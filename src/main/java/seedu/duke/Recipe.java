@@ -1,24 +1,37 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class Recipe implements Comparable<Recipe>{
+public class Recipe {
     protected String name;
+    protected int id;
+    protected Difficulty difficulty;
     protected int preparationTime;
     protected int cookingTime;
     protected ArrayList<Ingredient> ingredients;
     protected ArrayList<String> steps;
     protected float totalPrice;
-    protected String[] tags;
+    protected int calories;
+    protected ArrayList<String> tags;
 
     public Recipe(String name) {
         this.name = name;
         ingredients = new ArrayList<>();
         steps = new ArrayList<>();
+        tags = new ArrayList<>();
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getID() {
+        return id;
     }
 
     public void setTimes(int prepTime, int cookTime) {
@@ -54,40 +67,44 @@ public class Recipe implements Comparable<Recipe>{
         steps.set(index, newStep);
     }
 
+    public void addTag(String tag) {
+        tags.add(tag.toLowerCase());
+    }
+
+    public ArrayList<String> getTags() {
+        return tags;
+    }
+
     public float getTotalPrice() {
         return totalPrice;
     }
 
-    @Override
-    public String toString() {
-        String outputString = name + System.lineSeparator();
-        outputString += "Preparation time: " + preparationTime + System.lineSeparator();
-        outputString += "Cooking time: " + cookingTime + System.lineSeparator();
-        outputString += "Ingredients needed: " + System.lineSeparator();
-        for (int i = 0; i < ingredients.size(); i++) {
-            outputString += (i + 1) + ". ";
-            outputString += ingredients.get(i).getDescription();
-            outputString += System.lineSeparator();
-        }
-        outputString += "Method: " + System.lineSeparator();
-        for (int j = 0; j < steps.size(); j++) {
-            outputString += (j + 1) + ". ";
-            outputString += steps.get(j);
-            outputString += System.lineSeparator();
-        }
-        outputString += "Total price of ingredients: $" + String.format("%.2f", totalPrice) + System.lineSeparator();
-        return outputString;
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
     }
 
     @Override
-    public int compareTo(Recipe r) {
-        if (this.totalPrice - r.getTotalPrice() > 0) {
-            return 1;
+    public String toString() {
+        StringBuilder outputString = new StringBuilder(name + System.lineSeparator());
+        outputString.append("Preparation time: ").append(preparationTime).append(System.lineSeparator());
+        outputString.append("Cooking time: ").append(cookingTime).append(System.lineSeparator());
+        outputString.append("Ingredients needed: ").append(System.lineSeparator());
+        for (int i = 0; i < ingredients.size(); i++) {
+            outputString.append(i + 1).append(". ");
+            outputString.append(ingredients.get(i).getDescription());
+            outputString.append(System.lineSeparator());
         }
-        else if (this.totalPrice - r.getTotalPrice() < 0) {
-            return -1;
-        } else {
-            return 0;
+        outputString.append("Method: ").append(System.lineSeparator());
+        for (int j = 0; j < steps.size(); j++) {
+            outputString.append(j + 1).append(". ");
+            outputString.append(steps.get(j));
+            outputString.append(System.lineSeparator());
         }
+        outputString.append("Total price of ingredients: $").append(String.format("%.2f", totalPrice)).append(System.lineSeparator());
+        return outputString.toString();
     }
 }
