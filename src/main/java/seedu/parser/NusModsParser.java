@@ -41,25 +41,31 @@ public class NusModsParser {
     }
 
     private static void searchMods(byte[] response, String searchTerm) {
-        try (
-                InputStream inputStream = new ByteArrayInputStream(response);
-                JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
-        ) {
+        try {
+            InputStream inputStream = new ByteArrayInputStream(response);
+            JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
             reader.beginArray();
+
             while (reader.hasNext()) {
                 Mod mod = new Gson().fromJson(reader, Mod.class);
                 printMatchingMod(mod, searchTerm);
             }
+
             reader.endArray();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private static void printMatchingMod(Mod mod, String searchTerm) {
-        if (codeMatch(mod, searchTerm) || titleMatch(mod, searchTerm)) {
+        if (codeMatch(mod, searchTerm)) {
             System.out.println(mod);
         }
+        // title match not used for now
+//        if (codeMatch(mod, searchTerm) || titleMatch(mod, searchTerm)) {
+//            System.out.println(mod);
+//        }
     }
 
     private static boolean codeMatch(Mod mod, String searchTerm) {
