@@ -6,13 +6,15 @@ public class Mod {
 
     private String moduleCode;
     private String title;
+    private String description;
+    private int moduleCredit;
+    private String department;
+    private String faculty;
+    private String prerequisite;
+    private String preclusion;
+    private String corequisite;
     private List<Integer> semesters;
 
-    public Mod(String moduleCode, String title, List<Integer> semesters) {
-        this.moduleCode = moduleCode;
-        this.title = title;
-        this.semesters = semesters;
-    }
 
     public String getModuleCode() {
         return moduleCode;
