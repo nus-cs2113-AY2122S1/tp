@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Locale;
 
 
 public class NusModsParser {
@@ -31,7 +32,7 @@ public class NusModsParser {
 
         // create a request
         var request = HttpRequest.newBuilder()
-                .uri(URI.create("https://api.nusmods.com/v2/2021-2022/moduleList.json"))
+                .uri(URI.create("https://api.nusmods.com/v2/2021-2022/moduleInfo.json"))
                 .header("accept", "application/json")
                 .build();
 
@@ -69,10 +70,10 @@ public class NusModsParser {
     }
 
     private static boolean codeMatch(Mod mod, String searchTerm) {
-        return mod.getModuleCode().toLowerCase().contains(searchTerm);
+        return mod.getModuleCode().toLowerCase().contains(searchTerm.toLowerCase());
     }
 
     private static boolean titleMatch(Mod mod, String searchTerm) {
-        return mod.getTitle().toLowerCase().contains(searchTerm);
+        return mod.getTitle().toLowerCase().contains(searchTerm.toLowerCase());
     }
 }

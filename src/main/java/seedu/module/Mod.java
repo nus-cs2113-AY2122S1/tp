@@ -1,20 +1,32 @@
 package seedu.module;
 
-import java.util.List;
+import java.util.Date;
 
 public class Mod {
 
     private String moduleCode;
     private String title;
     private String description;
-    private int moduleCredit;
+    private double moduleCredit;
     private String department;
     private String faculty;
     private String prerequisite;
     private String preclusion;
     private String corequisite;
-    private List<Integer> semesters;
-
+    public class semesterData {
+        private int semester;
+        private Date examDate;
+        private int examDuration;
+        public class timetable {
+            private String classNo;
+            private int startTime;
+            private int endTime;
+            private String venue;
+            private String day;
+            private String lessonType; //placeholder
+            private int size;
+        }
+    }
 
     public String getModuleCode() {
         return moduleCode;
@@ -24,13 +36,9 @@ public class Mod {
         return title;
     }
 
-    public List<Integer> getSemesters() {
-        return semesters;
-    }
-
     @Override
     public String toString() {
-        return moduleCode + " " + title + " " + semesters;
+        return moduleCode + " " + title + " " + (int)moduleCredit + "MC";
     }
 
 }
