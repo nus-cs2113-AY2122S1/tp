@@ -1,6 +1,12 @@
 package seedu.module;
 
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import static org.apache.commons.text.WordUtils.wrap;
 
 public class Mod {
 
@@ -13,19 +19,12 @@ public class Mod {
     private String prerequisite;
     private String preclusion;
     private String corequisite;
-    public class semesterData {
-        private int semester;
-        private Date examDate;
-        private int examDuration;
-        public class timetable {
-            private String classNo;
-            private int startTime;
-            private int endTime;
-            private String venue;
-            private String day;
-            private String lessonType; //placeholder
-            private int size;
-        }
+    private String acadYear;
+    private Attributes attributes;
+    private ArrayList<Semester> semesterData;
+
+    public Mod(String name) {
+        this.moduleCode = name;
     }
 
     public String getModuleCode() {
@@ -36,9 +35,28 @@ public class Mod {
         return title;
     }
 
+    public List<Integer> getSemesters() {
+        return null;
+    }
+
     @Override
     public String toString() {
         return moduleCode + " " + title + " " + (int)moduleCredit + "MC";
+    }
+
+    public String getFullInfo() {
+        String isSUable = "No data";
+        if (attributes != null) {
+            isSUable = attributes.isSUable();
+        }
+        String fullInfo = "Title: " + title + "\n" +
+                "MCs: " + (int)moduleCredit + "\n" +
+                "Department: " + department + "\n" +
+                wrap(description, 70) + "\n" +
+                "Prerequisites: " + prerequisite + "\n" +
+                "S/U able: " + isSUable + "\n" +
+                "Semester Availability: " + semesterData + "\n";
+        return fullInfo;
     }
 
 }

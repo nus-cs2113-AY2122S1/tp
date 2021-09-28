@@ -2,15 +2,15 @@ package seedu.command;
 
 import seedu.ui.TextUi;
 
-public class SearchCommand extends Command {
+public class ShowCommand extends Command {
 
     private final String SEARCHTERM;
 
-    public SearchCommand(String searchTerm) {
+    public ShowCommand(String searchTerm) {
         this.SEARCHTERM = searchTerm;
     }
 
     public void execute() {
-        TextUi.searchMods(modList, SEARCHTERM);
+        TextUi.showMod(modList, SEARCHTERM);
     }
 }
