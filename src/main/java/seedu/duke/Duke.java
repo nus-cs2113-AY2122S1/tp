@@ -6,7 +6,9 @@ import seedu.parser.CommandParser;
 import seedu.parser.NusModsParser;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
+import seedu.duke.JSONParser.ReadJSONFile;
 
+import java.util.Scanner;
 import java.io.IOException;
 
 public class Duke {
@@ -52,5 +54,4 @@ public class Duke {
         command.setData(modList);
         command.execute();
     }
-
 }
