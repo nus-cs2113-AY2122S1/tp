@@ -7,7 +7,13 @@ import seedu.module.ModList;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Writer;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -117,7 +123,6 @@ public class NusModsParser {
                     .header("accept", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
             mod = new Gson().fromJson(response.body(), Mod.class);
             modList.addMod(mod);
         } catch (Exception e) {

@@ -38,10 +38,12 @@ public class TextUi {
             System.out.println(mod);
             return true;
         }
+        /*
         // title match not used for now
-//        if (codeMatch(mod, searchTerm) || titleMatch(mod, searchTerm)) {
-//            System.out.println(mod);
-//        }
+        if (codeMatch(mod, searchTerm) || titleMatch(mod, searchTerm)) {
+            System.out.println(mod);
+        }
+        */
         return false;
     }
 
