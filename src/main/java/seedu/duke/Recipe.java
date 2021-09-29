@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class Recipe {
     protected String name;
@@ -104,7 +103,9 @@ public class Recipe {
             outputString.append(steps.get(j));
             outputString.append(System.lineSeparator());
         }
-        outputString.append("Total price of ingredients: $").append(String.format("%.2f", totalPrice)).append(System.lineSeparator());
+        outputString.append("Total price of ingredients: $")
+                .append(String.format("%.2f", totalPrice))
+                .append(System.lineSeparator());
         return outputString.toString();
     }
 }
