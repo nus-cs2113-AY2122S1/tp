@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Duke {
     public static void main(String[] args) {
-        Cookbook cBook = new Cookbook();
-
         Recipe recipeA = new Recipe("Caprese Salad");
         recipeA.setTimes(10, 0);
         recipeA.addIngredient(new Ingredient("2 tomatoes", 0.80));
@@ -18,7 +16,9 @@ public class Duke {
         recipeA.addStep("Drizzle with olive oil");
         recipeA.setCalories(200);
         recipeA.addTag("Vegan");
-        cBook.addRecipe(recipeA);
+
+        Cookbook cookbook = new Cookbook();
+        cookbook.addRecipe(recipeA);
 
         Recipe recipeB = new Recipe("Ice Lemon Tea");
         recipeB.setTimes(5, 0);
@@ -32,14 +32,14 @@ public class Duke {
         recipeB.addStep("Dress with lemon slice");
         recipeB.setCalories(50);
         recipeB.addTag("Vegan");
-        cBook.addRecipe(recipeB);
+        cookbook.addRecipe(recipeB);
 
         Recipe recipeC = new Recipe("An apple");
         recipeC.setTimes(5, 0);
         recipeC.addIngredient(new Ingredient("Apple", 1));
         recipeC.setCalories(20);
         recipeC.addTag("Vegan");
-        cBook.addRecipe(recipeC);
+        cookbook.addRecipe(recipeC);
 
         Recipe recipeD = new Recipe("Fried Rice");
         recipeD.setTimes(10, 20);
@@ -54,24 +54,24 @@ public class Duke {
         recipeD.addStep("Add eggs and fry for 2 min");
         recipeD.addStep("And vegetables and saute for 1 min");
         recipeD.setCalories(230);
-        cBook.addRecipe(recipeD);
+        cookbook.addRecipe(recipeD);
 
-        cBook.checkRecipe("ice lemon tea");
+        cookbook.checkRecipe("ice lemon tea");
 
-        cBook.sortByPrice();
+        cookbook.sortByPrice();
         System.out.println("Sorted by price: ");
-        System.out.println(cBook);
+        System.out.println(cookbook);
 
-        cBook.sortByID();
+        cookbook.sortByID();
         System.out.println("Sorted by ID: ");
-        System.out.println(cBook);
+        System.out.println(cookbook);
 
-        cBook.sortByCalories();
+        cookbook.sortByCalories();
         System.out.println("Sorted by calories: ");
-        System.out.println(cBook);
+        System.out.println(cookbook);
 
         Cookbook filteredCBook = new Cookbook();
-        ArrayList<Recipe> filteredR = cBook.filterByTag("vegan");
+        ArrayList<Recipe> filteredR = cookbook.filterByTag("vegan");
         filteredCBook.recipes.addAll(filteredR);
         System.out.println("Recipes containing the 'Vegan' tag: ");
         System.out.println(filteredCBook);
