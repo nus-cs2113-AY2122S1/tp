@@ -18,26 +18,6 @@ public class ModStorage {
         this.file = new File(path);
     }
 
-    /**
-     * This function attempts to create the save file at the given path if it does not already exist.
-     * @return true if file is created, false otherwise
-     */
-    public boolean setupSave() throws FileErrorException {
-        try {
-            if (!file.exists()) {
-                file.getParentFile().mkdirs();
-            }
-            if (file.createNewFile()) {
-                return true;
-            }
-        } catch (IOException e) {
-            throw new FileErrorException();
-        } catch (SecurityException e) {
-            throw new SecurityException();
-        }
-        return false;
-    }
-
     public static boolean createModJson(String savePath) throws FileErrorException {
         try {
             File modFile = new File(savePath);
