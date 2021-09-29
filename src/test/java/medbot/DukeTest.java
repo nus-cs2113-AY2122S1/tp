@@ -1,4 +1,4 @@
-package seedu.duke;
+package medbot;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
