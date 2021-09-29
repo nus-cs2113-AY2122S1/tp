@@ -44,7 +44,7 @@ public class Cookbook {
         }
     }
 
-    public void sortByID () {
+    public void sortByID() {
         Comparator<Recipe> compareByID = Comparator
                 .comparing(Recipe::getID);
         recipes = recipes.stream()
@@ -52,7 +52,7 @@ public class Cookbook {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public void sortByPrice () {
+    public void sortByPrice() {
         Comparator<Recipe> compareByPrice = Comparator.comparing(Recipe::getTotalPrice)
                 .thenComparing(Recipe::getID);
         recipes = recipes.stream()
@@ -60,7 +60,7 @@ public class Cookbook {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public void sortByCalories () {
+    public void sortByCalories() {
         Comparator<Recipe> compareByCalories = Comparator.comparing(Recipe::getCalories)
                 .thenComparing(Recipe::getID);
         recipes = recipes.stream()
@@ -68,7 +68,7 @@ public class Cookbook {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public void sortByTime () {
+    public void sortByTime() {
         //Comparator<Recipe> compareByTime = Comparator.comparing(Recipe::getTotalPrice).thenComparing(Recipe::getID);
         //recipes = recipes.stream().sorted(compareByCalories).collect(Collectors.toCollection(ArrayList::new));
     }
