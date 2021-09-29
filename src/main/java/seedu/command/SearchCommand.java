@@ -4,13 +4,13 @@ import seedu.ui.TextUi;
 
 public class SearchCommand extends Command {
 
-    private final String SEARCHTERM;
+    private final String searchTerm;
 
     public SearchCommand(String searchTerm) {
-        this.SEARCHTERM = searchTerm;
+        this.searchTerm = searchTerm;
     }
 
     public void execute() {
-        TextUi.searchMods(modList, SEARCHTERM);
+        TextUi.searchMods(modList, searchTerm);
     }
 }

@@ -34,26 +34,10 @@ public class Duke {
     public void setup() throws IOException, InterruptedException {
         this.modList = new ModList();
         this.modStorage = new ModStorage(path);
-        TextUi.printWelcomeMessage(checkForSave());
-        NusModsParser.setup(modList);
+        TextUi.printWelcomeMessage();
+        NusModsParser.loadSave(modList);
         run();
 
-    }
-
-    /**
-     * Function that checks if a save file exists, and creates one if it does not.
-     * @return true if save does not exist, false otherwise
-     */
-    private boolean checkForSave() {
-        boolean hasSave = false;
-        try {
-            hasSave = modStorage.setupSave();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (ModStorage.FileErrorException e) {
-            e.printStackTrace();
-        }
-        return hasSave;
     }
 
     public void run() {

@@ -1,1 +1,1 @@
-{"moduleCode":"AY1111","title":"Anatomy","description":"","moduleCredit":1.0,"department":"Anatomy","faculty":"Dentistry","acadYear":"2021/2022","attributes":{"mpes1":false,"mpes2":false,"su":true},"semesterData":[]}
+{"acadYear":"2021/2022","description":"","title":"Anatomy","department":"Anatomy","faculty":"Dentistry","moduleCredit":"1","moduleCode":"AY1111","attributes":{"su":true,"year":true},"semesterData":[],"fulfillRequirements":["OMS2100","OMS3100"]}
