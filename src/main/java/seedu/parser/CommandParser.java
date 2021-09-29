@@ -6,16 +6,18 @@ import seedu.command.InvalidCommand;
 import seedu.command.SearchCommand;
 import seedu.command.ShowCommand;
 import seedu.command.UpdateCommand;
+import seedu.command.AddCommand;
 
 public class CommandParser {
-
-    private static final int SEARCH_LENGTH = 6;
-    private static final int SHOW_LENGTH = 4;
+    private static final Integer SEARCH_LENGTH = 6;
+    private static final Integer SHOW_LENGTH = 4;
+    private static final Integer ADD_LENGTH = 3;
 
     public Command parseCommand(String text) {
         Command command;
         text = text.trim();
         String lowerCaseText = text.toLowerCase();
+
         if (text.equalsIgnoreCase("exit")) {
             command = new ExitCommand();
         } else if (lowerCaseText.startsWith("update")) {
@@ -24,6 +26,8 @@ public class CommandParser {
             command = parseSearchCommand(text);
         } else if (lowerCaseText.startsWith("show")) {
             command = parseShowCommand(text);
+        } else if (lowerCaseText.startsWith("add")) {
+            command = parseAddCommand(text);
         } else {
             command = new InvalidCommand();
         }
@@ -38,5 +42,11 @@ public class CommandParser {
     public Command parseShowCommand(String text) {
         String str = text.substring(SHOW_LENGTH).trim();
         return new ShowCommand(str);
+    }
+
+    public Command parseAddCommand(String input) {
+        input = input.substring(ADD_LENGTH).trim();
+        String moduleCode = input.toUpperCase();
+        return new AddCommand(moduleCode);
     }
 }

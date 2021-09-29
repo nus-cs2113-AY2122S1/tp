@@ -8,7 +8,7 @@ import java.util.List;
 
 import static org.apache.commons.text.WordUtils.wrap;
 
-public class Mod {
+public class Module {
 
     private String moduleCode;
     private String title;
@@ -23,7 +23,7 @@ public class Mod {
     private Attributes attributes;
     private ArrayList<Semester> semesterData;
 
-    public Mod(String name) {
+    public Module(String name) {
         this.moduleCode = name;
     }
 

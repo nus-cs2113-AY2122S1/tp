@@ -2,7 +2,7 @@ package seedu.parser;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import seedu.module.Mod;
+import seedu.module.Module;
 import seedu.module.ModList;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
@@ -24,7 +24,6 @@ public class NusModsParser {
         TextUi.printLoadStartMessage();
         if (!createModListFromSave(modList)) {
             TextUi.printLoadError();
-            return;
         }
     }
 
@@ -37,8 +36,8 @@ public class NusModsParser {
                 for (File child : directoryListing) {
                     InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(child.toPath()));
                     JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
-                    Mod mod = new Gson().fromJson(reader, Mod.class);
-                    modList.addMod(mod);
+                    Module module = new Gson().fromJson(reader, Module.class);
+                    modList.addMod(module);
                 }
                 TextUi.printLoadSuccessMessage(modList.getSize());
             } else {
@@ -74,9 +73,9 @@ public class NusModsParser {
             JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
             reader.beginArray();
             while (reader.hasNext()) {
-                Mod mod = new Gson().fromJson(reader, Mod.class);
-                downloadModInfo(mod);
-                System.out.println("[" + count + "] " + mod.getModuleCode());
+                Module module = new Gson().fromJson(reader, Module.class);
+                downloadModInfo(module);
+                System.out.println("[" + count + "] " + module.getModuleCode());
                 count++;
             }
             reader.endArray();
@@ -86,8 +85,8 @@ public class NusModsParser {
         }
     }
 
-    private static void downloadModInfo(Mod mod) {
-        String moduleCode = mod.getModuleCode();
+    private static void downloadModInfo(Module module) {
+        String moduleCode = module.getModuleCode();
         try {
             String url = "https://api.nusmods.com/v2/2021-2022/modules/" + moduleCode + ".json";
             URL obj = new URL(url);

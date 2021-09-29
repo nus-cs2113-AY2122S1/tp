@@ -6,16 +6,10 @@ import seedu.parser.CommandParser;
 import seedu.parser.NusModsParser;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
-import seedu.duke.JSONParser.ReadJSONFile;
 
-import java.util.Scanner;
 import java.io.IOException;
 
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-
     private static String path = "data/Modules.json";
     public static CommandParser commandParser = new CommandParser();
     public ModList modList;
@@ -39,7 +33,6 @@ public class Duke {
         TextUi.printWelcomeMessage();
         NusModsParser.loadSave(modList);
         run();
-
     }
 
     public void run() {
