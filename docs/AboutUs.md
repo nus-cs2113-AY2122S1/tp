@@ -3,7 +3,7 @@
 Display | Name | Github Profile | Portfolio 
 --------|:----:|:--------------:|:---------:
 ![](https://via.placeholder.com/100.png?text=Photo) | Foong Xin Yu | [Github](https://github.com/Uxinnn) | [Portfolio](docs/team/foongxinyu.md)
-![](https://via.placeholder.com/100.png?text=Photo) | Don Joe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
+![](https://via.placeholder.com/100.png?text=Photo) | Gavien Pat | [Github](https://github.com/gavienwz) | [Portfolio](docs/team/gavienpat.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Ron John | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | John Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
 ![](https://via.placeholder.com/100.png?text=Photo) | Don Roe | [Github](https://github.com/) | [Portfolio](docs/team/johndoe.md)
