@@ -3,7 +3,6 @@ package seedu.command;
 import seedu.ui.TextUi;
 
 public class SearchCommand extends Command {
-
     private final String searchTerm;
 
     public SearchCommand(String searchTerm) {

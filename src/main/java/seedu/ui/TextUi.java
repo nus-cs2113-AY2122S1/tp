@@ -1,9 +1,8 @@
 package seedu.ui;
 
-import seedu.module.Mod;
+import seedu.module.Module;
 import seedu.module.ModList;
 
-import java.io.File;
 import java.util.Scanner;
 
 public class TextUi {
@@ -34,30 +33,30 @@ public class TextUi {
         System.out.println(count + " matching mods found.");
     }
 
-    public static boolean printMatchingMod(Mod mod, String searchTerm) {
-        if (codeContains(mod, searchTerm)) {
-            System.out.println(mod);
+    public static boolean printMatchingMod(Module module, String searchTerm) {
+        if (codeContains(module, searchTerm)) {
+            System.out.println(module);
             return true;
         }
         /*
         // title match not used for now
-        if (codeMatch(mod, searchTerm) || titleMatch(mod, searchTerm)) {
-            System.out.println(mod);
+        if (codeMatch(module, searchTerm) || titleMatch(module, searchTerm)) {
+            System.out.println(module);
         }
         */
         return false;
     }
 
-    private static boolean codeContains(Mod mod, String searchTerm) {
-        return mod.getModuleCode().toLowerCase().contains(searchTerm.toLowerCase());
+    private static boolean codeContains(Module module, String searchTerm) {
+        return module.getModuleCode().toLowerCase().contains(searchTerm.toLowerCase());
     }
 
-    public static boolean codeMatch(Mod mod, String searchTerm) {
-        return mod.getModuleCode().equalsIgnoreCase(searchTerm.toLowerCase());
+    public static boolean codeMatch(Module module, String searchTerm) {
+        return module.getModuleCode().equalsIgnoreCase(searchTerm.toLowerCase());
     }
 
-    private static boolean titleMatch(Mod mod, String searchTerm) {
-        return mod.getTitle().toLowerCase().contains(searchTerm.toLowerCase());
+    private static boolean titleMatch(Module module, String searchTerm) {
+        return module.getTitle().toLowerCase().contains(searchTerm.toLowerCase());
     }
 
     public static void printErrorMessage() {
@@ -105,8 +104,8 @@ public class TextUi {
         System.out.println("No matching mod found.");
     }
 
-    private static void printFullInfo(Mod mod) {
-        System.out.println(mod.getFullInfo());
+    private static void printFullInfo(Module module) {
+        System.out.println(module.getFullInfo());
     }
 
 }

@@ -4,25 +4,25 @@ import java.util.ArrayList;
 
 public class ModList {
 
-    private ArrayList<Mod> modList;
+    private ArrayList<Module> moduleList;
 
     public ModList() {
-        this.modList = new ArrayList<Mod>();
+        this.moduleList = new ArrayList<Module>();
     }
 
     public int getSize() {
-        return modList.size();
+        return moduleList.size();
     }
 
-    public void addMod(Mod mod) {
-        modList.add(mod);
+    public void addMod(Module module) {
+        moduleList.add(module);
     }
 
-    public Mod getMod(int index) {
-        return modList.get(index);
+    public Module getMod(int index) {
+        return moduleList.get(index);
     }
 
     public void clearMods() {
-        modList.clear();
+        moduleList.clear();
     }
 }
