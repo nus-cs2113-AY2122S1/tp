@@ -2,7 +2,7 @@ package seedu.parser;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import seedu.module.Mod;
+import seedu.module.Module;
 import seedu.module.ModList;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
@@ -15,6 +15,8 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 
 public class NusModsParser {
+
+    private static final String MODULE_API = "https://api.nusmods.com/v2/2021-2022/modules/";
 
     public static void setup(ModList modList) {
         if (!createModListFromSave(modList)) {
@@ -30,9 +32,9 @@ public class NusModsParser {
                 for (File child : directoryListing) {
                     InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(child.toPath()));
                     JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
-                    Mod mod = new Gson().fromJson(reader, Mod.class);
-                    modList.addMod(mod);
-                    System.out.println(mod.getModuleCode());
+                    Module module = new Gson().fromJson(reader, Module.class);
+                    modList.addMod(module);
+                    // System.out.println(module.getModuleCode());
                 }
             } else {
                 // Handle the case where dir is not really a directory.
@@ -61,8 +63,8 @@ public class NusModsParser {
             reader.beginArray();
 
             while (reader.hasNext()) {
-                Mod mod = new Gson().fromJson(reader, Mod.class);
-                modList.addMod(mod);
+                Module module = new Gson().fromJson(reader, Module.class);
+                modList.addMod(module);
             }
 
             reader.endArray();
@@ -98,32 +100,37 @@ public class NusModsParser {
         }
     }
 
-    private static void saveMod(Mod mod) throws IOException, ModStorage.FileErrorException {
+    private static void saveMod(Module module) throws IOException, ModStorage.FileErrorException {
         Gson gson = new Gson();
-        String path = "data/Modules/" + mod.getModuleCode() + ".json";
+        String path = "data/Modules/" + module.getModuleCode() + ".json";
         ModStorage.createModJson(path);
         Writer writer = new FileWriter(path);
-        gson.toJson(mod, writer);
+        gson.toJson(module, writer);
         writer.flush();
         writer.close();
     }
 
-    private static void fetchModData(ModList modList, Mod mod) {
-        String modCode = mod.getModuleCode();
+
+    public static Module fetchMod(String moduleCode) {
         try {
             var client = HttpClient.newHttpClient();
             var request = HttpRequest.newBuilder()
-                    .uri(URI.create("https://api.nusmods.com/v2/2021-2022/modules/" + modCode + ".json"))
+                    .uri(URI.create(MODULE_API + moduleCode + ".json"))
                     .header("accept", "application/json")
                     .build();
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
-            mod = new Gson().fromJson(response.body(), Mod.class);
-            modList.addMod(mod);
+            return new Gson().fromJson(response.body(), Module.class);
         } catch (Exception e) {
             System.out.println("error");
         }
-        System.out.print(modList.getSize() + " / ");
+        return null;
+    }
+
+
+    private static void fetchModData(ModList modList, Module module) {
+        String modCode = module.getModuleCode();
+        module = fetchMod(modCode);
+        modList.addMod(module);
     }
 
     public static void update(ModList modList) throws IOException, InterruptedException {
@@ -141,7 +148,7 @@ public class NusModsParser {
 
         for (int i = 0; i < numberOfModules; i++) {
             fetchModData(modList, allModsList.getMod(i));
-            System.out.println(numberOfModules);
+            // System.out.println(numberOfModules);
         }
     }
 }
