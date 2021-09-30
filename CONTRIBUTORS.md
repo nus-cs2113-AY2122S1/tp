@@ -7,5 +7,5 @@ Display | Name | Github Profile | Homepage
 | Mohamed Irfan
 | Zhang Erli
 | Hu Siyuan
-
+| Tng Jun Wei
 For more information, please refer to our [contributor's guide](https://oss-generic.github.io/process/).
