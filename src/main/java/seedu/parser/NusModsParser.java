@@ -26,7 +26,6 @@ public class NusModsParser {
         TextUi.printLoadStartMessage();
         if (!createModListFromSave(modList)) {
             TextUi.printLoadError();
-            return;
         }
     }
 
@@ -41,7 +40,6 @@ public class NusModsParser {
                     JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
                     Module module = new Gson().fromJson(reader, Module.class);
                     modList.addMod(module);
-                    // System.out.println(module.getModuleCode());
                 }
                 TextUi.printLoadSuccessMessage(modList.getSize());
             } else {

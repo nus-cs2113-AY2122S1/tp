@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class TimeTable {
 
-
     private static final int DEFAULT_START = 9;
     private static final int DEFAULT_END = 12;
 
@@ -85,7 +84,7 @@ public class TimeTable {
     }
 
     public void showTimetable() {
-        TimetableUI.printScheduleHours(earliestHour,latestHour);
+        TimetableUI.printScheduleHours(earliestHour, latestHour);
         TimetableUI.printDaySchedule("MON", monday, earliestHour, latestHour);
         TimetableUI.printDaySchedule("TUE", tuesday, earliestHour, latestHour);
         TimetableUI.printDaySchedule("WED", wednesday, earliestHour, latestHour);

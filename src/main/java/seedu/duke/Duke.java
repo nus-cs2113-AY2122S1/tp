@@ -14,10 +14,6 @@ import seedu.ui.TextUi;
 import java.io.IOException;
 
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
-
     private static String path = "data/Modules.json";
     public static TimeTable timetable = new TimeTable(1);
     public static CommandParser commandParser = new CommandParser();
@@ -71,5 +67,4 @@ public class Duke {
         command.setData(modList);
         command.execute();
     }
-
 }

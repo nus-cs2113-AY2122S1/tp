@@ -3,7 +3,6 @@ package seedu.ui;
 import seedu.module.Module;
 import seedu.module.ModList;
 
-import java.io.File;
 import java.util.Scanner;
 
 public class TextUi {
@@ -54,8 +53,8 @@ public class TextUi {
         }
         /*
         // title match not used for now
-        if (codeMatch(mod, searchTerm) || titleMatch(mod, searchTerm)) {
-            System.out.println(mod);
+        if (codeMatch(module, searchTerm) || titleMatch(module, searchTerm)) {
+            System.out.println(module);
         }
         */
         return false;
