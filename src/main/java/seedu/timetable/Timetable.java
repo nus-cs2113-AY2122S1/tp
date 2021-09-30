@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Timetable {
 
     private static final int DEFAULT_START = 9;
-    private static final int DEFAULT_END = 12;
+    private static final int DEFAULT_END = 16;
 
     private int semester;
     private int earliestHour;
