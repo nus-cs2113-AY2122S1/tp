@@ -71,19 +71,21 @@ public class TimetableUI {
         }
     }
 
-    private static String addInfoToString(TimetableLesson modTimetableLesson, TimetableLesson prevTimetableLesson, LineType type) {
+    private static String addInfoToString(TimetableLesson lesson,
+                                          TimetableLesson prevLesson, LineType type) {
         String str = "";
-        if (!Objects.equals(modTimetableLesson, prevTimetableLesson)) {
+        if (!Objects.equals(lesson, prevLesson)) {
             str = "|   ";
             switch (type) {
             case CODE:
-                str += addModuleCode(modTimetableLesson);
+                str += addModuleCode(lesson);
                 break;
             case LESSONTYPE:
-                str += addLessonType(modTimetableLesson);
+                str += addLessonType(lesson);
                 break;
             case VENUE:
-                str += addVenue(modTimetableLesson);
+                str += addVenue(lesson);
+                break;
             default:
                 str += "";
             }

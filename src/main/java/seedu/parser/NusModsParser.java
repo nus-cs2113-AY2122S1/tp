@@ -118,7 +118,7 @@ public class NusModsParser {
     }
 
 
-    public static Module fetchModFromAPI(String moduleCode) {
+    public static Module fetchModFromApi(String moduleCode) {
         try {
             String url = MODULE_API + moduleCode + ".json";
             URL obj = new URL(url);

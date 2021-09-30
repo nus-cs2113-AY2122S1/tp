@@ -49,6 +49,8 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
         case "Sunday":
             this.dayOfWeek = DayOfWeek.SUNDAY;
             break;
+        default:
+            break;
         }
     }
 
