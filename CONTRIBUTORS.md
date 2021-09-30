@@ -6,5 +6,6 @@ Display | Name | Github Profile | Homepage
 ![](https://avatars0.githubusercontent.com/u/1673303?s=100) | Damith C. Rajapakse | [Github](https://github.com/damithc/) | [Homepage](https://www.comp.nus.edu.sg/~damithch/)
 | Mohamed Irfan
 | Zhang Erli
+| Hu Siyuan
 
 For more information, please refer to our [contributor's guide](https://oss-generic.github.io/process/).
