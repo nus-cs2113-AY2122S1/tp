@@ -36,10 +36,10 @@ public class Duke {
 
     // EXAMPLES FOR HOW TO ADD A CLASS INTO TIMETABLE FOR @POOPIES99
     private void setupTT() {
-        Module module = NusModsParser.fetchModFromAPI("CG2271");
+        Module module = NusModsParser.fetchModFromApi("CG2271");
         timetable.addClass(new TimetableLesson(module,1, module.getLesson(1,1)));
         timetable.addClass(new TimetableLesson(module,1, module.getLesson(1,5)));
-        Module u = NusModsParser.fetchModFromAPI("EG2401A");
+        Module u = NusModsParser.fetchModFromApi("EG2401A");
         timetable.addClass(new TimetableLesson(u,1, module.getLesson(1,3)));
     }
 
