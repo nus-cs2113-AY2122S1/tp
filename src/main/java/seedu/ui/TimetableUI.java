@@ -1,4 +1,5 @@
 package seedu.ui;
+
 import seedu.module.Module;
 import seedu.timetable.Class;
 
@@ -11,9 +12,9 @@ public class TimetableUI {
       CODE,
       LESSONTYPE,
       VENUE,
-    };
+    }
 
-    private static final String FIXED_LENGTH_FORNAT = "%-16.16s";
+    private static final String FIXED_LENGTH_FORMAT = "%-16.16s";
     private static final String DIVIDER = "----------------";
     private static final String MODULES_HEADER = "Modules taken this semester: \n";
     private static final String CREDIT_COUNT_HEADER = "\nTotal MCs taken this semester: ";
@@ -35,7 +36,7 @@ public class TimetableUI {
     public static void printScheduleHours(int start, int end) {
         String infoLine = "\t\t\t\t";
         for (int u = start; u <= end; u++) {
-            infoLine += String.format(FIXED_LENGTH_FORNAT, u + "00");
+            infoLine += String.format(FIXED_LENGTH_FORMAT, u + "00");
         }
         System.out.println(infoLine);
     }
@@ -87,7 +88,7 @@ public class TimetableUI {
                 str += "";
             }
         }
-        return String.format(FIXED_LENGTH_FORNAT,str);
+        return String.format(FIXED_LENGTH_FORMAT,str);
     }
 
     private static String addModuleCode(Class modClass) {

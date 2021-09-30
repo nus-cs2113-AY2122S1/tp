@@ -31,12 +31,13 @@ public class Duke {
     private void setup() throws IOException, InterruptedException {
         this.modList = new ModList();
         this.modStorage = new ModStorage(path);
-        TextUi.printWelcomeMessage(checkForSave());
+        TextUi.printWelcomeMessage();
         NusModsParser.setup(modList);
         setupTT();
+        //setupTT(modList);
         run();
-
     }
+
 
     // EXAMPLES FOR HOW TO ADD A CLASS INTO TIMETABLE FOR @POOPIES99
     private void setupTT() {
@@ -47,21 +48,16 @@ public class Duke {
         timetable.addClass(new Class(u,1, module.getLesson(1,3)));
     }
 
-    /**
-     * Function that checks if a save file exists, and creates one if it does not.
-     * @return true if save does not exist, false otherwise
-     */
-    private boolean checkForSave() {
-        boolean hasSave = false;
-        try {
-            hasSave = modStorage.setupSave();
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (ModStorage.FileErrorException e) {
-            e.printStackTrace();
-        }
-        return hasSave;
+    /*
+    // SLOWER METHOD USING THE LOADED MODLIST
+    private void setupTT(ModList modList) {
+        Module module = modList.fetchMod("CG2271");
+        timetable.addClass(new Class(module,1, module.getLesson(1,1)));
+        timetable.addClass(new Class(module,1, module.getLesson(1,5)));
+        Module u = modList.fetchMod("EG2401A");
+        timetable.addClass(new Class(u,1, module.getLesson(1,3)));
     }
+    */
 
     private void run() {
         Command command;

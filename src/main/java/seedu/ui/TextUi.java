@@ -3,6 +3,7 @@ package seedu.ui;
 import seedu.module.Module;
 import seedu.module.ModList;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class TextUi {
@@ -51,10 +52,12 @@ public class TextUi {
             System.out.println(module);
             return true;
         }
+        /*
         // title match not used for now
-//        if (codeMatch(module, searchTerm) || titleMatch(module, searchTerm)) {
-//            System.out.println(module);
-//        }
+        if (codeMatch(mod, searchTerm) || titleMatch(mod, searchTerm)) {
+            System.out.println(mod);
+        }
+        */
         return false;
     }
 
@@ -82,15 +85,23 @@ public class TextUi {
         System.out.println("Local data updated successfully.");
     }
 
-    public static void printWelcomeMessage(boolean isFirstTime) {
-        String loadDataResult = (isFirstTime) ? "No save data found." : "Save data loaded.";
-        System.out.println(STARTUP);
-        System.out.println(loadDataResult);
-        System.out.println(GREETING);
+    public static void printWelcomeMessage() {
+        System.out.println("Generic greeting.");
+    }
+
+    public static void printLoadStartMessage() {
+        System.out.println("Loading modules from save...");
     }
 
     public static void printLoadError() {
         System.out.println("Save data failed to load. Fetch data from NUSMods with \"update\".");
+    }
+
+    public static void printLoadSuccessMessage(int count) {
+        System.out.println(count + " mods loaded from save.");
+        if (count < 10000) {
+            System.out.println("Save data seems to be incomplete or missing. Please run \"update\".");
+        }
     }
 
     public static void showMod(ModList modList, String searchTerm) {
@@ -103,7 +114,7 @@ public class TextUi {
         printNotFoundMessage();
     }
 
-    private static void printNotFoundMessage() {
+    public static void printNotFoundMessage() {
         System.out.println("No matching mod found.");
     }
 

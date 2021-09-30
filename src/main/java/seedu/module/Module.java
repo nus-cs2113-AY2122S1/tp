@@ -71,13 +71,13 @@ public class Module {
         if (attributes != null) {
             isSUable = attributes.isSUable();
         }
-        String fullInfo = "Title: " + title + "\n" +
-                "MCs: " + (int)moduleCredit + "\n" +
-                "Department: " + department + "\n" +
-                wrap(description, 70) + "\n" +
-                "Prerequisites: " + prerequisite + "\n" +
-                "S/U able: " + isSUable + "\n" +
-                "Semester Availability: " + semesterData + "\n";
+        String fullInfo = "Title: " + title + "\n"
+                + "MCs: " + (int)moduleCredit + "\n"
+                + "Department: " + department + "\n"
+                + wrap(description, 70) + "\n"
+                + "Prerequisites: " + prerequisite + "\n"
+                + "S/U able: " + isSUable + "\n"
+                + "Semester Availability: " + semesterData + "\n";
         return fullInfo;
     }
 
