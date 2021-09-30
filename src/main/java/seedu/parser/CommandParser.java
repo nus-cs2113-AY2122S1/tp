@@ -7,6 +7,8 @@ import seedu.command.SearchCommand;
 import seedu.command.ShowCommand;
 import seedu.command.UpdateCommand;
 import seedu.command.AddCommand;
+import seedu.command.TimetableCommand;
+import seedu.duke.Duke;
 
 public class CommandParser {
     private static final Integer SEARCH_LENGTH = 6;
@@ -26,6 +28,8 @@ public class CommandParser {
             command = parseSearchCommand(text);
         } else if (lowerCaseText.startsWith("show")) {
             command = parseShowCommand(text);
+        } else if (lowerCaseText.startsWith("timetable")) {
+            command = new TimetableCommand(Duke.timetable);
         } else if (lowerCaseText.startsWith("add")) {
             command = parseAddCommand(text);
         } else {

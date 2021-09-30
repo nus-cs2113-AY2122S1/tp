@@ -27,6 +27,10 @@ public class Module {
         this.moduleCode = name;
     }
 
+    public double getModuleCredit() {
+        return moduleCredit;
+    }
+
     public String getModuleCode() {
         return moduleCode;
     }
@@ -35,8 +39,26 @@ public class Module {
         return title;
     }
 
+    public Lesson getLesson(int sem, int idx) {
+        for (Semester s : semesterData) {
+            if (s.getSemester() == sem) {
+                return s.getLesson(idx);
+            }
+        }
+        return null;
+    }
+
     public List<Integer> getSemesters() {
         return null;
+    }
+
+    public Semester getSemester(int sem) {
+        for (Semester s : semesterData) {
+            if (s.getSemester() == sem) {
+                return s;
+            }
+        }
+        return new Semester();
     }
 
     @Override
