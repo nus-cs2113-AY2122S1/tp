@@ -1,7 +1,7 @@
 package seedu.ui;
 
 import seedu.module.Module;
-import seedu.timetable.Class;
+import seedu.timetable.TimetableLesson;
 
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +41,7 @@ public class TimetableUI {
         System.out.println(infoLine);
     }
 
-    public static void printDaySchedule(String day, Class[] schedule, int start, int end) {
+    public static void printDaySchedule(String day, TimetableLesson[] schedule, int start, int end) {
         for (int u = start; u <= end; u++) {
             System.out.print(DIVIDER);
         }
@@ -52,13 +52,13 @@ public class TimetableUI {
 
     }
 
-    private static void printLine(String day, Class[] schedule, int start, int end, LineType type) {
+    private static void printLine(String day, TimetableLesson[] schedule, int start, int end, LineType type) {
         String infoLine = addHeader(day, type);
-        Class prevClass = null;
+        TimetableLesson prevTimetableLesson = null;
         for (int i = start; i <= end; i++) {
-            Class modClass = schedule[i];
-            infoLine += addInfoToString(modClass, prevClass, type);
-            prevClass = modClass;
+            TimetableLesson modTimetableLesson = schedule[i];
+            infoLine += addInfoToString(modTimetableLesson, prevTimetableLesson, type);
+            prevTimetableLesson = modTimetableLesson;
         }
         System.out.println(infoLine);
     }
@@ -71,19 +71,19 @@ public class TimetableUI {
         }
     }
 
-    private static String addInfoToString(Class modClass, Class prevClass, LineType type) {
+    private static String addInfoToString(TimetableLesson modTimetableLesson, TimetableLesson prevTimetableLesson, LineType type) {
         String str = "";
-        if (!Objects.equals(modClass,prevClass)) {
+        if (!Objects.equals(modTimetableLesson, prevTimetableLesson)) {
             str = "|   ";
             switch (type) {
             case CODE:
-                str += addModuleCode(modClass);
+                str += addModuleCode(modTimetableLesson);
                 break;
             case LESSONTYPE:
-                str += addLessonType(modClass);
+                str += addLessonType(modTimetableLesson);
                 break;
             case VENUE:
-                str += addVenue(modClass);
+                str += addVenue(modTimetableLesson);
             default:
                 str += "";
             }
@@ -91,29 +91,34 @@ public class TimetableUI {
         return String.format(FIXED_LENGTH_FORMAT,str);
     }
 
-    private static String addModuleCode(Class modClass) {
+    private static String addModuleCode(TimetableLesson modTimetableLesson) {
         String str = "";
-        if (modClass != null) {
-            str = modClass.getModuleCode();
+        if (modTimetableLesson != null) {
+            str = modTimetableLesson.getModuleCode();
         }
         return str;
     }
 
-    private static String addLessonType(Class modClass) {
+    private static String addLessonType(TimetableLesson modTimetableLesson) {
         String str = "";
-        if (modClass != null) {
-            str += modClass.getLessonType().toString();
-            str += "[" + modClass.getClassNo() + "]";
+        if (modTimetableLesson != null) {
+            str += modTimetableLesson.getLessonType().toString();
+            str += "[" + modTimetableLesson.getClassNo() + "]";
         }
         return str;
     }
 
-    private static String addVenue(Class modClass) {
+    private static String addVenue(TimetableLesson modTimetableLesson) {
         String str = "";
-        if (modClass != null) {
-            str = modClass.getVenue();
+        if (modTimetableLesson != null) {
+            str = modTimetableLesson.getVenue();
         }
         return str;
     }
+
+
+
+    /*------------- Timetable Storage ----------- */
+    //TODO ADD UI TO SAVE AND LOAD TIMETABLE
 
 }

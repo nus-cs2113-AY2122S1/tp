@@ -1,15 +1,9 @@
 package seedu.storage;
 
-import seedu.timetable.TimetableDto;
-import seedu.timetable.TimetableInfo;
-import seedu.timetable.TimetableItem;
+import seedu.timetable.Timetable;
 
-import java.time.DayOfWeek;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import com.google.gson.Gson;
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -31,9 +25,9 @@ public class TimetableStorage {
      * 
      * @return
      */
-    public TimetableDto loadSchedule() throws FileNotFoundException {
+    public Timetable loadSchedule() throws FileNotFoundException {
         FileReader timetableSaveReader = new FileReader(file);
-        TimetableDto timetable = new Gson().fromJson(timetableSaveReader, TimetableDto.class);
+        Timetable timetable = new Gson().fromJson(timetableSaveReader, Timetable.class);
         return timetable;
     }
 
@@ -42,8 +36,8 @@ public class TimetableStorage {
      * 
      * @param timetable timetable
      */
-    public void save(TimetableInfo timetable) throws IOException {
+    public void save(Timetable timetable) throws IOException {
         Gson gson = new Gson();
-        gson.toJson(timetable.toDto(), new FileWriter(file));
+        gson.toJson(timetable, new FileWriter(file));
     }
 }

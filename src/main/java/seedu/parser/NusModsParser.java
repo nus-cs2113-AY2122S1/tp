@@ -118,7 +118,7 @@ public class NusModsParser {
     }
 
 
-    public static Module fetchMod(String moduleCode) {
+    public static Module fetchModFromAPI(String moduleCode) {
         try {
             String url = MODULE_API + moduleCode + ".json";
             URL obj = new URL(url);
@@ -131,6 +131,10 @@ public class NusModsParser {
             System.out.println("error");
         }
         return null;
+    }
+
+    public static Module fetchModFromFile(String path) {
+        //TODO Maybe add a method to fetch from the files we downloaded?
     }
 
 }

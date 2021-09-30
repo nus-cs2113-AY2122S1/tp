@@ -1,17 +1,9 @@
 package seedu.command;
 
-import com.google.gson.Gson;
-import seedu.module.Module;
-import seedu.timetable.TimeTable;
-
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 public class AddCommand extends Command {
 
     private final String moduleCode;
-    //public TimeTable timetable = new TimeTable();
+    //public Timetable timetable = new Timetable();
 
     public AddCommand(String moduleCode) {
         this.moduleCode = moduleCode;
