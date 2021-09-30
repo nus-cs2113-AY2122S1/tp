@@ -18,6 +18,13 @@ public class PatientList {
         return patientId;
     }
 
+    public String getPatientInfo(int patientId) throws MedBotException {
+        if (!patients.containsKey(patientId)) {
+            throw new MedBotException("No patient with ID " + patientId + " found.");
+        }
+        return patients.get(patientId).toString();
+    }
+
     private int generatePatientId() {
         while (patients.containsKey(lastId)) {
             lastId++;

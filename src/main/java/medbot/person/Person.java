@@ -1,24 +1,24 @@
 package medbot.person;
 
 public abstract class Person {
-    protected String nricNumber = "UNKNOWN";
-    protected String name = "UNKNOWN";
-    protected int phoneNumber = 0;
-    protected String emailAddress = "UNKNOWN";
-    protected String residentialAddress = "UNKNOWN";
+    protected String icNumber = "";
+    protected String name = "";
+    protected String phoneNumber = "";
+    protected String emailAddress = "";
+    protected String residentialAddress = "";
     protected PersonType personType;
 
     public String toString() {
-        return "IC: " + nricNumber + " Name: " + name + " H/P: " + phoneNumber +
+        return "IC: " + icNumber + " Name: " + name + " H/P: " + phoneNumber +
                 " Email: " + emailAddress + " Address: " + residentialAddress;
     }
 
-    public String getNricNumber() {
-        return nricNumber;
+    public String getIcNumber() {
+        return icNumber;
     }
 
-    public void setNricNumber(String nricNumber) {
-        this.nricNumber = nricNumber;
+    public void setIcNumber(String icNumber) {
+        this.icNumber = icNumber;
     }
 
     public String getName() {
@@ -29,11 +29,11 @@ public abstract class Person {
         this.name = name;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
