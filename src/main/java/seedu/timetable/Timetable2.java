@@ -33,7 +33,6 @@ public class Timetable2 {
     public void add(TimetableItem item) {
         ArrayList<TimetableItem> daySchedule = timetableInfo.getSchedule().get(item.getDay());
         daySchedule.add(item);
-        timetableInfo.getSchedule().put(item.getDay(), daySchedule);
         Collections.sort(daySchedule, (item1, item2) -> item1.compareTo(item2));
     }
 
