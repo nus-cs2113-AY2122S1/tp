@@ -11,7 +11,20 @@ public class TextUi {
 
     public static final String LINE = "____________________________________________________________________________\n";
 
+    /*------------- PRIVATE LOGGING CONSTANTS ----------- */
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+
+    private static final String STARTUP = "Hello from \n " + LOGO;
+    private static final String GREETING = "How can I help you today?";
+
+
+    /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
+        System.out.println();
         return in.nextLine();
     }
 
@@ -100,7 +113,7 @@ public class TextUi {
         printNotFoundMessage();
     }
 
-    private static void printNotFoundMessage() {
+    public static void printNotFoundMessage() {
         System.out.println("No matching mod found.");
     }
 

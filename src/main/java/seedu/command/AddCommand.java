@@ -2,22 +2,24 @@ package seedu.command;
 
 import com.google.gson.Gson;
 import seedu.module.Module;
-import seedu.timetable.Timetable;
+import seedu.timetable.TimeTable;
 
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class AddCommand extends Command{
-    private final String ModuleCode;
-    public Timetable timetable = new Timetable();
+public class AddCommand extends Command {
 
-    public AddCommand(String ModuleCode) {
-        this.ModuleCode = ModuleCode;
+    private final String moduleCode;
+    //public TimeTable timetable = new TimeTable();
+
+    public AddCommand(String moduleCode) {
+        this.moduleCode = moduleCode;
     }
 
     public void execute() {
-        String path = "data/Modules/" + ModuleCode + ".json";
+        /*
+        String path = "data/Modules/" + moduleCode + ".json";
         try {
             Gson gson = new Gson();
             Reader reader = Files.newBufferedReader(Paths.get(path));
@@ -28,5 +30,7 @@ public class AddCommand extends Command{
             ex.printStackTrace();
         }
         timetable.print();
+        */
     }
+
 }

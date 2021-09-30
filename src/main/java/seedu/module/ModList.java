@@ -1,5 +1,7 @@
 package seedu.module;
 
+import seedu.ui.TextUi;
+
 import java.util.ArrayList;
 
 public class ModList {
@@ -24,5 +26,16 @@ public class ModList {
 
     public void clearMods() {
         moduleList.clear();
+    }
+
+    public Module fetchMod(String searchTerm) {
+        for (int i = 0; i < moduleList.size(); i++) {
+            Module module = moduleList.get(i);
+            if (module.getModuleCode().equalsIgnoreCase(searchTerm)) {
+                return module;
+            }
+        }
+        TextUi.printNotFoundMessage();
+        return null;
     }
 }

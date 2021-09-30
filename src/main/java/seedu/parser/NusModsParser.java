@@ -20,7 +20,9 @@ import java.nio.file.Files;
 
 public class NusModsParser {
 
-    public static void loadSave(ModList modList) {
+    private static final String MODULE_API = "https://api.nusmods.com/v2/2021-2022/modules/";
+
+    public static void setup(ModList modList) {
         TextUi.printLoadStartMessage();
         if (!createModListFromSave(modList)) {
             TextUi.printLoadError();
@@ -88,7 +90,7 @@ public class NusModsParser {
     private static void downloadModInfo(Module module) {
         String moduleCode = module.getModuleCode();
         try {
-            String url = "https://api.nusmods.com/v2/2021-2022/modules/" + moduleCode + ".json";
+            String url = MODULE_API + moduleCode + ".json";
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
@@ -113,6 +115,22 @@ public class NusModsParser {
         String output = input + "\n";
         fw.append(output);
         fw.close();
+    }
+
+
+    public static Module fetchMod(String moduleCode) {
+        try {
+            String url = MODULE_API + moduleCode + ".json";
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("User-Agent", "Mozilla/5.0");
+            JsonReader reader = new JsonReader(new InputStreamReader(con.getInputStream()));
+            return new Gson().fromJson(reader, Module.class);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+        return null;
     }
 
 }
