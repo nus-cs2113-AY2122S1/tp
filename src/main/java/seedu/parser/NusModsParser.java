@@ -135,6 +135,7 @@ public class NusModsParser {
 
     public static Module fetchModFromFile(String path) {
         //TODO Maybe add a method to fetch from the files we downloaded?
+        return null;
     }
 
 }

@@ -31,50 +31,50 @@ public class Timetable {
         this.latestHour = DEFAULT_END;
     }
 
-    public void addClass(TimetableLesson modTimetableLesson) {
+    public void addClass(TimetableLesson timetableLesson) {
 
-        switch (modTimetableLesson.getDayOfWeek()) {
+        switch (timetableLesson.getDayOfWeek()) {
         case MONDAY:
-            addClassToSchedule(modTimetableLesson, monday);
+            addLessonToSchedule(timetableLesson, monday);
             break;
         case TUESDAY:
-            addClassToSchedule(modTimetableLesson, tuesday);
+            addLessonToSchedule(timetableLesson, tuesday);
             break;
         case WEDNESDAY:
-            addClassToSchedule(modTimetableLesson, wednesday);
+            addLessonToSchedule(timetableLesson, wednesday);
             break;
         case THURSDAY:
-            addClassToSchedule(modTimetableLesson, thursday);
+            addLessonToSchedule(timetableLesson, thursday);
             break;
         case FRIDAY:
-            addClassToSchedule(modTimetableLesson, friday);
+            addLessonToSchedule(timetableLesson, friday);
             break;
         case SATURDAY:
-            addClassToSchedule(modTimetableLesson, saturday);
+            addLessonToSchedule(timetableLesson, saturday);
             break;
         case SUNDAY:
-            addClassToSchedule(modTimetableLesson, sunday);
+            addLessonToSchedule(timetableLesson, sunday);
             break;
         default:
             break;
         }
 
-        if (modTimetableLesson.getStartHour() < earliestHour) {
-            earliestHour = modTimetableLesson.getStartHour();
+        if (timetableLesson.getStartHour() < earliestHour) {
+            earliestHour = timetableLesson.getStartHour();
         }
 
-        if (modTimetableLesson.getEndHour() > latestHour) {
-            latestHour = modTimetableLesson.getEndHour();
+        if (timetableLesson.getEndHour() > latestHour) {
+            latestHour = timetableLesson.getEndHour();
         }
     }
 
-    private void addClassToSchedule(TimetableLesson modTimetableLesson, TimetableLesson[] schedule) {
-        int start = modTimetableLesson.getStartHour();
-        int end = modTimetableLesson.getEndHour();
+    private void addLessonToSchedule(TimetableLesson timetableLesson, TimetableLesson[] schedule) {
+        int start = timetableLesson.getStartHour();
+        int end = timetableLesson.getEndHour();
         for (int i = start; i < end; i++) {
-            schedule[i] = modTimetableLesson;
+            schedule[i] = timetableLesson;
         }
-        addModuleToList(modTimetableLesson.getModule());
+        addModuleToList(timetableLesson.getModule());
     }
 
     private void addModuleToList(Module module) {
