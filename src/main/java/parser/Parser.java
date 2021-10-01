@@ -1,5 +1,6 @@
 package parser;
 
+import command.PurgeCommand;
 import errors.InvalidCommand;
 import inventory.Stock;
 import ui.Ui;
@@ -72,6 +73,7 @@ public class Parser {
         case LIST_ORDERS:
             break;
         case PURGE:
+            new PurgeCommand().execute(ui, parameters, stocks);
             break;
         case QUERY:
             break;
