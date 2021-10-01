@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Duke {
@@ -14,7 +15,7 @@ public class Duke {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
         System.out.println("What is your name?");
-
+        System.out.println("Your name is Rui Yang right?");
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
     }
