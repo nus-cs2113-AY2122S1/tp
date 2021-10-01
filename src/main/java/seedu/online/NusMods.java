@@ -34,7 +34,7 @@ public class NusMods {
         TextUi.printModsFound(count);
     }
 
-    private static Module fetchModOnline(String moduleCode) throws IOException {
+    public static Module fetchModOnline(String moduleCode) throws IOException {
         try {
             InputStream inputStream = getOnlineModInfo(moduleCode);
             ModStorage.saveModInfo(moduleCode, inputStream);
@@ -65,6 +65,28 @@ public class NusMods {
     public static void showModOnline(String moduleCode) throws IOException {
         Module module = fetchModOnline(moduleCode);
         TextUi.printModFullDescription(module);
+    }
+
+    public static void update() throws IOException, ModStorage.FileErrorException {
+        TextUi.printUpdateStartMessage();
+        InputStream inputStream = getOnlineModList();
+        JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+        int count = 0;
+        reader.beginArray();
+        while (reader.hasNext()) {
+            try {
+                Module module = new Gson().fromJson(reader, Module.class);
+                String moduleCode = module.getModuleCode();
+                InputStream modStream = getOnlineModInfo(moduleCode);
+                ModStorage.saveModInfo(moduleCode, modStream);
+                count++;
+                System.out.println(count);
+            } catch (Exception e) {
+                TextUi.printErrorMessage();
+            }
+        }
+        reader.endArray();
+        TextUi.printUpdateSuccessMessage();
     }
 
 }

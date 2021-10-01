@@ -1,7 +1,6 @@
 package seedu.ui;
 
 import seedu.module.Module;
-import seedu.module.ModList;
 
 import java.util.Scanner;
 
@@ -33,16 +32,6 @@ public class TextUi {
 
     public static void printInvalidCommandMessage() {
         System.out.print(LINE + "> Sorry friend, I don't know what that means. :/\n" + LINE);
-    }
-
-    public static void searchMods(ModList modList, String searchTerm) {
-        int count = 0;
-        for (int i = 0; i < modList.getSize(); i++) {
-            if (printMatchingMod(modList.getMod(i), searchTerm)) {
-                count += 1;
-            }
-        }
-        System.out.println(count + " matching mods found.");
     }
 
     public static void printModBriefDescription(Module module) {
@@ -108,16 +97,6 @@ public class TextUi {
         if (count < 10000) {
             System.out.println("Save data seems to be incomplete or missing. Please run \"update\".");
         }
-    }
-
-    public static void showMod(ModList modList, String searchTerm) {
-        for (int i = 0; i < modList.getSize(); i++) {
-            if (codeMatch(modList.getMod(i), searchTerm)) {
-                printFullInfo(modList.getMod(i));
-                return;
-            }
-        }
-        printNotFoundMessage();
     }
 
     public static void printNotFoundMessage() {
