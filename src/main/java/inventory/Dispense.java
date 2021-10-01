@@ -8,23 +8,23 @@ import java.util.Date;
  */
 
 public class Dispense extends Stock {
-    protected String customerNRIC;
+    protected String customerNric;
     protected Date date;
     protected String staffName;
 
     public Dispense(String medicineName, int quantity, String customerName, Date date, String staffName) {
         super(medicineName, quantity);
-        this.customerNRIC = customerName;
+        this.customerNric = customerName;
         this.date = date;
         this.staffName = staffName;
     }
 
-    public String getCustomerNRIC() {
-        return customerNRIC;
+    public String getCustomerNric() {
+        return customerNric;
     }
 
-    public void setCustomerNRIC(String customerNRIC) {
-        this.customerNRIC = customerNRIC;
+    public void setCustomerNric(String customerNric) {
+        this.customerNric = customerNric;
     }
 
     public Date getDate() {

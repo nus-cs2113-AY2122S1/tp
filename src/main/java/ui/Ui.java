@@ -17,11 +17,11 @@ public class Ui {
      * Prints the welcome command message.
      */
     public void printWelcomeMessage() {
-        String logo = "|  \\/  |          | |(_)| | | |              | || |  \n" +
-                "| .  . |  ___   __| | _ | | | |  __ _  _   _ | || |_ \n" +
-                "| |\\/| | / _ \\ / _` || || | | | / _` || | | || || __|\n" +
-                "| |  | ||  __/| (_| || |\\ \\_/ /| (_| || |_| || || |_ \n" +
-                "\\_|  |_/ \\___| \\__,_||_| \\___/  \\__,_| \\__,_||_| \\__|";
+        String logo = "|  \\/  |          | |(_)| | | |              | || |  \n"
+                + "| .  . |  ___   __| | _ | | | |  __ _  _   _ | || |_ \n"
+                + "| |\\/| | / _ \\ / _` || || | | | / _` || | | || || __|\n"
+                + "| |  | ||  __/| (_| || |\\ \\_/ /| (_| || |_| || || |_ \n"
+                + "\\_|  |_/ \\___| \\__,_||_| \\___/  \\__,_| \\__,_||_| \\__|";
         print(logo + "\nWelcome to MediVault!");
     }
 
@@ -48,9 +48,9 @@ public class Ui {
      * @param commandSyntax The commandSyntax of the command.
      */
     public void printInvalidParameter(String parameter, String commandSyntax) {
-        if (parameter.equals("")){
+        if (parameter.equals("")) {
             print("No parameter is provided!");
-        }else{
+        } else {
             print("An invalid parameter " + parameter + " is provided!");
         }
         print("COMMAND SYNTAX: " + commandSyntax);

@@ -31,7 +31,7 @@ public class Parser {
         String command = userCommand[0];
         String commandParameters = userCommand[1];
         HashMap<String, String> parameters = new HashMap<>();
-        if (!commandParameters.equals("")){
+        if (!commandParameters.equals("")) {
             parameters = parseParameters(commandParameters);
         }
         switch (command) {

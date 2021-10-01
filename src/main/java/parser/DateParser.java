@@ -22,10 +22,10 @@ public class DateParser {
      * @throws ParseException If date is invalid.
      */
     public static Date stringToDate(String date) throws ParseException {
-        try{
+        try {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(INPUT_DATE_FORMAT);
             dateTimeFormatter.parse(date); // To check if date was in valid format
-        }catch (DateTimeParseException e){
+        } catch (DateTimeParseException e) {
             throw new ParseException("Unknown date", 0);
         }
         return new SimpleDateFormat(INPUT_DATE_FORMAT).parse(date);
@@ -37,7 +37,7 @@ public class DateParser {
      * @param date Date object to be converted to string.
      * @return String value of date.
      */
-    public static String dateToString(Date date){
+    public static String dateToString(Date date) {
         return new SimpleDateFormat(OUTPUT_DATE_FORMAT).format(date);
     }
 }
