@@ -3,7 +3,6 @@ package seedu.online;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
-import org.w3c.dom.Text;
 import seedu.module.Module;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
@@ -26,7 +25,8 @@ public class NusMods {
         while (reader.hasNext()) {
             Module module = new Gson().fromJson(reader, Module.class);
             if (module.codeContains(searchTerm)) {
-                TextUi.printModBriefDescription(fetchModOnline(module));
+                String moduleCode = module.getModuleCode();
+                TextUi.printModBriefDescription(fetchModOnline(moduleCode));
                 count++;
             }
         }
@@ -34,16 +34,14 @@ public class NusMods {
         TextUi.printModsFound(count);
     }
 
-    private static Module fetchModOnline(Module module) {
+    private static Module fetchModOnline(String moduleCode) throws IOException {
         try {
-            String moduleCode = module.getModuleCode();
             InputStream inputStream = getOnlineModInfo(moduleCode);
             ModStorage.saveModInfo(moduleCode, inputStream);
             return ModStorage.loadModInfo(moduleCode);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new IOException();
         }
-        return null;
     }
 
     private static InputStream getOnlineModList() throws IOException {
@@ -63,4 +61,10 @@ public class NusMods {
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
         return con.getInputStream();
     }
+
+    public static void showModOnline(String moduleCode) throws IOException {
+        Module module = fetchModOnline(moduleCode);
+        TextUi.printModFullDescription(module);
+    }
+
 }

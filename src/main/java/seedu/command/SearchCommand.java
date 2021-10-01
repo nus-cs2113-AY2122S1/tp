@@ -24,9 +24,7 @@ public class SearchCommand extends Command {
                 ModStorage.searchModsOffline(searchTerm);
             }
         } else {
-            TextUi.printLocalSearchMessage();
             ModStorage.searchModsOffline(searchTerm);
         }
-        //TextUi.searchMods(modList, searchTerm); //old search function
     }
 }

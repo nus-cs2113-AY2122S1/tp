@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
-import java.util.Locale;
 
 
 public class ModStorage {
@@ -78,6 +77,7 @@ public class ModStorage {
             // to avoid race conditions with another process that deletes
             // directories.
         }
+        TextUi.printLocalSearchMessage();
     }
 
     private static void searchFiles(File[] fileList, String searchTerm) throws IOException {
@@ -103,6 +103,16 @@ public class ModStorage {
         InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
         return new Gson().fromJson(reader, Module.class);
+    }
+
+    public static void showModOffline(String moduleCode) {
+        try {
+            Module module = loadModInfo(moduleCode);
+            TextUi.printModFullDescription(module);
+        } catch (IOException e) {
+            TextUi.printNotFoundMessage();
+        }
+        TextUi.printLocalSearchMessage();
     }
 
     public static class FileErrorException extends Exception {

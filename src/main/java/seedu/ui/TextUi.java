@@ -21,7 +21,6 @@ public class TextUi {
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
 
-
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
         System.out.println();
@@ -48,6 +47,10 @@ public class TextUi {
 
     public static void printModBriefDescription(Module module) {
         System.out.println(module);
+    }
+
+    public static void printModFullDescription(Module module) {
+        System.out.println(module.getFullInfo());
     }
 
     public static boolean printMatchingMod(Module module, String searchTerm) {
@@ -126,7 +129,8 @@ public class TextUi {
     }
 
     public static void printNoConnectionMessage() {
-        System.out.println("Failed to connect to NUSMods API. Displaying saved information.");
+        System.out.println(LINE + "Failed to connect to NUSMods API. Displaying saved information.");
+        System.out.println(LINE);
     }
 
     public static void printModsFound(int count) {
@@ -135,6 +139,7 @@ public class TextUi {
     }
 
     public static void printLocalSearchMessage() {
-        System.out.println("!WARNING! This is a local search, data might not be up to date.");
+        System.out.println(LINE + "!WARNING! This is a local search, data might not be up to date.");
+        System.out.println(LINE);
     }
 }
