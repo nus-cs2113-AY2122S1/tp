@@ -1,7 +1,5 @@
 package parser;
 
-import command.PurgeCommand;
-import command.medicine.ListCommand;
 import errors.InvalidCommand;
 import inventory.Stock;
 import ui.Ui;
@@ -54,12 +52,10 @@ public class Parser {
         case HELP:
             break;
         case LIST:
-            new ListCommand().execute(ui, parameters, stocks);
             break;
         case LIST_ORDERS:
             break;
         case PURGE:
-            new PurgeCommand().execute(ui, parameters, stocks);
             break;
         case QUERY:
             break;
