@@ -1,21 +1,45 @@
 package terminus;
 
-import java.util.Scanner;
+import terminus.ui.Ui;
 
 public class Terminus {
+    
+    private Ui ui;
+    
     /**
      * Main entry-point for the terminus.Terminus application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        new Terminus().run();
     }
+
+    /**
+     * Start the program.
+     */
+    public void run() {
+        start();
+        runCommandsUntilExit();
+        exit();
+    }
+    
+    private void start() {
+        this.ui = new Ui();
+        this.ui.printBanner();
+    }
+    
+    private void runCommandsUntilExit() {
+        while (true) {
+            String input = ui.requestCommand("");
+            if (input.equalsIgnoreCase("bye")) {
+                break;
+            }
+            
+            ui.printSection(input);
+        }
+    } 
+    
+    private void exit() {
+        this.ui.printExitMessage();
+    }
+    
 }
