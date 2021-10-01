@@ -32,14 +32,23 @@ public class Duke {
     // EXAMPLES FOR HOW TO ADD A CLASS INTO TIMETABLE FOR @POOPIES99
     private void setupTT() {
         try {
-            Module module = NusMods.fetchModOnline("CG2271");
-            timetable.addClass(new Class(module,1, module.getLesson(1,1)));
-            timetable.addClass(new Class(module,1, module.getLesson(1,5)));
-            Module u = NusMods.fetchModOnline("EG2401A");
-            timetable.addClass(new Class(u,1, module.getLesson(1,3)));
+            Module module = fetchMod("CG2271");
+            timetable.addClass(new Class(module, 1, module.getLesson(1, 1)));
+            timetable.addClass(new Class(module, 1, module.getLesson(1, 5)));
+            Module u = fetchMod("EG2401A");
+            timetable.addClass(new Class(u, 1, module.getLesson(1, 3)));
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("You are seeing this because the example timetable cannot load when offline");
+            TextUi.printErrorMessage();
+        }
+    }
+
+    //This is a placeholder fetchMod function
+    public Module fetchMod(String moduleCode) throws IOException {
+        try {
+            return NusMods.fetchModOnline(moduleCode);
+        } catch (IOException e) {
+            TextUi.printNoConnectionMessage();
+            return ModStorage.loadModInfo(moduleCode);
         }
     }
 

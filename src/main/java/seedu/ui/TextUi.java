@@ -108,7 +108,7 @@ public class TextUi {
     }
 
     public static void printNoConnectionMessage() {
-        System.out.println(LINE + "Failed to connect to NUSMods API. Displaying saved information.");
+        System.out.println(LINE + "Failed to connect to NUSMods API. Loading saved information.");
         System.out.println(LINE);
     }
 
