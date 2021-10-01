@@ -8,7 +8,15 @@ import java.util.Date;
  */
 
 public class Medicine extends Stock {
-    public static final String[] COLUMNS = {"ID", "NAME", "PRICE", "QUANTITY", "EXPIRY", "DESCRIPTION", "MAX_QUANTITY"};
+    public static final String ID = "ID";
+    public static final String NAME = "NAME";
+    public static final String PRICE = "PRICE";
+    public static final String QUANTITY = "QUANTITY";
+    public static final String EXPIRY_DATE = "EXPIRY_DATE";
+    public static final String DESCRIPTION = "DESCRIPTION";
+    public static final String MAX_QUANTITY = "MAX_QUANTITY";
+
+    public static final String[] COLUMNS = {ID, NAME, PRICE, QUANTITY, EXPIRY_DATE, DESCRIPTION, MAX_QUANTITY};
     public static final int NO_OF_COLUMNS = 7;
 
     private static int stockCount = 0;
