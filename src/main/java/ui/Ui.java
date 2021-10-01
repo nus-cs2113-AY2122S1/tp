@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 
 public class Ui {
-    private final int TABLEPADDING = 2;
+    private final int TABLE_PADDING = 2;
 
     /**
      * Prints the welcome command message.
@@ -87,7 +87,7 @@ public class Ui {
         }
 
         int[] columnWidths = {idWidth, nameWidth, priceWidth, quantityWidth, expiryWidth, descriptionWidth,
-                maxQuantityWidth};
+            maxQuantityWidth};
 
         // Pad the data in the columns
         String idFormat = "| %1$-" + idWidth + "s | ";
@@ -99,7 +99,7 @@ public class Ui {
         String maxQuantityFormat = "%1$-" + maxQuantityWidth + "s | ";
 
         String[] formats = {idFormat, nameFormat, priceFormat, quantityFormat, expiryFormat, descriptionFormat,
-                maxQuantityFormat};
+            maxQuantityFormat};
         StringBuilder headers = new StringBuilder();
         for (int i = 0; i < Medicine.NO_OF_COLUMNS; i++) {
             headers.append(String.format(formats[i], centerString(columnWidths[i], Medicine.COLUMNS[i])));
@@ -138,7 +138,7 @@ public class Ui {
         StringBuilder headerBorder = new StringBuilder();
         for (int i = 0; i < noOfColumns; i++) {
             headerBorder.append("+");
-            int width = Math.max(0, columnWidths[i] + TABLEPADDING);
+            int width = Math.max(0, columnWidths[i] + TABLE_PADDING);
             headerBorder.append("=".repeat(width));
         }
         headerBorder.append("+");
@@ -155,7 +155,7 @@ public class Ui {
         StringBuilder rowBorder = new StringBuilder();
         for (int i = 0; i < noOfColumns; i++) {
             rowBorder.append("+");
-            int width = Math.max(0, columnWidths[i] + TABLEPADDING);
+            int width = Math.max(0, columnWidths[i] + TABLE_PADDING);
             rowBorder.append("-".repeat(width));
         }
         rowBorder.append("+");

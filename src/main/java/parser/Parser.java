@@ -7,7 +7,23 @@ import ui.Ui;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static command.CommandList.*;
+import static command.CommandList.ADD;
+import static command.CommandList.ADD_ORDER;
+import static command.CommandList.ARCHIVE;
+import static command.CommandList.DELETE;
+import static command.CommandList.DELETE_ORDER;
+import static command.CommandList.DISPENSE;
+import static command.CommandList.EXIT;
+import static command.CommandList.HELP;
+import static command.CommandList.LIST;
+import static command.CommandList.LIST_ORDERS;
+import static command.CommandList.PURGE;
+import static command.CommandList.QUERY;
+import static command.CommandList.RECEIVE_ORDER;
+import static command.CommandList.UNDO;
+import static command.CommandList.UPDATE;
+import static command.CommandList.UPDATE_ORDER;
+
 
 /**
  * Helps to parse the commands given by the user as well as extract the parameters provided.
@@ -78,7 +94,7 @@ public class Parser {
      *
      * @param userInput String input from user.
      * @return Array of string with size 2 with index 0 representing the command and index 1 representing the
-     * command parameters.
+     *     command parameters.
      */
     public static String[] parseCommand(String userInput) {
         String[] splitCommand = new String[2];
