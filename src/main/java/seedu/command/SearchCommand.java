@@ -1,15 +1,32 @@
 package seedu.command;
 
+import seedu.online.NusMods;
+import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
+
+import java.io.IOException;
 
 public class SearchCommand extends Command {
     private final String searchTerm;
+    private final boolean localFlag;
 
-    public SearchCommand(String searchTerm) {
+    public SearchCommand(String searchTerm, boolean localFlag) {
         this.searchTerm = searchTerm;
+        this.localFlag = localFlag;
     }
 
     public void execute() {
-        TextUi.searchMods(modList, searchTerm);
+        if (!localFlag) {
+            try {
+                NusMods.searchModsOnline(searchTerm);
+            } catch (IOException e) {
+                TextUi.printNoConnectionMessage();
+                ModStorage.searchModsOffline(searchTerm);
+            }
+        } else {
+            TextUi.printLocalSearchMessage();
+            ModStorage.searchModsOffline(searchTerm);
+        }
+        //TextUi.searchMods(modList, searchTerm); //old search function
     }
 }

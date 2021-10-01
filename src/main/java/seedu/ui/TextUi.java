@@ -46,6 +46,10 @@ public class TextUi {
         System.out.println(count + " matching mods found.");
     }
 
+    public static void printModBriefDescription(Module module) {
+        System.out.println(module);
+    }
+
     public static boolean printMatchingMod(Module module, String searchTerm) {
         if (codeContains(module, searchTerm)) {
             System.out.println(module);
@@ -121,4 +125,16 @@ public class TextUi {
         System.out.println(module.getFullInfo());
     }
 
+    public static void printNoConnectionMessage() {
+        System.out.println("Failed to connect to NUSMods API. Displaying saved information.");
+    }
+
+    public static void printModsFound(int count) {
+        String mods = (count == 1) ? " mod " : " mods ";
+        System.out.println(count + mods + "found.");
+    }
+
+    public static void printLocalSearchMessage() {
+        System.out.println("!WARNING! This is a local search, data might not be up to date.");
+    }
 }

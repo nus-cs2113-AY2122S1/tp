@@ -117,7 +117,6 @@ public class NusModsParser {
         fw.close();
     }
 
-
     public static Module fetchMod(String moduleCode) {
         try {
             String url = MODULE_API + moduleCode + ".json";
