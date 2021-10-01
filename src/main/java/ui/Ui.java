@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 
 public class Ui {
-    private final int TABLE_PADDING = 2;
+    private static final int TABLE_PADDING = 2;
 
     /**
      * Prints the welcome command message.
