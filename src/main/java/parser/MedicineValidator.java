@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 public class MedicineValidator {
     /**
-     * Checks if the given stock id is valid
+     * Checks if the given stock id is valid.
      *
      * @param ui    Reference to the UI object passed by Main to print messages.
      * @param id    ID of the medicine to be checked.

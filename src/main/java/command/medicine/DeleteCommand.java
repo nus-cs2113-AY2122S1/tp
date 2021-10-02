@@ -14,12 +14,11 @@ import java.util.HashMap;
 /**
  * Delete medication based on user input given stock id.
  */
-
 public class DeleteCommand extends Command {
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
-        String [] requiredParameters = {CommandParameters.STOCK_ID};
+        String[] requiredParameters = {CommandParameters.STOCK_ID};
         if (!CommandSyntax.checkRequiredParameters(parameters, requiredParameters)) {
             if (!parameters.isEmpty()) {
                 ui.printInvalidParameter(parameters.keySet().toArray()[0].toString(), CommandSyntax.DELETECOMMAND);
@@ -27,13 +26,14 @@ public class DeleteCommand extends Command {
                 ui.printInvalidParameter("", CommandSyntax.DELETECOMMAND);
             }
             return;
-        };
+        }
+
         String stockIdToDelete = parameters.get(CommandParameters.STOCK_ID);
         if (!MedicineValidator.isValidStockId(ui, stockIdToDelete, stocks)) {
             return;
         }
         int stockId = Integer.parseInt(stockIdToDelete);
-        for (Stock stock: stocks) {
+        for (Stock stock : stocks) {
             Medicine medicine = (Medicine) stock;
             if (medicine.getStockID() == stockId) {
                 stocks.remove(stock);
