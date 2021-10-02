@@ -2,10 +2,14 @@ package expiryeliminator.ui;
 
 import java.util.Scanner;
 
+//@@author bernardboey-reused
+// Reused from https://github.com/bernardboey/ip/blob/master/src/main/java/duke/ui/Ui.java
+// with minor modifications
+
+/**
+ * Text UI of the application.
+ */
 public class Ui {
-    //@@author bernardboey-reused
-    // Reused from https://github.com/bernardboey/ip/blob/master/src/main/java/duke/ui/Ui.java
-    // with minor modifications
     private static final String INDENTED_HORIZONTAL_LINE = " ".repeat(4) + "_".repeat(60);
     private static final String LINE_PREFIX = " ".repeat(5);
     /** Platform independent line separator. */

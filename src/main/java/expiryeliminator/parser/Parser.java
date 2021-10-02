@@ -11,6 +11,9 @@ import expiryeliminator.commands.IncorrectCommand;
 // Reused from https://github.com/bernardboey/ip/blob/master/src/main/java/duke/parser/Parser.java
 // with minor modifications
 
+/**
+ * Parses user input.
+ */
 public class Parser {
     // Capturing group variables store the name of the named capturing group.
     private static final String CAPTURING_GROUP_COMMAND = "command";

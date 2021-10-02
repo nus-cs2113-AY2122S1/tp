@@ -4,8 +4,11 @@ import expiryeliminator.commands.Command;
 import expiryeliminator.parser.Parser;
 import expiryeliminator.ui.Ui;
 
+/**
+ * Entry point of the ExpiryEliminator application.
+ * Initialises the application and starts the interaction with the user.
+ */
 public class ExpiryEliminator {
-    private static Parser parser;
     private static Ui ui;
 
     /**
