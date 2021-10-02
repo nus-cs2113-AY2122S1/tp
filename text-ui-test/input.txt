@@ -2,7 +2,9 @@ invalid
 notes test c f a
 notes invalid
 notes
+help
 invalid
 test c f a
 back
+help
 exit

@@ -5,7 +5,7 @@ import java.util.Scanner;
 import terminus.parser.CommandParser;
 
 public class Ui {
-        
+
     private static final String BANNER = "Welcome to TermiNUS!";
     private static final String PROMPT = "[%s] >>> ";
 
@@ -26,13 +26,16 @@ public class Ui {
      * Prints the banner for a workspace, which includes all the commands in the parser.
      */
     public void printParserBanner(CommandParser parser) {
-        printSection(parser.getCommandList().stream().reduce("\nType any of the following to get started:\n",
-            (x, y) -> String.format("%s> %s\n", x, y)));
+        printSection(parser.getCommandList()
+            .stream()
+            .reduce("\nType any of the following to get started:\n",
+                (x, y) -> String.format("%s> %s\n", x, y))
+        );
     }
 
     /**
      * Prints a prompt and requests a command from the user.
-     * 
+     *
      * @param workspaceName The string to place within the brackets.
      * @return The command the user inputted.
      */
@@ -47,7 +50,7 @@ public class Ui {
 
     /**
      * Prints multiple strings at once, separated by a new line.
-     * 
+     *
      * @param strings The strings to print.
      */
     public void printSection(String... strings) {
@@ -60,5 +63,5 @@ public class Ui {
     public void printExitMessage() {
         System.out.println("Goodbye!");
     }
-    
+
 }
