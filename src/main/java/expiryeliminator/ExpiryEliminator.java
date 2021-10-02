@@ -2,20 +2,33 @@ package expiryeliminator;
 
 import java.util.Scanner;
 
+import expiryeliminator.parser.Parser;
+import expiryeliminator.ui.Ui;
+
 public class ExpiryEliminator {
+    private static Parser parser;
+    private static Ui ui;
+
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Initialises the ExpiryEliminator application.
+     */
+    public ExpiryEliminator() {
+        ui = new Ui();
+    }
+
+    /**
+     * Runs the program.
+     */
+    public void run() {
+        ui.showGreeting();
+        final String userInput = ui.getUserInput();
+        System.out.println("Hello " + userInput);
+    }
+
+    /**
+     * Main entry-point for the ExpiryEliminator application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
-
-        Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        new ExpiryEliminator().run();
     }
 }
