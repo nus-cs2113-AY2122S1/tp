@@ -1,12 +1,17 @@
 Welcome to TermiNUS!
 
 Type any of the following to get started:
-> notes
-> schedules
-> help
 > exit
+> notes
 
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> c f a
+[] >>> Command not found! Type 'help' for a list of commands.
 [] >>> 
-notes
-[] >>> 
-Goodbye!
+Type any of the following to get started:
+> exit
+> test
+
+[notes] >>> Command not found! Type 'help' for a list of commands.
+[notes] >>> c f a
+[notes] >>> Goodbye!

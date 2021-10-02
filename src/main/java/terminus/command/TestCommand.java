@@ -5,9 +5,10 @@ import terminus.ui.Ui;
 
 public class TestCommand extends Command {
     private String arguments;
+    
     @Override
     public String getFormat() {
-        return null;
+        return "test";
     }
 
     @Override
@@ -22,7 +23,7 @@ public class TestCommand extends Command {
 
     @Override
     public CommandResult execute(Ui ui, NusModule module) {
-        System.out.println(arguments);
+        ui.printSection(arguments);
         return new CommandResult(true,false,null,null);
     }
 }
