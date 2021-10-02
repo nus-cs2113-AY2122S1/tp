@@ -12,6 +12,8 @@ public class Ui {
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final Scanner SCANNER = new Scanner(System.in);
 
+    private static final String MESSAGE_GREETING = "Welcome to Expiry Eliminator. What can I do for you?";
+
     /**
      * Reads input commands from the user.
      * Ignores blank lines and trims input command.
@@ -45,13 +47,7 @@ public class Ui {
      * Prints out greeting message.
      */
     public void showGreeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+        showToUser(MESSAGE_GREETING);
     }
 
     /**
