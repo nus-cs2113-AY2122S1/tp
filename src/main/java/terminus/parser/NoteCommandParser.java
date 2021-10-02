@@ -3,7 +3,7 @@ package terminus.parser;
 import terminus.command.TestCommand;
 
 
-public class NoteCommandParser extends CommandParser{
+public class NoteCommandParser extends CommandParser {
 
     public NoteCommandParser() {
         super("notes");
@@ -11,7 +11,7 @@ public class NoteCommandParser extends CommandParser{
 
     public static NoteCommandParser getInstance() {
         NoteCommandParser parser = new NoteCommandParser();
-        parser.commandMap.put("test",new TestCommand());
+        parser.addCommand("test", new TestCommand());
         return parser;
     }
 }

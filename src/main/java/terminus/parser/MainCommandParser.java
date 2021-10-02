@@ -8,10 +8,9 @@ public class MainCommandParser extends CommandParser {
         super("");
     }
 
-    public static MainCommandParser getInstance () {
+    public static MainCommandParser getInstance() {
         MainCommandParser parser = new MainCommandParser();
-        parser.commandMap.put("notes",new NotesCommand());
-//        parser.commandMap.put("schedules");
+        parser.addCommand("notes", new NotesCommand());
         return parser;
     }
 }
