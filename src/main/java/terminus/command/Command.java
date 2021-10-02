@@ -12,11 +12,11 @@ public abstract class Command {
     }
 
     public abstract String getFormat();
-    
-    public abstract StringBuilder getHelpMessage();
-    
+
+    public abstract String getHelpMessage();
+
     public abstract void parseArguments(String arguments);
-    
+
     public abstract CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException;
-    
+
 }
