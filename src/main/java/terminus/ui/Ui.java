@@ -2,16 +2,11 @@ package terminus.ui;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import terminus.parser.CommandParser;
 
 public class Ui {
         
-    private static final String BANNER = "Welcome to TermiNUS!\n" 
-            + "\n" 
-            + "Type any of the following to get started:\n"
-            + "> notes\n"
-            + "> schedules\n"
-            + "> help\n"
-            + "> exit\n";
+    private static final String BANNER = "Welcome to TermiNUS!";
     private static final String PROMPT = "[%s] >>> ";
 
     private final Scanner scanner;
@@ -28,6 +23,14 @@ public class Ui {
     }
 
     /**
+     * Prints the banner for a workspace, which includes all the commands in the parser.
+     */
+    public void printParserBanner(CommandParser parser) {
+        printSection(parser.getCommandList().stream().reduce("\nType any of the following to get started:\n",
+            (x, y) -> String.format("%s> %s\n", x, y)));
+    }
+
+    /**
      * Prints a prompt and requests a command from the user.
      * 
      * @param workspaceName The string to place within the brackets.
@@ -38,7 +41,7 @@ public class Ui {
         if (validatedWorkspaceName == null) {
             validatedWorkspaceName = "";
         }
-        System.out.printf((PROMPT) + "%n", validatedWorkspaceName);
+        System.out.printf(PROMPT, validatedWorkspaceName);
         return scanner.nextLine();
     }
 
