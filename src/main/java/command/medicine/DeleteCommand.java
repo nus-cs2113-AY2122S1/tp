@@ -27,11 +27,13 @@ public class DeleteCommand extends Command {
                 ui.printInvalidParameter("", CommandSyntax.DELETECOMMAND);
             }
             return;
-        };
+        }
+        
         String stockIdToDelete = parameters.get(CommandParameters.STOCK_ID);
         if (!MedicineValidator.isValidStockId(ui, stockIdToDelete, stocks)) {
             return;
         }
+        
         int stockId = Integer.parseInt(stockIdToDelete);
         for (Stock stock: stocks) {
             Medicine medicine = (Medicine) stock;
