@@ -15,7 +15,7 @@ Type any of the following to get started:
 
 [notes] >>> Command not found! Type 'help' for a list of commands.
 [notes] >>> c f a
-[notes] >>>
+[notes] >>> 
 Type any of the following to get started:
 > exit
 > notes
