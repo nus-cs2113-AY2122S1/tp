@@ -1,5 +1,6 @@
 package terminus.command;
 
+import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
@@ -10,7 +11,7 @@ public class NotesCommand extends Command {
 
     @Override
     public String getFormat() {
-        return null;
+        return "notes";
     }
 
     @Override
@@ -24,12 +25,12 @@ public class NotesCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, NusModule module) {
+    public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
         NoteCommandParser notesMap = NoteCommandParser.getInstance();
         if (arguments != null && !arguments.strip().isEmpty()) {
             return notesMap.parseCommand(arguments).execute(ui, module);
         } else {
-            return new CommandResult(true,false,notesMap,null);
+            return new CommandResult(true,false, notesMap,null);
         }
     }
 
