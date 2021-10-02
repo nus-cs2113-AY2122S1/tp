@@ -44,18 +44,16 @@ public class Terminus {
             Command currentCommand = null;
             try {
                 currentCommand = parser.parseCommand(input);
-
                 CommandResult result = currentCommand.execute(ui,null);
                 if (result.isOk() && result.isExit()) {
                     break;
                 } else if (result.isOk() && result.getAdditionalData() != null) {
-                    this.parser = result.getAdditionalData();
-                    this.workspace = this.parser.getWorkspace();
-                    this.ui.printParserBanner(this.parser);
+                    parser = result.getAdditionalData();
+                    workspace = parser.getWorkspace();
+                    ui.printParserBanner(parser);
                 } else if (!result.isOk()) {
                     ui.printSection(result.getErrorMessage());
                 }
-                
             } catch (InvalidCommandException e) {
                 ui.printSection(e.getMessage());
             }

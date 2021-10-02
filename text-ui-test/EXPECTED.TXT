@@ -11,7 +11,13 @@ Type any of the following to get started:
 Type any of the following to get started:
 > exit
 > test
+> back
 
 [notes] >>> Command not found! Type 'help' for a list of commands.
 [notes] >>> c f a
-[notes] >>> Goodbye!
+[notes] >>>
+Type any of the following to get started:
+> exit
+> notes
+
+[] >>> Goodbye!

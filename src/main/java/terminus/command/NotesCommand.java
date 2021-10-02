@@ -1,13 +1,15 @@
 package terminus.command;
 
-import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
-import terminus.parser.NoteCommandParser;
-import terminus.ui.Ui;
 
-public class NotesCommand extends Command {
+import terminus.parser.NoteCommandParser;
+
+public class NotesCommand extends WorkspaceCommand {
 
     private String arguments;
+
+    public NotesCommand() {
+        super(NoteCommandParser.getInstance());
+    }
 
     @Override
     public String getFormat() {
@@ -15,23 +17,7 @@ public class NotesCommand extends Command {
     }
 
     @Override
-    public StringBuilder getHelpMessage() {
-        return null;
+    public String getHelpMessage() {
+        return "Move to notes workspace";
     }
-
-    @Override
-    public void parseArguments(String arguments) {
-        this.arguments = arguments;
-    }
-
-    @Override
-    public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
-        NoteCommandParser notesMap = NoteCommandParser.getInstance();
-        if (arguments != null && !arguments.strip().isEmpty()) {
-            return notesMap.parseCommand(arguments).execute(ui, module);
-        } else {
-            return new CommandResult(true,false, notesMap,null);
-        }
-    }
-
 }

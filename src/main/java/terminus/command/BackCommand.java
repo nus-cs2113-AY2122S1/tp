@@ -2,18 +2,19 @@ package terminus.command;
 
 import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
+import terminus.parser.MainCommandParser;
 import terminus.ui.Ui;
 
-public class ExitCommand extends Command {
+public class BackCommand extends Command {
 
     @Override
     public String getFormat() {
-        return "exit";
+        return "back";
     }
 
     @Override
     public String getHelpMessage() {
-        return "Exits the program.";
+        return "Returns to the parent workspace.";
     }
 
     @Override
@@ -23,6 +24,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
-        return new CommandResult(true, true);
+        MainCommandParser mainParser = MainCommandParser.getInstance();
+        return new CommandResult(true, mainParser);
     }
 }

@@ -12,7 +12,7 @@ public class TestCommand extends Command {
     }
 
     @Override
-    public StringBuilder getHelpMessage() {
+    public String getHelpMessage() {
         return null;
     }
 
@@ -24,6 +24,6 @@ public class TestCommand extends Command {
     @Override
     public CommandResult execute(Ui ui, NusModule module) {
         ui.printSection(arguments);
-        return new CommandResult(true,false,null,null);
+        return new CommandResult(true,false);
     }
 }

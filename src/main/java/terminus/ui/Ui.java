@@ -27,7 +27,7 @@ public class Ui {
      */
     public void printParserBanner(CommandParser parser) {
         printSection(parser.getCommandList().stream().reduce("\nType any of the following to get started:\n",
-                (x, y) -> String.format("%s> %s\n", x, y)));
+            (x, y) -> String.format("%s> %s\n", x, y)));
     }
 
     /**
