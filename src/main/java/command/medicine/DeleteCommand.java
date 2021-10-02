@@ -32,6 +32,7 @@ public class DeleteCommand extends Command {
         if (!MedicineValidator.isValidStockId(ui, stockIdToDelete, stocks)) {
             return;
         }
+
         int stockId = Integer.parseInt(stockIdToDelete);
         for (Stock stock : stocks) {
             Medicine medicine = (Medicine) stock;

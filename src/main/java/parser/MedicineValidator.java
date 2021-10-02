@@ -28,7 +28,7 @@ public class MedicineValidator {
                 throw new Exception();
             }
             boolean stockExist = false;
-            for (Stock stock: stocks) {
+            for (Stock stock : stocks) {
                 Medicine medicine = (Medicine) stock;
                 if (medicine.getStockID() == stockId) {
                     stockExist = true;
