@@ -36,13 +36,16 @@ public class ListCommand extends Command {
         case "task":
             getListTypeTasks(listType);
             bubbleSortTask(sortedList);
-            System.out.println(listType + " list! Total number of " + listType + "s = "
+            System.out.println(listType
+                    + " list! Total number of "
+                    + listType
+                    + "s = "
                     + sortedList.size());
             //ui.printList(sortedList);
             break;
-        case "others":
-            return new CommandResult("please specify type for list " +
-                    "[list, list deadline, list event,list todo ]");
+        default:
+            return new CommandResult("please specify type for list "
+                    + "[list, list deadline, list event,list todo ]");
         }
 
         return new CommandResult("--------END OF LIST-----------");
