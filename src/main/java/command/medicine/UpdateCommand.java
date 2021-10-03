@@ -23,7 +23,8 @@ public class UpdateCommand extends Command {
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
         String[] stockIdParameter = {CommandParameters.STOCK_ID};
-        boolean isPresentStockId = CommandSyntax.checkRequiredParameters(parameters, stockIdParameter);
+        boolean isPresentStockId = !CommandSyntax.containsInvalidParameters(ui, parameters,
+                stockIdParameter, CommandSyntax.UPDATE_COMMAND);
 
         if (!isPresentStockId) {
             return;
