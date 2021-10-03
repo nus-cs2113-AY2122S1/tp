@@ -39,31 +39,51 @@ public class Recipe {
     }
 
     public void addIngredient(Ingredient ingredient) {
-        totalPrice += ingredient.getPrice();
         ingredients.add(ingredient);
     }
 
-    public void removeIngredient(int index) {
-        totalPrice -= ingredients.get(index).getPrice();
-        ingredients.remove(index);
+    public void addIngredient(Ingredient ingredient, int index) throws GordonException {
+        try {
+            ingredients.add(index, ingredient);
+        } catch (IndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.INDEX_OOB);
+        } catch (IllegalArgumentException e) {
+            throw new GordonException(GordonException.INDEX_INVALID);
+        }
     }
 
-    public void replaceIngredient(int index, Ingredient newIngredient) {
-        totalPrice += newIngredient.getPrice();
-        totalPrice -= ingredients.get(index).getPrice();
-        ingredients.set(index, newIngredient);
+    public void removeIngredient(int index) throws GordonException {
+        try {
+            ingredients.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.INDEX_OOB);
+        } catch (IllegalArgumentException e) {
+            throw new GordonException(GordonException.INDEX_INVALID);
+        }
     }
 
-    public void addStep(String step) {
+    public void addStep(String step) throws GordonException {
         steps.add(step);
     }
 
-    public void removeStep(int index) {
-        steps.remove(index);
+    public void addStep(String step, int index) throws GordonException {
+        try {
+            steps.add(index, step);
+        } catch (IndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.INDEX_OOB);
+        } catch (IllegalArgumentException e) {
+            throw new GordonException(GordonException.INDEX_INVALID);
+        }
     }
 
-    public void replaceStep(int index, String newStep) {
-        steps.set(index, newStep);
+    public void removeStep(int index) throws GordonException {
+        try {
+            steps.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.INDEX_OOB);
+        } catch (IllegalArgumentException e) {
+            throw new GordonException(GordonException.INDEX_INVALID);
+        }
     }
 
     public void addTag(String tag) {
@@ -94,7 +114,7 @@ public class Recipe {
         outputString.append("Ingredients needed: ").append(System.lineSeparator());
         for (int i = 0; i < ingredients.size(); i++) {
             outputString.append(i + 1).append(". ");
-            outputString.append(ingredients.get(i).getDescription());
+            outputString.append(ingredients.get(i));
             outputString.append(System.lineSeparator());
         }
         outputString.append("Method: ").append(System.lineSeparator());
