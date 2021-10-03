@@ -41,12 +41,12 @@ public class ListCommand extends Command {
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.NAME:
-                // Implement search by name
                 if (!MedicineValidator.isValidName(ui, parameterValue)) {
                     return;
                 }
                 filteredMedicines = (ArrayList<Stock>) filteredMedicines.stream()
-                        .filter((m) -> ((Medicine) m).getMedicineName() ==
+                        .filter((m) -> m.getMedicineName().equals(parameterValue))
+                        .collect(Collectors.toList());
                 break;
             case CommandParameters.PRICE:
                 if (!MedicineValidator.isValidPrice(ui, parameterValue)) {
@@ -73,7 +73,12 @@ public class ListCommand extends Command {
                 }
                 break;
             case CommandParameters.DESCRIPTION:
-                // Implement search by description
+                if (!MedicineValidator.isValidDescription(ui, parameterValue)) {
+                    return;
+                }
+                filteredMedicines = (ArrayList<Stock>) filteredMedicines.stream()
+                        .filter((m) -> ((Medicine) m).getDescription().equals(parameterValue))
+                        .collect(Collectors.toList());
                 break;
             case CommandParameters.MAX_QUANTITY:
                 // Implement search by max quantity
