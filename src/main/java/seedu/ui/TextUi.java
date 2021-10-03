@@ -1,6 +1,7 @@
 package seedu.ui;
 
 import seedu.module.Module;
+import seedu.module.Lesson;
 
 import java.util.Scanner;
 
@@ -124,5 +125,24 @@ public class TextUi {
 
     public static void printAddMessage(String moduleCode) {
         System.out.println("Adding " + moduleCode);
+    }
+
+    public static void printLectureMessage() {
+        System.out.println("Which Lecture time slot would you like to add ?");
+        System.out.println("Lecture Time slots:");
+    }
+
+    public static void printTutorialMessage() {
+        System.out.println("Which Tutorial time slot would you like to add ?");
+        System.out.println("Tutorial Time slots:");
+    }
+
+    public static void printLaboratoryMessage() {
+        System.out.println("Which Laboratory time slot would you like to add ?");
+        System.out.println("Laboratory Time slots:");
+    }
+
+    public static void printLessonInfo(int serial, Lesson lesson) {
+        System.out.println(serial + ": " + lesson.lessonDetail());
     }
 }

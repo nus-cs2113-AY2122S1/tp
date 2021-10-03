@@ -114,6 +114,13 @@ public class ModStorage {
         TextUi.printLocalSearchMessage();
     }
 
+    public static void addTimetableFile(Module module) throws IOException {
+        String filePath = "timetable/" + module.getModuleCode() + ".json";
+        FileWriter fw = new FileWriter(filePath);
+        Gson gson = new Gson();
+        gson.toJson(module, fw);
+    }
+
     public static class FileErrorException extends Exception {
     }
 

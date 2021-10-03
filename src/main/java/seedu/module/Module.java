@@ -56,6 +56,7 @@ public class Module {
                 return s;
             }
         }
+        //What is the point of this? Shouldn't we just print out an error
         return new Semester();
     }
 
@@ -82,16 +83,4 @@ public class Module {
     public boolean codeContains(String searchTerm) {
         return moduleCode.toLowerCase().contains(searchTerm.toLowerCase());
     }
-
-    /**
-     * Function returns the semesterData of the module base on the current semester
-     * specified by the user
-     * @param semester the semester as specified by the user
-     * @return The semester data of the module
-     */
-    public Semester getSemesterData(int semester) {
-        int index = semester - FINALISE_INDEX;
-        return semesterData.get(index);
-    }
-
 }
