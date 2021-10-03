@@ -17,7 +17,7 @@ public class CommandParser {
     private static final String FLAG = "-";
     private static final String L_FLAG = "-l";
 
-    public Command parseCommand(String text) {
+    public Command parseCommand(String text, Integer semester) {
         Command command;
         text = text.trim();
         String lowerCaseText = text.toLowerCase();
@@ -33,7 +33,7 @@ public class CommandParser {
         } else if (lowerCaseText.startsWith("timetable")) {
             command = new TimetableCommand(Duke.timetable);
         } else if (lowerCaseText.startsWith("add")) {
-            command = parseAddCommand(text);
+            command = parseAddCommand(text, semester);
         } else {
             command = new InvalidCommand();
         }
@@ -62,9 +62,9 @@ public class CommandParser {
         return new ShowCommand(str);
     }
 
-    public Command parseAddCommand(String input) {
+    public Command parseAddCommand(String input, Integer semester) {
         input = input.substring(ADD_LENGTH).trim();
         String moduleCode = input.toUpperCase();
-        return new AddCommand(moduleCode);
+        return new AddCommand(moduleCode, semester);
     }
 }

@@ -3,19 +3,24 @@ package seedu.command;
 import seedu.online.NusMods;
 import seedu.storage.ModStorage;
 import seedu.module.Module;
+import seedu.module.Semester;
+import seedu.timetable.TimeTable;
 import seedu.ui.TextUi;
 
 import java.io.IOException;
+import java.sql.Time;
 
 public class AddCommand extends Command {
     private final String moduleCode;
+    private final Integer semester;
 
-    public AddCommand(String moduleCode) {
+    public AddCommand(String moduleCode, Integer semester) {
         this.moduleCode = moduleCode;
+        this.semester = semester;
     }
 
     public void execute() {
-        Module module;
+        Module module = new Module(moduleCode);
         try {
             module = NusMods.fetchModOnline(moduleCode);
         } catch (IOException e1) {
@@ -26,6 +31,7 @@ public class AddCommand extends Command {
                 TextUi.printNotFoundMessage();
             }
         }
+        Semester semesterData = module.getSemesterData(semester);
     }
 
     /**

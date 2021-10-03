@@ -92,4 +92,7 @@ public class TimeTable {
         TimetableUI.printModules(modules);
     }
 
+    public int getSemester() {
+        return semester;
+    }
 }

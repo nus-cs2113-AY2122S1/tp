@@ -28,7 +28,7 @@ public class Duke {
     private void run() {
         Command command;
         do {
-            command = commandParser.parseCommand(TextUi.getCommand());
+            command = commandParser.parseCommand(TextUi.getCommand(), timetable.getSemester());
             executeCommand(command);
         } while (!command.isExit());
     }
