@@ -20,7 +20,8 @@ public class IngredientList {
     /**
      * Adds ingredient to the ingredient list.
      *
-     * @param ingredient Ingredient to be added;
+     * @param ingredient Ingredient to be added.
+     * @throws DuplicateDataException If the ingredient already exists.
      */
     public void add(Ingredient ingredient) throws DuplicateDataException {
         if (contains(ingredient)) {

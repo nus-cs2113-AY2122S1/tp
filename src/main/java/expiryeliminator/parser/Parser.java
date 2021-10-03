@@ -9,22 +9,20 @@ import expiryeliminator.commands.ByeCommand;
 import expiryeliminator.commands.Command;
 import expiryeliminator.commands.IncorrectCommand;
 
-//@@author bernardboey-reused
-// Reused from https://github.com/bernardboey/ip/blob/master/src/main/java/duke/parser/Parser.java
-// with minor modifications
-
 /**
  * Parses user input.
  */
 public class Parser {
-    // Capturing group variables store the name of the named capturing group.
-    private static final String CAPTURING_GROUP_COMMAND = "command";
-    private static final String CAPTURING_GROUP_ARGS = "args";
-    /** Used for initial separation of command word and args. */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile(
-            "^(?<" + CAPTURING_GROUP_COMMAND + ">[^/]+)"
-                    + "(?<" + CAPTURING_GROUP_ARGS + "> .*)?$");
+    //@@author bernardboey-reused
+    // Reused from https://github.com/bernardboey/ip/blob/master/src/main/java/duke/parser/Parser.java
+    // with minor modifications
 
+    /** Used for initial separation of command word and args. */
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("^(?<command>[^/]+)(?<args> .*)?$");
+    /**
+     * Used for separation of each prefix and argument.
+     * E.g. this matches "/a aaaaa aaaa"
+     */
     private static final Pattern ARGS_FORMAT = Pattern.compile("\\w+/([^/\\s]+( +|$))+");
 
     private static final String PREFIX_INGREDIENT = "i";
@@ -46,8 +44,8 @@ public class Parser {
         if (!matcher.matches()) {
             throw new RuntimeException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
-        final String command = matcher.group(CAPTURING_GROUP_COMMAND);
-        String args = matcher.group(CAPTURING_GROUP_ARGS);
+        final String command = matcher.group("command");
+        String args = matcher.group("args");
 
         // May not contain all arguments (e.g. if user did not provide).
         final HashMap<String, String> prefixesToArgs = parseArgs(args);
@@ -61,8 +59,11 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_UNRECOGNISED_COMMAND);
         }
     }
+    //@@author
 
     private static HashMap<String, String> parseArgs(String args) {
+        // TODO(bernardboey): Change the way this is done to allow for multiple of the same tags.
+        // Separate to different class and feed in the argument prefixes that are expected when parsing?
         args = args == null ? "" : args.trim();
         final HashMap<String, String> prefixesToArgs = new HashMap<>();
         final Matcher matcher = ARGS_FORMAT.matcher(args);
@@ -101,4 +102,3 @@ public class Parser {
         return Integer.parseInt(quantityString);
     }
 }
-//@@author
