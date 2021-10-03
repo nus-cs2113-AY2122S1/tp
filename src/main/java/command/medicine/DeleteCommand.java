@@ -19,12 +19,8 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
         String[] requiredParameters = {CommandParameters.STOCK_ID};
-        if (!CommandSyntax.checkRequiredParameters(parameters, requiredParameters)) {
-            if (!parameters.isEmpty()) {
-                ui.printInvalidParameter(parameters.keySet().toArray()[0].toString(), CommandSyntax.DELETE_COMMAND);
-            } else {
-                ui.printInvalidParameter("", CommandSyntax.DELETE_COMMAND);
-            }
+
+        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, CommandSyntax.DELETE_COMMAND)) {
             return;
         }
 

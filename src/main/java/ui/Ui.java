@@ -45,15 +45,37 @@ public class Ui {
      * Prints the invalid parameter message.
      *
      * @param parameter     The invalid parameter found.
-     * @param commandSyntax The commandSyntax of the command.
+     * @param commandSyntax The command syntax of the command.
      */
     public void printInvalidParameter(String parameter, String commandSyntax) {
         if (parameter.equals("")) {
-            print("No parameter is provided!");
+            print("Please provide all the required parameters!");
         } else {
             print("An invalid parameter " + parameter + " is provided!");
         }
         print("COMMAND SYNTAX: " + commandSyntax);
+    }
+
+    /**
+     * Prints the missing parameter message.
+     *
+     * @param parameter     The parameter that is not found.
+     * @param commandSyntax The command syntax of the command.
+     */
+    public void printRequiredParameter(String parameter, String commandSyntax) {
+        print("Required parameter " + parameter + " is missing!");
+        print("COMMAND SYNTAX: " + commandSyntax);
+    }
+
+    /**
+     * Prints out the medicine in a table format.
+     *
+     * @param medicine Medicine to be printed.
+     */
+    public void printMedicine(Medicine medicine) {
+        ArrayList<Stock> medicines = new ArrayList<>();
+        medicines.add(medicine);
+        printMedicines(medicines);
     }
 
     /**
@@ -111,18 +133,15 @@ public class Ui {
 
         for (Stock stock : medicines) {
             Medicine medicine = (Medicine) stock;
-            StringBuilder row = new StringBuilder();
-            row.append(String.format(idFormat, centerString(idWidth, String.valueOf(medicine.getStockID()))));
-            row.append(String.format(nameFormat, centerString(nameWidth, medicine.getMedicineName())));
-            row.append(String.format(priceFormat, centerString(priceWidth,
-                    String.format("$%.2f", medicine.getPrice()))));
-            row.append(String.format(quantityFormat, centerString(quantityWidth,
-                    String.valueOf(medicine.getQuantity()))));
-            row.append(String.format(expiryFormat, centerString(expiryWidth,
-                    DateParser.dateToString(medicine.getExpiry()))));
-            row.append(String.format(descriptionFormat, centerString(descriptionWidth, medicine.getDescription())));
-            row.append(String.format(maxQuantityFormat, centerString(maxQuantityWidth,
-                    String.valueOf(medicine.getMaxQuantity()))));
+            String row = String.format(idFormat, centerString(idWidth, String.valueOf(medicine.getStockID())))
+                    + String.format(nameFormat, centerString(nameWidth, medicine.getMedicineName()))
+                    + String.format(priceFormat, centerString(priceWidth, String.format("$%.2f", medicine.getPrice())))
+                    + String.format(quantityFormat, centerString(quantityWidth, String.valueOf(medicine.getQuantity())))
+                    + String.format(expiryFormat, centerString(expiryWidth,
+                    DateParser.dateToString(medicine.getExpiry())))
+                    + String.format(descriptionFormat, centerString(descriptionWidth, medicine.getDescription()))
+                    + String.format(maxQuantityFormat, centerString(maxQuantityWidth,
+                    String.valueOf(medicine.getMaxQuantity())));
             System.out.println(row);
             printRowBorder(Medicine.NO_OF_COLUMNS, columnWidths);
         }
