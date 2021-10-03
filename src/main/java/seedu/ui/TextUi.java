@@ -121,4 +121,8 @@ public class TextUi {
         System.out.println(LINE + "!WARNING! This is a local search, data might not be up to date.");
         System.out.println(LINE);
     }
+
+    public static void printAddMessage(String moduleCode) {
+        System.out.println("Adding " + moduleCode);
+    }
 }

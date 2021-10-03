@@ -88,5 +88,4 @@ public class NusMods {
         reader.endArray();
         TextUi.printUpdateSuccessMessage();
     }
-
 }

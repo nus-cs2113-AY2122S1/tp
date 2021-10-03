@@ -5,7 +5,6 @@ import seedu.ui.TimetableUI;
 import java.util.ArrayList;
 
 public class TimeTable {
-
     private static final int DEFAULT_START = 9;
     private static final int DEFAULT_END = 12;
 

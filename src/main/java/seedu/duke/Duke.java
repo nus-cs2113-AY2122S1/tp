@@ -9,9 +9,6 @@ import seedu.timetable.Class;
 import seedu.timetable.TimeTable;
 import seedu.ui.TextUi;
 
-import java.io.IOException;
-
-
 public class Duke {
     private static String path = "data/Modules.json";
     public static TimeTable timetable = new TimeTable(1);
@@ -25,31 +22,7 @@ public class Duke {
     private void setup() {
         this.modStorage = new ModStorage(path);
         TextUi.printWelcomeMessage();
-        setupTT();
         run();
-    }
-
-    // EXAMPLES FOR HOW TO ADD A CLASS INTO TIMETABLE FOR @POOPIES99
-    private void setupTT() {
-        try {
-            Module module = fetchMod("CG2271");
-            timetable.addClass(new Class(module, 1, module.getLesson(1, 1)));
-            timetable.addClass(new Class(module, 1, module.getLesson(1, 5)));
-            Module u = fetchMod("EG2401A");
-            timetable.addClass(new Class(u, 1, module.getLesson(1, 3)));
-        } catch (IOException e) {
-            TextUi.printErrorMessage();
-        }
-    }
-
-    //This is a placeholder fetchMod function
-    public Module fetchMod(String moduleCode) throws IOException {
-        try {
-            return NusMods.fetchModOnline(moduleCode);
-        } catch (IOException e) {
-            TextUi.printNoConnectionMessage();
-            return ModStorage.loadModInfo(moduleCode);
-        }
     }
 
     private void run() {
