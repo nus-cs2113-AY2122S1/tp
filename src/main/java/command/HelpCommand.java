@@ -14,8 +14,8 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
-        String LS = System.lineSeparator();
-        String HELP = "Welcome to the help page." + LS
+        final String LS = System.lineSeparator();
+        final String HELP = "Welcome to the help page." + LS
                 + "Note that parameters enclosed in [] are optional." + LS
                 + "Note that date format is dd-MM-yyyy." + LS + LS
                 + "|   COMMAND   |   USAGE" + LS
