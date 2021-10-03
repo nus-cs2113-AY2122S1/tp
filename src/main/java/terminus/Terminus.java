@@ -2,7 +2,9 @@ package terminus;
 
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
 import terminus.ui.Ui;
@@ -12,6 +14,8 @@ public class Terminus {
     private Ui ui;
     private CommandParser parser;
     private String workspace;
+
+    private NusModule nusModule;
     
     /**
      * Main entry-point for the terminus.Terminus application.
@@ -35,6 +39,7 @@ public class Terminus {
         this.workspace = "";
         this.ui.printBanner();
         this.ui.printParserBanner(this.parser);
+        this.nusModule = new NusModule();
     }
     
     private void runCommandsUntilExit() {
@@ -44,7 +49,7 @@ public class Terminus {
             Command currentCommand = null;
             try {
                 currentCommand = parser.parseCommand(input);
-                CommandResult result = currentCommand.execute(ui,null);
+                CommandResult result = currentCommand.execute(ui,nusModule);
                 if (result.isOk() && result.isExit()) {
                     break;
                 } else if (result.isOk() && result.getAdditionalData() != null) {
@@ -56,8 +61,10 @@ public class Terminus {
                 }
             } catch (InvalidCommandException e) {
                 ui.printSection(e.getMessage());
+            } catch (InvalidArgumentException e) {
+                ui.printSection(e.getMessage());
             }
-            
+
         }
     } 
     
