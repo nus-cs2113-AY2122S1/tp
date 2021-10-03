@@ -26,7 +26,7 @@ public class Medicine extends Stock {
     protected String description;
     protected int maxQuantity;
 
-    public Medicine(String name, int quantity, double price, Date expiry, String description, int maxQuantity) {
+    public Medicine(String name, double price, int quantity, Date expiry, String description, int maxQuantity) {
         super(name, quantity);
         stockCount++;
         this.stockID = stockCount;
@@ -34,6 +34,10 @@ public class Medicine extends Stock {
         this.expiry = expiry;
         this.description = description;
         this.maxQuantity = maxQuantity;
+    }
+
+    public static int getStockCount() {
+        return stockCount;
     }
 
     public int getStockID() {
