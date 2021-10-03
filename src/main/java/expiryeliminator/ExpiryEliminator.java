@@ -1,6 +1,7 @@
 package expiryeliminator;
 
 import expiryeliminator.commands.Command;
+import expiryeliminator.data.IngredientList;
 import expiryeliminator.parser.Parser;
 import expiryeliminator.ui.Ui;
 
@@ -10,12 +11,14 @@ import expiryeliminator.ui.Ui;
  */
 public class ExpiryEliminator {
     private static Ui ui;
+    private static IngredientList ingredients;
 
     /**
      * Initialises the ExpiryEliminator application.
      */
     public ExpiryEliminator() {
         ui = new Ui();
+        ingredients = new IngredientList();
     }
 
     //@@author bernardboey-reused
@@ -32,7 +35,7 @@ public class ExpiryEliminator {
             final String userInput = ui.getUserInput();
             final Command command = Parser.parseCommand(userInput);
             isExit = command.isExit();
-            final String feedback = command.execute();
+            final String feedback = command.execute(ingredients);
             ui.showToUser(feedback);
         }
     }

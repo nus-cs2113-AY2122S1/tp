@@ -5,6 +5,8 @@ package expiryeliminator.commands;
 // https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/commands/IncorrectCommand.java
 // with minor modifications
 
+import expiryeliminator.data.IngredientList;
+
 /**
  * Represents an incorrect command. Upon execution, produces some feedback to the user.
  */
@@ -17,7 +19,7 @@ public class IncorrectCommand extends Command {
     }
 
     @Override
-    public String execute() {
+    public String execute(IngredientList ingredientList) {
         return feedbackToUser;
     }
 
