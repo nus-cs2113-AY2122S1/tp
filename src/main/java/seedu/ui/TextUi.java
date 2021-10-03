@@ -1,7 +1,6 @@
 package seedu.ui;
 
 import seedu.module.Module;
-import seedu.module.ModList;
 
 import java.util.Scanner;
 
@@ -21,7 +20,6 @@ public class TextUi {
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
 
-
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
         System.out.println();
@@ -36,14 +34,12 @@ public class TextUi {
         System.out.print(LINE + "> Sorry friend, I don't know what that means. :/\n" + LINE);
     }
 
-    public static void searchMods(ModList modList, String searchTerm) {
-        int count = 0;
-        for (int i = 0; i < modList.getSize(); i++) {
-            if (printMatchingMod(modList.getMod(i), searchTerm)) {
-                count += 1;
-            }
-        }
-        System.out.println(count + " matching mods found.");
+    public static void printModBriefDescription(Module module) {
+        System.out.println(module);
+    }
+
+    public static void printModFullDescription(Module module) {
+        System.out.println(module.getFullInfo());
     }
 
     public static boolean printMatchingMod(Module module, String searchTerm) {
@@ -103,16 +99,6 @@ public class TextUi {
         }
     }
 
-    public static void showMod(ModList modList, String searchTerm) {
-        for (int i = 0; i < modList.getSize(); i++) {
-            if (codeMatch(modList.getMod(i), searchTerm)) {
-                printFullInfo(modList.getMod(i));
-                return;
-            }
-        }
-        printNotFoundMessage();
-    }
-
     public static void printNotFoundMessage() {
         System.out.println("No matching mod found.");
     }
@@ -121,4 +107,18 @@ public class TextUi {
         System.out.println(module.getFullInfo());
     }
 
+    public static void printNoConnectionMessage() {
+        System.out.println(LINE + "Failed to connect to NUSMods API. Loading saved information.");
+        System.out.println(LINE);
+    }
+
+    public static void printModsFound(int count) {
+        String mods = (count == 1) ? " mod " : " mods ";
+        System.out.println(count + mods + "found.");
+    }
+
+    public static void printLocalSearchMessage() {
+        System.out.println(LINE + "!WARNING! This is a local search, data might not be up to date.");
+        System.out.println(LINE);
+    }
 }
