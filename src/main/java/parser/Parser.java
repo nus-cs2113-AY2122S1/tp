@@ -2,7 +2,10 @@ package parser;
 
 import command.HelpCommand;
 import command.PurgeCommand;
-import command.medicine.*;
+import command.medicine.AddCommand;
+import command.medicine.DeleteCommand;
+import command.medicine.ListCommand;
+import command.medicine.UpdateCommand;
 import errors.InvalidCommand;
 import inventory.Stock;
 import ui.Ui;
