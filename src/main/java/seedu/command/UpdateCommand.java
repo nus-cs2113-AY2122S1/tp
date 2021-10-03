@@ -1,6 +1,7 @@
 package seedu.command;
 
-import seedu.parser.NusModsParser;
+import seedu.online.NusMods;
+import seedu.storage.ModStorage;
 
 import java.io.IOException;
 
@@ -11,10 +12,8 @@ public class UpdateCommand extends Command {
 
     public void execute() {
         try {
-            NusModsParser.update(modList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+            NusMods.update();
+        } catch (IOException | ModStorage.FileErrorException e) {
             e.printStackTrace();
         }
     }

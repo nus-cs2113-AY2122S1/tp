@@ -1,6 +1,10 @@
 package seedu.command;
 
+import seedu.online.NusMods;
+import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
+
+import java.io.IOException;
 
 public class ShowCommand extends Command {
 
@@ -11,6 +15,12 @@ public class ShowCommand extends Command {
     }
 
     public void execute() {
-        TextUi.showMod(modList, searchTerm);
+        String moduleCode = searchTerm.toUpperCase();
+        try {
+            NusMods.showModOnline(moduleCode);
+        } catch (IOException e) {
+            TextUi.printNoConnectionMessage();
+            ModStorage.showModOffline(moduleCode);
+        }
     }
 }
