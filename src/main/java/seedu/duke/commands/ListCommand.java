@@ -9,12 +9,6 @@ public class ListCommand extends Command {
     public static ArrayList<Item> sortedList = new ArrayList<>();
     protected String listType;
 
-    /**
-     * Parses through the different commands typed by the user
-     * and initializes the listType variable
-     *
-     * @param command an array of strings of the users response
-     */
     public ListCommand(String[] command) {
 
         if (command.length == 1) {
@@ -28,14 +22,6 @@ public class ListCommand extends Command {
         }
     }
 
-    /**
-     * lists the specified type of list. Normal list will list out the entire list of tasks
-     * but the specific task lists will, make a new sorted array based on its Task type and
-     * the date and time of each of the tasks.
-     *
-     * @return CommandResult indicating if the list has been printed successfully or if errors
-     * were encountered along the way
-     */
     public CommandResult execute() {
 
         sortedList.clear();
@@ -62,12 +48,6 @@ public class ListCommand extends Command {
         return new CommandResult("--------END OF LIST-----------");
     }
 
-    /**
-     * places the tasks of the specified type into a sortedList that is not yet
-     * sorted
-     *
-     * @param type String indicating the type of the task
-     */
     private void getListTypeTasks(String type) {
 
         for (Item task : Duke.itemList) {
@@ -77,9 +57,6 @@ public class ListCommand extends Command {
         }
     }
 
-    /**
-     * sorts the unsorted list using bubble sort
-     */
     private void bubbleSortTask(ArrayList<Item> list) {
 
         for (int j = 0; j < list.size() - 1; j++) {
@@ -91,11 +68,6 @@ public class ListCommand extends Command {
         }
     }
 
-    /**
-     * swaps tasks in the sortedList
-     *
-     * @param i index of the task being swapped
-     */
     private void swap(int i, ArrayList<Item> list) {
         Item t;
         t = list.get(i);
