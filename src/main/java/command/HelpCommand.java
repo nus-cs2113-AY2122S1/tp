@@ -15,7 +15,7 @@ public class HelpCommand extends Command {
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
         final String LS = System.lineSeparator();
-        final String HELP = "Welcome to the help page." + LS
+        String help = "Welcome to the help page." + LS
                 + "Note that parameters enclosed in [] are optional." + LS
                 + "Note that date format is dd-MM-yyyy." + LS + LS
                 + "|   COMMAND   |   USAGE" + LS
@@ -27,6 +27,6 @@ public class HelpCommand extends Command {
                 + "|   PURGE     |   " + CommandSyntax.PURGE_COMMAND + LS
                 + "|   EXIT      |   " + CommandSyntax.EXIT_COMMAND + LS + LS
                 + "For more information, refer to User Guide: https://ay2122s1-cs2113t-t10-1.github.io/tp/";
-        ui.print(HELP);
+        ui.print(help);
     }
 }
