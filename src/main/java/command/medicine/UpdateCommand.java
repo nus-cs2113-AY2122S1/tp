@@ -23,6 +23,9 @@ public class UpdateCommand extends Command {
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
         String[] stockIdParameter = {CommandParameters.STOCK_ID};
+        String[] optionalParameters = {CommandParameters.PRICE, CommandParameters.QUANTITY,
+                CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
+                CommandParameters.UPDATED_MEDICINE_NAME, CommandParameters.MAX_QUANTITY};
         boolean isPresentStockId = !CommandSyntax.containsInvalidParameters(ui, parameters,
                 stockIdParameter, CommandSyntax.UPDATE_COMMAND);
 
@@ -44,7 +47,8 @@ public class UpdateCommand extends Command {
         }
 
         // Checks validity of optional parameters
-        boolean containValidParameters = validOptionalParameterChecker(ui, parameters);
+        boolean containValidParameters = CommandSyntax.validOptionalParameterChecker(ui, parameters, stocks,
+                optionalParameters);
         if (!containValidParameters) {
             return;
         }
@@ -52,50 +56,6 @@ public class UpdateCommand extends Command {
         if (isPresentStockId) {
             processUpdatesByStockID(ui, parameters, stocks);
         }
-    }
-
-    /**
-     * Checks if optional parameters are valid.
-     *
-     * @param ui         Reference to the UI object passed by Main to print messages.
-     * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
-     * @return A boolean value indicating whether parameters are valid.
-     */
-    private boolean validOptionalParameterChecker(Ui ui, HashMap<String, String> parameters) {
-        boolean isValid;
-        for (String parameter : parameters.keySet()) {
-            String parameterValue = parameters.get(parameter);
-            switch (parameter) {
-            case CommandParameters.PRICE:
-                isValid = MedicineValidator.isValidPrice(ui, parameterValue);
-                break;
-            case CommandParameters.QUANTITY:
-                isValid = MedicineValidator.isValidQuantity(ui, parameterValue);
-                break;
-            case CommandParameters.EXPIRY_DATE:
-                isValid = MedicineValidator.isValidExpiry(ui, parameterValue);
-                break;
-            case CommandParameters.DESCRIPTION:
-                isValid = MedicineValidator.isValidDescription(ui, parameterValue);
-                break;
-            case CommandParameters.UPDATED_MEDICINE_NAME:
-                isValid = MedicineValidator.isValidName(ui, parameterValue);
-                break;
-            case CommandParameters.MAX_QUANTITY:
-                isValid = MedicineValidator.isValidMaxQuantity(ui, parameterValue);
-                break;
-            case CommandParameters.STOCK_ID:
-                isValid = true;
-                break;
-            default:
-                ui.printInvalidParameter(parameter, CommandSyntax.UPDATE_COMMAND);
-                isValid = false;
-            }
-            if (!isValid) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
