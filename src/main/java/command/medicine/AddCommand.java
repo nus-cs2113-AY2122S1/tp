@@ -24,12 +24,8 @@ public class AddCommand extends Command {
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE, CommandParameters.QUANTITY,
             CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
-        if (!CommandSyntax.checkRequiredParameters(parameters, requiredParameters)) {
-            if (!parameters.isEmpty()) {
-                ui.printInvalidParameter(parameters.keySet().toArray()[0].toString(), CommandSyntax.ADD_COMMAND);
-            } else {
-                ui.printInvalidParameter("", CommandSyntax.ADD_COMMAND);
-            }
+
+        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, CommandSyntax.ADD_COMMAND)) {
             return;
         }
 
@@ -86,10 +82,9 @@ public class AddCommand extends Command {
             Medicine medicine = new Medicine(nameToAdd, price, quantity, dateObj, descriptionToAdd, maxQuantity);
             stocks.add(medicine);
             ui.print("Medication added: " + nameToAdd);
+            ui.printMedicine(medicine);
         } catch (ParseException e) {
             e.printStackTrace();
-        } catch (NullPointerException e) {
-            System.out.println("Please include all parameters for the medicine");
         }
     }
 

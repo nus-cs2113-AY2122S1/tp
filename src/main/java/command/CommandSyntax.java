@@ -1,6 +1,7 @@
 package command;
 
-import java.util.Arrays;
+import ui.Ui;
+
 import java.util.HashMap;
 
 public class CommandSyntax {
@@ -17,19 +18,20 @@ public class CommandSyntax {
      * @param commandParameters Parameters required by the command.
      * @return A boolean value indicating if the parameters required are enterd by the user.
      */
-    public static boolean checkRequiredParameters(HashMap<String, String> parameters, String[] commandParameters) {
-        boolean isValidInput = true;
+    public static boolean containsInvalidParameters(Ui ui, HashMap<String, String> parameters,
+                                                    String[] commandParameters, String commandSyntax) {
+        // User did not provide parameters all the parameters
+        if (parameters.keySet().size() < commandParameters.length) {
+            ui.printInvalidParameter("", commandSyntax);
+            return true;
+        }
 
-        for (String userParameter : parameters.keySet()) {
-            if (!Arrays.asList(commandParameters).contains(userParameter)) { // Checks if required parameters are found
-                isValidInput = false;
-                break;
+        for (String requiredParameter : commandParameters) {
+            if (!parameters.containsKey(requiredParameter)) { // Checks if required parameters are found
+                ui.printRequiredParameter(requiredParameter, commandSyntax);
+                return true;
             }
         }
-        // When user did not provide parameters but it is required
-        if (parameters.keySet().size() == 0 && commandParameters.length != 0) {
-            isValidInput = false;
-        }
-        return isValidInput;
+        return false;
     }
 }
