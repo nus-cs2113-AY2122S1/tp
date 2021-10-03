@@ -41,6 +41,16 @@ public class Parser {
      */
     private static final Pattern DELETE_INCOME_ARGUMENT_FORMAT =
             Pattern.compile("i/(?<index>[^/]+)");
+    
+    private static final String HELP_COMMAND_KEYWORD = "help";
+    private static final String ADD_EXPENSE_KEYWORD = "add_ex";
+    private static final String ADD_INCOME_KEYWORD = "add_in";
+    private static final String DELETE_EXPENSE_KEYWORD = "del_ex";
+    private static final String DELETE_INCOME_KEYWORD = "del_in";
+    private static final String LIST_EXPENSE_KEYWORD = "list_ex";
+    private static final String LIST_INCOME_KEYWORD = "list_in";
+    private static final String TOTAL_EXPENSE_KEYWORD = "total_ex";
+    private static final String TOTAL_INCOME_KEYWORD = "total_in";
 
     /**
      * Parses user input into command for execution.
@@ -60,23 +70,23 @@ public class Parser {
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-        case "help":
+        case HELP_COMMAND_KEYWORD:
             return new HelpCommand();
-        case "add_ex":
+        case ADD_EXPENSE_KEYWORD:
             return prepareAddExpense(arguments);
-        case "add_in":
+        case ADD_INCOME_KEYWORD:
             return prepareAddIncome(arguments);
-        case "del_ex":
+        case DELETE_EXPENSE_KEYWORD:
             return prepareDeleteExpense(arguments);
-        case "del_in":
+        case DELETE_INCOME_KEYWORD:
             return prepareDeleteIncome(arguments);
-        case "list_ex":
+        case LIST_EXPENSE_KEYWORD:
             return new ListExpenseCommand();
-        case "list_in":
+        case LIST_INCOME_KEYWORD:
             return new ListIncomeCommand();
-        case "total_ex":
+        case TOTAL_EXPENSE_KEYWORD:
             return new TotalExpenseCommand();
-        case "total_in":
+        case TOTAL_INCOME_KEYWORD:
             return new TotalIncomeCommand();
         default:
             return new InvalidCommand();
