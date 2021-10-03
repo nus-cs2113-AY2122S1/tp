@@ -1,12 +1,9 @@
 package seedu.duke.tasks;
 
-/**
- *
- */
-public class Routine {
+public class Workout {
     protected String description;
 
-    public Routine(String description) {
+    public Workout(String description) {
         this.description = description;
     }
 }

@@ -2,9 +2,6 @@ package seedu.duke.command;
 
 import seedu.duke.exception.GetJackDException;
 
-/**
- *
- */
 public class AddCommand extends Command {
     @Override
     public void executeUserCommand() throws GetJackDException {
