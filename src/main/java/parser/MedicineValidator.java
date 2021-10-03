@@ -14,18 +14,30 @@ import java.util.Arrays;
 
 public class MedicineValidator {
     /**
-     * Checks if a medicine name is empty.
+     * Checks if the given stock id is valid.
      *
      * @param ui    Reference to the UI object passed by Main to print messages.
      * @param id    ID of the medicine to be checked.
-     * @param stock List of all medicines.
+     * @param stocks List of all medicines.
      * @return Boolean value indicating if medicine ID is valid.
      */
-    public static boolean isValidStockId(Ui ui, String id, ArrayList<Stock> stock) {
+    public static boolean isValidStockId(Ui ui, String id, ArrayList<Stock> stocks) {
         try {
             int stockId = Integer.parseInt(id);
-            if (stockId <= 0 || stockId > stock.size()) {
+            if (stockId <= 0 || stockId > Medicine.getStockCount()) {
                 throw new Exception();
+            }
+            boolean stockExist = false;
+            for (Stock stock : stocks) {
+                Medicine medicine = (Medicine) stock;
+                if (medicine.getStockID() == stockId) {
+                    stockExist = true;
+                    break;
+                }
+            }
+            if (!stockExist) {
+                ui.print("Invalid stock id provided!");
+                return false;
             }
             return true;
         } catch (Exception e) {
