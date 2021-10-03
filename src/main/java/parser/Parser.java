@@ -1,5 +1,6 @@
 package parser;
 
+import command.HelpCommand;
 import command.PurgeCommand;
 import command.medicine.*;
 import errors.InvalidCommand;

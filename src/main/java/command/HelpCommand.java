@@ -1,7 +1,5 @@
-package command.medicine;
+package command;
 
-import command.Command;
-import command.CommandSyntax;
 import inventory.Stock;
 import ui.Ui;
 
