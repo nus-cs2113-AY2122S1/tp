@@ -3,7 +3,6 @@ package seedu.timetable;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Locale;
 
 import seedu.module.Lesson;
@@ -81,7 +80,7 @@ public class Class {
         return dayOfWeek;
     }
 
-    public String getModuleCode() {
+    public String getModuleCode()  {
         return moduleCode;
     }
 

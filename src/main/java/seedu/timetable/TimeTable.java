@@ -2,7 +2,6 @@ package seedu.timetable;
 
 import seedu.module.Module;
 import seedu.ui.TimetableUI;
-
 import java.util.ArrayList;
 
 public class TimeTable {
@@ -32,7 +31,6 @@ public class TimeTable {
     }
 
     public void addClass(Class modClass) {
-
         switch (modClass.getDayOfWeek()) {
         case MONDAY:
             addClassToSchedule(modClass, monday);
