@@ -13,7 +13,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParseCommandForIncomeList() {
+    public void testParseCommandForListIncome() {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("list_in dshdtfshsdfh");
         assertTrue(underTest.getClass() == ListIncomeCommand.class);
@@ -31,5 +31,12 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("add_ex d/tfshsdfh");
         assertTrue(underTest.getClass() == InvalidCommand.class);
+    }
+
+    @Test
+    public void testParseCommandForInvalidDeleteIndex() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("del_in i/123              ");
+        assertTrue(underTest.getClass() == DeleteIncomeCommand.class);
     }
 }
