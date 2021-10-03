@@ -2,7 +2,7 @@ package seedu.duke;
 
 import java.util.ArrayList;
 
-public class Duke {
+public class Gordon {
     public static void main(String[] args) {
         Recipe recipeA = new Recipe("Caprese Salad");
         recipeA.setTimes(10, 0);
