@@ -6,6 +6,8 @@ import java.util.HashMap;
 public class CommandSyntax {
     public static final String LISTCOMMAND = "LIST {I/STOCK_ID P/PRICE Q/QUANTITY E/EXPIRY_DATE "
             + "D/DESCRIPTION M/MAX_QUANTITY}";
+    public static final String UPDATE_COMMAND = "UPDATE I/STOCK_ID {U/UPDATED_NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
+            + "D/DESCRIPTION M/MAX_QUANTITY}\n";
 
     /**
      * Helps to check if the paramters required are provided by the user.
