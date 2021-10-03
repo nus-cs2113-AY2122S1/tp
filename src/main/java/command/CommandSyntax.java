@@ -16,9 +16,11 @@ public class CommandSyntax {
     /**
      * Helps to check if the parameters required are provided by the user.
      *
+     * @param ui                Reference to the UI object passed by Main to print messages.
      * @param parameters        Parameters entered in by the user.
      * @param commandParameters Parameters required by the command.
-     * @return A boolean value indicating if the parameters required are enterd by the user.
+     * @param commandSyntax     The command's valid syntax,
+     * @return A boolean value indicating if the parameters required are entered by the user.
      */
     public static boolean containsInvalidParameters(Ui ui, HashMap<String, String> parameters,
                                                     String[] commandParameters, String commandSyntax) {
