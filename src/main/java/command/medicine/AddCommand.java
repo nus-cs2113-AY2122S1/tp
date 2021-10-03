@@ -18,6 +18,7 @@ import java.util.HashMap;
  * Add medication based on user input.
  * User input include name, price, quantity, expiry date, description and maximum quantity of medication.
  */
+
 public class AddCommand extends Command {
 
     @Override

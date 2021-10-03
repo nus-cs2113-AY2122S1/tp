@@ -1,10 +1,7 @@
 package parser;
 
 import command.PurgeCommand;
-import command.medicine.AddCommand;
-import command.medicine.DeleteCommand;
-import command.medicine.ListCommand;
-import command.medicine.UpdateCommand;
+import command.medicine.*;
 import errors.InvalidCommand;
 import inventory.Stock;
 import ui.Ui;
@@ -73,6 +70,7 @@ public class Parser {
         case EXIT:
             return true;
         case HELP:
+            new HelpCommand().execute(ui, parameters, stocks);
             break;
         case LIST:
             new ListCommand().execute(ui, parameters, stocks);
@@ -104,7 +102,7 @@ public class Parser {
      *
      * @param userInput String input from user.
      * @return Array of string with size 2 with index 0 representing the command and index 1 representing the
-     *     command parameters.
+     * command parameters.
      */
     public static String[] parseCommand(String userInput) {
         String[] splitCommand = new String[2];
