@@ -6,9 +6,10 @@ import java.util.HashMap;
 public class CommandSyntax {
     public static final String LISTCOMMAND = "LIST {I/STOCK_ID P/PRICE Q/QUANTITY E/EXPIRY_DATE "
             + "D/DESCRIPTION M/MAX_QUANTITY}";
+    public static final String DELETECOMMAND = "DELETE I/STOCK_ID";
 
     /**
-     * Helps to check if the paramters required are provided by the user.
+     * Helps to check if the parameters required are provided by the user.
      *
      * @param parameters        Parameters entered in by the user.
      * @param commandParameters Parameters required by the command.

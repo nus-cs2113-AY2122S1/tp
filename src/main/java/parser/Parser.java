@@ -1,6 +1,7 @@
 package parser;
 
 import command.PurgeCommand;
+import command.medicine.DeleteCommand;
 import command.medicine.ListCommand;
 import errors.InvalidCommand;
 import inventory.Stock;
@@ -60,6 +61,7 @@ public class Parser {
         case ARCHIVE:
             break;
         case DELETE:
+            new DeleteCommand().execute(ui, parameters, stocks);
             break;
         case DELETE_ORDER:
             break;

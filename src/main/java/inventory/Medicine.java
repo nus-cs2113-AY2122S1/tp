@@ -36,6 +36,10 @@ public class Medicine extends Stock {
         this.maxQuantity = maxQuantity;
     }
 
+    public static int getStockCount() {
+        return stockCount;
+    }
+
     public int getStockID() {
         return stockID;
     }
