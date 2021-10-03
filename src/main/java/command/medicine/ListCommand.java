@@ -74,7 +74,7 @@ public class ListCommand extends Command {
                 // Implement search by max quantity
                 break;
             default:
-                ui.printInvalidParameter(parameter, CommandSyntax.LISTCOMMAND);
+                ui.printInvalidParameter(parameter, CommandSyntax.LIST_COMMAND);
                 return;
             }
         }

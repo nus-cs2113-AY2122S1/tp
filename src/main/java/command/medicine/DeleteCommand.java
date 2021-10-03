@@ -21,9 +21,9 @@ public class DeleteCommand extends Command {
         String[] requiredParameters = {CommandParameters.STOCK_ID};
         if (!CommandSyntax.checkRequiredParameters(parameters, requiredParameters)) {
             if (!parameters.isEmpty()) {
-                ui.printInvalidParameter(parameters.keySet().toArray()[0].toString(), CommandSyntax.DELETECOMMAND);
+                ui.printInvalidParameter(parameters.keySet().toArray()[0].toString(), CommandSyntax.DELETE_COMMAND);
             } else {
-                ui.printInvalidParameter("", CommandSyntax.DELETECOMMAND);
+                ui.printInvalidParameter("", CommandSyntax.DELETE_COMMAND);
             }
             return;
         }
