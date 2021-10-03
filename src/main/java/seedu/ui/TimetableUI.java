@@ -93,27 +93,27 @@ public class TimetableUI {
         return String.format(FIXED_LENGTH_FORMAT,str);
     }
 
-    private static String addModuleCode(TimetableLesson modTimetableLesson) {
+    private static String addModuleCode(TimetableLesson timetableLesson) {
         String str = "";
-        if (modTimetableLesson != null) {
-            str = modTimetableLesson.getModuleCode();
+        if (timetableLesson != null) {
+            str = timetableLesson.getModuleCode();
         }
         return str;
     }
 
-    private static String addLessonType(TimetableLesson modTimetableLesson) {
+    private static String addLessonType(TimetableLesson timetableLesson) {
         String str = "";
-        if (modTimetableLesson != null) {
-            str += modTimetableLesson.getLessonType().toString();
-            str += "[" + modTimetableLesson.getClassNo() + "]";
+        if (timetableLesson != null) {
+            str += timetableLesson.getLessonType().toString();
+            str += "[" + timetableLesson.getClassNo() + "]";
         }
         return str;
     }
 
-    private static String addVenue(TimetableLesson modTimetableLesson) {
+    private static String addVenue(TimetableLesson timetableLesson) {
         String str = "";
-        if (modTimetableLesson != null) {
-            str = modTimetableLesson.getVenue();
+        if (timetableLesson != null) {
+            str = timetableLesson.getVenue();
         }
         return str;
     }
