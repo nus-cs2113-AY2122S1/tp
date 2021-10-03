@@ -1,5 +1,6 @@
 package parser;
 
+import command.HelpCommand;
 import command.PurgeCommand;
 import command.medicine.AddCommand;
 import command.medicine.DeleteCommand;
@@ -73,6 +74,7 @@ public class Parser {
         case EXIT:
             return true;
         case HELP:
+            new HelpCommand().execute(ui, parameters, stocks);
             break;
         case LIST:
             new ListCommand().execute(ui, parameters, stocks);

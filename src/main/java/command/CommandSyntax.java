@@ -9,13 +9,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class CommandSyntax {
-    public static final String LIST_COMMAND = "LIST {I/STOCK_ID P/PRICE Q/QUANTITY E/EXPIRY_DATE "
-            + "D/DESCRIPTION M/MAX_QUANTITY}";
-    public static final String DELETE_COMMAND = "DELETE I/STOCK_ID";
     public static final String ADD_COMMAND = "ADD N/NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
             + "D/DESCRIPTION M/MAX_QUANTITY";
-    public static final String UPDATE_COMMAND = "UPDATE I/STOCK_ID {U/UPDATED_NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
-            + "D/DESCRIPTION M/MAX_QUANTITY}\n";
+    public static final String LIST_COMMAND = "LIST [I/STOCK_ID P/PRICE Q/QUANTITY E/EXPIRY_DATE "
+            + "D/DESCRIPTION M/MAX_QUANTITY]";
+    public static final String UPDATE_COMMAND = "UPDATE I/STOCK_ID [U/UPDATED_NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
+            + "D/DESCRIPTION M/MAX_QUANTITY]";
+    public static final String DELETE_COMMAND = "DELETE I/STOCK_ID";
+    public static final String HELP_COMMAND = "HELP";
+    public static final String PURGE_COMMAND = "PURGE";
+    public static final String EXIT_COMMAND = "EXIT";
 
     /**
      * Helps to check if the parameters required are provided by the user.
