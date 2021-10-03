@@ -42,6 +42,11 @@ public class ListCommand extends Command {
                 break;
             case CommandParameters.NAME:
                 // Implement search by name
+                if (!MedicineValidator.isValidName(ui, parameterValue)) {
+                    return;
+                }
+                filteredMedicines = (ArrayList<Stock>) filteredMedicines.stream()
+                        .filter((m) -> ((Medicine) m).getMedicineName() ==
                 break;
             case CommandParameters.PRICE:
                 if (!MedicineValidator.isValidPrice(ui, parameterValue)) {
