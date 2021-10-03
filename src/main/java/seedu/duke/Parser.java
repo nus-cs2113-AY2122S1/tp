@@ -89,7 +89,7 @@ public class Parser {
      */
     private Command prepareAddExpense(String arguments) {
         final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
-
+        
         if (!matcher.matches()) {
             return new InvalidCommand();
         }
@@ -121,8 +121,13 @@ public class Parser {
         if (!matcher.matches()) {
             return new InvalidCommand();
         }
-
-        return new DeleteExpenseCommand();
+        
+        try {
+            int deleteindex = Integer.parseInt(matcher.group("index"));
+            return new DeleteExpenseCommand();
+        } catch (NumberFormatException e) {
+            return new InvalidCommand();
+        }
     }
 
     /**
@@ -136,6 +141,11 @@ public class Parser {
             return new InvalidCommand();
         }
 
-        return new DeleteIncomeCommand();
+        try {
+            int deleteindex = Integer.parseInt(matcher.group("index"));
+            return new DeleteIncomeCommand();
+        } catch (NumberFormatException e) {
+            return new InvalidCommand();
+        }
     }
 }
