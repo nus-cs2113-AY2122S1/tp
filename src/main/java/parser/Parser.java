@@ -1,6 +1,7 @@
 package parser;
 
 import command.PurgeCommand;
+import command.medicine.AddCommand;
 import command.medicine.DeleteCommand;
 import command.medicine.ListCommand;
 import errors.InvalidCommand;
@@ -55,6 +56,7 @@ public class Parser {
         }
         switch (command) {
         case ADD:
+            new AddCommand().execute(ui, parameters, stocks);
             break;
         case ADD_ORDER:
             break;
