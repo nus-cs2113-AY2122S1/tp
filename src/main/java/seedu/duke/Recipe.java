@@ -114,7 +114,7 @@ public class Recipe {
         outputString.append("Ingredients needed: ").append(System.lineSeparator());
         for (int i = 0; i < ingredients.size(); i++) {
             outputString.append(i + 1).append(". ");
-            outputString.append(ingredients.get(i));
+            outputString.append(ingredients.get(i).getDescription());
             outputString.append(System.lineSeparator());
         }
         outputString.append("Method: ").append(System.lineSeparator());
