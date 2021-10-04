@@ -13,7 +13,7 @@ public class Accouminate {
         String[] splitUserInput;
         String userInput;
 
-        Ui ui = new Ui();
+        Ui ui = Ui.getUi();
         ui.printGreeting();
 
         CommandLine cmd = new CommandLine(new MainCommand());

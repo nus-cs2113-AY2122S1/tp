@@ -9,7 +9,8 @@ import picocli.CommandLine.Command;
 @Command(name = "", subcommands = {
         BudgetCommand.class,
         ExpenseCommand.class,
-        IncomeCommand.class
+        IncomeCommand.class,
+        ExitCommand.class
 })
 public class MainCommand {
 }

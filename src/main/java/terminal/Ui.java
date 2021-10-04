@@ -15,8 +15,17 @@ public class Ui {
     private static final String ERROR_HEADER = "Error";
     private static final String SUCCESS_HEADER = "Success";
 
-    public Ui() {
+    private static Ui ui;
 
+    private Ui() {
+
+    }
+
+    public static Ui getUi() {
+        if (ui == null) {
+            ui = new Ui();
+        }
+        return ui;
     }
 
     public void printMessage(String msg) {
