@@ -1,4 +1,4 @@
-package seedu.situs.ingredients;
+package seedu.duke.ingredients;
 
 import java.util.ArrayList;
 

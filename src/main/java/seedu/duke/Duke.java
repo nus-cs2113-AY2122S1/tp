@@ -1,15 +1,15 @@
-package seedu.situs;
+package seedu.duke;
 
-import seedu.situs.ingredients.Ingredient;
-import seedu.situs.ingredients.IngredientList;
-import seedu.situs.ui.UI;
+import seedu.duke.ingredients.Ingredient;
+import seedu.duke.ingredients.IngredientList;
+import seedu.duke.ui.UI;
 
-public class Situs {
+public class Duke {
 
     private static UI ui;
     private static IngredientList ingredientList;
 
-    public Situs() {
+    public Duke() {
     }
 
     /**

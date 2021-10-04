@@ -1,4 +1,4 @@
-package seedu.situs.ui;
+package seedu.duke.ui;
 
 public class UI {
 
