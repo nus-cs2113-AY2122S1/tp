@@ -7,8 +7,9 @@ public class BudgetManager {
     }
 
     public static BudgetManager getBudgetManager() {
-        if(budgetMgr == null)
+        if (budgetMgr == null) {
             budgetMgr = new BudgetManager();
+        }
 
         return budgetMgr;
     }

@@ -7,8 +7,9 @@ public class DataManager {
     }
 
     public static DataManager getDataManager() {
-        if(dataMgr == null)
+        if (dataMgr == null) {
             dataMgr = new DataManager();
+        }
 
         return dataMgr;
     }

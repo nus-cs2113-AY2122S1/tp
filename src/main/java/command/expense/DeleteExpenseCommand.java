@@ -6,14 +6,16 @@ import picocli.CommandLine.Command;
 
 import java.util.concurrent.Callable;
 
-@Command(name="delete", description = "Deletes expense record(s) from the database by the unique identifier (from list) or by the name.")
+@Command(name = "delete",
+        description = "Deletes expense record(s) from the database "
+                + "by the unique identifier (from list) or by the name.")
 public class DeleteExpenseCommand implements Callable<Integer> {
 
     static class Exclusive {
-        @Option(names={"-n", "--name"}, required = true, description = "Name of the expense item")
+        @Option(names = {"-n", "--name"}, required = true, description = "Name of the expense item")
         String names;
 
-        @Option(names= {"-i", "--id"}, required = true, description = "Unique identifier of the expense item")
+        @Option(names = {"-i", "--id"}, required = true, description = "Unique identifier of the expense item")
         Integer id;
     }
 
@@ -21,9 +23,9 @@ public class DeleteExpenseCommand implements Callable<Integer> {
     Exclusive exclusive;
 
     @Override
-    public Integer call() throws Exception{
+    public Integer call() throws Exception {
         String expenseName;
-        if(exclusive.names != null) {
+        if (exclusive.names != null) {
             expenseName = String.join(" ", exclusive.names);
             //do something with name
         } else {

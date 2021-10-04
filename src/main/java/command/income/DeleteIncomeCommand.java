@@ -7,7 +7,8 @@ import picocli.CommandLine.ArgGroup;
 
 import java.util.concurrent.Callable;
 
-@Command(name = "delete", description = "Deletes an income source from the database by its unique identifier or by its name.")
+@Command(name = "delete",
+        description = "Deletes an income source from the database by its unique identifier or by its name.")
 public class DeleteIncomeCommand implements Callable<Integer> {
 
     static class Exclusive {
@@ -21,9 +22,9 @@ public class DeleteIncomeCommand implements Callable<Integer> {
     @ArgGroup(exclusive = true)
     Exclusive exclusive;
 
-    public Integer call() throws Exception{
+    public Integer call() throws Exception {
         String incomeName;
-        if(exclusive.names != null) {
+        if (exclusive.names != null) {
             incomeName = String.join(" ", exclusive.names);
             //do something with the name
         } else {

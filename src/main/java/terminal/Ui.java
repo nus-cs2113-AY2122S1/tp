@@ -5,17 +5,19 @@ import java.util.Scanner;
 public class Ui {
 
     private static final String LOGO =
-    "   ##     ####    ####    ####   #    #  #    #  #  #    #    ##    #####  ######\n" +
-    "  #  #   #    #  #    #  #    #  #    #  ##  ##  #  ##   #   #  #     #    #\n" +
-    " #    #  #       #       #    #  #    #  # ## #  #  # #  #  #    #    #    #####\n " +
-    "######  #       #       #    #  #    #  #    #  #  #  # #  ######    #    #\n" +
-    " #    #  #    #  #    #  #    #  #    #  #    #  #  #   ##  #    #    #    #\n" +
-    " #    #   ####    ####    ####    ####   #    #  #  #    #  #    #    #    ######\n";
+          "   ##     ####    ####    ####   #    #  #    #  #  #    #    ##    #####  ######\n"
+        + "  #  #   #    #  #    #  #    #  #    #  ##  ##  #  ##   #   #  #     #    #\n"
+        + " #    #  #       #       #    #  #    #  # ## #  #  # #  #  #    #    #    #####\n "
+        + "######  #       #       #    #  #    #  #    #  #  #  # #  ######    #    #\n"
+        + " #    #  #    #  #    #  #    #  #    #  #    #  #  #   ##  #    #    #    #\n"
+        + " #    #   ####    ####    ####    ####   #    #  #  #    #  #    #    #    ######\n";
 
     private static final String ERROR_HEADER = "Error";
     private static final String SUCCESS_HEADER = "Success";
 
-    public Ui() {}
+    public Ui() {
+
+    }
 
     public void printMessage(String msg) {
         System.out.println(msg);

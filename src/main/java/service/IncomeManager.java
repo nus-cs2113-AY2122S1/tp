@@ -7,8 +7,9 @@ public class IncomeManager {
     }
 
     public static IncomeManager getIncomeManager() {
-        if(incomeMgr == null)
+        if (incomeMgr == null) {
             incomeMgr = new IncomeManager();
+        }
 
         return incomeMgr;
     }

@@ -6,7 +6,7 @@ import command.income.IncomeCommand;
 import picocli.CommandLine.Command;
 
 
-@Command(name="", subcommands = {
+@Command(name = "", subcommands = {
         BudgetCommand.class,
         ExpenseCommand.class,
         IncomeCommand.class

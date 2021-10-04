@@ -18,7 +18,7 @@ public class Accouminate {
 
         CommandLine cmd = new CommandLine(new MainCommand());
 
-        while(true) {
+        while (true) {
             userInput = ui.getUserInput();
             splitUserInput = userInput.trim().split(" +"); //remove all excessive spaces in input
             Integer returnCode = cmd.execute(splitUserInput);

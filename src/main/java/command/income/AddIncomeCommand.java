@@ -13,11 +13,11 @@ public class AddIncomeCommand implements Callable<Integer> {
     @Parameters(paramLabel = "NAME", description = "Name of the income source")
     String name;
 
-    @Option(names={"-v", "--value"}, description = "Value of the income")
+    @Option(names = {"-v", "--value"}, description = "Value of the income")
     Double value;
 
     @Override
-    public Integer call() throws Exception{
+    public Integer call() throws Exception {
 
         Double incomeValue = Money.truncate(value);
 

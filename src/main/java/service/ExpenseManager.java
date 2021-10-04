@@ -7,8 +7,9 @@ public class ExpenseManager {
     }
 
     public static ExpenseManager getExpenseManager() {
-        if(expenseMgr == null)
+        if (expenseMgr == null) {
             expenseMgr = new ExpenseManager();
+        }
 
         return expenseMgr;
     }
