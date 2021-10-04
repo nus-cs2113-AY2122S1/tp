@@ -2,7 +2,6 @@ package seedu.duke;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class Cookbook {
@@ -23,25 +22,46 @@ public class Cookbook {
         return output.toString();
     }
 
-    public void addRecipe(Recipe r) {
-        r.setId(recipes.size() + 1);
-        recipes.add(r);
+    public void addRecipe(Recipe r) throws GordonException {
+        try {
+            r.setId(recipes.size() + 1);
+            recipes.add(r);
+        } catch (IndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.INDEX_OOB);
+        } catch (IllegalArgumentException e) {
+            throw new GordonException(GordonException.INDEX_INVALID);
+        }
     }
 
-    public void removeRecipe(int index) {
-        recipes.remove(index);
+    public void removeRecipe(int index) throws GordonException {
+        try {
+            recipes.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.INDEX_OOB);
+        } catch (IllegalArgumentException e) {
+            throw new GordonException(GordonException.INDEX_INVALID);
+        }
     }
 
-    public void checkRecipe(int index) {
-        System.out.println(recipes.get(index).toString());
+    public void checkRecipe(int index) throws GordonException {
+        try {
+            System.out.println(recipes.get(index).toString());
+        } catch (IndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.INDEX_OOB);
+        } catch (IllegalArgumentException e) {
+            throw new GordonException(GordonException.INDEX_INVALID);
+        }
     }
 
-    public void checkRecipe(String name) {
+    public void checkRecipe(String name) throws GordonException {
         for (Recipe recipe : recipes) {
             if (recipe.getName().equalsIgnoreCase(name)) {
                 System.out.println(recipe);
+                return;
             }
         }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
     public void sortByID() {
@@ -66,11 +86,6 @@ public class Cookbook {
         recipes = recipes.stream()
                 .sorted(compareByCalories)
                 .collect(Collectors.toCollection(ArrayList::new));
-    }
-
-    public void sortByTime() {
-        //Comparator<Recipe> compareByTime = Comparator.comparing(Recipe::getTotalPrice).thenComparing(Recipe::getID);
-        //recipes = recipes.stream().sorted(compareByCalories).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public ArrayList<Recipe> filterByTag(String tag) {
