@@ -1,5 +1,10 @@
 package seedu.duke;
 
+import seedu.duke.commands.Command;
+import seedu.duke.parser.ListCommandParser;
+import seedu.duke.parser.RemoveCommandParser;
+import seedu.duke.parser.SepPlannerParser;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -17,5 +22,15 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+
+        //test parser
+        for (int i = 0; i < 10; i++) {
+            String tmp = in.nextLine();
+            try {
+                Command p = new SepPlannerParser().parseCommand(tmp);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
