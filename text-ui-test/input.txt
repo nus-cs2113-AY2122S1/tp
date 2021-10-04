@@ -1,1 +1,8 @@
 James Gosling
+add i/Red Apple q/5
+add i/Red Apple e/2021-12-25
+add q/5 e/2021-12-25
+add i/Red Apple q/not a number e/2021-12-25
+add i/Red Apple q/5 e/2021-12-25
+add i/Red Apple q/5 e/2021-12-25
+bye
