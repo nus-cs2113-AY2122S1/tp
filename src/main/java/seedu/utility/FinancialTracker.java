@@ -5,18 +5,18 @@ import seedu.entry.Entry;
 import java.util.ArrayList;
 
 public class FinancialTracker {
-    private ArrayList<Entry> FinancialEntries;
+    private ArrayList<Entry> financialEntries;
 
     public FinancialTracker() {
-        this.FinancialEntries = new ArrayList<>();
+        this.financialEntries = new ArrayList<>();
     }
 
     public int size() {
-        return FinancialEntries.size();
+        return financialEntries.size();
     }
 
     public boolean isEmpty() {
-        return FinancialEntries.isEmpty();
+        return financialEntries.isEmpty();
     }
 
     public void addEntry(Entry entry) {
@@ -37,12 +37,12 @@ public class FinancialTracker {
         return null;
     }
 
-    public Entry getTotalExpense(){
+    public Entry getTotalExpense() {
         //TODO
         return null;
     }
 
-    public Entry getTotalIncome(){
+    public Entry getTotalIncome() {
         //TODO
         return null;
     }

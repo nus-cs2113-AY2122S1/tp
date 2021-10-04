@@ -9,12 +9,12 @@ public class StonksXD {
     private FinancialTracker finances;
     private Parser parser;
 
-    public StonksXD(){
+    public StonksXD() {
         this.ui = new Ui();
         this.finances = new FinancialTracker();
     }
 
-    public void run(){
+    public void run() {
         ui.printWelcome();
 
         boolean exitFlag = true;

@@ -1,6 +1,18 @@
 package seedu.duke;
 
-import seedu.commands.*;
+import seedu.commands.AddIncomeCommand;
+import seedu.commands.AddExpenseCommand;
+import seedu.commands.Command;
+import seedu.commands.HelpCommand;
+import seedu.commands.InvalidCommand;
+import seedu.commands.DeleteExpenseCommand;
+import seedu.commands.DeleteIncomeCommand;
+import seedu.commands.ListExpenseCommand;
+import seedu.commands.ListIncomeCommand;
+import seedu.commands.TotalExpenseCommand;
+import seedu.commands.TotalIncomeCommand;
+
+
 import seedu.entry.Expense;
 import seedu.entry.Income;
 
