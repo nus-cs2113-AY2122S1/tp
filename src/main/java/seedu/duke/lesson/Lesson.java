@@ -27,9 +27,6 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return ("[L]" + "    "
-                + "Title: " + title + " "
-                + "(Start: " + startTime + ") "
-                + "(End: " + endTime + ")");
+        return "[L]" + "    " + "Title: " + title + " " + "(Start: " + startTime + ") " + "(End: " + endTime + ")";
     }
 }

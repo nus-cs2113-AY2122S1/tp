@@ -1,11 +1,13 @@
 package seedu.duke.lesson;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class LessonList {
-    private ArrayList<Lesson> lessonList = new ArrayList<>();
+    private List<Lesson> lessonList;
 
     public LessonList() {
+        lessonList = new ArrayList<>();
     }
 
     /**
@@ -13,11 +15,11 @@ public class LessonList {
      *
      * @param newLessonList the new lesson list given
      */
-    public LessonList(ArrayList<Lesson> newLessonList) {
+    public LessonList(List<Lesson> newLessonList) {
         lessonList = newLessonList;
     }
 
-    public void addLessonToList(Lesson newLesson) {
+    public void addLesson(Lesson newLesson) {
         lessonList.add(newLesson);
     }
 
@@ -30,7 +32,7 @@ public class LessonList {
      *
      * @param index the index of the lesson to be removed
      */
-    public void deleteLessonFromList(int index) {
+    public void deleteLesson(int index) {
         lessonList.remove(index);
     }
 }

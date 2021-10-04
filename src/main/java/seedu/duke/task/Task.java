@@ -52,9 +52,7 @@ public class Task {
             return ("[T]" + getDoneSymbol() + " "
                     + "Title: " + title + " ");
         } else {
-            return ("[T]" + getDoneSymbol() + " "
-                    + "Title: " + title + " "
-                    + "(Info: " + information + ")");
+            return "[T]" + getDoneSymbol() + " " + "Title: " + title + " " + "(Info: " + information + ")";
         }
     }
 }

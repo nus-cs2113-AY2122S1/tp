@@ -1,11 +1,13 @@
 package seedu.duke.task;
 
+import java.util.List;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> taskList = new ArrayList<>();
+    private List<Task> taskList;
 
     public TaskList() {
+        taskList = new ArrayList<>();
     }
 
     /**
@@ -13,11 +15,11 @@ public class TaskList {
      *
      * @param newTaskList the new task list given
      */
-    public void loadTaskList(ArrayList<Task> newTaskList) {
+    public void loadTaskList(List<Task> newTaskList) {
         taskList = newTaskList;
     }
 
-    public void addTaskToList(Task newTask) {
+    public void addTask(Task newTask) {
         taskList.add(newTask);
     }
 
@@ -30,7 +32,7 @@ public class TaskList {
      *
      * @param index the index of the task to be removed
      */
-    public void deleteTaskFromList(int index) {
+    public void deleteTask(int index) {
         taskList.remove(index);
     }
 }
