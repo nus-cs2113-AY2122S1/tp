@@ -32,14 +32,29 @@ public class CommandResult {
         this(isOk, false, null, null);
     }
 
+    /**
+     * Contain the CommandParser that is required to switch workspaces
+     *
+     * @return The CommandParser object for the workspace or else null
+     */
     public CommandParser getAdditionalData() {
         return additionalData;
     }
 
+    /**
+     * Returns the result of the command execution
+     *
+     * @return True if successful or else false
+     */
     public boolean isOk() {
         return isOk;
     }
 
+    /**
+     * Tells the program to quit if the 'exit' command is sent
+     *
+     * @return true if 'exit' command is sent
+     */
     public boolean isExit() {
         return isExit;
     }

@@ -16,6 +16,12 @@ public class CommandParser {
     protected String workspace;
     protected final HashMap<String, Command> commandMap;
 
+    /**
+     * Initializes the commandMap.
+     * Adds some default commands to it.
+     *
+     * @param workspace The name of the workspace
+     */
     public CommandParser(String workspace) {
         this.commandMap = new HashMap<>();
         this.workspace = workspace;
@@ -23,6 +29,13 @@ public class CommandParser {
         addCommand("help", new HelpCommand(this));
     }
 
+    /**
+     * Parses the command and its arguments
+     *
+     * @param command The user input command
+     * @return The Command object to be executed
+     * @throws InvalidCommandException if there is no command or empty command
+     */
     public Command parseCommand(String command) throws InvalidCommandException {
         String[] commandLine = command.strip().split(SPACE_DELIMITER, 2);
         String cmdName = commandLine[0];
