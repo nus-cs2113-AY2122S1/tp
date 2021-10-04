@@ -1,7 +1,4 @@
 package seedu.entry;
 
-public class Income {
-    public static int getValue() {
-        return 0;
-    }
+public class Income extends Entry{
 }
