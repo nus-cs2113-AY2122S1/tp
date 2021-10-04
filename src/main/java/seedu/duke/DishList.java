@@ -24,4 +24,23 @@ public class DishList {
         }
         return -1;
     }
+
+    private static void list() {
+        System.out.println("Here are the dishes you have: ");
+        for (int i=0; i<dishList.size(); i++) {
+            String currentDish = dishList.get(i).getDishName();
+            System.out.println((i+1) + ". " + currentDish);
+        }
+        System.out.println("You can use commands 'add' or 'find' to add new dishes or find existing ones!");
+    }
+
+    private static void delete(String dishName) {
+        int dishIndex = DishList.find(dishName);
+        if (dishIndex == -1) {
+            System.out.println("Dish does not exist");
+        } else {
+            dishList.remove(dishIndex);
+            System.out.println("Dish, " + dishName + " has been removed!");
+        }
+    }
 }
