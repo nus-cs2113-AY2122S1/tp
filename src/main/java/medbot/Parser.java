@@ -1,9 +1,5 @@
 package medbot;
 
-import java.util.function.Function;
-import java.util.regex.MatchResult;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import medbot.command.AddPatientCommand;
 import medbot.command.Command;
 import medbot.command.DeletePatientCommand;
@@ -12,6 +8,11 @@ import medbot.command.ListPatientCommand;
 import medbot.command.ViewPatientCommand;
 import medbot.person.Patient;
 import medbot.person.Person;
+
+import java.util.function.Function;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Parser {
     private static final String COMMAND_ADD = "add";
@@ -87,7 +88,7 @@ public class Parser {
 
 
     /**
-     * Parses attributeString and modifies the corresponding attribute in person
+     * Parses attributeString and modifies the corresponding attribute in person.
      *
      * @param person Person whose personal information will be updated
      * @param attributeString String containing an attribute specifier and the corresponding personal information
@@ -120,9 +121,9 @@ public class Parser {
     }
 
     /**
-     * Returns a String containing the names specified in attributeString, with each name capitalised
-     * <p>
-     * Removes the attribute specifier "n/" from the start of the String
+     * Returns a String containing the names specified in attributeString, with each name capitalised.
+     *
+     * <p>Removes the attribute specifier "n/" from the start of the String
      *
      * @param attributeString String containing the name to be parsed
      * @return String containing the name specified in attributeString
@@ -142,9 +143,9 @@ public class Parser {
     }
 
     /**
-     * Returns a String containing the IC number specified in attributeString
+     * Returns a String containing the IC number specified in attributeString.
      *
-     * Removes the attribute specifier "i/" and checks if the resultant String is of the right
+     * <p>Removes the attribute specifier "i/" and checks if the resultant String is of the right
      * IC number format
      *
      * @param attributeString String containing the IC number to be parsed
@@ -162,20 +163,21 @@ public class Parser {
                 throw new MedBotException("Incorrect IC number format");
             }
             return icString;
-        } catch (IndexOutOfBoundsException ie ){
+        } catch (IndexOutOfBoundsException ie) {
             throw new MedBotException("IC number not specified");
         }
     }
 
     /**
      * Returns a String containing the phone number specified in attributeString.
-     * <p>
-     * Removes the attribute specifier "n/", removes special characters "- _+()" and checks if the length of
+     *
+     * <p>Removes the attribute specifier "n/", removes special characters "- _+()" and checks if the length of
      * the resultant String is 8
      *
      * @param attributeString String containing the phone number to be parsed
      * @return String containing the phone number specified in attributeString
-     * @throws MedBotException if the phone number is not specified, has too many/few digits or contains unexpected characters
+     * @throws MedBotException if the phone number is not specified,
+     *      has too many/few digits or contains unexpected characters
      */
     private static String parsePhoneNumber(String attributeString) throws MedBotException {
         String phoneNumberFormat = "[\\d]{8}";
@@ -200,9 +202,9 @@ public class Parser {
     }
 
     /**
-     * Returns a String containing the email address specified in attributeString
-     * <p>
-     * Removes the attribute specifier "e/" and checks if the resultant String is of the right email format
+     * Returns a String containing the email address specified in attributeString.
+     *
+     * <p>Removes the attribute specifier "e/" and checks if the resultant String is of the right email format
      *
      * @param attributeString String containing the email address to be parsed
      * @return String containing the email address specified in attributeString
@@ -225,9 +227,9 @@ public class Parser {
     }
 
     /**
-     * Returns the String containing the address specified in attributeString, with each word capitalised
+     * Returns the String containing the address specified in attributeString, with each word capitalised.
      *
-     * Removes the attribute specifier "a/" from the start of the String
+     * <p>Removes the attribute specifier "a/" from the start of the String
      *
      * @param attributeString String containing the address to be parsed
      * @return String containing the address specified in attributeString
@@ -246,9 +248,9 @@ public class Parser {
     }
 
     /**
-     * Sets the first letter of each word of each word to uppercase and sets all others to lowercase
-     * <p>
-     * A letter is considered the first letter of a word if it is the first letter of the input String or
+     * Sets the first letter of each word of each word to uppercase and sets all others to lowercase.
+     *
+     * <p>A letter is considered the first letter of a word if it is the first letter of the input String or
      * is immediately after any of the characters " _-".
      *
      * @param input String which will be capitalised
@@ -269,9 +271,9 @@ public class Parser {
     }
 
     /**
-     * Places a "|" separator before each attribute specifier in input and returns the resultant string
-     * <p>
-     * Attribute specifiers are in the following formats "a/" or "ab/" where a and b can be any uppercase
+     * Places a "|" separator before each attribute specifier in input and returns the resultant string.
+     *
+     * <p>Attribute specifiers are in the following formats "a/" or "ab/" where a and b can be any uppercase
      * or lowercase alphabet.
      *
      * @param input userInput String containing attribute specifiers
