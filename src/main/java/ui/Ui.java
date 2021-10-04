@@ -1,7 +1,7 @@
 package ui;
 
-import inventory.Medicine;
 import inventory.Stock;
+import inventory.Medicine;
 import parser.DateParser;
 
 import java.util.ArrayList;
@@ -70,11 +70,11 @@ public class Ui {
     /**
      * Prints out the medicine in a table format.
      *
-     * @param medicine Medicine to be printed.
+     * @param stock Medicine to be printed.
      */
-    public void printMedicine(Medicine medicine) {
-        ArrayList<Stock> medicines = new ArrayList<>();
-        medicines.add(medicine);
+    public void printMedicine(Stock stock) {
+        ArrayList<Medicine> medicines = new ArrayList<>();
+        medicines.add(stock);
         printMedicines(medicines);
     }
 
@@ -83,29 +83,29 @@ public class Ui {
      *
      * @param medicines Arraylist of the medicines to be printed.
      */
-    public void printMedicines(ArrayList<Stock> medicines) {
+    public void printMedicines(ArrayList<Medicine> medicines) {
         if (medicines.size() == 0) {
             print("There are no medicines found.");
             return;
         }
-        int idWidth = Medicine.COLUMNS[0].length();
-        int nameWidth = Medicine.COLUMNS[1].length();
-        int priceWidth = Medicine.COLUMNS[2].length();
-        int quantityWidth = Medicine.COLUMNS[3].length();
-        int expiryWidth = Medicine.COLUMNS[4].length();
-        int descriptionWidth = Medicine.COLUMNS[5].length();
-        int maxQuantityWidth = Medicine.COLUMNS[6].length();
+        int idWidth = Stock.COLUMNS[0].length();
+        int nameWidth = Stock.COLUMNS[1].length();
+        int priceWidth = Stock.COLUMNS[2].length();
+        int quantityWidth = Stock.COLUMNS[3].length();
+        int expiryWidth = Stock.COLUMNS[4].length();
+        int descriptionWidth = Stock.COLUMNS[5].length();
+        int maxQuantityWidth = Stock.COLUMNS[6].length();
 
         // Find the longest width of each column
-        for (Stock stock : medicines) {
-            Medicine medicine = (Medicine) stock;
-            idWidth = Math.max(String.valueOf(medicine.getStockID()).length(), idWidth);
-            nameWidth = Math.max(medicine.getMedicineName().length(), nameWidth);
-            priceWidth = Math.max(String.format("$%.2f", medicine.getPrice()).length(), priceWidth);
-            quantityWidth = Math.max(String.valueOf(medicine.getQuantity()).length(), quantityWidth);
-            expiryWidth = Math.max(DateParser.dateToString(medicine.getExpiry()).length(), expiryWidth);
-            descriptionWidth = Math.max(medicine.getDescription().length(), descriptionWidth);
-            maxQuantityWidth = Math.max(String.valueOf(medicine.getMaxQuantity()).length(), maxQuantityWidth);
+        for (Medicine medicine : medicines) {
+            Stock stock = (Stock) medicine;
+            idWidth = Math.max(String.valueOf(stock.getStockID()).length(), idWidth);
+            nameWidth = Math.max(stock.getMedicineName().length(), nameWidth);
+            priceWidth = Math.max(String.format("$%.2f", stock.getPrice()).length(), priceWidth);
+            quantityWidth = Math.max(String.valueOf(stock.getQuantity()).length(), quantityWidth);
+            expiryWidth = Math.max(DateParser.dateToString(stock.getExpiry()).length(), expiryWidth);
+            descriptionWidth = Math.max(stock.getDescription().length(), descriptionWidth);
+            maxQuantityWidth = Math.max(String.valueOf(stock.getMaxQuantity()).length(), maxQuantityWidth);
         }
 
         int[] columnWidths = {idWidth, nameWidth, priceWidth, quantityWidth, expiryWidth, descriptionWidth,
@@ -123,27 +123,27 @@ public class Ui {
         String[] formats = {idFormat, nameFormat, priceFormat, quantityFormat, expiryFormat, descriptionFormat,
             maxQuantityFormat};
         StringBuilder headers = new StringBuilder();
-        for (int i = 0; i < Medicine.NO_OF_COLUMNS; i++) {
-            headers.append(String.format(formats[i], centerString(columnWidths[i], Medicine.COLUMNS[i])));
+        for (int i = 0; i < Stock.NO_OF_COLUMNS; i++) {
+            headers.append(String.format(formats[i], centerString(columnWidths[i], Stock.COLUMNS[i])));
         }
 
-        printHeaderBorder(Medicine.NO_OF_COLUMNS, columnWidths);
+        printHeaderBorder(Stock.NO_OF_COLUMNS, columnWidths);
         System.out.println(headers);
-        printHeaderBorder(Medicine.NO_OF_COLUMNS, columnWidths);
+        printHeaderBorder(Stock.NO_OF_COLUMNS, columnWidths);
 
-        for (Stock stock : medicines) {
-            Medicine medicine = (Medicine) stock;
-            String row = String.format(idFormat, centerString(idWidth, String.valueOf(medicine.getStockID())))
-                    + String.format(nameFormat, centerString(nameWidth, medicine.getMedicineName()))
-                    + String.format(priceFormat, centerString(priceWidth, String.format("$%.2f", medicine.getPrice())))
-                    + String.format(quantityFormat, centerString(quantityWidth, String.valueOf(medicine.getQuantity())))
+        for (Medicine medicine : medicines) {
+            Stock stock = (Stock) medicine;
+            String row = String.format(idFormat, centerString(idWidth, String.valueOf(stock.getStockID())))
+                    + String.format(nameFormat, centerString(nameWidth, stock.getMedicineName()))
+                    + String.format(priceFormat, centerString(priceWidth, String.format("$%.2f", stock.getPrice())))
+                    + String.format(quantityFormat, centerString(quantityWidth, String.valueOf(stock.getQuantity())))
                     + String.format(expiryFormat, centerString(expiryWidth,
-                    DateParser.dateToString(medicine.getExpiry())))
-                    + String.format(descriptionFormat, centerString(descriptionWidth, medicine.getDescription()))
+                    DateParser.dateToString(stock.getExpiry())))
+                    + String.format(descriptionFormat, centerString(descriptionWidth, stock.getDescription()))
                     + String.format(maxQuantityFormat, centerString(maxQuantityWidth,
-                    String.valueOf(medicine.getMaxQuantity())));
+                    String.valueOf(stock.getMaxQuantity())));
             System.out.println(row);
-            printRowBorder(Medicine.NO_OF_COLUMNS, columnWidths);
+            printRowBorder(Stock.NO_OF_COLUMNS, columnWidths);
         }
     }
 

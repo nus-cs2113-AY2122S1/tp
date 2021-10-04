@@ -1,6 +1,6 @@
 package command;
 
-import inventory.Stock;
+import inventory.Medicine;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class HelpCommand extends Command {
 
     @Override
-    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
+    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         final String LS = System.lineSeparator();
         String help = "Welcome to the help page." + LS
                 + "Note that parameters enclosed in [] are optional." + LS

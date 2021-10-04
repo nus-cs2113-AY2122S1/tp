@@ -1,7 +1,7 @@
 package command;
 
-import inventory.Stock;
-import parser.MedicineValidator;
+import inventory.Medicine;
+import parser.StockValidator;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class CommandSyntax {
      * @param ui                Reference to the UI object passed by Main to print messages.
      * @param parameters        Parameters entered in by the user.
      * @param commandParameters Parameters required by the command.
-     * @param commandSyntax     The command's valid syntax,
+     * @param commandSyntax     The command's valid syntax.
      * @return A boolean value indicating if the parameters required are entered by the user.
      */
     public static boolean containsInvalidParameters(Ui ui, HashMap<String, String> parameters,
@@ -51,12 +51,12 @@ public class CommandSyntax {
      *
      * @param ui                 Reference to the UI object passed by Main to print messages.
      * @param parameters         HashMap Key-Value set for parameter and user specified parameter value.
-     * @param stocks             Arraylist of all stocks.
+     * @param medicines             Arraylist of all stocks.
      * @param optionalParameters Optional parameters by the command.
      * @return A boolean value indicating whether parameters are valid.
      */
     public static boolean validOptionalParameterChecker(Ui ui, HashMap<String, String> parameters,
-                                                        ArrayList<Stock> stocks, String[] optionalParameters) {
+                                                        ArrayList<Medicine> medicines, String[] optionalParameters) {
         boolean isValid;
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
@@ -68,25 +68,25 @@ public class CommandSyntax {
 
             switch (parameter) {
             case CommandParameters.PRICE:
-                isValid = MedicineValidator.isValidPrice(ui, parameterValue);
+                isValid = StockValidator.isValidPrice(ui, parameterValue);
                 break;
             case CommandParameters.QUANTITY:
-                isValid = MedicineValidator.isValidQuantity(ui, parameterValue);
+                isValid = StockValidator.isValidQuantity(ui, parameterValue);
                 break;
             case CommandParameters.EXPIRY_DATE:
-                isValid = MedicineValidator.isValidExpiry(ui, parameterValue);
+                isValid = StockValidator.isValidExpiry(ui, parameterValue);
                 break;
             case CommandParameters.DESCRIPTION:
-                isValid = MedicineValidator.isValidDescription(ui, parameterValue);
+                isValid = StockValidator.isValidDescription(ui, parameterValue);
                 break;
             case CommandParameters.UPDATED_MEDICINE_NAME:
-                isValid = MedicineValidator.isValidName(ui, parameterValue);
+                isValid = StockValidator.isValidName(ui, parameterValue);
                 break;
             case CommandParameters.MAX_QUANTITY:
-                isValid = MedicineValidator.isValidMaxQuantity(ui, parameterValue);
+                isValid = StockValidator.isValidMaxQuantity(ui, parameterValue);
                 break;
             case CommandParameters.STOCK_ID:
-                isValid = MedicineValidator.isValidStockId(ui, parameterValue, stocks);
+                isValid = StockValidator.isValidStockId(ui, parameterValue, medicines);
                 break;
             default:
                 ui.printInvalidParameter(parameter, CommandSyntax.UPDATE_COMMAND);

@@ -7,7 +7,7 @@ import command.medicine.DeleteCommand;
 import command.medicine.ListCommand;
 import command.medicine.UpdateCommand;
 import errors.InvalidCommand;
-import inventory.Stock;
+import inventory.Medicine;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -44,11 +44,11 @@ public class Parser {
      *
      * @param ui        Reference to the UI object passed by Main to print messages.
      * @param userInput Input provided by user.
-     * @param stocks    Arraylist of all stocks.
+     * @param medicines    Arraylist of all stocks.
      * @return A boolean value indicating isExit.
      * @throws InvalidCommand If a command does not exist.
      */
-    public static boolean processCommand(Ui ui, String userInput, ArrayList<Stock> stocks) throws InvalidCommand {
+    public static boolean processCommand(Ui ui, String userInput, ArrayList<Medicine> medicines) throws InvalidCommand {
         String[] userCommand = parseCommand(userInput);
         String command = userCommand[0];
         String commandParameters = userCommand[1];
@@ -58,14 +58,14 @@ public class Parser {
         }
         switch (command) {
         case ADD:
-            new AddCommand().execute(ui, parameters, stocks);
+            new AddCommand().execute(ui, parameters, medicines);
             break;
         case ADD_ORDER:
             break;
         case ARCHIVE:
             break;
         case DELETE:
-            new DeleteCommand().execute(ui, parameters, stocks);
+            new DeleteCommand().execute(ui, parameters, medicines);
             break;
         case DELETE_ORDER:
             break;
@@ -74,15 +74,15 @@ public class Parser {
         case EXIT:
             return true;
         case HELP:
-            new HelpCommand().execute(ui, parameters, stocks);
+            new HelpCommand().execute(ui, parameters, medicines);
             break;
         case LIST:
-            new ListCommand().execute(ui, parameters, stocks);
+            new ListCommand().execute(ui, parameters, medicines);
             break;
         case LIST_ORDERS:
             break;
         case PURGE:
-            new PurgeCommand().execute(ui, parameters, stocks);
+            new PurgeCommand().execute(ui, parameters, medicines);
             break;
         case QUERY:
             break;
@@ -91,7 +91,7 @@ public class Parser {
         case UNDO:
             break;
         case UPDATE:
-            new UpdateCommand().execute(ui, parameters, stocks);
+            new UpdateCommand().execute(ui, parameters, medicines);
             break;
         case UPDATE_ORDER:
             break;

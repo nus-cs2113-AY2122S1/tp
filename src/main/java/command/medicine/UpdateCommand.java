@@ -3,10 +3,10 @@ package command.medicine;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import inventory.Medicine;
 import inventory.Stock;
+import inventory.Medicine;
 import parser.DateParser;
-import parser.MedicineValidator;
+import parser.StockValidator;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -21,7 +21,7 @@ public class UpdateCommand extends Command {
     private static final int PARAM_COUNT_ONLY_ID = 1;
 
     @Override
-    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
+    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         String[] stockIdParameter = {CommandParameters.STOCK_ID};
         boolean isPresentStockId = !CommandSyntax.containsInvalidParameters(ui, parameters, stockIdParameter,
                 CommandSyntax.UPDATE_COMMAND);
@@ -31,7 +31,7 @@ public class UpdateCommand extends Command {
         }
 
         // Checks validity of compulsory parameter
-        boolean isValidID = MedicineValidator.isValidStockId(ui, parameters.get(CommandParameters.STOCK_ID), stocks);
+        boolean isValidID = StockValidator.isValidStockId(ui, parameters.get(CommandParameters.STOCK_ID), medicines);
         if (!isValidID) {
             return;
         }
@@ -47,15 +47,13 @@ public class UpdateCommand extends Command {
             CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.UPDATED_MEDICINE_NAME,
             CommandParameters.MAX_QUANTITY};
         // Checks validity of optional parameters
-        boolean containValidParameters = CommandSyntax.validOptionalParameterChecker(ui, parameters, stocks,
+        boolean containValidParameters = CommandSyntax.validOptionalParameterChecker(ui, parameters, medicines,
                 optionalParameters);
         if (!containValidParameters) {
             return;
         }
 
-        if (isPresentStockId) {
-            processUpdatesByStockID(ui, parameters, stocks);
-        }
+        processUpdatesByStockID(ui, parameters, medicines);
     }
 
     /**
@@ -63,21 +61,21 @@ public class UpdateCommand extends Command {
      *
      * @param ui         Reference to the UI object passed by Main to print messages.
      * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
-     * @param stocks     Arraylist of all stocks.
+     * @param temps     Arraylist of all stocks.
      */
-    private void processUpdatesByStockID(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
+    private void processUpdatesByStockID(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> temps) {
         int stockID = Integer.parseInt(parameters.get(CommandParameters.STOCK_ID));
 
-        Medicine medicine = null;
-        for (Stock stock : stocks) {
-            if (((Medicine) stock).getStockID() == stockID) {
-                medicine = (Medicine) stock;
+        Stock stock = null;
+        for (Medicine medicine : temps) {
+            if (((Stock) medicine).getStockID() == stockID) {
+                stock = (Stock) medicine;
                 break;
             }
         }
 
-        int currentQuantity = medicine.getQuantity();
-        int currentMaxQuantity = medicine.getMaxQuantity();
+        int currentQuantity = stock.getQuantity();
+        int currentMaxQuantity = stock.getMaxQuantity();
 
         boolean hasQuantity = parameters.containsKey(CommandParameters.QUANTITY);
         boolean hasMaxQuantity = parameters.containsKey(CommandParameters.MAX_QUANTITY);
@@ -107,44 +105,42 @@ public class UpdateCommand extends Command {
             }
         }
 
-        setUpdatesByStockID(parameters, medicine);
-        ArrayList<Stock> medicines = new ArrayList<>();
-        medicines.add(medicine);
+        setUpdatesByStockID(parameters, stock);
         ui.print("Updated");
-        ui.printMedicines(medicines);
+        ui.printMedicine(stock);
     }
 
     /**
      * Update values provided by user for a given stock id.
      *
      * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicine   Medicine object of the given stock id.
+     * @param stock   Medicine object of the given stock id.
      */
-    private void setUpdatesByStockID(HashMap<String, String> parameters, Medicine medicine) {
+    private void setUpdatesByStockID(HashMap<String, String> parameters, Stock stock) {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
             case CommandParameters.UPDATED_MEDICINE_NAME:
-                medicine.setMedicineName(parameterValue);
+                stock.setMedicineName(parameterValue);
                 break;
             case CommandParameters.PRICE:
-                medicine.setPrice(Double.parseDouble(parameterValue));
+                stock.setPrice(Double.parseDouble(parameterValue));
                 break;
             case CommandParameters.QUANTITY:
-                medicine.setQuantity(Integer.parseInt(parameterValue));
+                stock.setQuantity(Integer.parseInt(parameterValue));
                 break;
             case CommandParameters.EXPIRY_DATE:
                 try {
-                    medicine.setExpiry(DateParser.stringToDate(parameterValue));
+                    stock.setExpiry(DateParser.stringToDate(parameterValue));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 break;
             case CommandParameters.DESCRIPTION:
-                medicine.setDescription(parameterValue);
+                stock.setDescription(parameterValue);
                 break;
             case CommandParameters.MAX_QUANTITY:
-                medicine.setMaxQuantity(Integer.parseInt(parameterValue));
+                stock.setMaxQuantity(Integer.parseInt(parameterValue));
                 break;
             default:
                 break;
