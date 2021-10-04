@@ -10,6 +10,9 @@ public class AddCommand extends Command {
         switch (parameters.get(0)) {
         case "dish":
             DishList.add(parameters.get(1));
+            break;
+        default:
+            break;
         }
     }
 }
