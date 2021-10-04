@@ -47,11 +47,11 @@ public class Ui {
     
     public static void listExpense(ArrayList<Object> entries) {
         int i = 1;
-        for (Object Entry:entries) {
-            if(Entry instanceof Expense) {
+        for (Object entry:entries) {
+            if (entry instanceof Expense) {
                 System.out.println(i);
                 System.out.println(": ");
-                System.out.println(Entry);
+                System.out.println(entry);
                 i++;
             }
         }  
@@ -59,11 +59,11 @@ public class Ui {
     
     public static void listIncome(ArrayList<Object> entries) {
         int i = 1;
-        for (Object Entry:entries) {
-            if(Entry instanceof Income) {
+        for (Object entry:entries) {
+            if (entry instanceof Income) {
                 System.out.println(i);
                 System.out.println(": ");
-                System.out.println(Entry);
+                System.out.println(entry);
                 i++;
             }
         }
@@ -71,8 +71,8 @@ public class Ui {
     
     public static void printTotalExpense(ArrayList<Object> entries) {
         int totalExpense = 0;
-        for (Object Entry:entries) {
-            if(Entry instanceof Expense) {
+        for (Object entry:entries) {
+            if (entry instanceof Expense) {
                 totalExpense += Expense.getValue();
             }
         }
@@ -81,8 +81,8 @@ public class Ui {
     
     public static void printTotalIncome(ArrayList<Object> entries) {
         int totalIncome = 0;
-        for (Object Entry:entries) {
-            if(Entry instanceof Income) {
+        for (Object entry:entries) {
+            if (entry instanceof Income) {
                 totalIncome += Income.getValue();
             }
         }
@@ -106,7 +106,7 @@ public class Ui {
     }
     
     public static void printHelp() {
-        for(String command:commands) {
+        for (String command:commands) {
             System.out.println(command + ": ");
         }
     }
