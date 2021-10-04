@@ -51,7 +51,7 @@ public class CommandSyntax {
      *
      * @param ui                 Reference to the UI object passed by Main to print messages.
      * @param parameters         HashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines             Arraylist of all stocks.
+     * @param medicines          Arraylist of all medicines.
      * @param optionalParameters Optional parameters by the command.
      * @return A boolean value indicating whether parameters are valid.
      */
