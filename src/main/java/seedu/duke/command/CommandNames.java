@@ -1,10 +1,8 @@
 package seedu.duke.command;
 
-import seedu.duke.TestCommand;
-
 public enum CommandNames {
-    ADD("Add", new AddCommand()),
-    TEST("Test", new TestCommand());
+    ADD("add", new AddCommand()),
+    TEST("test", new TestCommand());
 
     private String name;
     private Command callbackCommand;

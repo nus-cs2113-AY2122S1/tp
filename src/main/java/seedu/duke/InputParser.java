@@ -20,7 +20,7 @@ public class InputParser {
         ArrayList<String> parameters = new ArrayList<>();
 
         //Replace the first command part with null, and you'll be left with params
-        String parameterString = input.replaceFirst(inputCommand.getName() + " ", "");
+        String parameterString = input.replaceFirst(inputCommand.getName(), "").trim();
         switch (inputCommand) {
 
         //No parameter commands check if there are params and if so error(Maybe not needed)
