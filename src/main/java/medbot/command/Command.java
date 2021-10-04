@@ -6,7 +6,7 @@ import medbot.Ui;
 
 public abstract class Command {
     /**
-     * Returns if the command type is the exitCommand
+     * Returns if the command type is the exitCommand.
      *
      * @return boolean value of whether the command is the exitCommand
      */
@@ -15,7 +15,7 @@ public abstract class Command {
     }
 
     /**
-     * Abstract method that executes the command
+     * Abstract method that executes the command.
      *
      * @param patientList the patientList that will be modified
      */

@@ -9,8 +9,8 @@ public abstract class Person {
     protected PersonType personType;
 
     public String toString() {
-        return "IC: " + icNumber + " Name: " + name + " H/P: " + phoneNumber +
-                " Email: " + emailAddress + " Address: " + residentialAddress;
+        return "IC: " + icNumber + " Name: " + name + " H/P: " + phoneNumber
+                + " Email: " + emailAddress + " Address: " + residentialAddress;
     }
 
     public String getIcNumber() {

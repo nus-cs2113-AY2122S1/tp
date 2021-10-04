@@ -4,7 +4,7 @@ import medbot.MedBotException;
 import medbot.PatientList;
 import medbot.Ui;
 
-public class DeletePatientCommand extends Command{
+public class DeletePatientCommand extends Command {
     private int patientId = 0;
     
     public DeletePatientCommand(int patientId) {

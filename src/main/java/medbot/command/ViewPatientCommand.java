@@ -4,7 +4,7 @@ import medbot.MedBotException;
 import medbot.PatientList;
 import medbot.Ui;
 
-public class ViewPatientCommand extends Command{
+public class ViewPatientCommand extends Command {
     private int patientId = 0;
 
     public ViewPatientCommand(int patientId) {
