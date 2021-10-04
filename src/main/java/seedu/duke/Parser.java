@@ -98,15 +98,15 @@ public class Parser {
         case DELETE_INCOME_KEYWORD:
             return prepareDeleteIncome(arguments);
         case LIST_EXPENSE_KEYWORD:
-            return new ListExpenseCommand();
+            return prepareListExpense(arguments);
         case LIST_INCOME_KEYWORD:
-            return new ListIncomeCommand();
+            return prepareListIncome(arguments);
         case TOTAL_EXPENSE_KEYWORD:
-            return new TotalExpenseCommand();
+            return prepareTotalExpense(arguments);
         case TOTAL_INCOME_KEYWORD:
-            return new TotalIncomeCommand();
+            return prepareTotalIncome(arguments);
         case EXIT_KEYWORD:
-            return new ExitCommand();
+            return prepareExit(arguments);
         default:
             return new InvalidCommand();
         }
@@ -122,7 +122,16 @@ public class Parser {
         if (!matcher.matches()) {
             return new InvalidCommand();
         }
-
+        
+        String expenseDescription = matcher.group("description").trim();
+        int expenseAmount;
+        
+        try {
+            expenseAmount = Integer.parseInt(matcher.group("amount"));
+        } catch (NumberFormatException e) {
+            return new InvalidCommand();
+        }
+        
         //need to create constructor for Expense
         Expense expense = new Expense();
         return new AddExpenseCommand(expense);
@@ -139,6 +148,15 @@ public class Parser {
             return new InvalidCommand();
         }
 
+        String incomeDescription = matcher.group("description").trim();
+        int incomeAmount;
+
+        try {
+            incomeAmount = Integer.parseInt(matcher.group("amount"));
+        } catch (NumberFormatException e) {
+            return new InvalidCommand();
+        }
+        
         //need to add the constructor for Income
         Income income = new Income();
         return new AddIncomeCommand(income);
@@ -180,5 +198,40 @@ public class Parser {
         } catch (NumberFormatException e) {
             return new InvalidCommand();
         }
+    }
+
+    private Command prepareListExpense(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new ListExpenseCommand();
+        } 
+        return new InvalidCommand();
+    }
+
+    private Command prepareListIncome(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new ListIncomeCommand();
+        }
+        return new InvalidCommand();
+    }
+    
+    private Command prepareTotalExpense(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new TotalExpenseCommand();
+        }
+        return new InvalidCommand();
+    }
+
+    private Command prepareTotalIncome(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new TotalIncomeCommand();
+        }
+        return new InvalidCommand();
+    }
+    
+    private Command prepareExit(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new ExitCommand();
+        }
+        return new InvalidCommand();
     }
 }
