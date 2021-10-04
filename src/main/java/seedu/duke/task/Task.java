@@ -48,7 +48,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[T]" + getDoneSymbol() + " " + "Title: " + title + ")"
-                + (information.isBlank() ? "" : "(Info: " + information + ")");
+        return "[T]" + getDoneSymbol() + " " + "Title: " + title
+                + (information.isBlank() ? "" : " (Info: " + information + ")");
     }
 }
