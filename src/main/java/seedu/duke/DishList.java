@@ -19,7 +19,7 @@ public class DishList {
     private static int find(String dishName) {
         for (Dish dish: dishList) {
             if (dish.getDishName().equals(dishName.toLowerCase())) {
-               return dishList.indexOf(dish);
+                return dishList.indexOf(dish);
             }
         }
         return -1;
