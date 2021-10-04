@@ -1,4 +1,4 @@
-package seedu.situs.UI;
+package seedu.situs.ui;
 
 public class UI {
 
@@ -14,5 +14,8 @@ public class UI {
     }
 
     public void printGoodbye() {
+    }
+
+    public void printCommandOutput(String commandOutput) {
     }
 }

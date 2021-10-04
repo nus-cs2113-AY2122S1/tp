@@ -1,11 +1,9 @@
-package seedu.situs.Ingredients;
+package seedu.situs.ingredients;
 
 //import java.time.LocalDate;
 
-import java.util.Locale;
-
 /**
- * Represents an Ingredients
+ * Represents an Ingredient.
  */
 public class Ingredient {
     protected String name;

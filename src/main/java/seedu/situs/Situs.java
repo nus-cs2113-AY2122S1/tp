@@ -1,10 +1,8 @@
 package seedu.situs;
 
-import seedu.situs.Ingredients.Ingredient;
-import seedu.situs.Ingredients.IngredientList;
-import seedu.situs.UI.UI;
-
-import java.util.Scanner;
+import seedu.situs.ingredients.Ingredient;
+import seedu.situs.ingredients.IngredientList;
+import seedu.situs.ui.UI;
 
 public class Situs {
 
@@ -15,7 +13,7 @@ public class Situs {
     }
 
     /**
-     * Starts up the system by creating the UI and the IngredientList
+     * Starts up the system by creating the UI and the IngredientList.
      */
     public static void initialize() {
         //TODO: CREATE A METHOD IN UI CLASS TO PRINT THE GREETING (CAN BE CALLED IN CONSTRUCTOR)
@@ -25,7 +23,7 @@ public class Situs {
     }
 
     /**
-     * Loops until exit command received
+     * Loops until exit command received.
      */
     public static void runCommandLoopUntilExitCommand() {
         //we temporarily do without the command classes and parser class
@@ -40,40 +38,42 @@ public class Situs {
         while (true) {
             String[] userInput = ui.getUserCommand().split(" ", 2); //Splits into command and parameters
             String command = userInput[0];
+            String commandOutput = "";
             switch (command) {
             case "exit":
                 exit();
+                break;
             case "list":
-                ingredientList.listAllIngredients();
+                commandOutput = ingredientList.listAllIngredients();
                 break;
             case "add":
                 //fill in code to obtain the necessary parameters
                 Ingredient newIngredient = new Ingredient("name", 200.0, "units", "expiry");
-                ingredientList.addNewIngredient(newIngredient);
+                commandOutput = ingredientList.addNewIngredient(newIngredient);
                 break;
             case "delete":
                 int indexToDelete = 999999; //write code to get the correct index
-                ingredientList.deleteIngredient(indexToDelete);
+                commandOutput = ingredientList.deleteIngredient(indexToDelete);
                 break;
             case "update":
                 int indexToUpdate = 999999;
                 double amount = 0;
-                String newExpiry = "I don't expiry woooo";
-                ingredientList.updateIngredient(indexToUpdate, amount, newExpiry);
+                commandOutput = ingredientList.updateIngredient(indexToUpdate, amount);
                 break;
             default:
                 System.out.println("Unknown Command");
                 break;
             }
+            ui.printCommandOutput(commandOutput);
 
         }
     }
 
     /**
-     * Prints the exit message, then closes the program
+     * Prints the exit message, then closes the program.
      */
     public static void exit() {
-//      TODO: CREATE GOODBYE FUNCTION IN UI CLASS
+        // TODO: CREATE GOODBYE FUNCTION IN UI CLASS
         ui.printGoodbye();
         System.exit(0);
     }
