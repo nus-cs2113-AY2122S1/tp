@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.entry;
 
 public class Expense extends Entry{
 }
