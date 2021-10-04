@@ -4,6 +4,7 @@ public enum CommandNames {
     ADD("add", new AddCommand()),
     TEST("test", new TestCommand());
 
+
     private String name;
     private Command callbackCommand;
     CommandNames(String name, Command callbackCommand) {
