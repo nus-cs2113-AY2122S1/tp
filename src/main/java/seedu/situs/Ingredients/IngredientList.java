@@ -54,9 +54,10 @@ public class IngredientList {
      * Updates the ingredient at the specified index in the list by the amount specified
      * @param index the index of the ingredient to be updated
      * @param amount the amount to add to the ingredient
+     * @param newExpiry
      * @return
      */
-    public String updateIngredient(int index, double amount) {
+    public String updateIngredient(int index, double amount, String newExpiry) {
         //TODO: add code to update the ingredient at the particular index by the amount specified
 
         return ingredientList.get(index - 1).toString();

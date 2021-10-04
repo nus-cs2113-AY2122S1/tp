@@ -58,7 +58,8 @@ public class Situs {
             case "update":
                 int indexToUpdate = 999999;
                 double amount = 0;
-                ingredientList.updateIngredient(indexToUpdate, amount);
+                String newExpiry = "I don't expiry woooo";
+                ingredientList.updateIngredient(indexToUpdate, amount, newExpiry);
                 break;
             default:
                 System.out.println("Unknown Command");
