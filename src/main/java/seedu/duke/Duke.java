@@ -1,5 +1,6 @@
 package seedu.duke;
-import Utility.Ui;
+
+import seedu.utility.Ui;
 
 
 public class Duke {
@@ -12,7 +13,7 @@ public class Duke {
         boolean exitFlag = true;
         while (exitFlag) {
             String command = Ui.readCommand();
-            if(command.equals("end")) {
+            if (command.equals("end")) {
                 exitFlag = false;
             }
             System.out.println("You typed this: " + command);
