@@ -1,8 +1,8 @@
 package parser;
 
 import command.CommandParameters;
-import inventory.Medicine;
 import inventory.Stock;
+import inventory.Medicine;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -12,25 +12,25 @@ import java.util.Arrays;
  * Contains all the methods to validate if a Medicine's input parameters are valid.
  */
 
-public class MedicineValidator {
+public class StockValidator {
     /**
      * Checks if the given stock id is valid.
      *
      * @param ui    Reference to the UI object passed by Main to print messages.
      * @param id    ID of the medicine to be checked.
-     * @param stocks List of all medicines.
+     * @param medicines List of all medicines.
      * @return Boolean value indicating if medicine ID is valid.
      */
-    public static boolean isValidStockId(Ui ui, String id, ArrayList<Stock> stocks) {
+    public static boolean isValidStockId(Ui ui, String id, ArrayList<Medicine> medicines) {
         try {
             int stockId = Integer.parseInt(id);
-            if (stockId <= 0 || stockId > Medicine.getStockCount()) {
+            if (stockId <= 0 || stockId > Stock.getStockCount()) {
                 throw new Exception();
             }
             boolean stockExist = false;
-            for (Stock stock : stocks) {
-                Medicine medicine = (Medicine) stock;
-                if (medicine.getStockID() == stockId) {
+            for (Medicine medicine : medicines) {
+                Stock stock = (Stock) medicine;
+                if (stock.getStockID() == stockId) {
                     stockExist = true;
                     break;
                 }
@@ -164,10 +164,10 @@ public class MedicineValidator {
         String[] columnAlias = new String[]{CommandParameters.STOCK_ID, CommandParameters.NAME, CommandParameters.PRICE,
             CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
             CommandParameters.MAX_QUANTITY};
-        if (Arrays.asList(Medicine.COLUMNS).contains(columnName) || Arrays.asList(columnAlias).contains(columnName)) {
+        if (Arrays.asList(Stock.COLUMNS).contains(columnName) || Arrays.asList(columnAlias).contains(columnName)) {
             return true;
         }
-        ui.print("Invalid column name/alias! Column names can only be " + Arrays.toString(Medicine.COLUMNS) + " and "
+        ui.print("Invalid column name/alias! Column names can only be " + Arrays.toString(Stock.COLUMNS) + " and "
                 + "the respective aliases are " + Arrays.toString(columnAlias) + ".");
         return false;
     }

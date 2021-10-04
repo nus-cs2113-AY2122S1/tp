@@ -7,7 +7,7 @@ import java.util.Date;
  * date and staff name.
  */
 
-public class Dispense extends Stock {
+public class Dispense extends Medicine {
     protected String customerNric;
     protected Date date;
     protected String staffName;

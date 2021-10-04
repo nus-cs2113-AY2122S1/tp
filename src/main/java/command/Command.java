@@ -1,6 +1,6 @@
 package command;
 
-import inventory.Stock;
+import inventory.Medicine;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -11,5 +11,5 @@ import java.util.HashMap;
  */
 
 public abstract class Command {
-    public abstract void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks);
+    public abstract void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines);
 }

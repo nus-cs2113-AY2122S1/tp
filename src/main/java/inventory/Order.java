@@ -6,7 +6,7 @@ import java.util.Date;
  * Represents an Order. An Order is represented by order_id, medicine name, quantity, date and isDelivered.
  */
 
-public class Order extends Stock {
+public class Order extends Medicine {
     public static int orderCount = 0;
     protected int orderId;
     protected Date date;

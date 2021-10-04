@@ -3,10 +3,10 @@ package command.medicine;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import inventory.Medicine;
 import inventory.Stock;
+import inventory.Medicine;
 import parser.DateParser;
-import parser.MedicineValidator;
+import parser.StockValidator;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -22,62 +22,62 @@ import java.util.stream.Collectors;
 public class ListCommand extends Command {
 
     @Override
-    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Stock> stocks) {
-        ArrayList<Stock> filteredMedicines = new ArrayList<>();
-        for (Stock stock : stocks) {
-            if (stock instanceof Medicine) { // Ensure that it is a medicine object
-                filteredMedicines.add(stock);
+    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+        ArrayList<Medicine> filteredMedicines = new ArrayList<>();
+        for (Medicine medicine : medicines) {
+            if (medicine instanceof Stock) { // Ensure that it is a medicine object
+                filteredMedicines.add(medicine);
             }
         }
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
             case CommandParameters.STOCK_ID:
-                if (!MedicineValidator.isValidStockId(ui, parameterValue, stocks)) {
+                if (!StockValidator.isValidStockId(ui, parameterValue, medicines)) {
                     return;
                 }
-                filteredMedicines = (ArrayList<Stock>) filteredMedicines.stream()
-                        .filter((m) -> ((Medicine) m).getStockID() == Integer.parseInt(parameterValue))
+                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
+                        .filter((m) -> ((Stock) m).getStockID() == Integer.parseInt(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.NAME:
-                if (!MedicineValidator.isValidName(ui, parameterValue)) {
+                if (!StockValidator.isValidName(ui, parameterValue)) {
                     return;
                 }
-                filteredMedicines = (ArrayList<Stock>) filteredMedicines.stream()
+                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
                         .filter((m) -> m.getMedicineName().equals(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.PRICE:
-                if (!MedicineValidator.isValidPrice(ui, parameterValue)) {
+                if (!StockValidator.isValidPrice(ui, parameterValue)) {
                     return;
                 }
-                filteredMedicines = (ArrayList<Stock>) filteredMedicines.stream()
-                        .filter((m) -> ((Medicine) m).getPrice() == Double.parseDouble(parameterValue))
+                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
+                        .filter((m) -> ((Stock) m).getPrice() == Double.parseDouble(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.QUANTITY:
                 // Implement search by quantity
                 break;
             case CommandParameters.EXPIRY_DATE:
-                if (!MedicineValidator.isValidExpiry(ui, parameterValue)) {
+                if (!StockValidator.isValidExpiry(ui, parameterValue)) {
                     return;
                 }
                 try {
                     Date expiryDate = DateParser.stringToDate(parameterValue);
-                    filteredMedicines = (ArrayList<Stock>) filteredMedicines.stream()
-                            .filter((m) -> ((Medicine) m).getExpiry().equals(expiryDate))
+                    filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
+                            .filter((m) -> ((Stock) m).getExpiry().equals(expiryDate))
                             .collect(Collectors.toList());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 break;
             case CommandParameters.DESCRIPTION:
-                if (!MedicineValidator.isValidDescription(ui, parameterValue)) {
+                if (!StockValidator.isValidDescription(ui, parameterValue)) {
                     return;
                 }
-                filteredMedicines = (ArrayList<Stock>) filteredMedicines.stream()
-                        .filter((m) -> ((Medicine) m).getDescription().equals(parameterValue))
+                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
+                        .filter((m) -> ((Stock) m).getDescription().equals(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.MAX_QUANTITY:
