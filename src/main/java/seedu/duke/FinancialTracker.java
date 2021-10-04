@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.entry.Entry;
+
 import java.util.ArrayList;
 
 public class FinancialTracker {
