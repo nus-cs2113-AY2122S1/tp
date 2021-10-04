@@ -26,8 +26,7 @@ public class Ui {
     protected static final List<String> commands = Arrays.asList("help", "add_ex", "del_ex",
             "list_ex", "total_ex", "add_in", "del_in", "list_in", "total_in");
     
-    public static String readCommand() {
-        Scanner in = new Scanner(System.in);
+    public static String readCommand(Scanner in) {
         return in.nextLine().trim();
     }
 
