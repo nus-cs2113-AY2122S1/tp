@@ -61,13 +61,13 @@ public class UpdateCommand extends Command {
      *
      * @param ui         Reference to the UI object passed by Main to print messages.
      * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
-     * @param temps     Arraylist of all stocks.
+     * @param medicines  Arraylist of all medicines.
      */
-    private void processUpdatesByStockID(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> temps) {
+    private void processUpdatesByStockID(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         int stockID = Integer.parseInt(parameters.get(CommandParameters.STOCK_ID));
 
         Stock stock = null;
-        for (Medicine medicine : temps) {
+        for (Medicine medicine : medicines) {
             if (((Stock) medicine).getStockID() == stockID) {
                 stock = (Stock) medicine;
                 break;
@@ -114,7 +114,7 @@ public class UpdateCommand extends Command {
      * Update values provided by user for a given stock id.
      *
      * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
-     * @param stock   Medicine object of the given stock id.
+     * @param stock      Stock object of the given stock id.
      */
     private void setUpdatesByStockID(HashMap<String, String> parameters, Stock stock) {
         for (String parameter : parameters.keySet()) {

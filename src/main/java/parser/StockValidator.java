@@ -16,8 +16,8 @@ public class StockValidator {
     /**
      * Checks if the given stock id is valid.
      *
-     * @param ui    Reference to the UI object passed by Main to print messages.
-     * @param id    ID of the medicine to be checked.
+     * @param ui        Reference to the UI object passed by Main to print messages.
+     * @param id        ID of the medicine to be checked.
      * @param medicines List of all medicines.
      * @return Boolean value indicating if medicine ID is valid.
      */
