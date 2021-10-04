@@ -2,6 +2,7 @@ Welcome to TermiNUS!
 
 Type any of the following to get started:
 > exit
+> help
 > notes
 
 [] >>> Command not found! Type 'help' for a list of commands.
@@ -10,14 +11,37 @@ Type any of the following to get started:
 [] >>> 
 Type any of the following to get started:
 > exit
+> help
 > test
 > back
+
+[notes] >>> exit : Exits the program.
+Format: exit
+
+help : Prints the help page.
+Format: help
+
+test : This is testing command.
+Format: test
+
+back : Returns to the parent workspace.
+Format: back
 
 [notes] >>> Command not found! Type 'help' for a list of commands.
 [notes] >>> c f a
 [notes] >>> 
 Type any of the following to get started:
 > exit
+> help
 > notes
+
+[] >>> exit : Exits the program.
+Format: exit
+
+help : Prints the help page.
+Format: help
+
+notes : Move to notes workspace.
+Format: notes
 
 [] >>> Goodbye!

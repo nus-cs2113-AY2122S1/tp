@@ -13,7 +13,7 @@ public class TestCommand extends Command {
 
     @Override
     public String getHelpMessage() {
-        return null;
+        return "This is testing command.";
     }
 
     @Override

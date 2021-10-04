@@ -18,6 +18,6 @@ public class NotesCommand extends WorkspaceCommand {
 
     @Override
     public String getHelpMessage() {
-        return "Move to notes workspace";
+        return "Move to notes workspace.";
     }
 }
