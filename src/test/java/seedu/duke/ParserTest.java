@@ -3,7 +3,11 @@ package seedu.duke;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import seedu.commands.*;
+import seedu.commands.Command;
+import seedu.commands.HelpCommand;
+import seedu.commands.InvalidCommand;
+import seedu.commands.DeleteIncomeCommand;
+import seedu.commands.ListIncomeCommand;
 
 public class ParserTest {
     @Test
