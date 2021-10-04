@@ -49,8 +49,7 @@ public class Task {
     @Override
     public String toString() {
         if (information.equals("")) {
-            return ("[T]" + getDoneSymbol() + " "
-                    + "Title: " + title + " ");
+            return ("[T]" + getDoneSymbol() + " " + "Title: " + title + " ");
         } else {
             return "[T]" + getDoneSymbol() + " " + "Title: " + title + " " + "(Info: " + information + ")";
         }
