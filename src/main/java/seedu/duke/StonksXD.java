@@ -12,6 +12,7 @@ public class StonksXD {
     public StonksXD() {
         this.ui = new Ui();
         this.finances = new FinancialTracker();
+        this.parser = new Parser();
     }
 
     public void run() {

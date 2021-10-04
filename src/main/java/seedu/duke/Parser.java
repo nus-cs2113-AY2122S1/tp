@@ -1,16 +1,6 @@
 package seedu.duke;
 
-import seedu.commands.AddIncomeCommand;
-import seedu.commands.AddExpenseCommand;
-import seedu.commands.Command;
-import seedu.commands.HelpCommand;
-import seedu.commands.InvalidCommand;
-import seedu.commands.DeleteExpenseCommand;
-import seedu.commands.DeleteIncomeCommand;
-import seedu.commands.ListExpenseCommand;
-import seedu.commands.ListIncomeCommand;
-import seedu.commands.TotalExpenseCommand;
-import seedu.commands.TotalIncomeCommand;
+import seedu.commands.*;
 
 
 import seedu.entry.Expense;
@@ -67,6 +57,7 @@ public class Parser {
     private static final String LIST_INCOME_KEYWORD = "list_in";
     private static final String TOTAL_EXPENSE_KEYWORD = "total_ex";
     private static final String TOTAL_INCOME_KEYWORD = "total_in";
+    private static final String EXIT_KEYWORD = "end";
 
     /**
      * Parses user input into command for execution.
@@ -104,6 +95,8 @@ public class Parser {
             return new TotalExpenseCommand();
         case TOTAL_INCOME_KEYWORD:
             return new TotalIncomeCommand();
+        case EXIT_KEYWORD:
+            return new ExitCommand();
         default:
             return new InvalidCommand();
         }
