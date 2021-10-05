@@ -9,7 +9,7 @@ import java.util.HashMap;
  * Represents the recipe list and contains methods to add and remove ingredients.
  */
 public class RecipeList {
-    private final HashMap <String,Recipe> recipes;
+    private final HashMap<String,Recipe> recipes;
 
     /**
      * Constructs Recipe List with no recipes.
@@ -28,7 +28,7 @@ public class RecipeList {
     public void add(Recipe recipe) throws DuplicateDataException, EmptyIngredientsException {
         if (contains(recipe)) {
             throw new DuplicateDataException();
-        } else if (recipe.getIngredients().size() == 0){
+        } else if (recipe.getIngredients().size() == 0) {
             throw new EmptyIngredientsException();
         } else {
             recipes.put(recipe.getName(), recipe);

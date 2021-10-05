@@ -146,16 +146,16 @@ public class Parser {
     }
 
     /**
-     * Creates a AddRecipeCommand from the inputs
+     * Creates a AddRecipeCommand from the inputs.
      *
      * @param prefixesToArgs A hash map of prefixes to their arguments
      * @return a AddRecipeCommand with the recipe name and the ingredients if successful
-     * and an IncorrectCommand if not
+     *     and an IncorrectCommand if not.
      */
     private static Command prepareAddRecipe(HashMap<String,ArrayList<String>> prefixesToArgs) {
         final String recipe;
         try {
-           recipe = prefixesToArgs.get(PREFIX_RECIPE).get(0);
+            recipe = prefixesToArgs.get(PREFIX_RECIPE).get(0);
         } catch (Exception e) {
             return new IncorrectCommand(MESSAGE_MISSING_RECIPE);
         }
@@ -165,7 +165,7 @@ public class Parser {
         for (int i = 0; i < name.size(); i++) {
             IncorrectCommand error = checkArgs(name,quantity,
                     prefixesToArgs.get(PREFIX_EXPIRY),!TEST_FOR_EXPIRY_DATE,i);
-            if(error != null) {
+            if (error != null) {
                 return error;
             }
             error = addIngredients(name, quantity, ingredients, i);
