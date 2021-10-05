@@ -11,6 +11,7 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(ModuleList modules, Ui ui) throws CustomException {
+        ui.printExitMessage();
         this.isExit = true;
     }
 }
