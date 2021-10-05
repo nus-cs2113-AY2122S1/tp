@@ -2,7 +2,6 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.lists.ExerciseList;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.parser.Parser;
 import seedu.duke.parser.TaskManager;
@@ -11,13 +10,11 @@ import seedu.duke.ui.Ui;
 import java.util.Scanner;
 
 public class Duke {
-    private final ExerciseList exerciseList;
-    private final WorkoutList workoutList;
+    private final WorkoutList workouts;
     private final Ui ui;
 
     public Duke() {
-        exerciseList = new ExerciseList();
-        workoutList = new WorkoutList();
+        workouts = new WorkoutList();
         ui = new Ui();
     }
 
