@@ -1,6 +1,13 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.*;
+import seedu.duke.command.Command;
+import seedu.duke.command.AddLessonCommand;
+import seedu.duke.command.AddTaskCommand;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.DoneCommand;
+import seedu.duke.command.FindCommand;
+import seedu.duke.command.ListCommand;
+
 import seedu.duke.exception.DukeException;
 
 public class Parser {
