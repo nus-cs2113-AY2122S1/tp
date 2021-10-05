@@ -36,4 +36,10 @@ public class Ui {
         System.out.print(LOGO);
         System.out.println(LINE);
     }
+
+    public void printMessage(String message) {
+        System.out.print(LINE);
+        System.out.println(message);
+        System.out.println(LINE);
+    }
 }
