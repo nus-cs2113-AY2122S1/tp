@@ -1,5 +1,7 @@
 package terminus.command;
 
+import terminus.common.CommonFormat;
+import terminus.common.Messages;
 import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.parser.MainCommandParser;
@@ -9,12 +11,12 @@ public class BackCommand extends Command {
 
     @Override
     public String getFormat() {
-        return "back";
+        return CommonFormat.COMMAND_BACK;
     }
 
     @Override
     public String getHelpMessage() {
-        return "Returns to the parent workspace.";
+        return Messages.MESSAGE_COMMAND_BACK;
     }
 
     @Override
