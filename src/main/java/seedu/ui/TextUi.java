@@ -53,4 +53,16 @@ public class TextUi {
                 "Please relocate the file and try again.";
         printBottomLineMessage(message);
     }
+
+    public static void addContactMessage(String contactName, int listSize) {
+        String message = "ConTech has added the specified contact: " + contactName + "\n" +
+                "You now have " + listSize + " contact(s).";
+        printDoubleLineMessage(message);
+    }
+
+    public static void exitMessage() {
+        String message = "ConTech will now shutdown.\n" +
+                "We hope you have enjoyed using it.";
+        printDoubleLineMessage(message);
+    }
 }
