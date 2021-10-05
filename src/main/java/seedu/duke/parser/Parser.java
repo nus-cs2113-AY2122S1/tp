@@ -55,7 +55,7 @@ public class Parser {
      * @return the Command to be executed to add the task or lesson
      * @throws DukeException the exception that occurs when the user enters a type to add other than "task" or "lesson"
      */
-    private Command parseAddCommand (String addInfo) throws DukeException {
+    private Command parseAddCommand(String addInfo) throws DukeException {
         int positionOfSpace = addInfo.indexOf(" ");
         String taskOrLesson = addInfo.substring(0, positionOfSpace);
         int positionOfDay = addInfo.indexOf(FLAG_DAY);
@@ -89,7 +89,8 @@ public class Parser {
 
     /**
      * Returns an executable Command object containing information about the type of tasks or lessons to list, and
-     * the time period of items to list
+     * the time period of items to list.
+     *
      * @param listInfo the remainder of the command following the word "list"
      * @return the Command to be executed to list items
      */
@@ -102,7 +103,8 @@ public class Parser {
     }
 
     /**
-     * Returns an executable Command object containing the index specified by the user of the task to mark as done
+     * Returns an executable Command object containing the index specified by the user of the task to mark as done.
+     *
      * @param doneIndex the index of the task to mark done
      * @return the Command to be executed to mark a task as done
      */
@@ -113,7 +115,7 @@ public class Parser {
 
     /**
      * Returns an executable Command object containing information about the type of tasks or lessons to delete, and if
-     * the user chooses to delete all tasks or lessons, the type of event to delete ("task" or "lesson")
+     * the user chooses to delete all tasks or lessons, the type of event to delete ("task" or "lesson").
      *
      * @param deleteInfo the remainder of the command following the word "delete"
      * @return the Command to be executed to delete a task / lesson / all tasks or lessons
