@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import terminus.command.ExitCommand;
 import terminus.command.Command;
 import terminus.command.HelpCommand;
+import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 
 public class CommandParser {
@@ -17,8 +18,7 @@ public class CommandParser {
     protected final HashMap<String, Command> commandMap;
 
     /**
-     * Initializes the commandMap.
-     * Adds some default commands to it.
+     * Initializes the commandMap. Adds some default commands to it.
      *
      * @param workspace The name of the workspace
      */
@@ -30,13 +30,15 @@ public class CommandParser {
     }
 
     /**
-     * Parses the command and its arguments
+     * Parses the command and its arguments.
      *
      * @param command The user input command
      * @return The Command object to be executed
-     * @throws InvalidCommandException if there is no command or empty command
+     * @throws InvalidCommandException  if there is no command or empty command
+     * @throws InvalidArgumentException Fails when arguments could not be parsed
      */
-    public Command parseCommand(String command) throws InvalidCommandException {
+
+    public Command parseCommand(String command) throws InvalidCommandException, InvalidArgumentException {
         String[] commandLine = command.strip().split(SPACE_DELIMITER, 2);
         String cmdName = commandLine[0];
         Command currentCommand = commandMap.get(cmdName.strip().toLowerCase(Locale.ROOT));
@@ -63,11 +65,11 @@ public class CommandParser {
      */
     public String[] getHelpMenu() {
         return commandMap.entrySet()
-            .stream()
-            .map((i) -> String.format("%s : %s\nFormat: %s\n",
-                i.getKey(),
-                i.getValue().getHelpMessage(),
-                i.getValue().getFormat()))
+                .stream()
+                .map((i) -> String.format("%s : %s\nFormat: %s\n",
+                        i.getKey(),
+                        i.getValue().getHelpMessage(),
+                        i.getValue().getFormat()))
                 .toArray(String[]::new);
     }
 

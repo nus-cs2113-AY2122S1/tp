@@ -33,7 +33,7 @@ public class CommandResult {
     }
 
     /**
-     * Contain the CommandParser that is required to switch workspaces
+     * Contain the CommandParser that is required to switch workspaces.
      *
      * @return The CommandParser object for the workspace or else null
      */
@@ -42,7 +42,7 @@ public class CommandResult {
     }
 
     /**
-     * Returns the result of the command execution
+     * Returns the result of the command execution.
      *
      * @return True if successful or else false
      */
@@ -51,7 +51,7 @@ public class CommandResult {
     }
 
     /**
-     * Tells the program to quit if the 'exit' command is sent
+     * Tells the program to quit if the 'exit' command is sent.
      *
      * @return true if 'exit' command is sent
      */

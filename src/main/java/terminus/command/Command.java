@@ -1,5 +1,6 @@
 package terminus.command;
 
+import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
@@ -29,18 +30,23 @@ public abstract class Command {
      * The function that parse the remaining arguments for the command.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
+     * @throws InvalidArgumentException Fail to parse arguments
      */
-    public abstract void parseArguments(String arguments);
+    public abstract void parseArguments(String arguments) throws InvalidArgumentException;
+
 
     /**
-     * A common function that needs to be run to execute the command.
-     * This function also updates the required changes and prints UI.
+     * A common function that needs to be run to execute the command. This function also updates the required changes
+     * and prints UI.
      *
-     * @param ui The Ui object to send messages to the users.
+     * @param ui     The Ui object to send messages to the users.
      * @param module The NusModule contain the list of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
-     * @throws InvalidCommandException Exception for when the command could not be found.
+     * @throws InvalidCommandException  Exception for when the command could not be found.
+     * @throws InvalidArgumentException Exception for when arguments parsing fails
      */
-    public abstract CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException;
+    public abstract CommandResult execute(Ui ui, NusModule module)
+            throws InvalidCommandException, InvalidArgumentException;
+
 
 }
