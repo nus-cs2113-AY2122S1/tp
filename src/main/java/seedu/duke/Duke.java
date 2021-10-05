@@ -22,6 +22,7 @@ public class Duke {
 
     public void startProgram() {
         boolean isExit = false;
+        // try {
         while (!isExit) {
             String userResponse = ui.readUserResponse();
             try {
@@ -34,6 +35,9 @@ public class Duke {
             // isExit = command.isExit();
             isExit = true;
         }
+        // } catch (DukeException e) {
+        //     ui.printMessage(e);
+        // }
     }
 
     public void run() {
