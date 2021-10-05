@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.task.TaskManager;
+
 /**
  * Represents a command.
  */
