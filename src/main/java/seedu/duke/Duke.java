@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.exception.DukeException;
 import seedu.duke.lesson.LessonList;
 import seedu.duke.parser.Parser;
 import seedu.duke.task.TaskList;
@@ -19,6 +20,7 @@ public class Duke {
 
     public void startProgram() {
         boolean isExit = false;
+        // try {
         while (!isExit) {
             String userResponse = ui.readUserResponse();
             // Command command = Parser.parse(userResponse);
@@ -26,6 +28,9 @@ public class Duke {
             // isExit = command.isExit();
             isExit = true;
         }
+        // } catch (DukeException e) {
+        //     ui.printMessage(e);
+        // }
     }
 
     public void run() {
