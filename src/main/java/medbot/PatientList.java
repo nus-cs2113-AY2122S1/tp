@@ -34,7 +34,7 @@ public class PatientList {
     }
 
     /**
-     * Replaces all values of the Patient data that is non-null in the new inputted data
+     * Replaces all values of the Patient data that is non-null in the new inputted data.
      *
      * @param oldPatientData the old patient data in the system
      * @param newPatientData the new patient data inputted by the user
@@ -58,7 +58,7 @@ public class PatientList {
     }
 
     /**
-     * Edits the specified fields on patient information with new values from the user
+     * Edits the specified fields on patient information with new values from the user.
      *
      * @param patientId      The patient with information to change
      * @param newPatientData the new Patient data to change to (except the null fields)

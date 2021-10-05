@@ -1,6 +1,13 @@
 package medbot;
 
-import medbot.command.*;
+import medbot.command.AddPatientCommand;
+import medbot.command.Command;
+import medbot.command.DeletePatientCommand;
+import medbot.command.ExitCommand;
+import medbot.command.ListPatientCommand;
+import medbot.command.ViewPatientCommand;
+import medbot.command.EditPatientCommand;
+
 import medbot.person.Patient;
 import medbot.person.Person;
 
@@ -69,7 +76,7 @@ public class Parser {
     }
 
     /**
-     * Parses the user input for the editPatientInformation command
+     * Parses the user input for the editPatientInformation command.
      *
      * @param userInput the preprocessed user input
      * @return the Edit Command
@@ -78,7 +85,7 @@ public class Parser {
     private static EditPatientCommand parseEditPatientCommand(String userInput) throws MedBotException {
         int patientId = 0;
         try {
-            patientId = Integer.parseInt(userInput.substring(4,6).strip());
+            patientId = Integer.parseInt(userInput.substring(4, 6).strip());
         } catch (NumberFormatException ne) {
             throw new MedBotException("Unable to parse number.");
         } catch (IndexOutOfBoundsException ie) {
@@ -94,16 +101,16 @@ public class Parser {
         for (int i = 1; i < parameters.length; i++) {
             updatePersonalInformation(patient, parameters[i]);
         }
-        return new EditPatientCommand(patientId,patient);
+        return new EditPatientCommand(patientId, patient);
     }
 
     /**
      * Sets all the information of the new patient data to null to avoid overwrite old information
-     * with blank space
+     * with blank space.
      *
      * @param person Person who all information will be set to null
      */
-    private static void preprocessEditPersonInformation(Person person){
+    private static void preprocessEditPersonInformation(Person person) {
         person.setName(null);
         person.setPhoneNumber(null);
         person.setEmailAddress(null);
@@ -129,12 +136,10 @@ public class Parser {
     }
 
 
-
-
     /**
      * Parses attributeString and modifies the corresponding attribute in person.
      *
-     * @param person Person whose personal information will be updated
+     * @param person          Person whose personal information will be updated
      * @param attributeString String containing an attribute specifier and the corresponding personal information
      * @throws MedBotException if the attributeString contains missing/invalid information
      */
@@ -221,7 +226,7 @@ public class Parser {
      * @param attributeString String containing the phone number to be parsed
      * @return String containing the phone number specified in attributeString
      * @throws MedBotException if the phone number is not specified,
-     *      has too many/few digits or contains unexpected characters
+     *                         has too many/few digits or contains unexpected characters
      */
     private static String parsePhoneNumber(String attributeString) throws MedBotException {
         String phoneNumberFormat = "[\\d]{8}";
