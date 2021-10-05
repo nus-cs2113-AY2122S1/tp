@@ -1,28 +1,19 @@
 package terminus.content;
 
-public class Link {
+public class Link extends Content {
 
-    private String description;
     private String day;
     private String startTime;
     private String zoomLink;
     final public static String TYPE = "Z";
 
-    final private String DISPLAY_MESSAGE = "%s, %s, %s, %s";
+    final private String DISPLAY_LINK_MESSAGE = "%s, %s, %s, %s";
 
-    public Link(String description, String day, String startTime, String zoomLink) {
-        this.description = description;
+    public Link(String name, String day, String startTime, String zoomLink) {
+        super(name);
         this.day = day;
         this.startTime = startTime;
         this.zoomLink = zoomLink;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getDay() {
@@ -49,7 +40,13 @@ public class Link {
         this.zoomLink = zoomLink;
     }
 
+    @Override
     public String getDisplayInfo() {
-        return String.format(DISPLAY_MESSAGE, description, day, startTime, zoomLink);
+        return String.format(DISPLAY_LINK_MESSAGE, this.name, day, startTime, zoomLink);
+    }
+
+    @Override
+    public String getViewDescription() {
+        return getDisplayInfo();
     }
 }

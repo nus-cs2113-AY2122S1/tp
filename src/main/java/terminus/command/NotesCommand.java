@@ -1,5 +1,7 @@
 package terminus.command;
 
+import terminus.common.CommonFormat;
+import terminus.common.Messages;
 import terminus.parser.NoteCommandParser;
 
 public class NotesCommand extends WorkspaceCommand {
@@ -12,11 +14,11 @@ public class NotesCommand extends WorkspaceCommand {
 
     @Override
     public String getFormat() {
-        return "notes";
+        return CommonFormat.COMMAND_NOTE;
     }
 
     @Override
     public String getHelpMessage() {
-        return "Move to notes workspace.";
+        return Messages.MESSAGE_COMMAND_NOTE;
     }
 }
