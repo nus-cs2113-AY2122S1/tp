@@ -31,7 +31,7 @@ public class Timetable {
         this.latestHour = DEFAULT_END;
     }
 
-    public void addClass(TimetableLesson timetableLesson) {
+    public void addLesson(TimetableLesson timetableLesson) {
 
         switch (timetableLesson.getDayOfWeek()) {
         case MONDAY:

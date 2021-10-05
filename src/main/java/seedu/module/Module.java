@@ -81,4 +81,7 @@ public class Module {
         return fullInfo;
     }
 
+    public boolean codeContains(String searchTerm) {
+        return moduleCode.toLowerCase().contains(searchTerm.toLowerCase());
+    }
 }
