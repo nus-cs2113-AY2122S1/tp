@@ -4,10 +4,11 @@ Type any of the following to get started:
 > exit
 > help
 > note
+> schedules
 
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
-[] >>> 
+[] >>>
 Type any of the following to get started:
 > add
 > exit
@@ -35,11 +36,12 @@ delete : delete an item from your list.
 Format: delete <item number>
 
 [note] >>> Command not found! Type 'help' for a list of commands.
-[note] >>> 
+[note] >>>
 Type any of the following to get started:
 > exit
 > help
 > note
+> schedules
 
 [] >>> note has been added!
 [] >>> 1. CS2113T
@@ -52,7 +54,6 @@ Content: Week 8 test
 [] >>> Error: Invalid numerical value provided.
 [] >>> Error: Content not found.
 [] >>> class terminus.content.Note 'CS2113T' has been deleted!
-[] >>> 
 [] >>> exit : Exits the program.
 Format: exit
 
@@ -61,5 +62,40 @@ Format: help
 
 note : Move to notes workspace.
 Format: note
+
+schedules : Move to schedules workspace.
+Format: schedules
+
+[] >>> schedules has been added!
+[] >>> schedules has been added!
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> 1. CS2113T Tutorial, Thursday, 10:00, zoom.nus.sg
+2. CS2113T Lecture, Friday, 16:00, zoom.com
+
+[] >>> Error: Content not found.
+[] >>> CS2113T Lecture, Friday, 16:00, zoom.com
+[] >>> Error: Content not found.
+[] >>> class terminus.content.Link 'CS2113T Tutorial' has been deleted!
+[] >>> 1. CS2113T Lecture, Friday, 16:00, zoom.com
+
+[] >>>
+Type any of the following to get started:
+> add
+> exit
+> help
+> view
+> back
+> delete
+
+[schedules] >>> 1. CS2113T Lecture, Friday, 16:00, zoom.com
+
+[schedules] >>> Error: Missing arguments.
+[schedules] >>> class terminus.content.Link 'CS2113T Lecture' has been deleted!
+[schedules] >>>
+Type any of the following to get started:
+> exit
+> help
+> note
+> schedules
 
 [] >>> Goodbye!

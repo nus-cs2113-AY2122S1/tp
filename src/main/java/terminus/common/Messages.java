@@ -9,6 +9,7 @@ public class Messages {
     public static final String MESSAGE_COMMAND_EXIT = "Exits the program.";
     public static final String MESSAGE_COMMAND_HELP = "Prints the help page.";
     public static final String MESSAGE_COMMAND_NOTE = "Move to notes workspace.";
+    public static final String MESSAGE_COMMAND_SCHEDULE = "Move to schedules workspace.";
 
     public static final String MESSAGE_RESPONSE_DELETE = "%s \'%s\' has been deleted!";
     public static final String MESSAGE_RESPONSE_ADD = "%s has been added!";
