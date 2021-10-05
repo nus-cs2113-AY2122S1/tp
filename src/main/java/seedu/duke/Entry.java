@@ -22,7 +22,7 @@ public class Entry {
             Parser.makeTodoTask(trainings, entry);
             break;
         case LIST_KEYWORD:
-            Ui.printList(tasks);
+            Ui.printList(entry);
             break;
         case ADD_MEMBER_KEYWORD:
             Parser.addItem(members, entry);
@@ -35,7 +35,7 @@ public class Entry {
         case DELETE_TRAINING_KEYWORD:
             Parser.deleteItem(trainings, entry);
         case FIND_KEYWORD:
-            Parser.findMatching(tasks, entry);
+            Parser.findMatching(members, entry);
             break;
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();

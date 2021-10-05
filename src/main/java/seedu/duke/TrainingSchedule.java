@@ -1,2 +1,4 @@
-package seedu.duke;public class TrainingSchedule {
+package seedu.duke;
+public class TrainingSchedule {
+
 }
