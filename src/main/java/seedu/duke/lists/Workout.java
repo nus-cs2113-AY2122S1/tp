@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * Adding, deleting and other operations related to the exercises will be executed from here.
+ * List of exercises
  */
 public class Workout {
     private String description;
