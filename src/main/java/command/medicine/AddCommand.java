@@ -24,7 +24,7 @@ public class AddCommand extends Command {
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE, CommandParameters.QUANTITY,
-            CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
+                CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
 
         if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, CommandSyntax.ADD_COMMAND)) {
             return;
@@ -36,7 +36,6 @@ public class AddCommand extends Command {
         String expiryToAdd = parameters.get(CommandParameters.EXPIRY_DATE);
         String descriptionToAdd = parameters.get(CommandParameters.DESCRIPTION);
         String maxQuantityToAdd = parameters.get(CommandParameters.MAX_QUANTITY);
-
         for (String parameter : parameters.keySet()) {
             switch (parameter) {
             case CommandParameters.NAME:
@@ -71,7 +70,7 @@ public class AddCommand extends Command {
                 break;
             default:
                 ui.printInvalidParameter(parameter, CommandSyntax.ADD_COMMAND);
-                break;
+                return;
             }
         }
 
@@ -79,11 +78,30 @@ public class AddCommand extends Command {
             double price = Double.parseDouble(priceToAdd);
             int quantity = Integer.parseInt(quantityToAdd);
             int maxQuantity = Integer.parseInt(maxQuantityToAdd);
-            Date dateObj = DateParser.stringToDate(expiryToAdd);
-            Stock stock = new Stock(nameToAdd, price, quantity, dateObj, descriptionToAdd, maxQuantity);
-            medicines.add(stock);
-            ui.print("Medication added: " + nameToAdd);
-            ui.printMedicine(stock);
+            Date formatExpiry = DateParser.stringToDate(expiryToAdd);
+            Stock stock = new Stock(nameToAdd, price, quantity, formatExpiry, descriptionToAdd, maxQuantity);
+            for (Medicine medicine : medicines) {
+                Stock existingStock = (Stock) medicine;
+                String existingName = existingStock.getMedicineName().toUpperCase();
+                Date existingExpiry = existingStock.getExpiry();
+                String existingDescription = existingStock.getDescription();
+                int existingMaxQuantity = existingStock.getMaxQuantity();
+                if ((existingName.equals(nameToAdd.toUpperCase())) & ((existingExpiry.equals(formatExpiry)))) {
+                    ui.print("You already have existing stocks! Use update instead");
+                    return;
+                }
+                if ((existingName.equals(nameToAdd.toUpperCase()))) {
+                    Stock stockToAdd = new Stock(nameToAdd, price, quantity, formatExpiry, existingDescription,
+                            existingMaxQuantity);
+                    medicines.add(stockToAdd);
+                    ui.print("Medication added: " + nameToAdd);
+                    ui.printMedicine(stockToAdd);
+                    return;
+                }
+                medicines.add(stock);
+                ui.print("Medication added: " + nameToAdd);
+                ui.printMedicine(stock);
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
