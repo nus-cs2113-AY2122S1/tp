@@ -29,4 +29,9 @@ public class AddCommand extends Command {
             break;
         }
     }
+
+    @Override
+    public void executeList(ArrayList<String> parameters) {
+        // blank as addCommand will not use executeList
+    }
 }

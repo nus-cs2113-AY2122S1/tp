@@ -25,7 +25,7 @@ public class DishList {
         return -1;
     }
 
-    private static void list() {
+    public static void list() {
         System.out.println("Here are the dishes you have: ");
         for (int i=0; i<dishList.size(); i++) {
             String currentDish = dishList.get(i).getDishName();

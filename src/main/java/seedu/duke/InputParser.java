@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.CommandNames;
+import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.CommandNotAvailableException;
 
 import java.util.ArrayList;
@@ -24,22 +25,26 @@ public class InputParser {
         switch (inputCommand) {
 
         //No parameter commands check if there are params and if so error(Maybe not needed)
-        case TEST:
-            if (!parameterString.isBlank()) {
+            case TEST:
+                if (!parameterString.isBlank()) {
                 System.out.println("Extra params, do not include next time");
-            }
-            return null;
+                }
+                return null;
 
         //One parameter commands just add the parameterString
 
 
         //Multi param is same as one but will need to split further
-        case ADD:
-            parameters.addAll(List.of(parameterString.split(" ", 3)));
-            break;
+            case ADD:
+                parameters.addAll(List.of(parameterString.split(" ", 3)));
+                break;
 
-        default:
-            break;
+            case LIST:
+                parameters.addAll(List.of(parameterString.split(" ", 1)));
+                break;
+
+            default:
+                break;
         }
 
         return parameters;
