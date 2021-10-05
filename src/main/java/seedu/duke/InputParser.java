@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.command.CommandNames;
-import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.CommandNotAvailableException;
 
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class InputParser {
     public CommandNames getCommandName(String input) throws CommandNotAvailableException {
-        for (CommandNames command: CommandNames.values()) {
+        for (CommandNames command : CommandNames.values()) {
             if (input.startsWith(command.getName())) {
                 return command;
             }
@@ -25,26 +24,35 @@ public class InputParser {
         switch (inputCommand) {
 
         //No parameter commands check if there are params and if so error(Maybe not needed)
-            case TEST:
-                if (!parameterString.isBlank()) {
+        case TEST:
+            if (!parameterString.isBlank()) {
                 System.out.println("Extra params, do not include next time");
-                }
-                return null;
+            }
+            return null;
 
         //One parameter commands just add the parameterString
-
+        case ADD_DISH:
+            parameters.add(parameterString);
+            break;
 
         //Multi param is same as one but will need to split further
-            case ADD:
-                parameters.addAll(List.of(parameterString.split(" ", 3)));
-                break;
+        case LIST:
+            parameters.addAll(List.of(parameterString.split(" ", 1)));
+            break;
 
-            case LIST:
-                parameters.addAll(List.of(parameterString.split(" ", 1)));
-                break;
+        //Following commands of format number, name
+        case ADD_INGR:
+        case ADD_DISH_WASTE:
+        case ADD_INGR_WASTE:
+            parameters.addAll(List.of(parameterString.split(" ", 2)));
+            break;
 
-            default:
-                break;
+        case ADD_CONSTITUENT:
+            //TODO trim inputs
+            parameters.addAll(List.of(parameterString.split("/", 2)));
+            break;
+        default:
+            break;
         }
 
         return parameters;

@@ -21,6 +21,7 @@ public class ListCommand extends Command {
 
             case "ingr":
                 IngredientList.list();
+                break;
 
             default:
                 System.out.println("____________________________________________");
