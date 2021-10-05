@@ -16,7 +16,7 @@ public enum DetailType {
 
     private int index;
 
-    private DetailType(int index) {
+    DetailType(int index) {
         this.index = index;
     }
 
