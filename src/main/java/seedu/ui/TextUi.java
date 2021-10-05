@@ -22,6 +22,10 @@ public class TextUi {
         initMessage();
     }
 
+    public String getUserInput() {
+        return scanner.nextLine();
+    }
+
     // Used for print messages after user inputs
     private static void printDoubleLineMessage(String message) {
         System.out.println(
