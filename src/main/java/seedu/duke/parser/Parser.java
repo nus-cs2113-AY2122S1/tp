@@ -97,7 +97,8 @@ public class Parser {
     private Command parseListCommand(String listInfo) {
         int positionOfSpace = listInfo.indexOf(" ");
         String listType = listInfo.substring(0, positionOfSpace); // either all, task or lesson
-        String period = listInfo.substring(positionOfSpace + 1); // today, week, tomorrow, mon, tue, wed, thu, fri, sat, or sun
+        String period = listInfo.substring(positionOfSpace + 1); // today, week, tomorrow, mon, tue, wed, thu, fri,
+        // sat, or sun
 
         return new ListCommand(listType, period);
     }
@@ -119,8 +120,7 @@ public class Parser {
      *
      * @param deleteInfo the remainder of the command following the word "delete"
      * @return the Command to be executed to delete a task / lesson / all tasks or lessons
-     * @throws DukeException the exception thrown when the user either enters invalid input after "delete all" (not
-     * "task" or "lesson") or enters an invalid type to delete
+     * @throws DukeException the exception thrown when the user either enters invalid input to delete
      */
     private Command parseDeleteCommand(String deleteInfo) throws DukeException {
         int positionOfSpace = deleteInfo.indexOf(" ");
