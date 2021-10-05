@@ -33,7 +33,8 @@ public class CommandResult {
     }
 
     /**
-     * Contain the CommandParser that is required to switch workspaces.
+     * Returns the CommandParser that is required to switch workspaces.
+     * If there isn't it s null.
      *
      * @return The CommandParser object for the workspace or else null
      */
@@ -51,14 +52,19 @@ public class CommandResult {
     }
 
     /**
-     * Tells the program to quit if the 'exit' command is sent.
+     * Returns the result to exit or not.
      *
-     * @return true if 'exit' command is sent
+     * @return True if 'exit' command is sent
      */
     public boolean isExit() {
         return isExit;
     }
 
+    /**
+     * Returns the error message as a String.
+     *
+     * @return The String object containing the error
+     */
     public String getErrorMessage() {
         return errorMessage;
     }

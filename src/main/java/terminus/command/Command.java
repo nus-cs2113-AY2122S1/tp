@@ -13,21 +13,21 @@ public abstract class Command {
     }
 
     /**
-     * Contains the format for the command.
+     * Returns the format for the command.
      *
      * @return The String object holding the appropriate format for the command.
      */
     public abstract String getFormat();
 
     /**
-     * Contains the description for the command.
+     * Returns the description for the command.
      *
      * @return The String object containing the description for this command.
      */
     public abstract String getHelpMessage();
 
     /**
-     * The function that parse the remaining arguments for the command.
+     * Parses remaining arguments for the command.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
      * @throws InvalidArgumentException Fail to parse arguments
@@ -36,8 +36,8 @@ public abstract class Command {
 
 
     /**
-     * A common function that needs to be run to execute the command. This function also updates the required changes
-     * and prints UI.
+     * Executes the command.
+     * Prints the required result to the Ui.
      *
      * @param ui     The Ui object to send messages to the users.
      * @param module The NusModule contain the list of all notes and schedules.

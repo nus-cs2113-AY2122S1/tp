@@ -21,8 +21,8 @@ public abstract class WorkspaceCommand extends Command {
     }
 
     /**
-     * A custom execute for command that switch workplaces. Runs any additional commands in arguments but will change
-     * works space if none is specified
+     * Returns the Command Result after execution.
+     * If no other arguments, returns the workspace.
      *
      * @param ui     The Ui object to send messages to the users.
      * @param module The NusModule contain the list of all notes and schedules.

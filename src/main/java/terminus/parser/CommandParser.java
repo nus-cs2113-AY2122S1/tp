@@ -59,7 +59,7 @@ public class CommandParser {
     }
 
     /**
-     * Get the help menu for the current workspace.
+     * Returns the list of items in the help menu.
      *
      * @return Array of strings contain the help messages
      */
@@ -73,10 +73,21 @@ public class CommandParser {
                 .toArray(String[]::new);
     }
 
+    /**
+     * Adds a command to the commandMap.
+     *
+     * @param cmdName The name of the command
+     * @param command The actual command object
+     */
     protected void addCommand(String cmdName, Command command) {
         commandMap.put(cmdName, command);
     }
 
+    /**
+     * Returns the name of the current workspace.
+     *
+     * @return The name of the workspace
+     */
     public String getWorkspace() {
         return workspace;
     }
