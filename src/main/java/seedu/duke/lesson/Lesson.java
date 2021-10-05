@@ -25,6 +25,10 @@ public class Lesson {
         return dayOfTheWeek;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     @Override
     public String toString() {
         return "[L]" + "    " + "Title: " + title + " (Start: " + startTime + ") " + "(End: " + endTime + ")";
