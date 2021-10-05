@@ -28,7 +28,7 @@ public class Duke {
             try {
                 Command command = parser.parse(userResponse);
             } catch (DukeException e) {
-                e.getMessage(); // error while parsing input
+                e.printStackTrace(); // error while parsing input
             }
             // Command command = Parser.parse(userResponse);
             // command.execute(ui, taskList, lessonList);
