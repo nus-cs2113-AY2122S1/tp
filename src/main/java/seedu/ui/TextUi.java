@@ -51,13 +51,6 @@ public class TextUi {
         printBottomLineMessage(message);
     }
 
-    public static void fileErrorMessage(String contactFilePath) {
-        String message = "ConTech is unfortunately unable to create a file for your\n" +
-                " save file at " + contactFilePath + ".\n" +
-                "Please relocate the file and try again.";
-        printBottomLineMessage(message);
-    }
-
     public static void addContactMessage(String contactName, int listSize) {
         String message = "ConTech has added the specified contact: " + contactName + "\n" +
                 "You now have " + listSize + " contact(s).";
@@ -67,6 +60,20 @@ public class TextUi {
     public static void exitMessage() {
         String message = "ConTech will now shutdown.\n" +
                 "We hope you have enjoyed using it.";
+        printDoubleLineMessage(message);
+    }
+
+    // Error Messages
+    public static void fileErrorMessage(String contactFilePath) {
+        String message = "ConTech is unfortunately unable to access / create a\n" +
+                " save file at " + contactFilePath + ".\n" +
+                "Please relocate the file and try again.";
+        printBottomLineMessage(message);
+    }
+
+    public static void invalidCommandMessage() {
+        String message = "ConTech is unable to understand your request.\n" +
+                "Please try again with a valid command.";
         printDoubleLineMessage(message);
     }
 }
