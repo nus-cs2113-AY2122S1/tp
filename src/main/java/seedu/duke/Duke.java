@@ -5,8 +5,8 @@ import seedu.module.Module;
 import seedu.online.NusMods;
 import seedu.parser.CommandParser;
 import seedu.storage.ModStorage;
-import seedu.timetable.Class;
-import seedu.timetable.TimeTable;
+import seedu.timetable.Timetable;
+import seedu.timetable.TimetableLesson;
 import seedu.ui.TextUi;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class Duke {
     private static String path = "data/Modules.json";
-    public static TimeTable timetable = new TimeTable(1);
+    public static Timetable timetable = new Timetable(1);
     public static CommandParser commandParser = new CommandParser();
     public ModStorage modStorage;
 
@@ -33,10 +33,10 @@ public class Duke {
     private void setupTT() {
         try {
             Module module = fetchMod("CG2271");
-            timetable.addClass(new Class(module, 1, module.getLesson(1, 1)));
-            timetable.addClass(new Class(module, 1, module.getLesson(1, 5)));
+            timetable.addLesson(new TimetableLesson(module, 1, module.getLesson(1, 1)));
+            timetable.addLesson(new TimetableLesson(module, 1, module.getLesson(1, 5)));
             Module u = fetchMod("EG2401A");
-            timetable.addClass(new Class(u, 1, module.getLesson(1, 3)));
+            timetable.addLesson(new TimetableLesson(u, 1, module.getLesson(1, 3)));
         } catch (IOException e) {
             TextUi.printErrorMessage();
         }

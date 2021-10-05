@@ -23,7 +23,11 @@ public class TextUi {
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
         System.out.println();
-        return in.nextLine();
+        String input = in.nextLine();
+        while (input.isBlank()) {
+            input = in.nextLine();
+        }
+        return input;
     }
 
     public static void printExitMessage() {

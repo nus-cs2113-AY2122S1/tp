@@ -1,1 +1,4 @@
-James Gosling
+search CG
+show CS2113T
+timetable
+exit
