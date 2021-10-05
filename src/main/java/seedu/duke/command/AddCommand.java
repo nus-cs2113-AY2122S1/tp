@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-import seedu.duke.DishList;
+import seedu.duke.*;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,15 @@ public class AddCommand extends Command {
             DishList.add(parameters.get(1));
             System.out.println("____________________________________________");
             break;
+
+        case "ingr":
+            System.out.println("____________________________________________");
+            String ingredientWeight = parameters.get(2);
+            double ingredientWeightValue = Double.parseDouble(ingredientWeight);
+            IngredientList.add(parameters.get(1), ingredientWeightValue);
+            System.out.println("____________________________________________");
+            break;
+
         default:
             System.out.println("____________________________________________");
             System.out.println("Invalid input");
