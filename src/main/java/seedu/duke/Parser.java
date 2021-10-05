@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class Parser {
 
-    protected ArrayList<String> ingredientsList;
-    protected ArrayList<String> stepsList;
+    protected ArrayList<String> ingredientsList = new ArrayList<>();
+    protected ArrayList<String> stepsList = new ArrayList<>();
     protected String nameRecipe;
 
 
