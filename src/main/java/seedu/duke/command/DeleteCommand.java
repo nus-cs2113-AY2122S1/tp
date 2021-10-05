@@ -1,5 +1,9 @@
 package seedu.duke.command;
 
+import seedu.duke.lesson.LessonList;
+import seedu.duke.task.TaskList;
+import seedu.duke.ui.Ui;
+
 public class DeleteCommand extends Command {
     private String deleteType;
     private int index;
@@ -13,5 +17,9 @@ public class DeleteCommand extends Command {
         this.deleteType = deleteType;
         this.index = index;
         this.deleteAllType = deleteAllType;
+    }
+
+    public void execute(Ui ui, TaskList tasklist, LessonList lessonList) {
+
     }
 }

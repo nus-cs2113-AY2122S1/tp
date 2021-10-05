@@ -46,6 +46,14 @@ public class Task {
         return isDone ? "[X]" : "[ ]";
     }
 
+    public String getInformation() {
+        return information;
+    }
+
+    public void setDone() {
+        isDone = true;
+    }
+
     @Override
     public String toString() {
         return "[T]" + getDoneSymbol() + " " + "Title: " + title
