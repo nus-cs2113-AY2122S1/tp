@@ -1,5 +1,6 @@
 package terminus.command;
 
+import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
@@ -15,8 +16,9 @@ public abstract class Command {
 
     public abstract String getHelpMessage();
 
-    public abstract void parseArguments(String arguments);
+    public abstract void parseArguments(String arguments) throws InvalidArgumentException;
 
-    public abstract CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException;
+    public abstract CommandResult execute(Ui ui, NusModule module)
+            throws InvalidCommandException, InvalidArgumentException;
 
 }

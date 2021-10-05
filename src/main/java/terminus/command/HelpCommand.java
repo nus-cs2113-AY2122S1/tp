@@ -1,5 +1,7 @@
 package terminus.command;
 
+import terminus.common.CommonFormat;
+import terminus.common.Messages;
 import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
@@ -15,12 +17,12 @@ public class HelpCommand extends Command {
 
     @Override
     public String getFormat() {
-        return "help";
+        return CommonFormat.COMMAND_HELP;
     }
 
     @Override
     public String getHelpMessage() {
-        return "Prints the help page.";
+        return Messages.MESSAGE_COMMAND_HELP;
     }
 
     @Override

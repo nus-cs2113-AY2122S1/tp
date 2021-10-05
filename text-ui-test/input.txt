@@ -1,10 +1,17 @@
 invalid
-notes test c f a
-notes invalid
-notes
+note invalid
+note
 help
 invalid
-test c f a
 back
+note add "CS2113T" "Week 8 test"
+note view
+note view aa
+note view 2
+note view 1
+note delete aa
+note delete 2
+note delete 1
+note view
 help
 exit

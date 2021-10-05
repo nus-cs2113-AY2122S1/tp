@@ -3,45 +3,63 @@ Welcome to TermiNUS!
 Type any of the following to get started:
 > exit
 > help
-> notes
+> note
 
 [] >>> Command not found! Type 'help' for a list of commands.
-[] >>> c f a
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> 
 Type any of the following to get started:
+> add
 > exit
 > help
-> test
+> view
 > back
+> delete
 
-[notes] >>> exit : Exits the program.
+[note] >>> add : add an item into your list.
+Format: add "{item name}" "{item content}"
+
+exit : Exits the program.
 Format: exit
 
 help : Prints the help page.
 Format: help
 
-test : This is testing command.
-Format: test
+view : view all items or view an individual items
+Format: view {item number}
 
 back : Returns to the parent workspace.
 Format: back
 
-[notes] >>> Command not found! Type 'help' for a list of commands.
-[notes] >>> c f a
-[notes] >>> 
+delete : delete an item from your list.
+Format: delete <item number>
+
+[note] >>> Command not found! Type 'help' for a list of commands.
+[note] >>> 
 Type any of the following to get started:
 > exit
 > help
-> notes
+> note
 
+[] >>> note has been added!
+[] >>> 1. CS2113T
+
+[] >>> Error: Invalid numerical value provided.
+[] >>> Error: Content not found.
+[] >>> Name: CS2113T
+Content: Week 8 test
+
+[] >>> Error: Invalid numerical value provided.
+[] >>> Error: Content not found.
+[] >>> class terminus.content.Note 'CS2113T' has been deleted!
+[] >>> 
 [] >>> exit : Exits the program.
 Format: exit
 
 help : Prints the help page.
 Format: help
 
-notes : Move to notes workspace.
-Format: notes
+note : Move to notes workspace.
+Format: note
 
 [] >>> Goodbye!
