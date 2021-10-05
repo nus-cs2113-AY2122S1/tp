@@ -34,7 +34,7 @@ public class CommandResult {
 
     /**
      * Returns the CommandParser that is required to switch workspaces.
-     * If there isn't it s null.
+     * If additionalData will be null.
      *
      * @return The CommandParser object for the workspace or else null
      */

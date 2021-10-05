@@ -18,7 +18,8 @@ public class CommandParser {
     protected final HashMap<String, Command> commandMap;
 
     /**
-     * Initializes the commandMap. Adds some default commands to it.
+     * Initializes the commandMap.
+     * Adds some default commands to it.
      *
      * @param workspace The name of the workspace
      */
