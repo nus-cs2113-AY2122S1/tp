@@ -1,48 +1,80 @@
 package seedu.duke.parser;
 
+import seedu.duke.command.Command;
+import seedu.duke.task.TaskManager;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Parser {
 
-    /**
-     * Parses a {@code userInput} and returns a {@code Command} to be executed.
-     *
-     * @param taskManager {@code TaskManager} object that contains the tasklist to be executed upon.
-     * @param userInput   full raw user input to determine the {@code Command} to be executed.
-     * @return {@code Command} to be executed.
-     */
+    private static final String HELP_COMMAND = "help";
+    private static final String ADD_COMMAND = "add";
+    private static final String LIST_COMMAND = "list";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String EXIT_COMMAND = "bye";
 
-    /*
-    public Command parseCommand(TaskManager taskManager, String userInput) {
+    private static final String FLAG_REGEX = "^--\\w+";
+
+    public static String printCommandOptions(Map<String, String> commandOptions) {
+
+        String flagsToArguments = "";
+
+        for (String flag: commandOptions.keySet()){
+            flagsToArguments += flag + " = " + commandOptions.get(flag) + "\n";
+        }
+
+        System.out.println(flagsToArguments);
+
+        return flagsToArguments;
+    }
+
+    public static Map getCommandOptions(String commandArguments) {
+
+        Map<String, String> flagsToArguments = new HashMap<>();
+        String[] tokens = commandArguments.split("\\s+");
+        String mainArgument = "";
+
+        for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i].matches(FLAG_REGEX)) {
+                flagsToArguments.put(tokens[i], tokens[i + 1]);
+                i++;
+            } else {
+                mainArgument += tokens[i] + " ";
+            }
+        }
+
+        flagsToArguments.put("mainArgument", mainArgument.trim());
+
+        return flagsToArguments;
+    }
+
+    public static String parseCommand(String userInput) {
+
         String[] inputArguments = userInput.split("\\s+", 2);
         String command = inputArguments[0];
-        String commandArguments = "";
+        Map<String, String> commandOptions = new HashMap<>();
 
         if (inputArguments.length == 2) {
-            commandArguments = inputArguments[1];
+            commandOptions = getCommandOptions(inputArguments[1]);
         }
 
+        String mapFlagsToArguments = printCommandOptions(commandOptions);
+
+
         switch (command) {
-        case TERMINATE_CMD:
-            return new TerminateCommand();
-        case HELP_CMD:
-            return new HelpCommand();
-        case LIST_CMD:
-            return new ListCommand(taskManager);
-        case ADD_TODO_CMD:
-            return new AddToDoCommand(taskManager, commandArguments);
-        case ADD_DEADLINE_CMD:
-            return new AddDeadlineCommand(taskManager, commandArguments);
-        case ADD_EVENT_CMD:
-            return new AddEventCommand(taskManager, commandArguments);
-        case SET_TASK_DONE_CMD:
-            return new SetTaskDoneCommand(taskManager, commandArguments);
-        case DELETE_TASK_CMD:
-            return new DeleteTaskCommand(taskManager, commandArguments);
-        case FIND_TASK_CMD:
-            return new FindTaskCommand(taskManager, commandArguments);
+        case HELP_COMMAND:
+        case ADD_COMMAND:
+        case LIST_COMMAND:
+        case DELETE_COMMAND:
+        case EXIT_COMMAND:
         default:
-            return new InvalidCommand();
         }
-    }*/
+
+
+        return userInput;
+    }
 
 
 }
