@@ -95,7 +95,7 @@ public class Parser {
             String lessonEndTime = addInfo.substring(positionOfEndTime + SEPARATING_SPACE).strip();
             return new AddLessonCommand(title, dayOfLesson, lessonStartTime, lessonEndTime);
         default:
-            throw new DukeException(Message.ERROR_TYPE_TO_ADD_NOT_SPECIFIED);
+            throw new DukeException(Message.ERROR_NO_ADD_TYPE);
         }
     }
 
@@ -148,10 +148,10 @@ public class Parser {
             if (deleteAllType.equals(TASK_KEYWORD) || deleteAllType.equals(LESSON_KEYWORD)) {
                 return new DeleteCommand(deleteType, 0, deleteAllType);
             } else {
-                throw new DukeException(Message.ERROR_TYPE_TO_DELETE_NOT_SPECIFIED);
+                throw new DukeException(Message.ERROR_NO_DELETE_TYPE);
             }
         default:
-            throw new DukeException(Message.ERROR_TYPE_TO_DELETE_NOT_SPECIFIED);
+            throw new DukeException(Message.ERROR_NO_DELETE_TYPE);
         }
     }
 

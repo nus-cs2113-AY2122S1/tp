@@ -10,9 +10,9 @@ public final class Message {
     public static final String ERROR_NUMBER_FORMAT =
             "Index is not a number";
 
-    public static final String ERROR_TYPE_TO_ADD_NOT_SPECIFIED =
+    public static final String ERROR_NO_ADD_TYPE =
             "Please specify if you are adding task or lesson";
 
-    public static final String ERROR_TYPE_TO_DELETE_NOT_SPECIFIED =
+    public static final String ERROR_NO_DELETE_TYPE =
             "Please specify if you are deleting task or lesson";
 }
