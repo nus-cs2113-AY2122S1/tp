@@ -11,11 +11,13 @@ public class Duke {
     private final Ui ui;
     private TaskList taskList;
     private LessonList lessonList;
+    private Parser parser;
 
     public Duke() {
         ui = new Ui();
         lessonList = new LessonList();
         taskList = new TaskList();
+        parser = new Parser();
     }
 
     public void startProgram() {
@@ -23,6 +25,11 @@ public class Duke {
         // try {
         while (!isExit) {
             String userResponse = ui.readUserResponse();
+            try {
+                Command command = parser.parse(userResponse);
+            } catch (DukeException e) {
+                e.printStackTrace(); // error while parsing input
+            }
             // Command command = Parser.parse(userResponse);
             // command.execute(ui, taskList, lessonList);
             // isExit = command.isExit();
