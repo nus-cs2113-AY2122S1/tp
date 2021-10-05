@@ -1,7 +1,5 @@
 package seedu.duke.command;
 
-import javax.swing.text.DefaultEditorKit;
-
 public class DeleteCommand extends Command {
     private String deleteType;
     private int index;

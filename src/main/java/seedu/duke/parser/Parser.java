@@ -43,7 +43,7 @@ public class Parser {
         case COMMAND_FIND:
             return parseFindCommand(commandInfo);
         default:
-            throw new DukeException();
+            throw new DukeException("");
         }
     }
 
@@ -83,7 +83,7 @@ public class Parser {
             String lessonEndTime = addInfo.substring(positionOfEndTime + SEPARATING_SPACE).strip();
             return new AddLessonCommand(title, dayOfLesson, lessonStartTime, lessonEndTime);
         default:
-            throw new DukeException();
+            throw new DukeException("");
         }
     }
 
@@ -136,10 +136,10 @@ public class Parser {
             if (deleteAllType.equals(TASK_KEYWORD) || deleteAllType.equals(LESSON_KEYWORD)) {
                 return new DeleteCommand(deleteType, 0, deleteAllType);
             } else {
-                throw new DukeException();
+                throw new DukeException("");
             }
         default:
-            throw new DukeException();
+            throw new DukeException("");
         }
     }
 

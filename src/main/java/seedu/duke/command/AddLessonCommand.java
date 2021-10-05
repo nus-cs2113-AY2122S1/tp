@@ -1,13 +1,13 @@
 package seedu.duke.command;
 
 public class AddLessonCommand extends Command {
-    private String lessonDescription;
+    private String title;
     private String dayOfTheWeek;
     private String startTime;
     private String endTime;
 
-    public AddLessonCommand(String lessonDescription, String dayOfTheWeek, String startTime, String endTime) {
-        this.lessonDescription = lessonDescription;
+    public AddLessonCommand(String title, String dayOfTheWeek, String startTime, String endTime) {
+        this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;
         this.startTime = startTime;
         this.endTime = endTime;
