@@ -1,11 +1,6 @@
 package medbot;
 
-import medbot.command.AddPatientCommand;
-import medbot.command.Command;
-import medbot.command.DeletePatientCommand;
-import medbot.command.ExitCommand;
-import medbot.command.ListPatientCommand;
-import medbot.command.ViewPatientCommand;
+import medbot.command.*;
 import medbot.person.Patient;
 import medbot.person.Person;
 
@@ -40,6 +35,10 @@ public class Parser {
         if (userInput.startsWith(COMMAND_EXIT)) {
             return new ExitCommand();
         }
+        if (userInput.startsWith(COMMAND_EDIT)) {
+            return parseEditPatientCommand(userInput);
+        }
+
 
         throw new MedBotException("Unable to parse command.");
     }
@@ -69,6 +68,49 @@ public class Parser {
         return new DeletePatientCommand(patientId);
     }
 
+    /**
+     * Parses the user input for the editPatientInformation command
+     *
+     * @param userInput the preprocessed user input
+     * @return the Edit Command
+     * @throws MedBotException when the parameters given cannot be parsed
+     */
+    private static EditPatientCommand parseEditPatientCommand(String userInput) throws MedBotException {
+        int patientId = 0;
+        try {
+            patientId = Integer.parseInt(userInput.substring(4,6).strip());
+        } catch (NumberFormatException ne) {
+            throw new MedBotException("Unable to parse number.");
+        } catch (IndexOutOfBoundsException ie) {
+            throw new MedBotException("Patient ID not specified.");
+        }
+        String processedInput = preprocessMultiAttributeInput(userInput);
+        String[] parameters = processedInput.split("\\|");
+        if (parameters.length == 1) {
+            throw new MedBotException("No parameters given");
+        }
+        Patient patient = new Patient();
+        preprocessEditPersonInformation(patient);
+        for (int i = 1; i < parameters.length; i++) {
+            updatePersonalInformation(patient, parameters[i]);
+        }
+        return new EditPatientCommand(patientId,patient);
+    }
+
+    /**
+     * Sets all the information of the new patient data to null to avoid overwrite old information
+     * with blank space
+     *
+     * @param person Person who all information will be set to null
+     */
+    private static void preprocessEditPersonInformation(Person person){
+        person.setName(null);
+        person.setPhoneNumber(null);
+        person.setEmailAddress(null);
+        person.setIcNumber(null);
+        person.setResidentialAddress(null);
+    }
+
     private static String preprocessInput(String userInput) {
         return userInput.stripLeading().replace("|", "");
     }
@@ -85,6 +127,8 @@ public class Parser {
         }
         return new AddPatientCommand(patient);
     }
+
+
 
 
     /**
