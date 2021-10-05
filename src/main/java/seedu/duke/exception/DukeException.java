@@ -12,5 +12,5 @@ public class DukeException extends Exception {
         String message = getLocalizedMessage();
         return (message != null) ? message : Message.ERROR_UNKNOWN;
     }
-
 }
+
