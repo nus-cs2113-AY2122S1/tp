@@ -13,6 +13,10 @@ public class ContactList {
         contacts.add(contact);
     }
 
+    public Contact getContactAtIndex(int index) {
+        return contacts.get(index);
+    }
+
     public int getListSize() {
         return contacts.size();
     }
