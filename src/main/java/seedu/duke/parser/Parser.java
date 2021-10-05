@@ -5,10 +5,12 @@ import seedu.duke.command.AddLessonCommand;
 import seedu.duke.command.AddTaskCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.DoneCommand;
+import seedu.duke.command.ExitCommand;
 import seedu.duke.command.FindCommand;
 import seedu.duke.command.ListCommand;
 
 import seedu.duke.exception.DukeException;
+import seedu.duke.ui.Message;
 
 public class Parser {
     public static final String COMMAND_ADD = "add";
@@ -19,6 +21,7 @@ public class Parser {
     public static final String COMMAND_DONE = "done";
     public static final String COMMAND_DELETE = "delete";
     public static final String COMMAND_FIND = "find";
+    public static final String COMMAND_EXIT = "exit";
     public static final String FLAG_DAY = "-d";
     public static final String FLAG_INFORMATION = "-i";
     public static final String FLAG_START_TIME = "-s";
@@ -49,8 +52,10 @@ public class Parser {
             return parseDeleteCommand(commandInfo);
         case COMMAND_FIND:
             return parseFindCommand(commandInfo);
+        case COMMAND_EXIT:
+            return new ExitCommand();
         default:
-            throw new DukeException("");
+            throw new DukeException(Message.ERROR_UNKNOWN);
         }
     }
 
@@ -90,7 +95,7 @@ public class Parser {
             String lessonEndTime = addInfo.substring(positionOfEndTime + SEPARATING_SPACE).strip();
             return new AddLessonCommand(title, dayOfLesson, lessonStartTime, lessonEndTime);
         default:
-            throw new DukeException("");
+            throw new DukeException("Please specify if you are adding a task or lesson.");
         }
     }
 
@@ -143,10 +148,10 @@ public class Parser {
             if (deleteAllType.equals(TASK_KEYWORD) || deleteAllType.equals(LESSON_KEYWORD)) {
                 return new DeleteCommand(deleteType, 0, deleteAllType);
             } else {
-                throw new DukeException("");
+                throw new DukeException("Please specify if you are deleting tasks or lessons.");
             }
         default:
-            throw new DukeException("");
+            throw new DukeException("Please specify if you are deleting a task or lesson.");
         }
     }
 
