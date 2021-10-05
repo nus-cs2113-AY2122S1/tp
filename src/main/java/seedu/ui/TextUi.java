@@ -22,12 +22,14 @@ public class TextUi {
         initMessage();
     }
 
+    // Used for print messages after user inputs
     private static void printDoubleLineMessage(String message) {
         System.out.println(
                 LINE + message + "\n" + LINE
         );
     }
 
+    // Used for system messages without user inputs
     private static void printBottomLineMessage(String message) {
         System.out.println(
                 message + "\n" + LINE
