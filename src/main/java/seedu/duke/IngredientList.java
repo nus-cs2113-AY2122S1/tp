@@ -9,14 +9,14 @@ public class IngredientList {
         if (IngredientList.find(ingredientName) == -1) {
             Ingredient ingredientToAdd = new Ingredient(ingredientName.toLowerCase(), ingredientWeight);
             ingredientList.add(ingredientToAdd);
-            System.out.println("Added:" + ingredientToAdd.getIngredientName() + ingredientWeight);
+            System.out.println("Added:" + ingredientToAdd.getIngredientName() + " " + ingredientWeight);
         } else {
             System.out.println("Dish already exists");
         }
     }
 
     //Returns -1 if not present, index if present
-    private static int find(String ingredientName) {
+    public static int find(String ingredientName) {
         for (Ingredient ingredient: ingredientList) {
             if (ingredient.getIngredientName().equals(ingredientName.toLowerCase())) {
                 return ingredientList.indexOf(ingredient);
