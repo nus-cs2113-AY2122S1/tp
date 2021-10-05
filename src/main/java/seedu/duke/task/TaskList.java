@@ -67,7 +67,7 @@ public class TaskList {
 
     public TaskList findTasksByKeyword(String keyword) {
         TaskList matchingTaskList = new TaskList();
-        for (Task task: taskList) {
+        for (Task task : taskList) {
             if (task.getInformation().contains(keyword)) {
                 matchingTaskList.addTask(task);
             }

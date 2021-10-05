@@ -51,7 +51,7 @@ public class LessonList {
 
     public LessonList findLessonsByKeyword(String keyword) {
         LessonList matchingLessonList = new LessonList();
-        for (Lesson lesson: lessonList) {
+        for (Lesson lesson : lessonList) {
             if (lesson.getTitle().contains(keyword)) {
                 matchingLessonList.addLesson(lesson);
             }
