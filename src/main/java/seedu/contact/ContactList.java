@@ -12,4 +12,8 @@ public class ContactList {
     public void addContact(Contact contact) {
         contacts.add(contact);
     }
+
+    public int getListSize() {
+        return contacts.size();
+    }
 }
