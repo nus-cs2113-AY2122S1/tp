@@ -1,6 +1,5 @@
 package terminus.command;
 
-
 import terminus.parser.NoteCommandParser;
 
 public class NotesCommand extends WorkspaceCommand {

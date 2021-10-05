@@ -2,6 +2,7 @@ package terminus;
 
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
@@ -55,6 +56,8 @@ public class Terminus {
                     ui.printSection(result.getErrorMessage());
                 }
             } catch (InvalidCommandException e) {
+                ui.printSection(e.getMessage());
+            } catch (InvalidArgumentException e) {
                 ui.printSection(e.getMessage());
             }
             

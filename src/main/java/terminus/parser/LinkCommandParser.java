@@ -1,23 +1,23 @@
 package terminus.parser;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.stream.Collectors;
-import terminus.command.ExitCommand;
-import terminus.command.Command;
-import terminus.command.HelpCommand;
+import terminus.command.*;
+import terminus.command.zoomlink.AddLinkCommand;
+import terminus.command.zoomlink.ViewLinkCommand;
+import terminus.common.CommonFormat;
+import terminus.content.Link;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 
-public class CommandParser {
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Set;
 
+public class LinkCommandParser {
     private static final String SPACE_DELIMITER = "\\s+";
     protected String workspace;
     protected final HashMap<String, Command> commandMap;
 
-    public CommandParser(String workspace) {
+    public LinkCommandParser(String workspace) {
         this.commandMap = new HashMap<>();
         this.workspace = workspace;
         addCommand("exit", new ExitCommand());
@@ -51,11 +51,11 @@ public class CommandParser {
      */
     public String[] getHelpMenu() {
         return commandMap.entrySet()
-            .stream()
-            .map((i) -> String.format("%s : %s\nFormat: %s\n",
-                i.getKey(),
-                i.getValue().getHelpMessage(),
-                i.getValue().getFormat()))
+                .stream()
+                .map((i) -> String.format("%s : %s\nFormat: %s\n",
+                        i.getKey(),
+                        i.getValue().getHelpMessage(),
+                        i.getValue().getFormat()))
                 .toArray(String[]::new);
     }
 
@@ -66,4 +66,18 @@ public class CommandParser {
     public String getWorkspace() {
         return workspace;
     }
+
+    public LinkCommandParser() {
+        super(CommonFormat.COMMAND_SCHEDULE);
+    }
+
+    public static LinkCommandParser getInstance() {
+        LinkCommandParser parser = new LinkCommandParser();
+        parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
+        parser.addCommand(CommonFormat.COMMAND_ADD, new AddLinkCommand());
+        parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewLinkCommand<Class<Link>>(Link.class));
+        parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand<Class<Link>>(Link.class));
+        return parser;
+    }
+
 }

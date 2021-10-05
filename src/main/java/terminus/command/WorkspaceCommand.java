@@ -1,5 +1,6 @@
 package terminus.command;
 
+import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
@@ -20,7 +21,7 @@ public abstract class WorkspaceCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
+    public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException, InvalidArgumentException {
         if (arguments != null && !arguments.isBlank()) {
             return commandMap.parseCommand(arguments).execute(ui, module);
         } else {
