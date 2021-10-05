@@ -71,5 +71,4 @@ public class Terminus {
     private void exit() {
         this.ui.printExitMessage();
     }
-
 }

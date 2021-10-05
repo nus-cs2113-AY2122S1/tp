@@ -21,5 +21,4 @@ public class LinkCommandParser extends CommandParser {
         parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand<Class<Link>>(Link.class));
         return parser;
     }
-
 }

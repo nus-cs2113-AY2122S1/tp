@@ -92,5 +92,4 @@ public class AddLinkCommand extends Command {
         }
         return false;
     }
-
 }

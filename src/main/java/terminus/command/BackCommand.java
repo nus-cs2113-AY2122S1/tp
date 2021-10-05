@@ -21,7 +21,7 @@ public class BackCommand extends Command {
 
     @Override
     public void parseArguments(String arguments) {
-
+        return;
     }
 
     @Override

@@ -19,6 +19,4 @@ public abstract class Command {
 
     public abstract CommandResult execute(Ui ui, NusModule module)
             throws InvalidCommandException, InvalidArgumentException;
-
-
 }

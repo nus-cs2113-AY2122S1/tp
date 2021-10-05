@@ -40,5 +40,4 @@ public class Content {
     public String getViewDescription() {
         return this.name;
     }
-
 }
