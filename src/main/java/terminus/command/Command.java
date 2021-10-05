@@ -18,6 +18,7 @@ public abstract class Command {
 
     public abstract void parseArguments(String arguments) throws InvalidArgumentException;
 
-    public abstract CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException, InvalidArgumentException;
+    public abstract CommandResult execute(Ui ui, NusModule module)
+            throws InvalidCommandException, InvalidArgumentException;
 
 }

@@ -4,9 +4,9 @@ public class Content {
 
     private String name;
     private String data;
-    final public static String TYPE = "";
+    public static final String TYPE = "";
 
-    private final String DISPLAY_MESSAGE = "Name: %s\nContent: %s\n";
+    private static final String DISPLAY_MESSAGE = "Name: %s\nContent: %s\n";
 
     public Content(String name, String data) {
         this.name = name;
