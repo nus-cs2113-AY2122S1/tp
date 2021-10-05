@@ -61,6 +61,7 @@ public class AddCommand extends Command {
                 if (!StockValidator.isValidExpiry(ui, expiryToAdd)) {
                     return;
                 }
+                break;
             case CommandParameters.DESCRIPTION:
                 if (!StockValidator.isValidDescription(ui, descriptionToAdd)) {
                     return;
@@ -93,7 +94,8 @@ public class AddCommand extends Command {
                     if ((expiryDateOfExistingMed.equals(formatExpiry))) {
                         ui.print("You already have existing stocks! Use update instead");
                     } else {
-                        Stock stockToAdd = new Stock(nameToAdd, price, quantity, formatExpiry, descriptionOfExistingMed, maxQuantityOfExistingMed);
+                        Stock stockToAdd = new Stock(nameToAdd, price, quantity, formatExpiry, descriptionOfExistingMed,
+                                maxQuantityOfExistingMed);
                         medicines.add(stockToAdd);
                         ui.print("Medication added: " + nameToAdd);
                         ui.printMedicine(stockToAdd);
