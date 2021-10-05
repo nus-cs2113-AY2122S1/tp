@@ -49,7 +49,7 @@ public class LessonList {
         }
     }
 
-    public LessonList findLesson(String keyword) {
+    public LessonList findLessonsByKeyword(String keyword) {
         LessonList matchingLessonList = new LessonList();
         for (Lesson lesson: lessonList) {
             if (lesson.getTitle().contains(keyword)) {
