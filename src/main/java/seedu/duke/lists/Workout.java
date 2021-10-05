@@ -10,17 +10,17 @@ import java.util.ArrayList;
  * List of exercises
  */
 public class Workout {
-    private String description;
+    private String workoutName;
 
-    public String getDescription() {
-        return description;
+    public String getWorkoutName() {
+        return workoutName;
     }
 
     private ArrayList<Exercise> exercises;
 
-    public Workout(String description) {
+    public Workout(String workoutName) {
         exercises = new ArrayList<>();
-        this.description = description;
+        this.workoutName = workoutName;
     }
 
     public void addExercise(Exercise exercise) {
