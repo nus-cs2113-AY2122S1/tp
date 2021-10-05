@@ -48,7 +48,14 @@ public class Parser {
         String args = matcher.group("args");
 
         // May not contain all arguments (e.g. if user did not provide).
-        final HashMap<String, String> prefixesToArgs = parseArgs(args);
+        final HashMap<String, ArrayList<String>> prefixesToArgs;
+
+        //catches null if user types in wrong prefix.
+        try {
+            prefixesToArgs = parseArgs(args);
+        } catch (NullPointerException error) {
+            return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+        }
 
         switch (command) {
         case AddIngredientCommand.COMMAND_WORD:
@@ -62,10 +69,14 @@ public class Parser {
     //@@author
 
     private static HashMap<String, String> parseArgs(String args) {
+    private static HashMap<String, ArrayList<String>> parseArgs(String args) {
         // TODO(bernardboey): Change the way this is done to allow for multiple of the same tags.
         // Separate to different class and feed in the argument prefixes that are expected when parsing?
+        /* Changed method so that it can store multiple values for each prefix, but have to manually set up the Hash
+        Map */
         args = args == null ? "" : args.trim();
-        final HashMap<String, String> prefixesToArgs = new HashMap<>();
+        final HashMap<String, ArrayList<String>> prefixesToArgs = new HashMap<>();
+        setUpPrefixesToArgs(prefixesToArgs);
         final Matcher matcher = ARGS_FORMAT.matcher(args);
 
         while (matcher.find()) {
@@ -82,6 +93,12 @@ public class Parser {
         final String ingredient = prefixesToArgs.get(PREFIX_INGREDIENT);
         final String quantity = prefixesToArgs.get(PREFIX_QUANTITY);
         final String expiry = prefixesToArgs.get(PREFIX_EXPIRY);
+    private static void setUpPrefixesToArgs(HashMap<String, ArrayList<String>> prefixesToArgs) {
+        prefixesToArgs.put(PREFIX_INGREDIENT,new ArrayList<>());
+        prefixesToArgs.put(PREFIX_EXPIRY,new ArrayList<>());
+        prefixesToArgs.put(PREFIX_RECIPE,new ArrayList<>());
+        prefixesToArgs.put(PREFIX_QUANTITY,new ArrayList<>());
+    }
         if (ingredient == null || ingredient.isBlank()) {
             return new IncorrectCommand("Missing ingredient");
         }
