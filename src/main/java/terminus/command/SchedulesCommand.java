@@ -12,11 +12,11 @@ public class SchedulesCommand extends WorkspaceCommand {
 
     @Override
     public String getFormat() {
-            return "schedules";
-        }
+        return "schedules";
+    }
 
     @Override
     public String getHelpMessage() {
-            return "Move to schedules workspace.";
-        }
+        return "Move to schedules workspace.";
+    }
 }

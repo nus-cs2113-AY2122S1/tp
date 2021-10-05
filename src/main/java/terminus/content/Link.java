@@ -5,9 +5,9 @@ public class Link extends Content {
     private String day;
     private String startTime;
     private String zoomLink;
-    final public static String TYPE = "Z";
+    public static final String TYPE = "Z";
 
-    final private String DISPLAY_LINK_MESSAGE = "%s, %s, %s, %s";
+    private static final String DISPLAY_LINK_MESSAGE = "%s, %s, %s, %s";
 
     public Link(String name, String day, String startTime, String zoomLink) {
         super(name);

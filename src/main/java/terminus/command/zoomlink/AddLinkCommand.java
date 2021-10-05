@@ -29,8 +29,8 @@ public class AddLinkCommand extends Command {
 
     @Override
     public String getFormat() {
-        return CommonFormat.COMMAND_ADD + " \"{description}\" " +
-                "\"{day}\" \"{start_time}\" \"{zoom_link}\"";
+        return CommonFormat.COMMAND_ADD + " \"{description}\" "
+                + "\"{day}\" \"{start_time}\" \"{zoom_link}\"";
     }
 
     @Override
@@ -41,11 +41,11 @@ public class AddLinkCommand extends Command {
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
         // Perform required checks with regex
-        if(arguments == null || arguments.isBlank()){
+        if (arguments == null || arguments.isBlank()) {
             throw new InvalidArgumentException("Error: Missing arguments.");
         }
         ArrayList<String> argArray = findArguments(arguments);
-        if(!isValidArguments(argArray)){
+        if (!isValidArguments(argArray)) {
             throw new InvalidArgumentException("Error: Missing arguments.");
         }
         this.description = argArray.get(0);
@@ -61,32 +61,32 @@ public class AddLinkCommand extends Command {
         contentManager.addLink(description, day, startTime, zoomLink);
         module.setLinks(contentManager.getContents());
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE));
-        return new CommandResult(true,false);
+        return new CommandResult(true, false);
     }
 
-    private ArrayList<String> findArguments(String arg){
+    private ArrayList<String> findArguments(String arg) {
         ArrayList<String> argsArray = new ArrayList<>();
         Pattern p = Pattern.compile("\"(.*?)\"");
         Matcher m = p.matcher(arg);
-        while(m.find()){
+        while (m.find()) {
             argsArray.add(m.group(1));
         }
         return argsArray;
     }
 
-    private boolean isValidArguments(ArrayList<String> argArray){
+    private boolean isValidArguments(ArrayList<String> argArray) {
         boolean isValid = true;
-        if(argArray.size() != totalArg){
+        if (argArray.size() != totalArg) {
             isValid = false;
-        }else if(isArrayEmpty(argArray)){
+        } else if (isArrayEmpty(argArray)) {
             isValid = false;
         }
         return isValid;
     }
 
-    private boolean isArrayEmpty(ArrayList<String> argArray){
-        for(String s:argArray){
-            if(s.isBlank()){
+    private boolean isArrayEmpty(ArrayList<String> argArray) {
+        for (String s : argArray) {
+            if (s.isBlank()) {
                 return true;
             }
         }
