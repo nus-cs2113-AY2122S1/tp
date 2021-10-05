@@ -35,7 +35,7 @@ public class TextUi {
     }
 
     private static void initMessage() {
-        System.out.println(LINE + LOGO + LINE);
+        printDoubleLineMessage(LOGO);
         System.out.println("Welcome to ConTech, your personal contact tracker.\n" + LINE);
     }
 
