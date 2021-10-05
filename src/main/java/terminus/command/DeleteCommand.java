@@ -30,12 +30,12 @@ public class DeleteCommand<T> extends Command {
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
         if (arguments == null || arguments.isBlank()) {
-            throw new InvalidArgumentException("Error: Missing content number.");
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         try {
             itemNumber = Integer.parseInt(arguments);
         } catch (NumberFormatException e) {
-            throw new InvalidArgumentException("Error: Invalid numerical value.");
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
     }
 

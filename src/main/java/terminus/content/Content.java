@@ -6,7 +6,7 @@ public class Content {
     private String data;
     final public static String TYPE = "";
 
-    final private String DISPLAY_MESSAGE = "Name: %s\nContent: %s\n";
+    private final String DISPLAY_MESSAGE = "Name: %s\nContent: %s\n";
 
     public Content(String name, String data) {
         this.name = name;

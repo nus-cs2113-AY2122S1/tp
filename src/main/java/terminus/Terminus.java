@@ -10,13 +10,13 @@ import terminus.parser.MainCommandParser;
 import terminus.ui.Ui;
 
 public class Terminus {
-    
+
     private Ui ui;
     private CommandParser parser;
     private String workspace;
 
     private NusModule nusModule;
-    
+
     /**
      * Main entry-point for the terminus.Terminus application.
      */
@@ -32,7 +32,7 @@ public class Terminus {
         runCommandsUntilExit();
         exit();
     }
-    
+
     private void start() {
         this.ui = new Ui();
         this.parser = MainCommandParser.getInstance();
@@ -41,15 +41,15 @@ public class Terminus {
         this.ui.printParserBanner(this.parser);
         this.nusModule = new NusModule();
     }
-    
+
     private void runCommandsUntilExit() {
         while (true) {
             String input = ui.requestCommand(workspace);
-            
+
             Command currentCommand = null;
             try {
                 currentCommand = parser.parseCommand(input);
-                CommandResult result = currentCommand.execute(ui,nusModule);
+                CommandResult result = currentCommand.execute(ui, nusModule);
                 if (result.isOk() && result.isExit()) {
                     break;
                 } else if (result.isOk() && result.getAdditionalData() != null) {
@@ -66,10 +66,10 @@ public class Terminus {
             }
 
         }
-    } 
-    
+    }
+
     private void exit() {
         this.ui.printExitMessage();
     }
-    
+
 }

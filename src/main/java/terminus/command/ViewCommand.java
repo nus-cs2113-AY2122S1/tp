@@ -7,7 +7,7 @@ import terminus.exception.InvalidArgumentException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
-public class ViewCommand<T> extends Command{
+public class ViewCommand<T> extends Command {
 
     private T type;
 
@@ -31,15 +31,15 @@ public class ViewCommand<T> extends Command{
 
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
-        if(arguments == null || arguments.isBlank()){
+        if (arguments == null || arguments.isBlank()) {
             displayAll = true;
             return;
         }
-        try{
+        try {
             itemNumber = Integer.parseInt(arguments);
             displayAll = false;
-        }catch(NumberFormatException e){
-            throw new InvalidArgumentException("Error: Invalid numerical value.");
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
     }
 
@@ -48,13 +48,13 @@ public class ViewCommand<T> extends Command{
         ContentManager contentManager = module.getContentManager();
         contentManager.setContent(module.get(type));
         String result = "";
-        if(displayAll){
+        if (displayAll) {
             result = contentManager.listAllContents();
-        }else{
+        } else {
             result = contentManager.getContentData(itemNumber);
         }
         ui.printSection(result);
-        return new CommandResult(true,false);
+        return new CommandResult(true, false);
     }
 
 }

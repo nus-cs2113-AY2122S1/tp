@@ -1,13 +1,15 @@
 package terminus.common;
 
 public class CommonFormat {
-    final public static String COMMAND_NOTE = "note";
-    final public static String COMMAND_ADD = "add";
-    final public static String COMMAND_DELETE = "delete";
-    final public static String COMMAND_VIEW = "view";
-    final public static String COMMAND_BACK = "back";
-    final public static String COMMAND_EXIT = "exit";
 
-    final public static String COMMAND_DELETE_FORMAT = COMMAND_DELETE + " {item number}";
-    final public static String COMMAND_VIEW_FORMAT = COMMAND_VIEW + " {[optional]item number}";
+    public static final String COMMAND_NOTE = "note";
+    public static final String COMMAND_ADD = "add";
+    public static final String COMMAND_DELETE = "delete";
+    public static final String COMMAND_VIEW = "view";
+    public static final String COMMAND_BACK = "back";
+    public static final String COMMAND_EXIT = "exit";
+    public static final String COMMAND_HELP = "help";
+
+    public static final String COMMAND_DELETE_FORMAT = COMMAND_DELETE + " <item number>";
+    public static final String COMMAND_VIEW_FORMAT = COMMAND_VIEW + " {item number}";
 }

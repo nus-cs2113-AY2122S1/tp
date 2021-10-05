@@ -1,11 +1,10 @@
 package terminus.content;
 
 import java.util.ArrayList;
+import terminus.common.Messages;
 import terminus.exception.InvalidArgumentException;
 
 public class ContentManager {
-
-    final private static String DATA_SEPARATOR = "";
 
     private ArrayList<Content> contents;
 
@@ -33,7 +32,7 @@ public class ContentManager {
 
     public String getContentData(int contentNumber) throws InvalidArgumentException {
         if (!isValidNumber(contentNumber)) {
-            throw new InvalidArgumentException("Error: content not found.");
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
         }
         return contents.get(contentNumber - 1).getDisplayInfo();
     }
@@ -48,7 +47,7 @@ public class ContentManager {
 
     public String deleteContent(int contentNumber) throws InvalidArgumentException {
         if (!isValidNumber(contentNumber)) {
-            throw new InvalidArgumentException("Error: content not found.");
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
         }
         String deletedContentName = contents.get(contentNumber - 1).getName();
         contents.remove(contentNumber - 1);

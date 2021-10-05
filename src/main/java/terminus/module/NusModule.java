@@ -30,9 +30,9 @@ public class NusModule {
 
     public <T> ArrayList<Content> get(T type) {
         ArrayList<Content> result = new ArrayList<>();
-        if(type == Note.class){
+        if (type == Note.class) {
             result = this.notes;
-        }else{
+        } else {
             // Error encountered
         }
         return result;
