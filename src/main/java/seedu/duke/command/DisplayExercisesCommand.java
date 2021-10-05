@@ -8,7 +8,7 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
-public class DisplayExercisesCommand extends Command{
+public class DisplayExercisesCommand extends Command {
     public static final String COMMAND_WORD = "display";
     public static final String MESSAGE_USAGE = "display: Displays all exercises in the particular workout.\n"
             + "\tParameters: w/WORKOUT_INDEX\n"
@@ -16,6 +16,7 @@ public class DisplayExercisesCommand extends Command{
     public static final String MESSAGE_LIST_EXERCISES = "Exercises in %1$s\n";
     public static final String MESSAGE_EMPTY_WORKOUT = "You have no workouts.\n";
     private final int workoutIndex;
+
     public DisplayExercisesCommand(int workoutIndex) {
         this.workoutIndex = workoutIndex;
     }
@@ -26,8 +27,7 @@ public class DisplayExercisesCommand extends Command{
         ArrayList<Exercise> exercises = workout.getAllExercises();
         if (exercises.isEmpty()) {
             System.out.println(MESSAGE_EMPTY_WORKOUT);
-        }
-        else {
+        } else {
             System.out.println(String.format(MESSAGE_LIST_EXERCISES, workout));
             ui.showExercisesToUser(exercises);
         }

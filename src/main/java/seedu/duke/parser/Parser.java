@@ -1,6 +1,17 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.*;
+
+import seedu.duke.command.AddExerciseCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.DisplayExercisesCommand;
+import seedu.duke.command.ListWorkoutsCommand;
+import seedu.duke.command.CreateWorkoutCommand;
+import seedu.duke.command.DeleteWorkoutCommand;
+import seedu.duke.command.RemoveExerciseCommand;
+import seedu.duke.command.MarkExerciseAsDoneCommand;
+import seedu.duke.command.ExitCommand;
+import seedu.duke.command.IncorrectCommand;
+
 import seedu.duke.exception.GetJackDException;
 
 import java.util.Locale;
@@ -100,9 +111,9 @@ public class Parser {
         String args = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
         String[] workoutIndexAndExerciseArgs = splitCommandWordsAndArgs(args, EXERCISE_KEYWORD);
         String workoutIndex = workoutIndexAndExerciseArgs[0];
-        String[] exerciseNameAndSetsReps = splitCommandWordsAndArgs(workoutIndexAndExerciseArgs[1].trim(), SETS_KEYWORD);
-        String exerciseName = exerciseNameAndSetsReps[0].trim();
-        String[] setsAndReps = splitCommandWordsAndArgs(exerciseNameAndSetsReps[1].trim(), REPS_KEYWORD);
+        String[] nameAndSetsReps = splitCommandWordsAndArgs(workoutIndexAndExerciseArgs[1].trim(), SETS_KEYWORD);
+        String exerciseName = nameAndSetsReps[0].trim();
+        String[] setsAndReps = splitCommandWordsAndArgs(nameAndSetsReps[1].trim(), REPS_KEYWORD);
         String sets = setsAndReps[0].trim();
         String reps = setsAndReps[1].trim();
 

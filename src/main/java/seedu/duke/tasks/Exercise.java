@@ -28,6 +28,6 @@ public class Exercise {
 
     @Override
     public String toString() {
-        return (description + " | " + sets + " sets of " + reps + " reps");
+        return (getStatusSymbol() + description + " | " + sets + " sets of " + reps + " reps");
     }
 }

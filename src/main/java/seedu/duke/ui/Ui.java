@@ -11,6 +11,7 @@ public class Ui {
     private static final String INDENT = "\t";
     private static final String NEW_LINE = "\n\t";
     private static final String DIVIDER = "_______________________________";
+
     public static void printLineSeparator() {
         System.out.println(DIVIDER);
     }

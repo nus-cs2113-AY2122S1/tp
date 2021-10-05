@@ -5,7 +5,7 @@ import seedu.duke.lists.WorkoutList;
 import seedu.duke.tasks.Exercise;
 import seedu.duke.ui.Ui;
 
-public class RemoveExerciseCommand extends Command{
+public class RemoveExerciseCommand extends Command {
     public static final String COMMAND_WORD = "remove";
     public static final String MESSAGE_USAGE = "remove: Removes the exercise from the workout.\n"
             + "\tParameters: w/WORKOUT_INDEX e/EXERCISE_INDEX\n"
@@ -13,6 +13,7 @@ public class RemoveExerciseCommand extends Command{
     public static final String MESSAGE_SUCCESS = "Removed exercise %1$s";
     private final int workoutIndex;
     private final int exerciseIndex;
+
     public RemoveExerciseCommand(int workoutIndex, int exerciseIndex) {
         this.workoutIndex = workoutIndex;
         this.exerciseIndex = exerciseIndex;

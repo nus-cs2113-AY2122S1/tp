@@ -43,6 +43,6 @@ public class Workout {
         if (index <= 0 || index > exercises.size()) {
             throw new GetJackDException("Invalid Exercise Index");
         }
-        return exercises.get(index-1);
+        return exercises.get(index - 1);
     }
 }

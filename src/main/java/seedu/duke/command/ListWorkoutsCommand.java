@@ -7,7 +7,7 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
-public class ListWorkoutsCommand extends Command{
+public class ListWorkoutsCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_USAGE = "list: Lists all workouts.\n"
             + "\tExample: list\n";
@@ -19,8 +19,7 @@ public class ListWorkoutsCommand extends Command{
         ArrayList<Workout> allWorkouts = workouts.getAllWorkouts();
         if (allWorkouts.isEmpty()) {
             System.out.println(MESSAGE_EMPTY_WORKOUT_LIST);
-        }
-        else {
+        } else {
             System.out.println(MESSAGE_LIST_WORKOUTS);
             ui.showWorkoutsToUser(allWorkouts);
         }
