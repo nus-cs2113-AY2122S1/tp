@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class IngredientList {
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
 
-    public static void add(String ingredientName) {
+    public static void add(String ingredientName, double ingredientWeight) {
         if (IngredientList.find(ingredientName) == -1) {
-            Ingredient ingredientToAdd = new Ingredient(ingredientName.toLowerCase());
+            Ingredient ingredientToAdd = new Ingredient(ingredientName.toLowerCase(), ingredientWeight);
             ingredientList.add(ingredientToAdd);
-            System.out.println("Added:" + ingredientToAdd.getIngredientName());
+            System.out.println("Added:" + ingredientToAdd.getIngredientName() + ingredientWeight);
         } else {
             System.out.println("Dish already exists");
         }
@@ -43,6 +43,4 @@ public class IngredientList {
             System.out.println("Ingredient, " + ingredientName + " has been removed!");
         }
     }
-}
-
 }

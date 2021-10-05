@@ -35,7 +35,7 @@ public class InputParser {
 
         //Multi param is same as one but will need to split further
         case ADD:
-            parameters.addAll(List.of(parameterString.split(" ", 2)));
+            parameters.addAll(List.of(parameterString.split(" ", 3)));
             break;
 
         default:
