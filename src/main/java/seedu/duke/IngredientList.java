@@ -25,7 +25,7 @@ public class IngredientList {
         return -1;
     }
 
-    private static void list() {
+    public static void list() {
         System.out.println("Here are the ingredients you have: ");
         for (int i=0; i<ingredientList.size(); i++) {
             String currentIngredient = ingredientList.get(i).getIngredientName();

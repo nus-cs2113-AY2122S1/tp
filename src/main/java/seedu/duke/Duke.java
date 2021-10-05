@@ -32,7 +32,12 @@ public class Duke {
 
                 //Switch to appropriate callback function and call function
                 Command userCommand = userCommandName.getCallbackCommand();
-                userCommand.execute(parameters);
+                if (userCommandName.getName().equals("add")) {
+                    userCommand.execute(parameters);
+                }
+                else {
+                    userCommand.executeList(parameters);
+                }
 
             } catch (CommandNotAvailableException e) {
                 System.out.println("No such command");

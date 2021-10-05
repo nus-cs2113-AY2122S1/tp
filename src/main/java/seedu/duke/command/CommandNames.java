@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 public enum CommandNames {
     ADD("add", new AddCommand()),
+    LIST("list", new ListCommand()),
     TEST("test", new TestCommand());
 
 
