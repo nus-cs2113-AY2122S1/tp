@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Adding, deleting and other operations related to the exercises will be executed from here.
  */
 public class Workout {
-    public static ArrayList<Exercise> exercises;
+    private ArrayList<Exercise> exercises;
 
     public Workout() {
         exercises = new ArrayList<>();
@@ -19,21 +19,21 @@ public class Workout {
         exercises.add(exercise);
     }
 
-    public Exercise removeExercise(int index) throws GetJackDException {
-        if (index <= 0 || index > exercises.size()) {
+    public Exercise removeExercise(int displayIndex) throws GetJackDException {
+        if (displayIndex <= 0 || displayIndex > exercises.size()) {
             throw new GetJackDException("Invalid Exercise Index");
         }
-        return exercises.remove(index - 1);
+        return exercises.remove(displayIndex - 1);
     }
-    
+
     public ArrayList<Exercise> getAllExercises() {
         return exercises;
     }
-    
-    public Exercise getExercise(int index) throws GetJackDException {
-        if (index <= 0 || index > exercises.size()) {
+
+    public Exercise getExercise(int displayIndex) throws GetJackDException {
+        if (displayIndex <= 0 || displayIndex > exercises.size()) {
             throw new GetJackDException("Invalid Exercise Index");
         }
-        return exercises.get(index);
+        return exercises.get(displayIndex - 1);
     }
 }
