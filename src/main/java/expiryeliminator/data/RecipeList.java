@@ -14,7 +14,9 @@ public class RecipeList {
     /**
      * Constructs Recipe List with no recipes.
      */
-    public RecipeList() {recipes = new HashMap<>();}
+    public RecipeList() {
+        recipes = new HashMap<>();
+    }
 
     /**
      * Adds a recipe to the recipe list.
@@ -24,7 +26,7 @@ public class RecipeList {
      * @throws EmptyIngredientsException If there are no ingredients in the recipe.
      */
     public void add(Recipe recipe) throws DuplicateDataException, EmptyIngredientsException {
-        if(contains(recipe)) {
+        if (contains(recipe)) {
             throw new DuplicateDataException();
         } else if (recipe.getIngredients().size() == 0){
             throw new EmptyIngredientsException();
@@ -34,17 +36,21 @@ public class RecipeList {
     }
 
     /**
-     * Returns {@code true} if the recipe list contains the given recipe.
+     * Returns { @code true } if the recipe list contains the given recipe.
      *
      * @param recipe The recipe whose presence in the list is to be tested
-     * @return {@code true} if the recipe list contains the given recipe.
+     * @return { @code true } if the recipe list contains the given recipe.
      */
-    public boolean contains(Recipe recipe) {return recipes.containsKey(recipe);}
+    public boolean contains(Recipe recipe) {
+        return recipes.containsKey(recipe);
+    }
 
     /**
      * Returns the number of recipes in the list.
      *
      * @return Number of recipes in the list.
      */
-    public int size() {return recipes.size();}
+    public int size() {
+        return recipes.size();
+    }
 }

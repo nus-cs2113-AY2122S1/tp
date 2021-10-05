@@ -18,8 +18,6 @@ import expiryeliminator.data.exception.DuplicateDataException;
  * Parses user input.
  */
 public class Parser {
-    public static final String MESSAGE_QUANTITY_AND_INGREDIENT_NUMBER_NOT_EQUAL = "Please ensure each " +
-            "ingredient has one quantity. :)";
     //@@author bernardboey-reused
     // Reused from https://github.com/bernardboey/ip/blob/master/src/main/java/duke/parser/Parser.java
     // with minor modifications
@@ -40,7 +38,11 @@ public class Parser {
     private static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!";
     private static final String MESSAGE_UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :-(";
     private static final String MESSAGE_INVALID_QUANTITY = "The specified quantity is not a valid integer.";
-    public static final String EXPIRY_NOT_CHECKED_FOR_RECIPE = "not needed";
+    public static final boolean TEST_FOR_EXPIRY_DATE = true;
+    public static final String MESSAGE_MISSING_RECIPE = "Missing recipe";
+    public static final String MESSAGE_MISSING_INGREDIENT = "Missing ingredient";
+    public static final String MESSAGE_MISSING_QUANTITY = "Missing quantity";
+    public static final String MESSAGE_MISSING_EXPIRY = "Missing expiry";
 
     /**
      * Parses user input as a command.
@@ -113,29 +115,32 @@ public class Parser {
     }
 
     private static Command prepareAddIngredient(HashMap<String, ArrayList<String>> prefixesToArgs) {
-        final String ingredient = prefixesToArgs.get(PREFIX_INGREDIENT).get(0);
-        final String quantity = prefixesToArgs.get(PREFIX_QUANTITY).get(0);
-        final String expiry = prefixesToArgs.get(PREFIX_EXPIRY).get(0);
-        IncorrectCommand result = checkArgs(ingredient, quantity, expiry);
+        final ArrayList<String> ingredient = prefixesToArgs.get(PREFIX_INGREDIENT);
+        final ArrayList<String> quantity = prefixesToArgs.get(PREFIX_QUANTITY);
+        final ArrayList<String> expiry = prefixesToArgs.get(PREFIX_EXPIRY);
+        IncorrectCommand result = checkArgs(ingredient, quantity, expiry, TEST_FOR_EXPIRY_DATE,0);
         if (result != null) {
             return result;
         }
         try {
-            return new AddIngredientCommand(ingredient, parseQuantity(quantity), expiry);
+            return new AddIngredientCommand(ingredient.get(0), parseQuantity(quantity.get(0)), expiry.get(0));
         } catch (NumberFormatException e) {
             return new IncorrectCommand(MESSAGE_INVALID_QUANTITY);
         }
     }
 
-    private static IncorrectCommand checkArgs(String ingredient, String quantity, String expiry) {
-        if (ingredient == null || ingredient.isBlank()) {
-            return new IncorrectCommand("Missing ingredient");
+    private static IncorrectCommand checkArgs(ArrayList<String> ingredient, ArrayList<String> quantity,
+                                              ArrayList<String> expiry,boolean testForExpiry, int index) {
+        if (ingredient.size() == 0 || ingredient.get(index).isBlank()) {
+            return new IncorrectCommand(MESSAGE_MISSING_INGREDIENT);
         }
-        if (quantity == null || quantity.isBlank()) {
-            return new IncorrectCommand("Missing quantity");
+        if (quantity.size() == 0 || quantity.get(index).isBlank()) {
+            return new IncorrectCommand(MESSAGE_MISSING_QUANTITY);
         }
-        if (expiry == null || expiry.isBlank()) {
-            return new IncorrectCommand("Missing expiry");
+        if (testForExpiry) {
+            if (expiry.size() == 0 || expiry.get(index).isBlank()) {
+                return new IncorrectCommand(MESSAGE_MISSING_EXPIRY);
+            }
         }
         return null;
     }
@@ -152,17 +157,15 @@ public class Parser {
         try {
            recipe = prefixesToArgs.get(PREFIX_RECIPE).get(0);
         } catch (Exception e) {
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
+            return new IncorrectCommand(MESSAGE_MISSING_RECIPE);
         }
         final ArrayList<String> name = prefixesToArgs.get(PREFIX_INGREDIENT);
         final ArrayList<String> quantity = prefixesToArgs.get(PREFIX_QUANTITY);
         final IngredientList ingredients = new IngredientList();
-        if(name.size() != quantity.size()) {
-            return new IncorrectCommand(MESSAGE_QUANTITY_AND_INGREDIENT_NUMBER_NOT_EQUAL);
-        }
-        for(int i = 0; i < name.size(); i ++) {
-            IncorrectCommand error = checkArgs(name.get(i), quantity.get(i), EXPIRY_NOT_CHECKED_FOR_RECIPE);
-            if (error != null) {
+        for (int i = 0; i < name.size(); i++) {
+            IncorrectCommand error = checkArgs(name,quantity,
+                    prefixesToArgs.get(PREFIX_EXPIRY),!TEST_FOR_EXPIRY_DATE,i);
+            if(error != null) {
                 return error;
             }
             error = addIngredients(name, quantity, ingredients, i);
@@ -179,14 +182,14 @@ public class Parser {
      * @param name Array of name of ingredients
      * @param quantity Array of quantity of ingredients
      * @param ingredients Ingredient list to store the ingredients
-     * @param i index of the loop
+     * @param index index of the loop
      * @return null if there's no error and an IncorrectCommand if there is.
      */
-    private static IncorrectCommand addIngredients
-            (ArrayList<String> name, ArrayList<String> quantity, IngredientList ingredients, int i) {
+    private static IncorrectCommand addIngredients(ArrayList<String> name,
+                                                   ArrayList<String> quantity, IngredientList ingredients, int index) {
         Ingredient ingredient;
         try {
-            ingredient = new Ingredient(name.get(i),parseQuantity(quantity.get(i)),null);
+            ingredient = new Ingredient(name.get(index),parseQuantity(quantity.get(index)),null);
         } catch (NumberFormatException e) {
             return new IncorrectCommand(MESSAGE_INVALID_QUANTITY);
         }

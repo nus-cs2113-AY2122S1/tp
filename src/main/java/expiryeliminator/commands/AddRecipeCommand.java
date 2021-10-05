@@ -6,7 +6,7 @@ import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.EmptyIngredientsException;
 
-public class AddRecipeCommand extends Command{
+public class AddRecipeCommand extends Command {
     public static final String COMMAND_WORD = "add recipe";
 
     private static final String MESSAGE_RECIPE_ADDED = "I've added this recipe:\n" + "%1$s\n"
