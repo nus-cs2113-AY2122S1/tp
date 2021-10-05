@@ -1,13 +1,43 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Parser {
 
     protected ArrayList<String> ingredientsList;
     protected ArrayList<String> stepsList;
+    protected String nameRecipe;
 
 
+    public void parseMaster() {
+        Scanner in = new Scanner(System.in);
+        String line  = in.nextLine();
+
+        while (true) {
+            if (parseCommand(line).equalsIgnoreCase("add")) {
+                nameRecipe = parseName(line);
+                System.out.println("What are the Ingredients for this dish? Input them separated by “+”.");
+                line = in.nextLine();
+                ingredientsList = parseIngredients(line);
+                System.out.println("What are the steps for this dish? Input them separated by “+”.");
+                line = in.nextLine();
+                stepsList = parseSteps(line);
+                System.out.println("Added " + nameRecipe + " recipe! Yum!");
+            }
+            if (parseCommand(line).equalsIgnoreCase("delete")) {
+                nameRecipe = parseName(line);
+            }
+            if (parseCommand(line).equalsIgnoreCase("check")) {
+                nameRecipe = parseName(line);
+            }
+            if (parseCommand(line).equalsIgnoreCase("exit")) {
+                System.out.println("Bye bye!");
+                break;
+            }
+            line = in.nextLine();
+        }
+    }
 
     public String parseCommand(String line) {
         int spaceIndex = line.indexOf(" ");
@@ -20,7 +50,6 @@ public class Parser {
 
         return spaceIndex == -1 ? line : name;
     }
-
 
 
     public ArrayList<String> parseIngredients(String line) {
