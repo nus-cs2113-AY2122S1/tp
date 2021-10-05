@@ -5,6 +5,7 @@ package expiryeliminator.commands;
 // with minor modifications
 
 import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.RecipeList;
 
 /**
  * Terminates the program.
@@ -16,7 +17,7 @@ public class ByeCommand extends Command {
     private static final String MESSAGE_FAREWELL = "Bye. Hope to see you again soon!";
 
     @Override
-    public String execute(IngredientList ingredientList) {
+    public String execute(IngredientList ingredientList, RecipeList recipes) {
         return MESSAGE_FAREWELL;
     }
 
