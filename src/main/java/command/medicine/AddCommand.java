@@ -38,9 +38,7 @@ public class AddCommand extends Command {
         String expiryToAdd = parameters.get(CommandParameters.EXPIRY_DATE);
         String descriptionToAdd = parameters.get(CommandParameters.DESCRIPTION);
         String maxQuantityToAdd = parameters.get(CommandParameters.MAX_QUANTITY);
-        ArrayList<Medicine> filteredMedicines = new ArrayList<>();
         for (String parameter : parameters.keySet()) {
-            String parameterValue = parameters.get(parameter);
             switch (parameter) {
             case CommandParameters.NAME:
                 if (!StockValidator.isValidName(ui, nameToAdd)) {
