@@ -5,7 +5,7 @@ import seedu.duke.IngredientList;
 
 import java.util.ArrayList;
 
-public class AddIngrWasteCommand extends Command{
+public class AddIngrWasteCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) {
         //Same num first then ingr (for now)
@@ -18,8 +18,4 @@ public class AddIngrWasteCommand extends Command{
         }
     }
 
-    @Override
-    public void executeList(ArrayList<String> parameters) {
-        // blank as AddIngrWasteCommand will not use executeList
-    }
 }

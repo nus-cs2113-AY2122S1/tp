@@ -16,8 +16,4 @@ public class AddDishWasteCommand extends Command {
         }
     }
 
-    @Override
-    public void executeList(ArrayList<String> parameters) {
-        // blank as AddDishWasteCommand will not use executeList
-    }
 }

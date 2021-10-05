@@ -27,9 +27,9 @@ public class IngredientList {
 
     public static void list() {
         System.out.println("Here are the ingredients you have: ");
-        for (int i=0; i<ingredientList.size(); i++) {
+        for (int i = 0; i < ingredientList.size(); i++) {
             String currentIngredient = ingredientList.get(i).getIngredientName();
-            System.out.println((i+1) + ". " + currentIngredient);
+            System.out.println((i + 1) + ". " + currentIngredient);
         }
         System.out.println("You can use commands 'add' or 'find' to add new ingredients or find existing ones!");
     }
