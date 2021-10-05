@@ -39,4 +39,16 @@ public class TextUi {
         System.out.println("Welcome to ConTech, your personal contact tracker.\n" + LINE);
     }
 
+    public static void createNewContactFileMessage(String contactFilePath) {
+        String message = "As ConTech is unable to find your saved data, \n" +
+                " it has created a new one for you at: \n" + contactFilePath;
+        printBottomLineMessage(message);
+    }
+
+    public static void fileErrorMessage(String contactFilePath) {
+        String message = "ConTech is unfortunately unable to create a file for your\n" +
+                " save file at " + contactFilePath + ".\n" +
+                "Please relocate the file and try again.";
+        printBottomLineMessage(message);
+    }
 }
