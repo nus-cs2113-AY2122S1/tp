@@ -4,7 +4,7 @@ import seedu.duke.DishList;
 
 import java.util.ArrayList;
 
-public class AddDishCommand extends Command{
+public class AddDishCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) {
         System.out.println("____________________________________________");
@@ -12,8 +12,4 @@ public class AddDishCommand extends Command{
         System.out.println("____________________________________________");
     }
 
-    @Override
-    public void executeList(ArrayList<String> parameters) {
-        // blank as AddDishCommand will not use executeList
-    }
 }

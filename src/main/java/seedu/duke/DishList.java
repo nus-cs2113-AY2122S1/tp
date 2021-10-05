@@ -27,9 +27,9 @@ public class DishList {
 
     public static void list() {
         System.out.println("Here are the dishes you have: ");
-        for (int i=0; i<dishList.size(); i++) {
+        for (int i = 0; i < dishList.size(); i++) {
             String currentDish = dishList.get(i).getDishName();
-            System.out.println((i+1) + ". " + currentDish);
+            System.out.println((i + 1) + ". " + currentDish);
         }
         System.out.println("You can use commands 'add' or 'find' to add new dishes or find existing ones!");
     }

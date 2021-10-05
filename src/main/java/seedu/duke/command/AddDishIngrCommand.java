@@ -18,8 +18,4 @@ public class AddDishIngrCommand extends Command {
         }
     }
 
-    @Override
-    public void executeList(ArrayList<String> parameters) {
-        // blank as AddDishIngrCommand will not use executeList
-    }
 }

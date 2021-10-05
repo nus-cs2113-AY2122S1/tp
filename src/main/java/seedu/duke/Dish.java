@@ -35,7 +35,8 @@ public class Dish {
         /*
         for (Ingredient ingredient: constituents) {
             ingredient.addWeight(value);
-            System.out.println("Wastage of " + ingredient.getIngredientName() + " is now " + ingredient.getIngredientWeight());
+            System.out.println("Wastage of " + ingredient.getIngredientName() +
+            " is now " + ingredient.getIngredientWeight());
         }
         */
     }
@@ -43,9 +44,12 @@ public class Dish {
     @Override
     //Todo Format into proper string
     public String toString() {
-        return "Dish{" +
-                "dishName='" + dishName + '\'' +
-                ", constituents=" + constituents +
-                '}';
+        return "Dish{"
+                + "dishName='"
+                + dishName
+                + '\''
+                + ", constituents="
+                + constituents
+                + '}';
     }
 }

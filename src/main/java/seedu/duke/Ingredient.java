@@ -37,9 +37,12 @@ public class Ingredient {
     @Override
     //Todo format into better string
     public String toString() {
-        return "Ingredient{" +
-                "ingredientName='" + ingredientName + '\'' +
-                ", ingredientWeight=" + ingredientWeight +
-                '}';
+        return "Ingredient{"
+                + "ingredientName='"
+                + ingredientName
+                + '\''
+                + ", ingredientWeight="
+                + ingredientWeight
+                + '}';
     }
 }

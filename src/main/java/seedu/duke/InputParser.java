@@ -32,14 +32,12 @@ public class InputParser {
 
         //One parameter commands just add the parameterString
         case ADD_DISH:
+
+        case LIST:
             parameters.add(parameterString);
             break;
 
         //Multi param is same as one but will need to split further
-        case LIST:
-            parameters.addAll(List.of(parameterString.split(" ", 1)));
-            break;
-
         //Following commands of format number, name
         case ADD_INGR:
         case ADD_DISH_WASTE:
