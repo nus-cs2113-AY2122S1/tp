@@ -22,6 +22,18 @@ public class TextUi {
         initMessage();
     }
 
+    private static void printDoubleLineMessage(String message) {
+        System.out.println(
+                LINE + message + "\n" + LINE
+        );
+    }
+
+    private static void printBottomLineMessage(String message) {
+        System.out.println(
+                message + "\n" + LINE
+        );
+    }
+
     private static void initMessage() {
         System.out.println(LINE + LOGO + LINE);
         System.out.println("Welcome to ConTech, your personal contact tracker.\n" + LINE);
