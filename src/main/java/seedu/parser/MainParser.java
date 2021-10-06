@@ -1,15 +1,13 @@
 package seedu.parser;
 
-import seedu.command.AddContactCommand;
-import seedu.command.Command;
-import seedu.command.ExitCommand;
-import seedu.command.FailedCommand;
+import seedu.command.*;
 import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
 
 public class MainParser {
     private static final String ADD_TASK_COMD = "add";
     private static final String EXIT_COMD = "exit";
+    private static final String VIEW_COMD = "view";
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
@@ -26,6 +24,9 @@ public class MainParser {
             break;
         case EXIT_COMD:
             command = new ExitCommand();
+            break;
+        case VIEW_COMD:
+            command = parseViewContact(userInput);
             break;
         default:
             command = new FailedCommand(FailedCommandType.GENERAL);
