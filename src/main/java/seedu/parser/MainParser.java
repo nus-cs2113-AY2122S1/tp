@@ -8,6 +8,8 @@ import seedu.command.ExitCommand;
 import seedu.command.FailedCommand;
 import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
+import seedu.exception.MissingArgException;
+import seedu.exception.MissingDetailException;
 
 public class MainParser {
     private static final String ADD_TASK_COMD = "add";
@@ -51,13 +53,28 @@ public class MainParser {
             return new AddContactCommand(details[DetailType.NAME.getIndex()], details[DetailType.GITHUB.getIndex()]);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
+        } catch (MissingArgException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (MissingDetailException e) {
+            return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         }
     }
 
     private Command parseDeleteContact(String userInput) {
-        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
-        int deletedIndex = Integer.parseInt(destructuredInputs[1]) - 1;
-        return new DeleteContactCommand(deletedIndex);
+        String[] destructuredInputs = userInput.split(" ");
+        if (destructuredInputs.length == 1) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        }
+        if (destructuredInputs.length > 2) {
+            return new FailedCommand(FailedCommandType.INVALID_FORMAT);
+        }
+
+        try {
+            int deletedIndex = Integer.parseInt(destructuredInputs[1]);
+            return new DeleteContactCommand(deletedIndex);
+        } catch (NumberFormatException e) {
+            return new FailedCommand(FailedCommandType.INVALID_NUM);
+        }
     }
 
 

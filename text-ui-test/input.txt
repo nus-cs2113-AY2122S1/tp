@@ -1,8 +1,7 @@
-<<<<<<< HEAD
-add n/andre g/ng-andre
-rm 1
-=======
 add -n ng andre -g ng-andre
+add -n bory -g
 add -g lezongmun -n lezong
->>>>>>> master
+rm 0
+rm a
+rm 1
 exit
