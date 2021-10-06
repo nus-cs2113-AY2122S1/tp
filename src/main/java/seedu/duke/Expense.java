@@ -14,13 +14,8 @@ public class Expense {
         this.location = location;
     }
 
-    public void addPersons(ArrayList<Person> newListOfPersons) {
-        listOfPersons.clear();
-        Person personToAdd;
-        for (int i = 0; i < newListOfPersons.size(); i++) {
-            personToAdd = newListOfPersons.get(i);
-            listOfPersons.add(personToAdd);
-        }
+    public void addPerson(Person personToAdd) {
+        listOfPersons.add(personToAdd);
     }
 
 }
