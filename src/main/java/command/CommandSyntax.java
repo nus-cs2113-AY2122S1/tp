@@ -83,24 +83,18 @@ public class CommandSyntax {
     }
 
     /**
-     * Checks if optional parameters are valid.
+     * Checks if parameter values are valid.
      *
-     * @param ui                 Reference to the UI object passed by Main to print messages.
-     * @param parameters         HashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines          Arraylist of all medicines.
-     * @param optionalParameters Optional parameters by the command.
-     * @return A boolean value indicating whether parameters are valid.
+     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines  Arraylist of all medicines.
+     * @return A boolean value indicating whether parameter values are valid.
      */
-    public static boolean validOptionalParameterChecker(Ui ui, HashMap<String, String> parameters,
-                                                        ArrayList<Medicine> medicines, String[] optionalParameters) {
-        boolean isValid;
+    public static boolean containsInvalidParameterValues(Ui ui, HashMap<String, String> parameters,
+                                                        ArrayList<Medicine> medicines) {
         for (String parameter : parameters.keySet()) {
+            boolean isValid = false;
             String parameterValue = parameters.get(parameter);
-            boolean isOptional = Arrays.stream(optionalParameters)
-                    .anyMatch(parameter::equals);
-            if (!isOptional) {
-                continue;
-            }
 
             switch (parameter) {
             case CommandParameters.PRICE:
@@ -125,13 +119,12 @@ public class CommandSyntax {
                 isValid = StockValidator.isValidStockId(ui, parameterValue, medicines);
                 break;
             default:
-                ui.printInvalidParameter(parameter, CommandSyntax.UPDATE_COMMAND);
-                isValid = false;
+                break;
             }
             if (!isValid) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }
