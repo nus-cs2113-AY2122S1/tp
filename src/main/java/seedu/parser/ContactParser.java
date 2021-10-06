@@ -18,7 +18,8 @@ public abstract class ContactParser {
     public static final String NAME_FLAG = "n";
     public static final String GITHUB_FLAG = "g";
 
-    public abstract String[] parseContactDetails(String userInput) throws InvalidFlagException, MissingArgException, MissingDetailException;
+    public abstract String[] parseContactDetails(String userInput) throws InvalidFlagException,
+            MissingArgException, MissingDetailException;
 
     /**
      * This method takes in the contactDetails array and populates it with contact details.
