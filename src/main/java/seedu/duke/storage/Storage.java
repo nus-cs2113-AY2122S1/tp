@@ -1,8 +1,8 @@
 package seedu.duke.storage;
 
-import seedu.duke.Classes.Module;
-import seedu.duke.Classes.ModuleMapping;
-import seedu.duke.Classes.University;
+import seedu.duke.classes.Module;
+import seedu.duke.classes.ModuleMapping;
+import seedu.duke.classes.University;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,10 +15,10 @@ public class Storage {
     private static final String UNIVERSITY_FILEPATH = "data/University.csv";
 
     public ArrayList<University> load() throws IOException {
-        return readUniversitiesFromCSV();
+        return readUniversitiesFromCsv();
     }
 
-    private ArrayList<University> readUniversitiesFromCSV() throws IOException {
+    private ArrayList<University> readUniversitiesFromCsv() throws IOException {
         ArrayList<University> universityList = new ArrayList<>();
         ArrayList<ModuleMapping> moduleMappingList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(UNIVERSITY_FILEPATH));
