@@ -69,6 +69,12 @@ public class TextUi {
                 + "Here's the list :";
         printDoubleLineMessage(message);
     }
+
+    public static void viewContactsEmptyListMessage() {
+        String message = "You have not stored any contacts in ConTech";
+        printDoubleLineMessage(message);
+    }
+
     public static void exitMessage() {
         String message = "ConTech will now shutdown.\n"
                 + "We hope you have enjoyed using it.";
