@@ -25,7 +25,7 @@ public class Cookbook {
     public void listRecipe() throws GordonException {
         try {
             for (int i = 0; i < recipes.size(); i++) {
-                System.out.println((i+1) + ". " + recipes.get(i));
+                System.out.println((i + 1) + ". " + recipes.get(i));
             }
         } catch (IndexOutOfBoundsException e) {
             throw new GordonException(GordonException.INDEX_OOB);
@@ -54,9 +54,7 @@ public class Cookbook {
             int index = Integer.parseInt(inputIndex);
             recipes.remove(index - 1);
             System.out.println("OK! The recipe has been deleted from your cookbook.");
-        } catch (IndexOutOfBoundsException e) {
-            throw new GordonException(GordonException.INVALID_RECIPE);
-        } catch (IllegalArgumentException e) {
+        } catch (IndexOutOfBoundsException | IllegalArgumentException e) {
             throw new GordonException(GordonException.INVALID_RECIPE);
         }
     }
