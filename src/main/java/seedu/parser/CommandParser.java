@@ -34,7 +34,7 @@ public class CommandParser {
         } else if (lowerCaseText.startsWith("timetable")) {
             command = new TimetableCommand(Duke.timetable);
         } else if (lowerCaseText.startsWith("add")) {
-            command = parseAddCommand(text, timetable.getSemester(), timetable);
+            command = parseAddCommand(text, timetable);
         } else {
             command = new InvalidCommand();
         }
@@ -63,7 +63,7 @@ public class CommandParser {
         return new ShowCommand(str);
     }
 
-    public Command parseAddCommand(String input, Integer semester, Timetable timetable) {
+    public Command parseAddCommand(String input, Timetable timetable) {
         input = input.substring(ADD_LENGTH).trim();
         String moduleCode = input.toUpperCase();
         return new AddCommand(moduleCode, timetable);
