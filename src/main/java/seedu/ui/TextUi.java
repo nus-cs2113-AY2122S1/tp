@@ -41,6 +41,13 @@ public class TextUi {
         );
     }
 
+    // Used to print a line after displayed data
+    public static void printBottomLine() {
+        System.out.println(
+                "\n" + LINE
+        );
+    }
+
     private static void initMessage() {
         printDoubleLineMessage(LOGO);
         System.out.println("Welcome to ConTech, your personal contact tracker.\n" + LINE);
@@ -55,6 +62,21 @@ public class TextUi {
     public static void addContactMessage(String contactName, int listSize) {
         String message = "ConTech has added the specified contact: " + contactName + "\n"
                 + "You now have " + listSize + " contact(s).";
+        printDoubleLineMessage(message);
+    }
+
+    public static void printContactWithIndex(int index, String contactName) {
+        System.out.println(index + ". " + contactName);
+    }
+
+    public static void contactsListMessage(int listSize) {
+        String message = "ConTech has " + listSize + " contacts stored.\n"
+                + "Here's the list :";
+        printDoubleLineMessage(message);
+    }
+
+    public static void contactsEmptyListMessage() {
+        String message = "You have not stored any contacts in ConTech";
         printDoubleLineMessage(message);
     }
 
