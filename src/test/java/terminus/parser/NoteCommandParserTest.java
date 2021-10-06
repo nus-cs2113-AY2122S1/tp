@@ -96,43 +96,7 @@ public class NoteCommandParserTest {
         assertTrue(commandParser.parseCommand("view 1") instanceof ViewCommand);
     }
 
-    @Test
-    void execute_addCommand_success() throws InvalidCommandException, InvalidArgumentException {
-        Command addCommand = commandParser.parseCommand("add \"test\" \"test1\"");
-        CommandResult addResult = addCommand.execute(ui, nusModule);
-        assertTrue(addResult.isOk());
-        assertEquals(1, nusModule.getContentManager().getTotalContents());
-        assertTrue(nusModule.getContentManager().getContentData(1).contains("test"));
-        assertTrue(nusModule.getContentManager().getContentData(1).contains("test1"));
-        for (int i = 0; i < 5; i++) {
-            addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
-            addResult = addCommand.execute(ui, nusModule);
-            assertTrue(addResult.isOk());
-        }
-        assertEquals(6, nusModule.getContentManager().getTotalContents());
-    }
 
-    @Test
-    void execute_deleteCommand_success() throws InvalidCommandException, InvalidArgumentException {
-        for (int i = 0; i < 5; i++) {
-            Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
-            CommandResult addResult = addCommand.execute(ui, nusModule);
-            assertTrue(addResult.isOk());
-        }
-
-        assertEquals(5, nusModule.getContentManager().getTotalContents());
-
-        Command deleteCommand = commandParser.parseCommand("delete 1");
-        CommandResult deleteResult = deleteCommand.execute(ui, nusModule);
-        assertTrue(deleteResult.isOk());
-        assertEquals(4, nusModule.getContentManager().getTotalContents());
-        for (int i = 2; i < 4; i++) {
-            deleteCommand = commandParser.parseCommand("delete " + i);
-            deleteResult = deleteCommand.execute(ui, nusModule);
-            assertTrue(deleteResult.isOk());
-        }
-        assertEquals(2, nusModule.getContentManager().getTotalContents());
-    }
 
     @Test
     void getCommandList_containsBasicCommands() {
