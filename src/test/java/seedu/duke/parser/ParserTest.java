@@ -6,8 +6,8 @@ import seedu.duke.command.Command;
 import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.workout.DeleteWorkoutCommand;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.parser.Parser.MESSAGE_INVALID_COMMAND;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
     private Parser parser;
