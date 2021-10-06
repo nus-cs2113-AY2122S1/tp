@@ -155,4 +155,7 @@ public class Timetable {
         }
     }
 
+    public Integer getSemester() {
+        return semester;
+    }
 }

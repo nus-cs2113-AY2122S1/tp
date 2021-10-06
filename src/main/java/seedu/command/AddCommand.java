@@ -49,6 +49,7 @@ public class AddCommand extends Command {
             ArrayList<Lesson> lab = selectLesson(semesterData, LAB);
             addToTimetable(lab, module);
         }
+        TextUi.printLessonAdded();
     }
 
     public ArrayList<Lesson> selectLesson(Semester semesterData, String lessonType) {

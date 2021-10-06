@@ -168,4 +168,8 @@ public class TextUi {
     public static void printLessonInfo(int serial, Lesson lesson) {
         System.out.println(serial + ": " + lesson.lessonDetails());
     }
+
+    public static void printLessonAdded() {
+        System.out.println("Lessons for all modules have been successfully added");
+    }
 }
