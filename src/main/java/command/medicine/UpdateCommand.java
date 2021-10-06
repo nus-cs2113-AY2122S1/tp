@@ -6,11 +6,13 @@ import command.CommandSyntax;
 import inventory.Stock;
 import inventory.Medicine;
 import parser.DateParser;
+import parser.MedicineManager;
 import parser.StockValidator;
 import ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -18,96 +20,100 @@ import java.util.HashMap;
  */
 
 public class UpdateCommand extends Command {
-    private static final int PARAM_COUNT_ONLY_ID = 1;
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
-        String[] stockIdParameter = {CommandParameters.STOCK_ID};
-        boolean isPresentStockId = !CommandSyntax.containsInvalidParameters(ui, parameters, stockIdParameter,
-                CommandSyntax.UPDATE_COMMAND);
-
-        if (!isPresentStockId) {
-            return;
-        }
-
-        // Checks validity of compulsory parameter
-        boolean isValidID = StockValidator.isValidStockId(ui, parameters.get(CommandParameters.STOCK_ID), medicines);
-        if (!isValidID) {
-            return;
-        }
-
-        // Checks empty optional parameter
-        if (parameters.size() == PARAM_COUNT_ONLY_ID) {
-            ui.print("Please provide at least one optional parameter!\n"
-                    + "COMMAND SYNTAX: " + CommandSyntax.UPDATE_COMMAND);
-            return;
-        }
-
+        String[] requiredParameter = {CommandParameters.STOCK_ID};
         String[] optionalParameters = {CommandParameters.PRICE, CommandParameters.QUANTITY,
             CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.UPDATED_MEDICINE_NAME,
             CommandParameters.MAX_QUANTITY};
-        // Checks validity of optional parameters
-        boolean containValidParameters = CommandSyntax.validOptionalParameterChecker(ui, parameters, medicines,
-                optionalParameters);
-        if (!containValidParameters) {
+
+        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
+                optionalParameters, CommandSyntax.UPDATE_COMMAND);
+        if (isInvalidParameter) {
             return;
         }
 
-        processUpdatesByStockID(ui, parameters, medicines);
+        boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines);
+        if (isInvalidParameterValues) {
+            return;
+        }
+
+        Stock stock = MedicineManager.extractStockObject(parameters, medicines);
+        boolean isValidQuantityValues = processQuantityValues(ui, parameters, medicines, stock);
+        if (!isValidQuantityValues) {
+            return;
+        }
+
+        boolean isValidExpDate = processDateInput(ui, parameters, medicines, stock);
+        if (!isValidExpDate) {
+            return;
+        }
+
+    private boolean processDateInput(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                                     Stock stock) {
+        String name = stock.getMedicineName();
+
+        boolean hasExpiryDate = parameters.containsKey(CommandParameters.EXPIRY_DATE);
+        if (!hasExpiryDate) {
+            return true;
+        }
+
+        Date expiryDate = null;
+        try {
+            expiryDate = DateParser.stringToDate(parameters.get(CommandParameters.EXPIRY_DATE));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return StockValidator.dateValidityChecker(ui, medicines, expiryDate, name);
     }
 
     /**
-     * Process values to be updated given a stock id.
+     * Process quantity values to be updated given a stock id.
      *
      * @param ui         Reference to the UI object passed by Main to print messages.
      * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
      * @param medicines  Arraylist of all medicines.
+     * @return Boolean value indicating if quantity values are valid.
      */
-    private void processUpdatesByStockID(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
-        int stockID = Integer.parseInt(parameters.get(CommandParameters.STOCK_ID));
+    private boolean processQuantityValues(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                                          Stock stock) {
 
-        Stock stock = null;
-        for (Medicine medicine : medicines) {
-            if (((Stock) medicine).getStockID() == stockID) {
-                stock = (Stock) medicine;
-                break;
-            }
-        }
+        String name = stock.getMedicineName();
 
-        int currentQuantity = stock.getQuantity();
-        int currentMaxQuantity = stock.getMaxQuantity();
+        int quantity = 0;
+        int maxQuantity = 0;
+        int totalStockQuantity = 0;
+        int initialQuantity = 0;
+        int updatedQuantity = 0;
 
         boolean hasQuantity = parameters.containsKey(CommandParameters.QUANTITY);
         boolean hasMaxQuantity = parameters.containsKey(CommandParameters.MAX_QUANTITY);
 
+        // initialise quantity and max quantity based on the different combinations of user inputs
+        if (hasQuantity && hasMaxQuantity) {
+            totalStockQuantity = MedicineManager.getTotalStockQuantity(medicines, name);
+            initialQuantity = stock.getQuantity();
+            updatedQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
+            quantity = totalStockQuantity - initialQuantity + updatedQuantity;
+            maxQuantity = Integer.parseInt(parameters.get(CommandParameters.MAX_QUANTITY));
+        }
+
         if (hasQuantity && !hasMaxQuantity) {
-            int quantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
-            if (quantity > currentMaxQuantity) {
-                ui.print("Update aborted! New quantity cannot be more than the current maximum quantity!");
-                return;
-            }
+            totalStockQuantity = MedicineManager.getTotalStockQuantity(medicines, name);
+            initialQuantity = stock.getQuantity();
+            updatedQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
+            quantity = totalStockQuantity - initialQuantity + updatedQuantity;
+            maxQuantity = MedicineManager.getMaxStockQuantity(medicines, name);
         }
 
         if (!hasQuantity && hasMaxQuantity) {
-            int maxQuantity = Integer.parseInt(parameters.get(CommandParameters.MAX_QUANTITY));
-            if (currentQuantity > maxQuantity) {
-                ui.print("Update aborted! New maximum quantity cannot be less than the current quantity!");
-                return;
-            }
+            quantity = MedicineManager.getTotalStockQuantity(medicines, name);
+            maxQuantity = Integer.parseInt(parameters.get(CommandParameters.MAX_QUANTITY));
         }
 
-        if (hasQuantity && hasMaxQuantity) {
-            int quantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
-            int maxQuantity = Integer.parseInt(parameters.get(CommandParameters.MAX_QUANTITY));
-            if (quantity > maxQuantity) {
-                ui.print("Update aborted! New quantity cannot be more than the new maximum quantity!");
-                return;
-            }
-        }
-
-        setUpdatesByStockID(parameters, stock);
-        ui.print("Updated");
-        ui.printMedicine(stock);
+        return StockValidator.quantityValidityChecker(ui, quantity, maxQuantity);
     }
 
     /**
