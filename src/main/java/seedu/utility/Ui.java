@@ -1,5 +1,6 @@
 package seedu.utility;
 
+import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 
@@ -98,16 +99,16 @@ public class Ui {
         System.out.println("Your most recent spending: ");
     }
     
-    public void printExpenseDeleted() {
-        System.out.println(".... has been removed");
+    public void printExpenseDeleted(Entry deletedEntry) {
+        System.out.println(deletedEntry + ".... has been removed");
     }
     
     public void printIncomeAdded() {
         System.out.println("Your most recent earning: ");
     }
     
-    public void printIncomeDeleted() {
-        System.out.println(".... has been removed");
+    public void printIncomeDeleted(Entry deletedIncomeEntry) {
+        System.out.println(deletedIncomeEntry + ".... has been removed");
     }
     
     public void printHelp() {

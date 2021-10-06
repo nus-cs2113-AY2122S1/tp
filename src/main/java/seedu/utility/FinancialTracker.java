@@ -20,29 +20,30 @@ public class FinancialTracker {
     }
 
     public void addEntry(Entry entry) {
-        //TODO
     }
 
-    public void deleteEntry(int entryIndex) {
-        //TODO
+    public ArrayList<Object> listExpense() {
+        return null;
     }
 
-    public ArrayList<Entry> listExpense() {
+    public ArrayList<Object> listIncome() {
         //TODO
         return null;
     }
 
-    public ArrayList<Entry> listIncome() {
-        //TODO
+    public Entry getEntry(int EntryIndex) {
+        return this.financialEntries.get(EntryIndex);
+    }
+
+    public ArrayList<Entry> getEntries() {
+        return this.financialEntries;
+    }
+
+    public ArrayList<Object> getTotalExpense() {
         return null;
     }
 
-    public Entry getTotalExpense() {
-        //TODO
-        return null;
-    }
-
-    public Entry getTotalIncome() {
+    public ArrayList<Object> getTotalIncome() {
         //TODO
         return null;
     }
