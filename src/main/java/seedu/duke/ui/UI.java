@@ -18,4 +18,7 @@ public class UI {
 
     public void printCommandOutput(String commandOutput) {
     }
+
+    public void printErrorMessage(String message) {
+    }
 }
