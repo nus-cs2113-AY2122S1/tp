@@ -19,7 +19,7 @@ public class Parser {
         case "list":
             return new ListCommand(command);
         case "delete":
-            return new DeleteCommand();
+            return new DeleteCommand(command);
         case "add":
             return new AddCommand();
         case "bye":
