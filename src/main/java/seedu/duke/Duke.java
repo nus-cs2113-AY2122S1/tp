@@ -22,15 +22,6 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
-
-        //test parser
-        for (int i = 0; i < 10; i++) {
-            String tmp = in.nextLine();
-            try {
-                Command p = new SepPlannerParser().parseCommand(tmp);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
         }
     }
 }
