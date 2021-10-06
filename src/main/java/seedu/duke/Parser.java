@@ -8,6 +8,9 @@ public class Parser {
     public static final int NAME_INDEX = 0;
     public static final int INGREDIENTS_INDEX = 1;
     public static final int STEPS_INDEX = 2;
+    public static final int INGREDIENTS_WORD_LENGTH = 11;
+    public static final int STEPS_WORD_LENGTH = 5;
+
 
     public void parseMaster(Cookbook cookbook) {
         Scanner in = new Scanner(System.in);
@@ -21,7 +24,6 @@ public class Parser {
                     Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
                     parseIngredients(splitContent[INGREDIENTS_INDEX], r);
                     parseSteps(splitContent[STEPS_INDEX], r);
-
                     cookbook.addRecipe(r);
                     System.out.println("Added " + r.name + " recipe! Yum!");
                     System.out.println(r);
@@ -57,7 +59,12 @@ public class Parser {
 
     public void parseIngredients(String line, Recipe r) throws GordonException {
         //For all ingredients,
-        String[] ingredientsList = line.split("\\+");
+        int ingredientsIndex = line.indexOf("ingredients");
+        if (ingredientsIndex == -1) {
+            throw new GordonException("Please use the word 'ingredients' to kickstart the adding of ingredients.");
+        }
+        String newLine = line.substring(ingredientsIndex + INGREDIENTS_WORD_LENGTH);
+        String[] ingredientsList = newLine.split("\\+");
         for (int i = 0; i < ingredientsList.length; i++) {
             Ingredient ingredient = new Ingredient(ingredientsList[i]);
             r.addIngredient(ingredient, i);
@@ -66,7 +73,12 @@ public class Parser {
 
     public void parseSteps(String line, Recipe r) throws GordonException {
         //For all steps,
-        String[] stepsList = line.split("\\+");
+        int stepsIndex = line.indexOf("steps");
+        if (stepsIndex == -1) {
+            throw new GordonException("Please use the word 'steps' to kickstart the adding of steps.");
+        }
+        String newLine = line.substring(stepsIndex + STEPS_WORD_LENGTH);
+        String[] stepsList = newLine.split("\\+");
         for (int i = 0; i < stepsList.length; i++) {
             r.addStep(stepsList[i], i);
         }

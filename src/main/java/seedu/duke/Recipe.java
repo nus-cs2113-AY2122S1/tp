@@ -14,7 +14,7 @@ public class Recipe {
     protected int calories;
     protected ArrayList<String> tags;
 
-    public Recipe(String name) {
+    public Recipe(String name) throws GordonException {
         this.name = name;
         ingredients = new ArrayList<>();
         steps = new ArrayList<>();
