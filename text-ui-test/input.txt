@@ -1,9 +1,1 @@
 hello
-add
-delete
-help
-list
-next
-select
-update
-bye
