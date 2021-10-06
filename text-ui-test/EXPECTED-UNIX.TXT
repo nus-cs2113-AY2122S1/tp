@@ -18,8 +18,13 @@ data/contacts.txt
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: andre
+ConTech has added the specified contact: ng andre
 You now have 1 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: lezong
+You now have 2 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
