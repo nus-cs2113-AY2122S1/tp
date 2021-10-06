@@ -1,6 +1,6 @@
 package medbot;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ class ParserTest {
                 {"   ", "Email address not specified"},
                 {"johntan_@example.com", "Incorrect email address format"},
                 {"_johntan@example.com", "Incorrect email address format"},
-                {"johntan@example","Incorrect email address format"}
+                {"johntan@example", "Incorrect email address format"}
         };
 
         Method method = Parser.class.getDeclaredMethod("parseEmailAddress", String.class);
@@ -38,13 +38,13 @@ class ParserTest {
     @Test
     public void testParsePhoneNumber() throws Exception {
         String[][] testPhoneNumbers = {
-                {"81234567","81234567"},
-                {"8123 4567","81234567"},
-                {"8123_4567","81234567"},
-                {"8123456","Phone number has too few digits"},
-                {"812345678","Phone number has too many digits"},
-                {"   ","Phone number not specified"},
-                {"8123456A","Phone number contains unexpected characters"},
+                {"81234567", "81234567"},
+                {"8123 4567", "81234567"},
+                {"8123_4567", "81234567"},
+                {"8123456", "Phone number has too few digits"},
+                {"812345678", "Phone number has too many digits"},
+                {"   ", "Phone number not specified"},
+                {"8123456A", "Phone number contains unexpected characters"},
         };
 
         Method method = Parser.class.getDeclaredMethod("parsePhoneNumber", String.class);
@@ -67,7 +67,7 @@ class ParserTest {
         String[][] testNames = {
                 {"John Tan", "John Tan"},
                 {"john tan", "John Tan"},
-                {"john-tan","John-Tan"},
+                {"john-tan", "John-Tan"},
                 {"JOHN TAN", "John Tan"},
                 {"   ", "Name not specified"}
         };
