@@ -42,12 +42,12 @@ public class Person {
         listOfExpenses.add(expense);
     }
 
-//    public float getTotalExpenditure() {
-//        float total = 0;
-//        for (Expense expense : listOfExpenses) {
-//            total += Expense.getAmountSpent() / Expense.getPersonsInvolved().size(); //Assuming everyone pays equally
-//        }
-//        return total;
-//    }
+    //public float getTotalExpenditure() {
+        //float total = 0;
+        //for (Expense expense : listOfExpenses) {
+            //total += Expense.getAmountSpent() / Expense.getPersonsInvolved().size(); //Assuming everyone pays equally
+        //}
+        //return total;
+    //}
 
 }
