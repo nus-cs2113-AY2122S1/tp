@@ -17,7 +17,7 @@ public class Trip {
     public void getWhoOwesMe() {
 
         for (Person person : listOfPersons) {
-
+            Ui.printWhoOwesMe(person);
         }
 
     }
