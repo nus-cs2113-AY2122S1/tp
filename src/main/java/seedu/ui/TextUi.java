@@ -1,9 +1,8 @@
 package seedu.ui;
 
-import seedu.module.Module;
 import seedu.module.Lesson;
+import seedu.module.Module;
 
-import java.time.DayOfWeek;
 import java.util.Scanner;
 
 public class TextUi {
@@ -150,18 +149,18 @@ public class TextUi {
 
     public static void printLessonMessage(String lessonType) {
         switch (lessonType) {
-        case "Lecture":
-            System.out.println("Which Lecture time slot would you like to add ?");
-            System.out.println("Lecture Time slots:");
-            break;
-        case "Tutorial":
-            System.out.println("Which Tutorial time slot would you like to add ?");
-            System.out.println("Tutorial Time slots:");
-            break;
-        default:
-            System.out.println("Which Laboratory time slot would you like to add ?");
-            System.out.println("Laboratory Time slots:");
-            break;
+            case "Lecture":
+                System.out.println("Which Lecture time slot would you like to add ?");
+                System.out.println("Lecture Time slots:");
+                break;
+            case "Tutorial":
+                System.out.println("Which Tutorial time slot would you like to add ?");
+                System.out.println("Tutorial Time slots:");
+                break;
+            default:
+                System.out.println("Which Laboratory time slot would you like to add ?");
+                System.out.println("Laboratory Time slots:");
+                break;
         }
     }
 
