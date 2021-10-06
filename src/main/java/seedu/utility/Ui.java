@@ -1,5 +1,6 @@
 package seedu.utility;
 
+import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 
@@ -74,21 +75,21 @@ public class Ui {
         }
     }
     
-    public void printTotalExpense(ArrayList<Object> entries) {
+    public void printTotalExpense(ArrayList<Entry> entries) {
         int totalExpense = 0;
-        for (Object entry:entries) {
+        for (Entry entry:entries) {
             if (entry instanceof Expense) {
-                totalExpense += Expense.getValue();
+                totalExpense += entry.getValue();
             }
         }
         System.out.printf("Your total expense is: %d\n",totalExpense);
     }
     
-    public void printTotalIncome(ArrayList<Object> entries) {
+    public void printTotalIncome(ArrayList<Entry> entries) {
         int totalIncome = 0;
-        for (Object entry:entries) {
+        for (Entry entry:entries) {
             if (entry instanceof Income) {
-                totalIncome += Income.getValue();
+                totalIncome += entry.getValue();
             }
         }
         System.out.printf("Your total income is: %d\n",totalIncome);
