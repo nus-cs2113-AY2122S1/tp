@@ -6,6 +6,7 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.task.TaskManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +17,6 @@ public class Parser {
     private static final String HELP_COMMAND = "help";
     private static final String ADD_COMMAND = "add";
     private static final String LIST_COMMAND = "list";
-
 
     private static final String FLAG_REGEX = "^--\\w+";
 
@@ -40,7 +40,7 @@ public class Parser {
         return flagsToArguments;
     }
 
-    public static Command parseCommand(String userInput) {
+    public static Command parseCommand(TaskManager taskManager, String userInput) {
 
         String[] inputArguments = userInput.split("\\s+", 2);
         String command = inputArguments[0];
@@ -56,14 +56,15 @@ public class Parser {
         case HELP_COMMAND:
             return new HelpCommand();
         case ADD_COMMAND:
-            return new AddCommand(commandOptions);
+            return new AddCommand(taskManager, commandOptions);
         case LIST_COMMAND:
-            return new ListCommand(commandOptions);
+            return new ListCommand(taskManager, commandOptions);
         default:
             return new InvalidCommand();
         }
     }
 
+    // Used to debug and check the whether the user command mapping of flag->value works
     public static String printCommandOptions(Map<String, String> commandOptions) {
 
         String flagsToArguments = "";
