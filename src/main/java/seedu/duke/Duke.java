@@ -16,14 +16,12 @@ public class Duke {
     private static String path = "data/Modules.json";
     public static Timetable timetable = new Timetable(1);
     public static CommandParser commandParser = new CommandParser();
-    public ModStorage modStorage;
 
     public static void main(String[] args) {
         new Duke().setup();
     }
 
     private void setup() {
-        this.modStorage = new ModStorage(path);
         TextUi.printWelcomeMessage();
         setupTT();
         run();
