@@ -30,6 +30,9 @@ public class FailedCommand extends Command {
         case INVALID_FORMAT:
             TextUi.invalidFormatMessage();
             break;
+        case NUM_OUT_OF_BOUND:
+            TextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
+            break;
         default:
             return;
         }

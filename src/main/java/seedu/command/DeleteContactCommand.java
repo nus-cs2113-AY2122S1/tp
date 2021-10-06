@@ -15,8 +15,12 @@ public class DeleteContactCommand extends Command {
     }
 
     public void execute() {
-        Contact deletedContact = contactList.getContactAtIndex(deletedIndex);
-        this.contactList.deleteContact(deletedIndex);
-        TextUi.deleteContactMessage(deletedContact.getName(), contactList.getListSize());
+        try {
+            Contact deletedContact = contactList.getContactAtIndex(deletedIndex);
+            this.contactList.deleteContact(deletedIndex);
+            TextUi.deleteContactMessage(deletedContact.getName(), contactList.getListSize());
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
+            TextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
+        }
     }
 }

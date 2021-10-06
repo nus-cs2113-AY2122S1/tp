@@ -1,12 +1,13 @@
 package seedu.parser;
 
-
 import seedu.command.AddContactCommand;
 import seedu.command.DeleteContactCommand;
 import seedu.command.Command;
-import seedu.command.ExitCommand;
+import seedu.command.ViewCommand;
 import seedu.command.FailedCommand;
+import seedu.command.ExitCommand;
 import seedu.command.ListContactsCommand;
+
 import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
@@ -16,6 +17,7 @@ public class MainParser {
     private static final String ADD_TASK_COMD = "add";
     private static final String DELETE_TASK_COMD = "rm";
     private static final String EXIT_COMD = "exit";
+    private static final String VIEW_COMD = "view";
     private static final String LIST_COMD = "list";
 
     private static final int COMD_WORD_INDEX = 0;
@@ -36,6 +38,9 @@ public class MainParser {
             break;
         case EXIT_COMD:
             command = new ExitCommand();
+            break;
+        case VIEW_COMD:
+            command = parseViewContact(userInput);
             break;
         case LIST_COMD:
             command = new ListContactsCommand();
@@ -65,6 +70,21 @@ public class MainParser {
         }
     }
 
+    private Command parseViewContact(String userInput) {
+        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
+        if (destructuredInputs.length == 1) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        }
+        if (destructuredInputs.length > 2) {
+            return new FailedCommand(FailedCommandType.INVALID_FORMAT);
+        }
+        try {
+            return new ViewCommand(Integer.parseInt(destructuredInputs[1]));
+        } catch (NumberFormatException e) {
+            return new FailedCommand(FailedCommandType.INVALID_NUM);
+        }
+    }
+
     private Command parseDeleteContact(String userInput) {
         String[] destructuredInputs = userInput.split(" ");
         if (destructuredInputs.length == 1) {
@@ -73,7 +93,6 @@ public class MainParser {
         if (destructuredInputs.length > 2) {
             return new FailedCommand(FailedCommandType.INVALID_FORMAT);
         }
-
         try {
             int deletedIndex = Integer.parseInt(destructuredInputs[1]);
             return new DeleteContactCommand(deletedIndex);
@@ -81,7 +100,6 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_NUM);
         }
     }
-
 
     // Will create a function to parse details soon, hardcoding for V0.1 (7/10/21 version)
     //    private String parseDetail(String contactParameters, String tag) {

@@ -1,5 +1,7 @@
 package seedu.ui;
 
+import seedu.contact.Contact;
+
 import java.util.Scanner;
 
 public class TextUi {
@@ -65,6 +67,12 @@ public class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void viewContactMessage(Contact viewingContact, int index) {
+        String message = index + ". " + "Name: " + viewingContact.getName() + " GitHub: "
+                + viewingContact.getGithub();
+        printDoubleLineMessage(message);
+    }
+
     public static void printContactWithIndex(int index, String contactName) {
         System.out.println(index + ". " + contactName);
     }
@@ -116,25 +124,37 @@ public class TextUi {
 
     public static void missingDetailMessage() {
         String message = "There are missing details.\n"
-                + "Please remove any flags with no details\n";
+                + "Please remove any flags with no details";
         printDoubleLineMessage(message);
     }
 
     public static void missingArgMessage() {
         String message = "There seems to be missing parameters in your request.\n"
-                + "Please specify your command.\n";
+                + "Please specify your command.";
         printDoubleLineMessage(message);
     }
 
     public static void invalidNumMessage() {
         String message = "That does not seem to be a number.\n"
-                + "Please provide a number instead.\n";
+                + "Please provide a number instead.";
         printDoubleLineMessage(message);
     }
 
     public static void invalidFormatMessage() {
         String message = "ConTech is unable to understand your request.\n"
-                + "The request has not been formatted correctly. Please try again.\n";
+                + "The request has not been formatted correctly. Please try again.";
+        printDoubleLineMessage(message);
+    }
+
+    public static void numOutOfRangeMessage(int listSize) {
+        String message;
+        if (listSize == 0) {
+            message = "The number you have input is out of range.\n"
+                    + "Please input 0 as you only have 1 contact saved.";
+        } else {
+            message = "The number you have input is out of range.\n"
+                    + "Please input a number between 0 and " + listSize + ".";
+        }
         printDoubleLineMessage(message);
     }
 
