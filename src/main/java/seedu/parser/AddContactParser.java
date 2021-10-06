@@ -39,7 +39,8 @@ public class AddContactParser extends ContactParser {
      * @param detail Unparsed detail
      * @throws InvalidFlagException If the flag given is not recognised
      */
-    private void parseDetail(String[] contactDetails, String detail) throws InvalidFlagException, MissingDetailException {
+    private void parseDetail(String[] contactDetails, String detail)
+            throws InvalidFlagException, MissingDetailException {
         String[] destructuredDetails = detail.split(" ", DETAILS_TO_SPLIT);
         int indexToStore;
         switch (destructuredDetails[FLAG_INDEX_IN_DETAILS]) {
