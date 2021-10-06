@@ -7,6 +7,7 @@ import ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * Contains all the methods to validate if a Medicine's input parameters are valid.
@@ -186,6 +187,31 @@ public class StockValidator {
             ui.print("Quantity cannot be more than maximum quantity!");
             ui.print(message);
             return false;
+        }
+        return true;
+    }
+
+    /**
+     * Checks if input date for medicine already exists.
+     *
+     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param medicines  List of all medicines.
+     * @param expiryDate Expiry date given by user
+     * @param name       Medicine name to check against
+     * @return Boolean false if same expiry date exist
+     */
+    public static boolean dateValidityChecker(Ui ui, ArrayList<Medicine> medicines, Date expiryDate, String name) {
+        ArrayList<Stock> filteredMedicines = new ArrayList<>();
+        for (Medicine medicine : medicines) {
+            if (medicine instanceof Stock && name.equalsIgnoreCase(medicine.getMedicineName())) {
+                filteredMedicines.add((Stock) medicine);
+            }
+        }
+        for (Stock filteredStock : filteredMedicines) {
+            if (expiryDate.equals(filteredStock.getExpiry())) {
+                ui.print("Same expiry date already exists!");
+                return false;
+            }
         }
         return true;
     }
