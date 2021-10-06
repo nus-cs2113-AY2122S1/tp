@@ -25,7 +25,7 @@ public class ContactsEncoder {
     }
 
     private static String encodeContact(Contact contact) {
-        String stringifiedContact = contact.getName() + SEPARATOR + contact.getGithub();
+        String stringifiedContact = contact.getName() + SEPARATOR + contact.getGithub() + "\n";
         return stringifiedContact;
     }
 }
