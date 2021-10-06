@@ -1,1 +1,9 @@
-James Gosling
+hello
+add
+delete
+help
+list
+next
+select
+update
+bye
