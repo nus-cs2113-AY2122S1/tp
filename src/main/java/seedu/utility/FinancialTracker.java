@@ -20,6 +20,7 @@ public class FinancialTracker {
     }
 
     public void addEntry(Entry entry) {
+        financialEntries.add(entry);
         //TODO
     }
 
