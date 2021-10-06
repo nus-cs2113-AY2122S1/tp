@@ -1,8 +1,8 @@
 package medbot;
 
-import java.util.HashMap;
-
 import medbot.person.Patient;
+
+import java.util.HashMap;
 
 public class PatientList {
     private HashMap<Integer, Patient> patients = new HashMap<>();
@@ -21,7 +21,7 @@ public class PatientList {
 
     public String getPatientInfo(int patientId) throws MedBotException {
         if (!patients.containsKey(patientId)) {
-            throw new MedBotException("No patient with ID " + patientId + " found.");
+            throw new MedBotException(getNoPatientIdErrorMessage(patientId));
         }
         return patients.get(patientId).toString();
     }
@@ -66,7 +66,7 @@ public class PatientList {
      */
     public void editPatient(int patientId, Patient newPatientData) throws MedBotException {
         if (!patients.containsKey(patientId)) {
-            throw new MedBotException("No patient with ID " + patientId + " found.");
+            throw new MedBotException(getNoPatientIdErrorMessage(patientId));
         } else {
             mergeEditPatientData(patients.get(patientId), newPatientData);
         }
@@ -74,7 +74,7 @@ public class PatientList {
 
     public Patient deletePatient(int patientId) throws MedBotException {
         if (!patients.containsKey(patientId)) {
-            throw new MedBotException("No patient with ID " + patientId + " found.");
+            throw new MedBotException(getNoPatientIdErrorMessage(patientId));
         }
         return patients.remove(patientId);
     }
@@ -83,5 +83,9 @@ public class PatientList {
         for (int key : patients.keySet()) {
             System.out.println(patients.get(key));
         }
+    }
+
+    private String getNoPatientIdErrorMessage(int patientId) {
+        return "No patient with ID " + patientId + " found.";
     }
 }
