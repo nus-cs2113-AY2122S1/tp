@@ -22,4 +22,9 @@ public class University {
             System.out.println(output);
         }
     }
+
+    public String getName() {
+        return name;
+    }
+
 }

@@ -34,4 +34,5 @@ public class Module {
     public void setModuleCredits(int moduleCredits) {
         this.moduleCredits = moduleCredits;
     }
+
 }

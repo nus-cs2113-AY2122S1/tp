@@ -24,4 +24,5 @@ public class ModuleMapping {
     public void setMappedModule(Module mappedModule) {
         this.mappedModule = mappedModule;
     }
+
 }
