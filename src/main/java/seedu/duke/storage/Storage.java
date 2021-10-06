@@ -18,7 +18,7 @@ public class Storage {
         return readUniversitiesFromCsv();
     }
 
-    private ArrayList<University> readUniversitiesFromCsv() throws IOException {
+    private static ArrayList<University> readUniversitiesFromCsv() throws IOException {
         ArrayList<University> universityList = new ArrayList<>();
         ArrayList<ModuleMapping> moduleMappingList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(UNIVERSITY_FILEPATH));

@@ -15,20 +15,16 @@ public class Duke {
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        SepPlannerParser mainParser = new SepPlannerParser();
+
         try {
             UniversityList universityList = new UniversityList(Storage.load());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-        while (true) {
-            try {
+            SepPlannerParser mainParser = new SepPlannerParser(universityList);
+            while (true) {
                 String userInput = in.nextLine();
                 Command cmd = mainParser.parseCommand(userInput);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 }
