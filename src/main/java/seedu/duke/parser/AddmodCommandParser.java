@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.AddmodCommand;
+import seedu.duke.modules.Module;
 
 import java.text.ParseException;
 
