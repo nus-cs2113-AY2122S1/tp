@@ -21,7 +21,7 @@ public class TaskDecoder {
         return decodedTasks;
     }
 
-    public static Task decodeTaskFromString(String encodedTask) {
+    private static Task decodeTaskFromString(String encodedTask) {
         String[] taskDetails = encodedTask.trim().split(TASK_DATA_ARGS_DELIMITER);
         String taskTitle = taskDetails[INDEX_OF_TILE];
         String taskDeadline = taskDetails[INDEX_OF_DEADLINE];

@@ -23,7 +23,7 @@ public class EventDecoder {
         return decodedEvents;
     }
 
-    public static Event decodeEventFromString(String encodedEvent) {
+    private static Event decodeEventFromString(String encodedEvent) {
         String[] eventDetails = encodedEvent.trim().split(EVENT_DATA_ARGS_DELIMITER);
         String eventTitle = eventDetails[INDEX_OF_TITLE];
         String eventDateTime = eventDetails[INDEX_OF_DATETIME];
