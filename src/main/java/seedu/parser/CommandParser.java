@@ -51,9 +51,13 @@ public class CommandParser {
 
     public Command parseSearchCommandWithFlag(String text) {
         int flagPos = text.indexOf(FLAG);
-        String str = text.substring(SEARCH_LENGTH, flagPos - 1).trim();
-        if (text.toLowerCase().contains(L_FLAG)) {
-            return new SearchCommand(str, true);
+        try {
+            String str = text.substring(SEARCH_LENGTH, flagPos - 1).trim();
+            if (text.toLowerCase().contains(L_FLAG)) {
+                return new SearchCommand(str, true);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return new InvalidCommand();
         }
         return new InvalidCommand();
     }

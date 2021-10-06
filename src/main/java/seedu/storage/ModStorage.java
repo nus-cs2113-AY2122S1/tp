@@ -16,14 +16,6 @@ import java.nio.file.Files;
 
 public class ModStorage {
 
-    private final String path;
-    private final File file;
-
-    public ModStorage(String path) {
-        this.path = path;
-        this.file = new File(path);
-    }
-
     public static void saveModInfo(String moduleCode, InputStream inputStream) throws IOException, FileErrorException {
         BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
         String inputLine;
