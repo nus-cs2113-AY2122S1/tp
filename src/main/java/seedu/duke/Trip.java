@@ -14,6 +14,7 @@ public class Trip {
     private float exchangeRate;
     private String foreignCurrency;
     private String repaymentCurrency;
+    private String location;
 
     public void getWhoOwesMe() {
 
@@ -59,6 +60,8 @@ public class Trip {
     public void setRepaymentCurrency(String repaymentCurrency) {
         this.repaymentCurrency = repaymentCurrency;
     }
+
+    public void setLocation(String location) { this.location = location; }
 
     public void setPersonName(int indexOfPerson, String newName) {
         Person personToEdit = listOfPersons.get(indexOfPerson);
