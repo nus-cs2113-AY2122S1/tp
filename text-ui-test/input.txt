@@ -4,4 +4,10 @@ add / / / / /
 add //////
 eat food
 add Cookies /ingredients Butter+Flour+Sugar // / / //
+add Cookies /ingredients Butter+Flour+Sugar /steps Set oven to 160 degrees Celcius+Mix all ingredients together in a bowl+Put in preheated oven for 20 mins+Remove and let cool for 10 mins
+list
+delete 5
+delete cookies
+delete 1
+list
 exit

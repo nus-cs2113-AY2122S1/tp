@@ -15,4 +15,21 @@ GordonException: Please use the word 'ingredients' before adding ingredients.
 GordonException: Command given cannot be recognized.
 GordonException: Command given cannot be recognized.
 GordonException: Please use the word 'steps' to kickstart the adding of steps.
+Added Cookies recipe! Yum!
+Cookies
+Ingredients needed: 
+1. Butter
+2. Flour
+3. Sugar 
+Method: 
+1. Set oven to 160 degrees Celcius
+2. Mix all ingredients together in a bowl
+3. Put in preheated oven for 20 mins
+4. Remove and let cool for 10 mins
+1. Caprese Salad
+2. Cookies
+GordonException: Please select a valid recipe from the cookbook!
+GordonException: Please select a valid recipe from the cookbook!
+OK! The recipe has been deleted from your cookbook.
+1. Cookies
 Bye bye!
