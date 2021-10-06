@@ -61,10 +61,9 @@ public class NoteCommandParserTest {
     @Test
     void parseCommand_resolveAddCommand_exceptionThrown() throws InvalidCommandException, InvalidArgumentException {
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add \"test1\"test2\""));
         assertThrows(InvalidArgumentException.class,
-                () -> commandParser.parseCommand("add \"test1\"test2\""));
-        assertThrows(InvalidArgumentException.class,
-                () -> commandParser.parseCommand("add \"test\" \"test1\" \"test2\""));
+            () -> commandParser.parseCommand("add \"test\" \"test1\" \"test2\""));
     }
 
     @Test
