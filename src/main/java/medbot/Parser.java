@@ -1,5 +1,6 @@
 package medbot;
 
+import java.util.Locale;
 import medbot.command.AddPatientCommand;
 import medbot.command.Command;
 import medbot.command.DeletePatientCommand;
@@ -55,7 +56,7 @@ public class Parser {
 
     private static final String REGEX_VERTICAL_LINE = "\\|";
     private static final String REGEX_INPUT_PARAMETER = " [a-zA-Z]{1,2}/";
-    private static final String REGEX_EMAIL = "(([\\w][\\w-\\.]*[\\w])|[\\w])\\@([\\w]+\\.)+[\\w]+";
+    private static final String REGEX_EMAIL = "(([\\w&&[^_]][\\w-\\.]*[\\w&&[^_]])|[\\w&&[^_]])\\@([\\w]+\\.)+[\\w]+";
     private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
     private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
     private static final String REGEX_PHONE_NUMBER_SEPARATOR = "[- _+()]";
@@ -125,7 +126,12 @@ public class Parser {
     private static EditPatientCommand parseEditPatientCommand(String userInput) throws MedBotException {
         int patientId = 0;
         try {
-            patientId = Integer.parseInt(userInput.substring(4, 6).strip());
+            String patientIdString = userInput.substring(4).stripLeading();
+            int endSpaceIndex = patientIdString.indexOf(' ');
+            if (endSpaceIndex != -1) {
+                patientIdString = patientIdString.substring(0, endSpaceIndex);
+            }
+            patientId = Integer.parseInt(patientIdString);
         } catch (NumberFormatException ne) {
             throw new MedBotException(WRONG_NUMBER_ERROR);
         } catch (IndexOutOfBoundsException ie) {
@@ -137,25 +143,11 @@ public class Parser {
             throw new MedBotException(ERROR_NO_PARAMETER);
         }
         Patient patient = new Patient();
-        preprocessEditPersonInformation(patient);
+        patient.setNull();
         for (int i = 1; i < parameters.length; i++) {
             updatePersonalInformation(patient, parameters[i]);
         }
         return new EditPatientCommand(patientId, patient);
-    }
-
-    /**
-     * Sets all the information of the new patient data to null to avoid overwrite old information
-     * with blank space.
-     *
-     * @param person Person who all information will be set to null
-     */
-    private static void preprocessEditPersonInformation(Person person) {
-        person.setName(null);
-        person.setPhoneNumber(null);
-        person.setEmailAddress(null);
-        person.setIcNumber(null);
-        person.setResidentialAddress(null);
     }
 
     private static String preprocessInput(String userInput) {
@@ -221,7 +213,7 @@ public class Parser {
     private static String parseName(String attributeString) throws MedBotException {
         try {
             //removes "n/" attribute specifier
-            String name = attributeString.substring(2).strip();
+            String name = attributeString.strip();
             if (name.equals(EMPTY_STRING)) {
                 throw new MedBotException(ERROR_NAME_NOT_SPECIFIED);
             }
@@ -243,7 +235,7 @@ public class Parser {
      */
     private static String parseIcNumber(String attributeString) throws MedBotException {
         try {
-            String icString = attributeString.substring(2).toUpperCase().strip();
+            String icString = attributeString.toUpperCase().strip();
             if (icString.equals(EMPTY_STRING)) {
                 throw new MedBotException(ERROR_IC_NUMBER_NOT_SPECIFIED);
             }
@@ -300,7 +292,7 @@ public class Parser {
      */
     private static String parseEmailAddress(String attributeString) throws MedBotException {
         try {
-            String emailString = attributeString.substring(2).strip();
+            String emailString = attributeString.strip();
             if (emailString.equals(EMPTY_STRING)) {
                 throw new MedBotException(ERROR_EMAIL_ADDRESS_NOT_SPECIFIED);
             }
@@ -324,7 +316,7 @@ public class Parser {
      */
     private static String parseResidentialAddress(String attributeString) throws MedBotException {
         try {
-            String addressString = attributeString.substring(2).strip();
+            String addressString = attributeString.strip();
             if (addressString.equals(EMPTY_STRING)) {
                 throw new MedBotException(ERROR_ADDRESS_NOT_SPECIFIED);
             }
@@ -344,6 +336,7 @@ public class Parser {
      * @return String with each word capitalised
      */
     private static String capitaliseEachWord(String input) {
+        input = input.toLowerCase();
         Function<MatchResult, String> multiAttributeReplacementFunction = x -> {
             String match = x.group();
             if (match.length() == 1) {

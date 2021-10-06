@@ -52,4 +52,12 @@ public abstract class Person {
     public void setResidentialAddress(String residentialAddress) {
         this.residentialAddress = residentialAddress;
     }
+
+    public void setNull() {
+        icNumber = null;
+        name = null;
+        phoneNumber = null;
+        emailAddress = null;
+        residentialAddress = null;
+    }
 }
