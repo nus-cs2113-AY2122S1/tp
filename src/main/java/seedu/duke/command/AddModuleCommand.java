@@ -1,38 +1,38 @@
 package seedu.duke.command;
 
 import seedu.duke.CustomException;
-import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.module.ModuleList;
 import seedu.duke.module.Module;
 
-import java.util.HashMap;
-
 public class AddModuleCommand extends Command {
-    private static String MESSAGE_MODULE_ADDED_FORMAT = "Module added:\n  %s\nThere are %d modules in the list.";
+    private static final String MESSAGE_MODULE_ADDED_FORMAT = "Module added:\n  %s\nThere are %d modules in the list.";
 
-    private static String[] argumentKeys = new String[]{"n"};
+    private static final String[] ADD_MODULE_ARGUMENT_KEYS = {"c","n"};
 
     public AddModuleCommand(String argument) {
-        super(argument);
+        super(argument, ADD_MODULE_ARGUMENT_KEYS);
     }
 
     @Override
     public void execute(ModuleList modules, Ui ui) throws CustomException {
         if (argument.isEmpty()) {
+            // TODO Usage format message
             throw new CustomException("");
         }
 
-        String[] argumentSplit = Parser.splitFirstSpace(argument);
-        String moduleCode = argumentSplit[0];
-        String additionalArgument = argumentSplit[1];
-
-        HashMap<String, String> argumentsMap = Parser.getArgumentsFromString(additionalArgument, argumentKeys);
-        if (!checkArgumentsMap(argumentsMap, argumentKeys)) {
+        if (!checkArgumentMap()) {
+            // TODO Invalid/missing arguments message
             throw new CustomException("");
         }
 
-        String name = argumentsMap.get("n");
+        String moduleCode = argumentMap.get("c");
+        if (moduleCode.contains(" ")) {
+            // TODO Invalid module code message
+            throw new CustomException("");
+        }
+
+        String name = argumentMap.get("n");
         Module module = new Module(moduleCode, name);
         modules.addModule(module);
 

@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.CustomException;
+import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.module.ModuleList;
 
@@ -24,10 +25,18 @@ public abstract class Command {
 
     protected String argument;
     protected boolean isExit;
+    protected String[] argumentKeys;
+    protected HashMap<String,String> argumentMap;
 
     public Command(String argument) {
+        this(argument, null);
+    }
+
+    public Command(String argument, String[] argumentKeys) {
         this.argument = argument;
         this.isExit = false;
+        this.argumentKeys = argumentKeys;
+        this.argumentMap = Parser.getArgumentsFromString(argument, argumentKeys);
     }
 
     public boolean isExit() {
@@ -36,9 +45,14 @@ public abstract class Command {
 
     public abstract void execute(ModuleList modules, Ui ui) throws CustomException;
 
-    protected static boolean checkArgumentsMap(HashMap<String, String> argumentsMap, String[] argumentKeys) {
+    /**
+     * Checks if argumentMap contains all the argument keys.
+     *
+     * @return true if argumentMap contains all keys, else false.
+     */
+    protected boolean checkArgumentMap() {
         for (String key : argumentKeys) {
-            if (!argumentsMap.containsKey(key)) {
+            if (!argumentMap.containsKey(key)) {
                 return false;
             }
         }
