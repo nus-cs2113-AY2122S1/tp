@@ -34,11 +34,11 @@ public class Person {
         amtOwedToUser += amount;
     }
 
-    public void editName(String name){
+    public void editName(String name) {
         this.name = name;
     }
 
-    public void addExpense(Expense expense){
+    public void addExpense(Expense expense) {
         listOfExpenses.add(expense);
     }
 
