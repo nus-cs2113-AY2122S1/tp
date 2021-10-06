@@ -10,6 +10,7 @@ public class Trip {
     private LocalDate dateOfTrip;
     private ArrayList<Expense> listOfExpenses;
     private ArrayList<Person> listOfPersons;
+    private float budget;
     private float exchangeRate;
     private String foreignCurrency;
     private String repaymentCurrency;
@@ -35,6 +36,10 @@ public class Trip {
             //TODO: catch date exception
         }
     }
+
+    public float getBudget() { return this.budget; }
+
+    public void setBudget(float budget) { this.budget = budget; }
 
     public float getExchangeRate() {
         return exchangeRate;
