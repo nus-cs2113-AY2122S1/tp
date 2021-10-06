@@ -1,9 +1,6 @@
 invalid
 note invalid
-note
-help
 invalid
-back
 note add "CS2113T" "Week 8 test"
 note view
 note view aa
@@ -22,9 +19,7 @@ schedule view 2
 schedule delete 5
 schedule delete 1
 schedule view
-schedule
 view
 delete
-delete 1
-back
+schedule delete 1
 exit
