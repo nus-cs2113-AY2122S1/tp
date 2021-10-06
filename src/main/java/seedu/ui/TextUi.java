@@ -5,17 +5,12 @@ import seedu.contact.Contact;
 import java.util.Scanner;
 
 public class TextUi {
-    private static final String LOGO =
-            "   _____         _______        _     \n"
-            + "  / ____|       |__   __|      | |    \n"
-            + " | |     ___  _ __ | | ___  ___| |__  \n"
-            + " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n"
-            + " | |___| (_) | | | | |  __/ (__| | | |\n"
-            + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n"
-            + "                                      \n";
+    private static final String LOGO = "   _____         _______        _     \n"
+            + "  / ____|       |__   __|      | |    \n" + " | |     ___  _ __ | | ___  ___| |__  \n"
+            + " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n" + " | |___| (_) | | | | |  __/ (__| | | |\n"
+            + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      \n";
 
-    private static final String LINE =
-            "____________________________________________________________\n";
+    private static final String LINE = "____________________________________________________________\n";
 
     private final Scanner scanner;
 
@@ -24,30 +19,23 @@ public class TextUi {
         initMessage();
     }
 
-
     public String getUserInput() {
         return scanner.nextLine();
     }
 
     // Used for print messages after user inputs
     private static void printDoubleLineMessage(String message) {
-        System.out.println(
-                LINE + message + "\n" + LINE
-        );
+        System.out.println(LINE + message + "\n" + LINE);
     }
 
     // Used for system messages without user inputs
     private static void printBottomLineMessage(String message) {
-        System.out.println(
-                message + "\n" + LINE
-        );
+        System.out.println(message + "\n" + LINE);
     }
 
     // Used to print a line after displayed data
     public static void printBottomLine() {
-        System.out.println(
-                "\n" + LINE
-        );
+        System.out.println("\n" + LINE);
     }
 
     private static void initMessage() {
@@ -56,20 +44,24 @@ public class TextUi {
     }
 
     public static void createNewContactFileMessage(String contactFilePath) {
-        String message = "As ConTech is unable to find your saved data, \n"
-                + " it has created a new one for you at: \n" + contactFilePath;
+        String message = "As ConTech is unable to find your saved data, \n" + " it has created a new one for you at: \n"
+                + contactFilePath;
         printBottomLineMessage(message);
     }
 
     public static void addContactMessage(String contactName, int listSize) {
-        String message = "ConTech has added the specified contact: " + contactName + "\n"
-                + "You now have " + listSize + " contact(s).";
+        String message = "ConTech has added the specified contact: " + contactName + "\n" + "You now have " + listSize
+                + " contact(s).";
+        printDoubleLineMessage(message);
+    }
+
+    public static void editContactMessage(String contactName) {
+        String message = "ConTech has edited the specified contact: " + contactName;
         printDoubleLineMessage(message);
     }
 
     public static void viewContactMessage(Contact viewingContact, int index) {
-        String message = index + ". " + "Name: " + viewingContact.getName() + " GitHub: "
-                + viewingContact.getGithub();
+        String message = index + ". " + "Name: " + viewingContact.getName() + " GitHub: " + viewingContact.getGithub();
         printDoubleLineMessage(message);
     }
 
@@ -78,8 +70,7 @@ public class TextUi {
     }
 
     public static void contactsListMessage(int listSize) {
-        String message = "ConTech has " + listSize + " contacts stored.\n"
-                + "Here's the list :";
+        String message = "ConTech has " + listSize + " contacts stored.\n" + "Here's the list :";
         printDoubleLineMessage(message);
     }
 
@@ -89,54 +80,51 @@ public class TextUi {
     }
 
     public static void deleteContactMessage(String contactName, int listSize) {
-        String message = "ConTech has removed the specified contact: " + contactName + "\n"
-                + "You now have " + listSize + " contact(s).";
+        String message = "ConTech has removed the specified contact: " + contactName + "\n" + "You now have " + listSize
+                + " contact(s).";
         printDoubleLineMessage(message);
     }
 
     public static void exitMessage() {
-        String message = "ConTech will now shutdown.\n"
-                + "We hope you have enjoyed using it.";
+        String message = "ConTech will now shutdown.\n" + "We hope you have enjoyed using it.";
         printDoubleLineMessage(message);
     }
 
     // Error Messages
     public static void fileErrorMessage(String contactFilePath) {
-        String message = "ConTech is unfortunately unable to access / create a\n"
-                + " save file at " + contactFilePath + ".\n"
-                + "Please relocate the file and try again.";
+        String message = "ConTech is unfortunately unable to access / create a\n" + " save file at " + contactFilePath
+                + ".\n" + "Please relocate the file and try again.";
         printBottomLineMessage(message);
     }
 
     public static void invalidCommandMessage() {
-        String message = "ConTech is unable to understand your request.\n"
-                + "Please try again with a valid command.";
+        String message = "ConTech is unable to understand your request.\n" + "Please try again with a valid command.";
         printDoubleLineMessage(message);
     }
 
     public static void invalidFlagMessage() {
         String message = "There appears to be a flag that is not recognised.\n"
-                + "Please try again with a valid flag.\n"
-                + "  -n NAME\n"
-                + "  -g GITHUB";
+                + "Please try again with a valid flag.\n" + "  -n NAME\n" + "  -g GITHUB";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidIndexMessage() {
+        String message = "Please enter a valid contact index.";
         printDoubleLineMessage(message);
     }
 
     public static void missingDetailMessage() {
-        String message = "There are missing details.\n"
-                + "Please remove any flags with no details";
+        String message = "There are missing details.\n" + "Please remove any flags with no details";
         printDoubleLineMessage(message);
     }
 
     public static void missingArgMessage() {
-        String message = "There seems to be missing parameters in your request.\n"
-                + "Please specify your command.";
+        String message = "There seems to be missing parameters in your request.\n" + "Please specify your command.";
         printDoubleLineMessage(message);
     }
 
     public static void invalidNumMessage() {
-        String message = "That does not seem to be a number.\n"
-                + "Please provide a number instead.";
+        String message = "That does not seem to be a number.\n" + "Please provide a number instead.";
         printDoubleLineMessage(message);
     }
 
@@ -157,5 +145,4 @@ public class TextUi {
         }
         printDoubleLineMessage(message);
     }
-
 }

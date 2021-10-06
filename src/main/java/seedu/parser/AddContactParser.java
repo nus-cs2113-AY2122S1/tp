@@ -35,13 +35,17 @@ public class AddContactParser extends ContactParser {
      * This method takes in the contactDetails array and populates it with contact details.
      * It will sift out the flags to decide what details to populate, using the
      * enumeration from DetailType.
+     *
      * @param contactDetails String array containing contact details
-     * @param detail Unparsed detail
+     * @param detail         Unparsed detail
      * @throws InvalidFlagException If the flag given is not recognised
      */
-    private void parseDetail(String[] contactDetails, String detail)
-            throws InvalidFlagException, MissingDetailException {
-        String[] destructuredDetails = detail.split(" ", DETAILS_TO_SPLIT);
+    public void parseDetail(String[] contactDetails, String detail) throws InvalidFlagException,
+            MissingDetailException {
+        String[] destructuredDetails = detail.split(" ", NUMBER_OF_DETAILS);
+        if (destructuredDetails.length < 2) {
+            throw new MissingDetailException();
+        }
         int indexToStore;
         switch (destructuredDetails[FLAG_INDEX_IN_DETAILS]) {
         case NAME_FLAG:
@@ -52,10 +56,6 @@ public class AddContactParser extends ContactParser {
             break;
         default:
             throw new InvalidFlagException();
-        }
-
-        if (destructuredDetails.length == 1 || destructuredDetails[DETAIL_INDEX_IN_DETAILS].isBlank()) {
-            throw new MissingDetailException();
         }
         contactDetails[indexToStore] = destructuredDetails[DETAIL_INDEX_IN_DETAILS];
     }
