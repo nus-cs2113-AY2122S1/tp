@@ -1,1 +1,7 @@
+add Caprese Salad /ingredients Tomatoes+Mozzarella+Basil+Olive Oil /steps Cut tomatoes into 1 inch slices+Cut mozzarella into similar slices+Arrange slices on plate+Drizzle with olive oil
+add something
+add / / / / /
+add //////
+eat food
+add Cookies /ingredients Butter+Flour+Sugar // / / //
 exit

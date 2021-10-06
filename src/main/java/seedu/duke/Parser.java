@@ -8,9 +8,8 @@ public class Parser {
     public static final int NAME_INDEX = 0;
     public static final int INGREDIENTS_INDEX = 1;
     public static final int STEPS_INDEX = 2;
-    public static final int INGREDIENTS_WORD_LENGTH = 11;
-    public static final int STEPS_WORD_LENGTH = 5;
-
+    public static final int INGREDIENTS_WORD_LENGTH = 12;
+    public static final int STEPS_WORD_LENGTH = 6;
 
     public void parseMaster(Cookbook cookbook) {
         Scanner in = new Scanner(System.in);
@@ -18,42 +17,45 @@ public class Parser {
             String line  = in.nextLine();
             try {
                 if (parseCommand(line).equalsIgnoreCase("add")) {
-                    //Format of input:
-                    //add [recipe name] /ingredients [ingredients separated by +] /steps [steps separated by +]
                     String[] splitContent = line.split("/");
+                    if (splitContent.length < 3) {
+                        throw new GordonException(GordonException.COMMAND_INVALID);
+                    }
                     Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
                     parseIngredients(splitContent[INGREDIENTS_INDEX], r);
                     parseSteps(splitContent[STEPS_INDEX], r);
                     cookbook.addRecipe(r);
                     System.out.println("Added " + r.name + " recipe! Yum!");
-                    System.out.println(r);
-                }
-                if (parseCommand(line).equalsIgnoreCase("delete")) {
+                    System.out.print(r);
+                } else if (parseCommand(line).equalsIgnoreCase("delete")) {
                     nameRecipe = parseName(line);
-                }
-                if (parseCommand(line).equalsIgnoreCase("check")) {
+                } else if (parseCommand(line).equalsIgnoreCase("check")) {
                     nameRecipe = parseName(line);
-                }
-                if (parseCommand(line).equalsIgnoreCase("exit")) {
+                } else if (parseCommand(line).equalsIgnoreCase("exit")) {
                     System.out.println("Bye bye!");
                     break;
+                } else {
+                    throw new GordonException(GordonException.COMMAND_INVALID);
                 }
             } catch (GordonException e) {
-                System.out.println("GordonException:" + e.getMessage());
+                System.out.println("GordonException: " + e.getMessage());
             }
         }
     }
 
-    public String parseCommand(String line) {
+    public String parseCommand(String line) throws GordonException {
         int spaceIndex = line.indexOf(" ");
-        return spaceIndex == -1 ? line : line.substring(0, spaceIndex);
+        return (spaceIndex == -1) ? line : line.substring(0, spaceIndex);
     }
 
-    public String parseName(String line) {
+    public String parseName(String line) throws GordonException {
         int spaceIndex = line.indexOf(" ");
-        String name = line.substring(spaceIndex);
 
-        return spaceIndex == -1 ? line : name;
+        if (spaceIndex == -1) {
+            throw new GordonException(GordonException.COMMAND_INVALID);
+        }
+
+        return line.substring(spaceIndex).trim();
     }
 
 
@@ -61,7 +63,7 @@ public class Parser {
         //For all ingredients,
         int ingredientsIndex = line.indexOf("ingredients");
         if (ingredientsIndex == -1) {
-            throw new GordonException("Please use the word 'ingredients' to kickstart the adding of ingredients.");
+            throw new GordonException(GordonException.INGREDIENTS_FORMAT);
         }
         String newLine = line.substring(ingredientsIndex + INGREDIENTS_WORD_LENGTH);
         String[] ingredientsList = newLine.split("\\+");
@@ -75,7 +77,7 @@ public class Parser {
         //For all steps,
         int stepsIndex = line.indexOf("steps");
         if (stepsIndex == -1) {
-            throw new GordonException("Please use the word 'steps' to kickstart the adding of steps.");
+            throw new GordonException(GordonException.STEPS_FORMAT);
         }
         String newLine = line.substring(stepsIndex + STEPS_WORD_LENGTH);
         String[] stepsList = newLine.split("\\+");
