@@ -19,12 +19,24 @@ public class TextUi {
 
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
+    private static final String HELP_MESSAGE = LINE
+            + "\tNUSModsLite accepts the following commands:-\n"
+            + "\t\t| No.|            Command Action                      | Command Syntax          |\n"
+            + "\t\t| 1. | Search module based on the given partial regex | search <module_code>    |\n"
+            + "\t\t| 2. | Display module information                     | show <module_code>      |\n"
+            + "\t\t| 3. | Add module to the Timetable                    | add <module_code>       |\n"
+            + "\t\t| 4. | Remove module from the Timetable               | delete <module_code>    |\n"
+            + "\t\t| 5. | Remove all modules from the Timetable          | clear                   |\n"
+            + "\t\t| 6. | Display the Timetable                          | timetable               |\n"
+            + "\t\t| 7. | Exit From Program                              | exit                    |\n"
+            + "\t ** Note: For details, refer to the User Guide of NUSModsLite at: "
+            + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n" + LINE;
 
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
         System.out.println();
         String input = in.nextLine();
-        while (input.isBlank()) {
+        while (input.isEmpty()) {
             input = in.nextLine();
         }
         return input;
@@ -32,6 +44,10 @@ public class TextUi {
 
     public static void printExitMessage() {
         System.out.print(LINE + "> Bye friend!\n> See you again! :)\n" + LINE);
+    }
+
+    public static void printHelpMessage() {
+        System.out.print(HELP_MESSAGE);
     }
 
     public static void printInvalidCommandMessage() {
