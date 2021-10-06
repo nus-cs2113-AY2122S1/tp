@@ -48,4 +48,9 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         }
     }
+
+    private Command parseViewContact(String userInput) {
+        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
+        return new ViewCommand(Integer.parseInt(destructuredInputs[1]));
+    }
 }
