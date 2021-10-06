@@ -61,6 +61,8 @@ public class MediVault {
         try {
             medicines.add(new Stock("PANADOL", 20, 10, DateParser.stringToDate("13-9-2021"),
                     "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
+            medicines.add(new Stock("PANADOL", 20, 10, DateParser.stringToDate("14-9-2021"),
+                    "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
             medicines.add(new Stock("VICODIN", 10, 20, DateParser.stringToDate("30-9-2021"),
                     "POPULAR DRUG FOR TREATING ACUTE OR CHRONIC MODERATE TO MODERATELY SEVERE PAIN",
                     500));

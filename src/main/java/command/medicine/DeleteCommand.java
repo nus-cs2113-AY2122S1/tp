@@ -20,8 +20,10 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         String[] requiredParameters = {CommandParameters.STOCK_ID};
+        String[] optionalParameters = {};
 
-        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, CommandSyntax.DELETE_COMMAND)) {
+        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
+            CommandSyntax.DELETE_COMMAND)) {
             return;
         }
 
