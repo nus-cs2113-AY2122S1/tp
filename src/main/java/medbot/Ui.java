@@ -98,4 +98,84 @@ public class Ui {
 
         return output;
     }
+
+    public void printCommandList() {
+        System.out.println("Here are the list of commands:\n\n" +
+                "help\n" +
+                "add\n" +
+                "list\n" +
+                "view\n" +
+                "edit\n" +
+                "delete\n" +
+                "exit\n" +
+                "\n" +
+                "To obtain more information on each command and their respective required inputs, type:\n" +
+                "help [COMMAND]");
+    }
+
+    public void printListHelpMessage() {
+        System.out.println("View information of all current patients.\n" +
+                "Format: list\n" +
+                "Expected Output\n" +
+                "id: PATIENT1_ID\n" +
+                "name: PATIENT1_NAME\n" +
+                "\n" +
+                "\n" +
+                "id: PATIENT2_ID\n" +
+                "name: PATIENT2_NAME\n");
+    }
+
+    public void printViewHelpMessage() {
+        System.out.println("View a patient’s personal information.\n" +
+                "Format: view PATIENT_ID\n" +
+                "Expected Output: \n" +
+                "id: PATIENT_ID\n" +
+                "name: NAME\n" +
+                "phone number: PHONE_NUMBER\n" +
+                "email: EMAIL\n" +
+                "address: ADDRESS\n");
+    }
+
+    public void printAddHelpMessage() {
+        System.out.println("Add a patient to the patient’s list.\n" +
+                "Format: \n" +
+                "add i/PATIENT_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n" +
+                "Expected output: \n" +
+                "Patient with the following information has been successfully added to the list:\n" +
+                "id: PATIENT_ID\n" +
+                "name: NAME\n" +
+                "phone number: PHONE_NUMBER\n" +
+                "email: EMAIL\n" +
+                "address: ADDRESS\n");
+    }
+
+    public void printEditHelpMessage() {
+        System.out.println("Edit the personal and medical information of a patient in the list.\n" +
+                "Format: edit PATIENT_ID FIELD_TO_EDIT NEW_DATA\n" +
+                "Expected output: \n" +
+                "The FIELD_TO_EDIT of patient PATIENT_ID has been changed from OLD_DATA to NEW_DATA\n");
+    }
+
+    public void printDeleteHelpMessage() {
+        System.out.println("Delete a patient from the list.\n" +
+                "Format: \n" +
+                "delete PATIENT_ID\n" +
+                "Expected Output:\n" +
+                "Patient with the following information has been successfully deleted from the list:\n" +
+                "id: PATIENT_ID\n" +
+                "name: NAME\n" +
+                "phone number: PHONE_NUMBER\n" +
+                "email: EMAIL\n" +
+                "address: ADDRESS\n");
+    }
+
+    public void printExitHelpMessage() {
+        System.out.println("Exits the program.\n" +
+                "Format: exit\n");
+    }
+
+    public void printUnrecognisedCommandHelpMessage() {
+        System.out.println("Sorry, that's not a recognised command. To view a list of commands, type:\n" +
+                "help\n");
+    }
 }

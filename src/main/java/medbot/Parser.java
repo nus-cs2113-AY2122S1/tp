@@ -1,12 +1,6 @@
 package medbot;
 
-import medbot.command.AddPatientCommand;
-import medbot.command.Command;
-import medbot.command.DeletePatientCommand;
-import medbot.command.EditPatientCommand;
-import medbot.command.ExitCommand;
-import medbot.command.ListPatientCommand;
-import medbot.command.ViewPatientCommand;
+import medbot.command.*;
 import medbot.person.Patient;
 import medbot.person.Person;
 
@@ -22,6 +16,7 @@ public class Parser {
     private static final String COMMAND_VIEW = "view";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_EXIT = "exit";
+    private static final String COMMAND_HELP = "help";
 
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
@@ -61,6 +56,7 @@ public class Parser {
     private static final String REGEX_CAPITALISE_POSITION = "(\\A|[ _-])[a-z]";
 
     private static final String VERTICAL_LINE = "|";
+    private static final String SEPARATOR_SPACE = " ";
 
     private static final String EMPTY_STRING = "";
 
@@ -84,7 +80,22 @@ public class Parser {
         if (userInput.startsWith(COMMAND_EDIT)) {
             return parseEditPatientCommand(userInput);
         }
+        if (userInput.startsWith(COMMAND_HELP)) {
+            return parseHelpCommand(userInput);
+        }
 
+
+        throw new MedBotException(WRONG_COMMAND_ERROR);
+    }
+
+    private static HelpCommand parseHelpCommand(String userInput) throws MedBotException {
+        String[] parameters = userInput.split(SEPARATOR_SPACE);
+        if (parameters.length == 1) {
+            return new HelpCommand(userInput);
+        }
+        if (parameters.length == 2) {
+            return new HelpCommand(parameters[1]);
+        }
 
         throw new MedBotException(WRONG_COMMAND_ERROR);
     }
