@@ -1,3 +1,4 @@
 add -n ng andre -g ng-andre
 add -g lezongmun -n lezong
+view 0
 exit
