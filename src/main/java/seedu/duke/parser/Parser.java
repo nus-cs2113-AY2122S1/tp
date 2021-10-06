@@ -20,10 +20,10 @@ import java.util.Locale;
  * To make sense of user commands by extracting keywords, descriptions and time/date.
  */
 public class Parser {
-    public static final String WORKOUT_KEYWORD = "w/";
-    public static final String EXERCISE_KEYWORD = "e/";
-    public static final String SETS_KEYWORD = "s/";
-    public static final String REPS_KEYWORD = "r/";
+    public static final String WORKOUT_KEYWORD = "/w";
+    public static final String EXERCISE_KEYWORD = "/e";
+    public static final String SETS_KEYWORD = "/s";
+    public static final String REPS_KEYWORD = "/r";
     private static final String MESSAGE_INVALID_COMMAND = "Invalid command\n";
 
     public Command parseCommand(String userInputString) {

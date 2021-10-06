@@ -9,11 +9,13 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
+import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
+
 public class DisplayExercisesCommand extends Command {
     public static final String COMMAND_WORD = "display";
-    public static final String MESSAGE_USAGE = "display: Displays all exercises in the particular workout.\n"
-            + "\tParameters: w/WORKOUT_INDEX\n"
-            + "\tExample: display w/3\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all exercises in the particular workout.\n"
+            + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX\n"
+            + "\tExample: display " + WORKOUT_KEYWORD + "3\n";
     public static final String MESSAGE_LIST_EXERCISES = "Exercises in %1$s";
     public static final String MESSAGE_EMPTY_WORKOUT = "You have no workouts.";
     private final int workoutIndex;

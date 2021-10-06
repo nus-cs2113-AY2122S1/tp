@@ -6,11 +6,14 @@ import seedu.duke.storage.Storage;
 import seedu.duke.tasks.Exercise;
 import seedu.duke.ui.Ui;
 
+import static seedu.duke.parser.Parser.EXERCISE_KEYWORD;
+import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
+
 public class RemoveExerciseCommand extends Command {
     public static final String COMMAND_WORD = "remove";
-    public static final String MESSAGE_USAGE = "remove: Removes the exercise from the workout.\n"
-            + "\tParameters: w/WORKOUT_INDEX e/EXERCISE_INDEX\n"
-            + "\tExample: remove w/1 e/3\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the exercise from the workout.\n"
+            + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_INDEX\n"
+            + "\tExample: remove " + WORKOUT_KEYWORD + "1 " + EXERCISE_KEYWORD + "3\n";
     public static final String MESSAGE_SUCCESS = "Removed exercise %1$s";
     private final int workoutIndex;
     private final int exerciseIndex;
