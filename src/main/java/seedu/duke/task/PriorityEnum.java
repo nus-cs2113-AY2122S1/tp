@@ -41,11 +41,11 @@ public enum PriorityEnum {
      * @return {@link PriorityEnum} enum corresponding to <code>int priorityNumber</code> argument.
      */
     public static PriorityEnum getEnum(int priorityNumber) throws PriorityEnumDoesNotExistException {
-        if(priorityNumber > LOWEST_PRIORITY_INT || priorityNumber < HIGHEST_PRIORITY_INT){
+        if (priorityNumber > LOWEST_PRIORITY_INT || priorityNumber < HIGHEST_PRIORITY_INT) {
             throw new PriorityEnumDoesNotExistException();
         }
-        for (PriorityEnum priority : PriorityEnum.values()){
-            if (priorityNumber <= priority.getValue()){
+        for (PriorityEnum priority : PriorityEnum.values()) {
+            if (priorityNumber <= priority.getValue()) {
                 return priority;
             }
         }
