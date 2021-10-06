@@ -11,7 +11,11 @@ public class ViewCommand extends Command {
     }
 
     public void execute() {
-        Contact viewingContact = contactList.getContactAtIndex(index);
-        TextUi.viewContactMessage(viewingContact, index);
+        try {
+            Contact viewingContact = contactList.getContactAtIndex(index);
+            TextUi.viewContactMessage(viewingContact, index);
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
+            TextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
+        }
     }
 }

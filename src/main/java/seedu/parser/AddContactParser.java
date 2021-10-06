@@ -2,6 +2,8 @@ package seedu.parser;
 
 import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
+import seedu.exception.MissingArgException;
+import seedu.exception.MissingDetailException;
 
 public class AddContactParser extends ContactParser {
     /**
@@ -16,9 +18,13 @@ public class AddContactParser extends ContactParser {
      * @return String[] Returns an array of details
      * @throws InvalidFlagException If the flag given is not recognised
      */
-    public String[] parseContactDetails(String userInput) throws InvalidFlagException {
+    public String[] parseContactDetails(String userInput) throws InvalidFlagException, MissingArgException,
+            MissingDetailException {
         String[] contactDetails = new String[NUMBER_OF_DETAILS];
         String[] destructuredInputs = userInput.split(DETAIL_SEPARATOR);
+        if (destructuredInputs.length == 1) {
+            throw new MissingArgException();
+        }
         for (int i = CONTACT_PARAMS_START_INDEX; i < destructuredInputs.length; i++) {
             parseDetail(contactDetails, destructuredInputs[i]);
         }
@@ -33,7 +39,8 @@ public class AddContactParser extends ContactParser {
      * @param detail Unparsed detail
      * @throws InvalidFlagException If the flag given is not recognised
      */
-    private void parseDetail(String[] contactDetails, String detail) throws InvalidFlagException {
+    private void parseDetail(String[] contactDetails, String detail)
+            throws InvalidFlagException, MissingDetailException {
         String[] destructuredDetails = detail.split(" ", DETAILS_TO_SPLIT);
         int indexToStore;
         switch (destructuredDetails[FLAG_INDEX_IN_DETAILS]) {
@@ -45,6 +52,10 @@ public class AddContactParser extends ContactParser {
             break;
         default:
             throw new InvalidFlagException();
+        }
+
+        if (destructuredDetails.length == 1 || destructuredDetails[DETAIL_INDEX_IN_DETAILS].isBlank()) {
+            throw new MissingDetailException();
         }
         contactDetails[indexToStore] = destructuredDetails[DETAIL_INDEX_IN_DETAILS];
     }

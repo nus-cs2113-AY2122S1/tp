@@ -24,6 +24,7 @@ public class TextUi {
         initMessage();
     }
 
+
     public String getUserInput() {
         return scanner.nextLine();
     }
@@ -39,6 +40,13 @@ public class TextUi {
     private static void printBottomLineMessage(String message) {
         System.out.println(
                 message + "\n" + LINE
+        );
+    }
+
+    // Used to print a line after displayed data
+    public static void printBottomLine() {
+        System.out.println(
+                "\n" + LINE
         );
     }
 
@@ -62,6 +70,27 @@ public class TextUi {
     public static void viewContactMessage(Contact viewingContact, int index) {
         String message = index + ". " + "Name: " + viewingContact.getName() + " GitHub: "
                 + viewingContact.getGithub();
+        printDoubleLineMessage(message);
+    }
+
+    public static void printContactWithIndex(int index, String contactName) {
+        System.out.println(index + ". " + contactName);
+    }
+
+    public static void contactsListMessage(int listSize) {
+        String message = "ConTech has " + listSize + " contacts stored.\n"
+                + "Here's the list :";
+        printDoubleLineMessage(message);
+    }
+
+    public static void contactsEmptyListMessage() {
+        String message = "You have not stored any contacts in ConTech";
+        printDoubleLineMessage(message);
+    }
+
+    public static void deleteContactMessage(String contactName, int listSize) {
+        String message = "ConTech has removed the specified contact: " + contactName + "\n"
+                + "You now have " + listSize + " contact(s).";
         printDoubleLineMessage(message);
     }
 
@@ -92,4 +121,41 @@ public class TextUi {
                 + "  -g GITHUB";
         printDoubleLineMessage(message);
     }
+
+    public static void missingDetailMessage() {
+        String message = "There are missing details.\n"
+                + "Please remove any flags with no details";
+        printDoubleLineMessage(message);
+    }
+
+    public static void missingArgMessage() {
+        String message = "There seems to be missing parameters in your request.\n"
+                + "Please specify your command.";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidNumMessage() {
+        String message = "That does not seem to be a number.\n"
+                + "Please provide a number instead.";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidFormatMessage() {
+        String message = "ConTech is unable to understand your request.\n"
+                + "The request has not been formatted correctly. Please try again.";
+        printDoubleLineMessage(message);
+    }
+
+    public static void numOutOfRangeMessage(int listSize) {
+        String message;
+        if (listSize == 0) {
+            message = "The number you have input is out of range.\n"
+                    + "Please input 0 as you only have 1 contact saved.";
+        } else {
+            message = "The number you have input is out of range.\n"
+                    + "Please input a number between 0 and " + listSize + ".";
+        }
+        printDoubleLineMessage(message);
+    }
+
 }
