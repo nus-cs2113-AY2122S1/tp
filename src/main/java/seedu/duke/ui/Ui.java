@@ -2,7 +2,7 @@ package seedu.duke.ui;
 
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.Workout;
-import seedu.duke.tasks.Exercise;
+import seedu.duke.exercises.Exercise;
 
 import java.util.ArrayList;
 

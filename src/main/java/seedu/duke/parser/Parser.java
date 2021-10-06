@@ -1,14 +1,14 @@
 package seedu.duke.parser;
 
 
-import seedu.duke.command.AddExerciseCommand;
+import seedu.duke.command.exercise.AddExerciseCommand;
 import seedu.duke.command.Command;
-import seedu.duke.command.DisplayExercisesCommand;
-import seedu.duke.command.ListWorkoutsCommand;
-import seedu.duke.command.CreateWorkoutCommand;
-import seedu.duke.command.DeleteWorkoutCommand;
-import seedu.duke.command.RemoveExerciseCommand;
-import seedu.duke.command.MarkExerciseAsDoneCommand;
+import seedu.duke.command.exercise.DisplayExercisesCommand;
+import seedu.duke.command.workout.ListWorkoutsCommand;
+import seedu.duke.command.workout.CreateWorkoutCommand;
+import seedu.duke.command.workout.DeleteWorkoutCommand;
+import seedu.duke.command.exercise.RemoveExerciseCommand;
+import seedu.duke.command.exercise.MarkExerciseAsDoneCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.IncorrectCommand;
 
