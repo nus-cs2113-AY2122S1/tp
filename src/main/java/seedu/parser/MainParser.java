@@ -1,6 +1,7 @@
 package seedu.parser;
 
 import seedu.command.AddContactCommand;
+import seedu.command.EditContactCommand;
 import seedu.command.Command;
 import seedu.command.ExitCommand;
 import seedu.command.FailedCommand;
@@ -13,7 +14,10 @@ public class MainParser {
     private static final String EDIT_CONTACT_COMD = "edit";
 
     private static final int COMD_WORD_INDEX = 0;
+    private static final int EDIT_USER_INDEX = 1;
+    private static final int EDIT_INFO_INDEX = 2;
     private static final int ISOLATE_COMD_WORD = 2;
+    public static final int NUMBER_OF_EDIT_DETAILS = 3;
 
     private ContactParser contactParser;
     private AddContactParser addContactParser = new AddContactParser();
