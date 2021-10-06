@@ -5,9 +5,9 @@ import seedu.exception.InvalidFlagException;
 
 public class AddContactParser extends ContactParser {
     /**
-     * This method returns a String[] containing the user's input and the arguments specified for
+     * Returns a String[] containing the user's input and the arguments specified for
      * each detail flag. Each detail is parsed individually using parseDetail.
-     *
+     * <p></p>
      * Eg. userInput => add -n andre -g ng-andre
      *     output => ["andre", "ng-andre"]
      * Note: Each index is properly identified by enumeration in contact/DetailType
