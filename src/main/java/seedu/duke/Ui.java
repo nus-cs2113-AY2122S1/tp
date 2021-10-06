@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Ui {
     private static final String INPUT_PROMPT = "$ ";
+
     private static final String MESSAGE_BORDER = "------------------------------------------------------------";
     private static final String MESSAGE_WELCOME = "Welcome\nWhat can I do for you?";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
@@ -12,9 +13,6 @@ public class Ui {
 
     private final Scanner scanner;
 
-    /**
-     * Constructor for Ui class.
-     */
     public Ui() {
         this.scanner = new Scanner(System.in);
     }
@@ -35,7 +33,7 @@ public class Ui {
     }
 
     /**
-     * Prints message within horizontal lines.
+     * Prints message within borders.
      *
      * @param message The message to print.
      */
@@ -60,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * Prints an exception.
+     * Prints an exception message.
      *
      * @param message The message to print.
      */

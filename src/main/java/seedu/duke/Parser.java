@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class Parser {
-    private static final int USERINPUT_SPLIT_COUNT = 2;
+    private static final String MESSAGE_UNKNOWN_COMMAND = "Unknown Command";
 
     public static Command parseUserInput(String userInput) throws CustomException {
         String[] userInputSplit = splitFirstSpace(userInput);
@@ -32,22 +32,39 @@ public class Parser {
             break;
 
         default:
-            throw new CustomException("Unknown Command");
+            throw new CustomException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         return command;
     }
 
     public static String[] splitFirstSpace(String string) {
-        String[] result = string.trim().split("\\s+", USERINPUT_SPLIT_COUNT);
-        if (result.length != USERINPUT_SPLIT_COUNT) {
+        String[] result = string.trim().split("\\s+", 2);
+        if (result.length != 2) {
             return new String[]{result[0], ""};
         }
 
         return result;
     }
 
+    /**
+     * Gets argument values specified by argumentKeys.
+     * e.g.
+     * string: "add_module c/CS2113T n/Software Engineering and Object-oriented Programming", argumentKeys: {"c","n"}
+     * Result: HashMap(
+     *            "c":"CS2113T",
+     *            "n":"Software Engineering and Object-oriented Programming"
+     *         )
+     *
+     * @param string The string to parse.
+     * @param argumentKeys The argument keys to find.
+     * @return HashMap - argumentKey:argumentValue pair.
+     */
     public static HashMap<String,String> getArgumentsFromString(String string, String[] argumentKeys) {
+        if (argumentKeys == null) {
+            return new HashMap<>();
+        }
+
         String argumentString = " " + string;
         HashMap<String, Integer> argumentIndexMap = new HashMap<>();
         ArrayList<Integer> argumentIndexes = new ArrayList<>();
@@ -72,8 +89,8 @@ public class Parser {
             if (isLastIndex) {
                 value = string.substring(startIndex);
             } else {
-                int nextIndex = argumentIndexes.get(listIndex + 1);
-                value = string.substring(startIndex, nextIndex - 1);
+                int nextListIndex = argumentIndexes.get(listIndex + 1);
+                value = string.substring(startIndex, nextListIndex - 1);
             }
             value = value.trim();
 

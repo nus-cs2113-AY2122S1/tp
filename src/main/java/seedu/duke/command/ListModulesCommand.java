@@ -13,6 +13,11 @@ public class ListModulesCommand extends Command {
 
     @Override
     public void execute(ModuleList modules, Ui ui) throws CustomException {
+        if (!argument.isEmpty()) {
+            // TODO Usage format message
+            throw new CustomException("");
+        }
+
         if (modules.getSize() == 0) {
             ui.printMessage(MESSAGE_LIST_EMPTY);
         } else {
