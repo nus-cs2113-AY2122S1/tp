@@ -1,5 +1,6 @@
 package seedu.parser;
 
+import seedu.timetable.Timetable;
 import seedu.command.Command;
 import seedu.command.ExitCommand;
 import seedu.command.InvalidCommand;
@@ -17,7 +18,7 @@ public class CommandParser {
     private static final String FLAG = "-";
     private static final String L_FLAG = "-l";
 
-    public Command parseCommand(String text, Integer semester) {
+    public Command parseCommand(String text, Timetable timetable) {
         Command command;
         text = text.trim();
         String lowerCaseText = text.toLowerCase();
@@ -33,7 +34,7 @@ public class CommandParser {
         } else if (lowerCaseText.startsWith("timetable")) {
             command = new TimetableCommand(Duke.timetable);
         } else if (lowerCaseText.startsWith("add")) {
-            command = parseAddCommand(text, semester);
+            command = parseAddCommand(text, timetable.getSemester(), timetable);
         } else {
             command = new InvalidCommand();
         }
@@ -62,9 +63,9 @@ public class CommandParser {
         return new ShowCommand(str);
     }
 
-    public Command parseAddCommand(String input, Integer semester) {
+    public Command parseAddCommand(String input, Integer semester, Timetable timetable) {
         input = input.substring(ADD_LENGTH).trim();
         String moduleCode = input.toUpperCase();
-        return new AddCommand(moduleCode, semester);
+        return new AddCommand(moduleCode, timetable);
     }
 }

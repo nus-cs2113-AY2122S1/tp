@@ -2,11 +2,14 @@ package seedu.timetable;
 
 import seedu.module.Module;
 import seedu.ui.TimetableUI;
+
+import java.time.DayOfWeek;
 import java.util.ArrayList;
 
-public class TimeTable {
+public class Timetable {
+
     private static final int DEFAULT_START = 9;
-    private static final int DEFAULT_END = 12;
+    private static final int DEFAULT_END = 16;
 
     private int semester;
     private int earliestHour;
@@ -14,64 +17,65 @@ public class TimeTable {
 
     private ArrayList<Module> modules;
 
-    private Class[] monday = new Class[24];
-    private Class[] tuesday = new Class[24];
-    private Class[] wednesday = new Class[24];
-    private Class[] thursday = new Class[24];
-    private Class[] friday = new Class[24];
-    private Class[] saturday = new Class[24];
-    private Class[] sunday = new Class[24];
+    private TimetableLesson[] monday = new TimetableLesson[24];
+    private TimetableLesson[] tuesday = new TimetableLesson[24];
+    private TimetableLesson[] wednesday = new TimetableLesson[24];
+    private TimetableLesson[] thursday = new TimetableLesson[24];
+    private TimetableLesson[] friday = new TimetableLesson[24];
+    private TimetableLesson[] saturday = new TimetableLesson[24];
+    private TimetableLesson[] sunday = new TimetableLesson[24];
 
-    public TimeTable(int semester) {
+    public Timetable(int semester) {
         this.modules = new ArrayList<>();
         this.semester = semester;
         this.earliestHour = DEFAULT_START;
         this.latestHour = DEFAULT_END;
     }
 
-    public void addClass(Class modClass) {
-        switch (modClass.getDayOfWeek()) {
+    public void addLesson(TimetableLesson timetableLesson) {
+        DayOfWeek day = timetableLesson.getDayOfWeek();
+        switch (day) {
         case MONDAY:
-            addClassToSchedule(modClass, monday);
+            addLessonToSchedule(timetableLesson, monday);
             break;
         case TUESDAY:
-            addClassToSchedule(modClass, tuesday);
+            addLessonToSchedule(timetableLesson, tuesday);
             break;
         case WEDNESDAY:
-            addClassToSchedule(modClass, wednesday);
+            addLessonToSchedule(timetableLesson, wednesday);
             break;
         case THURSDAY:
-            addClassToSchedule(modClass, thursday);
+            addLessonToSchedule(timetableLesson, thursday);
             break;
         case FRIDAY:
-            addClassToSchedule(modClass, friday);
+            addLessonToSchedule(timetableLesson, friday);
             break;
         case SATURDAY:
-            addClassToSchedule(modClass, saturday);
+            addLessonToSchedule(timetableLesson, saturday);
             break;
         case SUNDAY:
-            addClassToSchedule(modClass, sunday);
+            addLessonToSchedule(timetableLesson, sunday);
             break;
         default:
             break;
         }
 
-        if (modClass.getStartHour() < earliestHour) {
-            earliestHour = modClass.getStartHour();
+        if (timetableLesson.getStartHour() < earliestHour) {
+            earliestHour = timetableLesson.getStartHour();
         }
 
-        if (modClass.getEndHour() > latestHour) {
-            latestHour = modClass.getEndHour();
+        if (timetableLesson.getEndHour() > latestHour) {
+            latestHour = timetableLesson.getEndHour();
         }
     }
 
-    private void addClassToSchedule(Class modClass, Class[] schedule) {
-        int start = modClass.getStartHour();
-        int end = modClass.getEndHour();
+    private void addLessonToSchedule(TimetableLesson timetableLesson, TimetableLesson[] schedule) {
+        int start = timetableLesson.getStartHour();
+        int end = timetableLesson.getEndHour();
         for (int i = start; i < end; i++) {
-            schedule[i] = modClass;
+            schedule[i] = timetableLesson;
         }
-        addModuleToList(modClass.getModule());
+        addModuleToList(timetableLesson.getModule());
     }
 
     private void addModuleToList(Module module) {
@@ -92,7 +96,7 @@ public class TimeTable {
         TimetableUI.printModules(modules);
     }
 
-    public int getSemester() {
+    public Integer getSemester() {
         return semester;
     }
 }

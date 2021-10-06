@@ -3,6 +3,7 @@ package seedu.ui;
 import seedu.module.Module;
 import seedu.module.Lesson;
 
+import java.time.DayOfWeek;
 import java.util.Scanner;
 
 public class TextUi {
@@ -24,7 +25,11 @@ public class TextUi {
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
         System.out.println();
-        return in.nextLine();
+        String input = in.nextLine();
+        while (input.isBlank()) {
+            input = in.nextLine();
+        }
+        return input;
     }
 
     public static void printExitMessage() {
@@ -127,22 +132,24 @@ public class TextUi {
         System.out.println("Adding " + moduleCode);
     }
 
-    public static void printLectureMessage() {
-        System.out.println("Which Lecture time slot would you like to add ?");
-        System.out.println("Lecture Time slots:");
-    }
-
-    public static void printTutorialMessage() {
-        System.out.println("Which Tutorial time slot would you like to add ?");
-        System.out.println("Tutorial Time slots:");
-    }
-
-    public static void printLaboratoryMessage() {
-        System.out.println("Which Laboratory time slot would you like to add ?");
-        System.out.println("Laboratory Time slots:");
+    public static void printLessonMessage(String lessonType) {
+        switch (lessonType) {
+        case "Lecture":
+            System.out.println("Which Lecture time slot would you like to add ?");
+            System.out.println("Lecture Time slots:");
+            break;
+        case "Tutorial":
+            System.out.println("Which Tutorial time slot would you like to add ?");
+            System.out.println("Tutorial Time slots:");
+            break;
+        default:
+            System.out.println("Which Laboratory time slot would you like to add ?");
+            System.out.println("Laboratory Time slots:");
+            break;
+        }
     }
 
     public static void printLessonInfo(int serial, Lesson lesson) {
-        System.out.println(serial + ": " + lesson.lessonDetail());
+        System.out.println(serial + ": " + lesson.lessonDetails());
     }
 }

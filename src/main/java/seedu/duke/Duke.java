@@ -1,17 +1,14 @@
 package seedu.duke;
 
 import seedu.command.Command;
-import seedu.module.Module;
-import seedu.online.NusMods;
 import seedu.parser.CommandParser;
 import seedu.storage.ModStorage;
-import seedu.timetable.Class;
-import seedu.timetable.TimeTable;
+import seedu.timetable.Timetable;
 import seedu.ui.TextUi;
 
 public class Duke {
     private static String path = "data/Modules.json";
-    public static TimeTable timetable = new TimeTable(1);
+    public static Timetable timetable = new Timetable(1);
     public static CommandParser commandParser = new CommandParser();
     public ModStorage modStorage;
 
@@ -28,7 +25,7 @@ public class Duke {
     private void run() {
         Command command;
         do {
-            command = commandParser.parseCommand(TextUi.getCommand(), timetable.getSemester());
+            command = commandParser.parseCommand(TextUi.getCommand(), timetable);
             executeCommand(command);
         } while (!command.isExit());
     }

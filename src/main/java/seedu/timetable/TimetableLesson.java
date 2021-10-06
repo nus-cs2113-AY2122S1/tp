@@ -9,15 +9,14 @@ import seedu.module.Lesson;
 import seedu.module.LessonType;
 import seedu.module.Module;
 
-public class Class {
-
+public class TimetableLesson implements Comparable<TimetableLesson> {
     private Module module;
     private String moduleCode;
     private int semester;
     private DayOfWeek dayOfWeek;
     private Lesson lesson;
 
-    public Class(Module module, int semester, Lesson lesson) {
+    public TimetableLesson(Module module, int semester, Lesson lesson) {
         this.module = module;
         this.moduleCode = module.getModuleCode();
         this.semester = semester;
@@ -48,6 +47,8 @@ public class Class {
         case "Sunday":
             this.dayOfWeek = DayOfWeek.SUNDAY;
             break;
+        default:
+            break;
         }
     }
 
@@ -66,7 +67,6 @@ public class Class {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
         return LocalTime.parse(time, formatter);
     }
-
 
     public String getClassNo() {
         return lesson.getClassNo();
@@ -100,5 +100,10 @@ public class Class {
 
     public String getVenue() {
         return lesson.getVenue();
+    }
+
+    @Override
+    public int compareTo(TimetableLesson lesson) {
+        return this.getStartHour() - lesson.getStartHour();
     }
 }

@@ -1,12 +1,12 @@
 package seedu.command;
 
-import seedu.timetable.TimeTable;
+import seedu.timetable.Timetable;
 
 public class TimetableCommand extends Command {
 
-    private TimeTable timeTable;
+    private Timetable timeTable;
 
-    public TimetableCommand(TimeTable timeTable) {
+    public TimetableCommand(Timetable timeTable) {
         this.timeTable = timeTable;
     }
 
