@@ -23,26 +23,62 @@ public class CommandSyntax {
     /**
      * Helps to check if the parameters required are provided by the user.
      *
-     * @param ui                Reference to the UI object passed by Main to print messages.
-     * @param parameters        Parameters entered in by the user.
-     * @param commandParameters Parameters required by the command.
-     * @param commandSyntax     The command's valid syntax.
+     * @param ui                 Reference to the UI object passed by Main to print messages.
+     * @param parameters         Parameters entered in by the user.
+     * @param requiredParameters Parameters required by the command.
+     * @param optionalParameters Parameters that are optional.
+     * @param commandSyntax      The command's valid syntax.
      * @return A boolean value indicating if the parameters required are entered by the user.
      */
     public static boolean containsInvalidParameters(Ui ui, HashMap<String, String> parameters,
-                                                    String[] commandParameters, String commandSyntax) {
+                                                    String[] requiredParameters, String[] optionalParameters,
+                                                    String commandSyntax) {
+        int requiredParametersLength = requiredParameters.length;
+        int optionalParametersLength = optionalParameters.length;
+
         // User did not provide parameters all the parameters
-        if (parameters.keySet().size() < commandParameters.length) {
+        if (parameters.keySet().size() < requiredParametersLength) {
             ui.printInvalidParameter("", commandSyntax);
             return true;
         }
 
-        for (String requiredParameter : commandParameters) {
+        for (String requiredParameter : requiredParameters) {
             if (!parameters.containsKey(requiredParameter)) { // Checks if required parameters are found
                 ui.printRequiredParameter(requiredParameter, commandSyntax);
                 return true;
             }
         }
+
+        // Optional parameters not provided considered valid
+        if (optionalParameters == null || optionalParametersLength == 0) {
+            return false;
+        }
+
+        int emptyOptionalFieldCount = parameters.size() - requiredParametersLength;
+        if (emptyOptionalFieldCount <= 0) {
+            ui.print("Please provide at least one optional field!");
+            return true;
+        }
+
+        // Combine both parameter array to check if optional parameter is valid
+        String[] mergedParameters = new String[requiredParametersLength + optionalParametersLength];
+        System.arraycopy(requiredParameters, 0, mergedParameters, 0, requiredParametersLength);
+        System.arraycopy(optionalParameters, 0, mergedParameters, requiredParametersLength, optionalParametersLength);
+
+        for (String parameter : parameters.keySet()) {
+            boolean isValid = false;
+            for (String mergedParameter : mergedParameters) {
+                if (mergedParameter.equalsIgnoreCase(parameter)) {
+                    isValid = true;
+                    break;
+                }
+            }
+            if (!isValid) {
+                ui.print("Please enter a valid optional parameter!");
+                return true;
+            }
+        }
+
         return false;
     }
 
