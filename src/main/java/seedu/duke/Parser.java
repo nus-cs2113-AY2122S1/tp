@@ -5,6 +5,10 @@ import java.util.Scanner;
 public class Parser {
     protected String nameRecipe;
 
+    public static final int NAME_INDEX = 0;
+    public static final int INGREDIENTS_INDEX = 1;
+    public static final int STEPS_INDEX = 2;
+
     public void parseMaster(Cookbook cookbook) {
         Scanner in = new Scanner(System.in);
         while (true) {
@@ -13,15 +17,10 @@ public class Parser {
                 if (parseCommand(line).equalsIgnoreCase("add")) {
                     //Format of input:
                     //add [recipe name] /ingredients [ingredients separated by +] /steps [steps separated by +]
-                    Recipe r = new Recipe(parseName(line));
-
-                    System.out.println("Please add the ingredients, separated by +");
-                    line = in.nextLine();
-                    parseIngredients(line, r);
-
-                    System.out.println("Please add the steps, separated by +");
-                    line = in.nextLine();
-                    parseSteps(line, r);
+                    String[] splitContent = line.split("/");
+                    Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
+                    parseIngredients(splitContent[INGREDIENTS_INDEX], r);
+                    parseSteps(splitContent[STEPS_INDEX], r);
 
                     cookbook.addRecipe(r);
                     System.out.println("Added " + r.name + " recipe! Yum!");
