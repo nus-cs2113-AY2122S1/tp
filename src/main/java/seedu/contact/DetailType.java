@@ -7,12 +7,12 @@ package seedu.contact;
  * Eg. ANDRE, ng-andre => upon splitting becomes ["ANDRE", "ng-andre"]
  */
 public enum DetailType {
-    NAME (0),
-    GITHUB (1),
-    LINKEDIN (2),
-    TELEGRAM (3),
-    TWITTER (4),
-    EMAIL (5);
+    NAME(0),
+    GITHUB(1),
+    LINKEDIN(2),
+    TELEGRAM(3),
+    TWITTER(4),
+    EMAIL(5);
 
     private int index;
 

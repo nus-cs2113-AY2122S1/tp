@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class TextUi {
     private static final String LOGO =
-            "   _____         _______        _     \n" +
-            "  / ____|       |__   __|      | |    \n" +
-            " | |     ___  _ __ | | ___  ___| |__  \n" +
-            " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n" +
-            " | |___| (_) | | | | |  __/ (__| | | |\n" +
-            "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" +
-            "                                      \n";
+            "   _____         _______        _     \n"
+            + "  / ____|       |__   __|      | |    \n"
+            + " | |     ___  _ __ | | ___  ___| |__  \n"
+            + " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n"
+            + " | |___| (_) | | | | |  __/ (__| | | |\n"
+            + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n"
+            + "                                      \n";
 
     private static final String LINE =
             "____________________________________________________________\n";
@@ -46,34 +46,34 @@ public class TextUi {
     }
 
     public static void createNewContactFileMessage(String contactFilePath) {
-        String message = "As ConTech is unable to find your saved data, \n" +
-                " it has created a new one for you at: \n" + contactFilePath;
+        String message = "As ConTech is unable to find your saved data, \n"
+                + " it has created a new one for you at: \n" + contactFilePath;
         printBottomLineMessage(message);
     }
 
     public static void addContactMessage(String contactName, int listSize) {
-        String message = "ConTech has added the specified contact: " + contactName + "\n" +
-                "You now have " + listSize + " contact(s).";
+        String message = "ConTech has added the specified contact: " + contactName + "\n"
+                + "You now have " + listSize + " contact(s).";
         printDoubleLineMessage(message);
     }
 
     public static void exitMessage() {
-        String message = "ConTech will now shutdown.\n" +
-                "We hope you have enjoyed using it.";
+        String message = "ConTech will now shutdown.\n"
+                + "We hope you have enjoyed using it.";
         printDoubleLineMessage(message);
     }
 
     // Error Messages
     public static void fileErrorMessage(String contactFilePath) {
-        String message = "ConTech is unfortunately unable to access / create a\n" +
-                " save file at " + contactFilePath + ".\n" +
-                "Please relocate the file and try again.";
+        String message = "ConTech is unfortunately unable to access / create a\n"
+                + " save file at " + contactFilePath + ".\n"
+                + "Please relocate the file and try again.";
         printBottomLineMessage(message);
     }
 
     public static void invalidCommandMessage() {
-        String message = "ConTech is unable to understand your request.\n" +
-                "Please try again with a valid command.";
+        String message = "ConTech is unable to understand your request.\n"
+                + "Please try again with a valid command.";
         printDoubleLineMessage(message);
     }
 }
