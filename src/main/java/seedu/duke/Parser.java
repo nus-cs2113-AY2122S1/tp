@@ -8,9 +8,9 @@ public class Parser {
 
     public void parseMaster(Cookbook cookbook) {
         Scanner in = new Scanner(System.in);
-        String line  = in.nextLine();
 
         while (true) {
+            String line  = in.nextLine();
             try {
                 if (parseCommand(line).equalsIgnoreCase("add")) {
                     //Format of input:
@@ -30,7 +30,6 @@ public class Parser {
                     System.out.println("Bye bye!");
                     break;
                 }
-                line = in.nextLine();
             } catch (GordonException e) {
                 System.out.println("GordonException:" + e.getMessage());
             }
