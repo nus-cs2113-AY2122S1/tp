@@ -43,11 +43,11 @@ public class Person {
     }
 
     //public float getTotalExpenditure() {
-        //float total = 0;
-        //for (Expense expense : listOfExpenses) {
-            //total += Expense.getAmountSpent() / Expense.getPersonsInvolved().size(); //Assuming everyone pays equally
-        //}
-        //return total;
+    //    float total = 0;
+    //    for (Expense expense : listOfExpenses) {
+    //        total += Expense.getAmountSpent() / Expense.getPersonsInvolved().size(); //Assuming everyone pays equally
+    //    }
+    //    return total;
     //}
 
 }
