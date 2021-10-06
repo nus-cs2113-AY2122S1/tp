@@ -32,7 +32,7 @@ public class Ui {
 
     public void printMessage(String message) {
         String[] messageLines = message.split("\\r?\\n");
-        for(int i = 0; i < messageLines.length; i++) {
+        for (int i = 0; i < messageLines.length; i++) {
             System.out.print(MESSAGE_BORDER + messageLines[i] + "\n");
         }
         System.out.println(LINE_SEPARATOR);
