@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -57,6 +58,11 @@ public class Trip {
 
     public void setRepaymentCurrency(String repaymentCurrency) {
         this.repaymentCurrency = repaymentCurrency;
+    }
+
+    public void setPersonName(int indexOfPerson, String newName) {
+        Person personToEdit = listOfPersons.get(indexOfPerson);
+        personToEdit.editName(newName);
     }
 
 }
