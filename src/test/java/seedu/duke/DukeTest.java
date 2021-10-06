@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class DukeTest {
 
     @Test
-    public void testSetNameOfPerson() {
+    public void testSetLocation() {
         Trip trip = new Trip();
         trip.setLocation("America");
         assertEquals("America", trip.getLocation());
