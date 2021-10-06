@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class UniversityList {
     protected ArrayList<University> list;
 
-    public UniversityList(ArrayList<University> list) {
-        this.list = list;
+    public UniversityList() {
+        this.list = new ArrayList<>();
     }
 
     public void addUniversity(University addedUniversity) {
@@ -32,13 +32,5 @@ public class UniversityList {
             String output = (i + 1) + ". " + curr.name;
             System.out.println(output);
         }
-    }
-
-    public int getSize() {
-        return list.size();
-    }
-
-    public University get(int index) {
-        return list.get(index);
     }
 }
