@@ -82,4 +82,12 @@ public class Trip {
         personToEdit.setName(newName);
     }
 
+    public void addExpense(Expense expense) {
+        listOfExpenses.add(expense);
+    }
+
+    public void removeExpense(Expense expense) {
+        listOfExpenses.remove(expense);
+    }
+
 }
