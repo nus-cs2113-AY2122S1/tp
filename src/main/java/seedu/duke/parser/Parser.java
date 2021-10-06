@@ -66,11 +66,14 @@ public class Parser {
     }
 
     private Command prepareCreateWorkout(String commandArgs) {
-        String workoutName = commandArgs.replace(WORKOUT_KEYWORD,"");
-        if (workoutName.isEmpty()) {
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
+        if (commandArgs.contains(WORKOUT_KEYWORD)) {
+            String workoutName = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
+            if (workoutName.isEmpty()) {
+                return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
+            }
+            return new CreateWorkoutCommand(workoutName);
         }
-        return new CreateWorkoutCommand(workoutName);
+        return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
     }
 
     private Command prepareDeleteWorkout(String commandArgs) {
@@ -98,7 +101,7 @@ public class Parser {
         try {
             String[] exerciseArgs = getExerciseArgs(commandArgs);
             int workoutIndex = parseArgsAsIndex(exerciseArgs[0]);
-            String exerciseName = exerciseArgs[1];
+            String exerciseName = exerciseArgs[1].trim();
             int sets = parseArgsAsIndex(exerciseArgs[2]);
             int reps = parseArgsAsIndex(exerciseArgs[3]);
             return new AddExerciseCommand(workoutIndex, exerciseName, sets, reps);
@@ -110,7 +113,7 @@ public class Parser {
     private static String[] getExerciseArgs(String commandArgs) throws GetJackDException {
         String args = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
         String[] workoutIndexAndExerciseArgs = splitCommandWordsAndArgs(args, EXERCISE_KEYWORD);
-        String workoutIndex = workoutIndexAndExerciseArgs[0];
+        String workoutIndex = workoutIndexAndExerciseArgs[0].trim();
         String[] nameAndSetsReps = splitCommandWordsAndArgs(workoutIndexAndExerciseArgs[1].trim(), SETS_KEYWORD);
         String exerciseName = nameAndSetsReps[0].trim();
         String[] setsAndReps = splitCommandWordsAndArgs(nameAndSetsReps[1].trim(), REPS_KEYWORD);
