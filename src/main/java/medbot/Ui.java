@@ -99,6 +99,9 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Prints a list of all available commands.
+     */
     public void printCommandList() {
         System.out.println("Here are the list of commands:\n\n" +
                 "help\n" +
