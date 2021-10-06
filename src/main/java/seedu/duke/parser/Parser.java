@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.Command;
+import seedu.duke.universities.UniversityList;
 
 import java.text.ParseException;
 
