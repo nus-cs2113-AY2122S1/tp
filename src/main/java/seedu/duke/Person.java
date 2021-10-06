@@ -34,7 +34,7 @@ public class Person {
         amtOwedToUser += amount;
     }
 
-    public void editName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
