@@ -27,14 +27,11 @@ public class Parser {
                     cookbook.addRecipe(r);
                     System.out.println("Added " + r.name + " recipe! Yum!");
                     System.out.print(r);
-                }
-                else if (parseCommand(line).equalsIgnoreCase("delete")) {
+                } else if (parseCommand(line).equalsIgnoreCase("delete")) {
                     nameRecipe = parseName(line);
-                }
-                else if (parseCommand(line).equalsIgnoreCase("check")) {
+                } else if (parseCommand(line).equalsIgnoreCase("check")) {
                     nameRecipe = parseName(line);
-                }
-                else if (parseCommand(line).equalsIgnoreCase("exit")) {
+                } else if (parseCommand(line).equalsIgnoreCase("exit")) {
                     System.out.println("Bye bye!");
                     break;
                 } else {
