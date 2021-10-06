@@ -21,6 +21,21 @@ public class FailedCommand extends Command {
         case INVALID_INDEX:
             TextUi.invalidIndexMessage();
             break;
+        case MISSING_ARG:
+            TextUi.missingArgMessage();
+            break;
+        case MISSING_DETAIL:
+            TextUi.missingDetailMessage();
+            break;
+        case INVALID_NUM:
+            TextUi.invalidNumMessage();
+            break;
+        case INVALID_FORMAT:
+            TextUi.invalidFormatMessage();
+            break;
+        case NUM_OUT_OF_BOUND:
+            TextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
+            break;
         default:
             return;
         }
