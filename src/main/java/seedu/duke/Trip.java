@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -88,6 +89,12 @@ public class Trip {
 
     public void removeExpense(Expense expense) {
         listOfExpenses.remove(expense);
+    }
+
+    public void viewAllExpenses() {
+        for (Expense expense : listOfExpenses) {
+            System.out.println(expense);
+        }
     }
 
 }
