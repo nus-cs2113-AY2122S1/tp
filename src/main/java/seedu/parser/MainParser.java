@@ -106,8 +106,6 @@ public class MainParser {
             return new ViewCommand(Integer.parseInt(destructuredInputs[1]));
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_NUM);
-        } catch (IndexOutOfBoundsException e) {
-            return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
     }
 
@@ -124,8 +122,6 @@ public class MainParser {
             return new DeleteContactCommand(deletedIndex);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_NUM);
-        } catch (IndexOutOfBoundsException e) {
-            return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
     }
 
