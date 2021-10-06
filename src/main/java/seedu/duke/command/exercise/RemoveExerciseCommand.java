@@ -1,8 +1,9 @@
-package seedu.duke.command;
+package seedu.duke.command.exercise;
 
+import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
-import seedu.duke.tasks.Exercise;
+import seedu.duke.exercises.Exercise;
 import seedu.duke.ui.Ui;
 
 import static seedu.duke.parser.Parser.EXERCISE_KEYWORD;
