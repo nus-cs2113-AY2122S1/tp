@@ -14,7 +14,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 
-
 public class ModStorage {
 
     private final String path;
@@ -113,6 +112,13 @@ public class ModStorage {
             TextUi.printNotFoundMessage();
         }
         TextUi.printLocalSearchMessage();
+    }
+
+    public static void addTimetableFile(Module module) throws IOException {
+        String filePath = "timetable/" + module.getModuleCode() + ".json";
+        FileWriter fw = new FileWriter(filePath);
+        Gson gson = new Gson();
+        gson.toJson(module, fw);
     }
 
     public static class FileErrorException extends Exception {
