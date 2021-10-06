@@ -1,7 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.Classes.*;
-
 public class RemoveCommand extends Command {
     public static final String COMMAND_WORD = "remove";
 
@@ -22,6 +20,8 @@ public class RemoveCommand extends Command {
                 universityList.removeUniversity(description);
                 System.out.println("The module: " + description + " is removed.");
             }
+            break;
+        default:
             break;
         }
     }

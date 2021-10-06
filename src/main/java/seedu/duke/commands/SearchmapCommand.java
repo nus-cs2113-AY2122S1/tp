@@ -1,6 +1,6 @@
 package seedu.duke.commands;
 
-import seedu.duke.Classes.*;
+import seedu.duke.classes.University;
 
 public class SearchmapCommand extends Command {
     public static final String COMMAND_WORD = "searchmap";

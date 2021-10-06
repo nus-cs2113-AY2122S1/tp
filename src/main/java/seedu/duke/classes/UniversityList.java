@@ -1,4 +1,4 @@
-package seedu.duke.Classes;
+package seedu.duke.classes;
 
 import java.util.ArrayList;
 

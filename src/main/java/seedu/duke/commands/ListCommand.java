@@ -1,7 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.Classes.*;
-
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
@@ -29,6 +27,8 @@ public class ListCommand extends Command {
             break;
         //case "s":
         //case "t":
+        default:
+            break;
         }
     }
 }
