@@ -6,7 +6,7 @@ import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
-public class Command {
+public abstract class Command {
 
     public Command() {
 
@@ -17,18 +17,14 @@ public class Command {
      *
      * @return The String object holding the appropriate format for the command.
      */
-    public String getFormat() {
-        return null;
-    }
+    public abstract String getFormat();
 
     /**
      * Returns the description for the command.
      *
      * @return The String object containing the description for this command.
      */
-    public String getHelpMessage() {
-        return null;
-    }
+    public abstract String getHelpMessage();
 
     /**
      * Parses remaining arguments for the command.
@@ -52,8 +48,6 @@ public class Command {
      * @throws InvalidArgumentException Exception for when arguments parsing fails
      * @throws InvalidTimeFormatException Exception for when time format is invalid
      */
-    public CommandResult execute(Ui ui, NusModule module)
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
-        return null;
-    }
+    public abstract CommandResult execute(Ui ui, NusModule module)
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException;
 }
