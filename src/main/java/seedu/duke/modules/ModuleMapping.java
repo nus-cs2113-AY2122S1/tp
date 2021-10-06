@@ -1,4 +1,4 @@
-package seedu.duke.classes;
+package seedu.duke.modules;
 
 public class ModuleMapping {
     protected Module localModule;
