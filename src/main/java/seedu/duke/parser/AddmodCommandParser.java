@@ -9,10 +9,13 @@ public class AddmodCommandParser implements Parser<AddmodCommand> {
 
     @Override
     public AddmodCommand parse(String arguments) throws ParseException {
-        String module = arguments.trim();
-        if (module.length() == 0) {
+        String moduleCode = arguments.trim();
+        if (moduleCode.length() == 0) {
             throw new ParseException("no module give", 1);
         }
+        String moduleName = "";
+        int moduleCredits = 0;
+        Module module = new Module(moduleCode, moduleName, moduleCredits);
         return new AddmodCommand(module);
     }
 }
