@@ -27,8 +27,8 @@ public class EventDecoder {
         String eventDateTime = eventDetails[INDEX_OF_DATETIME];
         String eventVenue = eventDetails[INDEX_OF_VENUE];
         String eventDescription = eventDetails[INDEX_OF_DESCRIPTION];
-        String eventBudget = eventDetails[INDEX_OF_BUDGET];
+        int eventBudget = Integer.parseInt(eventDetails[INDEX_OF_BUDGET]);
 
-        return new Event(eventTitle, eventDateTime, eventVenue, eventDescription, eventBudget);
+        return new Event(eventTitle, eventDescription, eventDateTime, eventVenue, eventBudget);
     }
 }
