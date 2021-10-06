@@ -64,6 +64,10 @@ public class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void printContactWithIndex(int index, String contactName) {
+        System.out.println(index + ". " + contactName);
+    }
+
     public static void viewContactsListMessage(int listSize) {
         String message = "ConTech has " + listSize + " contacts stored.\n"
                 + "Here's the list :";
