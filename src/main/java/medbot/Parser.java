@@ -253,7 +253,7 @@ public class Parser {
      */
     private static String parsePhoneNumber(String attributeString) throws MedBotException {
         try {
-            String numberString = attributeString.substring(2)
+            String numberString = attributeString
                     .replaceAll(REGEX_PHONE_NUMBER_SEPARATOR, EMPTY_STRING).strip();
             if (numberString.equals(EMPTY_STRING)) {
                 throw new MedBotException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
