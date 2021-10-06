@@ -1,4 +1,7 @@
-package seedu.duke.classes;
+package seedu.duke.universities;
+
+import seedu.duke.modules.Module;
+import seedu.duke.modules.ModuleMapping;
 
 import java.util.ArrayList;
 
@@ -18,13 +21,9 @@ public class University {
     public void listMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
-            String output = currentMapping.localModule + " - " + currentMapping.mappedModule;
+            String output = currentMapping.getLocalModule() + " - " + currentMapping.getMappedModule();
             System.out.println(output);
         }
-    }
-
-    public String getName() {
-        return name;
     }
 
 }

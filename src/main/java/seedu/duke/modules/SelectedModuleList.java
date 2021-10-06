@@ -1,4 +1,4 @@
-package seedu.duke.classes;
+package seedu.duke.modules;
 
 import java.util.ArrayList;
 
@@ -22,11 +22,4 @@ public class SelectedModuleList {
         }
     }
 
-    public int getSize() {
-        return list.size();
-    }
-
-    public Module get(int index) {
-        return list.get(index);
-    }
 }
