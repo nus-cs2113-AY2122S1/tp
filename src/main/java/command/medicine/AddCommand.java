@@ -25,9 +25,10 @@ public class AddCommand extends Command {
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE, CommandParameters.QUANTITY,
             CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
+        String[] optionalParameters = {};
 
-
-        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, CommandSyntax.ADD_COMMAND)) {
+        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
+            CommandSyntax.ADD_COMMAND)) {
             return;
         }
 
