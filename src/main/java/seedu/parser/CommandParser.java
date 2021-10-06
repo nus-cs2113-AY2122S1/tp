@@ -1,13 +1,6 @@
 package seedu.parser;
 
-import seedu.command.Command;
-import seedu.command.ExitCommand;
-import seedu.command.InvalidCommand;
-import seedu.command.SearchCommand;
-import seedu.command.ShowCommand;
-import seedu.command.UpdateCommand;
-import seedu.command.AddCommand;
-import seedu.command.TimetableCommand;
+import seedu.command.*;
 import seedu.duke.Duke;
 
 public class CommandParser {
@@ -34,6 +27,8 @@ public class CommandParser {
             command = new TimetableCommand(Duke.timetable);
         } else if (lowerCaseText.startsWith("add")) {
             command = parseAddCommand(text);
+        } else if (lowerCaseText.startsWith("help")) {
+            command = new HelpCommand();
         } else {
             command = new InvalidCommand();
         }
