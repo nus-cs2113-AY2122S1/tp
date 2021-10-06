@@ -2,7 +2,6 @@ package seedu.command;
 
 import seedu.module.Lesson;
 import seedu.online.NusMods;
-import seedu.storage.ModStorage;
 import seedu.module.Module;
 import seedu.module.Semester;
 import seedu.timetable.Timetable;
@@ -33,33 +32,22 @@ public class AddCommand extends Command {
         Module module = new Module(moduleCode);
         try {
             module = NusMods.fetchModOnline(moduleCode);
-        } catch (IOException e1) {
-            TextUi.printNoConnectionMessage();
-            try {
-                module = ModStorage.loadModInfo(moduleCode);
-            } catch (IOException e2) {
-                TextUi.printNotFoundMessage();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         Semester semesterData = module.getSemester(semester);
         if (semesterData.isLectureExist()) {
             ArrayList<Lesson> lecture = selectLesson(semesterData, LECTURE);
-            for (Lesson lesson : lecture) {
-                timetable.addLesson(new TimetableLesson(module, semester, lesson));
-            }
+            addToTimetable(lecture, module);
         }
         if (semesterData.isTutorialExist()) {
             ArrayList<Lesson> tutorial = selectLesson(semesterData, TUTORIAL);
-            for (Lesson lesson : tutorial) {
-                timetable.addLesson(new TimetableLesson(module, semester, lesson));
-            }
+            addToTimetable(tutorial, module);
         }
         if (semesterData.isLabExist()) {
             ArrayList<Lesson> lab = selectLesson(semesterData, LAB);
-            for (Lesson lesson : lab) {
-                timetable.addLesson(new TimetableLesson(module, semester, lesson));
-            }
+            addToTimetable(lab, module);
         }
     }
 
@@ -78,12 +66,20 @@ public class AddCommand extends Command {
 
         String select = TextUi.getCommand();
         int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
-        String classNumber = lessonList.get(indexOfLesson).getLessonType();
+        String classNumber = lessonList.get(indexOfLesson).getClassNo();
+        System.out.println(classNumber);
         for (Lesson lesson : lessonList) {
             if (lesson.getClassNo().equals(classNumber)) {
                 confirmList.add(lesson);
             }
         }
         return confirmList;
+    }
+
+    public void addToTimetable(ArrayList<Lesson> lessonList, Module module) {
+        for (Lesson lesson : lessonList) {
+            timetable.addLesson(new TimetableLesson(module, semester, lesson));
+            System.out.println(lesson.getClassNo());
+        }
     }
 }
