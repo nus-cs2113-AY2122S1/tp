@@ -8,7 +8,7 @@ import seedu.duke.storage.models.WorkoutListModel;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JsonUtilTest {
 
@@ -21,15 +21,15 @@ class JsonUtilTest {
 
     @Test
     void fromJson_testJsonString_expectCorrectExtractedWorkoutNames() throws IOException {
-        String testJsonString = "{\n" +
-                "  \"workouts\" : [ {\n" +
-                "    \"exercises\" : [ ],\n" +
-                "    \"workoutName\" : \"Abs for Days\"\n" +
-                "  }, {\n" +
-                "    \"exercises\" : [ ],\n" +
-                "    \"workoutName\" : \"Arms like Guns\"\n" +
-                "  } ]\n" +
-                "}";
+        String testJsonString = "{\n"
+                + "  \"workouts\" : [ {\n"
+                + "    \"exercises\" : [ ],\n"
+                + "    \"workoutName\" : \"Abs for Days\"\n"
+                + "  }, {\n"
+                + "    \"exercises\" : [ ],\n"
+                + "    \"workoutName\" : \"Arms like Guns\"\n"
+                + "  } ]\n"
+                + "}";
         JsonNode node = JsonUtil.parse(testJsonString);
         WorkoutListModel workoutListModel = JsonUtil.fromJson(node, WorkoutListModel.class);
         assertEquals("Abs for Days", workoutListModel.getWorkouts().get(0).getWorkoutName());
@@ -48,7 +48,8 @@ class JsonUtilTest {
     void stringify_exerciseModel_expectJsonString() throws JsonProcessingException {
         ExerciseModel exerciseModel = new ExerciseModel("Push ups", "3", "10", "false");
         JsonNode node = JsonUtil.toJson(exerciseModel);
-        String expectedJsonString = "{\"description\":\"Push ups\",\"sets\":\"3\",\"reps\":\"10\",\"isDone\":\"false\"}";
+        String expectedJsonString =
+                "{\"description\":\"Push ups\",\"sets\":\"3\",\"reps\":\"10\",\"isDone\":\"false\"}";
         assertEquals(expectedJsonString, JsonUtil.stringify(node, false));
     }
 }
