@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 public class ExitCommand extends Command {
 
-    private final String EXIT_MSG = "Exiting program!";
+    private static final String EXIT_MSG = "Exiting program!";
 
     @Override
     public CommandResult executeCommand() {

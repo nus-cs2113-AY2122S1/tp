@@ -5,7 +5,7 @@ package seedu.duke.ui;
  */
 public class Ui {
 
-    private final String LOGO = "\n"
+    private static final String LOGO = "\n"
             + "  /$$$$$$  /$$       /$$$$$$                               /$$          \n"
             + " /$$__  $$| $$      |_  $$_/                              | $$          \n"
             + "| $$  \\__/| $$        | $$   /$$$$$$/$$$$   /$$$$$$   /$$$$$$$  /$$$$$$$\n"
@@ -18,8 +18,9 @@ public class Ui {
             + "Command-Line Interface for NUSMODS                              (v1.0.0)\n"
             + "------------------------------------------------------------------------";
 
-    private final String LINE_SEPARATOR = "------------------------------------------------------------------------";
-    private final String MESSAGE_BORDER = "|| ";
+    private static final String LINE_SEPARATOR = "---------------------------------------"
+            + "---------------------------------";
+    private static final String MESSAGE_BORDER = "|| ";
 
     public void printLogo() {
         System.out.println(LOGO);

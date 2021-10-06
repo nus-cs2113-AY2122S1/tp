@@ -69,7 +69,7 @@ public class Parser {
 
         String flagsToArguments = "";
 
-        for (String flag: commandOptions.keySet()){
+        for (String flag : commandOptions.keySet()) {
             flagsToArguments += flag + " = " + commandOptions.get(flag) + "\n";
         }
 

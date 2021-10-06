@@ -15,7 +15,7 @@ public class AddCommand extends Command {
         // To help u visualise the commandArguments (Flag -> value)
         String flagsToArguments = "Printing add command arguments (flags) below:\n";
 
-        for (String flag: commandArguments.keySet()){
+        for (String flag : commandArguments.keySet()) {
             flagsToArguments += flag + " = " + commandArguments.get(flag) + "\n";
         }
 
