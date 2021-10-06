@@ -171,4 +171,22 @@ public class StockValidator {
                 + "the respective aliases are " + Arrays.toString(columnAlias) + ".");
         return false;
     }
+
+    /**
+     * Checks if total quantity of medicine is below max quantity.
+     *
+     * @param ui          Reference to the UI object passed by Main to print messages.
+     * @param quantity    Quantity of the medicines.
+     * @param maxQuantity Max quantity of medicines.
+     * @return Boolean value indicating if total quantity is less than max quantity.
+     */
+    public static boolean quantityValidityChecker(Ui ui, int quantity, int maxQuantity) {
+        if (quantity > maxQuantity) {
+            String message = "Quantity: " + quantity + ", Max Quantity: " + maxQuantity;
+            ui.print("Quantity cannot be more than maximum quantity!");
+            ui.print(message);
+            return false;
+        }
+        return true;
+    }
 }
