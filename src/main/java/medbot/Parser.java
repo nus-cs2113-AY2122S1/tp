@@ -45,7 +45,8 @@ public class Parser {
     private static final String ERROR_PHONE_NUMBER_NOT_SPECIFIED = "Phone number not specified";
     private static final String ERROR_PHONE_NUMBER_TOO_FEW_DIGITS = "Phone number has too few digits";
     private static final String ERROR_PHONE_NUMBER_TOO_MANY_DIGITS = "Phone number has too many digits";
-    private static final String ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS = "Phone number contains unexpected characters";
+    private static final String ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS =
+            "Phone number contains unexpected characters";
 
     private static final String ERROR_EMAIL_ADDRESS_NOT_SPECIFIED = "Email address not specified";
     private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "Incorrect email address format";
@@ -56,6 +57,7 @@ public class Parser {
     private static final String REGEX_INPUT_PARAMETER = " [a-zA-Z]{1,2}/";
     private static final String REGEX_EMAIL = "(([\\w][\\w-\\.]*[\\w])|[\\w])\\@([\\w]+\\.)+[\\w]+";
     private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
+    private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
     private static final String REGEX_PHONE_NUMBER_SEPARATOR = "[- _+()]";
     private static final String REGEX_CAPITALISE_POSITION = "(\\A|[ _-])[a-z]";
 
@@ -266,9 +268,9 @@ public class Parser {
      *                         has too many/few digits or contains unexpected characters
      */
     private static String parsePhoneNumber(String attributeString) throws MedBotException {
-        String phoneNumberFormat = "[\\d]{8}";
         try {
-            String numberString = attributeString.substring(2).replaceAll(REGEX_PHONE_NUMBER_SEPARATOR, EMPTY_STRING).strip();
+            String numberString = attributeString.substring(2)
+                    .replaceAll(REGEX_PHONE_NUMBER_SEPARATOR, EMPTY_STRING).strip();
             if (numberString.equals("")) {
                 throw new MedBotException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
             }
@@ -278,7 +280,7 @@ public class Parser {
             if (numberString.length() < 8) {
                 throw new MedBotException(ERROR_PHONE_NUMBER_TOO_FEW_DIGITS);
             }
-            if (!numberString.matches(phoneNumberFormat)) {
+            if (!numberString.matches(REGEX_PHONE_NUMBER)) {
                 throw new MedBotException(ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS);
             }
             return numberString;
