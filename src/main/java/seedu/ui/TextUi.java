@@ -89,4 +89,9 @@ public class TextUi {
                 + "  -g GITHUB";
         printDoubleLineMessage(message);
     }
+
+    public static void invalidIndexMessage() {
+        String message = "Please enter a valid contact index.";
+        printDoubleLineMessage(message);
+    }
 }

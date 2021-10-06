@@ -18,6 +18,9 @@ public class FailedCommand extends Command {
         case INVALID_FLAG:
             TextUi.invalidFlagMessage();
             break;
+        case INVALID_INDEX:
+            TextUi.invalidIndexMessage();
+            break;
         default:
             return;
         }
