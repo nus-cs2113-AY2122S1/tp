@@ -8,9 +8,17 @@ import java.util.ArrayList;
 public class IngredientList {
 
     protected ArrayList<Ingredient> ingredientList;
+    private static IngredientList instance = null;
 
     public IngredientList() {
-        ingredientList = new ArrayList<>(); //This is for v1.0
+        ingredientList = new ArrayList<Ingredient>(); //This is for v1.0
+    }
+
+    public static IngredientList getInstance() {
+        if (instance == null) {
+            instance = new IngredientList();
+        }
+        return instance;
     }
 
     /**
@@ -29,25 +37,37 @@ public class IngredientList {
      * @return the list of ingredients
      */
     public String listAllIngredients() {
-        //TODO: Add code to print all ingredients. Return no ingredients if list is empty,
-        // else, return a string consisting of all the ingredients
+        String resultMsg;
+        int i;
 
-        // check if list empty
-        String listOfIngredients = "";
-        // loop through list
-        return listOfIngredients;
+        if (ingredientList.size() == 0) {
+            resultMsg = "No ingredients currently in the list";
+            return resultMsg;
+        }
+
+        resultMsg = "Here is the list of the ingredients currently in inventory:\n";
+
+        for (i = 0; i < ingredientList.size() - 1; i++) {
+            resultMsg += (i + 1) + "."
+                    + ingredientList.get(i).toString() + '\n' + '\t';
+        }
+        resultMsg = resultMsg + ingredientList.size() + "." + ingredientList.get(i).toString();
+
+        return resultMsg;
     }
 
     /**
      * Deletes an ingredient at the specified index in the list.
-     * @param index The index of the ingredient to be deleted
+     * @param ingredientNumber The index of the ingredient to be deleted
      * @return The details of the deleted ingredient
      */
-    public String deleteIngredient(int index) {
-        //TODO: add code to delete the ingredient at a particular index, rmb to catch invalid index in main
+    public String deleteIngredient(int ingredientNumber) {
+        String resultMsg;
+        Ingredient removedIngredient = ingredientList.remove(ingredientNumber - 1);
 
-        String removedIngredient = "placeholder";
-        return removedIngredient.toString();
+        resultMsg = "Got it. This ingredient is removed:\n"
+                + "\t" + removedIngredient.toString();
+        return resultMsg;
     }
 
     /**

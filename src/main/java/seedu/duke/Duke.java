@@ -52,8 +52,14 @@ public class Duke {
                 commandOutput = ingredientList.addNewIngredient(newIngredient);
                 break;
             case "delete":
-                int indexToDelete = 999999; //write code to get the correct index
-                commandOutput = ingredientList.deleteIngredient(indexToDelete);
+                try {
+                    int ingredientNumberToDelete = Integer.parseInt(userInput[1]);
+                    commandOutput = ingredientList.deleteIngredient(ingredientNumberToDelete);
+                } catch (NumberFormatException e) {
+                    commandOutput = "Invalid number format!";
+                } catch (IndexOutOfBoundsException e) {
+                    commandOutput = "Ingredient number not existed!";
+                }
                 break;
             case "update":
                 int indexToUpdate = 999999;
