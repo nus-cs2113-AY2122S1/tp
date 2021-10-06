@@ -8,21 +8,26 @@ import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
 
 public class MainParser {
-    private static final String ADD_TASK_COMD = "add";
+    private static final String ADD_CONTACT_COMD = "add";
     private static final String EXIT_COMD = "exit";
+    private static final String EDIT_CONTACT_COMD = "edit";
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
 
     private ContactParser contactParser;
     private AddContactParser addContactParser = new AddContactParser();
+    private EditContactParser editContactParser = new EditContactParser();
 
     public Command parseCommand(String userInput) {
         String commandType = getCommandWord(userInput);
         Command command;
         switch (commandType) {
-        case ADD_TASK_COMD:
+        case ADD_CONTACT_COMD:
             command = parseAddContact(userInput);
+            break;
+        case EDIT_CONTACT_COMD:
+            command = parseEditContact(userInput); //todo change
             break;
         case EXIT_COMD:
             command = new ExitCommand();
