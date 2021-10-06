@@ -11,7 +11,7 @@ public class TaskDecoder {
     private static final int INDEX_OF_DEADLINE = 1;
     private static final int INDEX_OF_DESCRIPTION = 2;
 
-    public static ArrayList<Task> decodeTaskList(List<String> encodedTaskList) {
+    public static ArrayList<Task> decodeTasksList(List<String> encodedTaskList) {
         ArrayList<Task> decodedTasks = new ArrayList<>();
         for (String encodedTask : encodedTaskList) {
             decodedTasks.add(decodeTaskFromString(encodedTask));

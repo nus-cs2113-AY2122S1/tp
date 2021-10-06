@@ -13,7 +13,7 @@ public class EventDecoder {
     private static final int INDEX_OF_DESCRIPTION = 3;
     private static final int INDEX_OF_BUDGET = 4;
 
-    public static ArrayList<Event> decodeEventList(List<String> encodedEventList) {
+    public static ArrayList<Event> decodeEventsList(List<String> encodedEventList) {
         ArrayList<Event> decodedEvents = new ArrayList<>();
         for (String encodedEvent : encodedEventList) {
             decodedEvents.add(decodeEventFromString(encodedEvent));
