@@ -33,6 +33,14 @@ public class Module {
         return moduleCode;
     }
 
+    public void setModuleCredit(double moduleCredit) {
+        this.moduleCredit = moduleCredit;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getTitle() {
         return title;
     }

@@ -12,6 +12,16 @@ public class Lesson {
     private String lessonType; //placeholder
     private int size;
 
+    public Lesson(String classNo, String startTime, String endTime, String venue,
+                  String lessonType, String day) {
+        this.classNo = classNo;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.venue = venue;
+        this.lessonType = lessonType;
+        this.day = day;
+    }
+
     public String getStartTime() {
         return startTime;
     }
