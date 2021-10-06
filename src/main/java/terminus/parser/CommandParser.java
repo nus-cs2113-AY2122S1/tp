@@ -8,6 +8,7 @@ import terminus.command.Command;
 import terminus.command.HelpCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidTimeFormatException;
 
 public class CommandParser {
 
@@ -22,7 +23,8 @@ public class CommandParser {
         addCommand("help", new HelpCommand(this));
     }
 
-    public Command parseCommand(String command) throws InvalidCommandException, InvalidArgumentException {
+    public Command parseCommand(String command)
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         String[] commandLine = command.strip().split(SPACE_DELIMITER, 2);
         String cmdName = commandLine[0];
         Command currentCommand = commandMap.get(cmdName.strip().toLowerCase(Locale.ROOT));

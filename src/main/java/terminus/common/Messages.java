@@ -16,7 +16,10 @@ public class Messages {
 
     public static final String ERROR_MESSAGE_TAG = "Error: ";
 
+    public static final String LOCAL_TIME_FORMAT = "HH:mm";
+
     public static final String ERROR_MESSAGE_MISSING_ARGUMENTS = ERROR_MESSAGE_TAG + "Missing arguments.";
     public static final String ERROR_MESSAGE_EMPTY_CONTENTS = ERROR_MESSAGE_TAG + "Content not found.";
     public static final String ERROR_MESSAGE_INVALID_NUMBER = ERROR_MESSAGE_TAG + "Invalid numerical value provided.";
+    public static final String ERROR_MESSAGE_INVALID_TIME_FORMAT = ERROR_MESSAGE_TAG + "Invalid time format.";
 }

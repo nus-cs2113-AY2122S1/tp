@@ -10,6 +10,7 @@ import terminus.command.HelpCommand;
 import terminus.command.NotesCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidTimeFormatException;
 
 public class MainCommandParserTest {
     
@@ -28,7 +29,8 @@ public class MainCommandParserTest {
     }
 
     @Test
-    void parseCommand_resolveExitCommand_success() throws InvalidCommandException, InvalidArgumentException {
+    void parseCommand_resolveExitCommand_success()
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         assertTrue(commandParser.parseCommand("exit") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("EXIT") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("   exit   ") instanceof ExitCommand);
@@ -36,7 +38,8 @@ public class MainCommandParserTest {
     }
     
     @Test
-    void parseCommand_resolveHelpCommand_success() throws InvalidCommandException, InvalidArgumentException {
+    void parseCommand_resolveHelpCommand_success()
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         assertTrue(commandParser.parseCommand("help") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("HELP") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("   help   ") instanceof HelpCommand);
@@ -50,7 +53,8 @@ public class MainCommandParserTest {
     }
     
     @Test
-    void parseCommand_resolveNoteCommand_success() throws InvalidCommandException, InvalidArgumentException {
+    void parseCommand_resolveNoteCommand_success()
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         assertTrue(commandParser.parseCommand("note") instanceof NotesCommand);
         assertTrue(commandParser.parseCommand("NOTE") instanceof NotesCommand);
         assertTrue(commandParser.parseCommand("   note   ") instanceof NotesCommand);

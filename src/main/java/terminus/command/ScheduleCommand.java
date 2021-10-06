@@ -4,11 +4,11 @@ import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.parser.LinkCommandParser;
 
-public class LinkCommand extends WorkspaceCommand {
+public class ScheduleCommand extends WorkspaceCommand {
 
     private String arguments;
 
-    public LinkCommand() {
+    public ScheduleCommand() {
         super(LinkCommandParser.getInstance());
     }
 

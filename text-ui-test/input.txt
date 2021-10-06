@@ -13,16 +13,16 @@ note delete aa
 note delete 2
 note delete 1
 help
-schedules add "CS2113T Tutorial" "Thursday" "10:00" "zoom.nus.sg"
-schedules add "CS2113T Lecture" "Friday" "16:00" "zoom.com"
-schedules invalid
-schedules view
-schedules view 4
-schedules view 2
-schedules delete 5
-schedules delete 1
-schedules view
-schedules
+schedule add "CS2113T Tutorial" "Thursday" "10:00" "zoom.nus.sg"
+schedule add "CS2113T Lecture" "Friday" "16:00" "zoom.com"
+schedule invalid
+schedule view
+schedule view 4
+schedule view 2
+schedule delete 5
+schedule delete 1
+schedule view
+schedule
 view
 delete
 delete 1

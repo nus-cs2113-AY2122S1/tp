@@ -3,6 +3,7 @@ package terminus.command.zoomlink;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.content.ContentManager;
+import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
@@ -10,21 +11,20 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.ui.Ui;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AddLinkCommand extends Command {
 
     private String description;
     private String day;
-    private String startTime;
-    private String zoomLink;
+    private LocalTime startTime;
+    private String link;
 
-    private int totalArg;
+    private static final int ADD_SCHEDULE_ARGUMENTS = 4;
 
     public AddLinkCommand() {
-        this.totalArg = 4;
+
     }
 
     @Override
@@ -39,57 +39,40 @@ public class AddLinkCommand extends Command {
     }
 
     @Override
-    public void parseArguments(String arguments) throws InvalidArgumentException {
+    public void parseArguments(String arguments) throws InvalidArgumentException, InvalidTimeFormatException {
         // Perform required checks with regex
         if (arguments == null || arguments.isBlank()) {
-            throw new InvalidArgumentException("Error: Missing arguments.");
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
-        ArrayList<String> argArray = findArguments(arguments);
-        if (!isValidArguments(argArray)) {
-            throw new InvalidArgumentException("Error: Missing arguments.");
+        ArrayList<String> argArray = CommonFormat.findArguments(arguments);
+        if (!isValidScheduleArguments(argArray)) {
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
+        String userStartTime = argArray.get(2);
+
         this.description = argArray.get(0);
         this.day = argArray.get(1);
-        this.startTime = argArray.get(2);
-        this.zoomLink = argArray.get(3);
+        this.startTime = CommonFormat.localTimeConverter(userStartTime);
+        this.link = argArray.get(3);
     }
 
     @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException, InvalidArgumentException {
         ContentManager contentManager = module.getContentManager();
         contentManager.setContent(module.getLinks());
-        contentManager.addLink(description, day, startTime, zoomLink);
+        contentManager.addLink(description, day, startTime, link);
         module.setLinks(contentManager.getContents());
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE));
         return new CommandResult(true, false);
     }
 
-    private ArrayList<String> findArguments(String arg) {
-        ArrayList<String> argsArray = new ArrayList<>();
-        Pattern p = Pattern.compile("\"(.*?)\"");
-        Matcher m = p.matcher(arg);
-        while (m.find()) {
-            argsArray.add(m.group(1));
-        }
-        return argsArray;
-    }
-
-    private boolean isValidArguments(ArrayList<String> argArray) {
+    private boolean isValidScheduleArguments(ArrayList<String> argArray) {
         boolean isValid = true;
-        if (argArray.size() != totalArg) {
+        if (argArray.size() != ADD_SCHEDULE_ARGUMENTS) {
             isValid = false;
-        } else if (isArrayEmpty(argArray)) {
+        } else if (CommonFormat.isArrayEmpty(argArray)) {
             isValid = false;
         }
         return isValid;
-    }
-
-    private boolean isArrayEmpty(ArrayList<String> argArray) {
-        for (String s : argArray) {
-            if (s.isBlank()) {
-                return true;
-            }
-        }
-        return false;
     }
 }

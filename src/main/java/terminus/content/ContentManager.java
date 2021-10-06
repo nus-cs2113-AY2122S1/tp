@@ -1,5 +1,6 @@
 package terminus.content;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import terminus.common.Messages;
 import terminus.exception.InvalidArgumentException;
@@ -20,7 +21,7 @@ public class ContentManager {
         contents.add(new Note(name, data));
     }
 
-    public void addLink(String description, String day, String startTime, String zoomLink) {
+    public void addLink(String description, String day, LocalTime startTime, String zoomLink) {
         contents.add(new Link(description, day, startTime, zoomLink));
     }
 

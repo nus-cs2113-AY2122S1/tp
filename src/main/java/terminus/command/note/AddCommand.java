@@ -1,8 +1,6 @@
 package terminus.command.note;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
@@ -20,7 +18,7 @@ public class AddCommand extends Command {
 
     private static final String COMMAND_FORMAT = " \"{item name}\" \"{item content}\"";
 
-    private static final int TOTAL_ARGUMENTS = 2;
+    private static final int ADD_NOTE_ARGUMENTS = 2;
 
     public AddCommand() {
 
@@ -42,8 +40,8 @@ public class AddCommand extends Command {
         if (arguments == null || arguments.isBlank()) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
-        ArrayList<String> argArray = findArguments(arguments);
-        if (!isValidArguments(argArray)) {
+        ArrayList<String> argArray = CommonFormat.findArguments(arguments);
+        if (!isValidNoteArguments(argArray)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         this.name = argArray.get(0);
@@ -60,32 +58,13 @@ public class AddCommand extends Command {
         return new CommandResult(true, false);
     }
 
-    private ArrayList<String> findArguments(String arg) {
-        ArrayList<String> argsArray = new ArrayList<>();
-        Pattern p = Pattern.compile("\"(.*?)\"");
-        Matcher m = p.matcher(arg);
-        while (m.find()) {
-            argsArray.add(m.group(1));
-        }
-        return argsArray;
-    }
-
-    private boolean isValidArguments(ArrayList<String> argArray) {
+    private boolean isValidNoteArguments(ArrayList<String> argArray) {
         boolean isValid = true;
-        if (argArray.size() != TOTAL_ARGUMENTS) {
+        if (argArray.size() != ADD_NOTE_ARGUMENTS) {
             isValid = false;
-        } else if (isArrayEmpty(argArray)) {
+        } else if (CommonFormat.isArrayEmpty(argArray)) {
             isValid = false;
         }
         return isValid;
-    }
-
-    private boolean isArrayEmpty(ArrayList<String> argArray) {
-        for (String s : argArray) {
-            if (s.isBlank()) {
-                return true;
-            }
-        }
-        return false;
     }
 }

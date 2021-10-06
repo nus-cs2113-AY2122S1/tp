@@ -4,6 +4,7 @@ import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
@@ -63,8 +64,9 @@ public class Terminus {
                 ui.printSection(e.getMessage());
             } catch (InvalidArgumentException e) {
                 ui.printSection(e.getMessage());
+            } catch (InvalidTimeFormatException e) {
+                ui.printSection(e.getMessage());
             }
-
         }
     }
 

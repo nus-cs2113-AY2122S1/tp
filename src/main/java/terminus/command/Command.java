@@ -2,21 +2,30 @@ package terminus.command;
 
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
-public abstract class Command {
+public class Command {
 
     public Command() {
 
     }
 
-    public abstract String getFormat();
+    public String getFormat() {
+        return null;
+    }
 
-    public abstract String getHelpMessage();
+    public String getHelpMessage() {
+        return null;
+    }
 
-    public abstract void parseArguments(String arguments) throws InvalidArgumentException;
+    public void parseArguments(String arguments) throws InvalidArgumentException, InvalidTimeFormatException {
 
-    public abstract CommandResult execute(Ui ui, NusModule module)
-            throws InvalidCommandException, InvalidArgumentException;
+    }
+
+    public CommandResult execute(Ui ui, NusModule module)
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+        return null;
+    }
 }

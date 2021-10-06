@@ -4,7 +4,7 @@ Type any of the following to get started:
 > exit
 > help
 > note
-> schedules
+> schedule
 
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
@@ -41,7 +41,7 @@ Type any of the following to get started:
 > exit
 > help
 > note
-> schedules
+> schedule
 
 [] >>> note has been added!
 [] >>> 1. CS2113T
@@ -63,11 +63,11 @@ Format: help
 note : Move to notes workspace.
 Format: note
 
-schedules : Move to schedules workspace.
-Format: schedules
+schedule : Move to schedules workspace.
+Format: schedule
 
-[] >>> schedules has been added!
-[] >>> schedules has been added!
+[] >>> schedule has been added!
+[] >>> schedule has been added!
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> 1. CS2113T Tutorial, Thursday, 10:00, zoom.nus.sg
 2. CS2113T Lecture, Friday, 16:00, zoom.com
@@ -87,15 +87,15 @@ Type any of the following to get started:
 > back
 > delete
 
-[schedules] >>> 1. CS2113T Lecture, Friday, 16:00, zoom.com
+[schedule] >>> 1. CS2113T Lecture, Friday, 16:00, zoom.com
 
-[schedules] >>> Error: Missing arguments.
-[schedules] >>> class terminus.content.Link 'CS2113T Lecture' has been deleted!
-[schedules] >>>
+[schedule] >>> Error: Missing arguments.
+[schedule] >>> class terminus.content.Link 'CS2113T Lecture' has been deleted!
+[schedule] >>>
 Type any of the following to get started:
 > exit
 > help
 > note
-> schedules
+> schedule
 
 [] >>> Goodbye!
