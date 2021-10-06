@@ -35,7 +35,7 @@ public class MainParser {
             command = parseAddContact(userInput);
             break;
         case EDIT_CONTACT_COMD:
-            command = parseEditContact(userInput); //todo change
+            command = parseEditContact(userInput);
             break;
         case EXIT_COMD:
             command = new ExitCommand();
@@ -58,6 +58,23 @@ public class MainParser {
             return new AddContactCommand(details[DetailType.NAME.getIndex()], details[DetailType.GITHUB.getIndex()]);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
+        }
+    }
+
+    private Command parseEditContact(String userInput) { //userInput is raw user input
+        contactParser = editContactParser;
+        try {
+            //split into array of size 3 with command, index and details
+            String[] details = userInput.split(" ", NUMBER_OF_EDIT_DETAILS);
+            int userIndex = Integer.parseInt(details[EDIT_USER_INDEX]) - 1;
+
+            String[] userDetails = editContactParser.parseContactDetails(details[ISOLATE_USER_INPUT]);
+            System.out.println(Arrays.toString(userDetails));
+            return new EditContactCommand(userDetails, userIndex);
+        } catch (InvalidFlagException e) {
+            return new FailedCommand(FailedCommandType.INVALID_FLAG);
+        } catch (IndexOutOfBoundsException e) {
+            return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
     }
 }
