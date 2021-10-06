@@ -1,8 +1,8 @@
 package seedu.duke.modules;
 
 public class ModuleMapping {
-    protected Module localModule;
-    protected Module mappedModule;
+    public Module localModule;
+    public Module mappedModule;
 
     public ModuleMapping(Module localModule, Module mappedModule) {
         this.localModule = localModule;
