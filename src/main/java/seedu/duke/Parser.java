@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Parser {
     protected String nameRecipe;
+    protected int indexOfRecipe;
 
     public static final int NAME_INDEX = 0;
     public static final int INGREDIENTS_INDEX = 1;
@@ -29,11 +30,14 @@ public class Parser {
                     System.out.print(r);
                 } else if (parseCommand(line).equalsIgnoreCase("delete")) {
                     nameRecipe = parseName(line);
+                    cookbook.removeRecipe(line);
                 } else if (parseCommand(line).equalsIgnoreCase("check")) {
                     nameRecipe = parseName(line);
                 } else if (parseCommand(line).equalsIgnoreCase("exit")) {
                     System.out.println("Bye bye!");
                     break;
+                } else if (parseCommand(line).equalsIgnoreCase("help")) {
+                    System.out.println("add \"recipe name\" \"/ingredients\" 1+2+3 \"steps\" 1+2+3");
                 } else {
                     throw new GordonException(GordonException.COMMAND_INVALID);
                 }

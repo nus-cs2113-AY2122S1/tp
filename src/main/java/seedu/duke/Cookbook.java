@@ -33,13 +33,19 @@ public class Cookbook {
         }
     }
 
-    public void removeRecipe(int index) throws GordonException {
+    public void removeRecipe(String input) throws GordonException {
         try {
-            recipes.remove(index);
+            String inputIndex = input.contains(" ") ? input.substring(input.indexOf(" ") + 1) : " ";
+            if (inputIndex.isEmpty() || inputIndex.equals(" ")) {
+                throw new GordonException(GordonException.INVALID_RECIPE);
+            }
+            int index = Integer.parseInt(inputIndex);
+            recipes.remove(index - 1);
+            System.out.println("OK! The recipe has been deleted from your cookbook.");
         } catch (IndexOutOfBoundsException e) {
-            throw new GordonException(GordonException.INDEX_OOB);
+            throw new GordonException(GordonException.INVALID_RECIPE);
         } catch (IllegalArgumentException e) {
-            throw new GordonException(GordonException.INDEX_INVALID);
+            throw new GordonException(GordonException.INVALID_RECIPE);
         }
     }
 
