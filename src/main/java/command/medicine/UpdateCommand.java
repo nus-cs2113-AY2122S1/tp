@@ -50,6 +50,11 @@ public class UpdateCommand extends Command {
             return;
         }
 
+        setUpdatesByStockID(parameters, medicines, stock);
+        ui.print("Updated");
+        ui.printMedicine(stock);
+    }
+
     private boolean processDateInput(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines,
                                      Stock stock) {
         String name = stock.getMedicineName();
@@ -120,14 +125,23 @@ public class UpdateCommand extends Command {
      * Update values provided by user for a given stock id.
      *
      * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines  Arraylist of all medicines.
      * @param stock      Stock object of the given stock id.
      */
-    private void setUpdatesByStockID(HashMap<String, String> parameters, Stock stock) {
+    private void setUpdatesByStockID(HashMap<String, String> parameters, ArrayList<Medicine> medicines, Stock stock) {
+        ArrayList<Stock> filteredMedicines = new ArrayList<>();
+        for (Medicine medicine : medicines) {
+            if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(stock.getMedicineName())) {
+                filteredMedicines.add((Stock) medicine);
+            }
+        }
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
             case CommandParameters.UPDATED_MEDICINE_NAME:
-                stock.setMedicineName(parameterValue);
+                for (Stock targetStock : filteredMedicines) {
+                    targetStock.setMedicineName(parameterValue);
+                }
                 break;
             case CommandParameters.PRICE:
                 stock.setPrice(Double.parseDouble(parameterValue));
@@ -143,10 +157,14 @@ public class UpdateCommand extends Command {
                 }
                 break;
             case CommandParameters.DESCRIPTION:
-                stock.setDescription(parameterValue);
+                for (Stock targetStock : filteredMedicines) {
+                    targetStock.setDescription(parameterValue);
+                }
                 break;
             case CommandParameters.MAX_QUANTITY:
-                stock.setMaxQuantity(Integer.parseInt(parameterValue));
+                for (Stock targetStock : filteredMedicines) {
+                    targetStock.setMaxQuantity(Integer.parseInt(parameterValue));
+                }
                 break;
             default:
                 break;
