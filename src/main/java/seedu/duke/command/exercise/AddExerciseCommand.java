@@ -17,7 +17,7 @@ public class AddExerciseCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exercise to a workout.\n"
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_NAME "
             + SETS_KEYWORD + "NUMBER_OF_SETS " + REPS_KEYWORD + "NUMBER_OF_REPS\n"
-            + "\tExample: add " + WORKOUT_KEYWORD + "3 " + EXERCISE_KEYWORD + "push ups "
+            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3 " + EXERCISE_KEYWORD + "push ups "
             + SETS_KEYWORD + "3 " + REPS_KEYWORD + "10\n";
     public static final String MESSAGE_SUCCESS = "New exercise added: %1$s";
 
