@@ -34,4 +34,11 @@ public class UniversityList {
         }
     }
 
+    public int getSize() {
+        return list.size();
+    }
+
+    public University get(int index) {
+        return list.get(index);
+    }
 }

@@ -22,4 +22,11 @@ public class SelectedModuleList {
         }
     }
 
+    public int getSize() {
+        return list.size();
+    }
+
+    public Module get(int index) {
+        return list.get(index);
+    }
 }

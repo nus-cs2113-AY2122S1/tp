@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
-import seedu.duke.classes.SelectedModuleList;
-import seedu.duke.classes.UniversityList;
+import seedu.duke.modules.SelectedModuleList;
+import seedu.duke.universities.UniversityList;
 
 public class Command {
     protected SelectedModuleList selectedModuleList;
