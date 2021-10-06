@@ -83,6 +83,5 @@ class DukeTest {
         filteredCBook.recipes.addAll(filteredR);
         System.out.println("Recipes containing the 'Vegan' tag: ");
         System.out.println(filteredCBook);
-
     }
 }
