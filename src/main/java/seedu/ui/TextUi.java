@@ -76,4 +76,12 @@ public class TextUi {
                 + "Please try again with a valid command.";
         printDoubleLineMessage(message);
     }
+
+    public static void invalidFlagMessage() {
+        String message = "There appears to be a flag that is not recognised.\n"
+                + "Please try again with a valid flag.\n"
+                + "  -n NAME\n"
+                + "  -g GITHUB";
+        printDoubleLineMessage(message);
+    }
 }
