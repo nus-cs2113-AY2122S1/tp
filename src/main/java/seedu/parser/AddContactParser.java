@@ -7,9 +7,10 @@ public class AddContactParser extends ContactParser {
     /**
      * Returns a String[] containing the user's input and the arguments specified for
      * each detail flag. Each detail is parsed individually using parseDetail.
-     * <p></p>
+     * <p>
      * Eg. userInput => add -n andre -g ng-andre
      *     output => ["andre", "ng-andre"]
+     * </p>
      * Note: Each index is properly identified by enumeration in contact/DetailType
      * @param userInput User's complete untouched input
      * @return String[] Returns an array of details
