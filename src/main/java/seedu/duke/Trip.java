@@ -37,9 +37,13 @@ public class Trip {
         }
     }
 
-    public float getBudget() { return this.budget; }
+    public float getBudget() {
+        return this.budget;
+    }
 
-    public void setBudget(float budget) { this.budget = budget; }
+    public void setBudget(float budget) {
+        this.budget = budget;
+    }
 
     public float getExchangeRate() {
         return exchangeRate;
@@ -65,9 +69,13 @@ public class Trip {
         this.repaymentCurrency = repaymentCurrency;
     }
 
-    public String getLocation() { return this.location; }
+    public String getLocation() {
+        return this.location;
+    }
 
-    public void setLocation(String location) { this.location = location; }
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public void setPersonName(int indexOfPerson, String newName) {
         Person personToEdit = listOfPersons.get(indexOfPerson);
