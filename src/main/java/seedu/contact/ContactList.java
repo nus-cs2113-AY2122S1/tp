@@ -13,6 +13,14 @@ public class ContactList {
         contacts.add(contact);
     }
 
+    public void deleteContact(int deletedIndex) {
+        contacts.remove(deletedIndex);
+    }
+
+    public int getIndexOfContact(Contact contact) {
+        return contacts.indexOf(contact);
+    }
+
     public Contact getContactAtIndex(int index) {
         return contacts.get(index);
     }

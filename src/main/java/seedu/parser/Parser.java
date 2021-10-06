@@ -1,12 +1,15 @@
 package seedu.parser;
 
+
 import seedu.command.AddContactCommand;
+import seedu.command.DeleteContactCommand;
 import seedu.command.Command;
 import seedu.command.ExitCommand;
 import seedu.command.FailedCommand;
 
 public class Parser {
     private static final String ADD_TASK_COMD = "add";
+    private static final String DELETE_TASK_COMD = "rm";
     private static final String EXIT_COMD = "exit";
 
     private static final int COMD_WORD_INDEX = 0;
@@ -22,6 +25,9 @@ public class Parser {
         switch (commandType) {
         case ADD_TASK_COMD:
             command = parseAddContact(userInput);
+            break;
+        case DELETE_TASK_COMD:
+            command = parseDeleteContact(userInput);
             break;
         case EXIT_COMD:
             command = new ExitCommand();
@@ -44,6 +50,12 @@ public class Parser {
         String name = contact.substring(contact.indexOf(NAME_TAG) + 3, contact.indexOf(GITHUB_TAG));
         String github = contact.substring(contact.indexOf(GITHUB_TAG) + 3);
         return new AddContactCommand(name, github);
+    }
+
+    private Command parseDeleteContact(String userInput) {
+        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
+        int deletedIndex = Integer.parseInt(destructuredInputs[1]) - 1;
+        return new DeleteContactCommand(deletedIndex);
     }
 
 
