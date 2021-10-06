@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    //check coding style and format
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
