@@ -13,7 +13,6 @@ public class EditContactParser extends ContactParser {
         String[] contactDetails = new String[NUMBER_OF_DETAILS];
         Arrays.fill(contactDetails, null);
         String[] destructuredInputs = (BUFFER + userInput).split(DETAIL_SEPARATOR);
-        System.out.println("editcontactparser" + Arrays.toString(destructuredInputs));
         for (int i = CONTACT_PARAMS_START_INDEX; i < destructuredInputs.length; i++) {
             parseDetail(contactDetails, destructuredInputs[i]);
         }
