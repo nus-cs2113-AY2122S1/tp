@@ -6,9 +6,9 @@ public class Person {
     String name;
     boolean isUser;
     float amtOwedToUser;
-    ArrayList <Expense> listOfExpenses = new ArrayList<>();
+    ArrayList<Expense> listOfExpenses = new ArrayList<>();
 
-    public Person(String name, Boolean isUser){
+    public Person(String name, Boolean isUser) {
         this.name = name;
         this.isUser = isUser;
         amtOwedToUser = 0;
@@ -30,14 +30,14 @@ public class Person {
         return amtOwedToUser;
     }
 
-    public void setAmtOwedToUser(float amount){
+    public void setAmtOwedToUser(float amount) {
         amtOwedToUser += amount;
     }
 
-    public float getTotalExpenditure(){
+    public float getTotalExpenditure() {
         float total = 0;
-        for (Expense Expense : listOfExpenses){
-//            total += Expense.getAmountSpent() / Expense.getPersonsInvolved().size(); //Assuming everyone pays equally
+        for (Expense expense : listOfExpenses) {
+            //total += Expense.getAmountSpent() / Expense.getPersonsInvolved().size(); //Assuming everyone pays equally
         }
         return total;
     }
