@@ -21,9 +21,11 @@ public class Entry {
         case TRAINING_SCHEDULE_ENTRY:
             Parser.makeTodoTask(trainings, entry);
             break;
-        case LIST_KEYWORD:
-            Ui.printList(entry);
+        case LIST_MEMBER_KEYWORD:
+            Ui.printList(members);
             break;
+        case LIST_TRAINING_KEYWORD:
+            Ui.printList(trainings);
         case ADD_MEMBER_KEYWORD:
             Parser.addItem(members, entry);
             break;
