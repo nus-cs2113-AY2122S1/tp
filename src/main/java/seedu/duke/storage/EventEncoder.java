@@ -9,13 +9,15 @@ public class EventEncoder {
 
     public static List<String> encodeEventsList(ArrayList<Event> eventsToSave) {
         List<String> encodedEvents = new ArrayList<>();
-
+        eventsToSave.forEach(event -> encodedEvents.add(encodeEventToString(event)));
         return encodedEvents;
     }
 
     public static String encodeEventToString(Event event) {
-        StringBuilder encodedEventBuilder = new StringBuilder();
-
-        return encodedEventBuilder.toString();
+        return event.getTitle() + " |" +
+                event.getDescription() + " |" +
+                event.getDateValue() + " |" +
+                event.getVenue() + " |" +
+                event.getBudget();
     }
 }
