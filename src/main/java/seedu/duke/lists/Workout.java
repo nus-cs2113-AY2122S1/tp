@@ -5,44 +5,42 @@ import seedu.duke.tasks.Exercise;
 
 import java.util.ArrayList;
 
-
+/**
+ * Adding, deleting and other operations related to the exercises will be executed from here.
+ */
 public class Workout {
-    public ArrayList<Exercise> exercises;
-    private final String description;
+    private String workoutName;
 
-    public String getDescription() {
-        return description;
+    public String getWorkoutName() {
+        return workoutName;
     }
 
-    @Override
-    public String toString() {
-        return getDescription();
-    }
+    private ArrayList<Exercise> exercises;
 
-    public Workout(String description) {
+    public Workout(String workoutName) {
         exercises = new ArrayList<>();
-        this.description = description;
+        this.workoutName = workoutName;
     }
 
     public void addExercise(Exercise exercise) {
         exercises.add(exercise);
     }
 
-    public Exercise removeExercise(int index) throws GetJackDException {
-        if (index <= 0 || index > exercises.size()) {
+    public Exercise removeExercise(int displayIndex) throws GetJackDException {
+        if (displayIndex <= 0 || displayIndex > exercises.size()) {
             throw new GetJackDException("Invalid Exercise Index");
         }
-        return exercises.remove(index - 1);
+        return exercises.remove(displayIndex - 1);
     }
 
     public ArrayList<Exercise> getAllExercises() {
         return exercises;
     }
 
-    public Exercise getExercise(int index) throws GetJackDException {
-        if (index <= 0 || index > exercises.size()) {
+    public Exercise getExercise(int displayIndex) throws GetJackDException {
+        if (displayIndex <= 0 || displayIndex > exercises.size()) {
             throw new GetJackDException("Invalid Exercise Index");
         }
-        return exercises.get(index - 1);
+        return exercises.get(displayIndex - 1);
     }
 }

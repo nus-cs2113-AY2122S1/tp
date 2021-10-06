@@ -7,7 +7,6 @@ public class Exercise {
     protected int reps;
     protected Boolean isDone = false;
 
-
     public Exercise(String description, int sets, int reps) {
         this.description = description;
         this.sets = sets;

@@ -2,6 +2,8 @@ package seedu.duke.lists;
 
 import seedu.duke.exception.GetJackDException;
 
+import seedu.duke.tasks.Workout;
+
 import java.util.ArrayList;
 
 /**
@@ -22,22 +24,21 @@ public class WorkoutList {
         workouts.add(workout);
     }
 
-    public Workout removeWorkout(int index) throws GetJackDException {
-        if (index <= 0 || index > workouts.size()) {
+    public Workout removeWorkout(int displayIndex) throws GetJackDException {
+        if (displayIndex <= 0 || displayIndex > workouts.size()) {
             throw new GetJackDException("Invalid Workout Index");
         }
-        return workouts.remove(index - 1);
+        return workouts.remove(displayIndex - 1);
     }
 
     public ArrayList<Workout> getAllWorkouts() {
         return workouts;
     }
 
-    public Workout getWorkout(int index) throws GetJackDException {
-        if (index <= 0 || index > workouts.size()) {
+    public Workout getWorkout(int displayIndex) throws GetJackDException {
+        if (displayIndex <= 0 || displayIndex > workouts.size()) {
             throw new GetJackDException("Invalid Workout Index");
         }
-        return workouts.get(index - 1);
+        return workouts.get(displayIndex - 1);
     }
-
 }
