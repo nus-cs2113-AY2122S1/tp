@@ -97,25 +97,11 @@ public class Parser {
             throw new MedBotException("No parameters given");
         }
         Patient patient = new Patient();
-        preprocessEditPersonInformation(patient);
+        patient.setNull();
         for (int i = 1; i < parameters.length; i++) {
             updatePersonalInformation(patient, parameters[i]);
         }
         return new EditPatientCommand(patientId, patient);
-    }
-
-    /**
-     * Sets all the information of the new patient data to null to avoid overwrite old information
-     * with blank space.
-     *
-     * @param person Person who all information will be set to null
-     */
-    private static void preprocessEditPersonInformation(Person person) {
-        person.setName(null);
-        person.setPhoneNumber(null);
-        person.setEmailAddress(null);
-        person.setIcNumber(null);
-        person.setResidentialAddress(null);
     }
 
     private static String preprocessInput(String userInput) {
