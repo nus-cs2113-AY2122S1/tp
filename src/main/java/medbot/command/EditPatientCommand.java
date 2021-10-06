@@ -18,7 +18,6 @@ public class EditPatientCommand extends Command {
     public void execute(PatientList patientList, Ui ui) throws MedBotException {
         patientList.editPatient(patientId, patient);
         String patientInfo = patientList.getPatientInfo(patientId);
-        ui.printOutput("The information of patient with ID " + patientId + " has been edited to:"
-                + System.lineSeparator() + patientInfo);
+        ui.printEditPatientMessage(patientId, patientInfo);
     }
 }

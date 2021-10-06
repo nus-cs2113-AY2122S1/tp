@@ -14,6 +14,6 @@ public class ViewPatientCommand extends Command {
     @Override
     public void execute(PatientList patientList, Ui ui) throws MedBotException {
         String patientInfo = patientList.getPatientInfo(patientId);
-        ui.printOutput("Here's the patient with id " + patientId + ": " + patientInfo);
+        ui.printPaitentInfo(patientId, patientInfo);
     }
 }

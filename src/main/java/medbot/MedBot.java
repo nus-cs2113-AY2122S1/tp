@@ -1,6 +1,5 @@
 package medbot;
 
-import java.util.Scanner;
 import medbot.command.Command;
 
 public class MedBot {
@@ -12,7 +11,8 @@ public class MedBot {
         PatientList patientList = new PatientList();
         boolean isInteracting = true;
         Ui ui = new Ui();
-        ui.printOutput("Hello, I'm MedBot!" + System.lineSeparator() + "How can I help you today?");
+        ui.printWelcomeMessage();
+
         while (isInteracting) {
             String userInput = ui.readInput();
             try {

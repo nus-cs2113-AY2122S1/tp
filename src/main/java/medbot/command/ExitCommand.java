@@ -10,6 +10,6 @@ public class ExitCommand extends Command {
     }
 
     public void execute(PatientList patientList, Ui ui) {
-
+        ui.printExitMessage();
     }
 }
