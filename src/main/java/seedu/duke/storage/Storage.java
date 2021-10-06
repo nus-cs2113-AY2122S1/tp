@@ -8,7 +8,7 @@ import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.models.ExerciseModel;
 import seedu.duke.storage.models.WorkoutListModel;
 import seedu.duke.storage.models.WorkoutModel;
-import seedu.duke.tasks.Exercise;
+import seedu.duke.exercises.Exercise;
 
 import java.io.File;
 import java.io.FileWriter;

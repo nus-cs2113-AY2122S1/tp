@@ -1,4 +1,4 @@
-package seedu.duke.tasks;
+package seedu.duke.exercises;
 
 import seedu.duke.storage.models.ExerciseModel;
 import seedu.duke.storage.models.WorkoutModel;

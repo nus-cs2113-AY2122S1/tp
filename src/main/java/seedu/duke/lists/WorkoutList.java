@@ -7,7 +7,7 @@ import seedu.duke.lists.Workout;
 import java.util.ArrayList;
 
 /**
- * Adding, deleting and other operations related to work out workouts will be executed from here.
+ * Adding, deleting and other operations related to workouts will be executed from here.
  */
 public class WorkoutList {
     private ArrayList<Workout> workouts;
