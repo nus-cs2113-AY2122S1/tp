@@ -7,8 +7,6 @@ import java.util.List;
 
 public class EventDecoder {
 
-    private static final String EVENT_DATA_ARGS_DELIMITER = "\\s*\\|\\s*";
-
     private static final int INDEX_OF_TITLE = 0;
     private static final int INDEX_OF_DATETIME = 1;
     private static final int INDEX_OF_VENUE = 2;
@@ -24,7 +22,7 @@ public class EventDecoder {
     }
 
     private static Event decodeEventFromString(String encodedEvent) {
-        String[] eventDetails = encodedEvent.trim().split(EVENT_DATA_ARGS_DELIMITER);
+        String[] eventDetails = encodedEvent.trim().split(Event.EVENT_DATA_ARGS_DELIMITER);
         String eventTitle = eventDetails[INDEX_OF_TITLE];
         String eventDateTime = eventDetails[INDEX_OF_DATETIME];
         String eventVenue = eventDetails[INDEX_OF_VENUE];
