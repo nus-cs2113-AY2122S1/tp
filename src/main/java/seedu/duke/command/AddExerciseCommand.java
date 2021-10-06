@@ -5,11 +5,18 @@ import seedu.duke.lists.WorkoutList;
 import seedu.duke.tasks.Exercise;
 import seedu.duke.ui.Ui;
 
+import static seedu.duke.parser.Parser.EXERCISE_KEYWORD;
+import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
+import static seedu.duke.parser.Parser.SETS_KEYWORD;
+import static seedu.duke.parser.Parser.REPS_KEYWORD;
+
 public class AddExerciseCommand extends Command {
     public static final String COMMAND_WORD = "add";
-    public static final String MESSAGE_USAGE = "add: Adds an exercise to a workout.\n"
-            + "\tParameters: w/WORKOUT_INDEX e/EXERCISE_NAME s/NUMBER_OF_SETS r/NUMBER_OF_REPS\n"
-            + "\tExample: add w/3 e/push ups s/3 r/10\n";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exercise to a workout.\n"
+            + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_NAME "
+            + SETS_KEYWORD + "NUMBER_OF_SETS " + REPS_KEYWORD + "NUMBER_OF_REPS\n"
+            + "\tExample: add " + WORKOUT_KEYWORD + "3 " + EXERCISE_KEYWORD + "push ups "
+            + SETS_KEYWORD + "3 " + REPS_KEYWORD + "10\n";
     public static final String MESSAGE_SUCCESS = "New exercise added: %1$s";
 
     private final Exercise toAdd;
