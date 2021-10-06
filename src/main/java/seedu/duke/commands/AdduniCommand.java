@@ -1,6 +1,6 @@
 package seedu.duke.commands;
 
-import duke.Classes.*;
+import seedu.duke.Classes.*;
 
 public class AdduniCommand extends Command {
     public static final String COMMAND_WORD = "adduni";
@@ -16,7 +16,7 @@ public class AdduniCommand extends Command {
         this.universityToAdd = universityToAdd;
 //        try {
         universityList.addUniversity(universityToAdd);
-        System.out.println("New university added: " + universityToAdd.name);
+        System.out.println("New university added: " + universityToAdd.getName());
         //or with getName();
         //} catch (UniversityList.DuplicateUniversityException e) {
 //            System.out.println("This university already exists in the university list!");
