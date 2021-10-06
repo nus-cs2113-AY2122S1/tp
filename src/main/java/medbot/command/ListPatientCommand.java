@@ -7,6 +7,7 @@ public class ListPatientCommand extends Command {
 
     @Override
     public void execute(PatientList patientList, Ui ui) {
-        ui.printAllPatients(patientList);
+        String allPatientsString = ui.getAllPatientsString(patientList);
+        ui.printOutput(allPatientsString);
     }
 }

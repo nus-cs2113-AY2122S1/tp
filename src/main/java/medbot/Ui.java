@@ -37,39 +37,42 @@ public class Ui {
     }
 
     /**
-     * Prints a message when successfully add a patient to a list.
+     * Returns a message when successfully add a patient to a list.
      *
-     * @param patientId the ID of the patient to be added.
+     * @param patientId the ID of the patient to be added
+     * @return the Successful Message
      */
-    public void printAddPatientMessage(int patientId) {
-        printOutput("Added patient with patient ID: " + patientId);
+    public String getAddPatientMessage(int patientId) {
+        return "Added patient with patient ID: " + patientId;
     }
 
     /**
-     * Prints a message when successfully delete a patient from a list.
+     * Returns a message when successfully delete a patient from a list.
      *
      * @param patientId the ID of the patient to be deleted.
+     * @return the Successful Message
      */
-    public void printDeletePatientMessage(int patientId) {
-        printOutput("Patient with id " + patientId + " deleted from system.");
+    public String getDeletePatientMessage(int patientId) {
+        return "Patient with id " + patientId + " deleted from system.";
     }
 
     /**
-     * Prints a message when successfully edit a patient in a list.
+     * Returns a message when successfully edit a patient in a list.
      *
      * @param patientId the ID of the patient to be edited.
+     * @return the Successful Message
      */
-    public void printEditPatientMessage(int patientId, String patientInfo) {
-        printOutput("The information of patient with ID " + patientId + " has been edited to:"
-                + System.lineSeparator() + patientInfo);
+    public String getEditPatientMessage(int patientId, String patientInfo) {
+        return "The information of patient with ID " + patientId + " has been edited to:"
+                + System.lineSeparator() + patientInfo;
     }
 
     /**
      * Prints an exit message when MedBot is exiting.
+     * @return the exit Message
      */
-    public void printExitMessage() {
-        printOutput("Thank you for using MedBot!");
-        printOutput("See you again!");
+    public String getExitMessage() {
+        return "Thank you for using MedBot!\nSee you again!";
     }
 
     /**
@@ -77,18 +80,22 @@ public class Ui {
      *
      * @param patientId the ID of the patient to be viewed.
      * @param patientInfo the Info of the patient to be printed.
+     * @return the Patient information
      */
-    public void printPaitentInfo(int patientId, String patientInfo) {
-        printOutput("Here's the patient with id " + patientId + ": " + patientInfo);
+    public String getPatientInfo(int patientId, String patientInfo) {
+        return "Here's the patient with id " + patientId + ": " + patientInfo;
     }
 
     /**
      * Prints all patients in a list.
      *
      * @param patientList the list containing patients to be printed.
+     * @return all Patients' information.
      */
-    public void printAllPatients(PatientList patientList) {
-        printOutput("Here is a list of all patients:");
-        patientList.listPatients();
+    public String getAllPatientsString(PatientList patientList) {
+        String output = "Here is a list of all patients:\n";
+        output += patientList.listPatients();
+
+        return output;
     }
 }

@@ -1,14 +1,6 @@
 package medbot;
 
-import java.util.Locale;
-import medbot.command.AddPatientCommand;
-import medbot.command.Command;
-import medbot.command.DeletePatientCommand;
-import medbot.command.ExitCommand;
-import medbot.command.ListPatientCommand;
-import medbot.command.ViewPatientCommand;
-import medbot.command.EditPatientCommand;
-
+import medbot.command.*;
 import medbot.person.Patient;
 import medbot.person.Person;
 
@@ -177,26 +169,26 @@ public class Parser {
      */
     private static void updatePersonalInformation(Person person, String attributeString) throws MedBotException {
         if (attributeString.startsWith(PARAMETER_NAME)) {
-            String name = parseName(attributeString);
+            String name = parseName(attributeString.substring(2));
             person.setName(name);
             return;
         }
         if (attributeString.startsWith(PARAMETER_PHONE)) {
-            String phoneNumber = parsePhoneNumber(attributeString);
+            String phoneNumber = parsePhoneNumber(attributeString.substring(2));
             person.setPhoneNumber(phoneNumber);
             return;
         }
         if (attributeString.startsWith(PARAMETER_EMAIL)) {
-            String email = parseEmailAddress(attributeString);
+            String email = parseEmailAddress(attributeString.substring(2));
             person.setEmailAddress(email);
             return;
         }
         if (attributeString.startsWith(PARAMETER_IC)) {
-            String icNumber = parseIcNumber(attributeString);
+            String icNumber = parseIcNumber(attributeString.substring(2));
             person.setIcNumber(icNumber);
         }
         if (attributeString.startsWith(PARAMETER_ADDRESS)) {
-            String address = parseResidentialAddress(attributeString);
+            String address = parseResidentialAddress(attributeString.substring(2));
             person.setResidentialAddress(address);
         }
     }
@@ -263,7 +255,7 @@ public class Parser {
         try {
             String numberString = attributeString.substring(2)
                     .replaceAll(REGEX_PHONE_NUMBER_SEPARATOR, EMPTY_STRING).strip();
-            if (numberString.equals("")) {
+            if (numberString.equals(EMPTY_STRING)) {
                 throw new MedBotException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
             }
             if (numberString.length() > 8) {
@@ -293,7 +285,7 @@ public class Parser {
     private static String parseEmailAddress(String attributeString) throws MedBotException {
         try {
             String emailString = attributeString.strip();
-            if (emailString.equals(EMPTY_STRING)) {
+            if (emailString.equals("")) {
                 throw new MedBotException(ERROR_EMAIL_ADDRESS_NOT_SPECIFIED);
             }
             if (!emailString.matches(REGEX_EMAIL)) {

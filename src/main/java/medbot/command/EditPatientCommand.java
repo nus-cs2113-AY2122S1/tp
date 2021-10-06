@@ -18,6 +18,7 @@ public class EditPatientCommand extends Command {
     public void execute(PatientList patientList, Ui ui) throws MedBotException {
         patientList.editPatient(patientId, patient);
         String patientInfo = patientList.getPatientInfo(patientId);
-        ui.printEditPatientMessage(patientId, patientInfo);
+        String editPatientMessage = ui.getEditPatientMessage(patientId, patientInfo);
+        ui.printOutput(editPatientMessage);
     }
 }

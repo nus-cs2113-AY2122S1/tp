@@ -14,6 +14,7 @@ public class AddPatientCommand extends Command {
     @Override
     public void execute(PatientList patientList, Ui ui) {
         int patientId = patientList.addPatient(patient);
-        ui.printAddPatientMessage(patientId);
+        String successMessage = ui.getAddPatientMessage(patientId);
+        ui.printOutput(successMessage);
     }
 }

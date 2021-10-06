@@ -14,6 +14,7 @@ public class DeletePatientCommand extends Command {
     @Override
     public void execute(PatientList patientList, Ui ui) throws MedBotException {
         patientList.deletePatient(patientId);
-        ui.printDeletePatientMessage(patientId);
+        String deletePatientMessage = ui.getDeletePatientMessage(patientId);
+        ui.printOutput(deletePatientMessage);
     }
 }

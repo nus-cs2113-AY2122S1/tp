@@ -79,10 +79,14 @@ public class PatientList {
         return patients.remove(patientId);
     }
 
-    public void listPatients() {
+    public String listPatients() {
+        String output = "";
         for (int key : patients.keySet()) {
-            System.out.println(patients.get(key));
+            output += patients.get(key);
+            output += "\n";
         }
+
+        return output;
     }
 
     private String getNoPatientIdErrorMessage(int patientId) {
