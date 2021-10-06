@@ -18,6 +18,18 @@ public class FailedCommand extends Command {
         case INVALID_FLAG:
             TextUi.invalidFlagMessage();
             break;
+        case MISSING_ARG:
+            TextUi.missingArgMessage();
+            break;
+        case MISSING_DETAIL:
+            TextUi.missingDetailMessage();
+            break;
+        case INVALID_NUM:
+            TextUi.invalidNumMessage();
+            break;
+        case INVALID_FORMAT:
+            TextUi.invalidFormatMessage();
+            break;
         default:
             return;
         }

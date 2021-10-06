@@ -22,6 +22,7 @@ public class TextUi {
         initMessage();
     }
 
+
     public String getUserInput() {
         return scanner.nextLine();
     }
@@ -57,6 +58,12 @@ public class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void deleteContactMessage(String contactName, int listSize) {
+        String message = "ConTech has removed the specified contact: " + contactName + "\n"
+                + "You now have " + listSize + " contact(s).";
+        printDoubleLineMessage(message);
+    }
+
     public static void exitMessage() {
         String message = "ConTech will now shutdown.\n"
                 + "We hope you have enjoyed using it.";
@@ -84,4 +91,29 @@ public class TextUi {
                 + "  -g GITHUB";
         printDoubleLineMessage(message);
     }
+
+    public static void missingDetailMessage() {
+        String message = "There are missing details.\n"
+                + "Please remove any flags with no details\n";
+        printDoubleLineMessage(message);
+    }
+
+    public static void missingArgMessage() {
+        String message = "There seems to be missing parameters in your request.\n"
+                + "Please specify your command.\n";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidNumMessage() {
+        String message = "That does not seem to be a number.\n"
+                + "Please provide a number instead.\n";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidFormatMessage() {
+        String message = "ConTech is unable to understand your request.\n"
+                + "The request has not been formatted correctly. Please try again.\n";
+        printDoubleLineMessage(message);
+    }
+
 }
