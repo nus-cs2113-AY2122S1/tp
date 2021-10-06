@@ -1,6 +1,10 @@
 package seedu.parser;
 
-import seedu.command.*;
+import seedu.command.Command;
+import seedu.command.ViewCommand;
+import seedu.command.AddContactCommand;
+import seedu.command.FailedCommand;
+import seedu.command.ExitCommand;
 import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
 
