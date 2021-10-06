@@ -14,7 +14,7 @@ public class Recipe {
     protected int calories;
     protected ArrayList<String> tags;
 
-    public Recipe(String name) {
+    public Recipe(String name) throws GordonException {
         this.name = name;
         ingredients = new ArrayList<>();
         steps = new ArrayList<>();
@@ -109,8 +109,8 @@ public class Recipe {
     @Override
     public String toString() {
         StringBuilder outputString = new StringBuilder(name + System.lineSeparator());
-        outputString.append("Preparation time: ").append(preparationTime).append(System.lineSeparator());
-        outputString.append("Cooking time: ").append(cookingTime).append(System.lineSeparator());
+        //outputString.append("Preparation time: ").append(preparationTime).append(System.lineSeparator());
+        //outputString.append("Cooking time: ").append(cookingTime).append(System.lineSeparator());
         outputString.append("Ingredients needed: ").append(System.lineSeparator());
         for (int i = 0; i < ingredients.size(); i++) {
             outputString.append(i + 1).append(". ");
@@ -123,9 +123,9 @@ public class Recipe {
             outputString.append(steps.get(j));
             outputString.append(System.lineSeparator());
         }
-        outputString.append("Total price of ingredients: $")
-                .append(String.format("%.2f", totalPrice))
-                .append(System.lineSeparator());
+        //outputString.append("Total price of ingredients: $")
+        //        .append(String.format("%.2f", totalPrice))
+        //        .append(System.lineSeparator());
         return outputString.toString();
     }
 }

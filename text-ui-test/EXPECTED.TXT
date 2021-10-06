@@ -1,0 +1,18 @@
+Added Caprese Salad recipe! Yum!
+Caprese Salad
+Ingredients needed: 
+1. Tomatoes
+2. Mozzarella
+3. Basil
+4. Olive Oil 
+Method: 
+1. Cut tomatoes into 1 inch slices
+2. Cut mozzarella into similar slices
+3. Arrange slices on plate
+4. Drizzle with olive oil
+GordonException: Command given cannot be recognized.
+GordonException: Please use the word 'ingredients' before adding ingredients.
+GordonException: Command given cannot be recognized.
+GordonException: Command given cannot be recognized.
+GordonException: Please use the word 'steps' to kickstart the adding of steps.
+Bye bye!
