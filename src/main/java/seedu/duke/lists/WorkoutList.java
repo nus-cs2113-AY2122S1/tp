@@ -41,4 +41,10 @@ public class WorkoutList {
         }
         return workouts.get(displayIndex - 1);
     }
+
+    public void convertAllWorkoutsToStorageModel() {
+        for (Workout workout : workouts) {
+            workout.convertToWorkoutStorageModel();
+        }
+    }
 }

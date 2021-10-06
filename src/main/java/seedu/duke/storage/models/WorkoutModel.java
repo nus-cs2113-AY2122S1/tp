@@ -8,7 +8,8 @@ public class WorkoutModel {
     private ArrayList<ExerciseModel> exercises = new ArrayList<>();
     private String workoutName;
 
-    public WorkoutModel() {
+    public WorkoutModel(String workoutName) {
+        this.workoutName = workoutName;
     }
 
     public WorkoutModel(@JsonProperty("exercises") ArrayList<ExerciseModel> exercises,

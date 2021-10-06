@@ -5,17 +5,25 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.parser.Parser;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.util.Scanner;
 
 public class Duke {
+    private Storage storage;
     private final WorkoutList workouts;
     private final Ui ui;
 
     public Duke() {
         workouts = new WorkoutList();
         ui = new Ui();
+        try {
+            storage = new Storage();
+            storage.loadData(workouts);
+        } catch (GetJackDException e) {
+            Ui.printErrorMessage(e);
+        }
     }
 
     /**
@@ -39,7 +47,7 @@ public class Duke {
             String userInput = input.nextLine();
             try {
                 c = new Parser().parseCommand(userInput);
-                c.executeUserCommand(workouts, ui);
+                c.executeUserCommand(workouts, ui, storage);
                 isExit = ExitCommand.isExit(c);
             } catch (GetJackDException e) {
                 Ui.printErrorMessage(e);

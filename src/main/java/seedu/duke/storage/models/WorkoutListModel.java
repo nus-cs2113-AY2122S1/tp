@@ -12,7 +12,7 @@ public class WorkoutListModel {
 
     public WorkoutListModel(@JsonProperty("workouts") ArrayList<WorkoutModel> workouts) { this.workouts = workouts; }
 
-    public static ArrayList<WorkoutModel> getWorkouts() {
+    public ArrayList<WorkoutModel> getWorkouts() {
         return workouts;
     }
 

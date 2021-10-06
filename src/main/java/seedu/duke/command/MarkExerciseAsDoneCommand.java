@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
+import seedu.duke.storage.Storage;
 import seedu.duke.tasks.Exercise;
 import seedu.duke.ui.Ui;
 
@@ -20,11 +21,13 @@ public class MarkExerciseAsDoneCommand extends Command {
     }
 
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException {
+    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         try {
             Exercise toMarkDone = workouts.getWorkout(workoutIndex).getExercise(exerciseIndex);
             toMarkDone.setDone();
             ui.showToUser(String.format(MESSAGE_SUCCESS, toMarkDone));
+            String jsonString = storage.convertToJSON(workouts);
+            storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {
             ui.showToUser(MESSAGE_EXERCISE_NOT_FOUND);
         }

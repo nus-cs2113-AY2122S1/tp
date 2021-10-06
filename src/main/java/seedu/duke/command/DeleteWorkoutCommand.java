@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 public class DeleteWorkoutCommand extends Command {
@@ -18,10 +19,12 @@ public class DeleteWorkoutCommand extends Command {
     }
 
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException {
+    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         try {
             workouts.removeWorkout(workoutIndex);
             ui.showToUser(MESSAGE_SUCCESS);
+            String jsonString = storage.convertToJSON(workouts);
+            storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {
             ui.showToUser(MESSAGE_WORKOUT_NOT_FOUND);
         }

@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 /**
@@ -21,6 +22,6 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException {
+    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
     }
 }
