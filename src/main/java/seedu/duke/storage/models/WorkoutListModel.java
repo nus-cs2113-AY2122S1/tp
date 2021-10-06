@@ -10,13 +10,19 @@ public class WorkoutListModel {
     public WorkoutListModel() {
     }
 
-    public WorkoutListModel(@JsonProperty("workouts") ArrayList<WorkoutModel> workouts) { this.workouts = workouts; }
+    public WorkoutListModel(@JsonProperty("workouts") ArrayList<WorkoutModel> workouts) {
+        this.workouts = workouts;
+    }
 
     public ArrayList<WorkoutModel> getWorkouts() {
         return workouts;
     }
 
-    public static void addToWorkoutListModel(WorkoutModel workout) { workouts.add(workout); }
+    public static void addToWorkoutListModel(WorkoutModel workout) {
+        workouts.add(workout);
+    }
 
-    public static void clearWorkoutListModel() { workouts.clear(); }
+    public static void clearWorkoutListModel() {
+        workouts.clear();
+    }
 }

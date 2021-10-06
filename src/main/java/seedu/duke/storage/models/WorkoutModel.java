@@ -26,7 +26,11 @@ public class WorkoutModel {
         return workoutName;
     }
 
-    public void addToWorkoutModel(ExerciseModel exercise) { exercises.add(exercise); }
+    public void addToWorkoutModel(ExerciseModel exercise) {
+        exercises.add(exercise);
+    }
 
-    public void clearWorkoutModel() { exercises.clear(); }
+    public void clearWorkoutModel() {
+        exercises.clear();
+    }
 }

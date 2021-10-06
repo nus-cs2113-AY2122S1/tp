@@ -21,9 +21,9 @@ import java.util.ArrayList;
  * To deal with loading tasks from the json file and saving tasks in the json file.
  */
 public class Storage {
-    private final String STORAGE_PATH = "data/workouts.json";
-    private final File file = new File(STORAGE_PATH);
-    private final String FILE_PATH = file.getAbsolutePath();
+    private final String storagePath = "data/workouts.json";
+    private final File file = new File(storagePath);
+    private final String filePath = file.getAbsolutePath();
     private WorkoutListModel workoutListModel = new WorkoutListModel();
 
     public Storage() throws GetJackDException {
@@ -36,7 +36,7 @@ public class Storage {
     }
 
     /**
-     * Loads data into WorkoutList class from JSON file
+     * Loads data into WorkoutList class from JSON file.
      * @param workoutList Manages workouts after loading data
      * @throws GetJackDException Exception is thrown when data cannot be loaded
      */
@@ -45,8 +45,8 @@ public class Storage {
             return;
         }
         try {
-            String jsonString = new String (Files.readAllBytes( Paths.get(FILE_PATH) ) );
-            ArrayList<WorkoutModel> workoutsStorageForm = convertFromJSON(jsonString);
+            String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
+            ArrayList<WorkoutModel> workoutsStorageForm = convertFromJson(jsonString);
             for (WorkoutModel workoutModel : workoutsStorageForm) {
                 Workout workout = new Workout(workoutModel.getWorkoutName());
                 for (ExerciseModel exerciseModel : workoutModel.getExercises()) {
@@ -61,13 +61,13 @@ public class Storage {
     }
 
     /**
-     * Saves data from WorkoutList into the JSON file
+     * Saves data from WorkoutList into the JSON file.
      * @param jsonString Workout List converted into a JSON string
      * @throws GetJackDException Exception is thrown when there is an error writing to JSON file
      */
     public void saveData(String jsonString) throws GetJackDException {
         try {
-            FileWriter fileWriter = new FileWriter(STORAGE_PATH, false);
+            FileWriter fileWriter = new FileWriter(storagePath, false);
             fileWriter.write(jsonString);
             fileWriter.close();
         } catch (IOException e) {
@@ -77,7 +77,7 @@ public class Storage {
     }
 
     /**
-     * Reads exercises as they are read from the JSON file and converts them to Exercise class
+     * Reads exercises as they are read from the JSON file and converts them to Exercise class.
      * @param exerciseModel Storage model for Exercise class
      * @return Exercise to be stored in the Workout class
      */
@@ -92,17 +92,16 @@ public class Storage {
     }
 
     /**
-     * Converts data read from JSON files and stored data into the attributes of the relevant storage model classes
+     * Converts data read from JSON files and stored data into the attributes of the relevant storage model classes.
      * @param jsonString jsonString read from JSON file
      * @return Workout List Model
-     * @throws GetJackDException Exception is thrown when data from JSON file cannot be converted to storage
-     * model classes
+     * @throws GetJackDException Exception is thrown when data from JSON file cannot be converted to storage model class
      */
-    private ArrayList<WorkoutModel> convertFromJSON(String jsonString) throws GetJackDException {
+    private ArrayList<WorkoutModel> convertFromJson(String jsonString) throws GetJackDException {
         try {
             JsonNode node = JsonUtil.parse(jsonString);
             WorkoutListModel.clearWorkoutListModel();
-            WorkoutListModel workoutListModel = JsonUtil.fromJSON(node, WorkoutListModel.class);
+            WorkoutListModel workoutListModel = JsonUtil.fromJson(node, WorkoutListModel.class);
             return workoutListModel.getWorkouts();
         } catch (IOException e) {
             throw new GetJackDException("☹ OOPS!!! Error converting from JSON");
@@ -110,15 +109,15 @@ public class Storage {
     }
 
     /**
-     * Converts the workoutList into a JSON string
+     * Converts the workoutList into a JSON string.
      * @param workoutList Workout List to convert
      * @return Converted JSON string
      * @throws GetJackDException Exception is thrown when workout List cannot be converted
      */
-    public String convertToJSON(WorkoutList workoutList) throws GetJackDException {
+    public String convertToJson(WorkoutList workoutList) throws GetJackDException {
         WorkoutListModel.clearWorkoutListModel();
         workoutList.convertAllWorkoutsToStorageModel();
-        JsonNode node = JsonUtil.toJSON(workoutListModel);
+        JsonNode node = JsonUtil.toJson(workoutListModel);
         try {
             return JsonUtil.stringify(node, true);
         } catch (JsonProcessingException e) {

@@ -29,7 +29,7 @@ public class MarkExerciseAsDoneCommand extends Command {
             Exercise toMarkDone = workouts.getWorkout(workoutIndex).getExercise(exerciseIndex);
             toMarkDone.setDone();
             ui.showToUser(String.format(MESSAGE_SUCCESS, toMarkDone));
-            String jsonString = storage.convertToJSON(workouts);
+            String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {
             ui.showToUser(MESSAGE_EXERCISE_NOT_FOUND);

@@ -24,7 +24,7 @@ public class CreateWorkoutCommand extends Command {
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         workouts.addWorkout(toCreate);
         ui.showToUser(String.format(MESSAGE_SUCCESS, toCreate));
-        String jsonString = storage.convertToJSON(workouts);
+        String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);
     }
 }

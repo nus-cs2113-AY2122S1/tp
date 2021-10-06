@@ -26,7 +26,7 @@ public class DeleteWorkoutCommand extends Command {
         try {
             workouts.removeWorkout(workoutIndex);
             ui.showToUser(MESSAGE_SUCCESS);
-            String jsonString = storage.convertToJSON(workouts);
+            String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {
             ui.showToUser(MESSAGE_WORKOUT_NOT_FOUND);
