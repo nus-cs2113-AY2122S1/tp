@@ -37,7 +37,7 @@ public class Person {
     public float getTotalExpenditure(){
         float total = 0;
         for (Expense Expense : listOfExpenses){
-            total += Expense.getAmountSpent() / Expense.getPersonsInvolved().size(); //Assuming everyone pays equally
+//            total += Expense.getAmountSpent() / Expense.getPersonsInvolved().size(); //Assuming everyone pays equally
         }
         return total;
     }
