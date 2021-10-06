@@ -64,6 +64,11 @@ public class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void viewContactsListMessage(int listSize) {
+        String message = "ConTech has " + listSize + " contacts stored.\n"
+                + "Here's the list :";
+        printDoubleLineMessage(message);
+    }
     public static void exitMessage() {
         String message = "ConTech will now shutdown.\n"
                 + "We hope you have enjoyed using it.";
