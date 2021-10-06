@@ -17,12 +17,27 @@ public class CommandParser {
     protected String workspace;
     protected final HashMap<String, Command> commandMap;
 
+    /**
+     * Initializes the commandMap.
+     * Adds some default commands to it.
+     *
+     * @param workspace The name of the workspace
+     */
     public CommandParser(String workspace) {
         this.commandMap = new HashMap<>();
         this.workspace = workspace;
         addCommand("exit", new ExitCommand());
         addCommand("help", new HelpCommand(this));
     }
+
+    /**
+     * Parses the command and its arguments.
+     *
+     * @param command The user input command
+     * @return The Command object to be executed
+     * @throws InvalidCommandException  if there is no command or empty command
+     * @throws InvalidArgumentException Fails when arguments could not be parsed
+     */
 
     public Command parseCommand(String command) throws InvalidCommandException, InvalidArgumentException {
         String[] commandLine = command.strip().split(SPACE_DELIMITER, 2);
@@ -45,24 +60,35 @@ public class CommandParser {
     }
 
     /**
-     * Get the help menu for the current workspace.
+     * Returns the list of items in the help menu.
      *
      * @return Array of strings contain the help messages
      */
     public String[] getHelpMenu() {
         return commandMap.entrySet()
-            .stream()
-            .map((i) -> String.format("%s : %s\nFormat: %s\n",
-                i.getKey(),
-                i.getValue().getHelpMessage(),
-                i.getValue().getFormat()))
+                .stream()
+                .map((i) -> String.format("%s : %s\nFormat: %s\n",
+                        i.getKey(),
+                        i.getValue().getHelpMessage(),
+                        i.getValue().getFormat()))
                 .toArray(String[]::new);
     }
 
+    /**
+     * Adds a command to the commandMap.
+     *
+     * @param cmdName The name of the command
+     * @param command The actual command object
+     */
     protected void addCommand(String cmdName, Command command) {
         commandMap.put(cmdName, command);
     }
 
+    /**
+     * Returns the name of the current workspace.
+     *
+     * @return The name of the workspace
+     */
     public String getWorkspace() {
         return workspace;
     }
