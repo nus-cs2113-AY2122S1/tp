@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- * Constructor requires a Person class which is the user, amount spent, and a description
- * printDate prints out a nicely formatted date
- * getExpenseSummary assumes user pays the bill first, and expense is equally split among his friends
+ * Constructor requires a Person class which is the user, amount spent, and a description.
+ * printDate prints out a nicely formatted date.
+ * getExpenseSummary assumes user pays the bill first, and expense is equally split among his friends.
  */
 public class Expense {
     private double amountSpent;
