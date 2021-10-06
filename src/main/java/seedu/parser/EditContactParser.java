@@ -19,20 +19,4 @@ public class EditContactParser extends ContactParser {
         }
         return contactDetails;
     }
-
-    private void parseDetail(String[] contactDetails, String detail) throws InvalidFlagException {
-        String[] destructuredDetails = detail.split(" ", NUMBER_OF_EDIT_DETAILS);
-        int indexToStore;
-        switch (destructuredDetails[FLAG_INDEX_IN_DETAILS]) {
-        case NAME_FLAG:
-            indexToStore = DetailType.NAME.getIndex();
-            break;
-        case GITHUB_FLAG:
-            indexToStore = DetailType.GITHUB.getIndex();
-            break;
-        default:
-            throw new InvalidFlagException();
-        }
-        contactDetails[indexToStore] = destructuredDetails[DETAIL_INDEX_IN_DETAILS];
-    }
 }
