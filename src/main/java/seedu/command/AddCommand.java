@@ -67,7 +67,6 @@ public class AddCommand extends Command {
         String select = TextUi.getCommand();
         int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
         String classNumber = lessonList.get(indexOfLesson).getClassNo();
-        System.out.println(classNumber);
         for (Lesson lesson : lessonList) {
             if (lesson.getClassNo().equals(classNumber)) {
                 confirmList.add(lesson);
@@ -79,7 +78,6 @@ public class AddCommand extends Command {
     public void addToTimetable(ArrayList<Lesson> lessonList, Module module) {
         for (Lesson lesson : lessonList) {
             timetable.addLesson(new TimetableLesson(module, semester, lesson));
-            System.out.println(lesson.getClassNo());
         }
     }
 }
