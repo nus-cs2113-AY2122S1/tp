@@ -68,13 +68,13 @@ public class TextUi {
         System.out.println(index + ". " + contactName);
     }
 
-    public static void viewContactsListMessage(int listSize) {
+    public static void contactsListMessage(int listSize) {
         String message = "ConTech has " + listSize + " contacts stored.\n"
                 + "Here's the list :";
         printDoubleLineMessage(message);
     }
 
-    public static void viewContactsEmptyListMessage() {
+    public static void contactsEmptyListMessage() {
         String message = "You have not stored any contacts in ConTech";
         printDoubleLineMessage(message);
     }

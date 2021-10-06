@@ -7,14 +7,14 @@ public class ListContactsCommand extends Command {
     public void execute() {
         int listSize = contactList.getListSize();
         if (listSize == 0) {
-            TextUi.viewContactsEmptyListMessage();
+            TextUi.contactsEmptyListMessage();
         } else {
             listAllContacts(listSize);
         }
     }
 
     private void listAllContacts(int listSize) {
-        TextUi.viewContactsListMessage(listSize);
+        TextUi.contactsListMessage(listSize);
         for (int index = 0; index < listSize; index++) {
             TextUi.printContactWithIndex(index, getContactName(index));
         }
