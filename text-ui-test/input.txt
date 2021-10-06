@@ -1,2 +1,3 @@
 add n/andre g/ng-andre
+rm 1
 exit
