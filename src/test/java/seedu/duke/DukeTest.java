@@ -15,8 +15,9 @@ class DukeTest {
     }
 
     @Test
-    public void testSetUser() {
-        Person person = new Person("Duke", true);
+    public void testSetName() {
+        Person person = new Person("CS2113T", true);
+        person.setName("Duke");
         assertEquals("Duke", person.getName());
     }
 
