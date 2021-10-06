@@ -1,4 +1,4 @@
-package seedu.duke.classes;
+package seedu.duke.universities;
 
 import java.util.ArrayList;
 
@@ -34,11 +34,4 @@ public class UniversityList {
         }
     }
 
-    public int getSize() {
-        return list.size();
-    }
-
-    public University get(int index) {
-        return list.get(index);
-    }
 }
