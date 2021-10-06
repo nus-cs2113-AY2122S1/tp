@@ -9,6 +9,7 @@ import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
@@ -25,7 +26,8 @@ public class NoteAddCommandTest {
     }
 
     @Test
-    void execute_addCommand_success() throws InvalidCommandException, InvalidArgumentException {
+    void execute_addCommand_success()
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test1\"");
         CommandResult addResult = addCommand.execute(ui, nusModule);
         assertTrue(addResult.isOk());
