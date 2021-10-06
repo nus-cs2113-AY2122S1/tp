@@ -22,6 +22,13 @@ class DukeTest {
     }
 
     @Test
+    public void testSetName() {
+        Person person = new Person("CS2113T", true);
+        person.setName("Duke");
+        assertEquals("Duke", person.getName());
+    }
+
+    @Test
     public void sampleTest() {
         assertTrue(true);
     }
