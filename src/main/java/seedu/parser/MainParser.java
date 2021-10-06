@@ -66,14 +66,14 @@ public class MainParser {
         try {
             //split into array of size 3 with command, index and details
             String[] details = userInput.split(" ", NUMBER_OF_EDIT_DETAILS);
+            System.out.println(Arrays.toString(details));
             int userIndex = Integer.parseInt(details[EDIT_USER_INDEX]) - 1;
-
             String[] userDetails = editContactParser.parseContactDetails(details[ISOLATE_USER_INPUT]);
             System.out.println(Arrays.toString(userDetails));
             return new EditContactCommand(userDetails, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
     }
