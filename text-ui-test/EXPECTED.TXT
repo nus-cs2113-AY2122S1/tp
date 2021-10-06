@@ -23,12 +23,24 @@ You now have 1 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
+There are missing details.
+Please remove any flags with no details
+
+____________________________________________________________
+
+____________________________________________________________
 ConTech has added the specified contact: lezong
 You now have 2 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech will now shutdown.
-We hope you have enjoyed using it.
+ConTech has removed the specified contact: ng andre
+You now have 1 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+That does not seem to be a number.
+Please provide a number instead.
+
 ____________________________________________________________
 
