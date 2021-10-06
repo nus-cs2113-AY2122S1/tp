@@ -8,6 +8,13 @@ import org.junit.jupiter.api.Test;
 class DukeTest {
 
     @Test
+    public void testSetBudget() {
+        Trip trip = new Trip();
+        trip.setBudget(5000.00F);
+        assertEquals(5000.00F, trip.getBudget());
+    }
+
+    @Test
     public void testSetLocation() {
         Trip trip = new Trip();
         trip.setLocation("America");
