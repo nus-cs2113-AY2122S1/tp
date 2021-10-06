@@ -33,6 +33,8 @@ public class Parser {
                     cookbook.removeRecipe(line);
                 } else if (parseCommand(line).equalsIgnoreCase("check")) {
                     nameRecipe = parseName(line);
+                } else if (parseCommand(line).equalsIgnoreCase("list")) {
+                    cookbook.listRecipe();
                 } else if (parseCommand(line).equalsIgnoreCase("exit")) {
                     System.out.println("Bye bye!");
                     break;
