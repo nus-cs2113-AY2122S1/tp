@@ -5,6 +5,8 @@ import seedu.duke.modules.ModuleMapping;
 
 import java.util.ArrayList;
 
+import seedu.duke.modules.ModuleMapping;
+
 public class University {
     protected String name;
     protected ArrayList<ModuleMapping> list;
@@ -21,9 +23,13 @@ public class University {
     public void listMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
-            String output = currentMapping.getLocalModule() + " - " + currentMapping.getMappedModule();
+            String output = currentMapping.localModule + " - " + currentMapping.mappedModule;
             System.out.println(output);
         }
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

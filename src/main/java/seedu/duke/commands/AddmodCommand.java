@@ -1,6 +1,6 @@
 package seedu.duke.commands;
 
-import seedu.duke.classes.Module;
+import seedu.duke.modules.Module;
 
 public class AddmodCommand extends Command {
     public static final String COMMAND_WORD = "addmod";
