@@ -16,23 +16,23 @@ public class Parser {
         String[] userInput = rawInput.split(" ", 2);
         String userCommand = userInput[0].toLowerCase();
 
-        switch(userCommand) {
-            case "new":
-                try {
-                    String tripName = userInput[1];
-                    command = new NewCommand(tripName);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new InvalidNewFormatException();
-                }
-                break;
-            case "viewall":
-                command = new ViewAllCommand();
-                break;
-            case "exit":
-                command = new ExitCommand();
-                break;
-            default:
-                throw new CommandNotFoundException(userCommand);
+        switch (userCommand) {
+        case "new":
+            try {
+                String tripName = userInput[1];
+                command = new NewCommand(tripName);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new InvalidNewFormatException();
+            }
+            break;
+        case "viewall":
+            command = new ViewAllCommand();
+            break;
+        case "exit":
+            command = new ExitCommand();
+            break;
+        default:
+            throw new CommandNotFoundException(userCommand);
         }
         return command;
     }

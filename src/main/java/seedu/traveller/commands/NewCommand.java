@@ -5,8 +5,9 @@ import seedu.traveller.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.TravellerException;
 
-public class NewCommand extends Command{
+public class NewCommand extends Command {
     private final String tripName;
+
     public NewCommand(String tripName) {
         this.tripName = tripName;
     }

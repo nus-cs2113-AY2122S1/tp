@@ -4,7 +4,7 @@ import seedu.traveller.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.TravellerException;
 
-abstract public class Command {
+public abstract class Command {
     private boolean isExit = false;
 
     public abstract void execute(TripsList tripsList, Ui ui) throws TravellerException;

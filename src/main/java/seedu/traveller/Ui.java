@@ -4,10 +4,10 @@ import java.util.Scanner;
 
 
 public class Ui {
-    private final Scanner SCANNER = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public String readCommand() {
-        return SCANNER.nextLine();
+        return scanner.nextLine();
     }
 
     public void printWelcome() {
@@ -34,7 +34,7 @@ public class Ui {
 
     public void printAllTrips(TripsList tripsList) {
         System.out.println("\tHere are all your trips: ");
-        for (int i=0; i < tripsList.getSize(); i++) {
+        for (int i = 0; i < tripsList.getSize(); i++) {
             printTrip(tripsList.getTrip(i));
         }
     }
