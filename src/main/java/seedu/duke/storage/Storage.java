@@ -14,7 +14,7 @@ import static java.lang.Integer.parseInt;
 public class Storage {
     private static final String UNIVERSITY_FILEPATH = "data/University.csv";
 
-    public ArrayList<University> load() throws IOException {
+    public static ArrayList<University> load() throws IOException {
         return readUniversitiesFromCsv();
     }
 
