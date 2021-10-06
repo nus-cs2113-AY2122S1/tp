@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
@@ -8,7 +7,6 @@ public class Parser {
 
     public void parseMaster(Cookbook cookbook) {
         Scanner in = new Scanner(System.in);
-
         while (true) {
             String line  = in.nextLine();
             try {
@@ -16,9 +14,18 @@ public class Parser {
                     //Format of input:
                     //add [recipe name] /ingredients [ingredients separated by +] /steps [steps separated by +]
                     Recipe r = new Recipe(parseName(line));
-                    //Do something
+
+                    System.out.println("Please add the ingredients, separated by +");
+                    line = in.nextLine();
+                    parseIngredients(line, r);
+
+                    System.out.println("Please add the steps, separated by +");
+                    line = in.nextLine();
+                    parseSteps(line, r);
+
                     cookbook.addRecipe(r);
                     System.out.println("Added " + r.name + " recipe! Yum!");
+                    System.out.println(r);
                 }
                 if (parseCommand(line).equalsIgnoreCase("delete")) {
                     nameRecipe = parseName(line);
@@ -49,14 +56,21 @@ public class Parser {
     }
 
 
-    public void parseIngredients(String line, Recipe r) {
+    public void parseIngredients(String line, Recipe r) throws GordonException {
         //For all ingredients,
-        //r.addIngredient(newIngredient);
+        String[] ingredientsList = line.split("\\+");
+        for (int i = 0; i < ingredientsList.length; i++) {
+            Ingredient ingredient = new Ingredient(ingredientsList[i]);
+            r.addIngredient(ingredient, i);
+        }
     }
 
-    public void parseSteps(String line, Recipe r) {
+    public void parseSteps(String line, Recipe r) throws GordonException {
         //For all steps,
-        //r.addStep(newStep);
+        String[] stepsList = line.split("\\+");
+        for (int i = 0; i < stepsList.length; i++) {
+            r.addStep(stepsList[i], i);
+        }
     }
 
 
