@@ -9,7 +9,7 @@ public class DeleteWorkoutCommand extends Command {
     public static final String MESSAGE_USAGE = "delete: Deletes the workout corresponding to the workout index.\n"
             + "\tParameters: w/WORKOUT_INDEX\n"
             + "\tExample: delete w/1\n";
-    public static final String MESSAGE_SUCCESS = "Deleted workout: %1$s\n";
+    public static final String MESSAGE_SUCCESS = "Deleted workout: %1$s";
 
     private final int workoutIndex;
 
@@ -21,9 +21,9 @@ public class DeleteWorkoutCommand extends Command {
     public void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException {
         try {
             workouts.removeWorkout(workoutIndex);
-            System.out.println(MESSAGE_SUCCESS);
+            ui.showToUser(MESSAGE_SUCCESS);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(MESSAGE_WORKOUT_NOT_FOUND);
+            ui.showToUser(MESSAGE_WORKOUT_NOT_FOUND);
         }
     }
 }

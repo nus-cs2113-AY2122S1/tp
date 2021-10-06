@@ -13,8 +13,8 @@ public class DisplayExercisesCommand extends Command {
     public static final String MESSAGE_USAGE = "display: Displays all exercises in the particular workout.\n"
             + "\tParameters: w/WORKOUT_INDEX\n"
             + "\tExample: display w/3\n";
-    public static final String MESSAGE_LIST_EXERCISES = "Exercises in %1$s\n";
-    public static final String MESSAGE_EMPTY_WORKOUT = "You have no workouts.\n";
+    public static final String MESSAGE_LIST_EXERCISES = "Exercises in %1$s";
+    public static final String MESSAGE_EMPTY_WORKOUT = "You have no workouts.";
     private final int workoutIndex;
 
     public DisplayExercisesCommand(int workoutIndex) {
@@ -26,9 +26,9 @@ public class DisplayExercisesCommand extends Command {
         Workout workout = workouts.getWorkout(workoutIndex);
         ArrayList<Exercise> exercises = workout.getAllExercises();
         if (exercises.isEmpty()) {
-            System.out.println(MESSAGE_EMPTY_WORKOUT);
+            ui.showToUser(MESSAGE_EMPTY_WORKOUT);
         } else {
-            System.out.println(String.format(MESSAGE_LIST_EXERCISES, workout));
+            ui.showToUser(String.format(MESSAGE_LIST_EXERCISES, workout));
             ui.showExercisesToUser(exercises);
         }
     }

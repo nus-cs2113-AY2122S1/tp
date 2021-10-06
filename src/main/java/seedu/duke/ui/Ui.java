@@ -10,7 +10,7 @@ public class Ui {
     public static final int DISPLAYED_INDEX_OFFSET = 1;
     private static final String INDENT = "\t";
     private static final String NEW_LINE = "\n\t";
-    private static final String DIVIDER = "_______________________________";
+    private static final String DIVIDER = "________________________________________________________";
 
     public static void printLineSeparator() {
         System.out.println(DIVIDER);
@@ -53,7 +53,7 @@ public class Ui {
         showToUser(getIndexedListViewOfWorkouts(workouts));
     }
 
-    private void showToUser(String... message) {
+    public void showToUser(String... message) {
         for (String m : message) {
             System.out.println(INDENT + m.replace("\n", NEW_LINE));
         }

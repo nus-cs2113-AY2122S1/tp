@@ -10,7 +10,7 @@ public class MarkExerciseAsDoneCommand extends Command {
     public static final String MESSAGE_USAGE = "done: Marks the exercise in the workout workout as complete.\n"
             + "\tParameters: w/WORKOUT_INDEX, e/EXERCISE_INDEX\n"
             + "\tExample: done w/3 e/2\n";
-    public static final String MESSAGE_SUCCESS = "Completed: %1$s\n";
+    public static final String MESSAGE_SUCCESS = "Completed: %1$s";
     private final int workoutIndex;
     private final int exerciseIndex;
 
@@ -24,9 +24,9 @@ public class MarkExerciseAsDoneCommand extends Command {
         try {
             Exercise toMarkDone = workouts.getWorkout(workoutIndex).getExercise(exerciseIndex);
             toMarkDone.setDone();
-            System.out.println(String.format(MESSAGE_SUCCESS, toMarkDone));
+            ui.showToUser(String.format(MESSAGE_SUCCESS, toMarkDone));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(MESSAGE_EXERCISE_NOT_FOUND);
+            ui.showToUser(MESSAGE_EXERCISE_NOT_FOUND);
         }
     }
 }

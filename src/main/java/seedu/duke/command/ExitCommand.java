@@ -16,12 +16,11 @@ public class ExitCommand extends Command {
      *
      * @return the boolean value to end the program
      */
-    public static boolean isExit() {
-        return isOver = true;
+    public static boolean isExit(Command command) {
+        return command instanceof ExitCommand;
     }
 
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException {
-        System.exit(0);
     }
 }

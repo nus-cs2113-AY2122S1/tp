@@ -20,6 +20,6 @@ public class CreateWorkoutCommand extends Command {
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException {
         workouts.addWorkout(toCreate);
-        System.out.println(String.format(MESSAGE_SUCCESS, toCreate));
+        ui.showToUser(String.format(MESSAGE_SUCCESS, toCreate));
     }
 }

@@ -11,18 +11,7 @@ public abstract class Command {
     public static final String MESSAGE_WORKOUT_NOT_FOUND = "Error. Workout not found\n";
     public static final String MESSAGE_EXERCISE_NOT_FOUND = "Error. Exercise not found\n";
 
-    protected static boolean isOver = false;
-
     protected Command() {
-    }
-
-    /**
-     * Provides condition of the loop in Duke class which is later updated in the ExitCommand subclass.
-     *
-     * @return the boolean value to check if the program is over
-     */
-    public static boolean isExit() {
-        return isOver;
     }
 
     /**

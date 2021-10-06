@@ -23,9 +23,9 @@ public class RemoveExerciseCommand extends Command {
     public void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException {
         try {
             Exercise toRemove = workouts.getWorkout(workoutIndex).removeExercise(exerciseIndex);
-            System.out.println(String.format(MESSAGE_SUCCESS, toRemove.toString()));
+            ui.showToUser(String.format(MESSAGE_SUCCESS, toRemove.toString()));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(MESSAGE_EXERCISE_NOT_FOUND);
+            ui.showToUser(MESSAGE_EXERCISE_NOT_FOUND);
         }
     }
 }

@@ -24,9 +24,9 @@ public class AddExerciseCommand extends Command {
     public void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException {
         try {
             workouts.getWorkout(workoutIndex).addExercise(toAdd);
-            System.out.println(String.format(MESSAGE_SUCCESS, toAdd));
+            ui.showToUser(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(MESSAGE_WORKOUT_NOT_FOUND);
+            ui.showToUser(MESSAGE_WORKOUT_NOT_FOUND);
         }
     }
 }
