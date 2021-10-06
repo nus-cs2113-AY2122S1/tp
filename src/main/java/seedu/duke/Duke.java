@@ -43,7 +43,7 @@ public class Duke {
         ui.printLogo();
 
         Command userCommand;
-        CommandResult commandResult;
+        CommandResult commandResult = null;
 
         do {
 
