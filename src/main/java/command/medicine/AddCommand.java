@@ -82,22 +82,37 @@ public class AddCommand extends Command {
             int maxQuantity = Integer.parseInt(maxQuantityToAdd);
             Date formatExpiry = DateParser.stringToDate(expiryToAdd);
             Stock stock = new Stock(nameToAdd, price, quantity, formatExpiry, descriptionToAdd, maxQuantity);
+            int totalStock = 0;
+            for (Medicine medicine : medicines) {
+                Stock existingStock = (Stock) medicine;
+                String existingName = existingStock.getMedicineName().toUpperCase();
+                int existingTotalQuantity = existingStock.getQuantity();
+                if ((existingName.equals(nameToAdd.toUpperCase()))) {
+                    totalStock = totalStock + existingTotalQuantity;
+                }
+            }
             for (Medicine medicine : medicines) {
                 Stock existingStock = (Stock) medicine;
                 String existingName = existingStock.getMedicineName().toUpperCase();
                 Date existingExpiry = existingStock.getExpiry();
                 String existingDescription = existingStock.getDescription();
+                int existingQuantity = existingStock.getQuantity();
                 int existingMaxQuantity = existingStock.getMaxQuantity();
                 if ((existingName.equals(nameToAdd.toUpperCase())) & ((existingExpiry.equals(formatExpiry)))) {
-                    ui.print("You already have existing stocks! Use update instead");
+                    ui.print("You already have existing stocks! Use update instead.");
                     return;
                 }
-                if ((existingName.equals(nameToAdd.toUpperCase()))) {
+                if ((existingName.equals(nameToAdd.toUpperCase())) & ((totalStock + quantity) <= existingMaxQuantity)) {
                     Stock stockToAdd = new Stock(nameToAdd, price, quantity, formatExpiry, existingDescription,
                             existingMaxQuantity);
                     medicines.add(stockToAdd);
                     ui.print("Medication added: " + nameToAdd);
                     ui.printMedicine(stockToAdd);
+                    return;
+                }
+                if (((totalStock + quantity) > existingMaxQuantity)) {
+                    System.out.println(existingQuantity);
+                    ui.print("Stock added will exceed max quantity! Please try again with different quantity.");
                     return;
                 }
                 medicines.add(stock);
