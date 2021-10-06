@@ -1,10 +1,10 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.ExitCommand;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.parser.Parser;
-import seedu.duke.parser.TaskManager;
 import seedu.duke.ui.Ui;
 
 import java.util.Scanner;
@@ -25,6 +25,7 @@ public class Duke {
         Ui.printWelcomeMessage();
         new Duke().run();
         Ui.printByeMessage();
+        exit();
     }
 
     /**
@@ -32,17 +33,22 @@ public class Duke {
      */
     private void run() {
         Scanner input = new Scanner(System.in);
-
-        while (!Command.isExit()) {
+        Command c;
+        boolean isExit = false;
+        while (!isExit) {
             String userInput = input.nextLine();
-            String command = Parser.getFirstWordFromCommand(userInput);
-
             try {
-                TaskManager.parseAndExecuteUserCommand(command, userInput);
+                c = new Parser().parseCommand(userInput);
+                c.executeUserCommand(workouts, ui);
+                isExit = ExitCommand.isExit(c);
             } catch (GetJackDException e) {
                 Ui.printErrorMessage(e);
             }
         }
+    }
+
+    private static void exit() {
+        System.exit(0);
     }
 }
 
