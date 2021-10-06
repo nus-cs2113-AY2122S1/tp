@@ -12,6 +12,9 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.0-rc2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0-rc2'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.0-rc2'
 }
 
 test {
@@ -33,6 +36,7 @@ application {
 }
 
 shadowJar {
+    configurations = [project.configurations.compileClasspath]
     archiveBaseName = "duke"
     archiveClassifier = null
 }

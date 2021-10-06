@@ -1,5 +1,8 @@
 package seedu.duke.exercises;
 
+import seedu.duke.storage.models.ExerciseModel;
+import seedu.duke.storage.models.WorkoutModel;
+
 public class Exercise {
     protected String description;
     //protected String muscle;
@@ -28,5 +31,12 @@ public class Exercise {
     @Override
     public String toString() {
         return (getStatusSymbol() + description + " | " + sets + " sets of " + reps + " reps");
+    }
+
+    public void convertToExerciseStorageModel(WorkoutModel workoutModel) {
+        String setsInString = String.valueOf(sets);
+        String repsInString = String.valueOf(reps);
+        String doneStatus = isDone ? "true" : "false";
+        workoutModel.addToWorkoutModel(new ExerciseModel(description, setsInString, repsInString, doneStatus));
     }
 }

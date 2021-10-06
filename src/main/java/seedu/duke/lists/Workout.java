@@ -1,7 +1,11 @@
 package seedu.duke.lists;
 
 import seedu.duke.exception.GetJackDException;
+
+import seedu.duke.storage.models.WorkoutListModel;
+import seedu.duke.storage.models.WorkoutModel;
 import seedu.duke.exercises.Exercise;
+
 
 import java.util.ArrayList;
 
@@ -42,5 +46,18 @@ public class Workout {
             throw new GetJackDException("Invalid Exercise Index");
         }
         return exercises.get(displayIndex - 1);
+    }
+
+    @Override
+    public String toString() {
+        return getWorkoutName();
+    }
+
+    public void convertToWorkoutStorageModel() {
+        WorkoutModel workoutModel = new WorkoutModel(workoutName);
+        for (Exercise exercise : exercises) {
+            exercise.convertToExerciseStorageModel(workoutModel);
+        }
+        WorkoutListModel.addToWorkoutListModel(workoutModel);
     }
 }

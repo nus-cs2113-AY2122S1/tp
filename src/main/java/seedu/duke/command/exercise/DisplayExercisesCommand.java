@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
+import seedu.duke.storage.Storage;
 import seedu.duke.exercises.Exercise;
 import seedu.duke.ui.Ui;
 
@@ -25,7 +26,7 @@ public class DisplayExercisesCommand extends Command {
     }
 
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException {
+    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         Workout workout = workouts.getWorkout(workoutIndex);
         ArrayList<Exercise> exercises = workout.getAllExercises();
         if (exercises.isEmpty()) {

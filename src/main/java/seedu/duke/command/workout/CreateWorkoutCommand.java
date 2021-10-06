@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
@@ -21,8 +22,10 @@ public class CreateWorkoutCommand extends Command {
     }
 
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException {
+    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         workouts.addWorkout(toCreate);
         ui.showToUser(String.format(MESSAGE_SUCCESS, toCreate));
+        String jsonString = storage.convertToJson(workouts);
+        storage.saveData(jsonString);
     }
 }

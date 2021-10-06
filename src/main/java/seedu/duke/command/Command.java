@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 /**
@@ -19,5 +20,5 @@ public abstract class Command {
      *
      * @throws GetJackDException if the subclasses have any exceptions
      */
-    public abstract void executeUserCommand(WorkoutList workouts, Ui ui) throws GetJackDException;
+    public abstract void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException;
 }
