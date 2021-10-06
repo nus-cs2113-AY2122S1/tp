@@ -2,8 +2,6 @@ package seedu.duke.lists;
 
 import seedu.duke.exception.GetJackDException;
 
-import seedu.duke.lists.Workout;
-
 import java.util.ArrayList;
 
 /**
