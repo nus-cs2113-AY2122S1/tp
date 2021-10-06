@@ -40,6 +40,13 @@ public class TextUi {
         );
     }
 
+    // Used to print a line after displayed data
+    public static void printBottomLine() {
+        System.out.println(
+                "\n" + LINE
+        );
+    }
+
     private static void initMessage() {
         printDoubleLineMessage(LOGO);
         System.out.println("Welcome to ConTech, your personal contact tracker.\n" + LINE);
