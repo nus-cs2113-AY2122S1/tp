@@ -1,5 +1,5 @@
 package seedu.parser;
 
 public enum FailedCommandType {
-    GENERAL
+    GENERAL, INVALID_FLAG
 }
