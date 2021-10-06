@@ -61,6 +61,8 @@ public class Trip {
         this.repaymentCurrency = repaymentCurrency;
     }
 
+    public String getLocation() { return this.location; }
+
     public void setLocation(String location) { this.location = location; }
 
     public void setPersonName(int indexOfPerson, String newName) {
