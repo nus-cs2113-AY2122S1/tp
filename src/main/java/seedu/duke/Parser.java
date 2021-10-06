@@ -61,7 +61,7 @@ public class Parser {
      * @return HashMap - argumentKey:argumentValue pair.
      */
     public static HashMap<String,String> getArgumentsFromString(String string, String[] argumentKeys) {
-        if (argumentKeys == null) {
+        if (argumentKeys == null || argumentKeys.length == 0) {
             return new HashMap<>();
         }
 
