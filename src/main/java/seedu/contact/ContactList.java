@@ -3,6 +3,9 @@ package seedu.contact;
 import java.util.ArrayList;
 
 public class ContactList {
+    public static final int NAME_INDEX = 0;
+    public static final int GITHUB_INDEX = 1;
+
     private ArrayList<Contact> contacts;
 
     public ContactList() {

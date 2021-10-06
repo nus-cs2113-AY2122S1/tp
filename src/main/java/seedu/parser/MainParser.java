@@ -7,6 +7,9 @@ import seedu.command.ExitCommand;
 import seedu.command.FailedCommand;
 import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
+import seedu.contact.Contact;
+
+import java.util.Arrays;
 
 public class MainParser {
     private static final String ADD_CONTACT_COMD = "add";
@@ -17,6 +20,7 @@ public class MainParser {
     private static final int EDIT_USER_INDEX = 1;
     private static final int EDIT_INFO_INDEX = 2;
     private static final int ISOLATE_COMD_WORD = 2;
+    private static final int ISOLATE_USER_INPUT = 2;
     public static final int NUMBER_OF_EDIT_DETAILS = 3;
 
     private ContactParser contactParser;
