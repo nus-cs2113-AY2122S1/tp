@@ -89,8 +89,8 @@ public class Parser {
             if (isLastIndex) {
                 value = string.substring(startIndex);
             } else {
-                int nextListIndex = argumentIndexes.get(listIndex + 1);
-                value = string.substring(startIndex, nextListIndex - 1);
+                int nextArgumentIndex = argumentIndexes.get(listIndex + 1);
+                value = string.substring(startIndex, nextArgumentIndex - 1);
             }
             value = value.trim();
 
