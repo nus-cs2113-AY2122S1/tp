@@ -17,13 +17,9 @@ public class Expense {
     public void addPersons(ArrayList<Person> newListOfPersons) {
         listOfPersons.clear();
         Person personToAdd;
-        Person personToChange;
-        String newName;
         for (int i = 0; i < newListOfPersons.size(); i++) {
             personToAdd = newListOfPersons.get(i);
-            personToChange = listOfPersons.get(i);
-            newName = personToAdd.getName();
-            personToChange.setName(newName);
+            listOfPersons.add(personToAdd);
         }
     }
 
