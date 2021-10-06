@@ -46,6 +46,7 @@ public class Duke {
             }
         }
     }
+
     private static void exit() {
         System.exit(0);
     }
