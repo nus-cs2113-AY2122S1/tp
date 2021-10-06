@@ -1,5 +1,7 @@
 package seedu.ui;
 
+import seedu.contact.Contact;
+
 import java.util.Scanner;
 
 public class TextUi {
@@ -54,6 +56,12 @@ public class TextUi {
     public static void addContactMessage(String contactName, int listSize) {
         String message = "ConTech has added the specified contact: " + contactName + "\n"
                 + "You now have " + listSize + " contact(s).";
+        printDoubleLineMessage(message);
+    }
+
+    public static void viewContactMessage(Contact viewingContact, int index) {
+        String message = index + ". " + "Name: " + viewingContact.getName() + " GitHub: "
+                + viewingContact.getGithub();
         printDoubleLineMessage(message);
     }
 
