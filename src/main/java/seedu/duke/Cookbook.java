@@ -22,6 +22,18 @@ public class Cookbook {
         return output.toString();
     }
 
+    public void listRecipe() throws GordonException {
+        try {
+            for (int i = 0; i < recipes.size(); i++) {
+                System.out.println((i+1) + ". " + recipes.get(i));
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.INDEX_OOB);
+        } catch (IllegalArgumentException e) {
+            throw new GordonException(GordonException.INDEX_INVALID);
+        }
+    }
+
     public void addRecipe(Recipe r) throws GordonException {
         try {
             r.setId(recipes.size() + 1);
