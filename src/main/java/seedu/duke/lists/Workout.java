@@ -43,4 +43,10 @@ public class Workout {
         }
         return exercises.get(displayIndex - 1);
     }
+
+
+    @Override
+    public String toString() {
+        return getWorkoutName();
+    }
 }

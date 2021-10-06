@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.exception.GetJackDException;
+import seedu.duke.lists.WorkoutList;
 
 import java.io.File;
 import java.io.IOException;
