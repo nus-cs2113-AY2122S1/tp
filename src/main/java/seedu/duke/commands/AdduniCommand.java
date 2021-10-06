@@ -1,6 +1,6 @@
 package seedu.duke.commands;
 
-import seedu.duke.classes.University;
+import seedu.duke.universities.University;
 
 public class AdduniCommand extends Command {
     public static final String COMMAND_WORD = "adduni";

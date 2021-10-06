@@ -1,8 +1,8 @@
 package seedu.duke.storage;
 
-import seedu.duke.classes.Module;
-import seedu.duke.classes.ModuleMapping;
-import seedu.duke.classes.University;
+import seedu.duke.modules.Module;
+import seedu.duke.modules.ModuleMapping;
+import seedu.duke.universities.University;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
