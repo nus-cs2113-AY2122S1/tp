@@ -26,11 +26,6 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void parseArguments(String arguments) {
-
-    }
-
-    @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
         ui.printSection(commandMap.getHelpMenu());
         return new CommandResult(true);

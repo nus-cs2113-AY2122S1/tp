@@ -9,15 +9,21 @@ Type any of the following to get started:
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
+[] >>> Error: Missing arguments.
+Format: note add "<note name>" "<note content>"
 [] >>> note has been added!
 [] >>> 1. CS2113T
 
 [] >>> Error: Invalid numerical value provided.
+Format: note view {item number}
 [] >>> Error: Content not found.
 [] >>> Name: CS2113T
 Content: Week 8 test
 
+[] >>> Error: Missing arguments.
+Format: note delete <item number>
 [] >>> Error: Invalid numerical value provided.
+Format: note delete <item number>
 [] >>> Error: Content not found.
 [] >>> Note 'CS2113T' has been deleted!
 [] >>> exit : Exits the program.
@@ -32,6 +38,12 @@ Format: note
 schedule : Move to schedules workspace.
 Format: schedule
 
+[] >>> Error: Missing arguments.
+Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
+[] >>> Error: Missing arguments.
+Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
+[] >>> Error: Missing arguments.
+Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
 [] >>> schedule has been added!
 [] >>> schedule has been added!
 [] >>> Command not found! Type 'help' for a list of commands.
@@ -40,6 +52,8 @@ Format: schedule
 
 [] >>> Error: Content not found.
 [] >>> CS2113T Lecture, Friday, 16:00, zoom.com
+[] >>> Error: Missing arguments.
+Format: schedule delete <item number>
 [] >>> Error: Content not found.
 [] >>> Link 'CS2113T Tutorial' has been deleted!
 [] >>> 1. CS2113T Lecture, Friday, 16:00, zoom.com

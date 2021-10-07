@@ -6,8 +6,6 @@ import terminus.parser.LinkCommandParser;
 
 public class ScheduleCommand extends WorkspaceCommand {
 
-    private String arguments;
-
     public ScheduleCommand() {
         super(LinkCommandParser.getInstance());
     }

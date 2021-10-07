@@ -6,8 +6,6 @@ import terminus.parser.NoteCommandParser;
 
 public class NotesCommand extends WorkspaceCommand {
 
-    private String arguments;
-
     public NotesCommand() {
         super(NoteCommandParser.getInstance());
     }

@@ -17,6 +17,8 @@ public class Terminus {
     private String workspace;
 
     private NusModule nusModule;
+    
+    private static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "Format: %s";
 
     /**
      * Main entry-point for the terminus.Terminus application.
@@ -60,12 +62,14 @@ public class Terminus {
                 } else if (!result.isOk()) {
                     ui.printSection(result.getErrorMessage());
                 }
-            } catch (InvalidCommandException e) {
+            } catch (InvalidCommandException | InvalidTimeFormatException e) {
                 ui.printSection(e.getMessage());
             } catch (InvalidArgumentException e) {
-                ui.printSection(e.getMessage());
-            } catch (InvalidTimeFormatException e) {
-                ui.printSection(e.getMessage());
+                if (e.getFormat() != null) {
+                    ui.printSection(e.getMessage(), String.format(INVALID_ARGUMENT_FORMAT_MESSAGE, e.getFormat()));   
+                } else {
+                    ui.printSection(e.getMessage());
+                }
             }
         }
     }

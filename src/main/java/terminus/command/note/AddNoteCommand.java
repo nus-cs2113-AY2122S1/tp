@@ -36,11 +36,11 @@ public class AddNoteCommand extends Command {
     public void parseArguments(String arguments) throws InvalidArgumentException {
         // Perform required checks with regex
         if (arguments == null || arguments.isBlank()) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         ArrayList<String> argArray = CommonFormat.findArguments(arguments);
         if (!isValidNoteArguments(argArray)) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         this.name = argArray.get(0);
         this.data = argArray.get(1);

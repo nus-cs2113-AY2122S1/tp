@@ -30,12 +30,12 @@ public class DeleteCommand<T> extends Command {
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
         if (arguments == null || arguments.isBlank()) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         try {
             itemNumber = Integer.parseInt(arguments);
         } catch (NumberFormatException e) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
     }
 
@@ -47,7 +47,7 @@ public class DeleteCommand<T> extends Command {
         module.set(type, contentManager.getContents());
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,
                 CommonFormat.getClassName(type), deletedContentName));
-        return new CommandResult(true, false);
+        return new CommandResult(true);
     }
 }
 

@@ -39,7 +39,7 @@ public class ViewCommand<T> extends Command {
             itemNumber = Integer.parseInt(arguments);
             displayAll = false;
         } catch (NumberFormatException e) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
     }
 

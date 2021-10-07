@@ -3,8 +3,8 @@ package terminus.command;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
+@Deprecated
 public class TestCommand extends Command {
-    private String arguments;
     
     @Override
     public String getFormat() {
@@ -14,11 +14,6 @@ public class TestCommand extends Command {
     @Override
     public String getHelpMessage() {
         return "This is testing command.";
-    }
-
-    @Override
-    public void parseArguments(String arguments) {
-        this.arguments = arguments;
     }
 
     @Override
