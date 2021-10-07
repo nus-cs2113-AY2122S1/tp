@@ -1,6 +1,7 @@
 package command.expense;
 
 import picocli.CommandLine.Command;
+import service.ExpenseManager;
 
 import java.util.concurrent.Callable;
 
@@ -10,7 +11,8 @@ import java.util.concurrent.Callable;
 public class ListExpenseCommand implements Callable<Integer> {
 
     public Integer call() throws Exception {
-        System.out.println("list budget");
+        System.out.println("Your expenses:");
+        ExpenseManager.listExpenses();
         return 0;
     }
 }
