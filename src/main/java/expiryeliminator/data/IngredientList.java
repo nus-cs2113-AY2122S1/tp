@@ -49,6 +49,11 @@ public class IngredientList {
         return ingredients.size();
     }
 
+    /**
+     * Returns a string representation of the whole list
+     *
+     * @return returns a string representing all the ingredients and their specific quantities and expiration dates
+     */
     public String printWholeList() {
         String wholeList = "";
         for (Ingredient ingredient : ingredients.values()) {
@@ -57,6 +62,12 @@ public class IngredientList {
         return wholeList;
     }
 
+    /**
+     * Looks for the ingredient that the user is looking for
+     *
+     * @param ingredientDescription The ingredient name the user is searching for
+     * @return the ingredient object that the user is searching for
+     */
     public Ingredient findIngredient(String ingredientDescription) {
         return ingredients.get(ingredientDescription);
     }

@@ -3,6 +3,9 @@ package expiryeliminator.commands;
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
 
+/**
+ * Finds a specific ingredient, together with its associated quantity and expiry date.
+ */
 public class ViewIngredientCommand extends Command{
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "view";

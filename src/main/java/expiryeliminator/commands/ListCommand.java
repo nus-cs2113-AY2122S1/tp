@@ -4,6 +4,9 @@ import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
 import expiryeliminator.data.exception.DuplicateDataException;
 
+/**
+ * Lists all ingredient, together with its associated quantity and expiry date.
+ */
 public class ListCommand extends Command{
 
     /** Unique word associated with the command. */
