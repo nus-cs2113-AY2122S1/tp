@@ -12,15 +12,6 @@ public class TextUi {
     public static final String LS = System.lineSeparator();
 
     private static final String DIVIDER = "========================================================";
-    private static final String LOGO = "\n"
-            + "╭━━╮╱╱╱╱╱╭╮╱╱╱╱╱╭╮╭━━━━╮╱╱╱╱╱╱╭╮\n"
-            + "┃╭╮┃╱╱╱╱╱┃┃╱╱╱╱╭╯╰┫╭╮╭╮┃╱╱╱╱╱╱┃┃\n"
-            + "┃╰╯╰┳╮╭┳━╯┣━━┳━┻╮╭┻╯┃┃┣┻┳━━┳━━┫┃╭┳━━┳━╮\n"
-            + "┃╭━╮┃┃┃┃╭╮┃╭╮┃┃━┫┃╱╱┃┃┃╭┫╭╮┃╭━┫╰╯┫┃━┫╭╯\n"
-            + "┃╰━╯┃╰╯┃╰╯┃╰╯┃┃━┫╰╮╱┃┃┃┃┃╭╮┃╰━┫╭╮┫┃━┫┃\n"
-            + "╰━━━┻━━┻━━┻━╮┣━━┻━╯╱╰╯╰╯╰╯╰┻━━┻╯╰┻━━┻╯\n"
-            + "╱╱╱╱╱╱╱╱╱╱╭━╯┃\n"
-            + "╱╱╱╱╱╱╱╱╱╱╰━━╯";
 
     private static final String MESSAGE_EXIT = "Bye, see you again soon!";
 
@@ -39,7 +30,6 @@ public class TextUi {
 
     public static void showWelcomeMessage() {
         System.out.println(DIVIDER
-                + LOGO
                 + "    Hello! I'm Budget Tracker\n"
                 + "    Which entries do you wish to enter today?\n"
                 + DIVIDER);
