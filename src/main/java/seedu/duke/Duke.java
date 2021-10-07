@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.InsufficientParametersException;
 import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.ingredients.Ingredient;
@@ -9,73 +10,15 @@ import seedu.duke.ui.UI;
 public class Duke {
 
     private static UI ui;
-    private static IngredientList ingredientList;
 
-    public Duke() {
-    }
 
     /**
      * Starts up the system by creating the UI and the IngredientList.
      */
     public static void initialize() {
         ui = new UI();
-        ingredientList = new IngredientList(); //For now, no storage
-
     }
 
-    /**
-     * Loops until exit command received.
-     */
-    public static void runCommandLoopUntilExitCommand() {
-        //we temporarily do without the command classes and parser class
-        //assume all commands are valid
-
-        /*
-            Here are the expected syntax as per the feature list style (yet to update)
-            add n/name a/amount u/units e/expiry date
-            delete i/index (for now is index, in future to change to name)
-            update i/index a/amount (amount should be negative if to subtract, positive if to add)
-         */
-        while (true) {
-            String[] userInput = ui.getUserCommand().split(" ", 2); //Splits into command and parameters
-            String command = userInput[0];
-            String commandOutput = "";
-
-            switch (command) {
-            case "exit":
-                exit();
-                break;
-            case "list":
-                commandOutput = ingredientList.listAllIngredients();
-                break;
-            case "add":
-                //fill in code to obtain the necessary parameters
-                Ingredient newIngredient = new Ingredient("name", 200.0, "units", "expiry");
-                commandOutput = ingredientList.addNewIngredient(newIngredient);
-                break;
-            case "delete":
-                try {
-                    int ingredientNumberToDelete = Integer.parseInt(userInput[1]);
-                    commandOutput = ingredientList.deleteIngredient(ingredientNumberToDelete);
-                } catch (NumberFormatException e) {
-                    commandOutput = "Invalid number format!";
-                } catch (IndexOutOfBoundsException e) {
-                    commandOutput = "Ingredient number does not exist!";
-                }
-                break;
-            case "update":
-                int indexToUpdate = 999999;
-                double amount = 0;
-                commandOutput = ingredientList.updateIngredient(indexToUpdate, amount);
-                break;
-            default:
-                System.out.println("Unknown Command");
-                break;
-            }
-
-            ui.printCommandOutput(commandOutput);
-        }
-    }
 
     /**
      * Prints the exit message, then closes the program.
@@ -85,9 +28,43 @@ public class Duke {
         System.exit(0);
     }
 
+
+    /**
+     * Runs the command parser and return the message
+     * @param command user's input command
+     * @return result message
+     */
+    public static String runCommand(String command) {
+        String msg;
+
+        try {
+            msg = Parser.parse(command);
+            return msg;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public static void run() {
+        boolean isExit = false;
+        String command;
+        String resultMsg;
+
+        while (!isExit) {
+            command = ui.getUserCommand();
+            resultMsg = runCommand(command);
+
+            isExit = Parser.isExit(command);
+
+            if (!isExit) {
+                ui.printCommandOutput(resultMsg);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         initialize();
-        runCommandLoopUntilExitCommand();
+        run();
         exit();
     }
 }
