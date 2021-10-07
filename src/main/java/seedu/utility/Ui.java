@@ -99,7 +99,7 @@ public class Ui {
         System.out.println("Your most recent spending: ");
         System.out.println(expense);
     }
-    
+
     public void printExpenseDeleted(Expense expense) {
         System.out.println("You removed this: ");
         System.out.println(expense);
@@ -109,7 +109,7 @@ public class Ui {
         System.out.println("Your most recent earning: ");
         System.out.println(income);
     }
-    
+
     public void printIncomeDeleted(Income income) {
         System.out.println("You removed this: ");
         System.out.println(income);
