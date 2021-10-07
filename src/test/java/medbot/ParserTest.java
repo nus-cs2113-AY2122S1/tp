@@ -80,4 +80,45 @@ class ParserTest {
             }
         }
     }
+
+    @Test
+    public void testParseIcNumber() throws Exception {
+        Method method = Parser.class.getDeclaredMethod("parseIcNumber", String.class);
+        method.setAccessible(true);
+        String[][] testIcNumbers = {
+                {"S1234567A", "S1234567A"},
+                {"F1234567A", "F1234567A"},
+                {"Z1234567A", "Incorrect IC number format"},
+                {"F1234567", "Incorrect IC number format"},
+                {"F1234A", "Incorrect IC number format"},
+                {"   ", "IC number not specified"},
+                {"1234567A", "Incorrect IC number format"}
+        };
+        for (String[] testIcNumber : testIcNumbers) {
+            try {
+                assertEquals(testIcNumber[1], method.invoke(method, testIcNumber[0]));
+            } catch (InvocationTargetException e) {
+                assertEquals(testIcNumber[1], e.getTargetException().getMessage());
+            }
+        }
+    }
+
+    @Test
+    void testParseResidentialAddress() throws Exception {
+        Method method = Parser.class.getDeclaredMethod("parseResidentialAddress", String.class);
+        method.setAccessible(true);
+        String[][] testResidentialAddresses = {
+                {"12 Lower Kent Ridge", "12 Lower Kent Ridge"},
+                {"12 lower kent ridge", "12 Lower Kent Ridge"},
+                {"12 LOWER KENT RIDGE", "12 Lower Kent Ridge"},
+                {"   ", "Address not specified"}
+        };
+        for (String[] testResidentialAddress : testResidentialAddresses) {
+            try {
+                assertEquals(testResidentialAddress[1], method.invoke(method, testResidentialAddress[0]));
+            } catch (InvocationTargetException e) {
+                assertEquals(testResidentialAddress[1], e.getTargetException().getMessage());
+            }
+        }
+    }
 }

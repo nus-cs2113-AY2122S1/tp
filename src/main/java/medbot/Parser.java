@@ -343,7 +343,7 @@ public class Parser {
     private static String parseEmailAddress(String attributeString) throws MedBotException {
         try {
             String emailString = attributeString.strip();
-            if (emailString.equals("")) {
+            if (emailString.equals(EMPTY_STRING)) {
                 throw new MedBotException(ERROR_EMAIL_ADDRESS_NOT_SPECIFIED);
             }
             if (!emailString.matches(REGEX_EMAIL)) {
@@ -411,7 +411,8 @@ public class Parser {
      */
     private static String preprocessMultiAttributeInput(String input) {
         //replacement function to add a "|" character before an attribute specifier
-        Function<MatchResult, String> replacementFunction = x -> " |" + x.group().substring(1);
+        Function<MatchResult, String> replacementFunction = x ->
+                SEPARATOR_SPACE + VERTICAL_LINE + x.group().substring(1);
         Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER);
         Matcher matcher = pattern.matcher(input);
         return matcher.replaceAll(replacementFunction);
