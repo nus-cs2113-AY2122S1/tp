@@ -116,7 +116,7 @@ public class Parser {
         int wordIndex = 1;
         while (matcher.find()) {
             switch (matcher.group()){
-            case "/t":
+            case "/n":
                 name = words[wordIndex].trim();
                 break;
             case "/a":
