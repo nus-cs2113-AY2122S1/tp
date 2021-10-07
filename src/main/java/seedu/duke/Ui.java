@@ -3,7 +3,8 @@ package seedu.duke;
 import java.util.Scanner;
 
 public class Ui {
-
+    private static final String CUT_MESSAGE = "Client has been deleted:";
+    
     private static Scanner in = new Scanner(System.in);
 
     public static void showLine() {
@@ -29,7 +30,6 @@ public class Ui {
     }
 
     public void showCut(Client client) {
-        String CUT_MESSAGE = "Client has been deleted:";
         show(CUT_MESSAGE + "\n" + client);
         showLine();
     }
