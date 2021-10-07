@@ -85,4 +85,18 @@ class UiTest {
         assertEquals(ui.getAllPatientsString(patientList), expectedOutput);
     }
 
+    @Test
+    public void testGetCommandListMessage() {
+        Ui ui = new Ui();
+
+        String expectedOutput = "Here are the list of commands:\n\n"
+                + "help\n" + "add\n" + "list\n" + "view\n" + "edit\n" + "delete\n"
+                + "exit\n" + "\n"
+                + "To obtain more information on each command and their respective required inputs, type:\n"
+                + "help [COMMAND]";
+
+        assertEquals(ui.getCommandList(), expectedOutput);
+    }
+
+
 }

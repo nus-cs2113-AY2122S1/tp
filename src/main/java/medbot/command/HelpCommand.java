@@ -20,22 +20,24 @@ public class HelpCommand extends Command {
 
     @Override
     public void execute(PatientList patientList, Ui ui) {
+        String output;
         if (secondCommand.equals(COMMAND_HELP)) {
-            ui.printCommandList();
+            output = ui.getCommandList();
         } else if (secondCommand.equals(COMMAND_LIST)) {
-            ui.printListHelpMessage();
+            output = ui.getListHelpMessage();
         } else if (secondCommand.equals(COMMAND_VIEW)) {
-            ui.printViewHelpMessage();
+            output = ui.getViewHelpMessage();
         } else if (secondCommand.equals(COMMAND_ADD)) {
-            ui.printAddHelpMessage();
+            output = ui.getAddHelpMessage();
         } else if (secondCommand.equals(COMMAND_EDIT)) {
-            ui.printEditHelpMessage();
+            output = ui.getEditHelpMessage();
         } else if (secondCommand.equals(COMMAND_DELETE)) {
-            ui.printDeleteHelpMessage();
+            output = ui.getDeleteHelpMessage();
         } else if (secondCommand.equals(COMMAND_EXIT)) {
-            ui.printExitHelpMessage();
+            output = ui.getExitHelpMessage();
         } else {
-            ui.printUnrecognisedCommandHelpMessage();
+            output = ui.getUnrecognisedCommandHelpMessage();
         }
+        ui.printOutput(output);
     }
 }
