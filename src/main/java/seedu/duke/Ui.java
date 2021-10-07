@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Ui {
 
-    private static final String DIVIDER = "    ——————————————————————————————————————————————————————————————";
+    private static final String DIVIDER = "    -------------------------------------------------------------";
     private static final String SPACE = "    ";
     private static final String LIST_MESSAGE = "     Here are the tasks in your list:";
     private static final String ADD_MESSAGE = "     Now you have %d tasks in the list.";

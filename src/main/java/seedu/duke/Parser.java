@@ -3,10 +3,10 @@ package seedu.duke;
 public class Parser {
 
     public static final String LIST = "list";
-    public static final String TODO = "todo";
+    public static final String ADD = "add";
     public static final String EVENT = "event";
     public static final String DEADLINE = "deadline";
-    public static final String DELETE = "delete";
+    public static final String DELETE = "remove";
     public static final String FIND = "find";
     public static final String EXIT = "bye";
     public static final String DONE = "done";
@@ -25,36 +25,36 @@ public class Parser {
      */
     public Command parseCommand (String userInput) {
 
-        String[] words = userInput.trim().split(" ", 2);
+        String[] words = userInput.trim().split(" ", 3);
 
         switch(words[0]) {
 
-            case LIST:
-                return new ListCommand();
-            case TODO:
-                if(userInput.equals("todo")) {
-                    return new FalseCommand(INVALID_TODO_ADD_MESSAGE);
-                } else {
-                    return new AddCommand(userInput);
-                }
-            case EVENT:
-                try {
-                    return new AddCommand(userInput);
-                } catch (StringIndexOutOfBoundsException e) {
-                    return new FalseCommand(INVALID_EVENT_ADD_MESSAGE);
-                }
-            case DEADLINE:
-                try {
-                    return new AddCommand(userInput);
-                } catch (StringIndexOutOfBoundsException e) {
-                    return new FalseCommand(INVALID_DEADLINE_ADD_MESSAGE);
-                }
-            case DONE:
-                return new DoneCommand(Integer.parseInt(userInput.substring(5)) - 1);
-            case DELETE:
-                return new DeleteCommand(Integer.parseInt(userInput.substring(7)) - 1);
-            case FIND:
-                return new FindCommand(userInput);
+//            case LIST:
+//                return new ListCommand();
+//            case ADD:
+//                if(words[1].equals("employee")) {
+//                    return new AddCommand(userInput);
+//                } else if(words[1].equals("menu")) {
+//                    return new AddCommand(userInput);
+//                } else if(words[1].equals("storage")) {
+//                    return new AddCommand(userInput);
+//                } else {
+//                    return new FalseCommand(FALSE_MESSAGE);
+//                }
+//            case DONE:
+//                return new DoneCommand(Integer.parseInt(userInput.substring(5)) - 1);
+//            case DELETE:
+//                if(words[1].equals("employee")) {
+//                    return new DeleteCommand(Integer.parseInt(words[2]));
+//                } else if(words[1].equals("menu")) {
+//                    return new DeleteCommand(Integer.parseInt(words[2]));
+//                } else if(words[1].equals("storage")) {
+//                    return new DeleteCommand(Integer.parseInt(words[2]));
+//                } else {
+//                    return new FalseCommand(FALSE_MESSAGE);
+//                }
+//            case FIND:
+//                return new FindCommand(userInput);
             case EXIT:
                 return new ExitCommand();
             default:

@@ -5,26 +5,26 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private Storage storage;
+//    private Storage storage;
     private TaskList tasksList = new TaskList();
     private Ui ui;
 
-    /**
-     * Constructor for Duke class.
-     *
-     * @param filePath The file containing the tasks.
-     */
-    public Duke(String filePath) {
-        this.storage = new Storage(filePath);
-        try {
-            this.tasksList = storage.load();
-        } catch (Storage.DukeException e) {
-            ui.showMessages(e.getMessage());
-        }
-    }
+//    /**
+//     * Constructor for Duke class.
+//     *
+//     * @param filePath The file containing the tasks.
+//     */
+//    public Duke(String filePath) {
+//        this.storage = new Storage(filePath);
+//        try {
+//            this.tasksList = storage.load();
+//        } catch (Storage.DukeException e) {
+//            ui.showMessages(e.getMessage());
+//        }
+//    }
 
     public static void main(String[] args) {
-        new Duke("Duke.txt").run();
+        new Duke().run();
     }
 
     /** Run the Duke */
@@ -41,11 +41,11 @@ public class Duke {
 
     private void exitDuke() {
         ui.showGoodbyeMessage();
-        try {
-            storage.write(tasksList);
-        } catch (Storage.DukeException e) {
-            ui.showMessages(e.getMessage());
-        }
+//        try {
+//            storage.write(tasksList);
+//        } catch (Storage.DukeException e) {
+//            ui.showMessages(e.getMessage());
+//        }
         System.exit(0);
     }
 
