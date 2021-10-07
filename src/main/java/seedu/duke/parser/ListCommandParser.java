@@ -4,8 +4,8 @@ import seedu.duke.commands.ListCommand;
 
 import java.text.ParseException;
 
-public class ListCommandParser implements Parser<ListCommand> {
-    @Override
+public class ListCommandParser {
+
     public ListCommand parse(String arguments) throws ParseException {
         String type;
 

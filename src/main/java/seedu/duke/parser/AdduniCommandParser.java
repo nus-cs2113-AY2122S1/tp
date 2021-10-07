@@ -11,12 +11,12 @@ import java.util.ArrayList;
 @SuppressWarnings("checkstyle:WhitespaceAround")
 public class AdduniCommandParser {
 
-    public AdduniCommand parse(String arguments, UniversityList universityList) throws ParseException {
+    public AdduniCommand parse(String arguments, UniversityList universityMasterList) throws ParseException {
         String universityName = arguments.trim();
         if (universityName.length() == 0) {
             throw new ParseException("no university given", 1);
         }
-        if (!isUniversityExist(universityName, universityList)) {
+        if (!isUniversityExist(universityName, universityMasterList)) {
             throw new ParseException("university does not exist", 1);
         }
 
@@ -25,8 +25,8 @@ public class AdduniCommandParser {
         return new AdduniCommand(university);
     }
 
-    private boolean isUniversityExist(String universityName, UniversityList universityList) {
-        for (University university : universityList.getList()) {
+    private boolean isUniversityExist(String universityName, UniversityList universityMasterList) {
+        for (University university : universityMasterList.getList()) {
             if (universityName.equals(university.getName())) {
                 return true;
             }

@@ -1,12 +1,12 @@
 package seedu.duke;
 
 import seedu.duke.commands.Command;
-import seedu.duke.parser.ListCommandParser;
-import seedu.duke.parser.RemoveCommandParser;
-import seedu.duke.parser.SepPlannerParser;
+import seedu.duke.modules.Module;
+import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.universities.UniversityList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -17,8 +17,9 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         try {
-            UniversityList universityList = new UniversityList(Storage.loadUniversities());
-            SepPlannerParser mainParser = new SepPlannerParser(universityList);
+            UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
+            ArrayList<Module> moduleMasterList = new ArrayList<>(Storage.loadModules());
+            Parser mainParser = new Parser(universityMasterList, moduleMasterList);
             while (true) {
                 String userInput = in.nextLine();
                 Command cmd = mainParser.parseCommand(userInput);

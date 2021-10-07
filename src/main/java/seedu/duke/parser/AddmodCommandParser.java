@@ -4,18 +4,28 @@ import seedu.duke.commands.AddmodCommand;
 import seedu.duke.modules.Module;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
-public class AddmodCommandParser implements Parser<AddmodCommand> {
+public class AddmodCommandParser {
 
-    @Override
-    public AddmodCommand parse(String arguments) throws ParseException {
+    public AddmodCommand parse(String arguments, ArrayList<Module> moduleMasterList) throws ParseException {
         String moduleCode = arguments.trim();
         if (moduleCode.length() == 0) {
             throw new ParseException("no module give", 1);
         }
-        String moduleName = "";
-        int moduleCredits = 0;
-        Module module = new Module(moduleCode, moduleName, moduleCredits);
+        Module module = searchForModule(moduleCode, moduleMasterList);
+        if (module == null) {
+            throw new ParseException("module does not exist", 1);
+        }
         return new AddmodCommand(module);
+    }
+
+    private Module searchForModule(String moduleCode, ArrayList<Module> moduleMasterList) {
+        for (Module module : moduleMasterList) {
+            if (moduleCode.equals(module.getModuleCode())) {
+                return module;
+            }
+        }
+        return null;
     }
 }
