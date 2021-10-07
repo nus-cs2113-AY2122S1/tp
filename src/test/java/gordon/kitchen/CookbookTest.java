@@ -3,19 +3,20 @@ package gordon.kitchen;
 import gordon.exception.GordonException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class CookbookTest {
     @Test
     public void testAdd() {
         try {
-            Cookbook c = new Cookbook();
             Recipe r = new Recipe("Coffee");
             r.addIngredient(new Ingredient("Coffee beans"));
             r.addIngredient(new Ingredient("Water"));
             r.addStep("Boil water");
             r.addStep("Grind beans");
             r.addStep("Pour water over grounds");
+            Cookbook c = new Cookbook();
             c.addRecipe(r);
             assertEquals("1. Coffee" + System.lineSeparator(), c.toString());
         } catch (GordonException g) {
@@ -34,13 +35,13 @@ class CookbookTest {
         }
 
         try {
-            Cookbook c = new Cookbook();
             Recipe r1 = new Recipe("Coffee");
             r1.addIngredient(new Ingredient("Coffee beans"));
             r1.addIngredient(new Ingredient("Water"));
             r1.addStep("Boil water");
             r1.addStep("Grind beans");
             r1.addStep("Pour water over grounds");
+            Cookbook c = new Cookbook();
             c.addRecipe(r1);
             Recipe r2 = new Recipe("Tea");
             r2.addIngredient(new Ingredient("Tea leaves"));
