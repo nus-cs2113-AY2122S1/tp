@@ -47,13 +47,20 @@ public class ViewCommand<T> extends Command {
     public CommandResult execute(Ui ui, NusModule module) throws InvalidArgumentException {
         ContentManager contentManager = module.getContentManager();
         contentManager.setContent(module.get(type));
-        String result = "";
+        StringBuilder result = new StringBuilder();
         if (displayAll) {
-            result = contentManager.listAllContents();
+            String fullList = contentManager.listAllContents();
+            if (fullList.isBlank()) {
+                result.append(Messages.EMPTY_CONTENT_LIST_MESSAGE);
+            } else {
+                result.append(Messages.CONTENT_MESSAGE_HEADER);
+                result.append(contentManager.listAllContents());
+                result.append("\nRerun the same command with an index behind to view the content.");
+            }
         } else {
-            result = contentManager.getContentData(itemNumber);
+            result.append(contentManager.getContentData(itemNumber));
         }
-        ui.printSection(result);
+        ui.printSection(result.toString());
         return new CommandResult(true, false);
     }
 }
