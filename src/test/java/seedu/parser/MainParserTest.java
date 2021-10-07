@@ -3,7 +3,6 @@ package seedu.parser;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -11,7 +10,7 @@ import seedu.command.AddContactCommand;
 import seedu.command.Command;
 import seedu.command.DeleteContactCommand;
 import seedu.command.FailedCommand;
-import seedu.exception.MissingNameException;
+import seedu.command.ViewCommand;
 
 
 public class MainParserTest {
@@ -42,7 +41,7 @@ public class MainParserTest {
     }
 
     @Test
-    public void parseDeleteCommand_validIndex_expectDeleteContactCommand() {
+    public void parseDeleteCommand_validIndex_expectDeleteContactIndexMatch() {
         testIndex = 1;
         testUserInput = "rm " + testIndex;
         final DeleteContactCommand testResultCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
@@ -65,6 +64,14 @@ public class MainParserTest {
         final AddContactCommand expectedCommand = new AddContactCommand("andre", "ng-andre");
         assertEquals(expectedCommand.getName(), actualCommand.getName());
         assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
+    }
+
+    @Test
+    public void parseViewCommand_validIndex_expectViewContactIndexMatch() {
+        final int testIndex = 1;
+        final String testUserInput = "view " + testIndex;
+        final ViewCommand testResultCommand = getParsedCommand(testUserInput, ViewCommand.class);
+        assertEquals(testIndex,testResultCommand.getIndex());
     }
 
     @Test
