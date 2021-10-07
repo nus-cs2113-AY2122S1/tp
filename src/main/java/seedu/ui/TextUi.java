@@ -20,7 +20,7 @@ public class TextUi {
     }
 
     public String getUserInput() {
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     // Used for print messages after user inputs
