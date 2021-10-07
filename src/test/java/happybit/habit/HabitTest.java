@@ -10,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HabitTest {
 
+    /**
+     * Test getDescription when a habit is initialised with a habit type.
+     */
     @Test
     void getDescription_withHabitType_expectStringDescription() {
         final Habit testHabit = new Habit("test", HabitType.SLEEP);
@@ -18,6 +21,9 @@ class HabitTest {
         assertEquals(expectedResult, actualResult);
     }
 
+    /**
+     * Test getDescription when a habit is initialised without a habit type.
+     */
     @Test
     void getDescription_withoutHabitType_expectStringDescription() {
         final Habit testHabit = new Habit("test");
@@ -26,6 +32,11 @@ class HabitTest {
         assertEquals(expectedResult, actualResult);
     }
 
+    /**
+     * Test printGoalList when 3 goals are added to the habit.
+     *
+     * @throws HappyBitException If there are issues with the goal dates.
+     */
     @Test
     void printGoalList_threeGoals_expectThreeLinesOfGoals() throws HappyBitException {
         final Habit testHabit = new Habit("test");
