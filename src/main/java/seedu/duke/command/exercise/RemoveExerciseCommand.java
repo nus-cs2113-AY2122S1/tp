@@ -14,7 +14,7 @@ public class RemoveExerciseCommand extends Command {
     public static final String COMMAND_WORD = "remove";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the exercise from the workout.\n"
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_INDEX\n"
-            + "\tExample: remove " + WORKOUT_KEYWORD + "1 " + EXERCISE_KEYWORD + "3\n";
+            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1 " + EXERCISE_KEYWORD + "3\n";
     public static final String MESSAGE_SUCCESS = "Removed exercise %1$s";
     private final int workoutIndex;
     private final int exerciseIndex;
