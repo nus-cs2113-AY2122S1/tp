@@ -40,6 +40,7 @@ public class Ui {
     public void showClear() {
         show(CLEAR_MESSAGE);
         showLine();
+    }
 
     public void showCut(Client client) {
         show(CUT_MESSAGE + "\n" + client);
