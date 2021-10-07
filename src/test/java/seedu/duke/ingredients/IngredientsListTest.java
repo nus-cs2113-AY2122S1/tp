@@ -9,8 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class IngredientsListTest {
     @Test
     public void getIngredientInfoTest_invalidIngredientNumber_dukeExceptionThrown() {
-        assertThrows(DukeException.class,
-                ()->IngredientList.getInstance().getIngredientInfo(-1));
+        try {
+            int ingredientNumber = -1;
+            IngredientList.getInstance().getIngredientInfo(ingredientNumber);
+        } catch (DukeException e) {
+            assertEquals("Ingredient number have not existed!", e.getMessage());
+        }
     }
 
     @Test

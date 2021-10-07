@@ -1,18 +1,21 @@
 package seedu.duke;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
     @Test
     public void parseDeleteCommand_invalidNumberFormatInput_expectException() {
-        String inputString = "delete abc";
+        try {
+            String inputString = "delete abc";
+            String resultMsg = Parser.parse(inputString);
+            fail();
+        } catch (DukeException e) {
+            assertEquals("Invalid number format!", e.getMessage());
+        }
 
-        assertThrows(DukeException.class,
-                ()-> Parser.parse(inputString));
     }
 
 }
