@@ -2,11 +2,12 @@ package terminus.ui;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import terminus.common.Messages;
+import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 
 public class Ui {
 
-    private static final String BANNER = "Welcome to TermiNUS!";
     private static final String PROMPT = "[%s] >>> ";
 
     private final Scanner scanner;
@@ -16,20 +17,16 @@ public class Ui {
     }
 
     /**
-     * Prints the banner.
-     */
-    public void printBanner() {
-        System.out.println(BANNER);
-    }
-
-    /**
      * Prints the banner for a workspace, which includes all the commands in the parser.
      */
-    public void printParserBanner(CommandParser parser) {
-        printSection(parser.getCommandList()
-            .stream()
-            .reduce("\nType any of the following to get started:\n",
-                (x, y) -> String.format("%s> %s\n", x, y))
+    public void printParserBanner(CommandParser parser, NusModule nusModule) {
+        printSection(
+            "",
+            parser.getWorkspaceBanner(nusModule), 
+            parser.getCommandList()
+                .stream()
+                .reduce("\nType any of the following to get started:\n",
+                    (x, y) -> String.format("%s> %s\n", x, y))
         );
     }
 

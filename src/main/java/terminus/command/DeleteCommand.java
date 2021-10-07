@@ -1,5 +1,6 @@
 package terminus.command;
 
+import java.util.Locale;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.ContentManager;
@@ -46,7 +47,7 @@ public class DeleteCommand<T> extends Command {
         String deletedContentName = contentManager.deleteContent(itemNumber);
         module.set(type, contentManager.getContents());
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,
-                CommonFormat.getClassName(type), deletedContentName));
+                CommonFormat.getClassName(type).toLowerCase(), deletedContentName));
         return new CommandResult(true);
     }
 }

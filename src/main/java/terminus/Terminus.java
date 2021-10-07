@@ -40,9 +40,8 @@ public class Terminus {
         this.ui = new Ui();
         this.parser = MainCommandParser.getInstance();
         this.workspace = "";
-        this.ui.printBanner();
-        this.ui.printParserBanner(this.parser);
         this.nusModule = new NusModule();
+        this.ui.printParserBanner(this.parser, this.nusModule);
     }
 
     private void runCommandsUntilExit() {
@@ -58,7 +57,7 @@ public class Terminus {
                 } else if (result.isOk() && result.getAdditionalData() != null) {
                     parser = result.getAdditionalData();
                     workspace = parser.getWorkspace();
-                    ui.printParserBanner(parser);
+                    ui.printParserBanner(parser, nusModule);
                 } else if (!result.isOk()) {
                     ui.printSection(result.getErrorMessage());
                 }

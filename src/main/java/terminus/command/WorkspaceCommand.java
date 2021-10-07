@@ -15,7 +15,7 @@ public abstract class WorkspaceCommand extends Command {
     public WorkspaceCommand(CommandParser commandMap) {
         this.commandMap = commandMap;
     }
-
+    
     /**
      * Returns the Command Result after execution.
      * If no other arguments, returns the workspace.

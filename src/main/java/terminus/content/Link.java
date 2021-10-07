@@ -9,7 +9,7 @@ public class Link extends Content {
     private String link;
     public static final String TYPE = "Z";
 
-    private static final String DISPLAY_LINK_MESSAGE = "%s, %s, %s, %s";
+    private static final String DISPLAY_LINK_MESSAGE = "%s (%s, %s): %s";
 
     public Link(String name, String day, LocalTime startTime, String link) {
         super(name);

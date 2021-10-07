@@ -61,7 +61,7 @@ public class AddLinkCommand extends Command {
         contentManager.setContent(module.getLinks());
         contentManager.addLink(description, day, startTime, link);
         module.setLinks(contentManager.getContents());
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE));
+        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
         return new CommandResult(true, false);
     }
 

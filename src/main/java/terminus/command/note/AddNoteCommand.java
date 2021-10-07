@@ -52,7 +52,7 @@ public class AddNoteCommand extends Command {
         contentManager.setContent(module.getNotes());
         contentManager.addNote(name, data);
         module.setNotes(contentManager.getContents());
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE));
+        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE, name));
         return new CommandResult(true, false);
     }
 
