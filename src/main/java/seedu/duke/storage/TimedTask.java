@@ -1,10 +1,11 @@
-package seedu.duke.task;
+package seedu.duke.storage;
 
 import net.fortuna.ical4j.model.Date;
 import net.fortuna.ical4j.model.Property;
 import net.fortuna.ical4j.model.component.CalendarComponent;
 import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
+import seedu.duke.storage.Task;
 
 public abstract class TimedTask extends Task {
     protected TimedTask(CalendarComponent calenderComponent) {
@@ -21,7 +22,8 @@ public abstract class TimedTask extends Task {
     }
 
     public Date getEndDate() {
-        return (Date) getProperty(Property.DTEND);
+        DtEnd dtEnd = (DtEnd) getProperty(Property.DTEND);
+        return dtEnd.getDate();
     }
 
     public void setEndDate(Date dateEnd) {
