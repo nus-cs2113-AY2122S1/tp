@@ -79,7 +79,7 @@ public class Ui {
         int totalExpense = 0;
         for (Entry entry:entries) {
             if (entry instanceof Expense) {
-                totalExpense += Expense.getValue();
+                totalExpense += entry.getValue();
             }
         }
         System.out.printf("Your total expense is: %d\n", totalExpense);
@@ -89,7 +89,7 @@ public class Ui {
         int totalIncome = 0;
         for (Entry entry:entries) {
             if (entry instanceof Income) {
-                totalIncome += Income.getValue();
+                totalIncome += entry.getValue();
             }
         }
         System.out.printf("Your total income is: %d\n", totalIncome);

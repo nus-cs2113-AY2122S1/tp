@@ -124,16 +124,16 @@ public class Parser {
         }
         
         String expenseDescription = matcher.group("description").trim();
-        int expenseAmount;
+        double expenseAmount;
         
         try {
-            expenseAmount = Integer.parseInt(matcher.group("amount"));
+            expenseAmount = Double.parseDouble(matcher.group("amount"));
         } catch (NumberFormatException e) {
             return new InvalidCommand();
         }
         
         //need to create constructor for Expense
-        Expense expense = new Expense();
+        Expense expense = new Expense(expenseDescription, expenseAmount);
         return new AddExpenseCommand(expense);
     }
 
@@ -149,16 +149,16 @@ public class Parser {
         }
 
         String incomeDescription = matcher.group("description").trim();
-        int incomeAmount;
+        double incomeAmount;
 
         try {
-            incomeAmount = Integer.parseInt(matcher.group("amount"));
+            incomeAmount = Double.parseDouble(matcher.group("amount"));
         } catch (NumberFormatException e) {
             return new InvalidCommand();
         }
         
         //need to add the constructor for Income
-        Income income = new Income();
+        Income income = new Income(incomeDescription, incomeAmount);
         return new AddIncomeCommand(income);
     }
 
