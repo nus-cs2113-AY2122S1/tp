@@ -24,12 +24,6 @@ public class Cookbook {
         return output.toString();
     }
 
-    public void listRecipe() {
-        for (int i = 0; i < recipes.size(); i++) {
-            System.out.println((i + 1) + ". " + recipes.get(i).getName());
-        }
-    }
-
     public void addRecipe(Recipe r) throws GordonException {
         try {
             r.setId(recipes.size() + 1);
@@ -41,17 +35,11 @@ public class Cookbook {
         }
     }
 
-    public void removeRecipe(String input) throws GordonException {
+    public void removeRecipe(int index) throws GordonException {
         try {
-            String inputIndex = input.contains(" ") ? input.substring(input.indexOf(" ") + 1) : " ";
-            if (inputIndex.isEmpty() || inputIndex.equals(" ")) {
-                throw new GordonException(GordonException.INVALID_RECIPE);
-            }
-            int index = Integer.parseInt(inputIndex);
-            recipes.remove(index - 1);
-            System.out.println("OK! The recipe has been deleted from your cookbook.");
-        } catch (IndexOutOfBoundsException | IllegalArgumentException e) {
-            throw new GordonException(GordonException.INVALID_RECIPE);
+            recipes.remove(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.INDEX_OOB);
         }
     }
 
@@ -72,7 +60,6 @@ public class Cookbook {
                 return;
             }
         }
-
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
