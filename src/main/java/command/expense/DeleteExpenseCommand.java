@@ -37,8 +37,8 @@ public class DeleteExpenseCommand implements Callable<Integer> {
     }
 
     static class Exclusive {
-        @Option(names = {"-n", "--name"}, required = true, description = "Name of the expense item")
-        String names;
+        @Option(names = {"-n", "--name"}, required = true, arity = "1..*", description = "Name of the expense item")
+        String[] names;
 
         @Option(names = {"-i", "--id"}, required = true, description = "Unique identifier of the expense item")
         Integer id;

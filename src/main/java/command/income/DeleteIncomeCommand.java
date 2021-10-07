@@ -26,8 +26,8 @@ public class DeleteIncomeCommand implements Callable<Integer> {
     }
 
     static class Exclusive {
-        @Option(names = {"-n", "--name"}, required = true, description = "Name of the income source")
-        String names;
+        @Option(names = {"-n", "--name"}, required = true, arity = "1..*", description = "Name of the income source")
+        String[] names;
 
         @Option(names = {"-i", "--id"}, required = true, description = "Unique identifier of the income source")
         Integer id;

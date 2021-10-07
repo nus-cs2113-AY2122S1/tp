@@ -10,15 +10,16 @@ import java.util.concurrent.Callable;
 @Command(name = "add", mixinStandardHelpOptions = true, description = "Adds an income source.")
 public class AddIncomeCommand implements Callable<Integer> {
 
-    @Parameters(paramLabel = "NAME", description = "Name of the income source")
-    String name;
+    @Parameters(paramLabel = "NAME", arity = "1..*", description = "Name of the income source")
+    String[] names;
 
-    @Option(names = {"-v", "--value"}, description = "Value of the income")
+    @Option(names = {"-v", "--value"}, required = true, description = "Value of the income")
     Double value;
 
     @Override
     public Integer call() throws Exception {
 
+        String incomeName = String.join(" ", names);
         Double incomeValue = Money.truncate(value);
 
         return 0;
