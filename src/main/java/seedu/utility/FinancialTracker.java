@@ -40,11 +40,11 @@ public class FinancialTracker {
         return this.financialEntries;
     }
 
-    public ArrayList<Object> getTotalExpense() {
+    public ArrayList<Entry> getTotalExpense() {
         return null;
     }
 
-    public ArrayList<Object> getTotalIncome() {
+    public ArrayList<Entry> getTotalIncome() {
         //TODO
         return null;
     }
