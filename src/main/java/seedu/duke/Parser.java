@@ -104,6 +104,12 @@ public class Parser {
         return sentenceAfterDeletion.toString();
     }
 
+    /**
+     * Creates Member class by input given by user
+     *
+     * @param query user raw data input.
+     * @return Member according to user input.
+     */
     public static Member getMemberDetails(String query) {
         String regex = "(\\/[a-z])+";
 
@@ -137,6 +143,19 @@ public class Parser {
         }
 
         return new Member(name, studentNumber,gender,phoneNumber);
+    }
+
+    /**
+     * Creates Member class by input given by user
+     *
+     * @param query user raw data input.
+     * @return Member according to user input.
+     */
+    public static Integer getMemberIndex(String query) {
+        String regex = "(\\/[a-z])+";
+        String[] words = query.trim().split(regex);
+        int memberNumber = Integer.parseInt(words[1].trim());
+        return memberNumber;
     }
 
 
@@ -198,18 +217,20 @@ public class Parser {
     }
 
     /**
-     * Function deletes an item from the ArrayList task.
+     * Function deletes a member from the MemberList class.
      *
-     * @param tasks ArrayList of tasks
+     * @param members MemberList which contains list of members
      * @param query user input
      */
-    public static void deleteMember(ArrayList<Member> members, String query) {
+    public static void deleteMember(MemberList members, String query) {
         try {
-            Member referencedMember = members.get(memberNumber);
-            members.remove(memberNumber);
-            Ui.printDeletedMessage(referencedMember);
+            int memberNumber = getMemberIndex(query);
+            Member member = members.deleteMember(memberNumber);
+            System.out.println("The following member have been deleted\n"+member.toString());
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("There is no such member number...");
+        } catch (NumberFormatException e){
+            System.out.println("Please input a proper number...");
         }
     }
 

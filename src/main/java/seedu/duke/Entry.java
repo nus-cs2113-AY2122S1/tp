@@ -1,10 +1,11 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import seedu.duke.member.MemberList;
 
 public class Entry {
     private static final ArrayList<TrainingSchedule> trainings = new ArrayList<>();
-    private static final ArrayList<Member> members = new ArrayList<>();
+    private static final MemberList members = new MemberList();
 
     /**
      * Returns void. Function is responsible for adding different Tasks to the task list.
@@ -27,12 +28,12 @@ public class Entry {
         case LIST_TRAINING_KEYWORD:
             Ui.printList(trainings);
         case ADD_MEMBER_KEYWORD:
-            Parser.addItem(members, entry);
+            Parser.makeMemberEntry(members, entry);
             break;
         case ADD_TRAINING_KEYWORD:
             Parser.addItem(trainings, entry);
         case DELETE_MEMBER_KEYWORD:
-            Parser.deleteItem(members, entry);
+            Parser.deleteMember(members, entry);
             break;
         case DELETE_TRAINING_KEYWORD:
             Parser.deleteItem(trainings, entry);
