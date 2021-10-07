@@ -132,6 +132,11 @@ public class Goal {
         return false;
     }
 
+    /**
+     * Checks if the start date is before the end date.
+     *
+     * @throws HappyBitException If start date is after the end date.
+     */
     private void isStartDateBeforeEndDate() throws HappyBitException {
         if (this.startDate.compareTo(this.endDate) > 0) {
             throw new HappyBitException("Error: Start Date has to come before End Date ");
