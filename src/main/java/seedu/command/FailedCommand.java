@@ -10,6 +10,10 @@ public class FailedCommand extends Command {
         this.type = type;
     }
 
+    public FailedCommandType getType() {
+        return type;
+    }
+
     public void execute() {
         switch (type) {
         case GENERAL:

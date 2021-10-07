@@ -4,6 +4,7 @@ import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
+import seedu.exception.MissingNameException;
 
 public class AddContactParser extends ContactParser {
     /**
@@ -43,7 +44,7 @@ public class AddContactParser extends ContactParser {
     public void parseDetail(String[] contactDetails, String detail) throws InvalidFlagException,
             MissingDetailException {
         String[] destructuredDetails = detail.split(" ", NUMBER_OF_DETAILS);
-        if (destructuredDetails.length < 2) {
+        if (destructuredDetails.length < 2 || destructuredDetails[1].trim().equalsIgnoreCase("")) {
             throw new MissingDetailException();
         }
         int indexToStore;
@@ -57,6 +58,6 @@ public class AddContactParser extends ContactParser {
         default:
             throw new InvalidFlagException();
         }
-        contactDetails[indexToStore] = destructuredDetails[DETAIL_INDEX_IN_DETAILS];
+        contactDetails[indexToStore] = destructuredDetails[DETAIL_INDEX_IN_DETAILS].trim();
     }
 }

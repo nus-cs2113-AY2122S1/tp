@@ -5,16 +5,13 @@ import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 
-import java.util.Arrays;
-
 public class EditContactParser extends ContactParser {
     public static final String BUFFER = " ";
 
-    @Override
     public String[] parseContactDetails(String userInput)
             throws InvalidFlagException, MissingDetailException, MissingArgException {
         String[] inputDetails = userInput.split(" ", NUMBER_OF_EDIT_DETAILS);
-        if (inputDetails.length < 3 || inputDetails[2].trim().equalsIgnoreCase("")) {
+        if (inputDetails.length < 3) {
             //if arguments are missing e.g. edit 2
             throw new MissingArgException();
         }

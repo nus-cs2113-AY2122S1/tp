@@ -27,8 +27,6 @@ public class MainParser {
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
-    private static final int ISOLATE_USER_INPUT = 2;
-    public static final int NUMBER_OF_EDIT_DETAILS = 3;
     public static final int NAME_INDEX = 0;
 
     private ContactParser contactParser;
@@ -136,11 +134,4 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_NUM);
         }
     }
-
-    // Will create a function to parse details soon, hardcoding for V0.1 (7/10/21
-    // version)
-    // private String parseDetail(String contactParameters, String tag) {
-    //
-    // }
-
 }
