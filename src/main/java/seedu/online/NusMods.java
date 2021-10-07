@@ -3,6 +3,7 @@ package seedu.online;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
+import seedu.command.flags.SearchFlags;
 import seedu.module.Module;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
@@ -16,21 +17,31 @@ import java.net.URL;
 public class NusMods {
     private static final String MODULE_API = "https://api.nusmods.com/v2/2021-2022/modules/";
 
-    public static void searchModsOnline(String searchTerm) throws IOException {
+    public static void searchModsOnline(String searchTerm, SearchFlags searchFlags) throws IOException {
         InputStream inputStream = getOnlineModList();
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
         int count = 0;
         reader.beginArray();
         while (reader.hasNext()) {
             Module module = new Gson().fromJson(reader, Module.class);
-            if (module.codeContains(searchTerm)) {
-                String moduleCode = module.getModuleCode();
-                TextUi.printModBriefDescription(fetchModOnline(moduleCode));
+            if (isMatch(module, searchTerm, searchFlags)) {
                 count++;
             }
         }
         reader.endArray();
         TextUi.printModsFound(count);
+    }
+
+    public static boolean isMatch(Module module, String searchTerm, SearchFlags searchFlags) throws IOException {
+        if (module.meetsPreliminaryConditions(searchTerm, searchFlags)) {
+            String moduleCode = module.getModuleCode();
+            module = fetchModOnline(moduleCode);
+            if (module.meetsSecondaryConditions(searchFlags)) {
+                TextUi.printModBriefDescription(module);
+                return true;
+            }
+        }
+        return false;
     }
 
     public static Module fetchModOnline(String moduleCode) throws IOException {

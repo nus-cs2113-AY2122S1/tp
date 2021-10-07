@@ -1,5 +1,6 @@
 package seedu.command;
 
+import seedu.command.flags.SearchFlags;
 import seedu.online.NusMods;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
@@ -8,23 +9,24 @@ import java.io.IOException;
 
 public class SearchCommand extends Command {
     private final String searchTerm;
-    private final boolean localFlag;
+    private final SearchFlags searchFlags;
 
-    public SearchCommand(String searchTerm, boolean localFlag) {
+    public SearchCommand(String searchTerm, SearchFlags searchFlags) {
         this.searchTerm = searchTerm;
-        this.localFlag = localFlag;
+        this.searchFlags = searchFlags;
     }
 
     public void execute() {
-        if (!localFlag) {
+        boolean isQuickSearch = searchFlags.getHasQuickFlag();
+        if (!isQuickSearch) {
             try {
-                NusMods.searchModsOnline(searchTerm);
+                NusMods.searchModsOnline(searchTerm, searchFlags);
             } catch (IOException e) {
                 TextUi.printNoConnectionMessage();
-                ModStorage.searchModsOffline(searchTerm);
+                ModStorage.searchModsOffline(searchTerm, searchFlags);
             }
         } else {
-            ModStorage.searchModsOffline(searchTerm);
+            ModStorage.searchModsOffline(searchTerm, searchFlags);
         }
     }
 }

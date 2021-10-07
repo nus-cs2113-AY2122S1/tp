@@ -1,6 +1,15 @@
 package seedu.parser;
 
-import seedu.command.*;
+import seedu.command.AddCommand;
+import seedu.command.Command;
+import seedu.command.ExitCommand;
+import seedu.command.HelpCommand;
+import seedu.command.InvalidCommand;
+import seedu.command.SearchCommand;
+import seedu.command.ShowCommand;
+import seedu.command.TimetableCommand;
+import seedu.command.UpdateCommand;
+import seedu.command.flags.SearchFlags;
 import seedu.duke.Duke;
 import seedu.timetable.Timetable;
 
@@ -9,7 +18,6 @@ public class CommandParser {
     private static final Integer SHOW_LENGTH = 4;
     private static final Integer ADD_LENGTH = 3;
     private static final String FLAG = "-";
-    private static final String L_FLAG = "-l";
 
     public Command parseCommand(String text, Timetable timetable) {
         Command command;
@@ -40,21 +48,16 @@ public class CommandParser {
         if (text.toLowerCase().contains(FLAG)) {
             return parseSearchCommandWithFlag(text);
         }
-        String str = text.substring(SEARCH_LENGTH).trim();
-        return new SearchCommand(str, false);
+        String searchTerm = text.substring(SEARCH_LENGTH).trim();
+        return new SearchCommand(searchTerm, new SearchFlags());
     }
 
-    public Command parseSearchCommandWithFlag(String text) {
-        int flagPos = text.indexOf(FLAG);
-        try {
-            String str = text.substring(SEARCH_LENGTH, flagPos - 1).trim();
-            if (text.toLowerCase().contains(L_FLAG)) {
-                return new SearchCommand(str, true);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand();
-        }
-        return new InvalidCommand();
+    private Command parseSearchCommandWithFlag(String text) {
+        int firstFlagPos = text.indexOf(FLAG);
+        String searchTerm = text.substring(SEARCH_LENGTH, firstFlagPos - 1).trim();
+        String[] flags = text.substring(firstFlagPos).split(FLAG);
+        SearchFlags searchFlags = FlagParser.parseSearchFlags(flags);
+        return new SearchCommand(searchTerm, searchFlags);
     }
 
     public Command parseShowCommand(String text) {
