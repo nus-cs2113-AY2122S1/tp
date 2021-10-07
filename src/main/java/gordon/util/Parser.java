@@ -34,11 +34,21 @@ public class Parser {
                     System.out.print(r);
                 } else if (parseCommand(line).equalsIgnoreCase("delete")) {
                     nameRecipe = parseName(line);
-                    cookbook.removeRecipe(line);
+                    String inputIndex = line.contains(" ") ? line.substring(line.indexOf(" ") + 1) : " ";
+                    if (inputIndex.isEmpty() || inputIndex.equals(" ")) {
+                        throw new GordonException(GordonException.COMMAND_INVALID);
+                    }
+                    try {
+                        int index = Integer.parseInt(inputIndex);
+                        cookbook.removeRecipe(index - 1);
+                        System.out.println("OK! The recipe has been deleted from your cookbook.");
+                    } catch (NumberFormatException e) {
+                        throw new GordonException(GordonException.INDEX_INVALID);
+                    }
                 } else if (parseCommand(line).equalsIgnoreCase("check")) {
                     nameRecipe = parseName(line);
                 } else if (parseCommand(line).equalsIgnoreCase("list")) {
-                    cookbook.listRecipe();
+                    System.out.print(cookbook);
                 } else if (parseCommand(line).equalsIgnoreCase("exit")) {
                     System.out.println("Bye bye!");
                     break;
