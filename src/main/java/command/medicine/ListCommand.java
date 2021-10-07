@@ -67,7 +67,9 @@ public class ListCommand extends Command {
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.QUANTITY:
-                // Implement search by quantity
+                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
+                        .filter((m) -> m.getQuantity() == Integer.parseInt(parameterValue))
+                        .collect(Collectors.toList());
                 break;
             case CommandParameters.EXPIRY_DATE:
                 try {
@@ -85,7 +87,9 @@ public class ListCommand extends Command {
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.MAX_QUANTITY:
-                // Implement search by max quantity
+                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
+                        .filter((m) -> ((Stock) m).getMaxQuantity() == Integer.parseInt(parameterValue))
+                        .collect(Collectors.toList());
                 break;
             case CommandParameters.SORT:
                 filteredMedicines.sort(new StockComparator(parameterValue.toUpperCase(), false));
