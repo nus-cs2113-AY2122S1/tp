@@ -1,7 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.data.BudgetList;
-
 //add EXPENDITURE_NAME COST DATE_TIME_OF_EXPENDITURE
 
 public class AddBudgetCommand extends Command {
@@ -31,6 +29,5 @@ public class AddBudgetCommand extends Command {
     }
 
     public void execute() {
-
     }
 }
