@@ -3,7 +3,6 @@ package seedu.command;
 import seedu.ui.TextUi;
 
 public class ListContactsCommand extends Command {
-    @Override
     public void execute() {
         int listSize = contactList.getListSize();
         if (listSize == 0) {
