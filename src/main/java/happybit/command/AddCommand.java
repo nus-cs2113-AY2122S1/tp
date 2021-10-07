@@ -32,7 +32,7 @@ public class AddCommand {
     }
 
     /**
-     * Returns list of all current habits
+     * Returns list of all current habits.
      *
      * @return List of all current habits
      */
