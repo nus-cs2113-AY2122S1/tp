@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 /**
- * Helps to process the list command and validate the user's input.
+ * Helps to process the list command together with filters and sort.
  */
 
 public class ListCommand extends Command {
@@ -98,6 +98,6 @@ public class ListCommand extends Command {
                 return;
             }
         }
-        ui.printMedicines(filteredMedicines);
+        ui.printStocks(filteredMedicines);
     }
 }

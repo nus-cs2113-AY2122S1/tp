@@ -71,7 +71,7 @@ public class AddCommand extends Command {
                             existingMaxQuantity);
                     medicines.add(stockToAdd);
                     ui.print("Medication added: " + nameToAdd);
-                    ui.printMedicine(stockToAdd);
+                    ui.printStock(stockToAdd);
                     return;
                 }
                 if (isValidQuantity) {
@@ -82,7 +82,7 @@ public class AddCommand extends Command {
             Stock stock = new Stock(nameToAdd, price, quantity, formatExpiry, descriptionToAdd, maxQuantity);
             medicines.add(stock);
             ui.print("Medication added: " + nameToAdd);
-            ui.printMedicine(stock);
+            ui.printStock(stock);
         } catch (ParseException e) {
             e.printStackTrace();
         }

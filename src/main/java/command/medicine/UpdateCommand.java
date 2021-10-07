@@ -52,7 +52,7 @@ public class UpdateCommand extends Command {
 
         setUpdatesByStockID(parameters, medicines, stock);
         ui.print("Updated");
-        ui.printMedicine(stock);
+        ui.printStock(stock);
     }
 
     private boolean processDateInput(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines,
