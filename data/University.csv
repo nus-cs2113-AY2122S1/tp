@@ -1,4 +1,3 @@
-Partner University,NUS Module 1,NUS Module 1 Title,NUS Mod1 Credits,PU Module 1,PU Module 1 Title,PU Mod1 Credits
 Aalto University,CS4222,Wireless Networking,4,ELEC-E7120,Wireless Systems,5
 Aalto University,CS2107,Introduction to Information Security,4,C3130,Information Security,5
 Aalto University,CS2107,Introduction to Information Security,4,CS-C3130,Information Security,5
@@ -13,7 +12,7 @@ Aalto University,EX1030,Exchange UEM,1,KIE98.7011,Finnish 1A,2
 Aalto University,EX4881,Exchange UEM 2,3,MAT1.3601,Introduction to stochastics P,5
 "Aalto University, Helsinki",FIN3702,Inv. Analysis & Portfolio Mgt,4,28C00300,INVESTMENT MANAGEMENT,6
 "Aalto University, Helsinki",BSE3701,Macroeconomic Principles in th,2,31E23000,Macroeconomics: Policy,6
-"Aalto University, Helsinki",DOS3703,Service Operations Management,4,35E00100,Service Operations and Strategy,1
+"Aalto University, Helsinki",DOS3703,Service Operations Management,4,3.50E+101,Service Operations and Strategy,1
 "Aalto University, Helsinki",MNO3761Z,Topics in L&HCM,4,21E06050,RESPONSIBILITY MANAGEMENT,6
 "Aalto University, Helsinki",MKT1705,Principles of Marketing,4,23A00210,INTRODUCTION TO MARKETING,6
 "Aalto University, Helsinki",BSP3701,Strategic Management,4,21E01050,Management and Strategy Making,6
@@ -34,14 +33,14 @@ Aalto University,EX4881,Exchange UEM 2,3,MAT1.3601,Introduction to stochastics P
 "Aalto University, Helsinki",MKT3722,Research for Marketing Insight,4,23C60000,MARKET RESEARCH,6
 "Aalto University, Helsinki",ACC2706,Managerial Accounting,4,22E26000,Cost Accounting and Financial Planning,6
 "Aalto University, Helsinki",DOS3714,Sustainable Operations Mgt,4,35E03000,Sustainable Supply Chains,6
-"Aalto University, Helsinki",DOS3811,Technology and Business Innova,4,21E00032,Innovation Processes in Transition,6
+"Aalto University, Helsinki",DOS3811,Technology and Business Innova,4,2.10E+33,Innovation Processes in Transition,6
 "Aalto University, Helsinki",MKT3702,Consumer Behaviour,4,23C59000,Consumer Research,6
 "Aalto University, Mikkeli",MNO3761Y,Topics in L&HCM,4,MLI26C664,INTERCULTURAL MANAGEMENT,6
 "Aalto University, Mikkeli",MNO3761Z,Topics in L&HCM,4,MLI26C684,MANAGEMENT CULTURE AND COMMUNICATION,6
 "Aalto University, Mikkeli",MNO3702,Negotiation and Conflict Mgt,4,MLI26C679,INTERCULTURAL NEGOTIATIONS,6
 "Aalto University, Mikkeli",DOS3761X,Topics in Operations & SCM,4,MLI26C680,MANAGEMENT INFORMATION SYSTEMS IN INTERNATIONAL BUSINESS,6
 "Aalto University, Mikkeli",MNO3761Y,Topics in L&HCM,4,MLI26C683,DESIGN COMMUNICATION IN INTERNATIONAL BUSINESS,6
-"Aalto University, Mikkeli",DAO2703,Operations and Technology Mana,4,MLI21C617,OPERATIONS MANAGEMENT,6
+"Aalto University, Mikkeli",DAO2703,Operations and Technology Management,4,MLI21C617,OPERATIONS MANAGEMENT,6
 "Aalto University, Mikkeli",DOS3701,Supply Chain Management,4,MLI21C715,GLOBAL SUPPLY NETWORKS,6
 "Aalto University, Mikkeli",FIN3711,International Financial Mgt,4,MLI26C643,INTERNATIONAL FINANCE,6
 "Aalto University, Mikkeli",FIN3701,Corporate Finance,4,MLI28A010,MANAGERIAL FINANCE,6
@@ -63,15 +62,15 @@ Aarhus School of Business,BSN3761X,Topics in Innovation & Entrepr,4,460201U004,I
 Aarhus School of Business,FIN3761Y,Topics in Finance,4,460181U005,INVESTMENTS AND CORPORATE FINANCE,5
 Aarhus School of Business,MNO3761X,Topics in L&HCM,4,461152U061,INTERNATIONAL MANAGEMENT,10
 Aarhus School of Business,FIN3713,Bank Management,4,460152U046,BANK MANAGEMENT,5
-Aarhus School of Business,MKT1705X,Principles of Marketing,4,460141E032,MARKETING MANAGEMENT,10
-Aarhus School of Business,MKT1705,Principles of Marketing,4,460141E032,MARKETING MANAGEMENT,10
+Aarhus School of Business,MKT1705X,Principles of Marketing,4,4.60E+37,MARKETING MANAGEMENT,10
+Aarhus School of Business,MKT1705,Principles of Marketing,4,4.60E+37,MARKETING MANAGEMENT,10
 Aarhus School of Business,FIN2704X,Finance,4,460151U032,FINANCE,5
 Aarhus School of Business,FIN2704,Finance,4,460151U032,FINANCE,5
 Aarhus School of Business,MNO3761Z,Topics in L&HCM,4,460161U021,INTERCULTURAL COMMUNICATION,5
 Aarhus School of Business,MNO3761Y,Topics in L&HCM,4,460161U075,INTERNATIONAL LABOUR MARKETS,5
 Aarhus School of Business,MNO3761Y,Topics in L&HCM,4,460161U081  ,ORGANISATIONAL DESIGN,5
 Aarhus School of Business,MKT3761Z,Topics in Marketing,4,460181U002,CONSUMER NEUROSCIENCE/ NEUROMARKETING,5
-Aarhus School of Business,DAO2703,Operations and Technology Mana,4,460151U030,OPERATIONS MANAGEMENT,10
+Aarhus School of Business,DAO2703,Operations and Technology Management,4,460151U030,OPERATIONS MANAGEMENT,10
 Aarhus School of Business,FIN3702,Inv. Analysis & Portfolio Mgt,4,460181U008,INVESTMENTS,5
 Aarhus School of Business,DOS3761X,Topics in Operations & SCM,4,460142U016,MODELLING AND SOLVING DISCRETE OPTIMIZATION PROBLEMS WITHIN LOGISTICS,5
 Aarhus School of Business,MKT3812,Game Theory & Strat. Analysis,4,460122U070,GAME THEORY,5
@@ -206,7 +205,7 @@ Bilkent University,PS2255,Politics of the Middle East,4,IR354,Introduction to Mi
 Bilkent University,PS3744,Department Exchange Module,4,IR439,Turkish Foreign Policy,3
 Bilkent University,CS2102,Database Systems,4,CS281,Computers and Data Organization,3
 Bilkent University,IS3261,Mobile Apps Development for En,4,CTIS487,Mobile Application Development,3
-Bilkent University,CS2107,Introduction to Information Se,4,CTIS496,Computer and Network Security,3
+Bilkent University,CS2107,Introduction to Information Security,4,CTIS496,Computer and Network Security,3
 Bilkent University,CS2100,Computer Organisation,4,CS224,Computer Organization,3
 Bilkent University,CS3244,Machine Learning,4,CS550,Machine Learning,3
 Bilkent University,CS3244,Machine Learning,4,CTIS464,Introduction to Machine Learning,3
@@ -492,7 +491,7 @@ Chulalongkorn University,MNO3761Y,Topics in L&HCM,4,2602371,PRINCIPLES OF INTERN
 Chulalongkorn University,FIN3711,International Financial Mgt,4,2604477,INTERNATIONAL FINANCIAL MANAGEMENT,3
 Chulalongkorn University,FIN3714,Financial Risk Management,4,2603347,FUNDAMENTAL RISK MANAGEMENT,3
 Chulalongkorn University,MKT3702,Consumer Behaviour,4,2605314,CONSUMER BEHAVIOR,3
-Chulalongkorn University,DAO2703,Operations and Technology Mana,4,2602344,PRODUCTION/OPERATIONS MANAGEMENT,3
+Chulalongkorn University,DAO2703,Operations and Technology Management,4,2602344,PRODUCTION/OPERATIONS MANAGEMENT,3
 Chulalongkorn University,MNO3701,Human Capital Management,4,2602330,HUMAN RESOURCE MANAGEMENT,3
 Chulalongkorn University,FIN2704X,Finance,4,2604361,BUSINESS FINANCE,3
 Chulalongkorn University,AR5321,Advanced Architectural Integra,4,2541331,Environmental Technology & Integrative building systems Design 1,3
@@ -526,7 +525,7 @@ City University of Hong Kong,FIN3711,International Financial Mgt,4,EF4331,INTERN
 City University of Hong Kong,ACC1701X,Accounting for Decision Makers,4,AC3202,CORPORATE ACCOUNTING,3
 City University of Hong Kong,FIN3703,Financial Markets,4,EF3333,"FINANCIAL SYSTEMS, MARKETS AND INSTRUMENTS",3
 City University of Hong Kong,MKT1705,Principles of Marketing,4,FB2601,MARKETING,2
-City University of Hong Kong,DAO2703,Operations and Technology Mana,4,CB2201,OPERATIONS MANAGEMENT,3
+City University of Hong Kong,DAO2703,Operations and Technology Management,4,CB2201,OPERATIONS MANAGEMENT,3
 City University of Hong Kong,DOS3703,Service Operations Management,4,MS3302,MANAGEMENT OF SERVICE OPERATIONS,3
 City University of Hong Kong,MKT1705X,Principles of Marketing,4,MKT2681,INTRODUCTION TO MARKETING,3
 City University of Hong Kong,MKT1705X,Principles of Marketing,4,FB2601,MARKETING,2
@@ -543,7 +542,7 @@ City University of Hong Kong,CS1010E,Programming Methodology,4,CS2310,Computer P
 City University of Hong Kong,CS2102,Database Systems,4,CS3402,Database Systems,3
 City University of Hong Kong,BT4212,Search Engine Optimization & A,4,IS4340,Search Engine Optimization,3
 City University of Hong Kong,BT3102,Computational Methods for Busi,4,MA3513,Elementary Numerical Methods,3
-City University of Hong Kong,CS2107,Introduction to Information Se,4,CS4286,Internet Security and E-Commerce Protocols,3
+City University of Hong Kong,CS2107,Introduction to Information Security,4,CS4286,Internet Security and E-Commerce Protocols,3
 City University of Hong Kong,BT4016,Risk Analytics for Financial S,4,MS4226,Risk Management Models,3
 City University of Hong Kong,IS4243,Information Systems Consulting,4,IS4650,Global Business Technology Consulting,3
 City University of Hong Kong,IS4228,Information Technologies in Fi,4,IS4835,Information Technology for Financial Services,3
@@ -675,7 +674,7 @@ City University of Hong Kong,CM3991,Exchange Enrichment Module,4,BCH3083,Cosmeti
 "City, University of London",FIN3711,International Financial Mgt,4,BS3200,INTERNATIONAL FINANCIAL MANAGEMENT,7.5
 "City, University of London",DOS3701,Supply Chain Management,4,BS3211,SUPPLY CHAIN & LOGISTICS MANAGEMENT,7.5
 "City, University of London",MKT3702,Consumer Behaviour,4,BS3108,CONSUMER BEHAVIOUR,7.5
-"City, University of London",DAO2703,Operations and Technology Mana,4,MS2103,OPERATIONS MANAGEMENT,7.5
+"City, University of London",DAO2703,Operations and Technology Management,4,MS2103,OPERATIONS MANAGEMENT,7.5
 "City, University of London",MKT3722,Research for Marketing Insight,4,BS3103,MARKET RESEARCH,7.5
 "City, University of London",MNO3761X,Topics in L&HCM,4,BS3214,CORPORATE SOCIAL RESPONSIBILITY,7.5
 "City, University of London",FIN2704X,Finance,4,BS2100,PRINCIPLES OF FINANCE,7.5
@@ -717,9 +716,9 @@ Colgate University,LSM1991,Exchange Enrichment Module,4,NEUR 170A,Intro to Brain
 Colgate University,LSM3991,Exchange Enrichment Module,4,PSYC 275A,Biological Psychology,1
 Colgate University,LSM1105,,4,BIOL 181,"Evolution, Ecology, Diversity",1.25
 Colgate University,LSM3267,Behavioural Biology,4,BIOL 341A,Animal Behavior,1
-Columbia University,CS3243,Introduction to Artificial Int,,COMSS4701D,Artifcial Intelligence,3
-Columbia University,CS3244,Machine Learning,,COMSS4771Q,Machine Learning,3
-Columbia University,CS3230,Design & Analysis of Algorithm,,CSORS4231D,Analysis of Algorithms,3
+Columbia University,CS3243,Introduction to Artificial Int,4,COMSS4701D,Artifcial Intelligence,3
+Columbia University,CS3244,Machine Learning,4,COMSS4771Q,Machine Learning,3
+Columbia University,CS3230,Design & Analysis of Algorithm,4,CSORS4231D,Analysis of Algorithms,3
 Concordia University,LAF1201,French 1,4,FRAN211,French Language: Elementary,1
 Concordia University,FIN3720,Financial Statement Analysis,4,ACCO355,ANALYSIS OF FINANCIAL STATEMENTS,3
 Concordia University,MKT3722,Research for Marketing Insight,4,MARK302,MARKETING RESEARCH,3
@@ -747,7 +746,7 @@ Concordia University,IS3221,ERP Systems with Analytics Sol,4,BTM430,Enterprise R
 Concordia University,CS3243,Introduction to Artificial Int,4,COMP472,ARTIFICIAL INTELLIGENCE,3
 Concordia University,CS3240,Interaction Design,4,SOEN357,User Interface Design,3
 Concordia University,IS3106,Enterprise Systems Interface D,4,SOEN387,Web-Based Enterprise Application Design,3
-Concordia University,CS2107,Introduction to Information Se,4,SOEN321,Information Systems Security,3
+Concordia University,CS2107,Introduction to Information Security,4,SOEN321,Information Systems Security,3
 Concordia University,IS1103,Ethics in Computing,4,ECNS393,Social and Ethical Dimensions of Information and Communication Technologies,3
 Concordia University,CS4232,,4,COMP335,Introduction to Theoretical Computer Science,3
 Concordia University,CS3226,Web Programming and Applicatio,4,SOEN287,Web Programming,3
@@ -793,7 +792,7 @@ Copenhagen Business School,FIN3761X,Topics in Finance,4,BINBO1601U,Risk Manageme
 Copenhagen Business School,FIN3702,Inv. Analysis & Portfolio Mgt,4,BHAAI1066U,Principles of Investment Finance,7.5
 Copenhagen Business School,MKT1705X,Principles of Marketing,4,BHAAI1015U,Introduction to Marketing,7.5
 Copenhagen Business School,MKT1705,Principles of Marketing,4,BHAAI1015U,Introduction to Marketing,7.5
-Copenhagen Business School,DAO2703,Operations and Technology Mana,4,BHAAV5005U,Operations Management - Driving Competitiveness Through Operational Effectiveness,7.5
+Copenhagen Business School,DAO2703,Operations and Technology Management,4,BHAAV5005U,Operations Management - Driving Competitiveness Through Operational Effectiveness,7.5
 Copenhagen Business School,MNO3761Z,Topics in L&HCM,4,BPROV1004U,Agility and Resilience in Projects,7.5
 Copenhagen Business School,FIN3761X,Topics in Finance,4,BINBO1427U,Corporate Governance,7.5
 Copenhagen Business School,MNO3761Z,Topics in L&HCM,4,BHAAV5009U,Strategic Management of Innovation and Technology,7.5
@@ -828,16 +827,16 @@ Cornell Univ Coll of Agriculture & Life Sciences,LSM3994,Exchange Enrichment Lev
 Cornell Univ Coll of Agriculture & Life Sciences,LSM2251,Ecology and Environment,4,BIOEE 1610,Introductory Biology: Ecology and The Environment,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3252,Evolutn & Comparative Genomics,4,BIOEE 1780,An Introduction to Evolutionary Biology and Diversity,4
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3991,Exchange Enrichment Module,4,BIOEE 3610,Advanced Ecology,4
-Cornell Univ Coll of Agriculture & Life Sciences,LSM4255,Methods in Mathematical Biolog,,BIOEE 3610,Advanced Ecology,4
+Cornell Univ Coll of Agriculture & Life Sciences,LSM4255,Methods in Mathematical Biolog,4,BIOEE 3610,Advanced Ecology,4
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3991,Exchange Enrichment Module,4,BIOEE 3611,Field Ecology,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3991,Exchange Enrichment Module,4,BIOEE 3690,Chemical Ecology,3
-Cornell Univ Coll of Agriculture & Life Sciences,LSM3272,Global Change Biology,,BIOEE 4780,Ecosystem Biology and Global Change,4
+Cornell Univ Coll of Agriculture & Life Sciences,LSM3272,Global Change Biology,4,BIOEE 4780,Ecosystem Biology and Global Change,4
 Cornell Univ Coll of Agriculture & Life Sciences,LSM4267,Light & Vision in Animal Commu,4,BIOEE3690,Chemical Ecology,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3245,RNA Biology and Technology,4,BIOMG 4380,The RNA World,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3233,Developmental Biology,4,BIOMG 4610,Development and Evolution,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3252,Evolutn & Comparative Genomics,4,BIOMG 4810,Population Genetics,4
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3991,Exchange Enrichment Module,4,BIOMS 3310,General Parasitology,2
-Cornell Univ Coll of Agriculture & Life Sciences,LSM3211,Fundamental Pharmacology,,BIOMS 4140,Principles of Pharmacology,3
+Cornell Univ Coll of Agriculture & Life Sciences,LSM3211,Fundamental Pharmacology,4,BIOMS 4140,Principles of Pharmacology,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3225,Molecular Microbiology in HD,4,BIOMS 4340,Cellular and Molecular Microbial Pathogenesis: The Host/Pathogen Interplay,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3267,Behavioural Biology,4,BIONB 2210,Neurobiology and Behavior I: Introduction to Behavior,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3991,Exchange Enrichment Module,4,ENTOM 2010,Alien Empire: Bizarre Biology of Bugs,2
@@ -845,7 +844,7 @@ Cornell Univ Coll of Agriculture & Life Sciences,LSM3265,Entomology,4,ENTOM 2011
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3265,Entomology,4,ENTOM 2120,Insect Biology,4
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3991,Exchange Enrichment Module,4,ENTOM 4900,Toxicology of Insecticides,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM2212,Human Anatomy,4,NS 3410,Human Anatomy and Physiology,4
-Cornell Univ Coll of Agriculture & Life Sciences,LSM3272,Global Change Biology,,NTRES 2010,Environmental Conservation,3
+Cornell Univ Coll of Agriculture & Life Sciences,LSM3272,Global Change Biology,4,NTRES 2010,Environmental Conservation,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3991,Exchange Enrichment Module,4,NTRES 2100,Introductory Field Biology,4
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3991,Exchange Enrichment Module,4,NTRES 3100,Applied Population Ecology,3
 Cornell Univ Coll of Agriculture & Life Sciences,LSM3991,Exchange Enrichment Module,4,NTRES 3220,Global Ecology and Management,3
@@ -947,7 +946,7 @@ Delft University of Technology,CS3231,Theory of Computation,4,TI2316,"Automata, 
 Delft University of Technology,CS2102,Database Systems,4,TI2506,Information and Data Modelling,5
 Delft University of Technology,CS3210,Parallel Computing,4,TW3740TU,Parallel Computing,5
 Delft University of Technology,CS3218,Multimodal Processing in Mobil,4,IN4254,Smart Phone Sensing,5
-Delft University of Technology,CS2107,Introduction to Information Se,4,ET4397IN,Network Security,5
+Delft University of Technology,CS2107,Introduction to Information Security,4,ET4397IN,Network Security,5
 Delft University of Technology,CS4234,Optimisation Algorithms,4,TW2020,Optimization,5
 Delft University of Technology,CS3244,Machine Learning,4,CS4230,Machine Learning 2,5
 Delft University of Technology,CS3231,Theory of Computation,4,CSE2315,"Automata, Computability and Complexity",5
@@ -1042,7 +1041,7 @@ Ecole Polytechnique Federale de Lausanne,CS4231,Parallel & Distr Algorithms,4,CS
 Ecole Polytechnique Federale de Lausanne,CS3240,Interaction Design,4,CS486,Human computer interaction,4
 Ecole Polytechnique Federale de Lausanne,CS3223,Database Systems Implementatio,4,CS422,Database systems,6
 Ecole Polytechnique Federale de Lausanne,CS2108,Introduction to Media Computin,4,EE550,Image and video processing,6
-Ecole Polytechnique Federale de Lausanne,CS2107,Introduction to Information Se,4,CS301,Computer security,6
+Ecole Polytechnique Federale de Lausanne,CS2107,Introduction to Information Security,4,CS301,Computer security,6
 Ecole Polytechnique Federale de Lausanne,BT1101,Introduction to Business Analy,4,MATH493,Applied biostatistics,5
 Ecole Polytechnique Federale de Lausanne,CS3230,Design & Analysis of Algorithm,4,CS450,Advanced algorithms,6
 Ecole Polytechnique Federale de Lausanne,IS4242,Intelligent Systems and Techni,4,CS421,Machine learning for behavioral data,5
@@ -1087,14 +1086,14 @@ Ecole Polytechnique Federale de Lausanne,LSM3994,Exchange Enrichment Level 3000,
 "Ecole Speciale D'Architecture, Paris",UD5628,Critique of Contemporary Urban Design,4,SDE-ARC-ZXY2001,Architectural Limits,3.5
 "Ecole Speciale D'Architecture, Paris",UD5628,Critique of Contemporary Urban Design,4,SDE-ARC-ZXY1006,Modernism,3.5
 Eindhoven University of Technology,CS3244,Machine Learning,4,CS2IIG0,Data mining and Machine Learning,5
-Eindhoven University of Technology,CS2107,Introduction to Information Se,4,2AC10,Information security basics,5
+Eindhoven University of Technology,CS2107,Introduction to Information Security,4,2AC10,Information security basics,5
 Eindhoven University of Technology,CS3244,Machine Learning,4,5XSL0,Fundamentals of machine learning,5
 Eindhoven University of Technology,CS5242,Neural Networks &Deep Learning,4,CS2IMM10/CSE2AMM10,Deep Learning,5
 Eindhoven University of Technology,CS5339,Theory and Algorithms for Mach,4,CSE2DI70,Statistical learning theory,5
 Eindhoven University of Technology,CS2106,Intro to Operating Systems,4,CS2INC0,Operating Systems,5
 Eindhoven University of Technology,CS3230,Design & Analysis of Algorithm,4,CS2ILC0,Algorithms,5
 Eindhoven University of Technology,CS2103,Software Engineering,4,2IS50,Software Development for Engineers,5
-Eindhoven University of Technology,CS2107,Introduction to Information Se,4,2IC80,Lab on offensive computer security,5
+Eindhoven University of Technology,CS2107,Introduction to Information Security,4,2IC80,Lab on offensive computer security,5
 Eindhoven University of Technology,CS2100,Computer Organisation,4,5SIBO,Electronic Design Automation,5
 Eindhoven University of Technology,CS3226,Web Programming and Applicatio,4,2II36,Web-based Interactive Systems,5
 Eindhoven University of Technology,BT1101,Introduction to Business Analy,4,ZXXJBM030,Business analytics 1,5
@@ -1167,8 +1166,8 @@ Erasmus University,PS3243,Public Sector Orgnl Behaviour,4,FSWSB1060,Organisation
 Erasmus University,PS4210,Public Policy Analysis,5,FSWSB1050,Public Policy,5
 Erasmus University,PS3261,,4,FSWSB1070,"Economics, Welfare and Distribution",4
 Erasmus University,PS3257,Political Inquiry,4,FSWSB2010,Political Science,6
-Esc. Sup. De Admin. Y Dir. De Empresas,BSP3701,Strategic Management,4,009417,STRATEGIC MANAGEMENT,5
-Esc. Sup. De Admin. Y Dir. De Empresas,BSP3701,Strategic Management,4,007875,BUSINESS ENVIRONMENT AND PUBLIC POLICY,5
+Esc. Sup. De Admin. Y Dir. De Empresas,BSP3701,Strategic Management,4,9417,STRATEGIC MANAGEMENT,5
+Esc. Sup. De Admin. Y Dir. De Empresas,BSP3701,Strategic Management,4,7875,BUSINESS ENVIRONMENT AND PUBLIC POLICY,5
 ESSEC Business School,MKT3761Z,Topics in Marketing,4,MKGF14125,LUXURY MARKETING,4
 ESSEC Business School,FIN3701,Corporate Finance,4,FINE14136,LONG-TERM FINANCIAL POLICY: DEBT VS. EQUITY,4
 ETH Zurich,LAG1201,German 1,4,FASS-CLS-ZXY1006,"German for Beginners: Intensive Course for Exchange or Master Students, A1.1",1
@@ -1260,7 +1259,7 @@ ETH Zurich,LSM3991,Exchange Enrichment Module,4,551-0351-0,Membrane Biology,6
 ETH Zurich,LSM3245,RNA Biology and Technology,4,551-1309-00L,RNA-Biology,6
 European Business School,FIN2704,Finance,4,M-FAC1-001,FINANCE AND ACCOUNTING 1,6
 European Business School,FIN2704X,Finance,4,M-FAC1-001,FINANCE AND ACCOUNTING 1,6
-European Business School,DAO2703,Operations and Technology Mana,4,M-SCM2-014,OPERATIONS & INFORMATION SYSTEMS,6
+European Business School,DAO2703,Operations and Technology Management,4,M-SCM2-014,OPERATIONS & INFORMATION SYSTEMS,6
 European Business School,DOS3701,Supply Chain Management,4,M-SCM3-002,SUPPLY CHAIN MANAGEMENT,6
 European Business School,BSN3702,New Venture Creation,4,M-ESH2,ENTREPRENEURSHIP AND INNOVATION,6
 European Business School,FIN3711,International Financial Mgt,4,M-FIN3-019,INTERNATIONAL FINANCIAL MANAGEMENT,6
@@ -1308,8 +1307,8 @@ Fudan University,PS2237,Intro to International Relatns,4,POL120002.01,Introducti
 Fudan University,PS2248,Chinese Politics,4,POLI170006,Political Culture and Public Opinion in Contemporary China,2
 Fudan University,FIN3713,Bank Management,4,MANA130334,COMMERCIAL BANK MANAGEMENT,3
 Fudan University,BSP1703,Managerial Economics,4,ECON120002,MICROECONOMICS,3
-Fudan University,DAO2703,Operations and Technology Mana,4,MANA110028,OPERATIONS MANAGEMENT,3
-Fudan University,DAO2703,Operations and Technology Mana,4,MANA130008,OPERATIONS MANAGEMENT,3
+Fudan University,DAO2703,Operations and Technology Management,4,MANA110028,OPERATIONS MANAGEMENT,3
+Fudan University,DAO2703,Operations and Technology Management,4,MANA130008,OPERATIONS MANAGEMENT,3
 Fudan University,MKT3812,Game Theory & Strat. Analysis,4,MANA130343,GAME THEORY,3
 Fudan University,MKT3701,Marketing Strategy: Analysis a,4,MANA130006,MARKETING MANAGEMENT,3
 Fudan University,MKT3812,Game Theory & Strat. Analysis,4,MANA130011,GAMES OF STRATEGY,3
@@ -1343,7 +1342,7 @@ Georg-August-University,PC4230,Quantum Mechanics III,4,B. PHY.5805,Quantum Field
 Georg-August-University,PC4991,Exchange Enrichment Module,4,B.PHY.5721,Information and Physics,6
 Georgetown University Law Center,PS4711,Department exchange module,5,GSI15108,International Institutions (in English) - Single view,10
 "Georgetown University, Washington D.C.",BT4222,Mining Web Data for Business I,4,COSC 586,Text Mining and Analysis,3
-"Georgetown University, Washington D.C.",CS2107,Introduction to Information Se,4,COSC430,Information Assurance,3
+"Georgetown University, Washington D.C.",CS2107,Introduction to Information Security,4,COSC430,Information Assurance,3
 "Georgetown University, Washington D.C.",IS4250,IT-enabled Healthcare Solution,4,COSC592,Health Search and Mining,3
 "Georgetown University, Washington D.C.",BT3102,Computational Methods for Busi,4,MATH504,Numerical Methods,3
 "Georgetown University, Washington D.C.",BT4212,Search Engine Optimization & A,4,COSC488,Information Retrieval,3
@@ -1358,7 +1357,7 @@ Georgetown University Law Center,PS4711,Department exchange module,5,GSI15108,In
 "Georgetown University, Washington D.C.",BT4013,Analytics for Capital Market T,4,FINC211,Business Financial Management,3
 "Georgetown University, Washington D.C.",BT4211,Data-Driven Marketing,4,HESY271,Strategic Planning & Marketing,3
 "Georgetown University, Washington D.C.",IS3150,Digital Media Marketing,4,MARK235,Social & Digital Media Marketing,3
-"Georgetown University, Washington D.C.",CS2040,Data Structures and Algorithms,,COSC160,Data Structures,3
+"Georgetown University, Washington D.C.",CS2040,Data Structures and Algorithms,4,COSC160,Data Structures,3
 "Georgetown University, Washington D.C.",IS3261,Mobile Apps Development for En,4,COSC253,Handheld Device Programming,3
 "Georgetown University, Washington D.C.",BT4221,Big Data Techniques & Technolo,4,COSC 282,Big Data Analytics,3
 "Georgetown University, Washington D.C.",MA1101R,,4,MATH150,Linear Algebra,4
@@ -1374,7 +1373,7 @@ Georgia Institute of Technology,CS3240,Interaction Design,4,CS6750,Human-Compute
 Georgia Institute of Technology,IS2102,Enterprise Systems Architectur,4,CS6365,Introduction to Enterprise Computing,3
 Georgia Institute of Technology,CS4231,Parallel & Distr Algorithms,4,CS7210,Distributed Computing,3
 Georgia Institute of Technology,CS4222,Wireless Networking,4,ECE6610,Wireless Networks,3
-Georgia Institute of Technology,CS2107,Introduction to Information Se,4,ECE4415,Introduction to Computer Security,3
+Georgia Institute of Technology,CS2107,Introduction to Information Security,4,ECE4415,Introduction to Computer Security,3
 Georgia Institute of Technology,CS2102,Database Systems,4,MGT4058,Database Management,3
 Georgia Institute of Technology,IS3103,Information Systems Leadership,4,MGT3103,Leadership in Changing Business Environments,3
 Georgia Institute of Technology,BT4222,Mining Web Data for Business I,4,CSE6240,Web Search & Text Mining,3
@@ -1416,7 +1415,7 @@ Georgia Institute of Technology,CS3221,Operatg Sys Desgn & Pragmatics,4,CS3210,O
 Georgia Institute of Technology,CS4212,Compiler Design,4,CS4240,Compilers and Interpreters,3
 Georgia Institute of Technology,IS1103,Ethics in Computing,4,CS4001,Computing and Society,3
 Georgia Institute of Technology,CS3241,Computer Graphics,4,CS3451,Computer Graphics,3
-Georgia Institute of Technology,CS2107,Introduction to Information Se,4,CS4235,Intro to Info Security,3
+Georgia Institute of Technology,CS2107,Introduction to Information Security,4,CS4235,Intro to Info Security,3
 Georgia Institute of Technology,CS2102,Database Systems,4,CS4400,Intro to Database Systems,3
 Georgia Institute of Technology,CS3243,Introduction to Artificial Int,4,CS3600,Introduction to Artificial Intelligence,3
 Georgia Institute of Technology,CS3240,Interaction Design,4,CS3750,User Interface Design,3
@@ -1613,10 +1612,10 @@ Heidelberg University (Rupr-Karls-Uni Heidelberg),LSM3214,Human Physio-Hormones 
 Heidelberg University (Rupr-Karls-Uni Heidelberg),LSM3233,Developmental Biology,4,LSF#89666,Recent Publications in Developmental Neurobiology,4
 Heidelberg University (Rupr-Karls-Uni Heidelberg),LSM3232,Microbiology,4,LSF#92231,Molecular Microbiology,4
 Helmut Schmidt University,GL4889A,International Law's Regulation,5,IR3031,Globalisation and the War on Terrorism,30
-Hokkaido University,LSM2991,Exchange Enrichment Level 2000,4,027071,Phylogenetics,2
+Hokkaido University,LSM2991,Exchange Enrichment Level 2000,4,27071,Phylogenetics,2
 Hong Kong University of Science & Technology,LAC1731,Department exchange module,3,LANG1120,Chinese for Non-Chinese Language Background Students I,1
 Hong Kong University of Science & Technology,DOS3701,Supply Chain Management,4,ISOM4770,SUPPLY CHAIN MANAGEMENT,3
-Hong Kong University of Science & Technology,DAO2703,Operations and Technology Mana,4,ISOM2700,OPERATIONS MANAGEMENT,3
+Hong Kong University of Science & Technology,DAO2703,Operations and Technology Management,4,ISOM2700,OPERATIONS MANAGEMENT,3
 Hong Kong University of Science & Technology,MKT3722,Research for Marketing Insight,4,MARK3220,MARKETING RESEARCH,4
 Hong Kong University of Science & Technology,MKT3711,Services Marketing,4,MARK3470,SERVICES MARKETING,4
 Hong Kong University of Science & Technology,MNO1706,Organisational Behavior,4,MGMT1110,INTRODUCTION TO MANAGEMENT,3
@@ -1642,7 +1641,7 @@ Hong Kong University of Science & Technology,CS3219,Software Engineering Princip
 Hong Kong University of Science & Technology,CS3210,Parallel Computing,4,COMP5112,Parallel Programming,3
 Hong Kong University of Science & Technology,CS3223,Database Systems Implementatio,4,COMP5311,Database Architecture and Implementation,3
 Hong Kong University of Science & Technology,CS4234,Optimisation Algorithms,4,comp5712,Introduction to Combinatorial Optimization,3
-Hong Kong University of Science & Technology,CS2107,Introduction to Information Se,4,COMP3632,Principles of Cybersecurity,3
+Hong Kong University of Science & Technology,CS2107,Introduction to Information Security,4,COMP3632,Principles of Cybersecurity,3
 Hong Kong University of Science & Technology,CS2103,Software Engineering,4,COMP3111,Software Engineering,4
 Hong Kong University of Science & Technology,IS4228,Information Technologies in Fi,4,ISOM4840,Financial Service Operations Management,3
 Hong Kong University of Science & Technology,CS4880,Digital Entrepreneurship,4,COMP4911,IT Entrepreneurship,3
@@ -1805,7 +1804,7 @@ Institut d'Etudes Politiques de Grenoble,PS3271,Public Policy-Making,4,IEPG002,P
 Institut d'Etudes Politiques de Grenoble,GL2103,Global Governance,4,IEPG001,Between fiction and politics: (Mis) Representations of the United Nations,5
 Institut d'Etudes Politiques de Grenoble,PS2234,Intro to Comparative Politics,4,ZXXCF3S2-5,Comparative Politics,5
 Institut d'Etudes Politiques de Grenoble,PS2236,European Politics,4,FEISS1-5,"France: State, Institutions and Society",5
-Interdisciplinary Center Herzliya (IDC),CS4240,Interaction Design for Virtual,4,3153201315301,Virtual Reality Development(Elective),3
+Interdisciplinary Center Herzliya (IDC),CS4240,Interaction Design for Virtual,4,3.15E+12,Virtual Reality Development(Elective),3
 Interdisciplinary Center Herzliya (IDC),CS4232,,4,201064303,Automata and Formal Languages,4
 Interdisciplinary Center Herzliya (IDC),CS3244,Machine Learning,4,CS3141,Machine Learning from Data (Lecture),4
 Interdisciplinary Center Herzliya (IDC),IS1103,Ethics in Computing,4,IS10342,Technology and Law (Lecture),2
@@ -1855,8 +1854,8 @@ Iowa State University,IE4240,Project Management,4,IE570,Systems Engineering and 
 "Jagiellonian University, Poland",LSM3255,Ecology of Terrestrial Env,4,WBNZ 849,Tropical Ecology,4
 "Jagiellonian University, Poland",LSM3267,Behavioural Biology,4,WB.INS6,Behavioural Ecology,6
 "Jagiellonian University, Poland",LSM3265,Entomology,4,WBNZ1866,Ecophysiology of Insects,4
-Johns Hopkins University,CS2030,Programming Methodology II,,EN.601.220,Intermediate Programming,4
-Johns Hopkins University,CS1231,Discrete Structures,,EN.553.171,Discrete Mathematics,4
+Johns Hopkins University,CS2030,Programming Methodology II,4,EN.601.220,Intermediate Programming,4
+Johns Hopkins University,CS1231,Discrete Structures,4,EN.553.171,Discrete Mathematics,4
 Johns Hopkins University,IE4994,Exchange Elective,4,EN EN.660.341,Business Process and Quality Management,3
 Johns Hopkins University,ME3661,Technical Elective,4,EN530.417,FABRICATOLOGY ??? ADVANCED MATERIALS PROCESSING,3
 Johns Hopkins University,ME3661,Technical Elective,4,EN530.421,Mechatronics,3
@@ -1902,7 +1901,7 @@ King's College London,PS3749,Department exchange module,4,4AANB006,Political Phi
 King's College London,PS3701,Political Science Exchange Mod,4,4SSWF001,CAUSES OF WAR,4
 King's College London,PS3702,Political Science Exchange Mod,4,4SSWF003,Experience Of War,4
 King's College London,LAF1201,French 1,4,4AALFR11,French 1 – One-Term,1
-King's College London,CS2107,Introduction to Information Se,4,6CCS3NSE,Network Security,15
+King's College London,CS2107,Introduction to Information Security,4,6CCS3NSE,Network Security,15
 King's College London,CS3244,Machine Learning,4,6CC13ML1,Machine Learning,15
 King's College London,CS2104,Programming Language Concepts,4,5CCS2PLD,Programming Language Design Paradigms,15
 King's College London,CS2106,Intro to Operating Systems,4,5CCS2OSC,Operating Systems and Concurrency,15
@@ -1984,9 +1983,9 @@ King's College London,LSM3991,Exchange Enrichment Module,4,4BBY1030,Cell Biology
 King's College London,ST2132,Mathematical Statistics,4,5CCM241A,Probability And Statistics II,15
 Korea Advanced Inst of Sci & Tech,LAK1201,Korean 1,4,HSS006,Basic Korean 1 for foreign students,1
 Korea Advanced Inst of Sci & Tech,LAK1201,Korean 1,4,HSS180,Basic Korean and Korean Culture,1
-Korea Advanced Inst of Sci & Tech,CS2104,Programming Language Concepts,,CS320,Programming Language,3
+Korea Advanced Inst of Sci & Tech,CS2104,Programming Language Concepts,4,CS320,Programming Language,3
 Korea Advanced Inst of Sci & Tech,CS2040,Data Structures and Algorithms,4,CS206,Data Structure,3
-Korea Advanced Inst of Sci & Tech,CS2107,Introduction to Information Se,4,CS448,Introduction to Information Security,3
+Korea Advanced Inst of Sci & Tech,CS2107,Introduction to Information Security,4,CS448,Introduction to Information Security,3
 Korea Advanced Inst of Sci & Tech,CS3226,Web Programming and Applicatio,4,CS457,Web-based Software Development,3
 Korea Advanced Inst of Sci & Tech,CS3230,Design & Analysis of Algorithm,4,CS500,Design and Analysis of Algorithm,3
 Korea Advanced Inst of Sci & Tech,IS3251,Principles of Technology Entre,4,COE207,Introduction to Entrepreneurship and Startup companies,3
@@ -2035,7 +2034,7 @@ Korea University,PS3744,Department Exchange Module,4,DISS428,ENERGY AND INTERNAT
 Korea University,GL4751,Department exchange module,5,DISS433,Special Topics in East Asian Studies I,3
 Korea University,GL3745,Department exchange module,4,DISS478,Special Topics in International Development I,3
 Korea University,GL3841,Department exchange module,4,JMCO349,POLITICAL COMMUNICATION,3
-Korea University,Gl4752,,5,JMCO436,Mass Media and Popular Culture in Korea,3
+Korea University,GL4752,Department exchange module,5,JMCO436,Mass Media and Popular Culture in Korea,3
 Korea University,PS3743,Department Exchange Module,4,PAPP330,Policy Planning,3
 Korea University,PS3713,Department exchange module,4,POLI342,ON DEMOCRACY,3
 Korea University,GL4752,Department exchange module,5,POLI431,DEMOCRACY AND CAPITALISM,3
@@ -2081,7 +2080,7 @@ Korea University,FIN2704X,Finance,4,BUSS207,FINANCIAL MANAGEMENT,3
 Korea University,ACC1701X,Accounting for Decision Makers,4,BUSS152,PRINCIPLES OF ACCOUNTING,3
 Korea University,FIN2704,Finance,4,BUSS207,FINANCIAL MANAGEMENT,3
 Korea University,MKT3701,Marketing Strategy: Analysis a,4,BUSS205,MARKETING MANAGEMENT,3
-Korea University,DAO2703,Operations and Technology Mana,4,BUSS211,INTRODUCTION TO OPERATIONS MANAGEMENT,3
+Korea University,DAO2703,Operations and Technology Management,4,BUSS211,INTRODUCTION TO OPERATIONS MANAGEMENT,3
 Korea University,FIN3720,Financial Statement Analysis,4,BUSS416,BUSINESS VALUATION,3
 Korea University,FIN3701,Corporate Finance,4,BUSS384,CORPORATE FINANCE,3
 Korea University,FIN3715,Risk and Insurance,4,BUSS382,INSURANCE AND RISK MANAGEMENT,3
@@ -2103,7 +2102,7 @@ Korea University,CS2040C,Data Structures and Algorithms,4,COSE 213,Data Structur
 Korea University,CS2106,Intro to Operating Systems,4,COSE341,Operating Systems,3
 Korea University,BT1101,Introduction to Business Analy,4,BUSS 216,Business Analytics I (English),3
 Korea University,CS3230,Design & Analysis of Algorithm,4,COSE214,ALORITHMS,3
-Korea University,CS3243,Introduction to Artificial Int,,COSE361,Artificial Intelligence (English),3
+Korea University,CS3243,Introduction to Artificial Int,4,COSE361,Artificial Intelligence (English),3
 Korea University,EX1001,Exchange UEM,4,IKL222,Beginning Korean 3,4
 Korea University,MT4002,Technology Management Strategy,4,ISC129,Business Strategy,1
 Korea University,EX1000,Exchange UEM,4,IKL221,Beginning Korean 2,4
@@ -2174,7 +2173,7 @@ KTH Royal Institute of Technology,CS3240,Interaction Design,4,IC1007,Human-compu
 KTH Royal Institute of Technology,CS2106,Intro to Operating Systems,4,ID2206,Operating Systems,7.5
 KTH Royal Institute of Technology,CS2105,Intro to Computer Networks,4,IK1550,Internetworking,6
 KTH Royal Institute of Technology,CS2106,Intro to Operating Systems,4,IS1350,Operating Systems,7.5
-KTH Royal Institute of Technology,CS2107,Introduction to Information Se,4,DD2395,Computer Security,6
+KTH Royal Institute of Technology,CS2107,Introduction to Information Security,4,DD2395,Computer Security,6
 KTH Royal Institute of Technology,CS2105,Intro to Computer Networks,4,IK1552,Internetworking,7.5
 KTH Royal Institute of Technology,IS3223,IT and Supply Chain Management,4,ME2054,Purchasing & Supply Chain Management,6
 KTH Royal Institute of Technology,CS2102,Database Systems,4,DD1368,Database Technology,6
@@ -2292,7 +2291,7 @@ Kyoto University,CM1111,Inorganic Chemistry 1,4,N363001,Introduction to Inorgani
 Kyushu University,PS2741,Department Exchange Module,4,ZXX001,Contemporary Japanese politics,2
 La Trobe University,LAC1201,Chinese 1,4,CHI1001,CHINESE 1,1
 LaTrobe University,CS1010,Programming Methodology,4,CSE1OOF,OBJECT-ORIENTED PROGRAMMING FUNDAMENTALS,15
-LaTrobe University,CS1010,Programming Methodology,,CSE1PE,Programming Environment,15
+LaTrobe University,CS1010,Programming Methodology,4,CSE1PE,Programming Environment,15
 LaTrobe University,LSM3991,Exchange Enrichment Module,4,ENV3API,Animal-Plant Interactions,15
 LaTrobe University,LSM3225,Molecular Microbiology in HD,4,HBS2IAI,Infection and Immunity,15
 LaTrobe University,LSM3252,Evolutn & Comparative Genomics,4,EEE3EGE,Ecological Genetics and Evolution,15
@@ -2581,7 +2580,7 @@ Lund University,MNO3761X,Topics in L&HCM,4,FEKG11,STRATEGIC ORGANIZING,6
 Lund University,DOS3761X,Topics in Operations & SCM,4,FEKH13,PROJECT MANAGEMENT- A BUSINESS PERSPECTIVE,7.5
 Lund University,MKT3715,Business-to-Business Mkting,4,FEKH22,BUSINESS-TO-BUSINESS MARKETING,7.5
 Lund University,IS4250,IT-enabled Healthcare Solution,4,SASE40,Introduction to e-health,7.5
-Lund University,CS2107,Introduction to Information Se,4,INFC40,Information Systems Security,7.5
+Lund University,CS2107,Introduction to Information Security,4,INFC40,Information Systems Security,7.5
 Lund University,BT4015,Geospatial Analytics,4,EXTN75,Spatial Analysis,7.5
 Lund University,BT3102,Computational Methods for Busi,4,FMSN50,Monte Carlo and Empirical Methods for Stochastic Inference,7.5
 Lund University,CS3230,Design & Analysis of Algorithm,4,EDAF05,"Algorithms, Data Structures and Complexity",5
@@ -2641,7 +2640,7 @@ Lund University,LSM3991,Exchange Enrichment Module,4,BIOR 77,Plant Evolution and
 Maastricht University,FIN3711,International Financial Mgt,4,EBC2070,INTERNATIONAL FINANCIAL MANAGEMENT,6.5
 Maastricht University,MKT3702,Consumer Behaviour,4,EBC2041,CONSUMER BEHAVIOUR,6.5
 Maastricht University,FIN3703,Financial Markets,4,EBC2006,FINANCIAL MARKETS,6.5
-Maastricht University,DAO2703,Operations and Technology Mana,4,EBC2064,OPERATIONS MANAGEMENT,6.5
+Maastricht University,DAO2703,Operations and Technology Management,4,EBC2064,OPERATIONS MANAGEMENT,6.5
 Maastricht University,MKT3711,Services Marketing,4,EBC2043,SERVICES MARKETING,6.5
 Maastricht University,MKT3717,Product & Brand Management,4,EBC2062,BRAND MANAGEMENT,6.5
 Maastricht University,BSP3701,Strategic Management,4,EBC2027,INTERNATIONAL BUSINESS STRATEGY,6.5
@@ -2802,10 +2801,10 @@ Monash University,IS3261,Mobile Apps Development for En,4,FIT2081,Mobile applica
 Monash University,CS3230,Design & Analysis of Algorithm,4,FIT3155,Advanced Data Structures and Algorithms,6
 Monash University,CS3243,Introduction to Artificial Int,4,FIT3080,Intelligent Systems,6
 Monash University,BT3103,Application Systems Developmen,4,FIT2001,Systems development,6
-Monash University,CS2107,Introduction to Information Se,4,FIT3031,Information and network security,6
+Monash University,CS2107,Introduction to Information Security,4,FIT3031,Information and network security,6
 Monash University,IS4204,IT Governance,4,FIT3174,IT strategy and governance,6
 Monash University,IS4100,IT Project Management,4,FIT2022,IT project management,6
-Monash University,CS2107,Introduction to Information Se,4,FIT2093,Introduction to cyber security,3
+Monash University,CS2107,Introduction to Information Security,4,FIT2093,Introduction to cyber security,3
 Monash University,LSM3232,Microbiology,4,MIC 2011,Introduction to microbiology and microbial biotechnology,6
 Monash University,LSM3991,Exchange Enrichment Module,4,MIC 3990,Action in Microbiology Research Project,6
 Monash University,LSM3224,Molecular Basis Human Diseases,4,HUP 3011,Human pathology 1: Understanding disease processes,6
@@ -2833,7 +2832,7 @@ Nanyang Technological University,MKT3761X,Topics in Marketing,4,BM2505,CHANNEL V
 Nanyang Technological University,MKT3717,Product & Brand Management,4,BM3506,STRATEGIC BRAND MANAGEMENT,4
 Nanyang Technological University,FIN3761X,Topics in Finance,4,BF3207,ALTERNATIVE INVESTMENTS,4
 Nanyang Technological University,MNO3702,Negotiation and Conflict Mgt,4,BL9304,NEGOTIATION AND DISPUTE RESOLUTION,4
-Nanyang Technological University,DAO2703,Operations and Technology Mana,4,BC3405,LEAN OPERATIONS & ANALYTICS,4
+Nanyang Technological University,DAO2703,Operations and Technology Management,4,BC3405,LEAN OPERATIONS & ANALYTICS,4
 Nanyang Technological University,MKT3811,Mkting Analysis & Deci Making,4,BM2507,MARKETING ANALYTICS,4
 Nanyang Technological University,DOS3761X,Topics in Operations & SCM,4,BR3208,OPERATIONAL RISK MANAGEMENT,4
 Nanyang Technological University,MKT3718,Advertising & Promotion Mgt,4,BM2504,INTEGRATED MARKETING COMMUNICATIONS,4
@@ -2898,7 +2897,7 @@ Nanyang Technological University,DOS3761X,Topics in Operations & SCM,4,BT2503,RE
 Nanyang Technological University,FIN3761Y,Topics in Finance,4,BU9222,PROPERTY & CASUALTY INSURANCE,3
 Nanyang Technological University,MNO3761X,Topics in L&HCM,4,HP0201,EMPLOYMENT RELATIONS FOR WORK AND CAREERS IN SINGAPORE,3
 Nanyang Technological University,FIN3719,Household Finance,4,BF2206,WEALTH MANAGEMENT,4
-Nanyang Technological University,DAO2703,Operations and Technology Mana,4,BE1401,BUSINESS OPERATIONS & PROCESSES,4
+Nanyang Technological University,DAO2703,Operations and Technology Management,4,BE1401,BUSINESS OPERATIONS & PROCESSES,4
 Nanyang Technological University,FIN4717,Entrepreneurial Finance,4,BE3201,ENTREPRENEURIAL FINANCE,3
 Nanyang Technological University,FIN3717,Fixed Income Securities,4,BF3202,FIXED INCOME SECURITIES,3
 Nanyang Technological University,TR3002,New Venture Creation,4,ET9131,VENTURING INTO ENTREPRENEURSHIP,3
@@ -2939,7 +2938,7 @@ Nanyang Technological University,IT3011,Introduction to Machine Learn,4,MH4510,S
 Nanyang Technological University,CS3245,Information Retrieval,4,CZ4034,Information Retrieval,3
 Nanyang Technological University,IS4228,Information Technologies in Fi,4,BC3402,FINANCIAL SERVICE PROCESSES & ANALYTICS,3
 Nanyang Technological University,CS4242,Social Media Computing,4,CS4022,Social Media Mining,3
-Nanyang Technological University,BT4222,Mining Web Data for Business I,,CZ2405,DATA MINING,3
+Nanyang Technological University,BT4222,Mining Web Data for Business I,4,CZ2405,DATA MINING,3
 Nanyang Technological University,CS1010S,Programming Methodology,4,MH1403,Algorithms and Computing I,3
 Nanyang Technological University,BT4240,Machine Learning for Predictiv,4,MH4510,Statistical Learning and Data Mining,3
 Nanyang Technological University,BT3103,Application Systems Developmen,4,EE4717,Web Application Design,3
@@ -2956,7 +2955,7 @@ Nanyang Technological University,BT4013,Analytics for Capital Market T,4,MH4500,
 Nanyang Technological University,CS3103,Computer Networks Practice,4,EE4761,Computer Networking,3
 Nanyang Technological University,CS4236,Cryptography Theory & Practice,4,CZ4010,Applied Cryptography,3
 Nanyang Technological University,CS4222,Wireless Networking,4,CZ4021,Pervasive Networks,3
-Nanyang Technological University,CS2107,Introduction to Information Se,4,IM3003,Information Security,3
+Nanyang Technological University,CS2107,Introduction to Information Security,4,IM3003,Information Security,3
 Nanyang Technological University,CS4278,Intelligent Robots: Algorithms,4,EE4268,Robotics and Automation,3
 Nanyang Technological University,CS4243,Comp Vision & Pattern Recogntn,4,CZ4003,Computer Vision,2
 Nanyang Technological University,CS4248,Natural Language Processing,4,CZ4045,Natural Language Processing,2
@@ -3063,7 +3062,7 @@ National Cheng Kung University,MKT1705,Principles of Marketing,4,H420200,MARKETI
 National Cheng Kung University,FIN2704,Finance,4,H120200,FUNDAMENTALS OF FINANCE,3
 National Cheng Kung University,BSP3701,Strategic Management,4,H446100,INTERNATIONAL BUSINESS STRATEGY,3
 National Cheng Kung University,MKT3702,Consumer Behaviour,4,H436500,CONSUMER BEHAVIOR,3
-National Cheng Kung University,CS2107,Introduction to Information Se,4,DCP3109,Introduction to Computer Security,3
+National Cheng Kung University,CS2107,Introduction to Information Security,4,DCP3109,Introduction to Computer Security,3
 National Cheng Kung University,CS2105,Intro to Computer Networks,4,CSIE3005 F722100,COMPUTER COMMUNICATION NETWORKS,3
 National Cheng Kung University,CS2106,Intro to Operating Systems,4,EE 5591E241900,OPERATING SYSTEM,3
 National Cheng Kung University,CS2100,Computer Organisation,4,CSIE2001 F720200,COMPUTER ORGANIZATION,3
@@ -3095,9 +3094,9 @@ National Cheng Kung University,ST3235,Statistical Quality Control,4,R253000,QUAL
 National Cheng Kung University,LSM3252,Evolutn & Comparative Genomics,4,L581200,Genomics,3
 National Chengchi University,PS2237,Intro to International Relatns,4,ZXX000220051,International Relations,3
 National Chengchi University,FIN3712,Options and Futures,4,357022001,ANALYSIS OF FUTURES AND OPTIONS,3
-National Chengchi University,DAO2703,Operations and Technology Mana,4,364068001,STRATEGIC PROJECT AND OPERATIONS MANAGEMENT,3
+National Chengchi University,DAO2703,Operations and Technology Management,4,364068001,STRATEGIC PROJECT AND OPERATIONS MANAGEMENT,3
 National Chengchi University,FIN3714,Financial Risk Management,4,308947001,RISK MANAGEMENT & INSURANCE,3
-National Chengchi University,ST1131,Intro to Stats and Stat Comp,4,0321211,Statistics,3
+National Chengchi University,ST1131,Intro to Stats and Stat Comp,4,321211,Statistics,3
 National Chiao Tung University,PS3741,Department Exchange Module,4,DCT3088,Information and Communication Technology Policies in Everyday Life,3
 National Chiao Tung University,PS3701,Political Science Exchange Mod,4,DHS3064,Political Sociology,3
 National Chiao Tung University,PS4207,,5,GE151300,International Law Stories,2
@@ -3157,7 +3156,7 @@ National Taiwan University,FIN3713,Bank Management,4,FIN3004,MANAGEMENT OF FINAN
 National Taiwan University,FIN3713,Bank Management,4,GMBA7019,"MODERN BANKING MANAGEMENT, REGULATION & PUBLIC POLICY",3
 National Taiwan University,FIN3713,Bank Management,4,FIN2007,MONEY AND BANKING,3
 National Taiwan University,DBA3803,Predictive Analytics in Biz,4,GMBA5028,DATA SCIENCE AND BUSINESS ANALYTICS,3
-National Taiwan University,DAO2703,Operations and Technology Mana,4,GMBA7094,SERVICE AND OPERATIONS MANAGEMENT,3
+National Taiwan University,DAO2703,Operations and Technology Management,4,GMBA7094,SERVICE AND OPERATIONS MANAGEMENT,3
 National Taiwan University,BSP3701,Strategic Management,4,GMBA7059,COMPETITIVE STRATEGY,3
 National Taiwan University,BSP3701,Strategic Management,4,IB7018,INTERNATIONAL BUSINESS STRATEGY,3
 National Taiwan University,FIN3701,Corporate Finance,4,IB7014,FINANCIAL MANAGEMENT,3
@@ -3166,14 +3165,14 @@ National Taiwan University,MKT3719,Branding Strategy,4,IB7095,GLOBAL BRAND MANAG
 National Taiwan University,MKT3717,Product & Brand Management,4,MBA5036,NEW PRODUCT DEVELOPMENT AND MARKETING,3
 National Taiwan University,MKT3714,Digital Marketing,4,OIM5006,DIGITAL MARKETING,2
 National Taiwan University,FIN3720,Financial Statement Analysis,4,FIN3002,FINANCIAL STATEMENT ANALYSIS,3
-National Taiwan University,DAO2703,Operations and Technology Mana,4,IM3003,OPERATIONS MANAGEMENT,3
+National Taiwan University,DAO2703,Operations and Technology Management,4,IM3003,OPERATIONS MANAGEMENT,3
 National Taiwan University,FIN3712,Options and Futures,4,FIN5050,DERIVATIVES TRADING,2
 National Taiwan University,FIN3712,Options and Futures,4,FIN3015,FINANCIAL ENGINEERING,3
 National Taiwan University,FIN3712,Options and Futures,4,GMBA7015,FUTURES AND OPTIONS MARKETS,3
 National Taiwan University,FIN3703,Financial Markets,4,FIN3013,INTERNATIONAL FINANCIAL MARKET,3
 National Taiwan University,CS2105,Intro to Computer Networks,4,IM3010,Computer Networks and Applications,3
 National Taiwan University,CS2106,Intro to Operating Systems,4,CSIE3310,Operating Systems,3
-National Taiwan University,CS2107,Introduction to Information Se,4,TB10310994,Introduction to Information Security,3
+National Taiwan University,CS2107,Introduction to Information Security,4,TB10310994,Introduction to Information Security,3
 National Taiwan University,CS2102,Database Systems,4,IM3008,Database Management,3
 National Taiwan University,CS2102,Database Systems,4,LIS5076,Database Management System,3
 National Taiwan University,CS3230,Design & Analysis of Algorithm,4,EE5048,The Design and Analysis of Algorithms,3
@@ -3363,7 +3362,7 @@ Norwegian School of Economics,FIN3701,Corporate Finance,4,FIE402,CORPORATE FINAN
 Norwegian School of Economics,BSP3701,Strategic Management,4,INB422,INTERNATIONAL STRATEGY,7.5
 Norwegian School of Economics,MNO3313X,,4,HIS012,HISTORICAL DEVELOPMENT OF MODERN BUSINESS,7.5
 Norwegian School of Economics,MNO3313,Topics in Leadership and Human,4,INB400,INTERNATIONAL ORGANIZATION AND MANAGEMENT,7.5
-Norwegian School of Economics,DAO2703,Operations and Technology Mana,4,BUS432,OPERATIONS MANAGEMENT,7.5
+Norwegian School of Economics,DAO2703,Operations and Technology Management,4,BUS432,OPERATIONS MANAGEMENT,7.5
 Norwegian School of Economics,FIN3720,Financial Statement Analysis,4,BUS457,FINANCIAL STATEMENT ANALYSIS AND VALUATION,7.5
 Norwegian School of Economics,FIN3720,Financial Statement Analysis,4,BUS437,"VALUATION, FINANCIAL ANALYSIS AND ACCOUNTING",7.5
 Norwegian School of Economics,FIN3720,Financial Statement Analysis,4,BUS424,STRATEGIC FINANCIAL STATEMENT ANALYSIS,7.5
@@ -3438,62 +3437,62 @@ Oulu University,IE4912,Exchange Technical Elective,2,TLO-25466,Logistics Strateg
 Oxford Brookes University,IE2140,Engineering Economy,4,B206,Financing Projects,4
 Oxford Brookes University,IE4240,Project Management,4,B205,Project Management,4
 Peking University,PS3706,Political Science Exchange Mod,4,ZXX02432090,Chinese Perspective on International and Global Affairs,3
-Peking University,MKT4811,Pricing Strategy,4,02832700,PRICE MANAGEMENT,2
-Peking University,DOS3761X,Topics in Operations & SCM,4,02830170,ELECTRONIC COMMERCE,3
-Peking University,FIN3720,Financial Statement Analysis,4,02834430,FINANCIAL STATEMENT ANALYSIS,2
+Peking University,MKT4811,Pricing Strategy,4,2832700,PRICE MANAGEMENT,2
+Peking University,DOS3761X,Topics in Operations & SCM,4,2830170,ELECTRONIC COMMERCE,3
+Peking University,FIN3720,Financial Statement Analysis,4,2834430,FINANCIAL STATEMENT ANALYSIS,2
 Peking University,FIN3761X,Topics in Finance,4,2832500,CHINA'S ECONOMIC REFORM AND DEVELOPMENT,3
-Peking University,FIN3761X,Topics in Finance,4,02831570,FIXED INCOME SECURITIES,2
+Peking University,FIN3761X,Topics in Finance,4,2831570,FIXED INCOME SECURITIES,2
 Peking University,FIN3761Y,Topics in Finance,4,2833670,ADVANCED ACCOUNTING,2
 Peking University,FIN3761Y,Topics in Finance,4,2835620,ACCOUNTING AND AUDITING AND SPECIAL TOPICS ON FINANCIAL MANAGEMENT,2
-Peking University,MKT3761X,Topics in Marketing,4,02833460,BRAND MANAGEMENT,2
-Peking University,MNO3761Z,Topics in L&HCM,4,02830150,CHINESE ECONOMY,2
-Peking University,DOS3701,Supply Chain Management,4,02832690,LOGISTICS AND SUPPLY CHAIN MANAGEMENT,2
+Peking University,MKT3761X,Topics in Marketing,4,2833460,BRAND MANAGEMENT,2
+Peking University,MNO3761Z,Topics in L&HCM,4,2830150,CHINESE ECONOMY,2
+Peking University,DOS3701,Supply Chain Management,4,2832690,LOGISTICS AND SUPPLY CHAIN MANAGEMENT,2
 Peking University,FIN3714,Financial Risk Management,4,2831680,FINANCIAL RISK MANAGEMENT,2
-Peking University,DOS3712,Physical Distribution Mgt,4,02838350,CHANNEL MANAGEMENT,2
-Peking University,FIN3703,Financial Markets,4,02837020,INVESTMENT BANKING,2
-Peking University,FIN3703,Financial Markets,4,02833230,FINANCIAL MARKETS & FINANCIAL INSTITUTIONS,3
-Peking University,FIN3701,Corporate Finance,4,02833430,CORPORATE FINANCE,3
-Peking University,MNO3761Y,Topics in L&HCM,4,02837140,DOING BUSINESS IN CHINA,2
-Peking University,FIN2704X,Finance,4,02834020,INTRODUCTION TO FINANCE,3
-Peking University,FIN2704X,Finance,4,02834420,SECURITIES ANALYSIS AND INVESTMENTS,3
-Peking University,FIN2704,Finance,4,02834020,INTRODUCTION TO FINANCE,3
-Peking University,FIN2704,Finance,4,02834420,SECURITIES ANALYSIS AND INVESTMENTS,3
-Peking University,BSP1703,Managerial Economics,4,02832110,MICROECONOMICS,3
-Peking University,DAO2703,Operations and Technology Mana,4,02830240,OPERATIONS MANAGEMENT,2
-Peking University,FIN3761Z,Topics in Finance,4,02839060,VENTURE CAPITAL AND THE FINANCE OF INNOVATION,2
-Peking University,ACC2706,Managerial Accounting,4,02832480,COST AND MANAGERIAL ACCOUNTING,3
-Peking University,BSP2701,Global Economy,2,06239084,INTERMEDIATE MACROECONOMICS,3
-Peking University,MNO3761Z,Topics in L&HCM,4,02830230,DOING BUSINESS WITH CHINESE PEOPLE,3
-Peking University,MKT3702,Consumer Behaviour,4,02837120,CONSUMER BEHAVIOR,3
-Peking University,MKT3812,Game Theory & Strat. Analysis,4,02837170,STRATEGIES AND GAME THEORY,3
+Peking University,DOS3712,Physical Distribution Mgt,4,2838350,CHANNEL MANAGEMENT,2
+Peking University,FIN3703,Financial Markets,4,2837020,INVESTMENT BANKING,2
+Peking University,FIN3703,Financial Markets,4,2833230,FINANCIAL MARKETS & FINANCIAL INSTITUTIONS,3
+Peking University,FIN3701,Corporate Finance,4,2833430,CORPORATE FINANCE,3
+Peking University,MNO3761Y,Topics in L&HCM,4,2837140,DOING BUSINESS IN CHINA,2
+Peking University,FIN2704X,Finance,4,2834020,INTRODUCTION TO FINANCE,3
+Peking University,FIN2704X,Finance,4,2834420,SECURITIES ANALYSIS AND INVESTMENTS,3
+Peking University,FIN2704,Finance,4,2834020,INTRODUCTION TO FINANCE,3
+Peking University,FIN2704,Finance,4,2834420,SECURITIES ANALYSIS AND INVESTMENTS,3
+Peking University,BSP1703,Managerial Economics,4,2832110,MICROECONOMICS,3
+Peking University,DAO2703,Operations and Technology Management,4,2830240,OPERATIONS MANAGEMENT,2
+Peking University,FIN3761Z,Topics in Finance,4,2839060,VENTURE CAPITAL AND THE FINANCE OF INNOVATION,2
+Peking University,ACC2706,Managerial Accounting,4,2832480,COST AND MANAGERIAL ACCOUNTING,3
+Peking University,BSP2701,Global Economy,2,6239084,INTERMEDIATE MACROECONOMICS,3
+Peking University,MNO3761Z,Topics in L&HCM,4,2830230,DOING BUSINESS WITH CHINESE PEOPLE,3
+Peking University,MKT3702,Consumer Behaviour,4,2837120,CONSUMER BEHAVIOR,3
+Peking University,MKT3812,Game Theory & Strat. Analysis,4,2837170,STRATEGIES AND GAME THEORY,3
 Peking University,MKT3722,Research for Marketing Insight,4,2838980,MARKETING RESEARCH METHOD,3
-Peking University,MKT3711,Services Marketing,4,02834660,SERVICE MARKETING,2
+Peking University,MKT3711,Services Marketing,4,2834660,SERVICE MARKETING,2
 Peking University,FIN3761X,Topics in Finance,4,2831661,INTERNATIONAL FINANCE AND INTERNATIONAL TRADE,3
-Peking University,MKT4712,,4,02839090,FRONTIERS OF MARKETING RESEARCH,2
+Peking University,MKT4712,,4,2839090,FRONTIERS OF MARKETING RESEARCH,2
 Peking University,MKT3761Y,Topics in Marketing,4,2837122,INTERNET AND NEW MARKETING MODELS,2
-Peking University,MNO3761X,Topics in L&HCM,4,02838130,CHINESE SOCIETY AND BUSINESS CULTURE,2
+Peking University,MNO3761X,Topics in L&HCM,4,2838130,CHINESE SOCIETY AND BUSINESS CULTURE,2
 Peking University,IS4232,,4,334170,Policy Issues for Security and Privacy in the Cyber World,3
 Peking University,CS3236,Introduction to Information Th,4,4831210,Information Theory,3
 Peking University,IS1103,Ethics in Computing,4,F00022,The Social Implications of Computing,3
 Peking University,BT4221,Big Data Techniques & Technolo,4,SECS04833520,Big Data Management Technology,3
 Peking University,CS3244,Machine Learning,4,MATH00137170,,3
 Peking University,CS2102,Database Systems,4,CS4830220,Introduction to Database Systems,3
-Peking University,CS3245,Information Retrieval,4,04831890,Introduction to information retrieval,2
+Peking University,CS3245,Information Retrieval,4,4831890,Introduction to information retrieval,2
 Peking University,CS3244,Machine Learning,4,MATH114250,Machine Learning,3
 Peking University,CS2106,Intro to Operating Systems,4,CS04834260,Operating Systems,4
 Peking University,CS4236,Cryptography Theory & Practice,4,CS4833900,Fundamentals of Cryptography,3
-Peking University,CS3240,Interaction Design,4,04830310,Human- Computer Interaction (HCI),2
-Peking University,CS3243,Introduction to Artificial Int,4,04830250,Introduction to artificial intelligence,2
+Peking University,CS3240,Interaction Design,4,4830310,Human- Computer Interaction (HCI),2
+Peking University,CS3243,Introduction to Artificial Int,4,4830250,Introduction to artificial intelligence,2
 Peking University,CS2104,Programming Language Concepts,4,CS04830270,Principle of Programming Languages,2
-Peking University,ST4234,Bayesian Statistics,4,00100877,Bayesian Theory and Computation,3
-Peking University,ST3233,,4,02831270,time series analysis,3
-Peking University,ST3236,Stochastic Processes I,4,00112650,Stochastic Processes,3
-Peking University,ST3232,Design & Analysis Of Experimts,4,00110710,Design of experiments,3
-Peking University,ST3234,Actuarial Statistics,4,02532090,Principles of Actuarial Science,3
-Peking University,QF4102,Financial Modelling and Comput,4,02838420,Mathematical Methods in Finance,2
-Peking University,MA4269,Mathematical Finance II,4,02532420,Introduction to Financial Engineering,2
-Peking University,QF4102,Financial Modelling and Comput,4,02831540,Financial Modelling,2
-Peking University,MA2101,Linear Algebra II,4,00131460,Linear Algebra (B),4
+Peking University,ST4234,Bayesian Statistics,4,100877,Bayesian Theory and Computation,3
+Peking University,ST3233,,4,2831270,time series analysis,3
+Peking University,ST3236,Stochastic Processes I,4,112650,Stochastic Processes,3
+Peking University,ST3232,Design & Analysis Of Experimts,4,110710,Design of experiments,3
+Peking University,ST3234,Actuarial Statistics,4,2532090,Principles of Actuarial Science,3
+Peking University,QF4102,Financial Modelling and Comput,4,2838420,Mathematical Methods in Finance,2
+Peking University,MA4269,Mathematical Finance II,4,2532420,Introduction to Financial Engineering,2
+Peking University,QF4102,Financial Modelling and Comput,4,2831540,Financial Modelling,2
+Peking University,MA2101,Linear Algebra II,4,131460,Linear Algebra (B),4
 Peking University,LSM3266,Avian Biology and Evolution,4,1133034,Avian Ecology and Conservation,2
 Peking University,LSM4262,Tropical Conservation Biology,4,1130960,Conservation Biology,2
 Peking University,LSM4265,Urban Ecology,4,12635230,Urban Ecology and Environmental Planning,2
@@ -3506,7 +3505,7 @@ Pennsylvania State University,IS4233,Legal Aspects of Information T,4,IST432,Leg
 Pennsylvania State University,IS4100,IT Project Management,4,IST302,IT Project Management,3
 Pennsylvania State University,IS3221,ERP Systems with Analytics Sol,4,IST421,Advanced Enterprise Integration: Technology and Applications,3
 Pennsylvania State University,CS1010,Programming Methodology,4,CMPSC101,Introduction to C++ Programming,3
-Pennsylvania State University,CS2107,Introduction to Information Se,4,SRA221,Overview of Information Security,3
+Pennsylvania State University,CS2107,Introduction to Information Security,4,SRA221,Overview of Information Security,3
 Pennsylvania State University,CS2105,Intro to Computer Networks,4,IST220,Networking and Telecommunications,3
 Pennsylvania State University,IS3251,Principles of Technology Entre,4,IST237,Digital Entrepreneurship,3
 Pennsylvania State University,IS3221,ERP Systems with Analytics Sol,4,IST420,Fundamentals of Systems and Enterprise Integration,3
@@ -3609,7 +3608,7 @@ Purdue University,CS5339,Theory and Algorithms for Mach,4,CS57800,Statistical Ma
 Purdue University,CS2105,Intro to Computer Networks,4,CS42200,Computer Networks,3
 Purdue University,CS2100,Computer Organisation,4,CS25000,Computer Architecture,4
 Purdue University,CS2102,Database Systems,4,CS44800,Introduction To Relational Database Systems,3
-Purdue University,CS2107,Introduction to Information Se,4,CS42600,Computer Security,3
+Purdue University,CS2107,Introduction to Information Security,4,CS42600,Computer Security,3
 Purdue University,CS2102,Database Systems,4,CS34800,Information Systems,3
 Purdue University,CS2108,Introduction to Media Computin,4,CS17700,Programming With Multimedia Objects,3
 Purdue University,CS3211,Parallel & Concurrent Programg,4,CS52500,Parallel Computing,3
@@ -3649,7 +3648,7 @@ Queen's University at Kingston,FIN3703,Financial Markets,4,ECON322,FINANCIAL MAR
 Queen's University at Kingston,FIN2704X,Finance,4,COMM221,INTRODUCTION TO FINANCE,3
 Queen's University at Kingston,ACC1701X,Accounting for Decision Makers,4,COMM211,INTRODUCTION TO FINANCIAL ACCOUNTING,3
 Queen's University at Kingston,FIN2704,Finance,4,COMM221,INTRODUCTION TO FINANCE,3
-Queen's University at Kingston,DAO2703,Operations and Technology Mana,4,COMM341,INTRODUCTION TO PRODUCTION & OPERATIONS MANAGEMENT,3
+Queen's University at Kingston,DAO2703,Operations and Technology Management,4,COMM341,INTRODUCTION TO PRODUCTION & OPERATIONS MANAGEMENT,3
 Queen's University at Kingston,MKT3701,Marketing Strategy: Analysis a,4,COMM333,MARKETING MANAGEMENT AND MARKETING STRATEGY,3
 Queen's University at Kingston,MNO3703,Leading in the 21st Century,4,COMM251,ORGANIZATIONAL BEHAVIOR,3
 Queen's University at Kingston,MKT1705X,Principles of Marketing,4,COMM231,FUNDAMENTALS OF MARKETING,3
@@ -3739,7 +3738,7 @@ RWTH Aachen University,IE4703,Exchange Elective,3,MSMMECAM2206,Factory Planning,
 RWTH Aachen University,ME3661,Technical Elective,4,MSCAME-2103/12,WELDING AND JOINING TECHNOLOGIES,6
 Sabanci University,PS4218,European Foreign Policy,5,POLS492,"European Union: Politics, Policies, and Governance",6
 Sabanci University,DOS3701,Supply Chain Management,4,OPIM401,SUPPLY CHAIN MANAGEMENT,6
-Sabanci University,DAO2703,Operations and Technology Mana,4,OPIM301,OPERATIONS MANAGEMENT,6
+Sabanci University,DAO2703,Operations and Technology Management,4,OPIM301,OPERATIONS MANAGEMENT,6
 Sabanci University,LSM3991,Exchange Enrichment Module,4,BIO 415,Plant Nutrition,6
 Sabanci University,LSM3991,Exchange Enrichment Module,4,BIO 445,Plant Tissue Culture Techniques,6
 Sabanci University,LSM3252,Evolutn & Comparative Genomics,4,BIO 303,Genetics,6
@@ -3807,7 +3806,7 @@ Sciences Po,PS4702,,5,AAFF1670A,World Politics,10
 Sciences Po,PS4701,POLITICAL SCIENCE EXCHANGE MOD,5,DHUM1320A,Introduction to Liberal Thinking,5
 Sciences Po,LAF1201,French 1,4,FASS-CLS-ZXY1002,French Language Level 0 / A1,1
 Seoul National University,HY2220,Korea in the Twentieth Century,4,109.311,Topics in Korean History 1,1
-Seoul National University,HY2220,Korea in the Twentieth Century,4,055.016,Two Koreas: Modern Korean History and Society,1
+Seoul National University,HY2220,Korea in the Twentieth Century,4,55.016,Two Koreas: Modern Korean History and Society,1
 Seoul National University,GL2741,Department exchange module,4,701220,Korean Education Introduced in English,3
 Seoul National University,PS2237,Intro to International Relatns,4,PU002,"Globalisation, War and Economy",3
 Seoul National University,PS2255,Politics of the Middle East,4,PS1003.432,Issues in Modern Middle Eastern History,3
@@ -3817,8 +3816,8 @@ Seoul National University,FIN3715,Risk and Insurance,4,251.341,CORPORATE RISK MA
 Seoul National University,FIN3720,Financial Statement Analysis,4,251.324,INTERMEDIATE ACCOUNTING 2,3
 Seoul National University,MNO1706X,Organisational Behavior,4,251.101,PRINCIPLES OF MANAGEMENT,3
 Seoul National University,MNO1706,Organisational Behavior,4,251.101,PRINCIPLES OF MANAGEMENT,3
-Seoul National University,DAO2703,Operations and Technology Mana,4,251.32,OPERATIONS MANAGEMENT,3
-Seoul National University,FIN3712,Options and Futures,4,251.420,FINANCIAL DERIVATIVES,3
+Seoul National University,DAO2703,Operations and Technology Management,4,251.32,OPERATIONS MANAGEMENT,3
+Seoul National University,FIN3712,Options and Futures,4,251.42,FINANCIAL DERIVATIVES,3
 Seoul National University,FIN3701,Corporate Finance,4,251.323,CORPORATE FINANCE,3
 Seoul National University,MNO3703,Leading in the 21st Century,4,251.209,ORGANIZATIONAL BEHAVIOR,3
 Seoul National University,FIN3702,Inv. Analysis & Portfolio Mgt,4,252.616,PORTFOLIO MANAGEMENT,3
@@ -3843,9 +3842,9 @@ Seoul National University,IE4984,Exchange Elective,4,406.436,Manufacturing Proce
 Seoul National University,IE4505,Exchange Elective,4,4190.4071,Algorithms,3
 Seoul National University,IE3999,IE3 Technical Elective,4,M1505.000200,Introduction to Systems Engineering,3
 Seoul National University,IE4504,Exchange Elective,4,M1522.00 1,Introduction to Data Mining,3
-Seoul National University,EX1001,Exchange UEM,4,055.007,Introduction to Korean Literature,3
+Seoul National University,EX1001,Exchange UEM,4,55.007,Introduction to Korean Literature,3
 Seoul National University,ME3661,Technical Elective,4,M2794.0104,FUEL CELL FUNDAMENTALS,3
-Seoul National University,EX1003,Exchange UEM,4,055.020,Music of the World,3
+Seoul National University,EX1003,Exchange UEM,4,55.02,Music of the World,3
 Seoul National University,IE4124,Department Exchange Module,4,NIL.NIL,Financial Management,3
 Seoul National University,IE4604,Exchange Elective,4,251.326,Management Information Theory,3
 Seoul National University,IE3704,Exchange Elective,4,251.305,Cost Accounting,3
@@ -3857,12 +3856,12 @@ Seoul National University,EX2000,Exchange UEM,4,PU002,Korean Architeture and Urb
 Seoul National University,IE4992,Exchange Elective 2,4,4190.426A,Human-Computer Interaction,3
 Seoul National University,IE3998,IE3 Technical Elective,4,251.207A,Management Science,3
 Seoul National University,EX2012,Exchange UEM,4,212.201,Microeconomics Theory,3
-Seoul National University,EX1000,Exchange UEM,4,034.038,Atmospheric Science,3
+Seoul National University,EX1000,Exchange UEM,4,34.038,Atmospheric Science,3
 Seoul National University,ME4245,Robot Mechanics and Control,4,446.345,INTRODUCTION TO ROBOTICS,3
 Seoul National University,LSM2254,Fundamentals of Plant Biology,4,719.331A,Plant Physiology & Education,3
 Seoul National University,LSM1105,,4,3346.401,Evolutionary Biology,3
 Seoul National University,LSM1301,General Biology,4,34.029,Biology,3
-Seoul National University,LSM3991,Exchange Enrichment Module,4,038.028,Biology 2,3
+Seoul National University,LSM3991,Exchange Enrichment Module,4,38.028,Biology 2,3
 Seoul National University,LSM3252,Evolutn & Comparative Genomics,4,47.001,Biological Evolution,3
 Seoul National University,LSM3991,Exchange Enrichment Module,4,300.312,Biochemistry 1,3
 Seoul National University,LSM3991,Exchange Enrichment Module,4,300.313,Biochemistry 2,3
@@ -3903,7 +3902,7 @@ Shanghai Jiao Tong University,MKT3714,Digital Marketing,4,AM007,INTRODUCTION TO 
 Shanghai Jiao Tong University,FIN3761X,Topics in Finance,4,AC456,MANAGERIAL ACCOUNTING,2
 Shanghai Jiao Tong University,MNO3703,Leading in the 21st Century,4,BU002,MANAGEMENT/MANAGERIAL PSYCHOLOGY OF MANAGEMENT,2
 Shanghai Jiao Tong University,DOS3712,Physical Distribution Mgt,4,BU303,LOGISTICS/PHYSICAL DISTRIBUTION MANAGEMENT,2
-Shanghai Jiao Tong University,DAO2703,Operations and Technology Mana,4,BU355,OPERATIONS MANAGEMENT,2
+Shanghai Jiao Tong University,DAO2703,Operations and Technology Management,4,BU355,OPERATIONS MANAGEMENT,2
 Shanghai Jiao Tong University,FIN2704X,Finance,4,FI420,FOUNDATIONS OF FINANCE,3
 Shanghai Jiao Tong University,FIN2704,Finance,4,FI420,FOUNDATIONS OF FINANCE,3
 Shanghai Jiao Tong University,ACC1701X,Accounting for Decision Makers,4,AC209,INTRODUCTION TO ACCOUNTING,2
@@ -3918,7 +3917,7 @@ Shanghai Jiao Tong University,FIN3711,International Financial Mgt,4,FI313,INTERN
 Shanghai Jiao Tong University,FIN3702,Inv. Analysis & Portfolio Mgt,4,FI303,INVESTMENTS,3
 Shanghai Jiao Tong University,MKT3722,Research for Marketing Insight,4,BU350,MARKET RESEARCH,2
 Shanghai Jiao Tong University,CS2105,Intro to Computer Networks,4,CS339,Computer Networking,3
-Shanghai Jiao Tong University,CS2107,Introduction to Information Se,4,IS102,Introduction to Network Information Security,3
+Shanghai Jiao Tong University,CS2107,Introduction to Information Security,4,IS102,Introduction to Network Information Security,3
 Shanghai Jiao Tong University,CS2100,Computer Organisation,4,CS359,Computer Architecture,3
 Shanghai Jiao Tong University,CS2102,Database Systems,4,CS002,The Principle of Database Systems,3
 Shanghai Jiao Tong University,PF3206,,4,251.32,Operations Management,3
@@ -3956,7 +3955,7 @@ Simon Fraser University,DBA3803,Predictive Analytics in Biz,4,BUS462,BUSINESS AN
 Simon Fraser University,BXT3041,Business Exchange Topic,4,BUS487,ORGANIZATIONAL DEVELOPMENT AND CHANGE MANAGEMENT,6
 Simon Fraser University,MNO3320,Managing Change,4,BUS487,ORGANIZATIONAL DEVELOPMENT AND CHANGE MANAGEMENT,6
 Simon Fraser University,TR3002,New Venture Creation,4,BUS342,FOUNDATIONS OF ENTREPRENEURSHIP,3
-Simon Fraser University,DAO2703,Operations and Technology Mana,4,BUS473,OPERATIONS MANAGEMENT,4
+Simon Fraser University,DAO2703,Operations and Technology Management,4,BUS473,OPERATIONS MANAGEMENT,4
 Simon Fraser University,FIN3711,International Financial Mgt,4,BUS418,INTERNATIONAL FINANCIAL MANAGEMENT,3
 Simon Fraser University,FIN2704,Finance,4,BUS312,INTRODUCTION TO FINANCE,4
 Simon Fraser University,FIN3702,Inv. Analysis & Portfolio Mgt,4,BUS315,INVESTMENTS,3
@@ -4015,7 +4014,7 @@ Singapore Management University,DOS3713,Project Management,4,OPIM313,PROJECT MAN
 Singapore Management University,DOS3712,Physical Distribution Mgt,4,OPIM314,LOGISTICS AND TRANSPORTATION MANAGEMENT,1
 Singapore Management University,FIN3761B,TIF: China’s Capital Markets,4,COR1306,CAPITAL MARKETS IN CHINA,1
 Singapore Management University,BSP1703,Managerial Economics,4,ECON001,INTRODUCTORY ECONOMICS,1
-Singapore Management University,DAO2703,Operations and Technology Mana,4,OPIM201,BUSINESS PROCESSES,1
+Singapore Management University,DAO2703,Operations and Technology Management,4,OPIM201,BUSINESS PROCESSES,1
 Singapore Management University,MNO3761X,Topics in L&HCM,4,MGMT223,SOCIAL ENTREPRENEURSHIP,1
 Singapore Management University,FIN2704,Finance,4,FNCE101,FINANCE,1
 Singapore Management University,MKT3722,Research for Marketing Insight,4,MKTG103,Marketing Research,1
@@ -4117,7 +4116,7 @@ Singapore Management University,CS2030,Programming Methodology II,4,IS442,Object
 Singapore Management University,CS3237,Introduction to Internet of Th,4,CS462,Internet of Things: Technology and Applications,1
 Singapore Management University,IS4250,IT-enabled Healthcare Solution,4,IS447,Smart Healthcare in Asia,1
 Singapore Management University,IS4100,IT Project Management,4,OPIM313,Project Management,4
-Singapore Management University,CS2107,Introduction to Information Se,4,IS302,Information Security and Trust,4
+Singapore Management University,CS2107,Introduction to Information Security,4,IS302,Information Security and Trust,4
 Singapore Management University,CS2102,Database Systems,4,IS202,Data Management,1
 Singapore Management University,CS2105,Intro to Computer Networks,4,IS204,Networking,1
 Singapore Management University,IS3223,IT and Supply Chain Management,4,OPIM321,Supply Chain Management,4
@@ -4174,7 +4173,7 @@ Singapore Management University,MA4269,Mathematical Finance II,4,QF307,Stochasti
 Singapore University of Technology and Design,GL4885A,International Law and World Po,5,IR3022,International Relations and International Law,30
 Singapore University of Technology and Design,BT4221,Big Data Techniques & Technolo,4,ISTD50.043,Database and Big Data,12
 Singapore University of Technology and Design,CS3103,Computer Networks Practice,4,50.012,Networks,12
-Singapore University of Technology and Design,CS2107,Introduction to Information Se,4,50.042,Foundations of Cybersecurity,12
+Singapore University of Technology and Design,CS2107,Introduction to Information Security,4,50.042,Foundations of Cybersecurity,12
 Singapore University of Technology and Design,CS3244,Machine Learning,4,50.007,Machine Learning,12
 Singapore University of Technology and Design,CS2102,Database Systems,4,50.043,Database Systems,12
 Stanford University,CS1231,Discrete Structures,4,CS103,Mathematical Foundations of Computing,3
@@ -4193,7 +4192,7 @@ Stanford University,IE4985,Exchange Elective,4,MS&E251,Stochastic Control,3
 Stanford University,IE4220,Supply Chain Modelling,4,MSandE262,Supply Chain Management,3
 Stanford University,IE4124,Department Exchange Module,4,MSandE245A,Investment Science,3
 Stockholm School of Economics,BSN3702,New Venture Creation,4,8061,IDEATION - CREATING A BUSINESS IDEA,7.5
-Stockholm School of Economics,DAO2703,Operations and Technology Mana,4,612,OPERATIONS MANAGEMENT,7.5
+Stockholm School of Economics,DAO2703,Operations and Technology Management,4,612,OPERATIONS MANAGEMENT,7.5
 Stockholm School of Economics,MNO3703,Leading in the 21st Century,4,6118,MANAGING HUMAN DYNAMICS IN THE GLOBAL FIRM,7.5
 Stockholm School of Economics,FIN3712,Options and Futures,4,4303,ADVANCED DERIVATIVES,7.5
 Stockholm School of Economics,FIN3717,Fixed Income Securities,4,4318,Fixed Income and Derivatives Markets,7.5
@@ -4215,7 +4214,7 @@ Stockholm School of Economics,BSN3702,New Venture Creation,4,8063,EXECUTION - RU
 Stockholm School of Economics,TR3002,New Venture Creation,4,8061,IDEATION - CREATING A BUSINESS IDEA,7.5
 Stockholm School of Economics,TR3002,New Venture Creation,4,8063,EXECUTION - RUNNING YOUR OWN COMPANY,7.5
 Sungkyunkwan University,IS3150,Digital Media Marketing,4,NIL,Digital Marketing,3
-Sungkyunkwan University,CS2107,Introduction to Information Se,4,NIL,Cyber Security,3
+Sungkyunkwan University,CS2107,Introduction to Information Security,4,NIL,Cyber Security,3
 Sungkyunkwan University,IS4242,Intelligent Systems and Techni,4,NIL,Introduction to Machine Learning,3
 Suzhou University,EX2020,Exchange UEM,3,FOE-ISE-ZXY1004,Chinese Economy and Culture,4
 Swiss Federal Institute of Technology Lausanne,CS3223,Database Systems Implementatio,4,CS422,Database systems,6
@@ -4236,7 +4235,7 @@ Swiss Federal Institute of Technology Lausanne,CS3241,Computer Graphics,4,CS341,
 Tallinn University of Technology,PS2711,Department Exchange Module,4,TSP0081,International Organisations,3
 Tallinn University of Technology,PS3240,International Security,4,TSP0043,International Security Studies,5
 Tallinn University of Technology,PS2711,Department Exchange Module,4,TSK1029,"Iranian History, Society and Culture",3
-Tallinn University of Technology,CS2107,Introduction to Information Se,4,ICS0009,Governance and Management of Cyber Security,6
+Tallinn University of Technology,CS2107,Introduction to Information Security,4,ICS0009,Governance and Management of Cyber Security,6
 Tallinn University of Technology,IE4879,Technical Elective,3,WNB0633,Business Processes,6
 Tallinn University of Technology,IE4603,Exchange Elective,3,TMK0080,Project Management,4
 Tallinn University of Technology,IE4112,Department Exchange Module,2,ETV3110,Fundamentals of Logistics,3
@@ -4312,7 +4311,7 @@ Technical University of Berlin,IE4505,Exchange Elective,4,0339L420,Optimization 
 Technical University of Berlin,EX2043,Exchange UEM,2,06341300L24,The Urban Atmosphere I,3
 Technical University of Berlin,IE4722,Exchange Elective,4,0434.L866,Machine Intelligence I,6
 Technical University of Berlin,IE4010,Exchange Elective,2,34332400.L001,Introduction to Game Theory,3
-Technical University of Berlin,EX4875,Unrestricted Elective Outside,4,2346742.38172,Industrial Internet of Things,6
+Technical University of Berlin,EX4875,Unrestricted Elective Outside,4,2346742.382,Industrial Internet of Things,6
 Technical University of Darmstadt,LAG3201,German 3,4,FASS-CLS-ZXY1021,41-12-1131-ku German Intensive Basic Course IV/V a,1
 Technical University of Darmstadt,IS3240,Digital Platform Strategy and,4,0115-0008-VL,Software and Internet Economics,5
 Technical University of Darmstadt,IS4100,IT Project Management,4,0119-2G04,Management von IT-Projekten/ Management of IT Projects,5
@@ -4335,21 +4334,21 @@ Technical University of Darmstadt,MT4002,Technology Management Strategy,4,01-222
 Technical University of Darmstadt,IE4113,Department Exchange Module,3,01-252G02,Strategic Decisions of Logistics Service Providers,5
 Technical University of Denmark,IS4231,Information Security Mgmt,4,COMSCI02190,IT Security (Health & IT),7.5
 Technical University of Denmark,BT4016,Risk Analytics for Financial S,4,42105,Financial Products,5
-Technical University of Denmark,BT4240,Machine Learning for Predictiv,4,02460,Advanced Machine Learning,5
-Technical University of Denmark,BT4014,Analytics Driven Design of Ada,4,02285,Artificial Intelligence and Multi-Agent Systems,5
+Technical University of Denmark,BT4240,Machine Learning for Predictiv,4,2460,Advanced Machine Learning,5
+Technical University of Denmark,BT4014,Analytics Driven Design of Ada,4,2285,Artificial Intelligence and Multi-Agent Systems,5
 Technical University of Denmark,BT4015,Geospatial Analytics,4,30530,Geographic Information Systems,5
-Technical University of Denmark,IS4241,Social Media Network Analysis,4,0102805,Social Graphs and Interactions,10
+Technical University of Denmark,IS4241,Social Media Network Analysis,4,102805,Social Graphs and Interactions,10
 Technical University of Denmark,IS4250,IT-enabled Healthcare Solution,4,31566,Personal portable health technologies,10
-Technical University of Denmark,CS2107,Introduction to Information Se,4,2244,Language Based Security,7.5
+Technical University of Denmark,CS2107,Introduction to Information Security,4,2244,Language Based Security,7.5
 Technical University of Denmark,BT4013,Analytics for Capital Market T,4,MGMENGIN42104,Introduction to Financial Engineering,5
 Technical University of Denmark,BT4015,Geospatial Analytics,4,30532,Introduction to digital mapping and GIS,5
 Technical University of Denmark,CS3210,Parallel Computing,4,2258,Parallel Computer Systems,5
 Technical University of Denmark,CS3234,Logic for Proofs and Programs,4,2156,Logical Systems and Logic Programming,5
-Technical University of Denmark,BT4221,Big Data Techniques & Technolo,4,02282,Algorithms for Massive Data Sets,7.5
+Technical University of Denmark,BT4221,Big Data Techniques & Technolo,4,2282,Algorithms for Massive Data Sets,7.5
 Technical University of Denmark,BT4211,Data-Driven Marketing,4,42578,Advanced Business Analytics,5
 Technical University of Denmark,CS3244,Machine Learning,4,42186,Model-based machine learning,5
 Technical University of Denmark,BT4014,Analytics Driven Design of Ada,4,PHOENGIN3436,Intelligent systems,5
-Technical University of Denmark,CS2107,Introduction to Information Se,4,02244,Language Based Security,7.5
+Technical University of Denmark,CS2107,Introduction to Information Security,4,2244,Language Based Security,7.5
 Technical University of Denmark,IS4241,Social Media Network Analysis,4,2805,Social graphs and interactions,10
 Technical University of Denmark,CS4211,Formal Methods for Software En,4,01-02263,Formal Aspects of Software Engineering,5
 Technical University of Denmark,IS4241,Social Media Network Analysis,4,2806,Social data analysis and visualization,5
@@ -4364,10 +4363,10 @@ Technical University of Denmark,IS4250,IT-enabled Healthcare Solution,4,2515,Hea
 Technical University of Denmark,CS4212,Compiler Design,4,2247,Compiler Construction,5
 Technical University of Denmark,CS4222,Wireless Networking,4,31405,Wireless Communications,5
 Technical University of Denmark,BT4221,Big Data Techniques & Technolo,4,2282,Algorithms for Massive Data Sets,7.5
-Technical University of Denmark,CS2102,Database Systems,4,02170,Database Systems,5
+Technical University of Denmark,CS2102,Database Systems,4,2170,Database Systems,5
 Technical University of Denmark,IS4250,IT-enabled Healthcare Solution,4,42376,Operation Management in Health Care and Service Systems,5
-Technical University of Denmark,BT4221,Big Data Techniques & Technolo,4,0102807,Computational Tools for Big Data,5
-Technical University of Denmark,CS3241,Computer Graphics,4,0102561,Computer Graphics,5
+Technical University of Denmark,BT4221,Big Data Techniques & Technolo,4,102807,Computational Tools for Big Data,5
+Technical University of Denmark,CS3241,Computer Graphics,4,102561,Computer Graphics,5
 Technical University of Denmark,IE2140,Engineering Economy,4,62618,Economics for Engineers,5
 Technical University of Denmark,IE2100,Probability Models With Applns,4,11376,Probabilistic Modelling in Civil Engineerintg,5
 Technical University of Denmark,EX3000,Exchange UEM,5,42345,Social Sustainability in Global Supply Chain Management,7.5
@@ -4376,14 +4375,14 @@ Technical University of Denmark,IE4887,Exchange Elective,3,13132,Advanced Public
 Technical University of Denmark,IE3991,IE3 Technical Elective,3,42377,Life Cycle Management in Industry,5
 Technical University of Denmark,MT4003,Engineering Product Developmnt,4,41631,Innovation in Product Development,10
 Technical University of Denmark,IE4503,Exchange Elective,3,42136,Large Scale Optimization using Decomposition,5
-Technical University of Denmark,IE4063,Exchange Elective,3,02610,Optimization and Data Fitting,5
-Technical University of Denmark,ST3240,,4,02409,Multivariate Statistics,5
+Technical University of Denmark,IE4063,Exchange Elective,3,2610,Optimization and Data Fitting,5
+Technical University of Denmark,ST3240,,4,2409,Multivariate Statistics,5
 Technical University of Denmark,ST4245,Statistical Mtds for Finance,4,42123,Optimization in Finance,5
-Technical University of Denmark,ST3232,Design & Analysis Of Experimts,4,02411,Statistical Design and Analysis of Experiments,5
-Technical University of Denmark,ST3248,Statistical Learning I,4,02450,Introduction to Machine Learning and Data Mining,5
-Technical University of Denmark,ST4991,Exchange Enrichment Module,4,02429,Analysis of correlated data: Mixed linear models,5
-Technical University of Denmark,ST3235,Statistical Quality Control,4,02413,Statistical Quality Control,5
-Technical University of Denmark,ST3236,Stochastic Processes I,4,02407,Stochastic Processes - Probability 2,5
+Technical University of Denmark,ST3232,Design & Analysis Of Experimts,4,2411,Statistical Design and Analysis of Experiments,5
+Technical University of Denmark,ST3248,Statistical Learning I,4,2450,Introduction to Machine Learning and Data Mining,5
+Technical University of Denmark,ST4991,Exchange Enrichment Module,4,2429,Analysis of correlated data: Mixed linear models,5
+Technical University of Denmark,ST3235,Statistical Quality Control,4,2413,Statistical Quality Control,5
+Technical University of Denmark,ST3236,Stochastic Processes I,4,2407,Stochastic Processes - Probability 2,5
 Technical University of Denmark,LSM2251,Ecology and Environment,4,25105,Ecology,5
 Technical University of Denmark,LSM3254,Ecology of Aquatic Environment,4,25329,Freshwater organisms as environmental indicators,5
 Technical University of Denmark,LSM1991,Exchange Enrichment Module,4,27008,Life Science,5
@@ -4393,14 +4392,14 @@ Technical University of Denmark,LSM2991,Exchange Enrichment Level 2000,4,25301,"
 Technical University of Denmark,LSM3243,Molecular Biophysics,4,27301,Advanced biochemistry,10
 Technical University of Denmark,LSM2991,Exchange Enrichment Level 2000,4,27026,Molecular Biology,5
 Technical University of Denmark,MA3269,Mathematical Finance I,4,42104,Introduction to Financial Engineering,5
-Technical University of Denmark,MA3264,Mathematical Modelling,4,02526,Mathematical Modelling,5
-Technical University of Denmark,MA3220,Ordinary Differential Equation,4,01034,Advanced Engineering Mathematics 2,5
-Technical University of Denmark,MA3218,Applied Algebra,4,01018,Discrete mathematics 2: algebra,5
-Technical University of Denmark,MA4229,Fourier Analysis and Approxima,4,01325,Mathematics 4 Real Analysis,5
-Technical University of Denmark,MA4270,Data Modelling and Computation,4,02450,Introduction to Machine Learning and Data Mining,5
-Technical University of Denmark,MA4268,Mathematics for Visual Data Pr,4,02502,Image analysis,5
-Technical University of Denmark,ST3233,,4,02417,Time Series Analysis,5
-Technical University of Denmark,ST3247,Simulation,4,02443,Stochastic Simulation,5
+Technical University of Denmark,MA3264,Mathematical Modelling,4,2526,Mathematical Modelling,5
+Technical University of Denmark,MA3220,Ordinary Differential Equation,4,1034,Advanced Engineering Mathematics 2,5
+Technical University of Denmark,MA3218,Applied Algebra,4,1018,Discrete mathematics 2: algebra,5
+Technical University of Denmark,MA4229,Fourier Analysis and Approxima,4,1325,Mathematics 4 Real Analysis,5
+Technical University of Denmark,MA4270,Data Modelling and Computation,4,2450,Introduction to Machine Learning and Data Mining,5
+Technical University of Denmark,MA4268,Mathematics for Visual Data Pr,4,2502,Image analysis,5
+Technical University of Denmark,ST3233,,4,2417,Time Series Analysis,5
+Technical University of Denmark,ST3247,Simulation,4,2443,Stochastic Simulation,5
 Technical University of Munich,LAG2201,German 2,4,DAF220000DE,German as a foreign language A1.2,1
 Technical University of Munich,LAG1201,German 1,4,SZ0301,German as a Foreign Language A 1.1,1
 Technical University of Munich,LAG2201,German 2,4,FASS-CLS-ZXY1015,Deutsch als Fremdsprache A1.2,1
@@ -4420,7 +4419,7 @@ Technical University of Munich,DOS3703,Service Operations Management,4,WI000226,
 Technical University of Munich,MKT1705X,Principles of Marketing,4,WI000688,MARKETING,4
 Technical University of Munich,MKT1705,Principles of Marketing,4,WI000820,MARKETING AND INNOVATION,6
 Technical University of Munich,MKT1705,Principles of Marketing,4,WI000688,MARKETING,4
-Technical University of Munich,DAO2703,Operations and Technology Mana,4,WI000044,OPERATIONS MANAGEMENT,6
+Technical University of Munich,DAO2703,Operations and Technology Management,4,WI000044,OPERATIONS MANAGEMENT,6
 Technical University of Munich,CS3244,Machine Learning,4,EI70130,Machine Learning in Robotics,5
 Technical University of Munich,CS4248,Natural Language Processing,4,IN2361,Natural Language Processing,6
 Technical University of Munich,CS5339,Theory and Algorithms for Mach,4,IN2378,Statistical Foundations of Learning,5
@@ -4444,7 +4443,7 @@ Technical University of Munich,CS3244,Machine Learning,4,IN2332,Statistical Mode
 Technical University of Munich,CS4218,Software Testing,4,IN2084,Software testing: Processes and Methods,4
 Technical University of Munich,CS2103,Software Engineering,4,IN0006,Introduction to Software Engineering,6
 Technical University of Munich,IS4250,IT-enabled Healthcare Solution,4,IN9048,Innovation Generation in the Healthcare Domain,6
-Technical University of Munich,CS2107,Introduction to Information Se,4,IN2178,Security Engineering,5
+Technical University of Munich,CS2107,Introduction to Information Security,4,IN2178,Security Engineering,5
 Technical University of Munich,CS3244,Machine Learning,4,IN2323,Machine Learning for Graphs and Sequential Data,5
 Technical University of Munich,CS4240,Interaction Design for Virtual,4,IN2018,Expanded reality,6
 Technical University of Munich,CS4243,Comp Vision & Pattern Recogntn,4,IN2057,3D Computer Vision,5
@@ -4555,7 +4554,7 @@ Thammasat University,FIN3715,Risk and Insurance,4,FN241,RISK MANAGEMENT AND INSU
 Thammasat University,FIN3701,Corporate Finance,4,FN311,FINANCIAL MANAGEMENT,3
 Thammasat University,FIN3702,Inv. Analysis & Portfolio Mgt,4,FN312,INVESTMENTS,3
 Thammasat University,FIN3713,Bank Management,4,FN331,FINANCIAL INSTITUTIONS MANAGEMENT,3
-Thammasat University,DAO2703,Operations and Technology Mana,4,OM201,OPERATIONS MANAGEMENT,3
+Thammasat University,DAO2703,Operations and Technology Management,4,OM201,OPERATIONS MANAGEMENT,3
 Thammasat University,FIN3714,Financial Risk Management,4,FN415,FINANCIAL RISK ANALYSIS AND MANAGEMENT,3
 Thammasat University,MKT1705X,Principles of Marketing,4,MK312,MARKETING MANAGEMENT/PLANNING,3
 Thammasat University,MKT1705,Principles of Marketing,4,MK312,MARKETING MANAGEMENT/PLANNING,3
@@ -4667,7 +4666,7 @@ The Chinese University of Hong Kong,MKT3702,Consumer Behaviour,4,MKTG3020,CONSUM
 The Chinese University of Hong Kong,FIN3702,Inv. Analysis & Portfolio Mgt,4,FINA3080,INVESTMENT ANALYSIS AND PORTFOLIO MANAGEMENT,3
 The Chinese University of Hong Kong,FIN2704X,Finance,4,FINA2010,FINANCIAL MANAGEMENT,3
 The Chinese University of Hong Kong,FIN3701,Corporate Finance,4,FINA3070,CORPORATE FINANCE: THEORY AND PRACTICE,3
-The Chinese University of Hong Kong,DAO2703,Operations and Technology Mana,4,DSME2030,OPERATIONS MANAGEMENT,3
+The Chinese University of Hong Kong,DAO2703,Operations and Technology Management,4,DSME2030,OPERATIONS MANAGEMENT,3
 The Chinese University of Hong Kong,FIN3715,Risk and Insurance,4,FINA3210,RISK MANAGEMENT AND INSURANCE,3
 The Chinese University of Hong Kong,IS3223,IT and Supply Chain Management,4,SEEM4610,Supply Chain Management,3
 The Chinese University of Hong Kong,CS1010J,Programming Methodology,4,CSCI 1130,Introduction to Computing Using Java,3
@@ -4776,7 +4775,7 @@ The George Washington University,FIN2704X,Finance,4,BADM3501,Financial Managemen
 The George Washington University,MNO1706,Organisational Behavior,4,ORSC1109,INTRODUCTION TO ORGANIZATIONAL SCIENCES,3
 The George Washington University,ACC2706,Managerial Accounting,4,ACCY2002,INTRODUCTORY MANAGERIAL ACCOUNTING,3
 The George Washington University,MNO1706X,Organisational Behavior,4,ORSC1109,INTRODUCTION TO ORGANIZATIONAL SCIENCES,3
-The George Washington University,DAO2703,Operations and Technology Mana,4,BADM3601,OPERATIONS MANAGEMENT,3
+The George Washington University,DAO2703,Operations and Technology Management,4,BADM3601,OPERATIONS MANAGEMENT,3
 The George Washington University,ACC1701X,Accounting for Decision Makers,4,ACCY2001,INTRODUCTORY FINANCIAL ACCOUNTING,4
 The George Washington University,FIN2704,Finance,4,BADM3501,Financial Management and Markets,4
 The George Washington University,BSP3701,Strategic Management,4,BADM4801,STRATEGY FORMULATION AND IMPLEMENTATION,3
@@ -4825,7 +4824,7 @@ The Hong Kong Polytechnic University,PS2238,Int'l Politics of NE Asia,4,CC2C08,M
 The Hong Kong Polytechnic University,ACC1701X,Accounting for Decision Makers,4,AF2108,Financial Accounting,3
 The Hong Kong Polytechnic University,MKT1705X,Principles of Marketing,4,MM2711,Introduction to Marketing,3
 The Hong Kong Polytechnic University,DAO1704X,Deci Analytics using Spreadsh,4,LGT2425,Introduction to Business Analytics,3
-The Hong Kong Polytechnic University,DAO2703,Operations and Technology Mana,4,LGT2106,Principles of Operations Management,3
+The Hong Kong Polytechnic University,DAO2703,Operations and Technology Management,4,LGT2106,Principles of Operations Management,3
 The Hong Kong Polytechnic University,BSP1702X,Legal Environment of Business,4,AF2504,Introduction to Business Law,3
 The Hong Kong Polytechnic University,IS1103,Ethics in Computing,4,COMP3512,"Legal Aspects, Professionalism and Ethics of Computing",3
 The Hong Kong Polytechnic University,CS3230,Design & Analysis of Algorithm,4,COMP3011,Design and Analysis of Algorithms,3
@@ -4950,7 +4949,7 @@ The University of Arizona,LSM3211,Fundamental Pharmacology,4,PHCL412,Introductio
 The University of Arizona,LSM3217,Human Ageing,4,PSIO487,Physiology of ageing,3
 The University of Arizona,LSM3212,Human Physio:Cardiopulmon Syst,4,PSIO485,Cardiovasular physiology,3
 The University of Arizona,LSM3214,Human Physio-Hormones & Hlth,4,PSIO467,Endocrine Physiology,3
-The University of Auckland,DAO2703,Operations and Technology Mana,4,OPSMGMT255,INTRODUCTION TO OPERATIONS AND SUPPLY CHAIN MANAGEMENT,15
+The University of Auckland,DAO2703,Operations and Technology Management,4,OPSMGMT255,INTRODUCTION TO OPERATIONS AND SUPPLY CHAIN MANAGEMENT,15
 The University of Auckland,FIN3713,Bank Management,4,FIN383,BANKING AND FINANCIAL INSTITUTIONS: SPECIAL TOPIC,15
 The University of Auckland,FIN3720,Financial Statement Analysis,4,ACCTG371,FINANCIAL STATEMENT ANALYSIS,15
 The University of Auckland,MKT3701,Marketing Strategy: Analysis a,4,MKTG301,MARKETING STRATEGY,15
@@ -4967,7 +4966,7 @@ The University of Auckland,CS2105,Intro to Computer Networks,4,COMPSCI 314,Moder
 The University of Auckland,CS2100,Computer Organisation,4,COMPSCI210,Computer Systems 1,15
 The University of Auckland,CS4243,Comp Vision & Pattern Recogntn,4,COMPSCI 773,Intelligent Vision Systems,15
 The University of Auckland,CS3244,Machine Learning,4,COMPSCI 361,Machine Learning,15
-The University of Auckland,CS2107,Introduction to Information Se,4,COMPSCI 316,Cyber Security,15
+The University of Auckland,CS2107,Introduction to Information Security,4,COMPSCI 316,Cyber Security,15
 The University of Auckland,LSM1991,Exchange Enrichment Module,4,MARINE 100G,The Oceans Around Us,15
 The University of Auckland,LSM2991,Exchange Enrichment Level 2000,4,MARINE 202,Principles of Marine Science,15
 The University of Auckland,LSM3991,Exchange Enrichment Module,4,MARINE 302,Dynamics of Marine Systems,15
@@ -5043,7 +5042,7 @@ The University of British Columbia,MKT1705X,Principles of Marketing,4,COMM296,IN
 The University of British Columbia,MKT1705,Principles of Marketing,4,COMM296,INTRODUCTION TO MARKETING,3
 The University of British Columbia,ACC1701X,Accounting for Decision Makers,4,COMM457,FUNDAMENTALS OF FINANCIAL ACCOUNTING,3
 The University of British Columbia,FIN2704,Finance,4,COMM298,INTRODUCTION TO FINANCE,3
-The University of British Columbia,DAO2703,Operations and Technology Mana,4,COMM399,LOGISTICS AND OPERATIONS MANAGEMENT,3
+The University of British Columbia,DAO2703,Operations and Technology Management,4,COMM399,LOGISTICS AND OPERATIONS MANAGEMENT,3
 The University of British Columbia,ACC1701X,Accounting for Decision Makers,4,COMM293,FINANCIAL ACCOUNTING,3
 The University of British Columbia,MKT3702,Consumer Behaviour,4,COMM362,BUYER BEHAVIOUR,3
 The University of British Columbia,BSP1703,Managerial Economics,4,COMM295,MANAGERIAL ECONOMICS,3
@@ -5072,7 +5071,7 @@ The University of British Columbia,CS3230,Design & Analysis of Algorithm,4,CPSC3
 The University of British Columbia,CS2040,Data Structures and Algorithms,4,CPSC221,Basic Algorithms and Data Structures,3
 The University of British Columbia,IS3221,ERP Systems with Analytics Sol,4,COMM335,Information Systems Technology and Development,3
 The University of British Columbia,BT4240,Machine Learning for Predictiv,4,CPSC340,Machine Learning and Data Mining,3
-The University of British Columbia,CS2107,Introduction to Information Se,4,CPEN442,Introduction to Computer Security,3
+The University of British Columbia,CS2107,Introduction to Information Security,4,CPEN442,Introduction to Computer Security,3
 The University of British Columbia,CS4234,Optimisation Algorithms,4,CSPC406,Computer Optimization,3
 The University of British Columbia,CS3240,Interaction Design,4,CPSC344,Introduction to Human Computer Interaction Methods,3
 The University of British Columbia,CS3210,Parallel Computing,4,CPSC418,Parallel Computation,3
@@ -5234,7 +5233,7 @@ The University of Edinburgh,IS4261,Designing IT-enabled Business,4,MAEE09003,Mar
 The University of Edinburgh,CS4248,Natural Language Processing,4,INFR11125,Accelerated Natural Language Processing,15
 The University of Edinburgh,CS3242,3D Modeling and Animation,4,INFR11067,Computer Animation and Visualisation,10
 The University of Edinburgh,CS4239,Software Security,4,INFR11098,Secure Programming,10
-The University of Edinburgh,CS2107,Introduction to Information Se,4,INFR10058,Computer Security,10
+The University of Edinburgh,CS2107,Introduction to Information Security,4,INFR10058,Computer Security,10
 The University of Edinburgh,CS3230,Design & Analysis of Algorithm,4,INFR10052,Algorithms and Data Structures,10
 The University of Edinburgh,CS4218,Software Testing,4,INFR10057,Software Testing,10
 The University of Edinburgh,CS5330,Randomized Algorithms,4,INFR11089,Randomness and Computation,10
@@ -5302,7 +5301,7 @@ The University of Hong Kong,MKT1705X,Principles of Marketing,4,BUSI1004,MARKETIN
 The University of Hong Kong,MKT1705,Principles of Marketing,4,MKTG2501,INTRODUCTION TO MARKETING,6
 The University of Hong Kong,MKT1705,Principles of Marketing,4,BUSI1004,MARKETING,6
 The University of Hong Kong,ACC1701X,Accounting for Decision Makers,4,BUSI1002,INTRODUCTION TO ACCOUNTING,6
-The University of Hong Kong,DAO2703,Operations and Technology Mana,4,BUSI0023,OPERATIONS AND QUALITY MANAGEMENT,6
+The University of Hong Kong,DAO2703,Operations and Technology Management,4,BUSI0023,OPERATIONS AND QUALITY MANAGEMENT,6
 The University of Hong Kong,MKT3711,Services Marketing,4,BUSI0038,SERVICES MARKETING,6
 The University of Hong Kong,MNO3701,Human Capital Management,4,BUSI0034,HUMAN RESOURCE MANAGEMENT: THEORY & PRACTICE,6
 The University of Hong Kong,MKT1705X,Principles of Marketing,4,MKTG2501,INTRODUCTION TO MARKETING,6
@@ -5320,7 +5319,7 @@ The University of Hong Kong,CS2100,Computer Organisation,4,COMP2120,Computer Org
 The University of Hong Kong,IS4100,IT Project Management,4,IIMT3603A,Project Management,6
 The University of Hong Kong,IS3223,IT and Supply Chain Management,4,IIMT3681,Supply Chain Management,6
 The University of Hong Kong,CS2105,Intro to Computer Networks,4,ELEC3443,Computer networks,3
-The University of Hong Kong,CS2107,Introduction to Information Se,4,COMP3355,Cyber Security,6
+The University of Hong Kong,CS2107,Introduction to Information Security,4,COMP3355,Cyber Security,6
 The University of Hong Kong,CS1231,Discrete Structures,4,COMP2121,Discrete Mathematics,3
 The University of Hong Kong,CS4243,Comp Vision & Pattern Recogntn,4,COMP3317,Computer vision,6
 The University of Hong Kong,IS4234,Compliance and Regulation Tech,4,IIMT3686,Information Systems Audit and Control,6
@@ -5438,8 +5437,8 @@ The University of Manchester,FIN2704X,Finance,4,BMAN10552,FUNDAMENTALS OF FINANC
 The University of Manchester,FIN2704X,Finance,4,BMAN10522,FINANCIAL DECISION MAKING,10
 The University of Manchester,FIN2704X,Finance,4,BMAN23000B,FOUNDATIONS OF FINANCE,20
 The University of Manchester,FIN2704X,Finance,4,BMAN23000A,FOUNDATIONS OF FINANCE,20
-The University of Manchester,DAO2703,Operations and Technology Mana,4,BMAN20031,OPERATIONS MANAGEMENT,10
-The University of Manchester,DAO2703,Operations and Technology Mana,4,BMAN20771,OPERATIONS MANAGEMENT,10
+The University of Manchester,DAO2703,Operations and Technology Management,4,BMAN20031,OPERATIONS MANAGEMENT,10
+The University of Manchester,DAO2703,Operations and Technology Management,4,BMAN20771,OPERATIONS MANAGEMENT,10
 The University of Manchester,FIN2704,Finance,4,BMAN20651,FOUNDATIONS OF FINANCE,10
 The University of Manchester,FIN2704,Finance,4,BMAN10552,FUNDAMENTALS OF FINANCE,10
 The University of Manchester,FIN2704,Finance,4,BMAN10522,FINANCIAL DECISION MAKING,10
@@ -5521,7 +5520,7 @@ The University of Melbourne,FIN2704X,Finance,4,FNCE10001,FINANCE 1,12.5
 The University of Melbourne,FIN3701,Corporate Finance,4,FNCE30002,CORPORATE FINANCE,12.5
 The University of Melbourne,ACC1701X,Accounting for Decision Makers,4,ACCT10001,ACCOUNTING REPORTS AND ANALYSIS,12.5
 The University of Melbourne,FIN2704,Finance,4,FNCE10001,FINANCE 1,12.5
-The University of Melbourne,DAO2703,Operations and Technology Mana,4,MGMT20002,MANAGING OPERATIONS,12.5
+The University of Melbourne,DAO2703,Operations and Technology Management,4,MGMT20002,MANAGING OPERATIONS,12.5
 The University of Melbourne,MNO3703,Leading in the 21st Century,4,MGMT20001,ORGANISATIONAL BEHAVIOUR,12.5
 The University of Melbourne,BSP1702X,Legal Environment of Business,4,BLAW10001,PRINCIPLES OF BUSINESS LAW,12.5
 The University of Melbourne,BSP1702,Legal Environment of Business,4,BLAW10001,PRINCIPLES OF BUSINESS LAW,12.5
@@ -5668,7 +5667,7 @@ The University of Nottingham,BSP3701,Strategic Management,4,N13418,STRATEGIC MAN
 The University of Nottingham,MKT1705,Principles of Marketing,4,N12105,INTRODUCTION TO MARKETING A,10
 The University of Nottingham,MNO1706,Organisational Behavior,4,N11603,PEOPLE AND ORGANISATIONS,10
 The University of Nottingham,MKT1705X,Principles of Marketing,4,N12105,INTRODUCTION TO MARKETING A,10
-The University of Nottingham,DAO2703,Operations and Technology Mana,4,N12814,INTRODUCTION TO BUSINESS OPERATIONS,10
+The University of Nottingham,DAO2703,Operations and Technology Management,4,N12814,INTRODUCTION TO BUSINESS OPERATIONS,10
 The University of Nottingham,MNO1706X,Organisational Behavior,4,N11603,PEOPLE AND ORGANISATIONS,10
 The University of Nottingham,DOS3703,Service Operations Management,4,N12812,MANAGING SERVICE OPERATIONS,10
 The University of Nottingham,DOS3701,Supply Chain Management,4,N14C32,SUPPLY CHAIN MANAGEMENT,15
@@ -5691,7 +5690,7 @@ The University of Queensland,MNO1706,Organisational Behavior,4,MGTS1301,INTRODUC
 The University of Queensland,MKT1705X,Principles of Marketing,4,MKTG1501,INTRODUCTION TO/FOUNDATIONS OF MARKETING,2
 The University of Queensland,FIN2704X,Finance,4,FINM2401,FINANCIAL MANAGEMENT,2
 The University of Queensland,MKT1705,Principles of Marketing,4,MKTG1501,INTRODUCTION TO/FOUNDATIONS OF MARKETING,2
-The University of Queensland,DAO2703,Operations and Technology Mana,4,MGTS7807,OPERATIONS DESIGN,2
+The University of Queensland,DAO2703,Operations and Technology Management,4,MGTS7807,OPERATIONS DESIGN,2
 The University of Queensland,MNO1706X,Organisational Behavior,4,MGTS1301,INTRODUCTION TO MANAGEMENT,2
 The University of Queensland,MKT3717,Product & Brand Management,4,MKTG2508,PRODUCT AND BRAND MANAGEMENT/BRAND MANAGEMENT AND STRATEGY,2
 The University of Queensland,MNO3703,Leading in the 21st Century,4,MGTS1601,ORGANISATIONAL BEHAVIOR,2
@@ -5783,7 +5782,7 @@ The University of Sydney,FIN3713,Bank Management,4,BANK3011,BANK FINANCIAL MANAG
 The University of Sydney,MNO3714,Biz with a Social Conscience,4,IBUS3104,ETHICAL INTERNATIONAL BUSINESS DECISIONS,6
 The University of Sydney,MNO3761B,TILHCM: Managing China Venture,4,IBUS2020,CHINESE ECONOMY AND BUSINESS,6
 The University of Sydney,MKT3717,Product & Brand Management,4,MKTG3120,BUILDING AND MANAGING BRANDS,6
-The University of Sydney,DAO2703,Operations and Technology Mana,4,QBUS3340,OPERATIONS MANAGEMENT,6
+The University of Sydney,DAO2703,Operations and Technology Management,4,QBUS3340,OPERATIONS MANAGEMENT,6
 The University of Sydney,FIN3711,International Financial Mgt,4,FINC3011,INTERNATIONAL FINANCIAL MANAGEMENT,6
 The University of Sydney,FIN2704X,Finance,4,FINC2011,CORPORATE FINANCE I,6
 The University of Sydney,FIN3702,Inv. Analysis & Portfolio Mgt,4,FINC3017,INVESTMENTS AND PORTFOLIO MANAGEMENT,6
@@ -5818,7 +5817,7 @@ The University of Sydney,BT4221,Big Data Techniques & Technolo,4,INFO3406,Introd
 The University of Sydney,BT4013,Analytics for Capital Market T,4,FINC3014,Trading and Dealing in Security Markets,6
 The University of Sydney,BT4016,Risk Analytics for Financial S,4,FINC3020,Financial Risk Management,6
 The University of Sydney,CS2106,Intro to Operating Systems,4,COMP2129,Operating Systems and Machine Principles,6
-The University of Sydney,CS2107,Introduction to Information Se,4,ELEC5616,Computer and Network Security,6
+The University of Sydney,CS2107,Introduction to Information Security,4,ELEC5616,Computer and Network Security,6
 The University of Sydney,IS4100,IT Project Management,4,INFO3402,Management of IT projects and systems,6
 The University of Sydney,BT3103,Application Systems Developmen,4,ISYS3402,Decision Analytics and Support Systems,6
 The University of Sydney,BT3102,Computational Methods for Busi,4,QBUS2830,Actuarial Data Analytics,6
@@ -5873,8 +5872,8 @@ The University of Sydney,LSM3258,Comparative Botany,4,BIOL 2031,Plants and Envir
 The University of Texas at Austin,FIN3720,Financial Statement Analysis,4,FIN377,FINANCIAL ANALYSIS,3
 The University of Texas at Austin,MNO3703,Leading in the 21st Century,4,MAN336,ORGANIZATIONAL BEHAVIOUR,3
 The University of Texas at Austin,DOS3701,Supply Chain Management,4,OM367,STRATEGIC SUPPLY CHAIN MANAGEMENT,3
-The University of Texas at Austin,DAO2703,Operations and Technology Mana,4,OM335,OPERATIONS MANAGEMENT,3
-The University of Texas at Austin,DAO2703,Operations and Technology Mana,4,MAN335,OPERATIONS MANAGEMENT,3
+The University of Texas at Austin,DAO2703,Operations and Technology Management,4,OM335,OPERATIONS MANAGEMENT,3
+The University of Texas at Austin,DAO2703,Operations and Technology Management,4,MAN335,OPERATIONS MANAGEMENT,3
 The University of Texas at Austin,MKT3702,Consumer Behaviour,4,MKT372,CONSUMER BEHAVIOR,3
 The University of Texas at Austin,ACC2706,Managerial Accounting,4,ACC312,FUNDAMENTALS OF MANAGERIAL ACCOUNTING,3
 The University of Texas at Austin,MKT1705,Principles of Marketing,4,MKT337,PRINCIPLES OF MARKETING,3
@@ -6059,8 +6058,8 @@ Tianjin University,AR4322,Design Simulation & Analysis,4,2060409,Practical use o
 Tianjin University of Finance and Economics,PS3701,Political Science Exchange Mod,4,IR3008,International Terrorism,30
 Tilburg University,FIN2704,Finance,4,323027,FINANCIAL MANAGEMENT,6
 Tilburg University,FIN2704,Finance,4,30J201,FINANCE 2 FOR IBA,6
-Tilburg University,DAO2703,Operations and Technology Mana,4,35V3A4,INVENTORY AND PRODUCTION MANAGEMENT,6
-Tilburg University,DAO2703,Operations and Technology Mana,4,30J203,OPERATIONS MANAGEMENT FOR IBA,6
+Tilburg University,DAO2703,Operations and Technology Management,4,35V3A4,INVENTORY AND PRODUCTION MANAGEMENT,6
+Tilburg University,DAO2703,Operations and Technology Management,4,30J203,OPERATIONS MANAGEMENT FOR IBA,6
 Tilburg University,FIN2704X,Finance,4,323027,FINANCIAL MANAGEMENT,6
 Tilburg University,FIN2704X,Finance,4,30J201,FINANCE 2 FOR IBA,6
 Tilburg University,FIN3761X,Topics in Finance,4,35V3A5,"AUCTIONS, BARGAINING AND NETWORKS",6
@@ -6074,7 +6073,7 @@ Tilburg University,DBA3711,Stochastic Models in Mgt,4,35B204,STOCHASTIC OPERATIO
 Tilburg University,DBA3761X,Topics in Business Analytics,4,346242,DECISION SUPPORT SYSTEMS,6
 Tilburg University,MNO3703,Leading in the 21st Century,4,422057,ORGANIZATIONAL BEHAVIOUR,5
 Tilburg University,FIN3702,Inv. Analysis & Portfolio Mgt,4,323060,INVESTMENT ANALYSIS,6
-Tilburg University,DAO2703,Operations and Technology Mana,4,35V3A4-B-6,INVENTORY AND PRODUCTION MANAGEMENT,6
+Tilburg University,DAO2703,Operations and Technology Management,4,35V3A4-B-6,INVENTORY AND PRODUCTION MANAGEMENT,6
 Tilburg University,MKT3702,Consumer Behaviour,4,590032-B-6,CONSUMER BEHAVIOR,6
 Tilburg University,BSP2701,Global Economy,2,630012,MACROECONOMICS AND INTERNATIONAL ECONOMICS,6
 Tilburg University,DBA3701,Introduction to Optimization,4,35V5A3-B-6,COMBINATORIAL OPTIMIZATION,6
@@ -6144,7 +6143,7 @@ Tsinghua University,FIN3720,Financial Statement Analysis,4,30510893,FINANCIAL ST
 Tsinghua University,MKT3812,Game Theory & Strat. Analysis,4,40511103,GAME THEORY,3
 Tsinghua University,MNO1706,Organisational Behavior,4,30510732,GENERAL MANAGEMENT,2
 Tsinghua University,FIN2704X,Finance,4,30510923,PRINCIPLES OF FINANCE,3
-Tsinghua University,DAO2703,Operations and Technology Mana,4,40510223,PRODUCTION AND OPERATION MANAGEMENT,3
+Tsinghua University,DAO2703,Operations and Technology Management,4,40510223,PRODUCTION AND OPERATION MANAGEMENT,3
 Tsinghua University,FIN2704,Finance,4,30510923,PRINCIPLES OF FINANCE,3
 Tsinghua University,ACC1701X,Accounting for Decision Makers,4,30510123,PRINCIPLE OF ACCOUNTING,3
 Tsinghua University,MNO1706X,Organisational Behavior,4,30510732,GENERAL MANAGEMENT,2
@@ -6202,13 +6201,13 @@ Tsinghua University,IE3114,Department Exchange Module,4,80160423,Manufacturing i
 Tsinghua University,IE4881,Exchange Elective,4,80250993,Machine Learning,3
 Tsinghua University,IE3704,Exchange Elective,4,80160192,Theory of Modern Inventory Management,3
 Tsinghua University,IE3999,IE3 Technical Elective,4,80160033,Enterprise Information Management,3
-Tsinghua University,IE4604,Exchange Elective,4,00510232,Management of Technological Innovation,2
+Tsinghua University,IE4604,Exchange Elective,4,510232,Management of Technological Innovation,2
 Tsinghua University,IE4064,Exchange Elective,4,40511323,Human-Computer Interaction,3
-Tsinghua University,IE4124,Department Exchange Module,4,00510353,Game Theory and Its Economic Applications,3
+Tsinghua University,IE4124,Department Exchange Module,4,510353,Game Theory and Its Economic Applications,3
 Tsinghua University,IE4113,Department Exchange Module,3,40160522,International Logistics,2
 Tsinghua University,IE4111,Department Exchange Module,1,70160591,Industrial Practice,1
 Tsinghua University,IE3714,Exchange Elective,4,40510223,Production and Operation Management,3
-Tsinghua University,EX4884,Exchange UEM 5,4,00510392,Entrepreneurial Management,2
+Tsinghua University,EX4884,Exchange UEM 5,4,510392,Entrepreneurial Management,2
 Tulane University,PS3706,Political Science Exchange Mod,4,POLA3010,"Booze, Drugs and the Courts",3
 Tulane University,LSM3991,Exchange Enrichment Module,4,EBIO 2040,Conservation Biology,3
 Tulane University,LSM3991,Exchange Enrichment Module,4,EBIO 3550,Shark Paleobiology,4
@@ -6230,7 +6229,7 @@ Universidad Catolica De Honduras,LAS1201,Spanish 1,4,FASS-CLS-ZXY1023,Spanish La
 Universidade Nova De Lisboa,ACC2706,Managerial Accounting,4,1202,MANAGEMENT ACCOUNTING,7.5
 Universidade Nova De Lisboa,MNO3703,Leading in the 21st Century,4,1206,ORGANISATIONAL BEHAVIOUR,7.5
 Universidade Nova De Lisboa,FIN2704,Finance,4,1203,FINANCE,7.5
-Universidade Nova De Lisboa,DAO2703,Operations and Technology Mana,4,1205,OPERATIONS MANAGEMENT,7.5
+Universidade Nova De Lisboa,DAO2703,Operations and Technology Management,4,1205,OPERATIONS MANAGEMENT,7.5
 Universidade Nova De Lisboa,MKT1705,Principles of Marketing,4,1204,MARKETING,7.5
 Universidade Nova De Lisboa,BSP3701,Strategic Management,4,1207,STRATEGY,7.5
 Universidade Nova De Lisboa,FIN2704X,Finance,4,1203,FINANCE,7.5
@@ -6249,7 +6248,7 @@ Universiteit van Stellenbosch,IE4114,Department Exchange Module,4,244,Logistics 
 "University College Cork, Ireland",IS3261,Mobile Apps Development for En,4,IS4447,Principles of Mobile Systems Development,5
 "University College Cork, Ireland",BT4013,Analytics for Capital Market T,4,MF3052,"Derivatives, Securities and Option Pricing",5
 "University College Cork, Ireland",CS3230,Design & Analysis of Algorithm,4,CS3509,Theory of Computation,5
-"University College Cork, Ireland",CS2102,Database Systems,,CS1106,Introduction to Relational Databases,5
+"University College Cork, Ireland",CS2102,Database Systems,4,CS1106,Introduction to Relational Databases,5
 "University College Cork, Ireland",CS3210,Parallel Computing,4,CS4402,Parallel and Grid Computing,5
 "University College Cork, Ireland",CS4236,Cryptography Theory & Practice,4,CS4614,Introductory Network Security,5
 "University College Cork, Ireland",CS3245,Information Retrieval,4,CS4611,Information Retrieval,5
@@ -6403,7 +6402,7 @@ University College London,CS3240,Interaction Design,4,COMP3012,Interaction Desig
 University College London,CS1010S,Programming Methodology,4,COMP0015,INTRODUCTION TO PROGRAMMING,15
 University College London,CS2103,Software Engineering,4,COMP203P,Software Engineering,0.5
 University College London,CS2030,Programming Methodology II,4,COMP0004,Object-Oriented Programming,15
-University College London,CS2107,Introduction to Information Se,4,COMPM063,Introduction to Cryptography,0.5
+University College London,CS2107,Introduction to Information Security,4,COMPM063,Introduction to Cryptography,0.5
 University College London,IE4505,Exchange Elective,4,STAT3005,Factorial Experimentation,4
 University College London,EX1105,Exchange UEM,4,ECON1602,Basic Microeconomic Concepts,7.5
 University College London,EX1043,Exchange UEM,5,ISSU1005,"Global London: Contemporary Urbanism, Culture and Space",7.5
@@ -6626,9 +6625,9 @@ University of Birmingham,CS1010S,Programming Methodology,4,CS 06-32248,Programmi
 University of Birmingham,CS4215,Programming Language Implement,4,CS30435,"Programming Language Principles, Design, and Implementation",20
 University of Birmingham,CS2102,Database Systems,4,06-21980,ICY Databases,15
 University of Birmingham,CS5272,Embedded Software Design,4,CE19504,Dig Systems & Embedded Computing,20
-University of Birmingham,CM3252,Polymer Chemistry 1,4,0430573,"LI Polymer Case Studies, Part A",10
-University of Birmingham,LSM3211,Fundamental Pharmacology,4,0218209,Molecular and Integrative Pharmacology: From Molecules to Man,30
-University of Birmingham,LSM4211,Toxicology,4,0328628,"LM Forensic, Clinical and Occupational Toxicology",20
+University of Birmingham,CM3252,Polymer Chemistry 1,4,430573,"LI Polymer Case Studies, Part A",10
+University of Birmingham,LSM3211,Fundamental Pharmacology,4,218209,Molecular and Integrative Pharmacology: From Molecules to Man,30
+University of Birmingham,LSM4211,Toxicology,4,328628,"LM Forensic, Clinical and Occupational Toxicology",20
 University of Birmingham,LSM3212,Human Physio:Cardiopulmon Syst,4,03 20422,Human Physiology,20
 University of Birmingham,LSM4243,Tumour Biology,4,03 23506,LM Cancer Biology,20
 University of Birmingham,LSM2254,Fundamentals of Plant Biology,4,03 13282,Plant Sciences: from cells to the environment,20
@@ -6646,14 +6645,14 @@ University of Birmingham,LSM2231,General Physiology,4,323318,LC Cell Biology & P
 University of Birmingham,LSM3991,Exchange Enrichment Module,4,02 21039,Infection: Bacterial Threats and Defence,30
 University of Birmingham,LSM4214,Cancer Pharmacology,4,130496,LH Cancer: pathology and therapy,20
 University of Birmingham,LSM4262,Tropical Conservation Biology,4,327192,LH Biodiversity and Conservation Management,20
-University of Birmingham,CM3212,Transition Metal Chemistry,4,0320492,"Spectroscopic and Magnetic Properties of TM Complexes, and Bonding in Solids",10
-University of Birmingham,CM3212,Transition Metal Chemistry,4,0310851,Inorganic Chemistry I,10
-University of Birmingham,CM3225,Biomolecules,4,0310860,Advanced Bioorganic Chemistry,10
-University of Birmingham,CM3225,Biomolecules,4,0329288,LH Year 3 Chemistry Options I,10
+University of Birmingham,CM3212,Transition Metal Chemistry,4,320492,"Spectroscopic and Magnetic Properties of TM Complexes, and Bonding in Solids",10
+University of Birmingham,CM3212,Transition Metal Chemistry,4,310851,Inorganic Chemistry I,10
+University of Birmingham,CM3225,Biomolecules,4,310860,Advanced Bioorganic Chemistry,10
+University of Birmingham,CM3225,Biomolecules,4,329288,LH Year 3 Chemistry Options I,10
 University of Birmingham,LSM3211,Fundamental Pharmacology,4,220309,SYSTEMS PHARMACOLOGY,10
-University of Birmingham,CM3253,Materials Chemistry 1,4,0328291,"LM Clusters, Surfaces and Interfaces",10
-University of Birmingham,CM4282,Energy Resources,4,0419689,Materials for Energy Generation and Storage,10
-University of Birmingham,CM4282,Energy Resources,4,0426221,Conventional Energy Technology,10
+University of Birmingham,CM3253,Materials Chemistry 1,4,328291,"LM Clusters, Surfaces and Interfaces",10
+University of Birmingham,CM4282,Energy Resources,4,419689,Materials for Energy Generation and Storage,10
+University of Birmingham,CM4282,Energy Resources,4,426221,Conventional Energy Technology,10
 University of Birmingham,LSM4262,Tropical Conservation Biology,4,327621,Biodiversity and Conservation Management,10
 University of Bordeaux,PS3705,POLITICAL SCIENCE EXCHANGE MOD,4,IR1,History of International Politics,4
 University of Bordeaux,PS4751,Department exchange module,5,PU7,War Studies: Understanding Modern War and Warfare,8
@@ -6863,7 +6862,7 @@ University of California,MA2101,Linear Algebra II,4,MATH110,LINEAR ALGEBRA,4
 University of California,MA3252,Linear & Network Optimisation,4,MATH170,MATHEMATICAL METHODS FOR OPTIMIZATION,4
 University of California,MA3111,Complex Analysis I,4,MATH185,Introduction to Complex Analysis,4
 University of California,MA4264,Game Theory,4,STAT155,Game Theory,3
-University of California,ma2101,,4,MATH108B,Advanced Linear Algebra,4
+University of California,MA2101,Linear Algebra II,4,MATH108B,Advanced Linear Algebra,4
 University of California,MA3220,Ordinary Differential Equation,4,MATH119A,Ordinary Differential Equations,4
 University of California,MA3111,Complex Analysis I,4,MATH202A,Complex Analysis,4
 University of California,MA2202,Algebra I,4,MATH111A,Introduction to Abstract Algebra,4
@@ -7073,13 +7072,13 @@ University of California,CM4991,Exchange Enrichment Module,4,CHEM130B,Biophysica
 "University of California, Davis",BT4222,Mining Web Data for Business I,4,STAT141B,Data & Web Technologies for Data Analysis,3
 "University of California, Davis",CS3230,Design & Analysis of Algorithm,4,ECS122B,Algorithm Design and Analysis,3
 "University of California, Davis",CS3243,Introduction to Artificial Int,4,ECS170,Artificial Intelligence,3
-"University of California, Davis",CS2107,Introduction to Information Se,4,CSE153,Computer Security,3
+"University of California, Davis",CS2107,Introduction to Information Security,4,CSE153,Computer Security,3
 "University of California, Davis",CS4225,Big Data Systems for Data Scie,4,CSE158,Web Mining and Recommender Systems,3
 "University of California, Davis",CS3241,Computer Graphics,4,ECS175,Computer Graphics,3
 "University of California, Davis",CS4236,Cryptography Theory & Practice,4,ECS127,Cryptography,3
 "University of California, Davis",CS3103,Computer Networks Practice,4,ECS152B,Computer Networks,3
 "University of California, Davis",CS4243,Comp Vision & Pattern Recogntn,4,ECS174,Introduction to Computer Vision,3
-"University of California, Davis",CS2107,Introduction to Information Se,4,ECS 235A,COMPUTER AND INFORMATION SECURITY,3
+"University of California, Davis",CS2107,Introduction to Information Security,4,ECS 235A,COMPUTER AND INFORMATION SECURITY,3
 "University of California, Davis",IS3103,Information Systems Leadership,4,MGT120,Managing and Using Information Technology,3
 "University of California, Davis",CS3244,Machine Learning,4,ECS171,Machine Learning,3
 "University of California, Davis",PF2504,Materials Technology,4,45,Properties of Materials,4
@@ -7092,7 +7091,7 @@ University of California,CM4991,Exchange Enrichment Module,4,CHEM130B,Biophysica
 "University of California, Irvine",CS3230,Design & Analysis of Algorithm,4,COMPSCI260,Fundamentals of the Design and Analysis of Algorithms,3
 "University of California, Irvine",IS4241,Social Media Network Analysis,4,BANA227,Web and Social Analytics,3
 "University of California, Irvine",IS3103,Information Systems Leadership,4,Mgmt178,Introduction to Management Information Systems,3
-"University of California, Irvine",CS2107,Introduction to Information Se,4,COMPSCI134,Computer and Network Security,3
+"University of California, Irvine",CS2107,Introduction to Information Security,4,COMPSCI134,Computer and Network Security,3
 "University of California, Irvine",CS3240,Interaction Design,4,IN4MATX131,Human Computer Interaction,3
 "University of California, Los Angeles",CS1010E,Programming Methodology,4,COMPSCI 31,INTRO TO PROGRMMING,3
 "University of California, Los Angeles",CS3240,Interaction Design,4,CMPSC185,Human-Computer Interaction,3
@@ -7126,7 +7125,7 @@ University of California,CM4991,Exchange Enrichment Module,4,CHEM130B,Biophysica
 "University of California, Los Angeles",CS3235,Computer Security,4,CSE127,Introduction to Computer Security,3
 "University of California, Los Angeles",IS3103,Information Systems Leadership,4,MGT127,Innovation and Technology Strategy,3
 "University of California, Los Angeles",CS1010S,Programming Methodology,4,CMPSC 8,Introduction to Computer Science,3
-"University of California, Los Angeles",CS2107,Introduction to Information Se,4,CMPSC177,Computer Security,3
+"University of California, Los Angeles",CS2107,Introduction to Information Security,4,CMPSC177,Computer Security,3
 "University of California, Los Angeles",IS3103,Information Systems Leadership,4,TMP127,Understanding and Managing Technology Organizations,3
 "University of California, Los Angeles",CS4243,Comp Vision & Pattern Recogntn,4,CSE185,INTRO TO COMPUTER VISION,4
 "University of California, Los Angeles",IE3114,Department Exchange Module,4,MGMT140,Elements of Production and Operations Research,4
@@ -7186,8 +7185,8 @@ University of California,CM4991,Exchange Enrichment Module,4,CHEM130B,Biophysica
 "University of California, Santa Cruz",CS3243,Introduction to Artificial Int,4,CMPSC 140,Artificial Intelligence,3
 "University of California, Santa Cruz",CS3230,Design & Analysis of Algorithm,4,CMPSC 102,Introduction to Analysis of Algorithms,3
 "University of California, Santa Cruz",CS2105,Intro to Computer Networks,4,CSE80N,Introduction to Networking and the Internet,5
-University of Cambridge,DBA3761X,Topics in Business Analytics,4,3E3,MODELLING RISK,
-University of Cambridge,DOS3714,Sustainable Operations Mgt,4,3E11,ENVIRONMENTAL SUSTAINABILITY & BUSINESS,
+University of Cambridge,DBA3761X,Topics in Business Analytics,4,3.00E+03,MODELLING RISK,
+University of Cambridge,DOS3714,Sustainable Operations Mgt,4,3.00E+11,ENVIRONMENTAL SUSTAINABILITY & BUSINESS,
 University of Cambridge,ME3112,,4,3C5,DYNAMICS,16
 University of Cambridge,ME4213,,4,3C6,VIBRATION,16
 University of Cambridge,ME3211,Mechanics Of Solids,4,3C7,MECHANICS OF SOLIDS,16
@@ -7276,7 +7275,7 @@ University of Connecticut,MKT3718,Advertising & Promotion Mgt,4,MKTG3625,INTEGRA
 University of Connecticut,MKT3717,Product & Brand Management,4,MKTG3757,STRATEGIC BRAND MANAGEMENT,3
 University of Connecticut,MKT3722,Research for Marketing Insight,4,MKTG3260,MARKETING RESEARCH,3
 University of Connecticut,ACC2706,Managerial Accounting,4,ACCT2101,PRINCIPALS OF MANAGERIAL ACCOUNTING,3
-University of Connecticut,DAO2703,Operations and Technology Mana,4,OPIM3104,OPERATIONS MANAGEMENT,3
+University of Connecticut,DAO2703,Operations and Technology Management,4,OPIM3104,OPERATIONS MANAGEMENT,3
 University of Connecticut,MNO1706X,Organisational Behavior,4,MGMT5138,MANAGING ORGANIZATIONS,3
 University of Connecticut,TR3002,New Venture Creation,4,MGMT3235,"VENTURE PLANNING, MANAGEMENT AND GROWTH",3
 University of Connecticut,MKT3714,Digital Marketing,4,MKTG3665,NEW MEDIA MARKETING STRATEGIES,3
@@ -7496,7 +7495,7 @@ University of Georgia,CS2100,Computer Organisation,4,CSCI4720,Computer Architect
 University of Georgia,CS4243,Comp Vision & Pattern Recogntn,4,CSCI8820,Computer Vision and Pattern Recognition,3
 University of Georgia,CS3243,Introduction to Artificial Int,4,CSCI4550,Artificial Intelligence,3
 University of Georgia,CS2105,Intro to Computer Networks,4,CSCI4760,Computer Networks,3
-University of Georgia,CS2107,Introduction to Information Se,4,CSCI4250,Computer Security,4
+University of Georgia,CS2107,Introduction to Information Security,4,CSCI4250,Computer Security,4
 University of Georgia,CS2103,Software Engineering,4,MIST4050,Software Engineering,4
 University of Georgia,IS3221,ERP Systems with Analytics Sol,4,MIST5650,Integrated Enterprise-Wide Systems,4
 University of Georgia,IS3103,Information Systems Leadership,4,MIST5670,Information Systems Leadership,4
@@ -7716,7 +7715,7 @@ University of Konstanz,PS4882F,The Politics of Int'l Trade,5,POL20880,Politics o
 University of Konstanz,PS3702,Political Science Exchange Mod,4,POLKU01,"The Impact of Technology on Political Communication: The Printing Press, Newspapers, Television and",6
 University of Konstanz,GL4751,Department exchange module,5,POL20670,Globalization and its Effects on Domestic Politics,7
 University of Konstanz,PS3701,Political Science Exchange Mod,4,POL14450,Data Analysis with R,7
-University of Konstanz,CS2220,Intro to Computational Biology,6,INF20780-2016,Algorithms in Bioinformatics,6
+University of Konstanz,CS2220,Intro to Computational Biology,4,INF20780-2016,Algorithms in Bioinformatics,6
 University of Konstanz,LSM1303,Animal Behaviour,4,BIO14250,Animal Behaviour,3
 University of Konstanz,LSM1105,,4,BIO11290,Evolutionary Organismal Biology,4
 University of Lausanne,LAF1201,French 1,4,A0-GRA/A,French for complete beginners,1
@@ -7731,7 +7730,7 @@ University of Leeds,MKT3718,Advertising & Promotion Mgt,4,LUBS3530,ADVERTISING A
 University of Leeds,MNO3703,Leading in the 21st Century,4,LUBS2150,PEOPLE IN ORGANISATIONS,10
 University of Leeds,BSP3701,Strategic Management,4,LUBS2660,PRINCIPLES OF CORPORATE STRATEGY,10
 University of Leeds,MNO1706,Organisational Behavior,4,LUBS2000,"MANAGEMENT, WORK AND ORGANISATIONS",10
-University of Leeds,DAO2703,Operations and Technology Mana,4,LUBS3970,FUNDAMENTALS OF OPERATIONAL MANAGEMENT,10
+University of Leeds,DAO2703,Operations and Technology Management,4,LUBS3970,FUNDAMENTALS OF OPERATIONAL MANAGEMENT,10
 University of Leeds,MNO1706,Organisational Behavior,4,LUBS2190,COMPANY ORGANISATION,10
 University of Leeds,FIN3711,International Financial Mgt,4,LUBS3620,INTERNATIONAL BUSINESS FINANCE,10
 University of Leeds,MNO1706X,Organisational Behavior,4,LUBS2000,"MANAGEMENT, WORK AND ORGANISATIONS",10
@@ -7802,7 +7801,7 @@ University of Leeds,FST3101,Food Enzymology & Fermentation,4,FOOD2135,Microbiolo
 University of Leeds,FST3106,Sensory and Flavour Science,4,FOOD2031,Molecules Controlling Sensory and Nutritional Properties,20
 University of Leeds,FST3202,Nutrition & Disease Prevention,4,FOOD2160,Nutrition in the Prevention and Treatment of Disease,20
 University of Liverpool,IS4100,IT Project Management,4,EBUS308,Project Management,15
-University of Liverpool,CS2107,Introduction to Information Se,4,COMP232,CYBER SECURITY,15
+University of Liverpool,CS2107,Introduction to Information Security,4,COMP232,CYBER SECURITY,15
 University of Liverpool,CS2100,Computer Organisation,4,COMP124,Computer Systems,15
 University of Liverpool,LSM3991,Exchange Enrichment Module,4,LIFE344,Animal Nervous and Musculoskeletal Disorders,15
 University of Mannheim,PS3746,Department Exchange Module,4,HS,"Ausgewahlte Themen der Internationalen Beziehungen II: Contentious Politics, Mobilization & Repressi",7
@@ -7872,7 +7871,7 @@ University of Miami,LSM2212,Human Anatomy,4,HCS 212,Human Anatomy,3
 "University of Michigan, Ann Arbor",CS3244,Machine Learning,4,EECS445,Introduction to Machine Learning,4
 "University of Michigan, Ann Arbor",CS4232,,4,EECS376,Foundations of Computer Science,3
 "University of Michigan, Ann Arbor",CS1010,Programming Methodology,4,EECS183,Elementary Programming Concepts,4
-"University of Michigan, Ann Arbor",CS2107,Introduction to Information Se,4,EECS388,Introduction to Computer Security,4
+"University of Michigan, Ann Arbor",CS2107,Introduction to Information Security,4,EECS388,Introduction to Computer Security,4
 "University of Michigan, Ann Arbor",CS4243,Comp Vision & Pattern Recogntn,4,EECS442,Computer Vision,3
 "University of Michigan, Ann Arbor",CS2104,Programming Language Concepts,4,EECS490,Programming Languages,3
 "University of Michigan, Ann Arbor",MA4991,Exchange Enrichment Module,4,MATH665,Combinatorial Theory II: Combinatorial Representation Theory,3
@@ -7881,8 +7880,8 @@ University of Miami,LSM2212,Human Anatomy,4,HCS 212,Human Anatomy,3
 "University of Michigan, Ann Arbor",ST2132,Mathematical Statistics,4,STATS426,Introduction to Theoretical Statistics,3
 "University of Michigan, Ann Arbor",MA4201,Commutative Algebra,4,MATH614,Commutative Algebra,3
 "University of Michigan, Ann Arbor",MA3265,Introduction to Number Theory,4,MATH676,Algebraic Number Theory,3
-University of Minnesota,CS2107,Introduction to Information Se,4,INET4007,Security II: Cyber Security,3
-University of Minnesota,CS2107,Introduction to Information Se,4,CSCI5271,Introduction to Computer Security,3
+University of Minnesota,CS2107,Introduction to Information Security,4,INET4007,Security II: Cyber Security,3
+University of Minnesota,CS2107,Introduction to Information Security,4,CSCI5271,Introduction to Computer Security,3
 University of Minnesota,CS3210,Parallel Computing,4,CSCI5451,"Introduction to Parallel Computing: Architectures, Algorithms, and Programming",3
 University of Minnesota,CS3223,Database Systems Implementatio,4,CSCI5708,Architecture and Implementation of Database Management System,3
 University of Minnesota,CS3244,Machine Learning,4,CSCI5521,Intro to Machine Learning,3
@@ -7971,7 +7970,7 @@ University of Newcastle upon Tyne,LSM1991,Exchange Enrichment Module,4,ACE 1044,
 "University of North Carolina, Chapel Hill",PS2237,Intro to International Relatns,4,PWAD150,International Relations and World Politics,3
 "University of North Carolina, Chapel Hill",PS4701,POLITICAL SCIENCE EXCHANGE MOD,5,POLI459,Trans-Atlantic Security,2
 "University of North Carolina, Chapel Hill",PS4701,POLITICAL SCIENCE EXCHANGE MOD,5,POLI409,A Mock Constitutional Convention,2
-"University of North Carolina, Chapel Hill",CS2107,Introduction to Information Se,4,COMP535,Introduction to Computer Security,3
+"University of North Carolina, Chapel Hill",CS2107,Introduction to Information Security,4,COMP535,Introduction to Computer Security,3
 "University of North Carolina, Chapel Hill",CS3240,Interaction Design,4,INLS318,Human Computer Interaction,3
 "University of North Carolina, Chapel Hill",CS2100,Computer Organisation,4,COMP411,Computer Organisation,3
 "University of North Carolina, Chapel Hill",IS1103,Ethics in Computing,4,COMP380,Computers and society,3
@@ -8092,7 +8091,7 @@ University of Newcastle upon Tyne,LSM1991,Exchange Enrichment Module,4,ACE 1044,
 "University of North Carolina, Kenan-Flagler",MKT1705,Principles of Marketing,4,BUSI406,PRINCIPLES OF MARKETING,3
 "University of North Carolina, Kenan-Flagler",MKT1705,Principles of Marketing,4,BUSI160,PRINCIPLES OF MARKETING,3
 "University of North Carolina, Kenan-Flagler",FIN2704,Finance,4,BUSI408,CORPORATE FINANCE,3
-"University of North Carolina, Kenan-Flagler",DAO2703,Operations and Technology Mana,4,BUSI403,OPERATIONS MANAGEMENT,3
+"University of North Carolina, Kenan-Flagler",DAO2703,Operations and Technology Management,4,BUSI403,OPERATIONS MANAGEMENT,3
 "University of North Carolina, Kenan-Flagler",MKT1705X,Principles of Marketing,4,BUSI406,PRINCIPLES OF MARKETING,3
 "University of North Carolina, Kenan-Flagler",MKT1705X,Principles of Marketing,4,BUSI160,PRINCIPLES OF MARKETING,3
 "University of North Carolina, Kenan-Flagler",FIN2704X,Finance,4,BUSI408,CORPORATE FINANCE,3
@@ -8158,7 +8157,7 @@ University of Otago,FIN3701,Corporate Finance,4,FINC303,FINANCIAL MANAGEMENT,18
 University of Otago,FIN2704X,Finance,4,FINC201,FUNDAMENTALS OF CORPORATE FINANCE,18
 University of Otago,MNO1706X,Organisational Behavior,4,BSNS105,MANAGEMENT AND ORGANISATIONS,18
 University of Otago,MNO3703,Leading in the 21st Century,4,MANT215,ORGANISATION(AL BEHAVIOUR,18
-University of Otago,DAO2703,Operations and Technology Mana,4,MANT212,OPERATIONS MANAGEMENT,18
+University of Otago,DAO2703,Operations and Technology Management,4,MANT212,OPERATIONS MANAGEMENT,18
 University of Otago,PF4307,,4,TOUR304,Event and Conventions Management,18
 University of Otago,PF2204,,4,BSN108,Business Finance,18
 University of Otago,PF2105,,4,BSN102,Quantitative Analysis for Business,20
@@ -8182,10 +8181,10 @@ University of Ottawa,PS3251,International Organisations,4,POL3179,INTERNATIONAL 
 University of Ottawa,CS3241,Computer Graphics,4,CSI4130,Computer Graphics,3
 University of Ottawa,CS4236,Cryptography Theory & Practice,4,CSI4108,Cryptography,3
 University of Ottawa,CS3243,Introduction to Artificial Int,4,CSI4106,Introduction to Artificial Intelligence,3
-University of Ottawa,BT4015,Geospatial Analytics,,CSI5124,Computational Aspects of Geographic Information Systems,3
-University of Ottawa,BT4013,Analytics for Capital Market T,,MAT4372,Financial Mathematics,3
-University of Ottawa,BT4240,Machine Learning for Predictiv,,MAT4373,Statistical Machine Learning,3
-University of Ottawa,CS2107,Introduction to Information Se,4,CSI4139,Design of Secure Computer Systems,3
+University of Ottawa,BT4015,Geospatial Analytics,4,CSI5124,Computational Aspects of Geographic Information Systems,3
+University of Ottawa,BT4013,Analytics for Capital Market T,4,MAT4372,Financial Mathematics,3
+University of Ottawa,BT4240,Machine Learning for Predictiv,4,MAT4373,Statistical Machine Learning,3
+University of Ottawa,CS2107,Introduction to Information Security,4,CSI4139,Design of Secure Computer Systems,3
 University of Ottawa,CS2106,Intro to Operating Systems,4,CSI3131,Operating Systems,3
 University of Ottawa,CS3240,Interaction Design,4,SEG3125,Analysis and Design of User Interfaces,3
 University of Ottawa,CS3223,Database Systems Implementatio,4,CSI3130,Database 2,3
@@ -8302,7 +8301,7 @@ University of San Diego,CS3241,Computer Graphics,4,CSE167,Computer Graphics,3
 University of San Diego,CS3230,Design & Analysis of Algorithm,4,CSE101,Design and Analysis of Algorithms,3
 University of San Diego,CS3243,Introduction to Artificial Int,4,CSE150,Introduction to Artificial Intelligence: Search and Reasoning,3
 University of San Diego,CS2010,Data Structures & AlgorithmsII,4,CSE100,Advanced Data Structures,3
-University of San Diego,CS2107,Introduction to Information Se,4,CSE127,Introduction to Computer Security,3
+University of San Diego,CS2107,Introduction to Information Security,4,CSE127,Introduction to Computer Security,3
 University of Seoul,UD5221,Urban Design Theory and Disco,4,11008-01,Urban Planning,3
 University of Seoul,AR5321,Advanced Architectural Integra,4,41677-01,Building System,3
 University of Seoul,AR4101,Design 7,8,41646,Architectural Design VI,6
@@ -8314,7 +8313,7 @@ University of Southern California,BSP3701,Strategic Management,4,BUAD497,STRATEG
 University of Southern California,MKT1705,Principles of Marketing,4,BUAD307,MARKETING FUNDAMENTALS,4
 University of Southern California,MKT1705X,Principles of Marketing,4,BUAD307,MARKETING FUNDAMENTALS,4
 University of Southern California,MKT3761X,Topics in Marketing,4,MKT465,GLOBAL MARKETING MANAGEMENT,4
-University of Southern California,DAO2703,Operations and Technology Mana,4,BUAD311,OPERATIONS MANAGEMENT,4
+University of Southern California,DAO2703,Operations and Technology Management,4,BUAD311,OPERATIONS MANAGEMENT,4
 University of Southern California,MKT3717,Product & Brand Management,4,MKT445,NEW PRODUCT DEVELOPMENT AND BRANDING,3
 University of Southern California,DOS3701,Supply Chain Management,4,IOM482,SUPPLY CHAIN MANAGEMENT,4
 University of Southern California,FIN3712,Options and Futures,4,FBE459,FINANCIAL DERIVATIVES,4
@@ -8409,12 +8408,12 @@ University of Stockholm,BT4221,Big Data Techniques & Technolo,4,ML464C,Open and 
 University of Stockholm,IS4204,IT Governance,4,IB576C,Management of Global IT Resources,7.5
 University of Stockholm,CS3244,Machine Learning,4,DA7063,Machine Learning,7.5
 University of Stockholm,IS3251,Principles of Technology Entre,4,IB577C,Entrepreneurship in the Digital Society,7.5
-University of Stockholm,CS2107,Introduction to Information Se,4,ML474C,Cyber Security (CYBER),7.5
-University of Stockholm,CS2107,Introduction to Information Se,4,ML470C,Introduction to Information Security,7.5
+University of Stockholm,CS2107,Introduction to Information Security,4,ML474C,Cyber Security (CYBER),7.5
+University of Stockholm,CS2107,Introduction to Information Security,4,ML470C,Introduction to Information Security,7.5
 University of Stockholm,CS2104,Programming Language Concepts,4,IB439C,Programming Languages and Paradigmms,7.5
 University of Stockholm,IS4231,Information Security Mgmt,4,SECORGSECORG,Information Security in Organisations,7.5
 University of Stockholm,CS3230,Design & Analysis of Algorithm,4,DA3004,Algorithms and Complexity,7.5
-University of Stockholm,CS2107,Introduction to Information Se,4,IB881C,Cyber Forensics (CYFO),7.5
+University of Stockholm,CS2107,Introduction to Information Security,4,IB881C,Cyber Forensics (CYFO),7.5
 University of Stockholm,LSM3991,Exchange Enrichment Module,4,BL 4020,Biological Statistics II,7.5
 University of Stockholm,LSM1991,Exchange Enrichment Module,4,KN1001,The Biochemistry of the Brain,2
 University of Stockholm,LSM3223,Immunology,4,BL4003,Immunology,4
@@ -8467,7 +8466,7 @@ University of Toronto,MKT3722,Research for Marketing Insight,4,MGT453,MARKETING 
 University of Toronto,MKT3719,Branding Strategy,4,RSM458,BRANDING STRATEGY,0.5
 University of Toronto,MNO3703,Leading in the 21st Century,4,MGIB02,INTERNATIONAL ORGANIZATIONAL BEHAVIOUR,0.5
 University of Toronto,FIN2704X,Finance,4,MGFB10,PRINCIPLES OF FINANCE,0.5
-University of Toronto,DAO2703,Operations and Technology Mana,4,RSM270,OPERATIONS MANAGEMENT,0.5
+University of Toronto,DAO2703,Operations and Technology Management,4,RSM270,OPERATIONS MANAGEMENT,0.5
 University of Toronto,ACC1701X,Accounting for Decision Makers,4,MGT201,FINANCIAL ACCOUNTING,0.5
 University of Toronto,ACC1701X,Accounting for Decision Makers,4,RSM220,FINANCIAL ACCOUNTING,0.5
 University of Toronto,MKT1705,Principles of Marketing,4,MGT352,PRINCIPLES OF MARKETING,0.5
@@ -8520,7 +8519,7 @@ University of Toronto,CS2103,Software Engineering,4,CSC444H1,Software Engineerin
 University of Toronto,CS2106,Intro to Operating Systems,4,ECE344H1,Operating Systems,0.5
 University of Toronto,CS3243,Introduction to Artificial Int,4,ROB311H1,Artificial Intellgence,0.5
 University of Toronto,CS3243,Introduction to Artificial Int,4,MIE369H1,Introduction to Artificial Intelligence,0.5
-University of Toronto,CS3241,Computer Graphics,,CSC317H1,Computer Graphics,0.5
+University of Toronto,CS3241,Computer Graphics,4,CSC317H1,Computer Graphics,0.5
 University of Toronto,CS2104,Programming Language Concepts,4,CSC324H1,Principles of Programming Languages,0.5
 University of Toronto,CS2102,Database Systems,4,CSC343H1,Introduction to Databases,0.5
 University of Toronto,CS2103,Software Engineering,4,CSC301H1,Introduction to Software Engineering,0.5
@@ -8539,7 +8538,7 @@ University of Toronto,ME2142,Feedback Control Systems,4,AER37241,CONTROL SYSTEMS
 University of Toronto,IE5108,,4,MIE468H1,Facility Planning,0.5
 University of Toronto,IE4124,Department Exchange Module,4,MIE561H1,Healthcare Systems,0.5
 University of Toronto,IE4004,Department Exchange Module,4,MIE365H1,Operations Research III: Advanced OR,0.5
-University of Toronto,IE2140,Engineering Economy,,ECE472H1,Engineering Economic Analysis & Entrepreneurship,0.5
+University of Toronto,IE2140,Engineering Economy,4,ECE472H1,Engineering Economic Analysis & Entrepreneurship,0.5
 University of Toronto,LSM2991,Exchange Enrichment Level 2000,4,MGY200H1,Current Topics in Molecular Genetics and Microbiology,0.5
 University of Toronto,LSM2991,Exchange Enrichment Level 2000,4,MGY277H1,Introduction to Medical Microbiology,0.5
 University of Toronto,LSM3991,Exchange Enrichment Module,4,MGY378H1,Microbiology II: Viruses,0.5
@@ -8665,7 +8664,7 @@ University of Toronto (Mississauga),CM3221,Organic Synthesis: The Disconn,4,CHM3
 "University of Victoria, British Columbia",ACC1701X,Accounting for Decision Makers,4,COM315,FINANCIAL ACCOUNTING,1.5
 "University of Victoria, British Columbia",MKT3701,Marketing Strategy: Analysis a,4,COM351,MARKETING PRINCIPLES AND MANAGEMENT,1.5
 "University of Victoria, British Columbia",MNO3703,Leading in the 21st Century,4,COM321,ORGANIZATIONAL BEHAVIOUR,1.5
-"University of Victoria, British Columbia",DAO2703,Operations and Technology Mana,4,COM341,OPERATIONS MANAGEMENT,1.5
+"University of Victoria, British Columbia",DAO2703,Operations and Technology Management,4,COM341,OPERATIONS MANAGEMENT,1.5
 "University of Victoria, British Columbia",MKT1705X,Principles of Marketing,4,COM250,FUNDAMENTALS OF MARKETING,1.5
 "University of Victoria, British Columbia",DOS3714,Sustainable Operations Mgt,4,COM362,BUSINESS AND SUSTAINABILITY,1.5
 "University of Victoria, British Columbia",FIN2704X,Finance,4,COM371,MANAGEMENT FINANCE,1.5
@@ -8705,7 +8704,7 @@ University of Virginia,CS3244,Machine Learning,4,CS6316,Machine Learning,3
 University of Virginia,IS3251,Principles of Technology Entre,4,ENTP1010,Startup: An Introduction to Entrepreneurship,3
 University of Virginia,IS3240,Digital Platform Strategy and,4,CS4753,Electronic Commerce Technologies,3
 University of Virginia,CS2102,Database Systems,4,CS4750,Database Systems,3
-University of Virginia,CS2107,Introduction to Information Se,4,CS3710,Introduction to Cybersecurity,3
+University of Virginia,CS2107,Introduction to Information Security,4,CS3710,Introduction to Cybersecurity,3
 University of Virginia,CS3241,Computer Graphics,4,CS4810,Computer Graphics,3
 University of Virginia,LSM3217,Human Ageing,4,BIOL 3140,Biology of Ageing,3
 University of Virginia,LSM3232,Microbiology,4,BIOL 3120,Microbiology in the Genomics Era,3
@@ -8738,7 +8737,7 @@ University of Warwick,CS2103,Software Engineering,4,CS261,Software Engineering,1
 "University of Washington, Seattle",BSP2701,Global Economy,2,ECON201,INTRODUCTION TO MACROECONOMICS,5
 "University of Washington, Seattle",FIN2704,Finance,4,FIN350,BUSINESS FINANCE,4
 "University of Washington, Seattle",FIN2704X,Finance,4,FIN350,BUSINESS FINANCE,4
-"University of Washington, Seattle",DAO2703,Operations and Technology Mana,4,OPMGT301,PRINCIPLES OF OPERATIONS MANAGEMENT,4
+"University of Washington, Seattle",DAO2703,Operations and Technology Management,4,OPMGT301,PRINCIPLES OF OPERATIONS MANAGEMENT,4
 "University of Washington, Seattle",MKT1705X,Principles of Marketing,4,MKTG301,MARKETING CONCEPTS,4
 "University of Washington, Seattle",MKT1705,Principles of Marketing,4,MKTG301,MARKETING CONCEPTS,4
 "University of Washington, Seattle",FIN3702,Inv. Analysis & Portfolio Mgt,4,FIN460,INVESTMENTS,4
@@ -8757,7 +8756,7 @@ University of Warwick,CS2103,Software Engineering,4,CS261,Software Engineering,1
 "University of Washington, Seattle",BT4221,Big Data Techniques & Technolo,4,SCM530,Managing and Mining Big Data,4
 "University of Washington, Seattle",CS1010S,Programming Methodology,4,CSE160,Data Programming,4
 "University of Washington, Seattle",CS1010,Programming Methodology,4,CSE142,Computer Programming I,4
-"University of Washington, Seattle",CS2107,Introduction to Information Se,4,CSE484,Computer Security,4
+"University of Washington, Seattle",CS2107,Introduction to Information Security,4,CSE484,Computer Security,4
 "University of Washington, Seattle",CS3244,Machine Learning,4,CSE546,Machine Learning,4
 "University of Washington, Seattle",CS3244,Machine Learning,4,CSE446,Machine Learning (4),4
 "University of Washington, Seattle",CS2105,Intro to Computer Networks,4,CSE461,Introduction to Computer-Communication Networks (4),4
@@ -8838,7 +8837,7 @@ University of Waterloo,CS2040,Data Structures and Algorithms,4,CS146,Elementary 
 University of Waterloo,CS2040,Data Structures and Algorithms,4,MSCI 240,Algorithms and Data Structures,0.5
 University of Waterloo,CS4212,Compiler Design,4,CS444,Compiler Construction,0.5
 University of Waterloo,CS3230,Design & Analysis of Algorithm,4,ECE406,Algorithm Design and Analysis,0.5
-University of Waterloo,CS2107,Introduction to Information Se,4,ECE409,Cryptography and System Security,0.5
+University of Waterloo,CS2107,Introduction to Information Security,4,ECE409,Cryptography and System Security,0.5
 University of Waterloo,CS3244,Machine Learning,4,CS485,Machine Learning: Statistical and Computational Foundations,0.5
 University of Waterloo,CS3235,Computer Security,4,CS458,Computer Security and Privacy,0.5
 University of Waterloo,CS4236,Cryptography Theory & Practice,4,CS758,Cryptography / Network Security,0.5
@@ -8971,7 +8970,7 @@ University of Wisconsin-Madison,ACC1701X,Accounting for Decision Makers,4,ACCTIS
 University of Wisconsin-Madison,BSP2701,Global Economy,2,ECON102,Principles of Macroeconomics,3
 University of Wisconsin-Madison,FIN2704,Finance,4,FIN300,INTRODUCTION TO FINANCE,3
 University of Wisconsin-Madison,FIN2704X,Finance,4,FIN300,INTRODUCTION TO FINANCE,3
-University of Wisconsin-Madison,DAO2703,Operations and Technology Mana,4,OTM300,OPERATIONS MANAGEMENT,3
+University of Wisconsin-Madison,DAO2703,Operations and Technology Management,4,OTM300,OPERATIONS MANAGEMENT,3
 University of Wisconsin-Madison,MKT1705X,Principles of Marketing,4,MKT300,MARKETING MANAGEMENT,3
 University of Wisconsin-Madison,MKT1705,Principles of Marketing,4,MKT300,MARKETING MANAGEMENT,3
 University of Wisconsin-Madison,BSP3701,Strategic Management,4,MHR423,STRATEGIC MANAGEMENT,3
@@ -9138,14 +9137,14 @@ Victoria University of Wellington,CS3230,Design & Analysis of Algorithm,4,COMP36
 Victoria University of Wellington,CS2102,Database Systems,4,INFO151,Databases,15
 Victoria University of Wellington,CS3236,Introduction to Information Th,4,MATH324,Coding and Cryptography,15
 Victoria University of Wellington,CS3211,Parallel & Concurrent Programg,4,NWEN303,Concurrent Programming,15
-Victoria University of Wellington,CS2107,Introduction to Information Se,4,NWEN405,Security Engineering,15
+Victoria University of Wellington,CS2107,Introduction to Information Security,4,NWEN405,Security Engineering,15
 Victoria University of Wellington,CS4211,Formal Methods for Software En,4,SWEN421,Formal Software Engineering,15
 Victoria University of Wellington,IS4100,IT Project Management,4,INFO231,Management of IT Projects,15
 Victoria University of Wellington,CS3240,Interaction Design,4,SWEN303,User Interface Design,15
 Victoria University of Wellington,CS2106,Intro to Operating Systems,4,NWEN301,Operating Systems Design,15
 Victoria University of Wellington,IT2002,Database Technology & Mgt,4,SWEN304,Database System Engineering,15
 Victoria University of Wellington,CS1010J,Programming Methodology,4,COMP102,Introduction to Computer Program Design,15
-Victoria University of Wellington,CS2040,Data Structures and Algorithms,,COMP103,Introduction to Data Structures and Algorithms,15
+Victoria University of Wellington,CS2040,Data Structures and Algorithms,4,COMP103,Introduction to Data Structures and Algorithms,15
 Victoria University of Wellington,IS3103,Information Systems Leadership,4,MSSL504,Managing the Organisation/System,15
 Victoria University of Wellington,CS2103,Software Engineering,4,SWEN221,Software Development,15
 Victoria University of Wellington,IS3150,Digital Media Marketing,4,MARK201,Digital Marketing Management,15
@@ -9209,7 +9208,7 @@ Waseda University,PS2701,Political Science Exchange Mod,4,ARSC181S,Japan's Imper
 Waseda University,CS1010,Programming Methodology,4,INFP11ZW,Introduction to C Programming (4),2
 Waseda University,IS2102,Enterprise Systems Architectur,4,INFB21ZL,Software engineering analysis,2
 Waseda University,CS2106,Intro to Operating Systems,4,INFK31Z26GC033005,Operating Systems,2
-Waseda University,CS2107,Introduction to Information Se,4,INFG41ZL2603034009,Information Security Basics,2
+Waseda University,CS2107,Introduction to Information Security,4,INFG41ZL2603034009,Information Security Basics,2
 Waseda University,CS2040,Data Structures and Algorithms,4,INFP21ZL,Algorithms and Data Structures,2
 Waseda University,CS2105,Intro to Computer Networks,4,INFJ1 4L,Network Engineering,2
 Waseda University,CS3245,Information Retrieval,4,INFI 41ZL,Information Retrieval,2
@@ -9234,7 +9233,7 @@ Western University,CS3241,Computer Graphics,4,COMPSCI3388,Computer Graphics I,0.
 Western University,CS2106,Intro to Operating Systems,4,COMPSCI3305A/B,Operating Systems,0.5
 Western University,CS5224,Cloud Computing,4,SE4455,"CLOUD COMPUTING: CONCEPTS, TECHNOLOGIES AND APPLICATIONS",3
 Western University,CS3219,Software Engineering Principle,4,SE3350B,SOFTWARE ENGINEERING DESIGN I,3
-Western University,CS3244,Machine Learning,,DATASCI3000B,INTRO TO MACHINE LEARNING,0.5
+Western University,CS3244,Machine Learning,4,DATASCI3000B,INTRO TO MACHINE LEARNING,0.5
 Western University,CS2102,Database Systems,4,SE3309A,DATABASE MANAGEMENT SYSTEMS,3
 Western University,CS3210,Parallel Computing,4,COMPSCI402A/B,DISTRIBUTED AND PARALLEL SYSTEMS,0.5
 Western University,CS3230,Design & Analysis of Algorithm,4,COMPSCI3340A/B,Analysis of Algorithms I,0.5
@@ -9322,7 +9321,7 @@ Yonsei University,FIN3702,Inv. Analysis & Portfolio Mgt,4,BIZ3120,INVESTMENT ANA
 Yonsei University,BSP3701,Strategic Management,4,BIZ3147,STRATEGIC MANAGEMENT,3
 Yonsei University,FIN3701,Corporate Finance,4,BIZ3119,CORPORATE FINANCE,3
 Yonsei University,FIN2704X,Finance,4,BIZ2119,FINANCIAL MANAGEMENT,3
-Yonsei University,DAO2703,Operations and Technology Mana,4,BIZ2121,PRODUCTIONS & OPERATIONS MANAGEMENT = DSC2006 OPERATIONS MANAGEMENT,3
+Yonsei University,DAO2703,Operations and Technology Management,4,BIZ2121,PRODUCTIONS & OPERATIONS MANAGEMENT = DSC2006 OPERATIONS MANAGEMENT,3
 Yonsei University,FIN3713,Bank Management,4,BIZ3162,MONEY AND BANKING,3
 Yonsei University,MKT1705,Principles of Marketing,4,BIZ2120,MARKETING,3
 Yonsei University,FIN3720,Financial Statement Analysis,4,BIZ4123,BUSINESS ANALYSIS AND VALUATION,3
@@ -9414,7 +9413,7 @@ Yonsei University,LSM3264,Environmental Biochemistry,4,BIO3714,Environmental Tox
 Yonsei University,LSM3993,Exchange Enrichment Module,4,BIO3714-01,Analysis in Ecotoxicology,3
 Yonsei University,LSM3991,Exchange Enrichment Module,4,BTE 3402,Microbial Biotechnology,3
 York University,ACC1701X,Accounting for Decision Makers,4,ACTG2010,INTRODUCTION TO FINANCIAL ACCOUNTING,3
-York University,DAO2703,Operations and Technology Mana,4,OMIS4550,INVENTORY MANAGEMENT,3
+York University,DAO2703,Operations and Technology Management,4,OMIS4550,INVENTORY MANAGEMENT,3
 York University,MKT1705,Principles of Marketing,4,MKTG2030,MARKETING MANAGEMENT,3
 York University,FIN2704,Finance,4,FINE2000,INTRODUCTION TO FINANCE,3
 York University,MNO3811,Social Entrepreneurship,4,ENTR4800,SOCIAL ENTREPRENEURSHIP,3
@@ -9447,7 +9446,7 @@ York University,ME2143,Sensors & Actuators,4,LE/EECS3505,ELECTRICAL SYSTEMS FOR 
 Zhejiang University,BSP3701,Strategic Management,4,20124440,STRATEGIC MANAGEMENT,2
 Zhejiang University,BSP3701,Strategic Management,4,20120490,STRATEGIC MANAGEMENT IN BUSINESS,3
 Zhejiang University,MKT3702,Consumer Behaviour,4,20120680,CONSUMER BEHAVIOR,2
-Zhejiang University,CS2107,Introduction to Information Se,4,21191920,Data-driven Security,2.5
+Zhejiang University,CS2107,Introduction to Information Security,4,21191920,Data-driven Security,2.5
 Zhejiang University,CS3230,Design & Analysis of Algorithm,4,21190120,Algorithm Design and Analysis,2.5
 Zhejiang University,CS2105,Intro to Computer Networks,4,21121340,Computer Networks,2.5
 Zhejiang University,CS3241,Computer Graphics,4,21120510,Computer Graphics,2.5
