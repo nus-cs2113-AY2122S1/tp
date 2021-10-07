@@ -1,4 +1,4 @@
-package UI;
+package ui;
 import message.Messages;
 
 import java.io.InputStream;

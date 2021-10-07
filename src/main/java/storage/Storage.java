@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import Game.*;
+import game.*;
 
 public class Storage {
     private static File save;

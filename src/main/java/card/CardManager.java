@@ -1,4 +1,4 @@
-package main.java.Card;
+package main.java.card;
 import java.util.ArrayList;
 import java.util.List;
 
