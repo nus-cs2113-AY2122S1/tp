@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GoalTest {
 
@@ -41,7 +42,7 @@ class GoalTest {
     @Test
     void getDescription_invalidStartDateFormat_expectException() {
         assertThrows(HappyBitException.class,
-                () -> new Goal("test", "7-10-2021", "21-Oct-2021"));
+            () -> new Goal("test", "7-10-2021", "21-Oct-2021"));
     }
 
     /**
@@ -50,7 +51,7 @@ class GoalTest {
     @Test
     void getDescription_invalidEndDateFormat_expectException() {
         assertThrows(HappyBitException.class,
-                () -> new Goal("test", "07-Oct-2021", "01/01/2021"));
+            () -> new Goal("test", "07-Oct-2021", "01/01/2021"));
     }
 
     /**
@@ -59,7 +60,7 @@ class GoalTest {
     @Test
     void getDescription_startDateAfterEndDate_expectException() {
         assertThrows(HappyBitException.class,
-                () -> new Goal("test", "07-Oct-2021", "07-Jan-2021"));
+            () -> new Goal("test", "07-Oct-2021", "07-Jan-2021"));
     }
 
     /**

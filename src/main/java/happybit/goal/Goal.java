@@ -14,8 +14,8 @@ public class Goal {
     protected boolean isDone;
 
     // To be implemented in a future iteration
-//    protected ArrayList<Milestone> milestoneList = new ArrayList<Milestone>();
-//    protected int reminderFrequency;
+    // protected ArrayList<Milestone> milestoneList = new ArrayList<Milestone>();
+    // protected int reminderFrequency;
 
     /**
      * Constructor for Goal class with startDate defined.
@@ -118,7 +118,7 @@ public class Goal {
     }
 
     /**
-     * Checks if the current date is before the compared date
+     * Checks if the current date is before the compared date.
      *
      * @param compareDate Date used to compare with current date.
      * @return true: If current date is before the compared date.
