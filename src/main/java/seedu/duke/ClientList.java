@@ -6,12 +6,12 @@ public class ClientList {
     private static ArrayList<Client> clients;
     private static int clientCount = 0;
 
-    public ClientList(){
+    public ClientList() {
         clients = new ArrayList<>();
         clientCount = 0;
     }
 
-    public void add(Client client){
+    public void add(Client client) {
         clients.add(client);
         clientCount++;
     }
