@@ -31,8 +31,8 @@ public class FinancialTracker {
         return null;
     }
 
-    public Entry getEntry(int EntryIndex) {
-        return this.financialEntries.get(EntryIndex);
+    public Entry getEntry(int entryIndex) {
+        return this.financialEntries.get(entryIndex);
     }
 
     public ArrayList<Entry> getEntries() {
