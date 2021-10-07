@@ -4,25 +4,25 @@ import java.time.LocalDateTime;
 
 public class Task extends Item {
 
-    private final LocalDateTime deadline;
-    private String description;
+    private String deadline;
 
-    public Task(String title, LocalDateTime deadline, String description) {
-        super(title);
+    public static final String TASK_DATA_ARGS_DELIMITER = "\\s*\\|\\s*";
+
+    public Task(String title, String description, String deadline) {
+        super("task", title, description);
         this.deadline = deadline;
-        this.description = description;
     }
 
-    public static String getItemType() {
+    public String getDeadline() {
+        return deadline;
+    }
+
+    public String getItemType() {
         return "task";
     }
 
     @Override
-    public LocalDateTime getDateValue() {
+    public String getDateValue() {
         return deadline;
-    }
-
-    public String getDescription() {
-        return description;
     }
 }
