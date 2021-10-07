@@ -1,18 +1,18 @@
 package taa.student;
 
 public class Mark {
-    private String assessment_name;
+    private String assessmentName;
     private int marks;
     private double weightage;
 
-    public Mark(String assessment_name, int marks, double weightage) {
-        this.assessment_name = assessment_name;
+    public Mark(String assessmentName, int marks, double weightage) {
+        this.assessmentName = assessmentName;
         this.marks = marks;
         this.weightage = weightage;
     }
 
-    public void setAssessmentName(String assessment_name) {
-        this.assessment_name = assessment_name;
+    public void setAssessmentName(String assessmentName) {
+        this.assessmentName = assessmentName;
     }
 
     public void setMarks(int marks) {
@@ -24,7 +24,7 @@ public class Mark {
     }
 
     public String getAssessmentName() {
-        return assessment_name;
+        return assessmentName;
     }
 
     public int getMarks() {
@@ -37,6 +37,6 @@ public class Mark {
 
     @Override
     public String toString() {
-        return assessment_name + ", " + marks + ", " + weightage;
+        return assessmentName + ", " + marks + ", " + weightage;
     }
 }
