@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
 import java.util.Arrays;
-
 import static seedu.duke.Duke.itemList;
 
 public class DeleteCommand extends Command {

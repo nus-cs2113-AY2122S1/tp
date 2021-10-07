@@ -27,7 +27,7 @@ public class Parser {
         case "help":
             return new HelpCommand();
         case "select":
-            return new SelectCommand();
+            return new SelectCommand(command);
         case "update":
             return new UpdateCommand(command);
         case "next":
