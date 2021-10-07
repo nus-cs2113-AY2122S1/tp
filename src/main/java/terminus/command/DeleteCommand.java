@@ -37,6 +37,10 @@ public class DeleteCommand<T> extends Command {
         } catch (NumberFormatException e) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
+
+        if (itemNumber <= 0) {
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
+        }
     }
 
     @Override

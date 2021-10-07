@@ -80,13 +80,14 @@ public class NoteCommandParserTest {
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("delete"));
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("delete abcd"));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("delete -5"));
     }
 
     @Test
     void parseCommand_resolveDeleteCommand_success()
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         assertTrue(commandParser.parseCommand("delete 1") instanceof DeleteCommand);
-        assertTrue(commandParser.parseCommand("delete -1") instanceof DeleteCommand);
+        assertTrue(commandParser.parseCommand("delete 2") instanceof DeleteCommand);
     }
 
     @Test
@@ -101,7 +102,6 @@ public class NoteCommandParserTest {
         assertTrue(commandParser.parseCommand("view") instanceof ViewCommand);
         assertTrue(commandParser.parseCommand("view 1") instanceof ViewCommand);
     }
-
 
     @Test
     void getCommandList_containsBasicCommands() {
