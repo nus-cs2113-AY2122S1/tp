@@ -1,6 +1,7 @@
 package seedu.duke.data;
 
 import seedu.duke.data.records.Budget;
+import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Record;
 
 import java.util.ArrayList;
@@ -15,6 +16,11 @@ public class BudgetList {
 
     public void addBudget(String description, double spendingLimit, int month) {
         allRecords.add(new Budget(description, spendingLimit, month));
+        numberOfRecords += 1;
+    }
+
+    public void addExpenditure(Expenditure newExpenditure) {
+        allRecords.add(newExpenditure);
         numberOfRecords += 1;
     }
 

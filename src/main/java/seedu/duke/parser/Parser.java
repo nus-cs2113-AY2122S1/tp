@@ -33,7 +33,7 @@ public class Parser {
             command = new AddBudgetCommand();
             break;
         case AddExpenditureCommand.COMMAND_WORD:
-            command = new AddExpenditureCommand();
+            command = new AddExpenditureCommand(commandParams);
             break;
         case DeleteBudgetCommand.COMMAND_WORD:
             command = new DeleteBudgetCommand(commandParams);
@@ -50,4 +50,10 @@ public class Parser {
         }
         return command;
     }
+
+    public static String[] splitExpenditureParams(String expenditureParams) {
+        return expenditureParams.split(" ", 3);
+    }
+
+
 }
