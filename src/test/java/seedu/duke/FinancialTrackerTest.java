@@ -12,8 +12,8 @@ public class FinancialTrackerTest {
     @Test
     public void addEntry_twoEntryObjects_expectSizeOfListToBeTwo() {
         FinancialTracker testTracker = new FinancialTracker();
-        testTracker.addEntry(new Expense());
-        testTracker.addEntry(new Income());
+        testTracker.addEntry(new Expense("Lunch", 5.20));
+        testTracker.addEntry(new Income("Allowance", 200));
         assertTrue(testTracker.isEmpty() == false && testTracker.size() == 2);
     }
 }
