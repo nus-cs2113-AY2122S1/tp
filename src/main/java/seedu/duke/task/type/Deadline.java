@@ -1,36 +1,25 @@
 package seedu.duke.task.type;
 
-import net.fortuna.ical4j.model.Date;
-import net.fortuna.ical4j.model.Property;
-import net.fortuna.ical4j.model.component.VToDo;
-import net.fortuna.ical4j.model.property.Due;
+import java.util.Date;
 import seedu.duke.task.PriorityEnum;
+import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
 
 public class Deadline extends Task {
 
-    private Deadline() {
-        super(new VToDo());
+    public Deadline(String description, Date dueDate) {
+        super(description, dueDate);
     }
 
-    Deadline(String description, Date dueDate) {
-        this();
-        setDescription(description);
-        setDate(dueDate);
+    public Deadline(String description, Date dueDate, RecurrenceEnum recurranceEnum) {
+        super(description, dueDate, recurranceEnum);
     }
 
-    Deadline(String description, PriorityEnum priority, Date startDate) {
-        this(description, startDate);
-        setPriority(priority);
+    public Deadline(String description, Date dueDate, PriorityEnum priorityEnum) {
+        super(description, dueDate, priorityEnum);
     }
 
-    public void setDate(Date dueDate) {
-        Due due = new Due(dueDate);
-        setProperty(due);
+    public Deadline(String description, Date dueDate, RecurrenceEnum recurranceEnum, PriorityEnum priorityEnum) {
+        super(description, dueDate, recurranceEnum, priorityEnum);
     }
-
-    public Date getDate() {
-        return (Date) getProperty(Property.DUE);
-    }
-
 }

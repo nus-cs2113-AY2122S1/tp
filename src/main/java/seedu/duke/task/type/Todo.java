@@ -1,46 +1,33 @@
 package seedu.duke.task.type;
 
-import net.fortuna.ical4j.model.Date;
-import net.fortuna.ical4j.model.Property;
-import net.fortuna.ical4j.model.component.VToDo;
-import net.fortuna.ical4j.model.property.DtEnd;
+import java.util.Date;
 import seedu.duke.task.PriorityEnum;
+import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
-import seedu.duke.task.TimedTask;
 
-public class Todo extends TimedTask {
+public class Todo extends Task {
 
-    private Todo() {
-        super(new VToDo());
+    public Todo(String description) {
+        super(description);
     }
 
-    Todo(String description) {
-        this();
-        setDescription(description);
+    public Todo(String description, Date date) {
+        super(description, date);
     }
 
-    Todo(String description, PriorityEnum priority) {
-        this(description);
-        setPriority(priority);
+    public Todo(String description, Date date, RecurrenceEnum recurranceEnum) {
+        super(description, date, recurranceEnum);
     }
 
-    Todo(String description, Date startDate) {
-        this(description);
-        setDate(startDate);
+    public Todo(String description, PriorityEnum priorityEnum) {
+        super(description, priorityEnum);
     }
 
-    Todo(String description, PriorityEnum priority, Date startDate) {
-        this(description, priority);
-        setDate(startDate);
+    public Todo(String description, Date date, PriorityEnum priorityEnum) {
+        super(description, date, priorityEnum);
     }
 
-    Todo(String description, Date startDate, Date endDate) {
-        this(description, startDate);
-        setEndDate(endDate);
-    }
-
-    Todo(String description, PriorityEnum priority, Date startDate, Date endDate) {
-        this(description, priority, startDate);
-        setEndDate(endDate);
+    public Todo(String description, Date date, RecurrenceEnum recurranceEnum, PriorityEnum priorityEnum) {
+        super(description, date, recurranceEnum, priorityEnum);
     }
 }

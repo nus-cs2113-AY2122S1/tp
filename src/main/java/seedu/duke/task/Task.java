@@ -1,50 +1,77 @@
 package seedu.duke.task;
 
-import net.fortuna.ical4j.model.Date;
-import net.fortuna.ical4j.model.Property;
-import net.fortuna.ical4j.model.component.CalendarComponent;
-import net.fortuna.ical4j.model.property.Description;
-import net.fortuna.ical4j.model.property.Priority;
+import java.util.Date;
 
 public abstract class Task {
-    static final PriorityEnum DEFAULT_TASK_PRIORITY = PriorityEnum.MEDIUM;
 
-    private CalendarComponent calenderComponent;
+    static final PriorityEnum DEFAULT_PRIORITY = PriorityEnum.MEDIUM;
+    static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
 
-    protected Task(CalendarComponent calenderComponent) {
-        this.calenderComponent = calenderComponent;
+    String description;
+    PriorityEnum priorityEnum;
+    RecurrenceEnum recurranceEnum;
+    Date date;
+
+    protected Task(String description) {
+        this.description = description;
+        setPriorityEnum(DEFAULT_PRIORITY);
+        setRecurranceEnum(DEFAULT_RECURRENCE);
     }
 
-    protected Object getProperty(String property) {
-        return calenderComponent.getProperties().getProperty(property);
+    protected Task(String description, Date date) {
+        this(description);
+        setDate(date);
     }
 
-    protected void setProperty(Property property) {
-        calenderComponent.getProperties().add(property);
+    protected Task(String description, Date date, RecurrenceEnum recurranceEnum) {
+        this(description, date);
+        setRecurranceEnum(recurranceEnum);
+    }
+
+    protected Task(String description, PriorityEnum priorityEnum) {
+        this(description);
+        setPriorityEnum(priorityEnum);
+    }
+
+    protected Task(String description, Date date, PriorityEnum priorityEnum) {
+        this(description, date);
+        setPriorityEnum(priorityEnum);
+    }
+
+    protected Task(String description, Date date, RecurrenceEnum recurranceEnum, PriorityEnum priorityEnum) {
+        this(description, date, priorityEnum);
+        setRecurranceEnum(recurranceEnum);
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
-        setProperty(new Description(description));
+        this.description = description;
     }
 
-    public String getDescription(String description) {
-        return (String) getProperty(Property.DESCRIPTION);
+    public PriorityEnum getPriorityEnum() {
+        return priorityEnum;
     }
 
-    public void setPriority() {
-        setPriority(DEFAULT_TASK_PRIORITY);
+    public void setPriorityEnum(PriorityEnum priorityEnum) {
+        this.priorityEnum = priorityEnum;
     }
 
-    public void setPriority(PriorityEnum priorityEnum) {
-        int priority = priorityEnum.getValue();
-        setProperty(new Priority(priority));
+    public RecurrenceEnum getRecurranceEnum() {
+        return recurranceEnum;
     }
 
-    public int getPriority() {
-        return (int) getProperty(Property.PRIORITY);
+    public void setRecurranceEnum(RecurrenceEnum recurranceEnum) {
+        this.recurranceEnum = recurranceEnum;
     }
 
-    public abstract Date getDate();
+    public Date getDate() {
+        return date;
+    }
 
-    public abstract void setDate(Date date);
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

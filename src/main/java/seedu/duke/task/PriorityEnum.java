@@ -7,13 +7,9 @@ import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toMap;
 
 public enum PriorityEnum {
-    //Values from https://www.kanzaki.com/docs/ical/priority.html
-    HIGH(1),
-    MEDIUM(5),
-    LOW(9);
-
-    private static final int LOWEST_PRIORITY_INT = 9;
-    private static final int HIGHEST_PRIORITY_INT = 1;
+    HIGH(2),
+    MEDIUM(1),
+    LOW(0);
 
     private final int priorityNumber;
 
@@ -21,7 +17,7 @@ public enum PriorityEnum {
         this.priorityNumber = priorityNumber;
     }
 
-    int getValue() {
+    public int getValue() {
         return this.priorityNumber;
     }
 
@@ -41,11 +37,8 @@ public enum PriorityEnum {
      * @return {@link PriorityEnum} enum corresponding to <code>int priorityNumber</code> argument.
      */
     public static PriorityEnum getEnum(int priorityNumber) throws PriorityEnumDoesNotExistException {
-        if (priorityNumber > LOWEST_PRIORITY_INT || priorityNumber < HIGHEST_PRIORITY_INT) {
-            throw new PriorityEnumDoesNotExistException();
-        }
         for (PriorityEnum priority : PriorityEnum.values()) {
-            if (priorityNumber <= priority.getValue()) {
+            if (priorityNumber == priority.getValue()) {
                 return priority;
             }
         }

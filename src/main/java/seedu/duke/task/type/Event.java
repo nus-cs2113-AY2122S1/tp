@@ -1,34 +1,56 @@
 package seedu.duke.task.type;
 
-import net.fortuna.ical4j.model.Date;
-import net.fortuna.ical4j.model.component.VEvent;
+import java.util.Date;
 import seedu.duke.task.PriorityEnum;
-import seedu.duke.task.TimedTask;
+import seedu.duke.task.RecurrenceEnum;
+import seedu.duke.task.Task;
 
-public class Event extends TimedTask {
+public class Event extends Task {
 
-    private Event() {
-        super(new VEvent());
+    private Date endDate;
+
+    public Event(String description, Date date) {
+        super(description, date);
     }
 
-    Event(String description, Date startDate) {
-        this();
-        setDescription(description);
-        setDate(startDate);
-    }
-
-    Event(String description, PriorityEnum priority, Date startDate) {
-        this(description, startDate);
-        setPriority(priority);
-    }
-
-    Event(String description, Date startDate, Date endDate) {
-        this(description, startDate);
+    public Event(String description, Date startDate, Date endDate) {
+        super(description, startDate);
         setEndDate(endDate);
     }
 
-    Event(String description, PriorityEnum priority, Date startDate, Date endDate) {
-        this(description, priority, startDate);
+    public Event(String description, Date date, RecurrenceEnum recurranceEnum) {
+        super(description, date, recurranceEnum);
+    }
+
+    public Event(String description, Date startDate, Date endDate, RecurrenceEnum recurranceEnum) {
+        super(description, startDate, recurranceEnum);
         setEndDate(endDate);
+    }
+
+    public Event(String description, Date date, PriorityEnum priorityEnum) {
+        super(description, date, priorityEnum);
+    }
+
+    public Event(String description, Date startDate, Date endDate, PriorityEnum priorityEnum) {
+        super(description, startDate, priorityEnum);
+        setEndDate(endDate);
+    }
+
+    public Event(String description, Date date, RecurrenceEnum recurranceEnum, PriorityEnum priorityEnum) {
+        super(description, date, recurranceEnum, priorityEnum);
+    }
+
+    public Event(String description, Date startDate, Date endDate,
+                 RecurrenceEnum recurranceEnum, PriorityEnum priorityEnum) {
+        super(description, startDate, recurranceEnum, priorityEnum);
+        setEndDate(endDate);
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 }
