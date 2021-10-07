@@ -1,4 +1,5 @@
 package happybit.parser;
+
 import happybit.command.ListHabitsCommand;
 import happybit.command.ListGoalsCommand;
 import happybit.command.HelpCommand;

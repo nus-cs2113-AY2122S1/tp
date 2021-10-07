@@ -18,8 +18,8 @@ public class Ui {
     private static final String LIST_GOAL_COMMAND =
             "list all goals for that habit: list -<habit name>";
     private static final String NEWLINE = System.lineSeparator();
-    private static final String DASHES = "______________________________________________________________" +
-            "__________________________________________________________";
+    private static final String DASHES = "______________________________________________________________"
+            + "__________________________________________________________";
 
     public static void printCommandList() {
         printDashes();
