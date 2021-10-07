@@ -39,6 +39,9 @@ public class Entry {
         case FIND_TRAINING_KEYWORD:
             Parser.findInTraining(trainings, entry);
             break;
+        case EDIT_TRAINING_KEYWORD:
+            Parser.editTraining(trainings, entry);
+            break;
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();
             break;
