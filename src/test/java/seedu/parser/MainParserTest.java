@@ -19,6 +19,13 @@ public class MainParserTest {
         mainParser = new MainParser();
     }
 
+    private <T extends Command> T getParsedCommand(String userInput, Class<T> commandClass) {
+        // This is because user input is normally trimmed by TextUi
+        String trimmedUserInput = userInput.trim();
+        final Command result = mainParser.parseCommand(trimmedUserInput);
+        assertTrue(commandClass.isInstance(result));
+        return (T) result;
+    }
     @Test
     public void parseDeleteCommand() {
         final int testIndex = 1;
