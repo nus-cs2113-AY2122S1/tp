@@ -9,33 +9,33 @@ import terminus.module.NusModule;
 
 public class ModuleStorage {
     
-    private Path filePath;
-    private Gson gson;
+    private final Path filePath;
+    private final Gson gson;
 
     public ModuleStorage(Path filePath) {
         this.filePath = filePath;
         this.gson = new GsonBuilder().setPrettyPrinting().create();
     }
     
-    private void createRequiredFolders() throws IOException {
+    private void initializeFile() throws IOException {
         if (!Files.isDirectory(filePath.getParent())) {
             Files.createDirectories(filePath.getParent());
+        }
+        if (!Files.exists(filePath)) {
+            Files.createFile(filePath);
         }
     }
     
     public NusModule loadFile() throws IOException {
-        createRequiredFolders();
-        if (!Files.exists(filePath) || !Files.isReadable(filePath)) {
+        initializeFile();
+        if (!Files.isReadable(filePath)) {
             return null;
         }
         return gson.fromJson(Files.newBufferedReader(filePath), NusModule.class);
     }
     
     public void saveFile(NusModule module) throws IOException {
-        createRequiredFolders();
-        if (!Files.exists(filePath)) {
-            Files.createFile(filePath);
-        }
+        initializeFile();
         String jsonString = gson.toJson(module);
         Files.writeString(filePath, jsonString);
     }

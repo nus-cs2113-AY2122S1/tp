@@ -52,7 +52,6 @@ public class Terminus {
             if (this.nusModule == null) {
                 this.nusModule = new NusModule();
             }
-            this.moduleStorage.saveFile(nusModule);
             this.ui.printParserBanner(this.parser, this.nusModule);
         } catch (IOException e) {
             ui.printSection(
