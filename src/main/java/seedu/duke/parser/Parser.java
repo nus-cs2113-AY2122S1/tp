@@ -20,4 +20,11 @@ public class Parser {
         }
         return false;
     }
+
+    public boolean isListBudget() {
+        if (rawCommandString.split(" ")[0].equals("ListBudget")) {
+            return true;
+        }
+        return false;
+    }
 }

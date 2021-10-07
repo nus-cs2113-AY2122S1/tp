@@ -1,18 +1,33 @@
 package seedu.duke.data.budget;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import seedu.duke.data.expenditure.Expenditure;
+
 import java.util.ArrayList;
 
 public class Budget {
-    public static String description;
-    public static double amountInDollars;
-    // public static ArrayList<Task> tasks = new ArrayList<>();
+    public String description;
+    public double spendingLimit;
+    public int month;
+    public static int numberOfExpenditure = 0;
 
-    public Budget(String description, String by) {
+    public static ArrayList<Expenditure> expenditureArrayList = new ArrayList<>();
+
+    public Budget(String description, double spendingLimit, int month) {
         this.description = description;
-        //this.by = by;
+        this.spendingLimit = spendingLimit;
+        this.month = month;
     }
 
+    public void addExpenditure(String description, double amount) {
+        expenditureArrayList.add(new Expenditure(description, amount));
+        numberOfExpenditure += 1;
+    }
 
+    public void printExpenditureList(int indexOfExpenditure) {
+        expenditureArrayList.get(indexOfExpenditure).printExpenditure();
+    }
+
+    public void printBudgetDetails() {
+        System.out.println(this.description + " $" + this.spendingLimit + " Month: " + this.month);
+    }
 }

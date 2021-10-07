@@ -1,11 +1,31 @@
 package seedu.duke.commands;
 
+import seedu.duke.data.BudgetList;
+
+//add EXPENDITURE_NAME COST DATE_TIME_OF_EXPENDITURE
+
 public class AddBudget {
+    public String description;
     public double amount;
     public int month;
 
-    public AddBudget(double amount, int month) {
-        this.amount = amount;
-        this.month = month;
+    public String getDescription(String rawCommand) {
+        return rawCommand.split(" ")[1];
+    }
+
+    public double getAmount(String rawCommand) {
+        return Double.parseDouble(rawCommand.split(" ")[2]);
+    }
+
+    public int getMonth(String rawCommand) {
+        return Integer.parseInt(rawCommand.split(" ")[3]);
+    }
+
+    public void addBudget(String rawCommand, BudgetList currentBudgetList) {
+        this.description = getDescription(rawCommand);
+        this.amount = getAmount(rawCommand);
+        this.month = getMonth(rawCommand);
+
+        currentBudgetList.addBudgetList(this.description, this.amount, this.month);
     }
 }
