@@ -25,9 +25,8 @@ public class ListCommand extends Command {
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         String[] requiredParameter = {};
         String[] optionalParameters = {CommandParameters.STOCK_ID, CommandParameters.NAME, CommandParameters.PRICE,
-                                       CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
-                                       CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY,
-                                       CommandParameters.SORT, CommandParameters.REVERSED_SORT};
+            CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
+            CommandParameters.MAX_QUANTITY, CommandParameters.SORT, CommandParameters.REVERSED_SORT};
 
         if (parameters.size() != 0) { // Check for valid parameters only when they are provided
             boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,

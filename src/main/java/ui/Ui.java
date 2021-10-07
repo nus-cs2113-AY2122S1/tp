@@ -110,7 +110,7 @@ public class Ui {
         }
 
         int[] columnWidths = {idWidth, nameWidth, priceWidth, quantityWidth, expiryWidth, descriptionWidth,
-                              maxQuantityWidth};
+            maxQuantityWidth};
 
         // Pad the data in the columns
         String idFormat = "| %1$-" + idWidth + "s | ";
@@ -122,7 +122,7 @@ public class Ui {
         String maxQuantityFormat = "%1$-" + maxQuantityWidth + "s | ";
 
         String[] formats = {idFormat, nameFormat, priceFormat, quantityFormat, expiryFormat, descriptionFormat,
-                            maxQuantityFormat};
+            maxQuantityFormat};
         StringBuilder headers = new StringBuilder();
         for (int i = 0; i < Stock.NO_OF_COLUMNS; i++) {
             headers.append(String.format(formats[i], centerString(columnWidths[i], Stock.COLUMNS[i])));
