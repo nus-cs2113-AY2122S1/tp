@@ -3,16 +3,21 @@ package seedu.parser;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import seedu.command.AddContactCommand;
 import seedu.command.Command;
 import seedu.command.DeleteContactCommand;
-import seedu.parser.MainParser;
+import seedu.command.FailedCommand;
+import seedu.exception.MissingNameException;
 
 
 public class MainParserTest {
     private MainParser mainParser;
+    private String testUserInput;
+    private int testIndex; // For commands that require index
 
     @BeforeEach
     public void setUp() {
@@ -35,6 +40,7 @@ public class MainParserTest {
         assertTrue(commandClass.isInstance(result));
         return (T) result;
     }
+
     @Test
     public void parseDeleteCommand_validIndex_expectDeleteContactCommand() {
         testIndex = 1;
@@ -43,11 +49,30 @@ public class MainParserTest {
         assertEquals(testIndex, testResultCommand.getDeletedIndex());
     }
 
+    @Test
+    public void parseAddCommand_validInputsWithIrregularSpaces_expectAddContactCommand() {
+        testUserInput = "         add -n   andre -g  ng-andre  ";
+        AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
+        AddContactCommand expectedCommand = new AddContactCommand("andre", "ng-andre");
+        assertEquals(expectedCommand.getName(), actualCommand.getName());
+        assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
+    }
 
-    private <T extends Command> T assertParseCommand(String userInput, Class<T> commandClass) {
-        final Command result = mainParser.parseCommand(userInput);
-        assertTrue(commandClass.isInstance(result));
-        return (T) result;
+    @Test
+    public void parseAddCommand_validInputs_expectAddContactCommand() {
+        testUserInput = "add -n andre -g ng-andre";
+        final AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
+        final AddContactCommand expectedCommand = new AddContactCommand("andre", "ng-andre");
+        assertEquals(expectedCommand.getName(), actualCommand.getName());
+        assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
+    }
+
+    @Test
+    public void parseAddCommand_missingName_expectFailedCommand() {
+        testUserInput = " add -g      github ";
+        final FailedCommand actualCommand = getParsedCommand(testUserInput, FailedCommand.class);
+        final FailedCommand expectedCommand = new FailedCommand(FailedCommandType.MISSING_NAME);
+        assertEquals(expectedCommand.getType(), actualCommand.getType());
     }
 }
 
