@@ -4,8 +4,6 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.Parser;
 import seedu.duke.ui.TextUI;
 
-import java.util.Scanner;
-
 public class Duke {
     private static TextUI ui;
 
