@@ -16,4 +16,17 @@ public class ClientList {
         clientCount++;
     }
 
+    public int getClientCount(){
+        return clientCount;
+    }
+
+    public Client getClient(int index){
+        return clients.get(index);
+    }
+
+    public void clearAllClients(){
+        clients.clear();
+    }
+
+
 }
