@@ -14,7 +14,7 @@ public class Duke {
     private BudgetList budgetList;
 
     public Duke() {
-       budgetList = new BudgetList();
+        budgetList = new BudgetList();
         textUi = new TextUi();
         parser = new Parser();
     }
