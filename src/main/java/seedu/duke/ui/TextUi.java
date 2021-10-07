@@ -30,6 +30,7 @@ public class TextUi {
 
     public static void showWelcomeMessage() {
         System.out.println(DIVIDER
+                + LS
                 + "    Hello! I'm Budget Tracker\n"
                 + "    Which entries do you wish to enter today?\n"
                 + DIVIDER);
