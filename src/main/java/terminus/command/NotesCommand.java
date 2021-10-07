@@ -1,6 +1,5 @@
 package terminus.command;
 
-
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.parser.NoteCommandParser;

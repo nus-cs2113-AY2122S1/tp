@@ -4,43 +4,11 @@ Type any of the following to get started:
 > exit
 > help
 > note
+> schedule
 
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
-[] >>> 
-Type any of the following to get started:
-> add
-> exit
-> help
-> view
-> back
-> delete
-
-[note] >>> add : add an item into your list.
-Format: add "{item name}" "{item content}"
-
-exit : Exits the program.
-Format: exit
-
-help : Prints the help page.
-Format: help
-
-view : view all items or view an individual items
-Format: view {item number}
-
-back : Returns to the parent workspace.
-Format: back
-
-delete : delete an item from your list.
-Format: delete <item number>
-
-[note] >>> Command not found! Type 'help' for a list of commands.
-[note] >>> 
-Type any of the following to get started:
-> exit
-> help
-> note
-
+[] >>> Command not found! Type 'help' for a list of commands.
 [] >>> note has been added!
 [] >>> 1. CS2113T
 
@@ -52,7 +20,6 @@ Content: Week 8 test
 [] >>> Error: Invalid numerical value provided.
 [] >>> Error: Content not found.
 [] >>> class terminus.content.Note 'CS2113T' has been deleted!
-[] >>> 
 [] >>> exit : Exits the program.
 Format: exit
 
@@ -62,4 +29,22 @@ Format: help
 note : Move to notes workspace.
 Format: note
 
+schedule : Move to schedules workspace.
+Format: schedule
+
+[] >>> schedule has been added!
+[] >>> schedule has been added!
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> 1. CS2113T Tutorial, Thursday, 10:00, zoom.nus.sg
+2. CS2113T Lecture, Friday, 16:00, zoom.com
+
+[] >>> Error: Content not found.
+[] >>> CS2113T Lecture, Friday, 16:00, zoom.com
+[] >>> Error: Content not found.
+[] >>> class terminus.content.Link 'CS2113T Tutorial' has been deleted!
+[] >>> 1. CS2113T Lecture, Friday, 16:00, zoom.com
+
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> Command not found! Type 'help' for a list of commands.
+[] >>> class terminus.content.Link 'CS2113T Lecture' has been deleted!
 [] >>> Goodbye!
