@@ -1,14 +1,14 @@
 package seedu.duke;
 
 public class CutCommand extends Command {
-    private int taskNumber;
+    private int clientIndex;
 
-    public CutCommand(int taskNumber) {
-        this.taskNumber = taskNumber;
+    public CutCommand(int clientIndex) {
+        this.clientIndex = clientIndex;
     }
 
     @Override
     public void execute(ClientList clients, Ui ui) {
-        clients.cut(taskNumber, ui);
+        clients.cut(clientIndex, ui);
     }
 }

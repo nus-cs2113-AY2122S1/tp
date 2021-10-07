@@ -28,11 +28,10 @@ public class ClientList {
         clients.clear();
     }
 
-
-    public void cut(int taskNumber, Ui ui) {
-        Client client = clients.get(taskNumber);
+    public void cut(int clientIndex, Ui ui) {
+        Client client = clients.get(clientIndex);
         ui.showCut(client);
-        clients.remove(taskNumber);
+        clients.remove(clientIndex);
         clientCount--;
     }
 
