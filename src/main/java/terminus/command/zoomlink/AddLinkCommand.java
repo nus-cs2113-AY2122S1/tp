@@ -29,8 +29,7 @@ public class AddLinkCommand extends Command {
 
     @Override
     public String getFormat() {
-        return CommonFormat.COMMAND_ADD + " \"{description}\" "
-                + "\"{day}\" \"{start_time}\" \"{zoom_link}\"";
+        return CommonFormat.COMMAND_ADD_SCHEDULE_FORMAT;
     }
 
     @Override
