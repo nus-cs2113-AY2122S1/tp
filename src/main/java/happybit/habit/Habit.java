@@ -1,6 +1,7 @@
 package happybit.habit;
 
 import happybit.goal.Goal;
+
 import java.util.ArrayList;
 
 public class Habit {
