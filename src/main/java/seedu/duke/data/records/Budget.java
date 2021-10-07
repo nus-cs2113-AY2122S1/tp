@@ -3,8 +3,6 @@ package seedu.duke.data.records;
 import java.util.ArrayList;
 
 public class Budget extends Record {
-    public static int numberOfExpenditure = 0;
-    public static ArrayList<Expenditure> expenditureArrayList = new ArrayList<>();
     public String description;
     public double spendingLimit;
     public int month;
@@ -14,13 +12,16 @@ public class Budget extends Record {
         this.description = description;
     }
 
-    public void addExpenditure(String description, double amount, int month) {
-        expenditureArrayList.add(new Expenditure(description, amount, month));
-        numberOfExpenditure += 1;
+    public String getDescription() {
+        return description;
     }
 
-    public void printExpenditureList(int indexOfExpenditure) {
-        expenditureArrayList.get(indexOfExpenditure).printExpenditure();
+    public double getSpendingLimit() {
+        return spendingLimit;
+    }
+
+    public int getMonth() {
+        return month;
     }
 
     public void printBudgetDetails() {

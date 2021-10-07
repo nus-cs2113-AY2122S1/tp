@@ -6,19 +6,30 @@ import seedu.duke.parser.Parser;
 public class AddExpenditureCommand extends Command {
 
     public static final String COMMAND_WORD = "AddExpenditure";
+    public String description;
+    public double spending;
+    public int month;
 
-    private final String expenditureParams;
+    public String getDescription(String rawCommand) {
+        return rawCommand.split(" ")[1];
+    }
 
-    public AddExpenditureCommand(String expenditureParams) {
-        this.expenditureParams = expenditureParams;
+    public double getSpending(String rawCommand) {
+        return Double.parseDouble(rawCommand.split(" ")[2]);
+    }
+
+    public int getMonth(String rawCommand) {
+        return Integer.parseInt(rawCommand.split(" ")[3]);
+    }
+
+    public void addBudget(String rawCommand) {
+        this.description = getDescription(rawCommand);
+        this.spending = getSpending(rawCommand);
+        this.month = getMonth(rawCommand);
+
+        budgetList.addBudget(this.description, this.spending, this.month);
     }
 
     public void execute() {
-        String[] splitExpenditureParams = Parser.splitExpenditureParams(expenditureParams);
-        String expenditureDescription = splitExpenditureParams[0].trim();
-        double expenditureAmount = Double.parseDouble(splitExpenditureParams[1].trim());
-        int expenditureMonth = Integer.parseInt(splitExpenditureParams[2].trim());
-        Expenditure newExpenditure = new Expenditure(expenditureDescription, expenditureAmount, expenditureMonth);
-        budgetList.addExpenditure(newExpenditure);
     }
 }
