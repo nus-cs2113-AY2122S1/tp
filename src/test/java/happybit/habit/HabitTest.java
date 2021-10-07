@@ -32,14 +32,14 @@ class HabitTest {
         final Goal testGoal1 = new Goal("goal1", "07-Oct-2021", "07-Oct-2050");
         final Goal testGoal2 = new Goal("goal2", "08-Oct-2021", "08-Oct-2050");
         final Goal testGoal3 = new Goal("goal3", "09-Oct-2021", "09-Oct-2050");
-        assertEquals(3, testHabit.numberOfGoals());
         testHabit.addGoal(testGoal1);
         testHabit.addGoal(testGoal2);
         testHabit.addGoal(testGoal3);
+        assertEquals(3, testHabit.numberOfGoals());
         ArrayList<String> expectedResultList = new ArrayList<>();
-        expectedResultList.add("1. goal1 (Start: 07-Oct-2021 | End: 07-Oct-2050)\n");
-        expectedResultList.add("2. goal2 (Start: 08-Oct-2021 | End: 08-Oct-2050)\n");
-        expectedResultList.add("3. goal3 (Start: 09-Oct-2021 | End: 09-Oct-2050)\n");
+        expectedResultList.add("goal1 (Start: 07-Oct-2021 | End: 07-Oct-2050)\n");
+        expectedResultList.add("goal2 (Start: 08-Oct-2021 | End: 08-Oct-2050)\n");
+        expectedResultList.add("goal3 (Start: 09-Oct-2021 | End: 09-Oct-2050)\n");
         for (int i = 0; i < testHabit.numberOfGoals(); i++) {
             assertEquals(expectedResultList.get(i), testHabit.goalList.get(i).getDescription());
         }
