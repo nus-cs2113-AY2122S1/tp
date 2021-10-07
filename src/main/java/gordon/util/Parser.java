@@ -1,10 +1,14 @@
-package seedu.duke;
+package gordon.util;
+
+import gordon.exception.GordonException;
+import gordon.kitchen.Cookbook;
+import gordon.kitchen.Ingredient;
+import gordon.kitchen.Recipe;
 
 import java.util.Scanner;
 
 public class Parser {
     protected String nameRecipe;
-    protected int indexOfRecipe;
 
     public static final int NAME_INDEX = 0;
     public static final int INGREDIENTS_INDEX = 1;
@@ -26,7 +30,7 @@ public class Parser {
                     parseIngredients(splitContent[INGREDIENTS_INDEX], r);
                     parseSteps(splitContent[STEPS_INDEX], r);
                     cookbook.addRecipe(r);
-                    System.out.println("Added " + r.name + " recipe! Yum!");
+                    System.out.println("Added " + r.getName() + " recipe! Yum!");
                     System.out.print(r);
                 } else if (parseCommand(line).equalsIgnoreCase("delete")) {
                     nameRecipe = parseName(line);

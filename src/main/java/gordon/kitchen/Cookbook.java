@@ -1,4 +1,6 @@
-package seedu.duke;
+package gordon.kitchen;
+
+import gordon.exception.GordonException;
 
 import java.util.ArrayList;
 import java.util.Comparator;
