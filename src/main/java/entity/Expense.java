@@ -1,14 +1,18 @@
 package entity;
 
 public class Expense {
-    private String name;
+    private String description;
     private double value;
     private String date;
 
-    public Expense(String name, double value, String date) {
-        this.name = name;
+    public Expense(String description, double value, String date) {
+        this.description = description;
         this.value = value;
         this.date = date;
+    }
+
+    public String getDescription() {
+        return this.description;
     }
 
     public String getDate() {
@@ -21,6 +25,6 @@ public class Expense {
 
     @Override
     public String toString() {
-        return (name + "\t| " + value + "\t| " + date);
+        return (description + "\t\t\t| " + value + "\t| " + date);
     }
 }

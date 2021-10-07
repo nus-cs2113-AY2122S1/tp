@@ -3,6 +3,7 @@ package command.expense;
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Command;
+import service.ExpenseManager;
 
 import java.util.concurrent.Callable;
 
@@ -27,9 +28,9 @@ public class DeleteExpenseCommand implements Callable<Integer> {
         String expenseName;
         if (exclusive.names != null) {
             expenseName = String.join(" ", exclusive.names);
-            //do something with name
+            ExpenseManager.deleteExpense(expenseName);
         } else {
-            //do something with value
+            ExpenseManager.deleteExpense(exclusive.id);
         }
         return 0;
     }

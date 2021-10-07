@@ -9,7 +9,15 @@ public class ExpenseList {
         expenses.add(newExpense);
     }
 
-    public void deleteExpense(int expenseIndex) {
+    public static void deleteExpense(String expenseName) {
+        for (int i = 0; i < expenses.size(); i++) {
+            if (expenses.get(i).getDescription().contains(expenseName)) {
+                expenses.remove(i);
+            }
+        }
+    }
+
+    public static void deleteExpense(int expenseIndex) {
         expenses.remove(expenseIndex);
     }
 

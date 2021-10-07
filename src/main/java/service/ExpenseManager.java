@@ -29,15 +29,19 @@ public class ExpenseManager {
         ExpenseList.addExpense(newExpense);
     }
 
-    public static void deleteExpense() {
-        //
+    public static void deleteExpense(String expenseName) {
+        ExpenseList.deleteExpense(expenseName);
+    }
+
+    public static void deleteExpense(int expenseNumber) {
+        ExpenseList.deleteExpense(expenseNumber - 1);
     }
 
     public static void listExpenses() {
-        System.out.println("No.\t| Name\t| Value\t| Date");
+        System.out.println("No.\t| Name\t\t\t\t| Value\t| Date");
         ArrayList<Expense> expenses = ExpenseList.getExpenses();
         for (int i = 0; i < expenses.size(); i++) {
-            System.out.println((i + 1) + ". \t" + expenses.get(i));
+            System.out.println((i + 1) + ". \t| " + expenses.get(i));
         }
     }
 }
