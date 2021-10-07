@@ -106,7 +106,7 @@ public class IngredientList {
         try {
             return ingredientList.get(ingredientNumber - 1).toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Ingredient number have not existed!");
+            throw new DukeException("Ingredient number does not exist!");
         }
     }
 
@@ -121,7 +121,7 @@ public class IngredientList {
             Ingredient removedIngredient = ingredientList.remove(ingredientNumber - 1);
             return removedIngredient;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Ingredient number have not existed!");
+            throw new DukeException("Ingredient number does not exist!");
         }
     }
 

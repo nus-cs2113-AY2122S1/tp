@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.ingredients.AddIngredient;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
 
@@ -46,8 +47,18 @@ public class Parser {
     }
 
     private static String parseAddCommand(String command) {
-        String resultMsg = "";
-        return resultMsg;
+        String[] userInput = command.split(SPACE_SEPARATOR, 2);
+        String ingredientName, ingredientUnit, ingredientExpiry;
+        double ingredientAmount;
+
+        ingredientName = AddIngredient.getIngredientName(userInput[1]);
+        ingredientAmount = AddIngredient.getIngredientAmount(userInput[1]);
+        ingredientUnit = AddIngredient.getIngredientUnit(userInput[1]);
+        ingredientExpiry = AddIngredient.getIngredientExpiry(userInput[1]);
+
+        Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,ingredientUnit, ingredientExpiry);
+
+        return IngredientList.getInstance().addNewIngredient(newIngredient);
     }
 
     private static String parseListCommand() throws DukeException {
