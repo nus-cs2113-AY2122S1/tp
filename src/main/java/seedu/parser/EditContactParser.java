@@ -2,6 +2,7 @@ package seedu.parser;
 
 import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
+import seedu.exception.MissingDetailException;
 
 import java.util.Arrays;
 
@@ -9,7 +10,7 @@ public class EditContactParser extends ContactParser {
     public static final String BUFFER = " ";
 
     @Override
-    public String[] parseContactDetails(String userInput) throws InvalidFlagException {
+    public String[] parseContactDetails(String userInput) throws InvalidFlagException, MissingDetailException {
         String[] contactDetails = new String[NUMBER_OF_DETAILS];
         Arrays.fill(contactDetails, null);
         String[] destructuredInputs = (BUFFER + userInput).split(DETAIL_SEPARATOR);
@@ -28,8 +29,12 @@ public class EditContactParser extends ContactParser {
      * @param detail         Unparsed detail
      * @throws InvalidFlagException If the flag given is not recognised
      */
-    public void parseDetail(String[] contactDetails, String detail) throws InvalidFlagException {
+    public void parseDetail(String[] contactDetails, String detail)
+            throws InvalidFlagException, MissingDetailException {
         String[] destructuredDetails = detail.split(" ", NUMBER_OF_EDIT_DETAILS);
+        if (destructuredDetails[1].trim().equalsIgnoreCase("")) {
+            throw new MissingDetailException();
+        }
         int indexToStore;
         switch (destructuredDetails[FLAG_INDEX_IN_DETAILS]) {
         case NAME_FLAG:
