@@ -50,18 +50,17 @@ public class IngredientList {
     }
 
     public String printWholeList() {
-//        for (String ingredient: ingredients.keySet()) {
-//            String key = ingredient.toString();
-//            Ingredient  = example.get(name).toString();
-//            System.out.println(key + " " + value);
-//        }
         String wholeList = "";
         for (Ingredient ingredient : ingredients.values()) {
             wholeList = wholeList + ingredient.toString() + "\n";
-            //System.out.println(ingredient);
         }
         return wholeList;
     }
+
+    public Ingredient findIngredient(String ingredientDescription) {
+        return ingredients.get(ingredientDescription);
+    }
+
 
 
 }

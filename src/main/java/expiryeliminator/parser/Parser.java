@@ -54,6 +54,8 @@ public class Parser {
             return new ByeCommand();
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+        case ViewIngredientCommand.COMMAND_WORD:
+            return prepareViewIngredient(prefixesToArgs);
         default:
             return new IncorrectCommand(MESSAGE_UNRECOGNISED_COMMAND);
         }
@@ -95,6 +97,11 @@ public class Parser {
         } catch (NumberFormatException e) {
             return new IncorrectCommand(MESSAGE_INVALID_QUANTITY);
         }
+    }
+
+    private static Command prepareViewIngredient(HashMap<String, String> prefixesToArgs) {
+        final String ingredientDescription = prefixesToArgs.get(PREFIX_INGREDIENT);
+        return new ViewIngredientCommand(ingredientDescription);
     }
 
     private static int parseQuantity(String quantityString) throws NumberFormatException {
