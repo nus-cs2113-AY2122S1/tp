@@ -15,7 +15,7 @@ public class Duke {
         ui = new TextUI();
 
         // Continue to read, parse and execute commands until exit command is issused by user
-        while(true) {
+        while (true) {
             // Gets one line of user input
             String userInput = ui.read();
             // Parse line to create relevant command object

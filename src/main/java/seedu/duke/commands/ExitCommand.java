@@ -6,13 +6,14 @@ import static seedu.duke.common.Messages.EXIT_MESSAGE;
 
 public class ExitCommand extends Command {
     /**
-     * Single constructor, no parameters
+     * Single constructor, no parameters.
      */
-    public ExitCommand() {}
+    public ExitCommand() {
+    }
 
     /**
-     * Prints exit message
-     * Overrides method from parent class
+     * Prints exit message.
+     * Overrides method from parent class.
      * @param ui Object that handles user IO
      */
     @Override
