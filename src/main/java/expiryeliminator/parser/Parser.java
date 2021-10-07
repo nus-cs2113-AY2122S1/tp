@@ -4,10 +4,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import expiryeliminator.commands.AddIngredientCommand;
-import expiryeliminator.commands.ByeCommand;
-import expiryeliminator.commands.Command;
-import expiryeliminator.commands.IncorrectCommand;
+import expiryeliminator.commands.*;
 
 /**
  * Parses user input.
@@ -55,6 +52,8 @@ public class Parser {
             return prepareAddIngredient(prefixesToArgs);
         case ByeCommand.COMMAND_WORD:
             return new ByeCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
         default:
             return new IncorrectCommand(MESSAGE_UNRECOGNISED_COMMAND);
         }

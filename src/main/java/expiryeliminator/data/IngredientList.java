@@ -48,4 +48,20 @@ public class IngredientList {
     public int size() {
         return ingredients.size();
     }
+
+    public String printWholeList() {
+//        for (String ingredient: ingredients.keySet()) {
+//            String key = ingredient.toString();
+//            Ingredient  = example.get(name).toString();
+//            System.out.println(key + " " + value);
+//        }
+        String wholeList = "";
+        for (Ingredient ingredient : ingredients.values()) {
+            wholeList = wholeList + ingredient.toString() + "\n";
+            //System.out.println(ingredient);
+        }
+        return wholeList;
+    }
+
+
 }
