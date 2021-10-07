@@ -39,7 +39,7 @@ class GoalTest {
      * Test getDescription when a goal class is initialised with an invalid start date format.
      */
     @Test
-    void getDescription_invalidStartDateFormat_expectInvalidDateFormatError() {
+    void getDescription_invalidStartDateFormat_expectException() {
         assertThrows(HappyBitException.class,
                 () -> new Goal("test", "7-10-2021", "21-Oct-2021"));
     }
@@ -48,9 +48,15 @@ class GoalTest {
      * Test getDescription when a goal class is initialised with an invalid end date format.
      */
     @Test
-    void getDescription_invalidEndDateFormat_expectInvalidDateFormatError() {
+    void getDescription_invalidEndDateFormat_expectException() {
         assertThrows(HappyBitException.class,
                 () -> new Goal("test", "07-Oct-2021", "01/01/2021"));
+    }
+
+    @Test
+    void getDescription_startDateAfterEndDate_expectException() {
+        assertThrows(HappyBitException.class,
+                () -> new Goal("test", "07-Oct-2021", "07-Jan-2021"));
     }
 
     /**
@@ -74,4 +80,5 @@ class GoalTest {
         final boolean expectedResult = false;
         assertEquals(expectedResult, testGoal.isDone);
     }
+
 }
