@@ -18,7 +18,6 @@ public class Duke {
      * Starts up the system by creating the UI and the IngredientList.
      */
     public static void initialize() {
-        //TODO: CREATE A METHOD IN UI CLASS TO PRINT THE GREETING (CAN BE CALLED IN CONSTRUCTOR)
         ui = new UI();
         ingredientList = new IngredientList(); //For now, no storage
 
@@ -61,7 +60,7 @@ public class Duke {
                 } catch (NumberFormatException e) {
                     commandOutput = "Invalid number format!";
                 } catch (IndexOutOfBoundsException e) {
-                    commandOutput = "Ingredient number not existed!";
+                    commandOutput = "Ingredient number does not exist!";
                 }
                 break;
             case "update":
@@ -73,7 +72,7 @@ public class Duke {
                 System.out.println("Unknown Command");
                 break;
             }
-          
+
             ui.printCommandOutput(commandOutput);
         }
     }
@@ -82,7 +81,6 @@ public class Duke {
      * Prints the exit message, then closes the program.
      */
     public static void exit() {
-        // TODO: CREATE GOODBYE FUNCTION IN UI CLASS
         ui.printGoodbye();
         System.exit(0);
     }
