@@ -89,13 +89,19 @@ public class IngredientList {
     }
 
     /**
-     * Gets the size of the current inventory, not including the amount of individual ingredient
+     * Gets the size of the current inventory, not including the amount of individual ingredient.
      * @return the size of current inventory
      */
     public int getInventoryStock() {
         return ingredientList.size();
     }
 
+    /**
+     * Gets the string representation of an ingredient in the list.
+     * @param ingredientNumber ingredient number to get information
+     * @return String representation of the ingredient
+     * @throws DukeException if the ingredient number have not existed
+     */
     public String getIngredientInfo(int ingredientNumber) throws DukeException {
         try {
             return ingredientList.get(ingredientNumber - 1).toString();
@@ -104,6 +110,12 @@ public class IngredientList {
         }
     }
 
+    /**
+     * Removes an ingredient from the list.
+     * @param ingredientNumber ingredient number to remove
+     * @return The removed ingredient
+     * @throws DukeException if the ingredient number has not existed
+     */
     public Ingredient remove(int ingredientNumber) throws DukeException {
         try {
             Ingredient removedIngredient = ingredientList.remove(ingredientNumber - 1);

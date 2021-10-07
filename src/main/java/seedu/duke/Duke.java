@@ -30,7 +30,7 @@ public class Duke {
 
 
     /**
-     * Runs the command parser and return the message
+     * Runs the command parser and return the message.
      * @param command user's input command
      * @return result message
      */
