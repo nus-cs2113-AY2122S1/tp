@@ -7,7 +7,7 @@ public class AddCommand {
     private final ArrayList<String> habits = new ArrayList<>();
 
     /**
-     * Adds habit to habit list
+     * Adds habit to habit list.
      *
      * @param habit Habit to add to habit list
      */
@@ -16,13 +16,15 @@ public class AddCommand {
     }
 
     /**
-     * Adds a habit
+     * Adds a habit.
      */
     public void runCommand(String habit) {
         addHabit(habit);
     }
 
     /**
+     * Returns size of habits list.
+     *
      * @return Size of habits list
      */
     public int getHabitListSize() {
@@ -30,6 +32,8 @@ public class AddCommand {
     }
 
     /**
+     * Returns list of all current habits
+     *
      * @return List of all current habits
      */
     public ArrayList<String> getHabits() {
