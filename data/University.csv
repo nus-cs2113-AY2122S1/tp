@@ -332,7 +332,7 @@ Brandeis University,PS3704,POLITICAL SCIENCE EXCHANGE MOD,4,POL162B,Middle East 
 Brandeis University,PS4751,Department exchange module,5,POL190B1,Seminar:Democratic Theory,4
 Brandeis University,PS3246,Public Ethics and Corruption,4,POL149B,Ending Deadly Conflict,4
 Brandeis University,PS3239,Int'l Conflict Analysis,4,POL127A1,Ending Deadly Conflict,4
-Brandeis University,PS4222,,5,POL124B,"Seminar: Race, Inequality and Social Policy",4
+Brandeis University,PS4222,,4,POL124B,"Seminar: Race, Inequality and Social Policy",4
 Brandeis University,LSM3215,Neuronal Signaling and Memory,4,NBIO 145B,Systems Neuroscience,15
 Brandeis University,LSM3233,Developmental Biology,4,BIOL 111A1,Developmental Biology,4
 Brandeis University,LSM3991,Exchange Enrichment Module,4,BISC 5B,Diseases of the mind,4
@@ -1004,7 +1004,7 @@ Delft University of Technology,ME3663,Exchange Technical Elective,4,WB4408A,DIES
 Delft University of Technology,ME4231,Aerodynamics,4,AE4245,ADVANCED AIRCRAFT DESIGN II,4
 Delft University of Technology,ME3661,Technical Elective,4,AE4204,KNOWLEDGE BASED ENGINEERING,4
 Delft University of Technology,ME3661,Technical Elective,4,AE4317,AUTONOMOUS FLIGHT OF MICRO AIR VEHICLES,4
-Delft University of Technology,ME2135,Intermediate Fluid Mechanics,5,ME45040,ADVANCED FLUID DYNAMICS,5
+Delft University of Technology,ME2135,Intermediate Fluid Mechanics,4,ME45040,ADVANCED FLUID DYNAMICS,5
 Delft University of Technology,IE4210,Operations Research II,4,WI4410,Advanced Discrete Optimization,6
 Delft University of Technology,ST4991,Exchange Enrichment Module,4,WI4231,Mathematical Data Science,6
 Delft University of Technology,ST3248,Statistical Learning I,4,TI2736-C,Data Mining,5
@@ -3278,8 +3278,8 @@ NOC Beijing,TR3002,New Venture Creation,4,PU00510392,Entrepreneurial Management,
 NOC Beijing,TR3049,Top in Entrepreneurship (TIE),4,PU02838920,Value Proposition and Business Model Design for Technology Venture,2
 NOC Israel,TR3002,New Venture Creation,4,PU5348,Venture Creation - Adelson School,6
 NOC Israel,TR3002,New Venture Creation,4,PU1220-8010,NUS - Foundations of Entrepreneurship (TAU),2
-NOC Israel,TR3002,,4,PU1221-8010,NUS - Foundations of Entrepreneurship (TAU),2
-NOC Israel,TR3002,,4,PU5348,Venture Creation - Adelson School,6
+NOC Israel,TR3002,New Venture Creation,4,PU1221-8010,NUS - Foundations of Entrepreneurship (TAU),2
+NOC Israel,TR3002,New Venture Creation,4,PU5348,Venture Creation - Adelson School,6
 NOC Munich,TR3049,Top in Entrepreneurship (TIE),4,WI001166,Advanced Topics in Innovation & Entrepreneurship: Entrepreneurial Prototyping,6
 NOC Munich,TR3049,Top in Entrepreneurship (TIE),4,WI001166,Advanced Topics in Innovation & Entrepreneurship: Entrepreneurial Prototyping,6
 NOC Shanghai,TR3001,New Product Development,4,MANA130058,New Products Development and Management,2
@@ -3698,7 +3698,7 @@ Radboud University Nijmegen,LSM3991,Exchange Enrichment Module,4,NWI-BB081B,Cogn
 Radboud University Nijmegen,LSM3222,Human Neuroanatomy,4,NWI-BB03,Neurobiology,6
 Radboud University Nijmegen,LSM2251,Ecology and Environment,4,NWI-BP 030,Ecology,6
 Radboud University Nijmegen,LSM2252,Biodiversity,4,NWI-BP 27B,Biodiversity,6
-Radboud University Nijmegen,LSM2996,Exchange Enrichment Level 2000,4,NWI-MOL 022,Aspects of Molecular Life Sciences,3
+Radboud University Nijmegen,LSM2996,Exchange Enrichment Level 2000,2,NWI-MOL 022,Aspects of Molecular Life Sciences,3
 Radboud University Nijmegen,LSM3991,Exchange Enrichment Module,4,NWI-BB 017C,Biochemistry and Molecular Biology II,6
 Radboud University Nijmegen,LSM3991,Exchange Enrichment Module,4,NWI-BB 025B,Principles and Practice of Human Pathology,6
 Renmin University of China,BT4211,Data-Driven Marketing,4,SE1922,Marketing Data Analysis,3
@@ -4760,7 +4760,7 @@ The College of William & Mary,PC3238,Fluid Dynamics,4,APSC302,Fluid Mechanics,3
 The College of William & Mary,PC3246,Astrophysics I,4,PHYS476,Modern Astrophysics,3
 The College of William & Mary,PC3193,Experimental Physics II,4,PHYS352,Experimental Modern Physics,2
 The George Washington University,PS3704,POLITICAL SCIENCE EXCHANGE MOD,4,PSC3192W,Political Economy of Developing Areas,3
-The George Washington University,PS4206,Regional Security in Asia-Pac,4,IAFF2190W,US-Asia: Critical Issues,3
+The George Washington University,PS4206,Regional Security in Asia-Pac,5,IAFF2190W,US-Asia: Critical Issues,3
 The George Washington University,PS4701,POLITICAL SCIENCE EXCHANGE MOD,5,IAFF3187,Political Economy of Latin America,3
 The George Washington University,PS4701,POLITICAL SCIENCE EXCHANGE MOD,5,IAFF3190,"Oil: Industry, Economy, Society",3
 The George Washington University,PS4701,POLITICAL SCIENCE EXCHANGE MOD,5,IAFF3186-13,"U.S.-China Relations: Background, Issues, and Outlook",3
@@ -6757,7 +6757,7 @@ University of Calgary,CM3252,Polymer Chemistry 1,4,ENCH539,Polymer Engineering,3
 University of Calgary,CM3253,Materials Chemistry 1,4,CHEM379,Materials Chemistry for Engineers,3
 University of Calgary,CM3261,Environmental Chemistry,4,CHEM321,Environmental Chemistry,3
 University of California,PS3755,,4,POL116,Politics of God,4
-University of California,PS2711,Department Exchange Module,1,POL122,International Law,4
+University of California,PS2711,Department Exchange Module,4,POL122,International Law,4
 University of California,PS4751,Department exchange module,5,POLSCI191-006,Junior Seminar - Fragile States,4
 University of California,PS3242,US Foreign Policy,4,POLSCI144,American Foreign Policy Toward Asia,4
 University of California,GL3101,Inquiry and Method,4,POLS15,Introduction to Research in Political Science,4
