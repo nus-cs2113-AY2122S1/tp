@@ -24,7 +24,7 @@ public class Parser {
     public static final String EXERCISE_KEYWORD = "/e";
     public static final String SETS_KEYWORD = "/s";
     public static final String REPS_KEYWORD = "/r";
-    private static final String MESSAGE_INVALID_COMMAND = "Invalid command\n";
+    static final String MESSAGE_INVALID_COMMAND = "Invalid command\n";
 
     public Command parseCommand(String userInputString) {
 

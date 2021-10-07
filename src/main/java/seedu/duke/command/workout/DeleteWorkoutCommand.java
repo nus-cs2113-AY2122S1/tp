@@ -17,6 +17,10 @@ public class DeleteWorkoutCommand extends Command {
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1\n";
     public static final String MESSAGE_SUCCESS = "Deleted workout: %1$s";
 
+    public int getWorkoutIndex() {
+        return workoutIndex;
+    }
+
     private final int workoutIndex;
 
     public DeleteWorkoutCommand(int workoutIndex) {
