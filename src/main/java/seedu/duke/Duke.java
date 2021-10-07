@@ -3,6 +3,7 @@ package seedu.duke;
 import java.util.Scanner;
 
 public class Duke {
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
@@ -13,9 +14,20 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
+        System.out.println("What would you like to do?");
 
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+
+        while (true) {
+            System.out.print("> ");
+            String userInput = in.nextLine();
+            if (userInput.equals("bye")) {
+                System.out.println("Bye");
+                return;
+            }
+
+            Entry.addEntry(userInput);
+        }
+
     }
 }

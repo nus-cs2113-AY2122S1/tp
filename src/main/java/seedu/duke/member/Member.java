@@ -2,7 +2,6 @@ package seedu.duke.member;
 
 public class Member {
 
-
     protected String name;
     protected String studentNumber;
 
@@ -68,4 +67,5 @@ public class Member {
         return String.format("Name: %s | Student Number: %s | Gender: %c | Phone Number: %d", this.name,
                 this.studentNumber, this.gender, this.phoneNumber);
     }
+  
 }
