@@ -1,5 +1,6 @@
 package seedu.utility;
 
+import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 
@@ -11,13 +12,13 @@ import java.util.Scanner;
 public class Ui {
     private Scanner in;
 
-    protected static final String PRODUCT_LOGO = "███████ ████████  ██████  ███    ██ ██   ██ ███████"
+    private static final String PRODUCT_LOGO = "███████ ████████  ██████  ███    ██ ██   ██ ███████"
             + "     ██   ██ ██████  \n██         ██    ██    ██ ████   ██ ██  ██  ██           ██ ██  ██   ██ \n"
             + "███████    ██    ██    ██ ██ ██  ██ █████   ███████       ███   ██   ██ \n"
             + "     ██    ██    ██    ██ ██  ██ ██ ██  ██       ██      ██ ██  ██   ██ \n"
             + "███████    ██     ██████  ██   ████ ██   ██ ███████     ██   ██ ██████  ";
     
-    protected static final String BYE_MESSAGE = "██████  ██    ██ ███████        ██  \n"
+    private static final String BYE_MESSAGE = "██████  ██    ██ ███████        ██  \n"
             + "██   ██  ██  ██  ██          ██  ██ \n"
             + "██████    ████   █████           ██ \n"
             + "██   ██    ██    ██          ██  ██ \n"
@@ -25,7 +26,7 @@ public class Ui {
 
     
     
-    protected static final List<String> commands = Arrays.asList("help", "add_ex", "del_ex",
+    private static final List<String> commands = Arrays.asList("help", "add_ex", "del_ex",
             "list_ex", "total_ex", "add_in", "del_in", "list_in", "total_in");
 
     public Ui() {
@@ -50,9 +51,9 @@ public class Ui {
         System.out.println(" ");
     }
     
-    public void listExpense(ArrayList<Object> entries) {
+    public void listExpense(ArrayList<Entry> entries) {
         int i = 1;
-        for (Object entry:entries) {
+        for (Entry entry:entries) {
             if (entry instanceof Expense) {
                 System.out.println(i);
                 System.out.println(": ");
@@ -62,9 +63,9 @@ public class Ui {
         }  
     }
     
-    public void listIncome(ArrayList<Object> entries) {
+    public void listIncome(ArrayList<Entry> entries) {
         int i = 1;
-        for (Object entry:entries) {
+        for (Entry entry:entries) {
             if (entry instanceof Income) {
                 System.out.println(i);
                 System.out.println(": ");
@@ -74,39 +75,39 @@ public class Ui {
         }
     }
     
-    public void printTotalExpense(ArrayList<Object> entries) {
+    public void printTotalExpense(ArrayList<Entry> entries) {
         int totalExpense = 0;
-        for (Object entry:entries) {
+        for (Entry entry:entries) {
             if (entry instanceof Expense) {
                 totalExpense += Expense.getValue();
             }
         }
-        System.out.printf("Your total expense is: %d\n",totalExpense);
+        System.out.printf("Your total expense is: %d\n", totalExpense);
     }
     
-    public void printTotalIncome(ArrayList<Object> entries) {
+    public void printTotalIncome(ArrayList<Entry> entries) {
         int totalIncome = 0;
-        for (Object entry:entries) {
+        for (Entry entry:entries) {
             if (entry instanceof Income) {
                 totalIncome += Income.getValue();
             }
         }
-        System.out.printf("Your total income is: %d\n",totalIncome);
+        System.out.printf("Your total income is: %d\n", totalIncome);
     }
     
-    public void printExpenseAdded() {
+    public void printExpenseAdded(Expense expense) {
         System.out.println("Your most recent spending: ");
     }
     
-    public void printExpenseDeleted() {
+    public void printExpenseDeleted(Expense expens) {
         System.out.println(".... has been removed");
     }
     
-    public void printIncomeAdded() {
+    public void printIncomeAdded(Income income) {
         System.out.println("Your most recent earning: ");
     }
     
-    public void printIncomeDeleted() {
+    public void printIncomeDeleted(Income income) {
         System.out.println(".... has been removed");
     }
     
