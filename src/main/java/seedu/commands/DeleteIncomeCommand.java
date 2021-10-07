@@ -1,6 +1,7 @@
 package seedu.commands;
 
 import seedu.entry.Entry;
+import seedu.entry.Income;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
@@ -14,7 +15,7 @@ public class DeleteIncomeCommand extends Command {
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
         Entry deletedEntry = handleEntryDelete(finances);
-        ui.printIncomeDeleted(deletedEntry);
+        ui.printIncomeDeleted((Income) deletedEntry);
     }
 
     private Entry handleEntryDelete(FinancialTracker financialEntry) {
