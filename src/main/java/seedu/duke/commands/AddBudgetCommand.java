@@ -22,12 +22,12 @@ public class AddBudgetCommand extends Command {
         return Integer.parseInt(rawCommand.split(" ")[3]);
     }
 
-    public void addBudget(String rawCommand, BudgetList currentBudgetList) {
+    public void addBudget(String rawCommand) {
         this.description = getDescription(rawCommand);
         this.amount = getAmount(rawCommand);
         this.month = getMonth(rawCommand);
 
-        currentBudgetList.addBudget(this.description, this.amount, this.month);
+        budgetList.addBudget(this.description, this.amount, this.month);
     }
 
     public void execute() {
