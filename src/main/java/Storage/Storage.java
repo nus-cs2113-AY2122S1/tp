@@ -1,3 +1,8 @@
+package Storage;
+
+import Game.Game;
+import Game.GameRecord;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

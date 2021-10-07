@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import Game.HangmanGame;
+
 import java.util.Scanner;
 
 public class Duke {
@@ -17,5 +19,10 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+
+        // just for test
+        HangmanGame hgm = new HangmanGame();
+        hgm.execute();
+
     }
 }

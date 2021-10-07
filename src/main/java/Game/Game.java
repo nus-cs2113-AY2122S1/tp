@@ -1,5 +1,5 @@
 package Game;
 
-abstract class Game {
+public abstract class Game {
     abstract void execute();
 }
