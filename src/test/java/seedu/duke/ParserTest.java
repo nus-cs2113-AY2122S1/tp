@@ -41,7 +41,7 @@ class ParserTest {
 
     @Test
     void getMemberDetails() {
-        final String string = "add /m Tan Teck Hwee /s A0123456A /g F /p 98765432";
+        final String string = "add /m /n Tan Teck Hwee /s A0123456A /g F /p 98765432";
         Member member = Parser.getMemberDetails(string);
         assertEquals("Name: Tan Teck Hwee | Student Number: A0123456A | Gender: F | Phone Number: 98765432",
                 member.toString());
@@ -51,15 +51,26 @@ class ParserTest {
     void deleteMember() {
         final String string = "delete /m 1";
         Parser.deleteMember(testMemberList, string);
-        assertEquals("The following member have been deleted\nName: Tan Teck Hwee | Student Number: A0123456A "
-                + "| Gender: F | Phone Number: 98765432\n", outContent.toString());
+        assertEquals("The following member have been deleted\n"
+                        + "Name: Tan Teck Hwee | Student Number: A0123456A | Gender: F | Phone Number: 98765432\n",
+                outContent.toString());
     }
 
     @Test
     void makeMemberEntry() {
-        final String string = "add /m Ian Wang /s A0234567B /g M /p 98441232";
+        final String string = "add /m /n Ian Wang /s A0234567B /g M /p 98441232";
         Parser.makeMemberEntry(testMemberList, string);
         assertEquals("Added a Member: Name: Ian Wang | Student Number: A0234567B | Gender: M | Phone Number: "
-                        + "98441232\n", outContent.toString());
+                + "98441232\n", outContent.toString());
+    }
+
+    @Test
+    void editMember() {
+        final String string = "edit /m 1 /n Ian Wang /s A0234567B /g M /p 98441232";
+        Parser.editMember(testMemberList, string);
+        assertEquals("Edited member: Name: Tan Teck Hwee | Student Number: A0123456A | Gender: F |"
+                        + "Phone Number: 98765432\n"
+                        + "To become:  Name: Ian Wang | Student Number: A0234567B | Gender: M | Phone Number: 98441232\n"
+                , outContent.toString());
     }
 }

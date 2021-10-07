@@ -126,7 +126,7 @@ public class Parser {
         int wordIndex = 1;
         while (matcher.find()) {
             switch (matcher.group()){
-            case "/m":
+            case "/n":
                 name = words[wordIndex].trim();
                 break;
             case "/s":
@@ -142,7 +142,63 @@ public class Parser {
             wordIndex++;
         }
 
-        return new Member(name, studentNumber,gender,phoneNumber);
+        return new Member(name,studentNumber,gender,phoneNumber);
+    }
+
+    /**
+     * Edit member by input given by user
+     *
+     * @param query user raw data input.
+     * @return Edited member according to user input.
+     */
+    public static ArrayList<Member> editMemberDetails(MemberList members, String query) {
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        Member editedMember = new Member();
+        Member oldMember = new Member();
+        String name = "";
+        String studentNumber = "";
+        char gender = ' ';
+        int phoneNumber = 0;
+        int memberNumber = 0;
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            switch (matcher.group()){
+            case "/m":
+                memberNumber = Integer.parseInt(words[wordIndex].trim());
+                oldMember = new Member(members.getMember(memberNumber));
+                editedMember = members.getMember(memberNumber);
+                break;
+            case "/n":
+                name = words[wordIndex].trim();
+                editedMember.setName(name);
+                break;
+            case "/s":
+                studentNumber = words[wordIndex].trim();
+                editedMember.setStudentNumber(studentNumber);
+                break;
+            case "/g":
+                gender = words[wordIndex].trim().charAt(0);
+                editedMember.setGender(gender);
+                break;
+            case "/p":
+                phoneNumber = Integer.parseInt(words[wordIndex].trim());
+                editedMember.setPhoneNumber(phoneNumber);
+                break;
+            }
+            wordIndex++;
+        }
+        ArrayList<Member> oldMemberAndEditedMember = new ArrayList<Member>();
+        oldMemberAndEditedMember.add(oldMember);
+        oldMemberAndEditedMember.add(editedMember);
+
+        return oldMemberAndEditedMember;
     }
 
     /**
@@ -169,6 +225,20 @@ public class Parser {
         Member member = getMemberDetails(query);
         members.addMember(member);
         System.out.println("Added a Member: " + member);
+    }
+
+    /**
+     * Function edits an existing member and shows the change to user
+     *
+     * @param members MemberList which contains list of members
+     * @param query user input
+     */
+    public static void editMember(MemberList members, String query) {
+        ArrayList<Member> oldMemberAndNewMember = editMemberDetails(members, query);
+        Member oldMember = oldMemberAndNewMember.get(0);
+        Member newMember = oldMemberAndNewMember.get(1);
+        System.out.println("Edited member: " + oldMember);
+        System.out.println("To become:  " + newMember);
     }
 
     /**
