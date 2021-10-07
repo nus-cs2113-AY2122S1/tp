@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 public class RemoveCommand {
 
-
      //Temporary methods
      protected ArrayList<String> goals = new ArrayList<>();
 
      public void removeGoal(String goal) {
-     goals.remove(goal);
+        goals.remove(goal);
      }
-
 
      //Semi-permanent methods
 

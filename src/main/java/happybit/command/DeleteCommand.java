@@ -11,7 +11,7 @@ public class DeleteCommand {
     protected ArrayList<String> habits = new ArrayList<>();
 
     public void deleteHabit(String habit) {
-            habits.remove(habit);
+        habits.remove(habit);
     }
 
 
