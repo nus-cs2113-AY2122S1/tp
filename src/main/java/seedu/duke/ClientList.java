@@ -16,6 +16,19 @@ public class ClientList {
         clientCount++;
     }
 
+    public int getClientCount() {
+        return clientCount;
+    }
+
+    public Client getClient(int index) {
+        return clients.get(index);
+    }
+
+    public void clearAllClients() {
+        clients.clear();
+    }
+
+
     public void cut(int taskNumber, Ui ui) {
         Client client = clients.get(taskNumber);
         ui.showCut(client);
