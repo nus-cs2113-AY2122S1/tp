@@ -1,6 +1,13 @@
 package medbot;
 
-import medbot.command.*;
+import medbot.command.AddPatientCommand;
+import medbot.command.Command;
+import medbot.command.DeletePatientCommand;
+import medbot.command.EditPatientCommand;
+import medbot.command.ExitCommand;
+import medbot.command.ListPatientCommand;
+import medbot.command.ViewPatientCommand;
+import medbot.command.HelpCommand;
 import medbot.person.Patient;
 import medbot.person.Person;
 
