@@ -10,4 +10,4 @@
       \(   _.-"  libmgr
        `--"
 Welcome to libmgr
-> James Gosling
+> See you soon!

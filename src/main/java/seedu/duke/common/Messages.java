@@ -14,5 +14,5 @@ public class Messages {
             + "       `--\""
             + "";
     public static final String WELCOME_MESSAGE = "Welcome to libmgr";
-    public static final String GOODBYE_MESSAGE = "See you soon!";
+    public static final String EXIT_MESSAGE = "See you soon!";
 }
