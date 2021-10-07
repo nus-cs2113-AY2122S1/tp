@@ -55,8 +55,8 @@ public class Ui {
         int i = 1;
         for (Entry entry:entries) {
             if (entry instanceof Expense) {
-                System.out.println(i);
-                System.out.println(": ");
+                System.out.print(i);
+                System.out.print(": ");
                 System.out.println(entry);
                 i++;
             }
@@ -67,8 +67,8 @@ public class Ui {
         int i = 1;
         for (Entry entry:entries) {
             if (entry instanceof Income) {
-                System.out.println(i);
-                System.out.println(": ");
+                System.out.print(i);
+                System.out.print(": ");
                 System.out.println(entry);
                 i++;
             }
@@ -76,39 +76,43 @@ public class Ui {
     }
     
     public void printTotalExpense(ArrayList<Entry> entries) {
-        int totalExpense = 0;
+        double totalExpense = 0;
         for (Entry entry:entries) {
             if (entry instanceof Expense) {
                 totalExpense += entry.getValue();
             }
         }
-        System.out.printf("Your total expense is: %d\n", totalExpense);
+        System.out.printf("Your total expense is: %f\n", totalExpense);
     }
     
     public void printTotalIncome(ArrayList<Entry> entries) {
-        int totalIncome = 0;
+        double totalIncome = 0;
         for (Entry entry:entries) {
             if (entry instanceof Income) {
                 totalIncome += entry.getValue();
             }
         }
-        System.out.printf("Your total income is: %d\n", totalIncome);
+        System.out.printf("Your total income is: %f\n", totalIncome);
     }
     
     public void printExpenseAdded(Expense expense) {
         System.out.println("Your most recent spending: ");
+        System.out.println(expense);
     }
     
-    public void printExpenseDeleted(Expense expens) {
-        System.out.println(".... has been removed");
+    public void printExpenseDeleted(Expense expense) {
+        System.out.println("You removed this: ");
+        System.out.println(expense);
     }
     
     public void printIncomeAdded(Income income) {
         System.out.println("Your most recent earning: ");
+        System.out.println(income);
     }
     
     public void printIncomeDeleted(Income income) {
-        System.out.println(".... has been removed");
+        System.out.println("You removed this: ");
+        System.out.println(income);
     }
     
     public void printHelp() {
