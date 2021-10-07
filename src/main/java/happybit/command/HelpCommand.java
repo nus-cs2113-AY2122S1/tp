@@ -1,4 +1,5 @@
 package happybit.command;
+
 import happybit.ui.Ui;
 
 public class HelpCommand {

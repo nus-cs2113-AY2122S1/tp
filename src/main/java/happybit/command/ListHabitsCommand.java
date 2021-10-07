@@ -9,9 +9,6 @@ public class ListHabitsCommand {
     // ArrayList for testing purposes
     private static ArrayList<String> habits = new ArrayList<>();
 
-    /**
-     * Lists out all habits user input
-     */
     public static void runCommand() {
         // Add here to test whether printing works
         habits.add("Habit 1");
