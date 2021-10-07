@@ -14,10 +14,14 @@ public class EventEncoder {
     }
 
     public static String encodeEventToString(Event event) {
-        return event.getTitle() + " | " +
-                event.getDescription() + " | " +
-                event.getDateValue() + " | " +
-                event.getVenue() + " | " +
+        return event.getTitle() +
+                " | " +
+                event.getDescription() +
+                " | " +
+                event.getDateValue() +
+                " | " +
+                event.getVenue() +
+                " | " +
                 event.getBudget();
     }
 }

@@ -16,7 +16,7 @@ public abstract class Item {
 
     public String getItemType() {
         return type;
-    };
+    }
 
     public String getTitle() {
         return title;

@@ -14,8 +14,10 @@ public class TaskEncoder {
     }
 
     public static String encodeTaskToString(Task task) {
-        return task.getTitle() + " | " +
-                task.getDescription() + " | " +
+        return task.getTitle() +
+                " | " +
+                task.getDescription() +
+                " | " +
                 task.getDateValue();
     }
 }

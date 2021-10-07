@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class StorageFile {
 
@@ -46,7 +45,8 @@ public class StorageFile {
         }
     }
 
-    public void writeToFile(File saveFile, List<String> encodedEventsList, List<String> encodedTasksList) throws IOException {
+    public void writeToFile(File saveFile, List<String> encodedEventsList, List<String> encodedTasksList)
+            throws IOException {
         FileWriter eventsWriter = new FileWriter(saveFile);
         for (String event : encodedEventsList) {
             eventsWriter.write(event + "\n");
@@ -70,7 +70,8 @@ public class StorageFile {
         tasksList.addAll(TaskDecoder.decodeTasksList(encodedTasks));
     }
 
-    private void separateEventAndTaskData(File saveFile, List<String> encodedEvents, List<String> encodedTasks) throws FileNotFoundException {
+    private void separateEventAndTaskData(File saveFile, List<String> encodedEvents, List<String> encodedTasks)
+            throws FileNotFoundException {
         Scanner myScanner = new Scanner(saveFile);
 
         boolean hasFinishedScanningEvents = false;

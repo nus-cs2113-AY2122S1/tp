@@ -16,6 +16,7 @@ public class Duke {
     public static ArrayList<Event> eventList = new ArrayList<>();
     public static ArrayList<Task> taskList = new ArrayList<>();
     private static final StorageFile storage = new StorageFile();
+
     public static void main(String[] args) {
         System.out.println("WASSUP DAWG"); //ui.introMessage();
         Ui.linebreak();
