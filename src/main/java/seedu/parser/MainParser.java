@@ -29,6 +29,7 @@ public class MainParser {
     private static final int ISOLATE_COMD_WORD = 2;
     private static final int ISOLATE_USER_INPUT = 2;
     public static final int NUMBER_OF_EDIT_DETAILS = 3;
+    public static final int NAME_INDEX = 0;
 
     private ContactParser contactParser;
     private AddContactParser addContactParser = new AddContactParser();
@@ -71,6 +72,10 @@ public class MainParser {
         contactParser = addContactParser;
         try {
             String[] details = contactParser.parseContactDetails(userInput);
+            //check if name is specified in input
+            if (details[NAME_INDEX] == null) {
+                throw new MissingDetailException();
+            }
             return new AddContactCommand(details[DetailType.NAME.getIndex()], details[DetailType.GITHUB.getIndex()]);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
@@ -86,8 +91,7 @@ public class MainParser {
         try {
             // split into array of size 3 with command, index and details
             String[] details = userInput.split(" ", NUMBER_OF_EDIT_DETAILS);
-            System.out.println(Arrays.toString(details));
-            if (details[2].trim().equalsIgnoreCase("")) {
+            if (details[ISOLATE_USER_INPUT].trim().equalsIgnoreCase("")) {
                 throw new MissingDetailException();
             }
             int userIndex = Integer.parseInt(details[EDIT_USER_INDEX]);
