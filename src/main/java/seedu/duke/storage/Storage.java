@@ -12,12 +12,17 @@ import java.util.ArrayList;
 import static java.lang.Integer.parseInt;
 
 public class Storage {
-    private static final String UNIVERSITY_FILEPATH = "data/University.csv";
+    private static final String UNIVERSITY_FILEPATH = "data/university.csv";
+    private static final String MODULE_FILEPATH = "data/module.csv";
 
-    public static ArrayList<University> load() throws IOException {
+    public static ArrayList<University> loadUniversities() throws IOException {
         return readUniversitiesFromCsv();
     }
 
+    public static ArrayList<Module> loadModules() throws IOException {
+        return readModulesFromCsv();
+    }
+    
     private static ArrayList<University> readUniversitiesFromCsv() throws IOException {
         ArrayList<University> universityList = new ArrayList<>();
         ArrayList<ModuleMapping> moduleMappingList = new ArrayList<>();
@@ -39,5 +44,16 @@ public class Storage {
             line = br.readLine();
         }
         return universityList;
+    }
+
+    private static ArrayList<Module> readModulesFromCsv() throws IOException {
+        ArrayList<Module> moduleList = new ArrayList<>();
+        BufferedReader br = new BufferedReader(new FileReader(MODULE_FILEPATH));
+        String line = br.readLine();
+        while (line != null) {
+            String[] attributes = line.split(",");
+            moduleList.add(new Module(attributes[0], attributes[1], parseInt(attributes[2])));
+        }
+        return moduleList;
     }
 }
