@@ -10,13 +10,7 @@ public class UI {
     Scanner line = new Scanner(System.in);
 
     public static final String DIVIDER = "___________________________________________\n";
-    private static final String WELCOME_MESSAGE = "  _________.__________________ ___  _________\n"
-            + " /   _____/|   \\__    ___/    |   \\/   _____/\n"
-            + " \\_____  \\ |   | |    |  |    |   /\\_____  \\ \n"
-            + " /        \\|   | |    |  |    |  / /        \\\n"
-            + "/_______  /|___| |____|  |______/ /_______  /\n"
-            + "        \\/                                \\/ \n"
-            + DIVIDER
+    private static final String WELCOME_MESSAGE = DIVIDER
             + "Welcome to SITUS!\n"
             + "What would you like to do first?\n"
             + DIVIDER;
