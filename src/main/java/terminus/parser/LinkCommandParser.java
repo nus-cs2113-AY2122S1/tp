@@ -5,7 +5,9 @@ import terminus.command.zoomlink.AddLinkCommand;
 import terminus.command.ViewCommand;
 import terminus.command.DeleteCommand;
 import terminus.common.CommonFormat;
+import terminus.common.Messages;
 import terminus.content.Link;
+import terminus.module.NusModule;
 
 public class LinkCommandParser extends CommandParser {
 
@@ -20,5 +22,10 @@ public class LinkCommandParser extends CommandParser {
         parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand<Class<Link>>(Link.class));
         parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand<Class<Link>>(Link.class));
         return parser;
+    }
+
+    @Override
+    public String getWorkspaceBanner(NusModule module) {
+        return String.format(Messages.SCHEDULE_BANNER, module.getLinks().size());
     }
 }

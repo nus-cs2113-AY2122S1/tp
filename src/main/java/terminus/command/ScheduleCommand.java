@@ -2,11 +2,10 @@ package terminus.command;
 
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
+import terminus.module.NusModule;
 import terminus.parser.LinkCommandParser;
 
 public class ScheduleCommand extends WorkspaceCommand {
-
-    private String arguments;
 
     public ScheduleCommand() {
         super(LinkCommandParser.getInstance());
@@ -21,4 +20,5 @@ public class ScheduleCommand extends WorkspaceCommand {
     public String getHelpMessage() {
         return Messages.MESSAGE_COMMAND_SCHEDULE;
     }
+    
 }

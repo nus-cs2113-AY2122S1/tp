@@ -1,4 +1,4 @@
-package terminus.parser;
+package terminus.command.link;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +9,7 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
+import terminus.parser.LinkCommandParser;
 import terminus.ui.Ui;
 
 import java.util.ArrayList;

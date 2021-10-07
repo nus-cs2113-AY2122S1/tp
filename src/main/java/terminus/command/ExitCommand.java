@@ -19,11 +19,6 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void parseArguments(String arguments) {
-
-    }
-
-    @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
         return new CommandResult(true, true);
     }

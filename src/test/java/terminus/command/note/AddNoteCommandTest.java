@@ -1,4 +1,4 @@
-package terminus.parser;
+package terminus.command.note;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,9 +11,10 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
+import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
 
-public class NoteDeleteCommandTest {
+public class AddNoteCommandTest {
     private NoteCommandParser commandParser;
     private NusModule nusModule;
     private Ui ui;
@@ -26,25 +27,19 @@ public class NoteDeleteCommandTest {
     }
 
     @Test
-    void execute_deleteCommand_success()
+    void execute_success()
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+        Command addCommand = commandParser.parseCommand("add \"test\" \"test1\"");
+        CommandResult addResult = addCommand.execute(ui, nusModule);
+        assertTrue(addResult.isOk());
+        assertEquals(1, nusModule.getContentManager().getTotalContents());
+        assertTrue(nusModule.getContentManager().getContentData(1).contains("test"));
+        assertTrue(nusModule.getContentManager().getContentData(1).contains("test1"));
         for (int i = 0; i < 5; i++) {
-            Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
-            CommandResult addResult = addCommand.execute(ui, nusModule);
+            addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
+            addResult = addCommand.execute(ui, nusModule);
             assertTrue(addResult.isOk());
         }
-
-        assertEquals(5, nusModule.getContentManager().getTotalContents());
-
-        Command deleteCommand = commandParser.parseCommand("delete 1");
-        CommandResult deleteResult = deleteCommand.execute(ui, nusModule);
-        assertTrue(deleteResult.isOk());
-        assertEquals(4, nusModule.getContentManager().getTotalContents());
-        for (int i = 2; i < 4; i++) {
-            deleteCommand = commandParser.parseCommand("delete " + i);
-            deleteResult = deleteCommand.execute(ui, nusModule);
-            assertTrue(deleteResult.isOk());
-        }
-        assertEquals(2, nusModule.getContentManager().getTotalContents());
+        assertEquals(6, nusModule.getContentManager().getTotalContents());
     }
 }

@@ -1,5 +1,6 @@
 package terminus.command;
 
+import java.util.Locale;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.ContentManager;
@@ -30,12 +31,12 @@ public class DeleteCommand<T> extends Command {
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
         if (arguments == null || arguments.isBlank()) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         try {
             itemNumber = Integer.parseInt(arguments);
         } catch (NumberFormatException e) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
 
         if (itemNumber <= 0) {
@@ -50,8 +51,8 @@ public class DeleteCommand<T> extends Command {
         String deletedContentName = contentManager.deleteContent(itemNumber);
         module.set(type, contentManager.getContents());
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,
-                CommonFormat.getClassName(type), deletedContentName));
-        return new CommandResult(true, false);
+                CommonFormat.getClassName(type).toLowerCase(), deletedContentName));
+        return new CommandResult(true);
     }
 }
 

@@ -9,8 +9,9 @@ import terminus.command.HelpCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidTimeFormatException;
+import terminus.module.NusModule;
 
-public class CommandParser {
+public abstract class CommandParser {
 
     private static final String SPACE_DELIMITER = "\\s+";
     protected String workspace;
@@ -60,6 +61,8 @@ public class CommandParser {
     public Set<String> getCommandList() {
         return commandMap.keySet();
     }
+    
+    public abstract String getWorkspaceBanner(NusModule module);
 
     /**
      * Returns the list of items in the help menu.
