@@ -13,6 +13,9 @@ import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
+import seedu.exception.MissingNameException;
+
+import java.util.Arrays;
 
 public class MainParser {
     private static final String ADD_CONTACT_COMD = "add";
@@ -23,10 +26,10 @@ public class MainParser {
     private static final String LIST_COMD = "list";
 
     private static final int COMD_WORD_INDEX = 0;
-    private static final int EDIT_USER_INDEX = 1;
     private static final int ISOLATE_COMD_WORD = 2;
     private static final int ISOLATE_USER_INPUT = 2;
     public static final int NUMBER_OF_EDIT_DETAILS = 3;
+    public static final int NAME_INDEX = 0;
 
     private ContactParser contactParser;
     private AddContactParser addContactParser = new AddContactParser();
@@ -69,11 +72,17 @@ public class MainParser {
         contactParser = addContactParser;
         try {
             String[] details = contactParser.parseContactDetails(userInput);
+            //check if name is specified in input
+            if (details[NAME_INDEX] == null) {
+                throw new MissingNameException();
+            }
             return new AddContactCommand(details[DetailType.NAME.getIndex()], details[DetailType.GITHUB.getIndex()]);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (MissingArgException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (MissingNameException e) {
+            return new FailedCommand(FailedCommandType.MISSING_NAME);
         } catch (MissingDetailException e) {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         }
@@ -82,15 +91,18 @@ public class MainParser {
     private Command parseEditContact(String userInput) { // userInput is raw user input
         contactParser = editContactParser;
         try {
-            // split into array of size 3 with command, index and details
-            String[] details = userInput.split(" ", NUMBER_OF_EDIT_DETAILS);
-            int userIndex = Integer.parseInt(details[EDIT_USER_INDEX]);
-            String[] userDetails = editContactParser.parseContactDetails(details[ISOLATE_USER_INPUT]);
-            return new EditContactCommand(userDetails, userIndex);
+            int userIndex = editContactParser.getIndex(userInput); //throws MissingArgException
+            String[] details = editContactParser.parseContactDetails(userInput);
+            //throws InvalidFlagException, MissingDetailException, MissingArgException
+            return new EditContactCommand(details, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+        } catch (MissingArgException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
+        } catch (MissingDetailException e) {
+            return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         }
     }
 

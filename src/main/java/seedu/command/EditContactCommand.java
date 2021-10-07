@@ -13,7 +13,11 @@ public class EditContactCommand extends Command {
     }
 
     public void execute() {
-        contactList.editContact(contactDetails, contactIndex);
-        TextUi.editContactMessage(contactList.getContactAtIndex(contactIndex).getName());
+        try {
+            contactList.editContact(contactDetails, contactIndex);
+            TextUi.editContactMessage(contactList.getContactAtIndex(contactIndex).getName());
+        } catch (IndexOutOfBoundsException e) {
+            TextUi.invalidIndexMessage();
+        }
     }
 }
