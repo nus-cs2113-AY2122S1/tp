@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddCommandTest {
+    private static final String H0 = "Habit 0";
+    private static final String H1 = "Habit 1";
+    private static final String H2 = "Habit 2";
 
     @Test
     void testAddHabit() {
         AddCommand addCommand = new AddCommand();
-        String H0 = "h0";
-        String H1 = "h1";
-        String H2 = "h2";
 
         assertEquals(0, addCommand.getHabitListSize());
 
