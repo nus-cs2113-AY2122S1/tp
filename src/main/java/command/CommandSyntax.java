@@ -5,7 +5,6 @@ import parser.StockValidator;
 import ui.Ui;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class CommandSyntax {
@@ -118,6 +117,10 @@ public class CommandSyntax {
                 break;
             case CommandParameters.STOCK_ID:
                 isValid = StockValidator.isValidStockId(ui, parameterValue, medicines);
+                break;
+            case CommandParameters.SORT:
+            case CommandParameters.REVERSED_SORT:
+                isValid = StockValidator.isValidColumn(ui, parameterValue);
                 break;
             default:
                 break;

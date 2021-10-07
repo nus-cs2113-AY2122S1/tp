@@ -59,7 +59,7 @@ public class MediVault {
      */
     public void generateData() {
         try {
-            medicines.add(new Stock("PANADOL", 20, 10, DateParser.stringToDate("13-9-2021"),
+            medicines.add(new Stock("PANADOL", 20, 20, DateParser.stringToDate("13-9-2021"),
                     "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
             medicines.add(new Stock("PANADOL", 20, 10, DateParser.stringToDate("14-9-2021"),
                     "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));

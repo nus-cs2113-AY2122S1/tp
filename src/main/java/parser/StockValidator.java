@@ -163,9 +163,11 @@ public class StockValidator {
      */
     public static boolean isValidColumn(Ui ui, String columnName) {
         String[] columnAlias = new String[]{CommandParameters.STOCK_ID, CommandParameters.NAME, CommandParameters.PRICE,
-            CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
-            CommandParameters.MAX_QUANTITY};
-        if (Arrays.asList(Stock.COLUMNS).contains(columnName) || Arrays.asList(columnAlias).contains(columnName)) {
+                                            CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
+                                            CommandParameters.DESCRIPTION,
+                                            CommandParameters.MAX_QUANTITY};
+        if (Arrays.asList(Stock.COLUMNS).contains(columnName.toUpperCase()) || Arrays.asList(columnAlias)
+                .contains(columnName.toUpperCase())) {
             return true;
         }
         ui.print("Invalid column name/alias! Column names can only be " + Arrays.toString(Stock.COLUMNS) + " and "

@@ -3,10 +3,10 @@ package command.medicine;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import inventory.Stock;
+import comparators.StockComparator;
 import inventory.Medicine;
+import inventory.Stock;
 import parser.DateParser;
-import parser.StockValidator;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -23,6 +23,25 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+        String[] requiredParameter = {};
+        String[] optionalParameters = {CommandParameters.STOCK_ID, CommandParameters.NAME, CommandParameters.PRICE,
+                                       CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
+                                       CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY,
+                                       CommandParameters.SORT, CommandParameters.REVERSED_SORT};
+
+        if (parameters.size() != 0) { // Check for valid parameters only when they are provided
+            boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
+                    optionalParameters, CommandSyntax.LIST_COMMAND);
+            if (isInvalidParameter) {
+                return;
+            }
+
+            boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines);
+            if (isInvalidParameterValues) {
+                return;
+            }
+        }
+
         ArrayList<Medicine> filteredMedicines = new ArrayList<>();
         for (Medicine medicine : medicines) {
             if (medicine instanceof Stock) { // Ensure that it is a medicine object
@@ -33,25 +52,16 @@ public class ListCommand extends Command {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
             case CommandParameters.STOCK_ID:
-                if (!StockValidator.isValidStockId(ui, parameterValue, medicines)) {
-                    return;
-                }
                 filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
                         .filter((m) -> ((Stock) m).getStockID() == Integer.parseInt(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.NAME:
-                if (!StockValidator.isValidName(ui, parameterValue)) {
-                    return;
-                }
                 filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
                         .filter((m) -> m.getMedicineName().equals(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.PRICE:
-                if (!StockValidator.isValidPrice(ui, parameterValue)) {
-                    return;
-                }
                 filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
                         .filter((m) -> ((Stock) m).getPrice() == Double.parseDouble(parameterValue))
                         .collect(Collectors.toList());
@@ -60,9 +70,6 @@ public class ListCommand extends Command {
                 // Implement search by quantity
                 break;
             case CommandParameters.EXPIRY_DATE:
-                if (!StockValidator.isValidExpiry(ui, parameterValue)) {
-                    return;
-                }
                 try {
                     Date expiryDate = DateParser.stringToDate(parameterValue);
                     filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
@@ -73,15 +80,18 @@ public class ListCommand extends Command {
                 }
                 break;
             case CommandParameters.DESCRIPTION:
-                if (!StockValidator.isValidDescription(ui, parameterValue)) {
-                    return;
-                }
                 filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
                         .filter((m) -> ((Stock) m).getDescription().equals(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.MAX_QUANTITY:
                 // Implement search by max quantity
+                break;
+            case CommandParameters.SORT:
+                filteredMedicines.sort(new StockComparator(parameterValue.toUpperCase(), false));
+                break;
+            case CommandParameters.REVERSED_SORT:
+                filteredMedicines.sort(new StockComparator(parameterValue.toUpperCase(), true));
                 break;
             default:
                 ui.printInvalidParameter(parameter, CommandSyntax.LIST_COMMAND);
