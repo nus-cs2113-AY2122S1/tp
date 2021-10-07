@@ -18,6 +18,10 @@ public class BudgetList {
         numberOfRecords += 1;
     }
 
+    public void deleteBudget(int index) {
+        allRecords.remove(index);
+    }
+
     public int getSize() {
         return allRecords.size();
     }
