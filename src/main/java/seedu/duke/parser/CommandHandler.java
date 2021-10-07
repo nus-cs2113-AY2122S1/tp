@@ -1,17 +1,16 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.AddBudget;
-import seedu.duke.commands.ListBudget;
+import seedu.duke.commands.AddBudgetCommand;
 import seedu.duke.data.BudgetList;
 
 public class CommandHandler {
-    public boolean commandHandle(Parser commandHandle, String userInputString, BudgetList currentBudgetList) {
+    /* public boolean commandHandle(Parser commandHandle, String userInputString, BudgetList currentBudgetList) {
         if (commandHandle.isAddBudget()) {
-            AddBudget newBudget = new AddBudget();
+            AddBudgetCommand newBudget = new AddBudgetCommand();
             newBudget.addBudget(userInputString, currentBudgetList);
             return false;
         } else if (commandHandle.isListBudget()) {
-            ListBudget listBudget = new ListBudget();
+            ListBudgetCommand listBudget = new ListBudgetCommand();
             listBudget.listBudget(currentBudgetList);
             return false;
         } else if (commandHandle.isBye()) {
@@ -21,5 +20,5 @@ public class CommandHandler {
             System.out.println("I don't Getz");
             return false;
         }
-    }
+    } */
 }

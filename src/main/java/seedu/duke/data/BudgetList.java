@@ -1,19 +1,30 @@
 package seedu.duke.data;
 
-import seedu.duke.data.budget.Budget;
+import seedu.duke.data.records.Budget;
+import seedu.duke.data.records.Record;
 
 import java.util.ArrayList;
 
 public class BudgetList {
-    public static int numberOfBudget = 0;
-    public static ArrayList<Budget> budgetArrayList = new ArrayList<>();
+    public static int numberOfRecords = 0;
+    private ArrayList<Record> allRecords;
 
-    public void addBudgetList(String description, double spendingLimit, int month) {
-        budgetArrayList.add(new Budget(description, spendingLimit, month));
-        numberOfBudget += 1;
+    public BudgetList() {
+        allRecords = new ArrayList<>();
     }
 
-    public void printBudgetList(int indexOfExpenditure) {
-        budgetArrayList.get(indexOfExpenditure).printBudgetDetails();
+    public void addBudget(String description, double spendingLimit, int month) {
+        allRecords.add(new Budget(description, spendingLimit, month));
+        numberOfRecords += 1;
+    }
+
+    public int getSize(){
+        return allRecords.size();
+    }
+
+    public void printRecord(int i) {
+    }
+
+    public void addBudgetList(String description, double spendingLimit, int month) {
     }
 }

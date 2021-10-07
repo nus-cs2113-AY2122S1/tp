@@ -1,27 +1,38 @@
 package seedu.duke;
 
+import seedu.duke.commands.Command;
 import seedu.duke.data.BudgetList;
 import seedu.duke.parser.CommandHandler;
 import seedu.duke.parser.Parser;
+import seedu.duke.ui.TextUi;
 
-import java.util.Scanner;
 
 public class Duke {
+
+    private TextUi textUi;
+    private Parser parser;
+    private BudgetList budgetList;
+
+    public Duke() {
+       budgetList = new BudgetList();
+        textUi = new TextUi();
+        parser = new Parser();
+    }
+
     public static void main(String[] args) {
-        String userInputString;
-        Scanner userInput = new Scanner(System.in);
+        new Duke().run();
+    }
 
-        BudgetList currentBudgetList = new BudgetList();
-
+    public void run() {
+        TextUi.showWelcomeMessage();
         boolean isExit = false;
 
         while (!isExit) {
-            userInputString = userInput.nextLine();
-            Parser parseCommand = new Parser(userInputString);
-            CommandHandler userCommand = new CommandHandler();
-            isExit = userCommand.commandHandle(parseCommand, userInputString, currentBudgetList);
+            String userInput = textUi.getUserInput();
+            Command command = parser.parseCommand(userInput);
+            command.setBudgetList(budgetList);
+            command.execute();
+            isExit = command.isExit();
         }
-
-        userInput.close();
     }
 }

@@ -1,10 +1,10 @@
-package seedu.duke.data.budget;
+package seedu.duke.data.records;
 
-import seedu.duke.data.expenditure.Expenditure;
+import seedu.duke.data.records.Expenditure;
 
 import java.util.ArrayList;
 
-public class Budget {
+public class Budget extends Record{
     public String description;
     public double spendingLimit;
     public int month;
@@ -13,13 +13,12 @@ public class Budget {
     public static ArrayList<Expenditure> expenditureArrayList = new ArrayList<>();
 
     public Budget(String description, double spendingLimit, int month) {
+        super(spendingLimit, month);
         this.description = description;
-        this.spendingLimit = spendingLimit;
-        this.month = month;
     }
 
-    public void addExpenditure(String description, double amount) {
-        expenditureArrayList.add(new Expenditure(description, amount));
+    public void addExpenditure(String description, double amount, int month) {
+        expenditureArrayList.add(new Expenditure(description, amount, month));
         numberOfExpenditure += 1;
     }
 

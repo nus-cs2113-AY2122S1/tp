@@ -1,12 +1,14 @@
-package seedu.duke.data.expenditure;
+package seedu.duke.data.records;
 
-public class Expenditure {
+public class Expenditure extends Record{
     public static String description;
     public static double spending;
+    public int month;
 
-    public Expenditure(String description, double spending) {
+    public Expenditure(String description, double spending, int month) {
+        super(spending, month);
         this.description = description;
-        this.spending = spending;
+
     }
 
     public void printExpenditure() {
