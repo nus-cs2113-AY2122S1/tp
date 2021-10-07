@@ -17,9 +17,12 @@ public class Event extends Item {
         this.budget = budget;
     }
 
-    @Override
     public String getDateValue() {
         return dateTime;
+    }
+
+    public String getVenue() {
+        return venue;
     }
 
     public double getBudget() {
