@@ -8,7 +8,6 @@ import seedu.exception.MissingDetailException;
 public class EditContactParser extends ContactParser {
     public static final String BUFFER = " ";
 
-    @Override
     public String[] parseContactDetails(String userInput)
             throws InvalidFlagException, MissingDetailException, MissingArgException {
         String[] inputDetails = userInput.split(" ", NUMBER_OF_EDIT_DETAILS);
