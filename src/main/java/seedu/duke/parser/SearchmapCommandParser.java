@@ -17,6 +17,9 @@ public class SearchmapCommandParser {
         }
 
         University university = searchForUniversity(universityName, universityMasterList);
+        if (university == null) {
+            throw new ParseException("university does not exist", 1);
+        }
         return new SearchmapCommand(university);
     }
 
