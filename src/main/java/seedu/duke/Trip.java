@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,9 +11,11 @@ public class Trip {
     private LocalDate dateOfTrip;
     private ArrayList<Expense> listOfExpenses;
     private ArrayList<Person> listOfPersons;
+    private float budget;
     private float exchangeRate;
     private String foreignCurrency;
     private String repaymentCurrency;
+    private String location;
 
     public void getWhoOwesMe() {
 
@@ -33,6 +36,14 @@ public class Trip {
         } catch (DateTimeParseException e) {
             //TODO: catch date exception
         }
+    }
+
+    public float getBudget() {
+        return this.budget;
+    }
+
+    public void setBudget(float budget) {
+        this.budget = budget;
     }
 
     public float getExchangeRate() {
@@ -57,6 +68,33 @@ public class Trip {
 
     public void setRepaymentCurrency(String repaymentCurrency) {
         this.repaymentCurrency = repaymentCurrency;
+    }
+
+    public String getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setPersonName(int indexOfPerson, String newName) {
+        Person personToEdit = listOfPersons.get(indexOfPerson);
+        personToEdit.setName(newName);
+    }
+
+    public void addExpense(Expense expense) {
+        listOfExpenses.add(expense);
+    }
+
+    public void removeExpense(Expense expense) {
+        listOfExpenses.remove(expense);
+    }
+
+    public void viewAllExpenses() {
+        for (Expense expense : listOfExpenses) {
+            System.out.println(expense);
+        }
     }
 
 }
