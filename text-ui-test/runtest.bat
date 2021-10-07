@@ -2,6 +2,8 @@
 setlocal enableextensions
 pushd %~dp0
 
+if exist .\data rmdir /Q /S .\data
+
 cd ..
 call gradlew clean shadowJar
 
@@ -17,3 +19,5 @@ java -jar %jarloc% < ..\..\text-ui-test\input.txt > ..\..\text-ui-test\ACTUAL.TX
 cd ..\..\text-ui-test
 
 FC ACTUAL.TXT EXPECTED.TXT >NUL && ECHO Test passed! || Echo Test failed!
+
+if exist .\data rmdir /Q /S .\data

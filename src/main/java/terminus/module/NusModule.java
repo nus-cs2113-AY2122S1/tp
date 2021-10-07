@@ -11,7 +11,7 @@ public class NusModule {
     private ArrayList<Content> notes;
     private ArrayList<Content> links;
 
-    private ContentManager contentManager;
+    private transient ContentManager contentManager;
 
     public NusModule() {
         contentManager = new ContentManager();
