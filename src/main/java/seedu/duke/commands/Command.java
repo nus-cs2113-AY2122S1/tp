@@ -15,4 +15,8 @@ public abstract class Command {
     public void execute(TextUI ui) {
         throw new UnsupportedOperationException();
     }
+
+    public Boolean isExit() {
+
+    }
 }
