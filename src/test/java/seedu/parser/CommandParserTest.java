@@ -68,12 +68,12 @@ public class CommandParserTest {
     @Test
     public void parse_Add_returnsAddCommand() {
         final String[] addInputs = {"add", " add ", "ADD", " ADd"};
-        parseMultipleInputsForCommand(new AddCommand(""), addInputs);
+        parseMultipleInputsForCommand(new AddCommand("", new Timetable(0)), addInputs);
     }
 
     private void parseMultipleInputsForCommand(Command expectedCommand, String[] inputs) {
         for (String input : inputs) {
-            final Command result = parser.parseCommand(input);
+            final Command result = parser.parseCommand(input, new Timetable(0));
             assertEquals(expectedCommand.getClass(), result.getClass());
         }
     }
