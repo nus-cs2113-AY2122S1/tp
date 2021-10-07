@@ -10,6 +10,10 @@ public class ViewCommand extends Command {
         this.index = index;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     public void execute() {
         try {
             Contact viewingContact = contactList.getContactAtIndex(index);
