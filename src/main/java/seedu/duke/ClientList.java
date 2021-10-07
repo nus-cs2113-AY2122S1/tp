@@ -16,15 +16,15 @@ public class ClientList {
         clientCount++;
     }
 
-    public int getClientCount(){
+    public int getClientCount() {
         return clientCount;
     }
 
-    public Client getClient(int index){
+    public Client getClient(int index) {
         return clients.get(index);
     }
 
-    public void clearAllClients(){
+    public void clearAllClients() {
         clients.clear();
     }
 
