@@ -110,6 +110,7 @@ public class CommandSyntax {
                 isValid = StockValidator.isValidDescription(ui, parameterValue);
                 break;
             case CommandParameters.UPDATED_MEDICINE_NAME:
+            case CommandParameters.NAME:
                 isValid = StockValidator.isValidName(ui, parameterValue);
                 break;
             case CommandParameters.MAX_QUANTITY:
