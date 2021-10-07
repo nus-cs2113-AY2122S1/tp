@@ -17,7 +17,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         try {
-            UniversityList universityList = new UniversityList(Storage.load());
+            UniversityList universityList = new UniversityList(Storage.loadUniversities());
             SepPlannerParser mainParser = new SepPlannerParser(universityList);
             while (true) {
                 String userInput = in.nextLine();
