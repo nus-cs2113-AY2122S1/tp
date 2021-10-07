@@ -105,8 +105,6 @@ public class NoteCommandParserTest {
         assertTrue(commandParser.parseCommand("view 1") instanceof ViewCommand);
     }
 
-
-
     @Test
     void getCommandList_containsBasicCommands() {
         assertTrue(commandParser.getCommandList().contains("exit"));
