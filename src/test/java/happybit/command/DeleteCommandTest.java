@@ -30,17 +30,4 @@ class DeleteCommandTest {
 
         assertEquals(expectedResult, actualResult);
     }
-
-    /**
-     * Test runCommand when parameter is empty or blank (unexpected input).
-     *
-     * @throws HappyBitException Exception to prompt user for correct input.
-     */
-    @Test
-    void runCommand_emptyOrBlankHabitName_expectException() throws HappyBitException{
-        DeleteCommand deleteCommand = new DeleteCommand();
-        deleteCommand.runCommand(null);
-        assertThrows(HappyBitException.class, () -> deleteCommand.runCommand(null));
-        assertThrows(HappyBitException.class, () -> deleteCommand.runCommand("   "));
-    }
 }

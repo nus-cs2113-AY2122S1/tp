@@ -17,6 +17,7 @@ public class RemoveCommand {
     //public DeleteCommand(int goalName) {
     //    this.goalName= goalName;
     //}
+
     /**
      * Deletes a goal of a habit.
      *
