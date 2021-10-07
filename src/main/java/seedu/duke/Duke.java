@@ -41,48 +41,40 @@ public class Duke {
             String[] userInput = ui.getUserCommand().split(" ", 2); //Splits into command and parameters
             String command = userInput[0];
             String commandOutput = "";
-            try {
-                switch (command) {
-                case "exit":
-                    exit();
-                    break;
-                case "list":
-                    commandOutput = ingredientList.listAllIngredients();
-                    break;
-                case "add":
-                    //fill in code to obtain the necessary parameters
-                    //rmb to check for insuff params
-                    if (false) {
-                        throw new InsufficientParametersException();
-                    }
-                    Ingredient newIngredient = new Ingredient("name", 200.0, "units", "expiry");
-                    commandOutput = ingredientList.addNewIngredient(newIngredient);
-                    break;
-                case "delete":
-                    //rmb to check for insuff params
-                    if (false) {
-                        throw new InsufficientParametersException();
-                    }
-                    int indexToDelete = 999999; //write code to get the correct index
-                    commandOutput = ingredientList.deleteIngredient(indexToDelete);
-                    break;
-                case "update":
-                    //rmb to check for insuff params
-                    if (false) {
-                        throw new InsufficientParametersException();
-                    }
-                    int indexToUpdate = 999999;
-                    double amount = 0;
-                    commandOutput = ingredientList.updateIngredient(indexToUpdate, amount);
-                    break;
-                default:
-                    throw new UnknownCommandException();
-                }
-            } catch (UnknownCommandException | InsufficientParametersException e) {
-                ui.printErrorMessage(e.getMessage());
-            }
-            ui.printCommandOutput(commandOutput);
 
+            switch (command) {
+            case "exit":
+                exit();
+                break;
+            case "list":
+                commandOutput = ingredientList.listAllIngredients();
+                break;
+            case "add":
+                //fill in code to obtain the necessary parameters
+                Ingredient newIngredient = new Ingredient("name", 200.0, "units", "expiry");
+                commandOutput = ingredientList.addNewIngredient(newIngredient);
+                break;
+            case "delete":
+                try {
+                    int ingredientNumberToDelete = Integer.parseInt(userInput[1]);
+                    commandOutput = ingredientList.deleteIngredient(ingredientNumberToDelete);
+                } catch (NumberFormatException e) {
+                    commandOutput = "Invalid number format!";
+                } catch (IndexOutOfBoundsException e) {
+                    commandOutput = "Ingredient number not existed!";
+                }
+                break;
+            case "update":
+                int indexToUpdate = 999999;
+                double amount = 0;
+                commandOutput = ingredientList.updateIngredient(indexToUpdate, amount);
+                break;
+            default:
+                System.out.println("Unknown Command");
+                break;
+            }
+          
+            ui.printCommandOutput(commandOutput);
         }
     }
 
