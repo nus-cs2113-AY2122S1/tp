@@ -6,7 +6,9 @@ package seedu.duke.commands;
 public class Parser {
     private static final String COMMAND_EXIT = "exit";
 
-    public static Command parse(String input){
-
+    public static Command parse(String input) {
+        if (input.equals(COMMAND_EXIT)) {
+            return new ExitCommand();
+        }
     }
 }
