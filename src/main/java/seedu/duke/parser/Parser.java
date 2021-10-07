@@ -12,7 +12,10 @@ import seedu.duke.commands.InvalidCommand;
 public class Parser {
     private static String[] splitCommandWordAndArgs(String userInput) {
         final String[] split = userInput.trim().split(" ", 2);
-        return split.length == 2 ? new String[]{split[0].toLowerCase(), split[1]} : new String[]{split[0].toLowerCase(), ""};
+        if (split.length == 2) {
+            return new String[]{split[0].toLowerCase(), split[1]};
+        }
+        return new String[]{split[0].toLowerCase(), ""};
     }
 
     /**
