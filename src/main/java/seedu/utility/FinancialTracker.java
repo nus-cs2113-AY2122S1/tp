@@ -23,11 +23,11 @@ public class FinancialTracker {
         //TODO
     }
 
-    public ArrayList<Object> listExpense() {
+    public ArrayList<Entry> listExpense() {
         return null;
     }
 
-    public ArrayList<Object> listIncome() {
+    public ArrayList<Entry> listIncome() {
         //TODO
         return null;
     }
