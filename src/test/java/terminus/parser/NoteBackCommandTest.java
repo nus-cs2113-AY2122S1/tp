@@ -9,6 +9,7 @@ import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
@@ -26,7 +27,8 @@ public class NoteBackCommandTest {
     }
 
     @Test
-    void execute_deleteCommand_success() throws InvalidCommandException, InvalidArgumentException {
+    void execute_deleteCommand_success()
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         Command backCommand = commandParser.parseCommand("back");
         CommandResult backResult = backCommand.execute(ui, nusModule);
         assertTrue(backResult.isOk());

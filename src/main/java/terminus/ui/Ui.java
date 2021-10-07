@@ -63,5 +63,4 @@ public class Ui {
     public void printExitMessage() {
         System.out.println("Goodbye!");
     }
-
 }

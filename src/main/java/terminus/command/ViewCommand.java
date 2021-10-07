@@ -56,5 +56,4 @@ public class ViewCommand<T> extends Command {
         ui.printSection(result);
         return new CommandResult(true, false);
     }
-
 }

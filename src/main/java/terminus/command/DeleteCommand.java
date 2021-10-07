@@ -49,3 +49,4 @@ public class DeleteCommand<T> extends Command {
         return new CommandResult(true, false);
     }
 }
+
