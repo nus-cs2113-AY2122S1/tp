@@ -19,6 +19,14 @@ public class MainParserTest {
         mainParser = new MainParser();
     }
 
+    /**
+     * Returns type of Command the parseCommand returns. This is required because most of the MainParser's
+     * internal parsing methods are private.
+     * @param userInput Expected user input
+     * @param commandClass Expected Command class/type returned
+     * @param <T> Type of Command expected
+     * @return Command Returns a Command for verification
+     */
     @SuppressWarnings("unchecked")
     private <T extends Command> T getParsedCommand(String userInput, Class<T> commandClass) {
         // This is because user input is normally trimmed by TextUi
