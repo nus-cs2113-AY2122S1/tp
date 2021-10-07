@@ -8,14 +8,11 @@ public class CommandResult {
     protected boolean isOk;
     protected boolean isExit;
     protected String errorMessage;
-
-    public CommandResult(boolean isOk, boolean isExit, CommandParser additionalData, String errorMessage) {
-        this.additionalData = additionalData;
-        this.isOk = isOk;
-        this.errorMessage = errorMessage;
-        this.isExit = isExit;
+    
+    public CommandResult(boolean isOk) {
+        this(isOk, false);
     }
-
+    
     public CommandResult(boolean isOk, boolean isExit) {
         this(isOk, isExit, null, null);
     }
@@ -28,8 +25,11 @@ public class CommandResult {
         this(isOk, false, null, errorMessage);
     }
 
-    public CommandResult(boolean isOk) {
-        this(isOk, false, null, null);
+    public CommandResult(boolean isOk, boolean isExit, CommandParser additionalData, String errorMessage) {
+        this.additionalData = additionalData;
+        this.isOk = isOk;
+        this.errorMessage = errorMessage;
+        this.isExit = isExit;
     }
 
     /**

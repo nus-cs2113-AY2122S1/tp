@@ -6,7 +6,7 @@ public class Content {
     protected String data;
     public static final String TYPE = "";
 
-    private static final String DISPLAY_MESSAGE = "Name: %s\nContent: %s\n";
+    private static final String DISPLAY_MESSAGE = "Name: %s\nContent:\n%s\n";
 
     public Content(String name) {
         this.name = name;

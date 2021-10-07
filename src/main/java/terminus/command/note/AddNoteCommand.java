@@ -11,22 +11,20 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
-public class AddCommand extends Command {
+public class AddNoteCommand extends Command {
 
     private String name;
     private String data;
 
-    private static final String COMMAND_FORMAT = " \"{item name}\" \"{item content}\"";
-
     private static final int ADD_NOTE_ARGUMENTS = 2;
 
-    public AddCommand() {
+    public AddNoteCommand() {
 
     }
 
     @Override
     public String getFormat() {
-        return CommonFormat.COMMAND_ADD + COMMAND_FORMAT;
+        return CommonFormat.COMMAND_ADD_NOTE_FORMAT;
     }
 
     @Override
@@ -38,11 +36,11 @@ public class AddCommand extends Command {
     public void parseArguments(String arguments) throws InvalidArgumentException {
         // Perform required checks with regex
         if (arguments == null || arguments.isBlank()) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         ArrayList<String> argArray = CommonFormat.findArguments(arguments);
         if (!isValidNoteArguments(argArray)) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         this.name = argArray.get(0);
         this.data = argArray.get(1);
@@ -54,7 +52,7 @@ public class AddCommand extends Command {
         contentManager.setContent(module.getNotes());
         contentManager.addNote(name, data);
         module.setNotes(contentManager.getContents());
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE));
+        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE, name));
         return new CommandResult(true, false);
     }
 

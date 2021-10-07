@@ -8,6 +8,8 @@ import terminus.ui.Ui;
 
 public abstract class Command {
 
+    protected String arguments;
+    
     public Command() {
 
     }
@@ -34,7 +36,7 @@ public abstract class Command {
      * @throws InvalidTimeFormatException Exception for when time format is invalid
      */
     public void parseArguments(String arguments) throws InvalidArgumentException, InvalidTimeFormatException {
-
+        this.arguments = arguments;
     }
 
     /**

@@ -39,6 +39,16 @@ public class NusModule {
         this.links = links;
     }
 
+    public <T> void set(T type, ArrayList<Content> contents) {
+        if (type == Note.class) {
+            this.notes = contents;
+        } else if (type == Link.class) {
+            this.links = contents;
+        } else {
+            //error encountered
+        }
+    }
+
     public <T> ArrayList<Content> get(T type) {
         ArrayList<Content> result = new ArrayList<>();
         if (type == Note.class) {
@@ -50,4 +60,5 @@ public class NusModule {
         }
         return result;
     }
+
 }

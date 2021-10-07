@@ -26,13 +26,13 @@ public class ContentManager {
     }
 
     public String listAllContents() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         int i = 1;
         for (Content n : contents) {
-            result += String.format("%d. %s\n", i, n.getViewDescription());
+            result.append(String.format("%d. %s\n", i, n.getViewDescription()));
             i++;
         }
-        return result;
+        return result.toString();
     }
 
     public String getContentData(int contentNumber) throws InvalidArgumentException {

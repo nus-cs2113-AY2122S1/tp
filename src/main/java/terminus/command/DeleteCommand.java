@@ -1,5 +1,6 @@
 package terminus.command;
 
+import java.util.Locale;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.ContentManager;
@@ -30,11 +31,15 @@ public class DeleteCommand<T> extends Command {
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
         if (arguments == null || arguments.isBlank()) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         try {
             itemNumber = Integer.parseInt(arguments);
         } catch (NumberFormatException e) {
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_NUMBER);
+        }
+
+        if (itemNumber <= 0) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
     }
@@ -44,9 +49,10 @@ public class DeleteCommand<T> extends Command {
         ContentManager contentManager = module.getContentManager();
         contentManager.setContent(module.get(type));
         String deletedContentName = contentManager.deleteContent(itemNumber);
-        module.setNotes(contentManager.getContents());
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE, type, deletedContentName));
-        return new CommandResult(true, false);
+        module.set(type, contentManager.getContents());
+        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,
+                CommonFormat.getClassName(type).toLowerCase(), deletedContentName));
+        return new CommandResult(true);
     }
 }
 

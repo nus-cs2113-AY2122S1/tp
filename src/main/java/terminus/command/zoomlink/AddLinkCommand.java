@@ -29,8 +29,7 @@ public class AddLinkCommand extends Command {
 
     @Override
     public String getFormat() {
-        return CommonFormat.COMMAND_ADD + " \"{description}\" "
-                + "\"{day}\" \"{start_time}\" \"{zoom_link}\"";
+        return CommonFormat.COMMAND_ADD_SCHEDULE_FORMAT;
     }
 
     @Override
@@ -42,11 +41,11 @@ public class AddLinkCommand extends Command {
     public void parseArguments(String arguments) throws InvalidArgumentException, InvalidTimeFormatException {
         // Perform required checks with regex
         if (arguments == null || arguments.isBlank()) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         ArrayList<String> argArray = CommonFormat.findArguments(arguments);
         if (!isValidScheduleArguments(argArray)) {
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+            throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         String userStartTime = argArray.get(2);
 
@@ -62,7 +61,7 @@ public class AddLinkCommand extends Command {
         contentManager.setContent(module.getLinks());
         contentManager.addLink(description, day, startTime, link);
         module.setLinks(contentManager.getContents());
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE));
+        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
         return new CommandResult(true, false);
     }
 
