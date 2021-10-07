@@ -16,7 +16,11 @@ public abstract class Command {
         throw new UnsupportedOperationException();
     }
 
+    /**
+     * Returns whether exit command has been issued by the user
+     * @return Boolean true if exit command has been issued, false if other commands issued
+     */
     public Boolean isExit() {
-
+        return this instanceof ExitCommand;
     }
 }
