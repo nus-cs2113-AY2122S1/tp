@@ -19,13 +19,23 @@ public class Ui {
                 + "   █    ███   ███  █   █ █     █████ █    █ █   ██ █   ██ █████ █   █\n";
         String greet = "Hello, Welcome to TourPlanner!\n"
                 + "What can I do for you?";
-        System.out.println(logo);
-        System.out.println(greet);
+        show(logo);
+        show(greet);
         showLine();
     }
 
     public String readCommand() {
         return in.nextLine();
+    }
+
+    public void showCut(Client client) {
+        String CUT_MESSAGE = "Client has been deleted:";
+        show(CUT_MESSAGE + "\n" + client);
+        showLine();
+    }
+
+    public void show(String textToShow) {
+        System.out.print(textToShow);
     }
 }
 
