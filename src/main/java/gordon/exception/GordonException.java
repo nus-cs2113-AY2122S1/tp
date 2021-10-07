@@ -1,4 +1,4 @@
-package seedu.duke;
+package gordon.exception;
 
 public class GordonException extends Exception {
     public static final String INDEX_OOB = "Index outside range.";

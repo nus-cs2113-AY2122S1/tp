@@ -1,4 +1,7 @@
-package seedu.duke;
+package gordon.kitchen;
+
+import gordon.exception.GordonException;
+import gordon.util.Difficulty;
 
 import java.util.ArrayList;
 

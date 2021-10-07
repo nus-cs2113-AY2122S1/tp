@@ -2,6 +2,10 @@ package seedu.duke;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import gordon.exception.GordonException;
+import gordon.kitchen.Cookbook;
+import gordon.kitchen.Ingredient;
+import gordon.kitchen.Recipe;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -80,7 +84,6 @@ class DukeTest {
 
         Cookbook filteredCBook = new Cookbook();
         ArrayList<Recipe> filteredR = cookbook.filterByTag("vegan");
-        filteredCBook.recipes.addAll(filteredR);
         System.out.println("Recipes containing the 'Vegan' tag: ");
         System.out.println(filteredCBook);
     }

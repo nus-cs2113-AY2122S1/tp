@@ -1,4 +1,4 @@
-package seedu.duke;
+package gordon.kitchen;
 
 public class Ingredient {
     protected String description;
