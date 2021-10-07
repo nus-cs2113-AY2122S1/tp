@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.InsufficientParametersException;
+import seedu.duke.exceptions.UnknownCommandException;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
 import seedu.duke.ui.UI;
@@ -39,6 +41,7 @@ public class Duke {
             String[] userInput = ui.getUserCommand().split(" ", 2); //Splits into command and parameters
             String command = userInput[0];
             String commandOutput = "";
+
             switch (command) {
             case "exit":
                 exit();
@@ -70,8 +73,8 @@ public class Duke {
                 System.out.println("Unknown Command");
                 break;
             }
+          
             ui.printCommandOutput(commandOutput);
-
         }
     }
 
