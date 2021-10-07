@@ -15,8 +15,9 @@ import static constants.ErrorMessage.addExpenseErrorMsg;
         description = "Adds an expense in the current month to the database.")
 public class AddExpenseCommand implements Callable<Integer> {
 
-    @Parameters(paramLabel = "NAME", description = "Name of the expense item")
+    @Parameters(paramLabel = "NAME", arity = "1..*", description = "Name of the expense item")
     String[] names;
+
     @Option(names = {"-v", "--value"}, required = true, description = "Value of the expense item")
     Double value;
 
@@ -25,11 +26,10 @@ public class AddExpenseCommand implements Callable<Integer> {
         Ui ui = Ui.getUi();
 
         try {
-            if (names != null) {
-                String expenseName = String.join(" ", names);
-                Double expenseValue = Money.truncate(value);
-                ExpenseManager.addExpense(expenseName, expenseValue);
-            }
+            String expenseName = String.join(" ", names);
+            Double expenseValue = Money.truncate(value);
+            ExpenseManager.addExpense(expenseName, expenseValue);
+
         } catch (Exception error) {
             ui.printMessage(addExpenseErrorMsg);
         }
