@@ -7,6 +7,7 @@ import medbot.command.EditPatientCommand;
 import medbot.command.ExitCommand;
 import medbot.command.ListPatientCommand;
 import medbot.command.ViewPatientCommand;
+import medbot.command.HelpCommand;
 import medbot.person.Patient;
 import medbot.person.Person;
 
@@ -22,6 +23,7 @@ public class Parser {
     private static final String COMMAND_VIEW = "view";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_EXIT = "exit";
+    private static final String COMMAND_HELP = "help";
 
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
@@ -61,9 +63,17 @@ public class Parser {
     private static final String REGEX_CAPITALISE_POSITION = "(\\A|[ _-])[a-z]";
 
     private static final String VERTICAL_LINE = "|";
+    private static final String SEPARATOR_SPACE = " ";
 
     private static final String EMPTY_STRING = "";
 
+    /**
+     * Parses the user input for commands and returns the relevant Command object.
+     *
+     * @param userInput String containing the full user input.
+     * @return the corresponding Command object.
+     * @throws MedBotException if command is unrecognised.
+     */
     public static Command parseCommand(String userInput) throws MedBotException {
         userInput = preprocessInput(userInput);
         if (userInput.startsWith(COMMAND_ADD)) {
@@ -84,11 +94,40 @@ public class Parser {
         if (userInput.startsWith(COMMAND_EDIT)) {
             return parseEditPatientCommand(userInput);
         }
+        if (userInput.startsWith(COMMAND_HELP)) {
+            return parseHelpCommand(userInput);
+        }
 
 
         throw new MedBotException(WRONG_COMMAND_ERROR);
     }
 
+    /**
+     * Parses user input to pass relevant parameters into the HelpCommand constructor.
+     *
+     * @param userInput String containing the full user input.
+     * @return HelpCommand object.
+     * @throws MedBotException if parameters.length < 1 && > 2
+     */
+    private static HelpCommand parseHelpCommand(String userInput) throws MedBotException {
+        String[] parameters = userInput.split(SEPARATOR_SPACE);
+        if (parameters.length == 1) {
+            return new HelpCommand(userInput);
+        }
+        if (parameters.length == 2) {
+            return new HelpCommand(parameters[1]);
+        }
+
+        throw new MedBotException(WRONG_COMMAND_ERROR);
+    }
+
+    /**
+     * Parses user input to pass relevant parameters into the ViewPatientCommand constructor.
+     *
+     * @param userInput String containing the full user input.
+     * @return ViewPatientCommand object.
+     * @throws MedBotException when patient id given is out of range, or no id is specified.
+     */
     private static ViewPatientCommand parseViewPatientCommand(String userInput) throws MedBotException {
         int patientId = 0;
         try {
@@ -101,7 +140,13 @@ public class Parser {
         return new ViewPatientCommand(patientId);
     }
 
-
+    /**
+     * Parses user input to pass relevant parameters into the DeletePatientCommand constructor.
+     *
+     * @param userInput String containing the full user input.
+     * @return DeletePatientCommand object.
+     * @throws MedBotException when patient id given is out of range, or no id is specified.
+     */
     private static DeletePatientCommand parseDeletePatientCommand(String userInput) throws MedBotException {
         int patientId = 0;
         try {
@@ -152,6 +197,13 @@ public class Parser {
         return userInput.stripLeading().replace(VERTICAL_LINE, EMPTY_STRING);
     }
 
+    /**
+     * Parses and processes user input to create a new patient object with the corresponding information.
+     *
+     * @param userInput String containing the full user input.
+     * @return AddPatientCommand object.
+     * @throws MedBotException when no parameters are specified.
+     */
     private static AddPatientCommand parseAddPatientCommand(String userInput) throws MedBotException {
         String processedInput = preprocessMultiAttributeInput(userInput);
         String[] parameters = processedInput.split(REGEX_VERTICAL_LINE);
