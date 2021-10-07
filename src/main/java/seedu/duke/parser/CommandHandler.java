@@ -1,11 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.parser.Parser;
-
-import java.io.IOException;
-
 public class CommandHandler {
-
     public boolean commandHandle(Parser commandHandle, String userInputString) {
         if (commandHandle.isAddBudget()) {
             System.out.println("Add Budget Command Triggered!");
@@ -18,5 +13,4 @@ public class CommandHandler {
             return false;
         }
     }
-
 }

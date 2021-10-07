@@ -6,9 +6,6 @@ import seedu.duke.parser.Parser;
 import java.util.Scanner;
 
 public class Duke {
-    /**
-     * Main entry-point for the java.duke.Duke application.
-     */
     public static void main(String[] args) {
         String userInputString;
         Scanner userInput = new Scanner(System.in);
