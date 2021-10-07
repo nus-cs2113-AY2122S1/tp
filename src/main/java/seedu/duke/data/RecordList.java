@@ -6,11 +6,11 @@ import seedu.duke.data.records.Record;
 
 import java.util.ArrayList;
 
-public class BudgetList {
+public class RecordList {
     public static int numberOfRecords = 0;
     private ArrayList<Record> allRecords;
 
-    public BudgetList() {
+    public RecordList() {
         allRecords = new ArrayList<>();
     }
 
@@ -19,13 +19,18 @@ public class BudgetList {
         numberOfRecords += 1;
     }
 
-    public void addExpenditure(Expenditure newExpenditure) {
-        allRecords.add(newExpenditure);
+    public void addExpenditure(String description, double spending, int month) {
+        allRecords.add(new Expenditure(description, spending, month));
         numberOfRecords += 1;
     }
 
     public void deleteBudget(int index) {
         allRecords.remove(index);
+    }
+
+    public void deleteExpenditure(int index) {
+        allRecords.remove(index);
+
     }
 
     public int getSize() {

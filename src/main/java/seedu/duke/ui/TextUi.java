@@ -1,6 +1,6 @@
 package seedu.duke.ui;
 
-import seedu.duke.data.BudgetList;
+import seedu.duke.data.RecordList;
 
 import java.util.Scanner;
 
@@ -21,8 +21,8 @@ public class TextUi {
         in = new Scanner(System.in);
     }
 
-    public static void showRecordsListView(BudgetList budgetList) {
-        int budgetListLength = BudgetList.numberOfRecords;
+    public static void showRecordsListView(RecordList budgetList) {
+        int budgetListLength = RecordList.numberOfRecords;
         for (int i = 0; i < budgetListLength; i += 1) {
             budgetList.printRecord(i);
         }

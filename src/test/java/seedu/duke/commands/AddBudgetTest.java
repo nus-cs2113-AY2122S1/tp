@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.data.BudgetList;
+import seedu.duke.data.RecordList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,7 +33,7 @@ public class AddBudgetTest {
         double spendingLimit = 20.00;
         int month = 12;
 
-        BudgetList currentBudgetList = new BudgetList();
+        RecordList currentBudgetList = new RecordList();
         currentBudgetList.addBudget(description, spendingLimit, month);
         assertEquals(1, currentBudgetList.getSize());
     }
