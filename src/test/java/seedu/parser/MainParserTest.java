@@ -19,6 +19,7 @@ public class MainParserTest {
         mainParser = new MainParser();
     }
 
+    @SuppressWarnings("unchecked")
     private <T extends Command> T getParsedCommand(String userInput, Class<T> commandClass) {
         // This is because user input is normally trimmed by TextUi
         String trimmedUserInput = userInput.trim();
