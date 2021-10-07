@@ -2,11 +2,15 @@ package terminus.content;
 
 public class Content {
 
-    private String name;
-    private String data;
+    protected String name;
+    protected String data;
     public static final String TYPE = "";
 
-    private static final String DISPLAY_MESSAGE = "Name: %s\nContent: %s\n";
+    private static final String DISPLAY_MESSAGE = "Name: %s\nContent:\n%s\n";
+
+    public Content(String name) {
+        this.name = name;
+    }
 
     public Content(String name, String data) {
         this.name = name;
@@ -33,4 +37,7 @@ public class Content {
         return String.format(DISPLAY_MESSAGE, name, data);
     }
 
+    public String getViewDescription() {
+        return this.name;
+    }
 }

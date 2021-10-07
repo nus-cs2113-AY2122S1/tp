@@ -9,13 +9,21 @@ public class Messages {
     public static final String MESSAGE_COMMAND_EXIT = "Exits the program.";
     public static final String MESSAGE_COMMAND_HELP = "Prints the help page.";
     public static final String MESSAGE_COMMAND_NOTE = "Move to notes workspace.";
+    public static final String MESSAGE_COMMAND_SCHEDULE = "Move to schedules workspace.";
 
-    public static final String MESSAGE_RESPONSE_DELETE = "%s \'%s\' has been deleted!";
-    public static final String MESSAGE_RESPONSE_ADD = "%s has been added!";
+    public static final String MESSAGE_RESPONSE_DELETE = "Your %s on \'%s\' has been deleted!";
+    public static final String MESSAGE_RESPONSE_ADD = "Your %s on '%s' has been added!";
 
     public static final String ERROR_MESSAGE_TAG = "Error: ";
 
     public static final String ERROR_MESSAGE_MISSING_ARGUMENTS = ERROR_MESSAGE_TAG + "Missing arguments.";
     public static final String ERROR_MESSAGE_EMPTY_CONTENTS = ERROR_MESSAGE_TAG + "Content not found.";
     public static final String ERROR_MESSAGE_INVALID_NUMBER = ERROR_MESSAGE_TAG + "Invalid numerical value provided.";
+    public static final String ERROR_MESSAGE_INVALID_TIME_FORMAT = ERROR_MESSAGE_TAG + "Invalid time format %s.";
+    public static final String EMPTY_CONTENT_LIST_MESSAGE = "You do not have any content in this workspace.\n";
+    public static final String CONTENT_MESSAGE_HEADER = "List of Content\n---------------\n";
+    
+    public static final String MAIN_BANNER = "Welcome to TermiNUS!";
+    public static final String NOTE_BANNER = "You have %d note(s) inside this workspace.";
+    public static final String SCHEDULE_BANNER = "You have %d link(s) in this workspace.";
 }

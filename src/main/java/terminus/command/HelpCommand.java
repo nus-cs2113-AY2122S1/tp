@@ -9,6 +9,7 @@ import terminus.ui.Ui;
 
 public class HelpCommand extends Command {
 
+    public static final String HELP_MENU_MESSAGE = "\nHelp Menu\n---------";
     private CommandParser commandMap;
 
     public HelpCommand(CommandParser commandMap) {
@@ -26,12 +27,8 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void parseArguments(String arguments) {
-
-    }
-
-    @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
+        ui.printSection(HELP_MENU_MESSAGE);
         ui.printSection(commandMap.getHelpMenu());
         return new CommandResult(true);
     }

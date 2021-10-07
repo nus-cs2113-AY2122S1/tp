@@ -1,4 +1,4 @@
-package terminus.parser;
+package terminus.command.note;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,10 +9,12 @@ import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
+import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
 
-public class NoteDeleteCommandTest {
+public class DeleteNoteCommandTest {
     private NoteCommandParser commandParser;
     private NusModule nusModule;
     private Ui ui;
@@ -25,7 +27,8 @@ public class NoteDeleteCommandTest {
     }
 
     @Test
-    void execute_deleteCommand_success() throws InvalidCommandException, InvalidArgumentException {
+    void execute_success()
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(ui, nusModule);

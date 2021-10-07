@@ -4,6 +4,7 @@ import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
@@ -16,6 +17,8 @@ public class Terminus {
     private String workspace;
 
     private NusModule nusModule;
+    
+    private static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "Format: %s";
 
     /**
      * Main entry-point for the terminus.Terminus application.
@@ -37,9 +40,8 @@ public class Terminus {
         this.ui = new Ui();
         this.parser = MainCommandParser.getInstance();
         this.workspace = "";
-        this.ui.printBanner();
-        this.ui.printParserBanner(this.parser);
         this.nusModule = new NusModule();
+        this.ui.printParserBanner(this.parser, this.nusModule);
     }
 
     private void runCommandsUntilExit() {
@@ -55,21 +57,23 @@ public class Terminus {
                 } else if (result.isOk() && result.getAdditionalData() != null) {
                     parser = result.getAdditionalData();
                     workspace = parser.getWorkspace();
-                    ui.printParserBanner(parser);
+                    ui.printParserBanner(parser, nusModule);
                 } else if (!result.isOk()) {
                     ui.printSection(result.getErrorMessage());
                 }
-            } catch (InvalidCommandException e) {
+            } catch (InvalidCommandException | InvalidTimeFormatException e) {
                 ui.printSection(e.getMessage());
             } catch (InvalidArgumentException e) {
-                ui.printSection(e.getMessage());
+                if (e.getFormat() != null) {
+                    ui.printSection(e.getMessage(), String.format(INVALID_ARGUMENT_FORMAT_MESSAGE, e.getFormat()));   
+                } else {
+                    ui.printSection(e.getMessage());
+                }
             }
-
         }
     }
 
     private void exit() {
         this.ui.printExitMessage();
     }
-
 }
