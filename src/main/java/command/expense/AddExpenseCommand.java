@@ -9,6 +9,8 @@ import utils.Money;
 
 import java.util.concurrent.Callable;
 
+import static constants.ErrorMessage.addExpenseErrorMsg;
+
 @Command(name = "add", mixinStandardHelpOptions = true,
         description = "Adds an expense in the current month to the database.")
 public class AddExpenseCommand implements Callable<Integer> {
@@ -21,19 +23,15 @@ public class AddExpenseCommand implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
-        String errorMsg = "Error with adding expense. Ensure you keyed in both an expense name"
-                + " and a value and try again!";
 
-        if (names == null || value == null) {
-            ui.printMessage(errorMsg);
-            return 0;
-        }
         try {
-            String expenseName = String.join(" ", names);
-            Double expenseValue = Money.truncate(value);
-            ExpenseManager.addExpense(expenseName, expenseValue);
+            if (names != null) {
+                String expenseName = String.join(" ", names);
+                Double expenseValue = Money.truncate(value);
+                ExpenseManager.addExpense(expenseName, expenseValue);
+            }
         } catch (Exception error) {
-            ui.printMessage(errorMsg);
+            ui.printMessage(addExpenseErrorMsg);
         }
         return 0;
     }

@@ -8,6 +8,8 @@ import terminal.Ui;
 
 import java.util.concurrent.Callable;
 
+import static constants.ErrorMessage.deleteExpenseErrorMsg;
+
 @Command(name = "delete",
         description = "Deletes expense record(s) from the database "
                 + "by the unique identifier (from list) or by the name.")
@@ -20,20 +22,16 @@ public class DeleteExpenseCommand implements Callable<Integer> {
     public Integer call() throws Exception {
         Ui ui = Ui.getUi();
         String expenseName;
-        String errorMsg = "Error with deleting expense. Ensure you keyed in the correct"
-                + " id or expense name and try again!";
 
         try {
             if (exclusive.names != null) {
                 expenseName = String.join(" ", exclusive.names);
                 ExpenseManager.deleteExpense(expenseName);
-            } else if (exclusive.id <= 0) {
-                ui.printMessage(errorMsg);
             } else {
                 ExpenseManager.deleteExpense(exclusive.id);
             }
         } catch (Exception error) {
-            ui.printMessage(errorMsg);
+            ui.printMessage(deleteExpenseErrorMsg);
         }
         return 0;
     }
