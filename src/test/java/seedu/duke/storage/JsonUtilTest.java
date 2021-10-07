@@ -9,14 +9,21 @@ import seedu.duke.storage.models.WorkoutListModel;
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class JsonUtilTest {
+    private final String buggyJsonString = "{ buggy json }";
 
     @Test
     void parse_exerciseJson_expectStringToParseToJsonNode() throws IOException {
         String exerciseJson = "{\"description\":\"Push ups\",\"sets\":\"3\",\"reps\":\"10\",\"isDone\":\"false\"}";
         JsonNode node = JsonUtil.parse(exerciseJson);
         assertEquals("Push ups", node.get("description").asText());
+    }
+
+    @Test
+    void parse_buggyJsonString_expectException() {
+        assertThrows(IOException.class, () -> JsonUtil.parse(buggyJsonString));
     }
 
     @Test
