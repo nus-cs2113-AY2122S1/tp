@@ -1,8 +1,8 @@
 package seedu.entry;
 
 public abstract class Entry {
-    String description;
-    double value;
+    protected String description;
+    protected double value;
 
     public String getDescription() {
         return this.description;
