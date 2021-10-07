@@ -12,12 +12,12 @@ public class Student {
         this.studentID = studentID;
     }
 
-    public void markAttendance(int lesson_index) {
-        attendance[lesson_index] = true;
+    public void markAttendance(int lessonIndex) {
+        attendance[lessonIndex] = true;
     }
 
-    public boolean getAttendance(int lesson_index) {
-        return attendance[lesson_index];
+    public boolean getAttendance(int lessonIndex) {
+        return attendance[lessonIndex];
     }
 
     public void setName(String name) {
