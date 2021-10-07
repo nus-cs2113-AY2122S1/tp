@@ -1,1 +1,6 @@
-James Gosling
+new new trip 1
+viewall
+new newTrip2
+viewall
+view all
+exit
