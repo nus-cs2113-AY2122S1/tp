@@ -10,6 +10,11 @@ public class IngredientList {
     protected ArrayList<Ingredient> ingredientList;
     private static IngredientList instance = null;
 
+    private static final String ADDED_MESSAGE = "That task has been added:\n" + "\t";
+    private static final String LIST_EMPTY_MESSAGE = "No ingredients currently in the list.";
+    private static final String LIST_MESSAGE = "Here is the list of the ingredients currently in inventory:\n";
+    private static final String DELETE_MESSAGE = "Got it. This ingredient has been removed:\n" + "\t";
+
     public IngredientList() {
         ingredientList = new ArrayList<Ingredient>(); //This is for v1.0
     }
@@ -29,7 +34,7 @@ public class IngredientList {
     public String addNewIngredient(Ingredient ingredient) {
         // TODO: Append new ingredient to the list
         // We allow duplicate names for v1.0
-        return ingredient.toString();
+        return ADDED_MESSAGE + ingredient.toString();
     }
 
     /**
@@ -41,11 +46,11 @@ public class IngredientList {
         int i;
 
         if (ingredientList.size() == 0) {
-            resultMsg = "No ingredients currently in the list";
+            resultMsg = LIST_EMPTY_MESSAGE;
             return resultMsg;
         }
 
-        resultMsg = "Here is the list of the ingredients currently in inventory:\n";
+        resultMsg = LIST_MESSAGE;
 
         for (i = 0; i < ingredientList.size() - 1; i++) {
             resultMsg += (i + 1) + "."
@@ -65,8 +70,7 @@ public class IngredientList {
         String resultMsg;
         Ingredient removedIngredient = ingredientList.remove(ingredientNumber - 1);
 
-        resultMsg = "Got it. This ingredient is removed:\n"
-                + "\t" + removedIngredient.toString();
+        resultMsg = DELETE_MESSAGE + removedIngredient.toString();
         return resultMsg;
     }
 

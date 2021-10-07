@@ -44,6 +44,6 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return getName() + "| Amount Left: " + getAmount() + getUnits() + "| Expiry Date: " + getExpiry();
+        return getName() + " | Amount Left: " + getAmount() + " " + getUnits() + " | Expiry Date: " + getExpiry();
     }
 }
