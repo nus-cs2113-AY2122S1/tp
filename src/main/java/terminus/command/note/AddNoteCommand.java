@@ -11,22 +11,20 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
-public class AddCommand extends Command {
+public class AddNoteCommand extends Command {
 
     private String name;
     private String data;
 
-    private static final String COMMAND_FORMAT = " \"{item name}\" \"{item content}\"";
-
     private static final int ADD_NOTE_ARGUMENTS = 2;
 
-    public AddCommand() {
+    public AddNoteCommand() {
 
     }
 
     @Override
     public String getFormat() {
-        return CommonFormat.COMMAND_ADD + COMMAND_FORMAT;
+        return CommonFormat.COMMAND_ADD_NOTE_FORMAT;
     }
 
     @Override

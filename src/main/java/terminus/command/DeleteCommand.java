@@ -44,8 +44,9 @@ public class DeleteCommand<T> extends Command {
         ContentManager contentManager = module.getContentManager();
         contentManager.setContent(module.get(type));
         String deletedContentName = contentManager.deleteContent(itemNumber);
-        module.setNotes(contentManager.getContents());
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE, type, deletedContentName));
+        module.set(type, contentManager.getContents());
+        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,
+                CommonFormat.getClassName(type), deletedContentName));
         return new CommandResult(true, false);
     }
 }

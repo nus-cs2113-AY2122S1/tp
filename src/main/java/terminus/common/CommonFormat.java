@@ -1,5 +1,7 @@
 package terminus.common;
 
+import java.util.Arrays;
+import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidTimeFormatException;
 
 import java.time.LocalTime;
@@ -19,8 +21,13 @@ public class CommonFormat {
     public static final String COMMAND_HELP = "help";
     public static final String COMMAND_SCHEDULE = "schedule";
 
+    public static final String LOCAL_TIME_FORMAT = "HH:mm";
+
     public static final String COMMAND_DELETE_FORMAT = COMMAND_DELETE + " <item number>";
     public static final String COMMAND_VIEW_FORMAT = COMMAND_VIEW + " {item number}";
+    public static final String COMMAND_ADD_SCHEDULE_FORMAT = COMMAND_ADD + " \"<link description>\" "
+            + "\"<day>\" \"<start_time " + LOCAL_TIME_FORMAT + ">\" \"<zoom_link>\"";
+    public static final String COMMAND_ADD_NOTE_FORMAT = COMMAND_ADD + " \"<note name>\" \"<note content>\"";
 
     public static ArrayList<String> findArguments(String arg) {
         ArrayList<String> argsArray = new ArrayList<>();
@@ -43,9 +50,19 @@ public class CommonFormat {
 
     public static LocalTime localTimeConverter(String startTime) throws InvalidTimeFormatException {
         if (startTime.length() != 5 || startTime.indexOf(":") != 2) {
-            throw new InvalidTimeFormatException(Messages.ERROR_MESSAGE_INVALID_TIME_FORMAT);
+            throw new InvalidTimeFormatException(
+                    String.format(Messages.ERROR_MESSAGE_INVALID_TIME_FORMAT, LOCAL_TIME_FORMAT));
         }
-        DateTimeFormatter format = DateTimeFormatter.ofPattern(Messages.LOCAL_TIME_FORMAT);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern(LOCAL_TIME_FORMAT);
         return LocalTime.parse(startTime, format);
+    }
+
+    public static <T> String getClassName(T type) {
+        String result = type.toString();
+        String[] string = result.split("\\.");
+        if (string.length > 0) {
+            result = string[string.length - 1];
+        }
+        return result;
     }
 }

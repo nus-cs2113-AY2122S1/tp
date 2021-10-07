@@ -19,7 +19,7 @@ Content: Week 8 test
 
 [] >>> Error: Invalid numerical value provided.
 [] >>> Error: Content not found.
-[] >>> class terminus.content.Note 'CS2113T' has been deleted!
+[] >>> Note 'CS2113T' has been deleted!
 [] >>> exit : Exits the program.
 Format: exit
 
@@ -41,10 +41,10 @@ Format: schedule
 [] >>> Error: Content not found.
 [] >>> CS2113T Lecture, Friday, 16:00, zoom.com
 [] >>> Error: Content not found.
-[] >>> class terminus.content.Link 'CS2113T Tutorial' has been deleted!
+[] >>> Link 'CS2113T Tutorial' has been deleted!
 [] >>> 1. CS2113T Lecture, Friday, 16:00, zoom.com
 
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
-[] >>> class terminus.content.Link 'CS2113T Lecture' has been deleted!
+[] >>> Link 'CS2113T Lecture' has been deleted!
 [] >>> Goodbye!

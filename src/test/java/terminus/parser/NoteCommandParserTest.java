@@ -4,16 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import javax.swing.text.View;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.command.Command;
-import terminus.command.CommandResult;
 import terminus.command.DeleteCommand;
 import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
 import terminus.command.ViewCommand;
-import terminus.command.note.AddCommand;
+import terminus.command.note.AddNoteCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidTimeFormatException;
@@ -73,9 +70,9 @@ public class NoteCommandParserTest {
     @Test
     void parseCommand_resolveAddCommand_success()
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
-        assertTrue(commandParser.parseCommand("add \"test\" \"test1\"") instanceof AddCommand);
-        assertTrue(commandParser.parseCommand("add \"    test     \" \"    test1   \"") instanceof AddCommand);
-        assertTrue(commandParser.parseCommand("add \"username\" \"password\"") instanceof AddCommand);
+        assertTrue(commandParser.parseCommand("add \"test\" \"test1\"") instanceof AddNoteCommand);
+        assertTrue(commandParser.parseCommand("add \"    test     \" \"    test1   \"") instanceof AddNoteCommand);
+        assertTrue(commandParser.parseCommand("add \"username\" \"password\"") instanceof AddNoteCommand);
     }
 
     @Test
@@ -104,7 +101,6 @@ public class NoteCommandParserTest {
         assertTrue(commandParser.parseCommand("view") instanceof ViewCommand);
         assertTrue(commandParser.parseCommand("view 1") instanceof ViewCommand);
     }
-
 
 
     @Test
