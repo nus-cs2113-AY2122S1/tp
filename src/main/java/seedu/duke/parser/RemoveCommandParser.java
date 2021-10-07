@@ -4,9 +4,8 @@ import seedu.duke.commands.RemoveCommand;
 
 import java.text.ParseException;
 
-public class RemoveCommandParser implements Parser<RemoveCommand> {
+public class RemoveCommandParser {
 
-    @Override
     public RemoveCommand parse(String arguments) throws ParseException {
 
         String type;

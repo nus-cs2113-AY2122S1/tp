@@ -3,6 +3,7 @@ package seedu.duke.universities;
 import java.util.ArrayList;
 
 public class UniversityList {
+
     protected ArrayList<University> list;
 
     public UniversityList(ArrayList<University> list) {
@@ -36,6 +37,10 @@ public class UniversityList {
 
     public int getSize() {
         return list.size();
+    }
+
+    public ArrayList<University> getList() {
+        return list;
     }
 
     public University get(int index) {
