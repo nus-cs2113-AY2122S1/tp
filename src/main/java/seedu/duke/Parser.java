@@ -3,6 +3,10 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import seedu.duke.member.Member;
+import seedu.duke.member.MemberList;
 
 public class Parser {
 
@@ -100,30 +104,52 @@ public class Parser {
         return sentenceAfterDeletion.toString();
     }
 
-    public static String getMemberDescription(String query) {
-        String[] words = query.trim().split("[\\s]+");
-        String[] allButFirstWord = Arrays.copyOfRange(words, 1, words.length);
-        StringBuilder sentenceAfterDeletion = new StringBuilder();
-        for (String word : allButFirstWord) {
-            if (word.contains("/")) {
+    public static Member getMemberDetails(String query) {
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        String name = "";
+        String studentNumber = "";
+        char gender = ' ';
+        int phoneNumber = 0;
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            switch (matcher.group()){
+            case "/m":
+                name = words[wordIndex].trim();
                 break;
-            } else {
-                sentenceAfterDeletion.append(word).append(" ");
+            case "/s":
+                studentNumber = words[wordIndex].trim();
+                break;
+            case "/g":
+                gender = words[wordIndex].trim().charAt(0);
+                break;
+            case "/p":
+                phoneNumber = Integer.parseInt(words[wordIndex].trim());
+                break;
             }
+            wordIndex++;
         }
-        return sentenceAfterDeletion.toString();
+
+        return new Member(name, studentNumber,gender,phoneNumber);
     }
 
 
     /**
-     * Function creates a new Todo task to be input in tasks.
+     * Function creates a new member to be input in MemberList Class.
      *
-     * @param tasks ArrayList of tasks
+     * @param members MemberList which contains list of members
      * @param query user input
      */
-    public static void makeMemberEntry(ArrayList<Member> members, String query) {
-        members.add(new Members(Parser.getMemberDescription(query)));
-        System.out.println("Added a Member: " + Parser.getMemberDescription(query));
+    public static void makeMemberEntry(MemberList members, String query) {
+        Member member = getMemberDetails(query);
+        members.addMember(member);
+        System.out.println("Added a Member: " + member);
     }
 
     /**
