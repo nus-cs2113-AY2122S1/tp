@@ -53,6 +53,9 @@ class GoalTest {
                 () -> new Goal("test", "07-Oct-2021", "01/01/2021"));
     }
 
+    /**
+     * Test getDescription when a goal class is initialised with start date after the end date.
+     */
     @Test
     void getDescription_startDateAfterEndDate_expectException() {
         assertThrows(HappyBitException.class,
