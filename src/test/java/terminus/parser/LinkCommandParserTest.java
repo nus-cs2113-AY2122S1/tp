@@ -97,13 +97,14 @@ public class LinkCommandParserTest {
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         assertThrows(InvalidArgumentException.class, () -> linkCommandParser.parseCommand("delete"));
         assertThrows(InvalidArgumentException.class, () -> linkCommandParser.parseCommand("delete abcd"));
+        assertThrows(InvalidArgumentException.class, () -> linkCommandParser.parseCommand("delete -1"));
     }
 
     @Test
     void parseCommand_resolveDeleteCommand_success()
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         assertTrue(linkCommandParser.parseCommand("delete 1") instanceof DeleteCommand);
-        assertTrue(linkCommandParser.parseCommand("delete -1") instanceof DeleteCommand);
+        assertTrue(linkCommandParser.parseCommand("delete 2") instanceof DeleteCommand);
     }
 
     @Test

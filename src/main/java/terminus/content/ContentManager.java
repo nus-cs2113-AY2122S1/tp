@@ -51,7 +51,7 @@ public class ContentManager {
     }
 
     public String deleteContent(int contentNumber) throws InvalidArgumentException {
-        if (!isValidNumber(contentNumber)) {
+        if (!isValidNumber(contentNumber) || contentNumber <= 0) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
         }
         String deletedContentName = contents.get(contentNumber - 1).getName();
