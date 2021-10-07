@@ -74,13 +74,15 @@ public class MainParser {
             String[] details = contactParser.parseContactDetails(userInput);
             //check if name is specified in input
             if (details[NAME_INDEX] == null) {
-                throw new MissingDetailException();
+                throw new MissingNameException();
             }
             return new AddContactCommand(details[DetailType.NAME.getIndex()], details[DetailType.GITHUB.getIndex()]);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (MissingArgException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (MissingNameException e) {
+            return new FailedCommand(FailedCommandType.MISSING_NAME);
         } catch (MissingDetailException e) {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         }

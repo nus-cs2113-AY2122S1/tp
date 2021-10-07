@@ -134,6 +134,12 @@ public class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void missingNameMessage() {
+        String message = "There are missing details.\n"
+                + "Please specify a name when creating a contact with the flag -n";
+        printDoubleLineMessage(message);
+    }
+
     public static void numOutOfRangeMessage(int listSize) {
         String message;
         if (listSize == 0) {

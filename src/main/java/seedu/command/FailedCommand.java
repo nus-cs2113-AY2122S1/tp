@@ -36,6 +36,9 @@ public class FailedCommand extends Command {
         case NUM_OUT_OF_BOUND:
             TextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
             break;
+        case MISSING_NAME:
+            TextUi.missingNameMessage();
+            break;
         default:
             return;
         }
