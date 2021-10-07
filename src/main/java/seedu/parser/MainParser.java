@@ -136,11 +136,4 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_NUM);
         }
     }
-
-    // Will create a function to parse details soon, hardcoding for V0.1 (7/10/21
-    // version)
-    // private String parseDetail(String contactParameters, String tag) {
-    //
-    // }
-
 }
