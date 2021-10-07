@@ -12,15 +12,15 @@ public class TextUi {
     public static final String LS = System.lineSeparator();
 
     private static final String DIVIDER = "========================================================";
-    private static final String LOGO = "\n" +
-            "╭━━╮╱╱╱╱╱╭╮╱╱╱╱╱╭╮╭━━━━╮╱╱╱╱╱╱╭╮\n" +
-            "┃╭╮┃╱╱╱╱╱┃┃╱╱╱╱╭╯╰┫╭╮╭╮┃╱╱╱╱╱╱┃┃\n" +
-            "┃╰╯╰┳╮╭┳━╯┣━━┳━┻╮╭┻╯┃┃┣┻┳━━┳━━┫┃╭┳━━┳━╮\n" +
-            "┃╭━╮┃┃┃┃╭╮┃╭╮┃┃━┫┃╱╱┃┃┃╭┫╭╮┃╭━┫╰╯┫┃━┫╭╯\n" +
-            "┃╰━╯┃╰╯┃╰╯┃╰╯┃┃━┫╰╮╱┃┃┃┃┃╭╮┃╰━┫╭╮┫┃━┫┃\n" +
-            "╰━━━┻━━┻━━┻━╮┣━━┻━╯╱╰╯╰╯╰╯╰┻━━┻╯╰┻━━┻╯\n" +
-            "╱╱╱╱╱╱╱╱╱╱╭━╯┃\n" +
-            "╱╱╱╱╱╱╱╱╱╱╰━━╯";
+    private static final String LOGO = "\n"
+            + "╭━━╮╱╱╱╱╱╭╮╱╱╱╱╱╭╮╭━━━━╮╱╱╱╱╱╱╭╮\n"
+            + "┃╭╮┃╱╱╱╱╱┃┃╱╱╱╱╭╯╰┫╭╮╭╮┃╱╱╱╱╱╱┃┃\n"
+            + "┃╰╯╰┳╮╭┳━╯┣━━┳━┻╮╭┻╯┃┃┣┻┳━━┳━━┫┃╭┳━━┳━╮\n"
+            + "┃╭━╮┃┃┃┃╭╮┃╭╮┃┃━┫┃╱╱┃┃┃╭┫╭╮┃╭━┫╰╯┫┃━┫╭╯\n"
+            + "┃╰━╯┃╰╯┃╰╯┃╰╯┃┃━┫╰╮╱┃┃┃┃┃╭╮┃╰━┫╭╮┫┃━┫┃\n"
+            + "╰━━━┻━━┻━━┻━╮┣━━┻━╯╱╰╯╰╯╰╯╰┻━━┻╯╰┻━━┻╯\n"
+            + "╱╱╱╱╱╱╱╱╱╱╭━╯┃\n"
+            + "╱╱╱╱╱╱╱╱╱╱╰━━╯";
 
     private static final String MESSAGE_EXIT = "Bye, see you again soon!";
 
@@ -61,7 +61,7 @@ public class TextUi {
      */
 
     /**
-     * Reads the text entered by the user
+     * Reads the text entered by the user.
      *
      * @return command (full input) entered by the user.
      */
