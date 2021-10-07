@@ -10,4 +10,10 @@ class IngredientTest {
         Ingredient i = new Ingredient("Salt");
         assertEquals("Salt", i.getDescription());
     }
+
+    @Test
+    public void getDescriptionTest_singleStringInput_noOutput() {
+        Ingredient i = new Ingredient("Water");
+        assertEquals("Water", i.getDescription());
+    }
 }
