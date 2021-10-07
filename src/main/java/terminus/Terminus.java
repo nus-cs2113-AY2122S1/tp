@@ -1,5 +1,7 @@
 package terminus;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.exception.InvalidArgumentException;
@@ -8,6 +10,7 @@ import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
+import terminus.storage.ModuleStorage;
 import terminus.ui.Ui;
 
 public class Terminus {
@@ -16,9 +19,12 @@ public class Terminus {
     private CommandParser parser;
     private String workspace;
 
+    private ModuleStorage moduleStorage;
     private NusModule nusModule;
     
     private static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "Format: %s";
+    private static final Path DATA_DIRECTORY = Path.of(System.getProperty("user.dir"), "data");
+    private static final String MAIN_JSON = "main.json";
 
     /**
      * Main entry-point for the terminus.Terminus application.
@@ -40,8 +46,19 @@ public class Terminus {
         this.ui = new Ui();
         this.parser = MainCommandParser.getInstance();
         this.workspace = "";
-        this.nusModule = new NusModule();
-        this.ui.printParserBanner(this.parser, this.nusModule);
+        this.moduleStorage = new ModuleStorage(DATA_DIRECTORY.resolve(MAIN_JSON));
+        try {
+            this.nusModule = moduleStorage.loadFile();
+            if (this.nusModule == null) {
+                this.nusModule = new NusModule();
+            }
+            this.ui.printParserBanner(this.parser, this.nusModule);
+        } catch (IOException e) {
+            ui.printSection(
+                "Unable to save/load file: " + DATA_DIRECTORY.resolve(MAIN_JSON),
+                "TermiNUS may still run, but your changes may not be saved."
+            );
+        }
     }
 
     private void runCommandsUntilExit() {
@@ -52,9 +69,15 @@ public class Terminus {
             try {
                 currentCommand = parser.parseCommand(input);
                 CommandResult result = currentCommand.execute(ui, nusModule);
-                if (result.isOk() && result.isExit()) {
+                if (result.isOk()) {
+                    this.moduleStorage.saveFile(nusModule);
+                }
+                
+                boolean isExitCommand = result.isOk() && result.isExit();
+                boolean isWorkspaceCommand = result.isOk() && result.getAdditionalData() != null;
+                if (isExitCommand) {
                     break;
-                } else if (result.isOk() && result.getAdditionalData() != null) {
+                } else if (isWorkspaceCommand) {
                     parser = result.getAdditionalData();
                     workspace = parser.getWorkspace();
                     ui.printParserBanner(parser, nusModule);
@@ -69,6 +92,11 @@ public class Terminus {
                 } else {
                     ui.printSection(e.getMessage());
                 }
+            } catch (IOException e) {
+                ui.printSection(
+                    "Unable to save/load file: " + DATA_DIRECTORY.resolve(MAIN_JSON),
+                    "TermiNUS may still run, but your changes may not be saved."
+                );
             }
         }
     }
