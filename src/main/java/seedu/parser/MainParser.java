@@ -14,6 +14,8 @@ import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 
+import java.util.Arrays;
+
 public class MainParser {
     private static final String ADD_CONTACT_COMD = "add";
     private static final String EDIT_CONTACT_COMD = "edit";
@@ -84,12 +86,18 @@ public class MainParser {
         try {
             // split into array of size 3 with command, index and details
             String[] details = userInput.split(" ", NUMBER_OF_EDIT_DETAILS);
+            System.out.println(Arrays.toString(details));
+            if (details[2].trim().equalsIgnoreCase("")) {
+                throw new MissingDetailException();
+            }
             int userIndex = Integer.parseInt(details[EDIT_USER_INDEX]);
             String[] userDetails = editContactParser.parseContactDetails(details[ISOLATE_USER_INPUT]);
             return new EditContactCommand(userDetails, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+        } catch (IndexOutOfBoundsException | MissingDetailException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
     }
