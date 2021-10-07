@@ -1,6 +1,7 @@
 package command.budget;
 
 import picocli.CommandLine.Command;
+
 import java.util.concurrent.Callable;
 
 @Command(name = "list", description = "Shows the budget for the current month.")

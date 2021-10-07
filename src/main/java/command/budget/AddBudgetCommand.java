@@ -1,8 +1,9 @@
 package command.budget;
 
-import picocli.CommandLine.Option;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.Option;
 import utils.Money;
+
 import java.util.concurrent.Callable;
 
 @Command(name = "add", mixinStandardHelpOptions = true, description = "Adds a budget plan for the current month.")
