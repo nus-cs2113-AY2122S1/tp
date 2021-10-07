@@ -7,16 +7,15 @@ public class Parser {
         this.rawCommandString = rawCommandString;
     }
 
-    public boolean isAddBudget () {
-        if(rawCommandString.split(" ")[0].equals("AddBudget")) {
+    public boolean isAddBudget() {
+        if (rawCommandString.split(" ")[0].equals("AddBudget")) {
             return true;
         }
-
         return false;
     }
 
     public boolean isBye() {
-        if(rawCommandString.split(" ")[0].equals("bye")) {
+        if (rawCommandString.split(" ")[0].equals("bye")) {
             return true;
         }
         return false;

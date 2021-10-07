@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.parser.Parser;
+
 import java.io.IOException;
 
 public class CommandHandler {

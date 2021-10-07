@@ -13,7 +13,7 @@ public class Duke {
         String userInputString;
         Scanner userInput = new Scanner(System.in);
 
-        boolean isExit  = false;
+        boolean isExit = false;
 
         while (!isExit) {
             userInputString = userInput.nextLine();
