@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class RemoveCommand {
 
-     //Temporary method
+    //Temporary method
     protected ArrayList<String> goals = new ArrayList<>();
 
     public void removeGoal(String goal) {
