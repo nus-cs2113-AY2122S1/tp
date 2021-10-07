@@ -6,13 +6,13 @@ public class Parser {
         String command = commandAndParams[0];
         String params = commandAndParams[1];
         switch (command) {
-            case "list":
-                return new ListCommand();
-            case "clear":
-                return new ClearCommand();
-            default:
-                System.out.println("INVALID");
-                break;
+        case "list":
+            return new ListCommand();
+        case "clear":
+            return new ClearCommand();
+        default:
+            System.out.println("INVALID");
+            break;
         }
         return null;
     }
