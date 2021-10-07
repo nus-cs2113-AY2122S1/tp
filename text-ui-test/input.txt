@@ -1,1 +1,5 @@
-James Gosling
+list_modules
+add_module c/CS2113T n/Software Engineering and Object-oriented Programming
+list_modules
+invalid_command
+exit
