@@ -1,7 +1,5 @@
 package seedu.duke.data.records;
 
-import java.util.ArrayList;
-
 public class Record {
     protected double amount;
     protected int month;

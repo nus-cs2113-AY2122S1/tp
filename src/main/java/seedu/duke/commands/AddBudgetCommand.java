@@ -4,12 +4,11 @@ import seedu.duke.data.BudgetList;
 
 //add EXPENDITURE_NAME COST DATE_TIME_OF_EXPENDITURE
 
-public class AddBudgetCommand extends Command{
+public class AddBudgetCommand extends Command {
+    public static final String COMMAND_WORD = "AddBudget";
     public String description;
     public double amount;
     public int month;
-
-    public static final String COMMAND_WORD = "AddBudget";
 
     public String getDescription(String rawCommand) {
         return rawCommand.split(" ")[1];

@@ -1,16 +1,13 @@
 package seedu.duke.data.records;
 
-import seedu.duke.data.records.Expenditure;
-
 import java.util.ArrayList;
 
-public class Budget extends Record{
+public class Budget extends Record {
+    public static int numberOfExpenditure = 0;
+    public static ArrayList<Expenditure> expenditureArrayList = new ArrayList<>();
     public String description;
     public double spendingLimit;
     public int month;
-    public static int numberOfExpenditure = 0;
-
-    public static ArrayList<Expenditure> expenditureArrayList = new ArrayList<>();
 
     public Budget(String description, double spendingLimit, int month) {
         super(spendingLimit, month);

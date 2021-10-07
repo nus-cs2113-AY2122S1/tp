@@ -6,7 +6,9 @@ import java.util.Scanner;
 
 public class TextUi {
 
-    /** A platform independent line separator. */
+    /**
+     * A platform independent line separator.
+     */
     public static final String LS = System.lineSeparator();
 
     private static final String DIVIDER = "========================================================";
@@ -35,18 +37,6 @@ public class TextUi {
         }
     }
 
-
-    /**
-     * Reads the text entered by the user
-     *
-     * @return command (full input) entered by the user.
-     */
-    public String getUserInput() {
-        String input = in.nextLine();
-        System.out.println(DIVIDER);
-        return input;
-    }
-
     public static void showWelcomeMessage() {
         System.out.println(DIVIDER
                 + LOGO
@@ -59,14 +49,25 @@ public class TextUi {
         System.out.println(MESSAGE_EXIT + LS + DIVIDER);
     }
 
+    public static void showInvalidCommandMessage() {
+        System.out.println("☹ Sorry, I did not understand your command.");
+        System.out.println(DIVIDER);
+    }
+
     /*
      * ===========================================
      *           ERROR MESSAGES
      * ===========================================
      */
 
-    public static void showInvalidCommandMessage() {
-        System.out.println("☹ Sorry, I did not understand your command.");
+    /**
+     * Reads the text entered by the user
+     *
+     * @return command (full input) entered by the user.
+     */
+    public String getUserInput() {
+        String input = in.nextLine();
         System.out.println(DIVIDER);
+        return input;
     }
 }

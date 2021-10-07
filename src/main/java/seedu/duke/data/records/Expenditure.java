@@ -1,6 +1,6 @@
 package seedu.duke.data.records;
 
-public class Expenditure extends Record{
+public class Expenditure extends Record {
     public static String description;
     public static double spending;
     public int month;

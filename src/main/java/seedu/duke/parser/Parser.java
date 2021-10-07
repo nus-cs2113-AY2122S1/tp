@@ -3,6 +3,11 @@ package seedu.duke.parser;
 import seedu.duke.commands.*;
 
 public class Parser {
+    private static String[] splitCommandWordAndArgs(String userInput) {
+        final String[] split = userInput.trim().split(" ", 2);
+        return split.length == 2 ? new String[]{split[0].toLowerCase(), split[1]} : new String[]{split[0].toLowerCase(), ""};
+    }
+
     /**
      * Parses user input into command for execution.
      *
@@ -35,10 +40,5 @@ public class Parser {
             break;
         }
         return command;
-    }
-
-    private static String[] splitCommandWordAndArgs(String userInput) {
-        final String[] split = userInput.trim().split(" ", 2);
-        return split.length == 2 ? new String[] { split[0].toLowerCase(), split[1] } : new String[] { split[0].toLowerCase() , "" };
     }
 }

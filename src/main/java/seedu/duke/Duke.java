@@ -2,7 +2,6 @@ package seedu.duke;
 
 import seedu.duke.commands.Command;
 import seedu.duke.data.BudgetList;
-import seedu.duke.parser.CommandHandler;
 import seedu.duke.parser.Parser;
 import seedu.duke.ui.TextUi;
 

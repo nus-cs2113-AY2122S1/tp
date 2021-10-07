@@ -18,7 +18,7 @@ public class BudgetList {
         numberOfRecords += 1;
     }
 
-    public int getSize(){
+    public int getSize() {
         return allRecords.size();
     }
 
