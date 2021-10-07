@@ -7,7 +7,9 @@ import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddContactParserTest {
     private AddContactParser addContactParser;
@@ -36,29 +38,25 @@ class AddContactParserTest {
     @Test
     void parseContactDetails_onlyAddInput_expectException() {
         inputUserInput = "   add  ";
-        assertThrows(MissingArgException.class,
-                () -> addContactParser.parseContactDetails(inputUserInput));
+        assertThrows(MissingArgException.class, () -> addContactParser.parseContactDetails(inputUserInput));
     }
 
     @Test
     void parseContactDetails_missingAllArguments_expectException() {
         inputUserInput = "   add  -n   -g  ";
-        assertThrows(MissingDetailException.class,
-                () -> addContactParser.parseContactDetails(inputUserInput));
+        assertThrows(MissingDetailException.class, () -> addContactParser.parseContactDetails(inputUserInput));
     }
 
     @Test
     void parseContactDetails_invalidFlags_expectException() {
         inputUserInput = "   add  -p pinterest  -f facebook ";
-        assertThrows(InvalidFlagException.class,
-                () -> addContactParser.parseContactDetails(inputUserInput));
+        assertThrows(InvalidFlagException.class, () -> addContactParser.parseContactDetails(inputUserInput));
     }
 
     @Test
     void parseContactDetails_missingDetails_expectException() {
         inputUserInput = "   add  -p  -f  ";
-        assertThrows(MissingDetailException.class,
-                () -> addContactParser.parseContactDetails(inputUserInput));
+        assertThrows(MissingDetailException.class, () -> addContactParser.parseContactDetails(inputUserInput));
     }
 
     @Test
@@ -66,15 +64,14 @@ class AddContactParserTest {
         // Upon user input being split, input detail may contain empty details
         inputDetail = "n  ";
         assertThrows(MissingDetailException.class,
-                () -> addContactParser.parseDetail(inputContactDetails, inputDetail));
+            () -> addContactParser.parseDetail(inputContactDetails, inputDetail));
     }
 
     @Test
     void parseDetail_invalidFlagUsed_expectException() {
         // As of V1.0, only GitHub (-g) and Name (-n) flags are used
         inputDetail = "f facebook";
-        assertThrows(InvalidFlagException.class,
-                () -> addContactParser.parseDetail(inputContactDetails, inputDetail));
+        assertThrows(InvalidFlagException.class, () -> addContactParser.parseDetail(inputContactDetails, inputDetail));
     }
 
     @Test
