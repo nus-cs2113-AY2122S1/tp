@@ -7,6 +7,14 @@ public class AddContactCommand extends Command {
     private final String name;
     private final String github;
 
+    public String getName() {
+        return name;
+    }
+
+    public String getGithub() {
+        return github;
+    }
+
     public AddContactCommand(String name, String github) {
         this.name = name;
         this.github = github;
