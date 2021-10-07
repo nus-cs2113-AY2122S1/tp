@@ -29,6 +29,24 @@ class DukeTest {
     }
 
     @Test
+    public void testSetCurrencyInfo() {
+        Trip trip = new Trip();
+        trip.setForeignCurrency("USD");
+        trip.setRepaymentCurrency("SGD");
+        trip.setExchangeRate(1.3);
+        assertEquals("USD", trip.getForeignCurrency());
+        assertEquals("SGD", trip.getRepaymentCurrency());
+        assertEquals(1.3, trip.getExchangeRate());
+    }
+
+    @Test
+    public void testSetDate() {
+        Trip trip = new Trip();
+        trip.setDateOfTrip("23-09-2021");
+        assertEquals("23 Sep 2021", trip.getDateOfTripString());
+    }
+
+    @Test
     public void sampleTest() {
         assertTrue(true);
     }

@@ -11,11 +11,15 @@ public class Trip {
     private LocalDate dateOfTrip;
     private ArrayList<Expense> listOfExpenses;
     private ArrayList<Person> listOfPersons;
-    private float budget;
-    private float exchangeRate;
+    private double budget;
+    private double exchangeRate;
     private String foreignCurrency;
     private String repaymentCurrency;
     private String location;
+
+    public Trip() {
+        //TODO: create non-empty constructor
+    }
 
     public void getWhoOwesMe() {
 
@@ -29,6 +33,11 @@ public class Trip {
         return dateOfTrip;
     }
 
+    public String getDateOfTripString() {
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        return dateOfTrip.format(pattern);
+    }
+
     public void setDateOfTrip(String dateOfTrip) {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
@@ -38,19 +47,19 @@ public class Trip {
         }
     }
 
-    public float getBudget() {
+    public double getBudget() {
         return this.budget;
     }
 
-    public void setBudget(float budget) {
+    public void setBudget(double budget) {
         this.budget = budget;
     }
 
-    public float getExchangeRate() {
+    public double getExchangeRate() {
         return exchangeRate;
     }
 
-    public void setExchangeRate(float exchangeRate) {
+    public void setExchangeRate(double exchangeRate) {
         this.exchangeRate = exchangeRate;
     }
 
