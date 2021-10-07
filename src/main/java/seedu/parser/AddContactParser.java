@@ -43,7 +43,7 @@ public class AddContactParser extends ContactParser {
     public void parseDetail(String[] contactDetails, String detail) throws InvalidFlagException,
             MissingDetailException {
         String[] destructuredDetails = detail.split(" ", NUMBER_OF_DETAILS);
-        if (destructuredDetails.length < 2) {
+        if (destructuredDetails.length < 2 || destructuredDetails[1].trim().equalsIgnoreCase("")) {
             throw new MissingDetailException();
         }
         int indexToStore;
