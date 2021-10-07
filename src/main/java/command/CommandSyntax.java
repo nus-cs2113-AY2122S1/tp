@@ -5,20 +5,53 @@ import parser.StockValidator;
 import ui.Ui;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * Contains all the valid command syntax accepted by the application. Also contains methods to validate if the
+ * parameter and its value is valid for a given command.
+ */
+
 public class CommandSyntax {
+    private String commandName;
+    private String commandSyntax;
+    public static final String COMMAND = "COMMAND";
+    public static final String COMMAND_SYNTAX = "COMMAND SYNTAX";
+    public static final String[] COLUMNS = {COMMAND, COMMAND_SYNTAX};
+    public static final int NO_OF_COLUMNS = 2;
+
     public static final String ADD_COMMAND = "ADD N/NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
             + "D/DESCRIPTION M/MAX_QUANTITY";
-    public static final String LIST_COMMAND = "LIST [I/STOCK_ID P/PRICE Q/QUANTITY E/EXPIRY_DATE "
-            + "D/DESCRIPTION M/MAX_QUANTITY]";
+    public static final String LIST_COMMAND = "LIST {I/STOCK_ID P/PRICE Q/QUANTITY E/EXPIRY_DATE "
+            + "D/DESCRIPTION M/MAX_QUANTITY SORT/COLUMN_NAME RSORT/COLUMN NAME}";
     public static final String UPDATE_COMMAND = "UPDATE I/STOCK_ID [U/UPDATED_NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
             + "D/DESCRIPTION M/MAX_QUANTITY]";
     public static final String DELETE_COMMAND = "DELETE I/STOCK_ID";
     public static final String HELP_COMMAND = "HELP";
     public static final String PURGE_COMMAND = "PURGE";
     public static final String EXIT_COMMAND = "EXIT";
+
+    public CommandSyntax(String commandName, String commandSyntax) {
+        this.commandName = commandName;
+        this.commandSyntax = commandSyntax;
+    }
+
+    public String getCommandName() {
+        return commandName;
+    }
+
+    public void setCommandName(String commandName) {
+        this.commandName = commandName;
+    }
+
+    public String getCommandSyntax() {
+        return commandSyntax;
+    }
+
+    public void setCommandSyntax(String commandSyntax) {
+        this.commandSyntax = commandSyntax;
+    }
+
 
     /**
      * Helps to check if the parameters required are provided by the user.
@@ -91,7 +124,7 @@ public class CommandSyntax {
      * @return A boolean value indicating whether parameter values are valid.
      */
     public static boolean containsInvalidParameterValues(Ui ui, HashMap<String, String> parameters,
-                                                        ArrayList<Medicine> medicines) {
+                                                         ArrayList<Medicine> medicines) {
         for (String parameter : parameters.keySet()) {
             boolean isValid = false;
             String parameterValue = parameters.get(parameter);
@@ -118,6 +151,10 @@ public class CommandSyntax {
                 break;
             case CommandParameters.STOCK_ID:
                 isValid = StockValidator.isValidStockId(ui, parameterValue, medicines);
+                break;
+            case CommandParameters.SORT:
+            case CommandParameters.REVERSED_SORT:
+                isValid = StockValidator.isValidColumn(ui, parameterValue);
                 break;
             default:
                 break;

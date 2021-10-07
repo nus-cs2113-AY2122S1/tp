@@ -1,5 +1,6 @@
 package ui;
 
+import command.CommandSyntax;
 import inventory.Stock;
 import inventory.Medicine;
 import parser.DateParser;
@@ -72,18 +73,18 @@ public class Ui {
      *
      * @param stock Medicine to be printed.
      */
-    public void printMedicine(Stock stock) {
+    public void printStock(Stock stock) {
         ArrayList<Medicine> medicines = new ArrayList<>();
         medicines.add(stock);
-        printMedicines(medicines);
+        printStocks(medicines);
     }
 
     /**
-     * Prints out all the medicines in the Arraylist in a table format.
+     * Prints out all the stocks in the Arraylist in a table format.
      *
-     * @param medicines Arraylist of the medicines to be printed.
+     * @param medicines Arraylist of the medicines.
      */
-    public void printMedicines(ArrayList<Medicine> medicines) {
+    public void printStocks(ArrayList<Medicine> medicines) {
         if (medicines.size() == 0) {
             print("There are no medicines found.");
             return;
@@ -174,7 +175,7 @@ public class Ui {
         StringBuilder rowBorder = new StringBuilder();
         for (int i = 0; i < noOfColumns; i++) {
             rowBorder.append("+");
-            int width = Math.max(0, columnWidths[i] + TABLE_PADDING);
+            int width = columnWidths[i] + TABLE_PADDING;
             rowBorder.append("-".repeat(width));
         }
         rowBorder.append("+");
@@ -192,4 +193,43 @@ public class Ui {
         return String.format("%-" + width + "s", String.format("%" + (s.length() + (width - s.length()) / 2) + "s", s));
     }
 
+    /**
+     * Prints out help table with the accepted commands and their respective syntaxes.
+     *
+     * @param commandSyntaxes Arraylist of the commandSyntax to be printed.
+     */
+    public void printHelpMessage(ArrayList<CommandSyntax> commandSyntaxes) {
+        int commandWidth = CommandSyntax.COMMAND.length();
+        int commandSyntaxWidth = CommandSyntax.COMMAND_SYNTAX.length();
+        for (CommandSyntax commandSyntax : commandSyntaxes) {
+            commandWidth = Math.max(commandWidth, commandSyntax.getCommandName().length());
+            commandSyntaxWidth = Math.max(commandSyntaxWidth, commandSyntax.getCommandSyntax().length());
+        }
+        int[] columnWidths = {commandWidth, commandSyntaxWidth};
+
+        String commandFormat = "| %1$-" + commandWidth + "s | ";
+        String commandSyntaxFormat = "%1$-" + commandSyntaxWidth + "s | ";
+        String[] formats = {commandFormat, commandSyntaxFormat};
+
+        StringBuilder headers = new StringBuilder();
+        for (int i = 0; i < CommandSyntax.NO_OF_COLUMNS; i++) {
+            headers.append(String.format(formats[i], centerString(columnWidths[i], CommandSyntax.COLUMNS[i])));
+        }
+        System.out.println("Welcome to the help page.");
+        System.out.println("Note that parameters in {curly braces} are optional.");
+        System.out.println("Parameters in [square braces] indicate that at least one of the parameter(s) must be "
+                + "provided.");
+        printHeaderBorder(CommandSyntax.NO_OF_COLUMNS, columnWidths);
+        System.out.println(headers);
+        printHeaderBorder(CommandSyntax.NO_OF_COLUMNS, columnWidths);
+
+        for (CommandSyntax commandSyntax : commandSyntaxes) {
+            String row = String.format(commandFormat, centerString(commandWidth, commandSyntax.getCommandName()))
+                    + String.format(commandSyntaxFormat, centerString(commandSyntaxWidth,
+                    commandSyntax.getCommandSyntax()));
+            System.out.println(row);
+            printRowBorder(CommandSyntax.NO_OF_COLUMNS, columnWidths);
+        }
+        System.out.println("For more information, refer to User Guide: https://ay2122s1-cs2113t-t10-1.github.io/tp/");
+    }
 }
