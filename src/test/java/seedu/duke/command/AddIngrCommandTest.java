@@ -1,13 +1,12 @@
 package seedu.duke.command;
 
+import org.junit.jupiter.api.Test;
 
-import org.junit.jupiter.api.*;
-import seedu.duke.*;
-
+import seedu.duke.IngredientList;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddIngrCommandTest {
 
