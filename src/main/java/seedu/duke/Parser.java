@@ -52,6 +52,10 @@ public class Parser {
         return arg.trim().toLowerCase().contains("find /t");
     }
 
+    public static boolean hasEditTrainingKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("edit /t");
+    }
+
 
     /**
      * Returns the required value for keyword which is the first word keyed in by user.
@@ -83,6 +87,8 @@ public class Parser {
             keyword = Keyword.FIND_MEMBER_KEYWORD;
         } else if (hasFindTrainingKeyword(query)) {
             keyword = Keyword.FIND_TRAINING_KEYWORD;
+        } else if (hasEditTrainingKeyword(query)) {
+            keyword = Keyword.EDIT_TRAINING_KEYWORD;
         } else {
             keyword = Keyword.NO_KEYWORD;
         }
@@ -96,7 +102,6 @@ public class Parser {
      * @return description of task.
      */
     public static TrainingSchedule getTrainingDescription(String query) {
-        System.out.println(query);
         String name = "";
         String venue = "";
         String time = "";
@@ -225,15 +230,15 @@ public class Parser {
         //Leave for later
     }
 
-    public static void deleteTraining(TrainingList trainings, String entry) {
+    public static void deleteTraining(TrainingList trainings, String query) {
         int trainingIndex = -1;
 
         String regex = "(\\/[a-z])+";
 
         Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(entry);
+        Matcher matcher = pattern.matcher(query);
 
-        String[] words = entry.trim().split(regex);
+        String[] words = query.trim().split(regex);
 
         int wordIndex = 1;
         while (matcher.find()) {
@@ -246,6 +251,57 @@ public class Parser {
         if (trainingIndex != -1) {
             TrainingSchedule toDelete = trainings.deleteTrainingSchedule(trainingIndex);
             System.out.println("You have deleted: \n" + toDelete.toString());
+        }
+
+    }
+
+    public static void editTraining(TrainingList trainings, String query) {
+        int index = -1;
+        String name = "";
+        String venue = "";
+        String time = "";
+
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            switch (matcher.group()){
+            case "/t":
+                index = Integer.parseInt(words[wordIndex].trim());
+                break;
+            case "/n":
+                name = words[wordIndex].trim();
+                break;
+            case "/a":
+                time = words[wordIndex].trim();
+                break;
+            case "/v":
+                venue = words[wordIndex].trim();
+                break;
+            }
+
+            wordIndex++;
+        }
+
+        if (index != -1) {
+            int listIndex = index - 1;
+            TrainingSchedule trainingToChange = trainings.getTrainingList().get(listIndex);
+            if (!name.equals("")) {
+                trainingToChange.setTrainingName(name);
+            }
+            if (!time.equals("")) {
+                trainingToChange.setTrainingTime(time);
+            }
+            if (!venue.equals("")) {
+                trainingToChange.setTrainingVenue(venue);
+            }
+
+            trainings.getTrainingList().set(listIndex,trainingToChange);
         }
 
     }
