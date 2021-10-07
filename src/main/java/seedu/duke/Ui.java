@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 public class Ui {
 
+
     private static final String CLEAR_MESSAGE = "All clients have been deleted";
+    private static final String CUT_MESSAGE = "Client has been deleted:";
+    
 
     private static Scanner in = new Scanner(System.in);
 
@@ -21,8 +24,8 @@ public class Ui {
                 + "   █    ███   ███  █   █ █     █████ █    █ █   ██ █   ██ █████ █   █\n";
         String greet = "Hello, Welcome to TourPlanner!\n"
                 + "What can I do for you?";
-        System.out.println(logo);
-        System.out.println(greet);
+        show(logo);
+        show(greet);
         showLine();
     }
 
@@ -37,6 +40,11 @@ public class Ui {
     public void showClear() {
         show(CLEAR_MESSAGE);
         showLine();
+
+    public void showCut(Client client) {
+        show(CUT_MESSAGE + "\n" + client);
+        showLine();
     }
+  
 }
 
