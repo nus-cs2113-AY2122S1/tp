@@ -7,7 +7,6 @@ public class ExitCommand extends Command {
 
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        ui.printBye();
     }
 
     @Override
