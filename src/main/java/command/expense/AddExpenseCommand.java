@@ -3,6 +3,7 @@ package command.expense;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 import picocli.CommandLine.Command;
+import service.ExpenseManager;
 import utils.Money;
 
 import java.util.concurrent.Callable;
@@ -21,10 +22,10 @@ public class AddExpenseCommand implements Callable<Integer> {
     public Integer call() throws Exception {
 
         if (names != null) {
-            String budgetName = String.join(" ", names);
-            Double budgetValue = Money.truncate(value);
+            String expenseName = String.join(" ", names);
+            Double expenseValue = Money.truncate(value);
 
-            // do something with the name and value
+            ExpenseManager.addExpense(expenseName, expenseValue);
         }
         return 0;
     }
