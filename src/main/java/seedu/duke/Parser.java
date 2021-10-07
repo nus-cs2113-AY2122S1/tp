@@ -28,7 +28,7 @@ public class Parser {
         return split.length == 2 ? split : new String[]{split[0], ""};
     }
 
-    private static AddCommand executeAddCommand(String params){
+    private static AddCommand executeAddCommand(String params) {
         SortedMap<Integer, String> valueIndex = extractValueIndexes(params);
         String[] values = extractValues(valueIndex, params);
         Client client = new Client(values);
