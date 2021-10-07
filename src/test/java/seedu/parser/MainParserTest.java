@@ -36,11 +36,11 @@ public class MainParserTest {
         return (T) result;
     }
     @Test
-    public void parseDeleteCommand() {
-        final int testIndex = 1;
-        final String testUserInput = "rm " + testIndex;
-        final DeleteContactCommand testResultCommand = assertParseCommand(testUserInput, DeleteContactCommand.class);
-        assertEquals(testIndex,testResultCommand.getDeletedIndex());
+    public void parseDeleteCommand_validIndex_expectDeleteContactCommand() {
+        testIndex = 1;
+        testUserInput = "rm " + testIndex;
+        final DeleteContactCommand testResultCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
+        assertEquals(testIndex, testResultCommand.getDeletedIndex());
     }
 
 
