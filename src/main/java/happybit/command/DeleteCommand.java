@@ -1,8 +1,6 @@
 package happybit.command;
 
 import happybit.exception.HappyBitException;
-
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 public class DeleteCommand {
