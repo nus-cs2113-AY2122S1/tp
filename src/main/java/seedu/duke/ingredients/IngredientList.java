@@ -1,5 +1,7 @@
 package seedu.duke.ingredients;
 
+import seedu.duke.exceptions.DukeException;
+
 import java.util.ArrayList;
 
 /**
@@ -84,6 +86,31 @@ public class IngredientList {
         //TODO: add code to update the ingredient at the particular index by the amount specified
 
         return ingredientList.get(index - 1).toString();
+    }
+
+    /**
+     * Gets the size of the current inventory, not including the amount of individual ingredient
+     * @return the size of current inventory
+     */
+    public int getInventoryStock() {
+        return ingredientList.size();
+    }
+
+    public String getIngredientInfo(int ingredientNumber) throws DukeException {
+        try {
+            return ingredientList.get(ingredientNumber - 1).toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Ingredient number have not existed!");
+        }
+    }
+
+    public Ingredient remove(int ingredientNumber) throws DukeException {
+        try {
+            Ingredient removedIngredient = ingredientList.remove(ingredientNumber - 1);
+            return removedIngredient;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Ingredient number have not existed!");
+        }
     }
 
 
