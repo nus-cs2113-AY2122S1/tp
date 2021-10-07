@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import seedu.command.Command;
 import seedu.command.DeleteContactCommand;
+import seedu.command.ViewCommand;
 import seedu.parser.MainParser;
 
 
@@ -25,6 +26,14 @@ public class MainParserTest {
         final String testUserInput = "rm " + testIndex;
         final DeleteContactCommand testResultCommand = assertParseCommand(testUserInput, DeleteContactCommand.class);
         assertEquals(testIndex,testResultCommand.getDeletedIndex());
+    }
+
+    @Test
+    public void parseViewCommand() {
+        final int testIndex = 1;
+        final String testUserInput = "view " + testIndex;
+        final ViewCommand testResultCommand = assertParseCommand(testUserInput, ViewCommand.class);
+        assertEquals(testIndex,testResultCommand.getIndex());
     }
 
 
