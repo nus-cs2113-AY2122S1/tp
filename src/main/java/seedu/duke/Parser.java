@@ -1,8 +1,15 @@
 package seedu.duke;
-import java.util.*;
-import java.util.regex.*;
-import seedu.duke.member.*;
-import seedu.duke.training.*;
+
+import java.security.Key;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import seedu.duke.member.Member;
+import seedu.duke.member.MemberList;
+import seedu.duke.training.TrainingSchedule;
+import seedu.duke.training.TrainingList;
 
 public class Parser {
 
@@ -121,21 +128,54 @@ public class Parser {
         return new TrainingSchedule(name, venue, time);
     }
 
-    public static String getMemberDescription(String query) {
-        //Settled by Teck Hwee. Overwrite in Merge conflict.
-        return "";
+
+    public static Member getMemberDetails(String query) {
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        String name = "";
+        String studentNumber = "";
+        char gender = ' ';
+        int phoneNumber = 0;
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            switch (matcher.group()){
+            case "/m":
+                name = words[wordIndex].trim();
+                break;
+            case "/s":
+                studentNumber = words[wordIndex].trim();
+                break;
+            case "/g":
+                gender = words[wordIndex].trim().charAt(0);
+                break;
+            case "/p":
+                phoneNumber = Integer.parseInt(words[wordIndex].trim());
+                break;
+            }
+            wordIndex++;
+        }
+
+        return new Member(name, studentNumber,gender,phoneNumber);
     }
 
 
     /**
-     * Function creates a new Todo task to be input in tasks.
+     * Function creates a new member to be input in MemberList Class.
      *
-     * @param members MemberList of Members
+     * @param members MemberList which contains list of members
      * @param query user input
      */
     public static void makeMemberEntry(MemberList members, String query) {
-        //Settled by Teck Hwee. Overwrite in Merge conflict.
-     }
+        Member member = getMemberDetails(query);
+        members.addMember(member);
+        System.out.println("Added a Member: " + member);
+    }
 
      /* *
      * Creates a TrainingSchedule to put into TrainingList
