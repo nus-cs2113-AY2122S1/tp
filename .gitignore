@@ -15,3 +15,13 @@ bin/
 
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
+
+.classpath
+.project
+.settings/
+text-ui-test/storage.in
+text-ui-test/storage/
+text-ui-test/.gradle/
+text-ui-test/ACTUAL.TXT
+
+

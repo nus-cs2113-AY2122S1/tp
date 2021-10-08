@@ -1,6 +1,11 @@
 package medbot.person;
 
+
+import static medbot.Ui.DATA_SEPARATOR_UNESCAPED;
+
+
 public abstract class Person {
+
     protected String icNumber = "";
     protected String name = "";
     protected String phoneNumber = "";
@@ -59,5 +64,29 @@ public abstract class Person {
         phoneNumber = null;
         emailAddress = null;
         residentialAddress = null;
+    }
+
+    /**
+     * Text to be written to storage/data.txt of a person
+     *
+     * @return storageString of a person
+     */
+    public String getStorageString() {
+
+        return setAsStorageParameterOrNull(icNumber) + DATA_SEPARATOR_UNESCAPED +
+                setAsStorageParameterOrNull(name) + DATA_SEPARATOR_UNESCAPED +
+                setAsStorageParameterOrNull(phoneNumber) + DATA_SEPARATOR_UNESCAPED +
+                setAsStorageParameterOrNull(emailAddress) + DATA_SEPARATOR_UNESCAPED +
+                setAsStorageParameterOrNull(residentialAddress);
+    }
+
+    /**
+     * Return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
+     *
+     * @param parameter an attribute of a person
+     * @return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
+     */
+    protected String setAsStorageParameterOrNull(String parameter) {
+        return (parameter == null || parameter.isBlank()) ? "X" : parameter;
     }
 }

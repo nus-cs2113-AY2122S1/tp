@@ -225,7 +225,7 @@ public class Parser {
      * @param attributeString String containing an attribute specifier and the corresponding personal information
      * @throws MedBotException if the attributeString contains missing/invalid information
      */
-    private static void updatePersonalInformation(Person person, String attributeString) throws MedBotException {
+    public static void updatePersonalInformation(Person person, String attributeString) throws MedBotException {
         if (attributeString.startsWith(PARAMETER_NAME)) {
             String name = parseName(attributeString.substring(2));
             person.setName(name);
