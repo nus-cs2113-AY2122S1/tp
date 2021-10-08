@@ -191,7 +191,7 @@ public class Parser {
     public static void makeTrainingEntry(TrainingList trainings, String query) {
         TrainingSchedule training = getTrainingDescription(query);
         trainings.addTrainingSchedule(training);
-        System.out.println("Added a Training entry: " + training);
+        System.out.println("Added a Training entry:\n" + training);
     }
 
     /**
