@@ -6,7 +6,7 @@ import java.util.Objects;
 public class GraphList {
     public static ArrayList<Vertex> vertexArray = new ArrayList<>();
     public static ArrayList<String> nameArray = new ArrayList<>();
-    private static double[][] edgeMatrix = new double[10][10];
+    public static double[][] edgeMatrix = new double[10][10];
 
     public static void addVertex(Vertex v) {
         vertexArray.add(v);

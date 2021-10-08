@@ -4,6 +4,7 @@ package seedu.traveller;
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.mapper.*;
+import seedu.traveller.database.DatabaseInput;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -25,20 +26,20 @@ public class Traveller {
                 Dijkstra dijkstra = new Dijkstra();
                 int i = 0;
 
-                Vertex v1 = new Vertex("SGP", ++i);
-                Vertex v2 = new Vertex("MLY", ++i);
-                Vertex v3 = new Vertex("HKD", ++i);
-                Vertex v4 = new Vertex("LAX", ++i);
-
-                GraphList.addVertex(v1);
-                GraphList.addVertex(v2);
-                GraphList.addVertex(v3);
-                GraphList.addVertex(v4);
-
-                GraphList.createEdge(1.0, v1, v2);
-                GraphList.createEdge(2.0, v1, v3);
-                GraphList.createEdge(3.0, v2, v4);
-                GraphList.createEdge(4.0, v3, v4);
+//                Vertex v1 = new Vertex("SGP", ++i);
+//                Vertex v2 = new Vertex("MLY", ++i);
+//                Vertex v3 = new Vertex("HKD", ++i);
+//                Vertex v4 = new Vertex("LAX", ++i);
+//
+//                GraphList.addVertex(v1);
+//                GraphList.addVertex(v2);
+//                GraphList.addVertex(v3);
+//                GraphList.addVertex(v4);
+//
+//                GraphList.createEdge(1.0, v1, v2);
+//                GraphList.createEdge(2.0, v1, v3);
+//                GraphList.createEdge(3.0, v2, v4);
+//                GraphList.createEdge(4.0, v3, v4);
                 String fullCommand = ui.readCommand();
                 ui.printLine();
                 Command c = ParserTrip.parse(fullCommand);
@@ -56,20 +57,20 @@ public class Traveller {
         Dijkstra dijkstra = new Dijkstra();
         int i = 0;
 
-        Vertex v1 = new Vertex("SGP", ++i);
-        Vertex v2 = new Vertex("MLY", ++i);
-        Vertex v3 = new Vertex("HKD", ++i);
-        Vertex v4 = new Vertex("LAX", ++i);
-
-        GraphList.addVertex(v1);
-        GraphList.addVertex(v2);
-        GraphList.addVertex(v3);
-        GraphList.addVertex(v4);
-
-        GraphList.createEdge(1.0, v1, v2);
-        GraphList.createEdge(2.0, v1, v3);
-        GraphList.createEdge(3.0, v2, v4);
-        GraphList.createEdge(4.0, v3, v4);
+//        Vertex v1 = new Vertex("SGP", ++i);
+//        Vertex v2 = new Vertex("MLY", ++i);
+//        Vertex v3 = new Vertex("HKD", ++i);
+//        Vertex v4 = new Vertex("LAX", ++i);
+//
+//        GraphList.addVertex(v1);
+//        GraphList.addVertex(v2);
+//        GraphList.addVertex(v3);
+//        GraphList.addVertex(v4);
+//
+//        GraphList.createEdge(1.0, v1, v2);
+//        GraphList.createEdge(2.0, v1, v3);
+//        GraphList.createEdge(3.0, v2, v4);
+//        GraphList.createEdge(4.0, v3, v4);
 
         //dijkstra.run(v1, v4); //expected output A-B-D, dist=4.0
        // GraphList.modifyEdge(11.0, v1, v2);
@@ -131,10 +132,29 @@ public class Traveller {
 
 
     public static void main(String[] args) {
-
+        DatabaseInput.readFile();
         //new Traveller().setupRoutes();
+        listEverything();
         new Traveller().run();
+    }
 
+    /*
+    This function lists all the vertexes(cities) and edges(hours)
+     */
+    public static void listEverything() {
+        Vertex from;
+        Vertex to;
+        for (int a = 0; a < 5; a++) {
+            System.out.println(GraphList.vertexArray.get(a));
+        }
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                from = GraphList.vertexArray.get(i);
+                to = GraphList.vertexArray.get(j);
+                System.out.println("From : " + from + " To : " + to
+                        + " is " + GraphList.edgeMatrix[from.key()][to.key()]);
+            }
+        }
     }
 }
 
