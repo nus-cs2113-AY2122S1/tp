@@ -2,7 +2,7 @@ package seedu.duke.items;
 
 import java.time.LocalDateTime;
 
-public class Item {
+public abstract class Item {
     public static String getItemType() {
         return null;
     }
