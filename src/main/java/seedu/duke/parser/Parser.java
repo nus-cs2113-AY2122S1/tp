@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.AddBudgetCommand;
+import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.AddExpenditureCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteBudgetCommand;
@@ -11,8 +12,8 @@ import seedu.duke.commands.ListRecordsCommand;
 
 import java.time.LocalDate;
 
-
 public class Parser {
+
     private static String[] splitCommandWordAndArgs(String userInput) {
         final String[] split = userInput.trim().split(" ", 2);
         if (split.length == 2) {
@@ -21,9 +22,9 @@ public class Parser {
         return new String[]{split[0].toLowerCase(), ""};
     }
 
-    public static String[] splitExpenditureParams(String expenditureParams) {
-        return expenditureParams.split(" ", 3);
-    }
+    //    public static String[] splitExpenditureParams(String expenditureParams) {
+    //        return expenditureParams.split(" ", 3);
+    //    }
 
     /**
      * Parses user input into command for execution.
@@ -37,11 +38,8 @@ public class Parser {
         String commandParams = commandTypeAndParams[1].trim();
         Command command;
         switch (commandType) {
-        case AddBudgetCommand.COMMAND_WORD:
-            command = new AddBudgetCommand();
-            break;
-        case AddExpenditureCommand.COMMAND_WORD:
-            command = decodeAddBudgetCommand(commandParams);
+        case AddCommand.COMMAND_WORD:
+            command = prepareAddCommand(commandParams);
             break;
         case DeleteExpenditureCommand.COMMAND_WORD:
             command = new DeleteExpenditureCommand(commandParams);
@@ -62,13 +60,51 @@ public class Parser {
         return command;
     }
 
-    private Command decodeAddBudgetCommand(String commandParams) {
-        String[] splitExpenditureParams = Parser.splitExpenditureParams(commandParams);
-        String expenditureDescription = splitExpenditureParams[0].trim();
-        double expenditureAmount = Double.parseDouble(splitExpenditureParams[1].trim());
-        LocalDate expenditureDate = LocalDate.parse(splitExpenditureParams[2].trim());
-        return new AddExpenditureCommand(expenditureDescription, expenditureAmount, expenditureDate);
+    /**
+     * Splits params into the different add commands.
+     *
+     * @param commandParams raw String commandParams
+     * @return AddBudgetCommand or AddExpenditureCommand depending on the addType
+     */
+    private Command prepareAddCommand(String commandParams) {
+        String addType = commandParams.substring(0, 2);
+        switch (addType) {
+        case ("-b"):
+            return prepareAddBudgetCommand(commandParams);
+        case ("-e"):
+            return prepareAddExpenditureCommand(commandParams);
+        default:
+            return new InvalidCommand();
+        }
     }
 
+    /**
+     * Splits the commandParams into amount and date.
+     *
+     * @param commandParams String with raw input
+     * @return an AddBudgetCommand with proper parameters
+     */
+    private Command prepareAddBudgetCommand(String commandParams) {
+        String[] split = commandParams.substring(2).trim().split("-a/|-m/", 3);
+        double amount = Double.parseDouble(split[1].trim());
+        int date = Integer.parseInt(split[2].trim());
+
+        return new AddBudgetCommand(amount, date);
+    }
+
+    /**
+     * Splits the commandParams into description, amount, date.
+     *
+     * @param commandParams raw String input
+     * @return an AddExpenditureCommand with proper parameters
+     */
+    private Command prepareAddExpenditureCommand(String commandParams) {
+        String[] split = commandParams.trim().split("-e/|-a/|-d/", 4);
+        String description = split[1].trim();
+        double amount = Double.parseDouble(split[2].trim());
+        LocalDate date = LocalDate.parse(split[3].trim());
+
+        return new AddExpenditureCommand(description, amount, date);
+    }
 
 }

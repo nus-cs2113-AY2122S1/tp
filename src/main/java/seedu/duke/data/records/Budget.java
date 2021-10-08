@@ -4,11 +4,12 @@ import java.time.LocalDate;
 
 public class Budget extends Record {
     public String description;
-    public double spendingLimit;
+    public int month;
 
-    public Budget(String description, double spendingLimit, int month) {
-        super(spendingLimit, month);
-        this.description = description;
+
+    public Budget(double amount, int month) {
+        super(amount, month);
+        //this.description = description;
     }
 
     @Override
@@ -18,7 +19,11 @@ public class Budget extends Record {
 
     @Override
     public double getAmount() {
-        return spendingLimit;
+        return amount;
+    }
+
+    public void printBudgetDetails() {
+        System.out.println(this.description + " $" + this.amount + " Month: " + this.month);
     }
 
     @Override
@@ -32,7 +37,7 @@ public class Budget extends Record {
     }
 
     public String toString() {
-        return (this.description + " $" + this.spendingLimit + " Month: " + this.month);
+        return (this.description + " $" + this.amount + " Month: " + this.month);
     }
 
     @Override

@@ -10,10 +10,10 @@ public class Duke {
 
     private TextUi textUi;
     private Parser parser;
-    private RecordList budgetList;
+    private final RecordList recordList;
 
     public Duke() {
-        budgetList = new RecordList();
+        recordList = new RecordList();
         textUi = new TextUi();
         parser = new Parser();
     }
@@ -29,7 +29,7 @@ public class Duke {
         while (!isExit) {
             String userInput = textUi.getUserInput();
             Command command = parser.parseCommand(userInput);
-            command.setBudgetList(budgetList);
+            command.setRecordList(recordList);
             command.execute();
             isExit = command.isExit();
         }

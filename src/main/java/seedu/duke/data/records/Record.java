@@ -1,6 +1,5 @@
 package seedu.duke.data.records;
 
-
 import java.time.LocalDate;
 
 public abstract class Record {

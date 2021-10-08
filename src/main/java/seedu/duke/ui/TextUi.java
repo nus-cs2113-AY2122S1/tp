@@ -1,7 +1,6 @@
 package seedu.duke.ui;
 
 
-import seedu.duke.data.RecordList;
 import seedu.duke.data.records.Expenditure;
 
 import java.util.Scanner;
@@ -31,12 +30,12 @@ public class TextUi {
         in = new Scanner(System.in);
     }
 
-    public static void showRecordsListView(RecordList budgetList) {
-        int budgetListLength = RecordList.numberOfRecords;
-        for (int i = 0; i < budgetListLength; i += 1) {
-            System.out.println(budgetList.getRecord(i));
-        }
-    }
+    //    public static void showRecordsListView(RecordList budgetList) {
+    //        int budgetListLength = RecordList.numberOfRecords;
+    //        for (int i = 0; i < budgetListLength; i += 1) {
+    //            System.out.println(budgetList.getRecord(i));
+    //        }
+    //    }
 
     public static void showWelcomeMessage() {
         System.out.println(DIVIDER + LS

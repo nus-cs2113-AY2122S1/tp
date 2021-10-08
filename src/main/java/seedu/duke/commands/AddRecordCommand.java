@@ -1,5 +1,8 @@
 package seedu.duke.commands;
 
+/**
+ * Not used right now.
+ */
 public class AddRecordCommand extends Command {
 
     public static final String COMMAND_WORD = "add";

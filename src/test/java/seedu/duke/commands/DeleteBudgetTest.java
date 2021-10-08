@@ -10,9 +10,9 @@ public class DeleteBudgetTest {
     @Test
     void deleteBudget_budgetListSize_1() {
         RecordList currentBudgetList = new RecordList();
-        currentBudgetList.addBudget("TestBudget1", 08.00, 01);
-        currentBudgetList.addBudget("TestBudget2", 10.00, 02);
-        currentBudgetList.deleteBudget(1);
+        currentBudgetList.addBudget(08.00, 01);
+        currentBudgetList.addBudget(10.00, 02);
+        currentBudgetList.deleteBudget(1, 1);
         assertEquals(1, currentBudgetList.getSize());
     }
 }

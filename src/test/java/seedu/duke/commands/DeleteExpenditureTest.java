@@ -14,7 +14,7 @@ public class DeleteExpenditureTest {
         RecordList currentExpenditureList = new RecordList();
         currentExpenditureList.addExpenditure("TestExpenditure1", 08.00, LocalDate.of(2021, 10, 8));
         currentExpenditureList.addExpenditure("TestExpenditure2", 10.00, LocalDate.of(2021, 10, 8));
-        currentExpenditureList.deleteExpenditure(1);
+        currentExpenditureList.deleteExpenditure(10, 1);
         assertEquals(1, currentExpenditureList.getSize());
     }
 }

@@ -2,7 +2,6 @@ package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.data.RecordList;
-import seedu.duke.data.records.Expenditure;
 
 import java.time.LocalDate;
 
