@@ -23,6 +23,6 @@ public class CommandTest {
         FinancialTracker testTracker = new FinancialTracker();
         testTracker.addEntry(new Expense("Bubble Tea", 4.80));
         testTracker.removeEntry(0);
-        assertTrue(testTracker.getEntry(0) == null);
+        assertTrue(testTracker.getSize() == 0);
     }
 }

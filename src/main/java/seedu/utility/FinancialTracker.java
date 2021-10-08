@@ -12,7 +12,7 @@ public class FinancialTracker {
         this.financialEntries = new ArrayList<>();
     }
 
-    public int size() {
+    public int getSize() {
         return financialEntries.size();
     }
 
