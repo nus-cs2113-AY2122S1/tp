@@ -9,7 +9,7 @@ public class Duke {
     private static boolean isProgramRunning = true;
 
     /**
-     * Reads and returns user input with leading and trailing whitespaces removed
+     * Reads and returns user input with leading and trailing whitespaces removed.
      *
      * @param in {@link Scanner} to read user input
      * @return user input with leading and trailing whitespaces removed

@@ -49,8 +49,8 @@ public class Trip {
         try {
             this.dateOfTrip = LocalDate.parse(dateOfTrip, pattern);
         } catch (DateTimeParseException e) {
-            System.out.print("Please check that your date-time format is dd-MM-yyyy. " +
-                    "Please enter the date again: ");
+            System.out.print("Please check that your date-time format is dd-MM-yyyy. "
+                    + "Please enter the date again: ");
             Scanner scanner = new Scanner(System.in);
             setDateOfTrip(scanner.nextLine().strip());
         }

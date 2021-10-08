@@ -24,15 +24,13 @@ public class Parser {
                         + tripToRemove.getDateOfTripString() + " has been successfully removed");
             } catch (NumberFormatException e) {
                 System.out.println("Please check that you have entered your trip number correctly.");
-//                e.printStackTrace();
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
-//                e.printStackTrace();
             }
             break;
         default:
-            System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter -help " +
-                    "to learn more.");
+            System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter -help "
+                    + "to learn more.");
         }
     }
 
