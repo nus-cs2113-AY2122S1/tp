@@ -1,6 +1,7 @@
 package seedu.utility;
 
 import seedu.entry.Entry;
+import seedu.entry.Expense;
 
 import java.util.ArrayList;
 
@@ -19,8 +20,18 @@ public class FinancialTracker {
         return financialEntries.isEmpty();
     }
 
-    public void addEntry(Entry entry) {
-        //TODO
+    public Entry addEntry(Entry entry) {
+        financialEntries.add(entry);
+        return entry;
+    }
+
+    public void removeEntry(int itemIndex) {
+        financialEntries.remove(itemIndex);
+    }
+
+    // Can implement later when needed
+    public int adjustItemIndex(int itemIndex) {
+        return itemIndex - 1;
     }
 
     public ArrayList<Entry> listExpense() {

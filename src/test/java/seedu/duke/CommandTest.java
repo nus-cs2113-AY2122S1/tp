@@ -1,24 +1,27 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
-import seedu.commands.Command;
+import seedu.commands.AddExpenseCommand;
 import seedu.commands.DeleteExpenseCommand;
+import seedu.entry.Expense;
 import seedu.utility.FinancialTracker;
 
-import java.util.jar.JarFile;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CommandTest {
-    @Test
-    void testDeleteExpenseCommand() {
-        int deleteIndex = 2;
-        new DeleteExpenseCommand(deleteIndex);
-        //assertEquals(financialEntry.getEntry(deleteIndex) == null);
 
+    @Test
+    public void testAddExpenseCommand() {
+        FinancialTracker testTracker = new FinancialTracker();
+        Expense expense = new Expense("Bubble Tea", 4.80);
+        new AddExpenseCommand(expense);
+        assertNotNull(testTracker.getEntry(0));
     }
 
-    void testGetEntry() {
-
+    @Test
+    public void testDeleteExpenseCommand() {
+        FinancialTracker testTracker = new FinancialTracker();
+        new DeleteExpenseCommand(1);
+        assertNull(testTracker.getEntry(0));
     }
 }
