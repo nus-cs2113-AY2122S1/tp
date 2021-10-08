@@ -42,6 +42,13 @@ public class StockValidatorTest {
     }
 
     @Test
+    public void checkValidPrice_validPrice_expectTrue() {
+        String inputPrice = "20";
+        boolean isValid = StockValidator.isValidPrice(ui, inputPrice);
+        assertTrue(isValid);
+    }
+
+    @Test
     public void checkValidExpiry_validDate_expectTrue() {
         String inputDate = "08-10-2021";
         boolean isValid = StockValidator.isValidExpiry(ui, inputDate);
