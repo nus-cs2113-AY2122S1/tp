@@ -21,7 +21,6 @@ public class Task extends Item {
         return "task";
     }
 
-    @Override
     public String getDateValue() {
         return deadline;
     }
