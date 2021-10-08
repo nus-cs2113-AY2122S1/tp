@@ -1,11 +1,10 @@
 package seedu.duke.data.records;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Budget extends Record {
     public String description;
     public double spendingLimit;
-    public int month;
 
     public Budget(String description, double spendingLimit, int month) {
         super(spendingLimit, month);
@@ -27,8 +26,13 @@ public class Budget extends Record {
         return month;
     }
 
-    public void printBudgetDetails() {
-        System.out.println(this.description + " $" + this.spendingLimit + " Month: " + this.month);
+    @Override
+    public LocalDate getDate() {
+        return null;
+    }
+
+    public String toString() {
+        return (this.description + " $" + this.spendingLimit + " Month: " + this.month);
     }
 
     @Override

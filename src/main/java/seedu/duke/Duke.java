@@ -35,3 +35,8 @@ public class Duke {
         }
     }
 }
+
+/*
+budgetList
+1. Budget Jan
+ */

@@ -1,12 +1,15 @@
 package seedu.duke.data.records;
 
+import java.time.LocalDate;
+
 public class Expenditure extends Record {
     public static String description;
     public static double spending;
-    public static int month;
+    public static LocalDate date;
 
-    public Expenditure(String description, double spending, int month) {
-        super(spending, month);
+    public Expenditure(String description, double spending, LocalDate date) {
+        super(spending, date.getMonthValue());
+        this.date = date;
         this.description = description;
     }
 
@@ -20,13 +23,18 @@ public class Expenditure extends Record {
         return spending;
     }
 
-    @Override
-    public int getMonth() {
-        return month;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void printExpenditure() {
-        System.out.println(this.description + " $" + this.spending + "Month: " + this.month);
+    @Override
+    public int getMonth() {
+        return date.getMonthValue();
+    }
+
+
+    public String toString() {
+        return (this.description + " $" + this.spending + "Month: " + this.date);
     }
 
     @Override

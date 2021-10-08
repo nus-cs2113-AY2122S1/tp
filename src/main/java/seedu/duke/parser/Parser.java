@@ -9,6 +9,8 @@ import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 
+import java.time.LocalDate;
+
 
 public class Parser {
     private static String[] splitCommandWordAndArgs(String userInput) {
@@ -17,6 +19,10 @@ public class Parser {
             return new String[]{split[0].toLowerCase(), split[1]};
         }
         return new String[]{split[0].toLowerCase(), ""};
+    }
+
+    public static String[] splitExpenditureParams(String expenditureParams) {
+        return expenditureParams.split(" ", 3);
     }
 
     /**
@@ -35,7 +41,7 @@ public class Parser {
             command = new AddBudgetCommand();
             break;
         case AddExpenditureCommand.COMMAND_WORD:
-            command = new AddExpenditureCommand();
+            command = decodeAddBudgetCommand(commandParams);
             break;
         case DeleteExpenditureCommand.COMMAND_WORD:
             command = new DeleteExpenditureCommand(commandParams);
@@ -56,8 +62,12 @@ public class Parser {
         return command;
     }
 
-    public static String[] splitExpenditureParams(String expenditureParams) {
-        return expenditureParams.split(" ", 3);
+    private Command decodeAddBudgetCommand(String commandParams) {
+        String[] splitExpenditureParams = Parser.splitExpenditureParams(commandParams);
+        String expenditureDescription = splitExpenditureParams[0].trim();
+        double expenditureAmount = Double.parseDouble(splitExpenditureParams[1].trim());
+        LocalDate expenditureDate = LocalDate.parse(splitExpenditureParams[2].trim());
+        return new AddExpenditureCommand(expenditureDescription, expenditureAmount, expenditureDate);
     }
 
 
