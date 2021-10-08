@@ -1,4 +1,4 @@
-package seedu.TypingGame.data;
+package seedu.typists.data;
 
 
 /**

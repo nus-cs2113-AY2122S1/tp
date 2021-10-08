@@ -1,4 +1,4 @@
-package seedu.TypingGame.commands;
+package seedu.typists.commands;
 
 /*
  * commands to initiate a new game.

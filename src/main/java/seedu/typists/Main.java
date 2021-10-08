@@ -1,4 +1,4 @@
-package seedu.TypingGame;
+package seedu.typists;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package seedu.TypingGame.exception;
+package seedu.typists.exception;
 
 public class InvalidCommandException {
 }

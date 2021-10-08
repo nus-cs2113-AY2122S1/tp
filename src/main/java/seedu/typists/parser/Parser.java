@@ -1,4 +1,4 @@
-package seedu.TypingGame.parser;
+package seedu.typists.parser;
 
 
 /**

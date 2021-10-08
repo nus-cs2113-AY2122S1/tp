@@ -1,4 +1,4 @@
-package seedu.TypingGame.ui;
+package seedu.typists.ui;
 
 
 /**

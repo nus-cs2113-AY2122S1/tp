@@ -1,4 +1,4 @@
-package seedu.TypingGame.common;
+package seedu.typists.common;
 
 import java.util.Collection;
 import java.util.HashSet;
