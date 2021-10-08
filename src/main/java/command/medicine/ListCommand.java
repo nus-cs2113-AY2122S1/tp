@@ -30,7 +30,7 @@ public class ListCommand extends Command {
 
         if (parameters.size() != 0) { // Check for valid parameters only when they are provided
             boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
-                    optionalParameters, CommandSyntax.LIST_COMMAND);
+                    optionalParameters, CommandSyntax.LIST_COMMAND, "list");
             if (isInvalidParameter) {
                 return;
             }

@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
         String[] optionalParameters = {};
 
         if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
-            CommandSyntax.DELETE_COMMAND)) {
+            CommandSyntax.DELETE_COMMAND, "delete")) {
             return;
         }
 

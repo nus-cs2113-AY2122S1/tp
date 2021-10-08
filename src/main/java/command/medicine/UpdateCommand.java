@@ -29,7 +29,7 @@ public class UpdateCommand extends Command {
             CommandParameters.MAX_QUANTITY};
 
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
-                optionalParameters, CommandSyntax.UPDATE_COMMAND);
+                optionalParameters, CommandSyntax.UPDATE_COMMAND, "update");
         if (isInvalidParameter) {
             return;
         }
