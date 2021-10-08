@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.io.IOException;
+
 import seedu.duke.command.Command;
 import seedu.duke.exception.DukeException;
 import seedu.duke.lesson.LessonList;
@@ -15,12 +17,18 @@ public class Duke {
     private Storage storage;
 
     public Duke() {
-        // TODO: Implement loading from a save file
         ui = new Ui();
+        storage = new Storage();
+        // try {
+        // TODO: Load task and lesson from saved data
         taskList = new TaskList();
         lessonList = new LessonList();
-        storage = new Storage();
-        storage.createNewData(ui);
+        // } catch (DukeException | IOException e) {
+        //     ui.printMessage(e.toString());
+        //     taskList = new TaskList();
+        //     lessonList = new LessonList();
+        //     storage.createNewData(ui);
+        // }
     }
 
     public void startProgram() {
