@@ -86,8 +86,8 @@ public class AddCommand extends Command {
             throw new DukeException("Please add a title for your task using 'n/<title>'. ");
         }
         if (!response.contains("d/")) {
-            throw new DukeException("Please add a deadline for your task using 'd/<deadline>' in the " +
-                    "format YYYY-MM-DD. ");
+            throw new DukeException("Please add a deadline for your task using 'd/<deadline>' in the "
+                    + "format YYYY-MM-DD. ");
         }
 
         itemTitle = retrieveItemTitle(response);
@@ -106,8 +106,8 @@ public class AddCommand extends Command {
             throw new DukeException("Please add a title for your event using 'n/<title>'. ");
         }
         if (!response.contains("d/")) {
-            throw new DukeException("Please add a date for your event using 'd/<date>' in the " +
-                    "format YYYY-MM-DD. ");
+            throw new DukeException("Please add a date for your event using 'd/<date>' in the "
+                    + "format YYYY-MM-DD. ");
         }
         if (!response.contains("v/")) {
             throw new DukeException("Please add a venue for your event using 'v/<venue>'. ");
@@ -153,14 +153,14 @@ public class AddCommand extends Command {
             if (itemType.equalsIgnoreCase("-t")) {
                 Task task = new Task(itemTitle, itemDescription, itemDate);
                 addToTaskList(task);
-                return new CommandResult("Task added: " + itemTitle + System.lineSeparator() +
-                        "Total number of tasks = " + Duke.taskList.size());
+                return new CommandResult("Task added: " + itemTitle + System.lineSeparator()
+                        + "Total number of tasks = " + Duke.taskList.size());
             }
             if (itemType.equalsIgnoreCase("-e")) {
                 Event event = new Event(itemTitle, itemDescription, itemDate, eventVenue, eventBudget);
                 addToEventList(event);
-                return new CommandResult("Event added: " + itemTitle + System.lineSeparator() +
-                        "Total number of events = " + Duke.eventList.size());
+                return new CommandResult("Event added: " + itemTitle + System.lineSeparator()
+                        + "Total number of events = " + Duke.eventList.size());
             }
         }
         return new CommandResult("Item unable to be added! ");
