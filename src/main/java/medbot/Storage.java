@@ -26,6 +26,12 @@ public class Storage {
             "1. Enter 'exit' to exit program to correct data file " + DATA_PATH + "\n" +
             "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
 
+    /**
+     * Constructor
+     * which creates a storage/data.txt file if it doesn't exist
+     *
+     * @throws MedBotException if storage/data.txt cannot be created and does not exist
+     */
     public Storage() throws MedBotException {
         try {
             DATA_FILE.getParentFile().mkdirs();
@@ -37,6 +43,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads in storage/data.txt file, parses each line and adds the data into the program
+     * prints out the line number of storage/data.txt that is invalid
+     *
+     * @param patientList instance of PatientList
+     * @throws FileNotFoundException if storage/data.txt cannot be found
+     */
     public void loadStorage(PatientList patientList) throws FileNotFoundException {
         boolean hasInvalidStorageLine = false;
         int lineNumber = 1;
@@ -64,6 +77,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Create a patient instance from information in a storageLine
+     *
+     * @param storageLine a line from storage/data.txt
+     * @return a patient instance with the parameters specified by storageLine
+     * @throws MedBotException if prefixPlusParameter is invalid
+     */
     private static Patient parseStorageLine(String storageLine) throws MedBotException {
         if (storageLine.isBlank()) {
             return null;
@@ -93,10 +113,20 @@ public class Storage {
         return patient;
     }
 
+    /**
+     * @param parameter a parameter in a line of storage/data.txt
+     * @return true if "X", which means the parameter is null, false otherwise
+     */
     private static boolean isStorageParameterNull(String parameter) {
         return parameter.equals("X");
     }
 
+    /**
+     * write patientList storageString to storage/data.txt
+     *
+     * @param patientList instance of PatientList
+     * @throws MedBotException if unable to write to storage/data.txt
+     */
     public void saveData(PatientList patientList) throws MedBotException {
         try {
             FileWriter fw = new FileWriter(DATA_PATH);

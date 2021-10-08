@@ -23,6 +23,11 @@ public class Patient extends Person {
     }
 
 
+    /**
+     * Text to be written to storage/data.txt of a patient
+     *
+     * @return storageString of a patient
+     */
     @Override
     public String getStorageString() {
         return patientId + DATA_SEPARATOR_UNESCAPED +

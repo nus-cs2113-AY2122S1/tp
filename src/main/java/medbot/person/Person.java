@@ -66,6 +66,11 @@ public abstract class Person {
         residentialAddress = null;
     }
 
+    /**
+     * Text to be written to storage/data.txt of a person
+     *
+     * @return storageString of a person
+     */
     public String getStorageString() {
 
         return setAsStorageParameterOrNull(icNumber) + DATA_SEPARATOR_UNESCAPED +
@@ -75,6 +80,12 @@ public abstract class Person {
                 setAsStorageParameterOrNull(residentialAddress);
     }
 
+    /**
+     * Return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
+     *
+     * @param parameter an attribute of a person
+     * @return "X" if parameter == null || parameter.isBlank(), otherwise return parameter itself
+     */
     protected String setAsStorageParameterOrNull(String parameter) {
         return (parameter == null || parameter.isBlank()) ? "X" : parameter;
     }
