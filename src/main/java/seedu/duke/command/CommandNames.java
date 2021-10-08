@@ -6,6 +6,8 @@ public enum CommandNames {
     ADD_CONSTITUENT("add constituent", new AddDishIngrCommand()),
     ADD_DISH("add dish", new AddDishCommand()),
     ADD_INGR("add ingr", new AddIngrCommand()),
+    DELETE_DISH("del dish", new DeleteDishCommand()),
+    DELETE_INGR("del ingr", new DeleteIngrCommand()),
     LIST("list", new ListCommand()),
     TEST("test", new TestCommand());
 
