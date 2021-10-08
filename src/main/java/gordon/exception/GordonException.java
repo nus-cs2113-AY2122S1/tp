@@ -6,6 +6,7 @@ public class GordonException extends Exception {
 
     public static final String INGREDIENTS_FORMAT = "Please use the word 'ingredients' before adding ingredients.";
     public static final String STEPS_FORMAT = "Please use the word 'steps' to kickstart the adding of steps.";
+    public static final String DUPLICATE_RECIPE_NAME = "No duplicate recipe name allowed";
 
     public static final String COMMAND_INVALID = "Command given cannot be recognized.";
 

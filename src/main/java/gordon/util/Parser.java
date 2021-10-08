@@ -47,6 +47,7 @@ public class Parser {
                     }
                 } else if (parseCommand(line).equalsIgnoreCase("check")) {
                     nameRecipe = parseName(line);
+                    cookbook.checkRecipe(nameRecipe);
                 } else if (parseCommand(line).equalsIgnoreCase("list")) {
                     System.out.print(cookbook);
                 } else if (parseCommand(line).equalsIgnoreCase("exit")) {

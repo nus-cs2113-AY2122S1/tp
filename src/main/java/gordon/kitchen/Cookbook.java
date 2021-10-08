@@ -26,6 +26,11 @@ public class Cookbook {
 
     public void addRecipe(Recipe r) throws GordonException {
         try {
+            for (Recipe recipe: recipes) {
+                if (recipe.getName().equals(r.getName())) {
+                    throw new GordonException(GordonException.DUPLICATE_RECIPE_NAME);
+                }
+            }
             r.setId(recipes.size() + 1);
             recipes.add(r);
         } catch (IndexOutOfBoundsException e) {
@@ -54,13 +59,22 @@ public class Cookbook {
     }
 
     public void checkRecipe(String name) throws GordonException {
+        System.out.println("Finding recipes called " + name + ".....");
+        boolean isFound = false;
         for (Recipe recipe : recipes) {
-            if (recipe.getName().equalsIgnoreCase(name)) {
-                System.out.println(recipe);
-                return;
+            // (?i) enables case insensitivity
+            // .* uses all characters except line break
+            if (recipe.getName().matches("(?i).*" + name + ".*")) {
+                isFound = true;
+                System.out.println("--------------------");
+                System.out.print(recipe);
+                System.out.println("--------------------");
             }
         }
-        throw new GordonException(GordonException.NO_RESULT_FOUND);
+
+        if (!isFound) {
+            throw new GordonException(GordonException.NO_RESULT_FOUND);
+        }
     }
 
     public void sortByID() {
