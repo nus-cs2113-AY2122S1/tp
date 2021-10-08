@@ -18,6 +18,8 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.exception.DukeException;
 import seedu.duke.ui.Message;
 
+import static seedu.duke.parser.DayOfTheWeek.is;
+
 public class Parser {
     public static CommandType getCommandType(String userResponse) {
         String[] params = userResponse.split(" ", 2);
@@ -76,9 +78,14 @@ public class Parser {
         if (params.length < 2 || params.length > 3) {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
-
+        if ((params.length > 2) && (userResponse.indexOf(" -d ") > userResponse.indexOf(" -i "))) {
+            throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
+        }
         String title = params[0].strip();
-        String dayOfTheWeek = params[1].strip();    // TODO: Validate correctness with enum
+        String dayOfTheWeek = params[1].strip();
+        if (!is(dayOfTheWeek)) {
+            throw new DukeException(dayOfTheWeek + Message.ERROR_INVALID_DAY_OF_WEEK);
+        }
 
         switch (params.length) {
         case 2:
@@ -96,12 +103,24 @@ public class Parser {
         if (params.length != 4) {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
-
+        if (!hasCorrectLessonFlagSequence(userResponse)) {
+            throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
+        }
         String title = params[0].strip();
-        String dayOfTheWeek = params[1].strip();    // TODO: Validate correctness with enum
+        String dayOfTheWeek = params[1].strip();
+        if (!is(dayOfTheWeek)) {
+            throw new DukeException(dayOfTheWeek + Message.ERROR_INVALID_DAY_OF_WEEK);
+        }
         String startTIme = params[2].strip();       // TODO: Validate correctness with time library
         String endTime = params[3].strip();         // TODO: Validate correctness with time library
         return new AddLessonCommand(title, dayOfTheWeek, startTIme, endTime);
+    }
+
+    private static boolean hasCorrectLessonFlagSequence(String userResponse) {
+        int posOfDFlag = userResponse.indexOf(" -d ");
+        int posOfSFlag = userResponse.indexOf(" -s ");
+        int posOfEFlag = userResponse.indexOf(" -e ");
+        return (posOfDFlag < posOfSFlag) && (posOfDFlag < posOfEFlag) && (posOfSFlag < posOfEFlag);
     }
 
     private static Command parseDeleteCommand(String userResponse) throws DukeException {
@@ -236,7 +255,7 @@ public class Parser {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
             return new ListTaskCommand();
-        } else if (DayOfTheWeek.is(period)) {
+        } else if (is(period)) {
             return new ListTaskCommand(period);
         }
 
@@ -247,7 +266,7 @@ public class Parser {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
             return new ListLessonCommand();
-        } else if (DayOfTheWeek.is(period)) {
+        } else if (is(period)) {
             return new ListLessonCommand(period);
         }
 
@@ -258,7 +277,7 @@ public class Parser {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
             return new ListAllCommand();
-        } else if (DayOfTheWeek.is(period)) {
+        } else if (is(period)) {
             return new ListAllCommand(period);
         }
 

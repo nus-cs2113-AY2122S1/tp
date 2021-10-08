@@ -45,4 +45,10 @@ public final class Message {
 
     public static final String DATA_RETRIEVED_SUCCESSFULLY =
             "Previous data has been retrieved successfully.";
+
+    public static final String ERROR_INVALID_DAY_OF_WEEK =
+            " is not a day of the week!";
+
+    public static final String ERROR_WRONG_FLAG_SEQUENCE =
+            "Incorrect sequence of flag usage.";
 }
