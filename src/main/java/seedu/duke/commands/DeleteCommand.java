@@ -52,7 +52,7 @@ public class DeleteCommand extends Command {
 
     public static int getTaskIndex(String command) {
         // command will contain either a "-t" or "-e"
-        int taskIndexPosition = command.trim().indexOf("-") + 2 ;
+        int taskIndexPosition = command.trim().indexOf("-") + 2;
         return Integer.parseInt(command.trim().substring(taskIndexPosition)) - 1;
     }
 }
