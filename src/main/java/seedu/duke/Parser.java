@@ -1,11 +1,12 @@
 package seedu.duke;
 
+import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 
 public class Parser {
 
     /**
-     * Parses the user-entered command and additional information/flags
+     * Parses the user-entered command and additional information/flags.
      * 
      * @param userInput the {@link String} containing the user input
      * @param listOfTrips the list of trips that the user has added to the program
@@ -75,6 +76,9 @@ public class Parser {
             case "person":
                 //TODO: add edit persons branch
                 break;
+            default:
+                System.out.println(splitCommandAndData[0] + "was not recognised. "
+                        + "Please try again after this process is complete");
             }
 
         }
