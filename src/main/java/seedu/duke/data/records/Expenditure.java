@@ -6,9 +6,9 @@ public class Expenditure extends Record {
     public int month;
 
     public Expenditure(String description, double spending, int month) {
-        super(spending, month);
+        super(spending);
         this.description = description;
-
+        this.month = month;
     }
 
     public void printExpenditure() {

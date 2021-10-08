@@ -2,11 +2,11 @@ package seedu.duke.data.records;
 
 public class Record {
     protected double amount;
-    protected int month;
+    //protected int month;
 
-    public Record(double amount, int month) {
+    public Record(double amount) {
         this.amount = amount;
-        this.month = month;
+//      this.month = month;
     }
 
     public double getAmount() {

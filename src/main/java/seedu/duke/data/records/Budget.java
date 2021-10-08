@@ -6,12 +6,12 @@ public class Budget extends Record {
     public static int numberOfExpenditure = 0;
     public static ArrayList<Expenditure> expenditureArrayList = new ArrayList<>();
     public String description;
-    public double spendingLimit;
     public int month;
 
-    public Budget(String description, double spendingLimit, int month) {
-        super(spendingLimit, month);
-        this.description = description;
+    public Budget(double amount, int month) {
+        super(amount);
+        this.month = month;
+//      this.description = description;
     }
 
     public void addExpenditure(String description, double amount, int month) {
@@ -24,6 +24,6 @@ public class Budget extends Record {
     }
 
     public void printBudgetDetails() {
-        System.out.println(this.description + " $" + this.spendingLimit + " Month: " + this.month);
+        System.out.println(this.description + " $" + this.amount + " Month: " + this.month);
     }
 }
