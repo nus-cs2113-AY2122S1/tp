@@ -133,7 +133,7 @@ public class Traveller {
     public static void main(String[] args) {
         DatabaseInput.readFile();
         //new Traveller().setupRoutes();
-        listEverything();
+        //listEverything();
         new Traveller().run();
     }
 
