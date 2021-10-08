@@ -35,5 +35,11 @@ public class StockValidatorTest {
         Boolean isValid = StockValidator.isValidStockId(ui,"1", tempMedicines);
         assertTrue(isValid);
     }
-    
+
+    @Test
+    public void checkValidQuantity_validQuantity_expectTrue() {
+        String inputString = "0";
+        Boolean isValid = StockValidator.isValidQuantity(ui, inputString);
+        assertTrue(isValid);
+    }
 }
