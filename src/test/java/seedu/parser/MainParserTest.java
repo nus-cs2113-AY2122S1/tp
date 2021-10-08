@@ -10,8 +10,6 @@ import seedu.command.FailedCommand;
 import seedu.command.ViewCommand;
 import seedu.contact.ContactList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
