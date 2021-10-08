@@ -1,5 +1,6 @@
 package expiryeliminator.data;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
@@ -11,7 +12,7 @@ public class IngredientList {
     private final HashMap<String, Ingredient> ingredients;
 
     /**
-     * Constructs IngredientList object with no tasks.
+     * Constructs IngredientList object with no ingredients.
      */
     public IngredientList() {
         ingredients = new HashMap<>();
@@ -28,6 +29,10 @@ public class IngredientList {
             throw new DuplicateDataException();
         }
         ingredients.put(ingredient.getName(), ingredient);
+    }
+
+    public Collection<Ingredient> getIngredients() {
+        return ingredients.values();
     }
 
     /**

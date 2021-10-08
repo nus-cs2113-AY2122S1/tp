@@ -2,6 +2,7 @@ package expiryeliminator.commands;
 
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 
 /**
@@ -18,7 +19,7 @@ public class ListCommand extends Command{
 
 
     @Override
-    public String execute(IngredientList ingredientList) {
+    public String execute(IngredientList ingredientList, RecipeList recipes) {
         //return ingredientList.printWholeList();
         return String.format(MESSAGE_SHOW_WHOLE_LIST, ingredientList.printWholeList(), ingredientList.size());
     }

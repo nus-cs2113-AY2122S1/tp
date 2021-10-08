@@ -2,6 +2,7 @@ package expiryeliminator.commands;
 
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 
 /**
@@ -23,7 +24,7 @@ public class AddIngredientCommand extends Command {
     }
 
     @Override
-    public String execute(IngredientList ingredients) {
+    public String execute(IngredientList ingredients, RecipeList recipes) {
         try {
             ingredients.add(ingredient);
         } catch (DuplicateDataException e) {

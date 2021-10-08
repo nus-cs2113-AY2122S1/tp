@@ -2,6 +2,7 @@ package expiryeliminator.commands;
 
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.RecipeList;
 
 /**
  * Finds a specific ingredient, together with its associated quantity and expiry date.
@@ -19,7 +20,7 @@ public class ViewIngredientCommand extends Command{
     }
 
     @Override
-    public String execute(IngredientList ingredientList) {
+    public String execute(IngredientList ingredientList, RecipeList recipes) {
         Ingredient ingredient = ingredientList.findIngredient(ingredientDescription);
         return String.format(MESSAGE_SHOW_Ingredient, ingredient);
     }
