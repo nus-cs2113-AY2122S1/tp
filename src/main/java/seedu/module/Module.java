@@ -133,6 +133,11 @@ public class Module {
                 return false;
             }
         }
+        if (searchFlags.getHasSemesterFlag()) {
+            if (!hasSemester(searchFlags.getSemester())) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -152,6 +157,15 @@ public class Module {
             }
             return true;
         }
+    }
+
+    private boolean hasSemester(int semester) {
+        for (Semester s : semesterData) {
+            if (s.getSemester() == semester) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

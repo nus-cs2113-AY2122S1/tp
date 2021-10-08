@@ -13,6 +13,8 @@ public class SearchFlags {
     private boolean hasExam;
     private boolean hasDepartmentFlag;
     private String department;
+    private boolean hasSemesterFlag;
+    private int semester;
 
     public SearchFlags() {
         this.hasQuickFlag = false;
@@ -111,4 +113,19 @@ public class SearchFlags {
         this.department = department;
     }
 
+    public boolean getHasSemesterFlag() {
+        return hasSemesterFlag;
+    }
+
+    public void setHasSemesterFlag(boolean hasSemesterFlag) {
+        this.hasSemesterFlag = hasSemesterFlag;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
 }

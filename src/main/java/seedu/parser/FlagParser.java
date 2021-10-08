@@ -12,6 +12,7 @@ public class FlagParser {
     private static final String FACULTY_FLAG = "f";
     private static final String EXAM_FLAG = "e";
     private static final String DEPARTMENT_FLAG = "d";
+    private static final String SEMESTER_FLAG = "s";
     private static final int MC_LENGTH = 2;
 
     public static SearchFlags parseSearchFlags(String[] flags) {
@@ -84,6 +85,10 @@ public class FlagParser {
         case EXAM_FLAG:
             searchFlags.setHasExamFlag(true);
             searchFlags.setHasExam(Boolean.parseBoolean(flagTerm));
+            break;
+        case SEMESTER_FLAG:
+            searchFlags.setHasSemesterFlag(true);
+            searchFlags.setSemester(tryParseInt(flagTerm));
             break;
         default:
             break;
