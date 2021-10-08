@@ -16,7 +16,7 @@ public class Student {
     }
 
     /**
-     * Marks the student as present for a particular lesson
+     * Marks the student as present for a particular lesson.
      *
      * @param lessonIndex The lesson index the student is present for
      */
@@ -25,7 +25,7 @@ public class Student {
     }
 
     /**
-     * Returns the attendance status of the student for a particular lesson
+     * Returns the attendance status of the student for a particular lesson.
      *
      * @param lessonIndex The lesson index
      * @return The attendance status of the student for the lesson
@@ -35,7 +35,7 @@ public class Student {
     }
 
     /**
-     * Sets the name of the student
+     * Sets the name of the student.
      *
      * @param name The name of the student
      */
@@ -44,7 +44,7 @@ public class Student {
     }
 
     /**
-     * Returns the name of the student
+     * Returns the name of the student.
      *
      * @return The name of the student
      */
@@ -53,7 +53,7 @@ public class Student {
     }
 
     /**
-     * Sets the student ID of the student
+     * Sets the student ID of the student.
      *
      * @param studentID the student ID of the student
      */
@@ -62,7 +62,7 @@ public class Student {
     }
 
     /**
-     * returns the student ID of the student
+     * returns the student ID of the student.
      *
      * @return the student ID of the student
      */
@@ -71,7 +71,7 @@ public class Student {
     }
 
     /**
-     * Overrides default toString method with the custom print message
+     * Overrides default toString method with the custom print message.
      *
      * @return the custom print message
      */
