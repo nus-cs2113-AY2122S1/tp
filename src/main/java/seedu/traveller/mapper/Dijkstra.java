@@ -9,7 +9,7 @@ import static seedu.traveller.mapper.GraphList.vertexArray;
 
 
 public class Dijkstra {
-    private static double[][] adjMatrix= new double[10][10];
+    private static double[][] adjMatrix = new double[10][10];
     //double[][] adjMatrix ;
 
     public static void computeSource(Vertex src) {
