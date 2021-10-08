@@ -1,7 +1,7 @@
 package taa.student;
 
 /**
- * Represents students
+ * Represents students.
  */
 public class Student {
     private static final int NUM_LESSONS = 13;

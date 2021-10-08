@@ -30,6 +30,7 @@ public class Parser {
 
         case Command.COMMAND_ADD_STUDENT:
             command = new AddStudentCommand(argument);
+            break;
 
         default:
             throw new CustomException(MESSAGE_UNKNOWN_COMMAND);

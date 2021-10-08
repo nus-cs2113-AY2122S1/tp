@@ -6,7 +6,7 @@ import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
 
-public class AddStudentCommand extends Command{
+public class AddStudentCommand extends Command {
 
     private static final String MESSAGE_STUDENT_ADDED_FORMAT = "Student %s, %s has been added to %s";
     private static final String[] ADD_STUDENT_ARGUMENT_KEYS = {"c","s","i"};
