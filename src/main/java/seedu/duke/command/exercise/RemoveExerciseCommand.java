@@ -32,7 +32,7 @@ public class RemoveExerciseCommand extends Command {
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {
-            ui.showToUser(MESSAGE_EXERCISE_NOT_FOUND);
+            throw new GetJackDException(ERROR_MESSAGE_EXERCISE_NOT_FOUND);
         }
     }
 }
