@@ -1,9 +1,30 @@
 add -n ng andre -g ng-andre
-add -n bory -g
-add -g lezongmun -n lezong
+view 999aa
+add -n ashraf -g ashraf
+add -n mayank -g mayankp123
+rm 9909
+add -n bory -g marcus
+add       -n   andre   -g ng-andre
 list
-view 0
+view 1
+add -n bory -g
+rm 1223
+add -g lezongmun -n lezong
+add -g      github
+list
+view 3
 rm 0
-rm a
+   add  -p  -f
+view 2
+n             andre
+f facebook
+n
+rm anc
+  add  -p pinterest  -f facebook
+         add   1231267azldasd -n   lezongmun    -g  lezong
 rm 1
+list
+view abc
+view 0
+   add  -n   -g
 exit
