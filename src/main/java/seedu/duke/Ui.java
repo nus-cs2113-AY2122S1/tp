@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.attendance.Attendance;
+import seedu.duke.attendance.AttendanceList;
 import seedu.duke.member.*;
 import seedu.duke.training.*;
 
@@ -17,6 +19,14 @@ public class Ui {
         int display = 1;
         for (TrainingSchedule trainingEntries : trainings.getTrainingList()) {
             System.out.println("[" + display + "] " + trainingEntries.toString());
+            display++;
+        }
+    }
+
+    public static void printList(AttendanceList attendanceList) {
+        int display = 1;
+        for (Attendance attendance : attendanceList.getAttendanceList()) {
+            System.out.println("[" + display + "] " + attendance.toString());
             display++;
         }
     }
