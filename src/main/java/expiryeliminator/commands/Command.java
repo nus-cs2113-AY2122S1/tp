@@ -5,6 +5,7 @@ package expiryeliminator.commands;
 // with minor modifications
 
 import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.RecipeList;
 
 /**
  * Represents an executable command.
@@ -14,9 +15,10 @@ public abstract class Command {
      * Executes the appropriate actions.
      *
      * @param ingredientList Ingredient list.
+     * @param recipes Recipe List.
      * @return Feedback about what was executed.
      */
-    public abstract String execute(IngredientList ingredientList);
+    public abstract String execute(IngredientList ingredientList,RecipeList recipes);
 
     /**
      * Indicates whether the command is an exit command.

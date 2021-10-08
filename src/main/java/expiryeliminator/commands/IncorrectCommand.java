@@ -6,6 +6,7 @@ package expiryeliminator.commands;
 // with minor modifications
 
 import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.RecipeList;
 
 /**
  * Represents an incorrect command. Upon execution, produces some feedback to the user.
@@ -19,7 +20,7 @@ public class IncorrectCommand extends Command {
     }
 
     @Override
-    public String execute(IngredientList ingredientList) {
+    public String execute(IngredientList ingredientList, RecipeList recipes) {
         return feedbackToUser;
     }
 
