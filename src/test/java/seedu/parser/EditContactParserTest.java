@@ -16,7 +16,7 @@ class EditContactParserTest {
     private EditContactParser editContactParser = new EditContactParser();
 
     @Test
-    void testParseContactDetails() throws MissingDetailException, MissingArgException, InvalidFlagException {
+    void parseContactDetails() throws MissingDetailException, MissingArgException, InvalidFlagException {
         String[] expectedResult = {null, "github"};
         String testInput = "edit 1 -g github";
         String[] actualResult = editContactParser.parseContactDetails(testInput);
@@ -24,7 +24,7 @@ class EditContactParserTest {
     }
 
     @Test
-    void testgetIndex() throws MissingArgException {
+    void getIndex() throws MissingArgException {
         int expectedResult = 3;
         String testInput = "edit 3 ";
         int actualResult = editContactParser.getIndex(testInput);
