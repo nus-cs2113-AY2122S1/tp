@@ -7,7 +7,7 @@ import seedu.entry.Expense;
 import seedu.utility.FinancialTracker;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CommandTest {
 
@@ -23,6 +23,6 @@ public class CommandTest {
         FinancialTracker testTracker = new FinancialTracker();
         testTracker.addEntry(new Expense("Bubble Tea", 4.80));
         testTracker.removeEntry(0);
-        assertNull(testTracker.getEntry(0));
+        assertTrue(testTracker.getEntry(0) == null);
     }
 }
