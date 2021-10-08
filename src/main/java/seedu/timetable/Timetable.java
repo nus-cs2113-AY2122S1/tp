@@ -1,5 +1,6 @@
 package seedu.timetable;
 
+import seedu.exceptions.UniModsException;
 import seedu.module.Module;
 import seedu.ui.TextUi;
 import seedu.ui.TimetableUI;
@@ -17,22 +18,24 @@ public class Timetable {
     private static final int DEFAULT_START = 9;
     private static final int DEFAULT_END = 16;
 
-    private int semester;
-    private int earliestHour;
-    private int latestHour;
+    private static int semester;
+    private static int earliestHour;
+    private static int latestHour;
 
-    private ArrayList<Module> modules;
+    private static ArrayList<Module> modules;
 
-    private TimetableLesson[] monday = new TimetableLesson[24];
-    private TimetableLesson[] tuesday = new TimetableLesson[24];
-    private TimetableLesson[] wednesday = new TimetableLesson[24];
-    private TimetableLesson[] thursday = new TimetableLesson[24];
-    private TimetableLesson[] friday = new TimetableLesson[24];
-    private TimetableLesson[] saturday = new TimetableLesson[24];
-    private TimetableLesson[] sunday = new TimetableLesson[24];
+    private static TimetableLesson[] monday = new TimetableLesson[24];
+    private static TimetableLesson[] tuesday = new TimetableLesson[24];
+    private static TimetableLesson[] wednesday = new TimetableLesson[24];
+    private static TimetableLesson[] thursday = new TimetableLesson[24];
+    private static TimetableLesson[] friday = new TimetableLesson[24];
+    private static TimetableLesson[] saturday = new TimetableLesson[24];
+    private static TimetableLesson[] sunday = new TimetableLesson[24];
+    private static final String[] DAYS_OF_WEEK = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
     /**
      * Creates a Timetable assigned to a specific semester of the Academic Year
+     *
      * @param semester Semester 1 OR 2 of the Academic Year
      */
     public Timetable(int semester) {
@@ -46,6 +49,7 @@ public class Timetable {
      * Adds a Timetable Lesson to the timetable,
      * and adds the corresponding module to an internal list if not already added
      * This can be a Lecture, Tutorial or Laboratory
+     *
      * @param timetableLesson lesson to be added to the timetable
      * @see TimetableLesson
      */
@@ -89,8 +93,9 @@ public class Timetable {
     /**
      * Adds a lesson to a specific day schedule
      * E.g. addLessonToSchedule(lesson, monday) will add the lesson to the monday schedule
+     *
      * @param timetableLesson Lesson to be added to a day's schedule
-     * @param schedule Day's schedule (i.e monday/tuesday/.. etc) to add the lesson to
+     * @param schedule        Day's schedule (i.e monday/tuesday/.. etc) to add the lesson to
      */
     private void addLessonToSchedule(TimetableLesson timetableLesson, TimetableLesson[] schedule) {
         int start = timetableLesson.getStartHour();
@@ -104,6 +109,7 @@ public class Timetable {
     /**
      * Adds the lesson's module to the internal tracking list
      * This is to be displayed later
+     *
      * @param module Module to be added
      * @see Module
      */
@@ -114,11 +120,76 @@ public class Timetable {
     }
 
     /**
+     * Deletes the module from the list of modules taken by the user.
+     *
+     * @param module Module to be Deleted
+     * @see Module
+     */
+    public static void deleteModuleFromList(Module module) throws UniModsException {
+        String moduleCode = module.getModuleCode();
+        boolean hasModule = false;
+        for (int i = 0; i < modules.size(); i++) {
+            if (modules.get(i).getModuleCode().equals(moduleCode)) {
+                hasModule = true;
+                modules.remove(modules.get(i));
+                TextUi.printModuleDeleted(moduleCode);
+                deleteFromLessons(module);
+            }
+        }
+        if (!hasModule) {
+            throw new UniModsException(TextUi.ERROR_MODULE_NOT_FOUND);
+        }
+    }
+
+   
+    public static void deleteFromLessons(Module module) {
+
+        for (int i = 0; i < 7; i++) {
+            String day = DAYS_OF_WEEK[i].toUpperCase();
+            switch (day) {
+            case "MONDAY":
+                deleteFromSchedule(module, monday);
+                break;
+            case "TUESDAY":
+                deleteFromSchedule(module, tuesday);
+                break;
+            case "WEDNESDAY":
+                deleteFromSchedule(module, wednesday);
+                break;
+            case "THURSDAY":
+                deleteFromSchedule(module, thursday);
+                break;
+            case "FRIDAY":
+                deleteFromSchedule(module, friday);
+                break;
+            case "SATURDAY":
+                deleteFromSchedule(module, saturday);
+                break;
+            case "SUNDAY":
+                deleteFromSchedule(module, sunday);
+                break;
+            default:
+                break;
+            }
+        }
+
+    }
+
+    public static void deleteFromSchedule(Module module, TimetableLesson[] schedule) {
+        for (int i = 0; i < schedule.length; i++) {
+            if (schedule[i] != null && schedule[i].getModuleCode().equals(module.getModuleCode())) {
+                schedule[i] = null;
+            }
+        }
+
+    }
+
+    /**
      * Displays the timetable over Command Line Interface
      * Draws a grid where the Horizontal Axis represents the hour timing
      * and the Vertical Axis represents the Day (MON/TUES/WED/... etc.)
      * Displays the lessons in each grid cell that had been added to the timetable
-     *
+     * <p>
      * Also displays all the modules taken and the total number of MCs taken for the
      * timetable
      */
