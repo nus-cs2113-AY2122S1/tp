@@ -1,13 +1,28 @@
 package seedu.duke.items;
 
-import java.time.LocalDateTime;
+public abstract class Item {
 
-public class Item {
-    public static String getItemType() {
-        return null;
+    protected String type;
+    protected String title;
+    protected String description;
+
+    public Item(String type, String title, String description) {
+        this.type = type;
+        this.title = title;
+        this.description = description;
     }
 
-    public LocalDateTime getDateValue() {
-        return null;
+    public String getItemType() {
+        return type;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public abstract String getDateValue();
 }
