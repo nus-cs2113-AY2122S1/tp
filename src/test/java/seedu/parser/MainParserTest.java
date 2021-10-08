@@ -58,6 +58,15 @@ public class MainParserTest {
     }
 
     @Test
+    public void parseAddCommand_validInputsWithExtraCharacters_expectAddContactCommand() {
+        testUserInput = "         add   1231267azldasd -n   marcus    -g  marcus-bory  ";
+        AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
+        AddContactCommand expectedCommand = new AddContactCommand("marcus", "marcus-bory");
+        assertEquals(expectedCommand.getName(), actualCommand.getName());
+        assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
+    }
+
+    @Test
     public void parseAddCommand_validInputs_expectAddContactCommand() {
         testUserInput = "add -n andre -g ng-andre";
         final AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
