@@ -54,18 +54,15 @@ public class RecordList {
         return size;
     }
 
-    /**
-     * Need to change
-     */
-//    public RecordList getExpenditureList(int startMonth, int endMonth) {
-//        RecordList allExpenditure = null;
-//        for (Record a : allRecords) {
-//            if (a.getType().equals("Expenditure") && a.getMonth() <= endMonth && a.getMonth() >= startMonth) {
-//                allExpenditure.addExpenditure(a.getDescription(), a.getAmount(), a.getDate());
-//            }
-//        }
-//        return allExpenditure;
-//    }
+    //    public RecordList getExpenditureList(int startMonth, int endMonth) {
+    //        RecordList allExpenditure = null;
+    //        for (Record a : allRecords) {
+    //            if (a.getType().equals("Expenditure") && a.getMonth() <= endMonth && a.getMonth() >= startMonth) {
+    //                allExpenditure.addExpenditure(a.getDescription(), a.getAmount(), a.getDate());
+    //            }
+    //        }
+    //        return allExpenditure;
+    //    }
     public Record getRecord(int month, int index) {
         return allRecords[month].get(index);
     }

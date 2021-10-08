@@ -9,7 +9,7 @@ public class Budget extends Record {
 
     public Budget(double amount, int month) {
         super(amount, month);
-//      this.description = description;
+        //this.description = description;
     }
 
     @Override

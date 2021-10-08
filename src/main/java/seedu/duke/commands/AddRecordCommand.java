@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 /**
- * Not used right now
+ * Not used right now.
  */
 public class AddRecordCommand extends Command {
 

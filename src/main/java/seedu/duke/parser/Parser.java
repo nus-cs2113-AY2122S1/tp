@@ -22,9 +22,9 @@ public class Parser {
         return new String[]{split[0].toLowerCase(), ""};
     }
 
-//    public static String[] splitExpenditureParams(String expenditureParams) {
-//        return expenditureParams.split(" ", 3);
-//    }
+    //    public static String[] splitExpenditureParams(String expenditureParams) {
+    //        return expenditureParams.split(" ", 3);
+    //    }
 
     /**
      * Parses user input into command for execution.
@@ -73,9 +73,9 @@ public class Parser {
             return prepareAddBudgetCommand(commandParams);
         case ("-e"):
             return prepareAddExpenditureCommand(commandParams);
+        default:
+            return new InvalidCommand();
         }
-        return new InvalidCommand();
-
     }
 
     /**
@@ -93,7 +93,7 @@ public class Parser {
     }
 
     /**
-     * Splits the commandParams into description, amount, date
+     * Splits the commandParams into description, amount, date.
      *
      * @param commandParams raw String input
      * @return an AddExpenditureCommand with proper parameters
