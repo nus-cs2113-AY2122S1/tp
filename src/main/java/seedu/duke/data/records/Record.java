@@ -1,16 +1,15 @@
 package seedu.duke.data.records;
 
-public class Record {
+
+import java.time.LocalDate;
+
+public abstract class Record {
     protected double amount;
     protected int month;
 
     public Record(double amount, int month) {
         this.amount = amount;
         this.month = month;
-    }
-
-    public int getMonth() {
-        return month;
     }
 
     public double getAmount() {
@@ -24,4 +23,10 @@ public class Record {
     public String getDescription() {
         return null;
     }
+
+    public int getMonth() {
+        return 0;
+    }
+
+    public abstract LocalDate getDate();
 }

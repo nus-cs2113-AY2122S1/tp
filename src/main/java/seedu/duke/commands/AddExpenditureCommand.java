@@ -2,13 +2,23 @@ package seedu.duke.commands;
 
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.parser.Parser;
+import seedu.duke.ui.TextUi;
+
+import java.time.LocalDate;
 
 public class AddExpenditureCommand extends Command {
 
-    public static final String COMMAND_WORD = "AddExpenditure";
+
+    public static final String COMMAND_WORD = "addexpenditure";
     public String description;
     public double spending;
-    public int month;
+    LocalDate date;
+
+    public AddExpenditureCommand(String description, double amount, LocalDate date) {
+        this.description = description;
+        this.spending = amount;
+        this.date = date;
+    }
 
     public String getDescription(String rawCommand) {
         return rawCommand.split(" ")[1];
@@ -22,14 +32,10 @@ public class AddExpenditureCommand extends Command {
         return Integer.parseInt(rawCommand.split(" ")[3]);
     }
 
-    public void addBudget(String rawCommand) {
-        this.description = getDescription(rawCommand);
-        this.spending = getSpending(rawCommand);
-        this.month = getMonth(rawCommand);
-
-        budgetList.addBudget(this.description, this.spending, this.month);
-    }
 
     public void execute() {
+        Expenditure newExpenditure = new Expenditure(description, spending, date);
+        budgetList.addExpenditure(description, spending, date);
+        TextUi.showExpenditureAddedMessage(newExpenditure);
     }
 }

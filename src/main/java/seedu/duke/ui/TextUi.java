@@ -1,6 +1,8 @@
 package seedu.duke.ui;
 
+
 import seedu.duke.data.RecordList;
+import seedu.duke.data.records.Expenditure;
 
 import java.util.Scanner;
 
@@ -12,6 +14,14 @@ public class TextUi {
     public static final String LS = System.lineSeparator();
 
     private static final String DIVIDER = "========================================================";
+    private static final String LOGO = "  ____            _            _ _______             _             \n"
+            + " |  _ \\          | |          | |__   __|           | |            \n"
+            + " | |_) |_   _  __| | __ _  ___| |_ | |_ __ __ _  ___| | _____ _ __ \n"
+            + " |  _ <| | | |/ _` |/ _` |/ _ \\ __|| | '__/ _` |/ __| |/ / _ \\ '__|\n"
+            + " | |_) | |_| | (_| | (_| |  __/ |_ | | | | (_| | (__|   <  __/ |   \n"
+            + " |____/ \\__,_|\\__,_|\\__, |\\___|\\__||_|_|  \\__,_|\\___|_|\\_\\___|_|   \n"
+            + "                     __/ |                                         \n"
+            + "                    |___/                                          ";
 
     private static final String MESSAGE_EXIT = "Bye, see you again soon!";
 
@@ -24,16 +34,21 @@ public class TextUi {
     public static void showRecordsListView(RecordList budgetList) {
         int budgetListLength = RecordList.numberOfRecords;
         for (int i = 0; i < budgetListLength; i += 1) {
-            budgetList.printRecord(i);
+            System.out.println(budgetList.getRecord(i));
         }
     }
 
     public static void showWelcomeMessage() {
-        System.out.println(DIVIDER
-                + LS
+        System.out.println(DIVIDER + LS
+                + LOGO + LS
                 + "    Hello! I'm Budget Tracker\n"
-                + "    Which entries do you wish to enter today?\n"
+                + "    What entries do you wish to enter today?\n"
                 + DIVIDER);
+    }
+
+    public static void showExpenditureAddedMessage(Expenditure addedExpenditure) {
+        System.out.println("Successfully added. Here's the added expenditure: ");
+        System.out.println("   " + addedExpenditure);
     }
 
     public static void showExitMessage() {
