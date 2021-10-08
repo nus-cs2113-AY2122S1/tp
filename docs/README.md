@@ -26,7 +26,7 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
          * use `/at` to input _timing_ of the training entry.
          * use `/v` to input _venue_ of the training entry.
     * **Examples:**
-      - `delete /m John Hwee 1`
+      - `delete /m 1`
       - `delete /t /at 12 Dec 2022 /v MPSH 2`
             
 3. `list` This lists out entries in Duke's Entry List.
