@@ -23,12 +23,7 @@ public class FinancialTracker {
         //TODO
     }
 
-    public void deleteEntry(int entryIndex) {
-        //TODO
-    }
-
     public ArrayList<Entry> listExpense() {
-        //TODO
         return null;
     }
 
@@ -37,12 +32,19 @@ public class FinancialTracker {
         return null;
     }
 
-    public Entry getTotalExpense() {
-        //TODO
+    public Entry getEntry(int entryIndex) {
+        return this.financialEntries.get(entryIndex);
+    }
+
+    public ArrayList<Entry> getEntries() {
+        return this.financialEntries;
+    }
+
+    public ArrayList<Entry> getTotalExpense() {
         return null;
     }
 
-    public Entry getTotalIncome() {
+    public ArrayList<Entry> getTotalIncome() {
         //TODO
         return null;
     }

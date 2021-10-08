@@ -6,6 +6,6 @@ import seedu.utility.Ui;
 public class ListExpenseCommand extends Command {
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        //TODO
+        ui.listExpense(finances.listExpense());
     }
 }
