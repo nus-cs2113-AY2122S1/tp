@@ -24,9 +24,9 @@ public class Trip {
 
     public Trip(String[] newTripInfo) {
         this.location = newTripInfo[0];
+        setDateOfTrip(newTripInfo[1]);
         this.listOfPersons = Parser.splitPeople(newTripInfo[2]);
         setExchangeRateString(newTripInfo[3]);
-        setDateOfTrip(newTripInfo[1]);
     }
 
     public void getWhoOwesMe() {
