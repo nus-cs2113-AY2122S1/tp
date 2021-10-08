@@ -1,21 +1,37 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
+
+    private static ArrayList<Trip> listOfTrips = new ArrayList<>();
+    private static boolean isProgramRunning = true;
+
+    /**
+     * Reads and returns user input with leading and trailing whitespaces removed
+     *
+     * @param in {@link Scanner} to read user input
+     * @return user input with leading and trailing whitespaces removed
+     */
+    private static String readUserInput(Scanner in) {
+        return in.nextLine().strip();
+    }
+
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
 
+        Ui.printWelcome();
         Scanner in = new Scanner(System.in);
+
+        while (isProgramRunning) {
+            Parser.parseUserInput(readUserInput(in), listOfTrips);
+        }
+
         System.out.println("Hello " + in.nextLine());
+
     }
+
 }
