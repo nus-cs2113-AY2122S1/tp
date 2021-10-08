@@ -1,5 +1,7 @@
 package seedu.duke.lesson;
 
+import seedu.duke.exception.DukeException;
+
 public class Lesson {
     // TODO: Implement serialization/deserialization
     private String title;
@@ -33,5 +35,18 @@ public class Lesson {
     @Override
     public String toString() {
         return "[L] " + "Title: " + title + " (Start: " + startTime + ") " + "(End: " + endTime + ")";
+    }
+
+    public String serialize() {
+        return "L" + " | " + title + " | " + dayOfTheWeek + " | " + startTime + " | " + endTime;
+    }
+
+    public static Lesson deserialize(String data) throws DukeException {
+        try {
+            String[] item = data.split(" \\| ");
+            return new Lesson(item[1], item[2], item[3], item[4]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Data storage file corrupted..");
+        }
     }
 }

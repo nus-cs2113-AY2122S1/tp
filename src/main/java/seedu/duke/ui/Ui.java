@@ -2,6 +2,7 @@ package seedu.duke.ui;
 
 import java.util.Scanner;
 
+import seedu.duke.lesson.Lesson;
 import seedu.duke.lesson.LessonList;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
@@ -61,6 +62,14 @@ public class Ui {
         System.out.println(PADDING + "Noted. I've added this task:");
         System.out.println(PADDING + "  " + task);
         System.out.println(PADDING + "Now you have " + size + " tasks in the list.");
+        System.out.println(LINE);
+    }
+
+    public void printLessonAdded(Lesson lesson, int size) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Noted. I've added this lesson:");
+        System.out.println(PADDING + "  " + lesson);
+        System.out.println(PADDING + "Now you have " + size + " lessons in the list.");
         System.out.println(LINE);
     }
 

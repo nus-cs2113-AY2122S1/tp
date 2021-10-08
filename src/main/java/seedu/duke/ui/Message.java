@@ -42,4 +42,7 @@ public final class Message {
 
     public static final String ERROR_TASK_NUMBER =
             "The task number is invalid.";
+
+    public static final String DATA_RETRIEVED_SUCCESSFULLY =
+            "Previous data has been retrieved successfully.";
 }

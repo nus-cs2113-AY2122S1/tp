@@ -89,4 +89,31 @@ public class TaskList {
         }
         return s.toString();
     }
+
+    /**
+     * Serializes the task list into the format suitable to store in the storage files.
+     *
+     * @return the serialized task list
+     */
+    public String serialize() {
+        StringBuilder data = new StringBuilder();
+        for (Task task : taskList) {
+            data.append(task.serialize()).append(System.lineSeparator());
+        }
+        return data.toString();
+    }
+
+    public static List<Task> deserialize(List<String> data) throws DukeException {
+        List<Task> taskList = new ArrayList<>();
+        try {
+            for (String entry : data) {
+                if (entry.charAt(0) == 'T') {
+                    taskList.add(Task.deserialize(entry));
+                }
+            }
+        } catch (DukeException e) {
+            throw e;
+        }
+        return taskList;
+    }
 }

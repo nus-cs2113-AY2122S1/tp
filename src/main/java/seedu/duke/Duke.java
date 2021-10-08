@@ -8,6 +8,7 @@ import seedu.duke.lesson.LessonList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
+import seedu.duke.ui.Message;
 import seedu.duke.ui.Ui;
 
 public class Duke {
@@ -19,16 +20,16 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage();
-        // try {
-        // TODO: Load task and lesson from saved data
-        taskList = new TaskList();
-        lessonList = new LessonList();
-        // } catch (DukeException | IOException e) {
-        //     ui.printMessage(e.toString());
-        //     taskList = new TaskList();
-        //     lessonList = new LessonList();
-        //     storage.createNewData(ui);
-        // }
+        try {
+            taskList = new TaskList(TaskList.deserialize(storage.loadData()));
+            lessonList = new LessonList(LessonList.deserialize(storage.loadData()));
+            ui.printMessage(Message.DATA_RETRIEVED_SUCCESSFULLY);
+        } catch (DukeException | IOException e) {
+            ui.printMessage(e.toString());
+            taskList = new TaskList();
+            lessonList = new LessonList();
+            storage.createNewData(ui);
+        }
     }
 
     public void startProgram() {

@@ -82,11 +82,9 @@ public class Parser {
 
         switch (params.length) {
         case 2:
-            // System.out.print(title + ", " + dayOfTheWeek);      // TODO: to be removed
             return new AddTaskCommand(title, dayOfTheWeek);
         case 3:
             String information = params[2].strip();
-            // System.out.print(title + ", " + dayOfTheWeek + ", " + information);     // TODO: to be removed
             return new AddTaskCommand(title, dayOfTheWeek, information);
         default:
             throw new DukeException(Message.ERROR_INVALID_COMMAND);

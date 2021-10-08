@@ -1,5 +1,7 @@
 package seedu.duke.task;
 
+import seedu.duke.exception.DukeException;
+
 public class Task {
     // TODO: Implement serialization/deserialization
 
@@ -65,5 +67,23 @@ public class Task {
         // TODO: Improve formatting
         return "[T]" + getDoneSymbol() + " Title: " + title
                 + (information.isBlank() ? "" : " (Info: " + information + ")");
+    }
+
+    public String serialize() {
+        return "T" + " | " + (isDone ? "1" : "0") + " | " + title + " | " + dayOfTheWeek + " | " + information;
+    }
+
+    public static Task deserialize(String data) throws DukeException {
+        try {
+            String[] item = data.split(" \\| ", -1);
+            boolean isTaskDone = item[1].equals("1");
+            Task task = new Task(item[2], item[3], item[4]);
+            if (isTaskDone) {
+                task.setDone();
+            }
+            return task;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Data storage file corrupted..");
+        }
     }
 }
