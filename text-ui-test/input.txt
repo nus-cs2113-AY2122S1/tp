@@ -1,6 +1,8 @@
 add -n ng andre -g ng-andre
+rm 2
 view 999aa
 add -n ashraf -g ashraf
+rm 3
 add -n mayank -g mayankp123
 rm 9909
 add -n bory -g marcus
@@ -8,18 +10,18 @@ add       -n   andre   -g ng-andre
 list
 view 1
 add -n bory -g
-rm 1223
+rm abc
 add -g lezongmun -n lezong
 add -g      github
 list
 view 3
 rm 0
+rm    0
    add  -p  -f
 view 2
 n             andre
 f facebook
 n
-rm anc
   add  -p pinterest  -f facebook
          add   1231267azldasd -n   lezongmun    -g  lezong
 rm 1
