@@ -1,7 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.ui.TextUi;
-
 public class ListRecordsCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
@@ -9,6 +7,6 @@ public class ListRecordsCommand extends Command {
 
     @Override
     public void execute() {
-        TextUi.showRecordsListView(budgetList);
+//        TextUi.showRecordsListView(budgetList);
     }
 }

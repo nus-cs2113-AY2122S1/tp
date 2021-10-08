@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.commands.Command;
-import seedu.duke.data.BudgetList;
+import seedu.duke.data.RecordList;
 import seedu.duke.parser.Parser;
 import seedu.duke.ui.TextUi;
 
@@ -10,10 +10,10 @@ public class Duke {
 
     private TextUi textUi;
     private Parser parser;
-    private BudgetList budgetList;
+    private final RecordList recordList;
 
     public Duke() {
-        budgetList = new BudgetList();
+        recordList = new RecordList();
         textUi = new TextUi();
         parser = new Parser();
     }
@@ -29,9 +29,14 @@ public class Duke {
         while (!isExit) {
             String userInput = textUi.getUserInput();
             Command command = parser.parseCommand(userInput);
-            command.setBudgetList(budgetList);
+            command.setRecordList(recordList);
             command.execute();
             isExit = command.isExit();
         }
     }
 }
+
+/*
+budgetList
+1. Budget Jan
+ */

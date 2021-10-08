@@ -2,9 +2,8 @@ package seedu.duke.commands;
 
 //add EXPENDITURE_NAME COST DATE_TIME_OF_EXPENDITURE
 
-public class AddBudgetCommand extends Command {
-    public static final String COMMAND_WORD = "add";
-//    public String description;
+public class AddBudgetCommand extends AddCommand {
+    //    public String description;
     public double amount;
     public int month;
 
@@ -31,6 +30,6 @@ public class AddBudgetCommand extends Command {
 //    }
 
     public void execute() {
-        budgetList.addBudget(amount, month);
+        recordList.addBudget(amount, month);
     }
 }

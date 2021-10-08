@@ -1,14 +1,17 @@
 package seedu.duke.commands;
 
-import seedu.duke.data.BudgetList;
+import seedu.duke.data.RecordList;
 
+/**
+ * Basic command that other commands extend off of.
+ */
 public abstract class Command {
-    protected BudgetList budgetList;
+    protected RecordList recordList;
 
     public abstract void execute();
 
-    public void setBudgetList(BudgetList budgetList) {
-        this.budgetList = budgetList;
+    public void setRecordList(RecordList recordList) {
+        this.recordList = recordList;
     }
 
     public boolean isExit() {

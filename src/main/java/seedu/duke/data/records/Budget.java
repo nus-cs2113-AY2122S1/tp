@@ -1,29 +1,47 @@
 package seedu.duke.data.records;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Budget extends Record {
-    public static int numberOfExpenditure = 0;
-    public static ArrayList<Expenditure> expenditureArrayList = new ArrayList<>();
     public String description;
     public int month;
 
+
     public Budget(double amount, int month) {
-        super(amount);
-        this.month = month;
+        super(amount, month);
 //      this.description = description;
     }
 
-    public void addExpenditure(String description, double amount, int month) {
-        expenditureArrayList.add(new Expenditure(description, amount, month));
-        numberOfExpenditure += 1;
+    @Override
+    public String getDescription() {
+        return description;
     }
 
-    public void printExpenditureList(int indexOfExpenditure) {
-        expenditureArrayList.get(indexOfExpenditure).printExpenditure();
+    @Override
+    public double getAmount() {
+        return amount;
     }
 
     public void printBudgetDetails() {
         System.out.println(this.description + " $" + this.amount + " Month: " + this.month);
+    }
+
+    @Override
+    public int getMonth() {
+        return month;
+    }
+
+    @Override
+    public LocalDate getDate() {
+        return null;
+    }
+
+    public String toString() {
+        return (this.description + " $" + this.amount + " Month: " + this.month);
+    }
+
+    @Override
+    public String getType() {
+        return "Budget";
     }
 }
