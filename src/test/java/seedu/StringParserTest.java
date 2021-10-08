@@ -30,8 +30,7 @@ class StringParserTest {
         StringParser sp = new StringParser();
         String separator = "\\|";
         //ArrayList<String> stringParts = sp.splitString(inputString,separator);
-        assertThrows(InvalidStringInputException.class,
-                () -> sp.splitString(inputString,separator));
+        assertThrows(InvalidStringInputException.class, () -> sp.splitString(inputString,separator));
         //assertEquals(0,stringParts.size());
     }
 }
