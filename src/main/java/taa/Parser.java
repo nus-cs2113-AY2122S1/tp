@@ -1,9 +1,6 @@
 package taa;
 
-import taa.command.AddModuleCommand;
-import taa.command.Command;
-import taa.command.ExitCommand;
-import taa.command.ListModulesCommand;
+import taa.command.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,6 +27,9 @@ public class Parser {
         case Command.COMMAND_ADD_MODULE:
             command = new AddModuleCommand(argument);
             break;
+
+        case Command.COMMAND_ADD_STUDENT:
+            command = new AddStudentCommand(argument);
 
         default:
             throw new CustomException(MESSAGE_UNKNOWN_COMMAND);
