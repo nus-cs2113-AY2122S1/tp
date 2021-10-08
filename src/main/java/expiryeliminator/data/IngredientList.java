@@ -68,10 +68,10 @@ public class IngredientList {
     }
 
     /**
-     * Looks for the ingredient that the user is looking for
+     * Looks for the ingredient that the user is looking for.
      *
-     * @param ingredientDescription The ingredient name the user is searching for
-     * @return the ingredient object that the user is searching for
+     * @param ingredientDescription The ingredient name the user is searching for.
+     * @return the ingredient object that the user is searching for.
      */
     public Ingredient findIngredient(String ingredientDescription) {
         return ingredients.get(ingredientDescription);
