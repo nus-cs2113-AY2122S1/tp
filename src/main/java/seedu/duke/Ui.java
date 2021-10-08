@@ -18,6 +18,11 @@ public class Ui {
         System.out.println("Goodbye!");
     }
 
+    /**
+     * Prints a line for each person who owes the user money.
+     *
+     * @param person a person in the given trip
+     */
     public static void printWhoOwesMe(Person person) {
         System.out.println(person.getName() + " | " + person.getAmtOwedToUser());
     }
