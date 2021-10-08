@@ -1,0 +1,14 @@
+package seedu.duke.command;
+
+import seedu.duke.DishList;
+
+import java.util.ArrayList;
+
+public class DeleteDishCommand extends Command {
+    @Override
+    public void execute(ArrayList<String> parameters) {
+        System.out.println("____________________________________________");
+        DishList.delete(parameters.get(0));
+        System.out.println("____________________________________________");
+    }
+}

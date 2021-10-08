@@ -34,7 +34,7 @@ public class DishList {
         System.out.println("You can use commands 'add' or 'find' to add new dishes or find existing ones!");
     }
 
-    private static void delete(String dishName) {
+    public static void delete(String dishName) {
         int dishIndex = DishList.find(dishName);
         if (dishIndex == -1) {
             System.out.println("Dish does not exist");
