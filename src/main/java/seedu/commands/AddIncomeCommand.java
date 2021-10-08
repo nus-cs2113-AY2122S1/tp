@@ -13,6 +13,6 @@ public class AddIncomeCommand extends Command {
 
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        //TODO
+        ui.printIncomeAdded((Income) finances.addEntry(income));
     }
 }
