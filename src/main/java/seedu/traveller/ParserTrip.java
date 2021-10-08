@@ -7,13 +7,14 @@ import seedu.traveller.commands.ViewAllCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.mapper.*;
 
-public class Parser {
+public class ParserTrip {
     public static Command parse(String rawInput) throws TravellerException {
         String details;
-        Command command;
+        Command command = null;
 
-        String[] userInput = rawInput.split(" ", 2);
+        String[] userInput = rawInput.split(" ", 5);
         String userCommand = userInput[0].toLowerCase();
 
         switch (userCommand) {
@@ -21,9 +22,16 @@ public class Parser {
             try {
                 String tripName = userInput[1];
                 command = new NewCommand(tripName);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InvalidNewFormatException();
+                Vertex s = GraphList.findVertex(userInput[2]);
+                Vertex t = GraphList.findVertex(userInput[3]);
+                System.out.println("Finding shortest path!");
+                Dijkstra.run(s, t);}
+             catch (ArrayIndexOutOfBoundsException e ) {
+                throw new InvalidNewFormatException();}
+             catch (EmptyVertexException e) {
+                System.out.println("Either of the nodes doesn't exist!");
             }
+
             break;
         case "viewall":
             command = new ViewAllCommand();
@@ -31,6 +39,12 @@ public class Parser {
         case "exit":
             command = new ExitCommand();
             break;
+//        case "d":
+//            try {
+//
+//                //Dijkstra.run(s, t);}
+//
+//                break;
         default:
             throw new CommandNotFoundException(userCommand);
         }

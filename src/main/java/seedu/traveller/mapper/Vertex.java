@@ -17,7 +17,7 @@ public class Vertex implements Comparable<Vertex> {
         this.name = name;
         this.edges = new ArrayList<>();
         this.key = key;
-        System.out.println("Node = " + this.name + ", Key = " + this.key);
+    //    System.out.println("Node = " + this.name + ", Key = " + this.key);
     }
 
     public static void addNeighbour(Double w, Vertex v1, Vertex v2) {

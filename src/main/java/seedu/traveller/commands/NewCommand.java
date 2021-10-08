@@ -7,6 +7,11 @@ import seedu.traveller.exceptions.TravellerException;
 
 public class NewCommand extends Command {
     private final String tripName;
+    private String startCountry;
+    private String endCountry;
+    private String distance;
+
+
 
     public NewCommand(String tripName) {
         this.tripName = tripName;
