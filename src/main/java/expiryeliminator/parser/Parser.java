@@ -5,14 +5,19 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+
 import expiryeliminator.commands.Command;
 import expiryeliminator.commands.IncorrectCommand;
 import expiryeliminator.commands.AddRecipeCommand;
 import expiryeliminator.commands.AddIngredientCommand;
+import expiryeliminator.commands.ListCommand;
+import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ByeCommand;
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
 import expiryeliminator.data.exception.DuplicateDataException;
+
 
 /**
  * Parses user input.
@@ -73,6 +78,10 @@ public class Parser {
             return prepareAddIngredient(prefixesToArgs);
         case ByeCommand.COMMAND_WORD:
             return new ByeCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case ViewIngredientCommand.COMMAND_WORD:
+            return prepareViewIngredient(prefixesToArgs);
         case AddRecipeCommand.COMMAND_WORD:
             return prepareAddRecipe(prefixesToArgs);
         default:
@@ -199,6 +208,12 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         return null;
+    }
+
+    private static Command prepareViewIngredient(HashMap<String, ArrayList<String>> prefixesToArgs) {
+        final ArrayList<String> ingredientDescription = prefixesToArgs.get(PREFIX_INGREDIENT);
+        //final String ingredientDescription = prefixesToArgs.get(PREFIX_INGREDIENT);
+        return new ViewIngredientCommand(ingredientDescription.get(0));
     }
 
     private static int parseQuantity(String quantityString) throws NumberFormatException {
