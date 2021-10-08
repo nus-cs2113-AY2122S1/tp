@@ -73,7 +73,7 @@ public class Ui {
         final ArrayList<String> workoutsStringList = new ArrayList<>();
         int displayIndex = DISPLAYED_INDEX_OFFSET;
         for (Workout workout : relevantWorkouts) {
-            workoutsStringList.add(displayIndex + ". " + workout + "\n");
+            workoutsStringList.add(displayIndex + ". " + workout);
             displayIndex++;
         }
         return workoutsStringList.toArray(new String[0]);
