@@ -5,12 +5,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Trip {
 
     private LocalDate dateOfTrip;
-    private ArrayList<Expense> listOfExpenses;
-    private ArrayList<Person> listOfPersons;
+    private ArrayList<Expense> listOfExpenses = new ArrayList<>();
+    private ArrayList<Person> listOfPersons = new ArrayList<>();
     private double budget;
     private double exchangeRate;
     private String foreignCurrency;
@@ -18,15 +19,20 @@ public class Trip {
     private String location;
 
     public Trip() {
-        //TODO: create non-empty constructor
+        //empty constructor
+    }
+
+    public Trip(String[] newTripInfo) {
+        this.location = newTripInfo[0];
+        setDateOfTrip(newTripInfo[1]);
+        this.listOfPersons = Parser.splitPeople(newTripInfo[2]);
+        setExchangeRateString(newTripInfo[3]);
     }
 
     public void getWhoOwesMe() {
-
         for (Person person : listOfPersons) {
             Ui.printWhoOwesMe(person);
         }
-
     }
 
     public LocalDate getDateOfTrip() {
@@ -43,7 +49,10 @@ public class Trip {
         try {
             this.dateOfTrip = LocalDate.parse(dateOfTrip, pattern);
         } catch (DateTimeParseException e) {
-            //TODO: catch date exception
+            System.out.print("Please check that your date-time format is dd-MM-yyyy. "
+                    + "Please enter the date again: ");
+            Scanner scanner = Storage.getScanner();
+            setDateOfTrip(scanner.nextLine().strip());
         }
     }
 
@@ -61,6 +70,16 @@ public class Trip {
 
     public void setExchangeRate(double exchangeRate) {
         this.exchangeRate = exchangeRate;
+    }
+
+    public void setExchangeRateString(String exchangeRateString) {
+        try {
+            this.exchangeRate = Double.parseDouble(exchangeRateString);
+        } catch (NumberFormatException e) {
+            System.out.print("Please re-enter your exchange rate as a decimal number: ");
+            Scanner scanner = Storage.getScanner();
+            setExchangeRateString(scanner.nextLine().strip());
+        }
     }
 
     public String getForeignCurrency() {
