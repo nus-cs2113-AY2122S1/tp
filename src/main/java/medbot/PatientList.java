@@ -92,4 +92,24 @@ public class PatientList {
     private String getNoPatientIdErrorMessage(int patientId) {
         return "No patient with ID " + patientId + " found.";
     }
+
+    public String getStorageString() {
+        String output = "";
+        for (int key : patients.keySet()) {
+            output += patients.get(key).getStorageString();
+            output += "\n";
+        }
+
+        return output;
+
+    }
+
+    public void addPatientFromStorage(Patient patient) {
+        int patientId = patient.getPatientId();
+        patients.put(patientId, patient);
+    }
+
+    public void setLastId(int newLastId) {
+        lastId = newLastId;
+    }
 }

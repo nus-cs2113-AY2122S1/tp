@@ -7,6 +7,9 @@ import java.util.Scanner;
  * (Reading user input and printing message to users).
  */
 public class Ui {
+    public static final String DATA_SEPARATOR_ESCAPED = " \\| ";
+    public static final String DATA_SEPARATOR_UNESCAPED = " | ";
+
     private Scanner inputScanner = new Scanner(System.in);
 
     /**
@@ -163,4 +166,6 @@ public class Ui {
     public void printUnrecognisedCommandHelpMessage() {
         System.out.println("Sorry, that's not a recognised command. To view a list of commands, type:\n" + "help\n");
     }
+
+
 }
