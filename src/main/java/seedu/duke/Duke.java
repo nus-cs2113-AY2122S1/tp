@@ -29,10 +29,8 @@ public class Duke {
         Storage.setScanner(in);
 
         while (isProgramRunning) {
-            Parser.parseUserInput(readUserInput(in), listOfTrips);
+            isProgramRunning = Parser.parseUserInput(readUserInput(in), listOfTrips);
         }
-
-        System.out.println("Hello " + in.nextLine());
 
     }
 

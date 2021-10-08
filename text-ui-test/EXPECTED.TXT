@@ -7,3 +7,4 @@ Hello from
 
 What is your name?
 Sorry, we didn't recognize your entry. Please try again, or enter -help to learn more.
+Goodbye!

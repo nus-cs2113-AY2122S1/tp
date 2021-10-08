@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    public static void parseUserInput(String userInput, ArrayList<Trip> listOfTrips) {
+    public static boolean parseUserInput(String userInput, ArrayList<Trip> listOfTrips) {
         String[] userInputSplit = userInput.split(" ", 2);
 
         switch (userInputSplit[0]) {
@@ -28,10 +28,14 @@ public class Parser {
                 System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
             }
             break;
+        case "quit":
+            Ui.goodBye();
+            return false;
         default:
             System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter -help "
                     + "to learn more.");
         }
+        return true;
     }
 
     public static ArrayList<Person> splitPeople(String peopleChained) {
