@@ -41,7 +41,7 @@ public class GraphList {
         int t = v2.key;
         edgeMatrix[s][t] = w;
         edgeMatrix[t][s] = w;
-        System.out.println("Edge between " + s + " and " + t + " created and assigned to " + w);
+    //    System.out.println("Edge between " + s + " and " + t + " created and assigned to " + w);
         Vertex.addNeighbour(w, v1, v2);
         // Vertex.addNeighbour(w, v2, v1);
     }
