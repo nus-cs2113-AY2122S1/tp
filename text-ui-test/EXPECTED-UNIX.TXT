@@ -23,42 +23,172 @@ You now have 1 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
+The number you have input is out of range.
+You only have 1 contact stored.
+____________________________________________________________
+
+____________________________________________________________
+Please enter a valid contact index.
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: ashraf
+You now have 2 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+The number you have input is out of range.
+Please input a number between 0 and 1.
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: mayank
+You now have 3 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+The number you have input is out of range.
+Please input a number between 0 and 2.
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: bory
+You now have 4 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: andre
+You now have 5 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+ConTech has 5 contacts stored.
+Here's the list :
+____________________________________________________________
+
+0. ng andre
+1. ashraf
+2. mayank
+3. bory
+4. andre
+
+____________________________________________________________
+
+____________________________________________________________
+1. Name: ashraf GitHub: ashraf
+____________________________________________________________
+
+____________________________________________________________
 There are missing details.
 Please remove any flags with no details
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: lezong
-You now have 2 contact(s).
+Please enter a valid contact index.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has 2 contacts stored.
+ConTech has added the specified contact: lezong
+You now have 6 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+There are missing details.
+Please specify a name when creating a contact with the flag -n
+____________________________________________________________
+
+____________________________________________________________
+ConTech has 6 contacts stored.
 Here's the list :
 ____________________________________________________________
 
 0. ng andre
-1. lezong
+1. ashraf
+2. mayank
+3. bory
+4. andre
+5. lezong
 
 ____________________________________________________________
 
 ____________________________________________________________
-0. Name: ng andre GitHub: ng-andre
+3. Name: bory GitHub: marcus
 ____________________________________________________________
 
 ____________________________________________________________
 ConTech has removed the specified contact: ng andre
-You now have 1 contact(s).
+You now have 5 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-That does not seem to be a number.
-Please provide a number instead.
+ConTech has removed the specified contact: ashraf
+You now have 4 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-The number you have input is out of range.
-Please input 0 as you only have 1 contact saved.
+There are missing details.
+Please remove any flags with no details
+____________________________________________________________
+
+____________________________________________________________
+2. Name: andre GitHub: ng-andre
+____________________________________________________________
+
+____________________________________________________________
+ConTech is unable to understand your request.
+Please try again with a valid command.
+____________________________________________________________
+
+____________________________________________________________
+ConTech is unable to understand your request.
+Please try again with a valid command.
+____________________________________________________________
+
+____________________________________________________________
+ConTech is unable to understand your request.
+Please try again with a valid command.
+____________________________________________________________
+
+____________________________________________________________
+There appears to be a flag that is not recognised.
+Please try again with a valid flag.
+  -n NAME
+  -g GITHUB
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: lezongmun
+You now have 5 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+ConTech has removed the specified contact: bory
+You now have 4 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+ConTech has 4 contacts stored.
+Here's the list :
+____________________________________________________________
+
+0. mayank
+1. andre
+2. lezong
+3. lezongmun
+
+____________________________________________________________
+
+____________________________________________________________
+Please enter a valid contact index.
+____________________________________________________________
+
+____________________________________________________________
+0. Name: mayank GitHub: mayankp123
+____________________________________________________________
+
+____________________________________________________________
+There are missing details.
+Please remove any flags with no details
 ____________________________________________________________
 
 ____________________________________________________________

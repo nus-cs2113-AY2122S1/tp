@@ -18,8 +18,8 @@ public class ViewCommand extends Command {
         try {
             Contact viewingContact = contactList.getContactAtIndex(index);
             TextUi.viewContactMessage(viewingContact, index);
-        } catch (IndexOutOfBoundsException | NullPointerException e) {
-            TextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
+        } catch (IndexOutOfBoundsException e) {
+            TextUi.numOutOfRangeMessage(contactList.getListSize());
         }
     }
 }
