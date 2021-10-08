@@ -10,6 +10,8 @@ public class Parser {
             return new ListCommand();
         case "clear":
             return new ClearCommand();
+        case "cut":
+            return parseCut(params);
         default:
             System.out.println("INVALID");
             break;
@@ -21,4 +23,15 @@ public class Parser {
         String[] split = input.trim().split(separator, 2);
         return split.length == 2 ? split : new String[] {split[0], ""};
     }
+
+    public static Command parseCut(String params) {
+        int clientIndex = stringToInt(params);
+        return new CutCommand(clientIndex);
+    }
+
+    private static int stringToInt(String params) {
+        int clientIndex = Integer.parseInt(params);
+        return clientIndex;
+    }
+
 }
