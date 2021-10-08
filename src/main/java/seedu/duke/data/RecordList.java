@@ -33,6 +33,16 @@ public class RecordList {
 
     }
 
+    public RecordList getExpenditureList(int startMonth, int endMonth) {
+        RecordList allExpenditure = null;
+        for (Record a:allRecords) {
+            if (a.getType() == "Expenditure" && a.getMonth() <= endMonth && a.getMonth() >= startMonth) {
+                allExpenditure.addExpenditure(a.getDescription(), a.getAmount(), a.getMonth());
+            }
+        }
+        return allExpenditure;
+    }
+
     public int getSize() {
         return allRecords.size();
     }

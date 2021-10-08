@@ -12,19 +12,27 @@ public class Budget extends Record {
         this.description = description;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
-    public double getSpendingLimit() {
+    @Override
+    public double getAmount() {
         return spendingLimit;
     }
 
+    @Override
     public int getMonth() {
         return month;
     }
 
     public void printBudgetDetails() {
         System.out.println(this.description + " $" + this.spendingLimit + " Month: " + this.month);
+    }
+
+    @Override
+    public String getType() {
+        return "Budget";
     }
 }

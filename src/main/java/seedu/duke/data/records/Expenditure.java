@@ -10,19 +10,27 @@ public class Expenditure extends Record {
         this.description = description;
     }
 
-    public static String getDescription() {
+    @Override
+    public String getDescription() {
         return description;
     }
 
-    public static double getSpending() {
+    @Override
+    public double getAmount() {
         return spending;
     }
 
-    public static int getMonth() {
+    @Override
+    public int getMonth() {
         return month;
     }
 
     public void printExpenditure() {
         System.out.println(this.description + " $" + this.spending + "Month: " + this.month);
+    }
+
+    @Override
+    public String getType() {
+        return "Expenditure";
     }
 }

@@ -9,7 +9,19 @@ public class Record {
         this.month = month;
     }
 
+    public int getMonth() {
+        return month;
+    }
+
     public double getAmount() {
         return amount;
+    }
+
+    public String getType() {
+        return "Record";
+    }
+
+    public String getDescription() {
+        return null;
     }
 }
