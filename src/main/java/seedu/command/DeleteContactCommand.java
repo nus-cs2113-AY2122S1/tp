@@ -1,7 +1,9 @@
 package seedu.command;
 
 import seedu.contact.Contact;
+import seedu.parser.FailedCommandType;
 import seedu.ui.TextUi;
+import seedu.command.FailedCommand;
 
 public class DeleteContactCommand extends Command {
     private final int deletedIndex;
@@ -19,8 +21,8 @@ public class DeleteContactCommand extends Command {
             Contact deletedContact = contactList.getContactAtIndex(deletedIndex);
             this.contactList.deleteContact(deletedIndex);
             TextUi.deleteContactMessage(deletedContact.getName(), contactList.getListSize());
-        } catch (IndexOutOfBoundsException | NullPointerException e) {
-            TextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
+        } catch (IndexOutOfBoundsException e) {
+            TextUi.numOutOfRangeMessage(contactList.getListSize());
         }
     }
 }

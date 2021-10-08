@@ -109,29 +109,24 @@ public class MainParser {
         if (destructuredInputs.length == 1) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
         }
-        if (destructuredInputs.length > 2) {
-            return new FailedCommand(FailedCommandType.INVALID_FORMAT);
-        }
         try {
-            return new ViewCommand(Integer.parseInt(destructuredInputs[1]));
+            return new ViewCommand(Integer.parseInt(destructuredInputs[1].trim()));
         } catch (NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.INVALID_NUM);
+            return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
     }
 
     private Command parseDeleteContact(String userInput) {
-        String[] destructuredInputs = userInput.split(" ");
+        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
+        //check if there is only the command word and no arguments in input
         if (destructuredInputs.length == 1) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
         }
-        if (destructuredInputs.length > 2) {
-            return new FailedCommand(FailedCommandType.INVALID_FORMAT);
-        }
         try {
-            int deletedIndex = Integer.parseInt(destructuredInputs[1]);
+            int deletedIndex = Integer.parseInt(destructuredInputs[1].trim());
             return new DeleteContactCommand(deletedIndex);
         } catch (NumberFormatException e) {
-            return new FailedCommand(FailedCommandType.INVALID_NUM);
+            return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
     }
 }

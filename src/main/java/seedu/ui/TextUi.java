@@ -142,12 +142,15 @@ public class TextUi {
 
     public static void numOutOfRangeMessage(int listSize) {
         String message;
+        int maxIndex = listSize - 1;
         if (listSize == 0) {
+            message = "There are no contacts stored in ConTech.";
+        } else if (listSize == 1) {
             message = "The number you have input is out of range.\n"
-                    + "Please input 0 as you only have 1 contact saved.";
+                    + "You only have 1 contact stored.";
         } else {
             message = "The number you have input is out of range.\n"
-                    + "Please input a number between 0 and " + listSize + ".";
+                    + "Please input a number between 0 and " + maxIndex + ".";
         }
         printDoubleLineMessage(message);
     }
