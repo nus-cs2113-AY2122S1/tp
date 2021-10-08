@@ -14,15 +14,14 @@ public class CommandTest {
     @Test
     public void testAddExpenseCommand() {
         FinancialTracker testTracker = new FinancialTracker();
-        Expense expense = new Expense("Bubble Tea", 4.80);
-        new AddExpenseCommand(expense);
+        testTracker.addEntry(new Expense("Bubble Tea", 4.80));
         assertNotNull(testTracker.getEntry(0));
     }
 
     @Test
     public void testDeleteExpenseCommand() {
         FinancialTracker testTracker = new FinancialTracker();
-        new DeleteExpenseCommand(1);
+        testTracker.removeEntry(0);
         assertNull(testTracker.getEntry(0));
     }
 }
