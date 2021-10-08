@@ -20,18 +20,6 @@ public class AddExpenditureCommand extends Command {
         this.date = date;
     }
 
-    public String getDescription(String rawCommand) {
-        return rawCommand.split(" ")[1];
-    }
-
-    public double getSpending(String rawCommand) {
-        return Double.parseDouble(rawCommand.split(" ")[2]);
-    }
-
-    public int getMonth(String rawCommand) {
-        return Integer.parseInt(rawCommand.split(" ")[3]);
-    }
-
 
     public void execute() {
         Expenditure newExpenditure = new Expenditure(description, spending, date);

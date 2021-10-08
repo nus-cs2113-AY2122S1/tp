@@ -9,6 +9,7 @@ public class Expenditure extends Record {
 
     public Expenditure(String description, double spending, LocalDate date) {
         super(spending, date.getMonthValue());
+        this.date = date;
         this.description = description;
     }
 
