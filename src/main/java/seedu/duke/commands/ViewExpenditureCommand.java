@@ -1,4 +1,16 @@
 package seedu.duke.commands;
 
-public class ViewExpenditureCommand {
+import seedu.duke.ui.TextUi;
+
+public class ViewExpenditureCommand extends Command{
+    public static final String COMMAND_WORD = "ViewExpenditure";
+    public int startMonth;
+    public int endMonth;
+
+
+
+    @Override
+    public void execute() {
+        TextUi.showRecordsListView(budgetList.getExpenditureList(startMonth, endMonth));
+    }
 }
