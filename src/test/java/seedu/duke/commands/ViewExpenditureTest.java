@@ -13,7 +13,7 @@ public class ViewExpenditureTest {
         RecordList currentExpenditureList = new RecordList();
         currentExpenditureList.addExpenditure("TestExpenditure1", 08.00, LocalDate.of(2021, 10, 8));
         currentExpenditureList.addExpenditure("TestExpenditure2", 10.00, LocalDate.of(2021, 10, 8));
-//        currentExpenditureList.getExpenditureList(1, 2);
+        //currentExpenditureList.getExpenditureList(1, 2);
         assertEquals(2, currentExpenditureList.getSize());
     }
 }
