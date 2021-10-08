@@ -16,8 +16,8 @@ public class DeleteCommand extends Command {
     // v1.0: deleteCommand deletes purely based on index, i.e. delete [TASK_INDEX]
     // converted command array to string for future uses, where input may have extra spaces
     // such as 'delete foo bar'
-    public DeleteCommand(String[] command) {
-        taskToDelete = Arrays.toString(command);
+    public DeleteCommand(String[] itemDescription) {
+        taskToDelete = Arrays.toString(itemDescription);
     }
 
     public CommandResult execute() {
@@ -46,12 +46,13 @@ public class DeleteCommand extends Command {
         } catch (ArrayIndexOutOfBoundsException e) {
             return "That task does not exist";
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            return ("Please tell me which task number to delete");
+            return "Please tell me which task number to delete";
         }
     }
 
     public static int getTaskIndex(String command) {
-        int taskIndexPosition = command.trim().indexOf("- ") + 1;
+        // command will contain either a "-t" or "-e"
+        int taskIndexPosition = command.trim().indexOf("-") + 2 ;
         return Integer.parseInt(command.trim().substring(taskIndexPosition)) - 1;
     }
 }
