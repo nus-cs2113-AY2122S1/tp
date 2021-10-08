@@ -21,14 +21,14 @@ public class Entry {
             break;
         case LIST_TRAINING_KEYWORD:
             Ui.printList(trainings);
+            break;
         case ADD_MEMBER_KEYWORD:
             Parser.makeMemberEntry(members, entry);
             break;
         case ADD_TRAINING_KEYWORD:
             Parser.makeTrainingEntry(trainings, entry);
             break;
-
-            case DELETE_MEMBER_KEYWORD:
+        case DELETE_MEMBER_KEYWORD:
             Parser.deleteMember(members, entry);
             break;
         case DELETE_TRAINING_KEYWORD:
