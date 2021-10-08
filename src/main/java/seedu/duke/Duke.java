@@ -24,7 +24,9 @@ public class Duke {
     public static void main(String[] args) {
 
         Ui.printWelcome();
+
         Scanner in = new Scanner(System.in);
+        Storage.setScanner(in);
 
         while (isProgramRunning) {
             Parser.parseUserInput(readUserInput(in), listOfTrips);
