@@ -1,6 +1,10 @@
 package taa;
 
-import taa.command.*;
+import taa.command.AddStudentCommand;
+import taa.command.Command;
+import taa.command.AddModuleCommand;
+import taa.command.ExitCommand;
+import taa.command.ListModulesCommand;
 
 import java.util.ArrayList;
 import java.util.Collections;
