@@ -1,171 +1,269 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.Command;
 import seedu.duke.command.AddLessonCommand;
 import seedu.duke.command.AddTaskCommand;
-import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.DeleteAllCommand;
+import seedu.duke.command.DeleteLessonCommand;
+import seedu.duke.command.DeleteTaskCommand;
 import seedu.duke.command.DoneCommand;
+import seedu.duke.command.FindAllCommand;
+import seedu.duke.command.FindLessonCommand;
+import seedu.duke.command.FindTaskCommand;
+import seedu.duke.command.ListAllCommand;
+import seedu.duke.command.ListLessonCommand;
+import seedu.duke.command.ListTaskCommand;
+import seedu.duke.command.Command;
+import seedu.duke.command.CommandType;
 import seedu.duke.command.ExitCommand;
-import seedu.duke.command.FindCommand;
-import seedu.duke.command.ListCommand;
-
 import seedu.duke.exception.DukeException;
 import seedu.duke.ui.Message;
 
 public class Parser {
-    public static final String COMMAND_ADD = "add";
-    public static final String TASK_KEYWORD = "task";
-    public static final String LESSON_KEYWORD = "lesson";
-    public static final String ALL_KEYWORD = "all";
-    public static final String COMMAND_LIST = "list";
-    public static final String COMMAND_DONE = "done";
-    public static final String COMMAND_DELETE = "delete";
-    public static final String COMMAND_FIND = "find";
-    public static final String COMMAND_EXIT = "exit";
-    public static final String FLAG_DAY = "-d";
-    public static final String FLAG_INFORMATION = "-i";
-    public static final String FLAG_START_TIME = "-s";
-    public static final String FLAG_END_TIME = "-e";
-    public static int SEPARATING_SPACE = 3;
+    public static CommandType getCommandType(String userResponse) {
+        String[] params = userResponse.split(" ", 2);
+        return CommandType.of(params[0]);
+    }
 
     /**
      * Identifies key information from raw user input and returns a Command object with the relevant information
      * prepared for execution.
      *
-     * @param userInput the raw input that from the command prompt
-     * @return the Command object to be executed
-     * @throws DukeException the exception that occurs when there are issues while parsing the input
+     * @param userResponse the user response
+     * @return the corresponding command
+     * @throws DukeException if user response is invalid
      */
-    public Command parse(String userInput) throws DukeException {
-        int positionOfSpace = userInput.indexOf(" ");
-        String commandWord = positionOfSpace > 0 ? userInput.substring(0, positionOfSpace).strip() : userInput;
-        String commandInfo = userInput.substring(positionOfSpace + 1);
+    public static Command parse(String userResponse) throws DukeException {
+        CommandType commandType = getCommandType(userResponse);
 
-        switch (commandWord) {
-        case COMMAND_ADD:
-            return parseAddCommand(commandInfo);
-        case COMMAND_LIST:
-            return parseListCommand(commandInfo);
-        case COMMAND_DONE:
-            return parseDoneCommand(commandInfo);
-        case COMMAND_DELETE:
-            return parseDeleteCommand(commandInfo);
-        case COMMAND_FIND:
-            return parseFindCommand(commandInfo);
-        case COMMAND_EXIT:
-            return new ExitCommand();
+        switch (commandType) {
+        case ADD:
+            return parseAddCommand(userResponse);
+        case DELETE:
+            return parseDeleteCommand(userResponse);
+        case DONE:
+            return parseDoneCommand(userResponse);
+        case EXIT:
+            return parseExitCommand(userResponse);
+        case FIND:
+            return parseFindCommand(userResponse);
+        case LIST:
+            return parseListCommand(userResponse);
+        case INVALID:
+            // Fallthrough
         default:
-            throw new DukeException(Message.ERROR_UNKNOWN);
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
     }
 
-    /**
-     * Returns the relevant Command object with the title of the task or lesson to add, the date of the task or
-     * lesson. Tasks can have an optional information parameter, and lessons have a start and end time.
-     *
-     * @param addInfo the remainder of the command following the word "add"
-     * @return the Command to be executed to add the task or lesson
-     * @throws DukeException the exception that occurs when the user enters a type to add other than "task" or "lesson"
-     */
-    private Command parseAddCommand(String addInfo) throws DukeException {
-        int positionOfSpace = addInfo.indexOf(" ");
-        String taskOrLesson = addInfo.substring(0, positionOfSpace);
-        int positionOfDay = addInfo.indexOf(FLAG_DAY);
-        String title = addInfo.substring(positionOfSpace + 1, positionOfDay - 1).strip();
+    private static Command parseAddCommand(String userResponse) throws DukeException {
+        String param = userResponse.replaceFirst("add", "").strip();
+        CommandType commandType = getCommandType(param);
 
-        switch (taskOrLesson) {
-        case TASK_KEYWORD:
-            String dayOfTask;
-            int positionOfInformation = addInfo.indexOf(FLAG_INFORMATION);
-            if (positionOfInformation != -1) {
-                dayOfTask = addInfo.substring(positionOfDay + SEPARATING_SPACE, positionOfInformation - 1).strip();
-                String information = addInfo.substring(positionOfInformation + SEPARATING_SPACE).strip();
-                return new AddTaskCommand(title, dayOfTask, information);
-            } else {
-                // no information entered
-                dayOfTask = addInfo.substring(positionOfDay + SEPARATING_SPACE).strip();
-                return new AddTaskCommand(title, dayOfTask, "");
-            }
-        case LESSON_KEYWORD:
-            int positionOfStartTime = addInfo.indexOf(FLAG_START_TIME);
-            int positionOfEndTime = addInfo.indexOf(FLAG_END_TIME);
-            String dayOfLesson = addInfo.substring(positionOfDay + SEPARATING_SPACE, positionOfStartTime - 1).strip();
-            String lessonStartTime =
-                    addInfo.substring(positionOfStartTime + SEPARATING_SPACE, positionOfEndTime - 1).strip();
-            String lessonEndTime = addInfo.substring(positionOfEndTime + SEPARATING_SPACE).strip();
-            return new AddLessonCommand(title, dayOfLesson, lessonStartTime, lessonEndTime);
+        switch (commandType) {
+        case TASK:
+            return parseAddTaskCommand(param.replaceFirst("task", "").strip());
+        case LESSON:
+            return parseAddLessonCommand(param.replaceFirst("lesson", "").strip());
+        case INVALID:
+            // Fallthrough
         default:
-            throw new DukeException(Message.ERROR_NO_ADD_TYPE);
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
     }
 
-    /**
-     * Returns an executable Command object containing information about the type of tasks or lessons to list, and
-     * the time period of items to list.
-     *
-     * @param listInfo the remainder of the command following the word "list"
-     * @return the Command to be executed to list items
-     */
-    private Command parseListCommand(String listInfo) {
-        int positionOfSpace = listInfo.indexOf(" ");
-        String listType = listInfo.substring(0, positionOfSpace); // either all, task or lesson
-        String period = listInfo.substring(positionOfSpace + 1); // today, week, tomorrow, mon, tue, wed, thu, fri,
-        // sat, or sun
+    private static Command parseAddTaskCommand(String userResponse) throws DukeException {
+        String[] params = userResponse.split(" -d | -i ");
+        if (params.length < 2 || params.length > 3) {
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
+        }
 
-        return new ListCommand(listType, period);
-    }
+        String title = params[0].strip();
+        String dayOfTheWeek = params[1].strip();    // TODO: Validate correctness with enum
 
-    /**
-     * Returns an executable Command object containing the index specified by the user of the task to mark as done.
-     *
-     * @param doneIndex the index of the task to mark done
-     * @return the Command to be executed to mark a task as done
-     */
-    private Command parseDoneCommand(String doneIndex) {
-        int taskIndex = Integer.parseInt(doneIndex);
-        return new DoneCommand(taskIndex);
-    }
-
-    /**
-     * Returns an executable Command object containing information about the type of tasks or lessons to delete, and if
-     * the user chooses to delete all tasks or lessons, the type of event to delete ("task" or "lesson").
-     *
-     * @param deleteInfo the remainder of the command following the word "delete"
-     * @return the Command to be executed to delete a task / lesson / all tasks or lessons
-     * @throws DukeException the exception thrown when the user either enters invalid input to delete
-     */
-    private Command parseDeleteCommand(String deleteInfo) throws DukeException {
-        int positionOfSpace = deleteInfo.indexOf(" ");
-        String deleteType = deleteInfo.substring(0, positionOfSpace);
-
-        switch (deleteType) {
-        case TASK_KEYWORD:
-        case LESSON_KEYWORD:
-            int deleteIndex = Integer.parseInt(deleteInfo.substring(positionOfSpace + 1).strip());
-            return new DeleteCommand(deleteType, deleteIndex);
-        case ALL_KEYWORD:
-            String deleteAllType = deleteInfo.substring(positionOfSpace + 1).strip();
-            if (deleteAllType.equals(TASK_KEYWORD) || deleteAllType.equals(LESSON_KEYWORD)) {
-                return new DeleteCommand(deleteType, 0, deleteAllType);
-            } else {
-                throw new DukeException(Message.ERROR_NO_DELETE_TYPE);
-            }
+        switch (params.length) {
+        case 2:
+            // System.out.print(title + ", " + dayOfTheWeek);      // TODO: to be removed
+            return new AddTaskCommand(title, dayOfTheWeek);
+        case 3:
+            String information = params[2].strip();
+            // System.out.print(title + ", " + dayOfTheWeek + ", " + information);     // TODO: to be removed
+            return new AddTaskCommand(title, dayOfTheWeek, information);
         default:
-            throw new DukeException(Message.ERROR_NO_DELETE_TYPE);
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
     }
 
-    /**
-     * Returns an executable Command object containing information about the keyword to locate in existing tasks and/or
-     * lessons.
-     *
-     * @param findInfo the remainder of the command following the word "find"
-     * @return the Command object to be executed to find relevant tasks/lessons
-     */
-    private Command parseFindCommand(String findInfo) {
-        int positionOfSpace = findInfo.indexOf(" ");
-        String typeToFind = findInfo.substring(0, positionOfSpace);
-        String findKeyword = findInfo.substring(positionOfSpace + 1).strip();
-        return new FindCommand(typeToFind, findKeyword);
+    private static Command parseAddLessonCommand(String userResponse) throws DukeException {
+        String[] params = userResponse.split(" -d | -s | -e ");
+        if (params.length != 4) {
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
+        }
+
+        String title = params[0].strip();
+        String dayOfTheWeek = params[1].strip();    // TODO: Validate correctness with enum
+        String startTIme = params[2].strip();       // TODO: Validate correctness with time library
+        String endTime = params[3].strip();         // TODO: Validate correctness with time library
+        return new AddLessonCommand(title, dayOfTheWeek, startTIme, endTime);
+    }
+
+    private static Command parseDeleteCommand(String userResponse) throws DukeException {
+        String param = userResponse.replaceFirst("delete", "").strip();
+        CommandType commandType = getCommandType(param);
+
+        switch (commandType) {
+        case TASK:
+            return parseDeleteTaskCommand(param.replaceFirst("task", "").strip());
+        case LESSON:
+            return parseDeleteLessonCommand(param.replaceFirst("lesson", "").strip());
+        case ALL:
+            return parseDeleteAllCommand();
+        case INVALID:
+            // Fallthrough
+        default:
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
+        }
+    }
+
+    private static Command parseDeleteTaskCommand(String userResponse) throws DukeException {
+        if (userResponse.equals("all")) {
+            return new DeleteTaskCommand();
+        }
+
+        try {
+            int taskIndex = Integer.parseInt(userResponse);
+            return new DeleteTaskCommand(taskIndex);
+        } catch (NumberFormatException e) {
+            throw new DukeException(Message.ERROR_NOT_NUMBER);
+        }
+    }
+
+    private static Command parseDeleteLessonCommand(String userResponse) throws DukeException {
+        if (userResponse.equals("all")) {
+            return new DeleteLessonCommand();
+        }
+
+        try {
+            int lessonIndex = Integer.parseInt(userResponse);
+            return new DeleteLessonCommand(lessonIndex);
+        } catch (NumberFormatException e) {
+            throw new DukeException(Message.ERROR_NOT_NUMBER);
+        }
+    }
+
+    private static Command parseDeleteAllCommand() throws DukeException {
+        return new DeleteAllCommand();
+    }
+
+    private static Command parseDoneCommand(String userResponse) throws DukeException {
+        // TODO: Implement batch marking
+
+        try {
+            int taskIndex = Integer.parseInt(userResponse);
+            return new DoneCommand(taskIndex);
+        } catch (NumberFormatException e) {
+            throw new DukeException(Message.ERROR_NOT_NUMBER);
+        }
+    }
+
+    private static Command parseExitCommand(String userResponse) throws DukeException {
+        boolean isValidResponse = userResponse.equals("exit");
+        if (!isValidResponse) {
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
+        }
+
+        return new ExitCommand();
+    }
+
+    private static Command parseFindCommand(String userResponse) throws DukeException {
+        String param = userResponse.replaceFirst("find", "").strip();
+        CommandType commandType = getCommandType(param);
+
+        switch (commandType) {
+        case TASK:
+            return parseFindTaskCommand(param.replaceFirst("task", "").strip());
+        case LESSON:
+            return parseFindLessonCommand(param.replaceFirst("lesson", "").strip());
+        case ALL:
+            return parseFindAllCommand(param.replaceFirst("all", "").strip());
+        case INVALID:
+            // Fallthrough
+        default:
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
+        }
+    }
+
+    private static Command parseFindTaskCommand(String keyword) throws DukeException {
+        if (keyword.isBlank()) {
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
+        }
+
+        return new FindTaskCommand(keyword);
+    }
+
+    private static Command parseFindLessonCommand(String keyword) throws DukeException {
+        if (keyword.isBlank()) {
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
+        }
+
+        return new FindLessonCommand(keyword);
+    }
+
+    private static Command parseFindAllCommand(String keyword) throws DukeException {
+        if (keyword.isBlank()) {
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
+        }
+
+        return new FindAllCommand(keyword);
+    }
+
+    private static Command parseListCommand(String userResponse) throws DukeException {
+        String param = userResponse.replaceFirst("list", "").strip();
+        CommandType commandType = getCommandType(param);
+
+        switch (commandType) {
+        case TASK:
+            return parseListTaskCommand(param.replaceFirst("task", "").strip());
+        case LESSON:
+            return parseListLessonCommand(param.replaceFirst("lesson", "").strip());
+        case ALL:
+            return parseListAllCommand(param.replaceFirst("all", "").strip());
+        case INVALID:
+            // Fallthrough
+        default:
+            throw new DukeException(Message.ERROR_INVALID_COMMAND);
+        }
+    }
+
+    private static Command parseListTaskCommand(String period) throws DukeException {
+        // TODO: Validate today, tomorrow
+        if (period.isBlank()) {
+            return new ListTaskCommand();
+        } else if (DayOfTheWeek.is(period)) {
+            return new ListTaskCommand(period);
+        }
+
+        throw new DukeException(Message.ERROR_INVALID_COMMAND);
+    }
+
+    private static Command parseListLessonCommand(String period) throws DukeException {
+        // TODO: Validate today, tomorrow
+        if (period.isBlank()) {
+            return new ListLessonCommand();
+        } else if (DayOfTheWeek.is(period)) {
+            return new ListLessonCommand(period);
+        }
+
+        throw new DukeException(Message.ERROR_INVALID_COMMAND);
+    }
+
+    private static Command parseListAllCommand(String period) throws DukeException {
+        // TODO: Validate today, tomorrow
+        if (period.isBlank()) {
+            return new ListAllCommand();
+        } else if (DayOfTheWeek.is(period)) {
+            return new ListAllCommand(period);
+        }
+
+        throw new DukeException(Message.ERROR_INVALID_COMMAND);
     }
 }
