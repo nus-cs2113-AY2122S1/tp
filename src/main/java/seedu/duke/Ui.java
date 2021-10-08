@@ -7,7 +7,7 @@ public class Ui {
 
     private static final String CLEAR_MESSAGE = "All clients have been deleted";
     private static final String CUT_MESSAGE = "Client has been deleted:";
-    
+
 
     private static Scanner in = new Scanner(System.in);
 
@@ -46,6 +46,6 @@ public class Ui {
         show(CUT_MESSAGE + "\n" + client);
         showLine();
     }
-  
+
 }
 
