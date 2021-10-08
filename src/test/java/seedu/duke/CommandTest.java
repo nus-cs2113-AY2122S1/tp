@@ -21,6 +21,7 @@ public class CommandTest {
     @Test
     public void testDeleteExpenseCommand() {
         FinancialTracker testTracker = new FinancialTracker();
+        testTracker.addEntry(new Expense("Bubble Tea", 4.80));
         testTracker.removeEntry(0);
         assertNull(testTracker.getEntry(0));
     }
