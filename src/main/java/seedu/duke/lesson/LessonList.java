@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class LessonList {
+    // TODO: Implement serialization/deserialization
+
     private List<Lesson> lessonList;
 
     public LessonList() {

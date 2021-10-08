@@ -1,6 +1,7 @@
 package seedu.duke.lesson;
 
 public class Lesson {
+    // TODO: Implement serialization/deserialization
     private String title;
     private String dayOfTheWeek;
     private String startTime;

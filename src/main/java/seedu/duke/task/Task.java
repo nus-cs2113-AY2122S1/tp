@@ -1,6 +1,8 @@
 package seedu.duke.task;
 
 public class Task {
+    // TODO: Implement serialization/deserialization
+
     private String title;
     private String dayOfTheWeek;
     private String information;
