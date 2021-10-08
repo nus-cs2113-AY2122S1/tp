@@ -1,6 +1,8 @@
 package seedu.duke.task;
 
 public class Task {
+    // TODO: Implement serialization/deserialization
+
     private String title;
     private String dayOfTheWeek;
     private String information;
@@ -33,6 +35,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public String getDayOfTheWeek() {
         return dayOfTheWeek;
     }
@@ -56,7 +62,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[T]" + getDoneSymbol() + " " + "Title: " + title
+        // TODO: Improve formatting
+        return "[T]" + getDoneSymbol() + " Title: " + title
                 + (information.isBlank() ? "" : " (Info: " + information + ")");
     }
 }

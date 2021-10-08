@@ -1,48 +1,54 @@
 package seedu.duke;
 
+import java.io.IOException;
+
 import seedu.duke.command.Command;
 import seedu.duke.exception.DukeException;
 import seedu.duke.lesson.LessonList;
 import seedu.duke.parser.Parser;
+import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
 
 public class Duke {
-    private final Ui ui;
+    private Ui ui;
     private TaskList taskList;
     private LessonList lessonList;
-    private Parser parser;
+    private Storage storage;
 
     public Duke() {
         ui = new Ui();
-        lessonList = new LessonList();
+        storage = new Storage();
+        // try {
+        // TODO: Load task and lesson from saved data
         taskList = new TaskList();
-        parser = new Parser();
+        lessonList = new LessonList();
+        // } catch (DukeException | IOException e) {
+        //     ui.printMessage(e.toString());
+        //     taskList = new TaskList();
+        //     lessonList = new LessonList();
+        //     storage.createNewData(ui);
+        // }
     }
 
     public void startProgram() {
         boolean isExit = false;
-        // try {
         while (!isExit) {
-            String userResponse = ui.readUserResponse();
             try {
-                Command command = parser.parse(userResponse);
+                String userResponse = ui.readUserResponse();
+                Command command = Parser.parse(userResponse);
+                command.execute(ui, taskList, lessonList);
+                isExit = command.isExit();
             } catch (DukeException e) {
-                e.printStackTrace(); // error while parsing input
+                ui.printMessage(e.toString());
             }
-            // Command command = Parser.parse(userResponse);
-            // command.execute(ui, taskList, lessonList);
-            // isExit = command.isExit();
-            isExit = true;
         }
-        // } catch (DukeException e) {
-        //     ui.printMessage(e);
-        // }
     }
 
     public void run() {
         ui.printGreeting();
         this.startProgram();
+        ui.printExit();
     }
 
     public static void main(String[] args) {

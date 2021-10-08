@@ -5,9 +5,7 @@ import seedu.duke.lesson.LessonList;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
 
-public class AddLessonCommand extends Command {
-    private String title;
-    private String dayOfTheWeek;
+public class AddLessonCommand extends AddCommand {
     private String startTime;
     private String endTime;
 
@@ -18,6 +16,7 @@ public class AddLessonCommand extends Command {
         this.endTime = endTime;
     }
 
+    @Override
     public void execute(Ui ui, TaskList tasklist, LessonList lessonList) {
         lessonList.addLesson(new Lesson(title, dayOfTheWeek, startTime, endTime));
     }

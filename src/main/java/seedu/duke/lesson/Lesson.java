@@ -1,6 +1,7 @@
 package seedu.duke.lesson;
 
 public class Lesson {
+    // TODO: Implement serialization/deserialization
     private String title;
     private String dayOfTheWeek;
     private String startTime;
@@ -21,16 +22,16 @@ public class Lesson {
         this.endTime = endTime;
     }
 
-    public String getDayOfTheWeek() {
-        return dayOfTheWeek;
-    }
-
     public String getTitle() {
         return title;
     }
 
+    public String getDayOfTheWeek() {
+        return dayOfTheWeek;
+    }
+
     @Override
     public String toString() {
-        return "[L]" + "    " + "Title: " + title + " (Start: " + startTime + ") " + "(End: " + endTime + ")";
+        return "[L] " + "Title: " + title + " (Start: " + startTime + ") " + "(End: " + endTime + ")";
     }
 }

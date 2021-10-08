@@ -1,25 +1,26 @@
 package seedu.duke.lesson;
 
 import seedu.duke.exception.DukeException;
+import seedu.duke.task.Task;
+import seedu.duke.task.TaskList;
 import seedu.duke.ui.Message;
+import seedu.duke.ui.Ui;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class LessonList {
+    // TODO: Implement serialization/deserialization
+
     private List<Lesson> lessonList;
 
     public LessonList() {
         lessonList = new ArrayList<>();
     }
 
-    /**
-     * Replaces the current lesson list with a given one.
-     *
-     * @param newLessonList the new lesson list given
-     */
-    public LessonList(List<Lesson> newLessonList) {
-        lessonList = newLessonList;
+    public LessonList(List<Lesson> lessonList) {
+        this.lessonList = lessonList;
     }
 
     public void addLesson(Lesson newLesson) {
@@ -30,11 +31,6 @@ public class LessonList {
         lessonList.clear();
     }
 
-    /**
-     * Removes the lesson of the given index from the lesson list.
-     *
-     * @param index the index of the lesson to be removed
-     */
     public void deleteLesson(int index) {
         lessonList.remove(index);
     }
@@ -49,13 +45,29 @@ public class LessonList {
         }
     }
 
-    public LessonList findLessonsByKeyword(String keyword) {
-        LessonList matchingLessonList = new LessonList();
-        for (Lesson lesson : lessonList) {
-            if (lesson.getTitle().contains(keyword)) {
-                matchingLessonList.addLesson(lesson);
-            }
+    public boolean isEmpty() {
+        return lessonList.isEmpty();
+    }
+
+    public LessonList filterLessonsByKeyword(String keyword) {
+        return new LessonList(lessonList.stream()
+                .filter(lesson -> lesson.getTitle().toLowerCase().contains(keyword))
+                .collect(Collectors.toList()));
+    }
+
+    public LessonList filterLessonsByPeriod(String period) {
+        return new LessonList(lessonList.stream()
+                .filter(lesson -> lesson.getDayOfTheWeek().toLowerCase().contains(period))
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < lessonList.size(); i++) {
+            Lesson lesson = lessonList.get(i);
+            s.append(Ui.PADDING).append(i + 1).append(". ").append(lesson).append(System.lineSeparator());
         }
-        return matchingLessonList;
+        return s.toString();
     }
 }
