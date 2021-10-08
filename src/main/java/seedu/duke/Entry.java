@@ -15,33 +15,32 @@ public class Entry {
     public static void addEntry(String entry) throws NullPointerException {
         Keyword keyword = Parser.getKeywordStatus(entry);
         switch (keyword) {
-        case MEMBER_ENTRY:
-            Parser.doDoneTask(members, entry);
+        case LIST_MEMBER_KEYWORD:
+            Ui.printMemberList(members);
             break;
-        case TRAINING_SCHEDULE_ENTRY:
-            Parser.makeTodoTask(trainings, entry);
-            break;
-        case LIST_KEYWORD:
-            Ui.printList(entry);
+        case LIST_TRAINING_KEYWORD:
+            Ui.printTrainingList(trainings);
             break;
         case ADD_MEMBER_KEYWORD:
-            Parser.addItem(members, entry);
+            Parser.makeMemberEntry(members, entry);
             break;
         case ADD_TRAINING_KEYWORD:
-            Parser.addItem(trainings, entry);
+            Parser.makeTrainingEntry(trainings, entry);
         case DELETE_MEMBER_KEYWORD:
-            Parser.deleteItem(members, entry);
+            Parser.deleteMember(members, entry);
             break;
         case DELETE_TRAINING_KEYWORD:
-            Parser.deleteItem(trainings, entry);
-        case FIND_KEYWORD:
-            Parser.findMatching(members, entry);
+            Parser.deleteTraining(trainings, entry);
+        case FIND_MEMBER_KEYWORD:
+            Parser.findInMembers(members, entry);
             break;
+        case FIND_TRAINING_KEYWORD:
+            Parser.findInTraining(trainings, entry);
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();
             break;
         case EXIT_KEYWORD:
-            Ui.printGoodbyeMessage();
+            Ui.printExitMessage();
             break;
         }
     }
