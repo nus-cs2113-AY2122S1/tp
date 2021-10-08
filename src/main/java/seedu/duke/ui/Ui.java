@@ -46,7 +46,7 @@ public class Ui {
     public void printExit() {
         System.out.print(LINE);
         System.out.println(PADDING + "Bye!");
-        System.out.println(LINE);
+        System.out.print(LINE);
     }
 
     public void printMessage(String message) {
