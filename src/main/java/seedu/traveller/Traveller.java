@@ -47,7 +47,7 @@ public class Traveller {
                 Command c = ParserTrip.parse(fullCommand);
                 c.execute(tripsList, ui);
                 isExit = c.getExit();
-            } catch (TravellerException e) {
+            } catch (TravellerException | IndexOutOfBoundsException e) {
                 ui.printError(e.getMessage());
             } finally {
                 ui.printLine();
