@@ -1,8 +1,8 @@
-package seedu.duke;
+package seedu.TypingGame;
 
 import java.util.Scanner;
 
-public class Duke {
+public class Main {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
