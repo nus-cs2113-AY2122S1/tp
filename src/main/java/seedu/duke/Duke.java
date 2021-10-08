@@ -8,41 +8,34 @@ import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
 
 public class Duke {
-    private final Ui ui;
+    private Ui ui;
     private TaskList taskList;
     private LessonList lessonList;
-    private Parser parser;
 
     public Duke() {
         ui = new Ui();
-        lessonList = new LessonList();
         taskList = new TaskList();
-        parser = new Parser();
+        lessonList = new LessonList();
     }
 
     public void startProgram() {
         boolean isExit = false;
-        // try {
         while (!isExit) {
-            String userResponse = ui.readUserResponse();
             try {
-                Command command = parser.parse(userResponse);
+                String userResponse = ui.readUserResponse();
+                Command command = Parser.parse(userResponse);
+                command.execute(ui, taskList, lessonList);
+                isExit = command.isExit();
             } catch (DukeException e) {
-                e.printStackTrace(); // error while parsing input
+                ui.printMessage(e.toString());
             }
-            // Command command = Parser.parse(userResponse);
-            // command.execute(ui, taskList, lessonList);
-            // isExit = command.isExit();
-            isExit = true;
         }
-        // } catch (DukeException e) {
-        //     ui.printMessage(e);
-        // }
     }
 
     public void run() {
         ui.printGreeting();
         this.startProgram();
+        ui.printExit();
     }
 
     public static void main(String[] args) {
