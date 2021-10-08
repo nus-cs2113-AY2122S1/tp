@@ -9,9 +9,10 @@ import static seedu.traveller.mapper.GraphList.vertexArray;
 
 
 public class Dijkstra {
-    double[][] adjMatrix = new double[10][10];
+    private static double[][] adjMatrix= new double[10][10];
+    //double[][] adjMatrix ;
 
-    public void computeSource(Vertex src) {
+    public static void computeSource(Vertex src) {
         for (Vertex v: vertexArray) {
             v.minDistance = Double.MAX_VALUE;
         }
@@ -39,7 +40,7 @@ public class Dijkstra {
         }
     }
 
-    public void getToGoal(Vertex targetV) {
+    public static void getToGoal(Vertex targetV) {
         List<Vertex> path = new ArrayList<>();
         List<Double> dist = new ArrayList<>();
         double curr;
@@ -65,7 +66,7 @@ public class Dijkstra {
         System.out.println("Total distance = " + sum);
     }
 
-    public void run(Vertex s, Vertex t) {
+    public static void run(Vertex s, Vertex t) {
         computeSource(s);
         getToGoal(t);
     }
