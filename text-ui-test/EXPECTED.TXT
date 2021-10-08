@@ -1,3 +1,4 @@
+No file
   ______                      ____         
  /_  __/________ __   _____  / / /__  _____
   / / / ___/ __ `/ | / / _ \/ / / _ \/ ___/
@@ -7,19 +8,20 @@
 Your one stop travel planner.
 
 ____________________________________________________________
-	You have just created a new trip called new trip 1.
+Either of the nodes doesn't exist!
+	You have just created a new trip called new.
 ____________________________________________________________
 ____________________________________________________________
 	Here are all your trips: 
-		TripName: new trip 1
+		TripName: new
 ____________________________________________________________
 ____________________________________________________________
-	You have just created a new trip called newTrip2.
+	Wrong format for New!
+	Correct format: new TRIP_NAME
 ____________________________________________________________
 ____________________________________________________________
 	Here are all your trips: 
-		TripName: new trip 1
-		TripName: newTrip2
+		TripName: new
 ____________________________________________________________
 ____________________________________________________________
 	The command 'view' is not recognised.
