@@ -2,24 +2,22 @@ package parser;
 
 import inventory.Medicine;
 import inventory.Stock;
-import ui.Ui;
-
 import org.junit.jupiter.api.Test;
+import ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 public class StockValidatorTest {
-    private Ui ui;
+    private Ui ui = new Ui();
 
     @Test
     public void checkValidName_validName_expectTrue() {
         String inputString = "panadol";
-        Boolean isValid = StockValidator.isValidName(ui, inputString);
+        boolean isValid = StockValidator.isValidName(ui, inputString);
         assertTrue(isValid);
     }
 
@@ -32,14 +30,21 @@ public class StockValidatorTest {
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
-        Boolean isValid = StockValidator.isValidStockId(ui,"1", tempMedicines);
+        boolean isValid = StockValidator.isValidStockId(ui,"1", tempMedicines);
         assertTrue(isValid);
     }
 
     @Test
     public void checkValidQuantity_validQuantity_expectTrue() {
         String inputString = "0";
-        Boolean isValid = StockValidator.isValidQuantity(ui, inputString);
+        boolean isValid = StockValidator.isValidQuantity(ui, inputString);
+        assertTrue(isValid);
+    }
+
+    @Test
+    public void checkValidExpiry_validDate_expectTrue() {
+        String inputDate = "08-10-2021";
+        boolean isValid = StockValidator.isValidExpiry(ui, inputDate);
         assertTrue(isValid);
     }
 }
