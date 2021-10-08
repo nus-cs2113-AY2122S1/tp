@@ -17,7 +17,7 @@ public class Record {
         return amount;
     }
 
-    public String getType(){
+    public String getType() {
         return "Record";
     }
 

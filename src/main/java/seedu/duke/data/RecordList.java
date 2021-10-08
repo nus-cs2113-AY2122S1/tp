@@ -33,10 +33,10 @@ public class RecordList {
 
     }
 
-    public RecordList getExpenditureList(int startMonth, int endMonth){
+    public RecordList getExpenditureList(int startMonth, int endMonth) {
         RecordList allExpenditure = null;
-        for(Record a:allRecords){
-            if(a.getType() == "Expenditure" && a.getMonth() <= endMonth && a.getMonth() >= startMonth){
+        for (Record a:allRecords) {
+            if (a.getType() == "Expenditure" && a.getMonth() <= endMonth && a.getMonth() >= startMonth) {
                 allExpenditure.addExpenditure(a.getDescription(), a.getAmount(), a.getMonth());
             }
         }

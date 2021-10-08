@@ -14,10 +14,12 @@ public class Expenditure extends Record {
     public String getDescription() {
         return description;
     }
+
     @Override
     public double getAmount() {
         return spending;
     }
+
     @Override
     public int getMonth() {
         return month;
@@ -26,8 +28,9 @@ public class Expenditure extends Record {
     public void printExpenditure() {
         System.out.println(this.description + " $" + this.spending + "Month: " + this.month);
     }
+
     @Override
-    public String getType(){
+    public String getType() {
         return "Expenditure";
     }
 }
