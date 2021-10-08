@@ -55,9 +55,9 @@ public class IngredientList {
     }
 
     /**
-     * Returns a string representation of the whole list
+     * Returns a string representation of the whole list.
      *
-     * @return returns a string representing all the ingredients and their specific quantities and expiration dates
+     * @return returns a string representing all the ingredients and their specific quantities and expiration dates.
      */
     public String printWholeList() {
         String wholeList = "";

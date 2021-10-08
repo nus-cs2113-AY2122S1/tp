@@ -8,7 +8,7 @@ import expiryeliminator.data.exception.DuplicateDataException;
 /**
  * Lists all ingredient, together with its associated quantity and expiry date.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
 
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "list";

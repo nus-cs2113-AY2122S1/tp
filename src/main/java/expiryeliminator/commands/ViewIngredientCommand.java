@@ -7,7 +7,7 @@ import expiryeliminator.data.RecipeList;
 /**
  * Finds a specific ingredient, together with its associated quantity and expiry date.
  */
-public class ViewIngredientCommand extends Command{
+public class ViewIngredientCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "view";
 
@@ -15,7 +15,7 @@ public class ViewIngredientCommand extends Command{
 
     private final String ingredientDescription;
 
-    public ViewIngredientCommand( String ingredientDescription) {
+    public ViewIngredientCommand(String ingredientDescription) {
         this.ingredientDescription = ingredientDescription;
     }
 
