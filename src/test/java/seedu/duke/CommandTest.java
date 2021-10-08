@@ -6,7 +6,8 @@ import seedu.commands.DeleteExpenseCommand;
 import seedu.entry.Expense;
 import seedu.utility.FinancialTracker;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class CommandTest {
 
