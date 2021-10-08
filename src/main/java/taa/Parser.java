@@ -1,7 +1,8 @@
 package taa;
 
-import taa.command.AddModuleCommand;
+import taa.command.AddStudentCommand;
 import taa.command.Command;
+import taa.command.AddModuleCommand;
 import taa.command.ExitCommand;
 import taa.command.ListModulesCommand;
 
@@ -29,6 +30,10 @@ public class Parser {
 
         case Command.COMMAND_ADD_MODULE:
             command = new AddModuleCommand(argument);
+            break;
+
+        case Command.COMMAND_ADD_STUDENT:
+            command = new AddStudentCommand(argument);
             break;
 
         default:
