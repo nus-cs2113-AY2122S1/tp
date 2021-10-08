@@ -16,6 +16,14 @@ public class Exercise {
         this.reps = reps;
     }
 
+    public int getSets() {
+        return sets;
+    }
+
+    public int getReps() {
+        return reps;
+    }
+    
     public Boolean getIsDone() {
         return isDone;
     }

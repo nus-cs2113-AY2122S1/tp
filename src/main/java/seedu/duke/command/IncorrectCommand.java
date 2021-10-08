@@ -15,7 +15,7 @@ public class IncorrectCommand extends Command {
 
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
-        System.out.println(feedbackToUser);
+        throw new GetJackDException(feedbackToUser);
     }
 
 }

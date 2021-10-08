@@ -9,8 +9,8 @@ import seedu.duke.ui.Ui;
  * To relay the parsed user input to the WorkoutList and ExerciseList class for execution.
  */
 public abstract class Command {
-    public static final String MESSAGE_WORKOUT_NOT_FOUND = "Error. Workout not found\n";
-    public static final String MESSAGE_EXERCISE_NOT_FOUND = "Error. Exercise not found\n";
+    public static final String ERROR_MESSAGE_WORKOUT_NOT_FOUND = "Error. Workout not found\n";
+    public static final String ERROR_MESSAGE_EXERCISE_NOT_FOUND = "Error. Exercise not found\n";
 
     protected Command() {
     }

@@ -31,13 +31,16 @@ public class AddExerciseCommand extends Command {
 
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
+        if (toAdd.getReps() <= 0 || toAdd.getSets() <= 0) {
+            throw new GetJackDException("Sets or reps must be more than 0.");
+        }
         try {
             workouts.getWorkout(workoutIndex).addExercise(toAdd);
             ui.showToUser(String.format(MESSAGE_SUCCESS, toAdd));
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {
-            ui.showToUser(MESSAGE_WORKOUT_NOT_FOUND);
+            throw new GetJackDException(ERROR_MESSAGE_WORKOUT_NOT_FOUND);
         }
     }
 }
