@@ -11,7 +11,6 @@ import seedu.duke.ui.Ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 class AddExerciseCommandTest {
     //featureUnderTest_testScenario_expectedBehavior()
     private Workout workout;
