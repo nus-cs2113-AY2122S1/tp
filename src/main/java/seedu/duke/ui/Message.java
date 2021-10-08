@@ -6,7 +6,7 @@ public final class Message {
     public static final String ERROR_UNKNOWN =
             "Sorry, something went wrong.";
 
-    // TODO: This message is breaking abstraction, will remove
+    // TODO: This message is breaking abstraction, will replace
     public static final String ERROR_INDEX_OUT_OF_BOUNDS =
             "Sorry, the index is out of bounds.";
 
