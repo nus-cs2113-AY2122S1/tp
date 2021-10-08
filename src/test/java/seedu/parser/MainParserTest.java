@@ -12,6 +12,10 @@ import seedu.contact.ContactList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class MainParserTest {
     private MainParser mainParser;
@@ -109,6 +113,15 @@ public class MainParserTest {
     }
 
     @Test
+    public void parseAddCommand_validInputsWithExtraCharacters_expectAddContactCommand() {
+        testUserInput = "         add   1231267azldasd -n   marcus    -g  marcus-bory  ";
+        AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
+        AddContactCommand expectedCommand = new AddContactCommand("marcus", "marcus-bory");
+        assertEquals(expectedCommand.getName(), actualCommand.getName());
+        assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
+    }
+
+    @Test
     public void parseAddCommand_validInputs_expectAddContactCommand() {
         testUserInput = "add -n andre -g ng-andre";
         final AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
@@ -123,6 +136,13 @@ public class MainParserTest {
         final String testUserInput = "view " + testIndex;
         final ViewCommand testResultCommand = getParsedCommand(testUserInput, ViewCommand.class);
         assertEquals(testIndex,testResultCommand.getIndex());
+    }
+
+    @Test
+    public void parseViewCommand_invalidIndex_expectException() {
+        testIndex = 99999;
+        final ViewCommand testResultCommand = new ViewCommand(testIndex);
+        assertThrows(NullPointerException.class, testResultCommand::execute);
     }
 
     @Test
