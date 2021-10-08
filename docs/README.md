@@ -16,8 +16,8 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
           -> use `/at` to input _timing_ of the training entry.
           -> use `/v` to input _venue_ of the training entry.
     * **Examples:**
-    - `add /m /n John Hwee /s A0248192K`
-    - `add /t /at 12 Dec 2022 /v MPSH 2`
+      - `add /m /n John Hwee /s A0248192K`
+      - `add /t /at 12 Dec 2022 /v MPSH 2`
           
 2. `delete` This deletes entries from the Entry List in Duke.
     * The `delete` keyword takes in 2 different arguments:
@@ -26,14 +26,14 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
             -> use `/at` to input _timing_ of the training entry.
             -> use `/v` to input _venue_ of the training entry.
     * **Examples:**
-    - `delete /m John Hwee 1`
-    - `delete /t /at 12 Dec 2022 /v MPSH 2`
+      - `delete /m John Hwee 1`
+      - `delete /t /at 12 Dec 2022 /v MPSH 2`
             
 3. `list` This lists out entries in Duke's Entry List.
     * The `list` keyword takes in 2 different arguments:
        * `/m` lists members and member related information.
        * `/t` lists trainings and training related information.
     * **Examples:**
-    - `list /m`
-    - `list /t`
+      - `list /m`
+      - `list /t`
 
