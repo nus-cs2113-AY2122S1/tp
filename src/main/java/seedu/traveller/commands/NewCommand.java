@@ -13,12 +13,14 @@ public class NewCommand extends Command {
 
 
 
-    public NewCommand(String tripName) {
+    public NewCommand(String tripName, String startCountry, String endCountry) {
         this.tripName = tripName;
+        this.startCountry = startCountry;
+        this.endCountry = endCountry;
     }
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
-        Trip trip = new Trip(this.tripName);
+        Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry);
         tripsList.addTrip(trip);
         ui.printNewTripCreated(tripName);
     }
