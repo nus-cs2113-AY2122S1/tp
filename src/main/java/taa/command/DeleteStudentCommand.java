@@ -6,7 +6,7 @@ import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
 
-public class DeleteStudentCommand extends Command{
+public class DeleteStudentCommand extends Command {
 
     private static final String[] DELETE_STUDENT_ARGUMENT_KEYS = {"c", "n"};
     private static final String MESSAGE_STUDENT_DELETED_FORMAT = "%s, %s has been removed from %s";

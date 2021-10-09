@@ -6,7 +6,7 @@ import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
 
-public class EditStudentCommand extends Command{
+public class EditStudentCommand extends Command {
 
     private static final String[] EDIT_STUDENT_ARGUMENT_KEYS = {"c", "n", "s", "i"};
     private static final String MESSAGE_STUDENT_EDITED_FORMAT = "Student details updated:\n %d. %s, %s";
