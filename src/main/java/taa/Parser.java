@@ -1,7 +1,16 @@
 package taa;
 
-import taa.command.*;
-
+import taa.command.AddModuleCommand;
+import taa.command.Command;
+import taa.command.ExitCommand;
+import taa.command.ListModulesCommand;
+import taa.command.AddAssessmentCommand;
+import taa.command.AddStudentCommand;
+import taa.command.DeleteStudentCommand;
+import taa.command.EditStudentCommand;
+import taa.command.ExitCommand;
+import taa.command.FindStudentCommand;
+import taa.command.ListStudentsCommand;
 
 import java.util.ArrayList;
 import java.util.Collections;

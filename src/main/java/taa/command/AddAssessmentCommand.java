@@ -7,7 +7,8 @@ import taa.module.Module;
 import taa.module.ModuleList;
 
 public class AddAssessmentCommand extends Command {
-    private static final String MESSAGE_ASSESSMENT_ADDED_FORMAT = "Assessment added:\n  %s\nThere are %d assessments in the %s module.";
+    private static final String MESSAGE_ASSESSMENT_ADDED_FORMAT =
+            "Assessment added:\n  %s\nThere are %d assessments in the %s module.";
 
     private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {"c", "a", "w"};
 
@@ -19,7 +20,7 @@ public class AddAssessmentCommand extends Command {
      * Adds an assessment to a particular module.
      *
      * @param modules The list of modules.
-     * @param ui The ui instance to handle interactions with the user.
+     * @param ui      The ui instance to handle interactions with the user.
      * @throws CustomException If the user inputs an invalid command.
      */
     @Override
@@ -45,6 +46,7 @@ public class AddAssessmentCommand extends Command {
         Assessment assessment = new Assessment(assessmentName, assessmentWeightage);
         module.addAssessment(assessment);
 
-        ui.printMessage(String.format(MESSAGE_ASSESSMENT_ADDED_FORMAT, assessment, module.getAssessmentsSize(), module));
+        ui.printMessage(String.format(MESSAGE_ASSESSMENT_ADDED_FORMAT,
+                assessment, module.getAssessmentsSize(), module));
     }
 }
