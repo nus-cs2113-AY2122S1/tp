@@ -10,7 +10,8 @@ public class ListIngredientsExpiredCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "list expired";
 
-    private static final String MESSAGE_SHOW_WHOLE_LIST = "Here are the expired ingredients in your list:\n" + "\n%1$s\n";
+    private static final String MESSAGE_SHOW_WHOLE_LIST = "Here are the expired ingredients in your list:\n"
+            + "\n%1$s\n";
 
     @Override
     public String execute(IngredientList ingredientList, RecipeList recipes) {

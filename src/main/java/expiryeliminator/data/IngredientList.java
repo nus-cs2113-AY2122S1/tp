@@ -91,7 +91,8 @@ public class IngredientList {
         String expiringIngredientsList = "";
 
         for (Ingredient ingredient : ingredients.values()) {
-            if (ingredient.getExpiryDate().isAfter(currentDate) && ingredient.getExpiryDate().isBefore(currentDatePlusAWeek)) {
+            if (ingredient.getExpiryDate().isAfter(currentDate)
+                    && ingredient.getExpiryDate().isBefore(currentDatePlusAWeek)) {
                 expiringIngredientsList = expiringIngredientsList + ingredient.toString() + "\n";
             }
         }
