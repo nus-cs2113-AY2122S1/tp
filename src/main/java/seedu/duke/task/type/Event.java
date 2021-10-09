@@ -72,7 +72,7 @@ public class Event extends Task {
     }
 
     public String getDateAsString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         String strDate = dateFormat.format(date);
         return strDate;
     }
