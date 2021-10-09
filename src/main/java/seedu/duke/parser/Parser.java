@@ -188,9 +188,7 @@ public class Parser {
 
     private static Command parseDoneCommand(String userResponse) throws DukeException {
         // TODO: Implement batch marking
-
         String[] params = userResponse.split(" ");
-
         try {
             //get 1-indexed task number
             int taskNumber = Integer.parseInt(params[1]);
