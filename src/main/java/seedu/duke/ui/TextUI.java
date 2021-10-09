@@ -6,7 +6,7 @@ import static seedu.duke.common.Messages.LOGO;
 import static seedu.duke.common.Messages.WELCOME_MESSAGE;
 
 /**
- * Class encapsulating input and output of the application
+ * Class encapsulating input and output of the application.
  */
 public class TextUI {
     private final Scanner in;
@@ -14,7 +14,7 @@ public class TextUI {
     private static String prefix = "> ";
 
     /**
-     * Constructor for TextUI class
+     * Constructor for TextUI class.
      */
     public TextUI() {
         in = new Scanner(System.in);
@@ -24,7 +24,7 @@ public class TextUI {
     }
 
     /**
-     * Reads in user input to the application
+     * Reads in user input to the application.
      *
      * @return User input
      */
@@ -35,7 +35,7 @@ public class TextUI {
     }
 
     /**
-     * Prints a message to the user
+     * Prints a message to the user.
      *
      * @param message Message to be printed
      */

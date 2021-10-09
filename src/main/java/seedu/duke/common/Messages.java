@@ -1,7 +1,7 @@
 package seedu.duke.common;
 
 /**
- * Class containing various output messages that are printed to the user
+ * Class containing various output messages that are printed to the user.
  */
 public class Messages {
     public static final String LOGO = "        _.-\"\\\n"

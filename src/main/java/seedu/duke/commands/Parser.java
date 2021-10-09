@@ -7,7 +7,7 @@ public class Parser {
     private static final String COMMAND_EXIT = "exit";
 
     /**
-     * Processes the commands inputted by the user
+     * Processes the commands inputted by the user.
      *
      * @param input A string corresponding to a specific command
      * @return The specific Command object corresponding to the input

@@ -5,7 +5,7 @@ import seedu.duke.commands.Parser;
 import seedu.duke.ui.TextUI;
 
 /**
- * Main class of the application
+ * Main class of the application.
  */
 public class Duke {
     private static TextUI ui;
