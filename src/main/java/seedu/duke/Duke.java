@@ -4,13 +4,15 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.Parser;
 import seedu.duke.ui.TextUI;
 
+/**
+ * Main class of the application
+ */
 public class Duke {
     private static TextUI ui;
 
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-
     public static void main(String[] args) {
         ui = new TextUI();
 
