@@ -16,9 +16,7 @@ public class NextCommand extends Command {
     }
 
     public CommandResult execute() {
-        sortedList.clear();
-        sortedList.addAll(Duke.eventList);
-        sortedList.addAll(Duke.taskList);
+        sortedList = Parser.makeMainList();
         Parser.bubbleSortTask(sortedList);
         Item nextItem = sortedList.get(0);
         if (nextItem.getItemType().equalsIgnoreCase("task")) {

@@ -70,4 +70,11 @@ public class Parser {
         list.set(i, list.get(i + 1));
         list.set(i + 1, t);
     }
+
+    public static ArrayList<Item> makeMainList() {
+        ArrayList<Item> sortedList = new ArrayList<>();
+        sortedList.addAll(Duke.eventList);
+        sortedList.addAll(Duke.taskList);
+        return sortedList;
+    }
 }
