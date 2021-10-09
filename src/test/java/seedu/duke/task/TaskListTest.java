@@ -26,9 +26,9 @@ public class TaskListTest {
     public void testDeleteTask() {
         try {
             TaskList taskList = new TaskList();
-            taskList.addTask(new Task("Do CS2113T", "sat", "Level 1 increment"));
-            taskList.addTask(new Task("Do CS2113T", "sat", "Level 2 increment"));
-            taskList.addTask(new Task("Do CS2113T", "sat", "Level 3 increment"));
+            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 1 increment"));
+            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 2 increment"));
+            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 3 increment"));
             assertEquals(3, taskList.getSize());
             taskList.deleteTask(2);
             assertEquals(2, taskList.getSize());
