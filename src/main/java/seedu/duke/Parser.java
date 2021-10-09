@@ -47,12 +47,9 @@ public class Parser {
     public static boolean hasDeleteTrainingKeyword(String arg) {
         return arg.trim().toLowerCase().contains("delete /t");
     }
-    public static boolean hasMemberKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("delete /m");
-    }
 
-    public static boolean hasTrainingKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("delete /m");
+    public static boolean hasDeleteAttendanceKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("delete /a");
     }
 
     public static boolean hasFindMemberKeyword(String arg) {
@@ -76,11 +73,7 @@ public class Parser {
      */
     public static Keyword getKeywordStatus(String query) {
         Keyword keyword;
-        if (hasMemberKeyword(query)) {
-            keyword = Keyword.MEMBER_ENTRY;
-        } else if (hasTrainingKeyword(query)) {
-            keyword = Keyword.TRAINING_SCHEDULE_ENTRY;
-        } else if (hasAddMemberKeyword(query)) {
+        if (hasAddMemberKeyword(query)) {
             keyword = Keyword.ADD_MEMBER_KEYWORD;
         } else if (hasAddTrainingKeyword(query)) {
             keyword = Keyword.ADD_TRAINING_KEYWORD;
@@ -98,6 +91,8 @@ public class Parser {
             keyword = Keyword.DELETE_MEMBER_KEYWORD;
         } else if (hasDeleteTrainingKeyword(query)) {
             keyword = Keyword.DELETE_TRAINING_KEYWORD;
+        } else if (hasDeleteAttendanceKeyword(query)) {
+            keyword = Keyword.DELETE_ATTENDANCE_KEYWORD;
         } else if (hasFindMemberKeyword(query)) {
             keyword = Keyword.FIND_MEMBER_KEYWORD;
         } else if (hasFindTrainingKeyword(query)) {
@@ -316,7 +311,7 @@ public class Parser {
     public static void makeMemberEntry(MemberList members, String query) {
         Member member = getMemberDetails(query);
         members.addMember(member);
-        System.out.println("Added a Member: " + member);
+        Ui.printAddedMemberMessage(member);
     }
 
     /**
@@ -329,11 +324,10 @@ public class Parser {
         ArrayList<Member> oldMemberAndNewMember = editMemberDetails(members, query);
         Member oldMember = oldMemberAndNewMember.get(0);
         Member newMember = oldMemberAndNewMember.get(1);
-        System.out.println("Edited member: " + oldMember);
-        System.out.println("To become:  " + newMember);
+        Ui.printEditMessage(oldMember, newMember);
     }
 
-     /* *
+     /**
      * Creates a TrainingSchedule to put into TrainingList
      *
      * @param trainings TrainingList containing all TrainingSchedule
@@ -342,10 +336,10 @@ public class Parser {
     public static void makeTrainingEntry(TrainingList trainings, String query) {
         TrainingSchedule training = getTrainingDescription(query);
         trainings.addTrainingSchedule(training);
-        System.out.println("Added a Training entry:\n" + training);
+        Ui.printAddedTrainingMessage(training);
     }
 
-    /* *
+    /**
      * Creates an Attendance Entry to put into AttendanceList
      *
      * @param attendanceList AttendanceList containing all Attendance entries
@@ -354,7 +348,7 @@ public class Parser {
     public static void makeAttendanceEntry(AttendanceList attendanceList, String query) {
         Attendance attendance = getAttendanceDetails(query);
         attendanceList.addAttendance(attendance);
-        System.out.println("Added an Attendance entry: " + attendance);
+        Ui.printAddedAttendanceMessage(attendance);
     }
 
     /**
@@ -389,7 +383,7 @@ public class Parser {
         try {
             int memberNumber = getMemberIndex(query);
             Member member = members.deleteMember(memberNumber);
-            System.out.println("The following member have been deleted\n"+member.toString());
+            Ui.printDeletedMemberMessage(member);
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("There is no such member number...");
         } catch (NumberFormatException e){
@@ -398,7 +392,7 @@ public class Parser {
     }
 
     public static void wrongInputTypeMessage() {
-        //Leave for later
+        Ui.printWrongInputMessage();
     }
 
     public static void deleteTraining(TrainingList trainings, String query) {
@@ -421,7 +415,7 @@ public class Parser {
 
         if (trainingIndex != -1) {
             TrainingSchedule toDelete = trainings.deleteTrainingSchedule(trainingIndex);
-            System.out.println("You have deleted: \n" + toDelete.toString());
+            Ui.printDeletedTrainingMessage(toDelete);
         }
 
     }
@@ -497,9 +491,24 @@ public class Parser {
 
         if (attendanceIndex != -1) {
             Attendance toDelete = attendanceList.deleteAttendance(attendanceIndex);
-            System.out.println("You have deleted: \n" + toDelete.toString());
+            Ui.printDeletedAttendanceMessage(toDelete);
         }
 
+    }
+
+    /**
+     * Function waits for user input, or takes input from ./list.txt.
+     */
+    public static void waitForQuery() {
+        String query = "";
+        Scanner userInput = new Scanner(System.in);
+        while (!query.equals("bye")) {
+            System.out.print("=>");
+            if (userInput.hasNextLine()) {
+                query = userInput.nextLine();
+            }
+            Entry.addEntry(query);
+        }
     }
 }
 

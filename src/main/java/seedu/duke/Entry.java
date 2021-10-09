@@ -41,6 +41,9 @@ public class Entry {
             break;
         case DELETE_TRAINING_KEYWORD:
             Parser.deleteTraining(trainings, entry);
+            break;
+        case DELETE_ATTENDANCE_KEYWORD:
+            Parser.deleteAttendance(attendanceList, entry);
         case FIND_MEMBER_KEYWORD:
             Parser.findInMembers(members, entry);
             break;
@@ -54,7 +57,7 @@ public class Entry {
             Parser.wrongInputTypeMessage();
             break;
         case EXIT_KEYWORD:
-            Ui.printGoodbyeMessage();
+            Ui.printExitMessage();
             break;
         }
     }
