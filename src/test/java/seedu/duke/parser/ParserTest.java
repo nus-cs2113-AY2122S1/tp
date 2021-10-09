@@ -6,8 +6,8 @@ import seedu.duke.command.AddTaskCommand;
 import seedu.duke.command.Command;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     @Test

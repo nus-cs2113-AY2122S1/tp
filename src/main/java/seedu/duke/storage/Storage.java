@@ -11,6 +11,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.duke.lesson.LessonList;
+import seedu.duke.task.TaskList;
 import seedu.duke.ui.Message;
 import seedu.duke.ui.Ui;
 
@@ -63,16 +65,19 @@ public class Storage {
     }
 
     /**
-     * Saves task data to a file.
+     * Saves the data of the task list and lesson list into the data storage file.
      *
-     * @param data task data
+     * @param taskList the task list
+     * @param lessonList the lesson list
      * @throws IOException if an I/O error occurs
      */
-    public void saveData(String data) throws IOException {
+    public void saveData(TaskList taskList, LessonList lessonList) throws IOException {
         try {
+            StringBuilder dataToWrite = new StringBuilder();
+            dataToWrite.append(taskList.serialize()).append(lessonList.serialize());
             FileWriter fout = new FileWriter(PATH_TO_FILE.toString());
             BufferedWriter bout = new BufferedWriter(fout);
-            bout.write(data);
+            bout.write(dataToWrite.toString());
             bout.close();
         } catch (IOException e) {
             throw new IOException(Message.ERROR_SAVING_DATA);

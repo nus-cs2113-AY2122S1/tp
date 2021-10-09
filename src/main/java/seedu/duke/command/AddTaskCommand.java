@@ -24,15 +24,12 @@ public class AddTaskCommand extends AddCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList) throws DukeException {
+    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws DukeException {
         Task newTask = new Task(title, dayOfTheWeek, information);
         taskList.addTask(newTask);
         ui.printTaskAdded(newTask, taskList.getSize());
-        Storage storage = new Storage();
         try {
-            StringBuilder dataToWrite = new StringBuilder();
-            dataToWrite.append(taskList.serialize()).append(lessonList.serialize());
-            storage.saveData(dataToWrite.toString());
+            storage.saveData(taskList, lessonList);
         } catch (IOException e) {
             throw new DukeException(e.toString());
         }

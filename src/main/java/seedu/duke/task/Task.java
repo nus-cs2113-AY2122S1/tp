@@ -7,7 +7,7 @@ public class Task {
 
     private String title;
     private String dayOfTheWeek;
-    private String information;
+    private String information = "";
     private boolean isDone;
 
     /**
@@ -75,8 +75,8 @@ public class Task {
     public static Task deserialize(String data) throws DukeException {
         try {
             String[] item = data.split(" \\| ", -1);
-            boolean isTaskDone = item[1].equals("1");
             Task task = new Task(item[2], item[3], item[4]);
+            boolean isTaskDone = item[1].equals("1");
             if (isTaskDone) {
                 task.setDone();
             }

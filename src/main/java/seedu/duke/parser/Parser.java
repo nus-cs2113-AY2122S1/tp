@@ -124,6 +124,7 @@ public class Parser {
         if (params.length != 4) {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
+
         if (!hasCorrectLessonFlagSequence(userResponse)) {
             throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
         }
@@ -135,19 +136,6 @@ public class Parser {
         String startTIme = params[2].strip();       // TODO: Validate correctness with time library
         String endTime = params[3].strip();         // TODO: Validate correctness with time library
         return new AddLessonCommand(title, dayOfTheWeek, startTIme, endTime);
-    }
-
-    /**
-     * Checks if the sequence of flags in an add lesson user response is correct.
-     *
-     * @param userResponse the user response
-     * @return true if the sequence is correct, false otherwise
-     */
-    private static boolean hasCorrectLessonFlagSequence(String userResponse) {
-        int posOfDFlag = userResponse.indexOf(" -d ");
-        int posOfSFlag = userResponse.indexOf(" -s ");
-        int posOfEFlag = userResponse.indexOf(" -e ");
-        return (posOfDFlag < posOfSFlag) && (posOfDFlag < posOfEFlag) && (posOfSFlag < posOfEFlag);
     }
 
     private static Command parseDeleteCommand(String userResponse) throws DukeException {
@@ -309,5 +297,18 @@ public class Parser {
         }
 
         throw new DukeException(Message.ERROR_INVALID_COMMAND);
+    }
+
+    /**
+     * Checks if the sequence of flags in an add lesson user response is correct.
+     *
+     * @param userResponse the user response
+     * @return true if the sequence is correct, false otherwise
+     */
+    private static boolean hasCorrectLessonFlagSequence(String userResponse) {
+        int posOfDFlag = userResponse.indexOf(" -d ");
+        int posOfSFlag = userResponse.indexOf(" -s ");
+        int posOfEFlag = userResponse.indexOf(" -e ");
+        return (posOfDFlag < posOfSFlag) && (posOfDFlag < posOfEFlag) && (posOfSFlag < posOfEFlag);
     }
 }
