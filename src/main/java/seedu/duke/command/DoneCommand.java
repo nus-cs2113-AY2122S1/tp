@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.exception.DukeException;
 import seedu.duke.lesson.LessonList;
 import seedu.duke.storage.Storage;
+import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Message;
 import seedu.duke.ui.Ui;
@@ -19,11 +20,12 @@ public class DoneCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws DukeException {
         try {
-            if (taskList.getTask(taskIndex).isDone()) {
+            Task task = taskList.getTask(taskIndex);
+            if (task.isDone()) {
                 throw new DukeException(Message.INFO_TASK_COMPLETED);
             }
             taskList.markTaskAsDone(taskIndex);
-            ui.printDoneTask(taskList, taskIndex);
+            ui.printDoneTask(taskList, task);
             storage.saveData(taskList, lessonList);
         } catch (IndexOutOfBoundsException exception) {
             throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
