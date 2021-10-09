@@ -55,11 +55,6 @@ public class Ui {
         System.out.println("\"bye\" : Ends the program");
     }
 
-    public static void printHelpMessage(Command command) {
-        printLineSeparator();
-        System.out.println(command.MESSAGE_USAGE);
-    }
-
     public static void printErrorMessage(GetJackDException e) {
         printLineSeparator();
         System.out.println(e.getMessage());
