@@ -130,7 +130,7 @@ public class Parser {
 
         int wordIndex = 1;
         while (matcher.find()) {
-            switch (matcher.group()){
+            switch (matcher.group()) {
             case "/n":
                 name = words[wordIndex].trim();
                 break;
@@ -140,6 +140,8 @@ public class Parser {
             case "/v":
                 venue = words[wordIndex].trim();
                 break;
+            default:
+                continue;
             }
 
             wordIndex++;
@@ -149,7 +151,7 @@ public class Parser {
     }
 
     /**
-     * Creates Member class by input given by user
+     * Creates Member class by input given by user.
      *
      * @param query user raw data input.
      * @return Member according to user input.
@@ -182,6 +184,8 @@ public class Parser {
             case "/p":
                 phoneNumber = Integer.parseInt(words[wordIndex].trim());
                 break;
+            default:
+                continue;
             }
             wordIndex++;
         }
@@ -190,7 +194,7 @@ public class Parser {
     }
 
     /**
-     * Edit member by input given by user
+     * Edit member by input given by user.
      *
      * @param query user raw data input.
      * @return Edited member according to user input.
@@ -213,7 +217,7 @@ public class Parser {
 
         int wordIndex = 1;
         while (matcher.find()) {
-            switch (matcher.group()){
+            switch (matcher.group()) {
             case "/m":
                 memberNumber = Integer.parseInt(words[wordIndex].trim());
                 oldMember = new Member(members.getMember(memberNumber));
@@ -235,6 +239,8 @@ public class Parser {
                 phoneNumber = Integer.parseInt(words[wordIndex].trim());
                 editedMember.setPhoneNumber(phoneNumber);
                 break;
+            default:
+                continue;
             }
             wordIndex++;
         }
@@ -286,6 +292,8 @@ public class Parser {
             case "/v":
                 venue = words[wordIndex].trim();
                 break;
+            default:
+                continue;
             }
             wordIndex++;
         }
@@ -295,7 +303,7 @@ public class Parser {
     }
   
     /**
-     * Creates Member class by input given by user
+     * Creates Member class by input given by user.
      *
      * @param query user raw data input.
      * @return Member according to user input.
@@ -320,7 +328,7 @@ public class Parser {
     }
 
     /**
-     * Function edits an existing member and shows the change to user
+     * Function edits an existing member and shows the change to user.
      *
      * @param members MemberList which contains list of members
      * @param query user input
@@ -333,8 +341,9 @@ public class Parser {
         System.out.println("To become:  " + newMember);
     }
 
-     /* *
-     * Creates a TrainingSchedule to put into TrainingList
+
+     /**
+     * Creates a TrainingSchedule to put into TrainingList.
      *
      * @param trainings TrainingList containing all TrainingSchedule
      * @param query User input command to parse
@@ -345,8 +354,8 @@ public class Parser {
         System.out.println("Added a Training entry:\n" + training);
     }
 
-    /* *
-     * Creates an Attendance Entry to put into AttendanceList
+    /**
+     * Creates an Attendance Entry to put into AttendanceList.
      *
      * @param attendanceList AttendanceList containing all Attendance entries
      * @param query User input command to parse
@@ -389,7 +398,7 @@ public class Parser {
         try {
             int memberNumber = getMemberIndex(query);
             Member member = members.deleteMember(memberNumber);
-            System.out.println("The following member have been deleted\n"+member.toString());
+            System.out.println("The following member have been deleted\n" + member.toString());
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("There is no such member number...");
         } catch (NumberFormatException e){
@@ -401,6 +410,12 @@ public class Parser {
         //Leave for later
     }
 
+    /**
+     * Removes an entry from a TrainingList based on input index.
+     *
+     * @param trainings TrainingList containing all recorded TrainingSchedules.
+     * @param query String input that contains the integer index of the entry to remove.
+     */
     public static void deleteTraining(TrainingList trainings, String query) {
         int trainingIndex = -1;
 
@@ -426,6 +441,13 @@ public class Parser {
 
     }
 
+    /**
+     * Edits an entry from a TrainingList based on input index.
+     * /t <INDEX> is compulsory. /n, /a and /v are optional fields.
+     *
+     * @param trainings TrainingList containing all TrainingSchedules recorded.
+     * @param query String input of TrainingSchedule to be edited, identified by index after /t.
+     */
     public static void editTraining(TrainingList trainings, String query) {
         int index = -1;
         String name = "";
@@ -454,6 +476,8 @@ public class Parser {
             case "/v":
                 venue = words[wordIndex].trim();
                 break;
+            default:
+                continue;
             }
 
             wordIndex++;
