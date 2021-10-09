@@ -1,10 +1,9 @@
 package seedu.parser;
 
-import seedu.contact.DetailType;
+import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
-import seedu.exception.MissingNameException;
 
 public class AddContactParser extends ContactParser {
     /**
@@ -20,7 +19,7 @@ public class AddContactParser extends ContactParser {
      * @throws InvalidFlagException If the flag given is not recognised
      */
     public String[] parseContactDetails(String userInput) throws InvalidFlagException, MissingArgException,
-            MissingDetailException {
+            MissingDetailException, ForbiddenDetailException {
         String[] contactDetails = new String[NUMBER_OF_DETAILS];
         String[] destructuredInputs = userInput.split(DETAIL_SEPARATOR);
         if (destructuredInputs.length == 1) {
@@ -30,34 +29,5 @@ public class AddContactParser extends ContactParser {
             parseDetail(contactDetails, destructuredInputs[i]);
         }
         return contactDetails;
-    }
-
-    /**
-     * This method takes in the contactDetails array and populates it with contact details.
-     * It will sift out the flags to decide what details to populate, using the
-     * enumeration from DetailType.
-     *
-     * @param contactDetails String array containing contact details
-     * @param detail         Unparsed detail
-     * @throws InvalidFlagException If the flag given is not recognised
-     */
-    public void parseDetail(String[] contactDetails, String detail) throws InvalidFlagException,
-            MissingDetailException {
-        String[] destructuredDetails = detail.split(" ", NUMBER_OF_DETAILS);
-        if (destructuredDetails.length < 2 || destructuredDetails[1].trim().equalsIgnoreCase("")) {
-            throw new MissingDetailException();
-        }
-        int indexToStore;
-        switch (destructuredDetails[FLAG_INDEX_IN_DETAILS]) {
-        case NAME_FLAG:
-            indexToStore = DetailType.NAME.getIndex();
-            break;
-        case GITHUB_FLAG:
-            indexToStore = DetailType.GITHUB.getIndex();
-            break;
-        default:
-            throw new InvalidFlagException();
-        }
-        contactDetails[indexToStore] = destructuredDetails[DETAIL_INDEX_IN_DETAILS].trim();
     }
 }

@@ -2,6 +2,7 @@ package seedu.parser;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
@@ -16,7 +17,7 @@ class EditContactParserTest {
     private EditContactParser editContactParser = new EditContactParser();
 
     @Test
-    void parseContactDetails() throws MissingDetailException, MissingArgException, InvalidFlagException {
+    void parseContactDetails() throws MissingDetailException, MissingArgException, InvalidFlagException, ForbiddenDetailException {
         String[] expectedResult = {null, "github"};
         String testInput = "edit 1 -g github";
         String[] actualResult = editContactParser.parseContactDetails(testInput);
