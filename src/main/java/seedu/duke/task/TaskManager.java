@@ -13,19 +13,19 @@ public class TaskManager {
     }
 
     public String listTasklist() throws EmptyTasklistException {
-        assert tasklist.size() < 0 : "Tasklist cannot be negative";
+        assert tasklist.size() >= 0 : "Tasklist cannot be negative";
 
         if (tasklist.size() == 0) {
             throw new EmptyTasklistException();
         }
 
-        String tasks = "";
+        String tasks = "MY TASKLIST:\n";
 
         for (int i = 0; i < tasklist.size(); i++) {
-            
+            tasks += i + 1 + ". " + tasklist.get(i).getTaskEntryDescription() + "\n";
         }
 
-
+        return tasks;
     }
 
     public ArrayList<Task> getTasklist() {
