@@ -38,7 +38,7 @@ public abstract class ContactParser {
         String[] destructuredDetails = detail.split(" ", NUMBER_OF_DETAILS);
         //for commands that specify a flag, but do not specify any argument for that flag
         //IndexOutOfBoundsException should not be thrown as the first if case will be true
-        if (destructuredDetails.length == 1 || destructuredDetails[1].trim().equalsIgnoreCase("")) {
+        if (destructuredDetails.length == 1 || destructuredDetails[1].isBlank()) {
             throw new MissingDetailException();
         }
         int indexToStore;
