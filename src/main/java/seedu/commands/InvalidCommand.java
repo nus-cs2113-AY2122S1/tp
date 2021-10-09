@@ -10,7 +10,11 @@ public class InvalidCommand extends Command {
     public InvalidCommand(String message) {
         this.message = message;
     }
-    
+
+    public String getMessage() {
+        return message;
+    }
+
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
         ui.printError(message);
