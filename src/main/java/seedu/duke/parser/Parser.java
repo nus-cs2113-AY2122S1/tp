@@ -138,6 +138,13 @@ public class Parser {
         return new AddLessonCommand(title, dayOfTheWeek, startTIme, endTime);
     }
 
+    /**
+     * Parses the user response into an executable delete command.
+     *
+     * @param userResponse the user response
+     * @return an executable delete type command
+     * @throws DukeException when user response is in an incorrect format
+     */
     private static Command parseDeleteCommand(String userResponse) throws DukeException {
         String param = userResponse.replaceFirst("delete", "").strip();
         CommandType commandType = getCommandType(param);
@@ -156,6 +163,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user response with commandType removed into an executable delete task command.
+     *
+     * @param userResponse the user response
+     * @return an executable delete task type command
+     * @throws DukeException when the user response is in an incorrect format
+     */
     private static Command parseDeleteTaskCommand(String userResponse) throws DukeException {
         if (userResponse.equals("all")) {
             return new DeleteTaskCommand();
@@ -169,6 +183,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user response with commandType removed into an executable delete lesson command.
+     *
+     * @param userResponse the user response
+     * @return an executable delete lesson type command
+     * @throws DukeException when the user response is in an incorrect format
+     */
     private static Command parseDeleteLessonCommand(String userResponse) throws DukeException {
         if (userResponse.equals("all")) {
             return new DeleteLessonCommand();
@@ -182,10 +203,17 @@ public class Parser {
         }
     }
 
-    private static Command parseDeleteAllCommand() throws DukeException {
+    private static Command parseDeleteAllCommand() {
         return new DeleteAllCommand();
     }
 
+    /**
+     * Parses the user response into an executable done command.
+     *
+     * @param userResponse the user response
+     * @return an executable done type command
+     * @throws DukeException when user response is in an incorrect format
+     */
     private static Command parseDoneCommand(String userResponse) throws DukeException {
         // TODO: Implement batch marking
         String[] params = userResponse.split(" ");
@@ -200,6 +228,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user response into an executable exit command.
+     *
+     * @param userResponse the user response
+     * @return an executable exit type command
+     * @throws DukeException when user response is in an incorrect format
+     */
     private static Command parseExitCommand(String userResponse) throws DukeException {
         boolean isValidResponse = userResponse.equals("exit");
         if (!isValidResponse) {
@@ -209,6 +244,13 @@ public class Parser {
         return new ExitCommand();
     }
 
+    /**
+     * Parses the user response into an executable find command.
+     *
+     * @param userResponse the user response
+     * @return an executable find type command
+     * @throws DukeException when user response is in an incorrect format
+     */
     private static Command parseFindCommand(String userResponse) throws DukeException {
         String param = userResponse.replaceFirst("find", "").strip();
         CommandType commandType = getCommandType(param);
@@ -227,6 +269,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the given keyword into an executable find task command.
+     *
+     * @param keyword the keyword parsed from the user response
+     * @return an executable find task type command
+     * @throws DukeException if keyword is not provided
+     */
     private static Command parseFindTaskCommand(String keyword) throws DukeException {
         if (keyword.isBlank()) {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
@@ -235,6 +284,13 @@ public class Parser {
         return new FindTaskCommand(keyword);
     }
 
+    /**
+     * Parses the given keyword into an executable find lesson command.
+     *
+     * @param keyword the keyword parsed from the user response
+     * @return an executable find lesson type command
+     * @throws DukeException if keyword is not provided
+     */
     private static Command parseFindLessonCommand(String keyword) throws DukeException {
         if (keyword.isBlank()) {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
@@ -243,6 +299,13 @@ public class Parser {
         return new FindLessonCommand(keyword);
     }
 
+    /**
+     * Parses the given keyword into an executable find all command.
+     *
+     * @param keyword the keyword parsed from the user response
+     * @return an executable find all type command
+     * @throws DukeException if keyword is not provided
+     */
     private static Command parseFindAllCommand(String keyword) throws DukeException {
         if (keyword.isBlank()) {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
@@ -251,6 +314,13 @@ public class Parser {
         return new FindAllCommand(keyword);
     }
 
+    /**
+     * Parses the user response into an executable list command.
+     *
+     * @param userResponse the user response
+     * @return an executable list type command
+     * @throws DukeException when user response is in an incorrect format
+     */
     private static Command parseListCommand(String userResponse) throws DukeException {
         String param = userResponse.replaceFirst("list", "").strip();
         CommandType commandType = getCommandType(param);
@@ -269,6 +339,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the given period (day of the week) into an executable list task command.
+     *
+     * @param period the keyword parsed from the user response
+     * @return an executable list task type command
+     * @throws DukeException if period is not provided
+     */
     private static Command parseListTaskCommand(String period) throws DukeException {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
@@ -280,6 +357,13 @@ public class Parser {
         throw new DukeException(Message.ERROR_INVALID_COMMAND);
     }
 
+    /**
+     * Parses the given period (day of the week) into an executable list lesson command.
+     *
+     * @param period the keyword parsed from the user response
+     * @return an executable list lesson type command
+     * @throws DukeException if period is not provided
+     */
     private static Command parseListLessonCommand(String period) throws DukeException {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
@@ -291,6 +375,13 @@ public class Parser {
         throw new DukeException(Message.ERROR_INVALID_COMMAND);
     }
 
+    /**
+     * Parses the given period (day of the week) into an executable list all command.
+     *
+     * @param period the keyword parsed from the user response
+     * @return an executable list all type command
+     * @throws DukeException if period is not provided
+     */
     private static Command parseListAllCommand(String period) throws DukeException {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
