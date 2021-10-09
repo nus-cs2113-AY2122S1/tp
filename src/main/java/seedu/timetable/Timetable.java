@@ -126,18 +126,15 @@ public class Timetable {
      */
     public void deleteModuleFromList(Module module) throws UniModsException {
         String moduleCode = module.getModuleCode();
-        boolean hasModule = false;
         for (int i = 0; i < modules.size(); i++) {
             if (modules.get(i).getModuleCode().equals(moduleCode)) {
-                hasModule = true;
                 modules.remove(modules.get(i));
                 TextUi.printModuleDeleted(moduleCode);
                 deleteFromLessons(module);
+                return;
             }
         }
-        if (!hasModule) {
-            throw new UniModsException(TextUi.ERROR_MODULE_NOT_FOUND);
-        }
+        throw new UniModsException(TextUi.ERROR_MODULE_NOT_FOUND);
     }
 
     /**
