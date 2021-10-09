@@ -22,6 +22,7 @@ class DeleteLessonCommandTest {
         TaskList taskList = new TaskList();
         LessonList lessonList = new LessonList();
         Storage storage = new Storage();
+        storage.createNewData(ui);
 
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
@@ -42,6 +43,7 @@ class DeleteLessonCommandTest {
         TaskList taskList = new TaskList();
         LessonList lessonList = new LessonList();
         Storage storage = new Storage();
+        storage.createNewData(ui);
 
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
@@ -62,6 +64,7 @@ class DeleteLessonCommandTest {
         TaskList taskList = new TaskList();
         LessonList lessonList = new LessonList();
         Storage storage = new Storage();
+        storage.createNewData(ui);
 
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));

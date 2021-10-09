@@ -21,6 +21,7 @@ class DeleteAllCommandTest {
         TaskList taskList = new TaskList();
         LessonList lessonList = new LessonList();
         Storage storage = new Storage();
+        storage.createNewData(ui);
 
         taskList.addTask(new Task("task 1", "mon", ""));
         taskList.addTask(new Task("task 2", "fri", "someInfo"));
