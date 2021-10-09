@@ -27,8 +27,8 @@ public class UpdateCommand extends Command {
         list.execute();
         System.out.println("Please type the index of the event you would like to update, "
                 + System.lineSeparator() + "and the attribute you would like to update in the format"
-                + System.lineSeparator() + "Index_num [n/TITLE] [d/dd-MM-yyyy HHmm] [p/DESCRIPTION] " + System.lineSeparator()
-                + "Only for Events: [v/VENUE] [b/BUDGET]");
+                + System.lineSeparator() + "Index_num [n/TITLE] [d/dd-MM-yyyy HHmm] [p/DESCRIPTION] "
+                + System.lineSeparator() + "Only for Events: [v/VENUE] [b/BUDGET]");
     }
 
     public CommandResult execute() {
