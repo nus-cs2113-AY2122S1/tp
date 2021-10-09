@@ -10,8 +10,14 @@ import seedu.duke.commands.UpdateCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.NextCommand;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Parser {
+    protected LocalDateTime formattedDate;
+    protected static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy");
 
     public static Command parseCommand(String response) {
         String[] command = response.split(" ", 10);
@@ -37,5 +43,13 @@ public class Parser {
                     + System.lineSeparator() /*+ ui.lineBreak*/);
             return new HelpCommand();
         }
+    }
+
+    public static String convertDateTime(LocalDateTime dateTime) {
+        return dateTime.format(formatter1);
+    }
+
+    public static LocalDateTime convertDateTime(String dateTime) {
+        return LocalDateTime.parse(dateTime, formatter1);
     }
 }
