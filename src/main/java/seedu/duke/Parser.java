@@ -27,9 +27,10 @@ public class Parser {
         case "edit":
             String[] tripToEditInfo = inputDescription.split(" ", 2);
             try {
-                int indexToEdit = Integer.parseInt(inputCommand) - 1;
+                int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
+                String attributesToEdit = tripToEditInfo[1];
                 Trip tripToEdit = listOfTrips.get(indexToEdit);
-                editTripPerAttribute(tripToEdit, inputDescription);
+                editTripPerAttribute(tripToEdit, attributesToEdit);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
             }
