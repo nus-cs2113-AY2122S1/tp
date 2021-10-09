@@ -157,9 +157,11 @@ public class Parser {
     private static Command parseDoneCommand(String userResponse) throws DukeException {
         // TODO: Implement batch marking
 
+        String[] params = userResponse.split(" ");
+
         try {
-            int taskIndex = Integer.parseInt(userResponse);
-            return new DoneCommand(taskIndex);
+            int taskIndex = Integer.parseInt(params[1]);
+            return new DoneCommand(taskIndex - 1); //convert 1-index (1, 2, 3, ...) to 0-index (0, 1, 2, ...)
         } catch (NumberFormatException e) {
             throw new DukeException(Message.ERROR_NOT_NUMBER);
         }
