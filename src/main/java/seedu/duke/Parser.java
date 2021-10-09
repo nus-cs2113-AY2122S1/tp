@@ -47,6 +47,7 @@ public class Parser {
     public static boolean hasDeleteTrainingKeyword(String arg) {
         return arg.trim().toLowerCase().contains("delete /t");
     }
+
     public static boolean hasMemberKeyword(String arg) {
         return arg.trim().toLowerCase().contains("delete /m");
     }
@@ -171,7 +172,7 @@ public class Parser {
 
         int wordIndex = 1;
         while (matcher.find()) {
-            switch (matcher.group()){
+            switch (matcher.group()) {
             case "/n":
                 name = words[wordIndex].trim();
                 break;
@@ -342,7 +343,7 @@ public class Parser {
     }
 
 
-     /**
+    /**
      * Creates a TrainingSchedule to put into TrainingList.
      *
      * @param trainings TrainingList containing all TrainingSchedule
@@ -401,7 +402,7 @@ public class Parser {
             System.out.println("The following member have been deleted\n" + member.toString());
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("There is no such member number...");
-        } catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println("Please input a proper number...");
         }
     }
@@ -443,7 +444,7 @@ public class Parser {
 
     /**
      * Edits an entry from a TrainingList based on input index.
-     * /t <INDEX> is compulsory. /n, /a and /v are optional fields.
+     * /t INDEX is compulsory, /n, /a and /v are optional fields.
      *
      * @param trainings TrainingList containing all TrainingSchedules recorded.
      * @param query String input of TrainingSchedule to be edited, identified by index after /t.
@@ -463,7 +464,7 @@ public class Parser {
 
         int wordIndex = 1;
         while (matcher.find()) {
-            switch (matcher.group()){
+            switch (matcher.group()) {
             case "/t":
                 index = Integer.parseInt(words[wordIndex].trim());
                 break;

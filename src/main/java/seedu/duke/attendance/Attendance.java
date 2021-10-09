@@ -22,7 +22,7 @@ public class Attendance {
     }
 
     /**
-     * Formats description of attendance to be displayed to user
+     * Formats description of attendance to be displayed to user.
      *
      * @return Formatted string of an attendance
      */
