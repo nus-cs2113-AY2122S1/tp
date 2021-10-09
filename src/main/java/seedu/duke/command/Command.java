@@ -13,5 +13,6 @@ public abstract class Command {
         return false;
     }
 
-    public abstract void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws DukeException, IOException;
+    public abstract void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage)
+            throws DukeException, IOException;
 }
