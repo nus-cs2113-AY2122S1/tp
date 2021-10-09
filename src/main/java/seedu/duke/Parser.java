@@ -6,10 +6,13 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import seedu.duke.attendance.Attendance;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingSchedule;
 import seedu.duke.training.TrainingList;
+import seedu.duke.attendance.AttendanceList;
 
 public class Parser {
 
@@ -21,12 +24,20 @@ public class Parser {
         return arg.trim().toLowerCase().contains("list /t");
     }
 
+    public static boolean hasListAttendanceKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("list /att");
+    }
+
     public static boolean hasAddMemberKeyword(String arg) {
         return arg.trim().toLowerCase().contains("add /m");
     }
 
     public static boolean hasAddTrainingKeyword(String arg) {
         return arg.trim().toLowerCase().contains("add /t");
+    }
+
+    public static boolean hasAddAttendanceKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("add /att");
     }
 
     public static boolean hasDeleteMemberKeyword(String arg) {
@@ -73,10 +84,14 @@ public class Parser {
             keyword = Keyword.ADD_MEMBER_KEYWORD;
         } else if (hasAddTrainingKeyword(query)) {
             keyword = Keyword.ADD_TRAINING_KEYWORD;
+        } else if (hasAddAttendanceKeyword(query)) {
+            keyword = Keyword.ADD_ATTENDANCE_KEYWORD;
         } else if (hasListMemberKeyword(query)) {
             keyword = Keyword.LIST_MEMBER_KEYWORD;
         } else if (hasListTrainingKeyword(query)) {
             keyword = Keyword.LIST_TRAINING_KEYWORD;
+        } else if (hasListAttendanceKeyword(query)) {
+            keyword = Keyword.LIST_ATTENDANCE_KEYWORD;
         } else if (query.trim().equals("bye")) {
             keyword = Keyword.EXIT_KEYWORD;
         } else if (hasDeleteMemberKeyword(query)) {
@@ -169,6 +184,54 @@ public class Parser {
         return new Member(name, studentNumber,gender,phoneNumber);
     }
 
+    public static Attendance getAttendanceDetails(String query) {
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        String memberName = "";
+        String studentNumber = "";
+        char gender = ' ';
+        int phoneNumber = 0;
+
+        String trainingName = "";
+        String venue = "";
+        String time = "";
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            switch (matcher.group()) {
+            case "/m":
+                memberName = words[wordIndex].trim();
+                break;
+            case "/s":
+                studentNumber = words[wordIndex].trim();
+                break;
+            case "/g":
+                gender = words[wordIndex].trim().charAt(0);
+                break;
+            case "/p":
+                phoneNumber = Integer.parseInt(words[wordIndex].trim());
+                break;
+            case "/n":
+                trainingName = words[wordIndex].trim();
+                break;
+            case "/a":
+                time = words[wordIndex].trim();
+                break;
+            case "/v":
+                venue = words[wordIndex].trim();
+                break;
+            }
+            wordIndex++;
+        }
+        Member member = new Member(memberName, studentNumber,gender,phoneNumber);
+        TrainingSchedule training = new TrainingSchedule(trainingName, venue, time);
+        return new Attendance(member, training);
+    }
 
     /**
      * Function creates a new member to be input in MemberList Class.
@@ -192,6 +255,18 @@ public class Parser {
         TrainingSchedule training = getTrainingDescription(query);
         trainings.addTrainingSchedule(training);
         System.out.println("Added a Training entry:\n" + training);
+    }
+
+    /* *
+     * Creates an Attendance Entry to put into AttendanceList
+     *
+     * @param attendanceList AttendanceList containing all Attendance entries
+     * @param query User input command to parse
+     */
+    public static void makeAttendanceEntry(AttendanceList attendanceList, String query) {
+        Attendance attendance = getAttendanceDetails(query);
+        attendanceList.addAttendance(attendance);
+        System.out.println("Added an Attendance entry: " + attendance);
     }
 
     /**
