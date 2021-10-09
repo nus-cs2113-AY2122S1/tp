@@ -124,7 +124,8 @@ public class TextUi {
     }
 
     public static void missingDetailMessage() {
-        String message = "There are missing details.\n" + "Please remove any flags with no details";
+        String message = "There are missing details.\n" + "Please remove any flags with no details, \n"
+                + "and ensure that your flags used are correct:\n" + "  -n NAME\n" + "  -g GITHUB";
         printDoubleLineMessage(message);
     }
 
