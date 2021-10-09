@@ -12,4 +12,8 @@ public class SearchMapCommand extends Command {
         System.out.println("Potential mappings for " + universityToMap.getName() + ": ");
         universityToMap.listMappings();
     }
+
+    public University getUniversityToMap() {
+        return universityToMap;
+    }
 }

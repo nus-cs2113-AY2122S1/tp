@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class AddmodCommandParserTest {
+class AddModCommandParserTest {
 
     @Test
     void parse_validModuleCode_expectModuleObject() throws IOException {
         String moduleCode = "CS1231";
-        AddmodCommandParser acp = new AddmodCommandParser();
+        AddModCommandParser acp = new AddModCommandParser();
         ArrayList<Module> moduleMasterList = Storage.loadModules();
         assertEquals("CS1231", acp.searchForModule(moduleCode, moduleMasterList).getModuleCode());
         assertEquals("Discrete Structures", acp.searchForModule(moduleCode, moduleMasterList).getModuleName());
@@ -26,7 +26,7 @@ class AddmodCommandParserTest {
     @Test
     void parse_invalidModuleCode_expectException() throws IOException {
         String moduleCode = "CS1011";
-        AddmodCommandParser acp = new AddmodCommandParser();
+        AddModCommandParser acp = new AddModCommandParser();
         ArrayList<Module> moduleMasterList = Storage.loadModules();
         assertThrows(ParseException.class, () -> acp.parse(moduleCode, moduleMasterList));
     }
@@ -34,7 +34,7 @@ class AddmodCommandParserTest {
     @Test
     void parse_nullInput_expectException() throws IOException {
         String moduleCode = "";
-        AddmodCommandParser acp = new AddmodCommandParser();
+        AddModCommandParser acp = new AddModCommandParser();
         ArrayList<Module> moduleMasterList = Storage.loadModules();
         assertThrows(ParseException.class, () -> acp.parse(moduleCode, moduleMasterList));
     }
