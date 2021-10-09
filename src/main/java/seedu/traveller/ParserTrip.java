@@ -25,9 +25,11 @@ public class ParserTrip {
         case "new":
             try {
                 String tripName = userInput[1];
-                command = new NewCommand(tripName);
-                Vertex s = GraphList.findVertex(userInput[2]);
-                Vertex t = GraphList.findVertex(userInput[3]);
+                String origin = userInput[2];
+                String destination = userInput[3];
+                command = new NewCommand(tripName, origin, destination);
+                Vertex s = GraphList.findVertex(origin);
+                Vertex t = GraphList.findVertex(destination);
                 System.out.println("Finding shortest path!");
                 Dijkstra.run(s, t);
             } catch (ArrayIndexOutOfBoundsException e) {
