@@ -11,7 +11,7 @@ public class Parser {
      * @param listOfTrips the list of trips that the user has added to the program
      * @return whether the program should continue running after processing the given user input
      */
-    public static boolean parseUserInput(String userInput, ArrayList<Trip> listOfTrips) {
+    public static boolean parseUserInput(String userInput, ArrayList<Trip> listOfTrips) throws ArrayIndexOutOfBoundsException{
         String[] userInputSplit = userInput.split(" ", 2);
         String inputCommand = userInputSplit[0];
         String inputDescription = userInputSplit[1];

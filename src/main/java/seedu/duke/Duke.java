@@ -29,7 +29,11 @@ public class Duke {
         Storage.setScanner(in);
 
         while (isProgramRunning) {
-            isProgramRunning = Parser.parseUserInput(readUserInput(in), listOfTrips);
+            try {
+                isProgramRunning = Parser.parseUserInput(readUserInput(in), listOfTrips);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
     }
