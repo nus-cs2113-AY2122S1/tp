@@ -20,7 +20,13 @@ public class TextUi {
     }
 
     public String getUserInput() {
-        return scanner.nextLine().trim();
+        String userInput = scanner.nextLine().trim();
+        if (userInput.contains(",")) {
+            String newUserInput = userInput.replace(",", "");
+            forbiddenInputCommaMessage(newUserInput);
+            return newUserInput;
+        }
+        return userInput;
     }
 
     // Used for print messages after user inputs
@@ -31,6 +37,10 @@ public class TextUi {
     // Used for system messages without user inputs
     private static void printBottomLineMessage(String message) {
         System.out.println(message + "\n" + LINE);
+    }
+
+    private static void printTopLineMessage(String message) {
+        System.out.println(LINE + "\n" + message);
     }
 
     // Used to print a line after displayed data
@@ -114,7 +124,8 @@ public class TextUi {
     }
 
     public static void missingDetailMessage() {
-        String message = "There are missing details.\n" + "Please remove any flags with no details";
+        String message = "There are missing details.\n" + "Please remove any flags with no details, \n"
+                + "and ensure that your flags used are correct:\n" + "  -n NAME\n" + "  -g GITHUB";
         printDoubleLineMessage(message);
     }
 
@@ -152,6 +163,23 @@ public class TextUi {
             message = "The number you have input is out of range.\n"
                     + "Please input a number between 0 and " + maxIndex + ".";
         }
+        printDoubleLineMessage(message);
+    }
+
+    public static void corruptLineMessage(String line) {
+        printBottomLineMessage("Line \"" + line + "\" is corrupted and not loaded.");
+    }
+
+    private void forbiddenInputCommaMessage(String newUserInput) {
+        String message = "Due to the storage nature of ConTech, we will remove\n"
+                + "commas (\",\"), and attempt to parse it as:\n"
+                + newUserInput;
+        printTopLineMessage(message);
+    }
+
+    public static void forbiddenDetailMessage() {
+        String message = "As one of the details to be stored is \"null\", \n"
+                + "ConTech is unable to process it";
         printDoubleLineMessage(message);
     }
 }

@@ -3,10 +3,12 @@ package seedu.parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.contact.DetailType;
+import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 
+import static seedu.parser.ContactParser.NUMBER_OF_ADD_ARGS;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -28,7 +30,7 @@ class AddContactParserTest {
 
     @Test
     void parseContactDetails_inputsWithIrregularSpacing_expectCorrectDetails() throws InvalidFlagException,
-            MissingDetailException, MissingArgException {
+            MissingDetailException, MissingArgException, ForbiddenDetailException {
         inputUserInput = "add       -n   andre   -g ng-andre   ";
         actualOutput = addContactParser.parseContactDetails(inputUserInput);
         expectedOutput = new String[]{"andre", "ng-andre"};
@@ -76,7 +78,7 @@ class AddContactParserTest {
 
     @Test
     void parseDetail_inputsWithTrailingSpaces_expectNewContactDetail() throws InvalidFlagException,
-            MissingDetailException {
+            MissingDetailException, ForbiddenDetailException {
         inputDetail = "n             andre";
         addContactParser.parseDetail(inputContactDetails, inputDetail);
         assertEquals("andre", inputContactDetails[DetailType.NAME.getIndex()]);
@@ -84,7 +86,7 @@ class AddContactParserTest {
 
     @Test
     void parseDetail_inputsWithSpaceInDetail_expectNewContactDetail() throws InvalidFlagException,
-            MissingDetailException {
+            MissingDetailException, ForbiddenDetailException {
         inputDetail = "n Marcus Bory";
         addContactParser.parseDetail(inputContactDetails, inputDetail);
         assertEquals("Marcus Bory", inputContactDetails[DetailType.NAME.getIndex()]);
