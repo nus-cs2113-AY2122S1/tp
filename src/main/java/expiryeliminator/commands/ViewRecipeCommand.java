@@ -9,7 +9,9 @@ import expiryeliminator.data.Recipe;
  */
 
 public class ViewRecipeCommand extends Command {
-    /** Unique word associated with the command. */
+    /**
+     * Unique word associated with the command.
+     */
     public static final String COMMAND_WORD = "view recipe";
 
     private static final String MESSAGE_SHOW_RECIPE = "Here is the recipe in your recipe list:\n" + "\n%1$s\n";
@@ -23,7 +25,7 @@ public class ViewRecipeCommand extends Command {
     @Override
     public String execute(IngredientList ingredientList, RecipeList recipeList) {
         Recipe recipe = recipeList.findRecipe(recipeDescription);
-        if(recipe == null) {
+        if (recipe == null) {
             IncorrectCommand incorrectCommand = new IncorrectCommand("Sorry. No matching recipes found!");
             return incorrectCommand.execute(ingredientList, recipeList);
         } else {
