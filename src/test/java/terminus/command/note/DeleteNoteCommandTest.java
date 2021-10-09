@@ -1,6 +1,7 @@
 package terminus.command.note;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,7 @@ import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
 
 public class DeleteNoteCommandTest {
+
     private NoteCommandParser commandParser;
     private NusModule nusModule;
     private Ui ui;
@@ -47,5 +49,12 @@ public class DeleteNoteCommandTest {
             assertTrue(deleteResult.isOk());
         }
         assertEquals(2, nusModule.getContentManager().getTotalContents());
+    }
+
+    @Test
+    void execute_throwsException()
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+        Command deleteCommand = commandParser.parseCommand("delete 100");
+        assertThrows(InvalidArgumentException.class, () -> deleteCommand.execute(ui, nusModule));
     }
 }
