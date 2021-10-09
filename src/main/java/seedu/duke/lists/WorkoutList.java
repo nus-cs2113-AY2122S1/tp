@@ -4,6 +4,7 @@ import seedu.duke.exception.GetJackDException;
 
 import java.util.ArrayList;
 
+
 /**
  * Represents a list of all workouts in the form of a ArrayList of Workout Objects (All workouts stored by user).
  * Adding, deleting and other operations related to workouts will be executed from here.
@@ -24,7 +25,7 @@ public class WorkoutList {
      * @param workout workout routine to be added.
      */
     public void addWorkout(Workout workout) {
-        //assumes not null
+        assert workout != null;
         workouts.add(workout);
     }
 
@@ -36,7 +37,6 @@ public class WorkoutList {
      * @throws GetJackDException when the index is greater than number of workouts or less than 0.
      */
     public Workout removeWorkout(int displayIndex) throws GetJackDException {
-        //assume not null
         if (displayIndex <= 0 || displayIndex > workouts.size()) {
             throw new GetJackDException("Invalid Workout Index");
         }
