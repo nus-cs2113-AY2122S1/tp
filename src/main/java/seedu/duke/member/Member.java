@@ -29,6 +29,16 @@ public class Member {
         setPhoneNumber(phoneNumber);
     }
 
+    public Member() {
+    }
+    public Member(Member member){
+        setName(member.name);
+        setStudentNumber(member.studentNumber);
+        setAsActiveMember();
+        setGender(member.gender);
+        setPhoneNumber(member.phoneNumber);
+    }
+
     public void setName(String name) {
         this.name = name;
     }
