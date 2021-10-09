@@ -14,15 +14,13 @@ public class WorkoutList {
         workouts = new ArrayList<>();
     }
 
-    public WorkoutList(ArrayList<Workout> loadedWorkouts) {
-        workouts = loadedWorkouts;
-    }
-
     public void addWorkout(Workout workout) {
+        //assumes not null
         workouts.add(workout);
     }
 
     public Workout removeWorkout(int displayIndex) throws GetJackDException {
+        //assume not null
         if (displayIndex <= 0 || displayIndex > workouts.size()) {
             throw new GetJackDException("Invalid Workout Index");
         }

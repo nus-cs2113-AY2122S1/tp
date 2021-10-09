@@ -22,11 +22,13 @@ public class Workout {
     private ArrayList<Exercise> exercises;
 
     public Workout(String workoutName) {
+        //assume not null
         exercises = new ArrayList<>();
         this.workoutName = workoutName;
     }
 
     public void addExercise(Exercise exercise) {
+        //assume not null
         exercises.add(exercise);
     }
 
