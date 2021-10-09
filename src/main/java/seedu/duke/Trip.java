@@ -106,6 +106,25 @@ public class Trip {
         }
     }
 
+    public double getTotalExpenses() {
+        double totalExpense = 0;
+        for (Expense currentExpense : listOfExpenses) {
+            totalExpense += currentExpense.getAmountSpent();
+        }
+        return totalExpense;
+    }
+
+    public double getBudgetLeft() {
+        return getBudget() - getTotalExpenses();
+    }
+
+    public void printExpensesSummary() {
+        System.out.println("This is the summary for your " + getLocation() + " trip " + getDateOfTripString());
+        System.out.println("Total budget for this trip: " + getBudget());
+        System.out.println("Total expenditure so far: " + getTotalExpenses());
+        System.out.println("Current budget left for this trip: " + getBudgetLeft());
+    }
+
     public String getForeignCurrency() {
         return foreignCurrency;
     }
@@ -124,6 +143,10 @@ public class Trip {
 
     public String getLocation() {
         return this.location;
+    }
+
+    public ArrayList<Person> getListOfPersons() {
+        return listOfPersons;
     }
 
     public void setLocation(String location) {
