@@ -64,6 +64,11 @@ public class AssessmentList {
         return assessments.size();
     }
 
+    /**
+     * Format the string to print out all the assessments.
+     *
+     * @return Assessment list string.
+     */
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(MESSAGE_ASSESSMENT_LIST_HEADER);

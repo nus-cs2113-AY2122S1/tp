@@ -13,6 +13,13 @@ public class ListAssessmentsCommand extends Command {
         super(argument, LIST_ASSESSMENTS_ARGUMENT_KEYS);
     }
 
+    /**
+     * Lists all the assessments of a particular module.
+     *
+     * @param modules The list of modules.
+     * @param ui The ui instance to handle interactions with the user.
+     * @throws CustomException If the user inputs an invalid command.
+     */
     @Override
     public void execute(ModuleList modules, Ui ui) throws CustomException {
         if (argument.isEmpty()) {
