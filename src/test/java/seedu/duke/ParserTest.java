@@ -73,8 +73,7 @@ class ParserTest {
         assertEquals("Edited member: Name: Tan Teck Hwee | Student Number: A0123456A | Gender: F |"
                         + "Phone Number: 98765432\n"
                         + "To become:  Name: Ian Wang | Student Number: A0234567B | Gender: M | "
-                        + "Phone Number: 98441232\n"
-                , outContent.toString());
+                        + "Phone Number: 98441232\n", outContent.toString());
     }
     
     void getTrainingDetails() {
