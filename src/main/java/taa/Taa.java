@@ -1,6 +1,7 @@
 package taa;
 
 import taa.command.Command;
+import taa.exception.TaaException;
 import taa.module.ModuleList;
 
 public class Taa {
@@ -23,7 +24,7 @@ public class Taa {
                 Command command = Parser.parseUserInput(userInput);
                 command.execute(modules, ui);
                 isExit = command.isExit();
-            } catch (CustomException e) {
+            } catch (TaaException e) {
                 ui.printException(e.getMessage());
             }
         } while (!isExit);
