@@ -1,5 +1,7 @@
 package expiryeliminator.commands;
 
+import java.time.LocalDate;
+
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
 import expiryeliminator.data.RecipeList;
@@ -19,7 +21,7 @@ public class AddIngredientCommand extends Command {
 
     private final Ingredient ingredient;
 
-    public AddIngredientCommand(String name, int quantity, String expiryDate) {
+    public AddIngredientCommand(String name, int quantity, LocalDate expiryDate) {
         ingredient = new Ingredient(name, quantity, expiryDate);
     }
 

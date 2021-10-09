@@ -1,13 +1,14 @@
 package expiryeliminator.data;
 
+import java.time.LocalDate;
+
 /**
  * Represents an ingredient.
  */
 public class Ingredient {
     private final String name;
     private final int quantity;
-    // TODO(bernardboey): Change to LocalDate and make sure to validate.
-    private final String expiryDate;
+    private final LocalDate expiryDate;
 
     /**
      * Initialises an ingredient.
@@ -16,7 +17,7 @@ public class Ingredient {
      * @param quantity The quantity of the ingredient.
      * @param expiryDate The expiry date of the ingredient.
      */
-    public Ingredient(String name, int quantity, String expiryDate) {
+    public Ingredient(String name, int quantity, LocalDate expiryDate) {
         this.name = name;
         this.quantity = quantity;
         this.expiryDate = expiryDate;
@@ -45,7 +46,7 @@ public class Ingredient {
      *
      * @return The expiry date of the ingredient.
      */
-    public String getExpiryDate() {
+    public LocalDate getExpiryDate() {
         return expiryDate;
     }
 

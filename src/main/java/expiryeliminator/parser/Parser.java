@@ -1,5 +1,6 @@
 package expiryeliminator.parser;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -85,7 +86,7 @@ public class Parser {
         try {
             final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
             final int quantity = new QuantityParser().parse(argParser.getSingleArg(PREFIX_QUANTITY));
-            final String expiry = new ExpiryDateParser().parse(argParser.getSingleArg(PREFIX_EXPIRY));
+            final LocalDate expiry = new ExpiryDateParser().parse(argParser.getSingleArg(PREFIX_EXPIRY));
             return new AddIngredientCommand(ingredient, quantity, expiry);
         } catch (InvalidArgFormatException e) {
             return new IncorrectCommand(e.getMessage());
