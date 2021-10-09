@@ -1,7 +1,6 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.commands.AddmodCommand;
 import seedu.duke.modules.Module;
 import seedu.duke.storage.Storage;
 
@@ -9,7 +8,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class AddmodCommandParserTest {
 
@@ -28,7 +28,7 @@ class AddmodCommandParserTest {
         String moduleCode = "CS1011";
         AddmodCommandParser acp = new AddmodCommandParser();
         ArrayList<Module> moduleMasterList = Storage.loadModules();
-        assertThrows(ParseException.class, ()-> acp.parse(moduleCode, moduleMasterList));
+        assertThrows(ParseException.class, () -> acp.parse(moduleCode, moduleMasterList));
     }
 
     @Test
@@ -36,6 +36,6 @@ class AddmodCommandParserTest {
         String moduleCode = "";
         AddmodCommandParser acp = new AddmodCommandParser();
         ArrayList<Module> moduleMasterList = Storage.loadModules();
-        assertThrows(ParseException.class, ()-> acp.parse(moduleCode, moduleMasterList));
+        assertThrows(ParseException.class, () -> acp.parse(moduleCode, moduleMasterList));
     }
 }
