@@ -15,9 +15,8 @@ import java.time.format.DateTimeFormatter;
 
 
 public class Parser {
-    protected LocalDateTime formattedDate;
-    protected static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy");
+    protected static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
 
     public static Command parseCommand(String response) {
         String[] command = response.split(" ", 10);
