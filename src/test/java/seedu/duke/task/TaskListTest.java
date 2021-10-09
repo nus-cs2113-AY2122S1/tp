@@ -43,7 +43,7 @@ public class TaskListTest {
 
     @Test
     public void deleteTask_indexOutOfBounds_exceptionThrown() {
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(DukeException.class, () -> {
             TaskList taskList = new TaskList();
             taskList.addTask(new Task("Study CS2113T", "mon", "JUnit test"));
             taskList.deleteTask(1);
@@ -52,7 +52,7 @@ public class TaskListTest {
 
     @Test
     public void deleteTask_negativeIndex_exceptionThrown() {
-        assertThrows(IndexOutOfBoundsException.class, () -> new TaskList().deleteTask(-1));
+        assertThrows(DukeException.class, () -> new TaskList().deleteTask(-1));
     }
 
     @Test
