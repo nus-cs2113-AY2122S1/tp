@@ -21,13 +21,12 @@ class DeleteTaskCommandTest {
     public void testDeleteAllTasks() {
         Ui ui = new Ui();
         TaskList taskList = new TaskList();
-        LessonList lessonList = new LessonList();
-        Storage storage = new Storage();
-        storage.createNewData(ui);
-
         taskList.addTask(new Task("task 1", "mon", ""));
         taskList.addTask(new Task("task 2", "fri", "someInfo"));
 
+        LessonList lessonList = new LessonList();
+        Storage storage = new Storage();
+        storage.createNewData(ui);
         try {
             Command deleteAllTasksCommand = new DeleteTaskCommand();
             deleteAllTasksCommand.execute(ui, taskList, lessonList, storage);
@@ -42,13 +41,12 @@ class DeleteTaskCommandTest {
     public void testDeleteTask() {
         Ui ui = new Ui();
         TaskList taskList = new TaskList();
-        LessonList lessonList = new LessonList();
-        Storage storage = new Storage();
-        storage.createNewData(ui);
-
         taskList.addTask(new Task("task 1", "mon", ""));
         taskList.addTask(new Task("task 2", "fri", "someInfo"));
 
+        LessonList lessonList = new LessonList();
+        Storage storage = new Storage();
+        storage.createNewData(ui);
         try {
             Command deleteTaskCommand = new DeleteTaskCommand(1);
             deleteTaskCommand.execute(ui, taskList, lessonList, storage);
@@ -63,12 +61,12 @@ class DeleteTaskCommandTest {
     public void testDeleteOobTask() {
         Ui ui = new Ui();
         TaskList taskList = new TaskList();
+        taskList.addTask(new Task("task 1", "mon", ""));
+        taskList.addTask(new Task("task 2", "fri", "someInfo"));
+
         LessonList lessonList = new LessonList();
         Storage storage = new Storage();
         storage.createNewData(ui);
-
-        taskList.addTask(new Task("task 1", "mon", ""));
-        taskList.addTask(new Task("task 2", "fri", "someInfo"));
 
         Command deleteOobTaskCommand = new DeleteTaskCommand(4);
         assertThrows(DukeException.class, () -> deleteOobTaskCommand.execute(ui, taskList, lessonList, storage));
