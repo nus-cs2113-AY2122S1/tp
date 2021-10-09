@@ -71,15 +71,15 @@ to keep track of your daily schedule and your total workload:
 
 > :information_source: **Notes about the command formats**
 > - Words in `<UPPER_CASE>` are the parameters to be given by the user. <br />
-    > e.g. in `todo <DESCRIPTION>`, <DESCRIPTION> is a parameter and be called like so : `todo eat breakfast`
-    > <br /><br />
+    > e.g. in `show <MODULE_CODE>`, <MODULE_CODE> is a parameter and be called like so : `show CS2113T`
+    <br /><br />
 > - Items in square brackets are optional <br />
-    > e.g. find `find <REGEX> [/type TASKTYPE]`
-    > can be called as `find eat /type todo` OR `find eat`.
-    > <br /><br />
+    > e.g. find `search <KEYWORD> [-l]`
+    > can be called as `search GEH` OR `search GEH -l`.
+    <br /><br />
 > - Parameters can be in any order for optional flags <br />
-    > e.g. `find <REGEX> [/type TASKTYPE] [/limit QUERYLIMIT]` is equivalent to `find <REGEX> [/limit QUERYLIMIT] [/type TASKTYPE] `
-    > <br /><br />
+    > e.g. `search <KEYWORD> [-l]` is equivalent to `search [-l] <KEYWORD> `
+    <br /><br />
 > - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `bye`) will be ignored.<br />
     > e.g. `help abc` will be interpreted as  `help`
 
@@ -111,7 +111,7 @@ To begin, perhaps try looking up CS2113T by running the following command:
 
 <br>
 
-## Display Module Info: `show <module_code>`
+## Display Module Info: `show <MODULE_CODE>`
 If you want to find out more about a module, type `show <module_code>` to display the following:
   * Name
   * MCs
@@ -144,7 +144,7 @@ Semester Availability: [1, 2]
 
 <br>
 
-## Search Module: `search <keyword> [-l]`
+## Search Module: `search <KEYWORD> [-l]`
 Maybe you don't know what modules are out there, and want to know what 
 GEH modules are available. 
 
@@ -170,7 +170,7 @@ might not be the most updated version
 
 <br>
 
-## Add to timetable: `add <module_code>`
+## Add to timetable: `add <MODULE_CODE>`
 You want to start planning your timetable and your semester workload. Try adding your first module!
 
 Let's add for example, `CS2113T` to the timetable
@@ -268,10 +268,10 @@ ____________________________________________________________________________
 | Command                   | Meaning                                                                                           |
 | --------------            | ----------                                                                                        |
 | `help`                    | Shows available commands and flags. </br> Example: `help`                                         |
-| `search <keyword> [-l]`   | Lists modules that have partial matches by regex to the keyword. </br> Example: `search GEH -l`   |
-| `show <module_code>`      | Display relevant module information. </br> Example: `show CS2113T`                                |
-| `add <module_code>`       | Adds the module to the timetable. </br> Example: `add CS2113T`                                    |
-| `delete <module_code>`    | Deletes the module from the timetable. </br> Example: `delete CS2113T`                            |
+| `search <KEYWORDd> [-l]`  | Lists modules that have partial matches by regex to the keyword. </br> Example: `search GEH -l`   |
+| `show <MODULE_CODE>`      | Display relevant module information. </br> Example: `show CS2113T`                                |
+| `add <MODULE_CODE>`       | Adds the module to the timetable. </br> Example: `add CS2113T`                                    |
+| `delete <MODULE_CODE>`    | Deletes the module from the timetable. </br> Example: `delete CS2113T`                            |
 | `clear`                   | Deletes all modules from the timetable. </br> Example: `clear`                                    |
 | `timetable`               | Displays timetable with total MCs taken. </br> Example: `timetable`                               |
 | `exit`                    | Exit the application. </br> Example:`exit`                                                        |
