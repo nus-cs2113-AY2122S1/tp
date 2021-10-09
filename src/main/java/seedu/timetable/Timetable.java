@@ -141,7 +141,12 @@ public class Timetable {
         }
     }
 
-
+    /**
+     * Calls the function deleteFromSchedule to delete the module from the timetable's daily plan.
+     *
+     * @param module Module to be Deleted
+     * @see Module
+     */
     public void deleteFromLessons(Module module) {
 
         for (int i = 0; i < 7; i++) {
@@ -175,6 +180,13 @@ public class Timetable {
 
     }
 
+    /**
+     * Sets the TimetableLesson for the particular time slot to be null where the timetableLesson is scheduled for the module to be deleted .
+     *
+     * @param schedule Schedule contains the lessons of the user for a particular of the week.
+     * @param module   Module to be Deleted
+     * @see Module
+     */
     public void deleteFromSchedule(Module module, TimetableLesson[] schedule) {
         for (int i = 0; i < schedule.length; i++) {
             if (schedule[i] != null && schedule[i].getModuleCode().equals(module.getModuleCode())) {
