@@ -18,14 +18,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 class DeleteLessonCommandTest {
     @Test
     public void testDeleteAllLessons() {
-        Ui ui = new Ui();
-        TaskList taskList = new TaskList();
         LessonList lessonList = new LessonList();
-        Storage storage = new Storage();
-
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
 
+        Ui ui = new Ui();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage();
+        storage.createNewData(ui);
         try {
             Command deleteAllLessonsCommand = new DeleteLessonCommand();
             deleteAllLessonsCommand.execute(ui, taskList, lessonList, storage);
@@ -38,14 +38,14 @@ class DeleteLessonCommandTest {
 
     @Test
     public void testDeleteLesson() {
-        Ui ui = new Ui();
-        TaskList taskList = new TaskList();
         LessonList lessonList = new LessonList();
-        Storage storage = new Storage();
-
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
 
+        Ui ui = new Ui();
+        TaskList taskList = new TaskList();
+        Storage storage = new Storage();
+        storage.createNewData(ui);
         try {
             Command deleteLessonCommand = new DeleteLessonCommand(0);
             deleteLessonCommand.execute(ui, taskList, lessonList, storage);
@@ -58,13 +58,15 @@ class DeleteLessonCommandTest {
 
     @Test
     public void testDeleteOobLesson() {
-        Ui ui = new Ui();
-        TaskList taskList = new TaskList();
-        LessonList lessonList = new LessonList();
-        Storage storage = new Storage();
 
+        LessonList lessonList = new LessonList();
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
+
+        TaskList taskList = new TaskList();
+        Ui ui = new Ui();
+        Storage storage = new Storage();
+        storage.createNewData(ui);
 
         Command deleteOobLessonCommand = new DeleteLessonCommand(4);
         assertThrows(DukeException.class, () -> deleteOobLessonCommand.execute(ui, taskList, lessonList, storage));

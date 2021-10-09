@@ -33,6 +33,11 @@ public class Ui {
 
     private final Scanner sc = new Scanner(System.in);
 
+    /**
+     * Gets user input from the standard input.
+     *
+     * @return the user input up to the next newline
+     */
     public String readUserResponse() {
         return sc.nextLine().strip();
     }
@@ -44,6 +49,9 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Greets user on exiting the program.
+     */
     public void printExit() {
         System.out.print(LINE);
         System.out.println(PADDING + "Bye!");
@@ -56,6 +64,12 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Prints a message to acknowledge that the specified task has been added.
+     *
+     * @param task the task that has been added
+     * @param size the number of tasks in the list
+     */
     // TODO: Fix print formatting
     public void printTaskAdded(Task task, int size) {
         System.out.print(LINE);
@@ -65,6 +79,12 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Prints a message to acknowledge that the specified lesson has been added.
+     *
+     * @param lesson the lesson that has been added
+     * @param size the number of lessons in the list
+     */
     public void printLessonAdded(Lesson lesson, int size) {
         System.out.print(LINE);
         System.out.println(PADDING + "Noted. I've added this lesson:");
@@ -74,7 +94,7 @@ public class Ui {
     }
 
     /**
-     * Print a message to acknowledge that all tasks and lessons have been deleted.
+     * Prints a message to acknowledge that all tasks and lessons have been deleted.
      */
     public void printDeletedAll() {
         System.out.print(LINE);
@@ -83,7 +103,7 @@ public class Ui {
     }
 
     /**
-     * Print a message to acknowledge that all lessons have been deleted.
+     * Prints a message to acknowledge that all lessons have been deleted.
      */
     public void printDeletedAllLessons() {
         System.out.print(LINE);
@@ -92,7 +112,7 @@ public class Ui {
     }
 
     /**
-     * Print a message to acknowledge that the specified lesson has been deleted.
+     * Prints a message to acknowledge that the specified lesson has been deleted.
      *
      * @param lesson the Lesson type object that has been deleted
      * @param size the number of remaining lessons in the list
@@ -106,7 +126,7 @@ public class Ui {
     }
 
     /**
-     * Print a message to acknowledge that all tasks have been deleted.
+     * Prints a message to acknowledge that all tasks have been deleted.
      */
     public void printDeletedAllTasks() {
         System.out.print(LINE);
@@ -115,7 +135,7 @@ public class Ui {
     }
 
     /**
-     * Print a message to acknowledge that the specified task has been deleted.
+     * Prints a message to acknowledge that the specified task has been deleted.
      * @param task the Task type object that has been deleted
      * @param size the number of remaining tasks in the list
      */
@@ -297,6 +317,20 @@ public class Ui {
             System.out.print(filteredLessonList);
         }
 
+        System.out.println(LINE);
+    }
+
+    /**
+     * Displays the task marked as done.
+     * 
+     * @param taskList the task list
+     * @param task the task marked as done
+     */
+    public void printDoneTask(TaskList taskList, Task task) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Nice! I've marked this task as done: ");
+        System.out.println(PADDING + task);
+        System.out.println(PADDING + "Now you have " + taskList.getNumberOfPendingTasks() + " pending tasks.");
         System.out.println(LINE);
     }
 }
