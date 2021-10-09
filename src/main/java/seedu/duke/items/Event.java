@@ -23,6 +23,10 @@ public class Event extends Item {
         return date;
     }
 
+    public String getItemType() {
+        return "event";
+    }
+
     public String getVenue() {
         return venue;
     }

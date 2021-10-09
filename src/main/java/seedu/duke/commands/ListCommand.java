@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.Parser;
 import seedu.duke.Duke;
 import seedu.duke.Ui;
 import seedu.duke.items.Item;
@@ -32,19 +33,19 @@ public class ListCommand extends Command {
         case "list":
             sortedList.addAll(Duke.eventList);
             sortedList.addAll(Duke.taskList);
-            bubbleSortTask(sortedList);
+            Parser.bubbleSortTask(sortedList);
             System.out.println("Here is your overall schedule:");
             Ui.printList(sortedList);
             break;
         case "event":
             sortedList = new ArrayList<Item>(Duke.eventList);
-            bubbleSortTask(sortedList);
+            Parser.bubbleSortTask(sortedList);
             System.out.println("Here are all the events in your list:");
             Ui.printList(sortedList);
             break;
         case "task":
             sortedList = new ArrayList<Item>(Duke.taskList);
-            bubbleSortTask(sortedList);
+            Parser.bubbleSortTask(sortedList);
             System.out.println("Here are all the tasks in your list:");
             Ui.printList(sortedList);
             break;
@@ -54,22 +55,5 @@ public class ListCommand extends Command {
         }
 
         return new CommandResult("--------END OF LIST-----------");
-    }
-
-    private void bubbleSortTask(ArrayList<Item> list) {
-        for (int j = 0; j < list.size() - 1; j++) {
-            for (int i = 0; i < list.size() - j - 1; i++) {
-                if (list.get(i + 1).getDateValue().isBefore(list.get(i).getDateValue())) {
-                    swap(i, list);
-                }
-            }
-        }
-    }
-
-    private void swap(int i, ArrayList<Item> list) {
-        Item t;
-        t = list.get(i);
-        list.set(i, list.get(i + 1));
-        list.set(i + 1, t);
     }
 }
