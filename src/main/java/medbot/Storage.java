@@ -21,10 +21,10 @@ public class Storage {
     private static final String ERROR_LOAD_STORAGE = "Error: Unable to load data file.";
     private static final String ERROR_SAVE_STORAGE = "Error: Unable to save data.";
 
-    private static final String ERROR_INVALID_STORAGE_LINE = "\n" +
-            "I am done reading " + DATA_PATH + "\n" +
-            "1. Enter 'exit' to exit program to correct data file " + DATA_PATH + "\n" +
-            "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
+    private static final String ERROR_INVALID_STORAGE_LINE = "\n"
+            + "I am done reading " + DATA_PATH + "\n"
+            + "1. Enter 'exit' to exit program to correct data file " + DATA_PATH + "\n"
+            + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
 
     /**
      * Constructor
@@ -35,9 +35,7 @@ public class Storage {
     public Storage() throws MedBotException {
         try {
             DATA_FILE.getParentFile().mkdirs();
-            if (DATA_FILE.createNewFile()) {
-                System.out.println(CREATED_NEW_FILE);
-            }
+            DATA_FILE.createNewFile();
         } catch (IOException e) {
             throw new MedBotException(ERROR_LOAD_STORAGE);
         }
@@ -63,7 +61,8 @@ public class Storage {
                 patientList.addPatientFromStorage(patient);
 
             } catch (Exception e) {
-                System.out.println("Error: Line " + lineNumber + " of " + DATA_PATH + " is invalid! Skipping to next line...");
+                System.out.println("Error: Line " + lineNumber + " of " + DATA_PATH
+                        + " is invalid! Skipping to next line...");
                 hasInvalidStorageLine = true;
             }
 
@@ -78,7 +77,7 @@ public class Storage {
     }
 
     /**
-     * Create a patient instance from information in a storageLine
+     * Create a patient instance from information in a storageLine.
      *
      * @param storageLine a line from storage/data.txt
      * @return a patient instance with the parameters specified by storageLine
@@ -114,6 +113,8 @@ public class Storage {
     }
 
     /**
+     * True if "X", which means the parameter is null, false otherwise.
+     *
      * @param parameter a parameter in a line of storage/data.txt
      * @return true if "X", which means the parameter is null, false otherwise
      */
