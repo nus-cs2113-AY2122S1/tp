@@ -81,7 +81,7 @@ public class Parser {
     }
 
     /**
-     * Parses the user respond into an executable add task command.
+     * Parses the user response with commandType removed into an executable add task command.
      *
      * @param userResponse the user response
      * @return an executable add task type command
@@ -113,7 +113,7 @@ public class Parser {
     }
 
     /**
-     * Parses the user command into an executable add lesson type command.
+     * Parses the user command with commandType removed into an executable add lesson type command.
      *
      * @param userResponse the user response
      * @return an executable add lesson type command
