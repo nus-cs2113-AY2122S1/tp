@@ -28,10 +28,12 @@ public class LoggerUtil {
     }
 
     public static void setupLogger(Logger logger) {
-        logger.setLevel(Level.ALL);
-        logger.addHandler(ch);
-        logger.addHandler(fh);
-        logger.info("Logger setup successful");
+        if (ch != null && fh != null) {
+            logger.setLevel(Level.ALL);
+            logger.addHandler(ch);
+            logger.addHandler(fh);
+            logger.info("Logger setup successful");
+        }
     }
 
 }
