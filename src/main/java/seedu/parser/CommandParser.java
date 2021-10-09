@@ -8,8 +8,10 @@ public class CommandParser {
     private static final Integer SEARCH_LENGTH = 6;
     private static final Integer SHOW_LENGTH = 4;
     private static final Integer ADD_LENGTH = 3;
+    public static final Integer DELETE_LENGTH = 6;
     private static final String FLAG = "-";
     private static final String L_FLAG = "-l";
+
 
     public Command parseCommand(String text, Timetable timetable) {
         Command command;
@@ -30,10 +32,17 @@ public class CommandParser {
             command = parseAddCommand(text, timetable);
         } else if (lowerCaseText.startsWith("help")) {
             command = new HelpCommand();
+        } else if (lowerCaseText.startsWith("delete")) {
+            command = parseDeleteCommand(text, timetable);
         } else {
             command = new InvalidCommand();
         }
         return command;
+    }
+
+    public Command parseDeleteCommand(String text, Timetable timetable) {
+        String moduleToBeDeleted = (text.substring(DELETE_LENGTH).trim()).toUpperCase();
+        return new DeleteCommand(moduleToBeDeleted, timetable);
     }
 
     public Command parseSearchCommand(String text) {
