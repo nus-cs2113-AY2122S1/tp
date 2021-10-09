@@ -192,6 +192,35 @@ Please remove any flags with no details
 ____________________________________________________________
 
 ____________________________________________________________
+
+Due to the storage nature of ConTech, we will remove
+commas (","), and attempt to parse it as:
+add -n lezong mun -g    lezaimun
+____________________________________________________________
+ConTech has added the specified contact: lezong mun
+You now have 5 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+As one of the details to be stored is "null", 
+ConTech is unable to process it
+____________________________________________________________
+
+____________________________________________________________
+As one of the details to be stored is "null", 
+ConTech is unable to process it
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: dev
+You now have 6 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+ConTech has edited the specified contact: lezongmun
+____________________________________________________________
+
+____________________________________________________________
 ConTech will now shutdown.
 We hope you have enjoyed using it.
 ____________________________________________________________

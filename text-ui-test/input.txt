@@ -29,4 +29,9 @@ list
 view abc
 view 0
    add  -n   -g
+      add -n le,zong, mun -g    lezaimun
+       add   -n null  -g legit
+       add -n name -g null
+       add   -n dev -g nullptr
+    edit 3 -g new-git
 exit
