@@ -38,13 +38,13 @@ public class AddStudentCommand extends Command {
         }
 
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        String studentID = argumentMap.get(KEY_STUDENT_ID);
-        String studentName = argumentMap.get(KEY_STUDENT_NAME);
-
         Module module = modules.getModule(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
+
+        String studentID = argumentMap.get(KEY_STUDENT_ID);
+        String studentName = argumentMap.get(KEY_STUDENT_NAME);
         Student student = new Student(studentID, studentName);
         module.addStudent(student);
 

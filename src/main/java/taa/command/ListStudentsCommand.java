@@ -39,8 +39,7 @@ public class ListStudentsCommand extends Command {
             throw new TaaException(getMissingArgumentMessage());
         }
 
-        String moduleCode = argumentMap.get("c");
-
+        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = modules.getModule(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);

@@ -46,15 +46,12 @@ public class EditStudentCommand extends Command {
         }
 
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
-        String newId = argumentMap.get(KEY_NEW_ID);
-        String newName = argumentMap.get(KEY_NEW_NAME);
-
         Module module = modules.getModule(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         if (!Util.isInteger(studentIndexInput)) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
@@ -66,6 +63,8 @@ public class EditStudentCommand extends Command {
             return;
         }
 
+        String newId = argumentMap.get(KEY_NEW_ID);
+        String newName = argumentMap.get(KEY_NEW_NAME);
         student.setId(newId);
         student.setName(newName);
 

@@ -40,14 +40,13 @@ public class FindStudentCommand extends Command {
             throw new TaaException(getMissingArgumentMessage());
         }
 
-        String moduleCode = argumentMap.get("c");
-        String keyword = argumentMap.get("k");
-
+        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = modules.getModule(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
+        String keyword = argumentMap.get(KEY_KEYWORD);
         ArrayList<Student> studentsFound = module.findStudents(keyword);
         if (studentsFound.isEmpty()) {
             ui.printMessage(MESSAGE_NO_STUDENTS_FOUND);

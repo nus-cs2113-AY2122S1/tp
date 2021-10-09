@@ -37,14 +37,13 @@ public class DeleteStudentCommand extends Command {
             throw new TaaException(getMissingArgumentMessage());
         }
 
-        String moduleCode = argumentMap.get("c");
-        String studentIndexInput = argumentMap.get("s");
-
+        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = modules.getModule(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         if (!Util.isInteger(studentIndexInput)) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }

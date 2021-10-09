@@ -31,12 +31,11 @@ public class AddModuleCommand extends Command {
         }
 
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        String name = argumentMap.get(KEY_MODULE_NAME);
-
         if (moduleCode.contains(" ")) {
             throw new TaaException(MESSAGE_INVALID_MODULE_CODE);
         }
 
+        String name = argumentMap.get(KEY_MODULE_NAME);
         Module module = new Module(moduleCode, name);
         modules.addModule(module);
 
