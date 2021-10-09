@@ -4,6 +4,7 @@ import seedu.traveller.commands.Command;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.NewCommand;
 import seedu.traveller.commands.ViewAllCommand;
+import seedu.traveller.commands.DeleteCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.TravellerException;
@@ -35,6 +36,9 @@ public class ParserTrip {
                 System.out.println("Either of the nodes doesn't exist!");
             }
 
+            break;
+        case "delete":
+            command = new DeleteCommand(userInput[1]);
             break;
         case "viewall":
             command = new ViewAllCommand();
