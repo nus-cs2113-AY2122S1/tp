@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.Duke;
 import seedu.duke.exception.DukeException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -57,7 +58,7 @@ public class TaskListTest {
 
     @Test
     public void markTaskAsDone_indexOutOfBounds_exceptionThrown() {
-        assertThrows(IndexOutOfBoundsException.class, () -> {
+        assertThrows(DukeException.class, () -> {
             TaskList taskList = new TaskList();
             taskList.addTask(new Task("Study CS2113T", "mon", "JUnit test"));
             taskList.markTaskAsDone(1);
@@ -66,6 +67,6 @@ public class TaskListTest {
 
     @Test
     public void markTaskAsDone_negativeIndex_exceptionThrown() {
-        assertThrows(IndexOutOfBoundsException.class, () -> new TaskList().markTaskAsDone(-1));
+        assertThrows(DukeException.class, () -> new TaskList().markTaskAsDone(-1));
     }
 }
