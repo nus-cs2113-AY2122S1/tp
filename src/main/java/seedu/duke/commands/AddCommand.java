@@ -8,6 +8,13 @@ import seedu.duke.items.Task;
 
 public class AddCommand extends Command {
 
+    protected static final String TASK_FLAG = "-t";
+    protected static final String EVENT_FLAG = "-e";
+    protected static final String TITLE_FLAG = "n/";
+    protected static final String DATE_FLAG = "d/";
+    protected static final String VENUE_FLAG = "v/";
+    protected static final String BUDGET_FLAG = "b/";
+
     protected static String itemType;
     protected static String itemTitle;
     protected static String itemDescription;
@@ -28,9 +35,9 @@ public class AddCommand extends Command {
                 throw new DukeException("Please specify what to add. ");
             }
             itemType = command[1];
-            if (itemType.equalsIgnoreCase("-t")) {
+            if (itemType.equalsIgnoreCase(TASK_FLAG)) {
                 prepareTask(response);
-            } else if (itemType.equalsIgnoreCase("-e")) {
+            } else if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 prepareEvent(response);
             } else {
                 throw new DukeException("Invalid item flag entered. Please specify task '-t' or event '-e'. ");
@@ -41,35 +48,17 @@ public class AddCommand extends Command {
         }
     }
 
-    private String retrieveItemTitle(String response) {
-        int startOfItemTitle = response.indexOf("n/") + 2;
-        int endOfItemTitle = response.indexOf("/", startOfItemTitle) - 2;
-        if (endOfItemTitle < 0) {
-            return response.trim().substring(startOfItemTitle);
+    private String retrieveItemAttribute(String response, String flag) {
+        int startOfItemAttribute = response.indexOf(flag) + 2;
+        int endOfItemAttribute = response.indexOf("/", startOfItemAttribute) - 2;
+        if (endOfItemAttribute < 0) {
+            return response.trim().substring(startOfItemAttribute);
         }
-        return response.trim().substring(startOfItemTitle, endOfItemTitle);
-    }
-
-    private String retrieveItemDate(String response) {
-        int startOfItemDate = response.indexOf("d/") + 2;
-        int endOfItemDate = response.indexOf("/", startOfItemDate) - 2;
-        if (endOfItemDate < 0) {
-            return response.trim().substring(startOfItemDate);
-        }
-        return response.trim().substring(startOfItemDate, endOfItemDate);
-    }
-
-    private String retrieveEventVenue(String response) {
-        int startOfEventVenue = response.indexOf("v/") + 2;
-        int endOfEventVenue = response.indexOf("/", startOfEventVenue) - 2;
-        if (endOfEventVenue < 0) {
-            return response.trim().substring(startOfEventVenue);
-        }
-        return response.trim().substring(startOfEventVenue, endOfEventVenue);
+        return response.trim().substring(startOfItemAttribute, endOfItemAttribute);
     }
 
     private int retrieveEventBudget(String response) {
-        int startOfEventBudget = response.indexOf("b/") + 2;
+        int startOfEventBudget = response.indexOf(BUDGET_FLAG) + 2;
         int endOfEventBudget = response.indexOf("/", startOfEventBudget) - 2;
         try {
             if (endOfEventBudget < 0) {
@@ -78,57 +67,58 @@ public class AddCommand extends Command {
             return Integer.parseInt(response.trim().substring(startOfEventBudget, endOfEventBudget));
         } catch (NumberFormatException e) {
             System.out.print("Budget needs to be an integer. ");
+            // Returns -1 to signify that the budget entered was not a valid integer
             return -1;
         }
     }
 
     private void prepareTask(String response) throws DukeException {
-        if (!response.contains("n/")) {
+        if (!response.contains(TITLE_FLAG)) {
             throw new DukeException("Please add a title for your task using 'n/<title>'. ");
         }
-        if (!response.contains("d/")) {
+        if (!response.contains(DATE_FLAG)) {
             throw new DukeException("Please add a deadline for your task using 'd/<deadline>' in the "
                     + "format YYYY-MM-DD. ");
         }
 
-        itemTitle = retrieveItemTitle(response);
-        if (itemTitle.equals("")) {
+        itemTitle = retrieveItemAttribute(response, TITLE_FLAG);
+        if (itemTitle.isBlank()) {
             throw new DukeException("Task title cannot be empty, please re-enter your task. ");
         }
 
-        itemDate = retrieveItemDate(response);
-        if (itemDate.equals("")) {
+        itemDate = retrieveItemAttribute(response, DATE_FLAG);
+        if (itemDate.isBlank()) {
             throw new DukeException("Task deadline cannot be empty, please re-enter your task. ");
         }
     }
 
     private void prepareEvent(String response) throws DukeException {
-        if (!response.contains("n/")) {
+        if (!response.contains(TITLE_FLAG)) {
             throw new DukeException("Please add a title for your event using 'n/<title>'. ");
         }
-        if (!response.contains("d/")) {
+        if (!response.contains(DATE_FLAG)) {
             throw new DukeException("Please add a date for your event using 'd/<date>' in the "
                     + "format YYYY-MM-DD. ");
         }
-        if (!response.contains("v/")) {
+        if (!response.contains(VENUE_FLAG)) {
             throw new DukeException("Please add a venue for your event using 'v/<venue>'. ");
         }
-        if (!response.contains("b/")) {
+        if (!response.contains(BUDGET_FLAG)) {
             throw new DukeException("Please add a budget for your event using 'b/<budget>'. ");
         }
 
-        itemTitle = retrieveItemTitle(response);
-        if (itemTitle.equals("")) {
+        itemTitle = retrieveItemAttribute(response, TITLE_FLAG);
+        if (itemTitle.isBlank()) {
             throw new DukeException("Event title cannot be empty, please re-enter your event. ");
         }
 
-        itemDate = retrieveItemDate(response);
-        if (itemDate.equals("")) {
+        itemDate = retrieveItemAttribute(response, DATE_FLAG);
+        if (itemDate.isBlank()) {
             throw new DukeException("Event date cannot be empty, please re-enter your event. ");
         }
 
-        eventVenue = retrieveEventVenue(response);
-        if (eventVenue.equals("")) {
+        eventVenue = retrieveItemAttribute(response, VENUE_FLAG);
+        if (eventVenue.isBlank()) {
             throw new DukeException("Event venue cannot be empty, please re-enter your event. ");
         }
 
@@ -151,13 +141,13 @@ public class AddCommand extends Command {
             Ui.promptForDescription();
             itemDescription = Ui.readInput();
             Ui.linebreak();
-            if (itemType.equalsIgnoreCase("-t")) {
+            if (itemType.equalsIgnoreCase(TASK_FLAG)) {
                 Task task = new Task(itemTitle, itemDescription, itemDate);
                 addToTaskList(task);
                 return new CommandResult("Task added: " + itemTitle + System.lineSeparator()
                         + "Total number of tasks = " + Duke.taskList.size());
             }
-            if (itemType.equalsIgnoreCase("-e")) {
+            if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 Event event = new Event(itemTitle, itemDescription, itemDate, eventVenue, eventBudget);
                 addToEventList(event);
                 return new CommandResult("Event added: " + itemTitle + System.lineSeparator()
