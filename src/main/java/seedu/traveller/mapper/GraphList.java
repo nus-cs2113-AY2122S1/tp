@@ -8,7 +8,6 @@ public class GraphList {
     public static ArrayList<String> nameArray = new ArrayList<>();
     public static double[][] edgeMatrix = new double[10][10];
 
-
     public static void addVertex(Vertex v) {
         vertexArray.add(v);
         nameArray.add(v.name);

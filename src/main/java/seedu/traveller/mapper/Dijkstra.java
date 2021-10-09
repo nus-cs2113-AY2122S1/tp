@@ -61,7 +61,6 @@ public class Dijkstra {
         }
 
 
-
         Collections.reverse(path);
         Collections.reverse(dist);
 
