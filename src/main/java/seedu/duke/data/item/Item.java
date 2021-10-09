@@ -1,37 +1,37 @@
 package seedu.duke.data.item;
 
 public class Item {
-    private String Title;
-    private String ID;
-    private String Status;
+    private String title;
+    private String id;
+    private String status;
 
-    public Item(String title, String ID, String status) {
-        Title = title;
-        this.ID = ID;
-        Status = status;
+    public Item(String title, String id, String status) {
+        this.title = title;
+        this.id = id;
+        this.status = status;
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getID() {
-        return ID;
+        return id;
     }
 
     public void setID(String ID) {
-        this.ID = ID;
+        this.id = ID;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 }
