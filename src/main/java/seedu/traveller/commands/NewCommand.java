@@ -13,7 +13,7 @@ public class NewCommand extends Command {
 
 
 
-    public NewCommand(String tripName, String startCountry, String endCountry ) {
+    public NewCommand(String tripName, String startCountry, String endCountry) {
         this.tripName = tripName;
         this.startCountry = startCountry;
         this.endCountry = endCountry;

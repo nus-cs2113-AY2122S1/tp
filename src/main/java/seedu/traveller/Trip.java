@@ -17,15 +17,18 @@ public class Trip {
 
     @Override
     public String toString() {
-        return "\t\tTripName: " + getTripName() + "\n\t\t\t Origin: " + getStartCountry()+ "\n\t\t\t Destination: "+ getEndCountry();
+        return "\t\tTripName: " + getTripName() + "\n\t\t\t Origin: "
+                + getStartCountry() + "\n\t\t\t Destination: " + getEndCountry();
     }
 
     public String getTripName() {
         return this.tripName;
     }
+
     public String getStartCountry() {
         return this.startCountry;
     }
+
     public String getEndCountry() {
         return this.endCountry;
     }
