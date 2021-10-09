@@ -6,13 +6,13 @@ package taa.student;
 public class Student {
     private static final int NUM_LESSONS = 13;
 
+    private String id;
     private String name;
-    private String studentID;
     private final boolean[] attendance = new boolean[NUM_LESSONS];
 
-    public Student(String name, String studentID) {
+    public Student(String id, String name) {
+        this.id = id;
         this.name = name;
-        this.studentID = studentID;
     }
 
     /**
@@ -55,10 +55,10 @@ public class Student {
     /**
      * Sets the student ID of the student.
      *
-     * @param studentID the student ID of the student
+     * @param id the student ID of the student
      */
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -66,8 +66,8 @@ public class Student {
      *
      * @return the student ID of the student
      */
-    public String getStudentID() {
-        return this.studentID;
+    public String getId() {
+        return this.id;
     }
 
     /**
@@ -77,6 +77,6 @@ public class Student {
      */
     @Override
     public String toString() {
-        return name + ", " + studentID;
+        return String.format("%s - %s", id, name);
     }
 }
