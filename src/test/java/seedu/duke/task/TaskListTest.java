@@ -37,7 +37,7 @@ public class TaskListTest {
             taskList.deleteTask(0);
             assertEquals(0, taskList.getSize());
         } catch (DukeException e) {
-            fail();  // the test should not reach this line
+            fail(); // the test should not reach this line
         }
     }
 

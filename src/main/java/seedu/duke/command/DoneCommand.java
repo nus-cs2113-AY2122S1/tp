@@ -11,8 +11,13 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 
 public class DoneCommand extends Command {
+    //index of task to mark as done
     private int taskIndex;
 
+    /**
+     * Creates a new DoneCommand for a task
+     * @param taskIndex index of the task to mark as done
+     */
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
