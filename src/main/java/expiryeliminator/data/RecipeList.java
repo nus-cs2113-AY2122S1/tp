@@ -6,7 +6,7 @@ import expiryeliminator.data.exception.EmptyIngredientsException;
 import java.util.HashMap;
 
 /**
- * Represents the recipe list and contains methods to add and remove ingredients.
+ * Represents the recipe list and contains methods to add and remove recipes.
  */
 public class RecipeList {
     private final HashMap<String,Recipe> recipes;
@@ -53,4 +53,28 @@ public class RecipeList {
     public int size() {
         return recipes.size();
     }
+
+    /**
+     * Returns a string representation of the whole recipe list.
+     *
+     * @return returns a string representing all the recipes.
+     */
+    public String getWholeRecipeList() {
+        String wholeRecipeList = "";
+        for (Recipe recipe : recipes.values()) {
+            wholeRecipeList = wholeRecipeList + recipe.toString() + "\n";
+        }
+        return wholeRecipeList;
+    }
+
+    /**
+     * Looks for the recipe that the user is looking for.
+     *
+     * @param recipeDescription The recipe name the user is searching for.
+     * @return the recipe object that the user is searching for.
+     */
+    public Recipe findRecipe(String recipeDescription) {
+        return recipes.get(recipeDescription);
+    }
+
 }

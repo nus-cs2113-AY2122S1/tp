@@ -11,8 +11,10 @@ import expiryeliminator.commands.AddRecipeCommand;
 import expiryeliminator.commands.ByeCommand;
 import expiryeliminator.commands.IncorrectCommand;
 import expiryeliminator.commands.ListCommand;
+import expiryeliminator.commands.ListRecipeCommand;
 import expiryeliminator.commands.ListIngredientExpiringCommand;
 import expiryeliminator.commands.ListIngredientsExpiredCommand;
+import expiryeliminator.commands.ViewRecipeCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
@@ -75,6 +77,10 @@ public class Parser {
             return new ListIngredientExpiringCommand();
         case ListIngredientsExpiredCommand.COMMAND_WORD:
             return new ListIngredientsExpiredCommand();
+        case ListRecipeCommand.COMMAND_WORD:
+            return new ListRecipeCommand();
+        case ViewRecipeCommand.COMMAND_WORD:
+            return prepareViewRecipe(args);
         default:
             return new IncorrectCommand(MESSAGE_UNRECOGNISED_COMMAND);
         }
@@ -172,6 +178,24 @@ public class Parser {
             return new IncorrectCommand(e.getMessage());
         } catch (MissingPrefixException | MultipleArgsException e) {
             return new IncorrectCommand("Wrong format for view command");
+        }
+    }
+
+    private static Command prepareViewRecipe(String args) {
+        final ArgParser argParser = new ArgParser(PREFIX_RECIPE);
+        try {
+            argParser.parse(args);
+        } catch (InvalidPrefixException | MissingPrefixException e) {
+            return new IncorrectCommand("Wrong format for view recipe command");
+        }
+
+        try {
+            final String recipe = new RecipeParser().parse(argParser.getSingleArg(PREFIX_RECIPE));
+            return new ViewRecipeCommand(recipe);
+        } catch (InvalidArgFormatException e) {
+            return new IncorrectCommand(e.getMessage());
+        } catch (MissingPrefixException | MultipleArgsException e) {
+            return new IncorrectCommand("Wrong format for view recipe command");
         }
     }
 }
