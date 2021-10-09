@@ -236,4 +236,18 @@ public class Ui {
 
         System.out.println(LINE);
     }
+
+    /**
+     * Displays the task marked as done.
+     * 
+     * @param taskList the task list
+     * @param index the index of the task to be marked as done
+     */
+    public void printDoneTask(TaskList taskList, int index) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Nice! I've marked this task as done: ");
+        System.out.println(PADDING + taskList.getTask(index));
+        System.out.println(PADDING + "Now you have " + taskList.getSize() + " pending tasks.");
+        System.out.println(LINE);
+    }
 }
