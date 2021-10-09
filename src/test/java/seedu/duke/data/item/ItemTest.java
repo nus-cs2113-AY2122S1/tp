@@ -3,7 +3,7 @@ package seedu.duke.data.item;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ItemTest {
     Item item = new Item("Junglebook", "1", "available");
