@@ -31,6 +31,7 @@ class DeleteAllCommandTest {
             assertTrue(taskList.isEmpty());
             assertTrue(lessonList.isEmpty());
         } catch (DukeException e) {
+            // fail when either the task or lesson list is not empty
             fail();
         }
     }

@@ -14,10 +14,6 @@ public class DeleteAllCommand extends DeleteCommand {
         taskList.clearTaskList();
         lessonList.clearLessonList();
         ui.printDeletedAll();
-        try {
-            storage.saveData(taskList, lessonList);
-        } catch (IOException e) {
-            throw new DukeException(e.toString());
-        }
+        storage.saveData(taskList, lessonList);
     }
 }

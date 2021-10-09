@@ -29,6 +29,7 @@ class DeleteLessonCommandTest {
             deleteAllLessonsCommand.execute(ui, taskList, lessonList, storage);
             assertTrue(lessonList.isEmpty());
         } catch (DukeException e) {
+            // fail when the lesson list has any items
             fail();
         }
     }
@@ -48,6 +49,7 @@ class DeleteLessonCommandTest {
             deleteLessonCommand.execute(ui, taskList, lessonList, storage);
             assertEquals(1, lessonList.getSize());
         } catch (DukeException e) {
+            // fail when there are more or tasks in the lesson list than there should be (should be 1 item)
             fail();
         }
     }

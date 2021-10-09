@@ -28,8 +28,9 @@ class DeleteTaskCommandTest {
         try {
             Command deleteAllTasksCommand = new DeleteTaskCommand();
             deleteAllTasksCommand.execute(ui, taskList, lessonList, storage);
-            assertTrue(taskList.isEmpty());
+            assertTrue(taskList.isEmpty()); // task list should be empty
         } catch (DukeException e) {
+            // fail when the task list has any items
             fail();
         }
     }
@@ -49,6 +50,7 @@ class DeleteTaskCommandTest {
             deleteTaskCommand.execute(ui, taskList, lessonList, storage);
             assertEquals(1, taskList.getSize());
         } catch (DukeException e) {
+            // fail when there are more or tasks in the task list than there should be (should be 1 item)
             fail();
         }
     }

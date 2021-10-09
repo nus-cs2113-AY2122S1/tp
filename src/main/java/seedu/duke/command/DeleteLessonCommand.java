@@ -31,10 +31,6 @@ public class DeleteLessonCommand extends DeleteCommand {
             lessonList.deleteLesson(lessonIndex);
             ui.printDeletedLesson(deletedLesson, lessonList.getSize());
         }
-        try {
-            storage.saveData(taskList, lessonList);
-        } catch (IOException e) {
-            throw new DukeException(e.toString());
-        }
+        storage.saveData(taskList, lessonList);
     }
 }

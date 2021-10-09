@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.duke.exception.DukeException;
 import seedu.duke.lesson.LessonList;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Message;
@@ -71,7 +72,7 @@ public class Storage {
      * @param lessonList the lesson list
      * @throws IOException if an I/O error occurs
      */
-    public void saveData(TaskList taskList, LessonList lessonList) throws IOException {
+    public void saveData(TaskList taskList, LessonList lessonList) throws DukeException {
         try {
             StringBuilder dataToWrite = new StringBuilder();
             dataToWrite.append(taskList.serialize()).append(lessonList.serialize());
@@ -80,7 +81,7 @@ public class Storage {
             bout.write(dataToWrite.toString());
             bout.close();
         } catch (IOException e) {
-            throw new IOException(Message.ERROR_SAVING_DATA);
+            throw new DukeException(Message.ERROR_SAVING_DATA);
         }
     }
 }
