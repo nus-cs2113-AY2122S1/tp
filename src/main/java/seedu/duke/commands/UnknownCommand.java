@@ -4,6 +4,9 @@ import seedu.duke.ui.TextUI;
 
 import static seedu.duke.common.Messages.UNKNOWN_MESSAGE;
 
+/**
+ * Class encapsulating an unknown command not recognised by the application
+ */
 public class UnknownCommand extends Command {
 
     /**
