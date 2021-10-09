@@ -37,6 +37,16 @@ public class TaskList {
         return taskList.size();
     }
 
+    public int getNumberOfPendingTasks() {
+        int count = 0;
+        for (Task task : taskList) {
+            if (!task.isDone()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
     public Task getTask(int index) {
         return taskList.get(index);
     }

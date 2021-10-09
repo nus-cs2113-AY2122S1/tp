@@ -256,7 +256,7 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Nice! I've marked this task as done: ");
         System.out.println(PADDING + taskList.getTask(index));
-        System.out.println(PADDING + "Now you have " + taskList.getSize() + " pending tasks.");
+        System.out.println(PADDING + "Now you have " + taskList.getNumberOfPendingTasks() + " pending tasks.");
         System.out.println(LINE);
     }
 }
