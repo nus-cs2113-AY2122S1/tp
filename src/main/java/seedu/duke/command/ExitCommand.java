@@ -11,6 +11,8 @@ import seedu.duke.ui.Ui;
 public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";
+    public static final String MESSAGE_USAGE = "bye: Closes the program"
+            + "\tExample: bye";
 
     /**
      * Function which makes the condition to exit the program true.
