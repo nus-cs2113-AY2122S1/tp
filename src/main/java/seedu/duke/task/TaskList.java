@@ -68,9 +68,13 @@ public class TaskList {
         }
     }
 
-    public void markTaskAsDone(int index) {
-        Task task = taskList.get(index);
-        task.setDone();
+    public void markTaskAsDone(int index) throws DukeException {
+        try {
+            Task task = taskList.get(index);
+            task.setDone();
+        } catch (IndexOutOfBoundsException exception) {
+            throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
+        }
     }
 
     public TaskList filterTasksByKeyword(String keyword) {
