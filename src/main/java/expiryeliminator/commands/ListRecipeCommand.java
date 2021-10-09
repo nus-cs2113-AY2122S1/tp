@@ -18,12 +18,13 @@ public class ListRecipeCommand extends Command {
     private static final String MESSAGE_RECIPE_LIST = "Here are the recipes in your recipe list:\n" + "\n%1$s\n"
             + "You have a total of %2$s recipe(s)";
 
+    private static final String MESSAGE_EMPTY_RECIPE_LIST = "The recipe list is currently empty!";
+
 
     @Override
     public String execute(IngredientList ingredientList, RecipeList recipeList) {
         if (recipeList.size() == 0) {
-            IncorrectCommand incorrectCommand = new IncorrectCommand("The recipe list is currently empty!");
-            return incorrectCommand.execute(ingredientList, null);
+            return MESSAGE_EMPTY_RECIPE_LIST;
         } else {
             return String.format(MESSAGE_RECIPE_LIST, recipeList.getWholeRecipeList(), recipeList.size());
         }

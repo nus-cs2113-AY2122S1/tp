@@ -16,6 +16,8 @@ public class ViewRecipeCommand extends Command {
 
     private static final String MESSAGE_SHOW_RECIPE = "Here is the recipe in your recipe list:\n" + "\n%1$s\n";
 
+    private static final String MESSAGE_RECIPE_NOT_FOUND = "Sorry. No matching recipes found!";
+
     private final String recipeDescription;
 
     public ViewRecipeCommand(String recipeDescription) {
@@ -26,8 +28,7 @@ public class ViewRecipeCommand extends Command {
     public String execute(IngredientList ingredientList, RecipeList recipeList) {
         Recipe recipe = recipeList.findRecipe(recipeDescription);
         if (recipe == null) {
-            IncorrectCommand incorrectCommand = new IncorrectCommand("Sorry. No matching recipes found!");
-            return incorrectCommand.execute(ingredientList, recipeList);
+            return MESSAGE_RECIPE_NOT_FOUND;
         } else {
             return String.format(MESSAGE_SHOW_RECIPE, recipe);
         }
