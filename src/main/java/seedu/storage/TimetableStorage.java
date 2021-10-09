@@ -25,10 +25,14 @@ public class TimetableStorage {
      * 
      * @return
      */
-    public Timetable loadSchedule() throws FileNotFoundException {
-        FileReader timetableSaveReader = new FileReader(file);
-        Timetable timetable = new Gson().fromJson(timetableSaveReader, Timetable.class);
-        return timetable;
+    public Timetable loadSchedule() {
+        try {
+            FileReader timetableSaveReader = new FileReader(file);
+            Timetable timetable = new Gson().fromJson(timetableSaveReader, Timetable.class);
+            return timetable;
+        } catch (FileNotFoundException e) {
+            return new Timetable(1);
+        }
     }
 
     /**
@@ -37,7 +41,10 @@ public class TimetableStorage {
      * @param timetable timetable
      */
     public void save(Timetable timetable) throws IOException {
+        FileWriter fw = new FileWriter(file);
         Gson gson = new Gson();
-        gson.toJson(timetable, new FileWriter(file));
+        gson.toJson(timetable, fw);
+        fw.flush();
+        fw.close();
     }
 }
