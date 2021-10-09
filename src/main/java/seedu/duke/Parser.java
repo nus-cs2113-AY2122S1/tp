@@ -476,5 +476,30 @@ public class Parser {
         }
 
     }
+
+    public static void deleteAttendance(AttendanceList attendanceList, String query) {
+        int attendanceIndex = -1;
+
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            if (matcher.group().equals("/t")) {
+                attendanceIndex = Integer.parseInt(words[wordIndex].trim());
+            }
+            wordIndex++;
+        }
+
+        if (attendanceIndex != -1) {
+            Attendance toDelete = attendanceList.deleteAttendance(attendanceIndex);
+            System.out.println("You have deleted: \n" + toDelete.toString());
+        }
+
+    }
 }
 
