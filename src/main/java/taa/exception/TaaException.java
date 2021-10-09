@@ -1,8 +1,7 @@
-package taa;
+package taa.exception;
 
-// TODO: Rename classname
-public class CustomException extends Exception {
-    public CustomException(String message) {
+public class TaaException extends Exception {
+    public TaaException(String message) {
         super(message);
     }
 }
