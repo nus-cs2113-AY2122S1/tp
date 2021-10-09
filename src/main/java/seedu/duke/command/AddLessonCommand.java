@@ -21,14 +21,10 @@ public class AddLessonCommand extends AddCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws DukeException {
+    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws IOException {
         Lesson newLesson = new Lesson(title, dayOfTheWeek, startTime, endTime);
         lessonList.addLesson(newLesson);
         ui.printLessonAdded(newLesson, lessonList.getSize());
-        try {
-            storage.saveData(taskList, lessonList);
-        } catch (IOException e) {
-            throw new DukeException(e.toString());
-        }
+        storage.saveData(taskList, lessonList);
     }
 }

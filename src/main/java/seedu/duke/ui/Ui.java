@@ -74,6 +74,60 @@ public class Ui {
     }
 
     /**
+     * Print a message to acknowledge that all tasks and lessons have been deleted.
+     */
+    public void printDeletedAll() {
+        System.out.print(LINE);
+        System.out.println(PADDING + "All your tasks and lessons have been deleted.");
+        System.out.println(LINE);
+    }
+
+    /**
+     * Print a message to acknowledge that all lessons have been deleted.
+     */
+    public void printDeletedAllLessons() {
+        System.out.print(LINE);
+        System.out.println(PADDING + "All your lessons have been deleted.");
+        System.out.println(LINE);
+    }
+
+    /**
+     * Print a message to acknowledge that the specified lesson has been deleted.
+     *
+     * @param lesson the Lesson type object that has been deleted
+     * @param size the number of remaining lessons in the list
+     */
+    public void printDeletedLesson(Lesson lesson, int size) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Ok. The following lesson has been deleted:");
+        System.out.println(PADDING + "  " + lesson);
+        System.out.println(PADDING + "Now you have " + size + " lesson(s) in the list.");
+        System.out.println(LINE);
+    }
+
+    /**
+     * Print a message to acknowledge that all tasks have been deleted.
+     */
+    public void printDeletedAllTasks() {
+        System.out.print(LINE);
+        System.out.println(PADDING + "All your tasks have been deleted.");
+        System.out.println(LINE);
+    }
+
+    /**
+     * Print a message to acknowledge that the specified task has been deleted.
+     * @param task the Task type object that has been deleted
+     * @param size the number of remaining tasks in the list
+     */
+    public void printDeletedTask(Task task, int size) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Ok. The following task has been deleted:");
+        System.out.println(PADDING + "  " + task);
+        System.out.println(PADDING + "Now you have " + size + " task(s) in the list.");
+        System.out.println(LINE);
+    }
+
+    /**
      * Displays the task list.
      *
      * @param taskList the task list
