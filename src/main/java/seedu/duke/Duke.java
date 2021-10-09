@@ -21,10 +21,6 @@ public class Duke {
         while (true) {
             System.out.print("> ");
             String userInput = in.nextLine();
-            if (userInput.equals("bye")) {
-                System.out.println("Bye");
-                return;
-            }
 
             Entry.addEntry(userInput);
         }

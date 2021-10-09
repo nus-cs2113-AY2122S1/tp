@@ -60,6 +60,10 @@ public class Parser {
         return arg.trim().toLowerCase().contains("edit /t");
     }
 
+    public static boolean hasExitKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("bye");
+    }
+
 
     /**
      * Returns the required value for keyword which is the first word keyed in by user.
@@ -92,7 +96,7 @@ public class Parser {
             keyword = Keyword.FIND_TRAINING_KEYWORD;
         } else if (hasEditTrainingKeyword(query)) {
             keyword = Keyword.EDIT_TRAINING_KEYWORD;
-        } else if (query.trim().equals("bye")) {
+        } else if (hasExitKeyword(query)) {
             keyword = Keyword.EXIT_KEYWORD;
         } else {
             keyword = Keyword.NO_KEYWORD;
