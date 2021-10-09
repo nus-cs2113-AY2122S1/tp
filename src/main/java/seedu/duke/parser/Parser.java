@@ -162,7 +162,7 @@ public class Parser {
         }
 
         try {
-            int taskIndex = Integer.parseInt(userResponse);
+            int taskIndex = Integer.parseInt(userResponse) - 1; // change user index to match internal 0 indexing
             return new DeleteTaskCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new DukeException(Message.ERROR_NOT_NUMBER);
@@ -175,7 +175,7 @@ public class Parser {
         }
 
         try {
-            int lessonIndex = Integer.parseInt(userResponse);
+            int lessonIndex = Integer.parseInt(userResponse) - 1; // change user index to match internal 0 indexing
             return new DeleteLessonCommand(lessonIndex);
         } catch (NumberFormatException e) {
             throw new DukeException(Message.ERROR_NOT_NUMBER);
