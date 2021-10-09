@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import javax.sound.midi.SysexMessage;
 import java.util.ArrayList;
 
 public class Parser {
@@ -45,8 +44,20 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
             }
+            break;
         case "delete":
             deleteTrip(listOfTrips, inputDescription);
+            break;
+        case "expense":
+            String[] expenseInfo = inputDescription.split(" ");
+            int tripIndex = Integer.parseInt(expenseInfo[0]) - 1;
+            Trip currentTrip = listOfTrips.get(tripIndex);
+            Double expenseAmount = Double.parseDouble(expenseInfo[1]);
+            String expenseDescription = expenseInfo[2];
+            String personChained = expenseInfo[3];
+            String[] personSplit = personChained.split(",");
+            ArrayList<Person> listOfPersonsIncluded = getPersons(tripIndex, personSplit, currentTrip);
+            currentTrip.addExpense(new Expense(expenseAmount, expenseDescription, listOfPersonsIncluded));
             break;
         case "quit":
             Ui.goodBye();
@@ -57,6 +68,32 @@ public class Parser {
         }
         return true;
     }
+
+    /**
+     * Obtains a list of Person objects from array of names of people.
+     * @param tripIndex Index of trip to check
+     * @param personSplit Names of people involved in expense
+     * @return listOfPersons ArrayList containing Person objects included in the expense
+     */
+    private static ArrayList<Person> getPersons(int tripIndex, String[] personSplit, Trip currentTrip) {
+        ArrayList<Person> listOfPersons = new ArrayList<Person>();
+        ArrayList<Person> personsInTrip = currentTrip.getListOfPersons();
+        Person personToAdd = null;
+        for (String nameToCheck : personSplit) {
+            for (Person currentPersonInTrip : personsInTrip) {
+                String name = currentPersonInTrip.getName();
+                if (nameToCheck.equals(name)) {
+                    personToAdd = currentPersonInTrip;
+                    break;
+                }
+            }
+            if (personToAdd != null) {
+                listOfPersons.add(personToAdd);
+            }
+        }
+        return listOfPersons;
+    }
+
 
     private static void editTripPerAttribute(Trip tripToEdit, String attributesToEdit) {
 
