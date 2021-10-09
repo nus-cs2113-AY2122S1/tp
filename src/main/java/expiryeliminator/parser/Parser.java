@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import expiryeliminator.commands.Command;
 import expiryeliminator.commands.AddIngredientCommand;
 import expiryeliminator.commands.AddRecipeCommand;
 import expiryeliminator.commands.ByeCommand;
-import expiryeliminator.commands.Command;
 import expiryeliminator.commands.IncorrectCommand;
 import expiryeliminator.commands.ListCommand;
+import expiryeliminator.commands.ListIngredientExpiringCommand;
+import expiryeliminator.commands.ListIngredientsExpiredCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
@@ -69,6 +71,10 @@ public class Parser {
             return prepareViewIngredient(args);
         case AddRecipeCommand.COMMAND_WORD:
             return prepareAddRecipe(args);
+        case ListIngredientExpiringCommand.COMMAND_WORD:
+            return new ListIngredientExpiringCommand();
+        case ListIngredientsExpiredCommand.COMMAND_WORD:
+            return new ListIngredientsExpiredCommand();
         default:
             return new IncorrectCommand(MESSAGE_UNRECOGNISED_COMMAND);
         }

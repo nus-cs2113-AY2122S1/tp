@@ -1,5 +1,7 @@
 package expiryeliminator.data;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -77,6 +79,43 @@ public class IngredientList {
         return ingredients.get(ingredientDescription);
     }
 
+    /**
+     * Looks for the ingredients that are expiring within the week.
+     *
+     * @return the string representing the list of expiring ingredients.
+     */
+    public String findExpiringIngredients() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDatePlusAWeek = currentDate.plus(1, ChronoUnit.WEEKS);
+
+        String expiringIngredientsList = "";
+
+        for (Ingredient ingredient : ingredients.values()) {
+            if (ingredient.getExpiryDate().isAfter(currentDate)
+                    && ingredient.getExpiryDate().isBefore(currentDatePlusAWeek)) {
+                expiringIngredientsList = expiringIngredientsList + ingredient.toString() + "\n";
+            }
+        }
+        return expiringIngredientsList;
+    }
+
+    /**
+     * Looks for the ingredients that have expired.
+     *
+     * @return the string representing the list of expired ingredients.
+     */
+    public String findExpiredIngredients() {
+        LocalDate currentDate = LocalDate.now();
+
+        String expiredIngredientsList = "";
+
+        for (Ingredient ingredient : ingredients.values()) {
+            if (ingredient.getExpiryDate().isBefore(currentDate)) {
+                expiredIngredientsList = expiredIngredientsList + ingredient.toString() + "\n";
+            }
+        }
+        return expiredIngredientsList;
+    }
 
 
 }
