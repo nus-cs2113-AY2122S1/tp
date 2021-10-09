@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -22,11 +21,16 @@ public class Trip {
         //empty constructor
     }
 
+    /**
+     * Non-empty {@link Trip} constructor. Reads in a String array and processes it to set attributes for a given Trip.
+     *
+     * @param newTripInfo array containing one attribute in each element
+     */
     public Trip(String[] newTripInfo) {
         this.location = newTripInfo[0];
         setDateOfTrip(newTripInfo[1]);
         this.listOfPersons = Parser.splitPeople(newTripInfo[2]);
-        setExchangeRateString(newTripInfo[3]);
+        setExchangeRate(newTripInfo[3]);
     }
 
     public void getWhoOwesMe() {
@@ -44,6 +48,11 @@ public class Trip {
         return dateOfTrip.format(pattern);
     }
 
+    /**
+     * Parses a user input (in {@link String}) into a {@link LocalDate}.
+     *
+     * @param dateOfTrip user-entered date of trip as a String
+     */
     public void setDateOfTrip(String dateOfTrip) {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
@@ -64,6 +73,16 @@ public class Trip {
         this.budget = budget;
     }
 
+    public void setBudget(String budget) {
+        try {
+            this.budget = Double.parseDouble(budget);
+        } catch (NumberFormatException e) {
+            System.out.print("Please re-enter your exchange rate as a decimal number (e.g. 1.32): ");
+            Scanner scanner = Storage.getScanner();
+            setBudget(scanner.nextLine().strip());
+        }
+    }
+
     public double getExchangeRate() {
         return exchangeRate;
     }
@@ -72,13 +91,18 @@ public class Trip {
         this.exchangeRate = exchangeRate;
     }
 
-    public void setExchangeRateString(String exchangeRateString) {
+    /**
+     * Parses an exchange rate entered by the user (as a {@link String}) into a {@link Double}.
+     *
+     * @param exchangeRateString user-entered exchange rate (as a String)
+     */
+    public void setExchangeRate(String exchangeRateString) {
         try {
             this.exchangeRate = Double.parseDouble(exchangeRateString);
         } catch (NumberFormatException e) {
-            System.out.print("Please re-enter your exchange rate as a decimal number: ");
+            System.out.print("Please re-enter your exchange rate as a decimal number (e.g. 1.32): ");
             Scanner scanner = Storage.getScanner();
-            setExchangeRateString(scanner.nextLine().strip());
+            setExchangeRate(scanner.nextLine().strip());
         }
     }
 
