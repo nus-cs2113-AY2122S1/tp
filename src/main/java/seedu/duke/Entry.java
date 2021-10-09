@@ -23,8 +23,10 @@ public class Entry {
             break;
         case LIST_TRAINING_KEYWORD:
             Ui.printList(trainings);
+            break;
         case LIST_ATTENDANCE_KEYWORD:
             Ui.printList(attendanceList);
+            break;
         case ADD_MEMBER_KEYWORD:
             Parser.makeMemberEntry(members, entry);
             break;
