@@ -57,6 +57,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user response into an executable add command.
+     *
+     * @param userResponse the user response
+     * @return an executable add type command
+     * @throws DukeException when user response is in an incorrect format
+     */
     private static Command parseAddCommand(String userResponse) throws DukeException {
         String param = userResponse.replaceFirst("add", "").strip();
         CommandType commandType = getCommandType(param);
@@ -73,6 +80,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user respond into an executable add task command.
+     *
+     * @param userResponse the user response
+     * @return an executable add task type command
+     * @throws DukeException when the user response is in an incorrect format
+     */
     private static Command parseAddTaskCommand(String userResponse) throws DukeException {
         String[] params = userResponse.split(" -d | -i ");
         if (params.length < 2 || params.length > 3) {
@@ -98,6 +112,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user command into an executable add lesson type command.
+     *
+     * @param userResponse the user response
+     * @return an executable add lesson type command
+     * @throws DukeException when the user response is in an incorrect format
+     */
     private static Command parseAddLessonCommand(String userResponse) throws DukeException {
         String[] params = userResponse.split(" -d | -s | -e ");
         if (params.length != 4) {
@@ -116,6 +137,12 @@ public class Parser {
         return new AddLessonCommand(title, dayOfTheWeek, startTIme, endTime);
     }
 
+    /**
+     * Checks if the sequence of flags in an add lesson user response is correct.
+     *
+     * @param userResponse the user response
+     * @return true if the sequence is correct, false otherwise
+     */
     private static boolean hasCorrectLessonFlagSequence(String userResponse) {
         int posOfDFlag = userResponse.indexOf(" -d ");
         int posOfSFlag = userResponse.indexOf(" -s ");

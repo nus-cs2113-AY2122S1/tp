@@ -37,10 +37,22 @@ public class Lesson {
         return "[L] " + "Title: " + title + " (Start: " + startTime + ") " + "(End: " + endTime + ")";
     }
 
+    /**
+     * Serializes the lesson into its file data storage format.
+     *
+     * @return the serialized lesson
+     */
     public String serialize() {
         return "L" + " | " + title + " | " + dayOfTheWeek + " | " + startTime + " | " + endTime;
     }
 
+    /**
+     * Deserializes the lesson from a line in the file data storage into a lesson object.
+     *
+     * @param data the line of the storage representing a lesson
+     * @return the deserialized lesson object
+     * @throws DukeException when the line is not deserializable into a lesson
+     */
     public static Lesson deserialize(String data) throws DukeException {
         try {
             String[] item = data.split(" \\| ");

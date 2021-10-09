@@ -91,7 +91,7 @@ public class TaskList {
     }
 
     /**
-     * Serializes the task list into the format suitable to store in the storage files.
+     * Serializes the task list into its file data storage format.
      *
      * @return the serialized task list
      */
@@ -103,16 +103,20 @@ public class TaskList {
         return data.toString();
     }
 
+    /**
+     * Filters out strings representing task data from a list of strings and deserializes
+     * them into a list of task objects.
+     *
+     * @param data the list of strings
+     * @return the list of task objects
+     * @throws DukeException when there is task data that is not deserializable
+     */
     public static List<Task> deserialize(List<String> data) throws DukeException {
         List<Task> taskList = new ArrayList<>();
-        try {
-            for (String entry : data) {
-                if (entry.charAt(0) == 'T') {
-                    taskList.add(Task.deserialize(entry));
-                }
+        for (String entry : data) {
+            if (entry.charAt(0) == 'T') {
+                taskList.add(Task.deserialize(entry));
             }
-        } catch (DukeException e) {
-            throw e;
         }
         return taskList;
     }

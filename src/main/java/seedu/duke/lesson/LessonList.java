@@ -74,7 +74,7 @@ public class LessonList {
     }
 
     /**
-     * Serializes the lesson list into the format suitable to store in the storage files.
+     * Serializes the lesson list into its file data storage format.
      *
      * @return the serialized lesson list
      */
@@ -86,16 +86,20 @@ public class LessonList {
         return data.toString();
     }
 
+    /**
+     * Filters out strings representing lesson data from a list of strings and deserializes
+     * them into a list of lesson objects.
+     *
+     * @param data the list of strings
+     * @return the list of lesson objects
+     * @throws DukeException when there is lesson data that is not deserializable
+     */
     public static List<Lesson> deserialize(List<String> data) throws DukeException {
         List<Lesson> lessonList = new ArrayList<>();
-        try {
-            for (String entry : data) {
-                if (entry.charAt(0) == 'L') {
-                    lessonList.add(Lesson.deserialize(entry));
-                }
+        for (String entry : data) {
+            if (entry.charAt(0) == 'L') {
+                lessonList.add(Lesson.deserialize(entry));
             }
-        } catch (DukeException e) {
-            throw e;
         }
         return lessonList;
     }
