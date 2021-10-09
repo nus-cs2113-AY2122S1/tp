@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class AddCommand extends Command {
-    private final int BALANCE_ARRAY = 1;
-    private final int SERIAL_STARTING = 1;
-    private final String LECTURE = "Lecture";
-    private final String TUTORIAL = "Tutorial";
-    private final String LAB = "Laboratory";
+    private static final int BALANCE_ARRAY = 1;
+    private static final int SERIAL_STARTING = 1;
+    private static final String LECTURE = "Lecture";
+    private static final String TUTORIAL = "Tutorial";
+    private static final String LAB = "Laboratory";
     private final String moduleCode;
     private final int semester;
     private final Timetable timetable;
