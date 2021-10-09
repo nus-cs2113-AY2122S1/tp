@@ -15,23 +15,23 @@ import java.util.ArrayList;
  */
 public class Timetable {
 
-    private static final int DEFAULT_START = 9;
-    private static final int DEFAULT_END = 16;
+    private final int DEFAULT_START = 9;
+    private final int DEFAULT_END = 16;
 
-    private static int semester;
-    private static int earliestHour;
-    private static int latestHour;
+    private int semester;
+    private int earliestHour;
+    private int latestHour;
 
-    private static ArrayList<Module> modules;
+    private ArrayList<Module> modules;
 
-    private static TimetableLesson[] monday = new TimetableLesson[24];
-    private static TimetableLesson[] tuesday = new TimetableLesson[24];
-    private static TimetableLesson[] wednesday = new TimetableLesson[24];
-    private static TimetableLesson[] thursday = new TimetableLesson[24];
-    private static TimetableLesson[] friday = new TimetableLesson[24];
-    private static TimetableLesson[] saturday = new TimetableLesson[24];
-    private static TimetableLesson[] sunday = new TimetableLesson[24];
-    private static final String[] DAYS_OF_WEEK = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
+    private TimetableLesson[] monday = new TimetableLesson[24];
+    private TimetableLesson[] tuesday = new TimetableLesson[24];
+    private TimetableLesson[] wednesday = new TimetableLesson[24];
+    private TimetableLesson[] thursday = new TimetableLesson[24];
+    private TimetableLesson[] friday = new TimetableLesson[24];
+    private TimetableLesson[] saturday = new TimetableLesson[24];
+    private TimetableLesson[] sunday = new TimetableLesson[24];
+    private final String[] DAYS_OF_WEEK = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
     /**
      * Creates a Timetable assigned to a specific semester of the Academic Year
@@ -125,7 +125,7 @@ public class Timetable {
      * @param module Module to be Deleted
      * @see Module
      */
-    public static void deleteModuleFromList(Module module) throws UniModsException {
+    public void deleteModuleFromList(Module module) throws UniModsException {
         String moduleCode = module.getModuleCode();
         boolean hasModule = false;
         for (int i = 0; i < modules.size(); i++) {
@@ -141,8 +141,8 @@ public class Timetable {
         }
     }
 
-   
-    public static void deleteFromLessons(Module module) {
+
+    public void deleteFromLessons(Module module) {
 
         for (int i = 0; i < 7; i++) {
             String day = DAYS_OF_WEEK[i].toUpperCase();
@@ -175,7 +175,7 @@ public class Timetable {
 
     }
 
-    public static void deleteFromSchedule(Module module, TimetableLesson[] schedule) {
+    public void deleteFromSchedule(Module module, TimetableLesson[] schedule) {
         for (int i = 0; i < schedule.length; i++) {
             if (schedule[i] != null && schedule[i].getModuleCode().equals(module.getModuleCode())) {
                 schedule[i] = null;

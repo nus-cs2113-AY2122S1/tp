@@ -11,16 +11,18 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
 
     private final String moduleToBeDeleted;
+    private Timetable timetable;
 
-    public DeleteCommand(String moduleToBeDeleted) {
+    public DeleteCommand(String moduleToBeDeleted, Timetable timetable) {
         this.moduleToBeDeleted = moduleToBeDeleted;
+        this.timetable = timetable;
     }
 
     public void execute() {
         Module module;
         try {
             module = NusMods.fetchModOnline(moduleToBeDeleted);
-            Timetable.deleteModuleFromList(module);
+            timetable.deleteModuleFromList(module);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);
