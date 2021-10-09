@@ -39,6 +39,10 @@ public class TextUi {
         System.out.println(message + "\n" + LINE);
     }
 
+    private static void printTopLineMessage(String message) {
+        System.out.println(LINE + "\n" + message);
+    }
+
     // Used to print a line after displayed data
     public static void printBottomLine() {
         System.out.println("\n" + LINE);
