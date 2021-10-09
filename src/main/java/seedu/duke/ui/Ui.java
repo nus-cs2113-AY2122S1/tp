@@ -28,8 +28,9 @@ public class Ui {
                 + " `._____.'  '.__.'\\__/  `.____.'\\'-;__/'.___.'[__|  \\_]  |______.'\n";
 
         System.out.println("Welcome to" + logo + "\nLet's begin the journey to achieve the physique you desire!\n"
-                + "Enter your command below \n"
-                + "If you don't know where to start, type \"help\" for a list of possible commands");
+                + "If you don't know where to start, type \"help\" for a list of possible commands.\n"
+                + "Enter your command below.");
+
         printLineSeparator();
     }
 
