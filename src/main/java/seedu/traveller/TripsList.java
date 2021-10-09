@@ -13,9 +13,13 @@ public class TripsList {
         trips.add(trip);
     }
 
-    public static Trip getTrip(int i) { return trips.get(i); }
+    public static Trip getTrip(int i) {
+        return trips.get(i);
+    }
 
-    public static void deleteTrip(int i) { trips.remove(i); }
+    public static void deleteTrip(int i) {
+        trips.remove(i);
+    }
 
     public static int getSize() {
         return trips.size();
