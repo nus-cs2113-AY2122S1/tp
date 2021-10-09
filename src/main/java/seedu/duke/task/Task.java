@@ -1,5 +1,8 @@
 package seedu.duke.task;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public abstract class Task {
@@ -41,6 +44,16 @@ public abstract class Task {
     protected Task(String description, Date date, RecurrenceEnum recurranceEnum, PriorityEnum priorityEnum) {
         this(description, date, priorityEnum);
         setRecurranceEnum(recurranceEnum);
+    }
+
+    public String getTaskEntryDescription() {
+        return this.description + this.priorityEnum + this.recurranceEnum + getDateAsString();
+    }
+
+    public String getDateAsString() {
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        String strDate = dateFormat.format(this.date);
+        return strDate;
     }
 
     public String getDescription() {
