@@ -65,7 +65,7 @@ public class CommandSyntax {
      */
     public static boolean containsInvalidParameters(Ui ui, HashMap<String, String> parameters,
                                                     String[] requiredParameters, String[] optionalParameters,
-                                                    String commandSyntax, String command) {
+                                                    String commandSyntax, boolean requiresOptionalParameters) {
         int requiredParametersLength = requiredParameters.length;
         int optionalParametersLength = optionalParameters.length;
 
@@ -88,7 +88,7 @@ public class CommandSyntax {
         }
 
         int emptyOptionalFieldCount = parameters.size() - requiredParametersLength;
-        if (emptyOptionalFieldCount <= 0 & !(command.equals("add"))) {
+        if (emptyOptionalFieldCount <= 0 && requiresOptionalParameters) {
             ui.print("Please provide at least one optional field!");
             return true;
         }

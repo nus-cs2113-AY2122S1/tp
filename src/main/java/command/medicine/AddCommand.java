@@ -49,15 +49,11 @@ public class AddCommand extends Command {
                 boolean isValidDate = StockValidator.dateValidityChecker(ui, medicines, formatExpiry, nameToAdd);
                 if (nameExist) {
                     String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE,
-                        CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
+                                                   CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
                     String[] optionalParameters = {CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
 
-                    if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
-                            CommandSyntax.ADD_COMMAND, "add")) {
-                        return;
-                    }
-
-                    if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines)) {
+                    if (checkValidParametersAndValues(ui, parameters, medicines,
+                            requiredParameters, optionalParameters)) {
                         return;
                     }
 
@@ -68,38 +64,54 @@ public class AddCommand extends Command {
                     if (!isValidQuantity) {
                         return;
                     }
+                    addMedicine(ui, medicines, nameToAdd, existingDescription, price,
+                            quantity, formatExpiry, existingMaxQuantity);
+                    return;
 
-                    Stock stockToAdd = new Stock(nameToAdd, price, quantity, formatExpiry, existingDescription,
-                            existingMaxQuantity);
-                    medicines.add(stockToAdd);
-                    ui.print("Medication added: " + nameToAdd);
-                    ui.printStock(stockToAdd);
                 }
+
             }
 
             String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE, CommandParameters.QUANTITY,
-                CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
+                                           CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
+                                           CommandParameters.MAX_QUANTITY};
             String[] optionalParameters = {};
 
-            if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
-                    CommandSyntax.ADD_COMMAND, "add")) {
-                return;
-            }
-
-            if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines)) {
+            if (checkValidParametersAndValues(ui, parameters, medicines, requiredParameters, optionalParameters)) {
                 return;
             }
 
             int maxQuantity = Integer.parseInt(maxQuantityToAdd);
 
-            Stock stock = new Stock(nameToAdd, price, quantity, formatExpiry, descriptionToAdd, maxQuantity);
-            medicines.add(stock);
-            ui.print("Medication added: " + nameToAdd);
-            ui.printStock(stock);
+            addMedicine(ui, medicines, nameToAdd, descriptionToAdd, price, quantity, formatExpiry, maxQuantity);
 
         } catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean checkValidParametersAndValues(Ui ui, HashMap<String, String> parameters,
+                                                  ArrayList<Medicine> medicines, String[] requiredParameters,
+                                                  String[] optionalParameters) {
+
+        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
+                CommandSyntax.ADD_COMMAND, false)) {
+            return true;
+        }
+
+        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private void addMedicine(Ui ui, ArrayList<Medicine> medicines, String name, String description,
+                             double price, int quantity, Date expiryDate, int maxQuantity) {
+        Stock stock = new Stock(name, price, quantity, expiryDate, description, maxQuantity);
+        medicines.add(stock);
+        ui.print("Medication added: " + name);
+        ui.printStock(stock);
     }
 
 }
