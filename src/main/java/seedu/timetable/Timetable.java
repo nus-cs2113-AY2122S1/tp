@@ -31,7 +31,6 @@ public class Timetable {
     private TimetableLesson[] friday = new TimetableLesson[24];
     private TimetableLesson[] saturday = new TimetableLesson[24];
     private TimetableLesson[] sunday = new TimetableLesson[24];
-    private final String[] DAYS_OF_WEEK = {"monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"};
 
     /**
      * Creates a Timetable assigned to a specific semester of the Academic Year
@@ -148,35 +147,13 @@ public class Timetable {
      * @see Module
      */
     public void deleteFromLessons(Module module) {
-
-        for (int i = 0; i < 7; i++) {
-            String day = DAYS_OF_WEEK[i].toUpperCase();
-            switch (day) {
-            case "MONDAY":
-                deleteFromSchedule(module, monday);
-                break;
-            case "TUESDAY":
-                deleteFromSchedule(module, tuesday);
-                break;
-            case "WEDNESDAY":
-                deleteFromSchedule(module, wednesday);
-                break;
-            case "THURSDAY":
-                deleteFromSchedule(module, thursday);
-                break;
-            case "FRIDAY":
-                deleteFromSchedule(module, friday);
-                break;
-            case "SATURDAY":
-                deleteFromSchedule(module, saturday);
-                break;
-            case "SUNDAY":
-                deleteFromSchedule(module, sunday);
-                break;
-            default:
-                break;
-            }
-        }
+        deleteFromSchedule(module, monday);
+        deleteFromSchedule(module, tuesday);
+        deleteFromSchedule(module, wednesday);
+        deleteFromSchedule(module, thursday);
+        deleteFromSchedule(module, friday);
+        deleteFromSchedule(module, saturday);
+        deleteFromSchedule(module, sunday);
 
     }
 
