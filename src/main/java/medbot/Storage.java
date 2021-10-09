@@ -36,7 +36,7 @@ public class Storage {
         try {
             DATA_FILE.getParentFile().mkdirs();
             if (DATA_FILE.createNewFile()) {
-                System.out.println(CREATED_NEW_FILE);
+//                System.out.println(CREATED_NEW_FILE);
             }
         } catch (IOException e) {
             throw new MedBotException(ERROR_LOAD_STORAGE);
