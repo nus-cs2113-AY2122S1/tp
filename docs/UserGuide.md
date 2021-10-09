@@ -7,13 +7,13 @@ TermiNUS is a CLI (command line interface) program for NUS Students who wish to 
 
 ## Contents
 * [Getting Start](#Getting-Started)
-* [Section: Notes](#Section:-Notes)
-    * [Accessing Notes : `note`](#Accessing-Notes)
+* [Section: Note](#Section:-Note)
+    * [Accessing Note : `note`](#Accessing-Note)
     * [Adding a note : `add "<name>" "<content>"`](#Adding-a-Note)
     * [Delete a note : `delete <index>`](#Delete-a-Note)
-    * [View notes : `view {index}`](#View-Notes)
-* [Section: Schedules](#Section:-Schedules)
-    * [Accessing Schedules : `schedule`](#Accessing-Schedules)
+    * [View note : `view {index}`](#View-Note)
+* [Section: Schedule](#Section:-Schedule)
+    * [Accessing Schedule : `schedule`](#Accessing-Schedule)
     * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<zoom_link>"`](#Adding-a-Schedule)
     * [Delete a Schedule : `delete <index>`](#Delete-a-Schedule)
     * [View Schedule : `view`](#View-Schedule)
@@ -32,8 +32,8 @@ TermiNUS is a CLI (command line interface) program for NUS Students who wish to 
 Welcome to TermiNUS! 
 
 Type any of the following to get started: 
-> notes 
-> schedules 
+> note
+> schedule
 > help 
 > exit 
  
@@ -41,20 +41,19 @@ Type any of the following to get started:
 ```
 4. To get started, you can run the following commands:
 
-   - notes
-   - schedules
+   - note
+   - schedule
    - help
    - exit
 
-## Section: Notes
+## Section: Note
 
-### Accessing Notes
+### Accessing Note
 **Format:** `note`
-<br>Accessing the notes workspace
-After running the notes command, you can see the following:
+<br>Accessing the note workspace
+After running the note command, you can see the following:
 ```
 [] >>> note
-
 You have 0 note(s) inside this workspace 
 
 Type any of  the following to get started: 
@@ -70,7 +69,7 @@ Type any of  the following to get started:
 
 ### Adding a Note
 **Format:** `add "<name>" "<content>"`
-<br>Adding a note when in the notes workspace
+<br>Adding a note when in the note workspace
 ```
 [note] >>> add “Remind Cabbin” “Cabbin was here” 
 Note has been added! 
@@ -86,7 +85,7 @@ Note `Remind Cabbin` has been deleted!
 [note] >>> 
 ```
 
-### View Notes
+### View Note
 **Format:** `view` or `view {index}`
 <br>Two ways to use this command simply running view or view [index]
 View by itself will list all notes
@@ -111,11 +110,11 @@ Content: Cabbin was here
 ```
 
 
-## Section: Schedules
+## Section: Schedule
 
-### Accessing Schedules
+### Accessing Schedule
 **Format:** `schedule`
-<br>After running the schedules command, you can see the following:
+<br>After running the schedule command, you can see the following:
 ```
 [] >>> schedule
 You have 0 link(s) in this workspace.
@@ -181,9 +180,9 @@ Goodbye!
 [] >>> help 
 
 You can run the following commands in the workspace: 
-> notes 
+> note 
     - Access all your notes that you have made.  
-> schedules 
+> schedule 
     - Access all your schedules that you have scheduled. 
 > help 
     - Prints this. 
@@ -191,7 +190,7 @@ You can run the following commands in the workspace:
     - Quits TermiNUS 
 
 You can also run the following to quickly do certain tasks: 
-> notes add Water “Drinking more water will make me hydrated” 
+> note add Water “Drinking more water will make me hydrated” 
 > schedule view 
 
 Running `help [command]` will print the help for the specific workspace. 
@@ -204,17 +203,17 @@ User can access workspace command directly without entering its environment. See
 <br>
 A workspace command is a command that will bring you to its own workspace. Current workspace command includes notes and schedules.
 <br>
-Command syntax: {workspace} {workspace available command}
+Command syntax: <workspace> <available workspace command>
 <br>
 
-Adding a note without entering the notes workspace.
+Adding a note without entering the note workspace.
 ```
 [] >>> note add “Remind Cabbin” “Cabbin was here” 
 Note has been added! 
 [] >>> 
 ```
 
-Adding a schedule without entering the schedules workspace.
+Adding a schedule without entering the schedule workspace.
 ```dtd
 [] >>> schedule add “Module1 Tut” Thursday 10:00 https://zoom.us/test
 You have added Module1 Tut’s scheduled zoom link!
