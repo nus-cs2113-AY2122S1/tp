@@ -15,9 +15,10 @@ public class Parser {
             throws ArrayIndexOutOfBoundsException {
         String[] userInputSplit = userInput.split(" ", 2);
         String inputCommand = userInputSplit[0];
-        String inputDescription = userInputSplit[1];
+        String inputDescription;
         switch (inputCommand) {
         case "create":
+            inputDescription = userInputSplit[1];
             String[] newTripInfo = inputDescription.split(" ");
             Trip newTrip = new Trip(newTripInfo);
             listOfTrips.add(newTrip);
@@ -25,6 +26,7 @@ public class Parser {
                     + newTrip.getDateOfTripString() + " has been successfully added!");
             break;
         case "edit":
+            inputDescription = userInputSplit[1];
             String[] tripToEditInfo = inputDescription.split(" ", 2);
             try {
                 int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
@@ -36,6 +38,7 @@ public class Parser {
             }
             break;
         case "summary":
+            inputDescription = userInputSplit[1];
             String[] tripToGetInfo = inputDescription.split(" ", 2);
             String tripNumber = tripToGetInfo[0];
             try {
@@ -47,9 +50,11 @@ public class Parser {
             }
             break;
         case "delete":
+            inputDescription = userInputSplit[1];
             deleteTrip(listOfTrips, inputDescription);
             break;
         case "expense":
+            inputDescription = userInputSplit[1];
             String[] expenseInfo = inputDescription.split(" ");
             int tripIndex = Integer.parseInt(expenseInfo[0]) - 1;
             Trip currentTrip = listOfTrips.get(tripIndex);
