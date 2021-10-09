@@ -32,12 +32,12 @@ class WorkoutTest {
         testExercises.removeExercise(1);
         assertEquals(2, testExercises.getAllExercises().size());
         testExercises.removeExercise(1);
-        assertEquals(1,testExercises.getAllExercises().size());
+        assertEquals(1, testExercises.getAllExercises().size());
         testExercises.removeExercise(1);
-        assertEquals(0,testExercises.getAllExercises().size());
+        assertEquals(0, testExercises.getAllExercises().size());
         testExercises.getAllExercises().clear();
     }
-    
+
     @Test
     public void removeExercise_indexOfExercises_expectCorrectExerciseReturned() throws GetJackDException {
         testExercises.addExercise(new Exercise("Test 1", 3, 8));
@@ -46,12 +46,12 @@ class WorkoutTest {
         Exercise test3 = testExercises.removeExercise(3);
         Exercise test1 = testExercises.removeExercise(1);
         Exercise test2 = testExercises.removeExercise(1);
-        assertEquals(3,test1.getSets());
-        assertEquals(4,test2.getSets());
-        assertEquals(7,test3.getSets());
+        assertEquals(3, test1.getSets());
+        assertEquals(4, test2.getSets());
+        assertEquals(7, test3.getSets());
         testExercises.getAllExercises().clear();
     }
-    
+
     @Test
     public void removeExercise_invalidIndex_expectGetJackDExceptionThrown() {
         testExercises.addExercise(new Exercise("Test 1", 3, 8));
@@ -61,7 +61,7 @@ class WorkoutTest {
         assertThrows(GetJackDException.class, () -> testExercises.removeExercise(0));
         testExercises.getAllExercises().clear();
     }
-    
+
     @Test
     public void convertToWorkoutStorageModel_void_expectConvertedToStorageModel() {
         testExercises.addExercise(new Exercise("Test 1", 3, 8));
