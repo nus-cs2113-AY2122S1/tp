@@ -1,7 +1,5 @@
 package seedu.duke.task;
 
-import seedu.duke.exception.DukeException;
-import seedu.duke.ui.Message;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -38,34 +36,16 @@ public class TaskList {
         return taskList.size();
     }
 
-    public Task getTask(int index) throws DukeException {
-        try {
-            return taskList.get(index);
-        } catch (IndexOutOfBoundsException exception) {
-            throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
-        } catch (NumberFormatException exception) {
-            throw new DukeException(Message.ERROR_NUMBER_FORMAT);
-        }
+    public Task getTask(int index) {
+        return taskList.get(index);
     }
 
-    public void deleteTask(int index) throws DukeException {
-        try {
-            taskList.remove(index);
-        } catch (IndexOutOfBoundsException exception) {
-            throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
-        } catch (NumberFormatException exception) {
-            throw new DukeException(Message.ERROR_NUMBER_FORMAT);
-        }
+    public void deleteTask(int index) {
+        taskList.remove(index);
     }
 
-    public void markTaskAsDone(int index) throws DukeException {
-        try {
-            taskList.get(index).setDone();
-        } catch (IndexOutOfBoundsException exception) {
-            throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
-        } catch (NumberFormatException exception) {
-            throw new DukeException(Message.ERROR_NUMBER_FORMAT);
-        }
+    public void markTaskAsDone(int index) {
+        taskList.get(index).setDone();
     }
 
     public TaskList filterTasksByKeyword(String keyword) {
