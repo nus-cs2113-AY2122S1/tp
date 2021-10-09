@@ -164,4 +164,21 @@ public class TextUi {
         }
         printDoubleLineMessage(message);
     }
+
+    public static void corruptLineMessage(String line) {
+        printBottomLineMessage("Line \"" + line + "\" is corrupted and not loaded.");
+    }
+
+    private void forbiddenInputCommaMessage(String newUserInput) {
+        String message = "Due to the storage nature of ConTech, we will remove\n"
+                + "commas (\",\"), and attempt to parse it as:\n"
+                + newUserInput;
+        printTopLineMessage(message);
+    }
+
+    public static void forbiddenDetailMessage() {
+        String message = "As one of the details to be stored is \"null\", \n"
+                + "ConTech is unable to process it";
+        printDoubleLineMessage(message);
+    }
 }
