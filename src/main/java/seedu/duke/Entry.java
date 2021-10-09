@@ -58,6 +58,7 @@ public class Entry {
         case EXIT_KEYWORD:
             Ui.printGoodbyeMessage();
             exit(0);
+            break;
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();
             break;
