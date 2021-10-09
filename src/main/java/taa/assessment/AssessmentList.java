@@ -63,4 +63,17 @@ public class AssessmentList {
     public int getSize() {
         return assessments.size();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(MESSAGE_ASSESSMENT_LIST_HEADER);
+        for (int i = 0; i < getSize(); i += 1) {
+            stringBuilder.append("\n");
+            stringBuilder.append(i + 1);
+            stringBuilder.append(": ");
+            stringBuilder.append(getAssessmentAt(i));
+        }
+
+        return stringBuilder.toString();
+    }
 }
