@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import static java.lang.System.exit;
+
 import seedu.duke.attendance.AttendanceList;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
@@ -55,6 +57,7 @@ public class Entry {
             break;
         case EXIT_KEYWORD:
             Ui.printGoodbyeMessage();
+            exit(0);
             break;
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();

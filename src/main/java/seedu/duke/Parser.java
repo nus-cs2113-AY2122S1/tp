@@ -48,14 +48,6 @@ public class Parser {
         return arg.trim().toLowerCase().contains("delete /t");
     }
 
-    public static boolean hasMemberKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("delete /m");
-    }
-
-    public static boolean hasTrainingKeyword(String arg) {
-        return arg.trim().toLowerCase().contains("delete /m");
-    }
-
     public static boolean hasFindMemberKeyword(String arg) {
         return arg.trim().toLowerCase().contains("find /m");
     }
@@ -68,6 +60,10 @@ public class Parser {
         return arg.trim().toLowerCase().contains("edit /t");
     }
 
+    public static boolean hasExitKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("bye");
+    }
+
 
     /**
      * Returns the required value for keyword which is the first word keyed in by user.
@@ -77,11 +73,8 @@ public class Parser {
      */
     public static Keyword getKeywordStatus(String query) {
         Keyword keyword;
-        if (hasMemberKeyword(query)) {
-            keyword = Keyword.MEMBER_ENTRY;
-        } else if (hasTrainingKeyword(query)) {
-            keyword = Keyword.TRAINING_SCHEDULE_ENTRY;
-        } else if (hasAddMemberKeyword(query)) {
+
+        if (hasAddMemberKeyword(query)) {
             keyword = Keyword.ADD_MEMBER_KEYWORD;
         } else if (hasAddTrainingKeyword(query)) {
             keyword = Keyword.ADD_TRAINING_KEYWORD;
@@ -93,8 +86,6 @@ public class Parser {
             keyword = Keyword.LIST_TRAINING_KEYWORD;
         } else if (hasListAttendanceKeyword(query)) {
             keyword = Keyword.LIST_ATTENDANCE_KEYWORD;
-        } else if (query.trim().equals("bye")) {
-            keyword = Keyword.EXIT_KEYWORD;
         } else if (hasDeleteMemberKeyword(query)) {
             keyword = Keyword.DELETE_MEMBER_KEYWORD;
         } else if (hasDeleteTrainingKeyword(query)) {
@@ -105,6 +96,8 @@ public class Parser {
             keyword = Keyword.FIND_TRAINING_KEYWORD;
         } else if (hasEditTrainingKeyword(query)) {
             keyword = Keyword.EDIT_TRAINING_KEYWORD;
+        } else if (hasExitKeyword(query)) {
+            keyword = Keyword.EXIT_KEYWORD;
         } else {
             keyword = Keyword.NO_KEYWORD;
         }
@@ -142,7 +135,7 @@ public class Parser {
                 venue = words[wordIndex].trim();
                 break;
             default:
-                continue;
+                break;
             }
 
             wordIndex++;
@@ -186,7 +179,7 @@ public class Parser {
                 phoneNumber = Integer.parseInt(words[wordIndex].trim());
                 break;
             default:
-                continue;
+                break;
             }
             wordIndex++;
         }
@@ -241,7 +234,7 @@ public class Parser {
                 editedMember.setPhoneNumber(phoneNumber);
                 break;
             default:
-                continue;
+                break;
             }
             wordIndex++;
         }
@@ -294,7 +287,7 @@ public class Parser {
                 venue = words[wordIndex].trim();
                 break;
             default:
-                continue;
+                break;
             }
             wordIndex++;
         }
@@ -478,7 +471,7 @@ public class Parser {
                 venue = words[wordIndex].trim();
                 break;
             default:
-                continue;
+                break;
             }
 
             wordIndex++;
