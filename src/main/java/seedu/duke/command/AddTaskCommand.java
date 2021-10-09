@@ -12,11 +12,6 @@ import java.io.IOException;
 public class AddTaskCommand extends AddCommand {
     private String information = "";
 
-    public AddTaskCommand(String title, String dayOfTheWeek) {
-        this.title = title;
-        this.dayOfTheWeek = dayOfTheWeek;
-    }
-
     public AddTaskCommand(String title, String dayOfTheWeek, String information) {
         this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;

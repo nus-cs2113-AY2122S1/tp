@@ -103,7 +103,7 @@ public class Parser {
 
         switch (params.length) {
         case 2:
-            return new AddTaskCommand(title, dayOfTheWeek);
+            return new AddTaskCommand(title, dayOfTheWeek, "");
         case 3:
             String information = params[2].strip();
             return new AddTaskCommand(title, dayOfTheWeek, information);
