@@ -20,7 +20,13 @@ public class TextUi {
     }
 
     public String getUserInput() {
-        return scanner.nextLine().trim();
+        String userInput = scanner.nextLine().trim();
+        if (userInput.contains(",")) {
+            String newUserInput = userInput.replace(",", "");
+            forbiddenInputCommaMessage(newUserInput);
+            return newUserInput;
+        }
+        return userInput;
     }
 
     // Used for print messages after user inputs
