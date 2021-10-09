@@ -6,17 +6,18 @@ import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
 
-public class AddStudentCommand extends Command {
+public class ListStudentsCommand extends Command {
 
-    private static final String MESSAGE_STUDENT_ADDED_FORMAT = "Student %s, %s has been added to %s";
-    private static final String[] ADD_STUDENT_ARGUMENT_KEYS = {"c","s","i"};
+    private static final String[] LIST_STUDENT_ARGUMENT_KEYS = {"c"};
+    private static final String MESSAGE_NO_STUDENTS = "No students added yet!";
+    private static final String MESSAGE_LIST_STUDENT_FORMAT = "Here are the students in %s";
 
-    public AddStudentCommand(String argument) {
-        super(argument, ADD_STUDENT_ARGUMENT_KEYS);
+    public ListStudentsCommand(String argument) {
+        super(argument, LIST_STUDENT_ARGUMENT_KEYS);
     }
 
     /**
-     * Adds a students to a particular module.
+     * Lists the students taking a particular module.
      *
      * @param modules The list of modules
      * @param ui The ui instance to handle interactions with the user
@@ -40,16 +41,19 @@ public class AddStudentCommand extends Command {
             throw new CustomException("");
         }
 
-        String studentName = argumentMap.get("s");
-        String studentID = argumentMap.get("i");
-        Student student = new Student(studentName, studentID);
         Module module = modules.getModule(moduleCode);
         if (module == null) {
             // TODO module not found message
             throw new CustomException("Module not found");
         }
-        module.addStudent(student);
 
-        ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, studentName, studentID, moduleCode));
+        if (module.getStudents().size() == 0) {
+            ui.printMessage(MESSAGE_NO_STUDENTS);
+        } else {
+            ui.printMessage(String.format(MESSAGE_LIST_STUDENT_FORMAT, moduleCode));
+            for (int i = 0; i < module.getStudents().size(); i += 1) {
+                System.out.println(i + 1 + ". " + module.getStudents().get(i));
+            }
+        }
     }
 }

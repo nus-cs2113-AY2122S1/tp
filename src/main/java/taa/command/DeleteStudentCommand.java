@@ -6,17 +6,17 @@ import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
 
-public class AddStudentCommand extends Command {
+public class DeleteStudentCommand extends Command {
 
-    private static final String MESSAGE_STUDENT_ADDED_FORMAT = "Student %s, %s has been added to %s";
-    private static final String[] ADD_STUDENT_ARGUMENT_KEYS = {"c","s","i"};
+    private static final String[] DELETE_STUDENT_ARGUMENT_KEYS = {"c", "n"};
+    private static final String MESSAGE_STUDENT_DELETED_FORMAT = "%s, %s has been removed from %s";
 
-    public AddStudentCommand(String argument) {
-        super(argument, ADD_STUDENT_ARGUMENT_KEYS);
+    public DeleteStudentCommand(String argument) {
+        super(argument, DELETE_STUDENT_ARGUMENT_KEYS);
     }
 
     /**
-     * Adds a students to a particular module.
+     * Deletes a student from a module.
      *
      * @param modules The list of modules
      * @param ui The ui instance to handle interactions with the user
@@ -40,16 +40,18 @@ public class AddStudentCommand extends Command {
             throw new CustomException("");
         }
 
-        String studentName = argumentMap.get("s");
-        String studentID = argumentMap.get("i");
-        Student student = new Student(studentName, studentID);
         Module module = modules.getModule(moduleCode);
         if (module == null) {
             // TODO module not found message
             throw new CustomException("Module not found");
         }
-        module.addStudent(student);
 
-        ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, studentName, studentID, moduleCode));
+        // TODO exceptions for number format and array out of bounds
+        int studentIndex = Integer.parseInt(argumentMap.get("n")) - 1;
+        Student student = modules.getModule(moduleCode).getStudents().get(studentIndex);
+        String studentName = student.getName();
+        String studentID = student.getStudentID();
+        modules.getModule(moduleCode).getStudents().remove(studentIndex);
+        ui.printMessage(String.format(MESSAGE_STUDENT_DELETED_FORMAT, studentName, studentID, moduleCode));
     }
 }

@@ -6,17 +6,17 @@ import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
 
-public class AddStudentCommand extends Command {
+public class EditStudentCommand extends Command {
 
-    private static final String MESSAGE_STUDENT_ADDED_FORMAT = "Student %s, %s has been added to %s";
-    private static final String[] ADD_STUDENT_ARGUMENT_KEYS = {"c","s","i"};
+    private static final String[] EDIT_STUDENT_ARGUMENT_KEYS = {"c", "n", "s", "i"};
+    private static final String MESSAGE_STUDENT_EDITED_FORMAT = "Student details updated:\n %d. %s, %s";
 
-    public AddStudentCommand(String argument) {
-        super(argument, ADD_STUDENT_ARGUMENT_KEYS);
+    public EditStudentCommand(String argument) {
+        super(argument, EDIT_STUDENT_ARGUMENT_KEYS);
     }
 
     /**
-     * Adds a students to a particular module.
+     * Edits the name and student ID of a given student.
      *
      * @param modules The list of modules
      * @param ui The ui instance to handle interactions with the user
@@ -40,16 +40,20 @@ public class AddStudentCommand extends Command {
             throw new CustomException("");
         }
 
-        String studentName = argumentMap.get("s");
-        String studentID = argumentMap.get("i");
-        Student student = new Student(studentName, studentID);
         Module module = modules.getModule(moduleCode);
         if (module == null) {
             // TODO module not found message
             throw new CustomException("Module not found");
         }
-        module.addStudent(student);
 
-        ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, studentName, studentID, moduleCode));
+        // TODO exceptions for number format and array out of bounds
+        int studentIndex = Integer.parseInt(argumentMap.get("n")) - 1;
+        String studentName = argumentMap.get("s");
+        String studentID = argumentMap.get("i");
+        Student student = modules.getModule(moduleCode).getStudents().get(studentIndex);
+        student.setName(studentName);
+        student.setStudentID(studentID);
+
+        ui.printMessage(String.format(MESSAGE_STUDENT_EDITED_FORMAT, (studentIndex + 1), studentName, studentID));
     }
 }
