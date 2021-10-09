@@ -14,7 +14,11 @@ public class Ui {
     }
 
     public static void printList(MemberList members) {
-        System.out.println("Members test");
+        int display = 1;
+        for (Member member : members.getMemberList()) {
+            System.out.println("[" + display + "] " + member.toString());
+            display++;
+        }
     }
 
     public static void printList(TrainingList trainings) {
