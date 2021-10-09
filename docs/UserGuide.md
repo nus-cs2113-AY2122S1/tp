@@ -9,13 +9,13 @@ TermiNUS is a CLI (command line interface) program for NUS Students who wish to 
 * [Getting Start](#Getting-Started)
 * [Section: Notes](#Section:-Notes)
     * [Accessing Notes : `note`](#Accessing-Notes)
-    * [Adding a note : `add "{name}" "{content}"`](#Adding-a-Note)
-    * [Delete a note : `delete {index}`](#Delete-a-Note)
+    * [Adding a note : `add "<name>" "<content>"`](#Adding-a-Note)
+    * [Delete a note : `delete <index>`](#Delete-a-Note)
     * [View notes : `view {index}`](#View-Notes)
 * [Section: Schedules](#Section:-Schedules)
     * [Accessing Schedules : `schedule`](#Accessing-Schedules)
-    * [Adding a Schedule : `add "{description}" "{day}" "{start_time}" "{zoom_link}"`](#Adding-a-Schedule)
-    * [Delete a Schedule : `delete {index}`](#Delete-a-Schedule)
+    * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<zoom_link>"`](#Adding-a-Schedule)
+    * [Delete a Schedule : `delete <index>`](#Delete-a-Schedule)
     * [View Schedule : `view`](#View-Schedule)
 * [Exiting the Program: `exit`](#Exiting-the-Program)
 * [Accessing Help: `help`](#Accessing-Help)
@@ -69,7 +69,7 @@ Type any of  the following to get started:
 ```
 
 ### Adding a Note
-**Format:** `add "{name}" "{content}"`
+**Format:** `add "<name>" "<content>"`
 <br>Adding a note when in the notes workspace
 ```
 [note] >>> add “Remind Cabbin” “Cabbin was here” 
@@ -78,7 +78,7 @@ Note has been added!
 ```
 
 ### Delete a Note
-**Format:** `delete {index}`
+**Format:** `delete <index>`
 <br>Deletes the specified note given by its index.
 ```
 [note] >>> delete 1
@@ -87,7 +87,7 @@ Note `Remind Cabbin` has been deleted!
 ```
 
 ### View Notes
-**Format:** `view {index}`
+**Format:** `view` or `view {index}`
 <br>Two ways to use this command simply running view or view [index]
 View by itself will list all notes
 ```
@@ -132,7 +132,7 @@ Type any of the following to get started:
 ```
 
 ### Adding a Schedule
-**Format:** `add "{description}" "{day}" "{start_time}" "{zoom_link}"`
+**Format:** `add "<description>" "<day>" "<start_time>" "<zoom_link>"`
 <br>Adding a new schedule when in the schedule’s workspace
 ```
 [schedule] >>> add “Module1 Tut1” "Thursday" "10:00" "https://zoom.us/test"  
@@ -141,7 +141,7 @@ You have added Module1 Tut’s scheduled zoom link!
 ```
 
 ### Delete a Schedule
-**Format:** `delete {index}`
+**Format:** `delete <index>`
 <br>Delete schedule when in the schedule’s workspace
 ```
 [schedule] >>> delete 1 
@@ -228,8 +228,8 @@ You have added Module1 Tut’s scheduled zoom link!
 ------------ | -------------
 **access note workspace**|`note`
 **access schedule workspace**|`schedule`
-**add**|`add {name} {content}` <br>e.g. `add note1 note_content`
-**delete**|`delete {index}` <br>e.g. `delete 1`
+**add**|`add "<name>" "<content>"` <br>e.g. `add note1 note_content`
+**delete**|`delete <index>` <br>e.g. `delete 1`
 **view**|`view` or `view {index}`<br>e.g. `view` or `view 1`
 **help**|`help`
 **exit**|`exit`
@@ -237,10 +237,10 @@ You have added Module1 Tut’s scheduled zoom link!
 ##Advanced Command Summary
 **Action** | **Format, Examples**
 ------------ | -------------
-**add note**|`note add {name} {content}` <br>e.g. `note add note1 note_content`
-**add schedule**|`schedule add {description} {day} {start_time} {zoom_link}` <br>e.g. `schedule add “Module1 Tut” Thursday 10:00 https://zoom.us/test`
-**delete note**|`note delete {index}` <br>e.g. `note delete 1`
-**delete schedule**|`schedule delete {index}` <br>e.g. `schedule delete 1`
+**add note**|`note add "<name>" "<content>"` <br>e.g. `note add note1 note_content`
+**add schedule**|`schedule add "<description>" "<day>" "<start_time>" "<zoom_link>"` <br>e.g. `schedule add “Module1 Tut” "Thursday" "10:00" "https://zoom.us/test"`
+**delete note**|`note delete <index>` <br>e.g. `note delete 1`
+**delete schedule**|`schedule delete <index>` <br>e.g. `schedule delete 1`
 **view note**|`note view` or `note view {index}` <br>e.g. `note view 1`
 **view schedule**|`schedule view` <br>e.g. `schedule view`
 
