@@ -19,7 +19,7 @@ public class Entry {
         Keyword keyword = Parser.getKeywordStatus(entry);
         switch (keyword) {
         case LIST_MEMBER_KEYWORD:
-            Ui.printList(members);
+            Ui.printMemberList(members);
             break;
         case LIST_TRAINING_KEYWORD:
             Ui.printList(trainings);
@@ -53,6 +53,8 @@ public class Entry {
         case EDIT_TRAINING_KEYWORD:
             Parser.editTraining(trainings, entry);
             break;
+        case FIND_TRAINING_KEYWORD:
+            Parser.findInTraining(trainings, entry);
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();
             break;

@@ -391,6 +391,16 @@ public class Parser {
         }
     }
 
+    public static void deleteTraining(ArrayList<TrainingSchedule> trainings, String query) {
+        try {
+            TrainingSchedule referencedTraining = trainings.get(trainingNumber);
+            trainings.remove(trainingNumber);
+            Ui.printDeletedTrainingMessage(referencedTraining);
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println("There is no such training schedule number...");
+        }
+    }
+
     public static void wrongInputTypeMessage() {
         Ui.printWrongInputMessage();
     }
