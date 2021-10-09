@@ -34,8 +34,8 @@ public class ParserTrip {
 
             break;
         case "delete":
-             command = new DeleteCommand(userInput[1]);
-             break;
+            command = new DeleteCommand(userInput[1]);
+            break;
         case "viewall":
             command = new ViewAllCommand();
             break;
