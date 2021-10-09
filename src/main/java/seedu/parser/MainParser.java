@@ -10,12 +10,11 @@ import seedu.command.ExitCommand;
 import seedu.command.ListContactsCommand;
 
 import seedu.contact.DetailType;
+import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingNameException;
-
-import java.util.Arrays;
 
 public class MainParser {
     private static final String ADD_CONTACT_COMD = "add";
@@ -24,6 +23,7 @@ public class MainParser {
     private static final String EXIT_COMD = "exit";
     private static final String VIEW_COMD = "view";
     private static final String LIST_COMD = "list";
+    private static final String FORBIDDEN_COMD = "forbidden";
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
@@ -83,6 +83,8 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_NAME);
         } catch (MissingDetailException e) {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
+        } catch (ForbiddenDetailException e) {
+            return new FailedCommand(FailedCommandType.FORBIDDEN_DETAIL);
         }
     }
 
@@ -101,6 +103,8 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         } catch (MissingDetailException e) {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
+        } catch (ForbiddenDetailException e) {
+            return new FailedCommand(FailedCommandType.FORBIDDEN_DETAIL);
         }
     }
 

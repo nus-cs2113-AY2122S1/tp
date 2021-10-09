@@ -43,6 +43,9 @@ public class FailedCommand extends Command {
         case MISSING_NAME:
             TextUi.missingNameMessage();
             break;
+        case FORBIDDEN_DETAIL:
+            TextUi.forbiddenDetailMessage();
+            break;
         default:
             return;
         }
