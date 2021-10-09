@@ -16,7 +16,7 @@ public class AddStudentCommand extends Command {
     }
 
     /**
-     * Adds a students to a particular module.
+     * Adds a student to a particular module.
      *
      * @param modules The list of modules
      * @param ui The ui instance to handle interactions with the user
