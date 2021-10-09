@@ -192,8 +192,11 @@ public class Parser {
         String[] params = userResponse.split(" ");
 
         try {
-            int taskIndex = Integer.parseInt(params[1]);
-            return new DoneCommand(taskIndex - 1); //convert 1-index (1, 2, 3, ...) to 0-index (0, 1, 2, ...)
+            //get 1-indexed task number
+            int taskNumber = Integer.parseInt(params[1]);
+            //convert 1-index (1, 2, 3, ...) to 0-index (0, 1, 2, ...)
+            int taskIndex = taskNumber - 1;
+            return new DoneCommand(taskIndex);
         } catch (NumberFormatException e) {
             throw new DukeException(Message.ERROR_NOT_NUMBER);
         }
