@@ -80,7 +80,10 @@ ____________________________________________________________
 
 ____________________________________________________________
 There are missing details.
-Please remove any flags with no details
+Please remove any flags with no details, 
+and ensure that your flags used are correct:
+  -n NAME
+  -g GITHUB
 ____________________________________________________________
 
 ____________________________________________________________
@@ -127,7 +130,10 @@ ____________________________________________________________
 
 ____________________________________________________________
 There are missing details.
-Please remove any flags with no details
+Please remove any flags with no details, 
+and ensure that your flags used are correct:
+  -n NAME
+  -g GITHUB
 ____________________________________________________________
 
 ____________________________________________________________
@@ -188,7 +194,10 @@ ____________________________________________________________
 
 ____________________________________________________________
 There are missing details.
-Please remove any flags with no details
+Please remove any flags with no details, 
+and ensure that your flags used are correct:
+  -n NAME
+  -g GITHUB
 ____________________________________________________________
 
 ____________________________________________________________
