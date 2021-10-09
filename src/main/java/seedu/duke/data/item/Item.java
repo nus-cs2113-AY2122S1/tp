@@ -23,8 +23,8 @@ public class Item {
         return id;
     }
 
-    public void setID(String ID) {
-        this.id = ID;
+    public void setID(String id) {
+        this.id = id;
     }
 
     public String getStatus() {
