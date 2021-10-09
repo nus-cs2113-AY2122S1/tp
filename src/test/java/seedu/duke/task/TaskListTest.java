@@ -24,17 +24,21 @@ public class TaskListTest {
 
     @Test
     public void testDeleteTask() {
-        TaskList taskList = new TaskList();
-        taskList.addTask(new Task("Do CS2113T", "SAT", "Level 1 increment"));
-        taskList.addTask(new Task("Do CS2113T", "SAT", "Level 2 increment"));
-        taskList.addTask(new Task("Do CS2113T", "SAT", "Level 3 increment"));
-        assertEquals(3, taskList.getSize());
-        taskList.deleteTask(2);
-        assertEquals(2, taskList.getSize());
-        taskList.deleteTask(1);
-        assertEquals(1, taskList.getSize());
-        taskList.deleteTask(0);
-        assertEquals(0, taskList.getSize());
+        try {
+            TaskList taskList = new TaskList();
+            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 1 increment"));
+            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 2 increment"));
+            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 3 increment"));
+            assertEquals(3, taskList.getSize());
+            taskList.deleteTask(2);
+            assertEquals(2, taskList.getSize());
+            taskList.deleteTask(1);
+            assertEquals(1, taskList.getSize());
+            taskList.deleteTask(0);
+            assertEquals(0, taskList.getSize());
+        } catch (DukeException exception) {
+            fail();
+        }
     }
 
     @Test

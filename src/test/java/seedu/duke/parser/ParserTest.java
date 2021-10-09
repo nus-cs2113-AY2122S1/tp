@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.DoneCommand;
 import seedu.duke.exception.DukeException;
 import seedu.duke.command.AddTaskCommand;
 import seedu.duke.command.Command;
@@ -31,6 +32,17 @@ public class ParserTest {
     public void parseAddTask_invalidDayOfTheWeek_exceptionThrown() {
         String userResponse = "add task CS2113T tP -d LOL -i before tutorial";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
+    }
+
+    @Test
+    public void testMarkTaskAsDone() {
+        String userResponse = "done 1";
+        try {
+            Command command = Parser.parse(userResponse);
+            assertTrue(command instanceof DoneCommand);
+        } catch (DukeException e) {
+            fail();
+        }
     }
 
     @Test
