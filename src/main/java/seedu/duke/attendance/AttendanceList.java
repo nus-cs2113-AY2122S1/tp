@@ -16,12 +16,16 @@ public class AttendanceList {
         attendanceList = new ArrayList<Attendance>();
     }
 
-    public AttendanceList(ArrayList<Attendance> attendanceList) { this.attendanceList = attendanceList; }
+    public AttendanceList(ArrayList<Attendance> attendanceList) {
+        this.attendanceList = attendanceList;
+    }
 
-    public ArrayList<Attendance> getAttendanceList() { return attendanceList; }
+    public ArrayList<Attendance> getAttendanceList() {
+        return attendanceList;
+    }
 
     /**
-     * Add attendance entry as request by user
+     * Add attendance entry as request by user.
      *
      * @param attendance attendance entry to be added
      */

@@ -14,7 +14,7 @@ public class Member {
     protected int phoneNumber;
 
     /**
-     * Constructor for any type of member
+     * Constructor for any type of member.
      *
      * @param name              Name of member
      * @param studentNumber     Student number of member
@@ -31,7 +31,8 @@ public class Member {
 
     public Member() {
     }
-    public Member(Member member){
+
+    public Member(Member member) {
         setName(member.name);
         setStudentNumber(member.studentNumber);
         setAsActiveMember();
@@ -68,7 +69,7 @@ public class Member {
     }
 
     /**
-     * Formats description of member to be displayed to user
+     * Formats description of member to be displayed to user.
      *
      * @return Formatted string of a member
      */
