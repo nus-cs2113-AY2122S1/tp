@@ -1,7 +1,5 @@
 package seedu.duke.items;
 
-import java.time.LocalDateTime;
-
 public abstract class Item {
 
     protected String type;
