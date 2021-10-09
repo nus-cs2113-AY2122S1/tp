@@ -8,6 +8,8 @@ import seedu.duke.exercises.Exercise;
 
 import java.util.ArrayList;
 
+import static seedu.duke.lists.WorkoutList.LOGGER;
+
 /**
  * A workout contains a list of exercises in the form of ArrayList of Exercise objects.
  * Adding, deleting and other operations related to all exercises in the workout will be executed from here.
@@ -44,6 +46,7 @@ public class Workout {
      */
     public void addExercise(Exercise exercise) {
         assert exercise != null;
+        LOGGER.info("Adding Exercise: " + exercise.getDescription());
         exercises.add(exercise);
     }
 
@@ -58,6 +61,7 @@ public class Workout {
         if (displayIndex <= 0 || displayIndex > exercises.size()) {
             throw new GetJackDException("Invalid Exercise Index");
         }
+        LOGGER.info("Removing Exercise");
         return exercises.remove(displayIndex - 1);
     }
 
@@ -100,6 +104,7 @@ public class Workout {
      * This is done as WorkoutModel objects are easily convertable to JSONStrings for storage.
      */
     public void convertToWorkoutStorageModel() {
+        LOGGER.info("Generating WorkoutModel");
         WorkoutModel workoutModel = new WorkoutModel(workoutName);
         for (Exercise exercise : exercises) {
             exercise.convertToExerciseStorageModel(workoutModel);

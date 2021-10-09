@@ -3,6 +3,9 @@ package seedu.duke.lists;
 import seedu.duke.exception.GetJackDException;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import static seedu.duke.command.logger.LoggerUtil.setupLogger;
 
 
 /**
@@ -11,12 +14,14 @@ import java.util.ArrayList;
  */
 public class WorkoutList {
     private ArrayList<Workout> workouts;
+    static final Logger LOGGER = Logger.getLogger(WorkoutList.class.getName());
 
     /**
      * Default Constructor.
      */
     public WorkoutList() {
         workouts = new ArrayList<>();
+        setupLogger(LOGGER);
     }
 
     /**
@@ -26,6 +31,7 @@ public class WorkoutList {
      */
     public void addWorkout(Workout workout) {
         assert workout != null;
+        LOGGER.info("Adding Workout: " + workout.getWorkoutName());
         workouts.add(workout);
     }
 
@@ -40,6 +46,7 @@ public class WorkoutList {
         if (displayIndex <= 0 || displayIndex > workouts.size()) {
             throw new GetJackDException("Invalid Workout Index");
         }
+        LOGGER.info("Removing Workout");
         return workouts.remove(displayIndex - 1);
     }
 
@@ -72,6 +79,7 @@ public class WorkoutList {
      * This is done as WorkoutModel objects are easily convertable to JSONStrings for storage.
      */
     public void convertAllWorkoutsToStorageModel() {
+        LOGGER.info("Generating WorkoutListModel");
         for (Workout workout : workouts) {
             workout.convertToWorkoutStorageModel();
         }
