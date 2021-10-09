@@ -7,13 +7,9 @@ import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TaskManagerTest {
 
