@@ -35,6 +35,16 @@ public class Parser {
                 System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
             }
             break;
+        case "summary":
+            String[] tripToGetInfo = inputDescription.split(" ", 2);
+            String tripNumber = tripToGetInfo[0];
+            try {
+                int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
+                Trip tripToGet = listOfTrips.get(indexToGet);
+                tripToGet.printExpensesSummary();
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
         case "delete":
             deleteTrip(listOfTrips, inputDescription);
             break;
