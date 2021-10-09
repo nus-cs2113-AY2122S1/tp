@@ -23,19 +23,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws DukeException {
-        try {
-            Task task = taskList.getTask(taskIndex);
-            if (task.isDone()) {
-                throw new DukeException(Message.INFO_TASK_COMPLETED);
-            }
-            taskList.markTaskAsDone(taskIndex);
-            ui.printDoneTask(taskList, task);
-            storage.saveData(taskList, lessonList);
-        } catch (IndexOutOfBoundsException exception) {
-            throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
-        } catch (IOException e) {
-            throw new DukeException(e.toString());
+    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws DukeException,
+            IOException {
+        Task task = taskList.getTask(taskIndex);
+        if (task.isDone()) {
+            throw new DukeException(Message.INFO_TASK_COMPLETED);
         }
+        taskList.markTaskAsDone(taskIndex);
+        ui.printDoneTask(taskList, task);
+        storage.saveData(taskList, lessonList);
     }
 }
