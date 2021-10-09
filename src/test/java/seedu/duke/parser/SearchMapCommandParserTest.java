@@ -21,7 +21,8 @@ public class SearchMapCommandParserTest {
     public void testCorrectUniversityName_success() throws IOException{
         try {
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
-            assertEquals("Aalto University", new SearchMapCommandParser().parse("Aalto University", universityMasterList).getUniversityToMap().getName());
+            SearchMapCommand command = new SearchMapCommandParser().parse("Aalto University", universityMasterList);
+            assertEquals("Aalto University", command.getUniversityToMap().getName());
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }
