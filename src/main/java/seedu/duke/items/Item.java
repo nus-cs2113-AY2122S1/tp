@@ -1,5 +1,7 @@
 package seedu.duke.items;
 
+import java.time.LocalDateTime;
+
 public abstract class Item {
 
     protected String type;
@@ -24,5 +26,5 @@ public abstract class Item {
         return description;
     }
 
-    public abstract String getDateValue();
+    public abstract LocalDateTime getDateValue();
 }

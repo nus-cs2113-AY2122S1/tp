@@ -1,10 +1,12 @@
 package seedu.duke.items;
 
+import seedu.duke.Parser;
+
 import java.time.LocalDateTime;
 
 public class Event extends Item {
 
-    private String date;
+    private LocalDateTime date;
     private String venue;
     private double budget;
 
@@ -12,12 +14,12 @@ public class Event extends Item {
 
     public Event(String title, String description, String dateTime, String venue, int budget) {
         super("event", title, description);
-        this.date = dateTime;
+        this.date = Parser.convertDateTime(dateTime);
         this.venue = venue;
         this.budget = budget;
     }
 
-    public String getDateValue() {
+    public LocalDateTime getDateValue() {
         return date;
     }
 

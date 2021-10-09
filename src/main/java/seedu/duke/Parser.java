@@ -46,7 +46,7 @@ public class Parser {
     }
 
     public static String convertDateTime(LocalDateTime dateTime) {
-        return dateTime.format(formatter1);
+        return dateTime.format(formatter2);
     }
 
     public static LocalDateTime convertDateTime(String dateTime) {
