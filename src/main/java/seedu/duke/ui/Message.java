@@ -51,4 +51,7 @@ public final class Message {
 
     public static final String ERROR_WRONG_FLAG_SEQUENCE =
             "Incorrect sequence of flag usage.";
+
+    public static final String INFO_TASK_COMPLETED =
+            "This task is already completed!";
 }

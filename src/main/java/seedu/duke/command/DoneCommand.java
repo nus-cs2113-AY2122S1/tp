@@ -19,6 +19,9 @@ public class DoneCommand extends Command {
     @Override
     public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws DukeException {
         try {
+            if (taskList.getTask(taskIndex).isDone()) {
+                throw new DukeException(Message.INFO_TASK_COMPLETED);
+            }
             taskList.markTaskAsDone(taskIndex);
             ui.printDoneTask(taskList, taskIndex);
             storage.saveData(taskList, lessonList);
