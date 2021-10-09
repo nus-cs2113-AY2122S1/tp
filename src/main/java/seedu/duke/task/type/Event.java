@@ -1,5 +1,8 @@
 package seedu.duke.task.type;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
@@ -7,50 +10,70 @@ import seedu.duke.task.Task;
 
 public class Event extends Task {
 
-    private Date endDate;
+    static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
 
-    public Event(String description, Date date) {
-        super(description, date);
+    Date startDate;
+    Date endDate;
+    RecurrenceEnum recurrence;
+
+    public Event(String description) {
+        super(description);
+        this.startDate = Calendar.getInstance().getTime();
+        this.endDate = Calendar.getInstance().getTime();
+        this.recurrence = DEFAULT_RECURRENCE;
+    }
+
+    public Event(String description, PriorityEnum priority) {
+        super(description, priority);
+        this.startDate = Calendar.getInstance().getTime();
+        this.endDate = Calendar.getInstance().getTime();
+        this.recurrence = DEFAULT_RECURRENCE;
     }
 
     public Event(String description, Date startDate, Date endDate) {
-        super(description, startDate);
-        setEndDate(endDate);
-    }
-
-    public Event(String description, Date date, RecurrenceEnum recurranceEnum) {
-        super(description, date, recurranceEnum);
-    }
-
-    public Event(String description, Date startDate, Date endDate, RecurrenceEnum recurranceEnum) {
-        super(description, startDate, recurranceEnum);
-        setEndDate(endDate);
-    }
-
-    public Event(String description, Date date, PriorityEnum priorityEnum) {
-        super(description, date, priorityEnum);
-    }
-
-    public Event(String description, Date startDate, Date endDate, PriorityEnum priorityEnum) {
-        super(description, startDate, priorityEnum);
-        setEndDate(endDate);
-    }
-
-    public Event(String description, Date date, RecurrenceEnum recurranceEnum, PriorityEnum priorityEnum) {
-        super(description, date, recurranceEnum, priorityEnum);
-    }
-
-    public Event(String description, Date startDate, Date endDate,
-                 RecurrenceEnum recurranceEnum, PriorityEnum priorityEnum) {
-        super(description, startDate, recurranceEnum, priorityEnum);
-        setEndDate(endDate);
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
+        super(description);
+        this.startDate = startDate;
         this.endDate = endDate;
+        this.recurrence = DEFAULT_RECURRENCE;
+    }
+
+    public Event(String description, RecurrenceEnum recurrence) {
+        super(description);
+        this.startDate = Calendar.getInstance().getTime();
+        this.endDate = Calendar.getInstance().getTime();
+        this.recurrence = recurrence;
+    }
+
+    public Event(String description, PriorityEnum priority, Date startDate, Date endDate) {
+        super(description, priority);
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.recurrence = DEFAULT_RECURRENCE;
+    }
+
+    public Event(String description, Date startDate, Date endDate, RecurrenceEnum recurrence) {
+        super(description);
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.recurrence = recurrence;
+    }
+
+    public Event(String description, PriorityEnum priority, Date startDate, Date endDate, RecurrenceEnum recurrence) {
+        super(description, priority);
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.recurrence = recurrence;
+    }
+
+    @Override
+    public String getTaskEntryDescription() {
+        return super.getTaskEntryDescription() + " (startDate: " + getDateAsString(this.startDate) + " - "
+                + "endDate: "+ getDateAsString(this.endDate) + ")";
+    }
+
+    public String getDateAsString(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        String strDate = dateFormat.format(date);
+        return strDate;
     }
 }
