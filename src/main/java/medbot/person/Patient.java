@@ -30,7 +30,7 @@ public class Patient extends Person {
      */
     @Override
     public String getStorageString() {
-        return patientId + DATA_SEPARATOR_UNESCAPED +
-                super.getStorageString();
+        return patientId + DATA_SEPARATOR_UNESCAPED
+                + super.getStorageString();
     }
 }

@@ -73,11 +73,11 @@ public abstract class Person {
      */
     public String getStorageString() {
 
-        return setAsStorageParameterOrNull(icNumber) + DATA_SEPARATOR_UNESCAPED +
-                setAsStorageParameterOrNull(name) + DATA_SEPARATOR_UNESCAPED +
-                setAsStorageParameterOrNull(phoneNumber) + DATA_SEPARATOR_UNESCAPED +
-                setAsStorageParameterOrNull(emailAddress) + DATA_SEPARATOR_UNESCAPED +
-                setAsStorageParameterOrNull(residentialAddress);
+        return setAsStorageParameterOrNull(icNumber) + DATA_SEPARATOR_UNESCAPED
+                + setAsStorageParameterOrNull(name) + DATA_SEPARATOR_UNESCAPED
+                + setAsStorageParameterOrNull(phoneNumber) + DATA_SEPARATOR_UNESCAPED
+                + setAsStorageParameterOrNull(emailAddress) + DATA_SEPARATOR_UNESCAPED
+                + setAsStorageParameterOrNull(residentialAddress);
     }
 
     /**

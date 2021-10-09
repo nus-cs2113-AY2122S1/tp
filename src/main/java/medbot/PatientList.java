@@ -94,7 +94,7 @@ public class PatientList {
     }
 
     /**
-     * get storageString for all patients
+     * Get storageString for all patients.
      *
      * @return storageString of all patients
      */
@@ -110,7 +110,7 @@ public class PatientList {
     }
 
     /**
-     * adds a patient to patients hashmap
+     * Adds a patient to patients hashmap.
      *
      * @param patient an instance of Patient
      */
@@ -120,7 +120,7 @@ public class PatientList {
     }
 
     /**
-     * set lastId to a new number
+     * Set lastId to a new number.
      *
      * @param newLastId lastId to be set to this
      */
