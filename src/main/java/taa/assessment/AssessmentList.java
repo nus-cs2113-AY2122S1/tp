@@ -5,8 +5,6 @@ import java.util.ArrayList;
 public class AssessmentList {
     private static final double MAX_ASSESSMENT_WEIGHTAGE = 100;
 
-    private static final String MESSAGE_ASSESSMENT_LIST_HEADER = "Assessment List:";
-
     private final ArrayList<Assessment> assessments;
 
     public AssessmentList() {
@@ -70,23 +68,5 @@ public class AssessmentList {
 
     public int getSize() {
         return assessments.size();
-    }
-
-    /**
-     * Format the string to print out all the assessments.
-     *
-     * @return Assessment list string.
-     */
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder(MESSAGE_ASSESSMENT_LIST_HEADER);
-        for (int i = 0; i < getSize(); i += 1) {
-            stringBuilder.append("\n");
-            stringBuilder.append(i + 1);
-            stringBuilder.append(". ");
-            stringBuilder.append(assessments.get(i));
-        }
-
-        return stringBuilder.toString();
     }
 }

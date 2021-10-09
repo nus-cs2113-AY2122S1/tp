@@ -88,7 +88,7 @@ public class Module {
         return studentsFound;
     }
 
-    public ArrayList<Assessment> getAssessmentList() {
+    public ArrayList<Assessment> getAssessments() {
         return assessmentList.getAssessments();
     }
 

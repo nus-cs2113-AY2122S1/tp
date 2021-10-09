@@ -9,7 +9,7 @@ import taa.util.Util;
 
 public class AddAssessmentCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
-    private static final String KEY_ASSESSMENT_NAME = "a";
+    private static final String KEY_ASSESSMENT_NAME = "n";
     private static final String KEY_WEIGHTAGE = "w";
     private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_ASSESSMENT_NAME, KEY_WEIGHTAGE};
 
