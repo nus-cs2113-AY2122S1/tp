@@ -30,7 +30,6 @@ public class Parser {
                     parseIngredients(splitContent[INGREDIENTS_INDEX], r);
                     parseSteps(splitContent[STEPS_INDEX], r);
                     cookbook.addRecipe(r);
-                    System.out.println("Added " + r.getName() + " recipe! Yum!");
                     System.out.print(r);
                 } else if (parseCommand(line).equalsIgnoreCase("delete")) {
                     nameRecipe = parseName(line);
@@ -41,7 +40,6 @@ public class Parser {
                     try {
                         int index = Integer.parseInt(inputIndex);
                         cookbook.removeRecipe(index - 1);
-                        System.out.println("OK! The recipe has been deleted from your cookbook.");
                     } catch (NumberFormatException e) {
                         throw new GordonException(GordonException.INDEX_INVALID);
                     }
