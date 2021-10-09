@@ -34,7 +34,7 @@ public class Ui {
     private final Scanner sc = new Scanner(System.in);
 
     /**
-     * Gets user input from the standard input
+     * Gets user input from the standard input.
      *
      * @return the user input up to the next newline
      */
