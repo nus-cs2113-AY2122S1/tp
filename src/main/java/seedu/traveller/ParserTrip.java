@@ -1,6 +1,10 @@
 package seedu.traveller;
 
-import seedu.traveller.commands.*;
+import seedu.traveller.commands.Command;
+import seedu.traveller.commands.ExitCommand;
+import seedu.traveller.commands.NewCommand;
+import seedu.traveller.commands.ViewAllCommand;
+import seedu.traveller.commands.DeleteCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.TravellerException;
