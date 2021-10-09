@@ -32,6 +32,7 @@ public class Vertex implements Comparable<Vertex> {
         }
     }
 
+
     public List<Edge> getEdges() {
         return edges;
     }
