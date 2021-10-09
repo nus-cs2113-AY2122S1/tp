@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
+import seedu.duke.training.TrainingSchedule;
 
 class ParserTest {
 
@@ -48,6 +49,7 @@ class ParserTest {
     }
 
     @Test
+
     void deleteMember() {
         final String string = "delete /m 1";
         Parser.deleteMember(testMemberList, string);
@@ -72,5 +74,12 @@ class ParserTest {
                         + "Phone Number: 98765432\n"
                         + "To become:  Name: Ian Wang | Student Number: A0234567B | Gender: M | Phone Number: 98441232\n"
                 , outContent.toString());
+    }
+    
+    void getTrainingDetails() {
+        final String input = "add /t /n October Friday Weekly Training 1 /a 1 Oct 2021 /v MPSH 1";
+        TrainingSchedule training = Parser.getTrainingDescription(input);
+        assertEquals("Training Name: October Friday Weekly Training 1 | Venue: MPSH 1 | Time: 1 Oct 2021",
+                training.toString());
     }
 }
