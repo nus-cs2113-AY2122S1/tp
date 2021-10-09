@@ -14,27 +14,28 @@ public class Parser {
      */
     public static boolean parseUserInput(String userInput, ArrayList<Trip> listOfTrips) {
         String[] userInputSplit = userInput.split(" ", 2);
-
-        switch (userInputSplit[0]) {
+        String inputCommand = userInputSplit[0];
+        String inputDescription = userInputSplit[1];
+        switch (inputCommand) {
         case "create":
-            String[] newTripInfo = userInputSplit[1].split(" ");
+            String[] newTripInfo = inputDescription.split(" ");
             Trip newTrip = new Trip(newTripInfo);
             listOfTrips.add(newTrip);
             System.out.println("Your trip to " + newTrip.getLocation() + " on "
                     + newTrip.getDateOfTripString() + " has been successfully added!");
             break;
         case "edit":
-            String[] tripToEditInfo = userInputSplit[1].split(" ", 2);
+            String[] tripToEditInfo = inputDescription.split(" ", 2);
             try {
-                int indexToEdit = Integer.parseInt(userInputSplit[0]) - 1;
+                int indexToEdit = Integer.parseInt(inputCommand) - 1;
                 Trip tripToEdit = listOfTrips.get(indexToEdit);
-                editTripPerAttribute(tripToEdit, userInputSplit[1]);
+                editTripPerAttribute(tripToEdit, inputDescription);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
             }
             break;
         case "delete":
-            deleteTrip(listOfTrips, userInputSplit[1]);
+            deleteTrip(listOfTrips, inputDescription);
             break;
         case "quit":
             Ui.goodBye();
