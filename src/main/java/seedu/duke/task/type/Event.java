@@ -68,7 +68,7 @@ public class Event extends Task {
     @Override
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription() + " (startDate: " + getDateAsString(this.startDate) + " - "
-                + "endDate: "+ getDateAsString(this.endDate) + ")";
+                + "endDate: " + getDateAsString(this.endDate) + ")";
     }
 
     public String getDateAsString(Date date) {
