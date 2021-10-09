@@ -11,7 +11,9 @@ public class ViewIngredientCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "view";
 
-    private static final String MESSAGE_SHOW_Ingredient = "Here is the ingredient in your list:\n" + "\n%1$s\n";
+    private static final String MESSAGE_SHOW_INGREDIENT = "Here is the ingredient in your list:\n" + "\n%1$s\n";
+
+    private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching recipes found!";
 
     private final String ingredientDescription;
 
@@ -22,6 +24,11 @@ public class ViewIngredientCommand extends Command {
     @Override
     public String execute(IngredientList ingredientList, RecipeList recipes) {
         Ingredient ingredient = ingredientList.findIngredient(ingredientDescription);
-        return String.format(MESSAGE_SHOW_Ingredient, ingredient);
+        if (ingredient == null) {
+            return MESSAGE_INGREDIENT_NOT_FOUND;
+        } else {
+            return String.format(MESSAGE_SHOW_INGREDIENT, ingredient);
+        }
     }
+
 }
