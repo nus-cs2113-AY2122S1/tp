@@ -2,7 +2,13 @@ package seedu.duke.lists;
 
 import seedu.duke.exception.GetJackDException;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 /**
  * Represents a list of all workouts in the form of a ArrayList of Workout Objects (All workouts stored by user).
@@ -10,12 +16,14 @@ import java.util.ArrayList;
  */
 public class WorkoutList {
     private ArrayList<Workout> workouts;
+    private final static Logger LOGGER = Logger.getLogger(WorkoutList.class.getName());
 
     /**
      * Default Constructor.
      */
     public WorkoutList() {
         workouts = new ArrayList<>();
+        LOGGER.info("Starting worklist");
     }
 
     /**
@@ -24,7 +32,7 @@ public class WorkoutList {
      * @param workout workout routine to be added.
      */
     public void addWorkout(Workout workout) {
-        //assumes not null
+        assert workout != null;
         workouts.add(workout);
     }
 
@@ -36,7 +44,6 @@ public class WorkoutList {
      * @throws GetJackDException when the index is greater than number of workouts or less than 0.
      */
     public Workout removeWorkout(int displayIndex) throws GetJackDException {
-        //assume not null
         if (displayIndex <= 0 || displayIndex > workouts.size()) {
             throw new GetJackDException("Invalid Workout Index");
         }
