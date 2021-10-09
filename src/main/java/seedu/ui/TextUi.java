@@ -35,6 +35,7 @@ public class TextUi {
 
     public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this module does not exist in your timetable!";
     public static final String ERROR_INVALID_MODULE_CODE = "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
+    public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
 
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
@@ -179,4 +180,7 @@ public class TextUi {
         System.out.println(moduleCode + " is successfully deleted from your Timetable.");
     }
 
+    public static void printTimetableCleared() {
+        System.out.println("All modules have been successfully removed from your Timetable.");
+    }
 }

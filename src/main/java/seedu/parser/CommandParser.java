@@ -34,6 +34,8 @@ public class CommandParser {
             command = new HelpCommand();
         } else if (lowerCaseText.startsWith("delete")) {
             command = parseDeleteCommand(text, timetable);
+        } else if (lowerCaseText.startsWith("clear")) {
+            command = parseClearCommand(timetable);
         } else {
             command = new InvalidCommand();
         }
@@ -43,6 +45,10 @@ public class CommandParser {
     public Command parseDeleteCommand(String text, Timetable timetable) {
         String moduleToBeDeleted = (text.substring(DELETE_LENGTH).trim()).toUpperCase();
         return new DeleteCommand(moduleToBeDeleted, timetable);
+    }
+
+    public Command parseClearCommand(Timetable timetable) {
+        return new ClearCommand(timetable);
     }
 
     public Command parseSearchCommand(String text) {
