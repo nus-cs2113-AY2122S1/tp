@@ -46,4 +46,8 @@ public class Ui {
     public void printNewTripCreated(String tripName) {
         System.out.println("\tYou have just created a new trip called " + tripName + ".");
     }
+
+    public void printDelete(String tripName) {
+        System.out.println("\tYou have just deleted a trip called " + tripName + ".");
+    }
 }
