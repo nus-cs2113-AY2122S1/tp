@@ -27,4 +27,11 @@ class ParserTest {
         String[] keys = {"c","n"};
         assertEquals(Parser.getArgumentsFromString(inputString, keys).size(), 2);
     }
+
+    @Test
+    void getArgumentsFromString_threeKeys_expectThreeItems() {
+        String inputString = "c/CS2113T a/Midterms w/20";
+        String[] keys = {"c", "a", "w"};
+        assertEquals(Parser.getArgumentsFromString(inputString, keys).size(), 3);
+    }
 }

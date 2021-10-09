@@ -1,24 +1,24 @@
 package taa.module;
 
+import taa.assessment.Assessment;
+import taa.assessment.AssessmentList;
 import taa.student.Student;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Module {
-    private static final double MAX_ASSESSMENT_WEIGHTAGE = 100;
 
     private final String code;
     private final String name;
     private final ArrayList<Student> students;
-    private final HashMap<String, Double> assessments;
+    private final AssessmentList assessments;
     private int lessonCount;
 
     public Module(String code, String name) {
         this.code = code;
         this.name = name;
         this.students = new ArrayList<>();
-        this.assessments = new HashMap<>();
+        this.assessments = new AssessmentList();
     }
 
     public String getCode() {
@@ -41,8 +41,8 @@ public class Module {
         return students;
     }
 
-    public HashMap<String, Double> getAssessments() {
-        return new HashMap<>(assessments);
+    public AssessmentList getAssessments() {
+        return assessments;
     }
 
     public void addStudent(Student student) {
@@ -50,28 +50,16 @@ public class Module {
     }
 
     /**
-     * Add an assessment to the module. Does not add if assessment name already exists
-     * or total weightage exceed MAX_ASSESSMENT_WEIGHTAGE after adding.
+     * Add an assessment to the module.
      *
-     * @param name Name of assessment.
-     * @param weightage Assessment weightage.
-     * @return true if success, else false.
+     * @param assessment      Assessment object to be added.
      */
-    public boolean addAssessment(String name, double weightage) {
-        if (assessments.containsKey(name)) {
-            return false;
-        }
+    public void addAssessment(Assessment assessment) {
+        assessments.addAssessment(assessment);
+    }
 
-        double totalWeightage = 0;
-        for (String key : assessments.keySet()) {
-            totalWeightage += assessments.get(key);
-        }
-        if ((totalWeightage + weightage) > MAX_ASSESSMENT_WEIGHTAGE) {
-            return false;
-        }
-
-        assessments.put(name, weightage);
-        return true;
+    public int getAssessmentsSize() {
+        return assessments.getSize();
     }
 
     @Override
