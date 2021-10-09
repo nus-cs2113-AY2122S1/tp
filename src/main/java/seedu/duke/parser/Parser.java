@@ -18,6 +18,8 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.exception.DukeException;
 import seedu.duke.ui.Message;
 
+import static seedu.duke.parser.DayOfTheWeek.is;
+
 public class Parser {
     public static CommandType getCommandType(String userResponse) {
         String[] params = userResponse.split(" ", 2);
@@ -55,6 +57,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user response into an executable add command.
+     *
+     * @param userResponse the user response
+     * @return an executable add type command
+     * @throws DukeException when user response is in an incorrect format
+     */
     private static Command parseAddCommand(String userResponse) throws DukeException {
         String param = userResponse.replaceFirst("add", "").strip();
         CommandType commandType = getCommandType(param);
@@ -71,36 +80,59 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user response with commandType removed into an executable add task command.
+     *
+     * @param userResponse the user response
+     * @return an executable add task type command
+     * @throws DukeException when the user response is in an incorrect format
+     */
     private static Command parseAddTaskCommand(String userResponse) throws DukeException {
         String[] params = userResponse.split(" -d | -i ");
         if (params.length < 2 || params.length > 3) {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
-
+        if ((params.length == 3) && (userResponse.indexOf(" -d ") > userResponse.indexOf(" -i "))) {
+            throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
+        }
         String title = params[0].strip();
-        String dayOfTheWeek = params[1].strip();    // TODO: Validate correctness with enum
+        String dayOfTheWeek = params[1].strip();
+        if (!is(dayOfTheWeek)) {
+            throw new DukeException(dayOfTheWeek + Message.ERROR_INVALID_DAY_OF_WEEK);
+        }
 
         switch (params.length) {
         case 2:
-            // System.out.print(title + ", " + dayOfTheWeek);      // TODO: to be removed
-            return new AddTaskCommand(title, dayOfTheWeek);
+            return new AddTaskCommand(title, dayOfTheWeek, "");
         case 3:
             String information = params[2].strip();
-            // System.out.print(title + ", " + dayOfTheWeek + ", " + information);     // TODO: to be removed
             return new AddTaskCommand(title, dayOfTheWeek, information);
         default:
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
     }
 
+    /**
+     * Parses the user command with commandType removed into an executable add lesson type command.
+     *
+     * @param userResponse the user response
+     * @return an executable add lesson type command
+     * @throws DukeException when the user response is in an incorrect format
+     */
     private static Command parseAddLessonCommand(String userResponse) throws DukeException {
         String[] params = userResponse.split(" -d | -s | -e ");
         if (params.length != 4) {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
 
+        if (!hasCorrectLessonFlagSequence(userResponse)) {
+            throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
+        }
         String title = params[0].strip();
-        String dayOfTheWeek = params[1].strip();    // TODO: Validate correctness with enum
+        String dayOfTheWeek = params[1].strip();
+        if (!is(dayOfTheWeek)) {
+            throw new DukeException(dayOfTheWeek + Message.ERROR_INVALID_DAY_OF_WEEK);
+        }
         String startTIme = params[2].strip();       // TODO: Validate correctness with time library
         String endTime = params[3].strip();         // TODO: Validate correctness with time library
         return new AddLessonCommand(title, dayOfTheWeek, startTIme, endTime);
@@ -240,7 +272,7 @@ public class Parser {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
             return new ListTaskCommand();
-        } else if (DayOfTheWeek.is(period)) {
+        } else if (is(period)) {
             return new ListTaskCommand(period);
         }
 
@@ -251,7 +283,7 @@ public class Parser {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
             return new ListLessonCommand();
-        } else if (DayOfTheWeek.is(period)) {
+        } else if (is(period)) {
             return new ListLessonCommand(period);
         }
 
@@ -262,10 +294,23 @@ public class Parser {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
             return new ListAllCommand();
-        } else if (DayOfTheWeek.is(period)) {
+        } else if (is(period)) {
             return new ListAllCommand(period);
         }
 
         throw new DukeException(Message.ERROR_INVALID_COMMAND);
+    }
+
+    /**
+     * Checks if the sequence of flags in an add lesson user response is correct.
+     *
+     * @param userResponse the user response
+     * @return true if the sequence is correct, false otherwise
+     */
+    private static boolean hasCorrectLessonFlagSequence(String userResponse) {
+        int posOfDFlag = userResponse.indexOf(" -d ");
+        int posOfSFlag = userResponse.indexOf(" -s ");
+        int posOfEFlag = userResponse.indexOf(" -e ");
+        return (posOfDFlag < posOfSFlag) && (posOfDFlag < posOfEFlag) && (posOfSFlag < posOfEFlag);
     }
 }

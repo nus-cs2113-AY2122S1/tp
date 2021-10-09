@@ -1,5 +1,6 @@
 package seedu.duke.task;
 
+import seedu.duke.exception.DukeException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -68,5 +69,36 @@ public class TaskList {
             s.append(Ui.PADDING).append(i + 1).append(". ").append(task).append(System.lineSeparator());
         }
         return s.toString();
+    }
+
+    /**
+     * Serializes the task list into its file data storage format.
+     *
+     * @return the serialized task list
+     */
+    public String serialize() {
+        StringBuilder data = new StringBuilder();
+        for (Task task : taskList) {
+            data.append(task.serialize()).append(System.lineSeparator());
+        }
+        return data.toString();
+    }
+
+    /**
+     * Filters out strings representing task data from a list of strings and deserializes
+     * them into a list of task objects.
+     *
+     * @param data the list of strings
+     * @return the list of task objects
+     * @throws DukeException when there is task data that is not deserializable
+     */
+    public static List<Task> deserialize(List<String> data) throws DukeException {
+        List<Task> taskList = new ArrayList<>();
+        for (String entry : data) {
+            if (entry.charAt(0) == 'T') {
+                taskList.add(Task.deserialize(entry));
+            }
+        }
+        return taskList;
     }
 }

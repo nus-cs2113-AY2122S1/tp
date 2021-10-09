@@ -1,8 +1,6 @@
 package seedu.duke.lesson;
 
 import seedu.duke.exception.DukeException;
-import seedu.duke.task.Task;
-import seedu.duke.task.TaskList;
 import seedu.duke.ui.Message;
 import seedu.duke.ui.Ui;
 
@@ -49,6 +47,10 @@ public class LessonList {
         return lessonList.isEmpty();
     }
 
+    public int getSize() {
+        return lessonList.size();
+    }
+
     public LessonList filterLessonsByKeyword(String keyword) {
         return new LessonList(lessonList.stream()
                 .filter(lesson -> lesson.getTitle().toLowerCase().contains(keyword))
@@ -69,5 +71,36 @@ public class LessonList {
             s.append(Ui.PADDING).append(i + 1).append(". ").append(lesson).append(System.lineSeparator());
         }
         return s.toString();
+    }
+
+    /**
+     * Serializes the lesson list into its file data storage format.
+     *
+     * @return the serialized lesson list
+     */
+    public String serialize() {
+        StringBuilder data = new StringBuilder();
+        for (Lesson lesson : lessonList) {
+            data.append(lesson.serialize()).append(System.lineSeparator());
+        }
+        return data.toString();
+    }
+
+    /**
+     * Filters out strings representing lesson data from a list of strings and deserializes
+     * them into a list of lesson objects.
+     *
+     * @param data the list of strings
+     * @return the list of lesson objects
+     * @throws DukeException when there is lesson data that is not deserializable
+     */
+    public static List<Lesson> deserialize(List<String> data) throws DukeException {
+        List<Lesson> lessonList = new ArrayList<>();
+        for (String entry : data) {
+            if (entry.charAt(0) == 'L') {
+                lessonList.add(Lesson.deserialize(entry));
+            }
+        }
+        return lessonList;
     }
 }
