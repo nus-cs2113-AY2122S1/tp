@@ -1,6 +1,8 @@
 import errors.InvalidCommand;
-import inventory.Stock;
+import inventory.Dispense;
 import inventory.Medicine;
+import inventory.Order;
+import inventory.Stock;
 import parser.DateParser;
 import parser.Parser;
 import ui.Ui;
@@ -8,6 +10,8 @@ import ui.Ui;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Helps to start the application, and initialise all variables.
@@ -17,14 +21,17 @@ import java.util.Scanner;
 public class MediVault {
     private ArrayList<Medicine> medicines;
     private Ui ui;
+    private static Logger logger = Logger.getLogger("MediVault");
 
     public MediVault() {
         medicines = new ArrayList<>();
         ui = new Ui();
         generateData();
+        logger.log(Level.INFO, "All variables are initialised.");
     }
 
     public static void main(String[] args) {
+        logger.log(Level.INFO, "Medivault is starting up");
         new MediVault().run();
     }
 
@@ -49,8 +56,10 @@ public class MediVault {
             } catch (InvalidCommand e) {
                 // Invalid Command
                 ui.printInvalidCommandMessage();
+                logger.log(Level.WARNING, "An invalid command was entered!");
             }
         }
+        logger.log(Level.INFO, "MediVault is shutting down");
     }
 
     /**
@@ -72,6 +81,23 @@ public class MediVault {
                     "USED FOR TREATING HYPOTHYROIDISM", 800));
             medicines.add(new Stock("AZITHROMYCIN", 20, 35, DateParser.stringToDate("15-10-2021"),
                     "USED FOR TREATING EAR, THROAT, AND SINUS INFECTIONS", 100));
+            medicines.add(new Order("PANADOL", 100, DateParser.stringToDate("9-10-2021")));
+            Order order = new Order("VICODIN", 50, DateParser.stringToDate("10-10-2021"));
+            order.setDelivered();
+            medicines.add(order);
+            medicines.add(new Order("SIMVASTATIN", 20, DateParser.stringToDate("11-10-2021")));
+            medicines.add(new Order("LISINOPRIL", 200, DateParser.stringToDate("12-10-2021")));
+            medicines.add(new Order("AZITHROMYCIN", 100, DateParser.stringToDate("13-10-2021")));
+            medicines.add(new Dispense("PANADOL", 10, "S1234567A",
+                    DateParser.stringToDate("9-10-2021"), "Jane"));
+            medicines.add(new Dispense("VICODIN", 10, "S2345678B",
+                    DateParser.stringToDate("10-10-2021"), "Peter"));
+            medicines.add(new Dispense("SIMVASTATIN", 10, "S1234567A",
+                    DateParser.stringToDate("11-10-2021"), "Sam"));
+            medicines.add(new Dispense("LISINOPRIL", 10, "S3456789C",
+                    DateParser.stringToDate("12-10-2021"), "Jane"));
+            medicines.add(new Dispense("AZITHROMYCIN", 10, "S2345678B",
+                    DateParser.stringToDate("13-10-2021"), "Peter"));
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
