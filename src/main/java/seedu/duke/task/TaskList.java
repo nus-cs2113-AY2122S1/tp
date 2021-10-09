@@ -69,7 +69,8 @@ public class TaskList {
     }
 
     public void markTaskAsDone(int index) {
-        taskList.get(index).setDone();
+        Task task = taskList.get(index);
+        task.setDone();
     }
 
     public TaskList filterTasksByKeyword(String keyword) {
