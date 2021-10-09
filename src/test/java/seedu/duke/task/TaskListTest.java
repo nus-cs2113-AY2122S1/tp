@@ -24,26 +24,22 @@ public class TaskListTest {
 
     @Test
     public void testDeleteTask() {
-        try {
-            TaskList taskList = new TaskList();
-            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 1 increment"));
-            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 2 increment"));
-            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 3 increment"));
-            assertEquals(3, taskList.getSize());
-            taskList.deleteTask(2);
-            assertEquals(2, taskList.getSize());
-            taskList.deleteTask(1);
-            assertEquals(1, taskList.getSize());
-            taskList.deleteTask(0);
-            assertEquals(0, taskList.getSize());
-        } catch (DukeException e) {
-            fail(); // the test should not reach this line
-        }
+        TaskList taskList = new TaskList();
+        taskList.addTask(new Task("Do CS2113T", "SAT", "Level 1 increment"));
+        taskList.addTask(new Task("Do CS2113T", "SAT", "Level 2 increment"));
+        taskList.addTask(new Task("Do CS2113T", "SAT", "Level 3 increment"));
+        assertEquals(3, taskList.getSize());
+        taskList.deleteTask(2);
+        assertEquals(2, taskList.getSize());
+        taskList.deleteTask(1);
+        assertEquals(1, taskList.getSize());
+        taskList.deleteTask(0);
+        assertEquals(0, taskList.getSize());
     }
 
     @Test
     public void deleteTask_indexOutOfBounds_exceptionThrown() {
-        assertThrows(DukeException.class, () -> {
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             TaskList taskList = new TaskList();
             taskList.addTask(new Task("Study CS2113T", "mon", "JUnit test"));
             taskList.deleteTask(1);
@@ -52,12 +48,12 @@ public class TaskListTest {
 
     @Test
     public void deleteTask_negativeIndex_exceptionThrown() {
-        assertThrows(DukeException.class, () -> new TaskList().deleteTask(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> new TaskList().deleteTask(-1));
     }
 
     @Test
     public void markTaskAsDone_indexOutOfBounds_exceptionThrown() {
-        assertThrows(DukeException.class, () -> {
+        assertThrows(IndexOutOfBoundsException.class, () -> {
             TaskList taskList = new TaskList();
             taskList.addTask(new Task("Study CS2113T", "mon", "JUnit test"));
             taskList.markTaskAsDone(1);
@@ -66,7 +62,6 @@ public class TaskListTest {
 
     @Test
     public void markTaskAsDone_negativeIndex_exceptionThrown() {
-        assertThrows(DukeException.class, () -> new TaskList().markTaskAsDone(-1));
+        assertThrows(IndexOutOfBoundsException.class, () -> new TaskList().markTaskAsDone(-1));
     }
-
 }

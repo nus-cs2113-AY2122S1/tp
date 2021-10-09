@@ -32,4 +32,10 @@ public class ParserTest {
         String userResponse = "add task CS2113T tP -d LOL -i before tutorial";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
+
+    @Test
+    public void parseMarkTaskDone_indexNotANumber_exceptionThrown() {
+        String userResponse = "done m";
+        assertThrows(DukeException.class, (() -> Parser.parse(userResponse)));
+    }
 }
