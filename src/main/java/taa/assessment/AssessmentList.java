@@ -63,4 +63,22 @@ public class AssessmentList {
     public int getSize() {
         return assessments.size();
     }
+
+    /**
+     * Format the string to print out all the assessments.
+     *
+     * @return Assessment list string.
+     */
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(MESSAGE_ASSESSMENT_LIST_HEADER);
+        for (int i = 0; i < getSize(); i += 1) {
+            stringBuilder.append("\n");
+            stringBuilder.append(i + 1);
+            stringBuilder.append(": ");
+            stringBuilder.append(getAssessmentAt(i));
+        }
+
+        return stringBuilder.toString();
+    }
 }
