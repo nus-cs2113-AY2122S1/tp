@@ -18,6 +18,7 @@ public class ListCommand extends Command {
 
 
 
+
     @Override
     public String execute(IngredientList ingredientList, RecipeList recipes) {
         return String.format(MESSAGE_SHOW_WHOLE_LIST, ingredientList.printWholeList(), ingredientList.size());
