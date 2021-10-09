@@ -42,7 +42,7 @@ public class Parser {
                 int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
                 Trip tripToGet = listOfTrips.get(indexToGet);
                 tripToGet.printExpensesSummary();
-            } catch (NumberFormatException e) {
+            } catch (ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
             }
         case "delete":
