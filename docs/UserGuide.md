@@ -9,12 +9,12 @@ TermiNUS is a CLI (command line interface) program for NUS Students who wish to 
 * [Getting Start](#Getting-Started)
 * [Section: Notes](#Section:-Notes)
     * [Accessing Notes : `note`](#Accessing-Notes)
-    * [Adding a note : `add {name} {content}`](#Adding-a-Note)
+    * [Adding a note : `add "{name}" "{content}"`](#Adding-a-Note)
     * [Delete a note : `delete {index}`](#Delete-a-Note)
     * [View notes : `view {index}`](#View-Notes)
 * [Section: Schedules](#Section:-Schedules)
     * [Accessing Schedules : `schedule`](#Accessing-Schedules)
-    * [Adding a Schedule : `add {description} {day} {start_time} {zoom_link}`](#Adding-a-Schedule)
+    * [Adding a Schedule : `add "{description}" "{day}" "{start_time}" "{zoom_link}"`](#Adding-a-Schedule)
     * [Delete a Schedule : `delete {index}`](#Delete-a-Schedule)
     * [View Schedule : `view`](#View-Schedule)
 * [Exiting the Program: `exit`](#Exiting-the-Program)
@@ -55,17 +55,21 @@ After running the notes command, you can see the following:
 ```
 [] >>> note
 
-You have no notes inside, run `add` to add a new note! 
-You can run the following commands after you add a new note: 
+You have 0 note(s) inside this workspace 
+
+Type any of  the following to get started: 
 > add 
+> exit
+> help
+> view
+> back
 > delete 
-> view 
  
 [note] >>> 
 ```
 
 ### Adding a Note
-**Format:** `add {name} {content}`
+**Format:** `add "{name}" "{content}"`
 <br>Adding a note when in the notes workspace
 ```
 [note] >>> add “Remind Cabbin” “Cabbin was here” 
@@ -88,13 +92,10 @@ Note `Remind Cabbin` has been deleted!
 View by itself will list all notes
 ```
 [note] >>> view 
-You have {N} notes inside: 
+You have 3 notes inside: 
 1. Remind Cabbin 
 2. Name1 
-. 
-. 
-. 
-N. Name2 
+3. Name2 
 
 [note] >>> 
 ```
@@ -117,20 +118,24 @@ Content: Cabbin was here
 <br>After running the schedules command, you can see the following:
 ```
 [] >>> schedule
-You have {N} schedules inside, run `add` to add a schedule! 
-You can run the following commands after you add a new note: 
+You have 0 link(s) in this workspace.
+
+Type any of the following to get started: 
 > add 
+> edit
+> help
+> view
+> back
 > delete 
-> view 
 
 [schedule] >>> 
 ```
 
 ### Adding a Schedule
-**Format:** `add {description} {day} {start_time} {zoom_link}`
+**Format:** `add "{description}" "{day}" "{start_time}" "{zoom_link}"`
 <br>Adding a new schedule when in the schedule’s workspace
 ```
-[schedule] >>> add “Module1 Tut1” Thursday 10:00 https://zoom.us/test  
+[schedule] >>> add “Module1 Tut1” "Thursday" "10:00" "https://zoom.us/test"  
 You have added Module1 Tut’s scheduled zoom link! 
 [schedule] >>> 
 ```
@@ -150,13 +155,10 @@ Schedule `Module1 Tut, Thursday, 10:00, https://zoom.us/test` has been deleted!
 <br>View all schedules when in the schedule’s workspace
 ```
 [schedule] >>> view 
-You have {N} schedules inside: 
+You have 3 schedules inside: 
 1. Module1 Tut, Thursday, 10:00, https://zoom.us/test 
 2. Module2 Lecture, Friday, 14:00, https://zoom.us/test 
-. 
-. 
-. 
-N. ModuleN Lecture, Nday, 09:00, https://zoom.us/test 
+3. Module1 Tut1, Thursday, 10:00, https://zoom.us/test
 
 [schedule] >>> 
 ```
