@@ -1,11 +1,13 @@
 package seedu.duke;
 
+import seedu.duke.attendance.AttendanceList;
 import seedu.duke.member.*;
 import seedu.duke.training.*;
 
 public class Entry {
     private static final TrainingList trainings = new TrainingList();
     private static final MemberList members = new MemberList();
+    private static final AttendanceList attendanceList = new AttendanceList();
 
     /**
      * Returns void. Function is responsible for adding different Tasks to the task list.
@@ -22,11 +24,17 @@ public class Entry {
         case LIST_TRAINING_KEYWORD:
             Ui.printList(trainings);
             break;
+        case LIST_ATTENDANCE_KEYWORD:
+            Ui.printList(attendanceList);
+            break;
         case ADD_MEMBER_KEYWORD:
             Parser.makeMemberEntry(members, entry);
             break;
         case ADD_TRAINING_KEYWORD:
             Parser.makeTrainingEntry(trainings, entry);
+            break;
+        case ADD_ATTENDANCE_KEYWORD:
+            Parser.makeAttendanceEntry(attendanceList, entry);
             break;
         case DELETE_MEMBER_KEYWORD:
             Parser.deleteMember(members, entry);
