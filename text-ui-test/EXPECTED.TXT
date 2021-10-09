@@ -11,3 +11,4 @@
        `--"
 Welcome to libmgr
 > See you soon!
+> Sorry, I don't understand what you mean
