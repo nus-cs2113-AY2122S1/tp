@@ -6,14 +6,7 @@ import seedu.duke.storage.models.WorkoutListModel;
 import seedu.duke.storage.models.WorkoutModel;
 import seedu.duke.exercises.Exercise;
 
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.Logger;
 
 /**
  * A workout contains a list of exercises in the form of ArrayList of Exercise objects.
@@ -22,7 +15,6 @@ import java.util.logging.Logger;
 public class Workout {
     private String workoutName;
     private ArrayList<Exercise> exercises;
-    private final static Logger LOGGER = Logger.getLogger(WorkoutList.class.getName());
 
     /**
      * Default Constructor.
@@ -33,9 +25,8 @@ public class Workout {
         assert !workoutName.isEmpty();
         exercises = new ArrayList<>();
         this.workoutName = workoutName;
-        LOGGER.info("start workout");
     }
-    
+
 
     /**
      * To get the name of the Workout.
