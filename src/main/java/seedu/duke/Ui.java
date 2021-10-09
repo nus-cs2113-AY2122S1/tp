@@ -1,73 +1,39 @@
 package seedu.duke;
 
-import java.util.ArrayList;
+import seedu.duke.attendance.Attendance;
+import seedu.duke.attendance.AttendanceList;
+import seedu.duke.member.*;
+import seedu.duke.training.*;
 
 public class Ui {
+
     private static final String LINE_SEPARATOR = ("_____________________________________________________");
 
     public static void printSeparator() {
         System.out.println(LINE_SEPARATOR);
     }
 
-    public static void printMatchingTrainingList(ArrayList<TrainingSchedule> trainings, String query) {
-        int count = 0;
-        if (trainings.size() == 0) {
-            System.out.println("I'm sorry, there is no training entry containing your find query.");
-        } else {
-            System.out.println("Here is your list of training entries containing " + "' "
-                    + Parser.getQueryDescription(query) + "'" + ":");
-            for (TrainingSchedule training : trainings) {
-                if (trainings.get(count) != null) {
-                    count++;
-                    System.out.println(count + ". " + training);
-                }
-            }
-        }
+    public static void printGreeting() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println(logo);
+        System.out.println("What would you like to do?");
     }
 
-    public static void printMatchingMemberList(ArrayList<Member> members, String query) {
-        int count = 0;
-        if (members.size() == 0) {
-            System.out.println("I'm sorry, there are no members containing your find query.");
-        } else {
-            System.out.println("Here is your list of members containing " + "' "
-                    + Parser.getQueryDescription(query) + "'" + ":");
-            for (Member member : members) {
-                if (members.get(count) != null) {
-                    count++;
-                    System.out.println(count + ". " + member);
-                }
-            }
-        }
+    public static void printWrongInputMessage() {
+        System.out.println("Wrong commands have been input. To get help on the overview and guide of how to use the" +
+                "programme, please take a look at our user guide at https://github.com/AY2122S1-CS2113T-F12-4/tp");
     }
 
-    public static void printMemberList(ArrayList<Member> members) {
-        int count = 0;
-        if (members.size() == 0) {
-            System.out.println("Well... your list of members is looking very scarce...");
-        } else {
-            System.out.println("Here is your list of members:");
-            for (Member member : members) {
-                if (members.get(count) != null) {
-                    count++;
-                    System.out.println(count + ". " + member);
-                }
-            }
-        }
+    public static void printMatchingTrainingList(TrainingList trainings, String query) {
+        // version 2.0
     }
-    public static void printTrainingList(ArrayList<TrainingSchedule> trainings) {
-        int count = 0;
-        if (trainings.size() == 0) {
-            System.out.println("Well... your list of members is looking very scarce...");
-        } else {
-            System.out.println("Here is your list of members:");
-            for (TrainingSchedule training : trainings) {
-                if (trainings.get(count) != null) {
-                    count++;
-                    System.out.println(count + ". " + training);
-                }
-            }
-        }
+
+    public static void printMatchingMemberList(MemberList members, String query) {
+        // version 2.0
     }
 
     public static void printDeletedMemberMessage(Member member) {
@@ -75,11 +41,52 @@ public class Ui {
     }
 
     public static void printDeletedTrainingMessage(TrainingSchedule training) {
-        System.out.println("You have removed training entry: " + "\n" + training);
+        System.out.println("You have removed training entry: " + "\n" + training.toString());
+    }
+
+    public static void printDeletedAttendanceMessage(Attendance attendance) {
+        System.out.println("You have removed training entry: " + "\n" + attendance.toString());
+    }
+
+    public static void printAddedTrainingMessage(TrainingSchedule training) {
+        System.out.println("Added a Training entry:\n" + training);
+    }
+
+    public static void printAddedMemberMessage(Member member) {
+        System.out.println("Added a Member: " + member);
+    }
+
+    public static void printAddedAttendanceMessage(Attendance attendance) {
+        System.out.println("Added an Attendance entry: " + "\n" + attendance);
+    }
+
+    public static void printEditMessage(Member oldMember, Member newMember) {
+        System.out.println("Edited member: " + oldMember);
+        System.out.println("To become:  " + newMember);
     }
 
     public static void printExitMessage() {
         System.out.println("You have successfully exited the programme.");
-        System.out.println(LINE_SEPARATOR);
+        printSeparator();
+    }
+
+    public static void printList(MemberList members) {
+        System.out.println("Members test");
+    }
+
+    public static void printList(TrainingList trainings) {
+        int display = 1;
+        for (TrainingSchedule trainingEntries : trainings.getTrainingList()) {
+            System.out.println("[" + display + "] " + trainingEntries.toString());
+            display++;
+        }
+    }
+
+    public static void printList(AttendanceList attendanceList) {
+        int display = 1;
+        for (Attendance attendance : attendanceList.getAttendanceList()) {
+            System.out.println("[" + display + "] " + attendance.toString());
+            display++;
+        }
     }
 }

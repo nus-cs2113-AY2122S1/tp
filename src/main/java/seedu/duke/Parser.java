@@ -1,8 +1,18 @@
 package seedu.duke;
+
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import seedu.duke.attendance.Attendance;
+import seedu.duke.member.Member;
+import seedu.duke.member.MemberList;
+import seedu.duke.training.TrainingSchedule;
+import seedu.duke.training.TrainingList;
+import seedu.duke.attendance.AttendanceList;
 
 public class Parser {
 
@@ -14,12 +24,20 @@ public class Parser {
         return arg.trim().toLowerCase().contains("list /t");
     }
 
+    public static boolean hasListAttendanceKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("list /att");
+    }
+
     public static boolean hasAddMemberKeyword(String arg) {
         return arg.trim().toLowerCase().contains("add /m");
     }
 
     public static boolean hasAddTrainingKeyword(String arg) {
         return arg.trim().toLowerCase().contains("add /t");
+    }
+
+    public static boolean hasAddAttendanceKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("add /att");
     }
 
     public static boolean hasDeleteMemberKeyword(String arg) {
@@ -30,12 +48,20 @@ public class Parser {
         return arg.trim().toLowerCase().contains("delete /t");
     }
 
+    public static boolean hasDeleteAttendanceKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("delete /a");
+    }
+
     public static boolean hasFindMemberKeyword(String arg) {
         return arg.trim().toLowerCase().contains("find /m");
     }
 
     public static boolean hasFindTrainingKeyword(String arg) {
         return arg.trim().toLowerCase().contains("find /t");
+    }
+
+    public static boolean hasEditTrainingKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("edit /t");
     }
 
 
@@ -51,20 +77,28 @@ public class Parser {
             keyword = Keyword.ADD_MEMBER_KEYWORD;
         } else if (hasAddTrainingKeyword(query)) {
             keyword = Keyword.ADD_TRAINING_KEYWORD;
+        } else if (hasAddAttendanceKeyword(query)) {
+            keyword = Keyword.ADD_ATTENDANCE_KEYWORD;
         } else if (hasListMemberKeyword(query)) {
             keyword = Keyword.LIST_MEMBER_KEYWORD;
         } else if (hasListTrainingKeyword(query)) {
             keyword = Keyword.LIST_TRAINING_KEYWORD;
+        } else if (hasListAttendanceKeyword(query)) {
+            keyword = Keyword.LIST_ATTENDANCE_KEYWORD;
         } else if (query.trim().equals("bye")) {
             keyword = Keyword.EXIT_KEYWORD;
         } else if (hasDeleteMemberKeyword(query)) {
             keyword = Keyword.DELETE_MEMBER_KEYWORD;
         } else if (hasDeleteTrainingKeyword(query)) {
             keyword = Keyword.DELETE_TRAINING_KEYWORD;
+        } else if (hasDeleteAttendanceKeyword(query)) {
+            keyword = Keyword.DELETE_ATTENDANCE_KEYWORD;
         } else if (hasFindMemberKeyword(query)) {
             keyword = Keyword.FIND_MEMBER_KEYWORD;
         } else if (hasFindTrainingKeyword(query)) {
             keyword = Keyword.FIND_TRAINING_KEYWORD;
+        } else if (hasEditTrainingKeyword(query)) {
+            keyword = Keyword.EDIT_TRAINING_KEYWORD;
         } else {
             keyword = Keyword.NO_KEYWORD;
         }
@@ -77,104 +111,283 @@ public class Parser {
      * @param query user raw data input.
      * @return description of task.
      */
-    public static String getTrainingDescription(String query) {
-        String[] words = query.trim().split("[\\s]+");
-        String[] allButFirstWord = Arrays.copyOfRange(words, 1, words.length);
-        StringBuilder sentenceAfterDeletion = new StringBuilder();
-        for (String word : allButFirstWord) {
-            if (word.contains("/")) {
+    public static TrainingSchedule getTrainingDescription(String query) {
+        String name = "";
+        String venue = "";
+        String time = "";
+
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            switch (matcher.group()){
+            case "/n":
+                name = words[wordIndex].trim();
                 break;
-            } else {
-                sentenceAfterDeletion.append(word).append(" ");
-            }
-        }
-        return sentenceAfterDeletion.toString();
-    }
-
-    public static String getMemberDescription(String query) {
-        String[] words = query.trim().split("[\\s]+");
-        String[] allButFirstWord = Arrays.copyOfRange(words, 1, words.length);
-        StringBuilder sentenceAfterDeletion = new StringBuilder();
-        for (String word : allButFirstWord) {
-            if (word.contains("/")) {
+            case "/a":
+                time = words[wordIndex].trim();
                 break;
-            } else {
-                sentenceAfterDeletion.append(word).append(" ");
+            case "/v":
+                venue = words[wordIndex].trim();
+                break;
             }
+
+            wordIndex++;
         }
-        return sentenceAfterDeletion.toString();
-    }
 
-
-    /**
-     * Function creates a new Todo task to be input in tasks.
-     *
-     * @param tasks ArrayList of tasks
-     * @param query user input
-     */
-    public static void makeMemberEntry(ArrayList<Member> members, String query) {
-        members.add(new Members(Parser.getMemberDescription(query)));
-        System.out.println("Added a Member: " + Parser.getMemberDescription(query));
+        return new TrainingSchedule(name, venue, time);
     }
 
     /**
-     * Function creates a new Event task to be input in tasks.
+     * Creates Member class by input given by user
      *
-     * @param tasks ArrayList of tasks
+     * @param query user raw data input.
+     * @return Member according to user input.
+     */
+    public static Member getMemberDetails(String query) {
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        String name = "";
+        String studentNumber = "";
+        char gender = ' ';
+        int phoneNumber = 0;
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            switch (matcher.group()){
+            case "/n":
+                name = words[wordIndex].trim();
+                break;
+            case "/s":
+                studentNumber = words[wordIndex].trim();
+                break;
+            case "/g":
+                gender = words[wordIndex].trim().charAt(0);
+                break;
+            case "/p":
+                phoneNumber = Integer.parseInt(words[wordIndex].trim());
+                break;
+            }
+            wordIndex++;
+        }
+
+        return new Member(name,studentNumber,gender,phoneNumber);
+    }
+
+    /**
+     * Edit member by input given by user
+     *
+     * @param query user raw data input.
+     * @return Edited member according to user input.
+     */
+    public static ArrayList<Member> editMemberDetails(MemberList members, String query) {
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        Member editedMember = new Member();
+        Member oldMember = new Member();
+        String name = "";
+        String studentNumber = "";
+        char gender = ' ';
+        int phoneNumber = 0;
+        int memberNumber = 0;
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            switch (matcher.group()){
+            case "/m":
+                memberNumber = Integer.parseInt(words[wordIndex].trim());
+                oldMember = new Member(members.getMember(memberNumber));
+                editedMember = members.getMember(memberNumber);
+                break;
+            case "/n":
+                name = words[wordIndex].trim();
+                editedMember.setName(name);
+                break;
+            case "/s":
+                studentNumber = words[wordIndex].trim();
+                editedMember.setStudentNumber(studentNumber);
+                break;
+            case "/g":
+                gender = words[wordIndex].trim().charAt(0);
+                editedMember.setGender(gender);
+                break;
+            case "/p":
+                phoneNumber = Integer.parseInt(words[wordIndex].trim());
+                editedMember.setPhoneNumber(phoneNumber);
+                break;
+            }
+            wordIndex++;
+        }
+        ArrayList<Member> oldMemberAndEditedMember = new ArrayList<Member>();
+        oldMemberAndEditedMember.add(oldMember);
+        oldMemberAndEditedMember.add(editedMember);
+
+        return oldMemberAndEditedMember;
+    }
+
+    public static Attendance getAttendanceDetails(String query) {
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        String memberName = "";
+        String studentNumber = "";
+        char gender = ' ';
+        int phoneNumber = 0;
+
+        String trainingName = "";
+        String venue = "";
+        String time = "";
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            switch (matcher.group()) {
+            case "/m":
+                memberName = words[wordIndex].trim();
+                break;
+            case "/s":
+                studentNumber = words[wordIndex].trim();
+                break;
+            case "/g":
+                gender = words[wordIndex].trim().charAt(0);
+                break;
+            case "/p":
+                phoneNumber = Integer.parseInt(words[wordIndex].trim());
+                break;
+            case "/n":
+                trainingName = words[wordIndex].trim();
+                break;
+            case "/a":
+                time = words[wordIndex].trim();
+                break;
+            case "/v":
+                venue = words[wordIndex].trim();
+                break;
+            }
+            wordIndex++;
+        }
+        Member member = new Member(memberName, studentNumber,gender,phoneNumber);
+        TrainingSchedule training = new TrainingSchedule(trainingName, venue, time);
+        return new Attendance(member, training);
+    }
+  
+    /**
+     * Creates Member class by input given by user
+     *
+     * @param query user raw data input.
+     * @return Member according to user input.
+     */
+    public static Integer getMemberIndex(String query) {
+        String regex = "(\\/[a-z])+";
+        String[] words = query.trim().split(regex);
+        int memberNumber = Integer.parseInt(words[1].trim());
+        return memberNumber;
+    }
+
+    /**
+     * Function creates a new member to be input in MemberList Class.
+     *
+     * @param members MemberList which contains list of members
      * @param query user input
      */
-    public static void makeTrainingEntry(ArrayList<TrainingSchedule> trainings, String query) {
-        trainings.add(new TrainingSchedule(Parser.getTrainingDescription(query)));
-        System.out.println("Added a Training entry: " + Parser.getTrainingDescription(query));
+    public static void makeMemberEntry(MemberList members, String query) {
+        Member member = getMemberDetails(query);
+        members.addMember(member);
+        Ui.printAddedMemberMessage(member);
+    }
+
+    /**
+     * Function edits an existing member and shows the change to user
+     *
+     * @param members MemberList which contains list of members
+     * @param query user input
+     */
+    public static void editMember(MemberList members, String query) {
+        ArrayList<Member> oldMemberAndNewMember = editMemberDetails(members, query);
+        Member oldMember = oldMemberAndNewMember.get(0);
+        Member newMember = oldMemberAndNewMember.get(1);
+        Ui.printEditMessage(oldMember, newMember);
+    }
+
+     /**
+     * Creates a TrainingSchedule to put into TrainingList
+     *
+     * @param trainings TrainingList containing all TrainingSchedule
+     * @param query User input command to parse
+     */
+    public static void makeTrainingEntry(TrainingList trainings, String query) {
+        TrainingSchedule training = getTrainingDescription(query);
+        trainings.addTrainingSchedule(training);
+        Ui.printAddedTrainingMessage(training);
+    }
+
+    /**
+     * Creates an Attendance Entry to put into AttendanceList
+     *
+     * @param attendanceList AttendanceList containing all Attendance entries
+     * @param query User input command to parse
+     */
+    public static void makeAttendanceEntry(AttendanceList attendanceList, String query) {
+        Attendance attendance = getAttendanceDetails(query);
+        attendanceList.addAttendance(attendance);
+        Ui.printAddedAttendanceMessage(attendance);
     }
 
     /**
      * Function finds tasks with descriptions matching the user's query and adds them to a new ArrayList. If no matching
      * words are found, the user will be notified.
      *
-     * @param tasks ArrayList of tasks
+     * @param trainings ArrayList of tasks
      * @param query user input
      */
-    public static void findInTraining(ArrayList<TrainingSchedule> trainings, String query) {
-        ArrayList<TrainingSchedule> matchingTrainings = new ArrayList<>();
-        for (TrainingSchedule training : trainings) {
-            if (training.getDescription().toLowerCase().contains(Parser.getTrainingDescription(query))) {
-                matchingTrainings.add(training);
-            }
-        }
-        Ui.printMatchingTrainingList(matchingTrainings, query);
+    public static void findInTraining(TrainingList trainings, String query) {
+        //Leave for v2.0
     }
 
     /**
      * Function finds tasks with descriptions matching the user's query and adds them to a new ArrayList. If no matching
      * words are found, the user will be notified.
      *
-     * @param tasks ArrayList of tasks
+     * @param members ArrayList of tasks
      * @param query user input
      */
-    public static void findInMembers(ArrayList<Member> members, String query) {
-        ArrayList<Member> matchingMembers = new ArrayList<>();
-        for (Member member : members) {
-            if (member.getDescription().toLowerCase().contains(Parser.getTrainingDescription(query))) {
-                matchingMembers.add(member);
-            }
-        }
-        Ui.printMatchingMemberList(matchingMembers, query);
+    public static void findInMembers(MemberList members, String query) {
+        //Leave for v2.0
     }
 
     /**
-     * Function deletes an item from the ArrayList task.
+     * Function deletes a member from the MemberList class.
      *
-     * @param tasks ArrayList of tasks
+     * @param members MemberList which contains list of members
      * @param query user input
      */
-    public static void deleteMember(ArrayList<Member> members, String query) {
+    public static void deleteMember(MemberList members, String query) {
         try {
-            Member referencedMember = members.get(memberNumber);
-            members.remove(memberNumber);
-            Ui.printDeletedMemberMessage(referencedMember);
+            int memberNumber = getMemberIndex(query);
+            Member member = members.deleteMember(memberNumber);
+            Ui.printDeletedMemberMessage(member);
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("There is no such member number...");
+        } catch (NumberFormatException e){
+            System.out.println("Please input a proper number...");
         }
     }
 
@@ -189,12 +402,108 @@ public class Parser {
     }
 
     public static void wrongInputTypeMessage() {
-        try {
-            throw new InvalidInputsException.MissingKeyword(Ui.printInvalidMessage());
-        } catch (InvalidInputsException.MissingKeyword exception) {
-            exception.printStackTrace();
-            System.out.println("Invalid keyword!!!");
+        Ui.printWrongInputMessage();
+    }
+
+    public static void deleteTraining(TrainingList trainings, String query) {
+        int trainingIndex = -1;
+
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            if (matcher.group().equals("/t")) {
+                trainingIndex = Integer.parseInt(words[wordIndex].trim());
+            }
+            wordIndex++;
         }
+
+        if (trainingIndex != -1) {
+            TrainingSchedule toDelete = trainings.deleteTrainingSchedule(trainingIndex);
+            Ui.printDeletedTrainingMessage(toDelete);
+        }
+
+    }
+
+    public static void editTraining(TrainingList trainings, String query) {
+        int index = -1;
+        String name = "";
+        String venue = "";
+        String time = "";
+
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            switch (matcher.group()){
+            case "/t":
+                index = Integer.parseInt(words[wordIndex].trim());
+                break;
+            case "/n":
+                name = words[wordIndex].trim();
+                break;
+            case "/a":
+                time = words[wordIndex].trim();
+                break;
+            case "/v":
+                venue = words[wordIndex].trim();
+                break;
+            }
+
+            wordIndex++;
+        }
+
+        if (index != -1) {
+            int listIndex = index - 1;
+            TrainingSchedule trainingToChange = trainings.getTrainingList().get(listIndex);
+            if (!name.equals("")) {
+                trainingToChange.setTrainingName(name);
+            }
+            if (!time.equals("")) {
+                trainingToChange.setTrainingTime(time);
+            }
+            if (!venue.equals("")) {
+                trainingToChange.setTrainingVenue(venue);
+            }
+
+            trainings.getTrainingList().set(listIndex,trainingToChange);
+        }
+
+    }
+
+    public static void deleteAttendance(AttendanceList attendanceList, String query) {
+        int attendanceIndex = -1;
+
+        String regex = "(\\/[a-z])+";
+
+        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        Matcher matcher = pattern.matcher(query);
+
+        String[] words = query.trim().split(regex);
+
+        int wordIndex = 1;
+        while (matcher.find()) {
+            if (matcher.group().equals("/t")) {
+                attendanceIndex = Integer.parseInt(words[wordIndex].trim());
+            }
+            wordIndex++;
+        }
+
+        if (attendanceIndex != -1) {
+            Attendance toDelete = attendanceList.deleteAttendance(attendanceIndex);
+            Ui.printDeletedAttendanceMessage(toDelete);
+        }
+
     }
 
     /**
@@ -202,13 +511,11 @@ public class Parser {
      */
     public static void waitForQuery() {
         String query = "";
-        Storage.loadTask();
         Scanner userInput = new Scanner(System.in);
         while (!query.equals("bye")) {
             System.out.print("=>");
             if (userInput.hasNextLine()) {
                 query = userInput.nextLine();
-                Storage.saveTask(query);
             }
             Entry.addEntry(query);
         }
