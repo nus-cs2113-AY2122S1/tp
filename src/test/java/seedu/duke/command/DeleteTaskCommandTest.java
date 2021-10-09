@@ -66,5 +66,4 @@ class DeleteTaskCommandTest {
         Command deleteOobTaskCommand = new DeleteTaskCommand(4);
         assertThrows(DukeException.class, () -> deleteOobTaskCommand.execute(ui, taskList, lessonList, storage));
     }
-
 }

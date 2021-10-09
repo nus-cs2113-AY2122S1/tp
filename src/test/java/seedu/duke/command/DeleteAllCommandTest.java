@@ -34,5 +34,4 @@ class DeleteAllCommandTest {
             fail();
         }
     }
-
 }
