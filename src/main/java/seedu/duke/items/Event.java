@@ -27,11 +27,23 @@ public class Event extends Item {
         return "event";
     }
 
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
+    }
+
     public String getVenue() {
         return venue;
     }
 
     public double getBudget() {
         return budget;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
     }
 }

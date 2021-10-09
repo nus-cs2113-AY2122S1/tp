@@ -26,4 +26,8 @@ public class Task extends Item {
     public LocalDateTime getDateValue() {
         return deadline;
     }
+
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
 }

@@ -78,7 +78,7 @@ public class AddCommand extends Command {
         }
         if (!response.contains(DATE_FLAG)) {
             throw new DukeException("Please add a deadline for your task using 'd/<deadline>' in the "
-                    + "format dd/MM/yyyy-HHmm. ");
+                    + "format dd-MM-yyyy HHmm. ");
         }
 
         itemTitle = retrieveItemAttribute(response, TITLE_FLAG);
@@ -98,7 +98,7 @@ public class AddCommand extends Command {
         }
         if (!response.contains(DATE_FLAG)) {
             throw new DukeException("Please add a date for your event using 'd/<date>' in the "
-                    + "format dd/MM/yyyy-HHmm. ");
+                    + "format dd-MM-yyyy HHmm. ");
         }
         if (!response.contains(VENUE_FLAG)) {
             throw new DukeException("Please add a venue for your event using 'v/<venue>'. ");

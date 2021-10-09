@@ -14,6 +14,14 @@ public abstract class Item {
         this.description = description;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getItemType() {
         return type;
     }
