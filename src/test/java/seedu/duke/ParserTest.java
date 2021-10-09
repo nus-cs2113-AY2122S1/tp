@@ -57,9 +57,8 @@ class ParserTest {
     void deleteMember() {
         final String string = "delete /m 1";
         final String expectedOutput = "The following member have been deleted\n"
-                + "Name: Tan Teck Hwee | Student Number: A0123456A | Gender: F | Phone Number: 98765432\r\n";
+                + "Name: Tan Teck Hwee | Student Number: A0123456A | Gender: F | Phone Number: 98765432\n";
         Parser.deleteMember(testMemberList, string);
-        //assertTrue(expectedOutput.equals(outContent.toString()));
         assertEquals(expectedOutput, outContent.toString());
     }
 
@@ -67,7 +66,7 @@ class ParserTest {
     void makeMemberEntry() {
         final String string = "add /m /n Ian Wang /s A0234567B /g M /p 98441232";
         final String expectedOutput = "Added a Member: Name: Ian Wang | Student Number: A0234567B | Gender: M | "
-                + "Phone Number: 98441232\r\n";
+                + "Phone Number: 98441232\n";
         Parser.makeMemberEntry(testMemberList, string);
         assertEquals(expectedOutput, outContent.toString());
     }
@@ -76,8 +75,8 @@ class ParserTest {
     void editMember() {
         final String string = "edit /m 1 /n Ian Wang /s A0234567B /g M /p 98441232";
         final String expectedOutput = "Edited member: Name: Tan Teck Hwee | Student Number: A0123456A | Gender: F | "
-                + "Phone Number: 98765432\r\n"
-                + "To become:  Name: Ian Wang | Student Number: A0234567B | Gender: M | Phone Number: 98441232\r\n";
+                + "Phone Number: 98765432\n"
+                + "To become:  Name: Ian Wang | Student Number: A0234567B | Gender: M | Phone Number: 98441232\n";
         Parser.editMember(testMemberList, string);
         assertEquals(expectedOutput, outContent.toString());
     }
