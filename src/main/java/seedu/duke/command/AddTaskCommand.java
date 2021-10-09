@@ -23,10 +23,6 @@ public class AddTaskCommand extends AddCommand {
         Task newTask = new Task(title, dayOfTheWeek, information);
         taskList.addTask(newTask);
         ui.printTaskAdded(newTask, taskList.getSize());
-        try {
-            storage.saveData(taskList, lessonList);
-        } catch (IOException e) {
-            throw new DukeException(e.toString());
-        }
+        storage.saveData(taskList, lessonList);
     }
 }
