@@ -45,6 +45,9 @@ public abstract class ContactParser {
         assert destructuredDetails.length == NUMBER_OF_DETAILS;
         String flag = destructuredDetails[FLAG_INDEX_IN_DETAILS];
         String detailToStore = destructuredDetails[DETAIL_INDEX_IN_DETAILS].trim();
+        if (detailToStore.equals("null")) {
+            throw new ForbiddenDetailException();
+        }
         indexToStore = getIndexToStore(flag);
         contactDetails[indexToStore] = detailToStore;
     }
