@@ -20,7 +20,7 @@ public class AddmodCommandParser {
         return new AddmodCommand(module);
     }
 
-    private Module searchForModule(String moduleCode, ArrayList<Module> moduleMasterList) {
+    Module searchForModule(String moduleCode, ArrayList<Module> moduleMasterList) {
         for (Module module : moduleMasterList) {
             if (moduleCode.equals(module.getModuleCode())) {
                 return module;

@@ -3,9 +3,9 @@ package seedu.duke.modules;
 public class Module {
     protected String moduleCode;
     protected String moduleName;
-    protected int moduleCredits;
+    protected double moduleCredits;
 
-    public Module(String moduleCode, String moduleName, int moduleCredits) {
+    public Module(String moduleCode, String moduleName, double moduleCredits) {
         this.moduleCode = moduleCode;
         this.moduleName = moduleName;
         this.moduleCredits = moduleCredits;
@@ -19,7 +19,7 @@ public class Module {
         return moduleName;
     }
 
-    public int getModuleCredits() {
+    public double getModuleCredits() {
         return moduleCredits;
     }
 
