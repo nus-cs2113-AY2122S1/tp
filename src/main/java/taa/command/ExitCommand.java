@@ -12,7 +12,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList modules, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
         if (!argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }

@@ -23,12 +23,12 @@ public class DeleteStudentCommand extends Command {
     /**
      * Deletes a student from a module.
      *
-     * @param modules The list of modules
+     * @param moduleList The list of modules
      * @param ui The ui instance to handle interactions with the user
      * @throws TaaException If the user inputs an invalid command
      */
     @Override
-    public void execute(ModuleList modules, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -38,13 +38,13 @@ public class DeleteStudentCommand extends Command {
         }
 
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = modules.getModule(moduleCode);
+        Module module = moduleList.getModule(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
-        if (!Util.isInteger(studentIndexInput)) {
+        if (!Util.isStringInteger(studentIndexInput)) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;

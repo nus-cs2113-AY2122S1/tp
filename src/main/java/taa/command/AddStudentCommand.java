@@ -21,14 +21,14 @@ public class AddStudentCommand extends Command {
     }
 
     /**
-     * Adds a students to a particular module.
+     * Adds a student to a particular module.
      *
-     * @param modules The list of modules
+     * @param moduleList The list of modules
      * @param ui The ui instance to handle interactions with the user
      * @throws TaaException If the user inputs an invalid command
      */
     @Override
-    public void execute(ModuleList modules, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -38,7 +38,7 @@ public class AddStudentCommand extends Command {
         }
 
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = modules.getModule(moduleCode);
+        Module module = moduleList.getModule(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }

@@ -5,11 +5,11 @@ import taa.exception.TaaException;
 import taa.module.ModuleList;
 
 public class Taa {
-    private final ModuleList modules;
+    private final ModuleList moduleList;
     private final Ui ui;
 
     public Taa() {
-        this.modules = new ModuleList();
+        this.moduleList = new ModuleList();
         this.ui = new Ui();
     }
 
@@ -22,7 +22,7 @@ public class Taa {
 
             try {
                 Command command = Parser.parseUserInput(userInput);
-                command.execute(modules, ui);
+                command.execute(moduleList, ui);
                 isExit = command.isExit();
             } catch (TaaException e) {
                 ui.printException(e.getMessage());

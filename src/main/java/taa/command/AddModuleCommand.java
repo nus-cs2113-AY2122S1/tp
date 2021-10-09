@@ -21,7 +21,7 @@ public class AddModuleCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList modules, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -37,9 +37,9 @@ public class AddModuleCommand extends Command {
 
         String name = argumentMap.get(KEY_MODULE_NAME);
         Module module = new Module(moduleCode, name);
-        modules.addModule(module);
+        moduleList.addModule(module);
 
-        ui.printMessage(String.format(MESSAGE_FORMAT_MODULE_ADDED, module, modules.getSize()));
+        ui.printMessage(String.format(MESSAGE_FORMAT_MODULE_ADDED, module, moduleList.getSize()));
     }
 
     @Override

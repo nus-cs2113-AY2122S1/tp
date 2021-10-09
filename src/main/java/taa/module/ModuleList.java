@@ -51,7 +51,7 @@ public class ModuleList {
      */
     public Module getModule(String code) {
         for (int i = 0; i < getSize(); i += 1) {
-            Module module = getModuleAt(i);
+            Module module = modules.get(i);
             if (module.getCode().equals(code)) {
                 return module;
             }
@@ -67,7 +67,7 @@ public class ModuleList {
             stringBuilder.append("\n");
             stringBuilder.append(i + 1);
             stringBuilder.append(". ");
-            stringBuilder.append(getModuleAt(i));
+            stringBuilder.append(modules.get(i));
         }
 
         return stringBuilder.toString();

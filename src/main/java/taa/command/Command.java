@@ -51,7 +51,7 @@ public abstract class Command {
         return isExit;
     }
 
-    public abstract void execute(ModuleList modules, Ui ui) throws TaaException;
+    public abstract void execute(ModuleList moduleList, Ui ui) throws TaaException;
 
     protected abstract String getUsageMessage();
 

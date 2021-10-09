@@ -1,16 +1,16 @@
 package taa;
 
-import taa.command.AddStudentCommand;
-import taa.command.Command;
 import taa.command.AddModuleCommand;
+import taa.command.Command;
 import taa.command.ExitCommand;
 import taa.command.ListModulesCommand;
+import taa.command.AddAssessmentCommand;
+import taa.command.AddStudentCommand;
+import taa.command.DeleteStudentCommand;
+import taa.command.EditStudentCommand;
 import taa.command.FindStudentCommand;
 import taa.command.ListStudentsCommand;
-import taa.command.EditStudentCommand;
-import taa.command.DeleteStudentCommand;
 import taa.exception.TaaException;
-
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,6 +56,10 @@ public class Parser {
 
         case Command.COMMAND_FIND_STUDENT:
             command = new FindStudentCommand(argument);
+            break;
+
+        case Command.COMMAND_ADD_ASSESSMENT:
+            command = new AddAssessmentCommand(argument);
             break;
 
         default:

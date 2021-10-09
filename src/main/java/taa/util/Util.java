@@ -1,7 +1,7 @@
 package taa.util;
 
 public class Util {
-    public static boolean isInteger(String string) {
+    public static boolean isStringInteger(String string) {
         boolean isInt;
         try {
             int value = Integer.parseInt(string);
@@ -11,5 +11,17 @@ public class Util {
         }
 
         return isInt;
+    }
+
+    public static boolean isStringDouble(String string) {
+        boolean isDouble;
+        try {
+            double value = Double.parseDouble(string);
+            isDouble = true;
+        } catch (NumberFormatException e) {
+            isDouble = false;
+        }
+
+        return isDouble;
     }
 }
