@@ -9,6 +9,8 @@ import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -30,7 +32,7 @@ class DeleteAllCommandTest {
             deleteAllCommand.execute(ui, taskList, lessonList, storage);
             assertTrue(taskList.isEmpty());
             assertTrue(lessonList.isEmpty());
-        } catch (DukeException e) {
+        } catch (IOException | DukeException e) {
             // fail when either the task or lesson list is not empty
             fail();
         }

@@ -40,7 +40,7 @@ public class Duke {
                 Command command = Parser.parse(userResponse);
                 command.execute(ui, taskList, lessonList, storage);
                 isExit = command.isExit();
-            } catch (DukeException e) {
+            } catch (DukeException | IOException e) {
                 ui.printMessage(e.toString());
             }
         }

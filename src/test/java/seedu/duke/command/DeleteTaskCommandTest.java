@@ -9,6 +9,8 @@ import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -29,7 +31,7 @@ class DeleteTaskCommandTest {
             Command deleteAllTasksCommand = new DeleteTaskCommand();
             deleteAllTasksCommand.execute(ui, taskList, lessonList, storage);
             assertTrue(taskList.isEmpty()); // task list should be empty
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             // fail when the task list has any items
             fail();
         }
@@ -49,7 +51,7 @@ class DeleteTaskCommandTest {
             Command deleteTaskCommand = new DeleteTaskCommand(1);
             deleteTaskCommand.execute(ui, taskList, lessonList, storage);
             assertEquals(1, taskList.getSize());
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             // fail when there are more or tasks in the task list than there should be (should be 1 item)
             fail();
         }
