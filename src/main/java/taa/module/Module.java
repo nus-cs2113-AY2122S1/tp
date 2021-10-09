@@ -38,7 +38,7 @@ public class Module {
     }
 
     public ArrayList<Student> getStudents() {
-        return new ArrayList<>(students);
+        return students;
     }
 
     public HashMap<String, Double> getAssessments() {

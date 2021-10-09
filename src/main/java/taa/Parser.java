@@ -5,6 +5,11 @@ import taa.command.Command;
 import taa.command.AddModuleCommand;
 import taa.command.ExitCommand;
 import taa.command.ListModulesCommand;
+import taa.command.FindStudentCommand;
+import taa.command.ListStudentsCommand;
+import taa.command.EditStudentCommand;
+import taa.command.DeleteStudentCommand;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +39,22 @@ public class Parser {
 
         case Command.COMMAND_ADD_STUDENT:
             command = new AddStudentCommand(argument);
+            break;
+
+        case Command.COMMAND_EDIT_STUDENT:
+            command = new EditStudentCommand(argument);
+            break;
+
+        case Command.COMMAND_DELETE_STUDENT:
+            command = new DeleteStudentCommand(argument);
+            break;
+
+        case Command.COMMAND_LIST_STUDENTS:
+            command = new ListStudentsCommand(argument);
+            break;
+
+        case Command.COMMAND_FIND_STUDENT:
+            command = new FindStudentCommand(argument);
             break;
 
         default:

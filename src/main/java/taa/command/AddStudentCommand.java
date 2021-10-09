@@ -15,6 +15,13 @@ public class AddStudentCommand extends Command {
         super(argument, ADD_STUDENT_ARGUMENT_KEYS);
     }
 
+    /**
+     * Adds a students to a particular module.
+     *
+     * @param modules The list of modules
+     * @param ui The ui instance to handle interactions with the user
+     * @throws CustomException If the user inputs an invalid command
+     */
     @Override
     public void execute(ModuleList modules, Ui ui) throws CustomException {
         if (argument.isEmpty()) {
@@ -36,9 +43,12 @@ public class AddStudentCommand extends Command {
         String studentName = argumentMap.get("s");
         String studentID = argumentMap.get("i");
         Student student = new Student(studentName, studentID);
-        for (int i = 0; i < modules.getSize(); i += 1) {
-            //TODO find module in modules and add student to module
+        Module module = modules.getModule(moduleCode);
+        if (module == null) {
+            // TODO module not found message
+            throw new CustomException("Module not found");
         }
+        module.addStudent(student);
 
         ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, studentName, studentID, moduleCode));
     }
