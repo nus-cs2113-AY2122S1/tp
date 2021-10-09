@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
     private int taskIndex;
 
     /**
-     * Creates a new DoneCommand for a task
+     * Creates a new DoneCommand for a task.
      * @param taskIndex index of the task to mark as done
      */
     public DoneCommand(int taskIndex) {
