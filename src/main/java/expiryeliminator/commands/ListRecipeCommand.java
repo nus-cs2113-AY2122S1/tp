@@ -13,13 +13,18 @@ public class ListRecipeCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "list recipes";
 
-    private static final String SHOW_WHOLE_RECIPE_LIST = "Here are the recipes in your recipe list:\n" + "\n%1$s\n"
+    private static final String MESSAGE_RECIPE_LIST = "Here are the recipes in your recipe list:\n" + "\n%1$s\n"
             + "You have a total of %2$s recipe(s)";
 
 
 
     @Override
     public String execute(IngredientList ingredientList, RecipeList recipeList) {
-        return String.format(SHOW_WHOLE_RECIPE_LIST, recipeList.printWholeRecipeList(), recipeList.size());
+        if(recipeList.size() == 0) {
+            IncorrectCommand incorrectCommand = new IncorrectCommand("The recipe list is currently empty!");
+            return incorrectCommand.execute(ingredientList, null);
+        } else {
+            return String.format(MESSAGE_RECIPE_LIST, recipeList.getWholeRecipeList(), recipeList.size());
+        }
     }
 }

@@ -59,7 +59,7 @@ public class RecipeList {
      *
      * @return returns a string representing all the recipes.
      */
-    public String printWholeRecipeList() {
+    public String getWholeRecipeList() {
         String wholeRecipeList = "";
         for (Recipe recipe : recipes.values()) {
             wholeRecipeList = wholeRecipeList + recipe.toString() + "\n";
