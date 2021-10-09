@@ -80,7 +80,7 @@ public class Parser {
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -108,7 +108,7 @@ public class Parser {
         case EXIT_KEYWORD:
             return prepareExit(arguments);
         default:
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
     }
 
@@ -118,9 +118,8 @@ public class Parser {
      */
     private Command prepareAddExpense(String arguments) {
         final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
-
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
         
         String expenseDescription = matcher.group("description").trim();
@@ -129,7 +128,7 @@ public class Parser {
         try {
             expenseAmount = Double.parseDouble(matcher.group("amount"));
         } catch (NumberFormatException e) {
-            return new InvalidCommand();
+            return new InvalidCommand("Please input a valid amount.");
         }
         
         //need to create constructor for Expense
@@ -143,9 +142,8 @@ public class Parser {
      */
     private Command prepareAddIncome(String arguments) {
         final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments.trim());
-
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
 
         String incomeDescription = matcher.group("description").trim();
@@ -154,7 +152,7 @@ public class Parser {
         try {
             incomeAmount = Double.parseDouble(matcher.group("amount"));
         } catch (NumberFormatException e) {
-            return new InvalidCommand();
+            return new InvalidCommand("Please input a valid amount.");
         }
         
         //need to add the constructor for Income
@@ -168,16 +166,15 @@ public class Parser {
      */
     private Command prepareDeleteExpense(String arguments) {
         final Matcher matcher = DELETE_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
-
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
         
         try {
             int deleteIndex = Integer.parseInt(matcher.group("index"));
             return new DeleteExpenseCommand(deleteIndex);
         } catch (NumberFormatException e) {
-            return new InvalidCommand();
+            return new InvalidCommand("Please input a valid index.");
         }
     }
 
@@ -187,16 +184,15 @@ public class Parser {
      */
     private Command prepareDeleteIncome(String arguments) {
         final Matcher matcher = DELETE_INCOME_ARGUMENT_FORMAT.matcher(arguments.trim());
-
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
 
         try {
             int deleteIndex = Integer.parseInt(matcher.group("index"));
             return new DeleteIncomeCommand(deleteIndex);
         } catch (NumberFormatException e) {
-            return new InvalidCommand();
+            return new InvalidCommand("Please input a valid index.");
         }
     }
 
@@ -204,34 +200,34 @@ public class Parser {
         if (arguments.trim().isBlank()) {
             return new ListExpenseCommand();
         } 
-        return new InvalidCommand();
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
     }
 
     private Command prepareListIncome(String arguments) {
         if (arguments.trim().isBlank()) {
             return new ListIncomeCommand();
         }
-        return new InvalidCommand();
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
     }
     
     private Command prepareTotalExpense(String arguments) {
         if (arguments.trim().isBlank()) {
             return new TotalExpenseCommand();
         }
-        return new InvalidCommand();
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
     }
 
     private Command prepareTotalIncome(String arguments) {
         if (arguments.trim().isBlank()) {
             return new TotalIncomeCommand();
         }
-        return new InvalidCommand();
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
     }
     
     private Command prepareExit(String arguments) {
         if (arguments.trim().isBlank()) {
             return new ExitCommand();
         }
-        return new InvalidCommand();
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
     }
 }
