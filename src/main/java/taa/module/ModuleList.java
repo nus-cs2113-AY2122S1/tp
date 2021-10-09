@@ -66,7 +66,7 @@ public class ModuleList {
         for (int i = 0; i < getSize(); i += 1) {
             stringBuilder.append("\n");
             stringBuilder.append(i + 1);
-            stringBuilder.append(": ");
+            stringBuilder.append(". ");
             stringBuilder.append(getModuleAt(i));
         }
 
