@@ -6,6 +6,7 @@ import seedu.duke.items.Task;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Ui {
     private static final String HELP_MESSAGE = "Here's some tips on how to use me!\n\n"
@@ -41,14 +42,6 @@ public class Ui {
         System.out.println("______________________________________________________________________");
     }
 
-    public static void printList(ArrayList<? extends Item> list) {
-        for (int i = 0; i < list.size(); i++) {
-            Item item = list.get(i);
-            int itemIndex = i + 1;
-            System.out.println(itemIndex + "." + item);
-        }
-    }
-
     public static void promptForDescription() {
         System.out.println("Please add an optional description for your item and press enter.");
         printLineBreak();
@@ -70,6 +63,10 @@ public class Ui {
                 event.getTitle(), Duke.eventList.size());
     }
 
+    public static void printGreetingMessage() {
+        System.out.println("Greetings mortal. How may you be served today?\n" + getLineBreak());
+    }
+
     public static String getByeMessage() {
         return "You will be missed!!";
     }
@@ -77,4 +74,24 @@ public class Ui {
     public static void displayUserGuide() {
         System.out.println(HELP_MESSAGE);
     }
+
+    public static void printList(ArrayList<Item> list) {
+        AtomicInteger i = new AtomicInteger();
+        list.forEach(item -> System.out.println(i.getAndIncrement() + 1 + ". " + item));
+    }
+
+    public static void printEvent(Event item) {
+        System.out.println(item.getTitle() + System.lineSeparator()
+                + Parser.convertDateTime(item.getDateValue()) + System.lineSeparator()
+                + item.getDescription() + System.lineSeparator()
+                + item.getVenue() + System.lineSeparator()
+                + item.getBudget());
+    }
+
+    public static void printTask(Task item) {
+        System.out.println(item.getTitle() + System.lineSeparator()
+                + Parser.convertDateTime(item.getDateValue()) + System.lineSeparator()
+                + item.getDescription());
+    }
+
 }
