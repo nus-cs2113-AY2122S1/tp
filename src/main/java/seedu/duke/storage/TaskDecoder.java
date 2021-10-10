@@ -1,7 +1,9 @@
 package seedu.duke.storage;
 
+import seedu.duke.Parser;
 import seedu.duke.items.Task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +24,9 @@ public class TaskDecoder {
     private static Task decodeTaskFromString(String encodedTask) {
         String[] taskDetails = encodedTask.trim().split(Task.TASK_DATA_ARGS_DELIMITER);
         String taskTitle = taskDetails[INDEX_OF_TILE];
-        String taskDeadline = taskDetails[INDEX_OF_DEADLINE];
+        LocalDateTime taskDeadline = Parser.convertDateTime(taskDetails[INDEX_OF_DEADLINE]);
         String taskDescription = taskDetails[INDEX_OF_DESCRIPTION];
 
-        return new Task(taskTitle, taskDeadline, taskDescription);
+        return new Task(taskTitle, taskDescription, taskDeadline);
     }
 }

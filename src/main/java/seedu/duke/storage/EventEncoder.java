@@ -18,7 +18,7 @@ public class EventEncoder {
                 + " | "
                 + event.getDescription()
                 + " | "
-                + event.getDateValue()
+                + event.getDateTime()
                 + " | "
                 + event.getVenue()
                 + " | "

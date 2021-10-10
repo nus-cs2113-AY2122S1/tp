@@ -57,7 +57,7 @@ public class Parser {
     public static void bubbleSortTask(ArrayList<Item> list) {
         for (int j = 0; j < list.size() - 1; j++) {
             for (int i = 0; i < list.size() - j - 1; i++) {
-                if (list.get(i + 1).getDateValue().isBefore(list.get(i).getDateValue())) {
+                if (list.get(i + 1).getDateTime().isBefore(list.get(i).getDateTime())) {
                     swap(i, list);
                 }
             }

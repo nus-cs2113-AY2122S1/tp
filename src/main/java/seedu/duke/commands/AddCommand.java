@@ -1,10 +1,14 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
+import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
 
@@ -18,7 +22,7 @@ public class AddCommand extends Command {
     protected static String itemType;
     protected static String itemTitle;
     protected static String itemDescription;
-    protected static String itemDate;
+    protected static LocalDateTime itemDateTime;
 
     protected static String eventVenue;
     protected static int eventBudget;
@@ -86,9 +90,14 @@ public class AddCommand extends Command {
             throw new DukeException("Task title cannot be empty, please re-enter your task. ");
         }
 
-        itemDate = retrieveItemAttribute(response, DATE_FLAG);
-        if (itemDate.isBlank()) {
+        String taskDeadline = retrieveItemAttribute(response, DATE_FLAG);
+        if (taskDeadline.isBlank()) {
             throw new DukeException("Task deadline cannot be empty, please re-enter your task. ");
+        }
+        try {
+            itemDateTime = Parser.convertDateTime(taskDeadline);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please use this format for the deadline 'dd-MM-yyyy HHmm'. ");
         }
     }
 
@@ -112,9 +121,14 @@ public class AddCommand extends Command {
             throw new DukeException("Event title cannot be empty, please re-enter your event. ");
         }
 
-        itemDate = retrieveItemAttribute(response, DATE_FLAG);
-        if (itemDate.isBlank()) {
+        String eventDateTime = retrieveItemAttribute(response, DATE_FLAG);
+        if (eventDateTime.isBlank()) {
             throw new DukeException("Event date cannot be empty, please re-enter your event. ");
+        }
+        try {
+            itemDateTime = Parser.convertDateTime(eventDateTime);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please use this format for the date and time 'dd-MM-yyyy HHmm'. ");
         }
 
         eventVenue = retrieveItemAttribute(response, VENUE_FLAG);
@@ -142,13 +156,13 @@ public class AddCommand extends Command {
             itemDescription = Ui.readInput();
             Ui.linebreak();
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
-                Task task = new Task(itemTitle, itemDescription, itemDate);
+                Task task = new Task(itemTitle, itemDescription, itemDateTime);
                 addToTaskList(task);
                 return new CommandResult("Task added: " + itemTitle + System.lineSeparator()
                         + "Total number of tasks = " + Duke.taskList.size());
             }
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
-                Event event = new Event(itemTitle, itemDescription, itemDate, eventVenue, eventBudget);
+                Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);
                 addToEventList(event);
                 return new CommandResult("Event added: " + itemTitle + System.lineSeparator()
                         + "Total number of events = " + Duke.eventList.size());

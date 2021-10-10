@@ -1,7 +1,9 @@
 package seedu.duke.storage;
 
+import seedu.duke.Parser;
 import seedu.duke.items.Event;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class EventDecoder {
     private static Event decodeEventFromString(String encodedEvent) {
         String[] eventDetails = encodedEvent.trim().split(Event.EVENT_DATA_ARGS_DELIMITER);
         String eventTitle = eventDetails[INDEX_OF_TITLE];
-        String eventDateTime = eventDetails[INDEX_OF_DATETIME];
+        LocalDateTime eventDateTime = Parser.convertDateTime(eventDetails[INDEX_OF_DATETIME]);
         String eventVenue = eventDetails[INDEX_OF_VENUE];
         String eventDescription = eventDetails[INDEX_OF_DESCRIPTION];
         int eventBudget = Integer.parseInt(eventDetails[INDEX_OF_BUDGET]);

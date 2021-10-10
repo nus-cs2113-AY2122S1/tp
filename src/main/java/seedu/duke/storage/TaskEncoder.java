@@ -18,6 +18,6 @@ public class TaskEncoder {
                 + " | "
                 + task.getDescription()
                 + " | "
-                + task.getDateValue();
+                + task.getDateTime();
     }
 }
