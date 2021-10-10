@@ -7,7 +7,7 @@ import java.time.LocalDate;
  */
 public class Ingredient {
     private final String name;
-    private final int quantity;
+    private int quantity;
     private final LocalDate expiryDate;
 
     /**
@@ -39,6 +39,15 @@ public class Ingredient {
      */
     public int getQuantity() {
         return quantity;
+    }
+
+    /**
+     * Sets the quantity of the ingredient.
+     *
+     * @param quantity Quantity of the ingredient.
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     /**
