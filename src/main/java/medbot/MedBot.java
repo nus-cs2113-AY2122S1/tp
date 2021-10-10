@@ -19,7 +19,7 @@ public class MedBot {
         ui.printWelcomeMessage();
         try {
             storage = new Storage();
-            storage.loadStorage(patientList);
+            ui.printOutput(storage.loadStorage(patientList));
         } catch (FileNotFoundException | MedBotException e) {
             System.out.println(e.getMessage());
         }
