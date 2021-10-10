@@ -11,7 +11,7 @@ class AssessmentListTest {
         String inputString = "c/CS2113T a/Midterms w/20";
         AssessmentList assessments = new AssessmentList();
         assessments.addAssessment(new Assessment("Midterms", 20));
-        assertEquals("Midterms", assessments.getAssessment("Midterms").getAssessmentName());
+        assertEquals("Midterms", assessments.getAssessment("Midterms").getName());
         assertEquals(20, assessments.getAssessment("Midterms").getWeightage());
     }
 }

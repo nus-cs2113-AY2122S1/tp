@@ -1,16 +1,16 @@
 package taa.assessment;
 
 public class Assessment {
-    private String assessmentName;
+    private String name;
     private double weightage;
 
-    public Assessment(String assessmentName, double weightage) {
-        this.assessmentName = assessmentName;
+    public Assessment(String name, double weightage) {
+        this.name = name;
         this.weightage = weightage;
     }
 
-    public String getAssessmentName() {
-        return assessmentName;
+    public String getName() {
+        return name;
     }
 
     public double getWeightage() {
@@ -20,13 +20,12 @@ public class Assessment {
     /**
      * Format the string to print out the assessment.
      * For Midterms with 20% weightage,
-     * this will be printed: Midterms
-     *                       Weightage: 20.0
+     * this will be printed: Midterms (20.0%)
      *
      * @return Assessment string.
      */
     @Override
     public String toString() {
-        return String.format("%s\n  Weightage: %s", assessmentName, weightage);
+        return String.format("%s (%.1f%%)", name, weightage);
     }
 }

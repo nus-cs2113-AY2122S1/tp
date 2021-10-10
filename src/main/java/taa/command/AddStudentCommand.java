@@ -1,15 +1,20 @@
 package taa.command;
 
-import taa.CustomException;
+import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
 
 public class AddStudentCommand extends Command {
+    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_STUDENT_ID = "i";
+    private static final String KEY_STUDENT_NAME = "n";
+    private static final String[] ADD_STUDENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_ID, KEY_STUDENT_NAME};
 
-    private static final String MESSAGE_STUDENT_ADDED_FORMAT = "Student %s, %s has been added to %s";
-    private static final String[] ADD_STUDENT_ARGUMENT_KEYS = {"c","s","i"};
+    private static final String MESSAGE_FORMAT_ADD_STUDENT_USAGE = "Usage: %s "
+            + "%s/<MODULE_CODE> %s/<STUDENT_ID> %s/<STUDENT_NAME>";
+    private static final String MESSAGE_STUDENT_ADDED_FORMAT = "Student has been added to %s:\n  %s";
 
     public AddStudentCommand(String argument) {
         super(argument, ADD_STUDENT_ARGUMENT_KEYS);
@@ -18,38 +23,42 @@ public class AddStudentCommand extends Command {
     /**
      * Adds a student to a particular module.
      *
-     * @param modules The list of modules
+     * @param moduleList The list of modules
      * @param ui The ui instance to handle interactions with the user
-     * @throws CustomException If the user inputs an invalid command
+     * @throws TaaException If the user inputs an invalid command
      */
     @Override
-    public void execute(ModuleList modules, Ui ui) throws CustomException {
+    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
         if (argument.isEmpty()) {
-            // TODO Usage format message
-            throw new CustomException("");
+            throw new TaaException(getUsageMessage());
         }
 
         if (!checkArgumentMap()) {
-            // TODO Invalid/missing arguments message
-            throw new CustomException("");
+            throw new TaaException(getMissingArgumentMessage());
         }
 
-        String moduleCode = argumentMap.get("c");
-        if (moduleCode.contains(" ")) {
-            // TODO Invalid module code message
-            throw new CustomException("");
-        }
-
-        String studentName = argumentMap.get("s");
-        String studentID = argumentMap.get("i");
-        Student student = new Student(studentName, studentID);
-        Module module = modules.getModule(moduleCode);
+        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
+        Module module = moduleList.getModule(moduleCode);
         if (module == null) {
-            // TODO module not found message
-            throw new CustomException("Module not found");
+            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
+
+        String studentID = argumentMap.get(KEY_STUDENT_ID);
+        String studentName = argumentMap.get(KEY_STUDENT_NAME);
+        Student student = new Student(studentID, studentName);
         module.addStudent(student);
 
-        ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, studentName, studentID, moduleCode));
+        ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, moduleCode, student));
+    }
+
+    @Override
+    protected String getUsageMessage() {
+        return String.format(
+                MESSAGE_FORMAT_ADD_STUDENT_USAGE,
+                COMMAND_ADD_STUDENT,
+                KEY_MODULE_CODE,
+                KEY_STUDENT_ID,
+                KEY_STUDENT_NAME
+        );
     }
 }

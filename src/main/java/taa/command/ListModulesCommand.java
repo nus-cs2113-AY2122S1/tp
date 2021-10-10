@@ -1,6 +1,6 @@
 package taa.command;
 
-import taa.CustomException;
+import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.ModuleList;
 
@@ -12,16 +12,23 @@ public class ListModulesCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList modules, Ui ui) throws CustomException {
+    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
         if (!argument.isEmpty()) {
-            // TODO Usage format message
-            throw new CustomException("");
+            throw new TaaException(getUsageMessage());
         }
 
-        if (modules.getSize() == 0) {
+        if (moduleList.getSize() == 0) {
             ui.printMessage(MESSAGE_LIST_EMPTY);
         } else {
-            ui.printMessage(modules.toString());
+            ui.printMessage(moduleList.toString());
         }
+    }
+
+    @Override
+    protected String getUsageMessage() {
+        return String.format(
+                MESSAGE_FORMAT_GENERIC_USAGE,
+                COMMAND_LIST_MODULES
+        );
     }
 }

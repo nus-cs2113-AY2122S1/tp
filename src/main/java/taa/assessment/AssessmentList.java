@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class AssessmentList {
     private static final double MAX_ASSESSMENT_WEIGHTAGE = 100;
-    private static final String MESSAGE_ASSESSMENT_LIST_HEADER = "Assessment List:";
 
     private final ArrayList<Assessment> assessments;
 
@@ -18,23 +17,26 @@ public class AssessmentList {
      * or total weightage exceed MAX_ASSESSMENT_WEIGHTAGE after adding.
      *
      * @param assessment The assessment object to be added.
+     * @return tue if success, else false.
      */
-    public void addAssessment(Assessment assessment) {
-        boolean isValidAssessment = true;
-        double totalWeightage = 0;
-        for (Assessment a : assessments) {
-            totalWeightage += a.getWeightage();
-            if (a.getAssessmentName().equalsIgnoreCase(assessment.getAssessmentName())) {
-                isValidAssessment = false;
-            }
-        }
-        if ((totalWeightage + assessment.getWeightage()) > MAX_ASSESSMENT_WEIGHTAGE) {
-            isValidAssessment = false;
+    public boolean addAssessment(Assessment assessment) {
+        if (assessment.getWeightage() > MAX_ASSESSMENT_WEIGHTAGE) {
+            return false;
         }
 
-        if (isValidAssessment) {
-            assessments.add(assessment);
+        double totalWeightage = 0;
+        for (Assessment a : assessments) {
+            if (a.getName().equalsIgnoreCase(assessment.getName())) {
+                return false;
+            }
         }
+
+        if ((totalWeightage + assessment.getWeightage()) > MAX_ASSESSMENT_WEIGHTAGE) {
+            return false;
+        }
+
+        assessments.add(assessment);
+        return true;
     }
 
     public boolean isValidIndex(int index) {
@@ -50,9 +52,9 @@ public class AssessmentList {
     }
 
     public Assessment getAssessment(String assessmentName) {
-        for (int i = 0; i < assessments.size(); i += 1) {
-            Assessment assessment = getAssessmentAt(i);
-            if (assessment.getAssessmentName().equalsIgnoreCase(assessmentName)) {
+        for (Assessment assessment : assessments) {
+            String name = assessment.getName();
+            if (name.equalsIgnoreCase(assessmentName)) {
                 return assessment;
             }
         }
@@ -60,25 +62,11 @@ public class AssessmentList {
         return null;
     }
 
-    public int getSize() {
-        return assessments.size();
+    public ArrayList<Assessment> getAssessments() {
+        return new ArrayList<>(assessments);
     }
 
-    /**
-     * Format the string to print out all the assessments.
-     *
-     * @return Assessment list string.
-     */
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder(MESSAGE_ASSESSMENT_LIST_HEADER);
-        for (int i = 0; i < getSize(); i += 1) {
-            stringBuilder.append("\n");
-            stringBuilder.append(i + 1);
-            stringBuilder.append(": ");
-            stringBuilder.append(getAssessmentAt(i));
-        }
-
-        return stringBuilder.toString();
+    public int getSize() {
+        return assessments.size();
     }
 }

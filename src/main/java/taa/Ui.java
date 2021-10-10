@@ -9,7 +9,7 @@ public class Ui {
     private static final String MESSAGE_WELCOME = "Welcome\nWhat can I do for you?";
     private static final String MESSAGE_EXIT = "Bye. Hope to see you again soon!";
 
-    private static final String MESSAGE_EXCEPTION_FORMAT = "An exception has occurred:\n%s";
+    private static final String MESSAGE_FORMAT_EXCEPTION = "An exception has occurred:\n%s";
 
     private final Scanner scanner;
 
@@ -63,6 +63,6 @@ public class Ui {
      * @param message The message to print.
      */
     public void printException(String message) {
-        printMessage(String.format(MESSAGE_EXCEPTION_FORMAT, message));
+        printMessage(String.format(MESSAGE_FORMAT_EXCEPTION, message));
     }
 }
