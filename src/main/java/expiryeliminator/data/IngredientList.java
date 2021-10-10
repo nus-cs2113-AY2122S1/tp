@@ -34,6 +34,20 @@ public class IngredientList {
         ingredients.put(ingredient.getName(), ingredient);
     }
 
+    /**
+     * Removes ingredient from the ingredient list.
+     *
+     * @param ingredientName Name of ingredient to be removed.
+     * @return Ingredient that was removed.
+     */
+    public Ingredient remove(String ingredientName) throws NotFoundException {
+        final Ingredient ingredient = ingredients.remove(ingredientName);
+        if (ingredient == null) {
+            throw new NotFoundException();
+        }
+        return ingredient;
+    }
+
     public Collection<Ingredient> getIngredients() {
         return ingredients.values();
     }
