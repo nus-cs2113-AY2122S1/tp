@@ -1,12 +1,13 @@
 package seedu.traveller;
 
 import seedu.traveller.commands.Command;
+import seedu.traveller.commands.DeleteCommand;
+import seedu.traveller.commands.EditCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.NewCommand;
 import seedu.traveller.commands.ViewAllCommand;
-import seedu.traveller.commands.DeleteCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
-import seedu.traveller.exceptions.InvalidNewFormatException;
+import seedu.traveller.exceptions.InvalidFormatException;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.mapper.Dijkstra;
 import seedu.traveller.mapper.EmptyVertexException;
@@ -35,7 +36,20 @@ public class ParserTrip {
                 List<Vertex> path = Dijkstra.run(s, t);
                 command = new NewCommand(tripName, origin, destination, path);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InvalidNewFormatException();
+                throw new InvalidFormatException(userCommand);
+            }
+            break;
+        case "edit":
+            try {
+                String tripName = userInput[1];
+                String origin = userInput[2];
+                String destination = userInput[3];
+                Vertex s = GraphList.findVertex(origin);
+                Vertex t = GraphList.findVertex(destination);
+                List<Vertex> path = Dijkstra.run(s, t);
+                command = new EditCommand(tripName, origin, destination, path);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new InvalidFormatException(userCommand);
             }
             break;
         case "delete":
