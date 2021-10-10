@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.storage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

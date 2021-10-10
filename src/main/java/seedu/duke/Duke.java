@@ -1,76 +1,85 @@
 package seedu.duke;
 
-import java.util.Scanner;
+import seedu.duke.employee.Employee;
+import seedu.duke.employee.EmployeeList;
+import seedu.duke.employee.EmployeeParser;
+import seedu.duke.ingredient.IngredientList;
+import seedu.duke.ingredient.IngredientParser;
+import seedu.duke.menu.MenuList;
+import seedu.duke.menu.MenuParser;
 
+import java.util.Scanner;
 
 public class Duke {
 
-//    private Storage storage;
-    private TaskList tasksList = new TaskList();
-    private Ui ui;
-
-//    /**
-//     * Constructor for Duke class.
-//     *
-//     * @param filePath The file containing the tasks.
-//     */
-//    public Duke(String filePath) {
-//        this.storage = new Storage(filePath);
-//        try {
-//            this.tasksList = storage.load();
-//        } catch (Storage.DukeException e) {
-//            ui.showMessages(e.getMessage());
-//        }
-//    }
 
     public static void main(String[] args) {
-        new Duke().run();
+
+        EmployeeList employeeList = new EmployeeList();
+        EmployeeParser employeeParser = new EmployeeParser();
+
+        MenuList menuList = new MenuList();
+        MenuParser menuParser = new MenuParser();
+
+        IngredientList ingredientList = new IngredientList();
+        IngredientParser ingredientParser = new IngredientParser();
+
+        // Load Storage
+
+
+        // Hello
+        System.out.println("Hello!");
+
+
+        // Active Chat
+        Scanner input = new Scanner(System.in);
+        String userInput;
+        boolean isBye = false;
+
+        while (!isBye) {
+            //store input into String
+            userInput = input.nextLine();
+            //process input
+            if (userInput.startsWith("add-employee")) {
+
+                String[] description = userInput.trim().split("\\|", 3);
+                Employee newEmployee = new Employee(description[1], description[2]);
+                employeeParser.addEmployee(employeeList, newEmployee);
+
+                System.out.println("I have added: ");
+                System.out.println(employeeList.employeeList.get(0));
+
+            } else if (userInput.startsWith("remove-employee")) {
+
+            } else if (userInput.startsWith("list-employee")) {
+
+            } else if (userInput.startsWith("add-menu")) {
+
+            } else if (userInput.startsWith("remove-menu")) {
+
+            } else if (userInput.startsWith("list-menu")) {
+
+            } else if (userInput.startsWith("add-ingredients")) {
+
+            } else if (userInput.startsWith("remove-ingredients")) {
+
+            } else if (userInput.startsWith("list-ingredients")) {
+
+            } else if (userInput.startsWith("bye")) {
+                isBye = true;
+            } else {
+                System.out.println("I do not recognise the input.");
+                System.out.println("Please try again!");
+            }
+        }
+
+        // Bye
+        System.out.println("Thank you. Goodbye!");
+
+        // Save Storage
+
+
     }
 
-    /** Run the Duke */
-    public void run() {
-        startDuke();
-        runCommand();
-        exitDuke();
-    }
-
-    private void startDuke() {
-        this.ui = new Ui();
-        ui.showWelcomeMessage();
-    }
-
-    private void exitDuke() {
-        ui.showGoodbyeMessage();
-//        try {
-//            storage.write(tasksList);
-//        } catch (Storage.DukeException e) {
-//            ui.showMessages(e.getMessage());
-//        }
-        System.exit(0);
-    }
-
-    /** The process of running Duke */
-    private void runCommand() {
-        Command command;
-        do {
-            String userCommandText = ui.getUserCommand();
-            command = new Parser().parseCommand(userCommandText);
-            CommandResult result = executeCommand(command);
-            ui.showResultToUser(result);
-
-        } while (!ExitCommand.isExit(command));
-    }
-
-    /**
-     * Return the result of the executed command.
-     *
-     * @param command the command class based on user input.
-     * @return the result of executed command.
-     */
-    private CommandResult executeCommand(Command command) {
-        command.setData(tasksList);
-        CommandResult result = command.execute();
-        return result;
-    }
 
 }

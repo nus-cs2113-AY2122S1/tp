@@ -8,7 +8,7 @@ public class EmployeeParser {
     }
 
     public void deleteEmployee(EmployeeList masterList, int employeeIndex) {
-        if (masterList.totalEmployee < 1){
+        if (masterList.totalEmployee < 1) {
             return;
         }
         masterList.employeeList.remove(employeeIndex);
@@ -16,13 +16,13 @@ public class EmployeeParser {
     }
 
     public void listEmployee(EmployeeList masterList) {
-        if (masterList.totalEmployee < 1){
+        if (masterList.totalEmployee < 1) {
             return;
         }
         System.out.println("--------------------");
         System.out.println("Here are the employees in your list:");
-        for(int i = 0; i < masterList.totalEmployee; i += 1){
-            System.out.println(i + masterList.employeeList.get(i).getName() );
+        for (int i = 0; i < masterList.totalEmployee; i += 1) {
+            System.out.println(i + masterList.employeeList.get(i).getName());
         }
         System.out.println("--------------------");
     }
