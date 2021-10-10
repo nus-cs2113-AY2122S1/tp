@@ -9,9 +9,16 @@ import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.UpdateCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.NextCommand;
+import seedu.duke.items.Item;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 
 public class Parser {
+    protected static DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
+    protected static DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d MMM yyyy - HH:mm");
 
     public static Command parseCommand(String response) {
         String[] command = response.split(" ", 10);
@@ -37,5 +44,37 @@ public class Parser {
                     + System.lineSeparator() /*+ ui.lineBreak*/);
             return new HelpCommand();
         }
+    }
+
+    public static String convertDateTime(LocalDateTime dateTime) {
+        return dateTime.format(formatter2);
+    }
+
+    public static LocalDateTime convertDateTime(String dateTime) {
+        return LocalDateTime.parse(dateTime, formatter1);
+    }
+
+    public static void bubbleSortTask(ArrayList<Item> list) {
+        for (int j = 0; j < list.size() - 1; j++) {
+            for (int i = 0; i < list.size() - j - 1; i++) {
+                if (list.get(i + 1).getDateValue().isBefore(list.get(i).getDateValue())) {
+                    swap(i, list);
+                }
+            }
+        }
+    }
+
+    private static void swap(int i, ArrayList<Item> list) {
+        Item t;
+        t = list.get(i);
+        list.set(i, list.get(i + 1));
+        list.set(i + 1, t);
+    }
+
+    public static ArrayList<Item> makeMainList() {
+        ArrayList<Item> sortedList = new ArrayList<>();
+        sortedList.addAll(Duke.eventList);
+        sortedList.addAll(Duke.taskList);
+        return sortedList;
     }
 }
