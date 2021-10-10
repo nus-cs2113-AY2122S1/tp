@@ -5,6 +5,7 @@ package seedu.duke.commands;
  */
 public class Parser {
     private static final String COMMAND_EXIT = "exit";
+    private static final String COMMAND_ADD = "add";
 
     /**
      * Processes the commands inputted by the user.
@@ -15,6 +16,9 @@ public class Parser {
     public static Command parse(String input) {
         if (input.equals(COMMAND_EXIT)) {
             return new ExitCommand();
+        } else if (input.startsWith(COMMAND_ADD)) {
+            String args = input.substring(COMMAND_ADD.length() + 1);
+            return new AddCommand(args);
         } else {
             return new UnknownCommand();
         }
