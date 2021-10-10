@@ -25,7 +25,7 @@ public class Parser {
     public static final String EXERCISE_KEYWORD = "/e ";
     public static final String SETS_KEYWORD = "/s ";
     public static final String REPS_KEYWORD = "/r ";
-    static final String MESSAGE_INVALID_COMMAND = "Invalid command\n";
+    static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
 
     public Command parseCommand(String userInputString) {
 
@@ -53,7 +53,7 @@ public class Parser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         default:
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND);
+            return new IncorrectCommand("Invalid Command");
         }
     }
 

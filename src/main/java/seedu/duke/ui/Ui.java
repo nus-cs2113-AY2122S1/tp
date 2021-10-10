@@ -54,6 +54,7 @@ public class Ui {
         System.out.println("\"list\" : lists all your workouts");
         System.out.println("\"display\" : shows all the exercises in a specified workout");
         System.out.println("\"bye\" : Ends the program");
+        printLineSeparator();
     }
 
     public static void printErrorMessage(GetJackDException e) {
@@ -82,6 +83,7 @@ public class Ui {
         for (int i = 0; i < workouts.size(); i++) {
             System.out.println((i + 1) + ". " + workouts.get(i));
         }
+
         Ui.printLineSeparator();
     }
 

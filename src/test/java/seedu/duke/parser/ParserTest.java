@@ -46,11 +46,8 @@ class ParserTest {
     @Test
     void parseCommand_deleteWorkoutCommandCorrect_returnsDeleteCommand() {
         int testIndex = 1;
-        String[] inputs = {"delete /w" + testIndex, "delete /w   " + testIndex};
-        for (String input : inputs) {
-            DeleteWorkoutCommand result = (DeleteWorkoutCommand) parser.parseCommand(input);
-            assertEquals(result.getWorkoutIndex(),testIndex);
-        }
+        String input = "delete /w " + testIndex;
+        DeleteWorkoutCommand result = (DeleteWorkoutCommand) parser.parseCommand(input);
+        assertEquals(result.getWorkoutIndex(), testIndex);
     }
-
 }
