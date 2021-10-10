@@ -13,6 +13,8 @@ import seedu.traveller.mapper.EmptyVertexException;
 import seedu.traveller.mapper.GraphList;
 import seedu.traveller.mapper.Vertex;
 
+import java.util.List;
+
 public class ParserTrip {
     public static Command parse(String rawInput) throws TravellerException {
         String details;
@@ -27,11 +29,11 @@ public class ParserTrip {
                 String tripName = userInput[1];
                 String origin = userInput[2];
                 String destination = userInput[3];
-                command = new NewCommand(tripName, origin, destination);
                 Vertex s = GraphList.findVertex(origin);
                 Vertex t = GraphList.findVertex(destination);
                 System.out.println("Finding shortest path!");
-                Dijkstra.run(s, t);
+                List<Vertex> path = Dijkstra.run(s, t);
+                command = new NewCommand(tripName, origin, destination, path);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new InvalidNewFormatException();
             } catch (EmptyVertexException e) {
