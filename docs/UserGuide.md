@@ -2,8 +2,8 @@
 
 ## Introduction
 
-TermiNUS is a CLI (command line interface) program for NUS Students who wish to organize their NUS academic materials through a CLI. 
-<br>The product aims to aid student in organizing their academic schedule and enhancing their learning experiences.
+TermiNUS is a CLI (command line interface) program for NUS Students who wish to organize their NUS academic materials through a CLI.  
+The product aims to aid student in organizing their academic schedule and enhancing their learning experiences.
 
 ## Contents
 * [Getting Start](#Getting-Started)
@@ -27,7 +27,8 @@ TermiNUS is a CLI (command line interface) program for NUS Students who wish to 
 
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `TermiNUS` from [here](https://github.com/AY2122S1-CS2113T-T10-2/tp).
-3. When you first start the program, you will be greeted with our banner:
+3. When you first start the program, you will be greeted with our banner:  
+
 ```
 Welcome to TermiNUS! 
 
@@ -51,7 +52,8 @@ Type any of the following to get started:
 ### Accessing Note
 **Format:** `note`
 <br>Accessing the note workspace
-After running the note command, you can see the following:
+After running the note command, you can see the following:  
+
 ```
 [] >>> note
 You have 0 note(s) inside this workspace 
@@ -68,8 +70,8 @@ Type any of  the following to get started:
 ```
 
 ### Adding a Note
-**Format:** `add "<name>" "<content>"`
-<br>Adding a note when in the note workspace
+**Format:** `add "<name>" "<content>"`  
+Adding a note when in the note workspace  
 ```
 [note] >>> add “Remind Cabbin” “Cabbin was here” 
 Note has been added! 
@@ -77,8 +79,8 @@ Note has been added!
 ```
 
 ### Delete a Note
-**Format:** `delete <index>`
-<br>Deletes the specified note given by its index.
+**Format:** `delete <index>`  
+Deletes the specified note given by its index.
 ```
 [note] >>> delete 1
 Note `Remind Cabbin` has been deleted!
@@ -213,7 +215,7 @@ Note has been added!
 [] >>> 
 ```
 
-Adding a schedule without entering the schedule workspace.
+Adding a schedule without entering the schedule workspace.  
 ```dtd
 [] >>> schedule add “Module1 Tut” Thursday 10:00 https://zoom.us/test
 You have added Module1 Tut’s scheduled zoom link!
@@ -221,10 +223,10 @@ You have added Module1 Tut’s scheduled zoom link!
 ```
 ## FAQ
 
-## Command Summary
+## Command Summary  
 
-**Action** | **Format, Examples**
------------- | -------------
+| **Action** | **Format, Examples**
+| ------------ | -------------
 **access note workspace**|`note`
 **access schedule workspace**|`schedule`
 **add**|`add "<name>" "<content>"` <br>e.g. `add note1 note_content`
@@ -233,7 +235,7 @@ You have added Module1 Tut’s scheduled zoom link!
 **help**|`help`
 **exit**|`exit`
 
-##Advanced Command Summary
+##Advanced Command Summary  
 **Action** | **Format, Examples**
 ------------ | -------------
 **add note**|`note add "<name>" "<content>"` <br>e.g. `note add note1 note_content`
