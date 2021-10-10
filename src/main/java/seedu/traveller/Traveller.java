@@ -4,6 +4,7 @@ package seedu.traveller;
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.mapper.Dijkstra;
+import seedu.traveller.mapper.EmptyVertexException;
 import seedu.traveller.mapper.GraphList;
 import seedu.traveller.mapper.Vertex;
 import seedu.traveller.database.DatabaseInput;
@@ -47,7 +48,7 @@ public class Traveller {
                 Command c = ParserTrip.parse(fullCommand);
                 c.execute(tripsList, ui);
                 isExit = c.getExit();
-            } catch (TravellerException | IndexOutOfBoundsException e) {
+            } catch (TravellerException | IndexOutOfBoundsException | EmptyVertexException e) {
                 ui.printError(e.getMessage());
             } finally {
                 ui.printLine();
@@ -132,6 +133,7 @@ public class Traveller {
 
     public static void main(String[] args) {
         DatabaseInput.readFile();
+        listEverything();
         //new Traveller().setupRoutes();
         //listEverything();
         new Traveller().run();
