@@ -7,9 +7,6 @@ import seedu.duke.items.Item;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-import static seedu.duke.Duke.eventList;
-import static seedu.duke.Duke.taskList;
-
 public class SelectCommand extends Command {
 
     public String keyword;

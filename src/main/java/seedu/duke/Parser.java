@@ -54,6 +54,10 @@ public class Parser {
         return LocalDateTime.parse(dateTime, formatter1);
     }
 
+    public static String convertDateTimeForSaving(LocalDateTime dateTime) {
+        return dateTime.format(formatter1);
+    }
+
     public static void bubbleSortTask(ArrayList<Item> list) {
         for (int j = 0; j < list.size() - 1; j++) {
             for (int i = 0; i < list.size() - j - 1; i++) {

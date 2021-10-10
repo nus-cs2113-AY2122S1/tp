@@ -1,6 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.Duke;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.items.Event;

@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import seedu.duke.Ui;
+
 public class ByeCommand extends Command {
     public static boolean isRunning = true;
 
@@ -8,6 +10,6 @@ public class ByeCommand extends Command {
 
     public CommandResult execute() {
         isRunning = false;
-        return new CommandResult("You will be missed!!");
+        return new CommandResult(Ui.getByeMessage());
     }
 }
