@@ -19,11 +19,12 @@ public class MedicineManager {
     public static int getTotalStockQuantity(ArrayList<Medicine> medicines, String name) {
         int existingQuantity = 0;
         for (Medicine medicine : medicines) {
-            if (medicine instanceof Stock) {
-                boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
-                if (isSameMedicineName) {
-                    existingQuantity += medicine.getQuantity();
-                }
+            if (!(medicine instanceof Stock)) {
+                continue;
+            }
+            boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
+            if (isSameMedicineName) {
+                existingQuantity += medicine.getQuantity();
             }
         }
         return existingQuantity;
@@ -39,12 +40,13 @@ public class MedicineManager {
     public static int getMaxStockQuantity(ArrayList<Medicine> medicines, String name) {
         int existingMaxQuantity = 0;
         for (Medicine medicine : medicines) {
-            if (medicine instanceof Stock) {
-                boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
-                if (isSameMedicineName) {
-                    existingMaxQuantity = ((Stock) medicine).getMaxQuantity();
-                    break;
-                }
+            if (!(medicine instanceof Stock)) {
+                continue;
+            }
+            boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
+            if (isSameMedicineName) {
+                existingMaxQuantity = ((Stock) medicine).getMaxQuantity();
+                break;
             }
         }
         return existingMaxQuantity;
