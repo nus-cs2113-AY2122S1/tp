@@ -1,8 +1,12 @@
 package seedu.duke;
 
+import static java.lang.System.exit;
+
 import seedu.duke.attendance.AttendanceList;
-import seedu.duke.member.*;
-import seedu.duke.training.*;
+import seedu.duke.member.Member;
+import seedu.duke.member.MemberList;
+import seedu.duke.training.TrainingSchedule;
+import seedu.duke.training.TrainingList;
 
 public class Entry {
     private static final TrainingList trainings = new TrainingList();
@@ -17,6 +21,10 @@ public class Entry {
      */
     public static void addEntry(String entry) throws NullPointerException {
         Keyword keyword = Parser.getKeywordStatus(entry);
+
+        //i just put here first even tho sus cos all the private attributes are declared in this class
+        MemberStorage.SetupMemberFile(members);
+
         switch (keyword) {
         case LIST_MEMBER_KEYWORD:
             Ui.printMemberList(members);
@@ -60,6 +68,7 @@ public class Entry {
             break;
         case EXIT_KEYWORD:
             Ui.printExitMessage();
+
             break;
         }
     }
