@@ -236,8 +236,8 @@ You have added Module1 Tut’s scheduled zoom link!
 **exit**|`exit`
 
 ## Advanced Command Summary  
-**Action** | **Format, Examples**
------------- | -------------
+| **Action** | **Format, Examples**
+| ------------ | -------------
 **add note**|`note add "<name>" "<content>"` <br>e.g. `note add note1 note_content`
 **add schedule**|`schedule add "<description>" "<day>" "<start_time>" "<zoom_link>"` <br>e.g. `schedule add “Module1 Tut” "Thursday" "10:00" "https://zoom.us/test"`
 **delete note**|`note delete <index>` <br>e.g. `note delete 1`
