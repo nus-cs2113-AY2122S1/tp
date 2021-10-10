@@ -12,6 +12,9 @@ import java.util.ArrayList;
 
 import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 
+/**
+ * To print exercises in a specified workout.
+ */
 public class DisplayExercisesCommand extends Command {
     public static final String COMMAND_WORD = "display";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all exercises in the particular workout.\n"

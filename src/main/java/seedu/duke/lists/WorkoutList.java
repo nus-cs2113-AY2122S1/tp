@@ -5,7 +5,7 @@ import seedu.duke.exception.GetJackDException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import static seedu.duke.command.logger.LoggerUtil.setupLogger;
+import static seedu.duke.logger.LoggerUtil.setupLogger;
 
 
 /**

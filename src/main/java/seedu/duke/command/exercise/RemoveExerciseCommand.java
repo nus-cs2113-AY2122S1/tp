@@ -10,6 +10,9 @@ import seedu.duke.ui.Ui;
 import static seedu.duke.parser.Parser.EXERCISE_KEYWORD;
 import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 
+/**
+ * To remove an exercise from a Workout.
+ */
 public class RemoveExerciseCommand extends Command {
     public static final String COMMAND_WORD = "remove";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the exercise from the workout.\n"
@@ -19,6 +22,11 @@ public class RemoveExerciseCommand extends Command {
     private final int workoutIndex;
     private final int exerciseIndex;
 
+    /**
+     * Instantiates object and sets workoutIndex and exerciseIndex.
+     * @param workoutIndex index of Workout that the exercise is in
+     * @param exerciseIndex index of exercise to remove
+     */
     public RemoveExerciseCommand(int workoutIndex, int exerciseIndex) {
         this.workoutIndex = workoutIndex;
         this.exerciseIndex = exerciseIndex;

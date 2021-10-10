@@ -1,4 +1,4 @@
-package seedu.duke.command.logger;
+package seedu.duke.logger;
 
 import java.io.IOException;
 import java.util.logging.ConsoleHandler;

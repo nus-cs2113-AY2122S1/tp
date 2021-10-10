@@ -9,6 +9,10 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
+/**
+ * To list all Workouts
+ * Does not show the exercises in each workout.
+ */
 public class ListWorkoutsCommand extends Command {
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_LIST_WORKOUTS = "Workout list: ";

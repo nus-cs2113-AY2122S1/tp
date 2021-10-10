@@ -12,6 +12,14 @@ public class HelpCommand extends Command {
     private String commandDescription = null;
     public static final String COMMAND_WORD = "help";
 
+    /**
+     * Creates an instance of HelpCommand and sets the help message.
+     * The help message is the MESSAGE_USAGE attribute from other Command classes, which instructs the user on how to
+     * use the command.
+     * If HelpCommand is constructed without a specified description, then executing the command will just print the
+     * generic help message.
+     * @param descriptionToPrint help message to print
+     */
     public HelpCommand(String descriptionToPrint) {
         this.commandDescription = descriptionToPrint;
     }

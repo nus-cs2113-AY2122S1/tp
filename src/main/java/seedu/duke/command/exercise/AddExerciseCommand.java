@@ -12,6 +12,9 @@ import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 import static seedu.duke.parser.Parser.SETS_KEYWORD;
 import static seedu.duke.parser.Parser.REPS_KEYWORD;
 
+/**
+ * For adding a new exercise to a workout.
+ */
 public class AddExerciseCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exercise to a workout.\n"
@@ -24,6 +27,13 @@ public class AddExerciseCommand extends Command {
     private final Exercise toAdd;
     private final int workoutIndex;
 
+    /**
+     * Instantiates object and sets parameters for adding exercise to Workout.
+     * @param workoutIndex index of Workout in the WorkoutList
+     * @param description description of exercise
+     * @param sets number of sets of exercise
+     * @param reps number of repetitions per set
+     */
     public AddExerciseCommand(int workoutIndex, String description, int sets, int reps) {
         this.toAdd = new Exercise(description, sets, reps);
         this.workoutIndex = workoutIndex;
