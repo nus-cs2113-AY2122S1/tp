@@ -157,7 +157,7 @@ public class Timetable {
     /**
      * Sets the TimetableLesson for the particular time slot to be null where the timetableLesson is scheduled for the module to be deleted .
      *
-     * @param schedule Schedule contains the lessons of the user for a particular of the week.
+     * @param schedule Schedule contains the lessons of the user for a particular day of the week.
      * @param module   Module to be Deleted
      * @see Module
      */
@@ -168,6 +168,47 @@ public class Timetable {
             }
         }
 
+    }
+
+    /**
+     * Removes all modules from the list of modules taken by the user.
+     * Calls the clearTimetableFromLessons() function to delete all the scheduled lessons.
+     */
+    public void clearTimetable() throws UniModsException {
+        if (modules.size() > 0) {
+            modules.clear();
+            clearTimetableFromLessons();
+            TextUi.printTimetableCleared();
+        } else {
+            throw new UniModsException(TextUi.ERROR_EMPTY_TIMETABLE);
+        }
+    }
+
+
+    /**
+     * Calls the function clearTimetableFromLessons() to clear the scheduled lessons from the timetable's daily plan.
+     */
+    public void clearTimetableFromLessons() {
+        clearSchedule(monday);
+        clearSchedule(tuesday);
+        clearSchedule(wednesday);
+        clearSchedule(thursday);
+        clearSchedule(friday);
+        clearSchedule(saturday);
+        clearSchedule(sunday);
+    }
+    
+    /**
+     * Clears the TimetableLesson for all non-null time slots .
+     *
+     * @param schedule Schedule contains the lessons of the user for a particular day of the week.
+     */
+    public void clearSchedule(TimetableLesson[] schedule) {
+        for (int i = 0; i < schedule.length; i++) {
+            if (schedule[i] != null) {
+                schedule[i] = null;
+            }
+        }
     }
 
     /**
