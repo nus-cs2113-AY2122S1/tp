@@ -20,6 +20,7 @@ import java.util.HashMap;
  */
 
 public class UpdateCommand extends Command {
+    private static final int MINIMUM_ROW_NUMBER_UPDATE = 1;
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
@@ -50,11 +51,43 @@ public class UpdateCommand extends Command {
             return;
         }
 
-        setUpdatesByStockID(parameters, medicines, stock);
-        ui.print("Updated");
-        ui.printStock(stock);
+        ArrayList<Medicine> filteredMedicines = new ArrayList<>();
+        for (Medicine medicine : medicines) {
+            if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(stock.getMedicineName())) {
+                filteredMedicines.add(medicine);
+            }
+        }
+
+        // Default value for updating one row
+        int rowsAffected = MINIMUM_ROW_NUMBER_UPDATE;
+        String[] affectedCommands = {CommandParameters.NAME, CommandParameters.DESCRIPTION,
+            CommandParameters.MAX_QUANTITY};
+        for (String affectedCommand : affectedCommands) {
+            if (parameters.containsKey(affectedCommand)) {
+                rowsAffected = filteredMedicines.size();
+                break;
+            }
+        }
+
+        setUpdatesByStockID(parameters, filteredMedicines, stock);
+        ui.print("Updated! Number of rows affected: " + rowsAffected);
+        if (rowsAffected > MINIMUM_ROW_NUMBER_UPDATE) {
+            ui.printStocks(filteredMedicines);
+        } else {
+            ui.printStock(stock);
+        }
+
     }
 
+    /**
+     * Process valid date input to be updated given a stock id.
+     *
+     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines  Arraylist of all medicines.
+     * @param stock      Stock object of the given stock id.
+     * @return Boolean value indicating if quantity values are valid.
+     */
     private boolean processDateInput(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines,
                                      Stock stock) {
         String name = stock.getMedicineName();
@@ -80,6 +113,7 @@ public class UpdateCommand extends Command {
      * @param ui         Reference to the UI object passed by Main to print messages.
      * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
      * @param medicines  Arraylist of all medicines.
+     * @param stock      Stock object of the given stock id.
      * @return Boolean value indicating if quantity values are valid.
      */
     private boolean processQuantityValues(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines,
@@ -125,21 +159,15 @@ public class UpdateCommand extends Command {
      * Update values provided by user for a given stock id.
      *
      * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines  Arraylist of all medicines.
+     * @param medicines  Arraylist of filtered medicines.
      * @param stock      Stock object of the given stock id.
      */
     private void setUpdatesByStockID(HashMap<String, String> parameters, ArrayList<Medicine> medicines, Stock stock) {
-        ArrayList<Stock> filteredMedicines = new ArrayList<>();
-        for (Medicine medicine : medicines) {
-            if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(stock.getMedicineName())) {
-                filteredMedicines.add((Stock) medicine);
-            }
-        }
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
             case CommandParameters.NAME:
-                for (Stock targetStock : filteredMedicines) {
+                for (Medicine targetStock : medicines) {
                     targetStock.setMedicineName(parameterValue);
                 }
                 break;
@@ -157,13 +185,13 @@ public class UpdateCommand extends Command {
                 }
                 break;
             case CommandParameters.DESCRIPTION:
-                for (Stock targetStock : filteredMedicines) {
-                    targetStock.setDescription(parameterValue);
+                for (Medicine targetStock : medicines) {
+                    ((Stock) targetStock).setDescription(parameterValue);
                 }
                 break;
             case CommandParameters.MAX_QUANTITY:
-                for (Stock targetStock : filteredMedicines) {
-                    targetStock.setMaxQuantity(Integer.parseInt(parameterValue));
+                for (Medicine targetStock : medicines) {
+                    ((Stock) targetStock).setMaxQuantity(Integer.parseInt(parameterValue));
                 }
                 break;
             default:
