@@ -1,16 +1,16 @@
 package expiryeliminator.data;
 
+import java.util.HashMap;
+
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.EmptyIngredientsException;
-import expiryeliminator.data.exception.RecipeNotFoundException;
-
-import java.util.HashMap;
+import expiryeliminator.data.exception.NotFoundException;
 
 /**
  * Represents the recipe list and contains methods to add and remove recipes.
  */
 public class RecipeList {
-    private final HashMap<String,Recipe> recipes;
+    private final HashMap<String, Recipe> recipes;
 
     /**
      * Constructs Recipe List with no recipes.
@@ -41,25 +41,15 @@ public class RecipeList {
      *
      * @param name name of the recipe to be removed
      * @return The recipe removed.
-     * @throws RecipeNotFoundException If there are no such recipes in the list
+     * @throws NotFoundException If there are no such recipes in the list
      */
-    public Recipe remove(String name) throws RecipeNotFoundException {
-        if (!contains(name)) {
-            throw new RecipeNotFoundException();
-        }
+    public Recipe remove(String name) throws NotFoundException {
         Recipe recipe = recipes.get(name);
+        if (recipe == null) {
+            throw new NotFoundException();
+        }
         recipes.remove(name);
         return recipe;
-    }
-
-    /**
-     * Returns { @code true } if the recipe list contains the given recipe.
-     *
-     * @param name The recipe name whose presence in the list is to be tested
-     * @return { @code true } if the recipe list contains the given recipe.
-     */
-    public boolean contains(String name) {
-        return recipes.containsKey(name);
     }
 
     /**
@@ -77,11 +67,11 @@ public class RecipeList {
      * @return returns a string representing all the recipes.
      */
     public String getWholeRecipeList() {
-        String wholeRecipeList = "";
+        StringBuilder wholeRecipeList = new StringBuilder();
         for (Recipe recipe : recipes.values()) {
-            wholeRecipeList = wholeRecipeList + recipe.toString() + "\n";
+            wholeRecipeList.append(recipe.toString()).append("\n");
         }
-        return wholeRecipeList;
+        return wholeRecipeList.toString();
     }
 
     /**
@@ -90,8 +80,11 @@ public class RecipeList {
      * @param recipeDescription The recipe name the user is searching for.
      * @return the recipe object that the user is searching for.
      */
-    public Recipe findRecipe(String recipeDescription) {
-        return recipes.get(recipeDescription);
+    public Recipe findRecipe(String recipeDescription) throws NotFoundException {
+        final Recipe recipe = recipes.get(recipeDescription);
+        if (recipe == null) {
+            throw new NotFoundException();
+        }
+        return recipe;
     }
-
 }
