@@ -56,7 +56,9 @@ public class Dijkstra {
                 if (v.getPrevVertex() != null) {
                     dist.add(adjMatrix[v.getPrevVertex().key][v.key]);
                 }
-                if (v == srcV) break;
+                if (v == srcV) {
+                    break;
+                }
             }
         }
 
@@ -69,7 +71,9 @@ public class Dijkstra {
         System.out.println("Breakdown of path");
         for (double d : dist) {
             curr = d - sum;
-            if (curr - 0.0 > 0.000001) System.out.println(curr);
+            if (curr - 0.0 > 0.000001) {
+                System.out.println(curr);
+            }
             sum += curr;
         }
         System.out.println("Total distance = " + sum);
