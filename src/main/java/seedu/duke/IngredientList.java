@@ -34,7 +34,7 @@ public class IngredientList {
         System.out.println("You can use commands 'add' or 'find' to add new ingredients or find existing ones!");
     }
 
-    private static void delete(String ingredientName) {
+    public static void delete(String ingredientName) {
         int ingredientIndex = IngredientList.find(ingredientName);
         if (ingredientIndex == -1) {
             System.out.println("Ingredient does not exist");
