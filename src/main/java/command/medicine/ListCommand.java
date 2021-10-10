@@ -28,17 +28,15 @@ public class ListCommand extends Command {
             CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
             CommandParameters.MAX_QUANTITY, CommandParameters.SORT, CommandParameters.REVERSED_SORT};
 
-        if (parameters.size() != 0) { // Check for valid parameters only when they are provided
-            boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
-                    optionalParameters, CommandSyntax.LIST_COMMAND, true);
-            if (isInvalidParameter) {
-                return;
-            }
+        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
+                optionalParameters, CommandSyntax.LIST_COMMAND, false);
+        if (isInvalidParameter) {
+            return;
+        }
 
-            boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines);
-            if (isInvalidParameterValues) {
-                return;
-            }
+        boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines);
+        if (isInvalidParameterValues) {
+            return;
         }
 
         ArrayList<Medicine> filteredMedicines = new ArrayList<>();

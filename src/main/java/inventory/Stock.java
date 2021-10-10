@@ -17,7 +17,6 @@ public class Stock extends Medicine {
     public static final String MAX_QUANTITY = "MAX_QUANTITY";
 
     public static final String[] COLUMNS = {ID, NAME, PRICE, QUANTITY, EXPIRY_DATE, DESCRIPTION, MAX_QUANTITY};
-    public static final int NO_OF_COLUMNS = 7;
 
     private static int stockCount = 0;
     protected int stockID;
@@ -38,6 +37,10 @@ public class Stock extends Medicine {
 
     public static int getStockCount() {
         return stockCount;
+    }
+
+    public static void setStockCount(int stockCount) {
+        Stock.stockCount = stockCount;
     }
 
     public int getStockID() {

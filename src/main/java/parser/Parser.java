@@ -109,9 +109,11 @@ public class Parser {
      *     command parameters.
      */
     public static String[] parseCommand(String userInput) {
-        String[] splitCommand = new String[2];
         // Splits user input by spaces
         String[] userInputSplit = userInput.split("\\s+", 2);
+
+        assert (userInputSplit.length <= 2) : "Command extraction failed! More than 2 values were returned!";
+
         String command = userInputSplit[0].toUpperCase();
         String commandParameters = "";
         if (userInputSplit.length > 1) { // Ensure command parameter exists
