@@ -3,9 +3,9 @@ package seedu.duke.data.records;
 import java.time.LocalDate;
 
 public class Budget extends Record {
-    // Description not needed
-    public String description;
-    public int month;
+    // Description and month not needed
+    // public String description;
+    // public int month;
 
 
     public Budget(double amount) {
@@ -14,12 +14,12 @@ public class Budget extends Record {
     }
 
     /*
-    getDescription not needed
-     */
+    Not used.
     @Override
     public String getDescription() {
         return description;
     }
+    */
 
     @Override
     public double getAmount() {
@@ -35,9 +35,11 @@ public class Budget extends Record {
     }
 
     public void printBudgetDetails() {
-        System.out.println(this.description + " $" + this.amount + " Month: " + this.month);
+        System.out.println(" $" + this.amount);
     }
 
+    /*
+    Not used/ needed.
     @Override
     public int getMonth() {
         return month;
@@ -47,9 +49,10 @@ public class Budget extends Record {
     public LocalDate getDate() {
         return null;
     }
+    */
 
     public String toString() {
-        return (this.description + " $" + this.amount + " Month: " + this.month);
+        return (" $" + this.amount);
     }
 
     @Override

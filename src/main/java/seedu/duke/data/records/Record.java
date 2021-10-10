@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public abstract class Record {
     protected double amount;
-    protected int month;
+    //protected int month;
 
     public Record(double amount) {
         this.amount = amount;
@@ -27,5 +27,5 @@ public abstract class Record {
         return 0;
     }
 
-    public abstract LocalDate getDate();
+    //public abstract LocalDate getDate();
 }
