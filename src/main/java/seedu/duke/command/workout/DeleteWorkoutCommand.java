@@ -14,7 +14,7 @@ public class DeleteWorkoutCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the workout corresponding to the workout index.\n"
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX\n"
-            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1\n";
+            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1";
     public static final String MESSAGE_SUCCESS = "Deleted workout: %1$s";
 
     public int getWorkoutIndex() {

@@ -16,9 +16,8 @@ public class DisplayExercisesCommand extends Command {
     public static final String COMMAND_WORD = "display";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all exercises in the particular workout.\n"
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX\n"
-            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3\n";
-    public static final String MESSAGE_LIST_EXERCISES = "Exercises in %1$s";
-    public static final String MESSAGE_EMPTY_WORKOUT = "You have no workouts.";
+            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3";
+    public static final String MESSAGE_EMPTY_WORKOUT = "You have no exercises.";
     private final int workoutIndex;
 
     public DisplayExercisesCommand(int workoutIndex) {
@@ -32,7 +31,6 @@ public class DisplayExercisesCommand extends Command {
         if (exercises.isEmpty()) {
             ui.showToUser(MESSAGE_EMPTY_WORKOUT);
         } else {
-            ui.showToUser(String.format(MESSAGE_LIST_EXERCISES, workout));
             ui.showExercisesToUser(exercises);
         }
     }

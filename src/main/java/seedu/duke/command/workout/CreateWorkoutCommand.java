@@ -11,9 +11,9 @@ import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 
 public class CreateWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "create";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new workout. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new workout.\n"
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_NAME\n"
-            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "ab workout\n";
+            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "ab workout";
     public static final String MESSAGE_SUCCESS = "New workout created: %1$s";
     private final Workout toCreate;
 

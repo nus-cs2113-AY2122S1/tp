@@ -33,7 +33,7 @@ public class Exercise {
     }
 
     public String getStatusSymbol() {
-        return ("[" + (isDone ? "X" : " ") + "]");
+        return ("[" + (isDone ? "X" : " ") + "] ");
     }
 
     @Override

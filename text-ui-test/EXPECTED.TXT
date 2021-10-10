@@ -14,5 +14,70 @@ Invalid command
 
 ________________________________________________________
 ________________________________________________________
+Invalid command
+create: Creates a new workout.
+	Parameters: /w WORKOUT_NAME
+	Example: create /w ab workout
+________________________________________________________
+________________________________________________________
+	New workout created: Legs
+________________________________________________________
+________________________________________________________
+Workout list:
+1. Legs
+________________________________________________________
+________________________________________________________
+Invalid command
+add: Adds an exercise to a workout.
+	Parameters: /w WORKOUT_INDEX /e EXERCISE_NAME /s NUMBER_OF_SETS /r NUMBER_OF_REPS
+	Example: add /w 3 /e push ups /s 3 /r 10
+________________________________________________________
+________________________________________________________
+	New exercise added: [ ] Squats | 3 sets of 10 reps
+________________________________________________________
+________________________________________________________
+Invalid command
+done: Marks the exercise in the workout workout as complete.
+	Parameters: /w WORKOUT_INDEX /e EXERCISE_INDEX
+	Example: done /w 3 /e 2
+________________________________________________________
+________________________________________________________
+	Completed: [X] Squats | 3 sets of 10 reps
+________________________________________________________
+________________________________________________________
+Invalid command
+display: Displays all exercises in the particular workout.
+	Parameters: /w WORKOUT_INDEX
+	Example: display /w 3
+________________________________________________________
+________________________________________________________
+Exercises in mentioned workout:
+1. [X] Squats | 3 sets of 10 reps
+________________________________________________________
+________________________________________________________
+Invalid command
+remove: Removes the exercise from the workout.
+	Parameters: /w WORKOUT_INDEX /e EXERCISE_INDEX
+	Example: remove /w 1 /e 3
+________________________________________________________
+________________________________________________________
+	Removed exercise: [X] Squats | 3 sets of 10 reps
+________________________________________________________
+________________________________________________________
+	You have no exercises.
+________________________________________________________
+________________________________________________________
+Invalid command
+delete: Deletes the workout corresponding to the workout index.
+	Parameters: /w WORKOUT_INDEX
+	Example: delete /w 1
+________________________________________________________
+________________________________________________________
+	Deleted workout: Legs
+________________________________________________________
+________________________________________________________
+	Empty workout list
+________________________________________________________
+________________________________________________________
 Bye. Hope you get your desired body soon, have a great day!
 ________________________________________________________
