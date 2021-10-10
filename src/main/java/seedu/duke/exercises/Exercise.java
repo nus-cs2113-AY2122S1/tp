@@ -3,9 +3,12 @@ package seedu.duke.exercises;
 import seedu.duke.storage.models.ExerciseModel;
 import seedu.duke.storage.models.WorkoutModel;
 
+/**
+ * Represents an exercise inside a workout.
+ * It contains basic information of an exercise such as reps, sets and status.
+ */
 public class Exercise {
     protected String description;
-
     //protected String muscle;
     protected int sets;
     protected int reps;
@@ -17,7 +20,16 @@ public class Exercise {
         this.reps = reps;
     }
 
+    public Exercise() {
+    }
+
+    /**
+     * Returns the exercise description.
+     *
+     * @return the exercise name.
+     */
     public String getDescription() {
+        assert description != null;
         return description;
     }
 
@@ -37,15 +49,32 @@ public class Exercise {
         isDone = true;
     }
 
+    /**
+     * Marks exercise as either completed or not completed.
+     *
+     * @return the current status of the exercise.
+     */
     public String getStatusSymbol() {
         return ("[" + (isDone ? "X" : " ") + "] ");
     }
 
+    /**
+     * Converts the object to a String.
+     *
+     * @return exercise with sets and reps in specified format.
+     */
     @Override
     public String toString() {
         return (getStatusSymbol() + description + " | " + sets + " sets of " + reps + " reps");
     }
 
+    /**
+     * Stores the sets, reps and status values as strings and converts the current exercise
+     * into an ExerciseModel that is added to the WorkoutModel.
+     * This is done as WorkoutModel objects are easily convertable to JSONStrings for storage.
+     *
+     * @param workoutModel is the model of workout stored inside Json file.
+     */
     public void convertToExerciseStorageModel(WorkoutModel workoutModel) {
         String setsInString = String.valueOf(sets);
         String repsInString = String.valueOf(reps);

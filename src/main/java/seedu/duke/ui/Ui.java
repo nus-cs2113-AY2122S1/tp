@@ -63,23 +63,30 @@ public class Ui {
         printLineSeparator();
     }
 
-
+    /**
+     * Prints out all the exercises present in the exercise list of the particular workout.
+     *
+     * @param exercises is the list of exercises.
+     */
     public void showExercisesToUser(ArrayList<Exercise> exercises) {
         Ui.printLineSeparator();
         System.out.println("Exercises in mentioned workout:");
 
-        //Lists down all the tasks added along with its status
         for (int i = 0; i < exercises.size(); i++) {
             System.out.println((i + 1) + ". " + exercises.get(i));
         }
         Ui.printLineSeparator();
     }
 
+    /**
+     * Prints out all the workouts present in workout list.
+     *
+     * @param workouts is the list of workouts.
+     */
     public void showWorkoutsToUser(ArrayList<Workout> workouts) {
         Ui.printLineSeparator();
         System.out.println("Workout list:");
 
-        //Lists down all the tasks added along with its status
         for (int i = 0; i < workouts.size(); i++) {
             System.out.println((i + 1) + ". " + workouts.get(i));
         }
@@ -87,11 +94,14 @@ public class Ui {
         Ui.printLineSeparator();
     }
 
-    public void showToUser(String... message) {
-        for (String m : message) {
-            printLineSeparator();
-            System.out.println(INDENT + m.replace("\n", NEW_LINE));
-            printLineSeparator();
-        }
+    /**
+     * Prints the specific message needed at specific points.
+     *
+     * @param message is the unique message to be shown.
+     */
+    public void showToUser(String message) {
+        printLineSeparator();
+        System.out.println(INDENT + message.replace("\n", NEW_LINE));
+        printLineSeparator();
     }
 }
