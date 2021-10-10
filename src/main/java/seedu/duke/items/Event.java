@@ -1,5 +1,7 @@
 package seedu.duke.items;
 
+import seedu.duke.Parser;
+
 import java.time.LocalDateTime;
 
 public class Event extends Item {
@@ -27,5 +29,10 @@ public class Event extends Item {
 
     public double getBudget() {
         return budget;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[E] %s (at: %s)", this.getTitle(), this.getDateValue());
     }
 }

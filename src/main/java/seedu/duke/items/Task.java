@@ -24,4 +24,9 @@ public class Task extends Item {
     public String getDateValue() {
         return deadline;
     }
+
+    @Override
+    public String toString() {
+        return String.format("[T] %s (by: %s)", this.getDescription(), this.getDateValue());
+    }
 }
