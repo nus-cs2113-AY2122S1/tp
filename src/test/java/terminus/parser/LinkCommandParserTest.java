@@ -21,13 +21,11 @@ public class LinkCommandParserTest {
 
     private LinkCommandParser linkCommandParser;
     private NusModule nusModule;
-    private Ui ui;
 
     @BeforeEach
     void setUp() {
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.nusModule = new NusModule();
-        this.ui = new Ui();
     }
 
     @Test
