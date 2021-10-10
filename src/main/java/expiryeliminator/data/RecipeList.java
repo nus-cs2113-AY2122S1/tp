@@ -37,7 +37,7 @@ public class RecipeList {
     }
 
     public Recipe remove(String name) throws RecipeNotFoundException {
-        if(recipes.get(name) == null) {
+        if (contains(recipes.get(name))) {
             throw new RecipeNotFoundException();
         }
         Recipe recipe = recipes.get(name);
@@ -52,7 +52,7 @@ public class RecipeList {
      * @return { @code true } if the recipe list contains the given recipe.
      */
     public boolean contains(Recipe recipe) {
-        return recipes.containsKey(recipe);
+        return recipes.containsKey(recipe.getName());
     }
 
     /**
