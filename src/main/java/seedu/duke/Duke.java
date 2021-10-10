@@ -3,8 +3,10 @@ package seedu.duke;
 import seedu.duke.employee.Employee;
 import seedu.duke.employee.EmployeeList;
 import seedu.duke.employee.EmployeeParser;
+import seedu.duke.ingredient.Ingredient;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientParser;
+import seedu.duke.menu.Menu;
 import seedu.duke.menu.MenuList;
 import seedu.duke.menu.MenuParser;
 
@@ -43,6 +45,10 @@ public class Duke {
                 }
                 Employee newEmployee = decodeEmployee(line);
                 employeeParser.addEmployee(employeeList,newEmployee);
+//                Ingredient newIngredient = decodeIngredient(line);
+//                ingredientParser.addIngredient(ingredientList,newIngredient);
+//                Menu newMenuItem = decodeMenuItem(line);
+//                employeeParser.addMenu(menuList,newMenuItem);
             }
             fileReader.close();
         } catch (FileNotFoundException e) {
@@ -103,6 +109,14 @@ public class Duke {
                 Employee employee = employeeList.employeeList.get(i);
                 fileWriter.write(String.format("%s\n", encodeEmployee(employee.toString())));
             }
+//            for (int i = 0; i < ingredientList.ingredientList.size(); i += 1) {
+//                Ingredient ingredient = ingredientList.ingredientList.get(i);
+//                fileWriter.write(String.format("%s\n", encodeIngredient(ingredient.toString())));
+//            }
+//            for (int i = 0; i < menuList.menuList.size(); i += 1) {
+//                Menu menuItem = menuList.menuList.get(i);
+//                fileWriter.write(String.format("%s\n", encodeMenuItem(menuItem.toString())));
+//            }
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("Cannot be written in the file!");
@@ -120,6 +134,31 @@ public class Duke {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 2);
         encodedItem = "add-employee" + "|" + description[0] + "|" + description[1];
+        return encodedItem;
+    }
+//    public static Ingredient decodeIngredient (String toRead) {
+//        String[] description = toRead.trim().split("\\|", 3);
+//        Ingredient ingredient = new Ingredient(description[1], description[2]);
+//        return ingredient;
+//    }
+
+    public static String encodeIngredient (String toWrite) {
+        String encodedItem = null;
+        String[] description = toWrite.trim().split(" ", 2);
+        encodedItem = "add-ingredient" + "|" + description[0] + "|" + description[1];
+        return encodedItem;
+    }
+
+//    public static MenuItem decodeMenuItem (String toRead) {
+//        String[] description = toRead.trim().split("\\|", 3);
+//        MenuItem menuItem = new MenuItem(description[1], description[2]);
+//        return menuItem;
+//    }
+
+    public static String encodeMenuItem (String toWrite) {
+        String encodedItem = null;
+        String[] description = toWrite.trim().split(" ", 2);
+        encodedItem = "add-menu" + "|" + description[0] + "|" + description[1];
         return encodedItem;
     }
 
