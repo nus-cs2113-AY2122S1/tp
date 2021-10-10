@@ -23,7 +23,8 @@ public class University {
     public void listMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
-            String output = currentMapping.localModule + " - " + currentMapping.mappedModule;
+            String output = currentMapping.localModule.getModuleName()
+                    + " - " + currentMapping.mappedModule.getModuleName();
             System.out.println(output);
         }
     }

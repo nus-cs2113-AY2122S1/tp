@@ -1,16 +1,14 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.SearchmapCommand;
-import seedu.duke.modules.ModuleMapping;
+import seedu.duke.commands.SearchMapCommand;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 
-public class SearchmapCommandParser {
+public class SearchMapCommandParser {
 
-    public SearchmapCommand parse(String arguments, UniversityList universityMasterList) throws ParseException {
+    public SearchMapCommand parse(String arguments, UniversityList universityMasterList) throws ParseException {
         String universityName = arguments.trim();
         if (universityName.length() == 0) {
             throw new ParseException("no description given", 1);
@@ -20,7 +18,7 @@ public class SearchmapCommandParser {
         if (university == null) {
             throw new ParseException("university does not exist", 1);
         }
-        return new SearchmapCommand(university);
+        return new SearchMapCommand(university);
     }
 
     private University searchForUniversity(String universityName, UniversityList universityMasterList) {

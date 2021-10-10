@@ -3,9 +3,9 @@ package seedu.duke.parser;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.RemoveCommand;
-import seedu.duke.commands.SearchmapCommand;
-import seedu.duke.commands.AddmodCommand;
-import seedu.duke.commands.AdduniCommand;
+import seedu.duke.commands.SearchMapCommand;
+import seedu.duke.commands.AddModCommand;
+import seedu.duke.commands.AddUniCommand;
 import seedu.duke.modules.Module;
 import seedu.duke.universities.UniversityList;
 import java.text.ParseException;
@@ -38,12 +38,12 @@ public class Parser {
             return new ListCommandParser().parse(arguments);
         case RemoveCommand.COMMAND_WORD:
             return new RemoveCommandParser().parse(arguments);
-        case SearchmapCommand.COMMAND_WORD:
-            return new SearchmapCommandParser().parse(arguments, universityMasterList);
-        case AddmodCommand.COMMAND_WORD:
-            return new AddmodCommandParser().parse(arguments, moduleMasterList);
-        case AdduniCommand.COMMAND_WORD:
-            return new AdduniCommandParser().parse(arguments, universityMasterList);
+        case SearchMapCommand.COMMAND_WORD:
+            return new SearchMapCommandParser().parse(arguments, universityMasterList);
+        case AddModCommand.COMMAND_WORD:
+            return new AddModCommandParser().parse(arguments, moduleMasterList);
+        case AddUniCommand.COMMAND_WORD:
+            return new AddUniCommandParser().parse(arguments, universityMasterList);
         default:
             throw new ParseException("Command not found", 1);
         }

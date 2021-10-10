@@ -21,6 +21,7 @@ public class Duke {
             ArrayList<Module> moduleMasterList = new ArrayList<>(Storage.loadModules());
             Parser mainParser = new Parser(universityMasterList, moduleMasterList);
             while (true) {
+                System.out.println("Enter a command");
                 String userInput = in.nextLine();
                 Command cmd = mainParser.parseCommand(userInput);
             }
