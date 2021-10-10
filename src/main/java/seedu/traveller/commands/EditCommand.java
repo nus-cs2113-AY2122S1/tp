@@ -9,7 +9,7 @@ import seedu.traveller.mapper.Vertex;
 
 import java.util.List;
 
-public class EditCommand extends Command{
+public class EditCommand extends Command {
     private int tripIndex = -1;
     private final String tripName;
     private String startCountry;
@@ -38,9 +38,8 @@ public class EditCommand extends Command{
             return;
         }
         TripsList.deleteTrip(tripIndex);
-        ui.printDelete(tripName);
-//        Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry, this.path);
-//        tripsList.addTrip(trip);
-//        ui.printNewTripCreated(tripName);
+        Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry, this.path);
+        tripsList.addTrip(trip);
+        ui.printEdit(tripName);
     }
 }
