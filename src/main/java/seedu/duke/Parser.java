@@ -48,6 +48,8 @@ public class Parser {
         return arg.trim().toLowerCase().contains("delete /t");
     }
 
+    public static boolean hasDeleteAttendanceKeyword(String arg) { return arg.trim().toLowerCase().contains("delete /att"); }
+
     public static boolean hasFindMemberKeyword(String arg) {
         return arg.trim().toLowerCase().contains("find /m");
     }
@@ -90,6 +92,8 @@ public class Parser {
             keyword = Keyword.DELETE_MEMBER_KEYWORD;
         } else if (hasDeleteTrainingKeyword(query)) {
             keyword = Keyword.DELETE_TRAINING_KEYWORD;
+        } else if (hasDeleteAttendanceKeyword(query)) {
+            keyword = Keyword.DELETE_ATTENDANCE_KEYWORD;
         } else if (hasFindMemberKeyword(query)) {
             keyword = Keyword.FIND_MEMBER_KEYWORD;
         } else if (hasFindTrainingKeyword(query)) {
@@ -271,12 +275,14 @@ public class Parser {
             case "/s":
                 studentNumber = words[wordIndex].trim();
                 break;
+            /**
             case "/g":
                 gender = words[wordIndex].trim().charAt(0);
                 break;
             case "/p":
                 phoneNumber = Integer.parseInt(words[wordIndex].trim());
                 break;
+             */
             case "/n":
                 trainingName = words[wordIndex].trim();
                 break;
@@ -495,29 +501,22 @@ public class Parser {
 
     }
 
+    public static Integer getAttIndex(String query) {
+        int attNumber = Integer.parseInt(query.replaceFirst("delete /att", "").trim());
+
+        return attNumber;
+    }
+
     public static void deleteAttendance(AttendanceList attendanceList, String query) {
-        int attendanceIndex = -1;
-
-        String regex = "(\\/[a-z])+";
-
-        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(query);
-
-        String[] words = query.trim().split(regex);
-
-        int wordIndex = 1;
-        while (matcher.find()) {
-            if (matcher.group().equals("/t")) {
-                attendanceIndex = Integer.parseInt(words[wordIndex].trim());
-            }
-            wordIndex++;
+        try {
+            int attNumber = getAttIndex(query);
+            Attendance entry = attendanceList.deleteAttendance(attNumber);
+            System.out.println("The following attendance entry have been deleted\n" + entry.toString());
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println("There is no such member number...");
+        } catch (NumberFormatException e) {
+            System.out.println("Please input a proper number...");
         }
-
-        if (attendanceIndex != -1) {
-            Attendance toDelete = attendanceList.deleteAttendance(attendanceIndex);
-            System.out.println("You have deleted: \n" + toDelete.toString());
-        }
-
     }
 }
 

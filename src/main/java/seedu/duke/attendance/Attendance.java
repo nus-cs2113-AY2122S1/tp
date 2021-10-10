@@ -21,6 +21,10 @@ public class Attendance {
         this.schedule = schedule;
     }
 
+    public void deleteMember() { this.member = null; }
+
+    public void deleteTrainingSchedule() { this.schedule = null; }
+
     /**
      * Formats description of attendance to be displayed to user.
      *
@@ -28,6 +32,7 @@ public class Attendance {
      */
     @Override
     public String toString() {
-        return "\n" + schedule.toString() + "\n" + member.toString();
+        return String.format("Name: %s | Student Number: %s | Training Name: %s | Venue: %s | Time: %s", member.getName(), member.getStudentNumber(),
+                schedule.getTrainingName(), schedule.getTrainingVenue(), schedule.getTrainingTime());
     }
 }
