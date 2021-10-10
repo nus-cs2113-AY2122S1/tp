@@ -23,5 +23,6 @@ text-ui-test/storage.in
 text-ui-test/storage/
 text-ui-test/.gradle/
 text-ui-test/ACTUAL.TXT
+storage/
 
 

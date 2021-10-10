@@ -1,4 +1,5 @@
 Hello, I'm MedBot!
 How can I help you today?
+
 Thank you for using MedBot!
 See you again!
