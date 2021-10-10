@@ -3,6 +3,10 @@ package seedu.duke.lists;
 import seedu.duke.exception.GetJackDException;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import static seedu.duke.command.logger.LoggerUtil.setupLogger;
+
 
 /**
  * Represents a list of all workouts in the form of a ArrayList of Workout Objects (All workouts stored by user).
@@ -10,12 +14,14 @@ import java.util.ArrayList;
  */
 public class WorkoutList {
     private ArrayList<Workout> workouts;
+    static final Logger LOGGER = Logger.getLogger(WorkoutList.class.getName());
 
     /**
      * Default Constructor.
      */
     public WorkoutList() {
         workouts = new ArrayList<>();
+        setupLogger(LOGGER);
     }
 
     /**
@@ -24,7 +30,8 @@ public class WorkoutList {
      * @param workout workout routine to be added.
      */
     public void addWorkout(Workout workout) {
-        //assumes not null
+        assert workout != null;
+        LOGGER.info("Adding Workout: " + workout.getWorkoutName());
         workouts.add(workout);
     }
 
@@ -36,10 +43,10 @@ public class WorkoutList {
      * @throws GetJackDException when the index is greater than number of workouts or less than 0.
      */
     public Workout removeWorkout(int displayIndex) throws GetJackDException {
-        //assume not null
         if (displayIndex <= 0 || displayIndex > workouts.size()) {
             throw new GetJackDException("Invalid Workout Index");
         }
+        LOGGER.info("Removing Workout");
         return workouts.remove(displayIndex - 1);
     }
 
@@ -72,6 +79,7 @@ public class WorkoutList {
      * This is done as WorkoutModel objects are easily convertable to JSONStrings for storage.
      */
     public void convertAllWorkoutsToStorageModel() {
+        LOGGER.info("Generating WorkoutListModel");
         for (Workout workout : workouts) {
             workout.convertToWorkoutStorageModel();
         }

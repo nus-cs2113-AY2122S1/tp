@@ -7,7 +7,8 @@ Welcome to
  `._____.'  '.__.'\__/  `.____.'\'-;__/'.___.'[__|  \_]  |______.'
 
 Let's begin the journey to achieve the physique you desire!
-Enter your command below
+If you don't know where to start, type "help" for a list of possible commands.
+Enter your command below.
 ________________________________________________________
 ________________________________________________________
 Invalid command

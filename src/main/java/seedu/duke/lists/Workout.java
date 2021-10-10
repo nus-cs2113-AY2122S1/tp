@@ -6,8 +6,9 @@ import seedu.duke.storage.models.WorkoutListModel;
 import seedu.duke.storage.models.WorkoutModel;
 import seedu.duke.exercises.Exercise;
 
-
 import java.util.ArrayList;
+
+import static seedu.duke.lists.WorkoutList.LOGGER;
 
 /**
  * A workout contains a list of exercises in the form of ArrayList of Exercise objects.
@@ -23,10 +24,11 @@ public class Workout {
      * @param workoutName name that the user gives to the workout routine.
      */
     public Workout(String workoutName) {
-        //assume not null
+        assert !workoutName.isEmpty();
         exercises = new ArrayList<>();
         this.workoutName = workoutName;
     }
+
 
     /**
      * To get the name of the Workout.
@@ -43,7 +45,8 @@ public class Workout {
      * @param exercise exercise that is to be added.
      */
     public void addExercise(Exercise exercise) {
-        //assume not null
+        assert exercise != null;
+        LOGGER.info("Adding Exercise: " + exercise.getDescription());
         exercises.add(exercise);
     }
 
@@ -58,6 +61,7 @@ public class Workout {
         if (displayIndex <= 0 || displayIndex > exercises.size()) {
             throw new GetJackDException("Invalid Exercise Index");
         }
+        LOGGER.info("Removing Exercise");
         return exercises.remove(displayIndex - 1);
     }
 
@@ -100,6 +104,7 @@ public class Workout {
      * This is done as WorkoutModel objects are easily convertable to JSONStrings for storage.
      */
     public void convertToWorkoutStorageModel() {
+        LOGGER.info("Generating WorkoutModel");
         WorkoutModel workoutModel = new WorkoutModel(workoutName);
         for (Exercise exercise : exercises) {
             exercise.convertToExerciseStorageModel(workoutModel);

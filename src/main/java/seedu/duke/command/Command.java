@@ -11,6 +11,7 @@ import seedu.duke.ui.Ui;
 public abstract class Command {
     public static final String ERROR_MESSAGE_WORKOUT_NOT_FOUND = "Error. Workout not found\n";
     public static final String ERROR_MESSAGE_EXERCISE_NOT_FOUND = "Error. Exercise not found\n";
+    public static String MESSAGE_USAGE;
 
     protected Command() {
     }

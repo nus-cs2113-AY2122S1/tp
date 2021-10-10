@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 
+import seedu.duke.command.HelpCommand;
 import seedu.duke.command.exercise.AddExerciseCommand;
 import seedu.duke.command.Command;
 import seedu.duke.command.exercise.DisplayExercisesCommand;
@@ -47,6 +48,8 @@ public class Parser {
             return prepareMarkExerciseAsDone(commandArgs);
         case RemoveExerciseCommand.COMMAND_WORD:
             return prepareRemoveExercise(commandArgs);
+        case HelpCommand.COMMAND_WORD:
+            return prepareHelpMessage(commandArgs);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         default:
@@ -63,6 +66,29 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + DisplayExercisesCommand.MESSAGE_USAGE);
         }
 
+    }
+
+    private Command prepareHelpMessage(String commandArgs) {
+        switch (commandArgs) {
+        case DisplayExercisesCommand.COMMAND_WORD:
+            return new HelpCommand(DisplayExercisesCommand.MESSAGE_USAGE);
+        case ListWorkoutsCommand.COMMAND_WORD:
+            return new HelpCommand(ListWorkoutsCommand.MESSAGE_USAGE);
+        case AddExerciseCommand.COMMAND_WORD:
+            return new HelpCommand(AddExerciseCommand.MESSAGE_USAGE);
+        case CreateWorkoutCommand.COMMAND_WORD:
+            return new HelpCommand(CreateWorkoutCommand.MESSAGE_USAGE);
+        case DeleteWorkoutCommand.COMMAND_WORD:
+            return new HelpCommand(DeleteWorkoutCommand.MESSAGE_USAGE);
+        case MarkExerciseAsDoneCommand.COMMAND_WORD:
+            return new HelpCommand(MarkExerciseAsDoneCommand.MESSAGE_USAGE);
+        case RemoveExerciseCommand.COMMAND_WORD:
+            return new HelpCommand(RemoveExerciseCommand.MESSAGE_USAGE);
+        case ExitCommand.COMMAND_WORD:
+            return new HelpCommand(ExitCommand.MESSAGE_USAGE);
+        default:
+            return new HelpCommand();
+        }
     }
 
     private Command prepareCreateWorkout(String commandArgs) {
