@@ -46,16 +46,4 @@ public class AttendanceList {
             throw new IndexOutOfBoundsException(e.getMessage());
         }
     }
-
-    public Attendance getAttendance(int attendanceNumber) throws IndexOutOfBoundsException {
-        try {
-            int index = attendanceNumber - 1;
-            Attendance entry = attendanceList.get(index);
-            return entry;
-        } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException(e.getMessage());
-        }
-    }
 }
-
-//add /att /m izzi /s 123456 /n Monday trg /v mpsh2 /a 1800
