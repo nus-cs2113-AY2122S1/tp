@@ -45,7 +45,10 @@ public class EventWithReminder extends Event {
         reminder = new Reminder(startDate);
     }
 
-    public EventWithReminder(String description, PriorityEnum priority, Date startDate, Date endDate, RecurrenceEnum recurrence) {
+    public EventWithReminder(String description,
+                             PriorityEnum priority,
+                             Date startDate, Date endDate,
+                             RecurrenceEnum recurrence) {
         super(description, priority);
         reminder = new Reminder(startDate);
     }

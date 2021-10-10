@@ -21,7 +21,8 @@ public class Reminder {
         LocalDateTime now = LocalDateTime.now();
         if (now.isAfter(this.reminderTime)) {
             this.reminderDone = true;
-        } else {
+        }
+        else {
             this.reminderDone = false;
         }
     }

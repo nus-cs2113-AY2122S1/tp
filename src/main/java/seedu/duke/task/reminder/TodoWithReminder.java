@@ -7,7 +7,7 @@ import seedu.duke.task.type.Todo;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public class TodoWithReminder extends Todo{
+public class TodoWithReminder extends Todo {
     static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
 
     Date doOn;
