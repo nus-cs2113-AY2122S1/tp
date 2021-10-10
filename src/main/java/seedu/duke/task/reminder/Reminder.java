@@ -10,7 +10,7 @@ public class Reminder {
     private boolean reminderDone;
 
     public Reminder() {
-        
+
     }
 
     public Reminder(Date time) {
