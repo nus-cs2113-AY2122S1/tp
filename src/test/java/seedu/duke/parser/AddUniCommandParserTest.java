@@ -5,17 +5,16 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.text.ParseException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import seedu.duke.commands.*;
-import seedu.duke.universities.*;
+import seedu.duke.universities.UniversityList;
 import seedu.duke.storage.Storage;
 
 
 public class AddUniCommandParserTest {
 
     @Test
-    public void AddUniCommandParser_existentUniversityName_success() throws IOException {
+    public void test_validUniversityName_success() throws IOException {
         UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
         AddUniCommandParser commandParser = new AddUniCommandParser();
         assertEquals(true, commandParser.isUniversityExist("Aalto University", universityMasterList));
@@ -24,7 +23,7 @@ public class AddUniCommandParserTest {
     }
 
     @Test
-    public void AddUniCommandParser_nonExistentUniversityName_exceptionThrown() {
+    public void test_invalidUniversityName_exceptionThrown() {
         try {
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
             AddUniCommandParser commandParser = new AddUniCommandParser();
@@ -37,7 +36,7 @@ public class AddUniCommandParserTest {
     }
 
     @Test
-    public void AddUniCommandParser_EmptyUniversityName_exceptionThrown() {
+    public void test_EmptyUniversityName_exceptionThrown() {
         try {
             AddUniCommandParser commandParser = new AddUniCommandParser();
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
