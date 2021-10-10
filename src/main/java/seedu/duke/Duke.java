@@ -19,7 +19,6 @@ public class Duke {
 
     public static void main(String[] args) {
         Ui.printGreetingMessage();
-        Ui.printLineBreak();
         try {
             storage.load(eventList, taskList);
         } catch (FileNotFoundException e) {

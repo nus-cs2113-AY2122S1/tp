@@ -10,9 +10,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Ui {
     private static final String HELP_MESSAGE = "Here's some tips on how to use me!\n\n"
-            + "help"
+            + "help\n"
             + "\t - Show a summary of the commands and options that I can handle\n\n"
-            + "list"
+            + "list\n"
             + "\t - Lists all the events and tasks currently in the schedule\n"
             + "\t - An additional -e or -t flag can be appended to list either events or tasks only\n"
             + "\t - E.g. list -e OR list -t\n\n"
@@ -27,7 +27,9 @@ public class Ui {
             + "delete -t n/INDEX\n"
             + "\t - Deletes a task given its index in the overall schedule\n\n"
             + "select -t n/INDEX\n"
-            + "\t - Selects a task given its index in the overall schedule and displays its details\n\n";
+            + "\t - Selects a task given its index in the overall schedule and displays its details\n\n"
+            + "update -e OR -t\n"
+            + "\t - Displays the respective list of events or tasks that you can choose and update";
 
     public static String readInput() {
         Scanner in = new Scanner(System.in);
@@ -53,26 +55,28 @@ public class Ui {
 
     public static String getTaskAddedMessage(Task task) {
         return String.format("Task added: %s\n"
-                        + "Total number of tasks = %s\n",
+                        + "Total number of tasks = %s",
                 task.getTitle(), Duke.taskList.size());
     }
 
     public static String getEventAddedMessage(Event event) {
         return String.format("Event added: %s\n"
-                        + "Total number of events = %s\n",
+                        + "Total number of events = %s",
                 event.getTitle(), Duke.eventList.size());
     }
 
     public static void printGreetingMessage() {
-        System.out.println("Greetings mortal. How may you be served today?\n" + getLineBreak());
+        System.out.println("Greetings mortal. How may you be served today?\n"
+                + "TIP: enter \"help\" if you are weak and clueless!\n"
+                + getLineBreak());
     }
 
     public static String getByeMessage() {
         return "You will be missed!!";
     }
 
-    public static void displayUserGuide() {
-        System.out.println(HELP_MESSAGE);
+    public static String getHelpMessage() {
+        return(HELP_MESSAGE);
     }
 
     public static void printList(ArrayList<Item> list) {

@@ -7,7 +7,6 @@ public class HelpCommand extends Command {
     }
 
     public CommandResult execute() {
-        Ui.displayUserGuide();
-        return new CommandResult("HelpCommand");
+        return new CommandResult(Ui.getHelpMessage());
     }
 }
