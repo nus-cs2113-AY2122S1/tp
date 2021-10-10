@@ -31,14 +31,10 @@ class AddExerciseCommandTest {
 
     @Test
     void executeUserCommand_validDataAddToEmptyWorkout_exerciseAdded() throws GetJackDException {
-        try {
-            int initialSize = workoutList.getWorkout(1).getAllExercises().size();
-            AddExerciseCommand c = new AddExerciseCommand(1, "description", 3, 10);
-            c.executeUserCommand(workoutList, ui, storage);
-            assertEquals(initialSize + 1, workoutList.getWorkout(1).getAllExercises().size());
-        } catch (GetJackDException e) {
-            e.printStackTrace();
-        }
+        int initialSize = workoutList.getWorkout(1).getAllExercises().size();
+        AddExerciseCommand c = new AddExerciseCommand(1, "description", 3, 10);
+        c.executeUserCommand(workoutList, ui, storage);
+        assertEquals(initialSize + 1, workoutList.getWorkout(1).getAllExercises().size());
     }
 
     @Test
