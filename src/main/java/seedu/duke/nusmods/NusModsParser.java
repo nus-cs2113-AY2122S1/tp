@@ -21,6 +21,9 @@ import static org.apache.commons.io.FileUtils.copyURLToFile;
 
 public class NusModsParser {
     public static final String CACHEDIR = "cache/";
+    private static final String ENDPOINT = "https://api.nusmods.com/v2/";
+    private static final int TIMEOUT = 5000;
+
     private enum Semester {
         S1, S2, ST1, ST2;
 
@@ -36,7 +39,7 @@ public class NusModsParser {
     }
 
     /**
-     * Get calendar events of the given classes in the current semester
+     * Get calendar events of the given classes in the current semester.
      * @param moduleCode The module code of the module in question, for example CS2113T
      * @param classNos A set of class numbers to be queried, for example T01
      * @return An array of Events denoting all class occurrences
@@ -74,12 +77,10 @@ public class NusModsParser {
     }
 
     private static String getModuleUrl(String moduleCode) {
-        final String ENDPOINT = "https://api.nusmods.com/v2/";
         return ENDPOINT + formatAcadYear(getAcadYear()) + "/modules/" + moduleCode + ".json";
     }
 
     private void getModuleJson(String moduleCode) throws IOException {
-        final int TIMEOUT = 5000;
         copyURLToFile(new URL(getModuleUrl(moduleCode)), new File(getModuleFilename(moduleCode)), TIMEOUT, TIMEOUT);
     }
 

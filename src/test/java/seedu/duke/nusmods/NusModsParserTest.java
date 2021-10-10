@@ -3,7 +3,6 @@ package seedu.duke.nusmods;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
 import seedu.duke.task.type.Event;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
@@ -29,6 +28,6 @@ class NusModsParserTest {
         }
         System.setProperty("https.proxyHost", "123.456.7.8"); // simulate network down
         assertThrows(IOException.class,
-                () -> parser.getModuleEvents("CS2113T", Collections.singleton("C02")));
+            () -> parser.getModuleEvents("CS2113T", Collections.singleton("C02")));
     }
 }
