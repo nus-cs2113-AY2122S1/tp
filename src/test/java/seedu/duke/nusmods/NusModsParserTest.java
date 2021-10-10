@@ -26,7 +26,7 @@ class NusModsParserTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.setProperty("https.proxyHost", "123.456.7.8"); // simulate network down
+        System.setProperty("https.proxyHost", "localhost"); // simulate network down
         assertThrows(IOException.class,
             () -> parser.getModuleEvents("CS2113T", Collections.singleton("C02")));
     }
