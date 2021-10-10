@@ -49,6 +49,7 @@ public class MedicineManager {
                 break;
             }
         }
+        assert (existingMaxQuantity > 0) : "Invalid max quantity";
         return existingMaxQuantity;
     }
 
