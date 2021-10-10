@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.Date;
 
 /**
- * Dispense medication based on user input
- * User input includes medication name, quantity to dispense, Customer's NRIC and Staff name
+ * Dispense medication based on user input.
+ * User input includes medication name, quantity to dispense, Customer's NRIC and Staff name.
  */
 public class DispenseCommand extends Command {
 
