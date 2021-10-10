@@ -21,6 +21,10 @@ public class Entry {
      */
     public static void addEntry(String entry) throws NullPointerException {
         Keyword keyword = Parser.getKeywordStatus(entry);
+
+        //i just put here first even tho sus cos all the private attributes are declared in this class
+        MemberStorage.SetupMemberFile(members);
+
         switch (keyword) {
         case LIST_MEMBER_KEYWORD:
             Ui.printList(members);

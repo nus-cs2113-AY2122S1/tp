@@ -19,6 +19,27 @@ public class MemberList {
         return memberList;
     }
 
+
+    public int getMemberSize() { //added by xy
+        return memberList.size();
+    }
+
+    public String getMemberName(int index){//added by xy
+        return memberList.get(index).name.toString();
+    }
+
+    public String getMemberStudentNumber(int index){//added by xy
+        return memberList.get(index).studentNumber.toString();
+    }
+
+    public char getMemberGender(int index){//added by xy
+        return memberList.get(index).gender;
+    }
+
+    public String getMemberPhoneNumber(int index){//added by xy
+        return String.valueOf(memberList.get(index).phoneNumber);
+    }
+
     /**
      * Add member as request by user.
      *

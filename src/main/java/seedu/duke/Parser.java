@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.io.File;
 import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,8 @@ import seedu.duke.member.MemberList;
 import seedu.duke.training.TrainingSchedule;
 import seedu.duke.training.TrainingList;
 import seedu.duke.attendance.AttendanceList;
+
+import static seedu.duke.MemberStorage.writeMemberFile;
 
 public class Parser {
 
@@ -246,6 +249,9 @@ public class Parser {
         oldMemberAndEditedMember.add(oldMember);
         oldMemberAndEditedMember.add(editedMember);
 
+        File dukeMemberFile = new File("dukeMembers.csv");
+        writeMemberFile(dukeMemberFile,members);
+
         return oldMemberAndEditedMember;
     }
 
@@ -324,6 +330,10 @@ public class Parser {
     public static void makeMemberEntry(MemberList members, String query) {
         Member member = getMemberDetails(query);
         members.addMember(member);
+
+        File dukeMemberFile = new File("dukeMembers.csv");
+        writeMemberFile(dukeMemberFile,members);
+
         System.out.println("Added a Member: " + member);
     }
 
@@ -337,6 +347,10 @@ public class Parser {
         ArrayList<Member> oldMemberAndNewMember = editMemberDetails(members, query);
         Member oldMember = oldMemberAndNewMember.get(0);
         Member newMember = oldMemberAndNewMember.get(1);
+
+        File dukeMemberFile = new File("dukeMembers.csv");
+        writeMemberFile(dukeMemberFile,members);
+
         System.out.println("Edited member: " + oldMember);
         System.out.println("To become:  " + newMember);
     }
@@ -398,6 +412,10 @@ public class Parser {
         try {
             int memberNumber = getMemberIndex(query);
             Member member = members.deleteMember(memberNumber);
+
+            File dukeMemberFile = new File("dukeMembers.csv");
+            writeMemberFile(dukeMemberFile,members);
+
             System.out.println("The following member have been deleted\n" + member.toString());
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("There is no such member number...");
