@@ -197,13 +197,14 @@ public class Timetable {
         clearSchedule(saturday);
         clearSchedule(sunday);
     }
-    
+
     /**
      * Clears the TimetableLesson for all non-null time slots .
      *
      * @param schedule Schedule contains the lessons of the user for a particular day of the week.
      */
     public void clearSchedule(TimetableLesson[] schedule) {
+        assert (schedule.length > 0);
         for (int i = 0; i < schedule.length; i++) {
             if (schedule[i] != null) {
                 schedule[i] = null;

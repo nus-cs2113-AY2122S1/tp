@@ -24,7 +24,6 @@ public class DeleteCommand extends Command {
             module = NusMods.fetchModOnline(moduleToBeDeleted);
             timetable.deleteModuleFromList(module);
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);
         } catch (UniModsException e) {
             System.out.println(e.getMessage());
