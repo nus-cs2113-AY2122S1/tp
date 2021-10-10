@@ -11,14 +11,17 @@ public class Parser {
      * @param listOfTrips the list of trips that the user has added to the program
      * @return whether the program should continue running after processing the given user input
      */
-    public static boolean parseUserInput(String userInput, ArrayList<Trip> listOfTrips)
-            throws ArrayIndexOutOfBoundsException {
+    public static boolean parseUserInput(String userInput, ArrayList<Trip> listOfTrips) {
         String[] userInputSplit = userInput.split(" ", 2);
         String inputCommand = userInputSplit[0];
         String inputDescription;
+        if (inputCommand.equals("quit")) {
+            inputDescription = null;
+        } else {
+            inputDescription = userInputSplit[1];
+        }
         switch (inputCommand) {
         case "create":
-            inputDescription = userInputSplit[1];
             String[] newTripInfo = inputDescription.split(" ");
             Trip newTrip = new Trip(newTripInfo);
             listOfTrips.add(newTrip);
@@ -26,7 +29,6 @@ public class Parser {
                     + newTrip.getDateOfTripString() + " has been successfully added!");
             break;
         case "edit":
-            inputDescription = userInputSplit[1];
             String[] tripToEditInfo = inputDescription.split(" ", 2);
             try {
                 int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
@@ -38,23 +40,20 @@ public class Parser {
             }
             break;
         case "summary":
-            inputDescription = userInputSplit[1];
             String[] tripToGetInfo = inputDescription.split(" ", 2);
             String tripNumber = tripToGetInfo[0];
             try {
                 int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
                 Trip tripToGet = listOfTrips.get(indexToGet);
-                tripToGet.printExpensesSummary();
+                Ui.printExpensesSummary(tripToGet);
             } catch (ArrayIndexOutOfBoundsException e) {
-                e.printStackTrace();
+                System.out.println("There is no matching trip index. Please try again.");
             }
             break;
         case "delete":
-            inputDescription = userInputSplit[1];
             deleteTrip(listOfTrips, inputDescription);
             break;
         case "expense":
-            inputDescription = userInputSplit[1];
             String[] expenseInfo = inputDescription.split(" ");
             int tripIndex = Integer.parseInt(expenseInfo[0]) - 1;
             Trip currentTrip = listOfTrips.get(tripIndex);
@@ -64,6 +63,7 @@ public class Parser {
             String[] personSplit = personChained.split(",");
             ArrayList<Person> listOfPersonsIncluded = getPersons(tripIndex, personSplit, currentTrip);
             currentTrip.addExpense(new Expense(expenseAmount, expenseDescription, listOfPersonsIncluded));
+            Ui.printExpenseAddedSuccess();
             break;
         case "quit":
             Ui.goodBye();

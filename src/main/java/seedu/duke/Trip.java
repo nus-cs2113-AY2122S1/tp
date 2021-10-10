@@ -118,12 +118,7 @@ public class Trip {
         return getBudget() - getTotalExpenses();
     }
 
-    public void printExpensesSummary() {
-        System.out.println("This is the summary for your " + getLocation() + " trip " + getDateOfTripString());
-        System.out.println("Total budget for this trip: " + getBudget());
-        System.out.println("Total expenditure so far: " + getTotalExpenses());
-        System.out.println("Current budget left for this trip: " + getBudgetLeft());
-    }
+
 
     public String getForeignCurrency() {
         return foreignCurrency;
