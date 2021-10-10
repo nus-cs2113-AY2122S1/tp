@@ -13,8 +13,8 @@ import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class Storage {
-    private static final String UNIVERSITY_FILEPATH = "data/University.csv";
-    private static final String MODULE_FILEPATH = "data/modules.csv";
+    private static final String UNIVERSITY_FILEPATH = "src/main/java/seedu/duke/data/University.csv";
+    private static final String MODULE_FILEPATH = "src/main/java/seedu/duke/data/modules.csv";
 
     public static ArrayList<University> loadUniversities() throws IOException {
         return readUniversitiesFromCsv();
