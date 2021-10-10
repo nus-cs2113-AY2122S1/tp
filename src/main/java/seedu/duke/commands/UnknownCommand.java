@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.data.item.Catalogue;
 import seedu.duke.ui.TextUI;
 
 import static seedu.duke.common.Messages.UNKNOWN_MESSAGE;
@@ -21,7 +22,7 @@ public class UnknownCommand extends Command {
      * @param ui Object that handles user IO
      */
     @Override
-    public void execute(TextUI ui) {
+    public void execute(TextUI ui, Catalogue catalogue) {
         ui.print(UNKNOWN_MESSAGE);
     }
 
