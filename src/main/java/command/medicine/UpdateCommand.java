@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Update medication information based on user input given stock id.
@@ -21,6 +23,7 @@ import java.util.HashMap;
 
 public class UpdateCommand extends Command {
     private static final int MINIMUM_ROW_NUMBER_UPDATE = 1;
+    private static Logger logger = Logger.getLogger("UpdateCommand");
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
@@ -198,5 +201,6 @@ public class UpdateCommand extends Command {
                 break;
             }
         }
+        logger.log(Level.INFO, "Updated stock information with given user input");
     }
 }
