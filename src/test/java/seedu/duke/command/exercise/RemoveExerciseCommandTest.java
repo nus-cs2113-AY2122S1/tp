@@ -33,7 +33,7 @@ class RemoveExerciseCommandTest {
     }
 
     @Test
-    void executeUserCommand_validData_exerciseDone() throws GetJackDException {
+    void executeUserCommand_validWorkoutIndexExerciseIndex_exerciseDone() throws GetJackDException {
         int initialWorkoutSize = workoutList.getWorkout(1).getAllExercises().size();
         RemoveExerciseCommand c = new RemoveExerciseCommand(1, 1);
         c.executeUserCommand(workoutList, ui, storage);
@@ -43,6 +43,12 @@ class RemoveExerciseCommandTest {
     @Test
     void executeUserCommand_invalidExerciseIndex_exceptionThrown() {
         RemoveExerciseCommand c = new RemoveExerciseCommand(1, 3);
+        assertThrows(GetJackDException.class, () -> c.executeUserCommand(workoutList, ui, storage));
+    }
+
+    @Test
+    void executeUserCommand_invalidWorkoutIndex_exceptionThrown() {
+        RemoveExerciseCommand c = new RemoveExerciseCommand(5, 1);
         assertThrows(GetJackDException.class, () -> c.executeUserCommand(workoutList, ui, storage));
     }
 

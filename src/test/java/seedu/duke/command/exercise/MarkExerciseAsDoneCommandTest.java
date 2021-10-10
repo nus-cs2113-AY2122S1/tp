@@ -34,7 +34,7 @@ class MarkExerciseAsDoneCommandTest {
     }
 
     @Test
-    void executeUserCommand_validData_exerciseDone() throws GetJackDException {
+    void executeUserCommand_validWorkoutIndexExerciseIndex_exerciseDone() throws GetJackDException {
         MarkExerciseAsDoneCommand c = new MarkExerciseAsDoneCommand(1, 1);
         c.executeUserCommand(workoutList, ui, storage);
         assertEquals(workoutList.getWorkout(1).getExercise(1).getIsDone(), true);
@@ -43,6 +43,12 @@ class MarkExerciseAsDoneCommandTest {
     @Test
     void executeUserCommand_invalidExerciseIndex_exceptionThrown() {
         MarkExerciseAsDoneCommand c = new MarkExerciseAsDoneCommand(1, 3);
+        assertThrows(GetJackDException.class, () -> c.executeUserCommand(workoutList, ui, storage));
+    }
+
+    @Test
+    void executeUserCommand_invalidWorkoutIndex_exceptionThrown() {
+        MarkExerciseAsDoneCommand c = new MarkExerciseAsDoneCommand(5, 3);
         assertThrows(GetJackDException.class, () -> c.executeUserCommand(workoutList, ui, storage));
     }
 
