@@ -19,11 +19,14 @@ public class AverageMarksCommand extends Command{
     }
 
     /**
-     * Checks if the set marks command is valid. Throws an exception if not.
+     * Outputs the average marks of an assessment in a module.
+     *
      * @param modules List of modules.
+     * @param ui The ui instance to handle interactions with the user.
      * @throws CustomException When average marks command is invalid.
      */
-    public void commandValidation(ModuleList modules) throws CustomException {
+    @Override
+    public void execute(ModuleList modules, Ui ui) throws CustomException {
         Module module = modules.getModule(argumentMap.get("c"));
         AssessmentList list = module.getAssessments();
         if (argument.isEmpty()) {
@@ -42,19 +45,10 @@ public class AverageMarksCommand extends Command{
             // TODO non-existent assessment error message
             throw new CustomException("assessment does not exist!");
         }
+        averageMarks(ui, module);
     }
 
-    /**
-     * Outputs the average marks of an assessment in a module.
-     *
-     * @param modules List of modules.
-     * @param ui The ui instance to handle interactions with the user.
-     * @throws CustomException When average marks command is invalid.
-     */
-    @Override
-    public void execute(ModuleList modules, Ui ui) throws CustomException {
-        commandValidation(modules);
-        Module module = modules.getModule(argumentMap.get("c"));
+    private void averageMarks(Ui ui, Module module) {
         String assessmentName = argumentMap.get("a");
         double classSize = module.getNumberOfStudents();
         double totalMarks = 0;

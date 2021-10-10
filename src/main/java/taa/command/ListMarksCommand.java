@@ -21,32 +21,6 @@ public class ListMarksCommand extends Command{
     }
 
     /**
-     * Checks if the set marks command is valid. Throws an exception if not.
-     * @param modules List of modules.
-     * @throws CustomException When list marks command is invalid.
-     */
-    public void commandValidation(ModuleList modules) throws CustomException {
-        Module module = modules.getModule(argumentMap.get("c"));
-        AssessmentList list = module.getAssessments();
-        if (argument.isEmpty()) {
-            // TODO Usage format message
-            throw new CustomException("");
-        }
-        if (!checkArgumentMap()) {
-            // TODO Invalid/missing arguments message
-            throw new CustomException("");
-        }
-        if (argumentMap.get("c").contains(" ")) {
-            // TODO Invalid module code message
-            throw new CustomException("");
-        }
-        if (!list.isValidAssessment(argumentMap.get("a"))) {
-            // TODO non-existent assessment error message
-            throw new CustomException("assessment does not exist!");
-        }
-    }
-
-    /**
      * Returns a string with the student name and the marks associated with the student.
      * @param studentName Name of the student.
      * @param marks Marks of the student.
@@ -65,14 +39,40 @@ public class ListMarksCommand extends Command{
      */
     @Override
     public void execute(ModuleList modules, Ui ui) throws CustomException {
-        commandValidation(modules);
         Module module = modules.getModule(argumentMap.get("c"));
+        AssessmentList list = module.getAssessments();
+        if (argument.isEmpty()) {
+            // TODO Usage format message
+            throw new CustomException("");
+        }
+        if (!checkArgumentMap()) {
+            // TODO Invalid/missing arguments message
+            throw new CustomException("");
+        }
+        if (argumentMap.get("c").contains(" ")) {
+            // TODO Invalid module code message
+            throw new CustomException("");
+        }
+        if (!list.isValidAssessment(argumentMap.get("a"))) {
+            // TODO non-existent assessment error message
+            throw new CustomException("assessment does not exist!");
+        }
+        listMarks(ui, module);
+    }
+
+    private void listMarks(Ui ui, Module module) {
         String assessmentName = argumentMap.get("a");
         StringBuilder marksList = new StringBuilder(String.format(MESSAGE_LIST_MARKS_HEADER, assessmentName));
+        int marksCount = 0;
         for (Student student : module.getStudents()) {
+            marksCount += 1;
             marksList.append("\n");
             marksList.append(marksToString(student.getName(), student.getMarks(assessmentName)));
         }
-        ui.printMessage(marksList.toString());
+        if (marksCount <= 0) {
+            ui.printMessage(MARKS_LIST_EMPTY);
+        } else {
+            ui.printMessage(marksList.toString());
+        }
     }
 }
