@@ -8,7 +8,7 @@ import seedu.traveller.mapper.EmptyVertexException;
 import seedu.traveller.mapper.GraphList;
 import seedu.traveller.mapper.Vertex;
 
-public class SearchCommand extends Command{
+public class SearchCommand extends Command {
     private final String startCountry;
     private final String endCountry;
 
