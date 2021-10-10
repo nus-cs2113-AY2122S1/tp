@@ -43,7 +43,7 @@ public class DispenseCommand extends Command {
         int dispenseQuantity = Integer.parseInt(quantity);
         int quantityLeftToDispense = dispenseQuantity;
         int totalStock = MedicineManager.getTotalStockQuantity(medicines, medicationName);
-        int totalColumnLeft = MedicineManager.getTotalColumn(medicines, medicationName);
+        int totalColumnLeft = MedicineManager.getTotalRows(medicines, medicationName);
         Date dispenseDate = new Date(); //dispense date will be today's date
         ArrayList<Medicine> filteredMedicines = new ArrayList<>();
 

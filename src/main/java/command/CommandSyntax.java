@@ -1,6 +1,7 @@
 package command;
 
 import inventory.Medicine;
+import parser.OrderValidator;
 import parser.StockValidator;
 import ui.Ui;
 
@@ -157,10 +158,10 @@ public class CommandSyntax {
                 isValid = StockValidator.isValidColumn(ui, parameterValue);
                 break;
             case CommandParameters.CUSTOMER_NRIC:
-                isValid = StockValidator.isValidCustomerNric(ui, parameterValue);
+                isValid = OrderValidator.isValidCustomerNric(ui, parameterValue);
                 break;
             case CommandParameters.STAFF:
-                isValid = StockValidator.isValidStaffName(ui, parameterValue);
+                isValid = OrderValidator.isValidStaffName(ui, parameterValue);
                 break;
             default:
                 break;

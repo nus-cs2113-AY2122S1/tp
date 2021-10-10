@@ -58,19 +58,19 @@ public class MedicineManager {
      *
      * @param medicines Arraylist of medicines.
      * @param name Medicine name.
-     * @return Total number of columns for the same medicine.
+     * @return Total number of rows for the same medicine.
      */
-    public static int getTotalColumn(ArrayList<Medicine> medicines, String name) {
-        int existingColumnQuantity = 0;
+    public static int getTotalRows(ArrayList<Medicine> medicines, String name) {
+        int existingRowQuantity = 0;
         for (Medicine medicine : medicines) {
             if (medicine instanceof Stock) {
                 boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
                 if (isSameMedicineName) {
-                    existingColumnQuantity++;
+                    existingRowQuantity++;
                 }
             }
         }
-        return existingColumnQuantity;
+        return existingRowQuantity;
     }
 
     /**
