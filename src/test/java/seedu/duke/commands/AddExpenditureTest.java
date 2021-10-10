@@ -13,10 +13,10 @@ public class AddExpenditureTest {
     void addBudget_rawCommand_expenditureList_sizeOf1() {
         String description = "JanuaryExpenditure";
         double spending = 20.00;
-        LocalDate date = LocalDate.of(2021, 10, 8);
+        //LocalDate date = LocalDate.of(2021, 10, 8);
 
         RecordList currentExpenditureList = new RecordList();
-        currentExpenditureList.addExpenditure(description, spending, date);
-        assertEquals(1, currentExpenditureList.getSize());
+        currentExpenditureList.addExpenditure(description, spending);
+        assertEquals(1, currentExpenditureList.getExpenditureListSize());
     }
 }

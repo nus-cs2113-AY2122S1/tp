@@ -6,9 +6,9 @@ public abstract class Record {
     protected double amount;
     protected int month;
 
-    public Record(double amount, int month) {
+    public Record(double amount) {
         this.amount = amount;
-        this.month = month;
+        //this.month = month;
     }
 
     public double getAmount() {

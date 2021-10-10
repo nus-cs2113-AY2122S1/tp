@@ -11,16 +11,16 @@ public class AddExpenditureCommand extends AddCommand {
     public double spending;
     LocalDate date;
 
-    public AddExpenditureCommand(String description, double amount, LocalDate date) {
+    public AddExpenditureCommand(String description, double amount) {
         this.description = description;
         this.spending = amount;
-        this.date = date;
+        //this.date = date;
     }
 
 
     public void execute() {
-        Expenditure newExpenditure = new Expenditure(description, spending, date);
-        recordList.addExpenditure(description, spending, date);
+        Expenditure newExpenditure = new Expenditure(description, spending);
+        recordList.addExpenditure(description, spending);
         TextUi.showExpenditureAddedMessage(newExpenditure);
     }
 }

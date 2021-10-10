@@ -69,9 +69,9 @@ public class Parser {
     private Command prepareAddCommand(String commandParams) {
         String addType = commandParams.substring(0, 2);
         switch (addType) {
-        case ("-b"):
+        case ("b/"):
             return prepareAddBudgetCommand(commandParams);
-        case ("-e"):
+        case ("e/"):
             return prepareAddExpenditureCommand(commandParams);
         default:
             return new InvalidCommand();
@@ -85,11 +85,11 @@ public class Parser {
      * @return an AddBudgetCommand with proper parameters
      */
     private Command prepareAddBudgetCommand(String commandParams) {
-        String[] split = commandParams.substring(2).trim().split("-a/|-m/", 3);
+        String[] split = commandParams.substring(2).trim().split("a/", 2);
         double amount = Double.parseDouble(split[1].trim());
-        int date = Integer.parseInt(split[2].trim());
+        //int date = Integer.parseInt(split[2].trim());
 
-        return new AddBudgetCommand(amount, date);
+        return new AddBudgetCommand(amount);
     }
 
     /**
@@ -99,12 +99,12 @@ public class Parser {
      * @return an AddExpenditureCommand with proper parameters
      */
     private Command prepareAddExpenditureCommand(String commandParams) {
-        String[] split = commandParams.trim().split("-e/|-a/|-d/", 4);
+        String[] split = commandParams.trim().split("e/|a/", 3);
         String description = split[1].trim();
         double amount = Double.parseDouble(split[2].trim());
-        LocalDate date = LocalDate.parse(split[3].trim());
+        //LocalDate date = LocalDate.parse(split[3].trim());
 
-        return new AddExpenditureCommand(description, amount, date);
+        return new AddExpenditureCommand(description, amount);
     }
 
 }
