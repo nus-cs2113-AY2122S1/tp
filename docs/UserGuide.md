@@ -225,25 +225,25 @@ You have added Module1 Tut’s scheduled zoom link!
 
 ## Command Summary  
 
-| **Action** | **Format, Examples**
-| ------------ | -------------
-**access note workspace**|`note`
-**access schedule workspace**|`schedule`
-**add**|`add "<name>" "<content>"` <br>e.g. `add note1 note_content`
-**delete**|`delete <index>` <br>e.g. `delete 1`
-**view**|`view` or `view {index}`<br>e.g. `view` or `view 1`
-**help**|`help`
-**exit**|`exit`
+| **Action** | **Format, Examples** |
+| ------------ | -------------|
+|**access note workspace**|`note`|
+|**access schedule workspace**|`schedule`|
+|**add**|`add "<name>" "<content>"` <br>e.g. `add note1 note_content`|
+|**delete**|`delete <index>` <br>e.g. `delete 1`|
+|**view**|`view` or `view {index}`<br>e.g. `view` or `view 1`|
+|**help**|`help`|
+|**exit**|`exit`|
 
 ## Advanced Command Summary  
-| **Action** | **Format, Examples**  
-| ------------ | -------------  
-**add note**|`note add "<name>" "<content>"` <br>e.g. `note add note1 note_content`
-**add schedule**|`schedule add "<description>" "<day>" "<start_time>" "<zoom_link>"` <br>e.g. `schedule add “Module1 Tut” "Thursday" "10:00" "https://zoom.us/test"`
-**delete note**|`note delete <index>` <br>e.g. `note delete 1`
-**delete schedule**|`schedule delete <index>` <br>e.g. `schedule delete 1`
-**view note**|`note view` or `note view {index}` <br>e.g. `note view 1`
-**view schedule**|`schedule view` <br>e.g. `schedule view`
+| **Action** | **Format, Examples** |
+| ------------ | ------------- |
+|**add note**|`note add "<name>" "<content>"` <br>e.g. `note add note1 note_content`|
+|**add schedule**|`schedule add "<description>" "<day>" "<start_time>" "<zoom_link>"` <br>e.g. `schedule add “Module1 Tut” "Thursday" "10:00" "https://zoom.us/test"`|
+|**delete note**|`note delete <index>` <br>e.g. `note delete 1`|
+|**delete schedule**|`schedule delete <index>` <br>e.g. `schedule delete 1`|
+|**view note**|`note view` or `note view {index}` <br>e.g. `note view 1`|
+|**view schedule**|`schedule view` <br>e.g. `schedule view`|
 
 
 
