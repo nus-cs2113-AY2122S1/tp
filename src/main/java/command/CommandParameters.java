@@ -17,6 +17,5 @@ public class CommandParameters {
     public static final String SORT = "SORT";
     public static final String STAFF = "S";
     public static final String STOCK_ID = "I";
-    public static final String UPDATED_MEDICINE_NAME = "U";
 
 }
