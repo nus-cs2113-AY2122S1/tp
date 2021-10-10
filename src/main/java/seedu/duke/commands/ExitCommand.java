@@ -4,7 +4,11 @@ import seedu.duke.ui.TextUI;
 
 import static seedu.duke.common.Messages.EXIT_MESSAGE;
 
+/**
+ * Class encapsulating an exit command.
+ */
 public class ExitCommand extends Command {
+
     /**
      * Single constructor, no parameters.
      */
