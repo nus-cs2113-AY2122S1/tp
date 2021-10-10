@@ -32,6 +32,6 @@ public class IncrementCommand extends Command {
             return MESSAGE_INGREDIENT_NOT_FOUND;
         }
         ingredient.setQuantity(ingredient.getQuantity() + quantity);
-        return String.format(MESSAGE_INGREDIENT_INCREMENTED, ingredient.getQuantity(), ingredient);
+        return String.format(MESSAGE_INGREDIENT_INCREMENTED, quantity, ingredient);
     }
 }
