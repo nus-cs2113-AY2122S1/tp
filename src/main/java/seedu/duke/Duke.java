@@ -8,10 +8,15 @@ import seedu.duke.ingredient.IngredientParser;
 import seedu.duke.menu.MenuList;
 import seedu.duke.menu.MenuParser;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
 
+    public static final String path = "Duke.txt";
 
     public static void main(String[] args) {
 
@@ -25,8 +30,24 @@ public class Duke {
         IngredientParser ingredientParser = new IngredientParser();
 
         // Load Storage
-
-
+        File file = new File(path);
+        if (!file.exists()) {
+            System.out.println("File is not found!");
+        }
+        try {
+            Scanner fileReader = new Scanner(file);
+            while(fileReader.hasNextLine()) {
+                String line = fileReader.nextLine();
+                if (line.isEmpty()) {
+                    continue;
+                }
+                Employee newEmployee = decodeEmployee(line);
+                employeeParser.addEmployee(employeeList,newEmployee);
+            }
+            fileReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Cannot read the file");
+        }
         // Hello
         System.out.println("Hello!");
 
@@ -46,14 +67,12 @@ public class Duke {
                 Employee newEmployee = new Employee(description[1], description[2]);
                 employeeParser.addEmployee(employeeList, newEmployee);
 
-                System.out.println("I have added: ");
-                System.out.println(employeeList.employeeList.get(0));
-
             } else if (userInput.startsWith("remove-employee")) {
 
             } else if (userInput.startsWith("list-employee")) {
 
             } else if (userInput.startsWith("add-menu")) {
+             employeeParser.listEmployee(employeeList);
 
             } else if (userInput.startsWith("remove-menu")) {
 
@@ -77,8 +96,31 @@ public class Duke {
         System.out.println("Thank you. Goodbye!");
 
         // Save Storage
+        try {
+            FileWriter fileWriter = new FileWriter(file);
 
+            for (int i = 0; i < employeeList.employeeList.size(); i += 1) {
+                Employee employee = employeeList.employeeList.get(i);
+                fileWriter.write(String.format("%s\n", encodeEmployee(employee.toString())));
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("Cannot be written in the file!");
+        }
 
+    }
+
+    public static Employee decodeEmployee (String toRead) {
+        String[] description = toRead.trim().split("\\|", 3);
+        Employee employee = new Employee(description[1], description[2]);
+        return employee;
+    }
+
+    public static String encodeEmployee (String toWrite) {
+        String encodedItem = null;
+        String[] description = toWrite.trim().split(" ", 2);
+        encodedItem = "add-employee" + "|" + description[0] + "|" + description[1];
+        return encodedItem;
     }
 
 
