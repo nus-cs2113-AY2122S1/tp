@@ -41,6 +41,23 @@ public class AssessmentList {
         return (index >= 0 && index < assessments.size());
     }
 
+    /**
+     * Returns true if there exists an assessment with the inputted name in the assessment list.
+     * Returns false otherwise.
+     *
+     * @param assessmentName name of assessment to be checked.
+     * @return true if assessment exists, false otherwise.
+     */
+    public boolean isValidAssessment(String assessmentName) {
+        for (Assessment a : assessments) {
+            if (a.getAssessmentName().equalsIgnoreCase(assessmentName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     private Assessment getAssessmentAt(int index) {
         if (isValidIndex(index)) {
             return assessments.get(index);

@@ -37,8 +37,16 @@ public class Module {
         this.lessonCount = lessonCount;
     }
 
+    public int getNumberOfStudents() {
+        return students.size();
+    }
+
     public ArrayList<Student> getStudents() {
         return students;
+    }
+
+    public Student getStudent(int studentIndex) {
+        return students.get(studentIndex);
     }
 
     public AssessmentList getAssessments() {
@@ -70,4 +78,6 @@ public class Module {
 
         return String.format("%s - %s", code, name);
     }
+
+
 }
