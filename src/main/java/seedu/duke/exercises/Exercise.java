@@ -3,6 +3,10 @@ package seedu.duke.exercises;
 import seedu.duke.storage.models.ExerciseModel;
 import seedu.duke.storage.models.WorkoutModel;
 
+import java.util.logging.Logger;
+
+import static seedu.duke.logger.LoggerUtil.setupLogger;
+
 /**
  * Represents an exercise inside a workout.
  * It contains basic information of an exercise such as reps, sets and status.
@@ -13,6 +17,7 @@ public class Exercise {
     protected int sets;
     protected int reps;
     protected Boolean isDone = false;
+    static final Logger LOGGER = Logger.getLogger(Exercise.class.getName());
 
     public Exercise(String description, int sets, int reps) {
         this.description = description;
@@ -21,6 +26,7 @@ public class Exercise {
     }
 
     public Exercise() {
+        setupLogger(LOGGER);
     }
 
     /**
@@ -55,6 +61,7 @@ public class Exercise {
      * @return the current status of the exercise.
      */
     public String getStatusSymbol() {
+        assert isDone != null;
         return ("[" + (isDone ? "X" : " ") + "] ");
     }
 
@@ -65,6 +72,7 @@ public class Exercise {
      */
     @Override
     public String toString() {
+        assert description != null;
         return (getStatusSymbol() + description + " | " + sets + " sets of " + reps + " reps");
     }
 
@@ -76,6 +84,7 @@ public class Exercise {
      * @param workoutModel is the model of workout stored inside Json file.
      */
     public void convertToExerciseStorageModel(WorkoutModel workoutModel) {
+        LOGGER.info("Generating WorkoutModel with ExerciseModel");
         String setsInString = String.valueOf(sets);
         String repsInString = String.valueOf(reps);
         String doneStatus = isDone ? "true" : "false";
