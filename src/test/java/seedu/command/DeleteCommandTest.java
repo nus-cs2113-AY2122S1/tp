@@ -2,6 +2,7 @@ package seedu.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.module.Lesson;
+import seedu.module.Module;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableLesson;
 import seedu.ui.TextUi;
