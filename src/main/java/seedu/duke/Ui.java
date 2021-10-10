@@ -33,7 +33,11 @@ public class Ui {
 
     public static String readInput() {
         Scanner in = new Scanner(System.in);
-        return in.nextLine();
+        String userInput = "";
+        if (in.hasNextLine()) {
+            userInput = in.nextLine();
+        }
+        return userInput;
     }
 
     public static String getLineBreak() {
