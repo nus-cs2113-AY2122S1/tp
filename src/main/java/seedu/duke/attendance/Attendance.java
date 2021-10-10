@@ -21,10 +21,6 @@ public class Attendance {
         this.schedule = schedule;
     }
 
-    public void deleteMember() { this.member = null; }
-
-    public void deleteTrainingSchedule() { this.schedule = null; }
-
     /**
      * Formats description of attendance to be displayed to user.
      *
