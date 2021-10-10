@@ -1,11 +1,12 @@
 package seedu.duke.commands;
 
+import seedu.duke.Ui;
+
 public class HelpCommand extends Command {
     public HelpCommand() {
     }
 
     public CommandResult execute() {
-        //ui.displayUserGuide();
-        return new CommandResult("HelpCommand");
+        return new CommandResult(Ui.getHelpMessage());
     }
 }

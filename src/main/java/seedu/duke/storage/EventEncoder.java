@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.Parser;
 import seedu.duke.items.Event;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class EventEncoder {
                 + " | "
                 + event.getDescription()
                 + " | "
-                + event.getDateTime()
+                + Parser.convertDateTimeForSaving(event.getDateTime())
                 + " | "
                 + event.getVenue()
                 + " | "

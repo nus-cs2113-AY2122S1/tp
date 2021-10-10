@@ -25,7 +25,7 @@ public class AddCommand extends Command {
     protected static LocalDateTime itemDateTime;
 
     protected static String eventVenue;
-    protected static int eventBudget;
+    protected static double eventBudget;
 
     // Indicates if an error occurs due to the wrong format typed by the user
     protected static boolean isCorrectFormat;
@@ -61,16 +61,16 @@ public class AddCommand extends Command {
         return response.trim().substring(startOfItemAttribute, endOfItemAttribute);
     }
 
-    private int retrieveEventBudget(String response) {
+    private double retrieveEventBudget(String response) {
         int startOfEventBudget = response.indexOf(BUDGET_FLAG) + 2;
         int endOfEventBudget = response.indexOf("/", startOfEventBudget) - 2;
         try {
             if (endOfEventBudget < 0) {
-                return Integer.parseInt(response.trim().substring(startOfEventBudget));
+                return Double.parseDouble(response.trim().substring(startOfEventBudget));
             }
-            return Integer.parseInt(response.trim().substring(startOfEventBudget, endOfEventBudget));
+            return Double.parseDouble(response.trim().substring(startOfEventBudget, endOfEventBudget));
         } catch (NumberFormatException e) {
-            System.out.print("Budget needs to be an integer. ");
+            System.out.print("Budget needs to be a number. ");
             // Returns -1 to signify that the budget entered was not a valid integer
             return -1;
         }
@@ -154,20 +154,18 @@ public class AddCommand extends Command {
         if (isCorrectFormat) {
             Ui.promptForDescription();
             itemDescription = Ui.readInput();
-            Ui.linebreak();
+            Ui.printLineBreak();
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
                 Task task = new Task(itemTitle, itemDescription, itemDateTime);
                 addToTaskList(task);
-                return new CommandResult("Task added: " + itemTitle + System.lineSeparator()
-                        + "Total number of tasks = " + Duke.taskList.size());
+                return new CommandResult(Ui.getTaskAddedMessage(task));
             }
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);
                 addToEventList(event);
-                return new CommandResult("Event added: " + itemTitle + System.lineSeparator()
-                        + "Total number of events = " + Duke.eventList.size());
+                return new CommandResult(Ui.getEventAddedMessage(event));
             }
         }
-        return new CommandResult("Item unable to be added! ");
+        return new CommandResult("Item unable to be added!");
     }
 }

@@ -4,13 +4,12 @@ import java.time.LocalDateTime;
 
 public class Event extends Item {
 
-    private LocalDateTime dateTime;
     private String venue;
     private double budget;
 
     public static final String EVENT_DATA_ARGS_DELIMITER = "\\s*\\|\\s*";
 
-    public Event(String title, String description, LocalDateTime dateTime, String venue, int budget) {
+    public Event(String title, String description, LocalDateTime dateTime, String venue, double budget) {
         super("event", title, description, dateTime);
         this.venue = venue;
         this.budget = budget;
@@ -30,5 +29,10 @@ public class Event extends Item {
 
     public double getBudget() {
         return budget;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[E] %s (at: %s)", this.getTitle(), this.getDateTime());
     }
 }
