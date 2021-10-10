@@ -6,7 +6,10 @@ import seedu.traveller.commands.EditCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.NewCommand;
 import seedu.traveller.commands.ViewAllCommand;
+<<<<<<< HEAD
 import seedu.traveller.commands.SearchCommand;
+=======
+>>>>>>> 5b8b9f08baa07ae4f375579985de11036ae5a1e8
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidFormatException;
 import seedu.traveller.exceptions.TravellerException;
@@ -26,6 +29,7 @@ public class ParserTrip {
         String userCommand = userInput[0].toLowerCase();
 
         switch (userCommand) {
+<<<<<<< HEAD
             case "new":
                 try {
                     String tripName = userInput[1];
@@ -65,6 +69,44 @@ public class ParserTrip {
             case "search":
                 command = new SearchCommand(userInput[1],userInput[2]);
                 break;
+=======
+        case "new":
+            try {
+                String tripName = userInput[1];
+                String origin = userInput[2];
+                String destination = userInput[3];
+                Vertex s = GraphList.findVertex(origin);
+                Vertex t = GraphList.findVertex(destination);
+                System.out.println("Finding shortest path!");
+                List<Vertex> path = Dijkstra.run(s, t);
+                command = new NewCommand(tripName, origin, destination, path);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new InvalidFormatException(userCommand);
+            }
+            break;
+        case "edit":
+            try {
+                String tripName = userInput[1];
+                String origin = userInput[2];
+                String destination = userInput[3];
+                Vertex s = GraphList.findVertex(origin);
+                Vertex t = GraphList.findVertex(destination);
+                List<Vertex> path = Dijkstra.run(s, t);
+                command = new EditCommand(tripName, origin, destination, path);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new InvalidFormatException(userCommand);
+            }
+            break;
+        case "delete":
+            command = new DeleteCommand(userInput[1]);
+            break;
+        case "viewall":
+            command = new ViewAllCommand();
+            break;
+        case "exit":
+            command = new ExitCommand();
+            break;
+>>>>>>> 5b8b9f08baa07ae4f375579985de11036ae5a1e8
         /*case "d":
             try {
 
