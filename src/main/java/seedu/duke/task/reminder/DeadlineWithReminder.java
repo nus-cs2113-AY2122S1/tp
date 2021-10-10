@@ -26,7 +26,7 @@ public class DeadlineWithReminder extends Deadline {
     
     public DeadlineWithReminder(String description, Date doOn) {
         super(description);
-        reminder = new Reminder(dueDate);
+        reminder = new Reminder(doOn);
     }
 
     public DeadlineWithReminder(String description, RecurrenceEnum recurrence) {
@@ -35,17 +35,17 @@ public class DeadlineWithReminder extends Deadline {
 
     public DeadlineWithReminder(String description, PriorityEnum priority, Date doOn) {
         super(description, priority);
-        reminder = new Reminder(dueDate);
+        reminder = new Reminder(doOn);
     }
 
     public DeadlineWithReminder(String description, Date doOn, RecurrenceEnum recurrence) {
         super(description);
-        reminder = new Reminder(dueDate);
+        reminder = new Reminder(doOn);
     }
 
     public DeadlineWithReminder(String description, PriorityEnum priority, Date doOn, RecurrenceEnum recurrence) {
         super(description, priority);
-        reminder = new Reminder(dueDate);
+        reminder = new Reminder(doOn);
     }
 
     public void displayReminder(LocalDateTime now) {

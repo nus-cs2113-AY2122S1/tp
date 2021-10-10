@@ -7,7 +7,11 @@ import java.time.LocalDateTime;
 public class ReminderManager {
     private TaskManager taskManager;
 
-    public ReminderManager(TaskManager taskManager) {
+    public ReminderManager() {
+        this.taskManager = new TaskManager();
+    }
+
+    public void setUpReminderManager(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
 
