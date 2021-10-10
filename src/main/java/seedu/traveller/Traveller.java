@@ -48,7 +48,7 @@ public class Traveller {
                 Command c = ParserTrip.parse(fullCommand);
                 c.execute(tripsList, ui);
                 isExit = c.getExit();
-            } catch (TravellerException | IndexOutOfBoundsException | EmptyVertexException e) {
+            } catch (TravellerException | IndexOutOfBoundsException e) {
                 ui.printError(e.getMessage());
             } finally {
                 ui.printLine();
@@ -133,7 +133,6 @@ public class Traveller {
 
     public static void main(String[] args) {
         DatabaseInput.readFile();
-        listEverything();
         //new Traveller().setupRoutes();
         //listEverything();
         new Traveller().run();
@@ -158,4 +157,3 @@ public class Traveller {
         }
     }
 }
-

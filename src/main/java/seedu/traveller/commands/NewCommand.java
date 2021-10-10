@@ -18,16 +18,6 @@ public class NewCommand extends Command {
 
 
 
-<<<<<<< HEAD
-    public NewCommand(String tripName, String startCountry, String endCountry) {
-        this.tripName = tripName;
-        this.startCountry = startCountry;
-        this.endCountry = endCountry;
-    }
-
-    public void execute(TripsList tripsList, Ui ui) throws TravellerException {
-        Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry);
-=======
     public NewCommand(String tripName, String startCountry, String endCountry, List<Vertex> path) {
         this.tripName = tripName;
         this.startCountry = startCountry;
@@ -42,7 +32,6 @@ public class NewCommand extends Command {
             }
         }
         Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry, this.path);
->>>>>>> 5b8b9f08baa07ae4f375579985de11036ae5a1e8
         tripsList.addTrip(trip);
         ui.printNewTripCreated(tripName);
     }

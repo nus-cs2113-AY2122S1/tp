@@ -9,8 +9,8 @@ import seedu.traveller.mapper.GraphList;
 import seedu.traveller.mapper.Vertex;
 
 public class SearchCommand extends Command{
-    private String startCountry;
-    private String endCountry;
+    private final String startCountry;
+    private final String endCountry;
 
     public SearchCommand(String startCountry, String endCountry) {
         this.startCountry = startCountry;

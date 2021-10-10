@@ -42,8 +42,4 @@ public class EditCommand extends Command {
         tripsList.addTrip(trip);
         ui.printEdit(tripName);
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5b8b9f08baa07ae4f375579985de11036ae5a1e8
