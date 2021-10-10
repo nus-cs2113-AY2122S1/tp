@@ -25,7 +25,7 @@ public class AddUniCommandParser {
         return new AddUniCommand(university);
     }
 
-    private boolean isUniversityExist(String universityName, UniversityList universityMasterList) {
+    public boolean isUniversityExist(String universityName, UniversityList universityMasterList) {
         for (University university : universityMasterList.getList()) {
             if (universityName.equals(university.getName())) {
                 return true;
