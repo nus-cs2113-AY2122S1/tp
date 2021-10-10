@@ -5,8 +5,11 @@ import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
+/**
+ * For indicating that the command entered by the user is incorrect or invalid.
+ * Feedback to user is set at point of instantiation.
+ */
 public class IncorrectCommand extends Command {
-
     public final String feedbackToUser;
 
     public IncorrectCommand(String feedbackToUser) {

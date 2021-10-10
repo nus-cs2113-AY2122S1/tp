@@ -9,6 +9,9 @@ import seedu.duke.ui.Ui;
 
 import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 
+/**
+ * To delete a Workout.
+ */
 public class DeleteWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD

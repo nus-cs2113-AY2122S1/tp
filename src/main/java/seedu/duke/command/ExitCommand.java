@@ -14,11 +14,6 @@ public class ExitCommand extends Command {
     public static final String MESSAGE_USAGE = "bye: Closes the program"
             + "\tExample: bye";
 
-    /**
-     * Function which makes the condition to exit the program true.
-     *
-     * @return the boolean value to end the program
-     */
     public static boolean isExit(Command command) {
         return command instanceof ExitCommand;
     }
