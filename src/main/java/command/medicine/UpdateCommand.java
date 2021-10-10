@@ -25,7 +25,7 @@ public class UpdateCommand extends Command {
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         String[] requiredParameter = {CommandParameters.STOCK_ID};
         String[] optionalParameters = {CommandParameters.PRICE, CommandParameters.QUANTITY,
-            CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.UPDATED_MEDICINE_NAME,
+            CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.NAME,
             CommandParameters.MAX_QUANTITY};
 
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
@@ -138,7 +138,7 @@ public class UpdateCommand extends Command {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
-            case CommandParameters.UPDATED_MEDICINE_NAME:
+            case CommandParameters.NAME:
                 for (Stock targetStock : filteredMedicines) {
                     targetStock.setMedicineName(parameterValue);
                 }

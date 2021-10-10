@@ -24,7 +24,7 @@ public class CommandSyntax {
             + "D/DESCRIPTION M/MAX_QUANTITY";
     public static final String LIST_COMMAND = "LIST {I/STOCK_ID P/PRICE Q/QUANTITY E/EXPIRY_DATE "
             + "D/DESCRIPTION M/MAX_QUANTITY SORT/COLUMN_NAME RSORT/COLUMN NAME}";
-    public static final String UPDATE_COMMAND = "UPDATE I/STOCK_ID [U/UPDATED_NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
+    public static final String UPDATE_COMMAND = "UPDATE I/STOCK_ID [N/NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
             + "D/DESCRIPTION M/MAX_QUANTITY]";
     public static final String DELETE_COMMAND = "DELETE I/STOCK_ID";
     public static final String HELP_COMMAND = "HELP";
@@ -142,7 +142,6 @@ public class CommandSyntax {
             case CommandParameters.DESCRIPTION:
                 isValid = StockValidator.isValidDescription(ui, parameterValue);
                 break;
-            case CommandParameters.UPDATED_MEDICINE_NAME:
             case CommandParameters.NAME:
                 isValid = StockValidator.isValidName(ui, parameterValue);
                 break;
