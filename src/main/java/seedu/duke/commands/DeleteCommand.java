@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.Ui;
 import seedu.duke.items.Item;
 
 import java.util.ArrayList;
@@ -26,8 +27,7 @@ public class DeleteCommand extends Command {
 
         String removedTaskTitle;
         removedTaskTitle = deleteTask(taskToDelete);
-        return new CommandResult("This task has been removed: " + removedTaskTitle
-            + System.lineSeparator());
+        return new CommandResult(Ui.getTaskDeletionMessage(removedTaskTitle));
     }
 
     public static void fillCombinedItemList() {

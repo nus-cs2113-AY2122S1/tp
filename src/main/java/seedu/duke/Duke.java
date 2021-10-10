@@ -18,16 +18,14 @@ public class Duke {
     private static final StorageFile storage = new StorageFile();
 
     public static void main(String[] args) {
-        System.out.println("WASSUP DAWG"); //ui.introMessage();
-        Ui.linebreak();
-        /*try {
+        Ui.printGreetingMessage();
+        try {
             storage.load(eventList, taskList);
         } catch (FileNotFoundException e) {
             System.out.println("Oooh a new user!");
-        }*/
+        }
         runSlam();
-        // storage.save(eventList, taskList);
-        System.out.println("seeya bitches"); //ui.byeMessage();
+        storage.save(eventList, taskList);
     }
 
     protected static void runSlam() {
@@ -37,11 +35,11 @@ public class Duke {
 
         do {
             userInput = Ui.readInput();
-            Ui.linebreak();
+            Ui.printLineBreak();
             command = Parser.parseCommand(userInput);
             feedback = command.execute();
             System.out.println(feedback.feedbackToUser);
-            Ui.linebreak();
+            Ui.printLineBreak();
         } while (ByeCommand.isRunning);
     }
 }

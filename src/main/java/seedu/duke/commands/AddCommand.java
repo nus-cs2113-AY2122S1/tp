@@ -140,20 +140,18 @@ public class AddCommand extends Command {
         if (isCorrectFormat) {
             Ui.promptForDescription();
             itemDescription = Ui.readInput();
-            Ui.linebreak();
+            Ui.printLineBreak();
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
                 Task task = new Task(itemTitle, itemDescription, itemDate);
                 addToTaskList(task);
-                return new CommandResult("Task added: " + itemTitle + System.lineSeparator()
-                        + "Total number of tasks = " + Duke.taskList.size());
+                return new CommandResult(Ui.getTaskAddedMessage(task));
             }
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 Event event = new Event(itemTitle, itemDescription, itemDate, eventVenue, eventBudget);
                 addToEventList(event);
-                return new CommandResult("Event added: " + itemTitle + System.lineSeparator()
-                        + "Total number of events = " + Duke.eventList.size());
+                return new CommandResult(Ui.getEventAddedMessage(event));
             }
         }
-        return new CommandResult("Item unable to be added! ");
+        return new CommandResult("Item unable to be added!");
     }
 }
