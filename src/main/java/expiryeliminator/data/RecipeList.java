@@ -2,6 +2,7 @@ package expiryeliminator.data;
 
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.EmptyIngredientsException;
+import expiryeliminator.data.exception.RecipeNotFoundException;
 
 import java.util.HashMap;
 
@@ -26,7 +27,7 @@ public class RecipeList {
      * @throws EmptyIngredientsException If there are no ingredients in the recipe.
      */
     public void add(Recipe recipe) throws DuplicateDataException, EmptyIngredientsException {
-        if (contains(recipe)) {
+        if (recipes.containsKey(recipe.getName())) {
             throw new DuplicateDataException();
         } else if (recipe.getIngredients().size() == 0) {
             throw new EmptyIngredientsException();
@@ -36,13 +37,29 @@ public class RecipeList {
     }
 
     /**
+     * Removes a recipe from the recipe list.
+     *
+     * @param name name of the recipe to be removed
+     * @return The recipe removed.
+     * @throws RecipeNotFoundException If there are no such recipes in the list
+     */
+    public Recipe remove(String name) throws RecipeNotFoundException {
+        if (!contains(name)) {
+            throw new RecipeNotFoundException();
+        }
+        Recipe recipe = recipes.get(name);
+        recipes.remove(name);
+        return recipe;
+    }
+
+    /**
      * Returns { @code true } if the recipe list contains the given recipe.
      *
-     * @param recipe The recipe whose presence in the list is to be tested
+     * @param name The recipe name whose presence in the list is to be tested
      * @return { @code true } if the recipe list contains the given recipe.
      */
-    public boolean contains(Recipe recipe) {
-        return recipes.containsKey(recipe);
+    public boolean contains(String name) {
+        return recipes.containsKey(name);
     }
 
     /**
