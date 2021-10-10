@@ -17,16 +17,18 @@ public class Expense {
     private final ArrayList<String> categoriesList;
     private LocalDate date;
 
-    public Expense(Person p, double amountSpent, String description) {
+    public Expense(Double amountSpent, String description, ArrayList<Person> listOfPersons) {
         this.amountSpent = amountSpent;
         this.date = LocalDate.now();
         this.description = description;
         this.personsList = new ArrayList<Person>();
         this.categoriesList = new ArrayList<String>();
-        addPerson(p);
+        for (Person p : listOfPersons) {
+            addPerson(p);
+        }
     }
 
-    public double getExpenseSummary() {
+    public double getCostPerPerson() {
         int totalPeople = personsList.size();
         double costPerPerson = amountSpent / totalPeople;
         System.out.println("Expense: " + amountSpent);

@@ -2,6 +2,7 @@ package seedu.duke;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -11,11 +12,13 @@ class ExpenseTest {
     @BeforeAll
     static void setUp() {
         Person person = new Person("Xi Yuan", true);
-        exp = new Expense(person,8, "for lunch");
+        ArrayList<Person> listOfPersons = new ArrayList<Person>();
+        listOfPersons.add(person);
+        exp = new Expense(8.0, "for lunch", listOfPersons);
     }
 
     @Test
     void getExpenseSummary() {
-        assertEquals(8.00, exp.getExpenseSummary());
+        assertEquals(8.00, exp.getCostPerPerson());
     }
 }

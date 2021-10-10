@@ -6,5 +6,5 @@ Hello from
 |____/ \__,_|_|\_\___|
 
 What is your name?
-Sorry, we didn't recognize your entry. Please try again, or enter -help to learn more.
+Your trip to America on 02 Feb 2021 has been successfully added!
 Goodbye!
