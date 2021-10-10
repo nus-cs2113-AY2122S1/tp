@@ -281,14 +281,6 @@ public class Parser {
             case "/s":
                 studentNumber = words[wordIndex].trim();
                 break;
-            /**
-            case "/g":
-                gender = words[wordIndex].trim().charAt(0);
-                break;
-            case "/p":
-                phoneNumber = Integer.parseInt(words[wordIndex].trim());
-                break;
-             */
             case "/n":
                 trainingName = words[wordIndex].trim();
                 break;
@@ -376,6 +368,7 @@ public class Parser {
      */
     public static void makeAttendanceEntry(AttendanceList attendanceList, String query) {
         Attendance attendance = getAttendanceDetails(query);
+        assert attendance != null: "attendance should not be empty";
         attendanceList.addAttendance(attendance);
         System.out.println("Added an Attendance entry: " + attendance);
     }
@@ -519,16 +512,17 @@ public class Parser {
 
     }
 
-    public static Integer getAttIndex(String query) {
+    public static Integer getAttendanceIndex(String query) {
         int attNumber = Integer.parseInt(query.replaceFirst("delete /att", "").trim());
-
+        assert attNumber > 0: "smallest attNumber is 1";
         return attNumber;
     }
 
     public static void deleteAttendance(AttendanceList attendanceList, String query) {
         try {
-            int attNumber = getAttIndex(query);
+            int attNumber = getAttendanceIndex(query);
             Attendance entry = attendanceList.deleteAttendance(attNumber);
+            assert entry != null: "entry should not be empty";
             System.out.println("The following attendance entry have been deleted\n" + entry.toString());
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("There is no such member number...");

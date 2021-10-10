@@ -1,8 +1,5 @@
 package seedu.duke.attendance;
 
-import seedu.duke.member.Member;
-import seedu.duke.training.TrainingSchedule;
-
 import java.util.ArrayList;
 
 public class AttendanceList {
