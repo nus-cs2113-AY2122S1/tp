@@ -14,8 +14,8 @@ import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 public class MarkExerciseAsDoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     public static final String MESSAGE_USAGE = "done: Marks the exercise in the workout workout as complete.\n"
-            + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX, " + EXERCISE_KEYWORD + "EXERCISE_INDEX\n"
-            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3" + EXERCISE_KEYWORD + "2\n";
+            + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_INDEX\n"
+            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3 " + EXERCISE_KEYWORD + "2";
     public static final String MESSAGE_SUCCESS = "Completed: %1$s";
     private final int workoutIndex;
     private final int exerciseIndex;

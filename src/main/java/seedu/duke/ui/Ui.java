@@ -54,6 +54,7 @@ public class Ui {
         System.out.println("\"list\" : lists all your workouts");
         System.out.println("\"display\" : shows all the exercises in a specified workout");
         System.out.println("\"bye\" : Ends the program");
+        printLineSeparator();
     }
 
     public static void printErrorMessage(GetJackDException e) {
@@ -64,36 +65,33 @@ public class Ui {
 
 
     public void showExercisesToUser(ArrayList<Exercise> exercises) {
-        showToUser(getIndexedListViewOfExercises(exercises));
+        Ui.printLineSeparator();
+        System.out.println("Exercises in mentioned workout:");
+
+        //Lists down all the tasks added along with its status
+        for (int i = 0; i < exercises.size(); i++) {
+            System.out.println((i + 1) + ". " + exercises.get(i));
+        }
+        Ui.printLineSeparator();
     }
 
     public void showWorkoutsToUser(ArrayList<Workout> workouts) {
-        showToUser(getIndexedListViewOfWorkouts(workouts));
+        Ui.printLineSeparator();
+        System.out.println("Workout list:");
+
+        //Lists down all the tasks added along with its status
+        for (int i = 0; i < workouts.size(); i++) {
+            System.out.println((i + 1) + ". " + workouts.get(i));
+        }
+
+        Ui.printLineSeparator();
     }
 
     public void showToUser(String... message) {
         for (String m : message) {
+            printLineSeparator();
             System.out.println(INDENT + m.replace("\n", NEW_LINE));
+            printLineSeparator();
         }
-    }
-
-    private String[] getIndexedListViewOfExercises(ArrayList<Exercise> relevantExercises) {
-        final ArrayList<String> exercisesStringList = new ArrayList<>();
-        int displayIndex = DISPLAYED_INDEX_OFFSET;
-        for (Exercise exercise : relevantExercises) {
-            exercisesStringList.add(displayIndex + ". " + exercise + "\n");
-            displayIndex++;
-        }
-        return exercisesStringList.toArray(new String[0]);
-    }
-
-    private String[] getIndexedListViewOfWorkouts(ArrayList<Workout> relevantWorkouts) {
-        final ArrayList<String> workoutsStringList = new ArrayList<>();
-        int displayIndex = DISPLAYED_INDEX_OFFSET;
-        for (Workout workout : relevantWorkouts) {
-            workoutsStringList.add(displayIndex + ". " + workout);
-            displayIndex++;
-        }
-        return workoutsStringList.toArray(new String[0]);
     }
 }

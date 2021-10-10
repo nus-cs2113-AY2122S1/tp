@@ -24,7 +24,7 @@ public class HelpCommand extends Command {
         if (commandDescription == null) {
             Ui.printHelpMessage();
         } else {
-            System.out.println(commandDescription);
+            ui.showToUser(commandDescription);
         }
     }
 }

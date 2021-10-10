@@ -1,2 +1,24 @@
 invalid command
+help
+create
+help create
+create /w Legs
+list
+add
+help add
+add /w 1 /e Squats /s 3 /r 10
+done
+help done
+done /w 1 /e 1
+display
+help display
+display /w 1
+remove
+help remove
+remove /w 1 /e 1
+display /w 1
+delete
+help delete
+delete /w 1
+list
 bye

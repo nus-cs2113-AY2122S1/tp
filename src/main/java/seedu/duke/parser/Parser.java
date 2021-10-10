@@ -21,11 +21,11 @@ import java.util.Locale;
  * To make sense of user commands by extracting keywords, descriptions and time/date.
  */
 public class Parser {
-    public static final String WORKOUT_KEYWORD = "/w";
-    public static final String EXERCISE_KEYWORD = "/e";
-    public static final String SETS_KEYWORD = "/s";
-    public static final String REPS_KEYWORD = "/r";
-    static final String MESSAGE_INVALID_COMMAND = "Invalid command\n";
+    public static final String WORKOUT_KEYWORD = "/w ";
+    public static final String EXERCISE_KEYWORD = "/e ";
+    public static final String SETS_KEYWORD = "/s ";
+    public static final String REPS_KEYWORD = "/r ";
+    static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
 
     public Command parseCommand(String userInputString) {
 
@@ -53,7 +53,7 @@ public class Parser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
         default:
-            return new IncorrectCommand(MESSAGE_INVALID_COMMAND);
+            return new IncorrectCommand("Invalid Command");
         }
     }
 
@@ -194,7 +194,7 @@ public class Parser {
 
     private static int parseArgsAsIndex(String index) throws GetJackDException {
         if (index.isEmpty()) {
-            throw new GetJackDException("Error. Workout or exercise index not found. ");
+            throw new GetJackDException("Error. Workout or exercise index not found.");
         }
         try {
             return Integer.parseInt(index.trim());
