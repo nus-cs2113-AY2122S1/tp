@@ -4,17 +4,13 @@
 
 # About The Project
 
-It’s August 5th, and the Academic Year is right around the corner! 
-ModReg is about to start, and you have no idea what modules to take 
-and what your timetable might even look like.
+It’s August 5th, and the Academic Year is right around the corner!
+ModReg is about to start, and you have no idea what modules to take and what your timetable might even look like.
 
-Introducing **UNI Mods**, 
-an easy to use application that provides information on all 
-available NUS modules and lets you pick and choose 
-the modules and classes you want to take for that semester! 
-Depending on the classes you decide to take, 
-a timetable will be generated 
-to keep track of your daily schedule and your total workload:
+Introducing **UNI Mods**, an easy to use application that provides information on all available NUS modules and lets you
+pick and choose the modules and classes you want to take for that semester!
+Depending on the classes you decide to take, a timetable will be generated to keep track of your daily schedule and your
+total workload:
 
 ![timetable](./resources/timetable.png)
 
@@ -52,7 +48,7 @@ to keep track of your daily schedule and your total workload:
 4. Double-click the file to start the app.
 5. Type the command in the command box and press Enter to execute it.
 
-    Some example commands you can try:
+   Some example commands you can try:
 
        - help : to list all the commands with their description
        - search <module_code> : lists module code based on the given partial regex
@@ -67,7 +63,7 @@ to keep track of your daily schedule and your total workload:
 
 ---
 
-# Features 
+# Features
 
 > :information_source: **Notes about the command formats**
 > - Words in `<UPPER_CASE>` are the parameters to be given by the user. <br />
@@ -84,15 +80,18 @@ to keep track of your daily schedule and your total workload:
     > e.g. `help abc` will be interpreted as  `help`
 
 ## Viewing Help: `help`
-If you are stuck wondering how to even begin using this application, 
-simply type `help` into the terminal 
-and you will be able to see all the available commands!
+
+If you are stuck wondering how to even begin using this application, simply type `help` into the terminal and you will
+be able to see all the available commands!
+You will also be provided a link to the User Guide of this application which you can refer to, for detailed descriptions
+of the commands.
 
 Output:
+
 ```shell
 ~$ help
 ____________________________________________________________________________
-	NUSModsLite accepts the following commands:-
+	UNIMods accepts the following commands:-
 		| No.| Command Syntax          |            Command Action                      |
 		| 1. | search <module_code>    | Search module based on the given partial regex |
 		| 2. | show <module_code>      | Display module information                     |
@@ -105,21 +104,23 @@ ____________________________________________________________________________
 		https://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html
 ____________________________________________________________________________
 
-
 ```
+
 To begin, perhaps try looking up CS2113T by running the following command:
 
 <br>
 
 ## Display Module Info: `show <MODULE_CODE>`
+
 If you want to find out more about a module, type `show <module_code>` to display the following:
-  * Name
-  * MCs
-  * Department which offers the module
-  * Description
-  * Prerequisites
-  * S/U option Availability
-  * Semester Availability
+
+* Name
+* MCs
+* Department which offers the module
+* Description
+* Prerequisites
+* S/U option Availability
+* Semester Availability
 
 For example, try typing `show CS2113T` and see the magic happen!
 
@@ -145,10 +146,11 @@ Semester Availability: [1, 2]
 <br>
 
 ## Search Module: `search <KEYWORD> [-l]`
-Maybe you don't know what modules are out there, and want to know what 
-GEH modules are available. 
+
+Maybe you don't know what modules are out there, and want to know what GEH modules are available.
 
 You can type `search GEH` to display all CG modules available:
+
 ```shell
 ~$ search GEH
 GEH1001 Globalisation and New Media 4MC
@@ -164,13 +166,15 @@ GEH1011 Film and History 4MC
 :
 :
 ```
+
 You can also apply the following flags to refine the search:
-- -l (small L) : performs a local search using locally saved module data which 
-might not be the most updated version
+
+- -l (small L) : performs a local search using locally saved module data which might not be the most updated version
 
 <br>
 
 ## Add to timetable: `add <MODULE_CODE>`
+
 You want to start planning your timetable and your semester workload. Try adding your first module!
 
 Let's add for example, `CS2113T` to the timetable
@@ -179,18 +183,79 @@ Let's add for example, `CS2113T` to the timetable
 
 ## Delete from timetable: `delete <module_code>`
 
+You can remove any module that you added to your timetable using this command.
+
+For example: If you have CS2113T already added to your timetable. You can type
+`delete CS2113T` to remove this module from your timetable.
+
+```shell
+~$ delete CS2113T
+CS2113T is successfully deleted from your Timetable.
+```
+
 <br>
 
 ## Clear timetable: `clear`
 
+You can remove **all** added modules from your timetable by typing `clear`. You can then view the empty timetable by
+typing the command `timetable`.
+
+For Example:
+
+```shell
+~$ clear
+All modules have been successfully removed from your Timetable.
+
+timetable
+				900             1000            1100            1200            1300            1400            1500            1600            1700            1800            1900            2000            
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				                                                                                                                                                                                                
+		MON		                                                                                                                                                                                                
+				                                                                                                                                                                                                
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				                                                                                                                                                                                                
+		TUE		                                                                                                                                                                                                
+				                                                                                                                                                                                                
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				                                                                                                                                                                                                
+		WED		                                                                                                                                                                                                
+				                                                                                                                                                                                                
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				                                                                                                                                                                                                
+		THU		                                                                                                                                                                                                
+				                                                                                                                                                                                                
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				                                                                                                                                                                                                
+		FRI		                                                                                                                                                                                                
+				                                                                                                                                                                                                
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				                                                                                                                                                                                                
+		SAT		                                                                                                                                                                                                
+				                                                                                                                                                                                                
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+				                                                                                                                                                                                                
+		SUN		                                                                                                                                                                                                
+				                                                                                                                                                                                                
+
+*******************
+Modules taken this semester: 
+
+
+Total MCs taken this semester: 0.0
+
+*******************
+
+```
+
 <br>
 
 ## View timetable: `timetable`
-You can view the current timetable which details your daily schedule 
-as well as  the total MCs taken and classes and time slots 
-for each day of the week in a timetable structure.
+
+You can view the current timetable which details your daily schedule as well as the total MCs taken and classes and time
+slots for each day of the week in a timetable structure.
 
 Simply type `timetable` into the input and voila!
+
 ```shell
 ~$ timetable
 
@@ -238,7 +303,9 @@ Total MCs taken this semester: 4.0
 <br>
 
 ## Exit: `exit`
+
 You can end the application anytime by typing `exit` into the terminal
+
 ```shell
 ~$ exit
 ____________________________________________________________________________
