@@ -12,7 +12,7 @@ public class Event extends Item {
 
     public static final String EVENT_DATA_ARGS_DELIMITER = "\\s*\\|\\s*";
 
-    public Event(String title, String description, String dateTime, String venue, int budget) {
+    public Event(String title, String description, String dateTime, String venue, double budget) {
         super("event", title, description);
         this.date = Parser.convertDateTime(dateTime);
         this.venue = venue;
@@ -35,6 +35,10 @@ public class Event extends Item {
         this.venue = venue;
     }
 
+    public void setBudget(Double budget) {
+        this.budget = budget;
+    }
+
     public String getVenue() {
         return venue;
     }
@@ -43,7 +47,8 @@ public class Event extends Item {
         return budget;
     }
 
-    public void setBudget(Double budget) {
-        this.budget = budget;
+    @Override
+    public String toString() {
+        return String.format("[E] %s (at: %s)", this.getTitle(), Parser.convertDateTime(this.getDateValue()));
     }
 }

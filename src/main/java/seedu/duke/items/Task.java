@@ -15,6 +15,10 @@ public class Task extends Item {
         this.deadline = Parser.convertDateTime(deadline);
     }
 
+    public void setDeadline(LocalDateTime deadline) {
+        this.deadline = deadline;
+    }
+
     public String getDeadline() {
         return Parser.convertDateTime(deadline);
     }
@@ -27,7 +31,8 @@ public class Task extends Item {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
+    @Override
+    public String toString() {
+        return String.format("[T] %s (by: %s)", this.getTitle(), Parser.convertDateTime(this.getDateValue()));
     }
 }
