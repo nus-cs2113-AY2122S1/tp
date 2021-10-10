@@ -6,6 +6,7 @@ import seedu.traveller.commands.EditCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.NewCommand;
 import seedu.traveller.commands.ViewAllCommand;
+import seedu.traveller.commands.SearchCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidFormatException;
 import seedu.traveller.exceptions.TravellerException;
@@ -57,6 +58,9 @@ public class ParserTrip {
             break;
         case "viewall":
             command = new ViewAllCommand();
+            break;
+        case "search":
+            command = new SearchCommand(userInput[1],userInput[2]);
             break;
         case "exit":
             command = new ExitCommand();
