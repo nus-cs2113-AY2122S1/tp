@@ -12,7 +12,7 @@ import seedu.traveller.mapper.Vertex;
 import java.util.List;
 
 public class ParserTrip {
-    public static Command parse(String rawInput) throws TravellerException {
+    public static Command parse(String rawInput) throws TravellerException, EmptyVertexException {
         String details;
         Command command = null;
 
@@ -32,10 +32,7 @@ public class ParserTrip {
                 command = new NewCommand(tripName, origin, destination, path);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new InvalidNewFormatException();
-            } catch (EmptyVertexException e) {
-                System.out.println("Either of the nodes doesn't exist!");
             }
-
             break;
 //        case "edit":
 //            try {
