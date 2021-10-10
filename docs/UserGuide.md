@@ -235,7 +235,7 @@ You have added Module1 Tut’s scheduled zoom link!
 **help**|`help`
 **exit**|`exit`
 
-##Advanced Command Summary  
+## Advanced Command Summary  
 **Action** | **Format, Examples**
 ------------ | -------------
 **add note**|`note add "<name>" "<content>"` <br>e.g. `note add note1 note_content`
