@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -82,6 +83,27 @@ class ParserTest {
     }
 
     @Test
+    void failedMakeMemberEntry() {
+        final String input = "add /m asd";
+        Parser.makeMemberEntry(testMemberList, input);
+        assertEquals("Added a Member: Name:  | Student Number:  | Gender:   | Phone Number: 0" + "\r\n",
+                outContent.toString());
+    }
+
+    @Test
+    void invalidKeyword() {
+        final String input = "ad ads dwd";
+        final String input2 = "";
+        Entry.addEntry(input);
+        Entry.addEntry(input2);
+        assertEquals("Wrong commands have been input. To get help on the overview and" +
+                " guide of how to use theprogramme, please take a look at our user guide" +
+                " at https://github.com/AY2122S1-CS2113T-F12-4/tp" +
+                "\r\n" + "Wrong commands have been input. To get help on the overview and" +
+                " guide of how to use theprogramme, please take a look at our user guide" +
+                " at https://github.com/AY2122S1-CS2113T-F12-4/tp" + "\r\n", outContent.toString());
+    }
+
     void getTrainingDetails() {
         final String input = "add /t /n October Friday Weekly Training 1 /a 1 Oct 2021 /v MPSH 1";
         final String expectedOutput = "Training Name: October Friday Weekly Training 1 | Venue: MPSH 1 | Time: 1 Oct "
@@ -89,4 +111,6 @@ class ParserTest {
         TrainingSchedule training = Parser.getTrainingDescription(input);
         assertEquals(expectedOutput, training.toString());
     }
+
+
 }

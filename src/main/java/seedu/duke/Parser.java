@@ -78,7 +78,6 @@ public class Parser {
      */
     public static Keyword getKeywordStatus(String query) {
         Keyword keyword;
-
         if (hasAddMemberKeyword(query)) {
             keyword = Keyword.ADD_MEMBER_KEYWORD;
         } else if (hasAddTrainingKeyword(query)) {
@@ -322,11 +321,9 @@ public class Parser {
     public static void makeMemberEntry(MemberList members, String query) {
         Member member = getMemberDetails(query);
         members.addMember(member);
-
         File dukeMemberFile = new File("dukeMembers.csv");
         writeMemberFile(dukeMemberFile,members);
-
-        System.out.println("Added a Member: " + member);
+        Ui.printAddedMemberMessage(member);
     }
 
     /**
@@ -339,17 +336,13 @@ public class Parser {
         ArrayList<Member> oldMemberAndNewMember = editMemberDetails(members, query);
         Member oldMember = oldMemberAndNewMember.get(0);
         Member newMember = oldMemberAndNewMember.get(1);
-
         File dukeMemberFile = new File("dukeMembers.csv");
         writeMemberFile(dukeMemberFile,members);
-
-        System.out.println("Edited member: " + oldMember);
-        System.out.println("To become:  " + newMember);
+        Ui.printEditMessage(oldMember, newMember);
     }
 
-
-    /**
-     * Creates a TrainingSchedule to put into TrainingList.
+     /**
+     * Creates a TrainingSchedule to put into TrainingList
      *
      * @param trainings TrainingList containing all TrainingSchedule
      * @param query User input command to parse
@@ -357,7 +350,7 @@ public class Parser {
     public static void makeTrainingEntry(TrainingList trainings, String query) {
         TrainingSchedule training = getTrainingDescription(query);
         trainings.addTrainingSchedule(training);
-        System.out.println("Added a Training entry:\n" + training);
+        Ui.printAddedTrainingMessage(training);
     }
 
     /**
@@ -370,7 +363,7 @@ public class Parser {
         Attendance attendance = getAttendanceDetails(query);
         assert attendance != null: "attendance should not be empty";
         attendanceList.addAttendance(attendance);
-        System.out.println("Added an Attendance entry: " + attendance);
+        Ui.printAddedAttendanceMessage(attendance);
     }
 
     /**
@@ -405,11 +398,9 @@ public class Parser {
         try {
             int memberNumber = getMemberIndex(query);
             Member member = members.deleteMember(memberNumber);
-
             File dukeMemberFile = new File("dukeMembers.csv");
             writeMemberFile(dukeMemberFile,members);
-
-            System.out.println("The following member have been deleted\n" + member.toString());
+            Ui.printDeletedMemberMessage(member);
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("There is no such member number...");
         } catch (NumberFormatException e) {
@@ -417,8 +408,18 @@ public class Parser {
         }
     }
 
+    public static void deleteTraining(ArrayList<TrainingSchedule> trainings, String query) {
+        try {
+            TrainingSchedule referencedTraining = trainings.get(trainingNumber);
+            trainings.remove(trainingNumber);
+            Ui.printDeletedTrainingMessage(referencedTraining);
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println("There is no such training schedule number...");
+        }
+    }
+
     public static void wrongInputTypeMessage() {
-        //Leave for later
+        Ui.printWrongInputMessage();
     }
 
     /**
@@ -447,7 +448,7 @@ public class Parser {
 
         if (trainingIndex != -1) {
             TrainingSchedule toDelete = trainings.deleteTrainingSchedule(trainingIndex);
-            System.out.println("You have deleted: \n" + toDelete.toString());
+            Ui.printDeletedTrainingMessage(toDelete);
         }
 
     }
@@ -528,6 +529,21 @@ public class Parser {
             System.out.println("There is no such member number...");
         } catch (NumberFormatException e) {
             System.out.println("Please input a proper number...");
+        }
+    }
+
+    /**
+     * Function waits for user input, or takes input from ./list.txt.
+     */
+    public static void waitForQuery() {
+        String query = "";
+        Scanner userInput = new Scanner(System.in);
+        while (!query.equals("bye")) {
+            System.out.print("=>");
+            if (userInput.hasNextLine()) {
+                query = userInput.nextLine();
+            }
+            Entry.addEntry(query);
         }
     }
 }
