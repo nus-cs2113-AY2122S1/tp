@@ -1,4 +1,5 @@
 package seedu.duke.command;
+
 import seedu.duke.exceptions.DukeException;
 
 /**
