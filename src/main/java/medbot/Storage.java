@@ -14,32 +14,40 @@ import java.util.Scanner;
 
 
 public class Storage {
-    private static final String DATA_PATH = "storage/data.txt";
-    private static final File DATA_FILE = new File(DATA_PATH);
+    private static final String DEFAULT_DATA_PATH = "storage/data.txt";
 
     private static final String CREATED_NEW_FILE = "New data file created.";
     private static final String ERROR_LOAD_STORAGE = "Error: Unable to load data file.";
     private static final String ERROR_SAVE_STORAGE = "Error: Unable to save data.";
 
     private static final String ERROR_INVALID_STORAGE_LINE = "\n"
-            + "I am done reading " + DATA_PATH + "\n"
-            + "1. Enter 'exit' to exit program to correct data file " + DATA_PATH + "\n"
+            + "I am done reading " + DEFAULT_DATA_PATH + "\n"
+            + "1. Enter 'exit' to exit program to correct data file " + DEFAULT_DATA_PATH + "\n"
             + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
+
+    private static File dataFile;
 
     /**
      * Constructor
-     * which creates a storage/data.txt file if it doesn't exist
+     * which creates a storage/data.txt file if it doesn't exist.
      *
      * @throws MedBotException if storage/data.txt cannot be created and does not exist
      */
     public Storage() throws MedBotException {
+        this(DEFAULT_DATA_PATH);
+    }
+
+    public Storage(String dataPath) throws MedBotException {
         try {
-            DATA_FILE.getParentFile().mkdirs();
-            DATA_FILE.createNewFile();
+            dataFile = new File(dataPath);
+            dataFile.getParentFile().mkdirs();
+            dataFile.createNewFile();
+
         } catch (IOException e) {
             throw new MedBotException(ERROR_LOAD_STORAGE);
         }
     }
+
 
     /**
      * Reads in storage/data.txt file, parses each line and adds the data into the program
@@ -52,22 +60,22 @@ public class Storage {
         boolean hasInvalidStorageLine = false;
         int lineNumber = 1;
         int lastId = 1;
-        Scanner s = new Scanner(DATA_FILE);
+        Scanner s = new Scanner(dataFile);
 
         while (s.hasNext()) {
-            Patient patient = new Patient();
+            Patient patient;
             try {
                 patient = parseStorageLine(s.nextLine());
                 patientList.addPatientFromStorage(patient);
+                lastId = patient.getPatientId();
 
             } catch (Exception e) {
-                System.out.println("Error: Line " + lineNumber + " of " + DATA_PATH
+                System.out.println("Error: Line " + lineNumber + " of " + DEFAULT_DATA_PATH
                         + " is invalid! Skipping to next line...");
                 hasInvalidStorageLine = true;
             }
 
             lineNumber++;
-            lastId = patient.getPatientId();
         }
         patientList.setLastId(lastId);
 
@@ -130,7 +138,7 @@ public class Storage {
      */
     public void saveData(PatientList patientList) throws MedBotException {
         try {
-            FileWriter fw = new FileWriter(DATA_PATH);
+            FileWriter fw = new FileWriter(DEFAULT_DATA_PATH);
             fw.write(patientList.getStorageString());
             fw.close();
         } catch (IOException e) {
