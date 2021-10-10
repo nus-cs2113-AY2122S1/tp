@@ -2,26 +2,27 @@ package seedu.duke.commands;
 
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.common.Messages.EXIT_MESSAGE;
+import static seedu.duke.common.Messages.UNKNOWN_MESSAGE;
 
 /**
- * Class encapsulating an exit command.
+ * Class encapsulating an unknown command not recognised by the application.
  */
-public class ExitCommand extends Command {
+public class UnknownCommand extends Command {
 
     /**
      * Single constructor, no parameters.
      */
-    public ExitCommand() {
+    public UnknownCommand() {
     }
 
     /**
-     * Prints exit message.
+     * Prints unknown message.
      * Overrides method from parent class.
      * @param ui Object that handles user IO
      */
     @Override
     public void execute(TextUI ui) {
-        ui.print(EXIT_MESSAGE);
+        ui.print(UNKNOWN_MESSAGE);
     }
+
 }
