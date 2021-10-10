@@ -51,6 +51,26 @@ public class MedicineManager {
     }
 
     /**
+     * Retrieves total number of column for the medicine with same name.
+     *
+     * @param medicines Arraylist of medicines.
+     * @param name Medicine name.
+     * @return Total number of columns for the same medicine.
+     */
+    public static int getTotalColumn(ArrayList<Medicine> medicines, String name) {
+        int existingColumnQuantity = 0;
+        for (Medicine medicine : medicines) {
+            if (medicine instanceof Stock) {
+                boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
+                if (isSameMedicineName) {
+                    existingColumnQuantity++;
+                }
+            }
+        }
+        return existingColumnQuantity;
+    }
+
+    /**
      * Extracts the stock object for a given stock id.
      *
      * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
