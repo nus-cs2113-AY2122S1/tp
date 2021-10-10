@@ -29,17 +29,17 @@ The product aims to aid student in organizing their academic schedule and enhanc
 2. Down the latest version of `TermiNUS` from [here](https://github.com/AY2122S1-CS2113T-T10-2/tp).
 3. When you first start the program, you will be greeted with our banner:  
 
-```
-Welcome to TermiNUS! 
-
-Type any of the following to get started: 
-> note
-> schedule
-> help 
-> exit 
- 
-[] >>> 
-```
+    ```
+    Welcome to TermiNUS! 
+    
+    Type any of the following to get started: 
+    > note
+    > schedule
+    > help 
+    > exit 
+     
+    [] >>> 
+    ```
 4. To get started, you can run the following commands:
 
    - note
@@ -47,11 +47,13 @@ Type any of the following to get started:
    - help
    - exit
 
+___  
+
 ## Section: Note
 
 ### Accessing Note
-**Format:** `note`
-<br>Accessing the note workspace
+**Format:** `note`  
+Accessing the note workspace
 After running the note command, you can see the following:  
 
 ```
@@ -88,8 +90,8 @@ Note `Remind Cabbin` has been deleted!
 ```
 
 ### View Note
-**Format:** `view` or `view {index}`
-<br>Two ways to use this command simply running view or view [index]
+**Format:** `view` or `view {index}`  
+Two ways to use this command simply running view or view [index]
 View by itself will list all notes
 ```
 [note] >>> view 
@@ -115,8 +117,8 @@ Content: Cabbin was here
 ## Section: Schedule
 
 ### Accessing Schedule
-**Format:** `schedule`
-<br>After running the schedule command, you can see the following:
+**Format:** `schedule`  
+After running the schedule command, you can see the following:
 ```
 [] >>> schedule
 You have 0 link(s) in this workspace.
@@ -133,8 +135,8 @@ Type any of the following to get started:
 ```
 
 ### Adding a Schedule
-**Format:** `add "<description>" "<day>" "<start_time>" "<zoom_link>"`
-<br>Adding a new schedule when in the schedule’s workspace
+**Format:** `add "<description>" "<day>" "<start_time>" "<zoom_link>"`  
+Adding a new schedule when in the schedule’s workspace
 ```
 [schedule] >>> add “Module1 Tut1” "Thursday" "10:00" "https://zoom.us/test"  
 You have added Module1 Tut’s scheduled zoom link! 
@@ -142,8 +144,8 @@ You have added Module1 Tut’s scheduled zoom link!
 ```
 
 ### Delete a Schedule
-**Format:** `delete <index>`
-<br>Delete schedule when in the schedule’s workspace
+**Format:** `delete <index>`  
+Delete schedule when in the schedule’s workspace
 ```
 [schedule] >>> delete 1 
 You have deleted your 1st schedule. 
@@ -152,8 +154,8 @@ Schedule `Module1 Tut, Thursday, 10:00, https://zoom.us/test` has been deleted!
 ```
 
 ### View Schedule
-**Format:** `view`
-<br>View all schedules when in the schedule’s workspace
+**Format:** `view`  
+View all schedules when in the schedule’s workspace
 ```
 [schedule] >>> view 
 You have 3 schedules inside: 
@@ -166,17 +168,17 @@ You have 3 schedules inside:
 
 
 ## Exiting the Program
-**Format:** `exit`
-<br>To exit the program, simply run the following command:
+**Format:** `exit`  
+To exit the program, simply run the following command:
 ```
 [] >>> exit 
 Goodbye! 
 ```
 
 ## Accessing Help
-**Format:** `help`
-<br>Depending on your current workspace, you may get different help messages.
-<br>The following shows the help message in the main workspace:
+**Format:** `help`  
+Depending on your current workspace, you may get different help messages.  
+The following shows the help message in the main workspace:
 
 ```
 [] >>> help 
@@ -201,12 +203,12 @@ Running `help [command]` will print the help for the specific workspace.
 ```
 
 ## Advanced Usage of Commands
-User can access workspace command directly without entering its environment. Seen below are some command examples.
-<br>
-A workspace command is a command that will bring you to its own workspace. Current workspace command includes notes and schedules.
-<br>
-Command syntax: <workspace> <available workspace command>
-<br>
+User can access workspace command directly without entering its environment. Seen below are some command examples.  
+
+A workspace command is a command that will bring you to its own workspace. Current workspace command includes notes and schedules.  
+
+Command syntax: <workspace> <available workspace command>  
+
 
 Adding a note without entering the note workspace.
 ```
@@ -221,12 +223,17 @@ Adding a schedule without entering the schedule workspace.
 You have added Module1 Tut’s scheduled zoom link!
 [] >>> 
 ```
+
+___  
+
 ## FAQ
+
+___  
 
 ## Command Summary  
 
 | **Action** | **Format, Examples** |
-| ------------ | -------------|
+| ------------ | -------------  |
 |**access note workspace**|`note`|
 |**access schedule workspace**|`schedule`|
 |**add**|`add "<name>" "<content>"` <br>e.g. `add note1 note_content`|
@@ -234,6 +241,8 @@ You have added Module1 Tut’s scheduled zoom link!
 |**view**|`view` or `view {index}`<br>e.g. `view` or `view 1`|
 |**help**|`help`|
 |**exit**|`exit`|
+
+___  
 
 ## Advanced Command Summary    
 
