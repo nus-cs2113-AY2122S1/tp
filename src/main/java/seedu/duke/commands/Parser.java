@@ -16,7 +16,7 @@ public class Parser {
         if (input.equals(COMMAND_EXIT)) {
             return new ExitCommand();
         } else {
-            return null;
+            return new UnknownCommand();
         }
     }
 }

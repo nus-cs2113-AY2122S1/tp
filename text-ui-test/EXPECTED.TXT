@@ -10,4 +10,5 @@
       \(   _.-"  libmgr
        `--"
 Welcome to libmgr
+> Sorry, I don't understand what you mean
 > See you soon!
