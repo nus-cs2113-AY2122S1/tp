@@ -1,9 +1,18 @@
 package seedu.duke.commands;
 
+import seedu.duke.modules.Module;
+import seedu.duke.modules.SelectedModuleList;
+import seedu.duke.storage.Storage;
+import seedu.duke.universities.University;
+import seedu.duke.universities.UniversityList;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
-    public ListCommand(String type) {
+    public ListCommand(String type) throws IOException {
         switch (type) {
         case "m":
             if (selectedModuleList.getSize() == 0) {
@@ -25,8 +34,20 @@ public class ListCommand extends Command {
                 }
             }
             break;
-        //case "s":
-        //case "t":
+        case "s":
+            ArrayList<University> allUniversityList = Storage.readUniversitiesFromCsv();
+            System.out.println("Here are all the universities available for you:");
+                for (int i = 0; i < allUniversityList.size(); i++) {
+                    System.out.println("[" + (i + 1) + "] " + allUniversityList.get(i).getName());
+                }
+            break;
+        case "t":
+            ArrayList<Module> allModuleList = Storage.readModulesFromCsv();
+            System.out.println("Here are all the modules available for you:");
+                for (int i = 0; i < allModuleList.size(); i++) {
+                    System.out.println("[" + (i + 1) + "] " + allModuleList.get(i).getModuleCode());
+                }
+            break;
         default:
             break;
         }

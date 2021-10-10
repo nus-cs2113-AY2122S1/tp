@@ -4,8 +4,8 @@ import seedu.duke.modules.SelectedModuleList;
 import seedu.duke.universities.UniversityList;
 
 public class Command {
-    protected SelectedModuleList selectedModuleList;
-    protected UniversityList universityList;
+    public SelectedModuleList selectedModuleList;
+    public UniversityList universityList;
 
     public Command() {
     }

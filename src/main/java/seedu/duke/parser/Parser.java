@@ -8,6 +8,8 @@ import seedu.duke.commands.AddModCommand;
 import seedu.duke.commands.AddUniCommand;
 import seedu.duke.modules.Module;
 import seedu.duke.universities.UniversityList;
+
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -24,7 +26,7 @@ public class Parser {
         this.moduleMasterList = moduleMasterList;
     }
 
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput) throws ParseException, IOException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException("matcher class exception", 1);
