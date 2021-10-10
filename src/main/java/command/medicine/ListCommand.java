@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -57,7 +58,7 @@ public class ListCommand extends Command {
                 break;
             case CommandParameters.NAME:
                 filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
-                        .filter((m) -> m.getMedicineName().equals(parameterValue))
+                        .filter((m) -> (m.getMedicineName().toUpperCase()).contains(parameterValue.toUpperCase()))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.PRICE:
@@ -82,8 +83,8 @@ public class ListCommand extends Command {
                 break;
             case CommandParameters.DESCRIPTION:
                 filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
-                        .filter((m) -> ((Stock) m).getDescription().equals(parameterValue))
-                        .collect(Collectors.toList());
+                        .filter((m) -> (((Stock) m).getDescription().toUpperCase())
+                                .contains(parameterValue.toUpperCase())).collect(Collectors.toList());
                 break;
             case CommandParameters.MAX_QUANTITY:
                 filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
