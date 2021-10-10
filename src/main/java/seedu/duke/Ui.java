@@ -76,7 +76,7 @@ public class Ui {
     }
 
     public static String getHelpMessage() {
-        return(HELP_MESSAGE);
+        return HELP_MESSAGE;
     }
 
     public static void printList(ArrayList<Item> list) {
