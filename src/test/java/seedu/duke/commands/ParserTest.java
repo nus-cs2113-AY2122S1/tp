@@ -16,4 +16,10 @@ class ParserTest {
         boolean type = Parser.parse("foo 2") instanceof UnknownCommand;
         assertTrue(type);
     }
+
+    @Test
+    public void parse_add_AddCommandObject() {
+        boolean type = Parser.parse("add t/The Hunger Games i/123") instanceof AddCommand;
+        assertTrue(type);
+    }
 }
