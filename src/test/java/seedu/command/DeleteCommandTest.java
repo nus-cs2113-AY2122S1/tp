@@ -2,18 +2,28 @@ package seedu.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.module.Lesson;
-import seedu.module.Module;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableLesson;
 import seedu.ui.TextUi;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DeleteCommandTest {
+
+
+    @Test
+
+
+    public void execute_Inavlid_mod_print() {
+        Timetable tt = new Timetable(1);
+        Command command = new DeleteCommand("CS2113C", tt);
+        assertThrows(IOException.class, command::execute);
+    }
 
 
     @Test
@@ -77,7 +87,7 @@ class DeleteCommandTest {
         //Deleting test module from timetable 1
         Command command = new DeleteCommand("CFG1002", tt1);
         command.execute();
-        //chacking if the empty timetable (that is timetable 2 matches with timetable 1)
+        //checking if the empty timetable (that is timetable 2 matches with timetable 1)
         assertEquals(tt2, tt1);
     }
 }
