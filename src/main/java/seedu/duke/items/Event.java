@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public class Event extends Item {
 
-    private String dateTime;
+    private String date;
     private String venue;
     private double budget;
 
@@ -12,13 +12,13 @@ public class Event extends Item {
 
     public Event(String title, String description, String dateTime, String venue, int budget) {
         super("event", title, description);
-        this.dateTime = dateTime;
+        this.date = dateTime;
         this.venue = venue;
         this.budget = budget;
     }
 
     public String getDateValue() {
-        return dateTime;
+        return date;
     }
 
     public String getVenue() {

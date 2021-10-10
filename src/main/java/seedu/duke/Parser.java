@@ -21,7 +21,7 @@ public class Parser {
         case "delete":
             return new DeleteCommand(command);
         case "add":
-            return new AddCommand();
+            return new AddCommand(command, response);
         case "bye":
             return new ByeCommand();
         case "help":
