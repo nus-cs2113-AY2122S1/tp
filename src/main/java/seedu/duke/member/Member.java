@@ -68,6 +68,10 @@ public class Member {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getName() { return name; }
+
+    public String getStudentNumber() { return studentNumber; }
+
     /**
      * Formats description of member to be displayed to user.
      *
