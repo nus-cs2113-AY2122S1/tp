@@ -35,6 +35,15 @@ public class RecipeList {
         }
     }
 
+    public Recipe remove(String name) throws RecipeNotFoundException {
+        if(recipes.get(name) == null) {
+            throw new RecipeNotFoundException();
+        }
+        Recipe recipe = recipes.get(name);
+        recipes.remove(name);
+        return recipe;
+    }
+
     /**
      * Returns { @code true } if the recipe list contains the given recipe.
      *
