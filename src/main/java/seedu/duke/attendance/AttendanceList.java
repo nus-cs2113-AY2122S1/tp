@@ -1,12 +1,9 @@
 package seedu.duke.attendance;
 
 import seedu.duke.member.Member;
-import seedu.duke.training.TrainingList;
 import seedu.duke.training.TrainingSchedule;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AttendanceList {
 
@@ -16,12 +13,16 @@ public class AttendanceList {
         attendanceList = new ArrayList<Attendance>();
     }
 
-    public AttendanceList(ArrayList<Attendance> attendanceList) { this.attendanceList = attendanceList; }
+    public AttendanceList(ArrayList<Attendance> inputAttendanceList) {
+        this.attendanceList = inputAttendanceList;
+    }
 
-    public ArrayList<Attendance> getAttendanceList() { return attendanceList; }
+    public ArrayList<Attendance> getAttendanceList() {
+        return attendanceList;
+    }
 
     /**
-     * Add attendance entry as request by user
+     * Add attendance entry as request by user.
      *
      * @param attendance attendance entry to be added
      */
@@ -38,11 +39,23 @@ public class AttendanceList {
     public Attendance deleteAttendance(int attendanceNumber) throws IndexOutOfBoundsException {
         try {
             int index = attendanceNumber - 1;
-            Attendance task = attendanceList.get(index);
+            Attendance entry = attendanceList.get(index);
             attendanceList.remove(index);
-            return task;
+            return entry;
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException(e.getMessage());
+        }
+    }
+
+    public Attendance getAttendance(int attendanceNumber) throws IndexOutOfBoundsException {
+        try {
+            int index = attendanceNumber - 1;
+            Attendance entry = attendanceList.get(index);
+            return entry;
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException(e.getMessage());
         }
     }
 }
+
+//add /att /m izzi /s 123456 /n Monday trg /v mpsh2 /a 1800

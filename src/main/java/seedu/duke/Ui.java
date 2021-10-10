@@ -2,8 +2,10 @@ package seedu.duke;
 
 import seedu.duke.attendance.Attendance;
 import seedu.duke.attendance.AttendanceList;
-import seedu.duke.member.*;
-import seedu.duke.training.*;
+import seedu.duke.member.Member;
+import seedu.duke.member.MemberList;
+import seedu.duke.training.TrainingList;
+import seedu.duke.training.TrainingSchedule;
 
 public class Ui {
 
@@ -12,7 +14,11 @@ public class Ui {
     }
 
     public static void printList(MemberList members) {
-        System.out.println("Members test");
+        int display = 1;
+        for (Member member : members.getMemberList()) {
+            System.out.println("[" + display + "] " + member.toString());
+            display++;
+        }
     }
 
     public static void printList(TrainingList trainings) {

@@ -1,8 +1,12 @@
 package seedu.duke;
 
+import static java.lang.System.exit;
+
 import seedu.duke.attendance.AttendanceList;
-import seedu.duke.member.*;
-import seedu.duke.training.*;
+import seedu.duke.member.Member;
+import seedu.duke.member.MemberList;
+import seedu.duke.training.TrainingSchedule;
+import seedu.duke.training.TrainingList;
 
 public class Entry {
     private static final TrainingList trainings = new TrainingList();
@@ -41,6 +45,9 @@ public class Entry {
             break;
         case DELETE_TRAINING_KEYWORD:
             Parser.deleteTraining(trainings, entry);
+            break;
+        case DELETE_ATTENDANCE_KEYWORD:
+            Parser.deleteAttendance(attendanceList, entry);
         case FIND_MEMBER_KEYWORD:
             Parser.findInMembers(members, entry);
             break;
@@ -50,11 +57,14 @@ public class Entry {
         case EDIT_TRAINING_KEYWORD:
             Parser.editTraining(trainings, entry);
             break;
+        case EXIT_KEYWORD:
+            Ui.printGoodbyeMessage();
+            exit(0);
+            break;
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();
             break;
-        case EXIT_KEYWORD:
-            Ui.printGoodbyeMessage();
+        default:
             break;
         }
     }

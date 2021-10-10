@@ -20,7 +20,7 @@ public class MemberList {
     }
 
     /**
-     * Add member as request by user
+     * Add member as request by user.
      *
      * @param member member to be added
      */
@@ -29,7 +29,7 @@ public class MemberList {
     }
 
     /**
-     * Get member by index
+     * Get member by index.
      *
      * @param memberNumber member number according to member list
      * @return member request by memberNumber

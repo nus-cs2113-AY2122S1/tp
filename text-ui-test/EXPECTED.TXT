@@ -5,5 +5,10 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-What is your name?
-Hello James Gosling
+What would you like to do?
+> add /m /n Glenn /s A0123456B /g M /p 98765432
+Added a Member: Name: Glenn | Student Number: A0123456B | Gender: M | Phone Number: 98765432
+> add /t /n Weekly October Training /a 1 Oct 2021 /v MPSH1
+Added a Training entry:
+Training Name: Weekly October Training | Venue: MPSH1 | Time: 1 Oct 2021
+>
