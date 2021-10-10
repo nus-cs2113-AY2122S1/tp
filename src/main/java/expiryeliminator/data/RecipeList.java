@@ -2,6 +2,7 @@ package expiryeliminator.data;
 
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.EmptyIngredientsException;
+import expiryeliminator.data.exception.RecipeNotFoundException;
 
 import java.util.HashMap;
 
@@ -26,7 +27,7 @@ public class RecipeList {
      * @throws EmptyIngredientsException If there are no ingredients in the recipe.
      */
     public void add(Recipe recipe) throws DuplicateDataException, EmptyIngredientsException {
-        if (contains(recipe)) {
+        if (recipes.containsKey(recipe.getName())) {
             throw new DuplicateDataException();
         } else if (recipe.getIngredients().size() == 0) {
             throw new EmptyIngredientsException();

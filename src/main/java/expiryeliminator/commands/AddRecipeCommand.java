@@ -6,10 +6,14 @@ import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.EmptyIngredientsException;
 
+/**
+ * Adds a recipe, together with the ingredients needed.
+ */
 public class AddRecipeCommand extends Command {
+    /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "add recipe";
 
-    private static final String MESSAGE_RECIPE_ADDED = "I've added this recipe:\n" + "%1$s\n"
+    private static final String MESSAGE_RECIPE_ADDED = "I've added this recipe:\n" + "%1$s"
             + "Now you have %2$s recipe(s)";
     private static final String MESSAGE_RECIPE_ALREADY_EXISTS = "Unable to add recipe: %1$s\n"
             + "You already have it in your list";
