@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.logger.LoggerUtil;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.parser.Parser;
@@ -9,11 +10,13 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Duke {
     private Storage storage;
     private final WorkoutList workouts;
     private final Ui ui;
+    private static final Logger LOGGER = Logger.getLogger(Duke.class.getName());
 
     public Duke() {
         workouts = new WorkoutList();
@@ -30,10 +33,17 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
+        setupGetJackDLogger();
         Ui.printWelcomeMessage();
         new Duke().run();
         Ui.printByeMessage();
         exit();
+    }
+
+    private static void setupGetJackDLogger() {
+        LoggerUtil.loggerUtilSetup();
+        LoggerUtil.setupLogger(LOGGER);
+        LOGGER.info("Start Application");
     }
 
     /**

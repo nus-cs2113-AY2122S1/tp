@@ -5,6 +5,7 @@ import seedu.duke.storage.models.WorkoutModel;
 
 public class Exercise {
     protected String description;
+
     //protected String muscle;
     protected int sets;
     protected int reps;
@@ -16,6 +17,10 @@ public class Exercise {
         this.reps = reps;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public int getSets() {
         return sets;
     }
@@ -23,7 +28,7 @@ public class Exercise {
     public int getReps() {
         return reps;
     }
-    
+
     public Boolean getIsDone() {
         return isDone;
     }
