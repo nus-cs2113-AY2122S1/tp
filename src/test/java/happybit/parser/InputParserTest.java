@@ -15,11 +15,13 @@ class InputParserTest {
     private static final String COMMAND_LIST_GREETING =
             "Hello! These are all the possible commands for this habit tracker :)";
     private static final String ADD_HABIT_COMMAND =
-            "add a habit: add <habit name>";
+            "add a habit: add <habit type> <habit name>";
+    private static final String HABIT_TYPE_INFO =
+            "-> Habit types include: default, sleep, food, exercise and study";
     private static final String DELETE_HABIT_COMMAND =
             "delete a habit: delete <habit name>";
     private static final String SET_GOAL_COMMAND =
-            "set a goal for a habit: set <habit name> <goal name>";
+            "set a goal for a habit: set <habit name> <goal name> /<start date> - /<end date>";
     private static final String REMOVE_GOAL_COMMAND =
             "remove a goal for a habit: remove <habit name> <goal name>";
     private static final String LIST_HABIT_COMMAND =
@@ -46,6 +48,7 @@ class InputParserTest {
         String expectedOutput = DASHES + NEWLINE
                 + COMMAND_LIST_GREETING + NEWLINE
                 + ADD_HABIT_COMMAND + NEWLINE
+                + HABIT_TYPE_INFO + NEWLINE
                 + DELETE_HABIT_COMMAND + NEWLINE
                 + SET_GOAL_COMMAND + NEWLINE
                 + REMOVE_GOAL_COMMAND + NEWLINE
