@@ -23,7 +23,7 @@ public class Entry {
         Keyword keyword = Parser.getKeywordStatus(entry);
 
         //i just put here first even tho sus cos all the private attributes are declared in this class
-        MemberStorage.SetupMemberFile(members);
+        MemberStorage.setupMemberFile(members);
 
         switch (keyword) {
         case LIST_MEMBER_KEYWORD:
@@ -52,6 +52,7 @@ public class Entry {
             break;
         case DELETE_ATTENDANCE_KEYWORD:
             Parser.deleteAttendance(attendanceList, entry);
+            break;
         case FIND_MEMBER_KEYWORD:
             Parser.findInMembers(members, entry);
             break;
