@@ -31,8 +31,9 @@ public class InputParser {
             return null;
 
         //One parameter commands just add the parameterString
+        case DELETE_DISH:
+        case DELETE_INGR:
         case ADD_DISH:
-
         case LIST:
             parameters.add(parameterString);
             break;
@@ -42,12 +43,16 @@ public class InputParser {
         case ADD_INGR:
         case ADD_DISH_WASTE:
         case ADD_INGR_WASTE:
+        case ADD_INGR_STORED:
             parameters.addAll(List.of(parameterString.split(" ", 2)));
             break;
 
         case ADD_CONSTITUENT:
             //TODO trim inputs
-            parameters.addAll(List.of(parameterString.split("/", 2)));
+            String[] splitString = parameterString.split("/", 2);
+            for (String param: splitString) {
+                parameters.add(param.trim());
+            }
             break;
         default:
             break;

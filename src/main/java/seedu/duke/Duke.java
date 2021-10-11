@@ -3,8 +3,10 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandNames;
 import seedu.duke.exceptions.CommandNotAvailableException;
+import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {
@@ -13,6 +15,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         InputParser parser = new InputParser();
+        Storage.load();
         Scanner input = new Scanner(System.in);
 
         String logo = " ____        _        \n"
@@ -23,7 +26,7 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("How may I help you?");
 
-        String userInput = input.nextLine();
+        String userInput = input.nextLine().toLowerCase();
         while (!userInput.equals("bye")) {
             try {
                 //Get command name and parameters
@@ -33,6 +36,8 @@ public class Duke {
                 //Switch to appropriate callback function and call function
                 Command userCommand = userCommandName.getCallbackCommand();
                 userCommand.execute(parameters);
+                Storage.write("ingredient");
+                Storage.write("dish");
 
             } catch (CommandNotAvailableException e) {
                 System.out.println("No such command");

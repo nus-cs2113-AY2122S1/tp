@@ -7,7 +7,7 @@ public class DishList {
 
     public static void add(String dishName) {
         if (DishList.find(dishName) == -1) {
-            Dish dishToAdd = new Dish(dishName.toLowerCase());
+            Dish dishToAdd = new Dish(dishName);
             dishList.add(dishToAdd);
             System.out.println("Added:" + dishToAdd.getDishName());
         } else {
@@ -18,7 +18,7 @@ public class DishList {
     //Returns -1 if not present, index if present
     public static int find(String dishName) {
         for (Dish dish: dishList) {
-            if (dish.getDishName().equals(dishName.toLowerCase())) {
+            if (dish.getDishName().equals(dishName)) {
                 return dishList.indexOf(dish);
             }
         }
@@ -28,8 +28,7 @@ public class DishList {
     public static void list() {
         System.out.println("Here are the dishes you have: ");
         for (int i = 0; i < dishList.size(); i++) {
-            String currentDish = dishList.get(i).getDishName();
-            System.out.println((i + 1) + ". " + currentDish);
+            System.out.println((i + 1) + ". " + dishList.get(i));
         }
         System.out.println("You can use commands 'add' or 'find' to add new dishes or find existing ones!");
     }
