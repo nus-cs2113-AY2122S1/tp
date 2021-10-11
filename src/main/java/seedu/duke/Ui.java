@@ -40,4 +40,18 @@ public class Ui {
     public static void printExpenseAddedSuccess() {
         System.out.println("Your expense has been added successfully");
     }
+
+    public static void printBudgetFormatError() {
+        System.out.print("Please re-enter your budget as a decimal number (e.g. 1.32): ");
+    }
+
+    public static void printExchangeRateFormatError() {
+        System.out.print("Please re-enter your exchange rate as a decimal number (e.g. 1.32): ");
+    }
+
+    public static void printDateTimeFormatError() {
+        System.out.print("Please check that your date-time format is dd-MM-yyyy. "
+                + "Please enter the date again: ");
+    }
+
 }

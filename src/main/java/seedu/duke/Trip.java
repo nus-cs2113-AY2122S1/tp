@@ -58,8 +58,7 @@ public class Trip {
         try {
             this.dateOfTrip = LocalDate.parse(dateOfTrip, pattern);
         } catch (DateTimeParseException e) {
-            System.out.print("Please check that your date-time format is dd-MM-yyyy. "
-                    + "Please enter the date again: ");
+            Ui.printDateTimeFormatError();
             Scanner scanner = Storage.getScanner();
             setDateOfTrip(scanner.nextLine().strip());
         }
@@ -77,7 +76,7 @@ public class Trip {
         try {
             this.budget = Double.parseDouble(budget);
         } catch (NumberFormatException e) {
-            System.out.print("Please re-enter your exchange rate as a decimal number (e.g. 1.32): ");
+            Ui.printBudgetFormatError();
             Scanner scanner = Storage.getScanner();
             setBudget(scanner.nextLine().strip());
         }
@@ -100,7 +99,7 @@ public class Trip {
         try {
             this.exchangeRate = Double.parseDouble(exchangeRateString);
         } catch (NumberFormatException e) {
-            System.out.print("Please re-enter your exchange rate as a decimal number (e.g. 1.32): ");
+            Ui.printExchangeRateFormatError();
             Scanner scanner = Storage.getScanner();
             setExchangeRate(scanner.nextLine().strip());
         }
