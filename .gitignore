@@ -22,3 +22,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 
 # Log folder
 /log/
+
+# old Log file
+log
