@@ -37,8 +37,24 @@ public class Module {
         this.lessonCount = lessonCount;
     }
 
+    public int getNumberOfStudents() {
+        return students.size();
+    }
+
     public ArrayList<Student> getStudents() {
         return new ArrayList<>(students);
+    }
+
+    public Student getStudent(int studentIndex) {
+        return students.get(studentIndex);
+    }
+
+    public AssessmentList getAssessmentList() {
+        return assessmentList;
+    }
+
+    public ArrayList<Assessment> getAssessments() {
+        return assessmentList.getAssessments();
     }
 
     public void addStudent(Student student) {
@@ -88,10 +104,6 @@ public class Module {
         return studentsFound;
     }
 
-    public ArrayList<Assessment> getAssessments() {
-        return assessmentList.getAssessments();
-    }
-
     public boolean addAssessment(Assessment assessment) {
         return assessmentList.addAssessment(assessment);
     }
@@ -108,6 +120,7 @@ public class Module {
 
         return String.format("%s - %s", code, name);
     }
+
 
     private boolean isValidStudentIndex(int index) {
         return (index >= 0 && index < getStudentCount());
