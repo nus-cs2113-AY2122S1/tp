@@ -1,6 +1,7 @@
 package command;
 
 import inventory.Medicine;
+import parser.OrderValidator;
 import parser.StockValidator;
 import ui.Ui;
 
@@ -27,6 +28,7 @@ public class CommandSyntax {
     public static final String UPDATE_COMMAND = "UPDATE I/STOCK_ID [N/NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
             + "D/DESCRIPTION M/MAX_QUANTITY]";
     public static final String DELETE_COMMAND = "DELETE I/STOCK_ID";
+    public static final String DISPENSE_COMMAND = "DISPENSE N/NAME Q/QUANTITY C/CUSTOMER_NRIC S/STAFF_NAME";
     public static final String HELP_COMMAND = "HELP";
     public static final String PURGE_COMMAND = "PURGE";
     public static final String EXIT_COMMAND = "EXIT";
@@ -154,6 +156,12 @@ public class CommandSyntax {
             case CommandParameters.SORT:
             case CommandParameters.REVERSED_SORT:
                 isValid = StockValidator.isValidColumn(ui, parameterValue);
+                break;
+            case CommandParameters.CUSTOMER_NRIC:
+                isValid = OrderValidator.isValidCustomerNric(ui, parameterValue);
+                break;
+            case CommandParameters.STAFF:
+                isValid = OrderValidator.isValidStaffName(ui, parameterValue);
                 break;
             default:
                 break;

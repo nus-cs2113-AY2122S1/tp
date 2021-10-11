@@ -6,7 +6,9 @@ import command.medicine.AddCommand;
 import command.medicine.DeleteCommand;
 import command.medicine.ListCommand;
 import command.medicine.UpdateCommand;
+import command.medicine.DispenseCommand;
 import errors.InvalidCommand;
+
 import inventory.Medicine;
 import ui.Ui;
 
@@ -70,6 +72,7 @@ public class Parser {
         case DELETE_ORDER:
             break;
         case DISPENSE:
+            new DispenseCommand().execute(ui, parameters, medicines);
             break;
         case EXIT:
             return true;
