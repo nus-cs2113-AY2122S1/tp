@@ -7,6 +7,10 @@ public class StudentList {
 
     private ArrayList<Student> students;
 
+    public StudentList() {
+        this.students = new ArrayList<>();
+    }
+
     /**
      * Gets a list of students in the ArrayList. Note that this returns a new ArrayList instance.
      *
