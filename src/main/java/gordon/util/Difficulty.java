@@ -1,5 +1,5 @@
 package gordon.util;
 
 public enum Difficulty {
-    Easy, Medium, Hard
+    None, Easy, Medium, Hard
 }

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class Recipe {
     protected String name;
     protected int id;
-    protected Difficulty difficulty;
-    protected int preparationTime;
-    protected int cookingTime;
+    protected Difficulty difficulty = Difficulty.None;
+    protected int preparationTime = -1;
+    protected int cookingTime = -1;
     protected ArrayList<Ingredient> ingredients;
     protected ArrayList<String> steps;
-    protected float totalPrice;
-    protected int calories;
+    protected float totalPrice = -1;
+    protected int calories = -1;
     protected ArrayList<String> tags;
 
     public Recipe(String name) {
@@ -112,23 +112,59 @@ public class Recipe {
     @Override
     public String toString() {
         StringBuilder outputString = new StringBuilder(name + System.lineSeparator());
-        //outputString.append("Preparation time: ").append(preparationTime).append(System.lineSeparator());
-        //outputString.append("Cooking time: ").append(cookingTime).append(System.lineSeparator());
+
+        if (difficulty != Difficulty.None) {
+            outputString.append("Difficulty: ")
+                    .append(System.lineSeparator())
+                    .append(difficulty)
+                    .append(System.lineSeparator());
+        }
+
+        if (preparationTime > -1) {
+            outputString.append("Preparation time: ")
+                    .append(System.lineSeparator())
+                    .append(preparationTime)
+                    .append(System.lineSeparator());
+        }
+
+        if (cookingTime > -1) {
+            outputString.append("Cooking time: ")
+                    .append(System.lineSeparator())
+                    .append(cookingTime)
+                    .append(System.lineSeparator());
+        }
+
+        if (totalPrice > -1) {
+            outputString.append("Total price of ingredients: ")
+                    .append(System.lineSeparator())
+                    .append("$")
+                    .append(String.format("%.2f", totalPrice))
+                    .append(System.lineSeparator());
+        }
+
         outputString.append("Ingredients needed: ").append(System.lineSeparator());
         for (int i = 0; i < ingredients.size(); i++) {
             outputString.append(i + 1).append(". ");
             outputString.append(ingredients.get(i).getDescription());
             outputString.append(System.lineSeparator());
         }
+
         outputString.append("Method: ").append(System.lineSeparator());
         for (int j = 0; j < steps.size(); j++) {
             outputString.append(j + 1).append(". ");
             outputString.append(steps.get(j));
             outputString.append(System.lineSeparator());
         }
-        //outputString.append("Total price of ingredients: $")
-        //        .append(String.format("%.2f", totalPrice))
-        //        .append(System.lineSeparator());
+
+        if (tags.size() > 0) {
+            outputString.append("Tags: ").append(System.lineSeparator());
+            for (int k = 0; k < tags.size(); k++) {
+                outputString.append(k + 1).append(". ");
+                outputString.append(tags.get(k));
+                outputString.append(System.lineSeparator());
+            }
+        }
+
         return outputString.toString();
     }
 }
