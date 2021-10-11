@@ -40,7 +40,7 @@ public class FinancialTracker {
     }
 
     public Entry removeExpenseEntry(int expenseItemNumber) throws ExpenseEntryNotFoundException {
-        assert(expenseItemNumber - 1 <= Expense.getSize());
+        assert expenseItemNumber - 1 <= Expense.getSize() : "Invalid Delete Number";
         int itemIndex = 0;
         int expenseItemCounter = 0;
         for (Entry entry : this.financialEntries) {
@@ -56,7 +56,7 @@ public class FinancialTracker {
     }
 
     public Entry removeIncomeEntry(int incomeItemNumber) throws IncomeEntryNotFoundException {
-        assert(incomeItemNumber - 1 <= Income.getSize());
+        assert incomeItemNumber - 1 <= Income.getSize() : "Invalid Delete Number";
         int itemIndex = 0;
         int incomeItemCounter = 0;
         for (Entry entry : this.financialEntries) {
