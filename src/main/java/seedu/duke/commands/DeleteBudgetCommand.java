@@ -1,14 +1,17 @@
 package seedu.duke.commands;
 
-public class DeleteBudgetCommand extends Command {
+import seedu.duke.ui.TextUi;
 
-    public static final String COMMAND_WORD = "DeleteBudget";
-    public final int index;
+public class DeleteBudgetCommand extends DeleteCommand {
 
-    public DeleteBudgetCommand(String indexString) {
-        this.index = Integer.parseInt(indexString) - 1;
+    public final String commandParams;
+
+    public DeleteBudgetCommand(String commandParams) {
+        this.commandParams = commandParams;
     }
 
     public void execute() {
+        recordList.deleteBudget();
+        TextUi.showBudgetDeletedMessage();
     }
 }
