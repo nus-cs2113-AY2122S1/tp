@@ -17,6 +17,25 @@ public class WorldMap {
         }
     }
 
+    public static void printWorld() {
+        for (String countryCode : graphList.getNameArray()) {
+            System.out.println(countryCode);
+        }
+        int numberOfCountries = graphList.getNameArray().size();
+        Country startCountry;
+        Country endCountry;
+        for (int i = 0; i < numberOfCountries; i++) {
+            for (int j = 0; j < numberOfCountries; j++) {
+                startCountry = graphList.getVertexArray().get(i);
+                endCountry = graphList.getVertexArray().get(j);
+                int startCountryKey = startCountry.getKey();
+                int endCountryKey = endCountry.getKey();
+                System.out.println("From : " + startCountry + " To : " + endCountry
+                        + " is " + graphList.getEdgeMatrix()[startCountryKey][endCountryKey]);
+            }
+        }
+    }
+
     public static MinCalcResult calcMinDistance(String sourceCountryName, String targetCountryName) {
         Country sourceCountry = getCountry(sourceCountryName);
         Country targetCountry = getCountry(targetCountryName);

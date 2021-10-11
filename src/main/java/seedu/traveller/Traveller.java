@@ -37,6 +37,7 @@ public class Traveller {
     public static void main(String[] args) {
         Traveller traveller = new Traveller();
         WorldMap.initWorldMap();
+        WorldMap.printWorld();
         traveller.run();
     }
 }
