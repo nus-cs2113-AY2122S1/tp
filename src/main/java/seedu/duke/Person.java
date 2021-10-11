@@ -50,4 +50,9 @@ public class Person {
         return total;
     }
 
+    @Override
+    public String toString() {
+        return this.getName();
+    }
+
 }
