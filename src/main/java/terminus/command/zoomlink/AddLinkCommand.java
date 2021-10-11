@@ -51,7 +51,7 @@ public class AddLinkCommand extends Command {
 
         this.description = argArray.get(0);
         this.day = argArray.get(1);
-        this.startTime = CommonFormat.localTimeConverter(userStartTime);
+        this.startTime = CommonFormat.convertToLocalTime(userStartTime);
         this.link = argArray.get(3);
     }
 

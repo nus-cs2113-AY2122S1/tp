@@ -48,7 +48,7 @@ public class CommonFormat {
         return false;
     }
 
-    public static LocalTime localTimeConverter(String startTime) throws InvalidTimeFormatException {
+    public static LocalTime convertToLocalTime(String startTime) throws InvalidTimeFormatException {
         if (startTime.length() != 5 || startTime.indexOf(":") != 2) {
             throw new InvalidTimeFormatException(
                     String.format(Messages.ERROR_MESSAGE_INVALID_TIME_FORMAT, LOCAL_TIME_FORMAT));
