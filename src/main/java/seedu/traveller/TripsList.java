@@ -2,6 +2,7 @@ package seedu.traveller;
 
 import java.util.ArrayList;
 
+
 public class TripsList {
     private final ArrayList<Trip> trips;
 
@@ -10,11 +11,11 @@ public class TripsList {
     }
 
     public void addTrip(Trip trip) {
-        trips.add(trip);
+        this.trips.add(trip);
     }
 
     public Trip getTrip(int i) {
-        return trips.get(i);
+        return this.trips.get(i);
     }
 
     public int getTripIndex(String tripName) {
@@ -30,10 +31,10 @@ public class TripsList {
     }
 
     public void deleteTrip(int i) {
-        trips.remove(i);
+        this.trips.remove(i);
     }
 
     public int getSize() {
-        return trips.size();
+        return this.trips.size();
     }
 }

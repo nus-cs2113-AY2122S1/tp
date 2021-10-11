@@ -4,6 +4,7 @@ import seedu.traveller.worldMap.Country;
 
 import java.util.List;
 
+
 public class Trip {
     private final String tripName;
     private final String startCountryCode;

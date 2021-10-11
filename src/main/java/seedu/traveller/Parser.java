@@ -8,20 +8,14 @@ import seedu.traveller.commands.NewCommand;
 import seedu.traveller.commands.ViewAllCommand;
 import seedu.traveller.commands.SearchCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
-import seedu.traveller.exceptions.InvalidFormatException;
+import seedu.traveller.exceptions.InvalidEditFormatException;
+import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.worldMap.Logic;
-import seedu.traveller.worldMap.WorldMap;
-import seedu.traveller.worldMap.exceptions.EmptyVertexException;
-import seedu.traveller.worldMap.GraphList;
-import seedu.traveller.worldMap.Country;
 
-import java.util.List;
 
 public class Parser {
     public static Command parse(String rawInput) throws TravellerException {
-        String details;
-        Command command = null;
+        Command command;
 
         String[] userInput = rawInput.split(" ", 5);
         String userCommand = userInput[0].toLowerCase();
@@ -34,7 +28,7 @@ public class Parser {
                 String endCountryCode = userInput[3];
                 command = new NewCommand(tripName, startCountryCode, endCountryCode);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InvalidFormatException(userCommand);
+                throw new InvalidNewFormatException();
             }
             break;
         case "edit":
@@ -44,7 +38,7 @@ public class Parser {
                 String endCountryCode = userInput[3];
                 command = new EditCommand(tripName, startCountryCode, endCountryCode);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new InvalidFormatException(userCommand);
+                throw new InvalidEditFormatException();
             }
             break;
         case "delete":

@@ -2,10 +2,8 @@ package seedu.traveller;
 
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.worldMap.GraphList;
-import seedu.traveller.worldMap.Loader;
 import seedu.traveller.worldMap.WorldMap;
-import seedu.traveller.worldMap.exceptions.WorldMapException;
+
 
 public class Traveller {
     private final Ui ui;
