@@ -27,6 +27,8 @@ public abstract class Command {
     protected static final String MESSAGE_UNKNOWN_USAGE = "Unknown usage.";
     protected static final String MESSAGE_MODULE_NOT_FOUND = "Module not found.";
     protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
+    protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
+    protected static final String MESSAGE_NO_STUDENTS = "There are no students in this module";
 
     protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "Usage: %s";
     protected static final String MESSAGE_FORMAT_MISSING_ARGUMENT = "Missing Argument(s).\n%s";
