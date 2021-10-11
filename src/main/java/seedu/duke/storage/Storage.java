@@ -50,6 +50,7 @@ public class Storage {
      * @throws GetJackDException Exception is thrown when data cannot be loaded
      */
     public void loadData(WorkoutList workoutList) throws GetJackDException {
+        assert file.exists();
         if (file.length() == 0) {
             return;
         }
@@ -78,11 +79,14 @@ public class Storage {
      * @throws GetJackDException Exception is thrown when there is an error writing to JSON file
      */
     public void saveData(String jsonString) throws GetJackDException {
+        assert file.exists();
         try {
             FileWriter fileWriter = new FileWriter(storagePath, false);
             fileWriter.write(jsonString);
             fileWriter.close();
+            LOGGER.info("Successfully saved data into JSON file.");
         } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Error writing data to save file. Exception: ", e);
             throw new GetJackDException("☹ OOPS!!! Error writing to file while data!");
         }
 
@@ -113,6 +117,7 @@ public class Storage {
         try {
             JsonNode node = JsonUtil.parse(jsonString);
             WorkoutListModel.clearWorkoutListModel();
+            assert workoutListModel.getWorkouts().isEmpty();
             WorkoutListModel workoutListModel = JsonUtil.fromJson(node, WorkoutListModel.class);
             return workoutListModel.getWorkouts();
         } catch (IOException e) {
@@ -128,12 +133,13 @@ public class Storage {
      */
     public String convertToJson(WorkoutList workoutList) throws GetJackDException {
         WorkoutListModel.clearWorkoutListModel();
+        assert workoutListModel.getWorkouts().isEmpty();
         workoutList.convertAllWorkoutsToStorageModel();
         JsonNode node = JsonUtil.toJson(workoutListModel);
         try {
             return JsonUtil.stringify(node, true);
         } catch (JsonProcessingException e) {
-            throw new GetJackDException("Fail to JSON node into String");
+            throw new GetJackDException("Fail to convert to JSON node");
         }
     }
 }

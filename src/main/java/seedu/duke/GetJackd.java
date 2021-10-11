@@ -12,13 +12,13 @@ import seedu.duke.ui.Ui;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-public class Duke {
+public class GetJackd {
     private Storage storage;
     private final WorkoutList workouts;
     private final Ui ui;
-    private static final Logger LOGGER = Logger.getLogger(Duke.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(GetJackd.class.getName());
 
-    public Duke() {
+    public GetJackd() {
         workouts = new WorkoutList();
         ui = new Ui();
         try {
@@ -35,7 +35,7 @@ public class Duke {
     public static void main(String[] args) {
         setupGetJackDLogger();
         Ui.printWelcomeMessage();
-        new Duke().run();
+        new GetJackd().run();
         Ui.printByeMessage();
         exit();
     }
