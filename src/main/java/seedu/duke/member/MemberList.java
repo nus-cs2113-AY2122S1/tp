@@ -19,8 +19,29 @@ public class MemberList {
         return memberList;
     }
 
+
+    public int getMemberSize() { //added by xy
+        return memberList.size();
+    }
+
+    public String getMemberName(int index){//added by xy
+        return memberList.get(index).name.toString();
+    }
+
+    public String getMemberStudentNumber(int index){//added by xy
+        return memberList.get(index).studentNumber.toString();
+    }
+
+    public char getMemberGender(int index){//added by xy
+        return memberList.get(index).gender;
+    }
+
+    public String getMemberPhoneNumber(int index){//added by xy
+        return String.valueOf(memberList.get(index).phoneNumber);
+    }
+
     /**
-     * Add member as request by user
+     * Add member as request by user.
      *
      * @param member member to be added
      */
@@ -29,9 +50,22 @@ public class MemberList {
     }
 
     /**
+     * Get member by index.
+     *
+     * @param memberNumber member number according to member list
+     * @return member request by memberNumber
+     */
+    public Member getMember(int memberNumber) {
+        int index = memberNumber - 1;
+        Member member = memberList.get(index);
+        return member;
+    }
+
+    /**
      * Delete member as request by user.
      *
      * @param memberNumber member number given by user
+     * @return member to be displayed as deleted
      * @throws IndexOutOfBoundsException When an invalid member is selected to be deleted
      */
     public Member deleteMember(int memberNumber) throws IndexOutOfBoundsException {
