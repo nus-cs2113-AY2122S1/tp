@@ -56,7 +56,6 @@ public class Traveller {
     }
 
     public void setupRoutes() {
-        Dijkstra dijkstra = new Dijkstra();
         int i = 0;
 
         Vertex v1 = new Vertex("SGP", ++i);
@@ -74,11 +73,13 @@ public class Traveller {
         GraphList.createEdge(3.0, v2, v4);
         GraphList.createEdge(4.0, v3, v4);
 
+        Dijkstra dijkstra = new Dijkstra();
+        /*
         dijkstra.run(v1, v4); //expected output A-B-D, dist=4.0
         dijkstra.run(v4, v1); //expected output D-B-A, dist=4.0
         //GraphList.modifyEdge(11.0, v1, v2);
         //dijkstra.run(v1, v4); //expected output A-C-D, dist=6.0
-/*
+
         commented out below but is important
 
         Scanner in = new Scanner(System.in);

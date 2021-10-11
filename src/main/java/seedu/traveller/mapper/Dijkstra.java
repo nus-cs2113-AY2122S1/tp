@@ -37,7 +37,7 @@ public class Dijkstra {
                     priorityQueue.add(v);
                     adjMatrix[vertex.key][v.key] = minDist;
                     adjMatrix[v.key][vertex.key] = minDist;
-                   //System.out.println("Min distance of " + minDist + " between " + vertex.name + " and " + v.name);
+                    //System.out.println("Min distance of " + minDist + " between " + vertex.name + " and " + v.name);
                 }
             }
         }
@@ -56,7 +56,9 @@ public class Dijkstra {
                 if (v.getPrevVertex() != null) {
                     dist.add(adjMatrix[v.getPrevVertex().key][v.key]);
                 }
-                if (v == srcV) break;
+                if (v == srcV) {
+                    break;
+                }
             }
         }
 
@@ -69,7 +71,9 @@ public class Dijkstra {
         System.out.println("Breakdown of path");
         for (double d : dist) {
             curr = d - sum;
-            if (curr - 0.0 > 0.000001) System.out.println(curr);
+            if (curr - 0.0 > 0.000001) {
+                System.out.println(curr);
+            }
             sum += curr;
         }
         System.out.println("Total distance = " + sum);
