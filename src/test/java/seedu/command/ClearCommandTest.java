@@ -13,7 +13,7 @@ class ClearCommandTest {
      * Tests if the timetable gets cleared.
      */
     @Test
-    public void execute_ValidModuleCode_timetableShouldBeEmptied() {
+    public void execute_testTimeTable_clearedTimetable() {
         // Creating two test timetables
         Timetable tt1 = new Timetable(1);
         Timetable tt2 = new Timetable(1);
@@ -44,7 +44,7 @@ class ClearCommandTest {
         //Clearing timetable 1
         Command command = new ClearCommand(tt1);
         command.execute();
-        
+
         //checking if the empty timetable (that is timetable 2 matches with timetable 1)
         assertEquals(tt2.getClass(), tt1.getClass());
     }

@@ -13,7 +13,7 @@ class DeleteCommandTest {
      * Tests if the module gets deleted from the test timetable.
      */
     @Test
-    public void execute_ValidModuleCode_timetableShouldBeEmptied() {
+    public void execute_validModuleCodeInTestTimetable_moduleShouldBeRemoved() {
         // Creating two test timetables
         Timetable tt1 = new Timetable(1);
         Timetable tt2 = new Timetable(1);
