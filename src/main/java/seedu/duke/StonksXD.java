@@ -24,7 +24,7 @@ public class StonksXD {
         while (exitFlag) {
             String fullCommand = ui.readCommand();
             Command command = parser.parseCommand(fullCommand);
-            command.execute(finances,ui);
+            command.execute(finances, ui);
             if (command.isExit()) {
                 assert command.getClass() == ExitCommand.class;
                 exitFlag = false;

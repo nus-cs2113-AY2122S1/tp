@@ -103,28 +103,14 @@ public class Ui {
 
     }
     
-    public void printTotalExpense(ArrayList<Entry> entries) {
-        double totalExpense = 0;
-        for (Entry entry:entries) {
-            if (entry instanceof Expense) {
-                totalExpense += entry.getValue();
-            }
-        }
+    public void printTotalExpense(double totalExpense) {
         System.out.printf("Your total expense is: %f\n", totalExpense);
         printLine();
-
     }
     
-    public void printTotalIncome(ArrayList<Entry> entries) {
-        double totalIncome = 0;
-        for (Entry entry:entries) {
-            if (entry instanceof Income) {
-                totalIncome += entry.getValue();
-            }
-        }
+    public void printTotalIncome(double totalIncome) {
         System.out.printf("Your total income is: %f\n", totalIncome);
         printLine();
-
     }
     
     public void printExpenseAdded(Expense expense) {
