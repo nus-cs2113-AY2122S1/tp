@@ -19,7 +19,6 @@ class GeneratorTest {
         generator = new Generator();
     }
 
-    //featureUnderTest_testScenario_expectedBehavior()
     @Test
     void generateCommand_emptyInput_returnsIncorrectCommand() {
         String[] emptyInputs = {"", " ", "\n"};

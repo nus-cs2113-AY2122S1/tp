@@ -21,19 +21,17 @@ public class Parser {
      * @throws GetJackDException if any of the above-mentioned arguments are empty.
      */
     static String[] getExerciseArgs(String commandArgs) throws GetJackDException {
+        if (!commandArgs.contains(WORKOUT_KEYWORD) && !commandArgs.contains(EXERCISE_KEYWORD)
+                && !commandArgs.contains(SETS_KEYWORD) && !commandArgs.contains(REPS_KEYWORD)) {
+            throw new GetJackDException("Invalid format for add exercise.");
+        }
         String args = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
-        assert (!args.contains(WORKOUT_KEYWORD));
 
         String[] workoutIndexAndExerciseArgs = splitCommandWordsAndArgs(args, EXERCISE_KEYWORD);
-        assert (!workoutIndexAndExerciseArgs[0].contains(EXERCISE_KEYWORD));
-        assert (!workoutIndexAndExerciseArgs[1].contains(EXERCISE_KEYWORD));
 
         String[] nameAndSetsReps = splitCommandWordsAndArgs(workoutIndexAndExerciseArgs[1].trim(), SETS_KEYWORD);
-        assert (!nameAndSetsReps[0].contains(SETS_KEYWORD) || !nameAndSetsReps[1].contains(SETS_KEYWORD));
 
         String[] setsAndReps = splitCommandWordsAndArgs(nameAndSetsReps[1].trim(), REPS_KEYWORD);
-        assert (!setsAndReps[0].contains(REPS_KEYWORD));
-        assert (!setsAndReps[1].contains(REPS_KEYWORD));
 
         String workoutIndex = workoutIndexAndExerciseArgs[0].trim();
         String exerciseName = nameAndSetsReps[0].trim();
