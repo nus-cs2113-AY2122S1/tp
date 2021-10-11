@@ -1,5 +1,6 @@
 package seedu.ui;
 
+import seedu.module.Lesson;
 import seedu.module.Module;
 
 import java.util.Scanner;
@@ -19,12 +20,28 @@ public class TextUi {
 
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
+    private static final String HELP_MESSAGE = LINE
+            + "\tUNIMods accepts the following commands:-\n"
+            + "\t\t| No.| Command Syntax          |            Command Action                      |\n"
+            + "\t\t| 1. | search <module_code>    | Search module based on the given partial regex |\n"
+            + "\t\t| 2. | show <module_code>      | Display module information                     |\n"
+            + "\t\t| 3. | add <module_code>       | Add module to the Timetable                    |\n"
+            + "\t\t| 4. | delete <module_code>    | Remove module from the Timetable               |\n"
+            + "\t\t| 5. | clear                   | Remove all modules from the Timetable          |\n"
+            + "\t\t| 6. | timetable               | Display the Timetable                          |\n"
+            + "\t\t| 7. | exit                    | Exit From Program                              |\n"
+            + "\t ** Note: For details, refer to the User Guide of NUSModsLite at: "
+            + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n" + LINE;
+
+    public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this module does not exist in your timetable!";
+    public static final String ERROR_INVALID_MODULE_CODE = "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
+    public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
 
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
         System.out.println();
         String input = in.nextLine();
-        while (input.isBlank()) {
+        while (input.isEmpty()) {
             input = in.nextLine();
         }
         return input;
@@ -32,6 +49,10 @@ public class TextUi {
 
     public static void printExitMessage() {
         System.out.print(LINE + "> Bye friend!\n> See you again! :)\n" + LINE);
+    }
+
+    public static void printHelpMessage() {
+        System.out.print(HELP_MESSAGE);
     }
 
     public static void printInvalidCommandMessage() {
@@ -124,5 +145,42 @@ public class TextUi {
     public static void printLocalSearchMessage() {
         System.out.println(LINE + "!WARNING! This is a local search, data might not be up to date.");
         System.out.println(LINE);
+    }
+
+    public static void printAddMessage(String moduleCode) {
+        System.out.println("Adding " + moduleCode);
+    }
+
+    public static void printLessonMessage(String lessonType) {
+        switch (lessonType) {
+        case "Lecture":
+            System.out.println("Which Lecture time slot would you like to add ?");
+            System.out.println("Lecture Time slots:");
+            break;
+        case "Tutorial":
+            System.out.println("Which Tutorial time slot would you like to add ?");
+            System.out.println("Tutorial Time slots:");
+            break;
+        default:
+            System.out.println("Which Laboratory time slot would you like to add ?");
+            System.out.println("Laboratory Time slots:");
+            break;
+        }
+    }
+
+    public static void printLessonInfo(int serial, Lesson lesson) {
+        System.out.println(serial + ": " + lesson.lessonDetails());
+    }
+
+    public static void printLessonAdded() {
+        System.out.println("Lessons for all modules have been successfully added");
+    }
+
+    public static void printModuleDeleted(String moduleCode) {
+        System.out.println(moduleCode + " is successfully deleted from your Timetable.");
+    }
+
+    public static void printTimetableCleared() {
+        System.out.println("All modules have been successfully removed from your Timetable.");
     }
 }
