@@ -5,7 +5,7 @@ package command;
  */
 
 public class CommandParameters {
-    public static final String CUSTOMER_NRIC = "C";
+    public static final String CUSTOMER_ID = "C";
     public static final String DATE = "D";
     public static final String DESCRIPTION = "D";
     public static final String EXPIRY_DATE = "E";

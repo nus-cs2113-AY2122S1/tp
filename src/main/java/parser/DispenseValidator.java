@@ -3,29 +3,30 @@ package parser;
 import ui.Ui;
 
 /**
- * Contains all the methods to validate if an Order's input parameters are valid.
+ * Contains all the methods to validate if a Dispense input parameters are valid.
  */
-
-public class OrderValidator {
+public class DispenseValidator {
     /**
-     * Checks if a customer NRIC is valid.
+     * Checks if a customer ID is valid.
+     *
      * @param ui                Reference to the UI object passed by Main to print messages.
-     * @param customerNric      Customer NRIC to be checked.
-     * @return Boolean value indicating if Customer NRIC is valid.
+     * @param customerId        Customer ID to be checked.
+     * @return                  Boolean value indicating if Customer ID is valid.
      */
-    public static boolean isValidCustomerNric(Ui ui, String customerNric) {
-        if (customerNric.equals("")) {
-            ui.print("Customer NRIC cannot be empty!");
+    public static boolean isValidCustomerId(Ui ui, String customerId) {
+        if (customerId.equals("")) {
+            ui.print("Customer ID cannot be empty!");
             return false;
         }
         return true;
     }
 
     /**
-     * Checks if a customer NRIC is valid.
+     * Checks if a Staff Name is valid.
+     *
      * @param ui                Reference to the UI object passed by Main to print messages.
      * @param staffName         Staff Name to be checked.
-     * @return Boolean value indicating if Staff Name is valid.
+     * @return                  Boolean value indicating if Staff Name is valid.
      */
     public static boolean isValidStaffName(Ui ui, String staffName) {
         if (staffName.equals("")) {
