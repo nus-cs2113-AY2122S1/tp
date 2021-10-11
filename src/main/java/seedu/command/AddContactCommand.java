@@ -6,6 +6,10 @@ import seedu.ui.TextUi;
 public class AddContactCommand extends Command {
     private final String name;
     private final String github;
+    private final String linkedin;
+    private final String telegram;
+    private final String twitter;
+    private final String email;
 
     public String getName() {
         return name;
