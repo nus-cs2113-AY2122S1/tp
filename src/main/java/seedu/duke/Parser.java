@@ -3,7 +3,7 @@ package seedu.duke;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.HelpCommand;
-import seedu.duke.commands.SelectCommand;
+import seedu.duke.commands.FindCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.UpdateCommand;
@@ -34,7 +34,7 @@ public class Parser {
         case "help":
             return new HelpCommand();
         case "select":
-            return new SelectCommand(command);
+            return new FindCommand(command);
         case "update":
             return new UpdateCommand(command);
         case "next":
