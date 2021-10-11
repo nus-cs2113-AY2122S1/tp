@@ -5,7 +5,7 @@ public class MainUI {
     public static void printWelcomeMessage() {
         printSingleLine();
         System.out.println(
-                "___        _                          _     \n" +
+                " ___        _                          _     \n" +
                 "| _ \\___ __| |_ __ _ _  _ _ _ __ _ _ _| |_  \n" +
                 "|   / -_|_-<  _/ _` | || | '_/ _` | ' \\  _| \n" +
                 "|_|_\\___/__/\\__\\__,_|\\_,_|_| \\__,_|_||_\\__| \n" +
