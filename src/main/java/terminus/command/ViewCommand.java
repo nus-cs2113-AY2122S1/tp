@@ -2,19 +2,20 @@ package terminus.command;
 
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
+import terminus.content.Content;
 import terminus.content.ContentManager;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
-public class ViewCommand<T> extends Command {
+public class ViewCommand<T extends Content> extends Command {
 
-    private T type;
+    private Class<T> type;
 
     private int itemNumber;
     private boolean displayAll;
 
-    public ViewCommand(T type) {
+    public ViewCommand(Class<T> type) {
         this.type = type;
         this.displayAll = false;
     }
@@ -45,11 +46,11 @@ public class ViewCommand<T> extends Command {
 
     @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidArgumentException {
-        ContentManager contentManager = module.getContentManager();
-        contentManager.setContent(module.get(type));
         StringBuilder result = new StringBuilder();
+        ContentManager<T> contentManager = module.getContentManager(type);
         if (displayAll) {
             String fullList = contentManager.listAllContents();
+            assert fullList != null;
             if (fullList.isBlank()) {
                 result.append(Messages.EMPTY_CONTENT_LIST_MESSAGE);
             } else {

@@ -1,64 +1,35 @@
 package terminus.module;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import terminus.content.Content;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Note;
+import terminus.exception.InvalidArgumentException;
 
 public class NusModule {
 
-    private ArrayList<Content> notes;
-    private ArrayList<Content> links;
 
-    private transient ContentManager contentManager;
+    private ContentManager<Note> noteManager;
+    private ContentManager<Link> linkManager;
 
     public NusModule() {
-        contentManager = new ContentManager();
-        notes = new ArrayList<Content>();
-        links = new ArrayList<Content>();
+        noteManager = new ContentManager<Note>();
+        linkManager = new ContentManager<Link>();
     }
 
-    public ContentManager getContentManager() {
-        return contentManager;
-    }
 
-    public ArrayList<Content> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(ArrayList<Content> notes) {
-        this.notes = notes;
-    }
-
-    public ArrayList<Content> getLinks() {
-        return links;
-    }
-
-    public void setLinks(ArrayList<Content> links) {
-        this.links = links;
-    }
-
-    public <T> void set(T type, ArrayList<Content> contents) {
+    public <T extends Content> ContentManager<T> getContentManager(Class<T> type) {
         if (type == Note.class) {
-            this.notes = contents;
+            return (ContentManager<T>) this.noteManager;
         } else if (type == Link.class) {
-            this.links = contents;
+            return (ContentManager<T>) this.linkManager;
         } else {
             //error encountered
+            assert false;
         }
-    }
-
-    public <T> ArrayList<Content> get(T type) {
-        ArrayList<Content> result = new ArrayList<>();
-        if (type == Note.class) {
-            result = this.notes;
-        } else if (type == Link.class) {
-            result = this.links;
-        } else {
-            //error encountered
-        }
-        return result;
+        return null;
     }
 
 }
