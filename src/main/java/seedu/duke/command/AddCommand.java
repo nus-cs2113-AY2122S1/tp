@@ -6,6 +6,9 @@ import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
 
 public class AddCommand implements Command {
+
+    private static final String ADDED_MESSAGE = "Got it. This ingredient has been added to the inventory:\n" + "\t";
+
     private Ingredient ingredient;
 
     /**
@@ -19,8 +22,8 @@ public class AddCommand implements Command {
     @Override
     public String run() {
         IngredientList.getInstance().add(this.ingredient);
-        String resultMsg = "Got it. This ingredient has been added to the inventory:\n"
-                + "\t" + ingredient.toString() + '\n'
+        String resultMsg = ADDED_MESSAGE
+                + ingredient.toString() + '\n'
                 + "Currently inventory has " + IngredientList.getInstance().getInventoryStock()
                 + " items.";
         return resultMsg;

@@ -25,8 +25,15 @@ public class ParserTest {
             String resultMsg = Parser.parse(inputString);
             fail();
         } catch (DukeException e) {
-            assertEquals("Ingredient number have not existed!", e.getMessage());
+            assertEquals("Ingredient number does not exist!", e.getMessage());
         }
+    }
+
+    @Test
+    public void parseCommand_invalidCommandInput_success() throws DukeException {
+        String inputString = "foo 2";
+        String resultMsg = Parser.parse(inputString);
+        assertEquals("Invalid command!", resultMsg);
     }
 
 }

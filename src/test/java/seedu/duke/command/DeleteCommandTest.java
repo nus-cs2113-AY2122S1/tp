@@ -14,7 +14,7 @@ public class DeleteCommandTest {
             String resultMsg = new DeleteCommand(removeNumber).run();
             fail();
         } catch (DukeException e) {
-            assertEquals("Ingredient number have not existed!", e.getMessage());
+            assertEquals("Ingredient number does not exist!", e.getMessage());
         }
     }
 }
