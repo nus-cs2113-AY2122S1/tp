@@ -129,8 +129,6 @@ public class Parser {
             return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
         
-        String expenseDescription = matcher.group("description").trim();
-        
         double expenseAmount;
         try {
             expenseAmount = Double.parseDouble(matcher.group("amount").trim());
@@ -142,6 +140,7 @@ public class Parser {
         }
         
         assert expenseAmount > 0;
+        String expenseDescription = matcher.group("description").trim();
         Expense expense = new Expense(expenseDescription, expenseAmount);
         return new AddExpenseCommand(expense);
     }
@@ -156,8 +155,6 @@ public class Parser {
             return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
         
-        String incomeDescription = matcher.group("description").trim();
-        
         double incomeAmount;
         try {
             incomeAmount = Double.parseDouble(matcher.group("amount").trim());
@@ -169,6 +166,7 @@ public class Parser {
         }
         
         assert incomeAmount > 0;
+        String incomeDescription = matcher.group("description").trim();
         Income income = new Income(incomeDescription, incomeAmount);
         return new AddIncomeCommand(income);
     }
