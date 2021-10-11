@@ -16,12 +16,16 @@ public class Cookbook {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (int i = 0; i < recipes.size(); i++) {
-            output.append(i + 1).append(". ");
-            output.append(recipes.get(i).getName());
+        for (Recipe recipe : recipes) {
+            output.append(recipe.getID()).append(". ");
+            output.append(recipe.getName());
             output.append(System.lineSeparator());
         }
         return output.toString();
+    }
+
+    public int numRecipes() {
+        return recipes.size();
     }
 
     public void addRecipe(Recipe r) throws GordonException {
@@ -36,13 +40,11 @@ public class Cookbook {
 
         r.setId(recipes.size() + 1);
         recipes.add(r);
-        System.out.println("Added " + r.getName() + " recipe! Yum!");
     }
 
     public void removeRecipe(int index) throws GordonException {
         try {
             recipes.remove(index);
-            System.out.println("OK! The recipe has been deleted from your cookbook.");
         } catch (IndexOutOfBoundsException e) {
             throw new GordonException(GordonException.INDEX_OOB);
         }
@@ -72,6 +74,10 @@ public class Cookbook {
         }
 
         throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
+
+    public String saveString(int index) {
+        return recipes.get(index).toString();
     }
 
     public void sortByID() {
