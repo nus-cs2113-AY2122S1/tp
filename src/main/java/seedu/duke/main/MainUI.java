@@ -26,10 +26,8 @@ public class MainUI {
     }
 
     public static void printStorageSaved() {
-        printSingleLine();
         System.out.println("Storage saved successfully.");
         System.out.println("See you again!");
-        printSingleLine();
     }
 
     public static void printSingleLine() {
