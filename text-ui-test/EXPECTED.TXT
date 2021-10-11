@@ -5,6 +5,5 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
-What is your name?
-Your trip to America on 02 Feb 2021 has been successfully added!
-Goodbye!
+Enter your command: Your trip to America on 02 Feb 2021 has been successfully added!
+Enter your command: Goodbye!
