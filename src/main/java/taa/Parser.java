@@ -99,7 +99,7 @@ public class Parser {
     }
 
     /**
-     * Gets argument values specified by argumentKeys.
+     * Gets argument values specified by argumentKeys. Keys with empty values are not included in the returned HashMap.
      * e.g.
      * string: "add_module c/CS2113T n/Software Engineering and Object-oriented Programming", argumentKeys: {"c","n"}
      * Result: HashMap(
@@ -145,7 +145,9 @@ public class Parser {
             }
             value = value.trim();
 
-            result.put(key, value);
+            if (!value.isEmpty()) {
+                result.put(key, value);
+            }
         }
 
         return result;

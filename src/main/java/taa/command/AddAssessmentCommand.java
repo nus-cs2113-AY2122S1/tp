@@ -2,6 +2,7 @@ package taa.command;
 
 import taa.Ui;
 import taa.assessment.Assessment;
+import taa.assessment.AssessmentList;
 import taa.exception.TaaException;
 import taa.module.Module;
 import taa.module.ModuleList;
@@ -14,10 +15,11 @@ public class AddAssessmentCommand extends Command {
     private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_ASSESSMENT_NAME, KEY_WEIGHTAGE};
 
     private static final String MESSAGE_FAIL_TO_ADD = "Fail to add assessment.";
-    private static final String MESSAGE_INVALID_WEIGHTAGE = "Invalid weightage.";
 
     private static final String MESSAGE_FORMAT_ADD_ASSESSMENT_USAGE = "Usage: %s "
             + "%s/<MODULE_CODE> %s/<ASSESSMENT_NAME> %s/<WEIGHTAGE>";
+    private static final String MESSAGE_FORMAT_INVALID_WEIGHTAGE = "Invalid weightage. "
+            + "Weightage must be between %,.2f and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED =
             "Assessment added:\n  %s\nThere are %d assessments in the %s.";
 
@@ -50,19 +52,33 @@ public class AddAssessmentCommand extends Command {
 
         String weightageString = argumentMap.get(KEY_WEIGHTAGE);
         if (!Util.isStringDouble(weightageString)) {
-            throw new TaaException(MESSAGE_INVALID_WEIGHTAGE);
+            throw new TaaException(String.format(
+                    MESSAGE_FORMAT_INVALID_WEIGHTAGE,
+                    Assessment.WEIGHTAGE_RANGE[0],
+                    Assessment.WEIGHTAGE_RANGE[1])
+            );
         }
-        double assessmentWeightage = Double.parseDouble(weightageString);
 
-        String assessmentName = argumentMap.get(KEY_ASSESSMENT_NAME);
-        Assessment assessment = new Assessment(assessmentName, assessmentWeightage);
-        boolean isSuccessful = module.addAssessment(assessment);
+        double weightage = Double.parseDouble(weightageString);
+        if (weightage < Assessment.WEIGHTAGE_RANGE[0] || weightage > Assessment.WEIGHTAGE_RANGE[1]) {
+            throw new TaaException(String.format(
+                    MESSAGE_FORMAT_INVALID_WEIGHTAGE,
+                    Assessment.WEIGHTAGE_RANGE[0],
+                    Assessment.WEIGHTAGE_RANGE[1])
+            );
+        }
+
+        String name = argumentMap.get(KEY_ASSESSMENT_NAME);
+        Assessment assessment = new Assessment(name, weightage);
+
+        AssessmentList assessmentList = module.getAssessmentList();
+        boolean isSuccessful = assessmentList.addAssessment(assessment);
         if (!isSuccessful) {
             throw new TaaException(MESSAGE_FAIL_TO_ADD);
         }
 
         ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_ADDED,
-                assessment, module.getAssessmentsCount(), module));
+                assessment, assessmentList.getSize(), module));
     }
 
     @Override

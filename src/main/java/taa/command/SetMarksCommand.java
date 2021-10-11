@@ -8,6 +8,8 @@ import taa.exception.TaaException;
 import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
+import taa.student.StudentList;
+import taa.util.Util;
 
 /**
  * Class that deals with the command for the setting of marks.
@@ -23,9 +25,14 @@ public class SetMarksCommand extends Command {
         KEY_ASSESSMENT_NAME,
         KEY_MARKS
     };
+
+    private static final double[] MARKS_RANGE = {0, 100};
+
     private static final String MESSAGE_FORMAT_SET_MARKS_USAGE = "Usage: %s "
             + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<ASSESSMENT_NAME> %s/<MARKS>";
-    private static final String MESSAGE_MARKS_ADDED_FORMAT = "Marks set for %s: %,.4f for %s";
+    private static final String MESSAGE_FORMAT_INVALID_MARKS = "Invalid Marks. "
+            + "Marks must be between %,.2f and %,.2f (inclusive)";
+    private static final String MESSAGE_FORMAT_MARKS_ADDED = "Marks set for %s: %,.2f for %s";
 
     public SetMarksCommand(String argument) {
         super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);
@@ -53,23 +60,53 @@ public class SetMarksCommand extends Command {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
-        int studentIndex = Integer.parseInt(argumentMap.get(KEY_STUDENT_INDEX));
-        if ((studentIndex > module.getNumberOfStudents()) || (studentIndex <= 0)) {
-            // TODO non-existent student error message
-            throw new TaaException("No such student!");
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        if (!Util.isStringInteger(studentIndexInput)) {
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
+        }
+        int studentIndex = Integer.parseInt(studentIndexInput) - 1;
+
+        StudentList studentList = module.getStudentList();
+        Student student = studentList.getStudentAt(studentIndex);
+        if (student == null) {
+            ui.printMessage(MESSAGE_INVALID_STUDENT_INDEX);
+            return;
         }
 
-        AssessmentList list = module.getAssessmentList();
-        Assessment assessment = list.getAssessment(argumentMap.get(KEY_ASSESSMENT_NAME));
+        AssessmentList assessmentList = module.getAssessmentList();
+        String assessmentName = argumentMap.get(KEY_ASSESSMENT_NAME);
+        Assessment assessment = assessmentList.getAssessment(assessmentName);
         if (assessment == null) {
-            // TODO non-existent assessment error message
-            throw new TaaException("Assessment does not exist!");
+            throw new TaaException(MESSAGE_INVALID_ASSESSMENT_NAME);
         }
-        if (Double.parseDouble(argumentMap.get(KEY_MARKS)) < 0) {
-            // TODO marks are negative
-            throw new TaaException("Marks cannot be negative!");
+
+        String marksInput = argumentMap.get(KEY_MARKS);
+        if (!Util.isStringDouble(marksInput)) {
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, MARKS_RANGE[0], MARKS_RANGE[1]));
         }
-        setMarks(ui, module, studentIndex);
+
+        double marks = Double.parseDouble(marksInput);
+        if (marks < MARKS_RANGE[0] || marks > MARKS_RANGE[1]) {
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, MARKS_RANGE[0], MARKS_RANGE[1]));
+        }
+
+        setMarks(ui, student, assessment, marks);
+    }
+
+    /**
+     * Sets the marks for a student's assessment.
+     *
+     * @param ui The ui instance to handle interactions with the user.
+     * @param student The student instance to set the mark for.
+     * @param assessment The assessment instance.
+     * @param marks The marks to set for the assessment.
+     */
+    private void setMarks(Ui ui, Student student, Assessment assessment, double marks) {
+        String assessmentName = assessment.getName();
+
+        student.setMarks(assessmentName, marks);
+        String studentName = student.getName();
+        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_ADDED, studentName, marks, assessmentName));
     }
 
     /**
@@ -86,21 +123,5 @@ public class SetMarksCommand extends Command {
                 KEY_ASSESSMENT_NAME,
                 KEY_MARKS
         );
-    }
-
-    /**
-     * Sets the marks for a student's assessment.
-     *
-     * @param ui The ui instance to handle interactions with the user.
-     * @param module The module the assessment and student belong to.
-     * @param studentIndex Index of the student.
-     */
-    private void setMarks(Ui ui, Module module, int studentIndex) {
-        String assessmentName = argumentMap.get(KEY_ASSESSMENT_NAME);
-        double marks = Double.parseDouble(argumentMap.get(KEY_MARKS));
-        Student student = module.getStudent(studentIndex - 1);
-        student.setMarks(assessmentName, marks);
-        String studentName = student.getName();
-        ui.printMessage(String.format(MESSAGE_MARKS_ADDED_FORMAT, studentName, marks, assessmentName));
     }
 }
