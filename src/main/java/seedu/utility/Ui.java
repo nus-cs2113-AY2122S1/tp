@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
-    public static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
     private Scanner in;
 
     private static final String PRODUCT_LOGO = "███████ ████████  ██████  ███    ██ ██   ██ ███████"
@@ -24,7 +23,8 @@ public class Ui {
             + "██████    ████   █████           ██ \n"
             + "██   ██    ██    ██          ██  ██ \n"
             + "██████     ██    ███████        ██ ";
-
+    
+    public static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
     private static final String LISTING_EXPENSE_MESSAGE = "Below is a list of all of your recent spending!";
     private static final String LISTING_INCOME_MESSAGE = "Below is a list of all of your recent earnings!";
 
