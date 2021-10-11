@@ -127,4 +127,10 @@ public class Ui {
         printLine();
     }
 
+    public void printError(String message) {
+        printLine();
+        System.out.println(message);
+        printLine();
+    }
+
 }
