@@ -27,7 +27,7 @@ public class Entry {
 
         switch (keyword) {
         case LIST_MEMBER_KEYWORD:
-            Ui.printMemberList(members);
+            Ui.printList(members);
             break;
         case LIST_TRAINING_KEYWORD:
             Ui.printList(trainings);
@@ -61,15 +61,14 @@ public class Entry {
         case EDIT_TRAINING_KEYWORD:
             Parser.editTraining(trainings, entry);
             break;
-        case FIND_TRAINING_KEYWORD:
-            Parser.findInTraining(trainings, entry);
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();
             break;
         case EXIT_KEYWORD:
             Ui.printExitMessage();
-
             break;
+        default:
+            assert false : keyword;
         }
     }
 }
