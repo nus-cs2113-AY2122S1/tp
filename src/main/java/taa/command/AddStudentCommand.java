@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.Module;
@@ -26,10 +27,11 @@ public class AddStudentCommand extends Command {
      *
      * @param moduleList The list of modules
      * @param ui The ui instance to handle interactions with the user
+     * @param storage
      * @throws TaaException If the user inputs an invalid command
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -50,6 +52,8 @@ public class AddStudentCommand extends Command {
 
         StudentList studentList = module.getStudentList();
         studentList.addStudent(student);
+
+        storage.save(moduleList);
 
         ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, moduleCode, student));
     }

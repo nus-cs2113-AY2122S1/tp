@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.Module;
@@ -33,10 +34,11 @@ public class EditStudentCommand extends Command {
      *
      * @param moduleList The list of modules
      * @param ui The ui instance to handle interactions with the user
+     * @param storage
      * @throws TaaException If the user inputs an invalid command
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -68,6 +70,8 @@ public class EditStudentCommand extends Command {
         String newName = argumentMap.get(KEY_NEW_NAME);
         student.setId(newId);
         student.setName(newName);
+
+        storage.save(moduleList);
 
         ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_EDITED, student));
     }

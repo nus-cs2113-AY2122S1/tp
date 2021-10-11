@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.Storage;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
@@ -48,10 +49,11 @@ public class ListMarksCommand extends Command {
      *
      * @param moduleList List of modules.
      * @param ui The ui instance to handle interactions with the user.
+     * @param storage
      * @throws TaaException When list marks command is invalid.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }

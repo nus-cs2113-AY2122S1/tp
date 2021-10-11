@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.Storage;
 import taa.exception.TaaException;
 import taa.Parser;
 import taa.Ui;
@@ -53,7 +54,7 @@ public abstract class Command {
         return isExit;
     }
 
-    public abstract void execute(ModuleList moduleList, Ui ui) throws TaaException;
+    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException;
 
     protected abstract String getUsageMessage();
 

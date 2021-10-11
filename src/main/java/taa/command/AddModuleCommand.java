@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.ModuleList;
@@ -21,7 +22,7 @@ public class AddModuleCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -38,6 +39,8 @@ public class AddModuleCommand extends Command {
         String name = argumentMap.get(KEY_MODULE_NAME);
         Module module = new Module(moduleCode, name);
         moduleList.addModule(module);
+
+        storage.save(moduleList);
 
         ui.printMessage(String.format(MESSAGE_FORMAT_MODULE_ADDED, module, moduleList.getSize()));
     }

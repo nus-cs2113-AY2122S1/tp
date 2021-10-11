@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.ModuleList;
@@ -12,7 +13,7 @@ public class ListModulesCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (!argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }

@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.Storage;
 import taa.Ui;
 import taa.assessment.AssessmentList;
 import taa.exception.TaaException;
@@ -23,10 +24,11 @@ public class ListAssessmentsCommand extends Command {
      *
      * @param moduleList The list of modules.
      * @param ui The ui instance to handle interactions with the user.
+     * @param storage
      * @throws TaaException If the user inputs an invalid command.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }

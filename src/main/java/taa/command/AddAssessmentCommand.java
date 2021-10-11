@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.Storage;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
@@ -32,10 +33,11 @@ public class AddAssessmentCommand extends Command {
      *
      * @param moduleList The list of modules.
      * @param ui      The ui instance to handle interactions with the user.
+     * @param storage The storage instance to handle saving.
      * @throws TaaException If the user inputs an invalid command.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -76,6 +78,8 @@ public class AddAssessmentCommand extends Command {
         if (!isSuccessful) {
             throw new TaaException(MESSAGE_FAIL_TO_ADD);
         }
+
+        storage.save(moduleList);
 
         ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_ADDED,
                 assessment, assessmentList.getSize(), module));

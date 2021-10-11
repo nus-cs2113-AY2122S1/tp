@@ -1,6 +1,7 @@
 package taa.command;
 
 
+import taa.Storage;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
@@ -43,10 +44,11 @@ public class SetMarksCommand extends Command {
      *
      * @param moduleList Module list to access the module the student is enrolled in.
      * @param ui The ui instance to handle interactions with the user.
+     * @param storage
      * @throws TaaException when set marks command is invalid.
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
@@ -91,6 +93,8 @@ public class SetMarksCommand extends Command {
         }
 
         setMarks(ui, student, assessment, marks);
+
+        storage.save(moduleList);
     }
 
     /**
