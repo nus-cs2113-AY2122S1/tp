@@ -269,8 +269,7 @@ public class Ui {
 
         for (CommandSyntax commandSyntax : commandSyntaxes) {
             String row = String.format(commandFormat, centerString(commandWidth, commandSyntax.getCommandName()))
-                    + String.format(commandSyntaxFormat, centerString(commandSyntaxWidth,
-                    commandSyntax.getCommandSyntax()));
+                    + String.format(commandSyntaxFormat, commandSyntax.getCommandSyntax());
             System.out.println(row);
             printRowBorder(columnWidths);
         }
