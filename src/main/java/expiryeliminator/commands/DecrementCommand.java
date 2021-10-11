@@ -13,7 +13,7 @@ public class DecrementCommand extends Command {
     public static final String COMMAND_WORD = "decrement";
 
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
-    private static final String MESSAGE_INGREDIENT_INCREMENTED = "I've decremented this ingredient by %1$s:\n" + "%2$s";
+    private static final String MESSAGE_INGREDIENT_DECREMENTED = "I've decremented this ingredient by %1$s:\n" + "%2$s";
 
     private final String ingredientName;
     private final int quantity;
@@ -32,6 +32,6 @@ public class DecrementCommand extends Command {
             return MESSAGE_INGREDIENT_NOT_FOUND;
         }
         ingredient.setQuantity(ingredient.getQuantity() - quantity);
-        return String.format(MESSAGE_INGREDIENT_INCREMENTED, quantity, ingredient);
+        return String.format(MESSAGE_INGREDIENT_DECREMENTED, quantity, ingredient);
     }
 }

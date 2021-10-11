@@ -41,7 +41,9 @@ public class Parser {
     // Reused from https://github.com/bernardboey/ip/blob/master/src/main/java/duke/parser/Parser.java
     // with minor modifications
 
-    /** Used for initial separation of command word and args. */
+    /**
+     * Used for initial separation of command word and args.
+     */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("^(?<command>[^/]+)(?<args> .*)?$");
 
     private static final Prefix PREFIX_RECIPE = new Prefix("r");
@@ -180,7 +182,7 @@ public class Parser {
      *
      * @param args Command arguments.
      * @return a AddRecipeCommand with the recipe name and the ingredients if successful
-     *         and an IncorrectCommand if not.
+     *     and an IncorrectCommand if not.
      */
     private static Command prepareAddRecipe(String args) {
         final ArgParser argParser = new ArgParser(PREFIX_RECIPE, PREFIX_INGREDIENT, PREFIX_QUANTITY);
@@ -235,8 +237,8 @@ public class Parser {
      * Adds the ingredients into the ingredient list.
      *
      * @param ingredientNames Array of name of ingredients
-     * @param quantities Array of quantity of ingredients
-     * @param ingredients Ingredient list to store the ingredients
+     * @param quantities      Array of quantity of ingredients
+     * @param ingredients     Ingredient list to store the ingredients
      * @return null if there's no error and an IncorrectCommand if there is.
      */
     private static IncorrectCommand addIngredients(ArrayList<String> ingredientNames, ArrayList<Integer> quantities,

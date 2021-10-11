@@ -1,9 +1,7 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
 import expiryeliminator.data.RecipeList;
-import expiryeliminator.data.exception.DuplicateDataException;
 
 /**
  * Lists all ingredient, together with its associated quantity and expiry date.

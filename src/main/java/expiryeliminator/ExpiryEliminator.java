@@ -38,7 +38,7 @@ public class ExpiryEliminator {
             final String userInput = ui.getUserInput();
             final Command command = Parser.parseCommand(userInput);
             isExit = command.isExit();
-            final String feedback = command.execute(ingredients,recipes);
+            final String feedback = command.execute(ingredients, recipes);
             ui.showToUser(feedback);
         }
     }
