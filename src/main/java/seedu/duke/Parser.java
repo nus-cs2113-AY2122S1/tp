@@ -15,7 +15,7 @@ public class Parser {
         String[] userInputSplit = userInput.split(" ", 2);
         String inputCommand = userInputSplit[0];
         String inputDescription;
-        if (inputCommand.equals("quit")) {
+        if (inputCommand.equals("quit") || inputCommand.equals("summary") || !checkValidCommand(inputCommand)) {
             inputDescription = null;
         } else {
             inputDescription = userInputSplit[1];
@@ -73,6 +73,11 @@ public class Parser {
                     + "to learn more.");
         }
         return true;
+    }
+
+    private static boolean checkValidCommand(String inputCommand) {
+        ArrayList<String> validCommands = Storage.getCommands();
+        return validCommands.contains(inputCommand);
     }
 
     /**
