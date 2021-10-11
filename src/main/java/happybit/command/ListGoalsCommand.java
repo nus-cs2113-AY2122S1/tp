@@ -1,7 +1,12 @@
 package happybit.command;
 
+import happybit.exception.HappyBitException;
+import happybit.goal.GoalList;
+
 import java.util.ArrayList;
 
 public class ListGoalsCommand {
-    ArrayList<String> goals = new ArrayList<>();
+    public static void runCommand() throws HappyBitException {
+        GoalList.listGoals();
+    }
 }

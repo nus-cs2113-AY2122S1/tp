@@ -1,7 +1,6 @@
 package happybit.parser;
 
 import happybit.command.HelpCommand;
-import happybit.command.ListHabitsCommand;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,21 +53,6 @@ class InputParserTest {
                 + REMOVE_GOAL_COMMAND + NEWLINE
                 + LIST_HABIT_COMMAND + NEWLINE
                 + LIST_GOAL_COMMAND + NEWLINE
-                + DASHES + NEWLINE;
-        iP.parseInput(input);
-        assertEquals(expectedOutput, outputStreamCaptor.toString());
-    }
-
-    @Test
-    void parseInput_inputList_printHabitList() {
-        final ListHabitsCommand listHabits = new ListHabitsCommand();
-        final InputParser iP = new InputParser();
-        String input = "list";
-        String expectedOutput = DASHES + NEWLINE
-                + "Habit 1" + NEWLINE
-                + "Habit 2" + NEWLINE
-                + "Habit 3" + NEWLINE
-                + "Habit 4" + NEWLINE
                 + DASHES + NEWLINE;
         iP.parseInput(input);
         assertEquals(expectedOutput, outputStreamCaptor.toString());

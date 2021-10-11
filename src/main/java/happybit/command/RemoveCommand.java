@@ -1,29 +1,30 @@
 package happybit.command;
 
+import happybit.exception.HappyBitException;
+import happybit.goal.GoalList;
+
 import java.util.ArrayList;
 
 public class RemoveCommand {
 
     //Temporary method
-    protected ArrayList<String> goals = new ArrayList<>();
+    // protected ArrayList<String> goals = new ArrayList<>();
 
+    /*
     public void removeGoal(String goal) {
         goals.remove(goal);
     }
+    */
+    private int goalIndex;
 
-    //Semi-permanent methods
-
-    //protected String goalName;
-    //public DeleteCommand(int goalName) {
-    //    this.goalName= goalName;
-    //}
+    public RemoveCommand(int goalIndex) {
+        this.goalIndex = goalIndex;
+    }
 
     /**
      * Deletes a goal of a habit.
-     *
-     * @param goal Name of habit to be deleted.
      */
-    public void runCommand(String goal) {
-        removeGoal(goal);
+    public void runCommand() throws IndexOutOfBoundsException {
+        GoalList.removeGoal(goalIndex);
     }
 }
