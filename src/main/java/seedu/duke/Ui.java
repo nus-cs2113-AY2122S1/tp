@@ -30,6 +30,10 @@ public class Ui {
         System.out.println(person.getName() + " | " + person.getAmtOwedToUser());
     }
 
+    public static void printExpenseDetails(Expense e) {
+        System.out.println(e);
+    }
+
     public static void printExpensesSummary(Trip t) {
         System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
         System.out.println("Total budget for this trip: " + t.getBudget());
