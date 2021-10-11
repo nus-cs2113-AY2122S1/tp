@@ -21,6 +21,8 @@ public class TextUi {
     private static final String LINE_PREFIX = "     | ";
     private static final String LS = lineSeparator();
 
+    //get current timestamp
+    //unused because it interferes with the EXPECTED.TXT in runtest
     public String getTimeStamp() {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return timeFormatter.format(timestamp);
@@ -31,7 +33,7 @@ public class TextUi {
         getTimeStamp();
         printScreen(
                 version,
-                getTimeStamp(),
+                //getTimeStamp(),
                 DIVIDER,
                 LOGO,
                 MESSAGE_WELCOME,
