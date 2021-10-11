@@ -60,6 +60,15 @@ public class ModuleList {
         return null;
     }
 
+    public boolean isModuleExist(String moduleName) {
+        for (Module module : modules) {
+            if (module.getName().toLowerCase().equalsIgnoreCase(moduleName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(MESSAGE_MODULE_LIST_HEADER);

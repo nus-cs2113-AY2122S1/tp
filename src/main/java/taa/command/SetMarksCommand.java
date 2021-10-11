@@ -38,7 +38,7 @@ public class SetMarksCommand extends Command{
             // TODO Invalid/missing arguments message
             throw new CustomException("");
         }
-        if (argumentMap.get("c").contains(" ")) {
+        if (argumentMap.get("c").contains(" ") || (modules.isModuleExist(argumentMap.get("c")))) {
             // TODO Invalid module code message
             throw new CustomException("");
         }
