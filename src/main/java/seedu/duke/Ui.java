@@ -90,7 +90,7 @@ public class Ui {
 
     public static void printEvent(Event item) {
         System.out.println(item.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(item.getDateValue()) + System.lineSeparator()
+                + Parser.convertDateTime(item.getDateTime()) + System.lineSeparator()
                 + item.getDescription() + System.lineSeparator()
                 + item.getVenue() + System.lineSeparator()
                 + item.getBudget());
@@ -98,7 +98,7 @@ public class Ui {
 
     public static void printTask(Task item) {
         System.out.println(item.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(item.getDateValue()) + System.lineSeparator()
+                + Parser.convertDateTime(item.getDateTime()) + System.lineSeparator()
                 + item.getDescription());
     }
 

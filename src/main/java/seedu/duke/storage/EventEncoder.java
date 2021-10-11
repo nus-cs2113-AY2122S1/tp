@@ -17,9 +17,11 @@ public class EventEncoder {
     public static String encodeEventToString(Event event) {
         return event.getTitle()
                 + " | "
+                + event.getStatusIcon()
+                + " | "
                 + event.getDescription()
                 + " | "
-                + Parser.convertDateTimeForSaving(event.getDateValue())
+                + Parser.convertDateTimeForSaving(event.getDateTime())
                 + " | "
                 + event.getVenue()
                 + " | "

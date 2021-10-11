@@ -69,11 +69,11 @@ public class UpdateCommand extends Command {
             if (this.listType.equalsIgnoreCase("-e")) {
                 Event itemToBeUpdated = Duke.eventList.get(index);
                 String newDate = retrieveItemAttribute(attribute, DATE_FLAG);
-                itemToBeUpdated.setDate(Parser.convertDateTime(newDate));
+                itemToBeUpdated.setDateTime(Parser.convertDateTime(newDate));
             } else if (this.listType.equalsIgnoreCase("-t")) {
                 Task itemToBeUpdated = Duke.taskList.get(index);
                 String newDate = retrieveItemAttribute(attribute, DATE_FLAG);
-                itemToBeUpdated.setDeadline(Parser.convertDateTime(newDate));
+                itemToBeUpdated.setDateTime(Parser.convertDateTime(newDate));
             }
         } catch (DateTimeParseException e) {
             System.out.println("incorrect format please ensure format for date is of [d/dd-MM-yyyy HHmm]");
