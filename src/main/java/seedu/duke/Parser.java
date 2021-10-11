@@ -3,8 +3,6 @@ package seedu.duke;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
 
 public class Parser {
     private static final String COMMAND_LIST = "list";
@@ -13,7 +11,9 @@ public class Parser {
     private static final String COMMAND_UPDATE = "update";
     private static final String COMMAND_EXIT = "exit";
 
-    private static final String INVALID_COMMAND = "Invalid command!";
+    private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
+    private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
+    private static final String NUMBER_FORMAT_MESSAGE = "Invalid number format!";
 
     private static final String SPACE_SEPARATOR = " ";
 
@@ -38,7 +38,7 @@ public class Parser {
         case COMMAND_EXIT:
             return "";
         default:
-            return INVALID_COMMAND;
+            return INVALID_COMMAND_MESSAGE;
         }
     }
 
@@ -63,7 +63,7 @@ public class Parser {
         String resultMsg;
 
         if (detail.length() <= 0) {
-            resultMsg = "Nothing to remove!";
+            resultMsg = DELETE_ERROR_MESSAGE;
             return resultMsg;
         }
 
@@ -72,7 +72,7 @@ public class Parser {
             resultMsg = new DeleteCommand(ingredientRemoveNumber).run();
             return resultMsg;
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid number format!");
+            throw new DukeException(NUMBER_FORMAT_MESSAGE);
         }
     }
 }
