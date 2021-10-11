@@ -19,7 +19,7 @@ public class MemberStorage {
      *
      * @param members the list of current members
      */
-    public static void SetupMemberFile(MemberList members) {
+    public static void setupMemberFile(MemberList members) {
         File dukeMemberFile = new File("DukeMembers.csv");
         if (!dukeMemberFile.exists()) {
             try {
@@ -41,7 +41,7 @@ public class MemberStorage {
     }
 
     /**
-     * This method loads the duke member file and writes to the current member list. //only happens on start up
+     * This method loads the duke member file and writes to the current member list. Only happens on start-up.
      *
      * @param dukeMemberFile
      * @param memberList
@@ -53,20 +53,20 @@ public class MemberStorage {
         String phoneNumber;
         try  {
             Scanner dukeMemberScanner = new Scanner(dukeMemberFile);
-            dukeMemberScanner.nextLine();//skips the first header row
-            while(dukeMemberScanner.hasNextLine()) {
+            dukeMemberScanner.nextLine(); //skips the first header row
+            while (dukeMemberScanner.hasNextLine()) {
                 String fullMemberDetails = dukeMemberScanner.nextLine();
                 System.out.println(fullMemberDetails);
-                String[] memberDetails = fullMemberDetails.split("\\," , 4);
+                String[] memberDetails = fullMemberDetails.split("\\,", 4);
 
-                name = memberDetails[0];//used this to prevent magic numbers
+                name = memberDetails[0]; //used this to prevent magic numbers
                 studentNumber = memberDetails[1];
                 gender =  memberDetails[2];
                 phoneNumber = memberDetails[3];
                 Member member = new Member(name,studentNumber,gender,phoneNumber);
                 memberList.addMember(member);
             }
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }

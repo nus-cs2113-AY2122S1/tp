@@ -343,8 +343,8 @@ public class Parser {
         Ui.printEditMessage(oldMember, newMember);
     }
 
-     /**
-     * Creates a TrainingSchedule to put into TrainingList
+    /**
+     * Creates a TrainingSchedule to put into TrainingList.
      *
      * @param trainings TrainingList containing all TrainingSchedule
      * @param query User input command to parse
@@ -363,7 +363,7 @@ public class Parser {
      */
     public static void makeAttendanceEntry(AttendanceList attendanceList, String query) {
         Attendance attendance = getAttendanceDetails(query);
-        assert attendance != null: "attendance should not be empty";
+        assert attendance != null : "attendance should not be empty";
         attendanceList.addAttendance(attendance);
         Ui.printAddedAttendanceMessage(attendance);
     }
@@ -507,7 +507,7 @@ public class Parser {
 
     public static Integer getAttendanceIndex(String query) {
         int attNumber = Integer.parseInt(query.replaceFirst("delete /att", "").trim());
-        assert attNumber > 0: "smallest attNumber is 1";
+        assert attNumber > 0 : "smallest attNumber is 1";
         return attNumber;
     }
 
@@ -515,7 +515,7 @@ public class Parser {
         try {
             int attNumber = getAttendanceIndex(query);
             Attendance entry = attendanceList.deleteAttendance(attNumber);
-            assert entry != null: "entry should not be empty";
+            assert entry != null : "entry should not be empty";
             System.out.println("The following attendance entry have been deleted\n" + entry.toString());
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("There is no such member number...");
