@@ -3,6 +3,8 @@ package terminus.command.zoomlink;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.content.ContentManager;
+import terminus.content.Link;
+import terminus.content.Note;
 import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.common.CommonFormat;
@@ -57,10 +59,8 @@ public class AddLinkCommand extends Command {
 
     @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException, InvalidArgumentException {
-        ContentManager contentManager = module.getContentManager();
-        contentManager.setContent(module.getLinks());
-        contentManager.addLink(description, day, startTime, link);
-        module.setLinks(contentManager.getContents());
+        ContentManager contentManager = module.getContentManager(Link.class);
+        contentManager.add(new Link(description, day, startTime, link));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
         return new CommandResult(true, false);
     }
