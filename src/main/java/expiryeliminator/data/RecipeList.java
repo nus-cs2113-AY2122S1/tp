@@ -3,7 +3,6 @@ package expiryeliminator.data;
 import java.util.HashMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
-import expiryeliminator.data.exception.EmptyIngredientsException;
 import expiryeliminator.data.exception.NotFoundException;
 
 /**
@@ -24,13 +23,10 @@ public class RecipeList {
      *
      * @param recipe Recipe to be added
      * @throws DuplicateDataException If the recipe already exists.
-     * @throws EmptyIngredientsException If there are no ingredients in the recipe.
      */
-    public void add(Recipe recipe) throws DuplicateDataException, EmptyIngredientsException {
+    public void add(Recipe recipe) throws DuplicateDataException {
         if (recipes.containsKey(recipe.getName())) {
             throw new DuplicateDataException();
-        } else if (recipe.getIngredients().size() == 0) {
-            throw new EmptyIngredientsException();
         } else {
             recipes.put(recipe.getName(), recipe);
         }
