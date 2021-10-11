@@ -7,7 +7,7 @@ import seedu.duke.Ui;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AddIngrWasteCommand extends Command {
+public class AddIngrStoredCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) {
         Ui ui = new Ui();
@@ -15,15 +15,15 @@ public class AddIngrWasteCommand extends Command {
         int ingredientIndex = IngredientList.find(ingredient);
         System.out.println(ui.getLineDivider());
         if (ingredientIndex == -1) {
-            System.out.println("Ingredient does not exist");
+            System.out.println(ui.getDishNotExistMsg());
         } else {
             try {
-                System.out.println("Enter the wastage of " + ingredient + " in KG:");
+                System.out.println("Enter the weight of " + ingredient + " in KG:");
                 Scanner in = new Scanner(System.in);
                 String ingredientWeight = in.nextLine();
                 double ingredientWeightValue = Double.parseDouble(ingredientWeight);
                 Ingredient currentIngredient = IngredientList.ingredientList.get(ingredientIndex);
-                currentIngredient.addWaste(ingredientWeightValue);
+                currentIngredient.updateIngredientWeight(ingredientWeightValue);
             } catch (NumberFormatException e) {
                 System.out.println("Incorrect parameters - Invalid number entered");
                 System.out.println(ui.getLineDivider());
@@ -31,5 +31,4 @@ public class AddIngrWasteCommand extends Command {
         }
         System.out.println(ui.getLineDivider());
     }
-
 }

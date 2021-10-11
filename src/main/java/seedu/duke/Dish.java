@@ -1,17 +1,20 @@
 package seedu.duke;
 
-import seedu.duke.command.CommandNames;
-
 import java.util.ArrayList;
 
 public class Dish {
+    public ArrayList<Ingredient> constituents = new ArrayList<>();
     private String dishName;
     private Double wastage;
-    private ArrayList<Ingredient> constituents = new ArrayList<>();
 
     public Dish(String dishName) {
         this.dishName = dishName;
         this.wastage = 0.0;
+    }
+
+    public Dish(String dishName, double wastage) {
+        this.dishName = dishName;
+        this.wastage = wastage;
     }
 
     public String getDishName() {
@@ -29,35 +32,29 @@ public class Dish {
     }
 
     public void addWaste(Double value) {
+        assert value > 0 : "Adding negative waste is impossible";
         wastage += value;
         System.out.println("Wastage of " + dishName + " is now " + wastage);
-        //Todo proportion stuff
+        //Todo proportion stuff and prevent feedback loop
         /*
         for (Ingredient ingredient: constituents) {
-            ingredient.addWeight(value);
-            System.out.println("Wastage of " + ingredient.getIngredientName() +
-            " is now " + ingredient.getIngredientWeight());
+            ingredient.addWaste(value);
         }
         */
     }
 
-//    @Override
-//    //Todo Format into proper string
-//    public String toString() {
-//        return "Dish{"
-//                + "dishName='"
-//                + dishName
-//                + '\''
-//                + ", constituents="
-//                + constituents
-//                + '}';
-//    }
 
     @Override
     public String toString() {
-        return "[Dish] "
-                + dishName
-                + " | Constituents: "
-                + constituents ;
+        return dishName + '\n' + "   Wastage: " + wastage;
+    }
+
+    public String formatData() {
+        String output = "";
+        output = output + dishName + "|" + wastage;
+        for (Ingredient ingredient : constituents) {
+            output = output + "|" + ingredient.getIngredientName();
+        }
+        return output;
     }
 }
