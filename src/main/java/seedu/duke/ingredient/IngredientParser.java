@@ -2,23 +2,32 @@ package seedu.duke.ingredient;
 
 public class IngredientParser {
 
-    public void addIngredient(IngredientList ingredients, Ingredient ingredient) {
-        ingredients.ingredientList.add(ingredient);
+    public void addIngredient(String[] command, IngredientList ingredients) {
+        Ingredient newIngredient = new Ingredient(command[1], command[2]);
+        
+        ingredients.ingredientList.add(newIngredient);
         ingredients.totalIngredients++;
 
         System.out.println("--------------------");
         System.out.println("Got it. This ingredient was added:");
-        System.out.println("Ingredient Name: " + ingredient.getName());
-        System.out.println("Ingredient Quantity: " + ingredient.getQuantity());
+        System.out.println("Ingredient Name: " + newIngredient.getName());
+        System.out.println("Ingredient Quantity: " + newIngredient.getQuantity());
         System.out.println("--------------------");
     }
 
-    public void deleteIngredient(IngredientList ingredients, int ingredientIndex) {
+    public void loadIngredientFromStorage(IngredientList ingredients, Ingredient ingredient) {
+        ingredients.ingredientList.add(ingredient);
+        ingredients.totalIngredients++;
+    }
+
+    public void deleteIngredient(String[] command, IngredientList ingredients) {
+        int deletedIngredientIndex = Integer.parseInt(command[1]) - 1;
+        
         if (ingredients.ingredientList.size() < 1) {
             return;
         }
-        Ingredient deletedIngredient = ingredients.ingredientList.get(ingredientIndex);
-        ingredients.ingredientList.remove(ingredientIndex);
+        Ingredient deletedIngredient = ingredients.ingredientList.get(deletedIngredientIndex);
+        ingredients.ingredientList.remove(deletedIngredientIndex);
         ingredients.totalIngredients--;
 
         System.out.println("--------------------");
