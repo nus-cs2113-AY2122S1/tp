@@ -41,6 +41,13 @@ public class Member {
         setPhoneNumber(phoneNumber);
     }
 
+    public Member(String name, String studentNumber) {
+        setName(name);
+        setStudentNumber(studentNumber);
+        setAsActiveMember();
+    }
+
+
     public Member(Member member) {
         setName(member.name);
         setStudentNumber(member.studentNumber);
