@@ -51,7 +51,9 @@ public class Parser {
         return arg.trim().toLowerCase().contains("delete /t");
     }
 
-    public static boolean hasDeleteAttendanceKeyword(String arg) { return arg.trim().toLowerCase().contains("delete /att"); }
+    public static boolean hasDeleteAttendanceKeyword(String arg) {
+        return arg.trim().toLowerCase().contains("delete /att");
+    }
 
     public static boolean hasFindMemberKeyword(String arg) {
         return arg.trim().toLowerCase().contains("find /m");
@@ -405,16 +407,6 @@ public class Parser {
             System.out.println("There is no such member number...");
         } catch (NumberFormatException e) {
             System.out.println("Please input a proper number...");
-        }
-    }
-
-    public static void deleteTraining(ArrayList<TrainingSchedule> trainings, String query) {
-        try {
-            TrainingSchedule referencedTraining = trainings.get(trainingNumber);
-            trainings.remove(trainingNumber);
-            Ui.printDeletedTrainingMessage(referencedTraining);
-        } catch (IndexOutOfBoundsException exception) {
-            System.out.println("There is no such training schedule number...");
         }
     }
 
