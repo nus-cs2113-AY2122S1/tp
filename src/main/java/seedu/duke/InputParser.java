@@ -36,8 +36,6 @@ public class InputParser {
             break;
 
         //Multi param is same as one but will need to split further
-        //Following commands of format number, name
-
         case ADD_CONSTITUENT:
             //TODO trim inputs
             String[] splitString = parameterString.split("/", 2);
@@ -45,6 +43,7 @@ public class InputParser {
                 parameters.add(param.trim());
             }
             break;
+
         default:
             break;
         }

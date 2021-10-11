@@ -98,12 +98,14 @@ public class Storage {
             while (s.hasNext()) {
                 String in = s.nextLine();
                 String[] params = in.split("\\|");
-                Dish dishToAdd = new Dish(params[0], Double.parseDouble(params[1]));
-                if (params.length > 2) {
+                Dish dishToAdd = new Dish(params[0], Double.parseDouble(params[1]), Double.parseDouble(params[2]));
+                if (params.length > 3) {
                     //System.out.println("Contains constituents");
-                    for (int i = 2; i < params.length; i++) {
+                    for (int i = 3; i < params.length; i++) {
                         int ingredientIndex = IngredientList.find(params[i]);
-                        dishToAdd.constituents.add(IngredientList.ingredientList.get(ingredientIndex));
+                        Ingredient dishComponent = IngredientList.ingredientList.get(ingredientIndex);
+                        dishToAdd.constituents.add(dishComponent);
+                        dishComponent.addDishWaste(dishToAdd.getIngredientContribution());
                     }
                 }
                 DishList.dishList.add(dishToAdd);
