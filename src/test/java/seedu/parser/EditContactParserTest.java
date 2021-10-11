@@ -19,7 +19,7 @@ class EditContactParserTest {
     @Test
     void parseContactDetails() throws MissingDetailException,
             MissingArgException, InvalidFlagException, ForbiddenDetailException {
-        String[] expectedResult = {null, "github"};
+        String[] expectedResult = {null, "github", null, null, null, null};
         String testInput = "edit 1 -g github";
         String[] actualResult = editContactParser.parseContactDetails(testInput);
         assertArrayEquals(expectedResult, actualResult);
