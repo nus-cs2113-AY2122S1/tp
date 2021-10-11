@@ -21,7 +21,8 @@ public class Parser {
     }
 
     public static String parse(String command) throws DukeException {
-        String[] words = command.split(SPACE_SEPARATOR);
+
+        String[] words = command.split(SPACE_SEPARATOR, 2);
 
         switch (words[0]) {
         case COMMAND_LIST:
@@ -58,7 +59,7 @@ public class Parser {
             resultMsg = "Inventory is empty!";
             return resultMsg;
         }
-
+        assert (IngredientList.getInstance().getInventoryStock() > 0);
         for (i = 0; i < IngredientList.getInstance().getInventoryStock() - 1; i++) {
             resultMsg += (i + 1) + "."
                     + IngredientList.getInstance().getIngredientInfo(i + 1)
