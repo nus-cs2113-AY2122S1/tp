@@ -50,8 +50,7 @@ public class ModuleList {
      * @return A Module object if found, else null.
      */
     public Module getModule(String code) {
-        for (int i = 0; i < getSize(); i += 1) {
-            Module module = modules.get(i);
+        for (Module module : modules) {
             if (module.getCode().equals(code)) {
                 return module;
             }

@@ -1,22 +1,22 @@
 package taa.student;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Represents students.
  */
 public class Student {
-    private static final int NUM_LESSONS = 13;
-
     private String id;
     private String name;
-    private final boolean[] attendance = new boolean[NUM_LESSONS];
-
-    private final HashMap<String, Double> results = new HashMap<>();
+    private final ArrayList<Attendance> attendance;
+    private final HashMap<String, Double> results;
 
     public Student(String id, String name) {
         this.id = id;
         this.name = name;
+        this.attendance = new ArrayList<>();
+        this.results = new HashMap<>();
     }
 
     /**
@@ -25,7 +25,7 @@ public class Student {
      * @param lessonIndex The lesson index the student is present for
      */
     public void markAttendance(int lessonIndex) {
-        attendance[lessonIndex] = true;
+        // TODO
     }
 
     /**
@@ -35,7 +35,8 @@ public class Student {
      * @return The attendance status of the student for the lesson
      */
     public boolean isPresent(int lessonIndex) {
-        return attendance[lessonIndex];
+        // TODO
+        return false;
     }
 
     /**
