@@ -25,13 +25,13 @@ public class Ingredient {
 
     public void updateIngredientWeight(double weightChange) {
         ingredientWeight += weightChange;
-        System.out.println("Stores of " + ingredientName + " is now " + ingredientWeight);
+        System.out.println("Storage of " + ingredientName + " is now " + ingredientWeight + " kg");
     }
 
     public void addWaste(Double waste) {
         ingredientWaste_ingr += waste;
         double totalWaste = ingredientWaste_ingr + ingredientWaste_dish;
-        System.out.println("Wastage of " + ingredientName + " is now " + totalWaste);
+        System.out.println("Wastage of " + ingredientName + " is now " + totalWaste + " kg");
     }
 
     @Override
@@ -39,8 +39,8 @@ public class Ingredient {
         double totalWaste = ingredientWaste_ingr + ingredientWaste_dish;
         //Todo add constituents
         return ingredientName + '\n'
-                + "   Storage: " + ingredientWeight + '\n'
-                + "   Wastage: " + totalWaste;
+                + "   Storage: " + ingredientWeight + " kg" +  System.lineSeparator()
+                + "   Wastage: " + totalWaste + " kg";
     }
 
     public String formatData() {

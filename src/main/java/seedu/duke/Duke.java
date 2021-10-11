@@ -18,7 +18,7 @@ public class Duke {
         Scanner input = new Scanner(System.in);
         Ui ui =  new Ui();
 
-        System.out.println(ui.getWelcomeMsg());
+        ui.printWelcomeMsg();
 
         String userInput = input.nextLine().toLowerCase();
         while (!userInput.equals("bye")) {
@@ -34,10 +34,10 @@ public class Duke {
                 Storage.write("dish");
 
             } catch (CommandNotAvailableException e) {
-                System.out.println(ui.getInvalidCommandMsg());
+                ui.printInvalidCommandMsg();
             }
             userInput = input.nextLine();
         }
-        System.out.println(ui.getExitMsg());
+        ui.printExitMsg();
     }
 }
