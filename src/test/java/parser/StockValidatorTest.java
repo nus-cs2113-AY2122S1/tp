@@ -135,8 +135,8 @@ public class StockValidatorTest {
             tempMedicines.add(new Stock("PANADOL", 20, 20, DateParser.stringToDate("13-9-2021"),
                     "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
 
-            SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-            Date expiryDate = DateFor.parse("10-10-2021");
+            final SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+            final Date expiryDate = DateFor.parse("10-10-2021");
             String inputName = "panadol";
 
             boolean isValid = StockValidator.dateValidityChecker(ui,tempMedicines, expiryDate, inputName);
@@ -153,8 +153,8 @@ public class StockValidatorTest {
             tempMedicines.add(new Stock("PANADOL", 20, 20, DateParser.stringToDate("13-9-2021"),
                     "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
 
-            SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
-            Date expiryDate = DateFor.parse("13-9-2021");
+            final SimpleDateFormat DateFor = new SimpleDateFormat("dd/MM/yyyy");
+            final Date expiryDate = DateFor.parse("13-9-2021");
             String inputName = "panadol";
 
             boolean isInvalid = StockValidator.dateValidityChecker(ui,tempMedicines, expiryDate, inputName);
