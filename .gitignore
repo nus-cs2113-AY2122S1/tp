@@ -18,3 +18,4 @@ text-ui-test/ACTUAL.TXT
 .classpath
 .project
 data/taa_data.json
+text-ui-test/data/taa_data.json
