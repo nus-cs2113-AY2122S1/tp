@@ -84,6 +84,10 @@ Please remove any flags with no details,
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
 ____________________________________________________________
 
 ____________________________________________________________
@@ -134,6 +138,10 @@ Please remove any flags with no details,
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
 ____________________________________________________________
 
 ____________________________________________________________
@@ -160,6 +168,10 @@ There appears to be a flag that is not recognised.
 Please try again with a valid flag.
   -n NAME
   -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
 ____________________________________________________________
 
 ____________________________________________________________
@@ -198,6 +210,10 @@ Please remove any flags with no details,
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
 ____________________________________________________________
 
 ____________________________________________________________
@@ -227,6 +243,32 @@ ____________________________________________________________
 
 ____________________________________________________________
 ConTech has edited the specified contact: lezongmun
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: name
+You now have 7 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+There appears to be a flag that is not recognised.
+Please try again with a valid flag.
+  -n NAME
+  -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: lezai3
+You now have 8 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: lezongggg
+You now have 9 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
