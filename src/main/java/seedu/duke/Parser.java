@@ -529,14 +529,18 @@ public class Parser {
      */
     public static void waitForQuery() {
         String query = "";
+        int flag = 0;
         Scanner userInput = new Scanner(System.in);
         while (!query.equals("bye")) {
             System.out.print("=>");
             if (userInput.hasNextLine()) {
                 query = userInput.nextLine();
             }
-            Entry.addEntry(query);
+            Entry.addEntry(query,flag);
+            flag = 1;
         }
     }
+
+
 }
 

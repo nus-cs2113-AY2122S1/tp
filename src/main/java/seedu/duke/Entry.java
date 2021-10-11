@@ -17,13 +17,16 @@ public class Entry {
      * Returns void. Function is responsible for adding different Tasks to the task list.
      *
      * @param entry user raw data input
+     * @param flag indicates whether the program is run the first time
      * @throws IndexOutOfBoundsException if user keys in done [number] when there is no such task.
      */
-    public static void addEntry(String entry) throws NullPointerException {
+    public static void addEntry(String entry , int flag) throws NullPointerException {
         Keyword keyword = Parser.getKeywordStatus(entry);
 
-        //i just put here first even tho sus cos all the private attributes are declared in this class
-        MemberStorage.setupMemberFile(members);
+        if (flag == 0 ){
+            MemberStorage.setupMemberFile(members);
+
+        }
 
         switch (keyword) {
         case LIST_MEMBER_KEYWORD:
