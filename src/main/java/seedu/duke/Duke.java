@@ -1,17 +1,19 @@
 package seedu.duke;
 
-import seedu.duke.employee.Employee;
 import seedu.duke.employee.EmployeeList;
 import seedu.duke.employee.EmployeeParser;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientParser;
+import seedu.duke.main.MainParser;
+import seedu.duke.main.MainUI;
 import seedu.duke.menu.MenuList;
 import seedu.duke.menu.MenuParser;
+import seedu.duke.storage.Storage;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Duke {
-
 
     public static void main(String[] args) {
 
@@ -25,11 +27,10 @@ public class Duke {
         IngredientParser ingredientParser = new IngredientParser();
 
         // Load Storage
-
+        File file = Storage.loadStorage(employeeList, employeeParser, menuList, menuParser, ingredientList, ingredientParser);
 
         // Hello
-        System.out.println("Hello!");
-
+        MainUI.printWelcomeMessage();
 
         // Active Chat
         Scanner input = new Scanner(System.in);
@@ -40,46 +41,16 @@ public class Duke {
             //store input into String
             userInput = input.nextLine();
             //process input
-            if (userInput.startsWith("add-employee")) {
-
-                String[] description = userInput.trim().split("\\|", 3);
-                Employee newEmployee = new Employee(description[1], description[2]);
-                employeeParser.addEmployee(employeeList, newEmployee);
-
-                System.out.println("I have added: ");
-                System.out.println(employeeList.employeeList.get(0));
-
-            } else if (userInput.startsWith("remove-employee")) {
-
-            } else if (userInput.startsWith("list-employee")) {
-
-            } else if (userInput.startsWith("add-menu")) {
-
-            } else if (userInput.startsWith("remove-menu")) {
-
-            } else if (userInput.startsWith("list-menu")) {
-
-            } else if (userInput.startsWith("add-ingredients")) {
-
-            } else if (userInput.startsWith("remove-ingredients")) {
-
-            } else if (userInput.startsWith("list-ingredients")) {
-
-            } else if (userInput.startsWith("bye")) {
-                isBye = true;
-            } else {
-                System.out.println("I do not recognise the input.");
-                System.out.println("Please try again!");
-            }
+            isBye = MainParser.handleCommand(employeeList, employeeParser, menuList, menuParser, ingredientList, ingredientParser, userInput);
         }
 
         // Bye
-        System.out.println("Thank you. Goodbye!");
+        MainUI.printGoodbyeMessage();
 
         // Save Storage
-
+        Storage.saveStorage(employeeList, menuList, ingredientList, file);
+        MainUI.printStorageSaved();
 
     }
-
 
 }
