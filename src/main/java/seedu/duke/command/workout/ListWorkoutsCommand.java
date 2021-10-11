@@ -8,6 +8,8 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * To list all Workouts

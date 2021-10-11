@@ -7,6 +7,9 @@ import seedu.duke.storage.Storage;
 import seedu.duke.exercises.Exercise;
 import seedu.duke.ui.Ui;
 
+import java.util.logging.Logger;
+
+import static seedu.duke.logger.LoggerUtil.setupLogger;
 import static seedu.duke.parser.Parser.EXERCISE_KEYWORD;
 import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 
@@ -19,6 +22,7 @@ public class RemoveExerciseCommand extends Command {
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_INDEX\n"
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1 " + EXERCISE_KEYWORD + "3";
     public static final String MESSAGE_SUCCESS = "Removed exercise: %1$s";
+    private static final Logger LOGGER = Logger.getLogger(RemoveExerciseCommand.class.getName());
     private final int workoutIndex;
     private final int exerciseIndex;
 
@@ -30,6 +34,9 @@ public class RemoveExerciseCommand extends Command {
     public RemoveExerciseCommand(int workoutIndex, int exerciseIndex) {
         this.workoutIndex = workoutIndex;
         this.exerciseIndex = exerciseIndex;
+        assert workoutIndex >= 0;
+        assert exerciseIndex >= 0;
+        setupLogger(LOGGER);
     }
 
     @Override
@@ -40,6 +47,7 @@ public class RemoveExerciseCommand extends Command {
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {
+            LOGGER.info("remove exercise failed - exercise not found");
             throw new GetJackDException(ERROR_MESSAGE_EXERCISE_NOT_FOUND);
         }
     }

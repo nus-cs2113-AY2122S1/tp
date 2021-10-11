@@ -7,6 +7,8 @@ import seedu.duke.storage.Storage;
 import seedu.duke.exercises.Exercise;
 import seedu.duke.ui.Ui;
 
+import java.util.logging.Logger;
+import static seedu.duke.logger.LoggerUtil.setupLogger;
 import static seedu.duke.parser.Parser.EXERCISE_KEYWORD;
 import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 import static seedu.duke.parser.Parser.SETS_KEYWORD;
@@ -23,7 +25,7 @@ public class AddExerciseCommand extends Command {
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3 " + EXERCISE_KEYWORD + "push ups "
             + SETS_KEYWORD + "3 " + REPS_KEYWORD + "10";
     public static final String MESSAGE_SUCCESS = "New exercise added: %1$s";
-
+    private static final Logger LOGGER = Logger.getLogger(AddExerciseCommand.class.getName());
     private final Exercise toAdd;
     private final int workoutIndex;
 
@@ -37,11 +39,13 @@ public class AddExerciseCommand extends Command {
     public AddExerciseCommand(int workoutIndex, String description, int sets, int reps) {
         this.toAdd = new Exercise(description, sets, reps);
         this.workoutIndex = workoutIndex;
+        setupLogger(LOGGER);
     }
 
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         if (toAdd.getReps() <= 0 || toAdd.getSets() <= 0) {
+            LOGGER.info("Add exercise failed - sets or reps <= 0");
             throw new GetJackDException("Sets or reps must be more than 0.");
         }
         try {
@@ -50,6 +54,7 @@ public class AddExerciseCommand extends Command {
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {
+            LOGGER.info("Add exercise failed - Workout not found");
             throw new GetJackDException(ERROR_MESSAGE_WORKOUT_NOT_FOUND);
         }
     }
