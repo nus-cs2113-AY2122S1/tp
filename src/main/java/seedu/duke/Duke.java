@@ -6,7 +6,7 @@ import seedu.duke.employee.EmployeeParser;
 import seedu.duke.ingredient.Ingredient;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientParser;
-import seedu.duke.menu.Menu;
+import seedu.duke.menu.MenuItem;
 import seedu.duke.menu.MenuList;
 import seedu.duke.menu.MenuParser;
 
@@ -86,14 +86,30 @@ public class Duke {
             } else if (userInput.startsWith("add-menu")) {
              employeeParser.listEmployee(employeeList);
 
+                String[] description = userInput.trim().split("\\|", 3);
+                MenuItem newMenuItem = new MenuItem(description[1], description[2]);
+                menuParser.addMenu(menuList, newMenuItem);
+
+                System.out.println("I have added: ");
+                System.out.println(newMenuItem);
+
             } else if (userInput.startsWith("remove-menu")) {
+
+                String[] description = userInput.trim().split("\\|", 2);
+                int targetIndex = Integer.valueOf(description[1]) - 1;
+                MenuItem removedMenuItem = menuList.menuList.get(targetIndex);
+                menuParser.deleteMenu(menuList, targetIndex);
+
+                System.out.println("I have removed: ");
+                System.out.println(removedMenuItem);
 
             } else if (userInput.startsWith("list-menu")) {
 
+                menuParser.listMenu(menuList);
+
+            } else if (userInput.startsWith("add-ingredients")) {
+
             } else if (userInput.startsWith("add-ingredient")) {
-                String[] description = userInput.trim().split("\\|", 3);
-                Ingredient newIngredient = new Ingredient(description[1], description[2]);
-                ingredientParser.addIngredient(ingredientList, newIngredient);
 
             } else if (userInput.startsWith("remove-ingredient")) {
                 String[] description = userInput.trim().split(" ", 2);
