@@ -14,6 +14,9 @@ import terminus.ui.Ui;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * AddLinkCommand class which will manage the adding of new Links from user command
+ */
 public class AddLinkCommand extends Command {
 
     private String description;

@@ -2,6 +2,9 @@ package terminus.content;
 
 import java.time.LocalTime;
 
+/**
+ * Link class to represent a content of type link
+ */
 public class Link extends Content {
 
     private String day;

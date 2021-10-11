@@ -4,6 +4,9 @@ import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.parser.LinkCommandParser;
 
+/**
+ * ScheduleCommand class to manage commands inside the Schedule workspace
+ */
 public class ScheduleCommand extends WorkspaceCommand {
 
     public ScheduleCommand() {

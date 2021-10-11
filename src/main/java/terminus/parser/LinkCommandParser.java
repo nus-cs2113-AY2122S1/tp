@@ -9,6 +9,9 @@ import terminus.common.Messages;
 import terminus.content.Link;
 import terminus.module.NusModule;
 
+/**
+ * LinkCommandParser class to manage schedule-related commands
+ */
 public class LinkCommandParser extends CommandParser {
 
     public LinkCommandParser() {
