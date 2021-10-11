@@ -34,7 +34,6 @@ public class Ingredient {
     }
 
     @Override
-    //Todo format into better string
     public String toString() {
         return ingredientName + '\n'
                 + "   Storage: " + ingredientWeight + '\n'

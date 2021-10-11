@@ -3,22 +3,23 @@ package seedu.duke.command;
 import seedu.duke.IngredientList;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AddIngrCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) {
-        try {
-            //Maybe number followed by name (name can be multi words)
-            String ingredientWeight = parameters.get(0);
-            double ingredientWeightValue = Double.parseDouble(ingredientWeight);
-            System.out.println("____________________________________________");
-            IngredientList.add(parameters.get(1), ingredientWeightValue);
-            System.out.println("____________________________________________");
-        } catch (NumberFormatException e) {
-            System.out.println("____________________________________________");
-            System.out.println("Incorrect parameters - Invalid number entered");
-            System.out.println("____________________________________________");
-        }
+        Ui ui = new Ui();
+        String ingredient = String.join(" ", parameters);
+        System.out.println(ui.getLineDivider());
+
+        //String ingredientWeight = parameters.get(0);
+        System.out.println("Enter the weight of " + ingredient + " in KG:");
+        Scanner in = new Scanner(System.in);
+        String ingredientWeight = in.nextLine();
+
+        double ingredientWeightValue = Double.parseDouble(ingredientWeight);
+        IngredientList.add(ingredient, ingredientWeightValue);
+        System.out.println(ui.getLineDivider());
     }
 
 }

@@ -11,7 +11,6 @@ public enum CommandNames {
     DELETE_INGR("del ingr", new DeleteIngrCommand()),
     LIST("list", new ListCommand());
 
-
     private String name;
     private Command callbackCommand;
     CommandNames(String name, Command callbackCommand) {

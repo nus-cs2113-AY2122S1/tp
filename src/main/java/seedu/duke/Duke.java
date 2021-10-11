@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandNames;
+import seedu.duke.command.Ui;
 import seedu.duke.exceptions.CommandNotAvailableException;
 import seedu.duke.storage.Storage;
 
@@ -17,14 +18,9 @@ public class Duke {
         InputParser parser = new InputParser();
         Storage.load();
         Scanner input = new Scanner(System.in);
+        Ui ui =  new Ui();
 
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("How may I help you?");
+        System.out.println(ui.getWelcomeMsg());
 
         String userInput = input.nextLine().toLowerCase();
         while (!userInput.equals("bye")) {
@@ -40,9 +36,10 @@ public class Duke {
                 Storage.write("dish");
 
             } catch (CommandNotAvailableException e) {
-                System.out.println("No such command");
+                System.out.println(ui.getInvalidCommandMsg());
             }
             userInput = input.nextLine();
         }
+        System.out.println(ui.getExitMsg());
     }
 }

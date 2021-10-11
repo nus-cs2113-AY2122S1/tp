@@ -11,7 +11,7 @@ public class IngredientList {
             ingredientList.add(ingredientToAdd);
             System.out.println("Added:" + ingredientToAdd.getIngredientName() + " " + ingredientWeight);
         } else {
-            System.out.println("Dish already exists");
+            System.out.println("Ingredient already exists");
         }
     }
 
