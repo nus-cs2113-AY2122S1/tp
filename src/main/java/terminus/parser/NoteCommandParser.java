@@ -20,13 +20,13 @@ public class NoteCommandParser extends CommandParser {
         NoteCommandParser parser = new NoteCommandParser();
         parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
         parser.addCommand(CommonFormat.COMMAND_ADD, new AddNoteCommand());
-        parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand<Class<Note>>(Note.class));
-        parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand<Class<Note>>(Note.class));
+        parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand(Note.class));
+        parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand(Note.class));
         return parser;
     }
 
     @Override
     public String getWorkspaceBanner(NusModule module) {
-        return String.format(Messages.NOTE_BANNER, module.getNotes().size());
+        return String.format(Messages.NOTE_BANNER, module.getContentManager(Note.class).getContents().size());
     }
 }

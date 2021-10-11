@@ -6,6 +6,7 @@ import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.ContentManager;
+import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
@@ -48,10 +49,8 @@ public class AddNoteCommand extends Command {
 
     @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
-        ContentManager contentManager = module.getContentManager();
-        contentManager.setContent(module.getNotes());
-        contentManager.addNote(name, data);
-        module.setNotes(contentManager.getContents());
+        ContentManager contentManager = module.getContentManager(Note.class);
+        contentManager.add(new Note(name, data));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE, name));
         return new CommandResult(true, false);
     }
