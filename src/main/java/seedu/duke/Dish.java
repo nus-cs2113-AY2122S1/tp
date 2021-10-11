@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import org.w3c.dom.css.CSSStyleDeclaration;
+
 import java.util.ArrayList;
 
 public class Dish {
@@ -68,7 +70,18 @@ public class Dish {
 
     @Override
     public String toString() {
-        return dishName + '\n' + "   Wastage: " + wastage;
+        String constituentList = "";
+        if(!constituents.isEmpty()) {
+            for (Ingredient ingredient : constituents) {
+                constituentList = constituentList + "," + ingredient.getIngredientName();
+            }
+            constituentList = constituentList.replaceFirst(",", " ");
+        } else {
+            constituentList = "None";
+        }
+        return dishName + '\n'
+                + "   Wastage: " + wastage + '\n'
+                + "   Constituents:" + constituentList;
     }
 
     public String formatData() {
