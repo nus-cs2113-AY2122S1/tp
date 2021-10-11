@@ -16,7 +16,7 @@ public class EmployeeParser {
 
     }
 
-    public void loadEmployeeFromStorage(EmployeeList masterList, Employee employee){
+    public void loadEmployeeFromStorage(EmployeeList masterList, Employee employee) {
         masterList.employeeList.add(employee);
         masterList.totalEmployee += 1;
     }
