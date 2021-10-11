@@ -4,6 +4,8 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
 
+import java.util.ArrayList;
+
 public class Parser {
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_ADD = "add";
@@ -40,9 +42,27 @@ public class Parser {
     }
 
 
-    private static String parseUpdateCommand(String command) {
-        String resultMsg = "";
-        return resultMsg;
+    private static String parseUpdateCommand(String command) throws DukeException {
+        String resultMsg;
+        int i;
+        String delimiter = "i/|a/|u/|e/";
+        String[] details = command.split(delimiter);
+        String ingredientName = details[0];
+        Double ingredientAmount = Double.parseDouble(details[1]);
+        String ingredientUnits = details[2];
+        String ingredientExpiry = details[3];
+
+        //For future versions, updating non-existing item will simply add item to stock.
+        if (IngredientList.getInstance().getInventoryStock() == 0) {
+            resultMsg = "Inventory is empty!";
+            return resultMsg;
+        }
+
+        for (i = 0; i < IngredientList.getInstance().getInventoryStock() - 1; i++) {
+            if (ingredientName == IngredientList.getInstance().getIngredientInfo(i + 1).split(" ")[0]) {
+                IngredientList.getInstance().setAmount(ingredientAmount);
+            }
+        }
     }
 
     private static String parseAddCommand(String command) {
