@@ -24,11 +24,11 @@ public class DispenseCommand extends Command {
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         String medicationName = parameters.get(CommandParameters.NAME);
         String quantity = parameters.get(CommandParameters.QUANTITY);
-        String customerNric = parameters.get(CommandParameters.CUSTOMER_NRIC);
+        String customerId = parameters.get(CommandParameters.CUSTOMER_ID);
         String staffName = parameters.get(CommandParameters.STAFF);
 
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY,
-                                       CommandParameters.CUSTOMER_NRIC, CommandParameters.STAFF};
+                                       CommandParameters.CUSTOMER_ID, CommandParameters.STAFF};
         String[] optionalParameters = {};
 
         if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
@@ -74,7 +74,7 @@ public class DispenseCommand extends Command {
 
                     if (existingQuantity >= quantityLeftToDispense) {
                         existingStock.setQuantity(existingQuantity - quantityLeftToDispense);
-                        medicines.add(new Dispense(medicationName, dispenseQuantity, customerNric, dispenseDate,
+                        medicines.add(new Dispense(medicationName, dispenseQuantity, customerId, dispenseDate,
                                 staffName));
                         ui.print("Dispensed:" + medicationName + " Quantity:" + quantityLeftToDispense + " Expiry "
                                 + "date:" + existingExpiry);

@@ -17,7 +17,7 @@ public class StockValidatorTest {
     @Test
     public void checkValidName_validName_expectTrue() {
         String inputString = "panadol";
-        boolean isValid = StockValidator.isValidName(ui, inputString);
+        boolean isValid = MedicineValidator.isValidName(ui, inputString);
         assertTrue(isValid);
     }
 
@@ -37,7 +37,7 @@ public class StockValidatorTest {
     @Test
     public void checkValidQuantity_validQuantity_expectTrue() {
         String inputString = "0";
-        boolean isValid = StockValidator.isValidQuantity(ui, inputString);
+        boolean isValid = MedicineValidator.isValidQuantity(ui, inputString);
         assertTrue(isValid);
     }
 

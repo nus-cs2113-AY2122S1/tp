@@ -1,7 +1,8 @@
 package command;
 
 import inventory.Medicine;
-import parser.OrderValidator;
+import parser.DispenseValidator;
+import parser.MedicineValidator;
 import parser.StockValidator;
 import ui.Ui;
 
@@ -28,7 +29,7 @@ public class CommandSyntax {
     public static final String UPDATE_COMMAND = "UPDATE I/STOCK_ID [N/NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
             + "D/DESCRIPTION M/MAX_QUANTITY]";
     public static final String DELETE_COMMAND = "DELETE I/STOCK_ID";
-    public static final String DISPENSE_COMMAND = "DISPENSE N/NAME Q/QUANTITY C/CUSTOMER_NRIC S/STAFF_NAME";
+    public static final String DISPENSE_COMMAND = "DISPENSE N/NAME Q/QUANTITY C/CUSTOMER_ID S/STAFF_NAME";
     public static final String HELP_COMMAND = "HELP";
     public static final String PURGE_COMMAND = "PURGE";
     public static final String EXIT_COMMAND = "EXIT";
@@ -136,7 +137,7 @@ public class CommandSyntax {
                 isValid = StockValidator.isValidPrice(ui, parameterValue);
                 break;
             case CommandParameters.QUANTITY:
-                isValid = StockValidator.isValidQuantity(ui, parameterValue);
+                isValid = MedicineValidator.isValidQuantity(ui, parameterValue);
                 break;
             case CommandParameters.EXPIRY_DATE:
                 isValid = StockValidator.isValidExpiry(ui, parameterValue);
@@ -145,7 +146,7 @@ public class CommandSyntax {
                 isValid = StockValidator.isValidDescription(ui, parameterValue);
                 break;
             case CommandParameters.NAME:
-                isValid = StockValidator.isValidName(ui, parameterValue);
+                isValid = MedicineValidator.isValidName(ui, parameterValue);
                 break;
             case CommandParameters.MAX_QUANTITY:
                 isValid = StockValidator.isValidMaxQuantity(ui, parameterValue);
@@ -157,11 +158,11 @@ public class CommandSyntax {
             case CommandParameters.REVERSED_SORT:
                 isValid = StockValidator.isValidColumn(ui, parameterValue);
                 break;
-            case CommandParameters.CUSTOMER_NRIC:
-                isValid = OrderValidator.isValidCustomerNric(ui, parameterValue);
+            case CommandParameters.CUSTOMER_ID:
+                isValid = DispenseValidator.isValidCustomerId(ui, parameterValue);
                 break;
             case CommandParameters.STAFF:
-                isValid = OrderValidator.isValidStaffName(ui, parameterValue);
+                isValid = DispenseValidator.isValidStaffName(ui, parameterValue);
                 break;
             default:
                 break;
