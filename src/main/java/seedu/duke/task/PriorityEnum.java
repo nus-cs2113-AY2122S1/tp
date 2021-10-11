@@ -1,10 +1,8 @@
 package seedu.duke.task;
 
-import java.util.Map;
-import seedu.duke.exception.PriorityEnumDoesNotExistException;
-
-import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.toMap;
+import seedu.duke.exception.InvalidPriorityException;
+import seedu.duke.exception.InvalidRecurrenceException;
+import seedu.duke.exception.PriorityNumberDoesNotExistException;
 
 public enum PriorityEnum {
     HIGH(2),
@@ -36,12 +34,21 @@ public enum PriorityEnum {
      *
      * @return {@link PriorityEnum} enum corresponding to <code>int priorityNumber</code> argument.
      */
-    public static PriorityEnum getEnum(int priorityNumber) throws PriorityEnumDoesNotExistException {
+    public static PriorityEnum getPriority(int priorityNumber) throws PriorityNumberDoesNotExistException {
         for (PriorityEnum priority : PriorityEnum.values()) {
             if (priorityNumber == priority.getValue()) {
                 return priority;
             }
         }
-        throw new PriorityEnumDoesNotExistException();
+        throw new PriorityNumberDoesNotExistException();
+    }
+
+    public static PriorityEnum getPriority(String priority) throws InvalidPriorityException {
+        for (PriorityEnum priorityEnum : values()) {
+            if (priority.equalsIgnoreCase(priorityEnum.name())) {
+                return priorityEnum;
+            }
+        }
+        throw new InvalidPriorityException(priority);
     }
 }
