@@ -88,6 +88,7 @@ public class MedicineManager {
                 stock = (Stock) medicine;
             }
         }
+        assert (stock != null) : "Expected a stock object but none extracted";
         return stock;
     }
 
