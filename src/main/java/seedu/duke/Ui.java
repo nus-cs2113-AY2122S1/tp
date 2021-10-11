@@ -11,7 +11,9 @@ public class Ui {
 
     private static Scanner in = new Scanner(System.in);
 
-    public Ui() {;}
+    public Ui() {
+        ;
+    }
 
     public static void showLine() {
         System.out.println("____________________________________________________________");
