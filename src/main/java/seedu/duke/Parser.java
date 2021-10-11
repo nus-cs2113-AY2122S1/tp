@@ -4,10 +4,7 @@ import seedu.duke.command.UpdateCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
-
-import java.util.ArrayList;
 
 public class Parser {
     private static final String COMMAND_LIST = "list";

@@ -26,10 +26,3 @@ public class UpdateCommand implements Command {
         return resultMsg;
     }
 }
-
-
-//                for (i = 0; i < IngredientList.getInstance().getInventoryStock() - 1; i++) {
-//        if (ingredientName == IngredientList.getInstance().getIngredientInfo(i + 1).split(" ")[0]) {
-//        IngredientList.getInstance().setAmount(ingredientAmount);
-//        }
-//        }
