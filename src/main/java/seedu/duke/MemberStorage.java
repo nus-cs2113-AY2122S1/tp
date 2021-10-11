@@ -108,7 +108,7 @@ public class MemberStorage {
             dukeMemberWriter.write(',');
             dukeMemberWriter.write("phone number");
             dukeMemberWriter.write('\n');
-            for (int i = 0; i < memberListSize; i++) {
+            for (int i = 1; i <= memberListSize; i++) {
                 dukeMemberWriter.write(memberList.getMemberName(i));
                 dukeMemberWriter.write(',');
                 dukeMemberWriter.write(memberList.getMemberStudentNumber(i));
