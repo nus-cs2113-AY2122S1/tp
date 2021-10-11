@@ -22,6 +22,18 @@ public class TrainingList {
         trainingList.add(schedule);
     }
 
+    public String getTrainingName(int index) {
+        return trainingList.get(index - 1).getTrainingName();
+    }
+
+    public String getTrainingTime(int index) {
+        return trainingList.get(index - 1).getTrainingTime();
+    }
+
+    public String getTrainingVenue(int index) {
+        return trainingList.get(index - 1).getTrainingVenue();
+    }
+
     /**
      * Deletes training schedule based on index input by user. Index must be valid.
      *
