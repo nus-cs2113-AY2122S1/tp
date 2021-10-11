@@ -1,5 +1,7 @@
 package happybit.ui;
 
+import happybit.goal.Goal;
+
 import java.util.ArrayList;
 
 public class Ui {
@@ -37,11 +39,17 @@ public class Ui {
         printDashes();
     }
 
-    public static void printHabitsList(ArrayList<String> habits) {
+    public static void printGoalsList(ArrayList<Goal> goals) {
         printDashes();
-        for (String habit : habits) {
-            System.out.println(habit);
+        for (Goal goal : goals) {
+            System.out.println(goal.getDescription());
         }
+        printDashes();
+    }
+
+    public static void printRemovedGoal(String goalDescription) {
+        printDashes();
+        System.out.println("Your goal: " + goalDescription + "has been removed!");
         printDashes();
     }
 
