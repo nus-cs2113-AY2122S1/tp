@@ -56,7 +56,10 @@ public class Traveller {
         }
     }
 
-    public void setupRoutes() {
+
+    /*public void setupRoutes() {
+        Dijkstra dijkstra = new Dijkstra();
+
         int i = 0;
 
         Vertex v1 = new Vertex("SGP", ++i);
@@ -129,13 +132,13 @@ public class Traveller {
                     }
                 }
             }
-        }*/
-    }
+        }
+    }*/
 
 
     public static void main(String[] args) {
         DatabaseInput.readFile();
-        new Traveller().setupRoutes();
+        //new Traveller().setupRoutes();
         //listEverything();
         new Traveller().run();
 

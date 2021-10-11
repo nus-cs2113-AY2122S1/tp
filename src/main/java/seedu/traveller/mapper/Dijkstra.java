@@ -43,7 +43,7 @@ public class Dijkstra {
         }
     }
 
-    public static void getToGoal(Vertex srcV, Vertex targetV) {
+    public static List<Vertex> getToGoal(Vertex srcV, Vertex targetV) {
         List<Vertex> path = new ArrayList<>();
         List<Double> dist = new ArrayList<>();
         double curr;
@@ -82,6 +82,6 @@ public class Dijkstra {
 
     public static List<Vertex> run(Vertex s, Vertex t) {
         computeSource(s);
-        getToGoal(s,t);
+        return getToGoal(s,t);
     }
 }
