@@ -29,59 +29,32 @@ public class AddCommand extends Command {
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         logger.log(Level.INFO, "Start addition of stock");
 
-        boolean paraExist = false;
-        for (String parameter : parameters.keySet()) {
-            if (parameter.contains(CommandParameters.NAME)) {
-                paraExist = true;
-                break;
-            }
-        }
-        if (!paraExist) {
-            ui.print("Please provide all parameters!");
-            ui.print("COMMAND SYNTAX: ADD N/NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE D/DESCRIPTION M/MAX_QUANTITY");
-        }
-
-        String nameToAdd = parameters.get(CommandParameters.NAME);
-        String priceToAdd = parameters.get(CommandParameters.PRICE);
-        String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
-        String expiryToAdd = parameters.get(CommandParameters.EXPIRY_DATE);
-        String descriptionToAdd = parameters.get(CommandParameters.DESCRIPTION);
-        String maxQuantityToAdd = parameters.get(CommandParameters.MAX_QUANTITY);
-        int totalStock = MedicineManager.getTotalStockQuantity(medicines, nameToAdd);
-
         boolean nameExist = false;
+        String nameToAdd = parameters.get(CommandParameters.NAME);
         Stock existingStock = null;
-
-        for (Medicine medicine : medicines) {
-            if (medicine instanceof Stock && medicine.getMedicineName().equals(nameToAdd.toUpperCase())) {
-                existingStock = (Stock) medicine;
-                nameExist = true;
-                break;
-            }
-        }
-
-        String existingDescription = existingStock.getDescription();
-        int existingMaxQuantity = existingStock.getMaxQuantity();
-
-        String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE,
-                                       CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
         String[] optionalParameters = {};
 
-        if (checkValidParametersAndValues(ui, parameters, medicines, requiredParameters, optionalParameters)) {
-
-            return;
+        if (parameters.containsKey(CommandParameters.NAME)) {
+            nameToAdd = parameters.get(CommandParameters.NAME);
+            for (Medicine medicine : medicines) {
+                if (medicine instanceof Stock && medicine.getMedicineName().equals(nameToAdd.toUpperCase())) {
+                    existingStock = (Stock) medicine;
+                    nameExist = true;
+                    break;
+                }
+            }
         }
 
         if (nameExist) {
-            String[] reqParameters = {CommandParameters.NAME, CommandParameters.PRICE,
-                                      CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
-            String[] optParameters = {CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
+            String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE,
+                                           CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
 
-            if (checkValidParametersAndValues(ui, parameters, medicines,
-                    reqParameters, optParameters)) {
-
+            if (checkValidParametersAndValues(ui, parameters, medicines, requiredParameters, optionalParameters)) {
                 return;
             }
+
+            String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
+            String expiryToAdd = parameters.get(CommandParameters.EXPIRY_DATE);
 
             Date formatExpiry = null;
             try {
@@ -91,19 +64,19 @@ public class AddCommand extends Command {
             }
 
             int quantity = Integer.parseInt(quantityToAdd);
-            double price = Double.parseDouble(priceToAdd);
 
             boolean isValidDate =
                     StockValidator.dateValidityChecker(ui, medicines, formatExpiry, nameToAdd);
-
-            assert quantity > 0 : "Quantity should be more than 0";
-            assert price > 0 : "Price should be more than 0";
 
             if (!isValidDate) {
                 logger.log(Level.WARNING, "Invalid Date is specified by user");
                 logger.log(Level.INFO, "Unsuccessful addition of stock");
                 return;
             }
+
+            int existingMaxQuantity = existingStock.getMaxQuantity();
+            int totalStock = MedicineManager.getTotalStockQuantity(medicines, nameToAdd);
+            assert totalStock > 0 : "Total Stock should be more than 0";
 
             boolean isValidQuantity =
                     StockValidator.quantityValidityChecker(ui, (totalStock + quantity),
@@ -115,23 +88,28 @@ public class AddCommand extends Command {
                 return;
             }
 
+            String existingDescription = existingStock.getDescription();
+            String priceToAdd = parameters.get(CommandParameters.PRICE);
+            double price = Double.parseDouble(priceToAdd);
             addMedicine(ui, medicines, nameToAdd, existingDescription, price,
                     quantity, formatExpiry, existingMaxQuantity);
 
         } else {
-            String[] requiredParam = {CommandParameters.NAME, CommandParameters.PRICE,
-                                      CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
-                                      CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
-            String[] optionalParam = {};
+            String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE,
+                                           CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
+                                           CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
 
-            if (checkValidParametersAndValues(ui, parameters, medicines, requiredParam,
-                    optionalParam)) {
-
+            if (checkValidParametersAndValues(ui, parameters, medicines, requiredParameters, optionalParameters)) {
                 return;
             }
 
-            Date formatExpiry = null;
+            String priceToAdd = parameters.get(CommandParameters.PRICE);
+            String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
+            String expiryToAdd = parameters.get(CommandParameters.EXPIRY_DATE);
+            String descriptionToAdd = parameters.get(CommandParameters.DESCRIPTION);
+            String maxQuantityToAdd = parameters.get(CommandParameters.MAX_QUANTITY);
 
+            Date formatExpiry = null;
             try {
                 formatExpiry = DateParser.stringToDate(expiryToAdd);
             } catch (ParseException e) {
@@ -144,9 +122,18 @@ public class AddCommand extends Command {
             addMedicine(ui, medicines, nameToAdd, descriptionToAdd, price, quantity, formatExpiry, maxQuantity);
         }
 
-
     }
 
+    /**
+     * Check if input contains Invalid Parameters and Invalid Parameter Values.
+     *
+     * @param ui                    Reference to the UI object passed by Main to print messages.
+     * @param parameters            The parameter that is not found.
+     * @param medicines             List of all medicines.
+     * @param requiredParameters    The required parameters to check.
+     * @param optionalParameters    The optional parameters to check.
+     * @return                      Boolean value indicating if parameter and parameter values are valid.
+     */
     private boolean checkValidParametersAndValues(Ui ui, HashMap<String, String> parameters,
                                                   ArrayList<Medicine> medicines, String[] requiredParameters,
                                                   String[] optionalParameters) {
@@ -163,10 +150,21 @@ public class AddCommand extends Command {
             logger.log(Level.INFO, "Unsuccessful addition of stock");
             return true;
         }
-
         return false;
     }
 
+    /**
+     * Add medication based on user input.
+     *
+     * @param ui            Reference to the UI object passed by Main to print messages.
+     * @param medicines     List of all medicines.
+     * @param name          Name of medication to add.
+     * @param description   Description of medication to add.
+     * @param price         Price of medication to add.
+     * @param quantity      Quantity of medication to add.
+     * @param expiryDate    Expiry Date of medication to add.
+     * @param maxQuantity   Maximum Quantity of medication to add.
+     */
     private void addMedicine(Ui ui, ArrayList<Medicine> medicines, String name, String description,
                              double price, int quantity, Date expiryDate, int maxQuantity) {
         Stock stock = new Stock(name, price, quantity, expiryDate, description, maxQuantity);
@@ -177,5 +175,3 @@ public class AddCommand extends Command {
     }
 
 }
-
-
