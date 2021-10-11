@@ -103,29 +103,39 @@ public class MainParserTest {
 
     @Test
     public void parseAddCommand_validInputsWithIrregularSpaces_expectAddContactCommand() {
-        testUserInput = "         add -n   andre -g  ng-andre  ";
+        testUserInput = "         add -n   andre -g  ng-andre  -l linkedin -tw twit -te tele -e email";
         AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
-        AddContactCommand expectedCommand = new AddContactCommand("andre", "ng-andre");
+        AddContactCommand expectedCommand = new AddContactCommand("andre", "ng-andre", "linkedin", "tele", "twit",
+                "email");
         assertEquals(expectedCommand.getName(), actualCommand.getName());
         assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
+        assertEquals(expectedCommand.getLinkedin(), actualCommand.getLinkedin());
+        assertEquals(expectedCommand.getTelegram(), actualCommand.getTelegram());
+        assertEquals(expectedCommand.getTwitter(), actualCommand.getTwitter());
+        assertEquals(expectedCommand.getEmail(), actualCommand.getEmail());
     }
 
     @Test
     public void parseAddCommand_validInputsWithExtraCharacters_expectAddContactCommand() {
         testUserInput = "         add   1231267azldasd -n   marcus    -g  marcus-bory  ";
         AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
-        AddContactCommand expectedCommand = new AddContactCommand("marcus", "marcus-bory");
+        AddContactCommand expectedCommand = new AddContactCommand("marcus", "marcus-bory", null, null, null, null);
         assertEquals(expectedCommand.getName(), actualCommand.getName());
         assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
     }
 
     @Test
     public void parseAddCommand_validInputs_expectAddContactCommand() {
-        testUserInput = "add -n andre -g ng-andre";
+        testUserInput = "add -n andre -g ng-andre -l linkedin -tw twit -te tele -e email";
         final AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
-        final AddContactCommand expectedCommand = new AddContactCommand("andre", "ng-andre");
+        final AddContactCommand expectedCommand = new AddContactCommand("andre", "ng-andre", "linkedin", "tele", "twit",
+                "email");
         assertEquals(expectedCommand.getName(), actualCommand.getName());
         assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
+        assertEquals(expectedCommand.getLinkedin(), actualCommand.getLinkedin());
+        assertEquals(expectedCommand.getTelegram(), actualCommand.getTelegram());
+        assertEquals(expectedCommand.getTwitter(), actualCommand.getTwitter());
+        assertEquals(expectedCommand.getEmail(), actualCommand.getEmail());
     }
 
     @Test

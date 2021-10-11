@@ -31,9 +31,9 @@ class AddContactParserTest {
     @Test
     void parseContactDetails_inputsWithIrregularSpacing_expectCorrectDetails() throws InvalidFlagException,
             MissingDetailException, MissingArgException, ForbiddenDetailException {
-        inputUserInput = "add       -n   andre   -g ng-andre   ";
+        inputUserInput = "         add -n   andre -g  ng-andre  -l linkedin -tw    twit -te   tele   -e email";
         actualOutput = addContactParser.parseContactDetails(inputUserInput);
-        expectedOutput = new String[]{"andre", "ng-andre"};
+        expectedOutput = new String[]{"andre", "ng-andre", "linkedin", "tele", "twit", "email"};
         assertArrayEquals(expectedOutput, actualOutput);
     }
 

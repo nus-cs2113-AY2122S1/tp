@@ -10,8 +10,8 @@ public class AddContactParser extends ContactParser {
      * Returns a String[] containing the user's input and the arguments specified for
      * each detail flag. Each detail is parsed individually using parseDetail.
      * <p>
-     * Eg. userInput => add -n andre -g ng-andre
-     *     output => ["andre", "ng-andre"]
+     * Eg. userInput => add -n andre -g ng-andre -te ng_andre -tw andre -e andre@gmail.com -l ng-andre
+     *     output => ["andre", "ng-andre", "ng_andre", "ng-andre", "ng_andre", "andre", "andre@gmail.com"]
      * </p>
      * Note: Each index is properly identified by enumeration in contact/DetailType
      * @param userInput User's complete untouched input
@@ -20,9 +20,9 @@ public class AddContactParser extends ContactParser {
      */
     public String[] parseContactDetails(String userInput) throws InvalidFlagException, MissingArgException,
             MissingDetailException, ForbiddenDetailException {
-        String[] contactDetails = new String[NUMBER_OF_DETAILS];
+        String[] contactDetails = new String[NUMBER_OF_FIELDS];
         String[] destructuredInputs = userInput.split(DETAIL_SEPARATOR);
-        if (destructuredInputs.length == 1) {
+        if (destructuredInputs.length < NUMBER_OF_ADD_ARGS) {
             throw new MissingArgException();
         }
         for (int i = CONTACT_PARAMS_START_INDEX; i < destructuredInputs.length; i++) {

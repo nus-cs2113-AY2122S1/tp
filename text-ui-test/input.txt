@@ -34,4 +34,8 @@ view 0
        add -n name -g null
        add   -n dev -g nullptr
     edit 3 -g new-git
+add -n name -l linkedin -g github -e email -tw twitter -te telegram
+add -n lezai  -g lezongmun  -e lezongmun@gmail.com   -linkedin  lezongmun
+add -n lezai3  -g lezongmun  -e lezongmun@gmail.com   -l  lezongmun
+add -n lezongggg    -te testTelegram
 exit
