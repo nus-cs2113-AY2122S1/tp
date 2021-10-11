@@ -18,6 +18,8 @@ public class ListCommand implements Command {
             return resultMsg;
         }
 
+        assert (IngredientList.getInstance().getInventoryStock() > 0);
+
         for (i = 0; i < IngredientList.getInstance().getInventoryStock() - 1; i++) {
             resultMsg += (i + 1) + "."
                     + IngredientList.getInstance().getIngredientInfo(i + 1)
