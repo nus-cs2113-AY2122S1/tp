@@ -15,7 +15,7 @@ class AddRecipeCommandTest {
                 TestUtil.generateIngredientListForRecipe());
         String errorMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ALREADY_EXISTS,
                 TestUtil.EXAMPLE_RECIPE_NAME);
-        assertEquals(command.execute(null,recipes),errorMessage);
+        assertEquals(command.execute(null, recipes), errorMessage);
     }
 
     @Test
@@ -23,7 +23,7 @@ class AddRecipeCommandTest {
         RecipeList recipes = new RecipeList();
         Command command = new AddRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME,
                 TestUtil.generateIngredientListForRecipe());
-        String successMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ADDED, TestUtil.generateRecipe(),1);
-        assertEquals(command.execute(null,recipes),successMessage);
+        String successMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ADDED, TestUtil.generateRecipe(), 1);
+        assertEquals(command.execute(null, recipes), successMessage);
     }
 }

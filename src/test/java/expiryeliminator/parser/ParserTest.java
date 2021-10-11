@@ -19,7 +19,7 @@ class ParserTest {
                           "add recipe i/Red Apple q/4 i/Green Apple q/4"};
 
         for (String test : tests) {
-            assertEquals(parseCommand(test).execute(null,null),
+            assertEquals(parseCommand(test).execute(null, null),
                     "Wrong format for add recipe command");
         }
     }
@@ -28,7 +28,7 @@ class ParserTest {
     public void prepareAddRecipe_quantityNotANumber_ErrorMessage() {
         String test = "add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple q/four";
         assertEquals("Quantity must be a valid number",
-                    parseCommand(test).execute(null,null));
+                parseCommand(test).execute(null, null));
     }
 
     @Test
@@ -40,7 +40,7 @@ class ParserTest {
 
         for (String test : tests) {
             assertEquals("Should have same number of ingredient names and quantities",
-                    parseCommand(test).execute(null,null));
+                    parseCommand(test).execute(null, null));
         }
     }
 
@@ -59,7 +59,7 @@ class ParserTest {
     @Test
     public void prepareDeleteRecipe_incorrectFormat_ErrorMessage() {
         String test = "delete recipe r/";
-        assertEquals(parseCommand(test).execute(null,null),
+        assertEquals(parseCommand(test).execute(null, null),
                 "Wrong format for delete recipe command");
     }
 }
