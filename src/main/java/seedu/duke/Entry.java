@@ -20,12 +20,11 @@ public class Entry {
      * @param flag indicates whether the program is run the first time
      * @throws IndexOutOfBoundsException if user keys in done [number] when there is no such task.
      */
-    public static void addEntry(String entry , int flag) throws NullPointerException {
+    public static void addEntry(String entry, int flag) throws NullPointerException {
         Keyword keyword = Parser.getKeywordStatus(entry);
 
-        if (flag == 0 ){
+        if (flag == 0) {
             MemberStorage.setupMemberFile(members);
-
         }
 
         switch (keyword) {
