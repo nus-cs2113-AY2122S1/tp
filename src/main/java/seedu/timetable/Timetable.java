@@ -167,7 +167,6 @@ public class Timetable implements Comparable<Timetable> {
                 schedule[i] = null;
             }
         }
-
     }
 
     /**
