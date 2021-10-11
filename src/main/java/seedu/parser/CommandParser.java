@@ -1,14 +1,6 @@
 package seedu.parser;
 
-import seedu.command.AddCommand;
-import seedu.command.Command;
-import seedu.command.ExitCommand;
-import seedu.command.HelpCommand;
-import seedu.command.InvalidCommand;
-import seedu.command.SearchCommand;
-import seedu.command.ShowCommand;
-import seedu.command.TimetableCommand;
-import seedu.command.UpdateCommand;
+import seedu.command.*;
 import seedu.command.flags.SearchFlags;
 import seedu.duke.Duke;
 import seedu.timetable.Timetable;
@@ -17,7 +9,9 @@ public class CommandParser {
     private static final Integer SEARCH_LENGTH = 6;
     private static final Integer SHOW_LENGTH = 4;
     private static final Integer ADD_LENGTH = 3;
+    public static final Integer DELETE_LENGTH = 6;
     private static final String FLAG = "-";
+
 
     public Command parseCommand(String text, Timetable timetable) {
         Command command;
@@ -38,10 +32,23 @@ public class CommandParser {
             command = parseAddCommand(text, timetable);
         } else if (lowerCaseText.startsWith("help")) {
             command = new HelpCommand();
+        } else if (lowerCaseText.startsWith("delete")) {
+            command = parseDeleteCommand(text, timetable);
+        } else if (lowerCaseText.startsWith("clear")) {
+            command = parseClearCommand(timetable);
         } else {
             command = new InvalidCommand();
         }
         return command;
+    }
+
+    public Command parseDeleteCommand(String text, Timetable timetable) {
+        String moduleToBeDeleted = (text.substring(DELETE_LENGTH).trim()).toUpperCase();
+        return new DeleteCommand(moduleToBeDeleted, timetable);
+    }
+
+    public Command parseClearCommand(Timetable timetable) {
+        return new ClearCommand(timetable);
     }
 
     public Command parseSearchCommand(String text) {

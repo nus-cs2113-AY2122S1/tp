@@ -1,9 +1,8 @@
 package seedu.ui;
 
-import seedu.module.Module;
 import seedu.module.Lesson;
+import seedu.module.Module;
 
-import java.time.DayOfWeek;
 import java.util.Scanner;
 
 public class TextUi {
@@ -22,7 +21,7 @@ public class TextUi {
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
     private static final String HELP_MESSAGE = LINE
-            + "\tNUSModsLite accepts the following commands:-\n"
+            + "\tUNIMods accepts the following commands:-\n"
             + "\t\t| No.| Command Syntax          |            Command Action                      |\n"
             + "\t\t| 1. | search <module_code>    | Search module based on the given partial regex |\n"
             + "\t\t| 2. | show <module_code>      | Display module information                     |\n"
@@ -33,6 +32,10 @@ public class TextUi {
             + "\t\t| 7. | exit                    | Exit From Program                              |\n"
             + "\t ** Note: For details, refer to the User Guide of NUSModsLite at: "
             + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n" + LINE;
+
+    public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this module does not exist in your timetable!";
+    public static final String ERROR_INVALID_MODULE_CODE = "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
+    public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
 
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
@@ -171,5 +174,13 @@ public class TextUi {
 
     public static void printLessonAdded() {
         System.out.println("Lessons for all modules have been successfully added");
+    }
+
+    public static void printModuleDeleted(String moduleCode) {
+        System.out.println(moduleCode + " is successfully deleted from your Timetable.");
+    }
+
+    public static void printTimetableCleared() {
+        System.out.println("All modules have been successfully removed from your Timetable.");
     }
 }
