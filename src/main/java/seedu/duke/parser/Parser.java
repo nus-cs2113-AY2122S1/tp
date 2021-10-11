@@ -14,8 +14,13 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.IncorrectCommand;
 
 import seedu.duke.exception.GetJackDException;
+import seedu.duke.lists.WorkoutList;
 
 import java.util.Locale;
+
+import java.util.logging.Logger;
+
+import static seedu.duke.logger.LoggerUtil.setupLogger;
 
 /**
  * To make sense of user commands by extracting keywords, descriptions and time/date.
@@ -26,6 +31,11 @@ public class Parser {
     public static final String SETS_KEYWORD = "/s ";
     public static final String REPS_KEYWORD = "/r ";
     static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
+    static final Logger LOGGER = Logger.getLogger(WorkoutList.class.getName());
+
+    public Parser() {
+        setupLogger(LOGGER);
+    }
 
     /**
      * Converts raw user input string to a command.
@@ -67,8 +77,10 @@ public class Parser {
         try {
             String[] indices = getWorkoutAndExerciseIndices(commandArgs);
             int workoutIndex = parseArgsAsIndex(indices[0]);
+            LOGGER.info("preparing display exercises: successful");
             return new DisplayExercisesCommand(workoutIndex);
         } catch (GetJackDException e) {
+            LOGGER.info("preparing display exercises: failed");
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + DisplayExercisesCommand.MESSAGE_USAGE);
         }
     }
@@ -100,10 +112,13 @@ public class Parser {
         if (commandArgs.contains(WORKOUT_KEYWORD)) {
             String workoutName = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
             if (workoutName.isEmpty()) {
+                LOGGER.info("preparing create workout: failed because workoutName is empty");
                 return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
             }
+            LOGGER.info("preparing create workout: successful");
             return new CreateWorkoutCommand(workoutName);
         }
+        LOGGER.info("preparing create workout: failed because no WORKOUT_KEYWORD");
         return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
     }
 
@@ -111,8 +126,10 @@ public class Parser {
         try {
             String[] indices = getWorkoutAndExerciseIndices(commandArgs);
             int workoutIndex = parseArgsAsIndex(indices[0]);
+            LOGGER.info("preparing delete workout: successful");
             return new DeleteWorkoutCommand(workoutIndex);
         } catch (GetJackDException e) {
+            LOGGER.info("preparing delete workout: failed because could not parse workout index");
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + DeleteWorkoutCommand.MESSAGE_USAGE);
         }
     }
@@ -122,8 +139,10 @@ public class Parser {
             String[] indices = getWorkoutAndExerciseIndices(commandArgs);
             int workoutIndex = parseArgsAsIndex(indices[0]);
             int exerciseIndex = parseArgsAsIndex(indices[1]);
+            LOGGER.info("preparing remove exercise: successful");
             return new RemoveExerciseCommand(workoutIndex, exerciseIndex);
         } catch (GetJackDException e) {
+            LOGGER.info("preparing remove exercise: failed because could not parse workout or exercise indices");
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + RemoveExerciseCommand.MESSAGE_USAGE);
         }
     }
@@ -135,8 +154,10 @@ public class Parser {
             String exerciseName = exerciseArgs[1].trim();
             int sets = parseArgsAsIndex(exerciseArgs[2]);
             int reps = parseArgsAsIndex(exerciseArgs[3]);
+            LOGGER.info("preparing add exercise: successful");
             return new AddExerciseCommand(workoutIndex, exerciseName, sets, reps);
         } catch (GetJackDException e) {
+            LOGGER.info("preparing add exercise: failed");
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + AddExerciseCommand.MESSAGE_USAGE);
         }
     }
@@ -178,12 +199,15 @@ public class Parser {
         }
 
         if (workoutIndex.isEmpty()) {
+            LOGGER.info("error getting exercise arguments: empty workout index");
             throw new GetJackDException("Error. Empty workout index");
         }
         if (exerciseName.isEmpty()) {
+            LOGGER.info("error getting exercise arguments: empty exercise name");
             throw new GetJackDException("Error. Empty exercise name.");
         }
         if (sets.isEmpty() || reps.isEmpty()) {
+            LOGGER.info("error getting exercise arguments: empty sets or reps");
             throw new GetJackDException("Error. Empty sets or reps.");
         }
         return exerciseArgs;
@@ -194,8 +218,11 @@ public class Parser {
             String[] indices = getWorkoutAndExerciseIndices(commandArgs);
             int workoutIndex = parseArgsAsIndex(indices[0]);
             int exerciseIndex = parseArgsAsIndex(indices[1]);
+            LOGGER.info("preparing mark exercise as done: successful");
             return new MarkExerciseAsDoneCommand(workoutIndex, exerciseIndex);
         } catch (GetJackDException e) {
+            LOGGER.info("preparing mark exercise as done: failed "
+                    + "because could not parse workout or exercise indices");
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + MarkExerciseAsDoneCommand.MESSAGE_USAGE);
         }
     }
@@ -213,9 +240,11 @@ public class Parser {
             return new String[]{"", ""};
         }
         if (!commandArgs.contains(EXERCISE_KEYWORD)) {
+            assert (commandArgs.contains(WORKOUT_KEYWORD));
             String workoutIndex = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
             return new String[]{workoutIndex, ""};
         }
+
         assert (commandArgs.contains(WORKOUT_KEYWORD));
         assert (commandArgs.contains(EXERCISE_KEYWORD));
 
@@ -255,11 +284,13 @@ public class Parser {
      */
     private static int parseArgsAsIndex(String index) throws GetJackDException {
         if (index.isEmpty()) {
+            LOGGER.info("Workout or exercise index not found");
             throw new GetJackDException("Error. Workout or exercise index not found.");
         }
         try {
             return Integer.parseInt(index.trim());
         } catch (NumberFormatException e) {
+            LOGGER.info("Invalid workout or exercise index");
             throw new GetJackDException("Error. Invalid workout or exercise index.");
         }
     }
