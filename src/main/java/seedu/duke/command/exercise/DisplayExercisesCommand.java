@@ -23,6 +23,10 @@ public class DisplayExercisesCommand extends Command {
     public static final String MESSAGE_EMPTY_WORKOUT = "You have no exercises.";
     private final int workoutIndex;
 
+    /**
+     * Instantiates object and sets parameters for displaying all the exercises in a specified workout.
+     * @param workoutIndex display index of workout in workoutList
+     */
     public DisplayExercisesCommand(int workoutIndex) {
         this.workoutIndex = workoutIndex;
     }

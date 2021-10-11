@@ -26,6 +26,10 @@ public class DeleteWorkoutCommand extends Command {
 
     private final int workoutIndex;
 
+    /**
+     * Instantiates object and sets workoutIndex and exerciseIndex.
+     * @param workoutIndex display index of workout that we want to delete.
+     */
     public DeleteWorkoutCommand(int workoutIndex) {
         this.workoutIndex = workoutIndex;
     }
