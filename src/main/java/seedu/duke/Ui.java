@@ -21,15 +21,15 @@ public class Ui {
 
     public void showWelcome() {
         showLine();
-//        String logo = " █████  ███  █   █ ████  ████  █      ████  █    █ █    █ █████ ████\n"
-//                + "   █   █   █ █   █ █   █ █   █ █     █    █ ██   █ ██   █ █     █   █\n"
-//                + "   █   █   █ █   █ █████ ████  █     ██████ █ █  █ █ █  █ █████ █████\n"
-//                + "   █   █   █ █   █ █  █  █     █     █    █ █  █ █ █  █ █ █     █  █\n"
-//                + "   █    ███   ███  █   █ █     █████ █    █ █   ██ █   ██ █████ █   █\n";
-        String logo = "gg";
+        String logo = " █████  ███  █   █ ████  ████  █      ████  █    █ █    █ █████ ████\n"
+               + "   █   █   █ █   █ █   █ █   █ █     █    █ ██   █ ██   █ █     █   █\n"
+               + "   █   █   █ █   █ █████ ████  █     ██████ █ █  █ █ █  █ █████ █████\n"
+               + "   █   █   █ █   █ █  █  █     █     █    █ █  █ █ █  █ █ █     █  █\n"
+               + "   █    ███   ███  █   █ █     █████ █    █ █   ██ █   ██ █████ █   █\n";
+        String logo2 = "gg";
         String greet = "Hello, Welcome to TourPlanner!\n"
                 + "What can I do for you?";
-        show(logo);
+        show(logo2);
         show(greet);
         showLine();
     }
