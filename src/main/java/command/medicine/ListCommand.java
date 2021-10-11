@@ -7,22 +7,29 @@ import comparators.StockComparator;
 import inventory.Medicine;
 import inventory.Stock;
 import parser.DateParser;
+import parser.StockValidator;
 import ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Helps to process the list command together with filters and sort.
  */
 
 public class ListCommand extends Command {
+    private static Logger logger = Logger.getLogger("ListCommand");
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+        logger.log(Level.INFO, "Start listing of available stock");
+
         String[] requiredParameter = {};
         String[] optionalParameters = {CommandParameters.STOCK_ID, CommandParameters.NAME, CommandParameters.PRICE,
             CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
@@ -31,15 +38,20 @@ public class ListCommand extends Command {
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
                 optionalParameters, CommandSyntax.LIST_COMMAND, false);
         if (isInvalidParameter) {
+            logger.log(Level.WARNING, "Invalid parameters given by user");
             return;
         }
 
         boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines);
         if (isInvalidParameterValues) {
+            logger.log(Level.WARNING, "Invalid parameters values given by user");
             return;
         }
 
         ArrayList<Medicine> filteredMedicines = new ArrayList<>();
+
+        assert filteredMedicines == null : "Arraylist should be empty at the start";
+
         for (Medicine medicine : medicines) {
             if (medicine instanceof Stock) { // Ensure that it is a medicine object
                 filteredMedicines.add(medicine);
@@ -100,5 +112,6 @@ public class ListCommand extends Command {
             }
         }
         ui.printStocks(filteredMedicines);
+        logger.log(Level.INFO, "Successful listing of stock");
     }
 }
