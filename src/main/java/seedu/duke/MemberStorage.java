@@ -43,8 +43,8 @@ public class MemberStorage {
     /**
      * This method loads the duke member file and writes to the current member list. Only happens on start-up.
      *
-     * @param dukeMemberFile
-     * @param memberList
+     * @param dukeMemberFile CSV file to read data from.
+     * @param memberList MemberList to write to.
      */
     public static void loadDukeAttendanceFile(File dukeMemberFile, MemberList memberList) {
         String name;

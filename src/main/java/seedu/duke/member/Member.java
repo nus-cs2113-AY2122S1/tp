@@ -29,7 +29,9 @@ public class Member {
         setPhoneNumber(phoneNumber);
     }
 
-    public Member() {}
+    public Member() {
+
+    }
 
     public Member(String name, String studentNumber, String gender, String phoneNumber) {
         setName(name);
