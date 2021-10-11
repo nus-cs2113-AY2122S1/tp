@@ -6,7 +6,5 @@ import org.junit.jupiter.api.Test;
 
 class ExpiryEliminatorTest {
     @Test
-    public void sampleTest() {
-        assertTrue(true);
-    }
+    public void sampleTest() {assertTrue(true);}
 }

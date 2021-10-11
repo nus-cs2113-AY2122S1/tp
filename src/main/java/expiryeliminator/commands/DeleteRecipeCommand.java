@@ -13,8 +13,8 @@ public class DeleteRecipeCommand extends Command {
     public static final String COMMAND_WORD = "delete recipe";
 
     private final String recipeName;
-    private static final String MESSAGE_RECIPE_NOT_FOUND = "You don't have this recipe in your list :(";
-    private static final String MESSAGE_RECIPE_DELETED = "I've deleted this recipe for you:\n" + "%1$s"
+    public static final String MESSAGE_RECIPE_NOT_FOUND = "You don't have this recipe in your list :(";
+    public static final String MESSAGE_RECIPE_DELETED = "I've deleted this recipe for you:\n" + "%1$s"
             + "Now you have %2$s recipe(s)";
 
     public DeleteRecipeCommand(String recipeName) {
