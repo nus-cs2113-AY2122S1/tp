@@ -27,4 +27,14 @@ public class Ui {
         System.out.println(person.getName() + " | " + person.getAmtOwedToUser());
     }
 
+    public static void printExpensesSummary(Trip t) {
+        System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
+        System.out.println("Total budget for this trip: " + t.getBudget());
+        System.out.println("Total expenditure so far: " + t.getTotalExpenses());
+        System.out.println("Current budget left for this trip: " + t.getBudgetLeft());
+    }
+
+    public static void printExpenseAddedSuccess() {
+        System.out.println("Your expense has been added successfully");
+    }
 }

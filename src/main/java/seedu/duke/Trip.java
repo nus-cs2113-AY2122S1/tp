@@ -106,6 +106,20 @@ public class Trip {
         }
     }
 
+    public double getTotalExpenses() {
+        double totalExpense = 0;
+        for (Expense currentExpense : listOfExpenses) {
+            totalExpense += currentExpense.getAmountSpent();
+        }
+        return totalExpense;
+    }
+
+    public double getBudgetLeft() {
+        return getBudget() - getTotalExpenses();
+    }
+
+
+
     public String getForeignCurrency() {
         return foreignCurrency;
     }
@@ -124,6 +138,10 @@ public class Trip {
 
     public String getLocation() {
         return this.location;
+    }
+
+    public ArrayList<Person> getListOfPersons() {
+        return listOfPersons;
     }
 
     public void setLocation(String location) {
