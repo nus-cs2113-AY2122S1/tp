@@ -52,7 +52,7 @@ public class Parser {
                     System.out.println("Bye bye!");
                     break;
                 } else if (parseCommand(line).equalsIgnoreCase("help")) {
-                    System.out.println("add \"recipe name\" \"/ingredients\" 1+2+3 \"steps\" 1+2+3");
+                    System.out.println("add \"recipe name\" \"/ingredients\" 1+2+3 \"/steps\" 1+2+3");
                 } else {
                     throw new GordonException(GordonException.COMMAND_INVALID);
                 }
