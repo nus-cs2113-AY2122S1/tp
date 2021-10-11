@@ -41,6 +41,7 @@ public class DishList {
         } else {
             dishList.remove(dishIndex);
             System.out.println("Dish, " + dishName + " has been removed!");
+
         }
     }
 }
