@@ -35,9 +35,14 @@ public class AddContactCommand extends Command {
         return github;
     }
 
-    public AddContactCommand(String name, String github) {
+    public AddContactCommand(String name, String github, String linkedin, String telegram, String twitter,
+                             String email) {
         this.name = name;
         this.github = github;
+        this.linkedin = linkedin;
+        this.telegram = telegram;
+        this.twitter = twitter;
+        this.email = email;
     }
 
     public void execute() {
