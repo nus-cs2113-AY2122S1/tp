@@ -1,41 +1,54 @@
 package taa.command;
 
-import taa.CustomException;
+import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.ModuleList;
 import taa.module.Module;
 
 public class AddModuleCommand extends Command {
-    private static final String MESSAGE_MODULE_ADDED_FORMAT = "Module added:\n  %s\nThere are %d modules in the list.";
+    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_MODULE_NAME = "n";
+    private static final String[] ADD_MODULE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_MODULE_NAME};
 
-    private static final String[] ADD_MODULE_ARGUMENT_KEYS = {"c","n"};
+    private static final String MESSAGE_INVALID_MODULE_CODE = "Invalid module code.";
+
+    private static final String MESSAGE_FORMAT_ADD_MODULE_USAGE = "Usage: %s "
+            + "%s/<MODULE_CODE> %s/<MODULE_NAME>";
+    private static final String MESSAGE_FORMAT_MODULE_ADDED = "Module added:\n  %s\nThere are %d modules in the list.";
 
     public AddModuleCommand(String argument) {
         super(argument, ADD_MODULE_ARGUMENT_KEYS);
     }
 
     @Override
-    public void execute(ModuleList modules, Ui ui) throws CustomException {
+    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
         if (argument.isEmpty()) {
-            // TODO Usage format message
-            throw new CustomException("");
+            throw new TaaException(getUsageMessage());
         }
 
         if (!checkArgumentMap()) {
-            // TODO Invalid/missing arguments message
-            throw new CustomException("");
+            throw new TaaException(getMissingArgumentMessage());
         }
 
-        String moduleCode = argumentMap.get("c");
+        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         if (moduleCode.contains(" ")) {
-            // TODO Invalid module code message
-            throw new CustomException("");
+            throw new TaaException(MESSAGE_INVALID_MODULE_CODE);
         }
 
-        String name = argumentMap.get("n");
+        String name = argumentMap.get(KEY_MODULE_NAME);
         Module module = new Module(moduleCode, name);
-        modules.addModule(module);
+        moduleList.addModule(module);
 
-        ui.printMessage(String.format(MESSAGE_MODULE_ADDED_FORMAT, module, modules.getSize()));
+        ui.printMessage(String.format(MESSAGE_FORMAT_MODULE_ADDED, module, moduleList.getSize()));
+    }
+
+    @Override
+    protected String getUsageMessage() {
+        return String.format(
+                MESSAGE_FORMAT_ADD_MODULE_USAGE,
+                COMMAND_ADD_MODULE,
+                KEY_MODULE_CODE,
+                KEY_MODULE_NAME
+        );
     }
 }

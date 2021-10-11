@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StudentTest {
     @Test
     public void testStringConversion() {
-        assertEquals("Jon Lim, A0217746X", new Student("Jon Lim", "A0217746X").toString());
+        assertEquals("A1234567B - Jon Lim", new Student("A1234567B", "Jon Lim").toString());
     }
     
 }

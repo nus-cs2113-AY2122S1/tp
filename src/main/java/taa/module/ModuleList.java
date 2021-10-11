@@ -51,7 +51,7 @@ public class ModuleList {
      */
     public Module getModule(String code) {
         for (int i = 0; i < getSize(); i += 1) {
-            Module module = getModuleAt(i);
+            Module module = modules.get(i);
             if (module.getCode().equals(code)) {
                 return module;
             }
@@ -60,23 +60,14 @@ public class ModuleList {
         return null;
     }
 
-    public boolean isModuleExist(String moduleName) {
-        for (Module module : modules) {
-            if (module.getName().toLowerCase().equalsIgnoreCase(moduleName)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(MESSAGE_MODULE_LIST_HEADER);
         for (int i = 0; i < getSize(); i += 1) {
             stringBuilder.append("\n");
             stringBuilder.append(i + 1);
-            stringBuilder.append(": ");
-            stringBuilder.append(getModuleAt(i));
+            stringBuilder.append(". ");
+            stringBuilder.append(modules.get(i));
         }
 
         return stringBuilder.toString();

@@ -1,18 +1,23 @@
 package taa.command;
 
-import taa.CustomException;
+import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
 
-import java.util.Locale;
+import java.util.ArrayList;
 
 public class FindStudentCommand extends Command {
+    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_KEYWORD = "k";
+    private static final String[] FIND_STUDENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_KEYWORD};
 
-    private static final String[] FIND_STUDENT_ARGUMENT_KEYS = {"c","k"};
-    private static final String MESSAGE_FOUND_STUDENT_FORMAT = "Here are the students in %s with '%s'";
-    public static final String MESSAGE_NO_STUDENTS_FOUND = "No Students matching your keyword found";
+    private static final String MESSAGE_NO_STUDENTS_FOUND = "There are no students matching your keyword.";
+
+    private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "Usage: %s "
+            + "%s/<MODULE_CODE> %s/<KEYWORD>";
+    private static final String MESSAGE_FORMAT_STUDENT_FOUND_HEADER = "Here are the students in %s with \"%s\":";
 
     public FindStudentCommand(String argument) {
         super(argument, FIND_STUDENT_ARGUMENT_KEYS);
@@ -21,50 +26,52 @@ public class FindStudentCommand extends Command {
     /**
      * Finds the students taking a particular module containing a particular keyword.
      *
-     * @param modules The list of modules
+     * @param moduleList The list of modules
      * @param ui The ui instance to handle interactions with the user
-     * @throws CustomException If the user inputs an invalid command
+     * @throws TaaException If the user inputs an invalid command
      */
     @Override
-    public void execute(ModuleList modules, Ui ui) throws CustomException {
+    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
         if (argument.isEmpty()) {
-            // TODO Usage format message
-            throw new CustomException("");
+            throw new TaaException(getUsageMessage());
         }
 
         if (!checkArgumentMap()) {
-            // TODO Invalid/missing arguments message
-            throw new CustomException("");
+            throw new TaaException(getMissingArgumentMessage());
         }
 
-        String moduleCode = argumentMap.get("c");
-        if (moduleCode.contains(" ")) {
-            // TODO Invalid module code message
-            throw new CustomException("");
-        }
-
-        Module module = modules.getModule(moduleCode);
+        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
+        Module module = moduleList.getModule(moduleCode);
         if (module == null) {
-            // TODO module not found message
-            throw new CustomException("Module not found");
+            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
-        boolean isFound = false;
-        Student student;
-        String keyword = argumentMap.get("k").toLowerCase();
-        for (int i = 0; i < module.getStudents().size(); i += 1) {
-            student = module.getStudents().get(i);
-            if (student.getName().toLowerCase().contains(keyword)
-                    || student.getStudentID().toLowerCase().contains(keyword)) {
-                if (!isFound) {
-                    ui.printMessage(String.format(MESSAGE_FOUND_STUDENT_FORMAT, moduleCode, keyword));
-                    isFound = true;
-                }
-                System.out.println(i + 1 + ". " + student);
-            }
-        }
-        if (!isFound) {
+        String keyword = argumentMap.get(KEY_KEYWORD);
+        ArrayList<Student> studentsFound = module.findStudents(keyword);
+        if (studentsFound.isEmpty()) {
             ui.printMessage(MESSAGE_NO_STUDENTS_FOUND);
+            return;
         }
+
+        String header = String.format(MESSAGE_FORMAT_STUDENT_FOUND_HEADER, moduleCode, keyword);
+        StringBuilder stringBuilder = new StringBuilder(header);
+        for (int i = 0; i < studentsFound.size(); i += 1) {
+            stringBuilder.append("\n");
+            stringBuilder.append(i + 1);
+            stringBuilder.append(". ");
+            stringBuilder.append(studentsFound.get(i));
+        }
+
+        ui.printMessage(stringBuilder.toString());
+    }
+
+    @Override
+    protected String getUsageMessage() {
+        return String.format(
+                MESSAGE_FORMAT_FIND_STUDENT_USAGE,
+                COMMAND_FIND_STUDENT,
+                KEY_MODULE_CODE,
+                KEY_KEYWORD
+        );
     }
 }

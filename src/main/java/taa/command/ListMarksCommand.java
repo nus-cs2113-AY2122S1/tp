@@ -1,8 +1,9 @@
 package taa.command;
 
-import taa.CustomException;
 import taa.Ui;
+import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
+import taa.exception.TaaException;
 import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
@@ -11,10 +12,17 @@ import taa.student.Student;
  * Class that deals with the command for the listing of marks.
  */
 public class ListMarksCommand extends Command{
+    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_ASSESSMENT_NAME = "a";
+    private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {
+            KEY_MODULE_CODE,
+            KEY_ASSESSMENT_NAME
+    };
+    private static final String MESSAGE_FORMAT_LIST_MARKS_USAGE = "Usage: %s "
+            + "%s/<MODULE_CODE> %s/<ASSESSMENT_NAME>";
     private static final String MESSAGE_LIST_MARKS_HEADER = "Here is the list of students and " +
             "their marks for %s:";
     private static final String MARKS_LIST_EMPTY = "There are no marks inputted!";
-    private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {"c", "a"};
 
     public ListMarksCommand(String argument) {
         super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);
@@ -33,43 +41,69 @@ public class ListMarksCommand extends Command{
     /**
      * Lists the student and the marks they attained for an assessment.
      *
-     * @param modules List of modules.
+     * @param moduleList List of modules.
      * @param ui The ui instance to handle interactions with the user.
-     * @throws CustomException When list marks command is invalid.
+     * @throws TaaException When list marks command is invalid.
      */
     @Override
-    public void execute(ModuleList modules, Ui ui) throws CustomException {
-        Module module = modules.getModule(argumentMap.get("c"));
-        AssessmentList list = module.getAssessments();
+    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
         if (argument.isEmpty()) {
-            // TODO Usage format message
-            throw new CustomException("");
+            throw new TaaException(getUsageMessage());
         }
         if (!checkArgumentMap()) {
-            // TODO Invalid/missing arguments message
-            throw new CustomException("");
+            throw new TaaException(getMissingArgumentMessage());
         }
-        if (argumentMap.get("c").contains(" ")) {
-            // TODO Invalid module code message
-            throw new CustomException("");
+
+        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
+        Module module = moduleList.getModule(moduleCode);
+        if (module == null) {
+            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
-        if (!list.isValidAssessment(argumentMap.get("a"))) {
+        if (module.getNumberOfStudents() <= 0) {
+            throw new TaaException("No students to list!");
+        }
+
+        AssessmentList list = module.getAssessments();
+        Assessment assessment = list.getAssessment(argumentMap.get(KEY_ASSESSMENT_NAME));
+        if (assessment == null) {
             // TODO non-existent assessment error message
-            throw new CustomException("assessment does not exist!");
+            throw new TaaException("Assessment does not exist!");
         }
+
         listMarks(ui, module);
+    }
+
+    @Override
+    protected String getUsageMessage() {
+        return String.format(
+                MESSAGE_FORMAT_LIST_MARKS_USAGE,
+                COMMAND_LIST_MARKS,
+                KEY_MODULE_CODE,
+                KEY_ASSESSMENT_NAME
+        );
     }
 
     private void listMarks(Ui ui, Module module) {
         String assessmentName = argumentMap.get("a");
         StringBuilder marksList = new StringBuilder(String.format(MESSAGE_LIST_MARKS_HEADER, assessmentName));
-        int marksCount = 0;
+        int studentIndex = 0;
         for (Student student : module.getStudents()) {
-            marksCount += 1;
-            marksList.append("\n");
-            marksList.append(marksToString(student.getName(), student.getMarks(assessmentName)));
+            studentIndex += 1;
+            if (student.marksExist(assessmentName)) {
+                marksList.append("\n");
+                marksList.append(studentIndex);
+                marksList.append(". ");
+                marksList.append(marksToString(student.getName(), student.getMarks(assessmentName)));
+            } else {
+                marksList.append("\n");
+                marksList.append(studentIndex);
+                marksList.append(". ");
+                marksList.append(student.getName());
+                marksList.append(" | ");
+                marksList.append("Marks not added.");
+            }
         }
-        if (marksCount <= 0) {
+        if (studentIndex <= 0) {
             ui.printMessage(MARKS_LIST_EMPTY);
         } else {
             ui.printMessage(marksList.toString());

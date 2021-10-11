@@ -1,6 +1,6 @@
 package taa.command;
 
-import taa.CustomException;
+import taa.exception.TaaException;
 import taa.Parser;
 import taa.Ui;
 import taa.module.ModuleList;
@@ -24,6 +24,13 @@ public abstract class Command {
     public static final String COMMAND_ADD_ASSESSMENT = "add_assessment";
     public static final String COMMAND_SET_MARKS = "set_marks";
 
+    protected static final String MESSAGE_UNKNOWN_USAGE = "Unknown usage.";
+    protected static final String MESSAGE_MODULE_NOT_FOUND = "Module not found.";
+    protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
+
+    protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "Usage: %s";
+    protected static final String MESSAGE_FORMAT_MISSING_ARGUMENT = "Missing Argument(s).\n%s";
+
     protected String argument;
     protected boolean isExit;
     protected String[] argumentKeys;
@@ -44,7 +51,9 @@ public abstract class Command {
         return isExit;
     }
 
-    public abstract void execute(ModuleList modules, Ui ui) throws CustomException;
+    public abstract void execute(ModuleList moduleList, Ui ui) throws TaaException;
+
+    protected abstract String getUsageMessage();
 
     /**
      * Checks if argumentMap contains all the argument keys.
@@ -59,5 +68,14 @@ public abstract class Command {
         }
 
         return true;
+    }
+
+    protected String getMissingArgumentMessage() {
+        String usageMessage = getUsageMessage();
+        if (usageMessage == null) {
+            usageMessage = MESSAGE_UNKNOWN_USAGE;
+        }
+
+        return String.format(MESSAGE_FORMAT_MISSING_ARGUMENT, usageMessage);
     }
 }

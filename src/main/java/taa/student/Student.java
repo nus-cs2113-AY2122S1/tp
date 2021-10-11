@@ -8,15 +8,15 @@ import java.util.HashMap;
 public class Student {
     private static final int NUM_LESSONS = 13;
 
+    private String id;
     private String name;
-    private String studentID;
     private final boolean[] attendance = new boolean[NUM_LESSONS];
 
     private final HashMap<String, Double> results = new HashMap<>();
 
-    public Student(String name, String studentID) {
+    public Student(String id, String name) {
+        this.id = id;
         this.name = name;
-        this.studentID = studentID;
     }
 
     /**
@@ -59,10 +59,10 @@ public class Student {
     /**
      * Sets the student ID of the student.
      *
-     * @param studentID the student ID of the student
+     * @param id the student ID of the student
      */
-    public void setStudentID(String studentID) {
-        this.studentID = studentID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -70,8 +70,8 @@ public class Student {
      *
      * @return the student ID of the student
      */
-    public String getStudentID() {
-        return this.studentID;
+    public String getId() {
+        return this.id;
     }
 
     /**
@@ -81,11 +81,12 @@ public class Student {
      */
     @Override
     public String toString() {
-        return name + ", " + studentID;
+        return String.format("%s - %s", id, name);
     }
 
     /**
      * Adds a key,value pair to the hashmap.
+     *
      * @param assessmentName key of the hashmap
      * @param marks value to be stored under the key given
      */
@@ -93,11 +94,33 @@ public class Student {
         results.put(assessmentName, marks);
     }
 
+    /**
+     * Gets the marks for the given assessment.
+     *
+     * @param assessmentName Assessment to get marks for.
+     * @return Marks for the inputted assessment.
+     */
     public double getMarks(String assessmentName) {
         return results.get(assessmentName);
     }
 
+    /**
+     * Gets all assessments and their marks in a hashmap.
+     *
+     * @return Hashmap containing assessment names as keys and the marks as values.
+     */
     public HashMap<String, Double> getAllMarks() {
         return results;
     }
+
+    /**
+     * Returns true if marks have been inputted for a given assessment.
+     *
+     * @param assessmentName Assessment to be checked.
+     * @return True if marks have been inputted. Returns false otherwise.
+     */
+    public boolean marksExist(String assessmentName) {
+        return results.containsKey(assessmentName);
+    }
+
 }

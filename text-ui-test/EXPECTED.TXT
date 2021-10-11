@@ -12,7 +12,7 @@ There are 1 modules in the list.
 ------------------------------------------------------------
 $ ------------------------------------------------------------
 Module List:
-1: CS2113T - Software Engineering and Object-oriented Programming
+1. CS2113T - Software Engineering and Object-oriented Programming
 ------------------------------------------------------------
 $ ------------------------------------------------------------
 An exception has occurred:

@@ -2,6 +2,11 @@ package taa;
 
 import taa.command.*;
 import taa.command.ExitCommand;
+import taa.command.FindStudentCommand;
+import taa.command.ListAssessmentsCommand;
+import taa.command.ListModulesCommand;
+import taa.command.ListStudentsCommand;
+import taa.exception.TaaException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +15,7 @@ import java.util.HashMap;
 public class Parser {
     private static final String MESSAGE_UNKNOWN_COMMAND = "Unknown Command";
 
-    public static Command parseUserInput(String userInput) throws CustomException {
+    public static Command parseUserInput(String userInput) throws TaaException {
         String[] userInputSplit = splitFirstSpace(userInput);
         String commandString = userInputSplit[0];
         String argument = userInputSplit[1];
@@ -70,7 +75,7 @@ public class Parser {
             break;
 
         default:
-            throw new CustomException(MESSAGE_UNKNOWN_COMMAND);
+            throw new TaaException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         return command;

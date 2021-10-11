@@ -1,15 +1,27 @@
 package taa.command;
 
-import taa.CustomException;
+import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
+import taa.util.Util;
 
 public class EditStudentCommand extends Command {
+    private static final String KEY_MODULE_CODE = "c";
+    private static final String KEY_STUDENT_INDEX = "s";
+    private static final String KEY_NEW_ID = "i";
+    private static final String KEY_NEW_NAME = "n";
+    private static final String[] EDIT_STUDENT_ARGUMENT_KEYS = {
+        KEY_MODULE_CODE,
+        KEY_STUDENT_INDEX,
+        KEY_NEW_ID,
+        KEY_NEW_NAME
+    };
 
-    private static final String[] EDIT_STUDENT_ARGUMENT_KEYS = {"c", "n", "s", "i"};
-    private static final String MESSAGE_STUDENT_EDITED_FORMAT = "Student details updated:\n %d. %s, %s";
+    private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "Usage: %s "
+            + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<NEW_ID> %s/<NEW_NAME>";
+    private static final String MESSAGE_FORMAT_STUDENT_EDITED = "Student updated:\n  %s";
 
     public EditStudentCommand(String argument) {
         super(argument, EDIT_STUDENT_ARGUMENT_KEYS);
@@ -18,42 +30,55 @@ public class EditStudentCommand extends Command {
     /**
      * Edits the name and student ID of a given student.
      *
-     * @param modules The list of modules
+     * @param moduleList The list of modules
      * @param ui The ui instance to handle interactions with the user
-     * @throws CustomException If the user inputs an invalid command
+     * @throws TaaException If the user inputs an invalid command
      */
     @Override
-    public void execute(ModuleList modules, Ui ui) throws CustomException {
+    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
         if (argument.isEmpty()) {
-            // TODO Usage format message
-            throw new CustomException("");
+            throw new TaaException(getUsageMessage());
         }
 
         if (!checkArgumentMap()) {
-            // TODO Invalid/missing arguments message
-            throw new CustomException("");
+            throw new TaaException(getMissingArgumentMessage());
         }
 
-        String moduleCode = argumentMap.get("c");
-        if (moduleCode.contains(" ")) {
-            // TODO Invalid module code message
-            throw new CustomException("");
-        }
-
-        Module module = modules.getModule(moduleCode);
+        String moduleCode = argumentMap.get(KEY_MODULE_CODE);
+        Module module = moduleList.getModule(moduleCode);
         if (module == null) {
-            // TODO module not found message
-            throw new CustomException("Module not found");
+            throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
-        // TODO exceptions for number format and array out of bounds
-        int studentIndex = Integer.parseInt(argumentMap.get("n")) - 1;
-        String studentName = argumentMap.get("s");
-        String studentID = argumentMap.get("i");
-        Student student = modules.getModule(moduleCode).getStudents().get(studentIndex);
-        student.setName(studentName);
-        student.setStudentID(studentID);
+        String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
+        if (!Util.isStringInteger(studentIndexInput)) {
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
+        }
+        int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
-        ui.printMessage(String.format(MESSAGE_STUDENT_EDITED_FORMAT, (studentIndex + 1), studentName, studentID));
+        Student student = module.getStudentAt(studentIndex);
+        if (student == null) {
+            ui.printMessage(MESSAGE_INVALID_STUDENT_INDEX);
+            return;
+        }
+
+        String newId = argumentMap.get(KEY_NEW_ID);
+        String newName = argumentMap.get(KEY_NEW_NAME);
+        student.setId(newId);
+        student.setName(newName);
+
+        ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_EDITED, student));
+    }
+
+    @Override
+    protected String getUsageMessage() {
+        return String.format(
+                MESSAGE_FORMAT_FIND_STUDENT_USAGE,
+                COMMAND_EDIT_STUDENT,
+                KEY_MODULE_CODE,
+                KEY_STUDENT_INDEX,
+                KEY_NEW_ID,
+                KEY_NEW_NAME
+        );
     }
 }
