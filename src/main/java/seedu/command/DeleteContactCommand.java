@@ -28,7 +28,13 @@ public class DeleteContactCommand extends Command {
     }
 
     public void execute() {
-        deleteContact();
-
+        Contact deletedContact = contactList.getContactAtIndex(deletedIndex);
+        TextUi.deleteContactConfirmationMessage(deletedContact, deletedIndex);
+        String userDeleteConfirmation = TextUi.getUserDeleteConfirmation();
+        if (userDeleteConfirmation.equalsIgnoreCase("y")) {
+            deleteContact();
+        } else {
+            TextUi.cancelDeleteContactMessage();
+        }
     }
 }

@@ -95,13 +95,14 @@ public class TextUi {
 
     public static void deleteContactConfirmationMessage(Contact deleteContact, int index) {
         String message = "Delete this contact? \n"
-                + index + ". " + "Name: " + deleteContact.getName() + " GitHub: " + deleteContact.getGithub() + "\n"
-                + "Enter \"y\" to delete";
+                + "   " + index + ". " + "Name: " + deleteContact.getName() + " GitHub: " + deleteContact.getGithub()
+                + "\nEnter \"y\" to delete.";
         printDoubleLineMessage(message);
     }
 
     public static void cancelDeleteContactMessage() {
         String message = "Delete has been cancelled.";
+        printDoubleLineMessage(message);
     }
 
     public static void deleteContactMessage(String contactName, int listSize) {
