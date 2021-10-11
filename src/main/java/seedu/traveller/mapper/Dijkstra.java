@@ -77,11 +77,11 @@ public class Dijkstra {
             sum += curr;
         }
         System.out.println("Total distance = " + sum);
+        return path;
     }
 
-    public static void run(Vertex s, Vertex t) {
+    public static List<Vertex> run(Vertex s, Vertex t) {
         computeSource(s);
         getToGoal(s,t);
     }
-
 }

@@ -1,4 +1,9 @@
 package seedu.traveller.mapper;
 
-public class EmptyVertexException extends Exception{
+import seedu.traveller.exceptions.TravellerException;
+
+public class EmptyVertexException extends TravellerException {
+    public EmptyVertexException() {
+        message = "\tEither of these nodes doesn't exist!";
+    }
 }
