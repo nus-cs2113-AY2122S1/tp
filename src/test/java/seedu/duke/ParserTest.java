@@ -95,7 +95,7 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("del_in i/aa");
         InvalidCommand test = (InvalidCommand) underTest;
-        assertTrue(test.getMessage() == "Please input a valid index.");
+        assertTrue(test.getMessage() == "Only numeric inputs are allowed for index.");
     }
 
     @Test
@@ -103,6 +103,6 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("add_in d/buy book a/aa");
         InvalidCommand test = (InvalidCommand) underTest;
-        assertTrue(test.getMessage() == "Please input a valid amount.");
+        assertTrue(test.getMessage() == "Only numeric inputs are allowed for amount.");
     }
 }

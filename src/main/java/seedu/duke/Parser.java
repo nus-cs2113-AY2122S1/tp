@@ -15,6 +15,11 @@ import seedu.commands.ExitCommand;
 
 import seedu.entry.Expense;
 import seedu.entry.Income;
+import seedu.exceptions.InvalidExpenseException;
+import seedu.exceptions.InvalidExpenseIndexException;
+import seedu.exceptions.InvalidIncomeException;
+import seedu.exceptions.InvalidIncomeIndexException;
+import seedu.utility.Messages;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -80,11 +85,11 @@ public class Parser {
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String arguments = matcher.group("arguments"); 
 
         switch (commandWord) {
         case HELP_COMMAND_KEYWORD:
@@ -108,7 +113,7 @@ public class Parser {
         case EXIT_KEYWORD:
             return prepareExit(arguments);
         default:
-            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
     }
     
@@ -116,7 +121,7 @@ public class Parser {
         if (arguments.trim().isBlank()) {
             return new HelpCommand();
         }
-        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     /**
@@ -126,20 +131,18 @@ public class Parser {
     private Command prepareAddExpense(String arguments) {
         final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
         if (!matcher.matches()) {
-            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
         
+        String userGivenAmount = matcher.group("amount").trim();
         double expenseAmount;
         try {
-            expenseAmount = Double.parseDouble(matcher.group("amount").trim());
-        } catch (NumberFormatException e) {
-            return new InvalidCommand("Please input a valid amount.");
+            expenseAmount = parseExpense(userGivenAmount);
+        } catch (InvalidExpenseException e) {
+            return new InvalidCommand(e.getMessage());
         }
-        if (expenseAmount <= 0) {
-            return new InvalidCommand("Please input a valid amount.");
-        }
-        
         assert expenseAmount > 0;
+        
         String expenseDescription = matcher.group("description").trim();
         Expense expense = new Expense(expenseDescription, expenseAmount);
         return new AddExpenseCommand(expense);
@@ -154,18 +157,16 @@ public class Parser {
         if (!matcher.matches()) {
             return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
-        
+
+        String userGivenAmount = matcher.group("amount").trim();
         double incomeAmount;
         try {
-            incomeAmount = Double.parseDouble(matcher.group("amount").trim());
-        } catch (NumberFormatException e) {
-            return new InvalidCommand("Please input a valid amount.");
+            incomeAmount = parseIncome(userGivenAmount);
+        } catch (InvalidIncomeException e) {
+            return new InvalidCommand(e.getMessage());
         }
-        if (incomeAmount <= 0) {
-            return new InvalidCommand("Please input a valid amount.");
-        }
-        
         assert incomeAmount > 0;
+        
         String incomeDescription = matcher.group("description").trim();
         Income income = new Income(incomeDescription, incomeAmount);
         return new AddIncomeCommand(income);
@@ -181,17 +182,16 @@ public class Parser {
             return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
         
-        int deleteIndex;
+        String userGivenIndex = matcher.group("index").trim();
+        int deleteExpenseIndex;
         try {
-            deleteIndex = Integer.parseInt(matcher.group("index").trim());
-        } catch (NumberFormatException e) {
-            return new InvalidCommand("Please input a valid index.");
+            deleteExpenseIndex = parseExpenseIndex(userGivenIndex);
+        } catch (InvalidExpenseIndexException e) {
+            return new InvalidCommand(e.getMessage());
         }
-        if (deleteIndex <= 0) {
-            return new InvalidCommand("Please input a valid index.");
-        }
+        assert deleteExpenseIndex >= 1;
         
-        return new DeleteExpenseCommand(deleteIndex);
+        return new DeleteExpenseCommand(deleteExpenseIndex);
     }
 
     /**
@@ -204,17 +204,16 @@ public class Parser {
             return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
 
-        int deleteIndex;
+        String userGivenIndex = matcher.group("index").trim();
+        int deleteIncomeIndex;
         try {
-            deleteIndex = Integer.parseInt(matcher.group("index").trim());
-        } catch (NumberFormatException e) {
-            return new InvalidCommand("Please input a valid index.");
+            deleteIncomeIndex = parseIncomeIndex(userGivenIndex);
+        } catch (InvalidIncomeIndexException e) {
+            return new InvalidCommand(e.getMessage());
         }
-        if (deleteIndex <= 0) {
-            return new InvalidCommand("Please input a valid index.");
-        }
+        assert deleteIncomeIndex >= 1;
         
-        return new DeleteIncomeCommand(deleteIndex);
+        return new DeleteIncomeCommand(deleteIncomeIndex);
     }
 
     private Command prepareListExpense(String arguments) {
@@ -250,5 +249,57 @@ public class Parser {
             return new ExitCommand();
         }
         return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+    }
+    
+    private double parseExpense(String userGivenAmount) throws InvalidExpenseException {
+        double expenseAmount;
+        try {
+            expenseAmount = Double.parseDouble(userGivenAmount);
+        } catch (NumberFormatException e) {
+            throw new InvalidExpenseException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        }
+        if (expenseAmount <= 0) {
+            throw new InvalidExpenseException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        }
+        return expenseAmount;
+    }
+
+    private double parseIncome(String userGivenAmount) throws InvalidIncomeException {
+        double incomeAmount;
+        try {
+            incomeAmount = Double.parseDouble(userGivenAmount);
+        } catch (NumberFormatException e) {
+            throw new InvalidIncomeException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        }
+        if (incomeAmount <= 0) {
+            throw new InvalidIncomeException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        }
+        return incomeAmount;
+    }
+
+    private int parseExpenseIndex(String userGivenIndex) throws InvalidExpenseIndexException {
+        int deleteExpenseIndex;
+        try {
+            deleteExpenseIndex = Integer.parseInt(userGivenIndex);
+        } catch (NumberFormatException e) {
+            throw new InvalidExpenseIndexException(Messages.N0N_NUMERIC_INDEX_MESSAGE);
+        }
+        if (deleteExpenseIndex <= 0) {
+            throw new InvalidExpenseIndexException(Messages.NON_POSITIVE_INDEX_MESSAGE);
+        }
+        return deleteExpenseIndex;
+    }
+
+    private int parseIncomeIndex(String userGivenIndex) throws InvalidIncomeIndexException {
+        int deleteIncomeIndex;
+        try {
+            deleteIncomeIndex = Integer.parseInt(userGivenIndex);
+        } catch (NumberFormatException e) {
+            throw new InvalidIncomeIndexException(Messages.N0N_NUMERIC_INDEX_MESSAGE);
+        }
+        if (deleteIncomeIndex <= 0) {
+            throw new InvalidIncomeIndexException(Messages.NON_POSITIVE_INDEX_MESSAGE);
+        }
+        return deleteIncomeIndex;
     }
 }
