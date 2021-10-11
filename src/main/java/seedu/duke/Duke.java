@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.employee.Employee;
 import seedu.duke.employee.EmployeeList;
 import seedu.duke.employee.EmployeeParser;
+import seedu.duke.ingredient.Ingredient;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientParser;
 import seedu.duke.menu.MenuList;
@@ -62,11 +63,18 @@ public class Duke {
 
             } else if (userInput.startsWith("list-menu")) {
 
-            } else if (userInput.startsWith("add-ingredients")) {
+            } else if (userInput.startsWith("add-ingredient")) {
+                String[] description = userInput.trim().split("\\|", 3);
+                Ingredient newIngredient = new Ingredient(description[1], description[2]);
+                ingredientParser.addIngredient(ingredientList, newIngredient);
 
-            } else if (userInput.startsWith("remove-ingredients")) {
+            } else if (userInput.startsWith("remove-ingredient")) {
+                String[] description = userInput.trim().split(" ", 2);
+                int deletedIngredientIndex = Integer.parseInt(description[1]) - 1;
+                ingredientParser.deleteIngredient(ingredientList, deletedIngredientIndex);
 
-            } else if (userInput.startsWith("list-ingredients")) {
+            } else if (userInput.startsWith("list-ingredient")) {
+                ingredientParser.listIngredient(ingredientList);
 
             } else if (userInput.startsWith("bye")) {
                 isBye = true;
