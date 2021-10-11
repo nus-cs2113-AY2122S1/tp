@@ -2,7 +2,10 @@ package seedu.duke.employee;
 
 public class EmployeeParser {
 
-    public void addEmployee(EmployeeList masterList, Employee employee) {
+    public void addEmployee(String[] command, EmployeeList masterList) {
+
+        Employee employee = new Employee(command[1], command[2]);
+
         masterList.employeeList.add(employee);
         masterList.totalEmployee += 1;
 
@@ -13,7 +16,13 @@ public class EmployeeParser {
 
     }
 
-    public void deleteEmployee(EmployeeList masterList, int employeeIndex) {
+    public void loadEmployeeFromStorage(EmployeeList masterList, Employee employee){
+        masterList.employeeList.add(employee);
+        masterList.totalEmployee += 1;
+    }
+
+    public void deleteEmployee(String[] command, EmployeeList masterList) {
+        int employeeIndex = Integer.parseInt(command[1]) - 1;
         if (masterList.totalEmployee < 1) {
             return;
         }
