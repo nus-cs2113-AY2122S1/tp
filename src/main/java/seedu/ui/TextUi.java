@@ -114,7 +114,8 @@ public class TextUi {
 
     public static void invalidFlagMessage() {
         String message = "There appears to be a flag that is not recognised.\n"
-                + "Please try again with a valid flag.\n" + "  -n NAME\n" + "  -g GITHUB";
+                + "Please try again with a valid flag.\n" + "  -n NAME\n" + "  -g GITHUB\n" + "  -l LINKEDIN\n"
+                + "  -te TELEGRAM\n" + "  -tw TWITTER\n" + "  -e EMAIL";
         printDoubleLineMessage(message);
     }
 
@@ -125,7 +126,8 @@ public class TextUi {
 
     public static void missingDetailMessage() {
         String message = "There are missing details.\n" + "Please remove any flags with no details, \n"
-                + "and ensure that your flags used are correct:\n" + "  -n NAME\n" + "  -g GITHUB";
+                + "and ensure that your flags used are correct:\n" + "  -n NAME\n" + "  -g GITHUB\n" + "  -l LINKEDIN\n"
+                + "  -te TELEGRAM\n" + "  -tw TWITTER\n" + "  -e EMAIL";
         printDoubleLineMessage(message);
     }
 
