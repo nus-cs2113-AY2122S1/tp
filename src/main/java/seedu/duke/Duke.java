@@ -46,12 +46,15 @@ public class Duke {
                 Employee newEmployee = new Employee(description[1], description[2]);
                 employeeParser.addEmployee(employeeList, newEmployee);
 
-                System.out.println("I have added: ");
-                System.out.println(employeeList.employeeList.get(0));
-
             } else if (userInput.startsWith("remove-employee")) {
 
+                String[] description = userInput.trim().split(" ", 2);
+                int employeeIndex = Integer.parseInt(description[1]) - 1;
+                employeeParser.deleteEmployee(employeeList, employeeIndex);
+
             } else if (userInput.startsWith("list-employee")) {
+
+                employeeParser.listEmployee(employeeList);
 
             } else if (userInput.startsWith("add-menu")) {
 
