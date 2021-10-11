@@ -1,46 +1,24 @@
 package seedu.duke.task;
 
-import java.util.Date;
-
 public abstract class Task {
 
     static final PriorityEnum DEFAULT_PRIORITY = PriorityEnum.MEDIUM;
-    static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
 
     String description;
-    PriorityEnum priorityEnum;
-    RecurrenceEnum recurranceEnum;
-    Date date;
+    PriorityEnum priority;
 
     protected Task(String description) {
         this.description = description;
-        setPriorityEnum(DEFAULT_PRIORITY);
-        setRecurranceEnum(DEFAULT_RECURRENCE);
+        this.priority = DEFAULT_PRIORITY;
     }
 
-    protected Task(String description, Date date) {
+    protected Task(String description, PriorityEnum priority) {
         this(description);
-        setDate(date);
+        this.priority = priority;
     }
 
-    protected Task(String description, Date date, RecurrenceEnum recurranceEnum) {
-        this(description, date);
-        setRecurranceEnum(recurranceEnum);
-    }
-
-    protected Task(String description, PriorityEnum priorityEnum) {
-        this(description);
-        setPriorityEnum(priorityEnum);
-    }
-
-    protected Task(String description, Date date, PriorityEnum priorityEnum) {
-        this(description, date);
-        setPriorityEnum(priorityEnum);
-    }
-
-    protected Task(String description, Date date, RecurrenceEnum recurranceEnum, PriorityEnum priorityEnum) {
-        this(description, date, priorityEnum);
-        setRecurranceEnum(recurranceEnum);
+    public String getTaskEntryDescription() {
+        return this.description + " [" + this.priority + "]";
     }
 
     public String getDescription() {
@@ -51,27 +29,12 @@ public abstract class Task {
         this.description = description;
     }
 
-    public PriorityEnum getPriorityEnum() {
-        return priorityEnum;
+    public PriorityEnum getPriority() {
+        return priority;
     }
 
-    public void setPriorityEnum(PriorityEnum priorityEnum) {
-        this.priorityEnum = priorityEnum;
+    public void setPriority(PriorityEnum priority) {
+        this.priority = priority;
     }
 
-    public RecurrenceEnum getRecurranceEnum() {
-        return recurranceEnum;
-    }
-
-    public void setRecurranceEnum(RecurrenceEnum recurranceEnum) {
-        this.recurranceEnum = recurranceEnum;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }

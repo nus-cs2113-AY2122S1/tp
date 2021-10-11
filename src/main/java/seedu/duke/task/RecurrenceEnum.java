@@ -1,5 +1,5 @@
 package seedu.duke.task;
 
 public enum RecurrenceEnum {
-    NONE, DAILY, MONTHLY, YEARLY;
+    NONE, DAILY, WEEKLY, MONTHLY, YEARLY;
 }
