@@ -19,13 +19,13 @@ public class LinkCommandParser extends CommandParser {
         LinkCommandParser parser = new LinkCommandParser();
         parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
         parser.addCommand(CommonFormat.COMMAND_ADD, new AddLinkCommand());
-        parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand<Class<Link>>(Link.class));
-        parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand<Class<Link>>(Link.class));
+        parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand(Link.class));
+        parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand(Link.class));
         return parser;
     }
 
     @Override
     public String getWorkspaceBanner(NusModule module) {
-        return String.format(Messages.SCHEDULE_BANNER, module.getLinks().size());
+        return String.format(Messages.SCHEDULE_BANNER, module.getContentManager(Link.class).getContents().size());
     }
 }
