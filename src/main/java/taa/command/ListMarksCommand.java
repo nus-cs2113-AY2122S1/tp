@@ -60,13 +60,14 @@ public class ListMarksCommand extends Command{
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
         if (module.getNumberOfStudents() <= 0) {
+            //TODO no students in assessment message
             throw new TaaException("No students to list!");
         }
 
         AssessmentList list = module.getAssessmentList();
         Assessment assessment = list.getAssessment(argumentMap.get(KEY_ASSESSMENT_NAME));
         if (assessment == null) {
-            // TODO non-existent assessment error message
+            // TODO no such assessment message
             throw new TaaException("Assessment does not exist!");
         }
 
