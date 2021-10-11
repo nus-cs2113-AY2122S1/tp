@@ -182,7 +182,7 @@ public class Parser {
      *
      * @param args Command arguments.
      * @return a AddRecipeCommand with the recipe name and the ingredients if successful
-     * and an IncorrectCommand if not.
+     *     and an IncorrectCommand if not.
      */
     private static Command prepareAddRecipe(String args) {
         final ArgParser argParser = new ArgParser(PREFIX_RECIPE, PREFIX_INGREDIENT, PREFIX_QUANTITY);
