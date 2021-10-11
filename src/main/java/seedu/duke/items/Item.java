@@ -2,6 +2,8 @@ package seedu.duke.items;
 
 import java.time.LocalDateTime;
 
+import seedu.duke.Parser;
+
 public abstract class Item {
 
     protected String type;
@@ -15,7 +17,7 @@ public abstract class Item {
         this.title = title;
         this.description = description;
         this.dateTime = dateTime;
-        this.isDone = false;
+        isDone = false;
     }
 
     public void setTitle(String title) {
@@ -28,6 +30,14 @@ public abstract class Item {
 
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public void markAsDone() {
+        isDone = true;
+    }
+
+    public void undo() {
+        isDone = false;
     }
 
     public String getItemType() {
@@ -44,5 +54,13 @@ public abstract class Item {
 
     public LocalDateTime getDateTime() {
         return dateTime;
+    }
+
+    public String getStringDateTime() {
+        return Parser.convertDateTime(dateTime);
+    }
+
+    public String getStatusIcon() {
+        return isDone ? "X" : " ";
     }
 }

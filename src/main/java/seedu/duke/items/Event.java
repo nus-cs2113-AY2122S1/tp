@@ -33,6 +33,6 @@ public class Event extends Item {
 
     @Override
     public String toString() {
-        return String.format("[E] %s (at: %s)", this.getTitle(), this.getDateTime());
+        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.getTitle(), this.getStringDateTime());
     }
 }

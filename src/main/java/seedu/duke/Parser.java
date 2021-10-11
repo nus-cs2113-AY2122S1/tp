@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ByeCommand;
+import seedu.duke.commands.DoneUndoCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.SelectCommand;
 import seedu.duke.commands.Command;
@@ -25,6 +26,9 @@ public class Parser {
         switch (command[0]) {
         case "list":
             return new ListCommand(command);
+        case "done":
+        case "undo":
+            return new DoneUndoCommand(command);
         case "delete":
             return new DeleteCommand(command);
         case "add":
@@ -58,7 +62,7 @@ public class Parser {
         return dateTime.format(formatter1);
     }
 
-    public static void bubbleSortTask(ArrayList<Item> list) {
+    public static void bubbleSortItems(ArrayList<Item> list) {
         for (int j = 0; j < list.size() - 1; j++) {
             for (int i = 0; i < list.size() - j - 1; i++) {
                 if (list.get(i + 1).getDateTime().isBefore(list.get(i).getDateTime())) {

@@ -17,6 +17,8 @@ public class EventEncoder {
     public static String encodeEventToString(Event event) {
         return event.getTitle()
                 + " | "
+                + event.getStatusIcon()
+                + " | "
                 + event.getDescription()
                 + " | "
                 + Parser.convertDateTimeForSaving(event.getDateTime())
