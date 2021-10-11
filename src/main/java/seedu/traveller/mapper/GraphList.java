@@ -33,7 +33,7 @@ public class GraphList {
         edgeMatrix[t][s] = w;
         System.out.println("Edge between " + s + " and " + t + " updated to " + w);
         Vertex.updateNeighbour(w, v1, v2);
-        // Vertex.updateNeighbour(w, v2, v1);
+        Vertex.updateNeighbour(w, v2, v1);
     }
 
     public static void createEdge(Double w, Vertex v1, Vertex v2) {
@@ -43,10 +43,11 @@ public class GraphList {
         edgeMatrix[t][s] = w;
         //System.out.println("Edge between " + s + " and " + t + " created and assigned to " + w);
         Vertex.addNeighbour(w, v1, v2);
-        // Vertex.addNeighbour(w, v2, v1);
+        Vertex.addNeighbour(w, v2, v1);
     }
 
     public static boolean edgeExists(Vertex s, Vertex t) {
         return edgeMatrix[s.key][t.key] > 0.0001; //floating point exception
     }
+
 }
