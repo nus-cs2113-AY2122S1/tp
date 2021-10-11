@@ -32,12 +32,12 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "seedu.duke.GetJackd"
 }
 
 shadowJar {
     configurations = [project.configurations.compileClasspath]
-    archiveBaseName = "duke"
+    archiveBaseName = "GetJackd"
     archiveClassifier = null
 }
 

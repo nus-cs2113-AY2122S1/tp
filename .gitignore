@@ -16,6 +16,9 @@ bin/
 # Data folder
 /data/
 
+# UI test files
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
-log
+
+# Log folder
+/log/
