@@ -25,14 +25,14 @@ public class MemberStorage {
             try {
                 dukeMemberFile.createNewFile();
                 initializeMemberFile(dukeMemberFile);
-                System.out.println("file create at " + dukeMemberFile.getCanonicalPath());
+                System.out.println("file created");
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                System.out.println("file loaded from " + dukeMemberFile.getCanonicalPath());
+                System.out.println("file loaded");
             } catch (Exception e) {
                 e.printStackTrace();
             }

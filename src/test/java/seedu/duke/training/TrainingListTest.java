@@ -66,6 +66,12 @@ public class TrainingListTest {
         assertEquals(trainingList.getTrainingVenue(5), "MPSH1");
     }
 
-    //Need test for Edit
+    @Test
+    void editTrainingSchedule() {
+        final String input = "edit /t 1 /a 30 Oct 2021 /v MPSH 3";
+        Parser.editTraining(trainingList, input);
+        assertEquals(trainingList.getTrainingTime(1), "30 Oct 2021");
+        assertEquals(trainingList.getTrainingVenue(1), "MPSH 3");
+    }
 
 }

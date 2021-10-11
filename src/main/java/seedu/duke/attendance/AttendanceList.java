@@ -1,6 +1,7 @@
 package seedu.duke.attendance;
 
 import java.util.ArrayList;
+import java.util.SplittableRandom;
 
 public class AttendanceList {
 
@@ -43,4 +44,27 @@ public class AttendanceList {
             throw new IndexOutOfBoundsException(e.getMessage());
         }
     }
+
+    public int getAttendanceSize() { //added by xy
+        return attendanceList.size();
+    }
+
+  /*  public String getStudentNumber(int index ){
+         AttendanceList.get(index);
+    }
+
+    public String getTrainingName(int index ){
+
+    }
+
+    public String getVenue(int index ){
+
+    }
+
+    public String getTime(int index ){
+
+    }
+
+    */
+
 }
