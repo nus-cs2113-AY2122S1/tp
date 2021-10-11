@@ -1,8 +1,9 @@
-package seedu.duke.command;
+package seedu.duke;
 
 public class Ui {
-    protected String LINE_DIVIDER = "____________________________________________________________";
-    protected String START_LOGO =
+    //Todo help
+    private static final String LINE_DIVIDER = "____________________________________________________________";
+    private static final String START_LOGO =
             "################################################################################################################\n" +
             "#  ________  ______    ______   _______            ______           _______    ______   __       __   ______   #\n" +
             "# /        |/      \\  /      \\ /       \\          /      \\         /       \\  /      \\ /  \\     /  | /      \\  #\n" +
@@ -15,7 +16,7 @@ public class Ui {
             "# $$/       $$$$$$/   $$$$$$/  $$$$$$$/           $$$$$$/          $$/   $$/ $$/   $$/ $$/      $$/ $$/   $$/  #\n" +
                     "################################################################################################################\n";
 
-    protected String EXIT_LOGO =
+    private static final String EXIT_LOGO =
             "###########################################################################\n" +
                     "#           _____                _____                    _____           #\n" +
                     "#          /\\    \\              |\\    \\                  /\\    \\          #\n" +
@@ -40,33 +41,34 @@ public class Ui {
                     "#          ~~                                            \\/____/         #\n" +
                             "###########################################################################";
 
-    protected String WELCOME_MESSSAGE = START_LOGO + System.lineSeparator()
-            + "Hello, welcome to FOOD-O-RAMA! The number one solution for food waste management." + System.lineSeparator()
+    private static final String WELCOME_MESSSAGE = START_LOGO + System.lineSeparator()
+            + "Hello, welcome to FOOD-O-RAMA! The number one solution for food waste management."
+            + System.lineSeparator()
             + "Type a command to get us started!" + System.lineSeparator()
             + LINE_DIVIDER;
 
-    protected String EXIT_MESSAGE = EXIT_LOGO + System.lineSeparator()
+    private static final String EXIT_MESSAGE = EXIT_LOGO + System.lineSeparator()
             + "Thank you for using Food-O-Rama to track your food wastage." + System.lineSeparator()
             + "Have a nice day!" + System.lineSeparator()
             + LINE_DIVIDER;
 
-    protected String INVALID_COMMAND = LINE_DIVIDER + System.lineSeparator()
+    private static final String INVALID_COMMAND = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, that is an invalid command." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    protected String LIST_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
+    private static final String LIST_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
             + "Missing parameters. Please input: list <TYPE>" + System.lineSeparator()
             + LINE_DIVIDER;
 
-    protected String DISH_NOTEXIST = LINE_DIVIDER + System.lineSeparator()
+    private static final String DISH_NOTEXIST = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, this dish does not exist in your list." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    protected String DISH_EXISTS = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, this dish does not exist in your list." + System.lineSeparator()
+    private static final String DISH_EXISTS = LINE_DIVIDER + System.lineSeparator()
+            + "Sorry, this dish already exists in your list." + System.lineSeparator()
             + LINE_DIVIDER;
 
-    protected String INGR_NOTEXIST = LINE_DIVIDER + System.lineSeparator()
+    private static final String INGR_NOTEXIST = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, this ingredient does not exist in your list." + System.lineSeparator()
             + LINE_DIVIDER;
 

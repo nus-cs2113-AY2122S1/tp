@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.IngredientList;
+import seedu.duke.Ui;
 
 import java.util.ArrayList;
 import java.util.Scanner;

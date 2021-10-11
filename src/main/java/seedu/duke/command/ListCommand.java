@@ -2,12 +2,15 @@ package seedu.duke.command;
 
 import seedu.duke.DishList;
 import seedu.duke.IngredientList;
+import seedu.duke.Ui;
 
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
     Ui ui = new Ui();
-    public boolean isDish, isIngr, isOther = false;
+    public boolean isDish = false;
+    public boolean isIngr = false;
+    public boolean isOther = false;
 
     @Override
     public void execute(ArrayList<String> parameters) {
