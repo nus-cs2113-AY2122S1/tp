@@ -32,7 +32,8 @@ public class InputParser {
 
         //One parameter commands just add the parameterString
         case ADD_DISH:
-
+        case DELETE_DISH:
+        case DELETE_INGR:
         case LIST:
             parameters.add(parameterString);
             break;

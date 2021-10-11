@@ -35,12 +35,16 @@ public class DishList {
     }
 
     public static void delete(String dishName) {
+        int listSize = dishList.size();
         int dishIndex = DishList.find(dishName);
         if (dishIndex == -1) {
             System.out.println("Dish does not exist");
+            assert dishList.size() == listSize : "list should be of size N";
         } else {
             dishList.remove(dishIndex);
             System.out.println("Dish, " + dishName + " has been removed!");
+            assert dishList.size() == (listSize - 1) : "list should be of size N-1";
+
         }
     }
 }
