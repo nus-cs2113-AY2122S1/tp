@@ -29,7 +29,7 @@ public class AddExerciseCommand extends Command {
 
     /**
      * Instantiates object and sets parameters for adding exercise to Workout.
-     * @param workoutIndex index of Workout in the WorkoutList
+     * @param workoutIndex display index of Workout in the WorkoutList
      * @param description description of exercise
      * @param sets number of sets of exercise
      * @param reps number of repetitions per set

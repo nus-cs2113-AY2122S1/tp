@@ -27,6 +27,12 @@ public class Parser {
     public static final String REPS_KEYWORD = "/r ";
     static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
 
+    /**
+     * Converts raw user input string to a command.
+     *
+     * @param userInputString raw user input string
+     * @return command
+     */
     public Command parseCommand(String userInputString) {
 
         final String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
@@ -65,7 +71,6 @@ public class Parser {
         } catch (GetJackDException e) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + DisplayExercisesCommand.MESSAGE_USAGE);
         }
-
     }
 
     private Command prepareHelpMessage(String commandArgs) {
@@ -136,6 +141,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets arguments required for an exercise, such as workoutIndex, exerciseName, sets and reps.
+     *
+     * @param commandArgs user input without the command word.
+     * @return string array containing workoutIndex, exerciseName, sets and reps.
+     * @throws GetJackDException if any of the above mentioned arguments are empty.
+     */
     private static String[] getExerciseArgs(String commandArgs) throws GetJackDException {
         String args = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
         String[] workoutIndexAndExerciseArgs = splitCommandWordsAndArgs(args, EXERCISE_KEYWORD);
@@ -158,7 +170,6 @@ public class Parser {
         return new String[]{workoutIndex, exerciseName, sets, reps};
     }
 
-
     private Command prepareMarkExerciseAsDone(String commandArgs) {
         try {
             String[] indices = getWorkoutAndExerciseIndices(commandArgs);
@@ -170,6 +181,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets workout and exercise indices.
+     *
+     * @param commandArgs raw input string without the command word.
+     * @return String array of size 2. If there is no workout index, empty String array is returned.
+     *      If there is a workout index but no exercise index, only workout index is returned.
+     *      Otherwise, both workout index and exercise index are returned.
+     */
     private String[] getWorkoutAndExerciseIndices(String commandArgs) {
         if (!commandArgs.contains(WORKOUT_KEYWORD)) {
             return new String[]{"", ""};
@@ -184,6 +203,13 @@ public class Parser {
         return new String[]{workoutIndex, exerciseIndex};
     }
 
+    /**
+     * Given a string and a keyword, this method splits the string around the keyword into 2.
+     *
+     * @param input   String
+     * @param keyword keyword that we want to split the string around.
+     * @return String array of size 2, none of the elements in the array contain the keyword.
+     */
     private static String[] splitCommandWordsAndArgs(String input, String keyword) {
         final String[] split = input.trim().split(keyword, 2);
         if (split.length == 2) {
@@ -192,6 +218,13 @@ public class Parser {
         return new String[]{split[0].trim(), ""};
     }
 
+    /**
+     * Parses a string as an integer.
+     *
+     * @param index String that we want to parse as an integer.
+     * @return integer obtained from the String
+     * @throws GetJackDException if index is empty, or index cannot be parsed as integer.
+     */
     private static int parseArgsAsIndex(String index) throws GetJackDException {
         if (index.isEmpty()) {
             throw new GetJackDException("Error. Workout or exercise index not found.");

@@ -20,6 +20,10 @@ public class CreateWorkoutCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New workout created: %1$s";
     private final Workout toCreate;
 
+    /**
+     * Instantiates object and creates a new workout.
+     * @param description description of new workout.
+     */
     public CreateWorkoutCommand(String description) {
         this.toCreate = new Workout(description);
     }

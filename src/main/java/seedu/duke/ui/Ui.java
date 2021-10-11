@@ -1,22 +1,26 @@
 package seedu.duke.ui;
 
-import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.lists.Workout;
 import seedu.duke.exercises.Exercise;
+import seedu.duke.lists.Workout;
 
 import java.util.ArrayList;
 
 public class Ui {
-    public static final int DISPLAYED_INDEX_OFFSET = 1;
     private static final String INDENT = "\t";
     private static final String NEW_LINE = "\n\t";
     private static final String DIVIDER = "________________________________________________________";
 
+    /**
+     * Prints a straight line.
+     */
     public static void printLineSeparator() {
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Prints welcome message.
+     */
     public static void printWelcomeMessage() {
 
         String logo = "\n"
@@ -34,6 +38,9 @@ public class Ui {
         printLineSeparator();
     }
 
+    /**
+     * Prints message to be displayed upon exit of program.
+     */
     public static void printByeMessage() {
         printLineSeparator();
         System.out.println("Bye. Hope you get your desired body soon, have a great day!");
@@ -41,6 +48,9 @@ public class Ui {
 
     }
 
+    /**
+     * Prints help message.
+     */
     public static void printHelpMessage() {
         printLineSeparator();
         System.out.println("Here's a list of commands and what they do.");
@@ -57,6 +67,10 @@ public class Ui {
         printLineSeparator();
     }
 
+    /**
+     * Prints error message.
+     * @param e exception whose message we want to print.
+     */
     public static void printErrorMessage(GetJackDException e) {
         printLineSeparator();
         System.out.println(e.getMessage());

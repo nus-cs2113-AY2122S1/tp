@@ -24,8 +24,8 @@ public class RemoveExerciseCommand extends Command {
 
     /**
      * Instantiates object and sets workoutIndex and exerciseIndex.
-     * @param workoutIndex index of Workout that the exercise is in
-     * @param exerciseIndex index of exercise to remove
+     * @param workoutIndex display index of Workout that the exercise is in
+     * @param exerciseIndex display index of exercise to remove
      */
     public RemoveExerciseCommand(int workoutIndex, int exerciseIndex) {
         this.workoutIndex = workoutIndex;
