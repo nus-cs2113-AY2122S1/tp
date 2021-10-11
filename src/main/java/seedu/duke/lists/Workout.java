@@ -15,13 +15,13 @@ import static seedu.duke.lists.WorkoutList.LOGGER;
  * Adding, deleting and other operations related to all exercises in the workout will be executed from here.
  */
 public class Workout {
-    private String workoutName;
-    private ArrayList<Exercise> exercises;
+    private final String workoutName;
+    private final ArrayList<Exercise> exercises;
 
     /**
      * Default Constructor.
      *
-     * @param workoutName name that the user gives to the workout routine.
+     * @param workoutName is the name that the user gives to the workout routine
      */
     public Workout(String workoutName) {
         assert !workoutName.isEmpty();
@@ -29,11 +29,20 @@ public class Workout {
         this.workoutName = workoutName;
     }
 
+    /**
+     * Converts the object to a String.
+     *
+     * @return name of workout routine
+     */
+    @Override
+    public String toString() {
+        return getWorkoutName();
+    }
 
     /**
      * To get the name of the Workout.
      *
-     * @return name of the workout routine.
+     * @return name of the workout routine
      */
     public String getWorkoutName() {
         return workoutName;
@@ -42,7 +51,7 @@ public class Workout {
     /**
      * Adds an exercise to the workout routine.
      *
-     * @param exercise exercise that is to be added.
+     * @param exercise is the exercise that is to be added
      */
     public void addExercise(Exercise exercise) {
         assert exercise != null;
@@ -51,64 +60,59 @@ public class Workout {
     }
 
     /**
-     * removes a specific exercise.
+     * Removes a specific exercise.
      *
-     * @param displayIndex 1-based index (as seen by user) of the exercise to be removed.
-     * @return exercise that was removed.
-     * @throws GetJackDException when the index is greater than number of exercises or less than 0.
+     * @param displayIndex is the 1-based index (as seen by user) of the exercise to be removed
+     * @return exercise that was removed
+     * @throws GetJackDException when the index is greater than number of exercises or less than 0
      */
     public Exercise removeExercise(int displayIndex) throws GetJackDException {
         if (displayIndex <= 0 || displayIndex > exercises.size()) {
             throw new GetJackDException("Invalid Exercise Index");
         }
+
         LOGGER.info("Removing Exercise");
+
         return exercises.remove(displayIndex - 1);
     }
 
     /**
      * To get all Exercises in the workout routine.
      *
-     * @return all the exercises stored in the ArrayList.
+     * @return all the exercises stored in the ArrayList
      */
     public ArrayList<Exercise> getAllExercises() {
         return exercises;
     }
 
     /**
-     * returns a specific exercise.
+     * Returns a specific exercise.
      *
-     * @param displayIndex 1-based index (as seen by user) of the exercise to be returned.
-     * @return exercise that was requested for.
-     * @throws GetJackDException when the index is greater than number of exercises or less than 0.
+     * @param displayIndex is the 1-based index (as seen by user) of the exercise to be returned
+     * @return exercise that was requested for
+     * @throws GetJackDException when the index is greater than number of exercises or less than 0
      */
     public Exercise getExercise(int displayIndex) throws GetJackDException {
         if (displayIndex <= 0 || displayIndex > exercises.size()) {
             throw new GetJackDException("Invalid Exercise Index");
         }
-        return exercises.get(displayIndex - 1);
-    }
 
-    /**
-     * Converts the object to a String.
-     *
-     * @return name of workout routine.
-     */
-    @Override
-    public String toString() {
-        return getWorkoutName();
+        return exercises.get(displayIndex - 1);
     }
 
     /**
      * Loops through all the exercise and constructs corresponding ExerciseModel objects, adding together
      * to form a WorkoutModel object to be added to the WorkoutListModel Object.
-     * This is done as WorkoutModel objects are easily convertable to JSONStrings for storage.
+     * This is done as WorkoutModel objects are easily convertible to JSONStrings for storage.
      */
     public void convertToWorkoutStorageModel() {
         LOGGER.info("Generating WorkoutModel");
         WorkoutModel workoutModel = new WorkoutModel(workoutName);
+
         for (Exercise exercise : exercises) {
             exercise.convertToExerciseStorageModel(workoutModel);
         }
+
         WorkoutListModel.addToWorkoutListModel(workoutModel);
     }
 }

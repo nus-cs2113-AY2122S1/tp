@@ -16,13 +16,13 @@ ________________________________________________________
 ________________________________________________________
 Here's a list of commands and what they do.
 To find out more information about the command, such as input format and parameters, enter "help COMMAND" where COMMAND is the command you want to know more about
-"add" : adds an exercise to a workout
-"done" : marks an exercise as done
-"remove" : removes an exercise from a workout
+"add" : Adds an exercise to a workout
+"done" : Marks an exercise as done
+"remove" : Removes an exercise from a workout
 "create" : Creates a new workout
-"delete" : deletes a workout
-"list" : lists all your workouts
-"display" : shows all the exercises in a specified workout
+"delete" : Deletes a workout
+"list" : Lists all your workouts
+"display" : Shows all the exercises in a specified workout
 "bye" : Ends the program
 ________________________________________________________
 ________________________________________________________

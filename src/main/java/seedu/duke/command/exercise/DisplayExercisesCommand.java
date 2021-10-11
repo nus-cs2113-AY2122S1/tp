@@ -21,20 +21,31 @@ public class DisplayExercisesCommand extends Command {
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX\n"
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3";
     public static final String MESSAGE_EMPTY_WORKOUT = "You have no exercises.";
+
     private final int workoutIndex;
 
     /**
      * Instantiates object and sets parameters for displaying all the exercises in a specified workout.
+     *
      * @param workoutIndex display index of workout in workoutList
      */
     public DisplayExercisesCommand(int workoutIndex) {
         this.workoutIndex = workoutIndex;
     }
 
+    /**
+     * Executes display exercise command to show all the exercises list.
+     *
+     * @param workouts is the list of Workouts
+     * @param ui       is a user-interface object
+     * @param storage  is a storage object
+     * @throws GetJackDException if there is an invalid index used
+     */
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         Workout workout = workouts.getWorkout(workoutIndex);
         ArrayList<Exercise> exercises = workout.getAllExercises();
+
         if (exercises.isEmpty()) {
             ui.showToUser(MESSAGE_EMPTY_WORKOUT);
         } else {
