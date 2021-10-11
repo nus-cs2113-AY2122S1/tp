@@ -30,7 +30,6 @@ public class LoggerUtil {
     }
 
     public static void setupLogger(Logger logger) {
-        assert FILE.exists();
         if (fh != null) {
             logger.setLevel(Level.ALL);
             logger.addHandler(fh);
