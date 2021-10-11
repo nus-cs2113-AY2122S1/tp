@@ -54,7 +54,7 @@ public class Parser {
     }
 
     /**
-     * Parses add command and splits input into ingredient parameters
+     * Parses add command and splits input into ingredient parameters.
      *
      * @param command 1 line of user input
      * @return Ingredient added message
@@ -62,7 +62,9 @@ public class Parser {
 
     private static String parseAddCommand(String command) {
         String[] userInput = command.split(SPACE_SEPARATOR, 2);
-        String ingredientName, ingredientUnit, ingredientExpiry;
+        String ingredientName;
+        String ingredientUnit;
+        String ingredientExpiry;
         double ingredientAmount;
 
         try {
@@ -70,13 +72,12 @@ public class Parser {
             ingredientAmount = AddIngredient.getIngredientAmount(userInput[1]);
             ingredientUnit = AddIngredient.getIngredientUnit(userInput[1]);
             ingredientExpiry = AddIngredient.getIngredientExpiry(userInput[1]);
-        } catch (InsufficientParametersException e){
+        } catch (InsufficientParametersException e) {
             return e.getMessage();
-        }
-        catch (DukeException e){
+        } catch (DukeException e) {
             return "Amount is not a number. Please try again";
         }
-        Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,ingredientUnit, ingredientExpiry);
+        Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnit, ingredientExpiry);
         return new AddCommand(newIngredient).run();
     }
 
