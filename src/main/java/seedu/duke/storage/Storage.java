@@ -1,11 +1,14 @@
-package seedu.duke.storage;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.File;
-import java.util.Scanner;
-import java.io.FileWriter;
-
+//package seedu.duke.storage;
+//
+//import seedu.duke.employee.Employee;
+//import seedu.duke.employee.EmployeeList;
+//
+//import java.io.FileNotFoundException;
+//import java.io.IOException;
+//import java.io.File;
+//import java.util.Scanner;
+//import java.io.FileWriter;
+//
 //public class Storage {
 //
 //    public final static String MESSAGE_INVALID_FILE = "File cannot be found.";
@@ -26,11 +29,11 @@ import java.io.FileWriter;
 //     * @return the tasksList of tasks in file.
 //     * @throws DukeException if the file is not found.
 //     */
-//    public TaskList load() throws DukeException {
-//        final TaskList taskLists = new TaskList();
+//    public EmployeeList load() throws DukeException {
+//        final EmployeeList employeeList = new EmployeeList();
 //        File file = new File(path);
 //        if (!file.exists()) {
-//            return new TaskList();
+//            return new EmployeeList();
 //        }
 //        try {
 //            Scanner fileReader = new Scanner(file);
@@ -39,8 +42,8 @@ import java.io.FileWriter;
 //                if (line.isEmpty()) {
 //                    continue;
 //                }
-//                Task task = decodeTask(line);
-//                taskLists.add(task);
+//                Employee newEmployee = decodeEmployee(line);
+//                EmployeeList.add(task);
 //            }
 //            fileReader.close();
 //        } catch (FileNotFoundException e) {
