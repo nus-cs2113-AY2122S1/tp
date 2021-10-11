@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.attendance.AttendanceList;
+import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
 
 import java.io.File;
@@ -46,7 +47,28 @@ public class MemberStorage {
      * @param memberList
      */
     public static void loadDukeAttendanceFile(File dukeMemberFile, MemberList memberList) {
-        //laze bro
+        String name;
+        String studentNumber;
+        String gender;
+        String phoneNumber;
+        try  {
+            Scanner dukeMemberScanner = new Scanner(dukeMemberFile);
+            dukeMemberScanner.nextLine();//skips the first header row
+            while(dukeMemberScanner.hasNextLine()) {
+                String fullMemberDetails = dukeMemberScanner.nextLine();
+                System.out.println(fullMemberDetails);
+                String[] memberDetails = fullMemberDetails.split("\\," , 4);
+
+                name = memberDetails[0];//used this to prevent magic numbers
+                studentNumber = memberDetails[1];
+                gender =  memberDetails[2];
+                phoneNumber = memberDetails[3];
+                Member member = new Member(name,studentNumber,gender,phoneNumber);
+                memberList.addMember(member);
+            }
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     /**

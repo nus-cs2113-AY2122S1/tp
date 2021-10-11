@@ -66,8 +66,9 @@ public class Entry {
             break;
         case EXIT_KEYWORD:
             Ui.printExitMessage();
-
             break;
+        default:
+            assert false : keyword;
         }
     }
 }
