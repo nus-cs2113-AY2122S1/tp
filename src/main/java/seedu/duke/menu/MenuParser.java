@@ -24,8 +24,8 @@ public class MenuParser {
             masterList.menuList.remove(targetIndex);
         }
 
-        assert 0 < targetIndex;
-        assert targetIndex < masterList.menuSize;
+        assert 0 < targetIndex : "Index of menu item to be removed should be more than 0";
+        assert targetIndex < masterList.menuSize : "Index of menu item to be removed should be less than the menu size";
 
         System.out.println("I have removed: ");
         System.out.println(removedMenuItem);
