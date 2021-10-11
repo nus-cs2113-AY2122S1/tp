@@ -65,5 +65,9 @@ public class IngredientList {
         }
     }
 
+    public void add(Ingredient ingredient) {
+        ingredientList.add(ingredient);
+    }
+
 
 }

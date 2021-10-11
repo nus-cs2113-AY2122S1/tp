@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
@@ -52,23 +54,7 @@ public class Parser {
     }
 
     private static String parseListCommand() throws DukeException {
-        String resultMsg = "";
-        int i;
-
-        if (IngredientList.getInstance().getInventoryStock() == 0) {
-            resultMsg = "Inventory is empty!";
-            return resultMsg;
-        }
-        assert (IngredientList.getInstance().getInventoryStock() > 0);
-        for (i = 0; i < IngredientList.getInstance().getInventoryStock() - 1; i++) {
-            resultMsg += (i + 1) + "."
-                    + IngredientList.getInstance().getIngredientInfo(i + 1)
-                    + '\n' + '\t';
-
-        }
-        resultMsg = resultMsg + IngredientList.getInstance().getInventoryStock() + "."
-                + IngredientList.getInstance().getIngredientInfo(i + 1);
-
+        String resultMsg = new ListCommand().run();
         return resultMsg;
     }
 
@@ -77,14 +63,13 @@ public class Parser {
         String resultMsg;
 
         if (detail.length() <= 0) {
-            resultMsg = "Nothing to delete!";
+            resultMsg = "Nothing to remove!";
             return resultMsg;
         }
+
         try {
             int ingredientRemoveNumber = Integer.parseInt(detail);
-            Ingredient removedIngredient = IngredientList.getInstance().remove(ingredientRemoveNumber);
-            resultMsg = "Noted. This has been removed:\n"
-                    + "t" + removedIngredient.toString();
+            resultMsg = new DeleteCommand(ingredientRemoveNumber).run();
             return resultMsg;
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid number format!");
