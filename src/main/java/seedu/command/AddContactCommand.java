@@ -46,7 +46,7 @@ public class AddContactCommand extends Command {
     }
 
     public void execute() {
-        Contact addedContact = new Contact(name, github);
+        Contact addedContact = new Contact(name, github, linkedin, telegram, twitter, email);
         contactList.addContact(addedContact);
         TextUi.addContactMessage(name, contactList.getListSize());
     }
