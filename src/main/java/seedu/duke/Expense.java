@@ -29,12 +29,7 @@ public class Expense {
     }
 
     public double getCostPerPerson() {
-        int totalPeople = personsList.size();
-        double costPerPerson = amountSpent / totalPeople;
-        System.out.println("Expense: " + amountSpent);
-        System.out.println("Shared among: " + totalPeople + " people");
-
-        return costPerPerson;
+        return amountSpent / personsList.size();
     }
 
     public void addPerson(Person p) {
