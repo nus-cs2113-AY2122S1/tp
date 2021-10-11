@@ -156,9 +156,5 @@ public class Traveller {
             }
         }
     }
-
-    public static void test() {
-        return;
-    }
 }
 
