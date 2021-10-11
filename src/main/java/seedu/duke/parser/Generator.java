@@ -15,7 +15,7 @@ import seedu.duke.exception.GetJackDException;
 
 import java.util.Locale;
 
-public class Generator implements Parser {
+public class Generator extends Parser {
     public static final String WORKOUT_KEYWORD = "/w ";
     static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
 
@@ -26,7 +26,7 @@ public class Generator implements Parser {
      * @return command
      */
     public Command generateCommand(String userInputString) {
-        final String[] commandTypeAndParams = Parser.splitCommandWordsAndArgs(userInputString, "\\s+");
+        final String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
         final String commandType = commandTypeAndParams[0].trim().toLowerCase(Locale.ROOT);
         final String commandArgs = commandTypeAndParams[1].trim();
 
@@ -67,8 +67,8 @@ public class Generator implements Parser {
 
     private Command prepareDeleteWorkout(String commandArgs) {
         try {
-            String[] indices = Parser.getWorkoutAndExerciseIndices(commandArgs);
-            int workoutIndex = Parser.parseArgsAsIndex(indices[0]);
+            String[] indices = getWorkoutAndExerciseIndices(commandArgs);
+            int workoutIndex = parseArgsAsIndex(indices[0]);
 
             return new DeleteWorkoutCommand(workoutIndex);
         } catch (GetJackDException e) {
@@ -78,8 +78,8 @@ public class Generator implements Parser {
 
     private Command prepareDisplayExercises(String commandArgs) {
         try {
-            String[] indices = Parser.getWorkoutAndExerciseIndices(commandArgs);
-            int workoutIndex = Parser.parseArgsAsIndex(indices[0]);
+            String[] indices = getWorkoutAndExerciseIndices(commandArgs);
+            int workoutIndex = parseArgsAsIndex(indices[0]);
 
             return new DisplayExercisesCommand(workoutIndex);
         } catch (GetJackDException e) {
@@ -89,11 +89,11 @@ public class Generator implements Parser {
 
     private Command prepareAddExercise(String commandArgs) {
         try {
-            String[] exerciseArgs = Parser.getExerciseArgs(commandArgs);
+            String[] exerciseArgs = getExerciseArgs(commandArgs);
             String exerciseName = exerciseArgs[1].trim();
-            int workoutIndex = Parser.parseArgsAsIndex(exerciseArgs[0]);
-            int sets = Parser.parseArgsAsIndex(exerciseArgs[2]);
-            int reps = Parser.parseArgsAsIndex(exerciseArgs[3]);
+            int workoutIndex = parseArgsAsIndex(exerciseArgs[0]);
+            int sets = parseArgsAsIndex(exerciseArgs[2]);
+            int reps = parseArgsAsIndex(exerciseArgs[3]);
 
             return new AddExerciseCommand(workoutIndex, exerciseName, sets, reps);
         } catch (GetJackDException e) {
@@ -103,9 +103,9 @@ public class Generator implements Parser {
 
     private Command prepareRemoveExercise(String commandArgs) {
         try {
-            String[] indices = Parser.getWorkoutAndExerciseIndices(commandArgs);
-            int workoutIndex = Parser.parseArgsAsIndex(indices[0]);
-            int exerciseIndex = Parser.parseArgsAsIndex(indices[1]);
+            String[] indices = getWorkoutAndExerciseIndices(commandArgs);
+            int workoutIndex = parseArgsAsIndex(indices[0]);
+            int exerciseIndex = parseArgsAsIndex(indices[1]);
 
             return new RemoveExerciseCommand(workoutIndex, exerciseIndex);
         } catch (GetJackDException e) {
@@ -115,9 +115,9 @@ public class Generator implements Parser {
 
     private Command prepareMarkExerciseAsDone(String commandArgs) {
         try {
-            String[] indices = Parser.getWorkoutAndExerciseIndices(commandArgs);
-            int workoutIndex = Parser.parseArgsAsIndex(indices[0]);
-            int exerciseIndex = Parser.parseArgsAsIndex(indices[1]);
+            String[] indices = getWorkoutAndExerciseIndices(commandArgs);
+            int workoutIndex = parseArgsAsIndex(indices[0]);
+            int exerciseIndex = parseArgsAsIndex(indices[1]);
 
             return new MarkExerciseAsDoneCommand(workoutIndex, exerciseIndex);
         } catch (GetJackDException e) {

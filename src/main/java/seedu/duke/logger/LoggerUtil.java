@@ -11,7 +11,7 @@ import java.util.logging.SimpleFormatter;
 public class LoggerUtil {
     private static final String LOGGER_PATH = "log/programLog.log";
     private static final File FILE = new File(LOGGER_PATH);
-    private static final Logger LOGGER = Logger.getLogger(LoggerUtil.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(LoggerUtil.class.getName());
     public static FileHandler fh;
 
     public static void loggerUtilSetup() {
