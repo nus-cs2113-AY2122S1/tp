@@ -1,6 +1,8 @@
 package taa.assessment;
 
 public class Assessment {
+    public static final double[] WEIGHTAGE_RANGE = {0, 100};
+
     private String name;
     private double weightage;
 
@@ -26,6 +28,6 @@ public class Assessment {
      */
     @Override
     public String toString() {
-        return String.format("%s (%.1f%%)", name, weightage);
+        return String.format("%s (%,.2f%%)", name, weightage);
     }
 }
