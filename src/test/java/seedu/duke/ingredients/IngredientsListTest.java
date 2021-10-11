@@ -12,7 +12,7 @@ public class IngredientsListTest {
             int ingredientNumber = -1;
             IngredientList.getInstance().getIngredientInfo(ingredientNumber);
         } catch (DukeException e) {
-            assertEquals("Ingredient number have not existed!", e.getMessage());
+            assertEquals("Ingredient number does not exist!", e.getMessage());
         }
     }
 
