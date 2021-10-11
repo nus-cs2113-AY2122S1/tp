@@ -7,6 +7,9 @@ import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
+import java.util.logging.Logger;
+
+import static seedu.duke.logger.LoggerUtil.setupLogger;
 import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 
 /**
@@ -19,6 +22,7 @@ public class DeleteWorkoutCommand extends Command {
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX\n"
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1";
     public static final String MESSAGE_SUCCESS = "Deleted workout: %1$s";
+    private static final Logger LOGGER = Logger.getLogger(DeleteWorkoutCommand.class.getName());
 
     public int getWorkoutIndex() {
         return workoutIndex;
@@ -28,6 +32,7 @@ public class DeleteWorkoutCommand extends Command {
 
     public DeleteWorkoutCommand(int workoutIndex) {
         this.workoutIndex = workoutIndex;
+        setupLogger(LOGGER);
     }
 
     @Override
@@ -38,6 +43,7 @@ public class DeleteWorkoutCommand extends Command {
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {
+            LOGGER.info("delete workout failed - workout not found");
             throw new GetJackDException(ERROR_MESSAGE_WORKOUT_NOT_FOUND);
         }
     }

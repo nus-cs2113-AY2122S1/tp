@@ -10,6 +10,7 @@ import seedu.duke.ui.Ui;
 /**
  * To create a new Workout
  */
+
 import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 
 public class CreateWorkoutCommand extends Command {
