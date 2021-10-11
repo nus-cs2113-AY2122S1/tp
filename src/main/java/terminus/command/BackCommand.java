@@ -1,9 +1,11 @@
 package terminus.command;
 
+import com.sun.tools.javac.Main;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
+import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
 import terminus.ui.Ui;
 
