@@ -29,7 +29,9 @@ public class Member {
         setPhoneNumber(phoneNumber);
     }
 
-    public Member(){}
+    public Member() {
+
+    }
 
     public Member(String name, String studentNumber, String gender, String phoneNumber) {
         setName(name);
@@ -83,9 +85,13 @@ public class Member {
         this.phoneNumber = Integer.parseInt(phoneNumber);
     }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public String getStudentNumber() { return studentNumber; }
+    public String getStudentNumber() {
+        return studentNumber;
+    }
 
     /**
      * Formats description of member to be displayed to user.
