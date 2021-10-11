@@ -35,6 +35,8 @@ public class MarkExerciseAsDoneCommand extends Command {
     public MarkExerciseAsDoneCommand(int workoutIndex, int exerciseIndex) {
         this.workoutIndex = workoutIndex;
         this.exerciseIndex = exerciseIndex;
+        assert workoutIndex >= 0;
+        assert exerciseIndex >= 0;
         setupLogger(LOGGER);
     }
 

@@ -32,6 +32,7 @@ public class DeleteWorkoutCommand extends Command {
 
     public DeleteWorkoutCommand(int workoutIndex) {
         this.workoutIndex = workoutIndex;
+        assert workoutIndex >= 0;
         setupLogger(LOGGER);
     }
 
