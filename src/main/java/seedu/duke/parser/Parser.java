@@ -92,9 +92,6 @@ public class Parser {
         if (params.length < 2 || params.length > 3) {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
-        if ((params.length == 3) && (userResponse.indexOf(" -d ") > userResponse.indexOf(" -i "))) {
-            throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
-        }
         String title = params[0].strip();
         String dayOfTheWeek = params[1].strip();
         if (!is(dayOfTheWeek)) {
@@ -105,6 +102,9 @@ public class Parser {
         case 2:
             return new AddTaskCommand(title, dayOfTheWeek, "");
         case 3:
+            if (userResponse.indexOf(" -d ") > userResponse.indexOf(" -i ")) {
+                throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
+            }
             String information = params[2].strip();
             return new AddTaskCommand(title, dayOfTheWeek, information);
         default:
