@@ -29,7 +29,14 @@ public class Member {
         setPhoneNumber(phoneNumber);
     }
 
-    public Member() {
+    public Member(){}
+
+    public Member(String name, String studentNumber, String gender, String phoneNumber) {
+        setName(name);
+        setStudentNumber(studentNumber);
+        setAsActiveMember();
+        setGender(gender);
+        setPhoneNumber(phoneNumber);
     }
 
     public Member(Member member) {
@@ -52,6 +59,10 @@ public class Member {
         this.gender = gender;
     }
 
+    public void setGender(String gender) {
+        this.gender = gender.charAt(0);
+    }
+
     public boolean checkIfActive() {
         return isActive;
     }
@@ -66,6 +77,10 @@ public class Member {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = Integer.parseInt(phoneNumber);
     }
 
     public String getName() { return name; }
