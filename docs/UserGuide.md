@@ -33,8 +33,10 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
 1. `add` This adds entries to the Entry List stored in Duke.
     * The `add` keyword takes in 3 different arguments:
       * `/m` adds member-related information.
-        * use `/n` to input _name_ of your member. ???
+        * use `/n` to input _name_ of your member. 
         * use `/s` to input _student number_ of your member.
+        * use `/g` to input _gender_ of your member.
+        * use `/p` to input _phone number_ of your member.
       * `/t` adds training-related information.
         * use `/n` to input _name_ of the training entry.
         * use `/a` to input _timing_ of the training entry.
@@ -50,13 +52,13 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
       * add [/t </a TRAINING_TIME> </v TRAINING_VENUE>]
       * add [/att </m MEMBER_NAME> </s STUDENT_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]
     * **Examples:**
-      - `add /m /n John Hwee /s A0248192K`
+      - `add /m /n John Hwee /s A0248192K /g M /p 91128888`
       - `add /t /n Weekly December Training 2 /a 12 Dec 2022 /v MPSH 2`
       - `add /att /m Izdiyad /s A0123456Z /n Monday Training /a 1800 /v MPSH6`
       
     * **Expected Output:**
    ```
-   Added a Member: Name: John Hwee | Student Number: A0248192K | Gender:   | Phone Number: 0   
+   Added a Member: Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
    
    Added a Training entry:
    Training Name: Weekly December Training 2 | Venue: MPSH2 | Time: 12 Dec 2022
@@ -77,7 +79,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    
    * **Expected Output:**
    ```
-   insert member list eg.
+   [1] Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
     ```
     ```
    [1] Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
@@ -98,6 +100,10 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
       - `delete /att 3`
     
     * **Expected Output:**
+    ```
+    You have deleted: 
+    Member Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888
+   ```
    ```
     You have deleted: 
     Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
@@ -117,7 +123,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
       * `/v <NEW_VENUE>` edits the current training _venue_
       
     * **Examples:**
-      - `edit /m 1 /n Juan Hwee /s A0123456B`
+      - `edit /m 1 /n Juan Hwee /s A0123456B /g F /p 90001111`
       - `edit /t 1 /n Weekly December Training 3 /a 13 Dec 2022 /v MPSH 3 | list /t`
     
     * **Expected Output:**
@@ -130,7 +136,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
 
 A 'cheat sheet' of commands here
 
-* add [/m </n MEMBER_NAME> </s STUDENT_NUMBER>] [/t </at TRAINING_TIME> </v TRAINING_VENUE>] [/att </m MEMBER_NAME> </s STUDENT_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]
+* add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>] [/t </at TRAINING_TIME> </v TRAINING_VENUE>] [/att </m MEMBER_NAME> </s STUDENT_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]
 * delete [/m <MEMBER_INDEX_NUMBER>] [/t <TRAINING_INDEX_NUMBER>] [/att <ATTENDANCE_INDEX_NUMBER>]
 * edit
 * list [/m] [/t] [/att]

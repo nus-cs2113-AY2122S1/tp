@@ -1,10 +1,12 @@
 package seedu.duke.training;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.*;
 
 public class TrainingListTest {
 
@@ -37,7 +39,33 @@ public class TrainingListTest {
         trainingList.deleteTrainingSchedule(3);
         trainingList.deleteTrainingSchedule(2);
         trainingList.deleteTrainingSchedule(1);
-        assertTrue(trainingList.getTrainingList().size() == 0);
+        assertEquals(0, trainingList.getTrainingList().size());
     }
+
+    @Test
+    void getTrainingDetails() {
+        final String input = "add /t /n October Friday Weekly Training 1 /a 1 Oct 2021 /v MPSH 1";
+        final String expectedOutput = "Training Name: October Friday Weekly Training 1 | Venue: MPSH 1 | Time: 1 Oct "
+                + "2021";
+        TrainingSchedule training = Parser.getTrainingDescription(input);
+        assertEquals(expectedOutput, training.toString());
+    }
+
+    @Test
+    void deleteOneTrainingDetail() {
+        trainingList.deleteTrainingSchedule(1);
+        assertEquals(3, trainingList.getTrainingList().size());
+    }
+
+    @Test
+    void addTrainingSchedule() {
+        final String input = "add /t /n October Friday Weekly Training 5 /a 29 Oct 2021 /v MPSH1";
+        trainingList.addTrainingSchedule(Parser.getTrainingDescription(input));
+        assertEquals(trainingList.getTrainingName(5), "October Friday Weekly Training 5");
+        assertEquals(trainingList.getTrainingTime(5), "29 Oct 2021");
+        assertEquals(trainingList.getTrainingVenue(5), "MPSH1");
+    }
+
+    //Need test for Edit
 
 }

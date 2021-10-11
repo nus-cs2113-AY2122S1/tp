@@ -25,19 +25,19 @@ public class MemberList {
     }
 
     public String getMemberName(int index){//added by xy
-        return memberList.get(index).name.toString();
+        return memberList.get(index-1).name.toString();
     }
 
     public String getMemberStudentNumber(int index){//added by xy
-        return memberList.get(index).studentNumber.toString();
+        return memberList.get(index-1).studentNumber.toString();
     }
 
     public char getMemberGender(int index){//added by xy
-        return memberList.get(index).gender;
+        return memberList.get(index-1).gender;
     }
 
     public String getMemberPhoneNumber(int index){//added by xy
-        return String.valueOf(memberList.get(index).phoneNumber);
+        return String.valueOf(memberList.get(index-1).phoneNumber);
     }
 
     /**
