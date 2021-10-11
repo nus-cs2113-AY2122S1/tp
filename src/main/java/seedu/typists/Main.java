@@ -1,5 +1,9 @@
 package seedu.typists;
 
+import seedu.typists.exception.InvalidStringInputException;
+import seedu.typists.parser.StringParser;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -17,5 +21,19 @@ public class Main {
 
         Scanner in = new Scanner(System.in);
         System.out.println("Hello " + in.nextLine());
+
+        /**
+         * The following code test on the JUnit test on StringParser
+         */
+        StringParser sp = new StringParser();
+        String str = "Hello|World|How are|you all";
+        List<String> stringParts = null;
+        try {
+            stringParts = sp.splitString(str, "\\|");
+        } catch (InvalidStringInputException e) {
+            e.printStackTrace();
+        }
     }
+
+
 }
