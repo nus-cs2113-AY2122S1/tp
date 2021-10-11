@@ -12,14 +12,13 @@ public class TextUi {
 
     private static final String LINE = "____________________________________________________________\n";
 
-    private final Scanner scanner;
+    private static final Scanner scanner = new Scanner(System.in);
 
     public TextUi() {
-        scanner = new Scanner(System.in);
         initMessage();
     }
 
-    public String getUserInput() {
+    public static String getUserInput() {
         String userInput = scanner.nextLine().trim();
         if (userInput.contains(",")) {
             String newUserInput = userInput.replace(",", "");
@@ -27,6 +26,11 @@ public class TextUi {
             return newUserInput;
         }
         return userInput;
+    }
+
+    public static String getUserDeleteConfirmation() {
+        String userDeleteConfirmation = scanner.nextLine().trim();
+        return userDeleteConfirmation;
     }
 
     // Used for print messages after user inputs
@@ -87,6 +91,17 @@ public class TextUi {
     public static void contactsEmptyListMessage() {
         String message = "You have not stored any contacts in ConTech";
         printDoubleLineMessage(message);
+    }
+
+    public static void deleteContactConfirmationMessage(Contact deleteContact, int index) {
+        String message = "Delete this contact? \n"
+                + index + ". " + "Name: " + deleteContact.getName() + " GitHub: " + deleteContact.getGithub() + "\n"
+                + "Enter \"y\" to delete";
+        printDoubleLineMessage(message);
+    }
+
+    public static void cancelDeleteContactMessage() {
+        String message = "Delete has been cancelled.";
     }
 
     public static void deleteContactMessage(String contactName, int listSize) {
@@ -170,7 +185,7 @@ public class TextUi {
         printBottomLineMessage("Line \"" + line + "\" is corrupted and not loaded.");
     }
 
-    private void forbiddenInputCommaMessage(String newUserInput) {
+    private static void forbiddenInputCommaMessage(String newUserInput) {
         String message = "Due to the storage nature of ConTech, we will remove\n"
                 + "commas (\",\"), and attempt to parse it as:\n"
                 + newUserInput;

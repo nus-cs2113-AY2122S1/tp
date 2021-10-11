@@ -7,6 +7,7 @@ import seedu.command.FailedCommand;
 
 public class DeleteContactCommand extends Command {
     private final int deletedIndex;
+    private final String confirmMessage = "";
 
     public DeleteContactCommand(int deletedIndex) {
         this.deletedIndex = deletedIndex;
@@ -16,7 +17,7 @@ public class DeleteContactCommand extends Command {
         return deletedIndex;
     }
 
-    public void execute() {
+    public void deleteContact() {
         try {
             Contact deletedContact = contactList.getContactAtIndex(deletedIndex);
             this.contactList.deleteContact(deletedIndex);
@@ -24,5 +25,10 @@ public class DeleteContactCommand extends Command {
         } catch (IndexOutOfBoundsException e) {
             TextUi.numOutOfRangeMessage(contactList.getListSize());
         }
+    }
+
+    public void execute() {
+        deleteContact();
+
     }
 }
