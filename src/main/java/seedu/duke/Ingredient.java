@@ -4,19 +4,19 @@ public class Ingredient {
 
     private String ingredientName;
     private double ingredientWeight;
-    private double ingredientWaste_ingr;
-    public double ingredientWaste_dish;
+    private double ingredientWasteIngr;
+    public double ingredientWasteDish;
 
     public Ingredient(String ingredientName, double ingredientWeight) {
         this.ingredientName = ingredientName;
         this.ingredientWeight = ingredientWeight;
-        this.ingredientWaste_ingr = 0;
+        this.ingredientWasteIngr = 0;
     }
 
     public Ingredient(String ingredientName, double ingredientWeight, double ingredientWaste) {
         this.ingredientName = ingredientName;
         this.ingredientWeight = ingredientWeight;
-        this.ingredientWaste_ingr = ingredientWaste;
+        this.ingredientWasteIngr = ingredientWaste;
     }
 
     public String getIngredientName() {
@@ -29,14 +29,14 @@ public class Ingredient {
     }
 
     public void addWaste(Double waste) {
-        ingredientWaste_ingr += waste;
-        double totalWaste = ingredientWaste_ingr + ingredientWaste_dish;
+        ingredientWasteIngr += waste;
+        double totalWaste = ingredientWasteIngr + ingredientWasteDish;
         System.out.println("Wastage of " + ingredientName + " is now " + totalWaste + " kg");
     }
 
     @Override
     public String toString() {
-        double totalWaste = ingredientWaste_ingr + ingredientWaste_dish;
+        double totalWaste = ingredientWasteIngr + ingredientWasteDish;
         //Todo add constituents
         return ingredientName + '\n'
                 + "   Storage: " + ingredientWeight + " kg" +  System.lineSeparator()
@@ -44,11 +44,11 @@ public class Ingredient {
     }
 
     public String formatData() {
-        return ingredientName + "|"  + ingredientWeight + "|" + ingredientWaste_ingr;
+        return ingredientName + "|"  + ingredientWeight + "|" + ingredientWasteIngr;
     }
 
 
     public void addDishWaste(Double value) {
-        ingredientWaste_dish += value;
+        ingredientWasteDish += value;
     }
 }

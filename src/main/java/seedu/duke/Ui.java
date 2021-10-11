@@ -26,7 +26,7 @@ public class Ui {
             + "$$/         $$ |  $$ |$$ |  $$ |$$ | $/  $$ |$$ |  $$ | #\n"
             + "# $$/       $$$$$$/   $$$$$$/  $$$$$$$/           $$$$"
             + "$$/          $$/   $$/ $$/   $$/ $$/      $$/ $$/   $$/  #\n"
-            +"#######################################################"
+            + "#######################################################"
             + "#########################################################\n";
 
     private static final String EXIT_LOGO =
@@ -204,7 +204,7 @@ public class Ui {
         System.out.println("You can use command 'add' to add new dishes!");
     }
 
-    public void printDishNameRemoved (String dishName) {
+    public void printDishNameRemoved(String dishName) {
         System.out.println("Dish, " + dishName + " has been removed!");
     }
 }

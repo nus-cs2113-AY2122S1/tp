@@ -72,7 +72,7 @@ public class Dish {
     @Override
     public String toString() {
         String constituentList = "";
-        if(!constituents.isEmpty()) {
+        if (!constituents.isEmpty()) {
             for (Ingredient ingredient : constituents) {
                 constituentList = constituentList + "," + ingredient.getIngredientName();
             }
