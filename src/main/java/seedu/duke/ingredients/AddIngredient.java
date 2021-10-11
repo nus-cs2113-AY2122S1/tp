@@ -4,7 +4,7 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.InsufficientParametersException;
 
 /**
- * Class for methods of adding ingredients
+ * Class for methods of adding ingredients.
  */
 public class AddIngredient {
 

@@ -65,7 +65,6 @@ public class IngredientList {
     /**
      * Adds the new ingredient to the ingredient list.
      * @param ingredient The ingredient object to be added
-     * @return Successful Addition Message
      */
     public void add(Ingredient ingredient) {
         ingredientList.add(ingredient);
