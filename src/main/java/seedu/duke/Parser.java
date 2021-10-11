@@ -50,6 +50,16 @@ public class Parser {
                 System.out.println("There is no matching trip index. Please try again.");
             }
             break;
+        case "view":
+            tripToGetInfo = inputDescription.split(" ", 2);
+            try {
+                int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
+                Trip tripToGet = listOfTrips.get(indexToGet);
+                tripToGet.viewAllExpenses();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("There is no matching trip index. Please try again.");
+            }
+            break;
         case "delete":
             deleteTrip(listOfTrips, inputDescription);
             break;
