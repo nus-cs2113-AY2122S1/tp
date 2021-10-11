@@ -40,11 +40,15 @@ public class TimetableStorage {
      * 
      * @param timetable timetable
      */
-    public void save(Timetable timetable) throws IOException {
-        FileWriter fw = new FileWriter(file);
-        Gson gson = new Gson();
-        gson.toJson(timetable, fw);
-        fw.flush();
-        fw.close();
+    public void save(Timetable timetable) {
+        try {
+            FileWriter fw = new FileWriter(file);
+            Gson gson = new Gson();
+            gson.toJson(timetable, fw);
+            fw.flush();
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("failed to save timetable");
+        }
     }
 }
