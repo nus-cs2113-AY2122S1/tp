@@ -53,7 +53,7 @@ public class AverageMarksCommand extends Command{
             throw new TaaException("No students taking this assessment!");
         }
 
-        AssessmentList list = module.getAssessments();
+        AssessmentList list = module.getAssessmentList();
         Assessment assessment = list.getAssessment(argumentMap.get(KEY_ASSESSMENT_NAME));
         if (assessment == null) {
             throw new TaaException("Assessment does not exist!");

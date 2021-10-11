@@ -59,7 +59,7 @@ public class SetMarksCommand extends Command{
             throw new TaaException("No such student!");
         }
 
-        AssessmentList list = module.getAssessments();
+        AssessmentList list = module.getAssessmentList();
         Assessment assessment = list.getAssessment(argumentMap.get(KEY_ASSESSMENT_NAME));
         if (assessment == null) {
             // TODO non-existent assessment error message

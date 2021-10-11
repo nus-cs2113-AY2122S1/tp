@@ -49,8 +49,11 @@ public class Module {
         return students.get(studentIndex);
     }
 
-    public AssessmentList getAssessments() {
+    public AssessmentList getAssessmentList() {
         return assessmentList;
+    }
+    public ArrayList<Assessment> getAssessments() {
+        return assessmentList.getAssessments();
     }
 
     public void addStudent(Student student) {

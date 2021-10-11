@@ -44,7 +44,7 @@ public class ListAssessmentsCommand extends Command {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
-        ArrayList<Assessment> assessments = module.getAssessments().getAssessments();
+        ArrayList<Assessment> assessments = module.getAssessments();
         if (assessments.isEmpty()) {
             ui.printMessage(MESSAGE_LIST_EMPTY);
             return;
