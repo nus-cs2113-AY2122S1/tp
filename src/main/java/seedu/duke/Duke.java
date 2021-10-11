@@ -27,11 +27,15 @@ public class Duke {
         boolean isExit = false;
 
         while (!isExit) {
-            String userInput = textUi.getUserInput();
-            Command command = parser.parseCommand(userInput);
-            command.setRecordList(recordList);
-            command.execute();
-            isExit = command.isExit();
+            try {
+                String userInput = textUi.getUserInput();
+                Command command = parser.parseCommand(userInput);
+                command.setRecordList(recordList);
+                command.execute();
+                isExit = command.isExit();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Error! Your inputs are missing or incorrect!");
+            }
         }
     }
 }
