@@ -5,30 +5,30 @@ import java.util.ArrayList;
 import terminus.common.Messages;
 import terminus.exception.InvalidArgumentException;
 
-public class ContentManager {
+public class ContentManager<T extends Content> {
 
-    private ArrayList<Content> contents;
+    private ArrayList<T> contents;
 
     public ContentManager() {
-
+        contents = new ArrayList<>();
     }
 
-    public void setContent(ArrayList<Content> contents) {
+    public void setContent(ArrayList<T> contents) {
         this.contents = contents;
     }
 
-    public void addNote(String name, String data) {
-        contents.add(new Note(name, data));
+    public ArrayList<T> getContents() {
+        return contents;
     }
 
-    public void addLink(String description, String day, LocalTime startTime, String zoomLink) {
-        contents.add(new Link(description, day, startTime, zoomLink));
+    public int getTotalContents() {
+        return contents.size();
     }
 
     public String listAllContents() {
         StringBuilder result = new StringBuilder();
         int i = 1;
-        for (Content n : contents) {
+        for (T n : contents) {
             result.append(String.format("%d. %s\n", i, n.getViewDescription()));
             i++;
         }
@@ -42,14 +42,6 @@ public class ContentManager {
         return contents.get(contentNumber - 1).getDisplayInfo();
     }
 
-    public ArrayList<Content> getContents() {
-        return contents;
-    }
-
-    public int getTotalContents() {
-        return contents.size();
-    }
-
     public String deleteContent(int contentNumber) throws InvalidArgumentException {
         if (!isValidNumber(contentNumber)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
@@ -59,7 +51,13 @@ public class ContentManager {
         return deletedContentName;
     }
 
+    public void add(T content) {
+        contents.add(content);
+    }
+
     private boolean isValidNumber(int number) {
         return !(number < 1 || number > contents.size());
     }
+
+
 }

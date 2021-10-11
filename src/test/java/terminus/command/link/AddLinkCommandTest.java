@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
+import terminus.content.Link;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidTimeFormatException;
@@ -22,6 +23,8 @@ public class AddLinkCommandTest {
     private LinkCommandParser linkCommandParser;
     private NusModule nusModule;
     private Ui ui;
+
+    Class<Link> type = Link.class;
 
     @BeforeEach
     void setUp() {
@@ -46,11 +49,11 @@ public class AddLinkCommandTest {
         Command addLinkCommand = linkCommandParser.parseCommand("add \"test\" \"test_day\" \"00:00\" \"Test.com\"");
         CommandResult addResult = addLinkCommand.execute(ui, nusModule);
         assertTrue(addResult.isOk());
-        assertEquals(1, nusModule.getContentManager().getTotalContents());
-        assertTrue(nusModule.getContentManager().getContentData(1).contains("test"));
-        assertTrue(nusModule.getContentManager().getContentData(1).contains("test_day"));
-        assertTrue(nusModule.getContentManager().getContentData(1).contains("00:00"));
-        assertTrue(nusModule.getContentManager().getContentData(1).contains("Test.com"));
+        assertEquals(1, nusModule.getContentManager(type).getTotalContents());
+        assertTrue(nusModule.getContentManager(type).getContentData(1).contains("test"));
+        assertTrue(nusModule.getContentManager(type).getContentData(1).contains("test_day"));
+        assertTrue(nusModule.getContentManager(type).getContentData(1).contains("00:00"));
+        assertTrue(nusModule.getContentManager(type).getContentData(1).contains("Test.com"));
 
         for (int i = 0; i < 5; i++) {
             addLinkCommand = linkCommandParser.parseCommand(
@@ -58,6 +61,6 @@ public class AddLinkCommandTest {
             addResult = addLinkCommand.execute(ui, nusModule);
             assertTrue(addResult.isOk());
         }
-        assertEquals(6, nusModule.getContentManager().getTotalContents());
+        assertEquals(6, nusModule.getContentManager(type).getTotalContents());
     }
 }
