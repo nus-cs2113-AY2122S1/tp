@@ -17,9 +17,9 @@ public class TextUi {
 
     private final SimpleDateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    private final String DIVIDER = "****************************************************************";
-    private final String LINE_PREFIX = "     | ";
-    private final String LS = lineSeparator();
+    private static final String DIVIDER = "****************************************************************";
+    private static final String LINE_PREFIX = "     | ";
+    private static final String LS = lineSeparator();
 
     public String getTimeStamp() {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());

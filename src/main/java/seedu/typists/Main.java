@@ -8,20 +8,28 @@ import seedu.typists.ui.TextUi;
 public class Main {
     /** Version info of the program. */
     public static final String VERSION = "Typist - Version 1.0";
-    TextUi UiBot;
-    Parser ParseBot;
+    TextUi uiBot;
+    Parser parseBot;
 
     public void start() {
-        this.UiBot = new TextUi();
-        this.ParseBot = new Parser();
-        UiBot.showWelcomeMessage(VERSION);
+        this.uiBot = new TextUi();
+        this.parseBot = new Parser();
+        uiBot.showWelcomeMessage(VERSION);
+    }
+
+    public void runCommandLoopUntilExitCommand() {
+
+    }
+
+    public void exit() {
+
     }
 
     /** Runs the program until termination.  */
     public void run() {
         start();
-//        runCommandLoopUntilExitCommand();
-//        exit();
+        runCommandLoopUntilExitCommand();
+        exit();
     }
 
     /**
