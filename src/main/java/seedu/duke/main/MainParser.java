@@ -1,21 +1,19 @@
 package seedu.duke.main;
 
-import seedu.duke.employee.Employee;
 import seedu.duke.employee.EmployeeList;
 import seedu.duke.employee.EmployeeParser;
-import seedu.duke.ingredient.Ingredient;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientParser;
-import seedu.duke.menu.MenuItem;
 import seedu.duke.menu.MenuList;
 import seedu.duke.menu.MenuParser;
 
 public class MainParser {
 
-    public static boolean handleCommand(EmployeeList employeeList, EmployeeParser employeeParser,
-                                        MenuList menuList, MenuParser menuParser,
-                                        IngredientList ingredientList, IngredientParser ingredientParser,
+    public static boolean handleCommand(EmployeeList employeeList, MenuList menuList, IngredientList ingredientList,
                                         String userInput) {
+        EmployeeParser employeeParser = new EmployeeParser();
+        MenuParser menuParser = new MenuParser();
+        IngredientParser ingredientParser = new IngredientParser();
 
         String[] command = userInput.trim().split("\\|", 3);
 
@@ -53,7 +51,6 @@ public class MainParser {
             MainUI.printWrongCommandMessage();
         }
         return false;
-
     }
 
 }

@@ -2,6 +2,10 @@ package seedu.duke.main;
 
 public class MainUI {
 
+    public static void printSingleLine() {
+        System.out.println("--------------------");
+    }
+
     public static void printWelcomeMessage() {
         printSingleLine();
         System.out.println("Hello! Welcome to Restaurant Buddy :D");
@@ -21,12 +25,11 @@ public class MainUI {
         printSingleLine();
     }
 
-    public static void printSingleLine() {
-        System.out.println("--------------------");
-    }
-
     public static void printWrongCommandMessage() {
+        printSingleLine();
         System.out.println("I do not recognise the input.");
         System.out.println("Please try again!");
+        printSingleLine();
     }
+
 }

@@ -1,11 +1,11 @@
 package seedu.duke.menu;
 
-public class MenuItem {
+public class Menu {
 
     private String name;
     private String price;
 
-    public MenuItem(String name, String price) {
+    public Menu(String name, String price) {
         this.name = name;
         this.price = price;
     }
