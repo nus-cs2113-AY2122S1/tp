@@ -47,6 +47,7 @@ public class AddLinkCommand extends Command {
         }
         ArrayList<String> argArray = CommonFormat.findArguments(arguments);
         assert argArray.size() > 0;
+
         if (!isValidScheduleArguments(argArray)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
@@ -61,6 +62,8 @@ public class AddLinkCommand extends Command {
     @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException, InvalidArgumentException {
         ContentManager contentManager = module.getContentManager(Link.class);
+        assert contentManager != null;
+
         contentManager.add(new Link(description, day, startTime, link));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
         return new CommandResult(true, false);

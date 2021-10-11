@@ -41,6 +41,7 @@ public class AddNoteCommand extends Command {
         }
         ArrayList<String> argArray = CommonFormat.findArguments(arguments);
         assert argArray.size() > 0;
+
         if (!isValidNoteArguments(argArray)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
@@ -51,6 +52,8 @@ public class AddNoteCommand extends Command {
     @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
         ContentManager contentManager = module.getContentManager(Note.class);
+        assert contentManager != null;
+
         contentManager.add(new Note(name, data));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE, name));
         return new CommandResult(true, false);
