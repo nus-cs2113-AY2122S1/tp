@@ -26,7 +26,7 @@ public class AddDishWasteCommand extends Command {
                 Dish currentDish = DishList.dishList.get(dishIndex);
                 currentDish.addWaste(ingredientWeightValue);
             } catch (NumberFormatException e) {
-                System.out.println("Incorrect parameters - Invalid number entered");
+                System.out.println(ui.getInvalidParamMsg());
                 System.out.println(ui.getLineDivider());
             }
         }

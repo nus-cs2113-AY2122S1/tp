@@ -10,7 +10,7 @@ public class DishList {
         if (DishList.find(dishName) == -1) {
             Dish dishToAdd = new Dish(dishName);
             dishList.add(dishToAdd);
-            System.out.println("Dish added to list: " + dishToAdd.getDishName());
+            ui.printAddedDish(dishToAdd.getDishName());
         } else {
             System.out.println(ui.getDishExistsMsg());
         }
@@ -27,11 +27,7 @@ public class DishList {
     }
 
     public static void list() {
-        System.out.println("Here are the dishes you have: ");
-        for (int i = 0; i < dishList.size(); i++) {
-            System.out.println((i + 1) + ". " + dishList.get(i));
-        }
-        System.out.println("You can use commands 'add' or 'find' to add new dishes or find existing ones!");
+        ui.printDishList(dishList);
     }
 
     public static void delete(String dishName) {
@@ -40,8 +36,7 @@ public class DishList {
             System.out.println(ui.getDishNotExistMsg());
         } else {
             dishList.remove(dishIndex);
-            System.out.println("Dish, " + dishName + " has been removed!");
-
+            ui.printDishNameRemoved(dishName);
         }
     }
 }

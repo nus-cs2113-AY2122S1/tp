@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Dish {
     public ArrayList<Ingredient> constituents = new ArrayList<>();
+    private Ui ui = new Ui();
     private String dishName;
     private Double wastage;
     //Each dish contributes a portion of its wastage to constituent ingredients
@@ -34,7 +35,7 @@ public class Dish {
     public void addConstituent(String ingredientName) {
         int ingredientIndex = IngredientList.find(ingredientName);
         if (ingredientIndex == -1) {
-            System.out.println("Ingredient does not exist");
+            System.out.println(ui.getIngrNotExistMsg());
         } else {
             //Subtract the old contribution if it exists
             for (Ingredient ingredient : constituents) {
@@ -55,8 +56,8 @@ public class Dish {
     public void addWaste(Double value) {
         assert value > 0 : "Adding negative waste is impossible";
         wastage += value;
-        System.out.println("Wastage of " + dishName + " is now " + wastage);
-        if(!constituents.isEmpty()) {
+        System.out.println("Wastage of " + dishName + " is now " + wastage + " kg");
+        if (!constituents.isEmpty()) {
             //Todo proportion stuff and prevent feedback loop
             ingredientContribution = wastage / constituents.size();
             for (Ingredient ingredient : constituents) {
@@ -71,7 +72,7 @@ public class Dish {
     @Override
     public String toString() {
         String constituentList = "";
-        if(!constituents.isEmpty()) {
+        if (!constituents.isEmpty()) {
             for (Ingredient ingredient : constituents) {
                 constituentList = constituentList + "," + ingredient.getIngredientName();
             }
@@ -80,8 +81,8 @@ public class Dish {
             constituentList = "None";
         }
         return dishName + '\n'
-                + "   Wastage: " + wastage + '\n'
-                + "   Constituents:" + constituentList;
+                + "   Wastage: " + wastage + " kg" + System.lineSeparator()
+                + "   Constituents: " + constituentList;
     }
 
     public String formatData() {
