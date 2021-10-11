@@ -18,6 +18,6 @@ class ListCommandTest {
 
         ListCommand list = new ListCommand();
         list.execute(inputArrayList);
-        //assertTrue(list.isOther);
+        assertTrue(list.isOther);
     }
 }

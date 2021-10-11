@@ -1,17 +1,20 @@
 package seedu.duke;
 
+import seedu.duke.command.Ui;
+
 import java.util.ArrayList;
 
 public class DishList {
     public static ArrayList<Dish> dishList = new ArrayList<>();
+    public static Ui ui = new Ui();
 
     public static void add(String dishName) {
         if (DishList.find(dishName) == -1) {
             Dish dishToAdd = new Dish(dishName.toLowerCase());
             dishList.add(dishToAdd);
-            System.out.println("Added:" + dishToAdd.getDishName());
+            System.out.println("Dish added to list: " + dishToAdd.getDishName());
         } else {
-            System.out.println("Dish already exists");
+            System.out.println(ui.getDishExistsMsg());
         }
     }
 
@@ -35,15 +38,12 @@ public class DishList {
     }
 
     public static void delete(String dishName) {
-        int listSize = dishList.size();
         int dishIndex = DishList.find(dishName);
         if (dishIndex == -1) {
-            System.out.println("Dish does not exist");
-            assert dishList.size() == listSize : "list should be of size N";
+            System.out.println(ui.getDishNotExistMsg());
         } else {
             dishList.remove(dishIndex);
             System.out.println("Dish, " + dishName + " has been removed!");
-            assert dishList.size() == (listSize - 1) : "list should be of size N-1";
 
         }
     }

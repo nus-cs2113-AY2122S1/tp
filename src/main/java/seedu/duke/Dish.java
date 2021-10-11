@@ -41,15 +41,23 @@ public class Dish {
         */
     }
 
+//    @Override
+//    //Todo Format into proper string
+//    public String toString() {
+//        return "Dish{"
+//                + "dishName='"
+//                + dishName
+//                + '\''
+//                + ", constituents="
+//                + constituents
+//                + '}';
+//    }
+
     @Override
-    //Todo Format into proper string
     public String toString() {
-        return "Dish{"
-                + "dishName='"
+        return "[Dish] "
                 + dishName
-                + '\''
-                + ", constituents="
-                + constituents
-                + '}';
+                + " | Constituents: "
+                + constituents ;
     }
 }

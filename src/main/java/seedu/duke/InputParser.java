@@ -23,13 +23,6 @@ public class InputParser {
         String parameterString = input.replaceFirst(inputCommand.getName(), "").trim();
         switch (inputCommand) {
 
-        //No parameter commands check if there are params and if so error(Maybe not needed)
-        case TEST:
-            if (!parameterString.isBlank()) {
-                System.out.println("Extra params, do not include next time");
-            }
-            return null;
-
         //One parameter commands just add the parameterString
         case ADD_DISH:
         case DELETE_DISH:
