@@ -1,7 +1,7 @@
 package seedu.duke;
 
 public class CutCommand extends Command {
-    private int clientIndex;
+    private final int clientIndex;
 
     public CutCommand(int clientIndex) {
         this.clientIndex = clientIndex;
