@@ -55,7 +55,8 @@ public class UiTest {
         final String expectedOutput = "---------------------------------------------------------------------------" 
                 + "-------------------------- " + newLine + "Below is a list of all of your recent earnings!" + newLine
                 + "---------------------------------------------------------------------------------------------------" 
-                + "-- " + newLine + "1: [I] Paycheck August - $20.0" + newLine + "2: [I] Paycheck July - $25.0" + newLine
+                + "-- " + newLine + "1: [I] Paycheck August - $20.0" + newLine
+                + "2: [I] Paycheck July - $25.0" + newLine
                 + "---------------------------------------------------------------------------------------------------" 
                 + "--";
         
