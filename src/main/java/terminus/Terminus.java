@@ -49,21 +49,24 @@ public class Terminus {
         this.moduleStorage = new ModuleStorage(DATA_DIRECTORY.resolve(MAIN_JSON));
         try {
             this.nusModule = moduleStorage.loadFile();
-            if (this.nusModule == null) {
-                this.nusModule = new NusModule();
-            }
-            this.ui.printParserBanner(this.parser, this.nusModule);
         } catch (IOException e) {
             ui.printSection(
                 "Unable to save/load file: " + DATA_DIRECTORY.resolve(MAIN_JSON),
                 "TermiNUS may still run, but your changes may not be saved."
             );
+        } finally {
+            if (this.nusModule == null) {
+                this.nusModule = new NusModule();
+            }
+            this.ui.printParserBanner(this.parser, this.nusModule);
         }
     }
 
     private void runCommandsUntilExit() {
         while (true) {
+            assert workspace != null: "Workspace should always have a value";
             String input = ui.requestCommand(workspace);
+            assert input != null: "Input should not be null.";
 
             Command currentCommand = null;
             try {
@@ -79,6 +82,7 @@ public class Terminus {
                     break;
                 } else if (isWorkspaceCommand) {
                     parser = result.getAdditionalData();
+                    assert parser != null: "commandParser is not null";
                     workspace = parser.getWorkspace();
                     ui.printParserBanner(parser, nusModule);
                 } else if (!result.isOk()) {

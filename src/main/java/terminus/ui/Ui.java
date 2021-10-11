@@ -2,7 +2,6 @@ package terminus.ui;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import terminus.common.Messages;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 

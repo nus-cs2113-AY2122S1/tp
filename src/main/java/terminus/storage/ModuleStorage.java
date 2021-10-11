@@ -18,6 +18,7 @@ public class ModuleStorage {
     }
     
     private void initializeFile() throws IOException {
+        assert filePath != null: "filePath should not be null";
         if (!Files.isDirectory(filePath.getParent())) {
             Files.createDirectories(filePath.getParent());
         }
@@ -37,6 +38,7 @@ public class ModuleStorage {
     public void saveFile(NusModule module) throws IOException {
         initializeFile();
         String jsonString = gson.toJson(module);
+        assert jsonString != null && !jsonString.isBlank(): "File saved is blank";
         Files.writeString(filePath, jsonString);
     }
     
