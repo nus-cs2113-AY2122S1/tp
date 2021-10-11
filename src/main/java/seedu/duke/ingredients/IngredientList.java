@@ -24,8 +24,8 @@ public class IngredientList {
         }
         return instance;
     }
-    /*•
-     *
+
+    /**
      * Gets the size of the current inventory, not including the amount of individual ingredient.
      * @return the size of current inventory
      */
