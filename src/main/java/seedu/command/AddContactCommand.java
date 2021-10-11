@@ -11,6 +11,22 @@ public class AddContactCommand extends Command {
     private final String twitter;
     private final String email;
 
+    public String getLinkedin() {
+        return linkedin;
+    }
+
+    public String getTelegram() {
+        return telegram;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public String getName() {
         return name;
     }
