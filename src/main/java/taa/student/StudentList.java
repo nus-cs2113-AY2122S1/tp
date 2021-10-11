@@ -26,7 +26,7 @@ public class StudentList implements ClassChecker {
         return students.size();
     }
 
-    private boolean isValidIndex(int index) {
+    public boolean isValidIndex(int index) {
         return (index >= 0 && index < getSize());
     }
 
