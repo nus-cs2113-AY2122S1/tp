@@ -8,12 +8,16 @@ public class Taa {
     private static final String DATA_FILENAME = "./data/taa_data.json";
 
     private ModuleList moduleList;
-    private final Ui ui;
-    private final Storage storage;
+    private final Ui ui = new Ui();
+    private final Storage storage = new Storage(DATA_FILENAME);
 
     public Taa() {
-        this.ui = new Ui();
-        this.storage = new Storage(DATA_FILENAME);
+
+    }
+
+    public Taa(boolean enableSaving) {
+        this();
+        storage.setEnabled(enableSaving);
     }
 
     public void run() {
@@ -55,6 +59,18 @@ public class Taa {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        new Taa().run();
+        Taa taa = null;
+        for (int i = 0; i < args.length && taa == null; i += 1) {
+            String arg = args[i];
+            if (arg.equals("nosave")) {
+                taa = new Taa(false);
+            }
+        }
+
+        if (taa == null) {
+            taa = new Taa();
+        }
+
+        taa.run();
     }
 }
