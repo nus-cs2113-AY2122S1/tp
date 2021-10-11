@@ -5,7 +5,7 @@ import seedu.utility.Ui;
 
 public class InvalidCommand extends Command {
     
-    private String message;
+    private final String message;
     
     public InvalidCommand(String message) {
         this.message = message;

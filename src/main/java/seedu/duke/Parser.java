@@ -88,7 +88,7 @@ public class Parser {
 
         switch (commandWord) {
         case HELP_COMMAND_KEYWORD:
-            return new HelpCommand();
+            return prepareHelp(arguments);
         case ADD_EXPENSE_KEYWORD:
             return prepareAddExpense(arguments);
         case ADD_INCOME_KEYWORD:
@@ -111,6 +111,13 @@ public class Parser {
             return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
     }
+    
+    private Command prepareHelp(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new HelpCommand();
+        }
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+    }
 
     /**
      * This was adapted from addressbook-level2 source code here:
@@ -123,15 +130,18 @@ public class Parser {
         }
         
         String expenseDescription = matcher.group("description").trim();
-        double expenseAmount;
         
+        double expenseAmount;
         try {
-            expenseAmount = Double.parseDouble(matcher.group("amount"));
+            expenseAmount = Double.parseDouble(matcher.group("amount").trim());
         } catch (NumberFormatException e) {
             return new InvalidCommand("Please input a valid amount.");
         }
+        if (expenseAmount <= 0) {
+            return new InvalidCommand("Please input a valid amount.");
+        }
         
-        //need to create constructor for Expense
+        assert expenseAmount > 0;
         Expense expense = new Expense(expenseDescription, expenseAmount);
         return new AddExpenseCommand(expense);
     }
@@ -145,17 +155,20 @@ public class Parser {
         if (!matcher.matches()) {
             return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
-
+        
         String incomeDescription = matcher.group("description").trim();
+        
         double incomeAmount;
-
         try {
-            incomeAmount = Double.parseDouble(matcher.group("amount"));
+            incomeAmount = Double.parseDouble(matcher.group("amount").trim());
         } catch (NumberFormatException e) {
             return new InvalidCommand("Please input a valid amount.");
         }
+        if (incomeAmount <= 0) {
+            return new InvalidCommand("Please input a valid amount.");
+        }
         
-        //need to add the constructor for Income
+        assert incomeAmount > 0;
         Income income = new Income(incomeDescription, incomeAmount);
         return new AddIncomeCommand(income);
     }
@@ -170,12 +183,17 @@ public class Parser {
             return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
         
+        int deleteIndex;
         try {
-            int deleteIndex = Integer.parseInt(matcher.group("index"));
-            return new DeleteExpenseCommand(deleteIndex);
+            deleteIndex = Integer.parseInt(matcher.group("index").trim());
         } catch (NumberFormatException e) {
             return new InvalidCommand("Please input a valid index.");
         }
+        if (deleteIndex <= 0) {
+            return new InvalidCommand("Please input a valid index.");
+        }
+        
+        return new DeleteExpenseCommand(deleteIndex);
     }
 
     /**
@@ -188,12 +206,17 @@ public class Parser {
             return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
 
+        int deleteIndex;
         try {
-            int deleteIndex = Integer.parseInt(matcher.group("index"));
-            return new DeleteIncomeCommand(deleteIndex);
+            deleteIndex = Integer.parseInt(matcher.group("index").trim());
         } catch (NumberFormatException e) {
             return new InvalidCommand("Please input a valid index.");
         }
+        if (deleteIndex <= 0) {
+            return new InvalidCommand("Please input a valid index.");
+        }
+        
+        return new DeleteIncomeCommand(deleteIndex);
     }
 
     private Command prepareListExpense(String arguments) {

@@ -2,7 +2,6 @@ package seedu.duke;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import seedu.commands.AddExpenseCommand;
 import seedu.commands.Command;
@@ -51,7 +50,7 @@ public class ParserTest {
     @Test
     public void parseCommand_validAddExpenseCommand_returnAddExpenseCommand() {
         Parser testParser = new Parser();
-        Command underTest = testParser.parseCommand("add_ex d/tfshsdfh a/123");
+        Command underTest = testParser.parseCommand("add_ex    d/      tfshsdfh     a/          123");
         assertTrue(underTest.getClass() == AddExpenseCommand.class);
     }
 
@@ -60,6 +59,13 @@ public class ParserTest {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("del_in      i/12a              ");
         assertTrue(underTest.getClass() == InvalidCommand.class);
+    }
+
+    @Test
+    public void parseCommand_validDeleteIncomeCommand_returnDeleteIncomeCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("del_in      i/   12              ");
+        assertTrue(underTest.getClass() == DeleteIncomeCommand.class);
     }
     
     @Test
