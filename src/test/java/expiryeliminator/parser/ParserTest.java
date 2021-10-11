@@ -15,10 +15,10 @@ class ParserTest {
     @Test
     public void prepareAddRecipe_incorrectFormats_ErrorMessage() {
         String[] tests = {"add recipe r/chicken soup i/chicken q/",
-                "add recipe r/chicken soup i/ q/1",
-                "add recipe r/chicken soup",
-                "add recipe r/Apple Pie",
-                "add recipe i/Red Apple q/4 i/Green Apple q/4"};
+                          "add recipe r/chicken soup i/ q/1",
+                          "add recipe r/chicken soup",
+                          "add recipe r/Apple Pie",
+                          "add recipe i/Red Apple q/4 i/Green Apple q/4"};
 
         for (String test : tests) {
             assertEquals(parseCommand(test).execute(null,null),
@@ -36,9 +36,9 @@ class ParserTest {
     @Test
     public void prepareAddRecipe_missingQuantityOrIngredient_ErrorMessage() {
         String[] tests = {"add recipe r/chicken soup i/chicken q/1 i/salt" ,
-                "add recipe r/chicken soup i/chicken q/1 q/20",
-                "add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple",
-                "add recipe r/Apple Pie i/Red Apple q/4 q/4"};
+                          "add recipe r/chicken soup i/chicken q/1 q/20",
+                          "add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple",
+                          "add recipe r/Apple Pie i/Red Apple q/4 q/4"};
 
         for (String test : tests) {
             assertEquals("Should have same number of ingredient names and quantities",
