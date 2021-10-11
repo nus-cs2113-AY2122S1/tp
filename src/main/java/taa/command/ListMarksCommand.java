@@ -11,17 +11,17 @@ import taa.student.Student;
 /**
  * Class that deals with the command for the listing of marks.
  */
-public class ListMarksCommand extends Command{
+public class ListMarksCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_ASSESSMENT_NAME = "a";
     private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {
-            KEY_MODULE_CODE,
-            KEY_ASSESSMENT_NAME
+        KEY_MODULE_CODE,
+        KEY_ASSESSMENT_NAME
     };
     private static final String MESSAGE_FORMAT_LIST_MARKS_USAGE = "Usage: %s "
             + "%s/<MODULE_CODE> %s/<ASSESSMENT_NAME>";
-    private static final String MESSAGE_LIST_MARKS_HEADER = "Here is the list of students and " +
-            "their marks for %s:";
+    private static final String MESSAGE_LIST_MARKS_HEADER = "Here is the list of students and "
+            + "their marks for %s:";
     private static final String MARKS_LIST_EMPTY = "There are no marks inputted!";
 
     public ListMarksCommand(String argument) {
@@ -39,7 +39,8 @@ public class ListMarksCommand extends Command{
     }
 
     /**
-     * Lists the student and the marks they attained for an assessment.
+     * Checks for errors before calling the function that
+     * lists the student and the marks they attained for an assessment.
      *
      * @param moduleList List of modules.
      * @param ui The ui instance to handle interactions with the user.
@@ -74,6 +75,10 @@ public class ListMarksCommand extends Command{
         listMarks(ui, module);
     }
 
+    /**
+     * Returns the usage message of the list marks command.
+     * @return String which contains the usage message.
+     */
     @Override
     protected String getUsageMessage() {
         return String.format(
@@ -84,6 +89,12 @@ public class ListMarksCommand extends Command{
         );
     }
 
+    /**
+     * Lists the student and the marks they attained for an assessment.
+     *
+     * @param ui The ui instance to handle interactions with the user.
+     * @param module The module that the student and assessment belong to.
+     */
     private void listMarks(Ui ui, Module module) {
         String assessmentName = argumentMap.get("a");
         StringBuilder marksList = new StringBuilder(String.format(MESSAGE_LIST_MARKS_HEADER, assessmentName));

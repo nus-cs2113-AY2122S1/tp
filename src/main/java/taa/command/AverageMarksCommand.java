@@ -11,25 +11,26 @@ import taa.student.Student;
 /**
  * Class that deals with the outputting of the average marks.
  */
-public class AverageMarksCommand extends Command{
+public class AverageMarksCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_ASSESSMENT_NAME = "a";
     private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {
-            KEY_MODULE_CODE,
-            KEY_ASSESSMENT_NAME
+        KEY_MODULE_CODE,
+        KEY_ASSESSMENT_NAME
     };
     private static final String MESSAGE_FORMAT_AVERAGE_MARKS_USAGE = "Usage: %s "
             + "%s/<MODULE_CODE> %s/<ASSESSMENT_NAME>";
     private static final String MESSAGE_AVERAGE_MARKS_FORMAT = "Average marks for %s is %,.4f";
-    private static final String MESSAGE_AVERAGE_MARKS_WITH_UNMARKED_FORMAT = "Average marks for %s is %,.4f\n" +
-            "Note that %d student(s) have yet to be marked!";
+    private static final String MESSAGE_AVERAGE_MARKS_WITH_UNMARKED_FORMAT = "Average marks for %s is %,.4f\n"
+            + "Note that %d student(s) have yet to be marked!";
 
     public AverageMarksCommand(String argument) {
         super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);
     }
 
     /**
-     * Outputs the average marks of an assessment in a module.
+     * Checks for errors before calling the function to output the average marks
+     * of an assessment in a module.
      *
      * @param moduleList List of modules.
      * @param ui The ui instance to handle interactions with the user.
@@ -64,6 +65,10 @@ public class AverageMarksCommand extends Command{
         averageMarks(ui, module);
     }
 
+    /**
+     * Returns the usage message of the average marks command.
+     * @return String which contains the usage message.
+     */
     @Override
     protected String getUsageMessage() {
         return String.format(
@@ -74,6 +79,11 @@ public class AverageMarksCommand extends Command{
         );
     }
 
+    /**
+     * Outputs the average marks of an assessment in a module.
+     * @param ui The ui instance to handle interactions with the user.
+     * @param module The module the assessment belongs to.
+     */
     private void averageMarks(Ui ui, Module module) {
         String assessmentName = argumentMap.get("a");
         double classSize = module.getNumberOfStudents();

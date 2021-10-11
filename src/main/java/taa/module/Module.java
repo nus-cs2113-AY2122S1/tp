@@ -52,6 +52,7 @@ public class Module {
     public AssessmentList getAssessmentList() {
         return assessmentList;
     }
+
     public ArrayList<Assessment> getAssessments() {
         return assessmentList.getAssessments();
     }

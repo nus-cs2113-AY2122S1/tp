@@ -12,16 +12,16 @@ import taa.student.Student;
 /**
  * Class that deals with the command for the setting of marks.
  */
-public class SetMarksCommand extends Command{
+public class SetMarksCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String KEY_ASSESSMENT_NAME = "a";
     private static final String KEY_MARKS = "m";
     private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {
-            KEY_MODULE_CODE,
-            KEY_STUDENT_INDEX,
-            KEY_ASSESSMENT_NAME,
-            KEY_MARKS
+        KEY_MODULE_CODE,
+        KEY_STUDENT_INDEX,
+        KEY_ASSESSMENT_NAME,
+        KEY_MARKS
     };
     private static final String MESSAGE_FORMAT_SET_MARKS_USAGE = "Usage: %s "
             + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<ASSESSMENT_NAME> %s/<MARKS>";
@@ -32,7 +32,7 @@ public class SetMarksCommand extends Command{
     }
 
     /**
-     * Sets marks for a student's assessment.
+     * Checks for errors before calling the function that sets marks for a student's assessment.
      *
      * @param moduleList Module list to access the module the student is enrolled in.
      * @param ui The ui instance to handle interactions with the user.
@@ -65,13 +65,17 @@ public class SetMarksCommand extends Command{
             // TODO non-existent assessment error message
             throw new TaaException("Assessment does not exist!");
         }
-        if(Double.parseDouble(argumentMap.get(KEY_MARKS)) < 0) {
+        if (Double.parseDouble(argumentMap.get(KEY_MARKS)) < 0) {
             // TODO marks are negative
             throw new TaaException("Marks cannot be negative!");
         }
         setMarks(ui, module, studentIndex);
     }
 
+    /**
+     * Returns the usage message of the set marks command.
+     * @return String which contains the usage message.
+     */
     @Override
     protected String getUsageMessage() {
         return String.format(
@@ -84,6 +88,13 @@ public class SetMarksCommand extends Command{
         );
     }
 
+    /**
+     * Sets the marks for a student's assessment.
+     *
+     * @param ui The ui instance to handle interactions with the user.
+     * @param module The module the assessment and student belong to.
+     * @param studentIndex Index of the student.
+     */
     private void setMarks(Ui ui, Module module, int studentIndex) {
         String assessmentName = argumentMap.get(KEY_ASSESSMENT_NAME);
         double marks = Double.parseDouble(argumentMap.get(KEY_MARKS));
