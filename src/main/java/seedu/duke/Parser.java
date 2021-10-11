@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.exceptions.InsufficientParametersException;
 import seedu.duke.ingredients.AddIngredient;
@@ -13,7 +15,9 @@ public class Parser {
     private static final String COMMAND_UPDATE = "update";
     private static final String COMMAND_EXIT = "exit";
 
-    private static final String INVALID_COMMAND = "Invalid command!";
+    private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
+    private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
+    private static final String NUMBER_FORMAT_MESSAGE = "Invalid number format!";
 
     private static final String SPACE_SEPARATOR = " ";
 
@@ -23,7 +27,8 @@ public class Parser {
     }
 
     public static String parse(String command) throws DukeException {
-        String[] words = command.split(SPACE_SEPARATOR);
+
+        String[] words = command.split(SPACE_SEPARATOR, 2);
 
         switch (words[0]) {
         case COMMAND_LIST:
@@ -37,7 +42,7 @@ public class Parser {
         case COMMAND_EXIT:
             return "";
         default:
-            return INVALID_COMMAND;
+            return INVALID_COMMAND_MESSAGE;
         }
     }
 
@@ -69,23 +74,7 @@ public class Parser {
     }
 
     private static String parseListCommand() throws DukeException {
-        String resultMsg = "";
-        int i;
-
-        if (IngredientList.getInstance().getInventoryStock() == 0) {
-            resultMsg = "Inventory is empty!";
-            return resultMsg;
-        }
-
-        for (i = 0; i < IngredientList.getInstance().getInventoryStock() - 1; i++) {
-            resultMsg += (i + 1) + "."
-                    + IngredientList.getInstance().getIngredientInfo(i + 1)
-                    + '\n' + '\t';
-
-        }
-        resultMsg = resultMsg + IngredientList.getInstance().getInventoryStock() + "."
-                + IngredientList.getInstance().getIngredientInfo(i + 1);
-
+        String resultMsg = new ListCommand().run();
         return resultMsg;
     }
 
@@ -94,17 +83,16 @@ public class Parser {
         String resultMsg;
 
         if (detail.length() <= 0) {
-            resultMsg = "Nothing to delete!";
+            resultMsg = DELETE_ERROR_MESSAGE;
             return resultMsg;
         }
+
         try {
             int ingredientRemoveNumber = Integer.parseInt(detail);
-            Ingredient removedIngredient = IngredientList.getInstance().remove(ingredientRemoveNumber);
-            resultMsg = "Noted. This has been removed:\n"
-                    + "t" + removedIngredient.toString();
+            resultMsg = new DeleteCommand(ingredientRemoveNumber).run();
             return resultMsg;
         } catch (NumberFormatException e) {
-            throw new DukeException("Invalid number format!");
+            throw new DukeException(NUMBER_FORMAT_MESSAGE);
         }
     }
 }

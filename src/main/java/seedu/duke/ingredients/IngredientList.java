@@ -9,13 +9,10 @@ import java.util.ArrayList;
  */
 public class IngredientList {
 
+    private static final String INVALID_NUMBER = "Ingredient number does not exist!";
+
     protected ArrayList<Ingredient> ingredientList;
     private static IngredientList instance = null;
-
-    private static final String ADDED_MESSAGE = "That task has been added:\n" + "\t";
-    private static final String LIST_EMPTY_MESSAGE = "No ingredients currently in the list.";
-    private static final String LIST_MESSAGE = "Here is the list of the ingredients currently in inventory:\n";
-    private static final String DELETE_MESSAGE = "Got it. This ingredient has been removed:\n" + "\t";
 
     public IngredientList() {
         ingredientList = new ArrayList<Ingredient>(); //This is for v1.0
@@ -108,6 +105,7 @@ public class IngredientList {
             return ingredientList.get(ingredientNumber - 1).toString();
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Ingredient number does not exist!");
+            throw new DukeException(INVALID_NUMBER);
         }
     }
 
@@ -123,7 +121,12 @@ public class IngredientList {
             return removedIngredient;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Ingredient number does not exist!");
+            throw new DukeException(INVALID_NUMBER);
         }
+    }
+
+    public void add(Ingredient ingredient) {
+        ingredientList.add(ingredient);
     }
 
 
