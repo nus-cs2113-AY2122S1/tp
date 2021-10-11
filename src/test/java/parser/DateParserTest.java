@@ -6,7 +6,7 @@ import java.util.Date;
 import java.text.ParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DateParserTest {
 
@@ -26,12 +26,7 @@ public class DateParserTest {
 
     @Test
     public void stringToDate_invalidDate_exceptionThrown() {
-        try {
-            Date parsedDate = DateParser.stringToDate("99-99-2021");
-            fail();
-        } catch (ParseException e) {
-            assertEquals("Unknown date", e.getMessage());
-        }
+        assertThrows(ParseException.class, () -> DateParser.stringToDate("99-99-2021"));
     }
 
     @Test
