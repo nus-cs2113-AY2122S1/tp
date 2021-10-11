@@ -16,6 +16,8 @@ import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingNameException;
 
+import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
+
 public class MainParser {
     private static final String ADD_CONTACT_COMD = "add";
     private static final String EDIT_CONTACT_COMD = "edit";
@@ -74,7 +76,14 @@ public class MainParser {
             if (details[NAME_INDEX] == null) {
                 throw new MissingNameException();
             }
-            return new AddContactCommand(details[DetailType.NAME.getIndex()], details[DetailType.GITHUB.getIndex()]);
+            assert details.length == NUMBER_OF_FIELDS;
+            String name = details[DetailType.NAME.getIndex()];
+            String github = details[DetailType.GITHUB.getIndex()];
+            String linkedin = details[DetailType.LINKEDIN.getIndex()];
+            String telegram = details[DetailType.TELEGRAM.getIndex()];
+            String twitter = details[DetailType.TWITTER.getIndex()];
+            String email = details[DetailType.EMAIL.getIndex()];
+            return new AddContactCommand(name, github, linkedin, telegram, twitter, email);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (MissingArgException e) {
