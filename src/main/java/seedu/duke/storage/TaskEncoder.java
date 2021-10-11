@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.Parser;
 import seedu.duke.items.Task;
 
 import java.util.ArrayList;
@@ -18,6 +19,6 @@ public class TaskEncoder {
                 + " | "
                 + task.getDescription()
                 + " | "
-                + task.getDateValue();
+                + Parser.convertDateTimeForSaving(task.getDateValue());
     }
 }
