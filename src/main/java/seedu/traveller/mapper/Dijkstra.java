@@ -10,7 +10,6 @@ import static seedu.traveller.mapper.GraphList.vertexArray;
 
 public class Dijkstra {
     private static double[][] adjMatrix = new double[10][10];
-    //double[][] adjMatrix ;
 
     public static void computeSource(Vertex src) {
         for (Vertex v: vertexArray) {
@@ -23,8 +22,10 @@ public class Dijkstra {
 
         while (!priorityQueue.isEmpty()) {
             Vertex vertex = priorityQueue.poll();
+            //System.out.println("Scanning Vertex " + vertex.name);
 
             for (Edge edge : vertex.getEdges()) {
+                //System.out.println("Scanning Edge from " + edge.getStartVertex() + " to " + edge.getTargetVertex());
                 Vertex v = edge.getTargetVertex();
                 double w = edge.getWeight();
                 double minDist = vertex.getMinDistance() + w;
@@ -35,23 +36,33 @@ public class Dijkstra {
                     v.setMinDistance(minDist);
                     priorityQueue.add(v);
                     adjMatrix[vertex.key][v.key] = minDist;
+                    adjMatrix[v.key][vertex.key] = minDist;
+                    //System.out.println("Min distance of " + minDist + " between " + vertex.name + " and " + v.name);
                 }
             }
         }
     }
 
-    public static List<Vertex> getToGoal(Vertex targetV) {
+    public static void getToGoal(Vertex srcV, Vertex targetV) {
         List<Vertex> path = new ArrayList<>();
         List<Double> dist = new ArrayList<>();
         double curr;
         double sum = 0.0;
 
         for (Vertex v = targetV; v != null; v = v.getPrevVertex()) {
-            path.add(v);
-            if (v.getPrevVertex() != null) {
-                dist.add(adjMatrix[v.getPrevVertex().key][v.key]);
+            if (!path.contains(v)) {
+                path.add(v);
+                //System.out.println("Adding to shortest path Vertex " + v.name);
+                if (v.getPrevVertex() != null) {
+                    dist.add(adjMatrix[v.getPrevVertex().key][v.key]);
+                }
+                if (v == srcV) {
+                    break;
+                }
             }
         }
+
+
         Collections.reverse(path);
         Collections.reverse(dist);
 
@@ -60,7 +71,9 @@ public class Dijkstra {
         System.out.println("Breakdown of path");
         for (double d : dist) {
             curr = d - sum;
-            System.out.println(curr);
+            if (curr - 0.0 > 0.000001) {
+                System.out.println(curr);
+            }
             sum += curr;
         }
         System.out.println("Total distance = " + sum);
@@ -69,6 +82,6 @@ public class Dijkstra {
 
     public static List<Vertex> run(Vertex s, Vertex t) {
         computeSource(s);
-        return getToGoal(t);
+        getToGoal(s,t);
     }
 }
