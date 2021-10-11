@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import seedu.duke.command.UpdateCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.DukeException;
@@ -46,7 +47,7 @@ public class Parser {
 
 
     private static String parseUpdateCommand(String command) throws DukeException {
-        String resultMsg;
+        String resultMsg = "";
         int i;
         String delimiter = "i/|a/|u/|e/";
         String[] details = command.split(delimiter);
@@ -63,9 +64,13 @@ public class Parser {
 
         for (i = 0; i < IngredientList.getInstance().getInventoryStock() - 1; i++) {
             if (ingredientName == IngredientList.getInstance().getIngredientInfo(i + 1).split(" ")[0]) {
-                IngredientList.getInstance().setAmount(ingredientAmount);
+                resultMsg = new UpdateCommand(i + 1, ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry).run();
             }
         }
+        if (resultMsg == "") {
+            resultMsg = "Ingredient not in inventory!";
+        }
+        return resultMsg;
     }
 
     private static String parseAddCommand(String command) {

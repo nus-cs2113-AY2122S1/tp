@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import seedu.duke.command.Command;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;

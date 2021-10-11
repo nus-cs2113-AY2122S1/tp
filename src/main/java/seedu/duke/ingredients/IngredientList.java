@@ -69,5 +69,8 @@ public class IngredientList {
         ingredientList.add(ingredient);
     }
 
+    public void set(int ingredientNumber, Ingredient ingredient) {
+        ingredientList.set(ingredientNumber, ingredient);
+    }
 
 }
