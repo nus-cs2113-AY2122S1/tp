@@ -30,7 +30,8 @@ public class RecipeListTest {
             recipes.add(recipe);
             Recipe duplicateRecipe = new Recipe(TestUtil.EXAMPLE_RECIPE_NAME,
                     TestUtil.generateIngredientListForRecipe());
-            assertThrows(DuplicateDataException.class,()-> { recipes.add(duplicateRecipe); });
+            assertThrows(DuplicateDataException.class,() -> {
+                recipes.add(duplicateRecipe); });
         } catch (Exception e) {
             fail("Recipe not added.");
         }
@@ -42,7 +43,8 @@ public class RecipeListTest {
         RecipeList recipes = new RecipeList();
         try {
             recipes.add(recipe);
-            assertThrows(NotFoundException.class,()-> { recipes.remove("Duck"); });
+            assertThrows(NotFoundException.class,() -> {
+                recipes.remove("Duck"); });
         } catch (Exception e) {
             fail("Recipe not added.");
         }
