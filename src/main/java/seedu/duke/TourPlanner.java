@@ -19,7 +19,9 @@ public class TourPlanner {
         ClientList clientList = new ClientList();
         while (flag) {
             command = ui.readCommand();
-            if (command.contains("bye")) { break;}
+            if (command.contains("bye")) {
+                break;
+            }
             Command dummy = Parser.parse(command);
             dummy.execute(clientList, ui);
         }
