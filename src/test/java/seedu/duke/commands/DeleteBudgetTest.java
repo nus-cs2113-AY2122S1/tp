@@ -8,11 +8,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeleteBudgetTest {
 
     @Test
-    void deleteBudget_budgetListSize_1() {
+    void deleteBudget_budgetAmount_0() {
         RecordList currentBudgetList = new RecordList();
-        currentBudgetList.addBudget(08.00, 01);
-        currentBudgetList.addBudget(10.00, 02);
-        currentBudgetList.deleteBudget(1, 1);
-        assertEquals(1, currentBudgetList.getSize());
+        currentBudgetList.addBudget(08.00);
+        currentBudgetList.deleteBudget();
+        assertEquals(0.00, currentBudgetList.getBudget().getAmount());
     }
 }

@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class Expenditure extends Record {
     public static String description;
-    public static LocalDate date;
+    //public static LocalDate date;
 
-    public Expenditure(String description, double amount, LocalDate date) {
-        super(amount, date.getMonthValue());
-        Expenditure.date = date;
+    public Expenditure(String description, double amount) {
+        super(amount);
+        //Expenditure.date = date;
         this.description = description;
     }
 
@@ -22,18 +22,22 @@ public class Expenditure extends Record {
         return amount;
     }
 
+    /*
+    Not used.
     public LocalDate getDate() {
         return date;
     }
+
 
     @Override
     public int getMonth() {
         return date.getMonthValue();
     }
+    */
 
 
     public String toString() {
-        return (description + " $" + this.amount + " Month: " + date);
+        return (description + " $" + this.amount);
     }
 
     @Override

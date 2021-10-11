@@ -12,9 +12,9 @@ public class DeleteExpenditureTest {
     @Test
     void deleteExpenditure_expenditureList_sizeOf1() {
         RecordList currentExpenditureList = new RecordList();
-        currentExpenditureList.addExpenditure("TestExpenditure1", 08.00, LocalDate.of(2021, 10, 8));
-        currentExpenditureList.addExpenditure("TestExpenditure2", 10.00, LocalDate.of(2021, 10, 8));
-        currentExpenditureList.deleteExpenditure(10, 1);
-        assertEquals(1, currentExpenditureList.getSize());
+        currentExpenditureList.addExpenditure("TestExpenditure1", 08.00);
+        currentExpenditureList.addExpenditure("TestExpenditure2", 10.00);
+        currentExpenditureList.deleteExpenditure(1);
+        assertEquals(1, currentExpenditureList.getExpenditureListSize());
     }
 }

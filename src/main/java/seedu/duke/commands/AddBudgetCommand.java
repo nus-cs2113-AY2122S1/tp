@@ -7,10 +7,10 @@ public class AddBudgetCommand extends AddCommand {
     public double amount;
     public int month;
 
-    public AddBudgetCommand(double amount, int month) {
+    public AddBudgetCommand(double amount) {
         //this.description = description;
         this.amount = amount;
-        this.month = month;
+        //this.month = month;
     }
     //    public String getDescription(String rawCommand) {
     //        return rawCommand.split(" ")[1];
@@ -30,6 +30,6 @@ public class AddBudgetCommand extends AddCommand {
     //    }
 
     public void execute() {
-        recordList.addBudget(amount, month);
+        recordList.addBudget(amount);
     }
 }

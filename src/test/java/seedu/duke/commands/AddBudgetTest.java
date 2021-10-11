@@ -28,12 +28,12 @@ public class AddBudgetTest {
     //    }
 
     @Test
-    void addBudget_rawCommand_budgetList_sizeOf1() {
+    void addBudget_rawCommand_budgetListAmount_20() {
         double spendingLimit = 20.00;
-        int month = 12;
+        //int month = 12;
 
         RecordList currentBudgetList = new RecordList();
-        currentBudgetList.addBudget(spendingLimit, month);
-        assertEquals(1, currentBudgetList.getSize());
+        currentBudgetList.addBudget(spendingLimit);
+        assertEquals(20.00, currentBudgetList.getBudget().getAmount());
     }
 }
