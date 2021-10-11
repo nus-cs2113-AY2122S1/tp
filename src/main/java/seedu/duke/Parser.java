@@ -23,7 +23,8 @@ public class Parser {
     }
 
     public static String parse(String command) throws DukeException {
-        String[] words = command.split(SPACE_SEPARATOR);
+
+        String[] words = command.split(SPACE_SEPARATOR, 2);
 
         switch (words[0]) {
         case COMMAND_LIST:
