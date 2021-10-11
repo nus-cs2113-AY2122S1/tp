@@ -156,18 +156,16 @@ public class Parser {
         assert (!workoutIndexAndExerciseArgs[0].contains(EXERCISE_KEYWORD));
         assert (!workoutIndexAndExerciseArgs[1].contains(EXERCISE_KEYWORD));
 
-        String workoutIndex = workoutIndexAndExerciseArgs[0].trim();
-
         String[] nameAndSetsReps = splitCommandWordsAndArgs(workoutIndexAndExerciseArgs[1].trim(), SETS_KEYWORD);
         assert (!nameAndSetsReps[0].contains(SETS_KEYWORD));
         assert (!nameAndSetsReps[1].contains(SETS_KEYWORD));
-
-        String exerciseName = nameAndSetsReps[0].trim();
 
         String[] setsAndReps = splitCommandWordsAndArgs(nameAndSetsReps[1].trim(), REPS_KEYWORD);
         assert (!setsAndReps[0].contains(REPS_KEYWORD));
         assert (!setsAndReps[1].contains(REPS_KEYWORD));
 
+        String workoutIndex = workoutIndexAndExerciseArgs[0].trim();
+        String exerciseName = nameAndSetsReps[0].trim();
         String sets = setsAndReps[0].trim();
         String reps = setsAndReps[1].trim();
 
@@ -207,8 +205,8 @@ public class Parser {
      *
      * @param commandArgs raw input string without the command word.
      * @return String array of size 2. If there is no workout index, empty String array is returned.
-     * If there is a workout index but no exercise index, only workout index is returned.
-     * Otherwise, both workout index and exercise index are returned.
+     *      If there is a workout index but no exercise index, only workout index is returned.
+     *      Otherwise, both workout index and exercise index are returned.
      */
     private String[] getWorkoutAndExerciseIndices(String commandArgs) {
         if (!commandArgs.contains(WORKOUT_KEYWORD)) {
