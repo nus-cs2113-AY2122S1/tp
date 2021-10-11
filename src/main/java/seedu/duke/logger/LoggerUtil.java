@@ -18,10 +18,8 @@ public class LoggerUtil {
 
     public static void loggerUtilSetup() {
         LogManager.getLogManager().reset();
-        ch = new ConsoleHandler();
-        ch.setLevel(Level.SEVERE);
-        LOGGER.addHandler(ch);
         try {
+            assert FILE != null;
             FILE.getParentFile().mkdirs();
             fh = new FileHandler(LOGGER_PATH);
             fh.setFormatter(new SimpleFormatter());
@@ -32,9 +30,9 @@ public class LoggerUtil {
     }
 
     public static void setupLogger(Logger logger) {
-        if (ch != null && fh != null) {
+        assert FILE.exists();
+        if (fh != null) {
             logger.setLevel(Level.ALL);
-            logger.addHandler(ch);
             logger.addHandler(fh);
             logger.info("Logger setup successful");
         }
