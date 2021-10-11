@@ -1,4 +1,4 @@
-No file
+	Flight data cannot be found, is the database file under ./flightData/flights.txt?
   ______                      ____         
  /_  __/________ __   _____  / / /__  _____
   / / / ___/ __ `/ | / / _ \/ / / _ \/ ___/
