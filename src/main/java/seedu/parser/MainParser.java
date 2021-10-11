@@ -25,7 +25,6 @@ public class MainParser {
     private static final String EXIT_COMD = "exit";
     private static final String VIEW_COMD = "view";
     private static final String LIST_COMD = "list";
-    private static final String FORBIDDEN_COMD = "forbidden";
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
