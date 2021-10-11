@@ -54,19 +54,21 @@ public class AddAssessmentCommand extends Command {
 
         String weightageString = argumentMap.get(KEY_WEIGHTAGE);
         if (!Util.isStringDouble(weightageString)) {
+            double[] weightageRange = Assessment.getWeightageRange();
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_WEIGHTAGE,
-                    Assessment.WEIGHTAGE_RANGE[0],
-                    Assessment.WEIGHTAGE_RANGE[1])
+                    weightageRange[0],
+                    weightageRange[1])
             );
         }
 
         double weightage = Double.parseDouble(weightageString);
-        if (weightage < Assessment.WEIGHTAGE_RANGE[0] || weightage > Assessment.WEIGHTAGE_RANGE[1]) {
+        if (!Assessment.isWeightageWithinRange(weightage)) {
+            double[] weightageRange = Assessment.getWeightageRange();
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_WEIGHTAGE,
-                    Assessment.WEIGHTAGE_RANGE[0],
-                    Assessment.WEIGHTAGE_RANGE[1])
+                    weightageRange[0],
+                    weightageRange[1])
             );
         }
 

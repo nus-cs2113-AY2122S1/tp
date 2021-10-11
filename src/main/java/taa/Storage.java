@@ -6,6 +6,7 @@ import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import taa.exception.TaaException;
+import taa.module.Module;
 import taa.module.ModuleList;
 import taa.util.Util;
 
@@ -13,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Storage {
     private static final String MESSAGE_FORMAT_UNABLE_TO_OPEN_FILE = "Unable to open file - %s";
@@ -44,6 +46,10 @@ public class Storage {
             throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_READ_JSON, filename));
         } catch (JsonSyntaxException e) {
             throw new TaaException(String.format(MESSAGE_FORMAT_JSON_SYNTAX_ERROR, filename));
+        }
+
+        if (!moduleList.verify()) {
+            moduleList = null;
         }
 
         return moduleList;

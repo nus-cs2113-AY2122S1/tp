@@ -1,22 +1,32 @@
 package taa.student;
 
+import taa.ClassChecker;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Represents students.
  */
-public class Student {
+public class Student implements ClassChecker {
+    private static final double[] MARKS_RANGE = {0, 100};
+
     private String id;
     private String name;
-    private final ArrayList<Attendance> attendance;
-    private final HashMap<String, Double> results;
+    private final ArrayList<Attendance> attendances = new ArrayList<>();
+    private final HashMap<String, Double> results = new HashMap<>();
 
     public Student(String id, String name) {
         this.id = id;
         this.name = name;
-        this.attendance = new ArrayList<>();
-        this.results = new HashMap<>();
+    }
+
+    public static boolean isMarksWithinRange(double marks) {
+        return (marks >= MARKS_RANGE[0] && marks <= MARKS_RANGE[1]);
+    }
+
+    public static double[] getMarksRange() {
+        return MARKS_RANGE;
     }
 
     /**
@@ -124,4 +134,24 @@ public class Student {
         return results.containsKey(assessmentName);
     }
 
+    @Override
+    public boolean verify() {
+        if (id.isEmpty() || name.isEmpty()) {
+            return false;
+        }
+
+        for (Attendance attendance : attendances) {
+            if (!attendance.verify()) {
+                return false;
+            }
+        }
+
+        for (String assessmentName : results.keySet()) {
+            if (!isMarksWithinRange(results.get(assessmentName))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

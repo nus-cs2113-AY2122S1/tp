@@ -1,14 +1,16 @@
 package taa.module;
 
+import taa.ClassChecker;
+
 import java.util.ArrayList;
 
-public class ModuleList {
+public class ModuleList implements ClassChecker {
     private static final String MESSAGE_MODULE_LIST_HEADER = "Module List:";
 
-    private final ArrayList<Module> modules;
+    private final ArrayList<Module> modules = new ArrayList<>();
 
     public ModuleList() {
-        this.modules = new ArrayList<>();
+
     }
 
     public void addModule(Module module) {
@@ -17,6 +19,10 @@ public class ModuleList {
 
     public int getSize() {
         return modules.size();
+    }
+
+    public ArrayList<Module> getModules() {
+        return new ArrayList<>(modules);
     }
 
     /**
@@ -70,5 +76,12 @@ public class ModuleList {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean verify() {
+        modules.removeIf(module -> !module.verify());
+
+        return true;
     }
 }

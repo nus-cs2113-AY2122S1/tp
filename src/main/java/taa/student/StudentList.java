@@ -1,14 +1,16 @@
 package taa.student;
 
+import taa.ClassChecker;
+
 import java.util.ArrayList;
 
-public class StudentList {
-    private static String MESSAGE_LIST_STUDENT_HEADER = "Student List:";
+public class StudentList implements ClassChecker {
+    private static final String MESSAGE_LIST_STUDENT_HEADER = "Student List:";
 
-    private ArrayList<Student> students;
+    private final ArrayList<Student> students = new ArrayList<>();
 
     public StudentList() {
-        this.students = new ArrayList<>();
+
     }
 
     /**
@@ -82,5 +84,12 @@ public class StudentList {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean verify() {
+        students.removeIf(student -> !student.verify());
+
+        return true;
     }
 }

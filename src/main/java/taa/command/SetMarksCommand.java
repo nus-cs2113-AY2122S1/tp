@@ -1,6 +1,5 @@
 package taa.command;
 
-
 import taa.Storage;
 import taa.Ui;
 import taa.assessment.Assessment;
@@ -27,8 +26,6 @@ public class SetMarksCommand extends Command {
         KEY_MARKS
     };
 
-    private static final double[] MARKS_RANGE = {0, 100};
-
     private static final String MESSAGE_FORMAT_SET_MARKS_USAGE = "Usage: %s "
             + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<ASSESSMENT_NAME> %s/<MARKS>";
     private static final String MESSAGE_FORMAT_INVALID_MARKS = "Invalid Marks. "
@@ -44,7 +41,7 @@ public class SetMarksCommand extends Command {
      *
      * @param moduleList Module list to access the module the student is enrolled in.
      * @param ui The ui instance to handle interactions with the user.
-     * @param storage
+     * @param storage The storage instance to handle saving.
      * @throws TaaException when set marks command is invalid.
      */
     @Override
@@ -84,12 +81,14 @@ public class SetMarksCommand extends Command {
 
         String marksInput = argumentMap.get(KEY_MARKS);
         if (!Util.isStringDouble(marksInput)) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, MARKS_RANGE[0], MARKS_RANGE[1]));
+            double[] marksRange = Student.getMarksRange();
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, marksRange[0], marksRange[1]));
         }
 
         double marks = Double.parseDouble(marksInput);
-        if (marks < MARKS_RANGE[0] || marks > MARKS_RANGE[1]) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, MARKS_RANGE[0], MARKS_RANGE[1]));
+        if (!Student.isMarksWithinRange(marks)) {
+            double[] marksRange = Student.getMarksRange();
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, marksRange[0], marksRange[1]));
         }
 
         setMarks(ui, student, assessment, marks);

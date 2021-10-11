@@ -1,6 +1,8 @@
 package taa.student;
 
-public class Attendance {
+import taa.ClassChecker;
+
+public class Attendance implements ClassChecker {
     private int lessonNum;
     private boolean hadAttend;
 
@@ -16,5 +18,14 @@ public class Attendance {
     @Override
     public String toString() {
         return lessonNum + " - " + markAttendance();
+    }
+
+    @Override
+    public boolean verify() {
+        if (lessonNum < 0) {
+            return false;
+        }
+
+        return true;
     }
 }

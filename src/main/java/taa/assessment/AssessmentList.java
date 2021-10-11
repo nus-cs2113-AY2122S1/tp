@@ -1,14 +1,20 @@
 package taa.assessment;
 
+import taa.ClassChecker;
+
 import java.util.ArrayList;
 
-public class AssessmentList {
+public class AssessmentList implements ClassChecker {
     private static final String MESSAGE_ASSESSMENT_LIST_HEADER = "Assessment List:";
 
-    private final ArrayList<Assessment> assessments;
+    private final ArrayList<Assessment> assessments = new ArrayList<>();
 
-    public AssessmentList() {
-        this.assessments = new ArrayList<>();
+    public int getSize() {
+        return assessments.size();
+    }
+
+    public ArrayList<Assessment> getAssessments() {
+        return new ArrayList<>(assessments);
     }
 
     /**
@@ -27,7 +33,7 @@ public class AssessmentList {
             }
         }
 
-        if ((totalWeightage + assessment.getWeightage()) > Assessment.WEIGHTAGE_RANGE[1]) {
+        if ((totalWeightage + assessment.getWeightage()) > Assessment.getWeightageRange()[1]) {
             return false;
         }
 
@@ -58,14 +64,6 @@ public class AssessmentList {
         return null;
     }
 
-    public ArrayList<Assessment> getAssessments() {
-        return new ArrayList<>(assessments);
-    }
-
-    public int getSize() {
-        return assessments.size();
-    }
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(MESSAGE_ASSESSMENT_LIST_HEADER);
@@ -77,5 +75,12 @@ public class AssessmentList {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Override
+    public boolean verify() {
+        assessments.removeIf(assessment -> !assessment.verify());
+
+        return true;
     }
 }
