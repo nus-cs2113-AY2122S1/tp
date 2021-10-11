@@ -113,7 +113,7 @@ public class Parser {
     }
 
     /**
-     * Parses the user command with commandType removed into an executable add lesson type command.
+     * Parses the user response with commandType removed into an executable add lesson type command.
      *
      * @param userResponse the user response
      * @return an executable add lesson type command
@@ -400,9 +400,14 @@ public class Parser {
      * @return true if the sequence is correct, false otherwise
      */
     private static boolean hasCorrectLessonFlagSequence(String userResponse) {
+        assert userResponse.split(" -d | -s | -e ").length == 4 : "user response should have exactly 3 flags";
         int posOfDFlag = userResponse.indexOf(" -d ");
         int posOfSFlag = userResponse.indexOf(" -s ");
         int posOfEFlag = userResponse.indexOf(" -e ");
+        if (posOfDFlag < 0 || posOfSFlag < 0 || posOfEFlag < 0) {
+            //one of the flags is not found, likely due to the presence of a duplicate flag
+            return false;
+        }
         return (posOfDFlag < posOfSFlag) && (posOfDFlag < posOfEFlag) && (posOfSFlag < posOfEFlag);
     }
 }
