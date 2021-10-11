@@ -50,4 +50,9 @@ public class Ui {
     public void printDelete(String tripName) {
         System.out.println("\tYou have just deleted a trip called " + tripName + ".");
     }
+
+    public void printEdit(String tripName) {
+        System.out.println("\tYou have just edited a trip called " + tripName + ".");
+    }
+
 }
