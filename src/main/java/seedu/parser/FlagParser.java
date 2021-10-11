@@ -67,6 +67,7 @@ public class FlagParser {
     }
 
     private static void checkRemainingFlags(String flag, SearchFlags searchFlags) {
+        assert flag.length() >= 1 : "Flag should not be empty";
         String flagLetter = flag.substring(0, 1);
         String flagTerm = flag.substring(1).trim();
         switch (flagLetter) {

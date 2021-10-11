@@ -13,8 +13,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NusMods {
+
+    private static Logger logger = Logger.getLogger("");
+
     private static final String MODULE_API = "https://api.nusmods.com/v2/2021-2022/modules/";
 
     public static void searchModsOnline(String searchTerm, SearchFlags searchFlags) throws IOException {
@@ -84,14 +89,15 @@ public class NusMods {
         int count = 0;
         reader.beginArray();
         while (reader.hasNext()) {
+            Module module = new Gson().fromJson(reader, Module.class);
+            String moduleCode = module.getModuleCode();
             try {
-                Module module = new Gson().fromJson(reader, Module.class);
-                String moduleCode = module.getModuleCode();
                 InputStream modStream = getOnlineModInfo(moduleCode);
                 ModStorage.saveModInfo(moduleCode, modStream);
                 count++;
                 System.out.println(count);
             } catch (Exception e) {
+                logger.log(Level.WARNING, "Failed to save mod" + moduleCode);
                 TextUi.printErrorMessage();
             }
         }

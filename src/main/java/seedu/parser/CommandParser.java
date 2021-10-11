@@ -55,11 +55,13 @@ public class CommandParser {
         if (text.toLowerCase().contains(FLAG)) {
             return parseSearchCommandWithFlag(text);
         }
+        assert !text.contains(FLAG) : "This line should not be hit with a flag.";
         String searchTerm = text.substring(SEARCH_LENGTH).trim();
         return new SearchCommand(searchTerm, new SearchFlags());
     }
 
     private Command parseSearchCommandWithFlag(String text) {
+        assert text.contains(FLAG) : "String should contain flag";
         int firstFlagPos = text.indexOf(FLAG);
         String searchTerm = text.substring(SEARCH_LENGTH, firstFlagPos - 1).trim();
         String[] flags = text.substring(firstFlagPos).split(FLAG);
