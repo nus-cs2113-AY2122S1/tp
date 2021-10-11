@@ -8,9 +8,9 @@ import seedu.timetable.TimetableLesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class DeleteCommandTest {
+class ClearCommandTest {
     /**
-     * Tests if the module gets deleted from the test timetable.
+     * Tests if the timetable gets cleared.
      */
     @Test
     public void execute_ValidModuleCode_timetableShouldBeEmptied() {
@@ -18,23 +18,33 @@ class DeleteCommandTest {
         Timetable tt1 = new Timetable(1);
         Timetable tt2 = new Timetable(1);
 
-        //Creating a test module and adding to timetable 1
-        Module testMod = new Module("CFG1002");
-        testMod.setModuleCredit(2.0);
+        //Creating a test modules and adding to timetable 1
+        Module testMod = new Module("CS1231");
+        testMod.setModuleCredit(4.0);
         testMod.setTitle("Career Catalyst");
-        Lesson lesson = new Lesson(
+        Lesson lesson1 = new Lesson(
+                "CS1231",
+                "1000",
+                "1200",
+                "E-Learn_C",
+                "Lecture",
+                "Thursday");
+        Lesson lesson2 = new Lesson(
                 "CFG1002",
                 "0600",
                 "0800",
                 "E-Learn_B",
                 "Lecture",
                 "Wednesday");
-        TimetableLesson timetableLesson = new TimetableLesson(testMod, 1, lesson);
-        tt1.addLesson(timetableLesson);
+        TimetableLesson timetableLesson1 = new TimetableLesson(testMod, 1, lesson1);
+        TimetableLesson timetableLesson2 = new TimetableLesson(testMod, 1, lesson2);
+        tt1.addLesson(timetableLesson1);
+        tt1.addLesson(timetableLesson2);
 
-        //Deleting test module from timetable 1
-        Command command = new DeleteCommand("CFG1002", tt1);
+        //Clearing timetable 1
+        Command command = new ClearCommand(tt1);
         command.execute();
+        
         //checking if the empty timetable (that is timetable 2 matches with timetable 1)
         assertEquals(tt2.getClass(), tt1.getClass());
     }
