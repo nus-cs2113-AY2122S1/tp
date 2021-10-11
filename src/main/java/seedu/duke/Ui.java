@@ -54,4 +54,8 @@ public class Ui {
                 + "Please enter the date again: ");
     }
 
+    public static void printUnknownCommandError(){
+        System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter -help "
+                + "to learn more.");
+    }
 }
