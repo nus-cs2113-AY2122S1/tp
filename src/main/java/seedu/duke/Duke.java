@@ -15,6 +15,7 @@ public class Duke {
      * @return user input with leading and trailing whitespaces removed
      */
     private static String readUserInput(Scanner in) {
+        Ui.printPendingCommand();
         return in.nextLine().strip();
     }
 

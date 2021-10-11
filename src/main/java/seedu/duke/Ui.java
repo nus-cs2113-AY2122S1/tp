@@ -2,6 +2,10 @@ package seedu.duke;
 
 public class Ui {
 
+    public static void printPendingCommand() {
+        System.out.print("Enter your command: ");
+    }
+
     public static void printWelcome() {
 
         String logo = " ____        _        \n"
@@ -10,7 +14,6 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
 
     }
 
