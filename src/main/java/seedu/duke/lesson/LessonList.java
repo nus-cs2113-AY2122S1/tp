@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class LessonList {
-    // TODO: Implement serialization/deserialization
 
     private List<Lesson> lessonList;
 
@@ -25,14 +24,47 @@ public class LessonList {
         lessonList.add(newLesson);
     }
 
+    /**
+     * Deletes all lessons from the lesson list.
+     */
     public void clearLessonList() {
         lessonList.clear();
     }
 
-    public void deleteLesson(int index) {
-        lessonList.remove(index);
+    public boolean isEmpty() {
+        return lessonList.isEmpty();
     }
 
+    /**
+     * Gets the size of the lesson list.
+     *
+     * @return the number of lessons in the lesson list
+     */
+    public int getSize() {
+        return lessonList.size();
+    }
+
+    /**
+     * Deletes a lesson from the list.
+     *
+     * @param index the index of the lesson to delete
+     */
+    public void deleteLesson(int index) throws DukeException {
+        try {
+            lessonList.remove(index);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
+        } catch (NumberFormatException exception) {
+            throw new DukeException(Message.ERROR_NUMBER_FORMAT);
+        }
+    }
+
+    /**
+     * Gets information of a lesson from the lesson list.
+     *
+     * @param index the index of the lesson
+     * @return the lesson represented by the specified index
+     */
     public Lesson getLesson(int index) throws DukeException {
         try {
             return lessonList.get(index);
@@ -43,20 +75,24 @@ public class LessonList {
         }
     }
 
-    public boolean isEmpty() {
-        return lessonList.isEmpty();
-    }
-
-    public int getSize() {
-        return lessonList.size();
-    }
-
+    /**
+     * Gets lessons containing the specified keyword.
+     *
+     * @param keyword the keyword to find in lessons in the list
+     * @return the filtered lessons list containing only lessons with the specified keyword
+     */
     public LessonList filterLessonsByKeyword(String keyword) {
         return new LessonList(lessonList.stream()
                 .filter(lesson -> lesson.getTitle().toLowerCase().contains(keyword))
                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Gets lessons with the specified period.
+     *
+     * @param period the day of the week for the task/lesson
+     * @return the filtered lessons list containing only lessons with the specified period
+     */
     public LessonList filterLessonsByPeriod(String period) {
         return new LessonList(lessonList.stream()
                 .filter(lesson -> lesson.getDayOfTheWeek().toLowerCase().contains(period))
