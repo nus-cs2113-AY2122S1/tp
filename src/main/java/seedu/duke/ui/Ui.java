@@ -69,6 +69,7 @@ public class Ui {
 
     /**
      * Prints error message.
+     *
      * @param e exception whose message we want to print.
      */
     public static void printErrorMessage(GetJackDException e) {
@@ -83,6 +84,7 @@ public class Ui {
      * @param exercises is the list of exercises.
      */
     public void showExercisesToUser(ArrayList<Exercise> exercises) {
+        assert (!exercises.isEmpty());
         Ui.printLineSeparator();
         System.out.println("Exercises in mentioned workout:");
 
@@ -98,6 +100,7 @@ public class Ui {
      * @param workouts is the list of workouts.
      */
     public void showWorkoutsToUser(ArrayList<Workout> workouts) {
+        assert (!workouts.isEmpty());
         Ui.printLineSeparator();
         System.out.println("Workout list:");
 
@@ -114,6 +117,7 @@ public class Ui {
      * @param message is the unique message to be shown.
      */
     public void showToUser(String message) {
+        assert (!message.isEmpty());
         printLineSeparator();
         System.out.println(INDENT + message.replace("\n", NEW_LINE));
         printLineSeparator();

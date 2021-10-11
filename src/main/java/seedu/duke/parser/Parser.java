@@ -146,17 +146,36 @@ public class Parser {
      *
      * @param commandArgs user input without the command word.
      * @return string array containing workoutIndex, exerciseName, sets and reps.
-     * @throws GetJackDException if any of the above mentioned arguments are empty.
+     * @throws GetJackDException if any of the above-mentioned arguments are empty.
      */
     private static String[] getExerciseArgs(String commandArgs) throws GetJackDException {
         String args = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
+        assert (!args.contains(WORKOUT_KEYWORD));
+
         String[] workoutIndexAndExerciseArgs = splitCommandWordsAndArgs(args, EXERCISE_KEYWORD);
-        String workoutIndex = workoutIndexAndExerciseArgs[0].trim();
+        assert (!workoutIndexAndExerciseArgs[0].contains(EXERCISE_KEYWORD));
+        assert (!workoutIndexAndExerciseArgs[1].contains(EXERCISE_KEYWORD));
+
         String[] nameAndSetsReps = splitCommandWordsAndArgs(workoutIndexAndExerciseArgs[1].trim(), SETS_KEYWORD);
-        String exerciseName = nameAndSetsReps[0].trim();
+        assert (!nameAndSetsReps[0].contains(SETS_KEYWORD));
+        assert (!nameAndSetsReps[1].contains(SETS_KEYWORD));
+
         String[] setsAndReps = splitCommandWordsAndArgs(nameAndSetsReps[1].trim(), REPS_KEYWORD);
+        assert (!setsAndReps[0].contains(REPS_KEYWORD));
+        assert (!setsAndReps[1].contains(REPS_KEYWORD));
+
+        String workoutIndex = workoutIndexAndExerciseArgs[0].trim();
+        String exerciseName = nameAndSetsReps[0].trim();
         String sets = setsAndReps[0].trim();
         String reps = setsAndReps[1].trim();
+
+        String[] exerciseArgs = new String[]{workoutIndex, exerciseName, sets, reps};
+        for (String s : exerciseArgs) {
+            assert (!s.contains(WORKOUT_KEYWORD));
+            assert (!s.contains(EXERCISE_KEYWORD));
+            assert (!s.contains(SETS_KEYWORD));
+            assert (!s.contains(REPS_KEYWORD));
+        }
 
         if (workoutIndex.isEmpty()) {
             throw new GetJackDException("Error. Empty workout index");
@@ -167,7 +186,7 @@ public class Parser {
         if (sets.isEmpty() || reps.isEmpty()) {
             throw new GetJackDException("Error. Empty sets or reps.");
         }
-        return new String[]{workoutIndex, exerciseName, sets, reps};
+        return exerciseArgs;
     }
 
     private Command prepareMarkExerciseAsDone(String commandArgs) {
@@ -197,9 +216,18 @@ public class Parser {
             String workoutIndex = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
             return new String[]{workoutIndex, ""};
         }
+        assert (commandArgs.contains(WORKOUT_KEYWORD));
+        assert (commandArgs.contains(EXERCISE_KEYWORD));
+
         String[] args = splitCommandWordsAndArgs(commandArgs, EXERCISE_KEYWORD);
         String workoutIndex = args[0].replace(WORKOUT_KEYWORD, "").trim();
         String exerciseIndex = args[1].trim();
+
+        assert (!workoutIndex.contains(WORKOUT_KEYWORD));
+        assert (!workoutIndex.contains(EXERCISE_KEYWORD));
+        assert (!exerciseIndex.contains(WORKOUT_KEYWORD));
+        assert (!exerciseIndex.contains(EXERCISE_KEYWORD));
+
         return new String[]{workoutIndex, exerciseIndex};
     }
 
