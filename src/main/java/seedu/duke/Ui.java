@@ -7,6 +7,7 @@ public class Ui {
     private static final String CLEAR_MESSAGE = "All clients have been deleted";
     private static final String CUT_MESSAGE = "Client has been deleted:";
     private static final String ADD_MESSAGE = "Client has been added:";
+    private static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
 
     private static Scanner in = new Scanner(System.in);
 
@@ -48,6 +49,11 @@ public class Ui {
 
     public void showAdd(Client client) {
         show(ADD_MESSAGE + "\n" + client);
+        showLine();
+    }
+
+    public void showBye() {
+        show(BYE_MESSAGE);
         showLine();
     }
 }
