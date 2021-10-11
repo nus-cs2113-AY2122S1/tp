@@ -6,9 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
 import terminus.command.CommandResult;
-import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidLinkException;
 import terminus.exception.InvalidTimeFormatException;
+import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidDayException;
 import terminus.module.NusModule;
 import terminus.parser.MainCommandParser;
 import terminus.parser.NoteCommandParser;
@@ -29,7 +31,8 @@ public class BackNoteCommandTest {
 
     @Test
     void execute_success()
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+            throws InvalidCommandException, InvalidArgumentException,
+            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
         Command backCommand = commandParser.parseCommand("back");
         CommandResult backResult = backCommand.execute(ui, nusModule);
         assertTrue(backResult.isOk());

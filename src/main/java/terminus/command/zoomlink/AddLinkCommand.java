@@ -4,17 +4,21 @@ import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.content.ContentManager;
 import terminus.content.Link;
-import terminus.content.Note;
+import terminus.exception.InvalidLinkException;
 import terminus.exception.InvalidTimeFormatException;
+import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidDayException;
 import terminus.module.NusModule;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
-import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidCommandException;
 import terminus.ui.Ui;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+
+import static terminus.common.CommonFormat.isValidDay;
+import static terminus.common.CommonFormat.isValidUrl;
 
 public class AddLinkCommand extends Command {
 
@@ -40,7 +44,8 @@ public class AddLinkCommand extends Command {
     }
 
     @Override
-    public void parseArguments(String arguments) throws InvalidArgumentException, InvalidTimeFormatException {
+    public void parseArguments(String arguments)
+            throws InvalidArgumentException, InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
         // Perform required checks with regex
         if (arguments == null || arguments.isBlank()) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
@@ -57,6 +62,14 @@ public class AddLinkCommand extends Command {
         this.day = argArray.get(1);
         this.startTime = CommonFormat.localTimeConverter(userStartTime);
         this.link = argArray.get(3);
+
+        if (!isValidDay(this.day)) {
+            throw new InvalidDayException(String.format(Messages.ERROR_MESSAGE_INVALID_DAY, this.day));
+        }
+        if (!isValidUrl(this.link)) {
+            throw new InvalidLinkException(
+                    String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
+        }
     }
 
     @Override

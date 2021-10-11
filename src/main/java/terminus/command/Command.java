@@ -1,8 +1,10 @@
 package terminus.command;
 
-import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidLinkException;
 import terminus.exception.InvalidTimeFormatException;
+import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidDayException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
@@ -35,7 +37,8 @@ public abstract class Command {
      * @throws InvalidArgumentException Exception for when arguments parsing fails
      * @throws InvalidTimeFormatException Exception for when time format is invalid
      */
-    public void parseArguments(String arguments) throws InvalidArgumentException, InvalidTimeFormatException {
+    public void parseArguments(String arguments)
+            throws InvalidArgumentException, InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
         this.arguments = arguments;
     }
 
@@ -51,5 +54,6 @@ public abstract class Command {
      * @throws InvalidTimeFormatException Exception for when time format is invalid
      */
     public abstract CommandResult execute(Ui ui, NusModule module)
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException;
+            throws InvalidCommandException, InvalidArgumentException,
+            InvalidTimeFormatException, InvalidLinkException, InvalidDayException;
 }

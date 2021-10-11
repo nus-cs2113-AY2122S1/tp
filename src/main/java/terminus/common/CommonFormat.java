@@ -1,5 +1,8 @@
 package terminus.common;
 
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Arrays;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidTimeFormatException;
@@ -64,5 +67,23 @@ public class CommonFormat {
             result = string[string.length - 1];
         }
         return result;
+    }
+
+    public static boolean isValidUrl(String url) {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidDay(String day) {
+        for (DaysOfWeekEnum dayOfWeek : DaysOfWeekEnum.values()) {
+            if (dayOfWeek.name().equalsIgnoreCase(day)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

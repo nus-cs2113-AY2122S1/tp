@@ -6,9 +6,11 @@ import java.util.Set;
 import terminus.command.ExitCommand;
 import terminus.command.Command;
 import terminus.command.HelpCommand;
-import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidLinkException;
 import terminus.exception.InvalidTimeFormatException;
+import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidDayException;
 import terminus.module.NusModule;
 
 public abstract class CommandParser {
@@ -41,7 +43,8 @@ public abstract class CommandParser {
      */
 
     public Command parseCommand(String command)
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+            throws InvalidCommandException, InvalidArgumentException,
+            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
         String[] commandLine = command.strip().split(SPACE_DELIMITER, 2);
 
         assert commandLine.length <= 2 && commandLine.length > 0;

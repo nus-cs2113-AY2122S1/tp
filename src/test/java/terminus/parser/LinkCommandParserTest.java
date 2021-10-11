@@ -7,11 +7,12 @@ import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
 import terminus.command.ViewCommand;
 import terminus.command.zoomlink.AddLinkCommand;
-import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidLinkException;
 import terminus.exception.InvalidTimeFormatException;
+import terminus.exception.InvalidCommandException;
+import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidDayException;
 import terminus.module.NusModule;
-import terminus.ui.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -40,7 +41,8 @@ public class LinkCommandParserTest {
 
     @Test
     void parseCommand_resolveExitCommand_success()
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+            throws InvalidCommandException, InvalidArgumentException,
+            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
         assertTrue(linkCommandParser.parseCommand("exit") instanceof ExitCommand);
         assertTrue(linkCommandParser.parseCommand("eXiT") instanceof ExitCommand);
         assertTrue(linkCommandParser.parseCommand("   ExIt   ") instanceof ExitCommand);
@@ -49,7 +51,8 @@ public class LinkCommandParserTest {
 
     @Test
     void parseCommand_resolveHelpCommand_success()
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+            throws InvalidCommandException, InvalidArgumentException,
+            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
         assertTrue(linkCommandParser.parseCommand("help") instanceof HelpCommand);
         assertTrue(linkCommandParser.parseCommand("HeLp") instanceof HelpCommand);
         assertTrue(linkCommandParser.parseCommand("   hElP   ") instanceof HelpCommand);
@@ -81,13 +84,14 @@ public class LinkCommandParserTest {
 
     @Test
     void parseCommand_resolveAddCommand_success()
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+            throws InvalidCommandException, InvalidArgumentException,
+            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
         assertTrue(linkCommandParser.parseCommand(
-                "add \"test desc\" \"test day\" \"10:00\" \"Zoom.com\"") instanceof AddLinkCommand);
+                "add \"test desc\" \"Tuesday\" \"10:00\" \"https://zoom.us/test\"") instanceof AddLinkCommand);
         assertTrue(linkCommandParser.parseCommand(
-                "add \"    test     \" \"    test1   \" \"10:00\" \"    Zoom.com    \"") instanceof AddLinkCommand);
+                "add \"    test     \" \"Wednesday\" \"10:00\" \"    https://zoom.us/test    \"") instanceof AddLinkCommand);
         assertTrue(linkCommandParser.parseCommand(
-                "add \"CS2113T Lecture\" \"Friday\" \"16:00\" \"nus-sg.zoom.com\"") instanceof AddLinkCommand);
+                "add \"CS2113T Lecture\" \"Friday\" \"16:00\" \"https://zoom.us/test\"") instanceof AddLinkCommand);
     }
 
     @Test
@@ -100,7 +104,8 @@ public class LinkCommandParserTest {
 
     @Test
     void parseCommand_resolveDeleteCommand_success()
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+            throws InvalidCommandException, InvalidArgumentException,
+            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
         assertTrue(linkCommandParser.parseCommand("delete 1") instanceof DeleteCommand);
         assertTrue(linkCommandParser.parseCommand("delete 2") instanceof DeleteCommand);
     }
@@ -113,7 +118,8 @@ public class LinkCommandParserTest {
 
     @Test
     void parseCommand_resolveViewCommand_success()
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+            throws InvalidCommandException, InvalidArgumentException,
+            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
         assertTrue(linkCommandParser.parseCommand("view") instanceof ViewCommand);
         assertTrue(linkCommandParser.parseCommand("view 1") instanceof ViewCommand);
     }
