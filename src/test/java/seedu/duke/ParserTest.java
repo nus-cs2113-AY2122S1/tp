@@ -16,7 +16,17 @@ public class ParserTest {
         } catch (DukeException e) {
             assertEquals("Invalid number format!", e.getMessage());
         }
+    }
 
+    @Test
+    public void parseDeleteCommand_taskNumberInvalidInput_expectException() {
+        try {
+            String inputString = "delete -1";
+            String resultMsg = Parser.parse(inputString);
+            fail();
+        } catch (DukeException e) {
+            assertEquals("Ingredient number have not existed!", e.getMessage());
+        }
     }
 
 }
