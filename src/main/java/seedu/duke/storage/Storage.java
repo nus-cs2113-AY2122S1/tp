@@ -16,6 +16,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static seedu.duke.logger.LoggerUtil.setupLogger;
 
 /**
  * To deal with loading tasks from the json file and saving tasks in the json file.
@@ -25,13 +29,18 @@ public class Storage {
     private final File file = new File(storagePath);
     private final String filePath = file.getAbsolutePath();
     private WorkoutListModel workoutListModel = new WorkoutListModel();
+    private static final Logger LOGGER = Logger.getLogger(Storage.class.getName());
 
     public Storage() throws GetJackDException {
+        setupLogger(LOGGER);
         try {
+            assert file != null;
             file.getParentFile().mkdirs();
             file.createNewFile();
+            LOGGER.info("Generated Data Folder and storage JSON");
         } catch (IOException e) {
-            throw new GetJackDException("☹ OOPS!!! Data file can't be found.");
+            LOGGER.log(Level.SEVERE, "Data file can't be created. Exception: ", e);
+            throw new GetJackDException("☹ OOPS!!! Data file can't be created.");
         }
     }
 
@@ -44,6 +53,7 @@ public class Storage {
         if (file.length() == 0) {
             return;
         }
+        assert file.length() > 0;
         try {
             String jsonString = new String(Files.readAllBytes(Paths.get(filePath)));
             ArrayList<WorkoutModel> workoutsStorageForm = convertFromJson(jsonString);
@@ -55,7 +65,9 @@ public class Storage {
                 }
                 workoutList.addWorkout(workout);
             }
+            LOGGER.info("Successfully loaded data from JSON file.");
         } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, "Data file can't be loaded. Exception: ", e);
             throw new GetJackDException("☹ OOPS!!! Can't load data");
         }
     }
