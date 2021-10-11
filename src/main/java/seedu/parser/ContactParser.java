@@ -20,6 +20,10 @@ public abstract class ContactParser {
 
     public static final String NAME_FLAG = "n";
     public static final String GITHUB_FLAG = "g";
+    public static final String EMAIL_FLAG = "e";
+    public static final String TWITTER_FLAG = "tw";
+    public static final String LINKEDIN_FLAG = "l";
+    public static final String TELEGRAM_FLAG = "te";
 
     public abstract String[] parseContactDetails(String userInput) throws InvalidFlagException,
             MissingArgException, MissingDetailException, ForbiddenDetailException;
