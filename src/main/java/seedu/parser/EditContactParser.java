@@ -11,11 +11,11 @@ public class EditContactParser extends ContactParser {
     public String[] parseContactDetails(String userInput)
             throws InvalidFlagException, MissingDetailException, MissingArgException, ForbiddenDetailException {
         String[] inputDetails = userInput.split(" ", NUMBER_OF_EDIT_ARGS);
-        if (inputDetails.length < 3) {
+        if (inputDetails.length < NUMBER_OF_EDIT_ARGS) {
             //if arguments are missing e.g. edit 2
             throw new MissingArgException();
         }
-        String[] contactDetails = new String[NUMBER_OF_DETAILS]; //initialise null array of strings
+        String[] contactDetails = new String[NUMBER_OF_FIELDS]; //initialise null array of strings
         //buffer is used to ensure first flag can be read
         String[] destructuredInputs = (BUFFER + inputDetails[USER_INFO_INDEX]).split(DETAIL_SEPARATOR);
         for (int i = CONTACT_PARAMS_START_INDEX; i < destructuredInputs.length; i++) {
@@ -26,7 +26,7 @@ public class EditContactParser extends ContactParser {
 
     public int getIndex(String input) throws MissingArgException {
         String[] destructuredInputs = input.split(" ", NUMBER_OF_EDIT_ARGS);
-        if (destructuredInputs.length < 3) {
+        if (destructuredInputs.length < NUMBER_OF_EDIT_ARGS) {
             //if arguments are missing e.g. edit 2
             throw new MissingArgException();
         }
