@@ -25,8 +25,8 @@ public class MenuParser {
             if (0 < targetIndex || targetIndex < masterList.menuListSize + 1) {
                 MenuUI.printInvalidIndexMessage();
             } else {
-                assert 0 < targetIndex : "Index of menu item to be removed should be more than 0";
-                assert targetIndex < masterList.menuListSize : "Index of menu item to be removed should be less than the menu size";
+                assert 0 < targetIndex : "Index should be more than 0";
+                assert targetIndex < masterList.menuListSize : "Index should be less than the menu size";
                 Menu oldMenu = masterList.menuList.get(targetIndex);
                 masterList.menuList.remove(targetIndex);
                 MenuUI.printRemoveMenuMessage(oldMenu);
