@@ -2,8 +2,6 @@ package expiryeliminator.parser;
 
 import expiryeliminator.commands.AddRecipeCommand;
 import expiryeliminator.commands.DeleteRecipeCommand;
-import expiryeliminator.util.TestUtil;
-import expiryeliminator.data.RecipeList;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +33,7 @@ class ParserTest {
 
     @Test
     public void prepareAddRecipe_missingQuantityOrIngredient_ErrorMessage() {
-        String[] tests = {"add recipe r/chicken soup i/chicken q/1 i/salt" ,
+        String[] tests = {"add recipe r/chicken soup i/chicken q/1 i/salt",
                           "add recipe r/chicken soup i/chicken q/1 q/20",
                           "add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple",
                           "add recipe r/Apple Pie i/Red Apple q/4 q/4"};
