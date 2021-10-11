@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.InsufficientParametersException;
 import seedu.duke.ingredients.AddIngredient;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
@@ -51,13 +52,19 @@ public class Parser {
         String ingredientName, ingredientUnit, ingredientExpiry;
         double ingredientAmount;
 
-        ingredientName = AddIngredient.getIngredientName(userInput[1]);
-        ingredientAmount = AddIngredient.getIngredientAmount(userInput[1]);
-        ingredientUnit = AddIngredient.getIngredientUnit(userInput[1]);
-        ingredientExpiry = AddIngredient.getIngredientExpiry(userInput[1]);
+        try {
+            ingredientName = AddIngredient.getIngredientName(userInput[1]);
+            ingredientAmount = AddIngredient.getIngredientAmount(userInput[1]);
+            ingredientUnit = AddIngredient.getIngredientUnit(userInput[1]);
+            ingredientExpiry = AddIngredient.getIngredientExpiry(userInput[1]);
+        } catch (InsufficientParametersException e){
+            return e.getMessage();
+        }
+        catch (DukeException e){
+            return "Amount is not a number. Please try again";
+        }
 
         Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,ingredientUnit, ingredientExpiry);
-
         return IngredientList.getInstance().addNewIngredient(newIngredient);
     }
 

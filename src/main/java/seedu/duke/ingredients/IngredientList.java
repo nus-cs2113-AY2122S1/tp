@@ -36,6 +36,7 @@ public class IngredientList {
     public String addNewIngredient(Ingredient ingredient) {
         // TODO: Append new ingredient to the list
         // We allow duplicate names for v1.0
+        ingredientList.add(ingredient);
         return ADDED_MESSAGE + ingredient.toString();
     }
 
