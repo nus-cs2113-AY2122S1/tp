@@ -2,7 +2,7 @@ package seedu.traveller;
 
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.worldMap.WorldMap;
+import seedu.traveller.worldmap.WorldMap;
 
 
 public class Traveller {

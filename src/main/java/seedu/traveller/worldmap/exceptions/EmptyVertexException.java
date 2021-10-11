@@ -1,4 +1,4 @@
-package seedu.traveller.worldMap.exceptions;
+package seedu.traveller.worldmap.exceptions;
 
 
 public class EmptyVertexException extends WorldMapException {

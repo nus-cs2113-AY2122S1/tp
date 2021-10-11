@@ -1,6 +1,6 @@
-package seedu.traveller.worldMap;
+package seedu.traveller.worldmap;
 
-import seedu.traveller.worldMap.exceptions.EmptyVertexException;
+import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 import java.util.ArrayList;
 import java.util.Objects;

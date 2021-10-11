@@ -1,6 +1,6 @@
 package seedu.traveller;
 
-import seedu.traveller.worldMap.Country;
+import seedu.traveller.worldmap.Country;
 
 import java.util.List;
 
@@ -23,11 +23,11 @@ public class Trip {
 
     @Override
     public String toString() {
-        return "\t\tTripName: " + getTripName() +
-                "\n\t\t\t Origin: " + getStartCountryCode() +
-                "\n\t\t\t Destination: " + getEndCountryCode() +
-                "\n\t\t\t Path: " + getPath() +
-                "\n\t\t\t Distances: " + getDistances();
+        return "\t\tTripName: " + getTripName()
+                + "\n\t\t\t Origin: " + getStartCountryCode()
+                + "\n\t\t\t Destination: " + getEndCountryCode()
+                + "\n\t\t\t Path: " + getPath()
+                + "\n\t\t\t Distances: " + getDistances();
     }
 
     public String getTripName() {

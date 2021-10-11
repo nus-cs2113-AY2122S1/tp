@@ -1,11 +1,11 @@
-package seedu.traveller.worldMap;
+package seedu.traveller.worldmap;
 
-import seedu.traveller.worldMap.exceptions.EmptyVertexException;
-import seedu.traveller.worldMap.exceptions.WorldMapException;
+import seedu.traveller.worldmap.exceptions.EmptyVertexException;
+import seedu.traveller.worldmap.exceptions.WorldMapException;
 
 
 public class WorldMap {
-    protected static GraphList graphList= new GraphList();
+    protected static GraphList graphList = new GraphList();
     protected static Loader loader = new Loader();
     protected static Logic logic = new Logic();
 

@@ -1,4 +1,4 @@
-package seedu.traveller.worldMap;
+package seedu.traveller.worldmap;
 
 
 public class Distance {

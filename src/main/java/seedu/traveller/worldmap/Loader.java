@@ -1,7 +1,7 @@
-package seedu.traveller.worldMap;
+package seedu.traveller.worldmap;
 
-import seedu.traveller.worldMap.exceptions.WorldMapException;
-import seedu.traveller.worldMap.exceptions.FlightDataNotFoundException;
+import seedu.traveller.worldmap.exceptions.WorldMapException;
+import seedu.traveller.worldmap.exceptions.FlightDataNotFoundException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,13 +9,13 @@ import java.util.Scanner;
 
 
 public class Loader {
-    private final int NUMBER_OF_CITIES = 5;
-    private final String FILE_PATH = "./flightData/flights.txt";
-    private final String SEPARATOR = "\\|";
+    private final int numberOfCities = 5;
+    private final String filePath = "./flightData/flights.txt";
+    private final String separator = "\\|";
     private final GraphList graphList = new GraphList();
 
     protected void loadCountries(String[] countryCodes) {
-        for (int j = 0; j < NUMBER_OF_CITIES; j++) {
+        for (int j = 0; j < numberOfCities; j++) {
             String countryCode = countryCodes[j];
             int countryIndex = j + 1;
             Country v = new Country(countryCode, countryIndex);
@@ -35,7 +35,7 @@ public class Loader {
     }
 
     public GraphList readData() throws WorldMapException {
-        File data = new File(FILE_PATH);
+        File data = new File(filePath);
         Scanner s;
         try {
             s = new Scanner(data);
@@ -44,8 +44,8 @@ public class Loader {
         }
         String[] rawInput;
         while (s.hasNext()) {
-            for (int i = 0; i < NUMBER_OF_CITIES; i++) {
-                rawInput = s.nextLine().split(SEPARATOR);
+            for (int i = 0; i < numberOfCities; i++) {
+                rawInput = s.nextLine().split(separator);
 
                 // Reading first line of country codes
                 if (i == 0) {

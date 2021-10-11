@@ -1,4 +1,4 @@
-package seedu.traveller.worldMap;
+package seedu.traveller.worldmap;
 
 import java.util.ArrayList;
 import java.util.Collections;

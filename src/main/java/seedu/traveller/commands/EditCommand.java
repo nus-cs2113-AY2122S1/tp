@@ -5,9 +5,9 @@ import seedu.traveller.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.exceptions.TripNotFoundException;
-import seedu.traveller.worldMap.Country;
-import seedu.traveller.worldMap.MinCalcResult;
-import seedu.traveller.worldMap.WorldMap;
+import seedu.traveller.worldmap.Country;
+import seedu.traveller.worldmap.MinCalcResult;
+import seedu.traveller.worldmap.WorldMap;
 
 import java.util.List;
 
