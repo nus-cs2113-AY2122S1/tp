@@ -66,6 +66,18 @@ public abstract class ContactParser {
         case GITHUB_FLAG:
             indexToStore = DetailType.GITHUB.getIndex();
             break;
+        case TELEGRAM_FLAG:
+            indexToStore = DetailType.TELEGRAM.getIndex();
+            break;
+        case TWITTER_FLAG:
+            indexToStore = DetailType.TWITTER.getIndex();
+            break;
+        case EMAIL_FLAG:
+            indexToStore = DetailType.EMAIL.getIndex();
+            break;
+        case LINKEDIN_FLAG:
+            indexToStore = DetailType.LINKEDIN.getIndex();
+            break;
         default:
             throw new InvalidFlagException();
         }
