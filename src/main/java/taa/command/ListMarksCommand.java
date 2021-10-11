@@ -49,7 +49,7 @@ public class ListMarksCommand extends Command {
      *
      * @param moduleList List of modules.
      * @param ui The ui instance to handle interactions with the user.
-     * @param storage
+     * @param storage The storage instance to handle saving.
      * @throws TaaException When list marks command is invalid.
      */
     @Override
