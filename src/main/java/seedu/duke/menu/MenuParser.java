@@ -1,28 +1,40 @@
 package seedu.duke.menu;
 
+import seedu.duke.main.MainUI;
+
 public class MenuParser {
 
     public void addMenu(String[] command, MenuList masterList) {
-        Menu newMenu = new Menu(command[1], command[2]);
-        masterList.menuList.add(newMenu);
-        MenuUI.printAddMenuMessage(newMenu);
+        try {
+            Menu newMenu = new Menu(command[1], command[2]);
+            masterList.menuList.add(newMenu);
+            MenuUI.printAddMenuMessage(newMenu);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            MainUI.printWrongCommandMessage();
+        }
     }
 
     public void loadMenuFromStorage(MenuList masterList, Menu menu) {
         masterList.menuList.add(menu);
     }
 
-    public void deleteMenu(String[] command, MenuList masterList) {
-        int targetIndex = Integer.valueOf(command[1]) - 1;
-        Menu oldMenu = masterList.menuList.get(targetIndex);
+    public void removeMenu(String[] command, MenuList masterList) {
+        try {
+            int targetIndex = Integer.valueOf(command[1]) - 1;
 
-        if (0 < targetIndex || targetIndex < masterList.menuListSize + 1) {
-            MenuUI.printInvalidIndexMessage();
-        } else {
-            assert 0 < targetIndex : "Index of menu item to be removed should be more than 0";
-            assert targetIndex < masterList.menuListSize : "Index of menu item to be removed should be less than the menu size";
-            masterList.menuList.remove(targetIndex);
-            MenuUI.printRemoveMenuMessage(oldMenu);
+            if (0 < targetIndex || targetIndex < masterList.menuListSize + 1) {
+                MenuUI.printInvalidIndexMessage();
+            } else {
+                assert 0 < targetIndex : "Index of menu item to be removed should be more than 0";
+                assert targetIndex < masterList.menuListSize : "Index of menu item to be removed should be less than the menu size";
+                Menu oldMenu = masterList.menuList.get(targetIndex);
+                masterList.menuList.remove(targetIndex);
+                MenuUI.printRemoveMenuMessage(oldMenu);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            MainUI.printWrongCommandMessage();
+        } catch (NumberFormatException e) {
+            MainUI.printWrongCommandMessage();
         }
     }
 

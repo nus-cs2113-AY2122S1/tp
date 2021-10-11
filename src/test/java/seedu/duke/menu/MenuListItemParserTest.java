@@ -11,7 +11,7 @@ public class MenuListItemParserTest {
         MenuList masterList = new MenuList();
         MenuParser menuParser = new MenuParser();
         String[] deleteCommand = "remove-menu|1".trim().split("\\|", 2);
-        menuParser.deleteMenu(deleteCommand, masterList);
+        menuParser.removeMenu(deleteCommand, masterList);
         assertEquals(0, masterList.menuListSize);
     }
 
@@ -23,7 +23,7 @@ public class MenuListItemParserTest {
         String[] deleteCommand = "remove-menu|1".trim().split("\\|", 2);
         menuParser.addMenu(addCommand, masterList);
         assertEquals(1, masterList.menuListSize);
-        menuParser.deleteMenu(deleteCommand, masterList);
+        menuParser.removeMenu(deleteCommand, masterList);
         assertEquals(0, masterList.menuListSize);
     }
 
