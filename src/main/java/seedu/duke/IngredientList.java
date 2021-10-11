@@ -11,7 +11,7 @@ public class IngredientList {
             ingredientList.add(ingredientToAdd);
             System.out.println("Added:" + ingredientToAdd.getIngredientName() + " " + ingredientWeight);
         } else {
-            System.out.println("Dish already exists");
+            System.out.println("Ingredient already exists");
         }
     }
 
@@ -29,7 +29,7 @@ public class IngredientList {
         System.out.println("Here are the ingredients you have: ");
         for (int i = 0; i < ingredientList.size(); i++) {
             String currentIngredient = ingredientList.get(i).getIngredientName();
-            System.out.println((i + 1) + ". " + currentIngredient);
+            System.out.println((i + 1) + ". " + ingredientList.get(i).toString());
         }
         System.out.println("You can use commands 'add' or 'find' to add new ingredients or find existing ones!");
     }

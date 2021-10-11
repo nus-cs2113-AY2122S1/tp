@@ -34,15 +34,23 @@ public class Ingredient {
         System.out.println("Wastage of " + ingredientName + " is now " + ingredientWaste);
     }
 
+//    @Override
+//    //Todo format into better string
+//    public String toString() {
+//        return "Ingredient{"
+//                + "ingredientName='"
+//                + ingredientName
+//                + '\''
+//                + ", ingredientWeight="
+//                + ingredientWeight
+//                + '}';
+//    }
+
     @Override
-    //Todo format into better string
     public String toString() {
-        return "Ingredient{"
-                + "ingredientName='"
+        return "[Ingr] "
                 + ingredientName
-                + '\''
-                + ", ingredientWeight="
-                + ingredientWeight
-                + '}';
+                + " | Weight: "
+                + ingredientWeight + " KG";
     }
 }

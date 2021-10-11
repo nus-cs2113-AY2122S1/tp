@@ -7,9 +7,10 @@ import java.util.ArrayList;
 public class AddDishCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) {
-        System.out.println("____________________________________________");
+        Ui ui = new Ui();
+        System.out.println(ui.getLineDivider());
         DishList.add(parameters.get(0));
-        System.out.println("____________________________________________");
+        System.out.println(ui.getLineDivider());
     }
 
 }
