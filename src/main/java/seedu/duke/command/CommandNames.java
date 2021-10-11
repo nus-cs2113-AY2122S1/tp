@@ -7,8 +7,8 @@ public enum CommandNames {
     ADD_DISH("add dish", new AddDishCommand()),
     ADD_INGR("add ingr", new AddIngrCommand()),
     DELETE_DISH("del dish", new DeleteDishCommand()),
-    DELETE_INGR("del ingr", new DeleteIngrCommand()),
-    LIST("list", new ListCommand());
+    DELETE_INGR("del ingr", new DeleteIngrCommand());
+
 
     private String name;
     private Command callbackCommand;

@@ -70,6 +70,10 @@ public class Ui {
             + "Sorry, this ingredient does not exist in your list." + System.lineSeparator()
             + LINE_DIVIDER;
 
+    protected String HELP = LINE_DIVIDER + System.lineSeparator()
+            + "Sorry, this ingredient does not exist in your list." + System.lineSeparator()
+            + LINE_DIVIDER;
+
     public String getLogo() {
         return START_LOGO;
     }
@@ -105,4 +109,6 @@ public class Ui {
     public String getIngrNotExistMsg() {
         return INGR_NOTEXIST;
     }
+
+    public String getHelpMsg() {return HELP};
 }
