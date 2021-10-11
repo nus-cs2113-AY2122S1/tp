@@ -49,22 +49,21 @@ public class AttendanceList {
         return attendanceList.size();
     }
 
-  /*  public String getStudentNumber(int index ){
+    /*public String getStudentNumber(int index ) {
          AttendanceList.get(index);
     }
 
-    public String getTrainingName(int index ){
+    public String getTrainingName(int index ) {
 
     }
 
-    public String getVenue(int index ){
+    public String getVenue(int index ) {
 
     }
 
-    public String getTime(int index ){
+    public String getTime(int index ) {
 
     }
-
     */
 
 }
