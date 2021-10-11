@@ -4,10 +4,9 @@ import java.util.Scanner;
 
 public class Ui {
 
-
     private static final String CLEAR_MESSAGE = "All clients have been deleted";
     private static final String CUT_MESSAGE = "Client has been deleted:";
-
+    private static final String ADD_MESSAGE = "Client has been added:";
 
     private static Scanner in = new Scanner(System.in);
 
@@ -47,5 +46,9 @@ public class Ui {
         showLine();
     }
 
+    public void showAdd(Client client) {
+        show(ADD_MESSAGE + "\n" + client);
+        showLine();
+    }
 }
 

@@ -9,6 +9,6 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(ClientList clients, Ui ui) {
-        clients.add(client);
+        clients.add(client, ui);
     }
 }

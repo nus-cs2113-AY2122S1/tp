@@ -11,8 +11,9 @@ public class ClientList {
         clientCount = 0;
     }
 
-    public void add(Client client) {
+    public void add(Client client, Ui ui) {
         clients.add(client);
+        ui.showAdd(client);
         clientCount++;
     }
 
@@ -34,5 +35,4 @@ public class ClientList {
         clients.remove(clientIndex);
         clientCount--;
     }
-
 }
