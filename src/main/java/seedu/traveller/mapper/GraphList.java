@@ -49,4 +49,5 @@ public class GraphList {
     public static boolean edgeExists(Vertex s, Vertex t) {
         return edgeMatrix[s.key][t.key] > 0.0001; //floating point exception
     }
+
 }
