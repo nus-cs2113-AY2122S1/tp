@@ -120,21 +120,21 @@ public class Recipe {
                     .append(System.lineSeparator());
         }
 
-        if (preparationTime > 0) {
+        if (preparationTime > -1) {
             outputString.append("Preparation time: ")
                     .append(System.lineSeparator())
                     .append(preparationTime)
                     .append(System.lineSeparator());
         }
 
-        if (cookingTime > 0) {
+        if (cookingTime > -1) {
             outputString.append("Cooking time: ")
                     .append(System.lineSeparator())
                     .append(cookingTime)
                     .append(System.lineSeparator());
         }
 
-        if (totalPrice > 0) {
+        if (totalPrice > -1) {
             outputString.append("Total price of ingredients: ")
                     .append(System.lineSeparator())
                     .append("$")
