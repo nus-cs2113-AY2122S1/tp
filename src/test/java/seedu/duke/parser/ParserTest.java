@@ -3,8 +3,13 @@ package seedu.duke.parser;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.GetJackDException;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.duke.parser.Parser.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static seedu.duke.parser.Parser.getExerciseArgs;
+import static seedu.duke.parser.Parser.getWorkoutAndExerciseIndices;
+import static seedu.duke.parser.Parser.splitCommandWordsAndArgs;
+import static seedu.duke.parser.Parser.parseArgsAsIndex;
 
 class ParserTest {
     //featureUnderTest_testScenario_expectedBehavior()
@@ -54,14 +59,14 @@ class ParserTest {
     void splitCommandWordsAndArgs_inputStringMissingKeyword_returnInputString() {
         String input = "aalskdjlaksjd";
         String keyword = "$";
-        assertArrayEquals(new String[] {input,""}, splitCommandWordsAndArgs(input, keyword));
+        assertArrayEquals(new String[]{input, ""}, splitCommandWordsAndArgs(input, keyword));
     }
 
     @Test
     void splitCommandWordsAndArgs_inputStringHasKeyword_returnsStringSplit() {
         String input = "alksjdj % lkj";
         String keyword = "%";
-        assertArrayEquals(new String[] {"alksjdj "," lkj"},splitCommandWordsAndArgs(input,keyword));
+        assertArrayEquals(new String[]{"alksjdj ", " lkj"}, splitCommandWordsAndArgs(input, keyword));
     }
 
     @Test
@@ -74,7 +79,7 @@ class ParserTest {
     void parseArgsAsIndex_validNumber_returnsInteger() {
         String input = "99";
         try {
-            assertEquals(99,parseArgsAsIndex(input));
+            assertEquals(99, parseArgsAsIndex(input));
         } catch (GetJackDException e) {
             e.printStackTrace();
         }
