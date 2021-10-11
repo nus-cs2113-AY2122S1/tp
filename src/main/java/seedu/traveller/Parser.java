@@ -10,15 +10,16 @@ import seedu.traveller.commands.SearchCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidFormatException;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.mapper.Dijkstra;
-import seedu.traveller.mapper.EmptyVertexException;
-import seedu.traveller.mapper.GraphList;
-import seedu.traveller.mapper.Vertex;
+import seedu.traveller.worldMap.Logic;
+import seedu.traveller.worldMap.WorldMap;
+import seedu.traveller.worldMap.exceptions.EmptyVertexException;
+import seedu.traveller.worldMap.GraphList;
+import seedu.traveller.worldMap.Country;
 
 import java.util.List;
 
-public class ParserTrip {
-    public static Command parse(String rawInput) throws TravellerException, EmptyVertexException {
+public class Parser {
+    public static Command parse(String rawInput) throws TravellerException {
         String details;
         Command command = null;
 
@@ -28,14 +29,10 @@ public class ParserTrip {
         switch (userCommand) {
         case "new":
             try {
-                String tripName = userInput[1];
-                String origin = userInput[2];
-                String destination = userInput[3];
-                Vertex s = GraphList.findVertex(origin);
-                Vertex t = GraphList.findVertex(destination);
-                System.out.println("Finding shortest path!");
-                List<Vertex> path = Dijkstra.run(s, t);
-                command = new NewCommand(tripName, origin, destination, path);
+                String tripName = userInput[1];  // TODO: Is there a better way to do this?
+                String startCountryCode = userInput[2];
+                String endCountryCode = userInput[3];
+                command = new NewCommand(tripName, startCountryCode, endCountryCode);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new InvalidFormatException(userCommand);
             }
@@ -43,34 +40,28 @@ public class ParserTrip {
         case "edit":
             try {
                 String tripName = userInput[1];
-                String origin = userInput[2];
-                String destination = userInput[3];
-                Vertex s = GraphList.findVertex(origin);
-                Vertex t = GraphList.findVertex(destination);
-                List<Vertex> path = Dijkstra.run(s, t);
-                command = new EditCommand(tripName, origin, destination, path);
+                String startCountryCode = userInput[2];
+                String endCountryCode = userInput[3];
+                command = new EditCommand(tripName, startCountryCode, endCountryCode);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new InvalidFormatException(userCommand);
             }
             break;
         case "delete":
-            command = new DeleteCommand(userInput[1]);
+            String countryCode = userInput[1];
+            command = new DeleteCommand(countryCode);
             break;
         case "viewall":
             command = new ViewAllCommand();
             break;
         case "search":
-            command = new SearchCommand(userInput[1],userInput[2]);
+            String startCountryCode = userInput[1];
+            String endCountryCode = userInput[2];
+            command = new SearchCommand(startCountryCode, endCountryCode);
             break;
         case "exit":
             command = new ExitCommand();
             break;
-        /*case "d":
-            try {
-
-                //Dijkstra.run(s, t);}
-
-                break;*/
         default:
             throw new CommandNotFoundException(userCommand);
         }

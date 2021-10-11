@@ -5,33 +5,34 @@ import seedu.traveller.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.DuplicateTripException;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.mapper.Vertex;
+import seedu.traveller.worldMap.Country;
+import seedu.traveller.worldMap.MinCalcResult;
+import seedu.traveller.worldMap.WorldMap;
 
 import java.util.List;
 
+
 public class NewCommand extends Command {
     private final String tripName;
-    private String startCountry;
-    private String endCountry;
-    private List<Vertex> path;
-    private String distance;
+    private final String startCountry;
+    private final String endCountry;
 
-
-
-    public NewCommand(String tripName, String startCountry, String endCountry, List<Vertex> path) {
+    public NewCommand(String tripName, String startCountry, String endCountry) {
         this.tripName = tripName;
         this.startCountry = startCountry;
         this.endCountry = endCountry;
-        this.path = path;
     }
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
-        for (int i = 0; i < TripsList.getSize(); i++) {
-            if (TripsList.getTrip(i).getTripName().equals(tripName)) {
+        for (int i = 0; i < tripsList.getSize(); i++) {
+            if (tripsList.getTrip(i).getTripName().equals(tripName)) {
                 throw new DuplicateTripException(tripName);
             }
         }
-        Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry, this.path);
+        MinCalcResult result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
+        List<Country> path = result.getPath();
+        List<Double> distances = result.getDistances();
+        Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry, path, distances);
         tripsList.addTrip(trip);
         ui.printNewTripCreated(tripName);
     }

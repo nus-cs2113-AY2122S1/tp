@@ -55,4 +55,8 @@ public class Ui {
         System.out.println("\tYou have just edited a trip called " + tripName + ".");
     }
 
+    public void printSearch(String startCountry, String endCountry, double distance) {
+        System.out.println("The distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
+    }
+
 }

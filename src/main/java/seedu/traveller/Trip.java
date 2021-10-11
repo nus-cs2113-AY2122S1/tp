@@ -1,42 +1,52 @@
 package seedu.traveller;
 
-import seedu.traveller.mapper.Vertex;
+import seedu.traveller.worldMap.Country;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Trip {
     private final String tripName;
-    private String startCountry;
-    private String endCountry;
-    private List<Vertex> path;
-    private final ArrayList<Destination> destinationsList;
+    private final String startCountryCode;
+    private final String endCountryCode;
+    private final List<Country> path;
+    private final List<Double> distances;
 
-    public Trip(String tripName, String startCountry, String endCountry, List<Vertex> path) {
+    public Trip(String tripName, String startCountryCode, String endCountryCode,
+                List<Country> path, List<Double> distances) {
         this.tripName = tripName;
-        this.startCountry = startCountry;
-        this.endCountry = endCountry;
+        this.startCountryCode = startCountryCode;
+        this.endCountryCode = endCountryCode;
         this.path = path;
-        this.destinationsList = new ArrayList<>();
+        this.distances = distances;
     }
 
     @Override
     public String toString() {
-        return "\t\tTripName: " + getTripName() + "\n\t\t\t Origin: "
-                + getStartCountry() + "\n\t\t\t Destination: " + getEndCountry()
-                + "\n\t\t\t Path: " + path;
+        return "\t\tTripName: " + getTripName() +
+                "\n\t\t\t Origin: " + getStartCountryCode() +
+                "\n\t\t\t Destination: " + getEndCountryCode() +
+                "\n\t\t\t Path: " + getPath() +
+                "\n\t\t\t Distances: " + getDistances();
     }
 
     public String getTripName() {
         return this.tripName;
     }
 
-    public String getStartCountry() {
-        return this.startCountry;
+    public String getStartCountryCode() {
+        return this.startCountryCode;
     }
 
-    public String getEndCountry() {
-        return this.endCountry;
+    public String getEndCountryCode() {
+        return this.endCountryCode;
+    }
+
+    public List<Country> getPath() {
+        return this.path;
+    }
+
+    public List<Double> getDistances() {
+        return this.distances;
     }
 
 }

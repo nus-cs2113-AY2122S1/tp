@@ -3,7 +3,7 @@ package seedu.traveller;
 import java.util.ArrayList;
 
 public class TripsList {
-    private static ArrayList<Trip> trips;
+    private final ArrayList<Trip> trips;
 
     public TripsList() {
         this.trips = new ArrayList<>();
@@ -13,15 +13,27 @@ public class TripsList {
         trips.add(trip);
     }
 
-    public static Trip getTrip(int i) {
+    public Trip getTrip(int i) {
         return trips.get(i);
     }
 
-    public static void deleteTrip(int i) {
+    public int getTripIndex(String tripName) {
+        int tripIndex = -1;
+        for (int i = 0; i < this.getSize(); i++) {
+            Trip trip = this.getTrip(i);
+            if (tripName.equals(trip.getTripName())) {
+                tripIndex = i;
+                break;
+            }
+        }
+        return tripIndex;
+    }
+
+    public void deleteTrip(int i) {
         trips.remove(i);
     }
 
-    public static int getSize() {
+    public int getSize() {
         return trips.size();
     }
 }

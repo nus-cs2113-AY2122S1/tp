@@ -1,8 +1,7 @@
 package seedu.traveller.exceptions;
 
-public class InvalidFormatException extends TravellerException {
-    private String command;
 
+public class InvalidFormatException extends TravellerException {
     public InvalidFormatException(String command) {
         switch (command) {
         case "new":
