@@ -191,12 +191,14 @@ public class Ui {
     }
 
     public void printAddedDish(String dishName) {
+        assert dishName != null : "dishName cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
             + "Dish added to list: " + dishName + System.lineSeparator()
             + LINE_DIVIDER);
     }
 
     public void printDishList(ArrayList<Dish> dishList) {
+        assert dishList != null : "dishList cannot be null";
         System.out.println("Here are the dishes you have: ");
         for (int i = 0; i < dishList.size(); i++) {
             System.out.println((i + 1) + ". " + dishList.get(i));
@@ -205,6 +207,7 @@ public class Ui {
     }
 
     public void printDishNameRemoved(String dishName) {
+        assert dishName != null : "dishName cannot be null";
         System.out.println("Dish, " + dishName + " has been removed!");
     }
 }
