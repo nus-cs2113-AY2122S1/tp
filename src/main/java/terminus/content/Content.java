@@ -13,7 +13,7 @@ public class Content {
     }
 
     /**
-     * Initializes the Content object
+     * Initializes the Content object.
      *
      * @param name the name attribute of Content
      * @param data the data attribute of Content
@@ -24,7 +24,7 @@ public class Content {
     }
 
     /**
-     * Returns the name attribute of the Content object
+     * Returns the name attribute of the Content object.
      *
      * @return A string containing the name attribute of the Content object
      */
@@ -45,7 +45,7 @@ public class Content {
     }
 
     /**
-     * Returns all the attributes of the Content object
+     * Returns all the attributes of the Content object.
      *
      * @return A string containing all the attributes of the Content object
      */

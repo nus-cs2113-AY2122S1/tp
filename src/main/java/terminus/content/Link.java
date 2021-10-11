@@ -3,7 +3,7 @@ package terminus.content;
 import java.time.LocalTime;
 
 /**
- * Link class to represent a content of type link
+ * Link class to represent a content of type link.
  */
 public class Link extends Content {
 
@@ -22,7 +22,7 @@ public class Link extends Content {
     }
 
     /**
-     * Returns the day of the Link object
+     * Returns the day of the Link object.
      *
      * @return A string containing the day of the Link object
      */
@@ -31,7 +31,7 @@ public class Link extends Content {
     }
 
     /**
-     * Sets the day of the Link object
+     * Sets the day of the Link object.
      *
      * @param day The new day to be set for the Link object
      */
@@ -40,7 +40,7 @@ public class Link extends Content {
     }
 
     /**
-     * Returns the startTime of the Link object
+     * Returns the startTime of the Link object.
      *
      * @return A LocalTime object containing the startTime of the Link object
      */
@@ -49,7 +49,7 @@ public class Link extends Content {
     }
 
     /**
-     * Sets the startTime of the Link object
+     * Sets the startTime of the Link object.
      *
      * @param startTime The new startTime to be set for the Link object
      */
@@ -58,7 +58,7 @@ public class Link extends Content {
     }
 
     /**
-     * Returns the link of the Link object
+     * Returns the link of the Link object.
      *
      * @return A String containing the link of the Link object
      */
@@ -67,7 +67,7 @@ public class Link extends Content {
     }
 
     /**
-     * Sets the link of the Link object
+     * Sets the link of the Link object.
      *
      * @param link The new link to be set for the Link object
      */
@@ -76,7 +76,7 @@ public class Link extends Content {
     }
 
     /**
-     * Returns all the attributes of the Link object
+     * Returns all the attributes of the Link object.
      *
      * @return A string containing all the attributes of the Link object
      */
@@ -86,7 +86,7 @@ public class Link extends Content {
     }
 
     /**
-     * Returns all the attributes' information of the Link object
+     * Returns all the attributes' information of the Link object.
      *
      * @return A method to display all the attributes of the Link object
      */

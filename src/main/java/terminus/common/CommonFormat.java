@@ -30,7 +30,7 @@ public class CommonFormat {
     public static final String COMMAND_ADD_NOTE_FORMAT = COMMAND_ADD + " \"<note name>\" \"<note content>\"";
 
     /**
-     * Method to get arguments
+     * Method to get arguments.
      *
      * @param arg String containing the arguments
      * @return An array list containing the separated arguments
@@ -46,7 +46,7 @@ public class CommonFormat {
     }
 
     /**
-     * Checks if an array list is empty
+     * Checks if an array list is empty.
      *
      * @param argArray The array list to be checked
      * @return True if array list is empty, false otherwise
@@ -61,7 +61,7 @@ public class CommonFormat {
     }
 
     /**
-     * Converts string to a LocalTime object
+     * Converts string to a LocalTime object.
      *
      * @param startTime The string to be converted to a LocalTime object
      * @return A LocalTime object of the converted string

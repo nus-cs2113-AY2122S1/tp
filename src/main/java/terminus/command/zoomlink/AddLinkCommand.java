@@ -15,7 +15,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
- * AddLinkCommand class which will manage the adding of new Links from user command
+ * AddLinkCommand class which will manage the adding of new Links from user command.
  */
 public class AddLinkCommand extends Command {
 
@@ -31,7 +31,7 @@ public class AddLinkCommand extends Command {
     }
 
     /**
-     * Returns the command format to Add a Link
+     * Returns the command format to Add a Link.
      *
      * @return The string containing the command format to add a link
      */
@@ -41,7 +41,7 @@ public class AddLinkCommand extends Command {
     }
 
     /**
-     * Returns the description of Add Link Command
+     * Returns the description of Add Link Command.
      *
      * @return The string containing the description of an add command
      */
@@ -51,8 +51,7 @@ public class AddLinkCommand extends Command {
     }
 
     /**
-     * Parses the arguments in an add link command
-     * to its respective description, day, start-time, and link
+     * Parses the arguments in an add link command to its respective description, day, start-time, and link.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
      * @throws InvalidArgumentException Exception for when argument parsing fails
@@ -77,8 +76,8 @@ public class AddLinkCommand extends Command {
     }
 
     /**
-     * Executes the add link command
-     * Prints the relevant response to the Ui
+     * Executes the add link command.
+     * Prints the relevant response to the Ui.
      *
      * @param ui     The Ui object to send messages to the users.
      * @param module The NusModule contain the list of all notes and schedules.
@@ -97,7 +96,7 @@ public class AddLinkCommand extends Command {
     }
 
     /**
-     * Checks if arguments are non-empty and valid
+     * Checks if arguments are non-empty and valid.
      *
      * @param argArray The command arguments in an array list
      * @return True if the appropriate number of arguments are present, false otherwise.

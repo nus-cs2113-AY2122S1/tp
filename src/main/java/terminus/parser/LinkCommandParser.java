@@ -10,7 +10,7 @@ import terminus.content.Link;
 import terminus.module.NusModule;
 
 /**
- * LinkCommandParser class to manage schedule-related commands
+ * LinkCommandParser class to manage schedule-related commands.
  */
 public class LinkCommandParser extends CommandParser {
 
@@ -19,7 +19,7 @@ public class LinkCommandParser extends CommandParser {
     }
 
     /**
-     * Returns the command map for the schedule workspace
+     * Returns the command map for the schedule workspace.
      *
      * @return A LinkCommandParser object which contains the command map for the schedule workspace
      */
@@ -33,7 +33,7 @@ public class LinkCommandParser extends CommandParser {
     }
 
     /**
-     * Returns the opening description of the workspace
+     * Returns the opening description of the workspace.
      *
      * @param module The current module containing the array list of all the links
      * @return The string containing a description of the number of links in the workspace
