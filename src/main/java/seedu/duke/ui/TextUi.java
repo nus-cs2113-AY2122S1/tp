@@ -50,6 +50,15 @@ public class TextUi {
         System.out.println("   " + addedExpenditure);
     }
 
+    public static void showExpenditureDeletedMessage(int indexOfDeletedExpenditure, Expenditure deletedExpenditure) {
+        System.out.println("Successfully deleted Expenditure" + indexOfDeletedExpenditure + "." + deletedExpenditure);
+    }
+
+    public static void showBudgetDeletedMessage() {
+        System.out.println("Successfully deleted Budget for this month!");
+        System.out.println("Now the budget amount is 0.00!");
+    }
+
     public static void showExitMessage() {
         System.out.println(MESSAGE_EXIT + LS + DIVIDER);
     }

@@ -1,16 +1,18 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.AddBudgetCommand;
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.AddExpenditureCommand;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.DeleteBudgetCommand;
-import seedu.duke.commands.DeleteExpenditureCommand;
+import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.InvalidCommand;
+import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ListRecordsCommand;
+import seedu.duke.commands.DeleteExpenditureCommand;
+import seedu.duke.commands.AddBudgetCommand;
+import seedu.duke.commands.DeleteBudgetCommand;
+import seedu.duke.commands.AddExpenditureCommand;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 public class Parser {
 
@@ -41,11 +43,8 @@ public class Parser {
         case AddCommand.COMMAND_WORD:
             command = prepareAddCommand(commandParams);
             break;
-        case DeleteExpenditureCommand.COMMAND_WORD:
-            command = new DeleteExpenditureCommand(commandParams);
-            break;
-        case DeleteBudgetCommand.COMMAND_WORD:
-            command = new DeleteBudgetCommand(commandParams);
+        case DeleteCommand.COMMAND_WORD:
+            command = prepareDeleteCommand(commandParams);
             break;
         case ListRecordsCommand.COMMAND_WORD:
             command = new ListRecordsCommand();
@@ -105,6 +104,38 @@ public class Parser {
         //LocalDate date = LocalDate.parse(split[3].trim());
 
         return new AddExpenditureCommand(description, amount);
+    }
+
+    /**
+     * Splits params into the different add commands.
+     *
+     * @param commandParams raw String commandParams
+     * @return AddBudgetCommand or AddExpenditureCommand depending on the addType
+     */
+    private Command prepareDeleteCommand(String commandParams) {
+        String deleteType = commandParams.substring(0, 2);
+        switch (deleteType) {
+        case ("b/"):
+            return new DeleteBudgetCommand(commandParams);
+        case ("e/"):
+            return prepareDeleteExpenditureCommand(commandParams);
+        default:
+            return new InvalidCommand();
+        }
+    }
+
+    /**
+     * Splits the commandParams to get index of expenditure to be deleted.
+     *
+     * @param commandParams raw String input
+     * @return an DeleteExpenditureCommand with proper parameters
+     */
+    private Command prepareDeleteExpenditureCommand(String commandParams) {
+        String[] split = commandParams.trim().split("/|", 2);
+        String indexString = split[1].trim();
+        int index = Integer.parseInt(indexString);
+
+        return new DeleteExpenditureCommand(index);
     }
 
 }

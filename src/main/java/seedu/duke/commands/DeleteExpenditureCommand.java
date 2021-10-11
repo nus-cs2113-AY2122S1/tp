@@ -1,15 +1,20 @@
 package seedu.duke.commands;
 
-public class DeleteExpenditureCommand extends Command {
+import seedu.duke.data.records.Expenditure;
+import seedu.duke.data.RecordList;
+import seedu.duke.ui.TextUi;
 
-    public static final String COMMAND_WORD = "DeleteExpenditure";
+public class DeleteExpenditureCommand extends DeleteCommand {
+
     public final int index;
 
-    public DeleteExpenditureCommand(String indexString) {
-        this.index = Integer.parseInt(indexString) - 1;
+    public DeleteExpenditureCommand(int index) {
+        this.index = index;
     }
 
     @Override
     public void execute() {
+        recordList.deleteExpenditure(index);
+        TextUi.showExpenditureDeletedMessage(index, recordList.getExpenditure(index - 1));
     }
 }
