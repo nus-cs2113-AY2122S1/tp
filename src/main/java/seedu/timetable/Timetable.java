@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Each cell in the timetable will display the module code, lesson type and venue of the lesson
  * Each Timetable should be assigned a semester number --> Academic Year semester (1 OR 2)
  */
-public class Timetable {
+public class Timetable implements Comparable<Timetable> {
 
     private final int DEFAULT_START = 9;
     private final int DEFAULT_END = 16;
@@ -256,5 +256,17 @@ public class Timetable {
 
     public Integer getSemester() {
         return semester;
+    }
+
+
+    @Override
+    public int compareTo(Timetable timetable) {
+        int flag = 0;
+        boolean isSemesterSame = this.getSemester() == timetable.getSemester();
+        boolean areModulesSame = this.modules.equals(timetable.modules);
+        if (isSemesterSame && areModulesSame) {
+            flag = 1;
+        }
+        return flag;
     }
 }
