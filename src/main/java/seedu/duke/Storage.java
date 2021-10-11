@@ -8,7 +8,7 @@ public class Storage {
 
     private static Scanner scanner;
 
-    private static final ArrayList<String> commands = new ArrayList<>(
+    private static final ArrayList<String> validCommands = new ArrayList<>(
             Arrays.asList("create", "edit", "summary", "delete", "expense", "quit"));
 
     public static Scanner getScanner() {
@@ -19,7 +19,7 @@ public class Storage {
         Storage.scanner = scanner;
     }
 
-    public static ArrayList<String> getCommands() {
-        return commands;
+    public static ArrayList<String> getValidCommands() {
+        return validCommands;
     }
 }

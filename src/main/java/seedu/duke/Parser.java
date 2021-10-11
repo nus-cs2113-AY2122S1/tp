@@ -13,13 +13,15 @@ public class Parser {
      */
     public static boolean parseUserInput(String userInput, ArrayList<Trip> listOfTrips) {
         String[] userInputSplit = userInput.split(" ", 2);
-        String inputCommand = userInputSplit[0];
-        String inputDescription;
-        if (inputCommand.equals("quit") || inputCommand.equals("summary") || !checkValidCommand(inputCommand)) {
-            inputDescription = null;
-        } else {
+        String inputCommand = userInputSplit[0].toLowerCase();
+        String inputDescription = null;
+        if (!checkValidCommand(inputCommand) || (userInputSplit.length == 1 && !inputCommand.equals("quit"))) {
+            Ui.printUnknownCommandError();
+            return true;
+        } else if (!inputCommand.equals("quit")) {
             inputDescription = userInputSplit[1];
         }
+
         switch (inputCommand) {
         case "create":
             String[] newTripInfo = inputDescription.split(" ");
@@ -79,15 +81,13 @@ public class Parser {
             Ui.goodBye();
             return false;
         default:
-            System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter -help "
-                    + "to learn more.");
+            Ui.printUnknownCommandError();
         }
         return true;
     }
 
     private static boolean checkValidCommand(String inputCommand) {
-        ArrayList<String> validCommands = Storage.getCommands();
-        return validCommands.contains(inputCommand);
+        return Storage.getValidCommands().contains(inputCommand);
     }
 
     /**
