@@ -26,12 +26,12 @@ public class StudentList implements ClassChecker {
         return students.size();
     }
 
-    private boolean isValidStudentIndex(int index) {
+    private boolean isValidIndex(int index) {
         return (index >= 0 && index < getSize());
     }
 
     public Student getStudentAt(int index) {
-        if (isValidStudentIndex(index)) {
+        if (isValidIndex(index)) {
             return students.get(index);
         }
 
@@ -49,7 +49,7 @@ public class StudentList implements ClassChecker {
      * @return A Student object if successfully deleted, else null.
      */
     public Student deleteStudent(int index) {
-        if (isValidStudentIndex(index)) {
+        if (isValidIndex(index)) {
             return students.remove(index);
         }
 
