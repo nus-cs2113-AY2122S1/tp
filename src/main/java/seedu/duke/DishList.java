@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import seedu.duke.command.Ui;
-
 import java.util.ArrayList;
 
 public class DishList {

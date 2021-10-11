@@ -3,9 +3,9 @@ package seedu.duke;
 import java.util.ArrayList;
 
 public class Dish {
+    public ArrayList<Ingredient> constituents = new ArrayList<>();
     private String dishName;
     private Double wastage;
-    public ArrayList<Ingredient> constituents = new ArrayList<>();
 
     public Dish(String dishName) {
         this.dishName = dishName;
@@ -35,12 +35,13 @@ public class Dish {
         assert value > 0 : "Adding negative waste is impossible";
         wastage += value;
         System.out.println("Wastage of " + dishName + " is now " + wastage);
-//        //Todo proportion stuff and prevent feedback loop
-//        for (Ingredient ingredient: constituents) {
-//            ingredient.addWaste(value);
-//        }
+        //Todo proportion stuff and prevent feedback loop
+        /*
+        for (Ingredient ingredient: constituents) {
+            ingredient.addWaste(value);
+        }
+        */
     }
-
 
 
     @Override
@@ -51,8 +52,8 @@ public class Dish {
     public String formatData() {
         String output = "";
         output = output + dishName + "|" + wastage;
-        for (Ingredient ingredient: constituents) {
-            output = output + "|" + ingredient.getIngredientName() ;
+        for (Ingredient ingredient : constituents) {
+            output = output + "|" + ingredient.getIngredientName();
         }
         return output;
     }

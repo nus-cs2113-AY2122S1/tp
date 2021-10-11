@@ -2,12 +2,10 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandNames;
-import seedu.duke.command.Ui;
 import seedu.duke.exceptions.CommandNotAvailableException;
 import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Duke {

@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.DishList;
+import seedu.duke.Ui;
 
 import java.util.ArrayList;
 

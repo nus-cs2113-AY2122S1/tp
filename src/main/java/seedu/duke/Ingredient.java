@@ -35,6 +35,7 @@ public class Ingredient {
 
     @Override
     public String toString() {
+        //Todo add constituents
         return ingredientName + '\n'
                 + "   Storage: " + ingredientWeight + '\n'
                 + "   Wastage: " + ingredientWaste;

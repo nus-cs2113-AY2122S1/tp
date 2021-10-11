@@ -19,14 +19,14 @@ public class Storage {
     public static void write(String mode) {
         try {
             File newDirectory = new File(DIRECTORY_NAME);
-            if(!newDirectory.exists()) {
+            if (!newDirectory.exists()) {
                 System.out.println("Creating directory " + DIRECTORY_NAME);
                 newDirectory.mkdirs();
             }
             switch (mode) {
             case "ingredient":
                 FileWriter writer = new FileWriter(DIRECTORY_NAME + File.separator + FILE_NAME_INGR);
-                for(Ingredient ingredient : IngredientList.ingredientList) {
+                for (Ingredient ingredient : IngredientList.ingredientList) {
                     writer.write(ingredient.formatData() + "\n");
                 }
                 writer.close();
@@ -34,7 +34,7 @@ public class Storage {
 
             case "dish":
                 writer = new FileWriter(DIRECTORY_NAME + File.separator + FILE_NAME_DISH);
-                for(Dish dish : DishList.dishList) {
+                for (Dish dish : DishList.dishList) {
                     writer.write(dish.formatData() + "\n");
                 }
                 writer.close();
@@ -60,7 +60,7 @@ public class Storage {
 
     private static void loadIngredients() {
         File newDirectory = new File(DIRECTORY_NAME);
-        if(!newDirectory.exists()) {
+        if (!newDirectory.exists()) {
             System.out.println("Creating directory " + DIRECTORY_NAME);
             newDirectory.mkdirs();
         }
@@ -69,8 +69,9 @@ public class Storage {
             Scanner s = new Scanner(fileToReadIngr);
             while (s.hasNext()) {
                 String in = s.nextLine();
-                String[] params =in.split("\\|");
-                Ingredient ingredientToAdd = new Ingredient(params[0], Double.parseDouble(params[1]), Double.parseDouble(params[2]));
+                String[] params = in.split("\\|");
+                Ingredient ingredientToAdd = new Ingredient(params[0], Double.parseDouble(params[1]),
+                        Double.parseDouble(params[2]));
                 IngredientList.ingredientList.add(ingredientToAdd);
             }
         } catch (FileNotFoundException e) {
@@ -87,7 +88,7 @@ public class Storage {
 
     private static void loadDishes() {
         File newDirectory = new File(DIRECTORY_NAME);
-        if(!newDirectory.exists()) {
+        if (!newDirectory.exists()) {
             System.out.println("Creating directory " + DIRECTORY_NAME);
             newDirectory.mkdirs();
         }
@@ -96,11 +97,11 @@ public class Storage {
             Scanner s = new Scanner(fileToReadIngr);
             while (s.hasNext()) {
                 String in = s.nextLine();
-                String[] params =in.split("\\|");
+                String[] params = in.split("\\|");
                 Dish dishToAdd = new Dish(params[0], Double.parseDouble(params[1]));
-                if(params.length > 2) {
+                if (params.length > 2) {
                     //System.out.println("Contains constituents");
-                    for(int i = 2; i < params.length; i++) {
+                    for (int i = 2; i < params.length; i++) {
                         int ingredientIndex = IngredientList.find(params[i]);
                         dishToAdd.constituents.add(IngredientList.ingredientList.get(ingredientIndex));
                     }
