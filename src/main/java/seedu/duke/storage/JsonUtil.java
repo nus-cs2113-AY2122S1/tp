@@ -10,10 +10,11 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.IOException;
 
 public class JsonUtil {
-    private static ObjectMapper objectMapper = getDefaultObjectMapper();
+    private static final ObjectMapper objectMapper = getDefaultObjectMapper();
 
     /**
      * Creates a Default object mapper class which converts data in Java classes into JSON format and vice versa.
+     *
      * @return defaultObjectMapper used in the app's methods
      */
     private static ObjectMapper getDefaultObjectMapper() {
@@ -24,6 +25,7 @@ public class JsonUtil {
 
     /**
      * Converts a json string into a json object.
+     *
      * @param src Json String
      * @return JsonNode
      * @throws IOException Exception thrown when object mapper fails to convert given string into a json object
@@ -34,9 +36,10 @@ public class JsonUtil {
 
     /**
      * Converts JSON node into a class.
-     * @param node JSON node
+     *
+     * @param node           JSON node
      * @param convertedClass Class to convert into
-     * @param <A> Generic return type
+     * @param <A>            Generic return type
      * @return Object of convertedClass
      * @throws JsonProcessingException Exception thrown when JSON cannot be processed
      */
@@ -46,6 +49,7 @@ public class JsonUtil {
 
     /**
      * Converts Java Object (Either instance of class or String) into a JSON node (JSON object).
+     *
      * @param obj Json String to be converted
      * @return JSON Node
      */
@@ -55,7 +59,8 @@ public class JsonUtil {
 
     /**
      * Turns entire JSON object into string (including {} ).
-     * @param node JSON object
+     *
+     * @param node     JSON object
      * @param isPretty Toggle to control if you want to format the string output
      * @return Json object in the form of a String
      * @throws JsonProcessingException Exception thrown when JSON object cannot be turned into a string

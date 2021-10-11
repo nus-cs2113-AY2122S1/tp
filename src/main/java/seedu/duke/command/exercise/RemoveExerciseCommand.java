@@ -23,12 +23,14 @@ public class RemoveExerciseCommand extends Command {
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1 " + EXERCISE_KEYWORD + "3";
     public static final String MESSAGE_SUCCESS = "Removed exercise: %1$s";
     private static final Logger LOGGER = Logger.getLogger(RemoveExerciseCommand.class.getName());
+
     private final int workoutIndex;
     private final int exerciseIndex;
 
     /**
      * Instantiates object and sets workoutIndex and exerciseIndex.
-     * @param workoutIndex display index of Workout that the exercise is in
+     *
+     * @param workoutIndex  display index of Workout that the exercise is in
      * @param exerciseIndex display index of exercise to remove
      */
     public RemoveExerciseCommand(int workoutIndex, int exerciseIndex) {
@@ -39,11 +41,20 @@ public class RemoveExerciseCommand extends Command {
         setupLogger(LOGGER);
     }
 
+    /**
+     * Executes remove exercise command to remove an exercise of given index from the list.
+     *
+     * @param workouts is the list of Workouts
+     * @param ui       is a user-interface object
+     * @param storage  is a storage object
+     * @throws GetJackDException if there is an invalid index used or an error occurs within the storage
+     */
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         try {
             Exercise toRemove = workouts.getWorkout(workoutIndex).removeExercise(exerciseIndex);
             ui.showToUser(String.format(MESSAGE_SUCCESS, toRemove.toString()));
+
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {

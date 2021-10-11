@@ -23,15 +23,11 @@ public class DeleteWorkoutCommand extends Command {
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1";
     public static final String MESSAGE_SUCCESS = "Deleted workout: %1$s";
     private static final Logger LOGGER = Logger.getLogger(DeleteWorkoutCommand.class.getName());
-
-    public int getWorkoutIndex() {
-        return workoutIndex;
-    }
-
     private final int workoutIndex;
 
     /**
      * Instantiates object and sets workoutIndex and exerciseIndex.
+     *
      * @param workoutIndex display index of workout that we want to delete.
      */
     public DeleteWorkoutCommand(int workoutIndex) {
@@ -40,11 +36,24 @@ public class DeleteWorkoutCommand extends Command {
         setupLogger(LOGGER);
     }
 
+    public int getWorkoutIndex() {
+        return workoutIndex;
+    }
+
+    /**
+     * Executes delete workout command to delete the workout of the given index from the workout list.
+     *
+     * @param workouts is the list of Workouts
+     * @param ui       is a user-interface object
+     * @param storage  is a storage object
+     * @throws GetJackDException if there is an invalid index used or an error occurs within the storage
+     */
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         try {
             Workout toDelete = workouts.removeWorkout(workoutIndex);
-            ui.showToUser(String.format(MESSAGE_SUCCESS,toDelete));
+            ui.showToUser(String.format(MESSAGE_SUCCESS, toDelete));
+
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {

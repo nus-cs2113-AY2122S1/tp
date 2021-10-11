@@ -12,27 +12,23 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  * It contains basic information of an exercise such as reps, sets and status.
  */
 public class Exercise {
+    static final Logger LOGGER = Logger.getLogger(Exercise.class.getName());
     protected String description;
-    //protected String muscle;
     protected int sets;
     protected int reps;
     protected Boolean isDone = false;
-    static final Logger LOGGER = Logger.getLogger(Exercise.class.getName());
 
     public Exercise(String description, int sets, int reps) {
         this.description = description;
         this.sets = sets;
         this.reps = reps;
-    }
-
-    public Exercise() {
         setupLogger(LOGGER);
     }
 
     /**
      * Returns the exercise description.
      *
-     * @return the exercise name.
+     * @return the exercise name
      */
     public String getDescription() {
         assert description != null;
@@ -58,7 +54,7 @@ public class Exercise {
     /**
      * Marks exercise as either completed or not completed.
      *
-     * @return the current status of the exercise.
+     * @return the current status of the exercise
      */
     public String getStatusSymbol() {
         assert isDone != null;
@@ -68,7 +64,7 @@ public class Exercise {
     /**
      * Converts the object to a String.
      *
-     * @return exercise with sets and reps in specified format.
+     * @return exercise with sets and reps in specified format
      */
     @Override
     public String toString() {
@@ -79,15 +75,17 @@ public class Exercise {
     /**
      * Stores the sets, reps and status values as strings and converts the current exercise
      * into an ExerciseModel that is added to the WorkoutModel.
-     * This is done as WorkoutModel objects are easily convertable to JSONStrings for storage.
+     * This is done as WorkoutModel objects are easily convertible to JSONStrings for storage.
      *
-     * @param workoutModel is the model of workout stored inside Json file.
+     * @param workoutModel is the model of workout stored inside Json file
      */
     public void convertToExerciseStorageModel(WorkoutModel workoutModel) {
-        LOGGER.info("Generating WorkoutModel with ExerciseModel");
         String setsInString = String.valueOf(sets);
         String repsInString = String.valueOf(reps);
         String doneStatus = isDone ? "true" : "false";
+
         workoutModel.addToWorkoutModel(new ExerciseModel(description, setsInString, repsInString, doneStatus));
+
+        LOGGER.info("WorkoutModel with ExerciseModel completed");
     }
 }

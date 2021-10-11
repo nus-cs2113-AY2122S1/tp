@@ -24,12 +24,14 @@ public class MarkExerciseAsDoneCommand extends Command {
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3 " + EXERCISE_KEYWORD + "2";
     public static final String MESSAGE_SUCCESS = "Completed: %1$s";
     private static final Logger LOGGER = Logger.getLogger(MarkExerciseAsDoneCommand.class.getName());
+
     private final int workoutIndex;
     private final int exerciseIndex;
 
     /**
      * Instantiates object and sets workoutIndex and exerciseIndex.
-     * @param workoutIndex display index of Workout that the exercise is in
+     *
+     * @param workoutIndex  display index of Workout that the exercise is in
      * @param exerciseIndex display index of exercise to remove
      */
     public MarkExerciseAsDoneCommand(int workoutIndex, int exerciseIndex) {
@@ -40,13 +42,24 @@ public class MarkExerciseAsDoneCommand extends Command {
         setupLogger(LOGGER);
     }
 
+    /**
+     * Executes mark exercise command to mark the given exercise as done in the list.
+     *
+     * @param workouts is the list of Workouts
+     * @param ui       is a user-interface object
+     * @param storage  is a storage object
+     * @throws GetJackDException if there is an invalid index used or an error occurs within the storage
+     */
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         try {
             Exercise toMarkDone = workouts.getWorkout(workoutIndex).getExercise(exerciseIndex);
             toMarkDone.setDone();
+
             LOGGER.info("Set workout " + workoutIndex + ", exercise " + exerciseIndex + " done");
+
             ui.showToUser(String.format(MESSAGE_SUCCESS, toMarkDone));
+
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
         } catch (IndexOutOfBoundsException e) {

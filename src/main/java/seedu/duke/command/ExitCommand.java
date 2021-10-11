@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
@@ -13,14 +12,13 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  * Used to exit the program.
  */
 public class ExitCommand extends Command {
-
     public static final String COMMAND_WORD = "bye";
-    public static final String MESSAGE_USAGE = "bye: Closes the program"
-            + "\tExample: bye";
+    public static final String MESSAGE_USAGE = "bye: Closes the program" + "\tExample: bye";
     private static final Logger LOGGER = Logger.getLogger(ExitCommand.class.getName());
 
     /**
      * Determines if command is ExitCommand.
+     *
      * @param command command that the user wants to execute
      * @return true if command is ExitCommand, false otherwise
      */
@@ -30,7 +28,14 @@ public class ExitCommand extends Command {
         return command instanceof ExitCommand;
     }
 
+    /**
+     * Makes no changes in the task list or storage.
+     *
+     * @param workouts is the list of Workouts
+     * @param ui       is a user-interface object
+     * @param storage  is a storage object
+     */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
+    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) {
     }
 }

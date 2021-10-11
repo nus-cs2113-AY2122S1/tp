@@ -19,20 +19,31 @@ public class CreateWorkoutCommand extends Command {
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_NAME\n"
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "ab workout";
     public static final String MESSAGE_SUCCESS = "New workout created: %1$s";
+
     private final Workout toCreate;
 
     /**
      * Instantiates object and creates a new workout.
+     *
      * @param description description of new workout.
      */
     public CreateWorkoutCommand(String description) {
         this.toCreate = new Workout(description);
     }
 
+    /**
+     * Executes create workout command to create a new workout into the workout list.
+     *
+     * @param workouts is the list of Workouts
+     * @param ui       is a user-interface object
+     * @param storage  is a storage object
+     * @throws GetJackDException if an error occurs within the storage
+     */
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         workouts.addWorkout(toCreate);
         ui.showToUser(String.format(MESSAGE_SUCCESS, toCreate));
+
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);
     }

@@ -13,15 +13,13 @@ public abstract class Command {
     public static final String ERROR_MESSAGE_EXERCISE_NOT_FOUND = "Error. Exercise not found\n";
     public static String MESSAGE_USAGE;
 
-    protected Command() {
-    }
-
     /**
-     * abstract method to execute the Command's main functionality.
-     * @param workouts List of Workouts
-     * @param ui User-Interface object
-     * @param storage Storage object
-     * @throws GetJackDException Thrown when command cannot be executed correctly
+     * Abstract method to execute the Command's main functionality.
+     *
+     * @param workouts is the list of Workouts
+     * @param ui       is a user-interface object
+     * @param storage  is a storage object
+     * @throws GetJackDException if command cannot be executed correctly
      */
     public abstract void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException;
 }

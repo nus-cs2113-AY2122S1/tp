@@ -1,15 +1,12 @@
 package seedu.duke.command.workout;
 
 import seedu.duke.command.Command;
-import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * To list all Workouts
@@ -22,9 +19,17 @@ public class ListWorkoutsCommand extends Command {
     public ListWorkoutsCommand() {
     }
 
+    /**
+     * Executes list workout command to list all the workouts from the workout list.
+     *
+     * @param workouts is the list of Workouts
+     * @param ui       is a user-interface object
+     * @param storage  is a storage object
+     */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
+    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) {
         ArrayList<Workout> allWorkouts = workouts.getAllWorkouts();
+
         if (allWorkouts.isEmpty()) {
             ui.showToUser(MESSAGE_EMPTY_WORKOUT_LIST);
         } else {
