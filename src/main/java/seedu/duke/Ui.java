@@ -11,17 +11,20 @@ public class Ui {
 
     private static Scanner in = new Scanner(System.in);
 
+    public Ui() {;}
+
     public static void showLine() {
         System.out.println("____________________________________________________________");
     }
 
     public void showWelcome() {
         showLine();
-        String logo = " █████  ███  █   █ ████  ████  █      ████  █    █ █    █ █████ ████\n"
-                + "   █   █   █ █   █ █   █ █   █ █     █    █ ██   █ ██   █ █     █   █\n"
-                + "   █   █   █ █   █ █████ ████  █     ██████ █ █  █ █ █  █ █████ █████\n"
-                + "   █   █   █ █   █ █  █  █     █     █    █ █  █ █ █  █ █ █     █  █\n"
-                + "   █    ███   ███  █   █ █     █████ █    █ █   ██ █   ██ █████ █   █\n";
+//        String logo = " █████  ███  █   █ ████  ████  █      ████  █    █ █    █ █████ ████\n"
+//                + "   █   █   █ █   █ █   █ █   █ █     █    █ ██   █ ██   █ █     █   █\n"
+//                + "   █   █   █ █   █ █████ ████  █     ██████ █ █  █ █ █  █ █████ █████\n"
+//                + "   █   █   █ █   █ █  █  █     █     █    █ █  █ █ █  █ █ █     █  █\n"
+//                + "   █    ███   ███  █   █ █     █████ █    █ █   ██ █   ██ █████ █   █\n";
+        String logo = "gg";
         String greet = "Hello, Welcome to TourPlanner!\n"
                 + "What can I do for you?";
         show(logo);
