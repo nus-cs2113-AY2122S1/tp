@@ -152,14 +152,4 @@ public class Parser {
 
 }
 
-    public static Command parseCut(String params) {
-        int clientIndex = stringToInt(params) - 1;
-        return new CutCommand(clientIndex);
-    }
-
-    private static int stringToInt(String params) {
-        int clientIndex = Integer.parseInt(params);
-        return clientIndex;
-    }
-
-}
+   
