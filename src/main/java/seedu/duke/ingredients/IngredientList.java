@@ -70,8 +70,27 @@ public class IngredientList {
         ingredientList.add(ingredient);
     }
 
+    /**
+     * Sets the update ingredient to an indexed ingredient in the ingredient list.
+     * @param ingredientNumber The index of the ingredient to be updated
+     * @param ingredient The update ingredient object
+     */
     public void set(int ingredientNumber, Ingredient ingredient) {
         ingredientList.set(ingredientNumber, ingredient);
+    }
+
+    /**
+     * Gets the ingredient from a specific index in the ingredient list.
+     * @param ingredientNumber The index of the ingredient to be located
+     * @returns The indexed ingredient object
+     * @throws DukeException The ingredient is out of bounds
+     */
+    public Ingredient get(int ingredientNumber) throws DukeException {
+        try {
+            return ingredientList.get(ingredientNumber - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(INVALID_NUMBER);
+        }
     }
 
 }

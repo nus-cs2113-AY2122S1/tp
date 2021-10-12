@@ -10,6 +10,8 @@ import seedu.duke.ingredients.AddIngredient;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
 
+import java.util.NoSuchElementException;
+
 public class Parser {
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_ADD = "add";
@@ -50,29 +52,31 @@ public class Parser {
         }
     }
 
-
-    private static String parseUpdateCommand(String command) throws DukeException{
+    /**
+     * Parses update command and splits input into ingredient parameters.
+     *
+     * @param command 1 line of user input
+     * @return Ingredient updated message
+     */
+    private static String parseUpdateCommand(String command) throws DukeException {
         String resultMsg = "";
         int i;
-        String delimiter = "i/|a/|u/|e/";
+        String delimiter = "n/|a/|u/|e/";
         String[] details = command.split(delimiter);
 
-        String ingredientName = details[0];
-        Double ingredientAmount = Double.parseDouble(details[1]);
-        String ingredientUnits = details[2];
-        String ingredientExpiry = details[3];
+        String ingredientName = details[1].trim();
+        double ingredientAmount = Double.parseDouble(details[2].trim());
+        String ingredientUnits = details[3].trim();
+        String ingredientExpiry = details[4].trim();
+        Ingredient updatedIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
 
-        //For future versions, updating non-existing item will simply add item to stock.
         if (IngredientList.getInstance().getInventoryStock() == 0) {
             resultMsg = DELETE_ERROR_MESSAGE;
             return resultMsg;
         }
 
-        for (i = 0; i < IngredientList.getInstance().getInventoryStock() - 1; i++) {
-            if (ingredientName == IngredientList.getInstance().getIngredientInfo(i + 1).split(" ")[0]) {
-                resultMsg = new UpdateCommand(i + 1, ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry).run();
-            }
-        }
+        resultMsg = new UpdateCommand(updatedIngredient).run();
+
         if (resultMsg == "") {
             resultMsg = NOT_FOUND_MESSAGE;
         }
@@ -85,7 +89,6 @@ public class Parser {
      * @param command 1 line of user input
      * @return Ingredient added message
      */
-
     private static String parseAddCommand(String command) {
         String[] userInput = command.split(SPACE_SEPARATOR, 2);
         String ingredientName;
