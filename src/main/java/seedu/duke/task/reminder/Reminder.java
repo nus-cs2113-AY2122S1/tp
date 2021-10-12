@@ -12,7 +12,7 @@ public class Reminder {
     private LocalDateTime taskTime;
     private LocalDateTime reminderTime;
     private boolean reminderDone;
-    private long userTime_minute = 10;
+    private long userTime = 10;
 
     public Reminder() {
         this.reminderDone = false;
@@ -20,7 +20,7 @@ public class Reminder {
 
     public Reminder(Date time) {
         this.taskTime = new Timestamp(time.getTime()).toLocalDateTime();
-        this.reminderTime = taskTime.minusMinutes(userTime_minute);
+        this.reminderTime = taskTime.minusMinutes(userTime);
         setReminderDone();
     }
 
@@ -70,6 +70,8 @@ public class Reminder {
         case YEARLY:
             reminderMessage = getMessage(now, task);
             setRecurReminderTime(reminderTime.plusYears(RECURRENCE_INCREMENT));
+            break;
+        default:
             break;
         }
         return reminderMessage;
