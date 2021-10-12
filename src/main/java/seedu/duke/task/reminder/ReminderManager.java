@@ -5,7 +5,7 @@ import seedu.duke.task.TaskManager;
 import java.time.LocalDateTime;
 
 public class ReminderManager {
-    private TaskManager taskManager;
+    private static TaskManager taskManager;
 
     public ReminderManager() {
         this.taskManager = new TaskManager();
@@ -18,7 +18,23 @@ public class ReminderManager {
     public void sendReminder() {
         LocalDateTime now = LocalDateTime.now();
         for (int i = 0; i < taskManager.getTasklist().size(); i++) {
-            taskManager.getTasklist().get(i).displayReminder(now);
+            if (taskManager.getTasklist().get(i).needReminder()) {
+                taskManager.getTasklist().get(i).displayReminder(now);
+            }
         }
     }
+
+/* for Junit Test
+    public static String testReminder() {
+        LocalDateTime now = LocalDateTime.now();
+        String testOut = "";
+        for (int i = 0; i < taskManager.getTasklist().size(); i++) {
+            if (taskManager.getTasklist().get(i).needReminder()) {
+                testOut += (taskManager.getTasklist().get(i).reminderForTest(now));
+            }
+        }
+        return testOut;
+    }
+ */
+
 }

@@ -8,6 +8,7 @@ import java.util.Date;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
+import seedu.duke.task.reminder.Reminder;
 
 public class Event extends Task {
 
@@ -16,6 +17,8 @@ public class Event extends Task {
     Date startDate;
     Date endDate;
     RecurrenceEnum recurrence;
+
+    private Reminder reminder;
 
     public Event(String description) {
         super(description);
@@ -36,6 +39,7 @@ public class Event extends Task {
         this.startDate = startDate;
         this.endDate = endDate;
         this.recurrence = DEFAULT_RECURRENCE;
+        reminder = new Reminder(startDate);
     }
 
     public Event(String description, RecurrenceEnum recurrence) {
@@ -50,6 +54,7 @@ public class Event extends Task {
         this.startDate = startDate;
         this.endDate = endDate;
         this.recurrence = DEFAULT_RECURRENCE;
+        reminder = new Reminder(startDate);
     }
 
     public Event(String description, Date startDate, Date endDate, RecurrenceEnum recurrence) {
@@ -57,6 +62,7 @@ public class Event extends Task {
         this.startDate = startDate;
         this.endDate = endDate;
         this.recurrence = recurrence;
+        reminder = new Reminder(startDate);
     }
 
     public Event(String description, PriorityEnum priority, Date startDate, Date endDate, RecurrenceEnum recurrence) {
@@ -64,6 +70,7 @@ public class Event extends Task {
         this.startDate = startDate;
         this.endDate = endDate;
         this.recurrence = recurrence;
+        reminder = new Reminder(startDate);
     }
 
     @Override
@@ -74,12 +81,21 @@ public class Event extends Task {
 
     @Override
     public void displayReminder(LocalDateTime now) {
+        reminder.printReminder(now, getTaskEntryDescription(), recurrence);
+    }
 
+    @Override
+    public boolean needReminder() {
+        return (reminder != null);
     }
 
     public String getDateAsString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         String strDate = dateFormat.format(date);
         return strDate;
+    }
+
+    public String reminderForTest(LocalDateTime now) {
+        return reminder.testReminder(now, getTaskEntryDescription(), recurrence);
     }
 }

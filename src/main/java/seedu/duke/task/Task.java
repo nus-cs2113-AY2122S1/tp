@@ -40,4 +40,8 @@ public abstract class Task {
     }
 
     public abstract void displayReminder(LocalDateTime now);
+
+    public abstract boolean needReminder();
+
+    public abstract String reminderForTest(LocalDateTime now);
 }
