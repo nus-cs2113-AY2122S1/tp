@@ -158,15 +158,19 @@ public class Parser {
         }
     }
 
-    private static void executeCreate(String inputDescription) {
-        try {
-            String[] newTripInfo = inputDescription.split(" ", 5);
-            Trip newTrip = new Trip(newTripInfo);
-            Storage.listOfTrips.add(newTrip);
-            System.out.println("Your trip to " + newTrip.getLocation() + " on "
-                    + newTrip.getDateOfTripString() + " has been successfully added!");
-        } catch (IndexOutOfBoundsException e) {
+    private static void executeCreate(String indexAsString) {
+        if (indexAsString == null) {
             Ui.printCreateFormatError();
+        } else {
+            try {
+                String[] newTripInfo = indexAsString.split(" ", 5);
+                Trip newTrip = new Trip(newTripInfo);
+                Storage.listOfTrips.add(newTrip);
+                System.out.println("Your trip to " + newTrip.getLocation() + " on "
+                        + newTrip.getDateOfTripString() + " has been successfully added!");
+            } catch (IndexOutOfBoundsException e) {
+                Ui.printCreateFormatError();
+            }
         }
     }
 
