@@ -15,7 +15,6 @@ class RemoveCommandParserTest {
         String arguments = "/u someUniversityName";
         RemoveCommandParser rcp = new RemoveCommandParser();
         try {
-
             assertEquals(RemoveCommand.class, rcp.parse(arguments));
         } catch (Exception e) {
             assertEquals(null, e.getMessage());

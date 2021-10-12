@@ -21,6 +21,8 @@ public class AddModCommandParser {
         if (module == null) {
             throw new ParseException("module does not exist", 1);
         }
+        assert module.getModuleCode() != null;
+
         return new AddModCommand(module, universitySelectedList, moduleSelectedList);
     }
 
