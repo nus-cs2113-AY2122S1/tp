@@ -97,13 +97,24 @@ Updated! Number of rows affected: 1
 ```
 
 ### Listing medication stock : `list`
+Lists all existing medication in the inventory.
+* All parameters for list command are optional, you can choose to list medication by any of the parameters.
+* The following example demonstrates list by medication name.
 
-Format:
+Format: `list {i/stock_id n/name p/price q/quantity e/expiry_date d/description m/max_quantity sort/column_name rsort/column_name} `
 
-Example:
+Example:  `list n/panadol`
 
 Expected output:
-
+```
++====+=========+========+==========+=============+==================================================+==============+
+| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE |                   DESCRIPTION                    | MAX_QUANTITY |
++====+=========+========+==========+=============+==================================================+==============+
+| 1  | PANADOL | $20.00 |    20    | 13-09-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS |     1000     |
++----+---------+--------+----------+-------------+--------------------------------------------------+--------------+
+| 2  | PANADOL | $20.00 |    10    | 14-09-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS |     1000     |
++----+---------+--------+----------+-------------+--------------------------------------------------+--------------+
+```
 
 ### Purging existing medication : `purge`
 Deletes all data in MediVault.
