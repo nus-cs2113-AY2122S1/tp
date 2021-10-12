@@ -37,6 +37,24 @@ public class FailedCommand extends Command {
         case INVALID_FORMAT:
             TextUi.invalidFormatMessage();
             break;
+        case INVALID_NAME:
+            TextUi.invalidNameInput();
+            break;
+        case INVALID_GITHUB_USERNAME:
+            TextUi.invalidGithubUsernameInput();
+            break;
+        case INVALID_TELEGRAM:
+            TextUi.invalidTelegramUsernameInput();
+            break;
+        case INVALID_LINKEDIN:
+            TextUi.invalidLinkedinInput();
+            break;
+        case INVALID_MAIL:
+            TextUi.invalidEmailInput();
+            break;
+        case INVALID_TWITTER:
+            TextUi.invalidTwitterUsernameInput();
+            break;
         case NUM_OUT_OF_BOUND:
             TextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
             break;
