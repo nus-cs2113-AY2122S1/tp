@@ -1,40 +1,31 @@
 package taa.command;
 
-import taa.storage.Storage;
-import taa.exception.TaaException;
 import taa.Ui;
+import taa.attendance.AttendanceList;
+import taa.exception.TaaException;
 import taa.module.Module;
 import taa.module.ModuleList;
+import taa.storage.Storage;
 import taa.student.Student;
 import taa.student.StudentList;
 import taa.util.Util;
 
-public class EditStudentCommand extends Command {
+public class ListAttendanceCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_STUDENT_INDEX = "s";
-    private static final String KEY_NEW_ID = "i";
-    private static final String KEY_NEW_NAME = "n";
-    private static final String[] EDIT_STUDENT_ARGUMENT_KEYS = {
-        KEY_MODULE_CODE,
-        KEY_STUDENT_INDEX,
-        KEY_NEW_ID,
-        KEY_NEW_NAME
-    };
+    private static final String[] LIST_ATTENDANCE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_INDEX};
 
-    private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<NEW_ID> %s/<NEW_NAME>";
-    private static final String MESSAGE_FORMAT_STUDENT_EDITED = "Student updated:\n  %s";
+    private static final String MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE = "Usage: %s %s/<MODULE_CODE> %s/<STUDENT_INDEX>";
+    protected static final String MESSAGE_FORMAT_NO_ATTENDANCE = "There is no recorded attendance for %s.";
+    private static final String MESSAGE_FORMAT_OUTPUT = "Attendance for %s:\n%s";
 
-    public EditStudentCommand(String argument) {
-        super(argument, EDIT_STUDENT_ARGUMENT_KEYS);
+    public ListAttendanceCommand(String argument) {
+        super(argument, LIST_ATTENDANCE_ARGUMENT_KEYS);
     }
 
-    /**
-     * Edits the name and student ID of a given student.
-     *
+    /** Lists out the attendance for all students in a module.
      * @param moduleList The list of modules
-     * @param ui The ui instance to handle interactions with the user
-     * @param storage The storage instance to handle saving.
+     * @param ui         The ui instance to handle interactions with the user
      * @throws TaaException If the user inputs an invalid command
      */
     @Override
@@ -65,25 +56,24 @@ public class EditStudentCommand extends Command {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
-        String newId = argumentMap.get(KEY_NEW_ID);
-        String newName = argumentMap.get(KEY_NEW_NAME);
-        student.setId(newId);
-        student.setName(newName);
+        String message;
+        AttendanceList attendanceList = student.getAttendanceList();
+        if (attendanceList.getSize() == 0) {
+            message = String.format(MESSAGE_FORMAT_NO_ATTENDANCE, student);
+        } else {
+            message = String.format(MESSAGE_FORMAT_OUTPUT, student, attendanceList);
+        }
 
-        storage.save(moduleList);
-
-        ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_EDITED, student));
+        ui.printMessage(message);
     }
 
     @Override
     protected String getUsageMessage() {
         return String.format(
-                MESSAGE_FORMAT_FIND_STUDENT_USAGE,
-                COMMAND_EDIT_STUDENT,
+                MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE,
+                COMMAND_LIST_ATTENDANCE,
                 KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX,
-                KEY_NEW_ID,
-                KEY_NEW_NAME
+                KEY_STUDENT_INDEX
         );
     }
 }

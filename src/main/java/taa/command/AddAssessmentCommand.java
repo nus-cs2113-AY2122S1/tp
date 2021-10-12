@@ -21,8 +21,8 @@ public class AddAssessmentCommand extends Command {
             + "%s/<MODULE_CODE> %s/<ASSESSMENT_NAME> %s/<WEIGHTAGE>";
     private static final String MESSAGE_FORMAT_INVALID_WEIGHTAGE = "Invalid weightage. "
             + "Weightage must be between %,.2f and %,.2f (inclusive)";
-    private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED =
-            "Assessment added:\n  %s\nThere are %d assessments in the %s.";
+    private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED = "Assessment added:\n"
+            + "  %s\nThere are %d assessments in the %s.";
 
     public AddAssessmentCommand(String argument) {
         super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);
@@ -42,7 +42,7 @@ public class AddAssessmentCommand extends Command {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 

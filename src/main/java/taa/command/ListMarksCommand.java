@@ -57,7 +57,7 @@ public class ListMarksCommand extends Command {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -109,6 +109,7 @@ public class ListMarksCommand extends Command {
                 stringBuilder.append("NIL");
             }
         }
+
         if (studentIndex <= 0) {
             ui.printMessage(MARKS_LIST_EMPTY);
         } else {

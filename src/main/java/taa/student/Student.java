@@ -1,8 +1,8 @@
 package taa.student;
 
 import taa.ClassChecker;
+import taa.attendance.AttendanceList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -13,13 +13,13 @@ public class Student implements ClassChecker {
 
     private String id;
     private String name;
-    private final ArrayList<Attendance> attendances;
+    private final AttendanceList attendanceList;
     private final HashMap<String, Double> results;
 
     public Student(String id, String name) {
         this.id = id;
         this.name = name;
-        this.attendances = new ArrayList<>();
+        this.attendanceList = new AttendanceList();
         this.results = new HashMap<>();
     }
 
@@ -31,24 +31,8 @@ public class Student implements ClassChecker {
         return MARKS_RANGE;
     }
 
-    /**
-     * Marks the student as present for a particular lesson.
-     *
-     * @param lessonIndex The lesson index the student is present for
-     */
-    public void markAttendance(int lessonIndex) {
-        // TODO
-    }
-
-    /**
-     * Returns the attendance status of the student for a particular lesson.
-     *
-     * @param lessonIndex The lesson index
-     * @return The attendance status of the student for the lesson
-     */
-    public boolean isPresent(int lessonIndex) {
-        // TODO
-        return false;
+    public AttendanceList getAttendanceList() {
+        return attendanceList;
     }
 
     /**
@@ -88,20 +72,10 @@ public class Student implements ClassChecker {
     }
 
     /**
-     * Overrides default toString method with the custom print message.
-     *
-     * @return the custom print message
-     */
-    @Override
-    public String toString() {
-        return String.format("%s - %s", id, name);
-    }
-
-    /**
      * Adds a key,value pair to the hashmap.
      *
      * @param assessmentName key of the hashmap
-     * @param marks value to be stored under the key given
+     * @param marks          value to be stored under the key given
      */
     public void setMarks(String assessmentName, double marks) {
         results.put(assessmentName, marks);
@@ -111,9 +85,13 @@ public class Student implements ClassChecker {
      * Gets the marks for the given assessment.
      *
      * @param assessmentName Assessment to get marks for.
-     * @return Marks for the inputted assessment.
+     * @return The marks for the inputted assessment if it exists, else -1.
      */
     public double getMarks(String assessmentName) {
+        if (!results.containsKey(assessmentName)) {
+            return -1;
+        }
+
         return results.get(assessmentName);
     }
 
@@ -122,8 +100,8 @@ public class Student implements ClassChecker {
      *
      * @return Hashmap containing assessment names as keys and the marks as values.
      */
-    public HashMap<String, Double> getAllMarks() {
-        return results;
+    public HashMap<String, Double> getResults() {
+        return new HashMap<>(results);
     }
 
     /**
@@ -142,12 +120,6 @@ public class Student implements ClassChecker {
             return false;
         }
 
-        for (Attendance attendance : attendances) {
-            if (!attendance.verify()) {
-                return false;
-            }
-        }
-
         for (String assessmentName : results.keySet()) {
             if (!isMarksWithinRange(results.get(assessmentName))) {
                 return false;
@@ -155,5 +127,15 @@ public class Student implements ClassChecker {
         }
 
         return true;
+    }
+
+    /**
+     * Overrides default toString method with the custom print message.
+     *
+     * @return the custom print message
+     */
+    @Override
+    public String toString() {
+        return String.format("%s (%s)", id, name);
     }
 }

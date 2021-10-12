@@ -36,7 +36,7 @@ public class AddStudentCommand extends Command {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 

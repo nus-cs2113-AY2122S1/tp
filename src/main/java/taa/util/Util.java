@@ -2,6 +2,7 @@ package taa.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class Util {
     public static boolean isStringInteger(String string) {
@@ -26,6 +27,10 @@ public class Util {
         }
 
         return isDouble;
+    }
+
+    public static boolean isStringBoolean(String string) {
+        return string.equals("true") || string.equals("false");
     }
 
     /**

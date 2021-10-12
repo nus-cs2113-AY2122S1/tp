@@ -5,8 +5,6 @@ import taa.ClassChecker;
 import java.util.ArrayList;
 
 public class AssessmentList implements ClassChecker {
-    private static final String MESSAGE_ASSESSMENT_LIST_HEADER = "Assessment List:";
-
     private final ArrayList<Assessment> assessments;
 
     public AssessmentList() {
@@ -24,7 +22,7 @@ public class AssessmentList implements ClassChecker {
     /**
      * Adds an assessment to the list of assessments in a particular module.
      * Does not add if assessment name already exists
-     * or total weightage exceed MAX_ASSESSMENT_WEIGHTAGE after adding.
+     * or total weightage exceed the maximum weightage after adding.
      *
      * @param assessment The assessment object to be added.
      * @return tue if success, else false.
@@ -35,9 +33,12 @@ public class AssessmentList implements ClassChecker {
             if (a.getName().equalsIgnoreCase(assessment.getName())) {
                 return false;
             }
+
+            totalWeightage += a.getWeightage();
         }
 
-        if ((totalWeightage + assessment.getWeightage()) > Assessment.getWeightageRange()[1]) {
+        double newTotalWeightage = totalWeightage + assessment.getWeightage();
+        if (!Assessment.isWeightageWithinRange(newTotalWeightage)) {
             return false;
         }
 
@@ -70,9 +71,12 @@ public class AssessmentList implements ClassChecker {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder(MESSAGE_ASSESSMENT_LIST_HEADER);
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < assessments.size(); i += 1) {
-            stringBuilder.append("\n");
+            if (i > 0) {
+                stringBuilder.append("\n");
+            }
+
             stringBuilder.append(i + 1);
             stringBuilder.append(". ");
             stringBuilder.append(assessments.get(i));
@@ -84,13 +88,19 @@ public class AssessmentList implements ClassChecker {
     @Override
     public boolean verify() {
         ArrayList<String> assessmentNames = new ArrayList<>();
+        double totalWeightage = 0;
         for (Assessment assessment : assessments) {
             String name = assessment.getName();
             if (assessmentNames.contains(name)) {
                 assessments.remove(assessment);
             } else {
                 assessmentNames.add(name);
+                totalWeightage += assessment.getWeightage();
             }
+        }
+
+        if (!Assessment.isWeightageWithinRange(totalWeightage)) {
+            return false;
         }
 
         return true;

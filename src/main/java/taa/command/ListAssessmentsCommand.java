@@ -14,6 +14,7 @@ public class ListAssessmentsCommand extends Command {
     private static final String MESSAGE_LIST_EMPTY = "There are no assessments in the module.";
 
     private static final String MESSAGE_FORMAT_LIST_ASSESSMENTS_USAGE = "Usage: %s %s/<MODULE_CODE>";
+    private static final String MESSAGE_FORMAT_OUTPUT = "Assessments for %s:\n%s";
 
     public ListAssessmentsCommand(String argument) {
         super(argument, LIST_ASSESSMENTS_ARGUMENT_KEYS);
@@ -33,7 +34,7 @@ public class ListAssessmentsCommand extends Command {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -43,13 +44,15 @@ public class ListAssessmentsCommand extends Command {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
+        String message;
         AssessmentList assessmentList = module.getAssessmentList();
         if (assessmentList.getSize() == 0) {
-            ui.printMessage(MESSAGE_LIST_EMPTY);
-            return;
+            message = MESSAGE_LIST_EMPTY;
+        } else {
+            message = String.format(MESSAGE_FORMAT_OUTPUT, module, assessmentList);
         }
 
-        ui.printMessage(assessmentList.toString());
+        ui.printMessage(message);
     }
 
     @Override

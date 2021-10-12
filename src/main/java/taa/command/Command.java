@@ -25,12 +25,15 @@ public abstract class Command {
     public static final String COMMAND_ADD_ASSESSMENT = "add_assessment";
     public static final String COMMAND_SET_MARKS = "set_marks";
 
+    // Common messages
     protected static final String MESSAGE_UNKNOWN_USAGE = "Unknown usage.";
     protected static final String MESSAGE_MODULE_NOT_FOUND = "Module not found.";
     protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
+    protected static final String MESSAGE_INVALID_LESSON_INDEX = "Invalid lesson index.";
     protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
     protected static final String MESSAGE_NO_STUDENTS = "There are no students in this module";
 
+    // Common message formats
     protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "Usage: %s";
     protected static final String MESSAGE_FORMAT_MISSING_ARGUMENT = "Missing Argument(s).\n%s";
 
@@ -58,21 +61,6 @@ public abstract class Command {
 
     protected abstract String getUsageMessage();
 
-    /**
-     * Checks if argumentMap contains all the argument keys.
-     *
-     * @return true if argumentMap contains all keys, else false.
-     */
-    protected boolean checkArgumentMap() {
-        for (String key : argumentKeys) {
-            if (!argumentMap.containsKey(key)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
     protected String getMissingArgumentMessage() {
         String usageMessage = getUsageMessage();
         if (usageMessage == null) {
@@ -80,5 +68,20 @@ public abstract class Command {
         }
 
         return String.format(MESSAGE_FORMAT_MISSING_ARGUMENT, usageMessage);
+    }
+
+    /**
+     * Checks if there are any missing arguments.
+     *
+     * @return true if there no missing arguments, else false.
+     */
+    protected boolean checkArguments() {
+        for (String key : argumentKeys) {
+            if (!argumentMap.containsKey(key)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

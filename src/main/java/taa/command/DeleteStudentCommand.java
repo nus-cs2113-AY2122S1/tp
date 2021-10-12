@@ -36,7 +36,7 @@ public class DeleteStudentCommand extends Command {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -55,7 +55,7 @@ public class DeleteStudentCommand extends Command {
         StudentList studentList = module.getStudentList();
         Student student = studentList.deleteStudent(studentIndex);
         if (student == null) {
-            ui.printMessage(MESSAGE_INVALID_STUDENT_INDEX);
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
         storage.save(moduleList);

@@ -39,7 +39,7 @@ public class FindStudentCommand extends Command {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -53,8 +53,7 @@ public class FindStudentCommand extends Command {
         StudentList studentList = module.getStudentList();
         ArrayList<Student> studentsFound = studentList.findStudents(keyword);
         if (studentsFound.isEmpty()) {
-            ui.printMessage(MESSAGE_NO_STUDENTS_FOUND);
-            return;
+            throw new TaaException(MESSAGE_NO_STUDENTS_FOUND);
         }
 
         String header = String.format(MESSAGE_FORMAT_STUDENT_FOUND_HEADER, moduleCode, keyword);
