@@ -54,10 +54,10 @@ class UiTest {
         Ui ui = new Ui();
 
         String patientInfo = patient.toString();
-        String expectedOutput = "Here's the patient with id 1: Patient ID: 1 IC:  "
-                + "Name: John Doe H/P:  Email: John@gmail.com Address: ";
+        String expectedOutput = "Here's the requested patient:\n" +
+                "Patient ID: 1 IC:  " + "Name: John Doe H/P:  Email: John@gmail.com Address: ";
         int patientId = 1;
-        assertEquals(ui.getPatientInfo(patientId, patientInfo), expectedOutput);
+        assertEquals(ui.getPatientInfo(patientInfo), expectedOutput);
     }
 
     @Test
@@ -93,7 +93,8 @@ class UiTest {
                 + "help\n" + "add\n" + "list\n" + "view\n" + "edit\n" + "delete\n"
                 + "exit\n" + "\n"
                 + "To obtain more information on each command and their respective required inputs, type:\n"
-                + "help [COMMAND]";
+                + "help [COMMAND]\n\n"
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes";
 
         assertEquals(ui.getCommandList(), expectedOutput);
     }

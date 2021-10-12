@@ -86,10 +86,10 @@ public class Parser {
         if (userInput.startsWith(COMMAND_VIEW)) {
             return parseViewPatientCommand(userInput);
         }
-        if (userInput.startsWith(COMMAND_LIST)) {
+        if (userInput.equals(COMMAND_LIST)) {
             return new ListPatientCommand();
         }
-        if (userInput.startsWith(COMMAND_EXIT)) {
+        if (userInput.equals(COMMAND_EXIT)) {
             return new ExitCommand();
         }
         if (userInput.startsWith(COMMAND_EDIT)) {
@@ -131,7 +131,7 @@ public class Parser {
      * @throws MedBotException when patient id given is out of range, or no id is specified.
      */
     private static ViewPatientCommand parseViewPatientCommand(String userInput) throws MedBotException {
-        int patientId = 0;
+        int patientId;
         try {
             patientId = Integer.parseInt(userInput.substring(4).strip());
         } catch (NumberFormatException ne) {
@@ -150,7 +150,7 @@ public class Parser {
      * @throws MedBotException when patient id given is out of range, or no id is specified.
      */
     private static DeletePatientCommand parseDeletePatientCommand(String userInput) throws MedBotException {
-        int patientId = 0;
+        int patientId;
         try {
             patientId = Integer.parseInt(userInput.substring(6).strip());
         } catch (NumberFormatException ne) {
@@ -169,7 +169,7 @@ public class Parser {
      * @throws MedBotException when the parameters given cannot be parsed
      */
     private static EditPatientCommand parseEditPatientCommand(String userInput) throws MedBotException {
-        int patientId = 0;
+        int patientId;
         try {
             String patientIdString = userInput.substring(4).stripLeading();
             int endSpaceIndex = patientIdString.indexOf(' ');

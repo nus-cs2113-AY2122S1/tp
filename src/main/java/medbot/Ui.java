@@ -82,12 +82,11 @@ public class Ui {
     /**
      * Prints a message when viewing the profile of a patient.
      *
-     * @param patientId   the ID of the patient to be viewed.
      * @param patientInfo the Info of the patient to be printed.
      * @return the Patient information
      */
-    public String getPatientInfo(int patientId, String patientInfo) {
-        return "Here's the patient with id " + patientId + ": " + patientInfo;
+    public String getPatientInfo(String patientInfo) {
+        return "Here's the requested patient:\n" + patientInfo;
     }
 
     /**
@@ -111,20 +110,22 @@ public class Ui {
                 + "help\n" + "add\n" + "list\n" + "view\n" + "edit\n" + "delete\n"
                 + "exit\n" + "\n"
                 + "To obtain more information on each command and their respective required inputs, type:\n"
-                + "help [COMMAND]";
+                + "help [COMMAND]\n"
+                + "*Note that all commands will remove any '|' inputs for format parsing purposes";
     }
 
     public String getListHelpMessage() {
         return "View information of all current patients.\n"
-                + "Format: list\n" + "Expected Output\n" + "id: PATIENT1_ID\n"
-                + "name: PATIENT1_NAME\n\n\n"
-                + "id: PATIENT2_ID\n" + "name: PATIENT2_NAME\n";
+                + "Format: list\n" + "Expected Output for 2 patients: \n" + "Patient ID: [PATIENT_ID_1] IC: [PATIENT_IC]"
+                + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]\n"
+                + "Patient ID: [PATIENT_ID_2] IC: [PATIENT_IC]"
+                + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]\n";
     }
 
     public String getViewHelpMessage() {
         return "View a patient’s personal information.\n" + "Format: view PATIENT_ID\n"
-                + "Expected Output: \n" + "id: PATIENT_ID\n" + "name: NAME\n"
-                + "phone number: PHONE_NUMBER\n" + "email: EMAIL\n" + "address: ADDRESS\n";
+                + "Expected Output: \n" + "id: PATIENT_ID " + "name: NAME "
+                + "phone number: PHONE_NUMBER " + "email: EMAIL " + "address: ADDRESS\n";
     }
 
     public String getAddHelpMessage() {
@@ -132,11 +133,7 @@ public class Ui {
                 + "Format: \n"
                 + "add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
                 + "Expected output: \n"
-                + "Patient with the following information has been successfully added to the list:\n"
-                + "id: PATIENT_ID\n"
-                + "name: NAME\n"
-                + "phone number: PHONE_NUMBER\n"
-                + "email: EMAIL\n" + "address: ADDRESS\n";
+                + "Added patient with patient ID: PATIENT_ID";
     }
 
     public String getEditHelpMessage() {
@@ -144,7 +141,7 @@ public class Ui {
                 + "Format: \n"
                 + "edit PATIENT ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
                 + "Expected output: \n"
-                + "The information of patient with ID [PATIENT_ID] has been edited to:\n"
+                + "The information of patient with ID PATIENT_ID has been edited to:\n"
                 + "Patient ID: [PATIENT_ID] IC: [PATIENT_IC] Name: [NAME] H/P: [PHONE_NUMBER] "
                 +   "Email: [EMAIL] Address: [ADDRESS] \n";
     }
@@ -154,12 +151,7 @@ public class Ui {
                 + "Format: \n"
                 + "delete PATIENT_ID\n"
                 + "Expected Output:\n"
-                + "Patient with the following information has been successfully deleted from the list:\n"
-                + "id: PATIENT_ID\n"
-                + "name: NAME\n"
-                + "phone number: PHONE_NUMBER\n"
-                + "email: EMAIL\n"
-                + "address: ADDRESS\n";
+                + "Patient with id PATIENT_ID deleted from system.\n";
     }
 
     public String getExitHelpMessage() {
