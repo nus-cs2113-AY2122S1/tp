@@ -7,14 +7,7 @@ public class Ui {
     }
 
     public static void printWelcome() {
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
+        System.out.println("Hello!");
     }
 
     public static void goodBye() {
@@ -30,6 +23,7 @@ public class Ui {
         System.out.println(person.getName() + " | " + person.getAmtOwedToUser());
     }
 
+
     public static void printExpenseDetails(Expense e) {
         System.out.println(e);
     }
@@ -43,6 +37,14 @@ public class Ui {
 
     public static void printExpenseAddedSuccess() {
         System.out.println("Your expense has been added successfully");
+    }
+
+    public static void printExpensesInList(Expense expense, int index) {
+        System.out.println(index + ". " + expense.getDescription() + " | Cost: " + expense.getAmountSpent());
+    }
+
+    public static void printTripsInList(Trip trip, int index) {
+        System.out.println(index + ". " + trip.getLocation() + " | " + trip.getDateOfTripString());
     }
 
     public static void printBudgetFormatError() {
@@ -71,13 +73,22 @@ public class Ui {
         System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
     }
 
-    public static void printDeleteTripSuccessful(Trip tripToRemove) {
-        System.out.println("Your trip to " + tripToRemove.getLocation() + " on "
-                + tripToRemove.getDateOfTripString() + " has been successfully removed");
+    public static void printNoTripError() {
+        System.out.println("You have not created a trip yet. Please create a trip using the keyword 'create'.");
+    }
+
+    public static void printDeleteTripSuccessful(String tripLocation, String tripDate) {
+        System.out.println("Your trip to " + tripLocation + " on "
+                + tripDate + " has been successfully removed");
+    }
+
+    public static void printNoExpensesError() {
+        System.out.println("There are no expenses in your trip, please add an expense using the keyword 'expense'.");
     }
 
     public static void printNoOpenTripError() {
         System.out.println("You have not opened any trip yet. Please open a trip to edit expenses within the trip.");
+        System.out.print("Please enter the trip you would like to open: ");
     }
 
 }
