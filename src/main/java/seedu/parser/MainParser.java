@@ -4,7 +4,7 @@ import seedu.command.AddContactCommand;
 import seedu.command.EditContactCommand;
 import seedu.command.DeleteContactCommand;
 import seedu.command.Command;
-import seedu.command.ViewCommand;
+import seedu.command.ViewContactCommand;
 import seedu.command.FailedCommand;
 import seedu.command.ExitCommand;
 import seedu.command.ListContactsCommand;
@@ -15,8 +15,6 @@ import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingNameException;
-
-import javax.swing.text.View;
 
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 
@@ -121,7 +119,7 @@ public class MainParser {
     private Command parseViewContact(String userInput) {
         try {
             int viewedIndex = IndexParser.getIndexFromInput(userInput, VIEW_CONTACT_COMD);
-            return new ViewCommand(viewedIndex);
+            return new ViewContactCommand(viewedIndex);
         } catch (MissingArgException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {

@@ -5,10 +5,10 @@ import seedu.parser.IndexParser;
 import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
 
-public class ViewCommand extends Command {
+public class ViewContactCommand extends Command {
     private final int contactIndex;
 
-    public ViewCommand(int contactIndex) {
+    public ViewContactCommand(int contactIndex) {
         this.contactIndex = contactIndex;
     }
 

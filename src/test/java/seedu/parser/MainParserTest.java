@@ -7,7 +7,7 @@ import seedu.command.AddContactCommand;
 import seedu.command.Command;
 import seedu.command.DeleteContactCommand;
 import seedu.command.FailedCommand;
-import seedu.command.ViewCommand;
+import seedu.command.ViewContactCommand;
 import seedu.contact.ContactList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -143,7 +143,7 @@ public class MainParserTest {
     public void parseViewCommand_validIndex_expectViewContactIndexMatch() {
         final int testIndex = 1;
         final String testUserInput = "view " + testIndex;
-        final ViewCommand testResultCommand = getParsedCommand(testUserInput, ViewCommand.class);
+        final ViewContactCommand testResultCommand = getParsedCommand(testUserInput, ViewContactCommand.class);
         assertEquals(testIndex,testResultCommand.getIndex());
     }
 
@@ -151,14 +151,14 @@ public class MainParserTest {
     public void parseViewCommand_multipleIndexes_expectViewContactIndexMatch() {
         int testIndex = 1;
         testUserInput = String.format("view %d %d", testIndex, 2);
-        final ViewCommand testResultCommand = getParsedCommand(testUserInput, ViewCommand.class);
+        final ViewContactCommand testResultCommand = getParsedCommand(testUserInput, ViewContactCommand.class);
         assertEquals(testIndex,testResultCommand.getIndex());
     }
 
     @Test
     public void parseViewCommand_invalidIndex_expectException() {
         testIndex = 99999;
-        final ViewCommand testResultCommand = new ViewCommand(testIndex);
+        final ViewContactCommand testResultCommand = new ViewContactCommand(testIndex);
         assertThrows(NullPointerException.class, testResultCommand::execute);
     }
 
@@ -166,7 +166,7 @@ public class MainParserTest {
     public void parseViewCommand_validIndexWithSpaces_expectViewContactIndexMatch() {
         testIndex = 1;
         testUserInput = "view    " + testIndex;
-        final ViewCommand testResultCommand = getParsedCommand(testUserInput, ViewCommand.class);
+        final ViewContactCommand testResultCommand = getParsedCommand(testUserInput, ViewContactCommand.class);
         assertEquals(testIndex, testResultCommand.getIndex());
     }
 
