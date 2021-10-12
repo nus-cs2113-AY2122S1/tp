@@ -1,12 +1,19 @@
 package seedu.duke.commands;
 
-import seedu.duke.modules.SelectedModuleList;
+import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.UniversityList;
+import seedu.duke.modules.Module;
+
+import java.util.ArrayList;
 
 public class Command {
-    public SelectedModuleList selectedModuleList;
-    public UniversityList universityList;
+    protected ModuleList moduleSelectedList;
+    protected UniversityList universitySelectedList;
 
-    public Command() {
+    public Command(UniversityList universitySelectedList, ModuleList moduleSelectedList) {
+        this.moduleSelectedList = moduleSelectedList;
+        this.universitySelectedList = universitySelectedList;
+//        ArrayList<Module> list = new ArrayList<>();
+//        selectedModuleList = new SelectedModuleList(list);
     }
 }

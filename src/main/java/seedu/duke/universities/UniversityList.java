@@ -10,6 +10,10 @@ public class UniversityList {
         this.list = list;
     }
 
+    public UniversityList() {
+        this.list = new ArrayList<>();
+    }
+
     public void addUniversity(University addedUniversity) {
         list.add(addedUniversity);
     }

@@ -1,13 +1,17 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.ListCommand;
+import seedu.duke.modules.ModuleList;
+import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
 import java.text.ParseException;
 
 public class ListCommandParser {
 
-    public ListCommand parse(String arguments) throws ParseException, IOException {
+    public ListCommand parse(String arguments,
+                             UniversityList universitySelectedList, ModuleList moduleSelectedList)
+            throws ParseException, IOException {
         String type;
 
         if (arguments.trim().length() == 0) {
@@ -31,6 +35,6 @@ public class ListCommandParser {
             throw new ParseException("Incorrect flags passed.", 1);
         }
 
-        return new ListCommand(type);
+        return new ListCommand(type, universitySelectedList, moduleSelectedList);
     }
 }

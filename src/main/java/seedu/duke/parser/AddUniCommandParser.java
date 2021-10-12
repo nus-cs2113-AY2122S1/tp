@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.AddUniCommand;
+import seedu.duke.modules.ModuleList;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
@@ -11,7 +12,9 @@ import java.util.ArrayList;
 @SuppressWarnings("checkstyle:WhitespaceAround")
 public class AddUniCommandParser {
 
-    public AddUniCommand parse(String arguments, UniversityList universityMasterList) throws ParseException {
+    public AddUniCommand parse(String arguments, UniversityList universityMasterList,
+                               UniversityList universitySelectedList, ModuleList moduleSelectedList)
+            throws ParseException {
         String universityName = arguments.trim();
         if (universityName.length() == 0) {
             throw new ParseException("no university given", 1);
@@ -22,7 +25,7 @@ public class AddUniCommandParser {
 
         ArrayList<ModuleMapping> list = new ArrayList<>();
         University university = new University(universityName, list);
-        return new AddUniCommand(university);
+        return new AddUniCommand(university, universitySelectedList, moduleSelectedList);
     }
 
     public boolean isUniversityExist(String universityName, UniversityList universityMasterList) {
