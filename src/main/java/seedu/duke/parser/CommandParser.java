@@ -44,7 +44,7 @@ public class CommandParser {
 
         String[] inputArguments = userInput.split("\\s+", 2);
         String command = inputArguments[0];
-        Map<String, String> commandOptions = new HashMap<>();
+        HashMap<String, String> commandOptions = new HashMap<>();
 
         if (inputArguments.length == 2) {
             commandOptions = getCommandOptions(inputArguments[1]);

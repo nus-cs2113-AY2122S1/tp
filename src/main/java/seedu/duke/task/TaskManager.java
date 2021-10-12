@@ -26,8 +26,8 @@ public class TaskManager {
         }
 
         String tasks = "-------------\n"
-                + " MY TASKLIST\n"
-                + "-------------\n";
+            + " MY TASKLIST\n"
+            + "-------------\n";
 
         for (int i = 0; i < tasklist.size(); i++) {
             tasks += i + 1 + ". " + tasklist.get(i).getTaskEntryDescription() + "\n";
@@ -43,6 +43,10 @@ public class TaskManager {
 
     public void setTasklist(ArrayList<Task> tasklist) {
         this.tasklist = tasklist;
+    }
+
+    public void addTask(Task task) {
+        tasklist.add(task);
     }
 
 }
