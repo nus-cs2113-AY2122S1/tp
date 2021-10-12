@@ -45,7 +45,7 @@ public class AttendanceList {
         }
     }
 
-    public int getAttendanceSize() { //added by xy
+    public int getAttendanceListSize() { //added by xy
         return attendanceList.size();
     }
 

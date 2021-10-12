@@ -99,7 +99,7 @@ public class MemberStorage {
      * @param memberList     the current attendance list
      */
     public static void writeMemberFile(File dukeMemberFile, MemberList memberList) {
-        int memberListSize = memberList.getMemberSize();
+        int memberListSize = memberList.getMemberListSize();
         try (PrintWriter dukeMemberWriter = new PrintWriter(dukeMemberFile)) {
             dukeMemberWriter.write("name");
             dukeMemberWriter.write(',');

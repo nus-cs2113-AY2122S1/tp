@@ -476,7 +476,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException exception) {
             System.out.println("There is no such training number...");
         } catch (NumberFormatException e) {
-            System.out.println("Your input must be a valid number...");
+            System.out.println("Please input a proper number...");
         }
 
     }
@@ -558,9 +558,9 @@ public class Parser {
             int attNumber = getAttendanceIndex(query);
             Attendance entry = attendanceList.deleteAttendance(attNumber);
             assert entry != null : "entry should not be empty";
-            System.out.println("The following attendance entry have been deleted\n" + entry);
+            Ui.printDeletedAttendanceMessage(entry);
         } catch (IndexOutOfBoundsException exception) {
-            System.out.println("There is no such member number...");
+            System.out.println("There is no such attendance number...");
         } catch (NumberFormatException e) {
             System.out.println("Please input a proper number...");
         }

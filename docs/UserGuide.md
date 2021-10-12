@@ -54,7 +54,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
     * **Examples:**
       - `add /m /n John Hwee /s A0248192K /g M /p 91128888`
       - `add /t /n Weekly December Training 2 /a 12 Dec 2022 /v MPSH 2`
-      - `add /att /m Izdiyad /s A0123456Z /n Monday Training /a 1800 /v MPSH6`
+      - `add /att /m Mark /s A0123456Z /n Monday Training /a 1800 /v MPSH 6`
       
     * **Expected Output:**
    ```
