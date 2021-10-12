@@ -2,7 +2,6 @@ package seedu.duke;
 
 import seedu.command.Command;
 import seedu.parser.CommandParser;
-import seedu.storage.ModStorage;
 import seedu.storage.TimetableStorage;
 import seedu.timetable.Timetable;
 import seedu.ui.TextUi;

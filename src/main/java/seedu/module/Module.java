@@ -1,5 +1,7 @@
 package seedu.module;
 
+import seedu.command.flags.SearchFlags;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,9 @@ public class Module {
     private String acadYear;
     private Attributes attributes;
     private ArrayList<Semester> semesterData;
+
+    private static final int CODE_LENGTH = 4;
+    private static final int THOUSAND = 1000;
 
     public Module(String name) {
         this.moduleCode = name;
@@ -88,7 +93,79 @@ public class Module {
         return fullInfo;
     }
 
-    public boolean codeContains(String searchTerm) {
+    public boolean meetsPreliminaryConditions(String searchTerm, SearchFlags searchFlags) {
+        if (searchFlags.getHasLevelFlag()) {
+            if (!isSameLevel(searchFlags.getLevel())) {
+                return false;
+            }
+        }
+        return codeContains(searchTerm);
+    }
+
+    private boolean codeContains(String searchTerm) {
         return moduleCode.toLowerCase().contains(searchTerm.toLowerCase());
     }
+
+    private boolean isSameLevel(int level) {
+        String modNumericCode = moduleCode.replaceAll("[^0-9]", "");
+        int modLevel = Integer.parseInt(modNumericCode) / THOUSAND;
+        return modLevel == level / THOUSAND;
+    }
+
+    public boolean meetsSecondaryConditions(SearchFlags searchFlags) {
+        if (searchFlags.getHasMcFlag()) {
+            if (moduleCredit != searchFlags.getMcs()) {
+                return false;
+            }
+        }
+        if (searchFlags.getHasFacultyFlag()) {
+            if (!faculty.equalsIgnoreCase(searchFlags.getFaculty())) {
+                return false;
+            }
+        }
+        if (searchFlags.getHasDepartmentFlag()) {
+            if (!department.equalsIgnoreCase(searchFlags.getDepartment())) {
+                return false;
+            }
+        }
+        if (searchFlags.getHasExamFlag()) {
+            if (!checkExams(searchFlags.getHasExam())) {
+                return false;
+            }
+        }
+        if (searchFlags.getHasSemesterFlag()) {
+            if (!hasSemester(searchFlags.getSemester())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean checkExams(boolean hasExams) {
+        if (hasExams) {
+            for (Semester s : semesterData) {
+                if (s.getExamDate() != null) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            for (Semester s : semesterData) {
+                if (s.getExamDate() != null) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    private boolean hasSemester(int semester) {
+        for (Semester s : semesterData) {
+            if (s.getSemester() == semester) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

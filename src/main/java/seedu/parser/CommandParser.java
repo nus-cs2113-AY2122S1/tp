@@ -1,5 +1,6 @@
 package seedu.parser;
 
+
 import seedu.command.AddCommand;
 import seedu.command.ClearCommand;
 import seedu.command.Command;
@@ -20,7 +21,6 @@ public class CommandParser {
     private static final Integer ADD_LENGTH = 3;
     public static final Integer DELETE_LENGTH = 6;
     private static final String FLAG = "-";
-    private static final String L_FLAG = "-l";
 
 
     public Command parseCommand(String text, Timetable timetable) {
@@ -65,21 +65,18 @@ public class CommandParser {
         if (text.toLowerCase().contains(FLAG)) {
             return parseSearchCommandWithFlag(text);
         }
-        String str = text.substring(SEARCH_LENGTH).trim();
-        return new SearchCommand(str, false);
+        assert !text.contains(FLAG) : "This line should not be hit with a flag.";
+        String searchTerm = text.substring(SEARCH_LENGTH).trim();
+        return new SearchCommand(searchTerm, new SearchFlags());
     }
 
-    public Command parseSearchCommandWithFlag(String text) {
-        int flagPos = text.indexOf(FLAG);
-        try {
-            String str = text.substring(SEARCH_LENGTH, flagPos - 1).trim();
-            if (text.toLowerCase().contains(L_FLAG)) {
-                return new SearchCommand(str, true);
-            }
-        } catch (IndexOutOfBoundsException e) {
-            return new InvalidCommand();
-        }
-        return new InvalidCommand();
+    private Command parseSearchCommandWithFlag(String text) {
+        assert text.contains(FLAG) : "String should contain flag";
+        int firstFlagPos = text.indexOf(FLAG);
+        String searchTerm = text.substring(SEARCH_LENGTH, firstFlagPos - 1).trim();
+        String[] flags = text.substring(firstFlagPos).split(FLAG);
+        SearchFlags searchFlags = FlagParser.parseSearchFlags(flags);
+        return new SearchCommand(searchTerm, searchFlags);
     }
 
     public Command parseShowCommand(String text) {
