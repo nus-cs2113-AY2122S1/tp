@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class DeleteTaskCommandTest {
     @Test
-    public void testDeleteAllTasks() {
+    public void deleteAllTasks_nonEmptyTaskList_emptyTaskList() {
         Ui ui = new Ui();
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("task 1", "mon", ""));
@@ -38,7 +38,7 @@ class DeleteTaskCommandTest {
     }
 
     @Test
-    public void testDeleteTask() {
+    public void deleteTask_taskToDelete_taskDeleted() {
         Ui ui = new Ui();
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("task 1", "mon", ""));
@@ -58,7 +58,7 @@ class DeleteTaskCommandTest {
     }
 
     @Test
-    public void testDeleteOobTask() {
+    public void deleteTask_outOfBoundsTask_exceptionThrown() {
         Ui ui = new Ui();
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("task 1", "mon", ""));

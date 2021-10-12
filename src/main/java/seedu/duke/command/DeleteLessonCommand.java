@@ -26,6 +26,7 @@ public class DeleteLessonCommand extends DeleteCommand {
             throws DukeException, IOException {
         if (isDeleteAll) {
             lessonList.deleteAllLessons();
+            assert lessonList.isEmpty() : Ui.PADDING + "Lesson list should be empty";
             ui.printMessage("All your lessons have been successfully removed.");
         } else {
             Lesson deletedLesson = lessonList.getLesson(lessonIndex);
