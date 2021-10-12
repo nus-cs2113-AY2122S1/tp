@@ -1,10 +1,13 @@
 package seedu.duke;
 
+import seedu.duke.command.UpdateCommand;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
+
+import java.util.NoSuchElementException;
 
 public class Parser {
     private static final String COMMAND_LIST = "list";
@@ -16,6 +19,7 @@ public class Parser {
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
     private static final String NUMBER_FORMAT_MESSAGE = "Invalid number format!";
+    private static final String NOT_FOUND_MESSAGE = "Ingredient not found!";
     private static final String INSUFFICIENT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
 
     private static final String SPACE_SEPARATOR = " ";
@@ -56,9 +60,34 @@ public class Parser {
         }
     }
 
-
-    private static String parseUpdateCommand(String command) {
+    /**
+     * Parses update command and splits input into ingredient parameters.
+     *
+     * @param command 1 line of user input
+     * @return Ingredient updated message
+     */
+    private static String parseUpdateCommand(String command) throws DukeException {
         String resultMsg = "";
+        int i;
+        String delimiter = "n/|a/|u/|e/";
+        String[] details = command.split(delimiter);
+
+        String ingredientName = details[1].trim();
+        double ingredientAmount = Double.parseDouble(details[2].trim());
+        String ingredientUnits = details[3].trim();
+        String ingredientExpiry = details[4].trim();
+        Ingredient updatedIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
+
+        if (IngredientList.getInstance().getInventoryStock() == 0) {
+            resultMsg = DELETE_ERROR_MESSAGE;
+            return resultMsg;
+        }
+
+        resultMsg = new UpdateCommand(updatedIngredient).run();
+
+        if (resultMsg == "") {
+            resultMsg = NOT_FOUND_MESSAGE;
+        }
         return resultMsg;
     }
 

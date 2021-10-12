@@ -34,14 +34,21 @@ public class Ingredient {
         return expiry;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setAmount(Double amount) {
         this.amount = amount;
+    }
+
+    public void setUnits(String units) {
+        this.units = units;
     }
 
     public void setExpiry(String expiry) {
         this.expiry = expiry;
     }
-
     @Override
     public String toString() {
         return getName() + " | Amount Left: " + getAmount() + " " + getUnits() + " | Expiry Date: " + getExpiry();
