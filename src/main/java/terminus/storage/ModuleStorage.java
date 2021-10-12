@@ -46,7 +46,7 @@ public class ModuleStorage {
      * @return NusModule based on the contents of the file.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
-    public NusModule loadFile() throws IOException, JsonSyntaxException, JsonIOException {
+    public NusModule loadFile() throws IOException {
         initializeFile();
         if (!Files.isReadable(filePath)) {
             TerminusLogger.severe("File is does not exist or is not readable!");
