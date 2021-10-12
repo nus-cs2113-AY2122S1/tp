@@ -15,17 +15,6 @@ public class ReminderManager {
         this.taskManager = taskManager;
     }
 
-    /*
-    public void printReminder() {
-        LocalDateTime now = LocalDateTime.now();
-        for (int i = 0; i < taskManager.getTasklist().size(); i++) {
-            if (taskManager.getTasklist().get(i).needReminder()) {
-                taskManager.getTasklist().get(i).displayReminder(now);
-            }
-        }
-    }
-    */
-
     public static String sendReminder() {
         LocalDateTime now = LocalDateTime.now();
         String message = "";

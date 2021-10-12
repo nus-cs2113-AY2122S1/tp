@@ -37,12 +37,6 @@ public class Lesson extends Task {
         this.moduleCode = moduleCode;
         this.classNo = classNo;
     }
-/*
-    @Override
-    public void displayReminder(LocalDateTime now) {
-
-    }
- */
 
     @Override
     public boolean needReminder() {
