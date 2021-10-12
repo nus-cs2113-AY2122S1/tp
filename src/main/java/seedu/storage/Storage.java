@@ -1,5 +1,6 @@
 package seedu.storage;
 
+import org.w3c.dom.Text;
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.exception.FileErrorException;
@@ -14,6 +15,7 @@ public class Storage {
     private final String personalContactFilePath;
     private final File personalContactFile;
     public static final String SEPARATOR = ",";
+    private static boolean isFirstRun = false;
 
     public Storage(String contactFilePath, String personalContactFilePath) {
         this.contactFilePath = contactFilePath;
@@ -22,13 +24,17 @@ public class Storage {
         this.personalContactFile = new File(personalContactFilePath);
     }
 
+    public static boolean getIsFirstRun() {
+        return isFirstRun;
+    }
+
     private boolean hasExistingPersonalContactFile() throws FileErrorException {
         try {
             if (!personalContactFile.exists()) {
                 personalContactFile.getParentFile().mkdirs();
             }
             if (personalContactFile.createNewFile()) {
-                TextUi.createNewContactFileMessage(personalContactFilePath);
+                TextUi.createNewPersonalContactFileMessage(personalContactFilePath);
                 return false;
             }
         } catch (IOException e) {
@@ -59,12 +65,24 @@ public class Storage {
         return ContactsDecoder.readContacts(contactFile);
     }
 
+
+
     public Contact loadExistingPersonalContact() throws FileErrorException {
         if (!hasExistingPersonalContactFile()) {
-           // get new contact
+            isFirstRun = true;
+            // get new contact
+            String personalName = TextUi.getNameMessage();
+            Contact personalContact = new Contact(personalName, null,null,null,null,null);
+            ContactList contactList = new ContactList();
+            contactList.addContact(personalContact);
+            ContactsEncoder.saveContacts(personalContactFilePath, contactList);
+            TextUi.greetingMessage(personalContact);
+            return personalContact;
         }
         ContactList contactList = ContactsDecoder.readContacts(personalContactFile);
         assert contactList.getListSize() == 1;
-        return contactList.getContactAtIndex(0);
+        Contact personalContact = contactList.getContactAtIndex(0);
+        TextUi.welcomeBackMessage(personalContact);
+        return personalContact;
     }
 }
