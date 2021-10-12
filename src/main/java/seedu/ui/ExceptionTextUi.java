@@ -47,7 +47,7 @@ public class ExceptionTextUi {
     }
 
     public static void missingDetailMessage() {
-        String message = "There are missing details.\n" + "Please remove any flags with no details, \n"
+        String message = "There are missing details.\n" + "Please remove any flags with no details,\n"
                 + "and ensure that your flags used are correct:\n" + "  -n NAME\n" + "  -g GITHUB\n" + "  -l LINKEDIN\n"
                 + "  -te TELEGRAM\n" + "  -tw TWITTER\n" + "  -e EMAIL";
         printDoubleLineMessage(message);
@@ -102,7 +102,7 @@ public class ExceptionTextUi {
     }
 
     public static void forbiddenDetailMessage() {
-        String message = "As one of the details to be stored is \"null\", \n"
+        String message = "As one of the details to be stored is \"null\",\n"
                 + "ConTech is unable to process it";
         printDoubleLineMessage(message);
     }
