@@ -178,6 +178,14 @@ public class MainParserTest {
     }
 
     @Test
+    public void parseViewCommand_invalidInputFormat_expectFailedCommandType() {
+        testUserInput = "view 1 2";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_INDEX;
+        final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
+        assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
+    }
+
+    @Test
     public void parseAddCommand_missingName_expectFailedCommand() {
         testUserInput = " add -g      github ";
         final FailedCommand actualCommand = getParsedCommand(testUserInput, FailedCommand.class);
