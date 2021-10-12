@@ -70,6 +70,9 @@ public class RecordList {
         return expenditureRecords.get(index);
     }
 
+    public int getSize() {
+        return expenditureRecords.size();
+    }
 
     public void printRecord(int i) {
     }

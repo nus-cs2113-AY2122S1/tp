@@ -11,6 +11,6 @@
 //
 //    @Override
 //    public void execute() {
-//        TextUi.showRecordsListView(budgetList.getExpenditureList(startMonth, endMonth));
+//        TextUi.showRecordsListView(recordList.getExpenditureList(startMonth, endMonth));
 //    }
 //}
