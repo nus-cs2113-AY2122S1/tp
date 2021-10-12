@@ -14,7 +14,7 @@ public class TaskEncoder {
         return encodedTasks;
     }
 
-    public static String encodeTaskToString(Task task) {
+    private static String encodeTaskToString(Task task) {
         return task.getTitle()
                 + " | "
                 + task.getStatusIcon()
