@@ -125,6 +125,16 @@ public abstract class ContactParser {
             throw new InvalidGithubUsernameException();
         }
     }
+
+    private void checkNameRegex(String detailToParse) throws InvalidNameException {
+        //only letters and spaces allowed
+        String nameRegex = "^[ A-Za-z]+$";
+        if (!detailToParse.matches(nameRegex)) {
+            throw new InvalidNameException();
+        }
+    }
+
+
     private int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
