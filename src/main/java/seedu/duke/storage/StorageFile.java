@@ -45,7 +45,7 @@ public class StorageFile {
         }
     }
 
-    public void writeToFile(File saveFile, List<String> encodedEventsList, List<String> encodedTasksList)
+    private void writeToFile(File saveFile, List<String> encodedEventsList, List<String> encodedTasksList)
             throws IOException {
         FileWriter eventsWriter = new FileWriter(saveFile);
         for (String event : encodedEventsList) {

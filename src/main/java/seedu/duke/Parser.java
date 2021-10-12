@@ -1,15 +1,20 @@
 package seedu.duke;
 
+
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ByeCommand;
+
 import seedu.duke.commands.DoneUndoCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.SelectCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.UpdateCommand;
+import seedu.duke.commands.FindCommand;
+import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.NextCommand;
+import seedu.duke.commands.SelectCommand;
+import seedu.duke.commands.UpdateCommand;
 import seedu.duke.items.Item;
 
 import java.time.LocalDateTime;
@@ -37,6 +42,8 @@ public class Parser {
             return new ByeCommand();
         case "help":
             return new HelpCommand();
+        case "find":
+            return new FindCommand(command);
         case "select":
             return new SelectCommand(command);
         case "update":
