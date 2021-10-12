@@ -55,6 +55,8 @@ public class AddNoteCommand extends Command {
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
         TerminusLogger.info("Executing Add Note Command");
         ContentManager contentManager = module.getContentManager(Note.class);
+        assert contentManager != null;
+
         contentManager.add(new Note(name, data));
         TerminusLogger.info(String.format("Note(\"%s\",\"%s\") has been added", name, data));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE, name));

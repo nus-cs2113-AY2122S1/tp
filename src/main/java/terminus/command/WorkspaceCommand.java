@@ -3,7 +3,6 @@ package terminus.command;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 import terminus.ui.Ui;
@@ -26,8 +25,7 @@ public abstract class WorkspaceCommand extends Command {
      * @throws InvalidCommandException Exception for when the command could not be found.
      */
     @Override
-    public CommandResult execute(Ui ui, NusModule module)
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+    public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException, InvalidArgumentException {
         assert commandMap != null;
         TerminusLogger.info("Executing Workspace Command");
         if (isNotNullOrBlank()) {
