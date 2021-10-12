@@ -76,7 +76,7 @@ public class Storage {
         }
     }
 
-    public void saveCookbook(Cookbook cookbook) throws GordonException {
+    public void saveCookbook(Cookbook cookbook) {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < cookbook.numRecipes(); i++) {
             output.append(cookbook.saveString(i));
