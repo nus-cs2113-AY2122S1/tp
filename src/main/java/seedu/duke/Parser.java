@@ -11,8 +11,9 @@ public class Parser {
      * @return whether the program should continue running after processing the given user input
      */
     public static boolean parseUserInput(String userInput) {
+        //userInputSplit guranteed to be length 2. UserInputSplit[1] is null by default
         String[] userInputSplit = new String[2];
-        String[] rawInput =userInput.split(" ", 2);
+        String[] rawInput = userInput.split(" ", 2);
 
         if (rawInput.length == 2){
             userInputSplit[0] = rawInput[0];

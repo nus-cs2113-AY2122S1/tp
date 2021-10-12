@@ -137,4 +137,8 @@ public class Ui {
         System.out.println("---------------------");
 
     }
+
+    public static void argNotNumber() {
+        System.out.println("Input is not a number");
+    }
 }
