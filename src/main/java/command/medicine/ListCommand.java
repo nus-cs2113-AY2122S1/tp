@@ -50,7 +50,7 @@ public class ListCommand extends Command {
 
         ArrayList<Medicine> filteredMedicines = new ArrayList<>();
 
-        assert filteredMedicines == null : "Array is not initialised";
+        assert (filteredMedicines != null) : "Array is not initialised";
 
         for (Medicine medicine : medicines) {
             if (medicine instanceof Stock) { // Ensure that it is a medicine object
