@@ -99,9 +99,9 @@ public class MainParser {
     private Command parseEditContact(String userInput) { // userInput is raw user input
         contactParser = editContactParser;
         try {
-            int userIndex = editContactParser.getIndex(userInput); //throws MissingArgException
             String[] details = editContactParser.parseContactDetails(userInput);
             //throws InvalidFlagException, MissingDetailException, MissingArgException
+            int userIndex = IndexParser.getIndexFromInput(userInput, EDIT_CONTACT_COMD); //throws MissingArgException
             return new EditContactCommand(details, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
@@ -130,7 +130,7 @@ public class MainParser {
 
     private Command parseDeleteContact(String userInput) {
         try {
-            int deletedIndex = IndexParser.getIndexFromInput(userInput);
+            int deletedIndex = IndexParser.getIndexFromInput(userInput, DELETE_CONTACT_COMD);
             return new DeleteContactCommand(deletedIndex);
         } catch (MissingArgException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);

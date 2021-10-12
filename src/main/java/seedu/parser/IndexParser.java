@@ -6,14 +6,20 @@ import seedu.exception.MissingArgException;
 
 
 public class IndexParser {
-    private static final int ISOLATE_COMD_WORD = 2;
+    private static final int COMD_WORD_LENGTH = 1;
+    private static final int INDEX_POSITION = 1;
 
-    public static int getIndexFromInput(String userInput) throws NumberFormatException, MissingArgException {
-        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
-        if (destructuredInputs.length == 1) {
+
+    public static int getIndexFromInput(String userInput, String command)
+            throws NumberFormatException, MissingArgException {
+        String inputWithoutDetails = userInput;
+
+        String[] destructuredInputs = inputWithoutDetails.split(" ");
+        if (destructuredInputs.length == COMD_WORD_LENGTH) {
             throw new MissingArgException();
         }
-        int index = Integer.parseInt(destructuredInputs[1].trim());
+        // throws NumberFormatExcept if not integer
+        int index = Integer.parseInt(destructuredInputs[INDEX_POSITION].trim());
         return index;
     }
 
