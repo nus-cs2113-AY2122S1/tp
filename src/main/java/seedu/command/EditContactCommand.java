@@ -17,7 +17,7 @@ public class EditContactCommand extends Command {
     public void execute() {
         try {
             contactList.editContact(contactDetails, contactIndex);
-            TextUi.editContactMessage(contactList.getContactAtIndex(contactIndex).getName());
+            TextUi.editContactMessage(contactList.getContactAtIndex(contactIndex));
         } catch (IndexOutOfBoundsException | InvalidFlagException e) {
             ExceptionTextUi.invalidIndexMessage();
         }
