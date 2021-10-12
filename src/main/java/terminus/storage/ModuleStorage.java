@@ -14,7 +14,7 @@ public class ModuleStorage {
     private final Gson gson;
 
     /**
-     * Initialize the ModuleStorage with a specific Path to the file.
+     * Initializes the ModuleStorage with a specific Path to the file.
      * @param filePath The Path to the file to store at.
      */
     public ModuleStorage(Path filePath) {

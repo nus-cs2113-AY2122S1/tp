@@ -64,8 +64,9 @@ public class ModuleStorageTest {
     }
 
     /**
-     * Asserts whether the text in the two given files are the same. Ignores any
-     * differences in line endings
+     * Asserts whether the text in the two given files are the same.
+     * Ignores any differences in line endings.
+     * Taken from: https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/util/TestUtil.java#L128
      */
     public static void assertTextFilesEqual(Path path1, Path path2) throws IOException {
         List<String> list1 = Files.readAllLines(path1);
