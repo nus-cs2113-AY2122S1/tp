@@ -60,6 +60,15 @@ public abstract class Command {
 
     protected abstract String getUsageMessage();
 
+    protected String getMissingArgumentMessage() {
+        String usageMessage = getUsageMessage();
+        if (usageMessage == null) {
+            usageMessage = MESSAGE_UNKNOWN_USAGE;
+        }
+
+        return String.format(MESSAGE_FORMAT_MISSING_ARGUMENT, usageMessage);
+    }
+
     /**
      * Checks if there are any missing arguments.
      *
@@ -73,14 +82,5 @@ public abstract class Command {
         }
 
         return true;
-    }
-
-    protected String getMissingArgumentMessage() {
-        String usageMessage = getUsageMessage();
-        if (usageMessage == null) {
-            usageMessage = MESSAGE_UNKNOWN_USAGE;
-        }
-
-        return String.format(MESSAGE_FORMAT_MISSING_ARGUMENT, usageMessage);
     }
 }
