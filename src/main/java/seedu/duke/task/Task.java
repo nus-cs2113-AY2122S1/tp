@@ -49,6 +49,10 @@ public class Task {
         isDone = true;
     }
 
+    public boolean isDone() {
+        return isDone;
+    }
+
     @Override
     public String toString() {
         // TODO: Improve formatting

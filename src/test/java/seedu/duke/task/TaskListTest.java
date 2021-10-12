@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.Duke;
 import seedu.duke.exception.DukeException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -68,5 +69,4 @@ public class TaskListTest {
     public void markTaskAsDone_negativeIndex_exceptionThrown() {
         assertThrows(DukeException.class, () -> new TaskList().markTaskAsDone(-1));
     }
-
 }
