@@ -59,7 +59,7 @@ public class Taa {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        Taa taa = null;
+        /*Taa taa = null;
         for (int i = 0; i < args.length && taa == null; i += 1) {
             String arg = args[i];
             if (arg.equals("nosave")) {
@@ -69,8 +69,9 @@ public class Taa {
 
         if (taa == null) {
             taa = new Taa();
-        }
+        }*/
 
+        Taa taa = new Taa();
         taa.run();
     }
 }

@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Storage {
+    private static final String MESSAGE_FORMAT_FAIL_CREATE_FILE = "Fail to create file - %s";
     private static final String MESSAGE_FORMAT_UNABLE_TO_OPEN_FILE = "Unable to open file - %s";
     private static final String MESSAGE_FORMAT_UNABLE_TO_READ_JSON = "Unable to read from JSON file - %s";
     private static final String MESSAGE_FORMAT_UNABLE_TO_WRITE_JSON = "Unable to write to JSON file - %s";
@@ -68,7 +69,9 @@ public class Storage {
             return;
         }
 
-        Util.createFile(filename);
+        if (!Util.createFile(filename)) {
+            throw new TaaException(String.format(MESSAGE_FORMAT_FAIL_CREATE_FILE, filename));
+        }
 
         Gson gson = new Gson();
         try {
