@@ -1,7 +1,7 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class Parser {
@@ -31,7 +31,7 @@ public class Parser {
     }
 
     private static AddCommand executeAddCommand(String params) {
-        SortedMap<Integer, String> valueIndex = extractValueIndexes(params);
+        TreeMap<Integer, String> valueIndex = extractValueIndexes(params);
         String[] values = extractValues(valueIndex, params);
         Client client = new Client(values);
         return new AddCommand(client);
@@ -45,13 +45,15 @@ public class Parser {
         NO_PREFIX
     }
 
-    private static SortedMap<Integer, String> extractValueIndexes(String argString) {
-        SortedMap<Integer, String> valueIndexes = new TreeMap<Integer, String>();
+    private static TreeMap<Integer, String> extractValueIndexes(String argString) {
+        TreeMap<Integer, String> valueIndexes = new TreeMap<Integer, String>();
         if (containAllFields(argString)) {
+            int nameIndex = 0;
             int contactIndex = argString.indexOf("/cn");
             int flightIndex = argString.indexOf("/f");
             int accommsIndex = argString.indexOf("/a");
             int tourIndex = argString.indexOf("/t");
+            valueIndexes.put(nameIndex, "");
             valueIndexes.put(contactIndex, "/cn");
             valueIndexes.put(flightIndex, "/f");
             valueIndexes.put(accommsIndex, "/a");
@@ -62,33 +64,61 @@ public class Parser {
         }
     }
 
-    private static String[] extractValues(SortedMap<Integer, String> valueIndexes, String argString) {
-        String[] extractValues = new String[5];
-        int previousIndex = 0;
+    private static String[] extractValues(TreeMap<Integer, String> valueIndexes, String argString) {
+        String[] extractedValues = new String[5];
+        ArrayList<Integer> indexes = new ArrayList<>();
+        ArrayList<String> prefixes = new ArrayList<>();
         for (Map.Entry<Integer, String> valueIndex : valueIndexes.entrySet()) {
-            int nextIndex = valueIndex.getKey();
-            String prefix = valueIndex.getValue();
-            String unformattedSubstring = argString.substring(previousIndex, nextIndex).trim();
-            String value = unformattedSubstring.replace(prefix, "").trim();
-            previousIndex = nextIndex;
-            switch (prefix) {
-            case "/cn":
-                extractValues[1] = value;
-                break;
-            case "/f":
-                extractValues[2] = value;
-                break;
-            case "/a":
-                extractValues[3] = value;
-                break;
-            case "/t":
-                extractValues[4] = value;
-                break;
-            default:
-                extractValues[0] = value;
-            }
+            System.out.println(valueIndex);
+            indexes.add(valueIndex.getKey());
+            prefixes.add(valueIndex.getValue());
         }
-        return extractValues;
+
+        int nextIndex = 0;
+        int previousIndex;
+        String finalPrefix = prefixes.get(4);
+
+        for (int i = 0; i < indexes.size() - 1; i++) {
+            previousIndex = indexes.get(i);
+            nextIndex = indexes.get(i + 1);
+            String previousPrefix = prefixes.get(i);
+
+            String unformattedSubstring = argString.substring(previousIndex, nextIndex).trim();
+            String value = unformattedSubstring.replace(previousPrefix, "").trim();
+            int inputIndex = obtainExtractedValueIndex(previousPrefix);
+            extractedValues[inputIndex] = value;
+        }
+
+        int inputIndex = obtainExtractedValueIndex(finalPrefix);
+        String unformattedSubstring = argString.substring(nextIndex).trim();
+        String value = unformattedSubstring.replace(finalPrefix, "").trim();
+        extractedValues[inputIndex] = value;
+        return extractedValues;
+    }
+
+
+    private static int obtainExtractedValueIndex(String prefix) {
+        int index = 0;
+        switch (prefix) {
+        case "/cn":
+            index = 1;
+            break;
+        case "/f":
+            index = 2;
+            break;
+        case "/a":
+            index = 3;
+            break;
+        case "/t":
+            index = 4;
+            break;
+        case "":
+            index = 0;
+            break;
+        default:
+            break;
+        }
+        return index;
     }
 
     private static boolean containAllFields(String argString) {
