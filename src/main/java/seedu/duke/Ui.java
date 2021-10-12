@@ -23,6 +23,9 @@ public class Ui {
         System.out.println(person.getName() + " | " + person.getAmtOwedToUser());
     }
 
+    public static void printMoney(double money){
+        System.out.printf("%.2f", money);
+    }
 
     public static void printExpenseDetails(Expense e) {
         System.out.println(e);
@@ -40,7 +43,8 @@ public class Ui {
     }
 
     public static void printExpensesInList(Expense expense, int index) {
-        System.out.println(index + ". " + expense.getDescription() + " | Cost: " + expense.getAmountSpent());
+        System.out.println(index + ". " + expense.getDescription() + " | Cost: ");
+        printMoney(expense.getAmountSpent());
     }
 
     public static void printTripsInList(Trip trip, int index) {

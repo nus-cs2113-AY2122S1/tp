@@ -13,28 +13,21 @@ public class Parser {
     public static boolean parseUserInput(String userInput) {
         String[] userInputSplit = userInput.split(" ", 2);
         String inputCommand = userInputSplit[0].toLowerCase();
-        String inputDescription = null;
-        if (userInputSplit[0].equals("close")) {
-            Storage.closeTrip();
-            return true;
-        }
+
         if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
             Ui.printNoTripError();
+            return true;
+        } else if (userInputSplit[0].equals("close")) {
+            Storage.closeTrip();
             return true;
         } else if (!checkValidCommand(inputCommand)) {
             Ui.printUnknownCommandError();
             return true;
-        } else if (inputCommand.equals("list") && userInputSplit.length > 1
-                && userInputSplit[1].equals("trips")) {
-            inputDescription = userInputSplit[1];
-        } else if (!(inputCommand.equals("view") || inputCommand.equals("summary")
-                || inputCommand.equals("quit") || inputCommand.equals("list"))) {
-            inputDescription = userInputSplit[1];
         }
 
         switch (inputCommand) {
         case "create":
-            String[] newTripInfo = inputDescription.split(" ", 4);
+            String[] newTripInfo = userInputSplit[1].split(" ", 4);
             Trip newTrip = new Trip(newTripInfo);
             Storage.listOfTrips.add(newTrip);
             System.out.println("Your trip to " + newTrip.getLocation() + " on "
@@ -42,7 +35,7 @@ public class Parser {
             break;
 
         case "edit":
-            String[] tripToEditInfo = inputDescription.split(" ", 2);
+            String[] tripToEditInfo = userInputSplit[1].split(" ", 2);
             try {
                 int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
                 String attributesToEdit = tripToEditInfo[1];
@@ -55,7 +48,7 @@ public class Parser {
 
         case "open":
             try {
-                int indexToGet = Integer.parseInt(inputDescription) - 1;
+                int indexToGet = Integer.parseInt(userInputSplit[1]) - 1;
                 Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 Ui.printSingleUnknownTripIndexError();
@@ -79,13 +72,13 @@ public class Parser {
             break;
 
         case "delete":
-            int tripIndex = Integer.parseInt(inputDescription) - 1;
+            int tripIndex = Integer.parseInt(userInputSplit[1]) - 1;
             deleteTrip(tripIndex);
             break;
 
         case "list":
             int index = 1;
-            if (inputDescription != null) {
+            if (userInputSplit[1] != null) {
                 for (Trip trip : Storage.listOfTrips) {
                     Ui.printTripsInList(trip, index);
                     index++;
@@ -102,7 +95,7 @@ public class Parser {
             break;
 
         case "expense":
-            String[] expenseInfo = inputDescription.split(" ", 3);
+            String[] expenseInfo = userInputSplit[1].split(" ", 3);
             Double expenseAmount = Double.parseDouble(expenseInfo[0]);
             String expenseCategory = expenseInfo[1].toLowerCase();
             ArrayList<Person> listOfPersonsIncluded = checkValidPersons(Storage.getOpenTrip(), expenseInfo[2]);
