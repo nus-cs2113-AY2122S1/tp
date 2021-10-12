@@ -1,8 +1,8 @@
 package parser;
 
 import command.CommandParameters;
-import inventory.Stock;
 import inventory.Medicine;
+import inventory.Stock;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -131,7 +131,7 @@ public class StockValidator {
             CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
             CommandParameters.MAX_QUANTITY};
         if (Arrays.asList(Stock.COLUMNS).contains(columnName.toUpperCase()) || Arrays.asList(columnAlias)
-                .contains(columnName.toUpperCase())) {
+                .contains(columnName.toLowerCase())) {
             return true;
         }
         ui.print("Invalid column name/alias! Column names can only be " + Arrays.toString(Stock.COLUMNS) + " and "

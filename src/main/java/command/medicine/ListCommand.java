@@ -7,7 +7,6 @@ import comparators.StockComparator;
 import inventory.Medicine;
 import inventory.Stock;
 import parser.DateParser;
-import parser.StockValidator;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -15,9 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
-import java.util.stream.Collectors;
 import java.util.logging.Logger;
-import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 /**
  * Helps to process the list command together with filters and sort.
@@ -101,10 +99,10 @@ public class ListCommand extends Command {
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.SORT:
-                filteredMedicines.sort(new StockComparator(parameterValue.toUpperCase(), false));
+                filteredMedicines.sort(new StockComparator(parameterValue.toLowerCase(), false));
                 break;
             case CommandParameters.REVERSED_SORT:
-                filteredMedicines.sort(new StockComparator(parameterValue.toUpperCase(), true));
+                filteredMedicines.sort(new StockComparator(parameterValue.toLowerCase(), true));
                 break;
             default:
                 ui.printInvalidParameter(parameter, CommandSyntax.LIST_COMMAND);
