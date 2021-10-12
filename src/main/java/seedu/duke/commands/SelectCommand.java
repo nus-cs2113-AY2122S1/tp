@@ -1,13 +1,11 @@
 package seedu.duke.commands;
 
-import seedu.duke.Duke;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
 
-import java.util.ArrayList;
 
 // meant to be used after FindCommand, where the user can view the details of a specific item
 // this class assumes that there were no exceptions thrown while using FindCommand and that at least one item
@@ -22,9 +20,9 @@ public class SelectCommand extends Command {
     // eg select 1
     public SelectCommand(String[] command) {
         try {
-            itemIndex = Integer.parseInt(command[1]) - 1;
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter the numeric index of the item you wish to select.");
+            itemIndex = getItemIndex(command);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -37,7 +35,7 @@ public class SelectCommand extends Command {
                 return new CommandResult(Ui.getSelectedEventMessage((Event) selectedItem));
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+           return new CommandResult(e.getMessage());
         }
         return new CommandResult("I can't select the item you want!");
     }
@@ -47,6 +45,16 @@ public class SelectCommand extends Command {
             throw new DukeException("Search for some items first, then select the item you want.");
         }
         return FindCommand.filteredItemList.get(index);
+    }
+
+    private int getItemIndex(String[] command) throws DukeException {
+        int itemIndex = 0;
+        try {
+            itemIndex = Integer.parseInt(command[1]) - 1;
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("Please enter the numeric index of the item you wish to select.");
+        }
+        return itemIndex;
     }
 
     private boolean isEvent(Item selectedItem) {

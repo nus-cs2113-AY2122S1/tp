@@ -84,13 +84,13 @@ public class Ui {
     }
 
     public static String getSelectedTaskMessage(Task item) {
-        return getLineBreak() + "Here are the details of the task:" + System.lineSeparator()
-                + getTask(item) + getLineBreak();
+        return getLineBreak() + System.lineSeparator() + "Here are the details of the task:" + System.lineSeparator()
+                + getTask(item) + System.lineSeparator() + getLineBreak();
     }
 
     public static String getSelectedEventMessage(Event item) {
-        return getLineBreak() + "Here are the details of the event:" + System.lineSeparator()
-                + getEvent(item) + getLineBreak();
+        return getLineBreak() + System.lineSeparator() + "Here are the details of the event:" + System.lineSeparator()
+                + getEvent(item) + System.lineSeparator() + getLineBreak();
     }
 
     public static void printList(ArrayList<Item> list) {

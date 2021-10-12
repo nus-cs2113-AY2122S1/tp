@@ -19,7 +19,10 @@ public class FindCommand extends Command {
 
     public FindCommand(String[] command) {
         try {
-            keyword = retrieveKeyword(command);
+            keyword = command[1];
+            if (keyword.isEmpty()) {
+                throw new DukeException("Please enter a keyword!");
+            }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -37,6 +40,7 @@ public class FindCommand extends Command {
         return new CommandResult(filteredItemList.size() + " items found.");
     }
 
+    /*
     private static String retrieveKeyword(String[] command) throws DukeException {
         String keyword = null;
         try {
@@ -49,12 +53,14 @@ public class FindCommand extends Command {
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("Please specify what you want to find.");
         }
+        System.out.println(keyword);
         return keyword;
     }
 
     private static String convertToString(String[] command) {
         return Arrays.toString(command).trim();
     }
+    */
 
     public static ArrayList<Item> filterItemsByString(String keyword) {
         filteredItemList = (ArrayList<Item>) combinedItemList.stream()
