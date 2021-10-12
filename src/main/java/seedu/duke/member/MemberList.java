@@ -56,7 +56,7 @@ public class MemberList {
      * @param memberNumber member number according to member list
      * @return member request by memberNumber
      */
-    public Member getMember(int memberNumber) throws InvalidMemberException{
+    public Member getMember(int memberNumber) throws InvalidMemberException {
         Member member = new Member();
         try {
             boolean isWithinMemberList = (memberNumber > 0) && (memberNumber <= memberList.size());

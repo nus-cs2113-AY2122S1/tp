@@ -207,8 +207,8 @@ public class Parser {
      * @param query user raw data input.
      * @return Edited member according to user input.
      */
-    public static ArrayList<Member> editMemberDetails(MemberList members, String query) throws InvalidMemberException
-            , NumberFormatException {
+    public static ArrayList<Member> editMemberDetails(MemberList members, String query) throws InvalidMemberException,
+            NumberFormatException {
         try {
             String regex = "(\\/[a-z])+";
 
