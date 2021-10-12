@@ -115,6 +115,16 @@ public abstract class ContactParser {
         }
     }
 
+    private void checkGithubUsernameRegex(String detailToParse) throws InvalidGithubUsernameException {
+        //Github username may only contain alphanumeric characters or hyphens.
+        //Github username cannot have multiple consecutive hyphens.
+        //Github username cannot begin or end with a hyphen.
+        //Maximum is 39 characters.
+        String githubUsernameRegex = "^[a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38}$";
+        if (!detailToParse.matches(githubUsernameRegex)) {
+            throw new InvalidGithubUsernameException();
+        }
+    }
     private int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
