@@ -249,6 +249,9 @@ public class Parser {
             return new IncorrectCommand("Should have same number of ingredient names and quantities");
         }
         for (int i = 0; i < ingredientNames.size(); i++) {
+            if (quantities.get(i) == 0) {
+                return new IncorrectCommand("Quantity of ingredients for recipe cannot be zero.");
+            }
             Ingredient ingredient = new Ingredient(ingredientNames.get(i), quantities.get(i), null);
             assert !ingredientNames.get(i).isBlank();
             assert quantities.get(i) != null && quantities.get(i) != 0;

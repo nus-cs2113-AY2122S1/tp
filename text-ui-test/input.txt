@@ -49,6 +49,7 @@ add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple
 add recipe r/Apple Pie i/Red Apple q/4 q/4
 add recipe r/Apple Pie
 add recipe i/Red Apple q/4 i/Green Apple q/4
+add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple q/0
 add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple q/four
 
 add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple q/4
