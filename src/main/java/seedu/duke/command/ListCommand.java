@@ -15,7 +15,6 @@ public class ListCommand implements Command {
     @Override
     public String run() throws DukeException {
         String resultMsg = "";
-        int i;
 
         if (IngredientList.getInstance().getInventoryStock() == 0) {
             resultMsg = LIST_EMPTY_MESSAGE;
@@ -26,7 +25,7 @@ public class ListCommand implements Command {
 
         int currentStock = IngredientList.getInstance().getInventoryStock();
         resultMsg = LIST_MESSAGE;
-        for (i = 0; i < currentStock; i++) {
+        for (int i = 0; i < currentStock; i++) {
             resultMsg +=  (i + 1) + ". "
                     + IngredientList.getInstance().getIngredientInfo(i + 1);
             if (i < currentStock - 1) {
