@@ -1,5 +1,13 @@
 package seedu.duke.commands;
 
+import seedu.duke.Duke;
+import seedu.duke.Ui;
+import seedu.duke.exceptions.DukeException;
+import seedu.duke.items.Event;
+import seedu.duke.items.Item;
+import seedu.duke.items.Task;
+
+import java.util.ArrayList;
 
 // meant to be used after FindCommand, where the user can view the details of a specific item
 // this class assumes that there were no exceptions thrown while using FindCommand and that at least one item
@@ -7,36 +15,38 @@ package seedu.duke.commands;
 
 //                        filteredItemList
 // FindCommand(keyword) --------------------> SelectCommand(index)
-
-import seedu.duke.Ui;
-import seedu.duke.items.Event;
-import seedu.duke.items.Item;
-import seedu.duke.items.Task;
-
-
-public class SelectCommand extends Command{
+public class SelectCommand extends Command {
 
     protected int itemIndex;
 
     // eg select 1
     public SelectCommand(String[] command) {
-        itemIndex = Integer.parseInt(command[1]);
+        try {
+            itemIndex = Integer.parseInt(command[1]) - 1;
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter the numeric index of the item you wish to select.");
+        }
     }
 
     public CommandResult execute() {
-        Item selectedItem = FindCommand.filteredItemList.get(itemIndex);
-        if (isEvent(selectedItem)) {
-            Ui.printLineBreak();
-            System.out.println("Here are the details of the event:");
-            Ui.printEvent((Event) selectedItem);
-            return new CommandResult(Ui.getLineBreak());
-        } else if (isTask(selectedItem)) {
-            Ui.printLineBreak();
-            System.out.println("Here are the details of the task:");
-            Ui.printTask((Task) selectedItem);
-            return new CommandResult(Ui.getLineBreak());
+        try {
+            Item selectedItem = itemFromIndex(itemIndex);
+            if (isTask(selectedItem)) {
+                return new CommandResult(Ui.getSelectedTaskMessage((Task) selectedItem));
+            } else if (isEvent(selectedItem)) {
+                return new CommandResult(Ui.getSelectedEventMessage((Event) selectedItem));
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
         return new CommandResult("I can't select the item you want!");
+    }
+
+    private Item itemFromIndex(int index) throws DukeException {
+        if (FindCommand.filteredItemList.isEmpty()) {
+            throw new DukeException("Search for some items first, then select the item you want.");
+        }
+        return FindCommand.filteredItemList.get(index);
     }
 
     private boolean isEvent(Item selectedItem) {
