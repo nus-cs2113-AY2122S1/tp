@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class DeleteLessonCommandTest {
     @Test
-    public void testDeleteAllLessons() {
+    public void deleteAllLessons_nonEmptyLessonList_emptyLessonList() {
         LessonList lessonList = new LessonList();
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
@@ -37,7 +37,7 @@ class DeleteLessonCommandTest {
     }
 
     @Test
-    public void testDeleteLesson() {
+    public void deleteLesson_lessonToDelete_lessonDeleted() {
         LessonList lessonList = new LessonList();
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
@@ -57,7 +57,7 @@ class DeleteLessonCommandTest {
     }
 
     @Test
-    public void testDeleteOobLesson() {
+    public void deleteLesson_outOfBoundsLesson_exceptionThrown() {
         LessonList lessonList = new LessonList();
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
