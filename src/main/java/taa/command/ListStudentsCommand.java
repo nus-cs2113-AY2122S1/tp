@@ -22,12 +22,12 @@ public class ListStudentsCommand extends Command {
     }
 
     /**
-     * Lists the students taking a particular module.
+     * Executes the list_student command and lists the students of a particular module.
      *
-     * @param moduleList The list of modules
-     * @param ui The ui instance to handle interactions with the user
-     * @param storage The storage instance to handle saving.
-     * @throws TaaException If the user inputs an invalid command
+     * @param moduleList The list of modules.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {

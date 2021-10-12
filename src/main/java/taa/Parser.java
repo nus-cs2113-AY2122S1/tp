@@ -72,7 +72,7 @@ public class Parser {
         case Command.COMMAND_LIST_ASSESSMENTS:
             command = new ListAssessmentsCommand(argument);
             break;
-            
+
         case Command.COMMAND_SET_ATTENDANCE:
             command = new SetAttendanceCommand(argument);
             break;
@@ -114,15 +114,15 @@ public class Parser {
      * e.g.
      * string: "add_module c/CS2113T n/Software Engineering and Object-oriented Programming", argumentKeys: {"c","n"}
      * Result: HashMap(
-     *            "c":"CS2113T",
-     *            "n":"Software Engineering and Object-oriented Programming"
-     *         )
+     * "c":"CS2113T",
+     * "n":"Software Engineering and Object-oriented Programming"
+     * )
      *
-     * @param string The string to parse.
+     * @param string       The string to parse.
      * @param argumentKeys The argument keys to find.
      * @return HashMap - argumentKey:argumentValue pair.
      */
-    public static HashMap<String,String> getArgumentsFromString(String string, String[] argumentKeys) {
+    public static HashMap<String, String> getArgumentsFromString(String string, String[] argumentKeys) {
         if (argumentKeys == null || argumentKeys.length == 0) {
             return new HashMap<>();
         }
@@ -140,7 +140,7 @@ public class Parser {
         }
         Collections.sort(argumentIndexes);
 
-        HashMap<String,String> result = new HashMap<>();
+        HashMap<String, String> result = new HashMap<>();
         for (String key : argumentIndexMap.keySet()) {
             int argumentIndex = argumentIndexMap.get(key);
             int startIndex = argumentIndex + key.length() + 1;

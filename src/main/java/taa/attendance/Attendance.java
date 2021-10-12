@@ -15,6 +15,11 @@ public class Attendance implements ClassChecker {
         this.isPresent = isPresent;
     }
 
+    /**
+     * Gets the minimum lesson number.
+     *
+     * @return The minimum lesson number.
+     */
     public static int getMinLessonNumber() {
         return MIN_LESSON_NUMBER;
     }
@@ -33,6 +38,11 @@ public class Attendance implements ClassChecker {
         return String.format(MESSAGE_FORMAT_ATTENDANCE, lessonNumber, presentString);
     }
 
+    /**
+     * Checks if the variables in the class are valid.
+     *
+     * @return true if valid, else false.
+     */
     @Override
     public boolean verify() {
         if (lessonNumber < MIN_LESSON_NUMBER) {

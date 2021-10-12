@@ -29,12 +29,12 @@ public class AddAssessmentCommand extends Command {
     }
 
     /**
-     * Adds an assessment to a particular module.
+     * Executes the add_assessment command and adds an assessment to a particular module.
      *
      * @param moduleList The list of modules.
-     * @param ui      The ui instance to handle interactions with the user.
-     * @param storage The storage instance to handle saving.
-     * @throws TaaException If the user inputs an invalid command.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {

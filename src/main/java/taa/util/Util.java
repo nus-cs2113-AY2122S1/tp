@@ -2,9 +2,14 @@ package taa.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.regex.Pattern;
 
 public class Util {
+    /**
+     * Checks if a string can be converted to an integer.
+     *
+     * @param string The string to check.
+     * @return true if string can convert to integer, else false.
+     */
     public static boolean isStringInteger(String string) {
         boolean isInt;
         try {
@@ -17,6 +22,12 @@ public class Util {
         return isInt;
     }
 
+    /**
+     * Checks if a string can be converted to a double.
+     *
+     * @param string The string to check.
+     * @return true if string can convert to double, else false.
+     */
     public static boolean isStringDouble(String string) {
         boolean isDouble;
         try {
@@ -29,6 +40,12 @@ public class Util {
         return isDouble;
     }
 
+    /**
+     * Checks if a string can be converted to a boolean.
+     *
+     * @param string The string to check.
+     * @return true if string can convert to boolean, else false.
+     */
     public static boolean isStringBoolean(String string) {
         return string.equals("true") || string.equals("false");
     }

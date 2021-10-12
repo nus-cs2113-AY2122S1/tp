@@ -11,14 +11,15 @@ public class ModuleList implements ClassChecker {
         this.modules = new ArrayList<>();
     }
 
-    public void addModule(Module module) {
-        modules.add(module);
-    }
-
     public int getSize() {
         return modules.size();
     }
 
+    /**
+     * Gets the list of modules. Note: This returns a new ArrayList instance.
+     *
+     * @return A new ArrayList containing all the modules.
+     */
     public ArrayList<Module> getModules() {
         return new ArrayList<>(modules);
     }
@@ -31,6 +32,15 @@ public class ModuleList implements ClassChecker {
      */
     public boolean isValidIndex(int index) {
         return (index >= 0 && index < getSize());
+    }
+
+    /**
+     * Adds a Module object to the list of modules.
+     *
+     * @param module The Module object to add.
+     */
+    public void addModule(Module module) {
+        modules.add(module);
     }
 
     /**
@@ -79,6 +89,11 @@ public class ModuleList implements ClassChecker {
         return stringBuilder.toString();
     }
 
+    /**
+     * Checks if the variables in the class are valid. Filters out duplicate modules with the same module code.
+     *
+     * @return Always returns true.
+     */
     @Override
     public boolean verify() {
         ArrayList<String> moduleCodes = new ArrayList<>();

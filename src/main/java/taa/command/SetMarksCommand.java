@@ -20,10 +20,10 @@ public class SetMarksCommand extends Command {
     private static final String KEY_ASSESSMENT_NAME = "a";
     private static final String KEY_MARKS = "m";
     private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {
-        KEY_MODULE_CODE,
-        KEY_STUDENT_INDEX,
-        KEY_ASSESSMENT_NAME,
-        KEY_MARKS
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX,
+            KEY_ASSESSMENT_NAME,
+            KEY_MARKS
     };
 
     private static final String MESSAGE_FORMAT_SET_MARKS_USAGE = "Usage: %s "
@@ -37,12 +37,12 @@ public class SetMarksCommand extends Command {
     }
 
     /**
-     * Checks for errors before calling the function that sets marks for a student's assessment.
+     * Executes the set_marks command and sets the marks of a student's assessment.
      *
-     * @param moduleList Module list to access the module the student is enrolled in.
-     * @param ui The ui instance to handle interactions with the user.
-     * @param storage The storage instance to handle saving.
-     * @throws TaaException when set marks command is invalid.
+     * @param moduleList The list of modules.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
@@ -98,10 +98,10 @@ public class SetMarksCommand extends Command {
     /**
      * Sets the marks for a student's assessment.
      *
-     * @param ui The ui instance to handle interactions with the user.
-     * @param student The student instance to set the mark for.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param student    The student instance to set the mark for.
      * @param assessment The assessment instance.
-     * @param marks The marks to set for the assessment.
+     * @param marks      The marks to set for the assessment.
      */
     private void setMarks(Ui ui, Student student, Assessment assessment, double marks) {
         String assessmentName = assessment.getName();
@@ -111,6 +111,7 @@ public class SetMarksCommand extends Command {
 
     /**
      * Returns the usage message of the set marks command.
+     *
      * @return String which contains the usage message.
      */
     @Override

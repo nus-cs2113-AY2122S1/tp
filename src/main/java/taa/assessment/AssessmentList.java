@@ -15,8 +15,23 @@ public class AssessmentList implements ClassChecker {
         return assessments.size();
     }
 
+    /**
+     * Gets the list of assessments. Note: This returns a new ArrayList instance.
+     *
+     * @return A new ArrayList containing all the assessments.
+     */
     public ArrayList<Assessment> getAssessments() {
         return new ArrayList<>(assessments);
+    }
+
+    /**
+     * Checks if an index is valid with respect to the assessments ArrayList.
+     *
+     * @param index The index to check.
+     * @return true if valid, else false.
+     */
+    public boolean isValidIndex(int index) {
+        return (index >= 0 && index < assessments.size());
     }
 
     /**
@@ -46,10 +61,12 @@ public class AssessmentList implements ClassChecker {
         return true;
     }
 
-    public boolean isValidIndex(int index) {
-        return (index >= 0 && index < assessments.size());
-    }
-
+    /**
+     * Gets an Assessment object at the index from the assessment ArrayList.
+     *
+     * @param index The index of the object.
+     * @return An Assessment object if the index is valid, else null.
+     */
     private Assessment getAssessmentAt(int index) {
         if (isValidIndex(index)) {
             return assessments.get(index);
@@ -58,6 +75,12 @@ public class AssessmentList implements ClassChecker {
         return null;
     }
 
+    /**
+     * Gets an Assessment object with a particular name. Note: name is case-insensitive.
+     *
+     * @param assessmentName The name of the assessment.
+     * @return An Assessment object if found, else null.
+     */
     public Assessment getAssessment(String assessmentName) {
         for (Assessment assessment : assessments) {
             String name = assessment.getName();
@@ -85,16 +108,22 @@ public class AssessmentList implements ClassChecker {
         return stringBuilder.toString();
     }
 
+    /**
+     * Checks if the variables within the class are valid. Filters out duplicate assessments with the same name.
+     * Also, checks if the total weightage is valid.
+     *
+     * @return true if valid, else false.
+     */
     @Override
     public boolean verify() {
         ArrayList<String> assessmentNames = new ArrayList<>();
         double totalWeightage = 0;
         for (Assessment assessment : assessments) {
             String name = assessment.getName();
-            if (assessmentNames.contains(name)) {
+            if (assessmentNames.contains(name.toLowerCase())) {
                 assessments.remove(assessment);
             } else {
-                assessmentNames.add(name);
+                assessmentNames.add(name.toLowerCase());
                 totalWeightage += assessment.getWeightage();
             }
         }

@@ -25,10 +25,20 @@ public class Module implements ClassChecker {
         return name;
     }
 
+    /**
+     * Gets the StudentList object associated to the module.
+     *
+     * @return A StudentList object.
+     */
     public StudentList getStudentList() {
         return studentList;
     }
 
+    /**
+     * Gets the AssessmentList object associated to the module.
+     *
+     * @return A AssessmentList object.
+     */
     public AssessmentList getAssessmentList() {
         return assessmentList;
     }
@@ -42,6 +52,11 @@ public class Module implements ClassChecker {
         return String.format("%s (%s)", code, name);
     }
 
+    /**
+     * Checks if the variables in the class are valid.
+     *
+     * @return true if valid, else false.
+     */
     @Override
     public boolean verify() {
         if (code.isEmpty() || name.isEmpty()) {

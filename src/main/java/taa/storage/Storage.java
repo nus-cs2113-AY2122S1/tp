@@ -30,6 +30,12 @@ public class Storage {
         this.filename = filename;
     }
 
+    /**
+     * Load the module list from the file.
+     *
+     * @return A ModuleList object after parsing from the file.
+     * @throws TaaException if fail to open, read, or parse the file.
+     */
     public ModuleList load() throws TaaException {
         if (!Util.fileExists(filename)) {
             return null;
@@ -56,6 +62,12 @@ public class Storage {
         return moduleList;
     }
 
+    /**
+     * Saves a ModuleList object to the file.
+     *
+     * @param moduleList The ModuleList object to save.
+     * @throws TaaException if fail to create, open, or write to the file.
+     */
     public void save(ModuleList moduleList) throws TaaException {
         if (!Util.createFile(filename)) {
             throw new TaaException(String.format(MESSAGE_FORMAT_FAIL_CREATE_FILE, filename));

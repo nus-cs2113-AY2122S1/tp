@@ -40,7 +40,7 @@ public abstract class Command {
     protected String argument;
     protected boolean isExit;
     protected String[] argumentKeys;
-    protected HashMap<String,String> argumentMap;
+    protected HashMap<String, String> argumentMap;
 
     public Command(String argument) {
         this(argument, null);

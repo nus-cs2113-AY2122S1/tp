@@ -23,10 +23,13 @@ public class ListAttendanceCommand extends Command {
         super(argument, LIST_ATTENDANCE_ARGUMENT_KEYS);
     }
 
-    /** Lists out the attendance for all students in a module.
-     * @param moduleList The list of modules
-     * @param ui         The ui instance to handle interactions with the user
-     * @throws TaaException If the user inputs an invalid command
+    /**
+     * Executes the list_attendance command and list all the attendance record of a student.
+     *
+     * @param moduleList The list of modules.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {

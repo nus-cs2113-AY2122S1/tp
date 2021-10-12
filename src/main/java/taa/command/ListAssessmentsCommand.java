@@ -21,12 +21,12 @@ public class ListAssessmentsCommand extends Command {
     }
 
     /**
-     * Lists all the assessments of a particular module.
+     * Executes the list_assessment command and list all the assessments of a particular module.
      *
      * @param moduleList The list of modules.
-     * @param ui The ui instance to handle interactions with the user.
-     * @param storage The storage instance to handle saving.
-     * @throws TaaException If the user inputs an invalid command.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {

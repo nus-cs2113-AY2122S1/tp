@@ -17,10 +17,10 @@ public class SetAttendanceCommand extends Command {
     private static final String KEY_LESSON_NUMBER = "l";
     private static final String KEY_PRESENT = "p";
     private static final String[] SET_ATTENDANCE_ARGUMENT_KEYS = {
-        KEY_MODULE_CODE,
-        KEY_STUDENT_INDEX,
-        KEY_LESSON_NUMBER,
-        KEY_PRESENT
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX,
+            KEY_LESSON_NUMBER,
+            KEY_PRESENT
     };
 
     private static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
@@ -40,11 +40,12 @@ public class SetAttendanceCommand extends Command {
     }
 
     /**
-     * Sets the attendance of a student to 1 or 0.
+     * Executes the set_attendance command and sets the attendance of a student.
      *
-     * @param moduleList The list of modules
-     * @param ui         The ui instance to handle interactions with the user
-     * @throws TaaException If the user inputs an invalid command
+     * @param moduleList The list of modules.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {

@@ -13,21 +13,27 @@ public class StudentList implements ClassChecker {
         this.students = new ArrayList<>();
     }
 
+    public int getSize() {
+        return students.size();
+    }
+
     /**
-     * Gets a list of students in the ArrayList. Note that this returns a new ArrayList instance.
+     * Checks if an index is valid with respect to the students ArrayList.
+     *
+     * @param index The index to check.
+     * @return true if valid, else false.
+     */
+    public boolean isValidIndex(int index) {
+        return (index >= 0 && index < getSize());
+    }
+
+    /**
+     * Gets a list of students in the ArrayList. Note: This returns a new ArrayList instance.
      *
      * @return A new ArrayList containing all the students.
      */
     public ArrayList<Student> getStudents() {
         return new ArrayList<>(students);
-    }
-
-    public int getSize() {
-        return students.size();
-    }
-
-    public boolean isValidIndex(int index) {
-        return (index >= 0 && index < getSize());
     }
 
     public Student getStudentAt(int index) {
@@ -38,6 +44,11 @@ public class StudentList implements ClassChecker {
         return null;
     }
 
+    /**
+     * Adds a Student object to the list of students.
+     *
+     * @param student The Student object to add.
+     */
     public void addStudent(Student student) {
         students.add(student);
     }
@@ -56,6 +67,12 @@ public class StudentList implements ClassChecker {
         return null;
     }
 
+    /**
+     * Gets a list of students based on a particular keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @return A list of students with the keyword.
+     */
     public ArrayList<Student> findStudents(String keyword) {
         String keywordLower = keyword.toLowerCase();
 
