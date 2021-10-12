@@ -83,11 +83,49 @@ $ add lesson CS2113 Lecture -d MON -s 1pm -e 3pm
 
 Format: `list [task/lesson/all]`
 
+Example usage:
+
+```
+$ list task
+    _______________________________________________________________________________
+     Here are the tasks in your list:
+     1. [T][ ] Title: CS2113 tP
+     2. [T][ ] Title: CS2113 tp (Info: add documentation)
+    _______________________________________________________________________________
+     
+$ list lesson
+    _______________________________________________________________________________
+     Here are the lessons in your list:
+     1. [L] Title: CS2113 Lecture (Start: 1pm) (End: 3pm)
+    _______________________________________________________________________________
+    
+$ list all
+    _______________________________________________________________________________
+     Here are the tasks in your list:
+     1. [T][ ] Title: CS2113 tP
+     2. [T][ ] Title: CS2113 tp (Info: add documentation)
+     
+     Here are the lessons in your list:
+     1. [L] Title: CS2113 Lecture (Start: 1pm) (End: 3pm)
+    _______________________________________________________________________________
+```
+
 ### Marking a Task as done - `done`
 
 Indicate that the specified task is completed.
 
 Format: `done [INDEX]`
+
+Example usage:
+
+```
+$ done 1
+    _______________________________________________________________________________
+     Nice! I've marked this task as done: 
+       [T][X] Title: CS2113 tP
+     Now you have 1 pending tasks.
+    _______________________________________________________________________________
+```
 
 ### Deleting Tasks or Lessons - `delete`
 
