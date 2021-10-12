@@ -1,5 +1,6 @@
 package taa.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -61,9 +62,9 @@ public class Util {
      * @return true if exists, else false.
      */
     public static boolean fileExists(String filename) {
-        Path path = getPathFromFilename(filename);
+        File file = new File(filename);
 
-        return Files.exists(path);
+        return file.exists();
     }
 
     /**
@@ -77,16 +78,25 @@ public class Util {
             return true;
         }
 
-        Path path = getPathFromFilename(filename);
-        Path parentPath = path.getParent();
+        File file = new File(filename);
+        File parentFile = file.getParentFile();
 
+        boolean result;
         try {
-            Files.createDirectories(parentPath);
-            Files.createFile(path);
+            boolean hasCreatedDir = true;
+            if (parentFile != null) {
+                hasCreatedDir = parentFile.mkdirs();
+            }
+
+            if (hasCreatedDir) {
+                result = file.createNewFile();
+            } else {
+                result = false;
+            }
         } catch (IOException e) {
-            return false;
+            result = false;
         }
 
-        return true;
+        return result;
     }
 }
