@@ -9,7 +9,7 @@ import seedu.duke.ingredients.IngredientList;
 public class ListCommand implements Command {
 
     private static final String LIST_EMPTY_MESSAGE = "Your inventory is empty!";
-    private static final String LIST_MESSAGE = "Here is the list of the ingredients currently in inventory:\n";
+    private static final String LIST_MESSAGE = "Here is the list of the ingredients currently in inventory:\n" + "\t";
 
     @Override
     public String run() throws DukeException {
@@ -23,13 +23,10 @@ public class ListCommand implements Command {
 
         assert (IngredientList.getInstance().getInventoryStock() > 0);
 
-        for (i = 0; i < IngredientList.getInstance().getInventoryStock() - 1; i++) {
-            resultMsg += (i + 1) + "."
-                    + IngredientList.getInstance().getIngredientInfo(i + 1)
-                    + '\n';
+        for (i = 0; i < IngredientList.getInstance().getInventoryStock(); i++) {
+            resultMsg += LIST_MESSAGE + (i + 1) + ". "
+                    + IngredientList.getInstance().getIngredientInfo(i + 1);
         }
-        resultMsg = resultMsg + IngredientList.getInstance().getInventoryStock() + "."
-                + IngredientList.getInstance().getIngredientInfo(i + 1);
 
         return resultMsg;
     }
