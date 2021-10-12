@@ -1,9 +1,13 @@
 package seedu.duke;
 
 import seedu.duke.command.UpdateCommand;
+import seedu.duke.command.AddCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.exceptions.InsufficientParametersException;
+import seedu.duke.ingredients.AddIngredient;
+import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
 
 public class Parser {
@@ -75,9 +79,32 @@ public class Parser {
         return resultMsg;
     }
 
+    /**
+     * Parses add command and splits input into ingredient parameters.
+     *
+     * @param command 1 line of user input
+     * @return Ingredient added message
+     */
+
     private static String parseAddCommand(String command) {
-        String resultMsg = "";
-        return resultMsg;
+        String[] userInput = command.split(SPACE_SEPARATOR, 2);
+        String ingredientName;
+        String ingredientUnit;
+        String ingredientExpiry;
+        double ingredientAmount;
+
+        try {
+            ingredientName = AddIngredient.getIngredientName(userInput[1]);
+            ingredientAmount = AddIngredient.getIngredientAmount(userInput[1]);
+            ingredientUnit = AddIngredient.getIngredientUnit(userInput[1]);
+            ingredientExpiry = AddIngredient.getIngredientExpiry(userInput[1]);
+        } catch (InsufficientParametersException e) {
+            return e.getMessage();
+        } catch (DukeException e) {
+            return "Amount is not a number. Please try again";
+        }
+        Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnit, ingredientExpiry);
+        return new AddCommand(newIngredient).run();
     }
 
     private static String parseListCommand() throws DukeException {
