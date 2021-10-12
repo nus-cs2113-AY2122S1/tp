@@ -69,18 +69,16 @@ public class Ui {
         System.out.println(" ");
     }
     
-    public void listExpense(ArrayList<Entry> entries) {
+    public void listExpense(ArrayList<Expense> expenses) {
         printLine();
         System.out.println(LISTING_EXPENSE_MESSAGE);
         printLine();
         int i = 1;
-        for (Entry entry:entries) {
-            if (entry instanceof Expense) {
-                System.out.print(i);
-                System.out.print(": ");
-                System.out.println(entry);
-                i++;
-            }
+        for (Expense expense:expenses) {
+            System.out.print(i);
+            System.out.print(": ");
+            System.out.println(expense);
+            i++;
         }
         printLine();
 
@@ -92,21 +90,18 @@ public class Ui {
         printLine();
     }
     
-    public void listIncome(ArrayList<Entry> entries) {
+    public void listIncome(ArrayList<Income> incomes) {
         printLine();
         System.out.println(LISTING_INCOME_MESSAGE);
         printLine();
         int i = 1;
-        for (Entry entry:entries) {
-            if (entry instanceof Income) {
-                System.out.print(i);
-                System.out.print(": ");
-                System.out.println(entry);
-                i++;
-            }
+        for (Income income:incomes) {
+            System.out.print(i);
+            System.out.print(": ");
+            System.out.println(income);
+            i++;
         }
         printLine();
-
     }
     
     public void printTotalExpense(double totalExpense) {
@@ -124,7 +119,6 @@ public class Ui {
         System.out.println("Your most recent spending: ");
         System.out.println(expense);
         printLine();
-
     }
 
     public void printExpenseDeleted(Expense expense) {
@@ -132,7 +126,6 @@ public class Ui {
         System.out.println("You removed this: ");
         System.out.println(expense);
         printLine();
-
     }
     
     public void printIncomeAdded(Income income) {
@@ -140,7 +133,6 @@ public class Ui {
         System.out.println("Your most recent earning: ");
         System.out.println(income);
         printLine();
-
     }
 
     public void printIncomeDeleted(Income income) {
@@ -148,7 +140,6 @@ public class Ui {
         System.out.println("You removed this: ");
         System.out.println(income);
         printLine();
-
     }
     
     public void printHelp() {

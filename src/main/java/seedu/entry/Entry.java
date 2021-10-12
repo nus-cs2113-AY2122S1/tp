@@ -8,16 +8,8 @@ public abstract class Entry {
         return this.description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public double getValue() {
         return this.value;
-    }
-
-    public void setValue(float value) {
-        this.value = value;
     }
 
     public String toString() {

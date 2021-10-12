@@ -1,15 +1,15 @@
 package seedu.commands;
 
+import seedu.entry.Income;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
+
+import java.util.ArrayList;
 
 public class ListIncomeCommand extends Command {
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        if (finances.getEntries().isEmpty()) {
-            ui.emptyList();
-        } else {
-            ui.listIncome(finances.getEntries());
-        }
+        ArrayList<Income> incomes = finances.listIncomes(); 
+        ui.listIncome(incomes);
     }
 }
