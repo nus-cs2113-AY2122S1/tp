@@ -24,7 +24,7 @@ y
 rm    0
 y
    add  -p  -f
-view 2
+view 2 1
 n             andre
 f facebook
 n

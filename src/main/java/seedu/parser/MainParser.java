@@ -4,7 +4,7 @@ import seedu.command.AddContactCommand;
 import seedu.command.EditContactCommand;
 import seedu.command.DeleteContactCommand;
 import seedu.command.Command;
-import seedu.command.ViewCommand;
+import seedu.command.ViewContactCommand;
 import seedu.command.FailedCommand;
 import seedu.command.ExitCommand;
 import seedu.command.ListContactsCommand;
@@ -22,8 +22,8 @@ public class MainParser {
     private static final String ADD_CONTACT_COMD = "add";
     private static final String EDIT_CONTACT_COMD = "edit";
     private static final String DELETE_CONTACT_COMD = "rm";
+    private static final String VIEW_CONTACT_COMD = "view";
     private static final String EXIT_COMD = "exit";
-    private static final String VIEW_COMD = "view";
     private static final String LIST_COMD = "list";
 
     private static final int COMD_WORD_INDEX = 0;
@@ -47,11 +47,11 @@ public class MainParser {
         case DELETE_CONTACT_COMD:
             command = parseDeleteContact(userInput);
             break;
+        case VIEW_CONTACT_COMD:
+            command = parseViewContact(userInput);
+            break;
         case EXIT_COMD:
             command = new ExitCommand();
-            break;
-        case VIEW_COMD:
-            command = parseViewContact(userInput);
             break;
         case LIST_COMD:
             command = new ListContactsCommand();
@@ -117,12 +117,11 @@ public class MainParser {
     }
 
     private Command parseViewContact(String userInput) {
-        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
-        if (destructuredInputs.length == 1) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
-        }
         try {
-            return new ViewCommand(Integer.parseInt(destructuredInputs[1].trim()));
+            int viewedIndex = IndexParser.getIndexFromInput(userInput, VIEW_CONTACT_COMD);
+            return new ViewContactCommand(viewedIndex);
+        } catch (MissingArgException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
