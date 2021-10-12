@@ -2,6 +2,8 @@ package terminus.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -44,7 +46,7 @@ public class ModuleStorage {
      * @return NusModule based on the contents of the file.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
-    public NusModule loadFile() throws IOException {
+    public NusModule loadFile() throws IOException, JsonSyntaxException, JsonIOException {
         initializeFile();
         if (!Files.isReadable(filePath)) {
             TerminusLogger.severe("File is does not exist or is not readable!");
