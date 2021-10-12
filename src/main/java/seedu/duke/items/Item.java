@@ -63,4 +63,8 @@ public abstract class Item {
     public String getStatusIcon() {
         return isDone ? "X" : " ";
     }
+
+    public boolean getIsDone() {
+        return isDone;
+    }
 }
