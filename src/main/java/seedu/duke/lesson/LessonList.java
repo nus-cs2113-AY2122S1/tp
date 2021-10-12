@@ -1,6 +1,7 @@
 package seedu.duke.lesson;
 
 import seedu.duke.exception.DukeException;
+import seedu.duke.ui.Message;
 import seedu.duke.ui.Ui;
 
 import java.util.List;
@@ -22,8 +23,14 @@ public class LessonList {
         return lessonList.size();
     }
 
-    public Lesson getLesson(int lessonIndex) {
-        return lessonList.get(lessonIndex);
+    public Lesson getLesson(int lessonIndex) throws DukeException {
+        try {
+            return lessonList.get(lessonIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(Message.ERROR_INVALID_INDEX);
+        } catch (NumberFormatException e) {
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
+        }
     }
 
     public boolean isEmpty() {
@@ -34,8 +41,14 @@ public class LessonList {
         lessonList.add(newLesson);
     }
 
-    public void deleteLesson(int lessonIndex) {
-        lessonList.remove(lessonIndex);
+    public void deleteLesson(int lessonIndex) throws DukeException {
+        try {
+            lessonList.remove(lessonIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(Message.ERROR_INVALID_INDEX);
+        } catch (NumberFormatException e) {
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
+        }
     }
 
     public void deleteAllLessons() {

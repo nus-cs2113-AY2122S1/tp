@@ -58,7 +58,6 @@ class DeleteLessonCommandTest {
 
     @Test
     public void testDeleteOobLesson() {
-
         LessonList lessonList = new LessonList();
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));

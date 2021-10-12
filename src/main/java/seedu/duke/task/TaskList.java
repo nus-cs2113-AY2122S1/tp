@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import seedu.duke.exception.DukeException;
+import seedu.duke.ui.Message;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -22,8 +23,14 @@ public class TaskList {
         return taskList.size();
     }
 
-    public Task getTask(int taskIndex) {
-        return taskList.get(taskIndex);
+    public Task getTask(int taskIndex) throws DukeException {
+        try {
+            return taskList.get(taskIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(Message.ERROR_INVALID_INDEX);
+        } catch (NumberFormatException e) {
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
+        }
     }
 
     public int getNumberOfPendingTasks() {
@@ -44,16 +51,28 @@ public class TaskList {
         taskList.add(newTask);
     }
 
-    public void deleteTask(int taskIndex) {
-        taskList.remove(taskIndex);
+    public void deleteTask(int taskIndex) throws DukeException {
+        try {
+            taskList.remove(taskIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(Message.ERROR_INVALID_INDEX);
+        } catch (NumberFormatException e) {
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
+        }
     }
 
     public void deleteAllTasks() {
         taskList.clear();
     }
 
-    public void markTaskAsDone(int taskIndex) {
-        taskList.get(taskIndex).setDone();
+    public void markTaskAsDone(int taskIndex) throws DukeException {
+        try {
+            taskList.get(taskIndex).setDone();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(Message.ERROR_INVALID_INDEX);
+        } catch (NumberFormatException e) {
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
+        }
     }
 
     /**

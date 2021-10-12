@@ -20,13 +20,6 @@ public class DoneCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
             throws DukeException, IOException {
-        boolean isLessThanZero = taskIndex < 0;
-        boolean isMoreThanMax = taskIndex >= taskList.getSize();
-        boolean isTaskIndexValid = !isLessThanZero && !isMoreThanMax;
-        if (!isTaskIndexValid) {
-            throw new DukeException(Message.ERROR_INVALID_INDEX);
-        }
-
         Task task = taskList.getTask(taskIndex);
         if (task.isDone()) {
             throw new DukeException(Message.ERROR_TASK_IS_ALREADY_DONE);
