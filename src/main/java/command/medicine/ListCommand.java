@@ -104,9 +104,6 @@ public class ListCommand extends Command {
             case CommandParameters.REVERSED_SORT:
                 filteredMedicines.sort(new StockComparator(parameterValue.toLowerCase(), true));
                 break;
-            default:
-                ui.printInvalidParameter(parameter, CommandSyntax.LIST_COMMAND);
-                return;
             }
         }
         ui.printStocks(filteredMedicines);
