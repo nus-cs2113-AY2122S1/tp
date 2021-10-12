@@ -158,7 +158,7 @@ public class Trip {
         listOfExpenses.add(expense);
     }
 
-    public ArrayList<Expense> getListOfExpenses(){
+    public ArrayList<Expense> getListOfExpenses() {
         return listOfExpenses;
     }
 

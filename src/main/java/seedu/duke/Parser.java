@@ -19,14 +19,14 @@ public class Parser {
             return true;
         }
 
-        if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")){
+        if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
             Ui.printNoTripError();
             return true;
         } else if (!checkValidCommand(inputCommand)) {
             Ui.printUnknownCommandError();
             return true;
         } else if (inputCommand.equals("list") && userInputSplit.length > 1
-                && userInputSplit[1].equals("trips")){
+                && userInputSplit[1].equals("trips")) {
             inputDescription = userInputSplit[1];
         } else if (!(inputCommand.equals("view") || inputCommand.equals("summary")
                 || inputCommand.equals("quit") || inputCommand.equals("list"))) {
@@ -91,7 +91,7 @@ public class Parser {
                     Ui.printTripsInList(trip, index);
                     index++;
                 }
-            } else{
+            } else {
                 for (Expense expense : Storage.getOpenTrip().getListOfExpenses()) {
                     Ui.printExpensesInList(expense, index);
                     index++;

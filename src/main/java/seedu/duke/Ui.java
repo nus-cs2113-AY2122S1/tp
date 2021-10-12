@@ -73,7 +73,7 @@ public class Ui {
         System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
     }
 
-    public static void printNoTripError(){
+    public static void printNoTripError() {
         System.out.println("You have not created a trip yet. Please create a trip using the keyword 'create'.");
     }
 
@@ -82,7 +82,7 @@ public class Ui {
                 + tripDate + " has been successfully removed");
     }
 
-    public static void printNoExpensesError(){
+    public static void printNoExpensesError() {
         System.out.println("There are no expenses in your trip, please add an expense using the keyword 'expense'.");
     }
 
