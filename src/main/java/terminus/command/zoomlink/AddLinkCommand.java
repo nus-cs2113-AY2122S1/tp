@@ -2,6 +2,7 @@ package terminus.command.zoomlink;
 
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.exception.InvalidLinkException;
@@ -64,12 +65,16 @@ public class AddLinkCommand extends Command {
         this.link = argArray.get(3);
 
         if (!isValidDay(this.day)) {
+            TerminusLogger.warning(String.format("Invalid Day: %s", this.day));
             throw new InvalidDayException(String.format(Messages.ERROR_MESSAGE_INVALID_DAY, this.day));
         }
         if (!isValidUrl(this.link)) {
+            TerminusLogger.warning(String.format("Invalid Link: %s", this.link));
             throw new InvalidLinkException(
                     String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
         }
+        TerminusLogger.info(String.format("Parsed arguments (description = %s, day = %s, startTime = %s, link = %s)"
+                + " to Add Link Command", description, day, startTime, link));
     }
 
     @Override
@@ -85,8 +90,11 @@ public class AddLinkCommand extends Command {
     private boolean isValidScheduleArguments(ArrayList<String> argArray) {
         boolean isValid = true;
         if (argArray.size() != ADD_SCHEDULE_ARGUMENTS) {
+            TerminusLogger.warning(String.format("Failed to find %d arguments, %d arguments found",
+                    ADD_SCHEDULE_ARGUMENTS, argArray.size()));
             isValid = false;
         } else if (CommonFormat.isArrayEmpty(argArray)) {
+            TerminusLogger.warning("Failed to parse arguments, some arguments found is empty");
             isValid = false;
         }
         return isValid;
