@@ -1,72 +1,89 @@
 package happybit.goal;
 
-import happybit.exception.HappyBitException;
+import happybit.habit.Habit;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 
 public class Goal {
 
-    protected String description;
-    protected Date startDate;
-    protected Date endDate;
-    protected boolean isDone;
-
-    // To be implemented in a future iteration
-    // protected ArrayList<Milestone> milestoneList = new ArrayList<Milestone>();
-    // protected int reminderFrequency;
+    protected String goalName;
+    protected GoalType goalType;
+    protected ArrayList<Habit> habitList = new ArrayList<>();
 
     /**
-     * Constructor for Goal class with startDate defined.
+     * Constructor for Goal class with goalType defined.
      *
-     * @param description Description of the end goal.
-     * @param startDate   Start date of progress towards a goal.
-     * @param endDate     End date of progress towards a goal.
-     * @throws HappyBitException If strings cannot be converted to date or/and
-     *                           If start date comes after the end date.
+     * @param goalName String description of the goal.
+     * @param goalType Type/Category of goal.
      */
-    public Goal(String description, String startDate, String endDate) throws HappyBitException {
-        this.description = description;
-        this.startDate = stringToDate(startDate);
-        this.endDate = stringToDate(endDate);
-        this.isDone = false;
-        isStartDateBeforeEndDate();
+    public Goal(String goalName, GoalType goalType) {
+        this.goalName = goalName;
+        this.goalType = goalType;
     }
 
     /**
-     * Constructor for Goal class without startDate defined.
-     * startDate will be set as current date.
+     * Constructor for Goal class with goalType not defined.
+     * goalType will be set as DEFAULT.
      *
-     * @param description Description of the end goal.
-     * @param endDate     End date of progress towards a goal.
-     * @throws HappyBitException If strings cannot be converted to date or/and
-     *                           If start date comes after the end date.
+     * @param goalName String description of the goal.
      */
-    public Goal(String description, String endDate) throws HappyBitException {
-        this.description = description;
-        this.startDate = new Date();
-        this.endDate = stringToDate(endDate);
-        this.isDone = false;
-        isStartDateBeforeEndDate();
+    public Goal(String goalName) {
+        this.goalName = goalName;
+        this.goalType = GoalType.DEFAULT;
     }
 
     /**
-     * Gets a string representation of goal details.
+     * Setter for name of goal.
+     * Used to edit the name of the goal.
      *
-     * @return String containing goal description and start-end dates.
+     * @param goalName
+     */
+    public void setGoalName(String goalName) {
+        this.goalName = goalName;
+    }
+
+    /**
+     * Gets the description of the goal.
+     *
+     * @return String containing goal name and type.
      */
     public String getDescription() {
-        return this.description + dateDescription();
+        return getGoalTypeCharacter() + " " + goalName + "\n";
     }
 
     /**
-     * Indicates goal completion if the current date is equal to or after the endDate.
-     * (Logic to be changed to allow user to manually check off the goal as completed)
+     * Adds a habit to the goal.
+     *
+     * @param habit Habit to be added to the goal.
      */
-    public void setDone() {
-        if (!isDateBeforeToday(endDate)) {
-            isDone = true;
+    public void addHabit(Habit habit) {
+        habitList.add(habit);
+    }
+
+    /**
+     * Removes a habit from the goal.
+     *
+     * @param habitIndex Index corresponding to habit in the habitList.
+     */
+    public void removeHabit(int habitIndex) {
+        habitList.remove(habitIndex);
+    }
+
+    /**
+     * Gets the number of habits in a goal.
+     *
+     * @return Integer number of habits associated with the goal.
+     */
+    public int numberOfHabits() {
+        return habitList.size();
+    }
+
+    /**
+     * Prints list of habits associated with the goal.
+     */
+    public void printHabitList() {
+        for (int i = 0; i < habitList.size(); i++) {
+            System.out.println(i + ". " + habitList.get(i).getDescription() + "\n");
         }
     }
 
@@ -79,67 +96,22 @@ public class Goal {
      */
 
     /**
-     * Formats the start-end dates as a single string for print output.
+     * Gets the corresponding 2-character code for the goalType.
      *
-     * @return String containing start-end dates.
+     * @return String of the goalType 2-character code.
      */
-    private String dateDescription() {
-        String startDateString = "Start: " + dateToString(this.startDate);
-        String endDateString = "End: " + dateToString(this.endDate);
-        return " (" + startDateString + " | " + endDateString + ")\n";
-    }
-
-    /**
-     * Converts a Date into a String.
-     *
-     * @param date Either a start or end date.
-     * @return String formatted from a date in the dd-MMM-yyyy format e.g, 07-Oct-2021.
-     */
-    private String dateToString(Date date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-        return formatter.format(date);
-    }
-
-    /**
-     * Converts a String into a Date.
-     *
-     * @param strDate String representation of a start or end date.
-     * @return Date formatted from a string in the dd-MMM-yyyy format e.g, 07-Oct-2021.
-     */
-    private Date stringToDate(String strDate) throws HappyBitException {
-        Date date = null;
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
-            date = formatter.parse(strDate);
-        } catch (ParseException parseException) {
-            throw new HappyBitException("Error: Invalid date format. Use dd-MMM-yyyy e.g, 07-Oct-2021.\n");
-        }
-        return date;
-    }
-
-    /**
-     * Checks if the current date is before the compared date.
-     *
-     * @param compareDate Date used to compare with current date.
-     * @return true: If current date is before the compared date.
-     *         false: If current date is after the compared date.
-     */
-    private boolean isDateBeforeToday(Date compareDate) {
-        Date currentDate = new Date();
-        if (currentDate.compareTo(compareDate) < 0) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * Checks if the start date is before the end date.
-     *
-     * @throws HappyBitException If start date is after the end date.
-     */
-    private void isStartDateBeforeEndDate() throws HappyBitException {
-        if (this.startDate.compareTo(this.endDate) > 0) {
-            throw new HappyBitException("Error: Start Date has to come before End Date ");
+    private String getGoalTypeCharacter() {
+        switch (this.goalType) {
+        case SLEEP:
+            return "[SL]";
+        case FOOD:
+            return "[FD]";
+        case EXERCISE:
+            return "[EX]";
+        case STUDY:
+            return "[SD]";
+        default:
+            return "[DF]";
         }
     }
 }
