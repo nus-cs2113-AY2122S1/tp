@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.duke.commands.Command;
 import seedu.duke.modules.Module;
+import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.universities.UniversityList;
@@ -18,16 +19,23 @@ public class Duke {
 
         try {
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
-            ArrayList<Module> moduleMasterList = new ArrayList<>(Storage.loadModules());
-            Parser mainParser = new Parser(universityMasterList, moduleMasterList);
+            ModuleList moduleMasterList = new ModuleList(Storage.loadModules());//ArrayList<>(Storage.loadModules());
+            UniversityList universitySelectedList = new UniversityList();
+            ModuleList moduleSelectedList = new ModuleList();
+            Parser mainParser = new Parser(universityMasterList, moduleMasterList,
+                    universitySelectedList, moduleSelectedList);
+
             while (true) {
-                System.out.println("Enter a command");
-                String userInput = in.nextLine();
-                Command cmd = mainParser.parseCommand(userInput);
+                try {
+                    System.out.println("Enter a command");
+                    String userInput = in.nextLine();
+                    Command cmd = mainParser.parseCommand(userInput);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 }
-
