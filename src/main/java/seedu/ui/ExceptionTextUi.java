@@ -118,7 +118,13 @@ public class ExceptionTextUi {
     }
 
     public static void invalidGithubUsernameInput() {
-        String message = "The github username is not correctly formatted";
+        String message = "The github username is not correctly formatted,\n"
+                + "Rules for Github username :\n"
+                + "    * Only contain alphanumeric characters or hyphens\n"
+                + "    * Only lowercase allowed\n"
+                + "    * Maximum 39 characters allowed\n"
+                + "    * Cannot have multiple consecutive hyphens\n"
+                + "    * Cannot begin or end with a hyphen\n";
         printDoubleLineMessage(message);
     }
 
