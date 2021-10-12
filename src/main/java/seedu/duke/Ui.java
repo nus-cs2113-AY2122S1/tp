@@ -23,9 +23,9 @@ public class Ui {
         System.out.println(person.getName() + " | " + person.getAmtOwedToUser());
     }
 
-    public static void printMoney(double money) {
-        System.out.printf("%.2f%n", money);
-        System.out.print(System.lineSeparator());
+    public static void printMoney(double val) {
+        String money = String.format("%.02f", val);
+        System.out.println(money);
     }
 
     public static void printExpenseDetails(Expense e) {
