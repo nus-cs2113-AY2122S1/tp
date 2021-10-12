@@ -24,7 +24,9 @@ public class DoneCommand extends Command {
         if (task.isDone()) {
             throw new DukeException(Message.INFO_TASK_COMPLETED);
         }
+        assert !task.isDone();
         taskList.markTaskAsDone(taskIndex);
+        assert task.isDone();
         ui.printDoneTask(taskList, task);
         storage.saveData(taskList, lessonList);
     }
