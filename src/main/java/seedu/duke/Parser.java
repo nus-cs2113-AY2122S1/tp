@@ -6,7 +6,7 @@ public class Parser {
 
     /**
      * Parses the user-entered command and additional information/flags.
-     * 
+     *
      * @param userInput the {@link String} containing the user input
      * @return whether the program should continue running after processing the given user input
      */
@@ -30,7 +30,11 @@ public class Parser {
 
         switch (inputCommand) {
         case "create":
-            executeCreate(userInputSplit[1]);
+            try {
+                executeCreate(userInputSplit[1]);
+            } catch (IndexOutOfBoundsException e) {
+                Ui.printCreateFormatError();
+            }
             break;
 
         case "edit":
@@ -54,7 +58,7 @@ public class Parser {
             break;
 
         case "list":
-            executeList(userInputSplit[1]);
+            executeList();
             break;
 
         case "expense":
@@ -78,9 +82,9 @@ public class Parser {
         Ui.printExpenseAddedSuccess();
     }
 
-    private static void executeList(String inputDescription) {
+    private static void executeList() {
         int index = 1;
-        if (inputDescription != null) {
+        if (!Storage.checkOpenTrip()) {
             for (Trip trip : Storage.listOfTrips) {
                 Ui.printTripsInList(trip, index);
                 index++;
@@ -121,18 +125,24 @@ public class Parser {
         try {
             int indexToGet = Integer.parseInt(inputDescription) - 1;
             Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
+            Ui.printOpenTripMessage(Storage.listOfTrips.get(indexToGet));
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             Ui.printSingleUnknownTripIndexError();
         }
     }
 
     private static void executeCreate(String inputDescription) {
-        String[] newTripInfo = inputDescription.split(" ", 5);
-        Trip newTrip = new Trip(newTripInfo);
-        Storage.listOfTrips.add(newTrip);
-        System.out.println("Your trip to " + newTrip.getLocation() + " on "
-                + newTrip.getDateOfTripString() + " has been successfully added!");
+        try {
+            String[] newTripInfo = inputDescription.split(" ", 5);
+            Trip newTrip = new Trip(newTripInfo);
+            Storage.listOfTrips.add(newTrip);
+            System.out.println("Your trip to " + newTrip.getLocation() + " on "
+                    + newTrip.getDateOfTripString() + " has been successfully added!");
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printCreateFormatError();
+        }
     }
+
 
     private static void executeEdit(String inputDescription) {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
@@ -152,6 +162,7 @@ public class Parser {
 
     /**
      * Obtains a list of Person objects from array of names of people.
+     *
      * @param userInput the input of the user
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */

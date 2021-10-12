@@ -51,12 +51,24 @@ public class Ui {
         printMoney(expense.getAmountSpent());
     }
 
+    public static void printOpenTripMessage(Trip trip) {
+        System.out.println("You have opened the following trip: "
+                + System.lineSeparator()
+                + trip.getLocation() + " | " + trip.getDateOfTripString());
+    }
+
     public static void printTripsInList(Trip trip, int index) {
         System.out.println(index + ". " + trip.getLocation() + " | " + trip.getDateOfTripString());
     }
 
+    public static void printCreateFormatError() {
+        System.out.println("Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "create [place] [date] [exchange rate] [budget] [people].");
+    }
+
     public static void printBudgetFormatError() {
-        System.out.print("Please re-enter your budget as a decimal number (e.g. 1.32): ");
+        System.out.print("Please re-enter your budget as a decimal number (e.g. 2000.00): ");
     }
 
     public static void printExchangeRateFormatError() {
