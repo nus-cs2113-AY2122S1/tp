@@ -14,7 +14,7 @@ public class Member {
     protected int phoneNumber;
 
     /**
-     * Constructor for any type of member
+     * Constructor for any type of member.
      *
      * @param name              Name of member
      * @param studentNumber     Student number of member
@@ -30,8 +30,25 @@ public class Member {
     }
 
     public Member() {
+
     }
-    public Member(Member member){
+
+    public Member(String name, String studentNumber, String gender, String phoneNumber) {
+        setName(name);
+        setStudentNumber(studentNumber);
+        setAsActiveMember();
+        setGender(gender);
+        setPhoneNumber(phoneNumber);
+    }
+
+    public Member(String name, String studentNumber) {
+        setName(name);
+        setStudentNumber(studentNumber);
+        setAsActiveMember();
+    }
+
+
+    public Member(Member member) {
         setName(member.name);
         setStudentNumber(member.studentNumber);
         setAsActiveMember();
@@ -51,6 +68,10 @@ public class Member {
         this.gender = gender;
     }
 
+    public void setGender(String gender) {
+        this.gender = gender.charAt(0);
+    }
+
     public boolean checkIfActive() {
         return isActive;
     }
@@ -67,8 +88,20 @@ public class Member {
         this.phoneNumber = phoneNumber;
     }
 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = Integer.parseInt(phoneNumber);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getStudentNumber() {
+        return studentNumber;
+    }
+
     /**
-     * Formats description of member to be displayed to user
+     * Formats description of member to be displayed to user.
      *
      * @return Formatted string of a member
      */

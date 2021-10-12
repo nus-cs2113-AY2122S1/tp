@@ -1,4 +1,5 @@
 package seedu.duke.training;
+
 public class TrainingSchedule {
 
     protected String trainingName;
@@ -8,7 +9,7 @@ public class TrainingSchedule {
     Boolean completed = false;
 
     /**
-     * Constructor for any type of TrainingSchedule
+     * Constructor for any type of TrainingSchedule.
      * @param name          Name of event
      * @param venue         Venue of event
      * @param time          Time of event
@@ -52,7 +53,7 @@ public class TrainingSchedule {
     }
 
     /**
-     * Formats description of training schedule to user
+     * Formats description of training schedule to user.
      *
      * @return Formatted string of training schedule
      */

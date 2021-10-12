@@ -1,1 +1,2 @@
-James Gosling
+add /m /n Glenn /s A0123456B /g M /p 98765432
+bye
