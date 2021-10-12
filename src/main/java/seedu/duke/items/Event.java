@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class Event extends Item {
 
+    private LocalDateTime dateTime;
     private String venue;
     private double budget;
 
@@ -13,6 +14,18 @@ public class Event extends Item {
         super("event", title, description, dateTime);
         this.venue = venue;
         this.budget = budget;
+    }
+
+    public LocalDateTime getDateValue() {
+        return dateTime;
+    }
+
+    public String getItemType() {
+        return "event";
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public void setVenue(String venue) {

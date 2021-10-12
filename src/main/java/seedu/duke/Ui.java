@@ -83,23 +83,44 @@ public class Ui {
         return HELP_MESSAGE;
     }
 
+    public static String getSelectedTaskMessage(Task task) {
+        return getLineBreak() + System.lineSeparator() + "Here are the details of the task:" + System.lineSeparator()
+                + getTask(task) + System.lineSeparator() + getLineBreak();
+    }
+
+    public static String getSelectedEventMessage(Event event) {
+        return getLineBreak() + System.lineSeparator() + "Here are the details of the event:" + System.lineSeparator()
+                + getEvent(event) + System.lineSeparator() + getLineBreak();
+    }
+
     public static void printList(ArrayList<Item> list) {
         AtomicInteger i = new AtomicInteger();
         list.forEach(item -> System.out.println(i.getAndIncrement() + 1 + ". " + item));
     }
 
-    public static void printEvent(Event item) {
-        System.out.println(item.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(item.getDateTime()) + System.lineSeparator()
-                + item.getDescription() + System.lineSeparator()
-                + item.getVenue() + System.lineSeparator()
-                + item.getBudget());
+
+    public static String getTask(Task task) {
+        return task.getTitle() + System.lineSeparator()
+                + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
+                + task.getDescription();
     }
 
-    public static void printTask(Task item) {
-        System.out.println(item.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(item.getDateTime()) + System.lineSeparator()
-                + item.getDescription());
+    public static String getEvent(Event event) {
+        return event.getTitle() + System.lineSeparator()
+                + Parser.convertDateTime(event.getDateValue()) + System.lineSeparator();
     }
 
+    public static void printTask(Task task) {
+        System.out.println(task.getTitle() + System.lineSeparator()
+                + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
+                + task.getDescription());
+    }
+
+    public static void printEvent(Event event) {
+        System.out.println(event.getTitle() + System.lineSeparator()
+                + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
+                + event.getDescription() + System.lineSeparator()
+                + event.getVenue() + System.lineSeparator()
+                + event.getBudget());
+    }
 }
