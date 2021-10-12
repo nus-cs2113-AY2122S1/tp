@@ -18,7 +18,6 @@ public class Parser {
             Storage.closeTrip();
             return true;
         }
-
         if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")){
             Ui.printNoTripError();
             return true;
