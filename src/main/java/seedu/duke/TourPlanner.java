@@ -26,7 +26,7 @@ public class TourPlanner {
                     break;
                 }
             } catch (NullPointerException | NumberFormatException e) {
-
+                System.out.println();
             } finally {
                 ui.showLine();
             }
