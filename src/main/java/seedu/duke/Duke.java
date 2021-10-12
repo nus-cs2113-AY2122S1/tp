@@ -2,7 +2,7 @@ package seedu.duke;
 
 import java.util.Scanner;
 
-public class Main {
+public class Duke {
 
     private static boolean isProgramRunning = true;
 
