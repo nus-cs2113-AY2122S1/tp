@@ -36,7 +36,7 @@ public class DispenseCommand extends Command {
             return;
         }
 
-        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines)) {
+        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines, CommandSyntax.DISPENSE_COMMAND)) {
             return;
         }
 
