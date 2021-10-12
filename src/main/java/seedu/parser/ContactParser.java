@@ -42,14 +42,15 @@ public abstract class ContactParser {
      * @throws InvalidFlagException If the flag given is not recognised
      */
     public void parseDetail(String[] contactDetails, String detail)
-            throws InvalidFlagException, MissingDetailException, ForbiddenDetailException {
+            throws InvalidFlagException, MissingDetailException, ForbiddenDetailException,
+            InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
+            InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException {
         String[] destructuredDetails = detail.split(" ", NUMBER_OF_DETAILS);
         //for commands that specify a flag, but do not specify any argument for that flag
         //IndexOutOfBoundsException should not be thrown as the first if case will be true
         if (destructuredDetails.length == 1 || destructuredDetails[1].isBlank()) {
             throw new MissingDetailException();
         }
-        int indexToStore;
         assert destructuredDetails.length == NUMBER_OF_DETAILS;
         String flag = destructuredDetails[FLAG_INDEX_IN_DETAILS];
         String detailToStore = destructuredDetails[DETAIL_INDEX_IN_DETAILS].trim();
