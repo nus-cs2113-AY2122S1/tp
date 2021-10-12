@@ -26,11 +26,11 @@ public class DeleteTaskCommand extends DeleteCommand {
             throws DukeException, IOException {
         if (isDeleteAll) {
             taskList.clearTaskList();
-            ui.printDeletedAllTasks();
+            ui.printMessage("All your tasks have been successfully removed.");
         } else {
             Task deletedTask = taskList.getTask(taskIndex);
             taskList.deleteTask(taskIndex);
-            ui.printDeletedTask(deletedTask, taskList.getSize());
+            ui.printTaskDeleted(deletedTask, taskList.getSize());
         }
         storage.saveData(taskList, lessonList);
     }

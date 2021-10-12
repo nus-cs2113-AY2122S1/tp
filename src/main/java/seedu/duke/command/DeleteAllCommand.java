@@ -14,7 +14,7 @@ public class DeleteAllCommand extends DeleteCommand {
             throws DukeException, IOException {
         taskList.clearTaskList();
         lessonList.clearLessonList();
-        ui.printDeletedAll();
         storage.saveData(taskList, lessonList);
+        ui.printMessage("All your tasks and lessons have been successfully removed.");
     }
 }
