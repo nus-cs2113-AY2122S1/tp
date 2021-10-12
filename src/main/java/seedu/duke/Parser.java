@@ -19,8 +19,8 @@ public class Parser {
             Storage.closeTrip();
             return true;
         }
-        if (!checkValidCommand(inputCommand) ||
-                (userInputSplit.length == 1 && !inputCommand.equals("quit"))) {
+        if (!checkValidCommand(inputCommand)
+                || (userInputSplit.length == 1 && !inputCommand.equals("quit"))) {
             Ui.printUnknownCommandError();
             return true;
         } else if (!inputCommand.equals("quit")) {
