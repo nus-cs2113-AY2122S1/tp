@@ -10,6 +10,7 @@ public class ListCommand implements Command {
 
     private static final String LIST_EMPTY_MESSAGE = "Your inventory is empty!";
     private static final String LIST_MESSAGE = "Here is the list of the ingredients currently in inventory:\n" + "\t";
+    private static final String LIST_NEWLINE_INDENT = "\n" + "\t";
 
     @Override
     public String run() throws DukeException {
@@ -23,9 +24,14 @@ public class ListCommand implements Command {
 
         assert (IngredientList.getInstance().getInventoryStock() > 0);
 
-        for (i = 0; i < IngredientList.getInstance().getInventoryStock(); i++) {
-            resultMsg += LIST_MESSAGE + (i + 1) + ". "
+        int currentStock = IngredientList.getInstance().getInventoryStock();
+        resultMsg = LIST_MESSAGE;
+        for (i = 0; i < currentStock; i++) {
+            resultMsg +=  (i + 1) + ". "
                     + IngredientList.getInstance().getIngredientInfo(i + 1);
+            if (i < currentStock - 1) {
+                resultMsg += LIST_NEWLINE_INDENT;
+            }
         }
 
         return resultMsg;

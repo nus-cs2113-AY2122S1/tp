@@ -33,6 +33,4 @@ public class UI {
         System.out.print(DIVIDER + commandOutput + "\n" + DIVIDER);
     }
 
-    public void printErrorMessage(String message) {
-    }
 }
