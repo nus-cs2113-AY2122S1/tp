@@ -6,9 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import terminus.content.Link;
+import terminus.content.Note;
+import terminus.exception.InvalidTimeFormatException;
 
 public class CommonFormatTest {
 
@@ -124,6 +129,41 @@ public class CommonFormatTest {
     @Test
     void isArrayEmpty_nullArraylist_exceptionThrown() {
         assertThrows(AssertionError.class, () -> CommonFormat.isArrayEmpty(null));
+    }
+
+    @Test
+    void getClassName_success() {
+        String result = CommonFormat.getClassName(Note.class);
+        assertEquals("Note", result);
+        result = CommonFormat.getClassName(Link.class);
+        assertEquals("Link", result);
+    }
+
+    @Test
+    void getClassName_invalidInput() {
+        String result = CommonFormat.getClassName("test1");
+        assertEquals("test1", result);
+        result = CommonFormat.getClassName("test1.2");
+        assertEquals("2", result);
+    }
+
+    @Test
+    void getClassName_nullInput_exceptionThrown() {
+        assertThrows(AssertionError.class, () -> CommonFormat.getClassName(null));
+    }
+
+    @Test
+    void convertToLocalTime_success() throws InvalidTimeFormatException {
+        String input = "11:56";
+        assertTrue(CommonFormat.convertToLocalTime(input) instanceof LocalTime);
+    }
+
+    @Test
+    void convertToLocalTime_invalidInput_exceptionThrown() {
+        assertThrows(InvalidTimeFormatException.class, () -> CommonFormat.convertToLocalTime("test"));
+        assertThrows(InvalidTimeFormatException.class, () -> CommonFormat.convertToLocalTime("25:10"));
+        assertThrows(InvalidTimeFormatException.class, () -> CommonFormat.convertToLocalTime("11-10"));
+        assertThrows(AssertionError.class, () -> CommonFormat.convertToLocalTime(null));
     }
 
 }

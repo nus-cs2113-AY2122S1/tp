@@ -1,5 +1,6 @@
 package terminus.common;
 
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidTimeFormatException;
@@ -57,6 +58,7 @@ public class CommonFormat {
     public static boolean isArrayEmpty(ArrayList<String> argArray) {
         if (argArray == null) {
             assert false;
+            return true;
         }
         if (argArray.isEmpty()) {
             return true;
@@ -64,6 +66,7 @@ public class CommonFormat {
         for (String s : argArray) {
             if (s == null) {
                 assert false;
+                return true;
             }
             if (s.isBlank()) {
                 return true;
@@ -80,15 +83,25 @@ public class CommonFormat {
      * @throws InvalidTimeFormatException Exception for when string does not follow the proper time format
      */
     public static LocalTime convertToLocalTime(String startTime) throws InvalidTimeFormatException {
-        if (startTime.length() != 5 || startTime.indexOf(":") != 2) {
+        if (startTime == null) {
+            assert false;
+            return null;
+        }
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(LOCAL_TIME_FORMAT);
+            return LocalTime.parse(startTime, format);
+        } catch (DateTimeParseException e) {
             throw new InvalidTimeFormatException(
                     String.format(Messages.ERROR_MESSAGE_INVALID_TIME_FORMAT, LOCAL_TIME_FORMAT));
         }
-        DateTimeFormatter format = DateTimeFormatter.ofPattern(LOCAL_TIME_FORMAT);
-        return LocalTime.parse(startTime, format);
+
     }
 
     public static <T> String getClassName(T type) {
+        if (type == null) {
+            assert false;
+            return null;
+        }
         String result = type.toString();
         String[] string = result.split("\\.");
         if (string.length > 0) {
