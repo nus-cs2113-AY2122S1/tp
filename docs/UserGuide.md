@@ -62,12 +62,16 @@ Medication added: vicodin
 ```
 
 ### Deleting a medication stock: `delete`
+Deletes medication from the inventory by specifying stock Id
 
-Format:
+Format: `delete i/STOCK_ID`
 
-Example:
+Example: `delete i/3`
 
 Expected output:
+```
+Medication deleted: Stock_Id=3
+```
 
 ### Updating medication stock information: `update`
 
