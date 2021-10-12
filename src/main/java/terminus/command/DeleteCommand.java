@@ -1,6 +1,5 @@
 package terminus.command;
 
-import java.util.Locale;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
@@ -10,11 +9,21 @@ import terminus.exception.InvalidArgumentException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
+/**
+ * DeleteCommand generic class which will manage the deletion of Content specified by user command.
+ *
+ * @param <T> Content object type.
+ */
 public class DeleteCommand<T extends Content> extends Command {
 
     private Class<T> type;
     private int itemNumber;
 
+    /**
+     * Creates a DeleteCommand object with referenced to the provided class type.
+     *
+     * @param type Content object type.
+     */
     public DeleteCommand(Class<T> type) {
         this.type = type;
     }
@@ -29,6 +38,13 @@ public class DeleteCommand<T extends Content> extends Command {
         return Messages.MESSAGE_COMMAND_DELETE;
     }
 
+    /**
+     * Parses the arguments to the DeleteCommand object.
+     * The arguments are attributes to identify a Content object in an ArrayList.
+     *
+     * @param arguments The string arguments to be parsed in to the respective fields.
+     * @throws InvalidArgumentException when argument provided is empty, non-numeric or less than 1.
+     */
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
         if (arguments == null || arguments.isBlank()) {
@@ -47,6 +63,15 @@ public class DeleteCommand<T extends Content> extends Command {
         }
     }
 
+    /**
+     * Executes the delete command.
+     * Prints the relevant response to the Ui and the specified Content object will be removed from the arraylist.
+     *
+     * @param ui The Ui object to send messages to the users.
+     * @param module The NusModule contain the ContentManager of all notes and schedules.
+     * @return CommandResult to indicate the success and additional information about the execution.
+     * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.
+     */
     @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidArgumentException {
         ContentManager<T> contentManager = module.getContentManager(type);
@@ -54,7 +79,8 @@ public class DeleteCommand<T extends Content> extends Command {
         TerminusLogger.info("Executing Delete Command");
         String deletedContentName = contentManager.deleteContent(itemNumber);
         assert deletedContentName != null && !deletedContentName.isBlank();
-
+        TerminusLogger.info(
+                String.format("%s(%s) has been deleted", CommonFormat.getClassName(type), deletedContentName));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,
                 CommonFormat.getClassName(type).toLowerCase(), deletedContentName));
         return new CommandResult(true);

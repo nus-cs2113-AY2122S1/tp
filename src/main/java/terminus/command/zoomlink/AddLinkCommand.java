@@ -16,6 +16,7 @@ import terminus.ui.Ui;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+
 import static terminus.common.CommonFormat.isValidDay;
 import static terminus.common.CommonFormat.isValidUrl;
 
@@ -31,10 +32,6 @@ public class AddLinkCommand extends Command {
 
     private static final int ADD_SCHEDULE_ARGUMENTS = 4;
 
-    public AddLinkCommand() {
-
-    }
-
     @Override
     public String getFormat() {
         return CommonFormat.COMMAND_ADD_SCHEDULE_FORMAT;
@@ -46,19 +43,19 @@ public class AddLinkCommand extends Command {
     }
 
     /**
-     * Parses the arguments in an AddLinkCommand object.
-     * The arguments' description, day, start-time, and link are attributes for a new Link object.
+     * Parses the arguments to the AddLinkCommand object.
+     * The arguments are attributes for a new Link object.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
-     * @throws InvalidArgumentException Exception for when argument parsing fails
-     * @throws InvalidArgumentException Exception for when any argument is invalid
+     * @throws InvalidArgumentException when arguments are empty or missing.
      */
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
-        // Perform required checks with regex
+
         if (arguments == null || arguments.isBlank()) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
+        // Regex to find arguments
         ArrayList<String> argArray = CommonFormat.findArguments(arguments);
         if (!isValidScheduleArguments(argArray)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
@@ -90,11 +87,9 @@ public class AddLinkCommand extends Command {
      * @param ui The Ui object to send messages to the users.
      * @param module The NusModule contain the list of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
-     * @throws InvalidCommandException Exception for when the user command is not found
-     * @throws InvalidArgumentException Exception for when the argument parsing fails
      */
     @Override
-    public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException, InvalidArgumentException {
+    public CommandResult execute(Ui ui, NusModule module) {
         ContentManager contentManager = module.getContentManager(Link.class);
         assert contentManager != null;
 
@@ -106,7 +101,7 @@ public class AddLinkCommand extends Command {
     /**
      * Checks if arguments are non-empty and valid.
      *
-     * @param argArray The command arguments in an array list
+     * @param argArray The command arguments in an array list.
      * @return True if the appropriate number of arguments are present, false otherwise.
      */
     private boolean isValidScheduleArguments(ArrayList<String> argArray) {

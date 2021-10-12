@@ -22,10 +22,6 @@ public class AddNoteCommand extends Command {
 
     private static final int ADD_NOTE_ARGUMENTS = 2;
 
-    public AddNoteCommand() {
-
-    }
-
     @Override
     public String getFormat() {
         return CommonFormat.COMMAND_ADD_NOTE_FORMAT;
@@ -37,11 +33,11 @@ public class AddNoteCommand extends Command {
     }
 
     /**
-     * Parses the arguments into an AddNoteCommand object.
-     * The arguments' name and data are attributes for a new Note object.
+     * Parses the arguments to the AddNoteCommand object.
+     * The arguments are attributes for a new Note object.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
-     * @throws InvalidArgumentException Exception for when argument parsing fails.
+     * @throws InvalidArgumentException when arguments are empty or missing.
      */
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
