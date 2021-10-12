@@ -21,6 +21,6 @@ public abstract class Entry {
     }
 
     public String toString() {
-        return description + "- " + Double.toString(value);
+        return description + " - " + Double.toString(value);
     }
 }
