@@ -1,25 +1,29 @@
 package seedu.command;
 
+import seedu.exceptions.IntegerException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.module.Semester;
 import seedu.online.NusMods;
 import seedu.timetable.Timetable;
-import seedu.timetable.TimetableLesson;
+import seedu.ui.AddUI;
 import seedu.ui.TextUi;
-
+import seedu.exceptions.AddException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+//Indicate time clashes with current timetable in milestone v2.0 when adding lesson
 public class AddCommand extends Command {
-    private static final int BALANCE_ARRAY = 1;
     private static final int SERIAL_STARTING = 1;
     private static final String LECTURE = "Lecture";
     private static final String TUTORIAL = "Tutorial";
     private static final String LAB = "Laboratory";
+    private static final String SPACE = " ";
+    private static final String DIV = "|";
     private final String moduleCode;
     private final int semester;
     private final Timetable timetable;
+    public AddUI addUI = new AddUI();
 
     public AddCommand(String moduleCode, Timetable timetable) {
         this.moduleCode = moduleCode;
@@ -27,58 +31,37 @@ public class AddCommand extends Command {
         this.timetable = timetable;
     }
 
-    public void execute() {
-        TextUi.printAddMessage(moduleCode);
-        Module module = new Module(moduleCode);
+    public void execute() throws AddException, IntegerException {
+        ArrayList<Lesson> lecture;
+        ArrayList<Lesson> tutorial;
+        ArrayList<Lesson> laboratory;
+        Module module;
         try {
             module = NusMods.fetchModOnline(moduleCode);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new AddException("Module Code does not exist");
         }
+        TextUi.printAddMessage(moduleCode);
 
         Semester semesterData = module.getSemester(semester);
-        if (semesterData.isLectureExist()) {
-            ArrayList<Lesson> lecture = selectLesson(semesterData, LECTURE);
-            addToTimetable(lecture, module);
+        lecture = getLessonDetails(semesterData.getTimetable(), LECTURE);
+        tutorial = getLessonDetails(semesterData.getTimetable(), TUTORIAL);
+        laboratory = getLessonDetails(semesterData.getTimetable(), LAB);
+
+        try {
+            addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
+        } catch (IntegerException e) {
+            throw new IntegerException("Invalid Integer");
         }
-        if (semesterData.isTutorialExist()) {
-            ArrayList<Lesson> tutorial = selectLesson(semesterData, TUTORIAL);
-            addToTimetable(tutorial, module);
-        }
-        if (semesterData.isLabExist()) {
-            ArrayList<Lesson> lab = selectLesson(semesterData, LAB);
-            addToTimetable(lab, module);
-        }
-        TextUi.printLessonAdded();
     }
 
-    public ArrayList<Lesson> selectLesson(Semester semesterData, String lessonType) {
-        ArrayList<Lesson> lessonList = new ArrayList<>();
-        ArrayList<Lesson> confirmList = new ArrayList<>();
-        int serial = SERIAL_STARTING;
-        TextUi.printLessonMessage(lessonType);
-        for (Lesson lesson : semesterData.getTimetable()) {
+    public ArrayList<Lesson> getLessonDetails(ArrayList<Lesson> lessons, String lessonType) {
+        ArrayList<Lesson> completeList = new ArrayList<>();
+        for (Lesson lesson : lessons) {
             if (lesson.getLessonType().equals(lessonType)) {
-                TextUi.printLessonInfo(serial, lesson);
-                lessonList.add(lesson);
-                serial++;
+                completeList.add(lesson);
             }
         }
-
-        String select = TextUi.getCommand();
-        int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
-        String classNumber = lessonList.get(indexOfLesson).getClassNo();
-        for (Lesson lesson : lessonList) {
-            if (lesson.getClassNo().equals(classNumber)) {
-                confirmList.add(lesson);
-            }
-        }
-        return confirmList;
-    }
-
-    public void addToTimetable(ArrayList<Lesson> lessonList, Module module) {
-        for (Lesson lesson : lessonList) {
-            timetable.addLesson(new TimetableLesson(module, semester, lesson));
-        }
+        return completeList;
     }
 }
