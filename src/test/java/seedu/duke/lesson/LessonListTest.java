@@ -34,7 +34,7 @@ public class LessonListTest {
             lessonList.deleteLesson(0);
             assertEquals(0, lessonList.getSize());
         } catch (DukeException e) {
-            fail();
+            fail(); // the program should never reach this line
         }
     }
 

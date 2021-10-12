@@ -22,15 +22,15 @@ public class DeleteTaskCommand extends DeleteCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage)
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
             throws DukeException, IOException {
         if (isDeleteAll) {
-            taskList.clearTaskList();
-            ui.printDeletedAllTasks();
+            taskList.deleteAllTasks();
+            ui.printMessage("All your tasks have been successfully removed.");
         } else {
             Task deletedTask = taskList.getTask(taskIndex);
             taskList.deleteTask(taskIndex);
-            ui.printDeletedTask(deletedTask, taskList.getSize());
+            ui.printTaskDeleted(deletedTask, taskList.getSize());
         }
         storage.saveData(taskList, lessonList);
     }

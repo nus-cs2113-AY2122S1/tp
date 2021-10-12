@@ -1,22 +1,14 @@
 package seedu.duke.task;
 
 import seedu.duke.exception.DukeException;
+import seedu.duke.ui.Ui;
 
 public class Task {
-    // TODO: Implement serialization/deserialization
-
-    private String title;
-    private String dayOfTheWeek;
-    private String information = "";
+    private final String title;
+    private final String dayOfTheWeek;
+    private final String information;
     private boolean isDone;
 
-    /**
-     * Constructor for the Task with the parameter "information" given.
-     *
-     * @param title title of the task
-     * @param dayOfTheWeek day of the week the task is to be done
-     * @param information extra information on the task
-     */
     public Task(String title, String dayOfTheWeek, String information) {
         this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;
@@ -32,17 +24,12 @@ public class Task {
         return dayOfTheWeek;
     }
 
-    /**
-     * Returns the symbol representing the done status of the task.
-     *
-     * @return the symbol representing whether the task is done
-     */
-    public String getDoneSymbol() {
-        return isDone ? "[X]" : "[ ]";
-    }
-
     public String getInformation() {
         return information;
+    }
+
+    public String getStatusIcon() {
+        return isDone ? "[X]" : "[ ]";
     }
 
     public void setDone() {
@@ -53,28 +40,21 @@ public class Task {
         return isDone;
     }
 
-    @Override
-    public String toString() {
-        // TODO: Improve formatting
-        return "[T]" + getDoneSymbol() + " Title: " + title
-                + (information.isBlank() ? "" : " (Info: " + information + ")");
-    }
-
     /**
-     * Serializes the task into its file data storage format.
+     * Serializes the task data into the correct format for storage file.
      *
-     * @return the serialized task
+     * @return serialized task data
      */
     public String serialize() {
         return "T" + " | " + (isDone ? "1" : "0") + " | " + title + " | " + dayOfTheWeek + " | " + information;
     }
 
     /**
-     * Deserializes the task from a line in the file data storage into a task object.
+     * Deserializes the task data from the storage file.
      *
-     * @param data the line of the storage representing a task
-     * @return the deserialized task object
-     * @throws DukeException when the line is not deserializable into a task
+     * @param data a line of string representing the serialized data
+     * @return deserialized task data
+     * @throws DukeException if the data is in invalid format
      */
     public static Task deserialize(String data) throws DukeException {
         try {
@@ -88,5 +68,14 @@ public class Task {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Data storage file corrupted..");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + getStatusIcon()
+                + " Title: " + title + " (Day: " + dayOfTheWeek + ")"
+                + (information.isBlank()
+                        ? ""
+                        : System.lineSeparator() + Ui.PADDING + "          Info: " + information);
     }
 }

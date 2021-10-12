@@ -95,7 +95,7 @@ public class Parser {
         String title = params[0].strip();
         String dayOfTheWeek = params[1].strip();
         if (!is(dayOfTheWeek)) {
-            throw new DukeException(dayOfTheWeek + Message.ERROR_INVALID_DAY_OF_WEEK);
+            throw new DukeException(dayOfTheWeek + Message.ERROR_INVALID_DAY);
         }
 
         switch (params.length) {
@@ -103,7 +103,7 @@ public class Parser {
             return new AddTaskCommand(title, dayOfTheWeek, "");
         case 3:
             if (userResponse.indexOf(" -d ") > userResponse.indexOf(" -i ")) {
-                throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
+                throw new DukeException(Message.ERROR_INVALID_FLAG_SEQUENCE);
             }
             String information = params[2].strip();
             return new AddTaskCommand(title, dayOfTheWeek, information);
@@ -126,13 +126,15 @@ public class Parser {
         }
 
         if (!hasCorrectLessonFlagSequence(userResponse)) {
-            throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
+            throw new DukeException(Message.ERROR_INVALID_FLAG_SEQUENCE);
         }
+
         String title = params[0].strip();
         String dayOfTheWeek = params[1].strip();
         if (!is(dayOfTheWeek)) {
-            throw new DukeException(dayOfTheWeek + Message.ERROR_INVALID_DAY_OF_WEEK);
+            throw new DukeException(dayOfTheWeek + Message.ERROR_INVALID_DAY);
         }
+
         String startTIme = params[2].strip();       // TODO: Validate correctness with time library
         String endTime = params[3].strip();         // TODO: Validate correctness with time library
         return new AddLessonCommand(title, dayOfTheWeek, startTIme, endTime);
@@ -176,10 +178,10 @@ public class Parser {
         }
 
         try {
-            int taskIndex = Integer.parseInt(userResponse) - 1; // change user index to match internal 0 indexing
+            int taskIndex = Integer.parseInt(userResponse) - 1; // convert to 0-indexing
             return new DeleteTaskCommand(taskIndex);
         } catch (NumberFormatException e) {
-            throw new DukeException(Message.ERROR_NOT_NUMBER);
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -196,10 +198,10 @@ public class Parser {
         }
 
         try {
-            int lessonIndex = Integer.parseInt(userResponse) - 1; // change user index to match internal 0 indexing
+            int lessonIndex = Integer.parseInt(userResponse) - 1;   // convert to 0-indexing
             return new DeleteLessonCommand(lessonIndex);
         } catch (NumberFormatException e) {
-            throw new DukeException(Message.ERROR_NOT_NUMBER);
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -218,13 +220,10 @@ public class Parser {
         // TODO: Implement batch marking
         String[] params = userResponse.split(" ");
         try {
-            //get 1-indexed task number
-            int taskNumber = Integer.parseInt(params[1]);
-            //convert 1-index (1, 2, 3, ...) to 0-index (0, 1, 2, ...)
-            int taskIndex = taskNumber - 1;
+            int taskIndex = Integer.parseInt(params[1]) - 1;    // convert to 0-indexing
             return new DoneCommand(taskIndex);
         } catch (NumberFormatException e) {
-            throw new DukeException(Message.ERROR_NOT_NUMBER);
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -349,8 +348,10 @@ public class Parser {
     private static Command parseListTaskCommand(String period) throws DukeException {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
+            // list all tasks
             return new ListTaskCommand();
         } else if (is(period)) {
+            // list tasks with the specified period
             return new ListTaskCommand(period);
         }
 
@@ -367,8 +368,10 @@ public class Parser {
     private static Command parseListLessonCommand(String period) throws DukeException {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
+            // list all lessons
             return new ListLessonCommand();
         } else if (is(period)) {
+            // list lessons with the specified period
             return new ListLessonCommand(period);
         }
 
@@ -385,8 +388,10 @@ public class Parser {
     private static Command parseListAllCommand(String period) throws DukeException {
         // TODO: Validate today, tomorrow
         if (period.isBlank()) {
+            // list all tasks and lessons
             return new ListAllCommand();
         } else if (is(period)) {
+            // list tasks and lessons with the specified period
             return new ListAllCommand(period);
         }
 
