@@ -49,12 +49,6 @@ public class CommandParserTest {
     }
 
     @Test
-    public void parse_Search_returnsInvalidCommand() {
-        final String[] searchInputs = {"search-", " search -", "SEARCH-", " searRCH -"};
-        parseMultipleInputsForCommand(new InvalidCommand(), searchInputs);
-    }
-
-    @Test
     public void parse_Show_returnsShowCommand() {
         final String[] showInputs = {"show", " show ", "SHOW", " ShoW"};
         parseMultipleInputsForCommand(new ShowCommand(""), showInputs);

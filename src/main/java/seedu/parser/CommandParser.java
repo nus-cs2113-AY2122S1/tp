@@ -1,6 +1,5 @@
 package seedu.parser;
 
-
 import seedu.command.AddCommand;
 import seedu.command.ClearCommand;
 import seedu.command.Command;
@@ -74,7 +73,7 @@ public class CommandParser {
     private Command parseSearchCommandWithFlag(String text) {
         assert text.contains(FLAG) : "String should contain flag";
         int firstFlagPos = text.indexOf(FLAG);
-        String searchTerm = text.substring(SEARCH_LENGTH, firstFlagPos - 1).trim();
+        String searchTerm = text.substring(SEARCH_LENGTH, firstFlagPos).trim();
         String[] flags = text.substring(firstFlagPos).split(FLAG);
         SearchFlags searchFlags = FlagParser.parseSearchFlags(flags);
         return new SearchCommand(searchTerm, searchFlags);
