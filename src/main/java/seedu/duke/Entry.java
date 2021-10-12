@@ -64,6 +64,9 @@ public class Entry {
         case EDIT_TRAINING_KEYWORD:
             Parser.editTraining(trainings, entry);
             break;
+        case EDIT_MEMBER_KEYWORD:
+            Parser.editMember(members, entry);
+            break;
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();
             break;
