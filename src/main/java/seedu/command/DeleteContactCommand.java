@@ -3,6 +3,7 @@ package seedu.command;
 import seedu.contact.Contact;
 import seedu.parser.FailedCommandType;
 import seedu.ui.TextUi;
+import seedu.ui.ExceptionTextUi;
 import seedu.command.FailedCommand;
 
 public class DeleteContactCommand extends Command {
@@ -22,7 +23,7 @@ public class DeleteContactCommand extends Command {
             this.contactList.deleteContact(deletedIndex);
             TextUi.deleteContactMessage(deletedContact.getName(), contactList.getListSize());
         } catch (IndexOutOfBoundsException e) {
-            TextUi.numOutOfRangeMessage(contactList.getListSize());
+            ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());
         }
     }
 }
