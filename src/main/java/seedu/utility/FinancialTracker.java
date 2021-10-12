@@ -29,17 +29,13 @@ public class FinancialTracker {
     public Expense removeExpense(int expenseIndex) throws ExpenseEntryNotFoundException {
         try {
             return expenses.remove(expenseIndex - 1);
-        } catch (Exception e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new ExpenseEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
         }
     }
 
     public Income removeIncome(int incomeIndex) throws IncomeEntryNotFoundException {
-        try {
-            return incomes.remove(incomeIndex - 1);
-        } catch (Exception e) {
-            throw new IncomeEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
-        }
+        return null;
     }
 
     public ArrayList<Expense> listExpenses() {
