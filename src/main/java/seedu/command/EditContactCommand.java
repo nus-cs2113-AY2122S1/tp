@@ -1,7 +1,9 @@
 package seedu.command;
 
 import seedu.contact.Contact;
+import seedu.exception.InvalidFlagException;
 import seedu.ui.TextUi;
+import seedu.ui.ExceptionTextUi;
 
 public class EditContactCommand extends Command {
     String[] contactDetails;
@@ -16,8 +18,8 @@ public class EditContactCommand extends Command {
         try {
             contactList.editContact(contactDetails, contactIndex);
             TextUi.editContactMessage(contactList.getContactAtIndex(contactIndex).getName());
-        } catch (IndexOutOfBoundsException e) {
-            TextUi.invalidIndexMessage();
+        } catch (IndexOutOfBoundsException | InvalidFlagException e) {
+            ExceptionTextUi.invalidIndexMessage();
         }
     }
 }

@@ -4,6 +4,7 @@ import seedu.contact.Contact;
 import seedu.parser.FailedCommandType;
 import seedu.parser.IndexParser;
 import seedu.ui.TextUi;
+import seedu.ui.ExceptionTextUi;
 import seedu.command.FailedCommand;
 
 public class DeleteContactCommand extends Command {
@@ -36,7 +37,7 @@ public class DeleteContactCommand extends Command {
             // Index is within range, insert assert here
             deleteOnConfirmation(deletedContact);
         } catch (IndexOutOfBoundsException e) {
-            TextUi.numOutOfRangeMessage(contactList.getListSize());
+            ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());
         }
     }
 }

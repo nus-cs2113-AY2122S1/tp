@@ -1,5 +1,7 @@
 package seedu.contact;
 
+import seedu.exception.InvalidFlagException;
+
 import java.util.ArrayList;
 
 public class ContactList {
@@ -20,7 +22,7 @@ public class ContactList {
         contacts.add(contact);
     }
 
-    public void editContact(String[] contactDetails, int contactIndex) {
+    public void editContact(String[] contactDetails, int contactIndex) throws InvalidFlagException {
         for (int i = 0; i < contactDetails.length; i++) {
             if (contactDetails[i] != null) {
                 switch (i) {
@@ -39,12 +41,13 @@ public class ContactList {
                 case TWITTER_INDEX:
                     contacts.get(contactIndex).setTwitter(contactDetails[i]);
                     break;
-                case EMAIL_INDEX:_INDEX:
+                case EMAIL_INDEX:
                     contacts.get(contactIndex).setEmail(contactDetails[i]);
                     break;
                 default:
-                    System.out.println("Index error has occurred.");
-                    break;
+                    //control should never reach here
+                    assert false;
+                    throw new InvalidFlagException();
                 }
             }
         }

@@ -2,6 +2,7 @@ package seedu.command;
 
 import seedu.contact.Contact;
 import seedu.ui.TextUi;
+import seedu.ui.ExceptionTextUi;
 
 public class ViewCommand extends Command {
     private final int index;
@@ -19,7 +20,7 @@ public class ViewCommand extends Command {
             Contact viewingContact = contactList.getContactAtIndex(index);
             TextUi.viewContactMessage(viewingContact, index);
         } catch (IndexOutOfBoundsException e) {
-            TextUi.numOutOfRangeMessage(contactList.getListSize());
+            ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());
         }
     }
 }
