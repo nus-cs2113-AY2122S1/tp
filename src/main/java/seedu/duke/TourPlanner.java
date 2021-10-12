@@ -25,11 +25,9 @@ public class TourPlanner {
                 if (command.contains("bye")) {
                     break;
                 }
-            }
-            catch (NullPointerException | NumberFormatException e) {
+            } catch (NullPointerException | NumberFormatException e) {
 
-            }
-            finally {
+            } finally {
                 ui.showLine();
             }
         }
