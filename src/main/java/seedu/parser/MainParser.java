@@ -16,14 +16,16 @@ import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingNameException;
 
+import javax.swing.text.View;
+
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 
 public class MainParser {
     private static final String ADD_CONTACT_COMD = "add";
     private static final String EDIT_CONTACT_COMD = "edit";
     private static final String DELETE_CONTACT_COMD = "rm";
+    private static final String VIEW_CONTACT_COMD = "view";
     private static final String EXIT_COMD = "exit";
-    private static final String VIEW_COMD = "view";
     private static final String LIST_COMD = "list";
 
     private static final int COMD_WORD_INDEX = 0;
@@ -47,11 +49,11 @@ public class MainParser {
         case DELETE_CONTACT_COMD:
             command = parseDeleteContact(userInput);
             break;
+        case VIEW_CONTACT_COMD:
+            command = parseViewContact(userInput);
+            break;
         case EXIT_COMD:
             command = new ExitCommand();
-            break;
-        case VIEW_COMD:
-            command = parseViewContact(userInput);
             break;
         case LIST_COMD:
             command = new ListContactsCommand();
@@ -117,12 +119,11 @@ public class MainParser {
     }
 
     private Command parseViewContact(String userInput) {
-        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
-        if (destructuredInputs.length == 1) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
-        }
         try {
-            return new ViewCommand(Integer.parseInt(destructuredInputs[1].trim()));
+            int viewedIndex = IndexParser.getIndexFromInput(userInput, VIEW_CONTACT_COMD);
+            return new ViewCommand(viewedIndex);
+        } catch (MissingArgException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
