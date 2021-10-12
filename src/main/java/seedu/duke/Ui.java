@@ -39,6 +39,14 @@ public class Ui {
         System.out.println("Your expense has been added successfully");
     }
 
+    public static void printExpensesInList(Expense expense, int index) {
+        System.out.println(index + ". " + expense.getDescription() + " | Cost: " + expense.getAmountSpent());
+    }
+
+    public static void printTripsInList(Trip trip, int index) {
+        System.out.println(index + ". " + trip.getLocation() + " | " + trip.getDateOfTripString());
+    }
+
     public static void printBudgetFormatError() {
         System.out.print("Please re-enter your budget as a decimal number (e.g. 1.32): ");
     }
@@ -65,9 +73,17 @@ public class Ui {
         System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
     }
 
-    public static void printDeleteTripSuccessful(Trip tripToRemove) {
-        System.out.println("Your trip to " + tripToRemove.getLocation() + " on "
-                + tripToRemove.getDateOfTripString() + " has been successfully removed");
+    public static void printNoTripError(){
+        System.out.println("You have not created a trip yet. Please create a trip using the keyword 'create'.");
+    }
+
+    public static void printDeleteTripSuccessful(String tripLocation, String tripDate) {
+        System.out.println("Your trip to " + tripLocation + " on "
+                + tripDate + " has been successfully removed");
+    }
+
+    public static void printNoExpensesError(){
+        System.out.println("There are no expenses in your trip, please add an expense using the keyword 'expense'.");
     }
 
     public static void printNoOpenTripError() {

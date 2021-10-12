@@ -145,10 +145,6 @@ public class Trip {
         return listOfPersons;
     }
 
-    public ArrayList<String> getListOfPersonsNames() {
-        return listOfPersonsNames;
-    }
-
     public void setLocation(String location) {
         this.location = location;
     }
@@ -160,6 +156,10 @@ public class Trip {
 
     public void addExpense(Expense expense) {
         listOfExpenses.add(expense);
+    }
+
+    public ArrayList<Expense> getListOfExpenses(){
+        return listOfExpenses;
     }
 
     public void removeExpense(Expense expense) {

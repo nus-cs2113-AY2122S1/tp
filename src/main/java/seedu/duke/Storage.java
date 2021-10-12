@@ -11,7 +11,7 @@ public class Storage {
     private static Trip openTrip = null;
 
     private static final ArrayList<String> validCommands = new ArrayList<>(
-            Arrays.asList("create", "edit", "view", "open", "summary", "delete", "expense", "quit"));
+            Arrays.asList("create", "edit", "view", "open", "list", "summary", "delete", "expense", "quit"));
 
     public static Scanner getScanner() {
         return scanner;
@@ -28,6 +28,8 @@ public class Storage {
     public static Trip getOpenTrip() {
         if (openTrip == null) {
             Ui.printNoOpenTripError();
+            int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
+            setOpenTrip(listOfTrips.get(tripIndex));
         }
         return openTrip;
     }

@@ -18,10 +18,18 @@ public class Parser {
             Storage.closeTrip();
             return true;
         }
-        if (!checkValidCommand(inputCommand)) {
+
+        if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")){
+            Ui.printNoTripError();
+            return true;
+        } else if (!checkValidCommand(inputCommand)) {
             Ui.printUnknownCommandError();
             return true;
-        } else if (!(inputCommand.equals("view") || inputCommand.equals("summary") || inputCommand.equals("quit"))) {
+        } else if (inputCommand.equals("list") && userInputSplit.length > 1
+                && userInputSplit[1].equals("trips")){
+            inputDescription = userInputSplit[1];
+        } else if (!(inputCommand.equals("view") || inputCommand.equals("summary")
+                || inputCommand.equals("quit") || inputCommand.equals("list"))) {
             inputDescription = userInputSplit[1];
         }
 
@@ -72,7 +80,26 @@ public class Parser {
             break;
 
         case "delete":
-            deleteTrip(Storage.listOfTrips, inputDescription);
+            int tripIndex = Integer.parseInt(inputDescription) - 1;
+            deleteTrip(tripIndex);
+            break;
+
+        case "list":
+            int index = 1;
+            if (inputDescription != null) {
+                for (Trip trip : Storage.listOfTrips) {
+                    Ui.printTripsInList(trip, index);
+                    index++;
+                }
+            } else{
+                for (Expense expense : Storage.getOpenTrip().getListOfExpenses()) {
+                    Ui.printExpensesInList(expense, index);
+                    index++;
+                }
+                if (index == 1) {
+                    Ui.printNoExpensesError();
+                }
+            }
             break;
 
         case "expense":
@@ -162,12 +189,12 @@ public class Parser {
 
     }
 
-    private static void deleteTrip(ArrayList<Trip> listOfTrips, String s) {
+    private static void deleteTrip(int tripIndex) {
         try {
-            int indexToDelete = Integer.parseInt(s);
-            Trip tripToRemove = listOfTrips.get(indexToDelete - 1);
-            listOfTrips.remove(indexToDelete - 1);
-            Ui.printDeleteTripSuccessful(tripToRemove);
+            String tripLocation = Storage.listOfTrips.get(tripIndex).getLocation();
+            String tripDate = Storage.listOfTrips.get(tripIndex).getDateOfTripString();
+            Storage.listOfTrips.remove(tripIndex);
+            Ui.printDeleteTripSuccessful(tripLocation, tripDate);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             Ui.printUnknownTripIndexError();
         }
