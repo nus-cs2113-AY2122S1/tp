@@ -6,9 +6,9 @@ import java.util.Set;
 import terminus.command.ExitCommand;
 import terminus.command.Command;
 import terminus.command.HelpCommand;
+import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 
 public abstract class CommandParser {
@@ -37,13 +37,12 @@ public abstract class CommandParser {
      * @return The Command object to be executed
      * @throws InvalidCommandException    if there is no command or empty command
      * @throws InvalidArgumentException   Fails when arguments could not be parsed
-     * @throws InvalidTimeFormatException Fails when time format is invalid
      */
 
     public Command parseCommand(String command)
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+            throws InvalidCommandException, InvalidArgumentException {
         String[] commandLine = command.strip().split(SPACE_DELIMITER, 2);
-
+        TerminusLogger.info("Parsing Command: " + command);
         assert commandLine.length <= 2 && commandLine.length > 0;
 
         String cmdName = commandLine[0];
@@ -55,6 +54,7 @@ public abstract class CommandParser {
         if (commandLine.length > 1) {
             cmdData = commandLine[1];
         }
+        TerminusLogger.info("Parsing arguments.");
         currentCommand.parseArguments(cmdData);
         return currentCommand;
     }
