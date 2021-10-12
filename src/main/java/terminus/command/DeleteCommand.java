@@ -81,7 +81,7 @@ public class DeleteCommand<T extends Content> extends Command {
         String deletedContentName = contentManager.deleteContent(itemNumber);
         assert deletedContentName != null && !deletedContentName.isBlank();
         TerminusLogger.info(
-                String.format("%s(%s) has been deleted", CommonFormat.getClassName(type), deletedContentName));
+                String.format("%s(%s) has been deleted", CommonUtils.getClassName(type), deletedContentName));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,
                 CommonUtils.getClassName(type).toLowerCase(), deletedContentName));
         return new CommandResult(true);
