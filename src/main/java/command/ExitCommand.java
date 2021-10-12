@@ -11,7 +11,7 @@ import java.util.HashMap;
  */
 
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
