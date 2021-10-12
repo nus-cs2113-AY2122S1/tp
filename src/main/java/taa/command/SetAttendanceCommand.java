@@ -21,7 +21,8 @@ public class SetAttendanceCommand extends Command {
     private static final String KEY_ATTENDANCE_MARK = "attend";
     private static final String ATTENDANCE_MARK_PRESENT = "1";
     private static final String ATTENDANCE_MARK_ABSENT = "0";
-    private static final String[] SET_ATTENDANCE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_NUM, KEY_LESSON_NUM, KEY_ATTENDANCE_MARK};
+    private static final String[] SET_ATTENDANCE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_NUM, KEY_LESSON_NUM,
+            KEY_ATTENDANCE_MARK};
 
     private static final int MIN_STUDENT_NUM = 1;
     private static final int MAX_LESSON_INDEX = 12;
