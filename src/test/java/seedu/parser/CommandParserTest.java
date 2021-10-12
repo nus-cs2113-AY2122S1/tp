@@ -12,6 +12,7 @@ import seedu.command.SearchCommand;
 import seedu.command.ShowCommand;
 import seedu.command.TimetableCommand;
 import seedu.command.UpdateCommand;
+import seedu.command.flags.SearchFlags;
 import seedu.timetable.Timetable;
 
 public class CommandParserTest {
@@ -44,7 +45,7 @@ public class CommandParserTest {
     @Test
     public void parse_Search_returnsSearchCommand() {
         final String[]searchInputs = {"search", " search ", "SEARCH", " seaRCH"};
-        parseMultipleInputsForCommand(new SearchCommand("", true), searchInputs);
+        parseMultipleInputsForCommand(new SearchCommand("", new SearchFlags()), searchInputs);
     }
 
     @Test
