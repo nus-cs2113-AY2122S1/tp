@@ -1,7 +1,7 @@
 Hello!
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully added!
 Enter your command: You have opened the following trip:
-                    America | 02 Feb 2021
+America | 02 Feb 2021
 Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
 Enter your command: Enter your command: Your expense has been added successfully
 Enter your command: 1. this is what i want to type | Cost: 8.00
