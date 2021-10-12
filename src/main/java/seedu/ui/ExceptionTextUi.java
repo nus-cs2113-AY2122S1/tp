@@ -138,7 +138,11 @@ public class ExceptionTextUi {
     }
 
     public static void invalidTwitterUsernameInput() {
-        String message = "The twitter username is not correctly formatted";
+        String message = "The twitter username is not correctly formatted,\n"
+                + "Rules for Twitter username :\n"
+                + "    * Lowercase letters only\n"
+                + "    * Numbers and underscore allowed\n"
+                + "    * Maximum 15 characters allowed";
         printDoubleLineMessage(message);
     }
 
