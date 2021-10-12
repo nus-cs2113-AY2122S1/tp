@@ -6,15 +6,11 @@ It is designed to be fast, flexible, and unobtrusive.
 ## Table of contents
 
 * [Quick Start](#quick-start)
-
 * [Features](#features)
-
   * [Adding a Task or Lesson - `add`](#adding-a-task-or-lesson---add)
   * [Exiting the program - `exit`](#exiting-the-program---exit)
   * [Saving the data](#saving-the-data)
-
 * [FAQ](#faq)
-
 * [Command summary](#command-summary)
 
 ## Quick Start
