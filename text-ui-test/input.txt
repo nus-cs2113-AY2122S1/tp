@@ -1,2 +1,10 @@
-create America 02-02-2021 1.08 yikai,yuzhao,qian,josh,xiyuan
+create America 02-02-2021 1.08 yikai,yuzhao,qian,josh,xiyuan 1000
+open 1
+list
+edit 1 budget 2000
+expense 8.00 food yikai,yuzhao /this is what i want to type
+list
+view
+summary
+delete 1
 quit
