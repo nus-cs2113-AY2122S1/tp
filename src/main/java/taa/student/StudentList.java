@@ -3,9 +3,7 @@ package taa.student;
 import java.util.ArrayList;
 
 public class StudentList {
-    private static String MESSAGE_LIST_STUDENT_HEADER = "Student List:";
-
-    private ArrayList<Student> students;
+    private final ArrayList<Student> students;
 
     public StudentList() {
         this.students = new ArrayList<>();
@@ -72,10 +70,12 @@ public class StudentList {
 
     @Override
     public String toString() {
-        String header = String.format(MESSAGE_LIST_STUDENT_HEADER);
-        StringBuilder stringBuilder = new StringBuilder(header);
-        for (int i = 0; i < students.size(); i += 1) {
-            stringBuilder.append("\n");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < getSize(); i += 1) {
+            if (i > 0) {
+                stringBuilder.append("\n");
+            }
+
             stringBuilder.append(i + 1);
             stringBuilder.append(". ");
             stringBuilder.append(students.get(i));

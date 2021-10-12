@@ -3,8 +3,6 @@ package taa.assessment;
 import java.util.ArrayList;
 
 public class AssessmentList {
-    private static final String MESSAGE_ASSESSMENT_LIST_HEADER = "Assessment List:";
-
     private final ArrayList<Assessment> assessments;
 
     public AssessmentList() {
@@ -25,6 +23,8 @@ public class AssessmentList {
             if (a.getName().equalsIgnoreCase(assessment.getName())) {
                 return false;
             }
+
+            totalWeightage += a.getWeightage();
         }
 
         if ((totalWeightage + assessment.getWeightage()) > Assessment.WEIGHTAGE_RANGE[1]) {
@@ -68,9 +68,12 @@ public class AssessmentList {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder(MESSAGE_ASSESSMENT_LIST_HEADER);
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < assessments.size(); i += 1) {
-            stringBuilder.append("\n");
+            if (i > 0) {
+                stringBuilder.append("\n");
+            }
+
             stringBuilder.append(i + 1);
             stringBuilder.append(". ");
             stringBuilder.append(assessments.get(i));

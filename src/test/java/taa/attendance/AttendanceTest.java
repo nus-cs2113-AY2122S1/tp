@@ -7,13 +7,9 @@ import taa.command.SetAttendanceCommand;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AttendanceTest {
-
-
     @Test
     void testAttendance() {
-        assertEquals("CS2113T 2 3 true",
-                new Attendance("CS2113T", "2", "3", true).toString());
+        assertEquals("Lesson: 2 (Present:true)",
+                new Attendance(2, true).toString());
     }
-
-
 }

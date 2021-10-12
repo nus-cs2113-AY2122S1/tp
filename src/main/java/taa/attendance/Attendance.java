@@ -1,34 +1,27 @@
 package taa.attendance;
 
 public class Attendance {
-    private final String code;
-    private final String studentIndex;
-    private final String lessonIndex;
-    private boolean hasAttend;
+    private static final String MESSAGE_FORMAT_ATTENDANCE = "Lesson %d (%s)";
 
-    public Attendance(String code, String studentIndex, String lessonIndex, boolean hasAttend) {
-        this.code = code;
-        this.studentIndex = studentIndex;
-        this.lessonIndex = lessonIndex;
-        this.hasAttend = hasAttend;
+    private final int lessonNumber;
+    private boolean isPresent;
+
+    public Attendance(int lessonNumber, boolean isPresent) {
+        this.lessonNumber = lessonNumber;
+        this.isPresent = isPresent;
     }
 
-    public String markAttendance() {
-        return (hasAttend ? "1" : "0");
+    public void setPresent(boolean present) {
+        isPresent = present;
     }
 
-    public String getLessonIndex() {
-        return lessonIndex;
+    public int getLessonNumber() {
+        return lessonNumber;
     }
-
-    public String getLessonNum() {
-        return Integer.toString(Integer.parseInt(lessonIndex) + 1);
-    }
-
 
     @Override
     public String toString() {
-        return String.format("%s %s %s %s", code, studentIndex, lessonIndex, hasAttend);
+        String presentString = (isPresent) ? "Present" : "Absent";
+        return String.format(MESSAGE_FORMAT_ATTENDANCE, lessonNumber, presentString);
     }
 }
-

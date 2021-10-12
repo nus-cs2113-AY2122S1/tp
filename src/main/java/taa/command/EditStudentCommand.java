@@ -41,7 +41,7 @@ public class EditStudentCommand extends Command {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -60,8 +60,7 @@ public class EditStudentCommand extends Command {
         StudentList studentList = module.getStudentList();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
-            ui.printMessage(MESSAGE_INVALID_STUDENT_INDEX);
-            return;
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
         String newId = argumentMap.get(KEY_NEW_ID);

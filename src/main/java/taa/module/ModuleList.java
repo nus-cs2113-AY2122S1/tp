@@ -3,8 +3,6 @@ package taa.module;
 import java.util.ArrayList;
 
 public class ModuleList {
-    private static final String MESSAGE_MODULE_LIST_HEADER = "Module List:";
-
     private final ArrayList<Module> modules;
 
     public ModuleList() {
@@ -61,9 +59,12 @@ public class ModuleList {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder(MESSAGE_MODULE_LIST_HEADER);
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < getSize(); i += 1) {
-            stringBuilder.append("\n");
+            if (i > 0) {
+                stringBuilder.append("\n");
+            }
+
             stringBuilder.append(i + 1);
             stringBuilder.append(". ");
             stringBuilder.append(modules.get(i));

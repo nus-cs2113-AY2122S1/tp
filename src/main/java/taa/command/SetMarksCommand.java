@@ -50,7 +50,7 @@ public class SetMarksCommand extends Command {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -69,8 +69,7 @@ public class SetMarksCommand extends Command {
         StudentList studentList = module.getStudentList();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
-            ui.printMessage(MESSAGE_INVALID_STUDENT_INDEX);
-            return;
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
         AssessmentList assessmentList = module.getAssessmentList();
@@ -103,10 +102,8 @@ public class SetMarksCommand extends Command {
      */
     private void setMarks(Ui ui, Student student, Assessment assessment, double marks) {
         String assessmentName = assessment.getName();
-
         student.setMarks(assessmentName, marks);
-        String studentName = student.getName();
-        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_ADDED, studentName, marks, assessmentName));
+        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_ADDED, student, marks, assessmentName));
     }
 
     /**

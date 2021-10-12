@@ -7,6 +7,8 @@ import taa.module.ModuleList;
 public class ListModulesCommand extends Command {
     private static final String MESSAGE_LIST_EMPTY = "There are no modules in the list.";
 
+    private static final String MESSAGE_FORMAT_OUTPUT = "Module list:\n%s";
+
     public ListModulesCommand(String argument) {
         super(argument);
     }
@@ -17,11 +19,14 @@ public class ListModulesCommand extends Command {
             throw new TaaException(getUsageMessage());
         }
 
+        String message;
         if (moduleList.getSize() == 0) {
-            ui.printMessage(MESSAGE_LIST_EMPTY);
+            message = MESSAGE_LIST_EMPTY;
         } else {
-            ui.printMessage(moduleList.toString());
+            message = String.format(MESSAGE_FORMAT_OUTPUT, moduleList);
         }
+
+        ui.printMessage(message);
     }
 
     @Override

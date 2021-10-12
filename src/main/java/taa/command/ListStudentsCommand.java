@@ -14,6 +14,7 @@ public class ListStudentsCommand extends Command {
 
     private static final String MESSAGE_FORMAT_LIST_STUDENT_USAGE = "Usage: %s "
             + "%s/<MODULE_CODE>";
+    private static final String MESSAGE_FORMAT_OUTPUT = "Students for %s:\n%s";
 
     public ListStudentsCommand(String argument) {
         super(argument, LIST_STUDENT_ARGUMENT_KEYS);
@@ -32,7 +33,7 @@ public class ListStudentsCommand extends Command {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -42,13 +43,15 @@ public class ListStudentsCommand extends Command {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
+        String message;
         StudentList studentList = module.getStudentList();
         if (studentList.getSize() == 0) {
-            ui.printMessage(MESSAGE_NO_STUDENTS);
-            return;
+            message = MESSAGE_NO_STUDENTS;
+        } else {
+            message = String.format(MESSAGE_FORMAT_OUTPUT, module, studentList);
         }
 
-        ui.printMessage(studentList.toString());
+        ui.printMessage(message);
     }
 
     @Override

@@ -2,12 +2,10 @@ package taa.attendance;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Comparator;
 
 public class AttendanceList {
-    private static final String MESSAGE_ATTENDANCE_LIST_HEADER = "Attendance List:";
-
-    private final ArrayList<String> attendances;
+    private final ArrayList<Attendance> attendances;
 
     public AttendanceList() {
         this.attendances = new ArrayList<>();
@@ -17,43 +15,42 @@ public class AttendanceList {
         return attendances.size();
     }
 
-    public ArrayList<String> getAttendances() {
-        return attendances;
+    public ArrayList<Attendance> getAttendances() {
+        return new ArrayList<>(attendances);
     }
 
-    /**
-     * Converts the array of attendances from all lessons for a student to a string.
-     *
-     * @param individualAttendances the array of attendances from all lessons for a student
-     * @return String representation of the array of attendances from all lessons for a student
-     */
-    public String individualAttendancesToString(String[] individualAttendances) {
-        return Arrays.toString(individualAttendances);
+    public Attendance getAttendance(int lessonNumber) {
+        for (Attendance attendance : attendances) {
+            if (attendance.getLessonNumber() == lessonNumber) {
+                return attendance;
+            }
+        }
+
+        return null;
     }
 
-    /**
-     * Adds the array of attendances from all lessons for a student to the AttendanceList.
-     *
-     * @param individualAttendances the array of attendances from all lessons for a student
-     */
-    public void addIndividualAttendances(String[] individualAttendances) {
-        String studentAttendances = individualAttendancesToString(individualAttendances);
-        String formattedStudentAttendances = formatStudentAttendances(studentAttendances);
-        attendances.add(formattedStudentAttendances);
+    public void addAttendance(Attendance attendance) {
+        attendances.add(attendance);
+        sortAttendances();
     }
 
-    private String formatStudentAttendances(String studentAttendances) {
-        studentAttendances = studentAttendances.replace("[", " | ");
-        studentAttendances = studentAttendances.replace("]", " |");
-        studentAttendances = studentAttendances.replace(",", " |");
-        return studentAttendances;
+    private void sortAttendances() {
+        attendances.sort(new Comparator<Attendance>() {
+            @Override
+            public int compare(Attendance attendance1, Attendance attendance2) {
+                return attendance1.getLessonNumber() - attendance2.getLessonNumber();
+            }
+        });
     }
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder(MESSAGE_ATTENDANCE_LIST_HEADER);
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < getSize(); i += 1) {
-            stringBuilder.append("\n");
+            if (i > 0) {
+                stringBuilder.append("\n");
+            }
+
             stringBuilder.append(i + 1);
             stringBuilder.append(". ");
             stringBuilder.append(attendances.get(i));
@@ -63,4 +60,3 @@ public class AttendanceList {
     }
 
 }
-

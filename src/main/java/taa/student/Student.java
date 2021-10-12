@@ -1,58 +1,28 @@
 package taa.student;
 
-import taa.attendance.Attendance;
+import taa.attendance.AttendanceList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Represents students.
  */
 public class Student {
-    private static final int NUM_LESSONS = 13;
-
     private String id;
     private String name;
-    private final String[] individualAttendances = new String[NUM_LESSONS];
-    private static final String ABSENT_MARK = "0";
 
-    private final ArrayList<Attendance> attendance;
-    private final HashMap<String, Double> results;
-
+    private final AttendanceList attendanceList;
+    private final HashMap<String, Double> marksMap;
 
     public Student(String id, String name) {
         this.id = id;
         this.name = name;
-        this.attendance = new ArrayList<>();
-        this.results = new HashMap<>();
+        this.attendanceList = new AttendanceList();
+        this.marksMap = new HashMap<>();
     }
 
-    private void initIndividualAttendances() {
-        for (int i = 0; i < NUM_LESSONS; i++) {
-            individualAttendances[i] = ABSENT_MARK;
-        }
-    }
-
-    /**
-     * Marks the student as present or absent for a particular lesson.
-     *
-     * @param attendance the attendance object
-     */
-    public void setAttendance(Attendance attendance) {
-        int lessonIndex = Integer.parseInt(attendance.getLessonIndex());
-        initIndividualAttendances();
-        individualAttendances[lessonIndex] = attendance.markAttendance();
-    }
-
-
-    /**
-     * Returns the attendance status of the student for a particular lesson.
-     *
-     * @param lessonIndex The lesson index
-     * @return The attendance status of the student for the lesson
-     */
-    public String isPresent(int lessonIndex) {
-        return individualAttendances[lessonIndex];
+    public AttendanceList getAttendanceList() {
+        return attendanceList;
     }
 
     /**
@@ -91,21 +61,6 @@ public class Student {
         return this.id;
     }
 
-    public String[] getIndividualAttendances() {
-        return individualAttendances;
-    }
-
-
-    /**
-     * Overrides default toString method with the custom print message.
-     *
-     * @return the custom print message
-     */
-    @Override
-    public String toString() {
-        return String.format("%s - %s", id, name);
-    }
-
     /**
      * Adds a key,value pair to the hashmap.
      *
@@ -113,17 +68,21 @@ public class Student {
      * @param marks          value to be stored under the key given
      */
     public void setMarks(String assessmentName, double marks) {
-        results.put(assessmentName, marks);
+        marksMap.put(assessmentName, marks);
     }
 
     /**
      * Gets the marks for the given assessment.
      *
      * @param assessmentName Assessment to get marks for.
-     * @return Marks for the inputted assessment.
+     * @return The marks for the inputted assessment if it exists, else -1.
      */
     public double getMarks(String assessmentName) {
-        return results.get(assessmentName);
+        if (!marksMap.containsKey(assessmentName)) {
+            return -1;
+        }
+
+        return marksMap.get(assessmentName);
     }
 
     /**
@@ -131,8 +90,8 @@ public class Student {
      *
      * @return Hashmap containing assessment names as keys and the marks as values.
      */
-    public HashMap<String, Double> getAllMarks() {
-        return results;
+    public HashMap<String, Double> getMarksMap() {
+        return new HashMap<>(marksMap);
     }
 
     /**
@@ -142,7 +101,16 @@ public class Student {
      * @return True if marks have been inputted. Returns false otherwise.
      */
     public boolean marksExist(String assessmentName) {
-        return results.containsKey(assessmentName);
+        return marksMap.containsKey(assessmentName);
     }
 
+    /**
+     * Overrides default toString method with the custom print message.
+     *
+     * @return the custom print message
+     */
+    @Override
+    public String toString() {
+        return String.format("%s (%s)", id, name);
+    }
 }
