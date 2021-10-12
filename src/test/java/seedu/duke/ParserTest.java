@@ -36,4 +36,13 @@ public class ParserTest {
         assertEquals("Invalid command!", resultMsg);
     }
 
+    @Test
+    public void parseAddCommand_insufficientCommandParameters_expectException() {
+        try {
+            String inputString = "add carrot";
+            String resultMsg = Parser.parse(inputString);
+        } catch (DukeException e) {
+            assertEquals("The number of parameters is wrong!", e.getMessage());
+        }
+    }
 }
