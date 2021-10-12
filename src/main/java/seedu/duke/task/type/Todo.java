@@ -69,14 +69,15 @@ public class Todo extends Task {
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription() + " (doOn: " + getDateAsString(this.doOn) + ")";
     }
-
+/*
     @Override
     public void displayReminder(LocalDateTime now) {
         reminder.printReminder(now, getTaskEntryDescription(), recurrence);
     }
+ */
 
-    public String reminderForTest(LocalDateTime now) {
-        return reminder.testReminder(now, getTaskEntryDescription(), recurrence);
+    public String getReminder(LocalDateTime now) {
+        return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
     }
 
     public boolean needReminder() {

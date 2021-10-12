@@ -37,11 +37,12 @@ public class Lesson extends Task {
         this.moduleCode = moduleCode;
         this.classNo = classNo;
     }
-
+/*
     @Override
     public void displayReminder(LocalDateTime now) {
 
     }
+ */
 
     @Override
     public boolean needReminder() {
@@ -49,7 +50,7 @@ public class Lesson extends Task {
     }
 
     @Override
-    public String reminderForTest(LocalDateTime now) {
+    public String getReminder(LocalDateTime now) {
         return null;
     }
 }

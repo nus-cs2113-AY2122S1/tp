@@ -11,11 +11,12 @@ public class ReminderManager {
         this.taskManager = new TaskManager();
     }
 
-    public void setUpReminderManager(TaskManager taskManager) {
+    public void updateReminderManager(TaskManager taskManager) {
         this.taskManager = taskManager;
     }
 
-    public void sendReminder() {
+    /*
+    public void printReminder() {
         LocalDateTime now = LocalDateTime.now();
         for (int i = 0; i < taskManager.getTasklist().size(); i++) {
             if (taskManager.getTasklist().get(i).needReminder()) {
@@ -23,18 +24,17 @@ public class ReminderManager {
             }
         }
     }
+    */
 
-/* for Junit Test
-    public static String testReminder() {
+    public static String sendReminder() {
         LocalDateTime now = LocalDateTime.now();
-        String testOut = "";
+        String message = "";
         for (int i = 0; i < taskManager.getTasklist().size(); i++) {
             if (taskManager.getTasklist().get(i).needReminder()) {
-                testOut += (taskManager.getTasklist().get(i).reminderForTest(now));
+                message += (taskManager.getTasklist().get(i).getReminder(now));
             }
         }
-        return testOut;
+        return message;
     }
- */
 
 }

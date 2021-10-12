@@ -24,13 +24,12 @@ class ReminderManagerTest {
 
     ReminderManager reminderManager = new ReminderManager();
 
-    private final String expectedOut = "Reminder! 10 min before the following task:"
-            + "Reminder! 10 min before the following task:"
-            + "Reminder! 10 min before the following task:";
+    private final String expectedOut = "Reminder! 10 min before the following task:\n"
+            + "Reminder! 10 min before the following task:\n"
+            + "Reminder! 10 min before the following task:\n";
 
     @Test
     void sendReminder() {
-        Calendar now = Calendar.getInstance();
         Calendar taskTime = Calendar.getInstance();
         taskTime.add(Calendar.MINUTE, 10);
         startDate = taskTime.getTime();
@@ -47,7 +46,7 @@ class ReminderManagerTest {
         tasklist.add(eventTest);
 
         taskManager.setTasklist(tasklist);
-        reminderManager.setUpReminderManager(taskManager);
-        //assertEquals(expectedOut, ReminderManager.testReminder());
+        reminderManager.updateReminderManager(taskManager);
+        assertEquals(expectedOut, ReminderManager.sendReminder());
     }
 }

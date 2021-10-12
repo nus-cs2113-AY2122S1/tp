@@ -69,11 +69,13 @@ public class Deadline extends Task {
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription() + " (dueDate: " + getDateAsString(this.dueDate) + ")";
     }
-
+/*
     @Override
     public void displayReminder(LocalDateTime now) {
-        reminder.printReminder(now, getTaskEntryDescription(), recurrence);
+        reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
     }
+
+ */
 
     @Override
     public boolean needReminder() {
@@ -86,7 +88,7 @@ public class Deadline extends Task {
         return strDate;
     }
 
-    public String reminderForTest(LocalDateTime now) {
-        return reminder.testReminder(now, getTaskEntryDescription(), recurrence);
+    public String getReminder(LocalDateTime now) {
+        return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
     }
 }

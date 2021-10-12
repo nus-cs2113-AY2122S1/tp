@@ -34,7 +34,7 @@ public class Reminder {
             this.reminderDone = false;
         }
     }
-
+/*
     public void checkAndPrintReminder(LocalDateTime now, String task) {
         if (reminderTime.isAfter(now.minusSeconds(30)) && reminderTime.isBefore(now.plusSeconds(30))) {
             System.out.println("Reminder! 10 min before the following task:");
@@ -42,15 +42,18 @@ public class Reminder {
             this.reminderDone = true;
         }
     }
+    */
 
-    public String testOut(LocalDateTime now, String task) {
-        if (reminderTime.isAfter(now.minusSeconds(30)) && reminderTime.isBefore(now.plusSeconds(30))) {
-            this.reminderDone = true;
-            return ("Reminder! 10 min before the following task:");
+    public String getMessage(LocalDateTime now, String task) {
+        if (!reminderDone) {
+            if (reminderTime.isAfter(now.minusSeconds(30)) && reminderTime.isBefore(now.plusSeconds(30))) {
+                this.reminderDone = true;
+                return ("Reminder! 10 min before the following task:\n");
+            }
         }
         return "";
     }
-
+/*
     public void printReminder(LocalDateTime now, String task, RecurrenceEnum recurrence) {
         if (!reminderDone) {
             switch (recurrence) {
@@ -71,26 +74,31 @@ public class Reminder {
             }
         }
     }
+    */
 
-    public String testReminder(LocalDateTime now, String task, RecurrenceEnum recurrence) {
-        if (!reminderDone) {
-            switch (recurrence) {
-            case NONE:
-                return testOut(now, task);
-            case DAILY:
-                setRecurReminderTime(reminderTime.plusDays(1));
-                return testOut(now, task);
-            case WEEKLY:
-                setRecurReminderTime(reminderTime.plusWeeks(1));
-                return testOut(now, task);
-            case MONTHLY:
-                setRecurReminderTime(reminderTime.plusMonths(1));
-                return testOut(now, task);
-            case YEARLY:
-                setRecurReminderTime(reminderTime.plusYears(1));
-                return testOut(now, task);
-            }
+    public String getRecurrenceMessage(LocalDateTime now, String task, RecurrenceEnum recurrence) {
+        String reminderMessage = "";
+        switch (recurrence) {
+        case NONE:
+            reminderMessage = getMessage(now, task);
+            break;
+        case DAILY:
+            reminderMessage = getMessage(now, task);
+            setRecurReminderTime(reminderTime.plusDays(1));
+            break;
+        case WEEKLY:
+            reminderMessage = getMessage(now, task);
+            setRecurReminderTime(reminderTime.plusWeeks(1));
+            break;
+        case MONTHLY:
+            reminderMessage = getMessage(now, task);
+            setRecurReminderTime(reminderTime.plusMonths(1));
+            break;
+        case YEARLY:
+            reminderMessage = getMessage(now, task);
+            setRecurReminderTime(reminderTime.plusYears(1));
+            break;
         }
-        return "";
+        return reminderMessage;
     }
 }
