@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TaskList {
-    // TODO: Implement serialization/deserialization
-    // TODO: Reorder methods
 
     private List<Task> taskList;
 
@@ -47,11 +45,6 @@ public class TaskList {
         taskList.clear();
     }
 
-    /**
-     * Gets information on whether the task list is empty or not.
-     *
-     * @return true if the task list is empty, false otherwise
-     */
     public boolean isEmpty() {
         return taskList.isEmpty();
     }
@@ -66,18 +59,18 @@ public class TaskList {
     }
 
     /**
-     * Gets the number of pending tasks.
+     * Deletes a task from the list.
      *
-     * @return the number of tasks not marked as done
+     * @param index the index of the task to delete
      */
-    public int getNumberOfPendingTasks() {
-        int count = 0;
-        for (Task task : taskList) {
-            if (!task.isDone()) {
-                count++;
-            }
+    public void deleteTask(int index) throws DukeException {
+        try {
+            taskList.remove(index);
+        } catch (IndexOutOfBoundsException exception) {
+            throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
+        } catch (NumberFormatException exception) {
+            throw new DukeException(Message.ERROR_NUMBER_FORMAT);
         }
-        return count;
     }
 
     /**
@@ -97,18 +90,18 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the list.
+     * Gets the number of pending tasks.
      *
-     * @param index the index of the task to delete
+     * @return the number of tasks not marked as done
      */
-    public void deleteTask(int index) throws DukeException {
-        try {
-            taskList.remove(index);
-        } catch (IndexOutOfBoundsException exception) {
-            throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
-        } catch (NumberFormatException exception) {
-            throw new DukeException(Message.ERROR_NUMBER_FORMAT);
+    public int getNumberOfPendingTasks() {
+        int count = 0;
+        for (Task task : taskList) {
+            if (!task.isDone()) {
+                count++;
+            }
         }
+        return count;
     }
 
     /**

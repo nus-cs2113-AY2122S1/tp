@@ -92,9 +92,6 @@ public class Parser {
         if (params.length < 2 || params.length > 3) {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
-        if ((params.length == 3) && (userResponse.indexOf(" -d ") > userResponse.indexOf(" -i "))) {
-            throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
-        }
         String title = params[0].strip();
         String dayOfTheWeek = params[1].strip();
         if (!is(dayOfTheWeek)) {
@@ -105,6 +102,9 @@ public class Parser {
         case 2:
             return new AddTaskCommand(title, dayOfTheWeek, "");
         case 3:
+            if (userResponse.indexOf(" -d ") > userResponse.indexOf(" -i ")) {
+                throw new DukeException(Message.ERROR_WRONG_FLAG_SEQUENCE);
+            }
             String information = params[2].strip();
             return new AddTaskCommand(title, dayOfTheWeek, information);
         default:
@@ -113,7 +113,7 @@ public class Parser {
     }
 
     /**
-     * Parses the user command with commandType removed into an executable add lesson type command.
+     * Parses the user response with commandType removed into an executable add lesson type command.
      *
      * @param userResponse the user response
      * @return an executable add lesson type command
@@ -403,6 +403,10 @@ public class Parser {
         int posOfDFlag = userResponse.indexOf(" -d ");
         int posOfSFlag = userResponse.indexOf(" -s ");
         int posOfEFlag = userResponse.indexOf(" -e ");
+        if (posOfDFlag < 0 || posOfSFlag < 0 || posOfEFlag < 0) {
+            //one of the flags is not found, likely due to the presence of a duplicate flag
+            return false;
+        }
         return (posOfDFlag < posOfSFlag) && (posOfDFlag < posOfEFlag) && (posOfSFlag < posOfEFlag);
     }
 }
