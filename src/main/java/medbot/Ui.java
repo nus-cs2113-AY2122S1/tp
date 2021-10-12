@@ -116,7 +116,8 @@ public class Ui {
 
     public String getListHelpMessage() {
         return "View information of all current patients.\n"
-                + "Format: list\n" + "Expected Output for 2 patients: \n" + "Patient ID: [PATIENT_ID_1] IC: [PATIENT_IC]"
+                + "Format: list\n" + "Expected Output for 2 patients: \n"
+                + "Patient ID: [PATIENT_ID_1] IC: [PATIENT_IC]"
                 + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]\n"
                 + "Patient ID: [PATIENT_ID_2] IC: [PATIENT_IC]"
                 + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]\n";
