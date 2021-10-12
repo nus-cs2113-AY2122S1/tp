@@ -1,7 +1,7 @@
 package seedu.typists.content;
 
 /**
- * Content object
+ * Content object.
  */
 public class Content {
     private String content;

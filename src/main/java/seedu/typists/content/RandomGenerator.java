@@ -3,7 +3,7 @@ package seedu.typists.content;
 import java.util.Random;
 
 /**
- * Generate random string of custom length
+ * Generate random string of custom length.
  */
 public class RandomGenerator {
     public String randomString(int length) {
@@ -14,8 +14,7 @@ public class RandomGenerator {
             int random = 0;
             if (isCaps.nextBoolean()) {
                 random = rand.nextInt(26) + 65;
-            }
-            else {
+            } else {
                 random = rand.nextInt(26) + 97;
             }
             s.append((char) random);
