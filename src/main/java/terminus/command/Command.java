@@ -1,8 +1,7 @@
 package terminus.command;
 
-import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.exception.InvalidTimeFormatException;
+import terminus.exception.InvalidArgumentException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
@@ -32,10 +31,10 @@ public abstract class Command {
      * Parses remaining arguments for the command.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
-     * @throws InvalidArgumentException Exception for when arguments parsing fails.
-     * @throws InvalidTimeFormatException Exception for when time format is invalid.
+     * @throws InvalidArgumentException Exception for when arguments parsing fails
      */
-    public void parseArguments(String arguments) throws InvalidArgumentException, InvalidTimeFormatException {
+    public void parseArguments(String arguments)
+            throws InvalidArgumentException {
         this.arguments = arguments;
     }
 
@@ -46,10 +45,9 @@ public abstract class Command {
      * @param ui The Ui object to send messages to the users.
      * @param module The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
-     * @throws InvalidCommandException Exception for when the command could not be found.
-     * @throws InvalidArgumentException Exception for when arguments parsing fails.
-     * @throws InvalidTimeFormatException Exception for when time format is invalid.
+     * @throws InvalidCommandException  Exception for when the command could not be found.
+     * @throws InvalidArgumentException Exception for when arguments parsing fails
      */
     public abstract CommandResult execute(Ui ui, NusModule module)
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException;
+            throws InvalidCommandException, InvalidArgumentException;
 }
