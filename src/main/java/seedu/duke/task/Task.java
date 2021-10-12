@@ -1,24 +1,47 @@
 package seedu.duke.task;
 
+import java.time.LocalDateTime;
+
 public abstract class Task {
 
-    static final PriorityEnum DEFAULT_PRIORITY = PriorityEnum.MEDIUM;
+    private static final PriorityEnum DEFAULT_PRIORITY = PriorityEnum.MEDIUM;
+    protected static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
 
-    String description;
-    PriorityEnum priority;
+    private static final String TASK_ENTRY_DESCRIPTION_REGEX = "%s [%s]";
+
+    private static final String DESCRIPTION_NOT_EMPTY_ASSERTION = "description should not be empty.";
+    private static final String DESCRIPTION_NOT_NULL_ASSERTION = "description should not be null.";
+    private static final String PRIORITY_ASSERTION = "priority should not be null.";
+    private static final String RECURRENCE_ASSERTION = "recurrence should not be null.";
+
+    private String description;
+    private PriorityEnum priority;
+    private RecurrenceEnum recurrence;
 
     protected Task(String description) {
-        this.description = description;
-        this.priority = DEFAULT_PRIORITY;
+        setDescription(description);
+        setPriority(DEFAULT_PRIORITY);
+        setRecurrence(DEFAULT_RECURRENCE);
     }
 
     protected Task(String description, PriorityEnum priority) {
         this(description);
-        this.priority = priority;
+        setPriority(priority);
+    }
+
+    protected Task(String description, RecurrenceEnum recurrence) {
+        this(description);
+        setRecurrence(recurrence);
+    }
+
+    protected Task(String description, PriorityEnum priority, RecurrenceEnum recurrence) {
+        this(description);
+        setPriority(priority);
+        setRecurrence(recurrence);
     }
 
     public String getTaskEntryDescription() {
-        return this.description + " [" + this.priority + "]";
+        return String.format(TASK_ENTRY_DESCRIPTION_REGEX, getDescription(), getPriority());
     }
 
     public String getDescription() {
@@ -26,6 +49,8 @@ public abstract class Task {
     }
 
     public void setDescription(String description) {
+        assert !description.equals("") : DESCRIPTION_NOT_EMPTY_ASSERTION;
+        assert description != null : DESCRIPTION_NOT_NULL_ASSERTION;
         this.description = description;
     }
 
@@ -34,7 +59,19 @@ public abstract class Task {
     }
 
     public void setPriority(PriorityEnum priority) {
+        assert priority != null : PRIORITY_ASSERTION;
         this.priority = priority;
     }
 
+    public abstract boolean needReminder();
+
+    public abstract String getReminder(LocalDateTime now);
+    public RecurrenceEnum getRecurrence() {
+        return this.recurrence;
+    }
+
+    public void setRecurrence(RecurrenceEnum recurrence) {
+        assert recurrence != null : RECURRENCE_ASSERTION;
+        this.recurrence = recurrence;
+    }
 }
