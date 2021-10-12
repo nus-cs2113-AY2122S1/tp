@@ -6,6 +6,18 @@ to be fast, flexible, and unobtrusive.
 
 ## Table of contents
 
+* [Quick Start](#quick-start)
+
+* [Features](#features)
+
+  * [Adding a Task or Lesson - `add`](#adding-a-task-or-lesson---add)
+  * [Exiting the program - `exit`](#exiting-the-program---exit)
+  * [Saving the data](#saving-the-data)
+
+* [FAQ](#faq)
+
+* [Command summary](#command-summary)
+
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed on your machine. You can follow the guide [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html) for more information.
@@ -22,7 +34,7 @@ to be fast, flexible, and unobtrusive.
 
 > {PARAM} → OPTIONAL
 
-### Adding a task - `add`
+### Adding a Task or Lesson - `add`
 
 Add a task or lesson to the list. 
 
@@ -33,7 +45,7 @@ Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION}`
 A lesson contains a title, the day of the week of the lesson, the start time of the lesson, and the end time of the 
 lesson.
 
-`add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME]`
+Format: `add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME]`
 
 Example usage:
 
@@ -61,15 +73,15 @@ $ add lesson CS2113 Lecture -d MON -s 1pm -e 3pm
     
 ```
 
-### Saving the data
-
-Data from Task Buddy is automatically saved on your local machine.
-
 ### Exiting the program - `exit`
 
 Exit the program.
 
 Format: `exit`
+
+### Saving the data
+
+Data from Task Buddy is automatically saved on your local machine.
 
 ## FAQ
 
