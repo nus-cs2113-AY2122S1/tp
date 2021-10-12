@@ -166,4 +166,38 @@ public class CommonFormatTest {
         assertThrows(AssertionError.class, () -> CommonFormat.convertToLocalTime(null));
     }
 
+    @Test
+    void isValidDay_success() {
+        assertTrue(CommonFormat.isValidDay("monday"));
+        assertTrue(CommonFormat.isValidDay("MoNdAy"));
+        assertTrue(CommonFormat.isValidDay("tuesday"));
+        assertTrue(CommonFormat.isValidDay("wednesday"));
+        assertTrue(CommonFormat.isValidDay("thursday"));
+        assertTrue(CommonFormat.isValidDay("friday"));
+        assertTrue(CommonFormat.isValidDay("saturday"));
+        assertTrue(CommonFormat.isValidDay("sunday"));
+    }
+
+    @Test
+    void isValidDay_invalidInput() {
+        assertFalse(CommonFormat.isValidDay("mon"));
+        assertFalse(CommonFormat.isValidDay("test1"));
+        assertFalse(CommonFormat.isValidDay("wednesdey"));
+        assertFalse(CommonFormat.isValidDay(""));
+        assertFalse(CommonFormat.isValidDay(null));
+    }
+
+    @Test
+    void isValidUrl_success() throws InvalidArgumentException {
+        assertTrue(CommonFormat.isValidUrl("https://www.test.com"));
+        assertTrue(CommonFormat.isValidUrl("http://www.test.org"));
+        assertTrue(CommonFormat.isValidUrl("https://nus-sg.zoom.us/j/88433650229?pwd=NFg3WSl0UEQ5ZG05ZW1MZz09"));
+    }
+
+    @Test
+    void isValidUrl_invalidInput_exceptionThrown() {
+        assertThrows(InvalidArgumentException.class, () -> CommonFormat.isValidUrl(""));
+        assertThrows(InvalidArgumentException.class, () -> CommonFormat.isValidUrl(".."));
+    }
+
 }
