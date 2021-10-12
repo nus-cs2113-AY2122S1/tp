@@ -1,13 +1,11 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.InsufficientParametersException;
-import seedu.duke.exceptions.UnknownCommandException;
-import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
 import seedu.duke.ui.UI;
 
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 public class Duke {
@@ -20,6 +18,11 @@ public class Duke {
      */
     public static void initialize() {
         ui = new UI();
+        LogManager.getLogManager().reset();
+        LOGGER.setLevel(Level.ALL);
+        ConsoleHandler ch = new ConsoleHandler();
+        ch.setLevel(Level.SEVERE);
+        LOGGER.addHandler(ch);
     }
 
 
@@ -28,6 +31,7 @@ public class Duke {
      */
     public static void exit() {
         ui.printGoodbye();
+        LOGGER.log(Level.INFO, "Program exited");
         System.exit(0);
     }
 
@@ -46,7 +50,7 @@ public class Duke {
             msg = Parser.parse(command);
             return msg;
         } catch (DukeException e) {
-            LOGGER.log(Level.INFO, "Error in parsing user command");
+            LOGGER.log(Level.WARNING, "Error in parsing user command");
             return e.getMessage();
         }
     }

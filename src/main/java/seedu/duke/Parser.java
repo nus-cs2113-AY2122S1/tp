@@ -5,10 +5,7 @@ import seedu.duke.command.AddCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.InsufficientParametersException;
-import seedu.duke.ingredients.AddIngredient;
 import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
 
 import java.util.NoSuchElementException;
 
@@ -23,15 +20,26 @@ public class Parser {
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
     private static final String NUMBER_FORMAT_MESSAGE = "Invalid number format!";
     private static final String NOT_FOUND_MESSAGE = "Ingredient not found!";
-
+    private static final String INSUFFICIENT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
 
     private static final String SPACE_SEPARATOR = " ";
+    private static final String INGREDIENT_NAME_SEPARATOR = "n/";
+    private static final String INGREDIENT_AMOUNT_SEPARATOR = "a/";
+    private static final String INGREDIENT_UNITS_SEPARATOR = "u/";
+    private static final String INGREDIENT_EXPIRY_SEPARATOR = "e/";
 
 
     static boolean isExit(String command) {
         return (command.equals(COMMAND_EXIT));
     }
 
+    /**
+     * Sends the input to the relevant command parser.
+     *
+     * @param command The user input String
+     * @return the output message
+     * @throws DukeException when there is an issue with the input
+     */
     public static String parse(String command) throws DukeException {
 
         String[] words = command.split(SPACE_SEPARATOR, 2);
@@ -84,37 +92,53 @@ public class Parser {
     }
 
     /**
-     * Parses add command and splits input into ingredient parameters.
+     * Parses add command and splits input into ingredient parameters,
+     * then calls and executes the add command.
      *
-     * @param command 1 line of user input
+     * @param command The user input String
      * @return Ingredient added message
      */
-    private static String parseAddCommand(String command) {
-        String[] userInput = command.split(SPACE_SEPARATOR, 2);
-        String ingredientName;
-        String ingredientUnit;
-        String ingredientExpiry;
-        double ingredientAmount;
-
-        try {
-            ingredientName = AddIngredient.getIngredientName(userInput[1]);
-            ingredientAmount = AddIngredient.getIngredientAmount(userInput[1]);
-            ingredientUnit = AddIngredient.getIngredientUnit(userInput[1]);
-            ingredientExpiry = AddIngredient.getIngredientExpiry(userInput[1]);
-        } catch (InsufficientParametersException e) {
-            return e.getMessage();
-        } catch (DukeException e) {
-            return "Amount is not a number. Please try again";
+    private static String parseAddCommand(String command) throws DukeException {
+        String[] userInput = command.split(INGREDIENT_NAME_SEPARATOR + "|" + INGREDIENT_AMOUNT_SEPARATOR
+                + "|" + INGREDIENT_UNITS_SEPARATOR + "|" + INGREDIENT_EXPIRY_SEPARATOR);
+        if (userInput.length != 5) {
+            throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
         }
+
+        assert (userInput.length == 5);
+
+        String ingredientName = userInput[1];
+        double ingredientAmount;
+        try {
+            ingredientAmount = Double.parseDouble(userInput[2]);
+        } catch (NumberFormatException e) {
+            throw new DukeException(NUMBER_FORMAT_MESSAGE);
+        }
+        String ingredientUnit = userInput[3];
+        String ingredientExpiry = userInput[4];
+
         Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnit, ingredientExpiry);
         return new AddCommand(newIngredient).run();
     }
 
+    /**
+     * Calls and Executes the List Command.
+     *
+     * @return List of ingredients
+     * @throws DukeException if trying to access non-existing ingredients
+     */
     private static String parseListCommand() throws DukeException {
         String resultMsg = new ListCommand().run();
         return resultMsg;
     }
 
+    /**
+     * Calls and Executes the Delete Command.
+     *
+     * @param command The user input String
+     * @return Ingredient Deleted Message
+     * @throws DukeException if trying to access non-existing ingredients
+     */
     private static String parseDeleteCommand(String command) throws DukeException {
         String detail = command.substring(COMMAND_DELETE.length()).trim();
         String resultMsg;

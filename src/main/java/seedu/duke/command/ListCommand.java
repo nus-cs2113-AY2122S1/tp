@@ -9,12 +9,12 @@ import seedu.duke.ingredients.IngredientList;
 public class ListCommand implements Command {
 
     private static final String LIST_EMPTY_MESSAGE = "Your inventory is empty!";
-    private static final String LIST_MESSAGE = "Here is the list of the ingredients currently in inventory:\n";
+    private static final String LIST_MESSAGE = "Here is the list of the ingredients currently in inventory:\n" + "\t";
+    private static final String LIST_NEWLINE_INDENT = "\n" + "\t";
 
     @Override
     public String run() throws DukeException {
         String resultMsg = "";
-        int i;
 
         if (IngredientList.getInstance().getInventoryStock() == 0) {
             resultMsg = LIST_EMPTY_MESSAGE;
@@ -22,14 +22,17 @@ public class ListCommand implements Command {
         }
 
         assert (IngredientList.getInstance().getInventoryStock() > 0);
+        assert (IngredientList.getInstance() != null);
 
-        for (i = 0; i < IngredientList.getInstance().getInventoryStock() - 1; i++) {
-            resultMsg += (i + 1) + "."
-                    + IngredientList.getInstance().getIngredientInfo(i + 1)
-                    + '\n';
+        int currentStock = IngredientList.getInstance().getInventoryStock();
+        resultMsg = LIST_MESSAGE;
+        for (int i = 0; i < currentStock; i++) {
+            resultMsg +=  (i + 1) + ". "
+                    + IngredientList.getInstance().getIngredientInfo(i + 1);
+            if (i < currentStock - 1) {
+                resultMsg += LIST_NEWLINE_INDENT;
+            }
         }
-        resultMsg = resultMsg + IngredientList.getInstance().getInventoryStock() + "."
-                + IngredientList.getInstance().getIngredientInfo(i + 1);
 
         return resultMsg;
     }
