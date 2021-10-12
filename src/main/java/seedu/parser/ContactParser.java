@@ -99,6 +99,14 @@ public abstract class ContactParser {
         }
     }
 
+    private void checkTwitterUsernameRegex(String detailToParse) throws InvalidTwitterUsernameException {
+        //allows lowercase, numbers and underscore. Length must be max 15 characters
+        String twitterRegex = "^[a-z0-9_]{1,15}$";
+        if (!detailToParse.matches(twitterRegex)) {
+            throw new InvalidTwitterUsernameException();
+        }
+    }
+
     private int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
