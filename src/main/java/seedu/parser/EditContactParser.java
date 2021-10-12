@@ -15,7 +15,9 @@ public class EditContactParser extends ContactParser {
     public static final String BUFFER = " ";
 
     public String[] parseContactDetails(String userInput)
-            throws InvalidFlagException, MissingDetailException, MissingArgException, ForbiddenDetailException {
+            throws InvalidFlagException, MissingDetailException, MissingArgException, ForbiddenDetailException,
+            InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
+            InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException {
         String[] inputDetails = userInput.split(" ", NUMBER_OF_EDIT_ARGS);
         if (inputDetails.length < 3) {
             //if arguments are missing e.g. edit 2

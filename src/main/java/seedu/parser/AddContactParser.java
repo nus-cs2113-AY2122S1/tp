@@ -25,7 +25,9 @@ public class AddContactParser extends ContactParser {
      * @throws InvalidFlagException If the flag given is not recognised
      */
     public String[] parseContactDetails(String userInput) throws InvalidFlagException, MissingArgException,
-            MissingDetailException, ForbiddenDetailException {
+            MissingDetailException, ForbiddenDetailException, InvalidNameException, InvalidGithubUsernameException,
+            InvalidTelegramUsernameException, InvalidLinkedinUsernameException, InvalidTwitterUsernameException,
+            InvalidEmailException {
         String[] contactDetails = new String[NUMBER_OF_DETAILS];
         String[] destructuredInputs = userInput.split(DETAIL_SEPARATOR);
         if (destructuredInputs.length == 1) {
