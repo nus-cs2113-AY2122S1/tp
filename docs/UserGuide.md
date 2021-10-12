@@ -102,7 +102,7 @@ Lists all existing medication in the inventory.
 * Example 1 demonstrates the list of all medication without parameters.
 * Example 2 demonstrates list by medication name.
 
-Format: `list {i/stock_id n/name p/price q/quantity e/expiry_date d/description m/max_quantity sort/column_name rsort/column_name}`
+Format: `list {i/STOCK_ID n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
 Example 1: `list`
 
