@@ -45,6 +45,8 @@ public class ContactList {
                     contacts.get(contactIndex).setEmail(contactDetails[i]);
                     break;
                 default:
+                    //control should never reach here
+                    assert false;
                     throw new InvalidFlagException();
                 }
             }
