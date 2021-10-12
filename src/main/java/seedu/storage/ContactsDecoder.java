@@ -4,7 +4,7 @@ import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.contact.DetailType;
 import seedu.exception.FileErrorException;
-import seedu.ui.TextUi;
+import seedu.ui.ExceptionTextUi;
 
 import static seedu.storage.Storage.SEPARATOR;
 import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
@@ -45,7 +45,7 @@ public class ContactsDecoder {
                     contactTwitter, contactEmail);
             contactList.addContact(newContact);
         } catch (IndexOutOfBoundsException e) {
-            TextUi.corruptLineMessage(contactText);
+            ExceptionTextUi.corruptLineMessage(contactText);
         }
     }
 
