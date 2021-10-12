@@ -16,7 +16,8 @@ import java.io.IOException;
 
 public class Storage {
     private static final String MESSAGE_FORMAT_FAIL_CREATE_FILE = "Fail to create file - %s";
-    private static final String MESSAGE_FORMAT_UNABLE_TO_OPEN_FILE = "Unable to open file - %s";
+    private static final String MESSAGE_FORMAT_UNABLE_TO_OPEN_READ = "Unable to open file to read - %s";
+    private static final String MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE = "Unable to open file to write - %s";
     private static final String MESSAGE_FORMAT_UNABLE_TO_READ_JSON = "Unable to read from JSON file - %s";
     private static final String MESSAGE_FORMAT_UNABLE_TO_WRITE_JSON = "Unable to write to JSON file - %s";
     private static final String MESSAGE_FORMAT_JSON_SYNTAX_ERROR = "JSON file syntax error - %s";
@@ -50,7 +51,7 @@ public class Storage {
             moduleList = gson.fromJson(jsonReader, ModuleList.class);
             jsonReader.close();
         } catch (FileNotFoundException e) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_FILE, filename));
+            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_READ, filename));
         } catch (JsonIOException | IOException e) {
             throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_READ_JSON, filename));
         } catch (JsonSyntaxException e) {
@@ -80,7 +81,7 @@ public class Storage {
             gson.toJson(moduleList, ModuleList.class, jsonWriter);
             jsonWriter.close();
         } catch (IOException e) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_FILE, filename));
+            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE, filename));
         } catch (JsonIOException e) {
             throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_WRITE_JSON, filename));
         }
