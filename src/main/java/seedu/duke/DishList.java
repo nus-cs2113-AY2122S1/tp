@@ -31,15 +31,15 @@ public class DishList {
     }
 
     public static void delete(String dishName) {
-        //int listSize = dishList.size(); //listSize = N
+        int listSize = dishList.size(); //listSize = N
         int dishIndex = DishList.find(dishName);
         if (dishIndex == -1) {
             System.out.println(ui.getDishNotExistMsg());
-            //assert dishList.size() == listSize: "dishList should be of size N";
+            assert dishList.size() == listSize: "dishList should be of size N";
         } else {
             dishList.remove(dishIndex);
             ui.printDishNameRemoved(dishName);
-            //assert dishList.size() == (listSize - 1): "dishList should be of size N-1";
+            assert dishList.size() == (listSize - 1): "dishList should be of size N-1";
         }
     }
 }
