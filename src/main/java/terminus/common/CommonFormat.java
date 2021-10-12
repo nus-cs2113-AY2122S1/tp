@@ -29,6 +29,12 @@ public class CommonFormat {
             + "\"<day>\" \"<start_time " + LOCAL_TIME_FORMAT + ">\" \"<zoom_link>\"";
     public static final String COMMAND_ADD_NOTE_FORMAT = COMMAND_ADD + " \"<note name>\" \"<note content>\"";
 
+    /**
+     * Method to get arguments.
+     *
+     * @param arg String containing the arguments
+     * @return An array list containing the separated arguments
+     */
     public static ArrayList<String> findArguments(String arg) {
         ArrayList<String> argsArray = new ArrayList<>();
         Pattern p = Pattern.compile("\"(.*?)\"");
@@ -39,6 +45,12 @@ public class CommonFormat {
         return argsArray;
     }
 
+    /**
+     * Checks if an array list is empty.
+     *
+     * @param argArray The array list to be checked
+     * @return True if array list is empty, false otherwise
+     */
     public static boolean isArrayEmpty(ArrayList<String> argArray) {
         for (String s : argArray) {
             if (s.isBlank()) {
@@ -48,7 +60,14 @@ public class CommonFormat {
         return false;
     }
 
-    public static LocalTime localTimeConverter(String startTime) throws InvalidTimeFormatException {
+    /**
+     * Converts string to a LocalTime object.
+     *
+     * @param startTime The string to be converted to a LocalTime object
+     * @return A LocalTime object of the converted string
+     * @throws InvalidTimeFormatException Exception for when string does not follow the proper time format
+     */
+    public static LocalTime convertToLocalTime(String startTime) throws InvalidTimeFormatException {
         if (startTime.length() != 5 || startTime.indexOf(":") != 2) {
             throw new InvalidTimeFormatException(
                     String.format(Messages.ERROR_MESSAGE_INVALID_TIME_FORMAT, LOCAL_TIME_FORMAT));
