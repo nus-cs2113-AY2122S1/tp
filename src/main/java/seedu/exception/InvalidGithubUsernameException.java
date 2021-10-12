@@ -1,4 +1,4 @@
 package seedu.exception;
 
-public class InvalidGithubUsernameException extends Exception{
+public class InvalidGithubUsernameException extends Exception {
 }

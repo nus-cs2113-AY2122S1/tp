@@ -1,4 +1,4 @@
 package seedu.exception;
 
-public class InvalidLinkedinUsernameException extends Exception{
+public class InvalidLinkedinUsernameException extends Exception {
 }
