@@ -9,6 +9,12 @@ public class CutCommand extends Command {
 
     @Override
     public void execute(ClientList clients, Ui ui) {
-        clients.cut(clientIndex, ui);
+        try {
+            ui.showCut(clients.getClient(clientIndex));
+            clients.cut(clientIndex, ui);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("INVALID: Index out of bounds");
+        }
     }
 }
+

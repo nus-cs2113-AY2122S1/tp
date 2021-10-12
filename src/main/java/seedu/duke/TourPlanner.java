@@ -19,11 +19,17 @@ public class TourPlanner {
         ClientList clientList = new ClientList();
         while (flag) {
             command = ui.readCommand();
-            if (command.contains("bye")) {
-                break;
+            try {
+                Command dummy = Parser.parse(command);
+                dummy.execute(clientList, ui);
+                if (command.contains("bye")) {
+                    break;
+                }
+            } catch (NullPointerException | NumberFormatException e) {
+                System.out.println();
+            } finally {
+                ui.showLine();
             }
-            Command dummy = Parser.parse(command);
-            dummy.execute(clientList, ui);
         }
     }
 
