@@ -54,7 +54,7 @@ public class DeleteLinkCommandTest {
     }
 
     @Test
-    void execute_throwsException() throws InvalidCommandException, InvalidArgumentException {
+    void execute_deleteLink_throwsException() throws InvalidCommandException, InvalidArgumentException {
         Command deleteLinkCommand = linkCommandParser.parseCommand("delete 20");
         assertThrows(InvalidArgumentException.class, () -> deleteLinkCommand.execute(ui, nusModule));
     }
