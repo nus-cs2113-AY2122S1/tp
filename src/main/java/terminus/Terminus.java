@@ -21,20 +21,20 @@ public class Terminus {
 
     private ModuleStorage moduleStorage;
     private NusModule nusModule;
-    
+
     private static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "Format: %s";
     private static final Path DATA_DIRECTORY = Path.of(System.getProperty("user.dir"), "data");
     private static final String MAIN_JSON = "main.json";
 
     /**
-     * Main entry-point for the terminus.Terminus application.
+     * Enters the main entry-point for the terminus.Terminus application.
      */
     public static void main(String[] args) {
         new Terminus().run();
     }
 
     /**
-     * Start the program.
+     * Starts the program.
      */
     public void run() {
         start();
@@ -50,7 +50,7 @@ public class Terminus {
             this.parser = MainCommandParser.getInstance();
             this.workspace = "";
             this.moduleStorage = new ModuleStorage(DATA_DIRECTORY.resolve(MAIN_JSON));
-            
+
             TerminusLogger.info("Loading file...");
             this.nusModule = moduleStorage.loadFile();
         } catch (IOException e) {
@@ -80,7 +80,7 @@ public class Terminus {
             try {
                 currentCommand = parser.parseCommand(input);
                 CommandResult result = currentCommand.execute(ui, nusModule);
-                
+
                 boolean isExitCommand = result.isOk() && result.isExit();
                 boolean isWorkspaceCommand = result.isOk() && result.getAdditionalData() != null;
                 if (isExitCommand) {
@@ -101,11 +101,11 @@ public class Terminus {
                 ui.printSection(e.getMessage());
             } catch (InvalidArgumentException e) {
                 TerminusLogger.warning("Invalid input provided: " + input, e.getCause());
-                
+
                 // Check if the exception specified a correct command format for the user to follow.
                 if (e.getFormat() != null) {
                     // Print the format of the command along with the error message to the user.
-                    ui.printSection(e.getMessage(), String.format(INVALID_ARGUMENT_FORMAT_MESSAGE, e.getFormat()));   
+                    ui.printSection(e.getMessage(), String.format(INVALID_ARGUMENT_FORMAT_MESSAGE, e.getFormat()));
                 } else {
                     ui.printSection(e.getMessage());
                 }

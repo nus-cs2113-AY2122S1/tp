@@ -21,7 +21,7 @@ public class LinkCommandParser extends CommandParser {
     /**
      * Returns the command map for the schedule workspace.
      *
-     * @return A LinkCommandParser object which contains the command map for the schedule workspace
+     * @return A LinkCommandParser object which contains the command map for the schedule workspace.
      */
     public static LinkCommandParser getInstance() {
         LinkCommandParser parser = new LinkCommandParser();
@@ -35,8 +35,8 @@ public class LinkCommandParser extends CommandParser {
     /**
      * Returns the opening description of the workspace.
      *
-     * @param module The current module containing the array list of all the links
-     * @return The string containing a description of the number of links in the workspace
+     * @param module The current module containing the array list of all the links.
+     * @return The string containing a description of the number of links in the workspace.
      */
     @Override
     public String getWorkspaceBanner(NusModule module) {

@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * CommonFormat class to manage methods and formats that are used across different packages.
+ */
 public class CommonFormat {
 
     public static final String COMMAND_NOTE = "note";
@@ -30,10 +33,11 @@ public class CommonFormat {
     public static final String COMMAND_ADD_NOTE_FORMAT = COMMAND_ADD + " \"<note name>\" \"<note content>\"";
 
     /**
-     * Method to get arguments.
+     * Returns an ArrayList of String containing elements found based on regex.
+     * Matches any strings that is within a pair of double quotes.
      *
-     * @param arg String containing the arguments
-     * @return An array list containing the separated arguments
+     * @param arg String containing the arguments from inputs.
+     * @return An array list containing strings that is within a pair of double quotes from arg.
      */
     public static ArrayList<String> findArguments(String arg) {
         assert arg != null;
@@ -47,10 +51,10 @@ public class CommonFormat {
     }
 
     /**
-     * Checks if an array list is empty.
+     * Checks if any elements in the ArrayList of String is empty.
      *
-     * @param argArray The array list to be checked
-     * @return True if array list is empty, false otherwise
+     * @param argArray The ArrayList to be checked.
+     * @return True if array list is empty, false otherwise.
      */
     public static boolean isArrayEmpty(ArrayList<String> argArray) {
         assert argArray != null;
@@ -66,11 +70,11 @@ public class CommonFormat {
     }
 
     /**
-     * Converts string to a LocalTime object.
+     * Returns a LocalTime object from a given string.
      *
-     * @param startTime The string to be converted to a LocalTime object
-     * @return A LocalTime object of the converted string
-     * @throws InvalidArgumentException Exception for when string does not follow the proper time format
+     * @param startTime The string to be converted to a LocalTime object.
+     * @return A LocalTime object of the converted string.
+     * @throws InvalidArgumentException when string does not follow the proper time format.
      */
     public static LocalTime convertToLocalTime(String startTime) throws InvalidArgumentException {
         assert startTime != null;
@@ -84,6 +88,13 @@ public class CommonFormat {
 
     }
 
+    /**
+     * Returns the class name without its packages.
+     *
+     * @param type Content class type.
+     * @param <T> Content object type.
+     * @return A string of the class name from the class type without its packages.
+     */
     public static <T> String getClassName(T type) {
         assert type != null;
         String result = type.toString();

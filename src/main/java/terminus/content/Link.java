@@ -21,56 +21,27 @@ public class Link extends Content {
         this.link = link;
     }
 
-    /**
-     * Returns the day of the Link object.
-     *
-     * @return A string containing the day of the Link object
-     */
+
     public String getDay() {
         return day;
     }
 
-    /**
-     * Sets the day of the Link object.
-     *
-     * @param day The new day to be set for the Link object
-     */
     public void setDay(String day) {
         this.day = day;
     }
 
-    /**
-     * Returns the startTime of the Link object.
-     *
-     * @return A LocalTime object containing the startTime of the Link object
-     */
     public LocalTime getStartTime() {
         return startTime;
     }
 
-    /**
-     * Sets the startTime of the Link object.
-     *
-     * @param startTime The new startTime to be set for the Link object
-     */
     public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    /**
-     * Returns the link of the Link object.
-     *
-     * @return A String containing the link of the Link object
-     */
     public String getLink() {
         return link;
     }
 
-    /**
-     * Sets the link of the Link object.
-     *
-     * @param link The new link to be set for the Link object
-     */
     public void setLink(String link) {
         this.link = link;
     }
@@ -78,7 +49,7 @@ public class Link extends Content {
     /**
      * Returns all the attributes of the Link object.
      *
-     * @return A string containing all the attributes of the Link object
+     * @return A string containing all the attributes of the Link object.
      */
     @Override
     public String getDisplayInfo() {
@@ -88,7 +59,7 @@ public class Link extends Content {
     /**
      * Returns all the attributes' information of the Link object.
      *
-     * @return A method to display all the attributes of the Link object
+     * @return A method to display all the attributes of the Link object.
      */
     @Override
     public String getViewDescription() {

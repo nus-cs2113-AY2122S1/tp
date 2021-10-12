@@ -18,9 +18,10 @@ public abstract class CommandParser {
     protected final HashMap<String, Command> commandMap;
 
     /**
-     * Initializes the commandMap. Adds some default commands to it.
+     * Initializes the commandMap.
+     * Adds some default commands to it.
      *
-     * @param workspace The name of the workspace
+     * @param workspace The name of the workspace.
      */
     public CommandParser(String workspace) {
         this.commandMap = new HashMap<>();
@@ -33,10 +34,10 @@ public abstract class CommandParser {
     /**
      * Parses the command and its arguments.
      *
-     * @param command The user input command
-     * @return The Command object to be executed
-     * @throws InvalidCommandException    if there is no command or empty command
-     * @throws InvalidArgumentException   Fails when arguments could not be parsed
+     * @param command The user input command.
+     * @return The Command object to be executed.
+     * @throws InvalidCommandException when there is no command or empty command.
+     * @throws InvalidArgumentException when arguments could not be parsed.
      */
 
     public Command parseCommand(String command)
@@ -68,7 +69,7 @@ public abstract class CommandParser {
     /**
      * Returns the list of items in the help menu.
      *
-     * @return Array of strings contain the help messages
+     * @return Array of strings contain the help messages.
      */
     public String[] getHelpMenu() {
         return commandMap.entrySet()
@@ -83,8 +84,8 @@ public abstract class CommandParser {
     /**
      * Adds a command to the commandMap.
      *
-     * @param cmdName The name of the command
-     * @param command The actual command object
+     * @param cmdName The name of the command.
+     * @param command The actual command object.
      */
     protected void addCommand(String cmdName, Command command) {
         commandMap.put(cmdName, command);
@@ -93,7 +94,7 @@ public abstract class CommandParser {
     /**
      * Returns the name of the current workspace.
      *
-     * @return The name of the workspace
+     * @return The name of the workspace.
      */
     public String getWorkspace() {
         return workspace;
