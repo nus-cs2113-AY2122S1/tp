@@ -34,12 +34,12 @@ public class AddLinkCommandTest {
 
     @Test
     void parseArguments_addLinkCommand_success() {
-        String addLinkInput = "add \"test\" \"Thursday\" \"00:00\" \"Test.com\"";
+        String addLinkInput = "add \"test\" \"Thursday\" \"00:00\" \"https://zoom.us/test\"";
         ArrayList<String> parsedArguments = CommonFormat.findArguments(addLinkInput);
         assertEquals("test", parsedArguments.get(0));
         assertEquals("Thursday", parsedArguments.get(1));
         assertEquals("00:00", parsedArguments.get(2));
-        assertEquals("Test.com", parsedArguments.get(3));
+        assertEquals("https://zoom.us/test", parsedArguments.get(3));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class AddLinkCommandTest {
 
         for (int i = 0; i < 5; i++) {
             addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test" + i + "\"");
+                    "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
             addResult = addLinkCommand.execute(ui, nusModule);
             assertTrue(addResult.isOk());
         }

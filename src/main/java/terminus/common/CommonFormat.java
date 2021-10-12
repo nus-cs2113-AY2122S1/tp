@@ -1,5 +1,7 @@
 package terminus.common;
 
+
+import java.time.format.DateTimeParseException;
 import java.net.URL;
 import terminus.exception.InvalidArgumentException;
 import java.time.LocalTime;
@@ -34,6 +36,7 @@ public class CommonFormat {
      * @return An array list containing the separated arguments
      */
     public static ArrayList<String> findArguments(String arg) {
+        assert arg != null;
         ArrayList<String> argsArray = new ArrayList<>();
         Pattern p = Pattern.compile("\"(.*?)\"");
         Matcher m = p.matcher(arg);
@@ -50,8 +53,12 @@ public class CommonFormat {
      * @return True if array list is empty, false otherwise
      */
     public static boolean isArrayEmpty(ArrayList<String> argArray) {
+        assert argArray != null;
+        if (argArray.isEmpty()) {
+            return true;
+        }
         for (String s : argArray) {
-            if (s.isBlank()) {
+            if (s == null || s.isBlank()) {
                 return true;
             }
         }
@@ -66,15 +73,19 @@ public class CommonFormat {
      * @throws InvalidArgumentException Exception for when string does not follow the proper time format
      */
     public static LocalTime convertToLocalTime(String startTime) throws InvalidArgumentException {
-        if (startTime.length() != 5 || startTime.indexOf(":") != 2) {
+        assert startTime != null;
+        try {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(LOCAL_TIME_FORMAT);
+            return LocalTime.parse(startTime, format);
+        } catch (DateTimeParseException e) {
             throw new InvalidArgumentException(
                     String.format(Messages.ERROR_MESSAGE_INVALID_TIME_FORMAT, LOCAL_TIME_FORMAT));
         }
-        DateTimeFormatter format = DateTimeFormatter.ofPattern(LOCAL_TIME_FORMAT);
-        return LocalTime.parse(startTime, format);
+
     }
 
     public static <T> String getClassName(T type) {
+        assert type != null;
         String result = type.toString();
         String[] string = result.split("\\.");
         if (string.length > 0) {
