@@ -1,5 +1,6 @@
 package seedu.ui;
 
+
 import seedu.comparator.ClassNumComparator;
 import seedu.module.Lesson;
 import seedu.module.Module;
