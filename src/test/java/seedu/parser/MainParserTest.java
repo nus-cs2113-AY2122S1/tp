@@ -141,6 +141,18 @@ public class MainParserTest {
     }
 
     @Test
+    public void parseAddCommand_validInputsWithFlags_expectAddContactCommand() {
+        testUserInput = "         add -n   ashraf  -g fdada-121   -tw 66123ada -e ash@yahoo.com  ";
+        AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
+        AddContactCommand expectedCommand = new AddContactCommand("ashraf", "fdada-121",
+                null, null, "66123ada", "ash@yahoo.com");
+        assertEquals(expectedCommand.getName(), actualCommand.getName());
+        assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
+        assertEquals(expectedCommand.getTwitter(), actualCommand.getTwitter());
+        assertEquals(expectedCommand.getEmail(), actualCommand.getEmail());
+    }
+
+    @Test
     public void parseViewCommand_validIndex_expectViewContactIndexMatch() {
         final int testIndex = 1;
         final String testUserInput = "view " + testIndex;
