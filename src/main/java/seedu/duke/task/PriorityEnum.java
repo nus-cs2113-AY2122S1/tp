@@ -1,8 +1,6 @@
 package seedu.duke.task;
 
 import seedu.duke.exception.InvalidPriorityException;
-import seedu.duke.exception.InvalidRecurrenceException;
-import seedu.duke.exception.PriorityNumberDoesNotExistException;
 
 public enum PriorityEnum {
     HIGH(2),
@@ -34,13 +32,13 @@ public enum PriorityEnum {
      *
      * @return {@link PriorityEnum} enum corresponding to <code>int priorityNumber</code> argument.
      */
-    public static PriorityEnum getPriority(int priorityNumber) throws PriorityNumberDoesNotExistException {
+    public static PriorityEnum getPriority(int priorityNumber) throws InvalidPriorityException {
         for (PriorityEnum priority : PriorityEnum.values()) {
             if (priorityNumber == priority.getValue()) {
                 return priority;
             }
         }
-        throw new PriorityNumberDoesNotExistException();
+        throw new InvalidPriorityException(Integer.toString(priorityNumber));
     }
 
     public static PriorityEnum getPriority(String priority) throws InvalidPriorityException {

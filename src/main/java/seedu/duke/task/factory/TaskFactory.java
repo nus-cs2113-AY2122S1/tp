@@ -1,16 +1,17 @@
 package seedu.duke.task.factory;
 
 import java.util.HashMap;
+import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.log.Log;
 import seedu.duke.command.flags.TaskFlag;
 import seedu.duke.exception.InvalidTaskTypeException;
 import seedu.duke.task.Task;
 import seedu.duke.task.TypeEnum;
-import seedu.duke.utility.Utility;
 
 public class TaskFactory {
+    private static String TASK = "Task";
 
-    public static Task getTask(HashMap<String, String> flags) {
+    public static Task getTask(HashMap<String, String> flags) throws GetTaskFailedException {
         try {
             String taskTypeString = flags.get(TaskFlag.TYPE);
             TypeEnum taskType = TypeEnum.getTaskType(taskTypeString);
@@ -26,8 +27,9 @@ public class TaskFactory {
             }
         } catch (InvalidTaskTypeException itte) {
             Log.getLogger(TaskFactory.class).severe(itte.getMessage());
+        } catch (GetTaskFailedException gtfe) {
+            Log.getLogger(TaskFactory.class).warning(gtfe.getMessage());
         }
-        Utility.assertEndOfFunctionUnreachable();
-        return null;
+        throw new GetTaskFailedException(TASK);
     }
 }

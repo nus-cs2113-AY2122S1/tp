@@ -1,22 +1,20 @@
 package seedu.duke.task.factory;
 
 import java.util.HashMap;
+import seedu.duke.exception.GetTaskFailedException;
+import seedu.duke.exception.ParseTaskFailedException;
 import seedu.duke.log.Log;
 import seedu.duke.command.flags.TodoFlag;
-import seedu.duke.exception.RecurrenceWithoutDateException;
 import seedu.duke.exception.RequiredArgmentNotProvidedException;
 import seedu.duke.parser.TaskParser;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.factory.arguments.TodoArguments;
 import seedu.duke.task.type.Todo;
-import seedu.duke.utility.Utility;
 
 public class TodoFactory {
     private static final TypeEnum taskType = TypeEnum.TODO;
 
-    private static final String[] requiredArguments = {TodoFlag.DESCRIPTION};
-
-    static Todo getTodo(HashMap<String, String> flags) {
+    static Todo getTodo(HashMap<String, String> flags) throws GetTaskFailedException {
         try {
             hasRequiredArguments(flags);
 
@@ -30,35 +28,31 @@ public class TodoFactory {
 
         } catch (RequiredArgmentNotProvidedException ranpe) {
             Log.getLogger(TodoFactory.class).severe(ranpe.getMessage());
-        } catch (RecurrenceWithoutDateException rwde) {
-            Log.getLogger(TodoFactory.class).severe(rwde.getMessage());
+        } catch (ParseTaskFailedException ptfe) {
+            Log.getLogger(TodoFactory.class).warning(ptfe.getMessage());
         }
-        Utility.assertEndOfFunctionUnreachable();
-        return null;
+        throw new GetTaskFailedException(taskType.toString());
     }
 
     private static void hasRequiredArguments(HashMap<String, String> flags)
-            throws RequiredArgmentNotProvidedException, RecurrenceWithoutDateException {
-        for (String requiredArgument : requiredArguments) {
+            throws RequiredArgmentNotProvidedException {
+        for (String requiredArgument : TodoFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);
             if (flag == null) {
                 throw new RequiredArgmentNotProvidedException(requiredArgument, taskType.toString());
             }
         }
-        if (flags.get(TodoFlag.DO_ON_DATE) == null && flags.get(TodoFlag.RECURRENCE) != null) {
-            throw new RecurrenceWithoutDateException();
-        }
     }
 
     private static Todo getConstructor(TodoArguments arguments) {
         if (arguments.getPriority() == null) {
-            return getTodoWithNoPriority(arguments);
+            return getTodoWithDefaultPriority(arguments);
         } else {
             return getTodoWithPriority(arguments);
         }
     }
 
-    private static Todo getTodoWithNoPriority(TodoArguments arguments) {
+    private static Todo getTodoWithDefaultPriority(TodoArguments arguments) {
         if (arguments.getDoOnDate() == null) {
             return new Todo(arguments.getDescription());
         } else {

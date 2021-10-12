@@ -9,8 +9,4 @@ public class Utility {
 
     private static final String FUNCTION_SHOULD_NOT_REACH_END_ASSERTION
             = "Execution should not reach the end of function.";
-
-    public static void assertEndOfFunctionUnreachable() {
-        assert false : FUNCTION_SHOULD_NOT_REACH_END_ASSERTION;
-    }
 }

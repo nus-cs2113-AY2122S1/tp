@@ -1,7 +1,7 @@
 package seedu.duke.task;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.exception.PriorityNumberDoesNotExistException;
+import seedu.duke.exception.InvalidPriorityException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PriorityEnumTest {
     @Test
-    void getEnum_validInputs_expectPriorityEnum() throws PriorityNumberDoesNotExistException {
+    void getEnum_validInputs_expectPriorityEnum() throws InvalidPriorityException {
         assertEquals(PriorityEnum.HIGH, PriorityEnum.getPriority(2));
         assertEquals(PriorityEnum.MEDIUM, PriorityEnum.getPriority(1));
         assertEquals(PriorityEnum.LOW, PriorityEnum.getPriority(0));
@@ -17,9 +17,9 @@ class PriorityEnumTest {
 
     @Test
     void getEnum_invalidInputs_expectPriorityEnumDoesNotExistException() {
-        assertThrows(PriorityNumberDoesNotExistException.class,
+        assertThrows(InvalidPriorityException.class,
             () -> PriorityEnum.getPriority(-1));
-        assertThrows(PriorityNumberDoesNotExistException.class,
+        assertThrows(InvalidPriorityException.class,
             () -> PriorityEnum.getPriority(10));
     }
 }

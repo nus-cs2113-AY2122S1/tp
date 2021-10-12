@@ -50,7 +50,7 @@ public class Todo extends Task {
         return doOnDate;
     }
 
-    public void setDoOnDate(Date doOn) {
+    public void setDoOnDate(Date doOnDate) {
         this.doOnDate = doOnDate;
     }
 
