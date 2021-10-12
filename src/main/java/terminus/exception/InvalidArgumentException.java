@@ -1,5 +1,8 @@
 package terminus.exception;
 
+/**
+ * Invalid Argument Exception class which handles exception when argument from user command is invalid.
+ */
 public class InvalidArgumentException extends Exception {
 
     private final String format;
