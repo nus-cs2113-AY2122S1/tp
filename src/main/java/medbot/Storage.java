@@ -103,6 +103,7 @@ public class Storage {
 
         String[] personParameters = splitStorageLine(storageLine);
         String[] parameterPrefixes = {"i/", "n/", "p/", "e/", "a/"};
+
         ArrayList<String> prefixPlusPersonParameters = new ArrayList<>();
 
         Integer patientId = Integer.parseInt(personParameters[0]);
@@ -116,6 +117,8 @@ public class Storage {
             String prefixPlusPersonParameter = parameterPrefixes[i] + personParameters[i + 1];
             prefixPlusPersonParameters.add(prefixPlusPersonParameter);
         }
+
+        assert personParameters.length == parameterPrefixes.length + 1;
 
         return new Pair<>(patientId, prefixPlusPersonParameters);
     }
