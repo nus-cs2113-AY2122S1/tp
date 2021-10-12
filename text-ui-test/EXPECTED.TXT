@@ -1,6 +1,14 @@
-Generic greeting.
+Hello from
+  ____        _
+|  _ \ _   _| | _____
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
 
-CG1111 Engineering Principles and Practice I 6MC
+____________________________________________________________________________
+
+What would you like to do?
+==>CG1111 Engineering Principles and Practice I 6MC
 CG1111A Engineering Principles and Practice I 4MC
 CG1112 Engineering Principles and Practice II 6MC
 CG2023 Signals and Systems 4MC
@@ -14,8 +22,10 @@ CG4001 B. Eng. Dissertation 12MC
 CG4002 Computer Engineering Capstone Project 8MC
 CG4003 Advanced Project and Internship 12MC
 13 mods found.
+____________________________________________________________________________
 
-Title: Software Engineering & Object-Oriented Programming
+What would you like to do?
+==>Title: Software Engineering & Object-Oriented Programming
 MCs: 4
 Department: Computer Science
 This module introduces the necessary skills for systematic and
@@ -30,8 +40,10 @@ Prerequisites: CS2040C or ((CS2030 or its equivalent) and CS2040/S)
 S/U able: No
 Semester Availability: [1, 2]
 
-
 ____________________________________________________________________________
+
+What would you like to do?
+==>____________________________________________________________________________
 > Bye friend!
 > See you again! :)
 ____________________________________________________________________________

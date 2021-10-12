@@ -1,12 +1,15 @@
 package seedu.timetable;
 
 import seedu.exceptions.UniModsException;
+import seedu.logger.TimetableLogger;
 import seedu.module.Module;
 import seedu.ui.TextUi;
 import seedu.ui.TimetableUI;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.logging.Level;
+
 
 /**
  * The Timetable Class, which will track all added modules and lessons that you have signed up for.
@@ -23,6 +26,7 @@ public class Timetable implements Comparable<Timetable> {
     private int latestHour;
 
     private ArrayList<Module> modules;
+    private TimetableLogger logger = new TimetableLogger();
 
     private TimetableLesson[] monday = new TimetableLesson[24];
     private TimetableLesson[] tuesday = new TimetableLesson[24];
@@ -87,6 +91,11 @@ public class Timetable implements Comparable<Timetable> {
         if (timetableLesson.getEndHour() > latestHour) {
             latestHour = timetableLesson.getEndHour();
         }
+        assert earliestHour < latestHour
+                : "Earliest hour of the day is should be earlier than latest hour of the day";
+
+        logger.log(Level.INFO, String.format("%s added to timetable",
+                timetableLesson.getModuleCode() + ", " + timetableLesson.getLessonType()));
     }
 
     /**
@@ -131,6 +140,8 @@ public class Timetable implements Comparable<Timetable> {
                 modules.remove(modules.get(i));
                 TextUi.printModuleDeleted(moduleCode);
                 deleteFromLessons(module);
+                logger.log(Level.INFO, String.format("%s added to timetable",
+                        module.getModuleCode()));
                 return;
             }
         }
@@ -178,6 +189,7 @@ public class Timetable implements Comparable<Timetable> {
             modules.clear();
             clearTimetableFromLessons();
             TextUi.printTimetableCleared();
+            logger.log(Level.INFO, "All modules removed from timetable");
         } else {
             throw new UniModsException(TextUi.ERROR_EMPTY_TIMETABLE);
         }

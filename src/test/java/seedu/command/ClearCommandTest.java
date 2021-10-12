@@ -17,19 +17,16 @@ class ClearCommandTest {
     @Test
     public void execute_timetableWith2modules_timetableShouldBeCleared() {
 
-        // Creating two test timetables
-        Timetable tt1 = new Timetable(1);
-        Timetable tt2 = new Timetable(1);
-
         //Creating two test modules and adding to timetable 1
         Module testMod1 = new Module("CFG1002");
         testMod1.setModuleCredit(2.0);
         testMod1.setTitle("Career Catalyst");
 
-        Module testMod2 = new Module("CS1231");
+
         testMod1.setModuleCredit(4.0);
         testMod1.setTitle("Discrete Structures");
 
+        Timetable tt1 = new Timetable(1);
         Lesson lesson1 = new Lesson(
                 "CFG1002",
                 "0600",
@@ -37,6 +34,11 @@ class ClearCommandTest {
                 "E-Learn_B",
                 "Lecture",
                 "Wednesday");
+        TimetableLesson timetableLesson1 = new TimetableLesson(testMod1, 1, lesson1);
+        tt1.addLesson(timetableLesson1);
+
+        Module testMod2 = new Module("CS1231");
+        Timetable tt2 = new Timetable(1);
         Lesson lesson2 = new Lesson(
                 "CS1231",
                 "1000",
@@ -44,9 +46,8 @@ class ClearCommandTest {
                 "E-Learn_C",
                 "Lecture",
                 "Thursday");
-        TimetableLesson timetableLesson1 = new TimetableLesson(testMod1, 1, lesson1);
         TimetableLesson timetableLesson2 = new TimetableLesson(testMod2, 1, lesson2);
-        tt1.addLesson(timetableLesson1);
+
         tt1.addLesson(timetableLesson2);
 
         //Clearing timetable 1

@@ -12,6 +12,7 @@ import seedu.command.SearchCommand;
 import seedu.command.ShowCommand;
 import seedu.command.TimetableCommand;
 import seedu.command.UpdateCommand;
+import seedu.command.flags.SearchFlags;
 import seedu.duke.Duke;
 import seedu.timetable.Timetable;
 
