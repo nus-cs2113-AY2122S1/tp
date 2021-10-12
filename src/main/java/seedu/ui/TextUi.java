@@ -66,8 +66,10 @@ public class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void editContactMessage(String contactName) {
-        String message = "ConTech has edited the specified contact: " + contactName;
+    public static void editContactMessage(Contact editedContact) {
+        String message = "ConTech has edited the specified contact: \n"
+                + "Name:     " + editedContact.getName()
+                + formatContactFields(editedContact);
         printDoubleLineMessage(message);
     }
 
