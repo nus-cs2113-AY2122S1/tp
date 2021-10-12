@@ -18,7 +18,7 @@ public class DishList {
 
     //Returns -1 if not present, index if present
     public static int find(String dishName) {
-        for (Dish dish: dishList) {
+        for (Dish dish : dishList) {
             if (dish.getDishName().equals(dishName)) {
                 return dishList.indexOf(dish);
             }
