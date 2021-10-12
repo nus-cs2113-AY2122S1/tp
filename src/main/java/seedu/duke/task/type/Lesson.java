@@ -4,6 +4,7 @@ import seedu.duke.nusmods.NusModsParser;
 import seedu.duke.task.Task;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 public class Lesson extends Task {
     public String getModuleCode() {
@@ -35,5 +36,15 @@ public class Lesson extends Task {
         super(moduleCode + ' ' + classNo);
         this.moduleCode = moduleCode;
         this.classNo = classNo;
+    }
+
+    @Override
+    public boolean needReminder() {
+        return false;
+    }
+
+    @Override
+    public String getReminder(LocalDateTime now) {
+        return null;
     }
 }
