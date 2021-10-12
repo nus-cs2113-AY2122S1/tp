@@ -19,6 +19,7 @@ import java.time.Month;
 import java.time.Year;
 import java.time.YearMonth;
 import java.util.stream.StreamSupport;
+import seedu.duke.task.type.Todo;
 
 import static org.apache.commons.io.FileUtils.copyURLToFile;
 
@@ -65,7 +66,7 @@ public class NusModsParser {
                                         formatter.parse(l.get("startTime").getAsString()),
                                         formatter.parse(l.get("endTime").getAsString()));
                             } catch (ParseException ex) {
-                                return new Event(lesson.getTaskEntryDescription());
+                                return new Todo(lesson.getTaskEntryDescription());
                             }
                         })
                         .toArray(Event[]::new);

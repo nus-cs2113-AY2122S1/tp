@@ -36,7 +36,7 @@ public class Todo extends Task {
         setPriority(priority);
         setDoOnDate(doOnDate);
     }
-    
+
     public Todo(String description, Date doOnDate, RecurrenceEnum recurrence) {
         this(description);
         setDoOnDate(doOnDate);
@@ -63,9 +63,10 @@ public class Todo extends Task {
 
 
     public String getReminder(LocalDateTime now) {
-        return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
+        return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), getRecurrence());
     }
-    @Overrride
+
+    @Override
     public boolean needReminder() {
         return (reminder != null);
     }

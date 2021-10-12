@@ -81,6 +81,6 @@ public class Event extends Task {
     }
 
     public String getReminder(LocalDateTime now) {
-        return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
+        return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), getRecurrence());
     }
 }

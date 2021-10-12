@@ -66,6 +66,7 @@ public abstract class Task {
     public abstract boolean needReminder();
 
     public abstract String getReminder(LocalDateTime now);
+
     public RecurrenceEnum getRecurrence() {
         return this.recurrence;
     }

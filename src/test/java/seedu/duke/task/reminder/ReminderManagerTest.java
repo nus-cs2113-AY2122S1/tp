@@ -1,6 +1,8 @@
 package seedu.duke.task.reminder;
 
+import java.text.ParseException;
 import org.junit.jupiter.api.Test;
+import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskManager;
 import seedu.duke.task.type.Deadline;
@@ -12,18 +14,23 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 class ReminderManagerTest {
 
+    private static final String VALID_DATE1 = "14-02-1998 02:00:00";
+    private static final String VALID_DATE2 = "14-02-1998 03:30:00";
+
     TaskManager taskManager = new TaskManager();
     ArrayList<Task> tasklist = new ArrayList<Task>();
-    Date startDate = new Date();
-    Date endDate = new Date();
+    Date startDate = UtilityParser.getStringAsDate(VALID_DATE1);
+    Date endDate = UtilityParser.getStringAsDate(VALID_DATE2);
 
     ReminderManager reminderManager = new ReminderManager();
 
     private String expectedOut;
+
+    ReminderManagerTest() throws ParseException {
+    }
 
     @Test
     void sendReminder() {
