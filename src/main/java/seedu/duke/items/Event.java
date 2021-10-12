@@ -6,29 +6,29 @@ import java.time.LocalDateTime;
 
 public class Event extends Item {
 
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
     private String venue;
     private double budget;
 
     public static final String EVENT_DATA_ARGS_DELIMITER = "\\s*\\|\\s*";
 
-    public Event(String title, String description, String dateTime, String venue, double budget) {
+    public Event(String title, String description, String date, String venue, double budget) {
         super("event", title, description);
-        this.date = Parser.convertDateTime(dateTime);
+        this.dateTime = Parser.convertDateTime(date);
         this.venue = venue;
         this.budget = budget;
     }
 
     public LocalDateTime getDateValue() {
-        return date;
+        return dateTime;
     }
 
     public String getItemType() {
         return "event";
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public void setVenue(String venue) {
