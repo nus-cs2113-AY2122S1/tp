@@ -1,8 +1,7 @@
 # User Guide
 
-NUS Buddy is a **simple desktop app for managing your todo list**. It is optimized for use via a **Command Line 
-Interface (CLI)** so students can spend most of their time using the terminal and focus on actual works. It is designed 
-to be fast, flexible, and unobtrusive.
+NUS Buddy is a **simple desktop app for managing your todo list**. It is optimized for use via a **Command Line Interface (CLI)** so students can spend most of their time using the terminal and focus on actual works. 
+It is designed to be fast, flexible, and unobtrusive.
 
 ## Table of contents
 
@@ -42,8 +41,7 @@ A task contains a title, the day of the week of the task, and an optional task i
 
 Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION}`
 
-A lesson contains a title, the day of the week of the lesson, the start time of the lesson, and the end time of the 
-lesson.
+A lesson contains a title, the day of the week of the lesson, the start time of the lesson, and the end time of the lesson.
 
 Format: `add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME]`
 
