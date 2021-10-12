@@ -421,26 +421,33 @@ public class Parser {
      * @param query String input that contains the integer index of the entry to remove.
      */
     public static void deleteTraining(TrainingList trainings, String query) {
-        int trainingIndex = -1;
+        try {
 
-        String regex = "(\\/[a-z])+";
+            int trainingIndex = -1;
 
-        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(query);
+            String regex = "(\\/[a-z])+";
 
-        String[] words = query.trim().split(regex);
+            Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+            Matcher matcher = pattern.matcher(query);
 
-        int wordIndex = 1;
-        while (matcher.find()) {
-            if (matcher.group().equals("/t")) {
-                trainingIndex = Integer.parseInt(words[wordIndex].trim());
+            String[] words = query.trim().split(regex);
+
+            int wordIndex = 1;
+            while (matcher.find()) {
+                if (matcher.group().equals("/t")) {
+                    trainingIndex = Integer.parseInt(words[wordIndex].trim());
+                }
+                wordIndex++;
             }
-            wordIndex++;
-        }
 
-        if (trainingIndex != -1) {
-            TrainingSchedule toDelete = trainings.deleteTrainingSchedule(trainingIndex);
-            Ui.printDeletedTrainingMessage(toDelete);
+            if (trainingIndex != -1) {
+                TrainingSchedule toDelete = trainings.deleteTrainingSchedule(trainingIndex);
+                Ui.printDeletedTrainingMessage(toDelete);
+            }
+        } catch (IndexOutOfBoundsException exception) {
+            System.out.println("There is no such training number...");
+        } catch (NumberFormatException e) {
+            System.out.println("Your input must be a valid number...");
         }
 
     }
@@ -453,54 +460,60 @@ public class Parser {
      * @param query String input of TrainingSchedule to be edited, identified by index after /t.
      */
     public static void editTraining(TrainingList trainings, String query) {
-        int index = -1;
-        String name = "";
-        String venue = "";
-        String time = "";
+        try {
+            int index = -1;
+            String name = "";
+            String venue = "";
+            String time = "";
 
-        String regex = "(\\/[a-z])+";
+            String regex = "(\\/[a-z])+";
 
-        Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(query);
+            Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+            Matcher matcher = pattern.matcher(query);
 
-        String[] words = query.trim().split(regex);
+            String[] words = query.trim().split(regex);
 
-        int wordIndex = 1;
-        while (matcher.find()) {
-            switch (matcher.group()) {
-            case "/t":
-                index = Integer.parseInt(words[wordIndex].trim());
-                break;
-            case "/n":
-                name = words[wordIndex].trim();
-                break;
-            case "/a":
-                time = words[wordIndex].trim();
-                break;
-            case "/v":
-                venue = words[wordIndex].trim();
-                break;
-            default:
-                break;
+            int wordIndex = 1;
+            while (matcher.find()) {
+                switch (matcher.group()) {
+                case "/t":
+                    index = Integer.parseInt(words[wordIndex].trim());
+                    break;
+                case "/n":
+                    name = words[wordIndex].trim();
+                    break;
+                case "/a":
+                    time = words[wordIndex].trim();
+                    break;
+                case "/v":
+                    venue = words[wordIndex].trim();
+                    break;
+                default:
+                    break;
+                }
+
+                wordIndex++;
             }
 
-            wordIndex++;
-        }
+            if (index != -1) {
+                int listIndex = index - 1;
+                TrainingSchedule trainingToChange = trainings.getTrainingList().get(listIndex);
+                if (!name.equals("")) {
+                    trainingToChange.setTrainingName(name);
+                }
+                if (!time.equals("")) {
+                    trainingToChange.setTrainingTime(time);
+                }
+                if (!venue.equals("")) {
+                    trainingToChange.setTrainingVenue(venue);
+                }
 
-        if (index != -1) {
-            int listIndex = index - 1;
-            TrainingSchedule trainingToChange = trainings.getTrainingList().get(listIndex);
-            if (!name.equals("")) {
-                trainingToChange.setTrainingName(name);
+                trainings.getTrainingList().set(listIndex, trainingToChange);
             }
-            if (!time.equals("")) {
-                trainingToChange.setTrainingTime(time);
-            }
-            if (!venue.equals("")) {
-                trainingToChange.setTrainingVenue(venue);
-            }
-
-            trainings.getTrainingList().set(listIndex,trainingToChange);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("There is no such training number...");
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid index...");
         }
 
     }
