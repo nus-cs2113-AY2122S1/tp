@@ -24,7 +24,8 @@ public class Ui {
     }
 
     public static void printMoney(double money) {
-        System.out.printf("%.2f", money);
+        System.out.printf("%.2f%n", money);
+        System.out.print(System.lineSeparator());
     }
 
     public static void printExpenseDetails(Expense e) {
