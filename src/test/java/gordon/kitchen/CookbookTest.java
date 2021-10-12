@@ -13,6 +13,7 @@ class CookbookTest {
             Recipe r = new Recipe("Coffee");
             r.addIngredient("Coffee beans");
             r.addIngredient("Water");
+            r.addIngredient("Sugar");
             r.addStep("Boil water");
             r.addStep("Grind beans");
             r.addStep("Pour water over grounds");

@@ -44,6 +44,7 @@ public class Cookbook {
 
     public void removeRecipe(int index) throws GordonException {
         try {
+            assert (index > 0);
             recipes.remove(index);
         } catch (IndexOutOfBoundsException e) {
             throw new GordonException(GordonException.INDEX_OOB);
