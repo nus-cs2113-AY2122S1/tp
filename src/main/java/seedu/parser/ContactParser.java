@@ -17,6 +17,7 @@ public abstract class ContactParser {
     public static final int NUMBER_OF_DETAILS = 2;
     public static final int NUMBER_OF_ADD_ARGS = 2;
     public static final int NUMBER_OF_EDIT_ARGS = 3;
+    public static final int NUMBER_OF_FIELDS = 6;
 
     public static final String DETAIL_SEPARATOR = " -";
     public static final int FLAG_INDEX_IN_DETAILS = 0;
@@ -26,6 +27,10 @@ public abstract class ContactParser {
 
     public static final String NAME_FLAG = "n";
     public static final String GITHUB_FLAG = "g";
+    public static final String TELEGRAM_FLAG = "te";
+    public static final String TWITTER_FLAG = "tw";
+    public static final String EMAIL_FLAG = "e";
+    public static final String LINKEDIN_FLAG = "l";
 
     public abstract String[] parseContactDetails(String userInput) throws InvalidFlagException,
             MissingArgException, MissingDetailException, ForbiddenDetailException,
@@ -69,22 +74,22 @@ public abstract class ContactParser {
             InvalidTelegramUsernameException, InvalidTwitterUsernameException,
             InvalidLinkedinUsernameException, InvalidEmailException {
         switch (flag) {
-        case "n":
+        case NAME_FLAG:
             checkNameRegex(detailToParse);
             break;
-        case "g":
+        case GITHUB_FLAG:
             checkGithubUsernameRegex(detailToParse);
             break;
-        case "tele":
+        case TELEGRAM_FLAG:
             checkTelegramUsernameRegex(detailToParse);
             break;
-        case "twit":
+        case TWITTER_FLAG:
             checkTwitterUsernameRegex(detailToParse);
             break;
-        case "link":
+        case LINKEDIN_FLAG:
             checkLinkedinUsernameRegex(detailToParse);
             break;
-        case "email":
+        case EMAIL_FLAG:
             checkEmailRegex(detailToParse);
             break;
         default:
@@ -152,6 +157,18 @@ public abstract class ContactParser {
             break;
         case GITHUB_FLAG:
             indexToStore = DetailType.GITHUB.getIndex();
+            break;
+        case TELEGRAM_FLAG:
+            indexToStore = DetailType.TELEGRAM.getIndex();
+            break;
+        case TWITTER_FLAG:
+            indexToStore = DetailType.TWITTER.getIndex();
+            break;
+        case EMAIL_FLAG:
+            indexToStore = DetailType.EMAIL.getIndex();
+            break;
+        case LINKEDIN_FLAG:
+            indexToStore = DetailType.LINKEDIN.getIndex();
             break;
         default:
             throw new InvalidFlagException();

@@ -22,6 +22,8 @@ import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingNameException;
 
+import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
+
 public class MainParser {
     private static final String ADD_CONTACT_COMD = "add";
     private static final String EDIT_CONTACT_COMD = "edit";
@@ -29,7 +31,6 @@ public class MainParser {
     private static final String EXIT_COMD = "exit";
     private static final String VIEW_COMD = "view";
     private static final String LIST_COMD = "list";
-    private static final String FORBIDDEN_COMD = "forbidden";
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
@@ -80,7 +81,14 @@ public class MainParser {
             if (details[NAME_INDEX] == null) {
                 throw new MissingNameException();
             }
-            return new AddContactCommand(details[DetailType.NAME.getIndex()], details[DetailType.GITHUB.getIndex()]);
+            assert details.length == NUMBER_OF_FIELDS;
+            String name = details[DetailType.NAME.getIndex()];
+            String github = details[DetailType.GITHUB.getIndex()];
+            String linkedin = details[DetailType.LINKEDIN.getIndex()];
+            String telegram = details[DetailType.TELEGRAM.getIndex()];
+            String twitter = details[DetailType.TWITTER.getIndex()];
+            String email = details[DetailType.EMAIL.getIndex()];
+            return new AddContactCommand(name, github, linkedin, telegram, twitter, email);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (MissingArgException e) {
@@ -109,9 +117,9 @@ public class MainParser {
     private Command parseEditContact(String userInput) { // userInput is raw user input
         contactParser = editContactParser;
         try {
-            int userIndex = editContactParser.getIndex(userInput); //throws MissingArgException
             String[] details = editContactParser.parseContactDetails(userInput);
             //throws InvalidFlagException, MissingDetailException, MissingArgException
+            int userIndex = IndexParser.getIndexFromInput(userInput, EDIT_CONTACT_COMD); //throws MissingArgException
             return new EditContactCommand(details, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
@@ -151,14 +159,11 @@ public class MainParser {
     }
 
     private Command parseDeleteContact(String userInput) {
-        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
-        //check if there is only the command word and no arguments in input
-        if (destructuredInputs.length == 1) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
-        }
         try {
-            int deletedIndex = Integer.parseInt(destructuredInputs[1].trim());
+            int deletedIndex = IndexParser.getIndexFromInput(userInput, DELETE_CONTACT_COMD);
             return new DeleteContactCommand(deletedIndex);
+        } catch (MissingArgException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }

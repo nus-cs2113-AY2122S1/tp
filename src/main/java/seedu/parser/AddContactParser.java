@@ -16,21 +16,22 @@ public class AddContactParser extends ContactParser {
      * Returns a String[] containing the user's input and the arguments specified for
      * each detail flag. Each detail is parsed individually using parseDetail.
      * <p>
-     * Eg. userInput => add -n andre -g ng-andre
-     *     output => ["andre", "ng-andre"]
+     * Eg. userInput => add -n andre -g ng-andre -te ng_andre -tw andre -e andre@gmail.com -l ng-andre
+     * output => ["andre", "ng-andre", "ng_andre", "ng-andre", "ng_andre", "andre", "andre@gmail.com"]
      * </p>
      * Note: Each index is properly identified by enumeration in contact/DetailType
+     *
      * @param userInput User's complete untouched input
      * @return String[] Returns an array of details
      * @throws InvalidFlagException If the flag given is not recognised
      */
     public String[] parseContactDetails(String userInput) throws InvalidFlagException, MissingArgException,
-            MissingDetailException, ForbiddenDetailException, InvalidNameException, InvalidGithubUsernameException,
-            InvalidTelegramUsernameException, InvalidLinkedinUsernameException, InvalidTwitterUsernameException,
-            InvalidEmailException {
-        String[] contactDetails = new String[NUMBER_OF_DETAILS];
+            InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
+            InvalidLinkedinUsernameException, InvalidTwitterUsernameException,
+            InvalidEmailException, MissingDetailException, ForbiddenDetailException {
+        String[] contactDetails = new String[NUMBER_OF_FIELDS];
         String[] destructuredInputs = userInput.split(DETAIL_SEPARATOR);
-        if (destructuredInputs.length == 1) {
+        if (destructuredInputs.length < NUMBER_OF_ADD_ARGS) {
             throw new MissingArgException();
         }
         for (int i = CONTACT_PARAMS_START_INDEX; i < destructuredInputs.length; i++) {

@@ -12,21 +12,29 @@ public class TextUi {
 
     private static final String LINE = "____________________________________________________________\n";
 
-    private final Scanner scanner;
+    private static final Scanner scanner = new Scanner(System.in);
 
     public TextUi() {
-        scanner = new Scanner(System.in);
         initMessage();
     }
 
-    public String getUserInput() {
+    public static String getUserInput() {
         String userInput = scanner.nextLine().trim();
         if (userInput.contains(",")) {
             String newUserInput = userInput.replace(",", "");
-            forbiddenInputCommaMessage(newUserInput);
+            ExceptionTextUi.forbiddenInputCommaMessage(newUserInput);
             return newUserInput;
         }
         return userInput;
+    }
+
+    public static String getUserDeleteConfirmation(Contact deletedContact, int deletedIndex) {
+        String message = "Delete this contact?  (y/n)\n"
+                + deletedIndex + ". " + deletedContact.getName() + formatContactFields(deletedContact);
+        printDoubleLineMessage(message);
+
+        String userDeleteConfirmation = scanner.nextLine().trim();
+        return userDeleteConfirmation;
     }
 
     // Used for print messages after user inputs
@@ -59,19 +67,33 @@ public class TextUi {
         printBottomLineMessage(message);
     }
 
-    public static void addContactMessage(String contactName, int listSize) {
-        String message = "ConTech has added the specified contact: " + contactName + "\n" + "You now have " + listSize
-                + " contact(s).";
+    public static void addContactMessage(Contact addedContact, int listSize) {
+        String message = "ConTech has added the specified contact: \n"
+                + "Name:     " + addedContact.getName()
+                + formatContactFields(addedContact)
+                + "\n\nYou now have " + listSize + " contact(s).";
         printDoubleLineMessage(message);
     }
 
-    public static void editContactMessage(String contactName) {
-        String message = "ConTech has edited the specified contact: " + contactName;
+    public static void editContactMessage(Contact editedContact) {
+        String message = "ConTech has edited the specified contact: \n"
+                + "Name:     " + editedContact.getName()
+                + formatContactFields(editedContact);
         printDoubleLineMessage(message);
+    }
+
+    public static String formatContactFields(Contact addedContact) {
+        String viewGithub = ViewMessageFormatterUi.viewGithubFormatter(addedContact);
+        String viewEmail = ViewMessageFormatterUi.viewEmailFormatter(addedContact);
+        String viewTwitter = ViewMessageFormatterUi.viewTwitterFormatter(addedContact);
+        String viewTelegram = ViewMessageFormatterUi.viewTelegramFormatter(addedContact);
+        String viewLinkedin = ViewMessageFormatterUi.viewLinkedinFormatter(addedContact);
+        return viewGithub + viewEmail + viewTelegram + viewLinkedin + viewTwitter;
     }
 
     public static void viewContactMessage(Contact viewingContact, int index) {
-        String message = index + ". " + "Name: " + viewingContact.getName() + " GitHub: " + viewingContact.getGithub();
+        String viewName = ViewMessageFormatterUi.viewNameFormatter(viewingContact);
+        String message = index + ". " + viewName + formatContactFields(viewingContact);
         printDoubleLineMessage(message);
     }
 
@@ -89,6 +111,11 @@ public class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void cancelDeleteContactMessage() {
+        String message = "Delete has been cancelled.";
+        printDoubleLineMessage(message);
+    }
+
     public static void deleteContactMessage(String contactName, int listSize) {
         String message = "ConTech has removed the specified contact: " + contactName + "\n" + "You now have " + listSize
                 + " contact(s).";
@@ -97,51 +124,6 @@ public class TextUi {
 
     public static void exitMessage() {
         String message = "ConTech will now shutdown.\n" + "We hope you have enjoyed using it.";
-        printDoubleLineMessage(message);
-    }
-
-    // Error Messages
-    public static void fileErrorMessage(String contactFilePath) {
-        String message = "ConTech is unfortunately unable to access / create a\n" + " save file at " + contactFilePath
-                + ".\n" + "Please relocate the file and try again.";
-        printBottomLineMessage(message);
-    }
-
-    public static void invalidCommandMessage() {
-        String message = "ConTech is unable to understand your request.\n" + "Please try again with a valid command.";
-        printDoubleLineMessage(message);
-    }
-
-    public static void invalidFlagMessage() {
-        String message = "There appears to be a flag that is not recognised.\n"
-                + "Please try again with a valid flag.\n" + "  -n NAME\n" + "  -g GITHUB";
-        printDoubleLineMessage(message);
-    }
-
-    public static void invalidIndexMessage() {
-        String message = "Please enter a valid contact index.";
-        printDoubleLineMessage(message);
-    }
-
-    public static void missingDetailMessage() {
-        String message = "There are missing details.\n" + "Please remove any flags with no details, \n"
-                + "and ensure that your flags used are correct:\n" + "  -n NAME\n" + "  -g GITHUB";
-        printDoubleLineMessage(message);
-    }
-
-    public static void missingArgMessage() {
-        String message = "There seems to be missing parameters in your request.\n" + "Please specify your command.";
-        printDoubleLineMessage(message);
-    }
-
-    public static void invalidNumMessage() {
-        String message = "That does not seem to be a number.\n" + "Please provide a number instead.";
-        printDoubleLineMessage(message);
-    }
-
-    public static void invalidFormatMessage() {
-        String message = "ConTech is unable to understand your request.\n"
-                + "The request has not been formatted correctly. Please try again.";
         printDoubleLineMessage(message);
     }
 
@@ -172,44 +154,6 @@ public class TextUi {
 
     public static void invalidLinkedinInput() {
         String message = "The linkedin username is not correctly formatted";
-        printDoubleLineMessage(message);
-    }
-
-    public static void missingNameMessage() {
-        String message = "There are missing details.\n"
-                + "Please specify a name when creating a contact with the flag -n";
-        printDoubleLineMessage(message);
-    }
-
-    public static void numOutOfRangeMessage(int listSize) {
-        String message;
-        int maxIndex = listSize - 1;
-        if (listSize == 0) {
-            message = "There are no contacts stored in ConTech.";
-        } else if (listSize == 1) {
-            message = "The number you have input is out of range.\n"
-                    + "You only have 1 contact stored.";
-        } else {
-            message = "The number you have input is out of range.\n"
-                    + "Please input a number between 0 and " + maxIndex + ".";
-        }
-        printDoubleLineMessage(message);
-    }
-
-    public static void corruptLineMessage(String line) {
-        printBottomLineMessage("Line \"" + line + "\" is corrupted and not loaded.");
-    }
-
-    private void forbiddenInputCommaMessage(String newUserInput) {
-        String message = "Due to the storage nature of ConTech, we will remove\n"
-                + "commas (\",\"), and attempt to parse it as:\n"
-                + newUserInput;
-        printTopLineMessage(message);
-    }
-
-    public static void forbiddenDetailMessage() {
-        String message = "As one of the details to be stored is \"null\", \n"
-                + "ConTech is unable to process it";
         printDoubleLineMessage(message);
     }
 }

@@ -3,14 +3,18 @@ package seedu.contact;
 public class Contact {
     private String name;
     private String github;
-    private String email;
     private String linkedin;
-    private String twitter;
     private String telegram;
+    private String twitter;
+    private String email;
 
-    public Contact(String name, String github) {
+    public Contact(String name, String github, String linkedin, String telegram, String twitter, String email) {
         this.name = name;
         this.github = github;
+        this.linkedin = linkedin;
+        this.telegram = telegram;
+        this.twitter = twitter;
+        this.email = email;
     }
 
     public String getName() {

@@ -27,17 +27,9 @@ class EditContactParserTest {
             MissingArgException, InvalidFlagException, ForbiddenDetailException, InvalidTelegramUsernameException,
             InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
             InvalidTwitterUsernameException, InvalidEmailException {
-        String[] expectedResult = {null, "github"};
+        String[] expectedResult = {null, "github", null, null, null, null};
         String testInput = "edit 1 -g github";
         String[] actualResult = editContactParser.parseContactDetails(testInput);
         assertArrayEquals(expectedResult, actualResult);
-    }
-
-    @Test
-    void getIndex() throws MissingArgException {
-        int expectedResult = 3;
-        String testInput = "edit 3 ";
-        int actualResult = editContactParser.getIndex(testInput);
-        assertEquals(expectedResult, actualResult);
     }
 }

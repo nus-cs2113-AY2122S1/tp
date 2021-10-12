@@ -39,9 +39,9 @@ class AddContactParserTest {
             MissingDetailException, MissingArgException, ForbiddenDetailException, InvalidTelegramUsernameException,
             InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
             InvalidTwitterUsernameException, InvalidEmailException {
-        inputUserInput = "add       -n   andre   -g ng-andre   ";
+        inputUserInput = "         add -n   andre -g  ng-andre  -l linkedin -tw    twit -te   tel69  -e yoyo@gmail.com";
         actualOutput = addContactParser.parseContactDetails(inputUserInput);
-        expectedOutput = new String[]{"andre", "ng-andre"};
+        expectedOutput = new String[]{"andre", "ng-andre", "linkedin", "tel69", "twit", "yoyo@gmail.com"};
         assertArrayEquals(expectedOutput, actualOutput);
     }
 

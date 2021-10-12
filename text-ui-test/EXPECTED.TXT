@@ -18,7 +18,14 @@ data/contacts.txt
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: ng andre
+There are no contacts stored in ConTech.
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: 
+Name:     ng andre
+Github:   github.com/ng-andre
+
 You now have 1 contact(s).
 ____________________________________________________________
 
@@ -32,17 +39,38 @@ Please enter a valid contact index.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: ashraf
+ConTech has added the specified contact: 
+Name:     ashraf
+Github:   github.com/ashraf
+
 You now have 2 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-The number you have input is out of range.
-Please input a number between 0 and 1.
+Delete this contact?  (y/n)
+1. ashraf
+Github:   github.com/ashraf
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: mayank
+Delete has been cancelled.
+____________________________________________________________
+
+____________________________________________________________
+Delete this contact?  (y/n)
+1. ashraf
+Github:   github.com/ashraf
+____________________________________________________________
+
+____________________________________________________________
+Delete has been cancelled.
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: 
+Name:     mayank
+Github:   github.com/mayankp123
+
 You now have 3 contact(s).
 ____________________________________________________________
 
@@ -52,12 +80,18 @@ Please input a number between 0 and 2.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: bory
+ConTech has added the specified contact: 
+Name:     bory
+Github:   github.com/marcus
+
 You now have 4 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: andre
+ConTech has added the specified contact: 
+Name:     andre
+Github:   github.com/ng-andre
+
 You now have 5 contact(s).
 ____________________________________________________________
 
@@ -75,7 +109,8 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
-1. Name: ashraf GitHub: ashraf
+1. ashraf
+Github:   github.com/ashraf
 ____________________________________________________________
 
 ____________________________________________________________
@@ -84,6 +119,10 @@ Please remove any flags with no details,
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
 ____________________________________________________________
 
 ____________________________________________________________
@@ -91,7 +130,10 @@ Please enter a valid contact index.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: lezong
+ConTech has added the specified contact: 
+Name:     lezong
+Github:   github.com/lezongmun
+
 You now have 6 contact(s).
 ____________________________________________________________
 
@@ -115,12 +157,25 @@ ____________________________________________________________
 ____________________________________________________________
 
 ____________________________________________________________
-3. Name: bory GitHub: marcus
+3. bory
+Github:   github.com/marcus
+____________________________________________________________
+
+____________________________________________________________
+Delete this contact?  (y/n)
+0. ng andre
+Github:   github.com/ng-andre
 ____________________________________________________________
 
 ____________________________________________________________
 ConTech has removed the specified contact: ng andre
 You now have 5 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+Delete this contact?  (y/n)
+0. ashraf
+Github:   github.com/ashraf
 ____________________________________________________________
 
 ____________________________________________________________
@@ -134,10 +189,15 @@ Please remove any flags with no details,
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
 ____________________________________________________________
 
 ____________________________________________________________
-2. Name: andre GitHub: ng-andre
+2. andre
+Github:   github.com/ng-andre
 ____________________________________________________________
 
 ____________________________________________________________
@@ -160,11 +220,34 @@ There appears to be a flag that is not recognised.
 Please try again with a valid flag.
   -n NAME
   -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: lezongmun
+ConTech has added the specified contact: 
+Name:     lezongmun
+Github:   github.com/lezong
+
 You now have 5 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+Delete this contact?  (y/n)
+1. bory
+Github:   github.com/marcus
+____________________________________________________________
+
+____________________________________________________________
+Delete has been cancelled.
+____________________________________________________________
+
+____________________________________________________________
+Delete this contact?  (y/n)
+1. bory
+Github:   github.com/marcus
 ____________________________________________________________
 
 ____________________________________________________________
@@ -189,7 +272,8 @@ Please enter a valid contact index.
 ____________________________________________________________
 
 ____________________________________________________________
-0. Name: mayank GitHub: mayankp123
+0. mayank
+Github:   github.com/mayankp123
 ____________________________________________________________
 
 ____________________________________________________________
@@ -198,6 +282,10 @@ Please remove any flags with no details,
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
 ____________________________________________________________
 
 ____________________________________________________________
@@ -206,7 +294,10 @@ Due to the storage nature of ConTech, we will remove
 commas (","), and attempt to parse it as:
 add -n lezong mun -g    lezaimun
 ____________________________________________________________
-ConTech has added the specified contact: lezong mun
+ConTech has added the specified contact: 
+Name:     lezong mun
+Github:   github.com/lezaimun
+
 You now have 5 contact(s).
 ____________________________________________________________
 
@@ -221,12 +312,58 @@ ConTech is unable to process it
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: dev
+ConTech has added the specified contact: 
+Name:     dev
+Github:   github.com/nullptr
+
 You now have 6 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has edited the specified contact: lezongmun
+ConTech has edited the specified contact: 
+Name:     lezongmun
+Github:   github.com/new-git
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: 
+Name:     name
+Github:   github.com/github
+Email:    email
+Telegram: t.me/telegram
+LinkedIn: linkedin.com/in/linkedin
+Twitter:  twitter.com/twitter
+
+You now have 7 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+There appears to be a flag that is not recognised.
+Please try again with a valid flag.
+  -n NAME
+  -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: 
+Name:     lezai3
+Github:   github.com/lezongmun
+Email:    lezongmun@gmail.com
+LinkedIn: linkedin.com/in/lezongmun
+
+You now have 8 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact: 
+Name:     lezongggg
+Telegram: t.me/testTelegram
+
+You now have 9 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
