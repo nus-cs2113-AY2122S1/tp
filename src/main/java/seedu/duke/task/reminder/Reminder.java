@@ -1,5 +1,7 @@
 package seedu.duke.task.reminder;
 
+import seedu.duke.task.RecurrenceEnum;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.sql.Timestamp;
@@ -10,7 +12,7 @@ public class Reminder {
     private boolean reminderDone;
 
     public Reminder() {
-
+        this.reminderDone = false;
     }
 
     public Reminder(Date time) {
