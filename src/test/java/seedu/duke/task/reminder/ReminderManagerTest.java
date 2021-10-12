@@ -37,12 +37,14 @@ class ReminderManagerTest {
 
         Task todoWithReminder = new Todo("lecture with reminder", startDate);
         Task todoWithoutReminder = new Todo("lecture without reminder", endDate);
-        Task deadlineTest = new Deadline("exercise 1", startDate);
+        Task deadlineWithReminder = new Deadline("exercise 1", startDate);
+        Task deadlineWithoutReminder = new Deadline("exercise 1", endDate);
         Task eventTest = new Event("meeting", startDate, endDate);
 
         tasklist.add(todoWithReminder);
         tasklist.add(todoWithoutReminder);
-        tasklist.add(deadlineTest);
+        tasklist.add(deadlineWithReminder);
+        tasklist.add(deadlineWithoutReminder);
         tasklist.add(eventTest);
 
         taskManager.setTasklist(tasklist);

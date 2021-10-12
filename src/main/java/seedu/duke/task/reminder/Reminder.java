@@ -53,28 +53,6 @@ public class Reminder {
         }
         return "";
     }
-/*
-    public void printReminder(LocalDateTime now, String task, RecurrenceEnum recurrence) {
-        if (!reminderDone) {
-            switch (recurrence) {
-            case NONE:
-                checkAndPrintReminder(now, task);
-            case DAILY:
-                checkAndPrintReminder(now, task);
-                setRecurReminderTime(reminderTime.plusDays(1));
-            case WEEKLY:
-                checkAndPrintReminder(now, task);
-                setRecurReminderTime(reminderTime.plusWeeks(1));
-            case MONTHLY:
-                checkAndPrintReminder(now, task);
-                setRecurReminderTime(reminderTime.plusMonths(1));
-            case YEARLY:
-                checkAndPrintReminder(now, task);
-                setRecurReminderTime(reminderTime.plusYears(1));
-            }
-        }
-    }
-    */
 
     public String getRecurrenceMessage(LocalDateTime now, String task, RecurrenceEnum recurrence) {
         String reminderMessage = "";

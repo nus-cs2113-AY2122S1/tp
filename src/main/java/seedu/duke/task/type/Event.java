@@ -78,13 +78,6 @@ public class Event extends Task {
         return super.getTaskEntryDescription() + " (startDate: " + getDateAsString(this.startDate) + " - "
                 + "endDate: " + getDateAsString(this.endDate) + ")";
     }
-/*
-    @Override
-    public void displayReminder(LocalDateTime now) {
-        reminder.printReminder(now, getTaskEntryDescription(), recurrence);
-    }
-
- */
 
     @Override
     public boolean needReminder() {
