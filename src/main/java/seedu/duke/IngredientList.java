@@ -47,8 +47,8 @@ public class IngredientList {
             for (Dish dish : DishList.dishList) {
                 //Find if they contain ingr in constituents
                 ArrayList<Ingredient> constituents = dish.getConstituents();
-                for(int i = 0; i < constituents.size(); i++) {
-                    if(constituents.get(i).getIngredientName().equals(ingredientName)) {
+                for (int i = 0; i < constituents.size(); i++) {
+                    if (constituents.get(i).getIngredientName().equals(ingredientName)) {
                         constituents.remove(i);
                     }
                 }
