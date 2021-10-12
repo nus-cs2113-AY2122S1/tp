@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class Catalogue {
     ArrayList<Item> itemsArrayList = new ArrayList<>();
 
-    public Item removeItem(String ID) {
+    public Item removeItem(String id) {
         Item selected = null;
         for (Item current : itemsArrayList) {
-            if (current.getID().equals(ID)) {
+            if (current.getID().equals(id)) {
                 selected = current;
                 break;
             }

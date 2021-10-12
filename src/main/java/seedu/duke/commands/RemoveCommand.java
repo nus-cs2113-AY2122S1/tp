@@ -14,6 +14,7 @@ public class RemoveCommand extends Command {
     public RemoveCommand(String input) {
         args = input;
     }
+
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         try {
