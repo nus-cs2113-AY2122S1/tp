@@ -6,7 +6,7 @@ import java.util.List;
 import static org.apache.commons.text.WordUtils.wrap;
 
 public class Module {
-    private final int FINALISE_INDEX = 1;
+    private static final int FINALISE_INDEX = 1;
 
     private String moduleCode;
     private String title;

@@ -11,7 +11,7 @@ import seedu.module.LessonType;
 import seedu.module.Module;
 
 /**
- * Timetable Lesson that can be added to a timetable if the user is taking this lesson
+ * Timetable Lesson that can be added to a timetable if the user is taking this lesson.
  */
 public class TimetableLesson implements Comparable<TimetableLesson> {
 
@@ -22,7 +22,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
     private Lesson lesson;
 
     /**
-     * Creates a Timetable Lesson based off a valid Lesson in a Module
+     * Creates a Timetable Lesson based off a valid Lesson in a Module.
      * @param module Module of the Lesson to be created
      * @param semester Academic Year semester number (1/2) of the lesson to be added
      * @param lesson Lesson to be created
@@ -37,7 +37,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
 
     /**
      * Takes in a string e.g. "Sunday", "Monday",
-     * and formats it as a DayOfWeek Enum for easier handling
+     * and formats it as a DayOfWeek Enum for easier handling.
      * @param day String to be parsed as a DayOfWeek
      */
     private void parseDayOfWeek(String day) {
@@ -70,7 +70,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
 
     /**
      * Takes in a string e.g. "Lecture/Tutorial/Laboratory"
-     * And parses it as a LessonType enum
+     * And parses it as a LessonType enum.
      * "Tutorial" -> LessonType.TUTORIAL
      * "Laboratory" -> LessonType.LABORATORY
      * DEFAULT : Lecture
@@ -100,7 +100,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
     }
 
     /**
-     * Getter for the class number of the Timetable Lesson
+     * Getter for the class number of the Timetable Lesson.
      * @return the class number
      */
     public String getClassNo() {
@@ -108,7 +108,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
     }
 
     /**
-     * Getter for the lesson type of the TimetableLesson
+     * Getter for the lesson type of the TimetableLesson.
      * @return the LessonType (LECTURE/TUTORIAL/LABORATORY)
      */
     public LessonType getLessonType() {
@@ -116,7 +116,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
     }
 
     /**
-     * Getter for the day of week the lesson is held on
+     * Getter for the day of week the lesson is held on.
      * @return DayOfWeek Enum e.g. DayOfWeek.MONDAY
      */
     public DayOfWeek getDayOfWeek() {
@@ -124,7 +124,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
     }
 
     /**
-     * Getter for the module code of the lesson
+     * Getter for the module code of the lesson.
      * @return String representation of the module code e.g. CS2113T
      */
     public String getModuleCode() {
@@ -132,7 +132,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
     }
 
     /**
-     * Getter for the starting hour of the lesson
+     * Getter for the starting hour of the lesson.
      * @return an Integer representing the hour in the day in 24H time format
      */
     public int getStartHour() {
@@ -141,7 +141,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
     }
 
     /**
-     * Getter for the ending hour of the lesson
+     * Getter for the ending hour of the lesson.
      * @return an Integer representing the hour in the day in 24H time format
      */
     public int getEndHour() {
@@ -150,7 +150,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
     }
 
     /**
-     * Getter for the Module that the lesson belongs to
+     * Getter for the Module that the lesson belongs to.
      * @return the Module the lesson belongs to
      */
     public Module getModule() {
@@ -158,7 +158,7 @@ public class TimetableLesson implements Comparable<TimetableLesson> {
     }
 
     /**
-     * Getter for the Venue that Lesson is held at
+     * Getter for the Venue that Lesson is held at.
      * @return a String representation of the venue that Lesson is held at
      */
     public String getVenue() {
