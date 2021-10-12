@@ -37,6 +37,7 @@ public class RemoveCommandParser {
         default:
             throw new ParseException("Wrong flags passed", 1);
         }
+        assert description.length() != 0;
 
         return new RemoveCommand(type, description, universitySelectedList, moduleSelectedList);
     }

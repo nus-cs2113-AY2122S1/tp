@@ -25,6 +25,7 @@ public class AddUniCommandParser {
 
         ArrayList<ModuleMapping> list = new ArrayList<>();
         University university = new University(universityName, list);
+        assert university.getName() != null;
         return new AddUniCommand(university, universitySelectedList, moduleSelectedList);
     }
 

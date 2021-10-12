@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.commands.Command;
+import seedu.duke.commands.ExitCommand;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
@@ -24,16 +25,18 @@ public class Duke {
             ModuleList moduleSelectedList = new ModuleList();
             Parser mainParser = new Parser(universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
+            Command cmd = null;
 
-            while (true) {
+            do {
                 try {
                     System.out.println("Enter a command");
                     String userInput = in.nextLine();
-                    Command cmd = mainParser.parseCommand(userInput);
+                    cmd = mainParser.parseCommand(userInput);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }
-            }
+            } while (!(cmd instanceof ExitCommand));
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

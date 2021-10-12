@@ -21,6 +21,7 @@ public class SearchMapCommandParser {
         if (university == null) {
             throw new ParseException("university does not exist", 1);
         }
+        assert university.getName() != null;
         return new SearchMapCommand(university, universitySelectedList, moduleSelectedList);
     }
 
