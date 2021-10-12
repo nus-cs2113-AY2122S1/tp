@@ -48,7 +48,7 @@ public class Parser {
      *
      * @param ui        Reference to the UI object passed by Main to print messages.
      * @param userInput Input provided by user.
-     * @param medicines    Arraylist of all stocks.
+     * @param medicines Arraylist of all stocks.
      * @return A boolean value indicating isExit.
      * @throws InvalidCommand If a command does not exist.
      */
@@ -155,7 +155,10 @@ public class Parser {
 
                 parameterContents = new StringBuilder(); // Reset the values
                 String[] commandSplit = s.split(DELIMITER);
-                commandParameter = commandSplit[0].toLowerCase();
+
+                if (commandSplit.length != 0) { // Ensure '/' exists
+                    commandParameter = commandSplit[0].toLowerCase();
+                }
 
                 if (commandSplit.length > 1) {
                     parameterContents = new StringBuilder(commandSplit[1]);
