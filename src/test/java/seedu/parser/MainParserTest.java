@@ -53,8 +53,8 @@ public class MainParserTest {
 
     @Test
     public void parseDeleteCommand_multipleIndexes_expectDeleteContactIndexMatch() {
-        testUserInput = "rm 1 2";
-        testUserInput = "rm " + testIndex;
+        int testIndex = 1;
+        testUserInput = String.format("rm %d %d", testIndex, 2);
         final DeleteContactCommand testResultCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
         assertEquals(testIndex, testResultCommand.getDeletedIndex());
     }
@@ -148,6 +148,14 @@ public class MainParserTest {
     }
 
     @Test
+    public void parseViewCommand_multipleIndexes_expectViewContactIndexMatch() {
+        int testIndex = 1;
+        testUserInput = String.format("view %d %d", testIndex, 2);
+        final ViewCommand testResultCommand = getParsedCommand(testUserInput, ViewCommand.class);
+        assertEquals(testIndex,testResultCommand.getIndex());
+    }
+
+    @Test
     public void parseViewCommand_invalidIndex_expectException() {
         testIndex = 99999;
         final ViewCommand testResultCommand = new ViewCommand(testIndex);
@@ -178,13 +186,6 @@ public class MainParserTest {
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
 
-    @Test
-    public void parseViewCommand_invalidInputFormat_expectFailedCommandType() {
-        testUserInput = "view 1 2";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_INDEX;
-        final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
-        assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
-    }
 
     @Test
     public void parseAddCommand_missingName_expectFailedCommand() {
