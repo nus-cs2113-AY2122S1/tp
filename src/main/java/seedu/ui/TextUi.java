@@ -30,8 +30,7 @@ public class TextUi {
 
     public static String getUserDeleteConfirmation(Contact deletedContact, int deletedIndex) {
         String message = "Delete this contact?  (y/n)\n"
-                + "   " + deletedIndex + ". " + "Name: " + deletedContact.getName() + " GitHub: "
-                + deletedContact.getGithub();
+                + deletedIndex + ". " + deletedContact.getName() + formatContactFields(deletedContact);
         printDoubleLineMessage(message);
 
         String userDeleteConfirmation = scanner.nextLine().trim();
@@ -68,19 +67,33 @@ public class TextUi {
         printBottomLineMessage(message);
     }
 
-    public static void addContactMessage(String contactName, int listSize) {
-        String message = "ConTech has added the specified contact: " + contactName + "\n" + "You now have " + listSize
-                + " contact(s).";
+    public static void addContactMessage(Contact addedContact, int listSize) {
+        String message = "ConTech has added the specified contact: \n"
+                + "Name:     " + addedContact.getName()
+                + formatContactFields(addedContact)
+                + "\n\nYou now have " + listSize + " contact(s).";
         printDoubleLineMessage(message);
     }
 
-    public static void editContactMessage(String contactName) {
-        String message = "ConTech has edited the specified contact: " + contactName;
+    public static void editContactMessage(Contact editedContact) {
+        String message = "ConTech has edited the specified contact: \n"
+                + "Name:     " + editedContact.getName()
+                + formatContactFields(editedContact);
         printDoubleLineMessage(message);
+    }
+
+    public static String formatContactFields(Contact addedContact) {
+        String viewGithub = ViewMessageFormatterUi.viewGithubFormatter(addedContact);
+        String viewEmail = ViewMessageFormatterUi.viewEmailFormatter(addedContact);
+        String viewTwitter = ViewMessageFormatterUi.viewTwitterFormatter(addedContact);
+        String viewTelegram = ViewMessageFormatterUi.viewTelegramFormatter(addedContact);
+        String viewLinkedin = ViewMessageFormatterUi.viewLinkedinFormatter(addedContact);
+        return viewGithub + viewEmail + viewTelegram + viewLinkedin + viewTwitter;
     }
 
     public static void viewContactMessage(Contact viewingContact, int index) {
-        String message = index + ". " + "Name: " + viewingContact.getName() + " GitHub: " + viewingContact.getGithub();
+        String viewName = ViewMessageFormatterUi.viewNameFormatter(viewingContact);
+        String message = index + ". " + viewName + formatContactFields(viewingContact);
         printDoubleLineMessage(message);
     }
 
