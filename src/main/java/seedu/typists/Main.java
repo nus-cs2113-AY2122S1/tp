@@ -1,5 +1,6 @@
 package seedu.typists;
 
+import seedu.typists.content.RandomGenerator;
 import seedu.typists.exception.InvalidStringInputException;
 import seedu.typists.parser.StringParser;
 
