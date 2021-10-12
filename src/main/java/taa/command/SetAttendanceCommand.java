@@ -21,8 +21,8 @@ public class SetAttendanceCommand extends Command {
     private static final String KEY_ATTENDANCE_MARK = "attend";
     private static final String ATTENDANCE_MARK_PRESENT = "1";
     private static final String ATTENDANCE_MARK_ABSENT = "0";
-    private static final String[] SET_ATTENDANCE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_NUM, KEY_LESSON_NUM
-            , KEY_ATTENDANCE_MARK};
+    private static final String[] SET_ATTENDANCE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_NUM, KEY_LESSON_NUM,
+            KEY_ATTENDANCE_MARK};
 
     private static final int MIN_STUDENT_NUM = 1;
     private static final int MAX_LESSON_INDEX = 12;
@@ -37,7 +37,7 @@ public class SetAttendanceCommand extends Command {
     }
 
     /**
-     * Sets the attendance of a student to 1 or 0
+     * Sets the attendance of a student to 1 or 0.
      *
      * @param moduleList The list of modules
      * @param ui         The ui instance to handle interactions with the user
@@ -111,7 +111,8 @@ public class SetAttendanceCommand extends Command {
     }
 
     private void checkIfStudentNumOutOfBounds(Module module, String studentNum) throws TaaException {
-        if (Integer.parseInt(studentNum) > module.getStudentList().getSize() || Integer.parseInt(studentNum) < MIN_STUDENT_NUM) {
+        if (Integer.parseInt(studentNum) > module.getStudentList().getSize()
+                || Integer.parseInt(studentNum) < MIN_STUDENT_NUM) {
             throw new TaaException(MESSAGE_STUDENT_INDEX_OUT_OF_BOUNDS);
         }
     }
@@ -130,7 +131,7 @@ public class SetAttendanceCommand extends Command {
     }
 
     /**
-     * Returns whether a student has attended a lesson, based on the attendance mark the user inputs
+     * Returns whether a student has attended a lesson, based on the attendance mark the user inputs.
      *
      * @return whether a student has attended a lesson
      * @throws TaaException If the user enters an invalid attendance mark

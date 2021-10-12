@@ -27,8 +27,8 @@ public class Student {
         this.results = new HashMap<>();
     }
 
-    private void initIndividualAttendances(){
-        for (int i = 0; i < NUM_LESSONS; i++){
+    private void initIndividualAttendances() {
+        for (int i = 0; i < NUM_LESSONS; i++) {
             individualAttendances[i] = ABSENT_MARK;
         }
     }
@@ -96,7 +96,6 @@ public class Student {
     }
 
 
-
     /**
      * Overrides default toString method with the custom print message.
      *
@@ -111,7 +110,7 @@ public class Student {
      * Adds a key,value pair to the hashmap.
      *
      * @param assessmentName key of the hashmap
-     * @param marks value to be stored under the key given
+     * @param marks          value to be stored under the key given
      */
     public void setMarks(String assessmentName, double marks) {
         results.put(assessmentName, marks);

@@ -22,7 +22,7 @@ public class AttendanceList {
     }
 
     /**
-     * Converts the array of attendances from all lessons for a student to a string
+     * Converts the array of attendances from all lessons for a student to a string.
      *
      * @param individualAttendances the array of attendances from all lessons for a student
      * @return String representation of the array of attendances from all lessons for a student
@@ -32,7 +32,7 @@ public class AttendanceList {
     }
 
     /**
-     * Adds the array of attendances from all lessons for a student to the AttendanceList
+     * Adds the array of attendances from all lessons for a student to the AttendanceList.
      *
      * @param individualAttendances the array of attendances from all lessons for a student
      */

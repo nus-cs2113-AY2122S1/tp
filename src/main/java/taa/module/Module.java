@@ -65,23 +65,23 @@ public class Module {
         return attendanceList;
     }
 
-    public void addAttendances(AttendanceList attendances, Student student){
+    public void addAttendances(AttendanceList attendances, Student student) {
         attendances.addIndividualAttendances(student.getIndividualAttendances());
     }
 
-    private String getLessonArrayAsString(){
+    private String getLessonArrayAsString() {
         buildLessonArray();
         return Arrays.toString(lessonArray);
     }
 
-    private int[] buildLessonArray(){
-        for (int i = 0; i < NUM_LESSONS; i++){
+    private int[] buildLessonArray() {
+        for (int i = 0; i < NUM_LESSONS; i++) {
             lessonArray[i] = i + 1;
         }
         return lessonArray;
     }
 
-    public String getFormattedLessons(){
+    public String getFormattedLessons() {
         String lessons = getLessonArrayAsString();
         String singleDigitLessons = lessons.substring(0, 27);
         String doubleDigitLessons = lessons.substring(28);

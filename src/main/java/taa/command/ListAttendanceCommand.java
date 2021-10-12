@@ -25,7 +25,7 @@ public class ListAttendanceCommand extends Command {
         super(argument, LIST_ATTENDANCE_ARGUMENT_KEYS);
     }
 
-    /**
+    /** Lists out the attendance for all students in a module.
      * @param moduleList The list of modules
      * @param ui         The ui instance to handle interactions with the user
      * @throws TaaException If the user inputs an invalid command
@@ -97,7 +97,7 @@ public class ListAttendanceCommand extends Command {
     }
 
     /**
-     * Trims the student's name if it is too long
+     * Trims the student's name if it is too long.
      *
      * @param studentName name of the student
      * @param number      the length of the list number
@@ -114,7 +114,7 @@ public class ListAttendanceCommand extends Command {
     }
 
     /**
-     * Pads a string with whitespace
+     * Pads a string with whitespace.
      *
      * @param stringToPad    string to pad with whitespace
      * @param lengthOfString length of the string to pad with whitespace
