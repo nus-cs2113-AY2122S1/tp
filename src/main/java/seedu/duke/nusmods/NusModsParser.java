@@ -5,16 +5,19 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import seedu.duke.task.type.Event;
+import seedu.duke.task.type.Lesson;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Month;
 import java.time.Year;
 import java.time.YearMonth;
-import java.util.Set;
 import java.util.stream.StreamSupport;
 
 import static org.apache.commons.io.FileUtils.copyURLToFile;
@@ -39,25 +42,32 @@ public class NusModsParser {
     }
 
     /**
-     * Get calendar events of the given classes in the current semester.
-     * @param moduleCode The module code of the module in question, for example CS2113T
-     * @param classNos A set of class numbers to be queried, for example T01
+     * Get calendar events of the given lesson in the current semester.
+     * @param lesson The lesson to be queried
      * @return An array of Events denoting all class occurrences
      * @throws IOException If there is neither network connection nor local cache
      */
-    public Event[] getModuleEvents(String moduleCode, Set<String> classNos)
-            throws IOException {
-        JsonObject obj = JsonParser.parseReader(getModuleReader(moduleCode)).getAsJsonObject();
+    public Event[] getLessonEvents(Lesson lesson) throws IOException {
+        DateFormat formatter = new SimpleDateFormat("HHmm");
+        JsonObject obj = JsonParser.parseReader(getModuleReader(lesson.getModuleCode())).getAsJsonObject();
         JsonArray semesterData = obj.getAsJsonArray("semesterData");
-        Event[] retval = new Event[0];
+        Event[] retval = null;
         for (JsonElement e : semesterData) {
             JsonObject o = e.getAsJsonObject();
             if (Semester.fromInt(o.get("semester").getAsInt()) == getSemester()) {
                 JsonArray timetable = o.get("timetable").getAsJsonArray();
                 retval = StreamSupport.stream(timetable.spliterator(), true)
                         .map(JsonElement::getAsJsonObject)
-                        .filter(lesson -> classNos.contains(lesson.get("classNo").getAsString()))
-                        .map(lesson -> new Event(moduleCode + lesson.get("lessonType")))
+                        .filter(l -> lesson.getClassNo().equals(l.get("classNo").getAsString()))
+                        .map(l -> {
+                            try {
+                                return new Event(lesson.getTaskEntryDescription(),
+                                        formatter.parse(l.get("startTime").getAsString()),
+                                        formatter.parse(l.get("endTime").getAsString()));
+                            } catch (ParseException ex) {
+                                return new Event(lesson.getTaskEntryDescription());
+                            }
+                        })
                         .toArray(Event[]::new);
             }
         }
