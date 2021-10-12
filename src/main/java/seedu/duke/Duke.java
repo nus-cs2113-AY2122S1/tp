@@ -3,16 +3,23 @@ package seedu.duke;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandNames;
 import seedu.duke.exceptions.CommandNotAvailableException;
+import seedu.duke.logger.LoggerManager;
 import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Duke {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
+        Logger logger = Logger.getLogger(Duke.class.getName());
+        LoggerManager.loggerFileSetup();
+        LoggerManager.setupLogger(logger);
+        logger.log(Level.INFO, "Food-o-rama has begun running");
         InputParser parser = new InputParser();
         Storage.load();
         Scanner input = new Scanner(System.in);
