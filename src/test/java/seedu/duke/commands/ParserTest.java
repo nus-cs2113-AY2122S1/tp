@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParserTest {
     Parser parser = new Parser();
+
     @Test
     public void parse_exit_ExitCommandObject() {
         boolean type = parser.parse("exit") instanceof ExitCommand;
