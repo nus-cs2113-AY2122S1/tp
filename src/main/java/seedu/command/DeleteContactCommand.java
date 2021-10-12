@@ -1,29 +1,27 @@
 package seedu.command;
 
 import seedu.contact.Contact;
-import seedu.parser.FailedCommandType;
 import seedu.parser.IndexParser;
 import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
-import seedu.command.FailedCommand;
+
 
 public class DeleteContactCommand extends Command {
-    private final int deletedIndex;
-    private final String confirmMessage = "";
+    private final int contactIndex;
 
     public DeleteContactCommand(int deletedIndex) {
-        this.deletedIndex = deletedIndex;
+        this.contactIndex = deletedIndex;
     }
 
     public int getDeletedIndex() {
-        return deletedIndex;
+        return contactIndex;
     }
 
     private void deleteOnConfirmation(Contact deletedContact) {
         // ask for confirmation to delete from user
-        String userDeleteConfirmation = TextUi.getUserDeleteConfirmation(deletedContact, deletedIndex);
+        String userDeleteConfirmation = TextUi.getUserDeleteConfirmation(deletedContact, contactIndex);
         if (userDeleteConfirmation.equalsIgnoreCase("y")) {
-            this.contactList.deleteContact(deletedIndex);
+            this.contactList.deleteContact(contactIndex);
             TextUi.deleteContactMessage(deletedContact.getName(), contactList.getListSize());
         } else {
             TextUi.cancelDeleteContactMessage();
@@ -33,7 +31,7 @@ public class DeleteContactCommand extends Command {
     public void execute() {
         try {
             // throws IndexOutOfBoundsException if index is outside of the range
-            Contact deletedContact = IndexParser.getContactFromIndex(deletedIndex, contactList);
+            Contact deletedContact = IndexParser.getContactFromIndex(contactIndex, contactList);
             deleteOnConfirmation(deletedContact);
         } catch (IndexOutOfBoundsException e) {
             ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());
