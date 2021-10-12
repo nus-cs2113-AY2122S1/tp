@@ -1,6 +1,6 @@
 # Duke
 
-This is a project for a greenfield Java project. CCA Manager is a CLI application, and it is designed to help CCA's manage their administrative issues.
+This is a project for a greenfield Java project. CCA Manager is a CLI application, and it is designed to help CCA's manage their administrative issues. MAIN.
 
 Prerequisites: `JDK 11`, update Intellij to the most recent version.
 
