@@ -27,6 +27,7 @@ public class ClientList {
 
     public void clearAllClients() {
         clients.clear();
+        clientCount = 0;
     }
 
     public void cut(int clientIndex, Ui ui) {

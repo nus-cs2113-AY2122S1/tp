@@ -39,22 +39,19 @@ public class Ui {
     }
 
     public void show(String textToShow) {
-        System.out.print(textToShow);
+        System.out.print(textToShow + System.lineSeparator());
     }
 
     public void showClear() {
         show(CLEAR_MESSAGE);
-        showLine();
     }
 
     public void showCut(Client client) {
         show(CUT_MESSAGE + "\n" + client);
-        showLine();
     }
 
     public void showAdd(Client client) {
         show(ADD_MESSAGE + "\n" + client);
-        showLine();
     }
 
     public void showBye() {

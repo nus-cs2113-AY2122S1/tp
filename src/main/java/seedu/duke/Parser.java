@@ -10,6 +10,8 @@ public class Parser {
         String command = commandAndParams[0];
         String params = commandAndParams[1];
         switch (command) {
+        case "bye":
+            return new ByeCommand();
         case "add":
             return executeAddCommand(params);
         case "list":
@@ -17,9 +19,15 @@ public class Parser {
         case "clear":
             return new ClearCommand();
         case "cut":
-            return parseCut(params);
+            try {
+                return parseCut(params);
+            }
+            catch (NullPointerException  | NumberFormatException e) {
+                System.out.println("INVALID: Empty 'cut' index");
+            }
+            break;
         default:
-            System.out.println("INVALID");
+            System.out.println("INVALID INPUT");
             break;
         }
         return null;
@@ -134,7 +142,7 @@ public class Parser {
     }
 
     public static Command parseCut(String params) {
-        int clientIndex = stringToInt(params);
+        int clientIndex = stringToInt(params) - 1;
         return new CutCommand(clientIndex);
     }
 
