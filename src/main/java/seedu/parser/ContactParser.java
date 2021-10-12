@@ -49,10 +49,39 @@ public abstract class ContactParser {
             throw new ForbiddenDetailException();
         }
         int indexToStore;
+        checkRegex(flag, detailToStore);
         indexToStore = getIndexToStore(flag);
         contactDetails[indexToStore] = detailToStore;
     }
 
+
+    public void checkRegex(String flag, String detailToParse)
+            throws InvalidGithubUsernameException, InvalidNameException, InvalidFlagException,
+            InvalidTelegramUsernameException, InvalidTwitterUsernameException,
+            InvalidLinkedinUsernameException, InvalidEmailException {
+        switch (flag) {
+        case "n":
+            checkNameRegex(detailToParse);
+            break;
+        case "g":
+            checkGithubUsernameRegex(detailToParse);
+            break;
+        case "tele":
+            checkTelegramUsernameRegex(detailToParse);
+            break;
+        case "twit":
+            checkTwitterUsernameRegex(detailToParse);
+            break;
+        case "link":
+            checkLinkedinUsernameRegex(detailToParse);
+            break;
+        case "email":
+            checkEmailRegex(detailToParse);
+            break;
+        default:
+            throw new InvalidFlagException();
+        }
+    }
     private int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
