@@ -81,12 +81,12 @@ public class AddUI {
 
     public void getCommand(ArrayList<Lesson> lessons,
             Timetable timetable, Module module) throws IntegerException {
-        if (isArrayExist(lessons, 1)) {
+        if (isArrayExist(lessons, 0)) {
             String select = TextUi.getLessonCommand(lessons.get(0).getLessonType());
             int indexOfLesson;
             try {
                 indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 throw new IntegerException("Input is not an integer");
             }
             String classNumber = lessons.get(indexOfLesson).getClassNo();
@@ -101,7 +101,7 @@ public class AddUI {
 
     public String printLessonInfo(int serial, Lesson lesson) {
         String output = serial + ": " + lesson.lessonDetails();
-        if (!lesson.getLessonType().equals(LAB))
+        if (!lesson.getLessonType().equals(LAB)) {
             for (int index = output.length(); GAP > index; index++) {
                 if (index == DIVIDER) {
                     output = output.concat(DIV);
@@ -109,6 +109,8 @@ public class AddUI {
                     output = output.concat(SPACE);
                 }
             }
+        }
+
         return output;
     }
 
