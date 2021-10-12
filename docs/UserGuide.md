@@ -5,22 +5,22 @@
 Food-O-Rama is a food wastage tracking application for restaurant owners and hawkers to 
 keep track of their food resources. It provides the user with insight on the amount of ingredients 
 in their storage and how much food is wasted. This allows the user to better plan their 
-purchase of raw ingredients and cooking of dishes which ultimately saves cost.
+purchase of raw ingredients and enables more efficient allocation to the cooking of dishes which ultimately saves cost.
 
 * [Quick Start](#quick-start)
 * [List of Commands](#list-of-commands)
 * [Features](#features)
   * [Get some help](#get-some-help-help)
-  * [Add a new Ingredient](#add-a-new-ingredient-add-ingr)
-  * [Add more storage to an existing Ingredient](#add-more-storage-to-an-existing-ingredient-add-ingr-stored)
-  * [View all exising Ingredients](#view-all-exising-ingredients-list-ingr)
-  * [Add a new Dish](#add-a-new-dish-add-dish)
-  * [View all existing dishes](#view-all-existing-dishes-list-dish)
-  * [Link a Dish to an Ingredient](#link-a-dish-to-an-ingredient-add-constituent)
-  * [Add Ingredient Wastage](#add-ingredient-wastage-add-ingr-waste)
+  * [Add New Dish](#add-new-dish-add-dish)
   * [Add Dish Wastage](#add-dish-wastage-add-dish-waste)
-  * [Delete an existing Ingredient](#delete-an-existing-ingredient-del-ingr)
-  * [Delete an existing Dish](#delete-an-existing-dish-del-dish)
+  * [Delete Existing Dish](#delete-existing-dish-del-dish)
+  * [View Existing dishes](#view-existing-dishes-list-dish)
+  * [Add New Ingredient](#add-new-ingredient-add-ingr)
+  * [Add Storage to Existing Ingredient](#add-storage-to-existing-ingredient-add-ingr-stored)
+  * [Add Ingredient Wastage](#add-ingredient-wastage-add-ingr-waste)
+  * [Link Ingredient to Dish](#link-ingredient-to-dish-add-constituent)
+  * [Delete Existing Ingredient](#delete-existing-ingredient-del-ingr)
+  * [View Exising Ingredients](#view-all-exising-ingredients-list-ingr)
   * [Exit Food-O-Rama](#exit-food-o-rama-bye)
 
 ## Quick Start
@@ -58,16 +58,16 @@ ____________________________________________________________
 | Function | Command  |
 |---|---|
 |View the list of commands| help|
+|Add a new Dish   | add dish [dishName]|
+|Add the Dish Wastage | add dish waste [dishName] followed by [weight in KG]|
+|Delete a Dish| del [dishName] |
+|View all Dishes|list dish|
 |Add a new Ingredient| add ingr [ingrName]  followed by [weight in KG] |
 |Add storage to an existing Ingredient| add ingr stored [ingrName] followed by [weight in KG] |
-|View all Ingredients| list ingr|
-|Add a new Dish   | add dish [dishName]|
-|View all Dishes|list dish|
-|Link a Dish to a Ingredient| add constituent [dishName] / [ingrName]|
 |Add Ingredient Wastage| add ingr waste [ingrName] followed by [weight in KG]|
-|Add the Dish Wastage | add dish waste [dishName] followed by [weight in KG]|
+|Link a Dish to a Ingredient| add constituent [dishName] / [ingrName]|
 |Delete an Ingredient | del [ingrName]|
-|Delete a Dish| del [dishName] |
+|View all Ingredients| list ingr|
 |Exit Food-O-Rama| bye|
 
 ## Features 
@@ -112,8 +112,94 @@ ____________________________________________________________
 
 ```
 
+### Add New Dish: `add dish`
+Add a new Dish to your Dish list
 
-### Add a new Ingredient: `add ingr`
+Format: `add dish dishName`
+
+* The `dishName` can be in a natural language format.
+
+Example of usage:
+
+`add dish chicken rice`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Dish added to list: chicken rice
+____________________________________________________________
+```
+### Add Dish Wastage: `add dish waste`
+Incur wastage on an existing Dish
+
+Format: `add dish waste ingrName`
+
+* Can only be performed on existing `dishName`
+* You will be prompted to enter the weight of `dishrName` wasted in the next step.
+
+Example of usage:
+
+`add dish waste chicken rice`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Enter the wastage of chicken rice in KG:
+```
+Example of usage:
+
+`2.5`
+
+Expected Outcome:
+
+```
+Wastage of chicken rice is now 2.5 kg
+____________________________________________________________
+```
+### Delete Existing Dish: `del dish`
+Delete an existing Ingredient from your Ingredient list
+
+Format: `del dish dishName`
+
+* The `dishName` has to be existing in the Ingredient list for it to be deleted.
+
+Example of usage:
+
+`del dish chicken rice`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Dish, chicken rice has been removed!
+____________________________________________________________
+```
+
+### View Existing dishes: `list dish`
+View all exisitng Dishes in the Dish list
+
+Format: `list dish`
+
+* The `list` must come before `dish`.
+
+Example of usage:
+
+`list dish`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Here are the dishes you have: 
+1. chicken rice
+   Wastage: 0.0 kg
+   Constituents: None
+You can use command 'add' to add new dishes!
+____________________________________________________________
+```
+### Add New Ingredient: `add ingr`
 Add a new Ingredient to your Ingredient list
 
 Format: `add ingr ingrName`
@@ -146,7 +232,7 @@ ____________________________________________________________
 
 ```
 
-### Add more storage to an existing Ingredient: `add ingr stored`
+### Add Storage to Existing Ingredient: `add ingr stored`
 Add more storage in KG to an Ingredient that exists in the Ingredient list.
 
 Format: `add ingr stored ingrName`
@@ -174,88 +260,8 @@ Expected Outcome:
 Storage of chicken is now 7.0 kg
 ____________________________________________________________
 ```
-### View all exising Ingredients: `list ingr`
-View all exisitng Ingredients in the Ingredient list
 
-Format: `list ingr`
-
-* The `list` must come before `ingr`.
-
-Example of usage:
-
-`list ingr`
-
-Expected Outcome:
-
-```
-____________________________________________________________
-Here are the ingredients you have: 
-1. chicken
-   Storage: 7.0 kg
-   Wastage: 0.0 kg
-You can use command 'add' to add new ingredients!
-____________________________________________________________
-```
-### Add a new Dish: `add dish`
-Add a new Dish to your Dish list
-
-Format: `add dish dishName`
-
-* The `dishName` can be in a natural language format.
-
-Example of usage:
-
-`add dish chicken rice`
-
-Expected Outcome:
-
-```
-____________________________________________________________
-Dish added to list: chicken rice
-____________________________________________________________
-```
-### View all existing dishes: `list dish`
-View all exisitng Dishes in the Dish list
-
-Format: `list dish`
-
-* The `list` must come before `dish`.
-
-Example of usage:
-
-`list dish`
-
-Expected Outcome:
-
-```
-____________________________________________________________
-Here are the dishes you have: 
-1. chicken rice
-   Wastage: 0.0 kg
-   Constituents: None
-You can use command 'add' to add new dishes!
-____________________________________________________________
-```
-### Link a Dish to an Ingredient: `add constituent`
-Link an existing Dish with an existing Ingredient
-
-Format: `add constituent dishName / ingrName`
-
-*`dishName` space `/` space `ingrName`.
-
-Example of usage:
-
-`add constituent chicken rice / chicken`
-
-Expected Outcome:
-
-```
-____________________________________________________________
-Added chicken as ingredient of chicken rice
-____________________________________________________________
-```
-
-## Add Ingredient Wastage: `add ingr waste`
+### Add Ingredient Wastage: `add ingr waste`
 Incur wastage on an existing Ingredient
 
 Format: `add ingr waste ingrName`
@@ -283,36 +289,26 @@ Expected Outcome:
 Wastage of chicken is now 1.5 kg
 ____________________________________________________________
 ```
-## Add Dish Wastage: `add dish waste`
-Incur wastage on an existing Dish
+### Link Ingredient to Dish: `add constituent`
+Link an existing Ingredient to an existing Dish
 
-Format: `add dish waste ingrName`
+Format: `add constituent dishName / ingrName`
 
-* Can only be performed on existing `dishName`
-* You will be prompted to enter the weight of `dishrName` wasted in the next step.
+*`dishName` space `/` space `ingrName`.
 
 Example of usage:
 
-`add dish waste chicken rice`
+`add constituent chicken rice / chicken`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Enter the wastage of chicken rice in KG:
-```
-Example of usage:
-
-`2.5`
-
-Expected Outcome:
-
-```
-Wastage of chicken rice is now 2.5 kg
+Added chicken as ingredient of chicken rice
 ____________________________________________________________
 ```
 
-### Delete an existing Ingredient: `del ingr`
+### Delete Existing Ingredient: `del ingr`
 Delete an existing Ingredient from your Ingredient list
 
 Format: `del ingr ingrName`
@@ -330,23 +326,26 @@ ____________________________________________________________
 Ingredient, rice has been removed!
 ____________________________________________________________
 ```
+### View all exising Ingredients: `list ingr`
+View all exisitng Ingredients in the Ingredient list
 
-### Delete an existing Dish: `del dish`
-Delete an existing Ingredient from your Ingredient list
+Format: `list ingr`
 
-Format: `del dish dishName`
-
-* The `dishName` has to be existing in the Ingredient list for it to be deleted.
+* The `list` must come before `ingr`.
 
 Example of usage:
 
-`del dish chicken rice`
+`list ingr`
 
 Expected Outcome:
 
 ```
 ____________________________________________________________
-Dish, chicken rice has been removed!
+Here are the ingredients you have: 
+1. chicken
+   Storage: 7.0 kg
+   Wastage: 0.0 kg
+You can use command 'add' to add new ingredients!
 ____________________________________________________________
 ```
 
@@ -395,5 +394,5 @@ ____________________________________________________________
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Copy the text files in the data folder over to the new computer. 
 
