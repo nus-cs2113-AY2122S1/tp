@@ -30,7 +30,7 @@ public abstract class WorkspaceCommand extends Command {
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         assert commandMap != null;
         TerminusLogger.info("Executing Delete Command");
-        if (arguments != null && !arguments.isBlank()) {
+        if (isNotNullOrBlank()) {
             try {
                 TerminusLogger.info("Parsing workspace command");
                 return commandMap.parseCommand(arguments).execute(ui, module);
@@ -38,7 +38,8 @@ public abstract class WorkspaceCommand extends Command {
                 if (e.getFormat() == null) {
                     throw e;
                 }
-                TerminusLogger.warning("Failed to parse command." + commandMap.getWorkspace() + ":" + e.getFormat());
+                TerminusLogger.warning("Failed to parse command.");
+                TerminusLogger.warning(commandMap.getWorkspace() + " : " + e.getFormat());
                 throw new InvalidArgumentException(
                         String.format(INVALID_ARGUMENT_FORMAT_MESSAGE, commandMap.getWorkspace(), e.getFormat()),
                         e.getMessage()
@@ -48,5 +49,8 @@ public abstract class WorkspaceCommand extends Command {
             TerminusLogger.info("Switching workspace to: " + commandMap.getWorkspace());
             return new CommandResult(true, commandMap);
         }
+    }
+    private boolean isNotNullOrBlank () {
+        return arguments != null && !arguments.isBlank();
     }
 }

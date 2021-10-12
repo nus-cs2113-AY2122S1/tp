@@ -42,11 +42,11 @@ public class ViewCommand<T extends Content> extends Command {
             itemNumber = Integer.parseInt(arguments);
             displayAll = false;
         } catch (NumberFormatException e) {
-            TerminusLogger.warning(String.format("Failed to parse view itemNumber %s", arguments));
+            TerminusLogger.warning(String.format("Failed to parse view itemNumber : %s", arguments));
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
         if (itemNumber <= 0) {
-            TerminusLogger.warning(String.format("Invalid itemNumber %d", itemNumber));
+            TerminusLogger.warning(String.format("Invalid itemNumber : %d", itemNumber));
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
     }
