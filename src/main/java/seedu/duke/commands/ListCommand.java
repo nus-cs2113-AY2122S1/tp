@@ -31,21 +31,20 @@ public class ListCommand extends Command {
 
         switch (listType) {
         case "list":
-            sortedList.addAll(Duke.eventList);
-            sortedList.addAll(Duke.taskList);
-            Parser.bubbleSortTask(sortedList);
+            sortedList = Parser.makeMainList();
+            Parser.bubbleSortItems(sortedList);
             System.out.println("Here is your overall schedule:");
             Ui.printList(sortedList);
             break;
         case "event":
-            sortedList = new ArrayList<Item>(Duke.eventList);
-            Parser.bubbleSortTask(sortedList);
+            sortedList = new ArrayList<>(Duke.eventList);
+            Parser.bubbleSortItems(sortedList);
             System.out.println("Here are all the events in your list:");
             Ui.printList(sortedList);
             break;
         case "task":
-            sortedList = new ArrayList<Item>(Duke.taskList);
-            Parser.bubbleSortTask(sortedList);
+            sortedList = new ArrayList<>(Duke.taskList);
+            Parser.bubbleSortItems(sortedList);
             System.out.println("Here are all the tasks in your list:");
             Ui.printList(sortedList);
             break;

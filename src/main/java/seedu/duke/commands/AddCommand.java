@@ -1,10 +1,15 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
+import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class AddCommand extends Command {
 
@@ -18,10 +23,10 @@ public class AddCommand extends Command {
     protected static String itemType;
     protected static String itemTitle;
     protected static String itemDescription;
-    protected static String itemDate;
+    protected static LocalDateTime itemDateTime;
 
     protected static String eventVenue;
-    protected static int eventBudget;
+    protected static double eventBudget;
 
     // Indicates if an error occurs due to the wrong format typed by the user
     protected static boolean isCorrectFormat;
@@ -40,7 +45,8 @@ public class AddCommand extends Command {
             } else if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 prepareEvent(response);
             } else {
-                throw new DukeException("Invalid item flag entered. Please specify task '-t' or event '-e'. ");
+                throw new DukeException("Invalid item flag entered. Please specify task '-t' or event '-e'"
+                        + "after the 'add' command. ");
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
@@ -57,16 +63,28 @@ public class AddCommand extends Command {
         return response.trim().substring(startOfItemAttribute, endOfItemAttribute);
     }
 
-    private int retrieveEventBudget(String response) {
+    private void initializeDateTime(String taskDeadline) throws DukeException {
+        try {
+            itemDateTime = Parser.convertDateTime(taskDeadline);
+            if (itemDateTime.isBefore(LocalDateTime.now())) {
+                throw new DukeException("Unfortunately, we cannot travel back in time. Please "
+                        + "enter a valid date and time in the format 'dd-MM-yyyy HHmm'. ");
+            }
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Please use this format for the deadline 'dd-MM-yyyy HHmm'. ");
+        }
+    }
+
+    private double retrieveEventBudget(String response) {
         int startOfEventBudget = response.indexOf(BUDGET_FLAG) + 2;
         int endOfEventBudget = response.indexOf("/", startOfEventBudget) - 2;
         try {
             if (endOfEventBudget < 0) {
-                return Integer.parseInt(response.trim().substring(startOfEventBudget));
+                return Double.parseDouble(response.trim().substring(startOfEventBudget));
             }
-            return Integer.parseInt(response.trim().substring(startOfEventBudget, endOfEventBudget));
+            return Double.parseDouble(response.trim().substring(startOfEventBudget, endOfEventBudget));
         } catch (NumberFormatException e) {
-            System.out.print("Budget needs to be an integer. ");
+            System.out.print("Event budget needs to be a number. ");
             // Returns -1 to signify that the budget entered was not a valid integer
             return -1;
         }
@@ -86,10 +104,11 @@ public class AddCommand extends Command {
             throw new DukeException("Task title cannot be empty, please re-enter your task. ");
         }
 
-        itemDate = retrieveItemAttribute(response, DATE_FLAG);
-        if (itemDate.isBlank()) {
+        String taskDeadline = retrieveItemAttribute(response, DATE_FLAG);
+        if (taskDeadline.isBlank()) {
             throw new DukeException("Task deadline cannot be empty, please re-enter your task. ");
         }
+        initializeDateTime(taskDeadline);
     }
 
     private void prepareEvent(String response) throws DukeException {
@@ -112,10 +131,11 @@ public class AddCommand extends Command {
             throw new DukeException("Event title cannot be empty, please re-enter your event. ");
         }
 
-        itemDate = retrieveItemAttribute(response, DATE_FLAG);
-        if (itemDate.isBlank()) {
-            throw new DukeException("Event date cannot be empty, please re-enter your event. ");
+        String eventDateTime = retrieveItemAttribute(response, DATE_FLAG);
+        if (eventDateTime.isBlank()) {
+            throw new DukeException("Event date and time cannot be empty, please re-enter your task. ");
         }
+        initializeDateTime(eventDateTime);
 
         eventVenue = retrieveItemAttribute(response, VENUE_FLAG);
         if (eventVenue.isBlank()) {
@@ -123,6 +143,10 @@ public class AddCommand extends Command {
         }
 
         eventBudget = retrieveEventBudget(response);
+        if (BigDecimal.valueOf(eventBudget).scale() > 2) {
+            throw new DukeException("Event budget cannot have more than 2 decimal places. Please re-enter "
+                    + "your event. ");
+        }
         if (eventBudget == -1) {
             throw new DukeException("Please re-enter your event. ");
         }
@@ -142,12 +166,12 @@ public class AddCommand extends Command {
             itemDescription = Ui.readInput();
             Ui.printLineBreak();
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
-                Task task = new Task(itemTitle, itemDescription, itemDate);
+                Task task = new Task(itemTitle, itemDescription, itemDateTime);
                 addToTaskList(task);
                 return new CommandResult(Ui.getTaskAddedMessage(task));
             }
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
-                Event event = new Event(itemTitle, itemDescription, itemDate, eventVenue, eventBudget);
+                Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);
                 addToEventList(event);
                 return new CommandResult(Ui.getEventAddedMessage(event));
             }

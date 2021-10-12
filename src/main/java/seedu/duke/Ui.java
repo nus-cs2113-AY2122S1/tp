@@ -98,31 +98,30 @@ public class Ui {
         list.forEach(item -> System.out.println(i.getAndIncrement() + 1 + ". " + item));
     }
 
+
     public static String getTask(Task item) {
         return item.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(item.getDateValue()) + System.lineSeparator()
+                + Parser.convertDateTime(item.getDateTime()) + System.lineSeparator()
                 + item.getDescription();
     }
 
     public static String getEvent(Event item) {
         return item.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(item.getDateValue()) + System.lineSeparator()
-                + item.getDescription() + System.lineSeparator()
-                + item.getVenue() + System.lineSeparator()
-                + item.getBudget();
-    }
-
-    public static void printTask(Task item) {
-        System.out.println(item.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(item.getDateValue()) + System.lineSeparator()
-                + item.getDescription());
+                + Parser.convertDateTime(item.getDateValue()) + System.lineSeparator();
     }
 
     public static void printEvent(Event item) {
         System.out.println(item.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(item.getDateValue()) + System.lineSeparator()
+                + Parser.convertDateTime(item.getDateTime()) + System.lineSeparator()
                 + item.getDescription() + System.lineSeparator()
                 + item.getVenue() + System.lineSeparator()
                 + item.getBudget());
     }
+
+    public static void printTask(Task item) {
+        System.out.println(item.getTitle() + System.lineSeparator()
+                + Parser.convertDateTime(item.getDateTime()) + System.lineSeparator()
+                + item.getDescription());
+    }
+
 }

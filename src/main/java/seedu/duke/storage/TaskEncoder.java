@@ -17,8 +17,10 @@ public class TaskEncoder {
     public static String encodeTaskToString(Task task) {
         return task.getTitle()
                 + " | "
+                + task.getStatusIcon()
+                + " | "
                 + task.getDescription()
                 + " | "
-                + Parser.convertDateTimeForSaving(task.getDateValue());
+                + Parser.convertDateTimeForSaving(task.getDateTime());
     }
 }
