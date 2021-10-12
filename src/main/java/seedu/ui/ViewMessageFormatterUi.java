@@ -60,6 +60,7 @@ public class ViewMessageFormatterUi {
             if (contact.getLinkedin() == null | contact.getLinkedin().equals("null")) {
                 return "";
             } else {
+                assert(!contact.getLinkedin().equals("null"));
                 return "\nLinkedIn: linkedin.com/in/" + contact.getLinkedin();
             }
         } catch (NullPointerException e) {
