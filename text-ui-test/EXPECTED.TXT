@@ -1,3 +1,7 @@
 Hello!
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully added!
+Enter your command: Enter your command: This is the summary for your America trip 02 Feb 2021
+Total budget for this trip: 1000.0
+Total expenditure so far: 0.0
+Current budget left for this trip: 1000.0
 Enter your command: Goodbye!
