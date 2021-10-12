@@ -150,6 +150,11 @@ public class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void invalidGithubUsernameInput() {
+        String message = "The github username is not correctly formatted";
+        printDoubleLineMessage(message);
+    }
+
     public static void missingNameMessage() {
         String message = "There are missing details.\n"
                 + "Please specify a name when creating a contact with the flag -n";
