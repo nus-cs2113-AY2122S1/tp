@@ -10,24 +10,24 @@ public class Parser {
         String command = commandAndParams[0];
         String params = commandAndParams[1];
         switch (command) {
-            case "bye":
-                return new ByeCommand();
-            case "add":
-                return executeAddCommand(params);
-            case "list":
-                return new ListCommand();
-            case "clear":
-                return new ClearCommand();
-            case "cut":
-                try {
-                    return parseCut(params);
-                } catch (NullPointerException | NumberFormatException e) {
-                    System.out.println("INVALID: Empty 'cut' index");
-                }
-                break;
-            default:
-                System.out.println("INVALID INPUT");
-                break;
+        case "bye":
+            return new ByeCommand();
+        case "add":
+            return executeAddCommand(params);
+        case "list":
+            return new ListCommand();
+        case "clear":
+            return new ClearCommand();
+        case "cut":
+            try {
+                return parseCut(params);
+            } catch (NullPointerException | NumberFormatException e) {
+                System.out.println("INVALID: Empty 'cut' index");
+            }
+            break;
+        default:
+            System.out.println("INVALID INPUT");
+            break;
         }
         return null;
     }
