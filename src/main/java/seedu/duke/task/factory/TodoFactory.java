@@ -27,9 +27,9 @@ public class TodoFactory {
             return getConstructor(arguments);
 
         } catch (RequiredArgmentNotProvidedException ranpe) {
-            Log.getLogger(TodoFactory.class).severe(ranpe.getMessage());
+            Log.severe(ranpe.getMessage());
         } catch (ParseTaskFailedException ptfe) {
-            Log.getLogger(TodoFactory.class).warning(ptfe.getMessage());
+            Log.warning(ptfe.getMessage());
         }
         throw new GetTaskFailedException(taskType.toString());
     }

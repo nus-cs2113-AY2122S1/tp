@@ -29,9 +29,9 @@ public class EventFactory {
             return getConstructor(arguments);
 
         } catch (RequiredArgmentNotProvidedException ranpe) {
-            Log.getLogger(EventFactory.class).severe(ranpe.getMessage());
+            Log.severe(ranpe.getMessage());
         } catch (ParseTaskFailedException ptfe) {
-            Log.getLogger(EventFactory.class).warning(ptfe.getMessage());
+            Log.warning(ptfe.getMessage());
         }
         throw new GetTaskFailedException(taskType.toString());
     }

@@ -18,7 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TaskFactoryTest {
-    private static final String DESCRIPTION = "bye vegetables";
+
+    private static final String DESCRIPTION = "buy vegetables";
     private static final String VALID_DATE1 = "14-02-1998 02:00:00";
     private static final String VALID_DATE2 = "14-02-1998 03:30:00";
 

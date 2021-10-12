@@ -12,7 +12,7 @@ public class EventArguments {
     private final RecurrenceEnum recurrenceEnum;
 
     public EventArguments(String description,
-                          Date startDate, Date endDate, PriorityEnum priorityEnum, RecurrenceEnum recurrenceEnum) {
+            Date startDate, Date endDate, PriorityEnum priorityEnum, RecurrenceEnum recurrenceEnum) {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;

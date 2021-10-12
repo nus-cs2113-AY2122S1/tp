@@ -27,9 +27,9 @@ public class DeadlineFactory {
             return getConstructor(arguments);
 
         } catch (RequiredArgmentNotProvidedException ranpe) {
-            Log.getLogger(DeadlineFactory.class).severe(ranpe.getMessage());
+            Log.severe(ranpe.getMessage());
         } catch (ParseTaskFailedException ptfe) {
-            Log.getLogger(DeadlineFactory.class).warning(ptfe.getMessage());
+            Log.warning(ptfe.getMessage());
         }
         throw new GetTaskFailedException(taskType.toString());
     }

@@ -26,9 +26,9 @@ public class TaskFactory {
             default:
             }
         } catch (InvalidTaskTypeException itte) {
-            Log.getLogger(TaskFactory.class).severe(itte.getMessage());
+            Log.severe(itte.getMessage());
         } catch (GetTaskFailedException gtfe) {
-            Log.getLogger(TaskFactory.class).warning(gtfe.getMessage());
+            Log.warning(gtfe.getMessage());
         }
         throw new GetTaskFailedException(TASK);
     }

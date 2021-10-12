@@ -18,6 +18,7 @@ import seedu.duke.task.factory.arguments.TodoArguments;
 import seedu.duke.utility.Utility;
 
 public class TaskParser {
+
     public static TodoArguments parseTodoArguments(String description,
             String priority, String doOn, String recurrence) throws ParseTaskFailedException {
         try {
@@ -31,13 +32,13 @@ public class TaskParser {
             }
             return new TodoArguments(description, priorityEnum, doOnDate, recurrenceEnum);
         } catch (InvalidPriorityException ipe) {
-            Log.getLogger(TodoFactory.class).severe(ipe.getMessage());
+            Log.severe(ipe.getMessage());
         } catch (ParseException pe) {
-            Log.getLogger(TodoFactory.class).severe(pe.getMessage());
+            Log.severe(pe.getMessage());
         } catch (InvalidRecurrenceException ire) {
-            Log.getLogger(TodoFactory.class).severe(ire.getMessage());
+            Log.severe(ire.getMessage());
         } catch (RecurrenceWithoutDateException rwde) {
-            Log.getLogger(TodoFactory.class).severe(rwde.getMessage());
+            Log.severe(rwde.getMessage());
         }
         throw new ParseTaskFailedException(TypeEnum.TODO.toString());
     }
@@ -51,11 +52,11 @@ public class TaskParser {
 
             return new DeadlineArguments(description, dueDate, priorityEnum, recurrenceEnum);
         } catch (InvalidPriorityException ipe) {
-            Log.getLogger(TodoFactory.class).severe(ipe.getMessage());
+            Log.severe(ipe.getMessage());
         } catch (ParseException pe) {
-            Log.getLogger(TodoFactory.class).severe(pe.getMessage());
+            Log.severe(pe.getMessage());
         } catch (InvalidRecurrenceException ire) {
-            Log.getLogger(TodoFactory.class).severe(ire.getMessage());
+            Log.severe(ire.getMessage());
         }
         throw new ParseTaskFailedException(TypeEnum.DEADLINE.toString());
     }
@@ -72,18 +73,18 @@ public class TaskParser {
             }
             return new EventArguments(description, startDate, endDate, priorityEnum, recurrenceEnum);
         } catch (InvalidPriorityException ipe) {
-            Log.getLogger(TodoFactory.class).severe(ipe.getMessage());
+            Log.severe(ipe.getMessage());
         } catch (ParseException pe) {
-            Log.getLogger(TodoFactory.class).severe(pe.getMessage());
+            Log.severe(pe.getMessage());
         } catch (InvalidRecurrenceException ire) {
-            Log.getLogger(TodoFactory.class).severe(ire.getMessage());
+            Log.severe(ire.getMessage());
         } catch (StartDateAfterEndDateException sdaede) {
-            Log.getLogger(TodoFactory.class).severe(sdaede.getMessage());
+            Log.severe(sdaede.getMessage());
         }
         throw new ParseTaskFailedException(TypeEnum.EVENT.toString());
     }
 
-    private static PriorityEnum getPriorityEnum(String priority)
+    public static PriorityEnum getPriorityEnum(String priority)
             throws InvalidPriorityException {
         if (priority == null) {
             return null;
@@ -95,7 +96,7 @@ public class TaskParser {
         }
     }
 
-    private static RecurrenceEnum getRecurrenceEnum(String recurrence)
+    public static RecurrenceEnum getRecurrenceEnum(String recurrence)
             throws InvalidRecurrenceException {
         if (recurrence == null) {
             return null;
@@ -103,7 +104,7 @@ public class TaskParser {
         return RecurrenceEnum.getRecurrence(recurrence);
     }
 
-    private static Date getDate(String date) throws ParseException {
+    public static Date getDate(String date) throws ParseException {
         if (date == null) {
             return null;
         }
