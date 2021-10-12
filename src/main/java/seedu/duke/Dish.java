@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import seedu.duke.logger.LoggerManager;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +16,7 @@ public class Dish {
     private Double ingredientContribution;
 
     public Dish(String dishName) {
+        LoggerManager.setupLogger(logger);
         logger.log(Level.INFO, "Calling default constructor");
         this.dishName = dishName;
         this.wastage = 0.0;
@@ -21,6 +24,7 @@ public class Dish {
     }
 
     public Dish(String dishName, double wastage, double ingredientContribution) {
+        LoggerManager.setupLogger(logger);
         logger.log(Level.INFO, "Calling loading constructor");
         this.dishName = dishName;
         this.wastage = wastage;

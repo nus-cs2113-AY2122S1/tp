@@ -2,12 +2,18 @@ package seedu.duke.command;
 
 import seedu.duke.DishList;
 import seedu.duke.Ui;
+import seedu.duke.logger.LoggerManager;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AddDishIngrCommand extends Command {
     private static Logger logger = Logger.getLogger("AddingDishIngrCommand.execute()");
+
+    AddDishIngrCommand() {
+        LoggerManager.setupLogger(logger);
+    }
 
     @Override
     public void execute(ArrayList<String> parameters) {
