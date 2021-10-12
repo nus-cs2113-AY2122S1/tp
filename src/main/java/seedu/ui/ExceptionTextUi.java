@@ -129,7 +129,11 @@ public class ExceptionTextUi {
     }
 
     public static void invalidTelegramUsernameInput() {
-        String message = "The telegram username is not correctly formatted";
+        String message = "The telegram username is not correctly formatted,\n"
+                + "Rules for Telegram username :\n"
+                + "    * Uppercase and lowercase letters allowed\n"
+                + "    * Numbers and underscore allowed\n"
+                + "    * Length at-least 5 characters";
         printDoubleLineMessage(message);
     }
 
