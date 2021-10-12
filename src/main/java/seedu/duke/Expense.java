@@ -48,7 +48,7 @@ public class Expense {
                 + System.lineSeparator()
                 + "date: " + this.getDate()
                 + System.lineSeparator()
-                + "Amount Spent: " + this.getAmountSpent()
+                + "Amount Spent: " + String.format("%.02f", this.getAmountSpent())
                 + System.lineSeparator()
                 + "People involved: " + this.getPersonsList().toString()
                 + System.lineSeparator()

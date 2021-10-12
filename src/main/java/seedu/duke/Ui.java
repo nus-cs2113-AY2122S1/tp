@@ -23,6 +23,10 @@ public class Ui {
         System.out.println(person.getName() + " | " + person.getAmtOwedToUser());
     }
 
+    public static void printMoney(double val) {
+        String money = String.format("%.02f", val);
+        System.out.println(money);
+    }
 
     public static void printExpenseDetails(Expense e) {
         System.out.println(e);
@@ -30,9 +34,12 @@ public class Ui {
 
     public static void printExpensesSummary(Trip t) {
         System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
-        System.out.println("Total budget for this trip: " + t.getBudget());
-        System.out.println("Total expenditure so far: " + t.getTotalExpenses());
-        System.out.println("Current budget left for this trip: " + t.getBudgetLeft());
+        System.out.println("Total budget for this trip: ");
+        printMoney(t.getBudget());
+        System.out.println("Total expenditure so far: ");
+        printMoney(t.getTotalExpenses());
+        System.out.println("Current budget left for this trip: ");
+        printMoney(t.getBudgetLeft());
     }
 
     public static void printExpenseAddedSuccess() {
@@ -40,7 +47,8 @@ public class Ui {
     }
 
     public static void printExpensesInList(Expense expense, int index) {
-        System.out.println(index + ". " + expense.getDescription() + " | Cost: " + expense.getAmountSpent());
+        System.out.println(index + ". " + expense.getDescription() + " | Cost: ");
+        printMoney(expense.getAmountSpent());
     }
 
     public static void printTripsInList(Trip trip, int index) {

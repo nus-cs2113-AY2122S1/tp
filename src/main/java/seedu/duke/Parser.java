@@ -13,36 +13,32 @@ public class Parser {
     public static boolean parseUserInput(String userInput) {
         String[] userInputSplit = userInput.split(" ", 2);
         String inputCommand = userInputSplit[0].toLowerCase();
-        String inputDescription = null;
-        if (userInputSplit[0].equals("close")) {
-            Storage.closeTrip();
-            return true;
-        }
-        if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create") && !inputCommand.equals("quit")) {
+
+        if (inputCommand.equals("quit")) {
+            Ui.goodBye();
+            return false;
+        } else if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
             Ui.printNoTripError();
+            return true;
+        } else if (userInputSplit[0].equals("close")) {
+            Storage.closeTrip();
             return true;
         } else if (!checkValidCommand(inputCommand)) {
             Ui.printUnknownCommandError();
             return true;
-        } else if (inputCommand.equals("list") && userInputSplit.length > 1
-                && userInputSplit[1].equals("trips")) {
-            inputDescription = userInputSplit[1];
-        } else if (!(inputCommand.equals("view") || inputCommand.equals("summary")
-                || inputCommand.equals("quit") || inputCommand.equals("list"))) {
-            inputDescription = userInputSplit[1];
         }
 
         switch (inputCommand) {
         case "create":
-            executeCreate(inputDescription);
+            executeCreate(userInputSplit[1]);
             break;
 
         case "edit":
-            executeEdit(inputDescription);
+            executeEdit(userInputSplit[1]);
             break;
 
         case "open":
-            executeOpen(inputDescription);
+            executeOpen(userInputSplit[1]);
             break;
 
         case "summary":
@@ -54,20 +50,16 @@ public class Parser {
             break;
 
         case "delete":
-            executeDelete(inputDescription);
+            executeDelete(userInputSplit[1]);
             break;
 
         case "list":
-            executeList(inputDescription);
+            executeList(userInputSplit[1]);
             break;
 
         case "expense":
-            executeExpense(inputDescription);
+            executeExpense(userInputSplit[1]);
             break;
-
-        case "quit":
-            Ui.goodBye();
-            return false;
 
         default:
             Ui.printUnknownCommandError();
