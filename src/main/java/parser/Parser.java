@@ -1,14 +1,14 @@
 package parser;
 
+import command.ExitCommand;
 import command.HelpCommand;
 import command.PurgeCommand;
 import command.medicine.AddCommand;
 import command.medicine.DeleteCommand;
+import command.medicine.DispenseCommand;
 import command.medicine.ListCommand;
 import command.medicine.UpdateCommand;
-import command.medicine.DispenseCommand;
 import errors.InvalidCommand;
-
 import inventory.Medicine;
 import ui.Ui;
 
@@ -19,6 +19,7 @@ import static command.CommandList.ADD;
 import static command.CommandList.ADD_ORDER;
 import static command.CommandList.ARCHIVE;
 import static command.CommandList.DELETE;
+import static command.CommandList.DELETE_DISPENSE;
 import static command.CommandList.DELETE_ORDER;
 import static command.CommandList.DISPENSE;
 import static command.CommandList.EXIT;
@@ -30,6 +31,7 @@ import static command.CommandList.QUERY;
 import static command.CommandList.RECEIVE_ORDER;
 import static command.CommandList.UNDO;
 import static command.CommandList.UPDATE;
+import static command.CommandList.UPDATE_DISPENSE;
 import static command.CommandList.UPDATE_ORDER;
 
 
@@ -69,12 +71,15 @@ public class Parser {
         case DELETE:
             new DeleteCommand().execute(ui, parameters, medicines);
             break;
+        case DELETE_DISPENSE:
+            break;
         case DELETE_ORDER:
             break;
         case DISPENSE:
             new DispenseCommand().execute(ui, parameters, medicines);
             break;
         case EXIT:
+            new ExitCommand().execute(ui, parameters, medicines);
             return true;
         case HELP:
             new HelpCommand().execute(ui, parameters, medicines);
@@ -95,6 +100,8 @@ public class Parser {
             break;
         case UPDATE:
             new UpdateCommand().execute(ui, parameters, medicines);
+            break;
+        case UPDATE_DISPENSE:
             break;
         case UPDATE_ORDER:
             break;
@@ -117,7 +124,7 @@ public class Parser {
 
         assert (userInputSplit.length <= 2) : "Command extraction failed! More than 2 values were returned!";
 
-        String command = userInputSplit[0].toUpperCase();
+        String command = userInputSplit[0].toLowerCase();
         String commandParameters = "";
         if (userInputSplit.length > 1) { // Ensure command parameter exists
             commandParameters = userInputSplit[1];
@@ -148,7 +155,7 @@ public class Parser {
 
                 parameterContents = new StringBuilder(); // Reset the values
                 String[] commandSplit = s.split(DELIMITER);
-                commandParameter = commandSplit[0].toUpperCase();
+                commandParameter = commandSplit[0].toLowerCase();
 
                 if (commandSplit.length > 1) {
                     parameterContents = new StringBuilder(commandSplit[1]);

@@ -104,29 +104,64 @@ Example:
 
 Expected output:
 
+
 ### Purging existing medication : `purge`
+Deletes all data in MediVault.
 
-Format:
+Format: `purge`
 
-Example:
+Example: `purge`
 
 Expected output:
+```
+Are you sure you want to delete all data? (Y/N)
+Y
+All data has been cleared!
+```
 
 ### Showing help page : `help`
+Displays the command syntax of all accepted commands by Medivault.
 
-Format:
+Format:`help`
 
-Example:
+Example: `help`
 
 Expected output:
+```
+Welcome to the help page.
+Note that parameters in {curly braces} are optional.
+Parameters in [square braces] indicate that at least one of the parameter(s) must be provided.
++=========+====================================================================================================================+
+| COMMAND |                                                   COMMAND SYNTAX                                                   | 
++=========+====================================================================================================================+
+|   add   | add n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY                                           | 
++---------+--------------------------------------------------------------------------------------------------------------------+
+|  list   | list {i/STOCK_ID p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME} | 
++---------+--------------------------------------------------------------------------------------------------------------------+
+| update  | update i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]                           | 
++---------+--------------------------------------------------------------------------------------------------------------------+
+| delete  | delete i/STOCK_ID                                                                                                  | 
++---------+--------------------------------------------------------------------------------------------------------------------+
+|  exit   | exit                                                                                                               | 
++---------+--------------------------------------------------------------------------------------------------------------------+
+|  help   | help                                                                                                               | 
++---------+--------------------------------------------------------------------------------------------------------------------+
+|  purge  | purge                                                                                                              | 
++---------+--------------------------------------------------------------------------------------------------------------------+
+For more information, refer to User Guide: https://ay2122s1-cs2113t-t10-1.github.io/tp/
+```
 
 ### Exiting MediVault : `exit`
+Exits MediVault.
 
-Format:
+Format: `exit`
 
-Example:
+Example: `exit`
 
 Expected output:
+```
+Quitting MediVault...
+```
 
 ## FAQ
 
@@ -136,4 +171,12 @@ Expected output:
 
 ## Command Summary
 
-{input summary page}
+Syntax | Command Parameters
+------ | ------
+add | `add n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY`
+delete | `delete i/STOCK_ID`
+update | `update i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
+list | `list {i/STOCK_ID p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}`
+purge | `no parameters`
+help | `no parameters`
+exit | `no parameters`

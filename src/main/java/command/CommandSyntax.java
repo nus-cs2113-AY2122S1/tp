@@ -22,17 +22,17 @@ public class CommandSyntax {
     public static final String[] COLUMNS = {COMMAND, COMMAND_SYNTAX};
     public static final int NO_OF_COLUMNS = 2;
 
-    public static final String ADD_COMMAND = "ADD N/NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
-            + "D/DESCRIPTION M/MAX_QUANTITY";
-    public static final String LIST_COMMAND = "LIST {I/STOCK_ID P/PRICE Q/QUANTITY E/EXPIRY_DATE "
-            + "D/DESCRIPTION M/MAX_QUANTITY SORT/COLUMN_NAME RSORT/COLUMN NAME}";
-    public static final String UPDATE_COMMAND = "UPDATE I/STOCK_ID [N/NAME P/PRICE Q/QUANTITY E/EXPIRY_DATE "
-            + "D/DESCRIPTION M/MAX_QUANTITY]";
-    public static final String DELETE_COMMAND = "DELETE I/STOCK_ID";
-    public static final String DISPENSE_COMMAND = "DISPENSE N/NAME Q/QUANTITY C/CUSTOMER_ID S/STAFF_NAME";
-    public static final String HELP_COMMAND = "HELP";
-    public static final String PURGE_COMMAND = "PURGE";
-    public static final String EXIT_COMMAND = "EXIT";
+    public static final String ADD_COMMAND = "add n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE "
+            + "d/DESCRIPTION m/MAX_QUANTITY";
+    public static final String LIST_COMMAND = "list {i/STOCK_ID p/PRICE q/QUANTITY e/EXPIRY_DATE "
+            + "d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}";
+    public static final String UPDATE_COMMAND = "update i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE "
+            + "d/DESCRIPTION m/MAX_QUANTITY]";
+    public static final String DELETE_COMMAND = "delete i/STOCK_ID";
+    public static final String DISPENSE_COMMAND = "dispense n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME";
+    public static final String HELP_COMMAND = "help";
+    public static final String PURGE_COMMAND = "purge";
+    public static final String EXIT_COMMAND = "exit";
 
     public CommandSyntax(String commandName, String commandSyntax) {
         this.commandName = commandName;

@@ -405,4 +405,11 @@ public class Ui {
             printRowBorder(columnWidths);
         }
     }
+
+    /**
+     * Prints the exit message.
+     */
+    public void printExit() {
+        print("Quitting Medivault...");
+    }
 }
