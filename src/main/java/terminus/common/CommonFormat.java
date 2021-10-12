@@ -37,6 +37,9 @@ public class CommonFormat {
      */
     public static ArrayList<String> findArguments(String arg) {
         ArrayList<String> argsArray = new ArrayList<>();
+        if (arg == null) {
+            assert false;
+        }
         Pattern p = Pattern.compile("\"(.*?)\"");
         Matcher m = p.matcher(arg);
         while (m.find()) {
@@ -52,7 +55,16 @@ public class CommonFormat {
      * @return True if array list is empty, false otherwise
      */
     public static boolean isArrayEmpty(ArrayList<String> argArray) {
+        if (argArray == null) {
+            assert false;
+        }
+        if (argArray.isEmpty()) {
+            return true;
+        }
         for (String s : argArray) {
+            if (s == null) {
+                assert false;
+            }
             if (s.isBlank()) {
                 return true;
             }
