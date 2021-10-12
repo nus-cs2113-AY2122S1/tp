@@ -15,8 +15,8 @@ help
 schedule add a
 schedule add a "Thursday"
 schedule add a "Thursday" "10:00"
-schedule add "CS2113T Tutorial" "Thursday" "10:00" "zoom.nus.sg"
-schedule add "CS2113T Lecture" "Friday" "16:00" "zoom.com"
+schedule add "CS2113T Tutorial" "Thursday" "10:00" "https://zoom.us/test"
+schedule add "CS2113T Lecture" "Friday" "16:00" "https://zoom.us/test"
 schedule invalid
 schedule view
 schedule view 4
