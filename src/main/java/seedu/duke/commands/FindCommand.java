@@ -12,13 +12,16 @@ public class FindCommand extends Command {
     public String keyword;
     public static ArrayList<Item> combinedItemList = new ArrayList<>();
 
+    // to pass into SelectCommand
+    public static ArrayList<Item> filteredItemList = new ArrayList<>();
+
     public FindCommand(String[] command) {
         keyword = command[1];
     }
 
     public CommandResult execute() {
         combinedItemList = Parser.makeMainList();
-        ArrayList<Item> filteredItemList = filterItemsByString(keyword);
+        filteredItemList = filterItemsByString(keyword);
 
         // can replace this with exceptions
         if (filteredItemList.isEmpty()) {
@@ -29,7 +32,7 @@ public class FindCommand extends Command {
     }
 
     public static ArrayList<Item> filterItemsByString(String keyword) {
-        ArrayList<Item> filteredItemList = (ArrayList<Item>) combinedItemList.stream()
+        filteredItemList = (ArrayList<Item>) combinedItemList.stream()
                 .filter((item) -> item.getDescription().toLowerCase().contains(keyword))
                 .collect(Collectors.toList());
         return filteredItemList;

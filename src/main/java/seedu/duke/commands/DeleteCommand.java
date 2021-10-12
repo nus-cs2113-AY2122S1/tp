@@ -10,6 +10,8 @@ import static seedu.duke.Duke.taskList;
 
 public class DeleteCommand extends Command {
 
+    protected static final String TASK_OR_EVENT_FLAG = "-";
+
     // input from user
     public String taskToDelete;
     public static ArrayList<Item> combinedItemList = new ArrayList<>();
@@ -52,7 +54,7 @@ public class DeleteCommand extends Command {
 
     public static int getTaskIndex(String command) {
         // command will contain either a "-t" or "-e"
-        int taskIndexPosition = command.trim().indexOf("-") + 2;
+        int taskIndexPosition = command.trim().indexOf(TASK_OR_EVENT_FLAG) + 2;
         return Integer.parseInt(command.trim().substring(taskIndexPosition)) - 1;
     }
 }
