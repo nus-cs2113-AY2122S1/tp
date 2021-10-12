@@ -2,6 +2,7 @@ package seedu.command;
 
 import seedu.parser.FailedCommandType;
 import seedu.ui.TextUi;
+import seedu.ui.ExceptionTextUi;
 
 public class FailedCommand extends Command {
     private FailedCommandType type;
@@ -17,34 +18,34 @@ public class FailedCommand extends Command {
     public void execute() {
         switch (type) {
         case GENERAL:
-            TextUi.invalidCommandMessage();
+            ExceptionTextUi.invalidCommandMessage();
             break;
         case INVALID_FLAG:
-            TextUi.invalidFlagMessage();
+            ExceptionTextUi.invalidFlagMessage();
             break;
         case INVALID_INDEX:
-            TextUi.invalidIndexMessage();
+            ExceptionTextUi.invalidIndexMessage();
             break;
         case MISSING_ARG:
-            TextUi.missingArgMessage();
+            ExceptionTextUi.missingArgMessage();
             break;
         case MISSING_DETAIL:
-            TextUi.missingDetailMessage();
+            ExceptionTextUi.missingDetailMessage();
             break;
         case INVALID_NUM:
-            TextUi.invalidNumMessage();
+            ExceptionTextUi.invalidNumMessage();
             break;
         case INVALID_FORMAT:
-            TextUi.invalidFormatMessage();
+            ExceptionTextUi.invalidFormatMessage();
             break;
         case NUM_OUT_OF_BOUND:
-            TextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
+            ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize() - 1);
             break;
         case MISSING_NAME:
-            TextUi.missingNameMessage();
+            ExceptionTextUi.missingNameMessage();
             break;
         case FORBIDDEN_DETAIL:
-            TextUi.forbiddenDetailMessage();
+            ExceptionTextUi.forbiddenDetailMessage();
             break;
         default:
             return;

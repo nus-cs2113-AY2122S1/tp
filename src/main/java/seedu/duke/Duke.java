@@ -7,6 +7,7 @@ import seedu.parser.MainParser;
 import seedu.storage.ContactsEncoder;
 import seedu.storage.Storage;
 import seedu.ui.TextUi;
+import seedu.ui.ExceptionTextUi;
 
 public class Duke {
     private TextUi textUi;
@@ -23,7 +24,7 @@ public class Duke {
         try {
             this.contactList = storage.loadExistingContacts();
         } catch (FileErrorException e) {
-            TextUi.fileErrorMessage(this.contactFilePath);
+            ExceptionTextUi.fileErrorMessage(this.contactFilePath);
         }
     }
 
@@ -42,7 +43,7 @@ public class Duke {
             command.execute();
             ContactsEncoder.saveContacts(contactFilePath, contactList);
         } catch (FileErrorException e) {
-            TextUi.fileErrorMessage(contactFilePath);
+            ExceptionTextUi.fileErrorMessage(contactFilePath);
         }
     }
 
