@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
 import seedu.duke.data.item.Catalogue;
-import seedu.duke.libmgrException;
 import seedu.duke.ui.TextUI;
 
 /**

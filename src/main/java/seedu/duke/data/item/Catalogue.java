@@ -9,7 +9,7 @@ public class Catalogue {
     private ArrayList<Item> itemsArrayList = new ArrayList<>();
 
     /**
-     * Adds an item to the ArrayList of items
+     * Adds an item to the ArrayList of items.
      *
      * @param newItem Item to be added
      */
