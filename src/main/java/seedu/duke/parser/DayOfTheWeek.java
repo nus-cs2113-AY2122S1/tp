@@ -1,15 +1,14 @@
 package seedu.duke.parser;
 
-import seedu.duke.command.CommandType;
-
+// TODO: Move class to a new package
 public enum DayOfTheWeek {
     MON, TUE, WED, THU, FRI, SAT, SUN;
 
     /**
-     * Determines if the input parameter is a day of the week.
+     * Determines if the input parameter is a valid day of the week.
      *
      * @param param the input parameter
-     * @return true if it is a day, false otherwise
+     * @return true if the input is valid, false otherwise
      */
     public static boolean is(String param) {
         for (DayOfTheWeek day : DayOfTheWeek.values()) {

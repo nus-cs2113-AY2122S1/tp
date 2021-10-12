@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class LessonList {
-
-    private List<Lesson> lessonList;
+    private final List<Lesson> lessonList;
 
     public LessonList() {
         lessonList = new ArrayList<>();
@@ -20,66 +19,47 @@ public class LessonList {
         this.lessonList = lessonList;
     }
 
-    public void addLesson(Lesson newLesson) {
-        lessonList.add(newLesson);
+    public int getSize() {
+        return lessonList.size();
     }
 
-    /**
-     * Deletes all lessons from the lesson list.
-     */
-    public void clearLessonList() {
-        lessonList.clear();
+    public Lesson getLesson(int lessonIndex) throws DukeException {
+        try {
+            return lessonList.get(lessonIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(Message.ERROR_INVALID_INDEX);
+        } catch (NumberFormatException e) {
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
+        }
     }
 
     public boolean isEmpty() {
         return lessonList.isEmpty();
     }
 
-    /**
-     * Gets the size of the lesson list.
-     *
-     * @return the number of lessons in the lesson list
-     */
-    public int getSize() {
-        return lessonList.size();
+    public void addLesson(Lesson newLesson) {
+        lessonList.add(newLesson);
     }
 
-    /**
-     * Deletes a lesson from the list.
-     *
-     * @param index the index of the lesson to delete
-     */
-    public void deleteLesson(int index) throws DukeException {
+    public void deleteLesson(int lessonIndex) throws DukeException {
         try {
-            lessonList.remove(index);
-        } catch (IndexOutOfBoundsException exception) {
-            throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
-        } catch (NumberFormatException exception) {
-            throw new DukeException(Message.ERROR_NUMBER_FORMAT);
+            lessonList.remove(lessonIndex);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(Message.ERROR_INVALID_INDEX);
+        } catch (NumberFormatException e) {
+            throw new DukeException(Message.ERROR_INVALID_NUMBER);
         }
     }
 
-    /**
-     * Gets information of a lesson from the lesson list.
-     *
-     * @param index the index of the lesson
-     * @return the lesson represented by the specified index
-     */
-    public Lesson getLesson(int index) throws DukeException {
-        try {
-            return lessonList.get(index);
-        } catch (IndexOutOfBoundsException exception) {
-            throw new DukeException(Message.ERROR_INDEX_OUT_OF_BOUNDS);
-        } catch (NumberFormatException exception) {
-            throw new DukeException(Message.ERROR_NUMBER_FORMAT);
-        }
+    public void deleteAllLessons() {
+        lessonList.clear();
     }
 
     /**
-     * Gets lessons containing the specified keyword.
+     * Filters the list of lessons based on the specified keyword.
      *
-     * @param keyword the keyword to find in lessons in the list
-     * @return the filtered lessons list containing only lessons with the specified keyword
+     * @param keyword the specified keyword
+     * @return the filtered lesson list
      */
     public LessonList filterLessonsByKeyword(String keyword) {
         return new LessonList(lessonList.stream()
@@ -88,10 +68,10 @@ public class LessonList {
     }
 
     /**
-     * Gets lessons with the specified period.
+     * Filters the list of lessons based on the specified period.
      *
-     * @param period the day of the week for the task/lesson
-     * @return the filtered lessons list containing only lessons with the specified period
+     * @param period the specified period
+     * @return the filtered lesson list
      */
     public LessonList filterLessonsByPeriod(String period) {
         return new LessonList(lessonList.stream()
@@ -99,20 +79,10 @@ public class LessonList {
                 .collect(Collectors.toList()));
     }
 
-    @Override
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < lessonList.size(); i++) {
-            Lesson lesson = lessonList.get(i);
-            s.append(Ui.PADDING).append(i + 1).append(". ").append(lesson).append(System.lineSeparator());
-        }
-        return s.toString();
-    }
-
     /**
-     * Serializes the lesson list into its file data storage format.
+     * Serializes the lesson list data into the correct format for storage file.
      *
-     * @return the serialized lesson list
+     * @return serialized lesson list
      */
     public String serialize() {
         StringBuilder data = new StringBuilder();
@@ -123,12 +93,11 @@ public class LessonList {
     }
 
     /**
-     * Filters out strings representing lesson data from a list of strings and deserializes
-     * them into a list of lesson objects.
+     * Deserializes the storage file and returns the correct lesson list.
      *
-     * @param data the list of strings
-     * @return the list of lesson objects
-     * @throws DukeException when there is lesson data that is not deserializable
+     * @param data a list of strings representing the serialized data
+     * @return deserialized lesson list
+     * @throws DukeException if the data is invalid format
      */
     public static List<Lesson> deserialize(List<String> data) throws DukeException {
         List<Lesson> lessonList = new ArrayList<>();
@@ -138,5 +107,15 @@ public class LessonList {
             }
         }
         return lessonList;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < lessonList.size(); i++) {
+            Lesson lesson = lessonList.get(i);
+            s.append(Ui.PADDING).append(i + 1).append(". ").append(lesson).append(System.lineSeparator());
+        }
+        return s.toString();
     }
 }

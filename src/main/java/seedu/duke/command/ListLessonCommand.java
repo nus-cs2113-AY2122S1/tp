@@ -16,7 +16,7 @@ public class ListLessonCommand extends ListCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) {
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList) {
         if (isListAll) {
             ui.printLessonList(lessonList);
         } else {
