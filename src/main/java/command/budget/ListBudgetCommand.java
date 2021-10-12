@@ -1,6 +1,8 @@
 package command.budget;
 
 import picocli.CommandLine.Command;
+import service.BudgetManager;
+import terminal.Ui;
 
 import java.util.concurrent.Callable;
 
@@ -8,7 +10,10 @@ import java.util.concurrent.Callable;
 public class ListBudgetCommand implements Callable<Integer> {
 
     public Integer call() throws Exception {
-        System.out.println("list budget");
+        Ui ui = Ui.getUi();
+        ui.printMessage("list budget");
+        BudgetManager.listBudgets();
         return 0;
     }
 }
+
