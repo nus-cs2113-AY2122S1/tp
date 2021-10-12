@@ -90,6 +90,15 @@ public abstract class ContactParser {
             throw new InvalidEmailException();
         }
     }
+
+    private void checkLinkedinUsernameRegex(String detailToParse) throws InvalidLinkedinUsernameException {
+        //allows lowercase, numbers, underscore and hyphen. Length must be 3-100 characters
+        String linkedinRegex = "^[a-z0-9-_]{3,100}$";
+        if (!detailToParse.matches(linkedinRegex)) {
+            throw new InvalidLinkedinUsernameException();
+        }
+    }
+
     private int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
