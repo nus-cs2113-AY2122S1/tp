@@ -47,6 +47,7 @@ public class ViewMessageFormatterUi {
             if (contact.getTelegram() == null | contact.getTelegram().equals("null")) {
                 return "";
             } else {
+                assert(!contact.getTelegram().equals("null"));
                 return "\nTelegram: t.me/" + contact.getTelegram();
             }
         } catch (NullPointerException e) {
