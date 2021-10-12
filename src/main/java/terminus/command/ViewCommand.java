@@ -11,7 +11,7 @@ import terminus.ui.Ui;
 
 public class ViewCommand<T extends Content> extends Command {
 
-    private Class<T> type;
+    private final Class<T> type;
 
     private int itemNumber;
     private boolean displayAll;

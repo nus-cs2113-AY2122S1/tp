@@ -11,7 +11,7 @@ import terminus.ui.Ui;
 public class HelpCommand extends Command {
 
     public static final String HELP_MENU_MESSAGE = "\nHelp Menu\n---------";
-    private CommandParser commandMap;
+    private final CommandParser commandMap;
 
     public HelpCommand(CommandParser commandMap) {
         this.commandMap = commandMap;
