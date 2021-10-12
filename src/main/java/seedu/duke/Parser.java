@@ -75,6 +75,9 @@ public class Parser {
         if (userInput.length != 5) {
             throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
         }
+
+        assert (userInput.length == 5);
+
         String ingredientName = userInput[1];
         double ingredientAmount;
         try {

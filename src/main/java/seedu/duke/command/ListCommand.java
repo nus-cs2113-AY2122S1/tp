@@ -22,6 +22,7 @@ public class ListCommand implements Command {
         }
 
         assert (IngredientList.getInstance().getInventoryStock() > 0);
+        assert (IngredientList.getInstance() != null);
 
         int currentStock = IngredientList.getInstance().getInventoryStock();
         resultMsg = LIST_MESSAGE;
