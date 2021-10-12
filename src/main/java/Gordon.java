@@ -29,7 +29,7 @@ public class Gordon {
             command.execute(mainCookbook);
             storage.saveCookbook(mainCookbook);
         }
-        System.out.println("Bye bye!");
+        System.out.println("Pack your bags, you're off the show");
         logger.log(Level.INFO, "Processing end.");
     }
 

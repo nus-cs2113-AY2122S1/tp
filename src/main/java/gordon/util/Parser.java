@@ -47,6 +47,7 @@ public class Parser {
                 }
                 try {
                     int index = Integer.parseInt(inputIndex);
+                    assert index > 0 : "Your input should be a number greater than 0";
                     return new DeleteCommand(index - 1);
                 } catch (NumberFormatException e) {
                     throw new GordonException(GordonException.INDEX_INVALID);
