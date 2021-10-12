@@ -16,7 +16,12 @@ public class AddRecipeCommand extends Command {
             + "Now you have %2$s recipe(s)";
     public static final String MESSAGE_RECIPE_ALREADY_EXISTS = "Unable to add recipe: %1$s\n"
             + "You already have it in your list";
-    public static final String MESSAGE_NO_INGREDIENTS_FOR_RECIPE = "There's no ingredients for this recipe";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a recipe with its constituent ingredients"
+            + " to the recipe list.\n"
+            + "You can add any number of ingredients with its required quantities.\n"
+            + "Parameters: r/RECIPE NAME i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...\n"
+            + "Example: " + COMMAND_WORD
+            + " r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2";
 
     private final Recipe recipe;
 
