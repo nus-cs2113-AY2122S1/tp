@@ -24,9 +24,7 @@ class ReminderManagerTest {
 
     ReminderManager reminderManager = new ReminderManager();
 
-    private final String expectedOut = "Reminder! 10 min before the following task:\n"
-            + "Reminder! 10 min before the following task:\n"
-            + "Reminder! 10 min before the following task:\n";
+    private String expectedOut;
 
     @Test
     void sendReminder() {
@@ -40,6 +38,10 @@ class ReminderManagerTest {
         Task deadlineWithReminder = new Deadline("exercise 1", startDate);
         Task deadlineWithoutReminder = new Deadline("exercise 1", endDate);
         Task eventTest = new Event("meeting", startDate, endDate);
+
+        expectedOut = "Reminder! 10 min before the following task:\n" + "\t" + todoWithReminder.getTaskEntryDescription()
+                + "Reminder! 10 min before the following task:\n" + "\t" + deadlineWithReminder.getTaskEntryDescription()
+                + "Reminder! 10 min before the following task:\n" + "\t" + eventTest.getTaskEntryDescription();
 
         tasklist.add(todoWithReminder);
         tasklist.add(todoWithoutReminder);
