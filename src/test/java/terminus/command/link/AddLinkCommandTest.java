@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
 import terminus.command.CommandResult;
-import terminus.common.CommonFormat;
+import terminus.common.CommonUtils;
 import terminus.content.Link;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
@@ -34,7 +34,7 @@ public class AddLinkCommandTest {
     @Test
     void parseArguments_addLinkCommand_success() {
         String addLinkInput = "add \"test\" \"Thursday\" \"00:00\" \"https://zoom.us/test\"";
-        ArrayList<String> parsedArguments = CommonFormat.findArguments(addLinkInput);
+        ArrayList<String> parsedArguments = CommonUtils.findArguments(addLinkInput);
         assertEquals("test", parsedArguments.get(0));
         assertEquals("Thursday", parsedArguments.get(1));
         assertEquals("00:00", parsedArguments.get(2));

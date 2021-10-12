@@ -1,6 +1,7 @@
 package terminus.command;
 
 import terminus.common.CommonFormat;
+import terminus.common.CommonUtils;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.Content;
@@ -55,7 +56,7 @@ public class DeleteCommand<T extends Content> extends Command {
         assert deletedContentName != null && !deletedContentName.isBlank();
 
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,
-                CommonFormat.getClassName(type).toLowerCase(), deletedContentName));
+                CommonUtils.getClassName(type).toLowerCase(), deletedContentName));
         return new CommandResult(true);
     }
 }
