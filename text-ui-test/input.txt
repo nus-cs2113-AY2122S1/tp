@@ -1,2 +1,2 @@
-create America 02-02-2021 yikai,yuzhao,qian,josh,xiyuan 1.08
+create America 02-02-2021 1.08 yikai,yuzhao,qian,josh,xiyuan
 quit
