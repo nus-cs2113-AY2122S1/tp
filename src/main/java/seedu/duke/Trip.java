@@ -71,10 +71,6 @@ public class Trip {
         return this.budget;
     }
 
-    public void setBudget(double budget) {
-        this.budget = budget;
-    }
-
     public void setBudget(String budget) {
         try {
             this.budget = Double.parseDouble(budget);
