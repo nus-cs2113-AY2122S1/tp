@@ -1,79 +1,73 @@
 package seedu.duke.task.type;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
+import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
 
 public class Event extends Task {
 
-    static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
+    private static final String DEADLINE_DATE_DESCRIPTION_REGEX = " (startDate: %s - endDate: %s)";
 
-    Date startDate;
-    Date endDate;
-    RecurrenceEnum recurrence;
+    private static final String START_DATE_NOT_NULL_ASSERTION = "startDate for Event cannot be null";
+    private static final String END_DATE_NOT_NULL_ASSERTION = "endDate for Event cannot be null";
 
-    public Event(String description) {
-        super(description);
-        this.startDate = Calendar.getInstance().getTime();
-        this.endDate = Calendar.getInstance().getTime();
-        this.recurrence = DEFAULT_RECURRENCE;
-    }
+    private static final String START_DATE_BEFORE_END_DATE_ASSERTION = "Start date must be before end date!";
 
-    public Event(String description, PriorityEnum priority) {
-        super(description, priority);
-        this.startDate = Calendar.getInstance().getTime();
-        this.endDate = Calendar.getInstance().getTime();
-        this.recurrence = DEFAULT_RECURRENCE;
-    }
+    private Date startDate;
+    private Date endDate;
 
     public Event(String description, Date startDate, Date endDate) {
         super(description);
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.recurrence = DEFAULT_RECURRENCE;
+        setStartDate(startDate);
+        setEndDate(endDate);
     }
 
-    public Event(String description, RecurrenceEnum recurrence) {
-        super(description);
-        this.startDate = Calendar.getInstance().getTime();
-        this.endDate = Calendar.getInstance().getTime();
-        this.recurrence = recurrence;
-    }
-
-    public Event(String description, PriorityEnum priority, Date startDate, Date endDate) {
-        super(description, priority);
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.recurrence = DEFAULT_RECURRENCE;
+    public Event(String description, Date startDate, Date endDate, PriorityEnum priority) {
+        this(description, startDate, endDate);
+        setPriority(priority);
     }
 
     public Event(String description, Date startDate, Date endDate, RecurrenceEnum recurrence) {
-        super(description);
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.recurrence = recurrence;
+        this(description, startDate, endDate);
+        setRecurrence(recurrence);
     }
 
-    public Event(String description, PriorityEnum priority, Date startDate, Date endDate, RecurrenceEnum recurrence) {
-        super(description, priority);
+    public Event(String description, Date startDate, Date endDate, PriorityEnum priority, RecurrenceEnum recurrence) {
+        this(description, startDate, endDate);
+        setPriority(priority);
+        setRecurrence(recurrence);
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        assert startDate != null : START_DATE_NOT_NULL_ASSERTION;
+        if (endDate != null) {
+            assert startDate.before(endDate) : START_DATE_BEFORE_END_DATE_ASSERTION;
+        }
         this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        assert endDate != null : END_DATE_NOT_NULL_ASSERTION;
+        if (startDate != null) {
+            assert startDate.before(endDate) : START_DATE_BEFORE_END_DATE_ASSERTION;
+        }
         this.endDate = endDate;
-        this.recurrence = recurrence;
     }
 
     @Override
     public String getTaskEntryDescription() {
-        return super.getTaskEntryDescription() + " (startDate: " + getDateAsString(this.startDate) + " - "
-                + "endDate: " + getDateAsString(this.endDate) + ")";
-    }
-
-    public String getDateAsString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        String strDate = dateFormat.format(date);
-        return strDate;
+        return super.getTaskEntryDescription()
+            + String.format(DEADLINE_DATE_DESCRIPTION_REGEX,
+            UtilityParser.getDateAsString(getStartDate()), UtilityParser.getDateAsString(getEndDate()));
     }
 }

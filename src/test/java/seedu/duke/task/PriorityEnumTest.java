@@ -1,7 +1,7 @@
 package seedu.duke.task;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.exception.PriorityEnumDoesNotExistException;
+import seedu.duke.exception.InvalidPriorityException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,17 +9,17 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PriorityEnumTest {
     @Test
-    void getEnum_validInputs_expectPriorityEnum() throws PriorityEnumDoesNotExistException {
-        assertEquals(PriorityEnum.HIGH, PriorityEnum.getEnum(2));
-        assertEquals(PriorityEnum.MEDIUM, PriorityEnum.getEnum(1));
-        assertEquals(PriorityEnum.LOW, PriorityEnum.getEnum(0));
+    void getEnum_validInputs_expectPriorityEnum() throws InvalidPriorityException {
+        assertEquals(PriorityEnum.HIGH, PriorityEnum.getPriority(2));
+        assertEquals(PriorityEnum.MEDIUM, PriorityEnum.getPriority(1));
+        assertEquals(PriorityEnum.LOW, PriorityEnum.getPriority(0));
     }
 
     @Test
     void getEnum_invalidInputs_expectPriorityEnumDoesNotExistException() {
-        assertThrows(PriorityEnumDoesNotExistException.class,
-            () -> PriorityEnum.getEnum(-1));
-        assertThrows(PriorityEnumDoesNotExistException.class,
-            () -> PriorityEnum.getEnum(10));
+        assertThrows(InvalidPriorityException.class,
+            () -> PriorityEnum.getPriority(-1));
+        assertThrows(InvalidPriorityException.class,
+            () -> PriorityEnum.getPriority(10));
     }
 }

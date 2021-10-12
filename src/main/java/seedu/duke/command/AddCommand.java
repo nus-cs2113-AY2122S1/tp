@@ -1,24 +1,32 @@
 package seedu.duke.command;
 
+import java.util.HashMap;
+import seedu.duke.exception.GetTaskFailedException;
+import seedu.duke.log.Log;
+import seedu.duke.task.Task;
 import seedu.duke.task.TaskManager;
 
 import java.util.Map;
+import seedu.duke.task.factory.TaskFactory;
 
 public class AddCommand extends Command {
-    public AddCommand(TaskManager taskManager, Map<String, String> commandArguments) {
+    private static String TASK_CREATED_MESSAGE = "Task Created";
+
+    public AddCommand(TaskManager taskManager, HashMap<String, String> commandArguments) {
         super(taskManager, commandArguments);
     }
 
     @Override
     public CommandResult executeCommand() throws Exception {
-
-        // To help u visualise the commandArguments (Flag -> value)
-        String flagsToArguments = "Printing add command arguments (flags) below:\n";
-
-        for (String flag : commandArguments.keySet()) {
-            flagsToArguments += flag + " = " + commandArguments.get(flag) + "\n";
+        Task createdTask;
+        String message;
+        try {
+            createdTask = TaskFactory.getTask(commandArguments);
+            taskManager.addTask(createdTask);
+            message = TASK_CREATED_MESSAGE;
+        } catch (GetTaskFailedException gtfe) {
+            message = gtfe.getMessage();
         }
-
-        return new CommandResult(flagsToArguments, false, false);
+        return new CommandResult(taskManager, message, true, false);
     }
 }
