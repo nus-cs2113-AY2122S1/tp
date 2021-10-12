@@ -73,13 +73,39 @@ public class LinkCommandParserTest {
     void parseCommand_resolveAddCommand_InvalidTimeFormatExceptionThrown()
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         assertThrows(InvalidTimeFormatException.class,
-            () -> linkCommandParser.parseCommand("add \"test desc\" \"test day\" \"0:0\" \"zoom\""));
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Friday\" \"0:0\" \"https://zoom.us/test\""));
         assertThrows(InvalidTimeFormatException.class,
-            () -> linkCommandParser.parseCommand("add \"test desc\" \"test day\" \"0:0X\" \"zoom\""));
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Saturday\" \"0:0X\" \"https://zoom.us/test\""));
         assertThrows(InvalidTimeFormatException.class,
-            () -> linkCommandParser.parseCommand("add \"test desc\" \"test day\" \"0\" \"zoom\""));
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Sunday\" \"0\" \"https://zoom.us/test\""));
         assertThrows(InvalidTimeFormatException.class,
-            () -> linkCommandParser.parseCommand("add \"test desc\" \"test day\" \"14:0\" \"zoom\""));
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Tuesday\" \"14:0\" \"https://zoom.us/test\""));
+    }
+
+    @Test
+    void parseCommand_resolveAddCommand_InvalidLinkExceptionThrown()
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+        assertThrows(InvalidLinkException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Friday\" \"10:00\" \"zoom.com\""));
+        assertThrows(InvalidLinkException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Saturday\" \"12:30\" \"zoom.sg\""));
+        assertThrows(InvalidLinkException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Sunday\" \"09:00\" \"invalidlink\""));
+        assertThrows(InvalidLinkException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Tuesday\" \"14:00\" \"invalid link.com\""));
+    }
+
+    @Test
+    void parseCommand_resolveAddCommand_InvalidDayExceptionThrown()
+            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+        assertThrows(InvalidDayException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Today\" \"10:00\" \"https://zoom.us/test\""));
+        assertThrows(InvalidDayException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Yesterday\" \"10:00\" \"https://zoom.us/test\""));
+        assertThrows(InvalidDayException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Everyday\" \"10:00\" \"https://zoom.us/test\""));
+        assertThrows(InvalidDayException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"whenever\" \"10:00\" \"https://zoom.us/test\""));
     }
 
     @Test
