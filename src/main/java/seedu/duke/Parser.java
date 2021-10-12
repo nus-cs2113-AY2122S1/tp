@@ -33,8 +33,10 @@ public class Parser {
             return new ByeCommand();
         case "help":
             return new HelpCommand();
-        case "select":
+        case "find":
             return new FindCommand(command);
+        case "select":
+            return new SelectCommand(command);
         case "update":
             return new UpdateCommand(command);
         case "next":
