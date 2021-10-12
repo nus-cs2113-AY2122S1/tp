@@ -25,7 +25,7 @@ public class AddIngrStoredCommand extends Command {
                 Ingredient currentIngredient = IngredientList.ingredientList.get(ingredientIndex);
                 currentIngredient.updateIngredientWeight(ingredientWeightValue);
             } catch (NumberFormatException e) {
-                System.out.println("Incorrect parameters - Invalid number entered");
+                System.out.println(ui.getInvalidParamMsg());
                 System.out.println(ui.getLineDivider());
             }
         }

@@ -15,7 +15,7 @@ public class AddIngrWasteCommand extends Command {
         int ingredientIndex = IngredientList.find(ingredient);
         System.out.println(ui.getLineDivider());
         if (ingredientIndex == -1) {
-            System.out.println("Ingredient does not exist");
+            System.out.println(ui.getIngrNotExistMsg());
         } else {
             try {
                 System.out.println("Enter the wastage of " + ingredient + " in KG:");
@@ -25,7 +25,7 @@ public class AddIngrWasteCommand extends Command {
                 Ingredient currentIngredient = IngredientList.ingredientList.get(ingredientIndex);
                 currentIngredient.addWaste(ingredientWeightValue);
             } catch (NumberFormatException e) {
-                System.out.println("Incorrect parameters - Invalid number entered");
+                System.out.println(ui.getInvalidParamMsg());
                 System.out.println(ui.getLineDivider());
             }
         }

@@ -10,7 +10,7 @@ public class DishList {
         if (DishList.find(dishName) == -1) {
             Dish dishToAdd = new Dish(dishName);
             dishList.add(dishToAdd);
-            System.out.println("Dish added to list: " + dishToAdd.getDishName());
+            ui.printAddedDish(dishToAdd.getDishName());
         } else {
             System.out.println(ui.getDishExistsMsg());
         }
@@ -18,7 +18,7 @@ public class DishList {
 
     //Returns -1 if not present, index if present
     public static int find(String dishName) {
-        for (Dish dish: dishList) {
+        for (Dish dish : dishList) {
             if (dish.getDishName().equals(dishName)) {
                 return dishList.indexOf(dish);
             }
@@ -27,20 +27,19 @@ public class DishList {
     }
 
     public static void list() {
-        System.out.println("Here are the dishes you have: ");
-        for (int i = 0; i < dishList.size(); i++) {
-            System.out.println((i + 1) + ". " + dishList.get(i));
-        }
-        System.out.println("You can use commands 'add' or 'find' to add new dishes or find existing ones!");
+        ui.printDishList(dishList);
     }
 
     public static void delete(String dishName) {
+        int listSize = dishList.size(); //listSize = N
         int dishIndex = DishList.find(dishName);
         if (dishIndex == -1) {
             System.out.println(ui.getDishNotExistMsg());
+            assert dishList.size() == listSize: "dishList should be of size N";
         } else {
             dishList.remove(dishIndex);
-            System.out.println("Dish, " + dishName + " has been removed!");
+            ui.printDishNameRemoved(dishName);
+            assert dishList.size() == (listSize - 1): "dishList should be of size N-1";
         }
     }
 }

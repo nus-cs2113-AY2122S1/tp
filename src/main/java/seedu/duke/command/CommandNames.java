@@ -9,7 +9,9 @@ public enum CommandNames {
     ADD_INGR("add ingr", new AddIngrCommand()),
     DELETE_DISH("del dish", new DeleteDishCommand()),
     DELETE_INGR("del ingr", new DeleteIngrCommand()),
-    LIST("list", new ListCommand());
+    LIST("list", new ListCommand()),
+    HELP("help", new HelpCommand());
+
 
     private String name;
     private Command callbackCommand;

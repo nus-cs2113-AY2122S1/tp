@@ -9,9 +9,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Storage {
+    private static Logger logger = Logger.getLogger("Storage class");
     private static final String DIRECTORY_NAME = "data";
     private static final String FILE_NAME_DISH = "dishes.txt";
     private static final String FILE_NAME_INGR = "ingredients.txt";
@@ -46,6 +50,7 @@ public class Storage {
             }
 
         } catch (IOException e) {
+            logger.log(Level.INFO, "File creation failed / unable to retrieve file");
             System.out.println("____________________________________________");
             System.out.println("Unable to access file");
             System.out.println("____________________________________________");
@@ -79,6 +84,7 @@ public class Storage {
                 System.out.println("Creating " + FILE_NAME_INGR);
                 fileToReadIngr.createNewFile();
             } catch (IOException ex) {
+                logger.log(Level.INFO, "File creation failed / unable to retrieve file");
                 System.out.println("____________________________________________");
                 System.out.println("Unable to create ingredients.txt");
                 System.out.println("____________________________________________");
@@ -98,12 +104,14 @@ public class Storage {
             while (s.hasNext()) {
                 String in = s.nextLine();
                 String[] params = in.split("\\|");
-                Dish dishToAdd = new Dish(params[0], Double.parseDouble(params[1]));
-                if (params.length > 2) {
+                Dish dishToAdd = new Dish(params[0], Double.parseDouble(params[1]), Double.parseDouble(params[2]));
+                if (params.length > 3) {
                     //System.out.println("Contains constituents");
-                    for (int i = 2; i < params.length; i++) {
+                    for (int i = 3; i < params.length; i++) {
                         int ingredientIndex = IngredientList.find(params[i]);
-                        dishToAdd.constituents.add(IngredientList.ingredientList.get(ingredientIndex));
+                        Ingredient dishComponent = IngredientList.ingredientList.get(ingredientIndex);
+                        dishToAdd.getConstituents().add(dishComponent);
+                        dishComponent.addDishWaste(dishToAdd.getIngredientContribution());
                     }
                 }
                 DishList.dishList.add(dishToAdd);
@@ -113,6 +121,7 @@ public class Storage {
                 System.out.println("Creating " + FILE_NAME_DISH);
                 fileToReadIngr.createNewFile();
             } catch (IOException ex) {
+                logger.log(Level.INFO, "File creation failed / unable to retrieve file");
                 System.out.println("____________________________________________");
                 System.out.println("Unable to create dishes.txt");
                 System.out.println("____________________________________________");

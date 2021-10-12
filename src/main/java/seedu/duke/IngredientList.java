@@ -4,20 +4,23 @@ import java.util.ArrayList;
 
 public class IngredientList {
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
+    private static Ui ui = new Ui();
 
     public static void add(String ingredientName, double ingredientWeight) {
         if (IngredientList.find(ingredientName) == -1) {
             Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeight);
             ingredientList.add(ingredientToAdd);
-            System.out.println("Added:" + ingredientToAdd.getIngredientName() + " " + ingredientWeight);
+            System.out.println(ui.getLineDivider() + System.lineSeparator()
+                    + "Ingredient added to list: " + ingredientToAdd.getIngredientName()
+                    + " (Weight: " + ingredientWeight + " kg)");
         } else {
-            System.out.println("Ingredient already exists");
+            System.out.println(ui.getIngrExistsMsg());
         }
     }
 
     //Returns -1 if not present, index if present
     public static int find(String ingredientName) {
-        for (Ingredient ingredient: ingredientList) {
+        for (Ingredient ingredient : ingredientList) {
             if (ingredient.getIngredientName().equals(ingredientName)) {
                 return ingredientList.indexOf(ingredient);
             }
@@ -30,16 +33,19 @@ public class IngredientList {
         for (int i = 0; i < ingredientList.size(); i++) {
             System.out.println((i + 1) + ". " + ingredientList.get(i));
         }
-        System.out.println("You can use commands 'add' or 'find' to add new ingredients or find existing ones!");
+        System.out.println("You can use command 'add' to add new ingredients!");
     }
 
     public static void delete(String ingredientName) {
+        int listSize = ingredientList.size(); //listSize = N
         int ingredientIndex = IngredientList.find(ingredientName);
         if (ingredientIndex == -1) {
-            System.out.println("Ingredient does not exist");
+            System.out.println(ui.getIngrNotExistMsg());
+            assert ingredientList.size() == listSize: "ingredientList should be of size N";
         } else {
             ingredientList.remove(ingredientIndex);
             System.out.println("Ingredient, " + ingredientName + " has been removed!");
+            assert ingredientList.size() == (listSize - 1): "ingredientList should be of size N-1";
         }
     }
 }
