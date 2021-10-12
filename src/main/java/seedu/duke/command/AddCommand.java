@@ -22,7 +22,7 @@ public class AddCommand implements Command {
         IngredientList.getInstance().add(this.ingredient);
         String resultMsg = ADDED_MESSAGE
                 + ingredient.toString() + '\n'
-                + "Currently inventory has " + IngredientList.getInstance().getInventoryStock()
+                + "Current inventory has " + IngredientList.getInstance().getInventoryStock()
                 + " items.";
         return resultMsg;
     }

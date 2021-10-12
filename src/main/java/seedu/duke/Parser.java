@@ -80,7 +80,7 @@ public class Parser {
 
         resultMsg = new UpdateCommand(updatedIngredient).run();
 
-        if (resultMsg == "") {
+        if (resultMsg.equals("")) {
             resultMsg = NOT_FOUND_MESSAGE;
         }
         return resultMsg;
@@ -102,15 +102,15 @@ public class Parser {
 
         assert (userInput.length == 5);
 
-        String ingredientName = userInput[1];
+        String ingredientName = userInput[1].trim();
         double ingredientAmount;
         try {
-            ingredientAmount = Double.parseDouble(userInput[2]);
+            ingredientAmount = Double.parseDouble(userInput[2].trim());
         } catch (NumberFormatException e) {
             throw new DukeException(NUMBER_FORMAT_MESSAGE);
         }
-        String ingredientUnit = userInput[3];
-        String ingredientExpiry = userInput[4];
+        String ingredientUnit = userInput[3].trim();
+        String ingredientExpiry = userInput[4].trim();
 
         Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnit, ingredientExpiry);
         return new AddCommand(newIngredient).run();
