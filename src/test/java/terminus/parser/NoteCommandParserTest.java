@@ -11,8 +11,8 @@ import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
 import terminus.command.ViewCommand;
 import terminus.command.note.AddNoteCommand;
-import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 

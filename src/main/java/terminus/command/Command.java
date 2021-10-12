@@ -1,7 +1,7 @@
 package terminus.command;
 
-import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 

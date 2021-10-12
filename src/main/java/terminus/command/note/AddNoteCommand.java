@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
+import terminus.common.CommonUtils;
 import terminus.common.Messages;
+import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
-import terminus.common.TerminusLogger;
 
 public class AddNoteCommand extends Command {
 
@@ -42,7 +43,7 @@ public class AddNoteCommand extends Command {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         // Regex to find arguments
-        ArrayList<String> argArray = CommonFormat.findArguments(arguments);
+        ArrayList<String> argArray = CommonUtils.findArguments(arguments);
         if (!isValidNoteArguments(argArray)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
@@ -69,7 +70,7 @@ public class AddNoteCommand extends Command {
             TerminusLogger.warning(String.format("Failed to find %d arguments: %d arguments found",
                     ADD_NOTE_ARGUMENTS, argArray.size()));
             isValid = false;
-        } else if (CommonFormat.isArrayEmpty(argArray)) {
+        } else if (CommonUtils.isArrayEmpty(argArray)) {
             TerminusLogger.warning("Failed to parse arguments: some arguments found is empty");
             isValid = false;
         }
