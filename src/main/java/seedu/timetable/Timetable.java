@@ -16,7 +16,7 @@ import java.util.logging.Level;
  * Each cell in the timetable will display the module code, lesson type and venue of the lesson
  * Each Timetable should be assigned a semester number --> Academic Year semester (1 OR 2).
  */
-public class Timetable {
+public class Timetable implements Comparable<Timetable> {
 
     private static final int DEFAULT_START = 9;
     private static final int DEFAULT_END = 16;
@@ -178,7 +178,6 @@ public class Timetable {
                 schedule[i] = null;
             }
         }
-
     }
 
     /**
@@ -209,13 +208,14 @@ public class Timetable {
         clearSchedule(saturday);
         clearSchedule(sunday);
     }
-    
+
     /**
      * Clears the TimetableLesson for all non-null time slots .
      *
      * @param schedule Schedule contains the lessons of the user for a particular day of the week.
      */
     public void clearSchedule(TimetableLesson[] schedule) {
+        assert (schedule.length > 0);
         for (int i = 0; i < schedule.length; i++) {
             if (schedule[i] != null) {
                 schedule[i] = null;
@@ -267,5 +267,17 @@ public class Timetable {
 
     public Integer getSemester() {
         return semester;
+    }
+
+
+    @Override
+    public int compareTo(Timetable timetable) {
+        int flag = 0;
+        boolean isSemesterSame = this.getSemester().equals(timetable.getSemester());
+        boolean areModulesSame = this.modules.equals(timetable.modules);
+        if (isSemesterSame && areModulesSame) {
+            flag = 1;
+        }
+        return flag;
     }
 }
