@@ -43,6 +43,16 @@ public class IngredientList {
             System.out.println(ui.getIngrNotExistMsg());
             assert ingredientList.size() == listSize : "ingredientList should be of size N";
         } else {
+            //Get all dishes
+            for (Dish dish : DishList.dishList) {
+                //Find if they contain ingr in constituents
+                ArrayList<Ingredient> constituents = dish.getConstituents();
+                for (int i = 0; i < constituents.size(); i++) {
+                    if (constituents.get(i).getIngredientName().equals(ingredientName)) {
+                        constituents.remove(i);
+                    }
+                }
+            }
             ingredientList.remove(ingredientIndex);
             System.out.println("Ingredient, " + ingredientName + " has been removed!");
             assert ingredientList.size() == (listSize - 1) : "ingredientList should be of size N-1";
