@@ -1,12 +1,13 @@
 package seedu.duke.command;
 
-import seedu.duke.command.Command;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
-import java.util.ArrayList;
 
 public class UpdateCommand implements Command {
+
+    private static final String UPDATE_MESSAGE = "Got it. This ingredient has been updated:\n" + "\t";
+
     private int ingredientNumber;
     private Ingredient updatedIngredient;
 
@@ -19,10 +20,9 @@ public class UpdateCommand implements Command {
     }
 
     @Override
-    public String run() {
+    public String run() throws DukeException {
         IngredientList.getInstance().set(ingredientNumber, updatedIngredient);
-        String resultMsg = "Noted. This has been updated:\n"
-                + "t" + updatedIngredient.toString();
+        String resultMsg = UPDATE_MESSAGE + updatedIngredient.toString();
         return resultMsg;
     }
 }

@@ -45,6 +45,7 @@ public class Ingredient {
     public void setUnits(String units) {
         this.units = units;
     }
+
     public void setExpiry(String expiry) {
         this.expiry = expiry;
     }

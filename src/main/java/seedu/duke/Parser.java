@@ -16,6 +16,8 @@ public class Parser {
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
     private static final String NUMBER_FORMAT_MESSAGE = "Invalid number format!";
+    private static final String NOT_FOUND_MESSAGE = "Ingredient not found!";
+
 
     private static final String SPACE_SEPARATOR = " ";
 
@@ -45,11 +47,12 @@ public class Parser {
     }
 
 
-    private static String parseUpdateCommand(String command) throws DukeException {
+    private static String parseUpdateCommand(String command) throws DukeException{
         String resultMsg = "";
         int i;
         String delimiter = "i/|a/|u/|e/";
         String[] details = command.split(delimiter);
+
         String ingredientName = details[0];
         Double ingredientAmount = Double.parseDouble(details[1]);
         String ingredientUnits = details[2];
@@ -57,7 +60,7 @@ public class Parser {
 
         //For future versions, updating non-existing item will simply add item to stock.
         if (IngredientList.getInstance().getInventoryStock() == 0) {
-            resultMsg = "Inventory is empty!";
+            resultMsg = DELETE_ERROR_MESSAGE;
             return resultMsg;
         }
 
@@ -67,7 +70,7 @@ public class Parser {
             }
         }
         if (resultMsg == "") {
-            resultMsg = "Ingredient not in inventory!";
+            resultMsg = NOT_FOUND_MESSAGE;
         }
         return resultMsg;
     }
