@@ -106,4 +106,34 @@ public class ExceptionTextUi {
                 + "ConTech is unable to process it";
         printDoubleLineMessage(message);
     }
+
+    public static void invalidNameInput() {
+        String message = "The name is not correctly formatted";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidGithubUsernameInput() {
+        String message = "The github username is not correctly formatted";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidTelegramUsernameInput() {
+        String message = "The telegram username is not correctly formatted";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidTwitterUsernameInput() {
+        String message = "The twitter username is not correctly formatted";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidEmailInput() {
+        String message = "The email id is not correctly formatted";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidLinkedinInput() {
+        String message = "The linkedin username is not correctly formatted";
+        printDoubleLineMessage(message);
+    }
 }
