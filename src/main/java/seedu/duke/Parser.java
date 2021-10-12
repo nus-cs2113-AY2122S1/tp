@@ -10,25 +10,24 @@ public class Parser {
         String command = commandAndParams[0];
         String params = commandAndParams[1];
         switch (command) {
-        case "bye":
-            return new ByeCommand();
-        case "add":
-            return executeAddCommand(params);
-        case "list":
-            return new ListCommand();
-        case "clear":
-            return new ClearCommand();
-        case "cut":
-            try {
-                return parseCut(params);
-            }
-            catch (NullPointerException  | NumberFormatException e) {
-                System.out.println("INVALID: Empty 'cut' index");
-            }
-            break;
-        default:
-            System.out.println("INVALID INPUT");
-            break;
+            case "bye":
+                return new ByeCommand();
+            case "add":
+                return executeAddCommand(params);
+            case "list":
+                return new ListCommand();
+            case "clear":
+                return new ClearCommand();
+            case "cut":
+                try {
+                    return parseCut(params);
+                } catch (NullPointerException | NumberFormatException e) {
+                    System.out.println("INVALID: Empty 'cut' index");
+                }
+                break;
+            default:
+                System.out.println("INVALID INPUT");
+                break;
         }
         return null;
     }
@@ -80,20 +79,20 @@ public class Parser {
             String value = unformattedSubstring.replace(prefix, "").trim();
             previousIndex = nextIndex;
             switch (prefix) {
-            case "/cn":
-                extractValues[1] = value;
-                break;
-            case "/f":
-                extractValues[2] = value;
-                break;
-            case "/a":
-                extractValues[3] = value;
-                break;
-            case "/t":
-                extractValues[4] = value;
-                break;
-            default:
-                extractValues[0] = value;
+                case "/cn":
+                    extractValues[1] = value;
+                    break;
+                case "/f":
+                    extractValues[2] = value;
+                    break;
+                case "/a":
+                    extractValues[3] = value;
+                    break;
+                case "/t":
+                    extractValues[4] = value;
+                    break;
+                default:
+                    extractValues[0] = value;
             }
         }
         return extractValues;
@@ -108,20 +107,20 @@ public class Parser {
         for (String substring : splitBySpaces) {
             Prefix prefix = checkPrefix(substring);
             switch (prefix) {
-            case HAS_CONTACT:
-                containsContact = true;
-                break;
-            case HAS_ACCOMMS:
-                containsAccomms = true;
-                break;
-            case HAS_TOUR:
-                containsTour = true;
-                break;
-            case HAS_FLIGHT:
-                containsFlight = true;
-                break;
-            default:
-                break;
+                case HAS_CONTACT:
+                    containsContact = true;
+                    break;
+                case HAS_ACCOMMS:
+                    containsAccomms = true;
+                    break;
+                case HAS_TOUR:
+                    containsTour = true;
+                    break;
+                case HAS_FLIGHT:
+                    containsFlight = true;
+                    break;
+                default:
+                    break;
             }
         }
         return containsContact && containsFlight && containsAccomms && containsTour;
@@ -140,6 +139,18 @@ public class Parser {
             return Prefix.NO_PREFIX;
         }
     }
+
+    public static Command parseCut(String params) {
+        int clientIndex = stringToInt(params) - 1;
+        return new CutCommand(clientIndex);
+    }
+
+    private static int stringToInt(String params) {
+        int clientIndex = Integer.parseInt(params);
+        return clientIndex;
+    }
+
+}
 
     public static Command parseCut(String params) {
         int clientIndex = stringToInt(params) - 1;
