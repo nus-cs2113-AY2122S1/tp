@@ -45,16 +45,24 @@ public class Ui {
             TOTAL_INCOME_FORMAT);
 
 
-    
-    
+
+    /**
+     * Initialises the Ui system of the program with a Scanner object that is able to read user inputs.
+     */
     public Ui() {
         this.in = new Scanner(System.in);
     }
 
+    /**
+     * Reads a new command from the user through the standard input.
+     */
     public String readCommand() {
         return in.nextLine().trim();
     }
-
+    
+    /**
+     * Prints the welcoming message for users that have entered the program.
+     */
     public void printWelcome() {
         printLine();
         System.out.println(PRODUCT_LOGO);
@@ -68,7 +76,12 @@ public class Ui {
         }
         System.out.println(" ");
     }
-    
+
+    /**
+     * Prints the filtered list of expenses in the financial tracker to the standard output.
+     *
+     * @param entries The list of incomes and expenses in the financial tracker.
+     */
     public void listExpense(ArrayList<Entry> entries) {
         printLine();
         System.out.println(LISTING_EXPENSE_MESSAGE);
@@ -76,8 +89,7 @@ public class Ui {
         int i = 1;
         for (Entry entry:entries) {
             if (entry instanceof Expense) {
-                System.out.print(i);
-                System.out.print(": ");
+                System.out.print(i + ": ");
                 System.out.println(entry);
                 i++;
             }
@@ -85,7 +97,12 @@ public class Ui {
         printLine();
 
     }
-    
+
+    /**
+     * Prints the filtered list of incomes in the financial tracker to the standard output.
+     *
+     * @param entries The list of incomes and expenses in the financial tracker.
+     */
     public void listIncome(ArrayList<Entry> entries) {
         printLine();
         System.out.println(LISTING_INCOME_MESSAGE);
@@ -93,8 +110,8 @@ public class Ui {
         int i = 1;
         for (Entry entry:entries) {
             if (entry instanceof Income) {
-                System.out.print(i);
-                System.out.print(": ");
+                assert i >= 1;
+                System.out.print(i + ": ");
                 System.out.println(entry);
                 i++;
             }
@@ -103,16 +120,35 @@ public class Ui {
 
     }
     
+    /**
+     * Prints the total expense of all expenses in the financial tracker to the standard output.
+     *
+     * @param totalExpense The total value of the expenses in the financial tracker.
+     */
     public void printTotalExpense(double totalExpense) {
-        System.out.printf("Your total expense is: %f\n", totalExpense);
+        assert totalExpense >= 0;
+        printLine();
+        System.out.printf("Your total expense is: $%.2f\n", totalExpense);
         printLine();
     }
-    
+
+    /**
+     * Prints the total income of the financial tracker to the standard output.
+     *
+     * @param totalIncome The total value of the incomes in the financial tracker.
+     */
     public void printTotalIncome(double totalIncome) {
-        System.out.printf("Your total income is: %f\n", totalIncome);
+        assert totalIncome >= 0;
+        printLine();
+        System.out.printf("Your total income is: $%.2f\n", totalIncome);
         printLine();
     }
-    
+
+    /**
+     * Prints the feedback message for adding an expense to the financial tracker.
+     *
+     * @param expense The expense to be added to the financial tracker.
+     */
     public void printExpenseAdded(Expense expense) {
         printLine();
         System.out.println("Your most recent spending: ");
@@ -121,6 +157,11 @@ public class Ui {
 
     }
 
+    /**
+     * Prints the feedback message for deleting an expense from the financial tracker.
+     *
+     * @param expense The expense to be deleted from the financial tracker.
+     */
     public void printExpenseDeleted(Expense expense) {
         printLine();
         System.out.println("You removed this: ");
@@ -128,7 +169,12 @@ public class Ui {
         printLine();
 
     }
-    
+
+    /**
+     * Prints the feedback message for adding an income to the financial tracker.
+     *
+     * @param income The income to be added to the financial tracker.
+     */
     public void printIncomeAdded(Income income) {
         printLine();
         System.out.println("Your most recent earning: ");
@@ -137,6 +183,11 @@ public class Ui {
 
     }
 
+    /**
+     * Prints the feedback message for deleting an income from the financial tracker.
+     *
+     * @param income The income to be deleted from the financial tracker.
+     */
     public void printIncomeDeleted(Income income) {
         printLine();
         System.out.println("You removed this: ");
@@ -144,7 +195,10 @@ public class Ui {
         printLine();
 
     }
-    
+
+    /**
+     * Prints the list of commands and their respective format to the standard output.
+     */
     public void printHelp() {
         printLine();
         System.out.println(HELP_COMMAND_MESSAGE);
@@ -154,16 +208,24 @@ public class Ui {
         }
         printLine();
     }
-    
+
+    /**
+     * Prints the termination message of the STONKS XD program.
+     */
     public void printBye() {
         printLine();
         System.out.println(BYE_MESSAGE);
         printLine();
     }
 
-    public void printError(String message) {
+    /**
+     * Prints the error message as feedback through the standard output.
+     * 
+     * @param errorMessage The error message to be printed out due to certain exceptions or invalid inputs.
+     */
+    public void printError(String errorMessage) {
         printLine();
-        System.out.println(message);
+        System.out.println(errorMessage);
         printLine();
     }
 
