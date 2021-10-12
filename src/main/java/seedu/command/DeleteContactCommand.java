@@ -29,8 +29,8 @@ public class DeleteContactCommand extends Command {
 
     public void execute() {
         Contact deletedContact = contactList.getContactAtIndex(deletedIndex);
-        TextUi.deleteContactConfirmationMessage(deletedContact, deletedIndex);
-        String userDeleteConfirmation = TextUi.getUserDeleteConfirmation();
+        // ask for confirmation to delete from user
+        String userDeleteConfirmation = TextUi.getUserDeleteConfirmation(deletedContact, deletedIndex);
         if (userDeleteConfirmation.equalsIgnoreCase("y")) {
             deleteContact();
         } else {

@@ -28,7 +28,12 @@ public class TextUi {
         return userInput;
     }
 
-    public static String getUserDeleteConfirmation() {
+    public static String getUserDeleteConfirmation(Contact deletedContact, int deletedIndex) {
+        String message = "Delete this contact?  (y/n)\n"
+                + "   " + deletedIndex + ". " + "Name: " + deletedContact.getName() + " GitHub: "
+                + deletedContact.getGithub();
+        printDoubleLineMessage(message);
+
         String userDeleteConfirmation = scanner.nextLine().trim();
         return userDeleteConfirmation;
     }
@@ -90,13 +95,6 @@ public class TextUi {
 
     public static void contactsEmptyListMessage() {
         String message = "You have not stored any contacts in ConTech";
-        printDoubleLineMessage(message);
-    }
-
-    public static void deleteContactConfirmationMessage(Contact deleteContact, int index) {
-        String message = "Delete this contact? \n"
-                + "   " + index + ". " + "Name: " + deleteContact.getName() + " GitHub: " + deleteContact.getGithub()
-                + "\nEnter \"y\" to delete.";
         printDoubleLineMessage(message);
     }
 
