@@ -17,6 +17,19 @@ public class SearchCommand extends Command {
         this.endCountry = endCountry;
     }
 
+    public String getStartCountry() {
+        return this.startCountry;
+    }
+
+    public String getEndCountry() {
+        return this.endCountry;
+    }
+
+    @Override
+    public String toString() {
+        return "search: " + getStartCountry() + " to " + getEndCountry();
+    }
+
     public void execute(TripsList tripsList, Ui ui) {
         MinCalcResult result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
         List<Double> distances = result.getDistances();
