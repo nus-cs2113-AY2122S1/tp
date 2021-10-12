@@ -14,6 +14,8 @@ public class DeleteAllCommand extends DeleteCommand {
             IOException {
         taskList.clearTaskList();
         lessonList.clearLessonList();
+        assert lessonList.isEmpty();
+        assert taskList.isEmpty();
         ui.printDeletedAll();
         storage.saveData(taskList, lessonList);
     }

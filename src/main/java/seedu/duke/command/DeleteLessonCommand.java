@@ -26,6 +26,7 @@ public class DeleteLessonCommand extends DeleteCommand {
             throws DukeException, IOException {
         if (isDeleteAll) {
             lessonList.clearLessonList();
+            assert lessonList.isEmpty();
             ui.printDeletedAllLessons();
         } else {
             Lesson deletedLesson = lessonList.getLesson(lessonIndex);

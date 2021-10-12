@@ -26,6 +26,7 @@ public class DeleteTaskCommand extends DeleteCommand {
             throws DukeException, IOException {
         if (isDeleteAll) {
             taskList.clearTaskList();
+            assert taskList.isEmpty();
             ui.printDeletedAllTasks();
         } else {
             Task deletedTask = taskList.getTask(taskIndex);
