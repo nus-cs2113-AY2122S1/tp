@@ -29,11 +29,10 @@ public class Storage {
     public static Trip getOpenTrip() {
         if (openTrip == null) {
             Ui.printNoOpenTripError();
-            try{
+            try {
                 int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
                 setOpenTrip(listOfTrips.get(tripIndex));
-            }
-            catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 Ui.argNotNumber();
             }
         }
@@ -42,6 +41,7 @@ public class Storage {
 
     /**
      * Checks if there is an open trip or not.
+     *
      * @return true if there is an open trip
      */
     public static boolean checkOpenTrip() {
