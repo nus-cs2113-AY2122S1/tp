@@ -43,8 +43,6 @@ public class AddNoteCommand extends Command {
         }
         // Regex to find arguments
         ArrayList<String> argArray = CommonFormat.findArguments(arguments);
-        assert argArray.size() > 0;
-
         if (!isValidNoteArguments(argArray)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
