@@ -2,11 +2,12 @@ package seedu.duke.parser;
 
 import seedu.duke.commands.ListCommand;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 public class ListCommandParser {
 
-    public ListCommand parse(String arguments) throws ParseException {
+    public ListCommand parse(String arguments) throws ParseException, IOException {
         String type;
 
         if (arguments.trim().length() == 0) {
