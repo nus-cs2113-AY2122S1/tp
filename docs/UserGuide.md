@@ -33,12 +33,33 @@ the last occurrence.
 
 
 ### Adding a medication stock: `add`
+Adds medication into the inventory.
+* If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION m/MAX_QUANTITY` parameter, it will be ignored, MediVault will add with the existing description and existing maximum quantity.
 
-Format:
+Format: `add n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE [d/DESCRIPTION m/MAX_QUANTITY]`
 
-Example:
+Example 1 (If medication exists): `add n/panadol p/5 q/50 e/19-09-2021`
 
-Expected output:
+Expected Output 1: 
+```
+Medication added: panadol
++====+=========+=======+==========+=============+==================================================+==============+
+| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE |                   DESCRIPTION                    | MAX_QUANTITY | 
++====+=========+=======+==========+=============+==================================================+==============+
+| 1  | panadol | $5.00 |    50    | 19-09-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS |     1000     | 
++----+---------+-------+----------+-------------+--------------------------------------------------+--------------+
+```
+Example 2 (If medication does not exists): `add n/vicodin q/10 p/10 e/02-11-2021 d/popular drug for treating pain m/500`
+
+Expected Output 2:
+```
+Medication added: vicodin
++====+=========+========+==========+=============+================================+==============+
+| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE |          DESCRIPTION           | MAX_QUANTITY | 
++====+=========+========+==========+=============+================================+==============+
+| 2  | vicodin | $10.00 |    10    | 02-11-2021  | popular drug for treating pain |     500      | 
++----+---------+--------+----------+-------------+--------------------------------+--------------+
+```
 
 ### Deleting a medication stock: `delete`
 
