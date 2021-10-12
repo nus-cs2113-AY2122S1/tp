@@ -1,6 +1,7 @@
 package seedu.typists;
 
 import seedu.typists.content.WikiImport;
+import seedu.typists.exception.InvalidArticleException;
 import seedu.typists.exception.InvalidStringInputException;
 import seedu.typists.parser.StringParser;
 
@@ -35,6 +36,10 @@ public class Main {
 
         // Test for WikiImport.
         WikiImport wiki = new WikiImport();
-        System.out.println(wiki.getArticle("GitHub"));
+        try {
+            String article = wiki.getArticle("GitHub");
+        } catch (InvalidArticleException e) {
+            e.printStackTrace();
+        }
     }
 }
