@@ -8,6 +8,7 @@ import java.util.Date;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
+import seedu.duke.task.reminder.Reminder;
 
 public class Deadline extends Task {
 
@@ -15,6 +16,8 @@ public class Deadline extends Task {
 
     Date dueDate;
     RecurrenceEnum recurrence;
+
+    private Reminder reminder;
 
     public Deadline(String description) {
         super(description);
@@ -32,6 +35,7 @@ public class Deadline extends Task {
         super(description);
         this.dueDate = doOn;
         this.recurrence = DEFAULT_RECURRENCE;
+        reminder = new Reminder(doOn);
     }
 
     public Deadline(String description, RecurrenceEnum recurrence) {
@@ -44,27 +48,38 @@ public class Deadline extends Task {
         super(description, priority);
         this.dueDate = doOn;
         this.recurrence = DEFAULT_RECURRENCE;
+        reminder = new Reminder(doOn);
     }
 
     public Deadline(String description, Date doOn, RecurrenceEnum recurrence) {
         super(description);
         this.dueDate = doOn;
         this.recurrence = recurrence;
+        reminder = new Reminder(doOn);
     }
 
     public Deadline(String description, PriorityEnum priority, Date doOn, RecurrenceEnum recurrence) {
         super(description, priority);
         this.dueDate = doOn;
         this.recurrence = recurrence;
+        reminder = new Reminder(doOn);
     }
 
     @Override
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription() + " (dueDate: " + getDateAsString(this.dueDate) + ")";
     }
-
+/*
     @Override
     public void displayReminder(LocalDateTime now) {
+        reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
+    }
+
+ */
+
+    @Override
+    public boolean needReminder() {
+        return (reminder != null);
     }
 
     public String getDateAsString(Date date) {
@@ -73,4 +88,7 @@ public class Deadline extends Task {
         return strDate;
     }
 
+    public String getReminder(LocalDateTime now) {
+        return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
+    }
 }

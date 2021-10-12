@@ -1,15 +1,13 @@
 package seedu.duke.task.reminder;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.task.PriorityEnum;
-import seedu.duke.task.RecurrenceEnum;
+import seedu.duke.parser.Parser;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskManager;
 import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,17 +24,21 @@ class ReminderManagerTest {
 
     ReminderManager reminderManager = new ReminderManager();
 
+    private final String expectedOut = "Reminder! 10 min before the following task:\n"
+            + "Reminder! 10 min before the following task:\n"
+            + "Reminder! 10 min before the following task:\n";
+
     @Test
     void sendReminder() {
-        Calendar now = Calendar.getInstance();
-        now.add(Calendar.MINUTE, 10);
-        startDate = now.getTime();
+        Calendar taskTime = Calendar.getInstance();
+        taskTime.add(Calendar.MINUTE, 10);
+        startDate = taskTime.getTime();
         endDate = Calendar.getInstance().getTime();
 
-        Task todoWithReminder = new TodoWithReminder("lecture with reminder", startDate);
-        Task todoWithoutReminder = new TodoWithReminder("lecture without reminder", endDate);
-        Task deadlineTest = new DeadlineWithReminder("exercise 1", startDate);
-        Task eventTest = new EventWithReminder("meeting", startDate, endDate);
+        Task todoWithReminder = new Todo("lecture with reminder", startDate);
+        Task todoWithoutReminder = new Todo("lecture without reminder", endDate);
+        Task deadlineTest = new Deadline("exercise 1", startDate);
+        Task eventTest = new Event("meeting", startDate, endDate);
 
         tasklist.add(todoWithReminder);
         tasklist.add(todoWithoutReminder);
@@ -44,6 +46,7 @@ class ReminderManagerTest {
         tasklist.add(eventTest);
 
         taskManager.setTasklist(tasklist);
-        reminderManager.setUpReminderManager(taskManager);
+        reminderManager.updateReminderManager(taskManager);
+        assertEquals(expectedOut, ReminderManager.sendReminder());
     }
 }

@@ -38,6 +38,12 @@ public abstract class Task {
     public void setPriority(PriorityEnum priority) {
         this.priority = priority;
     }
-
+/*
     public abstract void displayReminder(LocalDateTime now);
+
+ */
+
+    public abstract boolean needReminder();
+
+    public abstract String getReminder(LocalDateTime now);
 }

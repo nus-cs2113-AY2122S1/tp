@@ -8,6 +8,7 @@ import java.util.Date;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
+import seedu.duke.task.reminder.Reminder;
 
 public class Todo extends Task {
 
@@ -15,6 +16,8 @@ public class Todo extends Task {
 
     Date doOn;
     RecurrenceEnum recurrence;
+
+    private Reminder reminder;
 
     public Todo(String description) {
         super(description);
@@ -32,6 +35,7 @@ public class Todo extends Task {
         super(description);
         this.doOn = doOn;
         this.recurrence = DEFAULT_RECURRENCE;
+        reminder = new Reminder(doOn);
     }
 
     public Todo(String description, RecurrenceEnum recurrence) {
@@ -44,28 +48,40 @@ public class Todo extends Task {
         super(description, priority);
         this.doOn = doOn;
         this.recurrence = DEFAULT_RECURRENCE;
+        reminder = new Reminder(doOn);
     }
 
     public Todo(String description, Date doOn, RecurrenceEnum recurrence) {
         super(description);
         this.doOn = doOn;
         this.recurrence = recurrence;
+        reminder = new Reminder(doOn);
     }
 
     public Todo(String description, PriorityEnum priority, Date doOn, RecurrenceEnum recurrence) {
         super(description, priority);
         this.doOn = doOn;
         this.recurrence = recurrence;
+        reminder = new Reminder(doOn);
     }
 
     @Override
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription() + " (doOn: " + getDateAsString(this.doOn) + ")";
     }
-
+/*
     @Override
     public void displayReminder(LocalDateTime now) {
+        reminder.printReminder(now, getTaskEntryDescription(), recurrence);
+    }
+ */
 
+    public String getReminder(LocalDateTime now) {
+        return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
+    }
+
+    public boolean needReminder() {
+        return (reminder != null);
     }
 
     public String getDateAsString(Date date) {
