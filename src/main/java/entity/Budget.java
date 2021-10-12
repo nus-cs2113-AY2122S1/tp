@@ -12,5 +12,7 @@ public class Budget {
     }
 
     @Override
-    public String toString() { return "| " + value + "\t|"; }
+    public String toString() {
+        return value + "|";
+    }
 }

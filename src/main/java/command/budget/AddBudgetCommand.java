@@ -2,7 +2,6 @@ package command.budget;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-import picocli.CommandLine.Parameters;
 import service.BudgetManager;
 import terminal.Ui;
 import utils.Money;

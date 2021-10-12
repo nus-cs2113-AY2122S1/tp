@@ -4,10 +4,7 @@ import entity.Budget;
 import entity.BudgetList;
 import terminal.Ui;
 
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class BudgetManager {
 
@@ -22,7 +19,7 @@ public class BudgetManager {
 
     public static void listBudgets() {
         Ui ui = Ui.getUi();
-        String budgetListHeader = "| Value\t|";
+        String budgetListHeader = "Id.\t| Value\t|";
 
         ui.printMessage(budgetListHeader);
         ArrayList<Budget> budgets = BudgetList.getBudgets();
@@ -31,4 +28,3 @@ public class BudgetManager {
         }
     }
 }
-

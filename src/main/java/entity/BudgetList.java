@@ -10,7 +10,7 @@ public class BudgetList {
     }
 
     public static void deleteBudget() {
-                budgets.remove(budgets.size()-1);
+        budgets.remove(budgets.size() - 1);
     }
 
     public static ArrayList<Budget> getBudgets() {
