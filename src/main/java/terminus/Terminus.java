@@ -1,5 +1,7 @@
 package terminus;
 
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
 import java.nio.file.Path;
 import terminus.command.Command;
@@ -15,6 +17,12 @@ import terminus.ui.Ui;
 
 public class Terminus {
 
+    public static final String[] INVALID_JSON_MESSAGE = {
+            "Invalid file data detected.",
+            "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
+            "To save your current file, close your terminal (do not run exit).",
+            "Otherwise, you can continue using the program :)"
+    };
     private Ui ui;
     private CommandParser parser;
     private String workspace;
@@ -54,8 +62,11 @@ public class Terminus {
             TerminusLogger.info("Loading file...");
             this.nusModule = moduleStorage.loadFile();
         } catch (IOException e) {
-            TerminusLogger.warning("File loading has failed.");
+            TerminusLogger.warning("File loading has failed.", e.fillInStackTrace());
             handleIoException(e);
+        } catch (JsonSyntaxException | JsonIOException e) {
+            TerminusLogger.severe("Invalid file data detected!", e.fillInStackTrace());
+            ui.printSection(INVALID_JSON_MESSAGE);
         } finally {
             if (this.nusModule == null) {
                 TerminusLogger.warning("File not found.");
@@ -97,10 +108,10 @@ public class Terminus {
                 this.moduleStorage.saveFile(nusModule);
                 TerminusLogger.info("Save completed.");
             } catch (InvalidCommandException e) {
-                TerminusLogger.warning("Invalid input provided: " + input, e.getCause());
+                TerminusLogger.warning("Invalid input provided: " + input, e.fillInStackTrace());
                 ui.printSection(e.getMessage());
             } catch (InvalidArgumentException e) {
-                TerminusLogger.warning("Invalid input provided: " + input, e.getCause());
+                TerminusLogger.warning("Invalid input provided: " + input, e.fillInStackTrace());
 
                 // Check if the exception specified a correct command format for the user to follow.
                 if (e.getFormat() != null) {
