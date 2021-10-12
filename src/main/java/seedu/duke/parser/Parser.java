@@ -400,7 +400,6 @@ public class Parser {
      * @return true if the sequence is correct, false otherwise
      */
     private static boolean hasCorrectLessonFlagSequence(String userResponse) {
-        assert userResponse.split(" -d | -s | -e ").length == 4 : "user response should have exactly 3 flags";
         int posOfDFlag = userResponse.indexOf(" -d ");
         int posOfSFlag = userResponse.indexOf(" -s ");
         int posOfEFlag = userResponse.indexOf(" -e ");
