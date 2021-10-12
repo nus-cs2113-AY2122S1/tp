@@ -79,7 +79,8 @@ public class TextUi {
     }
 
     public static void viewContactMessage(Contact viewingContact, int index) {
-        String message = index + ". " + "Name: " + viewingContact.getName() + " GitHub: " + viewingContact.getGithub();
+        String viewName = ViewMessageFormatterUi.viewNameFormatter(viewingContact);
+        String message = index + ". " + viewName + formatContactFields(viewingContact);
         printDoubleLineMessage(message);
     }
 
