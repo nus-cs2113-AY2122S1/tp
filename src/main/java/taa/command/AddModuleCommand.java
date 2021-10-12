@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.ModuleList;
@@ -20,13 +21,21 @@ public class AddModuleCommand extends Command {
         super(argument, ADD_MODULE_ARGUMENT_KEYS);
     }
 
+    /**
+     * Executes the add_module command and adds a module.
+     *
+     * @param moduleList The list of modules.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
+     */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -38,6 +47,8 @@ public class AddModuleCommand extends Command {
         String name = argumentMap.get(KEY_MODULE_NAME);
         Module module = new Module(moduleCode, name);
         moduleList.addModule(module);
+
+        storage.save(moduleList);
 
         ui.printMessage(String.format(MESSAGE_FORMAT_MODULE_ADDED, module, moduleList.getSize()));
     }

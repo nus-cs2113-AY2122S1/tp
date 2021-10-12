@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.storage.Storage;
 import taa.assessment.Assessment;
 import taa.exception.TaaException;
 import taa.Ui;
@@ -28,20 +29,20 @@ public class AverageMarksCommand extends Command {
     }
 
     /**
-     * Checks for errors before calling the function to output the average marks
-     * of an assessment in a module.
+     * Executes the average_marks command and displays the average mark of an assessment to the user.
      *
-     * @param moduleList List of modules.
-     * @param ui The ui instance to handle interactions with the user.
-     * @throws TaaException When average marks command is invalid.
+     * @param moduleList The list of modules.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -68,7 +69,7 @@ public class AverageMarksCommand extends Command {
     /**
      * Outputs the average marks of an assessment in a module.
      *
-     * @param ui The ui instance to handle interactions with the user.
+     * @param ui     The ui instance to handle interactions with the user.
      * @param module The module the assessment belongs to.
      */
     private void printAverageMarks(Ui ui, Module module, Assessment assessment) {
@@ -96,7 +97,7 @@ public class AverageMarksCommand extends Command {
     }
 
     /**
-     * Returns the usage message of the average marks command.
+     * Returns the usage message of the command.
      *
      * @return String which contains the usage message.
      */

@@ -1,6 +1,6 @@
 package taa.command;
 
-
+import taa.storage.Storage;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
@@ -26,12 +26,10 @@ public class SetMarksCommand extends Command {
         KEY_MARKS
     };
 
-    private static final double[] MARKS_RANGE = {0, 100};
-
     private static final String MESSAGE_FORMAT_SET_MARKS_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<ASSESSMENT_NAME> %s/<MARKS>";
+        + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<ASSESSMENT_NAME> %s/<MARKS>";
     private static final String MESSAGE_FORMAT_INVALID_MARKS = "Invalid Marks. "
-            + "Marks must be between %,.2f and %,.2f (inclusive)";
+        + "Marks must be between %,.2f and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_MARKS_ADDED = "Marks set for %s: %,.2f for %s";
 
     public SetMarksCommand(String argument) {
@@ -39,18 +37,19 @@ public class SetMarksCommand extends Command {
     }
 
     /**
-     * Checks for errors before calling the function that sets marks for a student's assessment.
+     * Executes the set_marks command and sets the marks of a student's assessment.
      *
-     * @param moduleList Module list to access the module the student is enrolled in.
-     * @param ui The ui instance to handle interactions with the user.
-     * @throws TaaException when set marks command is invalid.
+     * @param moduleList The list of modules.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -69,8 +68,7 @@ public class SetMarksCommand extends Command {
         StudentList studentList = module.getStudentList();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
-            ui.printMessage(MESSAGE_INVALID_STUDENT_INDEX);
-            return;
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
         AssessmentList assessmentList = module.getAssessmentList();
@@ -82,46 +80,49 @@ public class SetMarksCommand extends Command {
 
         String marksInput = argumentMap.get(KEY_MARKS);
         if (!Util.isStringDouble(marksInput)) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, MARKS_RANGE[0], MARKS_RANGE[1]));
+            double[] marksRange = Student.getMarksRange();
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, marksRange[0], marksRange[1]));
         }
 
         double marks = Double.parseDouble(marksInput);
-        if (marks < MARKS_RANGE[0] || marks > MARKS_RANGE[1]) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, MARKS_RANGE[0], MARKS_RANGE[1]));
+        if (!Student.isMarksWithinRange(marks)) {
+            double[] marksRange = Student.getMarksRange();
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, marksRange[0], marksRange[1]));
         }
 
         setMarks(ui, student, assessment, marks);
+
+        storage.save(moduleList);
     }
 
     /**
      * Sets the marks for a student's assessment.
      *
-     * @param ui The ui instance to handle interactions with the user.
-     * @param student The student instance to set the mark for.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param student    The student instance to set the mark for.
      * @param assessment The assessment instance.
-     * @param marks The marks to set for the assessment.
+     * @param marks      The marks to set for the assessment.
      */
     private void setMarks(Ui ui, Student student, Assessment assessment, double marks) {
         String assessmentName = assessment.getName();
-
         student.setMarks(assessmentName, marks);
-        String studentName = student.getName();
-        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_ADDED, studentName, marks, assessmentName));
+        ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_ADDED, student, marks, assessmentName));
     }
 
     /**
      * Returns the usage message of the set marks command.
+     *
      * @return String which contains the usage message.
      */
     @Override
     protected String getUsageMessage() {
         return String.format(
-                MESSAGE_FORMAT_SET_MARKS_USAGE,
-                COMMAND_SET_MARKS,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX,
-                KEY_ASSESSMENT_NAME,
-                KEY_MARKS
+            MESSAGE_FORMAT_SET_MARKS_USAGE,
+            COMMAND_SET_MARKS,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX,
+            KEY_ASSESSMENT_NAME,
+            KEY_MARKS
         );
     }
 }

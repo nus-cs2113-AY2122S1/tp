@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.Module;
@@ -22,19 +23,20 @@ public class AddStudentCommand extends Command {
     }
 
     /**
-     * Adds a student to a particular module.
+     * Executes the add_student command and adds a student to a particular module.
      *
-     * @param moduleList The list of modules
-     * @param ui The ui instance to handle interactions with the user
-     * @throws TaaException If the user inputs an invalid command
+     * @param moduleList The list of modules.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -50,6 +52,8 @@ public class AddStudentCommand extends Command {
 
         StudentList studentList = module.getStudentList();
         studentList.addStudent(student);
+
+        storage.save(moduleList);
 
         ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, moduleCode, student));
     }

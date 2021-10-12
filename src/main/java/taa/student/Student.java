@@ -1,58 +1,54 @@
 package taa.student;
 
-import taa.attendance.Attendance;
+import taa.ClassChecker;
+import taa.attendance.AttendanceList;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Represents students.
  */
-public class Student {
-    private static final int NUM_LESSONS = 13;
+public class Student implements ClassChecker {
+    private static final double[] MARKS_RANGE = {0, 100};
 
     private String id;
     private String name;
-    private final String[] individualAttendances = new String[NUM_LESSONS];
-    private static final String ABSENT_MARK = "0";
-
-    private final ArrayList<Attendance> attendance;
+    private final AttendanceList attendanceList;
     private final HashMap<String, Double> results;
-
 
     public Student(String id, String name) {
         this.id = id;
         this.name = name;
-        this.attendance = new ArrayList<>();
+        this.attendanceList = new AttendanceList();
         this.results = new HashMap<>();
     }
 
-    private void initIndividualAttendances() {
-        for (int i = 0; i < NUM_LESSONS; i++) {
-            individualAttendances[i] = ABSENT_MARK;
-        }
+    /**
+     * Checks if the marks are valid.
+     *
+     * @param marks The marks to check.
+     * @return true if valid, else false.
+     */
+    public static boolean isMarksWithinRange(double marks) {
+        return (marks >= MARKS_RANGE[0] && marks <= MARKS_RANGE[1]);
     }
 
     /**
-     * Marks the student as present or absent for a particular lesson.
+     * Gets the marks range.
      *
-     * @param attendance the attendance object
+     * @return A double array of size 2: [0] - Min marks, [1] - Max marks.
      */
-    public void setAttendance(Attendance attendance) {
-        int lessonIndex = Integer.parseInt(attendance.getLessonIndex());
-        initIndividualAttendances();
-        individualAttendances[lessonIndex] = attendance.markAttendance();
+    public static double[] getMarksRange() {
+        return MARKS_RANGE;
     }
 
-
     /**
-     * Returns the attendance status of the student for a particular lesson.
+     * Gets the AttendanceList object associated to the student.
      *
-     * @param lessonIndex The lesson index
-     * @return The attendance status of the student for the lesson
+     * @return An AttendanceList object.
      */
-    public String isPresent(int lessonIndex) {
-        return individualAttendances[lessonIndex];
+    public AttendanceList getAttendanceList() {
+        return attendanceList;
     }
 
     /**
@@ -91,21 +87,6 @@ public class Student {
         return this.id;
     }
 
-    public String[] getIndividualAttendances() {
-        return individualAttendances;
-    }
-
-
-    /**
-     * Overrides default toString method with the custom print message.
-     *
-     * @return the custom print message
-     */
-    @Override
-    public String toString() {
-        return String.format("%s - %s", id, name);
-    }
-
     /**
      * Adds a key,value pair to the hashmap.
      *
@@ -120,9 +101,13 @@ public class Student {
      * Gets the marks for the given assessment.
      *
      * @param assessmentName Assessment to get marks for.
-     * @return Marks for the inputted assessment.
+     * @return The marks for the inputted assessment if it exists, else -1.
      */
     public double getMarks(String assessmentName) {
+        if (!results.containsKey(assessmentName)) {
+            return -1;
+        }
+
         return results.get(assessmentName);
     }
 
@@ -131,8 +116,8 @@ public class Student {
      *
      * @return Hashmap containing assessment names as keys and the marks as values.
      */
-    public HashMap<String, Double> getAllMarks() {
-        return results;
+    public HashMap<String, Double> getResults() {
+        return new HashMap<>(results);
     }
 
     /**
@@ -145,4 +130,28 @@ public class Student {
         return results.containsKey(assessmentName);
     }
 
+    @Override
+    public boolean verify() {
+        if (id.isEmpty() || name.isEmpty()) {
+            return false;
+        }
+
+        for (String assessmentName : results.keySet()) {
+            if (!isMarksWithinRange(results.get(assessmentName))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Overrides default toString method with the custom print message.
+     *
+     * @return the custom print message
+     */
+    @Override
+    public String toString() {
+        return String.format("%s (%s)", id, name);
+    }
 }

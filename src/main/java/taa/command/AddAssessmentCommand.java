@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.storage.Storage;
 import taa.Ui;
 import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
@@ -20,27 +21,28 @@ public class AddAssessmentCommand extends Command {
             + "%s/<MODULE_CODE> %s/<ASSESSMENT_NAME> %s/<WEIGHTAGE>";
     private static final String MESSAGE_FORMAT_INVALID_WEIGHTAGE = "Invalid weightage. "
             + "Weightage must be between %,.2f and %,.2f (inclusive)";
-    private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED =
-            "Assessment added:\n  %s\nThere are %d assessments in the %s.";
+    private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED = "Assessment added:\n"
+            + "  %s\nThere are %d assessments in the %s.";
 
     public AddAssessmentCommand(String argument) {
         super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);
     }
 
     /**
-     * Adds an assessment to a particular module.
+     * Executes the add_assessment command and adds an assessment to a particular module.
      *
      * @param moduleList The list of modules.
-     * @param ui      The ui instance to handle interactions with the user.
-     * @throws TaaException If the user inputs an invalid command.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -52,19 +54,21 @@ public class AddAssessmentCommand extends Command {
 
         String weightageString = argumentMap.get(KEY_WEIGHTAGE);
         if (!Util.isStringDouble(weightageString)) {
+            double[] weightageRange = Assessment.getWeightageRange();
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_WEIGHTAGE,
-                    Assessment.WEIGHTAGE_RANGE[0],
-                    Assessment.WEIGHTAGE_RANGE[1])
+                    weightageRange[0],
+                    weightageRange[1])
             );
         }
 
         double weightage = Double.parseDouble(weightageString);
-        if (weightage < Assessment.WEIGHTAGE_RANGE[0] || weightage > Assessment.WEIGHTAGE_RANGE[1]) {
+        if (!Assessment.isWeightageWithinRange(weightage)) {
+            double[] weightageRange = Assessment.getWeightageRange();
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_WEIGHTAGE,
-                    Assessment.WEIGHTAGE_RANGE[0],
-                    Assessment.WEIGHTAGE_RANGE[1])
+                    weightageRange[0],
+                    weightageRange[1])
             );
         }
 
@@ -76,6 +80,8 @@ public class AddAssessmentCommand extends Command {
         if (!isSuccessful) {
             throw new TaaException(MESSAGE_FAIL_TO_ADD);
         }
+
+        storage.save(moduleList);
 
         ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_ADDED,
                 assessment, assessmentList.getSize(), module));

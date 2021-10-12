@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.Module;
@@ -21,7 +22,7 @@ public class EditStudentCommand extends Command {
     };
 
     private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<NEW_ID> %s/<NEW_NAME>";
+        + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<NEW_ID> %s/<NEW_NAME>";
     private static final String MESSAGE_FORMAT_STUDENT_EDITED = "Student updated:\n  %s";
 
     public EditStudentCommand(String argument) {
@@ -29,19 +30,20 @@ public class EditStudentCommand extends Command {
     }
 
     /**
-     * Edits the name and student ID of a given student.
+     * Executes the edit_student command and edits the particulars of a student.
      *
-     * @param moduleList The list of modules
-     * @param ui The ui instance to handle interactions with the user
-     * @throws TaaException If the user inputs an invalid command
+     * @param moduleList The list of modules.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -65,8 +67,7 @@ public class EditStudentCommand extends Command {
         assert studentIndex < module.getStudentList().getSize();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
-            ui.printMessage(MESSAGE_INVALID_STUDENT_INDEX);
-            return;
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
 
         String newId = argumentMap.get(KEY_NEW_ID);
@@ -74,18 +75,20 @@ public class EditStudentCommand extends Command {
         student.setId(newId);
         student.setName(newName);
 
+        storage.save(moduleList);
+
         ui.printMessage(String.format(MESSAGE_FORMAT_STUDENT_EDITED, student));
     }
 
     @Override
     protected String getUsageMessage() {
         return String.format(
-                MESSAGE_FORMAT_FIND_STUDENT_USAGE,
-                COMMAND_EDIT_STUDENT,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX,
-                KEY_NEW_ID,
-                KEY_NEW_NAME
+            MESSAGE_FORMAT_FIND_STUDENT_USAGE,
+            COMMAND_EDIT_STUDENT,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX,
+            KEY_NEW_ID,
+            KEY_NEW_NAME
         );
     }
 }

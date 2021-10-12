@@ -1,34 +1,54 @@
 package taa.attendance;
 
-public class Attendance {
-    private final String code;
-    private final String studentIndex;
-    private final String lessonIndex;
-    private boolean hasAttend;
+import taa.ClassChecker;
 
-    public Attendance(String code, String studentIndex, String lessonIndex, boolean hasAttend) {
-        this.code = code;
-        this.studentIndex = studentIndex;
-        this.lessonIndex = lessonIndex;
-        this.hasAttend = hasAttend;
+public class Attendance implements ClassChecker {
+    private static final int MIN_LESSON_NUMBER = 1;
+
+    private static final String MESSAGE_FORMAT_ATTENDANCE = "Lesson %d (%s)";
+
+    private final int lessonNumber;
+    private boolean isPresent;
+
+    public Attendance(int lessonNumber, boolean isPresent) {
+        this.lessonNumber = lessonNumber;
+        this.isPresent = isPresent;
     }
 
-    public String markAttendance() {
-        return (hasAttend ? "1" : "0");
+    /**
+     * Gets the minimum lesson number.
+     *
+     * @return The minimum lesson number.
+     */
+    public static int getMinLessonNumber() {
+        return MIN_LESSON_NUMBER;
     }
 
-    public String getLessonIndex() {
-        return lessonIndex;
+    public void setPresent(boolean present) {
+        isPresent = present;
     }
 
-    public String getLessonNum() {
-        return Integer.toString(Integer.parseInt(lessonIndex) + 1);
+    public int getLessonNumber() {
+        return lessonNumber;
     }
-
 
     @Override
     public String toString() {
-        return String.format("%s %s %s %s", code, studentIndex, lessonIndex, hasAttend);
+        String presentString = (isPresent) ? "Present" : "Absent";
+        return String.format(MESSAGE_FORMAT_ATTENDANCE, lessonNumber, presentString);
+    }
+
+    /**
+     * Checks if the variables in the class are valid.
+     *
+     * @return true if valid, else false.
+     */
+    @Override
+    public boolean verify() {
+        if (lessonNumber < MIN_LESSON_NUMBER) {
+            return false;
+        }
+
+        return true;
     }
 }
-

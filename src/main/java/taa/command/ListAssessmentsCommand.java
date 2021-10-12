@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.storage.Storage;
 import taa.Ui;
 import taa.assessment.AssessmentList;
 import taa.exception.TaaException;
@@ -13,25 +14,27 @@ public class ListAssessmentsCommand extends Command {
     private static final String MESSAGE_LIST_EMPTY = "There are no assessments in the module.";
 
     private static final String MESSAGE_FORMAT_LIST_ASSESSMENTS_USAGE = "Usage: %s %s/<MODULE_CODE>";
+    private static final String MESSAGE_FORMAT_OUTPUT = "Assessments for %s:\n%s";
 
     public ListAssessmentsCommand(String argument) {
         super(argument, LIST_ASSESSMENTS_ARGUMENT_KEYS);
     }
 
     /**
-     * Lists all the assessments of a particular module.
+     * Executes the list_assessment command and list all the assessments of a particular module.
      *
      * @param moduleList The list of modules.
-     * @param ui The ui instance to handle interactions with the user.
-     * @throws TaaException If the user inputs an invalid command.
+     * @param ui         The ui instance to handle interactions with the user.
+     * @param storage    The storage instance to handle saving.
+     * @throws TaaException If the user inputs an invalid command or has missing/invalid argument(s).
      */
     @Override
-    public void execute(ModuleList moduleList, Ui ui) throws TaaException {
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArgumentMap()) {
+        if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
@@ -41,13 +44,15 @@ public class ListAssessmentsCommand extends Command {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
+        String message;
         AssessmentList assessmentList = module.getAssessmentList();
         if (assessmentList.getSize() == 0) {
-            ui.printMessage(MESSAGE_LIST_EMPTY);
-            return;
+            message = MESSAGE_LIST_EMPTY;
+        } else {
+            message = String.format(MESSAGE_FORMAT_OUTPUT, module, assessmentList);
         }
 
-        ui.printMessage(assessmentList.toString());
+        ui.printMessage(message);
     }
 
     @Override

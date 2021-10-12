@@ -1,22 +1,27 @@
 package taa.module;
 
+import taa.ClassChecker;
+
 import java.util.ArrayList;
 
-public class ModuleList {
-    private static final String MESSAGE_MODULE_LIST_HEADER = "Module List:";
-
+public class ModuleList implements ClassChecker {
     private final ArrayList<Module> modules;
 
     public ModuleList() {
         this.modules = new ArrayList<>();
     }
 
-    public void addModule(Module module) {
-        modules.add(module);
-    }
-
     public int getSize() {
         return modules.size();
+    }
+
+    /**
+     * Gets the list of modules. Note: This returns a new ArrayList instance.
+     *
+     * @return A new ArrayList containing all the modules.
+     */
+    public ArrayList<Module> getModules() {
+        return new ArrayList<>(modules);
     }
 
     /**
@@ -27,6 +32,15 @@ public class ModuleList {
      */
     public boolean isValidIndex(int index) {
         return (index >= 0 && index < getSize());
+    }
+
+    /**
+     * Adds a Module object to the list of modules.
+     *
+     * @param module The Module object to add.
+     */
+    public void addModule(Module module) {
+        modules.add(module);
     }
 
     /**
@@ -61,14 +75,36 @@ public class ModuleList {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder(MESSAGE_MODULE_LIST_HEADER);
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < getSize(); i += 1) {
-            stringBuilder.append("\n");
+            if (i > 0) {
+                stringBuilder.append("\n");
+            }
+
             stringBuilder.append(i + 1);
             stringBuilder.append(". ");
             stringBuilder.append(modules.get(i));
         }
 
         return stringBuilder.toString();
+    }
+
+    /**
+     * Checks if the variables in the class are valid. Filters out duplicate modules with the same module code.
+     *
+     * @return Always returns true.
+     */
+    @Override
+    public boolean verify() {
+        ArrayList<String> moduleCodes = new ArrayList<>();
+        for (Module module : modules) {
+            if (moduleCodes.contains(module.getCode())) {
+                modules.remove(module);
+            } else {
+                moduleCodes.add(module.getCode());
+            }
+        }
+
+        return true;
     }
 }
