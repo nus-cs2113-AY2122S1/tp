@@ -146,8 +146,13 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //not full, need to update
     public static void invalidEmailInput() {
-        String message = "The email id is not correctly formatted";
+        String message = "The email id is not correctly formatted,\n"
+                + "Rules for email id :\n"
+                + "    * Lowercase letters only\n"
+                + "    * Numbers, underscore, hyphen and dot allowed\n"
+                + "    * @ cannot be at the start or end";
         printDoubleLineMessage(message);
     }
 
