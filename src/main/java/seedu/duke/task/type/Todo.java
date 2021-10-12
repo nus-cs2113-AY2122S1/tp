@@ -2,6 +2,7 @@ package seedu.duke.task.type;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import seedu.duke.task.PriorityEnum;
@@ -60,6 +61,11 @@ public class Todo extends Task {
     @Override
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription() + " (doOn: " + getDateAsString(this.doOn) + ")";
+    }
+
+    @Override
+    public void displayReminder(LocalDateTime now) {
+
     }
 
     public String getDateAsString(Date date) {

@@ -2,6 +2,7 @@ package seedu.duke.task.type;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import seedu.duke.task.PriorityEnum;
@@ -60,6 +61,10 @@ public class Deadline extends Task {
     @Override
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription() + " (dueDate: " + getDateAsString(this.dueDate) + ")";
+    }
+
+    @Override
+    public void displayReminder(LocalDateTime now) {
     }
 
     public String getDateAsString(Date date) {

@@ -1,5 +1,7 @@
 package seedu.duke.task;
 
+import java.time.LocalDateTime;
+
 public abstract class Task {
 
     static final PriorityEnum DEFAULT_PRIORITY = PriorityEnum.MEDIUM;
@@ -37,4 +39,5 @@ public abstract class Task {
         this.priority = priority;
     }
 
+    public abstract void displayReminder(LocalDateTime now);
 }

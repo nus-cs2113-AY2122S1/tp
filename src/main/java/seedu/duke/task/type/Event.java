@@ -2,6 +2,7 @@ package seedu.duke.task.type;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import seedu.duke.task.PriorityEnum;
@@ -69,6 +70,11 @@ public class Event extends Task {
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription() + " (startDate: " + getDateAsString(this.startDate) + " - "
                 + "endDate: " + getDateAsString(this.endDate) + ")";
+    }
+
+    @Override
+    public void displayReminder(LocalDateTime now) {
+
     }
 
     public String getDateAsString(Date date) {
