@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Trip {
@@ -11,6 +12,7 @@ public class Trip {
     private LocalDate dateOfTrip;
     private ArrayList<Expense> listOfExpenses = new ArrayList<>();
     private ArrayList<Person> listOfPersons = new ArrayList<>();
+    private ArrayList<String> listOfPersonsNames = new ArrayList<>();
     private double budget;
     private double exchangeRate;
     private String foreignCurrency;
@@ -29,8 +31,8 @@ public class Trip {
     public Trip(String[] newTripInfo) {
         this.location = newTripInfo[0];
         setDateOfTrip(newTripInfo[1]);
-        this.listOfPersons = Parser.splitPeople(newTripInfo[2]);
-        setExchangeRate(newTripInfo[3]);
+        setExchangeRate(newTripInfo[2]);
+        this.listOfPersons = splitPeople(newTripInfo[3]);
     }
 
     public void getWhoOwesMe() {
@@ -143,6 +145,10 @@ public class Trip {
         return listOfPersons;
     }
 
+    public ArrayList<String> getListOfPersonsNames() {
+        return listOfPersonsNames;
+    }
+
     public void setLocation(String location) {
         this.location = location;
     }
@@ -164,6 +170,24 @@ public class Trip {
         for (Expense expense : listOfExpenses) {
             Ui.printExpenseDetails(expense);
         }
+    }
+
+    /**
+     * Splits the user-entered {@link String} of people involved in a trip into a String array.
+     *
+     * @param peopleChained String of all persons involved in the trip
+     * @return {@link String} array, each element of the array being a person involved in the trip
+     */
+    private ArrayList<Person> splitPeople(String peopleChained) {
+        ArrayList<Person> listOfPeople = new ArrayList<>();
+        for (String personName : peopleChained.split(",")) {
+            // Note that all people set to not as user
+            Person person = new Person(personName.trim(), false);
+            listOfPeople.add(person);
+            listOfPersonsNames.add(personName);
+        }
+        return listOfPeople;
+
     }
 
 }

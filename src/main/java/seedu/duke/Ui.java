@@ -30,6 +30,7 @@ public class Ui {
         System.out.println(person.getName() + " | " + person.getAmtOwedToUser());
     }
 
+
     public static void printExpenseDetails(Expense e) {
         System.out.println(e);
     }

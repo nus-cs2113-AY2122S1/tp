@@ -14,18 +14,15 @@ public class Expense {
     private String description;
     private String location;
     private final ArrayList<Person> personsList;
-    private final ArrayList<String> categoriesList;
+    private final String category;
     private LocalDate date;
 
-    public Expense(Double amountSpent, String description, ArrayList<Person> listOfPersons) {
+    public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons, String description) {
         this.amountSpent = amountSpent;
         this.date = LocalDate.now();
         this.description = description;
-        this.personsList = new ArrayList<Person>();
-        this.categoriesList = new ArrayList<String>();
-        for (Person p : listOfPersons) {
-            addPerson(p);
-        }
+        this.category = category;
+        this.personsList = listOfPersons;
     }
 
     public double getCostPerPerson() {
@@ -34,10 +31,6 @@ public class Expense {
 
     public void addPerson(Person p) {
         personsList.add(p);
-    }
-
-    public void addCategory(String category) {
-        categoriesList.add(category);
     }
 
     public void printDate() {
@@ -59,7 +52,7 @@ public class Expense {
                 + System.lineSeparator()
                 + "People involved: " + this.getPersonsList().toString()
                 + System.lineSeparator()
-                + "Categories involved: " + this.getCategoriesList().toString());
+                + "Category: " + this.category);
     }
 
     //Getters and setters
@@ -68,8 +61,8 @@ public class Expense {
         return personsList;
     }
 
-    public ArrayList<String> getCategoriesList() {
-        return categoriesList;
+    public String getCategory() {
+        return category;
     }
 
     public String getLocation() {
