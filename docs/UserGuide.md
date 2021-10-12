@@ -1,42 +1,83 @@
 # User Guide
 
-## Introduction
+NUS Buddy is a **simple desktop app for managing your todo list**. It is optimized for use via a **Command Line Interface (CLI)** so students can spend most of their time using the terminal and focus on actual works. 
+It is designed to be fast, flexible, and unobtrusive.
 
-{Give a product intro}
+## Table of contents
+
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * [Adding a Task or Lesson - `add`](#adding-a-task-or-lesson---add)
+  * [Exiting the program - `exit`](#exiting-the-program---exit)
+  * [Saving the data](#saving-the-data)
+* [FAQ](#faq)
+* [Command summary](#command-summary)
 
 ## Quick Start
 
-{Give steps to get started quickly}
+1. Ensure that you have Java 11 or above installed on your machine. You can follow the guide [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html) for more information.
+2. Download the latest version of Task Buddy from our GitHub repository.
+3. Copy the `.jar` file to the folder you want to use as the home directory for the application.
+4. To launch the app, run the command `java -jar {filename}.jar`.
 
-1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+## Features
 
-## Features 
+> The **CONSTANT_CASE** in the command denotes the parameter. Optional parameter is enclosed with brackets like this 
+> **[CONSTANT_CASE]**.
 
-{Give detailed description of each feature}
+> [PARAM] → COMPULSORY
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+> {PARAM} → OPTIONAL
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+### Adding a Task or Lesson - `add`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+Add a task or lesson to the list. 
 
-Example of usage: 
+A task contains a title, the day of the week of the task, and an optional task information.
 
-`todo n/Write the rest of the User Guide d/next week`
+Format: `add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION}`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+A lesson contains a title, the day of the week of the lesson, the start time of the lesson, and the end time of the lesson.
+
+Format: `add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME]`
+
+Example usage:
+
+```
+$ add task CS2113 tP -d MON
+    _______________________________________________________________________________
+     Noted. I've added this task:
+       [T][ ] Title: CS2113 tP
+     Now you have 1 tasks in the list.
+    _______________________________________________________________________________
+    
+$ add task CS2113 tP -d MON -i add documentation
+    _______________________________________________________________________________
+     Noted. I've added this task:
+       [T][ ] Title: CS2113 tP (Info: add documentation)
+     Now you have 2 tasks in the list.
+    _______________________________________________________________________________
+
+$ add lesson CS2113 Lecture -d MON -s 1pm -e 3pm
+    _______________________________________________________________________________
+     Noted. I've added this lesson:
+       [L] Title: CS2113 Lecture (Start: 1pm) (End: 3pm)
+     Now you have 1 lessons in the list.
+    _______________________________________________________________________________
+    
+```
+
+### Exiting the program - `exit`
+
+Exit the program.
+
+Format: `exit`
+
+### Saving the data
+
+Data from Task Buddy is automatically saved on your local machine.
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+## Command summary
 
-**A**: {your answer here}
-
-## Command Summary
-
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
