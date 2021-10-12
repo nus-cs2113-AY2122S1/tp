@@ -362,8 +362,6 @@ public class Parser {
             ArrayList<Member> oldMemberAndNewMember = editMemberDetails(members, query);
             Member oldMember = oldMemberAndNewMember.get(0);
             Member newMember = oldMemberAndNewMember.get(1);
-            /*File dukeMemberFile = new File("dukeMembers.csv");
-            writeMemberFile(dukeMemberFile, members);*/
             Ui.printEditMessage(oldMember, newMember);
         } catch (InvalidMemberException e) {
             System.out.println(e.getMessage());
