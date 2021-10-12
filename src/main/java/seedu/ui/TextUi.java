@@ -1,15 +1,26 @@
 package seedu.ui;
 
+import seedu.comparator.ClassNumComparator;
 import seedu.module.Lesson;
 import seedu.module.Module;
-
+import seedu.module.Semester;
+import seedu.timetable.Timetable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class TextUi {
+    private static final int BALANCE_ARRAY = 1;
+    private static final int SERIAL = 1;
+    private static final String SMALL_GAP = "         ";
+    private static final String BIG_GAP = "                         ";
+    private static final String LECTURE_SLOT = "Lecture Lesson Slots";
+    private static final String TUTORIAL_SLOT = "Tutorial Lesson Slots";
+    private static final String LAB_SLOT = "Laboratory Lesson Slots";
 
     public static Scanner in = new Scanner(System.in);
 
-    public static final String LINE = "____________________________________________________________________________\n";
+    public static final String LINE = "__________________________________________________________________________\n";
 
     /*------------- PRIVATE LOGGING CONSTANTS ----------- */
     private static final String LOGO = " ____        _        \n"
@@ -43,6 +54,16 @@ public class TextUi {
         String input = in.nextLine();
         while (input.isEmpty()) {
             input = in.nextLine();
+        }
+        return input;
+    }
+
+    public static String getLessonCommand(String lessonType) {
+        String output = "\nWhich " + lessonType + " would you like to choose? ";
+        System.out.print(output);
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
         }
         return input;
     }
@@ -148,28 +169,24 @@ public class TextUi {
     }
 
     public static void printAddMessage(String moduleCode) {
-        System.out.println("Adding " + moduleCode);
+        System.out.println("Now adding " + moduleCode + " into timetable");
     }
 
     public static void printLessonMessage(String lessonType) {
         switch (lessonType) {
         case "Lecture":
-            System.out.println("Which Lecture time slot would you like to add ?");
-            System.out.println("Lecture Time slots:");
+            //System.out.println("Which Lecture time slot would you like to add ?");
+            System.out.println("\nLecture Time slots:");
             break;
         case "Tutorial":
-            System.out.println("Which Tutorial time slot would you like to add ?");
-            System.out.println("Tutorial Time slots:");
+            //System.out.println("Which Tutorial time slot would you like to add ?");
+            System.out.println("\nTutorial Time slots:");
             break;
         default:
-            System.out.println("Which Laboratory time slot would you like to add ?");
-            System.out.println("Laboratory Time slots:");
+            //System.out.println("Which Laboratory time slot would you like to add ?");
+            System.out.println("\nLaboratory Time slots:");
             break;
         }
-    }
-
-    public static void printLessonInfo(int serial, Lesson lesson) {
-        System.out.println(serial + ": " + lesson.lessonDetails());
     }
 
     public static void printLessonAdded() {
@@ -182,5 +199,35 @@ public class TextUi {
 
     public static void printTimetableCleared() {
         System.out.println("All modules have been successfully removed from your Timetable.");
+    }
+
+    public static String returnLine() {
+        return "________________________________________";
+    }
+
+    public static void printLessonHeader(ArrayList<Lesson> lt, ArrayList<Lesson> tt, ArrayList<Lesson> lb) {
+        String header = "";
+        if (isExist(lt) && isExist(tt) && isExist(lb)) {
+            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
+        } else if (isExist(lt) && isExist(tt)) {
+            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT;
+        } else if (isExist(lt) && isExist(lb)) {
+            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + LAB_SLOT;
+        } else if (isExist(tt) && isExist(lb)) {
+            header = SMALL_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
+        } else if (isExist(lt)) {
+            header = SMALL_GAP + LECTURE_SLOT;
+        } else if (isExist(tt)) {
+            header = SMALL_GAP + TUTORIAL_SLOT;
+        } else if (isExist(lb)) {
+            header = SMALL_GAP + LAB_SLOT;
+        } else {
+            header = "No Lesson Time Slots Found";
+        }
+        System.out.println(header);
+    }
+
+    public static boolean isExist(ArrayList<Lesson> lesson) {
+        return lesson.size() > 0;
     }
 }
