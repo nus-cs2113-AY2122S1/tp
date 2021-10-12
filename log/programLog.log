@@ -1,6 +1,154 @@
-Oct 12, 2021 4:22:01 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 12, 2021 6:22:16 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 12, 2021 4:22:01 PM seedu.duke.Duke main
+Oct 12, 2021 6:22:16 PM seedu.duke.Duke main
 INFO: Food-o-rama has begun running
-Oct 12, 2021 4:22:07 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 12, 2021 6:22:16 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
+Oct 12, 2021 6:22:16 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 12, 2021 6:22:16 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 6:22:16 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 6:22:16 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 12, 2021 6:22:16 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 12, 2021 6:22:16 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 6:22:16 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 6:22:16 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 6:22:16 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 12, 2021 6:22:16 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 12, 2021 6:22:16 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 12, 2021 6:22:24 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 6:22:28 PM seedu.duke.Dish toString
+INFO: No constituents present for dish nasi lemak
+Oct 12, 2021 6:22:28 PM seedu.duke.Dish toString
+INFO: No constituents present for dish nasi lemak
+Oct 12, 2021 6:22:28 PM seedu.duke.Dish toString
+INFO: No constituents present for dish nasi lemak
+Oct 12, 2021 6:22:28 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 6:22:28 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 6:22:28 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 6:22:28 PM seedu.duke.Dish toString
+INFO: No constituents present for dish spaghetti
+Oct 12, 2021 6:22:28 PM seedu.duke.Dish toString
+INFO: No constituents present for dish spaghetti
+Oct 12, 2021 6:22:28 PM seedu.duke.Dish toString
+INFO: No constituents present for dish spaghetti
+Oct 12, 2021 6:34:59 PM seedu.duke.Dish toString
+INFO: No constituents present for dish nasi lemak
+Oct 12, 2021 6:34:59 PM seedu.duke.Dish toString
+INFO: No constituents present for dish nasi lemak
+Oct 12, 2021 6:34:59 PM seedu.duke.Dish toString
+INFO: No constituents present for dish nasi lemak
+Oct 12, 2021 6:34:59 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 6:34:59 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 6:34:59 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 6:34:59 PM seedu.duke.Dish toString
+INFO: No constituents present for dish spaghetti
+Oct 12, 2021 6:34:59 PM seedu.duke.Dish toString
+INFO: No constituents present for dish spaghetti
+Oct 12, 2021 6:34:59 PM seedu.duke.Dish toString
+INFO: No constituents present for dish spaghetti
+Oct 12, 2021 6:35:14 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 6:35:14 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 6:35:14 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 6:35:14 PM seedu.duke.Dish toString
+INFO: No constituents present for dish spaghetti
+Oct 12, 2021 6:35:14 PM seedu.duke.Dish toString
+INFO: No constituents present for dish spaghetti
+Oct 12, 2021 6:35:14 PM seedu.duke.Dish toString
+INFO: No constituents present for dish spaghetti
+Oct 12, 2021 6:58:34 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 6:58:34 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 6:58:34 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 6:58:34 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 6:58:34 PM seedu.duke.Dish <init>
+INFO: Calling default constructor
+Oct 12, 2021 6:58:34 PM seedu.duke.Dish <init>
+INFO: Calling default constructor
+Oct 12, 2021 6:58:34 PM seedu.duke.Dish <init>
+INFO: Calling default constructor
+Oct 12, 2021 6:58:34 PM seedu.duke.Dish <init>
+INFO: Calling default constructor
+Oct 12, 2021 7:02:29 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 7:02:29 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 7:02:29 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 7:02:29 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 7:04:04 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 7:04:04 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 7:04:04 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 7:04:04 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 7:04:04 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 7:04:04 PM seedu.duke.Dish <init>
+INFO: Calling default constructor
+Oct 12, 2021 7:04:04 PM seedu.duke.Dish <init>
+INFO: Calling default constructor
+Oct 12, 2021 7:04:04 PM seedu.duke.Dish <init>
+INFO: Calling default constructor
+Oct 12, 2021 7:04:04 PM seedu.duke.Dish <init>
+INFO: Calling default constructor
+Oct 12, 2021 7:04:04 PM seedu.duke.Dish <init>
+INFO: Calling default constructor
+Oct 12, 2021 7:04:11 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 7:04:11 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 7:04:11 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 7:04:11 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 7:04:11 PM seedu.duke.Dish toString
+INFO: No constituents present for dish chicken rice
+Oct 12, 2021 7:04:11 PM seedu.duke.Dish toString
+INFO: No constituents present for dish constituent chicken rice / chicken
+Oct 12, 2021 7:04:11 PM seedu.duke.Dish toString
+INFO: No constituents present for dish constituent chicken rice / chicken
+Oct 12, 2021 7:04:11 PM seedu.duke.Dish toString
+INFO: No constituents present for dish constituent chicken rice / chicken
+Oct 12, 2021 7:04:11 PM seedu.duke.Dish toString
+INFO: No constituents present for dish constituent chicken rice / chicken
+Oct 12, 2021 7:04:11 PM seedu.duke.Dish toString
+INFO: No constituents present for dish constituent chicken rice / chicken
+Oct 12, 2021 7:07:27 PM seedu.duke.command.AddDishIngrCommand execute
+INFO: Start of process
+Oct 12, 2021 7:07:27 PM seedu.duke.command.AddDishIngrCommand execute
+INFO: Successfully added dish ingredient
+Oct 12, 2021 7:07:27 PM seedu.duke.command.AddDishIngrCommand execute
+INFO: End of process
+Oct 12, 2021 7:32:24 PM seedu.duke.command.AddDishIngrCommand execute
+INFO: Start of process
+Oct 12, 2021 7:32:24 PM seedu.duke.command.AddDishIngrCommand execute
+INFO: Successfully added dish ingredient
+Oct 12, 2021 7:32:24 PM seedu.duke.command.AddDishIngrCommand execute
+INFO: End of process
