@@ -69,35 +69,31 @@ public class Ui {
         System.out.println(" ");
     }
     
-    public void listExpense(ArrayList<Entry> entries) {
+    public void listExpense(ArrayList<Expense> expenses) {
         printLine();
         System.out.println(LISTING_EXPENSE_MESSAGE);
         printLine();
         int i = 1;
-        for (Entry entry:entries) {
-            if (entry instanceof Expense) {
-                System.out.print(i);
-                System.out.print(": ");
-                System.out.println(entry);
-                i++;
-            }
+        for (Expense expense:expenses) {
+            System.out.print(i);
+            System.out.print(": ");
+            System.out.println(expense);
+            i++;
         }
         printLine();
 
     }
     
-    public void listIncome(ArrayList<Entry> entries) {
+    public void listIncome(ArrayList<Income> incomes) {
         printLine();
         System.out.println(LISTING_INCOME_MESSAGE);
         printLine();
         int i = 1;
-        for (Entry entry:entries) {
-            if (entry instanceof Income) {
+        for (Income income:incomes) {
                 System.out.print(i);
                 System.out.print(": ");
-                System.out.println(entry);
+                System.out.println(income);
                 i++;
-            }
         }
         printLine();
 

@@ -2,7 +2,6 @@ package seedu.duke;
 
 import seedu.commands.Command;
 import seedu.commands.ExitCommand;
-import seedu.commands.InvalidCommand;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 

@@ -1,6 +1,5 @@
 package seedu.utility;
 
-import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 import seedu.exceptions.ExpenseEntryNotFoundException;
@@ -9,108 +8,93 @@ import seedu.exceptions.IncomeEntryNotFoundException;
 import java.util.ArrayList;
 
 public class FinancialTracker {
-    private ArrayList<Entry> financialEntries;
+    private ArrayList<Expense> expenses;
+    private ArrayList<Income> incomes;
 
     public FinancialTracker() {
-        this.financialEntries = new ArrayList<>();
+        this.expenses = new ArrayList<>();
+        this.incomes = new ArrayList<>();
+    }
+    
+    public void addExpense(Expense expense) {
+        expenses.add(expense);
+        assert !expenses.isEmpty();
     }
 
-    public int getSize() {
-        return financialEntries.size();
+    public void addIncome(Income income) {
+        incomes.add(income);
+        assert !incomes.isEmpty();
     }
-
-    public boolean isEmpty() {
-        return financialEntries.isEmpty();
-    }
-
-    public Entry addEntry(Entry entry) {
-        financialEntries.add(entry);
-        return entry;
-    }
-
-    public Entry removeEntry(int itemIndex) {
-        Entry deletedEntry = financialEntries.get(itemIndex);
-        financialEntries.remove(itemIndex);
-        if (deletedEntry instanceof Expense) {
-            Expense.decrementSize();
-        } else if (deletedEntry instanceof Income) {
-            Income.decrementSize();
+    
+    public Expense removeExpense(int expenseIndex) throws ExpenseEntryNotFoundException {
+        try {
+            return expenses.remove(expenseIndex - 1);
+        } catch (Exception e) {
+            throw new ExpenseEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
         }
-        return deletedEntry;
     }
 
-    public Entry removeExpenseEntry(int expenseItemNumber) throws ExpenseEntryNotFoundException {
-        assert expenseItemNumber - 1 <= Expense.getSize() : "Invalid Delete Number";
-        int itemIndex = 0;
-        int expenseItemCounter = 0;
-        for (Entry entry : this.financialEntries) {
-            if (entry instanceof Expense) {
-                expenseItemCounter += 1;
-            }
-            if (expenseItemCounter == expenseItemNumber) {
-                return removeEntry(itemIndex);
-            }
-            itemIndex += 1;
+    public Income removeIncome(int incomeIndex) throws IncomeEntryNotFoundException {
+        try {
+            return incomes.remove(incomeIndex - 1);
+        } catch (Exception e) {
+            throw new IncomeEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
         }
-        throw new ExpenseEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
     }
 
-    public Entry removeIncomeEntry(int incomeItemNumber) throws IncomeEntryNotFoundException {
-        assert incomeItemNumber - 1 <= Income.getSize() : "Invalid Delete Number";
-        int itemIndex = 0;
-        int incomeItemCounter = 0;
-        for (Entry entry : this.financialEntries) {
-            if (entry instanceof Income) {
-                incomeItemCounter += 1;
-            }
-            if (incomeItemCounter == incomeItemNumber) {
-                return removeEntry(itemIndex);
-            }
-            itemIndex += 1;
-        }
-        throw new IncomeEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
+    public ArrayList<Expense> listExpenses() {
+        assert expenses != null;
+        return expenses;
     }
 
-
-    // Can implement later when needed
-    public int adjustItemIndex(int itemIndex) {
-        return itemIndex - 1;
-    }
-
-    public ArrayList<Entry> listExpense() {
-        return null;
-    }
-
-    public ArrayList<Entry> listIncome() {
-        //TODO
-        return null;
-    }
-
-    public Entry getEntry(int entryIndex) {
-        return this.financialEntries.get(entryIndex);
-    }
-
-    public ArrayList<Entry> getEntries() {
-        return this.financialEntries;
+    public ArrayList<Income> listIncomes() {
+        assert incomes != null;
+        return incomes;
     }
 
     public double getTotalExpense() {
         double totalExpense = 0;
-        for (Entry entry : this.financialEntries) {
-            if (entry instanceof Expense) {
-                totalExpense += entry.getValue();
-            }
+        for (Expense expense : expenses) {
+            assert expense.getValue() >= 0;
+            totalExpense += expense.getValue();
         }
         return totalExpense;
     }
 
     public double getTotalIncome() {
         double totalIncome = 0;
-        for (Entry entry : financialEntries) {
-            if (entry instanceof Income) {
-                totalIncome += entry.getValue();
-            }
+        for (Income income : incomes) {
+            assert income.getValue() >= 0;
+            totalIncome += income.getValue();
         }
         return totalIncome;
+    }
+
+    //method used for testing
+    public int getExpenseSize() {
+        return expenses.size();
+    }
+
+    //method used for testing
+    public int getIncomeSize() {
+        return incomes.size();
+    }
+    
+    public boolean isExpensesEmpty() {
+        return expenses.isEmpty();
+    }
+
+    public boolean isIncomesEmpty() {
+        return incomes.isEmpty();
+    }
+
+    //method used for testing
+    public Expense getExpense(int expenseIndex) {
+        return expenses.get(expenseIndex);
+    }
+
+    //method used for testing
+    public Income getIncome(int incomeIndex) {
+        return incomes.get(incomeIndex);
     }
 }
