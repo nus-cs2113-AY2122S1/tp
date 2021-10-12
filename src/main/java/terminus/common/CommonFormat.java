@@ -83,12 +83,13 @@ public class CommonFormat {
         return result;
     }
 
-    public static boolean isValidUrl(String url) {
+    public static boolean isValidUrl(String url) throws InvalidArgumentException {
         try {
             new URL(url).toURI();
             return true;
         } catch (Exception e) {
-            return false;
+            throw new InvalidArgumentException(
+                    String.format(Messages.ERROR_MESSAGE_INVALID_LINK, url));
         }
     }
 
