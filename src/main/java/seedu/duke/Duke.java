@@ -12,11 +12,16 @@ import seedu.duke.ui.Message;
 import seedu.duke.ui.Ui;
 
 public class Duke {
-    private Ui ui;
+    private final Ui ui;
+    private final Storage storage;
     private TaskList taskList;
     private LessonList lessonList;
-    private Storage storage;
 
+    /**
+     * The constructor method. Initializes ui and storage objects.
+     * Fetches task and lesson data from a saved file if it exists,
+     * otherwise creates a new task and lesson objects.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();
@@ -26,12 +31,16 @@ public class Duke {
             ui.printMessage(Message.DATA_RETRIEVED_SUCCESSFULLY);
         } catch (DukeException | IOException e) {
             ui.printMessage(e.toString());
+            storage.createNewData(ui);
             taskList = new TaskList();
             lessonList = new LessonList();
-            storage.createNewData(ui);
         }
     }
 
+    /**
+     * The main routine of the program. Asks for user input, parses
+     * to the corresponding command and executes it.
+     */
     public void startProgram() {
         boolean isExit = false;
         while (!isExit) {
@@ -52,6 +61,7 @@ public class Duke {
         ui.printExit();
     }
 
+    /** The main method. Creates an instance of Duke and run it. */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
