@@ -72,8 +72,7 @@ public class ViewNoteCommandTest {
 
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("view a"));
         assertThrows(InvalidArgumentException.class,
-                () -> commandParser.parseCommand("view -1").execute(ui, nusModule));
-        assertThrows(InvalidArgumentException.class,
-                () -> commandParser.parseCommand("view 6").execute(ui, nusModule));
+            () -> commandParser.parseCommand("view -1").execute(ui, nusModule));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("view 6").execute(ui, nusModule));
     }
 }
