@@ -5,6 +5,7 @@ import taa.Ui;
 import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
+import taa.student.StudentList;
 
 public class AddStudentCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
@@ -46,7 +47,9 @@ public class AddStudentCommand extends Command {
         String studentID = argumentMap.get(KEY_STUDENT_ID);
         String studentName = argumentMap.get(KEY_STUDENT_NAME);
         Student student = new Student(studentID, studentName);
-        module.addStudent(student);
+
+        StudentList studentList = module.getStudentList();
+        studentList.addStudent(student);
 
         ui.printMessage(String.format(MESSAGE_STUDENT_ADDED_FORMAT, moduleCode, student));
     }

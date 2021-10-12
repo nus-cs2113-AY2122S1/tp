@@ -5,6 +5,7 @@ import taa.Ui;
 import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
+import taa.student.StudentList;
 
 import java.util.ArrayList;
 
@@ -47,7 +48,8 @@ public class FindStudentCommand extends Command {
         }
 
         String keyword = argumentMap.get(KEY_KEYWORD);
-        ArrayList<Student> studentsFound = module.findStudents(keyword);
+        StudentList studentList = module.getStudentList();
+        ArrayList<Student> studentsFound = studentList.findStudents(keyword);
         if (studentsFound.isEmpty()) {
             ui.printMessage(MESSAGE_NO_STUDENTS_FOUND);
             return;

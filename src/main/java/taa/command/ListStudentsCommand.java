@@ -4,9 +4,7 @@ import taa.exception.TaaException;
 import taa.Ui;
 import taa.module.Module;
 import taa.module.ModuleList;
-import taa.student.Student;
-
-import java.util.ArrayList;
+import taa.student.StudentList;
 
 public class ListStudentsCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
@@ -16,7 +14,6 @@ public class ListStudentsCommand extends Command {
 
     private static final String MESSAGE_FORMAT_LIST_STUDENT_USAGE = "Usage: %s "
             + "%s/<MODULE_CODE>";
-    private static final String MESSAGE_FORMAT_LIST_STUDENT_HEADER = "Here are the students in %s:";
 
     public ListStudentsCommand(String argument) {
         super(argument, LIST_STUDENT_ARGUMENT_KEYS);
@@ -45,22 +42,13 @@ public class ListStudentsCommand extends Command {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
-        ArrayList<Student> students = module.getStudents();
-        if (students.isEmpty()) {
+        StudentList studentList = module.getStudentList();
+        if (studentList.getSize() == 0) {
             ui.printMessage(MESSAGE_NO_STUDENTS);
             return;
         }
 
-        String header = String.format(MESSAGE_FORMAT_LIST_STUDENT_HEADER, moduleCode);
-        StringBuilder stringBuilder = new StringBuilder(header);
-        for (int i = 0; i < students.size(); i += 1) {
-            stringBuilder.append("\n");
-            stringBuilder.append(i + 1);
-            stringBuilder.append(". ");
-            stringBuilder.append(students.get(i));
-        }
-
-        ui.printMessage(stringBuilder.toString());
+        ui.printMessage(studentList.toString());
     }
 
     @Override

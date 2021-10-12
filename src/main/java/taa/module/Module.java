@@ -1,6 +1,5 @@
 package taa.module;
 
-import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
 import taa.attendance.Attendance;
 import taa.attendance.AttendanceList;
@@ -9,12 +8,13 @@ import taa.student.Student;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import taa.student.StudentList;
+
 public class Module {
-    private static final double MAX_ASSESSMENT_WEIGHTAGE = 1;
     private String code;
     private String name;
     private int lessonCount;
-    private final ArrayList<Student> students;
+    private final StudentList studentList;
     private final AssessmentList assessmentList;
     private final AttendanceList attendanceList;
     private static final int NUM_LESSONS = 13;
@@ -23,7 +23,7 @@ public class Module {
     public Module(String code, String name) {
         this.code = code;
         this.name = name;
-        this.students = new ArrayList<>();
+        this.studentList = new StudentList();
         this.assessmentList = new AssessmentList();
         this.attendanceList = new AttendanceList();
     }
@@ -44,67 +44,12 @@ public class Module {
         this.lessonCount = lessonCount;
     }
 
-    public ArrayList<Student> getStudents() {
-        return new ArrayList<>(students);
+    public StudentList getStudentList() {
+        return studentList;
     }
 
-    public void addStudent(Student student) {
-        students.add(student);
-    }
-
-    public int getStudentCount() {
-        return students.size();
-    }
-
-    public Student getStudentAt(int index) {
-        if (isValidStudentIndex(index)) {
-            return students.get(index);
-        }
-
-        return null;
-    }
-
-    /**
-     * Deletes a student from the student list.
-     *
-     * @param index The index of the student.
-     * @return A Student object if successfully deleted, else null.
-     */
-    public Student deleteStudent(int index) {
-        if (isValidStudentIndex(index)) {
-            return students.remove(index);
-        }
-
-        return null;
-    }
-
-    public ArrayList<Student> findStudents(String keyword) {
-        String keywordLower = keyword.toLowerCase();
-
-        ArrayList<Student> studentsFound = new ArrayList<>();
-        for (int i = 0; i < getStudentCount(); i += 1) {
-            Student student = students.get(i);
-            String id = student.getId();
-            String name = student.getName();
-
-            if (id.toLowerCase().contains(keywordLower) || name.toLowerCase().contains(keywordLower)) {
-                studentsFound.add(student);
-            }
-        }
-
-        return studentsFound;
-    }
-
-    public ArrayList<Assessment> getAssessments() {
-        return assessmentList.getAssessments();
-    }
-
-    public boolean addAssessment(Assessment assessment) {
-        return assessmentList.addAssessment(assessment);
-    }
-
-    public int getAssessmentsCount() {
-        return assessmentList.getSize();
+    public AssessmentList getAssessmentList() {
+        return assessmentList;
     }
 
     public int getAttendanceCount() {
@@ -155,9 +100,5 @@ public class Module {
         }
 
         return String.format("%s - %s", code, name);
-    }
-
-    private boolean isValidStudentIndex(int index) {
-        return (index >= 0 && index < getStudentCount());
     }
 }

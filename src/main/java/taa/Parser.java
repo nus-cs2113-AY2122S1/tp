@@ -1,6 +1,20 @@
 package taa;
 
-import taa.command.*;
+import taa.command.AddAssessmentCommand;
+import taa.command.AddModuleCommand;
+import taa.command.AddStudentCommand;
+import taa.command.AverageMarksCommand;
+import taa.command.Command;
+import taa.command.DeleteStudentCommand;
+import taa.command.EditStudentCommand;
+import taa.command.ExitCommand;
+import taa.command.FindStudentCommand;
+import taa.command.ListAssessmentsCommand;
+import taa.command.ListMarksCommand;
+import taa.command.ListModulesCommand;
+import taa.command.ListStudentsCommand;
+import taa.command.SetMarksCommand;
+
 import taa.exception.TaaException;
 
 import java.util.ArrayList;
@@ -56,13 +70,25 @@ public class Parser {
         case Command.COMMAND_LIST_ASSESSMENTS:
             command = new ListAssessmentsCommand(argument);
             break;
-
+            
         case Command.COMMAND_SET_ATTENDANCE:
             command = new SetAttendanceCommand(argument);
             break;
 
         case Command.COMMAND_LIST_ATTENDANCE:
             command = new ListAttendanceCommand(argument);
+            break;
+
+        case Command.COMMAND_SET_MARKS:
+            command = new SetMarksCommand(argument);
+            break;
+
+        case Command.COMMAND_AVERAGE_MARKS:
+            command = new AverageMarksCommand(argument);
+            break;
+
+        case Command.COMMAND_LIST_MARKS:
+            command = new ListMarksCommand(argument);
             break;
 
         default:
@@ -82,7 +108,7 @@ public class Parser {
     }
 
     /**
-     * Gets argument values specified by argumentKeys.
+     * Gets argument values specified by argumentKeys. Keys with empty values are not included in the returned HashMap.
      * e.g.
      * string: "add_module c/CS2113T n/Software Engineering and Object-oriented Programming", argumentKeys: {"c","n"}
      * Result: HashMap(
@@ -128,7 +154,9 @@ public class Parser {
             }
             value = value.trim();
 
-            result.put(key, value);
+            if (!value.isEmpty()) {
+                result.put(key, value);
+            }
         }
 
         return result;

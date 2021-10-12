@@ -5,6 +5,7 @@ import taa.Ui;
 import taa.module.Module;
 import taa.module.ModuleList;
 import taa.student.Student;
+import taa.student.StudentList;
 import taa.util.Util;
 
 public class DeleteStudentCommand extends Command {
@@ -49,7 +50,8 @@ public class DeleteStudentCommand extends Command {
         }
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
-        Student student = module.deleteStudent(studentIndex);
+        StudentList studentList = module.getStudentList();
+        Student student = studentList.deleteStudent(studentIndex);
         if (student == null) {
             ui.printMessage(MESSAGE_INVALID_STUDENT_INDEX);
         }

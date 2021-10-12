@@ -3,7 +3,7 @@ package taa.assessment;
 import java.util.ArrayList;
 
 public class AssessmentList {
-    private static final double MAX_ASSESSMENT_WEIGHTAGE = 100;
+    private static final String MESSAGE_ASSESSMENT_LIST_HEADER = "Assessment List:";
 
     private final ArrayList<Assessment> assessments;
 
@@ -20,10 +20,6 @@ public class AssessmentList {
      * @return tue if success, else false.
      */
     public boolean addAssessment(Assessment assessment) {
-        if (assessment.getWeightage() > MAX_ASSESSMENT_WEIGHTAGE) {
-            return false;
-        }
-
         double totalWeightage = 0;
         for (Assessment a : assessments) {
             if (a.getName().equalsIgnoreCase(assessment.getName())) {
@@ -31,7 +27,7 @@ public class AssessmentList {
             }
         }
 
-        if ((totalWeightage + assessment.getWeightage()) > MAX_ASSESSMENT_WEIGHTAGE) {
+        if ((totalWeightage + assessment.getWeightage()) > Assessment.WEIGHTAGE_RANGE[1]) {
             return false;
         }
 
@@ -68,5 +64,18 @@ public class AssessmentList {
 
     public int getSize() {
         return assessments.size();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(MESSAGE_ASSESSMENT_LIST_HEADER);
+        for (int i = 0; i < assessments.size(); i += 1) {
+            stringBuilder.append("\n");
+            stringBuilder.append(i + 1);
+            stringBuilder.append(". ");
+            stringBuilder.append(assessments.get(i));
+        }
+
+        return stringBuilder.toString();
     }
 }
