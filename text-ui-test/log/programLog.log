@@ -1,0 +1,4 @@
+Oct 12, 2021 10:23:48 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 12, 2021 10:23:48 PM seedu.duke.Duke main
+INFO: Food-o-rama has begun running
