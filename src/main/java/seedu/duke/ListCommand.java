@@ -3,7 +3,7 @@ package seedu.duke;
 public class ListCommand extends Command {
     public void execute(ClientList clientList, Ui ui) {
         int count = clientList.getClientCount();
-        if (count == 0){
+        if (count == 0) {
             System.out.println("I'm sorry, There seems to be no clients.");
             return;
         }
@@ -18,4 +18,5 @@ public class ListCommand extends Command {
         return false;
     }
 }
+
 
