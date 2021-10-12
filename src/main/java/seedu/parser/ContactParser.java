@@ -107,6 +107,14 @@ public abstract class ContactParser {
         }
     }
 
+    private void checkTelegramUsernameRegex(String detailToParse) throws InvalidTelegramUsernameException {
+        //allows uppercase, lowercase, numbers and underscore. Length must be atleast 5 characters
+        String telegramRegex = "^[a-zA-Z0-9_]{5,}$";
+        if (!detailToParse.matches(telegramRegex)) {
+            throw new InvalidTelegramUsernameException();
+        }
+    }
+
     private int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
