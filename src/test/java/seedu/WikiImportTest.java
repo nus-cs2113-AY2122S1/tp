@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class WikiImportTest {
 
     // methodBeingTested_inputGiven_expectedOutcome
-    // Input, Github, relevant article (731 characters)
+    // Input, GitHub, relevant article (731 characters)
     @Test
-    void getArticle_Github_expectArticle() throws InvalidArticleException {
+    void getArticle_GitHub_expectArticle() throws InvalidArticleException {
         String article = "GitHub";
         WikiImport wiki = new WikiImport();
         String content = wiki.getArticle(article);
