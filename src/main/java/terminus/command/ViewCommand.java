@@ -2,6 +2,7 @@ package terminus.command;
 
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
+import terminus.common.TerminusLogger;
 import terminus.content.Content;
 import terminus.content.ContentManager;
 import terminus.exception.InvalidArgumentException;
@@ -36,11 +37,17 @@ public class ViewCommand<T extends Content> extends Command {
             displayAll = true;
             return;
         }
+        TerminusLogger.info("Parsing view arguments");
         try {
             itemNumber = Integer.parseInt(arguments);
             displayAll = false;
         } catch (NumberFormatException e) {
+            TerminusLogger.warning(String.format("Failed to parse view itemNumber : %s", arguments));
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_NUMBER);
+        }
+        if (itemNumber <= 0) {
+            TerminusLogger.warning(String.format("Invalid itemNumber : %d", itemNumber));
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
     }
 

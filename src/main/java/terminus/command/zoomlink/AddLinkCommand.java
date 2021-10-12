@@ -14,10 +14,12 @@ import terminus.ui.Ui;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-
 import static terminus.common.CommonFormat.isValidDay;
 import static terminus.common.CommonFormat.isValidUrl;
 
+/**
+ * AddLinkCommand class which will manage the adding of new Links from user command.
+ */
 public class AddLinkCommand extends Command {
 
     private String description;
@@ -31,16 +33,33 @@ public class AddLinkCommand extends Command {
 
     }
 
+    /**
+     * Returns the command format to Add a Link.
+     *
+     * @return The string containing the command format to add a link
+     */
     @Override
     public String getFormat() {
         return CommonFormat.COMMAND_ADD_SCHEDULE_FORMAT;
     }
 
+    /**
+     * Returns the description of Add Link Command.
+     *
+     * @return The string containing the description of an add command
+     */
     @Override
     public String getHelpMessage() {
         return Messages.MESSAGE_COMMAND_ADD;
     }
 
+    /**
+     * Parses the arguments in an add link command to its respective description, day, start-time, and link.
+     *
+     * @param arguments The string arguments to be parsed in to the respective fields.
+     * @throws InvalidArgumentException Exception for when argument parsing fails
+     * @throws InvalidArgumentException Exception for when any argument is invalid
+     */
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
         // Perform required checks with regex
@@ -57,7 +76,7 @@ public class AddLinkCommand extends Command {
 
         this.description = argArray.get(0);
         this.day = argArray.get(1);
-        this.startTime = CommonFormat.localTimeConverter(userStartTime);
+        this.startTime = CommonFormat.convertToLocalTime(userStartTime);
         this.link = argArray.get(3);
 
         if (!isValidDay(this.day)) {
@@ -73,6 +92,16 @@ public class AddLinkCommand extends Command {
                 + " to Add Link Command", description, day, startTime, link));
     }
 
+    /**
+     * Executes the add link command.
+     * Prints the relevant response to the Ui.
+     *
+     * @param ui     The Ui object to send messages to the users.
+     * @param module The NusModule contain the list of all notes and schedules.
+     * @return CommandResult to indicate the success and additional information about the execution
+     * @throws InvalidCommandException Exception for when the user command is not found
+     * @throws InvalidArgumentException Exception for when the argument parsing fails
+     */
     @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException, InvalidArgumentException {
         ContentManager contentManager = module.getContentManager(Link.class);
@@ -83,6 +112,12 @@ public class AddLinkCommand extends Command {
         return new CommandResult(true, false);
     }
 
+    /**
+     * Checks if arguments are non-empty and valid.
+     *
+     * @param argArray The command arguments in an array list
+     * @return True if the appropriate number of arguments are present, false otherwise.
+     */
     private boolean isValidScheduleArguments(ArrayList<String> argArray) {
         boolean isValid = true;
         if (argArray.size() != ADD_SCHEDULE_ARGUMENTS) {
