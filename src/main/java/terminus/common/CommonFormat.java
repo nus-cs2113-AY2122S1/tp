@@ -37,10 +37,8 @@ public class CommonFormat {
      * @return An array list containing the separated arguments
      */
     public static ArrayList<String> findArguments(String arg) {
+        assert arg != null;
         ArrayList<String> argsArray = new ArrayList<>();
-        if (arg == null) {
-            assert false;
-        }
         Pattern p = Pattern.compile("\"(.*?)\"");
         Matcher m = p.matcher(arg);
         while (m.find()) {
@@ -56,19 +54,12 @@ public class CommonFormat {
      * @return True if array list is empty, false otherwise
      */
     public static boolean isArrayEmpty(ArrayList<String> argArray) {
-        if (argArray == null) {
-            assert false;
-            return true;
-        }
+        assert argArray != null;
         if (argArray.isEmpty()) {
             return true;
         }
         for (String s : argArray) {
-            if (s == null) {
-                assert false;
-                return true;
-            }
-            if (s.isBlank()) {
+            if (s == null || s.isBlank()) {
                 return true;
             }
         }
@@ -83,10 +74,7 @@ public class CommonFormat {
      * @throws InvalidTimeFormatException Exception for when string does not follow the proper time format
      */
     public static LocalTime convertToLocalTime(String startTime) throws InvalidTimeFormatException {
-        if (startTime == null) {
-            assert false;
-            return null;
-        }
+        assert startTime != null;
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern(LOCAL_TIME_FORMAT);
             return LocalTime.parse(startTime, format);
@@ -98,10 +86,7 @@ public class CommonFormat {
     }
 
     public static <T> String getClassName(T type) {
-        if (type == null) {
-            assert false;
-            return null;
-        }
+        assert type != null;
         String result = type.toString();
         String[] string = result.split("\\.");
         if (string.length > 0) {

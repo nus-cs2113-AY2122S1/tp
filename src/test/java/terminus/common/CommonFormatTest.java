@@ -123,7 +123,7 @@ public class CommonFormatTest {
         resultExpected.add("test1");
         resultExpected.add(null);
         resultExpected.add("test2");
-        assertThrows(AssertionError.class, () -> CommonFormat.isArrayEmpty(resultExpected));
+        assertTrue(CommonFormat.isArrayEmpty(resultExpected));
     }
 
     @Test
