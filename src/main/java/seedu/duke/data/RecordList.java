@@ -25,7 +25,7 @@ public class RecordList {
     public void addBudget(double spendingLimit) {
         budget.clearAmount();
         budget.setAmount(spendingLimit);
-        assert budget.getAmount()==spendingLimit;
+        assert budget.getAmount() == spendingLimit;
         if (!hasBudget) {
             hasBudget = true;
         }
@@ -38,7 +38,7 @@ public class RecordList {
 
     public void deleteBudget() {
         budget.clearAmount();
-        assert budget.getAmount()==0.00;
+        assert budget.getAmount() == 0.00;
         hasBudget = false;
     }
 
