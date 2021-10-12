@@ -23,22 +23,12 @@ public class Storage {
     private static final String MESSAGE_FORMAT_JSON_SYNTAX_ERROR = "JSON file syntax error - %s";
 
     private final String filename;
-    private boolean isEnabled;
 
     public Storage(String filename) {
         this.filename = filename;
-        this.isEnabled = true;
-    }
-
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
     }
 
     public ModuleList load() throws TaaException {
-        if (!isEnabled) {
-            return null;
-        }
-
         if (!Util.fileExists(filename)) {
             return null;
         }
@@ -66,10 +56,6 @@ public class Storage {
     }
 
     public void save(ModuleList moduleList) throws TaaException {
-        if (!isEnabled) {
-            return;
-        }
-
         if (!Util.createFile(filename)) {
             throw new TaaException(String.format(MESSAGE_FORMAT_FAIL_CREATE_FILE, filename));
         }
@@ -81,8 +67,7 @@ public class Storage {
             gson.toJson(moduleList, ModuleList.class, jsonWriter);
             jsonWriter.close();
         } catch (IOException e) {
-            //throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE, filename));
-            throw new TaaException(e.getMessage());
+            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE, filename));
         } catch (JsonIOException e) {
             throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_WRITE_JSON, filename));
         }

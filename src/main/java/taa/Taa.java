@@ -15,11 +15,6 @@ public class Taa {
 
     }
 
-    public Taa(boolean enableSaving) {
-        this();
-        storage.setEnabled(enableSaving);
-    }
-
     public void run() {
         loadModuleListFromStorage();
         assert moduleList != null;
@@ -59,18 +54,6 @@ public class Taa {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        /*Taa taa = null;
-        for (int i = 0; i < args.length && taa == null; i += 1) {
-            String arg = args[i];
-            if (arg.equals("nosave")) {
-                taa = new Taa(false);
-            }
-        }
-
-        if (taa == null) {
-            taa = new Taa();
-        }*/
-
         Taa taa = new Taa();
         taa.run();
     }

@@ -2,10 +2,6 @@ package taa.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
 
 public class Util {
     public static boolean isStringInteger(String string) {
@@ -30,28 +26,6 @@ public class Util {
         }
 
         return isDouble;
-    }
-
-    /**
-     * Gets the Path object from filename.
-     *
-     * @param filename The filename.
-     * @return A Path object.
-     */
-    public static Path getPathFromFilename(String filename) {
-        String separator = FileSystems.getDefault().getSeparator();
-        String[] filenameSplit = filename.split(separator.replace("\\", "\\\\"));
-
-        String firstPathString = filenameSplit[0];
-        Path path;
-        if (filenameSplit.length > 1) {
-            String[] additionalPathStrings = Arrays.copyOfRange(filenameSplit, 1, filenameSplit.length - 1);
-            path = Paths.get(firstPathString, additionalPathStrings);
-        } else {
-            path = Paths.get(firstPathString);
-        }
-
-        return path;
     }
 
     /**
