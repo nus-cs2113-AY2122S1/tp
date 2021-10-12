@@ -83,6 +83,16 @@ public class Ui {
         return HELP_MESSAGE;
     }
 
+    public static String getSelectedTaskMessage(Task item) {
+        return getLineBreak() + "Here are the details of the task:" + System.lineSeparator()
+                + getTask(item) + getLineBreak();
+    }
+
+    public static String getSelectedEventMessage(Event item) {
+        return getLineBreak() + "Here are the details of the event:" + System.lineSeparator()
+                + getEvent(item) + getLineBreak();
+    }
+
     public static void printList(ArrayList<Item> list) {
         AtomicInteger i = new AtomicInteger();
         list.forEach(item -> System.out.println(i.getAndIncrement() + 1 + ". " + item));
