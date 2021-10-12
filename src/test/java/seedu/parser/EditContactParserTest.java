@@ -24,7 +24,9 @@ class EditContactParserTest {
 
     @Test
     void parseContactDetails() throws MissingDetailException,
-            MissingArgException, InvalidFlagException, ForbiddenDetailException {
+            MissingArgException, InvalidFlagException, ForbiddenDetailException, InvalidTelegramUsernameException,
+            InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
+            InvalidTwitterUsernameException, InvalidEmailException {
         String[] expectedResult = {null, "github"};
         String testInput = "edit 1 -g github";
         String[] actualResult = editContactParser.parseContactDetails(testInput);
