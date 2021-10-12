@@ -117,4 +117,37 @@ public class Ui {
         System.out.print("Please enter the trip you would like to open: ");
     }
 
+    public static void printAllTrips() {
+        System.out.println("List of Trips: ");
+        for (int i = 0; i < Storage.listOfTrips.size(); i++) {
+            System.out.println("\t");
+            System.out.println(i + 1 + "." + " "
+                    + Storage.listOfTrips.get(i).getLocation() + " "
+                    + Storage.listOfTrips.get(i).getDateOfTripString());
+
+        }
+    }
+
+    public static void emptyArgForOpenCommand() {
+        System.out.println();
+        System.out.println("Which trip to open?");
+        System.out.println("Syntax: open [trip number]");
+        System.out.println("---------------------");
+        printAllTrips();
+        System.out.println("---------------------");
+
+    }
+
+    public static void argNotNumber() {
+        System.out.println("Input is not a number");
+    }
+
+    public static void emptyArgForDeleteCommand() {
+        System.out.println();
+        System.out.println("Which trip to delete?");
+        System.out.println("Syntax: delete [trip number]");
+        System.out.println("---------------------");
+        printAllTrips();
+        System.out.println("---------------------");
+    }
 }

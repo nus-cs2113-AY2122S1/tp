@@ -11,7 +11,18 @@ public class Parser {
      * @return whether the program should continue running after processing the given user input
      */
     public static boolean parseUserInput(String userInput) {
-        String[] userInputSplit = userInput.split(" ", 2);
+        //userInputSplit guranteed to be length 2. UserInputSplit[1] is null by default
+        String[] userInputSplit = new String[2];
+        String[] rawInput = userInput.split(" ", 2);
+
+        if (rawInput.length == 2) {
+            userInputSplit[0] = rawInput[0];
+            userInputSplit[1] = rawInput[1];
+        } else {
+            userInputSplit[0] = rawInput[0];
+        }
+
+
         String inputCommand = userInputSplit[0].toLowerCase();
 
         if (inputCommand.equals("quit")) {
@@ -105,9 +116,14 @@ public class Parser {
         }
     }
 
-    private static void executeDelete(String inputDescription) {
-        int tripIndex = Integer.parseInt(inputDescription) - 1;
-        deleteTrip(tripIndex);
+    private static void executeDelete(String indexAsString) {
+        if (indexAsString == null) {
+            Ui.emptyArgForDeleteCommand();
+        } else {
+            int tripIndex = Integer.parseInt(indexAsString) - 1;
+            deleteTrip(tripIndex);
+        }
+
     }
 
     private static void executeView() {
@@ -126,25 +142,35 @@ public class Parser {
         }
     }
 
-    private static void executeOpen(String inputDescription) {
-        try {
-            int indexToGet = Integer.parseInt(inputDescription) - 1;
-            Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
-            Ui.printOpenTripMessage(Storage.listOfTrips.get(indexToGet));
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            Ui.printSingleUnknownTripIndexError();
+    //assumes that listOfTrips have at least 1 trip
+    private static void executeOpen(String indexAsString) {
+        if (indexAsString == null) {
+            Ui.emptyArgForOpenCommand();
+        } else {
+            try {
+                int indexToGet = Integer.parseInt(indexAsString) - 1;
+                Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
+                Ui.printOpenTripMessage(Storage.listOfTrips.get(indexToGet));
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                Ui.printSingleUnknownTripIndexError();
+                System.out.println();
+            }
         }
     }
 
-    private static void executeCreate(String inputDescription) {
-        try {
-            String[] newTripInfo = inputDescription.split(" ", 5);
-            Trip newTrip = new Trip(newTripInfo);
-            Storage.listOfTrips.add(newTrip);
-            System.out.println("Your trip to " + newTrip.getLocation() + " on "
-                    + newTrip.getDateOfTripString() + " has been successfully added!");
-        } catch (IndexOutOfBoundsException e) {
+    private static void executeCreate(String indexAsString) {
+        if (indexAsString == null) {
             Ui.printCreateFormatError();
+        } else {
+            try {
+                String[] newTripInfo = indexAsString.split(" ", 5);
+                Trip newTrip = new Trip(newTripInfo);
+                Storage.listOfTrips.add(newTrip);
+                System.out.println("Your trip to " + newTrip.getLocation() + " on "
+                        + newTrip.getDateOfTripString() + " has been successfully added!");
+            } catch (IndexOutOfBoundsException e) {
+                Ui.printCreateFormatError();
+            }
         }
     }
 
