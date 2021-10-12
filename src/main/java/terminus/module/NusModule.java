@@ -29,6 +29,7 @@ public class NusModule {
             // Fatal error encountered
             TerminusLogger.severe(String.format("Class type provided not found: %s", type));
             assert false;
+            return null;
         }
         TerminusLogger.info("ContentManager found");
         return result;
