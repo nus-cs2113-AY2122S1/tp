@@ -17,23 +17,23 @@ public class SetAttendanceCommand extends Command {
     private static final String KEY_LESSON_NUMBER = "l";
     private static final String KEY_PRESENT = "p";
     private static final String[] SET_ATTENDANCE_ARGUMENT_KEYS = {
-            KEY_MODULE_CODE,
-            KEY_STUDENT_INDEX,
-            KEY_LESSON_NUMBER,
-            KEY_PRESENT
+        KEY_MODULE_CODE,
+        KEY_STUDENT_INDEX,
+        KEY_LESSON_NUMBER,
+        KEY_PRESENT
     };
 
     private static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
 
     private static final String MESSAGE_FORMAT_INVALID_PRESENT = "Invalid present value.\n"
-            + "Possible values: %s (Present), %s (Absent)";
+        + "Possible values: %s (Present), %s (Absent)";
     private static final String MESSAGE_FORMAT_SET_ATTENDANCE = "Attendance set for %s:\n  %s";
 
     private static final String PRESENT_VALUE = "1";
     private static final String ABSENT_VALUE = "0";
 
     private static final String MESSAGE_FORMAT_SET_ATTENDANCE_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER> %s/<PRESENT>";
+        + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER> %s/<PRESENT>";
 
     public SetAttendanceCommand(String argument) {
         super(argument, SET_ATTENDANCE_ARGUMENT_KEYS);
@@ -116,12 +116,12 @@ public class SetAttendanceCommand extends Command {
     @Override
     protected String getUsageMessage() {
         return String.format(
-                MESSAGE_FORMAT_SET_ATTENDANCE_USAGE,
-                COMMAND_SET_ATTENDANCE,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX,
-                KEY_LESSON_NUMBER,
-                KEY_PRESENT
+            MESSAGE_FORMAT_SET_ATTENDANCE_USAGE,
+            COMMAND_SET_ATTENDANCE,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX,
+            KEY_LESSON_NUMBER,
+            KEY_PRESENT
         );
     }
 }

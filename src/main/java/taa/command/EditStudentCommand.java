@@ -15,14 +15,14 @@ public class EditStudentCommand extends Command {
     private static final String KEY_NEW_ID = "i";
     private static final String KEY_NEW_NAME = "n";
     private static final String[] EDIT_STUDENT_ARGUMENT_KEYS = {
-            KEY_MODULE_CODE,
-            KEY_STUDENT_INDEX,
-            KEY_NEW_ID,
-            KEY_NEW_NAME
+        KEY_MODULE_CODE,
+        KEY_STUDENT_INDEX,
+        KEY_NEW_ID,
+        KEY_NEW_NAME
     };
 
     private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<NEW_ID> %s/<NEW_NAME>";
+        + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<NEW_ID> %s/<NEW_NAME>";
     private static final String MESSAGE_FORMAT_STUDENT_EDITED = "Student updated:\n  %s";
 
     public EditStudentCommand(String argument) {
@@ -78,12 +78,12 @@ public class EditStudentCommand extends Command {
     @Override
     protected String getUsageMessage() {
         return String.format(
-                MESSAGE_FORMAT_FIND_STUDENT_USAGE,
-                COMMAND_EDIT_STUDENT,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX,
-                KEY_NEW_ID,
-                KEY_NEW_NAME
+            MESSAGE_FORMAT_FIND_STUDENT_USAGE,
+            COMMAND_EDIT_STUDENT,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX,
+            KEY_NEW_ID,
+            KEY_NEW_NAME
         );
     }
 }

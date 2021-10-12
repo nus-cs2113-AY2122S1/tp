@@ -20,16 +20,16 @@ public class SetMarksCommand extends Command {
     private static final String KEY_ASSESSMENT_NAME = "a";
     private static final String KEY_MARKS = "m";
     private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {
-            KEY_MODULE_CODE,
-            KEY_STUDENT_INDEX,
-            KEY_ASSESSMENT_NAME,
-            KEY_MARKS
+        KEY_MODULE_CODE,
+        KEY_STUDENT_INDEX,
+        KEY_ASSESSMENT_NAME,
+        KEY_MARKS
     };
 
     private static final String MESSAGE_FORMAT_SET_MARKS_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<ASSESSMENT_NAME> %s/<MARKS>";
+        + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<ASSESSMENT_NAME> %s/<MARKS>";
     private static final String MESSAGE_FORMAT_INVALID_MARKS = "Invalid Marks. "
-            + "Marks must be between %,.2f and %,.2f (inclusive)";
+        + "Marks must be between %,.2f and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_MARKS_ADDED = "Marks set for %s: %,.2f for %s";
 
     public SetMarksCommand(String argument) {
@@ -117,12 +117,12 @@ public class SetMarksCommand extends Command {
     @Override
     protected String getUsageMessage() {
         return String.format(
-                MESSAGE_FORMAT_SET_MARKS_USAGE,
-                COMMAND_SET_MARKS,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX,
-                KEY_ASSESSMENT_NAME,
-                KEY_MARKS
+            MESSAGE_FORMAT_SET_MARKS_USAGE,
+            COMMAND_SET_MARKS,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX,
+            KEY_ASSESSMENT_NAME,
+            KEY_MARKS
         );
     }
 }
