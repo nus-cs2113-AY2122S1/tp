@@ -6,6 +6,10 @@ import seedu.utility.Ui;
 public class ListExpenseCommand extends Command {
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        ui.listExpense(finances.getEntries());
+        if (finances.getEntries().isEmpty()) {
+            ui.emptyList();
+        } else {
+            ui.listExpense(finances.getEntries());
+        }
     }
 }

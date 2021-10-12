@@ -15,10 +15,7 @@ import seedu.commands.ExitCommand;
 
 import seedu.entry.Expense;
 import seedu.entry.Income;
-import seedu.exceptions.InvalidExpenseException;
-import seedu.exceptions.InvalidExpenseIndexException;
-import seedu.exceptions.InvalidIncomeException;
-import seedu.exceptions.InvalidIncomeIndexException;
+import seedu.exceptions.*;
 import seedu.utility.Messages;
 
 import java.util.regex.Matcher;
@@ -142,7 +139,7 @@ public class Parser {
             return new InvalidCommand(e.getMessage());
         }
         assert expenseAmount > 0;
-        
+
         String expenseDescription = matcher.group("description").trim();
         Expense expense = new Expense(expenseDescription, expenseAmount);
         return new AddExpenseCommand(expense);

@@ -71,19 +71,9 @@ public class FinancialTracker {
         throw new IncomeEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
     }
 
-
     // Can implement later when needed
     public int adjustItemIndex(int itemIndex) {
         return itemIndex - 1;
-    }
-
-    public ArrayList<Entry> listExpense() {
-        return null;
-    }
-
-    public ArrayList<Entry> listIncome() {
-        //TODO
-        return null;
     }
 
     public Entry getEntry(int entryIndex) {

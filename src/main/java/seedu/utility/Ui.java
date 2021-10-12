@@ -85,6 +85,12 @@ public class Ui {
         printLine();
 
     }
+
+    public void emptyList() {
+        printLine();
+        System.out.println("Your list is empty");
+        printLine();
+    }
     
     public void listIncome(ArrayList<Entry> entries) {
         printLine();
