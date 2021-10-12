@@ -1,14 +1,15 @@
 package seedu.duke.storage;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.Parser;
 import seedu.duke.items.Task;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TaskDecoderTest {
 
@@ -22,9 +23,6 @@ class TaskDecoderTest {
         encodedTaskList.add(encodedTask2);
         ArrayList<Task> decodedTaskList = TaskDecoder.decodeTasksList(encodedTaskList);
 
-        DateTimeFormatter requiredFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
-        LocalDateTime expectedDateTime = LocalDateTime.parse("19-02-2022 2359", requiredFormat);
-
         // Check number of items in decodedTaskList
         assertEquals(2, decodedTaskList.size());
 
@@ -32,6 +30,7 @@ class TaskDecoderTest {
         assertEquals("Do homework", decodedTaskList.get(0).getTitle());
         assertTrue(decodedTaskList.get(0).getIsDone());
         assertEquals("CS2113T tP v1.0", decodedTaskList.get(0).getDescription());
+        LocalDateTime expectedDateTime = Parser.convertDateTime("19-02-2022 2359");
         assertEquals(expectedDateTime, decodedTaskList.get(0).getDateTime());
     }
 }
