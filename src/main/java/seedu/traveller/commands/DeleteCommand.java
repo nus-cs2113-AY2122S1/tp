@@ -1,13 +1,12 @@
 package seedu.traveller.commands;
 
-import seedu.traveller.Trip;
 import seedu.traveller.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.exceptions.TripNotFoundException;
+
 
 public class DeleteCommand extends Command {
-
-    private int tripIndex = -1;
     private final String tripName;
 
     public DeleteCommand(String tripName) {
@@ -15,19 +14,12 @@ public class DeleteCommand extends Command {
     }
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
-        for (int i = 0; i < TripsList.getSize(); i++) {
-            Trip trip = TripsList.getTrip(i);
-            if (tripName.equals(trip.getTripName())) {
-                tripIndex = i;
-                break;
-            }
+        int tripIndex = tripsList.getTripIndex(this.tripName);
+        if (tripIndex == -1) {
+            throw new TripNotFoundException();
         }
 
-        if (tripIndex == -1) {
-            System.out.println("This trip does not exist.");
-            return;
-        }
-        TripsList.deleteTrip(tripIndex);
+        tripsList.deleteTrip(tripIndex);
         ui.printDelete(tripName);
     }
 }
