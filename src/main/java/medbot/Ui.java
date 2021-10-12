@@ -130,7 +130,7 @@ public class Ui {
     public String getAddHelpMessage() {
         return "Add a patient to the patient’s list.\n"
                 + "Format: \n"
-                + "add i/PATIENT_ID [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
+                + "add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
                 + "Expected output: \n"
                 + "Patient with the following information has been successfully added to the list:\n"
                 + "id: PATIENT_ID\n"
@@ -141,9 +141,12 @@ public class Ui {
 
     public String getEditHelpMessage() {
         return "Edit the personal and medical information of a patient in the list.\n"
-                + "Format: edit PATIENT_ID FIELD_TO_EDIT NEW_DATA\n"
+                + "Format: \n"
+                + "edit PATIENT ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
                 + "Expected output: \n"
-                + "The FIELD_TO_EDIT of patient PATIENT_ID has been changed from OLD_DATA to NEW_DATA\n";
+                + "The information of patient with ID [PATIENT_ID] has been edited to:\n"
+                + "Patient ID: [PATIENT_ID] IC: [PATIENT_IC] Name: [NAME] H/P: [PHONE_NUMBER] "
+                +   "Email: [EMAIL] Address: [ADDRESS] \n";
     }
 
     public String getDeleteHelpMessage() {

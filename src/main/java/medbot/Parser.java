@@ -30,6 +30,7 @@ public class Parser {
     private static final String PARAMETER_EMAIL = "e/";
     private static final String PARAMETER_IC = "i/";
     private static final String PARAMETER_ADDRESS = "a/";
+    private static final Integer PARAMETER_BUFFER = 2;
 
     private static final String WRONG_COMMAND_ERROR = "Unable to parse command.";
     private static final String WRONG_NUMBER_ERROR = "Unable to parse number.";
@@ -117,6 +118,7 @@ public class Parser {
         if (parameters.length == 2) {
             return new HelpCommand(parameters[1]);
         }
+        assert parameters.length > 2;
 
         throw new MedBotException(WRONG_COMMAND_ERROR);
     }
@@ -210,6 +212,7 @@ public class Parser {
         if (parameters.length == 1) {
             throw new MedBotException(ERROR_NO_PARAMETER);
         }
+        assert parameters.length > 1;
         Patient patient = new Patient();
         for (int i = 1; i < parameters.length; i++) {
             updatePersonalInformation(patient, parameters[i]);
@@ -227,26 +230,26 @@ public class Parser {
      */
     public static void updatePersonalInformation(Person person, String attributeString) throws MedBotException {
         if (attributeString.startsWith(PARAMETER_NAME)) {
-            String name = parseName(attributeString.substring(2));
+            String name = parseName(attributeString.substring(PARAMETER_BUFFER));
             person.setName(name);
             return;
         }
         if (attributeString.startsWith(PARAMETER_PHONE)) {
-            String phoneNumber = parsePhoneNumber(attributeString.substring(2));
+            String phoneNumber = parsePhoneNumber(attributeString.substring(PARAMETER_BUFFER));
             person.setPhoneNumber(phoneNumber);
             return;
         }
         if (attributeString.startsWith(PARAMETER_EMAIL)) {
-            String email = parseEmailAddress(attributeString.substring(2));
+            String email = parseEmailAddress(attributeString.substring(PARAMETER_BUFFER));
             person.setEmailAddress(email);
             return;
         }
         if (attributeString.startsWith(PARAMETER_IC)) {
-            String icNumber = parseIcNumber(attributeString.substring(2));
+            String icNumber = parseIcNumber(attributeString.substring(PARAMETER_BUFFER));
             person.setIcNumber(icNumber);
         }
         if (attributeString.startsWith(PARAMETER_ADDRESS)) {
-            String address = parseResidentialAddress(attributeString.substring(2));
+            String address = parseResidentialAddress(attributeString.substring(PARAMETER_BUFFER));
             person.setResidentialAddress(address);
         }
     }
@@ -325,6 +328,7 @@ public class Parser {
             if (!numberString.matches(REGEX_PHONE_NUMBER)) {
                 throw new MedBotException(ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS);
             }
+            assert numberString.length() == 8;
             return numberString;
         } catch (IndexOutOfBoundsException ie) {
             throw new MedBotException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
