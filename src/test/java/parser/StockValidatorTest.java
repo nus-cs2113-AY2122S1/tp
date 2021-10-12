@@ -20,6 +20,7 @@ public class StockValidatorTest {
     public void checkValidStockId_validId_expectTrue() {
         ArrayList<Medicine> tempMedicines = new ArrayList<>();
         try {
+            Stock.setStockCount(0);
             tempMedicines.add(new Stock("PANADOL", 20, 20, DateParser.stringToDate("13-9-2021"),
                     "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
         } catch (ParseException e) {
