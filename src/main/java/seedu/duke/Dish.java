@@ -1,11 +1,9 @@
 package seedu.duke;
 
-import org.w3c.dom.css.CSSStyleDeclaration;
-
 import java.util.ArrayList;
 
 public class Dish {
-    public ArrayList<Ingredient> constituents = new ArrayList<>();
+    private ArrayList<Ingredient> constituents = new ArrayList<>();
     private Ui ui = new Ui();
     private String dishName;
     private Double wastage;
@@ -30,6 +28,14 @@ public class Dish {
 
     public Double getIngredientContribution() {
         return ingredientContribution;
+    }
+
+    public ArrayList<Ingredient> getConstituents() {
+        return constituents;
+    }
+
+    public void setConstituents(ArrayList<Ingredient> constituents) {
+        this.constituents = constituents;
     }
 
     public void addConstituent(String ingredientName) {
@@ -76,7 +82,7 @@ public class Dish {
             for (Ingredient ingredient : constituents) {
                 constituentList = constituentList + "," + ingredient.getIngredientName();
             }
-            constituentList = constituentList.replaceFirst(",", " ");
+            constituentList = constituentList.replaceFirst(",", "");
         } else {
             constituentList = "None";
         }
