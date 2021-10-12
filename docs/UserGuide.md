@@ -1,6 +1,6 @@
 # User Guide
 
-Task Buddy is a **simple desktop app for managing your todo list**. It is optimized for use via a **Command Line 
+NUS Buddy is a **simple desktop app for managing your todo list**. It is optimized for use via a **Command Line 
 Interface (CLI)** so students can spend most of their time using the terminal and focus on actual works. It is designed 
 to be fast, flexible, and unobtrusive.
 
