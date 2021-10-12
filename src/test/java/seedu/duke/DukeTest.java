@@ -10,7 +10,7 @@ class DukeTest {
     @Test
     public void testSetBudget() {
         Trip trip = new Trip();
-        trip.setBudget(5000.00F);
+        trip.setBudget("5000.00");
         assertEquals(5000.00F, trip.getBudget());
     }
 
