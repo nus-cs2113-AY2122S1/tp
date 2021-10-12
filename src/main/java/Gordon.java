@@ -1,3 +1,4 @@
+import gordon.command.Command;
 import gordon.exception.GordonException;
 import gordon.util.Parser;
 import gordon.kitchen.Cookbook;
@@ -13,17 +14,22 @@ public class Gordon {
     static Logger logger;
 
     public Gordon() {
+        logger = Logger.getLogger(GordonException.loggerName);
+        logger.setLevel(Level.SEVERE);
         parser = new Parser();
         mainCookbook = new Cookbook();
         storage = new Storage(mainCookbook);
-        logger = Logger.getLogger(GordonException.loggerName);
-        logger.setLevel(Level.SEVERE);
     }
 
     public void run() {
         assert (parser != null && mainCookbook != null);
         logger.log(Level.INFO, "Processing start.");
-        parser.parseMaster(mainCookbook, storage);
+        while (parser.parseNextLine()) {
+            Command command = parser.parseMaster();
+            command.execute(mainCookbook);
+            storage.saveCookbook(mainCookbook);
+        }
+        System.out.println("Bye bye!");
         logger.log(Level.INFO, "Processing end.");
     }
 
