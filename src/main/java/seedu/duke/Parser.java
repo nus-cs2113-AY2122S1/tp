@@ -79,20 +79,20 @@ public class Parser {
             String value = unformattedSubstring.replace(prefix, "").trim();
             previousIndex = nextIndex;
             switch (prefix) {
-                case "/cn":
-                    extractValues[1] = value;
-                    break;
-                case "/f":
-                    extractValues[2] = value;
-                    break;
-                case "/a":
-                    extractValues[3] = value;
-                    break;
-                case "/t":
-                    extractValues[4] = value;
-                    break;
-                default:
-                    extractValues[0] = value;
+            case "/cn":
+                extractValues[1] = value;
+                break;
+            case "/f":
+                extractValues[2] = value;
+                break;
+            case "/a":
+                extractValues[3] = value;
+                break;
+            case "/t":
+                extractValues[4] = value;
+                break;
+            default:
+                extractValues[0] = value;
             }
         }
         return extractValues;
@@ -107,20 +107,20 @@ public class Parser {
         for (String substring : splitBySpaces) {
             Prefix prefix = checkPrefix(substring);
             switch (prefix) {
-                case HAS_CONTACT:
-                    containsContact = true;
-                    break;
-                case HAS_ACCOMMS:
-                    containsAccomms = true;
-                    break;
-                case HAS_TOUR:
-                    containsTour = true;
-                    break;
-                case HAS_FLIGHT:
-                    containsFlight = true;
-                    break;
-                default:
-                    break;
+            case HAS_CONTACT:
+                containsContact = true;
+                break;
+            case HAS_ACCOMMS:
+                containsAccomms = true;
+                break;
+            case HAS_TOUR:
+                containsTour = true;
+                break;
+            case HAS_FLIGHT:
+                containsFlight = true;
+                break;
+            default:
+                break;
             }
         }
         return containsContact && containsFlight && containsAccomms && containsTour;
