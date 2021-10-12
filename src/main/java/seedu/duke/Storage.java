@@ -7,9 +7,10 @@ import java.util.ArrayList;
 public class Storage {
 
     private static Scanner scanner;
+    private static Trip openTrip = null;
 
     private static final ArrayList<String> validCommands = new ArrayList<>(
-            Arrays.asList("create", "edit", "summary", "delete", "expense", "quit"));
+            Arrays.asList("create", "edit", "summary", "delete", "expense", "quit", "open", "close", "switch"));
 
     public static Scanner getScanner() {
         return scanner;
@@ -22,4 +23,20 @@ public class Storage {
     public static ArrayList<String> getValidCommands() {
         return validCommands;
     }
+
+    public static Trip getOpenTrip() {
+        if (openTrip == null) {
+            Ui.printNoOpenTripError();
+        }
+        return openTrip;
+    }
+
+    public static void setOpenTrip(Trip openTrip) {
+        Storage.openTrip = openTrip;
+    }
+
+    public static void closeTrip() {
+        Storage.openTrip = null;
+    }
+
 }

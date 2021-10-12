@@ -15,6 +15,10 @@ public class Parser {
         String[] userInputSplit = userInput.split(" ", 2);
         String inputCommand = userInputSplit[0].toLowerCase();
         String inputDescription = null;
+        if (userInputSplit[0].equals("close")) {
+            Storage.closeTrip();
+            return true;
+        }
         if (!checkValidCommand(inputCommand) || (userInputSplit.length == 1 && !inputCommand.equals("quit"))) {
             Ui.printUnknownCommandError();
             return true;
@@ -39,6 +43,14 @@ public class Parser {
                 editTripPerAttribute(tripToEdit, attributesToEdit);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
+            }
+            break;
+        case "open":
+            try {
+                int indexToGet = Integer.parseInt(inputDescription) - 1;
+                Storage.setOpenTrip(listOfTrips.get(indexToGet));
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                Ui.printSingleUnknownTripIndexError();
             }
             break;
         case "summary":
@@ -97,7 +109,7 @@ public class Parser {
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */
     private static ArrayList<Person> getPersons(int tripIndex, String[] personSplit, Trip currentTrip) {
-        ArrayList<Person> listOfPersons = new ArrayList<Person>();
+        ArrayList<Person> listOfPersons = new ArrayList<>();
         ArrayList<Person> personsInTrip = currentTrip.getListOfPersons();
         Person personToAdd = null;
         for (String nameToCheck : personSplit) {
@@ -160,10 +172,9 @@ public class Parser {
             int indexToDelete = Integer.parseInt(s);
             Trip tripToRemove = listOfTrips.get(indexToDelete - 1);
             listOfTrips.remove(indexToDelete - 1);
-            System.out.println("Your trip to " + tripToRemove.getLocation() + " on "
-                    + tripToRemove.getDateOfTripString() + " has been successfully removed");
+            Ui.printDeleteTripSuccessful(tripToRemove);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
+            Ui.printUnknownTripIndexError();
         }
     }
 

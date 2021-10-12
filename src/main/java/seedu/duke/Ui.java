@@ -62,4 +62,22 @@ public class Ui {
         System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter -help "
                 + "to learn more.");
     }
+
+    public static void printSingleUnknownTripIndexError() {
+        System.out.println("Please re-enter your trip number. You should only enter a single trip number at a time");
+    }
+
+    public static void printUnknownTripIndexError() {
+        System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
+    }
+
+    public static void printDeleteTripSuccessful(Trip tripToRemove) {
+        System.out.println("Your trip to " + tripToRemove.getLocation() + " on "
+                + tripToRemove.getDateOfTripString() + " has been successfully removed");
+    }
+
+    public static void printNoOpenTripError() {
+        System.out.println("You have not opened any trip yet. Please open a trip to edit expenses within the trip.");
+    }
+
 }
