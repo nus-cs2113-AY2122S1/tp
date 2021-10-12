@@ -14,7 +14,7 @@ public class ListCommand extends Command {
 
     public ListCommand(String type) throws IOException {
         switch (type) {
-        case "m":
+        case "t":
             if (selectedModuleList.getSize() == 0) {
                 System.out.println("The module list is empty!");
             } else {
@@ -24,7 +24,7 @@ public class ListCommand extends Command {
                 }
             }
             break;
-        case "u":
+        case "s":
             if (universityList.getSize() == 0) {
                 System.out.println("The university list is empty!");
             } else {
@@ -34,14 +34,14 @@ public class ListCommand extends Command {
                 }
             }
             break;
-        case "s":
+        case "u":
             ArrayList<University> allUniversityList = Storage.readUniversitiesFromCsv();
             System.out.println("Here are all the universities available for you:");
             for (int i = 0; i < allUniversityList.size(); i++) {
                 System.out.println("[" + (i + 1) + "] " + allUniversityList.get(i).getName());
             }
             break;
-        case "t":
+        case "m":
             ArrayList<Module> allModuleList = Storage.readModulesFromCsv();
             System.out.println("Here are all the modules available for you:");
             for (int i = 0; i < allModuleList.size(); i++) {
