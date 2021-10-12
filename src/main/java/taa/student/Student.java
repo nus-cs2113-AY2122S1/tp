@@ -1,5 +1,7 @@
 package taa.student;
 
+import taa.attendance.Attendance;
+
 /**
  * Represents students.
  */
@@ -8,21 +10,31 @@ public class Student {
 
     private String id;
     private String name;
-    private final boolean[] attendance = new boolean[NUM_LESSONS];
+    private final String[] individualAttendances = new String[NUM_LESSONS];
+    private static final String ABSENT_MARK = "0";
 
     public Student(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    /**
-     * Marks the student as present for a particular lesson.
-     *
-     * @param lessonIndex The lesson index the student is present for
-     */
-    public void markAttendance(int lessonIndex) {
-        attendance[lessonIndex] = true;
+    private void initIndividualAttendances(){
+        for (int i = 0; i < NUM_LESSONS; i++){
+            individualAttendances[i] = ABSENT_MARK;
+        }
     }
+
+    /**
+     * Marks the student as present or absent for a particular lesson.
+     *
+     * @param attendance
+     */
+    public void setAttendance(Attendance attendance) {
+        int lessonIndex = Integer.parseInt(attendance.getLessonIndex());
+        initIndividualAttendances();
+        individualAttendances[lessonIndex] = attendance.markAttendance();
+    }
+
 
     /**
      * Returns the attendance status of the student for a particular lesson.
@@ -30,8 +42,8 @@ public class Student {
      * @param lessonIndex The lesson index
      * @return The attendance status of the student for the lesson
      */
-    public boolean isPresent(int lessonIndex) {
-        return attendance[lessonIndex];
+    public String isPresent(int lessonIndex) {
+        return individualAttendances[lessonIndex];
     }
 
     /**
@@ -69,6 +81,12 @@ public class Student {
     public String getId() {
         return this.id;
     }
+
+    public String[] getIndividualAttendances() {
+        return individualAttendances;
+    }
+
+
 
     /**
      * Overrides default toString method with the custom print message.
