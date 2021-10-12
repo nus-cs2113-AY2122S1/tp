@@ -38,6 +38,8 @@ public class Main {
         WikiImport wiki = new WikiImport();
         try {
             String article = wiki.getArticle("GitHub");
+            System.out.println(article.length());
+            System.out.println(article);
         } catch (InvalidArticleException e) {
             e.printStackTrace();
         }
