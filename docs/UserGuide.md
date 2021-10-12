@@ -8,6 +8,10 @@ It is designed to be fast, flexible, and unobtrusive.
 * [Quick Start](#quick-start)
 * [Features](#features)
   * [Adding a Task or Lesson - `add`](#adding-a-task-or-lesson---add)
+  * [Listing Tasks or Lessons - `list`](#listing-tasks-or-lessons---list)
+  * [Marking a Task as done - `done`](#marking-a-task-as-done---done)
+  * [Deleting Tasks and Lessons - `delete`](#deleting-tasks-or-lessons---delete)
+  * [Finding Tasks or lessons by keyword - `find`](#finding-tasks-or-lessons-by-keyword---find)
   * [Exiting the program - `exit`](#exiting-the-program---exit)
   * [Saving the data](#saving-the-data)
 * [FAQ](#faq)
@@ -15,7 +19,8 @@ It is designed to be fast, flexible, and unobtrusive.
 
 ## Quick Start
 
-1. Ensure that you have Java 11 or above installed on your machine. You can follow the guide [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html) for more information.
+1. Ensure that you have Java 11 or above installed on your machine. You can follow the guide 
+[here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html) for more information.
 2. Download the latest version of Task Buddy from our GitHub repository.
 3. Copy the `.jar` file to the folder you want to use as the home directory for the application.
 4. To launch the app, run the command `java -jar {filename}.jar`.
@@ -28,6 +33,8 @@ It is designed to be fast, flexible, and unobtrusive.
 > [PARAM] → COMPULSORY
 
 > {PARAM} → OPTIONAL
+
+> [OPTION1/OPTION2] denotes that either OPTION1 or OPTION2 must be chosen as the parameter
 
 ### Adding a Task or Lesson - `add`
 
@@ -67,6 +74,40 @@ $ add lesson CS2113 Lecture -d MON -s 1pm -e 3pm
     
 ```
 
+### Listing Tasks or Lessons - `list`
+
+`list` can be used to perform any of the following actions:
+- list all tasks and lessons
+- list all tasks only
+- list all lessons only
+
+Format: `list [task/lesson/all]`
+
+### Marking a Task as done - `done`
+
+Indicate that the specified task is completed.
+
+Format: `done [INDEX]`
+
+### Deleting Tasks or Lessons - `delete`
+
+`delete` can be used to perform any of the following actions:
+- delete all tasks and lessons
+- delete all tasks
+- delete all lessons
+- delete a specific task or lesson
+
+Format: 
+- `delete [task/lesson] [INDEX]`: deletes the task or lesson at the specified index
+- `delete [task/lesson] all`: deletes all tasks or lessons as specified
+- `delete all`: deletes all tasks and lessons
+
+### Finding Tasks or Lessons by keyword - `find`
+
+Locate tasks and lessons that match the specified keyword.
+
+Format: `find [task/lesson] [KEYWORD]`
+
 ### Exiting the program - `exit`
 
 Exit the program.
@@ -80,4 +121,13 @@ Data from Task Buddy is automatically saved on your local machine.
 ## FAQ
 
 ## Command summary
+
+| Action                            | Format                                                                       |
+|-----------------------------------|------------------------------------------------------------------------------|
+| Add                               | `add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION}`                     |
+| List                              | `list [task/lesson/all]`                                                     |
+| Mark task as done                 | `done [INDEX]`                                                               |
+| Delete task or lesson             | `delete [task/lesson] [INDEX]` or `delete [task/lesson] all` or `delete all` |
+| Find tasks and lessons by keyword | `find [task/lesson] [KEYWORD]`                                               |
+| Exit the program                  | `exit`                                                                       |
 
