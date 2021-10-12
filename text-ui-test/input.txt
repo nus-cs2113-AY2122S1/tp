@@ -1,4 +1,1 @@
-add dish Chicken Rice
-add dish Prata
-add dish Prata
 bye
