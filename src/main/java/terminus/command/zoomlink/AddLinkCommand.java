@@ -4,7 +4,6 @@ import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.content.ContentManager;
 import terminus.content.Link;
-import terminus.content.Note;
 import terminus.exception.InvalidTimeFormatException;
 import terminus.module.NusModule;
 import terminus.common.CommonFormat;
@@ -32,32 +31,23 @@ public class AddLinkCommand extends Command {
 
     }
 
-    /**
-     * Returns the command format to Add a Link.
-     *
-     * @return The string containing the command format to add a link
-     */
     @Override
     public String getFormat() {
         return CommonFormat.COMMAND_ADD_SCHEDULE_FORMAT;
     }
 
-    /**
-     * Returns the description of Add Link Command.
-     *
-     * @return The string containing the description of an add command
-     */
     @Override
     public String getHelpMessage() {
         return Messages.MESSAGE_COMMAND_ADD;
     }
 
     /**
-     * Parses the arguments in an add link command to its respective description, day, start-time, and link.
+     * Parses the arguments in an AddLinkCommand object.
+     * The arguments' description, day, start-time, and link are attributes for a new Link object.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
-     * @throws InvalidArgumentException Exception for when argument parsing fails
-     * @throws InvalidTimeFormatException Exception for when time format is invalid
+     * @throws InvalidArgumentException Exception for when argument parsing fails.
+     * @throws InvalidTimeFormatException Exception for when time format is invalid.
      */
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException, InvalidTimeFormatException {
@@ -81,9 +71,9 @@ public class AddLinkCommand extends Command {
      * Executes the add link command.
      * Prints the relevant response to the Ui.
      *
-     * @param ui     The Ui object to send messages to the users.
+     * @param ui The Ui object to send messages to the users.
      * @param module The NusModule contain the list of all notes and schedules.
-     * @return CommandResult to indicate the success and additional information about the execution
+     * @return CommandResult to indicate the success and additional information about the execution.
      * @throws InvalidCommandException Exception for when the user command is not found
      * @throws InvalidArgumentException Exception for when the argument parsing fails
      */
