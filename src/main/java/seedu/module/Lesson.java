@@ -1,7 +1,7 @@
 package seedu.module;
 
 public class Lesson {
-    private final String GAP = ", ";
+    private static final String GAP = ", ";
     private String classNo;
     private String startTime;
     private String endTime;

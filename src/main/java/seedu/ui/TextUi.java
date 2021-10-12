@@ -1,15 +1,27 @@
 package seedu.ui;
 
+
+import seedu.comparator.ClassNumComparator;
 import seedu.module.Lesson;
 import seedu.module.Module;
-
+import seedu.module.Semester;
+import seedu.timetable.Timetable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class TextUi {
+    private static final int BALANCE_ARRAY = 1;
+    private static final int SERIAL = 1;
+    private static final String SMALL_GAP = "         ";
+    private static final String BIG_GAP = "                         ";
+    private static final String LECTURE_SLOT = "Lecture Lesson Slots";
+    private static final String TUTORIAL_SLOT = "Tutorial Lesson Slots";
+    private static final String LAB_SLOT = "Laboratory Lesson Slots";
 
     public static Scanner in = new Scanner(System.in);
 
-    public static final String LINE = "____________________________________________________________________________\n";
+    public static final String LINE = "__________________________________________________________________________\n";
 
     /*------------- PRIVATE LOGGING CONSTANTS ----------- */
     private static final String LOGO = " ____        _        \n"
@@ -20,8 +32,10 @@ public class TextUi {
 
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
+    private static final String USER_PROMPT = "What would you like to do?";
+    private static final String PROMPT_CURSOR = "==>";
     private static final String HELP_MESSAGE = LINE
-            + "\tNUSModsLite accepts the following commands:-\n"
+            + "\tUNIMods accepts the following commands:-\n"
             + "\t\t| No.| Command Syntax          |            Command Action                      |\n"
             + "\t\t| 1. | search <module_code>    | Search module based on the given partial regex |\n"
             + "\t\t| 2. | show <module_code>      | Display module information                     |\n"
@@ -33,12 +47,31 @@ public class TextUi {
             + "\t ** Note: For details, refer to the User Guide of NUSModsLite at: "
             + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n" + LINE;
 
+    public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this module does not exist in your timetable!";
+    public static final String ERROR_INVALID_MODULE_CODE =
+            "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
+    public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
+
+
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
-        System.out.println();
+        System.out.println(LINE);
+        System.out.println(USER_PROMPT);
+        System.out.print(PROMPT_CURSOR);
         String input = in.nextLine();
         while (input.isEmpty()) {
+            System.out.print(PROMPT_CURSOR);
             input = in.nextLine();
+        }
+        return input;
+    }
+
+    public static String getLessonCommand(String lessonType) {
+        String output = "Which " + lessonType + " would you like to choose? ";
+        System.out.print(output);
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
         }
         return input;
     }
@@ -52,7 +85,7 @@ public class TextUi {
     }
 
     public static void printInvalidCommandMessage() {
-        System.out.print(LINE + "> Sorry friend, I don't know what that means. :/\n" + LINE);
+        System.out.print(LINE + "> Sorry friend, I don't know what that means. :/\n");
     }
 
     public static void printModBriefDescription(Module module) {
@@ -102,7 +135,7 @@ public class TextUi {
     }
 
     public static void printWelcomeMessage() {
-        System.out.println("Generic greeting.");
+        System.out.println(STARTUP);
     }
 
     public static void printLoadStartMessage() {
@@ -144,31 +177,65 @@ public class TextUi {
     }
 
     public static void printAddMessage(String moduleCode) {
-        System.out.println("Adding " + moduleCode);
+        System.out.println("Now adding " + moduleCode + " into timetable");
     }
 
     public static void printLessonMessage(String lessonType) {
         switch (lessonType) {
-            case "Lecture":
-                System.out.println("Which Lecture time slot would you like to add ?");
-                System.out.println("Lecture Time slots:");
-                break;
-            case "Tutorial":
-                System.out.println("Which Tutorial time slot would you like to add ?");
-                System.out.println("Tutorial Time slots:");
-                break;
-            default:
-                System.out.println("Which Laboratory time slot would you like to add ?");
-                System.out.println("Laboratory Time slots:");
-                break;
+        case "Lecture":
+            //System.out.println("Which Lecture time slot would you like to add ?");
+            System.out.println("\nLecture Time slots:");
+            break;
+        case "Tutorial":
+            //System.out.println("Which Tutorial time slot would you like to add ?");
+            System.out.println("\nTutorial Time slots:");
+            break;
+        default:
+            //System.out.println("Which Laboratory time slot would you like to add ?");
+            System.out.println("\nLaboratory Time slots:");
+            break;
         }
-    }
-
-    public static void printLessonInfo(int serial, Lesson lesson) {
-        System.out.println(serial + ": " + lesson.lessonDetails());
     }
 
     public static void printLessonAdded() {
         System.out.println("Lessons for all modules have been successfully added");
+    }
+
+    public static void printModuleDeleted(String moduleCode) {
+        System.out.println(moduleCode + " is successfully deleted from your Timetable.");
+    }
+
+    public static void printTimetableCleared() {
+        System.out.println("All modules have been successfully removed from your Timetable.");
+    }
+
+    public static String returnLine() {
+        return "________________________________________";
+    }
+
+    public static void printLessonHeader(ArrayList<Lesson> lt, ArrayList<Lesson> tt, ArrayList<Lesson> lb) {
+        String header = "";
+        if (isExist(lt) && isExist(tt) && isExist(lb)) {
+            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
+        } else if (isExist(lt) && isExist(tt)) {
+            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT;
+        } else if (isExist(lt) && isExist(lb)) {
+            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + LAB_SLOT;
+        } else if (isExist(tt) && isExist(lb)) {
+            header = SMALL_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
+        } else if (isExist(lt)) {
+            header = SMALL_GAP + LECTURE_SLOT;
+        } else if (isExist(tt)) {
+            header = SMALL_GAP + TUTORIAL_SLOT;
+        } else if (isExist(lb)) {
+            header = SMALL_GAP + LAB_SLOT;
+        } else {
+            header = "No Lesson Time Slots Found";
+        }
+        System.out.println(header);
+    }
+
+    public static boolean isExist(ArrayList<Lesson> lesson) {
+        return lesson.size() > 0;
     }
 }

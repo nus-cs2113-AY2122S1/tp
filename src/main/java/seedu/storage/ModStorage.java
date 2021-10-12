@@ -2,7 +2,9 @@ package seedu.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import seedu.command.flags.SearchFlags;
 import seedu.module.Module;
+import seedu.online.NusMods;
 import seedu.ui.TextUi;
 
 import java.io.BufferedReader;
@@ -13,6 +15,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
+import java.util.logging.Logger;
+
+import static seedu.online.NusMods.isMatch;
 
 public class ModStorage {
 
@@ -53,12 +58,12 @@ public class ModStorage {
         return false;
     }
 
-    public static void searchModsOffline(String searchTerm) {
+    public static void searchModsOffline(String searchTerm, SearchFlags searchFlags) {
         File dir = new File("data/Modules/");
         File[] fileList = dir.listFiles();
         if (fileList != null) {
             try {
-                searchFiles(fileList, searchTerm);
+                searchFiles(fileList, searchTerm, searchFlags);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -71,14 +76,14 @@ public class ModStorage {
         TextUi.printLocalSearchMessage();
     }
 
-    private static void searchFiles(File[] fileList, String searchTerm) throws IOException {
+    private static void searchFiles(File[] fileList, String searchTerm, SearchFlags searchFlags) throws IOException {
         int count = 0;
         for (File file : fileList) {
-            if (fileNameContains(file, searchTerm)) {
-                InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
-                JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
-                Module module = new Gson().fromJson(reader, Module.class);
-                TextUi.printModBriefDescription(module);
+            String extension = ".json";
+            int extensionIndex = file.getName().indexOf(extension);
+            String modCode = file.getName().substring(0, extensionIndex);
+            Module module = new Module(modCode);
+            if (NusMods.isMatch(module, searchTerm, searchFlags)) {
                 count++;
             }
         }
@@ -90,7 +95,7 @@ public class ModStorage {
     }
 
     public static Module loadModInfo(String moduleCode) throws IOException {
-        File file = new File("data/Modules/" + moduleCode + ".json");
+        File file = new File("./data/Modules/" + moduleCode + ".json");
         InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
         JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
         return new Gson().fromJson(reader, Module.class);

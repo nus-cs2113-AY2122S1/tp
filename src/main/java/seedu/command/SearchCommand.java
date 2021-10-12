@@ -1,30 +1,39 @@
 package seedu.command;
 
+import seedu.command.flags.SearchFlags;
 import seedu.online.NusMods;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SearchCommand extends Command {
+    private static Logger logger = Logger.getLogger("");
     private final String searchTerm;
-    private final boolean localFlag;
+    private final SearchFlags searchFlags;
 
-    public SearchCommand(String searchTerm, boolean localFlag) {
+    public SearchCommand(String searchTerm, SearchFlags searchFlags) {
         this.searchTerm = searchTerm;
-        this.localFlag = localFlag;
+        this.searchFlags = searchFlags;
     }
 
     public void execute() {
-        if (!localFlag) {
+        boolean isQuickSearch = searchFlags.getHasQuickFlag();
+        if (!isQuickSearch) {
             try {
-                NusMods.searchModsOnline(searchTerm);
+                NusMods.searchModsOnline(searchTerm, searchFlags);
+                logger.log(Level.INFO, "Online search done");
             } catch (IOException e) {
                 TextUi.printNoConnectionMessage();
-                ModStorage.searchModsOffline(searchTerm);
+                logger.log(Level.INFO, "Unable to retrieve data from NUSMods, searching offline");
+                ModStorage.searchModsOffline(searchTerm, searchFlags);
+                logger.log(Level.INFO, "Offline search done");
             }
         } else {
-            ModStorage.searchModsOffline(searchTerm);
+            ModStorage.searchModsOffline(searchTerm, searchFlags);
+            logger.log(Level.INFO, "Manual offline search done");
         }
     }
 }
