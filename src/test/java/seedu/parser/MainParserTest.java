@@ -160,6 +160,15 @@ public class MainParserTest {
         final ViewCommand testResultCommand = getParsedCommand(testUserInput, ViewCommand.class);
         assertEquals(testIndex, testResultCommand.getIndex());
     }
+
+    @Test
+    public void parseViewCommand_missingIndex_expectFailedCommandType() {
+        testUserInput = "view";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.MISSING_ARG;
+        final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
+        assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
+    }
+
     @Test
     public void parseAddCommand_missingName_expectFailedCommand() {
         testUserInput = " add -g      github ";
