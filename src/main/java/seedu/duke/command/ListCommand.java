@@ -1,5 +1,6 @@
 package seedu.duke.command;
 
+import java.util.HashMap;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.task.TaskManager;
 
@@ -7,8 +8,8 @@ import java.util.Map;
 
 public class ListCommand extends Command {
 
-    public ListCommand(TaskManager taskManager, Map<String, String> commandOptions) {
-        super(taskManager, commandOptions);
+    public ListCommand(TaskManager taskManager, HashMap<String, String> commandArguments) {
+        super(taskManager, commandArguments);
     }
 
     @Override

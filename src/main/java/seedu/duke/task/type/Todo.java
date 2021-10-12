@@ -1,10 +1,8 @@
 package seedu.duke.task.type;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
+import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
@@ -12,76 +10,72 @@ import seedu.duke.task.reminder.Reminder;
 
 public class Todo extends Task {
 
-    static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
+    private static final String TODO_DATE_DESCRIPTION_REGEX = " (doOn: %s)";
 
-    Date doOn;
-    RecurrenceEnum recurrence;
+    private Date doOnDate;
 
     private Reminder reminder;
 
     public Todo(String description) {
         super(description);
-        this.doOn = Calendar.getInstance().getTime();
-        this.recurrence = DEFAULT_RECURRENCE;
+        setDoOnDate(null);
     }
 
     public Todo(String description, PriorityEnum priority) {
-        super(description, priority);
-        this.doOn = Calendar.getInstance().getTime();
-        this.recurrence = DEFAULT_RECURRENCE;
+        this(description);
+        setPriority(priority);
     }
 
-    public Todo(String description, Date doOn) {
-        super(description);
-        this.doOn = doOn;
-        this.recurrence = DEFAULT_RECURRENCE;
-        reminder = new Reminder(doOn);
+    public Todo(String description, Date doOnDate) {
+        this(description);
+        setDoOnDate(doOnDate);
     }
 
-    public Todo(String description, RecurrenceEnum recurrence) {
-        super(description);
-        this.doOn = Calendar.getInstance().getTime();
-        this.recurrence = recurrence;
+    public Todo(String description, PriorityEnum priority, Date doOnDate) {
+        this(description);
+        setPriority(priority);
+        setDoOnDate(doOnDate);
+    }
+    
+    public Todo(String description, Date doOnDate, RecurrenceEnum recurrence) {
+        this(description);
+        setDoOnDate(doOnDate);
+        setRecurrence(recurrence);
     }
 
-    public Todo(String description, PriorityEnum priority, Date doOn) {
-        super(description, priority);
-        this.doOn = doOn;
-        this.recurrence = DEFAULT_RECURRENCE;
-        reminder = new Reminder(doOn);
+    public Todo(String description, PriorityEnum priority, Date doOnDate, RecurrenceEnum recurrence) {
+        this(description);
+        setPriority(priority);
+        setDoOnDate(doOnDate);
+        setRecurrence(recurrence);
     }
 
-    public Todo(String description, Date doOn, RecurrenceEnum recurrence) {
-        super(description);
-        this.doOn = doOn;
-        this.recurrence = recurrence;
-        reminder = new Reminder(doOn);
+    public Date getDoOnDate() {
+        return doOnDate;
     }
 
-    public Todo(String description, PriorityEnum priority, Date doOn, RecurrenceEnum recurrence) {
-        super(description, priority);
-        this.doOn = doOn;
-        this.recurrence = recurrence;
-        reminder = new Reminder(doOn);
+    public void setDoOnDate(Date doOnDate) {
+        this.doOnDate = doOnDate;
+        if (doOnDate != null) {
+            reminder = new Reminder(doOnDate);
+        }
     }
 
-    @Override
-    public String getTaskEntryDescription() {
-        return super.getTaskEntryDescription() + " (doOn: " + getDateAsString(this.doOn) + ")";
-    }
 
     public String getReminder(LocalDateTime now) {
         return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
     }
-
+    @Overrride
     public boolean needReminder() {
         return (reminder != null);
     }
 
-    public String getDateAsString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        String strDate = dateFormat.format(date);
-        return strDate;
+    @Override
+    public String getTaskEntryDescription() {
+        String description = super.getTaskEntryDescription();
+        if (getDoOnDate() != null) {
+            description += String.format(TODO_DATE_DESCRIPTION_REGEX, UtilityParser.getDateAsString(getDoOnDate()));
+        }
+        return description;
     }
-
 }

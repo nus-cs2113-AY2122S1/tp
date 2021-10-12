@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
 
-    private static Map<String, String> commandOptions = new HashMap<>();
+    private static HashMap<String, String> commandOptions = new HashMap<>();
 
     private final String commandArguments = "cs2113 tp project --type deadline --start 22-09-2021"
             + " --end 29-09-2021 --recur weekly --priority 2";
@@ -25,8 +25,8 @@ class ParserTest {
     @Test
     @DisplayName("When we check the command is able to split all fields properly")
     void parse_commandArguments_checkIfSplitCorrectly() {
-        commandOptions = Parser.getCommandOptions(commandArguments);
+        commandOptions = CommandParser.getCommandOptions(commandArguments);
 
-        assertEquals(expectedSplit, Parser.printCommandOptions(commandOptions));
+        assertEquals(expectedSplit, CommandParser.printCommandOptions(commandOptions));
     }
 }

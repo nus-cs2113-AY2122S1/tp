@@ -1,10 +1,9 @@
 package seedu.duke.task.type;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
+import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
@@ -12,76 +11,58 @@ import seedu.duke.task.reminder.Reminder;
 
 public class Deadline extends Task {
 
-    static final RecurrenceEnum DEFAULT_RECURRENCE = RecurrenceEnum.NONE;
+    private static final String DEADLINE_DATE_DESCRIPTION_REGEX = " (dueDate: %s)";
 
-    Date dueDate;
-    RecurrenceEnum recurrence;
+    private static final String DUE_DATE_NOT_NULL_ASSERTION = "dueDate for Deadline cannot be null.";
+
 
     private Reminder reminder;
 
-    public Deadline(String description) {
+    private Date dueDate;
+
+    public Deadline(String description, Date dueDate) {
         super(description);
-        this.dueDate = Calendar.getInstance().getTime();
-        this.recurrence = DEFAULT_RECURRENCE;
+        setDueDate(dueDate);
     }
 
-    public Deadline(String description, PriorityEnum priority) {
-        super(description, priority);
-        this.dueDate = Calendar.getInstance().getTime();
-        this.recurrence = DEFAULT_RECURRENCE;
+    public Deadline(String description, Date dueDate, PriorityEnum priority) {
+        this(description, dueDate);
+        setPriority(priority);
+    }
+    
+    public Deadline(String description, Date dueDate, RecurrenceEnum recurrence) {
+        this(description, dueDate);
+        setRecurrence(recurrence);
     }
 
-    public Deadline(String description, Date doOn) {
-        super(description);
-        this.dueDate = doOn;
-        this.recurrence = DEFAULT_RECURRENCE;
-        reminder = new Reminder(doOn);
+    public Deadline(String description, Date dueDate, PriorityEnum priority, RecurrenceEnum recurrence) {
+        this(description, dueDate);
+        setPriority(priority);
+        setRecurrence(recurrence);
     }
 
-    public Deadline(String description, RecurrenceEnum recurrence) {
-        super(description);
-        this.dueDate = Calendar.getInstance().getTime();
-        this.recurrence = recurrence;
+    public Date getDueDate() {
+        return dueDate;
     }
 
-    public Deadline(String description, PriorityEnum priority, Date doOn) {
-        super(description, priority);
-        this.dueDate = doOn;
-        this.recurrence = DEFAULT_RECURRENCE;
-        reminder = new Reminder(doOn);
-    }
-
-    public Deadline(String description, Date doOn, RecurrenceEnum recurrence) {
-        super(description);
-        this.dueDate = doOn;
-        this.recurrence = recurrence;
-        reminder = new Reminder(doOn);
-    }
-
-    public Deadline(String description, PriorityEnum priority, Date doOn, RecurrenceEnum recurrence) {
-        super(description, priority);
-        this.dueDate = doOn;
-        this.recurrence = recurrence;
-        reminder = new Reminder(doOn);
-    }
-
-    @Override
-    public String getTaskEntryDescription() {
-        return super.getTaskEntryDescription() + " (dueDate: " + getDateAsString(this.dueDate) + ")";
+    public void setDueDate(Date dueDate) {
+        assert dueDate != null : DUE_DATE_NOT_NULL_ASSERTION;
+        this.dueDate = dueDate;
+        reminder = new Reminder(dueDate);
     }
 
     @Override
     public boolean needReminder() {
         return (reminder != null);
     }
-
-    public String getDateAsString(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-        String strDate = dateFormat.format(date);
-        return strDate;
-    }
-
+    
     public String getReminder(LocalDateTime now) {
         return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
+    }
+    
+    @Override
+    public String getTaskEntryDescription() {
+        return super.getTaskEntryDescription()
+                + String.format(DEADLINE_DATE_DESCRIPTION_REGEX, UtilityParser.getDateAsString(getDueDate()));
     }
 }

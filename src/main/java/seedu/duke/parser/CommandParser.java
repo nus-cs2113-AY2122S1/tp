@@ -11,7 +11,7 @@ import seedu.duke.task.TaskManager;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Parser {
+public class CommandParser {
 
     private static final String EXIT_COMMAND = "bye";
     private static final String HELP_COMMAND = "help";
@@ -20,9 +20,9 @@ public class Parser {
 
     private static final String FLAG_REGEX = "^--\\w+";
 
-    public static Map getCommandOptions(String commandArguments) {
+    public static HashMap getCommandOptions(String commandArguments) {
 
-        Map<String, String> flagsToArguments = new HashMap<>();
+        HashMap<String, String> flagsToArguments = new HashMap<>();
         String[] tokens = commandArguments.split("\\s+");
         String mainArgument = "";
 
@@ -44,7 +44,7 @@ public class Parser {
 
         String[] inputArguments = userInput.split("\\s+", 2);
         String command = inputArguments[0];
-        Map<String, String> commandOptions = new HashMap<>();
+        HashMap<String, String> commandOptions = new HashMap<>();
 
         if (inputArguments.length == 2) {
             commandOptions = getCommandOptions(inputArguments[1]);
@@ -65,7 +65,7 @@ public class Parser {
     }
 
     // Used to debug and check the whether the user command mapping of flag->value works
-    public static String printCommandOptions(Map<String, String> commandOptions) {
+    public static String printCommandOptions(HashMap<String, String> commandOptions) {
 
         String flagsToArguments = "";
 
