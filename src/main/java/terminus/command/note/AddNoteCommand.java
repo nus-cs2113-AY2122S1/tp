@@ -36,9 +36,9 @@ public class AddNoteCommand extends Command {
 
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
-        TerminusLogger.info("Parsing arguments to Add Note Command");
+        TerminusLogger.info("Parsing add note arguments");
         if (arguments == null || arguments.isBlank()) {
-            TerminusLogger.warning("Failed to parse arguments, arguments is empty");
+            TerminusLogger.warning("Failed to parse arguments: arguments is empty");
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         // Regex to find arguments
@@ -64,11 +64,11 @@ public class AddNoteCommand extends Command {
     private boolean isValidNoteArguments(ArrayList<String> argArray) {
         boolean isValid = true;
         if (argArray.size() != ADD_NOTE_ARGUMENTS) {
-            TerminusLogger.warning(String.format("Failed to find %d arguments, %d arguments found",
+            TerminusLogger.warning(String.format("Failed to find %d arguments: %d arguments found",
                     ADD_NOTE_ARGUMENTS, argArray.size()));
             isValid = false;
         } else if (CommonFormat.isArrayEmpty(argArray)) {
-            TerminusLogger.warning("Failed to parse arguments, some arguments found is empty");
+            TerminusLogger.warning("Failed to parse arguments: some arguments found is empty");
             isValid = false;
         }
         return isValid;
