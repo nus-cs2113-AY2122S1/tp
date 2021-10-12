@@ -55,9 +55,14 @@ public class EditStudentCommand extends Command {
         if (!Util.isStringInteger(studentIndexInput)) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
+
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
         StudentList studentList = module.getStudentList();
+        if (studentIndex < 0 || studentIndex >= studentList.getSize()) {
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
+        }
+        assert studentIndex < module.getStudentList().getSize();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null) {
             ui.printMessage(MESSAGE_INVALID_STUDENT_INDEX);
