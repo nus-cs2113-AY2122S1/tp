@@ -87,7 +87,7 @@ public class MedicineManagerTest {
     void extractStockObject_noStock_assertionError() {
         ArrayList<Medicine> medicines = new ArrayList<>();
         HashMap<String, String> parameters = new HashMap<>();
-        parameters.put("I", "1");
+        parameters.put("i", "1");
         assertThrows(AssertionError.class, () -> MedicineManager.extractStockObject(parameters, medicines));
     }
 
@@ -99,7 +99,7 @@ public class MedicineManagerTest {
         medicines.add(new Stock("PANADOL", 30, 20, DateParser.stringToDate("14-9-2021"),
                 "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
         HashMap<String, String> parameters = new HashMap<>();
-        parameters.put("I", "3");
+        parameters.put("i", "3");
         assertThrows(AssertionError.class, () -> MedicineManager.extractStockObject(parameters, medicines));
     }
 
