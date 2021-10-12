@@ -38,13 +38,4 @@ public class EditContactParser extends ContactParser {
         return contactDetails;
     }
 
-    public int getIndex(String input) throws MissingArgException {
-        String[] destructuredInputs = input.split(" ", NUMBER_OF_EDIT_ARGS);
-        if (destructuredInputs.length < NUMBER_OF_EDIT_ARGS) {
-            //if arguments are missing e.g. edit 2
-            throw new MissingArgException();
-        }
-        assert (destructuredInputs.length == NUMBER_OF_EDIT_ARGS);
-        return Integer.parseInt(destructuredInputs[EDIT_USER_INDEX]);
-    }
 }
