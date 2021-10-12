@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class LessonListTest {
     @Test
@@ -24,18 +23,14 @@ public class LessonListTest {
 
     @Test
     public void testDeleteLesson() {
-        try {
-            LessonList lessonList = new LessonList();
-            lessonList.addLesson(new Lesson("CS2113T Lecture", "MON", "2pm", "4pm"));
-            lessonList.addLesson(new Lesson("CS2113T Tutorial", "TUE", "12am", "1pm"));
-            assertEquals(2, lessonList.getSize());
-            lessonList.deleteLesson(1);
-            assertEquals(1, lessonList.getSize());
-            lessonList.deleteLesson(0);
-            assertEquals(0, lessonList.getSize());
-        } catch (DukeException e) {
-            fail();
-        }
+        LessonList lessonList = new LessonList();
+        lessonList.addLesson(new Lesson("CS2113T Lecture", "MON", "2pm", "4pm"));
+        lessonList.addLesson(new Lesson("CS2113T Tutorial", "TUE", "12am", "1pm"));
+        assertEquals(2, lessonList.getSize());
+        lessonList.deleteLesson(1);
+        assertEquals(1, lessonList.getSize());
+        lessonList.deleteLesson(0);
+        assertEquals(0, lessonList.getSize());
     }
 
     @Test

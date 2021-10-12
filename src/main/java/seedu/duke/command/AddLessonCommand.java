@@ -9,8 +9,8 @@ import seedu.duke.task.TaskList;
 import seedu.duke.ui.Ui;
 
 public class AddLessonCommand extends AddCommand {
-    private String startTime;
-    private String endTime;
+    private final String startTime;
+    private final String endTime;
 
     public AddLessonCommand(String title, String dayOfTheWeek, String startTime, String endTime) {
         this.title = title;
@@ -23,7 +23,7 @@ public class AddLessonCommand extends AddCommand {
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList) throws IOException {
         Lesson newLesson = new Lesson(title, dayOfTheWeek, startTime, endTime);
         lessonList.addLesson(newLesson);
-        ui.printLessonAdded(newLesson, lessonList.getSize());
         storage.saveData(taskList, lessonList);
+        ui.printLessonAdded(newLesson, lessonList.getSize());
     }
 }

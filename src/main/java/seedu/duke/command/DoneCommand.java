@@ -11,7 +11,7 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 
 public class DoneCommand extends Command {
-    private int taskIndex;
+    private final int taskIndex;
 
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
@@ -20,12 +20,20 @@ public class DoneCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
             throws DukeException, IOException {
+        boolean isLessThanZero = taskIndex < 0;
+        boolean isMoreThanMax = taskIndex >= taskList.getSize();
+        boolean isTaskIndexValid = !isLessThanZero && !isMoreThanMax;
+        if (!isTaskIndexValid) {
+            throw new DukeException(Message.ERROR_INVALID_INDEX);
+        }
+
         Task task = taskList.getTask(taskIndex);
         if (task.isDone()) {
-            throw new DukeException(Message.INFO_TASK_COMPLETED);
+            throw new DukeException(Message.ERROR_TASK_IS_ALREADY_DONE);
         }
+
         taskList.markTaskAsDone(taskIndex);
-        ui.printTaskMarkedAsDone(taskList, task);
         storage.saveData(taskList, lessonList);
+        ui.printTaskMarkedAsDone(taskList, task);
     }
 }

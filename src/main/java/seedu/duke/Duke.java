@@ -28,9 +28,9 @@ public class Duke {
         try {
             taskList = new TaskList(TaskList.deserialize(storage.loadData()));
             lessonList = new LessonList(LessonList.deserialize(storage.loadData()));
-            ui.printMessage(Message.DATA_RETRIEVED_SUCCESSFULLY);
+            ui.printMessage(Message.SUCCESS_RETRIEVING_DATA);
         } catch (DukeException | IOException e) {
-            ui.printMessage(e.toString());
+            ui.printMessage(e.getMessage());
             storage.createNewData(ui);
             taskList = new TaskList();
             lessonList = new LessonList();
@@ -50,7 +50,7 @@ public class Duke {
                 command.execute(ui, storage, taskList, lessonList);
                 isExit = command.isExit();
             } catch (DukeException | IOException e) {
-                ui.printMessage(e.toString());
+                ui.printMessage(e.getMessage());
             }
         }
     }

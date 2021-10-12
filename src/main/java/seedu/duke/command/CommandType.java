@@ -15,7 +15,7 @@ public enum CommandType {
     /**
      * Determines the correct command type from the input parameter.
      *
-     * @param param the first parameter of the user response
+     * @param param the input parameter
      * @return the command type of the input parameter
      */
     public static CommandType of(String param) {

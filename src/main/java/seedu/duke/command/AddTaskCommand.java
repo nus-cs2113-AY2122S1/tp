@@ -9,9 +9,10 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 
 public class AddTaskCommand extends AddCommand {
-    private String information = "";
+    private final String information;
 
     public AddTaskCommand(String title, String dayOfTheWeek, String information) {
+        assert information != null : Ui.PADDING + "Information should not be null.";
         this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;
         this.information = information;
@@ -21,7 +22,7 @@ public class AddTaskCommand extends AddCommand {
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList) throws IOException {
         Task newTask = new Task(title, dayOfTheWeek, information);
         taskList.addTask(newTask);
-        ui.printTaskAdded(newTask, taskList.getSize());
         storage.saveData(taskList, lessonList);
+        ui.printTaskAdded(newTask, taskList.getSize());
     }
 }

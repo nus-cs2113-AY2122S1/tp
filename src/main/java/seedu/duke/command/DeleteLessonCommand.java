@@ -5,6 +5,7 @@ import seedu.duke.lesson.Lesson;
 import seedu.duke.lesson.LessonList;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
+import seedu.duke.ui.Message;
 import seedu.duke.ui.Ui;
 
 import java.io.IOException;
@@ -24,8 +25,15 @@ public class DeleteLessonCommand extends DeleteCommand {
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
             throws DukeException, IOException {
+        boolean isLessThanZero = lessonIndex < 0;
+        boolean isMoreThanMax = lessonIndex >= lessonList.getSize();
+        boolean islessonIndexValid = !isLessThanZero && !isMoreThanMax;
+        if (!islessonIndexValid) {
+            throw new DukeException(Message.ERROR_INVALID_INDEX);
+        }
+
         if (isDeleteAll) {
-            lessonList.clearLessonList();
+            lessonList.deleteAllLessons();
             ui.printMessage("All your lessons have been successfully removed.");
         } else {
             Lesson deletedLesson = lessonList.getLesson(lessonIndex);

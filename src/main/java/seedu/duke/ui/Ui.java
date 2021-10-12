@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 import seedu.duke.lesson.Lesson;
@@ -158,9 +159,9 @@ public class Ui {
 
         System.out.print(LINE);
         if (filteredTaskList.isEmpty()) {
-            System.out.println(PADDING + "There is no matching task in your list.");
+            System.out.println(PADDING + "There is no task on " + period.toUpperCase() + ".");
         } else {
-            System.out.println(PADDING + "Here are the matching tasks in your list:");
+            System.out.println(PADDING + "Here are the tasks on " + period.toUpperCase() + ":");
             System.out.print(filteredTaskList);
         }
         System.out.println(LINE);
@@ -242,9 +243,9 @@ public class Ui {
 
         System.out.print(LINE);
         if (filteredLessonList.isEmpty()) {
-            System.out.println(PADDING + "There is no matching lesson in your list.");
+            System.out.println(PADDING + "There is no lesson on " + period.toUpperCase() + ".");
         } else {
-            System.out.println(PADDING + "Here are the matching lessons in your list:");
+            System.out.println(PADDING + "Here are the lessons on " + period.toUpperCase() + ":");
             System.out.print(filteredLessonList);
         }
         System.out.println(LINE);
@@ -261,7 +262,7 @@ public class Ui {
     public void printAllList(TaskList taskList, LessonList lessonList) {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the tasks in your list:");
-        System.out.print(taskList);
+        System.out.println(taskList);
         System.out.println(PADDING + "Here are the lessons in your list:");
         System.out.print(lessonList);
         System.out.println(LINE);
@@ -287,6 +288,7 @@ public class Ui {
             System.out.println(PADDING + "Here are the matching tasks in your list:");
             System.out.print(filteredTaskList);
         }
+        System.out.println();
 
         LessonList filteredLessonList = lessonList.filterLessonsByKeyword(keyword);
         if (filteredLessonList.isEmpty()) {
@@ -312,17 +314,17 @@ public class Ui {
 
         TaskList filteredTaskList = taskList.filterTasksByPeriod(period);
         if (filteredTaskList.isEmpty()) {
-            System.out.println(PADDING + "There is no matching task in your list.");
+            System.out.println(PADDING + "There is no task on " + period.toUpperCase() + ".");
         } else {
-            System.out.println(PADDING + "Here are the matching tasks in your list:");
+            System.out.println(PADDING + "Here are the tasks on " + period.toUpperCase() + ":");
             System.out.print(filteredTaskList);
         }
 
         LessonList filteredLessonList = lessonList.filterLessonsByPeriod(period);
         if (filteredLessonList.isEmpty()) {
-            System.out.println(PADDING + "There is no matching lesson in your list.");
+            System.out.println(PADDING + "There is no lesson on " + period.toUpperCase() + ".");
         } else {
-            System.out.println(PADDING + "Here are the matching lessons in your list:");
+            System.out.println(PADDING + "Here are the lessons on " + period.toUpperCase() + ":");
             System.out.print(filteredLessonList);
         }
 
