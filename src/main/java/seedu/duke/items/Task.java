@@ -11,8 +11,6 @@ public class Task extends Item {
         super("task", title, description, deadline);
     }
 
-
-
     @Override
     public String toString() {
         return String.format("[T][%s] %s (by: %s)", this.getStatusIcon(), this.getTitle(), this.getStringDateTime());
