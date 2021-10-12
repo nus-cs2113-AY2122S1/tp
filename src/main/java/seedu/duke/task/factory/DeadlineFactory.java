@@ -1,14 +1,18 @@
 package seedu.duke.task.factory;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import seedu.duke.exception.GetTaskFailedException;
-import seedu.duke.exception.ParseTaskFailedException;
+import seedu.duke.exception.InvalidPriorityException;
+import seedu.duke.exception.InvalidRecurrenceException;
 import seedu.duke.log.Log;
 import seedu.duke.command.flags.DeadlineFlag;
 import seedu.duke.exception.RequiredArgmentNotProvidedException;
 import seedu.duke.parser.TaskParser;
+import seedu.duke.task.PriorityEnum;
+import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.TypeEnum;
-import seedu.duke.task.factory.arguments.DeadlineArguments;
 import seedu.duke.task.type.Deadline;
 
 public class DeadlineFactory {
@@ -19,17 +23,24 @@ public class DeadlineFactory {
             hasRequiredArguments(flags);
 
             String description = flags.get(DeadlineFlag.DESCRIPTION);
-            String dueDate = flags.get(DeadlineFlag.DUE_DATE);
+            String due = flags.get(DeadlineFlag.DUE_DATE);
             String priority = flags.get(DeadlineFlag.PRIORITY);
             String recurrence = flags.get(DeadlineFlag.RECURRENCE);
 
-            DeadlineArguments arguments = TaskParser.parseDeadlineArguments(description, dueDate, priority, recurrence);
-            return getConstructor(arguments);
+            Date dueDate = TaskParser.getDate(due);
+            PriorityEnum priorityEnum = TaskParser.getPriorityEnum(priority);
+            RecurrenceEnum recurrenceEnum = TaskParser.getRecurrenceEnum(recurrence);
+
+            return getConstructor(description, dueDate, priorityEnum, recurrenceEnum);
 
         } catch (RequiredArgmentNotProvidedException ranpe) {
             Log.severe(ranpe.getMessage());
-        } catch (ParseTaskFailedException ptfe) {
-            Log.warning(ptfe.getMessage());
+        } catch (ParseException pe) {
+            Log.severe(pe.getMessage());
+        } catch (InvalidPriorityException ipe) {
+            Log.severe(ipe.getMessage());
+        } catch (InvalidRecurrenceException ire) {
+            Log.severe(ire.getMessage());
         }
         throw new GetTaskFailedException(taskType.toString());
     }
@@ -43,28 +54,29 @@ public class DeadlineFactory {
         }
     }
 
-    private static Deadline getConstructor(DeadlineArguments arguments) {
-        if (arguments.getPriority() == null) {
-            return getDeadlineWithDefaultPriority(arguments);
+    private static Deadline getConstructor(String description,
+            Date due, PriorityEnum priority, RecurrenceEnum recurrence) {
+        if (priority == null) {
+            return getDeadlineWithDefaultPriority(description, due, recurrence);
         } else {
-            return getDeadlineWithPriority(arguments);
+            return getDeadlineWithPriority(description, due, priority, recurrence);
         }
     }
 
-    private static Deadline getDeadlineWithDefaultPriority(DeadlineArguments arguments) {
-        if (arguments.getRecurrence() == null) {
-            return new Deadline(arguments.getDescription(), arguments.getDueDate());
+    private static Deadline getDeadlineWithDefaultPriority(String description, Date due, RecurrenceEnum recurrence) {
+        if (recurrence == null) {
+            return new Deadline(description, due);
         } else {
-            return new Deadline(arguments.getDescription(), arguments.getDueDate(), arguments.getRecurrence());
+            return new Deadline(description, due, recurrence);
         }
     }
 
-    private static Deadline getDeadlineWithPriority(DeadlineArguments arguments) {
-        if (arguments.getRecurrence() == null) {
-            return new Deadline(arguments.getDescription(), arguments.getDueDate(), arguments.getPriority());
+    private static Deadline getDeadlineWithPriority(String description,
+            Date due, PriorityEnum priority, RecurrenceEnum recurrence) {
+        if (recurrence == null) {
+            return new Deadline(description, due, priority);
         } else {
-            return new Deadline(arguments.getDescription(), arguments.getDueDate(),
-                    arguments.getPriority(), arguments.getRecurrence());
+            return new Deadline(description, due, priority, recurrence);
         }
     }
 }

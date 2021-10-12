@@ -1,14 +1,19 @@
 package seedu.duke.task.factory;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import seedu.duke.exception.GetTaskFailedException;
-import seedu.duke.exception.ParseTaskFailedException;
+import seedu.duke.exception.InvalidPriorityException;
+import seedu.duke.exception.InvalidRecurrenceException;
+import seedu.duke.exception.StartDateAfterEndDateException;
 import seedu.duke.log.Log;
 import seedu.duke.command.flags.EventFlag;
 import seedu.duke.exception.RequiredArgmentNotProvidedException;
 import seedu.duke.parser.TaskParser;
+import seedu.duke.task.PriorityEnum;
+import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.TypeEnum;
-import seedu.duke.task.factory.arguments.EventArguments;
 import seedu.duke.task.type.Event;
 
 public class EventFactory {
@@ -19,25 +24,37 @@ public class EventFactory {
             hasRequiredArguments(flags);
 
             String description = flags.get(EventFlag.DESCRIPTION);
-            String startDate = flags.get(EventFlag.START_DATE);
-            String endDate = flags.get(EventFlag.END_DATE);
+            String start = flags.get(EventFlag.START_DATE);
+            String end = flags.get(EventFlag.END_DATE);
             String priority = flags.get(EventFlag.PRIORITY);
             String recurrence = flags.get(EventFlag.RECURRENCE);
 
-            EventArguments arguments = TaskParser.parseEventArguments(description,
-                startDate, endDate, priority, recurrence);
-            return getConstructor(arguments);
+            Date startDate = TaskParser.getDate(start);
+            Date endDate = TaskParser.getDate(end);
+            PriorityEnum priorityEnum = TaskParser.getPriorityEnum(priority);
+            RecurrenceEnum recurrenceEnum = TaskParser.getRecurrenceEnum(recurrence);
 
+            if (startDate.after(endDate)) {
+                throw new StartDateAfterEndDateException();
+            }
+
+            return getConstructor(description, startDate, endDate, priorityEnum, recurrenceEnum);
         } catch (RequiredArgmentNotProvidedException ranpe) {
             Log.severe(ranpe.getMessage());
-        } catch (ParseTaskFailedException ptfe) {
-            Log.warning(ptfe.getMessage());
+        } catch (ParseException pe) {
+            Log.severe(pe.getMessage());
+        } catch (InvalidPriorityException ipe) {
+            Log.severe(ipe.getMessage());
+        } catch (InvalidRecurrenceException ire) {
+            Log.severe(ire.getMessage());
+        } catch (StartDateAfterEndDateException sdaede) {
+            Log.severe(sdaede.getMessage());
         }
         throw new GetTaskFailedException(taskType.toString());
     }
 
     private static void hasRequiredArguments(HashMap<String, String> flags)
-            throws RequiredArgmentNotProvidedException {
+        throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : EventFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);
             if (flag == null) {
@@ -46,31 +63,31 @@ public class EventFactory {
         }
     }
 
-    private static Event getConstructor(EventArguments arguments) {
-        if (arguments.getPriority() == null) {
-            return getEventWithDefaultPriority(arguments);
+    private static Event getConstructor(String description,
+            Date start, Date end, PriorityEnum priority, RecurrenceEnum recurrence) {
+        if (priority == null) {
+            return getEventWithDefaultPriority(description, start, end, recurrence);
         } else {
-            return getEventWithPriority(arguments);
+            return getEventWithPriority(description, start, end, priority, recurrence);
         }
     }
 
-    private static Event getEventWithDefaultPriority(EventArguments arguments) {
-        if (arguments.getRecurrence() == null) {
-            return new Event(arguments.getDescription(), arguments.getStartDate(), arguments.getEndDate());
+    private static Event getEventWithDefaultPriority(String description,
+            Date start, Date end, RecurrenceEnum recurrence) {
+        if (recurrence == null) {
+            return new Event(description, start, end);
         } else {
-            return new Event(arguments.getDescription(),
-                    arguments.getStartDate(), arguments.getEndDate(), arguments.getRecurrence());
+            return new Event(description, start, end, recurrence);
         }
     }
 
-    private static Event getEventWithPriority(EventArguments arguments) {
-        if (arguments.getRecurrence() == null) {
-            return new Event(arguments.getDescription(),
-                    arguments.getStartDate(), arguments.getEndDate(), arguments.getPriority());
+    private static Event getEventWithPriority(String description,
+            Date start, Date end, PriorityEnum priority, RecurrenceEnum recurrence) {
+        if (recurrence == null) {
+            return new Event(description,
+                start, end, priority);
         } else {
-            return new Event(arguments.getDescription(),
-                    arguments.getStartDate(), arguments.getEndDate(),
-                    arguments.getPriority(), arguments.getRecurrence());
+            return new Event(description, start, end, priority, recurrence);
         }
     }
 }
