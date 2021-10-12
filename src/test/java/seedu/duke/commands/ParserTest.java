@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.data.item.Catalogue;
 import seedu.duke.ui.TextUI;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class ParserTest {
     @Test
