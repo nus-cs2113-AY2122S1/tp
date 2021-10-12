@@ -5,8 +5,6 @@ import seedu.duke.modules.ModuleMapping;
 
 import java.util.ArrayList;
 
-import seedu.duke.modules.ModuleMapping;
-
 public class University {
     protected String name;
     protected ArrayList<ModuleMapping> list;

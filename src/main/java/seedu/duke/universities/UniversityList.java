@@ -15,7 +15,9 @@ public class UniversityList {
     }
 
     public void addUniversity(University addedUniversity) {
+        assert addedUniversity != null;
         list.add(addedUniversity);
+        assert !list.isEmpty();
     }
 
     public void removeUniversity(String universityName) {
@@ -28,6 +30,7 @@ public class UniversityList {
     }
 
     public void removeUniversity(int index) {
+        assert index <= list.size();
         list.remove(index);
     }
 
@@ -48,6 +51,7 @@ public class UniversityList {
     }
 
     public University get(int index) {
+        assert index <= list.size();
         return list.get(index);
     }
 }
