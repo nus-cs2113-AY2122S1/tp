@@ -16,11 +16,12 @@ public class Duke {
     private MainParser parser;
     private ContactList contactList;
     private String personalContactFilePath;
+    private
 
-    public Duke(String contactFilePath) {
+    public Duke(String contactFilePath, String personalContactFilePath) {
         this.textUi = new TextUi();
         this.contactFilePath = contactFilePath;
-        this.storage = new Storage(contactFilePath);
+        this.storage = new Storage(contactFilePath, personalContactFilePath);
         this.parser = new MainParser();
         try {
             this.contactList = storage.loadExistingContacts();
@@ -52,6 +53,6 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        new Duke("data/contacts.txt").runConTech();
+        new Duke("data/contacts.txt", "data/me.txt").runConTech();
     }
 }

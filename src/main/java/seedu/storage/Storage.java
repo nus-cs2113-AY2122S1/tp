@@ -1,5 +1,6 @@
 package seedu.storage;
 
+import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.exception.FileErrorException;
 import seedu.ui.TextUi;
@@ -23,11 +24,11 @@ public class Storage {
 
     private boolean hasExistingPersonalContactFile() throws FileErrorException {
         try {
-            if (!contactFile.exists()) {
-                contactFile.getParentFile().mkdirs();
+            if (!personalContactFile.exists()) {
+                personalContactFile.getParentFile().mkdirs();
             }
-            if (contactFile.createNewFile()) {
-                TextUi.createNewContactFileMessage(contactFilePath);
+            if (personalContactFile.createNewFile()) {
+                TextUi.createNewContactFileMessage(personalContactFilePath);
                 return false;
             }
         } catch (IOException e) {
@@ -56,5 +57,12 @@ public class Storage {
             return new ContactList();
         }
         return ContactsDecoder.readContacts(contactFile);
+    }
+
+    public Contact loadExistingPersonalContact() throws FileErrorException {
+        if (!hasExistingPersonalContactFile()) {
+            return new Contact;
+        }
+
     }
 }
