@@ -16,7 +16,7 @@ public class ScheduleCommand extends WorkspaceCommand {
     /**
      * Returns the keyword for schedule-related commands.
      *
-     * @return The string containing the keyword for schedule-related commands
+     * @return The string containing the keyword for schedule-related commands.
      */
     @Override
     public String getFormat() {
@@ -26,7 +26,7 @@ public class ScheduleCommand extends WorkspaceCommand {
     /**
      * Returns the description for the command.
      *
-     * @return The string containing the description for this command
+     * @return The string containing the description for this command.
      */
     @Override
     public String getHelpMessage() {

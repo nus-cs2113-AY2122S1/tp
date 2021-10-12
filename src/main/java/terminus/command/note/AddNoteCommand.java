@@ -10,20 +10,18 @@ import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
+/**
+ * AddNoteCommand class which will manage the adding of new Notes from user command.
+ */
 public class AddNoteCommand extends Command {
 
     private String name;
     private String data;
 
     private static final int ADD_NOTE_ARGUMENTS = 2;
-
-    public AddNoteCommand() {
-
-    }
 
     @Override
     public String getFormat() {
@@ -35,6 +33,13 @@ public class AddNoteCommand extends Command {
         return Messages.MESSAGE_COMMAND_ADD;
     }
 
+    /**
+     * Parses the arguments to the AddNoteCommand object.
+     * The arguments are attributes for a new Note object.
+     *
+     * @param arguments The string arguments to be parsed in to the respective fields.
+     * @throws InvalidArgumentException when arguments are empty or missing.
+     */
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
         TerminusLogger.info("Parsing add note arguments");
@@ -52,9 +57,17 @@ public class AddNoteCommand extends Command {
         TerminusLogger.info(String.format("Parsed argument (name = %s, data = %s) to Add Note Command", name, data));
     }
 
-    @Override
-    public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
+    /**
+     * Executes the add Note command.
+     * Prints the relevant response to the Ui and a new Note will be added into the arraylist of Notes.
+     *
+     * @param ui The Ui object to send messages to the users.
+     * @param module The NusModule contain the ContentManager of all notes and schedules.
+     * @return CommandResult to indicate the success and additional information about the execution.
+     */
+    public CommandResult execute(Ui ui, NusModule module) {
         TerminusLogger.info("Executing Add Note Command");
+
         ContentManager contentManager = module.getContentManager(Note.class);
         assert contentManager != null;
 
@@ -64,13 +77,19 @@ public class AddNoteCommand extends Command {
         return new CommandResult(true, false);
     }
 
+    /**
+     * Checks if arguments are non-empty and valid.
+     *
+     * @param argArray The command arguments in an array list.
+     * @return True if the appropriate number of arguments are present, false otherwise.
+     */
     private boolean isValidNoteArguments(ArrayList<String> argArray) {
         boolean isValid = true;
         if (argArray.size() != ADD_NOTE_ARGUMENTS) {
             TerminusLogger.warning(String.format("Failed to find %d arguments: %d arguments found",
                     ADD_NOTE_ARGUMENTS, argArray.size()));
             isValid = false;
-        } else if (CommonUtils.isArrayEmpty(argArray)) {
+        } else if (CommonUtils.hasEmptyString(argArray)) {
             TerminusLogger.warning("Failed to parse arguments: some arguments found is empty");
             isValid = false;
         }

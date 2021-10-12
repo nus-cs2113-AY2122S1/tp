@@ -101,7 +101,7 @@ public class CommonFormatTest {
     void isArrayEmpty_success() {
         resultExpected.add("test1");
         resultExpected.add("test2");
-        assertFalse(CommonUtils.isArrayEmpty(resultExpected));
+        assertFalse(CommonUtils.hasEmptyString(resultExpected));
     }
 
     @Test
@@ -109,11 +109,11 @@ public class CommonFormatTest {
         resultExpected.add("test1");
         resultExpected.add("");
         resultExpected.add("test2");
-        assertTrue(CommonUtils.isArrayEmpty(resultExpected));
+        assertTrue(CommonUtils.hasEmptyString(resultExpected));
 
         reset();
         System.out.println(resultExpected);
-        assertTrue(CommonUtils.isArrayEmpty(resultExpected));
+        assertTrue(CommonUtils.hasEmptyString(resultExpected));
     }
 
     @Test
@@ -121,12 +121,12 @@ public class CommonFormatTest {
         resultExpected.add("test1");
         resultExpected.add(null);
         resultExpected.add("test2");
-        assertTrue(CommonUtils.isArrayEmpty(resultExpected));
+        assertTrue(CommonUtils.hasEmptyString(resultExpected));
     }
 
     @Test
     void isArrayEmpty_nullArraylist_exceptionThrown() {
-        assertThrows(AssertionError.class, () -> CommonUtils.isArrayEmpty(null));
+        assertThrows(AssertionError.class, () -> CommonUtils.hasEmptyString(null));
     }
 
     @Test

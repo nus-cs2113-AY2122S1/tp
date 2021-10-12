@@ -1,6 +1,9 @@
 package terminus.common;
 
 
+/**
+ * CommonFormat class that contains formats that are used across different packages.
+ */
 public class CommonFormat {
 
     public static final String COMMAND_NOTE = "note";
@@ -19,4 +22,5 @@ public class CommonFormat {
     public static final String COMMAND_ADD_SCHEDULE_FORMAT = COMMAND_ADD + " \"<link description>\" "
             + "\"<day>\" \"<start_time " + LOCAL_TIME_FORMAT + ">\" \"<zoom_link>\"";
     public static final String COMMAND_ADD_NOTE_FORMAT = COMMAND_ADD + " \"<note name>\" \"<note content>\"";
+
 }
