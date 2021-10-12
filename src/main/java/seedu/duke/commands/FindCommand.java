@@ -2,9 +2,11 @@ package seedu.duke.commands;
 
 import seedu.duke.Parser;
 import seedu.duke.Ui;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Item;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class FindCommand extends Command {
@@ -16,7 +18,11 @@ public class FindCommand extends Command {
     public static ArrayList<Item> filteredItemList = new ArrayList<>();
 
     public FindCommand(String[] command) {
-        keyword = command[1];
+        try {
+            keyword = retrieveKeyword(command);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public CommandResult execute() {
@@ -31,9 +37,28 @@ public class FindCommand extends Command {
         return new CommandResult(filteredItemList.size() + " items found.");
     }
 
+    private static String retrieveKeyword(String[] command) throws DukeException {
+        String keyword = null;
+        try {
+            if (command.length == 1) {
+                throw new DukeException("Please specify what you want to find.");
+            }
+            String commandAsString = convertToString(command);
+            int startOfKeyword = commandAsString.trim().indexOf(" ") + 1;
+            keyword = commandAsString.trim().substring(startOfKeyword);
+        } catch (StringIndexOutOfBoundsException e) {
+            System.out.println("Please specify what you want to find.");
+        }
+        return keyword;
+    }
+
+    private static String convertToString(String[] command) {
+        return Arrays.toString(command).trim();
+    }
+
     public static ArrayList<Item> filterItemsByString(String keyword) {
         filteredItemList = (ArrayList<Item>) combinedItemList.stream()
-                .filter((item) -> item.getDescription().toLowerCase().contains(keyword))
+                .filter((item) -> item.getTitle().toLowerCase().contains(keyword))
                 .collect(Collectors.toList());
         return filteredItemList;
     }
