@@ -15,6 +15,11 @@ import seedu.commands.ExitCommand;
 
 import seedu.entry.Expense;
 import seedu.entry.Income;
+import seedu.exceptions.InvalidExpenseException;
+import seedu.exceptions.InvalidExpenseIndexException;
+import seedu.exceptions.InvalidIncomeException;
+import seedu.exceptions.InvalidIncomeIndexException;
+import seedu.utility.Messages;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -80,15 +85,15 @@ public class Parser {
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String arguments = matcher.group("arguments"); 
 
         switch (commandWord) {
         case HELP_COMMAND_KEYWORD:
-            return new HelpCommand();
+            return prepareHelp(arguments);
         case ADD_EXPENSE_KEYWORD:
             return prepareAddExpense(arguments);
         case ADD_INCOME_KEYWORD:
@@ -108,8 +113,15 @@ public class Parser {
         case EXIT_KEYWORD:
             return prepareExit(arguments);
         default:
-            return new InvalidCommand();
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
+    }
+    
+    private Command prepareHelp(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new HelpCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     /**
@@ -118,21 +130,20 @@ public class Parser {
      */
     private Command prepareAddExpense(String arguments) {
         final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
-
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
+        
+        String userGivenAmount = matcher.group("amount").trim();
+        double expenseAmount;
+        try {
+            expenseAmount = parseExpense(userGivenAmount);
+        } catch (InvalidExpenseException e) {
+            return new InvalidCommand(e.getMessage());
+        }
+        assert expenseAmount > 0;
         
         String expenseDescription = matcher.group("description").trim();
-        double expenseAmount;
-        
-        try {
-            expenseAmount = Double.parseDouble(matcher.group("amount"));
-        } catch (NumberFormatException e) {
-            return new InvalidCommand();
-        }
-        
-        //need to create constructor for Expense
         Expense expense = new Expense(expenseDescription, expenseAmount);
         return new AddExpenseCommand(expense);
     }
@@ -143,21 +154,20 @@ public class Parser {
      */
     private Command prepareAddIncome(String arguments) {
         final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments.trim());
-
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
 
-        String incomeDescription = matcher.group("description").trim();
+        String userGivenAmount = matcher.group("amount").trim();
         double incomeAmount;
-
         try {
-            incomeAmount = Double.parseDouble(matcher.group("amount"));
-        } catch (NumberFormatException e) {
-            return new InvalidCommand();
+            incomeAmount = parseIncome(userGivenAmount);
+        } catch (InvalidIncomeException e) {
+            return new InvalidCommand(e.getMessage());
         }
+        assert incomeAmount > 0;
         
-        //need to add the constructor for Income
+        String incomeDescription = matcher.group("description").trim();
         Income income = new Income(incomeDescription, incomeAmount);
         return new AddIncomeCommand(income);
     }
@@ -168,17 +178,20 @@ public class Parser {
      */
     private Command prepareDeleteExpense(String arguments) {
         final Matcher matcher = DELETE_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
-
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
         
+        String userGivenIndex = matcher.group("index").trim();
+        int deleteExpenseIndex;
         try {
-            int deleteIndex = Integer.parseInt(matcher.group("index"));
-            return new DeleteExpenseCommand(deleteIndex);
-        } catch (NumberFormatException e) {
-            return new InvalidCommand();
+            deleteExpenseIndex = parseExpenseIndex(userGivenIndex);
+        } catch (InvalidExpenseIndexException e) {
+            return new InvalidCommand(e.getMessage());
         }
+        assert deleteExpenseIndex >= 1;
+        
+        return new DeleteExpenseCommand(deleteExpenseIndex);
     }
 
     /**
@@ -187,51 +200,106 @@ public class Parser {
      */
     private Command prepareDeleteIncome(String arguments) {
         final Matcher matcher = DELETE_INCOME_ARGUMENT_FORMAT.matcher(arguments.trim());
-
         if (!matcher.matches()) {
-            return new InvalidCommand();
+            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
         }
 
+        String userGivenIndex = matcher.group("index").trim();
+        int deleteIncomeIndex;
         try {
-            int deleteIndex = Integer.parseInt(matcher.group("index"));
-            return new DeleteIncomeCommand(deleteIndex);
-        } catch (NumberFormatException e) {
-            return new InvalidCommand();
+            deleteIncomeIndex = parseIncomeIndex(userGivenIndex);
+        } catch (InvalidIncomeIndexException e) {
+            return new InvalidCommand(e.getMessage());
         }
+        assert deleteIncomeIndex >= 1;
+        
+        return new DeleteIncomeCommand(deleteIncomeIndex);
     }
 
     private Command prepareListExpense(String arguments) {
         if (arguments.trim().isBlank()) {
             return new ListExpenseCommand();
         } 
-        return new InvalidCommand();
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
     }
 
     private Command prepareListIncome(String arguments) {
         if (arguments.trim().isBlank()) {
             return new ListIncomeCommand();
         }
-        return new InvalidCommand();
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
     }
     
     private Command prepareTotalExpense(String arguments) {
         if (arguments.trim().isBlank()) {
             return new TotalExpenseCommand();
         }
-        return new InvalidCommand();
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
     }
 
     private Command prepareTotalIncome(String arguments) {
         if (arguments.trim().isBlank()) {
             return new TotalIncomeCommand();
         }
-        return new InvalidCommand();
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
     }
     
     private Command prepareExit(String arguments) {
         if (arguments.trim().isBlank()) {
             return new ExitCommand();
         }
-        return new InvalidCommand();
+        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+    }
+    
+    private double parseExpense(String userGivenAmount) throws InvalidExpenseException {
+        double expenseAmount;
+        try {
+            expenseAmount = Double.parseDouble(userGivenAmount);
+        } catch (NumberFormatException e) {
+            throw new InvalidExpenseException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        }
+        if (expenseAmount <= 0) {
+            throw new InvalidExpenseException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        }
+        return expenseAmount;
+    }
+
+    private double parseIncome(String userGivenAmount) throws InvalidIncomeException {
+        double incomeAmount;
+        try {
+            incomeAmount = Double.parseDouble(userGivenAmount);
+        } catch (NumberFormatException e) {
+            throw new InvalidIncomeException(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        }
+        if (incomeAmount <= 0) {
+            throw new InvalidIncomeException(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        }
+        return incomeAmount;
+    }
+
+    private int parseExpenseIndex(String userGivenIndex) throws InvalidExpenseIndexException {
+        int deleteExpenseIndex;
+        try {
+            deleteExpenseIndex = Integer.parseInt(userGivenIndex);
+        } catch (NumberFormatException e) {
+            throw new InvalidExpenseIndexException(Messages.N0N_NUMERIC_INDEX_MESSAGE);
+        }
+        if (deleteExpenseIndex <= 0) {
+            throw new InvalidExpenseIndexException(Messages.NON_POSITIVE_INDEX_MESSAGE);
+        }
+        return deleteExpenseIndex;
+    }
+
+    private int parseIncomeIndex(String userGivenIndex) throws InvalidIncomeIndexException {
+        int deleteIncomeIndex;
+        try {
+            deleteIncomeIndex = Integer.parseInt(userGivenIndex);
+        } catch (NumberFormatException e) {
+            throw new InvalidIncomeIndexException(Messages.N0N_NUMERIC_INDEX_MESSAGE);
+        }
+        if (deleteIncomeIndex <= 0) {
+            throw new InvalidIncomeIndexException(Messages.NON_POSITIVE_INDEX_MESSAGE);
+        }
+        return deleteIncomeIndex;
     }
 }

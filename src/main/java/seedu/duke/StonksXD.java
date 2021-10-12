@@ -1,6 +1,8 @@
 package seedu.duke;
 
 import seedu.commands.Command;
+import seedu.commands.ExitCommand;
+import seedu.commands.InvalidCommand;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
@@ -22,8 +24,9 @@ public class StonksXD {
         while (exitFlag) {
             String fullCommand = ui.readCommand();
             Command command = parser.parseCommand(fullCommand);
-            command.execute(finances,ui);
+            command.execute(finances, ui);
             if (command.isExit()) {
+                assert command.getClass() == ExitCommand.class;
                 exitFlag = false;
             }
         }

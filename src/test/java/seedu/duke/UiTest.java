@@ -32,7 +32,14 @@ public class UiTest {
 
     @Test
     public void listExpense_validFinancialTracker_filteredExpenses() {
-        final String expectedOutput = "1: [E] Bought cookies- $5.0" + newLine + "2: [E] Bought cakes- $7.0";
+        final String expectedOutput = "---------------------------------------------------------------------------" 
+                + "-------------------------- " + newLine + "Below is a list of all of your recent spending!" + newLine 
+                + "---------------------------------------------------------------------------------------------------" 
+                + "-- " + newLine + "1: [E] Bought cookies - $5.0" + newLine + "2: [E] Bought cakes - $7.0" + newLine
+                + "---------------------------------------------------------------------------------------------------" 
+                + "--";
+        
+        
         ArrayList<Entry> entries = new ArrayList<>();
         entries.add(new Expense("Bought cookies", 5.0));
         entries.add(new Income("Paycheck August", 20.0));
@@ -45,7 +52,15 @@ public class UiTest {
 
     @Test
     public void listIncome_validFinancialTracker_filteredIncomes() {
-        final String expectedOutput = "1: [I] Paycheck August- $20.0" + newLine + "2: [I] Paycheck July- $25.0";
+        final String expectedOutput = "---------------------------------------------------------------------------" 
+                + "-------------------------- " + newLine + "Below is a list of all of your recent earnings!" + newLine
+                + "---------------------------------------------------------------------------------------------------" 
+                + "-- " + newLine + "1: [I] Paycheck August - $20.0" + newLine
+                + "2: [I] Paycheck July - $25.0" + newLine
+                + "---------------------------------------------------------------------------------------------------" 
+                + "--";
+        
+        
         ArrayList<Entry> entries = new ArrayList<>();
         entries.add(new Expense("Bought cookies", 5.0));
         entries.add(new Income("Paycheck August", 20.0));
