@@ -13,7 +13,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.content.Link;
 import terminus.content.Note;
-import terminus.exception.InvalidTimeFormatException;
+import terminus.exception.InvalidArgumentException;
 
 public class CommonFormatTest {
 
@@ -153,16 +153,16 @@ public class CommonFormatTest {
     }
 
     @Test
-    void convertToLocalTime_success() throws InvalidTimeFormatException {
+    void convertToLocalTime_success() throws InvalidArgumentException {
         assertTrue(CommonFormat.convertToLocalTime("11:56") instanceof LocalTime);
         assertTrue(CommonFormat.convertToLocalTime("22:56") instanceof LocalTime);
     }
 
     @Test
     void convertToLocalTime_invalidInput_exceptionThrown() {
-        assertThrows(InvalidTimeFormatException.class, () -> CommonFormat.convertToLocalTime("test"));
-        assertThrows(InvalidTimeFormatException.class, () -> CommonFormat.convertToLocalTime("25:10"));
-        assertThrows(InvalidTimeFormatException.class, () -> CommonFormat.convertToLocalTime("11-10"));
+        assertThrows(InvalidArgumentException.class, () -> CommonFormat.convertToLocalTime("test"));
+        assertThrows(InvalidArgumentException.class, () -> CommonFormat.convertToLocalTime("25:10"));
+        assertThrows(InvalidArgumentException.class, () -> CommonFormat.convertToLocalTime("11-10"));
         assertThrows(AssertionError.class, () -> CommonFormat.convertToLocalTime(null));
     }
 

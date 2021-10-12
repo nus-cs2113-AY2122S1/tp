@@ -1,10 +1,9 @@
 package terminus.common;
 
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import terminus.exception.InvalidCommandException;
-import terminus.exception.InvalidTimeFormatException;
 
+import java.time.format.DateTimeParseException;
+import java.net.URL;
+import terminus.exception.InvalidArgumentException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -71,15 +70,15 @@ public class CommonFormat {
      *
      * @param startTime The string to be converted to a LocalTime object
      * @return A LocalTime object of the converted string
-     * @throws InvalidTimeFormatException Exception for when string does not follow the proper time format
+     * @throws InvalidArgumentException Exception for when string does not follow the proper time format
      */
-    public static LocalTime convertToLocalTime(String startTime) throws InvalidTimeFormatException {
+    public static LocalTime convertToLocalTime(String startTime) throws InvalidArgumentException {
         assert startTime != null;
         try {
             DateTimeFormatter format = DateTimeFormatter.ofPattern(LOCAL_TIME_FORMAT);
             return LocalTime.parse(startTime, format);
         } catch (DateTimeParseException e) {
-            throw new InvalidTimeFormatException(
+            throw new InvalidArgumentException(
                     String.format(Messages.ERROR_MESSAGE_INVALID_TIME_FORMAT, LOCAL_TIME_FORMAT));
         }
 
@@ -93,5 +92,24 @@ public class CommonFormat {
             result = string[string.length - 1];
         }
         return result;
+    }
+
+    public static boolean isValidUrl(String url) throws InvalidArgumentException {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (Exception e) {
+            throw new InvalidArgumentException(
+                    String.format(Messages.ERROR_MESSAGE_INVALID_LINK, url));
+        }
+    }
+
+    public static boolean isValidDay(String day) {
+        for (DaysOfWeekEnum dayOfWeek : DaysOfWeekEnum.values()) {
+            if (dayOfWeek.name().equalsIgnoreCase(day)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

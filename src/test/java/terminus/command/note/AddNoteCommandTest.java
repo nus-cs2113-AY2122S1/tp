@@ -8,9 +8,8 @@ import org.junit.jupiter.api.Test;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.content.Note;
-import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.exception.InvalidTimeFormatException;
+import terminus.exception.InvalidArgumentException;
 import terminus.module.NusModule;
 import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
@@ -31,8 +30,7 @@ public class AddNoteCommandTest {
     }
 
     @Test
-    void execute_success()
-            throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test1\"");
         CommandResult addResult = addCommand.execute(ui, nusModule);
         assertTrue(addResult.isOk());

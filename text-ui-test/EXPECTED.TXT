@@ -57,19 +57,19 @@ Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_li
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> List of Content
 ---------------
-1. CS2113T Tutorial (Thursday, 10:00): zoom.nus.sg
-2. CS2113T Lecture (Friday, 16:00): zoom.com
+1. CS2113T Tutorial (Thursday, 10:00): https://zoom.us/test
+2. CS2113T Lecture (Friday, 16:00): https://zoom.us/test
 
 Rerun the same command with an index behind to view the content.
 [] >>> Error: Content not found.
-[] >>> CS2113T Lecture (Friday, 16:00): zoom.com
+[] >>> CS2113T Lecture (Friday, 16:00): https://zoom.us/test
 [] >>> Error: Missing arguments.
 Format: schedule delete <item number>
 [] >>> Error: Content not found.
 [] >>> Your link on 'CS2113T Tutorial' has been deleted!
 [] >>> List of Content
 ---------------
-1. CS2113T Lecture (Friday, 16:00): zoom.com
+1. CS2113T Lecture (Friday, 16:00): https://zoom.us/test
 
 Rerun the same command with an index behind to view the content.
 [] >>> Command not found! Type 'help' for a list of commands.
