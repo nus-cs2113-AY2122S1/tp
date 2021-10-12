@@ -73,6 +73,7 @@ public class ViewMessageFormatterUi {
             if (contact.getTwitter() == null | contact.getTwitter().equals("null")) {
                 return "";
             } else {
+                assert(!contact.getTwitter().equals("null"));
                 return "\nTwitter:  twitter.com/" + contact.getTwitter();
             }
         } catch (NullPointerException e) {
