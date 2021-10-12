@@ -20,6 +20,10 @@ public class TimetableUI {
     private static final String CREDIT_COUNT_HEADER = "\nTotal MCs taken this semester: ";
     private static final String STAR_DIVIDER = "\n*******************";
 
+    /**
+     * Prints the list of modules taken in the timetable, and the total number of MCs.
+     * @param modules the list of modules taken in the timetable
+     */
     public static void printModules(List<Module> modules) {
         double counter = 0;
         System.out.println(STAR_DIVIDER);
@@ -33,6 +37,12 @@ public class TimetableUI {
         System.out.println(STAR_DIVIDER);
     }
 
+    /**
+     * Displays the first row in the timetable grid starting from
+     * the earliest hour in the timetable to the last.
+     * @param start the starting hour of the timetable
+     * @param end the last hour of the timetable
+     */
     public static void printScheduleHours(int start, int end) {
         String infoLine = "\t\t\t\t";
         for (int u = start; u <= end; u++) {
@@ -41,6 +51,14 @@ public class TimetableUI {
         System.out.println(infoLine);
     }
 
+    /**
+     * Displays the full-day schedule for a specific day.
+     * Prints three lines : Module Code, Lesson Type, and Venue.
+     * @param day The day to be printed (Monday/Tuesday/Wednesday... etc.)
+     * @param schedule The schedule to be printed for that day
+     * @param start the earliest hour that has any activity
+     * @param end the last hour that has any activity
+     */
     public static void printDaySchedule(String day, TimetableLesson[] schedule, int start, int end) {
         for (int u = start; u <= end; u++) {
             System.out.print(DIVIDER);

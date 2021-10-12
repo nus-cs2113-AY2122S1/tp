@@ -1,7 +1,17 @@
 package seedu.parser;
 
-import seedu.command.*;
-import seedu.command.flags.SearchFlags;
+
+import seedu.command.AddCommand;
+import seedu.command.ClearCommand;
+import seedu.command.Command;
+import seedu.command.DeleteCommand;
+import seedu.command.ExitCommand;
+import seedu.command.HelpCommand;
+import seedu.command.InvalidCommand;
+import seedu.command.SearchCommand;
+import seedu.command.ShowCommand;
+import seedu.command.TimetableCommand;
+import seedu.command.UpdateCommand;
 import seedu.duke.Duke;
 import seedu.timetable.Timetable;
 
