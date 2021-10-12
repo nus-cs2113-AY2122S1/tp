@@ -34,13 +34,12 @@ public class Parser {
 
         switch (inputCommand) {
         case "create":
-            String[] newTripInfo = inputDescription.split(" ", 4);
+            String[] newTripInfo = inputDescription.split(" ", 5);
             Trip newTrip = new Trip(newTripInfo);
             Storage.listOfTrips.add(newTrip);
             System.out.println("Your trip to " + newTrip.getLocation() + " on "
                     + newTrip.getDateOfTripString() + " has been successfully added!");
             break;
-
         case "edit":
             String[] tripToEditInfo = inputDescription.split(" ", 2);
             try {
