@@ -3,11 +3,11 @@ package seedu.duke;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.member.Member;
 import seedu.duke.member.MemberList;
+import seedu.duke.member.exception.InvalidMemberException;
 
 class ParserTest {
 
@@ -28,8 +28,12 @@ class ParserTest {
     void failedMakeMemberEntry() {
         final String input = "add /m asd";
         Parser.makeMemberEntry(testMemberList, input);
-        assertEquals(testMemberList.getMember(2).getName(), "");
-        assertEquals(testMemberList.getMember(2).getStudentNumber(), "");
+        try {
+            assertEquals(testMemberList.getMember(2).getName(), "");
+            assertEquals(testMemberList.getMember(2).getStudentNumber(), "");
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test

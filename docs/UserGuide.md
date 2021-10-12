@@ -63,7 +63,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    Added a Training entry:
    Training Name: Weekly December Training 2 | Venue: MPSH2 | Time: 12 Dec 2022
    
-   Added an Attendance entry: Name: Izdiyad | Student Number: A0123456Z | Training Name: Monday Training | Venue: MPSH6 | Time: 1800
+   Added an Attendance entry: Name: Izdiyad | Student Number: A0123456Z | Training Name: Monday Training | Time: 1800 | Venue: MPSH6
    ```
 
 2. `list` This lists out entries in Duke's Entry List.
@@ -71,7 +71,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
       * `/m` lists members and member related information.
       * `/t` lists trainings and training related information.
       * `/att` lists attendance entries, each consisting of a member and the training they attended.
-   * Format: list [/m] [/t]
+   * Format: list [/m] [/t] [/att]
    * **Examples:**
       - `list /m`
       - `list /t`
@@ -110,7 +110,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    ```
    ```
     The following attendance entry have been deleted
-    Name: Izdiyad | Student Number: A0123456Z | Training Name: Monday Training | Venue: MPSH6 | Time: 1800
+    Name: Izdiyad | Student Number: A0123456Z | Training Name: Monday Training | Time: 1800 | Venue: MPSH6
    ```
 4. `edit` This edits an existing entry from either the members list or training list
     * Entries are referenced using their index
