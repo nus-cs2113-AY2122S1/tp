@@ -7,11 +7,11 @@ import seedu.commands.DeleteExpenseCommand;
 import seedu.commands.DeleteIncomeCommand;
 import seedu.entry.Expense;
 import seedu.entry.Income;
-import seedu.exceptions.ExpenseEntryNotFoundException;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CommandTest {
     private FinancialTracker testTracker = new FinancialTracker();

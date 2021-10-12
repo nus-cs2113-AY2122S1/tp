@@ -7,7 +7,9 @@ import seedu.exceptions.ExpenseEntryNotFoundException;
 import seedu.exceptions.IncomeEntryNotFoundException;
 import seedu.utility.FinancialTracker;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 public class FinancialTrackerTest {
     
