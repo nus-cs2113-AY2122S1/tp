@@ -91,6 +91,18 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         } catch (ForbiddenDetailException e) {
             return new FailedCommand(FailedCommandType.FORBIDDEN_DETAIL);
+        } catch (InvalidNameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_NAME);
+        } catch (InvalidGithubUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_GITHUB_USERNAME);
+        } catch (InvalidEmailException e) {
+            return new FailedCommand(FailedCommandType.INVALID_MAIL);
+        } catch (InvalidTelegramUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TELEGRAM);
+        } catch (InvalidTwitterUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TWITTER);
+        } catch (InvalidLinkedinUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_LINKEDIN);
         }
     }
 
@@ -111,6 +123,18 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         } catch (ForbiddenDetailException e) {
             return new FailedCommand(FailedCommandType.FORBIDDEN_DETAIL);
+        } catch (InvalidNameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_NAME);
+        } catch (InvalidGithubUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_GITHUB_USERNAME);
+        } catch (InvalidEmailException e) {
+            return new FailedCommand(FailedCommandType.INVALID_MAIL);
+        } catch (InvalidTelegramUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TELEGRAM);
+        } catch (InvalidTwitterUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TWITTER);
+        } catch (InvalidLinkedinUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_LINKEDIN);
         }
     }
 
