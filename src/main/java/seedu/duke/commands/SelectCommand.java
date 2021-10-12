@@ -35,7 +35,7 @@ public class SelectCommand extends Command {
                 return new CommandResult(Ui.getSelectedEventMessage((Event) selectedItem));
             }
         } catch (DukeException e) {
-           return new CommandResult(e.getMessage());
+            return new CommandResult(e.getMessage());
         }
         return new CommandResult("I can't select the item you want!");
     }
