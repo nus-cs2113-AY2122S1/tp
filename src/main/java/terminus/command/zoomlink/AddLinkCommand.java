@@ -1,24 +1,24 @@
 package terminus.command.zoomlink;
 
+import static terminus.common.CommonUtils.isValidDay;
+import static terminus.common.CommonUtils.isValidUrl;
+
+import java.time.LocalTime;
+import java.util.ArrayList;
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.common.CommonFormat;
+import terminus.common.CommonUtils;
+import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 
-import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
 
 import terminus.module.NusModule;
-import terminus.common.CommonFormat;
-import terminus.common.Messages;
 import terminus.ui.Ui;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
-
-import static terminus.common.CommonFormat.isValidDay;
-import static terminus.common.CommonFormat.isValidUrl;
 
 /**
  * AddLinkCommand class which will manage the adding of new Links from user command.
@@ -55,8 +55,8 @@ public class AddLinkCommand extends Command {
         if (arguments == null || arguments.isBlank()) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
-        // Regex to find arguments
-        ArrayList<String> argArray = CommonFormat.findArguments(arguments);
+
+        ArrayList<String> argArray = CommonUtils.findArguments(arguments);
         if (!isValidScheduleArguments(argArray)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
@@ -64,7 +64,7 @@ public class AddLinkCommand extends Command {
 
         this.description = argArray.get(0);
         this.day = argArray.get(1);
-        this.startTime = CommonFormat.convertToLocalTime(userStartTime);
+        this.startTime = CommonUtils.convertToLocalTime(userStartTime);
         this.link = argArray.get(3);
 
         if (!isValidDay(this.day)) {
@@ -110,7 +110,7 @@ public class AddLinkCommand extends Command {
             TerminusLogger.warning(String.format("Failed to find %d arguments, %d arguments found",
                     ADD_SCHEDULE_ARGUMENTS, argArray.size()));
             isValid = false;
-        } else if (CommonFormat.isArrayEmpty(argArray)) {
+        } else if (CommonUtils.isArrayEmpty(argArray)) {
             TerminusLogger.warning("Failed to parse arguments, some arguments found is empty");
             isValid = false;
         }

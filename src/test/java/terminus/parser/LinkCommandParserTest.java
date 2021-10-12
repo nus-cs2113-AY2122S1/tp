@@ -1,5 +1,9 @@
 package terminus.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.DeleteCommand;
@@ -7,13 +11,9 @@ import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
 import terminus.command.ViewCommand;
 import terminus.command.zoomlink.AddLinkCommand;
-import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LinkCommandParserTest {
 

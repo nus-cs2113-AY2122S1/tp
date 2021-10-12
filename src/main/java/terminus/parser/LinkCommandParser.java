@@ -1,9 +1,9 @@
 package terminus.parser;
 
 import terminus.command.BackCommand;
-import terminus.command.zoomlink.AddLinkCommand;
-import terminus.command.ViewCommand;
 import terminus.command.DeleteCommand;
+import terminus.command.ViewCommand;
+import terminus.command.zoomlink.AddLinkCommand;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.Link;
