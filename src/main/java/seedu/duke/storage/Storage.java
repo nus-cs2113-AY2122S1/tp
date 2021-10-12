@@ -35,10 +35,10 @@ public class Storage {
             boolean isFileCreated = file.createNewFile();
 
             if (!isDirectoryCreated || !isFileCreated) {
-                throw new IOException(Message.ERROR_CREATING_FILE);
+                throw new IOException(Message.ERROR_CREATING_NEW_FILE);
             }
         } catch (IOException e) {
-            ui.printMessage(Message.ERROR_CREATING_FILE);
+            ui.printMessage(Message.ERROR_CREATING_NEW_FILE);
         }
     }
 
@@ -73,11 +73,9 @@ public class Storage {
      */
     public void saveData(TaskList taskList, LessonList lessonList) throws IOException {
         try {
-            StringBuilder dataToWrite = new StringBuilder();
-            dataToWrite.append(taskList.serialize()).append(lessonList.serialize());
             FileWriter fout = new FileWriter(PATH_TO_FILE.toString());
             BufferedWriter bout = new BufferedWriter(fout);
-            bout.write(dataToWrite.toString());
+            bout.write(taskList.serialize() + lessonList.serialize());
             bout.close();
         } catch (IOException e) {
             throw new IOException(Message.ERROR_SAVING_DATA);
