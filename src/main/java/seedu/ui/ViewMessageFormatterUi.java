@@ -21,6 +21,7 @@ public class ViewMessageFormatterUi {
             if (contact.getGithub() == null | contact.getGithub().equals("null")) {
                 return "";
             } else {
+                assert(!contact.getGithub().equals("null"));
                 return "\nGithub:   github.com/" + contact.getGithub();
             }
         } catch (NullPointerException e) {
