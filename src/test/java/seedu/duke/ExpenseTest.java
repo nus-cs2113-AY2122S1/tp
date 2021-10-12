@@ -14,7 +14,7 @@ class ExpenseTest {
         Person person = new Person("Xi Yuan", true);
         ArrayList<Person> listOfPersons = new ArrayList<Person>();
         listOfPersons.add(person);
-        exp = new Expense(8.0, "for lunch", listOfPersons);
+        exp = new Expense(8.0, "food", listOfPersons, "nice Italian restaurant");
     }
 
     @Test

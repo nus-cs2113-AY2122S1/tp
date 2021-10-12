@@ -6,11 +6,12 @@ import java.util.ArrayList;
 
 public class Storage {
 
+    public static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static Scanner scanner;
     private static Trip openTrip = null;
 
     private static final ArrayList<String> validCommands = new ArrayList<>(
-            Arrays.asList("create", "edit", "summary", "delete", "expense", "quit", "open", "close", "switch"));
+            Arrays.asList("create", "edit", "view", "summary", "delete", "expense", "quit"));
 
     public static Scanner getScanner() {
         return scanner;

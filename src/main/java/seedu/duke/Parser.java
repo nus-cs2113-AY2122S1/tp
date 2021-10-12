@@ -8,10 +8,9 @@ public class Parser {
      * Parses the user-entered command and additional information/flags.
      * 
      * @param userInput the {@link String} containing the user input
-     * @param listOfTrips the list of trips that the user has added to the program
      * @return whether the program should continue running after processing the given user input
      */
-    public static boolean parseUserInput(String userInput, ArrayList<Trip> listOfTrips) {
+    public static boolean parseUserInput(String userInput) {
         String[] userInputSplit = userInput.split(" ", 2);
         String inputCommand = userInputSplit[0].toLowerCase();
         String inputDescription = null;
@@ -28,9 +27,9 @@ public class Parser {
 
         switch (inputCommand) {
         case "create":
-            String[] newTripInfo = inputDescription.split(" ");
+            String[] newTripInfo = inputDescription.split(" ", 4);
             Trip newTrip = new Trip(newTripInfo);
-            listOfTrips.add(newTrip);
+            Storage.listOfTrips.add(newTrip);
             System.out.println("Your trip to " + newTrip.getLocation() + " on "
                     + newTrip.getDateOfTripString() + " has been successfully added!");
             break;
@@ -39,7 +38,7 @@ public class Parser {
             try {
                 int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
                 String attributesToEdit = tripToEditInfo[1];
-                Trip tripToEdit = listOfTrips.get(indexToEdit);
+                Trip tripToEdit = Storage.listOfTrips.get(indexToEdit);
                 editTripPerAttribute(tripToEdit, attributesToEdit);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
@@ -48,7 +47,7 @@ public class Parser {
         case "open":
             try {
                 int indexToGet = Integer.parseInt(inputDescription) - 1;
-                Storage.setOpenTrip(listOfTrips.get(indexToGet));
+                Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 Ui.printSingleUnknownTripIndexError();
             }
@@ -58,7 +57,7 @@ public class Parser {
             String tripNumber = tripToGetInfo[0];
             try {
                 int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
-                Trip tripToGet = listOfTrips.get(indexToGet);
+                Trip tripToGet = Storage.listOfTrips.get(indexToGet);
                 Ui.printExpensesSummary(tripToGet);
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("There is no matching trip index. Please try again.");
@@ -68,25 +67,26 @@ public class Parser {
             tripToGetInfo = inputDescription.split(" ", 2);
             try {
                 int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
-                Trip tripToGet = listOfTrips.get(indexToGet);
+                Trip tripToGet = Storage.listOfTrips.get(indexToGet);
                 tripToGet.viewAllExpenses();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("There is no matching trip index. Please try again.");
             }
             break;
         case "delete":
-            deleteTrip(listOfTrips, inputDescription);
+            deleteTrip(Storage.listOfTrips, inputDescription);
             break;
+
         case "expense":
-            String[] expenseInfo = inputDescription.split(" ");
+            String[] expenseInfo = inputDescription.split(" ", 4);
             int tripIndex = Integer.parseInt(expenseInfo[0]) - 1;
-            Trip currentTrip = listOfTrips.get(tripIndex);
+            Trip currentTrip = Storage.listOfTrips.get(tripIndex);
             Double expenseAmount = Double.parseDouble(expenseInfo[1]);
-            String expenseDescription = expenseInfo[2];
-            String personChained = expenseInfo[3];
-            String[] personSplit = personChained.split(",");
-            ArrayList<Person> listOfPersonsIncluded = getPersons(tripIndex, personSplit, currentTrip);
-            currentTrip.addExpense(new Expense(expenseAmount, expenseDescription, listOfPersonsIncluded));
+            String expenseCategory = expenseInfo[2].toLowerCase();
+            ArrayList<Person> listOfPersonsIncluded = checkValidPersons(currentTrip, expenseInfo[3]);
+            String expenseDescription = getDescription(expenseInfo[3]);
+            currentTrip.addExpense(
+                    new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription));
             Ui.printExpenseAddedSuccess();
             break;
         case "quit":
@@ -104,29 +104,26 @@ public class Parser {
 
     /**
      * Obtains a list of Person objects from array of names of people.
-     * @param tripIndex Index of trip to check
-     * @param personSplit Names of people involved in expense
+     * @param userInput the input of the user
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */
-    private static ArrayList<Person> getPersons(int tripIndex, String[] personSplit, Trip currentTrip) {
-        ArrayList<Person> listOfPersons = new ArrayList<>();
-        ArrayList<Person> personsInTrip = currentTrip.getListOfPersons();
-        Person personToAdd = null;
-        for (String nameToCheck : personSplit) {
-            for (Person currentPersonInTrip : personsInTrip) {
-                String name = currentPersonInTrip.getName();
-                if (nameToCheck.equals(name)) {
-                    personToAdd = currentPersonInTrip;
+    private static ArrayList<Person> checkValidPersons(Trip currentTrip, String userInput) {
+        String[] listOfPeople = userInput.split("/")[0].split(",");
+        ArrayList<Person> validListOfPeople = new ArrayList<>();
+        for (String name : listOfPeople) {
+            for (Person person : currentTrip.getListOfPersons()){
+                if (name.trim().equalsIgnoreCase(person.getName())){
+                    validListOfPeople.add(person);
                     break;
                 }
             }
-            if (personToAdd != null) {
-                listOfPersons.add(personToAdd);
-            }
         }
-        return listOfPersons;
+        return validListOfPeople;
     }
 
+    private static String getDescription(String userInput){
+        return userInput.split("/")[1].trim();
+    }
 
     private static void editTripPerAttribute(Trip tripToEdit, String attributesToEdit) {
 
@@ -178,21 +175,5 @@ public class Parser {
         }
     }
 
-    /**
-     * Splits the user-entered {@link String} of people involved in a trip into a String array.
-     * 
-     * @param peopleChained String of all persons involved in the trip
-     * @return {@link String} array, each element of the array being a person involved in the trip
-     */
-    public static ArrayList<Person> splitPeople(String peopleChained) {
 
-        ArrayList<Person> listOfPeople = new ArrayList<>();
-        String[] peopleSplit = peopleChained.split(",");
-        for (int i = 0; i < peopleSplit.length; i++) {
-            Person person = new Person(peopleSplit[i], (i == 0));
-            listOfPeople.add(person);
-        }
-        return listOfPeople;
-
-    }
 }

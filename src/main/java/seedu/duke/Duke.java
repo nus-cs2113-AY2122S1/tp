@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Duke {
 
-    private static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static boolean isProgramRunning = true;
 
     /**
@@ -30,7 +29,7 @@ public class Duke {
         Storage.setScanner(in);
 
         while (isProgramRunning) {
-            isProgramRunning = Parser.parseUserInput(readUserInput(in), listOfTrips);
+            isProgramRunning = Parser.parseUserInput(readUserInput(in));
         }
 
     }
