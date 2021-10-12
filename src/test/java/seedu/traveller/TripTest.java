@@ -16,8 +16,8 @@ class TripTest {
         path.add(new Country("SIN", 0));
         path.add(new Country("MLY", 1));
         distances.add(1.0);
-        assertEquals("\t\tTripName: trip1\n\t\t\t Origin: SIN\n\t\t\t " +
-                "Destination: MLY\n\t\t\t Path: [SIN, MLY]",
+        assertEquals("\t\tTripName: trip1\n\t\t\t Origin: SIN\n\t\t\t "
+                        + "Destination: MLY\n\t\t\t Path: [SIN, MLY]",
                 new Trip("trip1", "SIN", "MLY", path, distances).toString());
     }
 }

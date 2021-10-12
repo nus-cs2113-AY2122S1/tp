@@ -22,8 +22,8 @@ public class WorldMapTest {
         Country countryMly = new Country("MLY", 1);
         List<Country> path = new ArrayList<>();
         List<Double> distances = new ArrayList<>();
-        path.add(new Country("SIN", 0));
-        path.add(new Country("MLY", 1));
+        path.add(countrySin);
+        path.add(countryMly);
         distances.add(1.0);
         MinCalcResult minCalcResult = new MinCalcResult(countrySin, countryMly, path, distances);
         assertEquals(minCalcResult.toString(), WorldMap.calcMinDistance("SIN", "MLY").toString());
