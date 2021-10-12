@@ -2,6 +2,7 @@ package seedu.utility;
 
 import seedu.entry.Entry;
 import seedu.entry.Expense;
+import seedu.entry.Income;
 
 import java.util.ArrayList;
 
@@ -51,12 +52,23 @@ public class FinancialTracker {
         return this.financialEntries;
     }
 
-    public ArrayList<Entry> getTotalExpense() {
-        return null;
+    public double getTotalExpense() {
+        double totalExpense = 0;
+        for (Entry entry : this.financialEntries) {
+            if (entry instanceof Expense) {
+                totalExpense += entry.getValue();
+            }
+        }
+        return totalExpense;
     }
 
-    public ArrayList<Entry> getTotalIncome() {
-        //TODO
-        return null;
+    public double getTotalIncome() {
+        double totalIncome = 0;
+        for (Entry entry : financialEntries) {
+            if (entry instanceof Income) {
+                totalIncome += entry.getValue();
+            }
+        }
+        return totalIncome;
     }
 }

@@ -9,6 +9,6 @@ public class Expense extends Entry {
 
     @Override
     public String toString() {
-        return "[E] " + description + "- $" + value;
+        return "[E] " + description + " - $" + value;
     }
 }
