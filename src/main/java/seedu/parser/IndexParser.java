@@ -8,18 +8,19 @@ import seedu.exception.MissingArgException;
 public class IndexParser {
     private static final int COMD_WORD_LENGTH = 1;
     private static final int INDEX_POSITION = 1;
+    private static final int SIGNIFICANT_INDEX_POSITION = 0;
+    private static final int COMD_INDEX_LENGTH = 2;
 
 
     public static int getIndexFromInput(String userInput, String command)
             throws NumberFormatException, MissingArgException {
-        String inputWithoutDetails = userInput;
-
-        String[] destructuredInputs = inputWithoutDetails.split(" ");
-        if (destructuredInputs.length == COMD_WORD_LENGTH) {
+        String[] comdIndexSplit = userInput.split(" ", COMD_INDEX_LENGTH);
+        if (comdIndexSplit.length == COMD_WORD_LENGTH) {
             throw new MissingArgException();
         }
+        String[] indexSplit = comdIndexSplit[INDEX_POSITION].trim().split(" ");
         // throws NumberFormatExcept if not integer
-        int index = Integer.parseInt(destructuredInputs[INDEX_POSITION].trim());
+        int index = Integer.parseInt(indexSplit[SIGNIFICANT_INDEX_POSITION].trim());
         return index;
     }
 
