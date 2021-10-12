@@ -31,7 +31,7 @@ public class DeleteLinkCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException {
+    void execute_deleteLink_success() throws InvalidCommandException, InvalidArgumentException {
         for (int i = 0; i < 3; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand("add \"test_desc\" \"Monday\" \"12:00\" \"https://zoom.us/test\"");
             CommandResult addResult = addLinkCommand.execute(ui, nusModule);
@@ -54,7 +54,7 @@ public class DeleteLinkCommandTest {
     }
 
     @Test
-    void execute_throwsException() throws InvalidCommandException, InvalidArgumentException {
+    void execute_deleteLink_throwsException() throws InvalidCommandException, InvalidArgumentException {
         Command deleteLinkCommand = linkCommandParser.parseCommand("delete 20");
         assertThrows(InvalidArgumentException.class, () -> deleteLinkCommand.execute(ui, nusModule));
     }

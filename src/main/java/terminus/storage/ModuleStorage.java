@@ -13,6 +13,10 @@ public class ModuleStorage {
     private final Path filePath;
     private final Gson gson;
 
+    /**
+     * Initializes the ModuleStorage with a specific Path to the file.
+     * @param filePath The Path to the file to store at.
+     */
     public ModuleStorage(Path filePath) {
         this.filePath = filePath;
         this.gson = new GsonBuilder().setPrettyPrinting().create();
@@ -32,7 +36,14 @@ public class ModuleStorage {
             TerminusLogger.info(String.format("%s created.", filePath.getFileName().toString()));
         }
     }
-    
+
+    /**
+     * Loads a JSON file and parses it as a NusModule object based on GSON.
+     * Returns null if the file does not exist or the file is not in a valid format.
+     * 
+     * @return NusModule based on the contents of the file.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
     public NusModule loadFile() throws IOException {
         initializeFile();
         if (!Files.isReadable(filePath)) {
@@ -42,8 +53,18 @@ public class ModuleStorage {
         TerminusLogger.info("Decoding JSON to object");
         return gson.fromJson(Files.newBufferedReader(filePath), NusModule.class);
     }
-    
+
+    /**
+     * Saves NusModule instance into a JSON file based on GSON.
+     * Throws NullPointerException if the `module` is null.
+     * 
+     * @param module The NusModule to convert to JSON file.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
     public void saveFile(NusModule module) throws IOException {
+        if (module == null) {
+            throw new NullPointerException("module cannot be null!");
+        }
         initializeFile();
         TerminusLogger.info("Converting NusModule object into String...");
         String jsonString = gson.toJson(module);
