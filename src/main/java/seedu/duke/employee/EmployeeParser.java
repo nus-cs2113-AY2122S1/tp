@@ -2,15 +2,21 @@ package seedu.duke.employee;
 
 import seedu.duke.main.MainUI;
 
+import java.util.logging.*;
+
 public class EmployeeParser {
 
-    public void addEmployee(String[] command, EmployeeList masterList) {
+    private static Logger logger = Logger.getLogger("EmployeeParser");
 
+    public void addEmployee(String[] command, EmployeeList masterList) {
+        logger.log(Level.INFO, "going to add employee");
         boolean isEmptyCommand = command[1].stripLeading().stripTrailing().equals("")
                 || command[2].stripLeading().stripTrailing().equals("");
 
         if (isEmptyCommand) {
             MainUI.printWrongCommandMessage();
+            logger.log(Level.INFO, "one or more fields left empty");
+            logger.log(Level.INFO, "unable to add employee");
             return;
         }
 
@@ -23,7 +29,7 @@ public class EmployeeParser {
         System.out.println(masterList.employeeList.get(masterList.totalEmployee - 1));
         System.out.println("You now have " + masterList.totalEmployee + " employees.");
         MainUI.printSingleLine();
-
+        logger.log(Level.INFO, "end of adding employee");
     }
 
     public void loadEmployeeFromStorage(EmployeeList masterList, Employee employee) {
@@ -32,11 +38,13 @@ public class EmployeeParser {
     }
 
     public void deleteEmployee(String[] command, EmployeeList masterList) {
-
+        logger.log(Level.INFO, "going to delete employee");
         boolean isEmptyCommand = command[1].stripLeading().stripTrailing().equals("");
 
         if (isEmptyCommand) {
             MainUI.printWrongCommandMessage();
+            logger.log(Level.INFO, "one or more fields left empty");
+            logger.log(Level.INFO, "unable to delete employee");
             return;
         }
 
@@ -60,6 +68,7 @@ public class EmployeeParser {
 
         masterList.employeeList.remove(employeeIndex);
         masterList.totalEmployee -= 1;
+        logger.log(Level.INFO, "end of deleting employee");
     }
 
     public void listEmployee(EmployeeList masterList) {
