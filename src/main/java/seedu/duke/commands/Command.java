@@ -7,6 +7,7 @@ import seedu.duke.ui.TextUI;
  * It is inherited by all other command objects.
  */
 public abstract class Command {
+
     /**
      * This method executes the command, performing the required operations.
      * It is only meant to be called by child classes.
