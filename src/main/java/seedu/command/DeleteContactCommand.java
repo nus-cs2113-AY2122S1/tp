@@ -34,7 +34,6 @@ public class DeleteContactCommand extends Command {
         try {
             // throws IndexOutOfBoundsException if index is outside of the range
             Contact deletedContact = IndexParser.getContactFromIndex(deletedIndex, contactList);
-            // Index is within range, insert assert here
             deleteOnConfirmation(deletedContact);
         } catch (IndexOutOfBoundsException e) {
             ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());

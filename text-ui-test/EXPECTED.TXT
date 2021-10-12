@@ -97,7 +97,7 @@ ____________________________________________________________
 
 ____________________________________________________________
 There are missing details.
-Please remove any flags with no details,
+Please remove any flags with no details, 
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
@@ -161,7 +161,7 @@ ____________________________________________________________
 
 ____________________________________________________________
 There are missing details.
-Please remove any flags with no details,
+Please remove any flags with no details, 
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
@@ -247,7 +247,7 @@ ____________________________________________________________
 
 ____________________________________________________________
 There are missing details.
-Please remove any flags with no details,
+Please remove any flags with no details, 
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
@@ -268,12 +268,12 @@ You now have 5 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-As one of the details to be stored is "null",
+As one of the details to be stored is "null", 
 ConTech is unable to process it
 ____________________________________________________________
 
 ____________________________________________________________
-As one of the details to be stored is "null",
+As one of the details to be stored is "null", 
 ConTech is unable to process it
 ____________________________________________________________
 
