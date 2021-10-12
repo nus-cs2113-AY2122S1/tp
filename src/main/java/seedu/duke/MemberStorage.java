@@ -26,7 +26,7 @@ public class MemberStorage {
                 dukeMemberFile.createNewFile();
                 initializeMemberFile(dukeMemberFile);
                 System.out.println("file created");
-
+                assert dukeMemberFile != null : "duke member file should be created";
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -56,6 +56,7 @@ public class MemberStorage {
             dukeMemberScanner.nextLine(); //skips the first header row
             while (dukeMemberScanner.hasNextLine()) {
                 String fullMemberDetails = dukeMemberScanner.nextLine();
+                assert fullMemberDetails != null : "fullMemberDetails should not be empty";
                 System.out.println(fullMemberDetails);
                 String[] memberDetails = fullMemberDetails.split("\\,", 4);
 
