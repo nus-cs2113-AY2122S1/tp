@@ -4,7 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.contact.DetailType;
 import seedu.exception.ForbiddenDetailException;
+import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
+import seedu.exception.InvalidGithubUsernameException;
+import seedu.exception.InvalidLinkedinUsernameException;
+import seedu.exception.InvalidNameException;
+import seedu.exception.InvalidTelegramUsernameException;
+import seedu.exception.InvalidTwitterUsernameException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 
@@ -30,7 +36,9 @@ class AddContactParserTest {
 
     @Test
     void parseContactDetails_inputsWithIrregularSpacing_expectCorrectDetails() throws InvalidFlagException,
-            MissingDetailException, MissingArgException, ForbiddenDetailException {
+            MissingDetailException, MissingArgException, ForbiddenDetailException, InvalidTelegramUsernameException,
+            InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
+            InvalidTwitterUsernameException, InvalidEmailException {
         inputUserInput = "add       -n   andre   -g ng-andre   ";
         actualOutput = addContactParser.parseContactDetails(inputUserInput);
         expectedOutput = new String[]{"andre", "ng-andre"};
@@ -78,7 +86,9 @@ class AddContactParserTest {
 
     @Test
     void parseDetail_inputsWithTrailingSpaces_expectNewContactDetail() throws InvalidFlagException,
-            MissingDetailException, ForbiddenDetailException {
+            MissingDetailException, ForbiddenDetailException, InvalidTelegramUsernameException,
+            InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
+            InvalidTwitterUsernameException, InvalidEmailException {
         inputDetail = "n             andre";
         addContactParser.parseDetail(inputContactDetails, inputDetail);
         assertEquals("andre", inputContactDetails[DetailType.NAME.getIndex()]);
@@ -86,7 +96,9 @@ class AddContactParserTest {
 
     @Test
     void parseDetail_inputsWithSpaceInDetail_expectNewContactDetail() throws InvalidFlagException,
-            MissingDetailException, ForbiddenDetailException {
+            MissingDetailException, ForbiddenDetailException, InvalidTelegramUsernameException,
+            InvalidNameException, InvalidLinkedinUsernameException, InvalidGithubUsernameException,
+            InvalidTwitterUsernameException, InvalidEmailException {
         inputDetail = "n Marcus Bory";
         addContactParser.parseDetail(inputContactDetails, inputDetail);
         assertEquals("Marcus Bory", inputContactDetails[DetailType.NAME.getIndex()]);
