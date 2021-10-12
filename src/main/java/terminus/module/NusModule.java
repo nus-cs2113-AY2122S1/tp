@@ -9,8 +9,8 @@ import terminus.content.Note;
 public class NusModule {
 
 
-    private ContentManager<Note> noteManager;
-    private ContentManager<Link> linkManager;
+    private final ContentManager<Note> noteManager;
+    private final ContentManager<Link> linkManager;
 
     public NusModule() {
         noteManager = new ContentManager<>();

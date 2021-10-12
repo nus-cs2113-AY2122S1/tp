@@ -2,7 +2,6 @@ package terminus.command;
 
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
-import terminus.module.NusModule;
 import terminus.parser.NoteCommandParser;
 
 public class NotesCommand extends WorkspaceCommand {
