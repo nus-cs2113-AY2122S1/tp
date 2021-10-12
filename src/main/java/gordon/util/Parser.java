@@ -2,7 +2,6 @@ package gordon.util;
 
 import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
-import gordon.kitchen.Ingredient;
 import gordon.kitchen.Recipe;
 
 import java.util.Scanner;
@@ -89,8 +88,7 @@ public class Parser {
         String newLine = line.substring(ingredientsIndex + INGREDIENTS_WORD_LENGTH);
         String[] ingredientsList = newLine.split("\\+");
         for (int i = 0; i < ingredientsList.length; i++) {
-            Ingredient ingredient = new Ingredient(ingredientsList[i]);
-            r.addIngredient(ingredient, i);
+            r.addIngredient(ingredientsList[i], i);
         }
     }
 

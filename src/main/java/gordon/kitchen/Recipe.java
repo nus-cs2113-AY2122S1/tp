@@ -11,7 +11,7 @@ public class Recipe {
     protected Difficulty difficulty = Difficulty.None;
     protected int preparationTime = -1;
     protected int cookingTime = -1;
-    protected ArrayList<Ingredient> ingredients;
+    protected ArrayList<String> ingredients;
     protected ArrayList<String> steps;
     protected float totalPrice = -1;
     protected int calories = -1;
@@ -41,11 +41,11 @@ public class Recipe {
         cookingTime = cookTime;
     }
 
-    public void addIngredient(Ingredient ingredient) {
+    public void addIngredient(String ingredient) {
         ingredients.add(ingredient);
     }
 
-    public void addIngredient(Ingredient ingredient, int index) throws GordonException {
+    public void addIngredient(String ingredient, int index) throws GordonException {
         try {
             ingredients.add(index, ingredient);
         } catch (IndexOutOfBoundsException e) {
@@ -145,7 +145,7 @@ public class Recipe {
         outputString.append("Ingredients needed: ").append(System.lineSeparator());
         for (int i = 0; i < ingredients.size(); i++) {
             outputString.append(i + 1).append(". ");
-            outputString.append(ingredients.get(i).getDescription());
+            outputString.append(ingredients.get(i));
             outputString.append(System.lineSeparator());
         }
 
