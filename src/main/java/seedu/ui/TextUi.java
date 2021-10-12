@@ -69,6 +69,15 @@ public class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static String formatContactFields(Contact addedContact) {
+        String viewGithub = ViewMessageFormatterUi.viewGithubFormatter(addedContact);
+        String viewEmail = ViewMessageFormatterUi.viewEmailFormatter(addedContact);
+        String viewTwitter = ViewMessageFormatterUi.viewTwitterFormatter(addedContact);
+        String viewTelegram = ViewMessageFormatterUi.viewTelegramFormatter(addedContact);
+        String viewLinkedin = ViewMessageFormatterUi.viewLinkedinFormatter(addedContact);
+        return viewGithub + viewEmail + viewTelegram + viewLinkedin + viewTwitter;
+    }
+
     public static void viewContactMessage(Contact viewingContact, int index) {
         String message = index + ". " + "Name: " + viewingContact.getName() + " GitHub: " + viewingContact.getGithub();
         printDoubleLineMessage(message);
