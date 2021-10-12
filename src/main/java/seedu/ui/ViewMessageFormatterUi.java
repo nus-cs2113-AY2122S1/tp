@@ -8,6 +8,7 @@ public class ViewMessageFormatterUi {
             if (contact.getName() == null | contact.getName().equals("null")) {
                 return "";
             } else {
+                assert(!contact.getName().equals("null"));
                 return contact.getName();
             }
         } catch (NullPointerException e) {
