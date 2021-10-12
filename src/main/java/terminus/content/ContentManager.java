@@ -4,6 +4,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import terminus.common.Messages;
 import terminus.exception.InvalidArgumentException;
+import terminus.common.TerminusLogger;
 
 public class ContentManager<T extends Content> {
 
