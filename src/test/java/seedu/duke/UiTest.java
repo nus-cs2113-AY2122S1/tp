@@ -1,20 +1,18 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.items.Event;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
 
-import java.awt.desktop.SystemEventListener;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UiTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
