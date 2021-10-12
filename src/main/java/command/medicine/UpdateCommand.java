@@ -38,7 +38,8 @@ public class UpdateCommand extends Command {
             return;
         }
 
-        boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines);
+        boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines,
+            CommandSyntax.UPDATE_COMMAND);
         if (isInvalidParameterValues) {
             return;
         }
