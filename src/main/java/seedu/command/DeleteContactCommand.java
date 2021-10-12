@@ -18,16 +18,6 @@ public class DeleteContactCommand extends Command {
         return deletedIndex;
     }
 
-    public void checkContactIndex() {
-        try {
-            Contact deletedContact = contactList.getContactAtIndex(deletedIndex);
-            this.contactList.deleteContact(deletedIndex);
-            TextUi.deleteContactMessage(deletedContact.getName(), contactList.getListSize());
-        } catch (IndexOutOfBoundsException e) {
-            TextUi.numOutOfRangeMessage(contactList.getListSize());
-        }
-    }
-
     private void deleteOnConfirmation(Contact deletedContact) {
         // ask for confirmation to delete from user
         String userDeleteConfirmation = TextUi.getUserDeleteConfirmation(deletedContact, deletedIndex);
