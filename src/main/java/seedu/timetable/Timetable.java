@@ -1,28 +1,32 @@
 package seedu.timetable;
 
 import seedu.exceptions.UniModsException;
+import seedu.logger.TimetableLogger;
 import seedu.module.Module;
 import seedu.ui.TextUi;
 import seedu.ui.TimetableUI;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.logging.Level;
+
 
 /**
- * The Timetable Class, which will track all added modules and lessons that you have signed up for!
+ * The Timetable Class, which will track all added modules and lessons that you have signed up for.
  * Each cell in the timetable will display the module code, lesson type and venue of the lesson
- * Each Timetable should be assigned a semester number --> Academic Year semester (1 OR 2)
+ * Each Timetable should be assigned a semester number --> Academic Year semester (1 OR 2).
  */
-public class Timetable {
+public class Timetable implements Comparable<Timetable> {
 
-    private final int DEFAULT_START = 9;
-    private final int DEFAULT_END = 16;
+    private static final int DEFAULT_START = 9;
+    private static final int DEFAULT_END = 16;
 
     private int semester;
     private int earliestHour;
     private int latestHour;
 
     private ArrayList<Module> modules;
+    private TimetableLogger logger = new TimetableLogger();
 
     private TimetableLesson[] monday = new TimetableLesson[24];
     private TimetableLesson[] tuesday = new TimetableLesson[24];
@@ -33,7 +37,7 @@ public class Timetable {
     private TimetableLesson[] sunday = new TimetableLesson[24];
 
     /**
-     * Creates a Timetable assigned to a specific semester of the Academic Year
+     * Creates a Timetable assigned to a specific semester of the Academic Year.
      *
      * @param semester Semester 1 OR 2 of the Academic Year
      */
@@ -45,8 +49,8 @@ public class Timetable {
     }
 
     /**
-     * Adds a Timetable Lesson to the timetable,
-     * and adds the corresponding module to an internal list if not already added
+     * Adds a Timetable Lesson to the timetable
+     * and adds the corresponding module to an internal list if not already added.
      * This can be a Lecture, Tutorial or Laboratory
      *
      * @param timetableLesson lesson to be added to the timetable
@@ -87,6 +91,11 @@ public class Timetable {
         if (timetableLesson.getEndHour() > latestHour) {
             latestHour = timetableLesson.getEndHour();
         }
+        assert earliestHour < latestHour
+                : "Earliest hour of the day is should be earlier than latest hour of the day";
+
+        logger.log(Level.INFO, String.format("%s added to timetable",
+                timetableLesson.getModuleCode() + ", " + timetableLesson.getLessonType()));
     }
 
     /**
@@ -106,7 +115,7 @@ public class Timetable {
     }
 
     /**
-     * Adds the lesson's module to the internal tracking list
+     * Adds the lesson's module to the internal tracking list.
      * This is to be displayed later
      *
      * @param module Module to be added
@@ -131,6 +140,8 @@ public class Timetable {
                 modules.remove(modules.get(i));
                 TextUi.printModuleDeleted(moduleCode);
                 deleteFromLessons(module);
+                logger.log(Level.INFO, String.format("%s added to timetable",
+                        module.getModuleCode()));
                 return;
             }
         }
@@ -155,8 +166,8 @@ public class Timetable {
     }
 
     /**
-     * Sets the TimetableLesson for the particular time slot to be null where the timetableLesson is scheduled for the module to be deleted .
-     *
+     * Sets the TimetableLesson for the particular time slot to be null where the timetableLesson
+     * is scheduled for the module to be deleted.
      * @param schedule Schedule contains the lessons of the user for a particular day of the week.
      * @param module   Module to be Deleted
      * @see Module
@@ -167,7 +178,6 @@ public class Timetable {
                 schedule[i] = null;
             }
         }
-
     }
 
     /**
@@ -179,6 +189,7 @@ public class Timetable {
             modules.clear();
             clearTimetableFromLessons();
             TextUi.printTimetableCleared();
+            logger.log(Level.INFO, "All modules removed from timetable");
         } else {
             throw new UniModsException(TextUi.ERROR_EMPTY_TIMETABLE);
         }
@@ -197,13 +208,14 @@ public class Timetable {
         clearSchedule(saturday);
         clearSchedule(sunday);
     }
-    
+
     /**
      * Clears the TimetableLesson for all non-null time slots .
      *
      * @param schedule Schedule contains the lessons of the user for a particular day of the week.
      */
     public void clearSchedule(TimetableLesson[] schedule) {
+        assert (schedule.length > 0);
         for (int i = 0; i < schedule.length; i++) {
             if (schedule[i] != null) {
                 schedule[i] = null;
@@ -216,8 +228,8 @@ public class Timetable {
      * Draws a grid where the Horizontal Axis represents the hour timing
      * and the Vertical Axis represents the Day (MON/TUES/WED/... etc.)
      * Displays the lessons in each grid cell that had been added to the timetable
-     * <p>
-     * Also displays all the modules taken and the total number of MCs taken for the
+     *
+     * <p>Also displays all the modules taken and the total number of MCs taken for the
      * timetable
      */
     public void showTimetable() {
@@ -255,5 +267,17 @@ public class Timetable {
 
     public Integer getSemester() {
         return semester;
+    }
+
+
+    @Override
+    public int compareTo(Timetable timetable) {
+        int flag = 0;
+        boolean isSemesterSame = this.getSemester().equals(timetable.getSemester());
+        boolean areModulesSame = this.modules.equals(timetable.modules);
+        if (isSemesterSame && areModulesSame) {
+            flag = 1;
+        }
+        return flag;
     }
 }
