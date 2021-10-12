@@ -13,13 +13,15 @@ public class Parser {
      */
     public static boolean parseUserInput(String userInput, ArrayList<Trip> listOfTrips) {
         String[] userInputSplit = userInput.split(" ", 2);
-        String inputCommand = userInputSplit[0];
-        String inputDescription;
-        if (inputCommand.equals("quit")) {
-            inputDescription = null;
-        } else {
+        String inputCommand = userInputSplit[0].toLowerCase();
+        String inputDescription = null;
+        if (!checkValidCommand(inputCommand) || (userInputSplit.length == 1 && !inputCommand.equals("quit"))) {
+            Ui.printUnknownCommandError();
+            return true;
+        } else if (!inputCommand.equals("quit")) {
             inputDescription = userInputSplit[1];
         }
+
         switch (inputCommand) {
         case "create":
             String[] newTripInfo = inputDescription.split(" ");
@@ -50,6 +52,16 @@ public class Parser {
                 System.out.println("There is no matching trip index. Please try again.");
             }
             break;
+        case "view":
+            tripToGetInfo = inputDescription.split(" ", 2);
+            try {
+                int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
+                Trip tripToGet = listOfTrips.get(indexToGet);
+                tripToGet.viewAllExpenses();
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("There is no matching trip index. Please try again.");
+            }
+            break;
         case "delete":
             deleteTrip(listOfTrips, inputDescription);
             break;
@@ -69,10 +81,13 @@ public class Parser {
             Ui.goodBye();
             return false;
         default:
-            System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter -help "
-                    + "to learn more.");
+            Ui.printUnknownCommandError();
         }
         return true;
+    }
+
+    private static boolean checkValidCommand(String inputCommand) {
+        return Storage.getValidCommands().contains(inputCommand);
     }
 
     /**

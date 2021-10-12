@@ -45,6 +45,23 @@ public class Expense {
         System.out.println(formattedDate);
     }
 
+
+    //expense details
+    @Override
+    public String toString() {
+        return (this.getDescription()
+                + " at "
+                + this.getLocation()
+                + System.lineSeparator()
+                + "date: " + this.getDate()
+                + System.lineSeparator()
+                + "Amount Spent: " + this.getAmountSpent()
+                + System.lineSeparator()
+                + "People involved: " + this.getPersonsList().toString()
+                + System.lineSeparator()
+                + "Categories involved: " + this.getCategoriesList().toString());
+    }
+
     //Getters and setters
 
     public ArrayList<Person> getPersonsList() {
