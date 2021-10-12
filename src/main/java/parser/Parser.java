@@ -116,7 +116,7 @@ public class Parser {
      *
      * @param userInput String input from user.
      * @return Array of string with size 2 with index 0 representing the command and index 1 representing the
-     * command parameters.
+     *     command parameters.
      */
     public static String[] parseCommand(String userInput) {
         // Splits user input by spaces
