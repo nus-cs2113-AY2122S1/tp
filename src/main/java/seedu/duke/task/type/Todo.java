@@ -1,16 +1,20 @@
 package seedu.duke.task.type;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
+import seedu.duke.task.reminder.Reminder;
 
 public class Todo extends Task {
 
     private static final String TODO_DATE_DESCRIPTION_REGEX = " (doOn: %s)";
 
     private Date doOnDate;
+
+    private Reminder reminder;
 
     public Todo(String description) {
         super(description);
@@ -32,7 +36,7 @@ public class Todo extends Task {
         setPriority(priority);
         setDoOnDate(doOnDate);
     }
-
+    
     public Todo(String description, Date doOnDate, RecurrenceEnum recurrence) {
         this(description);
         setDoOnDate(doOnDate);
@@ -52,6 +56,18 @@ public class Todo extends Task {
 
     public void setDoOnDate(Date doOnDate) {
         this.doOnDate = doOnDate;
+        if (doOnDate != null) {
+            reminder = new Reminder(doOnDate);
+        }
+    }
+
+
+    public String getReminder(LocalDateTime now) {
+        return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
+    }
+    @Overrride
+    public boolean needReminder() {
+        return (reminder != null);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package seedu.duke.task;
 
-import net.fortuna.ical4j.model.property.Description;
-import seedu.duke.task.factory.DeadlineFactory;
+import java.time.LocalDateTime;
 
 public abstract class Task {
 
@@ -64,6 +63,9 @@ public abstract class Task {
         this.priority = priority;
     }
 
+    public abstract boolean needReminder();
+
+    public abstract String getReminder(LocalDateTime now);
     public RecurrenceEnum getRecurrence() {
         return this.recurrence;
     }

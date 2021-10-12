@@ -1,10 +1,12 @@
 package seedu.duke.task.type;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
+import seedu.duke.task.reminder.Reminder;
 
 public class Event extends Task {
 
@@ -12,9 +14,9 @@ public class Event extends Task {
 
     private static final String START_DATE_NOT_NULL_ASSERTION = "startDate for Event cannot be null";
     private static final String END_DATE_NOT_NULL_ASSERTION = "endDate for Event cannot be null";
-
     private static final String START_DATE_BEFORE_END_DATE_ASSERTION = "Start date must be before end date!";
 
+    private Reminder reminder;
     private Date startDate;
     private Date endDate;
 
@@ -40,6 +42,7 @@ public class Event extends Task {
         setRecurrence(recurrence);
     }
 
+
     public Date getStartDate() {
         return startDate;
     }
@@ -50,6 +53,7 @@ public class Event extends Task {
             assert startDate.before(endDate) : START_DATE_BEFORE_END_DATE_ASSERTION;
         }
         this.startDate = startDate;
+        reminder = new Reminder(startDate);
     }
 
     public Date getEndDate() {
@@ -63,11 +67,20 @@ public class Event extends Task {
         }
         this.endDate = endDate;
     }
+  
+    @Override
+    public boolean needReminder() {
+        return (reminder != null);
+    }
 
     @Override
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription()
             + String.format(DEADLINE_DATE_DESCRIPTION_REGEX,
             UtilityParser.getDateAsString(getStartDate()), UtilityParser.getDateAsString(getEndDate()));
+    }
+
+    public String getReminder(LocalDateTime now) {
+        return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), recurrence);
     }
 }
