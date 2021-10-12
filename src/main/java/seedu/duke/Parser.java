@@ -14,7 +14,10 @@ public class Parser {
         String[] userInputSplit = userInput.split(" ", 2);
         String inputCommand = userInputSplit[0].toLowerCase();
 
-        if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
+        if (inputCommand.equals("quit")) {
+            Ui.goodBye();
+            return false;
+        } else if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
             Ui.printNoTripError();
             return true;
         } else if (userInputSplit[0].equals("close")) {
@@ -104,10 +107,6 @@ public class Parser {
                     new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription));
             Ui.printExpenseAddedSuccess();
             break;
-
-        case "quit":
-            Ui.goodBye();
-            return false;
 
         default:
             Ui.printUnknownCommandError();
