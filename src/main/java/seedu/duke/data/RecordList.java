@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class RecordList {
     public static int numberOfRecords = 0;
-    private Budget budget;
+    private final Budget budget;
     private boolean hasBudget;
     private final ArrayList<Expenditure> expenditureRecords;
 
@@ -25,6 +25,7 @@ public class RecordList {
     public void addBudget(double spendingLimit) {
         budget.clearAmount();
         budget.setAmount(spendingLimit);
+        assert budget.getAmount()==spendingLimit;
         if (!hasBudget) {
             hasBudget = true;
         }
@@ -37,6 +38,7 @@ public class RecordList {
 
     public void deleteBudget() {
         budget.clearAmount();
+        assert budget.getAmount()==0.00;
         hasBudget = false;
     }
 

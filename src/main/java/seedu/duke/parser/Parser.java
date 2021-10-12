@@ -11,8 +11,8 @@ import seedu.duke.commands.AddBudgetCommand;
 import seedu.duke.commands.DeleteBudgetCommand;
 import seedu.duke.commands.AddExpenditureCommand;
 
-import java.time.LocalDate;
-import java.util.Locale;
+//import java.time.LocalDate;
+//import java.util.Locale;
 
 public class Parser {
 
@@ -38,6 +38,7 @@ public class Parser {
         String[] commandTypeAndParams = splitCommandWordAndArgs(userInput);
         String commandType = commandTypeAndParams[0];
         String commandParams = commandTypeAndParams[1].trim();
+        assert commandType.equals(commandType.toLowerCase());
         Command command;
         switch (commandType) {
         case AddCommand.COMMAND_WORD:
