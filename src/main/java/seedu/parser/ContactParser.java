@@ -134,7 +134,7 @@ public abstract class ContactParser {
         //Github username cannot have multiple consecutive hyphens.
         //Github username cannot begin or end with a hyphen.
         //Maximum is 39 characters.
-        String githubUsernameRegex = "^[a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38}$";
+        String githubUsernameRegex = "^[a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,39}$";
         if (!detailToParse.matches(githubUsernameRegex)) {
             throw new InvalidGithubUsernameException();
         }
