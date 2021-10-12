@@ -15,6 +15,7 @@ public class Duke {
     private Storage storage;
     private MainParser parser;
     private ContactList contactList;
+    private String personalContactFilePath;
 
     public Duke(String contactFilePath) {
         this.textUi = new TextUi();

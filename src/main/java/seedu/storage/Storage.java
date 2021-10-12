@@ -10,11 +10,30 @@ import java.io.IOException;
 public class Storage {
     private final String contactFilePath;
     private final File contactFile;
+    private final String personalContactFilePath;
+    private final File personalContactFile;
     public static final String SEPARATOR = ",";
 
-    public Storage(String contactFilePath) {
+    public Storage(String contactFilePath, String personalContactFilePath) {
         this.contactFilePath = contactFilePath;
         this.contactFile = new File(contactFilePath);
+        this.personalContactFilePath = personalContactFilePath;
+        this.personalContactFile = new File(personalContactFilePath);
+    }
+
+    private boolean hasExistingPersonalContactFile() throws FileErrorException {
+        try {
+            if (!contactFile.exists()) {
+                contactFile.getParentFile().mkdirs();
+            }
+            if (contactFile.createNewFile()) {
+                TextUi.createNewContactFileMessage(contactFilePath);
+                return false;
+            }
+        } catch (IOException e) {
+            throw new FileErrorException();
+        }
+        return true;
     }
 
     private boolean hasExistingContactFile() throws FileErrorException {
