@@ -11,14 +11,14 @@ public class TextUi {
             + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      \n";
 
     private static final String LINE = "____________________________________________________________\n";
-    private final Scanner scanner;
+
+    private static final Scanner scanner = new Scanner(System.in);
 
     public TextUi() {
-        scanner = new Scanner(System.in);
         initMessage();
     }
 
-    public String getUserInput() {
+    public static String getUserInput() {
         String userInput = scanner.nextLine().trim();
         if (userInput.contains(",")) {
             String newUserInput = userInput.replace(",", "");
@@ -26,6 +26,15 @@ public class TextUi {
             return newUserInput;
         }
         return userInput;
+    }
+
+    public static String getUserDeleteConfirmation(Contact deletedContact, int deletedIndex) {
+        String message = "Delete this contact?  (y/n)\n"
+                + deletedIndex + ". " + deletedContact.getName() + formatContactFields(deletedContact);
+        printDoubleLineMessage(message);
+
+        String userDeleteConfirmation = scanner.nextLine().trim();
+        return userDeleteConfirmation;
     }
 
     // Used for print messages after user inputs
@@ -99,6 +108,11 @@ public class TextUi {
 
     public static void contactsEmptyListMessage() {
         String message = "You have not stored any contacts in ConTech";
+        printDoubleLineMessage(message);
+    }
+
+    public static void cancelDeleteContactMessage() {
+        String message = "Delete has been cancelled.";
         printDoubleLineMessage(message);
     }
 

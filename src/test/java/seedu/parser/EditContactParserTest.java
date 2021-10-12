@@ -25,11 +25,4 @@ class EditContactParserTest {
         assertArrayEquals(expectedResult, actualResult);
     }
 
-    @Test
-    void getIndex() throws MissingArgException {
-        int expectedResult = 3;
-        String testInput = "edit 3 ";
-        int actualResult = editContactParser.getIndex(testInput);
-        assertEquals(expectedResult, actualResult);
-    }
 }

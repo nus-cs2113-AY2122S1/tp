@@ -52,6 +52,14 @@ public class MainParserTest {
     }
 
     @Test
+    public void parseDeleteCommand_multipleIndexes_expectDeleteContactIndexMatch() {
+        testUserInput = "rm 1 2";
+        testUserInput = "rm " + testIndex;
+        final DeleteContactCommand testResultCommand = getParsedCommand(testUserInput, DeleteContactCommand.class);
+        assertEquals(testIndex, testResultCommand.getDeletedIndex());
+    }
+
+    @Test
     public void parseDeleteCommand_validIndexWithSpaces_expectDeleteContactIndexMatch() {
         testIndex = 1;
         testUserInput = "rm    " + testIndex;
@@ -75,13 +83,6 @@ public class MainParserTest {
         assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
     }
 
-    @Test
-    public void parseDeleteCommand_invalidIndexFormatting_expectFailedCommandType() {
-        testUserInput = "rm 1 2";
-        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_INDEX;
-        final FailedCommand actualFailedCommand = getParsedCommand(testUserInput, FailedCommand.class);
-        assertEquals(expectedFailedCommandType, actualFailedCommand.getType());
-    }
 
     @Test
     public void parseDeleteCommand_outOfRangeIndex_expectFailedCommandType() {
