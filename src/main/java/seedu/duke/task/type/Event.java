@@ -13,6 +13,8 @@ public class Event extends Task {
     private static final String START_DATE_NOT_NULL_ASSERTION = "startDate for Event cannot be null";
     private static final String END_DATE_NOT_NULL_ASSERTION = "endDate for Event cannot be null";
 
+    private static final String START_DATE_BEFORE_END_DATE_ASSERTION = "Start date must be before end date!";
+
     private Date startDate;
     private Date endDate;
 
@@ -44,6 +46,9 @@ public class Event extends Task {
 
     public void setStartDate(Date startDate) {
         assert startDate != null : START_DATE_NOT_NULL_ASSERTION;
+        if (endDate != null) {
+            assert startDate.before(endDate) : START_DATE_BEFORE_END_DATE_ASSERTION;
+        }
         this.startDate = startDate;
     }
 
@@ -53,13 +58,16 @@ public class Event extends Task {
 
     public void setEndDate(Date endDate) {
         assert endDate != null : END_DATE_NOT_NULL_ASSERTION;
+        if (startDate != null) {
+            assert startDate.before(endDate) : START_DATE_BEFORE_END_DATE_ASSERTION;
+        }
         this.endDate = endDate;
     }
 
     @Override
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription()
-                + String.format(DEADLINE_DATE_DESCRIPTION_REGEX,
-                UtilityParser.getDateAsString(getStartDate()), UtilityParser.getDateAsString(getEndDate()));
+            + String.format(DEADLINE_DATE_DESCRIPTION_REGEX,
+            UtilityParser.getDateAsString(getStartDate()), UtilityParser.getDateAsString(getEndDate()));
     }
 }
