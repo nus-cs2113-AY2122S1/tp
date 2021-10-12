@@ -16,12 +16,18 @@ public class MedBot {
         Storage storage = null;
         boolean isInteracting = true;
 
-        ui.printWelcomeMessage();
+        ui.printWelcomeMessageOne();
         try {
             storage = new Storage();
-            ui.printOutput(storage.loadStorage(patientList));
+            String loadStorageErrorMessage = storage.loadStorage(patientList);
+
+            if (!loadStorageErrorMessage.isBlank()) {
+                ui.printOutput(loadStorageErrorMessage);
+            }
+            ui.printWelcomeMessageTwo();
+
         } catch (FileNotFoundException | MedBotException e) {
-            System.out.println(e.getMessage());
+            ui.printOutput(e.getMessage());
         }
 
         while (isInteracting) {

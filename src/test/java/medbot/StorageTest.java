@@ -20,31 +20,34 @@ class StorageTest {
     private static final String VALID_TEST_DATA = "src/test/data/StorageTest/validData.txt";
     private static final String SAVED_TEST_DATA = "src/test/data/StorageTest/savedData.txt";
     private static final String NON_EXISTENT_FILE_NAME = "NON_EXISTENT_FILE.txt";
+    private static final String ERROR_INVALID_STORAGE_LINE_INSTRUCTION = "\n\n"
+            + "Please decide if you wish to:" + "\n"
+            + "1. Enter 'exit' to exit Medbot to correct the storage file" + "\n"
+            + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
 
     @Test
-    public void constructor_nullFilePath_exceptionThrown() {
+    public void testConstructor_nullFilePath_exceptionThrown() {
         assertThrows(NullPointerException.class, () -> new Storage(null));
     }
 
     @Test
-    public void constructor_invalidFilePath_exceptionThrown() {
+    public void testConstructor_invalidFilePath_exceptionThrown() {
         assertThrows(NullPointerException.class, () -> new Storage(NON_EXISTENT_FILE_NAME));
     }
 
     @Test
-    public void loadStorage_partialInvalidFormat_exceptionThrown() throws MedBotException, FileNotFoundException {
+    public void testLoadStorage_partialInvalidFormat_exceptionThrown() throws MedBotException, FileNotFoundException {
 
         Storage storage = new Storage(INVALID_TEST_DATA);
         PatientList actualPl = new PatientList();
         PatientList expectedPl = getTestPatientList();
         String expectedLoadStorageErrorMessage =
-                "Error: Line 8 of storage/data.txt is invalid! Skipping to next line...\n"
-                        + "Error: Line 9 of storage/data.txt is invalid! Skipping to next line...\n"
-                        + "Error: Line 10 of storage/data.txt is invalid! Skipping to next line...\n"
-                        + "Error: Line 11 of storage/data.txt is invalid! Skipping to next line...\n"
-                        + "\nI am done reading storage/data.txt\n"
-                        + "1. Enter 'exit' to exit program to correct data file storage/data.txt\n"
-                        + "2. Enter other valid commands to OVERWRITE all invalid data!\n";
+                "Error: Line 8 of storage/data.txt is invalid!\n"
+                        + "Error: Line 9 of storage/data.txt is invalid!\n"
+                        + "Error: Line 10 of storage/data.txt is invalid!\n"
+                        + "Error: Line 11 of storage/data.txt is invalid!\n"
+                        + ERROR_INVALID_STORAGE_LINE_INSTRUCTION;
+
         //Test for both correct error message and correct loading of storage
         assertEquals(expectedLoadStorageErrorMessage, storage.loadStorage(actualPl));
         assertEquals(expectedPl.getStorageString(), actualPl.getStorageString());
@@ -53,19 +56,19 @@ class StorageTest {
     // expected: patients added through the program
     // actual: patients added through loading storage
     @Test
-    public void loadStorage_validFormat() throws FileNotFoundException, MedBotException {
+    public void testLoadStorage_validFormat() throws FileNotFoundException, MedBotException {
         Storage storage = new Storage(VALID_TEST_DATA);
         PatientList actualPl = new PatientList();
 
         storage.loadStorage(actualPl);
         PatientList expectedPl = getTestPatientList();
 
-        // ensure loaded storage data is properly constructed
+        // ensure storage data is properly loaded into the program
         assertEquals(expectedPl.getStorageString(), actualPl.getStorageString());
     }
 
     @Test
-    public void saveData_valid() throws MedBotException {
+    public void testSaveData() throws MedBotException {
         PatientList patientList = getTestPatientList();
         Storage storage = new Storage(SAVED_TEST_DATA);
         storage.saveData(patientList);
@@ -74,8 +77,8 @@ class StorageTest {
             String actualFileString = scanFileToString(SAVED_TEST_DATA);
             String expectedFileString = scanFileToString(VALID_TEST_DATA);
             assertEquals(expectedFileString, actualFileString);
-            deleteSavedData();
 
+            deleteSavedData();
 
         } catch (FileNotFoundException e) {
             throw new MedBotException("FILE ERROR");
