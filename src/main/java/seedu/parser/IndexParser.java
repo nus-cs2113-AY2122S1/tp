@@ -14,18 +14,17 @@ public class IndexParser {
 
     public static int getIndexFromInput(String userInput, String command)
             throws NumberFormatException, MissingArgException {
-        String[] comdIndexSplit = userInput.split(" ", COMD_INDEX_LENGTH);
-        if (comdIndexSplit.length == COMD_WORD_LENGTH) {
+        String[] destructuredInputs = userInput.split(" ", COMD_INDEX_LENGTH);
+        if (destructuredInputs.length <= COMD_WORD_LENGTH) {
             throw new MissingArgException();
         }
-        String[] indexSplit = comdIndexSplit[INDEX_POSITION].trim().split(" ");
+        String[] indexSplit = destructuredInputs[INDEX_POSITION].trim().split(" ");
         // throws NumberFormatExcept if not integer
-        int index = Integer.parseInt(indexSplit[SIGNIFICANT_INDEX_POSITION].trim());
-        return index;
+        return Integer.parseInt(indexSplit[SIGNIFICANT_INDEX_POSITION].trim());
+
     }
 
     public static Contact getContactFromIndex(int index, ContactList contactList) throws IndexOutOfBoundsException {
-        Contact contact = contactList.getContactAtIndex(index);
-        return contact;
+        return contactList.getContactAtIndex(index);
     }
 }

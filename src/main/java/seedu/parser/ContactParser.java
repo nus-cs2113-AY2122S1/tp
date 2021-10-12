@@ -57,8 +57,6 @@ public abstract class ContactParser {
         contactDetails[indexToStore] = detailToStore;
     }
 
-
-
     private int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
