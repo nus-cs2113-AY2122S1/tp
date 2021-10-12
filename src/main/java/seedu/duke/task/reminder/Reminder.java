@@ -7,9 +7,12 @@ import java.util.Date;
 import java.sql.Timestamp;
 
 public class Reminder {
+    private static final long BUFFER_SECOND = 30;
+    private static final long RECURRENCE_INCREMENT = 1;
     private LocalDateTime taskTime;
     private LocalDateTime reminderTime;
     private boolean reminderDone;
+    private long userTime_minute = 10;
 
     public Reminder() {
         this.reminderDone = false;
@@ -17,7 +20,7 @@ public class Reminder {
 
     public Reminder(Date time) {
         this.taskTime = new Timestamp(time.getTime()).toLocalDateTime();
-        this.reminderTime = taskTime.minusMinutes(10);
+        this.reminderTime = taskTime.minusMinutes(userTime_minute);
         setReminderDone();
     }
 
@@ -28,27 +31,19 @@ public class Reminder {
 
     public void setReminderDone() {
         LocalDateTime now = LocalDateTime.now();
-        if (now.isAfter(this.reminderTime.plusSeconds(30))) {
+        if (now.isAfter(this.reminderTime.plusSeconds(BUFFER_SECOND))) {
             this.reminderDone = true;
         } else {
             this.reminderDone = false;
         }
     }
-/*
-    public void checkAndPrintReminder(LocalDateTime now, String task) {
-        if (reminderTime.isAfter(now.minusSeconds(30)) && reminderTime.isBefore(now.plusSeconds(30))) {
-            System.out.println("Reminder! 10 min before the following task:");
-            //System.out.println("\t" + task);
-            this.reminderDone = true;
-        }
-    }
-    */
 
     public String getMessage(LocalDateTime now, String task) {
         if (!reminderDone) {
-            if (reminderTime.isAfter(now.minusSeconds(30)) && reminderTime.isBefore(now.plusSeconds(30))) {
+            if (reminderTime.isAfter(now.minusSeconds(BUFFER_SECOND))
+                    && reminderTime.isBefore(now.plusSeconds(BUFFER_SECOND))) {
                 this.reminderDone = true;
-                return ("Reminder! 10 min before the following task:\n");
+                return ("Reminder! 10 min before the following task:\n" + "\t" + task);
             }
         }
         return "";
@@ -62,19 +57,19 @@ public class Reminder {
             break;
         case DAILY:
             reminderMessage = getMessage(now, task);
-            setRecurReminderTime(reminderTime.plusDays(1));
+            setRecurReminderTime(reminderTime.plusDays(RECURRENCE_INCREMENT));
             break;
         case WEEKLY:
             reminderMessage = getMessage(now, task);
-            setRecurReminderTime(reminderTime.plusWeeks(1));
+            setRecurReminderTime(reminderTime.plusWeeks(RECURRENCE_INCREMENT));
             break;
         case MONTHLY:
             reminderMessage = getMessage(now, task);
-            setRecurReminderTime(reminderTime.plusMonths(1));
+            setRecurReminderTime(reminderTime.plusMonths(RECURRENCE_INCREMENT));
             break;
         case YEARLY:
             reminderMessage = getMessage(now, task);
-            setRecurReminderTime(reminderTime.plusYears(1));
+            setRecurReminderTime(reminderTime.plusYears(RECURRENCE_INCREMENT));
             break;
         }
         return reminderMessage;
