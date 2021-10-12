@@ -28,7 +28,7 @@ public class SelectCommand extends Command {
 
     public CommandResult execute() {
         try {
-            Item selectedItem = itemFromIndex(itemIndex);
+            Item selectedItem = getItemFromIndex(itemIndex);
             if (isTask(selectedItem)) {
                 return new CommandResult(Ui.getSelectedTaskMessage((Task) selectedItem));
             } else if (isEvent(selectedItem)) {
@@ -40,7 +40,7 @@ public class SelectCommand extends Command {
         return new CommandResult("I can't select the item you want!");
     }
 
-    private Item itemFromIndex(int index) throws DukeException {
+    private Item getItemFromIndex(int index) throws DukeException {
         if (FindCommand.filteredItemList.isEmpty()) {
             throw new DukeException("Search for some items first, then select the item you want.");
         }
