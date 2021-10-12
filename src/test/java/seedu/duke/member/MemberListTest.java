@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
+import seedu.duke.member.exception.InvalidMemberException;
 
 class MemberListTest {
 
@@ -27,7 +28,7 @@ class MemberListTest {
         izdiyad = new Member("Izdiyad", "A0456789D", 'M', 94376452);
         xingYuan = new Member("Xing Yuan", "A0567891E", 'M', 96987132);
 
-        ArrayList<Member>  memberList = new ArrayList<Member>();
+        ArrayList<Member> memberList = new ArrayList<Member>();
         memberList.add(teckHwee);
         memberList.add(ianWang);
         memberList.add(glenn);
@@ -75,7 +76,11 @@ class MemberListTest {
     void editMember() {
         final String string = "edit /m 1 /n Ian Wang";
         Parser.editMember(fullMemberList, string);
-        assertEquals(fullMemberList.getMember(1).getName(), "Ian Wang");
-        assertEquals(fullMemberList.getMember(1).getStudentNumber(), "A0123456A");
+        try {
+            assertEquals(fullMemberList.getMember(1).getName(), "Ian Wang");
+            assertEquals(fullMemberList.getMember(1).getStudentNumber(), "A0123456A");
+        } catch (InvalidMemberException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

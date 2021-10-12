@@ -1,6 +1,7 @@
 package seedu.duke.member;
 
 import java.util.ArrayList;
+import seedu.duke.member.exception.InvalidMemberException;
 
 public class MemberList {
 
@@ -25,11 +26,11 @@ public class MemberList {
     }
 
     public String getMemberName(int index) { //added by xy
-        return memberList.get(index - 1).name.toString();
+        return memberList.get(index - 1).name;
     }
 
     public String getMemberStudentNumber(int index) { //added by xy
-        return memberList.get(index - 1).studentNumber.toString();
+        return memberList.get(index - 1).studentNumber;
     }
 
     public char getMemberGender(int index) { //added by xy
@@ -55,9 +56,20 @@ public class MemberList {
      * @param memberNumber member number according to member list
      * @return member request by memberNumber
      */
-    public Member getMember(int memberNumber) {
-        int index = memberNumber - 1;
-        Member member = memberList.get(index);
+    public Member getMember(int memberNumber) throws InvalidMemberException{
+        Member member = new Member();
+        try {
+            boolean isWithinMemberList = (memberNumber > 0) && (memberNumber <= memberList.size());
+            if (isWithinMemberList) {
+                int index = memberNumber - 1;
+                member = memberList.get(index);
+
+            } else {
+                throw new InvalidMemberException("Member do not exist, please select the right member index.");
+            }
+        } catch (InvalidMemberException e) {
+            throw new InvalidMemberException(e.getMessage());
+        }
         return member;
     }
 
