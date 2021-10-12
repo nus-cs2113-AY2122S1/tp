@@ -109,8 +109,8 @@ public class Parser {
         String[] listOfPeople = userInput.split("/")[0].split(",");
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         for (String name : listOfPeople) {
-            for (Person person : currentTrip.getListOfPersons()){
-                if (name.trim().equalsIgnoreCase(person.getName())){
+            for (Person person : currentTrip.getListOfPersons()) {
+                if (name.trim().equalsIgnoreCase(person.getName())) {
                     validListOfPeople.add(person);
                     break;
                 }
@@ -119,7 +119,7 @@ public class Parser {
         return validListOfPeople;
     }
 
-    private static String getDescription(String userInput){
+    private static String getDescription(String userInput) {
         return userInput.split("/")[1].trim();
     }
 
