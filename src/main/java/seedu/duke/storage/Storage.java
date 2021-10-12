@@ -9,9 +9,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Storage {
+    private static Logger logger = Logger.getLogger("Storage class");
     private static final String DIRECTORY_NAME = "data";
     private static final String FILE_NAME_DISH = "dishes.txt";
     private static final String FILE_NAME_INGR = "ingredients.txt";
@@ -46,6 +50,7 @@ public class Storage {
             }
 
         } catch (IOException e) {
+            logger.log(Level.INFO, "File creation failed / unable to retrieve file");
             System.out.println("____________________________________________");
             System.out.println("Unable to access file");
             System.out.println("____________________________________________");
@@ -79,6 +84,7 @@ public class Storage {
                 System.out.println("Creating " + FILE_NAME_INGR);
                 fileToReadIngr.createNewFile();
             } catch (IOException ex) {
+                logger.log(Level.INFO, "File creation failed / unable to retrieve file");
                 System.out.println("____________________________________________");
                 System.out.println("Unable to create ingredients.txt");
                 System.out.println("____________________________________________");
@@ -104,7 +110,7 @@ public class Storage {
                     for (int i = 3; i < params.length; i++) {
                         int ingredientIndex = IngredientList.find(params[i]);
                         Ingredient dishComponent = IngredientList.ingredientList.get(ingredientIndex);
-                        dishToAdd.constituents.add(dishComponent);
+                        dishToAdd.getConstituents().add(dishComponent);
                         dishComponent.addDishWaste(dishToAdd.getIngredientContribution());
                     }
                 }
@@ -115,6 +121,7 @@ public class Storage {
                 System.out.println("Creating " + FILE_NAME_DISH);
                 fileToReadIngr.createNewFile();
             } catch (IOException ex) {
+                logger.log(Level.INFO, "File creation failed / unable to retrieve file");
                 System.out.println("____________________________________________");
                 System.out.println("Unable to create dishes.txt");
                 System.out.println("____________________________________________");

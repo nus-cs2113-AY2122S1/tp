@@ -3,7 +3,8 @@ package seedu.duke.command;
 import seedu.duke.DishList;
 import seedu.duke.Ui;
 import java.util.ArrayList;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddDishIngrCommand extends Command {
     private static Logger logger = Logger.getLogger("AddingDishIngrCommand.execute()");

@@ -1,11 +1,12 @@
 package seedu.duke;
 
-import org.w3c.dom.css.CSSStyleDeclaration;
-
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Dish {
-    public ArrayList<Ingredient> constituents = new ArrayList<>();
+    private static Logger logger = Logger.getLogger("Dish class");
+    private ArrayList<Ingredient> constituents = new ArrayList<>();
     private Ui ui = new Ui();
     private String dishName;
     private Double wastage;
@@ -13,12 +14,14 @@ public class Dish {
     private Double ingredientContribution;
 
     public Dish(String dishName) {
+        logger.log(Level.INFO, "Calling default constructor");
         this.dishName = dishName;
         this.wastage = 0.0;
         this.ingredientContribution = 0.0;
     }
 
     public Dish(String dishName, double wastage, double ingredientContribution) {
+        logger.log(Level.INFO, "Calling loading constructor");
         this.dishName = dishName;
         this.wastage = wastage;
         this.ingredientContribution = ingredientContribution;
@@ -30,6 +33,10 @@ public class Dish {
 
     public Double getIngredientContribution() {
         return ingredientContribution;
+    }
+
+    public ArrayList<Ingredient> getConstituents() {
+        return constituents;
     }
 
     public void addConstituent(String ingredientName) {
@@ -47,7 +54,6 @@ public class Dish {
             ingredientContribution = wastage / constituents.size();
             //Add new contribution
             for (Ingredient ingredient : constituents) {
-                //Change in contribution is change in wastage / num of constituents
                 ingredient.addDishWaste(ingredientContribution);
             }
         }
@@ -65,7 +71,6 @@ public class Dish {
                 ingredient.addDishWaste(value / constituents.size());
             }
         }
-
     }
 
 
@@ -76,11 +81,12 @@ public class Dish {
             for (Ingredient ingredient : constituents) {
                 constituentList = constituentList + "," + ingredient.getIngredientName();
             }
-            constituentList = constituentList.replaceFirst(",", " ");
+            constituentList = constituentList.replaceFirst(",", "");
         } else {
+            logger.log(Level.INFO, "No constituents present for dish " + dishName);
             constituentList = "None";
         }
-        return dishName + '\n'
+        return dishName + System.lineSeparator()
                 + "   Wastage: " + wastage + " kg" + System.lineSeparator()
                 + "   Constituents: " + constituentList;
     }

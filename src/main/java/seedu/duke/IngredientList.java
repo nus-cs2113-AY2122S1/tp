@@ -20,7 +20,7 @@ public class IngredientList {
 
     //Returns -1 if not present, index if present
     public static int find(String ingredientName) {
-        for (Ingredient ingredient: ingredientList) {
+        for (Ingredient ingredient : ingredientList) {
             if (ingredient.getIngredientName().equals(ingredientName)) {
                 return ingredientList.indexOf(ingredient);
             }
