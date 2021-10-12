@@ -35,7 +35,7 @@ public class Storage {
     }
 
     /**
-     * Checks if there is an open trip or not
+     * Checks if there is an open trip or not.
      * @return true if there is an open trip
      */
     public static boolean checkOpenTrip() {
