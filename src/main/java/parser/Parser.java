@@ -34,7 +34,6 @@ import static command.CommandList.UPDATE;
 import static command.CommandList.UPDATE_DISPENSE;
 import static command.CommandList.UPDATE_ORDER;
 
-
 /**
  * Helps to parse the commands given by the user as well as extract the parameters provided.
  */
