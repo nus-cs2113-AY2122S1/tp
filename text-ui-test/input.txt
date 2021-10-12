@@ -9,6 +9,10 @@ add Caprese Salad /ingredients 1+2+3 /steps a+b+c
 list
 check cookies
 check meatballs
+add Fried Fish /ingredients Fish+Olive Oil /steps Preheat pan+Add olive oil+Add fish and fry on both sides until crispy
+find /ingredients Olive Oil
+find olives
+find /// / / /
 delete 5
 delete cookies
 delete 2

@@ -16,9 +16,9 @@ public class Cookbook {
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();
-        for (Recipe recipe : recipes) {
-            output.append(recipe.getID()).append(". ");
-            output.append(recipe.getName());
+        for (int i = 0; i < recipes.size(); i++) {
+            output.append(i + 1).append(". ");
+            output.append(recipes.get(i).getName());
             output.append(System.lineSeparator());
         }
         return output.toString();
@@ -38,7 +38,6 @@ public class Cookbook {
             throw new GordonException(GordonException.DUPLICATE_RECIPE_NAME);
         }
 
-        r.setId(recipes.size() + 1);
         recipes.add(r);
     }
 
@@ -47,16 +46,6 @@ public class Cookbook {
             recipes.remove(index);
         } catch (IndexOutOfBoundsException e) {
             throw new GordonException(GordonException.INDEX_OOB);
-        }
-    }
-
-    public void checkRecipe(int index) throws GordonException {
-        try {
-            System.out.println(recipes.get(index).toString());
-        } catch (IndexOutOfBoundsException e) {
-            throw new GordonException(GordonException.INDEX_OOB);
-        } catch (IllegalArgumentException e) {
-            throw new GordonException(GordonException.INDEX_INVALID);
         }
     }
 
@@ -80,36 +69,39 @@ public class Cookbook {
         return recipes.get(index).toString();
     }
 
-    public void sortByID() {
-        Comparator<Recipe> compareByID = Comparator
-                .comparing(Recipe::getID);
-        recipes = recipes.stream()
-                .sorted(compareByID)
+    public ArrayList<Recipe> filterByIngredients(ArrayList<String> ingredients) {
+        return recipes.stream()
+                .filter(r -> r.containsIngredients(ingredients))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public void sortByPrice() {
-        Comparator<Recipe> compareByPrice = Comparator.comparing(Recipe::getTotalPrice)
-                .thenComparing(Recipe::getID);
-        recipes = recipes.stream()
+    public ArrayList<Recipe> filterByTags(ArrayList<String> tags) {
+        return recipes.stream()
+                .filter(r -> r.containsTags(tags))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public ArrayList<Recipe> filterByPrice(float price) {
+        Comparator<Recipe> compareByPrice = Comparator.comparing(Recipe::getTotalPrice);
+        return recipes.stream()
+                .filter(r -> r.totalPrice <= price)
                 .sorted(compareByPrice)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public void sortByCalories() {
-        Comparator<Recipe> compareByCalories = Comparator.comparing(Recipe::getCalories)
-                .thenComparing(Recipe::getID);
-        recipes = recipes.stream()
+    public ArrayList<Recipe> filterByCalories(int cal) {
+        Comparator<Recipe> compareByCalories = Comparator.comparing(Recipe::getCalories);
+        return recipes.stream()
+                .filter(r -> r.calories <= cal)
                 .sorted(compareByCalories)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public ArrayList<Recipe> filterByTag(String tag) {
-        Comparator<Recipe> compareByID = Comparator
-                .comparing(Recipe::getID);
+    public ArrayList<Recipe> filterByTime(int time) {
+        Comparator<Recipe> compareByTime = Comparator.comparing(Recipe::getTotalTime);
         return recipes.stream()
-                .filter(r -> r.getTags().contains(tag.toLowerCase()))
-                .sorted(compareByID)
+                .filter(r -> r.getTotalTime() <= time)
+                .sorted(compareByTime)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }

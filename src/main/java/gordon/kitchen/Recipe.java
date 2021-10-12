@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class Recipe {
     protected String name;
-    protected int id;
     protected Difficulty difficulty = Difficulty.None;
     protected int preparationTime = -1;
     protected int cookingTime = -1;
@@ -28,17 +27,13 @@ public class Recipe {
         return name;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getID() {
-        return id;
-    }
-
     public void setTimes(int prepTime, int cookTime) {
         preparationTime = prepTime;
         cookingTime = cookTime;
+    }
+
+    public int getTotalTime() {
+        return preparationTime + cookingTime;
     }
 
     public void addIngredient(String ingredient) {
@@ -63,6 +58,13 @@ public class Recipe {
         } catch (IllegalArgumentException e) {
             throw new GordonException(GordonException.INDEX_INVALID);
         }
+    }
+
+    public boolean containsIngredients(ArrayList<String> search) {
+        ArrayList<String> ingredientsToLowercase = new ArrayList<>(ingredients);
+        ingredientsToLowercase.replaceAll(String::toLowerCase);
+        search.replaceAll(String::toLowerCase);
+        return ingredientsToLowercase.containsAll(search);
     }
 
     public void addStep(String step) {
@@ -93,8 +95,11 @@ public class Recipe {
         tags.add(tag.toLowerCase());
     }
 
-    public ArrayList<String> getTags() {
-        return tags;
+    public boolean containsTags(ArrayList<String> search) {
+        ArrayList<String> tagsToLowercase = new ArrayList<>(tags);
+        tagsToLowercase.replaceAll(String::toLowerCase);
+        search.replaceAll(String::toLowerCase);
+        return tagsToLowercase.containsAll(search);
     }
 
     public float getTotalPrice() {

@@ -3,14 +3,16 @@ package gordon.util;
 import gordon.command.Command;
 import gordon.command.AddCommand;
 import gordon.command.DeleteCommand;
-import gordon.command.ListCommand;
 import gordon.command.CheckCommand;
 import gordon.command.HelpCommand;
+import gordon.command.ListCommand;
+import gordon.command.FindIngredientsCommand;
 import gordon.command.NullCommand;
 import gordon.exception.GordonException;
-import gordon.kitchen.Cookbook;
 import gordon.kitchen.Recipe;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Parser {
@@ -57,6 +59,25 @@ public class Parser {
                 return new CheckCommand(nameRecipe);
             } else if (parseCommand(line).equalsIgnoreCase("list")) {
                 return new ListCommand();
+            } else if (parseCommand(line).equalsIgnoreCase("find")) {
+                String[] splitContent = line.split("/");
+                if (splitContent.length < 2) {
+                    throw new GordonException(GordonException.COMMAND_INVALID);
+                }
+                int spaceIndex = splitContent[1].indexOf(' ');
+                if (spaceIndex < 0) {
+                    throw new GordonException(GordonException.COMMAND_INVALID);
+                }
+                String target = splitContent[1].substring(0, spaceIndex);
+                switch (target) {
+                case "ingredients":
+                    ArrayList<String> ingredients = new ArrayList<>(Arrays.asList(splitContent[1]
+                            .substring(spaceIndex + 1).split("\\+")));
+                    return new FindIngredientsCommand(ingredients);
+                case "tags":
+                default:
+                    throw new GordonException(GordonException.COMMAND_INVALID);
+                }
             } else if (parseCommand(line).equalsIgnoreCase("help")) {
                 return new HelpCommand();
             } else {
@@ -97,7 +118,7 @@ public class Parser {
         String newLine = line.substring(ingredientsIndex + INGREDIENTS_WORD_LENGTH);
         String[] ingredientsList = newLine.split("\\+");
         for (int i = 0; i < ingredientsList.length; i++) {
-            r.addIngredient(ingredientsList[i], i);
+            r.addIngredient(ingredientsList[i].trim(), i);
         }
     }
 
