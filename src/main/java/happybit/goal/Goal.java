@@ -3,33 +3,30 @@ package happybit.goal;
 import happybit.habit.Habit;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Goal {
 
     protected String goalName;
     protected GoalType goalType;
-    protected ArrayList<Habit> habitList = new ArrayList<>();
+    protected Date startDate;
+    protected Date endDate;
+    protected ArrayList<Habit> habitList;
 
     /**
-     * Constructor for Goal class with goalType defined.
+     * Constructor for Goal class with goalType and startDate defined.
      *
-     * @param goalName String description of the goal.
-     * @param goalType Type/Category of goal.
+     * @param goalName  String description of the goal.
+     * @param goalType  Type/Category of goal.
+     * @param startDate Date to start tracking of the goal.
+     * @param endDate   Date to end tracking of the goal.
      */
-    public Goal(String goalName, GoalType goalType) {
+    public Goal(String goalName, GoalType goalType, Date startDate, Date endDate) {
         this.goalName = goalName;
         this.goalType = goalType;
-    }
-
-    /**
-     * Constructor for Goal class with goalType not defined.
-     * goalType will be set as DEFAULT.
-     *
-     * @param goalName String description of the goal.
-     */
-    public Goal(String goalName) {
-        this.goalName = goalName;
-        this.goalType = GoalType.DEFAULT;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.habitList = new ArrayList<>();
     }
 
     /**
