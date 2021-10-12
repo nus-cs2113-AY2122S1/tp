@@ -67,25 +67,36 @@ public class PatientList {
     public void editPatient(int patientId, Patient newPatientData) throws MedBotException {
         if (!patients.containsKey(patientId)) {
             throw new MedBotException(getNoPatientIdErrorMessage(patientId));
-        } else {
-            mergeEditPatientData(patients.get(patientId), newPatientData);
         }
+        assert (patientId > 0) && (patientId <= size());
+        mergeEditPatientData(patients.get(patientId), newPatientData);
     }
 
-    public Patient deletePatient(int patientId) throws MedBotException {
+    /**
+     * Deletes the specified patient.
+     *
+     * @param patientId The patient to delete.
+     * @throws MedBotException when the patient ID cannot be found.
+     */
+    public void deletePatient(int patientId) throws MedBotException {
         if (!patients.containsKey(patientId)) {
             throw new MedBotException(getNoPatientIdErrorMessage(patientId));
         }
-        return patients.remove(patientId);
+        assert (patientId > 0) && (patientId <= size());
+        patients.remove(patientId);
     }
 
+    /**
+     * Lists all current patients.
+     *
+     * @return String displays the list of all current patients
+     */
     public String listPatients() {
         String output = "";
         for (int key : patients.keySet()) {
             output += patients.get(key);
             output += "\n";
         }
-
         return output;
     }
 
@@ -105,7 +116,6 @@ public class PatientList {
             String patientStorageString = patient.getStorageString();
             output += patientStorageString + "\n";
         }
-
         return output;
     }
 

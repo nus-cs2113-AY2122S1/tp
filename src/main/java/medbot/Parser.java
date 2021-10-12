@@ -162,10 +162,10 @@ public class Parser {
     }
 
     /**
-     * Parses the user input for the editPatientInformation command.
+     * Processes user input for the editPatientInformation command.
      *
-     * @param userInput the preprocessed user input
-     * @return the Edit Command
+     * @param userInput String containing the full user input.
+     * @return EditPatientCommand objects
      * @throws MedBotException when the parameters given cannot be parsed
      */
     private static EditPatientCommand parseEditPatientCommand(String userInput) throws MedBotException {
@@ -182,11 +182,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException ie) {
             throw new MedBotException(ERROR_PATIENT_ID_NOT_SPECIFIED);
         }
-        String processedInput = preprocessMultiAttributeInput(userInput);
-        String[] parameters = processedInput.split(REGEX_VERTICAL_LINE);
-        if (parameters.length == 1) {
-            throw new MedBotException(ERROR_NO_PARAMETER);
-        }
+        String[] parameters = getParameters(userInput);
         Patient patient = new Patient();
         patient.setNull();
         for (int i = 1; i < parameters.length; i++) {
@@ -195,24 +191,16 @@ public class Parser {
         return new EditPatientCommand(patientId, patient);
     }
 
-    private static String preprocessInput(String userInput) {
-        return userInput.stripLeading().replace(VERTICAL_LINE, EMPTY_STRING);
-    }
 
     /**
-     * Parses and processes user input to create a new patient object with the corresponding information.
+     * Processes user input to create a new patient object with the corresponding information.
      *
      * @param userInput String containing the full user input.
      * @return AddPatientCommand object.
      * @throws MedBotException when no parameters are specified.
      */
     private static AddPatientCommand parseAddPatientCommand(String userInput) throws MedBotException {
-        String processedInput = preprocessMultiAttributeInput(userInput);
-        String[] parameters = processedInput.split(REGEX_VERTICAL_LINE);
-        if (parameters.length == 1) {
-            throw new MedBotException(ERROR_NO_PARAMETER);
-        }
-        assert parameters.length > 1;
+        String[] parameters = getParameters(userInput);
         Patient patient = new Patient();
         for (int i = 1; i < parameters.length; i++) {
             updatePersonalInformation(patient, parameters[i]);
@@ -220,6 +208,32 @@ public class Parser {
         return new AddPatientCommand(patient);
     }
 
+    /**
+     * Parses user input to the correct patient information format.
+     *
+     * @param userInput String containing the full user input.
+     * @return The parameters list given by user.
+     * @throws MedBotException when no parameters are specified.
+     */
+    private static String[] getParameters(String userInput) throws MedBotException {
+        String processedInput = preprocessMultiAttributeInput(userInput);
+        String[] parameters = processedInput.split(REGEX_VERTICAL_LINE);
+        if (parameters.length == 1) {
+            throw new MedBotException(ERROR_NO_PARAMETER);
+        }
+        assert parameters.length > 1;
+        return parameters;
+    }
+
+    /**
+     * Preprocesses user input to remove invalid substring that can not be parsed.
+     *
+     * @param userInput The initial user input.
+     * @return user input without leading white space and vertical lines present.
+     */
+    private static String preprocessInput(String userInput) {
+        return userInput.stripLeading().replace(VERTICAL_LINE, EMPTY_STRING);
+    }
 
     /**
      * Parses attributeString and modifies the corresponding attribute in person.
@@ -295,6 +309,7 @@ public class Parser {
             if (!icString.matches(REGEX_IC)) {
                 throw new MedBotException(ERROR_IC_NUMBER_INCORRECT_FORMAT);
             }
+            assert icString.length() == 9;
             return icString;
         } catch (IndexOutOfBoundsException ie) {
             throw new MedBotException(ERROR_IC_NUMBER_NOT_SPECIFIED);
