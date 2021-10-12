@@ -2,7 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
-import seedu.duke.parser.Parser;
+import seedu.duke.parser.CommandParser;
 import seedu.duke.task.TaskManager;
 import seedu.duke.task.reminder.ReminderManager;
 import seedu.duke.ui.Ui;
@@ -13,14 +13,14 @@ public class Duke {
 
     private final Scanner in;
     private final Ui ui;
-    private final Parser parser;
+    private final CommandParser parser;
     private final TaskManager taskManager;
     private ReminderManager reminderManager;
 
     public Duke() {
         in = new Scanner(System.in);
         ui = new Ui();
-        parser = new Parser();
+        parser = new CommandParser();
         taskManager = new TaskManager();
         reminderManager = new ReminderManager();
     }

@@ -26,8 +26,8 @@ class TaskManagerTest {
         endDate = Calendar.getInstance().getTime();
 
         Task newToDo = new Todo("read book", PriorityEnum.LOW, startDate, RecurrenceEnum.DAILY);
-        Task newDeadline = new Deadline("return book", PriorityEnum.MEDIUM, startDate, RecurrenceEnum.WEEKLY);
-        Task newEvent = new Event("project meeting", PriorityEnum.MEDIUM, startDate, endDate, RecurrenceEnum.MONTHLY);
+        Task newDeadline = new Deadline("return book", startDate, PriorityEnum.MEDIUM, RecurrenceEnum.WEEKLY);
+        Task newEvent = new Event("project meeting", startDate, endDate, PriorityEnum.MEDIUM, RecurrenceEnum.MONTHLY);
 
         tasklist.add(newToDo);
         tasklist.add(newDeadline);
