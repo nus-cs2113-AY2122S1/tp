@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Text UI of the application.
  */
 public class Ui {
-    private static final String INDENTED_HORIZONTAL_LINE = " ".repeat(4) + "_".repeat(60);
+    private static final String INDENTED_HORIZONTAL_LINE = " ".repeat(4) + "_".repeat(80);
     private static final String LINE_PREFIX = " ".repeat(5);
     /** Platform independent line separator. */
     private static final String LINE_SEPARATOR = System.lineSeparator();
