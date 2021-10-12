@@ -105,7 +105,6 @@ public class ListCommand extends Command {
                 filteredMedicines.sort(new StockComparator(parameterValue.toLowerCase(), true));
                 break;
             default:
-                ui.printInvalidParameter(parameter, CommandSyntax.LIST_COMMAND);
                 return;
             }
         }
