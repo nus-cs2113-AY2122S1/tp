@@ -77,15 +77,12 @@ public class Storage {
         Gson gson = new Gson();
         try {
             FileWriter fileWriter = new FileWriter(filename);
-            System.out.println("After FileWriter");
             JsonWriter jsonWriter = new JsonWriter(fileWriter);
-            System.out.println("After JsonWriter");
             gson.toJson(moduleList, ModuleList.class, jsonWriter);
-            System.out.println("After toJson");
             jsonWriter.close();
-            System.out.println("After JsonWriter close");
         } catch (IOException e) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE, filename));
+            //throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_OPEN_WRITE, filename));
+            throw new TaaException(e.getMessage());
         } catch (JsonIOException e) {
             throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_WRITE_JSON, filename));
         }
