@@ -41,7 +41,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
         * use `/n` to input _name_ of the training entry.
         * use `/a` to input _timing_ of the training entry.
         * use `/v` to input _venue_ of the training entry.
-      * `att` adds attendance-related information.
+      * `/att` adds attendance-related information.
         * use `/m` to input _name_ of your member.
         * use `/s` to input _student number_ of your member.
         * use `/n` to input _name_ of the training entry.
