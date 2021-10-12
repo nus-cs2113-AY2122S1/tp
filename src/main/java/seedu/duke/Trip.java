@@ -33,6 +33,7 @@ public class Trip {
         setDateOfTrip(newTripInfo[1]);
         setExchangeRate(newTripInfo[2]);
         this.listOfPersons = splitPeople(newTripInfo[3]);
+        setBudget(newTripInfo[4]);
     }
 
     public void getWhoOwesMe() {
