@@ -128,9 +128,9 @@ class UiTest {
         Ui.printTask(task);
         String expectedOutput = "Do homework"
                 + System.lineSeparator()
-                + "CS2113T tp V1.0"
-                + System.lineSeparator()
                 + "19 Feb 2022 - 23:59"
+                + System.lineSeparator()
+                + "CS2113T tp V1.0"
                 + System.lineSeparator();
         assertEquals(expectedOutput, outContent.toString());
     }
