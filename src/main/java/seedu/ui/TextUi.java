@@ -20,6 +20,8 @@ public class TextUi {
 
     private static final String STARTUP = "Hello from \n " + LOGO;
     private static final String GREETING = "How can I help you today?";
+    private static final String USER_PROMPT = "What would you like to do?";
+    private static final String PROMPT_CURSOR = "==>";
     private static final String HELP_MESSAGE = LINE
             + "\tUNIMods accepts the following commands:-\n"
             + "\t\t| No.| Command Syntax          |            Command Action                      |\n"
@@ -38,11 +40,15 @@ public class TextUi {
             "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
     public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
 
+
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
-        System.out.println();
+        System.out.println(LINE);
+        System.out.println(USER_PROMPT);
+        System.out.print(PROMPT_CURSOR);
         String input = in.nextLine();
         while (input.isEmpty()) {
+            System.out.print(PROMPT_CURSOR);
             input = in.nextLine();
         }
         return input;
@@ -57,7 +63,7 @@ public class TextUi {
     }
 
     public static void printInvalidCommandMessage() {
-        System.out.print(LINE + "> Sorry friend, I don't know what that means. :/\n" + LINE);
+        System.out.print(LINE + "> Sorry friend, I don't know what that means. :/\n");
     }
 
     public static void printModBriefDescription(Module module) {
@@ -107,7 +113,7 @@ public class TextUi {
     }
 
     public static void printWelcomeMessage() {
-        System.out.println("Generic greeting.");
+        System.out.println(STARTUP);
     }
 
     public static void printLoadStartMessage() {
