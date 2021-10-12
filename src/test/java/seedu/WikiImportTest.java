@@ -17,7 +17,7 @@ public class WikiImportTest {
     // Input, Github, relevant article (731 characters)
     @Test
     void getArticle_Github_expectArticle() throws InvalidArticleException {
-        String article = "Github";
+        String article = "GitHub";
         WikiImport wiki = new WikiImport();
         String content = wiki.getArticle(article);
         assertEquals(731, content.length());
