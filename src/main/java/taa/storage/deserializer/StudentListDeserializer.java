@@ -18,7 +18,8 @@ public class StudentListDeserializer extends StorageDeserializer implements Json
     private static final String[] MEMBERS = {MEMBER_STUDENTS};
 
     @Override
-    public StudentList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public StudentList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+            throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
         if (!hasMembers(jsonObject, MEMBERS)) {
             return null;
