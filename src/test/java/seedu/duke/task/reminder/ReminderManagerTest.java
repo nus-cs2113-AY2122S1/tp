@@ -34,20 +34,22 @@ class ReminderManagerTest {
         endDate = Calendar.getInstance().getTime();
 
         Task todoWithReminder = new Todo("lecture with reminder", startDate);
-        Task todoWithoutReminder = new Todo("lecture without reminder", endDate);
-        Task deadlineWithReminder = new Deadline("exercise 1", startDate);
-        Task deadlineWithoutReminder = new Deadline("exercise 1", endDate);
-        Task eventTest = new Event("meeting", startDate, endDate);
-
-        expectedOut = "Reminder! 10 min before the following task:\n" + "\t" + todoWithReminder.getTaskEntryDescription()
-                + "Reminder! 10 min before the following task:\n" + "\t" + deadlineWithReminder.getTaskEntryDescription()
-                + "Reminder! 10 min before the following task:\n" + "\t" + eventTest.getTaskEntryDescription();
-
         tasklist.add(todoWithReminder);
+        Task todoWithoutReminder = new Todo("lecture without reminder", endDate);
         tasklist.add(todoWithoutReminder);
+        Task deadlineWithReminder = new Deadline("exercise 1", startDate);
         tasklist.add(deadlineWithReminder);
+        Task deadlineWithoutReminder = new Deadline("exercise 1", endDate);
         tasklist.add(deadlineWithoutReminder);
+        Task eventTest = new Event("meeting", startDate, endDate);
         tasklist.add(eventTest);
+
+        expectedOut = "Reminder! 10 min before the following task:\n" + "\t"
+                + todoWithReminder.getTaskEntryDescription()
+                + "Reminder! 10 min before the following task:\n" + "\t"
+                + deadlineWithReminder.getTaskEntryDescription()
+                + "Reminder! 10 min before the following task:\n" + "\t"
+                + eventTest.getTaskEntryDescription();
 
         taskManager.setTasklist(tasklist);
         reminderManager.updateReminderManager(taskManager);
