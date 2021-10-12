@@ -15,6 +15,26 @@ public class Client {
         tour = values[4];
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getContactNum() {
+        return contactNum;
+    }
+
+    public String getFlight() {
+        return flight;
+    }
+
+    public String getAccomms() {
+        return accomms;
+    }
+
+    public String getTour() {
+        return tour;
+    }
+
     @Override
     public String toString() {
         return "Client's name: " + name + System.lineSeparator() 
