@@ -9,13 +9,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import terminus.exception.InvalidArgumentException;
 
+/**
+ * CommonUtils class to manage methods that are used across different packages.
+ */
 public class CommonUtils {
 
     /**
-     * Method to get arguments.
+     * Returns an ArrayList of String containing elements found based on regex.
+     * Matches any strings that is within a pair of double quotes.
      *
-     * @param arg String containing the arguments
-     * @return An array list containing the separated arguments
+     * @param arg String containing the arguments from inputs.
+     * @return An array list containing strings that is within a pair of double quotes from arg.
      */
     public static ArrayList<String> findArguments(String arg) {
         assert arg != null;
@@ -29,12 +33,12 @@ public class CommonUtils {
     }
 
     /**
-     * Checks if an array list is empty.
+     * Checks if any elements in the ArrayList of String is empty.
      *
-     * @param argArray The array list to be checked
-     * @return True if array list is empty, false otherwise
+     * @param argArray The ArrayList to be checked.
+     * @return True if array list is empty, false otherwise.
      */
-    public static boolean isArrayEmpty(ArrayList<String> argArray) {
+    public static boolean hasEmptyString(ArrayList<String> argArray) {
         assert argArray != null;
         if (argArray.isEmpty()) {
             return true;
@@ -43,11 +47,11 @@ public class CommonUtils {
     }
 
     /**
-     * Converts string to a LocalTime object.
+     * Returns a LocalTime object from a given string.
      *
-     * @param startTime The string to be converted to a LocalTime object
-     * @return A LocalTime object of the converted string
-     * @throws InvalidArgumentException Exception for when string does not follow the proper time format
+     * @param startTime The string to be converted to a LocalTime object.
+     * @return A LocalTime object of the converted string.
+     * @throws InvalidArgumentException when string does not follow the proper time format.
      */
     public static LocalTime convertToLocalTime(String startTime) throws InvalidArgumentException {
         assert startTime != null;
@@ -61,6 +65,13 @@ public class CommonUtils {
 
     }
 
+    /**
+     * Returns the class name without its packages.
+     *
+     * @param type Content class type.
+     * @param <T> Content object type.
+     * @return A string of the class name from the class type without its packages.
+     */
     public static <T> String getClassName(T type) {
         assert type != null;
         String result = type.toString();
@@ -71,6 +82,13 @@ public class CommonUtils {
         return result;
     }
 
+    /**
+     * Checks if the given string is a valid url.
+     *
+     * @param url The string to be checked.
+     * @return True if url is valid, false otherwise.
+     * @throws InvalidArgumentException when given string is not a valid url.
+     */
     public static boolean isValidUrl(String url) throws InvalidArgumentException {
         try {
             new URL(url).toURI();
@@ -81,6 +99,12 @@ public class CommonUtils {
         }
     }
 
+    /**
+     * Checks if the given string is a valid DaysOfWeekEnum type.
+     *
+     * @param day The string to be checked.
+     * @return True if day is a valid DaysOfWeekEnum type, false otherwise.
+     */
     public static boolean isValidDay(String day) {
         for (DaysOfWeekEnum dayOfWeek : DaysOfWeekEnum.values()) {
             if (dayOfWeek.name().equalsIgnoreCase(day)) {
