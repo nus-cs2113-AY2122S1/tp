@@ -26,7 +26,7 @@ The product aims to aid student in organizing their academic schedule and enhanc
 ## Getting Started
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `TermiNUS` from [here](https://github.com/AY2122S1-CS2113T-T10-2/tp).
+2. Download the latest version of `TermiNUS` from [here](https://github.com/AY2122S1-CS2113T-T10-2/tp/releases/).
 3. When you first start the program, you will be greeted with our banner:  
 
     ```
