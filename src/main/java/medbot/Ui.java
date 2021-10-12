@@ -110,7 +110,7 @@ public class Ui {
                 + "help\n" + "add\n" + "list\n" + "view\n" + "edit\n" + "delete\n"
                 + "exit\n" + "\n"
                 + "To obtain more information on each command and their respective required inputs, type:\n"
-                + "help [COMMAND]\n"
+                + "help [COMMAND]\n\n"
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes";
     }
 

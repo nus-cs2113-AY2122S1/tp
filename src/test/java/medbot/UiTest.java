@@ -54,8 +54,8 @@ class UiTest {
         Ui ui = new Ui();
 
         String patientInfo = patient.toString();
-        String expectedOutput = "Here's the requested patient:\n" +
-                "Patient ID: 1 IC:  " + "Name: John Doe H/P:  Email: John@gmail.com Address: ";
+        String expectedOutput = "Here's the requested patient:\n"
+                + "Patient ID: 1 IC:  " + "Name: John Doe H/P:  Email: John@gmail.com Address: ";
         int patientId = 1;
         assertEquals(ui.getPatientInfo(patientInfo), expectedOutput);
     }
