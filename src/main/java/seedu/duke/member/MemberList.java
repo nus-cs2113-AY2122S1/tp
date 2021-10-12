@@ -15,13 +15,11 @@ public class MemberList {
         this.memberList = memberList;
     }
 
-
     public ArrayList<Member> getMemberList() {
         return memberList;
     }
 
-
-    public int getMemberSize() { //added by xy
+    public int getMemberListSize() { //added by xy
         return memberList.size();
     }
 

@@ -47,7 +47,7 @@ public class Ui {
     }
 
     public static void printDeletedAttendanceMessage(Attendance attendance) {
-        System.out.println("You have removed training entry: " + "\n" + attendance.toString());
+        System.out.println("You have removed attendance entry: " + "\n" + attendance);
     }
 
     public static void printAddedTrainingMessage(TrainingSchedule training) {
@@ -73,6 +73,9 @@ public class Ui {
     }
 
     public static void printList(MemberList members) {
+        if (members.getMemberListSize() == 0) {
+            System.out.println("Member list is empty!");
+        }
         int display = 1;
         for (Member member : members.getMemberList()) {
             System.out.println("[" + display + "] " + member.toString());
@@ -81,6 +84,9 @@ public class Ui {
     }
 
     public static void printList(TrainingList trainings) {
+        if (trainings.getTrainingListSize() == 0) {
+            System.out.println("Training schedule list is empty!");
+        }
         int display = 1;
         for (TrainingSchedule trainingEntries : trainings.getTrainingList()) {
             System.out.println("[" + display + "] " + trainingEntries.toString());
@@ -89,6 +95,9 @@ public class Ui {
     }
 
     public static void printList(AttendanceList attendanceList) {
+        if (attendanceList.getAttendanceListSize() == 0) {
+            System.out.println("Attendance list is empty!");
+        }
         int display = 1;
         for (Attendance attendance : attendanceList.getAttendanceList()) {
             System.out.println("[" + display + "] " + attendance.toString());

@@ -18,6 +18,10 @@ public class TrainingList {
         return trainingList;
     }
 
+    public int getTrainingListSize() { //added by xy
+        return trainingList.size();
+    }
+
     public void addTrainingSchedule(TrainingSchedule schedule) {
         trainingList.add(schedule);
     }
