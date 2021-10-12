@@ -154,6 +154,13 @@ public class MainParserTest {
     }
 
     @Test
+    public void parseViewCommand_validIndexWithSpaces_expectViewContactIndexMatch() {
+        testIndex = 1;
+        testUserInput = "view    " + testIndex;
+        final ViewCommand testResultCommand = getParsedCommand(testUserInput, ViewCommand.class);
+        assertEquals(testIndex, testResultCommand.getIndex());
+    }
+    @Test
     public void parseAddCommand_missingName_expectFailedCommand() {
         testUserInput = " add -g      github ";
         final FailedCommand actualCommand = getParsedCommand(testUserInput, FailedCommand.class);
