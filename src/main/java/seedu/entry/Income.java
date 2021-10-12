@@ -9,6 +9,7 @@ public class Income extends Entry {
 
     @Override
     public String toString() {
-        return "[I] " + description + " - $" + value;
+        String valueTwoDecimalPoint = String.format("%.2f",value);
+        return "[I] " + description + " - $" + valueTwoDecimalPoint;
     }
 }
