@@ -1,6 +1,6 @@
 package taa.command;
 
-import taa.Storage;
+import taa.storage.Storage;
 import taa.assessment.Assessment;
 import taa.exception.TaaException;
 import taa.Ui;

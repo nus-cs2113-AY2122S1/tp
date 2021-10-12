@@ -13,12 +13,14 @@ public class Student implements ClassChecker {
 
     private String id;
     private String name;
-    private final ArrayList<Attendance> attendances = new ArrayList<>();
-    private final HashMap<String, Double> results = new HashMap<>();
+    private final ArrayList<Attendance> attendances;
+    private final HashMap<String, Double> results;
 
     public Student(String id, String name) {
         this.id = id;
         this.name = name;
+        this.attendances = new ArrayList<>();
+        this.results = new HashMap<>();
     }
 
     public static boolean isMarksWithinRange(double marks) {

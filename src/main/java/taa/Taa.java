@@ -3,16 +3,18 @@ package taa;
 import taa.command.Command;
 import taa.exception.TaaException;
 import taa.module.ModuleList;
+import taa.storage.Storage;
 
 public class Taa {
     private static final String DATA_FILENAME = "./data/taa_data.json";
 
     private ModuleList moduleList;
-    private final Ui ui = new Ui();
-    private final Storage storage = new Storage(DATA_FILENAME);
+    private final Ui ui;
+    private final Storage storage;
 
     public Taa() {
-
+        this.ui = new Ui();
+        this.storage = new Storage(DATA_FILENAME);
     }
 
     public void run() {

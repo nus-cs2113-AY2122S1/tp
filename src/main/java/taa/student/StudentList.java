@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public class StudentList implements ClassChecker {
     private static final String MESSAGE_LIST_STUDENT_HEADER = "Student List:";
 
-    private final ArrayList<Student> students = new ArrayList<>();
+    private final ArrayList<Student> students;
 
     public StudentList() {
-
+        this.students = new ArrayList<>();
     }
 
     /**
@@ -88,8 +88,6 @@ public class StudentList implements ClassChecker {
 
     @Override
     public boolean verify() {
-        students.removeIf(student -> !student.verify());
-
         return true;
     }
 }

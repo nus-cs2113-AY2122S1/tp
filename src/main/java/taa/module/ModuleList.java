@@ -7,10 +7,10 @@ import java.util.ArrayList;
 public class ModuleList implements ClassChecker {
     private static final String MESSAGE_MODULE_LIST_HEADER = "Module List:";
 
-    private final ArrayList<Module> modules = new ArrayList<>();
+    private final ArrayList<Module> modules;
 
     public ModuleList() {
-
+        this.modules = new ArrayList<>();
     }
 
     public void addModule(Module module) {
@@ -80,8 +80,6 @@ public class ModuleList implements ClassChecker {
 
     @Override
     public boolean verify() {
-        modules.removeIf(module -> !module.verify());
-
         return true;
     }
 }

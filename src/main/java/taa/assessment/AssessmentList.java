@@ -7,7 +7,11 @@ import java.util.ArrayList;
 public class AssessmentList implements ClassChecker {
     private static final String MESSAGE_ASSESSMENT_LIST_HEADER = "Assessment List:";
 
-    private final ArrayList<Assessment> assessments = new ArrayList<>();
+    private final ArrayList<Assessment> assessments;
+
+    public AssessmentList() {
+        this.assessments = new ArrayList<>();
+    }
 
     public int getSize() {
         return assessments.size();
@@ -79,7 +83,15 @@ public class AssessmentList implements ClassChecker {
 
     @Override
     public boolean verify() {
-        assessments.removeIf(assessment -> !assessment.verify());
+        ArrayList<String> assessmentNames = new ArrayList<>();
+        for (Assessment assessment : assessments) {
+            String name = assessment.getName();
+            if (assessmentNames.contains(name)) {
+                assessments.remove(assessment);
+            } else {
+                assessmentNames.add(name);
+            }
+        }
 
         return true;
     }

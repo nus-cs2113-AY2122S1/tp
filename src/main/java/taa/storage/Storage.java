@@ -1,12 +1,14 @@
-package taa;
+package taa.storage;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import taa.exception.TaaException;
 import taa.module.ModuleList;
+import taa.storage.deserializer.ModuleListDeserializer;
 import taa.util.Util;
 
 import java.io.FileNotFoundException;
@@ -33,8 +35,11 @@ public class Storage {
             return null;
         }
 
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(ModuleList.class, new ModuleListDeserializer());
+        Gson gson = gsonBuilder.create();
+
         ModuleList moduleList;
-        Gson gson = new Gson();
         try {
             FileReader fileReader = new FileReader(filename);
             JsonReader jsonReader = new JsonReader(fileReader);
@@ -46,10 +51,6 @@ public class Storage {
             throw new TaaException(String.format(MESSAGE_FORMAT_UNABLE_TO_READ_JSON, filename));
         } catch (JsonSyntaxException e) {
             throw new TaaException(String.format(MESSAGE_FORMAT_JSON_SYNTAX_ERROR, filename));
-        }
-
-        if (!moduleList.verify()) {
-            moduleList = null;
         }
 
         return moduleList;

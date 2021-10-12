@@ -8,12 +8,15 @@ public class Module implements ClassChecker {
     private String code;
     private String name;
     private int lessonCount;
-    private final StudentList studentList = new StudentList();
-    private final AssessmentList assessmentList = new AssessmentList();
+    private final StudentList studentList;
+    private final AssessmentList assessmentList;
 
     public Module(String code, String name) {
         this.code = code;
         this.name = name;
+        this.lessonCount = 0;
+        this.studentList = new StudentList();
+        this.assessmentList = new AssessmentList();
     }
 
     public String getCode() {
