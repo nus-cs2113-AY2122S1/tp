@@ -56,7 +56,7 @@ public class TextUi {
         System.out.println(DIVIDER + LS
                  + "Your budget for this month:" + list.getBudget() + LS
                  + "Your expenditures:");
-        for(Expenditure a: list.getExpenditureRecords()) {
+        for (Expenditure a: list.getExpenditureRecords()) {
             System.out.println(i + "." + a);
             i++;
         }
