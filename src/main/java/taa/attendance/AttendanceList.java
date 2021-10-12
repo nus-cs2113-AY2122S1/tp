@@ -35,12 +35,7 @@ public class AttendanceList {
     }
 
     private void sortAttendances() {
-        attendances.sort(new Comparator<Attendance>() {
-            @Override
-            public int compare(Attendance attendance1, Attendance attendance2) {
-                return attendance1.getLessonNumber() - attendance2.getLessonNumber();
-            }
-        });
+        attendances.sort(Comparator.comparingInt(Attendance::getLessonNumber));
     }
 
     @Override
