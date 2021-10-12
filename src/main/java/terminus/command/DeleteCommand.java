@@ -11,6 +11,7 @@ import terminus.module.NusModule;
 import terminus.ui.Ui;
 
 public class DeleteCommand<T extends Content> extends Command {
+
     private Class<T> type;
     private int itemNumber;
 
@@ -51,7 +52,7 @@ public class DeleteCommand<T extends Content> extends Command {
         ContentManager<T> contentManager = module.getContentManager(type);
         assert contentManager != null;
         TerminusLogger.info("Executing Delete Command");
-        String deletedContentName =  contentManager.deleteContent(itemNumber);
+        String deletedContentName = contentManager.deleteContent(itemNumber);
         assert deletedContentName != null && !deletedContentName.isBlank();
 
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,

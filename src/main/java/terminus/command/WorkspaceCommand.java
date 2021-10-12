@@ -50,7 +50,8 @@ public abstract class WorkspaceCommand extends Command {
             return new CommandResult(true, commandMap);
         }
     }
-    private boolean isNotNullOrBlank () {
+
+    private boolean isNotNullOrBlank() {
         return arguments != null && !arguments.isBlank();
     }
 }
