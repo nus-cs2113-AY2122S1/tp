@@ -41,11 +41,11 @@ public class IngredientList {
         int ingredientIndex = IngredientList.find(ingredientName);
         if (ingredientIndex == -1) {
             System.out.println(ui.getIngrNotExistMsg());
-            assert ingredientList.size() == listSize:"ingredientList should be of size N";
+            assert ingredientList.size() == listSize : "ingredientList should be of size N";
         } else {
             ingredientList.remove(ingredientIndex);
             System.out.println("Ingredient, " + ingredientName + " has been removed!");
-            assert ingredientList.size() == (listSize - 1):"ingredientList should be of size N-1";
+            assert ingredientList.size() == (listSize - 1) : "ingredientList should be of size N-1";
         }
     }
 }

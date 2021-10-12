@@ -24,7 +24,7 @@ public class Storage {
         try {
             File newDirectory = new File(DIRECTORY_NAME);
             if (!newDirectory.exists()) {
-                System.out.println("Creating directory " + DIRECTORY_NAME);
+                //System.out.println("Creating directory " + DIRECTORY_NAME);
                 newDirectory.mkdirs();
             }
             switch (mode) {
@@ -66,7 +66,7 @@ public class Storage {
     private static void loadIngredients() {
         File newDirectory = new File(DIRECTORY_NAME);
         if (!newDirectory.exists()) {
-            System.out.println("Creating directory " + DIRECTORY_NAME);
+            //System.out.println("Creating directory " + DIRECTORY_NAME);
             newDirectory.mkdirs();
         }
         File fileToReadIngr = new File(DIRECTORY_NAME + File.separator + FILE_NAME_INGR);
@@ -81,7 +81,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             try {
-                System.out.println("Creating " + FILE_NAME_INGR);
+                //System.out.println("Creating " + FILE_NAME_INGR);
                 fileToReadIngr.createNewFile();
             } catch (IOException ex) {
                 logger.log(Level.INFO, "File creation failed / unable to retrieve file");
@@ -95,7 +95,7 @@ public class Storage {
     private static void loadDishes() {
         File newDirectory = new File(DIRECTORY_NAME);
         if (!newDirectory.exists()) {
-            System.out.println("Creating directory " + DIRECTORY_NAME);
+            //System.out.println("Creating directory " + DIRECTORY_NAME);
             newDirectory.mkdirs();
         }
         File fileToReadIngr = new File(DIRECTORY_NAME + File.separator + FILE_NAME_DISH);
@@ -118,7 +118,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             try {
-                System.out.println("Creating " + FILE_NAME_DISH);
+                //System.out.println("Creating " + FILE_NAME_DISH);
                 fileToReadIngr.createNewFile();
             } catch (IOException ex) {
                 logger.log(Level.INFO, "File creation failed / unable to retrieve file");
