@@ -92,15 +92,15 @@ Format: `done [INDEX]`
 ### Deleting Tasks or Lessons - `delete`
 
 `delete` can be used to perform any of the following actions:
-- delete all tasks and lessons
-- delete all tasks
-- delete all lessons
-- delete a specific task or lesson
+* delete all tasks and lessons 
+* delete all tasks 
+* delete all lessons 
+* delete a specific task or lesson
 
 Format: 
-- `delete [task/lesson] [INDEX]`: deletes the task or lesson at the specified index
-- `delete [task/lesson] all`: deletes all tasks or lessons as specified
-- `delete all`: deletes all tasks and lessons
+* `delete [task/lesson] [INDEX]`: deletes the task or lesson at the specified index
+* `delete [task/lesson] all`: deletes all tasks or lessons as specified
+* `delete all`: deletes all tasks and lessons
 
 ### Finding Tasks or Lessons by keyword - `find`
 
