@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class DeleteAllCommandTest {
     @Test
-    public void testDeleteAll() {
+    public void deleteAllTasksAndLessons_nonEmptyTaskListLessonList_emptyTaskListLessonList() {
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("task 1", "mon", ""));
         taskList.addTask(new Task("task 2", "fri", "someInfo"));
