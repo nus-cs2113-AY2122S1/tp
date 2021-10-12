@@ -16,15 +16,12 @@ class DeleteCommandTest {
 
     @Test
     public void execute_validModuleCodeInTestTimetable_moduleShouldBeRemoved() {
-        // Creating two test timetables
-        Timetable tt1 = new Timetable(1);
-        Timetable tt2 = new Timetable(1);
+
 
         //Creating two test module and adding to timetable 1
         Module testMod1 = new Module("CFG1002");
         testMod1.setModuleCredit(2.0);
         testMod1.setTitle("Career Catalyst");
-        Module testMod2 = new Module("CS1231");
         testMod1.setModuleCredit(4.0);
         testMod1.setTitle("Discrete Structures");
         Lesson lesson1 = new Lesson(
@@ -34,6 +31,11 @@ class DeleteCommandTest {
                 "E-Learn_B",
                 "Lecture",
                 "Wednesday");
+
+        Timetable tt1 = new Timetable(1);
+        TimetableLesson timetableLesson1 = new TimetableLesson(testMod1, 1, lesson1);
+        tt1.addLesson(timetableLesson1);
+
         Lesson lesson2 = new Lesson(
                 "CS1231",
                 "1000",
@@ -41,12 +43,13 @@ class DeleteCommandTest {
                 "E-Learn_C",
                 "Lecture",
                 "Thursday");
-        TimetableLesson timetableLesson1 = new TimetableLesson(testMod1, 1, lesson1);
+        // Adding test module 2 to timetable 2
+        Module testMod2 = new Module("CS1231");
+        Timetable tt2 = new Timetable(1);
         TimetableLesson timetableLesson2 = new TimetableLesson(testMod2, 1, lesson2);
-        tt1.addLesson(timetableLesson1);
         tt1.addLesson(timetableLesson2);
 
-        // Adding test module 2 to timetable 2
+
         TimetableLesson timetableLesson3 = new TimetableLesson(testMod2, 1, lesson2);
         tt2.addLesson(timetableLesson3);
 
