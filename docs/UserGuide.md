@@ -99,11 +99,36 @@ Updated! Number of rows affected: 1
 ### Listing medication stock : `list`
 Lists all existing medication in the inventory.
 * All parameters for list command are optional, you can choose to list medication by any of the parameters.
-* The following example demonstrates list by medication name.
+* Example 1 demonstrates the list of all medication without parameters.
+* Example 2 demonstrates list by medication name.
 
-Format: `list {i/stock_id n/name p/price q/quantity e/expiry_date d/description m/max_quantity sort/column_name rsort/column_name} `
+Format: `list {i/stock_id n/name p/price q/quantity e/expiry_date d/description m/max_quantity sort/column_name rsort/column_name}`
 
-Example:  `list n/panadol`
+Example 1: `list`
+
+Expected output:
+```
++====+==============+========+==========+=============+====================================================+==============+
+| ID |     NAME     | PRICE  | QUANTITY | EXPIRY_DATE |                    DESCRIPTION                     | MAX_QUANTITY |
++====+==============+========+==========+=============+====================================================+==============+
+| 1  |   PANADOL    | $20.00 |    20    | 13-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS  |     1000     |
++----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
+| 2  |   PANADOL    | $20.00 |    10    | 14-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS  |     1000     |
++----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
+| 3  |   VICODIN    | $10.00 |    20    | 30-09-2021  |    POPULAR DRUG FOR TREATING ACUTE OR CHRONIC      |     500      |
+|    |              |        |          |             |         MODERATE TO MODERATELY SEVERE PAIN         |              |
++----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
+| 4  | SIMVASTATIN  | $20.00 |    25    | 10-10-2021  |  TREATS HIGH CHOLESTEROL AND REDUCES THE RISK OF   |     800      |
+|    |              |        |          |             |                       STROKE                       |              |
++----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
+| 5  |  LISINOPRIL  | $20.00 |    25    | 15-10-2021  |          USED FOR TREATING HYPOTHYROIDISM          |     800      |
++----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
+| 6  | AZITHROMYCIN | $20.00 |    35    | 15-10-2021  |     USED FOR TREATING EAR, THROAT, AND SINUS       |     100      |
+|    |              |        |          |             |                     INFECTIONS                     |              |
++----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
+```
+
+Example 2: `list n/panadol`
 
 Expected output:
 ```
