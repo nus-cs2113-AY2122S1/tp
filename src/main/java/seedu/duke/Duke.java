@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.command.Command;
+import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.exception.FileErrorException;
 import seedu.parser.MainParser;
@@ -16,7 +17,7 @@ public class Duke {
     private MainParser parser;
     private ContactList contactList;
     private String personalContactFilePath;
-    private
+    private Contact personalContact;
 
     public Duke(String contactFilePath, String personalContactFilePath) {
         this.textUi = new TextUi();
@@ -25,6 +26,7 @@ public class Duke {
         this.parser = new MainParser();
         try {
             this.contactList = storage.loadExistingContacts();
+            this.personalContact = storage.loadExistingPersonalContact();
         } catch (FileErrorException e) {
             ExceptionTextUi.fileErrorMessage(this.contactFilePath);
         }

@@ -61,8 +61,10 @@ public class Storage {
 
     public Contact loadExistingPersonalContact() throws FileErrorException {
         if (!hasExistingPersonalContactFile()) {
-            return new Contact;
+           // get new contact
         }
-
+        ContactList contactList = ContactsDecoder.readContacts(personalContactFile);
+        assert contactList.getListSize() == 1;
+        return contactList.getContactAtIndex(0);
     }
 }
