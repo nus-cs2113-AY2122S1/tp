@@ -1,21 +1,21 @@
 package terminus.command.zoomlink;
 
-import terminus.command.Command;
-import terminus.command.CommandResult;
-import terminus.common.TerminusLogger;
-import terminus.content.ContentManager;
-import terminus.content.Link;
-import terminus.exception.InvalidCommandException;
-import terminus.exception.InvalidArgumentException;
-import terminus.module.NusModule;
-import terminus.common.CommonFormat;
-import terminus.common.Messages;
-import terminus.ui.Ui;
+import static terminus.common.CommonFormat.isValidDay;
+import static terminus.common.CommonFormat.isValidUrl;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-import static terminus.common.CommonFormat.isValidDay;
-import static terminus.common.CommonFormat.isValidUrl;
+import terminus.command.Command;
+import terminus.command.CommandResult;
+import terminus.common.CommonFormat;
+import terminus.common.Messages;
+import terminus.common.TerminusLogger;
+import terminus.content.ContentManager;
+import terminus.content.Link;
+import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidCommandException;
+import terminus.module.NusModule;
+import terminus.ui.Ui;
 
 /**
  * AddLinkCommand class which will manage the adding of new Links from user command.

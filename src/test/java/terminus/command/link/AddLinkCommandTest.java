@@ -1,21 +1,20 @@
 package terminus.command.link;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
 import terminus.content.Link;
-import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.parser.LinkCommandParser;
 import terminus.ui.Ui;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddLinkCommandTest {
 

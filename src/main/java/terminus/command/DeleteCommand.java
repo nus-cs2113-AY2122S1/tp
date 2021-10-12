@@ -1,6 +1,5 @@
 package terminus.command;
 
-import java.util.Locale;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
@@ -12,7 +11,7 @@ import terminus.ui.Ui;
 
 public class DeleteCommand<T extends Content> extends Command {
 
-    private Class<T> type;
+    private final Class<T> type;
     private int itemNumber;
 
     public DeleteCommand(Class<T> type) {
