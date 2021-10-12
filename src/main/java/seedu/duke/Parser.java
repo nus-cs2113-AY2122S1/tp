@@ -19,7 +19,8 @@ public class Parser {
             Storage.closeTrip();
             return true;
         }
-        if (!checkValidCommand(inputCommand) || (userInputSplit.length == 1 && !inputCommand.equals("quit"))) {
+        if (!checkValidCommand(inputCommand) ||
+                (userInputSplit.length == 1 && !inputCommand.equals("quit"))) {
             Ui.printUnknownCommandError();
             return true;
         } else if (!inputCommand.equals("quit")) {
@@ -54,10 +55,8 @@ public class Parser {
             }
             break;
         case "summary":
-            String[] tripToGetInfo = inputDescription.split(" ", 2);
-            String tripNumber = tripToGetInfo[0];
             try {
-                int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
+                int indexToGet = Integer.parseInt(inputDescription) - 1;
                 Trip tripToGet = listOfTrips.get(indexToGet);
                 Ui.printExpensesSummary(tripToGet);
             } catch (ArrayIndexOutOfBoundsException e) {
@@ -65,9 +64,8 @@ public class Parser {
             }
             break;
         case "view":
-            tripToGetInfo = inputDescription.split(" ", 2);
             try {
-                int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
+                int indexToGet = Integer.parseInt(inputDescription) - 1;
                 Trip tripToGet = listOfTrips.get(indexToGet);
                 tripToGet.viewAllExpenses();
             } catch (ArrayIndexOutOfBoundsException e) {
