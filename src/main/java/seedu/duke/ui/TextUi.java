@@ -1,6 +1,7 @@
 package seedu.duke.ui;
 
 
+import seedu.duke.data.RecordList;
 import seedu.duke.data.records.Expenditure;
 
 import java.util.Scanner;
@@ -48,6 +49,18 @@ public class TextUi {
     public static void showExpenditureAddedMessage(Expenditure addedExpenditure) {
         System.out.println("Successfully added. Here's the added expenditure: ");
         System.out.println("   " + addedExpenditure);
+    }
+
+    public static void showRecordsListView(RecordList list) {
+        int i = 1;
+        System.out.println(DIVIDER + LS
+                 + "Your budget for this month:" + list.getBudget() + LS
+                 + "Your expenditures:");
+        for (Expenditure a: list.getExpenditureRecords()) {
+            System.out.println(i + "." + a);
+            i++;
+        }
+        System.out.println(DIVIDER);
     }
 
     public static void showExpenditureDeletedMessage(int indexOfDeletedExpenditure, Expenditure deletedExpenditure) {
