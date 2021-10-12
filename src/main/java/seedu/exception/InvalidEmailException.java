@@ -1,2 +1,4 @@
-package seedu.exception;public class InvalidEmailException {
+package seedu.exception;
+
+public class InvalidEmailException extends Exception{
 }
