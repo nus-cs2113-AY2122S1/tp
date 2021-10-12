@@ -29,7 +29,7 @@ public abstract class WorkspaceCommand extends Command {
     public CommandResult execute(Ui ui, NusModule module)
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         assert commandMap != null;
-        TerminusLogger.info("Executing Delete Command");
+        TerminusLogger.info("Executing Workspace Command");
         if (isNotNullOrBlank()) {
             try {
                 TerminusLogger.info("Parsing workspace command");
