@@ -23,7 +23,7 @@ public class Storage {
 
     private static final String ERROR_INVALID_STORAGE_LINE_INSTRUCTION = "\n\n"
             + "Please decide if you wish to:" + "\n"
-            + "1. Enter 'exit' to exit Medbot to correct the data file " + DEFAULT_DATA_PATH + "\n"
+            + "1. Enter 'exit' to exit Medbot to correct the storage file" + "\n"
             + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
 
     private static File dataFile;
@@ -192,7 +192,7 @@ public class Storage {
      */
     private String loadStorageLineErrorMessage(int lineNumber) {
         return "Error: Line " + lineNumber + " of " + DEFAULT_DATA_PATH
-                + " is invalid!";
+                + " is invalid!\n";
     }
 
 }
