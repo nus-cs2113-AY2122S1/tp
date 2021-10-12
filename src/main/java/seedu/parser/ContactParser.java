@@ -48,6 +48,7 @@ public abstract class ContactParser {
         if (detailToStore.equals("null")) {
             throw new ForbiddenDetailException();
         }
+        int indexToStore;
         indexToStore = getIndexToStore(flag);
         contactDetails[indexToStore] = detailToStore;
     }
