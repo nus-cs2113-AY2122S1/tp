@@ -20,9 +20,9 @@ public class Storage {
     private static final String ERROR_LOAD_STORAGE = "Error: Unable to load data file.";
     private static final String ERROR_SAVE_STORAGE = "Error: Unable to save data.";
 
-    private static final String ERROR_INVALID_STORAGE_LINE = "\n"
-            + "I am done reading " + DEFAULT_DATA_PATH + "\n"
-            + "1. Enter 'exit' to exit program to correct data file " + DEFAULT_DATA_PATH + "\n"
+    private static final String ERROR_INVALID_STORAGE_LINE = "\n\n"
+            + "Please decide if you wish to:" + "\n"
+            + "1. Enter 'exit' to exit Medbot to correct the data file " + DEFAULT_DATA_PATH + "\n"
             + "2. Enter other valid commands to OVERWRITE all invalid data!" + "\n";
 
     private static File dataFile;
@@ -56,8 +56,10 @@ public class Storage {
      * prints out the line number of storage/data.txt that is invalid
      *
      * @param patientList instance of PatientList
+     * @return Error message if there are errors in storage/data.txt
      * @throws FileNotFoundException if storage/data.txt cannot be found
      */
+
     public String loadStorage(PatientList patientList) throws FileNotFoundException {
         int lineNumber = 1;
         int lastId = 1;
@@ -150,7 +152,7 @@ public class Storage {
 
     private String loadStorageLineError(int lineNumber) {
         return "Error: Line " + lineNumber + " of " + DEFAULT_DATA_PATH
-                + " is invalid! Skipping to next line...\n";
+                + " is invalid!";
     }
 
 }

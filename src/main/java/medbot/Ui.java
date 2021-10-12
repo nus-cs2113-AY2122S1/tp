@@ -35,8 +35,12 @@ public class Ui {
     /**
      * Prints a welcome message when MedBot is first loaded.
      */
-    public void printWelcomeMessage() {
-        printOutput("Hello, I'm MedBot!" + System.lineSeparator() + "How can I help you today?");
+    public void printWelcomeMessageOne() {
+        printOutput("Hello, I'm MedBot!" + System.lineSeparator());
+    }
+
+    public void printWelcomeMessageTwo() {
+        printOutput("How can I help you today?" + "\n\n");
     }
 
     /**
@@ -144,7 +148,7 @@ public class Ui {
                 + "Expected output: \n"
                 + "The information of patient with ID PATIENT_ID has been edited to:\n"
                 + "Patient ID: [PATIENT_ID] IC: [PATIENT_IC] Name: [NAME] H/P: [PHONE_NUMBER] "
-                +   "Email: [EMAIL] Address: [ADDRESS] \n";
+                + "Email: [EMAIL] Address: [ADDRESS] \n";
     }
 
     public String getDeleteHelpMessage() {
