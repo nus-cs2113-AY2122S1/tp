@@ -59,11 +59,12 @@ public class CommandSyntax {
     /**
      * Helps to check if the parameters required are provided by the user.
      *
-     * @param ui                 Reference to the UI object passed by Main to print messages.
-     * @param parameters         Parameters entered in by the user.
-     * @param requiredParameters Parameters required by the command.
-     * @param optionalParameters Parameters that are optional.
-     * @param commandSyntax      The command's valid syntax.
+     * @param ui                         Reference to the UI object passed by Main to print messages.
+     * @param parameters                 Parameters entered in by the user.
+     * @param requiredParameters         Parameters required by the command.
+     * @param optionalParameters         Parameters that are optional.
+     * @param commandSyntax              The command's valid syntax.
+     * @param requiresOptionalParameters Boolean value of whether command required optional parameters.
      * @return A boolean value indicating if the parameters required are entered by the user.
      */
     public static boolean containsInvalidParameters(Ui ui, HashMap<String, String> parameters,
@@ -121,13 +122,14 @@ public class CommandSyntax {
     /**
      * Checks if parameter values are valid.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
-     * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines  Arraylist of all medicines.
+     * @param ui            Reference to the UI object passed by Main to print messages.
+     * @param parameters    HashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines     Arraylist of all medicines.
+     * @param commandSyntax The command's valid syntax.
      * @return A boolean value indicating whether parameter values are valid.
      */
     public static boolean containsInvalidParameterValues(Ui ui, HashMap<String, String> parameters,
-                                                         ArrayList<Medicine> medicines) {
+                                                         ArrayList<Medicine> medicines, String commandSyntax) {
         for (String parameter : parameters.keySet()) {
             boolean isValid = false;
             String parameterValue = parameters.get(parameter);
@@ -165,6 +167,7 @@ public class CommandSyntax {
                 isValid = DispenseValidator.isValidStaffName(ui, parameterValue);
                 break;
             default:
+                ui.printInvalidParameter(parameter, commandSyntax);
                 break;
             }
             if (!isValid) {
