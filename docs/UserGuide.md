@@ -6,9 +6,9 @@ Duke is an greenfield application aimed to assist CCAs with their administrative
 
 Duke is designed for users who are familiar with Command Line Interface (CLI) operations.
 
-- [Pre-requisites](#Pre-requisites)
-- [Commands](#Commands)
-- [Command Summary](#Command-Summary)
+- [Pre-requisites](#pre-requisites)
+- [Commands](#commands)
+- [Command Summary](#command-summary)
 
 ## Pre-requisites
 1. Duke runs on Java 11. Please ensure you have `Java 11` installed on your workstation.
