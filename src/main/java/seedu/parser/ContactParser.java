@@ -28,7 +28,9 @@ public abstract class ContactParser {
     public static final String GITHUB_FLAG = "g";
 
     public abstract String[] parseContactDetails(String userInput) throws InvalidFlagException,
-            MissingArgException, MissingDetailException, ForbiddenDetailException;
+            MissingArgException, MissingDetailException, ForbiddenDetailException,
+            InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
+            InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException;
 
     /**
      * This method takes in the contactDetails array and populates it with contact details.
