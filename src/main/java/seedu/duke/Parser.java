@@ -15,11 +15,10 @@ public class Parser {
         String[] userInputSplit = new String[2];
         String[] rawInput = userInput.split(" ", 2);
 
-        if (rawInput.length == 2){
+        if (rawInput.length == 2) {
             userInputSplit[0] = rawInput[0];
             userInputSplit[1] = rawInput[1];
-        }
-        else{
+        } else {
             userInputSplit[0] = rawInput[0];
         }
 
@@ -118,9 +117,9 @@ public class Parser {
     }
 
     private static void executeDelete(String indexAsString) {
-        if (indexAsString == null){
+        if (indexAsString == null) {
             Ui.emptyArgForDeleteCommand();
-        }else{
+        } else {
             int tripIndex = Integer.parseInt(indexAsString) - 1;
             deleteTrip(tripIndex);
         }
@@ -145,10 +144,9 @@ public class Parser {
 
     //assumes that listOfTrips have at least 1 trip
     private static void executeOpen(String indexAsString) {
-        if (indexAsString == null){
+        if (indexAsString == null) {
             Ui.emptyArgForOpenCommand();
-        }
-        else {
+        } else {
             try {
                 int indexToGet = Integer.parseInt(indexAsString) - 1;
                 Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
