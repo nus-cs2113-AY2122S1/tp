@@ -5,11 +5,8 @@ import java.nio.file.Path;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.TerminusLogger;
-import terminus.exception.InvalidLinkException;
-import terminus.exception.InvalidTimeFormatException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidDayException;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
@@ -99,8 +96,7 @@ public class Terminus {
                 TerminusLogger.info("Saving data into file...");
                 this.moduleStorage.saveFile(nusModule);
                 TerminusLogger.info("Save completed.");
-            } catch (InvalidCommandException | InvalidTimeFormatException
-                    | InvalidLinkException | InvalidDayException e) {
+            } catch (InvalidCommandException e) {
                 TerminusLogger.warning("Invalid input provided: " + input, e.getCause());
                 ui.printSection(e.getMessage());
             } catch (InvalidArgumentException e) {

@@ -9,11 +9,8 @@ import org.junit.jupiter.api.Test;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.content.Note;
-import terminus.exception.InvalidLinkException;
-import terminus.exception.InvalidTimeFormatException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidDayException;
 import terminus.module.NusModule;
 import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
@@ -34,9 +31,7 @@ public class DeleteNoteCommandTest {
     }
 
     @Test
-    void execute_success()
-            throws InvalidCommandException, InvalidArgumentException,
-            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(ui, nusModule);
@@ -58,9 +53,7 @@ public class DeleteNoteCommandTest {
     }
 
     @Test
-    void execute_throwsException()
-            throws InvalidCommandException, InvalidArgumentException,
-            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
+    void execute_throwsException() throws InvalidCommandException, InvalidArgumentException {
         Command deleteCommand = commandParser.parseCommand("delete 100");
         assertThrows(InvalidArgumentException.class, () -> deleteCommand.execute(ui, nusModule));
     }

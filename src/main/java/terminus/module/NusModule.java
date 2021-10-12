@@ -1,12 +1,9 @@
 package terminus.module;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
 import terminus.content.Content;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Note;
-import terminus.exception.InvalidArgumentException;
 
 public class NusModule {
 

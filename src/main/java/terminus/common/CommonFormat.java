@@ -1,12 +1,7 @@
 package terminus.common;
 
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Arrays;
-import terminus.exception.InvalidCommandException;
-import terminus.exception.InvalidTimeFormatException;
-
+import terminus.exception.InvalidArgumentException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -51,9 +46,9 @@ public class CommonFormat {
         return false;
     }
 
-    public static LocalTime localTimeConverter(String startTime) throws InvalidTimeFormatException {
+    public static LocalTime localTimeConverter(String startTime) throws InvalidArgumentException {
         if (startTime.length() != 5 || startTime.indexOf(":") != 2) {
-            throw new InvalidTimeFormatException(
+            throw new InvalidArgumentException(
                     String.format(Messages.ERROR_MESSAGE_INVALID_TIME_FORMAT, LOCAL_TIME_FORMAT));
         }
         DateTimeFormatter format = DateTimeFormatter.ofPattern(LOCAL_TIME_FORMAT);

@@ -8,11 +8,8 @@ import org.junit.jupiter.api.Test;
 import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
 import terminus.command.NotesCommand;
-import terminus.exception.InvalidLinkException;
-import terminus.exception.InvalidTimeFormatException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidDayException;
 
 public class MainCommandParserTest {
     
@@ -31,9 +28,7 @@ public class MainCommandParserTest {
     }
 
     @Test
-    void parseCommand_resolveExitCommand_success()
-            throws InvalidCommandException, InvalidArgumentException,
-            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
+    void parseCommand_resolveExitCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("exit") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("EXIT") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("   exit   ") instanceof ExitCommand);
@@ -41,9 +36,7 @@ public class MainCommandParserTest {
     }
     
     @Test
-    void parseCommand_resolveHelpCommand_success()
-            throws InvalidCommandException, InvalidArgumentException,
-            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
+    void parseCommand_resolveHelpCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("help") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("HELP") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("   help   ") instanceof HelpCommand);
@@ -57,9 +50,7 @@ public class MainCommandParserTest {
     }
     
     @Test
-    void parseCommand_resolveNoteCommand_success()
-            throws InvalidCommandException, InvalidArgumentException,
-            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
+    void parseCommand_resolveNoteCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("note") instanceof NotesCommand);
         assertTrue(commandParser.parseCommand("NOTE") instanceof NotesCommand);
         assertTrue(commandParser.parseCommand("   note   ") instanceof NotesCommand);

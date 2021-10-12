@@ -5,11 +5,8 @@ import terminus.command.CommandResult;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Link;
-import terminus.exception.InvalidLinkException;
-import terminus.exception.InvalidTimeFormatException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidDayException;
 import terminus.module.NusModule;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
@@ -45,8 +42,7 @@ public class AddLinkCommand extends Command {
     }
 
     @Override
-    public void parseArguments(String arguments)
-            throws InvalidArgumentException, InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
+    public void parseArguments(String arguments) throws InvalidArgumentException {
         // Perform required checks with regex
         if (arguments == null || arguments.isBlank()) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
@@ -66,11 +62,11 @@ public class AddLinkCommand extends Command {
 
         if (!isValidDay(this.day)) {
             TerminusLogger.warning(String.format("Invalid Day: %s", this.day));
-            throw new InvalidDayException(String.format(Messages.ERROR_MESSAGE_INVALID_DAY, this.day));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DAY, this.day));
         }
         if (!isValidUrl(this.link)) {
             TerminusLogger.warning(String.format("Invalid Link: %s", this.link));
-            throw new InvalidLinkException(
+            throw new InvalidArgumentException(
                     String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
         }
         TerminusLogger.info(String.format("Parsed arguments (description = %s, day = %s, startTime = %s, link = %s)"

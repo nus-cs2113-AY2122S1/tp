@@ -6,11 +6,8 @@ import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
 import terminus.content.Link;
-import terminus.exception.InvalidLinkException;
-import terminus.exception.InvalidTimeFormatException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidDayException;
 import terminus.module.NusModule;
 import terminus.parser.LinkCommandParser;
 import terminus.ui.Ui;
@@ -46,9 +43,7 @@ public class AddLinkCommandTest {
     }
 
     @Test
-    void execute_addLinkCommand_success()
-            throws InvalidCommandException, InvalidArgumentException,
-            InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
+    void execute_addLinkCommand_success() throws InvalidCommandException, InvalidArgumentException {
         Command addLinkCommand = linkCommandParser.parseCommand("add \"test\" \"Monday\" \"00:00\" \"https://zoom.us/test\"");
         CommandResult addResult = addLinkCommand.execute(ui, nusModule);
         assertTrue(addResult.isOk());

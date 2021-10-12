@@ -1,10 +1,7 @@
 package terminus.command;
 
-import terminus.exception.InvalidLinkException;
-import terminus.exception.InvalidTimeFormatException;
 import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
-import terminus.exception.InvalidDayException;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
@@ -35,10 +32,9 @@ public abstract class Command {
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
      * @throws InvalidArgumentException Exception for when arguments parsing fails
-     * @throws InvalidTimeFormatException Exception for when time format is invalid
      */
     public void parseArguments(String arguments)
-            throws InvalidArgumentException, InvalidTimeFormatException, InvalidLinkException, InvalidDayException {
+            throws InvalidArgumentException {
         this.arguments = arguments;
     }
 
@@ -51,9 +47,7 @@ public abstract class Command {
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException  Exception for when the command could not be found.
      * @throws InvalidArgumentException Exception for when arguments parsing fails
-     * @throws InvalidTimeFormatException Exception for when time format is invalid
      */
     public abstract CommandResult execute(Ui ui, NusModule module)
-            throws InvalidCommandException, InvalidArgumentException,
-            InvalidTimeFormatException, InvalidLinkException, InvalidDayException;
+            throws InvalidCommandException, InvalidArgumentException;
 }
