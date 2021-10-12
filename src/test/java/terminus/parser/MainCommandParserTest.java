@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
 import terminus.command.NotesCommand;
-import terminus.exception.InvalidCommandException;
 import terminus.exception.InvalidArgumentException;
+import terminus.exception.InvalidCommandException;
 
 public class MainCommandParserTest {
     

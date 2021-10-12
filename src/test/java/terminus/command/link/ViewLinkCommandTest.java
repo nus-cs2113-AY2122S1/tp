@@ -1,5 +1,9 @@
 package terminus.command.link;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -10,10 +14,6 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.NusModule;
 import terminus.parser.LinkCommandParser;
 import terminus.ui.Ui;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ViewLinkCommandTest {
 
