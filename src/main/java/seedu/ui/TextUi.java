@@ -59,7 +59,7 @@ public class TextUi {
     }
 
     public static String getLessonCommand(String lessonType) {
-        String output = "\nWhich " + lessonType + " would you like to choose? ";
+        String output = "Which " + lessonType + " would you like to choose? ";
         System.out.print(output);
         String input = in.nextLine();
         while (input.isEmpty()) {

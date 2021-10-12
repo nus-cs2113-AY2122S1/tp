@@ -39,7 +39,7 @@ public class NusMods {
             ModStorage.saveModInfo(moduleCode, inputStream);
             return ModStorage.loadModInfo(moduleCode);
         } catch (Exception e) {
-            throw new IOException();
+            throw new IOException("Unable to fetch module");
         }
     }
 
@@ -87,5 +87,4 @@ public class NusMods {
         reader.endArray();
         TextUi.printUpdateSuccessMessage();
     }
-
 }
