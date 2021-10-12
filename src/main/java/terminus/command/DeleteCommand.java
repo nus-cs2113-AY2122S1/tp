@@ -45,7 +45,11 @@ public class DeleteCommand<T extends Content> extends Command {
     @Override
     public CommandResult execute(Ui ui, NusModule module) throws InvalidArgumentException {
         ContentManager<T> contentManager = module.getContentManager(type);
+        assert contentManager != null;
+
         String deletedContentName =  contentManager.deleteContent(itemNumber);
+        assert deletedContentName != null && !deletedContentName.isBlank();
+
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,
                 CommonFormat.getClassName(type).toLowerCase(), deletedContentName));
         return new CommandResult(true);

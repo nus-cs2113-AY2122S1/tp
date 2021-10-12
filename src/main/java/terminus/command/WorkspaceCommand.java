@@ -28,6 +28,7 @@ public abstract class WorkspaceCommand extends Command {
     @Override
     public CommandResult execute(Ui ui, NusModule module)
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
+        assert commandMap != null;
         if (arguments != null && !arguments.isBlank()) {
             try {
                 return commandMap.parseCommand(arguments).execute(ui, module);

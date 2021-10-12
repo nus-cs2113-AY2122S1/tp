@@ -18,8 +18,7 @@ public abstract class CommandParser {
     protected final HashMap<String, Command> commandMap;
 
     /**
-     * Initializes the commandMap.
-     * Adds some default commands to it.
+     * Initializes the commandMap. Adds some default commands to it.
      *
      * @param workspace The name of the workspace
      */
@@ -36,20 +35,22 @@ public abstract class CommandParser {
      *
      * @param command The user input command
      * @return The Command object to be executed
-     * @throws InvalidCommandException  if there is no command or empty command
-     * @throws InvalidArgumentException Fails when arguments could not be parsed
+     * @throws InvalidCommandException    if there is no command or empty command
+     * @throws InvalidArgumentException   Fails when arguments could not be parsed
      * @throws InvalidTimeFormatException Fails when time format is invalid
      */
 
     public Command parseCommand(String command)
             throws InvalidCommandException, InvalidArgumentException, InvalidTimeFormatException {
         String[] commandLine = command.strip().split(SPACE_DELIMITER, 2);
+
+        assert commandLine.length <= 2 && commandLine.length > 0;
+
         String cmdName = commandLine[0];
         Command currentCommand = commandMap.get(cmdName.strip().toLowerCase(Locale.ROOT));
         if (currentCommand == null) {
             throw new InvalidCommandException("Command not found! Type 'help' for a list of commands.");
         }
-
         String cmdData = null;
         if (commandLine.length > 1) {
             cmdData = commandLine[1];
@@ -61,7 +62,7 @@ public abstract class CommandParser {
     public Set<String> getCommandList() {
         return commandMap.keySet();
     }
-    
+
     public abstract String getWorkspaceBanner(NusModule module);
 
     /**

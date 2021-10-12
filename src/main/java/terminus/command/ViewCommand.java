@@ -50,6 +50,7 @@ public class ViewCommand<T extends Content> extends Command {
         ContentManager<T> contentManager = module.getContentManager(type);
         if (displayAll) {
             String fullList = contentManager.listAllContents();
+            assert fullList != null;
             if (fullList.isBlank()) {
                 result.append(Messages.EMPTY_CONTENT_LIST_MESSAGE);
             } else {
