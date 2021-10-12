@@ -154,8 +154,8 @@ public class CommonFormatTest {
 
     @Test
     void convertToLocalTime_success() throws InvalidTimeFormatException {
-        String input = "11:56";
-        assertTrue(CommonFormat.convertToLocalTime(input) instanceof LocalTime);
+        assertTrue(CommonFormat.convertToLocalTime("11:56") instanceof LocalTime);
+        assertTrue(CommonFormat.convertToLocalTime("22:56") instanceof LocalTime);
     }
 
     @Test
