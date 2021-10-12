@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 /**
@@ -31,6 +32,7 @@ public class MediVault {
     }
 
     public static void main(String[] args) {
+        LogManager.getLogManager().reset();
         logger.log(Level.INFO, "Medivault is starting up");
         new MediVault().run();
     }
