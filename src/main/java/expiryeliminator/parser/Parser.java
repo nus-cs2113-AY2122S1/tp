@@ -201,6 +201,7 @@ public class Parser {
             if (error != null) {
                 return error;
             }
+            assert !recipe.isBlank();
             return new AddRecipeCommand(recipe, ingredientList);
         } catch (InvalidArgFormatException e) {
             return new IncorrectCommand(e.getMessage());
@@ -225,6 +226,7 @@ public class Parser {
 
         try {
             final String recipe = new RecipeParser().parse(argParser.getSingleArg(PREFIX_RECIPE));
+            assert !recipe.isBlank();
             return new DeleteRecipeCommand(recipe);
         } catch (InvalidArgFormatException e) {
             return new IncorrectCommand(e.getMessage());
@@ -237,8 +239,8 @@ public class Parser {
      * Adds the ingredients into the ingredient list.
      *
      * @param ingredientNames Array of name of ingredients
-     * @param quantities      Array of quantity of ingredients
-     * @param ingredients     Ingredient list to store the ingredients
+     * @param quantities Array of quantity of ingredients
+     * @param ingredients Ingredient list to store the ingredients
      * @return null if there's no error and an IncorrectCommand if there is.
      */
     private static IncorrectCommand addIngredients(ArrayList<String> ingredientNames, ArrayList<Integer> quantities,
@@ -247,7 +249,12 @@ public class Parser {
             return new IncorrectCommand("Should have same number of ingredient names and quantities");
         }
         for (int i = 0; i < ingredientNames.size(); i++) {
+            if (quantities.get(i) == 0) {
+                return new IncorrectCommand("Quantity of ingredients for recipe cannot be zero.");
+            }
             Ingredient ingredient = new Ingredient(ingredientNames.get(i), quantities.get(i), null);
+            assert !ingredientNames.get(i).isBlank();
+            assert quantities.get(i) != null && quantities.get(i) != 0;
             try {
                 ingredients.add(ingredient);
             } catch (DuplicateDataException e) {
