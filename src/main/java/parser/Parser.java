@@ -155,7 +155,10 @@ public class Parser {
 
                 parameterContents = new StringBuilder(); // Reset the values
                 String[] commandSplit = s.split(DELIMITER);
-                commandParameter = commandSplit[0].toLowerCase();
+
+                if (commandSplit.length != 0){ // Ensure '/' exists
+                    commandParameter = commandSplit[0].toLowerCase();
+                }
 
                 if (commandSplit.length > 1) {
                     parameterContents = new StringBuilder(commandSplit[1]);
