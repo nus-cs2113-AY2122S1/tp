@@ -58,8 +58,7 @@ public class MedicineManagerTest {
     @Test
     void getMaxStockQuantity_emptyStock_assertionError() {
         ArrayList<Medicine> medicines = new ArrayList<>();
-        assertThrows(AssertionError.class,
-                () -> MedicineManager.getMaxStockQuantity(medicines, "PANADOL"));
+        assertThrows(AssertionError.class, () -> MedicineManager.getMaxStockQuantity(medicines, "PANADOL"));
     }
 
     @Test
@@ -89,8 +88,7 @@ public class MedicineManagerTest {
         ArrayList<Medicine> medicines = new ArrayList<>();
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("I", "1");
-        assertThrows(AssertionError.class,
-                () -> MedicineManager.extractStockObject(parameters, medicines));
+        assertThrows(AssertionError.class, () -> MedicineManager.extractStockObject(parameters, medicines));
     }
 
     @Test
@@ -102,8 +100,7 @@ public class MedicineManagerTest {
                 "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("I", "3");
-        assertThrows(AssertionError.class,
-                () -> MedicineManager.extractStockObject(parameters, medicines));
+        assertThrows(AssertionError.class, () -> MedicineManager.extractStockObject(parameters, medicines));
     }
 
 
