@@ -1,34 +1,31 @@
 package seedu.duke.items;
 
-import seedu.duke.Parser;
-
 import java.time.LocalDateTime;
 
 public class Event extends Item {
 
-    private LocalDateTime date;
+    private LocalDateTime dateTime;
     private String venue;
     private double budget;
 
     public static final String EVENT_DATA_ARGS_DELIMITER = "\\s*\\|\\s*";
 
-    public Event(String title, String description, String dateTime, String venue, double budget) {
-        super("event", title, description);
-        this.date = Parser.convertDateTime(dateTime);
+    public Event(String title, String description, LocalDateTime dateTime, String venue, double budget) {
+        super("event", title, description, dateTime);
         this.venue = venue;
         this.budget = budget;
     }
 
     public LocalDateTime getDateValue() {
-        return date;
+        return dateTime;
     }
 
     public String getItemType() {
         return "event";
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public void setVenue(String venue) {
@@ -49,6 +46,6 @@ public class Event extends Item {
 
     @Override
     public String toString() {
-        return String.format("[E] %s (at: %s)", this.getTitle(), Parser.convertDateTime(this.getDateValue()));
+        return String.format("[E][%s] %s (at: %s)", this.getStatusIcon(), this.getTitle(), this.getStringDateTime());
     }
 }

@@ -16,7 +16,7 @@ public class NextCommand extends Command {
 
     public CommandResult execute() {
         sortedList = Parser.makeMainList();
-        Parser.bubbleSortTask(sortedList);
+        Parser.bubbleSortItems(sortedList);
         Item nextItem = sortedList.get(0);
         if (nextItem.getItemType().equalsIgnoreCase("task")) {
             Ui.printTask((Task) nextItem);

@@ -1,14 +1,20 @@
 package seedu.duke;
 
+
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ByeCommand;
+
+import seedu.duke.commands.DoneUndoCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.SelectCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.UpdateCommand;
+import seedu.duke.commands.FindCommand;
+import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.NextCommand;
+import seedu.duke.commands.SelectCommand;
+import seedu.duke.commands.UpdateCommand;
 import seedu.duke.items.Item;
 
 import java.time.LocalDateTime;
@@ -25,6 +31,9 @@ public class Parser {
         switch (command[0]) {
         case "list":
             return new ListCommand(command);
+        case "done":
+        case "undo":
+            return new DoneUndoCommand(command);
         case "delete":
             return new DeleteCommand(command);
         case "add":
@@ -33,6 +42,8 @@ public class Parser {
             return new ByeCommand();
         case "help":
             return new HelpCommand();
+        case "find":
+            return new FindCommand(command);
         case "select":
             return new SelectCommand(command);
         case "update":
@@ -58,10 +69,10 @@ public class Parser {
         return dateTime.format(formatter1);
     }
 
-    public static void bubbleSortTask(ArrayList<Item> list) {
+    public static void bubbleSortItems(ArrayList<Item> list) {
         for (int j = 0; j < list.size() - 1; j++) {
             for (int i = 0; i < list.size() - j - 1; i++) {
-                if (list.get(i + 1).getDateValue().isBefore(list.get(i).getDateValue())) {
+                if (list.get(i + 1).getDateTime().isBefore(list.get(i).getDateTime())) {
                     swap(i, list);
                 }
             }
