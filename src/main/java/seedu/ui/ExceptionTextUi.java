@@ -108,7 +108,12 @@ public class ExceptionTextUi {
     }
 
     public static void invalidNameInput() {
-        String message = "The name is not correctly formatted";
+        String message = "The name is not correctly formatted,\n"
+                + "Rules for name :\n"
+                + "    * Uppercase and lowercase letters\n"
+                + "    * Spaces\n"
+                + "    * No numbers or special characters\n"
+                + "    * Cannot be \"null\"";
         printDoubleLineMessage(message);
     }
 
