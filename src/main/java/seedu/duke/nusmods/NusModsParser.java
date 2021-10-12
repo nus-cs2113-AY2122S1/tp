@@ -51,12 +51,12 @@ public class NusModsParser {
         DateFormat formatter = new SimpleDateFormat("HHmm");
         JsonObject obj = JsonParser.parseReader(getModuleReader(lesson.getModuleCode())).getAsJsonObject();
         JsonArray semesterData = obj.getAsJsonArray("semesterData");
-        Event[] retval = null;
-        for (JsonElement e : semesterData) {
-            JsonObject o = e.getAsJsonObject();
-            if (Semester.fromInt(o.get("semester").getAsInt()) == getSemester()) {
-                JsonArray timetable = o.get("timetable").getAsJsonArray();
-                retval = StreamSupport.stream(timetable.spliterator(), true)
+        Event[] lessonEvents = null;
+        for (JsonElement element : semesterData) {
+            JsonObject semesterObject = element.getAsJsonObject();
+            if (Semester.fromInt(semesterObject.get("semester").getAsInt()) == getSemester()) {
+                JsonArray timetable = semesterObject.get("timetable").getAsJsonArray();
+                lessonEvents = StreamSupport.stream(timetable.spliterator(), true)
                         .map(JsonElement::getAsJsonObject)
                         .filter(l -> lesson.getClassNo().equals(l.get("classNo").getAsString()))
                         .map(l -> {
@@ -71,7 +71,7 @@ public class NusModsParser {
                         .toArray(Event[]::new);
             }
         }
-        return retval;
+        return lessonEvents;
     }
 
     private Reader getModuleReader(String moduleCode) throws IOException {
