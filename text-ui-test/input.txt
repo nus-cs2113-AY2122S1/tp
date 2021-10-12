@@ -36,6 +36,12 @@ n
 y
 list
 view abc
+add -n yusdhsdsd -g -sdj11222
+add -n yusdhsdsd -g sdj0-11222
+add -n yusdhfgsd -g sdj11222-
+add -n yusdhsd -g sdj11--222
+add -n asbsd123123
+add -n asjoda sadfsd -te _123adad
 view 0
    add  -n   -g
       add -n le,zong, mun -g    lezaimun
@@ -43,7 +49,10 @@ view 0
        add -n name -g null
        add   -n dev -g nullptr
     edit 3 -g new-git
-add -n name -l linkedin -g github -e email -tw twitter -te telegram
+    add -n asjoda sadfsd -tw _123  adad
+    add -n asjoda sadfsd -tw 123_adad
+add -n name -l linkedin -g github -e lasdas@ -tw twitter -te telegram
+add -n asdasd -l kusdd__ -g adasdas -e .adadas@com
 add -n lezai  -g lezongmun  -e lezongmun@gmail.com   -linkedin  lezongmun
 add -n lezai3  -g lezongmun  -e lezongmun@gmail.com   -l  lezongmun
 add -n lezongggg    -te testTelegram

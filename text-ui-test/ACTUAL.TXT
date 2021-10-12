@@ -12,8 +12,8 @@ ____________________________________________________________
 Welcome to ConTech, your personal contact tracker.
 ____________________________________________________________
 
-As ConTech is unable to find your saved data, 
- it has created a new one for you at: 
+As ConTech is unable to find your saved data,
+ it has created a new one for you at:
 data/contacts.txt
 ____________________________________________________________
 
@@ -22,7 +22,7 @@ There are no contacts stored in ConTech.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
+ConTech has added the specified contact:
 Name:     ng andre
 Github:   github.com/ng-andre
 
@@ -39,7 +39,7 @@ Please enter a valid contact index.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
+ConTech has added the specified contact:
 Name:     ashraf
 Github:   github.com/ashraf
 
@@ -67,7 +67,7 @@ Delete has been cancelled.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
+ConTech has added the specified contact:
 Name:     mayank
 Github:   github.com/mayankp123
 
@@ -80,7 +80,7 @@ Please input a number between 0 and 2.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
+ConTech has added the specified contact:
 Name:     bory
 Github:   github.com/marcus
 
@@ -88,7 +88,7 @@ You now have 4 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
+ConTech has added the specified contact:
 Name:     andre
 Github:   github.com/ng-andre
 
@@ -115,7 +115,7 @@ ____________________________________________________________
 
 ____________________________________________________________
 There are missing details.
-Please remove any flags with no details, 
+Please remove any flags with no details,
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
@@ -130,7 +130,7 @@ Please enter a valid contact index.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
+ConTech has added the specified contact:
 Name:     lezong
 Github:   github.com/lezongmun
 
@@ -185,7 +185,7 @@ ____________________________________________________________
 
 ____________________________________________________________
 There are missing details.
-Please remove any flags with no details, 
+Please remove any flags with no details,
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
@@ -227,7 +227,7 @@ Please try again with a valid flag.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
+ConTech has added the specified contact:
 Name:     lezongmun
 Github:   github.com/lezong
 
@@ -272,13 +272,72 @@ Please enter a valid contact index.
 ____________________________________________________________
 
 ____________________________________________________________
+There are missing details.
+Please remove any flags with no details,
+and ensure that your flags used are correct:
+  -n NAME
+  -g GITHUB
+  -l LINKEDIN
+  -te TELEGRAM
+  -tw TWITTER
+  -e EMAIL
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact:
+Name:     yusdhsdsd
+Github:   github.com/sdj0-11222
+
+You now have 5 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+The github username is not correctly formatted,
+Rules for Github username :
+    * Only contain alphanumeric characters or hyphens
+    * Only lowercase allowed
+    * Maximum 39 characters allowed
+    * Cannot have multiple consecutive hyphens
+    * Cannot begin or end with a hyphen
+
+____________________________________________________________
+
+____________________________________________________________
+The github username is not correctly formatted,
+Rules for Github username :
+    * Only contain alphanumeric characters or hyphens
+    * Only lowercase allowed
+    * Maximum 39 characters allowed
+    * Cannot have multiple consecutive hyphens
+    * Cannot begin or end with a hyphen
+
+____________________________________________________________
+
+____________________________________________________________
+The name is not correctly formatted,
+Rules for name :
+    * Uppercase and lowercase letters
+    * Spaces
+    * No numbers or special characters
+    * Cannot be "null"
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact:
+Name:     asjoda sadfsd
+Telegram: t.me/_123adad
+
+You now have 6 contact(s).
+____________________________________________________________
+
+____________________________________________________________
 0. mayank
 Github:   github.com/mayankp123
 ____________________________________________________________
 
 ____________________________________________________________
 There are missing details.
-Please remove any flags with no details, 
+Please remove any flags with no details,
 and ensure that your flags used are correct:
   -n NAME
   -g GITHUB
@@ -294,47 +353,67 @@ Due to the storage nature of ConTech, we will remove
 commas (","), and attempt to parse it as:
 add -n lezong mun -g    lezaimun
 ____________________________________________________________
-ConTech has added the specified contact: 
+ConTech has added the specified contact:
 Name:     lezong mun
 Github:   github.com/lezaimun
 
-You now have 5 contact(s).
+You now have 7 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-As one of the details to be stored is "null", 
+As one of the details to be stored is "null",
 ConTech is unable to process it
 ____________________________________________________________
 
 ____________________________________________________________
-As one of the details to be stored is "null", 
+As one of the details to be stored is "null",
 ConTech is unable to process it
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
+ConTech has added the specified contact:
 Name:     dev
 Github:   github.com/nullptr
 
-You now have 6 contact(s).
+You now have 8 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has edited the specified contact: 
+ConTech has edited the specified contact:
 Name:     lezongmun
 Github:   github.com/new-git
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
-Name:     name
-Github:   github.com/github
-Email:    email
-Telegram: t.me/telegram
-LinkedIn: linkedin.com/in/linkedin
-Twitter:  twitter.com/twitter
+The twitter username is not correctly formatted,
+Rules for Twitter username :
+    * Lowercase letters only
+    * Numbers and underscore allowed
+    * Maximum 15 characters allowed
+____________________________________________________________
 
-You now have 7 contact(s).
+____________________________________________________________
+ConTech has added the specified contact:
+Name:     asjoda sadfsd
+Twitter:  twitter.com/123_adad
+
+You now have 9 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+The email id is not correctly formatted,
+Rules for email id :
+    * Lowercase letters only
+    * Numbers, underscore, hyphen and dot allowed
+    * @ cannot be at the start or end
+____________________________________________________________
+
+____________________________________________________________
+The email id is not correctly formatted,
+Rules for email id :
+    * Lowercase letters only
+    * Numbers, underscore, hyphen and dot allowed
+    * @ cannot be at the start or end
 ____________________________________________________________
 
 ____________________________________________________________
@@ -349,21 +428,20 @@ Please try again with a valid flag.
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
-Name:     lezai3
-Github:   github.com/lezongmun
-Email:    lezongmun@gmail.com
-LinkedIn: linkedin.com/in/lezongmun
-
-You now have 8 contact(s).
+The name is not correctly formatted,
+Rules for name :
+    * Uppercase and lowercase letters
+    * Spaces
+    * No numbers or special characters
+    * Cannot be "null"
 ____________________________________________________________
 
 ____________________________________________________________
-ConTech has added the specified contact: 
+ConTech has added the specified contact:
 Name:     lezongggg
 Telegram: t.me/testTelegram
 
-You now have 9 contact(s).
+You now have 10 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
