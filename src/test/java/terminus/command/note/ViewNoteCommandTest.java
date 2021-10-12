@@ -16,6 +16,7 @@ import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
 
 public class ViewNoteCommandTest {
+
     private NoteCommandParser commandParser;
     private NusModule nusModule;
     private Ui ui;
@@ -40,12 +41,39 @@ public class ViewNoteCommandTest {
         assertEquals(5, nusModule.getContentManager(type).getTotalContents());
 
         Command viewCommand = commandParser.parseCommand("view");
-        CommandResult result = viewCommand.execute(ui,nusModule);
-
-
-
-
+        CommandResult viewResult = viewCommand.execute(ui, nusModule);
+        assertTrue(viewResult.isOk());
     }
 
+    @Test
+    void execute_viewOne_success()
+            throws InvalidCommandException, InvalidArgumentException {
+        for (int i = 0; i < 5; i++) {
+            Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
+            CommandResult addResult = addCommand.execute(ui, nusModule);
+            assertTrue(addResult.isOk());
+        }
+        assertEquals(5, nusModule.getContentManager(type).getTotalContents());
 
+        Command viewCommand = commandParser.parseCommand("view 1");
+        CommandResult viewResult = viewCommand.execute(ui, nusModule);
+        assertTrue(viewResult.isOk());
+    }
+
+    @Test
+    void execute_viewOne_exceptionThrown()
+            throws InvalidCommandException, InvalidArgumentException {
+        for (int i = 0; i < 5; i++) {
+            Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
+            CommandResult addResult = addCommand.execute(ui, nusModule);
+            assertTrue(addResult.isOk());
+        }
+        assertEquals(5, nusModule.getContentManager(type).getTotalContents());
+
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("view a"));
+        assertThrows(InvalidArgumentException.class,
+                () -> commandParser.parseCommand("view -1").execute(ui, nusModule));
+        assertThrows(InvalidArgumentException.class,
+                () -> commandParser.parseCommand("view 6").execute(ui, nusModule));
+    }
 }
