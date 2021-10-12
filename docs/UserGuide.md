@@ -25,7 +25,7 @@ purchase of raw ingredients and enables more efficient allocation to the cooking
 
 ## Quick Start
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Food-O-Rama` from [here](http://link.to/duke).
+2. Download the latest version of `Food-O-Rama` from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp/releases/tag/Release_v1.0).
 3. Copy 'Food-O-Rama.jar' into an empty folder.
 4. Open command promppt, nagivate to where 'Food-O-Rama.jar' is located. e.g. cd [file path]
 5. Launch 'Food-O-Rama' using 'java -jar Food-O-Rama.jar'.
