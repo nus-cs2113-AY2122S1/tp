@@ -17,6 +17,7 @@ public class Gordon {
         mainCookbook = new Cookbook();
         storage = new Storage(mainCookbook);
         logger = Logger.getLogger(GordonException.loggerName);
+        logger.setLevel(Level.SEVERE);
     }
 
     public void run() {

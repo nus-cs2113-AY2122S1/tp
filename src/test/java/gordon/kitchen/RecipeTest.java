@@ -10,8 +10,8 @@ class RecipeTest {
     @Test
     public void testToString() {
         Recipe r = new Recipe("Coffee");
-        r.addIngredient(new Ingredient("Coffee beans"));
-        r.addIngredient(new Ingredient("Water"));
+        r.addIngredient("Coffee beans");
+        r.addIngredient("Water");
         r.addStep("Boil water");
         r.addStep("Grind beans");
         r.addStep("Pour water over grounds");
@@ -36,12 +36,12 @@ class RecipeTest {
     public void testAdd() {
         try {
             Recipe r = new Recipe("Coffee");
-            r.addIngredient(new Ingredient("Coffee beans"));
-            r.addIngredient(new Ingredient("Water"));
+            r.addIngredient("Coffee beans");
+            r.addIngredient("Water");
             r.addStep("Boil water");
             r.addStep("Grind beans");
             r.addStep("Pour water over grounds");
-            r.addIngredient(new Ingredient("Test"), 12);
+            r.addIngredient("Test", 12);
             fail();
         } catch (GordonException g) {
             System.out.println(g.getMessage());
@@ -49,8 +49,8 @@ class RecipeTest {
 
         try {
             Recipe r = new Recipe("Coffee");
-            r.addIngredient(new Ingredient("Coffee beans"));
-            r.addIngredient(new Ingredient("Water"));
+            r.addIngredient("Coffee beans");
+            r.addIngredient("Water");
             r.addStep("Boil water");
             r.addStep("Grind beans");
             r.addStep("Pour water over grounds");
@@ -65,8 +65,8 @@ class RecipeTest {
     public void testRemove() {
         try {
             Recipe r = new Recipe("Coffee");
-            r.addIngredient(new Ingredient("Coffee beans"));
-            r.addIngredient(new Ingredient("Water"));
+            r.addIngredient("Coffee beans");
+            r.addIngredient("Water");
             r.addStep("Boil water");
             r.addStep("Grind beans");
             r.addStep("Pour water over grounds");

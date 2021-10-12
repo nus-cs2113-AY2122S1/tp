@@ -2,7 +2,6 @@ package gordon.util;
 
 import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
-import gordon.kitchen.Ingredient;
 import gordon.kitchen.Recipe;
 
 import java.io.File;
@@ -58,7 +57,7 @@ public class Storage {
                 }
 
                 String parsedIngredient = line.substring(dotIndex + 2);
-                r.addIngredient(new Ingredient(parsedIngredient));
+                r.addIngredient(parsedIngredient);
             }
         }
     }
