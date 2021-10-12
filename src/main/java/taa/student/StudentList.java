@@ -36,6 +36,12 @@ public class StudentList implements ClassChecker {
         return new ArrayList<>(students);
     }
 
+    /**
+     * Gets the Student object at a particular index.
+     *
+     * @param index The index of the Student object.
+     * @return A Student object if the index is valid, else null.
+     */
     public Student getStudentAt(int index) {
         if (isValidIndex(index)) {
             return students.get(index);
