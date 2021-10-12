@@ -1,8 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.exceptions.InsufficientParametersException;
-import seedu.duke.ingredients.AddIngredient;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
 
