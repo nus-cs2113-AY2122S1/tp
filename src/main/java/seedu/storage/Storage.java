@@ -43,6 +43,14 @@ public class Storage {
         return true;
     }
 
+    private boolean hasEmptyExistingPersonalContactFile() {
+        if (personalContactFile.exists() && personalContactFile.length() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+
     private boolean hasExistingContactFile() throws FileErrorException {
         try {
             if (!contactFile.exists()) {
@@ -65,23 +73,18 @@ public class Storage {
         return ContactsDecoder.readContacts(contactFile);
     }
 
-
-
     public Contact loadExistingPersonalContact() throws FileErrorException {
-        if (!hasExistingPersonalContactFile()) {
+        if (!hasExistingPersonalContactFile() || hasEmptyExistingPersonalContactFile()) {
             isFirstRun = true;
             // get new contact
             String personalName = TextUi.getNameMessage();
-            Contact personalContact = new Contact(personalName, null,null,null,null,null);
-            ContactList contactList = new ContactList();
-            contactList.addContact(personalContact);
-            ContactsEncoder.saveContacts(personalContactFilePath, contactList);
+            Contact personalContact = new Contact(personalName, null,null,null,
+                    null,null);
+            ContactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
             TextUi.greetingMessage(personalContact);
             return personalContact;
         }
-        ContactList contactList = ContactsDecoder.readContacts(personalContactFile);
-        assert contactList.getListSize() == 1;
-        Contact personalContact = contactList.getContactAtIndex(0);
+        Contact personalContact = ContactsDecoder.readPersonalContact(personalContactFile);
         TextUi.welcomeBackMessage(personalContact);
         return personalContact;
     }

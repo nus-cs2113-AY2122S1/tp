@@ -28,12 +28,40 @@ public class ContactsDecoder {
         return updatedContactList;
     }
 
+    public static Contact readPersonalContact(File personalContactFile) throws FileErrorException {
+        Contact personalContact = new Contact(null, null, null, null, null, null);
+        try {
+            Scanner fileScanner = new Scanner(personalContactFile);
+            if (fileScanner.hasNext()) {
+                String contactText = fileScanner.nextLine();
+                personalContact = decodePersonalContact(contactText, personalContact);
+            }
+        } catch (FileNotFoundException e) {
+            throw new FileErrorException();
+        }
+        return personalContact;
+    }
+
+    private static Contact decodePersonalContact(String contactText, Contact contact) {
+        String[] destructuredInputs = contactText.split(SEPARATOR);
+        Contact personalContact = contact;
+        try {
+            String contactName = destructuredInputs[DetailType.NAME.getIndex()];
+            String contactGithub = destructuredInputs[DetailType.GITHUB.getIndex()];
+            String contactLinkedin = destructuredInputs[DetailType.LINKEDIN.getIndex()];
+            String contactTelegram = destructuredInputs[DetailType.TELEGRAM.getIndex()];
+            String contactTwitter = destructuredInputs[DetailType.TWITTER.getIndex()];
+            String contactEmail = destructuredInputs[DetailType.EMAIL.getIndex()];
+            personalContact = new Contact(contactName, contactGithub, contactLinkedin, contactTelegram,
+                    contactTwitter, contactEmail);
+        } catch (IndexOutOfBoundsException e) {
+            ExceptionTextUi.corruptLineMessage(contactText);
+        }
+        return personalContact;
+    }
 
     private static void decodeContact(ContactList contactList, String contactText) {
         String[] destructuredInputs = contactText.split(SEPARATOR);
-        String[] compiledDetails = new String[NUMBER_OF_FIELDS];
-        assert destructuredInputs.length > 0;
-        decodeDetails(compiledDetails, destructuredInputs);
         // Add the decoded details into the contact list
         try {
             String contactName = destructuredInputs[DetailType.NAME.getIndex()];
@@ -47,16 +75,6 @@ public class ContactsDecoder {
             contactList.addContact(newContact);
         } catch (IndexOutOfBoundsException e) {
             ExceptionTextUi.corruptLineMessage(contactText);
-        }
-    }
-
-    private static void decodeDetails(String[] compiledDetails, String[] destructuredInputs) {
-        if (compiledDetails.length != destructuredInputs.length) {
-            return;
-        }
-        assert compiledDetails.length == NUMBER_OF_FIELDS;
-        for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
-            compiledDetails[i] = destructuredInputs[i];
         }
     }
 }

@@ -38,7 +38,7 @@ public abstract class TextUi {
     }
 
     public static String getUserPersonalContact() {
-        String message = "Whats you name?";
+        String message = "Can I get your name?";
         System.out.println(message);
         System.out.println(LINE);
         return scanner.nextLine().trim();
@@ -53,12 +53,16 @@ public abstract class TextUi {
 
     public static void welcomeBackMessage(Contact personalContact) {
         printDoubleLineMessage(LOGO);
-        System.out.println(personalContact.getName() + ", welcome back to ConTech, your personal contact tracker.\n");
+        System.out.println("Hello, " + personalContact.getName() + "." + " Welcome back to ConTech.\n");
         System.out.println(LINE);
     }
 
     public static void greetingMessage(Contact personalContact) {
-        String message = "Hello there " + personalContact.getName();
+        String message = "Hello there, " + personalContact.getName() + ".\n\n"
+                + "This is ConTech, your very own contact tracking application\n"
+                + "to manage computing-related contacts, like GitHub Accounts\n"
+                + "or even Emails.\n\n"
+                + "Enter \"help\" to see what you can do with ConTech.";
         printDoubleLineMessage(message);
     }
 
@@ -80,16 +84,6 @@ public abstract class TextUi {
     public static void printBottomLine() {
         System.out.println("\n" + LINE);
     }
-
-//    private static void initMessage(boolean isFirstRun, Contact personalContact) {
-//        printDoubleLineMessage(LOGO);
-//        if (isFirstRun) {
-//            welcomeBackMessage();
-//        } else {
-//            System.out.println("Welcome back " + personalContact.getName());
-//        }
-//
-//    }
 
     public static void createNewContactFileMessage(String contactFilePath) {
         String message = "As ConTech is unable to find your saved data, \n" + " it has created a new one for you at: \n"

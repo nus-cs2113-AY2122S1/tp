@@ -18,25 +18,19 @@ public class Duke {
     private ContactList contactList;
     private String personalContactFilePath;
     private Contact personalContact;
-//    private boolean isFirstRun;
-
-
 
     public Duke(String contactFilePath, String personalContactFilePath) {
         this.contactFilePath = contactFilePath;
         this.personalContactFilePath = personalContactFilePath;
         this.parser = new MainParser();
         this.storage = new Storage(contactFilePath, personalContactFilePath);
-//        this.isFirstRun = storage.getIsFirstRun();
+
         try {
             this.contactList = storage.loadExistingContacts();
             this.personalContact = storage.loadExistingPersonalContact();
         } catch (FileErrorException e) {
             ExceptionTextUi.fileErrorMessage(this.contactFilePath);
         }
-
-//        this.textUi = new TextUi(isFirstRun, personalContact);
-
     }
 
     private void runConTech() {
