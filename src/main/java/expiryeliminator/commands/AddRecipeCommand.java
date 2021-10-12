@@ -26,7 +26,7 @@ public class AddRecipeCommand extends Command {
     private final Recipe recipe;
 
     public AddRecipeCommand(String name, IngredientList ingredients) {
-        recipe = new Recipe(name,ingredients);
+        recipe = new Recipe(name, ingredients);
     }
 
     @Override

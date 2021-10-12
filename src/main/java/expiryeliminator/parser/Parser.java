@@ -239,8 +239,8 @@ public class Parser {
      * Adds the ingredients into the ingredient list.
      *
      * @param ingredientNames Array of name of ingredients
-     * @param quantities      Array of quantity of ingredients
-     * @param ingredients     Ingredient list to store the ingredients
+     * @param quantities Array of quantity of ingredients
+     * @param ingredients Ingredient list to store the ingredients
      * @return null if there's no error and an IncorrectCommand if there is.
      */
     private static IncorrectCommand addIngredients(ArrayList<String> ingredientNames, ArrayList<Integer> quantities,
