@@ -19,13 +19,11 @@ import java.lang.reflect.Type;
 public class ModuleDeserializer extends StorageDeserializer implements JsonDeserializer<Module> {
     private static final String MEMBER_CODE = "code";
     private static final String MEMBER_NAME = "name";
-    private static final String MEMBER_LESSONCOUNT = "lessonCount";
     private static final String MEMBER_STUDENTLIST = "studentList";
     private static final String MEMBER_ASSESSMENTLIST = "assessmentList";
     private static final String[] MEMBERS = {
         MEMBER_CODE,
         MEMBER_NAME,
-        MEMBER_LESSONCOUNT,
         MEMBER_STUDENTLIST,
         MEMBER_ASSESSMENTLIST
     };
@@ -44,14 +42,7 @@ public class ModuleDeserializer extends StorageDeserializer implements JsonDeser
         JsonElement nameJson = jsonObject.get(MEMBER_NAME);
         String name = nameJson.getAsString();
 
-        JsonElement lessonCountJson = jsonObject.get(MEMBER_LESSONCOUNT);
-        if (!Util.isStringInteger(lessonCountJson.getAsString())) {
-            return null;
-        }
-        int lessonCount = lessonCountJson.getAsInt();
-
         Module module = new Module(code, name);
-        module.setLessonCount(lessonCount);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(StudentList.class, new StudentListDeserializer());
@@ -60,14 +51,18 @@ public class ModuleDeserializer extends StorageDeserializer implements JsonDeser
 
         JsonElement studentListJson = jsonObject.get(MEMBER_STUDENTLIST);
         StudentList studentList = gson.fromJson(studentListJson, StudentList.class);
-        for (Student student : studentList.getStudents()) {
-            module.getStudentList().addStudent(student);
+        if (studentList != null) {
+            for (Student student : studentList.getStudents()) {
+                module.getStudentList().addStudent(student);
+            }
         }
 
         JsonElement assessmentListJson = jsonObject.get(MEMBER_ASSESSMENTLIST);
         AssessmentList assessmentList = gson.fromJson(assessmentListJson, AssessmentList.class);
-        for (Assessment assessment : assessmentList.getAssessments()) {
-            module.getAssessmentList().addAssessment(assessment);
+        if (assessmentList != null) {
+            for (Assessment assessment : assessmentList.getAssessments()) {
+                module.getAssessmentList().addAssessment(assessment);
+            }
         }
 
         if (!module.verify()) {
