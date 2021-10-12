@@ -78,11 +78,6 @@ public class Parser {
         String ingredientExpiry = details[4].trim();
         Ingredient updatedIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
 
-        if (IngredientList.getInstance().getInventoryStock() == 0) {
-            resultMsg = DELETE_ERROR_MESSAGE;
-            return resultMsg;
-        }
-
         resultMsg = new UpdateCommand(updatedIngredient).run();
 
         if (resultMsg == "") {

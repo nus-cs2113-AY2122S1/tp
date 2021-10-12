@@ -4,11 +4,10 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
 
-import java.util.Locale;
-
 public class UpdateCommand implements Command {
 
     private static final String UPDATE_MESSAGE = "Got it. This ingredient has been updated:\n" + "\t";
+    private static final String LIST_EMPTY_MESSAGE = "Your inventory is empty!";
 
     private Ingredient updatedIngredient;
 
@@ -19,8 +18,15 @@ public class UpdateCommand implements Command {
 
     @Override
     public String run() throws DukeException {
-        int i;
         String resultMsg = "";
+        int i;
+
+        if (IngredientList.getInstance().getInventoryStock() == 0) {
+            resultMsg = LIST_EMPTY_MESSAGE;
+            return resultMsg;
+        }
+
+
         for (i = 0; i < IngredientList.getInstance().getInventoryStock(); i++) {
             if (this.updatedIngredient.getName().equals((IngredientList.getInstance()).get(i + 1).getName())) {
                 IngredientList.getInstance().set(i, this.updatedIngredient);
