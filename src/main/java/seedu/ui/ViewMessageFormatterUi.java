@@ -34,6 +34,7 @@ public class ViewMessageFormatterUi {
             if (contact.getEmail() == null | contact.getEmail().equals("null")) {
                 return "";
             } else {
+                assert(!contact.getEmail().equals("null"));
                 return "\nEmail:    " + contact.getEmail();
             }
         } catch (NullPointerException e) {
