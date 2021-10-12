@@ -144,6 +144,8 @@ public class Parser {
         assert expenseAmount > 0;
         
         String expenseDescription = matcher.group("description").trim();
+        
+        
         Expense expense = new Expense(expenseDescription, expenseAmount);
         return new AddExpenseCommand(expense);
     }

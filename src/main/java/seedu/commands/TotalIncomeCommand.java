@@ -6,6 +6,7 @@ import seedu.utility.Ui;
 public class TotalIncomeCommand extends Command {
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        ui.printTotalIncome(finances.getTotalIncome());
+        double totalIncome = finances.getTotalIncome();
+        ui.printTotalIncome(totalIncome);
     }
 }

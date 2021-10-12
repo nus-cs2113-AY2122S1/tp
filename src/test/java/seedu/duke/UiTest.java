@@ -40,9 +40,8 @@ public class UiTest {
                 + "--";
         
         
-        ArrayList<Entry> entries = new ArrayList<>();
+        ArrayList<Expense> entries = new ArrayList<>();
         entries.add(new Expense("Bought cookies", 5.0));
-        entries.add(new Income("Paycheck August", 20.0));
         entries.add(new Expense("Bought cakes", 7.0));
         Ui testUI = new Ui();
         testUI.listExpense(entries);
@@ -61,10 +60,8 @@ public class UiTest {
                 + "--";
         
         
-        ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Expense("Bought cookies", 5.0));
+        ArrayList<Income> entries = new ArrayList<>();
         entries.add(new Income("Paycheck August", 20.0));
-        entries.add(new Expense("Bought cakes", 7.0));
         entries.add(new Income("Paycheck July", 25.0));
         Ui testUI = new Ui();
         testUI.listIncome(entries);

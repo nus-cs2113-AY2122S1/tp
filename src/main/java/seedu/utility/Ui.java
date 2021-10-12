@@ -1,6 +1,5 @@
 package seedu.utility;
 
-import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 
@@ -80,44 +79,39 @@ public class Ui {
     /**
      * Prints the filtered list of expenses in the financial tracker to the standard output.
      *
-     * @param entries The list of incomes and expenses in the financial tracker.
-     */
-    public void listExpense(ArrayList<Entry> entries) {
+     * @param expenses The list of expenses in the financial tracker.
+     */ 
+    public void listExpense(ArrayList<Expense> expenses) {
         printLine();
         System.out.println(LISTING_EXPENSE_MESSAGE);
         printLine();
         int i = 1;
-        for (Entry entry:entries) {
-            if (entry instanceof Expense) {
-                System.out.print(i + ": ");
-                System.out.println(entry);
-                i++;
-            }
+
+        for (Expense expense:expenses) {
+            System.out.print(i + ": ");
+            System.out.println(expense);
+            i++;
         }
         printLine();
-
     }
 
     /**
      * Prints the filtered list of incomes in the financial tracker to the standard output.
      *
-     * @param entries The list of incomes and expenses in the financial tracker.
-     */
-    public void listIncome(ArrayList<Entry> entries) {
+     * @param incomes The list of incomes in the financial tracker.
+     */    
+    public void listIncome(ArrayList<Income> incomes) {
         printLine();
         System.out.println(LISTING_INCOME_MESSAGE);
         printLine();
         int i = 1;
-        for (Entry entry:entries) {
-            if (entry instanceof Income) {
-                assert i >= 1;
-                System.out.print(i + ": ");
-                System.out.println(entry);
-                i++;
-            }
+
+        for (Income income:incomes) {
+            System.out.print(i + ": ");
+            System.out.println(income);
+            i++;
         }
         printLine();
-
     }
     
     /**
@@ -154,7 +148,6 @@ public class Ui {
         System.out.println("Your most recent spending: ");
         System.out.println(expense);
         printLine();
-
     }
 
     /**
@@ -167,7 +160,6 @@ public class Ui {
         System.out.println("You removed this: ");
         System.out.println(expense);
         printLine();
-
     }
 
     /**
@@ -180,7 +172,6 @@ public class Ui {
         System.out.println("Your most recent earning: ");
         System.out.println(income);
         printLine();
-
     }
 
     /**
@@ -193,7 +184,6 @@ public class Ui {
         System.out.println("You removed this: ");
         System.out.println(income);
         printLine();
-
     }
 
     /**
