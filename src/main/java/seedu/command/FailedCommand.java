@@ -1,7 +1,6 @@
 package seedu.command;
 
 import seedu.parser.FailedCommandType;
-import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
 
 public class FailedCommand extends Command {
@@ -37,6 +36,24 @@ public class FailedCommand extends Command {
             break;
         case INVALID_FORMAT:
             ExceptionTextUi.invalidFormatMessage();
+            break;
+        case INVALID_NAME:
+            ExceptionTextUi.invalidNameInput();
+            break;
+        case INVALID_GITHUB_USERNAME:
+            ExceptionTextUi.invalidGithubUsernameInput();
+            break;
+        case INVALID_TELEGRAM:
+            ExceptionTextUi.invalidTelegramUsernameInput();
+            break;
+        case INVALID_LINKEDIN:
+            ExceptionTextUi.invalidLinkedinInput();
+            break;
+        case INVALID_MAIL:
+            ExceptionTextUi.invalidEmailInput();
+            break;
+        case INVALID_TWITTER:
+            ExceptionTextUi.invalidTwitterUsernameInput();
             break;
         case NUM_OUT_OF_BOUND:
             ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize() - 1);

@@ -47,7 +47,7 @@ public class ExceptionTextUi {
     }
 
     public static void missingDetailMessage() {
-        String message = "There are missing details.\n" + "Please remove any flags with no details, \n"
+        String message = "There are missing details.\n" + "Please remove any flags with no details,\n"
                 + "and ensure that your flags used are correct:\n" + "  -n NAME\n" + "  -g GITHUB\n" + "  -l LINKEDIN\n"
                 + "  -te TELEGRAM\n" + "  -tw TWITTER\n" + "  -e EMAIL";
         printDoubleLineMessage(message);
@@ -102,8 +102,66 @@ public class ExceptionTextUi {
     }
 
     public static void forbiddenDetailMessage() {
-        String message = "As one of the details to be stored is \"null\", \n"
+        String message = "As one of the details to be stored is \"null\",\n"
                 + "ConTech is unable to process it";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidNameInput() {
+        String message = "The name is not correctly formatted,\n"
+                + "Rules for name :\n"
+                + "    * Uppercase and lowercase letters\n"
+                + "    * Spaces\n"
+                + "    * No numbers or special characters\n"
+                + "    * Cannot be \"null\"";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidGithubUsernameInput() {
+        String message = "The github username is not correctly formatted,\n"
+                + "Rules for Github username :\n"
+                + "    * Only contain alphanumeric characters or hyphens\n"
+                + "    * Only lowercase allowed\n"
+                + "    * Maximum 39 characters allowed\n"
+                + "    * Cannot have multiple consecutive hyphens\n"
+                + "    * Cannot begin or end with a hyphen\n";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidTelegramUsernameInput() {
+        String message = "The telegram username is not correctly formatted,\n"
+                + "Rules for Telegram username :\n"
+                + "    * Uppercase and lowercase letters allowed\n"
+                + "    * Numbers and underscore allowed\n"
+                + "    * Length at-least 5 characters";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidTwitterUsernameInput() {
+        String message = "The twitter username is not correctly formatted,\n"
+                + "Rules for Twitter username :\n"
+                + "    * Lowercase letters only\n"
+                + "    * Numbers and underscore allowed\n"
+                + "    * Maximum 15 characters allowed";
+        printDoubleLineMessage(message);
+    }
+
+    //not full, need to update
+    public static void invalidEmailInput() {
+        String message = "The email id is not correctly formatted,\n"
+                + "Rules for email id :\n"
+                + "    * Lowercase letters only\n"
+                + "    * Numbers, underscore, hyphen and dot allowed\n"
+                + "    * @ cannot be at the start or end";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidLinkedinInput() {
+        String message = "The linkedin username is not correctly formatted,\n"
+                + "Rules for Linkedin username :\n"
+                + "    * Lowercase letters only\n"
+                + "    * Numbers, underscore and hyphen allowed\n"
+                + "    * Length between 3 to 100 characters";
         printDoubleLineMessage(message);
     }
 }

@@ -11,7 +11,13 @@ import seedu.command.ListContactsCommand;
 
 import seedu.contact.DetailType;
 import seedu.exception.ForbiddenDetailException;
+import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
+import seedu.exception.InvalidGithubUsernameException;
+import seedu.exception.InvalidLinkedinUsernameException;
+import seedu.exception.InvalidNameException;
+import seedu.exception.InvalidTelegramUsernameException;
+import seedu.exception.InvalidTwitterUsernameException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingNameException;
@@ -93,6 +99,18 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         } catch (ForbiddenDetailException e) {
             return new FailedCommand(FailedCommandType.FORBIDDEN_DETAIL);
+        } catch (InvalidNameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_NAME);
+        } catch (InvalidGithubUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_GITHUB_USERNAME);
+        } catch (InvalidEmailException e) {
+            return new FailedCommand(FailedCommandType.INVALID_MAIL);
+        } catch (InvalidTelegramUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TELEGRAM);
+        } catch (InvalidTwitterUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TWITTER);
+        } catch (InvalidLinkedinUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_LINKEDIN);
         }
     }
 
@@ -113,6 +131,18 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         } catch (ForbiddenDetailException e) {
             return new FailedCommand(FailedCommandType.FORBIDDEN_DETAIL);
+        } catch (InvalidNameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_NAME);
+        } catch (InvalidGithubUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_GITHUB_USERNAME);
+        } catch (InvalidEmailException e) {
+            return new FailedCommand(FailedCommandType.INVALID_MAIL);
+        } catch (InvalidTelegramUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TELEGRAM);
+        } catch (InvalidTwitterUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TWITTER);
+        } catch (InvalidLinkedinUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_LINKEDIN);
         }
     }
 

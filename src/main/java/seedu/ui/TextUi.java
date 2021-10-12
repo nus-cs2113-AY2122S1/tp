@@ -62,13 +62,13 @@ public class TextUi {
     }
 
     public static void createNewContactFileMessage(String contactFilePath) {
-        String message = "As ConTech is unable to find your saved data, \n" + " it has created a new one for you at: \n"
+        String message = "As ConTech is unable to find your saved data,\n" + " it has created a new one for you at:\n"
                 + contactFilePath;
         printBottomLineMessage(message);
     }
 
     public static void addContactMessage(Contact addedContact, int listSize) {
-        String message = "ConTech has added the specified contact: \n"
+        String message = "ConTech has added the specified contact:\n"
                 + "Name:     " + addedContact.getName()
                 + formatContactFields(addedContact)
                 + "\n\nYou now have " + listSize + " contact(s).";
@@ -76,7 +76,7 @@ public class TextUi {
     }
 
     public static void editContactMessage(Contact editedContact) {
-        String message = "ConTech has edited the specified contact: \n"
+        String message = "ConTech has edited the specified contact:\n"
                 + "Name:     " + editedContact.getName()
                 + formatContactFields(editedContact);
         printDoubleLineMessage(message);
@@ -126,5 +126,4 @@ public class TextUi {
         String message = "ConTech will now shutdown.\n" + "We hope you have enjoyed using it.";
         printDoubleLineMessage(message);
     }
-
 }
