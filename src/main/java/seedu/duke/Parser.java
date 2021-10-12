@@ -49,7 +49,7 @@ public class Parser {
             executeView();
             break;
 
-          case "delete":
+        case "delete":
             executeDelete(userInputSplit[1]);
             break;
 
