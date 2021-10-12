@@ -23,7 +23,7 @@ public class Ui {
         System.out.println(person.getName() + " | " + person.getAmtOwedToUser());
     }
 
-    public static void printMoney(double money){
+    public static void printMoney(double money) {
         System.out.printf("%.2f", money);
     }
 
