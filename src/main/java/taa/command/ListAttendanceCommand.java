@@ -39,7 +39,7 @@ public class ListAttendanceCommand extends Command {
         Module module = moduleList.getModule(moduleCode);
         checkIfModuleListIsEmpty(module);
 
-        ArrayList<Student> students = module.getStudents();
+        ArrayList<Student> students = module.getStudentList().getStudents();
         checkIfStudentsIsEmpty(students);
 
         ArrayList<String> attendances = module.getAttendances();

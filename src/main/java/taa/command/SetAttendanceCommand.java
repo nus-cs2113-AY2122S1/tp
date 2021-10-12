@@ -51,7 +51,7 @@ public class SetAttendanceCommand extends Command {
         Module module = moduleList.getModule(moduleCode);
         checkIfModuleListIsEmpty(module);
 
-        ArrayList<Student> students = module.getStudents();
+        ArrayList<Student> students = module.getStudentList().getStudents();
         checkIfStudentsIsEmpty(students);
 
         String studentNum = argumentMap.get(KEY_STUDENT_NUM);
@@ -59,7 +59,7 @@ public class SetAttendanceCommand extends Command {
         checkIfStudentNumOutOfBounds(module, studentNum);
 
         int studentIndex = Integer.parseInt(studentNum) - 1;
-        Student student = module.getStudentAt(studentIndex);
+        Student student = module.getStudentList().getStudentAt(studentIndex);
 
         String lessonNum = argumentMap.get(KEY_LESSON_NUM);
         checkIfLessonNumIsInteger(lessonNum);
@@ -111,7 +111,7 @@ public class SetAttendanceCommand extends Command {
     }
 
     private void checkIfStudentNumOutOfBounds(Module module, String studentNum) throws TaaException {
-        if (Integer.parseInt(studentNum) > module.getStudentCount() || Integer.parseInt(studentNum) < MIN_STUDENT_NUM) {
+        if (Integer.parseInt(studentNum) > module.getStudentList().getSize() || Integer.parseInt(studentNum) < MIN_STUDENT_NUM) {
             throw new TaaException(MESSAGE_STUDENT_INDEX_OUT_OF_BOUNDS);
         }
     }

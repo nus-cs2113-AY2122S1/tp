@@ -3,6 +3,7 @@ package taa;
 import taa.command.AddAssessmentCommand;
 import taa.command.AddModuleCommand;
 import taa.command.AddStudentCommand;
+import taa.command.SetAttendanceCommand;
 import taa.command.AverageMarksCommand;
 import taa.command.Command;
 import taa.command.DeleteStudentCommand;
@@ -13,6 +14,7 @@ import taa.command.ListAssessmentsCommand;
 import taa.command.ListMarksCommand;
 import taa.command.ListModulesCommand;
 import taa.command.ListStudentsCommand;
+import taa.command.ListAttendanceCommand;
 import taa.command.SetMarksCommand;
 
 import taa.exception.TaaException;

@@ -9,6 +9,8 @@ import java.util.HashMap;
  * Represents students.
  */
 public class Student {
+    private static final int NUM_LESSONS = 13;
+
     private String id;
     private String name;
     private final String[] individualAttendances = new String[NUM_LESSONS];
