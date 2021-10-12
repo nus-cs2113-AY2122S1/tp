@@ -82,6 +82,14 @@ public abstract class ContactParser {
             throw new InvalidFlagException();
         }
     }
+
+    private void checkEmailRegex(String detailToParse) throws InvalidEmailException {
+        //allow lowercase email ids
+        String emailRegex = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
+        if (!detailToParse.matches(emailRegex)) {
+            throw new InvalidEmailException();
+        }
+    }
     private int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
