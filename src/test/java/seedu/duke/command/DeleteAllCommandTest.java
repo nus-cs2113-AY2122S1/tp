@@ -30,7 +30,7 @@ class DeleteAllCommandTest {
         storage.createNewData(ui);
         try {
             Command deleteAllCommand = new DeleteAllCommand();
-            deleteAllCommand.execute(ui, taskList, lessonList, storage);
+            deleteAllCommand.execute(ui, storage, taskList, lessonList);
             assertTrue(taskList.isEmpty());
             assertTrue(lessonList.isEmpty());
         } catch (IOException | DukeException e) {

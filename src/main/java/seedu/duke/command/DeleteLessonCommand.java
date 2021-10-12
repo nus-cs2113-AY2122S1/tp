@@ -22,16 +22,16 @@ public class DeleteLessonCommand extends DeleteCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage)
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
             throws DukeException, IOException {
         if (isDeleteAll) {
-            lessonList.clearLessonList();
-            assert lessonList.isEmpty();
-            ui.printDeletedAllLessons();
+            lessonList.deleteAllLessons();
+            assert lessonList.isEmpty() : Ui.PADDING + "Lesson list should be empty";
+            ui.printMessage("All your lessons have been successfully removed.");
         } else {
             Lesson deletedLesson = lessonList.getLesson(lessonIndex);
             lessonList.deleteLesson(lessonIndex);
-            ui.printDeletedLesson(deletedLesson, lessonList.getSize());
+            ui.printLessonDeleted(deletedLesson, lessonList.getSize());
         }
         storage.saveData(taskList, lessonList);
     }

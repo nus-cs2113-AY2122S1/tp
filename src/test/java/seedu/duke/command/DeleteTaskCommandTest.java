@@ -29,7 +29,7 @@ class DeleteTaskCommandTest {
         storage.createNewData(ui);
         try {
             Command deleteAllTasksCommand = new DeleteTaskCommand();
-            deleteAllTasksCommand.execute(ui, taskList, lessonList, storage);
+            deleteAllTasksCommand.execute(ui, storage, taskList, lessonList);
             assertTrue(taskList.isEmpty()); // task list should be empty
         } catch (DukeException | IOException e) {
             // fail when the task list has any items
@@ -49,7 +49,7 @@ class DeleteTaskCommandTest {
         storage.createNewData(ui);
         try {
             Command deleteTaskCommand = new DeleteTaskCommand(1);
-            deleteTaskCommand.execute(ui, taskList, lessonList, storage);
+            deleteTaskCommand.execute(ui, storage, taskList, lessonList);
             assertEquals(1, taskList.getSize());
         } catch (DukeException | IOException e) {
             // fail when there are more or tasks in the task list than there should be (should be 1 item)
@@ -69,6 +69,7 @@ class DeleteTaskCommandTest {
         storage.createNewData(ui);
 
         Command deleteOobTaskCommand = new DeleteTaskCommand(4);
-        assertThrows(DukeException.class, () -> deleteOobTaskCommand.execute(ui, taskList, lessonList, storage));
+        assertThrows(DukeException.class, () -> deleteOobTaskCommand.execute(ui, storage,
+                taskList, lessonList));
     }
 }

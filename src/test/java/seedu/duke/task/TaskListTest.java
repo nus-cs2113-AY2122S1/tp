@@ -1,7 +1,6 @@
 package seedu.duke.task;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Duke;
 import seedu.duke.exception.DukeException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -27,9 +26,9 @@ public class TaskListTest {
     public void testDeleteTask() {
         try {
             TaskList taskList = new TaskList();
-            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 1 increment"));
-            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 2 increment"));
-            taskList.addTask(new Task("Do CS2113T", "SAT", "Level 3 increment"));
+            taskList.addTask(new Task("Do CS2113T iP", "SAT", "Level 1 increment"));
+            taskList.addTask(new Task("Do CS2113T iP", "SAT", "Level 2 increment"));
+            taskList.addTask(new Task("Do CS2113T iP", "SAT", "Level 3 increment"));
             assertEquals(3, taskList.getSize());
             taskList.deleteTask(2);
             assertEquals(2, taskList.getSize());
@@ -38,7 +37,7 @@ public class TaskListTest {
             taskList.deleteTask(0);
             assertEquals(0, taskList.getSize());
         } catch (DukeException e) {
-            fail(); // the test should not reach this line
+            fail(); // the program should never reach this line
         }
     }
 
