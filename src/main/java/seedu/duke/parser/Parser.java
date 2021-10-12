@@ -34,7 +34,7 @@ public class Parser {
      * @param userInput full user input string
      * @return the command based on the user input
      */
-    public Command parseCommand(String userInput) {
+    public Command parseCommand(String userInput) throws ArrayIndexOutOfBoundsException {
         String[] commandTypeAndParams = splitCommandWordAndArgs(userInput);
         String commandType = commandTypeAndParams[0];
         String commandParams = commandTypeAndParams[1].trim();
@@ -82,8 +82,9 @@ public class Parser {
      *
      * @param commandParams String with raw input
      * @return an AddBudgetCommand with proper parameters
+     * @throws ArrayIndexOutOfBoundsException if amount input does not exist.
      */
-    private Command prepareAddBudgetCommand(String commandParams) {
+    private Command prepareAddBudgetCommand(String commandParams) throws ArrayIndexOutOfBoundsException {
         String[] split = commandParams.substring(2).trim().split("a/", 2);
         double amount = Double.parseDouble(split[1].trim());
         //int date = Integer.parseInt(split[2].trim());
