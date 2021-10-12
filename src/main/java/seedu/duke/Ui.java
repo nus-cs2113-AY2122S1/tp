@@ -47,7 +47,7 @@ public class Ui {
     }
 
     public static void printExpensesInList(Expense expense, int index) {
-        System.out.println(index + ". " + expense.getDescription() + " | Cost: ");
+        System.out.print(index + ". " + expense.getDescription() + " | Cost: ");
         printMoney(expense.getAmountSpent());
     }
 
@@ -65,6 +65,12 @@ public class Ui {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
                 + "create [place] [date] [exchange rate] [budget] [people].");
+    }
+
+    public static void printExpenseFormatError() {
+        System.out.println("Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "expense [amount] [category] [people] /[description].");
     }
 
     public static void printBudgetFormatError() {

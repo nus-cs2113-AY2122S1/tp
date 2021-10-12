@@ -62,7 +62,11 @@ public class Parser {
             break;
 
         case "expense":
-            executeExpense(userInputSplit[1]);
+            try {
+                executeExpense(userInputSplit[1]);
+            } catch (IndexOutOfBoundsException e) {
+                Ui.printExpenseFormatError();
+            }
             break;
 
         default:
@@ -80,6 +84,7 @@ public class Parser {
         Storage.getOpenTrip().addExpense(
                 new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription));
         Ui.printExpenseAddedSuccess();
+
     }
 
     private static void executeList() {
