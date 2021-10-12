@@ -89,7 +89,7 @@ public class AddNoteCommand extends Command {
             TerminusLogger.warning(String.format("Failed to find %d arguments: %d arguments found",
                     ADD_NOTE_ARGUMENTS, argArray.size()));
             isValid = false;
-        } else if (CommonUtils.isArrayEmpty(argArray)) {
+        } else if (CommonUtils.hasEmptyString(argArray)) {
             TerminusLogger.warning("Failed to parse arguments: some arguments found is empty");
             isValid = false;
         }

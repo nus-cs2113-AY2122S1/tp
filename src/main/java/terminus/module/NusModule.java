@@ -6,18 +6,29 @@ import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Note;
 
+/**
+ * NusModule class to represent a Module object.
+ */
 public class NusModule {
-
 
     private final ContentManager<Note> noteManager;
     private final ContentManager<Link> linkManager;
 
+    /**
+     * Creates a NusModule object.
+     */
     public NusModule() {
         noteManager = new ContentManager<>();
         linkManager = new ContentManager<>();
     }
 
-
+    /**
+     * Returns a ContentManager object based on the provided class type.
+     *
+     * @param type Content class type.
+     * @param <T> Content object type.
+     * @return The ContentManager object based on the provided class type.
+     */
     public <T extends Content> ContentManager<T> getContentManager(Class<T> type) {
         TerminusLogger.info(String.format("Get ContentManager from NusModule with provided class type: %s", type));
         ContentManager<T> result = null;
