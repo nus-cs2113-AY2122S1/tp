@@ -26,16 +26,12 @@ public class FinancialTracker {
         assert !incomes.isEmpty();
     }
     
-    public Expense removeExpense(int expenseIndex) throws ExpenseEntryNotFoundException {
-        try {
-            return expenses.remove(expenseIndex - 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new ExpenseEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
-        }
+    public Expense removeExpense(int expenseIndex) {
+        return expenses.remove(expenseIndex - 1);
     }
 
-    public Income removeIncome(int incomeIndex) throws IncomeEntryNotFoundException {
-        return null;
+    public Income removeIncome(int incomeIndex) {
+        return incomes.remove(incomeIndex - 1);
     }
 
     public ArrayList<Expense> listExpenses() {

@@ -14,11 +14,7 @@ public class DeleteExpenseCommand extends Command {
 
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        try {
-            Expense deletedExpense = finances.removeExpense(expenseNumber);
-            ui.printExpenseDeleted(deletedExpense);
-        } catch (ExpenseEntryNotFoundException e) {
-            ui.printError(e.getMessage());
-        }
+        Expense deletedExpense = finances.removeExpense(expenseNumber);
+        ui.printExpenseDeleted(deletedExpense);
     }
 }

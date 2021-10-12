@@ -14,11 +14,7 @@ public class DeleteIncomeCommand extends Command {
 
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        try {
-            Income deletedEntry = finances.removeIncome(incomeNumber);
-            ui.printIncomeDeleted(deletedEntry);
-        } catch (IncomeEntryNotFoundException e) {
-            ui.printError(e.getMessage());
-        }
+        Income deletedEntry = finances.removeIncome(incomeNumber);
+        ui.printIncomeDeleted(deletedEntry);
     }
 }
