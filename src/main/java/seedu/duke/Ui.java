@@ -7,14 +7,7 @@ public class Ui {
     }
 
     public static void printWelcome() {
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
+        System.out.println("Hello!");
     }
 
     public static void goodBye() {
@@ -79,6 +72,7 @@ public class Ui {
 
     public static void printNoOpenTripError() {
         System.out.println("You have not opened any trip yet. Please open a trip to edit expenses within the trip.");
+        System.out.print("Please enter the trip you would like to open: ");
     }
 
 }

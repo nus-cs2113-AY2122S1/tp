@@ -11,7 +11,7 @@ public class Storage {
     private static Trip openTrip = null;
 
     private static final ArrayList<String> validCommands = new ArrayList<>(
-            Arrays.asList("create", "edit", "view", "summary", "delete", "expense", "quit"));
+            Arrays.asList("create", "edit", "view", "open", "summary", "delete", "expense", "quit"));
 
     public static Scanner getScanner() {
         return scanner;

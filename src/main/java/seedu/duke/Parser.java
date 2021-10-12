@@ -18,10 +18,10 @@ public class Parser {
             Storage.closeTrip();
             return true;
         }
-        if (!checkValidCommand(inputCommand) || (userInputSplit.length == 1 && !inputCommand.equals("quit"))) {
+        if (!checkValidCommand(inputCommand)) {
             Ui.printUnknownCommandError();
             return true;
-        } else if (!inputCommand.equals("quit")) {
+        } else if (!(inputCommand.equals("view") || inputCommand.equals("summary") || inputCommand.equals("quit"))) {
             inputDescription = userInputSplit[1];
         }
 
@@ -33,6 +33,7 @@ public class Parser {
             System.out.println("Your trip to " + newTrip.getLocation() + " on "
                     + newTrip.getDateOfTripString() + " has been successfully added!");
             break;
+
         case "edit":
             String[] tripToEditInfo = inputDescription.split(" ", 2);
             try {
@@ -44,6 +45,7 @@ public class Parser {
                 System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
             }
             break;
+
         case "open":
             try {
                 int indexToGet = Integer.parseInt(inputDescription) - 1;
@@ -52,46 +54,42 @@ public class Parser {
                 Ui.printSingleUnknownTripIndexError();
             }
             break;
+
         case "summary":
-            String[] tripToGetInfo = inputDescription.split(" ", 2);
-            String tripNumber = tripToGetInfo[0];
             try {
-                int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
-                Trip tripToGet = Storage.listOfTrips.get(indexToGet);
-                Ui.printExpensesSummary(tripToGet);
+                Ui.printExpensesSummary(Storage.getOpenTrip());
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("There is no matching trip index. Please try again.");
             }
             break;
+
         case "view":
-            tripToGetInfo = inputDescription.split(" ", 2);
             try {
-                int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
-                Trip tripToGet = Storage.listOfTrips.get(indexToGet);
-                tripToGet.viewAllExpenses();
+                Storage.getOpenTrip().viewAllExpenses();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("There is no matching trip index. Please try again.");
             }
             break;
+
         case "delete":
             deleteTrip(Storage.listOfTrips, inputDescription);
             break;
 
         case "expense":
-            String[] expenseInfo = inputDescription.split(" ", 4);
-            int tripIndex = Integer.parseInt(expenseInfo[0]) - 1;
-            Trip currentTrip = Storage.listOfTrips.get(tripIndex);
-            Double expenseAmount = Double.parseDouble(expenseInfo[1]);
-            String expenseCategory = expenseInfo[2].toLowerCase();
-            ArrayList<Person> listOfPersonsIncluded = checkValidPersons(currentTrip, expenseInfo[3]);
-            String expenseDescription = getDescription(expenseInfo[3]);
-            currentTrip.addExpense(
+            String[] expenseInfo = inputDescription.split(" ", 3);
+            Double expenseAmount = Double.parseDouble(expenseInfo[0]);
+            String expenseCategory = expenseInfo[1].toLowerCase();
+            ArrayList<Person> listOfPersonsIncluded = checkValidPersons(Storage.getOpenTrip(), expenseInfo[2]);
+            String expenseDescription = getDescription(expenseInfo[2]);
+            Storage.getOpenTrip().addExpense(
                     new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription));
             Ui.printExpenseAddedSuccess();
             break;
+
         case "quit":
             Ui.goodBye();
             return false;
+
         default:
             Ui.printUnknownCommandError();
         }

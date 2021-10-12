@@ -1,9 +1,8 @@
 package seedu.duke;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Duke {
+public class Main {
 
     private static boolean isProgramRunning = true;
 
