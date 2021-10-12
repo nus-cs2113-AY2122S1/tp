@@ -31,6 +31,11 @@ public class TimetableTest {
                 "Lecture",
                 "Monday");
 
+        TimetableLesson timetableLesson1 = new TimetableLesson(testMod,1,lesson1);
+        tt.addLesson(timetableLesson1);
+        assertEquals(tt.getLesson(DayOfWeek.MONDAY,10).getClassNo(),"TestClass1");
+        assertEquals(tt.getLesson(DayOfWeek.MONDAY,11).getClassNo(),"TestClass1");
+
         Lesson lesson2 = new Lesson(
                 "TestClass2",
                 "1100",
@@ -39,12 +44,7 @@ public class TimetableTest {
                 "Tutorial",
                 "Monday");
 
-        TimetableLesson timetableLesson1 = new TimetableLesson(testMod,1,lesson1);
         TimetableLesson timetableLesson2 = new TimetableLesson(testMod,1,lesson2);
-
-        tt.addLesson(timetableLesson1);
-        assertEquals(tt.getLesson(DayOfWeek.MONDAY,10).getClassNo(),"TestClass1");
-        assertEquals(tt.getLesson(DayOfWeek.MONDAY,11).getClassNo(),"TestClass1");
         tt.addLesson(timetableLesson2);
         assertEquals(tt.getLesson(DayOfWeek.MONDAY,10).getClassNo(),"TestClass1");
         assertEquals(tt.getLesson(DayOfWeek.MONDAY,11).getClassNo(),"TestClass2");

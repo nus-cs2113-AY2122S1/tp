@@ -34,7 +34,8 @@ public class TextUi {
             + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n" + LINE;
 
     public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this module does not exist in your timetable!";
-    public static final String ERROR_INVALID_MODULE_CODE = "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
+    public static final String ERROR_INVALID_MODULE_CODE =
+            "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
     public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
 
     /*------------- PUBLIC COMMANDS ----------- */
