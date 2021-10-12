@@ -1,14 +1,11 @@
 package seedu.ui;
 
-import seedu.comparator.ClassNumComparator;
 import seedu.module.Lesson;
 import seedu.module.Module;
-import seedu.module.Semester;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableLesson;
-
+import seedu.exceptions.IntegerException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class AddUI {
     private static final int BALANCE_ARRAY = 1;
@@ -17,125 +14,83 @@ public class AddUI {
     private static final int GAP = 46;
     private static final String SPACE = " ";
     private static final String DIV = "|";
-    private static final String LECTURE = "Lecture";
-    private static final String TUTORIAL = "Tutorial";
-    private static final String LAB = "Laboratory";
+    private static final String LAB = "lab";
+    private static final String LINE = "_______________________________________   |   ";
 
-    public void getLessonDetails(Semester semesterData, Timetable timetable, Module module) {
-        ArrayList<Lesson> lecture = new ArrayList<>();
-        ArrayList<Lesson> tutorial = new ArrayList<>();
-        ArrayList<Lesson> laboratory = new ArrayList<>();
-        ArrayList<Lesson> lessons = semesterData.getTimetable();
-        for (Lesson lesson : lessons) {
-            switch (lesson.getLessonType()) {
-            case LECTURE:
-                lecture.add(lesson);
-                break;
-            case TUTORIAL:
-                tutorial.add(lesson);
-                break;
-            case LAB:
-                laboratory.add(lesson);
-                break;
-            default:
-                break;
-            }
+    public void printLessonDetails(ArrayList<Lesson> lec, ArrayList<Lesson> tt,
+            ArrayList<Lesson> lab, Timetable timetable, Module module) throws IntegerException {
+        ArrayList<String> lectureLessons;
+        ArrayList<String> tutorialLessons;
+        ArrayList<String> labLessons;
+        int length = Math.max(lec.size(), Math.max(tt.size(), lab.size()));
+        lectureLessons = getLessonDetails(lec, length);
+        tutorialLessons = getLessonDetails(tt, length);
+        labLessons = getLessonDetails(lab, length);
+        TextUi.printLessonHeader(lec, tt, lab);
+        printLessons(lectureLessons, tutorialLessons, labLessons);
+        try {
+            getCommand(lec, timetable, module);
+            getCommand(tt, timetable, module);
+            getCommand(lab, timetable, module);
+        } catch (IntegerException e) {
+            throw new IntegerException("Invalid Integer");
         }
-        Collections.sort(lecture, new ClassNumComparator());
-        Collections.sort(tutorial, new ClassNumComparator());
-        Collections.sort(laboratory, new ClassNumComparator());
+    }
 
-        ArrayList<String> lectureLessons = new ArrayList<>();
-        ArrayList<String> tutorialLessons = new ArrayList<>();
-        ArrayList<String> laboratoryLessons = new ArrayList<>();
-        int lectureSerial = SERIAL_STARTING;
-        int tutorialSerial = SERIAL_STARTING;
-        int labSerial = SERIAL_STARTING;
-        int index = Math.max(lecture.size(), Math.max(tutorial.size(), laboratory.size()));
-
-        for (int i = 0; index > i; i++) {
-            if (lecture.size() > i) {
-                Lesson lesson = lecture.get(i);
-                String detail = printLessonInfo(lectureSerial, lesson);
-                lectureLessons.add(detail);
-                boolean isGap = classNumberGap(lecture, lesson);
-                if (isGap) {
-                    lectureLessons.add("_______________________________________   |   ");
-                    lectureSerial++;
-                }
-            }
-            if (tutorial.size() > i) {
-                Lesson lesson = tutorial.get(i);
-                String detail = printLessonInfo(tutorialSerial, lesson);
-                tutorialLessons.add(detail);
-                boolean isGap = classNumberGap(tutorial, lesson);
-                if (isGap) {
-                    tutorialLessons.add("_______________________________________   |   ");
-                    tutorialSerial++;
-                }
-            }
-            if (laboratory.size() > i) {
-                Lesson lesson = laboratory.get(i);
-                String detail = printLessonInfo(labSerial, lesson);
-                laboratoryLessons.add(detail);
-                boolean isGap = classNumberGap(laboratory, lesson);
-                if (isGap) {
-                    laboratoryLessons.add("_______________________________________");
-                    labSerial++;
+    public ArrayList<String> getLessonDetails(ArrayList<Lesson> lessonType, int length) {
+        ArrayList<String> completeList = new ArrayList<>();
+        int serial = SERIAL_STARTING;
+        for (int i = 0; length > i; i++) {
+            if (isArrayExist(lessonType, i)) {
+                Lesson lesson = lessonType.get(i);
+                String detail = printLessonInfo(serial, lesson);
+                completeList.add(detail);
+                if (classNumberGap(lessonType, lesson)) {
+                    completeList.add(LINE);
+                    serial++;
                 }
             }
         }
-        TextUi.printLessonHeader(lecture, tutorial, laboratory);
-        index = Math.max(lectureLessons.size(), Math.max(tutorialLessons.size(), laboratoryLessons.size()));
+        return completeList;
+    }
+
+    public void printLessons(ArrayList<String> lec, ArrayList<String> tt, ArrayList<String> lab) {
+        int index = Math.max(lec.size(), Math.max(tt.size(), lab.size()));
         for (int j = 0; index > j; j++) {
             String output = "";
-            if (lectureLessons.size() > j && isExist(lecture)) {
-                output = output.concat(lectureLessons.get(j));
-            } else if (tutorialLessons.size() > j && isExist(lecture)) {
+            if (isExist(lec, j)) {
+                output = output.concat(lec.get(j));
+            } else if (isExist(tt, j) && isExist(lec, j)) {
                 for (int i = 0; GAP > i; i++) {
                     output = output.concat(SPACE);
                 }
             }
-            if (tutorialLessons.size() > j) {
-                output = output.concat(tutorialLessons.get(j));
-            } else if (laboratoryLessons.size() > j && isExist(tutorial)) {
+            if (isExist(tt, j)) {
+                output = output.concat(tt.get(j));
+            } else if (isExist(lab, j) && isExist(tt, j)) {
                 for (int i = 0; GAP > i; i++) {
                     output = output.concat(SPACE);
                 }
             }
-            if (laboratoryLessons.size() > j) {
-                output = output.concat(laboratoryLessons.get(j));
+            if (isExist(lab, j)) {
+                output = output.concat(lab.get(j));
             }
             System.out.println(output);
         }
+    }
 
-        if (isExist(lecture)) {
-            String select = TextUi.getLessonCommand(LECTURE);
-            int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
-            String classNumber = lecture.get(indexOfLesson).getClassNo();
-            for (Lesson lesson : lecture) {
-                if (lesson.getClassNo().equals(classNumber)) {
-                    timetable.addLesson(new TimetableLesson(module, timetable.getSemester(), lesson));
-                }
+    public void getCommand(ArrayList<Lesson> lessons,
+            Timetable timetable, Module module) throws IntegerException {
+        if (isArrayExist(lessons, 1)) {
+            String select = TextUi.getLessonCommand(lessons.get(0).getLessonType());
+            int indexOfLesson;
+            try {
+                indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
+            } catch(NumberFormatException e) {
+                throw new IntegerException("Input is not an integer");
             }
-        }
-
-        if (isExist(tutorial)) {
-            String select = TextUi.getLessonCommand(TUTORIAL);
-            int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
-            String classNumber = tutorial.get(indexOfLesson).getClassNo();
-            for (Lesson lesson : tutorial) {
-                if (lesson.getClassNo().equals(classNumber)) {
-                    timetable.addLesson(new TimetableLesson(module, timetable.getSemester(), lesson));
-                }
-            }
-        }
-
-        if (isExist(laboratory)) {
-            String select = TextUi.getLessonCommand(LAB);
-            int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
-            String classNumber = laboratory.get(indexOfLesson).getClassNo();
-            for (Lesson lesson : laboratory) {
+            String classNumber = lessons.get(indexOfLesson).getClassNo();
+            for (Lesson lesson : lessons) {
                 if (lesson.getClassNo().equals(classNumber)) {
                     timetable.addLesson(new TimetableLesson(module, timetable.getSemester(), lesson));
                 }
@@ -146,7 +101,7 @@ public class AddUI {
 
     public String printLessonInfo(int serial, Lesson lesson) {
         String output = serial + ": " + lesson.lessonDetails();
-        if (!lesson.getLessonType().equals("Laboratory"))
+        if (!lesson.getLessonType().equals(LAB))
             for (int index = output.length(); GAP > index; index++) {
                 if (index == DIVIDER) {
                     output = output.concat(DIV);
@@ -170,7 +125,11 @@ public class AddUI {
         return true;
     }
 
-    public static boolean isExist(ArrayList<Lesson> lesson) {
-        return lesson.size() > 0;
+    public boolean isExist(ArrayList<String> lesson, int index) {
+        return lesson.size() > 0 && lesson.size() > index;
+    }
+
+    public boolean isArrayExist(ArrayList<Lesson> lesson, int index) {
+        return lesson.size() > 0 && lesson.size() > index;
     }
 }
