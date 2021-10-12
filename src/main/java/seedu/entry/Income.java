@@ -19,6 +19,6 @@ public class Income extends Entry {
 
     @Override
     public String toString() {
-        return "[I] " + description + "- $" + value;
+        return "[I] " + description + " - $" + value;
     }
 }
