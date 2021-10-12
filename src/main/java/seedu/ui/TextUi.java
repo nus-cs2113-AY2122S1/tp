@@ -58,9 +58,11 @@ public class TextUi {
         printBottomLineMessage(message);
     }
 
-    public static void addContactMessage(String contactName, int listSize) {
-        String message = "ConTech has added the specified contact: " + contactName + "\n" + "You now have " + listSize
-                + " contact(s).";
+    public static void addContactMessage(Contact addedContact, int listSize) {
+        String message = "ConTech has added the specified contact: \n"
+                + "Name:     " + addedContact.getName()
+                + formatContactFields(addedContact)
+                + "\n\nYou now have " + listSize + " contact(s).";
         printDoubleLineMessage(message);
     }
 
