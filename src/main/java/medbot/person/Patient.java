@@ -1,6 +1,6 @@
 package medbot.person;
 
-import static medbot.Ui.DATA_SEPARATOR_UNESCAPED;
+import static medbot.Ui.VERTICAL_LINE_SPACED;
 
 public class Patient extends Person {
 
@@ -30,7 +30,7 @@ public class Patient extends Person {
      */
     @Override
     public String getStorageString() {
-        return patientId + DATA_SEPARATOR_UNESCAPED
+        return patientId + VERTICAL_LINE_SPACED
                 + super.getStorageString();
     }
 }

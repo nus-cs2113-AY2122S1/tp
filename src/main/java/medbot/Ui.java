@@ -7,8 +7,8 @@ import java.util.Scanner;
  * (Reading user input and printing message to users).
  */
 public class Ui {
-    public static final String DATA_SEPARATOR_ESCAPED = " \\| ";
-    public static final String DATA_SEPARATOR_UNESCAPED = " | ";
+    public static final String VERTICAL_LINE_SPACED_ESCAPED = " \\| ";
+    public static final String VERTICAL_LINE_SPACED = " | ";
 
     private Scanner inputScanner = new Scanner(System.in);
 

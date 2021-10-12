@@ -1,7 +1,7 @@
 package medbot.person;
 
 
-import static medbot.Ui.DATA_SEPARATOR_UNESCAPED;
+import static medbot.Ui.VERTICAL_LINE_SPACED;
 
 
 public abstract class Person {
@@ -73,10 +73,10 @@ public abstract class Person {
      */
     public String getStorageString() {
 
-        return setAsStorageParameterOrNull(icNumber) + DATA_SEPARATOR_UNESCAPED
-                + setAsStorageParameterOrNull(name) + DATA_SEPARATOR_UNESCAPED
-                + setAsStorageParameterOrNull(phoneNumber) + DATA_SEPARATOR_UNESCAPED
-                + setAsStorageParameterOrNull(emailAddress) + DATA_SEPARATOR_UNESCAPED
+        return setAsStorageParameterOrNull(icNumber) + VERTICAL_LINE_SPACED
+                + setAsStorageParameterOrNull(name) + VERTICAL_LINE_SPACED
+                + setAsStorageParameterOrNull(phoneNumber) + VERTICAL_LINE_SPACED
+                + setAsStorageParameterOrNull(emailAddress) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(residentialAddress);
     }
 
