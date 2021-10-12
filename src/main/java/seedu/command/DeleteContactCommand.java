@@ -2,6 +2,7 @@ package seedu.command;
 
 import seedu.contact.Contact;
 import seedu.parser.FailedCommandType;
+import seedu.parser.IndexParser;
 import seedu.ui.TextUi;
 import seedu.command.FailedCommand;
 
@@ -17,7 +18,7 @@ public class DeleteContactCommand extends Command {
         return deletedIndex;
     }
 
-    public void deleteContact() {
+    public void checkContactIndex() {
         try {
             Contact deletedContact = contactList.getContactAtIndex(deletedIndex);
             this.contactList.deleteContact(deletedIndex);
@@ -27,14 +28,25 @@ public class DeleteContactCommand extends Command {
         }
     }
 
-    public void execute() {
-        Contact deletedContact = contactList.getContactAtIndex(deletedIndex);
+    private void deleteOnConfirmation(Contact deletedContact) {
         // ask for confirmation to delete from user
         String userDeleteConfirmation = TextUi.getUserDeleteConfirmation(deletedContact, deletedIndex);
         if (userDeleteConfirmation.equalsIgnoreCase("y")) {
-            deleteContact();
+            this.contactList.deleteContact(deletedIndex);
+            TextUi.deleteContactMessage(deletedContact.getName(), contactList.getListSize());
         } else {
             TextUi.cancelDeleteContactMessage();
+        }
+    }
+
+    public void execute() {
+        try {
+            // throws IndexOutOfBoundsException if index is outside of the range
+            Contact deletedContact = IndexParser.getContactFromIndex(deletedIndex, contactList);
+            // Index is within range, insert assert here
+            deleteOnConfirmation(deletedContact);
+        } catch (IndexOutOfBoundsException e) {
+            TextUi.numOutOfRangeMessage(contactList.getListSize());
         }
     }
 }

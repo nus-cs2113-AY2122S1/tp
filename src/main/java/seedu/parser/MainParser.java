@@ -129,14 +129,11 @@ public class MainParser {
     }
 
     private Command parseDeleteContact(String userInput) {
-        String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
-        //check if there is only the command word and no arguments in input
-        if (destructuredInputs.length == 1) {
-            return new FailedCommand(FailedCommandType.MISSING_ARG);
-        }
         try {
-            int deletedIndex = Integer.parseInt(destructuredInputs[1].trim());
+            int deletedIndex = IndexParser.getIndexFromInput(userInput);
             return new DeleteContactCommand(deletedIndex);
+        } catch (MissingArgException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
