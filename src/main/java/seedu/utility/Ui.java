@@ -90,13 +90,12 @@ public class Ui {
         printLine();
         int i = 1;
         for (Income income:incomes) {
-                System.out.print(i);
-                System.out.print(": ");
-                System.out.println(income);
-                i++;
+            System.out.print(i);
+            System.out.print(": ");
+            System.out.println(income);
+            i++;
         }
         printLine();
-
     }
     
     public void printTotalExpense(double totalExpense) {
@@ -114,7 +113,6 @@ public class Ui {
         System.out.println("Your most recent spending: ");
         System.out.println(expense);
         printLine();
-
     }
 
     public void printExpenseDeleted(Expense expense) {
@@ -122,7 +120,6 @@ public class Ui {
         System.out.println("You removed this: ");
         System.out.println(expense);
         printLine();
-
     }
     
     public void printIncomeAdded(Income income) {
@@ -130,7 +127,6 @@ public class Ui {
         System.out.println("Your most recent earning: ");
         System.out.println(income);
         printLine();
-
     }
 
     public void printIncomeDeleted(Income income) {
@@ -138,7 +134,6 @@ public class Ui {
         System.out.println("You removed this: ");
         System.out.println(income);
         printLine();
-
     }
     
     public void printHelp() {
