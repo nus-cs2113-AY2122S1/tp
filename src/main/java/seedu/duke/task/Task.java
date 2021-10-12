@@ -1,5 +1,8 @@
 package seedu.duke.task;
 
+import net.fortuna.ical4j.model.property.Description;
+import seedu.duke.task.factory.DeadlineFactory;
+
 public abstract class Task {
 
     private static final PriorityEnum DEFAULT_PRIORITY = PriorityEnum.MEDIUM;
@@ -7,7 +10,8 @@ public abstract class Task {
 
     private static final String TASK_ENTRY_DESCRIPTION_REGEX = "%s [%s]";
 
-    private static final String DESCRIPTION_ASSERTION = "description should not be empty.";
+    private static final String DESCRIPTION_NOT_EMPTY_ASSERTION = "description should not be empty.";
+    private static final String DESCRIPTION_NOT_NULL_ASSERTION = "description should not be null.";
     private static final String PRIORITY_ASSERTION = "priority should not be null.";
     private static final String RECURRENCE_ASSERTION = "recurrence should not be null.";
 
@@ -46,7 +50,8 @@ public abstract class Task {
     }
 
     public void setDescription(String description) {
-        assert !description.equals("") : DESCRIPTION_ASSERTION;
+        assert !description.equals("") : DESCRIPTION_NOT_EMPTY_ASSERTION;
+        assert description != null : DESCRIPTION_NOT_NULL_ASSERTION;
         this.description = description;
     }
 
