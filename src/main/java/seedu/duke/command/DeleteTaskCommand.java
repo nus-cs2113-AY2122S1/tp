@@ -22,7 +22,7 @@ public class DeleteTaskCommand extends DeleteCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage)
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
             throws DukeException, IOException {
         if (isDeleteAll) {
             taskList.clearTaskList();

@@ -10,8 +10,8 @@ import java.io.IOException;
 
 public class DeleteAllCommand extends DeleteCommand {
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws DukeException,
-            IOException {
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
+            throws DukeException, IOException {
         taskList.clearTaskList();
         lessonList.clearLessonList();
         ui.printDeletedAll();

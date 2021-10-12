@@ -18,8 +18,8 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws DukeException,
-            IOException {
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
+            throws DukeException, IOException {
         Task task = taskList.getTask(taskIndex);
         if (task.isDone()) {
             throw new DukeException(Message.INFO_TASK_COMPLETED);

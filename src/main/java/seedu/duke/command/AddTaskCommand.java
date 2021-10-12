@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exception.DukeException;
 import seedu.duke.lesson.LessonList;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.Task;
@@ -19,7 +18,7 @@ public class AddTaskCommand extends AddCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) throws IOException {
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList) throws IOException {
         Task newTask = new Task(title, dayOfTheWeek, information);
         taskList.addTask(newTask);
         ui.printTaskAdded(newTask, taskList.getSize());

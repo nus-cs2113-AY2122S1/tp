@@ -27,7 +27,7 @@ public class DoneCommandTest {
 
         try {
             Command doneCommand = new DoneCommand(0);
-            doneCommand.execute(ui, taskList, lessonList, storage);
+            doneCommand.execute(ui, storage, taskList, lessonList);
             assertEquals(taskList.getNumberOfPendingTasks(), 1);
         } catch (DukeException | IOException e) {
             // fail when the task list has any items

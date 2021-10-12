@@ -1,6 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exception.DukeException;
 import seedu.duke.lesson.LessonList;
 import seedu.duke.storage.Storage;
 import seedu.duke.task.TaskList;
@@ -17,7 +16,7 @@ public class ListAllCommand extends ListCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, LessonList lessonList, Storage storage) {
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList) {
         if (isListAll) {
             ui.printAllList(taskList, lessonList);
         } else {
