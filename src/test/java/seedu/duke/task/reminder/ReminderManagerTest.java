@@ -1,7 +1,6 @@
 package seedu.duke.task.reminder;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.parser.Parser;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskManager;
 import seedu.duke.task.type.Deadline;
@@ -28,10 +27,12 @@ class ReminderManagerTest {
 
     @Test
     void sendReminder() {
-        Calendar taskTime = Calendar.getInstance();
-        taskTime.add(Calendar.MINUTE, 10);
-        startDate = taskTime.getTime();
-        endDate = Calendar.getInstance().getTime();
+        Calendar start = Calendar.getInstance();
+        start.add(Calendar.MINUTE, 10);
+        Calendar end = Calendar.getInstance();
+        end.add(Calendar.MINUTE, 20);
+        startDate = start.getTime();
+        endDate = end.getTime();
 
         Task todoWithReminder = new Todo("lecture with reminder", startDate);
         tasklist.add(todoWithReminder);
