@@ -14,6 +14,7 @@ public class ModuleList {
     }
 
     public void addModule(Module module) {
+        assert module != null;
         list.add(module);
     }
 
@@ -31,6 +32,7 @@ public class ModuleList {
     }
 
     public Module get(int index) {
+        assert index <= list.size();
         return list.get(index);
     }
 }
