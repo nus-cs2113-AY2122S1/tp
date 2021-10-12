@@ -141,4 +141,13 @@ public class Ui {
     public static void argNotNumber() {
         System.out.println("Input is not a number");
     }
+
+    public static void emptyArgForDeleteCommand() {
+        System.out.println();
+        System.out.println("Which trip to delete?");
+        System.out.println("Syntax: delete [trip number]");
+        System.out.println("---------------------");
+        printAllTrips();
+        System.out.println("---------------------");
+    }
 }

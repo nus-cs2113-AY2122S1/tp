@@ -117,9 +117,14 @@ public class Parser {
         }
     }
 
-    private static void executeDelete(String inputDescription) {
-        int tripIndex = Integer.parseInt(inputDescription) - 1;
-        deleteTrip(tripIndex);
+    private static void executeDelete(String indexAsString) {
+        if (indexAsString == null){
+            Ui.emptyArgForDeleteCommand();
+        }else{
+            int tripIndex = Integer.parseInt(indexAsString) - 1;
+            deleteTrip(tripIndex);
+        }
+
     }
 
     private static void executeView() {
@@ -139,13 +144,13 @@ public class Parser {
     }
 
     //assumes that listOfTrips have at least 1 trip
-    private static void executeOpen(String indexInString) {
-        if (indexInString == null){
+    private static void executeOpen(String indexAsString) {
+        if (indexAsString == null){
             Ui.emptyArgForOpenCommand();
         }
         else {
             try {
-                int indexToGet = Integer.parseInt(indexInString) - 1;
+                int indexToGet = Integer.parseInt(indexAsString) - 1;
                 Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
                 Ui.printOpenTripMessage(Storage.listOfTrips.get(indexToGet));
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
