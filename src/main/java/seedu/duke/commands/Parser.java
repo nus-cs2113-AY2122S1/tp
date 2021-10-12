@@ -7,7 +7,7 @@ public class Parser {
     private static final String COMMAND_EXIT = "exit";
 
     /**
-     * Sole constructor
+     * Sole constructor.
      */
     public Parser() {
     }
