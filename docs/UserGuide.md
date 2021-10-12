@@ -84,7 +84,7 @@ m/MAX_QUANTITY]`
 
 Example:
 `update i/1 n/panadol p/20 q/50 e/01-12-2021 
-d/Best medicine to cure heacache, fever and pains m/100`
+d/Best medicine to cure headache, fever and pains m/100`
 
 Expected output:
 ```
