@@ -1,19 +1,18 @@
 Hello!
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully added!
-Enter your command: Enter your command: 1. America | 02 Feb 2021
+Enter your command: You have opened the following trip: 
+America | 02 Feb 2021
+Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
 Enter your command: Enter your command: Your expense has been added successfully
-Enter your command: 1. America | 02 Feb 2021
+Enter your command: 1. this is what i want to type | Cost: 8.00
 Enter your command: this is what i want to type at null
 date: 2021-10-12
 Amount Spent: 8.00
 People involved: [yikai, yuzhao]
 Category: food
 Enter your command: This is the summary for your America trip 02 Feb 2021
-Total budget for this trip: 
-2000.00
-Total expenditure so far: 
-8.00
-Current budget left for this trip: 
-1992.00
+Total budget for this trip: 2000.00
+Total expenditure so far: 8.00
+Current budget left for this trip: 1992.00
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully removed
 Enter your command: Goodbye!

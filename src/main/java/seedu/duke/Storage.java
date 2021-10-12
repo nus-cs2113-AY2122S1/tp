@@ -34,6 +34,14 @@ public class Storage {
         return openTrip;
     }
 
+    /**
+     * Checks if there is an open trip or not.
+     * @return true if there is an open trip
+     */
+    public static boolean checkOpenTrip() {
+        return openTrip != null;
+    }
+
     public static void setOpenTrip(Trip openTrip) {
         Storage.openTrip = openTrip;
     }

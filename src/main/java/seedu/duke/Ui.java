@@ -34,11 +34,11 @@ public class Ui {
 
     public static void printExpensesSummary(Trip t) {
         System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
-        System.out.println("Total budget for this trip: ");
+        System.out.print("Total budget for this trip: ");
         printMoney(t.getBudget());
-        System.out.println("Total expenditure so far: ");
+        System.out.print("Total expenditure so far: ");
         printMoney(t.getTotalExpenses());
-        System.out.println("Current budget left for this trip: ");
+        System.out.print("Current budget left for this trip: ");
         printMoney(t.getBudgetLeft());
     }
 
@@ -47,16 +47,34 @@ public class Ui {
     }
 
     public static void printExpensesInList(Expense expense, int index) {
-        System.out.println(index + ". " + expense.getDescription() + " | Cost: ");
+        System.out.print(index + ". " + expense.getDescription() + " | Cost: ");
         printMoney(expense.getAmountSpent());
+    }
+
+    public static void printOpenTripMessage(Trip trip) {
+        System.out.println("You have opened the following trip: "
+                + System.lineSeparator()
+                + trip.getLocation() + " | " + trip.getDateOfTripString());
     }
 
     public static void printTripsInList(Trip trip, int index) {
         System.out.println(index + ". " + trip.getLocation() + " | " + trip.getDateOfTripString());
     }
 
+    public static void printCreateFormatError() {
+        System.out.println("Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "create [place] [date] [exchange rate] [budget] [people].");
+    }
+
+    public static void printExpenseFormatError() {
+        System.out.println("Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "expense [amount] [category] [people] /[description].");
+    }
+
     public static void printBudgetFormatError() {
-        System.out.print("Please re-enter your budget as a decimal number (e.g. 1.32): ");
+        System.out.print("Please re-enter your budget as a decimal number (e.g. 2000.00): ");
     }
 
     public static void printExchangeRateFormatError() {
