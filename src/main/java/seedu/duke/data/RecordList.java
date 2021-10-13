@@ -4,6 +4,7 @@ package seedu.duke.data;
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Record;
+import seedu.duke.storage.ExpenditureStorage;
 
 //import java.time.LocalDate;
 import java.util.ArrayList;
@@ -31,9 +32,13 @@ public class RecordList {
         }
     }
 
-    public void addExpenditure(String description, double spending) {
+    public void addExpenditure(String description, double spending, boolean isLoadingStorage) {
         expenditureRecords.add(new Expenditure(description, spending));
         numberOfRecords += 1;
+        if (isLoadingStorage == false) {
+            ExpenditureStorage storeCurrentExpenditure = new ExpenditureStorage();
+            storeCurrentExpenditure.saveNewlyAddedExpenditure(description, spending);
+        }
     }
 
     public void deleteBudget() {

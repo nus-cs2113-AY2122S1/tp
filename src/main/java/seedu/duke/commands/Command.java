@@ -8,7 +8,7 @@ import seedu.duke.data.RecordList;
 public abstract class Command {
     protected RecordList recordList;
 
-    public abstract void execute();
+    public abstract void execute(boolean isLoadingStorage);
 
     public void setRecordList(RecordList recordList) {
         this.recordList = recordList;

@@ -10,7 +10,7 @@ public class DeleteBudgetCommand extends DeleteCommand {
         this.commandParams = commandParams;
     }
 
-    public void execute() {
+    public void execute(boolean isLoadingStorage) {
         recordList.deleteBudget();
         TextUi.showBudgetDeletedMessage();
     }

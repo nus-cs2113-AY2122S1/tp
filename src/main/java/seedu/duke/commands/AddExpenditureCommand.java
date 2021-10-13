@@ -18,9 +18,9 @@ public class AddExpenditureCommand extends AddCommand {
     }
 
 
-    public void execute() {
+    public void execute(boolean isLoadingStorage) {
         Expenditure newExpenditure = new Expenditure(description, spending);
-        recordList.addExpenditure(description, spending);
+        recordList.addExpenditure(description, spending, isLoadingStorage);
         TextUi.showExpenditureAddedMessage(newExpenditure);
     }
 }

@@ -16,7 +16,7 @@ public class AddExpenditureTest {
         //LocalDate date = LocalDate.of(2021, 10, 8);
 
         RecordList currentExpenditureList = new RecordList();
-        currentExpenditureList.addExpenditure(description, spending);
+        currentExpenditureList.addExpenditure(description, spending, false);
         assertEquals(1, currentExpenditureList.getExpenditureListSize());
     }
 }
