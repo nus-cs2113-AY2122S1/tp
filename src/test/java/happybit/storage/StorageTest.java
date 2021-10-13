@@ -31,18 +31,4 @@ class StorageTest {
     public void tearDown() {
         System.setOut(standardOut);
     }
-
-    @Test
-    public void importData_importEmptyFile_emptyArrayList() {
-        Storage s = new Storage();
-        GoalList actualOutput = null;
-        GoalList expectedOutput = new GoalList();
-
-        try {
-            actualOutput = s.load();
-            assertEquals(expectedOutput, actualOutput);
-        } catch (HaBitLoadException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }
