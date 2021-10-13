@@ -1,18 +1,18 @@
 package seedu.duke.parser;
 
+import seedu.duke.commands.AddBudgetCommand;
+import seedu.duke.commands.AddCommand;
+import seedu.duke.commands.AddExpenditureCommand;
 import seedu.duke.commands.Command;
+import seedu.duke.commands.DeleteBudgetCommand;
 import seedu.duke.commands.DeleteCommand;
+import seedu.duke.commands.DeleteExpenditureCommand;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.InvalidCommand;
-import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ListRecordsCommand;
-import seedu.duke.commands.DeleteExpenditureCommand;
-import seedu.duke.commands.AddBudgetCommand;
-import seedu.duke.commands.DeleteBudgetCommand;
-import seedu.duke.commands.AddExpenditureCommand;
 
-import java.time.LocalDate;
-import java.util.Locale;
+//import java.time.LocalDate;
+//import java.util.Locale;
 
 public class Parser {
 
@@ -38,6 +38,7 @@ public class Parser {
         String[] commandTypeAndParams = splitCommandWordAndArgs(userInput);
         String commandType = commandTypeAndParams[0];
         String commandParams = commandTypeAndParams[1].trim();
+        assert commandType.equals(commandType.toLowerCase());
         Command command;
         switch (commandType) {
         case AddCommand.COMMAND_WORD:
