@@ -20,7 +20,6 @@ public class Ingredient {
     public Ingredient(String name, int quantity, LocalDate expiryDate) {
         assert name != null && !name.isBlank();
         assert quantity >= 0;
-        assert expiryDate != null;
         this.name = name;
         this.quantity = quantity;
         this.expiryDate = expiryDate;
