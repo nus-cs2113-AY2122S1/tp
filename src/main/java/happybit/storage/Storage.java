@@ -1,7 +1,6 @@
 package happybit.storage;
 
 import happybit.exception.HaBitLoadException;
-import happybit.exception.HaBitParserException;
 import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.goal.GoalType;
@@ -12,8 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
