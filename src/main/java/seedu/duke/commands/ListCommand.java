@@ -20,6 +20,7 @@ public class ListCommand extends Command {
             if (moduleSelectedList.getSize() == 0) {
                 System.out.println("The module list is empty!");
             } else {
+                assert moduleSelectedList.getSize() > 0;
                 System.out.println("Here are the modules in your list:");
                 for (int i = 0; i < moduleSelectedList.getSize(); i++) {
                     System.out.println("[" + (i + 1) + "] " + moduleSelectedList.get(i).getModuleCode());
@@ -30,6 +31,7 @@ public class ListCommand extends Command {
             if (universitySelectedList.getSize() == 0) {
                 System.out.println("The university list is empty!");
             } else {
+                assert moduleSelectedList.getSize() > 0;
                 System.out.println("Here are the universities in your list:");
                 for (int i = 0; i < universitySelectedList.getSize(); i++) {
                     System.out.println("[" + (i + 1) + "] " + universitySelectedList.get(i).getName());

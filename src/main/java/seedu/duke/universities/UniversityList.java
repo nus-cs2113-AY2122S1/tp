@@ -35,6 +35,7 @@ public class UniversityList {
     }
 
     public void listUniversities() {
+        assert list.size() != 0;
         for (int i = 0; i < list.size(); i++) {
             University curr = list.get(i);
             String output = (i + 1) + ". " + curr.name;

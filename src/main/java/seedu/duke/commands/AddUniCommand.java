@@ -12,8 +12,11 @@ public class AddUniCommand extends Command {
     public AddUniCommand(University universityToAdd, UniversityList universitySelectedList,
                          ModuleList moduleSelectedList) {
         super(universitySelectedList, moduleSelectedList);
+        assert universityToAdd.getName() != null;
+        assert universityToAdd.getClass() != null;
         this.universityToAdd = universityToAdd;
         universitySelectedList.addUniversity(universityToAdd);
+        assert universitySelectedList.getSize() != 0;
         System.out.println("New university added: " + universityToAdd.getName());
     }
 }
