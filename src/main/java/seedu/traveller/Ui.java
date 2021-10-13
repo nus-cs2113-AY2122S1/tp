@@ -42,9 +42,14 @@ public class Ui {
     }
 
     public void printAllTrips(TripsList tripsList) {
-        System.out.println("\tHere are all your trips: ");
-        for (int i = 0; i < tripsList.getSize(); i++) {
-            printTrip(tripsList.getTrip(i));
+        if (tripsList.getSize() == 0) {
+            System.out.println("\tThere are no trips created yet.");
+        } else {
+            assert tripsList.getSize() > 0 : "There should be trips in the tripsList.";
+            System.out.println("\tHere are all your trips: ");
+            for (int i = 0; i < tripsList.getSize(); i++) {
+                printTrip(tripsList.getTrip(i));
+            }
         }
     }
 

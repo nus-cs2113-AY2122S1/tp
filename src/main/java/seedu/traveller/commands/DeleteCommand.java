@@ -26,6 +26,7 @@ public class DeleteCommand extends Command {
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
         int tripIndex = tripsList.getTripIndex(tripName);
+        assert tripIndex > tripsList.getSize() : "The trip index is out of bound.";
         if (tripIndex == -1) {
             throw new TripNotFoundException();
         }

@@ -12,6 +12,7 @@ import seedu.traveller.exceptions.InvalidEditFormatException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.TravellerException;
 
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,8 +33,10 @@ public class Parser {
             logger.log(Level.INFO, "New command input");
             try {
                 String tripName = userInput[1];  // TODO: Is there a better way to do this?
-                String startCountryCode = userInput[2];
-                String endCountryCode = userInput[3];
+                String startCountryCode = userInput[2].toUpperCase();
+                String endCountryCode = userInput[3].toUpperCase();
+                assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
+                assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
                 command = new NewCommand(tripName, startCountryCode, endCountryCode);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new InvalidNewFormatException();
@@ -43,8 +46,10 @@ public class Parser {
             logger.log(Level.INFO, "Edit command input");
             try {
                 String tripName = userInput[1];
-                String startCountryCode = userInput[2];
-                String endCountryCode = userInput[3];
+                String startCountryCode = userInput[2].toUpperCase();
+                String endCountryCode = userInput[3].toUpperCase();
+                assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
+                assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
                 command = new EditCommand(tripName, startCountryCode, endCountryCode);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new InvalidEditFormatException();
@@ -52,8 +57,8 @@ public class Parser {
             break;
         case "delete":
             logger.log(Level.INFO, "Delete command input");
-            String countryCode = userInput[1];
-            command = new DeleteCommand(countryCode);
+            String tripName = userInput[1];
+            command = new DeleteCommand(tripName);
             break;
         case "viewall":
             logger.log(Level.INFO, "Viewall command input");
@@ -61,8 +66,10 @@ public class Parser {
             break;
         case "search":
             logger.log(Level.INFO, "Search command input");
-            String startCountryCode = userInput[1];
-            String endCountryCode = userInput[2];
+            String startCountryCode = userInput[1].toUpperCase();
+            String endCountryCode = userInput[2].toUpperCase();
+            assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
+            assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
             command = new SearchCommand(startCountryCode, endCountryCode);
             break;
         case "exit":

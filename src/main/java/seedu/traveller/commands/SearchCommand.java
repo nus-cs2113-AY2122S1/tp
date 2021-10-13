@@ -46,6 +46,7 @@ public class SearchCommand extends Command {
             curr = d - sum;
             sum += curr;
         }
+        assert sum >= 0 : "The distance should be more than or equal to 0.";
         ui.printSearch(this.startCountry, this.endCountry, sum);
     }
 }

@@ -3,7 +3,6 @@ package seedu.traveller.commands;
 import seedu.traveller.TripsList;
 import seedu.traveller.Ui;
 
-import javax.swing.text.View;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

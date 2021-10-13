@@ -41,6 +41,7 @@ public class EditCommand extends Command {
         if (tripIndex == -1) {
             throw new TripNotFoundException();
         }
+        assert tripIndex > tripsList.getSize() && tripIndex > -1: "The trip index is out of bound.";
 
         tripsList.deleteTrip(tripIndex);
         MinCalcResult result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
