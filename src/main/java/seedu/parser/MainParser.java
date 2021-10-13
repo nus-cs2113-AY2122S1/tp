@@ -10,7 +10,6 @@ import seedu.command.FailedCommand;
 import seedu.command.ExitCommand;
 import seedu.command.ListContactsCommand;
 
-import seedu.contact.DetailType;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
@@ -87,13 +86,7 @@ public class MainParser {
                 throw new MissingNameException();
             }
             assert details.length == NUMBER_OF_FIELDS;
-            String name = details[DetailType.NAME.getIndex()];
-            String github = details[DetailType.GITHUB.getIndex()];
-            String linkedin = details[DetailType.LINKEDIN.getIndex()];
-            String telegram = details[DetailType.TELEGRAM.getIndex()];
-            String twitter = details[DetailType.TWITTER.getIndex()];
-            String email = details[DetailType.EMAIL.getIndex()];
-            return new AddContactCommand(name, github, linkedin, telegram, twitter, email);
+            return new AddContactCommand(details);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (MissingArgException e) {
