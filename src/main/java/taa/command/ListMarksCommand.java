@@ -22,8 +22,7 @@ public class ListMarksCommand extends Command {
         + "their marks for %s:";
     private static final String MARKS_LIST_EMPTY = "There are no marks inputted!";
 
-    private static final String MESSAGE_FORMAT_LIST_MARKS_USAGE = "Usage: %s "
-        + "%s/<MODULE_CODE> %s/<ASSESSMENT_NAME>";
+    private static final String MESSAGE_FORMAT_LIST_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<ASSESSMENT_NAME>";
 
     public ListMarksCommand(String argument) {
         super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);
@@ -119,7 +118,7 @@ public class ListMarksCommand extends Command {
      * @return String which contains the usage message.
      */
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
             MESSAGE_FORMAT_LIST_MARKS_USAGE,
             COMMAND_LIST_MARKS,

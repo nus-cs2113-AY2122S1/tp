@@ -3,6 +3,7 @@ package taa;
 import taa.command.AddAssessmentCommand;
 import taa.command.AddModuleCommand;
 import taa.command.AddStudentCommand;
+import taa.command.HelpCommand;
 import taa.command.SetAttendanceCommand;
 import taa.command.AverageMarksCommand;
 import taa.command.Command;
@@ -33,6 +34,10 @@ public class Parser {
 
         Command command;
         switch (commandString) {
+        case Command.COMMAND_HELP:
+            command = new HelpCommand(argument);
+            break;
+
         case Command.COMMAND_EXIT:
             command = new ExitCommand(argument);
             break;

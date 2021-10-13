@@ -73,6 +73,8 @@ public class Storage {
             throw new TaaException(String.format(MESSAGE_FORMAT_FAIL_CREATE_FILE, filename));
         }
 
+        assert Util.fileExists(filename);
+
         Gson gson = new Gson();
         try {
             FileWriter fileWriter = new FileWriter(filename);

@@ -121,6 +121,16 @@ public class Student implements ClassChecker {
     }
 
     /**
+     * Overrides default toString method with the custom print message.
+     *
+     * @return the custom print message
+     */
+    @Override
+    public String toString() {
+        return String.format("%s (%s)", id, name);
+    }
+
+    /**
      * Returns true if marks have been inputted for a given assessment.
      *
      * @param assessmentName Assessment to be checked.
@@ -143,15 +153,5 @@ public class Student implements ClassChecker {
         }
 
         return true;
-    }
-
-    /**
-     * Overrides default toString method with the custom print message.
-     *
-     * @return the custom print message
-     */
-    @Override
-    public String toString() {
-        return String.format("%s (%s)", id, name);
     }
 }

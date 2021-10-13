@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.logger.TaaLogger;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
@@ -13,8 +14,7 @@ public class AddModuleCommand extends Command {
 
     private static final String MESSAGE_INVALID_MODULE_CODE = "Invalid module code.";
 
-    private static final String MESSAGE_FORMAT_ADD_MODULE_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<MODULE_NAME>";
+    private static final String MESSAGE_FORMAT_ADD_MODULE_USAGE = "%s %s/<MODULE_CODE> %s/<MODULE_NAME>";
     private static final String MESSAGE_FORMAT_MODULE_ADDED = "Module added:\n  %s\nThere are %d modules in the list.";
 
     public AddModuleCommand(String argument) {
@@ -39,14 +39,17 @@ public class AddModuleCommand extends Command {
             throw new TaaException(getMissingArgumentMessage());
         }
 
+        assert argumentMap.containsKey(KEY_MODULE_CODE);
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         if (moduleCode.contains(" ")) {
             throw new TaaException(MESSAGE_INVALID_MODULE_CODE);
         }
 
+        assert argumentMap.containsKey(KEY_MODULE_NAME);
         String name = argumentMap.get(KEY_MODULE_NAME);
         Module module = new Module(moduleCode, name);
         moduleList.addModule(module);
+        TaaLogger.LOGGER.logInfo(String.format("Added module: %s", module));
 
         storage.save(moduleList);
 
@@ -54,12 +57,12 @@ public class AddModuleCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_ADD_MODULE_USAGE,
-                COMMAND_ADD_MODULE,
-                KEY_MODULE_CODE,
-                KEY_MODULE_NAME
+            MESSAGE_FORMAT_ADD_MODULE_USAGE,
+            COMMAND_ADD_MODULE,
+            KEY_MODULE_CODE,
+            KEY_MODULE_NAME
         );
     }
 }

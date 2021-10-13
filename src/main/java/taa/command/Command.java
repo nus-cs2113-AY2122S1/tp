@@ -24,6 +24,7 @@ public abstract class Command {
     public static final String COMMAND_SET_ATTENDANCE = "set_attendance";
     public static final String COMMAND_ADD_ASSESSMENT = "add_assessment";
     public static final String COMMAND_SET_MARKS = "set_marks";
+    public static final String COMMAND_HELP = "help";
 
     // Common messages
     protected static final String MESSAGE_UNKNOWN_USAGE = "Unknown usage.";
@@ -34,8 +35,9 @@ public abstract class Command {
     protected static final String MESSAGE_NO_STUDENTS = "There are no students in this module";
 
     // Common message formats
-    protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "Usage: %s";
+    protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "%s";
     protected static final String MESSAGE_FORMAT_MISSING_ARGUMENT = "Missing Argument(s).\n%s";
+    protected static final String MESSAGE_FORMAT_USAGE_MESSAGE = "Usage: %s";
 
     protected String argument;
     protected boolean isExit;
@@ -57,9 +59,13 @@ public abstract class Command {
         return isExit;
     }
 
-    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException;
+    protected abstract String getUsage();
 
-    protected abstract String getUsageMessage();
+    protected String getUsageMessage() {
+        return String.format(MESSAGE_FORMAT_USAGE_MESSAGE, getUsage());
+    }
+
+    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException;
 
     protected String getMissingArgumentMessage() {
         String usageMessage = getUsageMessage();

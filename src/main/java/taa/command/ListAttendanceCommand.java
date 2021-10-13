@@ -15,7 +15,7 @@ public class ListAttendanceCommand extends Command {
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String[] LIST_ATTENDANCE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_INDEX};
 
-    private static final String MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE = "Usage: %s %s/<MODULE_CODE> %s/<STUDENT_INDEX>";
+    private static final String MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX>";
     protected static final String MESSAGE_FORMAT_NO_ATTENDANCE = "There is no recorded attendance for %s.";
     private static final String MESSAGE_FORMAT_OUTPUT = "Attendance for %s:\n%s";
 
@@ -71,12 +71,12 @@ public class ListAttendanceCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE,
-                COMMAND_LIST_ATTENDANCE,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX
+            MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE,
+            COMMAND_LIST_ATTENDANCE,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX
         );
     }
 }

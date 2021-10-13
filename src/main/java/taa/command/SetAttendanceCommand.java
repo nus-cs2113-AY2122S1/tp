@@ -32,8 +32,8 @@ public class SetAttendanceCommand extends Command {
     private static final String PRESENT_VALUE = "1";
     private static final String ABSENT_VALUE = "0";
 
-    private static final String MESSAGE_FORMAT_SET_ATTENDANCE_USAGE = "Usage: %s "
-        + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER> %s/<PRESENT>";
+    private static final String MESSAGE_FORMAT_SET_ATTENDANCE_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "
+        + "%s/<LESSON_NUMBER> %s/<PRESENT>";
 
     public SetAttendanceCommand(String argument) {
         super(argument, SET_ATTENDANCE_ARGUMENT_KEYS);
@@ -114,7 +114,7 @@ public class SetAttendanceCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
             MESSAGE_FORMAT_SET_ATTENDANCE_USAGE,
             COMMAND_SET_ATTENDANCE,

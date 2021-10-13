@@ -5,8 +5,6 @@ import taa.ClassChecker;
 import java.util.ArrayList;
 
 public class StudentList implements ClassChecker {
-    private static final String MESSAGE_LIST_STUDENT_HEADER = "Student List:";
-
     private final ArrayList<Student> students;
 
     public StudentList() {
