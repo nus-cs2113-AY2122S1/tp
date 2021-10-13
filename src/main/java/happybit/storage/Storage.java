@@ -69,11 +69,15 @@ public class Storage {
                     } catch (ParseException e) {
                         throw new HaBitLoadException(e.toString());
                     }
+                    break;
                 case HABIT_TYPE:
                     Habit habit = habitParser(lineData);
                     int goalIndex = Integer.getInteger(lineData[NUM_INDEX]);
 
                     goalList.addHabitFromGoal(habit, goalIndex);
+                    break;
+                default:
+                    throw new HaBitLoadException("error while loading");
                 }
             }
         } catch (FileNotFoundException e) {
