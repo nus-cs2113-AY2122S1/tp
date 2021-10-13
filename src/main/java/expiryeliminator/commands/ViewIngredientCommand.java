@@ -21,7 +21,13 @@ public class ViewIngredientCommand extends Command {
 
     private final String ingredientDescription;
 
+    /**
+     * Initialises command and stores relevant parameters.
+     *
+     * @param ingredientDescription Name of ingredient to find.
+     */
     public ViewIngredientCommand(String ingredientDescription) {
+        assert ingredientDescription != null && !ingredientDescription.isBlank();
         this.ingredientDescription = ingredientDescription;
     }
 
