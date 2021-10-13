@@ -198,16 +198,11 @@ find lesson cs2113
 
 ```
 
-
 ### Exiting the program - `exit`
 
 Exit the program.
 
 Format: `exit`
-
-### Saving the data
-
-Data from NUS Buddy is automatically saved on your local machine.
 
 Example usage:
 
@@ -217,6 +212,10 @@ exit
      Bye!
     _______________________________________________________________________________
 ```
+
+### Saving the data
+
+Data from NUS Buddy is automatically saved on your local machine.
 
 ## FAQ
 
