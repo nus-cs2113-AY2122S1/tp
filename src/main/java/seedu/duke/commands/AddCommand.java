@@ -5,7 +5,6 @@ import seedu.duke.data.Item;
 import seedu.duke.LibmgrException;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.commands.Parser.COMMAND_ADD;
 import static seedu.duke.common.Messages.FORMAT_INCORRECT;
 import static seedu.duke.common.Messages.NO_TITLE;
 import static seedu.duke.common.Messages.NO_ID;
@@ -15,6 +14,7 @@ import static seedu.duke.common.Messages.ADD_MESSAGE;
  * Class encapsulating an add command.
  */
 public class AddCommand extends Command {
+    public static final String COMMAND_WORD = "add";
     protected String args; // Format: add t/TITLE i/ID
     protected String title;
     protected String id;
@@ -39,7 +39,7 @@ public class AddCommand extends Command {
         if (args.length() <= 4 || !args.contains("t/") || !args.contains("i/")) {
             throw new LibmgrException(FORMAT_INCORRECT);
         }
-        String parameters = args.substring(COMMAND_ADD.length() + 1);
+        String parameters = args.substring(COMMAND_WORD.length() + 1);
         String[] argList = parameters.split("/");
         int endIndex = argList[1].length() - 1;
         if (endIndex <= 0) {

@@ -10,6 +10,7 @@ import static seedu.duke.common.Messages.LIST_AVAILABLE_MESSAGE;
  * Class encapsulating an exit command.
  */
 public class ListAvailableCommand extends Command {
+    public static final String COMMAND_WORD = "list available";
 
     /**
      * Single constructor, no parameters.

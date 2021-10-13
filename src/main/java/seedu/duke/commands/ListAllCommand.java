@@ -10,6 +10,7 @@ import static seedu.duke.common.Messages.LIST_ALL_MESSAGE;
  * Class encapsulating an exit command.
  */
 public class ListAllCommand extends Command {
+    public static final String COMMAND_WORD = "list";
 
     /**
      * Single constructor, no parameters.

@@ -10,6 +10,7 @@ import static seedu.duke.common.Messages.NO_ID;
 import static seedu.duke.common.Messages.RM_INVALID_ID;
 
 public class LoanCommand extends Command {
+    public static final String COMMAND_WORD = "loan";
     private static final String BORROWED_STATUS = "Borrowed";
     protected String args; // Format: loan [ID]
     protected String id;

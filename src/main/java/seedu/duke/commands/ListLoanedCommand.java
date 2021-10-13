@@ -10,6 +10,7 @@ import static seedu.duke.common.Messages.LIST_LOANED_MESSAGE;
  * Class encapsulating an exit command.
  */
 public class ListLoanedCommand extends Command {
+    public static final String COMMAND_WORD = "list loaned";
 
     /**
      * Single constructor, no parameters.

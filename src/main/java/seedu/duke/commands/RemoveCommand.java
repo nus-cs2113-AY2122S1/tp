@@ -12,10 +12,19 @@ public class RemoveCommand extends Command {
     public static final String COMMAND_REMOVE = "rm";
     protected String args;
 
+    /**
+     * Single constructor, takes in full line of input
+     * @param input
+     */
     public RemoveCommand(String input) {
         args = input;
     }
 
+    /**
+     *
+     * @param ui Object that handles user IO
+     * @param catalogue
+     */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         try {
