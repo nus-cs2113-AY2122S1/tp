@@ -76,6 +76,16 @@ public class Goal {
     }
 
     /**
+     * Sets a habit at user specified index as done
+     *
+     * @param habitIndex
+     */
+    public void doneHabit(int habitIndex) {
+        Habit habit = habitList.get(habitIndex);
+        habit.setCompleted();
+    }
+
+    /**
      * Gets the number of habits in a goal.
      *
      * @return Integer number of habits associated with the goal.
