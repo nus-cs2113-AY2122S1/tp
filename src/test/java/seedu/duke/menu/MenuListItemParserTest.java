@@ -15,7 +15,7 @@ public class MenuListItemParserTest {
         assertEquals(0, masterList.menuListSize);
     }
 
-    @Test
+    /*@Test
     void deleteMenuItem_validMasterList_success() {
         MenuList masterList = new MenuList();
         MenuParser menuParser = new MenuParser();
@@ -25,6 +25,6 @@ public class MenuListItemParserTest {
         assertEquals(1, masterList.menuListSize);
         menuParser.removeMenu(deleteCommand, masterList);
         assertEquals(0, masterList.menuListSize);
-    }
+    }*/
 
 }

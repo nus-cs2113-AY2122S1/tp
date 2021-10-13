@@ -18,14 +18,13 @@ import java.util.Scanner;
 
 public class Storage {
 
-    public static final String PATH = "Duke.txt";
+    public static final String FILE_NAME = "Duke.txt";
 
-    public static File loadStorage(EmployeeList employeeList, MenuList menuList, IngredientList ingredientList) {
+    public static void loadStorage(EmployeeList employeeList, MenuList menuList, IngredientList ingredientList) {
+        File file = new File(FILE_NAME);
         EmployeeParser employeeParser = new EmployeeParser();
         MenuParser menuParser = new MenuParser();
         IngredientParser ingredientParser = new IngredientParser();
-
-        File file = new File(PATH);
         if (!file.exists()) {
             System.out.println("File is not found!");
         }
@@ -51,7 +50,6 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println("Cannot read the file");
         }
-        return file;
     }
 
     private static Employee decodeEmployee(String toRead) {
@@ -76,7 +74,8 @@ public class Storage {
     private static String encodeIngredient(String toWrite) {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 2);
-        encodedItem = "add-ingredient" + "|" + description[0] + "|" + description[1].substring(1, description[1].length() - 1);
+        encodedItem = "add-ingredient" + "|" + description[0] + "|"
+                + description[1].substring(1, description[1].length() - 1);
         assert (!encodedItem.contains("["));
         assert (!encodedItem.contains("]"));
         return encodedItem;
@@ -96,9 +95,10 @@ public class Storage {
         return encodedItem;
     }
 
-    public static void saveStorage(EmployeeList employeeList, MenuList menuList, IngredientList ingredientList, File file) {
+    public static void saveStorage(EmployeeList employeeList, MenuList menuList,
+                                   IngredientList ingredientList) {
         try {
-            FileWriter fileWriter = new FileWriter(file);
+            FileWriter fileWriter = new FileWriter(FILE_NAME);
 
             for (int i = 0; i < employeeList.employeeList.size(); i += 1) {
                 Employee employee = employeeList.employeeList.get(i);
@@ -115,6 +115,8 @@ public class Storage {
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("Cannot be written in the file!");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Exception out of bounds array caught");
         }
     }
 

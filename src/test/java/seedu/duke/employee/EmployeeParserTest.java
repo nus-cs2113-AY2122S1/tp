@@ -2,7 +2,7 @@ package seedu.duke.employee;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EmployeeParserTest {
 
@@ -19,6 +19,6 @@ class EmployeeParserTest {
         EmployeeList masterList = new EmployeeList();
         EmployeeParser test = new EmployeeParser();
         test.listEmployee(masterList);
-        assertEquals(0, masterList.totalEmployee );
+        assertEquals(0, masterList.totalEmployee);
     }
 }
