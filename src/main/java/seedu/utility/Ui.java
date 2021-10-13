@@ -119,6 +119,7 @@ public class Ui {
     }
 
     private void printIncomeList(ArrayList<Income> incomes) {
+        assert incomes.size() > 0;
         System.out.println(LISTING_INCOME_MESSAGE);
         printLine();
 
@@ -131,6 +132,7 @@ public class Ui {
     }
 
     private void printExpenseList(ArrayList<Expense> expenses) {
+        assert expenses.size() > 0;
         System.out.println(LISTING_EXPENSE_MESSAGE);
         printLine();
 

@@ -159,7 +159,7 @@ public class Parser {
     private Command prepareAddIncome(String arguments) {
         final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments.trim());
         if (!matcher.matches()) {
-            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
 
         String userGivenAmount = matcher.group("amount").trim();
@@ -186,7 +186,7 @@ public class Parser {
     private Command prepareDeleteExpense(String arguments) {
         final Matcher matcher = DELETE_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
         if (!matcher.matches()) {
-            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
         
         String userGivenIndex = matcher.group("index").trim();
@@ -208,7 +208,7 @@ public class Parser {
     private Command prepareDeleteIncome(String arguments) {
         final Matcher matcher = DELETE_INCOME_ARGUMENT_FORMAT.matcher(arguments.trim());
         if (!matcher.matches()) {
-            return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
 
         String userGivenIndex = matcher.group("index").trim();
@@ -227,35 +227,35 @@ public class Parser {
         if (arguments.trim().isBlank()) {
             return new ListExpenseCommand();
         } 
-        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareListIncome(String arguments) {
         if (arguments.trim().isBlank()) {
             return new ListIncomeCommand();
         }
-        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
     private Command prepareTotalExpense(String arguments) {
         if (arguments.trim().isBlank()) {
             return new TotalExpenseCommand();
         }
-        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareTotalIncome(String arguments) {
         if (arguments.trim().isBlank()) {
             return new TotalIncomeCommand();
         }
-        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
     private Command prepareExit(String arguments) {
         if (arguments.trim().isBlank()) {
             return new ExitCommand();
         }
-        return new InvalidCommand("Invalid command. Use \"help\" to show the list of possible commands.");
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
     private double parseExpense(String userGivenAmount) throws InvalidExpenseException {
