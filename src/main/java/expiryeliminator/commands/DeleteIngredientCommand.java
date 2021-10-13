@@ -11,6 +11,10 @@ import expiryeliminator.data.exception.NotFoundException;
 public class DeleteIngredientCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "delete";
+    public static final String MESSAGE_USAGE =
+            COMMAND_WORD + ": Deletes an ingredient from the ingredient repository.\n"
+                    + "Parameters: i/INGREDIENT\n"
+                    + "Example: " + COMMAND_WORD + " i/Red Apple";
 
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
     private static final String MESSAGE_INGREDIENT_DELETED = "I've deleted this ingredient for you:\n" + "%1$s\n"
@@ -18,18 +22,25 @@ public class DeleteIngredientCommand extends Command {
 
     private final String ingredientName;
 
+    /**
+     * Initialises command and stores relevant parameters.
+     *
+     * @param ingredientName Name of ingredient to be deleted.
+     */
     public DeleteIngredientCommand(String ingredientName) {
+        assert ingredientName != null && !ingredientName.isBlank();
         this.ingredientName = ingredientName;
     }
 
     @Override
-    public String execute(IngredientList ingredientList, RecipeList recipes) {
+    public String execute(IngredientList ingredients, RecipeList recipes) {
+        assert ingredients != null;
         final Ingredient ingredient;
         try {
-            ingredient = ingredientList.remove(ingredientName);
+            ingredient = ingredients.remove(ingredientName);
         } catch (NotFoundException e) {
             return MESSAGE_INGREDIENT_NOT_FOUND;
         }
-        return String.format(MESSAGE_INGREDIENT_DELETED, ingredient, ingredientList.size());
+        return String.format(MESSAGE_INGREDIENT_DELETED, ingredient, ingredients.size());
     }
 }

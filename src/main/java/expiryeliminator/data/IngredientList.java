@@ -28,6 +28,7 @@ public class IngredientList {
      * @throws DuplicateDataException If the ingredient already exists.
      */
     public void add(Ingredient ingredient) throws DuplicateDataException {
+        assert ingredient != null;
         if (contains(ingredient)) {
             throw new DuplicateDataException();
         }
@@ -59,6 +60,7 @@ public class IngredientList {
      * @return {@code true} if the ingredient list contains the specified ingredient.
      */
     public boolean contains(Ingredient ingredient) {
+        assert ingredient != null;
         return ingredients.containsKey(ingredient.getName());
     }
 

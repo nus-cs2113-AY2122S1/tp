@@ -13,7 +13,7 @@ public class Recipe {
      * @param name The name of the recipe
      * @param ingredients The ingredients for the recipe
      */
-    public Recipe(String name,IngredientList ingredients) {
+    public Recipe(String name, IngredientList ingredients) {
         this.name = name;
         this.ingredients = ingredients;
     }
@@ -38,11 +38,12 @@ public class Recipe {
 
     @Override
     public String toString() {
-        String ingredientsWithQuantities = name + "\n";
+        StringBuilder ingredientsWithQuantities = new StringBuilder(name + "\n");
         for (Ingredient ingredient : ingredients.getIngredients()) {
-            ingredientsWithQuantities += "- " + ingredient.getName() + " (qty: " + ingredient.getQuantity() + ")\n";
+            ingredientsWithQuantities.append("- ").append(ingredient.getName())
+                    .append(" (qty: ").append(ingredient.getQuantity()).append(")\n");
         }
-        return ingredientsWithQuantities;
+        return ingredientsWithQuantities.toString();
     }
 
     //TODO(vincentlauhl): Allow users to modify recipe.
