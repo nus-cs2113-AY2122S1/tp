@@ -15,7 +15,11 @@ import seedu.commands.ExitCommand;
 
 import seedu.entry.Expense;
 import seedu.entry.Income;
-import seedu.exceptions.*;
+
+import seedu.exceptions.InvalidExpenseException;
+import seedu.exceptions.InvalidExpenseIndexException;
+import seedu.exceptions.InvalidIncomeException;
+import seedu.exceptions.InvalidIncomeIndexException;
 import seedu.utility.Messages;
 
 import java.util.regex.Matcher;
