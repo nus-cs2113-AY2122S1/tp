@@ -3,12 +3,16 @@ package seedu.duke;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class Storage {
 
     public static ArrayList<Trip> listOfTrips = new ArrayList<>();
-    private static Scanner scanner;
     private static Trip openTrip = null;
+
+    private static Scanner scanner;
+
+    private static Logger logger;
 
     private static final ArrayList<String> validCommands = new ArrayList<>(
             Arrays.asList("create", "edit", "view", "open", "list", "summary", "delete", "expense", "quit"));
@@ -59,5 +63,14 @@ public class Storage {
     public static void closeTrip() {
         Storage.openTrip = null;
     }
+
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public static void setLogger(Logger logger) {
+        Storage.logger = logger;
+    }
+
 
 }

@@ -29,6 +29,7 @@ public class Trip {
      * @param newTripInfo array containing one attribute in each element
      */
     public Trip(String[] newTripInfo) {
+        assert newTripInfo.length == 5;
         this.location = newTripInfo[0];
         setDateOfTrip(newTripInfo[1]);
         setExchangeRate(newTripInfo[2]);

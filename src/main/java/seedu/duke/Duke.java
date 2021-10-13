@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Duke {
 
@@ -26,6 +27,9 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         Storage.setScanner(in);
+
+        Logger logger = Logger.getLogger("ProgramLogger");
+        Storage.setLogger(logger);
 
         while (isProgramRunning) {
             isProgramRunning = Parser.parseUserInput(readUserInput(in));
