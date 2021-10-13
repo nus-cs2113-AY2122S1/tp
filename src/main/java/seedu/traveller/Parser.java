@@ -12,9 +12,16 @@ import seedu.traveller.exceptions.InvalidEditFormatException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.TravellerException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class Parser {
+    private static final Logger logger = Logger.getLogger(Parser.class.getName());
+
     public static Command parse(String rawInput) throws TravellerException {
+        logger.setLevel(Level.INFO);
+        logger.log(Level.FINE, "Parsing raw user input");
         Command command;
 
         String[] userInput = rawInput.split(" ", 5);
@@ -22,6 +29,7 @@ public class Parser {
 
         switch (userCommand) {
         case "new":
+            logger.log(Level.INFO, "New command input");
             try {
                 String tripName = userInput[1];  // TODO: Is there a better way to do this?
                 String startCountryCode = userInput[2];
@@ -32,6 +40,7 @@ public class Parser {
             }
             break;
         case "edit":
+            logger.log(Level.INFO, "Edit command input");
             try {
                 String tripName = userInput[1];
                 String startCountryCode = userInput[2];
@@ -42,21 +51,26 @@ public class Parser {
             }
             break;
         case "delete":
+            logger.log(Level.INFO, "Delete command input");
             String countryCode = userInput[1];
             command = new DeleteCommand(countryCode);
             break;
         case "viewall":
+            logger.log(Level.INFO, "Viewall command input");
             command = new ViewAllCommand();
             break;
         case "search":
+            logger.log(Level.INFO, "Search command input");
             String startCountryCode = userInput[1];
             String endCountryCode = userInput[2];
             command = new SearchCommand(startCountryCode, endCountryCode);
             break;
         case "exit":
+            logger.log(Level.INFO, "Exit command input");
             command = new ExitCommand();
             break;
         default:
+            logger.log(Level.WARNING, "Invalid command input!");
             throw new CommandNotFoundException(rawInput);
         }
         return command;

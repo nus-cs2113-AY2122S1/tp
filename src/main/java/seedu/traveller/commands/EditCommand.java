@@ -10,20 +10,32 @@ import seedu.traveller.worldmap.MinCalcResult;
 import seedu.traveller.worldmap.WorldMap;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class EditCommand extends Command {
+    private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
     private final String tripName;
     private final String startCountry;
     private final String endCountry;
 
     public EditCommand(String tripName, String startCountry, String endCountry) {
+        logger.setLevel(Level.INFO);
         this.tripName = tripName;
         this.startCountry = startCountry;
         this.endCountry = endCountry;
+        logger.log(Level.INFO, "Created an edit command: " + this);
     }
 
     @Override
+    public String toString() {
+        return "Edit command:"
+                + "\n\ttripName: " + tripName
+                + "\n\tstartCountry: " + startCountry
+                + "\n\tendCountry: " + endCountry;
+    }
+
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
         int tripIndex = tripsList.getTripIndex(this.tripName);
         if (tripIndex == -1) {

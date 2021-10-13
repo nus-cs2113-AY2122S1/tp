@@ -1,10 +1,19 @@
 package seedu.traveller;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 public class Ui {
+    private static final Logger logger = Logger.getLogger(Ui.class.getName());
     private final Scanner scanner = new Scanner(System.in);
+
+    public Ui() {
+        logger.setLevel(Level.INFO);
+        logger.log(Level.FINE, "Created a ui");
+    }
 
     public String readCommand() {
         return scanner.nextLine();

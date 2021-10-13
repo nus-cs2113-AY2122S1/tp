@@ -6,15 +6,20 @@ import seedu.traveller.worldmap.MinCalcResult;
 import seedu.traveller.worldmap.WorldMap;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class SearchCommand extends Command {
+    private static final Logger logger = Logger.getLogger(SearchCommand.class.getName());
     private final String startCountry;
     private final String endCountry;
 
     public SearchCommand(String startCountry, String endCountry) {
+        logger.setLevel(Level.INFO);
         this.startCountry = startCountry;
         this.endCountry = endCountry;
+        logger.log(Level.INFO, "Created an search command: " + this);
     }
 
     public String getStartCountry() {
@@ -27,7 +32,9 @@ public class SearchCommand extends Command {
 
     @Override
     public String toString() {
-        return "search: " + getStartCountry() + " to " + getEndCountry();
+        return "Search command: "
+                + "\n\tstartCountry: " + startCountry
+                + "\n\tendCountry: " + endCountry;
     }
 
     public void execute(TripsList tripsList, Ui ui) {

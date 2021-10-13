@@ -9,7 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class NewCommandTest {
     @Test
     public void newCommand_create_success() {
+        final String expectedOutput = "New command:"
+                + "\n\ttripName: testTrip"
+                + "\n\tstartCountry: MLY"
+                + "\n\tendCountry: CHN";
         NewCommand newCommand = new NewCommand("testTrip", "MLY", "CHN");
-        assertEquals("new testTrip: MLY to CHN", newCommand.toString());
+        assertEquals(expectedOutput, newCommand.toString());
     }
 }
