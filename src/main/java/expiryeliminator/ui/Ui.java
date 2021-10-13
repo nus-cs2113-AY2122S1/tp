@@ -41,6 +41,7 @@ public class Ui {
      * @param text Text to be printed out.
      */
     public void showToUser(String text) {
+        assert text != null;
         System.out.println(INDENTED_HORIZONTAL_LINE);
         System.out.println(addPrefixAndReplaceNewline(text));
         System.out.println(INDENTED_HORIZONTAL_LINE);
@@ -62,6 +63,7 @@ public class Ui {
      * @return Processed text.
      */
     private String addPrefixAndReplaceNewline(String text) {
+        assert text != null;
         String[] lines = text.split("\n");
         for (int i = 0; i < lines.length; i++) {
             if (lines[i].isBlank()) {
