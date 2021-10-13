@@ -76,8 +76,8 @@ public class Parser {
         double ingredientAmount = Double.parseDouble(details[2].trim());
         String ingredientUnits = details[3].trim();
         String ingredientExpiry = details[4].trim();
-        Ingredient updatedIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
-
+        Ingredient updatedIngredient =
+                new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
         resultMsg = new UpdateCommand(updatedIngredient).run();
 
         if (resultMsg == "") {
@@ -94,23 +94,23 @@ public class Parser {
      * @return Ingredient added message
      */
     private static String parseAddCommand(String command) throws DukeException {
-        String[] userInput = command.split(INGREDIENT_NAME_SEPARATOR + "|" + INGREDIENT_AMOUNT_SEPARATOR
-                + "|" + INGREDIENT_UNITS_SEPARATOR + "|" + INGREDIENT_EXPIRY_SEPARATOR);
-        if (userInput.length != 5) {
+        String delimiter = "n/|a/|u/|e/";
+        String[] details = command.split(delimiter);
+        if (details.length != 5) {
             throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
         }
 
-        assert (userInput.length == 5);
+        assert (details.length == 5);
 
-        String ingredientName = userInput[1];
+        String ingredientName = details[1].trim();
         double ingredientAmount;
         try {
-            ingredientAmount = Double.parseDouble(userInput[2]);
+            ingredientAmount = Double.parseDouble(details[2]);
         } catch (NumberFormatException e) {
             throw new DukeException(NUMBER_FORMAT_MESSAGE);
         }
-        String ingredientUnit = userInput[3];
-        String ingredientExpiry = userInput[4];
+        String ingredientUnit = details[3].trim();
+        String ingredientExpiry = details[4].trim();
 
         Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnit, ingredientExpiry);
         return new AddCommand(newIngredient).run();
