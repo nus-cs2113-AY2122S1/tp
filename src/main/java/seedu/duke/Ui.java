@@ -7,14 +7,7 @@ public class Ui {
     }
 
     public static void printWelcome() {
-
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
+        System.out.println("Hello!");
     }
 
     public static void goodBye() {
@@ -30,23 +23,58 @@ public class Ui {
         System.out.println(person.getName() + " | " + person.getAmtOwedToUser());
     }
 
+    public static void printMoney(double val) {
+        String money = String.format("%.02f", val);
+        System.out.println(money);
+    }
+
     public static void printExpenseDetails(Expense e) {
         System.out.println(e);
     }
 
     public static void printExpensesSummary(Trip t) {
         System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
-        System.out.println("Total budget for this trip: " + t.getBudget());
-        System.out.println("Total expenditure so far: " + t.getTotalExpenses());
-        System.out.println("Current budget left for this trip: " + t.getBudgetLeft());
+        System.out.print("Total budget for this trip: ");
+        printMoney(t.getBudget());
+        System.out.print("Total expenditure so far: ");
+        printMoney(t.getTotalExpenses());
+        System.out.print("Current budget left for this trip: ");
+        printMoney(t.getBudgetLeft());
     }
 
     public static void printExpenseAddedSuccess() {
         System.out.println("Your expense has been added successfully");
     }
 
+    public static void printExpensesInList(Expense expense, int index) {
+        System.out.print(index + ". " + expense.getDescription() + " | Cost: ");
+        printMoney(expense.getAmountSpent());
+    }
+
+    public static void printOpenTripMessage(Trip trip) {
+        System.out.println("You have opened the following trip: "
+                + System.lineSeparator()
+                + trip.getLocation() + " | " + trip.getDateOfTripString());
+    }
+
+    public static void printTripsInList(Trip trip, int index) {
+        System.out.println(index + ". " + trip.getLocation() + " | " + trip.getDateOfTripString());
+    }
+
+    public static void printCreateFormatError() {
+        System.out.println("Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "create [place] [date] [exchange rate] [budget] [people].");
+    }
+
+    public static void printExpenseFormatError() {
+        System.out.println("Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "expense [amount] [category] [people] /[description].");
+    }
+
     public static void printBudgetFormatError() {
-        System.out.print("Please re-enter your budget as a decimal number (e.g. 1.32): ");
+        System.out.print("Please re-enter your budget as a decimal number (e.g. 2000.00): ");
     }
 
     public static void printExchangeRateFormatError() {
@@ -71,13 +99,68 @@ public class Ui {
         System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
     }
 
-    public static void printDeleteTripSuccessful(Trip tripToRemove) {
-        System.out.println("Your trip to " + tripToRemove.getLocation() + " on "
-                + tripToRemove.getDateOfTripString() + " has been successfully removed");
+    public static void printUnknownExpenseIndexError() {
+        System.out.println("Sorry, no such expense number exists. Please check your expense number and try again.");
+    }
+
+    public static void printNoTripError() {
+        System.out.println("You have not created a trip yet. Please create a trip using the keyword 'create'.");
+    }
+
+    public static void printDeleteTripSuccessful(String tripLocation, String tripDate) {
+        System.out.println("Your trip to " + tripLocation + " on "
+                + tripDate + " has been successfully removed");
+    }
+
+    public static void printDeleteExpenseSuccessful(Double expenseAmount) {
+        System.out.println("Your expense of " + expenseAmount + " has been successfully removed");
+    }
+
+    public static void printNoExpensesError() {
+        System.out.println("There are no expenses in your trip, please add an expense using the keyword 'expense'.");
     }
 
     public static void printNoOpenTripError() {
         System.out.println("You have not opened any trip yet. Please open a trip to edit expenses within the trip.");
+        printAllTrips();
+        System.out.print("Please enter the trip you would like to open: ");
     }
 
+    public static void printAllTrips() {
+        System.out.println("List of Trips: ");
+        for (int i = 0; i < Storage.listOfTrips.size(); i++) {
+            System.out.print("\t");
+            System.out.println(i + 1 + ". "
+                    + Storage.listOfTrips.get(i).getLocation() + " "
+                    + Storage.listOfTrips.get(i).getDateOfTripString());
+
+        }
+    }
+
+    public static void emptyArgForOpenCommand() {
+        System.out.println();
+        System.out.println("Which trip to open?");
+        System.out.println("Syntax: open [trip number]");
+        System.out.println("--------------------------");
+        printAllTrips();
+        System.out.println("--------------------------");
+
+    }
+
+    public static void argNotNumber() {
+        System.out.println("Input is not a number");
+    }
+
+    public static void emptyArgForDeleteCommand() {
+        System.out.println();
+        System.out.println("Which trip to delete?");
+        System.out.println("Syntax: delete [trip number]");
+        System.out.println("---------------------------");
+        printAllTrips();
+        System.out.println("---------------------------");
+    }
+
+    public static void printInvalidDeleteFormatError() {
+        System.out.println("Your current format is wrong. Please follow the proper format of 'delete type index'.");
+    }
 }

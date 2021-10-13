@@ -6,11 +6,12 @@ import java.util.ArrayList;
 
 public class Storage {
 
+    public static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static Scanner scanner;
     private static Trip openTrip = null;
 
     private static final ArrayList<String> validCommands = new ArrayList<>(
-            Arrays.asList("create", "edit", "summary", "delete", "expense", "quit", "open", "close", "switch"));
+            Arrays.asList("create", "edit", "view", "open", "list", "summary", "delete", "expense", "quit"));
 
     public static Scanner getScanner() {
         return scanner;
@@ -24,11 +25,31 @@ public class Storage {
         return validCommands;
     }
 
+
     public static Trip getOpenTrip() {
         if (openTrip == null) {
             Ui.printNoOpenTripError();
+            promptUserForValidTrip();
         }
         return openTrip;
+    }
+
+    private static void promptUserForValidTrip() {
+        try {
+            int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
+            setOpenTrip(listOfTrips.get(tripIndex));
+        } catch (NumberFormatException e) {
+            Ui.argNotNumber();
+        }
+    }
+
+    /**
+     * Checks if there is an open trip or not.
+     *
+     * @return true if there is an open trip
+     */
+    public static boolean checkOpenTrip() {
+        return openTrip != null;
     }
 
     public static void setOpenTrip(Trip openTrip) {

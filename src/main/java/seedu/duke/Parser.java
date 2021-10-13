@@ -1,101 +1,209 @@
 package seedu.duke;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Parser {
 
     /**
      * Parses the user-entered command and additional information/flags.
-     * 
+     *
      * @param userInput the {@link String} containing the user input
-     * @param listOfTrips the list of trips that the user has added to the program
      * @return whether the program should continue running after processing the given user input
      */
-    public static boolean parseUserInput(String userInput, ArrayList<Trip> listOfTrips) {
-        String[] userInputSplit = userInput.split(" ", 2);
-        String inputCommand = userInputSplit[0].toLowerCase();
-        String inputDescription = null;
-        if (userInputSplit[0].equals("close")) {
+    public static boolean parseUserInput(String userInput) {
+        String[] rawInput = userInput.split(" ", 2);
+        String inputCommand = rawInput[0].toLowerCase();
+        String inputParams = null;
+
+        if (rawInput.length == 2) {
+            inputParams = rawInput[1];
+        }
+
+        if (inputCommand.equals("quit")) {
+            Ui.goodBye();
+            return false;
+        } else if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
+            Ui.printNoTripError();
+            return true;
+        } else if (inputCommand.equals("close")) {
             Storage.closeTrip();
             return true;
-        }
-        if (!checkValidCommand(inputCommand) || (userInputSplit.length == 1 && !inputCommand.equals("quit"))) {
+        } else if (!checkValidCommand(inputCommand)) {
             Ui.printUnknownCommandError();
             return true;
-        } else if (!inputCommand.equals("quit")) {
-            inputDescription = userInputSplit[1];
         }
 
         switch (inputCommand) {
         case "create":
-            String[] newTripInfo = inputDescription.split(" ");
-            Trip newTrip = new Trip(newTripInfo);
-            listOfTrips.add(newTrip);
-            System.out.println("Your trip to " + newTrip.getLocation() + " on "
-                    + newTrip.getDateOfTripString() + " has been successfully added!");
-            break;
-        case "edit":
-            String[] tripToEditInfo = inputDescription.split(" ", 2);
             try {
-                int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
-                String attributesToEdit = tripToEditInfo[1];
-                Trip tripToEdit = listOfTrips.get(indexToEdit);
-                editTripPerAttribute(tripToEdit, attributesToEdit);
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
+                assert inputParams != null;
+                executeCreate(inputParams);
+            } catch (IndexOutOfBoundsException | NullPointerException e) {
+                Ui.printCreateFormatError();
             }
             break;
+
+        case "edit":
+            try {
+                assert inputParams != null;
+                executeEdit(inputParams);
+            } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
+                Ui.printUnknownTripIndexError();
+            }
+            break;
+
         case "open":
             try {
-                int indexToGet = Integer.parseInt(inputDescription) - 1;
-                Storage.setOpenTrip(listOfTrips.get(indexToGet));
+                assert inputParams != null;
+                executeOpen(inputParams);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 Ui.printSingleUnknownTripIndexError();
+                System.out.println();
+            } catch (NullPointerException e) {
+                Ui.emptyArgForOpenCommand();
             }
             break;
+
         case "summary":
-            String[] tripToGetInfo = inputDescription.split(" ", 2);
-            String tripNumber = tripToGetInfo[0];
             try {
-                int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
-                Trip tripToGet = listOfTrips.get(indexToGet);
-                Ui.printExpensesSummary(tripToGet);
+                assert inputParams != null;
+                executeSummary();
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("There is no matching trip index. Please try again.");
+                Ui.printUnknownTripIndexError();
             }
             break;
+
         case "view":
-            tripToGetInfo = inputDescription.split(" ", 2);
+            executeView();
+            break;
+
+        case "delete":
             try {
-                int indexToGet = Integer.parseInt(tripToGetInfo[0]) - 1;
-                Trip tripToGet = listOfTrips.get(indexToGet);
-                tripToGet.viewAllExpenses();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("There is no matching trip index. Please try again.");
+                assert inputParams != null;
+                executeDelete(inputParams);
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                Ui.printUnknownTripIndexError();
+            } catch (NullPointerException e) {
+                Ui.emptyArgForDeleteCommand();
             }
             break;
-        case "delete":
-            deleteTrip(listOfTrips, inputDescription);
+
+        case "list":
+            executeList();
             break;
+
         case "expense":
-            String[] expenseInfo = inputDescription.split(" ");
-            int tripIndex = Integer.parseInt(expenseInfo[0]) - 1;
-            Trip currentTrip = listOfTrips.get(tripIndex);
-            Double expenseAmount = Double.parseDouble(expenseInfo[1]);
-            String expenseDescription = expenseInfo[2];
-            String personChained = expenseInfo[3];
-            String[] personSplit = personChained.split(",");
-            ArrayList<Person> listOfPersonsIncluded = getPersons(tripIndex, personSplit, currentTrip);
-            currentTrip.addExpense(new Expense(expenseAmount, expenseDescription, listOfPersonsIncluded));
-            Ui.printExpenseAddedSuccess();
+            try {
+                assert inputParams != null;
+                executeExpense(inputParams);
+            } catch (NullPointerException | IndexOutOfBoundsException e) {
+                Ui.printExpenseFormatError();
+            }
             break;
-        case "quit":
-            Ui.goodBye();
-            return false;
+
         default:
             Ui.printUnknownCommandError();
         }
         return true;
+    }
+
+    private static void executeCreate(String indexAsString) {
+        String[] newTripInfo = indexAsString.split(" ", 5);
+        Trip newTrip = new Trip(newTripInfo);
+        Storage.listOfTrips.add(newTrip);
+        System.out.println("Your trip to " + newTrip.getLocation() + " on "
+                + newTrip.getDateOfTripString() + " has been successfully added!");
+    }
+
+    private static void executeEdit(String inputDescription) {
+        String[] tripToEditInfo = inputDescription.split(" ", 2);
+        int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
+        String attributesToEdit = tripToEditInfo[1];
+        Trip tripToEdit = Storage.listOfTrips.get(indexToEdit);
+        editTripPerAttribute(tripToEdit, attributesToEdit);
+    }
+
+    //assumes that listOfTrips have at least 1 trip
+    private static void executeOpen(String indexAsString) {
+        int indexToGet = Integer.parseInt(indexAsString) - 1;
+        Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
+        Ui.printOpenTripMessage(Storage.listOfTrips.get(indexToGet));
+    }
+
+    private static void executeSummary() {
+        Ui.printExpensesSummary(Storage.getOpenTrip());
+    }
+
+    private static void executeView() {
+        Storage.getOpenTrip().viewAllExpenses();
+    }
+
+    private static void executeDelete(String inputParams) {
+        String[] splitInputParams = inputParams.split(" ", 2);
+        String type = splitInputParams[0];
+        Integer index = Integer.parseInt(splitInputParams[1]) - 1;
+        if (type.equals("trip")) {
+            executeDeleteTrip(index);
+        } else if (type.equals("expense")) {
+            executeDeleteExpense(index);
+        } else {
+            Ui.printInvalidDeleteFormatError();
+        }
+
+    }
+
+    private static void executeDeleteExpense(Integer expenseIndex) {
+        try {
+            Trip currentTrip = Storage.getOpenTrip();
+            Expense expenseToDelete = currentTrip.getListOfExpenses().get(expenseIndex);
+            Double expenseAmount = expenseToDelete.getAmountSpent();
+            currentTrip.removeExpense(expenseIndex);
+            Ui.printDeleteExpenseSuccessful(expenseAmount);
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printUnknownExpenseIndexError();
+        }
+    }
+
+    private static void executeDeleteTrip(Integer tripIndex) {
+        try {
+            String tripLocation = Storage.listOfTrips.get(tripIndex).getLocation();
+            String tripDate = Storage.listOfTrips.get(tripIndex).getDateOfTripString();
+            Storage.listOfTrips.remove(tripIndex);
+            Ui.printDeleteTripSuccessful(tripLocation, tripDate);
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printUnknownTripIndexError();
+        }
+
+    }
+
+    private static void executeList() {
+        int index = 1;
+        if (!Storage.checkOpenTrip()) {
+            for (Trip trip : Storage.listOfTrips) {
+                Ui.printTripsInList(trip, index);
+                index++;
+            }
+        } else {
+            for (Expense expense : Storage.getOpenTrip().getListOfExpenses()) {
+                Ui.printExpensesInList(expense, index);
+                index++;
+            }
+            if (index == 1) {
+                Ui.printNoExpensesError();
+            }
+        }
+    }
+
+    private static void executeExpense(String inputDescription) {
+        Trip currTrip = Storage.getOpenTrip();
+        String[] expenseInfo = inputDescription.split(" ", 3);
+        Double expenseAmount = Double.parseDouble(expenseInfo[0]);
+        String expenseCategory = expenseInfo[1].toLowerCase();
+        ArrayList<Person> listOfPersonsIncluded = checkValidPersons(Storage.getOpenTrip(), expenseInfo[2]);
+        String expenseDescription = getDescription(expenseInfo[2]);
+        currTrip.addExpense(new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription));
+        Ui.printExpenseAddedSuccess();
     }
 
     private static boolean checkValidCommand(String inputCommand) {
@@ -104,32 +212,29 @@ public class Parser {
 
     /**
      * Obtains a list of Person objects from array of names of people.
-     * @param tripIndex Index of trip to check
-     * @param personSplit Names of people involved in expense
+     *
+     * @param userInput the input of the user
      * @return listOfPersons ArrayList containing Person objects included in the expense
      */
-    private static ArrayList<Person> getPersons(int tripIndex, String[] personSplit, Trip currentTrip) {
-        ArrayList<Person> listOfPersons = new ArrayList<>();
-        ArrayList<Person> personsInTrip = currentTrip.getListOfPersons();
-        Person personToAdd = null;
-        for (String nameToCheck : personSplit) {
-            for (Person currentPersonInTrip : personsInTrip) {
-                String name = currentPersonInTrip.getName();
-                if (nameToCheck.equals(name)) {
-                    personToAdd = currentPersonInTrip;
+    private static ArrayList<Person> checkValidPersons(Trip currentTrip, String userInput) {
+        String[] listOfPeople = userInput.split("/")[0].split(",");
+        ArrayList<Person> validListOfPeople = new ArrayList<>();
+        for (String name : listOfPeople) {
+            for (Person person : currentTrip.getListOfPersons()) {
+                if (name.trim().equalsIgnoreCase(person.getName())) {
+                    validListOfPeople.add(person);
                     break;
                 }
             }
-            if (personToAdd != null) {
-                listOfPersons.add(personToAdd);
-            }
         }
-        return listOfPersons;
+        return validListOfPeople;
     }
 
+    private static String getDescription(String userInput) {
+        return userInput.split("/")[1].trim();
+    }
 
     private static void editTripPerAttribute(Trip tripToEdit, String attributesToEdit) {
-
         String[] attributesToEditSplit = attributesToEdit.split("-");
         for (String attributeToEdit : attributesToEditSplit) {
             String[] splitCommandAndData = attributeToEdit.split(" ");
@@ -162,37 +267,6 @@ public class Parser {
                 System.out.println(splitCommandAndData[0] + "was not recognised. "
                         + "Please try again after this process is complete");
             }
-
         }
-
-    }
-
-    private static void deleteTrip(ArrayList<Trip> listOfTrips, String s) {
-        try {
-            int indexToDelete = Integer.parseInt(s);
-            Trip tripToRemove = listOfTrips.get(indexToDelete - 1);
-            listOfTrips.remove(indexToDelete - 1);
-            Ui.printDeleteTripSuccessful(tripToRemove);
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            Ui.printUnknownTripIndexError();
-        }
-    }
-
-    /**
-     * Splits the user-entered {@link String} of people involved in a trip into a String array.
-     * 
-     * @param peopleChained String of all persons involved in the trip
-     * @return {@link String} array, each element of the array being a person involved in the trip
-     */
-    public static ArrayList<Person> splitPeople(String peopleChained) {
-
-        ArrayList<Person> listOfPeople = new ArrayList<>();
-        String[] peopleSplit = peopleChained.split(",");
-        for (int i = 0; i < peopleSplit.length; i++) {
-            Person person = new Person(peopleSplit[i], (i == 0));
-            listOfPeople.add(person);
-        }
-        return listOfPeople;
-
     }
 }
