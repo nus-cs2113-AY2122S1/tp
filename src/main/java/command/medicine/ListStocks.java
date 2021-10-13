@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * Helps to process the list command together with filters and sort.
  */
 
-public class ListCommand extends Command {
+public class ListStocks extends Command {
     private static Logger logger = Logger.getLogger("ListCommand");
 
     @Override
@@ -46,70 +46,70 @@ public class ListCommand extends Command {
             return;
         }
 
-        ArrayList<Medicine> filteredMedicines = new ArrayList<>();
+        ArrayList<Stock> filteredStocks = new ArrayList<>();
 
-        assert (filteredMedicines != null) : "Array is not initialised";
+        assert (filteredStocks != null) : "Array is not initialised";
 
         for (Medicine medicine : medicines) {
             if (medicine instanceof Stock) { // Ensure that it is a medicine object
-                filteredMedicines.add(medicine);
+                filteredStocks.add((Stock) medicine);
             }
         }
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
             case CommandParameters.STOCK_ID:
-                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
-                        .filter((m) -> ((Stock) m).getStockID() == Integer.parseInt(parameterValue))
+                filteredStocks = (ArrayList<Stock>) filteredStocks.stream()
+                        .filter((m) -> (m).getStockID() == Integer.parseInt(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.NAME:
-                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
+                filteredStocks = (ArrayList<Stock>) filteredStocks.stream()
                         .filter((m) -> (m.getMedicineName().toUpperCase()).contains(parameterValue.toUpperCase()))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.PRICE:
-                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
-                        .filter((m) -> ((Stock) m).getPrice() == Double.parseDouble(parameterValue))
+                filteredStocks = (ArrayList<Stock>) filteredStocks.stream()
+                        .filter((m) -> (m).getPrice() == Double.parseDouble(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.QUANTITY:
-                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
+                filteredStocks = (ArrayList<Stock>) filteredStocks.stream()
                         .filter((m) -> m.getQuantity() == Integer.parseInt(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.EXPIRY_DATE:
                 try {
                     Date expiryDate = DateParser.stringToDate(parameterValue);
-                    filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
-                            .filter((m) -> ((Stock) m).getExpiry().equals(expiryDate))
+                    filteredStocks = (ArrayList<Stock>) filteredStocks.stream()
+                            .filter((m) -> (m).getExpiry().equals(expiryDate))
                             .collect(Collectors.toList());
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 break;
             case CommandParameters.DESCRIPTION:
-                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
-                        .filter((m) -> (((Stock) m).getDescription().toUpperCase())
+                filteredStocks = (ArrayList<Stock>) filteredStocks.stream()
+                        .filter((m) -> (m.getDescription().toUpperCase())
                                 .contains(parameterValue.toUpperCase())).collect(Collectors.toList());
                 break;
             case CommandParameters.MAX_QUANTITY:
-                filteredMedicines = (ArrayList<Medicine>) filteredMedicines.stream()
-                        .filter((m) -> ((Stock) m).getMaxQuantity() == Integer.parseInt(parameterValue))
+                filteredStocks = (ArrayList<Stock>) filteredStocks.stream()
+                        .filter((m) -> m.getMaxQuantity() == Integer.parseInt(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.SORT:
-                filteredMedicines.sort(new StockComparator(parameterValue.toLowerCase(), false));
+                filteredStocks.sort(new StockComparator(parameterValue.toLowerCase(), false));
                 break;
             case CommandParameters.REVERSED_SORT:
-                filteredMedicines.sort(new StockComparator(parameterValue.toLowerCase(), true));
+                filteredStocks.sort(new StockComparator(parameterValue.toLowerCase(), true));
                 break;
             default:
                 ui.printInvalidParameter(parameter, CommandSyntax.LIST_COMMAND);
                 return;
             }
         }
-        ui.printStocks(filteredMedicines);
+        //ui.printStocks(filteredStocks);
         logger.log(Level.INFO, "Successful listing of stock");
     }
 }
