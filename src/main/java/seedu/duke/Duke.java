@@ -31,6 +31,7 @@ public class Duke {
      */
     public static void exit() {
         ui.printGoodbye();
+        LOGGER.log(Level.INFO, "Program exited");
         System.exit(0);
     }
 
