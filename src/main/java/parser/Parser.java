@@ -6,7 +6,7 @@ import command.PurgeCommand;
 import command.dispense.AddDispense;
 import command.medicine.AddCommand;
 import command.medicine.DeleteCommand;
-import command.medicine.ListCommand;
+import command.medicine.ListStock;
 import command.medicine.UpdateCommand;
 import errors.InvalidCommand;
 import inventory.Medicine;
@@ -84,7 +84,7 @@ public class Parser {
             new HelpCommand().execute(ui, parameters, medicines);
             break;
         case LIST:
-            new ListCommand().execute(ui, parameters, medicines);
+            new ListStock().execute(ui, parameters, medicines);
             break;
         case LIST_ORDERS:
             break;
