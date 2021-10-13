@@ -10,8 +10,9 @@ public class Habit {
      *
      * @param habitName Name of habit linked to a goal.
      */
-    public Habit(String habitName) {
+    public Habit(String habitName, boolean isDone) {
         this.habitName = habitName;
+        this.isDone = isDone;
     }
 
     /**
