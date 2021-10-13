@@ -11,6 +11,8 @@ public class Parser {
     private static final String COMMAND_LIST_AVAILABLE = "list available";
     private static final String COMMAND_LIST_LOANED = "list loaned";
     public static final String COMMAND_ADD = "add";
+    private static final String COMMAND_LOAN = "loan";
+    private static final String COMMAND_RETURN = "return";
 
     /**
      * Sole constructor.
@@ -37,6 +39,10 @@ public class Parser {
             return new ListLoanedCommand();
         } else if (input.startsWith(COMMAND_ADD)) {
             return new AddCommand(input);
+        } else if (input.startsWith(COMMAND_LOAN)) {
+            return new LoanCommand(input);
+        } else if (input.startsWith(COMMAND_RETURN)) {
+            return new ReturnCommand(input);
         } else {
             return new UnknownCommand();
         }

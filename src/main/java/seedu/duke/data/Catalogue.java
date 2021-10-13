@@ -29,6 +29,26 @@ public class Catalogue {
     }
 
     /**
+     * Searches for an item by the item ID.
+     * @param id Identifier of item to match
+     * @return Referenced item whose id matches the given input
+     * @throws NullPointerException If id provided does not reference any item
+     */
+    public Item getItem(String id) throws NullPointerException {
+        Item selected = null;
+        for (Item current : itemsArrayList) {
+            if (current.getID().equals(id)) {
+                selected = current;
+                break;
+            }
+        }
+        if (selected == null) {
+            throw new NullPointerException();
+        }
+        return selected;
+    }
+
+    /**
      * Adds an item to the ArrayList of items.
      *
      * @param newItem Item to be added
