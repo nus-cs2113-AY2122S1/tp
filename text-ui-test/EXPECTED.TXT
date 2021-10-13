@@ -10,9 +10,17 @@ date: 2021-10-13
 Amount Spent: 8.00
 People involved: [yikai, yuzhao]
 Category: food
+Enter your command: Sorry, no such expense number exists. Please check your expense number and try again.
+Enter your command: Your expense of 8.0 has been successfully removed
+Enter your command: Sorry, no such expense number exists. Please check your expense number and try again.
 Enter your command: This is the summary for your America trip 02 Feb 2021
 Total budget for this trip: 2000.00
-Total expenditure so far: 8.00
-Current budget left for this trip: 1992.00
+Total expenditure so far: 0.00
+Current budget left for this trip: 2000.00
+Enter your command: Sorry, no such trip number exists. Please check your trip number and try again.
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully removed
+Enter your command: This is the summary for your America trip 02 Feb 2021
+Total budget for this trip: 2000.00
+Total expenditure so far: 0.00
+Current budget left for this trip: 2000.00
 Enter your command: Goodbye!

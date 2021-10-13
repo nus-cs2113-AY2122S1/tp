@@ -1,5 +1,6 @@
 package seedu.duke;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Parser {
@@ -138,12 +139,42 @@ public class Parser {
         Storage.getOpenTrip().viewAllExpenses();
     }
 
-    private static void executeDelete(String indexAsString) {
-        int tripIndex = Integer.parseInt(indexAsString) - 1;
-        String tripLocation = Storage.listOfTrips.get(tripIndex).getLocation();
-        String tripDate = Storage.listOfTrips.get(tripIndex).getDateOfTripString();
-        Storage.listOfTrips.remove(tripIndex);
-        Ui.printDeleteTripSuccessful(tripLocation, tripDate);
+    private static void executeDelete(String inputParams) {
+        String[] splitInputParams = inputParams.split(" ", 2);
+        String type = splitInputParams[0];
+        Integer index = Integer.parseInt(splitInputParams[1]) - 1;
+        if (type.equals("trip")) {
+            executeDeleteTrip(index);
+        } else if (type.equals("expense")) {
+            executeDeleteExpense(index);
+        } else {
+            Ui.printInvalidDeleteFormatError();
+        }
+
+    }
+
+    private static void executeDeleteExpense(Integer expenseIndex) {
+        try {
+            Trip currentTrip = Storage.getOpenTrip();
+            Expense expenseToDelete = currentTrip.getListOfExpenses().get(expenseIndex);
+            Double expenseAmount = expenseToDelete.getAmountSpent();
+            currentTrip.removeExpense(expenseIndex);
+            Ui.printDeleteExpenseSuccessful(expenseAmount);
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printUnknownExpenseIndexError();
+        }
+    }
+
+    private static void executeDeleteTrip(Integer tripIndex) {
+        try {
+            String tripLocation = Storage.listOfTrips.get(tripIndex).getLocation();
+            String tripDate = Storage.listOfTrips.get(tripIndex).getDateOfTripString();
+            Storage.listOfTrips.remove(tripIndex);
+            Ui.printDeleteTripSuccessful(tripLocation, tripDate);
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printUnknownTripIndexError();
+        }
+
     }
 
     private static void executeList() {

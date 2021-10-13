@@ -99,6 +99,10 @@ public class Ui {
         System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
     }
 
+    public static void printUnknownExpenseIndexError() {
+        System.out.println("Sorry, no such expense number exists. Please check your expense number and try again.");
+    }
+
     public static void printNoTripError() {
         System.out.println("You have not created a trip yet. Please create a trip using the keyword 'create'.");
     }
@@ -106,6 +110,10 @@ public class Ui {
     public static void printDeleteTripSuccessful(String tripLocation, String tripDate) {
         System.out.println("Your trip to " + tripLocation + " on "
                 + tripDate + " has been successfully removed");
+    }
+
+    public static void printDeleteExpenseSuccessful(Double expenseAmount) {
+        System.out.println("Your expense of " + expenseAmount + " has been successfully removed");
     }
 
     public static void printNoExpensesError() {
@@ -150,5 +158,9 @@ public class Ui {
         System.out.println("---------------------------");
         printAllTrips();
         System.out.println("---------------------------");
+    }
+
+    public static void printInvalidDeleteFormatError() {
+        System.out.println("Your current format is wrong. Please follow the proper format of 'delete type index'.");
     }
 }
