@@ -16,7 +16,7 @@ public class Ui {
             + "███████    ██    ██    ██ ██ ██  ██ █████   ███████       ███   ██   ██ \n"
             + "     ██    ██    ██    ██ ██  ██ ██ ██  ██       ██      ██ ██  ██   ██ \n"
             + "███████    ██     ██████  ██   ████ ██   ██ ███████     ██   ██ ██████  ";
-    
+
     private static final String BYE_MESSAGE = "██████  ██    ██ ███████        ██  \n"
             + "██   ██  ██  ██  ██          ██  ██ \n"
             + "██████    ████   █████           ██ \n"
@@ -61,7 +61,7 @@ public class Ui {
     public String readCommand() {
         return in.nextLine().trim();
     }
-    
+
     /**
      * Prints the welcoming message for users that have entered the program.
      */
@@ -83,7 +83,7 @@ public class Ui {
      * Prints the filtered list of expenses in the financial tracker to the standard output.
      *
      * @param expenses The list of expenses in the financial tracker.
-     */ 
+     */
     public void listExpense(ArrayList<Expense> expenses) {
         printLine();
         if (expenses.isEmpty()) {
@@ -93,13 +93,13 @@ public class Ui {
         }
         printLine();
     }
-   
+
 
     /**
      * Prints the filtered list of incomes in the financial tracker to the standard output.
      *
      * @param incomes The list of incomes in the financial tracker.
-     */    
+     */
     public void listIncome(ArrayList<Income> incomes) {
         printLine();
         if (incomes.isEmpty()) {
@@ -117,7 +117,7 @@ public class Ui {
     private void printEmptyExpenseListMessage() {
         System.out.println(EMPTY_EXPENSE_MESSAGE);
     }
-    
+
     private void printIncomeList(ArrayList<Income> incomes) {
         System.out.println(LISTING_INCOME_MESSAGE);
         printLine();
@@ -133,7 +133,7 @@ public class Ui {
     private void printExpenseList(ArrayList<Expense> expenses) {
         System.out.println(LISTING_EXPENSE_MESSAGE);
         printLine();
-        
+
         int i = 1;
         for (Expense expense : expenses) {
             System.out.print(i + ": ");
@@ -240,7 +240,7 @@ public class Ui {
 
     /**
      * Prints the error message as feedback through the standard output.
-     * 
+     *
      * @param errorMessage The error message to be printed out due to certain exceptions or invalid inputs.
      */
     public void printError(String errorMessage) {

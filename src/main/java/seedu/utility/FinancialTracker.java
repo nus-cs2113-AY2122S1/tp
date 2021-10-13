@@ -15,7 +15,7 @@ public class FinancialTracker {
         this.expenses = new ArrayList<>();
         this.incomes = new ArrayList<>();
     }
-    
+
     public void addExpense(Expense expense) {
         expenses.add(expense);
         assert !expenses.isEmpty();
@@ -25,13 +25,25 @@ public class FinancialTracker {
         incomes.add(income);
         assert !incomes.isEmpty();
     }
-    
-    public Expense removeExpense(int expenseIndex) {
-        return expenses.remove(expenseIndex - 1);
+
+    public int indexOffset(int index) {
+        return index - 1;
     }
 
-    public Income removeIncome(int incomeIndex) {
-        return incomes.remove(incomeIndex - 1);
+    public Expense removeExpense(int expenseIndex) throws ExpenseEntryNotFoundException {
+        try {
+            return expenses.remove(indexOffset(expenseIndex));
+        } catch (IndexOutOfBoundsException e) {
+            throw new ExpenseEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
+        }
+    }
+
+    public Income removeIncome(int incomeIndex) throws IncomeEntryNotFoundException {
+        try {
+            return incomes.remove(indexOffset(incomeIndex));
+        } catch (IndexOutOfBoundsException e) {
+            throw new IncomeEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
+        }
     }
 
     public ArrayList<Expense> listExpenses() {
@@ -71,7 +83,7 @@ public class FinancialTracker {
     public int getIncomeSize() {
         return incomes.size();
     }
-    
+
     public boolean isExpensesEmpty() {
         return expenses.isEmpty();
     }

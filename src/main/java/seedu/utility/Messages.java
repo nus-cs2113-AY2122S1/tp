@@ -11,5 +11,5 @@ public class Messages {
     public static final String NON_POSITIVE_AMOUNT_MESSAGE = "Only positive values are allowed for amount.";
     public static final String NON_POSITIVE_INDEX_MESSAGE = "Only positive values are allowed for index.";
     public static final String UNABLE_TO_DELETE_MESSAGE = "Entry not deleted because entry not found!";
-    
+    public static final String BLANK_DESCRIPTION_MESSAGE = "Your description is empty!";
 }

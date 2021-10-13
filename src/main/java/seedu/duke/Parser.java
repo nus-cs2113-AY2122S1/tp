@@ -15,6 +15,7 @@ import seedu.commands.ExitCommand;
 
 import seedu.entry.Expense;
 import seedu.entry.Income;
+
 import seedu.exceptions.InvalidExpenseException;
 import seedu.exceptions.InvalidExpenseIndexException;
 import seedu.exceptions.InvalidIncomeException;
@@ -142,10 +143,11 @@ public class Parser {
             return new InvalidCommand(e.getMessage());
         }
         assert expenseAmount > 0;
-        
+
         String expenseDescription = matcher.group("description").trim();
-        
-        
+        if (expenseDescription.isBlank()) {
+            return new InvalidCommand(Messages.BLANK_DESCRIPTION_MESSAGE);
+        }
         Expense expense = new Expense(expenseDescription, expenseAmount);
         return new AddExpenseCommand(expense);
     }
@@ -168,8 +170,11 @@ public class Parser {
             return new InvalidCommand(e.getMessage());
         }
         assert incomeAmount > 0;
-        
+
         String incomeDescription = matcher.group("description").trim();
+        if (incomeDescription.isBlank()) {
+            return new InvalidCommand(Messages.BLANK_DESCRIPTION_MESSAGE);
+        }
         Income income = new Income(incomeDescription, incomeAmount);
         return new AddIncomeCommand(income);
     }
