@@ -2,22 +2,23 @@ package happybit.command;
 
 import happybit.exception.HBCommandException;
 import happybit.goal.GoalList;
+import happybit.habit.Habit;
 import happybit.storage.Storage;
 import happybit.ui.Ui;
 
 public class AddHabitCommand extends AddCommand {
 
-    protected String habitName;
+    protected Habit habit;
     protected int goalIndex;
 
-    public AddHabitCommand(String habitName, int goalIndex) {
-        this.habitName = habitName;
+    public AddHabitCommand(Habit habit, int goalIndex) {
+        this.habit = habit;
         this.goalIndex = goalIndex;
     }
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HBCommandException {
-
+        goalList.addHabitFromGoal(habit, goalIndex);
     }
 
 }
