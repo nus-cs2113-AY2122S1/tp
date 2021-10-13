@@ -2,9 +2,13 @@ package command.budget;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
+import service.BudgetManager;
+import terminal.Ui;
 import utils.Money;
 
 import java.util.concurrent.Callable;
+
+import static constants.ErrorMessage.addBudgetErrorMsg;
 
 @Command(name = "add", mixinStandardHelpOptions = true, description = "Adds a budget plan for the current month.")
 public class AddBudgetCommand implements Callable<Integer> {
@@ -14,9 +18,16 @@ public class AddBudgetCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        Double budgetValue = Money.truncate(value);
+        Ui ui = Ui.getUi();
 
-        // do something with the value
+        try {
+            Double budgetValue = Money.truncate(value);
+            BudgetManager.addBudget(budgetValue);
+
+        } catch (Exception error) {
+            ui.printMessage(addBudgetErrorMsg);
+        }
         return 0;
     }
 }
+
