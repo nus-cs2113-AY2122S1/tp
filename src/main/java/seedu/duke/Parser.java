@@ -74,12 +74,7 @@ public class Parser {
             break;
 
         case "view":
-            try {
-                assert inputParams != null;
-                executeView();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.printUnknownTripIndexError();
-            }
+            executeView();
             break;
 
         case "delete":
@@ -178,7 +173,6 @@ public class Parser {
         String expenseDescription = getDescription(expenseInfo[2]);
         currTrip.addExpense(new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription));
         Ui.printExpenseAddedSuccess();
-
     }
 
     private static boolean checkValidCommand(String inputCommand) {
@@ -210,7 +204,6 @@ public class Parser {
     }
 
     private static void editTripPerAttribute(Trip tripToEdit, String attributesToEdit) {
-
         String[] attributesToEditSplit = attributesToEdit.split("-");
         for (String attributeToEdit : attributesToEditSplit) {
             String[] splitCommandAndData = attributeToEdit.split(" ");
@@ -243,10 +236,6 @@ public class Parser {
                 System.out.println(splitCommandAndData[0] + "was not recognised. "
                         + "Please try again after this process is complete");
             }
-
         }
-
     }
-
-
 }
