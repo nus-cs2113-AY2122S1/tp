@@ -160,16 +160,21 @@ public class Parser {
             Double expenseAmount = expenseToDelete.getAmountSpent();
             currentTrip.removeExpense(expenseIndex);
             Ui.printDeleteExpenseSuccessful(expenseAmount);
-        } catch(ArrayIndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             Ui.printUnknownExpenseIndexError();
         }
     }
 
     private static void executeDeleteTrip(Integer tripIndex) {
-        String tripLocation = Storage.listOfTrips.get(tripIndex).getLocation();
-        String tripDate = Storage.listOfTrips.get(tripIndex).getDateOfTripString();
-        Storage.listOfTrips.remove(tripIndex);
-        Ui.printDeleteTripSuccessful(tripLocation, tripDate);
+        try {
+            String tripLocation = Storage.listOfTrips.get(tripIndex).getLocation();
+            String tripDate = Storage.listOfTrips.get(tripIndex).getDateOfTripString();
+            Storage.listOfTrips.remove(tripIndex);
+            Ui.printDeleteTripSuccessful(tripLocation, tripDate);
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printUnknownTripIndexError();
+        }
+
     }
 
     private static void executeList() {
