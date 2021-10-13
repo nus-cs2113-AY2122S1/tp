@@ -76,7 +76,8 @@ public class Parser {
         double ingredientAmount = Double.parseDouble(details[2].trim());
         String ingredientUnits = details[3].trim();
         String ingredientExpiry = details[4].trim();
-        Ingredient updatedIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
+        Ingredient updatedIngredient =
+                new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
         resultMsg = new UpdateCommand(updatedIngredient).run();
 
         if (resultMsg == "") {
