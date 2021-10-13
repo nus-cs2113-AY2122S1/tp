@@ -131,7 +131,8 @@ public class Parser {
             String ingredientUnit = details[3];
             String ingredientExpiry = details[4];
 
-            Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnit, ingredientExpiry);
+            Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,
+                    ingredientUnit, ingredientExpiry);
             return new AddCommand(newIngredient).run();
         } catch (NumberFormatException e) {
             throw new DukeException(NUMBER_FORMAT_MESSAGE);
