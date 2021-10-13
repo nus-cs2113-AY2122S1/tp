@@ -32,12 +32,16 @@ public class Storage {
                 if (line.isEmpty()) {
                     continue;
                 }
-                Employee newEmployee = decodeEmployee(line);
-                employeeParser.loadEmployeeFromStorage(employeeList, newEmployee);
-                Ingredient newIngredient = decodeIngredient(line);
-                ingredientParser.loadIngredientFromStorage(ingredientList, newIngredient);
-                MenuItem newMenuItem = decodeMenuItem(line);
-                menuParser.loadMenuFromStorage(menuList, newMenuItem);
+                if (line.startsWith("add-employee")) {
+                    Employee newEmployee = decodeEmployee(line);
+                    employeeParser.loadEmployeeFromStorage(employeeList, newEmployee);
+                } else if (line.startsWith("add-ingredient")) {
+                    Ingredient newIngredient = decodeIngredient(line);
+                    ingredientParser.loadIngredientFromStorage(ingredientList, newIngredient);
+                } else if (line.startsWith("add-menu")) {
+                    MenuItem newMenuItem = decodeMenuItem(line);
+                    menuParser.loadMenuFromStorage(menuList, newMenuItem);
+                }
             }
             fileReader.close();
         } catch (FileNotFoundException e) {
@@ -69,7 +73,9 @@ public class Storage {
     private static String encodeIngredient(String toWrite) {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 2);
-        encodedItem = "add-ingredient" + "|" + description[0] + "|" + description[1];
+        encodedItem = "add-ingredient" + "|" + description[0] + "|" + description[1].substring(1, description[1].length() - 1);
+        assert (!encodedItem.contains("["));
+        assert (!encodedItem.contains("]"));
         return encodedItem;
     }
 
@@ -82,7 +88,8 @@ public class Storage {
     private static String encodeMenuItem(String toWrite) {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 2);
-        encodedItem = "add-menu" + "|" + description[0] + "|" + description[1];
+        encodedItem = "add-menu" + "|" + description[0] + "|" + description[1].substring(3);
+        assert (!encodedItem.contains("$"));
         return encodedItem;
     }
 
