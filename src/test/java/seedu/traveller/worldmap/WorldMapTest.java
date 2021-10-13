@@ -26,7 +26,8 @@ public class WorldMapTest {
         path.add(countryMly);
         distances.add(1.0);
         MinCalcResult minCalcResult = new MinCalcResult(countrySin, countryMly, path, distances);
-        assertEquals(minCalcResult.toString(), WorldMap.calcMinDistance("SIN", "MLY").toString());
+        assertEquals(minCalcResult.toString(),
+                WorldMap.calcMinDistance("SIN", "MLY").toString());
     }
 
     @Test
