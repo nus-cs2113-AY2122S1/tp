@@ -88,7 +88,7 @@ public class Parser {
                 executeDelete(inputParams);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 Ui.printUnknownTripIndexError();
-            } catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 Ui.emptyArgForDeleteCommand();
             }
             break;
