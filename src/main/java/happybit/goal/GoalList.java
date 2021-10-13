@@ -1,7 +1,6 @@
 package happybit.goal;
 
-import happybit.exception.HBCommandException;
-import happybit.exception.HappyBitException;
+import happybit.exception.HaBitCommandException;
 import happybit.habit.Habit;
 import happybit.ui.Ui;
 
@@ -43,9 +42,9 @@ public class GoalList {
      * Deletes a goal from the goalList.
      *
      * @param goalIndex Integer index of the goal to be deleted from goalList.
-     * @throws HBCommandException If the goalIndex is not within the index range of the goalList.
+     * @throws HaBitCommandException If the goalIndex is not within the index range of the goalList.
      */
-    public void deleteGoal(int goalIndex) throws HBCommandException {
+    public void deleteGoal(int goalIndex) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         goalList.remove(goal);
     }
@@ -55,13 +54,14 @@ public class GoalList {
      *
      * @param goalIndex  Integer index of goal in goalList.
      * @param habitIndex Integer index of habit to be deleted in goal.
-     * @throws HBCommandException
+     * @throws HaBitCommandException If the goalIndex is not within the index range of the goalList.
+     *                               If the habitIndex is not within the index range of the habitList.
      */
-    public void deleteHabitFromGoal(int goalIndex, int habitIndex) throws HBCommandException {
+    public void deleteHabitFromGoal(int goalIndex, int habitIndex) throws HaBitCommandException {
         try {
             getGoal(goalIndex).removeHabit(habitIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new HBCommandException("Habit index out of range");
+            throw new HaBitCommandException("Habit index out of range");
         }
     }
 
@@ -69,11 +69,11 @@ public class GoalList {
      * List all the goals in the goalList.
      *
      * @param ui User Interface class for printing goalList to output.
-     * @throws HBCommandException If there are no items in the goalList.
+     * @throws HaBitCommandException If there are no items in the goalList.
      */
-    public void listGoals(Ui ui) throws HBCommandException {
+    public void listGoals(Ui ui) throws HaBitCommandException {
         if (goalList.isEmpty()) {
-            throw new HBCommandException(ERROR_EMPTY_GOAL_LIST);
+            throw new HaBitCommandException(ERROR_EMPTY_GOAL_LIST);
         }
         ui.printGoalList(goalList);
     }
@@ -83,14 +83,14 @@ public class GoalList {
      *
      * @param goalIndex Integer index of goal in goalList.
      * @param ui        User Interface class for printing habitList to output.
-     * @throws HBCommandException If the goalIndex is not within the range of the goalList.
+     * @throws HaBitCommandException If the goalIndex is not within the range of the goalList.
      *                            If there are no items in the habitList.
      */
-    public void listHabitsFromGoal(int goalIndex, Ui ui) throws HBCommandException {
+    public void listHabitsFromGoal(int goalIndex, Ui ui) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         ArrayList<Habit> habitList = goal.getHabitList();
         if (habitList.isEmpty()) {
-            throw new HBCommandException("Habit list is empty");
+            throw new HaBitCommandException("Habit list is empty");
         }
         ui.printHabitList(habitList);
     }
@@ -108,14 +108,14 @@ public class GoalList {
      *
      * @param goalIndex Integer index of goal in goalList.
      * @return Goal corresponding to the index provided.
-     * @throws HBCommandException If the goalIndex is not within the range of the goalList.
+     * @throws HaBitCommandException If the goalIndex is not within the range of the goalList.
      */
-    private Goal getGoal(int goalIndex) throws HBCommandException {
+    private Goal getGoal(int goalIndex) throws HaBitCommandException {
         Goal goal;
         try {
             goal = goalList.get(goalIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new HBCommandException("Goal index out of range");
+            throw new HaBitCommandException("Goal index out of range");
         }
         return goal;
     }

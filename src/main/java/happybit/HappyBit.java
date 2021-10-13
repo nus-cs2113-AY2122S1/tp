@@ -1,9 +1,8 @@
 package happybit;
 
 import happybit.command.Command;
-import happybit.exception.HBCommandException;
-import happybit.exception.HBLoadException;
-import happybit.exception.HBParserException;
+import happybit.exception.HaBitCommandException;
+import happybit.exception.HaBitParserException;
 import happybit.goal.GoalList;
 import happybit.parser.Parser;
 import happybit.storage.Storage;
@@ -18,8 +17,7 @@ public class HappyBit {
     private Ui ui;
 
     /**
-     * Duke class constructor that also loads in tasks data
-     * from an external save file
+     * Duke class constructor that also loads in tasks data from an external save file.
      *
      * @param filePath File path of the external save file
      */
@@ -76,7 +74,7 @@ public class HappyBit {
                 Command command = Parser.parse(userInput);
                 command.runCommand(goalList, ui, storage);
                 isExit = command.isExit();
-            } catch (HBParserException | HBCommandException e) {
+            } catch (HaBitParserException | HaBitCommandException e) {
                 //ui.showError(e.getMessage());
             }
         }

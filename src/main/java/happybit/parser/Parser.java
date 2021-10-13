@@ -2,13 +2,13 @@ package happybit.parser;
 
 import happybit.command.Command;
 import happybit.command.HelpCommand;
-import happybit.exception.HBParserException;
+import happybit.exception.HaBitParserException;
 
 public class Parser {
 
     private static final String DELIMITER = "@@@";
 
-    public static Command parse(String userInput) throws HBParserException {
+    public static Command parse(String userInput) throws HaBitParserException {
         String treatedUserInput = treatUserInput(userInput);
         String[] words = treatedUserInput.split(" ");
         String commandWord = words[0];
@@ -29,11 +29,11 @@ public class Parser {
      *
      * @param userInput String input by the user into the command line.
      * @return String with removed extraneous whitespaces.
-     * @throws HBParserException If the delimiter appears in the user's input.
+     * @throws HaBitParserException If the delimiter appears in the user's input.
      */
-    private static String treatUserInput(String userInput) throws HBParserException {
+    private static String treatUserInput(String userInput) throws HaBitParserException {
         if (userInput.contains(DELIMITER)) {
-            throw new HBParserException("Invalid character in the user input");
+            throw new HaBitParserException("Invalid character in the user input");
         }
         String treatedInput = userInput.strip().replaceAll("\\s+"," ");
         testEmptyString(treatedInput);
@@ -44,11 +44,11 @@ public class Parser {
      * Checks if the string is empty.
      *
      * @param userInput String of user's input with extraneous whitespace removed.
-     * @throws HBParserException If the treated user's input is empty.
+     * @throws HaBitParserException If the treated user's input is empty.
      */
-    private static void testEmptyString(String userInput) throws HBParserException {
+    private static void testEmptyString(String userInput) throws HaBitParserException {
         if (userInput.isEmpty()) {
-            throw new HBParserException("No user command detected");
+            throw new HaBitParserException("No user command detected");
         }
     }
 

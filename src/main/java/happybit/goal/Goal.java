@@ -33,7 +33,7 @@ public class Goal {
      * Setter for name of goal.
      * Used to edit the name of the goal.
      *
-     * @param goalName
+     * @param goalName Name of goal to be updated.
      */
     public void setGoalName(String goalName) {
         this.goalName = goalName;
