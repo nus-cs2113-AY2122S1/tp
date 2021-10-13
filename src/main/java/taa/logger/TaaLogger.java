@@ -14,7 +14,7 @@ public class TaaLogger {
 
     private final Logger logger;
 
-    public TaaLogger() {
+    private TaaLogger() {
         this.logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         init();
     }
