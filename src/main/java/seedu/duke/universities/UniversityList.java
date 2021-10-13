@@ -55,4 +55,13 @@ public class UniversityList {
         assert index <= list.size();
         return list.get(index);
     }
+
+    public boolean searchUniversity(String universityName) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).name.equals(universityName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
