@@ -51,21 +51,16 @@ public class HappyBit {
      * Loads in data from an external storage.
      */
     private void loadData() {
-        try {
-            goalList = storage.load();
-        } catch (HBLoadException e) {
-            ui.showError(e.getMessage());
-            goalList = new GoalList();
-        }
+        goalList = storage.load();
     }
 
     /**
      * Executes the main body of HappyBit.
      */
     private void run() {
-        ui.showWelcome();
+        //ui.showWelcome();
         handleUserInput();
-        ui.showGoodbye();
+        //ui.showGoodbye();
     }
 
     /**
@@ -82,7 +77,7 @@ public class HappyBit {
                 command.runCommand(goalList, ui, storage);
                 isExit = command.isExit();
             } catch (HBParserException | HBCommandException e) {
-                ui.showError(e.getMessage());
+                //ui.showError(e.getMessage());
             }
         }
     }
