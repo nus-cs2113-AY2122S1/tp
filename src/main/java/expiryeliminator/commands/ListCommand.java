@@ -21,7 +21,7 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(IngredientList ingredientList, RecipeList recipes) {
-        if(ingredientList.size() == 0) {
+        if (ingredientList.size() == 0) {
             return MESSAGE_EMPTY_INGREDIENT_LIST;
         } else {
             assert ingredientList.size() > 0;
