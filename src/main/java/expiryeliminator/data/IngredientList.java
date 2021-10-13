@@ -93,6 +93,7 @@ public class IngredientList {
      * @return the ingredient object that the user is searching for.
      */
     public Ingredient find(String ingredientDescription) throws NotFoundException {
+        assert ingredientDescription != null && !ingredientDescription.isBlank();
         final Ingredient ingredient = ingredients.get(ingredientDescription);
         if (ingredient == null) {
             throw new NotFoundException();
