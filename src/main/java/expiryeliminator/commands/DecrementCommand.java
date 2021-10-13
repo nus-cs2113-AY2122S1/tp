@@ -18,7 +18,7 @@ public class DecrementCommand extends Command {
 
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
     private static final String MESSAGE_QUANTITY_NEGATIVE = "Sorry, you currently only have %1$s of this ingredient.\n"
-            + "You cannot decrease it by %1$s.\n" + "%3$s";
+            + "You cannot decrease it by %2$s.\n" + "%3$s";
     private static final String MESSAGE_INGREDIENT_DECREMENTED = "I've decremented this ingredient by %1$s:\n" + "%2$s";
 
     private final String ingredientName;

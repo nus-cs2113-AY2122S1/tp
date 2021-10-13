@@ -28,6 +28,7 @@ decrement i/Red Apple
 decrement q/5
 decrement i/Red Apple q/five
 decrement i/James Gosling
+decrement i/Red Apple q/100
 
 decrement i/Red Apple q/5
 list
