@@ -6,7 +6,7 @@ import taa.Ui;
 import taa.module.ModuleList;
 
 public class ExitCommand extends Command {
-    private static final String MESSAGE_FORMAT_EXIT_USAGE = "Usage: %s";
+    private static final String MESSAGE_FORMAT_EXIT_USAGE = "%s";
 
     public ExitCommand(String argument) {
         super(argument);
@@ -31,7 +31,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(MESSAGE_FORMAT_EXIT_USAGE, COMMAND_EXIT);
     }
 }

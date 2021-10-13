@@ -13,8 +13,7 @@ public class ListStudentsCommand extends Command {
 
     private static final String MESSAGE_NO_STUDENTS = "No students added yet!";
 
-    private static final String MESSAGE_FORMAT_LIST_STUDENT_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE>";
+    private static final String MESSAGE_FORMAT_LIST_STUDENT_USAGE = "%s %s/<MODULE_CODE>";
     private static final String MESSAGE_FORMAT_OUTPUT = "Students for %s:\n%s";
 
     public ListStudentsCommand(String argument) {
@@ -57,7 +56,7 @@ public class ListStudentsCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(MESSAGE_FORMAT_LIST_STUDENT_USAGE,
                 COMMAND_LIST_STUDENTS,
                 KEY_MODULE_CODE

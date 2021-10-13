@@ -17,8 +17,8 @@ public class AddAssessmentCommand extends Command {
 
     private static final String MESSAGE_FAIL_TO_ADD = "Fail to add assessment.";
 
-    private static final String MESSAGE_FORMAT_ADD_ASSESSMENT_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<ASSESSMENT_NAME> %s/<WEIGHTAGE>";
+    private static final String MESSAGE_FORMAT_ADD_ASSESSMENT_USAGE = "%s %s/<MODULE_CODE> %s/<ASSESSMENT_NAME> "
+        + "%s/<WEIGHTAGE>";
     private static final String MESSAGE_FORMAT_INVALID_WEIGHTAGE = "Invalid weightage. "
             + "Weightage must be between %,.2f and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED = "Assessment added:\n"
@@ -88,7 +88,7 @@ public class AddAssessmentCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_ADD_ASSESSMENT_USAGE,
                 COMMAND_ADD_ASSESSMENT,

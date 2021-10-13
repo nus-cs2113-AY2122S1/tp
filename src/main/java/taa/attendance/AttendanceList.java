@@ -83,12 +83,17 @@ public class AttendanceList implements ClassChecker {
     @Override
     public boolean verify() {
         ArrayList<Integer> lessonNumbers = new ArrayList<>();
+        ArrayList<Attendance> duplicatedAttendances = new ArrayList<>();
         for (Attendance attendance : attendances) {
             if (lessonNumbers.contains(attendance.getLessonNumber())) {
-                attendances.remove(attendance);
+                duplicatedAttendances.add(attendance);
             } else {
                 lessonNumbers.add(attendance.getLessonNumber());
             }
+        }
+
+        for (Attendance attendance : duplicatedAttendances) {
+            attendances.remove(attendance);
         }
 
         return true;

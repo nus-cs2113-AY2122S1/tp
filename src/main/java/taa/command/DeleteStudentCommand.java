@@ -14,8 +14,7 @@ public class DeleteStudentCommand extends Command {
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String[] DELETE_STUDENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_INDEX};
 
-    private static final String MESSAGE_FORMAT_DELETE_STUDENT_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<STUDENT_INDEX>";
+    private static final String MESSAGE_FORMAT_DELETE_STUDENT_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX>";
     private static final String MESSAGE_FORMAT_STUDENT_DELETED = "Student removed from %s:\n  %s";
 
     public DeleteStudentCommand(String argument) {
@@ -65,7 +64,7 @@ public class DeleteStudentCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_DELETE_STUDENT_USAGE,
                 COMMAND_DELETE_STUDENT,

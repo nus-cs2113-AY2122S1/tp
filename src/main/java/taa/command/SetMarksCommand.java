@@ -26,8 +26,8 @@ public class SetMarksCommand extends Command {
         KEY_MARKS
     };
 
-    private static final String MESSAGE_FORMAT_SET_MARKS_USAGE = "Usage: %s "
-        + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<ASSESSMENT_NAME> %s/<MARKS>";
+    private static final String MESSAGE_FORMAT_SET_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "
+        + "%s/<ASSESSMENT_NAME> %s/<MARKS>";
     private static final String MESSAGE_FORMAT_INVALID_MARKS = "Invalid Marks. "
         + "Marks must be between %,.2f and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_MARKS_ADDED = "Marks set for %s: %,.2f for %s";
@@ -115,7 +115,7 @@ public class SetMarksCommand extends Command {
      * @return String which contains the usage message.
      */
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
             MESSAGE_FORMAT_SET_MARKS_USAGE,
             COMMAND_SET_MARKS,

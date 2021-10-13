@@ -117,15 +117,20 @@ public class AssessmentList implements ClassChecker {
     @Override
     public boolean verify() {
         ArrayList<String> assessmentNames = new ArrayList<>();
+        ArrayList<Assessment> duplicatedAssessments = new ArrayList<>();
         double totalWeightage = 0;
         for (Assessment assessment : assessments) {
             String name = assessment.getName();
             if (assessmentNames.contains(name.toLowerCase())) {
-                assessments.remove(assessment);
+                duplicatedAssessments.add(assessment);
             } else {
                 assessmentNames.add(name.toLowerCase());
                 totalWeightage += assessment.getWeightage();
             }
+        }
+
+        for (Assessment assessment : duplicatedAssessments) {
+            assessments.remove(assessment);
         }
 
         if (!Assessment.isWeightageWithinRange(totalWeightage)) {

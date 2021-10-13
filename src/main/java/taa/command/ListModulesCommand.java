@@ -39,7 +39,7 @@ public class ListModulesCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_GENERIC_USAGE,
                 COMMAND_LIST_MODULES

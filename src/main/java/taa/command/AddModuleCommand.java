@@ -13,8 +13,7 @@ public class AddModuleCommand extends Command {
 
     private static final String MESSAGE_INVALID_MODULE_CODE = "Invalid module code.";
 
-    private static final String MESSAGE_FORMAT_ADD_MODULE_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<MODULE_NAME>";
+    private static final String MESSAGE_FORMAT_ADD_MODULE_USAGE = "%s %s/<MODULE_CODE> %s/<MODULE_NAME>";
     private static final String MESSAGE_FORMAT_MODULE_ADDED = "Module added:\n  %s\nThere are %d modules in the list.";
 
     public AddModuleCommand(String argument) {
@@ -56,7 +55,7 @@ public class AddModuleCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_ADD_MODULE_USAGE,
                 COMMAND_ADD_MODULE,

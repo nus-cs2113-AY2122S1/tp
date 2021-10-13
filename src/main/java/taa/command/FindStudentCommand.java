@@ -17,8 +17,7 @@ public class FindStudentCommand extends Command {
 
     private static final String MESSAGE_NO_STUDENTS_FOUND = "There are no students matching your keyword.";
 
-    private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<KEYWORD>";
+    private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "%s %s/<MODULE_CODE> %s/<KEYWORD>";
     private static final String MESSAGE_FORMAT_STUDENT_FOUND_HEADER = "Here are the students in %s with \"%s\":";
 
     public FindStudentCommand(String argument) {
@@ -69,7 +68,7 @@ public class FindStudentCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_FIND_STUDENT_USAGE,
                 COMMAND_FIND_STUDENT,

@@ -21,8 +21,8 @@ public class EditStudentCommand extends Command {
         KEY_NEW_NAME
     };
 
-    private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "Usage: %s "
-        + "%s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<NEW_ID> %s/<NEW_NAME>";
+    private static final String MESSAGE_FORMAT_FIND_STUDENT_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<NEW_ID> "
+        + "%s/<NEW_NAME>";
     private static final String MESSAGE_FORMAT_STUDENT_EDITED = "Student updated:\n  %s";
 
     public EditStudentCommand(String argument) {
@@ -78,7 +78,7 @@ public class EditStudentCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
             MESSAGE_FORMAT_FIND_STUDENT_USAGE,
             COMMAND_EDIT_STUDENT,

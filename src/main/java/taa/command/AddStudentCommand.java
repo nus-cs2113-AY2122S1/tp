@@ -14,8 +14,7 @@ public class AddStudentCommand extends Command {
     private static final String KEY_STUDENT_NAME = "n";
     private static final String[] ADD_STUDENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_ID, KEY_STUDENT_NAME};
 
-    private static final String MESSAGE_FORMAT_ADD_STUDENT_USAGE = "Usage: %s "
-            + "%s/<MODULE_CODE> %s/<STUDENT_ID> %s/<STUDENT_NAME>";
+    private static final String MESSAGE_FORMAT_ADD_STUDENT_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_ID> %s/<STUDENT_NAME>";
     private static final String MESSAGE_STUDENT_ADDED_FORMAT = "Student has been added to %s:\n  %s";
 
     public AddStudentCommand(String argument) {
@@ -59,7 +58,7 @@ public class AddStudentCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_ADD_STUDENT_USAGE,
                 COMMAND_ADD_STUDENT,

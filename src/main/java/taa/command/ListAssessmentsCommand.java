@@ -13,7 +13,7 @@ public class ListAssessmentsCommand extends Command {
 
     private static final String MESSAGE_LIST_EMPTY = "There are no assessments in the module.";
 
-    private static final String MESSAGE_FORMAT_LIST_ASSESSMENTS_USAGE = "Usage: %s %s/<MODULE_CODE>";
+    private static final String MESSAGE_FORMAT_LIST_ASSESSMENTS_USAGE = "%s %s/<MODULE_CODE>";
     private static final String MESSAGE_FORMAT_OUTPUT = "Assessments for %s:\n%s";
 
     public ListAssessmentsCommand(String argument) {
@@ -56,7 +56,7 @@ public class ListAssessmentsCommand extends Command {
     }
 
     @Override
-    protected String getUsageMessage() {
+    protected String getUsage() {
         return String.format(
                 MESSAGE_FORMAT_LIST_ASSESSMENTS_USAGE,
                 COMMAND_LIST_ASSESSMENTS,
