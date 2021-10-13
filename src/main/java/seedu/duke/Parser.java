@@ -67,8 +67,6 @@ public class Parser {
      * @return Ingredient updated message
      */
     private static String parseUpdateCommand(String command) throws DukeException {
-        String resultMsg = "";
-
         String delimiter = "n/|a/|u/|e/";
         String[] details = command.split(delimiter);
 
@@ -89,7 +87,7 @@ public class Parser {
         String ingredientExpiry = details[4].trim();
         Ingredient updatedIngredient =
                 new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
-        resultMsg = new UpdateCommand(updatedIngredient).run();
+        String resultMsg = new UpdateCommand(updatedIngredient).run();
 
         if (resultMsg.equals("")) {
             resultMsg = NOT_FOUND_MESSAGE;
