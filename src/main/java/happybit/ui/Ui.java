@@ -1,6 +1,7 @@
 package happybit.ui;
 
 import happybit.goal.Goal;
+import happybit.habit.Habit;
 
 import java.util.ArrayList;
 
@@ -25,7 +26,7 @@ public class Ui {
     private static final String DASHES = "______________________________________________________________"
             + "__________________________________________________________";
 
-    public static void printCommandList() {
+    public void printCommandList() {
         printDashes();
         System.out.print(COMMAND_LIST_GREETING + NEWLINE
                 + ADD_HABIT_COMMAND + NEWLINE
@@ -39,10 +40,18 @@ public class Ui {
         printDashes();
     }
 
-    public static void printGoalsList(ArrayList<Goal> goals) {
+    public void printGoalList(ArrayList<Goal> goals) {
         printDashes();
         for (Goal goal : goals) {
             System.out.println(goal.getDescription());
+        }
+        printDashes();
+    }
+
+    public void printHabitList(ArrayList<Habit> habits) {
+        printDashes();
+        for (Habit habit : habits) {
+            System.out.println(habit.getHabitName());
         }
         printDashes();
     }

@@ -49,6 +49,15 @@ public class Goal {
     }
 
     /**
+     * Gets the habitList.
+     *
+     * @return ArrayList of habits.
+     */
+    public ArrayList<Habit> getHabitList() {
+        return habitList;
+    }
+
+    /**
      * Adds a habit to the goal.
      *
      * @param habit Habit to be added to the goal.
@@ -73,15 +82,6 @@ public class Goal {
      */
     public int numberOfHabits() {
         return habitList.size();
-    }
-
-    /**
-     * Prints list of habits associated with the goal.
-     */
-    public void printHabitList() {
-        for (int i = 0; i < habitList.size(); i++) {
-            System.out.println(i + ". " + habitList.get(i).getDescription() + "\n");
-        }
     }
 
     /*
