@@ -9,6 +9,7 @@ public class ExitCommand extends Command {
         return true;
     }
 
+    @Override
     public void execute(PatientList patientList, Ui ui) {
         String exitMessage = ui.getExitMessage();
         ui.printOutput(exitMessage);
