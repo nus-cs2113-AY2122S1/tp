@@ -11,6 +11,7 @@ import static seedu.duke.common.Messages.RM_INVALID_ID;
 
 public class LoanCommand extends Command {
     private static final String BORROWED_STATUS = "Loaned";
+    private static final String AVAILABLE_STATUS = "Available";
     protected String args; // Format: loan [ID]
     protected String id;
 
