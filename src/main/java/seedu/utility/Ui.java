@@ -107,13 +107,13 @@ public class Ui {
      */    
     public void listIncome(ArrayList<Income> incomes) {
         if (incomes.isEmpty()) {
-           emptyList();
+            emptyList();
         } else {
             printLine();
             System.out.println(LISTING_INCOME_MESSAGE);
             printLine();
             int i = 1;
-            for (Income income:incomes) {
+            for (Income income : incomes) {
                 System.out.print(i);
                 System.out.print(": ");
                 System.out.println(income);
