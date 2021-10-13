@@ -5,7 +5,7 @@ import happybit.command.ListHabitsCommand;
 import happybit.exception.HaBitParserException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DeleteParserTest {
 
