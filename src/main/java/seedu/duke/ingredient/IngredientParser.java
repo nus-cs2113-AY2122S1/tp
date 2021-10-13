@@ -5,16 +5,22 @@ import seedu.duke.main.MainUI;
 public class IngredientParser {
 
     public void addIngredient(String[] command, IngredientList ingredients) {
-        Ingredient newIngredient = new Ingredient(command[1], command[2]);
+        try {
+            Ingredient newIngredient = new Ingredient(command[1], command[2]);
 
-        ingredients.ingredientList.add(newIngredient);
-        ingredients.totalIngredients++;
+            ingredients.ingredientList.add(newIngredient);
+            ingredients.totalIngredients++;
 
-        MainUI.printSingleLine();
-        System.out.println("Got it. This ingredient was added:");
-        System.out.println("Ingredient Name: " + newIngredient.getName());
-        System.out.println("Ingredient Quantity: " + newIngredient.getQuantity());
-        MainUI.printSingleLine();
+            MainUI.printSingleLine();
+            System.out.println("Got it. This ingredient was added:");
+            System.out.println("Ingredient Name: " + newIngredient.getName());
+            System.out.println("Ingredient Quantity: " + newIngredient.getQuantity());
+            MainUI.printSingleLine();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            MainUI.printSingleLine();
+            System.out.println("Invalid command syntax!");
+            MainUI.printSingleLine();
+        }
     }
 
     public void loadIngredientFromStorage(IngredientList ingredients, Ingredient ingredient) {
@@ -23,19 +29,30 @@ public class IngredientParser {
     }
 
     public void deleteIngredient(String[] command, IngredientList ingredients) {
-        int deletedIngredientIndex = Integer.parseInt(command[1]) - 1;
+        try {
+            int deletedIngredientIndex = Integer.parseInt(command[1]) - 1;
 
-        if (ingredients.ingredientList.size() < 1) {
-            return;
+            Ingredient deletedIngredient = ingredients.ingredientList.get(deletedIngredientIndex);
+            ingredients.ingredientList.remove(deletedIngredientIndex);
+            ingredients.totalIngredients--;
+
+            MainUI.printSingleLine();
+            System.out.println("Got it. This ingredient was deleted:");
+            System.out.println(deletedIngredient.getName());
+            MainUI.printSingleLine();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            MainUI.printSingleLine();
+            System.out.println("Invalid command syntax!");
+            MainUI.printSingleLine();
+        } catch (IndexOutOfBoundsException e) {
+            MainUI.printSingleLine();
+            System.out.println("That ingredient does not exist!");
+            MainUI.printSingleLine();
+        } catch (NumberFormatException e) {
+            MainUI.printSingleLine();
+            System.out.println("Invalid command syntax!");
+            MainUI.printSingleLine();
         }
-        Ingredient deletedIngredient = ingredients.ingredientList.get(deletedIngredientIndex);
-        ingredients.ingredientList.remove(deletedIngredientIndex);
-        ingredients.totalIngredients--;
-
-        MainUI.printSingleLine();
-        System.out.println("Got it. This ingredient was deleted:");
-        System.out.println(deletedIngredient.getName());
-        MainUI.printSingleLine();
     }
 
     public void listIngredient(IngredientList ingredients) {
@@ -45,6 +62,8 @@ public class IngredientParser {
             MainUI.printSingleLine();
             return;
         }
+
+        assert ingredients.ingredientList.size() > 0 : "Ingredient list should not be empty";
 
         MainUI.printSingleLine();
         System.out.println("Here are the ingredients in your list:");
