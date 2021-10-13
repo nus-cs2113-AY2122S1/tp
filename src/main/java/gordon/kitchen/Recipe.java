@@ -118,6 +118,8 @@ public class Recipe {
     public String toString() {
         StringBuilder outputString = new StringBuilder(name + System.lineSeparator());
 
+        outputString.append("Calories:").append(calories).append("kcal").append(System.lineSeparator());
+
         if (difficulty != Difficulty.None) {
             outputString.append("Difficulty: ")
                     .append(System.lineSeparator())

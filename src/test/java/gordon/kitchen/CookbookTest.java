@@ -17,6 +17,7 @@ class CookbookTest {
             r.addStep("Boil water");
             r.addStep("Grind beans");
             r.addStep("Pour water over grounds");
+            r.setCalories(10);
             Cookbook c = new Cookbook();
             c.addRecipe(r);
             assertEquals("1. Coffee" + System.lineSeparator(), c.toString());
@@ -42,6 +43,7 @@ class CookbookTest {
             r1.addStep("Boil water");
             r1.addStep("Grind beans");
             r1.addStep("Pour water over grounds");
+            r1.setCalories(10);
             Cookbook c = new Cookbook();
             c.addRecipe(r1);
             Recipe r2 = new Recipe("Tea");
@@ -49,6 +51,7 @@ class CookbookTest {
             r2.addIngredient("Water");
             r2.addStep("Boil water");
             r2.addStep("Pour water over leaves");
+            r2.setCalories(10);
             c.addRecipe(r2);
             c.removeRecipe(1);
             assertEquals("1. Coffee" + System.lineSeparator(), c.toString());

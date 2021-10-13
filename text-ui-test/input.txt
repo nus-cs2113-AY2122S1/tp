@@ -1,15 +1,15 @@
-add Caprese Salad /ingredients Tomatoes+Mozzarella+Basil+Olive Oil /steps Cut tomatoes into 1 inch slices+Cut mozzarella into similar slices+Arrange slices on plate+Drizzle with olive oil
+add Caprese Salad /ingredients Tomatoes+Mozzarella+Basil+Olive Oil /steps Cut tomatoes into 1 inch slices+Cut mozzarella into similar slices+Arrange slices on plate+Drizzle with olive oil /calories 400
 add something
 add / / / / /
 add //////
 eat food
 add Cookies /ingredients Butter+Flour+Sugar // / / //
-add Cookies /ingredients Butter+Flour+Sugar /steps Set oven to 160 degrees Celcius+Mix all ingredients together in a bowl+Put in preheated oven for 20 mins+Remove and let cool for 10 mins
-add Caprese Salad /ingredients 1+2+3 /steps a+b+c
+add Cookies /ingredients Butter+Flour+Sugar /steps Set oven to 160 degrees Celcius+Mix all ingredients together in a bowl+Put in preheated oven for 20 mins+Remove and let cool for 10 mins /calories 300
+add Caprese Salad /ingredients 1+2+3 /steps a+b+c /calories 400
 list
 check cookies
 check meatballs
-add Fried Fish /ingredients Fish+Olive Oil /steps Preheat pan+Add olive oil+Add fish and fry on both sides until crispy
+add Fried Fish /ingredients Fish+Olive Oil /steps Preheat pan+Add olive oil+Add fish and fry on both sides until crispy /calories 200
 find /ingredients Olive Oil
 find olives
 find /// / / /
@@ -17,4 +17,6 @@ delete 5
 delete cookies
 delete 2
 list
+add Duck Rice /ingredients Duck /steps DucknRice
+add Duck Rice /ingredients Duck /steps DucknRice /calories
 exit

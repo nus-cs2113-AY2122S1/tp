@@ -23,6 +23,7 @@ public class Parser {
     public static final int NAME_INDEX = 0;
     public static final int INGREDIENTS_INDEX = 1;
     public static final int STEPS_INDEX = 2;
+    public static final int CALORIES_INDEX = 3;
     public static final int INGREDIENTS_WORD_LENGTH = 12;
     public static final int STEPS_WORD_LENGTH = 6;
 
@@ -34,12 +35,13 @@ public class Parser {
         try {
             if (parseCommand(line).equalsIgnoreCase("add")) {
                 String[] splitContent = line.split("/");
-                if (splitContent.length < 3) {
+                if (splitContent.length < 4) {
                     throw new GordonException(GordonException.COMMAND_INVALID);
                 }
                 Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
                 parseIngredients(splitContent[INGREDIENTS_INDEX], r);
                 parseSteps(splitContent[STEPS_INDEX], r);
+                parseCalories(splitContent[CALORIES_INDEX], r);
                 return new AddCommand(r);
             } else if (parseCommand(line).equalsIgnoreCase("delete")) {
                 nameRecipe = parseName(line);
@@ -109,7 +111,6 @@ public class Parser {
         return line.substring(spaceIndex).trim();
     }
 
-
     public void parseIngredients(String line, Recipe r) throws GordonException {
         int ingredientsIndex = line.indexOf("ingredients");
         if (ingredientsIndex == -1) {
@@ -131,6 +132,17 @@ public class Parser {
         String[] stepsList = newLine.split("\\+");
         for (int i = 0; i < stepsList.length; i++) {
             r.addStep(stepsList[i], i);
+        }
+    }
+
+    public void parseCalories (String line, Recipe r) throws GordonException {
+        String[] input = line.split("calories");
+
+        try {
+            int calories = Integer.parseInt(input[1].trim());
+            r.setCalories(calories);
+        } catch (IndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.EMPTY_CALORIES);
         }
     }
 }
