@@ -31,15 +31,16 @@ public class DecrementCommand extends Command {
      * @param quantity Quantity to increment by.
      */
     public DecrementCommand(String ingredientName, int quantity) {
-        assert ingredientName != null && !ingredientName.isBlank();
-        assert quantity >= 0;
+        assert ingredientName != null && !ingredientName.isBlank()
+                : "Ingredient name cannot be null and cannot be blank";
+        assert quantity >= 0 : "Quantity cannot be negative";
         this.ingredientName = ingredientName;
         this.quantity = quantity;
     }
 
     @Override
     public String execute(IngredientList ingredients, RecipeList recipes) {
-        assert ingredients != null;
+        assert ingredients != null : "Ingredient list cannot be null";
         final Ingredient ingredient;
         try {
             ingredient = ingredients.find(ingredientName);

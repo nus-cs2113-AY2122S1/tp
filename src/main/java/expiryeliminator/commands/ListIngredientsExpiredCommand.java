@@ -9,8 +9,10 @@ import expiryeliminator.data.RecipeList;
 public class ListIngredientsExpiredCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "list expired";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists out the ingredients that have expired.\n"
+            + "Example: " + COMMAND_WORD;
 
-    private static final String MESSAGE_SHOW_WHOLE_LIST = "Here are the expired ingredients in your list:\n"
+    public static final String MESSAGE_SHOW_WHOLE_LIST = "Here are the expired ingredients in your list:\n"
             + "\n%1$s\n";
 
     @Override

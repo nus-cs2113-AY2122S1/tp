@@ -6,11 +6,16 @@ import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class TestUtil {
 
     public static final String EXAMPLE_RECIPE_NAME = "Chicken Soup";
+
+    public static final String RANDOM_INPUT_RECIPE_NAME = "Foo";
 
     public static IngredientList generateIngredientListForRecipe() {
         Ingredient firstIngredient = new Ingredient("Chicken", 1,null);
@@ -40,5 +45,36 @@ public class TestUtil {
             fail("Recipe should be valid by definition");
             return null;
         }
+    }
+
+    public static IngredientList generateIngredientList() {
+        LocalDate pastDate = LocalDate.of(2021,10,8);
+        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
+        LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);
+
+        //expired
+        Ingredient firstIngredient = new Ingredient("Red Apple", 1,pastDate);
+        //expiring
+        Ingredient secondIngredient = new Ingredient("Blue Apple", 2,currentDatePlusThreeDays);
+        //fresh
+        Ingredient thirdIngredient = new Ingredient("Green Apple", 3,currentDatePlusThreeWeeks);
+
+        IngredientList ingredientList = new IngredientList();
+
+        try {
+            ingredientList.add(firstIngredient);
+            ingredientList.add(secondIngredient);
+            ingredientList.add(thirdIngredient);
+            return ingredientList;
+        } catch (DuplicateDataException e) {
+            fail("Ingredient List should be valid by definition");
+            return null;
+        }
+    }
+
+    public static IngredientList generateEmptyIngredientList() {
+        IngredientList ingredientList = new IngredientList();
+        return ingredientList;
     }
 }

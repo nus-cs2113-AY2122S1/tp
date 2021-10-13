@@ -34,15 +34,15 @@ public class AddIngredientCommand extends Command {
      * @param expiryDate Expiry date of ingredient to be added.
      */
     public AddIngredientCommand(String name, int quantity, LocalDate expiryDate) {
-        assert name != null && !name.isBlank();
-        assert quantity >= 0;
-        assert expiryDate != null;
+        assert name != null && !name.isBlank() : "Ingredient name cannot be null and cannot be blank";
+        assert quantity >= 0 : "Quantity cannot be negative";
+        assert expiryDate != null : "Expiry date cannot be null";
         ingredient = new Ingredient(name, quantity, expiryDate);
     }
 
     @Override
     public String execute(IngredientList ingredients, RecipeList recipes) {
-        assert ingredients != null;
+        assert ingredients != null : "Ingredient list cannot be null";
         try {
             ingredients.add(ingredient);
         } catch (DuplicateDataException e) {
