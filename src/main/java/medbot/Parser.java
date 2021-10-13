@@ -219,7 +219,7 @@ public class Parser {
             throw new MedBotException(ERROR_NO_PARAMETER);
         }
         assert words.length > 1;
-        String[] parameters = Arrays.copyOfRange(words, 2, words.length);
+        String[] parameters = Arrays.copyOfRange(words, 1, words.length);
         assert parameters.length >= 1;
         return parameters;
     }
