@@ -20,7 +20,8 @@ public class SearchMapCommandParserTest {
     public void testCorrectUniversityName_success() throws IOException {
         try {
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
-            SearchMapCommand command = new SearchMapCommandParser().parse("Aalto University", universityMasterList, universitySelectedList, moduleSelectedList);
+            SearchMapCommand command = new SearchMapCommandParser().parse("Aalto University",
+                    universityMasterList, universitySelectedList, moduleSelectedList);
             assertEquals("Aalto University", command.getUniversityToMap().getName());
         } catch (ParseException e) {
             System.out.println(e.getMessage());
@@ -31,7 +32,8 @@ public class SearchMapCommandParserTest {
     public void test_NonExistentUniversityName_exceptionThrown() {
         try {
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
-            new SearchMapCommandParser().parse("non existent", universityMasterList, universitySelectedList, moduleSelectedList);
+            new SearchMapCommandParser().parse("non existent", universityMasterList,
+                    universitySelectedList, moduleSelectedList);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (ParseException e) {

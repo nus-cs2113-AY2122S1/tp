@@ -33,7 +33,8 @@ class AddModCommandParserTest {
         String moduleCode = "CS1011";
         AddModCommandParser acp = new AddModCommandParser();
         ModuleList moduleMasterList = new ModuleList(Storage.loadModules());
-        assertThrows(ParseException.class, () -> acp.parse(moduleCode, moduleMasterList, universitySelectedList, moduleSelectedList));
+        assertThrows(ParseException.class, () -> acp.parse(moduleCode,
+                moduleMasterList, universitySelectedList, moduleSelectedList));
     }
 
     @Test
@@ -41,6 +42,7 @@ class AddModCommandParserTest {
         String moduleCode = "";
         AddModCommandParser acp = new AddModCommandParser();
         ModuleList moduleMasterList = new ModuleList(Storage.loadModules());
-        assertThrows(ParseException.class, () -> acp.parse(moduleCode, moduleMasterList, universitySelectedList, moduleSelectedList));
+        assertThrows(ParseException.class, () -> acp.parse(moduleCode, moduleMasterList,
+                universitySelectedList, moduleSelectedList));
     }
 }

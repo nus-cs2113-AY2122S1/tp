@@ -31,7 +31,8 @@ public class AddUniCommandParserTest {
         try {
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
             AddUniCommandParser commandParser = new AddUniCommandParser();
-            commandParser.parse("non-existent university name", universityMasterList, universitySelectedList, moduleSelectedList);
+            commandParser.parse("non-existent university name", universityMasterList,
+                    universitySelectedList, moduleSelectedList);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } catch (ParseException e) {
