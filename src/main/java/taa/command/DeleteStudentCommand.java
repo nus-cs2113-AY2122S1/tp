@@ -66,10 +66,10 @@ public class DeleteStudentCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_DELETE_STUDENT_USAGE,
-                COMMAND_DELETE_STUDENT,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX
+            MESSAGE_FORMAT_DELETE_STUDENT_USAGE,
+            COMMAND_DELETE_STUDENT,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX
         );
     }
 }

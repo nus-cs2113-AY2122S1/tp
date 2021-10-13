@@ -59,10 +59,10 @@ public class AddModuleCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_ADD_MODULE_USAGE,
-                COMMAND_ADD_MODULE,
-                KEY_MODULE_CODE,
-                KEY_MODULE_NAME
+            MESSAGE_FORMAT_ADD_MODULE_USAGE,
+            COMMAND_ADD_MODULE,
+            KEY_MODULE_CODE,
+            KEY_MODULE_NAME
         );
     }
 }

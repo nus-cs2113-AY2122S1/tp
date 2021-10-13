@@ -57,9 +57,10 @@ public class ListStudentsCommand extends Command {
 
     @Override
     protected String getUsage() {
-        return String.format(MESSAGE_FORMAT_LIST_STUDENT_USAGE,
-                COMMAND_LIST_STUDENTS,
-                KEY_MODULE_CODE
+        return String.format(
+            MESSAGE_FORMAT_LIST_STUDENT_USAGE,
+            COMMAND_LIST_STUDENTS,
+            KEY_MODULE_CODE
         );
     }
 }

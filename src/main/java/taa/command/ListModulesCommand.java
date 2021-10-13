@@ -41,8 +41,8 @@ public class ListModulesCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_GENERIC_USAGE,
-                COMMAND_LIST_MODULES
+            MESSAGE_FORMAT_GENERIC_USAGE,
+            COMMAND_LIST_MODULES
         );
     }
 }

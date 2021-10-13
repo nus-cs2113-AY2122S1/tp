@@ -58,9 +58,9 @@ public class ListAssessmentsCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_LIST_ASSESSMENTS_USAGE,
-                COMMAND_LIST_ASSESSMENTS,
-                KEY_MODULE_CODE
+            MESSAGE_FORMAT_LIST_ASSESSMENTS_USAGE,
+            COMMAND_LIST_ASSESSMENTS,
+            KEY_MODULE_CODE
         );
     }
 }

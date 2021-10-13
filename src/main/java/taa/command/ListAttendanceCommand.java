@@ -73,10 +73,10 @@ public class ListAttendanceCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE,
-                COMMAND_LIST_ATTENDANCE,
-                KEY_MODULE_CODE,
-                KEY_STUDENT_INDEX
+            MESSAGE_FORMAT_LIST_ATTENDANCE_USAGE,
+            COMMAND_LIST_ATTENDANCE,
+            KEY_MODULE_CODE,
+            KEY_STUDENT_INDEX
         );
     }
 }

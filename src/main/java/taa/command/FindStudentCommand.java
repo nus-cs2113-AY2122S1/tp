@@ -70,10 +70,10 @@ public class FindStudentCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_FIND_STUDENT_USAGE,
-                COMMAND_FIND_STUDENT,
-                KEY_MODULE_CODE,
-                KEY_KEYWORD
+            MESSAGE_FORMAT_FIND_STUDENT_USAGE,
+            COMMAND_FIND_STUDENT,
+            KEY_MODULE_CODE,
+            KEY_KEYWORD
         );
     }
 }

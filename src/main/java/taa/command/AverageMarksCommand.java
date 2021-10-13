@@ -103,10 +103,10 @@ public class AverageMarksCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_AVERAGE_MARKS_USAGE,
-                COMMAND_AVERAGE_MARKS,
-                KEY_MODULE_CODE,
-                KEY_ASSESSMENT_NAME
+            MESSAGE_FORMAT_AVERAGE_MARKS_USAGE,
+            COMMAND_AVERAGE_MARKS,
+            KEY_MODULE_CODE,
+            KEY_ASSESSMENT_NAME
         );
     }
 }

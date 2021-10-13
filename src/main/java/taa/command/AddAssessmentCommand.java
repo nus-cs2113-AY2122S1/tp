@@ -90,11 +90,11 @@ public class AddAssessmentCommand extends Command {
     @Override
     protected String getUsage() {
         return String.format(
-                MESSAGE_FORMAT_ADD_ASSESSMENT_USAGE,
-                COMMAND_ADD_ASSESSMENT,
-                KEY_MODULE_CODE,
-                KEY_ASSESSMENT_NAME,
-                KEY_WEIGHTAGE
+            MESSAGE_FORMAT_ADD_ASSESSMENT_USAGE,
+            COMMAND_ADD_ASSESSMENT,
+            KEY_MODULE_CODE,
+            KEY_ASSESSMENT_NAME,
+            KEY_WEIGHTAGE
         );
     }
 }
