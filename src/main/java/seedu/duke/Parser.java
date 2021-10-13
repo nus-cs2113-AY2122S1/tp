@@ -124,6 +124,7 @@ public class Parser {
     private static void executeEdit(String inputDescription) {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
         int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
+        assert tripToEditInfo[1] != null;
         String attributesToEdit = tripToEditInfo[1];
         Trip tripToEdit = Storage.listOfTrips.get(indexToEdit);
         editTripPerAttribute(tripToEdit, attributesToEdit);
