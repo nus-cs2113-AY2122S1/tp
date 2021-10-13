@@ -8,7 +8,7 @@ import static seedu.duke.common.Messages.DIVIDER;
 import static seedu.duke.common.Messages.LIST_ALL_MESSAGE;
 
 /**
- * Class encapsulating an exit command.
+ * Command that lists out all items.
  */
 public class ListAllCommand extends Command {
     public static final String COMMAND_WORD = "list";
@@ -20,9 +20,10 @@ public class ListAllCommand extends Command {
     }
 
     /**
-     * Prints exit message.
+     * Prints out all items in the list.
      * Overrides method from parent class.
      * @param ui Object that handles user IO
+     * @param catalogue Object that stores the list of all items
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
