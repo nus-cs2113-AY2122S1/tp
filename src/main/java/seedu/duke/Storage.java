@@ -25,18 +25,22 @@ public class Storage {
         return validCommands;
     }
 
-    //TODO This function does 2 things, therefore it deserves to be split, like a dysfunction marriage, into 2 functions
+
     public static Trip getOpenTrip() {
         if (openTrip == null) {
             Ui.printNoOpenTripError();
-            try {
-                int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
-                setOpenTrip(listOfTrips.get(tripIndex));
-            } catch (NumberFormatException e) {
-                Ui.argNotNumber();
-            }
+            promptUserForValidTrip();
         }
         return openTrip;
+    }
+
+    private static void promptUserForValidTrip() {
+        try {
+            int tripIndex = Integer.parseInt(scanner.nextLine().strip()) - 1;
+            setOpenTrip(listOfTrips.get(tripIndex));
+        } catch (NumberFormatException e) {
+            Ui.argNotNumber();
+        }
     }
 
     /**
