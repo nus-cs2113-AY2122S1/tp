@@ -37,7 +37,6 @@ public class Storage {
             if (!isDirectoryCreated || !isFileCreated) {
                 throw new IOException(Message.ERROR_CREATING_NEW_FILE);
             }
-            assert file.isFile() : "file should have been created at this point";
         } catch (IOException e) {
             ui.printMessage(Message.ERROR_CREATING_NEW_FILE);
         }
