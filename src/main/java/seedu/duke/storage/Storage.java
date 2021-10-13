@@ -5,35 +5,37 @@ import seedu.duke.modules.ModuleMapping;
 import seedu.duke.universities.University;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static java.lang.Double.parseDouble;
-import static java.lang.Integer.parseInt;
 
 public class Storage {
-    private static final String UNIVERSITY_FILEPATH = "data/University.csv";
-    private static final String MODULE_FILEPATH = "data/modules.csv";
+    private static final String UNIVERSITY_FILEPATH = "src/main/resources/University.csv";
+    private static final String MODULE_FILEPATH = "src/main/resources/modules.csv";
 
     private static final Logger logger = Logger.getLogger("StorageLog");
 
     public static ArrayList<University> loadUniversities() throws IOException {
         logger.log(Level.INFO, "Start loading university data");
-        return readUniversitiesFromCsv();
+        InputStream inputStream = Storage.class.getResourceAsStream("/University.csv");
+        return readUniversitiesFromCsv(inputStream);
     }
 
     public static ArrayList<Module> loadModules() throws IOException {
         logger.log(Level.INFO, "Start loading module data");
-        return readModulesFromCsv();
+        InputStream inputStream = Storage.class.getResourceAsStream("/modules.csv");
+        return readModulesFromCsv(inputStream);
     }
 
-    public static ArrayList<University> readUniversitiesFromCsv() throws IOException {
+    public static ArrayList<University> readUniversitiesFromCsv(InputStream inputStream) throws IOException {
         ArrayList<University> universityList = new ArrayList<>();
         ArrayList<ModuleMapping> moduleMappingList = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader(UNIVERSITY_FILEPATH));
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line = br.readLine();
         String curr = " ";
         while (line != null) {
@@ -45,9 +47,9 @@ public class Storage {
                 curr = attributes[0];
                 moduleMappingList.clear();
             }
-            assert parseDouble(attributes[3]) > 0 : "Local module credits should be greater than 0";
+            assert parseDouble(attributes[3]) > 0 : "Local module credits should be positive";
             Module local = new Module(attributes[1], attributes[2], parseDouble(attributes[3]));
-            assert parseDouble(attributes[6]) > 0 : "Mapped module credits should be greater than 0";
+            assert parseDouble(attributes[6]) > 0 : "Mapped module credits should be positive";
             Module mapped = new Module(attributes[4], attributes[5], parseDouble(attributes[6]));
             moduleMappingList.add(new ModuleMapping(local, mapped));
             line = br.readLine();
@@ -56,9 +58,9 @@ public class Storage {
         return universityList;
     }
 
-    public static ArrayList<Module> readModulesFromCsv() throws IOException {
+    public static ArrayList<Module> readModulesFromCsv(InputStream inputStream) throws IOException {
         ArrayList<Module> moduleList = new ArrayList<>();
-        BufferedReader br = new BufferedReader(new FileReader(MODULE_FILEPATH));
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line = br.readLine();
         while (line != null) {
             String[] attributes = line.split(";");

@@ -37,14 +37,14 @@ public class ListCommand extends Command {
             }
             break;
         case "u":
-            ArrayList<University> allUniversityList = Storage.readUniversitiesFromCsv();
+            ArrayList<University> allUniversityList = Storage.loadUniversities();
             System.out.println("Here are all the universities available for you:");
             for (int i = 0; i < allUniversityList.size(); i++) {
                 System.out.println("[" + (i + 1) + "] " + allUniversityList.get(i).getName());
             }
             break;
         case "m":
-            ArrayList<Module> allModuleList = Storage.readModulesFromCsv();
+            ArrayList<Module> allModuleList = Storage.loadModules();
             System.out.println("Here are all the modules available for you:");
             for (int i = 0; i < allModuleList.size(); i++) {
                 System.out.println("[" + (i + 1) + "] " + allModuleList.get(i).getModuleCode());
