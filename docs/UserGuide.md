@@ -54,14 +54,15 @@ Example usage:
 $ add task CS2113 tP -d MON
     _______________________________________________________________________________
      Noted. I've added this task:
-       [T][ ] Title: CS2113 tP
+       [T][ ] Title: CS2113 tP (Day: MON)
      Now you have 1 tasks in the list.
     _______________________________________________________________________________
     
 $ add task CS2113 tP -d MON -i add documentation
     _______________________________________________________________________________
      Noted. I've added this task:
-       [T][ ] Title: CS2113 tP (Info: add documentation)
+       [T][ ] Title: CS2113 tP (Day: MON)
+               Info: add documentation 
      Now you have 2 tasks in the list.
     _______________________________________________________________________________
 
@@ -155,7 +156,6 @@ find lesson cs2113
      2. [L] Title: CS2113 Tutorial (Day: THU) (Start: 11am, End: 12pm)
     _______________________________________________________________________________
 
-
 ```
 
 ### Exiting the program - `exit`
@@ -171,6 +171,7 @@ exit
     _______________________________________________________________________________
      Bye!
     _______________________________________________________________________________
+
 ```
 
 ### Saving the data
