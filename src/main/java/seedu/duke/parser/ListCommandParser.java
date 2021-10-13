@@ -23,7 +23,6 @@ public class ListCommandParser {
         if (arguments.trim().length() == 0) {
             throw new ParseException("no flags passed", 1);
         }
-
         switch (arguments.trim()) {
         case "/m":
             type = "m";
