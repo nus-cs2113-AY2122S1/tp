@@ -16,7 +16,7 @@ public class DoneHabitCommand extends Command {
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-
+        goalList.doneHabitFromGoal(goalIndex, habitIndex);
     }
 
 }

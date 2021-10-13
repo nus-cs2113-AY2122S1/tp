@@ -94,6 +94,9 @@ public class Parser {
         StringBuilder instruction = new StringBuilder();
         for (int i = 1; i < words.length; i++) {
             instruction.append(words[i]);
+            if (i != words.length - 1) {
+                instruction.append(" ");
+            }
         }
         return instruction.toString();
     }
