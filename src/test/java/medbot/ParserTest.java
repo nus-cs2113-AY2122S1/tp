@@ -131,13 +131,13 @@ class ParserTest {
         method.setAccessible(true);
         String[][] testInputStrings = {
                 {"add n/John Tan i/S8712345G e/john@gmail.com p/8123 4567 a/123 bishan st 24 #05-19",
-                        "add |n/John Tan |i/S8712345G |e/john@gmail.com |p/8123 4567 |a/123 bishan st 24 #05-19"},
+                "add |n/John Tan |i/S8712345G |e/john@gmail.com |p/8123 4567 |a/123 bishan st 24 #05-19"},
                 {"add n/joe ong e/joe@gmail.com a/123 Bishan st 24 #05-19 ",
-                        "add |n/joe ong |e/joe@gmail.com |a/123 Bishan st 24 #05-19 "},
+                "add |n/joe ong |e/joe@gmail.com |a/123 Bishan st 24 #05-19 "},
                 {"add   n/Tim lee   e/tim_lee@gmail.com.sg   a/123 queenstown ave 6 #05-19 ",
-                        "add   |n/Tim lee   |e/tim_lee@gmail.com.sg   |a/123 queenstown ave 6 #05-19 "},
+                "add   |n/Tim lee   |e/tim_lee@gmail.com.sg   |a/123 queenstown ave 6 #05-19 "},
                 {"add i/S8712345G ",
-                        "add |i/S8712345G "}
+                "add |i/S8712345G "}
         };
         for (String[] testInputString : testInputStrings) {
             assertEquals(testInputString[1], method.invoke(method, testInputString[0]));
@@ -146,10 +146,12 @@ class ParserTest {
 
     @Test
     void testUpdateMultiplePersonalInformation() throws Exception {
-        Method method = Parser.class.getDeclaredMethod("updateMultiplePersonalInformation", Person.class, String[].class);
+        Method method = Parser.class.getDeclaredMethod("updateMultiplePersonalInformation", Person.class,
+                String[].class);
         method.setAccessible(true);
         Patient patient = new Patient();
-        String[] attributeStrings = {"n/John tan  ", "i/S8712345G  ", "e/john_tan@gmail.com ", "p/8123 4567", "a/123 bishan st 24 #05-19  "};
+        String[] attributeStrings = {"n/John tan  ", "i/S8712345G  ", "e/john_tan@gmail.com ", "p/8123 4567",
+                                     "a/123 bishan st 24 #05-19  "};
         method.invoke(method, patient, attributeStrings);
         assertEquals(patient.getName(), "John Tan");
         assertEquals(patient.getIcNumber(), "S8712345G");
