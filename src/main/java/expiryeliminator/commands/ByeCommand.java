@@ -13,6 +13,8 @@ import expiryeliminator.data.RecipeList;
 public class ByeCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "bye";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Exits the program.\n"
+            + "Example: " + COMMAND_WORD;
 
     private static final String MESSAGE_FAREWELL = "Bye. Hope to see you again soon!";
 
