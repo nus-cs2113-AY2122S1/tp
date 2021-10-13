@@ -34,6 +34,8 @@ public class DeleteFromTextFile {
                 count += 1;
             }
 
+            assert count >= lineNumber;
+
             fileWrite.close();
             bufferRead.close();
             // Put into exception...
