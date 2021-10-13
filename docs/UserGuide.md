@@ -102,76 +102,17 @@ Format:
 * `delete [task/lesson] all`: deletes all tasks or lessons as specified
 * `delete all`: deletes all tasks and lessons
 
-Example usage:
-
-```
-delete lesson 2
-    _______________________________________________________________________________
-     Ok. The following lesson has been deleted:
-       [L] Title: CS2113 Tutorial (Day: THU) (Start: 11am, End: 12pm)
-     Now you have 1 lesson(s) in the list.
-    _______________________________________________________________________________
-
-delete task 1
-    _______________________________________________________________________________
-     Ok. The following task has been deleted:
-       [T][ ] Title: CS2113 tP (Day: WED)
-     Now you have 1 task(s) in the list.
-    _______________________________________________________________________________
-
-delete lesson all
-    _______________________________________________________________________________
-     All your lessons have been successfully removed.
-    _______________________________________________________________________________
-
-delete all
-    _______________________________________________________________________________
-     All your tasks and lessons have been successfully removed.
-    _______________________________________________________________________________
-
-```
-
 ### Finding Tasks or Lessons by keyword - `find`
 
 Locate tasks and lessons that match the specified keyword.
 
 Format: `find [task/lesson] [KEYWORD]`
 
-Example usage:
-
-```
-find task cs2113
-    _______________________________________________________________________________
-     Here are the matching tasks in your list:
-     1. [T][ ] Title: CS2113 tP (Day: WED)
-     2. [T][ ] Title: CS2113 iP (Day: WED)
-               Info: New increment
-    _______________________________________________________________________________
-
-find lesson cs2113
-    _______________________________________________________________________________
-     Here are the matching lessons in your list:
-     1. [L] Title: CS2113 Lecture (Day: MON) (Start: 1pm, End: 2pm)
-     2. [L] Title: CS2113 Tutorial (Day: THU) (Start: 11am, End: 12pm)
-    _______________________________________________________________________________
-
-
-```
-
 ### Exiting the program - `exit`
 
 Exit the program.
 
 Format: `exit`
-
-Example usage:
-
-```
-exit
-    _______________________________________________________________________________
-     Bye!
-    _______________________________________________________________________________
-```
 
 ### Saving the data
 
