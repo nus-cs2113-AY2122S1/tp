@@ -35,6 +35,7 @@ public class UniversityList {
     }
 
     public void listUniversities() {
+        assert list.size() != 0;
         for (int i = 0; i < list.size(); i++) {
             University curr = list.get(i);
             String output = (i + 1) + ". " + curr.name;
@@ -53,5 +54,14 @@ public class UniversityList {
     public University get(int index) {
         assert index <= list.size();
         return list.get(index);
+    }
+
+    public boolean searchUniversity(String universityName) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).name.equals(universityName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
