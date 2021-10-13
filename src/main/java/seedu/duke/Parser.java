@@ -112,7 +112,8 @@ public class Parser {
             throws TourPlannerException {
         String unformattedSubstring = argString.substring(startIndex, endIndex).trim();
         String value = unformattedSubstring.replace(prefix, "").trim();
-        if (value.contains("/cn") || value.contains("/f") || value.contains("/a") || value.contains("/t")) {
+        if (value.contains(CONTACT_NUMBER_PREFIX) || value.contains(FLIGHT_PREFIX)
+                    || value.contains(ACCOMMS_PREFIX) || value.contains(TOUR_PREFIX)) {
             throw new TourPlannerException("There are duplicate prefixes!");
         }
         return value;
