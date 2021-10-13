@@ -14,7 +14,7 @@ public class DeleteExpenditureCommand extends DeleteCommand {
 
     @Override
     public void execute(boolean isLoadingStorage) {
-        recordList.deleteExpenditure(index);
         TextUi.showExpenditureDeletedMessage(index, recordList.getExpenditure(index - 1));
+        recordList.deleteExpenditure(index);
     }
 }

@@ -49,12 +49,12 @@ public class TextUi {
     public static void showExpenditureAddedMessage(Expenditure addedExpenditure) {
         System.out.println("Successfully added. Here's the added expenditure: ");
         System.out.println("   " + addedExpenditure);
+        System.out.println(DIVIDER);
     }
 
     public static void showRecordsListView(RecordList list) {
         int i = 1;
-        System.out.println(DIVIDER + LS
-                 + "Your budget for this month:" + list.getBudget() + LS
+        System.out.println("Your budget for this month:" + list.getBudget() + LS
                  + "Your expenditures:");
         for (Expenditure a: list.getExpenditureRecords()) {
             System.out.println(i + "." + a);
@@ -64,12 +64,14 @@ public class TextUi {
     }
 
     public static void showExpenditureDeletedMessage(int indexOfDeletedExpenditure, Expenditure deletedExpenditure) {
-        System.out.println("Successfully deleted Expenditure" + indexOfDeletedExpenditure + "." + deletedExpenditure);
+        System.out.println("Successfully deleted Expenditure " + indexOfDeletedExpenditure + "." + deletedExpenditure);
+        System.out.println(DIVIDER);
     }
 
     public static void showBudgetDeletedMessage() {
         System.out.println("Successfully deleted Budget for this month!");
         System.out.println("Now the budget amount is 0.00!");
+        System.out.println(DIVIDER);
     }
 
     public static void showExitMessage() {
