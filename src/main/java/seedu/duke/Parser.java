@@ -67,20 +67,29 @@ public class Parser {
      * @return Ingredient updated message
      */
     private static String parseUpdateCommand(String command) throws DukeException {
-        String resultMsg = "";
-        int i;
         String delimiter = "n/|a/|u/|e/";
         String[] details = command.split(delimiter);
 
+        if (details.length != 5) {
+            throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+        }
+
+        assert (details.length == 5);
+
         String ingredientName = details[1].trim();
-        double ingredientAmount = Double.parseDouble(details[2].trim());
+        double ingredientAmount;
+        try {
+            ingredientAmount = Double.parseDouble(details[2]);
+        } catch (NumberFormatException e) {
+            throw new DukeException(NUMBER_FORMAT_MESSAGE);
+        }
         String ingredientUnits = details[3].trim();
         String ingredientExpiry = details[4].trim();
         Ingredient updatedIngredient =
                 new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
-        resultMsg = new UpdateCommand(updatedIngredient).run();
+        String resultMsg = new UpdateCommand(updatedIngredient).run();
 
-        if (resultMsg == "") {
+        if (resultMsg.equals("")) {
             resultMsg = NOT_FOUND_MESSAGE;
         }
         return resultMsg;
