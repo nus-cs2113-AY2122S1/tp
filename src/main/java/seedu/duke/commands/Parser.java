@@ -5,7 +5,9 @@ package seedu.duke.commands;
  */
 public class Parser {
     private static final String COMMAND_EXIT = "exit";
-
+    private static final String COMMAND_LIST_ALL = "list";
+    private static final String COMMAND_LIST_AVAILABLE = "list available";
+    private static final String COMMAND_LIST_LOANED = "list loaned";
     /**
      * Processes the commands inputted by the user.
      *
@@ -15,6 +17,12 @@ public class Parser {
     public static Command parse(String input) {
         if (input.equals(COMMAND_EXIT)) {
             return new ExitCommand();
+        } else if (input.equals(COMMAND_LIST_ALL)){
+            return new ListAllCommand();
+        } else if (input.equals(COMMAND_LIST_AVAILABLE)){
+            return new ListAvailableCommand();
+        } else if (input.equals(COMMAND_LIST_LOANED)){
+            return new ListLoanedCommand();
         } else {
             return new UnknownCommand();
         }

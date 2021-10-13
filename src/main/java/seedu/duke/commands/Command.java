@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.data.Catalogue;
 import seedu.duke.ui.TextUI;
 
 /**

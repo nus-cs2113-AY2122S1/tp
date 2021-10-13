@@ -1,4 +1,4 @@
-package seedu.duke.data.item;
+package seedu.duke.data;
 
 public class Item {
     private String title;
