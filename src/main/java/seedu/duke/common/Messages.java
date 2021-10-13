@@ -24,6 +24,8 @@ public class Messages {
     public static final String EXIT_MESSAGE = "See you soon!";
     public static final String LOAN_MESSAGE = "Item has been loaned to you:";
     public static final String RETURN_MESSAGE = "Thank you for returning the item:";
+    public static final String UNAVAILABLE_ITEM_MESSAGE = "Sorry, the item is unavailable.";
+    public static final String WRONG_ITEM_MESSAGE = "You didn't borrow this item. You might have input the wrong ID.";
     public static final String UNKNOWN_MESSAGE = "Sorry, I don't understand what you mean";
     public static final String RM_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: rm <id>";
