@@ -33,7 +33,7 @@ public class Goal {
      * Setter for name of goal.
      * Used to edit the name of the goal.
      *
-     * @param goalName
+     * @param goalName Name of goal to be updated.
      */
     public void setGoalName(String goalName) {
         this.goalName = goalName;
@@ -46,6 +46,15 @@ public class Goal {
      */
     public String getDescription() {
         return getGoalTypeCharacter() + " " + goalName + "\n";
+    }
+
+    /**
+     * Gets the habitList.
+     *
+     * @return ArrayList of habits.
+     */
+    public ArrayList<Habit> getHabitList() {
+        return habitList;
     }
 
     /**
@@ -73,15 +82,6 @@ public class Goal {
      */
     public int numberOfHabits() {
         return habitList.size();
-    }
-
-    /**
-     * Prints list of habits associated with the goal.
-     */
-    public void printHabitList() {
-        for (int i = 0; i < habitList.size(); i++) {
-            System.out.println(i + ". " + habitList.get(i).getDescription() + "\n");
-        }
     }
 
     /*

@@ -1,6 +1,6 @@
 package happybit.command;
 
-import happybit.exception.HBCommandException;
+import happybit.exception.HaBitCommandException;
 import happybit.goal.GoalList;
 import happybit.storage.Storage;
 import happybit.ui.Ui;
@@ -13,9 +13,9 @@ public abstract class Command {
      * @param goalList List that stores all the tasks.
      * @param ui       User interface of duke.
      * @param storage  Reference to the file where data is stored.
-     * @throws HBCommandException If exception is thrown by Command subclasses.
+     * @throws HaBitCommandException If exception is thrown by Command subclasses.
      */
-    public abstract void runCommand(GoalList goalList, Ui ui, Storage storage) throws HBCommandException;
+    public abstract void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException;
 
     /**
      * Checks if the exit command is being called.

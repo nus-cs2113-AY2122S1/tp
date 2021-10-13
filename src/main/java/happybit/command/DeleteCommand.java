@@ -1,33 +1,13 @@
 package happybit.command;
 
-import happybit.exception.HappyBitException;
-import java.util.ArrayList;
+import happybit.exception.HaBitCommandException;
+import happybit.goal.GoalList;
+import happybit.storage.Storage;
+import happybit.ui.Ui;
 
 public class DeleteCommand {
 
-    //Temporary methods
-    protected ArrayList<String> habits = new ArrayList<>();
-
-    public void deleteHabit(String habit) {
-        habits.remove(habit);
-    }
-
-
-    //Semi-permanent methods
-
-    //protected String habitName;
-    //public DeleteCommand(int habitName) {
-    //    this.habitName= habitName;
-    //}
-
-
-    /**
-     * Deletes a habit from the list.
-     *
-     * @param habit Name of habit to be deleted.
-     */
-    //@Override
-    public void runCommand(String habit) {
-        deleteHabit(habit);
+    public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
+        // Do nothing
     }
 }

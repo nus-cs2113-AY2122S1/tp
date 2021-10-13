@@ -1,9 +1,10 @@
 package happybit;
 
 import happybit.command.Command;
-import happybit.exception.HBLoadException;
-import happybit.exception.HappyBitException;
+import happybit.exception.HaBitCommandException;
+import happybit.exception.HaBitParserException;
 import happybit.goal.GoalList;
+import happybit.parser.Parser;
 import happybit.storage.Storage;
 import happybit.ui.Ui;
 
@@ -16,14 +17,13 @@ public class HappyBit {
     private Ui ui;
 
     /**
-     * Duke class constructor that also loads in tasks data
-     * from an external save file
+     * Duke class constructor that also loads in tasks data from an external save file.
      *
      * @param filePath File path of the external save file
      */
-    public HappyBit(String filePath) {
+    public HappyBit(String filePath, String fileDir) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, fileDir);
         loadData();
     }
 
@@ -34,7 +34,7 @@ public class HappyBit {
      * @param args Not applicable.
      */
     public static void main(String[] args) {
-        new HappyBit("happybit.txt").run();
+        new HappyBit("data/habits.txt", "data").run();
     }
 
     /*
@@ -49,21 +49,16 @@ public class HappyBit {
      * Loads in data from an external storage.
      */
     private void loadData() {
-        try {
-            goalList = storage.load();
-        } catch (HBLoadException e) {
-            ui.showError(e.getMessage());
-            goalList = new GoalList();
-        }
+        goalList = storage.load();
     }
 
     /**
      * Executes the main body of HappyBit.
      */
     private void run() {
-        ui.showWelcome();
+        //ui.showWelcome();
         handleUserInput();
-        ui.showGoodbye();
+        //ui.showGoodbye();
     }
 
     /**
@@ -74,13 +69,13 @@ public class HappyBit {
         boolean isExit = false;
         Scanner in = new Scanner(System.in);
         while (!isExit) {
-            userInput = in.nextLine().strip().replaceAll("\\s+"," ");
+            userInput = in.nextLine();
             try {
                 Command command = Parser.parse(userInput);
                 command.runCommand(goalList, ui, storage);
                 isExit = command.isExit();
-            } catch (HappyBitException e) {
-                ui.showError(e.getMessage());
+            } catch (HaBitParserException | HaBitCommandException e) {
+                //ui.showError(e.getMessage());
             }
         }
     }
