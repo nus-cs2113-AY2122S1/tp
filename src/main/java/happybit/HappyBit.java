@@ -56,9 +56,9 @@ public class HappyBit {
      * Executes the main body of HappyBit.
      */
     private void run() {
-        //ui.showWelcome();
+        ui.showWelcome();
         handleUserInput();
-        //ui.showGoodbye();
+        ui.showGoodbye();
     }
 
     /**
