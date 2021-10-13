@@ -41,6 +41,6 @@ public class Client {
             + "Client's contactNum: " + contactNum + System.lineSeparator()
                 + "Client's flight number: " + flight + System.lineSeparator() 
                     + "Client's accomms: " + accomms + System.lineSeparator() 
-                        + "Client's tour" + tour + System.lineSeparator();
+                        + "Client's tour: " + tour + System.lineSeparator();
     }
 }
