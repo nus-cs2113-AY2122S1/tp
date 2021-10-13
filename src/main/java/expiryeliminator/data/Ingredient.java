@@ -18,6 +18,9 @@ public class Ingredient {
      * @param expiryDate The expiry date of the ingredient.
      */
     public Ingredient(String name, int quantity, LocalDate expiryDate) {
+        assert name != null && !name.isBlank();
+        assert quantity >= 0;
+        assert expiryDate != null;
         this.name = name;
         this.quantity = quantity;
         this.expiryDate = expiryDate;
@@ -47,6 +50,7 @@ public class Ingredient {
      * @param quantity Quantity of the ingredient.
      */
     public void setQuantity(int quantity) {
+        assert quantity >= 0;
         this.quantity = quantity;
     }
 
