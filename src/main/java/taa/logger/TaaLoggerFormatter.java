@@ -8,7 +8,7 @@ import java.util.logging.LogRecord;
 public class TaaLoggerFormatter extends Formatter {
     private static final String MESSAGE_FORMAT_LOG_OUTPUT = "%d %s %s %s";
 
-    private static final String DATE_FORMAT = "dd/MM/yyyy HHmm";
+    private static final String DATE_FORMAT = "dd/MM/yyyy HHmm z";
 
     @Override
     public String format(LogRecord record) {
