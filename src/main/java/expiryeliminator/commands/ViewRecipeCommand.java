@@ -19,7 +19,7 @@ public class ViewRecipeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": View a recipe in the recipe list.\n"
             + "Only full name of recipe will be matched.\n"
             + "Parameters: r/RECIPE NAME\n"
-            + "Example: " + COMMAND_WORD + "r/Chicken Soup";
+            + "Example: " + COMMAND_WORD + " r/Chicken Soup";
 
 
     private final String recipeDescription;
