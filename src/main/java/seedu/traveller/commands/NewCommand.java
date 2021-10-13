@@ -25,7 +25,7 @@ public class NewCommand extends Command {
         this.tripName = tripName;
         this.startCountry = startCountry;
         this.endCountry = endCountry;
-        logger.log(Level.INFO, "Created an edit command: " + this);
+        logger.log(Level.INFO, "Created a new command: \n" + this);
     }
 
     public String getTripName() {

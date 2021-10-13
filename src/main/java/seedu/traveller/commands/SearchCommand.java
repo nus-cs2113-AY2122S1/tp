@@ -19,7 +19,7 @@ public class SearchCommand extends Command {
         logger.setLevel(Level.INFO);
         this.startCountry = startCountry;
         this.endCountry = endCountry;
-        logger.log(Level.INFO, "Created an search command: " + this);
+        logger.log(Level.INFO, "Created an search command: \n" + this);
     }
 
     public String getStartCountry() {

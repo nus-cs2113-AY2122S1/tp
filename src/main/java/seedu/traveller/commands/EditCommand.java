@@ -25,7 +25,7 @@ public class EditCommand extends Command {
         this.tripName = tripName;
         this.startCountry = startCountry;
         this.endCountry = endCountry;
-        logger.log(Level.INFO, "Created an edit command: " + this);
+        logger.log(Level.INFO, "Created an edit command: \n" + this);
     }
 
     @Override

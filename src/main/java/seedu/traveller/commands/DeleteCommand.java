@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String tripName) {
         logger.setLevel(Level.INFO);
         this.tripName = tripName;
-        logger.log(Level.INFO, "Created a delete command: " + this);
+        logger.log(Level.INFO, "Created a delete command: \n" + this);
     }
 
     @Override
