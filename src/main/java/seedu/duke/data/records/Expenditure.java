@@ -3,7 +3,7 @@ package seedu.duke.data.records;
 import java.time.LocalDate;
 
 public class Expenditure extends Record {
-    public static String description;
+    public String description;
     //public static LocalDate date;
 
     public Expenditure(String description, double amount) {
@@ -37,7 +37,7 @@ public class Expenditure extends Record {
 
 
     public String toString() {
-        return (description + " $" + this.amount);
+        return (this.description + " $" + this.amount);
     }
 
     @Override
