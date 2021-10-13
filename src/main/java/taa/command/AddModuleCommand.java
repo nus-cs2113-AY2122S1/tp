@@ -13,6 +13,7 @@ public class AddModuleCommand extends Command {
     private static final String[] ADD_MODULE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_MODULE_NAME};
 
     private static final String MESSAGE_INVALID_MODULE_CODE = "Invalid module code.";
+    private static final String MESSAGE_MODULE_EXISTS = "Module already exists.";
 
     private static final String MESSAGE_FORMAT_ADD_MODULE_USAGE = "%s %s/<MODULE_CODE> %s/<MODULE_NAME>";
     private static final String MESSAGE_FORMAT_MODULE_ADDED = "Module added:\n  %s\nThere are %d modules in the list.";
@@ -45,9 +46,15 @@ public class AddModuleCommand extends Command {
             throw new TaaException(MESSAGE_INVALID_MODULE_CODE);
         }
 
+        Module module = moduleList.getModule(moduleCode);
+        if (module != null) {
+            throw new TaaException(MESSAGE_MODULE_EXISTS);
+        }
+
         assert argumentMap.containsKey(KEY_MODULE_NAME);
         String name = argumentMap.get(KEY_MODULE_NAME);
-        Module module = new Module(moduleCode, name);
+
+        module = new Module(moduleCode, name);
         moduleList.addModule(module);
         TaaLogger.LOGGER.logInfo(String.format("Added module: %s", module));
 
