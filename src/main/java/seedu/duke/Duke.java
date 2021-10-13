@@ -18,7 +18,7 @@ public class Duke {
         IngredientList ingredientList = new IngredientList();
 
         // Load Storage
-        File file = Storage.loadStorage(employeeList, menuList, ingredientList);
+        Storage.loadStorage(employeeList, menuList, ingredientList);
 
         // Hello
         MainUI.printWelcomeMessage();
@@ -39,7 +39,7 @@ public class Duke {
         MainUI.printGoodbyeMessage();
 
         // Save Storage
-        Storage.saveStorage(employeeList, menuList, ingredientList, file);
+        Storage.saveStorage(employeeList, menuList, ingredientList);
         MainUI.printStorageSaved();
     }
 
