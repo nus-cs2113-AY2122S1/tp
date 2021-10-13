@@ -70,7 +70,7 @@ public class Storage {
         return habits;
     }
 
-    public void createFile(String filePath, String fileDir) {
+    protected void createFile(String filePath, String fileDir) {
         File storageDir = new File(fileDir);
         File storageFile = new File(filePath);
 
