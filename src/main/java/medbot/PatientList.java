@@ -94,8 +94,7 @@ public class PatientList {
     public String listPatients() {
         String output = "";
         for (int key : patients.keySet()) {
-            output += patients.get(key);
-            output += "\n";
+            output += patients.get(key) + System.lineSeparator();
         }
         return output;
     }
@@ -114,7 +113,7 @@ public class PatientList {
         for (int key : patients.keySet()) {
             Patient patient = patients.get(key);
             String patientStorageString = patient.getStorageString();
-            output += patientStorageString + "\n";
+            output += patientStorageString + System.lineSeparator();
         }
         return output;
     }

@@ -15,6 +15,7 @@ import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Arrays;
 
 public class Parser {
     private static final String COMMAND_ADD = "add";
@@ -185,7 +186,7 @@ public class Parser {
         String[] parameters = getParameters(userInput);
         Patient patient = new Patient();
         patient.setNull();
-        for (int i = 1; i < parameters.length; i++) {
+        for (int i = 0; i < parameters.length; i++) {
             updatePersonalInformation(patient, parameters[i]);
         }
         return new EditPatientCommand(patientId, patient);
@@ -202,7 +203,7 @@ public class Parser {
     private static AddPatientCommand parseAddPatientCommand(String userInput) throws MedBotException {
         String[] parameters = getParameters(userInput);
         Patient patient = new Patient();
-        for (int i = 1; i < parameters.length; i++) {
+        for (int i = 0; i < parameters.length; i++) {
             updatePersonalInformation(patient, parameters[i]);
         }
         return new AddPatientCommand(patient);
@@ -217,11 +218,13 @@ public class Parser {
      */
     private static String[] getParameters(String userInput) throws MedBotException {
         String processedInput = preprocessMultiAttributeInput(userInput);
-        String[] parameters = processedInput.split(REGEX_VERTICAL_LINE);
-        if (parameters.length == 1) {
+        String[] words = processedInput.split(REGEX_VERTICAL_LINE);
+        if (words.length == 1) {
             throw new MedBotException(ERROR_NO_PARAMETER);
         }
-        assert parameters.length > 1;
+        assert words.length > 1;
+        String[] parameters = Arrays.copyOfRange(words, 2, words.length);
+        assert parameters.length >= 1;
         return parameters;
     }
 
