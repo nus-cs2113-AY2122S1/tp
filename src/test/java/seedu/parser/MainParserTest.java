@@ -86,7 +86,7 @@ public class MainParserTest {
 
 
     @Test
-    public void parseDeleteCommand_outOfRangeIndex_expectFailedCommandType() {
+    public void parseDeleteCommand_outOfRangeIndex_expectException() {
         ContactList contactList = new ContactList();
         testUserInput = "rm 3";
         // adding 1 input contact into contactList
