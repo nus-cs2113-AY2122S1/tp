@@ -6,7 +6,7 @@ import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
 import static seedu.duke.common.Messages.NO_ID;
-import static seedu.duke.common.Messages.RETURN_MESSAGE;
+import static seedu.duke.common.Messages.RETURN_SUCCESS;
 import static seedu.duke.common.Messages.RM_INVALID_ID;
 
 public class ReturnCommand extends Command {
@@ -26,8 +26,8 @@ public class ReturnCommand extends Command {
         id = args.split(" ")[1];
         Item toBeReturned = catalogue.getItem(id);
         toBeReturned.setStatus(AVAILABLE_STATUS);
-        ui.print(RETURN_MESSAGE);
-        ui.print(toBeReturned.getID() + " " + toBeReturned.getTitle());
+        ui.print(RETURN_SUCCESS);
+        ui.print(toBeReturned);
     }
 
     @Override

@@ -5,7 +5,7 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.common.Messages.LOAN_MESSAGE;
+import static seedu.duke.common.Messages.LOAN_SUCCESS;
 import static seedu.duke.common.Messages.NO_ID;
 import static seedu.duke.common.Messages.RM_INVALID_ID;
 
@@ -26,8 +26,8 @@ public class LoanCommand extends Command {
         id = args.split(" ")[1];
         Item toBeLoaned = catalogue.getItem(id);
         toBeLoaned.setStatus(BORROWED_STATUS);
-        ui.print(LOAN_MESSAGE);
-        ui.print(toBeLoaned.getID() + " " + toBeLoaned.getTitle());
+        ui.print(LOAN_SUCCESS);
+        ui.print(toBeLoaned);
     }
 
     @Override

@@ -4,6 +4,7 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
+import static seedu.duke.common.Messages.DIVIDER;
 import static seedu.duke.common.Messages.LIST_ALL_MESSAGE;
 
 /**
@@ -26,8 +27,10 @@ public class ListAllCommand extends Command {
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         ui.print(LIST_ALL_MESSAGE);
+        ui.print(DIVIDER);
         for (Item temp : catalogue.getAllItems()) {
-            System.out.println(temp.getID() + " " + temp.getTitle() + " " + temp.getStatus());
+            ui.print(temp);
         }
+        ui.print(DIVIDER);
     }
 }
