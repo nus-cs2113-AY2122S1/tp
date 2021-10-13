@@ -14,8 +14,9 @@ import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
  * Class encapsulating command to update the status of the item to be loaned out.
  */
 public class LoanCommand extends Command {
+
+    private static final String BORROWED_STATUS = "Loaned";
     private static final String AVAILABLE_STATUS = "Available";
-    private static final String BORROWED_STATUS = "Borrowed";
     protected String args; // Format: loan [ID]
     protected String id;
 
