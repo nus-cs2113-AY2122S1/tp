@@ -5,7 +5,7 @@ import command.HelpCommand;
 import command.PurgeCommand;
 import command.dispense.AddDispense;
 import command.medicine.AddCommand;
-import command.medicine.DeleteCommand;
+import command.medicine.DeleteStock;
 import command.medicine.UpdateStock;
 import command.medicine.ListStock;
 import errors.InvalidCommand;
@@ -68,7 +68,7 @@ public class Parser {
         case ARCHIVE:
             break;
         case DELETE:
-            new DeleteCommand().execute(ui, parameters, medicines);
+            new DeleteStock().execute(ui, parameters, medicines);
             break;
         case DELETE_DISPENSE:
             break;
