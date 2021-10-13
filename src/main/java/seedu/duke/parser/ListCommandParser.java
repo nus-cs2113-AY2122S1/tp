@@ -1,15 +1,25 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.ListCommand;
+import seedu.duke.modules.ModuleList;
+import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ListCommandParser {
 
-    public ListCommand parse(String arguments) throws ParseException, IOException {
-        String type;
+    private Logger logger = Logger.getLogger("ListCommandParserLog");
 
+    public ListCommand parse(String arguments,
+                             UniversityList universitySelectedList, ModuleList moduleSelectedList)
+            throws ParseException, IOException {
+
+        logger.log(Level.INFO, "Start parsing list command");
+
+        String type;
         if (arguments.trim().length() == 0) {
             throw new ParseException("no flags passed", 1);
         }
@@ -28,9 +38,12 @@ public class ListCommandParser {
             type = "t";
             break;
         default:
+            logger.log(Level.WARNING, "incorrect flags");
             throw new ParseException("Incorrect flags passed.", 1);
         }
 
-        return new ListCommand(type);
+        logger.log(Level.INFO, "parse success");
+
+        return new ListCommand(type, universitySelectedList, moduleSelectedList);
     }
 }

@@ -8,19 +8,25 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 
 public class Storage {
     private static final String UNIVERSITY_FILEPATH = "data/University.csv";
-    private static final String MODULE_FILEPATH = "data/modules.csv";
+    private static final String MODULE_FILEPATH = "src/main/resources/modules.csv";
+
+    private static final Logger logger = Logger.getLogger("StorageLog");
 
     public static ArrayList<University> loadUniversities() throws IOException {
+        logger.log(Level.INFO, "Start loading university data");
         return readUniversitiesFromCsv();
     }
 
     public static ArrayList<Module> loadModules() throws IOException {
+        logger.log(Level.INFO, "Start loading module data");
         return readModulesFromCsv();
     }
 
@@ -39,11 +45,14 @@ public class Storage {
                 curr = attributes[0];
                 moduleMappingList.clear();
             }
+            assert parseInt(attributes[3]) > 1 : "Local module credits should be greater than 1";
             Module local = new Module(attributes[1], attributes[2], parseInt(attributes[3]));
+            assert parseDouble(attributes[6]) > 0 : "Mapped module credits should be greater than 0";
             Module mapped = new Module(attributes[4], attributes[5], parseDouble(attributes[6]));
             moduleMappingList.add(new ModuleMapping(local, mapped));
             line = br.readLine();
         }
+        logger.log(Level.INFO, "Completed loading of universities");
         return universityList;
     }
 
@@ -53,9 +62,11 @@ public class Storage {
         String line = br.readLine();
         while (line != null) {
             String[] attributes = line.split(";");
+            assert parseInt(attributes[2]) > 1 : "Local module credits should be greater than 1";
             moduleList.add(new Module(attributes[0], attributes[1], parseInt(attributes[2])));
             line = br.readLine();
         }
+        logger.log(Level.INFO, "Completed loading of modules");
         return moduleList;
     }
 

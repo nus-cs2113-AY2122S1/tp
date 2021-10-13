@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.modules.Module;
-import seedu.duke.modules.SelectedModuleList;
+import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.Storage;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
@@ -12,25 +12,27 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
-    public ListCommand(String type) throws IOException {
+    public ListCommand(String type, UniversityList universitySelectedList,
+                       ModuleList moduleSelectedList) throws IOException {
+        super(universitySelectedList, moduleSelectedList);
         switch (type) {
         case "t":
-            if (selectedModuleList.getSize() == 0) {
+            if (moduleSelectedList.getSize() == 0) {
                 System.out.println("The module list is empty!");
             } else {
                 System.out.println("Here are the modules in your list:");
-                for (int i = 0; i < selectedModuleList.getSize(); i++) {
-                    System.out.println("[" + (i + 1) + "] " + selectedModuleList.get(i).getModuleCode());
+                for (int i = 0; i < moduleSelectedList.getSize(); i++) {
+                    System.out.println("[" + (i + 1) + "] " + moduleSelectedList.get(i).getModuleCode());
                 }
             }
             break;
         case "s":
-            if (universityList.getSize() == 0) {
+            if (universitySelectedList.getSize() == 0) {
                 System.out.println("The university list is empty!");
             } else {
                 System.out.println("Here are the universities in your list:");
-                for (int i = 0; i < universityList.getSize(); i++) {
-                    System.out.println("[" + (i + 1) + "] " + universityList.get(i).getName());
+                for (int i = 0; i < universitySelectedList.getSize(); i++) {
+                    System.out.println("[" + (i + 1) + "] " + universitySelectedList.get(i).getName());
                 }
             }
             break;

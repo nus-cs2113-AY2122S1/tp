@@ -2,14 +2,19 @@ package seedu.duke.modules;
 
 import java.util.ArrayList;
 
-public class SelectedModuleList {
+public class ModuleList {
     protected ArrayList<Module> list;
 
-    public SelectedModuleList(ArrayList<Module> list) {
+    public ModuleList(ArrayList<Module> list) {
         this.list = list;
     }
 
+    public ModuleList() {
+        this.list = new ArrayList<>();
+    }
+
     public void addModule(Module module) {
+        assert module != null;
         list.add(module);
     }
 
@@ -27,6 +32,7 @@ public class SelectedModuleList {
     }
 
     public Module get(int index) {
+        assert index <= list.size();
         return list.get(index);
     }
 }
