@@ -30,6 +30,7 @@ public class EmployeeParser {
         System.out.println("You now have " + masterList.totalEmployee + " employees.");
         MainUI.printSingleLine();
         logger.log(Level.INFO, "end of adding employee");
+        assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
     }
 
     public void loadEmployeeFromStorage(EmployeeList masterList, Employee employee) {
@@ -60,6 +61,7 @@ public class EmployeeParser {
             System.out.println("Invalid input detected.");
             System.out.println("Please include employee index found in \"list-employee\".");
             MainUI.printSingleLine();
+            logger.log(Level.INFO, "index from user input for removing employee is out of range");
             return;
         }
         System.out.println("I have deleted: ");
@@ -69,6 +71,7 @@ public class EmployeeParser {
         masterList.employeeList.remove(employeeIndex);
         masterList.totalEmployee -= 1;
         logger.log(Level.INFO, "end of deleting employee");
+        assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
     }
 
     public void listEmployee(EmployeeList masterList) {
