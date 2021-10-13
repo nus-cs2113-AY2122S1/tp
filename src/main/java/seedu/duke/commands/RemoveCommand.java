@@ -13,17 +13,17 @@ public class RemoveCommand extends Command {
     protected String args;
 
     /**
-     * Single constructor, takes in full line of input
-     * @param input
+     * Single constructor, takes in full line of input.
+     * @param input User input
      */
     public RemoveCommand(String input) {
         args = input;
     }
 
     /**
-     *
+     * Gets the ID of object to be deleted, attempt deletion and output result.
      * @param ui Object that handles user IO
-     * @param catalogue
+     * @param catalogue Underlying list of all items
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
@@ -32,7 +32,6 @@ public class RemoveCommand extends Command {
             if (argList.length == 2) {
                 Item removed = catalogue.removeItem(argList[1]);
                 assert removed != null : "Removed item returns null";
-
                 ui.print(RM_SUCCESS);
                 ui.print("  " + removed);
             } else {
