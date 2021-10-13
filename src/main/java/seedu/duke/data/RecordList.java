@@ -49,10 +49,8 @@ public class RecordList {
 
     public void deleteExpenditure(int index) {
         expenditureRecords.remove(index - 1);
-        System.out.println(getExpenditureListSize());
-        System.out.println(numberOfRecords - 1);
-        assert getExpenditureListSize() == (numberOfRecords - 1);
         numberOfRecords -= 1;
+        assert getExpenditureListSize() == numberOfRecords;
     }
 
     public ArrayList<Expenditure> getExpenditureRecords() {
