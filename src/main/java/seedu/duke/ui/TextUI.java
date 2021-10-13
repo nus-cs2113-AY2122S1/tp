@@ -48,6 +48,16 @@ public class TextUI {
      * @param item Item to be printed
      */
     public void print(Item item) {
-        out.println(item);
+        out.println("  " + item);
+    }
+
+    /**
+     * Prints pair of message and string representation of item
+     * @param message Message to be printed
+     * @param item Item to be printed
+     */
+    public void print(String message, Item item) {
+       out.println(message);
+       out.println("  " + item);
     }
 }

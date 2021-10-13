@@ -6,8 +6,7 @@ import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
 import static seedu.duke.common.Messages.LOAN_SUCCESS;
-import static seedu.duke.common.Messages.NO_ID;
-import static seedu.duke.common.Messages.RM_INVALID_ID;
+import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
 
 /**
@@ -36,15 +35,14 @@ public class LoanCommand extends Command {
      */
     public void handleLoanCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         if (!args.contains(" ")) {
-            throw new LibmgrException(NO_ID);
+            throw new LibmgrException(INVALID_ID);
         }
         id = args.split(" ")[1];
         Item toBeLoaned = catalogue.getItem(id);
 
         if (toBeLoaned.getStatus().equals(AVAILABLE_STATUS)) {
             toBeLoaned.setStatus(LOANED_STATUS);
-            ui.print(LOAN_SUCCESS);
-            ui.print(toBeLoaned.getID() + " " + toBeLoaned.getTitle());
+            ui.print(LOAN_SUCCESS, toBeLoaned);
         } else {
             ui.print(UNAVAILABLE_ITEM_MESSAGE);
         }
@@ -60,9 +58,9 @@ public class LoanCommand extends Command {
         try {
             handleLoanCommand(ui, catalogue);
         } catch (IndexOutOfBoundsException e) {
-            ui.print(RM_INVALID_ID);
+            ui.print(INVALID_ID);
         } catch (NullPointerException e) {
-            ui.print(RM_INVALID_ID);
+            ui.print(INVALID_ID);
         } catch (LibmgrException e) {
             ui.print(e.getMessage());
         }

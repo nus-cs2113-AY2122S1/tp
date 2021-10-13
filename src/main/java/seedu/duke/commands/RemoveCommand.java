@@ -5,7 +5,7 @@ import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
 import static seedu.duke.common.Messages.RM_INVALID_FORMAT;
-import static seedu.duke.common.Messages.RM_INVALID_ID;
+import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.RM_SUCCESS;
 
 public class RemoveCommand extends Command {
@@ -32,15 +32,14 @@ public class RemoveCommand extends Command {
             if (argList.length == 2) {
                 Item removed = catalogue.removeItem(argList[1]);
                 assert removed != null : "Removed item returns null";
-                ui.print(RM_SUCCESS);
-                ui.print("  " + removed);
+                ui.print(RM_SUCCESS, removed);
             } else {
-                ui.print(RM_INVALID_ID);
+                ui.print(INVALID_ID);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.print(RM_INVALID_FORMAT);
         } catch (NullPointerException e) {
-            ui.print(RM_INVALID_ID);
+            ui.print(INVALID_ID);
         }
     }
 

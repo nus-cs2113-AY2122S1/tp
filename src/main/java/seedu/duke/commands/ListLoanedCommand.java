@@ -4,6 +4,7 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
+import static seedu.duke.common.Messages.DIVIDER;
 import static seedu.duke.common.Messages.LIST_LOANED_MESSAGE;
 
 /**
@@ -26,10 +27,12 @@ public class ListLoanedCommand extends Command {
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         ui.print(LIST_LOANED_MESSAGE);
+        ui.print(DIVIDER);
         for (Item temp : catalogue.getAllItems()) {
             if (temp.getStatus().equals("Loaned")) {
-                System.out.println(temp);
+                ui.print(temp);
             }
         }
+        ui.print(DIVIDER);
     }
 }

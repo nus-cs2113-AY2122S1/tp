@@ -1,6 +1,10 @@
 package seedu.duke.data;
 
+import seedu.duke.LibmgrException;
+
 import java.util.ArrayList;
+
+import static seedu.duke.common.Messages.ADD_DUPLICATE_ID;
 
 /**
  * The Catalogue class stores the ArrayList of the items.
@@ -49,12 +53,23 @@ public class Catalogue {
     }
 
     /**
-     * Adds an item to the ArrayList of items.
-     *
+     * Checks whether ID is duplicate, if not adds item to ArrayList
      * @param newItem Item to be added
+     * @throws LibmgrException Thrown when item ID is a duplicate
      */
-    public void add(Item newItem) {
-        itemsArrayList.add(newItem);
+    public void add(Item newItem) throws LibmgrException {
+        Boolean isDuplicate = false;
+        for (Item current : itemsArrayList) {
+            if (newItem.getID().equals(current.getID())) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        if (isDuplicate) {
+            throw new LibmgrException(ADD_DUPLICATE_ID);
+        } else {
+            itemsArrayList.add(newItem);
+        }
     }
 
     /**
