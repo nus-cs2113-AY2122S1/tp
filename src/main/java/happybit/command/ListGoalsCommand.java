@@ -1,12 +1,15 @@
 package happybit.command;
 
-import happybit.exception.HappyBitException;
+import happybit.exception.HaBitCommandException;
 import happybit.goal.GoalList;
+import happybit.storage.Storage;
+import happybit.ui.Ui;
 
-import java.util.ArrayList;
+public class ListGoalsCommand extends ListCommand {
 
-public class ListGoalsCommand {
-    public static void runCommand() throws HappyBitException {
-        GoalList.listGoals();
+    @Override
+    public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
+        goalList.listGoals(ui);
     }
+
 }

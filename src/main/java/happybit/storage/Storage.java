@@ -1,5 +1,7 @@
 package happybit.storage;
 
+import happybit.goal.GoalList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,6 +29,11 @@ public class Storage {
     public Storage(String filePath, String fileDir) {
         this.filePath = filePath;
         this.fileDir = fileDir;
+    }
+
+    // temp method until the importData method is fixed
+    public GoalList load() {
+        return null;
     }
 
     public ArrayList<String> importData() {
