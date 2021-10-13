@@ -5,20 +5,19 @@ import happybit.goal.GoalList;
 import happybit.storage.Storage;
 import happybit.ui.Ui;
 
-public class ListHabitsCommand extends ListCommand {
-
+public class DoneHabitCommand extends Command {
     protected int goalIndex;
+    protected int habitIndex;
 
-    public ListHabitsCommand(int goalIndex) {
+    public DoneHabitCommand(int goalIndex, int habitIndex) {
         this.goalIndex = goalIndex;
+        this.habitIndex = habitIndex;
     }
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-        goalList.listHabitsFromGoal(goalIndex, ui);
+
     }
 
-    public int getGoalIndex() {
-        return goalIndex;
-    }
 }
+
