@@ -22,12 +22,14 @@ public class IncomeManager {
         IncomeList.deleteIncome(incomeName);
     }
 
+    // index starts from 0
     public static void deleteIncome(int incomeNumber) {
         IncomeList.deleteIncome(incomeNumber - 1);
     }
 
     public static void listIncomes() {
         Ui ui = Ui.getUi();
+        // the formatting needs to be aligned
         String incomeListHeader = "Id.\t| Name\t\t\t\t| Value\t| Date";
 
         ui.printMessage(incomeListHeader);
