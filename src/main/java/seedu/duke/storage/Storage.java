@@ -6,7 +6,7 @@ import seedu.duke.employee.EmployeeParser;
 import seedu.duke.ingredient.Ingredient;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientParser;
-import seedu.duke.menu.MenuItem;
+import seedu.duke.menu.Menu;
 import seedu.duke.menu.MenuList;
 import seedu.duke.menu.MenuParser;
 
@@ -20,7 +20,11 @@ public class Storage {
 
     public static final String PATH = "Duke.txt";
 
-    public static File loadStorage(EmployeeList employeeList, EmployeeParser employeeParser, MenuList menuList, MenuParser menuParser, IngredientList ingredientList, IngredientParser ingredientParser) {
+    public static File loadStorage(EmployeeList employeeList, MenuList menuList, IngredientList ingredientList) {
+        EmployeeParser employeeParser = new EmployeeParser();
+        MenuParser menuParser = new MenuParser();
+        IngredientParser ingredientParser = new IngredientParser();
+
         File file = new File(PATH);
         if (!file.exists()) {
             System.out.println("File is not found!");
@@ -39,7 +43,7 @@ public class Storage {
                     Ingredient newIngredient = decodeIngredient(line);
                     ingredientParser.loadIngredientFromStorage(ingredientList, newIngredient);
                 } else if (line.startsWith("add-menu")) {
-                    MenuItem newMenuItem = decodeMenuItem(line);
+                    Menu newMenuItem = decodeMenuItem(line);
                     menuParser.loadMenuFromStorage(menuList, newMenuItem);
                 }
             }
@@ -49,7 +53,6 @@ public class Storage {
         }
         return file;
     }
-
 
     private static Employee decodeEmployee(String toRead) {
         String[] description = toRead.trim().split("\\|", 3);
@@ -79,10 +82,10 @@ public class Storage {
         return encodedItem;
     }
 
-    private static MenuItem decodeMenuItem(String toRead) {
+    private static Menu decodeMenuItem(String toRead) {
         String[] description = toRead.trim().split("\\|", 3);
-        MenuItem menuItem = new MenuItem(description[1], description[2]);
-        return menuItem;
+        Menu menu = new Menu(description[1], description[2]);
+        return menu;
     }
 
     private static String encodeMenuItem(String toWrite) {
@@ -106,14 +109,13 @@ public class Storage {
                 fileWriter.write(String.format("%s\n", encodeIngredient(ingredient.toString())));
             }
             for (int i = 0; i < menuList.menuList.size(); i += 1) {
-                MenuItem menuItem = menuList.menuList.get(i);
-                fileWriter.write(String.format("%s\n", encodeMenuItem(menuItem.toString())));
+                Menu menu = menuList.menuList.get(i);
+                fileWriter.write(String.format("%s\n", encodeMenuItem(menu.toString())));
             }
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("Cannot be written in the file!");
         }
     }
-
 
 }
