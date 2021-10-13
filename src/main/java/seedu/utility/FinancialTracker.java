@@ -17,13 +17,19 @@ public class FinancialTracker {
     }
 
     public void addExpense(Expense expense) {
+        int expenseSize = 0;
+        assert (expenseSize = expenses.size()) >= 0;
         expenses.add(expense);
         assert !expenses.isEmpty();
+        assert expenses.size() > expenseSize;
     }
 
     public void addIncome(Income income) {
+        int incomeSize = 0;
+        assert (incomeSize = incomes.size()) >= 0;
         incomes.add(income);
         assert !incomes.isEmpty();
+        assert incomes.size() > incomeSize;
     }
 
     public int indexOffset(int index) {
@@ -62,6 +68,7 @@ public class FinancialTracker {
             assert expense.getValue() >= 0;
             totalExpense += expense.getValue();
         }
+        assert totalExpense >= 0;
         return totalExpense;
     }
 
@@ -71,6 +78,7 @@ public class FinancialTracker {
             assert income.getValue() >= 0;
             totalIncome += income.getValue();
         }
+        assert totalIncome >= 0;
         return totalIncome;
     }
 
