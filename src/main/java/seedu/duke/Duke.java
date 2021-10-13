@@ -28,6 +28,7 @@ public class Duke {
             String userInput = ui.read();
             // Parse line to create relevant command object
             Command userCommand = parser.parse(userInput);
+            assert userCommand != null : "Parsed command returns null";
             // Executes logic of command
             userCommand.execute(ui, catalogue);
             // Check whether to exit program

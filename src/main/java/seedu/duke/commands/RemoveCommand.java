@@ -22,6 +22,7 @@ public class RemoveCommand extends Command {
             String[] argList = args.split(" ");
             if (argList.length == 2) {
                 Item removed = catalogue.removeItem(argList[1]);
+                assert removed != null : "Removed item returns null";
 
                 ui.print(RM_SUCCESS);
                 ui.print("  " + removed);
