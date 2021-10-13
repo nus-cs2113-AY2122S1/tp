@@ -5,7 +5,10 @@ import seedu.duke.data.Item;
 import seedu.duke.LibmgrException;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.common.Messages.*;
+import static seedu.duke.common.Messages.FORMAT_INCORRECT;
+import static seedu.duke.common.Messages.INVALID_TITLE;
+import static seedu.duke.common.Messages.INVALID_ID;
+import static seedu.duke.common.Messages.ADD_MESSAGE;
 
 /**
  * Class encapsulating an add command.

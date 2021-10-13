@@ -52,12 +52,12 @@ public class TextUI {
     }
 
     /**
-     * Prints pair of message and string representation of item
+     * Prints a pair of message and string representation of item.
      * @param message Message to be printed
      * @param item Item to be printed
      */
     public void print(String message, Item item) {
-       out.println(message);
-       out.println("  " + item);
+        out.println(message);
+        out.println("  " + item);
     }
 }

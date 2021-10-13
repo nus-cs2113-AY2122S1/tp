@@ -53,7 +53,7 @@ public class Catalogue {
     }
 
     /**
-     * Checks whether ID is duplicate, if not adds item to ArrayList
+     * Checks whether ID is duplicate, if not adds item to ArrayList.
      * @param newItem Item to be added
      * @throws LibmgrException Thrown when item ID is a duplicate
      */
