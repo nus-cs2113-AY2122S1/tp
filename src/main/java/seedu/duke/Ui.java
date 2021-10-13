@@ -114,14 +114,15 @@ public class Ui {
 
     public static void printNoOpenTripError() {
         System.out.println("You have not opened any trip yet. Please open a trip to edit expenses within the trip.");
+        printAllTrips();
         System.out.print("Please enter the trip you would like to open: ");
     }
 
     public static void printAllTrips() {
         System.out.println("List of Trips: ");
         for (int i = 0; i < Storage.listOfTrips.size(); i++) {
-            System.out.println("\t");
-            System.out.println(i + 1 + "." + " "
+            System.out.print("\t");
+            System.out.println(i + 1 + ". "
                     + Storage.listOfTrips.get(i).getLocation() + " "
                     + Storage.listOfTrips.get(i).getDateOfTripString());
 
@@ -132,9 +133,9 @@ public class Ui {
         System.out.println();
         System.out.println("Which trip to open?");
         System.out.println("Syntax: open [trip number]");
-        System.out.println("---------------------");
+        System.out.println("--------------------------");
         printAllTrips();
-        System.out.println("---------------------");
+        System.out.println("--------------------------");
 
     }
 
@@ -146,8 +147,8 @@ public class Ui {
         System.out.println();
         System.out.println("Which trip to delete?");
         System.out.println("Syntax: delete [trip number]");
-        System.out.println("---------------------");
+        System.out.println("---------------------------");
         printAllTrips();
-        System.out.println("---------------------");
+        System.out.println("---------------------------");
     }
 }
