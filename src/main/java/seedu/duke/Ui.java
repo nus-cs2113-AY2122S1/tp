@@ -161,6 +161,6 @@ public class Ui {
     }
 
     public static void printInvalidDeleteFormatError() {
-        System.out.println("Your current format is wrong. Please follow the proper format of 'delete type index'".);
+        System.out.println("Your current format is wrong. Please follow the proper format of 'delete type index'.");
     }
 }
