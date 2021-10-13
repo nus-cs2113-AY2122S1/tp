@@ -3,11 +3,11 @@ package seedu.duke.parser;
 import seedu.duke.commands.AddBudgetCommand;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.AddExpenditureCommand;
-import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteBudgetCommand;
-import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.DeleteExpenditureCommand;
+import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 
