@@ -2,7 +2,7 @@ package seedu.duke;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.Parser;
-import seedu.duke.data.item.Catalogue;
+import seedu.duke.data.Catalogue;
 import seedu.duke.ui.TextUI;
 
 /**
