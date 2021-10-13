@@ -2,6 +2,8 @@ package seedu.duke;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Parser {
 
@@ -11,6 +13,7 @@ public class Parser {
      * @param userInput the {@link String} containing the user input
      * @return whether the program should continue running after processing the given user input
      */
+    //TODO: this method needs refactoring and extraction - currently about 100 lines
     public static boolean parseUserInput(String userInput) {
         String[] rawInput = userInput.split(" ", 2);
         String inputCommand = rawInput[0].toLowerCase();
@@ -30,6 +33,8 @@ public class Parser {
             Storage.closeTrip();
             return true;
         } else if (!checkValidCommand(inputCommand)) {
+            Logger logger = Storage.getLogger();
+            logger.log(Level.WARNING, "invalid user input");
             Ui.printUnknownCommandError();
             return true;
         }
@@ -180,6 +185,8 @@ public class Parser {
     private static void executeList() {
         int index = 1;
         if (!Storage.checkOpenTrip()) {
+            Logger logger = Storage.getLogger();
+            logger.log(Level.INFO, "trying to list - no trip currently open");
             for (Trip trip : Storage.listOfTrips) {
                 Ui.printTripsInList(trip, index);
                 index++;
