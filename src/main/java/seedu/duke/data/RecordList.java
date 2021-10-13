@@ -12,12 +12,13 @@ import java.util.ArrayList;
 //import java.util.List;
 
 public class RecordList {
-    public static int numberOfRecords = 0;
+    public static int numberOfRecords;
     private final Budget budget;
     private boolean hasBudget;
     private final ArrayList<Expenditure> expenditureRecords;
 
     public RecordList() {
+        numberOfRecords = 0;
         budget = new Budget(0.00);
         hasBudget = false;
         expenditureRecords = new ArrayList<>();
@@ -50,7 +51,7 @@ public class RecordList {
     public void deleteExpenditure(int index) {
         expenditureRecords.remove(index - 1);
         numberOfRecords -= 1;
-        assert 1 == 1;
+        assert getExpenditureListSize() == numberOfRecords;
     }
 
     public ArrayList<Expenditure> getExpenditureRecords() {
