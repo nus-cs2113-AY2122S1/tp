@@ -30,6 +30,18 @@ class ParserTest {
     }
 
     @Test
+    public void parse_loan_LoanCommandObject() {
+        boolean type = parser.parse("loan 123") instanceof LoanCommand;
+        assertTrue(type);
+    }
+
+    @Test
+    public void parse_return_ReturnCommandObject() {
+        boolean type = parser.parse("return 123") instanceof ReturnCommand;
+        assertTrue(type);
+    }
+
+    @Test
     public void parse_add_FormatIncorrectExceptionThrown() {
         TextUI ui = new TextUI();
         Catalogue catalogue = new Catalogue();

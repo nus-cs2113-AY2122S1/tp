@@ -26,7 +26,7 @@ public class ListAllCommand extends Command {
     public void execute(TextUI ui, Catalogue catalogue) {
         ui.print(LIST_ALL_MESSAGE);
         for (Item temp : catalogue.getAllItems()) {
-            System.out.println(temp.getID() + " " + temp.getTitle() + " " + temp.getStatus());
+            System.out.println(temp);
         }
     }
 }
