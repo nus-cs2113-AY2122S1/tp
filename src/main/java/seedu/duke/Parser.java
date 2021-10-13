@@ -23,10 +23,11 @@ public class Parser {
     private static final String INSUFFICIENT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
 
     private static final String SPACE_SEPARATOR = " ";
-    private static final String INGREDIENT_NAME_SEPARATOR = "n/";
-    private static final String INGREDIENT_AMOUNT_SEPARATOR = "a/";
-    private static final String INGREDIENT_UNITS_SEPARATOR = "u/";
-    private static final String INGREDIENT_EXPIRY_SEPARATOR = "e/";
+    private static final String EMPTY_STRING = "";
+    private static final String DELIMITER = "n/|a/|u/|e/";
+
+    private static final int ADD_COMMAND_ARGUMENT_COUNT = 5;
+    private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 5;
 
 
     static boolean isExit(String command) {
@@ -67,32 +68,38 @@ public class Parser {
      * @return Ingredient updated message
      */
     private static String parseUpdateCommand(String command) throws DukeException {
-        String delimiter = "n/|a/|u/|e/";
-        String[] details = command.split(delimiter);
+        String[] details = command.split(DELIMITER);
 
-        if (details.length != 5) {
+        if (details.length != UPDATE_COMMAND_ARGUMENT_COUNT) {
             throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
         }
 
-        assert (details.length == 5);
+        assert (details.length == UPDATE_COMMAND_ARGUMENT_COUNT);
 
-        String ingredientName = details[1].trim();
-        double ingredientAmount;
+        for (int i = 1; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
+            details[i] = details[i].trim();
+            if (details[i].equals(EMPTY_STRING)) {
+                throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+            }
+        }
+
         try {
-            ingredientAmount = Double.parseDouble(details[2]);
+            String ingredientName = details[1];
+            double ingredientAmount = Double.parseDouble(details[2]);
+            String ingredientUnits = details[3];
+            String ingredientExpiry = details[4];
+
+            Ingredient updatedIngredient =
+                    new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
+            String resultMsg = new UpdateCommand(updatedIngredient).run();
+
+            if (resultMsg.equals(EMPTY_STRING)) {
+                resultMsg = NOT_FOUND_MESSAGE;
+            }
+            return resultMsg;
         } catch (NumberFormatException e) {
             throw new DukeException(NUMBER_FORMAT_MESSAGE);
         }
-        String ingredientUnits = details[3].trim();
-        String ingredientExpiry = details[4].trim();
-        Ingredient updatedIngredient =
-                new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
-        String resultMsg = new UpdateCommand(updatedIngredient).run();
-
-        if (resultMsg.equals("")) {
-            resultMsg = NOT_FOUND_MESSAGE;
-        }
-        return resultMsg;
     }
 
     /**
@@ -103,27 +110,33 @@ public class Parser {
      * @return Ingredient added message
      */
     private static String parseAddCommand(String command) throws DukeException {
-        String delimiter = "n/|a/|u/|e/";
-        String[] details = command.split(delimiter);
+        String[] details = command.split(DELIMITER);
 
-        if (details.length != 5) {
+        if (details.length != ADD_COMMAND_ARGUMENT_COUNT) {
             throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
         }
 
-        assert (details.length == 5);
+        assert (details.length == ADD_COMMAND_ARGUMENT_COUNT);
 
-        String ingredientName = details[1].trim();
-        double ingredientAmount;
+        for (int i = 1; i < ADD_COMMAND_ARGUMENT_COUNT; i++) {
+            details[i] = details[i].trim();
+            if (details[i].equals(EMPTY_STRING)) {
+                throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+            }
+        }
+
         try {
-            ingredientAmount = Double.parseDouble(details[2]);
+            String ingredientName = details[1];
+            double ingredientAmount = Double.parseDouble(details[2]);
+            String ingredientUnit = details[3];
+            String ingredientExpiry = details[4];
+
+            Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,
+                    ingredientUnit, ingredientExpiry);
+            return new AddCommand(newIngredient).run();
         } catch (NumberFormatException e) {
             throw new DukeException(NUMBER_FORMAT_MESSAGE);
         }
-        String ingredientUnit = details[3].trim();
-        String ingredientExpiry = details[4].trim();
-
-        Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnit, ingredientExpiry);
-        return new AddCommand(newIngredient).run();
     }
 
     /**
