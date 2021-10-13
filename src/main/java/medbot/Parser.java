@@ -242,7 +242,8 @@ public class Parser {
      *                         personal information
      * @throws MedBotException if the attributeString contains missing/invalid information
      */
-    public static void updateMultiplePersonalInformation(Person person, String[] attributeStrings) throws MedBotException {
+    public static void updateMultiplePersonalInformation(Person person, String[] attributeStrings)
+            throws MedBotException {
         for (int i = 0; i < attributeStrings.length; i++) {
             updatePersonalInformation(person, attributeStrings[i]);
         }
