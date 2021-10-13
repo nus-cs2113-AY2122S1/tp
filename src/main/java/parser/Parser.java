@@ -3,9 +3,9 @@ package parser;
 import command.ExitCommand;
 import command.HelpCommand;
 import command.PurgeCommand;
+import command.dispense.AddDispense;
 import command.medicine.AddCommand;
 import command.medicine.DeleteCommand;
-import command.medicine.DispenseCommand;
 import command.medicine.ListCommand;
 import command.medicine.UpdateCommand;
 import errors.InvalidCommand;
@@ -75,7 +75,7 @@ public class Parser {
         case DELETE_ORDER:
             break;
         case DISPENSE:
-            new DispenseCommand().execute(ui, parameters, medicines);
+            new AddDispense().execute(ui, parameters, medicines);
             break;
         case EXIT:
             new ExitCommand().execute(ui, parameters, medicines);
