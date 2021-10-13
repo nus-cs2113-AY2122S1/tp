@@ -14,19 +14,32 @@
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for add command
+     Invalid command format!
+     add: Adds an ingredient to the ingredient repository. Expiry date must be yyyy-mm-dd.
+     Quantity must be an integer. Ingredient names are case insensitive and must be unique.
+     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
+     Example: add i/Red Apple q/5 e/2021-12-25
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for add command
+     Invalid command format!
+     add: Adds an ingredient to the ingredient repository. Expiry date must be yyyy-mm-dd.
+     Quantity must be an integer. Ingredient names are case insensitive and must be unique.
+     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
+     Example: add i/Red Apple q/5 e/2021-12-25
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for add command
+     Invalid command format!
+     add: Adds an ingredient to the ingredient repository. Expiry date must be yyyy-mm-dd.
+     Quantity must be an integer. Ingredient names are case insensitive and must be unique.
+     Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE
+     Example: add i/Red Apple q/5 e/2021-12-25
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Quantity must be a valid number
+     Invalid argument format!
+     Quantity must be a valid number.
     ________________________________________________________________________________
 
     ________________________________________________________________________________
@@ -72,19 +85,29 @@
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for increment command
+     Invalid command format!
+     increment: Increases the quantity of a specified ingredient by a specified amount.
+     Parameters: i/INGREDIENT q/QUANTITY
+     Example: increment i/Red Apple q/3
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for increment command
+     Invalid command format!
+     increment: Increases the quantity of a specified ingredient by a specified amount.
+     Parameters: i/INGREDIENT q/QUANTITY
+     Example: increment i/Red Apple q/3
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Quantity must be a valid number
+     Invalid argument format!
+     Quantity must be a valid number.
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for increment command
+     Invalid command format!
+     increment: Increases the quantity of a specified ingredient by a specified amount.
+     Parameters: i/INGREDIENT q/QUANTITY
+     Example: increment i/Red Apple q/3
     ________________________________________________________________________________
 
     ________________________________________________________________________________
@@ -102,19 +125,29 @@
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for decrement command
+     Invalid command format!
+     decrement: Decreases the quantity of a specified ingredient by a specified amount.
+     Parameters: i/INGREDIENT q/QUANTITY
+     Example: decrement i/Red Apple q/5
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for decrement command
+     Invalid command format!
+     decrement: Decreases the quantity of a specified ingredient by a specified amount.
+     Parameters: i/INGREDIENT q/QUANTITY
+     Example: decrement i/Red Apple q/5
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Quantity must be a valid number
+     Invalid argument format!
+     Quantity must be a valid number.
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for decrement command
+     Invalid command format!
+     decrement: Decreases the quantity of a specified ingredient by a specified amount.
+     Parameters: i/INGREDIENT q/QUANTITY
+     Example: decrement i/Red Apple q/5
     ________________________________________________________________________________
 
     ________________________________________________________________________________
@@ -186,11 +219,19 @@
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for add recipe command
+     Invalid command format!
+     add recipe: Adds a recipe with its constituent ingredients to the recipe list.
+     You can add any number of ingredients with its required quantities.
+     Parameters: r/RECIPE NAME i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...
+     Example: add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Wrong format for add recipe command
+     Invalid command format!
+     add recipe: Adds a recipe with its constituent ingredients to the recipe list.
+     You can add any number of ingredients with its required quantities.
+     Parameters: r/RECIPE NAME i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...
+     Example: add recipe r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2
     ________________________________________________________________________________
 
     ________________________________________________________________________________
@@ -198,7 +239,8 @@
     ________________________________________________________________________________
 
     ________________________________________________________________________________
-     Quantity must be a valid number
+     Invalid argument format!
+     Quantity must be a valid number.
     ________________________________________________________________________________
 
     ________________________________________________________________________________
