@@ -1,13 +1,13 @@
 package expiryeliminator.parser;
 
-import expiryeliminator.commands.AddRecipeCommand;
-import expiryeliminator.commands.DeleteRecipeCommand;
-
-import org.junit.jupiter.api.Test;
-
 import static expiryeliminator.parser.Parser.parseCommand;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import expiryeliminator.commands.AddRecipeCommand;
+import expiryeliminator.commands.DeleteRecipeCommand;
 
 class ParserTest {
     @Test
@@ -20,14 +20,14 @@ class ParserTest {
 
         for (String test : tests) {
             assertEquals(parseCommand(test).execute(null, null),
-                    "Wrong format for add recipe command");
+                    String.format(Parser.MESSAGE_INVALID_COMMAND_FORMAT, AddRecipeCommand.MESSAGE_USAGE));
         }
     }
 
     @Test
     public void prepareAddRecipe_quantityNotANumber_ErrorMessage() {
         String test = "add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple q/four";
-        assertEquals("Quantity must be a valid number",
+        assertEquals(String.format(Parser.MESSAGE_INVALID_ARGUMENT_FORMAT, "Quantity must be a valid number."),
                 parseCommand(test).execute(null, null));
     }
 
@@ -67,6 +67,6 @@ class ParserTest {
     public void prepareDeleteRecipe_incorrectFormat_ErrorMessage() {
         String test = "delete recipe r/";
         assertEquals(parseCommand(test).execute(null, null),
-                "Wrong format for delete recipe command");
+                String.format(Parser.MESSAGE_INVALID_COMMAND_FORMAT, DeleteRecipeCommand.MESSAGE_USAGE));
     }
 }

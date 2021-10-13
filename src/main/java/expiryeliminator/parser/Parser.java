@@ -55,8 +55,8 @@ public class Parser {
     private static final MultipleArgPrefix PREFIX_MULTIPLE_INGREDIENT = new MultipleArgPrefix(PREFIX_INGREDIENT);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_QUANTITY = new MultipleArgPrefix(PREFIX_QUANTITY);
 
-    private static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n%1$s";
-    private static final String MESSAGE_INVALID_ARGUMENT_FORMAT = "Invalid argument format!\n%1$s";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n%1$s";
+    public static final String MESSAGE_INVALID_ARGUMENT_FORMAT = "Invalid argument format!\n%1$s";
     private static final String MESSAGE_UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :-(";
 
     /**
