@@ -1,13 +1,12 @@
 package expiryeliminator.parser.exception;
 
 
-import expiryeliminator.parser.Prefix;
+import expiryeliminator.parser.prefix.Prefix;
 
 /**
  * Signals an error caused by a missing prefix where it should have been present.
  */
 public class MissingPrefixException extends Exception {
-    final Prefix prefix;
     private final Prefix prefix;
 
     /**
