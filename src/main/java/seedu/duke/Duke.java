@@ -6,6 +6,7 @@ import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.TextUi;
 
+import java.io.File;
 import java.io.IOException;
 
 
@@ -28,6 +29,26 @@ public class Duke {
     public void run() {
         TextUi.showWelcomeMessage();
         boolean isExit = false;
+
+        // To be placed somewhere else later
+        //----------------------------------------------------------------------
+        File dataDirectory = new File("./data");
+        File budgetList = new File("./data/BudgetList1.txt");
+        if (!(dataDirectory.exists())) {
+            dataDirectory.mkdir();
+            try {
+                budgetList.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (budgetList.exists() == false) {
+            try {
+                budgetList.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        //----------------------------------------------------------------------
 
         Storage budgetStorage = new Storage();
         try {
