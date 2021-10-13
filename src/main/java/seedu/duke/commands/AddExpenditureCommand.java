@@ -17,7 +17,7 @@ public class AddExpenditureCommand extends AddCommand {
         //this.date = date;
     }
 
-
+    @Override
     public void execute(boolean isLoadingStorage) {
         Expenditure newExpenditure = new Expenditure(description, spending);
         recordList.addExpenditure(description, spending, isLoadingStorage);
