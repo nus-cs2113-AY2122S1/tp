@@ -29,6 +29,8 @@ public class Ui {
             input = scanner.nextLine();
         } while (input.trim().isEmpty());
 
+        assert !input.isEmpty();
+
         return input;
     }
 

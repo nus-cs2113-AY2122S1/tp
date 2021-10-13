@@ -39,11 +39,13 @@ public class AddModuleCommand extends Command {
             throw new TaaException(getMissingArgumentMessage());
         }
 
+        assert argumentMap.containsKey(KEY_MODULE_CODE);
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         if (moduleCode.contains(" ")) {
             throw new TaaException(MESSAGE_INVALID_MODULE_CODE);
         }
 
+        assert argumentMap.containsKey(KEY_MODULE_NAME);
         String name = argumentMap.get(KEY_MODULE_NAME);
         Module module = new Module(moduleCode, name);
         moduleList.addModule(module);
