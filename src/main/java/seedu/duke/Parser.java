@@ -27,6 +27,8 @@ public class Parser {
             Ui.goodBye();
             return false;
         } else if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
+            Logger logger = Storage.getLogger();
+            logger.log(Level.WARNING, "invalid trip index");
             Ui.printNoTripError();
             return true;
         } else if (inputCommand.equals("close")) {
