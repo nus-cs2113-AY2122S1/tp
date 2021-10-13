@@ -6,10 +6,10 @@ import java.util.TreeMap;
 
 
 public class Parser {
-    private final static String CONTACT_NUMBER_PREFIX = "/cn";
-    private final static String FLIGHT_PREFIX = "/f";
-    private final static String ACCOMMS_PREFIX = "/a";
-    private final static String TOUR_PREFIX = "/t";
+    private static final String CONTACT_NUMBER_PREFIX = "/cn";
+    private static final String FLIGHT_PREFIX = "/f";
+    private static final String ACCOMMS_PREFIX = "/a";
+    private static final String TOUR_PREFIX = "/t";
 
     public static Command parse(String input) {
         String[] commandAndParams = splitCommandString(input, " ");
