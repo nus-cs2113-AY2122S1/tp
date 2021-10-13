@@ -45,7 +45,7 @@ public class ListCommand extends Command {
             }
             break;
         case ALLUNIS:
-            ArrayList<University> allUniversityList = Storage.readUniversitiesFromCsv();
+            ArrayList<University> allUniversityList = Storage.loadUniversities();
             System.out.println("Here are all the universities available for you:");
             assert allUniversityList.size() > 0;
             for (int i = 0; i < allUniversityList.size(); i++) {
@@ -54,7 +54,7 @@ public class ListCommand extends Command {
             }
             break;
         case ALLMODS:
-            ArrayList<Module> allModuleList = Storage.readModulesFromCsv();
+            ArrayList<Module> allModuleList = Storage.loadModules();
             System.out.println("Here are all the modules available for you:");
             assert allModuleList.size() > 0;
             for (int i = 0; i < allModuleList.size(); i++) {
