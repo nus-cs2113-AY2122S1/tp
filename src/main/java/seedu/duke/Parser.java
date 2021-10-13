@@ -68,9 +68,12 @@ public class Parser {
      */
     private static String parseUpdateCommand(String command) throws DukeException {
         String resultMsg = "";
-        int i;
         String delimiter = "n/|a/|u/|e/";
         String[] details = command.split(delimiter);
+
+        if (details.length != 5) {
+            throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+        }
 
         String ingredientName = details[1].trim();
         double ingredientAmount = Double.parseDouble(details[2].trim());
@@ -96,6 +99,7 @@ public class Parser {
     private static String parseAddCommand(String command) throws DukeException {
         String delimiter = "n/|a/|u/|e/";
         String[] details = command.split(delimiter);
+
         if (details.length != 5) {
             throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
         }
