@@ -26,7 +26,7 @@ public class ListLoanedCommand extends Command {
     public void execute(TextUI ui, Catalogue catalogue) {
         ui.print(LIST_LOANED_MESSAGE);
         for (Item temp : catalogue.getAllItems()) {
-            if (temp.getStatus().equals("loaned")) {
+            if (temp.getStatus().equals("Loaned")) {
                 System.out.println(temp.getID() + " " + temp.getTitle() + " " + temp.getStatus());
             }
         }

@@ -14,7 +14,7 @@ public abstract class Command {
      * It is only meant to be called by child classes.
      * @param ui Object that handles user IO
      */
-    public void execute(TextUI ui) {
+    public void execute(TextUI ui, Catalogue catalogue) {
         throw new UnsupportedOperationException();
     }
 
