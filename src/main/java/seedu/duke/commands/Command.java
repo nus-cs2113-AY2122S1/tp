@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.data.Catalogue;
 import seedu.duke.ui.TextUI;
 
 /**
@@ -7,12 +8,13 @@ import seedu.duke.ui.TextUI;
  * It is inherited by all other command objects.
  */
 public abstract class Command {
+
     /**
      * This method executes the command, performing the required operations.
      * It is only meant to be called by child classes.
      * @param ui Object that handles user IO
      */
-    public void execute(TextUI ui) {
+    public void execute(TextUI ui, Catalogue catalogue) {
         throw new UnsupportedOperationException();
     }
 
