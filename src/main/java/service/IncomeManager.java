@@ -30,7 +30,7 @@ public class IncomeManager {
     public static void listIncomes() {
         Ui ui = Ui.getUi();
         // the formatting needs to be aligned
-        String incomeListHeader = "Id.\t| Name\t\t\t\t| Value\t| Date";
+        String incomeListHeader = "Id. | Name             | Value  | Date";
 
         ui.printMessage(incomeListHeader);
         ArrayList<Income> incomes = IncomeList.getIncomes();
