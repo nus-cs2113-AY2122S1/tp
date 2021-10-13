@@ -1,14 +1,14 @@
 package happybit.command;
 
+import happybit.exception.HBCommandException;
+import happybit.goal.GoalList;
+import happybit.storage.Storage;
 import happybit.ui.Ui;
 
-import java.util.ArrayList;
+public class ViewProgressCommand extends Command {
 
-public class ViewProgressCommand {
-
-    // ArrayList for testing purposes
-    private static ArrayList<String> habits = new ArrayList<>();
-
-    public static void runCommand() {
+    @Override
+    public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HBCommandException {
+        // To be implemented
     }
 }
