@@ -18,4 +18,7 @@ public class ListHabitsCommand extends ListCommand {
         goalList.listHabitsFromGoal(goalIndex, ui);
     }
 
+    public int getGoalIndex() {
+        return goalIndex;
+    }
 }
