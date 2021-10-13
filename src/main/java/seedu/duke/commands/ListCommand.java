@@ -12,7 +12,8 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
-    public ListCommand(String type, UniversityList universitySelectedList, ModuleList moduleSelectedList) throws IOException {
+    public ListCommand(String type, UniversityList universitySelectedList,
+                       ModuleList moduleSelectedList) throws IOException {
         super(universitySelectedList, moduleSelectedList);
         switch (type) {
         case "t":

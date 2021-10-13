@@ -9,7 +9,8 @@ public class SearchMapCommand extends Command {
 
     private final University universityToMap;
 
-    public SearchMapCommand(University universityToMap, UniversityList universitySelectedList, ModuleList moduleSelectedList) {
+    public SearchMapCommand(University universityToMap, UniversityList universitySelectedList,
+                            ModuleList moduleSelectedList) {
         super(universitySelectedList, moduleSelectedList);
         this.universityToMap = universityToMap;
         System.out.println("Potential mappings for " + universityToMap.getName() + ": ");

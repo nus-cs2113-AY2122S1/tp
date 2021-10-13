@@ -13,7 +13,5 @@ public class Command {
     public Command(UniversityList universitySelectedList, ModuleList moduleSelectedList) {
         this.moduleSelectedList = moduleSelectedList;
         this.universitySelectedList = universitySelectedList;
-//        ArrayList<Module> list = new ArrayList<>();
-//        selectedModuleList = new SelectedModuleList(list);
     }
 }

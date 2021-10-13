@@ -14,7 +14,8 @@ public class RemoveCommandParser {
 
     private Logger logger = Logger.getLogger("RemoveCommandParserLog");
 
-    public RemoveCommand parse(String arguments, UniversityList universitySelectedList, ModuleList moduleSelectedList) throws ParseException {
+    public RemoveCommand parse(String arguments, UniversityList universitySelectedList,
+                               ModuleList moduleSelectedList) throws ParseException {
 
         logger.log(Level.INFO, "Start parsing remove command");
 

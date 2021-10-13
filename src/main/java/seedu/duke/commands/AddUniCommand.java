@@ -9,7 +9,8 @@ public class AddUniCommand extends Command {
 
     private final University universityToAdd;
 
-    public AddUniCommand(University universityToAdd, UniversityList universitySelectedList, ModuleList moduleSelectedList) {
+    public AddUniCommand(University universityToAdd, UniversityList universitySelectedList,
+                         ModuleList moduleSelectedList) {
         super(universitySelectedList, moduleSelectedList);
         this.universityToAdd = universityToAdd;
         universitySelectedList.addUniversity(universityToAdd);
