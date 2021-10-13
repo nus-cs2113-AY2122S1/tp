@@ -3,5 +3,35 @@ Hello, I'm MedBot!
 How can I help you today?
 
 
+Here is a list of all patients:
+
+Here are the list of commands:
+
+help
+add
+list
+view
+edit
+delete
+exit
+
+To obtain more information on each command and their respective required inputs, type:
+help [COMMAND]
+
+*Note that all commands will remove any '|' inputs for format parsing purposes
+Add a patient to the patient’s list.
+Format:
+add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]
+Expected output:
+Added patient with patient ID: PATIENT_ID
+Added patient with patient ID: 1
+No patient with ID 2 found.
+The information of patient with ID 1 has been edited to:
+Patient ID: 1 IC:  Name: Jane Smith H/P: 81234321 Email: jane@gmail.com Address: 123 Dover Road
+Here's the requested patient:
+Patient ID: 1 IC:  Name: Jane Smith H/P: 81234321 Email: jane@gmail.com Address: 123 Dover Road
+Patient with id 1 deleted from system.
+Here is a list of all patients:
+
 Thank you for using MedBot!
 See you again!

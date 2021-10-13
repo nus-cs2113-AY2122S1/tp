@@ -36,14 +36,14 @@ public class Ui {
      * Prints a welcome message when MedBot is first loaded.
      */
     public void printWelcomeMessageOne() {
-        printOutput( "Hello, I'm MedBot!" + System.lineSeparator());
+        printOutput("Hello, I'm MedBot!" + System.lineSeparator());
     }
 
     /**
      * Prints a welcome message when MedBot file storage is successfully loaded.
      */
     public void printWelcomeMessageTwo() {
-        printOutput( "How can I help you today?" + "\n\n");
+        printOutput("How can I help you today?" + "\n\n");
     }
 
     /**
@@ -147,7 +147,7 @@ public class Ui {
      */
     public String getViewHelpMessage() {
         return "View a patient’s personal information.\n" + "Format: view PATIENT_ID\n"
-                + "Expected Output: \n" + "id: PATIENT_ID " + "name: NAME "
+                + "Expected Output:\n" + "id: PATIENT_ID " + "name: NAME "
                 + "phone number: PHONE_NUMBER " + "email: EMAIL " + "address: ADDRESS\n";
     }
 
@@ -158,9 +158,9 @@ public class Ui {
      */
     public String getAddHelpMessage() {
         return "Add a patient to the patient’s list.\n"
-                + "Format: \n"
+                + "Format:\n"
                 + "add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
-                + "Expected output: \n"
+                + "Expected output:\n"
                 + "Added patient with patient ID: PATIENT_ID";
     }
 
@@ -171,7 +171,7 @@ public class Ui {
      */
     public String getEditHelpMessage() {
         return "Edit the personal and medical information of a patient in the list.\n"
-                + "Format: \n"
+                + "Format:\n"
                 + "edit PATIENT ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
                 + "Expected output: \n"
                 + "The information of patient with ID PATIENT_ID has been edited to:\n"
@@ -186,7 +186,7 @@ public class Ui {
      */
     public String getDeleteHelpMessage() {
         return "Delete a patient from the list.\n"
-                + "Format: \n"
+                + "Format:\n"
                 + "delete PATIENT_ID\n"
                 + "Expected Output:\n"
                 + "Patient with id PATIENT_ID deleted from system.\n";
