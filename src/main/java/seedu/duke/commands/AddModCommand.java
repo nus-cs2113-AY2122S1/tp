@@ -16,8 +16,10 @@ public class AddModCommand extends Command {
         moduleSelectedList.addModule(moduleToAdd);
         assert moduleSelectedList.getSize() != 0;
         assert moduleSelectedList.searchModule(moduleToAdd.getModuleCode());
-        assert moduleSelectedList.get(moduleSelectedList.getSize() - 1).getModuleName().equals(moduleToAdd.getModuleName());
-        assert moduleSelectedList.get(moduleSelectedList.getSize() - 1).getModuleCode().equals(moduleToAdd.getModuleCode());
+        assert moduleSelectedList.get(moduleSelectedList.getSize() - 1)
+                .getModuleName().equals(moduleToAdd.getModuleName());
+        assert moduleSelectedList.get(moduleSelectedList.getSize() - 1)
+                .getModuleCode().equals(moduleToAdd.getModuleCode());
         System.out.println("New module added: " + moduleToAdd.getModuleCode());
     }
 }

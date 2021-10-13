@@ -18,7 +18,8 @@ public class AddUniCommand extends Command {
         universitySelectedList.addUniversity(universityToAdd);
         assert universitySelectedList.getSize() != 0;
         assert universitySelectedList.searchUniversity(universityToAdd.getName());
-        assert universitySelectedList.get(universitySelectedList.getSize() - 1).getName().equals(universityToAdd.getName());
+        assert universitySelectedList.get(universitySelectedList.getSize() - 1)
+                .getName().equals(universityToAdd.getName());
         System.out.println("New university added: " + universityToAdd.getName());
     }
 }
