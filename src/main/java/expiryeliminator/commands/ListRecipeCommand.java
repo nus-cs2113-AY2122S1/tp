@@ -26,7 +26,6 @@ public class ListRecipeCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
 
-
     @Override
     public String execute(IngredientList ingredientList, RecipeList recipeList) {
         if (recipeList.size() == 0) {

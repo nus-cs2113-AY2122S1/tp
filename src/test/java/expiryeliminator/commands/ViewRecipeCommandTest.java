@@ -3,6 +3,7 @@ package expiryeliminator.commands;
 import org.junit.jupiter.api.Test;
 import expiryeliminator.util.TestUtil;
 import expiryeliminator.data.RecipeList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ViewRecipeCommandTest {
