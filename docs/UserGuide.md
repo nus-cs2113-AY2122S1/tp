@@ -9,7 +9,17 @@ stocks as well as make the user's life easier by keeping track of expired
 medication.
 ## Contents
 
-{to include content page}
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * [Add medication stock](#adding-a-medication-stock-add)
+  * [Delete medication stock](#deleting-a-medication-stock-delete)
+  * [Update medication stock](#updating-medication-stock-information-update)
+  * [List medication stocks](#listing-medication-stock--list)
+  * [Purge data](#purging-existing-data--purge)
+  * [Help](#showing-help-page--help)
+  * [Exit](#exiting-medivault--exit)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 ## Quick Start
 
