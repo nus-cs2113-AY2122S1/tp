@@ -11,25 +11,28 @@ public class Dispense extends Medicine {
     public static final String ID = "ID";
     public static final String NAME = "NAME";
     public static final String QUANTITY = "QUANTITY";
-    public static final String CUSTOMERS_NRIC = "CUSTOMER'S NRIC";
+    public static final String CUSTOMERS_ID = "CUSTOMER'S ID";
     public static final String DATE = "DATE";
     public static final String STAFF_NAME = "STAFF NAME";
+    public static final String STOCK_ID = "STOCK ID";
 
-    public static final String[] COLUMNS = {ID, NAME, QUANTITY, CUSTOMERS_NRIC, DATE, STAFF_NAME};
+    public static final String[] COLUMNS = {ID, NAME, QUANTITY, CUSTOMERS_ID, DATE, STAFF_NAME, STOCK_ID};
 
     private static int dispenseCount = 0;
     protected int dispenseId;
-    protected String customerNric;
+    protected String customerId;
     protected Date date;
     protected String staffName;
+    protected int stockId;
 
-    public Dispense(String medicineName, int quantity, String customerNric, Date date, String staffName) {
+    public Dispense(String medicineName, int quantity, String customerId, Date date, String staffName, int stockId) {
         super(medicineName, quantity);
         dispenseCount++;
         this.dispenseId = dispenseCount;
-        this.customerNric = customerNric;
+        this.customerId = customerId;
         this.date = date;
         this.staffName = staffName;
+        this.stockId = stockId;
     }
 
     public static int getDispenseCount() {
@@ -48,12 +51,12 @@ public class Dispense extends Medicine {
         this.dispenseId = dispenseId;
     }
 
-    public String getCustomerNric() {
-        return customerNric;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerNric(String customerNric) {
-        this.customerNric = customerNric;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public Date getDate() {
@@ -71,4 +74,13 @@ public class Dispense extends Medicine {
     public void setStaffName(String staffName) {
         this.staffName = staffName;
     }
+
+    public int getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(int stockId) {
+        this.stockId = stockId;
+    }
+
 }
