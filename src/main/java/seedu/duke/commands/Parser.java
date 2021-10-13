@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import static seedu.duke.commands.RemoveCommand.COMMAND_REMOVE;
+
 /**
  * The parser class contains methods to process the string input by the user.
  */
@@ -25,6 +27,8 @@ public class Parser {
     public Command parse(String input) {
         if (input.equals(COMMAND_EXIT)) {
             return new ExitCommand();
+        } else if (input.startsWith(COMMAND_REMOVE)) {
+            return new RemoveCommand(input);
         } else if (input.equals(COMMAND_LIST_ALL)) {
             return new ListAllCommand();
         } else if (input.equals(COMMAND_LIST_AVAILABLE)) {

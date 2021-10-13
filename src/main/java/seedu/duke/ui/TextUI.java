@@ -1,5 +1,7 @@
 package seedu.duke.ui;
 
+import seedu.duke.data.Item;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 import static seedu.duke.common.Messages.LOGO;
@@ -25,7 +27,6 @@ public class TextUI {
 
     /**
      * Reads in user input to the application.
-     *
      * @return User input
      */
     public String read() {
@@ -36,11 +37,17 @@ public class TextUI {
 
     /**
      * Prints a message to the user.
-     *
      * @param message Message to be printed
      */
     public void print(String message) {
         out.println(message);
     }
 
+    /**
+     * Prints string representation of an item to user.
+     * @param item Item to be printed
+     */
+    public void print(Item item) {
+        out.println(item);
+    }
 }

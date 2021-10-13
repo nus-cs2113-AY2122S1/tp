@@ -36,4 +36,26 @@ public class Catalogue {
     public void add(Item newItem) {
         itemsArrayList.add(newItem);
     }
+
+    /**
+     * Searches for referenced item and removes it from ArrayList of items.
+     * @param id Identifier of item to be removed
+     * @return Referenced item that has been removed
+     * @throws NullPointerException If id provided does not reference any item
+     */
+    public Item removeItem(String id) throws NullPointerException {
+        Item selected = null;
+        for (Item current : itemsArrayList) {
+            if (current.getID().equals(id)) {
+                selected = current;
+                break;
+            }
+        }
+        if (selected == null) {
+            throw new NullPointerException();
+        } else {
+            itemsArrayList.remove(selected);
+        }
+        return selected;
+    }
 }
