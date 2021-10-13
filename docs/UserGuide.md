@@ -14,7 +14,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
 1. Duke runs on Java 11. Please ensure you have `Java 11` installed on your workstation.
    1. You can download Java [here](https://java.com/en/download/) 
 2. Download the latest .jar of Duke [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/releases)
-3. Run Duke with the command `java -jar duke.jar` on your Command Prompt `cmd.exe`
+3. Run Duke with the command `java -jar tP.jar` on your Command Prompt `cmd.exe`
 4. You should see the following screen if you have successfully run Duke
    ```
    Hello from
@@ -63,7 +63,8 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    Added a Training entry:
    Training Name: Weekly December Training 2 | Venue: MPSH2 | Time: 12 Dec 2022
    
-   Added an Attendance entry: Name: Izdiyad | Student Number: A0123456Z | Training Name: Monday Training | Time: 1800 | Venue: MPSH6
+   Added an Attendance entry:
+   Name: Mark | Student Number: A0123456Z | Training Name: Monday Training | Venue: MPSH6 | Time: 1800
    ```
 
 2. `list` This lists out entries in Duke's Entry List.
@@ -85,7 +86,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    [1] Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
     ```
     ```
-   [1] Name: Izdiyad | Student Number: A0123456Z | Training Name: Monday Training | Venue: MPSH6 | Time: 1800
+   [1] Name: Mark | Student Number: A0123456Z | Training Name: Monday Training | Venue: MPSH6 | Time: 1800
     ```
 
 3. `delete` This deletes entries from the Entry List in Duke.
@@ -101,16 +102,16 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
     
     * **Expected Output:**
     ```
-    You have deleted: 
+    You have removed member:
     Member Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888
    ```
    ```
-    You have deleted: 
+    You have removed training entry:
     Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
    ```
    ```
-    The following attendance entry have been deleted
-    Name: Izdiyad | Student Number: A0123456Z | Training Name: Monday Training | Time: 1800 | Venue: MPSH6
+    You have removed attendance entry:
+    Name: Mark | Student Number: A0123456Z | Training Name: Monday Training | Venue: MPSH6 | Time: 1800
    ```
 4. `edit` This edits an existing entry from either the members list or training list
     * Entries are referenced using their index
