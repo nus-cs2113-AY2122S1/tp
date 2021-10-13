@@ -13,7 +13,7 @@ import expiryeliminator.data.exception.DuplicateDataException;
 public class AddIngredientCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "add";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an ingredient to the ingredient repository.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an ingredient to the ingredient repository. "
             + "Expiry date must be yyyy-mm-dd.\n"
             + "Quantity must be an integer. Ingredient names are case insensitive and must be unique.\n"
             + "Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE\n"
