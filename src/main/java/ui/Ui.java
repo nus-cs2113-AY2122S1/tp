@@ -6,6 +6,7 @@ import inventory.Medicine;
 import inventory.Order;
 import inventory.Stock;
 import parser.DateParser;
+import parser.MedicineManager;
 
 import java.util.ArrayList;
 
@@ -112,6 +113,10 @@ public class Ui {
             nameWidth = Math.max(stock.getMedicineName().length(), nameWidth);
             priceWidth = Math.max(String.format("$%.2f", stock.getPrice()).length(), priceWidth);
             quantityWidth = Math.max(String.valueOf(stock.getQuantity()).length(), quantityWidth);
+            int orderQuantity = MedicineManager.getTotalOrderQuantity(medicines, stock.getMedicineName());
+            if (orderQuantity != 0) {
+                quantityWidth = Math.max(("PENDING: " + orderQuantity).length(), quantityWidth);
+            }
             expiryWidth = Math.max(DateParser.dateToString(stock.getExpiry()).length(), expiryWidth);
             descriptionWidth = Math.min(Math.max(stock.getDescription().length(), descriptionWidth),
                     DESCRIPTION_MAX_WIDTH);
@@ -144,6 +149,7 @@ public class Ui {
         for (Stock stock : stocks) {
             String description = stock.getDescription();
             String truncatedDescription = truncateDescription(description, 0);
+            int orderQuantity = MedicineManager.getTotalOrderQuantity(medicines, stock.getMedicineName());
             int descriptionIndex = truncatedDescription.length();
 
             String row = String.format(idFormat, centerString(idWidth, String.valueOf(stock.getStockID())))
@@ -156,15 +162,17 @@ public class Ui {
                     + String.format(maxQuantityFormat, centerString(maxQuantityWidth,
                     String.valueOf(stock.getMaxQuantity())));
 
-            while (descriptionIndex < description.length()) {
+            while (descriptionIndex < description.length() || orderQuantity != 0) {
                 truncatedDescription = truncateDescription(description, descriptionIndex);
                 descriptionIndex += truncatedDescription.length();
 
                 row += "\n" + String.format(idFormat, "") + String.format(nameFormat, "")
-                        + String.format(priceFormat, "") + String.format(quantityFormat, "")
+                        + String.format(priceFormat, "")
+                        + String.format(quantityFormat, (orderQuantity == 0) ? "" : ("PENDING: " + orderQuantity))
                         + String.format(expiryFormat, "")
                         + String.format(descriptionFormat, centerString(descriptionWidth, truncatedDescription))
                         + String.format(maxQuantityFormat, "");
+                orderQuantity = 0; // Reset the quantity count to prevent looping
             }
             System.out.println(row);
             printRowBorder(columnWidths);
