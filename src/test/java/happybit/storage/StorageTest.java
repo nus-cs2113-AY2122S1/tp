@@ -1,5 +1,7 @@
 package happybit.storage;
 
+import happybit.exception.HaBitLoadException;
+import happybit.goal.GoalList;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,14 +30,5 @@ class StorageTest {
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);
-    }
-
-    @Test
-    public void importData_importEmptyFile_emptyArrayList() {
-        Storage s = new Storage();
-        ArrayList<String> actualOutput = s.importData();
-        ArrayList<String> expectedOutput = new ArrayList<>();
-
-        assertEquals(expectedOutput, actualOutput);
     }
 }
