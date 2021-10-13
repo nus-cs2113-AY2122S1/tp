@@ -12,6 +12,8 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Storage {
     public static final String PATHNAME = Paths.get("saveFile.txt").toString();
@@ -26,6 +28,7 @@ public class Storage {
 
             while (loadScanner.hasNext()) {
                 Recipe r = new Recipe(loadScanner.nextLine().trim());
+                loadCalories(r, loadScanner);
                 loadIngredients(r, loadScanner);
                 loadSteps(r, loadScanner);
                 cookbook.addRecipe(r);
@@ -42,6 +45,19 @@ public class Storage {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+        }
+    }
+
+    public void loadCalories(Recipe r, Scanner loadScanner) {
+        String line = loadScanner.nextLine().trim();
+        assert (line.contains("Calories"));
+        String[] lineSplit = line.split(":");
+
+        // Regex to extract integers from String
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(lineSplit[1]);
+        while (m.find()) {
+            r.setCalories(Integer.parseInt(m.group()));
         }
     }
 

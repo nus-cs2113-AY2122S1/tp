@@ -15,7 +15,9 @@ class RecipeTest {
         r.addStep("Boil water");
         r.addStep("Grind beans");
         r.addStep("Pour water over grounds");
+        r.setCalories(10);
         String expected = "Coffee" + System.lineSeparator()
+                + "Calories:10kcal" + System.lineSeparator()
                 + "Ingredients needed: " + System.lineSeparator()
                 + "1. Coffee beans" + System.lineSeparator()
                 + "2. Water" + System.lineSeparator()
@@ -72,6 +74,7 @@ class RecipeTest {
             r.addStep("Pour water over grounds");
             r.removeStep(1);
             String expected = "Coffee" + System.lineSeparator()
+                    + "Calories:-1kcal" + System.lineSeparator()
                     + "Ingredients needed: " + System.lineSeparator()
                     + "1. Coffee beans" + System.lineSeparator()
                     + "2. Water" + System.lineSeparator()
