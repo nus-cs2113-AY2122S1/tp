@@ -68,21 +68,6 @@ public class Ui {
         }
         System.out.println(" ");
     }
-    
-    public void listExpense(ArrayList<Expense> expenses) {
-        printLine();
-        System.out.println(LISTING_EXPENSE_MESSAGE);
-        printLine();
-        int i = 1;
-        for (Expense expense:expenses) {
-            System.out.print(i);
-            System.out.print(": ");
-            System.out.println(expense);
-            i++;
-        }
-        printLine();
-
-    }
 
     public void emptyList() {
         printLine();
@@ -90,18 +75,40 @@ public class Ui {
         printLine();
     }
     
-    public void listIncome(ArrayList<Income> incomes) {
-        printLine();
-        System.out.println(LISTING_INCOME_MESSAGE);
-        printLine();
-        int i = 1;
-        for (Income income:incomes) {
-            System.out.print(i);
-            System.out.print(": ");
-            System.out.println(income);
-            i++;
+    public void listExpense(ArrayList<Expense> expenses) {
+        if (expenses.isEmpty()) {
+            emptyList();
+        } else {
+            printLine();
+            System.out.println(LISTING_EXPENSE_MESSAGE);
+            printLine();
+            int i = 1;
+            for (Expense expense:expenses) {
+                System.out.print(i);
+                System.out.print(": ");
+                System.out.println(expense);
+                i++;
+            }
+            printLine();
         }
-        printLine();
+    }
+    
+    public void listIncome(ArrayList<Income> incomes) {
+        if (incomes.isEmpty()) {
+           emptyList();
+        } else {
+            printLine();
+            System.out.println(LISTING_INCOME_MESSAGE);
+            printLine();
+            int i = 1;
+            for (Income income:incomes) {
+                System.out.print(i);
+                System.out.print(": ");
+                System.out.println(income);
+                i++;
+            }
+            printLine();
+        }
     }
     
     public void printTotalExpense(double totalExpense) {
