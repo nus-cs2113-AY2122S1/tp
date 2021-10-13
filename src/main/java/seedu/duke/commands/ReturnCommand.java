@@ -16,7 +16,7 @@ import static seedu.duke.common.Messages.WRONG_ITEM_MESSAGE;
 public class ReturnCommand extends Command {
     public static final String COMMAND_WORD = "return";
     private static final String AVAILABLE_STATUS = "Available";
-    private static final String BORROWED_STATUS = "Borrowed";
+    private static final String LOANED_STATUS = "Loaned";
     protected String args; // Format: loan [ID]
     protected String id;
 
@@ -41,7 +41,7 @@ public class ReturnCommand extends Command {
         id = args.split(" ")[1];
         Item toBeReturned = catalogue.getItem(id);
 
-        if (toBeReturned.getStatus().equals(BORROWED_STATUS)) {
+        if (toBeReturned.getStatus().equals(LOANED_STATUS)) {
             toBeReturned.setStatus(AVAILABLE_STATUS);
             ui.print(RETURN_SUCCESS);
             ui.print(toBeReturned.getID() + " " + toBeReturned.getTitle());

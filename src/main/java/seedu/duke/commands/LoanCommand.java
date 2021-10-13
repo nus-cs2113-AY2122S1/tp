@@ -16,7 +16,7 @@ import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
 public class LoanCommand extends Command {
     public static final String COMMAND_WORD = "loan";
     private static final String AVAILABLE_STATUS = "Available";
-    private static final String BORROWED_STATUS = "Borrowed";
+    private static final String LOANED_STATUS = "Loaned";
     protected String args; // Format: loan [ID]
     protected String id;
 
@@ -42,7 +42,7 @@ public class LoanCommand extends Command {
         Item toBeLoaned = catalogue.getItem(id);
 
         if (toBeLoaned.getStatus().equals(AVAILABLE_STATUS)) {
-            toBeLoaned.setStatus(BORROWED_STATUS);
+            toBeLoaned.setStatus(LOANED_STATUS);
             ui.print(LOAN_SUCCESS);
             ui.print(toBeLoaned.getID() + " " + toBeLoaned.getTitle());
         } else {
