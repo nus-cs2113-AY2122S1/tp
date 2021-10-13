@@ -23,9 +23,6 @@ public class TourPlanner {
                 Command dummy = Parser.parse(command);
                 dummy.execute(clientList, ui);
                 isExit = dummy.isExit();
-//                if (command.contains("bye")) {
-//                    break;
-//                }
             } catch (NullPointerException | NumberFormatException e) {
                 System.out.println();
             } finally {
