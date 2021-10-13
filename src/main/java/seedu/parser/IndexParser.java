@@ -24,7 +24,6 @@ public class IndexParser {
         String[] indexSplit = destructuredInputs[INDEX_POSITION].trim().split(" ");
         // takes only the first word/ element as given user input, and throws NumberFormatExcept if it is not integer
         return Integer.parseInt(indexSplit[SIGNIFICANT_INDEX_POSITION].trim());
-
     }
 
     public static Contact getContactFromIndex(int index, ContactList contactList) throws IndexOutOfBoundsException {

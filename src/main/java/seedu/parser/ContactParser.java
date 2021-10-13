@@ -78,6 +78,8 @@ public abstract class ContactParser {
             throws InvalidGithubUsernameException, InvalidNameException, InvalidFlagException,
             InvalidTelegramUsernameException, InvalidTwitterUsernameException,
             InvalidLinkedinUsernameException, InvalidEmailException {
+        assert flag != null;
+        assert detailToParse != null;
         switch (flag) {
         case NAME_FLAG:
             checkNameRegex(detailToParse);
