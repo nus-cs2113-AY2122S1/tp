@@ -10,13 +10,13 @@ public class ListCommand extends Command {
 
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists out all the ingredients in the repository. ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists out all the ingredients in the repository.\n"
+            + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SHOW_WHOLE_LIST = "Here are the ingredients in your list:\n" + "\n%1$s\n"
             + "You have a total of %2$s ingredient(s)";
 
     public static final String MESSAGE_EMPTY_INGREDIENT_LIST = "The recipe list is currently empty!";
-
 
 
     @Override

@@ -28,13 +28,14 @@ public class DeleteIngredientCommand extends Command {
      * @param ingredientName Name of ingredient to be deleted.
      */
     public DeleteIngredientCommand(String ingredientName) {
-        assert ingredientName != null && !ingredientName.isBlank();
+        assert ingredientName != null && !ingredientName.isBlank()
+                : "Ingredient name cannot be null and cannot be blank";
         this.ingredientName = ingredientName;
     }
 
     @Override
     public String execute(IngredientList ingredients, RecipeList recipes) {
-        assert ingredients != null;
+        assert ingredients != null : "Ingredient list cannot be null";
         final Ingredient ingredient;
         try {
             ingredient = ingredients.remove(ingredientName);

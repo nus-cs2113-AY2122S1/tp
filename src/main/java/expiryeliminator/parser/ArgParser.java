@@ -40,7 +40,7 @@ public class ArgParser {
         this.prefixList = new ArrayList<>(Arrays.asList(prefixList));
 
         for (Prefix prefix : prefixList) {
-            assert prefix != null;
+            assert prefix != null : "Prefix cannot be null";
             prefixesToArgs.put(prefix.getPrefix(), new ArrayList<>());
         }
     }
@@ -98,12 +98,12 @@ public class ArgParser {
      * @return Arg that corresponds to the given prefix.
      */
     public String getSingleArg(SingleArgPrefix prefix) {
-        assert prefix != null && prefixList.contains(prefix);
+        assert prefix != null && prefixList.contains(prefix)
+                : "Prefix cannot be null and must be present in the arg parser's prefix list";
         final ArrayList<String> argList = prefixesToArgs.get(prefix.getPrefix());
-        // argList should not be null because we should have already checked that all args are present.
-        assert argList != null;
-        // argList should be of size 1 because we should have already checked that beforehand.
-        assert argList.size() == 1;
+        assert argList != null
+                : "Arg list should not be null because we should have already checked that all args are present";
+        assert argList.size() == 1 : "There should be one arg because we should have already checked that beforehand";
         return argList.get(0);
     }
 
@@ -114,10 +114,11 @@ public class ArgParser {
      * @return List of args that correspond to the given prefix.
      */
     public ArrayList<String> getArgList(MultipleArgPrefix prefix) {
-        assert prefix != null && prefixList.contains(prefix);
+        assert prefix != null && prefixList.contains(prefix)
+                : "Prefix cannot be null and must be present in the arg parser's prefix list";
         final ArrayList<String> argList = prefixesToArgs.get(prefix.getPrefix());
-        // argList should not be null because we should have already checked that all args are present.
-        assert argList != null;
+        assert argList != null
+                : "Arg list should not be null because we should have already checked that all args are present";
         return argList;
     }
 }
