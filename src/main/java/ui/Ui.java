@@ -398,7 +398,8 @@ public class Ui {
             String row = String.format(idFormat, centerString(idWidth, String.valueOf(dispense.getDispenseId())))
                     + String.format(nameFormat, centerString(nameWidth, dispense.getMedicineName()))
                     + String.format(quantityFormat, centerString(quantityWidth, String.valueOf(dispense.getQuantity())))
-                    + String.format(customerIdFormat, centerString(customerIdWidth, String.valueOf(dispense.getCustomerId())))
+                    + String.format(customerIdFormat, centerString(customerIdWidth,
+                    String.valueOf(dispense.getCustomerId())))
                     + String.format(dateFormat, centerString(dateWidth, DateParser.dateToString(dispense.getDate())))
                     + String.format(staffFormat, centerString(staffWidth, String.valueOf(dispense.getStaffName())));
             System.out.println(row);
