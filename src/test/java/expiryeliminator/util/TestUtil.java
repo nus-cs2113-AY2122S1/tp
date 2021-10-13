@@ -12,6 +12,8 @@ public class TestUtil {
 
     public static final String EXAMPLE_RECIPE_NAME = "Chicken Soup";
 
+    public static final String RANDOM_INPUT_RECIPE_NAME = "Foo";
+
     public static IngredientList generateIngredientListForRecipe() {
         Ingredient firstIngredient = new Ingredient("Chicken", 1,null);
         Ingredient secondIngredient = new Ingredient("Salt", 20,null);

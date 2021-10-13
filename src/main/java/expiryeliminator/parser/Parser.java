@@ -5,21 +5,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import expiryeliminator.commands.AddIngredientCommand;
-import expiryeliminator.commands.AddRecipeCommand;
-import expiryeliminator.commands.ByeCommand;
-import expiryeliminator.commands.Command;
-import expiryeliminator.commands.DecrementCommand;
-import expiryeliminator.commands.DeleteIngredientCommand;
-import expiryeliminator.commands.DeleteRecipeCommand;
-import expiryeliminator.commands.IncorrectCommand;
-import expiryeliminator.commands.IncrementCommand;
-import expiryeliminator.commands.ListCommand;
-import expiryeliminator.commands.ListIngredientExpiringCommand;
-import expiryeliminator.commands.ListIngredientsExpiredCommand;
-import expiryeliminator.commands.ListRecipeCommand;
-import expiryeliminator.commands.ViewIngredientCommand;
-import expiryeliminator.commands.ViewRecipeCommand;
+import expiryeliminator.commands.*;
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
 import expiryeliminator.data.exception.DuplicateDataException;
@@ -102,6 +88,8 @@ public class Parser {
                 return prepareViewRecipe(args);
             case ByeCommand.COMMAND_WORD:
                 return new ByeCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
             default:
                 return new IncorrectCommand(MESSAGE_UNRECOGNISED_COMMAND);
             }
