@@ -40,7 +40,7 @@ public class Ui {
     }
 
     public void printWelcomeMessageTwo() {
-        printOutput("How can I help you today?" + "\n\n");
+        printOutput( "How can I help you today?" + "\n\n");
     }
 
     /**
@@ -108,6 +108,8 @@ public class Ui {
 
     /**
      * Prints a list of all available commands.
+     *
+     * @return all supported commands.
      */
     public String getCommandList() {
         return "Here are the list of commands:\n\n"
@@ -118,6 +120,11 @@ public class Ui {
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes";
     }
 
+    /**
+     * Prints information about list command.
+     *
+     * @return the information on list command.
+     */
     public String getListHelpMessage() {
         return "View information of all current patients.\n"
                 + "Format: list\n" + "Expected Output for 2 patients: \n"
@@ -127,12 +134,22 @@ public class Ui {
                 + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]\n";
     }
 
+    /**
+     * Prints information about help command.
+     *
+     * @return the information on help command.
+     */
     public String getViewHelpMessage() {
         return "View a patient’s personal information.\n" + "Format: view PATIENT_ID\n"
                 + "Expected Output: \n" + "id: PATIENT_ID " + "name: NAME "
                 + "phone number: PHONE_NUMBER " + "email: EMAIL " + "address: ADDRESS\n";
     }
 
+    /**
+     * Prints information about add command.
+     *
+     * @return the information on add command.
+     */
     public String getAddHelpMessage() {
         return "Add a patient to the patient’s list.\n"
                 + "Format: \n"
@@ -141,6 +158,11 @@ public class Ui {
                 + "Added patient with patient ID: PATIENT_ID";
     }
 
+    /**
+     * Prints information about edit command.
+     *
+     * @return the information on edit command.
+     */
     public String getEditHelpMessage() {
         return "Edit the personal and medical information of a patient in the list.\n"
                 + "Format: \n"
@@ -151,6 +173,11 @@ public class Ui {
                 + "Email: [EMAIL] Address: [ADDRESS] \n";
     }
 
+    /**
+     * Prints information about delete command.
+     *
+     * @return the information on delete command.
+     */
     public String getDeleteHelpMessage() {
         return "Delete a patient from the list.\n"
                 + "Format: \n"
@@ -159,10 +186,20 @@ public class Ui {
                 + "Patient with id PATIENT_ID deleted from system.\n";
     }
 
+    /**
+     * Prints information about exit command.
+     *
+     * @return the information on exot command.
+     */
     public String getExitHelpMessage() {
         return "Exits the program.\n" + "Format: exit\n";
     }
 
+    /**
+     * Prints unrecognised command message.
+     *
+     * @return the error message on unrecognised command.
+     */
     public String getUnrecognisedCommandHelpMessage() {
         return "Sorry, that's not a recognised command. To view a list of commands, type:\n" + "help\n";
     }
