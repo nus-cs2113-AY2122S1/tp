@@ -21,9 +21,9 @@ import java.util.logging.Logger;
  * Update medication information based on user input given stock id.
  */
 
-public class UpdateCommand extends Command {
+public class UpdateStock extends Command {
     private static final int MINIMUM_ROW_NUMBER_UPDATE = 1;
-    private static Logger logger = Logger.getLogger("UpdateCommand");
+    private static Logger logger = Logger.getLogger("UpdateStock");
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
@@ -55,10 +55,10 @@ public class UpdateCommand extends Command {
             return;
         }
 
-        ArrayList<Medicine> filteredMedicines = new ArrayList<>();
+        ArrayList<Stock> filteredStocks = new ArrayList<>();
         for (Medicine medicine : medicines) {
             if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(stock.getMedicineName())) {
-                filteredMedicines.add(medicine);
+                filteredStocks.add((Stock) medicine);
             }
         }
 
@@ -68,17 +68,17 @@ public class UpdateCommand extends Command {
             CommandParameters.MAX_QUANTITY};
         for (String affectedCommand : affectedCommands) {
             if (parameters.containsKey(affectedCommand)) {
-                rowsAffected = filteredMedicines.size();
+                rowsAffected = filteredStocks.size();
                 break;
             }
         }
 
-        setUpdatesByStockID(parameters, filteredMedicines, stock);
+        setUpdatesByStockID(parameters, filteredStocks, stock);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
         if (rowsAffected > MINIMUM_ROW_NUMBER_UPDATE) {
-            ui.printStocks(filteredMedicines);
+            //ui.printStocks(filteredStocks);
         } else {
-            ui.printStock(stock);
+            //ui.printStock(stock);
         }
 
     }
@@ -162,16 +162,16 @@ public class UpdateCommand extends Command {
     /**
      * Update values provided by user for a given stock id.
      *
-     * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines  Arraylist of filtered medicines.
-     * @param stock      Stock object of the given stock id.
+     * @param parameters     HashMap Key-Value set for parameter and user specified parameter value.
+     * @param filteredStocks Arraylist of filtered medicine stocks.
+     * @param stock          Stock object of the given stock id.
      */
-    private void setUpdatesByStockID(HashMap<String, String> parameters, ArrayList<Medicine> medicines, Stock stock) {
+    private void setUpdatesByStockID(HashMap<String, String> parameters, ArrayList<Stock> filteredStocks, Stock stock) {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
             case CommandParameters.NAME:
-                for (Medicine targetStock : medicines) {
+                for (Stock targetStock : filteredStocks) {
                     targetStock.setMedicineName(parameterValue);
                 }
                 break;
@@ -189,13 +189,13 @@ public class UpdateCommand extends Command {
                 }
                 break;
             case CommandParameters.DESCRIPTION:
-                for (Medicine targetStock : medicines) {
-                    ((Stock) targetStock).setDescription(parameterValue);
+                for (Stock targetStock : filteredStocks) {
+                    targetStock.setDescription(parameterValue);
                 }
                 break;
             case CommandParameters.MAX_QUANTITY:
-                for (Medicine targetStock : medicines) {
-                    ((Stock) targetStock).setMaxQuantity(Integer.parseInt(parameterValue));
+                for (Stock targetStock : filteredStocks) {
+                    targetStock.setMaxQuantity(Integer.parseInt(parameterValue));
                 }
                 break;
             default:
