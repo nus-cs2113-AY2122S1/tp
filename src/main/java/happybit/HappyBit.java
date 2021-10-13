@@ -1,5 +1,6 @@
 package happybit;
 
+import happybit.command.Command;
 import happybit.exception.HBLoadException;
 import happybit.exception.HappyBitException;
 import happybit.goal.GoalList;
