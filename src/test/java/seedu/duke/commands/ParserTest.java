@@ -50,7 +50,8 @@ class ParserTest {
             a.handlesAddCommand(ui, catalogue);
             fail();
         } catch (Exception e) {
-            assertEquals("Incorrect input format. It should be 'add t/TITLE i/ID'", e.getMessage());
+            assertEquals("  (!) Invalid/missing values!" + System.lineSeparator()
+                    + "  (!) Format: add t/TITLE i/ID", e.getMessage());
         }
     }
 
@@ -63,7 +64,7 @@ class ParserTest {
             a.handlesAddCommand(ui, catalogue);
             fail();
         } catch (Exception e) {
-            assertEquals("Please enter a valid title", e.getMessage());
+            assertEquals("  (!) Please enter a valid title", e.getMessage());
         }
     }
 
@@ -76,7 +77,7 @@ class ParserTest {
             a.handlesAddCommand(ui, catalogue);
             fail();
         } catch (Exception e) {
-            assertEquals("Please enter a valid ID", e.getMessage());
+            assertEquals("  (!) Invalid Item ID!", e.getMessage());
         }
     }
 }

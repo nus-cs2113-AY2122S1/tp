@@ -8,6 +8,7 @@ import static seedu.duke.common.Messages.EXIT_MESSAGE;
  * Class encapsulating an exit command.
  */
 public class ExitCommand extends Command {
+    public static final String COMMAND_WORD = "exit";
 
     /**
      * Single constructor, no parameters.
