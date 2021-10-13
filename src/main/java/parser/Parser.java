@@ -6,12 +6,7 @@ import command.PurgeCommand;
 import command.dispense.AddDispense;
 import command.medicine.AddCommand;
 import command.medicine.DeleteCommand;
-<<<<<<< HEAD
-import command.medicine.DispenseCommand;
 import command.medicine.ListStocks;
-=======
-import command.medicine.ListCommand;
->>>>>>> 86de1884d34f82fed14164b2226e4bcf1067d5eb
 import command.medicine.UpdateCommand;
 import errors.InvalidCommand;
 import inventory.Medicine;
