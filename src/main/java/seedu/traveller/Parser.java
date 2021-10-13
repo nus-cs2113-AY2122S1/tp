@@ -57,7 +57,7 @@ public class Parser {
             command = new ExitCommand();
             break;
         default:
-            throw new CommandNotFoundException(userCommand);
+            throw new CommandNotFoundException(rawInput);
         }
         return command;
     }

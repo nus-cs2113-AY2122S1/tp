@@ -23,6 +23,23 @@ public class NewCommand extends Command {
         this.endCountry = endCountry;
     }
 
+    public String getTripName() {
+        return this.tripName;
+    }
+
+    public String getStartCountry() {
+        return this.startCountry;
+    }
+
+    public String getEndCountry() {
+        return this.endCountry;
+    }
+
+    @Override
+    public String toString() {
+        return "new " + getTripName() + ": " + getStartCountry() + " to " + getEndCountry();
+    }
+
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
         for (int i = 0; i < tripsList.getSize(); i++) {
             if (tripsList.getTrip(i).getTripName().equals(tripName)) {
