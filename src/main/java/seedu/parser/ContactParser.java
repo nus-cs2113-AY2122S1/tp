@@ -25,7 +25,6 @@ public abstract class ContactParser {
     public static final String DETAIL_SEPARATOR = " -";
     public static final int FLAG_INDEX_IN_DETAILS = 0;
     public static final int DETAIL_INDEX_IN_DETAILS = 1;
-    public static final int EDIT_USER_INDEX = 1;
     public static final int USER_INFO_INDEX = 2;
 
     public static final String NAME_FLAG = "n";
