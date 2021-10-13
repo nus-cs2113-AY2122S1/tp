@@ -105,6 +105,7 @@ public class Parser {
     private static String parseAddCommand(String command) throws DukeException {
         String delimiter = "n/|a/|u/|e/";
         String[] details = command.split(delimiter);
+
         if (details.length != 5) {
             throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
         }
