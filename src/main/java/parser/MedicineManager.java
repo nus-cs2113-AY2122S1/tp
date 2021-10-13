@@ -2,6 +2,7 @@ package parser;
 
 import command.CommandParameters;
 import inventory.Medicine;
+import inventory.Order;
 import inventory.Stock;
 
 import java.util.ArrayList;
@@ -20,6 +21,27 @@ public class MedicineManager {
         int existingQuantity = 0;
         for (Medicine medicine : medicines) {
             if (!(medicine instanceof Stock)) {
+                continue;
+            }
+            boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
+            if (isSameMedicineName) {
+                existingQuantity += medicine.getQuantity();
+            }
+        }
+        return existingQuantity;
+    }
+
+    /**
+     * Retrieves the total order quantity for order with same name.
+     *
+     * @param medicines Arraylist of medicines.
+     * @param name      Medicine name.
+     * @return Total order quantity for the medicine.
+     */
+    public static int getTotalOrderQuantity(ArrayList<Medicine> medicines, String name) {
+        int existingQuantity = 0;
+        for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Order)) {
                 continue;
             }
             boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);

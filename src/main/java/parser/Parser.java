@@ -3,10 +3,15 @@ package parser;
 import command.ExitCommand;
 import command.HelpCommand;
 import command.PurgeCommand;
+import command.dispense.AddDispense;
 import command.medicine.AddCommand;
 import command.medicine.DeleteCommand;
+<<<<<<< HEAD
 import command.medicine.DispenseCommand;
 import command.medicine.ListStocks;
+=======
+import command.medicine.ListCommand;
+>>>>>>> 86de1884d34f82fed14164b2226e4bcf1067d5eb
 import command.medicine.UpdateCommand;
 import errors.InvalidCommand;
 import inventory.Medicine;
@@ -34,7 +39,6 @@ import static command.CommandList.UPDATE;
 import static command.CommandList.UPDATE_DISPENSE;
 import static command.CommandList.UPDATE_ORDER;
 
-
 /**
  * Helps to parse the commands given by the user as well as extract the parameters provided.
  */
@@ -48,7 +52,7 @@ public class Parser {
      *
      * @param ui        Reference to the UI object passed by Main to print messages.
      * @param userInput Input provided by user.
-     * @param medicines    Arraylist of all stocks.
+     * @param medicines Arraylist of all stocks.
      * @return A boolean value indicating isExit.
      * @throws InvalidCommand If a command does not exist.
      */
@@ -76,7 +80,7 @@ public class Parser {
         case DELETE_ORDER:
             break;
         case DISPENSE:
-            new DispenseCommand().execute(ui, parameters, medicines);
+            new AddDispense().execute(ui, parameters, medicines);
             break;
         case EXIT:
             new ExitCommand().execute(ui, parameters, medicines);
@@ -155,7 +159,10 @@ public class Parser {
 
                 parameterContents = new StringBuilder(); // Reset the values
                 String[] commandSplit = s.split(DELIMITER);
-                commandParameter = commandSplit[0].toLowerCase();
+
+                if (commandSplit.length != 0) { // Ensure '/' exists
+                    commandParameter = commandSplit[0].toLowerCase();
+                }
 
                 if (commandSplit.length > 1) {
                     parameterContents = new StringBuilder(commandSplit[1]);

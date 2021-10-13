@@ -6,6 +6,7 @@ import inventory.Medicine;
 import inventory.Order;
 import inventory.Stock;
 import parser.DateParser;
+import parser.MedicineManager;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 
 public class Ui {
     private static final int TABLE_PADDING = 2;
-    private static final int DESCRIPTION_MAX_WIDTH = 50;
+    private static final int DESCRIPTION_MAX_WIDTH = 45;
 
     /**
      * Prints the welcome command message.
@@ -112,6 +113,10 @@ public class Ui {
             nameWidth = Math.max(stock.getMedicineName().length(), nameWidth);
             priceWidth = Math.max(String.format("$%.2f", stock.getPrice()).length(), priceWidth);
             quantityWidth = Math.max(String.valueOf(stock.getQuantity()).length(), quantityWidth);
+            int orderQuantity = MedicineManager.getTotalOrderQuantity(medicines, stock.getMedicineName());
+            if (orderQuantity != 0) {
+                quantityWidth = Math.max(("PENDING: " + orderQuantity).length(), quantityWidth);
+            }
             expiryWidth = Math.max(DateParser.dateToString(stock.getExpiry()).length(), expiryWidth);
             descriptionWidth = Math.min(Math.max(stock.getDescription().length(), descriptionWidth),
                     DESCRIPTION_MAX_WIDTH);
@@ -144,6 +149,7 @@ public class Ui {
         for (Stock stock : stocks) {
             String description = stock.getDescription();
             String truncatedDescription = truncateDescription(description, 0);
+            int orderQuantity = MedicineManager.getTotalOrderQuantity(medicines, stock.getMedicineName());
             int descriptionIndex = truncatedDescription.length();
 
             String row = String.format(idFormat, centerString(idWidth, String.valueOf(stock.getStockID())))
@@ -156,15 +162,17 @@ public class Ui {
                     + String.format(maxQuantityFormat, centerString(maxQuantityWidth,
                     String.valueOf(stock.getMaxQuantity())));
 
-            while (descriptionIndex < description.length()) {
+            while (descriptionIndex < description.length() || orderQuantity != 0) {
                 truncatedDescription = truncateDescription(description, descriptionIndex);
                 descriptionIndex += truncatedDescription.length();
 
                 row += "\n" + String.format(idFormat, "") + String.format(nameFormat, "")
-                        + String.format(priceFormat, "") + String.format(quantityFormat, "")
+                        + String.format(priceFormat, "")
+                        + String.format(quantityFormat, (orderQuantity == 0) ? "" : ("PENDING: " + orderQuantity))
                         + String.format(expiryFormat, "")
                         + String.format(descriptionFormat, centerString(descriptionWidth, truncatedDescription))
                         + String.format(maxQuantityFormat, "");
+                orderQuantity = 0; // Reset the quantity count to prevent looping
             }
             System.out.println(row);
             printRowBorder(columnWidths);
@@ -359,7 +367,7 @@ public class Ui {
         int idWidth = Dispense.COLUMNS[0].length();
         int nameWidth = Dispense.COLUMNS[1].length();
         int quantityWidth = Dispense.COLUMNS[2].length();
-        int nricWidth = Dispense.COLUMNS[3].length();
+        int customerIdWidth = Dispense.COLUMNS[3].length();
         int dateWidth = Dispense.COLUMNS[4].length();
         int staffWidth = Dispense.COLUMNS[5].length();
 
@@ -368,22 +376,22 @@ public class Ui {
             idWidth = Math.max(String.valueOf(dispense.getDispenseId()).length(), idWidth);
             nameWidth = Math.max(dispense.getMedicineName().length(), nameWidth);
             quantityWidth = Math.max(String.valueOf(dispense.getQuantity()).length(), quantityWidth);
-            nricWidth = Math.max(dispense.getCustomerNric().length(), nricWidth);
+            customerIdWidth = Math.max(dispense.getCustomerId().length(), customerIdWidth);
             dateWidth = Math.max(DateParser.dateToString(dispense.getDate()).length(), dateWidth);
             staffWidth = Math.max(dispense.getStaffName().length(), staffWidth);
         }
 
-        int[] columnWidths = {idWidth, nameWidth, quantityWidth, nricWidth, dateWidth, staffWidth};
+        int[] columnWidths = {idWidth, nameWidth, quantityWidth, customerIdWidth, dateWidth, staffWidth};
 
         // Pad the data in the columns
         String idFormat = "| %1$-" + idWidth + "s | ";
         String nameFormat = "%1$-" + nameWidth + "s | ";
         String quantityFormat = "%1$-" + quantityWidth + "s | ";
-        String nricFormat = "%1$-" + nricWidth + "s | ";
+        String customerIdFormat = "%1$-" + customerIdWidth + "s | ";
         String dateFormat = "%1$-" + dateWidth + "s | ";
         String staffFormat = "%1$-" + staffWidth + "s | ";
 
-        String[] formats = {idFormat, nameFormat, quantityFormat, nricFormat, dateFormat, staffFormat};
+        String[] formats = {idFormat, nameFormat, quantityFormat, customerIdFormat, dateFormat, staffFormat};
 
         StringBuilder headers = new StringBuilder();
         for (int i = 0; i < columnWidths.length; i++) {
@@ -398,7 +406,8 @@ public class Ui {
             String row = String.format(idFormat, centerString(idWidth, String.valueOf(dispense.getDispenseId())))
                     + String.format(nameFormat, centerString(nameWidth, dispense.getMedicineName()))
                     + String.format(quantityFormat, centerString(quantityWidth, String.valueOf(dispense.getQuantity())))
-                    + String.format(nricFormat, centerString(nricWidth, String.valueOf(dispense.getCustomerNric())))
+                    + String.format(customerIdFormat, centerString(customerIdWidth,
+                    String.valueOf(dispense.getCustomerId())))
                     + String.format(dateFormat, centerString(dateWidth, DateParser.dateToString(dispense.getDate())))
                     + String.format(staffFormat, centerString(staffWidth, String.valueOf(dispense.getStaffName())));
             System.out.println(row);

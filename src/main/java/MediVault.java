@@ -91,15 +91,15 @@ public class MediVault {
             medicines.add(new Order("LISINOPRIL", 200, DateParser.stringToDate("12-10-2021")));
             medicines.add(new Order("AZITHROMYCIN", 100, DateParser.stringToDate("13-10-2021")));
             medicines.add(new Dispense("PANADOL", 10, "S1234567A",
-                    DateParser.stringToDate("9-10-2021"), "Jane"));
+                    DateParser.stringToDate("9-10-2021"), "Jane",1));
             medicines.add(new Dispense("VICODIN", 10, "S2345678B",
-                    DateParser.stringToDate("10-10-2021"), "Peter"));
+                    DateParser.stringToDate("10-10-2021"), "Peter",3));
             medicines.add(new Dispense("SIMVASTATIN", 10, "S1234567A",
-                    DateParser.stringToDate("11-10-2021"), "Sam"));
+                    DateParser.stringToDate("11-10-2021"), "Sam",4));
             medicines.add(new Dispense("LISINOPRIL", 10, "S3456789C",
-                    DateParser.stringToDate("12-10-2021"), "Jane"));
+                    DateParser.stringToDate("12-10-2021"), "Jane",5));
             medicines.add(new Dispense("AZITHROMYCIN", 10, "S2345678B",
-                    DateParser.stringToDate("13-10-2021"), "Peter"));
+                    DateParser.stringToDate("13-10-2021"), "Peter",6));
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }

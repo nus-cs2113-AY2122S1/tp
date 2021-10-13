@@ -40,7 +40,8 @@ public class ListStocks extends Command {
             return;
         }
 
-        boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines);
+        boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines,
+            CommandSyntax.LIST_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");
             return;
@@ -51,8 +52,13 @@ public class ListStocks extends Command {
         assert (filteredStocks != null) : "Array is not initialised";
 
         for (Medicine medicine : medicines) {
+<<<<<<< HEAD:src/main/java/command/medicine/ListStocks.java
             if (medicine instanceof Stock) { // Ensure that it is a medicine object
                 filteredStocks.add((Stock) medicine);
+=======
+            if (medicine instanceof Stock) {
+                filteredMedicines.add(medicine);
+>>>>>>> 86de1884d34f82fed14164b2226e4bcf1067d5eb:src/main/java/command/medicine/ListCommand.java
             }
         }
         for (String parameter : parameters.keySet()) {
@@ -105,11 +111,21 @@ public class ListStocks extends Command {
                 filteredStocks.sort(new StockComparator(parameterValue.toLowerCase(), true));
                 break;
             default:
-                ui.printInvalidParameter(parameter, CommandSyntax.LIST_COMMAND);
                 return;
             }
         }
+<<<<<<< HEAD:src/main/java/command/medicine/ListStocks.java
         //ui.printStocks(filteredStocks);
+=======
+        // Adds back Order and Dispense objects
+        for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Stock)) {
+                filteredMedicines.add(medicine);
+            }
+        }
+
+        ui.printStocks(filteredMedicines);
+>>>>>>> 86de1884d34f82fed14164b2226e4bcf1067d5eb:src/main/java/command/medicine/ListCommand.java
         logger.log(Level.INFO, "Successful listing of stock");
     }
 }

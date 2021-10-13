@@ -9,12 +9,22 @@ stocks as well as make the user's life easier by keeping track of expired
 medication.
 ## Contents
 
-{to include content page}
+* [Quick Start](#quick-start)
+* [Features](#features)
+  * [Add medication stock](#adding-a-medication-stock-add)
+  * [Delete medication stock](#deleting-a-medication-stock-delete)
+  * [Update medication stock](#updating-medication-stock-information-update)
+  * [List medication stock](#listing-medication-stock--list)
+  * [Purge data](#purging-existing-data--purge)
+  * [Help](#showing-help-page--help)
+  * [Exit](#exiting-medivault--exit)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `MediVault` from [here](jar-file-location).
+2. Download the latest version of `MediVault.jar` from [here](https://github.com/AY2122S1-CS2113T-T10-1/tp/releases/tag/v1.0).
 
 ## Features
 Notes about the commands:
@@ -145,7 +155,7 @@ Expected output:
 +----+---------+--------+----------+-------------+--------------------------------------------------+--------------+
 ```
 
-### Purging existing medication : `purge`
+### Purging existing data : `purge`
 Deletes all data in MediVault.
 
 Format: `purge`
@@ -207,7 +217,7 @@ Quitting MediVault...
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Unfortunately, MediVault does not support saving information to files in v1.0.
 
 ## Command Summary
 

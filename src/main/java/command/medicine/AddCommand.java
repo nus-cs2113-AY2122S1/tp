@@ -145,7 +145,7 @@ public class AddCommand extends Command {
             return true;
         }
 
-        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines)) {
+        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines, CommandSyntax.ADD_COMMAND)) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
             logger.log(Level.INFO, "Unsuccessful addition of stock");
             return true;

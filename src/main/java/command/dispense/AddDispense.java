@@ -1,4 +1,4 @@
-package command.medicine;
+package command.dispense;
 
 import command.Command;
 import command.CommandParameters;
@@ -18,7 +18,7 @@ import java.util.Date;
  * Dispense medication based on user input.
  * User input includes medication name, quantity to dispense, Customer's NRIC and Staff name.
  */
-public class DispenseCommand extends Command {
+public class AddDispense extends Command {
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
@@ -36,7 +36,7 @@ public class DispenseCommand extends Command {
             return;
         }
 
-        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines)) {
+        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines, CommandSyntax.DISPENSE_COMMAND)) {
             return;
         }
 
@@ -61,6 +61,7 @@ public class DispenseCommand extends Command {
                 Stock existingStock = (Stock) medicine;
                 String existingName = existingStock.getMedicineName().toUpperCase();
                 int existingQuantity = existingStock.getQuantity();
+                int existingId = existingStock.getStockID();;
                 Date existingExpiry = existingStock.getExpiry();
                 boolean medicationExist = existingName.equals(medicationName.toUpperCase());
 
@@ -75,7 +76,7 @@ public class DispenseCommand extends Command {
                     if (existingQuantity >= quantityLeftToDispense) {
                         existingStock.setQuantity(existingQuantity - quantityLeftToDispense);
                         medicines.add(new Dispense(medicationName, dispenseQuantity, customerId, dispenseDate,
-                                staffName));
+                                staffName, existingId));
                         ui.print("Dispensed:" + medicationName + " Quantity:" + quantityLeftToDispense + " Expiry "
                                 + "date:" + existingExpiry);
                         return;
