@@ -6,8 +6,8 @@ import command.PurgeCommand;
 import command.dispense.AddDispense;
 import command.medicine.AddCommand;
 import command.medicine.DeleteCommand;
+import command.medicine.UpdateStock;
 import command.medicine.ListStock;
-import command.medicine.UpdateCommand;
 import errors.InvalidCommand;
 import inventory.Medicine;
 import ui.Ui;
@@ -98,7 +98,7 @@ public class Parser {
         case UNDO:
             break;
         case UPDATE:
-            new UpdateCommand().execute(ui, parameters, medicines);
+            new UpdateStock().execute(ui, parameters, medicines);
             break;
         case UPDATE_DISPENSE:
             break;
