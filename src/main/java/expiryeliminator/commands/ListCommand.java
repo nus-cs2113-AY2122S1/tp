@@ -24,6 +24,7 @@ public class ListCommand extends Command {
         if(ingredientList.size() == 0) {
             return MESSAGE_EMPTY_INGREDIENT_LIST;
         } else {
+            assert ingredientList.size() > 0;
             return String.format(MESSAGE_SHOW_WHOLE_LIST, ingredientList.printWholeList(), ingredientList.size());
         }
     }
