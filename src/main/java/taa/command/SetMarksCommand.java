@@ -104,6 +104,7 @@ public class SetMarksCommand extends Command {
      * @param marks      The marks to set for the assessment.
      */
     private void setMarks(Ui ui, Student student, Assessment assessment, double marks) {
+        assert marks > 0;
         String assessmentName = assessment.getName();
         student.setMarks(assessmentName, marks);
         ui.printMessage(String.format(MESSAGE_FORMAT_MARKS_ADDED, student, marks, assessmentName));
