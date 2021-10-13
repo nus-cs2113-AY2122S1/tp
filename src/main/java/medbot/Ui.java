@@ -36,9 +36,12 @@ public class Ui {
      * Prints a welcome message when MedBot is first loaded.
      */
     public void printWelcomeMessageOne() {
-        printOutput("Hello, I'm MedBot!" + System.lineSeparator());
+        printOutput( "Hello, I'm MedBot!" + System.lineSeparator());
     }
 
+    /**
+     * Prints a welcome message when MedBot file storage is successfully loaded.
+     */
     public void printWelcomeMessageTwo() {
         printOutput( "How can I help you today?" + "\n\n");
     }
@@ -50,6 +53,7 @@ public class Ui {
      * @return the Successful Message
      */
     public String getAddPatientMessage(int patientId) {
+        assert patientId > 0;
         return "Added patient with patient ID: " + patientId;
     }
 
@@ -60,6 +64,7 @@ public class Ui {
      * @return the Successful Message
      */
     public String getDeletePatientMessage(int patientId) {
+        assert patientId > 0;
         return "Patient with id " + patientId + " deleted from system.";
     }
 
@@ -70,6 +75,7 @@ public class Ui {
      * @return the Successful Message
      */
     public String getEditPatientMessage(int patientId, String patientInfo) {
+        assert patientId > 0;
         return "The information of patient with ID " + patientId + " has been edited to:"
                 + System.lineSeparator() + patientInfo;
     }
