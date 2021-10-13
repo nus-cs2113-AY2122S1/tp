@@ -55,7 +55,7 @@ class UiTest {
         Ui ui = new Ui();
 
         String patientInfo = patient.toString();
-        String expectedOutput = "Here's the requested patient:\n"
+        String expectedOutput = "Here's the requested patient:" + System.lineSeparator()
                 + "Patient ID: 1 IC:  " + "Name: John Doe H/P:  Email: John@gmail.com Address: ";
         int patientId = 1;
         assertEquals(ui.getPatientInfo(patientInfo), expectedOutput);
@@ -80,8 +80,8 @@ class UiTest {
         String patientOneInfo = patient1.toString();
         String patientTwoInfo = patient2.toString();
 
-        String expectedOutput = "Here is a list of all patients:\n" + patientOneInfo + "\n"
-                + patientTwoInfo + "\n";
+        String expectedOutput = "Here is a list of all patients:" + System.lineSeparator() + patientOneInfo
+                + System.lineSeparator() + patientTwoInfo + System.lineSeparator();
 
         assertEquals(ui.getAllPatientsString(patientList), expectedOutput);
     }
