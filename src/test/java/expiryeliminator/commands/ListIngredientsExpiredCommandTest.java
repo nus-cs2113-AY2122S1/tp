@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ListIngredientsExpiredCommandTest {
 
     @Test
-    public void ListIngredientsExpiredCommand_sampleIngredientList_expectExpiredIngredientString() {
+    public void listIngredientsExpiredCommand_sampleIngredientList_expectExpiredIngredientString() {
         IngredientList ingredientList = TestUtil.generateIngredientList();
         assert ingredientList != null;
         Command command = new ListIngredientsExpiredCommand();

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ViewIngredientCommandTest {
 
     @Test
-    public void ViewIngredientCommand_sampleIngredientList_expectRedAppleString() {
+    public void viewIngredientCommand_sampleIngredientList_expectRedAppleString() {
         IngredientList ingredientList = TestUtil.generateIngredientList();
         assert ingredientList != null;
         Command command = new ViewIngredientCommand("Red Apple");
