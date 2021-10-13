@@ -12,7 +12,7 @@ public class Parser {
 
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_ADD_GOAL = "set";
-    private static final String COMMAND_ADD_HABIT = "edit";
+    private static final String COMMAND_ADD_HABIT = "add";
     private static final String COMMAND_LIST_GOAL = "list";
     private static final String COMMAND_LIST_HABIT = "view";
     private static final String COMMAND_DELETE_GOAL = "remove";
