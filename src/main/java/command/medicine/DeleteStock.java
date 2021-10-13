@@ -17,8 +17,8 @@ import java.util.logging.Logger;
  * Delete medication based on user input given stock id.
  */
 
-public class DeleteCommand extends Command {
-    private static Logger logger = Logger.getLogger("DeleteCommand");
+public class DeleteStock extends Command {
+    private static Logger logger = Logger.getLogger("DeleteStock");
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
