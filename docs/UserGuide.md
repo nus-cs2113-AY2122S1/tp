@@ -155,7 +155,7 @@ Expected output:
 +----+---------+--------+----------+-------------+--------------------------------------------------+--------------+
 ```
 
-### Purging existing medication : `purge`
+### Purging existing data : `purge`
 Deletes all data in MediVault.
 
 Format: `purge`
@@ -217,7 +217,7 @@ Quitting MediVault...
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Unfortunately, MediVault does not support saving information to files in v1.0.
 
 ## Command Summary
 
