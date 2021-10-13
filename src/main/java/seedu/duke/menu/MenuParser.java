@@ -21,12 +21,12 @@ public class MenuParser {
     public void removeMenu(String[] command, MenuList masterList) {
         try {
             int targetIndex = Integer.valueOf(command[1]) - 1;
-
-            if (0 < targetIndex || targetIndex < masterList.menuListSize + 1) {
+            boolean validTargetIndex = (-1 < targetIndex) && (targetIndex < masterList.menuListSize + 1);
+            if (!validTargetIndex) {
                 MenuUI.printInvalidIndexMessage();
             } else {
-                assert 0 < targetIndex : "Index should be more than 0";
-                assert targetIndex < masterList.menuListSize : "Index should be less than the menu size";
+                assert -1 < targetIndex : "Index should be more than 0";
+                assert targetIndex < masterList.menuListSize + 1: "Index should be less than the menu size";
                 Menu oldMenu = masterList.menuList.get(targetIndex);
                 masterList.menuList.remove(targetIndex);
                 MenuUI.printRemoveMenuMessage(oldMenu);
