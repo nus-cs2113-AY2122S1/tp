@@ -1,7 +1,5 @@
 package seedu.duke.ingredient;
 
-import seedu.duke.main.MainUI;
-
 public class IngredientParser {
 
     public void addIngredient(String[] command, IngredientList ingredients) {
@@ -11,15 +9,10 @@ public class IngredientParser {
             ingredients.ingredientList.add(newIngredient);
             ingredients.totalIngredients++;
 
-            MainUI.printSingleLine();
-            System.out.println("Got it. This ingredient was added:");
-            System.out.println("Ingredient Name: " + newIngredient.getName());
-            System.out.println("Ingredient Quantity: " + newIngredient.getQuantity());
-            MainUI.printSingleLine();
+            IngredientUI.printAddIngredientMessage(newIngredient);
+
         } catch (ArrayIndexOutOfBoundsException e) {
-            MainUI.printSingleLine();
-            System.out.println("Invalid command syntax!");
-            MainUI.printSingleLine();
+            IngredientUI.printInvalidCommandSyntaxMessage();
         }
     }
 
@@ -36,40 +29,24 @@ public class IngredientParser {
             ingredients.ingredientList.remove(deletedIngredientIndex);
             ingredients.totalIngredients--;
 
-            MainUI.printSingleLine();
-            System.out.println("Got it. This ingredient was deleted:");
-            System.out.println(deletedIngredient.getName());
-            MainUI.printSingleLine();
+            IngredientUI.printRemoveIngredientMessage(deletedIngredient);
+
         } catch (ArrayIndexOutOfBoundsException e) {
-            MainUI.printSingleLine();
-            System.out.println("Invalid command syntax!");
-            MainUI.printSingleLine();
+            IngredientUI.printInvalidCommandSyntaxMessage();
         } catch (IndexOutOfBoundsException e) {
-            MainUI.printSingleLine();
-            System.out.println("That ingredient does not exist!");
-            MainUI.printSingleLine();
+            IngredientUI.printInvalidIndexMessage();
         } catch (NumberFormatException e) {
-            MainUI.printSingleLine();
-            System.out.println("Invalid command syntax!");
-            MainUI.printSingleLine();
+            IngredientUI.printInvalidCommandSyntaxMessage();
         }
     }
 
     public void listIngredient(IngredientList ingredients) {
         if (ingredients.ingredientList.size() < 1) {
-            MainUI.printSingleLine();
-            System.out.println("No ingredients found.");
-            MainUI.printSingleLine();
+            IngredientUI.printEmptyListMessage();
             return;
         }
-
         assert ingredients.ingredientList.size() > 0 : "Ingredient list should not be empty";
 
-        MainUI.printSingleLine();
-        System.out.println("Here are the ingredients in your list:");
-        for (int i = 0; i < ingredients.ingredientList.size(); i++) {
-            System.out.println((i + 1) + ". " + ingredients.ingredientList.get(i));
-        }
-        MainUI.printSingleLine();
+        IngredientUI.printIngredientListMessage(ingredients);
     }
 }
