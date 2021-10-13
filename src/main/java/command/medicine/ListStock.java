@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * Helps to process the list command together with filters and sort.
  */
 
-public class ListStocks extends Command {
+public class ListStock extends Command {
     private static Logger logger = Logger.getLogger("ListCommand");
 
     @Override
