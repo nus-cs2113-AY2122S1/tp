@@ -7,8 +7,8 @@ import happybit.ui.Ui;
 import java.util.ArrayList;
 
 public class GoalList {
-    private static final String ERROR_EMPTY_GOAL_LIST = "You have no set any goals for yourself yet, would"
-            + " you like to set some for yourself?";
+    private static final String ERROR_EMPTY_GOAL_LIST = "You have not set any goals for yourself yet, would"
+            + "you like to set some for yourself?";
     protected ArrayList<Goal> goalList;
 
     public GoalList() {
