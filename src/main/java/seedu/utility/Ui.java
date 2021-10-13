@@ -16,18 +16,21 @@ public class Ui {
             + "███████    ██    ██    ██ ██ ██  ██ █████   ███████       ███   ██   ██ \n"
             + "     ██    ██    ██    ██ ██  ██ ██ ██  ██       ██      ██ ██  ██   ██ \n"
             + "███████    ██     ██████  ██   ████ ██   ██ ███████     ██   ██ ██████  ";
-    
+
     private static final String BYE_MESSAGE = "██████  ██    ██ ███████        ██  \n"
             + "██   ██  ██  ██  ██          ██  ██ \n"
             + "██████    ████   █████           ██ \n"
             + "██   ██    ██    ██          ██  ██ \n"
             + "██████     ██    ███████        ██ ";
-    
-    public static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
+
+    private static final String TYPE_SOMETHING_MESSAGE = "Type something!";
+    private static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
     private static final String LISTING_EXPENSE_MESSAGE = "Below is a list of all of your recent spending!";
     private static final String LISTING_INCOME_MESSAGE = "Below is a list of all of your recent earnings!";
+    private static final String EMPTY_INCOME_MESSAGE = "You have not entered any income!";
+    private static final String EMPTY_EXPENSE_MESSAGE = "You have not spent anything!";
 
-    private static final String HELP_FORMAT = "List out all commands: help:)";
+    private static final String HELP_FORMAT = "List Out All Commands: help";
     private static final String ADD_EXPENSE_FORMAT = "Adding Expense: add_ex d/DESCRIPTION a/AMOUNT";
     private static final String DEL_EXPENSE_FORMAT = "Deleting Expense: del_ex i/INDEX";
     private static final String LIST_EXPENSE_FORMAT = "Listing Expense: list_ex";
@@ -36,12 +39,12 @@ public class Ui {
     private static final String DEL_INCOME_FORMAT = "Deleting Income: del_in i/INDEX";
     private static final String LIST_INCOME_FORMAT = "Listing Income: list_in";
     private static final String TOTAL_INCOME_FORMAT = "Show Total Income: total_in";
-
+    private static final String END_FORMAT = "To Terminate The Program: end";
 
 
     private static final List<String> commands = Arrays.asList(HELP_FORMAT, ADD_EXPENSE_FORMAT, DEL_EXPENSE_FORMAT,
             LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT, LIST_INCOME_FORMAT,
-            TOTAL_INCOME_FORMAT);
+            TOTAL_INCOME_FORMAT, END_FORMAT);
 
 
 
@@ -58,7 +61,7 @@ public class Ui {
     public String readCommand() {
         return in.nextLine().trim();
     }
-    
+
     /**
      * Prints the welcoming message for users that have entered the program.
      */
@@ -66,7 +69,7 @@ public class Ui {
         printLine();
         System.out.println(PRODUCT_LOGO);
         printLine();
-        System.out.println("Type something!");
+        System.out.println(TYPE_SOMETHING_MESSAGE);
     }
 
     private void printLine() {
@@ -76,53 +79,71 @@ public class Ui {
         System.out.println(" ");
     }
 
-    public void emptyList() {
-        printLine();
-        System.out.println("Your list is empty");
-        printLine();
-    }
-    
+    /**
+     * Prints the filtered list of expenses in the financial tracker to the standard output.
+     *
+     * @param expenses The list of expenses in the financial tracker.
+     */
     public void listExpense(ArrayList<Expense> expenses) {
+        printLine();
         if (expenses.isEmpty()) {
-            emptyList();
+            printEmptyExpenseListMessage();
         } else {
-            printLine();
-            System.out.println(LISTING_EXPENSE_MESSAGE);
-            printLine();
-            int i = 1;
-            for (Expense expense:expenses) {
-                System.out.print(i);
-                System.out.print(": ");
-                System.out.println(expense);
-                i++;
-            }
-            printLine();
+            printExpenseList(expenses);
         }
+        printLine();
     }
+
 
     /**
      * Prints the filtered list of incomes in the financial tracker to the standard output.
      *
      * @param incomes The list of incomes in the financial tracker.
-     */    
+     */
     public void listIncome(ArrayList<Income> incomes) {
+        printLine();
         if (incomes.isEmpty()) {
-            emptyList();
+            printEmptyIncomeListMessage();
         } else {
-            printLine();
-            System.out.println(LISTING_INCOME_MESSAGE);
-            printLine();
-            int i = 1;
-            for (Income income : incomes) {
-                System.out.print(i);
-                System.out.print(": ");
-                System.out.println(income);
-                i++;
-            }
-            printLine();
+            printIncomeList(incomes);
+        }
+        printLine();
+    }
+
+    private void printEmptyIncomeListMessage() {
+        System.out.println(EMPTY_INCOME_MESSAGE);
+    }
+
+    private void printEmptyExpenseListMessage() {
+        System.out.println(EMPTY_EXPENSE_MESSAGE);
+    }
+
+    private void printIncomeList(ArrayList<Income> incomes) {
+        System.out.println(LISTING_INCOME_MESSAGE);
+        printLine();
+
+        int i = 1;
+        for (Income income : incomes) {
+            System.out.print(i + ": ");
+            System.out.println(income);
+            i++;
         }
     }
-    
+
+    private void printExpenseList(ArrayList<Expense> expenses) {
+        System.out.println(LISTING_EXPENSE_MESSAGE);
+        printLine();
+
+        int i = 1;
+        for (Expense expense : expenses) {
+            System.out.print(i + ": ");
+            System.out.println(expense);
+            i++;
+        }
+    }
+
+
+
     /**
      * Prints the total expense of all expenses in the financial tracker to the standard output.
      *
@@ -219,7 +240,7 @@ public class Ui {
 
     /**
      * Prints the error message as feedback through the standard output.
-     * 
+     *
      * @param errorMessage The error message to be printed out due to certain exceptions or invalid inputs.
      */
     public void printError(String errorMessage) {
