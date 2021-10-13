@@ -22,7 +22,7 @@ public class AddCommand extends Command {
     /**
      * Sole Constructor.
      *
-     * @param args Additional arguments supplied by user after command word "add"
+     * @param args Arguments supplied by user in the add command
      */
     public AddCommand(String args) {
         this.args = args;
