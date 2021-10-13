@@ -10,34 +10,34 @@ class ItemTest {
     Item item = new Item("Junglebook", "1", "available");
 
     @Test
-    void getTitle() {
+    void testGetTitle() {
         assertEquals("Junglebook", item.getTitle());
     }
 
     @Test
-    void setTitle() {
+    void testSetTitle() {
         item.setTitle("notJunglebook");
         assertEquals("notJunglebook", item.getTitle());
     }
 
     @Test
-    void getID() {
+    void testGetID() {
         assertEquals("1", item.getID());
     }
 
     @Test
-    void setID() {
+    void testSetID() {
         item.setID("2");
         assertEquals("2", item.getID());
     }
 
     @Test
-    void getStatus() {
+    void testGetStatus() {
         assertEquals("available", item.getStatus());
     }
 
     @Test
-    void setStatus() {
+    void testSetStatus() {
         item.setStatus("notAvailable");
         assertEquals("notAvailable", item.getStatus());
     }

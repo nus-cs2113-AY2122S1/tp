@@ -28,7 +28,7 @@ public class ListAvailableCommand extends Command {
         ui.print(LIST_AVAILABLE_MESSAGE);
         for (Item temp : catalogue.getAllItems()) {
             if (temp.getStatus().equals("Available")) {
-                System.out.println(temp.getID() + " " + temp.getTitle() + " " + temp.getStatus());
+                System.out.println(temp);
             }
         }
     }
