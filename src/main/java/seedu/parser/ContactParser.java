@@ -12,6 +12,9 @@ import seedu.exception.InvalidTwitterUsernameException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public abstract class ContactParser {
     public static final int CONTACT_PARAMS_START_INDEX = 1;
     public static final int NUMBER_OF_DETAILS = 2;
@@ -31,6 +34,8 @@ public abstract class ContactParser {
     public static final String TWITTER_FLAG = "tw";
     public static final String EMAIL_FLAG = "e";
     public static final String LINKEDIN_FLAG = "l";
+
+    private static final Logger LOGGER = Logger.getLogger(ContactParser.class.getName());
 
     public abstract String[] parseContactDetails(String userInput) throws InvalidFlagException,
             MissingArgException, MissingDetailException, ForbiddenDetailException,
@@ -101,6 +106,7 @@ public abstract class ContactParser {
         //allow lowercase email ids
         String emailRegex = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
         if (!detailToParse.matches(emailRegex)) {
+            LOGGER.log(Level.INFO, "Regex check for Email id failed");
             throw new InvalidEmailException();
         }
     }
@@ -109,6 +115,7 @@ public abstract class ContactParser {
         //allows lowercase, numbers, underscore and hyphen. Length must be 3-100 characters
         String linkedinRegex = "^[a-z0-9-_]{3,100}$";
         if (!detailToParse.matches(linkedinRegex)) {
+            LOGGER.log(Level.INFO, "Regex check for Linkedin failed");
             throw new InvalidLinkedinUsernameException();
         }
     }
@@ -117,6 +124,7 @@ public abstract class ContactParser {
         //allows lowercase, numbers and underscore. Length must be max 15 characters
         String twitterRegex = "^[a-z0-9_]{1,15}$";
         if (!detailToParse.matches(twitterRegex)) {
+            LOGGER.log(Level.INFO, "Regex check for Name failed");
             throw new InvalidTwitterUsernameException();
         }
     }
@@ -125,6 +133,7 @@ public abstract class ContactParser {
         //allows uppercase, lowercase, numbers and underscore. Length must be atleast 5 characters
         String telegramRegex = "^[a-zA-Z0-9_]{5,}$";
         if (!detailToParse.matches(telegramRegex)) {
+            LOGGER.log(Level.INFO, "Regex check for Telegram username failed");
             throw new InvalidTelegramUsernameException();
         }
     }
@@ -136,6 +145,7 @@ public abstract class ContactParser {
         //Maximum is 39 characters.
         String githubUsernameRegex = "^[a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,39}$";
         if (!detailToParse.matches(githubUsernameRegex)) {
+            LOGGER.log(Level.INFO, "Regex check for Github username failed");
             throw new InvalidGithubUsernameException();
         }
     }
@@ -144,6 +154,7 @@ public abstract class ContactParser {
         //only letters and spaces allowed
         String nameRegex = "^[ A-Za-z]+$";
         if (!detailToParse.matches(nameRegex)) {
+            LOGGER.log(Level.INFO, "Regex check for name failed");
             throw new InvalidNameException();
         }
     }
