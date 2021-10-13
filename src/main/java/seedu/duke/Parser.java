@@ -54,15 +54,19 @@ public class Parser {
 
         case "open":
             try {
+                assert inputParams != null;
                 executeOpen(inputParams);
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 Ui.printSingleUnknownTripIndexError();
                 System.out.println();
+            } catch (NullPointerException e) {
+                Ui.emptyArgForOpenCommand();
             }
             break;
 
         case "summary":
             try {
+                assert inputParams != null;
                 executeSummary();
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ui.printUnknownTripIndexError();
@@ -71,6 +75,7 @@ public class Parser {
 
         case "view":
             try {
+                assert inputParams != null;
                 executeView();
             } catch (ArrayIndexOutOfBoundsException e) {
                 Ui.printUnknownTripIndexError();
@@ -79,9 +84,12 @@ public class Parser {
 
         case "delete":
             try {
+                assert inputParams != null;
                 executeDelete(inputParams);
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 Ui.printUnknownTripIndexError();
+            } catch (NullPointerException e){
+                Ui.emptyArgForDeleteCommand();
             }
             break;
 
@@ -122,13 +130,9 @@ public class Parser {
 
     //assumes that listOfTrips have at least 1 trip
     private static void executeOpen(String indexAsString) {
-        if (indexAsString == null) {
-            Ui.emptyArgForOpenCommand();
-        } else {
-            int indexToGet = Integer.parseInt(indexAsString) - 1;
-            Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
-            Ui.printOpenTripMessage(Storage.listOfTrips.get(indexToGet));
-        }
+        int indexToGet = Integer.parseInt(indexAsString) - 1;
+        Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
+        Ui.printOpenTripMessage(Storage.listOfTrips.get(indexToGet));
     }
 
     private static void executeSummary() {
@@ -140,12 +144,11 @@ public class Parser {
     }
 
     private static void executeDelete(String indexAsString) {
-        if (indexAsString == null) {
-            Ui.emptyArgForDeleteCommand();
-        } else {
-            int tripIndex = Integer.parseInt(indexAsString) - 1;
-            deleteTrip(tripIndex);
-        }
+        int tripIndex = Integer.parseInt(indexAsString) - 1;
+        String tripLocation = Storage.listOfTrips.get(tripIndex).getLocation();
+        String tripDate = Storage.listOfTrips.get(tripIndex).getDateOfTripString();
+        Storage.listOfTrips.remove(tripIndex);
+        Ui.printDeleteTripSuccessful(tripLocation, tripDate);
     }
 
     private static void executeList() {
@@ -177,7 +180,6 @@ public class Parser {
         Ui.printExpenseAddedSuccess();
 
     }
-
 
     private static boolean checkValidCommand(String inputCommand) {
         return Storage.getValidCommands().contains(inputCommand);
@@ -244,17 +246,6 @@ public class Parser {
 
         }
 
-    }
-
-    private static void deleteTrip(int tripIndex) {
-        try {
-            String tripLocation = Storage.listOfTrips.get(tripIndex).getLocation();
-            String tripDate = Storage.listOfTrips.get(tripIndex).getDateOfTripString();
-            Storage.listOfTrips.remove(tripIndex);
-            Ui.printDeleteTripSuccessful(tripLocation, tripDate);
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            Ui.printUnknownTripIndexError();
-        }
     }
 
 
