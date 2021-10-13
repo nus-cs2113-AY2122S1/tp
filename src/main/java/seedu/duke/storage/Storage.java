@@ -24,7 +24,7 @@ public class Storage {
             String userInput = commandStorage.get(i);
             Command command = parser.parseCommand(userInput);
             command.setRecordList(recordList);
-            command.execute();
+            command.execute(true);
         }
     }
 

@@ -16,7 +16,7 @@ public class AddRecordCommand extends Command {
         this.recordParameters = recordParameters;
     }
 
-    public void execute() {
+    public void execute(boolean isLoadingStorage) {
 
     }
 }

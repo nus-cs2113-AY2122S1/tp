@@ -42,7 +42,7 @@ public class Duke {
                 String userInput = textUi.getUserInput();
                 Command command = parser.parseCommand(userInput);
                 command.setRecordList(recordList);
-                command.execute();
+                command.execute(false);
                 isExit = command.isExit();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Error! Your inputs are missing or incorrect!");

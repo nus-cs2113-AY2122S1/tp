@@ -29,7 +29,7 @@ public class AddBudgetCommand extends AddCommand {
     //
     //    }
 
-    public void execute() {
+    public void execute(boolean isLoadingStorage) {
         recordList.addBudget(amount);
     }
 }

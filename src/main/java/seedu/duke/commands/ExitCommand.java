@@ -6,7 +6,7 @@ public class ExitCommand extends Command {
 
     public static final String COMMAND_WORD = "bye";
 
-    public void execute() {
+    public void execute(boolean isLoadingStorage) {
         TextUi.showExitMessage();
     }
 }

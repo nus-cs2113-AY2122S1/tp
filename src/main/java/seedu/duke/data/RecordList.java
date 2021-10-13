@@ -32,11 +32,13 @@ public class RecordList {
         }
     }
 
-    public void addExpenditure(String description, double spending) {
+    public void addExpenditure(String description, double spending, boolean isLoadingStorage) {
         expenditureRecords.add(new Expenditure(description, spending));
         numberOfRecords += 1;
-        ExpenditureStorage storeCurrentExpenditure = new ExpenditureStorage();
-        storeCurrentExpenditure.saveNewlyAddedExpenditure(description, spending);
+        if (isLoadingStorage == false) {
+            ExpenditureStorage storeCurrentExpenditure = new ExpenditureStorage();
+            storeCurrentExpenditure.saveNewlyAddedExpenditure(description, spending);
+        }
     }
 
     public void deleteBudget() {
