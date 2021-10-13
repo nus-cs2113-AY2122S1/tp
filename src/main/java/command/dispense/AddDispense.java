@@ -3,7 +3,6 @@ package command.dispense;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import comparators.StockComparator;
 import inventory.Dispense;
 import inventory.Medicine;
 import inventory.Stock;
@@ -11,8 +10,8 @@ import parser.MedicineManager;
 import ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Dispense medication based on user input.
@@ -54,7 +53,7 @@ public class AddDispense extends Command {
             }
         }
 
-        filteredMedicines.sort(new StockComparator(CommandParameters.EXPIRY_DATE, false));
+        //filteredMedicines.sort(new StockComparator(CommandParameters.EXPIRY_DATE, false));
 
         for (Medicine medicine : filteredMedicines) {
 
