@@ -14,8 +14,13 @@ public class ViewRecipeCommand extends Command {
      */
     public static final String COMMAND_WORD = "view recipe";
 
-    private static final String MESSAGE_SHOW_RECIPE = "Here is the recipe in your recipe list:\n" + "\n%1$s\n";
-    private static final String MESSAGE_RECIPE_NOT_FOUND = "Sorry. No matching recipes found!";
+    public static final String MESSAGE_SHOW_RECIPE = "Here is the recipe in your recipe list:\n" + "\n%1$s\n";
+    public static final String MESSAGE_RECIPE_NOT_FOUND = "Sorry. No matching recipes found!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": View a recipe in the recipe list.\n"
+            + "Only full name of recipe will be matched.\n"
+            + "Parameters: r/RECIPE NAME\n"
+            + "Example: " + COMMAND_WORD + " r/Chicken Soup";
+
 
     private final String recipeDescription;
 
