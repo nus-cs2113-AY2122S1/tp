@@ -48,7 +48,7 @@ public class Storage {
         }
     }
 
-    public void loadCalories (Recipe r, Scanner loadScanner) {
+    public void loadCalories(Recipe r, Scanner loadScanner) {
         String line = loadScanner.nextLine().trim();
         assert (line.contains("Calories"));
         String[] lineSplit = line.split(":");

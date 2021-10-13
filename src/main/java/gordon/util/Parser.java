@@ -135,7 +135,7 @@ public class Parser {
         }
     }
 
-    public void parseCalories (String line, Recipe r) throws GordonException {
+    public void parseCalories(String line, Recipe r) throws GordonException {
         String[] input = line.split("calories");
 
         try {
