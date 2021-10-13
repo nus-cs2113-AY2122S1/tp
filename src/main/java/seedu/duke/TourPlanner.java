@@ -23,6 +23,8 @@ public class TourPlanner {
                 isExit = dummy.isExit();
             } catch (NullPointerException | NumberFormatException e) {
                 System.out.println();
+            } catch (TourPlannerException e) {
+                System.out.println(e.getMessage());
             } finally {
                 ui.showLine();
             }
