@@ -96,8 +96,9 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_NAME);
         } catch (MissingDetailException e) {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
-        } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException | InvalidLinkedinUsernameException
-                | InvalidTelegramUsernameException | InvalidTwitterUsernameException | ForbiddenDetailException e) {
+        } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
+                | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
+                | InvalidTwitterUsernameException | ForbiddenDetailException e) {
             return parseInvalidDetailCommand(e);
         }
     }
@@ -117,8 +118,9 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         } catch (MissingDetailException e) {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
-        } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException | InvalidLinkedinUsernameException
-                | InvalidTelegramUsernameException | InvalidTwitterUsernameException | ForbiddenDetailException e) {
+        } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
+                | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
+                | InvalidTwitterUsernameException | ForbiddenDetailException e) {
             return parseInvalidDetailCommand(e);
         }
     }
