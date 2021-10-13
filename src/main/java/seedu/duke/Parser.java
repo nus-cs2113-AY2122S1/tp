@@ -72,8 +72,19 @@ public class Parser {
         String delimiter = "n/|a/|u/|e/";
         String[] details = command.split(delimiter);
 
+        if (details.length != 5) {
+            throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+        }
+
+        assert (details.length == 5);
+
         String ingredientName = details[1].trim();
-        double ingredientAmount = Double.parseDouble(details[2].trim());
+        double ingredientAmount;
+        try {
+            ingredientAmount = Double.parseDouble(details[2]);
+        } catch (NumberFormatException e) {
+            throw new DukeException(NUMBER_FORMAT_MESSAGE);
+        }
         String ingredientUnits = details[3].trim();
         String ingredientExpiry = details[4].trim();
         Ingredient updatedIngredient =
