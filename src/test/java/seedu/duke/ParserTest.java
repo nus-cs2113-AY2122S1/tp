@@ -58,7 +58,8 @@ public class ParserTest {
         }
     }
 
-    @Test public void parseAddCommand_amountAsInteger_success() throws DukeException {
+    @Test
+    public void parseAddCommand_amountAsInteger_success() throws DukeException {
         Ingredient sampleIngredient = new Ingredient("carrot", 50, "kg", "1aug");
         String inputString = "add n/carrot a/50 u/kg e/1aug";
         String resultMsg = Parser.parse(inputString);
