@@ -22,14 +22,13 @@ public class Ui {
     public void showWelcome() {
         showLine();
         String logo = " █████  ███  █   █ ████  ████  █      ████  █    █ █    █ █████ ████\n"
-               + "   █   █   █ █   █ █   █ █   █ █     █    █ ██   █ ██   █ █     █   █\n"
-               + "   █   █   █ █   █ █████ ████  █     ██████ █ █  █ █ █  █ █████ █████\n"
-               + "   █   █   █ █   █ █  █  █     █     █    █ █  █ █ █  █ █ █     █  █\n"
-               + "   █    ███   ███  █   █ █     █████ █    █ █   ██ █   ██ █████ █   █\n";
-        String logo2 = "gg";
+                + "   █   █   █ █   █ █   █ █   █ █     █    █ ██   █ ██   █ █     █   █\n"
+                + "   █   █   █ █   █ █████ ████  █     ██████ █ █  █ █ █  █ █████ █████\n"
+                + "   █   █   █ █   █ █  █  █     █     █    █ █  █ █ █  █ █ █     █  █\n"
+                + "   █    ███   ███  █   █ █     █████ █    █ █   ██ █   ██ █████ █   █\n";
         String greet = "Hello, Welcome to TourPlanner!\n"
                 + "What can I do for you?";
-        show(logo2);
+        show(logo);
         show(greet);
         showLine();
     }

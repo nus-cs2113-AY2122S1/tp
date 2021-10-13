@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
+
 public class Parser {
+    private final static String CONTACT_NUMBER_PREFIX = "/cn";
+    private final static String FLIGHT_PREFIX = "/f";
+    private final static String ACCOMMS_PREFIX = "/a";
+    private final static String TOUR_PREFIX = "/t";
+
     public static Command parse(String input) {
         String[] commandAndParams = splitCommandString(input, " ");
         String command = commandAndParams[0];
@@ -38,8 +44,8 @@ public class Parser {
     }
 
     private static AddCommand executeAddCommand(String params) {
-        TreeMap<Integer, String> valueIndex = extractValueIndexes(params);
-        String[] values = extractValues(valueIndex, params);
+        TreeMap<Integer, String> prefixIndexes = extractPrefixIndexes(params);
+        String[] values = extractValuesIntoArray(prefixIndexes, params);
         Client client = new Client(values);
         return new AddCommand(client);
     }
@@ -52,71 +58,71 @@ public class Parser {
         NO_PREFIX
     }
 
-    private static TreeMap<Integer, String> extractValueIndexes(String argString) {
-        TreeMap<Integer, String> valueIndexes = new TreeMap<Integer, String>();
+    private static TreeMap<Integer, String> extractPrefixIndexes(String argString) {
+        TreeMap<Integer, String> prefixIndexes = new TreeMap<>();
         if (containAllFields(argString)) {
             int nameIndex = 0;
-            int contactIndex = argString.indexOf("/cn");
-            int flightIndex = argString.indexOf("/f");
-            int accommsIndex = argString.indexOf("/a");
-            int tourIndex = argString.indexOf("/t");
-            valueIndexes.put(nameIndex, "");
-            valueIndexes.put(contactIndex, "/cn");
-            valueIndexes.put(flightIndex, "/f");
-            valueIndexes.put(accommsIndex, "/a");
-            valueIndexes.put(tourIndex, "/t");
-            return valueIndexes;
+            int contactIndex = argString.indexOf(CONTACT_NUMBER_PREFIX);
+            int flightIndex = argString.indexOf(FLIGHT_PREFIX);
+            int accommsIndex = argString.indexOf(ACCOMMS_PREFIX);
+            int tourIndex = argString.indexOf(TOUR_PREFIX);
+            prefixIndexes.put(nameIndex, "");
+            prefixIndexes.put(contactIndex, CONTACT_NUMBER_PREFIX);
+            prefixIndexes.put(flightIndex, FLIGHT_PREFIX);
+            prefixIndexes.put(accommsIndex, ACCOMMS_PREFIX);
+            prefixIndexes.put(tourIndex, TOUR_PREFIX);
+            return prefixIndexes;
         } else {
             return null;
         }
     }
 
-    private static String[] extractValues(TreeMap<Integer, String> valueIndexes, String argString) {
+    private static String[] extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes, String argString) {
         String[] extractedValues = new String[5];
         ArrayList<Integer> indexes = new ArrayList<>();
         ArrayList<String> prefixes = new ArrayList<>();
-        for (Map.Entry<Integer, String> valueIndex : valueIndexes.entrySet()) {
-            System.out.println(valueIndex);
-            indexes.add(valueIndex.getKey());
-            prefixes.add(valueIndex.getValue());
+        for (Map.Entry<Integer, String> prefixIndex : prefixIndexes.entrySet()) {
+            indexes.add(prefixIndex.getKey());
+            prefixes.add(prefixIndex.getValue());
         }
 
-        int nextIndex = 0;
-        int previousIndex;
-        String finalPrefix = prefixes.get(4);
-
         for (int i = 0; i < indexes.size() - 1; i++) {
-            previousIndex = indexes.get(i);
-            nextIndex = indexes.get(i + 1);
-            String previousPrefix = prefixes.get(i);
-
-            String unformattedSubstring = argString.substring(previousIndex, nextIndex).trim();
-            String value = unformattedSubstring.replace(previousPrefix, "").trim();
-            int inputIndex = obtainExtractedValueIndex(previousPrefix);
+            int previousIndex = indexes.get(i);
+            int nextIndex = indexes.get(i + 1);
+            String prefix = prefixes.get(i);
+            String value = extractValue(argString, prefix, previousIndex, nextIndex);
+            int inputIndex = obtainExtractedValueIndex(prefix);
             extractedValues[inputIndex] = value;
         }
 
+        String finalPrefix = prefixes.get(4);
+        int finalIndex = indexes.get(4);
+
         int inputIndex = obtainExtractedValueIndex(finalPrefix);
-        String unformattedSubstring = argString.substring(nextIndex).trim();
-        String value = unformattedSubstring.replace(finalPrefix, "").trim();
+        String value = extractValue(argString, finalPrefix, finalIndex, argString.length());
         extractedValues[inputIndex] = value;
         return extractedValues;
     }
 
+    private static String extractValue(String argString, String prefix, int startIndex, int endIndex) {
+        String unformattedSubstring = argString.substring(startIndex, endIndex).trim();
+        String value = unformattedSubstring.replace(prefix, "").trim();
+        return value;
+    }
 
     private static int obtainExtractedValueIndex(String prefix) {
         int index = 0;
         switch (prefix) {
-        case "/cn":
+        case CONTACT_NUMBER_PREFIX:
             index = 1;
             break;
-        case "/f":
+        case FLIGHT_PREFIX:
             index = 2;
             break;
-        case "/a":
+        case ACCOMMS_PREFIX:
             index = 3;
             break;
-        case "/t":
+        case TOUR_PREFIX:
             index = 4;
             break;
         case "":
@@ -157,13 +163,13 @@ public class Parser {
     }
 
     private static Prefix checkPrefix(String substring) {
-        if (substring.startsWith("/cn")) {
+        if (substring.startsWith(CONTACT_NUMBER_PREFIX)) {
             return Prefix.HAS_CONTACT;
-        } else if (substring.startsWith("/f")) {
+        } else if (substring.startsWith(FLIGHT_PREFIX)) {
             return Prefix.HAS_FLIGHT;
-        } else if (substring.startsWith("/a")) {
+        } else if (substring.startsWith(ACCOMMS_PREFIX)) {
             return Prefix.HAS_ACCOMMS;
-        } else if (substring.startsWith("/t")) {
+        } else if (substring.startsWith(TOUR_PREFIX)) {
             return Prefix.HAS_TOUR;
         } else {
             return Prefix.NO_PREFIX;
