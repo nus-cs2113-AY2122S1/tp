@@ -24,7 +24,7 @@ medication.
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `MediVault` from [here](jar-file-location).
+2. Download the latest version of `MediVault.jar` from [here](https://github.com/AY2122S1-CS2113T-T10-1/tp/releases/tag/v1.0).
 
 ## Features
 Notes about the commands:
