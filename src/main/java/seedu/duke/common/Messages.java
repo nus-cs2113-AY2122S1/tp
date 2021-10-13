@@ -26,6 +26,7 @@ public class Messages {
     public static final String RM_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: rm <id>";
     public static final String RM_INVALID_ID = "  (!) Invalid Item ID!";
+    public static final String RM_SUCCESS = "  (+) Removed the following item:";
     public static final String FORMAT_INCORRECT = "Incorrect input format. It should be 'add t/TITLE i/ID'";
     public static final String NO_TITLE = "Please enter a valid title";
     public static final String NO_ID = "Please enter a valid ID";

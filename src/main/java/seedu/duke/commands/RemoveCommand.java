@@ -6,6 +6,7 @@ import seedu.duke.ui.TextUI;
 
 import static seedu.duke.common.Messages.RM_INVALID_FORMAT;
 import static seedu.duke.common.Messages.RM_INVALID_ID;
+import static seedu.duke.common.Messages.RM_SUCCESS;
 
 public class RemoveCommand extends Command {
     public static final String COMMAND_REMOVE = "rm";
@@ -21,7 +22,9 @@ public class RemoveCommand extends Command {
             String[] argList = args.split(" ");
             if (argList.length == 2) {
                 Item removed = catalogue.removeItem(argList[1]);
-                // print removed item details
+
+                ui.print(RM_SUCCESS);
+                ui.print("  " + removed);
             } else {
                 ui.print(RM_INVALID_ID);
             }

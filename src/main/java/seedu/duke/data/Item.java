@@ -5,6 +5,8 @@ public class Item {
     private String id;
     private String status;
 
+    private String separator = " | ";
+
     public Item(String title, String id, String status) {
         this.title = title;
         this.id = id;
@@ -33,5 +35,10 @@ public class Item {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return getID() + separator + getStatus() + separator + getTitle();
     }
 }
