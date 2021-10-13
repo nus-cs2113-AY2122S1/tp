@@ -3,9 +3,13 @@ package command.income;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
+import service.IncomeManager;
+import terminal.Ui;
 import utils.Money;
 
 import java.util.concurrent.Callable;
+
+import static constants.ErrorMessage.addIncomeErrorMsg;
 
 @Command(name = "add", mixinStandardHelpOptions = true, description = "Adds an income source.")
 public class AddIncomeCommand implements Callable<Integer> {
@@ -18,10 +22,16 @@ public class AddIncomeCommand implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
+        Ui ui = Ui.getUi();
 
-        String incomeName = String.join(" ", names);
-        Double incomeValue = Money.truncate(value);
+        try {
+            String incomeName = String.join(" ", names);
+            Double incomeValue = Money.truncate(value);
+            IncomeManager.addIncome(incomeName, incomeValue);
 
+        } catch (Exception error) {
+            ui.printMessage(addIncomeErrorMsg);
+        }
         return 0;
     }
 }

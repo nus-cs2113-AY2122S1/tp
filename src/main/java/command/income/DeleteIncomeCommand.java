@@ -3,8 +3,12 @@ package command.income;
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
+import service.IncomeManager;
+import terminal.Ui;
 
 import java.util.concurrent.Callable;
+
+import static constants.ErrorMessage.deleteIncomeErrorMsg;
 
 @Command(name = "delete",
         description = "Deletes an income source from the database by its unique identifier or by its name.")
@@ -14,14 +18,19 @@ public class DeleteIncomeCommand implements Callable<Integer> {
     Exclusive exclusive;
 
     public Integer call() throws Exception {
+        Ui ui = Ui.getUi();
         String incomeName;
-        if (exclusive.names != null) {
-            incomeName = String.join(" ", exclusive.names);
-            //do something with the name
-        } else {
-            //do something with the id
-        }
 
+        try {
+            if (exclusive.names != null) {
+                incomeName = String.join(" ", exclusive.names);
+                IncomeManager.deleteIncome(incomeName);
+            } else {
+                IncomeManager.deleteIncome(exclusive.id);
+            }
+        } catch (Exception error) {
+            ui.printMessage(deleteIncomeErrorMsg);
+        }
         return 0;
     }
 
