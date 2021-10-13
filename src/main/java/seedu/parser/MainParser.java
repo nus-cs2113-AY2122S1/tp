@@ -64,6 +64,9 @@ public class MainParser {
         case LIST_COMD:
             command = new ListContactsCommand();
             break;
+        case HELP_COMD:
+            command = new HelpCommand();
+            break;
         default:
             command = new FailedCommand(FailedCommandType.GENERAL);
         }
