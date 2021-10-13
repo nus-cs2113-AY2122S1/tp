@@ -30,6 +30,7 @@ public class CommandSyntax {
     public static final String HELP_COMMAND = "help";
     public static final String LIST_DISPENSE_COMMAND = "listdispense {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE "
             + "s/STAFF_NAME sid/STOCK_ID}";
+    public static final String LIST_ORDER_COMMAND = "listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS}";
     public static final String LIST_STOCK_COMMAND = "liststock {i/ID p/PRICE q/QUANTITY e/EXPIRY_DATE "
             + "d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}";
     public static final String PURGE_COMMAND = "purge";

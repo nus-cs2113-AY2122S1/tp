@@ -8,6 +8,7 @@ import command.medicine.AddCommand;
 import command.medicine.DeleteStock;
 import command.medicine.ListStock;
 import command.medicine.UpdateStock;
+import command.order.ListOrder;
 import errors.InvalidCommand;
 import inventory.Medicine;
 import ui.Ui;
@@ -89,6 +90,7 @@ public class Parser {
             new ListStock().execute(ui, parameters, medicines);
             break;
         case LIST_ORDER:
+            new ListOrder().execute(ui, parameters, medicines);
             break;
         case PURGE:
             new PurgeCommand().execute(ui, parameters, medicines);

@@ -295,15 +295,9 @@ public class Ui {
     /**
      * Prints out all the orders in the Arraylist in a table format.
      *
-     * @param medicines Arraylist of the medicines.
+     * @param orders Arraylist of the orders.
      */
-    public void printOrders(ArrayList<Medicine> medicines) {
-        ArrayList<Order> orders = new ArrayList<>();
-        for (Medicine medicine : medicines) {
-            if (medicine instanceof Order) {
-                orders.add((Order) medicine);
-            }
-        }
+    public void printOrders(ArrayList<Order> orders) {
         if (orders.size() == 0) {
             print("There are no orders found.");
             return;
