@@ -1,11 +1,16 @@
 package seedu.duke;
 
+import java.util.ArrayList;
 import java.util.Map;
-import java.util.SortedMap;
 import java.util.TreeMap;
 
 public class Parser {
-    public static Command parse(String input) {
+    private static final String CONTACT_NUMBER_PREFIX = "/cn";
+    private static final String FLIGHT_PREFIX = "/f";
+    private static final String ACCOMMS_PREFIX = "/a";
+    private static final String TOUR_PREFIX = "/t";
+
+    public static Command parse(String input) throws TourPlannerException {
         String[] commandAndParams = splitCommandString(input, " ");
         String command = commandAndParams[0];
         String params = commandAndParams[1];
@@ -22,14 +27,11 @@ public class Parser {
             try {
                 return parseCut(params);
             } catch (NullPointerException | NumberFormatException e) {
-                System.out.println("INVALID: Empty 'cut' index");
+                throw new TourPlannerException("INVALID: Empty 'cut' index");
             }
-            break;
         default:
-            System.out.println("INVALID INPUT");
-            break;
+            throw new TourPlannerException("INVALID INPUT");
         }
-        return null;
     }
 
     public static String[] splitCommandString(String input, String separator) {
@@ -37,9 +39,9 @@ public class Parser {
         return split.length == 2 ? split : new String[]{split[0], ""};
     }
 
-    private static AddCommand executeAddCommand(String params) {
-        SortedMap<Integer, String> valueIndex = extractValueIndexes(params);
-        String[] values = extractValues(valueIndex, params);
+    private static AddCommand executeAddCommand(String params) throws TourPlannerException {
+        TreeMap<Integer, String> prefixIndexes = extractPrefixIndexes(params);
+        String[] values = extractValuesIntoArray(prefixIndexes, params);
         Client client = new Client(values);
         return new AddCommand(client);
     }
@@ -52,50 +54,90 @@ public class Parser {
         NO_PREFIX
     }
 
-    private static SortedMap<Integer, String> extractValueIndexes(String argString) {
-        SortedMap<Integer, String> valueIndexes = new TreeMap<Integer, String>();
+    private static TreeMap<Integer, String> extractPrefixIndexes(String argString) throws TourPlannerException {
+        TreeMap<Integer, String> prefixIndexes = new TreeMap<>();
         if (containAllFields(argString)) {
-            int contactIndex = argString.indexOf("/cn");
-            int flightIndex = argString.indexOf("/f");
-            int accommsIndex = argString.indexOf("/a");
-            int tourIndex = argString.indexOf("/t");
-            valueIndexes.put(contactIndex, "/cn");
-            valueIndexes.put(flightIndex, "/f");
-            valueIndexes.put(accommsIndex, "/a");
-            valueIndexes.put(tourIndex, "/t");
-            return valueIndexes;
+            int nameIndex = 0;
+            int contactIndex = argString.indexOf(CONTACT_NUMBER_PREFIX);
+            int flightIndex = argString.indexOf(FLIGHT_PREFIX);
+            int accommsIndex = argString.indexOf(ACCOMMS_PREFIX);
+            int tourIndex = argString.indexOf(TOUR_PREFIX);
+
+            prefixIndexes.put(nameIndex, "");
+            prefixIndexes.put(contactIndex, CONTACT_NUMBER_PREFIX);
+            prefixIndexes.put(flightIndex, FLIGHT_PREFIX);
+            prefixIndexes.put(accommsIndex, ACCOMMS_PREFIX);
+            prefixIndexes.put(tourIndex, TOUR_PREFIX);
+
+            boolean isUniqueIndex = prefixIndexes.size() == 5;
+
+            if (!isUniqueIndex) {
+                throw new TourPlannerException("You missed out your name!");
+            }
+            return prefixIndexes;
         } else {
-            return null;
+            throw new TourPlannerException("Missing prefixes! Did you miss out some fields?");
         }
     }
 
-    private static String[] extractValues(SortedMap<Integer, String> valueIndexes, String argString) {
-        String[] extractValues = new String[5];
-        int previousIndex = 0;
-        for (Map.Entry<Integer, String> valueIndex : valueIndexes.entrySet()) {
-            int nextIndex = valueIndex.getKey();
-            String prefix = valueIndex.getValue();
-            String unformattedSubstring = argString.substring(previousIndex, nextIndex).trim();
-            String value = unformattedSubstring.replace(prefix, "").trim();
-            previousIndex = nextIndex;
-            switch (prefix) {
-            case "/cn":
-                extractValues[1] = value;
-                break;
-            case "/f":
-                extractValues[2] = value;
-                break;
-            case "/a":
-                extractValues[3] = value;
-                break;
-            case "/t":
-                extractValues[4] = value;
-                break;
-            default:
-                extractValues[0] = value;
-            }
+    private static String[] extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes, String argString)
+            throws TourPlannerException {
+        String[] extractedValues = new String[5];
+        ArrayList<Integer> indexes = new ArrayList<>();
+        ArrayList<String> prefixes = new ArrayList<>();
+        for (Map.Entry<Integer, String> prefixIndex : prefixIndexes.entrySet()) {
+            indexes.add(prefixIndex.getKey());
+            prefixes.add(prefixIndex.getValue());
         }
-        return extractValues;
+
+        for (int i = 0; i < indexes.size() - 1; i++) {
+            int previousIndex = indexes.get(i);
+            int nextIndex = indexes.get(i + 1);
+            String prefix = prefixes.get(i);
+            String value = extractValue(argString, prefix, previousIndex, nextIndex);
+            int inputIndex = obtainExtractedValueIndex(prefix);
+            extractedValues[inputIndex] = value;
+        }
+
+        String finalPrefix = prefixes.get(4);
+        int finalIndex = indexes.get(4);
+
+        int inputIndex = obtainExtractedValueIndex(finalPrefix);
+        String value = extractValue(argString, finalPrefix, finalIndex, argString.length());
+        extractedValues[inputIndex] = value;
+        return extractedValues;
+    }
+
+    private static String extractValue(String argString, String prefix, int startIndex, int endIndex)
+            throws TourPlannerException {
+        String unformattedSubstring = argString.substring(startIndex, endIndex).trim();
+        String value = unformattedSubstring.replace(prefix, "").trim();
+        if (value.contains(CONTACT_NUMBER_PREFIX) || value.contains(FLIGHT_PREFIX)
+                    || value.contains(ACCOMMS_PREFIX) || value.contains(TOUR_PREFIX)) {
+            throw new TourPlannerException("There are duplicate prefixes!");
+        }
+        return value;
+    }
+
+    private static int obtainExtractedValueIndex(String prefix) {
+        int index = 0;
+        switch (prefix) {
+        case CONTACT_NUMBER_PREFIX:
+            index = 1;
+            break;
+        case FLIGHT_PREFIX:
+            index = 2;
+            break;
+        case ACCOMMS_PREFIX:
+            index = 3;
+            break;
+        case TOUR_PREFIX:
+            index = 4;
+            break;
+        default:
+            break;
+        }
+        return index;
     }
 
     private static boolean containAllFields(String argString) {
@@ -127,13 +169,13 @@ public class Parser {
     }
 
     private static Prefix checkPrefix(String substring) {
-        if (substring.startsWith("/cn")) {
+        if (substring.equals(CONTACT_NUMBER_PREFIX)) {
             return Prefix.HAS_CONTACT;
-        } else if (substring.startsWith("/f")) {
+        } else if (substring.equals(FLIGHT_PREFIX)) {
             return Prefix.HAS_FLIGHT;
-        } else if (substring.startsWith("/a")) {
+        } else if (substring.equals(ACCOMMS_PREFIX)) {
             return Prefix.HAS_ACCOMMS;
-        } else if (substring.startsWith("/t")) {
+        } else if (substring.equals(TOUR_PREFIX)) {
             return Prefix.HAS_TOUR;
         } else {
             return Prefix.NO_PREFIX;
