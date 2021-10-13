@@ -11,10 +11,10 @@ public class Item {
     private String separator = " | ";
 
     /**
-     * Constructor for class item
+     * Constructor for class item.
      * @param title The title of the item.
      * @param id The unique attribute of the item.
-     * @param status The status of the item, can be either "Loaned" or "Available"
+     * @param status The status of the item, can be either "Loaned" or "Available".
      */
     public Item(String title, String id, String status) {
         this.title = title;
@@ -32,7 +32,7 @@ public class Item {
 
     /**
      * Setter method that sets the title attribute.
-     * @param title The input title to be set
+     * @param title The input title to be set.
      */
     public void setTitle(String title) {
         this.title = title;
@@ -48,7 +48,7 @@ public class Item {
 
     /**
      * Setter method that sets the id attribute.
-     * @param id The input id to be set
+     * @param id The input id to be set.
      */
     public void setID(String id) {
         this.id = id;
