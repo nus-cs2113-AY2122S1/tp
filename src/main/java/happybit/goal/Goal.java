@@ -76,9 +76,9 @@ public class Goal {
     }
 
     /**
-     * Sets a habit at user specified index as done
+     * Sets a habit at user specified index as done.
      *
-     * @param habitIndex
+     * @param habitIndex Index corresponding to habit in the habitList
      */
     public void doneHabit(int habitIndex) {
         Habit habit = habitList.get(habitIndex);
