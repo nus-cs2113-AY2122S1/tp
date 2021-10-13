@@ -16,7 +16,7 @@ public class RemoveCommand extends Command {
                 assert moduleSelectedList.getSize() == 0;
                 System.out.println("The module list is empty!");
             } else {
-                //assert description != null;
+                assert description != null;
                 assert moduleSelectedList.getSize() != 0;
                 moduleSelectedList.removeModule(description);
                 assert !moduleSelectedList.searchModule(description);
@@ -28,7 +28,7 @@ public class RemoveCommand extends Command {
                 assert universitySelectedList.getSize() == 0;
                 System.out.println("The university list is empty!");
             } else {
-                //assert description != null;
+                assert description != null;
                 assert universitySelectedList.getSize() != 0;
                 universitySelectedList.removeUniversity(description);
                 assert !universitySelectedList.searchUniversity(description);
