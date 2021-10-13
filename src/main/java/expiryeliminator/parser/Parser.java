@@ -253,7 +253,8 @@ public class Parser {
         try {
             argParser.parse(args);
         } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
-            return new IncorrectCommand("Wrong format for view command");
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewIngredientCommand.MESSAGE_USAGE));
         }
 
         final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
@@ -265,7 +266,7 @@ public class Parser {
         try {
             argParser.parse(args);
         } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
-            return new IncorrectCommand("Wrong format for view recipe command");
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewRecipeCommand.MESSAGE_USAGE));
         }
 
         final String recipe = new RecipeParser().parse(argParser.getSingleArg(PREFIX_RECIPE));
