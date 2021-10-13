@@ -1,9 +1,11 @@
 package happybit;
 
 import happybit.command.Command;
+import happybit.exception.HBCommandException;
 import happybit.exception.HBLoadException;
-import happybit.exception.HappyBitException;
+import happybit.exception.HBParserException;
 import happybit.goal.GoalList;
+import happybit.parser.Parser;
 import happybit.storage.Storage;
 import happybit.ui.Ui;
 
@@ -21,9 +23,9 @@ public class HappyBit {
      *
      * @param filePath File path of the external save file
      */
-    public HappyBit(String filePath) {
+    public HappyBit(String filePath, String fileDir) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, fileDir);
         loadData();
     }
 
@@ -34,7 +36,7 @@ public class HappyBit {
      * @param args Not applicable.
      */
     public static void main(String[] args) {
-        new HappyBit("happybit.txt").run();
+        new HappyBit("data/habits.txt", "data").run();
     }
 
     /*
@@ -74,12 +76,12 @@ public class HappyBit {
         boolean isExit = false;
         Scanner in = new Scanner(System.in);
         while (!isExit) {
-            userInput = in.nextLine().strip().replaceAll("\\s+"," ");
+            userInput = in.nextLine();
             try {
                 Command command = Parser.parse(userInput);
                 command.runCommand(goalList, ui, storage);
                 isExit = command.isExit();
-            } catch (HappyBitException e) {
+            } catch (HBParserException | HBCommandException e) {
                 ui.showError(e.getMessage());
             }
         }
