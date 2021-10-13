@@ -1,5 +1,6 @@
 package taa.command;
 
+import taa.logger.TaaLogger;
 import taa.storage.Storage;
 import taa.exception.TaaException;
 import taa.Ui;
@@ -48,6 +49,7 @@ public class AddModuleCommand extends Command {
         String name = argumentMap.get(KEY_MODULE_NAME);
         Module module = new Module(moduleCode, name);
         moduleList.addModule(module);
+        TaaLogger.LOGGER.logInfo(String.format("Added module: %s", module));
 
         storage.save(moduleList);
 

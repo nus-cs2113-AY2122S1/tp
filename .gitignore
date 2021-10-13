@@ -19,3 +19,4 @@ text-ui-test/ACTUAL.TXT
 .project
 data/taa_data.json
 text-ui-test/data/taa_data.json
+taa.log*
