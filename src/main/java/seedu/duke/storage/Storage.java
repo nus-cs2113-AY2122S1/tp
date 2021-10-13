@@ -73,7 +73,9 @@ public class Storage {
     private static String encodeIngredient(String toWrite) {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 2);
-        encodedItem = "add-ingredient" + "|" + description[0] + "|" + description[1].substring(1,description[1].length()-1);
+        encodedItem = "add-ingredient" + "|" + description[0] + "|" + description[1].substring(1, description[1].length() - 1);
+        assert (!encodedItem.contains("["));
+        assert (!encodedItem.contains("]"));
         return encodedItem;
     }
 
@@ -87,6 +89,7 @@ public class Storage {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 2);
         encodedItem = "add-menu" + "|" + description[0] + "|" + description[1].substring(3);
+        assert (!encodedItem.contains("$"));
         return encodedItem;
     }
 
