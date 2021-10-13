@@ -2,10 +2,20 @@ package happybit.parser;
 
 import happybit.command.Command;
 import happybit.command.HelpCommand;
+import happybit.command.ByeCommand;
 import happybit.exception.HaBitParserException;
 
 public class Parser {
 
+    private static final String HELP = "help";
+    private static final String LIST = "list";
+    private static final String SET = "set";
+    private static final String REMOVE = "remove";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String EDIT = "edit";
+    private static final String VIEW = "view";
+    private static final String BYE = "bye";
     private static final String DELIMITER = "@@@";
 
     public static Command parse(String userInput) throws HaBitParserException {
@@ -81,22 +91,24 @@ public class Parser {
 
     private static Command parseCommand(String command, String details) {
         switch (command) {
-        case "help":
+        case HELP:
             return new HelpCommand();
-        case "list":
+        case LIST:
             return null;
-        case "set":
+        case SET:
             return null;
-        case "remove":
+        case REMOVE:
             return null;
-        case "done":
+        case DONE:
             return null;
-        case "delete":
+        case DELETE:
             return null;
-        case "edit":
+        case EDIT:
             return null;
-        case "view":
+        case VIEW:
             return null;
+        case BYE:
+            return new ByeCommand();
         default:
             return null;
         }

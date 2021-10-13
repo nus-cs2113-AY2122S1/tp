@@ -65,4 +65,18 @@ public class Ui {
     private static void printDashes() {
         System.out.println(DASHES);
     }
+
+    public static void showWelcome() {
+        printDashes();
+        System.out.println("Howdy! Welcome to Ha(ppy)Bit!");
+        printDashes();
+    }
+
+    public static void showGoodbye() {
+        printDashes();
+        System.out.println("Thanks for using Ha(ppy)Bit, see you in a \033[3mbit\033[0m! (hehe)" + NEWLINE);
+        System.out.println("\"We are what we repeatedly do. Excellence, then, is not an act, but a habit.\"" + NEWLINE
+                + " — Will Durant");
+        printDashes();
+    }
 }
