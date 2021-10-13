@@ -24,7 +24,8 @@ public class HappyBit {
     public HappyBit(String filePath, String fileDir) {
         ui = new Ui();
         storage = new Storage(filePath, fileDir);
-        loadData();
+        goalList = new GoalList();
+        // loadData();
     }
 
     /**
@@ -75,7 +76,7 @@ public class HappyBit {
                 command.runCommand(goalList, ui, storage);
                 isExit = command.isExit();
             } catch (HaBitParserException | HaBitCommandException e) {
-                //ui.showError(e.getMessage());
+                ui.showError(e.getMessage());
             }
         }
     }
