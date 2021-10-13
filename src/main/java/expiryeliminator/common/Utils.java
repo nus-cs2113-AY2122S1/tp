@@ -16,6 +16,7 @@ public class Utils {
     public static String toTitleCase(String string) {
         //@@author bernardboey-reused
         // Referenced from https://www.baeldung.com/java-string-title-case
+        assert string != null;
         return Arrays.stream(string.toLowerCase().split(" "))
                 .filter(word -> !word.isEmpty())
                 .map(word -> Character.toUpperCase(word.charAt(0)) + word.substring(1))
