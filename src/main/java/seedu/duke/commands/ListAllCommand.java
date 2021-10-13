@@ -1,18 +1,20 @@
 package seedu.duke.commands;
 
 import seedu.duke.data.Catalogue;
+import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
-import static seedu.duke.common.Messages.EXIT_MESSAGE;
+
+import static seedu.duke.common.Messages.LIST_ALL_MESSAGE;
 
 /**
  * Class encapsulating an exit command.
  */
-public class ExitCommand extends Command {
+public class ListAllCommand extends Command {
 
     /**
      * Single constructor, no parameters.
      */
-    public ExitCommand() {
+    public ListAllCommand() {
     }
 
     /**
@@ -22,6 +24,9 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
-        ui.print(EXIT_MESSAGE);
+        ui.print(LIST_ALL_MESSAGE);
+        for (Item temp : catalogue.getAllItems()) {
+            System.out.println(temp.getID() + " " + temp.getTitle() + " " + temp.getStatus());
+        }
     }
 }
