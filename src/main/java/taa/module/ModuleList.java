@@ -96,7 +96,7 @@ public class ModuleList implements ClassChecker {
      */
     @Override
     public boolean verify() {
-        /*ArrayList<String> moduleCodes = new ArrayList<>();
+        ArrayList<String> moduleCodes = new ArrayList<>();
         ArrayList<Module> duplicatedModules = new ArrayList<>();
         for (Module module : modules) {
             if (moduleCodes.contains(module.getCode())) {
@@ -108,7 +108,7 @@ public class ModuleList implements ClassChecker {
 
         for (Module module : duplicatedModules) {
             modules.remove(module);
-        }*/
+        }
 
         return true;
     }
