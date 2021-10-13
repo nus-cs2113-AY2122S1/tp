@@ -7,21 +7,20 @@ import java.util.regex.Pattern;
 
 import expiryeliminator.commands.AddIngredientCommand;
 import expiryeliminator.commands.AddRecipeCommand;
+import expiryeliminator.commands.ByeCommand;
+import expiryeliminator.commands.Command;
 import expiryeliminator.commands.DecrementCommand;
-import expiryeliminator.commands.IncrementCommand;
 import expiryeliminator.commands.DeleteIngredientCommand;
 import expiryeliminator.commands.DeleteRecipeCommand;
-import expiryeliminator.commands.ListCommand;
-import expiryeliminator.commands.ListIngredientsExpiredCommand;
-import expiryeliminator.commands.ListIngredientExpiringCommand;
-import expiryeliminator.commands.ViewIngredientCommand;
-import expiryeliminator.commands.ByeCommand;
 import expiryeliminator.commands.HelpCommand;
-import expiryeliminator.commands.ViewRecipeCommand;
-import expiryeliminator.commands.ListRecipeCommand;
-import expiryeliminator.commands.Command;
 import expiryeliminator.commands.IncorrectCommand;
-
+import expiryeliminator.commands.IncrementCommand;
+import expiryeliminator.commands.ListCommand;
+import expiryeliminator.commands.ListIngredientExpiringCommand;
+import expiryeliminator.commands.ListIngredientsExpiredCommand;
+import expiryeliminator.commands.ListRecipeCommand;
+import expiryeliminator.commands.ViewIngredientCommand;
+import expiryeliminator.commands.ViewRecipeCommand;
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
 import expiryeliminator.data.exception.DuplicateDataException;
@@ -59,7 +58,8 @@ public class Parser {
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n%1$s";
     public static final String MESSAGE_INVALID_ARGUMENT_FORMAT = "Invalid argument format!\n%1$s";
-    private static final String MESSAGE_UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :-(";
+    private static final String MESSAGE_UNRECOGNISED_COMMAND = "I'm sorry, but I don't know what that means :-(\n"
+            + "For help, please type `help`.";
 
     /**
      * Parses user input as a command.
@@ -68,7 +68,7 @@ public class Parser {
      * @return Command that corresponds to the user input, if valid.
      */
     public static Command parseCommand(String userInput) {
-        assert userInput != null;
+        assert userInput != null : "User input string cannot be null";
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput);
         if (!matcher.matches()) {
             throw new RuntimeException(MESSAGE_INVALID_COMMAND_FORMAT);
