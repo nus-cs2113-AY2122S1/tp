@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
-import seedu.duke.data.item.Catalogue;
-import seedu.duke.data.item.Item;
+import seedu.duke.data.Catalogue;
+import seedu.duke.data.Item;
 import seedu.duke.LibmgrException;
 import seedu.duke.ui.TextUI;
 

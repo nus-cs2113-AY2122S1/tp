@@ -1,9 +1,11 @@
-package seedu.duke.data.item;
+package seedu.duke.data;
 
 public class Item {
     private String title;
     private String id;
     private String status;
+
+    private String separator = " | ";
 
     public Item(String title, String id, String status) {
         this.title = title;
@@ -33,5 +35,10 @@ public class Item {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return getID() + separator + getStatus() + separator + getTitle();
     }
 }

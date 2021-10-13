@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.data.item.Catalogue;
+import seedu.duke.data.Catalogue;
 import seedu.duke.ui.TextUI;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
