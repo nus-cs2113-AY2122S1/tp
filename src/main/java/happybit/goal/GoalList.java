@@ -8,10 +8,10 @@ import java.util.ArrayList;
 public class GoalList {
     private static final String ERROR_EMPTY_GOAL_LIST = "You have no set any goals for yourself yet, would"
             + "you like to set some for yourself?";
-    protected static ArrayList<Goal> goals;
+    protected ArrayList<Goal> goalList;
 
     public GoalList() {
-        this.goals = new ArrayList<>();
+        this.goalList = new ArrayList<>();
     }
 
     public static int getListLength() {
@@ -20,10 +20,9 @@ public class GoalList {
 
     /**
      * Add Goal to goals; Set Command.
-     * Replace with Varun's Implementation
      */
-    public static void setGoal(Goal goal) {
-        goals.add(goal);
+    public void addGoal(Goal goal) {
+        goalList.add(goal);
     }
 
     /**
