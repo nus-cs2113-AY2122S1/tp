@@ -5,17 +5,17 @@ import happybit.goal.GoalList;
 import happybit.storage.Storage;
 import happybit.ui.Ui;
 
-public class ListHabitsCommand extends ListCommand {
+public class DeleteGoalCommand extends DeleteCommand {
 
     protected int goalIndex;
 
-    public ListHabitsCommand(int goalIndex) {
+    public DeleteGoalCommand(int goalIndex) {
         this.goalIndex = goalIndex;
     }
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-        goalList.listHabitsFromGoal(goalIndex, ui);
+        goalList.deleteGoal(goalIndex);
     }
 
 }

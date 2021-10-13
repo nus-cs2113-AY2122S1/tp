@@ -1,10 +1,15 @@
 package happybit.command;
 
+import happybit.exception.HaBitCommandException;
+import happybit.goal.GoalList;
+import happybit.storage.Storage;
 import happybit.ui.Ui;
 
-public class HelpCommand {
+public class HelpCommand extends Command {
 
-    public static void runCommand() {
-        Ui.printCommandList();
+    @Override
+    public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
+        ui.printCommandList();
     }
+
 }

@@ -1,21 +1,22 @@
 package happybit.command;
 
 import happybit.exception.HaBitCommandException;
+import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.storage.Storage;
 import happybit.ui.Ui;
 
-public class ListHabitsCommand extends ListCommand {
+public class AddGoalCommand extends AddCommand {
 
-    protected int goalIndex;
+    protected Goal goal;
 
-    public ListHabitsCommand(int goalIndex) {
-        this.goalIndex = goalIndex;
+    public AddGoalCommand(Goal goal) {
+        this.goal = goal;
     }
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-        goalList.listHabitsFromGoal(goalIndex, ui);
+        goalList.addGoal(goal);
     }
 
 }

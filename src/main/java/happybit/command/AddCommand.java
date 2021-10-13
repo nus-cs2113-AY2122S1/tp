@@ -1,42 +1,14 @@
 package happybit.command;
 
-import java.util.ArrayList;
+import happybit.exception.HaBitCommandException;
+import happybit.goal.GoalList;
+import happybit.storage.Storage;
+import happybit.ui.Ui;
 
-public class AddCommand {
-    // temporary attribute
-    private final ArrayList<String> habits = new ArrayList<>();
+public class AddCommand extends Command {
 
-    /**
-     * Adds habit to habit list.
-     *
-     * @param habit Habit to add to habit list
-     */
-    public void addHabit(String habit) {
-        habits.add(habit);
-    }
-
-    /**
-     * Adds a habit.
-     */
-    public void runCommand(String habit) {
-        addHabit(habit);
-    }
-
-    /**
-     * Returns size of habits list.
-     *
-     * @return Size of habits list
-     */
-    public int getHabitListSize() {
-        return habits.size();
-    }
-
-    /**
-     * Returns list of all current habits.
-     *
-     * @return List of all current habits
-     */
-    public ArrayList<String> getHabits() {
-        return habits;
+    @Override
+    public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
+        // do nothing
     }
 }
