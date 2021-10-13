@@ -2,6 +2,7 @@ package happybit.parser;
 
 import happybit.command.Command;
 import happybit.command.HelpCommand;
+import happybit.command.ByeCommand;
 import happybit.exception.HaBitParserException;
 
 public class Parser {
@@ -97,6 +98,8 @@ public class Parser {
             return null;
         case "view":
             return null;
+        case "bye":
+            return new ByeCommand();
         default:
             return null;
         }
