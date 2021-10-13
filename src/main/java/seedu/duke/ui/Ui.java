@@ -110,7 +110,7 @@ public class Ui {
     public void printTaskMarkedAsDone(TaskList taskList, Task task) {
         System.out.print(LINE);
         System.out.println(PADDING + "Nice! I've marked this task as done: ");
-        System.out.println(PADDING + task);
+        System.out.println(PADDING + "  " + task);
         System.out.println(PADDING + "Now you have " + taskList.getNumberOfPendingTasks() + " pending tasks.");
         System.out.println(LINE);
     }

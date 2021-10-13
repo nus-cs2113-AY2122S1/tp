@@ -21,7 +21,7 @@ It is designed to be fast, flexible, and unobtrusive.
 
 1. Ensure that you have Java 11 or above installed on your machine. You can follow the guide 
 [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/what-is-corretto-11.html) for more information.
-2. Download the latest version of Task Buddy from our GitHub repository.
+2. Download the latest version of NUS Buddy from our GitHub repository.
 3. Copy the `.jar` file to the folder you want to use as the home directory for the application.
 4. To launch the app, run the command `java -jar {filename}.jar`.
 
@@ -69,7 +69,7 @@ $ add task CS2113 tP -d MON -i add documentation
 $ add lesson CS2113 Lecture -d MON -s 1pm -e 3pm
     _______________________________________________________________________________
      Noted. I've added this lesson:
-       [L] Title: CS2113 Lecture (Start: 1pm) (End: 3pm)
+       [L] Title: CS2113 Lecture (Day: MON) (Start: 1pm, End: 3pm)
      Now you have 1 lessons in the list.
     _______________________________________________________________________________
     
@@ -84,11 +84,51 @@ $ add lesson CS2113 Lecture -d MON -s 1pm -e 3pm
 
 Format: `list [task/lesson/all]`
 
+Example usage:
+
+```
+$ list task
+    _______________________________________________________________________________
+     Here are the tasks in your list:
+     1. [T][ ] Title: CS2113 tP (Day: MON)
+     2. [T][ ] Title: CS2113 tp (Day: MON)
+                Info: add documentation
+    _______________________________________________________________________________
+     
+$ list lesson
+    _______________________________________________________________________________
+     Here are the lessons in your list:
+     1. [L] Title: CS2113 Lecture (Day: MON) (Start: 1pm, End: 3pm)
+    _______________________________________________________________________________
+    
+$ list all
+    _______________________________________________________________________________
+     Here are the tasks in your list:
+     1. [T][ ] Title: CS2113 tP (Day: MON)
+     2. [T][ ] Title: CS2113 tp (Day: MON)
+                Info: add documentation
+     
+     Here are the lessons in your list:
+     1. [L] Title: CS2113 Lecture (Day: MON) (Start: 1pm, End: 3pm)
+    _______________________________________________________________________________
+```
+
 ### Marking a Task as done - `done`
 
 Indicate that the specified task is completed.
 
 Format: `done [INDEX]`
+
+Example usage:
+
+```
+$ done 1
+    _______________________________________________________________________________
+     Nice! I've marked this task as done: 
+       [T][X] Title: CS2113 tP (Day: MON)
+     Now you have 1 pending tasks.
+    _______________________________________________________________________________
+```
 
 ### Deleting Tasks or Lessons - `delete`
 
@@ -158,16 +198,11 @@ find lesson cs2113
 
 ```
 
-
 ### Exiting the program - `exit`
 
 Exit the program.
 
 Format: `exit`
-
-### Saving the data
-
-Data from Task Buddy is automatically saved on your local machine.
 
 Example usage:
 
@@ -177,6 +212,10 @@ exit
      Bye!
     _______________________________________________________________________________
 ```
+
+### Saving the data
+
+Data from NUS Buddy is automatically saved on your local machine.
 
 ## FAQ
 

@@ -24,8 +24,9 @@ public class DoneCommand extends Command {
         if (task.isDone()) {
             throw new DukeException(Message.ERROR_TASK_IS_ALREADY_DONE);
         }
-
+        assert !task.isDone() : "Task should not be marked as done";
         taskList.markTaskAsDone(taskIndex);
+        assert task.isDone() : "Task should be marked as done";
         storage.saveData(taskList, lessonList);
         ui.printTaskMarkedAsDone(taskList, task);
     }
