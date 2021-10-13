@@ -9,8 +9,13 @@ public class ListParser {
 
     public static Command parseListHabitCommand(String commandInstruction) throws HaBitParserException {
         // write parse code
-        // return new ListHabitsCommand(<ADD PARAMS>);
-        return null;
+        int goalIndex;
+        try {
+            goalIndex = Integer.parseInt(commandInstruction);
+        } catch (NumberFormatException e) {
+            throw new HaBitParserException("Please enter a valid integer for the goal index");
+        }
+        return new ListHabitsCommand(goalIndex);
     }
 
 }
