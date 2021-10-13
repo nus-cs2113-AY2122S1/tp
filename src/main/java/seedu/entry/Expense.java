@@ -19,6 +19,7 @@ public class Expense extends Entry {
 
     @Override
     public String toString() {
-        return "[E] " + description + " - $" + value;
+        String valueTwoDecimalPoint = String.format("%.2f",value);
+        return "[E] " + description + " - $" + valueTwoDecimalPoint;
     }
 }

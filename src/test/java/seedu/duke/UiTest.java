@@ -35,7 +35,7 @@ public class UiTest {
         final String expectedOutput = "---------------------------------------------------------------------------" 
                 + "-------------------------- " + newLine + "Below is a list of all of your recent spending!" + newLine 
                 + "---------------------------------------------------------------------------------------------------" 
-                + "-- " + newLine + "1: [E] Bought cookies - $5.0" + newLine + "2: [E] Bought cakes - $7.0" + newLine
+                + "-- " + newLine + "1: [E] Bought cookies - $5.00" + newLine + "2: [E] Bought cakes - $7.00" + newLine
                 + "---------------------------------------------------------------------------------------------------" 
                 + "--";
         
@@ -54,8 +54,8 @@ public class UiTest {
         final String expectedOutput = "---------------------------------------------------------------------------" 
                 + "-------------------------- " + newLine + "Below is a list of all of your recent earnings!" + newLine
                 + "---------------------------------------------------------------------------------------------------" 
-                + "-- " + newLine + "1: [I] Paycheck August - $20.0" + newLine
-                + "2: [I] Paycheck July - $25.0" + newLine
+                + "-- " + newLine + "1: [I] Paycheck August - $20.00" + newLine
+                + "2: [I] Paycheck July - $25.00" + newLine
                 + "---------------------------------------------------------------------------------------------------" 
                 + "--";
         
@@ -66,6 +66,18 @@ public class UiTest {
         Ui testUI = new Ui();
         testUI.listIncome(entries);
 
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+    
+    @Test
+    public void printExpenseAdded_addedOneItem_expenseAddedFeedback() {
+        final String expectedOutput = "---------------------------------------------------------------------------"
+                + "-------------------------- " + newLine + "Your most recent spending: " + newLine
+                + "[E] Bought cookies - $5.00" + newLine + "------------------------------------------------------"
+                + "-----------------------------------------------";
+        
+        Ui testUI = new Ui();
+        testUI.printExpenseAdded(new Expense("Bought cookies", 5.0));
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 }
