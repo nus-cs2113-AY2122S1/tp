@@ -32,11 +32,12 @@ public class AddDispense extends Command {
         String[] optionalParameters = {};
 
         if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
-                CommandSyntax.DISPENSE_COMMAND, false)) {
+                CommandSyntax.ADD_DISPENSE_COMMAND, false)) {
             return;
         }
 
-        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines, CommandSyntax.DISPENSE_COMMAND)) {
+        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines,
+                CommandSyntax.ADD_DISPENSE_COMMAND)) {
             return;
         }
 

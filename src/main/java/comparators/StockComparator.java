@@ -33,7 +33,7 @@ public class StockComparator implements Comparator<Medicine> {
 
         switch (column) {
         case Stock.ID_LOWERCASE:
-        case CommandParameters.STOCK_ID:
+        case CommandParameters.ID:
             return Integer.compare(stock1.getStockID(), stock2.getStockID());
         case Stock.NAME_LOWERCASE:
         case CommandParameters.NAME:

@@ -30,6 +30,9 @@ public class StockValidator {
             }
             boolean stockExist = false;
             for (Medicine medicine : medicines) {
+                if (!(medicine instanceof Stock)) {
+                    continue;
+                }
                 Stock stock = (Stock) medicine;
                 if (stock.getStockID() == stockId) {
                     stockExist = true;
@@ -127,7 +130,7 @@ public class StockValidator {
      * @return Boolean value indicating if max medicine quantity is valid.
      */
     public static boolean isValidColumn(Ui ui, String columnName) {
-        String[] columnAlias = new String[]{CommandParameters.STOCK_ID, CommandParameters.NAME, CommandParameters.PRICE,
+        String[] columnAlias = new String[]{CommandParameters.ID, CommandParameters.NAME, CommandParameters.PRICE,
             CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
             CommandParameters.MAX_QUANTITY};
         if (Arrays.asList(Stock.COLUMNS).contains(columnName.toUpperCase()) || Arrays.asList(columnAlias)

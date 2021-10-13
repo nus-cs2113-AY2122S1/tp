@@ -24,17 +24,17 @@ public class DeleteStock extends Command {
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         logger.log(Level.INFO, "Start deletion of stock");
 
-        String[] requiredParameters = {CommandParameters.STOCK_ID};
+        String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};
 
         if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
-                CommandSyntax.DELETE_COMMAND, true)) {
+                CommandSyntax.DELETE_STOCK_COMMAND, true)) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of stock");
             return;
         }
 
-        String stockIdToDelete = parameters.get(CommandParameters.STOCK_ID);
+        String stockIdToDelete = parameters.get(CommandParameters.ID);
         if (!StockValidator.isValidStockId(ui, stockIdToDelete, medicines)) {
             logger.log(Level.WARNING, "Invalid stock id is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of stock");
@@ -47,6 +47,9 @@ public class DeleteStock extends Command {
         assert stockId <= Stock.getStockCount() : "Stock Id should not exceed max stock count";
 
         for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Stock)) {
+                continue;
+            }
             Stock stock = (Stock) medicine;
             if (stock.getStockID() == stockId) {
                 medicines.remove(medicine);

@@ -22,26 +22,26 @@ import java.util.stream.Collectors;
  */
 
 public class ListStock extends Command {
-    private static Logger logger = Logger.getLogger("ListCommand");
+    private static Logger logger = Logger.getLogger("ListStock");
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         logger.log(Level.INFO, "Start listing of available stock");
 
         String[] requiredParameter = {};
-        String[] optionalParameters = {CommandParameters.STOCK_ID, CommandParameters.NAME, CommandParameters.PRICE,
+        String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.PRICE,
             CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
             CommandParameters.MAX_QUANTITY, CommandParameters.SORT, CommandParameters.REVERSED_SORT};
 
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters,
-                    requiredParameter, optionalParameters, CommandSyntax.LIST_COMMAND, false);
+                    requiredParameter, optionalParameters, CommandSyntax.LIST_STOCK_COMMAND, false);
         if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameters given by user");
             return;
         }
 
         boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters,
-                    medicines, CommandSyntax.LIST_COMMAND);
+                    medicines, CommandSyntax.LIST_STOCK_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");
             return;
@@ -59,7 +59,7 @@ public class ListStock extends Command {
             for (String parameter : parameters.keySet()) {
                 String parameterValue = parameters.get(parameter);
                 switch (parameter) {
-                case CommandParameters.STOCK_ID:
+                case CommandParameters.ID:
                     filteredStocks = (ArrayList<Stock>) filteredStocks.stream().filter((m) ->
                                 (m).getStockID() == Integer.parseInt(parameterValue)).collect(Collectors.toList());
                     break;
@@ -104,9 +104,8 @@ public class ListStock extends Command {
                     return;
                 }
             }
-
-            //ui.printStocks(filteredStocks);
-            logger.log(Level.INFO, "Successful listing of stock");
         }
+        ui.printStocks(filteredStocks, medicines);
+        logger.log(Level.INFO, "Successful listing of stock");
     }
 }

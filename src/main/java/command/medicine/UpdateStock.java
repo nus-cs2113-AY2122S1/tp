@@ -27,19 +27,19 @@ public class UpdateStock extends Command {
 
     @Override
     public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
-        String[] requiredParameter = {CommandParameters.STOCK_ID};
+        String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.PRICE, CommandParameters.QUANTITY,
             CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.NAME,
             CommandParameters.MAX_QUANTITY};
 
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
-                optionalParameters, CommandSyntax.UPDATE_COMMAND, true);
+                optionalParameters, CommandSyntax.UPDATE_STOCK_COMMAND, true);
         if (isInvalidParameter) {
             return;
         }
 
         boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines,
-            CommandSyntax.UPDATE_COMMAND);
+            CommandSyntax.UPDATE_STOCK_COMMAND);
         if (isInvalidParameterValues) {
             return;
         }
@@ -76,9 +76,9 @@ public class UpdateStock extends Command {
         setUpdatesByStockID(parameters, filteredStocks, stock);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
         if (rowsAffected > MINIMUM_ROW_NUMBER_UPDATE) {
-            //ui.printStocks(filteredStocks);
+            ui.printStocks(filteredStocks, medicines);
         } else {
-            //ui.printStock(stock);
+            ui.printStock(stock, medicines);
         }
 
     }
