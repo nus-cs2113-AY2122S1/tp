@@ -15,6 +15,7 @@ import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Arrays;
 
 public class Parser {
     private static final String COMMAND_ADD = "add";
@@ -185,9 +186,7 @@ public class Parser {
         String[] parameters = getParameters(userInput);
         Patient patient = new Patient();
         patient.setNull();
-        for (int i = 1; i < parameters.length; i++) {
-            updatePersonalInformation(patient, parameters[i]);
-        }
+        updateMultiplePersonalInformation(patient, parameters);
         return new EditPatientCommand(patientId, patient);
     }
 
@@ -202,9 +201,7 @@ public class Parser {
     private static AddPatientCommand parseAddPatientCommand(String userInput) throws MedBotException {
         String[] parameters = getParameters(userInput);
         Patient patient = new Patient();
-        for (int i = 1; i < parameters.length; i++) {
-            updatePersonalInformation(patient, parameters[i]);
-        }
+        updateMultiplePersonalInformation(patient, parameters);
         return new AddPatientCommand(patient);
     }
 
@@ -217,11 +214,13 @@ public class Parser {
      */
     private static String[] getParameters(String userInput) throws MedBotException {
         String processedInput = preprocessMultiAttributeInput(userInput);
-        String[] parameters = processedInput.split(REGEX_VERTICAL_LINE);
-        if (parameters.length == 1) {
+        String[] words = processedInput.split(REGEX_VERTICAL_LINE);
+        if (words.length == 1) {
             throw new MedBotException(ERROR_NO_PARAMETER);
         }
-        assert parameters.length > 1;
+        assert words.length > 1;
+        String[] parameters = Arrays.copyOfRange(words, 1, words.length);
+        assert parameters.length >= 1;
         return parameters;
     }
 
@@ -233,6 +232,21 @@ public class Parser {
      */
     private static String preprocessInput(String userInput) {
         return userInput.stripLeading().replace(VERTICAL_LINE, EMPTY_STRING);
+    }
+
+    /**
+     * Parses attributeStrings array and modifies all the corresponding attribute in person.
+     *
+     * @param person           Person whose personal information will be updated
+     * @param attributeStrings String Array containing Strings of an attribute specifier and the corresponding
+     *                         personal information
+     * @throws MedBotException if the attributeString contains missing/invalid information
+     */
+    public static void updateMultiplePersonalInformation(Person person, String[] attributeStrings)
+            throws MedBotException {
+        for (int i = 0; i < attributeStrings.length; i++) {
+            updatePersonalInformation(person, attributeStrings[i]);
+        }
     }
 
     /**
@@ -271,15 +285,12 @@ public class Parser {
     /**
      * Returns a String containing the names specified in attributeString, with each name capitalised.
      *
-     * <p>Removes the attribute specifier "n/" from the start of the String
-     *
      * @param attributeString String containing the name to be parsed
      * @return String containing the name specified in attributeString
      * @throws MedBotException if no name is given
      */
     private static String parseName(String attributeString) throws MedBotException {
         try {
-            //removes "n/" attribute specifier
             String name = attributeString.strip();
             if (name.equals(EMPTY_STRING)) {
                 throw new MedBotException(ERROR_NAME_NOT_SPECIFIED);
@@ -293,8 +304,7 @@ public class Parser {
     /**
      * Returns a String containing the IC number specified in attributeString.
      *
-     * <p>Removes the attribute specifier "i/" and checks if the resultant String is of the right
-     * IC number format
+     * <p>Checks if the resultant String is of the right IC number format
      *
      * @param attributeString String containing the IC number to be parsed
      * @return String containing the IC number specified in attributeString
@@ -319,8 +329,7 @@ public class Parser {
     /**
      * Returns a String containing the phone number specified in attributeString.
      *
-     * <p>Removes the attribute specifier "n/", removes special characters "- _+()" and checks if the length of
-     * the resultant String is 8
+     * <p>Removes special characters "- _+()" and checks if the length of the resultant String is 8
      *
      * @param attributeString String containing the phone number to be parsed
      * @return String containing the phone number specified in attributeString
@@ -329,8 +338,7 @@ public class Parser {
      */
     private static String parsePhoneNumber(String attributeString) throws MedBotException {
         try {
-            String numberString = attributeString
-                    .replaceAll(REGEX_PHONE_NUMBER_SEPARATOR, EMPTY_STRING).strip();
+            String numberString = attributeString.replaceAll(REGEX_PHONE_NUMBER_SEPARATOR, EMPTY_STRING).strip();
             if (numberString.equals(EMPTY_STRING)) {
                 throw new MedBotException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
             }
@@ -353,7 +361,7 @@ public class Parser {
     /**
      * Returns a String containing the email address specified in attributeString.
      *
-     * <p>Removes the attribute specifier "e/" and checks if the resultant String is of the right email format
+     * <p>Checks if the resultant String is of the right email format
      *
      * @param attributeString String containing the email address to be parsed
      * @return String containing the email address specified in attributeString
@@ -377,7 +385,7 @@ public class Parser {
     /**
      * Returns the String containing the address specified in attributeString, with each word capitalised.
      *
-     * <p>Removes the attribute specifier "a/" from the start of the String
+     * <p>Capitalises each word in the address
      *
      * @param attributeString String containing the address to be parsed
      * @return String containing the address specified in attributeString
@@ -409,8 +417,10 @@ public class Parser {
         Function<MatchResult, String> multiAttributeReplacementFunction = x -> {
             String match = x.group();
             if (match.length() == 1) {
+                //if substring is the first character of the string
                 return match.toUpperCase();
             } else {
+                //if substring consists of one of the characters " _-" followed by a letter
                 return match.charAt(0) + match.substring(1).toUpperCase();
             }
         };

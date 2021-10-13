@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import medbot.person.Patient;
+import medbot.person.Person;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -120,5 +123,40 @@ class ParserTest {
                 assertEquals(testResidentialAddress[1], e.getTargetException().getMessage());
             }
         }
+    }
+
+    @Test
+    void testPreprocessMultiAttributeInput() throws Exception {
+        Method method = Parser.class.getDeclaredMethod("preprocessMultiAttributeInput", String.class);
+        method.setAccessible(true);
+        String[][] testInputStrings = {
+                {"add n/John Tan i/S8712345G e/john@gmail.com p/8123 4567 a/123 bishan st 24 #05-19",
+                "add |n/John Tan |i/S8712345G |e/john@gmail.com |p/8123 4567 |a/123 bishan st 24 #05-19"},
+                {"add n/joe ong e/joe@gmail.com a/123 Bishan st 24 #05-19 ",
+                "add |n/joe ong |e/joe@gmail.com |a/123 Bishan st 24 #05-19 "},
+                {"add   n/Tim lee   e/tim_lee@gmail.com.sg   a/123 queenstown ave 6 #05-19 ",
+                "add   |n/Tim lee   |e/tim_lee@gmail.com.sg   |a/123 queenstown ave 6 #05-19 "},
+                {"add i/S8712345G ",
+                "add |i/S8712345G "}
+        };
+        for (String[] testInputString : testInputStrings) {
+            assertEquals(testInputString[1], method.invoke(method, testInputString[0]));
+        }
+    }
+
+    @Test
+    void testUpdateMultiplePersonalInformation() throws Exception {
+        Method method = Parser.class.getDeclaredMethod("updateMultiplePersonalInformation", Person.class,
+                String[].class);
+        method.setAccessible(true);
+        Patient patient = new Patient();
+        String[] attributeStrings = {"n/John tan  ", "i/S8712345G  ", "e/john_tan@gmail.com ", "p/8123 4567",
+                                     "a/123 bishan st 24 #05-19  "};
+        method.invoke(method, patient, attributeStrings);
+        assertEquals(patient.getName(), "John Tan");
+        assertEquals(patient.getIcNumber(), "S8712345G");
+        assertEquals(patient.getEmailAddress(), "john_tan@gmail.com");
+        assertEquals(patient.getPhoneNumber(), "81234567");
+        assertEquals(patient.getResidentialAddress(), "123 Bishan St 24 #05-19");
     }
 }

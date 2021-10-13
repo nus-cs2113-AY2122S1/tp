@@ -43,7 +43,7 @@ public class Ui {
      * Prints a welcome message when MedBot file storage is successfully loaded.
      */
     public void printWelcomeMessageTwo() {
-        printOutput("How can I help you today?" + "\n\n");
+        printOutput("How can I help you today?" + System.lineSeparator() + System.lineSeparator());
     }
 
     /**
@@ -86,7 +86,7 @@ public class Ui {
      * @return the exit Message
      */
     public String getExitMessage() {
-        return "Thank you for using MedBot!\nSee you again!";
+        return "Thank you for using MedBot!" + System.lineSeparator() + "See you again!";
     }
 
     /**
@@ -96,7 +96,7 @@ public class Ui {
      * @return the Patient information
      */
     public String getPatientInfo(String patientInfo) {
-        return "Here's the requested patient:\n" + patientInfo;
+        return "Here's the requested patient:" + System.lineSeparator() + patientInfo;
     }
 
     /**
@@ -106,7 +106,7 @@ public class Ui {
      * @return all Patients' information.
      */
     public String getAllPatientsString(PatientList patientList) {
-        String output = "Here is a list of all patients:\n";
+        String output = "Here is a list of all patients:" + System.lineSeparator();
         output += patientList.listPatients();
 
         return output;

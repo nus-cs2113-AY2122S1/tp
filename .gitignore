@@ -26,3 +26,5 @@ text-ui-test/ACTUAL.TXT
 storage/
 
 
+
+gradle/wrapper/gradle-wrapper.properties
