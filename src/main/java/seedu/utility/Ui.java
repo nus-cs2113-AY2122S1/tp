@@ -22,7 +22,8 @@ public class Ui {
             + "██████    ████   █████           ██ \n"
             + "██   ██    ██    ██          ██  ██ \n"
             + "██████     ██    ███████        ██ ";
-    
+
+    private static final String TYPE_SOMETHING_MESSAGE = "Type something!";
     private static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
     private static final String LISTING_EXPENSE_MESSAGE = "Below is a list of all of your recent spending!";
     private static final String LISTING_INCOME_MESSAGE = "Below is a list of all of your recent earnings!";
@@ -68,7 +69,7 @@ public class Ui {
         printLine();
         System.out.println(PRODUCT_LOGO);
         printLine();
-        System.out.println("Type something!");
+        System.out.println(TYPE_SOMETHING_MESSAGE);
     }
 
     private void printLine() {
@@ -86,21 +87,13 @@ public class Ui {
     public void listExpense(ArrayList<Expense> expenses) {
         printLine();
         if (expenses.isEmpty()) {
-            System.out.println(EMPTY_EXPENSE_MESSAGE);
-            printLine();
-            return;
-        }
-        System.out.println(LISTING_EXPENSE_MESSAGE);
-        printLine();
-        int i = 1;
-
-        for (Expense expense:expenses) {
-            System.out.print(i + ": ");
-            System.out.println(expense);
-            i++;
+            printEmptyExpenseListMessage();
+        } else {
+            printExpenseList(expenses);
         }
         printLine();
     }
+   
 
     /**
      * Prints the filtered list of incomes in the financial tracker to the standard output.
@@ -110,22 +103,47 @@ public class Ui {
     public void listIncome(ArrayList<Income> incomes) {
         printLine();
         if (incomes.isEmpty()) {
-            System.out.println(EMPTY_INCOME_MESSAGE);
-            printLine();
-            return;
+            printEmptyIncomeListMessage();
+        } else {
+            printIncomeList(incomes);
         }
+        printLine();
+    }
+
+    private void printEmptyIncomeListMessage() {
+        System.out.println(EMPTY_INCOME_MESSAGE);
+    }
+
+    private void printEmptyExpenseListMessage() {
+        System.out.println(EMPTY_EXPENSE_MESSAGE);
+    }
+    
+    private void printIncomeList(ArrayList<Income> incomes) {
         System.out.println(LISTING_INCOME_MESSAGE);
         printLine();
-        int i = 1;
 
-        for (Income income:incomes) {
+        int i = 1;
+        for (Income income : incomes) {
             System.out.print(i + ": ");
             System.out.println(income);
             i++;
         }
-        printLine();
     }
-    
+
+    private void printExpenseList(ArrayList<Expense> expenses) {
+        System.out.println(LISTING_EXPENSE_MESSAGE);
+        printLine();
+        
+        int i = 1;
+        for (Expense expense : expenses) {
+            System.out.print(i + ": ");
+            System.out.println(expense);
+            i++;
+        }
+    }
+
+
+
     /**
      * Prints the total expense of all expenses in the financial tracker to the standard output.
      *
