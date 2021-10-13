@@ -11,4 +11,6 @@
        `--"
 Welcome to libmgr
 > Sorry, I don't understand what you mean
+> Added item to catalogue:
+[Available] The Hunger Games
 > See you soon!
