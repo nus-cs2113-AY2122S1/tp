@@ -14,12 +14,15 @@ public class IndexParser {
 
     public static int getIndexFromInput(String userInput, String command)
             throws NumberFormatException, MissingArgException {
+        //split user input into 2 strings: command word string and index string
         String[] destructuredInputs = userInput.split(" ", COMD_INDEX_LENGTH);
         if (destructuredInputs.length <= COMD_WORD_LENGTH) {
             throw new MissingArgException();
         }
+        assert destructuredInputs.length == 2;
+        // split index string into words
         String[] indexSplit = destructuredInputs[INDEX_POSITION].trim().split(" ");
-        // throws NumberFormatExcept if not integer
+        // takes only the first word/ element as given user input, and throws NumberFormatExcept if it is not integer
         return Integer.parseInt(indexSplit[SIGNIFICANT_INDEX_POSITION].trim());
 
     }
