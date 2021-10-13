@@ -9,9 +9,10 @@ public class DeleteParser {
 
     private static final String ERROR_BLANK = "No instruction given.";
     private static final String ERROR_NOT_NUM = "Expected a number.";
+    private static final String ERROR_HABIT_NOT_EXIST = "Habit index does not exist.";
 
     public static Command parseDeleteGoalCommand(String commandInstruction) throws HaBitParserException  {
-        if (commandInstruction.isBlank()) {
+        if (commandInstruction == null) {
             throw new HaBitParserException(ERROR_BLANK);
         }
 
@@ -28,7 +29,7 @@ public class DeleteParser {
     }
 
     public static Command parseDeleteHabitCommand(String commandInstruction) throws HaBitParserException {
-        if (commandInstruction.isBlank()) {
+        if (commandInstruction == null) {
             throw new HaBitParserException(ERROR_BLANK);
         }
 
@@ -43,6 +44,8 @@ public class DeleteParser {
 
         } catch (NumberFormatException e) {
             throw new HaBitParserException(ERROR_NOT_NUM);
+        } catch (IndexOutOfBoundsException e) {
+            throw new HaBitParserException(ERROR_HABIT_NOT_EXIST);
         }
     }
 
