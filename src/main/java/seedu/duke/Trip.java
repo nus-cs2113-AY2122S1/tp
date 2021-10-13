@@ -159,8 +159,8 @@ public class Trip {
         return listOfExpenses;
     }
 
-    public void removeExpense(Expense expense) {
-        listOfExpenses.remove(expense);
+    public void removeExpense(Integer i) {
+        listOfExpenses.remove(listOfExpenses.get(i));
     }
 
     public void viewAllExpenses() {
