@@ -48,7 +48,7 @@ public class Parser {
                 assert inputParams != null;
                 executeEdit(inputParams);
             } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
-                System.out.println("Sorry, no such trip number exists. Please check your trip number and try again.");
+                Ui.printUnknownTripIndexError();
             }
             break;
 
