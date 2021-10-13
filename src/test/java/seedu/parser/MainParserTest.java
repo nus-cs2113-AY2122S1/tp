@@ -7,6 +7,7 @@ import seedu.command.AddContactCommand;
 import seedu.command.Command;
 import seedu.command.DeleteContactCommand;
 import seedu.command.FailedCommand;
+import seedu.command.InvalidDetailCommand;
 import seedu.command.ViewContactCommand;
 import seedu.contact.ContactList;
 
@@ -151,6 +152,70 @@ public class MainParserTest {
         assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
         assertEquals(expectedCommand.getTwitter(), actualCommand.getTwitter());
         assertEquals(expectedCommand.getEmail(), actualCommand.getEmail());
+    }
+
+    @Test
+    public void parseAddCommand_invalidNameWithNumber_expectInvalidDetailCommand() {
+        testUserInput = "add -n 123456";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_NAME;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_invalidGithubUsername_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -g git@hub//";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_GITHUB_USERNAME;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_invalidLinkedin_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -l linked@in/#";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_LINKEDIN;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_invalidTwitter_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -tw b#b#@@";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_TWITTER;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_invalidTelegram_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -te $$5ts@!";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_TELEGRAM;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_invalidEmail_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -e marcus";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_MAIL;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_forbiddenGithub_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -g null";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.FORBIDDEN_DETAIL;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_forbiddenName_expectInvalidDetailCommand() {
+        testUserInput = "add -n null -g legit";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.FORBIDDEN_DETAIL;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
     }
 
     @Test
