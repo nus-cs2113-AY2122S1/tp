@@ -29,21 +29,21 @@ public class FinancialTrackerTest {
         assertEquals(2, testTracker.getIncomeSize());
     }
     
-        @Test
-        public void removeExpense_emptyExpenseList_expectExpenseEntryNotFoundException() {
-            FinancialTracker testTracker = new FinancialTracker();
-            testTracker.addExpense(new Expense("Lunch", 5.20));
-            assertThrows(ExpenseEntryNotFoundException.class, () -> {
-                testTracker.removeExpense(4);
-            });
-        }
+    @Test
+    public void removeExpense_emptyExpenseList_expectExpenseEntryNotFoundException() {
+        FinancialTracker testTracker = new FinancialTracker();
+        testTracker.addExpense(new Expense("Lunch", 5.20));
+        assertThrows(ExpenseEntryNotFoundException.class, () -> {
+            testTracker.removeExpense(4);
+        });
+    }
 
-        @Test
-        public void removeIncome_emptyIncomeList_expectIncomeEntryNotFoundException() {
-            FinancialTracker testTracker = new FinancialTracker();
-            testTracker.addIncome(new Income("allowance", 5.20));
-            assertThrows(IncomeEntryNotFoundException.class, () -> {
-                testTracker.removeIncome(4);
-            });
-        }
+    @Test
+    public void removeIncome_emptyIncomeList_expectIncomeEntryNotFoundException() {
+        FinancialTracker testTracker = new FinancialTracker();
+        testTracker.addIncome(new Income("allowance", 5.20));
+        assertThrows(IncomeEntryNotFoundException.class, () -> {
+            testTracker.removeIncome(4);
+        });
+    }
 }
