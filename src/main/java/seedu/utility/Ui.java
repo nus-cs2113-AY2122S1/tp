@@ -23,11 +23,13 @@ public class Ui {
             + "██   ██    ██    ██          ██  ██ \n"
             + "██████     ██    ███████        ██ ";
     
-    public static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
+    private static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
     private static final String LISTING_EXPENSE_MESSAGE = "Below is a list of all of your recent spending!";
     private static final String LISTING_INCOME_MESSAGE = "Below is a list of all of your recent earnings!";
+    private static final String EMPTY_INCOME_MESSAGE = "You have not entered any income!";
+    private static final String EMPTY_EXPENSE_MESSAGE = "You have not spent anything!";
 
-    private static final String HELP_FORMAT = "List out all commands: help:)";
+    private static final String HELP_FORMAT = "List Out All Commands: help";
     private static final String ADD_EXPENSE_FORMAT = "Adding Expense: add_ex d/DESCRIPTION a/AMOUNT";
     private static final String DEL_EXPENSE_FORMAT = "Deleting Expense: del_ex i/INDEX";
     private static final String LIST_EXPENSE_FORMAT = "Listing Expense: list_ex";
@@ -36,12 +38,12 @@ public class Ui {
     private static final String DEL_INCOME_FORMAT = "Deleting Income: del_in i/INDEX";
     private static final String LIST_INCOME_FORMAT = "Listing Income: list_in";
     private static final String TOTAL_INCOME_FORMAT = "Show Total Income: total_in";
-
+    private static final String END_FORMAT = "To Terminate The Program: end";
 
 
     private static final List<String> commands = Arrays.asList(HELP_FORMAT, ADD_EXPENSE_FORMAT, DEL_EXPENSE_FORMAT,
             LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT, LIST_INCOME_FORMAT,
-            TOTAL_INCOME_FORMAT);
+            TOTAL_INCOME_FORMAT, END_FORMAT);
 
 
 
@@ -83,6 +85,11 @@ public class Ui {
      */ 
     public void listExpense(ArrayList<Expense> expenses) {
         printLine();
+        if (expenses.isEmpty()) {
+            System.out.println(EMPTY_EXPENSE_MESSAGE);
+            printLine();
+            return;
+        }
         System.out.println(LISTING_EXPENSE_MESSAGE);
         printLine();
         int i = 1;
@@ -102,6 +109,11 @@ public class Ui {
      */    
     public void listIncome(ArrayList<Income> incomes) {
         printLine();
+        if (incomes.isEmpty()) {
+            System.out.println(EMPTY_INCOME_MESSAGE);
+            printLine();
+            return;
+        }
         System.out.println(LISTING_INCOME_MESSAGE);
         printLine();
         int i = 1;
