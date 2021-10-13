@@ -6,13 +6,6 @@ import static seedu.duke.commands.RemoveCommand.COMMAND_REMOVE;
  * The parser class contains methods to process the string input by the user.
  */
 public class Parser {
-    private static final String COMMAND_EXIT = "exit";
-    private static final String COMMAND_LIST_ALL = "list";
-    private static final String COMMAND_LIST_AVAILABLE = "list available";
-    private static final String COMMAND_LIST_LOANED = "list loaned";
-    public static final String COMMAND_ADD = "add";
-    private static final String COMMAND_LOAN = "loan";
-    private static final String COMMAND_RETURN = "return";
 
     /**
      * Sole constructor.
@@ -27,21 +20,21 @@ public class Parser {
      * @return The specific Command object corresponding to the input
      */
     public Command parse(String input) {
-        if (input.equals(COMMAND_EXIT)) {
+        if (input.equals(ExitCommand.COMMAND_WORD)) {
             return new ExitCommand();
         } else if (input.startsWith(COMMAND_REMOVE)) {
             return new RemoveCommand(input);
-        } else if (input.equals(COMMAND_LIST_ALL)) {
+        } else if (input.equals(ListAllCommand.COMMAND_WORD)) {
             return new ListAllCommand();
-        } else if (input.equals(COMMAND_LIST_AVAILABLE)) {
+        } else if (input.equals(ListAvailableCommand.COMMAND_WORD)) {
             return new ListAvailableCommand();
-        } else if (input.equals(COMMAND_LIST_LOANED)) {
+        } else if (input.equals(ListLoanedCommand.COMMAND_WORD)) {
             return new ListLoanedCommand();
-        } else if (input.startsWith(COMMAND_ADD)) {
+        } else if (input.startsWith(AddCommand.COMMAND_WORD)) {
             return new AddCommand(input);
-        } else if (input.startsWith(COMMAND_LOAN)) {
+        } else if (input.startsWith(LoanCommand.COMMAND_WORD)) {
             return new LoanCommand(input);
-        } else if (input.startsWith(COMMAND_RETURN)) {
+        } else if (input.startsWith(ReturnCommand.COMMAND_WORD)) {
             return new ReturnCommand(input);
         } else {
             return new UnknownCommand();
