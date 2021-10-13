@@ -12,8 +12,8 @@ public class ViewIngredientCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "view";
 
-    private static final String MESSAGE_SHOW_INGREDIENT = "Here is the ingredient in your list:\n" + "\n%1$s\n";
-    private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
+    public static final String MESSAGE_SHOW_INGREDIENT = "Here is the ingredient in your list:\n" + "\n%1$s\n";
+    public static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
 
     private final String ingredientDescription;
 
