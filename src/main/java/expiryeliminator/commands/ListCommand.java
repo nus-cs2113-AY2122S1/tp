@@ -1,9 +1,7 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
 import expiryeliminator.data.RecipeList;
-import expiryeliminator.data.exception.DuplicateDataException;
 
 /**
  * Lists all ingredient, together with its associated quantity and expiry date.
@@ -15,6 +13,7 @@ public class ListCommand extends Command {
 
     private static final String MESSAGE_SHOW_WHOLE_LIST = "Here are the ingredients in your list:\n" + "\n%1$s\n"
             + "You have a total of %2$s ingredient(s)";
+
 
 
 

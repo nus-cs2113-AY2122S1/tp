@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
+import expiryeliminator.data.exception.NotFoundException;
 
 /**
  * Represents the ingredient list and contains methods to add and remove ingredients.
@@ -31,6 +32,20 @@ public class IngredientList {
             throw new DuplicateDataException();
         }
         ingredients.put(ingredient.getName(), ingredient);
+    }
+
+    /**
+     * Removes ingredient from the ingredient list.
+     *
+     * @param ingredientName Name of ingredient to be removed.
+     * @return Ingredient that was removed.
+     */
+    public Ingredient remove(String ingredientName) throws NotFoundException {
+        final Ingredient ingredient = ingredients.remove(ingredientName);
+        if (ingredient == null) {
+            throw new NotFoundException();
+        }
+        return ingredient;
     }
 
     public Collection<Ingredient> getIngredients() {
@@ -62,11 +77,11 @@ public class IngredientList {
      * @return returns a string representing all the ingredients and their specific quantities and expiration dates.
      */
     public String printWholeList() {
-        String wholeList = "";
+        StringBuilder wholeList = new StringBuilder();
         for (Ingredient ingredient : ingredients.values()) {
-            wholeList = wholeList + ingredient.toString() + "\n";
+            wholeList.append(ingredient.toString()).append("\n");
         }
-        return wholeList;
+        return wholeList.toString();
     }
 
     /**
@@ -75,8 +90,12 @@ public class IngredientList {
      * @param ingredientDescription The ingredient name the user is searching for.
      * @return the ingredient object that the user is searching for.
      */
-    public Ingredient findIngredient(String ingredientDescription) {
-        return ingredients.get(ingredientDescription);
+    public Ingredient find(String ingredientDescription) throws NotFoundException {
+        final Ingredient ingredient = ingredients.get(ingredientDescription);
+        if (ingredient == null) {
+            throw new NotFoundException();
+        }
+        return ingredient;
     }
 
     /**
@@ -88,15 +107,15 @@ public class IngredientList {
         LocalDate currentDate = LocalDate.now();
         LocalDate currentDatePlusAWeek = currentDate.plus(1, ChronoUnit.WEEKS);
 
-        String expiringIngredientsList = "";
+        StringBuilder expiringIngredientsList = new StringBuilder();
 
         for (Ingredient ingredient : ingredients.values()) {
             if (ingredient.getExpiryDate().isAfter(currentDate)
                     && ingredient.getExpiryDate().isBefore(currentDatePlusAWeek)) {
-                expiringIngredientsList = expiringIngredientsList + ingredient.toString() + "\n";
+                expiringIngredientsList.append(ingredient).append("\n");
             }
         }
-        return expiringIngredientsList;
+        return expiringIngredientsList.toString();
     }
 
     /**
@@ -107,15 +126,13 @@ public class IngredientList {
     public String findExpiredIngredients() {
         LocalDate currentDate = LocalDate.now();
 
-        String expiredIngredientsList = "";
+        StringBuilder expiredIngredientsList = new StringBuilder();
 
         for (Ingredient ingredient : ingredients.values()) {
             if (ingredient.getExpiryDate().isBefore(currentDate)) {
-                expiredIngredientsList = expiredIngredientsList + ingredient.toString() + "\n";
+                expiredIngredientsList.append(ingredient).append("\n");
             }
         }
-        return expiredIngredientsList;
+        return expiredIngredientsList.toString();
     }
-
-
 }

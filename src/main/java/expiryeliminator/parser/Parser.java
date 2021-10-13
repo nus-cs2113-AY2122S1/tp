@@ -5,17 +5,21 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import expiryeliminator.commands.Command;
 import expiryeliminator.commands.AddIngredientCommand;
 import expiryeliminator.commands.AddRecipeCommand;
 import expiryeliminator.commands.ByeCommand;
+import expiryeliminator.commands.Command;
+import expiryeliminator.commands.DecrementCommand;
+import expiryeliminator.commands.DeleteIngredientCommand;
+import expiryeliminator.commands.DeleteRecipeCommand;
 import expiryeliminator.commands.IncorrectCommand;
+import expiryeliminator.commands.IncrementCommand;
 import expiryeliminator.commands.ListCommand;
-import expiryeliminator.commands.ListRecipeCommand;
 import expiryeliminator.commands.ListIngredientExpiringCommand;
 import expiryeliminator.commands.ListIngredientsExpiredCommand;
-import expiryeliminator.commands.ViewRecipeCommand;
+import expiryeliminator.commands.ListRecipeCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
+import expiryeliminator.commands.ViewRecipeCommand;
 import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientList;
 import expiryeliminator.data.exception.DuplicateDataException;
@@ -37,7 +41,9 @@ public class Parser {
     // Reused from https://github.com/bernardboey/ip/blob/master/src/main/java/duke/parser/Parser.java
     // with minor modifications
 
-    /** Used for initial separation of command word and args. */
+    /**
+     * Used for initial separation of command word and args.
+     */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("^(?<command>[^/]+)(?<args> .*)?$");
 
     private static final Prefix PREFIX_RECIPE = new Prefix("r");
@@ -65,22 +71,30 @@ public class Parser {
         switch (command) {
         case AddIngredientCommand.COMMAND_WORD:
             return prepareAddIngredient(args);
-        case ByeCommand.COMMAND_WORD:
-            return new ByeCommand();
+        case DecrementCommand.COMMAND_WORD:
+            return prepareDecrementIngredient(args);
+        case IncrementCommand.COMMAND_WORD:
+            return prepareIncrementIngredient(args);
+        case DeleteIngredientCommand.COMMAND_WORD:
+            return prepareDeleteIngredient(args);
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-        case ViewIngredientCommand.COMMAND_WORD:
-            return prepareViewIngredient(args);
-        case AddRecipeCommand.COMMAND_WORD:
-            return prepareAddRecipe(args);
         case ListIngredientExpiringCommand.COMMAND_WORD:
             return new ListIngredientExpiringCommand();
         case ListIngredientsExpiredCommand.COMMAND_WORD:
             return new ListIngredientsExpiredCommand();
+        case ViewIngredientCommand.COMMAND_WORD:
+            return prepareViewIngredient(args);
+        case AddRecipeCommand.COMMAND_WORD:
+            return prepareAddRecipe(args);
+        case DeleteRecipeCommand.COMMAND_WORD:
+            return prepareDeleteRecipe(args);
         case ListRecipeCommand.COMMAND_WORD:
             return new ListRecipeCommand();
         case ViewRecipeCommand.COMMAND_WORD:
             return prepareViewRecipe(args);
+        case ByeCommand.COMMAND_WORD:
+            return new ByeCommand();
         default:
             return new IncorrectCommand(MESSAGE_UNRECOGNISED_COMMAND);
         }
@@ -107,12 +121,68 @@ public class Parser {
         }
     }
 
+    private static Command prepareDecrementIngredient(String args) {
+        final ArgParser argParser = new ArgParser(PREFIX_INGREDIENT, PREFIX_QUANTITY);
+        try {
+            argParser.parse(args);
+        } catch (InvalidPrefixException | MissingPrefixException e) {
+            return new IncorrectCommand("Wrong format for decrement command");
+        }
+
+        try {
+            final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
+            final int quantity = new QuantityParser().parse(argParser.getSingleArg(PREFIX_QUANTITY));
+            return new DecrementCommand(ingredient, quantity);
+        } catch (InvalidArgFormatException e) {
+            return new IncorrectCommand(e.getMessage());
+        } catch (MissingPrefixException | MultipleArgsException e) {
+            return new IncorrectCommand("Wrong format for decrement command");
+        }
+    }
+
+    private static Command prepareIncrementIngredient(String args) {
+        final ArgParser argParser = new ArgParser(PREFIX_INGREDIENT, PREFIX_QUANTITY);
+        try {
+            argParser.parse(args);
+        } catch (InvalidPrefixException | MissingPrefixException e) {
+            return new IncorrectCommand("Wrong format for increment command");
+        }
+
+        try {
+            final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
+            final int quantity = new QuantityParser().parse(argParser.getSingleArg(PREFIX_QUANTITY));
+            return new IncrementCommand(ingredient, quantity);
+        } catch (InvalidArgFormatException e) {
+            return new IncorrectCommand(e.getMessage());
+        } catch (MissingPrefixException | MultipleArgsException e) {
+            return new IncorrectCommand("Wrong format for increment command");
+        }
+    }
+
+    private static Command prepareDeleteIngredient(String args) {
+        final ArgParser argParser = new ArgParser(PREFIX_INGREDIENT);
+        try {
+            argParser.parse(args);
+        } catch (InvalidPrefixException | MissingPrefixException e) {
+            return new IncorrectCommand("Wrong format for delete command");
+        }
+
+        try {
+            final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
+            return new DeleteIngredientCommand(ingredient);
+        } catch (InvalidArgFormatException e) {
+            return new IncorrectCommand(e.getMessage());
+        } catch (MissingPrefixException | MultipleArgsException e) {
+            return new IncorrectCommand("Wrong format for delete command");
+        }
+    }
+
     /**
      * Creates a AddRecipeCommand from the inputs.
      *
      * @param args Command arguments.
      * @return a AddRecipeCommand with the recipe name and the ingredients if successful
-     *         and an IncorrectCommand if not.
+     *     and an IncorrectCommand if not.
      */
     private static Command prepareAddRecipe(String args) {
         final ArgParser argParser = new ArgParser(PREFIX_RECIPE, PREFIX_INGREDIENT, PREFIX_QUANTITY);
@@ -131,11 +201,37 @@ public class Parser {
             if (error != null) {
                 return error;
             }
+            assert !recipe.isBlank();
             return new AddRecipeCommand(recipe, ingredientList);
         } catch (InvalidArgFormatException e) {
             return new IncorrectCommand(e.getMessage());
         } catch (MissingPrefixException | MultipleArgsException e) {
             return new IncorrectCommand("Wrong format for add recipe command");
+        }
+    }
+
+    /**
+     * Creates a DeleteRecipeCommand from the inputs.
+     *
+     * @param args Command arguments.
+     * @return a DeleteRecipeCommand with the recipe name if successful and an IncorrectCommand if not.
+     */
+    private static Command prepareDeleteRecipe(String args) {
+        final ArgParser argParser = new ArgParser(PREFIX_RECIPE);
+        try {
+            argParser.parse(args);
+        } catch (InvalidPrefixException | MissingPrefixException e) {
+            return new IncorrectCommand("Wrong format for delete recipe command");
+        }
+
+        try {
+            final String recipe = new RecipeParser().parse(argParser.getSingleArg(PREFIX_RECIPE));
+            assert !recipe.isBlank();
+            return new DeleteRecipeCommand(recipe);
+        } catch (InvalidArgFormatException e) {
+            return new IncorrectCommand(e.getMessage());
+        } catch (MissingPrefixException | MultipleArgsException e) {
+            return new IncorrectCommand("Wrong format for delete recipe command");
         }
     }
 
@@ -153,7 +249,12 @@ public class Parser {
             return new IncorrectCommand("Should have same number of ingredient names and quantities");
         }
         for (int i = 0; i < ingredientNames.size(); i++) {
+            if (quantities.get(i) == 0) {
+                return new IncorrectCommand("Quantity of ingredients for recipe cannot be zero.");
+            }
             Ingredient ingredient = new Ingredient(ingredientNames.get(i), quantities.get(i), null);
+            assert !ingredientNames.get(i).isBlank();
+            assert quantities.get(i) != null && quantities.get(i) != 0;
             try {
                 ingredients.add(ingredient);
             } catch (DuplicateDataException e) {

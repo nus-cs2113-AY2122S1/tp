@@ -64,7 +64,11 @@ public class Ui {
     private String addPrefixAndReplaceNewline(String text) {
         String[] lines = text.split("\n");
         for (int i = 0; i < lines.length; i++) {
-            lines[i] = LINE_PREFIX + lines[i];
+            if (lines[i].isBlank()) {
+                lines[i] = "";
+            } else {
+                lines[i] = LINE_PREFIX + lines[i];
+            }
         }
         return String.join(LINE_SEPARATOR, lines);
     }

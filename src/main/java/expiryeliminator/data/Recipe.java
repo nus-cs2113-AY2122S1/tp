@@ -40,7 +40,7 @@ public class Recipe {
     public String toString() {
         String ingredientsWithQuantities = name + "\n";
         for (Ingredient ingredient : ingredients.getIngredients()) {
-            ingredientsWithQuantities += "- " + ingredient.getName() + "(qty: " + ingredient.getQuantity() + ")\n";
+            ingredientsWithQuantities += "- " + ingredient.getName() + " (qty: " + ingredient.getQuantity() + ")\n";
         }
         return ingredientsWithQuantities;
     }
