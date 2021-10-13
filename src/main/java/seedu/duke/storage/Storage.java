@@ -16,7 +16,7 @@ import static java.lang.Integer.parseInt;
 
 public class Storage {
     private static final String UNIVERSITY_FILEPATH = "data/University.csv";
-    private static final String MODULE_FILEPATH = "src/main/resources/modules.csv";
+    private static final String MODULE_FILEPATH = "data/modules.csv";
 
     private static final Logger logger = Logger.getLogger("StorageLog");
 
@@ -45,8 +45,8 @@ public class Storage {
                 curr = attributes[0];
                 moduleMappingList.clear();
             }
-            assert parseInt(attributes[3]) > 1 : "Local module credits should be greater than 1";
-            Module local = new Module(attributes[1], attributes[2], parseInt(attributes[3]));
+            assert parseDouble(attributes[3]) > 0 : "Local module credits should be greater than 0";
+            Module local = new Module(attributes[1], attributes[2], parseDouble(attributes[3]));
             assert parseDouble(attributes[6]) > 0 : "Mapped module credits should be greater than 0";
             Module mapped = new Module(attributes[4], attributes[5], parseDouble(attributes[6]));
             moduleMappingList.add(new ModuleMapping(local, mapped));
@@ -62,8 +62,8 @@ public class Storage {
         String line = br.readLine();
         while (line != null) {
             String[] attributes = line.split(";");
-            assert parseInt(attributes[2]) > 1 : "Local module credits should be greater than 1";
-            moduleList.add(new Module(attributes[0], attributes[1], parseInt(attributes[2])));
+            assert parseDouble(attributes[2]) > 0 : "Local module credits should be greater than 0";
+            moduleList.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2])));
             line = br.readLine();
         }
         logger.log(Level.INFO, "Completed loading of modules");
