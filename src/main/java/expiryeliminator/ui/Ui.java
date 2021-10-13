@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Text UI of the application.
  */
 public class Ui {
-    private static final String INDENTED_HORIZONTAL_LINE = " ".repeat(4) + "_".repeat(60);
+    private static final String INDENTED_HORIZONTAL_LINE = " ".repeat(4) + "_".repeat(100);
     private static final String LINE_PREFIX = " ".repeat(5);
     /** Platform independent line separator. */
     private static final String LINE_SEPARATOR = System.lineSeparator();
@@ -41,6 +41,7 @@ public class Ui {
      * @param text Text to be printed out.
      */
     public void showToUser(String text) {
+        assert text != null;
         System.out.println(INDENTED_HORIZONTAL_LINE);
         System.out.println(addPrefixAndReplaceNewline(text));
         System.out.println(INDENTED_HORIZONTAL_LINE);
@@ -62,6 +63,7 @@ public class Ui {
      * @return Processed text.
      */
     private String addPrefixAndReplaceNewline(String text) {
+        assert text != null;
         String[] lines = text.split("\n");
         for (int i = 0; i < lines.length; i++) {
             if (lines[i].isBlank()) {

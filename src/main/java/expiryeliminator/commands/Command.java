@@ -18,7 +18,7 @@ public abstract class Command {
      * @param recipes Recipe List.
      * @return Feedback about what was executed.
      */
-    public abstract String execute(IngredientList ingredientList,RecipeList recipes);
+    public abstract String execute(IngredientList ingredientList, RecipeList recipes);
 
     /**
      * Indicates whether the command is an exit command.
