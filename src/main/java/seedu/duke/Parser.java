@@ -197,6 +197,7 @@ public class Parser {
 
     private static void executeExpense(String inputDescription) {
         Trip currTrip = Storage.getOpenTrip();
+        assert Storage.checkOpenTrip();
         String[] expenseInfo = inputDescription.split(" ", 3);
         Double expenseAmount = Double.parseDouble(expenseInfo[0]);
         String expenseCategory = expenseInfo[1].toLowerCase();
