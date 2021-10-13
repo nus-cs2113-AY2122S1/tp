@@ -52,7 +52,7 @@ public class ListCommand extends Command {
         assert (filteredMedicines != null) : "Array is not initialised";
 
         for (Medicine medicine : medicines) {
-            if (medicine instanceof Stock) { // Ensure that it is a medicine object
+            if (medicine instanceof Stock) {
                 filteredMedicines.add(medicine);
             }
         }
@@ -109,6 +109,13 @@ public class ListCommand extends Command {
                 return;
             }
         }
+        // Adds back Order and Dispense objects
+        for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Stock)) {
+                filteredMedicines.add(medicine);
+            }
+        }
+
         ui.printStocks(filteredMedicines);
         logger.log(Level.INFO, "Successful listing of stock");
     }
