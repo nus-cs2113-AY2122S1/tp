@@ -49,7 +49,7 @@ public class RecordList {
 
     public void deleteExpenditure(int index) {
         expenditureRecords.remove(index - 1);
-        assert getExpenditureListSize() == numberOfRecords - 1;
+        assert getExpenditureListSize() == (numberOfRecords - 1);
         numberOfRecords -= 1;
     }
 
