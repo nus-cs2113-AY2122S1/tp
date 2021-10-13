@@ -124,7 +124,7 @@ public class MainParser {
         try {
             String[] details = editContactParser.parseContactDetails(userInput);
             //throws InvalidFlagException, MissingDetailException, MissingArgException
-            int userIndex = IndexParser.getIndexFromInput(userInput, EDIT_CONTACT_COMD); //throws MissingArgException
+            int userIndex = IndexParser.getIndexFromInput(userInput); //throws MissingArgException
             return new EditContactCommand(details, userIndex);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
@@ -153,7 +153,7 @@ public class MainParser {
 
     private Command parseViewContact(String userInput) {
         try {
-            int viewedIndex = IndexParser.getIndexFromInput(userInput, VIEW_CONTACT_COMD);
+            int viewedIndex = IndexParser.getIndexFromInput(userInput);
             return new ViewContactCommand(viewedIndex);
         } catch (MissingArgException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
@@ -164,7 +164,7 @@ public class MainParser {
 
     private Command parseDeleteContact(String userInput) {
         try {
-            int deletedIndex = IndexParser.getIndexFromInput(userInput, DELETE_CONTACT_COMD);
+            int deletedIndex = IndexParser.getIndexFromInput(userInput);
             return new DeleteContactCommand(deletedIndex);
         } catch (MissingArgException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
