@@ -22,17 +22,19 @@ public class CommandSyntax {
     public static final String[] COLUMNS = {COMMAND, COMMAND_SYNTAX};
     public static final int NO_OF_COLUMNS = 2;
 
-    public static final String ADD_COMMAND = "add n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE "
+    public static final String ADD_DISPENSE_COMMAND = "adddispense n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME";
+    public static final String ADD_STOCK_COMMAND = "addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE "
             + "d/DESCRIPTION m/MAX_QUANTITY";
-    public static final String LIST_COMMAND = "list {i/STOCK_ID p/PRICE q/QUANTITY e/EXPIRY_DATE "
-            + "d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}";
-    public static final String UPDATE_COMMAND = "update i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE "
-            + "d/DESCRIPTION m/MAX_QUANTITY]";
-    public static final String DELETE_COMMAND = "delete i/STOCK_ID";
-    public static final String DISPENSE_COMMAND = "dispense n/NAME q/QUANTITY c/CUSTOMER_ID s/STAFF_NAME";
-    public static final String HELP_COMMAND = "help";
-    public static final String PURGE_COMMAND = "purge";
+    public static final String DELETE_STOCK_COMMAND = "deletestock i/ID";
     public static final String EXIT_COMMAND = "exit";
+    public static final String HELP_COMMAND = "help";
+    public static final String LIST_DISPENSE_COMMAND = "listdispense {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE "
+            + "s/STAFF_NAME sid/STOCK_ID}";
+    public static final String LIST_STOCK_COMMAND = "liststock {i/ID p/PRICE q/QUANTITY e/EXPIRY_DATE "
+            + "d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}";
+    public static final String PURGE_COMMAND = "purge";
+    public static final String UPDATE_STOCK_COMMAND = "updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE "
+            + "d/DESCRIPTION m/MAX_QUANTITY]";
 
     public CommandSyntax(String commandName, String commandSyntax) {
         this.commandName = commandName;
@@ -153,7 +155,7 @@ public class CommandSyntax {
             case CommandParameters.MAX_QUANTITY:
                 isValid = StockValidator.isValidMaxQuantity(ui, parameterValue);
                 break;
-            case CommandParameters.STOCK_ID:
+            case CommandParameters.ID:
                 isValid = StockValidator.isValidStockId(ui, parameterValue, medicines);
                 break;
             case CommandParameters.SORT:

@@ -75,26 +75,34 @@ public class Ui {
     /**
      * Prints out the medicine in a table format.
      *
-     * @param stock Medicine to be printed.
+     * @param stock Stock to be printed.
      */
     public void printStock(Stock stock) {
+        ArrayList<Stock> stocks = new ArrayList<>();
         ArrayList<Medicine> medicines = new ArrayList<>();
-        medicines.add(stock);
-        printStocks(medicines);
+        stocks.add(stock);
+        printStocks(stocks, medicines);
+    }
+
+    /**
+     * Prints out the medicine in a table format.
+     *
+     * @param stock Stock to be printed.
+     * @param medicines Arraylist of the medicines.
+     */
+    public void printStock(Stock stock, ArrayList<Medicine> medicines) {
+        ArrayList<Stock> stocks = new ArrayList<>();
+        stocks.add(stock);
+        printStocks(stocks, medicines);
     }
 
     /**
      * Prints out all the stocks in the Arraylist in a table format.
      *
+     * @param stocks Arraylist of the stocks.
      * @param medicines Arraylist of the medicines.
      */
-    public void printStocks(ArrayList<Medicine> medicines) {
-        ArrayList<Stock> stocks = new ArrayList<>();
-        for (Medicine medicine : medicines) {
-            if (medicine instanceof Stock) {
-                stocks.add((Stock) medicine);
-            }
-        }
+    public void printStocks(ArrayList<Stock> stocks, ArrayList<Medicine> medicines) {
         if (stocks.size() == 0) {
             print("There are no stocks found.");
             return;
@@ -350,15 +358,9 @@ public class Ui {
     /**
      * Prints out all the medicines dispensed in a table format.
      *
-     * @param medicines Arraylist of the medicines.
+     * @param dispenses Arraylist of the dispenses.
      */
-    public void printDispense(ArrayList<Medicine> medicines) {
-        ArrayList<Dispense> dispenses = new ArrayList<>();
-        for (Medicine medicine : medicines) {
-            if (medicine instanceof Dispense) {
-                dispenses.add((Dispense) medicine);
-            }
-        }
+    public void printDispenses(ArrayList<Dispense> dispenses) {
         if (dispenses.size() == 0) {
             print("There are no records of medicines dispensed.");
             return;
@@ -370,6 +372,7 @@ public class Ui {
         int customerIdWidth = Dispense.COLUMNS[3].length();
         int dateWidth = Dispense.COLUMNS[4].length();
         int staffWidth = Dispense.COLUMNS[5].length();
+        int stockIdWidth = Dispense.COLUMNS[6].length();
 
         // Find the longest width of each column
         for (Dispense dispense : dispenses) {
@@ -379,9 +382,10 @@ public class Ui {
             customerIdWidth = Math.max(dispense.getCustomerId().length(), customerIdWidth);
             dateWidth = Math.max(DateParser.dateToString(dispense.getDate()).length(), dateWidth);
             staffWidth = Math.max(dispense.getStaffName().length(), staffWidth);
+            stockIdWidth = Math.max(String.valueOf(dispense.getStockId()).length(), stockIdWidth);
         }
 
-        int[] columnWidths = {idWidth, nameWidth, quantityWidth, customerIdWidth, dateWidth, staffWidth};
+        int[] columnWidths = {idWidth, nameWidth, quantityWidth, customerIdWidth, dateWidth, staffWidth, stockIdWidth};
 
         // Pad the data in the columns
         String idFormat = "| %1$-" + idWidth + "s | ";
@@ -390,8 +394,10 @@ public class Ui {
         String customerIdFormat = "%1$-" + customerIdWidth + "s | ";
         String dateFormat = "%1$-" + dateWidth + "s | ";
         String staffFormat = "%1$-" + staffWidth + "s | ";
+        String stockIdFormat = "%1$-" + stockIdWidth + "s | ";
 
-        String[] formats = {idFormat, nameFormat, quantityFormat, customerIdFormat, dateFormat, staffFormat};
+        String[] formats = {idFormat, nameFormat, quantityFormat, customerIdFormat, dateFormat, staffFormat,
+            stockIdFormat};
 
         StringBuilder headers = new StringBuilder();
         for (int i = 0; i < columnWidths.length; i++) {
@@ -409,7 +415,8 @@ public class Ui {
                     + String.format(customerIdFormat, centerString(customerIdWidth,
                     String.valueOf(dispense.getCustomerId())))
                     + String.format(dateFormat, centerString(dateWidth, DateParser.dateToString(dispense.getDate())))
-                    + String.format(staffFormat, centerString(staffWidth, String.valueOf(dispense.getStaffName())));
+                    + String.format(staffFormat, centerString(staffWidth, dispense.getStaffName()))
+                    + String.format(stockIdFormat, centerString(stockIdWidth, String.valueOf(dispense.getStockId())));
             System.out.println(row);
             printRowBorder(columnWidths);
         }

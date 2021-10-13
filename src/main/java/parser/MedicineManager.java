@@ -103,7 +103,7 @@ public class MedicineManager {
      * @return Stock object of the provided stock id by user
      */
     public static Stock extractStockObject(HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
-        int stockId = Integer.parseInt(parameters.get(CommandParameters.STOCK_ID));
+        int stockId = Integer.parseInt(parameters.get(CommandParameters.ID));
         Stock stock = null;
         for (Medicine medicine : medicines) {
             if (medicine instanceof Stock && stockId == ((Stock) medicine).getStockID()) {

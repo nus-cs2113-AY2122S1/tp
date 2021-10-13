@@ -6,8 +6,8 @@ import command.PurgeCommand;
 import command.dispense.AddDispense;
 import command.medicine.AddCommand;
 import command.medicine.DeleteStock;
-import command.medicine.UpdateStock;
 import command.medicine.ListStock;
+import command.medicine.UpdateStock;
 import errors.InvalidCommand;
 import inventory.Medicine;
 import ui.Ui;
@@ -15,24 +15,24 @@ import ui.Ui;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static command.CommandList.ADD;
+import static command.CommandList.ADD_DISPENSE;
 import static command.CommandList.ADD_ORDER;
+import static command.CommandList.ADD_STOCK;
 import static command.CommandList.ARCHIVE;
-import static command.CommandList.DELETE;
 import static command.CommandList.DELETE_DISPENSE;
 import static command.CommandList.DELETE_ORDER;
-import static command.CommandList.DISPENSE;
+import static command.CommandList.DELETE_STOCK;
 import static command.CommandList.EXIT;
 import static command.CommandList.HELP;
-import static command.CommandList.LIST;
-import static command.CommandList.LIST_ORDERS;
+import static command.CommandList.LIST_DISPENSE;
+import static command.CommandList.LIST_ORDER;
+import static command.CommandList.LIST_STOCK;
 import static command.CommandList.PURGE;
-import static command.CommandList.QUERY;
 import static command.CommandList.RECEIVE_ORDER;
 import static command.CommandList.UNDO;
-import static command.CommandList.UPDATE;
 import static command.CommandList.UPDATE_DISPENSE;
 import static command.CommandList.UPDATE_ORDER;
+import static command.CommandList.UPDATE_STOCK;
 
 /**
  * Helps to parse the commands given by the user as well as extract the parameters provided.
@@ -60,22 +60,22 @@ public class Parser {
             parameters = parseParameters(commandParameters);
         }
         switch (command) {
-        case ADD:
+        case ADD_DISPENSE:
+            new AddDispense().execute(ui, parameters, medicines);
+            break;
+        case ADD_STOCK:
             new AddCommand().execute(ui, parameters, medicines);
             break;
         case ADD_ORDER:
             break;
         case ARCHIVE:
             break;
-        case DELETE:
-            new DeleteStock().execute(ui, parameters, medicines);
-            break;
         case DELETE_DISPENSE:
             break;
-        case DELETE_ORDER:
+        case DELETE_STOCK:
+            new DeleteStock().execute(ui, parameters, medicines);
             break;
-        case DISPENSE:
-            new AddDispense().execute(ui, parameters, medicines);
+        case DELETE_ORDER:
             break;
         case EXIT:
             new ExitCommand().execute(ui, parameters, medicines);
@@ -83,21 +83,21 @@ public class Parser {
         case HELP:
             new HelpCommand().execute(ui, parameters, medicines);
             break;
-        case LIST:
+        case LIST_DISPENSE:
+            break;
+        case LIST_STOCK:
             new ListStock().execute(ui, parameters, medicines);
             break;
-        case LIST_ORDERS:
+        case LIST_ORDER:
             break;
         case PURGE:
             new PurgeCommand().execute(ui, parameters, medicines);
-            break;
-        case QUERY:
             break;
         case RECEIVE_ORDER:
             break;
         case UNDO:
             break;
-        case UPDATE:
+        case UPDATE_STOCK:
             new UpdateStock().execute(ui, parameters, medicines);
             break;
         case UPDATE_DISPENSE:

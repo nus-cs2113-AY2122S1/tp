@@ -1,7 +1,6 @@
 package comparators;
 
 import command.CommandParameters;
-import inventory.Medicine;
 import inventory.Stock;
 
 import java.util.Comparator;
@@ -10,7 +9,7 @@ import java.util.Comparator;
  * Helps to sort the medicines based on the column provided.
  */
 
-public class StockComparator implements Comparator<Medicine> {
+public class StockComparator implements Comparator<Stock> {
     private String column;
     private Boolean isReversed;
 
@@ -20,20 +19,17 @@ public class StockComparator implements Comparator<Medicine> {
     }
 
     @Override
-    public int compare(Medicine medicine1, Medicine medicine2) {
-        Stock stock1;
-        Stock stock2;
+    public int compare(Stock stock1, Stock stock2) {
+        Stock stock;
         if (isReversed) { // If the user chooses to sort in reverse order
-            stock1 = (Stock) medicine2;
-            stock2 = (Stock) medicine1;
-        } else {
-            stock1 = (Stock) medicine1;
-            stock2 = (Stock) medicine2;
+            stock = stock2;
+            stock2 = stock1;
+            stock1 = stock;
         }
 
         switch (column) {
         case Stock.ID_LOWERCASE:
-        case CommandParameters.STOCK_ID:
+        case CommandParameters.ID:
             return Integer.compare(stock1.getStockID(), stock2.getStockID());
         case Stock.NAME_LOWERCASE:
         case CommandParameters.NAME:
