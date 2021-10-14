@@ -33,6 +33,17 @@ public class GoalList {
     }
 
     /**
+     * Adds a goal to the goalList.
+     *
+     * @param goal Goal to be added.
+     * @param ui User Interface class for printing added goal.
+     */
+    public void addGoal(Goal goal, Ui ui) {
+        goalList.add(goal);
+        ui.printAddedGoal(goal.getDescription());
+    }
+
+    /**
      * Adds a habit that is linked to a goal.
      *
      * @param habit     Habit to be linked to a goal.
