@@ -40,7 +40,7 @@ public class CommandParser {
                 } catch (IndexOutOfBoundsException e) {
                     Log.warning(e.getMessage());
                 }
-                flagsToArguments.put(flag, flagArguments.trim());
+                flagsToArguments.put(flag.substring(2), flagArguments.trim());
             } else {
                 mainArgument += tokens[i] + " ";
             }
