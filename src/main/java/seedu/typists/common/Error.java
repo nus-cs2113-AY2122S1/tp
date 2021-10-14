@@ -17,4 +17,8 @@ public class Error {
         }
         return charDiff + lengthDifference(content, typed);
     }
+
+    public double errorRate(String content, String typed) {
+        return (double) characterDifference(content, typed) / content.length();
+    }
 }
