@@ -149,7 +149,7 @@ public class Parser {
     private static void executeDelete(String inputParams) {
         String[] splitInputParams = inputParams.split(" ", 2);
         String type = splitInputParams[0];
-        Integer index = Integer.parseInt(splitInputParams[1]) - 1;
+        int index = Integer.parseInt(splitInputParams[1]) - 1;
         if (type.equals("trip")) {
             executeDeleteTrip(index);
         } else if (type.equals("expense")) {
@@ -160,7 +160,7 @@ public class Parser {
 
     }
 
-    private static void executeDeleteExpense(Integer expenseIndex) {
+    private static void executeDeleteExpense(int expenseIndex) {
         try {
             Trip currentTrip = Storage.getOpenTrip();
             Expense expenseToDelete = currentTrip.getListOfExpenses().get(expenseIndex);
@@ -172,7 +172,7 @@ public class Parser {
         }
     }
 
-    private static void executeDeleteTrip(Integer tripIndex) {
+    private static void executeDeleteTrip(int tripIndex) {
         try {
             String tripLocation = Storage.listOfTrips.get(tripIndex).getLocation();
             String tripDate = Storage.listOfTrips.get(tripIndex).getDateOfTripString();
