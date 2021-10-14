@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Sense-makes the inputs given and distributes the information to other parts of the program.
+ */
 public class Parser {
     private static final String CONTACT_NUMBER_PREFIX = "/cn";
     private static final String FLIGHT_PREFIX = "/f";

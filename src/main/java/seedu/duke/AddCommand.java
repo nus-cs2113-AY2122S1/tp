@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Adds a client into the database.
+ */
 public class AddCommand extends Command {
     private final Client client;
 

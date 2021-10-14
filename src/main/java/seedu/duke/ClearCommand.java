@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Clears the entire client list.
+ */
 public class ClearCommand extends Command {
     /**
      * Executes the clearing of all clients in the client list.

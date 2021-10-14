@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Acknowledge that the user is exiting the application.
+ */
 public class ByeCommand extends Command {
 
     /**

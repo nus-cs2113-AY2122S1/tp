@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * List all clients and their information in a viewable indexed manner.
+ */
 public class ListCommand extends Command {
 
     /**

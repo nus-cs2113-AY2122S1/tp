@@ -1,5 +1,8 @@
 package seedu.duke;
 
+/**
+ * Deletes a client from the client list.
+ */
 public class CutCommand extends Command {
     private final int clientIndex;
 
