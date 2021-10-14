@@ -375,7 +375,7 @@ public class Ui {
             quantityWidth = Math.max(String.valueOf(dispense.getQuantity()).length(), quantityWidth);
             customerIdWidth = Math.max(dispense.getCustomerId().length(), customerIdWidth);
             dateWidth = Math.max(DateParser.dateToString(dispense.getDate()).length(), dateWidth);
-            staffWidth = Math.max(dispense.getStaffName().length(), staffWidth);
+            staffWidth = Math.max(dispense.getStaff().length(), staffWidth);
             stockIdWidth = Math.max(String.valueOf(dispense.getStockId()).length(), stockIdWidth);
         }
 
@@ -409,7 +409,7 @@ public class Ui {
                     + String.format(customerIdFormat, centerString(customerIdWidth,
                     String.valueOf(dispense.getCustomerId())))
                     + String.format(dateFormat, centerString(dateWidth, DateParser.dateToString(dispense.getDate())))
-                    + String.format(staffFormat, centerString(staffWidth, dispense.getStaffName()))
+                    + String.format(staffFormat, centerString(staffWidth, dispense.getStaff()))
                     + String.format(stockIdFormat, centerString(stockIdWidth, String.valueOf(dispense.getStockId())));
             System.out.println(row);
             printRowBorder(columnWidths);

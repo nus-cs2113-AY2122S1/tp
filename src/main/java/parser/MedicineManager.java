@@ -41,7 +41,7 @@ public class MedicineManager {
     public static int getTotalOrderQuantity(ArrayList<Medicine> medicines, String name) {
         int existingQuantity = 0;
         for (Medicine medicine : medicines) {
-            if (!(medicine instanceof Order)) {
+            if (!(medicine instanceof Order) || ((Order) medicine).isDelivered()) {
                 continue;
             }
             boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
