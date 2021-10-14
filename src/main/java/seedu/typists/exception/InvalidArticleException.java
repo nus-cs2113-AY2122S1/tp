@@ -1,6 +1,6 @@
 package seedu.typists.exception;
 
-public class InvalidArticleException extends Throwable {
+public class InvalidArticleException extends Exception {
     @Override
     public String getMessage() {
         return "Invalid article given" + super.getMessage();
