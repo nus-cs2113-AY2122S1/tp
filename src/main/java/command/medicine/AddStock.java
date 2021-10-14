@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * Add medication based on user input.
  * User input include name, price, quantity, expiry date, description and maximum quantity of medication.
  */
-public class AddCommand extends Command {
+public class AddStock extends Command {
     private static Logger logger = Logger.getLogger("AddCommand");
 
     @Override
@@ -91,6 +91,7 @@ public class AddCommand extends Command {
             String existingDescription = existingStock.getDescription();
             String priceToAdd = parameters.get(CommandParameters.PRICE);
             double price = Double.parseDouble(priceToAdd);
+            ui.print("Medicine exists. Using existing description and maximum quantity.");
             addMedicine(ui, medicines, nameToAdd, existingDescription, price,
                     quantity, formatExpiry, existingMaxQuantity);
 

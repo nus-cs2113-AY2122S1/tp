@@ -45,15 +45,14 @@ public class AddDispense extends Command {
         int totalStock = MedicineManager.getTotalStockQuantity(medicines, medicationName);
         int totalColumnLeft = MedicineManager.getTotalRows(medicines, medicationName);
         Date dispenseDate = new Date(); //dispense date will be today's date
-        ArrayList<Medicine> filteredMedicines = new ArrayList<>();
+        ArrayList<Stock> filteredMedicines = new ArrayList<>();
 
         for (Medicine medicine : medicines) {
             if (medicine instanceof Stock) { //Ensure that it is a medicine object
-                filteredMedicines.add(medicine);
+                filteredMedicines.add((Stock) medicine);
             }
         }
-
-        //filteredMedicines.sort(new StockComparator(CommandParameters.EXPIRY_DATE, false));
+        filteredMedicines.sort(new comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
 
         for (Medicine medicine : filteredMedicines) {
 
@@ -97,7 +96,6 @@ public class AddDispense extends Command {
         }
 
         ui.print("Medicine not available!");
-        return;
 
     }
 

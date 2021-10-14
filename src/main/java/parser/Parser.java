@@ -4,7 +4,7 @@ import command.ExitCommand;
 import command.HelpCommand;
 import command.PurgeCommand;
 import command.dispense.AddDispense;
-import command.medicine.AddCommand;
+import command.medicine.AddStock;
 import command.medicine.DeleteStock;
 import command.medicine.ListStock;
 import command.medicine.UpdateStock;
@@ -65,7 +65,7 @@ public class Parser {
             new AddDispense().execute(ui, parameters, medicines);
             break;
         case ADD_STOCK:
-            new AddCommand().execute(ui, parameters, medicines);
+            new AddStock().execute(ui, parameters, medicines);
             break;
         case ADD_ORDER:
             break;
