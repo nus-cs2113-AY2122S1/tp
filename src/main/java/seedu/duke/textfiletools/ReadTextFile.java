@@ -13,6 +13,9 @@ public class ReadTextFile {
         this.fileDirectory = fileDirectory;
     }
 
+    /**
+     * Reads a text file and then print its content into the terminal.
+     */
     public void printText() {
         try {
             FileReader readTextFile = new FileReader(this.fileDirectory);
@@ -32,6 +35,15 @@ public class ReadTextFile {
         System.out.println("");
     }
 
+    /**
+     * Reads the text file containing all the commands for adding Budget or Expenditure
+     * and return an ArrayList of String containing those commands.
+     *
+     * @return An ArrayList of String containing all the individual commands saved in
+     *              the text file.
+     * @throws IOException When the FileReader fails to read the file .txt file in the
+     *                     stated directory.
+     */
     public ArrayList<String> readTextFileToString() throws IOException {
         ArrayList<String> arrayListOfRawCommands = new ArrayList<String>();
         //---------------------------------------------------------
