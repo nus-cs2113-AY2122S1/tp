@@ -19,5 +19,13 @@ public class DoneHabitCommand extends Command {
         goalList.doneHabitFromGoal(goalIndex, habitIndex);
     }
 
+    public int getGoalIndex() {
+        return goalIndex;
+    }
+
+    public int getHabitIndex() {
+        return habitIndex;
+    }
+
 }
 

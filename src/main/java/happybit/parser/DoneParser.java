@@ -28,10 +28,11 @@ public class DoneParser {
         if (descriptions.length < 2) {
             throw new HaBitParserException(ERROR_MISSING_HABIT_INDEX);
         }
+
         // get goal Index
         int goalIndex;
         try {
-            goalIndex = Integer.parseInt(descriptions[GOAL_INDEX]);
+            goalIndex = Integer.parseInt(descriptions[GOAL_INDEX]) - 1;
         } catch (NumberFormatException e) {
             throw new HaBitParserException(ERROR_INVALID_GOAL_INDEX);
         }
@@ -39,7 +40,7 @@ public class DoneParser {
         // get goal Index
         int habitIndex;
         try {
-            habitIndex = Integer.parseInt(descriptions[HABIT_INDEX]);
+            habitIndex = Integer.parseInt(descriptions[HABIT_INDEX]) - 1;
         } catch (NumberFormatException e) {
             throw new HaBitParserException(ERROR_INVALID_HABIT_INDEX);
         }
