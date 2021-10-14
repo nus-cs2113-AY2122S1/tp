@@ -8,6 +8,7 @@ import seedu.typists.storage.StorageFile;
 import seedu.typists.ui.TextUi;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 
 //solution below adapted from https://github.com/se-edu/addressbook-level2/
@@ -57,6 +58,8 @@ public class Main {
             } catch (FaultyInputException e) {
                 uiBot.showText(e.getMessage());
             } catch (InvalidStringInputException e) {
+                e.printStackTrace();
+            } catch (NoSuchElementException e) {
                 e.printStackTrace();
             } finally {
                 uiBot.showLine();
