@@ -2,6 +2,7 @@ package happybit.goal;
 
 import happybit.habit.Habit;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -95,11 +96,15 @@ public class Goal {
     }
 
     public String getStartDate() {
-        return this.startDate.toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+
+        return dateFormat.format(this.startDate);
     }
 
     public String getEndDate() {
-        return this.endDate.toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+
+        return dateFormat.format(this.endDate);
     }
 
     /*
