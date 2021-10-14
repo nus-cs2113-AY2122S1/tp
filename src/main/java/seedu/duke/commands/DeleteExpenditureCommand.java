@@ -15,9 +15,10 @@ public class DeleteExpenditureCommand extends DeleteCommand {
 
     @Override
     public void execute(boolean isLoadingStorage) {
+        int sizeBeforeDeletion = recordList.getSize();
         TextUi.showExpenditureDeletedMessage(index, recordList.getExpenditure(index - 1));
         recordList.deleteExpenditure(index);
 
-        DeleteFromTextFile.removeLineFromFile("./data/BudgetList1.txt", index);
+        DeleteFromTextFile.removeLineFromFile("./data/BudgetList1.txt", index, sizeBeforeDeletion);
     }
 }

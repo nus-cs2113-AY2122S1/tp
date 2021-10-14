@@ -8,12 +8,15 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class DeleteFromTextFile {
-    public static void removeLineFromFile(String textFileDirectory, int lineNumber) {
-        System.out.println(lineNumber);
-
+    public static void removeLineFromFile(String textFileDirectory, int lineNumber, int sizeOfExpenditureList) {
         try {
             File inFile = new File(textFileDirectory);
             int count = 1;
+            boolean deletionAtLastLine = false;
+
+            if (lineNumber == sizeOfExpenditureList) {
+                deletionAtLastLine = true;
+            }
 
             if (!inFile.isFile()) {
                 System.out.println("Parameter is not an existing file");
@@ -29,16 +32,15 @@ public class DeleteFromTextFile {
 
             while (scanText.hasNext()) {
                 line = scanText.nextLine();
-                if (count != lineNumber && scanText.hasNext() && (count + 1 != lineNumber)) {
+
+                if (count != lineNumber && count != sizeOfExpenditureList) {
                     fileWrite.println(line);
                     fileWrite.flush();
-                } else if ((count != lineNumber && !(scanText.hasNext()))) {
-                    fileWrite.print(line);
-                    fileWrite.flush();
-                } else if ((count + 1) == lineNumber) {
+                } else if (count == sizeOfExpenditureList && !(deletionAtLastLine)) {
                     fileWrite.print(line);
                     fileWrite.flush();
                 }
+
                 count += 1;
             }
 
