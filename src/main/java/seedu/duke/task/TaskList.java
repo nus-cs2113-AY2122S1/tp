@@ -83,7 +83,7 @@ public class TaskList {
      */
     public TaskList filterTasksByKeyword(String keyword) {
         return new TaskList(taskList.stream()
-                .filter(task -> task.getTitle().toLowerCase().contains(keyword))
+                .filter(task -> task.getTitle().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toList()));
     }
 
@@ -95,7 +95,7 @@ public class TaskList {
      */
     public TaskList filterTasksByPeriod(String period) {
         return new TaskList(taskList.stream()
-                .filter(task -> task.getDayOfTheWeek().toLowerCase().contains(period))
+                .filter(task -> task.getDayOfTheWeek().toLowerCase().contains(period.toLowerCase()))
                 .collect(Collectors.toList()));
     }
 
