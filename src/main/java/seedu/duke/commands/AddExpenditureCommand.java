@@ -11,6 +11,9 @@ public class AddExpenditureCommand extends AddCommand {
     public double spending;
     LocalDate date;
 
+    public static final String MESSAGE_USAGE = "Adds an expenditure record.\n"
+            + "Parameters: e/EXPENDITURE_NAME a/COST [d/DATE_OF_EXPENDITURE]";
+
     public AddExpenditureCommand(String description, double amount) {
         this.description = description;
         this.spending = amount;

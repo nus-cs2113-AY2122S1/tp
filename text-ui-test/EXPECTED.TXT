@@ -11,5 +11,35 @@
     What entries do you wish to enter today?
 ========================================================
 ========================================================
-☹ Sorry, I did not understand your command.
+1. add
+Adds an expenditure record.
+Parameters: e/EXPENDITURE_NAME a/COST [d/DATE_OF_EXPENDITURE]
+
+Adds a budget record.
+Parameters: b/ a/AMOUNT m/MONTH [y/YEAR]
+
+Adds a loan record.
+Parameters: l/DEBTOR_NAME a/AMOUNT [d/DATE_OF_LOAN]
+========================================================
+2. edit m/MONTH b/AMOUNT
+========================================================
+3. edit m/MONTH i/INDEX [e/NEW_EXPENDITURE_NAME] [a/NEW_AMOUNT] [d/NEW_DATE]
+========================================================
+4. edit m/MONTH i/INDEX [l/DEBTOR_NAME] [a/AMOUNT] [d/DATE_OF_LOAN]
+========================================================
+5. find [m/MONTH] b/DESCRIPTION
+========================================================
+6. list m/all
+========================================================
+7. list m/MONTH
+========================================================
+8. delete m/MONTH
+========================================================
+9. delete m/MONTH i/INDEX
+========================================================
+10. delete m/MONTH i/INDEX_FROM-INDEX_TO
+========================================================
+11. help
+========================================================
+12. bye
 ========================================================
