@@ -34,9 +34,23 @@ public class MenuUI {
         MainUI.printSingleLine();
     }
 
+    public static void printEditMenuMessage(Menu newMenu, int menuIndex) {
+        MainUI.printSingleLine();
+        System.out.println(" Got it! I have updated the price of the dish as follows:");
+        System.out.println("   " + menuIndex + ". " + newMenu);
+        MainUI.printSingleLine();
+    }
+
     public static void printInvalidIndexMessage() {
         MainUI.printSingleLine();
         System.out.println(" You have entered an invalid index number!");
+        System.out.println(" Please try again :)");
+        MainUI.printSingleLine();
+    }
+
+    public static void printInvalidPriceMessage() {
+        MainUI.printSingleLine();
+        System.out.println(" You have entered an invalid price!");
         System.out.println(" Please try again :)");
         MainUI.printSingleLine();
     }

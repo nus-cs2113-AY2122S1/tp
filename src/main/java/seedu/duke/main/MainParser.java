@@ -33,6 +33,9 @@ public class MainParser {
         case "remove-menu":
             menuParser.removeMenu(command, menuList);
             break;
+        case "edit-menu":
+            menuParser.editMenu(command, menuList);
+            break;
         case "list-menu":
             menuParser.listMenu(menuList);
             break;

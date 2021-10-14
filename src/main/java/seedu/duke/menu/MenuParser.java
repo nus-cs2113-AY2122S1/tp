@@ -7,8 +7,7 @@ public class MenuParser {
     public boolean addMenuCommandChecker(String[] command) {
         try {
             boolean emptyDescription = command[1].stripLeading().stripTrailing().equals("");
-            boolean emptyPrice = command[2].stripLeading().stripTrailing().equals("");
-            if (emptyDescription || emptyPrice) {
+            if (emptyDescription) {
                 MainUI.printWrongCommandMessage();
                 return false;
             }
@@ -17,7 +16,7 @@ public class MenuParser {
             MainUI.printWrongCommandMessage();
             return false;
         } catch (NumberFormatException e) {
-            MainUI.printWrongCommandMessage();
+            MenuUI.printInvalidPriceMessage();
             return false;
         }
         return true;
@@ -63,6 +62,36 @@ public class MenuParser {
             Menu oldMenu = masterList.menuList.get(menuIndex - 1);
             masterList.menuList.remove(menuIndex - 1);
             MenuUI.printRemoveMenuMessage(oldMenu, menuIndex);
+        }
+    }
+
+    public boolean editMenuCommandChecker(String[] command, int menuSize) {
+        try {
+            Double.valueOf(command[2]);
+            int menuIndex = Integer.valueOf(command[1]);
+            boolean validMenuIndex = (0 < menuIndex) && (menuIndex < menuSize + 1);
+            if (!validMenuIndex) {
+                MenuUI.printInvalidIndexMessage();
+                return false;
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            MainUI.printWrongCommandMessage();
+            return false;
+        } catch (NumberFormatException e) {
+            MenuUI.printInvalidPriceMessage();
+            return false;
+        }
+        return true;
+    }
+
+    public void editMenu(String[] command, MenuList masterList) {
+        boolean isValidEditMenuCommand = editMenuCommandChecker(command, masterList.menuList.size());
+        if (isValidEditMenuCommand) {
+            int menuIndex = Integer.valueOf(command[1]);
+            assert 0 < menuIndex : "Index should be more than 0";
+            assert menuIndex < masterList.menuList.size() + 1 : "Index should not be bigger than the menu size";
+            masterList.menuList.get(menuIndex - 1).setPrice(command[2]);
+            MenuUI.printEditMenuMessage(masterList.menuList.get(menuIndex - 1), menuIndex);
         }
     }
 
