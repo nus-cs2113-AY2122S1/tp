@@ -63,7 +63,7 @@ public class Parser {
      */
     private static final Pattern DELETE_INCOME_ARGUMENT_FORMAT =
             Pattern.compile("i/(?<index>[^/]+)");
-    
+
     private static final String HELP_COMMAND_KEYWORD = "help";
     private static final String ADD_EXPENSE_KEYWORD = "add_ex";
     private static final String ADD_INCOME_KEYWORD = "add_in";
@@ -74,7 +74,14 @@ public class Parser {
     private static final String TOTAL_EXPENSE_KEYWORD = "total_ex";
     private static final String TOTAL_INCOME_KEYWORD = "total_in";
     private static final String EXIT_KEYWORD = "end";
-
+    
+    private static final String DATA_SEPARATOR = ", ";
+    private static final Pattern EXPENSE_DATA_FORMAT 
+            = Pattern.compile("E" + DATA_SEPARATOR + "(?<description>[^/]+)" + DATA_SEPARATOR 
+            + "(?<amount>[0-9]+\\.[0-9]+|\\.[0-9]+)");
+    private static final Pattern INCOME_DATA_FORMAT
+            = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>[^/]+)" + DATA_SEPARATOR
+            + "(?<amount>[0-9]+\\.[0-9]+|\\.[0-9]+)");
     /**
      * Parses user input into command for execution.
      * This was adapted from addressbook-level2 source code here:
@@ -90,7 +97,7 @@ public class Parser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments"); 
+        final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
         case HELP_COMMAND_KEYWORD:
@@ -117,7 +124,7 @@ public class Parser {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
     }
-    
+
     private Command prepareHelp(String arguments) {
         if (arguments.trim().isBlank()) {
             return new HelpCommand();
@@ -134,11 +141,11 @@ public class Parser {
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
-        
+
         String userGivenAmount = matcher.group("amount").trim();
         double expenseAmount;
         try {
-            expenseAmount = parseExpense(userGivenAmount);
+            expenseAmount = parseExpenseAmount(userGivenAmount);
         } catch (InvalidExpenseException e) {
             return new InvalidCommand(e.getMessage());
         }
@@ -165,7 +172,7 @@ public class Parser {
         String userGivenAmount = matcher.group("amount").trim();
         double incomeAmount;
         try {
-            incomeAmount = parseIncome(userGivenAmount);
+            incomeAmount = parseIncomeAmount(userGivenAmount);
         } catch (InvalidIncomeException e) {
             return new InvalidCommand(e.getMessage());
         }
@@ -188,7 +195,7 @@ public class Parser {
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
-        
+
         String userGivenIndex = matcher.group("index").trim();
         int deleteExpenseIndex;
         try {
@@ -197,7 +204,7 @@ public class Parser {
             return new InvalidCommand(e.getMessage());
         }
         assert deleteExpenseIndex >= 1;
-        
+
         return new DeleteExpenseCommand(deleteExpenseIndex);
     }
 
@@ -219,14 +226,14 @@ public class Parser {
             return new InvalidCommand(e.getMessage());
         }
         assert deleteIncomeIndex >= 1;
-        
+
         return new DeleteIncomeCommand(deleteIncomeIndex);
     }
 
     private Command prepareListExpense(String arguments) {
         if (arguments.trim().isBlank()) {
             return new ListExpenseCommand();
-        } 
+        }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
@@ -236,7 +243,7 @@ public class Parser {
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
-    
+
     private Command prepareTotalExpense(String arguments) {
         if (arguments.trim().isBlank()) {
             return new TotalExpenseCommand();
@@ -250,15 +257,15 @@ public class Parser {
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
-    
+
     private Command prepareExit(String arguments) {
         if (arguments.trim().isBlank()) {
             return new ExitCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
-    
-    private double parseExpense(String userGivenAmount) throws InvalidExpenseException {
+
+    private double parseExpenseAmount(String userGivenAmount) throws InvalidExpenseException {
         double expenseAmount;
         try {
             expenseAmount = Double.parseDouble(userGivenAmount);
@@ -271,7 +278,7 @@ public class Parser {
         return expenseAmount;
     }
 
-    private double parseIncome(String userGivenAmount) throws InvalidIncomeException {
+    private double parseIncomeAmount(String userGivenAmount) throws InvalidIncomeException {
         double incomeAmount;
         try {
             incomeAmount = Double.parseDouble(userGivenAmount);
@@ -308,5 +315,43 @@ public class Parser {
             throw new InvalidIncomeIndexException(Messages.NON_POSITIVE_INDEX_MESSAGE);
         }
         return deleteIncomeIndex;
+    }
+    
+    public String convertExpenseToData (Expense expense) {
+        return "E" + DATA_SEPARATOR + expense.getDescription() + DATA_SEPARATOR + expense.getValue();
+    }
+
+    public String convertIncomeToData (Income income) {
+        return "I" + DATA_SEPARATOR + income.getDescription() + DATA_SEPARATOR + income.getValue();
+    }
+    
+    public Boolean isExpenseData (String data) {
+        final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data);
+        return matcher.matches();
+    }
+
+    public Boolean isIncomeData (String data) {
+        final Matcher matcher = INCOME_DATA_FORMAT.matcher(data);
+        return matcher.matches();
+    }
+    
+    public Expense convertDataToExpense (String data) throws InvalidExpenseException {
+        final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data);
+        
+        String expenseDescription = matcher.group("description");
+        String dataAmount = matcher.group("amount");
+        double expenseAmount = parseExpenseAmount(dataAmount);
+        
+        return new Expense(expenseDescription, expenseAmount);
+    }
+
+    public Income convertDataToIncome (String data) throws InvalidIncomeException {
+        final Matcher matcher = INCOME_DATA_FORMAT.matcher(data);
+
+        String incomeDescription = matcher.group("description");
+        String dataAmount = matcher.group("amount");
+        double incomeAmount = parseIncomeAmount(dataAmount);
+
+        return new Income(incomeDescription, incomeAmount);
     }
 }
