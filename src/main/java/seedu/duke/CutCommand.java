@@ -24,8 +24,10 @@ public class CutCommand extends Command {
     @Override
     public void execute(ClientList clients, Ui ui) {
         try {
-            ui.showCut(clients.getClient(clientIndex));
+            int newClientCount = clients.getClientCount() - 1;
             clients.cut(clientIndex, ui);
+            assert newClientCount == clients.getClientCount();
+            assert newClientCount >= 0;
         } catch (IndexOutOfBoundsException e) {
             System.out.println("INVALID: Index out of bounds");
         }
