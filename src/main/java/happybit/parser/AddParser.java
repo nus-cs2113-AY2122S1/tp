@@ -113,8 +113,8 @@ public class AddParser {
      */
     private static void checkImproperFlags(String input) throws HaBitParserException {
         String[] improperFlagArray = {" -sl", " -fd", " -ex", " -sd", " -df",
-                "-sl ", "-fd ", "-ex ", "-sd ", "-df ",
-                "-sl", "-fd", "-ex", "-sd", "-df"};
+            "-sl ", "-fd ", "-ex ", "-sd ", "-df ",
+            "-sl", "-fd", "-ex", "-sd", "-df"};
         if (countInstancesInString(input, improperFlagArray) != 0) {
             throw new HaBitParserException("Flags should be defined with a space before and after.");
         }
