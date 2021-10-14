@@ -1,5 +1,7 @@
 package seedu.duke.textfiletools;
 
+import java.util.logging.Logger;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,6 +10,7 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class DeleteFromTextFile {
+
     public static void removeLineFromFile(String textFileDirectory, int lineNumber, int sizeOfExpenditureList) {
         try {
             File inFile = new File(textFileDirectory);
@@ -50,12 +53,19 @@ public class DeleteFromTextFile {
             scanText.close();
             // Put into exception...
             //----------------------------------------------------
+
+            Logger logger = Logger.getLogger("deletion");
+            // logger.log(Level.INFO, "Deletion Or Renaming failed!");
+            // logger.setLevel(Level.INFO);
+
             if (!inFile.delete()) {
+                logger.info("Deletion Or Renaming failed!");
                 System.out.println("Could not delete file");
                 return;
             }
 
             if (!tempFile.renameTo(inFile)) {
+                logger.info("Deletion Or Renaming failed!");
                 System.out.println("Could not rename file");
             }
             //----------------------------------------------------
