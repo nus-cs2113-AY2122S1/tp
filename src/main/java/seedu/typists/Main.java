@@ -69,6 +69,7 @@ public class Main {
 
     public void exit() {
         uiBot.showBye();
+        return;
     }
 
     /** Runs the program until termination.  */
