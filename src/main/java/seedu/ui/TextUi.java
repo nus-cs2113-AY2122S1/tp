@@ -13,11 +13,6 @@ import java.util.Scanner;
 public class TextUi {
     private static final int BALANCE_ARRAY = 1;
     private static final int SERIAL = 1;
-    private static final String SMALL_GAP = "         ";
-    private static final String BIG_GAP = "                         ";
-    private static final String LECTURE_SLOT = "Lecture Lesson Slots";
-    private static final String TUTORIAL_SLOT = "Tutorial Lesson Slots";
-    private static final String LAB_SLOT = "Laboratory Lesson Slots";
 
     public static Scanner in = new Scanner(System.in);
 
@@ -213,27 +208,6 @@ public class TextUi {
         return "________________________________________";
     }
 
-    public static void printLessonHeader(ArrayList<Lesson> lt, ArrayList<Lesson> tt, ArrayList<Lesson> lb) {
-        String header = "";
-        if (isExist(lt) && isExist(tt) && isExist(lb)) {
-            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
-        } else if (isExist(lt) && isExist(tt)) {
-            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT;
-        } else if (isExist(lt) && isExist(lb)) {
-            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + LAB_SLOT;
-        } else if (isExist(tt) && isExist(lb)) {
-            header = SMALL_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
-        } else if (isExist(lt)) {
-            header = SMALL_GAP + LECTURE_SLOT;
-        } else if (isExist(tt)) {
-            header = SMALL_GAP + TUTORIAL_SLOT;
-        } else if (isExist(lb)) {
-            header = SMALL_GAP + LAB_SLOT;
-        } else {
-            header = "No Lesson Time Slots Found";
-        }
-        System.out.println(header);
-    }
 
     public static boolean isExist(ArrayList<Lesson> lesson) {
         return lesson.size() > 0;
