@@ -10,7 +10,16 @@ import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class DeleteFromTextFile {
-
+    /**
+     * Reads the text file and then traverse through line by line separated by "\n" and
+     * copy it to a temporary text file and do not copy the line to be deleted. Lastly,
+     * delete the original text file and rename that text file to the original text file
+     * name.
+     *
+     * @param textFileDirectory Text file's directory which we want to delete a line from.
+     * @param lineNumber The line number to be deleted.
+     * @param sizeOfExpenditureList
+     */
     public static void removeLineFromFile(String textFileDirectory, int lineNumber, int sizeOfExpenditureList) {
         try {
             File inFile = new File(textFileDirectory);
