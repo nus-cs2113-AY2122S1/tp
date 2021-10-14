@@ -94,6 +94,14 @@ public class Goal {
         return habitList.size();
     }
 
+    public String getStartDate() {
+        return this.startDate.toString();
+    }
+
+    public String getEndDate() {
+        return this.endDate.toString();
+    }
+
     /*
      * NOTE : ==================================================================
      * The following are private methods that are used to implement SLAP for the
@@ -107,7 +115,7 @@ public class Goal {
      *
      * @return String of the goalType 2-character code.
      */
-    private String getGoalTypeCharacter() {
+    public String getGoalTypeCharacter() {
         switch (this.goalType) {
         case SLEEP:
             return "[SL]";
