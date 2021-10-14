@@ -37,7 +37,7 @@ public class Expenditure extends Record {
 
 
     public String toString() {
-        return (this.description + " $" + this.amount);
+        return ("Description: " + this.description + "\nAmount: $" + this.amount);
     }
 
     @Override

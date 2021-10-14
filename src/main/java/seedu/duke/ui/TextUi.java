@@ -47,16 +47,23 @@ public class TextUi {
     }
 
     public static void showExpenditureAddedMessage(Expenditure addedExpenditure) {
-        System.out.println("Successfully added. Here's the added expenditure: ");
-        System.out.println("   " + addedExpenditure);
+        System.out.println("Expenditure successfully added!" + LS + addedExpenditure);
         System.out.println(DIVIDER);
+    }
+
+    public static void showBudgetAddedMessage(double amount) {
+        System.out.println("Your budget of "
+                + amount
+                + " for this month is successfully added!"
+                + LS
+                + DIVIDER);
     }
 
     public static void showRecordsListView(RecordList list) {
         int i = 1;
         System.out.println("Your budget for this month:" + list.getBudget() + LS
-                 + "Your expenditures:");
-        for (Expenditure a: list.getExpenditureRecords()) {
+                + "Your expenditures:");
+        for (Expenditure a : list.getExpenditureRecords()) {
             System.out.println(i + "." + a);
             i++;
         }

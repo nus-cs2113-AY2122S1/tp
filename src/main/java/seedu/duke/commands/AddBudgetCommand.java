@@ -2,6 +2,8 @@ package seedu.duke.commands;
 
 //add EXPENDITURE_NAME COST DATE_TIME_OF_EXPENDITURE
 
+import seedu.duke.ui.TextUi;
+
 public class AddBudgetCommand extends AddCommand {
     //public String description;
     public double amount;
@@ -34,5 +36,6 @@ public class AddBudgetCommand extends AddCommand {
 
     public void execute(boolean isLoadingStorage) {
         recordList.addBudget(amount);
+        TextUi.showBudgetAddedMessage(amount);
     }
 }
