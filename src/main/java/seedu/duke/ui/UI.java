@@ -10,7 +10,6 @@ public class UI {
 
     public static final String DIVIDER = "____________________________________________________\n";
     private static final String WELCOME_MESSAGE = DIVIDER
-            + "Current session date: " + CurrentDate.getCurrentFormattedDate() + '\n'
             + "Welcome to SITUS!\n"
             + "What would you like to do first?\n"
             + "To see what I can do, use \"help\"\n"
