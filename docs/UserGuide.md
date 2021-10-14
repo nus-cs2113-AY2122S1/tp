@@ -1,15 +1,28 @@
-# User Guide
+# Traveller User Guide
 
 ## Introduction
+````
+  ______                      ____         
+ /_  __/________ __   _____  / / /__  _____
+  / / / ___/ __ `/ | / / _ \/ / / _ \/ ___/
+ / / / /  / /_/ /| |/ /  __/ / /  __/ /    
+/_/ /_/   \__,_/ |___/\___/_/_/\___/_/     
+````
+Traveller is a travel planner app that is designed to help holidaymakers like you optimise your trips!
+It is created for individuals who prefer to use a Command Line Interface (CLI) over a Graphical User Interface (GUI), 
+while still retaining the ease of use of a GUI.
+Use Traveller so that you can plan your trips with ease and focus on what matters most: Fun!
 
-{Give a product intro}
+### What is a Command Line Interface (CLI)?
+A CLI is a way of interacting with applications via lines of text, instead of the usual way of clicking on the application.
+Each computer will have their own CLI, such as the window's Powershell and the MacOS's Terminal.
 
 ## Quick Start
 
-{Give steps to get started quickly}
-
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `Traveller` from [here](https://github.com/AY2122S1-CS2113T-W13-1/tp).
+3. Unzip the downloaded file.
+4. Navigate to the directory containing `Traveller.java` and run `java -jar Traveller.java`.
 
 ## Features 
 
