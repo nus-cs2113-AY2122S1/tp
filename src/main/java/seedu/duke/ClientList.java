@@ -47,7 +47,7 @@ public class ClientList {
     public Client getClient(int index) {
         return clients.get(index);
     }
-    
+
     /**
      * Main method for clearing the client list.
      */
