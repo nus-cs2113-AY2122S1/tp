@@ -1,14 +1,19 @@
 package seedu.duke;
 
+
+/**
+ * Main entry-point of the TourPlanner application.
+ * Initialises the application and starts interaction with application user.
+ */
 public class TourPlanner {
+
     /**
-     * Main entry-point for the java.duke.Duke application.
+     * Main method of TourPlanner.
+     * Initialises Ui and ClientList objects.
+     * Reads, parses and executes command from user's input until exit condition is met.
+     *
+     * @param args not used
      */
-
-    public TourPlanner() {
-        ;
-    }
-
     public static void main(String[] args) {
         Ui ui = new Ui();
         ui.showWelcome();
@@ -18,9 +23,9 @@ public class TourPlanner {
         while (!isExit) {
             command = ui.readCommand();
             try {
-                Command dummy = Parser.parse(command);
-                dummy.execute(clientList, ui);
-                isExit = dummy.isExit();
+                Command specificCommand = Parser.parse(command);
+                specificCommand.execute(clientList, ui);
+                isExit = specificCommand.isExit();
             } catch (NullPointerException | NumberFormatException e) {
                 System.out.println();
             } catch (TourPlannerException e) {
@@ -30,6 +35,4 @@ public class TourPlanner {
             }
         }
     }
-
-
 }
