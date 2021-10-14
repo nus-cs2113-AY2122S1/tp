@@ -10,6 +10,8 @@ import seedu.commands.HelpCommand;
 import seedu.commands.InvalidCommand;
 import seedu.commands.ListIncomeCommand;
 import seedu.commands.TotalIncomeCommand;
+import seedu.entry.Expense;
+import seedu.entry.Income;
 
 public class ParserTest {
     @Test
@@ -104,5 +106,51 @@ public class ParserTest {
         Command underTest = testParser.parseCommand("add_in d/buy book a/aa");
         InvalidCommand test = (InvalidCommand) underTest;
         assertTrue(test.getMessage() == "Only numeric inputs are allowed for amount.");
+    }
+    
+    @Test
+    public void convertExpenseToData_validExpense_correctDataOutput() {
+        Parser testParser = new Parser();
+        Expense testExpense = new Expense("buy book", 12.33);
+        String testData = testParser.convertExpenseToData(testExpense);
+        assertTrue(testData.equals("E, buy book, 12.33"));
+    }
+
+    @Test
+    public void convertIncomeToData_validIncome_correctDataOutput() {
+        Parser testParser = new Parser();
+        Income testIncome = new Income("job", 1233.0);
+        String testData = testParser.convertIncomeToData(testIncome);
+        assertTrue(testData.equals("I, job, 1233.0"));
+    }
+    
+    @Test
+    public void isExpenseData_validExpenseData_returnTrue() {
+        Parser testParser = new Parser();
+        assertTrue(testParser.isExpenseData("E, agaga, 89.22"));
+    }
+
+    @Test
+    public void isExpenseData_validExpenseDataNoNumberBeforeDecimal_returnTrue() {
+        Parser testParser = new Parser();
+        assertTrue(testParser.isExpenseData("E, agaga, .333"));
+    }
+
+    @Test
+    public void isExpenseData_invalidExpenseData_returnFalse() {
+        Parser testParser = new Parser();
+        assertTrue(!testParser.isExpenseData("E, agaga, 33."));
+    }
+
+    @Test
+    public void isIncomeData_validIncomeData_returnTrue() {
+        Parser testParser = new Parser();
+        assertTrue(testParser.isIncomeData("I, agaga, 89.22"));
+    }
+
+    @Test
+    public void isIncomeData_invalidIncomeData_returnFalse() {
+        Parser testParser = new Parser();
+        assertTrue(!testParser.isIncomeData("E, agaga, 33.22"));
     }
 }
