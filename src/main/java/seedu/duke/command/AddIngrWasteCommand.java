@@ -3,19 +3,30 @@ package seedu.duke.command;
 import seedu.duke.Ingredient;
 import seedu.duke.IngredientList;
 import seedu.duke.Ui;
+import seedu.duke.logger.LoggerManager;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AddIngrWasteCommand extends Command {
+    private static Logger logger = Logger.getLogger("AddIngrCommand.execute()");
+
+    AddIngrWasteCommand() {
+        LoggerManager.setupLogger(logger);
+    }
+
     @Override
     public void execute(ArrayList<String> parameters) {
         Ui ui = new Ui();
+        logger.log(Level.INFO, "Start of process");
         String ingredient = String.join(" ", parameters);
         int ingredientIndex = IngredientList.find(ingredient);
         System.out.println(ui.getLineDivider());
         if (ingredientIndex == -1) {
             System.out.println(ui.getIngrNotExistMsg());
+            logger.log(Level.INFO, "Ingredient does not exist", ingredientIndex);
         } else {
             try {
                 System.out.println("Enter the wastage of " + ingredient + " in KG:");
@@ -24,12 +35,14 @@ public class AddIngrWasteCommand extends Command {
                 double ingredientWeightValue = Double.parseDouble(ingredientWeight);
                 Ingredient currentIngredient = IngredientList.ingredientList.get(ingredientIndex);
                 currentIngredient.addWaste(ingredientWeightValue);
+                logger.log(Level.INFO, "Successfully recorded Ingredient waste");
             } catch (NumberFormatException e) {
                 System.out.println(ui.getInvalidParamMsg());
                 System.out.println(ui.getLineDivider());
             }
         }
         System.out.println(ui.getLineDivider());
+        logger.log(Level.INFO, "End of process");
     }
 
 }
