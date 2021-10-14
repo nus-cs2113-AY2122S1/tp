@@ -1,6 +1,6 @@
 package happybit.storage;
 
-import happybit.exception.HaBitLoadException;
+import happybit.exception.HaBitStorageException;
 import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.goal.GoalType;
@@ -8,9 +8,11 @@ import happybit.habit.Habit;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -45,8 +47,7 @@ public class Storage {
         this.fileDir = fileDir;
     }
 
-    // temp method until the importData method is fixed
-    public GoalList load() throws HaBitLoadException {
+    public GoalList load() throws HaBitStorageException {
         GoalList goalList = new GoalList();
         Scanner s;
         String line;
@@ -67,7 +68,7 @@ public class Storage {
                     try {
                         goalList.addGoal(goalParser(lineData));
                     } catch (ParseException e) {
-                        throw new HaBitLoadException(e.toString());
+                        throw new HaBitStorageException(e.toString());
                     }
                     break;
                 case HABIT_TYPE:
@@ -77,11 +78,11 @@ public class Storage {
                     goalList.addHabitFromGoal(habit, goalIndex);
                     break;
                 default:
-                    throw new HaBitLoadException("error while loading");
+                    throw new HaBitStorageException("error while loading");
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new HaBitLoadException(e.toString());
+            throw new HaBitStorageException(e.toString());
         }
 
         return goalList;
@@ -161,5 +162,56 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Error occurred while creating file: " + e);
         }
+    }
+
+    protected void export(ArrayList<Goal> goalList) throws HaBitStorageException {
+        try {
+            clearFile();
+            writeToFile(goalList);
+        } catch (IOException e) {
+            throw new HaBitStorageException(e.toString());
+        }
+    }
+
+    protected void clearFile() throws IOException {
+        FileWriter fileWriter = new FileWriter(this.filePath);
+
+        fileWriter.write("");
+        fileWriter.close();
+    }
+
+    protected void writeToFile(ArrayList<Goal> goalList) throws IOException {
+        FileWriter fileWriter = new FileWriter(this.filePath, true);
+
+        for (Goal goal : goalList) {
+            int index = goalList.indexOf(goal);
+            ArrayList<Habit> habits = goal.getHabitList();
+            String goalToWrite = index
+                    + DELIMITER
+                    + GOAL_TYPE
+                    + DELIMITER
+                    + goal.getGoalTypeCharacter()
+                    + DELIMITER
+                    + goal.getDescription()
+                    + DELIMITER
+                    + goal.getStartDate()
+                    + DELIMITER
+                    + goal.getEndDate();
+            fileWriter.write(goalToWrite);
+
+            for (Habit habit : habits) {
+                int doneValue = habit.getDone() ? 1 : 0;
+                String habitToWrite = index
+                        + DELIMITER
+                        + HABIT_TYPE
+                        + DELIMITER
+                        + doneValue
+                        + DELIMITER
+                        + habit.getHabitName();
+                fileWriter.write(habitToWrite);
+            }
+        }
+
+        fileWriter.close();
     }
 }
