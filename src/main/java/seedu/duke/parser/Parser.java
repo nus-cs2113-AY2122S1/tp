@@ -19,6 +19,30 @@ public abstract class Parser {
 
     protected String userInputString;
 
+    public static String getCommandType(String userInputString) {
+        String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
+        String commandType = commandTypeAndParams[0].trim().toLowerCase(Locale.ROOT);
+        return commandType;
+    }
+
+    /**
+     * Returns the parameters for commands from the user.
+     * @param userInputString user input
+     * @return parameters to execute commands with
+     */
+    protected static String getCommandArguments(String userInputString) {
+        String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
+        String commandArgs = commandTypeAndParams[1].trim();
+        return commandArgs;
+    }
+
+    /**
+     * Parses and processes the user input and returns a Command object with parameters and attributes according to the
+     * user input.
+     * @return User-specified command
+     */
+    public abstract Command parseInput();
+
     /**
      * Gets arguments required for an exercise, such as workoutIndex, exerciseName, sets and reps.
      *
@@ -139,28 +163,4 @@ public abstract class Parser {
             throw new GetJackDException("Error. Invalid workout or exercise index.");
         }
     }
-
-    public static String getCommandType(String userInputString) {
-        String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
-        String commandType = commandTypeAndParams[0].trim().toLowerCase(Locale.ROOT);
-        return commandType;
-    }
-
-    /**
-     * Returns the parameters for commands from the user.
-     * @param userInputString user input
-     * @return parameters to execute commands with
-     */
-    protected static String getCommandArguments(String userInputString) {
-        String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
-        String commandArgs = commandTypeAndParams[1].trim();
-        return commandArgs;
-    }
-
-    /**
-     * Parses and processes the user input and returns a Command object with parameters and attributes according to the
-     * user input.
-     * @return User-specified command
-     */
-    public abstract Command parseInput();
 }
