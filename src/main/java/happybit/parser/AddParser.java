@@ -8,7 +8,6 @@ import happybit.goal.Goal;
 import happybit.goal.GoalType;
 import happybit.habit.Habit;
 
-import java.nio.file.LinkPermission;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -173,6 +172,7 @@ public class AddParser {
         checkDateNotBeforeToday(dates[0]);
         checkDateNotBeforeToday(dates[1]);
         checkStartDateBeforeOrEqualEndDate(dates[0], dates[1]);
+        assert dates[0].compareTo(dates[1]) < 0;
         return dates;
     }
 
