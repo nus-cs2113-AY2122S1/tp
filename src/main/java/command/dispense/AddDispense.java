@@ -52,52 +52,50 @@ public class AddDispense extends Command {
                 filteredMedicines.add((Stock) medicine);
             }
         }
+
         filteredMedicines.sort(new comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
 
         for (Medicine medicine : filteredMedicines) {
+            Stock existingStock = (Stock) medicine;
+            String existingName = existingStock.getMedicineName().toUpperCase();
+            int existingQuantity = existingStock.getQuantity();
+            int existingId = existingStock.getStockID();
+            Date existingExpiry = existingStock.getExpiry();
+            boolean medicationExist = existingName.equals(medicationName.toUpperCase());
 
-            if (medicine instanceof Stock) {
-                Stock existingStock = (Stock) medicine;
-                String existingName = existingStock.getMedicineName().toUpperCase();
-                int existingQuantity = existingStock.getQuantity();
-                int existingId = existingStock.getStockID();;
-                Date existingExpiry = existingStock.getExpiry();
-                boolean medicationExist = existingName.equals(medicationName.toUpperCase());
+            if (medicationExist && (dispenseQuantity > totalStock)) {
+                ui.print("Unable to Dispense! Dispense quantity is more than stock available!");
+                ui.print("Dispense quantity: " + dispenseQuantity + " Stock available: " + totalStock);
+                return;
+            }
 
-                if (medicationExist && (dispenseQuantity > totalStock)) {
-                    ui.print("Unable to Dispense! Dispense quantity is more than stock available!");
-                    ui.print("Dispense quantity: " + dispenseQuantity + " Stock available: " + totalStock);
+            if (medicationExist) {
+
+                if (existingQuantity >= quantityLeftToDispense) {
+                    existingStock.setQuantity(existingQuantity - quantityLeftToDispense);
+                    medicines.add(new Dispense(medicationName, dispenseQuantity, customerId, dispenseDate,
+                            staffName, existingId));
+                    ui.print("Dispensed:" + medicationName + " Quantity:" + quantityLeftToDispense + " Expiry "
+                            + "date:" + existingExpiry);
                     return;
                 }
 
-                if (medicationExist) {
-
-                    if (existingQuantity >= quantityLeftToDispense) {
-                        existingStock.setQuantity(existingQuantity - quantityLeftToDispense);
-                        medicines.add(new Dispense(medicationName, dispenseQuantity, customerId, dispenseDate,
-                                staffName, existingId));
-                        ui.print("Dispensed:" + medicationName + " Quantity:" + quantityLeftToDispense + " Expiry "
-                                + "date:" + existingExpiry);
-                        return;
-                    }
-
-                    if (totalColumnLeft > 1 && existingQuantity < dispenseQuantity) {
-                        quantityLeftToDispense = quantityLeftToDispense - existingQuantity;
-                        existingStock.setQuantity(0);
-                        ui.print("Dispensed:" + medicationName + " Quantity:" + existingQuantity + " Expiry "
-                                + "date:" + existingExpiry);
-                    }
-
-                    totalColumnLeft--;
+                if (totalColumnLeft > 1 && existingQuantity < dispenseQuantity) {
+                    quantityLeftToDispense = quantityLeftToDispense - existingQuantity;
+                    existingStock.setQuantity(0);
+                    ui.print("Dispensed:" + medicationName + " Quantity:" + existingQuantity + " Expiry "
+                            + "date:" + existingExpiry);
                 }
 
+                totalColumnLeft--;
             }
 
         }
 
         ui.print("Medicine not available!");
-
     }
 
 }
+
+
 
