@@ -131,8 +131,7 @@ public class Storage {
             assert !isDone : "done should be true if value of done is 1";
         }
 
-        return new Habit(lineData[HABIT_NAME_INDEX],
-                isDone);
+        return new Habit(lineData[HABIT_NAME_INDEX]);
     }
 
     protected void createFile(String filePath, String fileDir) {
