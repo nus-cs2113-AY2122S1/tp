@@ -13,7 +13,7 @@ class ClearCommandTest {
      * Asserts that client list is empty after clear command object is created.
      */
     @Test
-    void clearCommand_populatedClientList_correctlyCleared() {
+    void clearCommand_populatedClientList_correctlyCleared() throws TourPlannerException {
         ClientList testClientList = new ClientList();
         Ui testUi = new Ui();
         Client testClient1 = new Client(new String[]{"botuan", "1234", "SQ123", "Intercontinental", "AUS_A"});

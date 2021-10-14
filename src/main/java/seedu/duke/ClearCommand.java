@@ -4,6 +4,7 @@ package seedu.duke;
  * Clears the entire client list.
  */
 public class ClearCommand extends Command {
+  
     /**
      * Executes the clearing of all clients in the client list.
      *
@@ -11,8 +12,12 @@ public class ClearCommand extends Command {
      * @param ui         user interface of TourPlanner
      */
     public void execute(ClientList clientList, Ui ui) {
-        clientList.clearAllClients();
-        assert clientList.getClientCount() == 0;
-        ui.showClear();
+        try {
+            clientList.clearAllClients();
+            assert clientList.getClientCount() == 0;
+            ui.showClear();
+        } catch (TourPlannerException e) {
+            ui.show(e.getMessage());
+        }
     }
 }
