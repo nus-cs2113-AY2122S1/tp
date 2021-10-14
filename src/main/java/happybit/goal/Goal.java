@@ -45,7 +45,7 @@ public class Goal {
      * @return String containing goal name and type.
      */
     public String getDescription() {
-        return getGoalTypeCharacter() + " " + goalName + "\n";
+        return getGoalTypeCharacter() + " " + goalName;
     }
 
     /**

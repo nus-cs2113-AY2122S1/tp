@@ -44,30 +44,49 @@ public class Ui {
         printDashes();
     }
 
-    public void printGoalList(ArrayList<Goal> goals) {
+    public void printGoalList(ArrayList<Goal> goals, int numOfGoals) {
         printDashes();
+        assert (numOfGoals > 0) : "List cannot be empty here";
+        System.out.println("There are " + numOfGoals + " goal(s) in your list:");
         for (Goal goal : goals) {
             System.out.println(goal.getDescription());
         }
         printDashes();
     }
 
-    public void printHabitList(ArrayList<Habit> habits) {
+    public void printHabitList(String goalDescription, ArrayList<Habit> habits, int numOfHabits) {
         printDashes();
+        assert (numOfHabits > 0) : "List cannot be empty here";
+        System.out.println("Here are your " + numOfHabits + " habit(s) under the goal \""
+                + goalDescription + "\".");
+        String prefix = "[ ]";
         for (Habit habit : habits) {
-            System.out.println(habit.getHabitName());
+            if (habit.getDone()) {
+                prefix = "[X]";
+            }
+            System.out.println(prefix + " " + habit.getHabitName());
         }
         printDashes();
     }
 
-    public static void printRemovedGoal(String goalDescription) {
+    public void printRemovedGoal(String goalDescription) {
         printDashes();
-        System.out.println("Your goal: " + goalDescription + "has been removed!");
+        System.out.println("Your goal: " + goalDescription + "has been removed.");
         printDashes();
     }
 
-    private static void printDashes() {
-        System.out.println(DASHES);
+    public void printRemovedHabit(String goalDescription, String habitName) {
+        printDashes();
+        System.out.println("Your habit of \"" + habitName + "\" under the goal \""
+                + goalDescription + "\" has been removed.");
+        printDashes();
+    }
+
+    public void printDoneHabit(String goalDescription, String habitName) {
+        printDashes();
+        System.out.println("Your habit of \"" + habitName + "\" under the goal \""
+                + goalDescription + "\" has been set as done.");
+        printDashes();
     }
 
     public void showWelcome() {
@@ -89,4 +108,9 @@ public class Ui {
                 + " — Will Durant");
         printDashes();
     }
+
+    private void printDashes() {
+        System.out.println(DASHES);
+    }
+
 }
