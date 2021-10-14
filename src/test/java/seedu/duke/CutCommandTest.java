@@ -6,6 +6,9 @@ import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Junit testing for CutCommand.
+ */
 class CutCommandTest {
 
     ClientList clientList = new ClientList();
@@ -14,6 +17,9 @@ class CutCommandTest {
     Client testClient = new Client(new String[]{"botuan", "1234", "hgus", "hotel-one", "aus-a"});
 
 
+    /**
+     * Asserts that if cut index is valid, a client in the list would be deleted.
+     */
     @Test
     void cutCommand_validData_correctlyDeleted() {
         Command add = new AddCommand(testClient);
@@ -25,6 +31,9 @@ class CutCommandTest {
         assertEquals(0, length);
     }
 
+    /**
+     * Asserts that if cut index is invalid, a client in the list would not be deleted.
+     */
     @Test
     void cutCommand_invalidData_correctlyDeleted() {
         Command add = new AddCommand(testClient);

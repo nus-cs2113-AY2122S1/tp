@@ -24,7 +24,7 @@ class AddCommandTest {
         Ui testUi = new Ui();
         Client testClient = new Client(new String[]{"botuan", "1234", "SQ123", "Intercontinental", "AUS_A"});
         Command addClient = new AddCommand(testClient);
-        addClient.execute(testClientList,testUi);
+        addClient.execute(testClientList, testUi);
 
         Client retrieveClient = testClientList.getClient(0);
         assertEquals("botuan", retrieveClient.getName());
