@@ -2,7 +2,7 @@ package happybit;
 
 import happybit.command.Command;
 import happybit.exception.HaBitCommandException;
-import happybit.exception.HaBitLoadException;
+import happybit.exception.HaBitStorageException;
 import happybit.exception.HaBitParserException;
 import happybit.goal.GoalList;
 import happybit.parser.Parser;
@@ -53,7 +53,7 @@ public class HappyBit {
     private void loadData() {
         try {
             goalList = storage.load();
-        } catch (HaBitLoadException e) {
+        } catch (HaBitStorageException e) {
             //ui.showError(e.getMessage());
         }
     }
