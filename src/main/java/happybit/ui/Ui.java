@@ -69,6 +69,12 @@ public class Ui {
         printDashes();
     }
 
+    public void printAddedGoal(String goalDescription) {
+        printDashes();
+        System.out.println("Your goal: " + goalDescription + " has been added.");
+        printDashes();
+    }
+
     public void printRemovedGoal(String goalDescription) {
         printDashes();
         System.out.println("Your goal: " + goalDescription + "has been removed.");
