@@ -5,8 +5,10 @@ import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.exercise.DisplayExercisesCommand;
 import seedu.duke.exception.GetJackDException;
 
-import java.util.Locale;
 
+/**
+ * Parses and processes input for the display command.
+ */
 public class DisplayExerciseParser extends Parser {
 
     public DisplayExerciseParser(String userInputString) {

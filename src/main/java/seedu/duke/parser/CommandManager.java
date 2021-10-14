@@ -12,13 +12,15 @@ import seedu.duke.command.workout.CreateWorkoutCommand;
 import seedu.duke.command.workout.DeleteWorkoutCommand;
 import seedu.duke.command.workout.ListWorkoutsCommand;
 
-
+/**
+ * Generates Commands from user input.
+ */
 public class CommandManager {
 
     /**
      * Converts raw user input string to a command.
      * @param userInputString raw user input
-     * @return command
+     * @return command to execute
      */
     public Command generateCommand(String userInputString) {
         Parser parser;

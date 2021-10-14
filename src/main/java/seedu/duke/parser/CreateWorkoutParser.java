@@ -4,7 +4,9 @@ import seedu.duke.command.Command;
 import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.workout.CreateWorkoutCommand;
 
-
+/**
+ * Parses and processes input for the create command.
+ */
 public class CreateWorkoutParser extends Parser {
 
     public CreateWorkoutParser(String userInputString) {

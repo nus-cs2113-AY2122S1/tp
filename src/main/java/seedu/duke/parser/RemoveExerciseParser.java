@@ -5,6 +5,9 @@ import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.exercise.RemoveExerciseCommand;
 import seedu.duke.exception.GetJackDException;
 
+/**
+ * Parses and processes input for the remove command.
+ */
 public class RemoveExerciseParser extends Parser {
 
     public RemoveExerciseParser(String userInputString) {

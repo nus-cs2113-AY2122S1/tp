@@ -5,6 +5,9 @@ import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.exercise.AddExerciseCommand;
 import seedu.duke.exception.GetJackDException;
 
+/**
+ * Parses and processes input for the add command.
+ */
 public class AddExerciseParser extends Parser {
 
     public AddExerciseParser(String userInputString) {

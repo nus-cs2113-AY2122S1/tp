@@ -145,8 +145,9 @@ public abstract class Parser {
         String commandType = commandTypeAndParams[0].trim().toLowerCase(Locale.ROOT);
         return commandType;
     }
+
     /**
-     * Returns the parameters for commands from the user
+     * Returns the parameters for commands from the user.
      * @param userInputString user input
      * @return parameters to execute commands with
      */
@@ -156,5 +157,10 @@ public abstract class Parser {
         return commandArgs;
     }
 
+    /**
+     * Parses and processes the user input and returns a Command object with parameters and attributes according to the
+     * user input.
+     * @return User-specified command
+     */
     public abstract Command parseInput();
 }

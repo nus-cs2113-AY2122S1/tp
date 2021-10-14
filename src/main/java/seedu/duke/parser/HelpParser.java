@@ -11,6 +11,10 @@ import seedu.duke.command.workout.CreateWorkoutCommand;
 import seedu.duke.command.workout.DeleteWorkoutCommand;
 import seedu.duke.command.workout.ListWorkoutsCommand;
 
+
+/**
+ * Parses and processes input for the help command.
+ */
 public class HelpParser extends Parser {
 
     public HelpParser(String userInputString) {

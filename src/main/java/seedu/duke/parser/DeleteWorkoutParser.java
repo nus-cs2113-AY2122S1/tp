@@ -5,8 +5,10 @@ import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.workout.DeleteWorkoutCommand;
 import seedu.duke.exception.GetJackDException;
 
-import java.util.Locale;
 
+/**
+ * Parses and processes input for the delete command.
+ */
 public class DeleteWorkoutParser extends Parser {
 
     public DeleteWorkoutParser(String userInputString) {

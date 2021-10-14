@@ -5,6 +5,9 @@ import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.exercise.MarkExerciseAsDoneCommand;
 import seedu.duke.exception.GetJackDException;
 
+/**
+ * Parses and processes input for the done command.
+ */
 public class MarkExerciseAsDoneParser extends Parser {
 
     public MarkExerciseAsDoneParser(String userInputString) {
