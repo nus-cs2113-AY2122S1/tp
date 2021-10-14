@@ -48,7 +48,7 @@ public class ClientList {
         return clients.get(index);
     }
 
-     /**
+    /**
      * Main method for clearing the client list.
      */
     public void clearAllClients() throws TourPlannerException {
