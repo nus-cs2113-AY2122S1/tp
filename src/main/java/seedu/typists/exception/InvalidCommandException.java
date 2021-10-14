@@ -1,4 +1,4 @@
 package seedu.typists.exception;
 
-public class InvalidCommandException {
+public class InvalidCommandException extends Exception{
 }
