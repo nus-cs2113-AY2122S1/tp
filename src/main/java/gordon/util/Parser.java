@@ -38,6 +38,7 @@ public class Parser {
                 if (splitContent.length < 4) {
                     throw new GordonException(GordonException.COMMAND_INVALID);
                 }
+                assert splitContent.length == 4 : "Your add input should have exactly 3 '/' separating them.";
                 Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
                 parseIngredients(splitContent[INGREDIENTS_INDEX], r);
                 parseSteps(splitContent[STEPS_INDEX], r);
