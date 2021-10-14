@@ -37,6 +37,7 @@ public class Client {
 
     @Override
     public String toString() {
+
         return "Client's name: " + name + System.lineSeparator()
                 + "Client's contactNum: " + contactNum + System.lineSeparator()
                 + "Client's flight number: " + flight + System.lineSeparator()
