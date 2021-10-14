@@ -5,7 +5,20 @@
 The Smart Inventory Tracking and Updating System (SITUS) is a **desktop app for tracking
 ingredient inventory.** 
 
-_TO INSERT HYPERLINKS HERE_
+## Contents
+
+* [Quick Start](#quick-start)
+* [Features](#features)
+    * [Viewing Help](#tba-viewing-help)
+    * [Adding Ingredients](#adding-an-ingredient)
+    * [Listing Ingredients](#listing-all-ingredients)
+    * [Updating Ingredients](#updating-an-ingredient)
+    * [Delete Ingredients](#stop-tracking-an-ingredient)
+    * [Setting Thresholds](#tba-setting-thresholds)
+    * [Show Expiring Ingredients](#tba-show-expiring-ingredients)
+    * [Exit Program](#exiting-the-program)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 ## Quick Start
 
@@ -14,11 +27,13 @@ _TO INSERT HYPERLINKS HERE_
 
 ## Features 
 
-### [TBA] Viewing help: `help`
+### [TBA] Viewing help
 
 Shows a list of available commands and their syntax.
 
-### Adding an ingredient: `add`
+Format: `help`
+
+### Adding an ingredient
 
 Adds an ingredient to the ingredient list. 
 
@@ -28,13 +43,13 @@ Examples:
 * `add n/carrot a/200 u/sticks e/22/10/2021`
 * `add n/potato a/500 u/g e/25/10/2021`
 
-### Listing all ingredients: `list`
+### Listing all ingredients
 
 Displays a list of all ingredients in the ingredient list
 
 Format: `list`
 
-### Updating an ingredient: `update`
+### Updating an ingredient
 
 Updates the amount, unit and expiry of an ingredient in the ingredient list
 
@@ -44,7 +59,7 @@ Examples:
 * `update n/carrot a/100 u/sticks e/21/10/2021`
 * `update n/potato a/0.6 u/kg e/27/10/2021`
 
-### Stop tracking an ingredient :`delete`
+### Stop tracking an ingredient
 
 Deletes an ingredient from the ingredient list based on its index in the list.
 
@@ -52,15 +67,17 @@ Format: `delete INDEX`
 
 Example: `delete 1`
 
-### [TBA] Setting thresholds: `set`
+### [TBA] Setting thresholds
 
 _TO BE ADDED_
 
-### [TBA] Show expiring ingredients: `expiry`
+### [TBA] Show expiring ingredients
 
 Lists the ingredients expiring before a given date.
 
-### Exiting the program: `exit`
+Format: `expiry` (TBA)
+
+### Exiting the program
 
 Exits the program
 
