@@ -10,8 +10,7 @@ import seedu.duke.utility.Utility;
 
 public class TaskParser {
 
-    public static PriorityEnum getPriorityEnum(String priority)
-            throws InvalidPriorityException {
+    public static PriorityEnum getPriorityEnum(String priority) throws InvalidPriorityException {
         if (priority == null) {
             return null;
         }
@@ -22,8 +21,7 @@ public class TaskParser {
         }
     }
 
-    public static RecurrenceEnum getRecurrenceEnum(String recurrence)
-            throws InvalidRecurrenceException {
+    public static RecurrenceEnum getRecurrenceEnum(String recurrence) throws InvalidRecurrenceException {
         if (recurrence == null) {
             return null;
         }

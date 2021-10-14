@@ -8,8 +8,8 @@ import java.util.Map;
 
 public class ListCommand extends Command {
 
-    public ListCommand(TaskManager taskManager, HashMap<String, String> commandArguments) {
-        super(taskManager, commandArguments);
+    public ListCommand(HashMap<String, String> commandArguments) {
+        super(commandArguments);
     }
 
     @Override
@@ -17,11 +17,11 @@ public class ListCommand extends Command {
         String message = "";
 
         try {
-            message = taskManager.listTasklist();
+            message = TaskManager.listTasklist();
         } catch (EmptyTasklistException e) {
             message = e.toString();
         }
 
-        return new CommandResult(taskManager, message, false, false);
+        return new CommandResult(message, false, false);
     }
 }

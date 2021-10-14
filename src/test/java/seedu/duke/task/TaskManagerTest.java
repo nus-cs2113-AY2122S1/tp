@@ -9,14 +9,10 @@ import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 class TaskManagerTest {
 
-    TaskManager taskManager = new TaskManager();
-    ArrayList<Task> tasklist = new ArrayList<Task>();
     private static final String VALID_DATE1 = "14-02-1998 02:00:00";
     private static final String VALID_DATE2 = "14-02-1998 03:30:00";
 
@@ -31,14 +27,12 @@ class TaskManagerTest {
         Task newDeadline = new Deadline("return book", startDate, PriorityEnum.MEDIUM, RecurrenceEnum.WEEKLY);
         Task newEvent = new Event("project meeting", startDate, endDate, PriorityEnum.HIGH, RecurrenceEnum.MONTHLY);
 
-        tasklist.add(newToDo);
-        tasklist.add(newDeadline);
-        tasklist.add(newEvent);
-
-        taskManager.setTasklist(tasklist);
+        TaskManager.addTask(newToDo);
+        TaskManager.addTask(newDeadline);
+        TaskManager.addTask(newEvent);
 
         try {
-            System.out.println(taskManager.listTasklist());
+            System.out.println(TaskManager.listTasklist());
         } catch (EmptyTasklistException e) {
             System.out.println(e);
         }
