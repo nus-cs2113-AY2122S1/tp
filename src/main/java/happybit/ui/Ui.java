@@ -77,7 +77,9 @@ public class Ui {
     }
 
     public void showError(String message) {
+        printDashes();
         System.out.println(message);
+        printDashes();
     }
 
     public void showGoodbye() {
