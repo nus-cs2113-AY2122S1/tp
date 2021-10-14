@@ -7,10 +7,10 @@ import java.util.logging.Logger;
 
 public class HaBitLogger {
 
-    private final static Logger logger = Logger.getLogger( HaBitLogger.class.getName() );
+    private final Logger logger = Logger.getLogger(HaBitLogger.class.getName());
 
     // Testing logger methods for now, will implement in v2.0
-    public static void main(String[] args) {
+    public void main(String[] args) {
 
         LogManager.getLogManager().reset();
         logger.setLevel(Level.ALL);
