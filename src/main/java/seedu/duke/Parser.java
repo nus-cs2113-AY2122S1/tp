@@ -4,6 +4,7 @@ import seedu.duke.command.UpdateCommand;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.HelpCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 
@@ -14,6 +15,7 @@ public class Parser {
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_UPDATE = "update";
+    private static final String COMMAND_HELP = "help";
     private static final String COMMAND_EXIT = "exit";
 
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
@@ -23,10 +25,11 @@ public class Parser {
     private static final String INSUFFICIENT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
 
     private static final String SPACE_SEPARATOR = " ";
-    private static final String INGREDIENT_NAME_SEPARATOR = "n/";
-    private static final String INGREDIENT_AMOUNT_SEPARATOR = "a/";
-    private static final String INGREDIENT_UNITS_SEPARATOR = "u/";
-    private static final String INGREDIENT_EXPIRY_SEPARATOR = "e/";
+    private static final String EMPTY_STRING = "";
+    private static final String DELIMITER = "n/|a/|u/|e/";
+
+    private static final int ADD_COMMAND_ARGUMENT_COUNT = 5;
+    private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 5;
 
 
     static boolean isExit(String command) {
@@ -53,11 +56,22 @@ public class Parser {
             return parseDeleteCommand(command);
         case COMMAND_UPDATE:
             return parseUpdateCommand(command);
+        case COMMAND_HELP:
+            return parseHelpCommand();
         case COMMAND_EXIT:
             return "";
         default:
             return INVALID_COMMAND_MESSAGE;
         }
+    }
+
+    /**
+     * Calls and executes help command.
+     *
+     * @return a message summarising all possible commands recognised by SITUS
+     */
+    private static String parseHelpCommand() {
+        return new HelpCommand().run();
     }
 
     /**
@@ -67,23 +81,38 @@ public class Parser {
      * @return Ingredient updated message
      */
     private static String parseUpdateCommand(String command) throws DukeException {
-        String resultMsg = "";
-        int i;
-        String delimiter = "n/|a/|u/|e/";
-        String[] details = command.split(delimiter);
+        String[] details = command.split(DELIMITER);
 
-        String ingredientName = details[1].trim();
-        double ingredientAmount = Double.parseDouble(details[2].trim());
-        String ingredientUnits = details[3].trim();
-        String ingredientExpiry = details[4].trim();
-        Ingredient updatedIngredient =
-                new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
-        resultMsg = new UpdateCommand(updatedIngredient).run();
-
-        if (resultMsg == "") {
-            resultMsg = NOT_FOUND_MESSAGE;
+        if (details.length != UPDATE_COMMAND_ARGUMENT_COUNT) {
+            throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
         }
-        return resultMsg;
+
+        assert (details.length == UPDATE_COMMAND_ARGUMENT_COUNT);
+
+        for (int i = 1; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
+            details[i] = details[i].trim();
+            if (details[i].equals(EMPTY_STRING)) {
+                throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+            }
+        }
+
+        try {
+            String ingredientName = details[1];
+            double ingredientAmount = Double.parseDouble(details[2]);
+            String ingredientUnits = details[3];
+            String ingredientExpiry = details[4];
+
+            Ingredient updatedIngredient =
+                    new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
+            String resultMsg = new UpdateCommand(updatedIngredient).run();
+
+            if (resultMsg.equals(EMPTY_STRING)) {
+                resultMsg = NOT_FOUND_MESSAGE;
+            }
+            return resultMsg;
+        } catch (NumberFormatException e) {
+            throw new DukeException(NUMBER_FORMAT_MESSAGE);
+        }
     }
 
     /**
@@ -94,26 +123,33 @@ public class Parser {
      * @return Ingredient added message
      */
     private static String parseAddCommand(String command) throws DukeException {
-        String delimiter = "n/|a/|u/|e/";
-        String[] details = command.split(delimiter);
-        if (details.length != 5) {
+        String[] details = command.split(DELIMITER);
+
+        if (details.length != ADD_COMMAND_ARGUMENT_COUNT) {
             throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
         }
 
-        assert (details.length == 5);
+        assert (details.length == ADD_COMMAND_ARGUMENT_COUNT);
 
-        String ingredientName = details[1].trim();
-        double ingredientAmount;
+        for (int i = 1; i < ADD_COMMAND_ARGUMENT_COUNT; i++) {
+            details[i] = details[i].trim();
+            if (details[i].equals(EMPTY_STRING)) {
+                throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+            }
+        }
+
         try {
-            ingredientAmount = Double.parseDouble(details[2]);
+            String ingredientName = details[1];
+            double ingredientAmount = Double.parseDouble(details[2]);
+            String ingredientUnit = details[3];
+            String ingredientExpiry = details[4];
+
+            Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,
+                    ingredientUnit, ingredientExpiry);
+            return new AddCommand(newIngredient).run();
         } catch (NumberFormatException e) {
             throw new DukeException(NUMBER_FORMAT_MESSAGE);
         }
-        String ingredientUnit = details[3].trim();
-        String ingredientExpiry = details[4].trim();
-
-        Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount, ingredientUnit, ingredientExpiry);
-        return new AddCommand(newIngredient).run();
     }
 
     /**
@@ -123,8 +159,7 @@ public class Parser {
      * @throws DukeException if trying to access non-existing ingredients
      */
     private static String parseListCommand() throws DukeException {
-        String resultMsg = new ListCommand().run();
-        return resultMsg;
+        return new ListCommand().run();
     }
 
     /**
