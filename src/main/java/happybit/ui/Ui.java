@@ -75,6 +75,12 @@ public class Ui {
         printDashes();
     }
 
+    public void printAddedHabit(String habitDescription, String goalDescription) {
+        printDashes();
+        System.out.println("Your habit: " + habitDescription + " has been added to your goal: " + goalDescription);
+        printDashes();
+    }
+
     public void printRemovedGoal(String goalDescription) {
         printDashes();
         System.out.println("Your goal: " + goalDescription + "has been removed.");
