@@ -20,12 +20,15 @@ public class Storage {
         ReadTextFile newReader = new ReadTextFile("./data/BudgetList1.txt");
         ArrayList<String> commandStorage = newReader.readTextFileToString();
         Parser parser = new Parser();
-        for (int i = 0; i < commandStorage.size(); i += 1) {
+        int i;
+        for (i = 0; i < commandStorage.size(); i += 1) {
             String userInput = commandStorage.get(i);
             Command command = parser.parseCommand(userInput);
             command.setRecordList(recordList);
             command.execute(true);
         }
+
+        assert i == commandStorage.size();
     }
 
     public static void makeStorageDirectory() {

@@ -3,13 +3,14 @@ package seedu.duke.parser;
 import seedu.duke.commands.AddBudgetCommand;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.AddExpenditureCommand;
-import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteBudgetCommand;
-import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.DeleteExpenditureCommand;
+import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
+import seedu.duke.commands.Command;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
@@ -49,6 +50,9 @@ public class Parser {
             break;
         case ListRecordsCommand.COMMAND_WORD:
             command = new ListRecordsCommand();
+            break;
+        case HelpCommand.COMMAND_WORD:
+            command = new HelpCommand();
             break;
         case ExitCommand.COMMAND_WORD:
             command = new ExitCommand();
