@@ -12,6 +12,7 @@ public class Parser {
     private static final String FLIGHT_PREFIX = "/f";
     private static final String ACCOMMS_PREFIX = "/a";
     private static final String TOUR_PREFIX = "/t";
+    public static final String ERROR_INVALID_INPUT = "Invalid input! Please enter a valid command.";
     public static final String ERROR_EXTRA_INPUT = "Extra input! Refrain from doing so.";
     public static final String ERROR_INVALID_CUT_INDEX = "Invalid cut index!";
     public static final String ERROR_DUPLICATE_PREFIXES = "Duplicate prefixes! Please try again.";
@@ -67,7 +68,7 @@ public class Parser {
                 throw new TourPlannerException(ERROR_INVALID_CUT_INDEX);
             }
         default:
-            throw new TourPlannerException(ERROR_EXTRA_INPUT);
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
 
