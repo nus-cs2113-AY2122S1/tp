@@ -1,17 +1,23 @@
 package seedu.duke.parser;
 
+import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
+
+import java.util.Locale;
 
 import static seedu.duke.logger.LoggerUtil.LOGGER;
 
 /**
  * To make sense of user commands by extracting keywords and descriptions.
  */
-public class Parser {
+public abstract class Parser {
     public static String WORKOUT_KEYWORD = "/w ";
     public static String EXERCISE_KEYWORD = "/e ";
     public static String SETS_KEYWORD = "/s ";
     public static String REPS_KEYWORD = "/r ";
+    static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
+
+    protected String userInputString;
 
     /**
      * Gets arguments required for an exercise, such as workoutIndex, exerciseName, sets and reps.
@@ -133,4 +139,22 @@ public class Parser {
             throw new GetJackDException("Error. Invalid workout or exercise index.");
         }
     }
+
+    public static String getCommandType(String userInputString) {
+        String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
+        String commandType = commandTypeAndParams[0].trim().toLowerCase(Locale.ROOT);
+        return commandType;
+    }
+    /**
+     * Returns the parameters for commands from the user
+     * @param userInputString user input
+     * @return parameters to execute commands with
+     */
+    protected static String getCommandArguments(String userInputString) {
+        String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
+        String commandArgs = commandTypeAndParams[1].trim();
+        return commandArgs;
+    }
+
+    public abstract Command parseInput();
 }

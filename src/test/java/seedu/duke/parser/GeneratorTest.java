@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GeneratorTest {
-    private Generator generator;
+    private CommandManager generator;
 
     @BeforeEach
     public void setUp() {
-        generator = new Generator();
+        generator = new CommandManager();
     }
 
     @Test

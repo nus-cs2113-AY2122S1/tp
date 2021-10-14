@@ -5,9 +5,9 @@ import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.exercise.MarkExerciseAsDoneCommand;
 import seedu.duke.exception.GetJackDException;
 
-public class MarkExericseAsDoneParser extends Parser {
+public class MarkExerciseAsDoneParser extends Parser {
 
-    public MarkExericseAsDoneParser(String userInputString) {
+    public MarkExerciseAsDoneParser(String userInputString) {
         this.userInputString = userInputString;
     }
 
