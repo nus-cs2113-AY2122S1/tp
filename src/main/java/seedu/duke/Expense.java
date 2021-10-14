@@ -43,8 +43,6 @@ public class Expense {
     @Override
     public String toString() {
         return (this.getDescription()
-                + " at "
-                + this.getLocation()
                 + System.lineSeparator()
                 + "date: " + this.getDate()
                 + System.lineSeparator()

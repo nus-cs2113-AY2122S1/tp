@@ -1,6 +1,5 @@
 package seedu.duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +27,7 @@ public class Parser {
             return false;
         } else if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
             Logger logger = Storage.getLogger();
-            logger.log(Level.WARNING, "invalid trip index");
+            logger.log(Level.WARNING, "No trip created yet");
             Ui.printNoTripError();
             return true;
         } else if (inputCommand.equals("close")) {
@@ -230,6 +229,8 @@ public class Parser {
     private static ArrayList<Person> checkValidPersons(Trip currentTrip, String userInput) {
         String[] listOfPeople = userInput.split("/")[0].split(",");
         ArrayList<Person> validListOfPeople = new ArrayList<>();
+        Logger logger = Storage.getLogger();
+        logger.log(Level.INFO, "Checking if names are valid");
         for (String name : listOfPeople) {
             for (Person person : currentTrip.getListOfPersons()) {
                 if (name.trim().equalsIgnoreCase(person.getName())) {
