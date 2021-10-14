@@ -64,6 +64,11 @@ public class HappyBit {
     private void run() {
         ui.showWelcome();
         handleUserInput();
+        try {
+            storage.export(goalList.getGoalList());
+        } catch (HaBitStorageException e) {
+            ui.showError(e.getMessage());
+        }
         ui.showGoodbye();
     }
 

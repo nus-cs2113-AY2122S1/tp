@@ -18,7 +18,7 @@ public class AddHabitCommand extends AddCommand {
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-        goalList.addHabitFromGoal(habit, goalIndex, ui);
+        goalList.addHabitToGoal(habit, goalIndex, ui);
     }
 
 }
