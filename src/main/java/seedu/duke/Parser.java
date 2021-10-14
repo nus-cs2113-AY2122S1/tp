@@ -4,17 +4,21 @@ import seedu.duke.command.UpdateCommand;
 import seedu.duke.command.AddCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.DateCommand;
+import seedu.duke.command.HelpCommand;
+
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 
-import java.util.NoSuchElementException;
 
 public class Parser {
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_UPDATE = "update";
+    private static final String COMMAND_HELP = "help";
     private static final String COMMAND_EXIT = "exit";
+    private static final String COMMAND_DATE = "date";
 
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
@@ -54,11 +58,24 @@ public class Parser {
             return parseDeleteCommand(command);
         case COMMAND_UPDATE:
             return parseUpdateCommand(command);
+        case COMMAND_DATE:
+            return parseDateCommand(command);
+        case COMMAND_HELP:
+            return parseHelpCommand();
         case COMMAND_EXIT:
             return "";
         default:
             return INVALID_COMMAND_MESSAGE;
         }
+    }
+
+    /**
+     * Calls and executes help command.
+     *
+     * @return a message summarising all possible commands recognised by SITUS
+     */
+    private static String parseHelpCommand() {
+        return new HelpCommand().run();
     }
 
     /**
@@ -146,8 +163,7 @@ public class Parser {
      * @throws DukeException if trying to access non-existing ingredients
      */
     private static String parseListCommand() throws DukeException {
-        String resultMsg = new ListCommand().run();
-        return resultMsg;
+        return new ListCommand().run();
     }
 
     /**
@@ -173,5 +189,18 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException(NUMBER_FORMAT_MESSAGE);
         }
+    }
+
+    /**
+     * Parses and executes the date command.
+     *
+     * @param command The user's input string
+     * @return the result message
+     * @throws DukeException if the date format is incorrect
+     */
+    private static String parseDateCommand(String command) throws DukeException {
+        String detail = command.substring(COMMAND_DATE.length()).trim();
+
+        return new DateCommand(detail).run();
     }
 }
