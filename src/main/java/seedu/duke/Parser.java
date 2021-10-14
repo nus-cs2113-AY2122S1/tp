@@ -11,7 +11,7 @@ public class Parser {
     private static final String TOUR_PREFIX = "/t";
 
     /**
-     * Enum to show availability of prefix in string during add client command
+     * Enum to show availability of prefix in string during add client command.
      */
     private enum Prefix {
         HAS_CONTACT,
@@ -22,7 +22,7 @@ public class Parser {
     }
 
     /**
-     * Parses user's input into command to execute
+     * Parses user's input into command to execute.
      *
      * @param input full user's input string
      * @return the command parsed from user's input
@@ -54,7 +54,7 @@ public class Parser {
     }
 
     /**
-     * Separates command word and arguments
+     * Separates command word and arguments.
      *
      * @param input     full user's input string
      * @param separator separator between command and argument/params strings
@@ -66,7 +66,7 @@ public class Parser {
     }
 
     /**
-     * Parses arguments with respect to the add client command
+     * Parses arguments with respect to the add client command.
      *
      * @param params full user's argument string
      * @return the prepared command
@@ -80,7 +80,7 @@ public class Parser {
     }
 
     /**
-     * Extracts the indexes for prefixes and put into a map that sorts the list by the natural ordering of the keys
+     * Extracts the indexes for prefixes and put into a map that sorts the list by the natural ordering of the keys.
      *
      * @param argString full user's argument string
      * @return the treemap with prefix index as the key and the corresponding prefix as the value
@@ -113,7 +113,7 @@ public class Parser {
     }
 
     /**
-     * Extract values into an array in a sorted manner to prepare for execution of add
+     * Extract values into an array in a sorted manner to prepare for execution of add.
      *
      * @param prefixIndexes the treemap with prefix index as the key and the corresponding prefix as the value
      * @param argString     full user's argument string
@@ -149,7 +149,7 @@ public class Parser {
     }
 
     /**
-     * Extract value from a substring of the user's argument string, according to prefix
+     * Extract value from a substring of the user's argument string, according to prefix.
      *
      * @param argString  full user's argument string
      * @param prefix     prefix of value to be extracted
@@ -170,7 +170,7 @@ public class Parser {
     }
 
     /**
-     * Obtains array index that corresponds to the prefix given
+     * Obtains array index that corresponds to the prefix given.
      *
      * @param prefix prefix of value extracted
      * @return array index of values according to prefix
@@ -197,7 +197,7 @@ public class Parser {
     }
 
     /**
-     * Returns true if all prefixes are present in add command's argument string
+     * Returns true if all prefixes are present in add command's argument string.
      *
      * @param argString full user's argument string
      * @return true if all prefixes are present in add command's argument string
@@ -231,7 +231,7 @@ public class Parser {
     }
 
     /**
-     * Checks whether substring equals to prefixes
+     * Checks whether substring equals to prefixes.
      *
      * @param substring strings obtained from argument string after splitting by spaces
      * @return the enum Prefix that shows availability of prefix
@@ -251,7 +251,7 @@ public class Parser {
     }
 
     /**
-     * Parses arguments with respect to the cut client command
+     * Parses arguments with respect to the cut client command.
      *
      * @param params full user's argument/params string after splitting
      * @return the prepared command
@@ -262,7 +262,7 @@ public class Parser {
     }
 
     /**
-     * Parses string containing an integer value to int
+     * Parses string containing an integer value to int.
      *
      * @param params full user's argument/params string after splitting
      * @return the client index from argument string
