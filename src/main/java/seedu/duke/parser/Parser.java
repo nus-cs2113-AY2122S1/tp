@@ -12,7 +12,11 @@ import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 import seedu.duke.commands.Command;
 
-import static seedu.duke.common.Messages.*;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_AMOUNT;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_ADD_COMMAND;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
@@ -156,7 +160,9 @@ public class Parser {
             int index = Integer.parseInt(indexString);
             return new DeleteExpenditureCommand(index);
         } catch (NumberFormatException nfe) {
-            return new InvalidCommand(String.format(MESSAGE_INVALID_INDEX_OF_EXPENDITURE, DeleteExpenditureCommand.MESSAGE_USAGE));
+            return new InvalidCommand(
+                    String.format(MESSAGE_INVALID_INDEX_OF_EXPENDITURE, DeleteExpenditureCommand.MESSAGE_USAGE)
+            );
         }
     }
 

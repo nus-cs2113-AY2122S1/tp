@@ -101,7 +101,7 @@ public class TextUi {
     }
 
     /**
-     * Prints out the divider line
+     * Prints out the divider line.
      */
     public static void printDivider() {
         System.out.println(DIVIDER);
