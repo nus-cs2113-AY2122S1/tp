@@ -1,8 +1,10 @@
 package seedu.typists.game;
 
+import org.w3c.dom.Text;
 import seedu.typists.ui.TextUi;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,10 +12,16 @@ import java.util.TimerTask;
 import static seedu.typists.common.Messages.SAMPLE_TEXT;
 
 public class TimeModeGame extends Game {
-    private final TextUi uiBot;
+    ArrayList<String> displayLines;
+    ArrayList<String> inputLines;
+    boolean is_gameEnd;
+    TextUi uiBot;
 
     public TimeModeGame() {
         this.uiBot = new TextUi();
+        this.is_gameEnd = false;
+        displayLines = new ArrayList <>();
+        inputLines = new ArrayList <>();
     }
 
     /** Currently still a dummy */
@@ -21,44 +29,75 @@ public class TimeModeGame extends Game {
         return SAMPLE_TEXT;
     }
 
-    public void startGame(String targetWordSet, int timeLimitSeconds) {
-        uiBot.showTargetWordSet(targetWordSet);
-        /*
-        TimerTask game = new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("Timer ends");
+    public boolean readyToStartTimer () {
+        Scanner in = new Scanner(System.in);
+        String command = "";
+        while(!command.equals("yes")) {
+            System.out.println("Do you want to start now?");
+            command = in.nextLine();
+
+        }
+        return true;
+    }
+
+    public void startGame(String targetWordSet, int timeLimitSeconds, int wordsPerLine) {
+        Scanner in = new Scanner(System.in);
+        //refacter out this line later, pass in the arraylist to statGame
+        displayLines = uiBot.getDisplayWordLine(targetWordSet, wordsPerLine);
+
+        if (readyToStartTimer()) {
+            int i = 0;
+            long beginTime = System.currentTimeMillis();
+            //System.out.println("Timer starts now: " + beginTime);
+            boolean timeOver = false;
+            long currTime = 0;
+            inputLines = new ArrayList <>();
+            while (!timeOver) {
+                currTime = System.currentTimeMillis() - beginTime;
+                //10000millisecond = 10 second
+                if (currTime >= timeLimitSeconds * 1000L) {
+                    timeOver = true;
+                } else {
+                    System.out.println(displayLines.get(i));
+                    String userInput = in.nextLine();
+                    inputLines.add(userInput);
+                    i++;
+                }
             }
-        };
+            int displayTime = (int)currTime/1000;
+            System.out.println("Game Finished. Total time taken: " + displayTime + "seconds. ");
 
-        Timer timer = new Timer(){
-            @Override
-            public void cancel() {
-                super.cancel();
-                System.out.println("Timer abort.");
+            compareData(displayLines, inputLines);
+//            this.gameTimer = new Timer();
+//            gameTimer.schedule(endGame, timeLimitSeconds * 1000L);
+        }
+//
+//        while(!is_gameEnd) {
+//            String userInput = in.next();
+//            System.out.println(userInput);
+//        }
+//        System.out.println("ends.");
+        }
+    public void compareData(ArrayList<String> checker, ArrayList<String> answer){
+        int totalErrorCount = 0;
+        for (int i = 0; i < answer.size(); i++) {
+            totalErrorCount += compareOneLine(checker.get(i), answer.get(i));
+        }
+        System.out.println("Total number of wrong keystrokes: " + totalErrorCount);
+    }
+
+    public int compareOneLine(String checker, String answer) {
+        int errorCount = 0;
+        for (int i = 0; i < checker.length(); i++) {
+            try {
+                if (checker.charAt(i) != answer.charAt(i)) {
+                    errorCount++;
+                }
+            } catch (StringIndexOutOfBoundsException e) {
+                errorCount++;
             }
-        };
-        timer.schedule(game, timeLimitSeconds*1000 );
-        System.out.println("counting " + timeLimitSeconds + " starting now:" );
-        //task to do within timeLimit
-        timer.cancel();
-        */
-
-        //method 1 trying
-        LocalDateTime currentTime = LocalDateTime.now();
-        System.out.println(currentTime);
-
-        //method 2 trying 
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Enter a number: ");
-        long limit = 5000L;
-        long startTime = System.currentTimeMillis();
-        Long l = reader.nextLong();
-        if ((startTime + limit) < System.currentTimeMillis())
-            System.out.println("Sorry, your answer is too late");
-        else
-            System.out.println("Your answer is on time");
-
+        }
+        return errorCount;
     }
 
 }

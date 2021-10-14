@@ -1,9 +1,5 @@
 package seedu.typists.ui;
 
-
-<<<<<<< Updated upstream
-=======
-import java.sql.Array;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,14 +11,10 @@ import static seedu.typists.common.Messages.LOGO;
 import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
 import static seedu.typists.common.Messages.MESSAGE_WELCOME;
 
->>>>>>> Stashed changes
 /**
  * Text UI of the application.
  */
 public class TextUi {
-
-<<<<<<< Updated upstream
-=======
     private final SimpleDateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private static final String DIVIDER = "****************************************************************";
@@ -55,9 +47,7 @@ public class TextUi {
     }
 
     public ArrayList<String> splitLineIntoWordList(String line) {
-        ArrayList<String> wordList = new ArrayList <>();
-        wordList.addAll(Arrays.asList(line.split(" ")));
-        return wordList;
+        return new ArrayList <>(Arrays.asList(line.split(" ")));
     }
 
     /** Print to screen the target words, each line 10 words */
@@ -73,5 +63,20 @@ public class TextUi {
         }
         out.print("\n");
     }
->>>>>>> Stashed changes
+
+    public ArrayList<String> getDisplayWordLine(String TargetWordSet, int lineLength) {
+        ArrayList<String> wordList = splitLineIntoWordList(TargetWordSet);
+        ArrayList<String> wordLines = new ArrayList <>();
+        int i = 1;
+        StringBuilder sb = new StringBuilder();
+        for (String w : wordList) {
+            sb.append(w).append(" ");
+            if (i % lineLength == 0) {
+                wordLines.add(sb.toString().trim());
+                sb = new StringBuilder();
+            }
+            i++;
+        }
+        return wordLines;
+    }
 }
