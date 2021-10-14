@@ -127,7 +127,7 @@ public class StockValidator {
      *
      * @param ui         Reference to the UI object passed by Main to print messages.
      * @param columnName Column name/alias to be validated.
-     * @return Boolean value indicating if max medicine quantity is valid.
+     * @return Boolean value indicating if column name is value.
      */
     public static boolean isValidColumn(Ui ui, String columnName) {
         String[] columnAlias = new String[]{CommandParameters.ID, CommandParameters.NAME, CommandParameters.PRICE,

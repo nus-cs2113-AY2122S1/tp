@@ -13,25 +13,34 @@ public class Dispense extends Medicine {
     public static final String QUANTITY = "QUANTITY";
     public static final String CUSTOMERS_ID = "CUSTOMER'S ID";
     public static final String DATE = "DATE";
-    public static final String STAFF_NAME = "STAFF NAME";
+    public static final String STAFF = "STAFF";
     public static final String STOCK_ID = "STOCK ID";
 
-    public static final String[] COLUMNS = {ID, NAME, QUANTITY, CUSTOMERS_ID, DATE, STAFF_NAME, STOCK_ID};
+    // Used for sorting
+    public static final String ID_LOWERCASE = "id";
+    public static final String NAME_LOWERCASE = "name";
+    public static final String QUANTITY_LOWERCASE = "quantity";
+    public static final String CUSTOMERS_ID_LOWERCASE = "customer's id";
+    public static final String DATE_LOWERCASE = "date";
+    public static final String STAFF_LOWERCASE = "staff";
+    public static final String STOCK_ID_LOWERCASE = "stock id";
+
+    public static final String[] COLUMNS = {ID, NAME, QUANTITY, CUSTOMERS_ID, DATE, STAFF, STOCK_ID};
 
     private static int dispenseCount = 0;
     protected int dispenseId;
     protected String customerId;
     protected Date date;
-    protected String staffName;
+    protected String staff;
     protected int stockId;
 
-    public Dispense(String medicineName, int quantity, String customerId, Date date, String staffName, int stockId) {
+    public Dispense(String medicineName, int quantity, String customerId, Date date, String staff, int stockId) {
         super(medicineName, quantity);
         dispenseCount++;
         this.dispenseId = dispenseCount;
         this.customerId = customerId;
         this.date = date;
-        this.staffName = staffName;
+        this.staff = staff;
         this.stockId = stockId;
     }
 
@@ -67,12 +76,12 @@ public class Dispense extends Medicine {
         this.date = date;
     }
 
-    public String getStaffName() {
-        return staffName;
+    public String getStaff() {
+        return staff;
     }
 
-    public void setStaffName(String staffName) {
-        this.staffName = staffName;
+    public void setStaff(String staff) {
+        this.staff = staff;
     }
 
     public int getStockId() {
