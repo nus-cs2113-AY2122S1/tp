@@ -12,14 +12,13 @@ import java.util.TimerTask;
 import static seedu.typists.common.Messages.SAMPLE_TEXT;
 
 public class TimeModeGame extends Game {
-    ArrayList<String> displayLines;
-    ArrayList<String> inputLines;
-    boolean is_gameEnd;
-    TextUi uiBot;
+    private ArrayList<String> displayLines;
+    private ArrayList<String> inputLines;
+    private final TextUi uiBot;
 
     public TimeModeGame() {
         this.uiBot = new TextUi();
-        this.is_gameEnd = false;
+        boolean is_gameEnd = false;
         displayLines = new ArrayList <>();
         inputLines = new ArrayList <>();
     }
@@ -48,13 +47,11 @@ public class TimeModeGame extends Game {
         if (readyToStartTimer()) {
             int i = 0;
             long beginTime = System.currentTimeMillis();
-            //System.out.println("Timer starts now: " + beginTime);
             boolean timeOver = false;
             long currTime = 0;
             inputLines = new ArrayList <>();
             while (!timeOver) {
                 currTime = System.currentTimeMillis() - beginTime;
-                //10000millisecond = 10 second
                 if (currTime >= timeLimitSeconds * 1000L) {
                     timeOver = true;
                 } else {
@@ -64,20 +61,14 @@ public class TimeModeGame extends Game {
                     i++;
                 }
             }
-            int displayTime = (int)currTime/1000;
+            int displayTime = (int) currTime / 1000;
             System.out.println("Game Finished. Total time taken: " + displayTime + "seconds. ");
 
             compareData(displayLines, inputLines);
-//            this.gameTimer = new Timer();
-//            gameTimer.schedule(endGame, timeLimitSeconds * 1000L);
         }
-//
-//        while(!is_gameEnd) {
-//            String userInput = in.next();
-//            System.out.println(userInput);
-//        }
-//        System.out.println("ends.");
-        }
+    }
+
+
     public void compareData(ArrayList<String> checker, ArrayList<String> answer){
         int totalErrorCount = 0;
         for (int i = 0; i < answer.size(); i++) {
