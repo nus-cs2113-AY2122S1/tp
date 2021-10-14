@@ -36,7 +36,7 @@ public class Duke {
 
                 //Switch to appropriate callback function and call function
                 Command userCommand = userCommandName.getCallbackCommand();
-                userCommand.execute(parameters);    
+                userCommand.execute(parameters);
                 Storage.write("ingredient");
                 Storage.write("dish");
 

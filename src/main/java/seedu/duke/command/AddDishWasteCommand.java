@@ -18,6 +18,7 @@ public class AddDishWasteCommand extends Command {
         if (dishIndex == -1) {
             System.out.println(ui.getDishNotExistMsg());
         } else {
+            assert (dishIndex != -1) : "The dishIndex cannot be -1";
             try {
                 System.out.println("Enter the wastage of " + dish + " in KG:");
                 Scanner in = new Scanner(System.in);

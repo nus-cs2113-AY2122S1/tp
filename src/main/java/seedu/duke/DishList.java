@@ -8,10 +8,12 @@ public class DishList {
 
     public static void add(String dishName) {
         if (DishList.find(dishName) == -1) {
+            assert DishList.find(dishName) < 0;
             Dish dishToAdd = new Dish(dishName);
             dishList.add(dishToAdd);
             ui.printAddedDish(dishToAdd.getDishName());
         } else {
+            assert DishList.find(dishName) >= 0;
             System.out.println(ui.getDishExistsMsg());
         }
     }
