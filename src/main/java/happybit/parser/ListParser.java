@@ -6,6 +6,7 @@ import happybit.exception.HaBitParserException;
 import happybit.goal.GoalList;
 
 public class ListParser {
+    private static final String ERROR_INVALID_GOAL_INDEX = "Please enter a valid integer for the goal index";
 
     public static Command parseListHabitCommand(String commandInstruction) throws HaBitParserException {
         // write parse code
@@ -13,7 +14,7 @@ public class ListParser {
         try {
             goalIndex = Integer.parseInt(commandInstruction);
         } catch (NumberFormatException e) {
-            throw new HaBitParserException("Please enter a valid integer for the goal index");
+            throw new HaBitParserException(ERROR_INVALID_GOAL_INDEX);
         }
         return new ListHabitsCommand(goalIndex);
     }

@@ -12,7 +12,7 @@ public class Parser {
 
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_ADD_GOAL = "set";
-    private static final String COMMAND_ADD_HABIT = "edit";
+    private static final String COMMAND_ADD_HABIT = "add";
     private static final String COMMAND_LIST_GOAL = "list";
     private static final String COMMAND_LIST_HABIT = "view";
     private static final String COMMAND_DELETE_GOAL = "remove";
@@ -94,6 +94,9 @@ public class Parser {
         StringBuilder instruction = new StringBuilder();
         for (int i = 1; i < words.length; i++) {
             instruction.append(words[i]);
+            if (i != words.length - 1) {
+                instruction.append(" ");
+            }
         }
         return instruction.toString();
     }
