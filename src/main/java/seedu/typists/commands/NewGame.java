@@ -28,6 +28,7 @@ public class NewGame {
     public void beginNewGame() throws InvalidStringInputException {
         String content1 = "The greatest glory in living lies not in never falling.";
         game1 = splitString(content1," ");
+        uiGame.showText(content1);
         boolean isExit = false;
         while (!isExit) {
             uiGame.showText(game1.get(game_index));
@@ -35,10 +36,7 @@ public class NewGame {
             TextParser c =  new TextParser(fullCommand, game1.get(game_index));
             isExit = c.getIsExit();
             game_index += 1;
-            uiGame.printProgress();
-            uiGame.showNumber(game_index);
-            uiGame.showText("out of");
-            uiGame.showNumber(getTotalSentence());
+            uiGame.printGameMode1Progress(game_index,getTotalSentence());
             if (game_index == getTotalSentence()) {
                 uiGame.printSuccess();
                 break;

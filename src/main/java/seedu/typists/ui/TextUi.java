@@ -74,8 +74,8 @@ public class TextUi {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void printProgress() {
-        System.out.println("So far so good.");
+    public static void printGameMode1Progress(int a, int b) {
+        System.out.println("Your progress:" + String.valueOf(a) + "/" + String.valueOf(b));
     }
 
     public static void printSuccess() {
