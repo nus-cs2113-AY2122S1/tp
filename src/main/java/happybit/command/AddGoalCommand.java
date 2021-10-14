@@ -16,7 +16,7 @@ public class AddGoalCommand extends AddCommand {
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-        goalList.addGoal(goal);
+        goalList.addGoal(goal, ui);
     }
 
 }
