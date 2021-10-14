@@ -25,7 +25,8 @@ public class MenuParser {
     public void addMenu(String[] command, MenuList masterList) {
         boolean isValidAddMenuCommand = addMenuCommandChecker(command);
         if (isValidAddMenuCommand) {
-            Menu newMenu = new Menu(command[1], command[2]);
+            double menuPrice = Double.valueOf(command[2]);
+            Menu newMenu = new Menu(command[1], menuPrice);
             masterList.menuList.add(newMenu);
             MenuUI.printAddMenuMessage(newMenu, masterList.menuList.size());
         }
@@ -90,7 +91,8 @@ public class MenuParser {
             int menuIndex = Integer.valueOf(command[1]);
             assert 0 < menuIndex : "Index should be more than 0";
             assert menuIndex < masterList.menuList.size() + 1 : "Index should not be bigger than the menu size";
-            masterList.menuList.get(menuIndex - 1).setPrice(command[2]);
+            double newPrice = Double.valueOf(command[2]);
+            masterList.menuList.get(menuIndex - 1).setPrice(newPrice);
             MenuUI.printEditMenuMessage(masterList.menuList.get(menuIndex - 1), menuIndex);
         }
     }

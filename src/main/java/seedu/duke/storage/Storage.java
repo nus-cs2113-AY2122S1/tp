@@ -83,7 +83,8 @@ public class Storage {
 
     private static Menu decodeMenuItem(String toRead) {
         String[] description = toRead.trim().split("\\|", 3);
-        Menu menu = new Menu(description[1], description[2]);
+        double menuPrice = Double.valueOf(description[2]);
+        Menu menu = new Menu(description[1], menuPrice);
         return menu;
     }
 

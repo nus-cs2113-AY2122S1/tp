@@ -3,9 +3,9 @@ package seedu.duke.menu;
 public class Menu {
 
     private String name;
-    private String price;
+    private double price;
 
-    public Menu(String name, String price) {
+    public Menu(String name, double price) {
         this.name = name;
         this.price = price;
     }
@@ -18,11 +18,11 @@ public class Menu {
         this.name = name;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
