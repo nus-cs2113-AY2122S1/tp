@@ -3,6 +3,7 @@ package seedu.typists.ui;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 import static java.lang.System.lineSeparator;
 import static java.lang.System.out;
@@ -47,4 +48,38 @@ public class TextUi {
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
     }
+
+    public static String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
+
+    public static void showLine() {
+        System.out.println(DIVIDER);
+    }
+
+    /**
+     * Print error message.
+     * @param meg obtained from DukeException message
+     */
+    public static void showText(String meg) {
+        System.out.println(meg);
+    }
+
+    public static void showNumber(int i) {
+        System.out.println(String.valueOf(i));
+    }
+
+    public static void showBye() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void printProgress() {
+        System.out.println("So far so good.");
+    }
+
+    public static void printSuccess() {
+        System.out.println("Finished!");
+    }
+
 }
