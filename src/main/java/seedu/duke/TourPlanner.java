@@ -1,11 +1,21 @@
 package seedu.duke;
 
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /**
  * Main entry-point of the TourPlanner application.
  * Initialises the application and starts interaction with application user.
  */
 public class TourPlanner {
+
+    public TourPlanner() {
+        ;
+    }
+
+    private static final Logger logr = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     /**
      * Main method of TourPlanner.
@@ -28,8 +38,10 @@ public class TourPlanner {
                 isExit = specificCommand.isExit();
             } catch (NullPointerException | NumberFormatException e) {
                 System.out.println();
+                logr.log(Level.SEVERE, "Null pointer or Number format error occur");
             } catch (TourPlannerException e) {
                 System.out.println(e.getMessage());
+                logr.log(Level.SEVERE, e.getMessage());
             } finally {
                 ui.showLine();
             }

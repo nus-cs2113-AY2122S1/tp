@@ -256,7 +256,7 @@ public class Parser {
      * @param params full user's argument/params string after splitting
      * @return the prepared command
      */
-    public static Command parseCut(String params) {
+    private static Command parseCut(String params) {
         int clientIndex = stringToInt(params) - 1;
         return new CutCommand(clientIndex);
     }
