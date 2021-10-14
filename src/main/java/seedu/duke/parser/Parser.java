@@ -280,7 +280,7 @@ public class Parser {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
 
-        return new FindTaskCommand(keyword);
+        return new FindTaskCommand(keyword.toLowerCase());
     }
 
     /**
@@ -295,7 +295,7 @@ public class Parser {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
 
-        return new FindLessonCommand(keyword);
+        return new FindLessonCommand(keyword.toLowerCase());
     }
 
     /**
@@ -310,7 +310,7 @@ public class Parser {
             throw new DukeException(Message.ERROR_INVALID_COMMAND);
         }
 
-        return new FindAllCommand(keyword);
+        return new FindAllCommand(keyword.toLowerCase());
     }
 
     /**
