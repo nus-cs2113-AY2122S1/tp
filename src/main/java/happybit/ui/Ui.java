@@ -7,23 +7,25 @@ import java.util.ArrayList;
 
 public class Ui {
     private static final String COMMAND_LIST_GREETING =
-            "Hello! These are all the possible commands for this habit tracker :)";
+            "Hello! These are all the possible commands for this habit tracker :)"
+                    + " (flags within {} brackets are optional)";
     private static final String SET_GOAL_COMMAND =
-            "set a goal: set /<goal type> /<goal name> /<start date> - /<end date>";
+            "1. set a goal: set <goal name> {-<goal type> /<start date>} /<end date>";
     private static final String GOAL_TYPE_INFO =
-            "-> Habit types include: default, sleep, food, exercise and study";
+            "   -> Goal types include: default, sleep, food, exercise and study";
     private static final String REMOVE_GOAL_COMMAND =
-            "remove a goal: remove <goal index>";
+            "2. remove a goal: remove <goal index>";
     private static final String LIST_GOAL_COMMAND =
-            "list all goals for that habit: list";
+            "3. list all goals for that habit: list";
     private static final String ADD_HABIT_COMMAND =
-            "add a habit to a goal: add <goal index> <habit name>";
+            "4. add a habit to a goal: add <goal index> <habit name>";
     private static final String DELETE_HABIT_COMMAND =
-            "delete a habit from a goal: delete <goal index> <habit index>";
+            "5. delete a habit from a goal: delete <goal index> <habit index>";
     private static final String DONE_HABIT_COMMAND =
-            "indicate a habit as done: done <goal index> <habit index>";
+            "6. indicate a habit as done: done <goal index> <habit index>";
     private static final String LIST_HABIT_COMMAND =
-            "View all the habits user has under a goal: view <goal index>";
+            "7. View all the habits user has under a goal: view <goal index>";
+    private static final String BYE_COMMAND = "Exit habit tracker program";
 
     private static final String NEWLINE = System.lineSeparator();
     private static final String DASHES = "______________________________________________________________"
@@ -40,6 +42,7 @@ public class Ui {
                 + DELETE_HABIT_COMMAND + NEWLINE
                 + DONE_HABIT_COMMAND + NEWLINE
                 + LIST_HABIT_COMMAND + NEWLINE
+                + BYE_COMMAND + NEWLINE
         );
         printDashes();
     }
@@ -90,7 +93,7 @@ public class Ui {
     public void printRemovedHabit(String goalDescription, String habitName) {
         printDashes();
         System.out.println("Your habit of \"" + habitName + "\" under the goal \""
-                + goalDescription + "\" has been removed.");
+                + goalDescription + "\" has been deleted.");
         printDashes();
     }
 

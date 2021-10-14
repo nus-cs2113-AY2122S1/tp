@@ -1,13 +1,14 @@
 package happybit.goal;
 
 import happybit.exception.HaBitCommandException;
+import happybit.exception.HaBitParserException;
 import happybit.habit.Habit;
 import happybit.ui.Ui;
 
 import java.util.ArrayList;
 
 public class GoalList {
-    private static final String ERROR_EMPTY_GOAL_LIST = "You have no set any goals for yourself yet, would"
+    private static final String ERROR_EMPTY_GOAL_LIST = "You have not set any goals for yourself yet, would"
             + " you like to set some for yourself?";
     private static final String ERROR_INVALID_GOAL_INDEX = "There is no goal at that index.";
     private static final String ERROR_EMPTY_HABIT_LIST = "There are no habits listed under this goal, add some!";
@@ -19,12 +20,17 @@ public class GoalList {
         this.goalList = new ArrayList<>();
     }
 
+    public ArrayList<Goal> getGoalList() {
+        return goalList;
+    }
+
     public int getListLength() {
         return goalList.size();
     }
 
     /**
      * Adds a goal to the goalList.
+     * For storage
      *
      * @param goal Goal to be added.
      */
@@ -34,6 +40,7 @@ public class GoalList {
 
     /**
      * Adds a goal to the goalList.
+     * With Ui for printing message
      *
      * @param goal Goal to be added.
      * @param ui User Interface class for printing added goal.
@@ -45,24 +52,28 @@ public class GoalList {
 
     /**
      * Adds a habit that is linked to a goal.
+     * With Ui for printing message.
      *
      * @param habit     Habit to be linked to a goal.
      * @param goalIndex Integer index of goal in goalList.
      * @param ui User Interface class for printing added habit to goal in goalList.
      */
-    public void addHabitFromGoal(Habit habit, int goalIndex, Ui ui) {
-        goalList.get(goalIndex).addHabit(habit);
-        ui.printAddedHabit(habit.getHabitName(), goalList.get(goalIndex).getDescription());
+    public void addHabitToGoal(Habit habit, int goalIndex, Ui ui) throws HaBitCommandException {
+        Goal goal = getGoal(goalIndex);
+        goal.addHabit(habit);
+        ui.printAddedHabit(habit.getHabitName(), goal.getDescription());
     }
 
     /**
      * Adds a habit that is linked to a goal.
+     * For storage.
      *
      * @param habit     Habit to be linked to a goal.
      * @param goalIndex Integer index of goal in goalList.
      */
-    public void addHabitFromGoal(Habit habit, int goalIndex) {
-        goalList.get(goalIndex).addHabit(habit);
+    public void addHabitToGoal(Habit habit, int goalIndex) throws HaBitCommandException {
+        Goal goal = getGoal(goalIndex);
+        goal.addHabit(habit);
     }
 
     /**
