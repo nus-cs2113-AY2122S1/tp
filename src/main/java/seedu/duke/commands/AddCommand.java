@@ -6,4 +6,8 @@ package seedu.duke.commands;
  */
 public abstract class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
+
+    public static final String MESSAGE_USAGE = (AddExpenditureCommand.MESSAGE_USAGE
+            + System.lineSeparator()
+            + AddBudgetCommand.MESSAGE_USAGE);
 }

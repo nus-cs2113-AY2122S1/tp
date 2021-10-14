@@ -7,6 +7,9 @@ public class AddBudgetCommand extends AddCommand {
     public double amount;
     public int month;
 
+    public static final String MESSAGE_USAGE = ("Adds a budget record.\n"
+            + "Parameters: b/ a/AMOUNT m/MONTH [y/YEAR]");
+
     public AddBudgetCommand(double amount) {
         //this.description = description;
         this.amount = amount;

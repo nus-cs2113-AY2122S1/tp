@@ -78,16 +78,16 @@ public class TextUi {
         System.out.println(MESSAGE_EXIT + LS + DIVIDER);
     }
 
-    public static void showInvalidCommandMessage() {
-        System.out.println("☹ Sorry, I did not understand your command.");
-        System.out.println(DIVIDER);
-    }
-
     /*
      * ===========================================
      *           ERROR MESSAGES
      * ===========================================
      */
+
+    public static void showInvalidCommandMessage(String feedbackToUser) {
+        System.out.println(feedbackToUser);
+        System.out.println(DIVIDER);
+    }
 
     /**
      * Reads the text entered by the user.

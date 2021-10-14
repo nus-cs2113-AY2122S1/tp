@@ -12,6 +12,10 @@ import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 import seedu.duke.commands.Command;
 
+import static seedu.duke.common.Messages.MESSAGE_INVALID_AMOUNT;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_ADD_COMMAND;
+
 //import java.time.LocalDate;
 //import java.util.Locale;
 
@@ -51,14 +55,12 @@ public class Parser {
         case ListRecordsCommand.COMMAND_WORD:
             command = new ListRecordsCommand();
             break;
-        case HelpCommand.COMMAND_WORD:
-            command = new HelpCommand();
-            break;
         case ExitCommand.COMMAND_WORD:
             command = new ExitCommand();
             break;
+        case HelpCommand.COMMAND_WORD:
         default:
-            command = new InvalidCommand();
+            command = new HelpCommand();
             break;
         }
         return command;
@@ -71,15 +73,20 @@ public class Parser {
      * @return AddBudgetCommand or AddExpenditureCommand depending on the addType
      */
     private Command prepareAddCommand(String commandParams) {
-        String addType = commandParams.substring(0, 2);
-        switch (addType) {
-        case ("b/"):
-            return prepareAddBudgetCommand(commandParams);
-        case ("e/"):
-            return prepareAddExpenditureCommand(commandParams);
-        default:
-            return new InvalidCommand();
+        try {
+            String addType = commandParams.substring(0, 2);
+            switch (addType) {
+            case ("b/"):
+                return prepareAddBudgetCommand(commandParams);
+            case ("e/"):
+                return prepareAddExpenditureCommand(commandParams);
+            default:
+                return new InvalidCommand(MESSAGE_INVALID_COMMAND);
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
         }
+
     }
 
     /**
@@ -104,12 +111,16 @@ public class Parser {
      * @return an AddExpenditureCommand with proper parameters
      */
     private Command prepareAddExpenditureCommand(String commandParams) {
-        String[] split = commandParams.trim().split("e/|a/", 3);
-        String description = split[1].trim();
-        double amount = Double.parseDouble(split[2].trim());
-        //LocalDate date = LocalDate.parse(split[3].trim());
+        try {
+            String[] split = commandParams.trim().split("e/|a/", 3);
+            String description = split[1].trim();
+            double amount = Double.parseDouble(split[2].trim());
+            //LocalDate date = LocalDate.parse(split[3].trim());
+            return new AddExpenditureCommand(description, amount);
+        } catch (NumberFormatException nfe) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_AMOUNT, AddExpenditureCommand.MESSAGE_USAGE));
+        }
 
-        return new AddExpenditureCommand(description, amount);
     }
 
     /**
@@ -126,7 +137,7 @@ public class Parser {
         case ("e/"):
             return prepareDeleteExpenditureCommand(commandParams);
         default:
-            return new InvalidCommand();
+            return new InvalidCommand(MESSAGE_INVALID_COMMAND);
         }
     }
 
