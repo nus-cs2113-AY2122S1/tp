@@ -17,4 +17,6 @@ public class ExpenditureStorage extends Storage {
 
         WriteToTextFile.writeToStorage(expenditureToAdd, "./data/BudgetList1.txt");
     }
+
+
 }
