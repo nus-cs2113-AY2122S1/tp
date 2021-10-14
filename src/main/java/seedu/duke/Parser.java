@@ -27,6 +27,8 @@ public class Parser {
             Ui.goodBye();
             return false;
         } else if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
+            Logger logger = Storage.getLogger();
+            logger.log(Level.WARNING, "invalid trip index");
             Ui.printNoTripError();
             return true;
         } else if (inputCommand.equals("close")) {
@@ -124,6 +126,7 @@ public class Parser {
     private static void executeEdit(String inputDescription) {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
         int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
+        assert tripToEditInfo[1] != null;
         String attributesToEdit = tripToEditInfo[1];
         Trip tripToEdit = Storage.listOfTrips.get(indexToEdit);
         editTripPerAttribute(tripToEdit, attributesToEdit);
@@ -204,6 +207,7 @@ public class Parser {
 
     private static void executeExpense(String inputDescription) {
         Trip currTrip = Storage.getOpenTrip();
+        assert Storage.checkOpenTrip();
         String[] expenseInfo = inputDescription.split(" ", 3);
         Double expenseAmount = Double.parseDouble(expenseInfo[0]);
         String expenseCategory = expenseInfo[1].toLowerCase();
