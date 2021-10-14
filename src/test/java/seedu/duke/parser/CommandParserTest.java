@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ParserTest {
+class CommandParserTest {
 
     private static HashMap<String, String> commandOptions = new HashMap<>();
 

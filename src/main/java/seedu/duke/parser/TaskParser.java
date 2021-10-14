@@ -1,9 +1,9 @@
 package seedu.duke.parser;
 
-import java.text.ParseException;
 import java.util.Date;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
+import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.utility.Utility;
@@ -28,7 +28,7 @@ public class TaskParser {
         return RecurrenceEnum.getRecurrence(recurrence);
     }
 
-    public static Date getDate(String date) throws ParseException {
+    public static Date getDate(String date) throws ParseDateFailedException {
         if (date == null) {
             return null;
         }

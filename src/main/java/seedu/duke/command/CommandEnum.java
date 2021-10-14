@@ -1,8 +1,5 @@
 package seedu.duke.command;
 
-import seedu.duke.exception.InvalidRecurrenceException;
-import seedu.duke.task.RecurrenceEnum;
-
 public enum CommandEnum {
     BYE, HELP, LIST, TODO, DEADLINE, EVENT, INVALID;
 

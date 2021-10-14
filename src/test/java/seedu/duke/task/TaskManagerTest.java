@@ -1,9 +1,9 @@
 package seedu.duke.task;
 
-import java.text.ParseException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.EmptyTasklistException;
+import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
@@ -18,7 +18,7 @@ class TaskManagerTest {
 
     @Test
     @DisplayName("Used to check the printing of the tasklist format")
-    void testListTasklistFormat() throws ParseException {
+    void testListTasklistFormat() throws ParseDateFailedException {
 
         Date startDate = UtilityParser.getStringAsDate(VALID_DATE1);
         Date endDate = UtilityParser.getStringAsDate(VALID_DATE2);
