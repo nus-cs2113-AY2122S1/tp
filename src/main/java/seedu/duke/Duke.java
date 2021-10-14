@@ -67,6 +67,7 @@ public class Duke {
                 isExit = command.isExit();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Error! Your inputs are missing or incorrect!");
+                TextUi.printDivider();
             }
         }
     }

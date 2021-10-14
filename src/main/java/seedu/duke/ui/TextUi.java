@@ -106,4 +106,11 @@ public class TextUi {
         System.out.println(DIVIDER);
         return input;
     }
+
+    /**
+     * Prints out the divider line.
+     */
+    public static void printDivider() {
+        System.out.println(DIVIDER);
+    }
 }

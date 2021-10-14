@@ -6,4 +6,8 @@ package seedu.duke.commands;
  */
 public abstract class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
+
+    public static final String MESSAGE_USAGE = (DeleteExpenditureCommand.MESSAGE_USAGE
+            + System.lineSeparator()
+            + DeleteBudgetCommand.MESSAGE_USAGE);
 }
