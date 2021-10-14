@@ -40,9 +40,9 @@ public class ReadTextFile {
      * and return an ArrayList of String containing those commands.
      *
      * @return An ArrayList of String containing all the individual commands saved in
-     * the text file.
+     *              the text file.
      * @throws IOException When the FileReader fails to read the file .txt file in the
-     * stated directory.
+     *                     stated directory.
      */
     public ArrayList<String> readTextFileToString() throws IOException {
         ArrayList<String> arrayListOfRawCommands = new ArrayList<String>();

@@ -8,7 +8,7 @@ public class WriteToTextFile {
     /**
      * Writes the adding Budget and Expenditure command to the text file.
      *
-     * @param textToWrite The raw command string from the user.
+     * @param textToWrite      The raw command string from the user.
      * @param storageDirectory Directory of the text file which the command is saved to.
      */
     public static void writeToStorage(String textToWrite, String storageDirectory) {

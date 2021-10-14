@@ -16,9 +16,9 @@ public class DeleteFromTextFile {
      * delete the original text file and rename that text file to the original text file
      * name.
      *
-     * @param textFileDirectory Text file's directory which we want to delete a line from.
-     * @param lineNumber The line number to be deleted.
-     * @param sizeOfExpenditureList
+     * @param textFileDirectory     Text file's directory which we want to delete a line from.
+     * @param lineNumber            The line number to be deleted.
+     * @param sizeOfExpenditureList The size of the expenditureList.
      */
     public static void removeLineFromFile(String textFileDirectory, int lineNumber, int sizeOfExpenditureList) {
         try {
