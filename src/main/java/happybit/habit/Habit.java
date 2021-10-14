@@ -3,16 +3,16 @@ package happybit.habit;
 public class Habit {
 
     protected String habitName;
-    protected boolean isDone = false;
+    protected boolean isDone;
 
     /**
      * Constructor for Habit class.
      *
      * @param habitName Name of habit linked to a goal.
      */
-    public Habit(String habitName, boolean isDone) {
+    public Habit(String habitName) {
         this.habitName = habitName;
-        this.isDone = isDone;
+        this.isDone = false;
     }
 
     /**

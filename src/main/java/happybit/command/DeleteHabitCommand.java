@@ -17,7 +17,7 @@ public class DeleteHabitCommand extends DeleteCommand {
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-        goalList.deleteHabitFromGoal(goalIndex, habitIndex);
+        goalList.deleteHabitFromGoal(goalIndex, habitIndex, ui);
     }
 
 }

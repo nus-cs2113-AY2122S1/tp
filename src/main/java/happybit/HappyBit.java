@@ -26,7 +26,7 @@ public class HappyBit {
         ui = new Ui();
         storage = new Storage(filePath, fileDir);
         goalList = new GoalList();
-        // loadData();
+        loadData();
     }
 
     /**
@@ -54,7 +54,7 @@ public class HappyBit {
         try {
             goalList = storage.load();
         } catch (HaBitStorageException e) {
-            //ui.showError(e.getMessage());
+            ui.showError(e.getMessage());
         }
     }
 
