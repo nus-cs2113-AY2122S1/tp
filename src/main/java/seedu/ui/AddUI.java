@@ -8,6 +8,11 @@ import seedu.exceptions.IntegerException;
 import java.util.ArrayList;
 
 public class AddUI {
+    private static final String SMALL_GAP = "         ";
+    private static final String BIG_GAP = "                         ";
+    private static final String LECTURE_SLOT = "Lecture Lesson Slots";
+    private static final String TUTORIAL_SLOT = "Tutorial Lesson Slots";
+    private static final String LAB_SLOT = "Laboratory Lesson Slots";
     private static final int BALANCE_ARRAY = 1;
     private static final int SERIAL_STARTING = 1;
     private static final int DIVIDER = 42;
@@ -26,7 +31,7 @@ public class AddUI {
         lectureLessons = getLessonDetails(lec, length);
         tutorialLessons = getLessonDetails(tt, length);
         labLessons = getLessonDetails(lab, length);
-        TextUi.printLessonHeader(lec, tt, lab);
+        printLessonHeader(lec, tt, lab);
         printLessons(lectureLessons, tutorialLessons, labLessons);
         try {
             getCommand(lec, timetable, module);
@@ -60,14 +65,14 @@ public class AddUI {
             String output = "";
             if (isExist(lec, j)) {
                 output = output.concat(lec.get(j));
-            } else if (isExist(tt, j) && isExist(lec, j)) {
+            } else if (isExist(tt, j) && !isExist(lec, j)) {
                 for (int i = 0; GAP > i; i++) {
                     output = output.concat(SPACE);
                 }
             }
             if (isExist(tt, j)) {
                 output = output.concat(tt.get(j));
-            } else if (isExist(lab, j) && isExist(tt, j)) {
+            } else if (isExist(lab, j) && !isExist(tt, j)) {
                 for (int i = 0; GAP > i; i++) {
                     output = output.concat(SPACE);
                 }
@@ -90,13 +95,18 @@ public class AddUI {
                 throw new IntegerException("Input is not an integer");
             }
             String classNumber = lessons.get(indexOfLesson).getClassNo();
-            for (Lesson lesson : lessons) {
-                if (lesson.getClassNo().equals(classNumber)) {
-                    timetable.addLesson(new TimetableLesson(module, timetable.getSemester(), lesson));
-                }
+            addLessonToTimetable(lessons, timetable, module, classNumber);
+            TextUi.printLessonAdded();
+        }
+    }
+
+    public void addLessonToTimetable(ArrayList<Lesson> lessons,
+            Timetable timetable, Module module, String classNumber) {
+        for (Lesson lesson : lessons) {
+            if (lesson.getClassNo().equals(classNumber)) {
+                timetable.addLesson(new TimetableLesson(module, timetable.getSemester(), lesson));
             }
         }
-        TextUi.printLessonAdded();
     }
 
     public String printLessonInfo(int serial, Lesson lesson) {
@@ -110,7 +120,6 @@ public class AddUI {
                 }
             }
         }
-
         return output;
     }
 
@@ -118,10 +127,8 @@ public class AddUI {
         int index = lessonList.indexOf(lesson);
         if (lessonList.size() != index + BALANCE_ARRAY) {
             String classNumber = lessonList.get(index).getClassNo();
-
             int nextIndex = index + BALANCE_ARRAY;
             String nextClassNumber = lessonList.get(nextIndex).getClassNo();
-
             return !classNumber.equals(nextClassNumber);
         }
         return true;
@@ -133,5 +140,27 @@ public class AddUI {
 
     public boolean isArrayExist(ArrayList<Lesson> lesson, int index) {
         return lesson.size() > 0 && lesson.size() > index;
+    }
+
+    public void printLessonHeader(ArrayList<Lesson> lt, ArrayList<Lesson> tt, ArrayList<Lesson> lb) {
+        String header;
+        if (isArrayExist(lt, 0) && isArrayExist(tt, 0) && isArrayExist(lb, 0)) {
+            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
+        } else if (isArrayExist(lt, 0) && isArrayExist(tt, 0)) {
+            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT;
+        } else if (isArrayExist(lt, 0) && isArrayExist(lb, 0)) {
+            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + LAB_SLOT;
+        } else if (isArrayExist(tt, 0) && isArrayExist(lb, 0)) {
+            header = SMALL_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
+        } else if (isArrayExist(lt, 0)) {
+            header = SMALL_GAP + LECTURE_SLOT;
+        } else if (isArrayExist(tt, 0)) {
+            header = SMALL_GAP + TUTORIAL_SLOT;
+        } else if (isArrayExist(lb, 0)) {
+            header = SMALL_GAP + LAB_SLOT;
+        } else {
+            header = "No Lesson Time Slots Found";
+        }
+        System.out.println(header);
     }
 }

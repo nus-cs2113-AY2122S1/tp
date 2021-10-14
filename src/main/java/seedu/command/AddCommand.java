@@ -34,8 +34,6 @@ public class AddCommand extends Command {
     }
 
     public void execute() throws AddException, IntegerException {
-
-
         Module module;
         try {
             module = NusMods.fetchModOnline(moduleCode);
@@ -68,7 +66,7 @@ public class AddCommand extends Command {
                 completeList.add(lesson);
             }
         }
-        Collections.sort(completeList,new ClassNumComparator());
+        Collections.sort(completeList, new ClassNumComparator());
         return completeList;
     }
 }
