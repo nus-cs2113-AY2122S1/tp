@@ -29,6 +29,7 @@ public class Attendance implements ClassChecker {
     }
 
     public int getLessonNumber() {
+        assert lessonNumber >= MIN_LESSON_NUMBER;
         return lessonNumber;
     }
 
