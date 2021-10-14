@@ -19,8 +19,5 @@ Total expenditure so far: 0.00
 Current budget left for this trip: 2000.00
 Enter your command: Sorry, no such trip number exists. Please check your trip number and try again.
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully removed
-Enter your command: This is the summary for your America trip 02 Feb 2021
-Total budget for this trip: 2000.00
-Total expenditure so far: 0.00
-Current budget left for this trip: 2000.00
+Enter your command: You have not created a trip yet. Please create a trip using the keyword 'create'.
 Enter your command: Goodbye!
