@@ -17,6 +17,11 @@ class NusModsParserTest {
     @Test
     void getModuleEvents_CS2113T_success() throws IOException {
         Event[] moduleLessons = parser.getLessonEvents(new Lesson("CS2113T", "C02"));
+
+        for (int i = 0; i < moduleLessons.length; i++) {
+            System.out.println(moduleLessons[i].getTaskEntryDescription());
+        }
+
         assertEquals(4, moduleLessons.length);
     }
 
