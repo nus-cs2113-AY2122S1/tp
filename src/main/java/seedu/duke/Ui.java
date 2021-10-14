@@ -7,7 +7,14 @@ public class Ui {
     }
 
     public static void printWelcome() {
-        System.out.println("Hello!");
+        String logo = System.lineSeparator() +
+                "    ____              __  ___     ____             __  " + System.lineSeparator() +
+                "   / __ \\____ ___  __/  |/  ___  / __ )____ ______/ /__" + System.lineSeparator() +
+                "  / /_/ / __ `/ / / / /|_/ / _ \\/ __  / __ `/ ___/ //_/" + System.lineSeparator() +
+                " / ____/ /_/ / /_/ / /  / /  __/ /_/ / /_/ / /__/ ,<   " + System.lineSeparator() +
+                "/_/    \\__,_/\\__, /_/  /_/\\___/_____/\\__,_/\\___/_/|_|  " + System.lineSeparator() +
+                "            /____/                                     " + System.lineSeparator();
+        System.out.println("Welcome to" + logo);
     }
 
     public static void goodBye() {
