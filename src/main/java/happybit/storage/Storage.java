@@ -1,5 +1,6 @@
 package happybit.storage;
 
+import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitStorageException;
 import happybit.goal.Goal;
 import happybit.goal.GoalList;
@@ -19,6 +20,7 @@ import java.util.Scanner;
 public class Storage {
     private static final String DEFAULT_DIR = "data";
     private static final String DEFAULT_FILEPATH = "data/habits.txt";
+    private static final String NEWLINE = System.lineSeparator();
     private static final String DELIMITER = "##";
     private static final String GOAL_TYPE = "G";
     private static final String HABIT_TYPE = "H";
@@ -34,6 +36,7 @@ public class Storage {
     private static final int HABIT_NAME_INDEX = 3;
     private static final int GOAL_START_INDEX = 4;
     private static final int GOAL_END_INDEX = 5;
+    private static final String ERROR_INVALID_GOAL_INDEX = "There is no goal at that index.";
 
     protected String filePath;
     protected String fileDir;
@@ -75,7 +78,7 @@ public class Storage {
                     Habit habit = habitParser(lineData);
                     int goalIndex = Integer.parseInt(lineData[NUM_INDEX]);
 
-                    goalList.addHabitFromGoal(habit, goalIndex);
+                    goalList.addHabitToGoal(habit, goalIndex);
                     break;
                 default:
                     throw new HaBitStorageException("error while loading");
@@ -83,6 +86,8 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             throw new HaBitStorageException(e.toString());
+        } catch (HaBitCommandException e) {
+            throw new HaBitStorageException(ERROR_INVALID_GOAL_INDEX);
         }
 
         return goalList;
@@ -122,16 +127,13 @@ public class Storage {
 
     protected Habit habitParser(String[] lineData) {
         boolean isDone;
+        Habit habit = new Habit(lineData[HABIT_NAME_INDEX]);
 
-        if (lineData[DONE_INDEX].equals("0")) {
-            isDone = false;
-            assert isDone : "done should be false if value of done is 0";
-        } else {
-            isDone = true;
-            assert !isDone : "done should be true if value of done is 1";
+        if (lineData[DONE_INDEX].equals("1")) {
+            habit.setCompleted();
         }
 
-        return new Habit(lineData[HABIT_NAME_INDEX]);
+        return habit;
     }
 
     protected void createFile(String filePath, String fileDir) {
@@ -163,7 +165,7 @@ public class Storage {
         }
     }
 
-    protected void export(ArrayList<Goal> goalList) throws HaBitStorageException {
+    public void export(ArrayList<Goal> goalList) throws HaBitStorageException {
         try {
             clearFile();
             writeToFile(goalList);
@@ -191,11 +193,12 @@ public class Storage {
                     + DELIMITER
                     + goal.getGoalTypeCharacter()
                     + DELIMITER
-                    + goal.getDescription()
+                    + goal.getGoalName()
                     + DELIMITER
                     + goal.getStartDate()
                     + DELIMITER
-                    + goal.getEndDate();
+                    + goal.getEndDate()
+                    + NEWLINE;
             fileWriter.write(goalToWrite);
 
             for (Habit habit : habits) {
@@ -206,7 +209,8 @@ public class Storage {
                         + DELIMITER
                         + doneValue
                         + DELIMITER
-                        + habit.getHabitName();
+                        + habit.getHabitName()
+                        + NEWLINE;
                 fileWriter.write(habitToWrite);
             }
         }

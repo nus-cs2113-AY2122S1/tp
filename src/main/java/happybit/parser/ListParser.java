@@ -12,7 +12,7 @@ public class ListParser {
         // write parse code
         int goalIndex;
         try {
-            goalIndex = Integer.parseInt(commandInstruction);
+            goalIndex = Integer.parseInt(commandInstruction) - 1;
         } catch (NumberFormatException e) {
             throw new HaBitParserException(ERROR_INVALID_GOAL_INDEX);
         }
