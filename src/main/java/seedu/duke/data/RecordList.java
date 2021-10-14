@@ -36,10 +36,11 @@ public class RecordList {
     public void addExpenditure(String description, double spending, boolean isLoadingStorage) {
         expenditureRecords.add(new Expenditure(description, spending));
         numberOfRecords += 1;
-        if (isLoadingStorage == false) {
+        if (!isLoadingStorage) {
             ExpenditureStorage storeCurrentExpenditure = new ExpenditureStorage();
             storeCurrentExpenditure.saveNewlyAddedExpenditure(description, spending);
         }
+        assert getExpenditureListSize() == numberOfRecords;
     }
 
     public void deleteBudget() {
