@@ -17,11 +17,6 @@ public class MainParser {
 
         String[] command = userInput.trim().split("\\|", 3);
 
-        if (!userInput.contains("|") && (userInput.contains("add") || userInput.contains("remove"))) {
-            MainUI.printWrongCommandMessage();
-            return false;
-        }
-
         switch (command[0]) {
         case "add-employee":
             employeeParser.addEmployee(command, employeeList);
@@ -54,6 +49,7 @@ public class MainParser {
             return true;
         default:
             MainUI.printWrongCommandMessage();
+            break;
         }
         return false;
     }
