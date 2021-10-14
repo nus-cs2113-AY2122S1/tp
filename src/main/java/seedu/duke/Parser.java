@@ -34,7 +34,7 @@ public class Parser {
         }
     }
 
-    public static String[] splitCommandString(String input, String separator) {
+    private static String[] splitCommandString(String input, String separator) {
         String[] split = input.trim().split(separator, 2);
         return split.length == 2 ? split : new String[]{split[0], ""};
     }
@@ -182,7 +182,7 @@ public class Parser {
         }
     }
 
-    public static Command parseCut(String params) {
+    private static Command parseCut(String params) {
         int clientIndex = stringToInt(params) - 1;
         return new CutCommand(clientIndex);
     }
