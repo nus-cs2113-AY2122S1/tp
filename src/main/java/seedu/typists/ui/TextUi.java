@@ -14,9 +14,7 @@ import static seedu.typists.common.Messages.MESSAGE_WELCOME;
  * Text UI of the application.
  */
 public class TextUi {
-
     private final SimpleDateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
     private static final String DIVIDER = "****************************************************************";
     private static final String LINE_PREFIX = "     | ";
     private static final String LS = lineSeparator();
@@ -44,7 +42,7 @@ public class TextUi {
 
     public void printScreen(String... message) {
         for (String m: message) {
-            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
+            System.out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
     }
 }

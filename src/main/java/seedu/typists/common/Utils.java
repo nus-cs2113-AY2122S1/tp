@@ -5,5 +5,4 @@ package seedu.typists.common;
  */
 public class Utils {
 
-
 }
