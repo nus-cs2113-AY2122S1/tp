@@ -38,12 +38,21 @@ public class Parser {
         String params = commandAndParams[1];
         switch (command) {
         case "bye":
+            if (!params.equals("")) {
+                throw new TourPlannerException("INVALID INPUT");
+            }
             return new ByeCommand();
         case "add":
             return parseAdd(params);
         case "list":
+            if (!params.equals("")) {
+                throw new TourPlannerException("INVALID INPUT");
+            }
             return new ListCommand();
         case "clear":
+            if (!params.equals("")) {
+                throw new TourPlannerException("INVALID INPUT");
+            }
             return new ClearCommand();
         case "cut":
             try {
@@ -77,6 +86,7 @@ public class Parser {
      */
     private static AddCommand parseAdd(String params) throws TourPlannerException {
         TreeMap<Integer, String> prefixIndexes = extractPrefixIndexes(params);
+        assert containAllPrefixes(params);
         String[] values = extractValuesIntoArray(prefixIndexes, params);
         Client client = new Client(values);
         return new AddCommand(client);
