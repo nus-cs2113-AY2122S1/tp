@@ -69,7 +69,6 @@ public class Parser {
      * Calls and executes help command.
      *
      * @return a message summarising all possible commands recognised by SITUS
-     * and their formats
      */
     private static String parseHelpCommand() {
         return new HelpCommand().run();
