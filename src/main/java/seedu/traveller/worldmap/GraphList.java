@@ -1,17 +1,23 @@
 package seedu.traveller.worldmap;
 
+import seedu.traveller.Parser;
 import seedu.traveller.worldmap.exceptions.EmptyVertexException;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class GraphList {
+    private static final Logger logger = Logger.getLogger(GraphList.class.getName());
     private final ArrayList<Country> vertexArray;
     private final ArrayList<String> nameArray;
     private final double[][] edgeMatrix;
 
     public GraphList() {
+        logger.setLevel(Level.INFO);
+        logger.log(Level.FINE, "Created a GraphList");
         this.vertexArray = new ArrayList<>();
         this.nameArray = new ArrayList<>();
         this.edgeMatrix = new double[10][10];
@@ -47,23 +53,30 @@ public class GraphList {
         throw new EmptyVertexException();
     }
 
-    public void modifyEdge(Double w, Country v1, Country v2) {
-        int s = v1.key;
-        int t = v2.key;
-        edgeMatrix[s][t] = w;
-        edgeMatrix[t][s] = w;
-        System.out.println("Edge between " + s + " and " + t + " updated to " + w);
-        Country.updateNeighbour(w, v1, v2);
-        Country.updateNeighbour(w, v2, v1);
+    public void modifyEdge(Double distance, Country startCountry, Country endCountry) {
+        logger.log(Level.INFO, "Modifying an edge: "
+                + "\n\tdistance: " + distance
+                + "\n\tstartCountry: " + startCountry
+                + "\n\tendCountry: " + endCountry);
+        int startCountryKey = startCountry.key;
+        int endCountryKey = endCountry.key;
+        edgeMatrix[startCountryKey][endCountryKey] = distance;
+        edgeMatrix[endCountryKey][startCountryKey] = distance;
+        Country.updateNeighbour(distance, startCountry, endCountry);
+        Country.updateNeighbour(distance, endCountry, startCountry);
     }
 
-    public void createEdge(Double w, Country v1, Country v2) {
-        int s = v1.key;
-        int t = v2.key;
-        edgeMatrix[s][t] = w;
-        edgeMatrix[t][s] = w;
-        Country.addNeighbour(w, v1, v2);
-        Country.addNeighbour(w, v2, v1);
+    public void createEdge(Double distance, Country startCountry, Country endCountry) {
+        logger.log(Level.INFO, "Creating an edge: "
+                + "\n\tdistance: " + distance
+                + "\n\tstartCountry: " + startCountry
+                + "\n\tendCountry: " + endCountry);
+        int startCountryKey = startCountry.key;
+        int endCountryKey = endCountry.key;
+        edgeMatrix[startCountryKey][endCountryKey] = distance;
+        edgeMatrix[endCountryKey][startCountryKey] = distance;
+        Country.addNeighbour(distance, startCountry, endCountry);
+        Country.addNeighbour(distance, endCountry, startCountry);
     }
 
     public boolean edgeExists(Country s, Country t) {

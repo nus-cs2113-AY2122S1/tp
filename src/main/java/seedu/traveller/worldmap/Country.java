@@ -1,10 +1,15 @@
 package seedu.traveller.worldmap;
 
+import seedu.traveller.Parser;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Country implements Comparable<Country> {
+    private static final Logger logger = Logger.getLogger(Country.class.getName());
     public int key;
     public final String name;
     private List<Distance> distances;
@@ -14,16 +19,28 @@ public class Country implements Comparable<Country> {
 
 
     public Country(String name, int key) {
+        logger.setLevel(Level.INFO);
         this.name = name;
         this.distances = new ArrayList<>();
         this.key = key;
+        logger.log(Level.INFO, "Created country: "
+                + "\n\tname: " + this.name
+                + "\n\tkey: " + this.key);
     }
 
     public static void addNeighbour(Double distance, Country startCountry, Country endCountry) {
+        logger.log(Level.INFO, "Adding new neighbour: "
+                + "\n\tdistance: " + distance
+                + "\n\tstartCountry: " + startCountry
+                + "\n\tendCountry: " + endCountry);
         startCountry.distances.add(new Distance(distance, startCountry, endCountry));
     }
 
     public static void updateNeighbour(Double newDistance, Country startCountry, Country endCountry) {
+        logger.log(Level.INFO, "Updating neighbour: "
+                + "\n\tnewDistance: " + newDistance
+                + "\n\tstartCountry: " + startCountry
+                + "\n\tendCountry: " + endCountry);
         int endCountryKey = endCountry.getKey();
         for (Distance distance : startCountry.getDistances()) {
             if (distance.getEndCountry().getKey() == endCountryKey) {

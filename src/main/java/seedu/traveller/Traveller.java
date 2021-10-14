@@ -4,6 +4,8 @@ import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.worldmap.WorldMap;
 
+import java.util.logging.LogManager;
+
 
 public class Traveller {
     private final Ui ui;
@@ -33,7 +35,8 @@ public class Traveller {
     }
 
     public static void main(String[] args) {
-        //assert false : "dummy assertion set to fail";
+
+        LogManager.getLogManager().reset();
         Traveller traveller = new Traveller();
         WorldMap.initWorldMap();
         traveller.run();

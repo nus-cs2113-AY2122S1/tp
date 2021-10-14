@@ -31,4 +31,10 @@ public class MinCalcResult {
     public List<Double> getDistances() {
         return distances;
     }
+
+    @Override
+    public String toString() {
+        return "minCalcResult:\n\t" + getStartCountry() + " to " + getEndCountry()
+                + "\n\t" + getPath() + "\n\t" + getDistances();
+    }
 }
