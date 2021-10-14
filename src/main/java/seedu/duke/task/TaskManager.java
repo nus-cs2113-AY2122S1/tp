@@ -4,24 +4,18 @@ import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.log.Log;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TaskManager {
 
-    private ArrayList<Task> tasklist;
+    private static final int STARTING_SIZE = 128;
 
-    private static Logger logger = Logger.getLogger("TaskManager");
+    private static ArrayList<Task> taskList = new ArrayList<>(128);
 
-    public TaskManager() {
-        this.tasklist = new ArrayList<Task>();
-    }
-
-    public String listTasklist() throws EmptyTasklistException {
+    public static String listTasklist() throws EmptyTasklistException {
         Log.info("listTasklist method called");
-        assert tasklist.size() >= 0 : "Tasklist cannot be negative";
+        assert taskList.size() >= 0 : "Tasklist cannot be negative";
 
-        if (tasklist.size() == 0) {
+        if (taskList.size() == 0) {
             Log.warning("tasklist is empty, throwing EmptyTasklistException");
             throw new EmptyTasklistException();
         }
@@ -30,24 +24,28 @@ public class TaskManager {
             + " MY TASKLIST\n"
             + "-------------\n";
 
-        for (int i = 0; i < tasklist.size(); i++) {
-            tasks += i + 1 + ". " + tasklist.get(i).getTaskEntryDescription() + "\n";
+        for (int i = 0; i < taskList.size(); i++) {
+            tasks += i + 1 + ". " + taskList.get(i).getTaskEntryDescription() + "\n";
         }
 
         Log.info("end of listTasklist - no issues detected");
         return tasks;
     }
 
-    public ArrayList<Task> getTasklist() {
-        return this.tasklist;
+    public static ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
-    public void setTasklist(ArrayList<Task> tasklist) {
-        this.tasklist = tasklist;
+    public static int getTaskListSize() {
+        return taskList.size();
     }
 
-    public void addTask(Task task) {
-        tasklist.add(task);
+    public static Task getTask(int index) {
+        return taskList.get(index);
+    }
+
+    public static void addTask(Task task) {
+        taskList.add(task);
     }
 
 }

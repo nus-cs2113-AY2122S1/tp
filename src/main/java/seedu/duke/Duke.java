@@ -13,15 +13,11 @@ public class Duke {
 
     private final Scanner in;
     private final Ui ui;
-    private final CommandParser parser;
-    private final TaskManager taskManager;
     private ReminderManager reminderManager;
 
     public Duke() {
         in = new Scanner(System.in);
         ui = new Ui();
-        parser = new CommandParser();
-        taskManager = new TaskManager();
         reminderManager = new ReminderManager();
     }
 
@@ -42,7 +38,6 @@ public class Duke {
     }
 
     public String checkReminder() {
-        reminderManager.updateReminderManager(taskManager);
         return reminderManager.sendReminder();
     }
 
@@ -57,7 +52,7 @@ public class Duke {
 
             String userInput = readInput();
 
-            userCommand = parser.parseCommand(taskManager, userInput);
+            userCommand = CommandParser.parseCommand(userInput);
 
             commandResult = runCommand(userCommand);
 

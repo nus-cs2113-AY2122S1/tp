@@ -7,7 +7,6 @@ import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.log.Log;
-import seedu.duke.task.TaskManager;
 
 import java.util.HashMap;
 
@@ -50,7 +49,7 @@ public class CommandParser {
         return flagsToArguments;
     }
 
-    public static Command parseCommand(TaskManager taskManager, String userInput) {
+    public static Command parseCommand(String userInput) {
 
         String[] inputArguments = userInput.split("\\s+", 2);
         String command = inputArguments[0];
@@ -66,9 +65,9 @@ public class CommandParser {
         case HELP_COMMAND:
             return new HelpCommand();
         case ADD_COMMAND:
-            return new AddCommand(taskManager, commandOptions);
+            return new AddCommand(commandOptions);
         case LIST_COMMAND:
-            return new ListCommand(taskManager, commandOptions);
+            return new ListCommand(commandOptions);
         default:
             return new InvalidCommand();
         }
