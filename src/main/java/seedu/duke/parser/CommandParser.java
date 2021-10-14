@@ -19,11 +19,13 @@ public class CommandParser {
     private static final String LIST_COMMAND = "list";
 
     private static final String FLAG_REGEX = "^--\\w+";
+    private static final String WHITESPACE_REGEX = "\\s+";
+
 
     public static HashMap getCommandOptions(String commandArguments) {
 
         HashMap<String, String> flagsToArguments = new HashMap<>();
-        String[] tokens = commandArguments.split("\\s+");
+        String[] tokens = commandArguments.split(WHITESPACE_REGEX);
         String mainArgument = "";
 
         for (int i = 0; i < tokens.length; i++) {
