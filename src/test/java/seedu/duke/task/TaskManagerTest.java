@@ -29,7 +29,7 @@ class TaskManagerTest {
 
         Task newToDo = new Todo("read book", PriorityEnum.LOW, startDate, RecurrenceEnum.DAILY);
         Task newDeadline = new Deadline("return book", startDate, PriorityEnum.MEDIUM, RecurrenceEnum.WEEKLY);
-        Task newEvent = new Event("project meeting", startDate, endDate, PriorityEnum.MEDIUM, RecurrenceEnum.MONTHLY);
+        Task newEvent = new Event("project meeting", startDate, endDate, PriorityEnum.HIGH, RecurrenceEnum.MONTHLY);
 
         tasklist.add(newToDo);
         tasklist.add(newDeadline);

@@ -6,10 +6,10 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.log.Log;
 import seedu.duke.task.TaskManager;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class CommandParser {
 
@@ -19,24 +19,34 @@ public class CommandParser {
     private static final String LIST_COMMAND = "list";
 
     private static final String FLAG_REGEX = "^--\\w+";
+    private static final String WHITESPACE_REGEX = "\\s+";
+
 
     public static HashMap getCommandOptions(String commandArguments) {
 
         HashMap<String, String> flagsToArguments = new HashMap<>();
-        String[] tokens = commandArguments.split("\\s+");
+        String[] tokens = commandArguments.split(WHITESPACE_REGEX);
         String mainArgument = "";
 
         for (int i = 0; i < tokens.length; i++) {
             if (tokens[i].matches(FLAG_REGEX)) {
-                flagsToArguments.put(tokens[i], tokens[i + 1]);
-                i++;
+                String flag = tokens[i];
+                String flagArguments = "";
+                try {
+                    while (tokens[i + 1].matches(FLAG_REGEX) == false) {
+                        flagArguments += tokens[i + 1] + " ";
+                        i++;
+                    }
+                } catch (IndexOutOfBoundsException e) {
+                    Log.warning(e.getMessage());
+                }
+                flagsToArguments.put(flag.substring(2), flagArguments.trim());
             } else {
                 mainArgument += tokens[i] + " ";
             }
         }
 
         flagsToArguments.put("mainArgument", mainArgument.trim());
-
         return flagsToArguments;
     }
 

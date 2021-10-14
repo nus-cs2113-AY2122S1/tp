@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import seedu.duke.exception.EmptyTasklistException;
+import seedu.duke.log.Log;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -17,11 +18,11 @@ public class TaskManager {
     }
 
     public String listTasklist() throws EmptyTasklistException {
-        logger.log(Level.INFO, "listTasklist method called");
+        Log.info("listTasklist method called");
         assert tasklist.size() >= 0 : "Tasklist cannot be negative";
 
         if (tasklist.size() == 0) {
-            logger.log(Level.WARNING, "tasklist is empty, throwing EmptyTasklistException");
+            Log.warning("tasklist is empty, throwing EmptyTasklistException");
             throw new EmptyTasklistException();
         }
 
@@ -33,7 +34,7 @@ public class TaskManager {
             tasks += i + 1 + ". " + tasklist.get(i).getTaskEntryDescription() + "\n";
         }
 
-        logger.log(Level.INFO, "end of listTasklist - no issues detected");
+        Log.info("end of listTasklist - no issues detected");
         return tasks;
     }
 
