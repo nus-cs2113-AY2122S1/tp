@@ -8,7 +8,6 @@ public class HelpCommand extends Command {
     public static final String LS = System.lineSeparator();
 
     public void printHelp() {
-        System.out.println(DIVIDER);
         System.out.println("1. " + AddCommand.COMMAND_WORD);
         System.out.println(AddExpenditureCommand.MESSAGE_USAGE + LS);
         System.out.println(AddBudgetCommand.MESSAGE_USAGE + LS);
