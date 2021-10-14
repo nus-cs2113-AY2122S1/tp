@@ -1,4 +1,11 @@
-Hello!
+Welcome to
+    ____              __  ___     ____             __  
+   / __ \____ ___  __/  |/  ___  / __ )____ ______/ /__
+  / /_/ / __ `/ / / / /|_/ / _ \/ __  / __ `/ ___/ //_/
+ / ____/ /_/ / /_/ / /  / /  __/ /_/ / /_/ / /__/ ,<   
+/_/    \__,_/\__, /_/  /_/\___/_____/\__,_/\___/_/|_|  
+            /____/                                     
+
 Enter your command: Your trip to America on 02 Feb 2021 has been successfully added!
 Enter your command: You have opened the following trip: 
 America | 02 Feb 2021
