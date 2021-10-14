@@ -42,7 +42,7 @@ public class Storage {
         String newBudgetStorageDirectory =  dataStorageDirectory + budgetStorageName;
         File newBudgetStorageFile = new File(newBudgetStorageDirectory);
 
-        if (newBudgetStorageFile.exists() == false) {
+        if (!newBudgetStorageFile.exists()) {
             newBudgetStorageFile.createNewFile();
         } else {
             // Add exception here!
