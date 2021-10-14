@@ -1,6 +1,6 @@
 package seedu.duke.textfiletools;
 
-import java.util.logging.*;
+import java.util.logging.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,8 +46,6 @@ public class DeleteFromTextFile {
 
                 count += 1;
             }
-
-            
 
             assert count >= lineNumber;
 
