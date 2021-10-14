@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ClearCommandTest {
 
     @Test
-    void clearCommand_populatedClientList_correctlyCleared() {
+    void clearCommand_populatedClientList_correctlyCleared() throws TourPlannerException {
         ClientList testClientList = new ClientList();
         Ui testUi = new Ui();
         Client testClient1 = new Client(new String[]{"botuan", "1234", "SQ123", "Intercontinental", "AUS_A"});

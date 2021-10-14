@@ -19,7 +19,7 @@ class AddCommandTest {
     }
 
     @Test
-    void addCommand_emptyClientList_populatedClientList() {
+    void addCommand_emptyClientList_populatedClientList() throws TourPlannerException {
         ClientList testClientList = new ClientList();
         Ui testUi = new Ui();
         Client testClient = new Client(new String[]{"botuan", "1234", "SQ123", "Intercontinental", "AUS_A"});

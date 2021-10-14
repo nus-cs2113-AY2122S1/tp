@@ -27,8 +27,8 @@ public class ClientList {
 
     public void clearAllClients() throws TourPlannerException {
         if (clientCount == 0) {
-            throw new TourPlannerException("Your client list is currently empty.\n" +
-                    "Please first add clients to clear.");
+            throw new TourPlannerException("Your client list is currently empty.\n"
+                    + "Please first add clients to clear.");
         }
         clients.clear();
         clientCount = 0;
