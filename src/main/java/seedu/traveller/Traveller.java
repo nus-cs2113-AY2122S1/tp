@@ -33,6 +33,7 @@ public class Traveller {
     }
 
     public static void main(String[] args) {
+        //assert false : "dummy assertion set to fail";
         Traveller traveller = new Traveller();
         WorldMap.initWorldMap();
         traveller.run();
