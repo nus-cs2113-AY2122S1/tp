@@ -104,6 +104,44 @@ public class Books {
             + "first time; also there was talk that he had just "
             + "married a girl called Marylou. ";
 
+    String brightonrock = "Hale knew, before he had been in Brighton "
+            + "three hours, that they meant to murder him. "
+            + "With his inky fingers and his bitten nails, "
+            + "his manner cynical and nervous, "
+            + "anybody could tell he didn’t belong – "
+            + "belong to the early summer sun, the cool "
+            + "Whitsun wind off the sea, the holiday crowd. "
+            + "They came in by train from Victoria every five minutes, "
+            + "rocked down Queen’s Road standing on the "
+            + "tops of the little local trams, stepped off "
+            + "in bewildered multitudes into fresh and "
+            + "glittering air: the new silver paint sparkled on the piers, "
+            + "the cream houses ran away into the west like a "
+            + "pale Victorian water-colour; a race in miniature motors, "
+            + "a band playing, flower gardens in bloom below the "
+            + "front, an aeroplane advertising something for "
+            + "the health in pale vanishing clouds across the sky.";
+
+    String pickup = "It must have been around a quarter to eleven. "
+            + "A sailor came in and ordered a chile dog and coffee. "
+            + "I sliced a bun, jerked a frank out of the boiling water, "
+            + "nested it, poured a half-dipper of chile over the frank "
+            + "and sprinkled it liberally with chopped onions. "
+            + "I scribbled a check and put it by his plate. "
+            + "I wouldn’t have recommended the unpalatable mess "
+            + "to a starving animal. The sailor was the only customer, "
+            + "and after he ate his dog he left. "
+            + "That was the exact moment she entered. "
+            + "A small woman, hardly more than five feet. "
+            + "She had the figure of a teenage girl. "
+            + "Her suit was a blue tweed, smartly cut, "
+            + "and over her thin shoulders she wore a fur jacket, "
+            + "bolero length. Tiny gold circular earrings "
+            + "clung to her small pierced ears. "
+            + "Her hands and feet were small, "
+            + "and when she seated herself at "
+            + "the counter I noticed she wasn’t wearing any rings.";
+
     String prideandprejudice = "It is a truth universally acknowledged, "
             + "that a single man in possession of a good fortune must be in "
             + "want of a wife. However little known the feelings or "
@@ -168,6 +206,17 @@ public class Books {
             + "But still, if I don't consult a doctor it is from spite. "
             + "My liver is bad, well then let it hurt even worse!";
 
+    String thehauntingofhillhouse = "No live organism can continue "
+            + "for long to exist sanely under conditions of absolute "
+            + "reality; even larks and katydids are supposed, by some, "
+            + "to dream. Hill House, not sane, stood by itself against "
+            + "its hills, holding darkness within; it had stood so for "
+            + "eighty years and might stand for eighty more. "
+            + "Within, walls continued upright, bricks met neatly, "
+            + "floors were firm, and doors were sensibly shut; "
+            + "silence lay steadily against the wood and "
+            + "stone of Hill House, and whatever walked there, walked alone…";
+
     String metamorphosis = "As Gregor Samsa awoke one "
             + "morning from uneasy dreams he found himself transformed "
             + "in his bed into a gigantic insect. "
@@ -180,6 +229,19 @@ public class Books {
             + "His numerous legs, which were pitifully thin "
             + "compared to the rest of his bulk, "
             + "waved helplessly before his eyes.";
+
+    String invisibleman = "I am an invisible man. "
+            + "No, I am not a spook like those who haunted Edgar Allan Poe; "
+            + "nor am I one of your Hollywood-movie ectoplasms. "
+            + "I am a man of substance, of flesh and bone, fiber "
+            + "and liquids—and I might even be said to possess a mind. "
+            + "I am invisible, understand, simply because people "
+            + "refuse to see me. Like the bodiless heads you see "
+            + "sometimes in circus sideshows, it is as though "
+            + "I have been surrounded by mirrors of hard, distorting glass. "
+            + "When they approach me they see only my surroundings, "
+            + "themselves, or figments of their imagination—"
+            + "indeed, everything and anything except me.";
 
     String theadventuresofhuckleberryfinn = "You don't know "
             + "about me without you have read a book by the "
