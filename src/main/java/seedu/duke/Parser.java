@@ -5,6 +5,7 @@ import seedu.duke.command.AddCommand;
 import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.DateCommand;
+import seedu.duke.command.HelpCommand;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
@@ -15,6 +16,7 @@ public class Parser {
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_UPDATE = "update";
+    private static final String COMMAND_HELP = "help";
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_DATE = "date";
 
@@ -58,11 +60,22 @@ public class Parser {
             return parseUpdateCommand(command);
         case COMMAND_DATE:
             return parseDateCommand(command);
+        case COMMAND_HELP:
+            return parseHelpCommand();
         case COMMAND_EXIT:
             return "";
         default:
             return INVALID_COMMAND_MESSAGE;
         }
+    }
+
+    /**
+     * Calls and executes help command.
+     *
+     * @return a message summarising all possible commands recognised by SITUS
+     */
+    private static String parseHelpCommand() {
+        return new HelpCommand().run();
     }
 
     /**
@@ -150,8 +163,7 @@ public class Parser {
      * @throws DukeException if trying to access non-existing ingredients
      */
     private static String parseListCommand() throws DukeException {
-        String resultMsg = new ListCommand().run();
-        return resultMsg;
+        return new ListCommand().run();
     }
 
     /**
