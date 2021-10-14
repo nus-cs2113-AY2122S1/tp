@@ -43,24 +43,22 @@ public class AddDispense extends Command {
         int dispenseQuantity = Integer.parseInt(quantity);
         int quantityLeftToDispense = dispenseQuantity;
         int totalStock = MedicineManager.getTotalStockQuantity(medicines, medicationName);
-        int totalColumnLeft = MedicineManager.getTotalRows(medicines, medicationName);
         Date dispenseDate = new Date(); //dispense date will be today's date
-        ArrayList<Stock> filteredMedicines = new ArrayList<>();
+        ArrayList<Stock> filteredStocks = new ArrayList<>();
 
         for (Medicine medicine : medicines) {
             if (medicine instanceof Stock) { //Ensure that it is a medicine object
-                filteredMedicines.add((Stock) medicine);
+                filteredStocks.add((Stock) medicine);
             }
         }
 
-        filteredMedicines.sort(new comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
+        filteredStocks.sort(new comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
 
-        for (Medicine medicine : filteredMedicines) {
-            Stock existingStock = (Stock) medicine;
-            String existingName = existingStock.getMedicineName().toUpperCase();
-            int existingQuantity = existingStock.getQuantity();
-            int existingId = existingStock.getStockID();
-            Date existingExpiry = existingStock.getExpiry();
+        for (Stock stock : filteredStocks) {
+            String existingName = stock.getMedicineName().toUpperCase();
+            int existingQuantity = stock.getQuantity();
+            int existingId = stock.getStockID();
+            Date existingExpiry = stock.getExpiry();
             boolean medicationExist = existingName.equals(medicationName.toUpperCase());
 
             if (medicationExist && (dispenseQuantity > totalStock)) {
@@ -69,25 +67,24 @@ public class AddDispense extends Command {
                 return;
             }
 
-            if (medicationExist) {
+            if (!medicationExist) {
+                continue;
+            }
 
-                if (existingQuantity >= quantityLeftToDispense) {
-                    existingStock.setQuantity(existingQuantity - quantityLeftToDispense);
-                    medicines.add(new Dispense(medicationName, dispenseQuantity, customerId, dispenseDate,
-                            staffName, existingId));
-                    ui.print("Dispensed:" + medicationName + " Quantity:" + quantityLeftToDispense + " Expiry "
-                            + "date:" + existingExpiry);
-                    return;
-                }
+            if (existingQuantity >= quantityLeftToDispense) {
+                stock.setQuantity(existingQuantity - quantityLeftToDispense);
+                medicines.add(new Dispense(medicationName, dispenseQuantity, customerId, dispenseDate,
+                        staffName, existingId));
+                ui.print("Dispensed:" + medicationName + " Quantity:" + quantityLeftToDispense + " Expiry "
+                        + "date:" + existingExpiry);
+                return;
+            }
 
-                if (totalColumnLeft > 1 && existingQuantity < dispenseQuantity) {
-                    quantityLeftToDispense = quantityLeftToDispense - existingQuantity;
-                    existingStock.setQuantity(0);
-                    ui.print("Dispensed:" + medicationName + " Quantity:" + existingQuantity + " Expiry "
-                            + "date:" + existingExpiry);
-                }
-
-                totalColumnLeft--;
+            if (existingName.equalsIgnoreCase(medicationName) && existingQuantity < dispenseQuantity) {
+                quantityLeftToDispense = quantityLeftToDispense - existingQuantity;
+                stock.setQuantity(0);
+                ui.print("Dispensed:" + medicationName + " Quantity:" + existingQuantity + " Expiry "
+                        + "date:" + existingExpiry);
             }
 
         }
@@ -96,6 +93,8 @@ public class AddDispense extends Command {
     }
 
 }
+
+
 
 
 
