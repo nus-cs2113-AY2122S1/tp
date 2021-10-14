@@ -2,7 +2,6 @@ package seedu.duke;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Parser {
 
@@ -26,16 +25,14 @@ public class Parser {
             Ui.goodBye();
             return false;
         } else if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
-            Logger logger = Storage.getLogger();
-            logger.log(Level.WARNING, "No trip created yet");
+            Storage.getLogger().log(Level.WARNING, "No trip created yet");
             Ui.printNoTripError();
             return true;
         } else if (inputCommand.equals("close")) {
             Storage.closeTrip();
             return true;
         } else if (!checkValidCommand(inputCommand)) {
-            Logger logger = Storage.getLogger();
-            logger.log(Level.WARNING, "invalid user input");
+            Storage.getLogger().log(Level.WARNING, "invalid user input");
             Ui.printUnknownCommandError();
             return true;
         }
@@ -187,8 +184,7 @@ public class Parser {
     private static void executeList() {
         int index = 1;
         if (!Storage.checkOpenTrip()) {
-            Logger logger = Storage.getLogger();
-            logger.log(Level.INFO, "trying to list - no trip currently open");
+            Storage.getLogger().log(Level.INFO, "trying to list - no trip currently open");
             for (Trip trip : Storage.listOfTrips) {
                 Ui.printTripsInList(trip, index);
                 index++;
@@ -229,8 +225,7 @@ public class Parser {
     private static ArrayList<Person> checkValidPersons(Trip currentTrip, String userInput) {
         String[] listOfPeople = userInput.split("/")[0].split(",");
         ArrayList<Person> validListOfPeople = new ArrayList<>();
-        Logger logger = Storage.getLogger();
-        logger.log(Level.INFO, "Checking if names are valid");
+        Storage.getLogger().log(Level.INFO, "Checking if names are valid");
         for (String name : listOfPeople) {
             for (Person person : currentTrip.getListOfPersons()) {
                 if (name.trim().equalsIgnoreCase(person.getName())) {
