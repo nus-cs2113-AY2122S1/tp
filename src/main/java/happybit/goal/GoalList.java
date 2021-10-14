@@ -46,11 +46,13 @@ public class GoalList {
      * Deletes a goal from the goalList.
      *
      * @param goalIndex Integer index of the goal to be deleted from goalList.
+     * @param ui User Interface class for printing deleted goal to output.
      * @throws HaBitCommandException If the goalIndex is not within the index range of the goalList.
      */
-    public void deleteGoal(int goalIndex) throws HaBitCommandException {
+    public void deleteGoal(int goalIndex, Ui ui) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         goalList.remove(goal);
+        ui.printRemovedGoal(goal.getDescription());
     }
 
     /**
@@ -58,15 +60,22 @@ public class GoalList {
      *
      * @param goalIndex  Integer index of goal in goalList.
      * @param habitIndex Integer index of habit to be deleted in goal.
+     * @param ui User Interface class for printing deleted habit from goal to output.
      * @throws HaBitCommandException If the goalIndex is not within the index range of the goalList.
      *                               If the habitIndex is not within the index range of the habitList.
      */
-    public void deleteHabitFromGoal(int goalIndex, int habitIndex) throws HaBitCommandException {
+    public void deleteHabitFromGoal(int goalIndex, int habitIndex, Ui ui) throws HaBitCommandException {
+        Goal goal;
+        Habit habit;
         try {
-            getGoal(goalIndex).removeHabit(habitIndex);
+            goal = getGoal(goalIndex);
+            ArrayList<Habit> habits = goal.getHabitList();
+            habit = habits.get(habitIndex); // index out of bounds exception thrown here if invalid
+            goal.removeHabit(habitIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new HaBitCommandException(ERROR_INVALID_HABIT_INDEX);
         }
+        ui.printRemovedHabit(goal.getDescription(), habit.getHabitName());
     }
 
     /**
@@ -75,15 +84,22 @@ public class GoalList {
      *
      * @param goalIndex Integer index of goal in goal list
      * @param habitIndex Integer index of habit to be marked as done in goal
+     * @param ui User Interface class for printing Habit marked as done to output.
      * @throws HaBitCommandException If goalIndex is not within index range of goalList.
      *                               if habitIndex is not within index range of the habitList
      */
-    public void doneHabitFromGoal(int goalIndex, int habitIndex) throws HaBitCommandException {
+    public void doneHabitFromGoal(int goalIndex, int habitIndex, Ui ui) throws HaBitCommandException {
+        Goal goal;
+        Habit habit;
         try {
-            getGoal(goalIndex).doneHabit(habitIndex);
+            goal = getGoal(goalIndex);
+            ArrayList<Habit> habits = goal.getHabitList();
+            habit = habits.get(habitIndex); // index out of bounds exception thrown here if invalid
+            goal.doneHabit(habitIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new HaBitCommandException(ERROR_INVALID_HABIT_INDEX);
         }
+        ui.printDoneHabit(goal.getDescription(), habit.getHabitName());
     }
 
     /**
@@ -96,7 +112,7 @@ public class GoalList {
         if (goalList.isEmpty()) {
             throw new HaBitCommandException(ERROR_EMPTY_GOAL_LIST);
         }
-        ui.printGoalList(goalList);
+        ui.printGoalList(goalList, getListLength());
     }
 
     /**
@@ -110,10 +126,11 @@ public class GoalList {
     public void listHabitsFromGoal(int goalIndex, Ui ui) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         ArrayList<Habit> habitList = goal.getHabitList();
+        int numOfHabits = goal.numberOfHabits();
         if (habitList.isEmpty()) {
             throw new HaBitCommandException(ERROR_EMPTY_HABIT_LIST);
         }
-        ui.printHabitList(habitList);
+        ui.printHabitList(goal.getDescription(), habitList, numOfHabits);
     }
 
     /*
