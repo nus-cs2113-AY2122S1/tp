@@ -48,6 +48,18 @@ public class GoalList {
      *
      * @param habit     Habit to be linked to a goal.
      * @param goalIndex Integer index of goal in goalList.
+     * @param ui User Interface class for printing deleted goal to output.
+     */
+    public void addHabitFromGoal(Habit habit, int goalIndex, Ui ui) {
+        goalList.get(goalIndex).addHabit(habit);
+        ui.printAddedHabit(habit.getHabitName(), goalList.get(goalIndex).getDescription());
+    }
+
+    /**
+     * Adds a habit that is linked to a goal.
+     *
+     * @param habit     Habit to be linked to a goal.
+     * @param goalIndex Integer index of goal in goalList.
      */
     public void addHabitFromGoal(Habit habit, int goalIndex) {
         goalList.get(goalIndex).addHabit(habit);
