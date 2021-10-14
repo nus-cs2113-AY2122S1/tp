@@ -73,7 +73,7 @@ public class Storage {
                     break;
                 case HABIT_TYPE:
                     Habit habit = habitParser(lineData);
-                    int goalIndex = Integer.getInteger(lineData[NUM_INDEX]);
+                    int goalIndex = Integer.parseInt(lineData[NUM_INDEX]);
 
                     goalList.addHabitFromGoal(habit, goalIndex);
                     break;
