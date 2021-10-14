@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# Rachel - Project Portfolio Page
 
 ## Overview
 
