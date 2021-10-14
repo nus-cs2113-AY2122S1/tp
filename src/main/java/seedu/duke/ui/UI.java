@@ -1,5 +1,7 @@
 package seedu.duke.ui;
 
+import seedu.duke.localtime.CurrentDate;
+
 import java.util.Scanner;
 
 public class UI {
@@ -11,6 +13,7 @@ public class UI {
 
     public static final String DIVIDER = "___________________________________________\n";
     private static final String WELCOME_MESSAGE = DIVIDER
+            + "Current session date: " + CurrentDate.getCurrentFormattedDate() + '\n'
             + "Welcome to SITUS!\n"
             + "What would you like to do first?\n"
             + DIVIDER;
