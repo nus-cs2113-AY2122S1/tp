@@ -12,9 +12,7 @@ import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 import seedu.duke.commands.Command;
 
-import static seedu.duke.common.Messages.MESSAGE_INVALID_AMOUNT;
-import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND;
-import static seedu.duke.common.Messages.MESSAGE_INVALID_ADD_COMMAND;
+import static seedu.duke.common.Messages.*;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
@@ -130,14 +128,18 @@ public class Parser {
      * @return AddBudgetCommand or AddExpenditureCommand depending on the addType
      */
     private Command prepareDeleteCommand(String commandParams) {
-        String deleteType = commandParams.substring(0, 2);
-        switch (deleteType) {
-        case ("b/"):
-            return new DeleteBudgetCommand(commandParams);
-        case ("e/"):
-            return prepareDeleteExpenditureCommand(commandParams);
-        default:
-            return new InvalidCommand(MESSAGE_INVALID_COMMAND);
+        try {
+            String deleteType = commandParams.substring(0, 2);
+            switch (deleteType) {
+            case ("b/"):
+                return new DeleteBudgetCommand(commandParams);
+            case ("e/"):
+                return prepareDeleteExpenditureCommand(commandParams);
+            default:
+                return new InvalidCommand(MESSAGE_INVALID_COMMAND);
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_DELETE_COMMAND, DeleteCommand.MESSAGE_USAGE));
         }
     }
 
@@ -148,11 +150,14 @@ public class Parser {
      * @return an DeleteExpenditureCommand with proper parameters
      */
     private Command prepareDeleteExpenditureCommand(String commandParams) {
-        String[] split = commandParams.trim().split("/|", 2);
-        String indexString = split[1].trim();
-        int index = Integer.parseInt(indexString);
-
-        return new DeleteExpenditureCommand(index);
+        try {
+            String[] split = commandParams.trim().split("/|", 2);
+            String indexString = split[1].trim();
+            int index = Integer.parseInt(indexString);
+            return new DeleteExpenditureCommand(index);
+        } catch (NumberFormatException nfe) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_INDEX_OF_EXPENDITURE, DeleteExpenditureCommand.MESSAGE_USAGE));
+        }
     }
 
 }
