@@ -13,6 +13,8 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(ClientList clients, Ui ui) {
+        int NewClientCount = clients.getClientCount() + 1;
         clients.add(client, ui);
+        assert NewClientCount == clients.getClientCount();
     }
 }
