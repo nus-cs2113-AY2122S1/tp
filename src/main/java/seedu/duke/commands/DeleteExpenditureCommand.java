@@ -2,6 +2,7 @@ package seedu.duke.commands;
 
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.RecordList;
+import seedu.duke.textfiletools.DeleteFromTextFile;
 import seedu.duke.ui.TextUi;
 
 public class DeleteExpenditureCommand extends DeleteCommand {
@@ -16,5 +17,7 @@ public class DeleteExpenditureCommand extends DeleteCommand {
     public void execute(boolean isLoadingStorage) {
         TextUi.showExpenditureDeletedMessage(index, recordList.getExpenditure(index - 1));
         recordList.deleteExpenditure(index);
+
+        DeleteFromTextFile.removeLineFromFile("./data/BudgetList1.txt", index);
     }
 }
