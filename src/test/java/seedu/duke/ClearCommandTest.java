@@ -4,8 +4,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Junit testing for ClearCommand.
+ */
 class ClearCommandTest {
 
+    /**
+     * Asserts that client list is empty after clear command object is created.
+     */
     @Test
     void clearCommand_populatedClientList_correctlyCleared() throws TourPlannerException {
         ClientList testClientList = new ClientList();

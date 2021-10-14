@@ -4,11 +4,20 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Sense-makes the inputs given and distributes the information to other parts of the program.
+ */
 public class Parser {
     private static final String CONTACT_NUMBER_PREFIX = "/cn";
     private static final String FLIGHT_PREFIX = "/f";
     private static final String ACCOMMS_PREFIX = "/a";
     private static final String TOUR_PREFIX = "/t";
+    public static final String ERROR_EXTRA_INPUT = "Extra input! Refrain from doing so.";
+    public static final String ERROR_INVALID_CUT_INDEX = "Invalid cut index!";
+    public static final String ERROR_DUPLICATE_PREFIXES = "Duplicate prefixes! Please try again.";
+    public static final String ERROR_MISSING_PREFIXES
+            = "Missing prefixes! Did you miss out some fields? Please try again.";
+    public static final String ERROR_MISSING_NAME = "Missing client name! Please try again.";
 
     /**
      * Enum to show availability of prefix in string during add client command.
@@ -36,29 +45,29 @@ public class Parser {
         switch (command) {
         case "bye":
             if (!params.equals("")) {
-                throw new TourPlannerException("INVALID INPUT");
+                throw new TourPlannerException(ERROR_EXTRA_INPUT);
             }
             return new ByeCommand();
         case "add":
             return parseAdd(params);
         case "list":
             if (!params.equals("")) {
-                throw new TourPlannerException("INVALID INPUT");
+                throw new TourPlannerException(ERROR_EXTRA_INPUT);
             }
             return new ListCommand();
         case "clear":
             if (!params.equals("")) {
-                throw new TourPlannerException("INVALID INPUT");
+                throw new TourPlannerException(ERROR_EXTRA_INPUT);
             }
             return new ClearCommand();
         case "cut":
             try {
                 return parseCut(params);
             } catch (NullPointerException | NumberFormatException e) {
-                throw new TourPlannerException("INVALID: Empty 'cut' index");
+                throw new TourPlannerException(ERROR_INVALID_CUT_INDEX);
             }
         default:
-            throw new TourPlannerException("INVALID INPUT");
+            throw new TourPlannerException(ERROR_EXTRA_INPUT);
         }
     }
 
@@ -98,7 +107,7 @@ public class Parser {
      */
     private static TreeMap<Integer, String> extractPrefixIndexes(String argString) throws TourPlannerException {
         if (!containAllPrefixes(argString)) {
-            throw new TourPlannerException("Missing prefixes! Did you miss out some fields?");
+            throw new TourPlannerException(ERROR_MISSING_PREFIXES);
         }
 
         TreeMap<Integer, String> prefixIndexes = new TreeMap<>();
@@ -117,7 +126,7 @@ public class Parser {
         boolean isUniqueIndex = prefixIndexes.size() == 5;
 
         if (!isUniqueIndex) {
-            throw new TourPlannerException("You missed out your name!");
+            throw new TourPlannerException(ERROR_MISSING_NAME);
         }
         return prefixIndexes;
     }
@@ -171,10 +180,10 @@ public class Parser {
     private static String extractValue(String argString, String prefix, int startIndex, int endIndex)
             throws TourPlannerException {
         String unformattedSubstring = argString.substring(startIndex, endIndex).trim();
-        String value = unformattedSubstring.replace(prefix, "").trim();
+        String value = unformattedSubstring.replaceFirst(prefix, "").trim();
         if (value.contains(CONTACT_NUMBER_PREFIX) || value.contains(FLIGHT_PREFIX)
                 || value.contains(ACCOMMS_PREFIX) || value.contains(TOUR_PREFIX)) {
-            throw new TourPlannerException("There are duplicate prefixes!");
+            throw new TourPlannerException(ERROR_DUPLICATE_PREFIXES);
         }
         return value;
     }
@@ -281,7 +290,6 @@ public class Parser {
         int clientIndex = Integer.parseInt(params);
         return clientIndex;
     }
-
 }
 
    
