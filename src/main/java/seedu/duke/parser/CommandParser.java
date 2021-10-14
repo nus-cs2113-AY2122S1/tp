@@ -1,21 +1,19 @@
 package seedu.duke.parser;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.AddCommand;
+import seedu.duke.command.CommandEnum;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.addtask.DeadlineCommand;
+import seedu.duke.command.addtask.EventCommand;
+import seedu.duke.command.addtask.TodoCommand;
 import seedu.duke.log.Log;
 
 import java.util.HashMap;
 
 public class CommandParser {
-
-    private static final String EXIT_COMMAND = "bye";
-    private static final String HELP_COMMAND = "help";
-    private static final String ADD_COMMAND = "add";
-    private static final String LIST_COMMAND = "list";
 
     private static final String FLAG_REGEX = "^--\\w+";
     private static final String WHITESPACE_REGEX = "\\s+";
@@ -53,20 +51,25 @@ public class CommandParser {
 
         String[] inputArguments = userInput.split("\\s+", 2);
         String command = inputArguments[0];
+        CommandEnum commandEnum = CommandEnum.getCommand(command);
         HashMap<String, String> commandOptions = new HashMap<>();
 
         if (inputArguments.length == 2) {
             commandOptions = getCommandOptions(inputArguments[1]);
         }
 
-        switch (command) {
-        case EXIT_COMMAND:
+        switch (commandEnum) {
+        case BYE:
             return new ExitCommand();
-        case HELP_COMMAND:
+        case HELP:
             return new HelpCommand();
-        case ADD_COMMAND:
-            return new AddCommand(commandOptions);
-        case LIST_COMMAND:
+        case TODO:
+            return new TodoCommand(commandOptions);
+        case DEADLINE:
+            return new DeadlineCommand(commandOptions);
+        case EVENT:
+            return new EventCommand(commandOptions);
+        case LIST:
             return new ListCommand(commandOptions);
         default:
             return new InvalidCommand();

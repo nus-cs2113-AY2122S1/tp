@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import seedu.duke.exception.ParseDateFailedException;
 
-public class UtilityParser {
+public class DateParser {
     private static final String DATE_FORMAT = "dd-MM-yyyy hh:mm:ss";
 
     public static String getDateAsString(Date date) {
@@ -20,7 +20,11 @@ public class UtilityParser {
             SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
             return formatter.parse(date);
         } catch (ParseException pe) {
-            throw new ParseDateFailedException(DATE_FORMAT);
+            throw new ParseDateFailedException(getDefaultDateFormat());
         }
+    }
+
+    public static String getDefaultDateFormat() {
+        return DATE_FORMAT;
     }
 }

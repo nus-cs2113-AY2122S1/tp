@@ -1,13 +1,12 @@
 package seedu.duke.task.factory;
 
-import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
+import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.exception.StartDateAfterEndDateException;
-import seedu.duke.log.Log;
 import seedu.duke.command.flags.EventFlag;
 import seedu.duke.exception.RequiredArgmentNotProvidedException;
 import seedu.duke.parser.TaskParser;
@@ -19,7 +18,7 @@ import seedu.duke.task.type.Event;
 public class EventFactory {
     private static final TypeEnum taskType = TypeEnum.EVENT;
 
-    static Event getEvent(HashMap<String, String> flags) throws GetTaskFailedException {
+    public static Event getEvent(HashMap<String, String> flags) throws GetTaskFailedException {
         try {
             hasRequiredArguments(flags);
 
@@ -40,17 +39,16 @@ public class EventFactory {
 
             return getConstructor(description, startDate, endDate, priorityEnum, recurrenceEnum);
         } catch (RequiredArgmentNotProvidedException ranpe) {
-            Log.severe(ranpe.getMessage());
-        } catch (ParseException pe) {
-            Log.severe(pe.getMessage());
+            throw new GetTaskFailedException(ranpe.getMessage());
+        } catch (ParseDateFailedException pdfe) {
+            throw new GetTaskFailedException(pdfe.getMessage());
         } catch (InvalidPriorityException ipe) {
-            Log.severe(ipe.getMessage());
+            throw new GetTaskFailedException(ipe.getMessage());
         } catch (InvalidRecurrenceException ire) {
-            Log.severe(ire.getMessage());
+            throw new GetTaskFailedException(ire.getMessage());
         } catch (StartDateAfterEndDateException sdaede) {
-            Log.severe(sdaede.getMessage());
+            throw new GetTaskFailedException(sdaede.getMessage());
         }
-        throw new GetTaskFailedException(taskType.toString());
     }
 
     private static void hasRequiredArguments(HashMap<String, String> flags)

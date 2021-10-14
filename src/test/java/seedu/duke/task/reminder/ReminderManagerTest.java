@@ -2,6 +2,7 @@ package seedu.duke.task.reminder;
 
 import java.text.ParseException;
 import org.junit.jupiter.api.Test;
+import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskManager;
@@ -9,7 +10,6 @@ import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -27,7 +27,7 @@ class ReminderManagerTest {
 
     private String expectedOut;
 
-    ReminderManagerTest() throws ParseException {
+    ReminderManagerTest() throws ParseException, ParseDateFailedException {
     }
 
     @Test
