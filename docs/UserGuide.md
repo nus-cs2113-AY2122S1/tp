@@ -1,33 +1,62 @@
 # User Guide
 
-## Introduction
+Ha(ppy)Bit is a desktop app aimed to improve both the **physical and mental lifestyle of students**, 
+through the setting and tracking of goals to cultivate good habits. 
+The app operates on a Command Line Interface (CLI) while still 
+comprising features typically found in a Graphical User Interface (GUI). 
+Students who type fast will find that Ha(ppy)Bit performs habit tracking more efficiently than your 
+conventional GUI apps.
 
-{Give a product intro}
+* [Quick Start](#quick-start)
+* [Terminology](#terminology)
+* [Features](#features)
+    * [Ask for Help: `help`](#ask-for-help-help)
+    * [List all Goals: `list`](#list-all-goals-list)
+    * [Set a Goal: `set`](#set-a-goal-set)
+    * [Remove a Goal: `remove`](#remove-a-goal-remove)
+    * [Add a Habit: `add`](#add-a-habit-add)
+    * [Complete Habit: `done`](#complete-habit-done)
+    * [Delete Habit: `delete`](#delete-habit-delete)
+    * [View Habit: `view`](#view-habit-view)
+    * [Exit Program: `bye`](#exit-program-bye)
+* [About Loading and Saving Data](#about-loading-and-saving-data)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 ## Quick Start
 
 {Give steps to get started quickly}
 
 1. Ensure that you have Java 11 or above installed.
-1. Down the latest version of `Duke` from [here](http://link.to/duke).
+2. Down the latest version of `Duke` from [here](http://link.to/duke).
+
+## Terminology
+
 
 ## Features 
 
-{Give detailed description of each feature}
+Below are the commands that the app supports.
+Each section includes the function of the command and the command format.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Ask for Help: `help`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+### List all Goals: `list`
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+### Set a Goal: `set`
 
-Example of usage: 
+### Remove a Goal: `remove`
 
-`todo n/Write the rest of the User Guide d/next week`
+### Add a Habit: `add`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+### Complete Habit: `done`
+
+### Delete Habit: `delete`
+
+### View Habit: `view`
+
+### Exit Program: `bye`
+
+## About Loading and Saving Data
 
 ## FAQ
 
@@ -39,4 +68,3 @@ Example of usage:
 
 {Give a 'cheat sheet' of commands here}
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`

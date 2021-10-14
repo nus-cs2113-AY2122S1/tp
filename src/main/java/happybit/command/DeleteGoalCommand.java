@@ -15,7 +15,7 @@ public class DeleteGoalCommand extends DeleteCommand {
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-        goalList.deleteGoal(goalIndex);
+        goalList.deleteGoal(goalIndex, ui);
     }
 
 }

@@ -2,6 +2,7 @@ package happybit.goal;
 
 import happybit.habit.Habit;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -45,7 +46,7 @@ public class Goal {
      * @return String containing goal name and type.
      */
     public String getDescription() {
-        return getGoalTypeCharacter() + " " + goalName + "\n";
+        return getGoalTypeCharacter() + " " + goalName;
     }
 
     /**
@@ -76,12 +77,34 @@ public class Goal {
     }
 
     /**
+     * Sets a habit at user specified index as done.
+     *
+     * @param habitIndex Index corresponding to habit in the habitList
+     */
+    public void doneHabit(int habitIndex) {
+        Habit habit = habitList.get(habitIndex);
+        habit.setCompleted();
+    }
+
+    /**
      * Gets the number of habits in a goal.
      *
      * @return Integer number of habits associated with the goal.
      */
     public int numberOfHabits() {
         return habitList.size();
+    }
+
+    public String getStartDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+
+        return dateFormat.format(this.startDate);
+    }
+
+    public String getEndDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+
+        return dateFormat.format(this.endDate);
     }
 
     /*
@@ -97,7 +120,7 @@ public class Goal {
      *
      * @return String of the goalType 2-character code.
      */
-    private String getGoalTypeCharacter() {
+    public String getGoalTypeCharacter() {
         switch (this.goalType) {
         case SLEEP:
             return "[SL]";

@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -28,14 +27,5 @@ class StorageTest {
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);
-    }
-
-    @Test
-    public void importData_importEmptyFile_emptyArrayList() {
-        Storage s = new Storage();
-        ArrayList<String> actualOutput = s.importData();
-        ArrayList<String> expectedOutput = new ArrayList<>();
-
-        assertEquals(expectedOutput, actualOutput);
     }
 }

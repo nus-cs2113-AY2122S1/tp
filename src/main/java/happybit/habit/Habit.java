@@ -3,7 +3,7 @@ package happybit.habit;
 public class Habit {
 
     protected String habitName;
-    protected boolean isDone = false;
+    protected boolean isDone;
 
     /**
      * Constructor for Habit class.
@@ -12,6 +12,7 @@ public class Habit {
      */
     public Habit(String habitName) {
         this.habitName = habitName;
+        this.isDone = false;
     }
 
     /**

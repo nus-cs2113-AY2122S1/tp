@@ -8,20 +8,23 @@ import java.util.ArrayList;
 public class Ui {
     private static final String COMMAND_LIST_GREETING =
             "Hello! These are all the possible commands for this habit tracker :)";
-    private static final String ADD_HABIT_COMMAND =
-            "add a habit: add <habit type> <habit name>";
-    private static final String HABIT_TYPE_INFO =
-            "-> Habit types include: default, sleep, food, exercise and study";
-    private static final String DELETE_HABIT_COMMAND =
-            "delete a habit: delete <habit name>";
     private static final String SET_GOAL_COMMAND =
-            "set a goal for a habit: set <habit name> <goal name> /<start date> - /<end date>";
+            "set a goal: set /<goal type> /<goal name> /<start date> - /<end date>";
+    private static final String GOAL_TYPE_INFO =
+            "-> Habit types include: default, sleep, food, exercise and study";
     private static final String REMOVE_GOAL_COMMAND =
-            "remove a goal for a habit: remove <habit name> <goal name>";
-    private static final String LIST_HABIT_COMMAND =
-            "list all habits user has input: list";
+            "remove a goal: remove <goal index>";
     private static final String LIST_GOAL_COMMAND =
-            "list all goals for that habit: list -<habit name>";
+            "list all goals for that habit: list";
+    private static final String ADD_HABIT_COMMAND =
+            "add a habit to a goal: add <goal index> <habit name>";
+    private static final String DELETE_HABIT_COMMAND =
+            "delete a habit from a goal: delete <goal index> <habit index>";
+    private static final String DONE_HABIT_COMMAND =
+            "indicate a habit as done: done <goal index> <habit index>";
+    private static final String LIST_HABIT_COMMAND =
+            "View all the habits user has under a goal: view <goal index>";
+
     private static final String NEWLINE = System.lineSeparator();
     private static final String DASHES = "______________________________________________________________"
             + "__________________________________________________________";
@@ -29,46 +32,84 @@ public class Ui {
     public void printCommandList() {
         printDashes();
         System.out.print(COMMAND_LIST_GREETING + NEWLINE
-                + ADD_HABIT_COMMAND + NEWLINE
-                + HABIT_TYPE_INFO + NEWLINE
-                + DELETE_HABIT_COMMAND + NEWLINE
                 + SET_GOAL_COMMAND + NEWLINE
+                + GOAL_TYPE_INFO + NEWLINE
                 + REMOVE_GOAL_COMMAND + NEWLINE
-                + LIST_HABIT_COMMAND + NEWLINE
                 + LIST_GOAL_COMMAND + NEWLINE
+                + ADD_HABIT_COMMAND + NEWLINE
+                + DELETE_HABIT_COMMAND + NEWLINE
+                + DONE_HABIT_COMMAND + NEWLINE
+                + LIST_HABIT_COMMAND + NEWLINE
         );
         printDashes();
     }
 
-    public void printGoalList(ArrayList<Goal> goals) {
+    public void printGoalList(ArrayList<Goal> goals, int numOfGoals) {
         printDashes();
+        assert (numOfGoals > 0) : "List cannot be empty here";
+        System.out.println("There are " + numOfGoals + " goal(s) in your list:");
         for (Goal goal : goals) {
             System.out.println(goal.getDescription());
         }
         printDashes();
     }
 
-    public void printHabitList(ArrayList<Habit> habits) {
+    public void printHabitList(String goalDescription, ArrayList<Habit> habits, int numOfHabits) {
         printDashes();
+        assert (numOfHabits > 0) : "List cannot be empty here";
+        System.out.println("Here are your " + numOfHabits + " habit(s) under the goal \""
+                + goalDescription + "\".");
+        String prefix = "[ ]";
         for (Habit habit : habits) {
-            System.out.println(habit.getHabitName());
+            if (habit.getDone()) {
+                prefix = "[X]";
+            }
+            System.out.println(prefix + " " + habit.getHabitName());
         }
         printDashes();
     }
 
-    public static void printRemovedGoal(String goalDescription) {
+    public void printAddedGoal(String goalDescription) {
         printDashes();
-        System.out.println("Your goal: " + goalDescription + "has been removed!");
+        System.out.println("Your goal: " + goalDescription + " has been added.");
         printDashes();
     }
 
-    private static void printDashes() {
-        System.out.println(DASHES);
+    public void printAddedHabit(String habitDescription, String goalDescription) {
+        printDashes();
+        System.out.println("Your habit: " + habitDescription + " has been added to your goal: " + goalDescription);
+        printDashes();
+    }
+
+    public void printRemovedGoal(String goalDescription) {
+        printDashes();
+        System.out.println("Your goal: " + goalDescription + "has been removed.");
+        printDashes();
+    }
+
+    public void printRemovedHabit(String goalDescription, String habitName) {
+        printDashes();
+        System.out.println("Your habit of \"" + habitName + "\" under the goal \""
+                + goalDescription + "\" has been removed.");
+        printDashes();
+    }
+
+    public void printDoneHabit(String goalDescription, String habitName) {
+        printDashes();
+        System.out.println("Your habit of \"" + habitName + "\" under the goal \""
+                + goalDescription + "\" has been set as done.");
+        printDashes();
     }
 
     public void showWelcome() {
         printDashes();
         System.out.println("Howdy! Welcome to Ha(ppy)Bit!");
+        printDashes();
+    }
+
+    public void showError(String message) {
+        printDashes();
+        System.out.println(message);
         printDashes();
     }
 
@@ -79,4 +120,9 @@ public class Ui {
                 + " — Will Durant");
         printDashes();
     }
+
+    private void printDashes() {
+        System.out.println(DASHES);
+    }
+
 }
