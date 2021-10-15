@@ -2,14 +2,18 @@ package seedu.typists.ui;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static java.lang.System.lineSeparator;
 import static java.lang.System.out;
 import static seedu.typists.common.Messages.LOGO;
 import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
 import static seedu.typists.common.Messages.MESSAGE_WELCOME;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Scanner;
+
+import static seedu.typists.common.Messages.*;
 
 /**
  * Text UI of the application.
@@ -21,6 +25,8 @@ public class TextUi {
     private static final String LINE_PREFIX = "     | ";
     private static final String LS = lineSeparator();
 
+    //get current timestamp
+    //unused because it interferes with the EXPECTED.TXT in runtest
     public String getTimeStamp() {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         return timeFormatter.format(timestamp);
@@ -31,11 +37,12 @@ public class TextUi {
         getTimeStamp();
         printScreen(
                 version,
-                getTimeStamp(),
+                //getTimeStamp(),
                 DIVIDER,
                 LOGO,
                 MESSAGE_WELCOME,
                 MESSAGE_ACKNOWLEDGE,
+                MESSAGE_HELP,
                 DIVIDER
         );
     }
@@ -52,6 +59,39 @@ public class TextUi {
             out.print(m + " ");
         }
         out.print("\n");
+    }
+
+    public String readCommand() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
+
+    public void showLine() {
+        System.out.println(DIVIDER);
+    }
+
+    /**
+     * Print error message.
+     * @param meg obtained from DukeException message
+     */
+    public void showText(String meg) {
+        System.out.println(meg);
+    }
+
+    public void showNumber(int i) {
+        System.out.println(String.valueOf(i));
+    }
+
+    public void showBye() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public void printGameMode1Progress(int a, int b) {
+        System.out.println("Your progress:" + String.valueOf(a) + "/" + String.valueOf(b));
+    }
+
+    public void printSuccess() {
+        System.out.println("Finished!");
     }
 
     public void showSummary(int errorWordCount, double WPM, int totalWordTyped, double gameTime) {
