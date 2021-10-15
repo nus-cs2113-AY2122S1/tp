@@ -350,7 +350,7 @@ public class Timetable implements Comparable<Timetable> {
     @Override
     public int compareTo(Timetable timetable) {
         int flag = 0;
-        boolean isSemesterSame = this.getSemester().equals(timetable.getSemester());
+        boolean isSemesterSame = this.getSemester() == timetable.getSemester();
         boolean areModulesSame = this.modules.equals(timetable.modules);
         if (isSemesterSame && areModulesSame) {
             flag = 1;
