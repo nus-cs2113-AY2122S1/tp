@@ -6,9 +6,9 @@ import seedu.duke.employee.EmployeeParser;
 import seedu.duke.ingredient.Ingredient;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientParser;
-import seedu.duke.menu.Menu;
-import seedu.duke.menu.MenuList;
-import seedu.duke.menu.MenuParser;
+import seedu.duke.dish.Dish;
+import seedu.duke.dish.Menu;
+import seedu.duke.dish.DishParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,10 +20,10 @@ public class Storage {
 
     public static final String FILE_NAME = "Duke.txt";
 
-    public static void loadStorage(EmployeeList employeeList, MenuList menuList, IngredientList ingredientList) {
+    public static void loadStorage(EmployeeList employeeList, Menu menu, IngredientList ingredientList) {
         File file = new File(FILE_NAME);
         EmployeeParser employeeParser = new EmployeeParser();
-        MenuParser menuParser = new MenuParser();
+        DishParser dishParser = new DishParser();
         IngredientParser ingredientParser = new IngredientParser();
         if (!file.exists()) {
             System.out.println("File is not found!");
@@ -41,9 +41,9 @@ public class Storage {
                 } else if (line.startsWith("add-ingredient")) {
                     Ingredient newIngredient = decodeIngredient(line);
                     ingredientParser.loadIngredientFromStorage(ingredientList, newIngredient);
-                } else if (line.startsWith("add-menu")) {
-                    Menu newMenuItem = decodeMenuItem(line);
-                    menuParser.loadMenuFromStorage(menuList, newMenuItem);
+                } else if (line.startsWith("add-dish")) {
+                    Dish newDishItem = decodeDish(line);
+                    dishParser.loadDishFromStorage(menu, newDishItem);
                 }
             }
             fileReader.close();
@@ -81,22 +81,22 @@ public class Storage {
         return encodedItem;
     }
 
-    private static Menu decodeMenuItem(String toRead) {
+    private static Dish decodeDish(String toRead) {
         String[] description = toRead.trim().split("\\|", 3);
-        double menuPrice = Double.valueOf(description[2]);
-        Menu menu = new Menu(description[1], menuPrice);
-        return menu;
+        double dishPrice = Double.valueOf(description[2]);
+        Dish dish = new Dish(description[1], dishPrice);
+        return dish;
     }
 
-    private static String encodeMenuItem(String toWrite) {
+    private static String encodeDish(String toWrite) {
         String encodedItem = null;
         String[] description = toWrite.trim().split(" ", 2);
-        encodedItem = "add-menu" + "|" + description[0] + "|" + description[1].substring(3);
+        encodedItem = "add-dish" + "|" + description[0] + "|" + description[1].substring(3);
         assert (!encodedItem.contains("$"));
         return encodedItem;
     }
 
-    public static void saveStorage(EmployeeList employeeList, MenuList menuList,
+    public static void saveStorage(EmployeeList employeeList, Menu menu,
                                    IngredientList ingredientList) {
         try {
             FileWriter fileWriter = new FileWriter(FILE_NAME);
@@ -109,9 +109,9 @@ public class Storage {
                 Ingredient ingredient = ingredientList.ingredientList.get(i);
                 fileWriter.write(String.format("%s\n", encodeIngredient(ingredient.toString())));
             }
-            for (int i = 0; i < menuList.menuList.size(); i += 1) {
-                Menu menu = menuList.menuList.get(i);
-                fileWriter.write(String.format("%s\n", encodeMenuItem(menu.toString())));
+            for (int i = 0; i < menu.menu.size(); i += 1) {
+                Dish dish = menu.menu.get(i);
+                fileWriter.write(String.format("%s\n", encodeDish(dish.toString())));
             }
             fileWriter.close();
         } catch (IOException e) {

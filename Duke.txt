@@ -1,3 +1,3 @@
 add-employee|asdsd|12312
-add-menu|asd|123
-add-menu|asd|14
+add-dish|asdfg|1234.0
+add-dish|fas|123.0

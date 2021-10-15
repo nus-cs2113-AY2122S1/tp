@@ -4,15 +4,15 @@ import seedu.duke.employee.EmployeeList;
 import seedu.duke.employee.EmployeeParser;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientParser;
-import seedu.duke.menu.MenuList;
-import seedu.duke.menu.MenuParser;
+import seedu.duke.dish.Menu;
+import seedu.duke.dish.DishParser;
 
 public class MainParser {
 
-    public static boolean handleCommand(EmployeeList employeeList, MenuList menuList, IngredientList ingredientList,
+    public static boolean handleCommand(EmployeeList employeeList, Menu menu, IngredientList ingredientList,
                                         String userInput) {
         EmployeeParser employeeParser = new EmployeeParser();
-        MenuParser menuParser = new MenuParser();
+        DishParser dishParser = new DishParser();
         IngredientParser ingredientParser = new IngredientParser();
 
         String[] command = userInput.trim().split("\\|", 3);
@@ -27,17 +27,17 @@ public class MainParser {
         case "list-employee":
             employeeParser.listEmployee(employeeList);
             break;
-        case "add-menu":
-            menuParser.addMenu(command, menuList);
+        case "add-dish":
+            dishParser.addDish(command, menu);
             break;
-        case "remove-menu":
-            menuParser.removeMenu(command, menuList);
+        case "remove-dish":
+            dishParser.removeDish(command, menu);
             break;
-        case "edit-menu":
-            menuParser.editMenu(command, menuList);
+        case "edit-dish":
+            dishParser.editDish(command, menu);
             break;
         case "list-menu":
-            menuParser.listMenu(menuList);
+            dishParser.listMenu(menu);
             break;
         case "add-ingredient":
             ingredientParser.addIngredient(command, ingredientList);
