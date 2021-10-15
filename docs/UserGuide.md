@@ -32,10 +32,10 @@ conventional GUI apps.
 5. Run jar file as java -jar tp.jar.
 
 ## Terminology
-Name  | Description                                    | Example
--------|------------------------------------------------|-------------------
-Goal  | A long term achievement you wish to accomplish | `Lose 5kg by Dec` 
-Habit | Checkpoints / Steps taken to achieve goal      | `Run 5km`         
+Name | Description | Example
+------- | ------------------------------------------------ | -------------------
+Goal | A long term achievement you wish to accomplish | `Lose 5kg by Dec` 
+Habit | Checkpoints / Steps taken to achieve goal | `Run 5km`         
 
 ## Features 
 
