@@ -1,5 +1,6 @@
 package seedu.utility;
 
+import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 import seedu.exceptions.ExpenseEntryNotFoundException;
@@ -15,7 +16,8 @@ public class FinancialTracker {
         this.expenses = new ArrayList<>();
         this.incomes = new ArrayList<>();
     }
-
+    
+    
     public void addExpense(Expense expense) {
         int expenseSize = 0;
         assert (expenseSize = expenses.size()) >= 0;
@@ -52,16 +54,24 @@ public class FinancialTracker {
         }
     }
 
-    public ArrayList<Expense> listExpenses() {
+    public ArrayList<Expense> getExpenses() {
         assert expenses != null;
         return expenses;
     }
 
-    public ArrayList<Income> listIncomes() {
+    public ArrayList<Income> getIncomes() {
         assert incomes != null;
         return incomes;
     }
 
+    public ArrayList<Entry> getEntries() {
+        ArrayList<Entry> entries = new ArrayList<>();
+        entries.addAll(getExpenses());
+        entries.addAll(getIncomes());
+        return entries;
+    }
+    
+    
     public double getTotalExpense() {
         double totalExpense = 0;
         for (Expense expense : expenses) {
@@ -81,7 +91,7 @@ public class FinancialTracker {
         assert totalIncome >= 0;
         return totalIncome;
     }
-
+    
     //method used for testing
     public int getExpenseSize() {
         return expenses.size();
