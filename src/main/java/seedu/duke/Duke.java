@@ -2,13 +2,12 @@ package seedu.duke;
 
 import java.io.IOException;
 
-import seedu.duke.command.Command;
-import seedu.duke.exception.DukeException;
-import seedu.duke.lesson.LessonList;
-import seedu.duke.parser.Parser;
+import seedu.duke.logic.commands.Command;
+import seedu.duke.model.lesson.LessonList;
+import seedu.duke.logic.parser.Parser;
 import seedu.duke.storage.Storage;
-import seedu.duke.task.TaskList;
-import seedu.duke.ui.Message;
+import seedu.duke.model.task.TaskList;
+import seedu.duke.commons.core.Messages;
 import seedu.duke.ui.Ui;
 
 public class Duke {
@@ -28,7 +27,7 @@ public class Duke {
         try {
             taskList = new TaskList(TaskList.deserialize(storage.loadData()));
             lessonList = new LessonList(LessonList.deserialize(storage.loadData()));
-            ui.printMessage(Message.SUCCESS_RETRIEVING_DATA);
+            ui.printMessage(Messages.SUCCESS_RETRIEVING_DATA);
         } catch (DukeException | IOException e) {
             ui.printMessage(e.getMessage());
             storage.createNewData(ui);
@@ -63,6 +62,7 @@ public class Duke {
 
     /** The main method. Creates an instance of Duke and run it. */
     public static void main(String[] args) {
+        assert false : "dummy assertion set to fail";
         Duke duke = new Duke();
         duke.run();
     }

@@ -11,9 +11,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.duke.lesson.LessonList;
-import seedu.duke.task.TaskList;
-import seedu.duke.ui.Message;
+import seedu.duke.model.lesson.LessonList;
+import seedu.duke.model.task.TaskList;
+import seedu.duke.commons.core.Messages;
 import seedu.duke.ui.Ui;
 
 // Code reuse from https://github.com/richwill28/ip/blob/master/src/main/java/duke/storage/Storage.java
@@ -35,11 +35,11 @@ public class Storage {
             boolean isFileCreated = file.createNewFile();
 
             if (!isDirectoryCreated || !isFileCreated) {
-                throw new IOException(Message.ERROR_CREATING_NEW_FILE);
+                throw new IOException(Messages.ERROR_CREATING_NEW_FILE);
             }
             assert file.isFile() : "file should have been created at this point";
         } catch (IOException e) {
-            ui.printMessage(Message.ERROR_CREATING_NEW_FILE);
+            ui.printMessage(Messages.ERROR_CREATING_NEW_FILE);
         }
     }
 
@@ -61,7 +61,7 @@ public class Storage {
             bin.close();
             return data;
         } catch (IOException e) {
-            throw new IOException(Message.ERROR_RETRIEVING_DATA);
+            throw new IOException(Messages.ERROR_RETRIEVING_DATA);
         }
     }
 
@@ -79,7 +79,7 @@ public class Storage {
             bout.write(taskList.serialize() + lessonList.serialize());
             bout.close();
         } catch (IOException e) {
-            throw new IOException(Message.ERROR_SAVING_DATA);
+            throw new IOException(Messages.ERROR_SAVING_DATA);
         }
     }
 }
