@@ -12,6 +12,10 @@ public class WikiImport {
         if (!wiki.exists(article)) {
             throw new InvalidArticleException();
         }
-        return wiki.getTextExtract(article);
+        String temp = wiki.getTextExtract(article);
+        if (temp.length() < 1) {
+            throw new InvalidArticleException();
+        }
+        return temp;
     }
 }

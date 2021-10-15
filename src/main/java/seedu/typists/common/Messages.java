@@ -15,8 +15,10 @@ public class Messages {
     public static final String MESSAGE_WELCOME = "Welcome to Typist -- the ultimate cli typing game.";
     public static final String MESSAGE_ACKNOWLEDGE = "Brought to you by -- AY2122S1-CS2113-T13-4.";
     public static final String MESSAGE_HELP = "Manual:\n"
+            + "content: set the content\n"
             + "new: start a new word game\n"
             + "time: start a new timer game\n"
+            + "error: start a new error game\n"
             + "bye: exit typist";
 
     //This sample text is gotten from https://www.lipsum.com/

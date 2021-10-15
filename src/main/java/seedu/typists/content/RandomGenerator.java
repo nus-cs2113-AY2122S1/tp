@@ -11,13 +11,11 @@ public class RandomGenerator {
         Random rand = new Random();
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            int random = 0;
             if (isCaps.nextBoolean()) {
-                random = rand.nextInt(26) + 65;
+                s.append((char) (rand.nextInt(26) + 'A'));
             } else {
-                random = rand.nextInt(26) + 97;
+                s.append((char) (rand.nextInt(26) + 'a'));
             }
-            s.append((char) random);
         }
         return s.toString();
     }
