@@ -27,19 +27,6 @@ public class RecordList {
         expenditureRecords = new ArrayList<>();
     }
 
-    /**
-     * Constructor for MonthlyRecordList, used in AllRecordsList
-     * 12 instances will be instantiated to represent the months from Jan to Dec
-     * @param month
-     */
-    public RecordList(int month) {
-        this.month = month;
-        numberOfRecords = 0;
-        budget = new Budget(0.00);
-        hasBudget = false;
-        expenditureRecords = new ArrayList<>();
-    }
-
     public void addBudget(double spendingLimit) {
         budget.clearAmount();
         budget.setAmount(spendingLimit);
@@ -50,7 +37,7 @@ public class RecordList {
     }
 
     /**
-     * Adds an expenditure record into the RecordList
+     * Adds an expenditure record into the RecordList.
      *
      * @param description description of the expenditure
      * @param amount amount spent

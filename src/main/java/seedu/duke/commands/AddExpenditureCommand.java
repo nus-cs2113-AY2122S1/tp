@@ -6,7 +6,7 @@ import seedu.duke.ui.TextUi;
 import java.time.LocalDate;
 
 /**
- * Adds an Expenditure record to the RecordList
+ * Adds an Expenditure record to the RecordList.
  */
 public class AddExpenditureCommand extends AddCommand {
 
@@ -21,8 +21,8 @@ public class AddExpenditureCommand extends AddCommand {
      * Constructor for when the user inputs only two parameters, leaving the optional
      * date parameter empty. In that case, the date is set to "today" by default.
      *
-     * @param description
-     * @param amount
+     * @param description description of the expenditure, e.g. chicken rice
+     * @param amount amount spent for expenditure
      */
     public AddExpenditureCommand(String description, double amount) {
         this.description = description;
@@ -31,7 +31,7 @@ public class AddExpenditureCommand extends AddCommand {
     }
 
     /**
-     * Adds an expenditure
+     * Adds an expenditure.
      *
      * @param isLoadingStorage boolean to indicate if command is being executed during loading
      *                         or during normal runtime operation
