@@ -1,31 +1,24 @@
 package seedu.duke.data.records;
 
-import java.time.LocalDate;
 
+/**
+ * Superclass of budget. Each record instance has a month and amount
+ * attribute which allows it to be placed into the corresponding MonthList.
+ */
 public abstract class Record {
     protected double amount;
-    //protected int month;
+    protected int month;
 
-    public Record(double amount) {
+    public Record(double amount, int month) {
         this.amount = amount;
-        //this.month = month;
+        this.month = month;
     }
 
     public double getAmount() {
         return amount;
     }
 
-    public String getType() {
-        return "Record";
-    }
-
-    public String getDescription() {
-        return null;
-    }
-
     public int getMonth() {
-        return 0;
+        return this.month;
     }
-
-    //public abstract LocalDate getDate();
 }
