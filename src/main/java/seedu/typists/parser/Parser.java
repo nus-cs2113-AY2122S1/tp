@@ -33,11 +33,17 @@ public class Parser {
 
 
     public void parse() throws FaultyInputException {
-        if (input.equals("bye")) {
+        switch (input) {
+        case "bye":
             isExit = true;
-            command =  "bye";
-        } else if (input.equals("new")) {
-            command =  "new";
+            command = "bye";
+            break;
+        case "new":
+            command = "new";
+            break;
+        case "time":
+            command = "time";
+            break;
         }
     }
 

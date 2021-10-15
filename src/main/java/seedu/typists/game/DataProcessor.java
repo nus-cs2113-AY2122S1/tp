@@ -23,8 +23,12 @@ public class DataProcessor {
         for (String[] sa : userWordLines) {
             String[] checker = checkerWordLines.get(i);
             int ii = 0;
-            for (String s : sa) {
-                if (!s.equals(checker[ii])) {
+            for (String s : checker) {
+                try {
+                    if (!s.equals(sa[ii])) {
+                        errorWordCount++;
+                    }
+                } catch (ArrayIndexOutOfBoundsException e) {
                     errorWordCount++;
                 }
                 ii++;

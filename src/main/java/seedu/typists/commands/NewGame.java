@@ -13,7 +13,7 @@ import static seedu.typists.parser.StringParser.splitString;
 public class NewGame {
 
     private ArrayList<String> game1;
-    private static int game_index;
+    private int game_index;
     TextUi uiGame;
 
     public NewGame() {
