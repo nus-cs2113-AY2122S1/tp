@@ -25,7 +25,7 @@ public class Ui {
             "6. indicate a habit as done: done <goal index> <habit index>";
     private static final String LIST_HABIT_COMMAND =
             "7. View all the habits user has under a goal: view <goal index>";
-    private static final String BYE_COMMAND = "Exit habit tracker program";
+    private static final String BYE_COMMAND = "8. Exit habit tracker program: bye";
 
     private static final String NEWLINE = System.lineSeparator();
     private static final String DASHES = "______________________________________________________________"
