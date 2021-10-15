@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AddIngrWasteCommand extends Command {
-    private static Logger logger = Logger.getLogger("AddIngrCommand.execute()");
+    private static Logger logger = Logger.getLogger("AddIngrWasteCommand.execute()");
 
     AddIngrWasteCommand() {
         LoggerManager.setupLogger(logger);
@@ -35,7 +35,10 @@ public class AddIngrWasteCommand extends Command {
                 double ingredientWeightValue = Double.parseDouble(ingredientWeight);
                 Ingredient currentIngredient = IngredientList.ingredientList.get(ingredientIndex);
                 currentIngredient.addWaste(ingredientWeightValue);
-                logger.log(Level.INFO, "Successfully recorded Ingredient waste");
+                logger.log(Level.INFO, "Successfully recorded Ingredient waste "
+                        + ingredient
+                        + " "
+                        + ingredientWeightValue);
             } catch (NumberFormatException e) {
                 System.out.println(ui.getInvalidParamMsg());
                 System.out.println(ui.getLineDivider());
