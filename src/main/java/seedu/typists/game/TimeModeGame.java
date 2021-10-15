@@ -28,7 +28,7 @@ public class TimeModeGame extends Game {
         Scanner in = new Scanner(System.in);
         String command = "";
         while(!command.equals("yes")) {
-            System.out.println("Do you want to start now?");
+            ui.printScreen("Do you want to start now?");
             command = in.nextLine();
         }
         return true;
@@ -36,7 +36,7 @@ public class TimeModeGame extends Game {
 
     public int getGameTime() {
         Scanner in = new Scanner(System.in);
-        System.out.println("Enter how long (in seconds) you want the game to run: ");
+        ui.printScreen("Enter how long (in seconds) you want the game to run: ");
         try {
             return Integer.parseInt(in.nextLine());
         } catch (NumberFormatException e) {
