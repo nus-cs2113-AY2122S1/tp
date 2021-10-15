@@ -39,8 +39,8 @@ public class ReadTextFile {
      * Reads the text file containing all the commands for adding Budget or Expenditure
      * and return an ArrayList of String containing those commands.
      *
-     * @return An ArrayList of String containing all the individual commands saved in
-     * the text file.
+     * @return An ArrayList of String containing all the individual commands saved in the text file.
+     *
      * @throws IOException When the FileReader fails to read the file .txt file in the
      *                     stated directory.
      */
