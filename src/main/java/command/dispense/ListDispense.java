@@ -7,6 +7,7 @@ import comparators.DispenseComparator;
 import inventory.Dispense;
 import inventory.Medicine;
 import parser.DateParser;
+import parser.DispenseValidator;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -36,7 +37,7 @@ public class ListDispense extends Command {
             return;
         }
 
-        boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines,
+        boolean isInvalidParameterValues = DispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.LIST_DISPENSE_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");

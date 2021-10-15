@@ -7,6 +7,7 @@ import inventory.Medicine;
 import inventory.Order;
 import parser.DateParser;
 import parser.OrderManager;
+import parser.OrderValidator;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -30,7 +31,7 @@ public class UpdateOrder extends Command {
             return;
         }
 
-        boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines,
+        boolean isInvalidParameterValues = OrderValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.UPDATE_ORDER_COMMAND);
         if (isInvalidParameterValues) {
             return;

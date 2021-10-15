@@ -146,7 +146,7 @@ public class AddStock extends Command {
             return true;
         }
 
-        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines, CommandSyntax.ADD_STOCK_COMMAND)) {
+        if (StockValidator.containsInvalidParameterValues(ui, parameters, medicines, CommandSyntax.ADD_STOCK_COMMAND)) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
             logger.log(Level.INFO, "Unsuccessful addition of stock");
             return true;

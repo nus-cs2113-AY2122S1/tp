@@ -6,6 +6,7 @@ import command.CommandSyntax;
 import inventory.Dispense;
 import inventory.Medicine;
 import inventory.Stock;
+import parser.DispenseValidator;
 import parser.MedicineManager;
 import ui.Ui;
 
@@ -35,7 +36,7 @@ public class AddDispense extends Command {
             return;
         }
 
-        if (CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines,
+        if (DispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.ADD_DISPENSE_COMMAND)) {
             return;
         }
