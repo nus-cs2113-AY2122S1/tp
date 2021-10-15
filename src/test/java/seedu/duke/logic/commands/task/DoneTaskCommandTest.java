@@ -1,7 +1,8 @@
-package seedu.duke.logic.commands;
+package seedu.duke.logic.commands.task;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.DukeException;
+import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.task.DoneTaskCommand;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.storage.Storage;

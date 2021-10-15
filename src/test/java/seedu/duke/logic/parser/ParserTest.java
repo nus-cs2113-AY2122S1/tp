@@ -3,7 +3,7 @@ package seedu.duke.logic.parser;
 import org.junit.jupiter.api.Test;
 import seedu.duke.logic.commands.lesson.AddLessonCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
-import seedu.duke.logic.commands.task.DoneCommand;
+import seedu.duke.logic.commands.task.DoneTaskCommand;
 import seedu.duke.DukeException;
 
 import seedu.duke.logic.commands.Command;
@@ -61,10 +61,10 @@ public class ParserTest {
 
     @Test
     public void testMarkTaskAsDone() {
-        String userResponse = "done 1";
+        String userResponse = "done task 1";
         try {
             Command command = Parser.parse(userResponse);
-            assertTrue(command instanceof DoneCommand);
+            assertTrue(command instanceof DoneTaskCommand);
         } catch (DukeException e) {
             fail();
         }

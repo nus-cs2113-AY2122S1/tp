@@ -1,7 +1,8 @@
-package seedu.duke.logic.commands;
+package seedu.duke.logic.commands.lesson;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.DukeException;
+import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.DeleteLessonCommand;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
@@ -17,26 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class DeleteLessonCommandTest {
-    @Test
-    public void deleteAllLessons_nonEmptyLessonList_emptyLessonList() {
-        LessonList lessonList = new LessonList();
-        lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
-        lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
-
-        Ui ui = new Ui();
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage();
-        storage.createNewData(ui);
-        try {
-            Command deleteAllLessonsCommand = new DeleteLessonCommand();
-            deleteAllLessonsCommand.execute(ui, storage, taskList, lessonList);
-            assertTrue(lessonList.isEmpty());
-        } catch (DukeException | IOException e) {
-            // fail when the lesson list has any items
-            fail();
-        }
-    }
-
     @Test
     public void deleteLesson_lessonToDelete_lessonDeleted() {
         LessonList lessonList = new LessonList();
@@ -58,7 +39,7 @@ class DeleteLessonCommandTest {
     }
 
     @Test
-    public void deleteLesson_outOfBoundsLesson_exceptionThrown() {
+    public void deleteLesson_indexOutOfBounds_exceptionThrown() {
         LessonList lessonList = new LessonList();
         lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
         lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
