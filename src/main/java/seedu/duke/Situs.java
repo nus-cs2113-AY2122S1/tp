@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.localtime.CurrentDate;
 import seedu.duke.ui.UI;
 
 import java.util.logging.ConsoleHandler;
@@ -17,6 +18,7 @@ public class Situs {
      * Starts up the system by creating the UI.
      */
     public static void initialize() {
+        CurrentDate.setCurrentDate();
         ui = new UI();
         LogManager.getLogManager().reset();
         LOGGER.setLevel(Level.ALL);
