@@ -50,7 +50,7 @@ public class Parser {
         case "content":
             command = "content";
             break;
-            default:
+        default:
             System.out.println("invalid command.");
             break;
         }
