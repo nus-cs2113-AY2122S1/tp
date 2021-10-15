@@ -5,34 +5,17 @@ package seedu.duke.commands;
 import seedu.duke.ui.TextUi;
 
 public class AddBudgetCommand extends AddCommand {
-    //public String description;
-    public double amount;
-    public int month;
 
     public static final String MESSAGE_USAGE = ("Adds a budget record.\n"
             + "Parameters: b/ a/AMOUNT m/MONTH [y/YEAR]");
 
-    public AddBudgetCommand(double amount) {
-        //this.description = description;
-        this.amount = amount;
-        //this.month = month;
-    }
-    //    public String getDescription(String rawCommand) {
-    //        return rawCommand.split(" ")[1];
-    //    }
-    //
-    //    public double getAmount(String rawCommand) {
-    //        return Double.parseDouble(rawCommand.split(" ")[2]);
-    //    }
-    //
-    //    public int getMonth(String rawCommand) {
-    //        return Integer.parseInt(rawCommand.split(" ")[3]);
-    //    }
+    private final double amount;
+    private final int month;
 
-    //    public void addBudget(String rawCommand) {
-    //
-    //
-    //    }
+    public AddBudgetCommand(double amount, int month) {
+        this.amount = amount;
+        this.month = month;
+    }
 
     public void execute(boolean isLoadingStorage) {
         recordList.addBudget(amount);
