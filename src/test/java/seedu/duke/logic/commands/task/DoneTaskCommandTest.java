@@ -2,7 +2,7 @@ package seedu.duke.logic.commands;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.DukeException;
-import seedu.duke.logic.commands.task.DoneCommand;
+import seedu.duke.logic.commands.task.DoneTaskCommand;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.Task;
@@ -14,7 +14,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class DoneCommandTest {
+public class DoneTaskCommandTest {
     @Test
     public void testMarkTaskAsDone() {
         Ui ui = new Ui();
@@ -27,7 +27,7 @@ public class DoneCommandTest {
         taskList.addTask(new Task("task 2", "fri", "someInfo"));
 
         try {
-            Command doneCommand = new DoneCommand(0);
+            Command doneCommand = new DoneTaskCommand(0);
             doneCommand.execute(ui, storage, taskList, lessonList);
             assertEquals(taskList.getNumberOfPendingTasks(), 1);
         } catch (DukeException | IOException e) {
