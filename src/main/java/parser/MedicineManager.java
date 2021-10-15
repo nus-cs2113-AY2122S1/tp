@@ -76,7 +76,7 @@ public class MedicineManager {
     }
 
     /**
-     * Retrieves total number of column for the medicine with same name.
+     * Retrieves total number of rows for the medicine with same name.
      *
      * @param medicines Arraylist of medicines.
      * @param name Medicine name.

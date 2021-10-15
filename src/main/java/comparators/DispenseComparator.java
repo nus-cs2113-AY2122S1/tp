@@ -41,7 +41,7 @@ public class DispenseComparator implements Comparator<Dispense> {
         case Dispense.CUSTOMERS_ID_LOWERCASE:
         case CommandParameters.CUSTOMER_ID:
             return dispense1.getCustomerId().compareTo(dispense2.getCustomerId());
-        //case Dispense.DATE_LOWERCASE:
+        case Dispense.DATE_LOWERCASE:
         case CommandParameters.DATE:
             return dispense1.getDate().compareTo(dispense2.getDate());
         case Dispense.STAFF_LOWERCASE:

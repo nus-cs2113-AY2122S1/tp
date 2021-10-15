@@ -12,7 +12,7 @@ import ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +21,7 @@ public class UpdateOrder extends Command {
     private static Logger logger = Logger.getLogger("UpdateOrder");
 
     @Override
-    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
 
@@ -73,11 +73,12 @@ public class UpdateOrder extends Command {
     /**
      * Update values provided by user for a given order id.
      *
-     * @param parameters     HashMap Key-Value set for parameter and user specified parameter value.
+     * @param parameters     LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param filteredOrders Arraylist of filtered medicine orders.
      * @param order          Order object of the given order id.
      */
-    private void setOrdersByOrderId(HashMap<String, String> parameters, ArrayList<Order> filteredOrders, Order order) {
+    private void setOrdersByOrderId(LinkedHashMap<String, String> parameters, ArrayList<Order> filteredOrders,
+                                    Order order) {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {

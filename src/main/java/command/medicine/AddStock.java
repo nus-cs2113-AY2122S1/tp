@@ -3,18 +3,17 @@ package command.medicine;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import inventory.Stock;
 import inventory.Medicine;
+import inventory.Stock;
 import parser.DateParser;
 import parser.MedicineManager;
 import parser.StockValidator;
-
 import ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +25,7 @@ public class AddStock extends Command {
     private static Logger logger = Logger.getLogger("AddCommand");
 
     @Override
-    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         logger.log(Level.INFO, "Start addition of stock");
 
         boolean nameExist = false;
@@ -135,7 +134,7 @@ public class AddStock extends Command {
      * @param optionalParameters    The optional parameters to check.
      * @return                      Boolean value indicating if parameter and parameter values are valid.
      */
-    private boolean checkValidParametersAndValues(Ui ui, HashMap<String, String> parameters,
+    private boolean checkValidParametersAndValues(Ui ui, LinkedHashMap<String, String> parameters,
                                                   ArrayList<Medicine> medicines, String[] requiredParameters,
                                                   String[] optionalParameters) {
 

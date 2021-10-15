@@ -17,32 +17,40 @@ import inventory.Medicine;
 import ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
+import static command.CommandList.ADD;
 import static command.CommandList.ADD_DISPENSE;
 import static command.CommandList.ADD_ORDER;
 import static command.CommandList.ADD_STOCK;
 import static command.CommandList.ARCHIVE;
+import static command.CommandList.DELETE;
 import static command.CommandList.DELETE_DISPENSE;
 import static command.CommandList.DELETE_ORDER;
 import static command.CommandList.DELETE_STOCK;
 import static command.CommandList.EXIT;
 import static command.CommandList.HELP;
+import static command.CommandList.LIST;
 import static command.CommandList.LIST_DISPENSE;
 import static command.CommandList.LIST_ORDER;
 import static command.CommandList.LIST_STOCK;
 import static command.CommandList.PURGE;
 import static command.CommandList.RECEIVE_ORDER;
 import static command.CommandList.UNDO;
+import static command.CommandList.UPDATE;
 import static command.CommandList.UPDATE_DISPENSE;
 import static command.CommandList.UPDATE_ORDER;
 import static command.CommandList.UPDATE_STOCK;
+import static parser.Mode.DISPENSE;
+import static parser.Mode.ORDER;
+import static parser.Mode.STOCK;
+
 
 /**
  * Helps to parse the commands given by the user as well as extract the parameters provided.
  */
 
-public class Parser {
+public class CommandParser {
 
     private static final String DELIMITER = "/";
 
@@ -55,11 +63,22 @@ public class Parser {
      * @return A boolean value indicating isExit.
      * @throws InvalidCommand If a command does not exist.
      */
-    public static boolean processCommand(Ui ui, String userInput, ArrayList<Medicine> medicines) throws InvalidCommand {
+    public static Mode processCommand(Ui ui, String userInput, ArrayList<Medicine> medicines, Mode mode)
+            throws InvalidCommand {
         String[] userCommand = parseCommand(userInput);
         String command = userCommand[0];
+        // Append user's command with mode
+        if (command.equals(ADD) || command.equals(LIST) || command.equals(UPDATE) || command.equals(DELETE)) {
+            command += mode.name().toLowerCase();
+        }
+        // Check is user is changing modes
+        if (command.equalsIgnoreCase(STOCK.name()) || command.equalsIgnoreCase(DISPENSE.name())
+                || command.equalsIgnoreCase(ORDER.name())) {
+            return changeMode(ui, command, mode);
+        }
+
         String commandParameters = userCommand[1];
-        HashMap<String, String> parameters = new HashMap<>();
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
         if (!commandParameters.equals("")) {
             parameters = parseParameters(commandParameters);
         }
@@ -84,7 +103,7 @@ public class Parser {
             break;
         case EXIT:
             new ExitCommand().execute(ui, parameters, medicines);
-            return true;
+            return Mode.EXIT;
         case HELP:
             new HelpCommand().execute(ui, parameters, medicines);
             break;
@@ -115,7 +134,7 @@ public class Parser {
         default:
             throw new InvalidCommand();
         }
-        return false;
+        return mode;
     }
 
     /**
@@ -145,8 +164,8 @@ public class Parser {
      * @param parameterString String of parameters.
      * @return HashMap with parameter as key and parameter contents as value.
      */
-    public static HashMap<String, String> parseParameters(String parameterString) {
-        HashMap<String, String> parameters = new HashMap<>();
+    public static LinkedHashMap<String, String> parseParameters(String parameterString) {
+        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
 
         String[] parameterSplit = parameterString.split("\\s+"); // Split by space
 
@@ -156,7 +175,7 @@ public class Parser {
         for (String s : parameterSplit) {
             if (s.contains(DELIMITER)) {
                 if (!commandParameter.equals("")) { // Ensure it is not the first iteration
-                    // Add to hashmap before resetting values
+                    // Add to linkedhashmap before resetting values
                     parameters.put(commandParameter, parameterContents.toString());
                 }
 
@@ -174,7 +193,32 @@ public class Parser {
                 parameterContents.append(" ").append(s);
             }
         }
-        parameters.put(commandParameter, parameterContents.toString()); // Add to hashmap for the last parameter
+        parameters.put(commandParameter, parameterContents.toString()); // Add to linkedhashmap for the last parameter
         return parameters;
+    }
+
+    /**
+     * Helps to set the mode of the program.
+     *
+     * @param ui      Reference to the UI object passed by Main to print messages.
+     * @param command Command entered by the user.
+     * @param mode    Current mode of the program.
+     * @return New mode requested by the user.
+     */
+    public static Mode changeMode(Ui ui, String command, Mode mode) {
+        Mode newMode = mode;
+        if (command.equalsIgnoreCase(STOCK.name()) && !mode.name().equalsIgnoreCase(STOCK.name())) {
+            newMode = STOCK;
+            ui.print("Mode has changed to STOCK.");
+        } else if (command.equalsIgnoreCase(Mode.DISPENSE.name()) && !mode.name().equalsIgnoreCase(DISPENSE.name())) {
+            newMode = Mode.DISPENSE;
+            ui.print("Mode has changed to DISPENSE.");
+        } else if (command.equalsIgnoreCase(ORDER.name()) && !mode.name().equalsIgnoreCase(ORDER.name())) {
+            newMode = ORDER;
+            ui.print("Mode has changed to ORDER.");
+        } else {
+            ui.print("Already in " + mode.name() + " mode!");
+        }
+        return newMode;
     }
 }

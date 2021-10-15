@@ -4,7 +4,7 @@ import inventory.Medicine;
 import ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 /**
@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class PurgeCommand extends Command {
     @Override
-    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         ui.print("Are you sure you want to delete all data? (Y/N)");
         Scanner in = new Scanner(System.in);
         if ("Y".equals(in.nextLine())) {

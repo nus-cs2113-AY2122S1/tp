@@ -4,7 +4,8 @@ import inventory.Medicine;
 import inventory.Order;
 import inventory.Stock;
 import parser.DateParser;
-import parser.Parser;
+import parser.Mode;
+import parser.CommandParser;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -23,6 +24,7 @@ public class MediVault {
     private ArrayList<Medicine> medicines;
     private Ui ui;
     private static Logger logger = Logger.getLogger("MediVault");
+    private Mode mode = Mode.STOCK;
 
     public MediVault() {
         medicines = new ArrayList<>();
@@ -48,11 +50,12 @@ public class MediVault {
 
         // Loops till exit is received
         while (true) {
-            System.out.print("> ");
+            System.out.print("[" + mode + "] > ");
             // Reads user input
             userInput = in.nextLine();
             try {
-                if (Parser.processCommand(ui, userInput, medicines)) { // User entered exit
+                mode = CommandParser.processCommand(ui, userInput, medicines, mode);
+                if (mode == Mode.EXIT) { // User entered exit
                     break;
                 }
             } catch (InvalidCommand e) {

@@ -6,41 +6,38 @@ import org.junit.jupiter.api.Test;
 import ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ParserTest {
+public class CommandParserTest {
     Ui ui = new Ui();
     ArrayList<Medicine> medicines = new ArrayList<>();
 
     @Test
-    public void processCommand_validCommand_expectFalse() {
+    public void processCommand_validCommand_expectExit() {
         try {
-            boolean status = Parser.processCommand(ui, "LIST", medicines);
-            assertFalse(status);
+            Mode mode = CommandParser.processCommand(ui, "exit", medicines, Mode.STOCK);
+            assertEquals(mode, Mode.EXIT);
         } catch (InvalidCommand e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void processCommand_exitCommand_expectTrue() {
-        boolean status = false;
+    public void processCommand_exitCommand_expectOrder() {
         try {
-            status = Parser.processCommand(ui, "EXIT", medicines);
+            Mode mode = CommandParser.processCommand(ui, "order", medicines, Mode.STOCK);
+            assertEquals(mode, Mode.ORDER);
         } catch (InvalidCommand e) {
-            assertTrue(status);
             e.printStackTrace();
         }
     }
 
     @Test
     public void parseCommand_oneSeparator_expectTwoParts() {
-        String inputString = "list i/1";
-        String[] stringParts = Parser.parseCommand(inputString);
+        String inputString = "listorder i/1";
+        String[] stringParts = CommandParser.parseCommand(inputString);
         assertEquals(2, stringParts.length);
     }
 
@@ -48,14 +45,20 @@ public class ParserTest {
     @Test
     public void parseParameters_twoParameters_expectTwoParts() {
         String inputString = "i/1 n/name";
-        HashMap<String, String> parametersValues = Parser.parseParameters(inputString);
+        LinkedHashMap<String, String> parametersValues = CommandParser.parseParameters(inputString);
         assertEquals(2, parametersValues.keySet().size());
     }
 
     @Test
     public void parseParameters_threeParameters_expectThreeParts() {
         String inputString = "i/1 n/name p/20";
-        HashMap<String, String> parametersValues = Parser.parseParameters(inputString);
+        LinkedHashMap<String, String> parametersValues = CommandParser.parseParameters(inputString);
         assertEquals(3, parametersValues.keySet().size());
+    }
+
+    @Test
+    public void changeMode_modeSTOCK_expectModeDispense(){
+        Mode mode = CommandParser.changeMode(ui,"dispense", Mode.DISPENSE);
+        assertEquals(mode, Mode.DISPENSE);
     }
 }

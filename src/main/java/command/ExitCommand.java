@@ -4,7 +4,7 @@ import inventory.Medicine;
 import ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Helps to process the exit command and prints the exit message.
@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         ui.printExit();
     }
 }
