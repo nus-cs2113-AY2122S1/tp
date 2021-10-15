@@ -1,7 +1,5 @@
 package seedu.duke.data.records;
 
-import java.time.LocalDate;
-
 public abstract class Record {
     protected double amount;
     //protected int month;

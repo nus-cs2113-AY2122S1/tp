@@ -1,7 +1,5 @@
 package seedu.duke.data.records;
 
-import java.time.LocalDate;
-
 public class Budget extends Record {
     // Description and month not needed
     // public String description;

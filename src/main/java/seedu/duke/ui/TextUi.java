@@ -99,6 +99,13 @@ public class TextUi {
     }
 
     /**
+     * Prints out the divider line.
+     */
+    public static void printDivider() {
+        System.out.println(DIVIDER);
+    }
+
+    /**
      * Reads the text entered by the user.
      *
      * @return command (full input) entered by the user.
@@ -107,12 +114,5 @@ public class TextUi {
         String input = in.nextLine();
         System.out.println(DIVIDER);
         return input;
-    }
-
-    /**
-     * Prints out the divider line.
-     */
-    public static void printDivider() {
-        System.out.println(DIVIDER);
     }
 }

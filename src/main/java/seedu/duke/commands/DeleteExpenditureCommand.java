@@ -5,10 +5,9 @@ import seedu.duke.ui.TextUi;
 
 public class DeleteExpenditureCommand extends DeleteCommand {
 
-    public final int index;
-
     public static final String MESSAGE_USAGE = "Delete an expenditure record.\n"
             + "Parameters: e/INDEX_OF_EXPENDITURE";
+    public final int index;
 
     public DeleteExpenditureCommand(int index) {
         this.index = index;

@@ -2,7 +2,6 @@ package seedu.duke.data;
 
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
-import seedu.duke.storage.ExpenditureStorage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,12 +26,12 @@ public class AllRecordList {
     /**
      * Adds an expenditure record into the RecordList.
      *
-     * @param description description of the expenditure
-     * @param amount amount spent
+     * @param description      description of the expenditure
+     * @param amount           amount spent
      * @param isLoadingStorage indicate if this command is called during loading or runtime
      */
     public void addExpenditure(String description, double amount, LocalDate date, int month, boolean isLoadingStorage) {
-        allRecordList.get(month).addExpenditure(description,amount,isLoadingStorage);
+        allRecordList.get(month).addExpenditure(description, amount, isLoadingStorage);
     }
 
     public void deleteBudget(int month) {

@@ -39,7 +39,7 @@ public class Storage {
 
     // Catch IOException!
     public static void makeBudgetFile(String budgetStorageName) throws IOException {
-        String newBudgetStorageDirectory =  dataStorageDirectory + budgetStorageName;
+        String newBudgetStorageDirectory = dataStorageDirectory + budgetStorageName;
         File newBudgetStorageFile = new File(newBudgetStorageDirectory);
 
         if (!newBudgetStorageFile.exists()) {

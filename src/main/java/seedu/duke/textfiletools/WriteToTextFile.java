@@ -14,11 +14,7 @@ public class WriteToTextFile {
     public static void writeToStorage(String textToWrite, String storageDirectory) {
         try {
             File textFileToWrite = new File(storageDirectory);
-            boolean fileIsEmpty = false;
-
-            if (textFileToWrite.length() == 0) {
-                fileIsEmpty = true;
-            }
+            boolean fileIsEmpty = textFileToWrite.length() == 0;
 
             FileWriter writeLineToFile = new FileWriter(storageDirectory, true);
 

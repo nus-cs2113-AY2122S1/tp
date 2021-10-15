@@ -1,11 +1,10 @@
 package seedu.duke.commands;
 
 
-
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
-    private static final String DIVIDER = "========================================================";
     public static final String LS = System.lineSeparator();
+    private static final String DIVIDER = "========================================================";
 
     public void printHelp() {
         System.out.println("1. " + AddCommand.COMMAND_WORD);
