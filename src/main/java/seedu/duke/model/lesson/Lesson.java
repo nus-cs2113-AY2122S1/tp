@@ -2,6 +2,7 @@ package seedu.duke.model.lesson;
 
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
+import seedu.duke.model.lesson.exceptions.DeserializeLessonException;
 
 public class Lesson {
     private final String title;
@@ -38,14 +39,14 @@ public class Lesson {
      *
      * @param data a line of string representing the serialized data
      * @return deserialized lesson data
-     * @throws DukeException if the data is in invalid format
+     * @throws DeserializeLessonException if the data is in invalid format
      */
-    public static Lesson deserialize(String data) throws DukeException {
+    public static Lesson deserialize(String data) throws DeserializeLessonException {
         try {
             String[] item = data.split(" \\| ");
             return new Lesson(item[1], item[2], item[3], item[4]);
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException(Messages.ERROR_DESERIALIZING_DATA);
+            throw new DeserializeLessonException(Messages.ERROR_DESERIALIZING_DATA);
         }
     }
 

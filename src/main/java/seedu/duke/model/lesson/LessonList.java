@@ -2,6 +2,8 @@ package seedu.duke.model.lesson;
 
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
+import seedu.duke.model.lesson.exceptions.DeserializeLessonException;
+import seedu.duke.model.lesson.exceptions.LessonIndexException;
 import seedu.duke.ui.Ui;
 
 import java.util.List;
@@ -23,13 +25,13 @@ public class LessonList {
         return lessonList.size();
     }
 
-    public Lesson getLesson(int lessonIndex) throws DukeException {
+    public Lesson getLesson(int lessonIndex) throws LessonIndexException {
         try {
             return lessonList.get(lessonIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Messages.ERROR_INVALID_INDEX);
+            throw new LessonIndexException(Messages.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new DukeException(Messages.ERROR_INVALID_NUMBER);
+            throw new LessonIndexException(Messages.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -41,13 +43,13 @@ public class LessonList {
         lessonList.add(newLesson);
     }
 
-    public void deleteLesson(int lessonIndex) throws DukeException {
+    public void deleteLesson(int lessonIndex) throws LessonIndexException {
         try {
             lessonList.remove(lessonIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Messages.ERROR_INVALID_INDEX);
+            throw new LessonIndexException(Messages.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new DukeException(Messages.ERROR_INVALID_NUMBER);
+            throw new LessonIndexException(Messages.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -97,9 +99,9 @@ public class LessonList {
      *
      * @param data a list of strings representing the serialized data
      * @return deserialized lesson list
-     * @throws DukeException if the data is invalid format
+     * @throws DeserializeLessonException if the data is invalid format
      */
-    public static List<Lesson> deserialize(List<String> data) throws DukeException {
+    public static List<Lesson> deserialize(List<String> data) throws DeserializeLessonException {
         List<Lesson> lessonList = new ArrayList<>();
         for (String entry : data) {
             if (entry.charAt(0) == 'L') {
