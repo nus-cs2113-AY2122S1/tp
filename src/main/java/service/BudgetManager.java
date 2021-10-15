@@ -19,12 +19,12 @@ public class BudgetManager {
 
     public static void listBudgets() {
         Ui ui = Ui.getUi();
-        String budgetListHeader = "Id.\t| Value\t|";
+        String budgetListHeader = "Id. |  Value  |";
 
         ui.printMessage(budgetListHeader);
         ArrayList<Budget> budgets = BudgetList.getBudgets();
         for (int i = 0; i < budgets.size(); i++) {
-            ui.printMessage((i + 1) + ". \t| " + budgets.get(i));
+            ui.printMessage((i + 1) + ".  | " + budgets.get(i));
         }
     }
 }
