@@ -4,13 +4,15 @@ import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
 
 import java.util.Locale;
+import java.util.logging.Logger;
 
-import static seedu.duke.logger.LoggerUtil.LOGGER;
+import static seedu.duke.logger.LoggerUtil.setupLogger;
 
 /**
  * To make sense of user commands by extracting keywords and descriptions.
  */
 public abstract class Parser {
+    private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
     public static String WORKOUT_KEYWORD = "/w ";
     public static String EXERCISE_KEYWORD = "/e ";
     public static String SETS_KEYWORD = "/s ";
@@ -18,6 +20,11 @@ public abstract class Parser {
     static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
 
     protected String userInputString;
+
+    public Parser(String userInputString) {
+        this.userInputString = userInputString;
+        setupLogger(LOGGER);
+    }
 
     public static String getCommandType(String userInputString) {
         String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
