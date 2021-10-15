@@ -8,7 +8,14 @@ ArrowColor Red
 together {
 package "parser" {
     abstract Parser #lightgrey ##[bold]grey {
-    ~LOGGER:Logger
+    ~LOGGER:Logger {static}
+    ~MESSAGE_INVALID_COMMAND:String {static}
+    +WORKOUT_KEYWORD:String {static}
+    +EXERCISE_KEYWORD:String {static}
+    +SETS_KEYWORD:String {static}
+    +REPS_KEYWORD:String {static}
+    #userInputString:String
+    +Parser(userInputString:String)
     +getCommandType(userInputString:String):String
     #getCommandArguments(userInputString:String):String
     +parseInput():Command {abstract}
@@ -56,12 +63,15 @@ package "parser" {
     -prepareRemoveExercise(commandArgs:String):Command
     +parseInput():Command
     }
-    CommandManager --> "1  parser" Parser
     }
 
 package "logger" {
     class LoggerUtil #LightBlue##Blue
     }
 
+hide AddExerciseParser
+hide RemoveExerciseParser
+CommandManager --> "1  parser" Parser
+Parser ..> LoggerUtil
 }
 @enduml

@@ -12,13 +12,12 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  * To make sense of user commands by extracting keywords and descriptions.
  */
 public abstract class Parser {
-    private static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
+    static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
+    static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
     public static String WORKOUT_KEYWORD = "/w ";
     public static String EXERCISE_KEYWORD = "/e ";
     public static String SETS_KEYWORD = "/s ";
     public static String REPS_KEYWORD = "/r ";
-    static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
-
     protected String userInputString;
 
     public Parser(String userInputString) {
@@ -34,6 +33,7 @@ public abstract class Parser {
 
     /**
      * Returns the parameters for commands from the user.
+     *
      * @param userInputString user input
      * @return parameters to execute commands with
      */
@@ -42,13 +42,6 @@ public abstract class Parser {
         String commandArgs = commandTypeAndParams[1].trim();
         return commandArgs;
     }
-
-    /**
-     * Parses and processes the user input and returns a Command object with parameters and attributes according to the
-     * user input.
-     * @return User-specified command
-     */
-    public abstract Command parseInput();
 
     /**
      * Gets arguments required for an exercise, such as workoutIndex, exerciseName, sets and reps.
@@ -104,8 +97,8 @@ public abstract class Parser {
      *
      * @param commandArgs raw input string without the command word.
      * @return String array of size 2. If there is no workout index, empty String array is returned.
-     *         If there is a workout index but no exercise index, only workout index is returned.
-     *         Otherwise, both workout index and exercise index are returned.
+     * If there is a workout index but no exercise index, only workout index is returned.
+     * Otherwise, both workout index and exercise index are returned.
      */
     static String[] getWorkoutAndExerciseIndices(String commandArgs) {
         if (!commandArgs.contains(WORKOUT_KEYWORD)) {
@@ -170,4 +163,12 @@ public abstract class Parser {
             throw new GetJackDException("Error. Invalid workout or exercise index.");
         }
     }
+
+    /**
+     * Parses and processes the user input and returns a Command object with parameters and attributes according to the
+     * user input.
+     *
+     * @return User-specified command
+     */
+    public abstract Command parseInput();
 }
