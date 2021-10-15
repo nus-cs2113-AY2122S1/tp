@@ -8,13 +8,13 @@ import static seedu.typists.common.Utils.getWordLineFromStringArray;
 public class DataProcessor {
     private final ArrayList<String[]> checkerWordLines;
     private final ArrayList<String[]> userWordLines;
-    public final int totalTime;
+    public final double totalTime;
 
     public DataProcessor(TimeModeGame tg) {
             //ArrayList<String[]> checkerWordLines, ArrayList<String> userText, int lineLength, int totalTime){
         this.checkerWordLines = tg.wordLines;
         this.userWordLines = getWordLineFromStringArray(tg.inputLines);
-        this.totalTime = tg.gameTime;
+        this.totalTime = tg.realGameTime;
     }
 
     public int getErrorWordCount() {
@@ -39,7 +39,7 @@ public class DataProcessor {
     }
 
     public double getWPM() {
-        return getTotalWordTyped()/ ((double)totalTime/60);
+        return getTotalWordTyped() / (totalTime / 60);
     }
 
 

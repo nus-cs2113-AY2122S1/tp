@@ -33,7 +33,7 @@ public class Main {
 
     public void start() {
         uiBot.showWelcomeMessage(VERSION);
-        TimeModeGame g = new TimeModeGame(SAMPLE_TEXT, GAME_TIME, LINE_LENGTH);
+        TimeModeGame g = new TimeModeGame(SAMPLE_TEXT, LINE_LENGTH);
         DataProcessor p =  new DataProcessor(g);
         uiBot.showSummary(p.getErrorWordCount(), p.getWPM(), p.getTotalWordTyped(), p.totalTime);
     }
