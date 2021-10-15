@@ -7,9 +7,7 @@ import java.util.Scanner;
 
 import static java.lang.System.lineSeparator;
 import static java.lang.System.out;
-import static seedu.typists.common.Messages.LOGO;
-import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
-import static seedu.typists.common.Messages.MESSAGE_WELCOME;
+import static seedu.typists.common.Messages.*;
 
 /**
  * Text UI of the application.
@@ -37,6 +35,7 @@ public class TextUi {
                 LOGO,
                 MESSAGE_WELCOME,
                 MESSAGE_ACKNOWLEDGE,
+                MESSAGE_HELP,
                 DIVIDER
         );
     }
@@ -47,12 +46,12 @@ public class TextUi {
         }
     }
 
-    public static String readCommand() {
+    public String readCommand() {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 
-    public static void showLine() {
+    public void showLine() {
         System.out.println(DIVIDER);
     }
 
@@ -60,23 +59,23 @@ public class TextUi {
      * Print error message.
      * @param meg obtained from DukeException message
      */
-    public static void showText(String meg) {
+    public void showText(String meg) {
         System.out.println(meg);
     }
 
-    public static void showNumber(int i) {
+    public void showNumber(int i) {
         System.out.println(String.valueOf(i));
     }
 
-    public static void showBye() {
+    public void showBye() {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
-    public static void printGameMode1Progress(int a, int b) {
+    public void printGameMode1Progress(int a, int b) {
         System.out.println("Your progress:" + String.valueOf(a) + "/" + String.valueOf(b));
     }
 
-    public static void printSuccess() {
+    public void printSuccess() {
         System.out.println("Finished!");
     }
 

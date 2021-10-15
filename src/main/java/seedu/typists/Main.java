@@ -7,7 +7,6 @@ import seedu.typists.parser.Parser;
 import seedu.typists.storage.StorageFile;
 import seedu.typists.ui.TextUi;
 
-import java.io.IOException;
 import java.util.NoSuchElementException;
 
 
@@ -57,9 +56,7 @@ public class Main {
                 uiBot.showText("OOPS!!! Input after done/delete must be a number.");
             } catch (FaultyInputException e) {
                 uiBot.showText(e.getMessage());
-            } catch (InvalidStringInputException e) {
-                e.printStackTrace();
-            } catch (NoSuchElementException e) {
+            } catch (InvalidStringInputException | NoSuchElementException e) {
                 e.printStackTrace();
             } finally {
                 uiBot.showLine();
@@ -69,7 +66,6 @@ public class Main {
 
     public void exit() {
         uiBot.showBye();
-        return;
     }
 
     /** Runs the program until termination.  */

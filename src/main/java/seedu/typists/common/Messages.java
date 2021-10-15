@@ -13,6 +13,10 @@ public class Messages {
                     + "    /____/_/";
     public static final String MESSAGE_WELCOME = "Welcome to Typist -- the ultimate cli typing game.";
     public static final String MESSAGE_ACKNOWLEDGE = "Brought to you by -- AY2122S1-CS2113-T13-4.";
+    public static final String MESSAGE_HELP = "Manual: \n" +
+            "new: start a new word game\n" +
+            "timer game: start a new timer game\n" +
+            "bye: exit typist";
 
     //public static final String MESSAGE_GOODBYE = "Good bye!";
     //public static final String MESSAGE_INIT_FAILED = "Failed to initialise address book application. Exiting...";
