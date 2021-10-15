@@ -1,7 +1,7 @@
 package seedu.exceptions;
 
-public class InvalidIncomeException extends Exception {
-    public InvalidIncomeException(String message) {
+public class InvalidIncomeAmountException extends Exception {
+    public InvalidIncomeAmountException(String message) {
         super(message);
     }
 }

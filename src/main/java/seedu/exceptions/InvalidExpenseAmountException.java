@@ -1,7 +1,7 @@
 package seedu.exceptions;
 
-public class InvalidExpenseException extends Exception {
-    public InvalidExpenseException(String message) {
+public class InvalidExpenseAmountException extends Exception {
+    public InvalidExpenseAmountException(String message) {
         super(message);
     }
 }
