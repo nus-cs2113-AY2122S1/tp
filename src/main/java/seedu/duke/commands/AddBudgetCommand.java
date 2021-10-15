@@ -5,12 +5,11 @@ package seedu.duke.commands;
 import seedu.duke.ui.TextUi;
 
 public class AddBudgetCommand extends AddCommand {
+    public static final String MESSAGE_USAGE = ("Adds a budget record.\n"
+            + "Parameters: b/ a/AMOUNT m/MONTH [y/YEAR]");
     //public String description;
     public double amount;
     public int month;
-
-    public static final String MESSAGE_USAGE = ("Adds a budget record.\n"
-            + "Parameters: b/ a/AMOUNT m/MONTH [y/YEAR]");
 
     public AddBudgetCommand(double amount) {
         //this.description = description;

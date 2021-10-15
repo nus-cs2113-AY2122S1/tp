@@ -1,13 +1,12 @@
 package seedu.duke.textfiletools;
 
-import java.util.logging.Logger;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class DeleteFromTextFile {
     /**
@@ -24,11 +23,7 @@ public class DeleteFromTextFile {
         try {
             File inFile = new File(textFileDirectory);
             int count = 1;
-            boolean deletionAtLastLine = false;
-
-            if (lineNumber == sizeOfExpenditureList) {
-                deletionAtLastLine = true;
-            }
+            boolean deletionAtLastLine = lineNumber == sizeOfExpenditureList;
 
             if (!inFile.isFile()) {
                 System.out.println("Parameter is not an existing file");
