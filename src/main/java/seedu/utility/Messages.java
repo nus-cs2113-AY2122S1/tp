@@ -12,4 +12,17 @@ public class Messages {
     public static final String NON_POSITIVE_INDEX_MESSAGE = "Only positive values are allowed for index.";
     public static final String UNABLE_TO_DELETE_MESSAGE = "Entry not deleted because entry not found!";
     public static final String BLANK_DESCRIPTION_MESSAGE = "Your description is empty!";
+    public static final String SEARCH_NO_MATCH_MESSAGE = "Your search did not match any of the entries!";
+    public static final String TYPE_SOMETHING_MESSAGE = "Type something!";
+    public static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
+    public static final String LISTING_EXPENSE_MESSAGE = "Below is a list of all of your recent spending!";
+    public static final String LISTING_INCOME_MESSAGE = "Below is a list of all of your recent earnings!";
+    public static final String EMPTY_INCOME_MESSAGE = "You have not entered any income!";
+    public static final String EMPTY_EXPENSE_MESSAGE = "You have not spent anything!";
+
+    public static final String BYE_MESSAGE = "██████  ██    ██ ███████        ██  \n"
+            + "██   ██  ██  ██  ██          ██  ██ \n"
+            + "██████    ████   █████           ██ \n"
+            + "██   ██    ██    ██          ██  ██ \n"
+            + "██████     ██    ███████        ██ ";
 }
