@@ -12,7 +12,7 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  * It contains basic information of an exercise such as reps, sets and status.
  */
 public class Exercise {
-    static final Logger LOGGER = Logger.getLogger(Exercise.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Exercise.class.getName());
     protected String description;
     protected int sets;
     protected int reps;
