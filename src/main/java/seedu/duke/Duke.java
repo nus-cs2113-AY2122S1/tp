@@ -29,6 +29,7 @@ public class Duke {
      * otherwise creates a new task and lesson objects.
      */
     public Duke() {
+        initializeLogger();
         ui = new Ui();
         storage = new Storage();
         try {
@@ -74,7 +75,6 @@ public class Duke {
 
     /** The main method. Creates an instance of Duke and run it. */
     public static void main(String[] args) {
-        LOGGER.info("Initializing Duke.");
         Duke duke = new Duke();
         duke.run();
     }
