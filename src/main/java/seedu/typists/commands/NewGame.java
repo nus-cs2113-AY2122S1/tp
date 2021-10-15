@@ -13,12 +13,12 @@ import static seedu.typists.parser.StringParser.splitString;
 public class NewGame {
 
     private ArrayList<String> game1;
-    private static int game_index;
+    private int gameIndex;
     TextUi uiGame;
 
     public NewGame() {
         this.game1 = new ArrayList<>(100);
-        this.game_index = 0;
+        this.gameIndex = 0;
         this.uiGame = new TextUi();
     }
 
@@ -32,13 +32,13 @@ public class NewGame {
         uiGame.showText(content1);
         boolean isExit = false;
         while (!isExit) {
-            uiGame.showText(game1.get(game_index));
+            uiGame.showText(game1.get(gameIndex));
             String fullCommand = uiGame.readCommand();
-            TextParser c =  new TextParser(fullCommand, game1.get(game_index));
+            TextParser c =  new TextParser(fullCommand, game1.get(gameIndex));
             isExit = c.getIsExit();
-            game_index += 1;
-            uiGame.printGameMode1Progress(game_index,getTotalSentence());
-            if (game_index == getTotalSentence()) {
+            gameIndex += 1;
+            uiGame.printGameMode1Progress(gameIndex,getTotalSentence());
+            if (gameIndex == getTotalSentence()) {
                 uiGame.printSuccess();
                 break;
             }

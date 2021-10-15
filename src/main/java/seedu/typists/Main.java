@@ -1,13 +1,17 @@
 package seedu.typists;
 
+import seedu.typists.game.DataProcessor;
+import seedu.typists.game.TimeModeGame;
+import seedu.typists.parser.Parser;
+import seedu.typists.ui.TextUi;
+
+import static seedu.typists.common.Messages.SAMPLE_TEXT;
+
 import seedu.typists.commands.NewGame;
 import seedu.typists.exception.FaultyInputException;
 import seedu.typists.exception.InvalidStringInputException;
 import seedu.typists.parser.Parser;
 import seedu.typists.storage.StorageFile;
-import seedu.typists.ui.TextUi;
-
-import java.io.IOException;
 import java.util.NoSuchElementException;
 
 
@@ -15,23 +19,44 @@ import java.util.NoSuchElementException;
 public class Main {
     /** Version info of the program. */
     public static final String VERSION = "Typist - Version 1.0";
+    public static final int LINE_LENGTH = 10;
     TextUi uiBot;
-    NewGame game;
+    //Parser parseBot;
+    NewGame wordLimitGame;
     StorageFile storage;
 
-    public void start() {
+    public Main() {
         this.uiBot = new TextUi();
-        this.game = new NewGame();
         this.storage = new StorageFile();
+    }
+
+    public void start() {
         uiBot.showWelcomeMessage(VERSION);
     }
 
-    public static void executeCommand(Parser c, NewGame game, StorageFile storage) throws InvalidStringInputException {
+    public void startWordLimitGame() {
+        this.wordLimitGame = new NewGame();
+        try {
+            wordLimitGame.beginNewGame();
+        } catch (InvalidStringInputException e) {
+            //some error msg, @zhansen
+        }
+    }
+
+    public void startTimeLimitGame() {
+        TimeModeGame g = new TimeModeGame(SAMPLE_TEXT, LINE_LENGTH);
+        DataProcessor p =  new DataProcessor(g);
+        uiBot.showSummary(p.getErrorWordCount(), p.getWordPerMinute(), p.getTotalWordTyped(), p.totalTime);
+    }
+
+
+    public void executeCommand(Parser c, NewGame game, StorageFile storage) {
         switch (c.getCommand()) {
-        case "bye":
-            break;
         case "new":
-            game.beginNewGame();
+            startWordLimitGame();
+            break;
+        case "time":
+            startTimeLimitGame();
             break;
         default:
             break;
@@ -44,21 +69,18 @@ public class Main {
         while (!isExit) {
             try {
                 String fullCommand = uiBot.readCommand();
-                uiBot.showLine(); // show the divider line ("_______")
                 Parser c = new Parser(fullCommand);
                 c.parse();
-                executeCommand(c,game,storage);
+                executeCommand(c,wordLimitGame,storage);
                 isExit = c.getIsExit();
             } catch (StringIndexOutOfBoundsException e) {
                 uiBot.showText("OOPS!!! The description after this command word cannot be empty.");
             } catch (IndexOutOfBoundsException e) {
                 uiBot.showText("OOPS!!! It's out of range.");
             } catch (NumberFormatException e) {
-                uiBot.showText("OOPS!!! Input after done/delete must be a number.");
+                uiBot.showText("OOPS!!! Number not found. ");
             } catch (FaultyInputException e) {
                 uiBot.showText(e.getMessage());
-            } catch (InvalidStringInputException e) {
-                e.printStackTrace();
             } catch (NoSuchElementException e) {
                 e.printStackTrace();
             } finally {
@@ -69,7 +91,6 @@ public class Main {
 
     public void exit() {
         uiBot.showBye();
-        return;
     }
 
     /** Runs the program until termination.  */
