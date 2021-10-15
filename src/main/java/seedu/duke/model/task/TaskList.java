@@ -2,6 +2,8 @@ package seedu.duke.model.task;
 
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
+import seedu.duke.model.task.exceptions.DeserializeTaskException;
+import seedu.duke.model.task.exceptions.TaskIndexException;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -51,13 +53,13 @@ public class TaskList {
         taskList.add(newTask);
     }
 
-    public void deleteTask(int taskIndex) throws DukeException {
+    public void deleteTask(int taskIndex) throws TaskIndexException {
         try {
             taskList.remove(taskIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Messages.ERROR_INVALID_INDEX);
+            throw new TaskIndexException(Messages.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new DukeException(Messages.ERROR_INVALID_NUMBER);
+            throw new TaskIndexException(Messages.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -65,13 +67,13 @@ public class TaskList {
         taskList.clear();
     }
 
-    public void markTaskAsDone(int taskIndex) throws DukeException {
+    public void markTaskAsDone(int taskIndex) throws TaskIndexException {
         try {
             taskList.get(taskIndex).setDone();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Messages.ERROR_INVALID_INDEX);
+            throw new TaskIndexException(Messages.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new DukeException(Messages.ERROR_INVALID_NUMBER);
+            throw new TaskIndexException(Messages.ERROR_INVALID_NUMBER);
         }
     }
 
@@ -117,9 +119,9 @@ public class TaskList {
      *
      * @param data a list of strings representing the serialized data
      * @return deserialized task list
-     * @throws DukeException if the data is invalid format
+     * @throws DeserializeTaskException if the data is invalid format
      */
-    public static List<Task> deserialize(List<String> data) throws DukeException {
+    public static List<Task> deserialize(List<String> data) throws DeserializeTaskException {
         List<Task> taskList = new ArrayList<>();
         for (String entry : data) {
             if (entry.charAt(0) == 'T') {

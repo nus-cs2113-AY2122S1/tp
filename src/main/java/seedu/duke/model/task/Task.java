@@ -1,6 +1,7 @@
 package seedu.duke.model.task;
 
 import seedu.duke.DukeException;
+import seedu.duke.model.task.exceptions.DeserializeTaskException;
 import seedu.duke.ui.Ui;
 
 public class Task {
@@ -54,9 +55,9 @@ public class Task {
      *
      * @param data a line of string representing the serialized data
      * @return deserialized task data
-     * @throws DukeException if the data is in invalid format
+     * @throws DeserializeTaskException if the data is in invalid format
      */
-    public static Task deserialize(String data) throws DukeException {
+    public static Task deserialize(String data) throws DeserializeTaskException {
         try {
             String[] item = data.split(" \\| ", -1);
             Task task = new Task(item[2], item[3], item[4]);
@@ -66,7 +67,7 @@ public class Task {
             }
             return task;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Data storage file corrupted..");
+            throw new DeserializeTaskException("Data storage file corrupted..");
         }
     }
 
