@@ -12,6 +12,7 @@ public class WorldMap {
     public static void initWorldMap() {
         try {
             graphList = loader.readData();
+            WorldMap.printWorld();
         } catch (WorldMapException e) {
             System.out.println(e.getMessage());
         }
