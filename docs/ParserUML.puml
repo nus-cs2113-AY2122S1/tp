@@ -1,73 +1,70 @@
 @startuml
 skinparam classAttributeIconSize 0
 skinparam stereotypeBackgroundColor White
+
 skinparam class {
 BackgroundColor Pink
 ArrowColor Red
 }
+
 together {
 package "parser" {
-    abstract Parser #lightgrey ##[bold]grey {
-    ~LOGGER:Logger {static}
-    ~MESSAGE_INVALID_COMMAND:String {static}
-    +WORKOUT_KEYWORD:String {static}
-    +EXERCISE_KEYWORD:String {static}
-    +SETS_KEYWORD:String {static}
-    +REPS_KEYWORD:String {static}
-    #userInputString:String
-    +Parser(userInputString:String)
-    +getCommandType(userInputString:String):String
-    #getCommandArguments(userInputString:String):String
-    +parseInput():Command {abstract}
-    getExerciseArgs(commandArgs:String):String {static}
-    getWorkoutAndExerciseIndices(commandArgs:String):String {static}
-    splitCommandWordsAndArgs(input:String, keyword:String):String {static}
-    parseArgsAsIndex(index:String):Integer {static}
-    }
-    class CommandManager {
-    -commandType:String
-    +generateCommand(userInputString:String):Command
-    }
-    class AddExerciseParser extends Parser {
-    +AddExerciseParser(userInputString:String)
-    -prepareAddExercise(commandArgs:String):Command
-    +parseInput():Command
-    }
-    class CreateWorkoutParser extends Parser {
-    +CreateWorkoutParser(userInputString:String)
-    -prepareCreateWorkout(commandArgs:String):Command
-    +parseInput():Command
-    }
-    class DeleteWorkoutParser extends Parser {
-    +DeleteWorkoutParser(userInputString:String)
-    -prepareDeleteWorkout(commandArgs:String):Command
-    +parseInput():Command
-    }
-    class DisplayExerciseParser extends Parser {
-    +DisplayExerciseParser(userInputString:String)
-    -prepareDisplayExercises(commandArgs:String):Command
-    +parseInput():Command
-    }
-    class HelpParser extends Parser {
-    +HelpParser(userInputString:String)
-    -prepareHelpMessage(commandArgs:String):Command
-    +parseInput():Command
-    }
-    class MarkExerciseAsDoneParser extends Parser {
-    +MarkExerciseAsDoneParser(userInputString:String)
-    -prepareMarkExerciseAsDone(commandArgs:String):Command
-    +parseInput():Command
-    }
-    class RemoveExerciseParser extends Parser {
-    +RemoveExerciseParser(userInputString:String)
-    -prepareRemoveExercise(commandArgs:String):Command
-    +parseInput():Command
-    }
-    }
+abstract Parser #lightgrey ##[bold]grey {
+~LOGGER:Logger {static}
+#userInputString:String
++Parser(userInputString:String)
++getCommandType(userInputString:String):String
+#getCommandArguments(userInputString:String):String
++parseInput():Command {abstract}
+getExerciseArgs(commandArgs:String):String {static}
+getWorkoutAndExerciseIndices(commandArgs:String):String {static}
+splitCommandWordsAndArgs(input:String, keyword:String):String {static}
+parseArgsAsIndex(index:String):Integer {static}
+}
+class CommandManager {
+-commandType:String
++generateCommand(userInputString:String):Command
+}
+class AddExerciseParser extends Parser {
++AddExerciseParser(userInputString:String)
+-prepareAddExercise(commandArgs:String):Command
++parseInput():Command
+}
+class CreateWorkoutParser extends Parser {
++CreateWorkoutParser(userInputString:String)
+-prepareCreateWorkout(commandArgs:String):Command
++parseInput():Command
+}
+class DeleteWorkoutParser extends Parser {
++DeleteWorkoutParser(userInputString:String)
+-prepareDeleteWorkout(commandArgs:String):Command
++parseInput():Command
+}
+class DisplayExerciseParser extends Parser {
++DisplayExerciseParser(userInputString:String)
+-prepareDisplayExercises(commandArgs:String):Command
++parseInput():Command
+}
+class HelpParser extends Parser {
++HelpParser(userInputString:String)
+-prepareHelpMessage(commandArgs:String):Command
++parseInput():Command
+}
+class MarkExerciseAsDoneParser extends Parser {
++MarkExerciseAsDoneParser(userInputString:String)
+-prepareMarkExerciseAsDone(commandArgs:String):Command
++parseInput():Command
+}
+class RemoveExerciseParser extends Parser {
++RemoveExerciseParser(userInputString:String)
+-prepareRemoveExercise(commandArgs:String):Command
++parseInput():Command
+}
+}
 
 package "logger" {
-    class LoggerUtil #LightBlue##Blue
-    }
+class LoggerUtil #LightBlue##Blue
+}
 
 hide AddExerciseParser
 hide RemoveExerciseParser
