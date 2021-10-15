@@ -25,6 +25,7 @@ public class UpdateOrder extends Command {
 
     @Override
     public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+        logger.log(Level.INFO, "Start of UpdateOrder command execution.");
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
 
@@ -66,9 +67,10 @@ public class UpdateOrder extends Command {
             rowsAffected = filteredOrders.size();
         }
 
-        setOrdersByOrderId(parameters, filteredOrders, order);
+        setUpdatesByOrderId(parameters, filteredOrders, order);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
         ui.printOrders(filteredOrders);
+        logger.log(Level.INFO, "End of UpdateOrder command execution.");
     }
 
     /**
@@ -102,7 +104,7 @@ public class UpdateOrder extends Command {
                 break;
             }
         }
-        logger.log(Level.INFO, "Updated order information with given user input");
+        logger.log(Level.INFO, "Updated order information with given user input.");
     }
 
 }
