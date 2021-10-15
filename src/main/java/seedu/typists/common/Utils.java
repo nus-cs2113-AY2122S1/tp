@@ -8,15 +8,15 @@ import java.util.Arrays;
  */
 public class Utils {
 
-    /** convert the line of text into an arraylist of word */
+    /** convert the line of text into an arraylist of word. */
     public static ArrayList<String> splitStringIntoWordList(String line) {
         return new ArrayList<>(Arrays.asList(line.split(" ")));
     }
 
-    /** group the word list into groups of x, where x is the number of words per line */
+    /** group the word list into groups of x, where x is the number of words per line. */
     public static ArrayList<String[]> getWordLine(String text, int lineLength) {
         ArrayList<String> wordList = splitStringIntoWordList(text);
-        ArrayList<String[]> wordLines = new ArrayList <>();
+        ArrayList<String[]> wordLines = new ArrayList<>();
         int j = 0;
         String[] line = new String[lineLength];
         for (String w : wordList) {

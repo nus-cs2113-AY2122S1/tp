@@ -6,14 +6,12 @@ import java.text.SimpleDateFormat;
 import static java.lang.System.lineSeparator;
 import static java.lang.System.out;
 import static seedu.typists.common.Messages.LOGO;
-import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
 import static seedu.typists.common.Messages.MESSAGE_WELCOME;
-
+import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
+import static seedu.typists.common.Messages.MESSAGE_HELP;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
-
-import static seedu.typists.common.Messages.*;
 
 /**
  * Text UI of the application.
@@ -94,9 +92,9 @@ public class TextUi {
         System.out.println("Finished!");
     }
 
-    public void showSummary(int errorWordCount, double WPM, int totalWordTyped, double gameTime) {
+    public void showSummary(int errorWordCount, double wpm, int totalWordTyped, double gameTime) {
         out.println("Wrong words:  " + errorWordCount + "/" + totalWordTyped);
-        out.println("WPM: " + String. format("%.2f", WPM));
+        out.println("WPM: " + String. format("%.2f", wpm));
         out.println("Total Time taken for the game: " + String. format("%.2f", gameTime) + " seconds");
     }
 }

@@ -14,25 +14,25 @@ public class Messages {
 
     public static final String MESSAGE_WELCOME = "Welcome to Typist -- the ultimate cli typing game.";
     public static final String MESSAGE_ACKNOWLEDGE = "Brought to you by -- AY2122S1-CS2113-T13-4.";
-    public static final String MESSAGE_HELP = "Manual:\n" +
-            "new: start a new word game\n" +
-            "time: start a new timer game\n" +
-            "bye: exit typist";
+    public static final String MESSAGE_HELP = "Manual:\n"
+            + "new: start a new word game\n"
+            + "time: start a new timer game\n"
+            + "bye: exit typist";
 
     //This sample text is gotten from https://www.lipsum.com/
-    public static final String SAMPLE_TEXT = "lorem ipsum is simply dummy text of the printing and typesetting industry" +
-            "imply dummy text of the printing and typesetting industry ipum is simply dummy" +
-            "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy" +
-            "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy " +
-            "industry industry industry industry industry industry industry industry industry industry industry" +
-            "industry industry industry industry industry industry industry industry industry industry industry" +
-            "industry industry industry industry industry industry industry industry industry industry industry" +
-            "industry industry industry industry industry industry industry industry industry industry industry" +
-            "industry industry industry industry industry industry industry industry industry industry industry" +
-            "industry industry industry industry industry industry industry industry industry industry industry" +
-            "industry industry industry industry industry industry industry industry industry industry industry" +
-            "industry industry industry industry industry industry industry industry industry industry industry" +
-            "industry industry industry industry industry industry industry industry industry industry industry";
+    public static final String SAMPLE_TEXT = "lorem ipsum is simply dummy text of the printing and typesetting "
+           + "imply dummy text of the printing and typesetting industry ipum is simply dummy"
+           + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
+           + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry ";
 
     //public static final String MESSAGE_GOODBYE = "Goodbye!";
     //public static final String MESSAGE_INIT_FAILED = "Failed to initialise address book application. Exiting...";

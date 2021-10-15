@@ -11,7 +11,6 @@ public class DataProcessor {
     public final double totalTime;
 
     public DataProcessor(TimeModeGame tg) {
-            //ArrayList<String[]> checkerWordLines, ArrayList<String> userText, int lineLength, int totalTime){
         this.checkerWordLines = tg.wordLines;
         this.userWordLines = getWordLineFromStringArray(tg.inputLines);
         this.totalTime = tg.realGameTime;
@@ -42,12 +41,12 @@ public class DataProcessor {
         return userWordLines.size() * LINE_LENGTH;
     }
 
-    public double getWPM() {
+    public double getWordPerMinute() {
         return getTotalWordTyped() / (totalTime / 60);
     }
 
 
-    public void getWrongKeyStrokes(ArrayList<String> checkerText, ArrayList<String> userText){
+    public void getWrongKeyStrokes(ArrayList<String> checkerText, ArrayList<String> userText) {
         int totalErrorCount = 0;
         for (int i = 0; i < userText.size(); i++) {
             totalErrorCount += getLineWrongKeyStrokes(checkerText.get(i), userText.get(i));

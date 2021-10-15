@@ -46,7 +46,7 @@ public class Main {
     public void startTimeLimitGame() {
         TimeModeGame g = new TimeModeGame(SAMPLE_TEXT, LINE_LENGTH);
         DataProcessor p =  new DataProcessor(g);
-        uiBot.showSummary(p.getErrorWordCount(), p.getWPM(), p.getTotalWordTyped(), p.totalTime);
+        uiBot.showSummary(p.getErrorWordCount(), p.getWordPerMinute(), p.getTotalWordTyped(), p.totalTime);
     }
 
 

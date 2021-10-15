@@ -18,7 +18,7 @@ public class TimeModeGame extends Game {
 
     public TimeModeGame(String targetWordSet, int wordsPerLine) {
         ui = new TextUi();
-        inputLines = new ArrayList <>();
+        inputLines = new ArrayList<>();
         wordLines = getWordLine(targetWordSet, wordsPerLine);
         this.gameTime = getGameTime();
         startGame();
@@ -27,7 +27,7 @@ public class TimeModeGame extends Game {
     public boolean readyToStartTimer() {
         Scanner in = new Scanner(System.in);
         String command = "";
-        while(!command.equals("yes")) {
+        while (!command.equals("yes")) {
             ui.printScreen("Do you want to start now?");
             command = in.nextLine();
         }
