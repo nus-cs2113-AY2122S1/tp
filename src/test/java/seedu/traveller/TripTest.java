@@ -14,7 +14,8 @@ class TripTest {
         final String expectedOutput = "\t\tTripName: trip1"
                 + "\n\t\t\t Origin: SIN"
                 + "\n\t\t\t Destination: MLY"
-                + "\n\t\t\t Path: [SIN, MLY]";
+                + "\n\t\t\t Path: [SIN, MLY]"
+                + "\n\t\t\t Distances: [1.0]";
         List<Country> path = new ArrayList<>();
         List<Double> distances = new ArrayList<>();
         path.add(new Country("SIN", 0));

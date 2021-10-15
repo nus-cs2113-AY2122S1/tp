@@ -19,9 +19,11 @@ public class WorldMap {
 
     public static void printWorld() {
         for (String countryCode : graphList.getNameArray()) {
-            System.out.println(countryCode);
+            System.out.print(countryCode + " ");
         }
+        System.out.println("");
         int numberOfCountries = graphList.getNameArray().size();
+        System.out.println(numberOfCountries);
         Country startCountry;
         Country endCountry;
         for (int i = 0; i < numberOfCountries; i++) {
