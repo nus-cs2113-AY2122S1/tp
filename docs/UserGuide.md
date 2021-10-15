@@ -50,7 +50,8 @@ Format: `help`
 
 Example:
 ```
-Hello! These are all the possible commands for this habit tracker :) (flags within {} brackets are optional)
+Hello! These are all the possible commands for this habit tracker :) 
+(flags within {} brackets are optional)
 1. set a goal: set <goal name> {-<goal type> /<start date>} /<end date>
    -> Goal types include: default, sleep, food, exercise and study
 2. remove a goal: remove <goal index>
@@ -63,7 +64,7 @@ Hello! These are all the possible commands for this habit tracker :) (flags with
 ```
 
 ### Set a Goal: `set`
-Set a new goal for long term achievement you wish to accomplish. Goals must have an end date while goal type and
+Sets a new goal for long term achievement you wish to accomplish. Goals must have an end date while goal type and
 start dates are optional.
 
 Format: `set <GOAL_NAME> {-<GOAL_TYPE> /<START_DATE>} /<END_DATE>` 
@@ -88,6 +89,19 @@ Your goal: [DF] Reduce spending has been added.
 ```
 
 ### Remove a Goal: `remove`
+Removes a goal specified by index.
+
+Format: `remove <GOAL_INDEX>`
+
+Example:
+```
+remove 1
+```
+
+Output:
+```
+Your goal: [DF] Exercise More has been removed.
+```
 
 ### List all Goals: `list`
 Lists all goals currently added and set by the user
@@ -118,7 +132,7 @@ Your habit:  Run 4km has been added to your goal: [DF] Exercise More
 
 
 ### Complete Habit: `done`
-Mark a habit under a goal as done.
+Marks a habit under a goal as done.
 
 Format: `done <GOAL_INDEX> <HABIT_INDEX>`
 
@@ -134,9 +148,22 @@ Your habit of " Run 6km" under the goal "[DF] Exercise More" has been set as don
 
 
 ### Delete Habit: `delete`
+Deletes a habit under a goal.
+
+Format: `delete <GOAL_INDEX> <HABIT_INDEX>`
+
+Example:
+```
+delete 1 2
+```
+
+Output:
+```
+Your habit of " Run 6km" under the goal "[DF] Exercise More" has been deleted.
+```
 
 ### View Habits: `view`
-List all habits' user has added under a specific goal.
+Lists all habits' user has added under a specific goal.
 
 Format: `view <GOAL_INDEX>` 
 
@@ -153,6 +180,20 @@ Here are your 2 habit(s) under the goal "[EX] Exercise More".
 ```
 
 ### Exit Program: `bye`
+Exits the program.
+
+**Make sure to use this command before exiting the program
+to ensure that your data are saved properly.**
+
+Format: `bye`
+
+Output:
+```
+Thanks for using Ha(ppy)Bit, see you in a bit! (hehe)
+
+"We are what we repeatedly do. Excellence, then, is not an act, but a habit."
+ — Will Durant
+```
 
 ## About Loading and Saving Data
 **Loading saved data:** 
