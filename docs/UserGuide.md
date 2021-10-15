@@ -165,7 +165,7 @@ Here are your 2 habit(s) under the goal "[EX] Exercise More".
 
 Action | Command Format | Example
 ------------ | ------------ | ------------
-Set goal | `set <GOAL_NAME> {-<GOAL_TYPE> /<START_DATE>} /<END_DATE>` | `set Exercise More -ex /15102021 /31122021`
+Set goal | `set <GOAL_NAME> {-<GOAL_TYPE> /<START_DATE>} /<END_DATE>` | `set Reduce spending /01012022 /31122022`
 Remove goal | `remove <GOAL_INDEX>` | `remove 1`
 List goals | `list` | `list`
 Add habit | `add <GOAL_INDEX> <HABIT_NAME>` | `add 1 Run 4km`
