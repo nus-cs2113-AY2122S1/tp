@@ -17,7 +17,7 @@ public class OrderManager {
      * @return Stock object of the provided order id by user
      */
     public static Order extractOrderObject(LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
-        int orderId = Integer.parseInt(parameters.get(CommandParameters.ORDER_ID));
+        int orderId = Integer.parseInt(parameters.get(CommandParameters.ID));
         Order order = null;
         for (Medicine medicine : medicines) {
             if (medicine instanceof Order && orderId == ((Order) medicine).getOrderId()) {
