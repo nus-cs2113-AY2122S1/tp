@@ -1,12 +1,11 @@
 package seedu.duke.ui;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
-import seedu.duke.lesson.Lesson;
-import seedu.duke.lesson.LessonList;
-import seedu.duke.task.Task;
-import seedu.duke.task.TaskList;
+import seedu.duke.model.lesson.Lesson;
+import seedu.duke.model.lesson.LessonList;
+import seedu.duke.model.task.Task;
+import seedu.duke.model.task.TaskList;
 
 public class Ui {
     public static final String LINE =
