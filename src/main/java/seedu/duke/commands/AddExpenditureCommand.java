@@ -10,22 +10,31 @@ import java.time.LocalDate;
  */
 public class AddExpenditureCommand extends AddCommand {
 
+    public static final String MESSAGE_USAGE = "Adds an expenditure record.\n"
+            + "Parameters: e/EXPENDITURE_NAME a/COST [d/DATE_OF_EXPENDITURE]";
     public String description;
     public double spending;
     LocalDate date;
 
+<<<<<<< HEAD
     public static final String MESSAGE_USAGE = "Adds an expenditure record.\n"
             + "Parameters: e/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE]\n"
             + "Note: If DATE_OF_EXPENDITURE is not specified, the current system date will be the "
             + "default value.";
 
+=======
+>>>>>>> f005599d27bbe7f2d1f7fb66e0cd5172e44fa03f
     /**
      * Constructor for when the user inputs only two parameters, leaving the optional
      * date parameter empty. In that case, the date is set to "today" by default.
      *
      * @param description description of the expenditure, e.g. chicken rice
+<<<<<<< HEAD
      * @param amount amount spent for expenditure
      * @param date date on which expenditure was made
+=======
+     * @param amount      amount spent for expenditure
+>>>>>>> f005599d27bbe7f2d1f7fb66e0cd5172e44fa03f
      */
     public AddExpenditureCommand(String description, double amount, LocalDate date) {
         this.description = description;

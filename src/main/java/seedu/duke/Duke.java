@@ -52,7 +52,7 @@ public class Duke {
 
         Storage budgetStorage = new Storage();
         try {
-            budgetStorage.loadStorage(recordList);
+            Storage.loadStorage(recordList);
         } catch (IOException e) {
             e.printStackTrace();
             return;
