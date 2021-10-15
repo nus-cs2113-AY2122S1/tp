@@ -36,7 +36,7 @@ public class CommandResult {
      * Returns the CommandParser that is required to switch workspaces.
      * If additionalData will be null.
      *
-     * @return The CommandParser object for the workspace or else null
+     * @return The CommandParser object for the workspace or else null.
      */
     public CommandParser getAdditionalData() {
         return additionalData;
@@ -45,7 +45,7 @@ public class CommandResult {
     /**
      * Returns the result of the command execution.
      *
-     * @return True if successful or else false
+     * @return True if successful or else false.
      */
     public boolean isOk() {
         return isOk;
@@ -54,7 +54,7 @@ public class CommandResult {
     /**
      * Returns the result to exit or not.
      *
-     * @return True if 'exit' command is sent
+     * @return True if 'exit' command is sent.
      */
     public boolean isExit() {
         return isExit;
@@ -63,7 +63,7 @@ public class CommandResult {
     /**
      * Returns the error message as a String.
      *
-     * @return The String object containing the error
+     * @return The String object containing the error.
      */
     public String getErrorMessage() {
         return errorMessage;

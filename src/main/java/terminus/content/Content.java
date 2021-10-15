@@ -1,5 +1,8 @@
 package terminus.content;
 
+/**
+ * Content class to represent any data related object.
+ */
 public class Content {
 
     protected String name;
@@ -13,21 +16,16 @@ public class Content {
     }
 
     /**
-     * Initializes the Content object.
+     * Initializes a Content object.
      *
-     * @param name the name attribute of Content
-     * @param data the data attribute of Content
+     * @param name The name attribute of the Content.
+     * @param data The data attribute of the Content.
      */
     public Content(String name, String data) {
         this.name = name;
         this.data = data;
     }
 
-    /**
-     * Returns the name attribute of the Content object.
-     *
-     * @return A string containing the name attribute of the Content object
-     */
     public String getName() {
         return name;
     }
@@ -45,14 +43,19 @@ public class Content {
     }
 
     /**
-     * Returns all the attributes of the Content object.
+     * Returns all the attributes of the Content object formatted by its display message.
      *
-     * @return A string containing all the attributes of the Content object
+     * @return A string containing all the attributes of the Content object.
      */
     public String getDisplayInfo() {
         return String.format(DISPLAY_MESSAGE, name, data);
     }
 
+    /**
+     * Returns attributes of the Content object to be listed by the view command.
+     *
+     * @return A string containing attributes of the Content object based on the view command.
+     */
     public String getViewDescription() {
         return this.name;
     }
