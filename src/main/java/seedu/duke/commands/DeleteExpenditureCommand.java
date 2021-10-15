@@ -1,7 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.data.records.Expenditure;
-import seedu.duke.data.RecordList;
 import seedu.duke.textfiletools.DeleteFromTextFile;
 import seedu.duke.ui.TextUi;
 
