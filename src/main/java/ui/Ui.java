@@ -293,6 +293,17 @@ public class Ui {
     }
 
     /**
+     * Prints out the orders in a table format.
+     *
+     * @param order Order to be printed.
+     */
+    public void printOrder(Order order) {
+        ArrayList<Order> orders = new ArrayList<>();
+        orders.add(order);
+        printOrders(orders);
+    }
+
+    /**
      * Prints out all the orders in the Arraylist in a table format.
      *
      * @param orders Arraylist of the orders.

@@ -35,6 +35,7 @@ public class CommandSyntax {
     public static final String LIST_STOCK_COMMAND = "liststock {i/ID p/PRICE q/QUANTITY e/EXPIRY_DATE "
             + "d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN NAME}";
     public static final String PURGE_COMMAND = "purge";
+    public static final String UPDATE_ORDER_COMMAND = "updateorder i/ID [n/NAME q/QUANTITY d/DATE]";
     public static final String UPDATE_STOCK_COMMAND = "updatestock i/ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE "
             + "d/DESCRIPTION m/MAX_QUANTITY]";
 
@@ -120,74 +121,6 @@ public class CommandSyntax {
             }
         }
 
-        return false;
-    }
-
-    /**
-     * Checks if parameter values are valid.
-     *
-     * @param ui            Reference to the UI object passed by Main to print messages.
-     * @param parameters    HashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines     Arraylist of all medicines.
-     * @param commandSyntax The command's valid syntax.
-     * @return A boolean value indicating whether parameter values are valid.
-     */
-    public static boolean containsInvalidParameterValues(Ui ui, HashMap<String, String> parameters,
-                                                         ArrayList<Medicine> medicines, String commandSyntax) {
-        for (String parameter : parameters.keySet()) {
-            boolean isValid = false;
-            String parameterValue = parameters.get(parameter);
-
-            switch (parameter) {
-            case CommandParameters.PRICE:
-                isValid = StockValidator.isValidPrice(ui, parameterValue);
-                break;
-            case CommandParameters.QUANTITY:
-                isValid = MedicineValidator.isValidQuantity(ui, parameterValue);
-                break;
-            case CommandParameters.EXPIRY_DATE:
-                isValid = StockValidator.isValidExpiry(ui, parameterValue);
-                break;
-            case CommandParameters.DESCRIPTION:
-                isValid = StockValidator.isValidDescription(ui, parameterValue);
-                break;
-            case CommandParameters.NAME:
-                isValid = MedicineValidator.isValidName(ui, parameterValue);
-                break;
-            case CommandParameters.MAX_QUANTITY:
-                isValid = StockValidator.isValidMaxQuantity(ui, parameterValue);
-                break;
-            case CommandParameters.ID:
-                isValid = StockValidator.isValidStockId(ui, parameterValue, medicines);
-                break;
-            case CommandParameters.SORT:
-            case CommandParameters.REVERSED_SORT:
-                if (commandSyntax.equals(CommandSyntax.LIST_STOCK_COMMAND)) {
-                    isValid = StockValidator.isValidColumn(ui, parameterValue);
-                } else if (commandSyntax.equals(CommandSyntax.LIST_DISPENSE_COMMAND)) {
-                    isValid = DispenseValidator.isValidColumn(ui, parameterValue);
-                }
-                break;
-            case CommandParameters.CUSTOMER_ID:
-                isValid = DispenseValidator.isValidCustomerId(ui, parameterValue);
-                break;
-            case CommandParameters.STAFF:
-                isValid = DispenseValidator.isValidStaffName(ui, parameterValue);
-                break;
-            case CommandParameters.STOCK_ID:
-                isValid = DispenseValidator.isValidStockId(ui, parameterValue);
-                break;
-            case CommandParameters.DATE:
-                isValid = DispenseValidator.isValidDate(ui, parameterValue);
-                break;
-            default:
-                ui.printInvalidParameter(parameter, commandSyntax);
-                break;
-            }
-            if (!isValid) {
-                return true;
-            }
-        }
         return false;
     }
 }

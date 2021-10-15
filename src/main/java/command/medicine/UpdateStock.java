@@ -38,7 +38,7 @@ public class UpdateStock extends Command {
             return;
         }
 
-        boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters, medicines,
+        boolean isInvalidParameterValues = StockValidator.containsInvalidParameterValues(ui, parameters, medicines,
             CommandSyntax.UPDATE_STOCK_COMMAND);
         if (isInvalidParameterValues) {
             return;

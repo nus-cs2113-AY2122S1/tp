@@ -7,6 +7,7 @@ import comparators.StockComparator;
 import inventory.Medicine;
 import inventory.Stock;
 import parser.DateParser;
+import parser.StockValidator;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -40,7 +41,7 @@ public class ListStock extends Command {
             return;
         }
 
-        boolean isInvalidParameterValues = CommandSyntax.containsInvalidParameterValues(ui, parameters,
+        boolean isInvalidParameterValues = StockValidator.containsInvalidParameterValues(ui, parameters,
                     medicines, CommandSyntax.LIST_STOCK_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");

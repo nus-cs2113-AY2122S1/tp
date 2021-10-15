@@ -2,14 +2,90 @@ package parser;
 
 import command.CommandParameters;
 import inventory.Dispense;
+import inventory.Medicine;
 import ui.Ui;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Contains all the methods to validate if a Dispense input parameters are valid.
  */
 public class DispenseValidator {
+
+    /**
+     * Checks if parameter values are valid for Dispense objects.
+     *
+     * @param ui            Reference to the UI object passed by Main to print messages.
+     * @param parameters    HashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines     Arraylist of all medicines.
+     * @param commandSyntax The command's valid syntax.
+     * @return A boolean value indicating whether parameter values are valid.
+     */
+    public static boolean containsInvalidParameterValues(Ui ui, HashMap<String, String> parameters,
+                                                         ArrayList<Medicine> medicines, String commandSyntax) {
+        for (String parameter : parameters.keySet()) {
+            boolean isValid = false;
+            String parameterValue = parameters.get(parameter);
+
+            switch (parameter) {
+            case CommandParameters.ID:
+                isValid = isValidDispenseId(ui, parameterValue);
+                break;
+            case CommandParameters.NAME:
+                isValid = MedicineValidator.isValidName(ui, parameterValue);
+                break;
+            case CommandParameters.QUANTITY:
+                isValid = MedicineValidator.isValidQuantity(ui, parameterValue);
+                break;
+            case CommandParameters.CUSTOMER_ID:
+                isValid = isValidCustomerId(ui, parameterValue);
+                break;
+            case CommandParameters.DATE:
+                isValid = isValidDate(ui, parameterValue);
+                break;
+            case CommandParameters.STAFF:
+                isValid = isValidStaffName(ui, parameterValue);
+                break;
+            case CommandParameters.STOCK_ID:
+                isValid = StockValidator.isValidStockId(ui, parameterValue, medicines);
+                break;
+            case CommandParameters.SORT:
+            case CommandParameters.REVERSED_SORT:
+                isValid = DispenseValidator.isValidColumn(ui, parameterValue);
+                break;
+            default:
+                ui.printInvalidParameter(parameter, commandSyntax);
+                break;
+            }
+            if (!isValid) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if a dispense ID is valid.
+     *
+     * @param ui               Reference to the UI object passed by Main to print messages.
+     * @param stringDispenseId Stock ID to be checked.
+     * @return Boolean value indicating if Dispense ID is valid.
+     */
+    public static boolean isValidDispenseId(Ui ui, String stringDispenseId) {
+        try {
+            int stockId = Integer.parseInt(stringDispenseId);
+            if (stockId < 0) {
+                throw new Exception();
+            }
+            return true;
+        } catch (Exception e) {
+            ui.print("Invalid dispense ID provided!");
+        }
+        return false;
+    }
+
     /**
      * Checks if a customer ID is valid.
      *
@@ -38,26 +114,6 @@ public class DispenseValidator {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Checks if a stock ID is valid.
-     *
-     * @param ui            Reference to the UI object passed by Main to print messages.
-     * @param stringStockId Stock ID to be checked.
-     * @return Boolean value indicating if Stock ID is valid.
-     */
-    public static boolean isValidStockId(Ui ui, String stringStockId) {
-        try {
-            int stockId = Integer.parseInt(stringStockId);
-            if (stockId < 0) {
-                throw new Exception();
-            }
-            return true;
-        } catch (Exception e) {
-            ui.print("Invalid stock ID provided!");
-        }
-        return false;
     }
 
     /**

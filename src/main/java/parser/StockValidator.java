@@ -1,6 +1,7 @@
 package parser;
 
 import command.CommandParameters;
+import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Stock;
 import ui.Ui;
@@ -8,12 +9,65 @@ import ui.Ui;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  * Contains all the methods to validate if a Medicine's input parameters are valid.
  */
 
 public class StockValidator {
+    /**
+     * Checks if parameter values are valid for Stock objects.
+     *
+     * @param ui            Reference to the UI object passed by Main to print messages.
+     * @param parameters    HashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines     Arraylist of all medicines.
+     * @param commandSyntax The command's valid syntax.
+     * @return A boolean value indicating whether parameter values are valid.
+     */
+    public static boolean containsInvalidParameterValues(Ui ui, HashMap<String, String> parameters,
+                                                         ArrayList<Medicine> medicines, String commandSyntax) {
+        for (String parameter : parameters.keySet()) {
+            boolean isValid = false;
+            String parameterValue = parameters.get(parameter);
+
+            switch (parameter) {
+            case CommandParameters.ID:
+                isValid = isValidStockId(ui, parameterValue, medicines);
+                break;
+            case CommandParameters.NAME:
+                isValid = MedicineValidator.isValidName(ui, parameterValue);
+                break;
+            case CommandParameters.PRICE:
+                isValid = isValidPrice(ui, parameterValue);
+                break;
+            case CommandParameters.QUANTITY:
+                isValid = MedicineValidator.isValidQuantity(ui, parameterValue);
+                break;
+            case CommandParameters.EXPIRY_DATE:
+                isValid = isValidExpiry(ui, parameterValue);
+                break;
+            case CommandParameters.DESCRIPTION:
+                isValid = isValidDescription(ui, parameterValue);
+                break;
+            case CommandParameters.MAX_QUANTITY:
+                isValid = isValidMaxQuantity(ui, parameterValue);
+                break;
+            case CommandParameters.SORT:
+            case CommandParameters.REVERSED_SORT:
+                isValid = isValidColumn(ui, parameterValue);
+                break;
+            default:
+                ui.printInvalidParameter(parameter, commandSyntax);
+                break;
+            }
+            if (!isValid) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Checks if the given stock id is valid.
      *

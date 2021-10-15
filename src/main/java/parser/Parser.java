@@ -11,6 +11,7 @@ import command.medicine.ListStock;
 import command.medicine.UpdateStock;
 import command.order.DeleteOrder;
 import command.order.ListOrder;
+import command.order.UpdateOrder;
 import errors.InvalidCommand;
 import inventory.Medicine;
 import ui.Ui;
@@ -109,6 +110,7 @@ public class Parser {
         case UPDATE_DISPENSE:
             break;
         case UPDATE_ORDER:
+            new UpdateOrder().execute(ui, parameters, medicines);
             break;
         default:
             throw new InvalidCommand();
