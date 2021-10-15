@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +16,10 @@ import seedu.commands.ListIncomeCommand;
 import seedu.commands.TotalIncomeCommand;
 import seedu.entry.Expense;
 import seedu.entry.Income;
+import seedu.exceptions.InvalidExpenseAmountException;
+import seedu.exceptions.InvalidExpenseDataFormatException;
+import seedu.exceptions.InvalidIncomeAmountException;
+import seedu.exceptions.InvalidIncomeDataFormatException;
 
 public class ParserTest {
     @Test
@@ -46,6 +54,13 @@ public class ParserTest {
     public void parseCommand_invalidAddExpenseCommand_returnInvalidCommand() {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("add_ex d/tfshsdfh a/12a");
+        assertTrue(underTest.getClass() == InvalidCommand.class);
+    }
+
+    @Test
+    public void parseCommand_invalidAddExpenseCommandWithEmptyDescription_returnInvalidCommand() {
+        Parser testParser = new Parser();
+        Command underTest = testParser.parseCommand("add_ex d/a/12a");
         assertTrue(underTest.getClass() == InvalidCommand.class);
     }
 
@@ -125,32 +140,62 @@ public class ParserTest {
     }
     
     @Test
-    public void isExpenseData_validExpenseData_returnTrue() {
+    public void convertDataToExpense_validExpenseData_outputExpense() throws InvalidExpenseAmountException, 
+            InvalidExpenseDataFormatException {
         Parser testParser = new Parser();
-        assertTrue(testParser.isExpenseData("E, agaga, 89.22"));
+        Expense testExpense = testParser.convertDataToExpense("E, sfa, 12");
+        assertEquals("sfa", testExpense.getDescription());
+        assertTrue(testExpense.getValue() == 12);
     }
 
     @Test
-    public void isExpenseData_validExpenseDataNoNumberBeforeDecimal_returnTrue() {
+    public void convertDataToExpense_invalidExpenseDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
-        assertTrue(testParser.isExpenseData("E, agaga, .333"));
+        assertThrows(InvalidExpenseDataFormatException.class,
+                ()-> testParser.convertDataToExpense("E, , 12"));
     }
 
     @Test
-    public void isExpenseData_invalidExpenseData_returnFalse() {
+    public void convertDataToExpense_invalidExpenseDataWithInvalidAmount_throwsException() {
         Parser testParser = new Parser();
-        assertTrue(!testParser.isExpenseData("E, agaga, 33."));
+        assertThrows(InvalidExpenseAmountException.class,
+                ()-> testParser.convertDataToExpense("E, asd, 12a"));
     }
 
     @Test
-    public void isIncomeData_validIncomeData_returnTrue() {
+    public void convertDataToIncome_validIncomeData_outputIncome() throws InvalidIncomeAmountException, 
+            InvalidIncomeDataFormatException {
         Parser testParser = new Parser();
-        assertTrue(testParser.isIncomeData("I, agaga, 89.22"));
+        Income testIncome = testParser.convertDataToIncome("I, sfa, 12");
+        assertEquals("sfa", testIncome.getDescription());
+        assertTrue(testIncome.getValue() == 12);
     }
 
     @Test
-    public void isIncomeData_invalidIncomeData_returnFalse() {
+    public void convertDataToIncome_invalidIncomeDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
-        assertTrue(!testParser.isIncomeData("E, agaga, 33.22"));
+        assertThrows(InvalidIncomeDataFormatException.class,
+                ()-> testParser.convertDataToIncome("I, , 12"));
+    }
+
+    @Test
+    public void convertDataToIncome_invalidIncomeDataWithInvalidAmount_throwsException() {
+        Parser testParser = new Parser();
+        assertThrows(InvalidIncomeAmountException.class,
+                ()-> testParser.convertDataToIncome("I, asd, 12a"));
+    }
+
+    @Test
+    public void convertDataToIncome_invalidIncomeDataWithInvalidMarker_throwsException() {
+        Parser testParser = new Parser();
+        assertThrows(InvalidIncomeDataFormatException.class,
+                ()-> testParser.convertDataToIncome("E, asd, 12a"));
+    }
+
+    @Test
+    public void convertDataToIncome_invalidIncomeDataWithInvalidSeparator_throwsException() {
+        Parser testParser = new Parser();
+        assertThrows(InvalidIncomeDataFormatException.class,
+                ()-> testParser.convertDataToIncome("I,asd, 12"));
     }
 }
