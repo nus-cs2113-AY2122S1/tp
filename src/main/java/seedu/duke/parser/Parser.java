@@ -13,12 +13,14 @@ import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import static seedu.duke.common.Messages.MESSAGE_INVALID_ADD_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_DATE;
 
 //import java.time.LocalDate;
 //import java.util.Locale;

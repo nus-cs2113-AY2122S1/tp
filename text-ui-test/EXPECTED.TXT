@@ -13,7 +13,8 @@
 ========================================================
 1. add
 Adds an expenditure record.
-Parameters: e/EXPENDITURE_NAME a/COST [d/DATE_OF_EXPENDITURE]
+Parameters: e/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE]
+Note: If DATE_OF_EXPENDITURE is not specified, the current system date will be the default value.
 
 Adds a budget record.
 Parameters: b/ a/AMOUNT m/MONTH [y/YEAR]
