@@ -25,6 +25,6 @@ public class Expense {
 
     @Override
     public String toString() {
-        return (description + "\t\t\t| " + value + "\t| " + date);
+        return String.format("%-25s | %-10.2f | %s", description, value, date);
     }
 }
