@@ -80,8 +80,9 @@ public class UpdateOrder extends Command {
      * @param filteredOrders Arraylist of filtered medicine orders.
      * @param order          Order object of the given order id.
      */
-    private void setOrdersByOrderId(LinkedHashMap<String, String> parameters, ArrayList<Order> filteredOrders,
-                                    Order order) {
+    private void setUpdatesByOrderId(LinkedHashMap<String, String> parameters, ArrayList<Order> filteredOrders,
+                                     Order order) {
+        logger.log(Level.INFO, "Attempt to update order information.");
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
