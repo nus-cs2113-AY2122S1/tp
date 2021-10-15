@@ -98,7 +98,6 @@ public class UpdateStock extends Command {
     private boolean processDateInput(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
                                      Stock stock) {
         logger.log(Level.INFO, "Processing date input for update stock...");
-        String name = stock.getMedicineName();
 
         boolean hasExpiryDate = parameters.containsKey(CommandParameters.EXPIRY_DATE);
         if (!hasExpiryDate) {
@@ -111,7 +110,7 @@ public class UpdateStock extends Command {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        String name = stock.getMedicineName();
         logger.log(Level.INFO, "End processing date input for update stock.");
         return StockValidator.dateValidityChecker(ui, medicines, expiryDate, name);
     }
