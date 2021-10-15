@@ -24,6 +24,9 @@ public abstract class Parser {
         this.userInputString = userInputString;
         setupLogger(LOGGER);
     }
+    
+    protected Parser() {
+    }
 
     public static String getCommandType(String userInputString) {
         String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
@@ -97,8 +100,8 @@ public abstract class Parser {
      *
      * @param commandArgs raw input string without the command word.
      * @return String array of size 2. If there is no workout index, empty String array is returned.
-     * If there is a workout index but no exercise index, only workout index is returned.
-     * Otherwise, both workout index and exercise index are returned.
+     *         If there is a workout index but no exercise index, only workout index is returned.
+     *         Otherwise, both workout index and exercise index are returned.
      */
     static String[] getWorkoutAndExerciseIndices(String commandArgs) {
         if (!commandArgs.contains(WORKOUT_KEYWORD)) {
