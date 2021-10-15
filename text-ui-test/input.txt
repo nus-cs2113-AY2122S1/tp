@@ -1,2 +1,3 @@
-list all
+list task
+list lesson
 exit
