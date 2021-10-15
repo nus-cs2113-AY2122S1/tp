@@ -22,7 +22,6 @@ import java.util.logging.Logger;
  */
 
 public class UpdateStock extends Command {
-    private static final int MINIMUM_ROW_NUMBER_UPDATE = 1;
     private static Logger logger = Logger.getLogger("UpdateStock");
 
     @Override
@@ -62,24 +61,27 @@ public class UpdateStock extends Command {
             }
         }
 
-        // Default value for updating one row
-        int rowsAffected = MINIMUM_ROW_NUMBER_UPDATE;
+        // Default value for updating all affected rows
+        int rowsAffected = filteredStocks.size();
         String[] affectedCommands = {CommandParameters.NAME, CommandParameters.DESCRIPTION,
             CommandParameters.MAX_QUANTITY};
+        boolean isAffectedCommand = false;
         for (String affectedCommand : affectedCommands) {
             if (parameters.containsKey(affectedCommand)) {
-                rowsAffected = filteredStocks.size();
+                isAffectedCommand = true;
                 break;
             }
         }
 
+        if (!isAffectedCommand) {
+            filteredStocks.clear();
+            filteredStocks.add(stock);
+            rowsAffected = filteredStocks.size();
+        }
+
         setUpdatesByStockID(parameters, filteredStocks, stock);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
-        if (rowsAffected > MINIMUM_ROW_NUMBER_UPDATE) {
-            ui.printStocks(filteredStocks, medicines);
-        } else {
-            ui.printStock(stock, medicines);
-        }
+        ui.printStocks(filteredStocks, medicines);
 
     }
 

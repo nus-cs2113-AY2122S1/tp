@@ -16,8 +16,11 @@ import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Update medication information based on user input given order id.
+ */
+
 public class UpdateOrder extends Command {
-    private static final int MINIMUM_ROW_NUMBER_UPDATE = 1;
     private static Logger logger = Logger.getLogger("UpdateOrder");
 
     @Override
@@ -55,19 +58,17 @@ public class UpdateOrder extends Command {
             }
         }
 
-        // Default value for updating one row
-        int rowsAffected = MINIMUM_ROW_NUMBER_UPDATE;
-        if (parameters.containsKey(CommandParameters.NAME)) {
+        // Default value for updating all affected rows
+        int rowsAffected = filteredOrders.size();
+        if (!parameters.containsKey(CommandParameters.NAME)) {
+            filteredOrders.clear();
+            filteredOrders.add(order);
             rowsAffected = filteredOrders.size();
         }
 
         setOrdersByOrderId(parameters, filteredOrders, order);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
-        if (rowsAffected > MINIMUM_ROW_NUMBER_UPDATE) {
-            ui.printOrders(filteredOrders);
-        } else {
-            ui.printOrder(order);
-        }
+        ui.printOrders(filteredOrders);
     }
 
     /**
