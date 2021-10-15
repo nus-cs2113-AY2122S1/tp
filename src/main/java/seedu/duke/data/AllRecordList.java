@@ -31,7 +31,7 @@ public class AllRecordList {
      * @param isLoadingStorage indicate if this command is called during loading or runtime
      */
     public void addExpenditure(String description, double amount, LocalDate date, int month, boolean isLoadingStorage) {
-        allRecordList.get(month).addExpenditure(description, amount, isLoadingStorage);
+        allRecordList.get(month).addExpenditure(description, amount, date, isLoadingStorage);
     }
 
     public void deleteBudget(int month) {
@@ -54,15 +54,6 @@ public class AllRecordList {
         return allRecordList.get(month).getExpenditureListSize();
     }
 
-    //    public RecordList getExpenditureList(int startMonth, int endMonth) {
-    //        RecordList allExpenditure = null;
-    //        for (Record a : allRecords) {
-    //            if (a.getType().equals("Expenditure") && a.getMonth() <= endMonth && a.getMonth() >= startMonth) {
-    //                allExpenditure.addExpenditure(a.getDescription(), a.getAmount(), a.getDate());
-    //            }
-    //        }
-    //        return allExpenditure;
-    //    }
     public Expenditure getExpenditure(int index, int month) {
         return allRecordList.get(month).getExpenditure(index);
     }

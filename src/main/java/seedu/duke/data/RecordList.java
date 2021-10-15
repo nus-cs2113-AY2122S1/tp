@@ -5,11 +5,9 @@ import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.storage.ExpenditureStorage;
 
-<<<<<<< HEAD
-//import java.time.LocalDate;
+
 import java.time.LocalDate;
-=======
->>>>>>> f005599d27bbe7f2d1f7fb66e0cd5172e44fa03f
+
 import java.util.ArrayList;
 
 public class RecordList {
@@ -42,14 +40,9 @@ public class RecordList {
     /**
      * Adds an expenditure record into the RecordList.
      *
-<<<<<<< HEAD
      * @param description description of the expenditure
      * @param amount amount spent
      * @param date date on which the expenditure took place
-=======
-     * @param description      description of the expenditure
-     * @param amount           amount spent
->>>>>>> f005599d27bbe7f2d1f7fb66e0cd5172e44fa03f
      * @param isLoadingStorage indicate if this command is called during loading or runtime
      */
     public void addExpenditure(String description, double amount, LocalDate date, boolean isLoadingStorage) {

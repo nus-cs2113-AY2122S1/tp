@@ -1,5 +1,7 @@
 package seedu.duke.data.records;
 
+import java.time.LocalDate;
+
 public class Expenditure extends Record {
     protected String description;
     protected LocalDate date;
