@@ -32,10 +32,10 @@ conventional GUI apps.
 5. Run jar file as java -jar tp.jar.
 
 ## Terminology
-Name | Description | Example
------------- | ------------ | ------------
-Goal | A long term achievement you wish to accomplish | `Lose 5kg by Dec`
-Habit | Checkpoints / Steps taken to achieve goal | `Run 5km`
+| Name  | Description                                    | Example           |
+|-------|------------------------------------------------|-------------------|
+| Goal  | A long term achievement you wish to accomplish | `Lose 5kg by Dec` |
+| Habit | Checkpoints / Steps taken to achieve goal      | `Run 5km`         |
 
 ## Features 
 
@@ -154,6 +154,18 @@ Here are your 2 habit(s) under the goal "[EX] Exercise More".
 ### Exit Program: `bye`
 
 ## About Loading and Saving Data
+**Loading saved data:** 
+
+Whenever you run the program, the program will **automatically** look for any
+saved data in the relative storage path, `data/habits.txt`. 
+* If the storage file is found, `File exists` will be printed. 
+* If the storage file is not found, the program will create 
+one for you at the relative storage path, `data/habits.txt`.
+
+**Saving data:** 
+
+Before you exit the program, the goals you set and the habits you tracked
+are **automatically** saved in a text file at the relative storage path, `data/habits.txt`.
 
 ## FAQ
 
