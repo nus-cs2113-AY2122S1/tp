@@ -94,18 +94,6 @@ public class Ui {
     }
 
     /**
-     * Prints out the medicine in a table format.
-     *
-     * @param stock Stock to be printed.
-     * @param medicines Arraylist of the medicines.
-     */
-    public void printStock(Stock stock, ArrayList<Medicine> medicines) {
-        ArrayList<Stock> stocks = new ArrayList<>();
-        stocks.add(stock);
-        printStocks(stocks, medicines);
-    }
-
-    /**
      * Prints out all the stocks in the Arraylist in a table format.
      *
      * @param stocks Arraylist of the stocks.
@@ -302,17 +290,6 @@ public class Ui {
             printRowBorder(columnWidths);
         }
         System.out.println("For more information, refer to User Guide: https://ay2122s1-cs2113t-t10-1.github.io/tp/");
-    }
-
-    /**
-     * Prints out the orders in a table format.
-     *
-     * @param order Order to be printed.
-     */
-    public void printOrder(Order order) {
-        ArrayList<Order> orders = new ArrayList<>();
-        orders.add(order);
-        printOrders(orders);
     }
 
     /**
