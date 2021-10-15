@@ -37,6 +37,7 @@ public class Main {
     }
 
     public void startWordLimitGame() {
+        uiBot.printKeyboard();
         this.wordLimitGame = new NewGame();
         try {
             wordLimitGame.beginNewGame();
