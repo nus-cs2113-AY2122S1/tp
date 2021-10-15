@@ -62,6 +62,29 @@ Hello! These are all the possible commands for this habit tracker :) (flags with
 ```
 
 ### Set a Goal: `set`
+Set a new goal for long term achievement you wish to accomplish. Goals must have an end date while goal type and
+start dates are optional.
+
+Format: `set <GOAL_NAME> {-<GOAL_TYPE> /<START_DATE>} /<END_DATE>` 
+
+Note:
+1. Dates must be in `DDMMYYYY` format. For example, 01 January 2021 must be written as `01012020`.
+2. If the optional `/<START_DATE>` argument is not provided, `/<END_DATE>` will be used instead. 
+3. The optional `-<GOAL_TYPE>` argument can take one of the following flags:
+   1. `sl` &#8594; Sleep
+   2. `fd` &#8594; Food
+   3. `ex` &#8594; Exercise
+   4. `sd` &#8594; Study
+
+Example:
+```
+set Reduce spending /01012022 /31122022
+```
+
+Output:
+```
+Your goal: [DF] Reduce spending has been added.
+```
 
 ### Remove a Goal: `remove`
 
