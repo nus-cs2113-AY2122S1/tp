@@ -36,7 +36,7 @@ public class ListCommandParser {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 
-        return new ListLessonCommand(userResponse);
+        return new ListLessonCommand(userResponse.toLowerCase());
     }
 
     private static Command parseListTaskCommand(String userResponse) throws ParseException {
@@ -45,6 +45,6 @@ public class ListCommandParser {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 
-        return new ListTaskCommand(userResponse);
+        return new ListTaskCommand(userResponse.toLowerCase());
     }
 }

@@ -34,7 +34,7 @@ public class FindCommandParser {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 
-        return new FindTaskCommand(userResponse);
+        return new FindLessonCommand(userResponse.toLowerCase());
     }
 
     private static Command parseFindTaskCommand(String userResponse) throws ParseException {
@@ -42,6 +42,6 @@ public class FindCommandParser {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 
-        return new FindLessonCommand(userResponse);
+        return new FindTaskCommand(userResponse.toLowerCase());
     }
 }
