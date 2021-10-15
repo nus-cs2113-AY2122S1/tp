@@ -49,8 +49,8 @@ public class Ui {
 
 
     private static final List<String> commands = Arrays.asList(HELP_FORMAT, ADD_EXPENSE_FORMAT, DEL_EXPENSE_FORMAT,
-            LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, EXPENSE_BETWEEN_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT, LIST_INCOME_FORMAT,
-            TOTAL_INCOME_FORMAT, INCOME_BETWEEN_FORMAT, END_FORMAT);
+            LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, EXPENSE_BETWEEN_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT, 
+            LIST_INCOME_FORMAT, TOTAL_INCOME_FORMAT, INCOME_BETWEEN_FORMAT, END_FORMAT);
 
 
 
@@ -167,11 +167,13 @@ public class Ui {
     public void printTotalExpenseBetween(double totalExpense, LocalDate start, LocalDate end) {
         printLine();
         if (totalExpense == 0) {
-            System.out.printf("You do not have any expense between " + start.format(DateTimeFormatter.ofPattern("dd MMM yyy"))
-                    + " and " + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + "\n");
+            System.out.printf("You do not have any expense between " 
+                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + "\n");
         } else {
-            System.out.printf("Your total expense between " + start.format(DateTimeFormatter.ofPattern("dd MMM yyy"))
-                    + " and " + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f\n", totalExpense);
+            System.out.printf("Your total expense between " 
+                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f\n", totalExpense);
         }
         printLine();
     }
@@ -179,11 +181,13 @@ public class Ui {
     public void printTotalIncomeBetween(double totalExpense, LocalDate start, LocalDate end) {
         printLine();
         if (totalExpense == 0) {
-            System.out.printf("You do not have any income between " + start.format(DateTimeFormatter.ofPattern("dd MMM yyy"))
-                    + " and " + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + "\n");
+            System.out.printf("You do not have any income between " 
+                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + "\n");
         } else {
-            System.out.printf("Your total income between " + start.format(DateTimeFormatter.ofPattern("dd MMM yyy"))
-                    + " and " + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f\n", totalExpense);
+            System.out.printf("Your total income between " 
+                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f\n", totalExpense);
         }
         printLine();
     }
