@@ -11,7 +11,7 @@ import seedu.duke.command.workout.DeleteWorkoutCommand;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class GeneratorTest {
+class CommandManagerTest {
     private CommandManager generator;
 
     @BeforeEach
