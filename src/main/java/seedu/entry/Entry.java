@@ -23,4 +23,8 @@ public abstract class Entry {
     public String toString() {
         return description + " - " + Double.toString(value);
     }
+
+    public String getCategory() {
+        return category;
+    }
 }
