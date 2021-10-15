@@ -47,7 +47,7 @@ public class DeleteOrder extends Command {
         assert orderId <= Order.getOrderCount() : "order Id should not exceed max order count";
 
         for (Medicine medicine : medicines) {
-            if (medicine instanceof Order) {
+            if (!(medicine instanceof Order)) {
                 continue;
             }
             Order order = (Order) medicine;
@@ -56,6 +56,7 @@ public class DeleteOrder extends Command {
                 logger.log(Level.INFO, "Order id found and deleted");
                 break;
             }
+
         }
         ui.print("Order deleted: Order_Id=" + orderId);
         logger.log(Level.INFO, "Successful deletion of order");
