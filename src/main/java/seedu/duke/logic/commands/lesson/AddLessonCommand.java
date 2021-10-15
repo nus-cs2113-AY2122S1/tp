@@ -2,14 +2,16 @@ package seedu.duke.logic.commands.lesson;
 
 import java.io.IOException;
 
-import seedu.duke.logic.commands.AddCommand;
+import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.TaskList;
 import seedu.duke.ui.Ui;
 
-public class AddLessonCommand extends AddCommand {
+public class AddLessonCommand extends Command {
+    private final String title;
+    private final String dayOfTheWeek;
     private final String startTime;
     private final String endTime;
 

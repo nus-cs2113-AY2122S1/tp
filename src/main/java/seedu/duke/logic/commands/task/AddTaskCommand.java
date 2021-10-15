@@ -1,6 +1,6 @@
 package seedu.duke.logic.commands.task;
 
-import seedu.duke.logic.commands.AddCommand;
+import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.Task;
@@ -9,7 +9,9 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
-public class AddTaskCommand extends AddCommand {
+public class AddTaskCommand extends Command {
+    private final String title;
+    private final String dayOfTheWeek;
     private final String information;
 
     public AddTaskCommand(String title, String dayOfTheWeek, String information) {
