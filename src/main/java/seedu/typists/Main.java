@@ -1,6 +1,7 @@
 package seedu.typists;
 
 
+import seedu.typists.game.DataProcessor;
 import seedu.typists.game.TimeModeGame;
 import seedu.typists.parser.Parser;
 import seedu.typists.ui.TextUi;
@@ -12,14 +13,14 @@ public class Main {
     /** Version info of the program. */
     public static final String VERSION = "Typist - Version 1.0";
     public static final int LINE_LENGTH = 10;
+    /** game time in seconds */
+    public static final int GAME_TIME = 15;
     TextUi uiBot;
     Parser parseBot;
-    TimeModeGame gameBot;
 
     public Main() {
         this.uiBot = new TextUi();
         this.parseBot = new Parser();
-        this.gameBot = new TimeModeGame();
     }
 
     public void runCommandLoopUntilExitCommand() {
@@ -32,7 +33,9 @@ public class Main {
 
     public void start() {
         uiBot.showWelcomeMessage(VERSION);
-        gameBot.startGame(SAMPLE_TEXT,10, LINE_LENGTH);
+        TimeModeGame g = new TimeModeGame(SAMPLE_TEXT, GAME_TIME, LINE_LENGTH);
+        DataProcessor p =  new DataProcessor(g);
+        uiBot.showSummary(p.getErrorWordCount(), p.getWPM(), p.getTotalWordTyped(), p.totalTime);
     }
     /** Runs the program until termination.  */
     public void run() {

@@ -15,8 +15,19 @@ public class Messages {
     public static final String MESSAGE_WELCOME = "Welcome to Typist -- the ultimate cli typing game.";
     public static final String MESSAGE_ACKNOWLEDGE = "Brought to you by -- AY2122S1-CS2113-T13-4.";
     //This sample text is gotten from https://www.lipsum.com/
-    public static final String SAMPLE_TEXT = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." +
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+    public static final String SAMPLE_TEXT = "lorem ipsum is simply dummy text of the printing and typesetting industry" +
+            "imply dummy text of the printing and typesetting industry ipum is simply dummy" +
+            "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy" +
+            "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy " +
+            "industry industry industry industry industry industry industry industry industry industry industry" +
+            "industry industry industry industry industry industry industry industry industry industry industry" +
+            "industry industry industry industry industry industry industry industry industry industry industry" +
+            "industry industry industry industry industry industry industry industry industry industry industry" +
+            "industry industry industry industry industry industry industry industry industry industry industry" +
+            "industry industry industry industry industry industry industry industry industry industry industry" +
+            "industry industry industry industry industry industry industry industry industry industry industry" +
+            "industry industry industry industry industry industry industry industry industry industry industry" +
+            "industry industry industry industry industry industry industry industry industry industry industry";
 
     //public static final String MESSAGE_GOODBYE = "Good bye!";
     //public static final String MESSAGE_INIT_FAILED = "Failed to initialise address book application. Exiting...";

@@ -46,37 +46,18 @@ public class TextUi {
         }
     }
 
-    public ArrayList<String> splitLineIntoWordList(String line) {
-        return new ArrayList <>(Arrays.asList(line.split(" ")));
-    }
-
-    /** Print to screen the target words, each line 10 words */
-    public void showTargetWordSet(String TargetWordSet) {
-        ArrayList<String> wordList = splitLineIntoWordList(TargetWordSet);
-        int i = 1;
-        for (String w : wordList) {
-            out.print(w + " ");
-            if (i % 10 == 0) {
-                out.print("\n");
-            }
-            i++;
+    public void printLine(String... message) {
+        out.print(LINE_PREFIX);
+        for (String m: message) {
+            out.print(m + " ");
         }
         out.print("\n");
     }
 
-    public ArrayList<String> getDisplayWordLine(String TargetWordSet, int lineLength) {
-        ArrayList<String> wordList = splitLineIntoWordList(TargetWordSet);
-        ArrayList<String> wordLines = new ArrayList <>();
-        int i = 1;
-        StringBuilder sb = new StringBuilder();
-        for (String w : wordList) {
-            sb.append(w).append(" ");
-            if (i % lineLength == 0) {
-                wordLines.add(sb.toString().trim());
-                sb = new StringBuilder();
-            }
-            i++;
-        }
-        return wordLines;
+    public void showSummary(int errorWordCount, double WPM, int totalWordTyped, int gameTime) {
+        out.println("Number of wrong words typed" + errorWordCount);
+        out.println("WPM: " + WPM);
+        out.println("Total Time taken for the game: " + gameTime);
+        out.println("Total words typed: " + totalWordTyped);
     }
 }

@@ -1,31 +1,26 @@
 package seedu.typists.game;
 
-import org.w3c.dom.Text;
-import seedu.typists.ui.TextUi;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
 
-import static seedu.typists.common.Messages.SAMPLE_TEXT;
+import seedu.typists.ui.TextUi;
+import static seedu.typists.common.Utils.getWordLine;
 
 public class TimeModeGame extends Game {
-    private ArrayList<String> displayLines;
-    private ArrayList<String> inputLines;
-    private final TextUi uiBot;
+    private final TextUi ui;
 
-    public TimeModeGame() {
-        this.uiBot = new TextUi();
-        boolean is_gameEnd = false;
-        displayLines = new ArrayList <>();
+    protected final ArrayList<String[]> wordLines;
+    protected final int gameTime;
+
+    protected ArrayList<String> inputLines;
+    protected int displayTime;
+
+    public TimeModeGame(String targetWordSet, int gameTime, int wordsPerLine) {
+        this.gameTime = gameTime;
+        ui = new TextUi();
         inputLines = new ArrayList <>();
-    }
-
-    /** Currently still a dummy */
-    public String getTargetWordSet() {
-        return SAMPLE_TEXT;
+        wordLines = getWordLine(targetWordSet, wordsPerLine);
+        startGame();
     }
 
     public boolean readyToStartTimer () {
@@ -39,56 +34,29 @@ public class TimeModeGame extends Game {
         return true;
     }
 
-    public void startGame(String targetWordSet, int timeLimitSeconds, int wordsPerLine) {
+    public void startGame() {
         Scanner in = new Scanner(System.in);
-        //refacter out this line later, pass in the arraylist to statGame
-        displayLines = uiBot.getDisplayWordLine(targetWordSet, wordsPerLine);
 
         if (readyToStartTimer()) {
             int i = 0;
             long beginTime = System.currentTimeMillis();
             boolean timeOver = false;
-            long currTime = 0;
-            inputLines = new ArrayList <>();
+            long realGameTime = 0;
+
             while (!timeOver) {
-                currTime = System.currentTimeMillis() - beginTime;
-                if (currTime >= timeLimitSeconds * 1000L) {
+                long currTime = System.currentTimeMillis() - beginTime;
+                if (currTime >= gameTime * 1000L) {
                     timeOver = true;
+                    realGameTime = currTime;
                 } else {
-                    System.out.println(displayLines.get(i));
+                    ui.printLine(wordLines.get(i));
                     String userInput = in.nextLine();
                     inputLines.add(userInput);
                     i++;
                 }
             }
-            int displayTime = (int) currTime / 1000;
+            displayTime = (int) realGameTime / 1000;
             System.out.println("Game Finished. Total time taken: " + displayTime + "seconds. ");
-
-            compareData(displayLines, inputLines);
         }
     }
-
-
-    public void compareData(ArrayList<String> checker, ArrayList<String> answer){
-        int totalErrorCount = 0;
-        for (int i = 0; i < answer.size(); i++) {
-            totalErrorCount += compareOneLine(checker.get(i), answer.get(i));
-        }
-        System.out.println("Total number of wrong keystrokes: " + totalErrorCount);
-    }
-
-    public int compareOneLine(String checker, String answer) {
-        int errorCount = 0;
-        for (int i = 0; i < checker.length(); i++) {
-            try {
-                if (checker.charAt(i) != answer.charAt(i)) {
-                    errorCount++;
-                }
-            } catch (StringIndexOutOfBoundsException e) {
-                errorCount++;
-            }
-        }
-        return errorCount;
-    }
-
 }
