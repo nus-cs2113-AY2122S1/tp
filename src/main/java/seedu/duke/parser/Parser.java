@@ -12,6 +12,8 @@ import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 import seedu.duke.commands.Command;
 
+import java.time.LocalDate;
+
 import static seedu.duke.common.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_ADD_COMMAND;
@@ -114,7 +116,8 @@ public class Parser {
      */
     private Command prepareAddExpenditureCommand(String commandParams) {
         try {
-            String[] split = commandParams.trim().split("e/|a/", 3);
+            String[] split = commandParams.trim().split("e/|a/|d/", 3);
+            assert split[0].equals("");
             String description = split[1].trim();
             double amount = Double.parseDouble(split[2].trim());
             //LocalDate date = LocalDate.parse(split[3].trim());

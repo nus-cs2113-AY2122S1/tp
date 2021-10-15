@@ -3,8 +3,6 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.Test;
 import seedu.duke.data.RecordList;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ViewExpenditureTest {

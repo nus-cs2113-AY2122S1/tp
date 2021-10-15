@@ -1,6 +1,6 @@
 package seedu.duke.data;
 
-//import seedu.duke.data.records.Budget;
+
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Record;
@@ -8,16 +8,32 @@ import seedu.duke.storage.ExpenditureStorage;
 
 //import java.time.LocalDate;
 import java.util.ArrayList;
-//import java.util.Arrays;
-//import java.util.List;
 
 public class RecordList {
+    private static int month;
     public static int numberOfRecords;
     private final Budget budget;
     private boolean hasBudget;
     private final ArrayList<Expenditure> expenditureRecords;
 
+    /**
+     * Constructor for MonthlyRecordList for v1.0
+     * Kept for normal operation, should be removed by v2.0
+     */
     public RecordList() {
+        numberOfRecords = 0;
+        budget = new Budget(0.00);
+        hasBudget = false;
+        expenditureRecords = new ArrayList<>();
+    }
+
+    /**
+     * Constructor for MonthlyRecordList, used in AllRecordsList
+     * 12 instances will be instantiated to represent the months from Jan to Dec
+     * @param month
+     */
+    public RecordList(int month) {
+        this.month = month;
         numberOfRecords = 0;
         budget = new Budget(0.00);
         hasBudget = false;
@@ -33,12 +49,19 @@ public class RecordList {
         }
     }
 
-    public void addExpenditure(String description, double spending, boolean isLoadingStorage) {
-        expenditureRecords.add(new Expenditure(description, spending));
+    /**
+     * Adds an expenditure record into the RecordList
+     *
+     * @param description description of the expenditure
+     * @param amount amount spent
+     * @param isLoadingStorage indicate if this command is called during loading or runtime
+     */
+    public void addExpenditure(String description, double amount, boolean isLoadingStorage) {
+        expenditureRecords.add(new Expenditure(description, amount));
         numberOfRecords += 1;
         if (!isLoadingStorage) {
             ExpenditureStorage storeCurrentExpenditure = new ExpenditureStorage();
-            storeCurrentExpenditure.saveNewlyAddedExpenditure(description, spending);
+            storeCurrentExpenditure.saveNewlyAddedExpenditure(description, amount);
         }
         assert getExpenditureListSize() == numberOfRecords;
     }

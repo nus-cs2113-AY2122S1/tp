@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class Duke {
 
-    private TextUi textUi;
-    private Parser parser;
+    private final TextUi textUi;
+    private final Parser parser;
     private final RecordList recordList;
 
     public Duke() {

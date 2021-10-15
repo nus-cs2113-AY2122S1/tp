@@ -10,16 +10,7 @@ public class Budget extends Record {
 
     public Budget(double amount) {
         super(amount);
-        //this.description = description;
     }
-
-    /*
-    Not used.
-    @Override
-    public String getDescription() {
-        return description;
-    }
-    */
 
     @Override
     public double getAmount() {
@@ -32,10 +23,6 @@ public class Budget extends Record {
 
     public void clearAmount() {
         amount = 0.00;
-    }
-
-    public void printBudgetDetails() {
-        System.out.println(" $" + this.amount);
     }
 
     /*

@@ -46,9 +46,11 @@ public class TextUi {
                 + DIVIDER);
     }
 
-    public static void showExpenditureAddedMessage(Expenditure addedExpenditure) {
-        System.out.println("Expenditure successfully added!" + LS + addedExpenditure);
-        System.out.println(DIVIDER);
+    public static void showExpenditureAddedMessage(Expenditure addedExpenditure, boolean isLoadingStorage) {
+        if (!isLoadingStorage) {
+            System.out.println("Expenditure successfully added!" + LS + addedExpenditure);
+            System.out.println(DIVIDER);
+        }
     }
 
     public static void showBudgetAddedMessage(double amount) {
