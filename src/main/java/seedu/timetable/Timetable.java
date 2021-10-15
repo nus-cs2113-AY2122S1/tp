@@ -49,41 +49,59 @@ public class Timetable implements Comparable<Timetable> {
         this.latestHour = DEFAULT_END;
     }
 
+    public Timetable(int semester, int earliestHour, int latestHour, ArrayList<Module> modules, TimetableItem[] mon,
+            TimetableItem[] tues, TimetableItem[] wed, TimetableItem[] thurs, TimetableItem[] fri, TimetableItem[] sat,
+            TimetableItem[] sun) {
+        this.semester = semester;
+        this.earliestHour = earliestHour;
+        this.latestHour = latestHour;
+        this.modules = modules;
+        this.monday = mon;
+        this.tuesday = tues;
+        this.wednesday = wed;
+        this.thursday = thurs;
+        this.friday = fri;
+        this.saturday = sat;
+        this.sunday = sun;
+    }
+
     /**
      * Adds a Timetable Lesson to the timetable and adds the corresponding module to
      * an internal list if not already added. This can be a Lecture, Tutorial or
      * Laboratory
      *
-     * @param TimetableLesson lesson to be added to the timetable
+     * @param module   module to be added to the timetable
+     * @param semester semester of the timetable
+     * @param lesson   lesson to be added to the timetable
      * @see TimetableLesson
      */
     public void addLesson(Module module, Integer semester, Lesson lesson) {
         TimetableLesson timetableLesson = new TimetableLesson(module, semester, lesson);
 
         switch (timetableLesson.getDayOfWeek()) {
-            case MONDAY:
-                addLessonToSchedule(timetableLesson, monday);
-                break;
-            case TUESDAY:
-                addLessonToSchedule(timetableLesson, tuesday);
-                break;
-            case WEDNESDAY:
-                addLessonToSchedule(timetableLesson, wednesday);
-                break;
-            case THURSDAY:
-                addLessonToSchedule(timetableLesson, thursday);
-                break;
-            case FRIDAY:
-                addLessonToSchedule(timetableLesson, friday);
-                break;
-            case SATURDAY:
-                addLessonToSchedule(timetableLesson, saturday);
-                break;
-            case SUNDAY:
-                addLessonToSchedule(timetableLesson, sunday);
-                break;
-            default:
-                break;
+        case MONDAY:
+            addItemToSchedule(timetableLesson, monday);
+            break;
+        case TUESDAY:
+            addItemToSchedule(timetableLesson, tuesday);
+            break;
+        case WEDNESDAY:
+            addItemToSchedule(timetableLesson, wednesday);
+            break;
+        case THURSDAY:
+            addItemToSchedule(timetableLesson, thursday);
+            break;
+        case FRIDAY:
+            addItemToSchedule(timetableLesson, friday);
+            break;
+        case SATURDAY:
+            addItemToSchedule(timetableLesson, saturday);
+            break;
+        case SUNDAY:
+            addItemToSchedule(timetableLesson, sunday);
+            break;
+        default:
+            break;
         }
 
         addModuleToList(module);
@@ -102,20 +120,20 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     /**
-     * Adds a lesson to a specific day schedule E.g. addLessonToSchedule(lesson,
-     * monday) will add the lesson to the monday schedule
+     * Adds a timetable item to a specific day schedule E.g.
+     * addLessonToSchedule(lesson, monday) will add the lesson to the monday
+     * schedule
      *
-     * @param timetableLesson Lesson to be added to a day's schedule
-     * @param schedule        Day's schedule (i.e monday/tuesday/.. etc) to add the
-     *                        lesson to
+     * @param timetableItem Item to be added to a day's schedule
+     * @param schedule      Day's schedule (i.e monday/tuesday/.. etc) to add the
+     *                      lesson to
      */
-    private void addLessonToSchedule(TimetableItem timetableLesson, TimetableItem[] schedule) {
-        int start = timetableLesson.getStartHour();
-        int end = timetableLesson.getEndHour();
+    private void addItemToSchedule(TimetableItem timetableItem, TimetableItem[] schedule) {
+        int start = timetableItem.getStartHour();
+        int end = timetableItem.getEndHour();
         for (int i = start; i < end; i++) {
-            schedule[i] = timetableLesson;
+            schedule[i] = timetableItem;
         }
-        // addModuleToList(timetableLesson.getModule());
     }
 
     /**
@@ -253,28 +271,80 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     public TimetableLesson getLesson(DayOfWeek day, int startHour) {
+        TimetableItem lesson;
         switch (day) {
-            case MONDAY:
-                return monday[startHour];
-            case TUESDAY:
-                return tuesday[startHour];
-            case WEDNESDAY:
-                return wednesday[startHour];
-            case THURSDAY:
-                return thursday[startHour];
-            case FRIDAY:
-                return friday[startHour];
-            case SATURDAY:
-                return saturday[startHour];
-            case SUNDAY:
-                return sunday[startHour];
-            default:
-                return null;
+        case MONDAY:
+            lesson = monday[startHour];
+            break;
+        case TUESDAY:
+            lesson = tuesday[startHour];
+            break;
+        case WEDNESDAY:
+            lesson = wednesday[startHour];
+            break;
+        case THURSDAY:
+            lesson = thursday[startHour];
+            break;
+        case FRIDAY:
+            lesson = friday[startHour];
+            break;
+        case SATURDAY:
+            lesson = saturday[startHour];
+            break;
+        case SUNDAY:
+            lesson = sunday[startHour];
+            break;
+        default:
+            return null;
         }
+        if (lesson instanceof TimetableLesson) {
+            return (TimetableLesson) lesson;
+        }
+        return null;
     }
 
-    public Integer getSemester() {
+    public int getSemester() {
         return semester;
+    }
+
+    public int getEarliestHour() {
+        return earliestHour;
+    }
+
+    public int getLatesthour() {
+        return latestHour;
+    }
+
+    public ArrayList<Module> getModules() {
+        return this.modules;
+    }
+
+    public TimetableItem[] getMonday() {
+        return this.monday;
+    }
+
+    public TimetableItem[] getTuesday() {
+        return this.tuesday;
+    }
+
+    public TimetableItem[] getWednesday() {
+        return this.wednesday;
+    }
+
+    public TimetableItem[] getThursday() {
+        return this.thursday;
+    }
+
+    public TimetableItem[] getFriday() {
+        return this.friday;
+    }
+
+    public TimetableItem[] getSaturday() {
+        return this.saturday;
+    }
+
+    public TimetableItem[] getSunday() {
+        return this.sunday;
     }
 
     @Override

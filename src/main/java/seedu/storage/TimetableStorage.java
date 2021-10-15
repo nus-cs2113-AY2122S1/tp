@@ -1,6 +1,9 @@
 package seedu.storage;
 
 import seedu.timetable.Timetable;
+import seedu.timetable.TimetableDto;
+import seedu.timetable.TimetableItem;
+import seedu.timetable.TimetableLesson;
 
 import com.google.gson.Gson;
 
@@ -28,8 +31,8 @@ public class TimetableStorage {
     public Timetable loadSchedule() {
         try {
             FileReader timetableSaveReader = new FileReader(file);
-            Timetable timetable = new Gson().fromJson(timetableSaveReader, Timetable.class);
-            return timetable;
+            TimetableDto timetable = new Gson().fromJson(timetableSaveReader, TimetableDto.class);
+            return timetable.toTimetable();
         } catch (FileNotFoundException e) {
             return new Timetable(1);
         }
@@ -44,7 +47,7 @@ public class TimetableStorage {
         try {
             FileWriter fw = new FileWriter(file);
             Gson gson = new Gson();
-            gson.toJson(timetable, fw);
+            gson.toJson(new TimetableDto(timetable), fw);
             fw.flush();
             fw.close();
         } catch (IOException e) {

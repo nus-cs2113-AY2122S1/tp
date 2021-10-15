@@ -3,7 +3,6 @@ package seedu.ui;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
-import seedu.timetable.TimetableLesson;
 import seedu.exceptions.IntegerException;
 import java.util.ArrayList;
 

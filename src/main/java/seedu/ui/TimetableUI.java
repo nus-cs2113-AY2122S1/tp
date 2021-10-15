@@ -5,7 +5,6 @@ import seedu.timetable.TimetableItem;
 import seedu.timetable.TimetableLesson;
 
 import java.util.List;
-import java.util.Objects;
 
 public class TimetableUI {
 
@@ -99,27 +98,22 @@ public class TimetableUI {
 
     private static String addInfoToString(TimetableLesson lesson, TimetableLesson prevLesson, LineType type) {
         String str = "";
-        if (!Objects.equals(lesson, prevLesson)) {
+        if ((lesson == null && prevLesson != null) || (lesson != null && !lesson.equals(prevLesson))) {
             str = "|   ";
             switch (type) {
-                case CODE:
-                    str += addModuleCode(lesson);
-                    break;
-                case LESSONTYPE:
-                    str += addLessonType(lesson);
-                    break;
-                case VENUE:
-                    str += addVenue(lesson);
-                    break;
-                default:
-                    str += "";
+            case CODE:
+                str += addModuleCode(lesson);
+                break;
+            case LESSONTYPE:
+                str += addLessonType(lesson);
+                break;
+            case VENUE:
+                str += addVenue(lesson);
+                break;
+            default:
+                str += "";
             }
         }
-        return String.format(FIXED_LENGTH_FORMAT, str);
-    }
-
-    private static String printItemClose() {
-        String str = "|   ";
         return String.format(FIXED_LENGTH_FORMAT, str);
     }
 
