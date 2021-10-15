@@ -101,6 +101,20 @@ There are 2 goal(s) in your list:
 ```
 
 ### Add a Habit: `add`
+Adds a habit that is linked to a goal.
+
+Format: `add <GOAL_INDEX> <HABIT_NAME>`
+
+Example:
+```
+add 1 Run 4km
+```
+
+Output:
+```
+Your habit:  Run 4km has been added to your goal: [DF] Exercise More
+```
+
 
 ### Complete Habit: `done`
 Mark a habit under a goal as done.
