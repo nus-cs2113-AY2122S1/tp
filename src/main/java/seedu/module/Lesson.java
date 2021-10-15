@@ -1,12 +1,16 @@
 package seedu.module;
 
+import com.google.gson.annotations.JsonAdapter;
+
 public class Lesson {
     private static final String GAP = ", ";
     private String classNo;
     private String startTime;
     private String endTime;
-    //private int[] weeks; //weeks currently not handled because special term has weeks:
-    // {start,end} instead of weeks: [] which breaks the program
+
+    @JsonAdapter(WeeksAdapterFactory.class)
+    private Weeks weeks;
+
     private String venue;
     private String day;
     private String lessonType; //placeholder
@@ -44,6 +48,10 @@ public class Lesson {
 
     public String getVenue() {
         return venue;
+    }
+
+    public String getWeeks() {
+        return weeks.toString();
     }
 
     public String lessonDetails() {

@@ -90,6 +90,10 @@ public class Module {
                 + "Prerequisites: " + prerequisite + "\n"
                 + "S/U able: " + isSUable + "\n"
                 + "Semester Availability: " + semesterData + "\n";
+        //uncomment and test this with mods with special sems eg CS1010E, CS2040, CS3243. It should print the
+        //weeks for two lessons, one from sem 1 and one from special term 2.
+        //String test = getSemester(1).getLesson(0).getWeeks() + getSemester(4).getLesson(0).getWeeks();
+        //return fullInfo + test;
         return fullInfo;
     }
 
