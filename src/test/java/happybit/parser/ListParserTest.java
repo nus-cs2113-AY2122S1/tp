@@ -12,7 +12,7 @@ class ListParserTest {
     @Test
     void parseListHabitCommand_index2_goalIndex() throws HaBitParserException {
         String testIndex = "2";
-        ListHabitsCommand expectedOutput = new ListHabitsCommand(2);
+        ListHabitsCommand expectedOutput = new ListHabitsCommand(1);
         ListHabitsCommand actualOutput = (ListHabitsCommand) ListParser.parseListHabitCommand(testIndex);
         assertEquals(expectedOutput.getGoalIndex(), actualOutput.getGoalIndex());
     }

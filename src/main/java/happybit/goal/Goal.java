@@ -40,6 +40,10 @@ public class Goal {
         this.goalName = goalName;
     }
 
+    public String getGoalName() {
+        return goalName;
+    }
+
     /**
      * Gets the description of the goal.
      *
