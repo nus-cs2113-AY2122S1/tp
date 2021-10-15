@@ -36,7 +36,7 @@ public class DishParser {
         menu.menu.add(dish);
     }
 
-    public boolean removeDishCommandChecker (String[] command, int menuSize) {
+    public boolean removeDishCommandChecker(String[] command, int menuSize) {
         try {
             int dishIndex = Integer.valueOf(command[1]);
             boolean validDishIndex = (0 < dishIndex) && (dishIndex < menuSize + 1);
