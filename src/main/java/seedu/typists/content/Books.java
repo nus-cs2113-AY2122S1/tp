@@ -245,6 +245,7 @@ public class Books {
                     + "all told about in that book, which is mostly a "
                     + "true book, with some stretchers, as I said before."
     };
+
     public static String getBook(int index) {
         return bookContent[index];
     }

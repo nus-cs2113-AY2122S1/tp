@@ -68,6 +68,7 @@ public class Main {
             break;
         case "error":
             startErrorGame();
+            break;
         default:
             break;
         }
