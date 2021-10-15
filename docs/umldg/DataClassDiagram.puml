@@ -1,0 +1,49 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam stereotypeCBackgroundColor White
+skinparam class {
+BackgroundColor Pink
+ArrowColor Red
+}
+package "data" {
+together {
+class WorkoutList {
+~LOGGER:Logger {static}
++WorkoutList()
+}
+class Workout {
+-workoutName:String
++Workout(String)
++convertToWorkoutStorageModel()
+}
+class Exercise {
+-LOGGER:Logger {static}
+#description:String
+#sets:Integer
+#reps:Integer
++convertToExerciseStorageModel(WorkoutModel)
+}
+}
+}
+package "logger" {
+class LoggerUtil #LightBlue##Blue {
++setupLogger(Logger) {static}
+}
+}
+package "storage.models" {
+class WorkoutListModel #LightGreen##Green {
++addToWorkoutListModel(WorkoutModel) {static}
+}
+class WorkoutModel #LightGreen##Green {
++addToWorkoutModel(ExerciseModel) {static}
+}
+}
+note "To set up the logger" as N1 
+WorkoutList *-- "*" Workout
+WorkoutList .right.> LoggerUtil
+WorkoutList .right. N1
+N1 .. LoggerUtil
+Workout ..> WorkoutListModel
+Exercise ..> WorkoutModel
+Workout *-- "*" Exercise
+@enduml

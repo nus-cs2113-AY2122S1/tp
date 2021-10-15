@@ -6,8 +6,26 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+###Data Component
+Location : `seedu.duke.data`
 
+![img.png](umldg/DataClassDiagram.png)
+
+__Note:__
+* `WorkoutList` : List of all Workout Routines.
+* `Workout` : A specific Workout Routine eg. "Leg day" could be a routine created for exercises that focus on legs.
+* `Exercise` : A specific exercise eg. "Squats" could be an exercise added to "Leg day." 
+
+The `data` component defines the format in which data is temporarily stored while the application is running.
+As seen in the figure above, the highest level of abstraction is the `WorkoutList` which stores all the workout routines
+that the user has currently stored. Next, the `Workout` refers to a Workout Routine and stores a variable number of 
+exercises (in the form of an `Exercise` object). Lastly, `Exercise` stores the exercise with attributes:
+* `description` corresponding to the name of the exercise.
+* `reps` corresponding to the number of times the exercise is done in a given set.
+* `sets` corresponding to the number of times the whole exercise is repeated.
+
+Storage: `addToWorkoutListModel(WorkoutModel workout)` and `addToWorkoutModel(ExerciseModel exercise)` from the `storage.models` component
+are called in the methods of `Workout` and `Exercise` respectively. This causes the dependency on `WorkoutModel` and `WorkoutListModel` as seen in the UML Diagram.
 
 ## Product scope
 ### Target user profile
