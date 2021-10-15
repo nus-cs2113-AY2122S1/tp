@@ -57,8 +57,8 @@ public class CommandParserTest {
     }
 
     @Test
-    public void changeMode_modeSTOCK_expectModeDispense(){
-        Mode mode = CommandParser.changeMode(ui,"dispense", Mode.DISPENSE);
+    public void changeMode_modeStock_expectModeDispense() {
+        Mode mode = CommandParser.changeMode(ui, "dispense", Mode.STOCK);
         assertEquals(mode, Mode.DISPENSE);
     }
 }
