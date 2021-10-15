@@ -17,11 +17,11 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
     
-    public void execute(FinancialTracker finances, Ui ui){
+    public void execute(FinancialTracker finances, Ui ui) {
         ArrayList<Entry> entries = finances.getEntries();
         ArrayList<Entry> filteredEntries = new ArrayList<>();
         
-        try{
+        try {
             filterByDate(entries, filteredEntries);
         } catch (DateTimeParseException e) {
             filterByKeyword(entries, filteredEntries);
@@ -45,8 +45,8 @@ public class FindCommand extends Command {
 
     private void filterByDate(ArrayList<Entry> entries, ArrayList<Entry> filteredEntries) {
         LocalDate localDate = LocalDate.parse(keyword);
-        for(Entry entry: entries) {
-            if(entry.getDate().isEqual(localDate)) {
+        for (Entry entry: entries) {
+            if (entry.getDate().isEqual(localDate)) {
                 filteredEntries.add(entry);
             }
         }

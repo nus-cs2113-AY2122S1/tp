@@ -128,14 +128,14 @@ public class Parser {
     }
     
     private Command prepareBalance(String arguments) {
-        if(arguments.trim().isBlank()) {
+        if (arguments.trim().isBlank()) {
             return new BalanceCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
     private Command prepareFind(String arguments) {
-        if(arguments.trim().isBlank()) {
+        if (arguments.trim().isBlank()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
         return new FindCommand(arguments.trim());
