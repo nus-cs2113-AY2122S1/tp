@@ -40,11 +40,9 @@ public class SearchCommand extends Command {
     public void execute(TripsList tripsList, Ui ui) {
         MinCalcResult result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
         List<Double> distances = result.getDistances();
-        double curr;
         double sum = 0.0;
         for (double d : distances) {  // TODO: CHECK THIS, LOOKS V SUS
-            curr = d - sum;
-            sum += curr;
+            sum += d;
         }
         assert sum >= 0 : "The distance should be more than or equal to 0.";
         ui.printSearch(this.startCountry, this.endCountry, sum);

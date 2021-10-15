@@ -16,26 +16,25 @@ public class Loader {
     private final int numberOfCities = 5;
     private final String filePath = "./flightData/flights.txt";
     private final String separator = "\\|";
-    private final GraphList graphList = new GraphList();
 
-    protected void loadCountries(String[] countryCodes) {
+    protected void loadCountries(String[] countryCodes, GraphList graphList) {
         logger.log(Level.INFO, "Loading countries: " + Arrays.toString(countryCodes));
         for (int j = 0; j < numberOfCities; j++) {
             String countryCode = countryCodes[j];
             int countryIndex = j + 1;
             Country v = new Country(countryCode, countryIndex);
-            this.graphList.addVertex(v);
+            graphList.addVertex(v);
         }
     }
 
-    protected void loadDistances(String[] rawDistances) {
+    protected void loadDistances(String[] rawDistances, GraphList graphList) {
         logger.log(Level.INFO, "Loading distances: " + Arrays.toString(rawDistances));
         for (int k = 0; k < rawDistances.length; k++) {
             double distance = Double.parseDouble(rawDistances[k]);
-            Country sourceCountry = this.graphList.getVertexArray().get(k);
-            Country destinationCountry = this.graphList.getVertexArray().get(rawDistances.length);
+            Country sourceCountry = graphList.getVertexArray().get(k);
+            Country destinationCountry = graphList.getVertexArray().get(rawDistances.length);
             if (distance != 0) {
-                this.graphList.createEdge(distance, destinationCountry, sourceCountry);
+                graphList.createEdge(distance, destinationCountry, sourceCountry);
             }
         }
     }
@@ -51,6 +50,7 @@ public class Loader {
             logger.log(Level.WARNING, "Flight data cannot be found.");
             throw new FlightDataNotFoundException();
         }
+        GraphList graphList = new GraphList();
         String[] rawInput;
         while (scanner.hasNext()) {
             for (int i = 0; i < numberOfCities; i++) {
@@ -58,12 +58,12 @@ public class Loader {
 
                 // Reading first line of country codes
                 if (i == 0) {
-                    loadCountries(rawInput);
+                    loadCountries(rawInput, graphList);
                     continue;
                 }
-                loadDistances(rawInput);
+                loadDistances(rawInput, graphList);
             }
         }
-        return this.graphList;
+        return graphList;
     }
 }
