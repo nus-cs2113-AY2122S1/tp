@@ -254,8 +254,7 @@ public class Timetable implements Comparable<Timetable> {
      * the Day (MON/TUES/WED/... etc.) Displays the lessons in each grid cell that
      * had been added to the timetable
      *
-     * <p>
-     * Also displays all the modules taken and the total number of MCs taken for the
+     * <p>Also displays all the modules taken and the total number of MCs taken for the
      * timetable
      */
     public void showTimetable() {
