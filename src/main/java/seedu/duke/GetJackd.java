@@ -5,8 +5,7 @@ import seedu.duke.command.ExitCommand;
 import seedu.duke.logger.LoggerUtil;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
-import seedu.duke.parser.Generator;
-import seedu.duke.parser.Parser;
+import seedu.duke.parser.CommandManager;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
@@ -76,7 +75,7 @@ public class GetJackd {
         while (!isExit) {
             String userInput = input.nextLine();
             try {
-                c = new Generator().generateCommand(userInput);
+                c = new CommandManager().generateCommand(userInput);
                 c.executeUserCommand(workouts, ui, storage);
                 isExit = ExitCommand.isExit(c);
             } catch (GetJackDException e) {

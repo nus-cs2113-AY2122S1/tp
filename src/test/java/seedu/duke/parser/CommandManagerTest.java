@@ -11,12 +11,12 @@ import seedu.duke.command.workout.DeleteWorkoutCommand;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class GeneratorTest {
-    private Generator generator;
+class CommandManagerTest {
+    private CommandManager generator;
 
     @BeforeEach
     public void setUp() {
-        generator = new Generator();
+        generator = new CommandManager();
     }
 
     @Test
