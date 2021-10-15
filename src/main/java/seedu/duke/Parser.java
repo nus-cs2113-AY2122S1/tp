@@ -13,6 +13,7 @@ import seedu.commands.TotalIncomeCommand;
 import seedu.commands.Command;
 import seedu.commands.ExitCommand;
 import seedu.commands.FindCommand;
+import seedu.commands.BalanceCommand;
 
 import seedu.entry.Expense;
 import seedu.entry.Income;
@@ -76,6 +77,7 @@ public class Parser {
     private static final String TOTAL_EXPENSE_KEYWORD = "total_ex";
     private static final String TOTAL_INCOME_KEYWORD = "total_in";
     private static final String FIND_KEYWORD = "find";
+    private static final String BALANCE_KEYWORD = "balance";
     private static final String EXIT_KEYWORD = "end";
 
     /**
@@ -116,11 +118,20 @@ public class Parser {
             return prepareTotalIncome(arguments); 
         case FIND_KEYWORD:
             return prepareFind(arguments);
+        case BALANCE_KEYWORD:
+            return prepareBalance(arguments);
         case EXIT_KEYWORD:
             return prepareExit(arguments);
         default:
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
+    }
+    
+    private Command prepareBalance(String arguments) {
+        if(arguments.trim().isBlank()) {
+            return new BalanceCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
     private Command prepareFind(String arguments) {

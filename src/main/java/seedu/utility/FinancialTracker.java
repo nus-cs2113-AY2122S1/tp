@@ -11,12 +11,16 @@ import java.util.ArrayList;
 public class FinancialTracker {
     private ArrayList<Expense> expenses;
     private ArrayList<Income> incomes;
-
+    private double balance;
+    
     public FinancialTracker() {
         this.expenses = new ArrayList<>();
         this.incomes = new ArrayList<>();
     }
     
+    public double getBalance() {
+        return balance;
+    }
     
     public void addExpense(Expense expense) {
         int expenseSize = 0;
@@ -24,6 +28,7 @@ public class FinancialTracker {
         expenses.add(expense);
         assert !expenses.isEmpty();
         assert expenses.size() > expenseSize;
+        balance -= expense.getValue();
     }
 
     public void addIncome(Income income) {
@@ -32,6 +37,7 @@ public class FinancialTracker {
         incomes.add(income);
         assert !incomes.isEmpty();
         assert incomes.size() > incomeSize;
+        balance += income.getValue();
     }
 
     public int indexOffset(int index) {
@@ -40,7 +46,9 @@ public class FinancialTracker {
 
     public Expense removeExpense(int expenseIndex) throws ExpenseEntryNotFoundException {
         try {
-            return expenses.remove(indexOffset(expenseIndex));
+            Expense removedExpense =  expenses.remove(indexOffset(expenseIndex));
+            balance += removedExpense.getValue();
+            return removedExpense;
         } catch (IndexOutOfBoundsException e) {
             throw new ExpenseEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
         }
@@ -48,7 +56,9 @@ public class FinancialTracker {
 
     public Income removeIncome(int incomeIndex) throws IncomeEntryNotFoundException {
         try {
-            return incomes.remove(indexOffset(incomeIndex));
+            Income removedIncome = incomes.remove(indexOffset(incomeIndex));
+            balance -= removedIncome.getValue();
+            return removedIncome;
         } catch (IndexOutOfBoundsException e) {
             throw new IncomeEntryNotFoundException(Messages.UNABLE_TO_DELETE_MESSAGE);
         }

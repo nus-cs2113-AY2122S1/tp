@@ -33,10 +33,11 @@ public class Ui {
     private static final String END_FORMAT = "To Terminate The Program: end";
     private static final String FIND_FORMAT = "To Find Using Date: find YYYY-MM-DD\n"
             + "To Find Based On Keyword: find KEYWORD";
+    private static final String BALANCE_FORMAT = "To Display Total Balance: balance";
 
     private static final List<String> commands = Arrays.asList(HELP_FORMAT, ADD_EXPENSE_FORMAT, DEL_EXPENSE_FORMAT,
             LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT, LIST_INCOME_FORMAT,
-            TOTAL_INCOME_FORMAT, FIND_FORMAT, END_FORMAT);
+            TOTAL_INCOME_FORMAT, FIND_FORMAT, BALANCE_FORMAT, END_FORMAT);
 
 
 
@@ -185,6 +186,14 @@ public class Ui {
         printLine();
     }
 
+    public void printBalance(double balance) {
+        printLine();
+        System.out.printf("Your current balance is: $%.2f\n", balance);
+        printLine();
+    }
+    
+    
+    
     /**
      * Prints the feedback message for adding an expense to the financial tracker.
      *
