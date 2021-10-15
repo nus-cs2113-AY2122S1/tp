@@ -58,7 +58,7 @@ public class Ui {
         } else {
             print("An invalid parameter " + parameter + " is provided!");
         }
-        print("COMMAND SYNTAX: " + commandSyntax);
+        printCommandSyntax(commandSyntax);
     }
 
     /**
@@ -69,6 +69,15 @@ public class Ui {
      */
     public void printRequiredParameter(String parameter, String commandSyntax) {
         print("Required parameter " + parameter + " is missing!");
+        printCommandSyntax(commandSyntax);
+    }
+
+    /**
+     * Prints the command syntax.
+     *
+     * @param commandSyntax The command syntax of the command.
+     */
+    public void printCommandSyntax(String commandSyntax) {
         print("COMMAND SYNTAX: " + commandSyntax);
     }
 
@@ -276,6 +285,9 @@ public class Ui {
             headers.append(String.format(formats[i], centerString(columnWidths[i], CommandSyntax.COLUMNS[i])));
         }
         System.out.println("Welcome to the help page.");
+        System.out.println("Your current mode is indicated in the square brackets. It allows you to type add, list, "
+                + "update, delete without typing in the full command.");
+        System.out.println("Type stock, dispense or order to change to respective modes.");
         System.out.println("Note that parameters in {curly braces} are optional.");
         System.out.println("Parameters in [square braces] indicate that at least one of the parameter(s) must be "
                 + "provided.");

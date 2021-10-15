@@ -3,13 +3,13 @@ package command.medicine;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import inventory.Stock;
 import inventory.Medicine;
+import inventory.Stock;
 import parser.StockValidator;
 import ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +21,7 @@ public class DeleteStock extends Command {
     private static Logger logger = Logger.getLogger("DeleteStock");
 
     @Override
-    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         logger.log(Level.INFO, "Start deletion of stock");
 
         String[] requiredParameters = {CommandParameters.ID};

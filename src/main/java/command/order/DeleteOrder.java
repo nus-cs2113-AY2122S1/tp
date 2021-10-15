@@ -6,11 +6,10 @@ import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Order;
 import parser.OrderValidator;
-
 import ui.Ui;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +20,7 @@ public class DeleteOrder extends Command {
     private static Logger logger = Logger.getLogger("Delete Order");
 
     @Override
-    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         logger.log(Level.INFO, "Start deletion of order");
 
         String[] requiredParameters = {CommandParameters.ORDER_ID};

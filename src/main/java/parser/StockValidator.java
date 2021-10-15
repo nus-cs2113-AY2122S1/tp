@@ -1,7 +1,6 @@
 package parser;
 
 import command.CommandParameters;
-import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Stock;
 import ui.Ui;
@@ -9,7 +8,7 @@ import ui.Ui;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Contains all the methods to validate if a Medicine's input parameters are valid.
@@ -20,12 +19,12 @@ public class StockValidator {
      * Checks if parameter values are valid for Stock objects.
      *
      * @param ui            Reference to the UI object passed by Main to print messages.
-     * @param parameters    HashMap Key-Value set for parameter and user specified parameter value.
+     * @param parameters    LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param medicines     Arraylist of all medicines.
      * @param commandSyntax The command's valid syntax.
      * @return A boolean value indicating whether parameter values are valid.
      */
-    public static boolean containsInvalidParameterValues(Ui ui, HashMap<String, String> parameters,
+    public static boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
                                                          ArrayList<Medicine> medicines, String commandSyntax) {
         for (String parameter : parameters.keySet()) {
             boolean isValid = false;

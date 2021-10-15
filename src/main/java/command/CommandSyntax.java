@@ -1,13 +1,8 @@
 package command;
 
-import inventory.Medicine;
-import parser.DispenseValidator;
-import parser.MedicineValidator;
-import parser.StockValidator;
 import ui.Ui;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Contains all the valid command syntax accepted by the application. Also contains methods to validate if the
@@ -29,7 +24,7 @@ public class CommandSyntax {
     public static final String DELETE_ORDER_COMMAND = "deleteorder oid/ORDER_ID";
     public static final String EXIT_COMMAND = "exit";
     public static final String HELP_COMMAND = "help";
-    public static final String LIST_DISPENSE_COMMAND = "listdispense {i/ID q/QUANTITY c/CUSTOMER_ID date/DATE "
+    public static final String LIST_DISPENSE_COMMAND = "listdispense {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE "
             + "s/STAFF_NAME sid/STOCK_ID sort/COLUMN_NAME rsort/COLUMN NAME}";
     public static final String LIST_ORDER_COMMAND = "listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS}";
     public static final String LIST_STOCK_COMMAND = "liststock {i/ID p/PRICE q/QUANTITY e/EXPIRY_DATE "
@@ -72,7 +67,7 @@ public class CommandSyntax {
      * @param requiresOptionalParameters Boolean value of whether command required optional parameters.
      * @return A boolean value indicating if the parameters required are entered by the user.
      */
-    public static boolean containsInvalidParameters(Ui ui, HashMap<String, String> parameters,
+    public static boolean containsInvalidParameters(Ui ui, LinkedHashMap<String, String> parameters,
                                                     String[] requiredParameters, String[] optionalParameters,
                                                     String commandSyntax, boolean requiresOptionalParameters) {
         int requiredParametersLength = requiredParameters.length;
@@ -99,6 +94,7 @@ public class CommandSyntax {
         int emptyOptionalFieldCount = parameters.size() - requiredParametersLength;
         if (emptyOptionalFieldCount <= 0 && requiresOptionalParameters) {
             ui.print("Please provide at least one optional field!");
+            ui.printCommandSyntax(commandSyntax);
             return true;
         }
 
@@ -117,6 +113,7 @@ public class CommandSyntax {
             }
             if (!isValid) {
                 ui.print("Please enter a valid optional parameter!");
+                ui.printCommandSyntax(commandSyntax);
                 return true;
             }
         }

@@ -7,7 +7,7 @@ import ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * Contains all the methods to validate if a Dispense input parameters are valid.
@@ -18,12 +18,12 @@ public class DispenseValidator {
      * Checks if parameter values are valid for Dispense objects.
      *
      * @param ui            Reference to the UI object passed by Main to print messages.
-     * @param parameters    HashMap Key-Value set for parameter and user specified parameter value.
+     * @param parameters    LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param medicines     Arraylist of all medicines.
      * @param commandSyntax The command's valid syntax.
      * @return A boolean value indicating whether parameter values are valid.
      */
-    public static boolean containsInvalidParameterValues(Ui ui, HashMap<String, String> parameters,
+    public static boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
                                                          ArrayList<Medicine> medicines, String commandSyntax) {
         for (String parameter : parameters.keySet()) {
             boolean isValid = false;
@@ -31,7 +31,7 @@ public class DispenseValidator {
 
             switch (parameter) {
             case CommandParameters.ID:
-                isValid = isValidDispenseId(ui, parameterValue);
+                isValid = isValidDispenseId(ui, parameterValue, medicines);
                 break;
             case CommandParameters.NAME:
                 isValid = MedicineValidator.isValidName(ui, parameterValue);
@@ -69,19 +69,35 @@ public class DispenseValidator {
     /**
      * Checks if a dispense ID is valid.
      *
-     * @param ui               Reference to the UI object passed by Main to print messages.
-     * @param stringDispenseId Stock ID to be checked.
+     * @param ui        Reference to the UI object passed by Main to print messages.
+     * @param id        ID of the dispense record to be checked.
+     * @param medicines List of all medicines.
      * @return Boolean value indicating if Dispense ID is valid.
      */
-    public static boolean isValidDispenseId(Ui ui, String stringDispenseId) {
+    public static boolean isValidDispenseId(Ui ui, String id, ArrayList<Medicine> medicines) {
         try {
-            int stockId = Integer.parseInt(stringDispenseId);
-            if (stockId < 0) {
+            int dispenseId = Integer.parseInt(id);
+            if (dispenseId <= 0 || dispenseId > Dispense.getDispenseCount()) {
                 throw new Exception();
+            }
+            boolean dispenseExist = false;
+            for (Medicine medicine : medicines) {
+                if (!(medicine instanceof Dispense)) {
+                    continue;
+                }
+                Dispense dispense = (Dispense) medicine;
+                if (dispense.getDispenseId() == dispenseId) {
+                    dispenseExist = true;
+                    break;
+                }
+            }
+            if (!dispenseExist) {
+                ui.print("Invalid dispense id provided!");
+                return false;
             }
             return true;
         } catch (Exception e) {
-            ui.print("Invalid dispense ID provided!");
+            ui.print("Invalid dispense id provided!");
         }
         return false;
     }
@@ -110,7 +126,7 @@ public class DispenseValidator {
      */
     public static boolean isValidStaffName(Ui ui, String staffName) {
         if (staffName.equals("")) {
-            ui.print("Staff Name cannot be empty!");
+            ui.print("Staff name cannot be empty!");
             return false;
         }
         return true;

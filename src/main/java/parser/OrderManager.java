@@ -3,21 +3,20 @@ package parser;
 import command.CommandParameters;
 import inventory.Medicine;
 import inventory.Order;
-import inventory.Stock;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class OrderManager {
 
     /**
      * Extracts the order object for a given order id.
      *
-     * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
+     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param medicines  Arraylist of all medicines.
      * @return Stock object of the provided order id by user
      */
-    public static Order extractOrderObject(HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public static Order extractOrderObject(LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         int orderId = Integer.parseInt(parameters.get(CommandParameters.ORDER_ID));
         Order order = null;
         for (Medicine medicine : medicines) {

@@ -3,8 +3,8 @@ package command.medicine;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import inventory.Stock;
 import inventory.Medicine;
+import inventory.Stock;
 import parser.DateParser;
 import parser.MedicineManager;
 import parser.StockValidator;
@@ -13,7 +13,7 @@ import ui.Ui;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +26,7 @@ public class UpdateStock extends Command {
     private static Logger logger = Logger.getLogger("UpdateStock");
 
     @Override
-    public void execute(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.PRICE, CommandParameters.QUANTITY,
             CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.NAME,
@@ -87,12 +87,12 @@ public class UpdateStock extends Command {
      * Process valid date input to be updated given a stock id.
      *
      * @param ui         Reference to the UI object passed by Main to print messages.
-     * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
+     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param medicines  Arraylist of all medicines.
      * @param stock      Stock object of the given stock id.
      * @return Boolean value indicating if quantity values are valid.
      */
-    private boolean processDateInput(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines,
+    private boolean processDateInput(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
                                      Stock stock) {
         String name = stock.getMedicineName();
 
@@ -115,13 +115,13 @@ public class UpdateStock extends Command {
      * Process quantity values to be updated given a stock id.
      *
      * @param ui         Reference to the UI object passed by Main to print messages.
-     * @param parameters HashMap Key-Value set for parameter and user specified parameter value.
+     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param medicines  Arraylist of all medicines.
      * @param stock      Stock object of the given stock id.
      * @return Boolean value indicating if quantity values are valid.
      */
-    private boolean processQuantityValues(Ui ui, HashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                                          Stock stock) {
+    private boolean processQuantityValues(Ui ui, LinkedHashMap<String, String> parameters,
+                                          ArrayList<Medicine> medicines, Stock stock) {
 
         String name = stock.getMedicineName();
 
@@ -162,11 +162,12 @@ public class UpdateStock extends Command {
     /**
      * Update values provided by user for a given stock id.
      *
-     * @param parameters     HashMap Key-Value set for parameter and user specified parameter value.
+     * @param parameters     LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param filteredStocks Arraylist of filtered medicine stocks.
      * @param stock          Stock object of the given stock id.
      */
-    private void setUpdatesByStockID(HashMap<String, String> parameters, ArrayList<Stock> filteredStocks, Stock stock) {
+    private void setUpdatesByStockID(LinkedHashMap<String, String> parameters, ArrayList<Stock> filteredStocks,
+                                     Stock stock) {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
