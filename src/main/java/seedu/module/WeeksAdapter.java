@@ -7,6 +7,8 @@ import com.google.gson.stream.JsonWriter;
 import seedu.exceptions.UniModsException;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class WeeksAdapter extends TypeAdapter<Weeks> {
@@ -19,8 +21,19 @@ public class WeeksAdapter extends TypeAdapter<Weeks> {
 
     @Override
     public void write(JsonWriter jsonWriter, Weeks weeks) throws IOException {
-        //throw new UniModsException("");
-        throw new IOException();
+        if (weeks.getWeeks() != null) {
+            jsonWriter.beginArray();
+            for (Integer week : weeks.getWeeks()) {
+                jsonWriter.value(week);
+            }
+            jsonWriter.endArray();
+        } else {
+            jsonWriter.beginObject();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            jsonWriter.name("start").value(dateFormat.format(weeks.getStart()));
+            jsonWriter.name("end").value(dateFormat.format(weeks.getEnd()));
+            jsonWriter.endObject();
+        }
     }
 
     @Override
