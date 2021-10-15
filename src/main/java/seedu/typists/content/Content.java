@@ -115,13 +115,13 @@ public class Content {
         if (length == 0) {
             setContent();
         } else {
-            StringBuilder s = new StringBuilder();
+            String s = "";
+            Random r = new Random();
             for (int i = 0; i < length; i++) {
-                Random r = new Random();
-                s.append(rg.randomString(r.nextInt(10) + 5)).append(" ");
+                s += (rg.randomString(r.nextInt(10) + 5) + " ");
             }
-            this.content = s.toString();
-            ui.showText("Content set");
+            this.content = s;
+            ui.showText("Content set " + this.content);
         }
     }
 }

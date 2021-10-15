@@ -45,7 +45,6 @@ public class DataProcessor {
         return getTotalWordTyped() / (totalTime / 60);
     }
 
-
     public void getWrongKeyStrokes(ArrayList<String> checkerText, ArrayList<String> userText) {
         int totalErrorCount = 0;
         for (int i = 0; i < userText.size(); i++) {
