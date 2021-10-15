@@ -5,10 +5,8 @@ import java.text.SimpleDateFormat;
 
 import static java.lang.System.lineSeparator;
 import static java.lang.System.out;
-import static seedu.typists.common.Messages.LOGO;
-import static seedu.typists.common.Messages.MESSAGE_WELCOME;
-import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
-import static seedu.typists.common.Messages.MESSAGE_HELP;
+import static seedu.typists.common.Messages.*;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -90,6 +88,18 @@ public class TextUi {
 
     public void printSuccess() {
         System.out.println("Finished!");
+    }
+
+    public void printKeyboard() {
+        out.println(KEYBOARD);
+    }
+
+    public void printLetter() {
+        out.println(LETTER);
+    }
+
+    public void printClock() {
+        out.println(CLOCK);
     }
 
     public void printBookSelection() {

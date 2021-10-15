@@ -22,6 +22,7 @@ public class Content {
     }
 
     public void setContent() {
+        ui.printLetter();
         ui.showText("Content selection (input 0 to go back):\n"
                 + "1. Opening of famous books\n"
                 + "2. Wikipedia article\n"
