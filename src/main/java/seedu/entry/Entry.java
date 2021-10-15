@@ -7,7 +7,8 @@ import java.time.format.DateTimeParseException;
 public abstract class Entry {
     protected String description;
     protected double value;
-    protected String date;
+    protected LocalDate date;
+    protected String category;
 
     public String getDescription() {
         return this.description;
@@ -17,9 +18,12 @@ public abstract class Entry {
         return this.value;
     }
     
-    public void setDate(String editDate) {
-        LocalDate newDate = LocalDate.parse(editDate);
-        this.date = newDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+    public LocalDate getDate() {
+        return this.date;
+    }
+    
+    public String getCategory() {
+        return this.category;
     }
 
     public abstract String toString();
