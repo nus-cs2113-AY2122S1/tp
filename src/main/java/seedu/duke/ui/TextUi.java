@@ -71,6 +71,7 @@ public class TextUi {
         int i = 1;
         System.out.println("Your budget for this month:" + list.getBudget(LocalDate.now().getMonthValue()) + LS
                 + "Your expenditures:");
+        System.out.printf("%-30.30s  %-30.30s %-30.30s%n", "  Description", "   | Amount", "   | Date ");
         for (Expenditure a : list.getExpenditureRecords(LocalDate.now().getMonthValue())) {
             System.out.println(i + "." + a);
             i++;

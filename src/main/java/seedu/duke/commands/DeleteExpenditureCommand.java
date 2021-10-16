@@ -16,14 +16,13 @@ public class DeleteExpenditureCommand extends DeleteCommand {
     }
 
     /**
-     *
-     *
-     * @param isLoadingStorage
+     * LocalDate.now().getMonthValue() is being used as a placeholder
      */
     @Override
-    public void execute(boolean isLoadingStorage) {
+    public void execute() {
         int sizeBeforeDeletion = recordList.getExpenditureListSize(LocalDate.now().getMonthValue());
-        TextUi.showExpenditureDeletedMessage(index, recordList.getExpenditure(index - 1, LocalDate.now().getMonthValue()));
+        TextUi.showExpenditureDeletedMessage(index,
+                recordList.getExpenditure(index - 1, LocalDate.now().getMonthValue()));
         recordList.deleteExpenditure(index, LocalDate.now().getMonthValue());
 
         DeleteFromTextFile.removeLineFromFile("./data/BudgetList1.txt", index, sizeBeforeDeletion);

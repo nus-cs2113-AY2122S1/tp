@@ -33,6 +33,13 @@ public class AddExpenditureCommand extends AddCommand {
         this.date = date;
     }
 
+    public void execute() {
+        Expenditure newExpenditure = new Expenditure(description, spending, date);
+        recordList.addExpenditure(description, spending, date, false);
+        TextUi.showExpenditureAddedMessage(newExpenditure, false);
+    }
+
+
     /**
      * Adds an expenditure.
      *

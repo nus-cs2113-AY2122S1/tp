@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.data.AllRecordList;
 import seedu.duke.data.RecordList;
@@ -24,7 +25,7 @@ public class Storage {
         int i;
         for (i = 0; i < commandStorage.size(); i += 1) {
             String userInput = commandStorage.get(i);
-            Command command = parser.parseCommand(userInput);
+            AddCommand command = (AddCommand) parser.parseCommand(userInput);
             command.setRecordList(recordList);
             command.execute(true);
         }
