@@ -7,9 +7,10 @@ import seedu.duke.task.TaskManager;
 import java.util.Map;
 
 public class ListCommand extends Command {
+    private static final CommandEnum COMMAND = CommandEnum.LIST;
 
     public ListCommand(HashMap<String, String> commandArguments) {
-        super(commandArguments);
+        super(COMMAND, commandArguments);
     }
 
     @Override
