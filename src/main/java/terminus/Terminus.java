@@ -103,8 +103,6 @@ public class Terminus {
                     assert parser != null : "commandParser is not null";
                     workspace = parser.getWorkspace();
                     ui.printParserBanner(parser, nusModule);
-                } else if (!result.isOk()) {
-                    ui.printSection(result.getErrorMessage());
                 }
                 TerminusLogger.info("Saving data into file...");
                 this.moduleStorage.saveFile(moduleManager);
