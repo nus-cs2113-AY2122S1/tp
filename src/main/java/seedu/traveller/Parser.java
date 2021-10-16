@@ -1,31 +1,29 @@
 package seedu.traveller;
 
-import seedu.traveller.commands.Command;
-import seedu.traveller.commands.DeleteCommand;
-import seedu.traveller.commands.EditCommand;
-import seedu.traveller.commands.ExitCommand;
-import seedu.traveller.commands.NewCommand;
-import seedu.traveller.commands.ViewAllCommand;
-import seedu.traveller.commands.SearchCommand;
+import seedu.traveller.commands.*;  // TODO: CHANGE!!
+import seedu.traveller.commands.additemcommands.AddDiningItemCommand;
+import seedu.traveller.commands.additemcommands.AddHousingItemCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidEditFormatException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.TravellerException;
 
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
 public class Parser {
     private static final Logger logger = Logger.getLogger(Parser.class.getName());
+    private static final int FROM_LENGTH = 7;
+    private static final int TO_LENGTH = 5;
+
 
     public static Command parse(String rawInput) throws TravellerException {
         logger.setLevel(Level.INFO);
         logger.log(Level.FINE, "Parsing raw user input");
         Command command;
 
-        String[] userInput = rawInput.split(" ", 5);
+        String[] userInput = rawInput.split(" ", 0);
         String userCommand = userInput[0].toLowerCase();
 
         switch (userCommand) {
@@ -72,6 +70,14 @@ public class Parser {
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
             command = new SearchCommand(startCountryCode, endCountryCode);
             break;
+        case "add-day":
+            logger.log(Level.INFO, "Add-day command input");
+            tripName = userInput[1];
+            command = new AddTripDayCommand(tripName);
+            break;
+        case "add-item":
+            command = parseAddItem(userInput);
+            break;
         case "exit":
             logger.log(Level.INFO, "Exit command input");
             command = new ExitCommand();
@@ -79,6 +85,26 @@ public class Parser {
         default:
             logger.log(Level.WARNING, "Invalid command input!");
             throw new CommandNotFoundException(rawInput);
+        }
+        return command;
+    }
+
+    protected static Command parseAddItem(String[] userInput) {
+        Command command = null;
+
+        logger.log(Level.INFO, "Add-item command input");
+        String tripName = userInput[1];
+        int dayIndex = Integer.parseInt(userInput[2]);
+        String itemType = userInput[3];
+        String itemName = userInput[4];
+        String details = userInput[5];
+        switch (itemType) {
+        case("housing"):
+            command = new AddHousingItemCommand(tripName, dayIndex, itemName, details);
+            break;
+        case("dining"):
+            command = new AddDiningItemCommand(tripName, dayIndex, itemName, details);
+            break;
         }
         return command;
     }
