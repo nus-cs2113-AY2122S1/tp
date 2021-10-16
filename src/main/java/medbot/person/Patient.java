@@ -20,7 +20,6 @@ public class Patient extends Person {
         return "Patient ID: " + getPatientId() + " " + super.toString();
     }
 
-
     /**
      * Text to be written to storage/data.txt of a patient
      *

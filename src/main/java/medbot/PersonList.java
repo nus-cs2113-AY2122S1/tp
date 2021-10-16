@@ -1,6 +1,7 @@
 package medbot;
 
 import medbot.person.Person;
+import medbot.utilities.ViewType;
 
 import java.util.HashMap;
 
@@ -65,9 +66,6 @@ public class PersonList {
      * @throws MedBotException when the Person ID cannot be found
      */
     public void editPerson(int personId, Person newPersonData) throws MedBotException {
-        if (!persons.containsKey(personId)) {
-            throw new MedBotException(getNoPersonIdErrorMessage(personId));
-        }
         assert (personId > 0) && (personId <= size());
         mergeEditPersonData(persons.get(personId), newPersonData);
     }
@@ -99,8 +97,11 @@ public class PersonList {
         return output;
     }
 
-    private String getNoPersonIdErrorMessage(int personId) {
-        return "No Person with ID " + personId + " found.";
+    public String getNoPersonIdErrorMessage(int personId) {
+        if (Parser.getViewType() == ViewType.PATIENT_INFO) {
+            return "No patient with ID " + personId + " found.";
+        }
+        return "No person with ID " + personId + " found.";
     }
 
     /**

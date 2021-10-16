@@ -24,6 +24,10 @@ public class PatientList extends PersonList {
         return super.listPersons();
     }
 
+    private String getNoPatientIdErrorMessage(int patientId) {
+        return "No Patient with ID " + super.getNoPersonIdErrorMessage(patientId);
+    }
+
     public void addPatientFromStorage(Patient patient) {
         super.addPersonFromStorage(patient);
     }
