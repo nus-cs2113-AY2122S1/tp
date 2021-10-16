@@ -1,3 +1,4 @@
+//@@author jerrelllzw
 package seedu.duke.dish;
 
 public class Dish {
