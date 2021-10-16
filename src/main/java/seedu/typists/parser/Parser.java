@@ -44,6 +44,12 @@ public class Parser {
         case "time":
             command = "time";
             break;
+        case "error":
+            command = "error";
+            break;
+        case "content":
+            command = "content";
+            break;
         default:
             System.out.println("invalid command.");
             break;

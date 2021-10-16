@@ -12,11 +12,60 @@ public class Messages {
                     + "/_/  \\__, / .___/_/____/\\__/\n"
                     + "    /____/_/";
 
+    public static final String KEYBOARD =
+            ",---,---,---,---,---,---,---,---,---,---,---,---,---,-------,\n"
+                    + "|1/2| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | + | ' | <-    |\n"
+                    + "|---'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-----|\n"
+                    + "| ->| | Q | W | E | R | T | Y | U | I | O | P | ] | ^ |     |\n"
+                    + "|-----',--',--',--',--',--',--',--',--',--',--',--',--'|    |\n"
+                    + "| Caps | A | S | D | F | G | H | J | K | L | \\ | [ | * |    |\n"
+                    + "|----,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'-,-'---'----|\n"
+                    + "|    | < | Z | X | C | V | B | N | M | , | . | - |          |\n"
+                    + "|----'-,-',--'--,'---'---'---'---'---'---'-,-'---',--,------|\n"
+                    + "| ctrl |  | alt |                          |altgr |  | ctrl |\n"
+                    + "'------'  '-----'--------------------------'------'  '------'\n";
+
+    public static final String LETTER =
+            "(\\ \n"
+                    + "\\'\\ \n"
+                    + " \\'\\     __________  \n"
+                    + " / '|   ()_________)\n"
+                    + " \\ '/    \\ ~~~~~~~~ \\\n"
+                    + "   \\       \\ ~~~~~~   \\\n"
+                    + "   ==).      \\__________\\\n"
+                    + "  (__)       ()__________)";
+
+    public static final String CLOCK =
+            "       ,--.-----.--.\n"
+                    + "       |--|-----|--|\n"
+                    + "       |--|     |--|\n"
+                    + "       |  |-----|  |\n"
+                    + "     __|--|     |--|__\n"
+                    + "    /  |  |-----|  |  \\\n"
+                    + "   /   \\__|-----|__/   \\\n"
+                    + "  /   ______---______   \\/\\\n"
+                    + " /   /               \\   \\/\n"
+                    + "{   /    _     _   _  \\   }\n"
+                    + "|  {    | | . | | | |  }  |-,\n"
+                    + "|  |    |_| . |_| |_|  |  | |\n"
+                    + "|  {                   }  |-'\n"
+                    + "{   \\                 /   }\n"
+                    + " \\   `------___------'   /\\\n"
+                    + "  \\     __|-----|__     /\\/\n"
+                    + "   \\   /  |-----|  \\   /\n"
+                    + "    \\  |--|     |--|  /\n"
+                    + "     --|  |-----|  |--\n"
+                    + "       |--|     |--|\n"
+                    + "       |--|-----|--|\n"
+                    + "       `--'-----`--'";
+
     public static final String MESSAGE_WELCOME = "Welcome to Typist -- the ultimate cli typing game.";
     public static final String MESSAGE_ACKNOWLEDGE = "Brought to you by -- AY2122S1-CS2113-T13-4.";
     public static final String MESSAGE_HELP = "Manual:\n"
+            + "content: set the content\n"
             + "new: start a new word game\n"
             + "time: start a new timer game\n"
+            + "error: start a new error game\n"
             + "bye: exit typist";
 
     //This sample text is gotten from https://www.lipsum.com/

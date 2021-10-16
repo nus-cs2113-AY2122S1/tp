@@ -5,10 +5,14 @@ import java.text.SimpleDateFormat;
 
 import static java.lang.System.lineSeparator;
 import static java.lang.System.out;
+import static seedu.typists.common.Messages.CLOCK;
+import static seedu.typists.common.Messages.KEYBOARD;
+import static seedu.typists.common.Messages.LETTER;
 import static seedu.typists.common.Messages.LOGO;
-import static seedu.typists.common.Messages.MESSAGE_WELCOME;
 import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
 import static seedu.typists.common.Messages.MESSAGE_HELP;
+import static seedu.typists.common.Messages.MESSAGE_WELCOME;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
@@ -92,9 +96,46 @@ public class TextUi {
         System.out.println("Finished!");
     }
 
+    public void printKeyboard() {
+        out.println(KEYBOARD);
+    }
+
+    public void printLetter() {
+        out.println(LETTER);
+    }
+
+    public void printClock() {
+        out.println(CLOCK);
+    }
+
+    public void printBookSelection() {
+        System.out.println("Input '0' to go back.\n"
+                + "Content list:\n"
+                + "1. A Confederacy of Dunces\n"
+                + "2. Moby Dick\n"
+                + "3. A Farewell to Arms\n"
+                + "4. A Tale of Two Cities\n"
+                + "5. On the Road\n"
+                + "6. Bright on Rock\n"
+                + "7. Pick Up\n"
+                + "8. Pride and Prejudice\n"
+                + "9. White Fang\n"
+                + "10. American Psycho\n"
+                + "11. Notes from Underground\n"
+                + "12. The Haunting of Hill House\n"
+                + "13. Metamorphosis\n"
+                + "14. Invisible Man\n"
+                + "15. The Adventures of Huckleberry Finn");
+    }
+
+    public void showErrorSummary(int wrongWordCount, int totalWordCount, double sentenceErrorRate) {
+        out.println("Wrong words:  " + wrongWordCount + "/" + totalWordCount);
+        out.println("Error rate:  " + String.format("%.2f", sentenceErrorRate));
+    }
+
     public void showSummary(int errorWordCount, double wpm, int totalWordTyped, double gameTime) {
         out.println("Wrong words:  " + errorWordCount + "/" + totalWordTyped);
         out.println("WPM: " + String. format("%.2f", wpm));
-        out.println("Total Time taken for the game: " + String. format("%.2f", gameTime) + " seconds");
+        out.println("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds");
     }
 }

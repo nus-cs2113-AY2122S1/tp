@@ -1,17 +1,17 @@
 package seedu.typists;
 
+import seedu.typists.content.Content;
+import seedu.typists.game.ErrorGame;
 import seedu.typists.game.DataProcessor;
 import seedu.typists.game.TimeModeGame;
 import seedu.typists.parser.Parser;
 import seedu.typists.ui.TextUi;
 
-import static seedu.typists.common.Messages.SAMPLE_TEXT;
-
 import seedu.typists.commands.NewGame;
 import seedu.typists.exception.FaultyInputException;
 import seedu.typists.exception.InvalidStringInputException;
-import seedu.typists.parser.Parser;
 import seedu.typists.storage.StorageFile;
+
 import java.util.NoSuchElementException;
 
 
@@ -24,10 +24,12 @@ public class Main {
     //Parser parseBot;
     NewGame wordLimitGame;
     StorageFile storage;
+    Content content;
 
     public Main() {
         this.uiBot = new TextUi();
         this.storage = new StorageFile();
+        this.content = new Content();
     }
 
     public void start() {
@@ -35,6 +37,7 @@ public class Main {
     }
 
     public void startWordLimitGame() {
+        uiBot.printKeyboard();
         this.wordLimitGame = new NewGame();
         try {
             wordLimitGame.beginNewGame();
@@ -44,19 +47,29 @@ public class Main {
     }
 
     public void startTimeLimitGame() {
-        TimeModeGame g = new TimeModeGame(SAMPLE_TEXT, LINE_LENGTH);
+        uiBot.printClock();
+        TimeModeGame g = new TimeModeGame(content.getContent(), LINE_LENGTH);
         DataProcessor p =  new DataProcessor(g);
         uiBot.showSummary(p.getErrorWordCount(), p.getWordPerMinute(), p.getTotalWordTyped(), p.totalTime);
     }
 
+    public void startErrorGame() {
+        ErrorGame a = new ErrorGame(content.getContent(), LINE_LENGTH);
+    }
 
     public void executeCommand(Parser c, NewGame game, StorageFile storage) {
         switch (c.getCommand()) {
+        case "content":
+            content.setContent();
+            break;
         case "new":
             startWordLimitGame();
             break;
         case "time":
             startTimeLimitGame();
+            break;
+        case "error":
+            startErrorGame();
             break;
         default:
             break;
