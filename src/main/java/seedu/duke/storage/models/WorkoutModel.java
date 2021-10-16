@@ -30,7 +30,4 @@ public class WorkoutModel {
         exercises.add(exercise);
     }
 
-    public void clearWorkoutModel() {
-        exercises.clear();
-    }
 }

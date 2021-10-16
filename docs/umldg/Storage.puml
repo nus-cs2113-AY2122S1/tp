@@ -1,0 +1,56 @@
+@startuml
+package "logger" {
+class LoggerUtil #LightBlue##Blue {
++setupLogger(Logger) {static}
+}
+}
+package "storage" {
+together {
+class Storage #LightGreen##Green {
+-LOGGER:Logger {static}
+-storagePath:String
+-file:File
+-filePath:String
++Storage()
++loadData(WorkoutList workoutList):void
++saveData(String jsonString):void
++convertToJson(WorkoutList workoutList):String
+}
+class JsonUtil #LightGreen##Green {
++parse(String src):JsonNode {static}
++fromJson(JsonNode node, Class<A> convertedClass):<A> A {static}
++toJson(Object obj):JsonNode {static}
++stringify(JsonNode node, boolean isPretty):String {static}
+}
+}
+package "storage.models" {
+together {
+class WorkoutListModel #LightGreen##Green {
++WorkoutListModel(ArrayList<WorkoutModel> workouts)
++getWorkouts():ArrayList<WorkoutModel>
++addToWorkoutListModel(WorkoutModel):void {static}
++clearWorkoutListModel():void {static}
+}
+class WorkoutModel #LightGreen##Green {
++WorkoutModel(ArrayList<ExerciseModel> exercises,String workoutName)
++getWorkoutName():String
++getExercises():ArrayList<ExerciseModel>
++addToWorkoutModel(ExerciseModel):void {static}
+}
+class ExerciseModel #LightGreen##Green {
++ExerciseModel(String description, String sets, String reps, String isDone)
++getDescription():String
++getSets():String
++getReps():String
++getIsDone():String
++addToWorkoutModel(ExerciseModel) {static}
+}
+}
+}
+}
+Storage-->JsonUtil : uses >
+Storage--> "workoutListModel 1"WorkoutListModel
+Storage..>LoggerUtil
+WorkoutListModel "1" --> "workouts *" WorkoutModel
+WorkoutModel "1" --> "exercises *" ExerciseModel
+@enduml
