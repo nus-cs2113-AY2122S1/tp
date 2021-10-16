@@ -30,7 +30,8 @@ public class AllRecordList {
      * @param amount           amount spent
      * @param isLoadingStorage indicate if this command is called during loading or runtime
      */
-    public void addExpenditure(String description, double amount, LocalDate date, int month, boolean isLoadingStorage) {
+    public void addExpenditure(String description, double amount, LocalDate date, boolean isLoadingStorage) {
+        int month = date.getMonthValue();
         allRecordList.get(month).addExpenditure(description, amount, date, isLoadingStorage);
     }
 

@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.commands.Command;
+import seedu.duke.data.AllRecordList;
 import seedu.duke.data.RecordList;
 import seedu.duke.parser.Parser;
 import seedu.duke.textfiletools.ReadTextFile;
@@ -16,7 +17,7 @@ public class Storage {
     public static int numberOfBudget = 0;
     public static int numberOfExpenditure = 0;
 
-    public static void loadStorage(RecordList recordList) throws IOException {
+    public static void loadStorage(AllRecordList recordList) throws IOException {
         ReadTextFile newReader = new ReadTextFile("./data/BudgetList1.txt");
         ArrayList<String> commandStorage = newReader.readTextFileToString();
         Parser parser = new Parser();

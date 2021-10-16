@@ -2,6 +2,8 @@ package seedu.duke.commands;
 
 import seedu.duke.ui.TextUi;
 
+import java.time.LocalDate;
+
 public class DeleteBudgetCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = "Delete a budget record.\n"
@@ -14,7 +16,7 @@ public class DeleteBudgetCommand extends DeleteCommand {
 
     @Override
     public void execute(boolean isLoadingStorage) {
-        recordList.deleteBudget();
+        recordList.deleteBudget(LocalDate.now().getMonthValue());
         TextUi.showBudgetDeletedMessage();
     }
 }

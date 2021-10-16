@@ -1,9 +1,11 @@
 package seedu.duke.ui;
 
 
+import seedu.duke.data.AllRecordList;
 import seedu.duke.data.RecordList;
 import seedu.duke.data.records.Expenditure;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class TextUi {
@@ -50,7 +52,9 @@ public class TextUi {
         if (!isLoadingStorage) {
             System.out.println("Expenditure successfully added!"
                     + LS
-                    + addedExpenditure);
+                    + "Description: " + addedExpenditure.getDescription()
+                    + "\nAmount: $" + addedExpenditure.getAmount()
+                    + "\nDate: " + addedExpenditure.getDate());
             System.out.println(DIVIDER);
         }
     }
@@ -63,11 +67,11 @@ public class TextUi {
                 + DIVIDER);
     }
 
-    public static void showRecordsListView(RecordList list) {
+    public static void showRecordsListView(AllRecordList list) {
         int i = 1;
-        System.out.println("Your budget for this month:" + list.getBudget() + LS
+        System.out.println("Your budget for this month:" + list.getBudget(LocalDate.now().getMonthValue()) + LS
                 + "Your expenditures:");
-        for (Expenditure a : list.getExpenditureRecords()) {
+        for (Expenditure a : list.getExpenditureRecords(LocalDate.now().getMonthValue())) {
             System.out.println(i + "." + a);
             i++;
         }

@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.commands.Command;
+import seedu.duke.data.AllRecordList;
 import seedu.duke.data.RecordList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
@@ -14,10 +15,10 @@ public class Duke {
 
     private final TextUi textUi;
     private final Parser parser;
-    private final RecordList recordList;
+    private final AllRecordList recordList;
 
     public Duke() {
-        recordList = new RecordList();
+        recordList = new AllRecordList();
         textUi = new TextUi();
         parser = new Parser();
     }
