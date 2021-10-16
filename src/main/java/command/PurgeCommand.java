@@ -14,7 +14,8 @@ import java.util.Scanner;
 
 public class PurgeCommand extends Command {
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                        Storage storage) {
         ui.print("Are you sure you want to delete all data? (Y/N)");
         Scanner in = new Scanner(System.in);
         if ("Y".equals(in.nextLine())) {

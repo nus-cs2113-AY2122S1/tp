@@ -26,7 +26,8 @@ public class AddStock extends Command {
     private static Logger logger = Logger.getLogger("AddCommand");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                        Storage storage) {
         logger.log(Level.INFO, "Start addition of stock");
 
         boolean nameExist = false;

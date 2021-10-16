@@ -27,7 +27,8 @@ public class ListStock extends Command {
     private static Logger logger = Logger.getLogger("ListStock");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                        Storage storage) {
         logger.log(Level.INFO, "Start listing of available stock");
 
         String[] requiredParameter = {};

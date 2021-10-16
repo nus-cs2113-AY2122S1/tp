@@ -22,7 +22,8 @@ public class DeleteStock extends Command {
     private static Logger logger = Logger.getLogger("DeleteStock");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                        Storage storage) {
         logger.log(Level.INFO, "Start deletion of stock");
 
         String[] requiredParameters = {CommandParameters.ID};

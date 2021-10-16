@@ -12,5 +12,6 @@ import java.util.LinkedHashMap;
  */
 
 public abstract class Command {
-    public abstract void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage);
+    public abstract void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                                 Storage storage);
 }

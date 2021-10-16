@@ -15,7 +15,8 @@ import java.util.LinkedHashMap;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                        Storage storage) {
         storage.saveData(medicines);
         ui.printExit();
     }

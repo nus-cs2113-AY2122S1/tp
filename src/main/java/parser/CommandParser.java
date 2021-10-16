@@ -64,7 +64,8 @@ public class CommandParser {
      * @return A boolean value indicating isExit.
      * @throws InvalidCommand If a command does not exist.
      */
-    public static Mode processCommand(Ui ui, String userInput, ArrayList<Medicine> medicines, Mode mode, Storage storage)
+    public static Mode processCommand(Ui ui, String userInput, ArrayList<Medicine> medicines, Mode mode,
+                                      Storage storage)
             throws InvalidCommand {
         String[] userCommand = parseCommand(userInput);
         String command = userCommand[0];

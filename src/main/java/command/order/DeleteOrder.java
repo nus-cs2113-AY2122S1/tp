@@ -21,7 +21,8 @@ public class DeleteOrder extends Command {
     private static Logger logger = Logger.getLogger("Delete Order");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                        Storage storage) {
         logger.log(Level.INFO, "Start deletion of order");
 
         String[] requiredParameters = {CommandParameters.ORDER_ID};

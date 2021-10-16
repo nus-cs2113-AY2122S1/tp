@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2021-10-10T09:45:15.530950600Z</date>
+  <millis>1633859115530</millis>
+  <nanos>950600</nanos>
+  <sequence>2</sequence>
+  <logger>DeleteCommand</logger>
+  <level>INFO</level>
+  <class>command.medicine.DeleteCommand</class>
+  <method>execute</method>
+  <thread>1</thread>
+  <message>Start deletion of stock</message>
+</record>
+<record>
+  <date>2021-10-10T09:45:15.533910800Z</date>
+  <millis>1633859115533</millis>
+  <nanos>910800</nanos>
+  <sequence>3</sequence>
+  <logger>DeleteCommand</logger>
+  <level>WARNING</level>
+  <class>command.medicine.DeleteCommand</class>
+  <method>execute</method>
+  <thread>1</thread>
+  <message>Invalid parameter is specified by user</message>
+</record>
+<record>
+  <date>2021-10-10T09:45:19.544652500Z</date>
+  <millis>1633859119544</millis>
+  <nanos>652500</nanos>
+  <sequence>4</sequence>
+  <logger>DeleteCommand</logger>
+  <level>INFO</level>
+  <class>command.medicine.DeleteCommand</class>
+  <method>execute</method>
+  <thread>1</thread>
+  <message>Start deletion of stock</message>
+</record>
+<record>
+  <date>2021-10-10T09:45:19.545652600Z</date>
+  <millis>1633859119545</millis>
+  <nanos>652600</nanos>
+  <sequence>5</sequence>
+  <logger>DeleteCommand</logger>
+  <level>INFO</level>
+  <class>command.medicine.DeleteCommand</class>
+  <method>execute</method>
+  <thread>1</thread>
+  <message>Stock id found and deleted</message>
+</record>
+<record>
+  <date>2021-10-10T09:45:19.546652200Z</date>
+  <millis>1633859119546</millis>
+  <nanos>652200</nanos>
+  <sequence>6</sequence>
+  <logger>DeleteCommand</logger>
+  <level>INFO</level>
+  <class>command.medicine.DeleteCommand</class>
+  <method>execute</method>
+  <thread>1</thread>
+  <message>Successful deletion of stock</message>
+</record>

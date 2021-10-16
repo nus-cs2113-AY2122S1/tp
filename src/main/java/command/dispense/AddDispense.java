@@ -22,7 +22,8 @@ import java.util.LinkedHashMap;
 public class AddDispense extends Command {
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                        Storage storage) {
         String medicationName = parameters.get(CommandParameters.NAME);
         String quantity = parameters.get(CommandParameters.QUANTITY);
         String customerId = parameters.get(CommandParameters.CUSTOMER_ID);

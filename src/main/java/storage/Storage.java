@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 /**
- * Storage class handles all saving and loading of data
+ * Storage class handles all saving and loading of data.
  */
 public class Storage {
     private static final String DIRECTORY_PATH = "data";
@@ -29,7 +29,7 @@ public class Storage {
 
     /**
      * Constructor of Storage class.
-     * Initializes myFile variable with file data/duke.txt
+     * Initializes myFile variable with file data/duke.txt.
      */
     public Storage() {
         stockFile = new File(STOCK_FILE_PATH);
@@ -40,8 +40,8 @@ public class Storage {
     /**
      * Write data into file corresponding files.
      *
-     * @param data Data to be written into the file
-     * @throws IOException If unable to write into file
+     * @param data Data to be written into the file.
+     * @throws IOException If unable to write into file.
      */
     private void writeToFile(String data) throws IOException {
         FileWriter fw = new FileWriter(STOCK_FILE_PATH);
@@ -142,7 +142,7 @@ public class Storage {
     }
 
     /**
-     * Read and process medicine stock details from file to restore medicine stock state in program
+     * Read and process medicine stock details from file to restore medicine stock state in program.
      *
      * @param file File object of data/duke.txt
      * @throws FileNotFoundException If file is not found
@@ -159,7 +159,7 @@ public class Storage {
     }
 
     /**
-     * Load saved data from data/stock.txt, data/order.txt, data/dispense.txt
+     * Load saved data from data/stock.txt, data/order.txt, data/dispense.txt.
      */
     public ArrayList<Medicine> loadData() {
         ArrayList<Medicine> medicines = new ArrayList<>();
@@ -170,20 +170,20 @@ public class Storage {
                 System.out.println("Something went wrong: " + e.getMessage());
             }
         }
-//        if (orderFile.exists()) {
-//            try {
-//                medicines.addAll(readFromFile(orderFile));
-//            } catch (FileNotFoundException e) {
-//                System.out.println("Something went wrong: " + e.getMessage());
-//            }
-//        }
-//        if (dispenseFile.exists()) {
-//            try {
-//                medicines.addAll(readFromFile(stockFile));
-//            } catch (FileNotFoundException e) {
-//                System.out.println("Something went wrong: " + e.getMessage());
-//            }
-//        }
+        //        if (orderFile.exists()) {
+        //            try {
+        //                medicines.addAll(readFromFile(orderFile));
+        //            } catch (FileNotFoundException e) {
+        //                System.out.println("Something went wrong: " + e.getMessage());
+        //            }
+        //        }
+        //        if (dispenseFile.exists()) {
+        //            try {
+        //                medicines.addAll(readFromFile(stockFile));
+        //            } catch (FileNotFoundException e) {
+        //                System.out.println("Something went wrong: " + e.getMessage());
+        //            }
+        //        }
         return medicines;
     }
 }
