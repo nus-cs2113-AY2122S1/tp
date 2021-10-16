@@ -83,8 +83,12 @@ public class ModStorage {
             int extensionIndex = file.getName().indexOf(extension);
             String modCode = file.getName().substring(0, extensionIndex);
             Module module = new Module(modCode);
-            if (NusMods.isMatch(module, searchTerm, searchFlags)) {
-                count++;
+            if (module.meetsPreliminaryConditions(searchTerm, searchFlags)) {
+                module = loadModInfo(modCode);
+                if (module.meetsSecondaryConditions(searchFlags)) {
+                    TextUi.printModBriefDescription(module);
+                    count++;
+                }
             }
         }
         TextUi.printModsFound(count);
