@@ -21,6 +21,13 @@ import static seedu.online.NusMods.isMatch;
 
 public class ModStorage {
 
+    /**
+     * Saves the given mod into a json.
+     * @param moduleCode Code of mod to save.
+     * @param inputStream InputStream of the mod from NUSMods.
+     * @throws IOException if there is an IO operation error.
+     * @throws FileErrorException if file is unable to be created.
+     */
     public static void saveModInfo(String moduleCode, InputStream inputStream) throws IOException, FileErrorException {
         BufferedReader in = new BufferedReader(new InputStreamReader(inputStream));
         String inputLine;
@@ -34,6 +41,12 @@ public class ModStorage {
         in.close();
     }
 
+    /**
+     * Adds a line to file.
+     * @param input Line to input.
+     * @param path Path of file.
+     * @throws IOException if there is an IO operation error.
+     */
     private static void addToFile(String input, String path) throws IOException {
         FileWriter fw = new FileWriter(path, false);
         String output = input + "\n";
@@ -41,6 +54,12 @@ public class ModStorage {
         fw.close();
     }
 
+    /**
+     * Creates a mod json at the path.
+     * @param savePath Path to create file at.
+     * @return true if file is created, false otherwise.
+     * @throws FileErrorException if file was unable to be created.
+     */
     public static boolean createModJson(String savePath) throws FileErrorException {
         try {
             File modFile = new File(savePath);
@@ -58,6 +77,11 @@ public class ModStorage {
         return false;
     }
 
+    /**
+     * Searches all files in the data/Modules directory, prints matching mods and the number of matching mods.
+     * @param searchTerm Search term to search for.
+     * @param searchFlags Flags to check mods against.
+     */
     public static void searchModsOffline(String searchTerm, SearchFlags searchFlags) {
         File dir = new File("data/Modules/");
         File[] fileList = dir.listFiles();
@@ -76,6 +100,13 @@ public class ModStorage {
         TextUi.printLocalSearchMessage();
     }
 
+    /**
+     * Searches all files in the given file list and prints matching mods.
+     * @param fileList list of Files to search in.
+     * @param searchTerm Search term to search for.
+     * @param searchFlags Flags to check mods against.
+     * @throws IOException if there is an IO operation error.
+     */
     private static void searchFiles(File[] fileList, String searchTerm, SearchFlags searchFlags) throws IOException {
         int count = 0;
         for (File file : fileList) {
@@ -94,10 +125,12 @@ public class ModStorage {
         TextUi.printModsFound(count);
     }
 
-    private static boolean fileNameContains(File file, String searchTerm) {
-        return file.getName().toLowerCase().contains(searchTerm.toLowerCase());
-    }
-
+    /**
+     * Loads module info from local data.
+     * @param moduleCode mod to load.
+     * @return module that was loaded.
+     * @throws IOException if there is an IO operation error.
+     */
     public static Module loadModInfo(String moduleCode) throws IOException {
         File file = new File("./data/Modules/" + moduleCode + ".json");
         InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
@@ -105,6 +138,10 @@ public class ModStorage {
         return new Gson().fromJson(reader, Module.class);
     }
 
+    /**
+     * Shows mod information, loaded from local data.
+     * @param moduleCode module to display information from.
+     */
     public static void showModOffline(String moduleCode) {
         try {
             Module module = loadModInfo(moduleCode);

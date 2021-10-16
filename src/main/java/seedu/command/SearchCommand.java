@@ -19,6 +19,11 @@ public class SearchCommand extends Command {
         this.searchFlags = searchFlags;
     }
 
+    /**
+     * Searches for mods. Defaults to online search unless quick flag is specified, and or if it is
+     * unable to reach the NUSMods API. Prints all mods that matches the search term and all specified
+     * flags, and the total count of matching mods. Also displays a warning message for offline searches.
+     */
     public void execute() {
         boolean isQuickSearch = searchFlags.getHasQuickFlag();
         if (!isQuickSearch) {

@@ -14,6 +14,9 @@ public class UpdateCommand extends Command {
     public UpdateCommand() {
     }
 
+    /**
+     * Fetches full information for all mods from NUSMods API and saves them into local storage.
+     */
     public void execute() {
         try {
             logger.log(Level.INFO, "Updating local data");
