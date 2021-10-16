@@ -2,13 +2,18 @@ package seedu.duke;
 
 import seedu.commands.Command;
 import seedu.commands.ExitCommand;
+
+import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
+
 import seedu.utility.Ui;
+
 
 public class StonksXD {
     private Ui ui;
     private FinancialTracker finances;
     private Parser parser;
+    private DataManager dataManager;
 
     public StonksXD() {
         this.ui = new Ui();
@@ -17,6 +22,7 @@ public class StonksXD {
     }
 
     public void run() {
+        dataManager.load(parser, finances, ui);
         ui.printWelcome();
 
         boolean exitFlag = true;
@@ -28,6 +34,9 @@ public class StonksXD {
                 assert command.getClass() == ExitCommand.class;
                 exitFlag = false;
             }
+
+            dataManager.save(parser, finances, ui);
+
         }
         ui.printBye();
     }
