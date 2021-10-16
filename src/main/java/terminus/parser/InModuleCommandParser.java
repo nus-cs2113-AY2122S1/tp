@@ -17,6 +17,10 @@ public abstract class InModuleCommandParser extends CommandParser {
         super(workspace);
     }
 
+    public String getModuleName() {
+        return moduleName;
+    }
+
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }

@@ -2,6 +2,7 @@ package terminus.ui;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 
@@ -18,10 +19,10 @@ public class Ui {
     /**
      * Prints the banner for a workspace, which includes all the commands in the parser.
      */
-    public void printParserBanner(CommandParser parser, NusModule nusModule) {
+    public void printParserBanner(CommandParser parser, ModuleManager moduleManager) {
         printSection(
             "",
-            parser.getWorkspaceBanner(nusModule), 
+            parser.getWorkspaceBanner(moduleManager),
             parser.getCommandList()
                 .stream()
                 .reduce("\nType any of the following to get started:\n",

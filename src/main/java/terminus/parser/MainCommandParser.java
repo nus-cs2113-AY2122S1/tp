@@ -3,6 +3,7 @@ package terminus.parser;
 import terminus.command.GoCommand;
 import terminus.command.ModuleCommand;
 import terminus.common.Messages;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
 public class MainCommandParser extends CommandParser {
@@ -21,7 +22,7 @@ public class MainCommandParser extends CommandParser {
     }
 
     @Override
-    public String getWorkspaceBanner(NusModule module) {
+    public String getWorkspaceBanner(ModuleManager module) {
         return Messages.MAIN_BANNER;
     }
 }
