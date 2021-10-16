@@ -17,8 +17,6 @@ public class MainCommandParser extends CommandParser {
         MainCommandParser parser = PARSER;
         parser.addCommand("module", new ModuleCommand());
         parser.addCommand("go", new GoCommand());
-//        parser.addCommand(CommonFormat.COMMAND_NOTE, new NotesCommand());
-//        parser.addCommand(CommonFormat.COMMAND_SCHEDULE, new ScheduleCommand());
         return parser;
     }
 

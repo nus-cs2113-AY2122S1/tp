@@ -41,8 +41,8 @@ public class DeleteCommand<T extends Content> extends Command {
     }
 
     /**
-     * Parses the arguments to the DeleteCommand object.
-     * The arguments are attributes to identify a Content object in an ArrayList.
+     * Parses the arguments to the DeleteCommand object. The arguments are attributes to identify a Content object in an
+     * ArrayList.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
      * @throws InvalidArgumentException when argument provided is empty, non-numeric or less than 1.
@@ -66,10 +66,10 @@ public class DeleteCommand<T extends Content> extends Command {
     }
 
     /**
-     * Executes the delete command.
-     * Prints the relevant response to the Ui and the specified Content object will be removed from the arraylist.
+     * Executes the delete command. Prints the relevant response to the Ui and the specified Content object will be
+     * removed from the arraylist.
      *
-     * @param ui The Ui object to send messages to the users.
+     * @param ui            The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.

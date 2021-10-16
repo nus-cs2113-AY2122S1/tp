@@ -37,6 +37,6 @@ public class BackCommand extends Command {
 
     private boolean isModuleNameNullOrEmpty() {
         String moduleName = getModuleName();
-        return  moduleName == null || moduleName.isBlank();
+        return moduleName == null || moduleName.isBlank();
     }
 }

@@ -61,6 +61,9 @@ public class AddModuleCommand extends Command {
      */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidCommandException, InvalidArgumentException {
+        if (moduleManager.getModule(moduleName) != null) {
+            throw new InvalidArgumentException("Module already exist!");
+        }
         moduleManager.setModule(moduleName);
         ui.printSection(String.format("Module %s has been added",moduleName));
         return new CommandResult(true);

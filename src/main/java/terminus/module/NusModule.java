@@ -26,7 +26,7 @@ public class NusModule {
      * Returns a ContentManager object based on the provided class type.
      *
      * @param type Content class type.
-     * @param <T> Content object type.
+     * @param <T>  Content object type.
      * @return The ContentManager object based on the provided class type.
      */
     public <T extends Content> ContentManager<T> getContentManager(Class<T> type) {

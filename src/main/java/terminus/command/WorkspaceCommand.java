@@ -5,7 +5,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.CommandParser;
-import terminus.parser.InModuleCommandParser;
 import terminus.ui.Ui;
 
 public abstract class WorkspaceCommand extends Command {
@@ -17,9 +16,6 @@ public abstract class WorkspaceCommand extends Command {
         this.commandMap = commandMap;
     }
 
-    public WorkspaceCommand(InModuleCommandParser commandMap) {
-        this.commandMap = commandMap;
-    }
 
     /**
      * Returns the Command Result after execution. If no other arguments, returns the workspace.

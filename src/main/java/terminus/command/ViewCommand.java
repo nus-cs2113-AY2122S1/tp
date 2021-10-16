@@ -47,9 +47,9 @@ public class ViewCommand<T extends Content> extends Command {
     }
 
     /**
-     * Parses the arguments to the ViewModuleCommand object.
-     * The arguments are attributes to identify a Content object in an ArrayList. The arguments can be empty which
-     * refers to viewing a list all Content object in an ArrayList instead.
+     * Parses the arguments to the ViewModuleCommand object. The arguments are attributes to identify a Content object
+     * in an ArrayList. The arguments can be empty which refers to viewing a list all Content object in an ArrayList
+     * instead.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
      * @throws InvalidArgumentException when a non-empty argument provided is non-numeric or less than 1.
@@ -75,10 +75,9 @@ public class ViewCommand<T extends Content> extends Command {
     }
 
     /**
-     * Executes the view command.
-     * Prints the relevant response to the Ui.
+     * Executes the view command. Prints the relevant response to the Ui.
      *
-     * @param ui The Ui object to send messages to the users.
+     * @param ui            The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.
