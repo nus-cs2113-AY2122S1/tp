@@ -21,9 +21,9 @@ import seedu.duke.ui.Ui;
 public class Storage {
     private static final String ROOT_DIRECTORY = System.getProperty("user.dir");
     private static final String STORAGE_DIRECTORY = "data";
-    private static final String TASK_FILE_NAME = "tasks.txt";
-    private static final String LESSON_FILE_NAME = "lessons.txt";
-    private static final String MODULE_FILE_NAME = "modules.txt";
+    public static final String TASK_FILE_NAME = "tasks.txt";
+    public static final String LESSON_FILE_NAME = "lessons.txt";
+    public static final String MODULE_FILE_NAME = "modules.txt";
     private static final Path PATH_TO_TASK_FILE = Paths.get(ROOT_DIRECTORY, STORAGE_DIRECTORY, TASK_FILE_NAME);
     private static final Path PATH_TO_LESSON_FILE = Paths.get(ROOT_DIRECTORY, STORAGE_DIRECTORY, LESSON_FILE_NAME);
     private static final Path PATH_TO_MODULE_FILE = Paths.get(ROOT_DIRECTORY, STORAGE_DIRECTORY, MODULE_FILE_NAME);

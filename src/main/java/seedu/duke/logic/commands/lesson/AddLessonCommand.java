@@ -28,7 +28,7 @@ public class AddLessonCommand extends Command {
             throws DukeException, IOException {
         Lesson newLesson = new Lesson(title, dayOfTheWeek, startTime, endTime);
         lessonList.addLesson(newLesson);
-        storage.saveData(taskList, lessonList, "lessons.txt");
+        storage.saveData(taskList, lessonList, Storage.LESSON_FILE_NAME);
         ui.printLessonAdded(newLesson, lessonList.getSize());
     }
 }

@@ -29,7 +29,7 @@ public class DoneTaskCommand extends Command {
 
         taskList.markTaskAsDone(taskIndex);
         assert task.isDone() : "Task should have been marked as done.";
-        storage.saveData(taskList, lessonList, "tasks.txt");
+        storage.saveData(taskList, lessonList, Storage.TASK_FILE_NAME);
         ui.printTaskMarkedAsDone(taskList, task);
     }
 }

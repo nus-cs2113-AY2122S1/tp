@@ -27,7 +27,7 @@ public class AddTaskCommand extends Command {
             throws DukeException, IOException {
         Task newTask = new Task(title, dayOfTheWeek, information);
         taskList.addTask(newTask);
-        storage.saveData(taskList, lessonList, "tasks.txt");
+        storage.saveData(taskList, lessonList, Storage.TASK_FILE_NAME);
         ui.printTaskAdded(newTask, taskList.getSize());
     }
 }
