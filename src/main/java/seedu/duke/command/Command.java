@@ -11,10 +11,11 @@ public abstract class Command {
     private static final String USAGE_REGEX = "Usage: %s";
 
     private final CommandEnum command;
-    public HashMap<String, String> commandArguments;
+    protected final HashMap<String, String> commandArguments;
 
     public Command(CommandEnum command) {
         this.command = command;
+        commandArguments = null;
     }
 
     public Command(CommandEnum command, HashMap<String, String> commandArguments) {
