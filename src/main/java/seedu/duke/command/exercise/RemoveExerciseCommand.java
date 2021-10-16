@@ -10,8 +10,6 @@ import seedu.duke.ui.Ui;
 import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
-import static seedu.duke.parser.Parser.EXERCISE_KEYWORD;
-import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 
 /**
  * To remove an exercise from a Workout.
