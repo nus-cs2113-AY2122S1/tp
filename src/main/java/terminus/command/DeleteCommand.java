@@ -7,6 +7,7 @@ import terminus.common.TerminusLogger;
 import terminus.content.Content;
 import terminus.content.ContentManager;
 import terminus.exception.InvalidArgumentException;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
@@ -69,12 +70,13 @@ public class DeleteCommand<T extends Content> extends Command {
      * Prints the relevant response to the Ui and the specified Content object will be removed from the arraylist.
      *
      * @param ui The Ui object to send messages to the users.
-     * @param module The NusModule contain the ContentManager of all notes and schedules.
+     * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.
      */
     @Override
-    public CommandResult execute(Ui ui, NusModule module) throws InvalidArgumentException {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException {
+        NusModule module = moduleManager.getModule(getModuleName());
         ContentManager<T> contentManager = module.getContentManager(type);
         assert contentManager != null;
         TerminusLogger.info("Executing Delete Command");

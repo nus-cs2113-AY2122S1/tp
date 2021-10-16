@@ -10,7 +10,7 @@ import terminus.content.Note;
 import terminus.module.NusModule;
 
 
-public class NoteCommandParser extends CommandParser {
+public class NoteCommandParser extends InModuleCommandParser {
 
     public NoteCommandParser() {
         super(CommonFormat.COMMAND_NOTE);

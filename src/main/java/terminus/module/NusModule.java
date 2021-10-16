@@ -45,5 +45,4 @@ public class NusModule {
         TerminusLogger.info("ContentManager found");
         return result;
     }
-
 }

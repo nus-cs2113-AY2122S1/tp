@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import terminus.common.TerminusLogger;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
 public class ModuleStorage {
@@ -44,30 +45,30 @@ public class ModuleStorage {
      * @return NusModule based on the contents of the file.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
-    public NusModule loadFile() throws IOException {
+    public ModuleManager loadFile() throws IOException {
         initializeFile();
         if (!Files.isReadable(filePath)) {
             TerminusLogger.severe("File is does not exist or is not readable!");
             return null;
         }
         TerminusLogger.info("Decoding JSON to object");
-        return gson.fromJson(Files.newBufferedReader(filePath), NusModule.class);
+        return gson.fromJson(Files.newBufferedReader(filePath), ModuleManager.class);
     }
 
     /**
      * Saves NusModule instance into a JSON file based on GSON.
      * Throws NullPointerException if the `module` is null.
      * 
-     * @param module The NusModule to convert to JSON file.
+     * @param moduleManager The ModuleManager to convert to JSON file.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
-    public void saveFile(NusModule module) throws IOException {
-        if (module == null) {
+    public void saveFile(ModuleManager moduleManager) throws IOException {
+        if (moduleManager == null) {
             throw new NullPointerException("module cannot be null!");
         }
         initializeFile();
         TerminusLogger.info("Converting NusModule object into String...");
-        String jsonString = gson.toJson(module);
+        String jsonString = gson.toJson(moduleManager);
         TerminusLogger.info("String conversion completed.");
         TerminusLogger.info(String.format("Writing to file: %s", filePath.toString()));
         assert jsonString != null && !jsonString.isBlank() : "File saved is blank";

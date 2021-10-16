@@ -99,4 +99,8 @@ public abstract class CommandParser {
     public String getWorkspace() {
         return workspace;
     }
+
+    public void setWorkspace(String workspace) {
+        this.workspace = workspace;
+    }
 }

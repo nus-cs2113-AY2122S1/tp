@@ -9,6 +9,7 @@ import terminus.command.CommandResult;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 import terminus.parser.MainCommandParser;
@@ -28,6 +29,7 @@ public class Terminus {
     private String workspace;
 
     private ModuleStorage moduleStorage;
+    private ModuleManager moduleManager;
     private NusModule nusModule;
 
     private static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "Format: %s";
@@ -58,9 +60,9 @@ public class Terminus {
             this.parser = MainCommandParser.getInstance();
             this.workspace = "";
             this.moduleStorage = new ModuleStorage(DATA_DIRECTORY.resolve(MAIN_JSON));
-
+            this.moduleManager = new ModuleManager();
             TerminusLogger.info("Loading file...");
-            this.nusModule = moduleStorage.loadFile();
+            this.moduleManager = moduleStorage.loadFile();
         } catch (IOException e) {
             TerminusLogger.warning("File loading has failed.", e.fillInStackTrace());
             handleIoException(e);
@@ -90,7 +92,7 @@ public class Terminus {
             Command currentCommand = null;
             try {
                 currentCommand = parser.parseCommand(input);
-                CommandResult result = currentCommand.execute(ui, nusModule);
+                CommandResult result = currentCommand.execute(ui, moduleManager);
 
                 boolean isExitCommand = result.isOk() && result.isExit();
                 boolean isWorkspaceCommand = result.isOk() && result.getAdditionalData() != null;
@@ -105,7 +107,7 @@ public class Terminus {
                     ui.printSection(result.getErrorMessage());
                 }
                 TerminusLogger.info("Saving data into file...");
-                this.moduleStorage.saveFile(nusModule);
+                this.moduleStorage.saveFile(moduleManager);
                 TerminusLogger.info("Save completed.");
             } catch (InvalidCommandException e) {
                 TerminusLogger.warning("Invalid input provided: " + input, e.fillInStackTrace());
@@ -140,7 +142,7 @@ public class Terminus {
     private void exit() {
         TerminusLogger.info("Saving data into file...");
         try {
-            this.moduleStorage.saveFile(nusModule);
+            this.moduleStorage.saveFile(moduleManager);
             TerminusLogger.info("Save completed.");
         } catch (IOException e) {
             TerminusLogger.warning("File saving has failed.");
