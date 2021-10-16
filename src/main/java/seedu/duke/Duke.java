@@ -39,14 +39,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage();
         try {
-            fullModuleList = new FullModuleList();
-        } catch (DukeException | FileNotFoundException e) {
-            ui.printMessage(e.getMessage());
-        }
-        try {
             taskList = new TaskList(TaskList.deserialize(storage.loadData(Storage.TASK_FILE_NAME)));
             lessonList = new LessonList(LessonList.deserialize(storage.loadData(Storage.LESSON_FILE_NAME)));
             moduleList = new ModuleList(); // todo add module list deserialization
+            fullModuleList = new FullModuleList();
             ui.printMessage(Messages.SUCCESS_RETRIEVING_DATA);
             LOGGER.info("Successfully retrieved data from the save file.");
         } catch (DukeException | IOException e) {

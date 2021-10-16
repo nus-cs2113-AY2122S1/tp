@@ -18,5 +18,4 @@ class JsonUtilTest {
             fail(); // fail if there is any error loading the module information from ModuleInfo.json
         }
     }
-
 }
