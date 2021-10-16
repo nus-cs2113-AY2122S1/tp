@@ -12,7 +12,7 @@ public class IndexParser {
     private static final int COMD_INDEX_LENGTH = 2;
 
 
-    public static int getIndexFromInput(String userInput, String command)
+    public static int getIndexFromInput(String userInput)
             throws NumberFormatException, MissingArgException {
         //split user input into 2 strings: command word string and index string
         String[] destructuredInputs = userInput.split(" ", COMD_INDEX_LENGTH);

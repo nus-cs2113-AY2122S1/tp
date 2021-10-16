@@ -1,6 +1,5 @@
 package seedu.command;
 
-import seedu.contact.Contact;
 import seedu.exception.InvalidFlagException;
 import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
