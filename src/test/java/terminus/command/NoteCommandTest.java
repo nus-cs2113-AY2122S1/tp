@@ -15,7 +15,7 @@ import terminus.parser.MainCommandParser;
 import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
 
-public class ScheduleCommandTest {
+public class NoteCommandTest {
 
     private MainCommandParser commandParser;
     private Ui ui;

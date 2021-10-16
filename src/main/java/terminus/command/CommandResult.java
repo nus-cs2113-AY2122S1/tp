@@ -7,17 +7,17 @@ public class CommandResult {
     protected CommandParser additionalData;
     protected boolean isOk;
     protected boolean isExit;
-    
+
     public CommandResult(boolean isOk) {
         this(isOk, false);
     }
-    
+
     public CommandResult(boolean isOk, boolean isExit) {
         this(isOk, isExit, null);
     }
 
     public CommandResult(boolean isOk, CommandParser additionalData) {
-        this(isOk, false, additionalData );
+        this(isOk, false, additionalData);
     }
 
     public CommandResult(boolean isOk, String errorMessage) {

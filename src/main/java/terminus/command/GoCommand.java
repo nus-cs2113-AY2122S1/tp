@@ -8,8 +8,10 @@ import terminus.module.NusModule;
 import terminus.parser.ModuleWorkspaceCommandParser;
 import terminus.ui.Ui;
 
-public class GoCommand extends WorkspaceCommand{
+public class GoCommand extends WorkspaceCommand {
+
     private String moduleName;
+
     public GoCommand() {
         super(ModuleWorkspaceCommandParser.getInstance());
     }
@@ -39,11 +41,11 @@ public class GoCommand extends WorkspaceCommand{
         if (arguments == null || arguments.isBlank()) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
-        String[] args =  arguments.strip().split("\\s+", 2);
-         moduleName = args[0];
-         if (args.length > 1) {
-             super.parseArguments(args[1]);
-         }
+        String[] args = arguments.strip().split("\\s+", 2);
+        moduleName = args[0];
+        if (args.length > 1) {
+            super.parseArguments(args[1]);
+        }
     }
 
     @Override

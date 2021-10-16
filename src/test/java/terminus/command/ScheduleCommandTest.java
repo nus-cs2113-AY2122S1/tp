@@ -15,7 +15,7 @@ import terminus.parser.LinkCommandParser;
 import terminus.parser.MainCommandParser;
 import terminus.ui.Ui;
 
-public class NotesCommandTest {
+public class ScheduleCommandTest {
 
     private MainCommandParser commandParser;
     private Ui ui;
@@ -50,14 +50,14 @@ public class NotesCommandTest {
     @Test
     void execute_linkAdvance_throwsException() throws InvalidArgumentException, InvalidCommandException {
         assertThrows(InvalidCommandException.class,
-                () -> commandParser.parseCommand("go " + tempModule + " schedule -1").execute(ui, moduleManager));
+            () -> commandParser.parseCommand("go " + tempModule + " schedule -1").execute(ui, moduleManager));
         assertThrows(InvalidArgumentException.class,
-                () -> commandParser.parseCommand(
-                                "go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" \"test.com\"")
-                        .execute(ui, moduleManager));
+            () -> commandParser.parseCommand(
+                            "go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" \"test.com\"")
+                    .execute(ui, moduleManager));
         assertThrows(InvalidArgumentException.class,
-                () -> commandParser.parseCommand("go " + tempModule + " schedule delete -1")
-                        .execute(ui, moduleManager));
+            () -> commandParser.parseCommand("go " + tempModule + " schedule delete -1")
+                    .execute(ui, moduleManager));
 
     }
 }

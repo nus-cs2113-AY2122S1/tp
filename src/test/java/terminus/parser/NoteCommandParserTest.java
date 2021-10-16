@@ -19,14 +19,13 @@ import terminus.ui.Ui;
 public class NoteCommandParserTest {
 
     private NoteCommandParser commandParser;
-    private NusModule nusModule;
-    private Ui ui;
+
+    private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
         this.commandParser = NoteCommandParser.getInstance();
-        this.nusModule = new NusModule();
-        this.ui = new Ui();
+        this.commandParser.setModuleName(tempModule);
     }
 
     @Test
@@ -111,7 +110,7 @@ public class NoteCommandParserTest {
 
     @Test
     void getWorkspace_isNote() {
-        assertEquals("note", commandParser.getWorkspace());
+        assertEquals(tempModule + " > note", commandParser.getWorkspace());
     }
 
     @Test

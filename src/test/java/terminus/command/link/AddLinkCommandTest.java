@@ -12,6 +12,7 @@ import terminus.common.CommonUtils;
 import terminus.content.Link;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.parser.LinkCommandParser;
 import terminus.ui.Ui;
@@ -19,15 +20,19 @@ import terminus.ui.Ui;
 public class AddLinkCommandTest {
 
     private LinkCommandParser linkCommandParser;
-    private NusModule nusModule;
+    private ModuleManager moduleManager;
     private Ui ui;
+
+    private String tempModule = "test";
 
     Class<Link> type = Link.class;
 
     @BeforeEach
     void setUp() {
+        this.moduleManager = new ModuleManager();
+        moduleManager.setModule(tempModule);
         this.linkCommandParser = LinkCommandParser.getInstance();
-        this.nusModule = new NusModule();
+        this.linkCommandParser.setModuleName(tempModule);
         this.ui = new Ui();
     }
 
@@ -44,20 +49,20 @@ public class AddLinkCommandTest {
     @Test
     void execute_addLinkCommand_success() throws InvalidCommandException, InvalidArgumentException {
         Command addLinkCommand = linkCommandParser.parseCommand("add \"test\" \"Monday\" \"00:00\" \"https://zoom.us/test\"");
-        CommandResult addResult = addLinkCommand.execute(ui, nusModule);
+        CommandResult addResult = addLinkCommand.execute(ui, moduleManager);
         assertTrue(addResult.isOk());
-        assertEquals(1, nusModule.getContentManager(type).getTotalContents());
-        assertTrue(nusModule.getContentManager(type).getContentData(1).contains("test"));
-        assertTrue(nusModule.getContentManager(type).getContentData(1).contains("Monday"));
-        assertTrue(nusModule.getContentManager(type).getContentData(1).contains("00:00"));
-        assertTrue(nusModule.getContentManager(type).getContentData(1).contains("https://zoom.us/test"));
+        assertEquals(1, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
+        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("test"));
+        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("Monday"));
+        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("00:00"));
+        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("https://zoom.us/test"));
 
         for (int i = 0; i < 5; i++) {
             addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
-            addResult = addLinkCommand.execute(ui, nusModule);
+            addResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addResult.isOk());
         }
-        assertEquals(6, nusModule.getContentManager(type).getTotalContents());
+        assertEquals(6, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
     }
 }

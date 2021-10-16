@@ -18,12 +18,13 @@ import terminus.module.NusModule;
 public class LinkCommandParserTest {
 
     private LinkCommandParser linkCommandParser;
-    private NusModule nusModule;
+
+    private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
         this.linkCommandParser = LinkCommandParser.getInstance();
-        this.nusModule = new NusModule();
+        this.linkCommandParser.setModuleName(tempModule);
     }
 
     @Test
@@ -116,7 +117,7 @@ public class LinkCommandParserTest {
 
     @Test
     void getWorkspace_isSchedule() {
-        assertEquals("schedule", linkCommandParser.getWorkspace());
+        assertEquals(tempModule + " > schedule", linkCommandParser.getWorkspace());
     }
 
     @Test
