@@ -43,12 +43,12 @@ public class TimetableLesson extends TimetableItem {
      */
     private LessonType parseLessonType(String type) {
         switch (type.toLowerCase(Locale.ROOT)) {
-            case "tutorial":
-                return LessonType.TUTORIAL;
-            case "laboratory":
-                return LessonType.LABORATORY;
-            default:
-                return LessonType.LECTURE;
+        case "tutorial":
+            return LessonType.TUTORIAL;
+        case "laboratory":
+            return LessonType.LABORATORY;
+        default:
+            return LessonType.LECTURE;
         }
     }
 
