@@ -1,6 +1,9 @@
 package seedu.duke.parser;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,7 +17,16 @@ import static seedu.duke.parser.Parser.splitCommandWordsAndArgs;
 import static seedu.duke.parser.Parser.parseArgsAsIndex;
 
 class ParserTest {
-    //featureUnderTest_testScenario_expectedBehavior()
+    @BeforeEach
+    void setupTests() {
+        Command.workoutMode = 0;
+    }
+
+    @AfterEach
+    void resetWorkoutMode() {
+        Command.workoutMode = 0;
+    }
+
     @Test
     void getExerciseArgs_emptyString_throwsException() {
         String[] emptyString = {" ", "\n", "\t", " "};
@@ -40,13 +52,17 @@ class ParserTest {
     }
 
     @Test
-    void parseWorkoutIndex_validInput_returnsWorkoutIndex() {
+    void parseWorkoutIndex_validInput_returnsWorkoutIndex() throws GetJackDException {
         String input = "  2  ";
-        try {
-            assertEquals(2, parseWorkoutIndex(input));
-        } catch (GetJackDException e) {
-            e.printStackTrace();
-        }
+        Command.workoutMode = 0;
+        assertEquals(2, parseWorkoutIndex(input));
+    }
+
+    @Test
+    void parseWorkoutIndex_inputWhenInsideAWorkout_returnsWorkoutMode() throws GetJackDException {
+        String input = " 2 ";
+        Command.workoutMode = 1;
+        assertEquals(1, parseWorkoutIndex(input));
     }
 
     @Test
@@ -56,13 +72,24 @@ class ParserTest {
     }
 
     @Test
-    void parseWorkoutAndExerciseIndex_validInput_returnWorkoutAndExerciseIndices() {
+    void parseWorkoutIndex_invalidStringWhenInsideAWorkout_returnsWorkoutMode() throws GetJackDException {
+        String input = " a ";
+        Command.workoutMode = 2;
+        assertEquals(2, parseWorkoutIndex(input));
+    }
+
+    @Test
+    void parseWorkoutAndExerciseIndex_validInput_returnWorkoutAndExerciseIndices() throws GetJackDException {
         String input = " 2, 3";
-        try {
-            assertArrayEquals(new int[]{3, 2}, parseWorkoutAndExerciseIndex(input));
-        } catch (GetJackDException e) {
-            e.printStackTrace();
-        }
+        assertArrayEquals(new int[]{2, 3}, parseWorkoutAndExerciseIndex(input));
+    }
+
+    @Test
+    void parseWorkoutAndExerciseIndex_validInputWhenInsideWorkout_returnsWorkoutModeAndExerciseIndex()
+            throws GetJackDException {
+        String input = " 2, 3";
+        Command.workoutMode = 1;
+        assertArrayEquals(new int[]{2, 1}, parseWorkoutAndExerciseIndex(input));
     }
 
     @Test
