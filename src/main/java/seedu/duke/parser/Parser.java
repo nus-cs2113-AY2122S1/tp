@@ -4,20 +4,29 @@ import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
 
 import java.util.Locale;
+import java.util.logging.Logger;
 
-import static seedu.duke.logger.LoggerUtil.LOGGER;
+import static seedu.duke.logger.LoggerUtil.setupLogger;
 
 /**
  * To make sense of user commands by extracting keywords and descriptions.
  */
 public abstract class Parser {
+    static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
+    static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
     public static String WORKOUT_KEYWORD = "/w ";
     public static String EXERCISE_KEYWORD = "/e ";
     public static String SETS_KEYWORD = "/s ";
     public static String REPS_KEYWORD = "/r ";
-    static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
-
     protected String userInputString;
+
+    public Parser(String userInputString) {
+        this.userInputString = userInputString;
+        setupLogger(LOGGER);
+    }
+    
+    protected Parser() {
+    }
 
     public static String getCommandType(String userInputString) {
         String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
@@ -27,6 +36,7 @@ public abstract class Parser {
 
     /**
      * Returns the parameters for commands from the user.
+     *
      * @param userInputString user input
      * @return parameters to execute commands with
      */
@@ -35,13 +45,6 @@ public abstract class Parser {
         String commandArgs = commandTypeAndParams[1].trim();
         return commandArgs;
     }
-
-    /**
-     * Parses and processes the user input and returns a Command object with parameters and attributes according to the
-     * user input.
-     * @return User-specified command
-     */
-    public abstract Command parseInput();
 
     /**
      * Gets arguments required for an exercise, such as workoutIndex, exerciseName, sets and reps.
@@ -163,4 +166,12 @@ public abstract class Parser {
             throw new GetJackDException("Error. Invalid workout or exercise index.");
         }
     }
+
+    /**
+     * Parses and processes the user input and returns a Command object with parameters and attributes according to the
+     * user input.
+     *
+     * @return User-specified command
+     */
+    public abstract Command parseInput();
 }

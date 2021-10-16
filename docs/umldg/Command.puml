@@ -1,0 +1,81 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam stereotypeBackgroundColor White
+skinparam class {
+BackgroundColor Pink
+ArrowColor Red
+}
+together {
+package "command" {
+package "exercise" {
+class AddExerciseCommand extends Command {
+~LOGGER:Logger {static}
+-toAdd:Exercise
+-workoutIndex:Integer
++AddExerciseCommand(workoutIndex:Integer, description:String, sets:Integer, reps:Integer)
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
+}
+class DisplayExercisesCommand extends Command {
+-workoutIndex:Integer
++DisplayExercisesCommand(workoutIndex:Integer)
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
+}
+class MarkExerciseAsDoneCommand extends Command {
+~LOGGER:Logger {static}
++MarkExerciseAsDoneCommand(workoutIndex:Integer, exerciseIndex:Integer)
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
+}
+class RemoveExerciseCommand extends Command {
+~LOGGER:Logger {static}
+-workoutIndex:Integer
+-exerciseIndex:Integer
++RemoveExerciseCommand(workoutIndex:Integer, exerciseIndex:Integer)
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
+}
+}
+package "workout" {
+class CreateWorkoutCommand extends Command {
+-toCreate:Workout
++CreateWorkoutCommand(description:String)
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
+}
+class DeleteWorkoutCommand extends Command {
+~LOGGER:Logger {static}
+-workoutIndex:Integer
++DeleteWorkoutCommand(workoutIndex:Integer)
++getWorkoutIndex()
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
+}
+class ListWorkoutsCommand extends Command {
++ListWorkoutsCommand()
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
+}
+}
+abstract Command #lightgrey ##[bold]grey {
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage) {abstract}
+}
+class ExitCommand extends Command {
+~LOGGER:Logger {static}
++isExit(command:Command) {static}
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
+}
+class HelpCommand extends Command{
+-commandDescription:String
++HelpCommand(descriptionToPrint:String)
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
+}
+class IncorrectCommand extends Command {
+~LOGGER:Logger {static}
++feedbackToUser:String
++IncorrectCommand(feedbackToUser:String)
++executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
+}
+}
+
+package "logger" {
+class LoggerUtil #LightBlue##Blue
+}
+
+}
+
+@enduml
