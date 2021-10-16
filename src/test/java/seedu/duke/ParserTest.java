@@ -84,7 +84,7 @@ public class ParserTest {
         Command underTest = testParser.parseCommand("del_in      i/   12              ");
         assertTrue(underTest.getClass() == DeleteIncomeCommand.class);
     }
-    
+
     @Test
     public void parseCommand_invalidTotalIncomeCommand_returnInvalidCommand() {
         Parser testParser = new Parser();
@@ -103,7 +103,7 @@ public class ParserTest {
     public void parseCommand_invalidInput_correctOutputWarningMessage() {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("gfsbsfbgfsbfgs");
-        InvalidCommand test = (InvalidCommand) underTest; 
+        InvalidCommand test = (InvalidCommand) underTest;
         assertTrue(test.getMessage() == "Invalid command. Use \"help\" to show the list of possible commands.");
     }
 
@@ -122,7 +122,7 @@ public class ParserTest {
         InvalidCommand test = (InvalidCommand) underTest;
         assertTrue(test.getMessage() == "Only numeric inputs are allowed for amount.");
     }
-    
+
     @Test
     public void convertExpenseToData_validExpense_correctDataOutput() {
         Parser testParser = new Parser();
@@ -138,9 +138,9 @@ public class ParserTest {
         String testData = testParser.convertIncomeToData(testIncome);
         assertTrue(testData.equals("I, job, 1233.0"));
     }
-    
+
     @Test
-    public void convertDataToExpense_validExpenseData_outputExpense() throws InvalidExpenseAmountException, 
+    public void convertDataToExpense_validExpenseData_outputExpense() throws InvalidExpenseAmountException,
             InvalidExpenseDataFormatException {
         Parser testParser = new Parser();
         Expense testExpense = testParser.convertDataToExpense("E, sfa, 12");
@@ -152,18 +152,18 @@ public class ParserTest {
     public void convertDataToExpense_invalidExpenseDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidExpenseDataFormatException.class,
-                ()-> testParser.convertDataToExpense("E, , 12"));
+                () -> testParser.convertDataToExpense("E, , 12"));
     }
 
     @Test
     public void convertDataToExpense_invalidExpenseDataWithInvalidAmount_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidExpenseAmountException.class,
-                ()-> testParser.convertDataToExpense("E, asd, 12a"));
+                () -> testParser.convertDataToExpense("E, asd, 12a"));
     }
 
     @Test
-    public void convertDataToIncome_validIncomeData_outputIncome() throws InvalidIncomeAmountException, 
+    public void convertDataToIncome_validIncomeData_outputIncome() throws InvalidIncomeAmountException,
             InvalidIncomeDataFormatException {
         Parser testParser = new Parser();
         Income testIncome = testParser.convertDataToIncome("I, sfa, 12");
@@ -175,27 +175,27 @@ public class ParserTest {
     public void convertDataToIncome_invalidIncomeDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidIncomeDataFormatException.class,
-                ()-> testParser.convertDataToIncome("I, , 12"));
+                () -> testParser.convertDataToIncome("I, , 12"));
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithInvalidAmount_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidIncomeAmountException.class,
-                ()-> testParser.convertDataToIncome("I, asd, 12a"));
+                () -> testParser.convertDataToIncome("I, asd, 12a"));
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithInvalidMarker_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidIncomeDataFormatException.class,
-                ()-> testParser.convertDataToIncome("E, asd, 12a"));
+                () -> testParser.convertDataToIncome("E, asd, 12a"));
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithInvalidSeparator_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidIncomeDataFormatException.class,
-                ()-> testParser.convertDataToIncome("I,asd, 12"));
+                () -> testParser.convertDataToIncome("I,asd, 12"));
     }
 }
