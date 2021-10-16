@@ -3,7 +3,6 @@ package seedu.duke.logic.commands.task;
 import org.junit.jupiter.api.Test;
 import seedu.duke.DukeException;
 import seedu.duke.logic.commands.Command;
-import seedu.duke.logic.commands.task.DoneTaskCommand;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.Task;
@@ -32,8 +31,7 @@ public class DoneTaskCommandTest {
             doneCommand.execute(ui, storage, taskList, lessonList);
             assertEquals(taskList.getNumberOfPendingTasks(), 1);
         } catch (DukeException | IOException e) {
-            // fail when the task list has any items
-            fail();
+            fail(); // fail when the task list has any items
         }
     }
 }

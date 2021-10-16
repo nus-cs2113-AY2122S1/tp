@@ -14,6 +14,10 @@ public class FullModuleList {
         this.fullModuleList = Arrays.asList(moduleArray.getModules()); // convert Module[] to ArrayList<Module>
     }
 
+    public List<Module> getFullModuleList() {
+        return fullModuleList;
+    }
+
     public FullModuleList() throws ModuleLoadException, FileNotFoundException {
         setFullModuleList(new JsonUtil());
     }
