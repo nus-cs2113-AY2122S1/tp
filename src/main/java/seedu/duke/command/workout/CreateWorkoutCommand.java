@@ -18,7 +18,7 @@ public class CreateWorkoutCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new workout.\n"
             + "Format: create [workout description]\n"
             + "Parameters:\n"
-            + "\tWorkout description - description or name of workout\n\n"
+            + "\tWorkout description - description or name of workout\n"
             + "Example: " + COMMAND_WORD + " abs";
     public static final String MESSAGE_SUCCESS = "New workout created: %1$s";
 

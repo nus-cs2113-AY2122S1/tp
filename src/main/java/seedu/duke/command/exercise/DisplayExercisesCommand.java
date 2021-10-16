@@ -20,8 +20,8 @@ public class DisplayExercisesCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all exercises in the particular workout.\n"
             + "Format: display [Workout index]\n"
             + "Parameters:\n"
-            + "Workout index - index of workout to display exercises\n\n"
-            + "\tExample: " + COMMAND_WORD + " 3";
+            + "\tWorkout index - index of workout to display exercises\n"
+            + "Example: " + COMMAND_WORD + " 3";
     public static final String MESSAGE_EMPTY_WORKOUT = "You have no exercises.";
 
     private final int workoutIndex;

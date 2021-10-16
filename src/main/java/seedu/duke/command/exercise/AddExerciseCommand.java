@@ -21,7 +21,7 @@ public class AddExerciseCommand extends Command {
             + "Format: add [exercise description], [sets and reps], [workout index]\n"
             + "Parameters:\n"
             + "\tSets and reps: \"5 10\" - 5 sets of 10 reps\n"
-            + "\tWorkout index: Index of workout to add exercise to\n\n"
+            + "\tWorkout index: Index of workout to add exercise to\n"
             + "Example: " + COMMAND_WORD + " Push-ups" + PARAMETER_SEPARATOR + "5 10" + PARAMETER_SEPARATOR + "1";
     public static final String MESSAGE_SUCCESS = "New exercise added: %1$s";
 

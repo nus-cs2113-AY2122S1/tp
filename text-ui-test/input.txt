@@ -2,23 +2,23 @@ invalid command
 help
 create
 help create
-create /w Legs
+create Legs
 list
 add
 help add
-add /w 1 /e Squats /s 3 /r 10
+add Squats, 3 10, 1
 done
 help done
-done /w 1 /e 1
+done 1, 1
 display
 help display
-display /w 1
+display 1
 remove
 help remove
-remove /w 1 /e 1
-display /w 1
+remove 1, 1
+display 1
 delete
 help delete
-delete /w 1
+delete 1
 list
 bye
