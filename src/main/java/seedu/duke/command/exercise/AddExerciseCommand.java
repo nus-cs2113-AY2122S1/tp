@@ -7,6 +7,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.exercises.Exercise;
 import seedu.duke.ui.Ui;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
@@ -56,19 +57,12 @@ public class AddExerciseCommand extends Command {
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
         if (toAdd.getReps() <= 0 || toAdd.getSets() <= 0) {
-            LOGGER.info("Add exercise failed - sets or reps <= 0");
+            LOGGER.log(Level.SEVERE, "Add exercise failed - sets or reps <= 0");
             throw new GetJackDException("Sets or reps must be more than 0.");
         }
-
-        try {
-            workouts.getWorkout(workoutIndex).addExercise(toAdd);
-            ui.showToUser(String.format(MESSAGE_SUCCESS, toAdd));
-
-            String jsonString = storage.convertToJson(workouts);
-            storage.saveData(jsonString);
-        } catch (IndexOutOfBoundsException e) {
-            LOGGER.info("Add exercise failed - Workout not found");
-            throw new GetJackDException(ERROR_MESSAGE_WORKOUT_NOT_FOUND);
-        }
+        workouts.getWorkout(workoutIndex).addExercise(toAdd);
+        ui.showToUser(String.format(MESSAGE_SUCCESS, toAdd));
+        String jsonString = storage.convertToJson(workouts);
+        storage.saveData(jsonString);
     }
 }

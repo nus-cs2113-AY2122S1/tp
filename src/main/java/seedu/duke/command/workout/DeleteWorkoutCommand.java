@@ -50,15 +50,9 @@ public class DeleteWorkoutCommand extends Command {
      */
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
-        try {
-            Workout toDelete = workouts.removeWorkout(workoutIndex);
-            ui.showToUser(String.format(MESSAGE_SUCCESS, toDelete));
-
-            String jsonString = storage.convertToJson(workouts);
-            storage.saveData(jsonString);
-        } catch (IndexOutOfBoundsException e) {
-            LOGGER.info("delete workout failed - workout not found");
-            throw new GetJackDException(ERROR_MESSAGE_WORKOUT_NOT_FOUND);
-        }
+        Workout toDelete = workouts.removeWorkout(workoutIndex);
+        ui.showToUser(String.format(MESSAGE_SUCCESS, toDelete));
+        String jsonString = storage.convertToJson(workouts);
+        storage.saveData(jsonString);
     }
 }
