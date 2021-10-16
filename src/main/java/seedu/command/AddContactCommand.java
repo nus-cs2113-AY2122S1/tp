@@ -1,6 +1,7 @@
 package seedu.command;
 
 import seedu.contact.Contact;
+import seedu.contact.DetailType;
 import seedu.ui.TextUi;
 
 public class AddContactCommand extends Command {
@@ -35,14 +36,13 @@ public class AddContactCommand extends Command {
         return github;
     }
 
-    public AddContactCommand(String name, String github, String linkedin, String telegram, String twitter,
-                             String email) {
-        this.name = name;
-        this.github = github;
-        this.linkedin = linkedin;
-        this.telegram = telegram;
-        this.twitter = twitter;
-        this.email = email;
+    public AddContactCommand(String[] details) {
+        this.name = details[DetailType.NAME.getIndex()];
+        this.github = details[DetailType.GITHUB.getIndex()];
+        this.linkedin = details[DetailType.LINKEDIN.getIndex()];
+        this.telegram = details[DetailType.TELEGRAM.getIndex()];
+        this.twitter = details[DetailType.TWITTER.getIndex()];
+        this.email = details[DetailType.EMAIL.getIndex()];
     }
 
     public void execute() {
