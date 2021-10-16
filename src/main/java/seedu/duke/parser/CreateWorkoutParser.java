@@ -14,14 +14,11 @@ public class CreateWorkoutParser extends Parser {
     }
 
     private Command prepareCreateWorkout(String commandArgs) {
-        if (commandArgs.contains(WORKOUT_KEYWORD)) {
-            String workoutName = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
-            if (workoutName.isEmpty()) {
-                return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
-            }
-            return new CreateWorkoutCommand(workoutName);
+        String workoutName = commandArgs.trim();
+        if (workoutName.length() == 0) {
+            return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
         }
-        return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
+        return new CreateWorkoutCommand(workoutName);
     }
 
     @Override
