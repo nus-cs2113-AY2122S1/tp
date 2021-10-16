@@ -12,11 +12,15 @@ import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import static seedu.duke.common.Messages.MESSAGE_INVALID_ADD_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_DATE;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
@@ -99,11 +103,12 @@ public class Parser {
      * @throws ArrayIndexOutOfBoundsException if amount input does not exist.
      */
     private Command prepareAddBudgetCommand(String commandParams) throws ArrayIndexOutOfBoundsException {
-        String[] split = commandParams.substring(2).trim().split("a/", 2);
+        String[] split = commandParams.substring(2).trim().split("a/|d/", 2);
+        assert split[0].equals("");
         double amount = Double.parseDouble(split[1].trim());
-        //int date = Integer.parseInt(split[2].trim());
+        int month = Integer.parseInt(split[2].trim());
 
-        return new AddBudgetCommand(amount);
+        return new AddBudgetCommand(amount, month);
     }
 
     /**
@@ -114,14 +119,21 @@ public class Parser {
      */
     private Command prepareAddExpenditureCommand(String commandParams) {
         try {
-            String[] split = commandParams.trim().split("e/|a/|d/", 3);
+            String[] split = commandParams.trim().split("e/|a/|d/", 4);
             assert split[0].equals("");
             String description = split[1].trim();
             double amount = Double.parseDouble(split[2].trim());
-            //LocalDate date = LocalDate.parse(split[3].trim());
-            return new AddExpenditureCommand(description, amount);
+            LocalDate date;
+            if (split[3].equals("")) {
+                date = LocalDate.now();
+            } else {
+                date = LocalDate.parse(split[3].trim());
+            }
+            return new AddExpenditureCommand(description, amount, date);
         } catch (NumberFormatException nfe) {
             return new InvalidCommand(String.format(MESSAGE_INVALID_AMOUNT, AddExpenditureCommand.MESSAGE_USAGE));
+        } catch (DateTimeParseException dtpe) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_DATE, AddExpenditureCommand.MESSAGE_USAGE));
         }
 
     }

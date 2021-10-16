@@ -5,6 +5,9 @@ import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.storage.ExpenditureStorage;
 
+
+import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 public class RecordList {
@@ -20,7 +23,7 @@ public class RecordList {
      */
     public RecordList() {
         numberOfRecords = 0;
-        budget = new Budget(0.00);
+        budget = new Budget(0.00, LocalDate.now().getMonthValue());
         hasBudget = false;
         expenditureRecords = new ArrayList<>();
     }
@@ -37,16 +40,17 @@ public class RecordList {
     /**
      * Adds an expenditure record into the RecordList.
      *
-     * @param description      description of the expenditure
-     * @param amount           amount spent
+     * @param description description of the expenditure
+     * @param amount amount spent
+     * @param date date on which the expenditure took place
      * @param isLoadingStorage indicate if this command is called during loading or runtime
      */
-    public void addExpenditure(String description, double amount, boolean isLoadingStorage) {
-        expenditureRecords.add(new Expenditure(description, amount));
+    public void addExpenditure(String description, double amount, LocalDate date, boolean isLoadingStorage) {
+        expenditureRecords.add(new Expenditure(description, amount, date));
         numberOfRecords += 1;
         if (!isLoadingStorage) {
             ExpenditureStorage storeCurrentExpenditure = new ExpenditureStorage();
-            storeCurrentExpenditure.saveNewlyAddedExpenditure(description, amount);
+            storeCurrentExpenditure.saveNewlyAddedExpenditure(description, amount, date);
         }
         assert getExpenditureListSize() == numberOfRecords;
     }

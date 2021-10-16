@@ -10,23 +10,27 @@ import java.time.LocalDate;
  */
 public class AddExpenditureCommand extends AddCommand {
 
-    public static final String MESSAGE_USAGE = "Adds an expenditure record.\n"
-            + "Parameters: e/EXPENDITURE_NAME a/COST [d/DATE_OF_EXPENDITURE]";
     public String description;
     public double spending;
     LocalDate date;
+
+    public static final String MESSAGE_USAGE = "Adds an expenditure record.\n"
+            + "Parameters: e/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE]\n"
+            + "Note: If DATE_OF_EXPENDITURE is not specified, the current system date will be the "
+            + "default value.";
 
     /**
      * Constructor for when the user inputs only two parameters, leaving the optional
      * date parameter empty. In that case, the date is set to "today" by default.
      *
      * @param description description of the expenditure, e.g. chicken rice
-     * @param amount      amount spent for expenditure
+     * @param amount amount spent for expenditure
+     * @param date date on which expenditure was made
      */
-    public AddExpenditureCommand(String description, double amount) {
+    public AddExpenditureCommand(String description, double amount, LocalDate date) {
         this.description = description;
         this.spending = amount;
-        //this.date = date;
+        this.date = date;
     }
 
     /**
@@ -37,8 +41,8 @@ public class AddExpenditureCommand extends AddCommand {
      */
     @Override
     public void execute(boolean isLoadingStorage) {
-        Expenditure newExpenditure = new Expenditure(description, spending);
-        recordList.addExpenditure(description, spending, isLoadingStorage);
+        Expenditure newExpenditure = new Expenditure(description, spending, date);
+        recordList.addExpenditure(description, spending, date, isLoadingStorage);
         TextUi.showExpenditureAddedMessage(newExpenditure, isLoadingStorage);
     }
 }
