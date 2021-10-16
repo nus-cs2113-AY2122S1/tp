@@ -17,6 +17,7 @@ public class AddExerciseParser extends Parser {
     /**
      * Gets arguments required for an exercise, such as workoutIndex, exerciseName, sets and reps.
      * commandArgs passed in as [exercise description], [sets and reps], [workout index or name]
+     *
      * @param commandArgs user input without the command word.
      * @return string array containing workoutIndex, exerciseName, sets and reps.
      * @throws GetJackDException if any of the above-mentioned arguments are empty.
@@ -27,7 +28,7 @@ public class AddExerciseParser extends Parser {
         }
 
         String[] arguments = commandArgs.split(PARAMETER_SEPARATOR);
-        if (arguments.length < 3) {
+        if ((arguments.length < 3 && Command.workoutMode == 0) || arguments.length < 2) {
             LOGGER.info("Missing exercise arguments");
             throw new GetJackDException("Error. Missing exercise parameters");
         }
@@ -36,9 +37,9 @@ public class AddExerciseParser extends Parser {
         String[] setsAndReps = arguments[1].split(" ");
         String sets = setsAndReps[0];
         String reps = setsAndReps[1];
-        String workoutIdentifier = arguments[2];
+        String workoutIdentifier = (Command.workoutMode == 0) ? arguments[2] : null;
 
-        String[] exerciseArgs = new String[] {exerciseDescription, sets, reps, workoutIdentifier};
+        String[] exerciseArgs = new String[]{exerciseDescription, sets, reps, workoutIdentifier};
         for (String s : exerciseArgs) {
             assert (!s.contains(PARAMETER_SEPARATOR));
         }
@@ -52,8 +53,8 @@ public class AddExerciseParser extends Parser {
             String exerciseName = exerciseArgs[0].trim();
             int sets = parseArgsAsIndex(exerciseArgs[1]);
             int reps = parseArgsAsIndex(exerciseArgs[2]);
-            int workoutIndex = parseArgsAsIndex(exerciseArgs[3]);
-
+            int workoutIndex = (Command.workoutMode == 0)
+                    ? parseArgsAsIndex(exerciseArgs[3]) : Command.workoutMode;
             return new AddExerciseCommand(workoutIndex, exerciseName, sets, reps);
         } catch (GetJackDException e) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + AddExerciseCommand.MESSAGE_USAGE);
