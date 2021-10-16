@@ -6,6 +6,7 @@ import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Stock;
 import parser.StockValidator;
+import storage.Storage;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class DeleteStock extends Command {
     private static Logger logger = Logger.getLogger("DeleteStock");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
         logger.log(Level.INFO, "Start deletion of stock");
 
         String[] requiredParameters = {CommandParameters.ID};
@@ -58,6 +59,7 @@ public class DeleteStock extends Command {
             }
         }
         ui.print("Medication deleted: Stock_Id=" + stockId);
+        storage.saveData(medicines);
         logger.log(Level.INFO, "Successful deletion of stock");
     }
 }

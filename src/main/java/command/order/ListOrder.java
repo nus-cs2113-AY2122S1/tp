@@ -4,6 +4,7 @@ import command.Command;
 import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Order;
+import storage.Storage;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class ListOrder extends Command {
     private static Logger logger = Logger.getLogger("ListOrder");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
         logger.log(Level.INFO, "Start listing of order");
 
         // For now no optional parameters only listorder

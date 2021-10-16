@@ -91,4 +91,11 @@ public class Stock extends Medicine {
     public void setMaxQuantity(int maxQuantity) {
         this.maxQuantity = maxQuantity;
     }
+
+    @Override
+    public String toFileFormat() {
+        String fileFormat = getStockID() + "|" + getMedicineName() + "|" + getPrice() + "|" + getQuantity() + "|"
+                + getExpiry() + "|" +  getDescription() + "|" + getMaxQuantity();
+        return fileFormat;
+    }
 }

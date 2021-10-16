@@ -92,4 +92,9 @@ public class Dispense extends Medicine {
         this.stockId = stockId;
     }
 
+    @Override
+    public String toFileFormat() {
+        return "";
+    }
+
 }

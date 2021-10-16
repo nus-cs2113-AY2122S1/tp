@@ -8,6 +8,7 @@ import inventory.Dispense;
 import inventory.Medicine;
 import parser.DateParser;
 import parser.DispenseValidator;
+import storage.Storage;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -26,7 +27,7 @@ public class ListDispense extends Command {
     private static Logger logger = Logger.getLogger("ListDispenseCommand");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
         logger.log(Level.INFO, "Start listing of dispense records");
         String[] requiredParameter = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,

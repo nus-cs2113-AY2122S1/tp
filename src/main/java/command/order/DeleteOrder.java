@@ -7,6 +7,7 @@ import inventory.Medicine;
 import inventory.Order;
 import parser.OrderValidator;
 import ui.Ui;
+import storage.Storage;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -20,7 +21,7 @@ public class DeleteOrder extends Command {
     private static Logger logger = Logger.getLogger("Delete Order");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
         logger.log(Level.INFO, "Start deletion of order");
 
         String[] requiredParameters = {CommandParameters.ORDER_ID};

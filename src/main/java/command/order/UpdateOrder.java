@@ -8,6 +8,7 @@ import inventory.Order;
 import parser.DateParser;
 import parser.OrderManager;
 import parser.OrderValidator;
+import storage.Storage;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -24,7 +25,7 @@ public class UpdateOrder extends Command {
     private static Logger logger = Logger.getLogger("UpdateOrder");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
         logger.log(Level.INFO, "Start of UpdateOrder command execution.");
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};

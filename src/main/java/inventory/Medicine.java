@@ -29,4 +29,6 @@ public abstract class Medicine {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    abstract public String toFileFormat();
 }

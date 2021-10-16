@@ -8,6 +8,7 @@ import inventory.Stock;
 import parser.DateParser;
 import parser.MedicineManager;
 import parser.StockValidator;
+import storage.Storage;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -25,7 +26,7 @@ public class AddStock extends Command {
     private static Logger logger = Logger.getLogger("AddCommand");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
         logger.log(Level.INFO, "Start addition of stock");
 
         boolean nameExist = false;
@@ -93,7 +94,7 @@ public class AddStock extends Command {
             ui.print("Medicine exists. Using existing description and maximum quantity.");
             addMedicine(ui, medicines, nameToAdd, existingDescription, price,
                     quantity, formatExpiry, existingMaxQuantity);
-
+            storage.saveData(medicines);
         } else {
             String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE,
                                            CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
@@ -120,6 +121,7 @@ public class AddStock extends Command {
             int quantity = Integer.parseInt(quantityToAdd);
             double price = Double.parseDouble(priceToAdd);
             addMedicine(ui, medicines, nameToAdd, descriptionToAdd, price, quantity, formatExpiry, maxQuantity);
+            storage.saveData(medicines);
         }
 
     }

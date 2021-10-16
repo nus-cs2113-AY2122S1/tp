@@ -8,6 +8,7 @@ import inventory.Stock;
 import parser.DateParser;
 import parser.MedicineManager;
 import parser.StockValidator;
+import storage.Storage;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -25,7 +26,7 @@ public class UpdateStock extends Command {
     private static Logger logger = Logger.getLogger("UpdateStock");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
         logger.log(Level.INFO, "Start of UpdateStock command execution.");
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.PRICE, CommandParameters.QUANTITY,
@@ -83,6 +84,7 @@ public class UpdateStock extends Command {
         setUpdatesByStockID(parameters, filteredStocks, stock);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
         ui.printStocks(filteredStocks, medicines);
+        storage.saveData(medicines);
         logger.log(Level.INFO, "End of UpdateStock command execution.");
     }
 

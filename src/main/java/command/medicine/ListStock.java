@@ -8,6 +8,7 @@ import inventory.Medicine;
 import inventory.Stock;
 import parser.DateParser;
 import parser.StockValidator;
+import storage.Storage;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -26,7 +27,7 @@ public class ListStock extends Command {
     private static Logger logger = Logger.getLogger("ListStock");
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines, Storage storage) {
         logger.log(Level.INFO, "Start listing of available stock");
 
         String[] requiredParameter = {};
@@ -107,6 +108,7 @@ public class ListStock extends Command {
             }
         }
         ui.printStocks(filteredStocks, medicines);
+        storage.saveData(medicines);
         logger.log(Level.INFO, "Successful listing of stock");
     }
 }
