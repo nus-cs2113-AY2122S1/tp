@@ -7,8 +7,12 @@ import seedu.duke.model.module.exceptions.ModuleIndexException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is used to store and manipulate the user's list of modules that they can modify using command line
+ * commands.
+ */
 public class ModuleList {
-    private List<Module> userModuleList; // a list of modules added by the user
+    private List<Module> userModuleList;
 
     public ModuleList() {
         userModuleList = new ArrayList<>();
