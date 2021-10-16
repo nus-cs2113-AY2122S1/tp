@@ -4,17 +4,29 @@ import seedu.traveller.TripsList;
 import seedu.traveller.Ui;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.exceptions.TripNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class DeleteCommand extends Command {
+    private static final Logger logger = Logger.getLogger(DeleteCommand.class.getName());
     private final String tripName;
 
     public DeleteCommand(String tripName) {
+        logger.setLevel(Level.INFO);
         this.tripName = tripName;
+        logger.log(Level.INFO, "Created a delete command: \n" + this);
+    }
+
+    @Override
+    public String toString() {
+        return "Delete command:"
+                + "\n\ttripName: " + tripName;
     }
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
-        int tripIndex = tripsList.getTripIndex(this.tripName);
+        int tripIndex = tripsList.getTripIndex(tripName);
+        assert tripIndex < tripsList.getSize() : "The trip index is out of bound.";
         if (tripIndex == -1) {
             throw new TripNotFoundException();
         }

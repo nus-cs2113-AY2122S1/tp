@@ -1,10 +1,19 @@
 package seedu.traveller;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 public class Ui {
+    private static final Logger logger = Logger.getLogger(Ui.class.getName());
     private final Scanner scanner = new Scanner(System.in);
+
+    public Ui() {
+        logger.setLevel(Level.INFO);
+        logger.log(Level.FINE, "Created a ui");
+    }
 
     public String readCommand() {
         return scanner.nextLine();
@@ -33,9 +42,14 @@ public class Ui {
     }
 
     public void printAllTrips(TripsList tripsList) {
-        System.out.println("\tHere are all your trips: ");
-        for (int i = 0; i < tripsList.getSize(); i++) {
-            printTrip(tripsList.getTrip(i));
+        if (tripsList.getSize() == 0) {
+            System.out.println("\tThere are no trips created yet.");
+        } else {
+            assert tripsList.getSize() > 0 : "There should be trips in the tripsList.";
+            System.out.println("\tHere are all your trips: ");
+            for (int i = 0; i < tripsList.getSize(); i++) {
+                printTrip(tripsList.getTrip(i));
+            }
         }
     }
 

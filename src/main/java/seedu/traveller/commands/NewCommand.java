@@ -10,17 +10,42 @@ import seedu.traveller.worldmap.MinCalcResult;
 import seedu.traveller.worldmap.WorldMap;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class NewCommand extends Command {
+    private static final Logger logger = Logger.getLogger(NewCommand.class.getName());
     private final String tripName;
     private final String startCountry;
     private final String endCountry;
 
     public NewCommand(String tripName, String startCountry, String endCountry) {
+        logger.setLevel(Level.INFO);
         this.tripName = tripName;
         this.startCountry = startCountry;
         this.endCountry = endCountry;
+        logger.log(Level.INFO, "Created a new command: \n" + this);
+    }
+
+    public String getTripName() {
+        return this.tripName;
+    }
+
+    public String getStartCountry() {
+        return this.startCountry;
+    }
+
+    public String getEndCountry() {
+        return this.endCountry;
+    }
+
+    @Override
+    public String toString() {
+        return "New command:"
+                + "\n\ttripName: " + tripName
+                + "\n\tstartCountry: " + startCountry
+                + "\n\tendCountry: " + endCountry;
     }
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {

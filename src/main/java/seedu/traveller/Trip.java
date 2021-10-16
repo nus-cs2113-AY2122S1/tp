@@ -3,9 +3,12 @@ package seedu.traveller;
 import seedu.traveller.worldmap.Country;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Trip {
+    private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final String tripName;
     private final String startCountryCode;
     private final String endCountryCode;
@@ -14,11 +17,13 @@ public class Trip {
 
     public Trip(String tripName, String startCountryCode, String endCountryCode,
                 List<Country> path, List<Double> distances) {
+        logger.setLevel(Level.INFO);
         this.tripName = tripName;
         this.startCountryCode = startCountryCode;
         this.endCountryCode = endCountryCode;
         this.path = path;
         this.distances = distances;
+        logger.log(Level.INFO, "Trip created with details: \n" + this);
     }
 
     @Override
@@ -26,7 +31,8 @@ public class Trip {
         return "\t\tTripName: " + getTripName()
                 + "\n\t\t\t Origin: " + getStartCountryCode()
                 + "\n\t\t\t Destination: " + getEndCountryCode()
-                + "\n\t\t\t Path: " + getPath();
+                + "\n\t\t\t Path: " + getPath()
+                + "\n\t\t\t Distances: " + getDistances();
     }
 
     public String getTripName() {
