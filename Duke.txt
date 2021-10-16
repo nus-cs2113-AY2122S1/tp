@@ -1,3 +1,1 @@
-add-dish|pizza|5.0|50.0
-add-dish|pizza|1341.0|100.0
-add-dish|asdasd|1212.0|50.0
+add-dish|Pizza|10.0|30.0

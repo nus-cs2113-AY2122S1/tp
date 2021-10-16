@@ -8,157 +8,201 @@ such as its employees, dishes and ingredients in storage via a **Command Line In
 * Quick start
 * Features
   * Adding an employee: `add-employee`
-  * Adding a dish: `add-dish`
-  * Adding an ingredient: `add-ingredient`
   * Removing an employee: `remove-employee`
-  * Removing a dish: `remove-dish`
-  * Removing an ingredient: `remove-employee`
   * Listing all employees: `list-employee`
+  * Adding a dish: `add-dish`
+  * Removing a dish: `remove-dish`
+  * Editing a dish's price: `edit-dish`
+  * Adding a discount to a dish: `discount-dish`
   * Listing all dishes: `list-menu`
+  * Adding an ingredient: `add-ingredient`
+  * Removing an ingredient: `remove-ingredient`
   * Listing all ingredients: `list-ingredient`
   * Exiting the program: `bye`
 * Command Summary
 
 ## Quick start
 1. Ensure you have **Java 11** or above installed on your computer.
-2. Download the latest RestaurantBuddy.jar from [here](https://github.com/jerrelllzw/ip/releases).
-3. Copy the file to the folder you want to use as the _home folder_ for Duke.
+2. Download the latest tp.jar from [here](https://github.com/AY2122S1-CS2113T-T12-4/tp/releases).
+3. Copy the file to the folder you want to use as the _home folder_ for Restaurant Buddy.
 4. Open your command prompt and navigate to your _home folder_ as chosen in step 3.
-5. Type `java -jar ip.jar` in the command prompt and press enter to run Duke.
-6. Type a command in Duke's command box and press enter to execute it.
+5. Type `java -jar tp.jar` in the command prompt and press enter to run Restaurant Buddy.
+6. Type a command in Restaurant Buddy's command box and press enter to execute it.
 7. Refer to the **Features** below for details of each command.
 
 ## Features
 
 **Notes about the command format:**
-* Words in UPPER_CASE are the parameters to be supplied by the user.
-  e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo read book`.
-* For commands that do not take in parameters, supplying a parameter will result in an error.
-  e.g. entering `list 3` will result in an error.
+* Words in UPPER_CASE are the parameters to be supplied by the user. 
+  e.g. in `add-employee|EMPLOYEE_NAME|PHONE_NUMBER`, `EMPLOYEE_NAME` and `PHONE_NUMBER` are 
+  parameters which can be used as `add-employee|John|81145812`.
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+### Adding an employee: `add-employee`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Adds an employee to the employee list.
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.
-
-Example of usage:
-
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
-
-### Adding a todo: `todo`
-
-Adds a todo to the task list.
-
-Format: `todo TASK_DESCRIPTION`
+Format: `add-employee|EMPLOYEE_NAME|PHONE_NUMBER`
 
 Example:
-`todo read book` Adds the task "read book" to the task list.
+`add-employee|John|81145812` Adds the employee named John with 81145812 as his phone number to the employee list.
 ```
-____________________________________________________________
- Got it. I've added this task:
-  [T][ ] read book
- Now you have 1 tasks in the list.
-____________________________________________________________
+---------------------------------------------
+I have added: 
+John 81145812
+You now have 1 employees.
+---------------------------------------------
 ```
 
-### Adding a deadline: `deadline`
+### Removing an employee: `remove-employee`
 
-Adds a task with a deadline to the task list.
+Removes an employee from the employee list.
 
-Format: `deadline TASK_DESCRIPTION /by DEADLINE`
+Format: `remove-employee|EMPLOYEE_INDEX`
 
 Example:
-`deadline finish essay /by Mon 9pm` Adds a task "finish essay" with the deadline "Mon 9pm" to the task list.
+`remove-employee|1` Removes the first employee from the employee list.
 ```
-____________________________________________________________
- Got it. I've added this task:
-  [D][ ] finish essay (by: Mon 9pm)
- Now you have 2 tasks in the list.
-____________________________________________________________
+---------------------------------------------
+I have deleted: 
+John 81145812
+---------------------------------------------
 ```
 
-### Adding an event: `event`
+### Listing all employees: `list-employee`
 
-Adds an event to the task list.
+Lists all employees in the employee list.
 
-Format: `event TASK_DESCRIPTION /at DATE`
+Format: `list-employee`
 
 Example:
-`event school dance /at Jan 28th 7-9pm` Adds an event "school dance" with the date "Jan 28th 7-9pm" to the task list.
+`list-employee` Lists all employees in the employee list.
 ```
-____________________________________________________________
- Got it. I've added this task:
-  [E][ ] school dance (at: Jan 28th 7-9pm)
- Now you have 3 tasks in the list.
-____________________________________________________________
+---------------------------------------------
+Here are the employees in your list:
+1. John - 81145812
+---------------------------------------------
 ```
 
-### Listing all tasks: `list`
+### Adding a dish: `add-dish`
 
-Shows a list of all tasks in the task list.
+Adds a dish to the menu.
 
-Format: `list`
+Format: `add-dish|DISH_NAME|PRICE`
 
 Example:
-`list`
+`add-dish|Pizza|5.80` Adds Pizza which costs $5.80 to the menu.
 ```
-____________________________________________________________
- Here are the tasks in your list:
- 1.[T][ ] read book
- 2.[D][ ] finish essay (by: Mon 9pm)
- 3.[E][ ] school dance (at: Jan 28th 7-9pm)
-____________________________________________________________
+---------------------------------------------
+ I have added the following dish to the menu:
+   1. Pizza - $5.8
+---------------------------------------------
 ```
 
-### Checking off a task: `done`
+### Removing a dish: `remove-dish`
 
-Marks a task as done.
+Removes a dish from the menu.
 
-Format: `done TASK_NUMBER`
+Format: `remove-dish|DISH_INDEX`
 
 Example:
-`done 2` Marks the second task "finish essay" in the task list as done.
+`remove-dish|1` Removes the first dish from the menu.
 ```
-____________________________________________________________
- Nice! I've marked this task as done:
-  [D][X] finish essay (by: Mon 9pm)
-____________________________________________________________
+---------------------------------------------
+ I have removed the following dish from the menu:
+   1. Pizza - $5.8
+---------------------------------------------
 ```
 
-### Finding a task by keyword: `find`
+### Changing a dish's price: `edit-dish`
 
-Finds tasks with a description that contain the keyword.
+Edits the price of a dish in the menu.
 
-Format: `find KEYWORD`
+Format: `edit-dish|DISH_INDEX|NEW_PRICE`
 
 Example:
-`find school` Finds tasks with a description that contain the keyword "school".
+`edit-dish|1|10` Increases the price of the first dish in the menu to $10.
 ```
-____________________________________________________________
- Here are the matching tasks in your list:
- 1.[E][ ] school dance (at: Jan 28th 7-9pm)
-____________________________________________________________
+---------------------------------------------
+ Got it! The updated price of the dish is as follows:
+   1. Pizza - $10.0
+---------------------------------------------
 ```
 
-### Deleting a task: `delete`
+### Adding a discount to a dish: `discount-dish`
 
-Deletes a task in the task list.
+Adds a discount to a dish in the menu.
 
-Format: `delete TASK_NUMBER`
+Format: `discount-dish|DISH_INDEX|DISCOUNT(%)`
 
 Example:
-`delete 1` Deletes the first task in the task list.
+`discount-dish|1|30` Adds a 30% discount to the first dish in the menu.
 ```
-____________________________________________________________
- Noted. I've removed this task:
-  [T][ ] read book
- Now you have 2 tasks in the list.
-____________________________________________________________
+---------------------------------------------
+ Got it! I have added the discount to the dish!
+ The discounted price is as follows:
+   1. Pizza - $10.0 ---> $7.0
+---------------------------------------------
+```
+
+### Listing all dishes: `list-menu`
+
+Lists all dishes in the menu.
+
+Format: `list-menu`
+
+Example:
+`list-menu` Lists all dishes in the menu.
+```
+---------------------------------------------
+ Here are the dishes in your menu:
+   1. Pizza - $5.8
+---------------------------------------------
+```
+
+### Adding an ingredient: `add-ingredient`
+
+Adds an ingredient to the ingredient list.
+
+Format: `add-ingredient|INGREDIENT_NAME|QUANTITY`
+
+Example:
+`add-ingredient|Carrot|50` Adds 50 carrots to the ingredient list.
+```
+---------------------------------------------
+Got it. This ingredient was added:
+Ingredient Name: Carrot
+Ingredient Quantity: 50
+---------------------------------------------
+```
+
+### Removing an ingredient: `remove-ingredient`
+
+Removes an ingredient from the ingredient list.
+
+Format: `remove-ingredient|INGREDIENT_INDEX`
+
+Example:
+`remove-ingredient|1` Removes the first ingredient from the ingredient list.
+```
+---------------------------------------------
+Got it. This ingredient was deleted:
+Carrot
+---------------------------------------------
+```
+
+### Listing all ingredients: `list-ingredient`
+
+Lists all ingredients in the ingredient list.
+
+Format: `list-ingredient`
+
+Example:
+`list-ingredient` Lists all ingredients in the ingredient list.
+```
+---------------------------------------------
+Here are the ingredients in your list:
+1. Carrot [50]
+---------------------------------------------
 ```
 
 ### Exiting the program: `bye`
@@ -167,29 +211,37 @@ Exits the program.
 
 Format: `bye`
 
-Example: `bye`
-
+Example:
+`bye` 
 ```
-____________________________________________________________
- Bye. Hope to see you again soon!
-____________________________________________________________
+---------------------------------------------
+ Thank you. Goodbye!
+---------------------------------------------
+---------------------------------------------
+ Storage saved successfully.
+ See you again!
+---------------------------------------------
 ```
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: {your answer here}
+**A**: Copy the home directory folder of your tp.jar over to the other computer and run it as usual.
 
 ## Command Summary
 
 | Command | Format |
 | ------------ | ------------- |
-| Todo | `todo TASK_DESCRIPTION` |
-| Deadline | `deadline TASK_DESCRIPTION /by DEADLINE` |
-| Event | `event TASK_DESCRIPTION /at DATE` |
-| List | `list` |
-| Done | `done TASK_NUMBER` |
-| Find | `find KEYWORD` |
-| Delete | `delete TASK_NUMBER` |
-| Bye | `bye` |
+| add-employee | `add-employee/EMPLOYEE_NAME/PHONE_NUMBER` |
+| remove-employee | `remove-employee/EMPLOYEE_INDEX` |
+| list-employee | `list-employee` |
+| add-dish | `add-dish/DISH_NAME/PRICE` |
+| remove-dish | `remove-dish/DISH_INDEX` |
+| edit-dish | `edit-dish/DISH_INDEX/NEW_PRICE` |
+| discount-dish | `discount-dish/DISH_INDEX/DISCOUNT(%)` |
+| list-menu | `list-menu` |
+| add-ingredient | `add-ingredient/INGREDIENT_NAME/QUANTITY` |
+| remove-ingredient | `remove-ingredient/INGREDIENT_INDEX` |
+| list-ingredient | `list-ingredient` |
+| bye | `bye` |

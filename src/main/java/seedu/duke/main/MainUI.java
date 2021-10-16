@@ -10,14 +10,14 @@ public class MainUI {
         printSingleLine();
         System.out.println(
                 " ___        _                          _     \n"
-                + "| _ \\___ __| |_ __ _ _  _ _ _ __ _ _ _| |_  \n"
-                + "|   / -_|_-<  _/ _` | || | '_/ _` | ' \\  _| \n"
-                + "|_|_\\___/__/\\__\\__,_|\\_,_|_| \\__,_|_||_\\__| \n"
-                + " ___         _    _                         \n"
-                + "| _ )_  _ __| |__| |_  _                    \n"
-                + "| _ \\ || / _` / _` | || |                   \n"
-                + "|___/\\_,_\\__,_\\__,_|\\_, |                   \n"
-                + "                    |__/                    \n");
+                        + "| _ \\___ __| |_ __ _ _  _ _ _ __ _ _ _| |_  \n"
+                        + "|   / -_|_-<  _/ _` | || | '_/ _` | ' \\  _| \n"
+                        + "|_|_\\___/__/\\__\\__,_|\\_,_|_| \\__,_|_||_\\__| \n"
+                        + " ___         _    _                         \n"
+                        + "| _ )_  _ __| |__| |_  _                    \n"
+                        + "| _ \\ || / _` / _` | || |                   \n"
+                        + "|___/\\_,_\\__,_\\__,_|\\_, |                   \n"
+                        + "                    |__/                    \n");
         System.out.println(" Hello! Welcome to Restaurant Buddy :D");
         System.out.println(" How may I help you today?");
         printSingleLine();
@@ -30,8 +30,10 @@ public class MainUI {
     }
 
     public static void printStorageSaved() {
+        printSingleLine();
         System.out.println(" Storage saved successfully.");
         System.out.println(" See you again!");
+        printSingleLine();
     }
 
     public static void printWrongCommandMessage() {

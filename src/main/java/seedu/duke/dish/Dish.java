@@ -1,4 +1,5 @@
 //@@author jerrelllzw
+
 package seedu.duke.dish;
 
 public class Dish {
@@ -30,7 +31,7 @@ public class Dish {
     }
 
     public double getDiscountedPrice() {
-        double discountMultiplier = getDiscount() / 100;
+        double discountMultiplier = 1 - getDiscount() / 100;
         double discountedPrice = getPrice() * discountMultiplier;
         return discountedPrice;
     }
