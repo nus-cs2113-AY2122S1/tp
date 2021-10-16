@@ -7,6 +7,9 @@ import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
 
+import static seedu.duke.commons.core.DayOfTheWeek.getCurrentDayOfWeek;
+import static seedu.duke.commons.core.DayOfTheWeek.getNextDayOfWeek;
+
 public class Ui {
     public static final String LINE =
             "    _______________________________________________________________________________"
@@ -154,6 +157,12 @@ public class Ui {
      * @param period the specified period
      */
     public void printTasksWithPeriod(TaskList taskList, String period) {
+        if (period.toLowerCase().equals("today")) {
+            period = getCurrentDayOfWeek();
+        }
+        if (period.toLowerCase().equals("tomorrow")) {
+            period = getNextDayOfWeek();
+        }
         TaskList filteredTaskList = taskList.filterTasksByPeriod(period);
 
         System.out.print(LINE);
@@ -238,6 +247,12 @@ public class Ui {
      * @param period the specified period
      */
     public void printLessonsWithPeriod(LessonList lessonList, String period) {
+        if (period.toLowerCase().equals("today")) {
+            period = getCurrentDayOfWeek();
+        }
+        if (period.toLowerCase().equals("tomorrow")) {
+            period = getNextDayOfWeek();
+        }
         LessonList filteredLessonList = lessonList.filterLessonsByPeriod(period);
 
         System.out.print(LINE);

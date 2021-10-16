@@ -31,8 +31,8 @@ public class ListCommandParser {
     }
 
     private static Command parseListLessonCommand(String userResponse) throws ParseException {
-        // TODO: Validate today and tomorrow
-        if (!userResponse.isBlank() && !DayOfTheWeek.is(userResponse)) {
+        if (!userResponse.isBlank() && !DayOfTheWeek.is(userResponse)
+                && !DayOfTheWeek.isTodayOrTomorrow(userResponse)) {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 
@@ -40,8 +40,8 @@ public class ListCommandParser {
     }
 
     private static Command parseListTaskCommand(String userResponse) throws ParseException {
-        // TODO: Validate today and tomorrow
-        if (!userResponse.isBlank() && !DayOfTheWeek.is(userResponse)) {
+        if (!userResponse.isBlank() && !DayOfTheWeek.is(userResponse)
+                && !DayOfTheWeek.isTodayOrTomorrow(userResponse)) {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 
