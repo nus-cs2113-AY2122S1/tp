@@ -23,19 +23,29 @@ public enum DayOfTheWeek {
     /**
      * Checks if period given is "today" or "tomorrow".
      *
-     * @param period the given period in lower case
+     * @param period the given period
      * @return true if period is "today" or "tomorrow", false otherwise
      */
     public static boolean isTodayOrTomorrow(String period) {
-        return period.equals("today") | period.equals("tomorrow");
+        return period.equalsIgnoreCase("today") | period.equalsIgnoreCase("tomorrow");
     }
 
+    /**
+     * Returns the DayOfTheWeek for today.
+     *
+     * @return DayOfTheWeek for today in lowercase
+     */
     public static String getCurrentDayOfWeek() {
         LocalDate currentDate = LocalDate.now();
         String currentDayOfWeek = currentDate.getDayOfWeek().toString();
         return currentDayOfWeek.substring(0,3).toLowerCase();
     }
 
+    /**
+     * Returns the DayOfTheWeek for tomorrow.
+     *
+     * @return DayOfTheWeek for tomorrow in lowercase
+     */
     public static String getNextDayOfWeek() {
         LocalDate currentDate = LocalDate.now().plusDays(1);
         String currentDayOfWeek = currentDate.getDayOfWeek().toString();

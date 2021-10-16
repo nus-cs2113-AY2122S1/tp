@@ -17,7 +17,9 @@ public class Ui {
 
     public static final String PADDING = "     ";
 
-    /** Temporary logo. */
+    /**
+     * Temporary logo.
+     */
     public static final String LOGO = PADDING
             + "  _   _       _   _   ____           ____     _   _   ____     ____   __   __ "
             + System.lineSeparator() + PADDING
@@ -45,14 +47,18 @@ public class Ui {
         return sc.nextLine().strip();
     }
 
-    /** Greets user by displaying the logo. */
+    /**
+     * Greets user by displaying the logo.
+     */
     public void printGreeting() {
         System.out.print(LINE);
         System.out.print(LOGO);
         System.out.println(LINE);
     }
 
-    /** Displays goodbye message to user on exit. */
+    /**
+     * Displays goodbye message to user on exit.
+     */
     public void printExit() {
         System.out.print(LINE);
         System.out.println(PADDING + "Bye!");
@@ -157,10 +163,10 @@ public class Ui {
      * @param period the specified period
      */
     public void printTasksWithPeriod(TaskList taskList, String period) {
-        if (period.toLowerCase().equals("today")) {
+        if (period.equalsIgnoreCase("today")) {
             period = getCurrentDayOfWeek();
         }
-        if (period.toLowerCase().equals("tomorrow")) {
+        if (period.equalsIgnoreCase("tomorrow")) {
             period = getNextDayOfWeek();
         }
         TaskList filteredTaskList = taskList.filterTasksByPeriod(period);
@@ -247,10 +253,10 @@ public class Ui {
      * @param period the specified period
      */
     public void printLessonsWithPeriod(LessonList lessonList, String period) {
-        if (period.toLowerCase().equals("today")) {
+        if (period.equalsIgnoreCase("today")) {
             period = getCurrentDayOfWeek();
         }
-        if (period.toLowerCase().equals("tomorrow")) {
+        if (period.equalsIgnoreCase("tomorrow")) {
             period = getNextDayOfWeek();
         }
         LessonList filteredLessonList = lessonList.filterLessonsByPeriod(period);
