@@ -31,7 +31,8 @@ public class Trip {
         return "\t\tTripName: " + getTripName()
                 + "\n\t\t\t Origin: " + getStartCountryCode()
                 + "\n\t\t\t Destination: " + getEndCountryCode()
-                + "\n\t\t\t Path: " + getPath();
+                + "\n\t\t\t Path: " + getPath()
+                + "\n\t\t\t Distances: " + getDistances();
     }
 
     public String getTripName() {

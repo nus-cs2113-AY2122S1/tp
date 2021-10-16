@@ -41,13 +41,16 @@ public class Logic {
 
     public MinCalcResult getToGoal(Country sourceCountry, Country targetCountry) {
         List<Country> path = new ArrayList<>();
+        List<Double> accumDist = new ArrayList<>();
         List<Double> dist = new ArrayList<>();
+        double curr;
+        double sum = 0.0;
 
         for (Country country = targetCountry; country != null; country = country.getPrevCountry()) {
             if (!path.contains(country)) {
                 path.add(country);
                 if (country.getPrevCountry() != null) {
-                    dist.add(adjMatrix[country.getPrevCountry().key][country.key]);
+                    accumDist.add(adjMatrix[country.getPrevCountry().key][country.key]);
                 }
                 if (country == sourceCountry) {
                     break;
@@ -56,7 +59,15 @@ public class Logic {
         }
 
         Collections.reverse(path);
-        Collections.reverse(dist);
+        Collections.reverse(accumDist);
+
+        for (double d : accumDist) {
+            curr = d - sum;
+            if (curr - 0.0 > 0.000001) {
+                dist.add(curr);
+            }
+            sum += curr;
+        }
 
         MinCalcResult result = new MinCalcResult(sourceCountry, targetCountry, path, dist);
         return result;
