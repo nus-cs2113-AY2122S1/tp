@@ -17,8 +17,8 @@
 - Libraries used: [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 ## Design & implementation
+### Data Component
 
-###Data Component
 Location : `seedu.duke.data`
 
 ![img.png](umldg/DataClassDiagram.png)
@@ -39,7 +39,8 @@ exercises (in the form of an `Exercise` object). Lastly, `Exercise` stores the e
 Storage.models: `addToWorkoutListModel(WorkoutModel workout)` and `addToWorkoutModel(ExerciseModel exercise)` from the `storage.models` component
 are called in the methods of `Workout` and `Exercise` respectively. This causes the dependency on `WorkoutModel` and `WorkoutListModel` as seen in the UML Diagram.
 
-###Storage Component
+### Storage Component
+
 Location: `seedu.duke.storage`
 
 ![img.png](umldg/StorageDiagram.png)
