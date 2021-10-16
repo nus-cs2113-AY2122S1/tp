@@ -9,8 +9,8 @@ import seedu.ui.ExceptionTextUi;
 public class DeleteContactCommand extends Command {
     private final int contactIndex;
 
-    public DeleteContactCommand(int deletedIndex) {
-        this.contactIndex = deletedIndex;
+    public DeleteContactCommand(int contactIndex) {
+        this.contactIndex = contactIndex;
     }
 
     public int getDeletedIndex() {
@@ -24,6 +24,7 @@ public class DeleteContactCommand extends Command {
             this.contactList.deleteContact(contactIndex);
             TextUi.deleteContactMessage(deletedContact.getName(), contactList.getListSize());
         } else {
+            assert !userDeleteConfirmation.equalsIgnoreCase("y");
             TextUi.cancelDeleteContactMessage();
         }
     }
@@ -32,6 +33,7 @@ public class DeleteContactCommand extends Command {
         try {
             // throws IndexOutOfBoundsException if index is outside of the range
             Contact deletedContact = IndexParser.getContactFromIndex(contactIndex, contactList);
+            assert contactIndex >= 0 && contactIndex < contactList.getListSize();
             deleteOnConfirmation(deletedContact);
         } catch (IndexOutOfBoundsException e) {
             ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());

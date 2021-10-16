@@ -1,7 +1,13 @@
 package seedu.parser;
 
 import seedu.exception.ForbiddenDetailException;
+import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
+import seedu.exception.InvalidGithubUsernameException;
+import seedu.exception.InvalidLinkedinUsernameException;
+import seedu.exception.InvalidNameException;
+import seedu.exception.InvalidTelegramUsernameException;
+import seedu.exception.InvalidTwitterUsernameException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 
@@ -9,7 +15,9 @@ public class EditContactParser extends ContactParser {
     public static final String BUFFER = " ";
 
     public String[] parseContactDetails(String userInput)
-            throws InvalidFlagException, MissingDetailException, MissingArgException, ForbiddenDetailException {
+            throws InvalidFlagException, MissingDetailException, MissingArgException, ForbiddenDetailException,
+            InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
+            InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException {
         String[] inputDetails = userInput.split(" ", NUMBER_OF_EDIT_ARGS);
         if (inputDetails.length < NUMBER_OF_EDIT_ARGS) {
             //if arguments are missing e.g. edit 2

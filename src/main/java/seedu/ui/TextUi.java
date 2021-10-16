@@ -86,7 +86,7 @@ public abstract class TextUi {
     }
 
     public static void createNewContactFileMessage(String contactFilePath) {
-        String message = "As ConTech is unable to find your saved data, \n" + " it has created a new one for you at: \n"
+        String message = "As ConTech is unable to find your saved data,\n" + " it has created a new one for you at:\n"
                 + contactFilePath;
         printBottomLineMessage(message);
     }
@@ -99,7 +99,7 @@ public abstract class TextUi {
     }
 
     public static void addContactMessage(Contact addedContact, int listSize) {
-        String message = "ConTech has added the specified contact: \n"
+        String message = "ConTech has added the specified contact:\n"
                 + "Name:     " + addedContact.getName()
                 + formatContactFields(addedContact)
                 + "\n\nYou now have " + listSize + " contact(s).";
@@ -107,7 +107,7 @@ public abstract class TextUi {
     }
 
     public static void editContactMessage(Contact editedContact) {
-        String message = "ConTech has edited the specified contact: \n"
+        String message = "ConTech has edited the specified contact:\n"
                 + "Name:     " + editedContact.getName()
                 + formatContactFields(editedContact);
         printDoubleLineMessage(message);
@@ -157,4 +157,29 @@ public abstract class TextUi {
         String message = "ConTech will now shutdown.\n" + "We hope you have enjoyed using it.";
         printDoubleLineMessage(message);
     }
+
+    public static void helpMessage() {
+        String message = "add: ConTech adds the specified contact with provided parameters.\n"
+                + " Parameters: -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER\n"
+                + " Note: Parameters need not be in order and are optional except for NAME.\n"
+                + " Example: add -n John Doe -g johndoecoder -e john@email.com -te johndoe\n\n"
+                + "list: Displays the name of all saved contacts.\n"
+                + " Example: list\n\n"
+                + "edit: Edit any parameter in an existing contact.\n"
+                + " Parameters: INDEX -n NAME -g GITHUB -e EMAIL -te TELEGRAM -l LINKEDIN -tw TWITTER\n"
+                + " Note: Parameters need not be in order and are optional except for INDEX.\n"
+                + " Example: edit 1 -e john.doe@email.com\n\n"
+                + "view: Displays all details for index specified contact.\n"
+                + " Parameter: INDEX\n"
+                + " Note: Index starts from 0.\n"
+                + " Example: view 2\n\n"
+                + "rm: Deletes the index specified contact.\n"
+                + " Parameter: INDEX\n"
+                + " Note: Index starts from 0.\n"
+                + " Example: rm 0\n\n"
+                + "help: Displays application usage instructions.\n"
+                + " Example: help";
+        printDoubleLineMessage(message);
+    }
+
 }

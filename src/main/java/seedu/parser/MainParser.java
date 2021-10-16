@@ -4,6 +4,7 @@ import seedu.command.AddContactCommand;
 import seedu.command.EditContactCommand;
 import seedu.command.DeleteContactCommand;
 import seedu.command.Command;
+import seedu.command.HelpCommand;
 import seedu.command.ViewContactCommand;
 import seedu.command.FailedCommand;
 import seedu.command.ExitCommand;
@@ -11,7 +12,13 @@ import seedu.command.ListContactsCommand;
 
 import seedu.contact.DetailType;
 import seedu.exception.ForbiddenDetailException;
+import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
+import seedu.exception.InvalidGithubUsernameException;
+import seedu.exception.InvalidLinkedinUsernameException;
+import seedu.exception.InvalidNameException;
+import seedu.exception.InvalidTelegramUsernameException;
+import seedu.exception.InvalidTwitterUsernameException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 import seedu.exception.MissingNameException;
@@ -25,6 +32,7 @@ public class MainParser {
     private static final String VIEW_CONTACT_COMD = "view";
     private static final String EXIT_COMD = "exit";
     private static final String LIST_COMD = "list";
+    private static final String HELP_COMD = "help";
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
@@ -55,6 +63,9 @@ public class MainParser {
             break;
         case LIST_COMD:
             command = new ListContactsCommand();
+            break;
+        case HELP_COMD:
+            command = new HelpCommand();
             break;
         default:
             command = new FailedCommand(FailedCommandType.GENERAL);
@@ -93,6 +104,18 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         } catch (ForbiddenDetailException e) {
             return new FailedCommand(FailedCommandType.FORBIDDEN_DETAIL);
+        } catch (InvalidNameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_NAME);
+        } catch (InvalidGithubUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_GITHUB_USERNAME);
+        } catch (InvalidEmailException e) {
+            return new FailedCommand(FailedCommandType.INVALID_MAIL);
+        } catch (InvalidTelegramUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TELEGRAM);
+        } catch (InvalidTwitterUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TWITTER);
+        } catch (InvalidLinkedinUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_LINKEDIN);
         }
     }
 
@@ -113,6 +136,18 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
         } catch (ForbiddenDetailException e) {
             return new FailedCommand(FailedCommandType.FORBIDDEN_DETAIL);
+        } catch (InvalidNameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_NAME);
+        } catch (InvalidGithubUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_GITHUB_USERNAME);
+        } catch (InvalidEmailException e) {
+            return new FailedCommand(FailedCommandType.INVALID_MAIL);
+        } catch (InvalidTelegramUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TELEGRAM);
+        } catch (InvalidTwitterUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_TWITTER);
+        } catch (InvalidLinkedinUsernameException e) {
+            return new FailedCommand(FailedCommandType.INVALID_LINKEDIN);
         }
     }
 
