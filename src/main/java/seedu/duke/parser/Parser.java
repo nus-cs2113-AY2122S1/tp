@@ -13,11 +13,9 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  */
 public abstract class Parser {
     static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
-    static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n";
+    static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n\n";
     public static String WORKOUT_KEYWORD = "/w ";
     public static String EXERCISE_KEYWORD = "/e ";
-    public static String SETS_KEYWORD = "/s ";
-    public static String REPS_KEYWORD = "/r ";
     public static final String PARAMETER_SEPARATOR = ", ";
     protected String userInputString;
 
@@ -45,6 +43,27 @@ public abstract class Parser {
         String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
         String commandArgs = commandTypeAndParams[1].trim();
         return commandArgs;
+    }
+
+
+    static int parseWorkoutIndex(String commandArgs) throws GetJackDException {
+        String arg = commandArgs.trim();
+        int workoutIndex = parseArgsAsIndex(arg);
+        return workoutIndex;
+    }
+
+    /**
+     * For parsing workout and exercise index for "done" and "remove" commands.
+     * @param commandArgs command arguments from user, in the format "workoutIndex, exerciseIndex"
+     * @return int[2] the indices of workout and exercise
+     * @throws GetJackDException when workout or exercise indices are not valid
+     */
+    static int[] parseWorkoutAndExerciseIndex(String commandArgs) throws GetJackDException {
+        String[] args = commandArgs.split(PARAMETER_SEPARATOR);
+        int exerciseIndex = parseArgsAsIndex(args[0]);
+        int workoutIndex = parseArgsAsIndex(args[1]);
+        int[] indices = {workoutIndex, exerciseIndex};
+        return indices;
     }
 
     /**

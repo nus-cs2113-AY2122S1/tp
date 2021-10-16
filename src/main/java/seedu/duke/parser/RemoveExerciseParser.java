@@ -16,9 +16,9 @@ public class RemoveExerciseParser extends Parser {
 
     private Command prepareRemoveExercise(String commandArgs) {
         try {
-            String[] indices = getWorkoutAndExerciseIndices(commandArgs);
-            int workoutIndex = parseArgsAsIndex(indices[0]);
-            int exerciseIndex = parseArgsAsIndex(indices[1]);
+            int [] indices = parseWorkoutAndExerciseIndex(commandArgs);
+            int exerciseIndex =indices[0];
+            int workoutIndex = indices[1];
 
             return new RemoveExerciseCommand(workoutIndex, exerciseIndex);
         } catch (GetJackDException e) {

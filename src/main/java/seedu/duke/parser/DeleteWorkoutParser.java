@@ -17,9 +17,7 @@ public class DeleteWorkoutParser extends Parser {
 
     private Command prepareDeleteWorkout(String commandArgs) {
         try {
-            String[] indices = getWorkoutAndExerciseIndices(commandArgs);
-            int workoutIndex = parseArgsAsIndex(indices[0]);
-
+            int workoutIndex = parseWorkoutIndex(commandArgs);
             return new DeleteWorkoutCommand(workoutIndex);
         } catch (GetJackDException e) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + DeleteWorkoutCommand.MESSAGE_USAGE);

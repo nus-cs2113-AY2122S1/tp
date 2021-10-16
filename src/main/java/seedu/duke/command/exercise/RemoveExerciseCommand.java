@@ -19,8 +19,11 @@ import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 public class RemoveExerciseCommand extends Command {
     public static final String COMMAND_WORD = "remove";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the exercise from the workout.\n"
-            + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_INDEX\n"
-            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1 " + EXERCISE_KEYWORD + "3";
+            + "Format: done [Exercise index], [Workout index]\n"
+            + "Parameters:\n"
+            + "\tExercise index - Index of exercise to mark done\n"
+            + "\tWorkout index - Index of workout containing exercise to mark done\n\n"
+            + "Example: " + COMMAND_WORD + " 1, 2  - remove exercise 1 from workout 2";
     public static final String MESSAGE_SUCCESS = "Removed exercise: %1$s";
     private static final Logger LOGGER = Logger.getLogger(RemoveExerciseCommand.class.getName());
 
