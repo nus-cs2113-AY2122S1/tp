@@ -9,11 +9,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class AddTripDayCommand extends Command {
+public class AddDayCommand extends Command {
     private static final Logger logger = Logger.getLogger(NewCommand.class.getName());
     private final String tripName;
 
-    public AddTripDayCommand(String tripName) {
+    public AddDayCommand(String tripName) {
         logger.setLevel(Level.INFO);
         this.tripName = tripName;
         logger.log(Level.INFO, "Created an addTripDay command: \n" + this);

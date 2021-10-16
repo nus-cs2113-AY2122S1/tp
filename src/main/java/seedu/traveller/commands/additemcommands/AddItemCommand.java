@@ -53,6 +53,10 @@ public abstract class AddItemCommand extends Command {
         return item;
     }
 
+    /**
+     * Used to pretty print an <code>ItemCommand</code> to the logger.
+     * @return <code>String</code> representing the contents of an <code>ItemCommand</code>.
+     */
     @Override
     public String toString() {
         return "AddItem command:"
@@ -63,6 +67,14 @@ public abstract class AddItemCommand extends Command {
                 + "\n\tdetails: " + getDetails();
     }
 
+    /**
+     * Performs the action of adding an <code>Item</code> to a <code>Day</code>
+     * in a <code>Trip</code> of the <code>TripsList</code>.
+     * @param tripsList The <code>TripsList</code> that the command will be executed on.
+     * @param ui The <code>Ui</code> that will be used to print out the outcome of the execution.
+     * @throws TravellerException thrown if the <code>Item</code> cannot be added to the
+     * <code>ItemsList</code> of a <code>Day</code>.
+     */
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
         Trip trip = tripsList.getTrip(getTripName());
         Day day = trip.getDay(getDayIndex());

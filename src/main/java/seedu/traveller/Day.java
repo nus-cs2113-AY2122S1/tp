@@ -1,7 +1,7 @@
 package seedu.traveller;
 
-
 import seedu.traveller.items.Item;
+
 
 public class Day {
     protected ItemsList itemsList;

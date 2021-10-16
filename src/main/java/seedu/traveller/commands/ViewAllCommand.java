@@ -15,6 +15,11 @@ public class ViewAllCommand extends Command {
         logger.log(Level.INFO, "Created a viewall command");
     }
 
+    /**
+     * Performs the action of printing all trips in the <code>TripsList</code> to the console.
+     * @param tripsList The <code>TripsList</code> that the command will be executed on.
+     * @param ui The <code>Ui</code> that will be used to print out the outcome of the execution.
+     */
     public void execute(TripsList tripsList, Ui ui) {
         ui.printAllTrips(tripsList);
     }

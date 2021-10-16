@@ -7,6 +7,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+/**
+ * Represents a list of items that will be done in a particular day of a trip.
+ * Each <code>Day</code> will have 1 <code>ItemsList</code>.
+ */
 public class ItemsList {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final ArrayList<Item> items;
@@ -18,6 +22,7 @@ public class ItemsList {
     }
 
     public void addItem(Item item) {
+        logger.log(Level.INFO, "Added an item to itemsList");
         items.add(item);
     }
 
@@ -26,6 +31,7 @@ public class ItemsList {
     }
 
     public void deleteItem(int i) {
+        logger.log(Level.INFO, "Deleted an item of index " + i + " from itemsList");
         items.remove(i);
     }
 
@@ -33,6 +39,10 @@ public class ItemsList {
         return items.size();
     }
 
+    /**
+     * Used by the <code>Ui</code> to print out an <code>ItemsList</code>.
+     * @return <code>String</code> of the <code>ItemsList</code> and its <code>Item</code>s' contents.
+     */
     @Override
     public String toString() {
         StringBuilder itemsListString = new StringBuilder();

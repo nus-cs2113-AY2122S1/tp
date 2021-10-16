@@ -14,6 +14,11 @@ public class ExitCommand extends Command {
         logger.log(Level.INFO, "Created an exit command");
     }
 
+    /**
+     * Performs the action of exiting <code>Traveller</code>.
+     * @param tripsList The <code>TripsList</code> that the command will be executed on.
+     * @param ui The <code>Ui</code> that will be used to print out the outcome of the execution.
+     */
     public void execute(TripsList tripsList, Ui ui) {
         setExit();
         ui.printExit();
