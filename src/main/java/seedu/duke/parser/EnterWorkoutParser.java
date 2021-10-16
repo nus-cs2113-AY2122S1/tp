@@ -28,8 +28,7 @@ public class EnterWorkoutParser extends Parser {
      */
     private Command prepareEnterWorkout(String commandArgs) {
         try {
-            String[] indices = getWorkoutAndExerciseIndices(commandArgs);
-            int workoutIndex = parseArgsAsIndex(indices[0]);
+            int workoutIndex = parseWorkoutIndex(commandArgs);
             return new EnterWorkoutCommand(workoutIndex);
         } catch (GetJackDException e) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND
