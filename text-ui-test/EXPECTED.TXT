@@ -23,6 +23,7 @@ To find out more information about the command, such as input format and paramet
 "delete" : Deletes a workout
 "list" : Lists all your workouts
 "display" : Shows all the exercises in a specified workout
+"search" : Displays workouts or exercises that contain the specified keyword
 "bye" : Ends the program
 ________________________________________________________
 ________________________________________________________
@@ -35,14 +36,14 @@ Parameters:
 Example: create abs
 ________________________________________________________
 ________________________________________________________
-	create: Creates a new workout.
-	Format: create [workout description]
-	Parameters:
-		Workout description - description or name of workout
-	Example: create abs
+create: Creates a new workout.
+Format: create [workout description]
+Parameters:
+	Workout description - description or name of workout
+Example: create abs
 ________________________________________________________
 ________________________________________________________
-	New workout created: Legs
+New workout created: Legs
 ________________________________________________________
 ________________________________________________________
 Workout list:
@@ -59,15 +60,15 @@ Parameters:
 Example: add Push-ups, 5 10, 1
 ________________________________________________________
 ________________________________________________________
-	add: Adds an exercise to a workout.
-	Format: add [exercise description], [sets and reps], [workout index]
-	Parameters:
-		Sets and reps: "5 10" - 5 sets of 10 reps
-		Workout index: Index of workout to add exercise to
-	Example: add Push-ups, 5 10, 1
+add: Adds an exercise to a workout.
+Format: add [exercise description], [sets and reps], [workout index]
+Parameters:
+	Sets and reps: "5 10" - 5 sets of 10 reps
+	Workout index: Index of workout to add exercise to
+Example: add Push-ups, 5 10, 1
 ________________________________________________________
 ________________________________________________________
-	New exercise added: [ ] Squats | 3 sets of 10 reps
+New exercise added: [ ] Squats | 3 sets of 10 reps
 ________________________________________________________
 ________________________________________________________
 Invalid command format
@@ -80,15 +81,15 @@ Parameters:
 Example: done 1, 2  - Mark exercise 1 from workout 2 as done
 ________________________________________________________
 ________________________________________________________
-	done: Marks the exercise in the workout workout as complete.
-	Format: done [Exercise index], [Workout index]
-	Parameters:
-		Exercise index - Index of exercise to mark done
-		Workout index - Index of workout containing exercise to mark done
-	Example: done 1, 2  - Mark exercise 1 from workout 2 as done
+done: Marks the exercise in the workout workout as complete.
+Format: done [Exercise index], [Workout index]
+Parameters:
+	Exercise index - Index of exercise to mark done
+	Workout index - Index of workout containing exercise to mark done
+Example: done 1, 2  - Mark exercise 1 from workout 2 as done
 ________________________________________________________
 ________________________________________________________
-	Completed: [X] Squats | 3 sets of 10 reps
+Completed: [X] Squats | 3 sets of 10 reps
 ________________________________________________________
 ________________________________________________________
 Invalid command format
@@ -100,14 +101,13 @@ Parameters:
 Example: display 3
 ________________________________________________________
 ________________________________________________________
-	display: Displays all exercises in the particular workout.
-	Format: display [Workout index]
-	Parameters:
-		Workout index - index of workout to display exercises
-	Example: display 3
+display: Displays all exercises in the particular workout.
+Format: display [Workout index]
+Parameters:
+	Workout index - index of workout to display exercises
+Example: display 3
 ________________________________________________________
-________________________________________________________
-Exercises in mentioned workout:
+Exercises in Legs
 1. [X] Squats | 3 sets of 10 reps
 ________________________________________________________
 ________________________________________________________
@@ -121,18 +121,18 @@ Parameters:
 Example: remove 1, 2  - remove exercise 1 from workout 2
 ________________________________________________________
 ________________________________________________________
-	remove: Removes the exercise from the workout.
-	Format: done [Exercise index], [Workout index]
-	Parameters:
-		Exercise index - Index of exercise to mark done
-		Workout index - Index of workout containing exercise to mark done
-	Example: remove 1, 2  - remove exercise 1 from workout 2
+remove: Removes the exercise from the workout.
+Format: done [Exercise index], [Workout index]
+Parameters:
+	Exercise index - Index of exercise to mark done
+	Workout index - Index of workout containing exercise to mark done
+Example: remove 1, 2  - remove exercise 1 from workout 2
 ________________________________________________________
 ________________________________________________________
-	Removed exercise: [X] Squats | 3 sets of 10 reps
+Removed exercise: [X] Squats | 3 sets of 10 reps
 ________________________________________________________
 ________________________________________________________
-	You have no exercises.
+You have no exercises.
 ________________________________________________________
 ________________________________________________________
 Invalid command format
@@ -144,17 +144,17 @@ Parameters:
 Example: delete /w 1
 ________________________________________________________
 ________________________________________________________
-	delete: Deletes the workout corresponding to the workout index.
-	Format: delete [Workout index]
-	Parameters:
-		Workout index - Index of workout to delete
-	Example: delete /w 1
+delete: Deletes the workout corresponding to the workout index.
+Format: delete [Workout index]
+Parameters:
+	Workout index - Index of workout to delete
+Example: delete /w 1
 ________________________________________________________
 ________________________________________________________
-	Deleted workout: Legs
+Deleted workout: Legs
 ________________________________________________________
 ________________________________________________________
-	Empty workout list
+Empty workout list
 ________________________________________________________
 ________________________________________________________
 Bye. Hope you get your desired body soon, have a great day!

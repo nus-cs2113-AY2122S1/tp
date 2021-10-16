@@ -23,7 +23,9 @@ public class MarkExerciseAsDoneCommand extends Command {
             + "\tExercise index - Index of exercise to mark done\n"
             + "\tWorkout index - Index of workout containing exercise to mark done\n"
             + "Example: " + COMMAND_WORD + " 1, 2  - Mark exercise 1 from workout 2 as done";
-    public static final String MESSAGE_SUCCESS = "Completed: %1$s";
+
+    public static final String MESSAGE_SUCCESS = "Completed: %s";
+
     private static final Logger LOGGER = Logger.getLogger(MarkExerciseAsDoneCommand.class.getName());
 
     private final int workoutIndex;

@@ -10,8 +10,6 @@ import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
-import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
-
 /**
  * To print exercises in a specified workout.
  */
@@ -22,6 +20,7 @@ public class DisplayExercisesCommand extends Command {
             + "Parameters:\n"
             + "\tWorkout index - index of workout to display exercises\n"
             + "Example: " + COMMAND_WORD + " 3";
+    public static final String MESSAGE_DISPLAY_EXERCISES = "Exercises in %s";
     public static final String MESSAGE_EMPTY_WORKOUT = "You have no exercises.";
 
     private final int workoutIndex;
@@ -51,7 +50,8 @@ public class DisplayExercisesCommand extends Command {
         if (exercises.isEmpty()) {
             ui.showToUser(MESSAGE_EMPTY_WORKOUT);
         } else {
-            ui.showExercisesToUser(exercises);
+            String displayMessage = String.format(MESSAGE_DISPLAY_EXERCISES, workout.getWorkoutName());
+            ui.showItemListToUser(displayMessage, exercises, true);
         }
     }
 }

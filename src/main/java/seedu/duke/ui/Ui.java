@@ -1,14 +1,11 @@
 package seedu.duke.ui;
 
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.exercises.Exercise;
-import seedu.duke.lists.Workout;
 
 import java.util.ArrayList;
 
 public class Ui {
-    private static final String INDENT = "\t";
-    private static final String NEW_LINE = "\n\t";
+    private static final String NEW_LINE = "\n";
     private static final String DIVIDER = "________________________________________________________";
 
     public static void printLineSeparator() {
@@ -51,6 +48,7 @@ public class Ui {
         System.out.println("\"delete\" : Deletes a workout");
         System.out.println("\"list\" : Lists all your workouts");
         System.out.println("\"display\" : Shows all the exercises in a specified workout");
+        System.out.println("\"search\" : Displays workouts or exercises that contain the specified keyword");
         System.out.println("\"bye\" : Ends the program");
         printLineSeparator();
     }
@@ -66,38 +64,31 @@ public class Ui {
         printLineSeparator();
     }
 
-    /**
-     * Prints out all the exercises present in the exercise list of the particular workout.
-     *
-     * @param exercises is the list of exercises
-     */
-    public void showExercisesToUser(ArrayList<Exercise> exercises) {
-        assert (!exercises.isEmpty());
-        Ui.printLineSeparator();
-        System.out.println("Exercises in mentioned workout:");
 
-        for (int i = 0; i < exercises.size(); i++) {
-            System.out.println((i + 1) + ". " + exercises.get(i));
+    /**
+     * Prints out all the items in a list.
+     *
+     * @param itemList is the list of items
+     */
+    public <T> void showItemListToUser(String displayMessage, ArrayList<T> itemList, boolean bottomLineOnly) {
+        assert (!itemList.isEmpty());
+        if (!bottomLineOnly) {
+            Ui.printLineSeparator();
+        }
+        System.out.println(displayMessage);
+        if (!itemList.isEmpty()) {
+            printList(itemList);
         }
 
         Ui.printLineSeparator();
     }
 
-    /**
-     * Prints out all the workouts present in workout list.
-     *
-     * @param workouts is the list of workouts
-     */
-    public void showWorkoutsToUser(ArrayList<Workout> workouts) {
-        assert (!workouts.isEmpty());
-        Ui.printLineSeparator();
-        System.out.println("Workout list:");
-
-        for (int i = 0; i < workouts.size(); i++) {
-            System.out.println((i + 1) + ". " + workouts.get(i));
+    private <T> void printList(ArrayList<T> itemList) {
+        for (int i = 0; i < itemList.size(); i++) {
+            if (itemList.get(i) != null) {
+                System.out.println((i + 1) + ". " + itemList.get(i));
+            }
         }
-
-        Ui.printLineSeparator();
     }
 
     /**
@@ -108,7 +99,7 @@ public class Ui {
     public void showToUser(String message) {
         assert (!message.isEmpty());
         printLineSeparator();
-        System.out.println(INDENT + message.replace("\n", NEW_LINE));
+        System.out.println(message.replace("\n", NEW_LINE));
         printLineSeparator();
     }
 }
