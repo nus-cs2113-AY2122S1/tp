@@ -19,7 +19,7 @@ public class BudgetManager {
 
     public static void listBudgets() {
         Ui ui = Ui.getUi();
-        String budgetListHeader = "Id. |  Value  |";
+        String budgetListHeader = String.format("%s |  %-10s |", "Id.", "Value");
 
         ui.printMessage(budgetListHeader);
         ArrayList<Budget> budgets = BudgetList.getBudgets();
