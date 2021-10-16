@@ -12,7 +12,7 @@ import terminus.module.NusModule;
 /**
  * LinkCommandParser class to manage schedule-related commands.
  */
-public class LinkCommandParser extends CommandParser {
+public class LinkCommandParser extends InModuleCommandParser {
 
     public LinkCommandParser() {
         super(CommonFormat.COMMAND_SCHEDULE);

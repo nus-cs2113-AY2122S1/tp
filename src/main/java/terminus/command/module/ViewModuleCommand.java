@@ -1,42 +1,35 @@
-package terminus.command;
+package terminus.command.module;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import terminus.command.Command;
+import terminus.command.CommandResult;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.ui.Ui;
 
-public abstract class Command {
-
-    protected String arguments;
-    private String moduleName;
-
-    public Command() {
-
-    }
+public class ViewModuleCommand extends Command {
 
     /**
      * Returns the format for the command.
      *
      * @return The String object holding the appropriate format for the command.
      */
-    public abstract String getFormat();
+    @Override
+    public String getFormat() {
+        return "view";
+    }
 
     /**
      * Returns the description for the command.
      *
      * @return The String object containing the description for this command.
      */
-    public abstract String getHelpMessage();
-
-    /**
-     * Parses remaining arguments for the command.
-     *
-     * @param arguments The string arguments to be parsed in to the respective fields.
-     * @throws InvalidArgumentException when arguments parsing fails.
-     */
-    public void parseArguments(String arguments)
-            throws InvalidArgumentException {
-        this.arguments = arguments;
+    @Override
+    public String getHelpMessage() {
+        return "View all modules available";
     }
 
     /**
@@ -48,14 +41,14 @@ public abstract class Command {
      * @throws InvalidCommandException  when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
      */
-    public abstract CommandResult execute(Ui ui, ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException;
-
-    public String getModuleName() {
-        return moduleName;
-    }
-
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
+    @Override
+    public CommandResult execute(Ui ui, ModuleManager moduleManager)
+            throws InvalidCommandException, InvalidArgumentException {
+        String[] modules = moduleManager.getAllModules();
+        String[] listOfModules = IntStream.range(0, modules.length)
+                .mapToObj(i -> String.format("%d. %s", i + 1, modules[i]))
+                .toArray(String[]::new);
+        ui.printSection(listOfModules);
+        return new CommandResult(true);
     }
 }

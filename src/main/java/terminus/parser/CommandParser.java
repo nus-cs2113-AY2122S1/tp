@@ -18,8 +18,7 @@ public abstract class CommandParser {
     protected final HashMap<String, Command> commandMap;
 
     /**
-     * Initializes the commandMap.
-     * Adds some default commands to it.
+     * Initializes the commandMap. Adds some default commands to it.
      *
      * @param workspace The name of the workspace.
      */
@@ -36,7 +35,7 @@ public abstract class CommandParser {
      *
      * @param command The user input command.
      * @return The Command object to be executed.
-     * @throws InvalidCommandException when there is no command or empty command.
+     * @throws InvalidCommandException  when there is no command or empty command.
      * @throws InvalidArgumentException when arguments could not be parsed.
      */
 
@@ -98,5 +97,9 @@ public abstract class CommandParser {
      */
     public String getWorkspace() {
         return workspace;
+    }
+
+    public void setWorkspace(String workspace) {
+        this.workspace = workspace;
     }
 }

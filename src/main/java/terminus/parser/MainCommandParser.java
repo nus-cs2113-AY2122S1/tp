@@ -1,8 +1,7 @@
 package terminus.parser;
 
-import terminus.command.NotesCommand;
-import terminus.command.ScheduleCommand;
-import terminus.common.CommonFormat;
+import terminus.command.GoCommand;
+import terminus.command.ModuleCommand;
 import terminus.common.Messages;
 import terminus.module.NusModule;
 
@@ -16,8 +15,8 @@ public class MainCommandParser extends CommandParser {
 
     public static MainCommandParser getInstance() {
         MainCommandParser parser = PARSER;
-        parser.addCommand(CommonFormat.COMMAND_NOTE, new NotesCommand());
-        parser.addCommand(CommonFormat.COMMAND_SCHEDULE, new ScheduleCommand());
+        parser.addCommand("module", new ModuleCommand());
+        parser.addCommand("go", new GoCommand());
         return parser;
     }
 

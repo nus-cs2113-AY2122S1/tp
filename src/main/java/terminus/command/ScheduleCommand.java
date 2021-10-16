@@ -7,7 +7,7 @@ import terminus.parser.LinkCommandParser;
 /**
  * ScheduleCommand class to manage commands inside the Schedule workspace.
  */
-public class ScheduleCommand extends WorkspaceCommand {
+public class ScheduleCommand extends InModuleCommand {
 
     public ScheduleCommand() {
         super(LinkCommandParser.getInstance());

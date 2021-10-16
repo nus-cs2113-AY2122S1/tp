@@ -10,6 +10,7 @@ import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
@@ -62,12 +63,12 @@ public class AddNoteCommand extends Command {
      * Prints the relevant response to the Ui and a new Note will be added into the arraylist of Notes.
      *
      * @param ui The Ui object to send messages to the users.
-     * @param module The NusModule contain the ContentManager of all notes and schedules.
+     * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      */
-    public CommandResult execute(Ui ui, NusModule module) {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
         TerminusLogger.info("Executing Add Note Command");
-
+        NusModule module = moduleManager.getModule(getModuleName());
         ContentManager contentManager = module.getContentManager(Note.class);
         assert contentManager != null;
 
