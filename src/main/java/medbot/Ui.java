@@ -254,8 +254,7 @@ public class Ui {
                     + "  \\ V / | || _| \\ \\/\\/ /          \n"
                     + "   \\_/ |___|___| \\_/\\_/           \n"
                     + "                                  ");
-        }
-        if (viewType == ViewType.SCHEDULE) {
+        } else if (viewType == ViewType.SCHEDULE) {
             System.out.println("  ___  ___ _  _ ___ ___  _   _ _    ___ ___ \n"
                     + " / __|/ __| || | __|   \\| | | | |  | __| _ \\\n"
                     + " \\__ \\ (__| __ | _|| |) | |_| | |__| _||   /\n"

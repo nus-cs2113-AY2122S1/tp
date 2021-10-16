@@ -133,7 +133,11 @@ public class Parser {
 
     //Update with relevant scheduling commands
     public static Command parseSchedulingCommand(String userInput) throws MedBotException {
-        return new ListPatientCommand();
+        userInput = preprocessInput(userInput);
+        if (userInput.equals(COMMAND_SWITCH)) {
+            return new SwitchCommand();
+        }
+        return new ListPatientCommand(); //just using list as a placeholder/default cmd to be returned
     }
 
     /**
