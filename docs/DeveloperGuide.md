@@ -30,6 +30,8 @@ are called in the methods of `Workout` and `Exercise` respectively. This causes 
 ###Storage Component
 Location: `seedu.duke.storage`
 
+![img.png](umldg/StorageDiagram.png)
+
 __Note:__
 * `Storage` : Deals with loading tasks from the json file and saving tasks in the json file.
 * `JsonUtil` : Handles functions required to convert Java Objects to JSON objects and vice versa using the Jackson Library.
