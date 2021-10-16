@@ -57,8 +57,10 @@ public class Storage {
     /**
      * Loads task data from a saved file.
      *
+     * @param fileName the name of the file to be loaded from
      * @return data stored in a list of strings
      * @throws IOException if an I/O error occurs
+     * @throws StorageException if the given file name is invalid
      */
     public List<String> loadData(String fileName) throws IOException, StorageException {
         try {
@@ -84,7 +86,9 @@ public class Storage {
      *
      * @param taskList the task list
      * @param lessonList the lesson list
+     * @param fileName the name of the file to be stored
      * @throws IOException if an I/O error occurs
+     * @throws StorageException if the given file name is invalid
      */
     public void saveData(TaskList taskList, LessonList lessonList, String fileName)
             throws IOException, StorageException {
@@ -103,7 +107,7 @@ public class Storage {
                 //TODO: add moduleList saving
                 break;
             default:
-                throw new StorageException("Wrong file name");
+                throw new StorageException("Invalid file name"); //should be caught when calling getPath
             }
             bout.close();
         } catch (IOException e) {
@@ -113,6 +117,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the path corresponding to the file name given.
+     *
+     * @param fileName the file name
+     * @return the path for the file
+     * @throws StorageException the given file name is invalid
+     */
     private Path getPath(String fileName) throws StorageException {
         switch (fileName) {
         case TASK_FILE_NAME:
