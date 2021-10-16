@@ -7,6 +7,7 @@ import seedu.command.AddContactCommand;
 import seedu.command.Command;
 import seedu.command.DeleteContactCommand;
 import seedu.command.FailedCommand;
+import seedu.command.InvalidDetailCommand;
 import seedu.command.ViewContactCommand;
 import seedu.contact.ContactList;
 
@@ -86,7 +87,7 @@ public class MainParserTest {
 
 
     @Test
-    public void parseDeleteCommand_outOfRangeIndex_expectFailedCommandType() {
+    public void parseDeleteCommand_outOfRangeIndex_expectException() {
         ContactList contactList = new ContactList();
         testUserInput = "rm 3";
         // adding 1 input contact into contactList
@@ -107,8 +108,8 @@ public class MainParserTest {
     public void parseAddCommand_validInputsWithIrregularSpaces_expectAddContactCommand() {
         testUserInput = "         add -n   andre -g  ng-andre  -l linkedin -tw twit -te teles123 -e andre@twix.com";
         AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
-        AddContactCommand expectedCommand = new AddContactCommand("andre", "ng-andre",
-                "linkedin", "teles123", "twit", "andre@twix.com");
+        String[] details = {"andre", "ng-andre", "linkedin", "teles123", "twit", "andre@twix.com"};
+        AddContactCommand expectedCommand = new AddContactCommand(details);
         assertEquals(expectedCommand.getName(), actualCommand.getName());
         assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
         assertEquals(expectedCommand.getLinkedin(), actualCommand.getLinkedin());
@@ -121,7 +122,8 @@ public class MainParserTest {
     public void parseAddCommand_validInputsWithExtraCharacters_expectAddContactCommand() {
         testUserInput = "         add   1231267azldasd -n   marcus    -g  marcus-bory  ";
         AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
-        AddContactCommand expectedCommand = new AddContactCommand("marcus", "marcus-bory", null, null, null, null);
+        String[] details = {"marcus", "marcus-bory", null, null, null, null};
+        AddContactCommand expectedCommand = new AddContactCommand(details);
         assertEquals(expectedCommand.getName(), actualCommand.getName());
         assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
     }
@@ -130,8 +132,8 @@ public class MainParserTest {
     public void parseAddCommand_validInputs_expectAddContactCommand() {
         testUserInput = "add -n andre -g ng-andre -l linkedin -tw twit -te teles123 -e andre@twix.com";
         final AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
-        final AddContactCommand expectedCommand = new AddContactCommand("andre", "ng-andre",
-                "linkedin", "teles123", "twit", "andre@twix.com");
+        String[] details = {"andre", "ng-andre", "linkedin", "teles123", "twit", "andre@twix.com"};
+        final AddContactCommand expectedCommand = new AddContactCommand(details);
         assertEquals(expectedCommand.getName(), actualCommand.getName());
         assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
         assertEquals(expectedCommand.getLinkedin(), actualCommand.getLinkedin());
@@ -141,15 +143,79 @@ public class MainParserTest {
     }
 
     @Test
-    public void parseAddCommand_validInputsWithFlags_expectAddContactCommand() {
+    public void parseAddCommand_validInputsWithPartialFlags_expectAddContactCommand() {
         testUserInput = "         add -n   ashraf  -g fdada-121   -tw 66123ada -e ash@yahoo.com  ";
         AddContactCommand actualCommand = getParsedCommand(testUserInput, AddContactCommand.class);
-        AddContactCommand expectedCommand = new AddContactCommand("ashraf", "fdada-121",
-                null, null, "66123ada", "ash@yahoo.com");
+        String[] details = {"ashraf", "fdada-121", null, null, "66123ada", "ash@yahoo.com"};
+        AddContactCommand expectedCommand = new AddContactCommand(details);
         assertEquals(expectedCommand.getName(), actualCommand.getName());
         assertEquals(expectedCommand.getGithub(), actualCommand.getGithub());
         assertEquals(expectedCommand.getTwitter(), actualCommand.getTwitter());
         assertEquals(expectedCommand.getEmail(), actualCommand.getEmail());
+    }
+
+    @Test
+    public void parseAddCommand_invalidNameWithNumber_expectInvalidDetailCommand() {
+        testUserInput = "add -n 123456";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_NAME;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_invalidGithubUsername_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -g git@hub//";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_GITHUB_USERNAME;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_invalidLinkedin_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -l linked@in/#";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_LINKEDIN;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_invalidTwitter_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -tw b#b#@@";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_TWITTER;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_invalidTelegram_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -te $$5ts@!";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_TELEGRAM;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_invalidEmail_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -e marcus";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.INVALID_MAIL;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_forbiddenGithub_expectInvalidDetailCommand() {
+        testUserInput = "add -n marcus -g null";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.FORBIDDEN_DETAIL;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
+    }
+
+    @Test
+    public void parseAddCommand_forbiddenName_expectInvalidDetailCommand() {
+        testUserInput = "add -n null -g legit";
+        FailedCommandType expectedFailedCommandType = FailedCommandType.FORBIDDEN_DETAIL;
+        final InvalidDetailCommand actualCommand = getParsedCommand(testUserInput, InvalidDetailCommand.class);
+        assertEquals(expectedFailedCommandType, actualCommand.getType());
     }
 
     @Test
