@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
-    private String keyword;
+    protected String keyword;
     
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -35,7 +35,7 @@ public class FindCommand extends Command {
             String valueAsString = Double.toString(entry.getValue());
             if (entry.getDescription().contains(keyword)) {
                 filteredEntries.add(entry);
-            } else if (entry.getCategory() != null && entry.getCategory().contains(keyword)) {
+            } else if (entry.getCategory().toLowerCase().contains(keyword)) {
                 filteredEntries.add(entry);
             } else if (valueAsString.contains(keyword)) {
                 filteredEntries.add(entry);

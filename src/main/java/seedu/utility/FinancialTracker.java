@@ -6,7 +6,10 @@ import seedu.entry.Income;
 import seedu.exceptions.ExpenseEntryNotFoundException;
 import seedu.exceptions.IncomeEntryNotFoundException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class FinancialTracker {
     private ArrayList<Expense> expenses;
@@ -102,6 +105,33 @@ public class FinancialTracker {
         return totalIncome;
     }
     
+
+    public double getTotalExpenseBetween(LocalDate start, LocalDate end) {
+        List<Expense> accumulatedExpense =
+            expenses.stream()
+                .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start)) 
+                        && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
+                .collect(Collectors.toList());
+        double count = 0;
+        for (Expense o: accumulatedExpense) {
+            count += o.getValue();    
+        }
+        return count;
+    }
+
+    public double getTotalIncomeBetween(LocalDate start, LocalDate end) {
+        List<Income> accumulatedExpense =
+                incomes.stream()
+                        .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start))
+                                && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
+                        .collect(Collectors.toList());
+        double count = 0;
+        for (Income o: accumulatedExpense) {
+            count += o.getValue();
+        }
+        return count;
+    }
+
     //method used for testing
     public int getExpenseSize() {
         return expenses.size();

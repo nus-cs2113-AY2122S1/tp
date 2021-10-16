@@ -2,12 +2,13 @@ package seedu.entry;
 
 import java.time.LocalDate;
 
+
 public abstract class Entry {
     protected String description;
     protected double value;
     protected LocalDate date;
     protected String category;
-    
+
     public String getDescription() {
         return this.description;
     }
@@ -20,11 +21,9 @@ public abstract class Entry {
         return this.date;
     }
     
-    public String toString() {
-        return description + " - " + Double.toString(value);
+    public String getCategory() {
+        return this.category;
     }
 
-    public String getCategory() {
-        return category;
-    }
+    public abstract String toString();
 }
