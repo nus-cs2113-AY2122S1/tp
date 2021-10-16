@@ -15,18 +15,20 @@ public class AddLessonCommand extends Command {
     private final String dayOfTheWeek;
     private final String startTime;
     private final String endTime;
+    private final String meetingUrl;
 
-    public AddLessonCommand(String title, String dayOfTheWeek, String startTime, String endTime) {
+    public AddLessonCommand(String title, String dayOfTheWeek, String startTime, String endTime, String meetingUrl) {
         this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.meetingUrl = meetingUrl;
     }
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
             throws DukeException, IOException {
-        Lesson newLesson = new Lesson(title, dayOfTheWeek, startTime, endTime);
+        Lesson newLesson = new Lesson(title, dayOfTheWeek, startTime, endTime, meetingUrl);
         lessonList.addLesson(newLesson);
         storage.saveData(taskList, lessonList, Storage.LESSON_FILE_NAME);
         ui.printLessonAdded(newLesson, lessonList.getSize());

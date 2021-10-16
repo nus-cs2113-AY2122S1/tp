@@ -32,24 +32,35 @@ public class AddCommandParser {
     }
 
     private static Command parseAddLessonCommand(String userResponse) throws ParseException {
-        String[] params = userResponse.split(" -d | -s | -e ");
-        if (params.length != 4) {
+        String[] params = userResponse.split(" -d | -s | -e | -l ");
+        if (params.length < 4 || params.length > 5) {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
-        }
-
-        if (!hasCorrectFlagSequence(userResponse, "-d", "-s", "-e")) {
-            throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
         }
 
         String title = params[0].strip();
         String dayOfTheWeek = params[1].strip();
         if (!is(dayOfTheWeek)) {
-            throw new ParseException(dayOfTheWeek + Messages.ERROR_INVALID_DAY);
+            throw new ParseException(Messages.ERROR_INVALID_DAY);
         }
 
-        String startTIme = params[2].strip();       // TODO: Validate correctness with time library
+        String startTime = params[2].strip();       // TODO: Validate correctness with time library
         String endTime = params[3].strip();         // TODO: Validate correctness with time library
-        return new AddLessonCommand(title, dayOfTheWeek, startTIme, endTime);
+
+        switch (params.length) {
+        case 4:
+            if (!hasCorrectFlagSequence(userResponse, "-d", "-s", "-e")) {
+                throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
+            }
+            return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, "");
+        case 5:
+            if (!hasCorrectFlagSequence(userResponse, "-d", "-s", "-e", "-l")) {
+                throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
+            }
+            String meetingUrl = params[4].strip();
+            return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, meetingUrl);
+        default:
+            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+        }
     }
 
     private static Command parseAddTaskCommand(String userResponse) throws ParseException {

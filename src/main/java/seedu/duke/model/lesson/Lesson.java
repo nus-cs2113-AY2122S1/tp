@@ -1,20 +1,24 @@
 package seedu.duke.model.lesson;
 
-import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.model.lesson.exceptions.DeserializeLessonException;
+import seedu.duke.ui.Ui;
+
+import static seedu.duke.commons.core.DayOfTheWeek.is;
 
 public class Lesson {
     private final String title;
     private final String dayOfTheWeek;
     private final String startTime;
     private final String endTime;
+    private final String meetingUrl;
 
-    public Lesson(String title, String dayOfTheWeek, String startTime, String endTime) {
+    public Lesson(String title, String dayOfTheWeek, String startTime, String endTime, String meetingUrl) {
         this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.meetingUrl = meetingUrl;
     }
 
     public String getTitle() {
@@ -25,13 +29,25 @@ public class Lesson {
         return dayOfTheWeek;
     }
 
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String endTime() {
+        return endTime;
+    }
+
+    public String getMeetingUrl() {
+        return meetingUrl;
+    }
+
     /**
      * Serializes the lesson data into the correct format for storage file.
      *
      * @return serialized lesson data
      */
     public String serialize() {
-        return "L" + " | " + title + " | " + dayOfTheWeek + " | " + startTime + " | " + endTime;
+        return "L" + " | " + title + " | " + dayOfTheWeek + " | " + startTime + " | " + endTime + " | " + meetingUrl;
     }
 
     /**
@@ -43,8 +59,24 @@ public class Lesson {
      */
     public static Lesson deserialize(String data) throws DeserializeLessonException {
         try {
-            String[] item = data.split(" \\| ");
-            return new Lesson(item[1], item[2], item[3], item[4]);
+            String[] params = data.split("\\s*[|]\\s*");
+
+            String modelType = params[0];
+            if (!modelType.equals("L")) {
+                throw new DeserializeLessonException(Messages.ERROR_DESERIALIZING_DATA);
+            }
+
+            String title = params[1];
+            String dayOfTheWeek = params[2];
+            if (!is(dayOfTheWeek)) {
+                throw new DeserializeLessonException(Messages.ERROR_DESERIALIZING_DATA);
+            }
+
+            String startTime = params[3];
+            String endTime = params[4];
+            String meetingUrl = params[5];
+
+            return new Lesson(title, dayOfTheWeek, startTime, endTime, meetingUrl);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DeserializeLessonException(Messages.ERROR_DESERIALIZING_DATA);
         }
@@ -52,7 +84,8 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return "[L] " + "Title: " + title + " (Day: " + dayOfTheWeek + ") "
-                + "(Start: " + startTime + ", End: " + endTime + ")";
+        return title + System.lineSeparator()
+                + Ui.PADDING + "   " + dayOfTheWeek + ", " + startTime + " - " + endTime + System.lineSeparator()
+                + Ui.PADDING + "   " + "Meeting URL: " + meetingUrl;
     }
 }
