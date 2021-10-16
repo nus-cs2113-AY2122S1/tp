@@ -386,7 +386,7 @@ public class Parser {
     public String convertIncomeToData(Income income) {
         return "I" + DATA_SEPARATOR + income.getDescription() + DATA_SEPARATOR + income.getValue();
     }
-
+/*
     public Expense convertDataToExpense(String data) throws InvalidExpenseAmountException,
             InvalidExpenseDataFormatException {
         final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data);
@@ -418,4 +418,5 @@ public class Parser {
         double incomeAmount = parseIncomeAmount(dataAmount);
         return new Income(incomeDescription, incomeAmount);
     }
+*/
 }
