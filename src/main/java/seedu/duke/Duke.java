@@ -62,7 +62,6 @@ public class Duke {
 
     /** The main method. Creates an instance of Duke and run it. */
     public static void main(String[] args) {
-        assert false : "dummy assertion set to fail";
         Duke duke = new Duke();
         duke.run();
     }
