@@ -20,8 +20,6 @@ public class JsonUtil {
     private static final String ROOT_DIRECTORY = System.getProperty("user.dir");
     private static final String MODULE_DIRECTORY_PATH = "src/main/resources";
     private static final String MODULE_FILE_NAME = "ModuleInfo.json";
-//    private static final Path FULL_MODULE_FILEPATH = Paths.get(ROOT_DIRECTORY, "src", "main",
-//            "resources", "ModuleInfo.json");
     private static final Path FULL_MODULE_FILEPATH = Paths.get(ROOT_DIRECTORY, MODULE_DIRECTORY_PATH, MODULE_FILE_NAME);
 
     public JsonUtil() throws ModuleLoadException, FileNotFoundException {
