@@ -9,6 +9,9 @@ public final class Messages {
     public static final String ERROR_DESERIALIZING_DATA =
             "The data is in invalid format. I can't deserialize it.";
 
+    public static final String ERROR_FILE_LOGGER =
+            "Something went wrong with the file logger.";
+
     public static final String ERROR_INVALID_COMMAND =
             "Sorry, I don't understand your command.";
 
