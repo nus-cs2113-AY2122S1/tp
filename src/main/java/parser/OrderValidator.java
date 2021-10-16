@@ -28,6 +28,7 @@ public class OrderValidator {
             String parameterValue = parameters.get(parameter);
 
             switch (parameter) {
+            case CommandParameters.ID:
             case CommandParameters.ORDER_ID:
                 isValid = isValidOrderId(ui, parameterValue, medicines);
                 break;

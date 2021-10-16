@@ -16,12 +16,16 @@ import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Update medication information based on user input given order id.
+ */
+
 public class UpdateOrder extends Command {
-    private static final int MINIMUM_ROW_NUMBER_UPDATE = 1;
     private static Logger logger = Logger.getLogger("UpdateOrder");
 
     @Override
     public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+        logger.log(Level.INFO, "Start of UpdateOrder command execution.");
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
 
@@ -55,19 +59,18 @@ public class UpdateOrder extends Command {
             }
         }
 
-        // Default value for updating one row
-        int rowsAffected = MINIMUM_ROW_NUMBER_UPDATE;
-        if (parameters.containsKey(CommandParameters.NAME)) {
+        // Default value for updating all affected rows
+        int rowsAffected = filteredOrders.size();
+        if (!parameters.containsKey(CommandParameters.NAME)) {
+            filteredOrders.clear();
+            filteredOrders.add(order);
             rowsAffected = filteredOrders.size();
         }
 
-        setOrdersByOrderId(parameters, filteredOrders, order);
+        setUpdatesByOrderId(parameters, filteredOrders, order);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
-        if (rowsAffected > MINIMUM_ROW_NUMBER_UPDATE) {
-            ui.printOrders(filteredOrders);
-        } else {
-            ui.printOrder(order);
-        }
+        ui.printOrders(filteredOrders);
+        logger.log(Level.INFO, "End of UpdateOrder command execution.");
     }
 
     /**
@@ -77,8 +80,9 @@ public class UpdateOrder extends Command {
      * @param filteredOrders Arraylist of filtered medicine orders.
      * @param order          Order object of the given order id.
      */
-    private void setOrdersByOrderId(LinkedHashMap<String, String> parameters, ArrayList<Order> filteredOrders,
-                                    Order order) {
+    private void setUpdatesByOrderId(LinkedHashMap<String, String> parameters, ArrayList<Order> filteredOrders,
+                                     Order order) {
+        logger.log(Level.INFO, "Attempt to update order information.");
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
@@ -101,7 +105,7 @@ public class UpdateOrder extends Command {
                 break;
             }
         }
-        logger.log(Level.INFO, "Updated order information with given user input");
+        logger.log(Level.INFO, "Updated order information with given user input.");
     }
 
 }

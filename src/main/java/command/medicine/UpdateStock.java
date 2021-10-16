@@ -22,11 +22,11 @@ import java.util.logging.Logger;
  */
 
 public class UpdateStock extends Command {
-    private static final int MINIMUM_ROW_NUMBER_UPDATE = 1;
     private static Logger logger = Logger.getLogger("UpdateStock");
 
     @Override
     public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+        logger.log(Level.INFO, "Start of UpdateStock command execution.");
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.PRICE, CommandParameters.QUANTITY,
             CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.NAME,
@@ -62,25 +62,28 @@ public class UpdateStock extends Command {
             }
         }
 
-        // Default value for updating one row
-        int rowsAffected = MINIMUM_ROW_NUMBER_UPDATE;
+        // Default value for updating all affected rows
+        int rowsAffected = filteredStocks.size();
         String[] affectedCommands = {CommandParameters.NAME, CommandParameters.DESCRIPTION,
             CommandParameters.MAX_QUANTITY};
+        boolean isAffectedCommand = false;
         for (String affectedCommand : affectedCommands) {
             if (parameters.containsKey(affectedCommand)) {
-                rowsAffected = filteredStocks.size();
+                isAffectedCommand = true;
                 break;
             }
         }
 
-        setUpdatesByStockID(parameters, filteredStocks, stock);
-        ui.print("Updated! Number of rows affected: " + rowsAffected);
-        if (rowsAffected > MINIMUM_ROW_NUMBER_UPDATE) {
-            ui.printStocks(filteredStocks, medicines);
-        } else {
-            ui.printStock(stock, medicines);
+        if (!isAffectedCommand) {
+            filteredStocks.clear();
+            filteredStocks.add(stock);
+            rowsAffected = filteredStocks.size();
         }
 
+        setUpdatesByStockID(parameters, filteredStocks, stock);
+        ui.print("Updated! Number of rows affected: " + rowsAffected);
+        ui.printStocks(filteredStocks, medicines);
+        logger.log(Level.INFO, "End of UpdateStock command execution.");
     }
 
     /**
@@ -94,7 +97,7 @@ public class UpdateStock extends Command {
      */
     private boolean processDateInput(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
                                      Stock stock) {
-        String name = stock.getMedicineName();
+        logger.log(Level.INFO, "Processing date input for update stock...");
 
         boolean hasExpiryDate = parameters.containsKey(CommandParameters.EXPIRY_DATE);
         if (!hasExpiryDate) {
@@ -107,7 +110,8 @@ public class UpdateStock extends Command {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        String name = stock.getMedicineName();
+        logger.log(Level.INFO, "End processing date input for update stock.");
         return StockValidator.dateValidityChecker(ui, medicines, expiryDate, name);
     }
 
@@ -122,7 +126,7 @@ public class UpdateStock extends Command {
      */
     private boolean processQuantityValues(Ui ui, LinkedHashMap<String, String> parameters,
                                           ArrayList<Medicine> medicines, Stock stock) {
-
+        logger.log(Level.INFO, "Processing quantity values for update stock...");
         String name = stock.getMedicineName();
 
         int quantity = 0;
@@ -155,7 +159,7 @@ public class UpdateStock extends Command {
             quantity = MedicineManager.getTotalStockQuantity(medicines, name);
             maxQuantity = Integer.parseInt(parameters.get(CommandParameters.MAX_QUANTITY));
         }
-
+        logger.log(Level.INFO, "End processing quantity values for update stock.");
         return StockValidator.quantityValidityChecker(ui, quantity, maxQuantity);
     }
 
@@ -168,6 +172,7 @@ public class UpdateStock extends Command {
      */
     private void setUpdatesByStockID(LinkedHashMap<String, String> parameters, ArrayList<Stock> filteredStocks,
                                      Stock stock) {
+        logger.log(Level.INFO, "Attempt to update stock information.");
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
