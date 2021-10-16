@@ -1,5 +1,17 @@
 # Developer Guide
 
+- [Acknowledgements](#acknowledgements)
+- [Design & Implementation](#design-&-implementation)
+  - [Data Component](#data-component)
+  - [Storage Component](#storage-component)
+- [Product Scope](#product-scope)
+  - [Target User Profile](#target-user-profile)
+  - [Value Proposition](#value-proposition)
+- [User Stories](#user-stories)
+- [Non-Functional Requirements](#non-functional-requirements)
+- [Glossary](#glossary)
+- [Instructions for manual testing](#instructions-for-manual-testing)
+
 ## Acknowledgements
 
 - Libraries used: [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
@@ -43,11 +55,15 @@ The `Storage` component,
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+- has a need to plan and remember their workouts quickly
+- Prefer desktop apps over other types
+- Can type fast
+- Comfortable using CLI apps
 
-### Value proposition
+### Value proposition: 
+Manage fitness routines quickly
 
-{Describe the value proposition: what problem does it solve?}
+
 
 ## User Stories
 
