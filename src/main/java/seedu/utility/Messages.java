@@ -17,4 +17,7 @@ public class Messages {
     public static final String UNABLE_TO_FIND_DATA_FILE = "Unable to find StonksXD_Data.csv, a new one has been made.";
     public static final String ERROR_SAVING_ENTRIES = "Unable to save entries into StonksXD_Data.csv, " +
             "some or all data maybe lost.";
+    public static final String BLANK_CATEGORY_MESSAGE = "Your category is empty!";
+    public static final String DATE_FORMAT_MESSAGE = "Your start and end dates must be in a YYYY-MM-DD format!";
+
 }

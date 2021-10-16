@@ -2,17 +2,18 @@ package seedu.duke;
 
 import seedu.commands.AddExpenseCommand;
 import seedu.commands.AddIncomeCommand;
-import seedu.commands.ListExpenseCommand;
-import seedu.commands.ListIncomeCommand;
+import seedu.commands.Command;
 import seedu.commands.DeleteExpenseCommand;
 import seedu.commands.DeleteIncomeCommand;
-import seedu.commands.InvalidCommand;
-import seedu.commands.HelpCommand;
-import seedu.commands.TotalExpenseCommand;
-import seedu.commands.TotalIncomeCommand;
-import seedu.commands.Command;
 import seedu.commands.ExitCommand;
-
+import seedu.commands.HelpCommand;
+import seedu.commands.InvalidCommand;
+import seedu.commands.ListExpenseCommand;
+import seedu.commands.ListIncomeCommand;
+import seedu.commands.TotalExpenseBetweenCommand;
+import seedu.commands.TotalExpenseCommand;
+import seedu.commands.TotalIncomeBetweenCommand;
+import seedu.commands.TotalIncomeCommand;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 
@@ -24,6 +25,9 @@ import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidIncomeIndexException;
 import seedu.utility.Messages;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,7 +46,8 @@ public class Parser {
      */
     private static final Pattern ADD_EXPENSE_ARGUMENT_FORMAT =
             Pattern.compile("d/(?<description>[^/]+)"
-                    + " a/(?<amount>[^/]+)");
+                    + " a/(?<amount>[^/]+)"
+                    + " c/(?<category>[^/]+)");
 
     /**
      * This was adapted from addressbook-level2 source code here:
@@ -50,7 +55,8 @@ public class Parser {
      */
     private static final Pattern ADD_INCOME_ARGUMENT_FORMAT =
             Pattern.compile("d/(?<description>[^/]+)"
-                    + " a/(?<amount>[^/]+)");
+                    + " a/(?<amount>[^/]+)"
+                    + " c/(?<category>[^/]+)");
 
     /**
      * This was adapted from addressbook-level2 source code here:
@@ -66,6 +72,10 @@ public class Parser {
     private static final Pattern DELETE_INCOME_ARGUMENT_FORMAT =
             Pattern.compile("i/(?<index>[^/]+)");
 
+    private static final Pattern DATE_RANGE_ARGUMENT_FORMAT =
+            Pattern.compile("s/(?<start>[^/]+)"
+                    + "e/(?<end>[^/]+)");
+    
     private static final String HELP_COMMAND_KEYWORD = "help";
     private static final String ADD_EXPENSE_KEYWORD = "add_ex";
     private static final String ADD_INCOME_KEYWORD = "add_in";
@@ -77,6 +87,9 @@ public class Parser {
     private static final String TOTAL_INCOME_KEYWORD = "total_in";
     private static final String EXIT_KEYWORD = "end";
 
+    private static final String EXPENSE_RANGE_KEYWORD = "btw_ex";
+    private static final String INCOME_RANGE_KEYWORD = "btw_in";
+    
     private static final String DATA_SEPARATOR = ", ";
     private static final Pattern EXPENSE_DATA_FORMAT
             = Pattern.compile("E" + DATA_SEPARATOR + "(?<description>[^/]+)" + DATA_SEPARATOR
@@ -123,11 +136,47 @@ public class Parser {
             return prepareTotalIncome(arguments);
         case EXIT_KEYWORD:
             return prepareExit(arguments);
+        case EXPENSE_RANGE_KEYWORD:
+            return prepareExpenseRange(arguments);
+        case INCOME_RANGE_KEYWORD:
+            return prepareIncomeRange(arguments);
         default:
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
     }
 
+    private Command prepareIncomeRange(String arguments) {
+        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(arguments.trim());
+        if (!matcher.matches()) {
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+        }
+        try {
+            String start = matcher.group("start").trim();
+            LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String end = matcher.group("end").trim();
+            LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return new TotalIncomeBetweenCommand(startDate,endDate);
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
+        }
+    }
+    
+    private Command prepareExpenseRange(String arguments) {
+        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(arguments.trim());
+        if (!matcher.matches()) {
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+        }
+        try {
+            String start = matcher.group("start").trim();
+            LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String end = matcher.group("end").trim();
+            LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            return new TotalExpenseBetweenCommand(startDate,endDate);
+        } catch (DateTimeParseException e) {
+            return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
+        }
+    }
+    
     private Command prepareHelp(String arguments) {
         if (arguments.trim().isBlank()) {
             return new HelpCommand();
@@ -158,7 +207,12 @@ public class Parser {
         if (expenseDescription.isBlank()) {
             return new InvalidCommand(Messages.BLANK_DESCRIPTION_MESSAGE);
         }
-        Expense expense = new Expense(expenseDescription, expenseAmount);
+        
+        String expenseCategory = matcher.group("category").trim().toUpperCase();
+        if (expenseCategory.isBlank()) {
+            return new InvalidCommand(Messages.BLANK_CATEGORY_MESSAGE);
+        }
+        Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory);
         return new AddExpenseCommand(expense);
     }
 
@@ -185,7 +239,12 @@ public class Parser {
         if (incomeDescription.isBlank()) {
             return new InvalidCommand(Messages.BLANK_DESCRIPTION_MESSAGE);
         }
-        Income income = new Income(incomeDescription, incomeAmount);
+
+        String incomeCategory = matcher.group("category").trim().toUpperCase();
+        if (incomeCategory.isBlank()) {
+            return new InvalidCommand(Messages.BLANK_CATEGORY_MESSAGE);
+        }
+        Income income = new Income(incomeDescription, incomeAmount, incomeCategory);
         return new AddIncomeCommand(income);
     }
 
@@ -327,7 +386,7 @@ public class Parser {
     public String convertIncomeToData(Income income) {
         return "I" + DATA_SEPARATOR + income.getDescription() + DATA_SEPARATOR + income.getValue();
     }
-
+    /*
     public Expense convertDataToExpense(String data) throws InvalidExpenseAmountException,
             InvalidExpenseDataFormatException {
         final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data);
@@ -359,4 +418,5 @@ public class Parser {
         double incomeAmount = parseIncomeAmount(dataAmount);
         return new Income(incomeDescription, incomeAmount);
     }
+    */
 }
