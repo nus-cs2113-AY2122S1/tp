@@ -3,6 +3,8 @@ package seedu.duke.commands;
 import seedu.duke.textfiletools.DeleteFromTextFile;
 import seedu.duke.ui.TextUi;
 
+import java.time.LocalDate;
+
 public class DeleteExpenditureCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = "Delete an expenditure record.\n"
@@ -13,11 +15,15 @@ public class DeleteExpenditureCommand extends DeleteCommand {
         this.index = index;
     }
 
+    /**
+     * LocalDate.now().getMonthValue() is being used as a placeholder
+     */
     @Override
-    public void execute(boolean isLoadingStorage) {
-        int sizeBeforeDeletion = recordList.getSize();
-        TextUi.showExpenditureDeletedMessage(index, recordList.getExpenditure(index - 1));
-        recordList.deleteExpenditure(index);
+    public void execute() {
+        int sizeBeforeDeletion = recordList.getExpenditureListSize(LocalDate.now().getMonthValue());
+        TextUi.showExpenditureDeletedMessage(index,
+                recordList.getExpenditure(index - 1, LocalDate.now().getMonthValue()));
+        recordList.deleteExpenditure(index, LocalDate.now().getMonthValue());
 
         DeleteFromTextFile.removeLineFromFile("./data/BudgetList1.txt", index, sizeBeforeDeletion);
     }

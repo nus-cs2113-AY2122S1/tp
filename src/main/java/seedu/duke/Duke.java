@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.commands.Command;
-import seedu.duke.data.RecordList;
+import seedu.duke.data.AllRecordList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.TextUi;
@@ -14,10 +14,10 @@ public class Duke {
 
     private final TextUi textUi;
     private final Parser parser;
-    private final RecordList recordList;
+    private final AllRecordList recordList;
 
     public Duke() {
-        recordList = new RecordList();
+        recordList = new AllRecordList();
         textUi = new TextUi();
         parser = new Parser();
     }
@@ -41,7 +41,7 @@ public class Duke {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (budgetList.exists() == false) {
+        } else if (!budgetList.exists()) {
             try {
                 budgetList.createNewFile();
             } catch (IOException e) {
@@ -63,7 +63,7 @@ public class Duke {
                 String userInput = textUi.getUserInput();
                 Command command = parser.parseCommand(userInput);
                 command.setRecordList(recordList);
-                command.execute(false);
+                command.execute();
                 isExit = command.isExit();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Error! Your inputs are missing or incorrect!");
@@ -72,8 +72,3 @@ public class Duke {
         }
     }
 }
-
-/*
-budgetList
-1. Budget Jan
- */

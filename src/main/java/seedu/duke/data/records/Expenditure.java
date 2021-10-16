@@ -16,13 +16,12 @@ public class Expenditure extends Record {
         return description;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getDate() {
+        return date.toString();
     }
 
     public String toString() {
-        return ("Description: " + this.description
-                + "\nAmount: $" + this.amount
-                + "\nDate: " + this.date.toString());
+        return String.format("%-30.30s  %-30.30s %-30.30s",
+                this.description, " | $" + this.amount, " | " + this.date.toString());
     }
 }

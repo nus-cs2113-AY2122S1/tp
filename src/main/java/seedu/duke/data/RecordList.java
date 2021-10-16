@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 public class RecordList {
     public static int numberOfRecords;
-    private static int month;
     private final Budget budget;
     private final ArrayList<Expenditure> expenditureRecords;
     private boolean hasBudget;

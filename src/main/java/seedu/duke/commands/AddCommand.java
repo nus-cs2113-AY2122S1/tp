@@ -10,4 +10,6 @@ public abstract class AddCommand extends Command {
     public static final String MESSAGE_USAGE = (AddExpenditureCommand.MESSAGE_USAGE
             + System.lineSeparator()
             + AddBudgetCommand.MESSAGE_USAGE);
+
+    public abstract void execute(boolean isLoadingStorage);
 }
