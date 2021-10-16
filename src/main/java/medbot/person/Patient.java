@@ -4,22 +4,20 @@ import static medbot.Ui.VERTICAL_LINE_SPACED;
 
 public class Patient extends Person {
 
-    private int patientId = 0;
-
     public Patient() {
         super.personType = PersonType.PATIENT;
     }
 
     public int getPatientId() {
-        return patientId;
+        return super.getPersonId();
     }
 
     public void setPatientId(int patientId) {
-        this.patientId = patientId;
+        super.setPersonId(patientId);
     }
 
     public String toString() {
-        return "Patient ID: " + patientId + " " + super.toString();
+        return "Patient ID: " + getPatientId() + " " + super.toString();
     }
 
 
@@ -30,7 +28,7 @@ public class Patient extends Person {
      */
     @Override
     public String getStorageString() {
-        return patientId + VERTICAL_LINE_SPACED
+        return getPatientId() + VERTICAL_LINE_SPACED
                 + super.getStorageString();
     }
 }

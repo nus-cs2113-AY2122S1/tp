@@ -1,5 +1,6 @@
 package medbot.command;
 
+import medbot.Parser;
 import medbot.PatientList;
 import medbot.Ui;
 import medbot.person.Patient;
