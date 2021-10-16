@@ -24,6 +24,9 @@ public final class Messages {
     public static final String ERROR_INVALID_NUMBER =
             "Sorry, the input parameter is not a valid number.";
 
+    public static final String ERROR_MODULE_LOAD_FAILED =
+            "Sorry, there was an issue loading NUSMods module information.";
+
     public static final String ERROR_RETRIEVING_DATA =
             "I can't retrieve any data. Creating new file..";
 

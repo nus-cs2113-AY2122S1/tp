@@ -1,10 +1,13 @@
 package seedu.duke;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.logic.parser.Parser;
+import seedu.duke.model.module.FullModuleList;
+import seedu.duke.model.module.ModuleList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.TaskList;
 import seedu.duke.commons.core.Messages;
@@ -15,6 +18,8 @@ public class Duke {
     private final Storage storage;
     private TaskList taskList;
     private LessonList lessonList;
+    private ModuleList moduleList;
+    private FullModuleList fullModuleList;
 
     /**
      * The constructor method. Initializes ui and storage objects.
@@ -25,14 +30,21 @@ public class Duke {
         ui = new Ui();
         storage = new Storage();
         try {
+            fullModuleList = new FullModuleList();
+        } catch (DukeException | FileNotFoundException e) {
+            ui.printMessage(e.getMessage());
+        }
+        try {
             taskList = new TaskList(TaskList.deserialize(storage.loadData()));
             lessonList = new LessonList(LessonList.deserialize(storage.loadData()));
+            moduleList = new ModuleList(); // todo add module list deserialization
             ui.printMessage(Messages.SUCCESS_RETRIEVING_DATA);
         } catch (DukeException | IOException e) {
             ui.printMessage(e.getMessage());
             storage.createNewData(ui);
             taskList = new TaskList();
             lessonList = new LessonList();
+            moduleList = new ModuleList();
         }
     }
 
