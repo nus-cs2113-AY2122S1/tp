@@ -103,10 +103,14 @@ public class LessonList {
      */
     public static List<Lesson> deserialize(List<String> data) throws DeserializeLessonException {
         List<Lesson> lessonList = new ArrayList<>();
-        for (String entry : data) {
-            if (entry.charAt(0) == 'L') {
-                lessonList.add(Lesson.deserialize(entry));
+        try {
+            for (String entry : data) {
+                if (entry.charAt(0) == 'L') {
+                    lessonList.add(Lesson.deserialize(entry));
+                }
             }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DeserializeLessonException(Messages.ERROR_DESERIALIZING_DATA);
         }
         return lessonList;
     }
