@@ -30,7 +30,8 @@ public class Dish {
 
     public double getDiscountedPrice() {
         double discountMultiplier = getDiscount() / 100;
-        return getPrice() * discountMultiplier;
+        double discountedPrice = getPrice() * discountMultiplier;
+        return discountedPrice;
     }
 
     public String getDiscountedPriceString() {
@@ -39,7 +40,7 @@ public class Dish {
 
     @Override
     public String toString() {
-            return name + " - $" + getPrice();
+        return name + " - $" + getPrice();
     }
 
 }
