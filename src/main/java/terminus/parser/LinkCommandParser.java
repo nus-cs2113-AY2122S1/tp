@@ -7,6 +7,7 @@ import terminus.command.zoomlink.AddLinkCommand;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.Link;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
 /**
@@ -39,7 +40,8 @@ public class LinkCommandParser extends InModuleCommandParser {
      * @return The string containing a description of the number of links in the workspace.
      */
     @Override
-    public String getWorkspaceBanner(NusModule module) {
-        return String.format(Messages.SCHEDULE_BANNER, module.getContentManager(Link.class).getContents().size());
+    public String getWorkspaceBanner(ModuleManager module) {
+        return String.format(Messages.SCHEDULE_BANNER,
+                module.getModule(getModuleName()).getContentManager(Link.class).getContents().size());
     }
 }

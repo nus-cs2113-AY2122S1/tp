@@ -9,6 +9,7 @@ import terminus.command.HelpCommand;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
 public abstract class CommandParser {
@@ -63,7 +64,7 @@ public abstract class CommandParser {
         return commandMap.keySet();
     }
 
-    public abstract String getWorkspaceBanner(NusModule module);
+    public abstract String getWorkspaceBanner(ModuleManager module);
 
     /**
      * Returns the list of items in the help menu.

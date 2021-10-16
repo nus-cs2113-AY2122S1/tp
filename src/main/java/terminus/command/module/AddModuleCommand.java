@@ -12,7 +12,9 @@ import terminus.module.ModuleManager;
 import terminus.ui.Ui;
 
 public class AddModuleCommand extends Command {
+
     private String moduleName;
+
     /**
      * Returns the format for the command.
      *
@@ -53,24 +55,25 @@ public class AddModuleCommand extends Command {
     /**
      * Executes the command. Prints the required result to the Ui.
      *
-     * @param ui     The Ui object to send messages to the users.
+     * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
-     * @throws InvalidCommandException  when the command could not be found.
+     * @throws InvalidCommandException when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidCommandException, InvalidArgumentException {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager)
+            throws InvalidCommandException, InvalidArgumentException {
         if (moduleManager.getModule(moduleName) != null) {
             throw new InvalidArgumentException("Module already exist!");
         }
         moduleManager.setModule(moduleName);
-        ui.printSection(String.format("Module %s has been added",moduleName));
+        ui.printSection(String.format("Module %s has been added", moduleName));
         return new CommandResult(true);
     }
 
-    private boolean isValidModuleArguments (ArrayList<String> argArray) {
-        if(argArray.size() != 1) {
+    private boolean isValidModuleArguments(ArrayList<String> argArray) {
+        if (argArray.size() != 1) {
             return false;
         } else {
             return !CommonUtils.hasEmptyString(argArray);

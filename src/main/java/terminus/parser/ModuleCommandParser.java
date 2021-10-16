@@ -5,6 +5,7 @@ import terminus.command.module.AddModuleCommand;
 import terminus.command.module.DeleteModuleCommand;
 import terminus.command.module.ViewModuleCommand;
 import terminus.common.CommonFormat;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
 public class ModuleCommandParser extends CommandParser {
@@ -28,7 +29,7 @@ public class ModuleCommandParser extends CommandParser {
     }
 
     @Override
-    public String getWorkspaceBanner(NusModule module) {
+    public String getWorkspaceBanner(ModuleManager module) {
         return "Welcome to the workspace module";
     }
 }

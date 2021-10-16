@@ -4,34 +4,45 @@ Welcome to TermiNUS!
 Type any of the following to get started:
 > exit
 > help
-> note
-> schedule
+> module
+> go
 
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
-[] >>> Error: Missing arguments.
-Format: note add "<note name>" "<note content>"
-[] >>> Your note on 'CS2113T' has been added!
-[] >>> List of Content
+[] >>> Module test has been added
+[] >>> 
+Entering test workspace
+
+Type any of the following to get started:
+> exit
+> help
+> note
+> schedule
+> back
+
+[test] >>> Error: Missing arguments.
+Format: test > note add "<note name>" "<note content>"
+[test] >>> Your note on 'CS2113T' has been added!
+[test] >>> List of Content
 ---------------
 1. CS2113T
 
 Rerun the same command with an index behind to view the content.
-[] >>> Error: Invalid numerical value provided.
-Format: note view {item number}
-[] >>> Error: Content not found.
-[] >>> Name: CS2113T
+[test] >>> Error: Invalid numerical value provided.
+Format: test > note view {item number}
+[test] >>> Error: Content not found.
+[test] >>> Name: CS2113T
 Content:
 Week 8 test
 
-[] >>> Error: Missing arguments.
-Format: note delete <item number>
-[] >>> Error: Invalid numerical value provided.
-Format: note delete <item number>
-[] >>> Error: Content not found.
-[] >>> Your note on 'CS2113T' has been deleted!
-[] >>> 
+[test] >>> Error: Missing arguments.
+Format: test > note delete <item number>
+[test] >>> Error: Invalid numerical value provided.
+Format: test > note delete <item number>
+[test] >>> Error: Content not found.
+[test] >>> Your note on 'CS2113T' has been deleted!
+[test] >>> 
 Help Menu
 ---------
 exit : Exits the program.
@@ -46,33 +57,36 @@ Format: note
 schedule : Move to schedules workspace.
 Format: schedule
 
-[] >>> Error: Missing arguments.
-Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
-[] >>> Error: Missing arguments.
-Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
-[] >>> Error: Missing arguments.
-Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
-[] >>> Your schedule on 'CS2113T Tutorial' has been added!
-[] >>> Your schedule on 'CS2113T Lecture' has been added!
-[] >>> Command not found! Type 'help' for a list of commands.
-[] >>> List of Content
+back : Returns to the parent workspace.
+Format: back
+
+[test] >>> Error: Missing arguments.
+Format: test > schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
+[test] >>> Error: Missing arguments.
+Format: test > schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
+[test] >>> Error: Missing arguments.
+Format: test > schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
+[test] >>> Your schedule on 'CS2113T Tutorial' has been added!
+[test] >>> Your schedule on 'CS2113T Lecture' has been added!
+[test] >>> Command not found! Type 'help' for a list of commands.
+[test] >>> List of Content
 ---------------
 1. CS2113T Tutorial (Thursday, 10:00): https://zoom.us/test
 2. CS2113T Lecture (Friday, 16:00): https://zoom.us/test
 
 Rerun the same command with an index behind to view the content.
-[] >>> Error: Content not found.
-[] >>> CS2113T Lecture (Friday, 16:00): https://zoom.us/test
-[] >>> Error: Missing arguments.
-Format: schedule delete <item number>
-[] >>> Error: Content not found.
-[] >>> Your link on 'CS2113T Tutorial' has been deleted!
-[] >>> List of Content
+[test] >>> Error: Content not found.
+[test] >>> CS2113T Lecture (Friday, 16:00): https://zoom.us/test
+[test] >>> Error: Missing arguments.
+Format: test > schedule delete <item number>
+[test] >>> Error: Content not found.
+[test] >>> Your link on 'CS2113T Tutorial' has been deleted!
+[test] >>> List of Content
 ---------------
 1. CS2113T Lecture (Friday, 16:00): https://zoom.us/test
 
 Rerun the same command with an index behind to view the content.
-[] >>> Command not found! Type 'help' for a list of commands.
-[] >>> Command not found! Type 'help' for a list of commands.
-[] >>> Your link on 'CS2113T Lecture' has been deleted!
-[] >>> Goodbye!
+[test] >>> Command not found! Type 'help' for a list of commands.
+[test] >>> Command not found! Type 'help' for a list of commands.
+[test] >>> Your link on 'CS2113T Lecture' has been deleted!
+[test] >>> Goodbye!

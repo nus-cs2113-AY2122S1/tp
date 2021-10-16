@@ -19,10 +19,10 @@ import terminus.ui.Ui;
 public class Terminus {
 
     public static final String[] INVALID_JSON_MESSAGE = {
-            "Invalid file data detected.",
-            "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
-            "To save your current file, close your terminal (do not run exit).",
-            "Otherwise, you can continue using the program :)"
+        "Invalid file data detected.",
+        "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
+        "To save your current file, close your terminal (do not run exit).",
+        "Otherwise, you can continue using the program :)"
     };
     private Ui ui;
     private CommandParser parser;
@@ -30,7 +30,6 @@ public class Terminus {
 
     private ModuleStorage moduleStorage;
     private ModuleManager moduleManager;
-    private NusModule nusModule;
 
     private static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "Format: %s";
     private static final Path DATA_DIRECTORY = Path.of(System.getProperty("user.dir"), "data");
@@ -70,14 +69,14 @@ public class Terminus {
             TerminusLogger.severe("Invalid file data detected!", e.fillInStackTrace());
             ui.printSection(INVALID_JSON_MESSAGE);
         } finally {
-            if (this.nusModule == null) {
+            if (this.moduleManager == null) {
                 TerminusLogger.warning("File not found.");
                 TerminusLogger.warning("Creating new NusModule instance...");
-                this.nusModule = new NusModule();
+                this.moduleManager = new ModuleManager();
             } else {
                 TerminusLogger.info("File loaded.");
             }
-            this.ui.printParserBanner(this.parser, this.nusModule);
+            this.ui.printParserBanner(this.parser, this.moduleManager);
         }
         TerminusLogger.info("Terminus has started.");
     }
@@ -102,7 +101,7 @@ public class Terminus {
                     parser = result.getAdditionalData();
                     assert parser != null : "commandParser is not null";
                     workspace = parser.getWorkspace();
-                    ui.printParserBanner(parser, nusModule);
+                    ui.printParserBanner(parser, moduleManager);
                 }
                 TerminusLogger.info("Saving data into file...");
                 this.moduleStorage.saveFile(moduleManager);

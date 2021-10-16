@@ -6,18 +6,27 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.ExitCommand;
+import terminus.command.GoCommand;
 import terminus.command.HelpCommand;
 import terminus.command.NotesCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
+import terminus.module.ModuleManager;
+import terminus.ui.Ui;
 
 public class MainCommandParserTest {
-    
+
     private MainCommandParser commandParser;
+
+    private ModuleManager moduleManager;
+    private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
         this.commandParser = MainCommandParser.getInstance();
+        moduleManager = new ModuleManager();
+        moduleManager.setModule(tempModule);
+
     }
 
     @Test
@@ -34,7 +43,7 @@ public class MainCommandParserTest {
         assertTrue(commandParser.parseCommand("   exit   ") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("eXiT a") instanceof ExitCommand);
     }
-    
+
     @Test
     void parseCommand_resolveHelpCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("help") instanceof HelpCommand);
@@ -48,14 +57,14 @@ public class MainCommandParserTest {
         assertTrue(commandParser.getCommandList().contains("exit"));
         assertTrue(commandParser.getCommandList().contains("help"));
     }
-    
+
     @Test
     void parseCommand_resolveNoteCommand_success() throws InvalidCommandException, InvalidArgumentException {
-        assertTrue(commandParser.parseCommand("note") instanceof NotesCommand);
-        assertTrue(commandParser.parseCommand("NOTE") instanceof NotesCommand);
-        assertTrue(commandParser.parseCommand("   note   ") instanceof NotesCommand);
-        assertTrue(commandParser.parseCommand("note    help") instanceof NotesCommand);
-        assertTrue(commandParser.parseCommand("note    exit") instanceof NotesCommand);
+        assertTrue(commandParser.parseCommand("go " + tempModule + " note") instanceof GoCommand);
+        assertTrue(commandParser.parseCommand("go " + tempModule + " NOTE") instanceof GoCommand);
+        assertTrue(commandParser.parseCommand("go " + tempModule + "    note   ") instanceof GoCommand);
+        assertTrue(commandParser.parseCommand("go " + tempModule + " note    help") instanceof GoCommand);
+        assertTrue(commandParser.parseCommand("go " + tempModule + " note    exit") instanceof GoCommand);
     }
 
     @Test
