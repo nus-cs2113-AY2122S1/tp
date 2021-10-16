@@ -1,6 +1,6 @@
 package seedu.traveller.items;
 
-public class Housing extends Item{
+public class Housing extends Item {
     public Housing(String itemName, String details) {
         super(itemName, details);
         this.itemType = "H";

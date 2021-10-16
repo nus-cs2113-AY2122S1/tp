@@ -17,9 +17,9 @@ public class ParserTest {
     @Test
     public void parse_new_success() {
         try {
-            assertEquals(newCommand.toString(), Parser.parse("new trip2 CHN JPN").toString());
+            assertEquals(newCommand.toString(), Parser.parse("new trip2 /from CHN /to JPN").toString());
         } catch (TravellerException e) {
-            assertEquals("\tWrong format for New!\n\tCorrect format: new TRIP_NAME START END", e.getMessage());
+            assertEquals("\tWrong format for New!\n\tCorrect format: new TRIP_NAME /from START /to END", e.getMessage());
         }
     }
 
@@ -28,7 +28,7 @@ public class ParserTest {
         try {
             assertEquals(newCommand, Parser.parse("new trip2 CHN-JPN"));
         } catch (TravellerException e) {
-            assertEquals("\tWrong format for New!\n\tCorrect format: new TRIP_NAME START END", e.getMessage());
+            assertEquals("\tWrong format for New!\n\tCorrect format: new TRIP_NAME /from START /to END", e.getMessage());
         }
     }
 

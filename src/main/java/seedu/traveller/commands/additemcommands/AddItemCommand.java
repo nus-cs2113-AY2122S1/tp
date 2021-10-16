@@ -21,7 +21,7 @@ public abstract class AddItemCommand extends Command {
     private final String details;
     protected Item item;
 
-    abstract protected void createItem();
+    protected abstract void createItem();
 
     public AddItemCommand(String tripName, int dayIndex, String itemName, String details) {
         logger.setLevel(Level.INFO);
