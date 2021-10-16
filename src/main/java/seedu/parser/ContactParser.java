@@ -161,7 +161,6 @@ public abstract class ContactParser {
         }
     }
 
-
     private int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {

@@ -1,10 +1,10 @@
 package seedu.storage;
 
-import org.w3c.dom.Text;
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.exception.FileErrorException;
 import seedu.ui.TextUi;
+import seedu.ui.UserInputTextUi;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,8 +76,9 @@ public class Storage {
     public Contact loadExistingPersonalContact() throws FileErrorException {
         if (!hasExistingPersonalContactFile() || hasEmptyExistingPersonalContactFile()) {
             isFirstRun = true;
-            // get new contact
-            String personalName = TextUi.getNameMessage();
+            // get new contact's name
+            TextUi.welcomeMessage();
+            String personalName = UserInputTextUi.getUserInput();
             Contact personalContact = new Contact(personalName, null,null,null,
                     null,null);
             ContactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
@@ -88,4 +89,5 @@ public class Storage {
         TextUi.welcomeBackMessage(personalContact);
         return personalContact;
     }
+
 }

@@ -7,7 +7,6 @@ import seedu.exception.FileErrorException;
 import seedu.ui.ExceptionTextUi;
 
 import static seedu.storage.Storage.SEPARATOR;
-import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,6 +39,10 @@ public class ContactsDecoder {
             throw new FileErrorException();
         }
         return personalContact;
+    }
+
+    public void getPersonalContactDetails() {
+
     }
 
     private static Contact decodePersonalContact(String contactText, Contact contact) {

@@ -9,9 +9,9 @@ import seedu.storage.ContactsEncoder;
 import seedu.storage.Storage;
 import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
+import seedu.ui.UserInputTextUi;
 
 public class Duke {
-    private TextUi textUi;
     private String contactFilePath;
     private Storage storage;
     private MainParser parser;
@@ -36,7 +36,7 @@ public class Duke {
     private void runConTech() {
         Command command;
         do {
-            String userInput = textUi.getUserInput();
+            String userInput = UserInputTextUi.getUserInput();
             command = parser.parseCommand(userInput);
             runCommandProcedure(command);
         } while (!command.isExit());
