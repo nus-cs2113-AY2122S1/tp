@@ -8,7 +8,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 /**
- * To create a new Workout
+ * To create a new Workout.
  */
 
 
