@@ -6,7 +6,7 @@ import seedu.duke.exception.GetJackDException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static seedu.duke.parser.Parser.getExerciseArgs;
+import static seedu.duke.parser.AddExerciseParser.getExerciseArgs;
 import static seedu.duke.parser.Parser.getWorkoutAndExerciseIndices;
 import static seedu.duke.parser.Parser.splitCommandWordsAndArgs;
 import static seedu.duke.parser.Parser.parseArgsAsIndex;

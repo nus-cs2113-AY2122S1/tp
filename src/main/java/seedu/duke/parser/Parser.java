@@ -18,6 +18,7 @@ public abstract class Parser {
     public static String EXERCISE_KEYWORD = "/e ";
     public static String SETS_KEYWORD = "/s ";
     public static String REPS_KEYWORD = "/r ";
+    public static final String PARAMETER_SEPARATOR = ", ";
     protected String userInputString;
 
     public Parser(String userInputString) {
@@ -44,55 +45,6 @@ public abstract class Parser {
         String[] commandTypeAndParams = splitCommandWordsAndArgs(userInputString, "\\s+");
         String commandArgs = commandTypeAndParams[1].trim();
         return commandArgs;
-    }
-
-    /**
-     * Gets arguments required for an exercise, such as workoutIndex, exerciseName, sets and reps.
-     *
-     * @param commandArgs user input without the command word.
-     * @return string array containing workoutIndex, exerciseName, sets and reps.
-     * @throws GetJackDException if any of the above-mentioned arguments are empty.
-     */
-    static String[] getExerciseArgs(String commandArgs) throws GetJackDException {
-        if (!commandArgs.contains(WORKOUT_KEYWORD) && !commandArgs.contains(EXERCISE_KEYWORD)
-                && !commandArgs.contains(SETS_KEYWORD) && !commandArgs.contains(REPS_KEYWORD)) {
-            throw new GetJackDException("Invalid format for add exercise.");
-        }
-        String args = commandArgs.replace(WORKOUT_KEYWORD, "").trim();
-
-        String[] workoutIndexAndExerciseArgs = splitCommandWordsAndArgs(args, EXERCISE_KEYWORD);
-
-        String[] nameAndSetsReps = splitCommandWordsAndArgs(workoutIndexAndExerciseArgs[1].trim(), SETS_KEYWORD);
-
-        String[] setsAndReps = splitCommandWordsAndArgs(nameAndSetsReps[1].trim(), REPS_KEYWORD);
-
-        String workoutIndex = workoutIndexAndExerciseArgs[0].trim();
-        String exerciseName = nameAndSetsReps[0].trim();
-        String sets = setsAndReps[0].trim();
-        String reps = setsAndReps[1].trim();
-
-        String[] exerciseArgs = new String[]{workoutIndex, exerciseName, sets, reps};
-        for (String s : exerciseArgs) {
-            assert (!s.contains(WORKOUT_KEYWORD));
-            assert (!s.contains(EXERCISE_KEYWORD));
-            assert (!s.contains(SETS_KEYWORD));
-            assert (!s.contains(REPS_KEYWORD));
-        }
-
-        if (workoutIndex.isEmpty()) {
-            LOGGER.info("error getting exercise arguments: empty workout index");
-            throw new GetJackDException("Error. Empty workout index");
-        }
-        if (exerciseName.isEmpty()) {
-            LOGGER.info("error getting exercise arguments: empty exercise name");
-            throw new GetJackDException("Error. Empty exercise name.");
-        }
-        if (sets.isEmpty() || reps.isEmpty()) {
-            LOGGER.info("error getting exercise arguments: empty sets or reps");
-            throw new GetJackDException("Error. Empty sets or reps.");
-        }
-
-        return exerciseArgs;
     }
 
     /**

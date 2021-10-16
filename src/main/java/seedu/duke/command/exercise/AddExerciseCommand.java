@@ -10,10 +10,7 @@ import seedu.duke.ui.Ui;
 import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
-import static seedu.duke.parser.Parser.EXERCISE_KEYWORD;
-import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
-import static seedu.duke.parser.Parser.SETS_KEYWORD;
-import static seedu.duke.parser.Parser.REPS_KEYWORD;
+import static seedu.duke.parser.Parser.PARAMETER_SEPARATOR;
 
 /**
  * For adding a new exercise to a workout.
@@ -21,10 +18,11 @@ import static seedu.duke.parser.Parser.REPS_KEYWORD;
 public class AddExerciseCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exercise to a workout.\n"
-            + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_NAME "
-            + SETS_KEYWORD + "NUMBER_OF_SETS " + REPS_KEYWORD + "NUMBER_OF_REPS\n"
-            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3 " + EXERCISE_KEYWORD + "push ups "
-            + SETS_KEYWORD + "3 " + REPS_KEYWORD + "10";
+            + "Format: add [exercise description], [sets and reps], [workout index]\n"
+            + "Parameters:\n"
+            + "\tSets and reps: \"5 10\" - 5 sets of 10 reps\n"
+            + "\tWorkout index: Index of workout to add exercise to\n"
+            + "Example: " + COMMAND_WORD + " Push-ups" + PARAMETER_SEPARATOR + "5 10" + PARAMETER_SEPARATOR + "1";
     public static final String MESSAGE_SUCCESS = "New exercise added: %1$s";
 
     private static final Logger LOGGER = Logger.getLogger(AddExerciseCommand.class.getName());
