@@ -5,6 +5,9 @@ import java.time.LocalDate;
 public enum DayOfTheWeek {
     MON, TUE, WED, THU, FRI, SAT, SUN;
 
+    public static final String TODAY_PERIOD = "today";
+    public static final String TOMORROW_PERIOD = "tomorrow";
+
     /**
      * Determines if the input parameter is a valid day of the week.
      *
@@ -27,7 +30,7 @@ public enum DayOfTheWeek {
      * @return true if period is "today" or "tomorrow", false otherwise
      */
     public static boolean isTodayOrTomorrow(String period) {
-        return period.equalsIgnoreCase("today") | period.equalsIgnoreCase("tomorrow");
+        return period.equalsIgnoreCase(TODAY_PERIOD) | period.equalsIgnoreCase(TOMORROW_PERIOD);
     }
 
     /**
