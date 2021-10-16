@@ -48,7 +48,7 @@ public abstract class Parser {
 
     static int parseWorkoutIndex(String commandArgs) throws GetJackDException {
         String arg = commandArgs.trim();
-        int workoutIndex = parseArgsAsIndex(arg);
+        int workoutIndex = (Command.workoutMode == 0) ? parseArgsAsIndex(arg) : Command.workoutMode;
         return workoutIndex;
     }
 
@@ -60,9 +60,12 @@ public abstract class Parser {
      */
     static int[] parseWorkoutAndExerciseIndex(String commandArgs) throws GetJackDException {
         String[] args = commandArgs.split(PARAMETER_SEPARATOR);
+        if ((args.length < 2 && Command.workoutMode == 0) || args.length < 1) {
+            throw new GetJackDException("Error. Missing workout parameters");
+        }
         int exerciseIndex = parseArgsAsIndex(args[0]);
-        int workoutIndex = parseArgsAsIndex(args[1]);
-        int[] indices = {workoutIndex, exerciseIndex};
+        int workoutIndex = (Command.workoutMode == 0) ? parseArgsAsIndex(args[1]) : Command.workoutMode;
+        int[] indices = {exerciseIndex, workoutIndex};
         return indices;
     }
 
