@@ -22,7 +22,7 @@ public class DeleteLessonCommand extends Command {
             throws DukeException, IOException {
         Lesson deletedLesson = lessonList.getLesson(lessonIndex);
         lessonList.deleteLesson(lessonIndex);
-        storage.saveData(taskList, lessonList);
+        storage.saveData(taskList, lessonList, Storage.LESSON_FILE_NAME);
         ui.printLessonDeleted(deletedLesson, lessonList.getSize());
     }
 }

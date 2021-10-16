@@ -123,10 +123,14 @@ public class TaskList {
      */
     public static List<Task> deserialize(List<String> data) throws DeserializeTaskException {
         List<Task> taskList = new ArrayList<>();
-        for (String entry : data) {
-            if (entry.charAt(0) == 'T') {
-                taskList.add(Task.deserialize(entry));
+        try {
+            for (String entry : data) {
+                if (entry.charAt(0) == 'T') {
+                    taskList.add(Task.deserialize(entry));
+                }
             }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DeserializeTaskException(Messages.ERROR_DESERIALIZING_DATA);
         }
         return taskList;
     }
