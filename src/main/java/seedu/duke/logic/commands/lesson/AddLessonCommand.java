@@ -7,6 +7,7 @@ import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.TaskList;
+import seedu.duke.DukeException;
 import seedu.duke.ui.Ui;
 
 public class AddLessonCommand extends Command {
@@ -23,10 +24,11 @@ public class AddLessonCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList) throws IOException {
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
+            throws DukeException, IOException {
         Lesson newLesson = new Lesson(title, dayOfTheWeek, startTime, endTime);
         lessonList.addLesson(newLesson);
-        storage.saveData(taskList, lessonList);
+        storage.saveData(taskList, lessonList, "lessons.txt");
         ui.printLessonAdded(newLesson, lessonList.getSize());
     }
 }

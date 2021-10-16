@@ -8,6 +8,7 @@ import seedu.duke.logic.parser.Parser;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.TaskList;
 import seedu.duke.commons.core.Messages;
+import seedu.duke.storage.exceptions.StorageException;
 import seedu.duke.ui.Ui;
 
 public class Duke {
@@ -25,8 +26,9 @@ public class Duke {
         ui = new Ui();
         storage = new Storage();
         try {
-            taskList = new TaskList(TaskList.deserialize(storage.loadData()));
-            lessonList = new LessonList(LessonList.deserialize(storage.loadData()));
+            taskList = new TaskList(TaskList.deserialize(storage.loadData("tasks.txt")));
+            lessonList = new LessonList(LessonList.deserialize(storage.loadData("lessons.txt")));
+            //TODO: add moduleList loading here
             ui.printMessage(Messages.SUCCESS_RETRIEVING_DATA);
         } catch (DukeException | IOException e) {
             ui.printMessage(e.getMessage());

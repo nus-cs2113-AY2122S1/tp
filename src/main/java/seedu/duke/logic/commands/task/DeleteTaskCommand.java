@@ -22,7 +22,7 @@ public class DeleteTaskCommand extends Command {
             throws DukeException, IOException {
         Task deletedTask = taskList.getTask(taskIndex);
         taskList.deleteTask(taskIndex);
-        storage.saveData(taskList, lessonList);
+        storage.saveData(taskList, lessonList, "tasks.txt");
         ui.printTaskDeleted(deletedTask, taskList.getSize());
     }
 }
