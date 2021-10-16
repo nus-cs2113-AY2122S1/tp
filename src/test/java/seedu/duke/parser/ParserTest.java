@@ -59,7 +59,7 @@ class ParserTest {
     void parseWorkoutAndExerciseIndex_validInput_returnWorkoutAndExerciseIndices() {
         String input = " 2, 3";
         try {
-            assertArrayEquals(new int[]{2, 3}, parseWorkoutAndExerciseIndex(input));
+            assertArrayEquals(new int[]{3, 2}, parseWorkoutAndExerciseIndex(input));
         } catch (GetJackDException e) {
             e.printStackTrace();
         }
