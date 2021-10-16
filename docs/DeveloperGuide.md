@@ -1,8 +1,20 @@
 # Developer Guide
 
+- [Acknowledgements](#acknowledgements)
+- [Design & Implementation](#design-&-implementation)
+  - [Data Component](#data-component)
+  - [Storage Component](#storage-component)
+- [Product Scope](#product-scope)
+  - [Target User Profile](#target-user-profile)
+  - [Value Proposition](#value-proposition)
+- [User Stories](#user-stories)
+- [Non-Functional Requirements](#non-functional-requirements)
+- [Glossary](#glossary)
+- [Instructions for manual testing](#instructions-for-manual-testing)
+
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- Libraries used: [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 ## Design & implementation
 
@@ -24,17 +36,34 @@ exercises (in the form of an `Exercise` object). Lastly, `Exercise` stores the e
 * `reps` corresponding to the number of times the exercise is done in a given set.
 * `sets` corresponding to the number of times the whole exercise is repeated.
 
-Storage: `addToWorkoutListModel(WorkoutModel workout)` and `addToWorkoutModel(ExerciseModel exercise)` from the `storage.models` component
+Storage.models: `addToWorkoutListModel(WorkoutModel workout)` and `addToWorkoutModel(ExerciseModel exercise)` from the `storage.models` component
 are called in the methods of `Workout` and `Exercise` respectively. This causes the dependency on `WorkoutModel` and `WorkoutListModel` as seen in the UML Diagram.
+
+###Storage Component
+Location: `seedu.duke.storage`
+
+![img.png](umldg/StorageDiagram.png)
+
+__Note:__
+* `Storage` : Deals with loading tasks from the json file and saving tasks in the json file.
+* `JsonUtil` : Handles functions required to convert Java Objects to JSON objects and vice versa using the Jackson Library.
+
+The `Storage` component,
+- can save workout list data in json format, and read them back into corresponding Java objects.
+- depends on some classes in the `Models` component within Storage (because the Storage component can only save/retrieve objects that belong to the Model).
 
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+- has a need to plan and remember their workouts quickly
+- Prefer desktop apps over other types
+- Can type fast
+- Comfortable using CLI apps
 
-### Value proposition
+### Value proposition: 
+Manage fitness routines quickly
 
-{Describe the value proposition: what problem does it solve?}
+
 
 ## User Stories
 
