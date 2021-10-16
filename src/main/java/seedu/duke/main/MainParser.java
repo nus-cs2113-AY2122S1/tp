@@ -36,6 +36,9 @@ public class MainParser {
         case "edit-dish":
             dishParser.editDish(command, menu);
             break;
+        case "discount-dish":
+            dishParser.discountDish(command, menu);
+            break;
         case "list-menu":
             dishParser.listMenu(menu);
             break;

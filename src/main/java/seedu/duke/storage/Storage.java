@@ -42,8 +42,8 @@ public class Storage {
                     Ingredient newIngredient = decodeIngredient(line);
                     ingredientParser.loadIngredientFromStorage(ingredientList, newIngredient);
                 } else if (line.startsWith("add-dish")) {
-                    Dish newDishItem = decodeDish(line);
-                    dishParser.loadDishFromStorage(menu, newDishItem);
+                    Dish newDish = decodeDish(line);
+                    dishParser.loadDishFromStorage(menu, newDish);
                 }
             }
             fileReader.close();
@@ -82,16 +82,18 @@ public class Storage {
     }
 
     private static Dish decodeDish(String toRead) {
-        String[] description = toRead.trim().split("\\|", 3);
-        double dishPrice = Double.valueOf(description[2]);
+        String[] description = toRead.trim().split("\\|", 4);
+        double dishPrice = Double.parseDouble(description[2]);
         Dish dish = new Dish(description[1], dishPrice);
+        double discount = Double.parseDouble(description[3]);
+        dish.setDiscount(discount);
         return dish;
     }
 
     private static String encodeDish(String toWrite) {
         String encodedItem = null;
-        String[] description = toWrite.trim().split(" ", 2);
-        encodedItem = "add-dish" + "|" + description[0] + "|" + description[1].substring(3);
+        String[] description = toWrite.trim().split(" ");
+        encodedItem = "add-dish" + "|" + description[0] + "|" + description[2].substring(1) + "|" + description[3];
         assert (!encodedItem.contains("$"));
         return encodedItem;
     }
@@ -111,7 +113,7 @@ public class Storage {
             }
             for (int i = 0; i < menu.menu.size(); i += 1) {
                 Dish dish = menu.menu.get(i);
-                fileWriter.write(String.format("%s\n", encodeDish(dish.toString())));
+                fileWriter.write(String.format("%s\n", encodeDish(dish.toString() + " " + dish.getDiscount())));
             }
             fileWriter.close();
         } catch (IOException e) {
