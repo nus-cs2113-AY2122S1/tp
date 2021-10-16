@@ -124,7 +124,7 @@ public class Storage {
      * @return the path for the file
      * @throws StorageException the given file name is invalid
      */
-    private Path getPath(String fileName) throws StorageException {
+    public Path getPath(String fileName) throws StorageException {
         switch (fileName) {
         case TASK_FILE_NAME:
             return PATH_TO_TASK_FILE;
