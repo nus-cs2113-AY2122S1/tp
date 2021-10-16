@@ -11,8 +11,6 @@ import seedu.duke.ui.Ui;
 import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
-import static seedu.duke.parser.Parser.EXERCISE_KEYWORD;
-import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 
 /**
  * Sets isDone attribute in an exercise Object to true.
@@ -20,8 +18,11 @@ import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 public class MarkExerciseAsDoneCommand extends Command {
     public static final String COMMAND_WORD = "done";
     public static final String MESSAGE_USAGE = "done: Marks the exercise in the workout workout as complete.\n"
-            + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_INDEX\n"
-            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3 " + EXERCISE_KEYWORD + "2";
+            + "Format: done [Exercise index], [Workout index]\n"
+            + "Parameters:\n"
+            + "\tExercise index - Index of exercise to mark done\n"
+            + "\tWorkout index - Index of workout containing exercise to mark done\n"
+            + "Example: " + COMMAND_WORD + " 1, 2  - Mark exercise 1 from workout 2 as done";
     public static final String MESSAGE_SUCCESS = "Completed: %1$s";
     private static final Logger LOGGER = Logger.getLogger(MarkExerciseAsDoneCommand.class.getName());
 

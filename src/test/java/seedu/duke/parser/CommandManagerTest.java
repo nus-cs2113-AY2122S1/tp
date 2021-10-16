@@ -7,7 +7,9 @@ import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.exercise.AddExerciseCommand;
 import seedu.duke.command.exercise.MarkExerciseAsDoneCommand;
 import seedu.duke.command.workout.DeleteWorkoutCommand;
+import seedu.duke.exception.GetJackDException;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -36,53 +38,23 @@ class CommandManagerTest {
     }
 
     @Test
-    void generateCommand_deleteWorkoutCommandNoWorkoutIndex_returnsIncorrectCommand() {
-        String[] inputs = {"delete", "delete /w ", "delete "};
-        for (String input : inputs) {
-            Command result = generator.generateCommand(input);
-            assertTrue(result instanceof IncorrectCommand);
-        }
-    }
-
-    @Test
     void generateCommand_deleteWorkoutCommandCorrect_returnsDeleteCommand() {
         int testIndex = 1;
-        String input = "delete /w " + testIndex;
+        String input = "delete " + testIndex;
         DeleteWorkoutCommand result = (DeleteWorkoutCommand) generator.generateCommand(input);
         assertEquals(result.getWorkoutIndex(), testIndex);
     }
 
     @Test
-    void generateCommand_addExerciseCommandNoWorkoutIndex_returnsIncorrectCommand() {
-        String input = "add /w /e Exercise /s 10 /r 100";
-        Command result = generator.generateCommand(input);
-        assertTrue(result instanceof IncorrectCommand);
-    }
-
-    @Test
-    void generateCommand_addExerciseCommandNoSets_returnsIncorrectCommand() {
-        String input = "add /w 1 /e Exercise /s  /r 100";
-        Command result = generator.generateCommand(input);
-        assertTrue(result instanceof IncorrectCommand);
-    }
-
-    @Test
     void generateCommand_addExerciseCorrect_returnsAddExerciseCommand() {
-        String input = "add /w 1 /e Exercise /s 10 /r 100";
+        String input = "add Exercise, 10 100, 1";
         Command result = generator.generateCommand(input);
         assertTrue(result instanceof AddExerciseCommand);
     }
 
     @Test
-    void generateCommand_markExerciseAsDoneNoWorkoutIndex_returnsIncorrectCommand() {
-        String input = "done /w 1 /e ";
-        Command result = generator.generateCommand(input);
-        assertTrue(result instanceof IncorrectCommand);
-    }
-
-    @Test
     void generateCommand_markExerciseAsDoneCorrect_returnsMarkExerciseAsDoneCommand() {
-        String input = "done /w 1 /e 3";
+        String input = "done 3, 1";
         Command result = generator.generateCommand(input);
         assertTrue(result instanceof MarkExerciseAsDoneCommand);
     }

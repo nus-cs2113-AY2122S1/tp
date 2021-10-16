@@ -17,9 +17,7 @@ public class DisplayExerciseParser extends Parser {
 
     private Command prepareDisplayExercises(String commandArgs) {
         try {
-            String[] indices = getWorkoutAndExerciseIndices(commandArgs);
-            int workoutIndex = parseArgsAsIndex(indices[0]);
-
+            int workoutIndex = parseWorkoutIndex(commandArgs);
             return new DisplayExercisesCommand(workoutIndex);
         } catch (GetJackDException e) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + DisplayExercisesCommand.MESSAGE_USAGE);

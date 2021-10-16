@@ -27,14 +27,19 @@ To find out more information about the command, such as input format and paramet
 ________________________________________________________
 ________________________________________________________
 Invalid command format
+
 create: Creates a new workout.
-	Parameters: /w WORKOUT_NAME
-	Example: create /w ab workout
+Format: create [workout description]
+Parameters:
+	Workout description - description or name of workout
+Example: create abs
 ________________________________________________________
 ________________________________________________________
 	create: Creates a new workout.
-		Parameters: /w WORKOUT_NAME
-		Example: create /w ab workout
+	Format: create [workout description]
+	Parameters:
+		Workout description - description or name of workout
+	Example: create abs
 ________________________________________________________
 ________________________________________________________
 	New workout created: Legs
@@ -45,42 +50,61 @@ Workout list:
 ________________________________________________________
 ________________________________________________________
 Invalid command format
+
 add: Adds an exercise to a workout.
-	Parameters: /w WORKOUT_INDEX /e EXERCISE_NAME /s NUMBER_OF_SETS /r NUMBER_OF_REPS
-	Example: add /w 3 /e push ups /s 3 /r 10
+Format: add [exercise description], [sets and reps], [workout index]
+Parameters:
+	Sets and reps: "5 10" - 5 sets of 10 reps
+	Workout index: Index of workout to add exercise to
+Example: add Push-ups, 5 10, 1
 ________________________________________________________
 ________________________________________________________
 	add: Adds an exercise to a workout.
-		Parameters: /w WORKOUT_INDEX /e EXERCISE_NAME /s NUMBER_OF_SETS /r NUMBER_OF_REPS
-		Example: add /w 3 /e push ups /s 3 /r 10
+	Format: add [exercise description], [sets and reps], [workout index]
+	Parameters:
+		Sets and reps: "5 10" - 5 sets of 10 reps
+		Workout index: Index of workout to add exercise to
+	Example: add Push-ups, 5 10, 1
 ________________________________________________________
 ________________________________________________________
 	New exercise added: [ ] Squats | 3 sets of 10 reps
 ________________________________________________________
 ________________________________________________________
 Invalid command format
+
 done: Marks the exercise in the workout workout as complete.
-	Parameters: /w WORKOUT_INDEX /e EXERCISE_INDEX
-	Example: done /w 3 /e 2
+Format: done [Exercise index], [Workout index]
+Parameters:
+	Exercise index - Index of exercise to mark done
+	Workout index - Index of workout containing exercise to mark done
+Example: done 1, 2  - Mark exercise 1 from workout 2 as done
 ________________________________________________________
 ________________________________________________________
 	done: Marks the exercise in the workout workout as complete.
-		Parameters: /w WORKOUT_INDEX /e EXERCISE_INDEX
-		Example: done /w 3 /e 2
+	Format: done [Exercise index], [Workout index]
+	Parameters:
+		Exercise index - Index of exercise to mark done
+		Workout index - Index of workout containing exercise to mark done
+	Example: done 1, 2  - Mark exercise 1 from workout 2 as done
 ________________________________________________________
 ________________________________________________________
 	Completed: [X] Squats | 3 sets of 10 reps
 ________________________________________________________
 ________________________________________________________
 Invalid command format
+
 display: Displays all exercises in the particular workout.
-	Parameters: /w WORKOUT_INDEX
-	Example: display /w 3
+Format: display [Workout index]
+Parameters:
+	Workout index - index of workout to display exercises
+Example: display 3
 ________________________________________________________
 ________________________________________________________
 	display: Displays all exercises in the particular workout.
-		Parameters: /w WORKOUT_INDEX
-		Example: display /w 3
+	Format: display [Workout index]
+	Parameters:
+		Workout index - index of workout to display exercises
+	Example: display 3
 ________________________________________________________
 ________________________________________________________
 Exercises in mentioned workout:
@@ -88,14 +112,21 @@ Exercises in mentioned workout:
 ________________________________________________________
 ________________________________________________________
 Invalid command format
+
 remove: Removes the exercise from the workout.
-	Parameters: /w WORKOUT_INDEX /e EXERCISE_INDEX
-	Example: remove /w 1 /e 3
+Format: done [Exercise index], [Workout index]
+Parameters:
+	Exercise index - Index of exercise to mark done
+	Workout index - Index of workout containing exercise to mark done
+Example: remove 1, 2  - remove exercise 1 from workout 2
 ________________________________________________________
 ________________________________________________________
 	remove: Removes the exercise from the workout.
-		Parameters: /w WORKOUT_INDEX /e EXERCISE_INDEX
-		Example: remove /w 1 /e 3
+	Format: done [Exercise index], [Workout index]
+	Parameters:
+		Exercise index - Index of exercise to mark done
+		Workout index - Index of workout containing exercise to mark done
+	Example: remove 1, 2  - remove exercise 1 from workout 2
 ________________________________________________________
 ________________________________________________________
 	Removed exercise: [X] Squats | 3 sets of 10 reps
@@ -105,14 +136,19 @@ ________________________________________________________
 ________________________________________________________
 ________________________________________________________
 Invalid command format
+
 delete: Deletes the workout corresponding to the workout index.
-	Parameters: /w WORKOUT_INDEX
-	Example: delete /w 1
+Format: delete [Workout index]
+Parameters:
+	Workout index - Index of workout to delete
+Example: delete /w 1
 ________________________________________________________
 ________________________________________________________
 	delete: Deletes the workout corresponding to the workout index.
-		Parameters: /w WORKOUT_INDEX
-		Example: delete /w 1
+	Format: delete [Workout index]
+	Parameters:
+		Workout index - Index of workout to delete
+	Example: delete /w 1
 ________________________________________________________
 ________________________________________________________
 	Deleted workout: Legs

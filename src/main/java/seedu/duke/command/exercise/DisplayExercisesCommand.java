@@ -18,8 +18,10 @@ import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 public class DisplayExercisesCommand extends Command {
     public static final String COMMAND_WORD = "display";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays all exercises in the particular workout.\n"
-            + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX\n"
-            + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3";
+            + "Format: display [Workout index]\n"
+            + "Parameters:\n"
+            + "\tWorkout index - index of workout to display exercises\n"
+            + "Example: " + COMMAND_WORD + " 3";
     public static final String MESSAGE_EMPTY_WORKOUT = "You have no exercises.";
 
     private final int workoutIndex;

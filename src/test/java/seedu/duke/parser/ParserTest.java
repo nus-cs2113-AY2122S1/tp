@@ -6,8 +6,10 @@ import seedu.duke.exception.GetJackDException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static seedu.duke.parser.Parser.getExerciseArgs;
-import static seedu.duke.parser.Parser.getWorkoutAndExerciseIndices;
+import static seedu.duke.parser.AddExerciseParser.getExerciseArgs;
+
+import static seedu.duke.parser.Parser.parseWorkoutAndExerciseIndex;
+import static seedu.duke.parser.Parser.parseWorkoutIndex;
 import static seedu.duke.parser.Parser.splitCommandWordsAndArgs;
 import static seedu.duke.parser.Parser.parseArgsAsIndex;
 
@@ -22,37 +24,53 @@ class ParserTest {
     }
 
     @Test
-    void getExerciseArgs_nonEmptyStringMissingSetsKeyword_throwsException() {
-        String input = "\"/w 1 /e exercise /s 10 100";
+    void getExerciseArgs_nonEmptyStringWorkoutIndex_throwsException() {
+        String input = "Test input, 5 20";
         assertThrows(GetJackDException.class, () -> getExerciseArgs(input));
     }
 
     @Test
     void getExerciseArgs_validInput_returnsStringWithExerciseArgs() {
-        String input = "/w 1 /e exercise /s 10 /r 30";
+        String input = "exercise, 5 20, 1";
         try {
-            assertArrayEquals(new String[]{"1", "exercise", "10", "30"}, getExerciseArgs(input));
+            assertArrayEquals(new String[]{"exercise", "5", "20", "1"}, getExerciseArgs(input));
         } catch (GetJackDException e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    void getWorkoutAndExerciseIndices_noWorkoutKeyword_returnEmptyStringArray() {
-        String input = "/e 1";
-        assertArrayEquals(new String[]{"", ""}, getWorkoutAndExerciseIndices(input));
+    void parseWorkoutIndex_validInput_returnsWorkoutIndex() {
+        String input = "  2  ";
+        try {
+            assertEquals(2, parseWorkoutIndex(input));
+        } catch (GetJackDException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
-    void getWorkoutAndExerciseIndices_haveWorkoutKeywordNoExerciseKeyword_returnWorkoutIndex() {
-        String input = "/w 4";
-        assertArrayEquals(new String[]{"4", ""}, getWorkoutAndExerciseIndices(input));
+    void parseWorkoutIndex_invalidString_throwsException() {
+        String input = "  a  ";
+        assertThrows(GetJackDException.class, () -> parseWorkoutIndex(input));
     }
 
     @Test
-    void getWorkoutAndExerciseIndices_haveWorkoutAndExerciseKeyword_returnWorkoutAndExerciseIndices() {
-        String input = "/w 4 /e 5";
-        assertArrayEquals(new String[]{"4", "5"}, getWorkoutAndExerciseIndices(input));
+    void parseWorkoutAndExerciseIndex_validInput_returnWorkoutAndExerciseIndices() {
+        String input = " 2, 3";
+        try {
+            assertArrayEquals(new int[]{3, 2}, parseWorkoutAndExerciseIndex(input));
+        } catch (GetJackDException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void parseWorkoutAndExerciseIndex_invalidInputs_throwsException() {
+        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex(""));
+        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex("a"));
+        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex("2 2"));
+        assertThrows(GetJackDException.class, () -> parseWorkoutAndExerciseIndex("2,"));
     }
 
     @Test
