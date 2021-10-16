@@ -23,4 +23,9 @@ public class ViewAllCommand extends Command {
     public void execute(TripsList tripsList, Ui ui) {
         ui.printAllTrips(tripsList);
     }
+
+    @Override
+    public String toString() {
+        return "Viewall command";
+    }
 }
