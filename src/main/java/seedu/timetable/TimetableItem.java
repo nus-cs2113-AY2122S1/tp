@@ -4,12 +4,16 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class TimetableItem {
+import seedu.ui.TimetableUI.LineType;
+
+public abstract class TimetableItem {
 
     private String title;
     private DayOfWeek dayOfWeek;
     private String startTime;
     private String endTime;
+
+    public abstract String printTypeInfo(LineType type);
 
     public TimetableItem(String title, String day, String startTime, String endTime) {
         this.title = title;
@@ -94,5 +98,9 @@ public class TimetableItem {
     public int getEndHour() {
         LocalTime endTime = parseTime(this.endTime);
         return endTime.getHour();
+    }
+
+    public int duration() {
+        return getEndHour() - getStartHour();
     }
 }
