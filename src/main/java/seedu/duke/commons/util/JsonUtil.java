@@ -22,6 +22,13 @@ public class JsonUtil {
     private static final String MODULE_FILE_NAME = "ModuleInfo.json";
     private static final Path FULL_MODULE_FILEPATH = Paths.get(ROOT_DIRECTORY, MODULE_DIRECTORY_PATH, MODULE_FILE_NAME);
 
+    /**
+     * Constructor that handles translation from module information in json data to Module[] array that is used for
+     * internal module representation.
+     *
+     * @throws ModuleLoadException exception thrown when the module information file ModuleInfo.json is corrupted
+     * @throws FileNotFoundException exception thrown when ModuleInfo.json is not found
+     */
     public JsonUtil() throws ModuleLoadException, FileNotFoundException {
         Gson gson = new Gson();
         logger = Logger.getLogger(JsonUtil.class.getName());
