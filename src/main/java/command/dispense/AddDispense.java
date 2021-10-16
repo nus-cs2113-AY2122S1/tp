@@ -28,7 +28,7 @@ public class AddDispense extends Command {
         String staffName = parameters.get(CommandParameters.STAFF);
 
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY,
-                                       CommandParameters.CUSTOMER_ID, CommandParameters.STAFF};
+            CommandParameters.CUSTOMER_ID, CommandParameters.STAFF};
         String[] optionalParameters = {};
 
         if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
@@ -42,55 +42,82 @@ public class AddDispense extends Command {
         }
 
         int dispenseQuantity = Integer.parseInt(quantity);
-        int quantityLeftToDispense = dispenseQuantity;
+        int quantityToDispense = dispenseQuantity;
         int totalStock = MedicineManager.getTotalStockQuantity(medicines, medicationName);
         Date dispenseDate = new Date(); //dispense date will be today's date
         ArrayList<Stock> filteredStocks = new ArrayList<>();
 
         for (Medicine medicine : medicines) {
-            if (medicine instanceof Stock) { //Ensure that it is a medicine object
+            if ((medicine instanceof Stock) && (medicine.getMedicineName().equalsIgnoreCase(medicationName))) {
                 filteredStocks.add((Stock) medicine);
             }
+        }
+
+        if (filteredStocks.isEmpty()) {
+            ui.print("Medicine not available!");
+            return;
         }
 
         filteredStocks.sort(new comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
 
         for (Stock stock : filteredStocks) {
-            String existingName = stock.getMedicineName().toUpperCase();
             int existingQuantity = stock.getQuantity();
             int existingId = stock.getStockID();
             Date existingExpiry = stock.getExpiry();
-            boolean medicationExist = existingName.equals(medicationName.toUpperCase());
+            int setStockValue = 0;
 
-            if (medicationExist && (dispenseQuantity > totalStock)) {
+            if (dispenseQuantity > totalStock) {
                 ui.print("Unable to Dispense! Dispense quantity is more than stock available!");
                 ui.print("Dispense quantity: " + dispenseQuantity + " Stock available: " + totalStock);
                 return;
             }
 
-            if (!medicationExist) {
-                continue;
-            }
-
-            if (existingQuantity >= quantityLeftToDispense) {
-                stock.setQuantity(existingQuantity - quantityLeftToDispense);
-                medicines.add(new Dispense(medicationName, dispenseQuantity, customerId, dispenseDate,
-                        staffName, existingId));
-                ui.print("Dispensed:" + medicationName + " Quantity:" + quantityLeftToDispense + " Expiry "
-                        + "date:" + existingExpiry);
+            if (existingQuantity == quantityToDispense) {
+                dispense(ui, medicines, medicationName, customerId, staffName, existingQuantity, dispenseDate,
+                        stock, existingId, existingExpiry, setStockValue);
                 return;
             }
 
-            if (existingName.equalsIgnoreCase(medicationName) && existingQuantity < dispenseQuantity) {
-                quantityLeftToDispense = quantityLeftToDispense - existingQuantity;
-                stock.setQuantity(0);
-                ui.print("Dispensed:" + medicationName + " Quantity:" + existingQuantity + " Expiry "
-                        + "date:" + existingExpiry);
+            if (existingQuantity > quantityToDispense) {
+                setStockValue = existingQuantity - quantityToDispense;
+                dispense(ui, medicines, medicationName, customerId, staffName, quantityToDispense, dispenseDate,
+                        stock, existingId, existingExpiry, setStockValue);
+                return;
+            }
+
+            if (existingQuantity < dispenseQuantity) {
+                quantityToDispense = quantityToDispense - existingQuantity;
+                dispense(ui, medicines, medicationName, customerId, staffName, existingQuantity, dispenseDate,
+                        stock, existingId, existingExpiry, setStockValue);
             }
 
         }
 
-        ui.print("Medicine not available!");
+    }
+
+    /**
+     * Change the stock quantity based on dispense quantity. Add dispense medication to dispense list.
+     *
+     * @param ui                 Reference to the UI object passed by Main to print messages.
+     * @param medicines          Arraylist of all medicines.
+     * @param medicationName     Medication to dispense.
+     * @param customerId         Customer ID whom medicine will be dispensed to.
+     * @param staffName          Staff who dispense the medication.
+     * @param quantityToDispense Quantity of medication to dispense.
+     * @param dispenseDate       Date which medication is dispensed
+     * @param stock              Stock object of the given stock id.
+     * @param existingId         Existing id of the stock object.
+     * @param existingExpiry     Existing expiry of the stock object.
+     * @param setStockValue      Stock quantity to set to after dispensed.
+     */
+    private void dispense(Ui ui, ArrayList<Medicine> medicines, String medicationName, String customerId,
+                          String staffName, int quantityToDispense, Date dispenseDate, Stock stock,
+                          int existingId, Date existingExpiry, int setStockValue) {
+        stock.setQuantity(setStockValue);
+        medicines.add(new Dispense(medicationName, quantityToDispense, customerId, dispenseDate,
+                staffName, existingId));
+        ui.print("Dispensed:" + medicationName + " Quantity:" + quantityToDispense + " Expiry "
+                + "date:" + existingExpiry);
     }
 
 }
