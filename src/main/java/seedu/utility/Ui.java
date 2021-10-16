@@ -3,6 +3,8 @@ package seedu.utility;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,12 +41,16 @@ public class Ui {
     private static final String DEL_INCOME_FORMAT = "Deleting Income: del_in i/INDEX";
     private static final String LIST_INCOME_FORMAT = "Listing Income: list_in";
     private static final String TOTAL_INCOME_FORMAT = "Show Total Income: total_in";
+    private static final String EXPENSE_BETWEEN_FORMAT = "Show Total Expense between 2 dates" 
+            + ": btw_ex s/START_DATE e/END_DATE";
+    private static final String INCOME_BETWEEN_FORMAT = "Show Total Income between 2 dates"
+            + ": btw_in s/START_DATE e/END_DATE";
     private static final String END_FORMAT = "To Terminate The Program: end";
 
 
     private static final List<String> commands = Arrays.asList(HELP_FORMAT, ADD_EXPENSE_FORMAT, DEL_EXPENSE_FORMAT,
-            LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT, LIST_INCOME_FORMAT,
-            TOTAL_INCOME_FORMAT, END_FORMAT);
+            LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, EXPENSE_BETWEEN_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT, 
+            LIST_INCOME_FORMAT, TOTAL_INCOME_FORMAT, INCOME_BETWEEN_FORMAT, END_FORMAT);
 
 
 
@@ -155,6 +161,34 @@ public class Ui {
         assert totalExpense >= 0;
         printLine();
         System.out.printf("Your total expense is: $%.2f\n", totalExpense);
+        printLine();
+    }
+
+    public void printTotalExpenseBetween(double totalExpense, LocalDate start, LocalDate end) {
+        printLine();
+        if (totalExpense == 0) {
+            System.out.printf("You do not have any expense between " 
+                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + "\n");
+        } else {
+            System.out.printf("Your total expense between " 
+                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f\n", totalExpense);
+        }
+        printLine();
+    }
+
+    public void printTotalIncomeBetween(double totalExpense, LocalDate start, LocalDate end) {
+        printLine();
+        if (totalExpense == 0) {
+            System.out.printf("You do not have any income between " 
+                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + "\n");
+        } else {
+            System.out.printf("Your total income between " 
+                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f\n", totalExpense);
+        }
         printLine();
     }
 
