@@ -39,7 +39,7 @@ public class Parser {
      * Breaks down raw user input into commands understood by <code>Traveller</code>.
      * @param rawInput String of the raw user input.
      * @return Command <code>Command</code> object based on the user input.
-     * @throws TravellerException Will be thrown when the raw user input cannot be understood by the <code>Parser</code>.
+     * @throws TravellerException Thrown when the raw user input cannot be understood by the <code>Parser</code>.
      */
     public static Command parse(String rawInput) throws TravellerException {
         logger.setLevel(Level.INFO);

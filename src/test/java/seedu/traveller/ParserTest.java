@@ -1,10 +1,15 @@
 package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
-import seedu.traveller.commands.*;
+import seedu.traveller.commands.DeleteCommand;
+import seedu.traveller.commands.EditCommand;
+import seedu.traveller.commands.NewCommand;
+import seedu.traveller.commands.ViewAllCommand;
+import seedu.traveller.commands.SearchCommand;
+import seedu.traveller.commands.AddDayCommand;
+import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.additemcommands.AddDiningItemCommand;
 import seedu.traveller.commands.additemcommands.AddHousingItemCommand;
-import seedu.traveller.commands.additemcommands.AddItemCommand;
 import seedu.traveller.exceptions.TravellerException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -57,7 +62,8 @@ public class ParserTest {
         try {
             assertEquals(newCommand, Parser.parse("new trip0 CHN-JPN"));
         } catch (TravellerException e) {
-            assertEquals("\tWrong format for New!\n\tCorrect format: new TRIP_NAME /from START /to END", e.getMessage());
+            assertEquals("\tWrong format for New!\n\tCorrect format: new TRIP_NAME /from START /to END",
+                    e.getMessage());
         }
     }
 
