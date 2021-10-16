@@ -25,7 +25,7 @@ public class AddExerciseCommand extends Command {
             + SETS_KEYWORD + "NUMBER_OF_SETS " + REPS_KEYWORD + "NUMBER_OF_REPS\n"
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3 " + EXERCISE_KEYWORD + "push ups "
             + SETS_KEYWORD + "3 " + REPS_KEYWORD + "10";
-    public static final String MESSAGE_SUCCESS = "New exercise added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New exercise added: %s";
 
     private static final Logger LOGGER = Logger.getLogger(AddExerciseCommand.class.getName());
     private final Exercise toAdd;

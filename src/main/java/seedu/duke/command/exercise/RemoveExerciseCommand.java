@@ -21,7 +21,7 @@ public class RemoveExerciseCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the exercise from the workout.\n"
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_INDEX\n"
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1 " + EXERCISE_KEYWORD + "3";
-    public static final String MESSAGE_SUCCESS = "Removed exercise: %1$s";
+    public static final String MESSAGE_SUCCESS = "Removed exercise: %s";
     private static final Logger LOGGER = Logger.getLogger(RemoveExerciseCommand.class.getName());
 
     private final int workoutIndex;

@@ -22,7 +22,7 @@ public class MarkExerciseAsDoneCommand extends Command {
     public static final String MESSAGE_USAGE = "done: Marks the exercise in the workout workout as complete.\n"
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX " + EXERCISE_KEYWORD + "EXERCISE_INDEX\n"
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "3 " + EXERCISE_KEYWORD + "2";
-    public static final String MESSAGE_SUCCESS = "Completed: %1$s";
+    public static final String MESSAGE_SUCCESS = "Completed: %s";
     private static final Logger LOGGER = Logger.getLogger(MarkExerciseAsDoneCommand.class.getName());
 
     private final int workoutIndex;

@@ -33,7 +33,7 @@ public class ListWorkoutsCommand extends Command {
         if (allWorkouts.isEmpty()) {
             ui.showToUser(MESSAGE_EMPTY_WORKOUT_LIST);
         } else {
-            ui.showWorkoutsToUser(allWorkouts);
+            ui.showItemListToUser("Workout list: ",allWorkouts, false);
         }
     }
 }

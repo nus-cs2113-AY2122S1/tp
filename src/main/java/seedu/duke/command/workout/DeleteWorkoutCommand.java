@@ -21,7 +21,7 @@ public class DeleteWorkoutCommand extends Command {
             + ": Deletes the workout corresponding to the workout index.\n"
             + "\tParameters: " + WORKOUT_KEYWORD + "WORKOUT_INDEX\n"
             + "\tExample: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1";
-    public static final String MESSAGE_SUCCESS = "Deleted workout: %1$s";
+    public static final String MESSAGE_SUCCESS = "Deleted workout: %s";
     private static final Logger LOGGER = Logger.getLogger(DeleteWorkoutCommand.class.getName());
     private final int workoutIndex;
 
