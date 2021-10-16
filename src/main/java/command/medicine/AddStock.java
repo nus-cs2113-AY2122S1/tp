@@ -36,7 +36,7 @@ public class AddStock extends Command {
         if (parameters.containsKey(CommandParameters.NAME)) {
             nameToAdd = parameters.get(CommandParameters.NAME);
             for (Medicine medicine : medicines) {
-                if (medicine instanceof Stock && medicine.getMedicineName().equals(nameToAdd.toUpperCase())) {
+                if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)) {
                     existingStock = (Stock) medicine;
                     nameExist = true;
                     break;
@@ -46,7 +46,7 @@ public class AddStock extends Command {
 
         if (nameExist) {
             String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE,
-                                           CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
+                CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
 
             if (checkValidParametersAndValues(ui, parameters, medicines, requiredParameters, optionalParameters)) {
                 return;
@@ -63,27 +63,12 @@ public class AddStock extends Command {
             }
 
             int quantity = Integer.parseInt(quantityToAdd);
-
-            boolean isValidDate =
-                    StockValidator.dateValidityChecker(ui, medicines, formatExpiry, nameToAdd);
-
-            if (!isValidDate) {
-                logger.log(Level.WARNING, "Invalid Date is specified by user");
-                logger.log(Level.INFO, "Unsuccessful addition of stock");
-                return;
-            }
-
             int existingMaxQuantity = existingStock.getMaxQuantity();
             int totalStock = MedicineManager.getTotalStockQuantity(medicines, nameToAdd);
             assert totalStock > 0 : "Total Stock should be more than 0";
 
-            boolean isValidQuantity =
-                    StockValidator.quantityValidityChecker(ui, (totalStock + quantity),
-                            existingMaxQuantity);
-
-            if (!isValidQuantity) {
-                logger.log(Level.WARNING, "Invalid Quantity is specified by user");
-                logger.log(Level.INFO, "Unsuccessful addition of stock");
+            if (checkDateAndQuantity(ui, medicines, nameToAdd, formatExpiry, quantity,
+                    existingMaxQuantity, totalStock)) {
                 return;
             }
 
@@ -96,8 +81,8 @@ public class AddStock extends Command {
 
         } else {
             String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE,
-                                           CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
-                                           CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
+                CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
+                CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
 
             if (checkValidParametersAndValues(ui, parameters, medicines, requiredParameters, optionalParameters)) {
                 return;
@@ -125,14 +110,49 @@ public class AddStock extends Command {
     }
 
     /**
+     * Check if expiry date and quantity are valid.
+     *
+     * @param ui                  Reference to the UI object passed by Main to print messages.
+     * @param medicines           List of all medicines.
+     * @param nameToAdd           Name of medication based on user input.
+     * @param formatExpiry        Expiry Date of medication based on user input.
+     * @param quantity            Quantity of medication based on user input.
+     * @param existingMaxQuantity Maximum quantity of medication.
+     * @param totalStock          Total quantity of medication in stock.
+     * @return Boolean value indicating if date and quantity are valid.
+     */
+    private boolean checkDateAndQuantity(Ui ui, ArrayList<Medicine> medicines, String nameToAdd, Date formatExpiry,
+                                         int quantity, int existingMaxQuantity, int totalStock) {
+        boolean isValidDate =
+                StockValidator.dateValidityChecker(ui, medicines, formatExpiry, nameToAdd);
+
+        if (!isValidDate) {
+            logger.log(Level.WARNING, "Invalid Date is specified by user");
+            logger.log(Level.INFO, "Unsuccessful addition of stock");
+            return true;
+        }
+
+        boolean isValidQuantity =
+                StockValidator.quantityValidityChecker(ui, (totalStock + quantity),
+                        existingMaxQuantity);
+
+        if (!isValidQuantity) {
+            logger.log(Level.WARNING, "Invalid Quantity is specified by user");
+            logger.log(Level.INFO, "Unsuccessful addition of stock");
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Check if input contains Invalid Parameters and Invalid Parameter Values.
      *
-     * @param ui                    Reference to the UI object passed by Main to print messages.
-     * @param parameters            The parameter that is not found.
-     * @param medicines             List of all medicines.
-     * @param requiredParameters    The required parameters to check.
-     * @param optionalParameters    The optional parameters to check.
-     * @return                      Boolean value indicating if parameter and parameter values are valid.
+     * @param ui                 Reference to the UI object passed by Main to print messages.
+     * @param parameters         The parameter that is not found.
+     * @param medicines          List of all medicines.
+     * @param requiredParameters The required parameters to check.
+     * @param optionalParameters The optional parameters to check.
+     * @return Boolean value indicating if parameter and parameter values are valid.
      */
     private boolean checkValidParametersAndValues(Ui ui, LinkedHashMap<String, String> parameters,
                                                   ArrayList<Medicine> medicines, String[] requiredParameters,
@@ -156,14 +176,14 @@ public class AddStock extends Command {
     /**
      * Add medication based on user input.
      *
-     * @param ui            Reference to the UI object passed by Main to print messages.
-     * @param medicines     List of all medicines.
-     * @param name          Name of medication to add.
-     * @param description   Description of medication to add.
-     * @param price         Price of medication to add.
-     * @param quantity      Quantity of medication to add.
-     * @param expiryDate    Expiry Date of medication to add.
-     * @param maxQuantity   Maximum Quantity of medication to add.
+     * @param ui          Reference to the UI object passed by Main to print messages.
+     * @param medicines   List of all medicines.
+     * @param name        Name of medication to add.
+     * @param description Description of medication to add.
+     * @param price       Price of medication to add.
+     * @param quantity    Quantity of medication to add.
+     * @param expiryDate  Expiry Date of medication to add.
+     * @param maxQuantity Maximum Quantity of medication to add.
      */
     private void addMedicine(Ui ui, ArrayList<Medicine> medicines, String name, String description,
                              double price, int quantity, Date expiryDate, int maxQuantity) {
