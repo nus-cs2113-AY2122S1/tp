@@ -5,12 +5,12 @@ import seedu.command.EditContactCommand;
 import seedu.command.DeleteContactCommand;
 import seedu.command.Command;
 import seedu.command.HelpCommand;
+import seedu.command.InvalidDetailCommand;
 import seedu.command.ViewContactCommand;
 import seedu.command.FailedCommand;
 import seedu.command.ExitCommand;
 import seedu.command.ListContactsCommand;
 
-import seedu.contact.DetailType;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
@@ -87,13 +87,7 @@ public class MainParser {
                 throw new MissingNameException();
             }
             assert details.length == NUMBER_OF_FIELDS;
-            String name = details[DetailType.NAME.getIndex()];
-            String github = details[DetailType.GITHUB.getIndex()];
-            String linkedin = details[DetailType.LINKEDIN.getIndex()];
-            String telegram = details[DetailType.TELEGRAM.getIndex()];
-            String twitter = details[DetailType.TWITTER.getIndex()];
-            String email = details[DetailType.EMAIL.getIndex()];
-            return new AddContactCommand(name, github, linkedin, telegram, twitter, email);
+            return new AddContactCommand(details);
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         } catch (MissingArgException e) {
@@ -102,20 +96,10 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_NAME);
         } catch (MissingDetailException e) {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
-        } catch (ForbiddenDetailException e) {
-            return new FailedCommand(FailedCommandType.FORBIDDEN_DETAIL);
-        } catch (InvalidNameException e) {
-            return new FailedCommand(FailedCommandType.INVALID_NAME);
-        } catch (InvalidGithubUsernameException e) {
-            return new FailedCommand(FailedCommandType.INVALID_GITHUB_USERNAME);
-        } catch (InvalidEmailException e) {
-            return new FailedCommand(FailedCommandType.INVALID_MAIL);
-        } catch (InvalidTelegramUsernameException e) {
-            return new FailedCommand(FailedCommandType.INVALID_TELEGRAM);
-        } catch (InvalidTwitterUsernameException e) {
-            return new FailedCommand(FailedCommandType.INVALID_TWITTER);
-        } catch (InvalidLinkedinUsernameException e) {
-            return new FailedCommand(FailedCommandType.INVALID_LINKEDIN);
+        } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
+                | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
+                | InvalidTwitterUsernameException | ForbiddenDetailException e) {
+            return parseInvalidDetailCommand(e);
         }
     }
 
@@ -134,21 +118,37 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         } catch (MissingDetailException e) {
             return new FailedCommand(FailedCommandType.MISSING_DETAIL);
-        } catch (ForbiddenDetailException e) {
-            return new FailedCommand(FailedCommandType.FORBIDDEN_DETAIL);
-        } catch (InvalidNameException e) {
-            return new FailedCommand(FailedCommandType.INVALID_NAME);
-        } catch (InvalidGithubUsernameException e) {
-            return new FailedCommand(FailedCommandType.INVALID_GITHUB_USERNAME);
-        } catch (InvalidEmailException e) {
-            return new FailedCommand(FailedCommandType.INVALID_MAIL);
-        } catch (InvalidTelegramUsernameException e) {
-            return new FailedCommand(FailedCommandType.INVALID_TELEGRAM);
-        } catch (InvalidTwitterUsernameException e) {
-            return new FailedCommand(FailedCommandType.INVALID_TWITTER);
-        } catch (InvalidLinkedinUsernameException e) {
-            return new FailedCommand(FailedCommandType.INVALID_LINKEDIN);
+        } catch (InvalidNameException | InvalidGithubUsernameException | InvalidEmailException
+                | InvalidLinkedinUsernameException | InvalidTelegramUsernameException
+                | InvalidTwitterUsernameException | ForbiddenDetailException e) {
+            return parseInvalidDetailCommand(e);
         }
+    }
+
+    private Command parseInvalidDetailCommand(Exception e) {
+        if (e instanceof InvalidNameException) {
+            return new InvalidDetailCommand(FailedCommandType.INVALID_NAME);
+        }
+        if (e instanceof InvalidGithubUsernameException) {
+            return new InvalidDetailCommand(FailedCommandType.INVALID_GITHUB_USERNAME);
+        }
+        if (e instanceof InvalidEmailException) {
+            return new InvalidDetailCommand(FailedCommandType.INVALID_MAIL);
+        }
+        if (e instanceof InvalidTelegramUsernameException) {
+            return new InvalidDetailCommand(FailedCommandType.INVALID_TELEGRAM);
+        }
+        if (e instanceof InvalidTwitterUsernameException) {
+            return new InvalidDetailCommand(FailedCommandType.INVALID_TWITTER);
+        }
+        if (e instanceof InvalidLinkedinUsernameException) {
+            return new InvalidDetailCommand(FailedCommandType.INVALID_LINKEDIN);
+        }
+        if (e instanceof ForbiddenDetailException) {
+            return new InvalidDetailCommand(FailedCommandType.FORBIDDEN_DETAIL);
+        }
+        assert false; // Exception should be caught before this
+        return new FailedCommand(FailedCommandType.GENERAL);
     }
 
     private Command parseViewContact(String userInput) {
