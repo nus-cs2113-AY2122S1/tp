@@ -3,7 +3,6 @@ package seedu.duke.logic.commands.lesson;
 import org.junit.jupiter.api.Test;
 import seedu.duke.DukeException;
 import seedu.duke.logic.commands.Command;
-import seedu.duke.logic.commands.lesson.DeleteLessonCommand;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.storage.Storage;
@@ -14,7 +13,6 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class DeleteLessonCommandTest {
@@ -33,8 +31,7 @@ class DeleteLessonCommandTest {
             deleteLessonCommand.execute(ui, storage, taskList, lessonList);
             assertEquals(1, lessonList.getSize());
         } catch (DukeException | IOException e) {
-            // fail when there are more or tasks in the lesson list than there should be (should be 1 item)
-            fail();
+            fail(); // fail when there are more or tasks in the lesson list than there should be (should be 1 item)
         }
     }
 

@@ -4,7 +4,6 @@ package seedu.duke.logic.commands.task;
 import org.junit.jupiter.api.Test;
 import seedu.duke.DukeException;
 import seedu.duke.logic.commands.Command;
-import seedu.duke.logic.commands.task.DeleteTaskCommand;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.Task;
@@ -15,7 +14,6 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class DeleteTaskCommandTest {
@@ -34,8 +32,7 @@ class DeleteTaskCommandTest {
             deleteTaskCommand.execute(ui, storage, taskList, lessonList);
             assertEquals(1, taskList.getSize());
         } catch (DukeException | IOException e) {
-            // fail when there are more or tasks in the task list than there should be (should be 1 item)
-            fail();
+            fail(); // fail when there are more or tasks in the task list than there should be (should be 1 item)
         }
     }
 
