@@ -16,7 +16,7 @@ public class Duke {
     public static CommandParser commandParser = new CommandParser();
 
     public static void main(String[] args) {
-        assert false : "dummy";
+        // assert false : "dummy";
         new Duke().setup();
     }
 

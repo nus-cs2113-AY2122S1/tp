@@ -63,6 +63,13 @@ public class Timetable implements Comparable<Timetable> {
         this.friday = fri;
         this.saturday = sat;
         this.sunday = sun;
+
+        addItemToSchedule(new TimetableUserItem(
+                "Test Item",
+                "Monday",
+                "1400",
+                "1700",
+                "Test description"), monday);
     }
 
     /**
@@ -106,17 +113,27 @@ public class Timetable implements Comparable<Timetable> {
 
         addModuleToList(module);
 
-        if (timetableLesson.getStartHour() < earliestHour) {
-            earliestHour = timetableLesson.getStartHour();
-        }
-
-        if (timetableLesson.getEndHour() > latestHour) {
-            latestHour = timetableLesson.getEndHour();
-        }
-        assert earliestHour < latestHour : "Earliest hour of the day is should be earlier than latest hour of the day";
-
         logger.log(Level.INFO, String.format("%s added to timetable",
                 timetableLesson.getTitle() + ", " + timetableLesson.getLessonType()));
+    }
+
+    /**
+     * Resizes the starting hour and ending hour of the displayed timetable.
+     * If the item has an earlier starting hour, the starting hour = item's starting hour
+     * And same with ending hour
+     *
+     * @param start The starting hour of the item to be added
+     * @param end The ending hour of the item to be added
+     */
+    private void adjustStartAndEndHours(int start, int end) {
+        if (start < earliestHour) {
+            earliestHour = start;
+        }
+
+        if (end > latestHour) {
+            latestHour = end;
+        }
+        assert earliestHour < latestHour : "Earliest hour of the day is should be earlier than latest hour of the day";
     }
 
     /**
@@ -134,6 +151,7 @@ public class Timetable implements Comparable<Timetable> {
         for (int i = start; i < end; i++) {
             schedule[i] = timetableItem;
         }
+        adjustStartAndEndHours(start, end);
     }
 
     /**
