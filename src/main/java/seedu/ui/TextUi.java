@@ -54,6 +54,37 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void promptPersonalGithubUsernameMessage(String personalName) {
+        String message = "Hello, " + personalName + ".\n\n"
+                + "Please provide us with your Github Username\n"
+                + "or press ENTER if you would like to skip.";
+        printDoubleLineMessage(message);
+    }
+
+    public static void promptPersonalTelegramUsernameMessage() {
+        String message = "Please provide us with your Telegram Handle\n"
+                + "or press ENTER if you would like to skip.";
+        printDoubleLineMessage(message);
+    }
+
+    public static void promptPersonalTwitterUsernameMessage() {
+        String message = "Please provide us with your Twitter Username\n"
+                + "or press ENTER if you would like to skip.";
+        printDoubleLineMessage(message);
+    }
+
+    public static void promptPersonalEmailMessage() {
+        String message = "Please provide us with your Email Address\n"
+                + "or press ENTER if you would like to skip.";
+        printDoubleLineMessage(message);
+    }
+
+    public static void promptPersonalLinkedInUsernameMessage() {
+        String message = "Please provide us with your LinkedIn Username\n"
+                + "or press ENTER if you would like to skip.";
+        printDoubleLineMessage(message);
+    }
+
     public static void createNewContactFileMessage(String contactFilePath) {
         String message = "As ConTech is unable to find your saved data,\n" + " it has created a new one for you at:\n"
                 + contactFilePath;

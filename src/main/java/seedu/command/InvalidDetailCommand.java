@@ -26,7 +26,7 @@ public class InvalidDetailCommand extends Command {
             ExceptionTextUi.invalidTelegramUsernameInput();
             break;
         case INVALID_LINKEDIN:
-            ExceptionTextUi.invalidLinkedinInput();
+            ExceptionTextUi.invalidLinkedinUsernameInput();
             break;
         case INVALID_MAIL:
             ExceptionTextUi.invalidEmailInput();
