@@ -1,4 +1,11 @@
 Le Zong
+
+lezongmun
+lezongg
+
+@gmail.com
+lezongmun@gmail.com
+
 rm 1
 add -n ng andre -g ng-andre
 rm 2

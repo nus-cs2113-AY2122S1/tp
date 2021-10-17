@@ -31,6 +31,69 @@ public class ExceptionTextUi {
                 + "    * Cannot be \"null\"\n\n"
                 + "Please enter your name again.";
         printDoubleLineMessage(message);
+        System.out.print("Name:");
+    }
+
+    public static void invalidPersonalGithubUsernameErrorMessage() {
+        String message = "The github username is not correctly formatted,\n"
+                + "Rules for Github username :\n"
+                + "    * Only contain alphanumeric characters or hyphens\n"
+                + "    * Only lowercase allowed\n"
+                + "    * Maximum 39 characters allowed\n"
+                + "    * Cannot have multiple consecutive hyphens\n"
+                + "    * Cannot begin or end with a hyphen\n\n"
+                + "Please enter your github username again\n"
+                + "or press ENTER to skip.";
+        printDoubleLineMessage(message);
+        System.out.print("GitHub Username:");
+    }
+
+    public static void invalidPersonalTelegramUsernameErrorMessage() {
+        String message = "The telegram username is not correctly formatted,\n"
+                + "Rules for Telegram username :\n"
+                + "    * Uppercase and lowercase letters allowed\n"
+                + "    * Numbers and underscore allowed\n"
+                + "    * Length at-least 5 characters\n\n"
+                + "Please enter your telegram username again\n"
+                + "or press ENTER to skip.";
+        printDoubleLineMessage(message);
+        System.out.print("Telegram Handle: @");
+    }
+
+    public static void invalidPersonalTwitterUsernameErrorMessage() {
+        String message = "The twitter username is not correctly formatted,\n"
+                + "Rules for Twitter username :\n"
+                + "    * Lowercase letters only\n"
+                + "    * Numbers and underscore allowed\n"
+                + "    * Maximum 15 characters allowed\n\n"
+                + "Please enter your twitter username again\n"
+                + "or press ENTER to skip.";
+        printDoubleLineMessage(message);
+        System.out.print("Twitter Username:");
+    }
+
+    public static void invalidPersonalEmailErrorMessage() {
+        String message = "The email id is not correctly formatted,\n"
+                + "Rules for email id :\n"
+                + "    * Lowercase letters only\n"
+                + "    * Numbers, underscore, hyphen and dot allowed\n"
+                + "    * @ cannot be at the start or end\n\n"
+                + "Please enter your email again\n"
+                + "or press ENTER to skip.";
+        printDoubleLineMessage(message);
+        System.out.print("Email Address:");
+    }
+
+    public static void invalidPersonalLinkedinUsernameErrorMessage() {
+        String message = "The linkedin username is not correctly formatted,\n"
+                + "Rules for Linkedin username :\n"
+                + "    * Lowercase letters only\n"
+                + "    * Numbers, underscore and hyphen allowed\n"
+                + "    * Length between 3 to 100 characters\n\n"
+                + "Please enter your linkedin username again\n"
+                + "or press ENTER to skip.";
+        printDoubleLineMessage(message);
+        System.out.print("LinkedIn Username:");
     }
 
     // Error Messages
@@ -135,7 +198,7 @@ public class ExceptionTextUi {
                 + "    * Only lowercase allowed\n"
                 + "    * Maximum 39 characters allowed\n"
                 + "    * Cannot have multiple consecutive hyphens\n"
-                + "    * Cannot begin or end with a hyphen\n";
+                + "    * Cannot begin or end with a hyphen";
         printDoubleLineMessage(message);
     }
 
@@ -167,7 +230,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void invalidLinkedinInput() {
+    public static void invalidLinkedinUsernameInput() {
         String message = "The linkedin username is not correctly formatted,\n"
                 + "Rules for Linkedin username :\n"
                 + "    * Lowercase letters only\n"

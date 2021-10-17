@@ -23,14 +23,61 @@ Welcome to ConTech, your personal contact tracker.
 Can I get your name?
 ____________________________________________________________
 
-____________________________________________________________
+Name:____________________________________________________________
 Hello there, Le Zong.
 
 This is ConTech, your very own contact tracking application
-to manage computing-related contacts, like GitHub Accounts
-or even Emails.
+to manage tech-related contacts, like GitHub Accounts or
+even Emails.
 
-Enter "help" to see what you can do with ConTech.
+Before we start, let's set up your personal contact, shall
+we?
+
+Enter anything to continue...
+____________________________________________________________
+
+____________________________________________________________
+Please provide us with your Github Username
+or press ENTER if you would like to skip.
+____________________________________________________________
+
+GitHub Username:____________________________________________________________
+Please provide us with your Telegram Handle
+or press ENTER if you would like to skip.
+____________________________________________________________
+
+Telegram Handle: @____________________________________________________________
+Please provide us with your Twitter Username
+or press ENTER if you would like to skip.
+____________________________________________________________
+
+Twitter Username:____________________________________________________________
+Please provide us with your Email Address
+or press ENTER if you would like to skip.
+____________________________________________________________
+
+Email Address:____________________________________________________________
+The email id is not correctly formatted,
+Rules for email id :
+    * Lowercase letters only
+    * Numbers, underscore, hyphen and dot allowed
+    * @ cannot be at the start or end
+
+Please enter your email again
+or press ENTER to skip.
+____________________________________________________________
+
+Email Address:____________________________________________________________
+Please provide us with your LinkedIn Username
+or press ENTER if you would like to skip.
+____________________________________________________________
+
+LinkedIn Username:____________________________________________________________
+You have successfully set up your own personal contact.
+Don't worry, you can always edit your personal details 
+later on.
+
+To see what you can do with ConTech, enter "help".
 ____________________________________________________________
 
 ____________________________________________________________
@@ -315,7 +362,6 @@ Rules for Github username :
     * Maximum 39 characters allowed
     * Cannot have multiple consecutive hyphens
     * Cannot begin or end with a hyphen
-
 ____________________________________________________________
 
 ____________________________________________________________
@@ -326,7 +372,6 @@ Rules for Github username :
     * Maximum 39 characters allowed
     * Cannot have multiple consecutive hyphens
     * Cannot begin or end with a hyphen
-
 ____________________________________________________________
 
 ____________________________________________________________
