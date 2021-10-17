@@ -1,6 +1,7 @@
 package seedu.duke.ingredients;
 
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,14 @@ public class IngredientList {
             instance = new IngredientList();
         }
         return instance;
+    }
+
+    /**
+     * Gets the current list of ingredients.
+     * @return the list of ingredients.
+     */
+    public ArrayList<Ingredient> getIngredientList() {
+        return ingredientList;
     }
 
     /**

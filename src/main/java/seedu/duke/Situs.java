@@ -2,8 +2,10 @@ package seedu.duke;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.localtime.CurrentDate;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.UI;
 
+import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -50,8 +52,9 @@ public class Situs {
 
         try {
             msg = Parser.parse(command);
+            Storage.save();
             return msg;
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             LOGGER.log(Level.WARNING, "Error in parsing user command");
             return e.getMessage();
         }
