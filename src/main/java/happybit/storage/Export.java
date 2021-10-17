@@ -55,5 +55,6 @@ public class Export {
                 fileWriter.write(habitToWrite);
             }
         }
+        fileWriter.close();
     }
 }
