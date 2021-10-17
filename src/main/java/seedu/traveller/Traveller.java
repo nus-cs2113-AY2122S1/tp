@@ -1,5 +1,6 @@
 package seedu.traveller;
 
+import seedu.traveller.save.SaveLoader;
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.worldmap.WorldMap;
@@ -10,10 +11,12 @@ import java.util.logging.LogManager;
 public class Traveller {
     private final Ui ui;
     private final TripsList tripsList;
+    private static SaveLoader save;
 
     public Traveller() {
         ui = new Ui();
         tripsList = new TripsList();
+        save = new SaveLoader(tripsList, ui);
     }
 
     public void run() {
@@ -38,6 +41,8 @@ public class Traveller {
         LogManager.getLogManager().reset();
         Traveller traveller = new Traveller();
         WorldMap.initWorldMap();
+        save.readSave();
         traveller.run();
+        save.writeSave();
     }
 }

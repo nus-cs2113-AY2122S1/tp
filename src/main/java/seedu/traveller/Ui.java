@@ -79,4 +79,12 @@ public class Ui {
     public void printAddItemToDay(String tripName, int dayIndex, String itemName) {
         System.out.println("Added a new item to day " + dayIndex + " of trip " + tripName + ".");
     }
+
+    public void printReadSave() {
+        System.out.println("Now reading save data.");
+    }
+
+    public void printWriteSave() {
+        System.out.println("\tNow saving all your trips.");
+    }
 }
