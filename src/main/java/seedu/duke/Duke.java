@@ -153,7 +153,7 @@ public class Duke {
             fullModuleList = new FullModuleList();
         } catch (ModuleLoadException | FileNotFoundException e) {
             LOGGER.warning(e.getMessage());
-            ui.printMessage(e.getMessage());
+            // Ignore error
         }
     }
 }
