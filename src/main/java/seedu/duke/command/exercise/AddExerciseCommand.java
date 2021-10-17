@@ -25,8 +25,10 @@ public class AddExerciseCommand extends Command {
             + "\tWorkout index: Index of workout to add exercise to\n"
             + "Example: " + COMMAND_WORD + " Push-ups" + PARAMETER_SEPARATOR + "5 10" + PARAMETER_SEPARATOR + "1";
     public static final String MESSAGE_SUCCESS = "New exercise added: %1$s";
+
     private static final Logger LOGGER = Logger.getLogger(AddExerciseCommand.class.getName());
     private final Exercise toAdd;
+
     private final int workoutIndex;
 
     /**
@@ -57,8 +59,10 @@ public class AddExerciseCommand extends Command {
             LOGGER.log(Level.SEVERE, "Add exercise failed - sets or reps <= 0");
             throw new GetJackDException("Sets or reps must be more than 0.");
         }
+
         workouts.getWorkout(workoutIndex).addExercise(toAdd);
         ui.showToUser(String.format(MESSAGE_SUCCESS, toAdd));
+
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);
     }

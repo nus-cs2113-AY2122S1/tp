@@ -7,6 +7,7 @@ import seedu.duke.storage.models.WorkoutModel;
 import seedu.duke.exercises.Exercise;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static seedu.duke.lists.WorkoutList.LOGGER;
 
@@ -114,5 +115,9 @@ public class Workout {
         }
 
         WorkoutListModel.addToWorkoutListModel(workoutModel);
+    }
+
+    public void recommendExercise(Exercise[] toAdd) {
+        exercises.addAll(Arrays.asList(toAdd));
     }
 }

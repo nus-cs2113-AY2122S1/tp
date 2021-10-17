@@ -6,6 +6,7 @@ import seedu.duke.command.EnterWorkoutCommand;
 import seedu.duke.command.ExitCommand;
 import seedu.duke.command.ExitWorkoutCommand;
 import seedu.duke.command.HelpCommand;
+import seedu.duke.command.RecommendWorkoutCommand;
 import seedu.duke.command.SearchCommand;
 import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.exercise.AddExerciseCommand;
@@ -37,6 +38,9 @@ public class CommandManager {
             break;
         case DeleteWorkoutCommand.COMMAND_WORD:
             parser = new DeleteWorkoutParser(userInputString);
+            break;
+        case RecommendWorkoutCommand.COMMAND_WORD:
+            parser = new RecommendWorkoutParser(userInputString);
             break;
         case DisplayExercisesCommand.COMMAND_WORD:
             parser = new DisplayExerciseParser(userInputString);
