@@ -12,11 +12,11 @@ public class Messages {
     public static final String NON_POSITIVE_INDEX_MESSAGE = "Only positive values are allowed for index.";
     public static final String UNABLE_TO_DELETE_MESSAGE = "Entry not deleted because entry not found!";
     public static final String BLANK_DESCRIPTION_MESSAGE = "Your description is empty!";
-    public static final String HAS_CORRUPTED_DATA_ENTRIES = "StonksXD_Data.csv has corrupted entries, " +
-            "some or all data maybe lost.";
+    public static final String HAS_CORRUPTED_DATA_ENTRIES = "StonksXD_Data.csv has corrupted entries, " 
+            + "some or all data maybe lost.";
     public static final String UNABLE_TO_FIND_DATA_FILE = "Unable to find StonksXD_Data.csv, a new one has been made.";
-    public static final String ERROR_SAVING_ENTRIES = "Unable to save entries into StonksXD_Data.csv, " +
-            "some or all data maybe lost.";
+    public static final String ERROR_SAVING_ENTRIES = "Unable to save entries into StonksXD_Data.csv, " 
+            + "some or all data maybe lost.";
     public static final String SEARCH_NO_MATCH_MESSAGE = "Your search did not match any of the entries!";
     public static final String TYPE_SOMETHING_MESSAGE = "Type something!";
     public static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";

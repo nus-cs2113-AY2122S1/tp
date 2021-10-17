@@ -23,29 +23,29 @@ import java.util.Scanner;
  * Also loads all saved entries when a new instance of StonksXD starts.
  */
 public class DataManager {
-    private final String FILENAME = "./StonksXD_Data.csv";
+    private final String FILE_NAME = "./StonksXD_Data.csv";
 
     public void save(Parser parser, FinancialTracker financialTracker, Ui ui) {
         try {
-            FileWriter writer = new FileWriter(FILENAME);
+            FileWriter writer = new FileWriter(FILE_NAME);
             BufferedWriter buffer = new BufferedWriter(writer);
-            ArrayList<Expense> expenses = financialTracker.getExpenses();
-            ArrayList<Income> incomes = financialTracker.getIncomes();
             String data;
-            String NEWLINE = "\n";
+            String newline = "\n";
 
             // Categories header for the CSV file
             buffer.write("entry_type, entry_description, amount, category, date");
-            buffer.write(NEWLINE);
+            buffer.write(newline);
+            ArrayList<Expense> expenses = financialTracker.getExpenses();
             for (Expense expense : expenses) {
                 data = parser.convertExpenseToData(expense);
                 buffer.write(data);
-                buffer.write(NEWLINE);
+                buffer.write(newline);
             }
+            ArrayList<Income> incomes = financialTracker.getIncomes();
             for (Income income : incomes) {
                 data = parser.convertIncomeToData(income);
                 buffer.write(data);
-                buffer.write(NEWLINE);
+                buffer.write(newline);
             }
 
             buffer.close();
@@ -58,7 +58,7 @@ public class DataManager {
         boolean hasCorruptedLines = false;
         FileInputStream fis;
         try {
-            fis = new FileInputStream(FILENAME);
+            fis = new FileInputStream(FILE_NAME);
         } catch (FileNotFoundException e) {
             ui.printError(Messages.UNABLE_TO_FIND_DATA_FILE);
             return;
