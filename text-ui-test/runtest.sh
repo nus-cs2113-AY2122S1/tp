@@ -7,7 +7,7 @@ cd ..
 ./gradlew clean shadowJar
 
 cd text-ui-test
-
+if exist StonksXD_Data.csv del StonksXD_Data.csv
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
 
 cp EXPECTED.TXT EXPECTED-UNIX.TXT

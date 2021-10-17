@@ -83,6 +83,6 @@ public class DataManager {
         
         if (hasCorruptedLines) {
             ui.printError(Messages.HAS_CORRUPTED_DATA_ENTRIES);
-        }
+        } 
     }
 }
