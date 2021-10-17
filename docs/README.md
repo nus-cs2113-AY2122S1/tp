@@ -1,13 +1,10 @@
 # Ha(ppy)Bit
 
-Ha(ppy)Bit is a desktop app aimed to improve both the **physical and mental lifestyle of students**,
-through the setting and tracking of goals to cultivate good habits.
-The app operates on a Command Line Interface (CLI) while still
-comprising features typically found in a Graphical User Interface (GUI).
-Students who type fast will find that Ha(ppy)Bit performs habit tracking more efficiently than your
-conventional GUI apps.
+Ha(ppy)Bit is a desktop application to set and track goals to cultivate good habits.
+Users can only run the app on a Command Line Interface (CLI).
 
-Useful links:
-* [User Guide](UserGuide.md)
-* [Developer Guide](DeveloperGuide.md)
-* [About Us](AboutUs.md)
+If you are interested in:
+
+* using the app, head over to our [User Guide](UserGuide.md).
+* the system of Ha(ppy)Bit, our [Developer Guide](DeveloperGuide.md) will be helpful.
+* the developers behind Ha(ppy)Bit, find out [About Us](AboutUs.md).
