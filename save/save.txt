@@ -1,3 +1,1 @@
-new s1 JPN MLY
-new s2 SIN MLY
-new four MLY JPN
+new s1 /from SIN /to MLY
