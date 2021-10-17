@@ -1,6 +1,5 @@
 package seedu.duke.model.task;
 
-import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.model.task.exceptions.DeserializeTaskException;
 import seedu.duke.model.task.exceptions.TaskIndexException;
@@ -25,13 +24,13 @@ public class TaskList {
         return taskList.size();
     }
 
-    public Task getTask(int taskIndex) throws DukeException {
+    public Task getTask(int taskIndex) throws TaskIndexException {
         try {
             return taskList.get(taskIndex);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Messages.ERROR_INVALID_INDEX);
+            throw new TaskIndexException(Messages.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
-            throw new DukeException(Messages.ERROR_INVALID_NUMBER);
+            throw new TaskIndexException(Messages.ERROR_INVALID_NUMBER);
         }
     }
 
