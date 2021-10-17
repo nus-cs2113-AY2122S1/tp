@@ -1,10 +1,9 @@
 package seedu.duke.logic.commands.task;
 
-
 import org.junit.jupiter.api.Test;
 import seedu.duke.DukeException;
-import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.LessonList;
+import seedu.duke.model.module.ModuleList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
@@ -19,18 +18,21 @@ import static org.junit.jupiter.api.Assertions.fail;
 class DeleteTaskCommandTest {
     @Test
     public void deleteTask_taskToDelete_taskDeleted() {
-        Ui ui = new Ui();
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("task 1", "mon", ""));
         taskList.addTask(new Task("task 2", "fri", "someInfo"));
 
-        LessonList lessonList = new LessonList();
+        Ui ui = new Ui();
         Storage storage = new Storage();
-        storage.createNewData(ui);
+        storage.createNewDataFile(ui, "TASK");
+        LessonList lessonList = new LessonList();
+        ModuleList moduleList = new ModuleList();
+
         try {
-            Command deleteTaskCommand = new DeleteTaskCommand(1);
-            deleteTaskCommand.execute(ui, storage, taskList, lessonList);
+            new DeleteTaskCommand(1).execute(ui, storage, taskList, lessonList, moduleList);
             assertEquals(1, taskList.getSize());
+            new DeleteTaskCommand(0).execute(ui, storage, taskList, lessonList, moduleList);
+            assertEquals(0, taskList.getSize());
         } catch (DukeException | IOException e) {
             fail(); // fail when there are more or tasks in the task list than there should be (should be 1 item)
         }
@@ -38,17 +40,17 @@ class DeleteTaskCommandTest {
 
     @Test
     public void deleteTask_indexOutOfBounds_exceptionThrown() {
-        Ui ui = new Ui();
         TaskList taskList = new TaskList();
         taskList.addTask(new Task("task 1", "mon", ""));
         taskList.addTask(new Task("task 2", "fri", "someInfo"));
 
-        LessonList lessonList = new LessonList();
+        Ui ui = new Ui();
         Storage storage = new Storage();
-        storage.createNewData(ui);
+        storage.createNewDataFile(ui, "TASK");
+        LessonList lessonList = new LessonList();
+        ModuleList moduleList = new ModuleList();
 
-        Command deleteOobTaskCommand = new DeleteTaskCommand(4);
-        assertThrows(DukeException.class, () -> deleteOobTaskCommand.execute(ui, storage,
-                taskList, lessonList));
+        assertThrows(DukeException.class, () -> new DeleteTaskCommand(2)
+                .execute(ui, storage, taskList, lessonList, moduleList));
     }
 }

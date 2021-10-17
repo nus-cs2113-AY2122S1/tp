@@ -2,9 +2,9 @@ package seedu.duke.logic.commands.lesson;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.DukeException;
-import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
+import seedu.duke.model.module.ModuleList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.TaskList;
 import seedu.duke.ui.Ui;
@@ -19,17 +19,19 @@ class DeleteLessonCommandTest {
     @Test
     public void deleteLesson_lessonToDelete_lessonDeleted() {
         LessonList lessonList = new LessonList();
-        lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
-        lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
+        lessonList.addLesson(new Lesson("lesson 1", "tue", "12:00", "14:00", ""));
+        lessonList.addLesson(new Lesson("lesson 2", "thu", "15:00", "17:00", "https://example.com/"));
 
         Ui ui = new Ui();
-        TaskList taskList = new TaskList();
         Storage storage = new Storage();
-        storage.createNewData(ui);
+        storage.createNewDataFile(ui, "LESSON");
+        TaskList taskList = new TaskList();
+        ModuleList moduleList = new ModuleList();
         try {
-            Command deleteLessonCommand = new DeleteLessonCommand(0);
-            deleteLessonCommand.execute(ui, storage, taskList, lessonList);
+            new DeleteLessonCommand(1).execute(ui, storage, taskList, lessonList, moduleList);
             assertEquals(1, lessonList.getSize());
+            new DeleteLessonCommand(0).execute(ui, storage, taskList, lessonList, moduleList);
+            assertEquals(0, lessonList.getSize());
         } catch (DukeException | IOException e) {
             fail(); // fail when there are more or tasks in the lesson list than there should be (should be 1 item)
         }
@@ -38,15 +40,16 @@ class DeleteLessonCommandTest {
     @Test
     public void deleteLesson_indexOutOfBounds_exceptionThrown() {
         LessonList lessonList = new LessonList();
-        lessonList.addLesson(new Lesson("lesson 1", "tue", "2pm", "6pm"));
-        lessonList.addLesson(new Lesson("lesson 2", "thu", "1pm", "2pm"));
+        lessonList.addLesson(new Lesson("lesson 1", "tue", "12:00", "14:00", ""));
+        lessonList.addLesson(new Lesson("lesson 2", "thu", "15:00", "17:00", ""));
 
-        TaskList taskList = new TaskList();
         Ui ui = new Ui();
         Storage storage = new Storage();
-        storage.createNewData(ui);
+        storage.createNewDataFile(ui, "LESSON");
+        TaskList taskList = new TaskList();
+        ModuleList moduleList = new ModuleList();
 
-        Command deleteOobLessonCommand = new DeleteLessonCommand(4);
-        assertThrows(DukeException.class, () -> deleteOobLessonCommand.execute(ui, storage, taskList, lessonList));
+        assertThrows(DukeException.class, () -> new DeleteLessonCommand(2)
+                .execute(ui, storage, taskList, lessonList, moduleList));
     }
 }

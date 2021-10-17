@@ -1,9 +1,8 @@
 package seedu.duke.model.module;
 
+import java.io.FileNotFoundException;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commons.util.exceptions.ModuleLoadException;
-
-import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;

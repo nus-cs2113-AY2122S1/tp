@@ -1,12 +1,11 @@
 package seedu.duke.logic.parser;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.AddLessonCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.commands.task.DoneTaskCommand;
 import seedu.duke.DukeException;
-
-import seedu.duke.logic.commands.Command;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -38,7 +37,7 @@ public class ParserTest {
 
     @Test
     public void testParseAddLesson() {
-        String userResponse = "add lesson CS2113T Lecture -d MON -s 2pm -e 4pm";
+        String userResponse = "add lesson CS2113T Lecture -d FRI -s 16:00 -e 18:00";
         try {
             Command command = Parser.parse(userResponse);
             assertTrue(command instanceof AddLessonCommand);
@@ -49,13 +48,13 @@ public class ParserTest {
 
     @Test
     public void parseAddLesson_wrongFlag_exceptionThrown() {
-        String userResponse = "add lesson CS2113T Lecture -d MON -e 2pm -s 4pm";
+        String userResponse = "add lesson CS2113T Lecture -d MON -e 18:00 -s 16:00";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
 
     @Test
     public void parseAddLesson_invalidDayOfTheWeek_exceptionThrown() {
-        String userResponse = "add lesson CS2113T Lecture -d LOL -s 2pm -e 4pm";
+        String userResponse = "add lesson CS2113T Lecture -d LOL -s 16:00 -e 18:00";
         assertThrows(DukeException.class, () -> Parser.parse(userResponse));
     }
 
