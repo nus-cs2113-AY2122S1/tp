@@ -91,7 +91,7 @@ public class DeleteStock extends Command {
     }
 
     /**
-     * Deletion of expired stocks given a date
+     * Deletion of expired stocks given a date.
      *
      * @param ui         Reference to the UI object passed by Main to print messages.
      * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
