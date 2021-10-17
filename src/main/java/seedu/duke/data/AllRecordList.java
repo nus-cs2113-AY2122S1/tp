@@ -17,7 +17,7 @@ public class AllRecordList {
     public AllRecordList() {
         allRecordList = new ArrayList<>();
         for (int i = 0; i <= 12; i++) {
-            allRecordList.add(new RecordList());
+            allRecordList.add(new RecordList(i));
         }
     }
 

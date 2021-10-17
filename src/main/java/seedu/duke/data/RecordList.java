@@ -20,9 +20,9 @@ public class RecordList {
      * Constructor for MonthlyRecordList for v1.0
      * Kept for normal operation, should be removed by v2.0
      */
-    public RecordList() {
+    public RecordList(int month) {
         numberOfRecords = 0;
-        budget = new Budget(0.00, LocalDate.now().getMonthValue());
+        budget = new Budget(0.00, month);
         hasBudget = false;
         expenditureRecords = new ArrayList<>();
     }
