@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -33,7 +34,7 @@ public class DataManager {
             String data;
             String NEWLINE = "\n";
 
-            buffer.write("entry_type, entry_description, amount");
+            buffer.write("entry_type, entry_description, amount, category, date");
             buffer.write(NEWLINE);
 
             for (Expense expense : expenses) {
@@ -70,11 +71,11 @@ public class DataManager {
             try {
                 Expense expense = parser.convertDataToExpense(data);
                 financialTracker.addExpense(expense);
-            } catch (InvalidExpenseAmountException | InvalidExpenseDataFormatException ee) {
+            } catch (InvalidExpenseAmountException | InvalidExpenseDataFormatException | DateTimeException ee) {
                 try {
                     Income income = parser.convertDataToIncome(data);
                     financialTracker.addIncome(income);
-                } catch (InvalidIncomeAmountException | InvalidIncomeDataFormatException ie) {
+                } catch (InvalidIncomeAmountException | InvalidIncomeDataFormatException | DateTimeException ie) {
                     hasCorruptedLines = true;
                 }
             }

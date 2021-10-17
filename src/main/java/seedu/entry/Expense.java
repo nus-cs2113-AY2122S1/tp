@@ -12,6 +12,13 @@ public class Expense extends Entry {
         this.category = category;
     }
 
+    public Expense(String description, double value, String category, LocalDate date) {
+        this.description = description;
+        this.value = value;
+        this.date = date;
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         String valueTwoDecimalPoint = String.format("%.2f",value);
