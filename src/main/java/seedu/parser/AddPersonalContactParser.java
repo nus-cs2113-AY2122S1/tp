@@ -23,6 +23,7 @@ public class AddPersonalContactParser extends RegexParser {
         promptPersonalTelegramUsername();
         promptPersonalTwitterUsername();
         promptPersonalEmailAddress();
+        promptPersonalLinkedInUsername();
         TextUi.greetingMessage(personalContact);
     }
 
@@ -133,6 +134,28 @@ public class AddPersonalContactParser extends RegexParser {
         }
     }
 
+    private void promptPersonalLinkedInUsername() {
+        isValidDetail = false;
+        TextUi.promptPersonalLinkedInUsernameMessage();
+        do {
+            try {
+                String personalLinkedIn = UserInputTextUi.getUserInput();
+                setLinkedInIfValid(personalLinkedIn);
+            } catch (InvalidLinkedinUsernameException e) {
+                ExceptionTextUi.invalidPersonalLinkedinUsernameErrorMessage();
+            }
+        } while (!isValidDetail);
+    }
+
+    private void setLinkedInIfValid(String userInput) throws InvalidLinkedinUsernameException {
+        if (userInput.isEmpty()) {
+            isValidDetail = true;
+        } else {
+            checkLinkedinUsernameRegex(userInput);
+            isValidDetail = true;
+            this.personalContact.setLinkedin(userInput);
+        }
+    }
 
     public Contact getPersonalContact() {
         return personalContact;
