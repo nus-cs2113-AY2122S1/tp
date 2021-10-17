@@ -114,18 +114,18 @@ ________________________________________________________
 Invalid command format
 
 remove: Removes the exercise from the workout.
-Format: done [Exercise index], [Workout index]
+Format: remove [Exercise index], [Workout index]
 Parameters:
-	Exercise index - Index of exercise to mark done
-	Workout index - Index of workout containing exercise to mark done
+	Exercise index - Index of exercise to remove
+	Workout index - Index of workout containing exercise to remove
 Example: remove 1, 2  - remove exercise 1 from workout 2
 ________________________________________________________
 ________________________________________________________
 remove: Removes the exercise from the workout.
-Format: done [Exercise index], [Workout index]
+Format: remove [Exercise index], [Workout index]
 Parameters:
-	Exercise index - Index of exercise to mark done
-	Workout index - Index of workout containing exercise to mark done
+	Exercise index - Index of exercise to remove
+	Workout index - Index of workout containing exercise to remove
 Example: remove 1, 2  - remove exercise 1 from workout 2
 ________________________________________________________
 ________________________________________________________
