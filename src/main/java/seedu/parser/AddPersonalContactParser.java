@@ -8,13 +8,6 @@ import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 public class AddPersonalContactParser extends RegexParser {
-    public static final String NAME_FLAG = "n";
-    public static final String GITHUB_FLAG = "g";
-    public static final String TELEGRAM_FLAG = "te";
-    public static final String TWITTER_FLAG = "tw";
-    public static final String EMAIL_FLAG = "e";
-    public static final String LINKEDIN_FLAG = "l";
-
     private Contact personalContact = new Contact(null, null,null,null,
             null,null);
 
