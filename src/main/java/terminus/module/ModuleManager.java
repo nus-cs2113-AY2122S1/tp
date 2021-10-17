@@ -1,7 +1,6 @@
 package terminus.module;
 
 import java.util.HashMap;
-import java.util.Set;
 
 public class ModuleManager {
 
