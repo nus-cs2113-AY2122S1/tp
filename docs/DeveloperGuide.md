@@ -65,35 +65,40 @@ The five main components interact with each other, as shown in the sequence diag
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+{NOT DONE}
 
-## Product scope
-### Target user profile
+## <a name="scope"></a>Product scope
+### <a name="target"></a>Target user profile
 - Has a need to store a significant amount of computing-related contacts
 - Prefers and is familiar with Command Line Interface (CLI) applications
 - Has many contacts that use common computing platforms, such as: Github, Linkedin, Twitter, Telegram, and Email
 - Can type fast and prefers typing to mouse interactions
 
-### Value proposition
+### <a name="value"></a>Value proposition
 
 As computing professionals are often on their computer, ConTech allows them to have a platform to 
 manage their computing-related contacts locally and efficiently, without the need to use 
 additional devices or platforms.
 
-## User Stories
+## <a name="stories"></a>User Stories
+
+{NOT DONE}
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## Non-Functional Requirements
+## <a name="nf-req"></a>Non-Functional Requirements
 
+- Should work on any [*mainstream Operating Systems*](#os) as long as Java `11` or higher has been installed on it
 {Give non-functional requirements}
 
-## Glossary
+## <a name="glossary"></a>Glossary
 
-* *glossary item* - Definition
+* <a name="os"></a>**Mainstream Operating Systems** - Windows, macOS, *NIX
+* <a name="local-storage"></a>**LocalStorage** - Refers to user's hard disk storage
 
-## Instructions for manual testing
+## <a name="manual-test"></a>Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
