@@ -15,7 +15,9 @@ public class Expense extends Entry {
     @Override
     public String toString() {
         String valueTwoDecimalPoint = String.format("%.2f",value);
-        return "[E] on " + date.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + ": " 
-                + description + " (" + category + ")" + " - $" + valueTwoDecimalPoint;
+
+        
+        return "[E] " + description + " - $" + valueTwoDecimalPoint + " ("
+                + date.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + ")";
     }
 }

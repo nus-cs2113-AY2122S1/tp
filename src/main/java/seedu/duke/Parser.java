@@ -14,6 +14,11 @@ import seedu.commands.TotalExpenseBetweenCommand;
 import seedu.commands.TotalExpenseCommand;
 import seedu.commands.TotalIncomeBetweenCommand;
 import seedu.commands.TotalIncomeCommand;
+
+import seedu.commands.FindCommand;
+import seedu.commands.BalanceCommand;
+
+
 import seedu.entry.Expense;
 import seedu.entry.Income;
 
@@ -76,6 +81,7 @@ public class Parser {
             Pattern.compile("s/(?<start>[^/]+)"
                     + "e/(?<end>[^/]+)");
     
+    
     private static final String HELP_COMMAND_KEYWORD = "help";
     private static final String ADD_EXPENSE_KEYWORD = "add_ex";
     private static final String ADD_INCOME_KEYWORD = "add_in";
@@ -85,6 +91,8 @@ public class Parser {
     private static final String LIST_INCOME_KEYWORD = "list_in";
     private static final String TOTAL_EXPENSE_KEYWORD = "total_ex";
     private static final String TOTAL_INCOME_KEYWORD = "total_in";
+    private static final String FIND_KEYWORD = "find";
+    private static final String BALANCE_KEYWORD = "balance";
     private static final String EXIT_KEYWORD = "end";
 
     private static final String EXPENSE_RANGE_KEYWORD = "btw_ex";
@@ -133,7 +141,11 @@ public class Parser {
         case TOTAL_EXPENSE_KEYWORD:
             return prepareTotalExpense(arguments);
         case TOTAL_INCOME_KEYWORD:
-            return prepareTotalIncome(arguments);
+            return prepareTotalIncome(arguments); 
+        case FIND_KEYWORD:
+            return prepareFind(arguments);
+        case BALANCE_KEYWORD:
+            return prepareBalance(arguments);
         case EXIT_KEYWORD:
             return prepareExit(arguments);
         case EXPENSE_RANGE_KEYWORD:
@@ -176,6 +188,21 @@ public class Parser {
             return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
         }
     }
+    
+    private Command prepareBalance(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new BalanceCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+    
+    private Command prepareFind(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+        }
+        return new FindCommand(arguments.trim());
+    }
+    
     
     private Command prepareHelp(String arguments) {
         if (arguments.trim().isBlank()) {
