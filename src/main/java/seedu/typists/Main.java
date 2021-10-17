@@ -17,7 +17,9 @@ import java.util.NoSuchElementException;
 
 //solution below adapted from https://github.com/se-edu/addressbook-level2/
 public class Main {
-    /** Version info of the program. */
+    /**
+     * Version info of the program.
+     */
     public static final String VERSION = "Typist - Version 1.0";
     public static final int LINE_LENGTH = 10;
     TextUi uiBot;
@@ -49,8 +51,9 @@ public class Main {
     public void startTimeLimitGame() {
         uiBot.printClock();
         TimeModeGame g = new TimeModeGame(content.getContent(), LINE_LENGTH);
-        DataProcessor p =  new DataProcessor(g);
-        uiBot.showSummary(p.getErrorWordCount(), p.getErrorPercentage(), p.getWordPerMinute(), p.getTotalWordTyped(), p.totalTime);
+        DataProcessor p = new DataProcessor(g);
+        uiBot.showSummary(p.getErrorWordCount(), p.getErrorPercentage(), p.getWordPerMinute(),
+                p.getTotalWordTyped(), p.totalTime);
     }
 
     public void startErrorGame() {
@@ -84,7 +87,7 @@ public class Main {
                 String fullCommand = uiBot.readCommand();
                 Parser c = new Parser(fullCommand);
                 c.parse();
-                executeCommand(c,wordLimitGame,storage);
+                executeCommand(c, wordLimitGame, storage);
                 isExit = c.getIsExit();
             } catch (StringIndexOutOfBoundsException e) {
                 uiBot.showText("OOPS!!! The description after this command word cannot be empty.");
@@ -106,7 +109,9 @@ public class Main {
         uiBot.showBye();
     }
 
-    /** Runs the program until termination.  */
+    /**
+     * Runs the program until termination.
+     */
     public void run() {
         start();
         runCommandLoopUntilExitCommand();

@@ -135,7 +135,8 @@ public class TextUi {
         out.println("Error rate:  " + String.format("%.2f", sentenceErrorRate));
     }
 
-    public void showSummary(int errorWordCount, double errorPercentage, double wpm, int totalWordTyped, double gameTime) {
+    public void showSummary(int errorWordCount, double errorPercentage, double wpm,
+                            int totalWordTyped, double gameTime) {
         out.print(SUMMARY + '\n');
         out.print("Wrong Words: " + errorWordCount + "/" + totalWordTyped + '\n');
         out.print("Error Percentage: " + String.format("%.2f", errorPercentage) + "%\n");

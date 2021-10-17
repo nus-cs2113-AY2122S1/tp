@@ -13,11 +13,11 @@ public class Messages {
                     + "    /____/_/";
 
     public static final String SUMMARY =
-            "   _____ __  ____  _____  ______    ______  __\n" +
-                    "  / ___// / / /  |/  /  |/  /   |  / __ \\ \\/ /\n" +
-                    "  \\__ \\/ / / / /|_/ / /|_/ / /| | / /_/ /\\  / \n" +
-                    " ___/ / /_/ / /  / / /  / / ___ |/ _, _/ / /  \n" +
-                    "/____/\\____/_/  /_/_/  /_/_/  |_/_/ |_| /_/";
+            "   _____ __  ____  _____  ______    ______  __\n"
+                    + "  / ___// / / /  |/  /  |/  /   |  / __ \\ \\/ /\n"
+                    + "  \\__ \\/ / / / /|_/ / /|_/ / /| | / /_/ /\\  / \n"
+                    + " ___/ / /_/ / /  / / /  / / ___ |/ _, _/ / /  \n"
+                    + "/____/\\____/_/  /_/_/  /_/_/  |_/_/ |_| /_/";
 
     public static final String KEYBOARD =
             ",---,---,---,---,---,---,---,---,---,---,---,---,---,-------,\n"
@@ -77,18 +77,18 @@ public class Messages {
 
     //This sample text is gotten from https://www.lipsum.com/
     public static final String SAMPLE_TEXT = "lorem ipsum is simply dummy text of the printing and typesetting "
-           + "imply dummy text of the printing and typesetting industry ipum is simply dummy"
-           + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
-           + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
-           + "industry industry industry industry industry industry industry industry industry industry industry "
-           + "industry industry industry industry industry industry industry industry industry industry industry "
-           + "industry industry industry industry industry industry industry industry industry industry industry "
-           + "industry industry industry industry industry industry industry industry industry industry industry "
-           + "industry industry industry industry industry industry industry industry industry industry industry "
-           + "industry industry industry industry industry industry industry industry industry industry industry "
-           + "industry industry industry industry industry industry industry industry industry industry industry "
-           + "industry industry industry industry industry industry industry industry industry industry industry "
-           + "industry industry industry industry industry industry industry industry industry industry industry ";
+            + "imply dummy text of the printing and typesetting industry ipum is simply dummy"
+            + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
+            + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
+            + "industry industry industry industry industry industry industry industry industry industry industry "
+            + "industry industry industry industry industry industry industry industry industry industry industry "
+            + "industry industry industry industry industry industry industry industry industry industry industry "
+            + "industry industry industry industry industry industry industry industry industry industry industry "
+            + "industry industry industry industry industry industry industry industry industry industry industry "
+            + "industry industry industry industry industry industry industry industry industry industry industry "
+            + "industry industry industry industry industry industry industry industry industry industry industry "
+            + "industry industry industry industry industry industry industry industry industry industry industry "
+            + "industry industry industry industry industry industry industry industry industry industry industry ";
 
     //public static final String MESSAGE_GOODBYE = "Goodbye!";
     //public static final String MESSAGE_INIT_FAILED = "Failed to initialise address book application. Exiting...";
