@@ -1,5 +1,6 @@
 package parser;
 
+import command.Command;
 import command.ExitCommand;
 import command.HelpCommand;
 import command.PurgeCommand;
@@ -13,20 +14,14 @@ import command.order.DeleteOrder;
 import command.order.ListOrder;
 import command.order.UpdateOrder;
 import errors.InvalidCommand;
-import inventory.Medicine;
-import storage.Storage;
 import ui.Ui;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import static command.CommandList.ADD;
 import static command.CommandList.ADD_DISPENSE;
-import static command.CommandList.ADD_ORDER;
 import static command.CommandList.ADD_STOCK;
-import static command.CommandList.ARCHIVE;
 import static command.CommandList.DELETE;
-import static command.CommandList.DELETE_DISPENSE;
 import static command.CommandList.DELETE_ORDER;
 import static command.CommandList.DELETE_STOCK;
 import static command.CommandList.EXIT;
@@ -36,10 +31,7 @@ import static command.CommandList.LIST_DISPENSE;
 import static command.CommandList.LIST_ORDER;
 import static command.CommandList.LIST_STOCK;
 import static command.CommandList.PURGE;
-import static command.CommandList.RECEIVE_ORDER;
-import static command.CommandList.UNDO;
 import static command.CommandList.UPDATE;
-import static command.CommandList.UPDATE_DISPENSE;
 import static command.CommandList.UPDATE_ORDER;
 import static command.CommandList.UPDATE_STOCK;
 import static parser.Mode.DISPENSE;
@@ -58,85 +50,58 @@ public class CommandParser {
     /**
      * Processes the user input into a Command Object.
      *
-     * @param ui        Reference to the UI object passed by Main to print messages.
-     * @param userInput Input provided by user.
-     * @param medicines Arraylist of all stocks.
-     * @return A boolean value indicating isExit.
+     * @param command Input provided by user.
+     * @param mode    The current mode of the program.
+     * @return A Command object.
      * @throws InvalidCommand If a command does not exist.
      */
-    public static Mode processCommand(Ui ui, String userInput, ArrayList<Medicine> medicines, Mode mode,
-                                      Storage storage)
-            throws InvalidCommand {
-        String[] userCommand = parseCommand(userInput);
-        String command = userCommand[0];
+    public static Command processCommand(String command, Mode mode) throws InvalidCommand {
         // Append user's command with mode
-        if (command.equals(ADD) || command.equals(LIST) || command.equals(UPDATE) || command.equals(DELETE)) {
-            command += mode.name().toLowerCase();
-        }
-        // Check is user is changing modes
-        if (command.equalsIgnoreCase(STOCK.name()) || command.equalsIgnoreCase(DISPENSE.name())
-                || command.equalsIgnoreCase(ORDER.name())) {
-            return changeMode(ui, command, mode);
+        if (command.equals(ADD) || command.equals(LIST) || command.equals(UPDATE)
+                || command.equals(DELETE)) {
+            command = command + mode.name().toLowerCase();
         }
 
-        String commandParameters = userCommand[1];
-        LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
-        if (!commandParameters.equals("")) {
-            parameters = parseParameters(commandParameters);
-        }
         switch (command) {
         case ADD_DISPENSE:
-            new AddDispense().execute(ui, parameters, medicines, storage);
-            break;
+            return new AddDispense();
         case ADD_STOCK:
-            new AddStock().execute(ui, parameters, medicines, storage);
-            break;
-        case ADD_ORDER:
+            return new AddStock();
+        /*case ADD_ORDER:
             break;
         case ARCHIVE:
             break;
         case DELETE_DISPENSE:
-            break;
+            break;*/
         case DELETE_STOCK:
-            new DeleteStock().execute(ui, parameters, medicines, storage);
-            break;
+            return new DeleteStock();
         case DELETE_ORDER:
-            new DeleteOrder().execute(ui, parameters, medicines, storage);
-            break;
+            return new DeleteOrder();
         case EXIT:
-            new ExitCommand().execute(ui, parameters, medicines, storage);
-            return Mode.EXIT;
+            return new ExitCommand();
         case HELP:
-            new HelpCommand().execute(ui, parameters, medicines, storage);
-            break;
+            return new HelpCommand();
         case LIST_DISPENSE:
-            new ListDispense().execute(ui, parameters, medicines, storage);
-            break;
+            return new ListDispense();
         case LIST_STOCK:
-            new ListStock().execute(ui, parameters, medicines, storage);
-            break;
+            return new ListStock();
         case LIST_ORDER:
-            new ListOrder().execute(ui, parameters, medicines, storage);
-            break;
+            return new ListOrder();
         case PURGE:
-            new PurgeCommand().execute(ui, parameters, medicines, storage);
-            break;
-        case RECEIVE_ORDER:
+            return new PurgeCommand();
+        /*case RECEIVE_ORDER:
             break;
         case UNDO:
-            break;
+            break;*/
         case UPDATE_STOCK:
-            new UpdateStock().execute(ui, parameters, medicines, storage);
-            break;
-        case UPDATE_DISPENSE:
-            break;
+            return new UpdateStock();
+        /*case UPDATE_DISPENSE:
+            break;*/
         case UPDATE_ORDER:
-            new UpdateOrder().execute(ui, parameters, medicines, storage);
-            break;
+            return new UpdateOrder();
         default:
             throw new InvalidCommand();
         }
-        return mode;
     }
 
     /**
@@ -168,6 +133,10 @@ public class CommandParser {
      */
     public static LinkedHashMap<String, String> parseParameters(String parameterString) {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
+
+        if (parameterString.equals("")) { // Ensure parameter string is not empty
+            return parameters;
+        }
 
         String[] parameterSplit = parameterString.split("\\s+"); // Split by space
 
