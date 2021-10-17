@@ -19,8 +19,10 @@
 
 ## Product scope
 ### Target user profile
-
-{Describe the target user profile}
+- Has a need to store a significant amount of computing-related contacts
+- Prefers and is familiar with Command Line Interface (CLI) applications
+- Has many contacts that use common computing platforms, such as: Github, Linkedin, Twitter, Telegram, and Email
+- Can type fast and prefers typing to mouse interactions
 
 ### Value proposition
 
