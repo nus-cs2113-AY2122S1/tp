@@ -5,7 +5,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-
 public class Ui {
     private static final Logger logger = Logger.getLogger(Ui.class.getName());
     private final Scanner scanner = new Scanner(System.in);
@@ -73,4 +72,11 @@ public class Ui {
         System.out.println("The distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
     }
 
+    public void printAddDayToTrip(String tripName) {
+        System.out.println("Added a new day to trip " + tripName + ".");
+    }
+
+    public void printAddItemToDay(String tripName, int dayIndex, String itemName) {
+        System.out.println("Added a new item to day " + dayIndex + " of trip " + tripName + ".");
+    }
 }
