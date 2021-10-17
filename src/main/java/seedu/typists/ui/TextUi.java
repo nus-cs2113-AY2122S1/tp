@@ -134,10 +134,10 @@ public class TextUi {
     }
 
     public void showSummary(int errorWordCount, double errorPercentage, double wpm, int totalWordTyped, double gameTime) {
-        out.println(SUMMARY);
-        out.println("Wrong words:  " + errorWordCount + "/" + totalWordTyped);
-        out.println("Error percentage: "+ String. format("%.2f", errorPercentage));
-        out.println("WPM: " + String. format("%.2f", wpm));
-        out.println("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds");
+        out.print(SUMMARY+'\n');
+        out.print("Wrong Words: " + errorWordCount + "/" + totalWordTyped + '\n');
+        out.print("Error Percentage: "+ String. format("%.2f", errorPercentage) +"%\n");
+        out.print("WPM: " + String. format("%.2f", wpm)+'\n');
+        out.print("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds\n");
     }
 }
