@@ -64,7 +64,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void setGithubIfValid(String userInput) throws InvalidGithubUsernameException {
-        if (userInput.isEmpty()) {
+        if (userInput.isEmpty() || userInput == null) {
             isValidDetail = true;
         } else {
             checkGithubUsernameRegex(userInput);
@@ -87,7 +87,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void setTelegramIfValid(String userInput) throws InvalidTelegramUsernameException {
-        if (userInput.isEmpty()) {
+        if (userInput.isEmpty() || userInput == null) {
             isValidDetail = true;
         } else {
             checkTelegramUsernameRegex(userInput);
@@ -110,7 +110,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void setTwitterIfValid(String userInput) throws InvalidTwitterUsernameException {
-        if (userInput.isEmpty()) {
+        if (userInput.isEmpty() || userInput == null) {
             isValidDetail = true;
         } else {
             checkTwitterUsernameRegex(userInput);
@@ -133,7 +133,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void setEmailIfValid(String userInput) throws InvalidEmailException {
-        if (userInput.isEmpty()) {
+        if (userInput.isEmpty() || userInput == null) {
             isValidDetail = true;
         } else {
             checkEmailRegex(userInput);
@@ -156,7 +156,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void setLinkedInIfValid(String userInput) throws InvalidLinkedinUsernameException {
-        if (userInput.isEmpty()) {
+        if (userInput.isEmpty() || userInput == null) {
             isValidDetail = true;
         } else {
             checkLinkedinUsernameRegex(userInput);

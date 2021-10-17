@@ -36,11 +36,12 @@ public abstract class TextUi {
         String message = "Welcome to ConTech, your personal contact tracker.\n"
                 + "Can I get your name?";
         printBottomLineMessage(message);
+        System.out.print("Name:");
     }
 
     public static void welcomeBackMessage(Contact personalContact) {
         printDoubleLineMessage(LOGO);
-        String message = "Hello, " + personalContact.getName() + ". Welcome back to ConTech, "
+        String message = "Hello, " + personalContact.getName() + ". \nWelcome back to ConTech, "
                 + "your personal \ncontact tracker.";
         printBottomLineMessage(message);
     }
@@ -67,30 +68,35 @@ public abstract class TextUi {
         String message = "Please provide us with your Github Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
+        System.out.print("GitHub Username:");
     }
 
     public static void promptPersonalTelegramUsernameMessage() {
         String message = "Please provide us with your Telegram Handle\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
+        System.out.print("Telegram Handle: @");
     }
 
     public static void promptPersonalTwitterUsernameMessage() {
         String message = "Please provide us with your Twitter Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
+        System.out.print("Twitter Username:");
     }
 
     public static void promptPersonalEmailMessage() {
         String message = "Please provide us with your Email Address\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
+        System.out.print("Email Address:");
     }
 
     public static void promptPersonalLinkedInUsernameMessage() {
         String message = "Please provide us with your LinkedIn Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
+        System.out.print("LinkedIn Username:");
     }
 
     public static void createNewContactFileMessage(String contactFilePath) {
