@@ -13,6 +13,10 @@ add Fried Fish /ingredients Fish+Olive Oil /steps Preheat pan+Add olive oil+Add 
 find /ingredients Olive Oil
 find olives
 find /// / / /
+set fried fish /calories 250
+check fried fish
+set fried fish /calories xyz
+set meatballs /calories 150
 delete 5
 delete cookies
 delete 2

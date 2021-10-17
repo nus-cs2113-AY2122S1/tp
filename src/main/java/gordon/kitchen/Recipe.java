@@ -40,26 +40,6 @@ public class Recipe {
         ingredients.add(ingredient);
     }
 
-    public void addIngredient(String ingredient, int index) throws GordonException {
-        try {
-            ingredients.add(index, ingredient);
-        } catch (IndexOutOfBoundsException e) {
-            throw new GordonException(GordonException.INDEX_OOB);
-        } catch (IllegalArgumentException e) {
-            throw new GordonException(GordonException.INDEX_INVALID);
-        }
-    }
-
-    public void removeIngredient(int index) throws GordonException {
-        try {
-            ingredients.remove(index);
-        } catch (IndexOutOfBoundsException e) {
-            throw new GordonException(GordonException.INDEX_OOB);
-        } catch (IllegalArgumentException e) {
-            throw new GordonException(GordonException.INDEX_INVALID);
-        }
-    }
-
     public boolean containsIngredients(ArrayList<String> search) {
         ArrayList<String> ingredientsToLowercase = new ArrayList<>(ingredients);
         ingredientsToLowercase.replaceAll(String::toLowerCase);
