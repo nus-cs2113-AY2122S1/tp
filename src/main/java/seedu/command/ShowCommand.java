@@ -17,6 +17,10 @@ public class ShowCommand extends Command {
         this.searchTerm = searchTerm;
     }
 
+    /**
+     * Shows full mod information as fetched from NUSMods API. If it is unable to reach the API, it will
+     * print an error message and attempt to fetch information from local data.
+     */
     public void execute() {
         String moduleCode = searchTerm.toUpperCase();
         try {

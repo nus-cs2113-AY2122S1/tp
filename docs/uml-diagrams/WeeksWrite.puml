@@ -1,0 +1,25 @@
+@startuml
+
+[-> WeeksAdapterFactory : create()
+activate WeeksAdapterFactory
+
+WeeksAdapterFactory --> WeeksAdapter : new
+activate WeeksAdapter
+
+<-- WeeksAdapterFactory
+deactivate WeeksAdapterFactory
+
+alt weeks != null
+    WeeksAdapter -> WeeksAdapter : writeAsIntArray
+    activate WeeksAdapter
+    deactivate WeeksAdapter
+else else
+    WeeksAdapter -> WeeksAdapter : writeAsObject
+    activate WeeksAdapter
+    deactivate WeeksAdapter
+end
+
+<-- WeeksAdapter
+deactivate WeeksAdapter
+
+@enduml

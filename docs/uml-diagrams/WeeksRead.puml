@@ -1,0 +1,27 @@
+@startuml
+
+[-> WeeksAdapterFactory : create()
+activate WeeksAdapterFactory
+
+WeeksAdapterFactory --> WeeksAdapter : new
+activate WeeksAdapter
+
+<-- WeeksAdapterFactory
+deactivate WeeksAdapterFactory
+
+alt BEGIN_ARRAY
+    WeeksAdapter -> WeeksAdapter : getWeeksIntArray
+    activate WeeksAdapter
+    deactivate WeeksAdapter
+else BEGIN_OBJECT
+    WeeksAdapter -> WeeksAdapter : getWeeksObject
+    activate WeeksAdapter
+    deactivate WeeksAdapter
+else
+    <-- WeeksAdapter : Throw IOException
+end
+
+<-- WeeksAdapter
+deactivate WeeksAdapter
+
+@enduml
