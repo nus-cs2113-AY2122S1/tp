@@ -79,6 +79,16 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void invalidPersonalLinkedinUsernameErrorMessage() {
+        String message = "The linkedin username is not correctly formatted,\n"
+                + "Rules for Linkedin username :\n"
+                + "    * Lowercase letters only\n"
+                + "    * Numbers, underscore and hyphen allowed\n"
+                + "    * Length between 3 to 100 characters\n\n"
+                + "Please enter your linkedin username again\n"
+                + "or press ENTER to skip.";
+        printDoubleLineMessage(message);
+    }
 
     // Error Messages
     public static void fileErrorMessage(String contactFilePath) {
