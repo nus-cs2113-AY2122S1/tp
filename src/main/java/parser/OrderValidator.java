@@ -15,9 +15,9 @@ public class OrderValidator {
     /**
      * Checks if parameter values are valid for Order objects.
      *
-     * @param ui Reference to the UI object passed by Main to print messages.
-     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines Arraylist of all medicines.
+     * @param ui            Reference to the UI object passed by Main to print messages.
+     * @param parameters    LinkedHashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines     Arraylist of all medicines.
      * @param commandSyntax The command's valid syntax.
      * @return A boolean value indicating whether parameter values are valid.
      */
@@ -57,8 +57,8 @@ public class OrderValidator {
     /**
      * Checks if the given order id is valid.
      *
-     * @param ui Reference to the UI object passed by Main to print messages.
-     * @param oid ID of the order to be checked.
+     * @param ui        Reference to the UI object passed by Main to print messages.
+     * @param oid       ID of the order to be checked.
      * @param medicines List of all medicines.
      * @return Boolean value indicating if order ID is valid.
      */
@@ -92,7 +92,7 @@ public class OrderValidator {
     /**
      * Checks if a medicine order date is valid.
      *
-     * @param ui Reference to the UI object passed by Main to print messages.
+     * @param ui         Reference to the UI object passed by Main to print messages.
      * @param dateString Date of the medicine.
      * @return Boolean value indicating if medicine expiry date is valid.
      */
@@ -109,7 +109,7 @@ public class OrderValidator {
     /**
      * Checks if a medicine order status is valid.
      *
-     * @param ui Reference to the UI object passed by Main to print messages.
+     * @param ui           Reference to the UI object passed by Main to print messages.
      * @param statusString Status of medicine order.
      * @return Boolean value indicating if medicine expiry date is valid.
      */
