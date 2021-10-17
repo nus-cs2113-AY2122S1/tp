@@ -1,5 +1,9 @@
 package seedu.duke.logic.parser;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import seedu.duke.commons.core.CommandType;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.logic.commands.Command;
@@ -43,8 +47,14 @@ public class AddCommandParser {
             throw new ParseException(Messages.ERROR_INVALID_DAY);
         }
 
-        String startTime = params[2].strip();       // TODO: Validate correctness with time library
-        String endTime = params[3].strip();         // TODO: Validate correctness with time library
+        String startTime;
+        String endTime;
+        try {
+            startTime = LocalTime.parse(params[2].strip()).format(DateTimeFormatter.ofPattern("hh:mm a"));
+            endTime = LocalTime.parse(params[3].strip()).format(DateTimeFormatter.ofPattern("hh:mm a"));
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Messages.ERROR_INVALID_TIME_FORMAT);
+        }
 
         switch (params.length) {
         case 4:
