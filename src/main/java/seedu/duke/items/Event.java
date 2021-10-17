@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Event extends Item {
 
-    private ArrayList<Task> taskList = new ArrayList<>();
+    public ArrayList<Task> taskList = new ArrayList<>();
     private LocalDateTime dateTime;
     private String venue;
     private double budget;

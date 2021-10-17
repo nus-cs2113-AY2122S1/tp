@@ -13,6 +13,8 @@ import java.util.ArrayList;
 public class Duke {
 
     public static ArrayList<Event> eventCatalog = new ArrayList<>();
+    /*TODO: Delete the ArrayList of tasks below once the project has been restructured to fully utilize the new
+    *  ArrayList of Task objects within each Event*/
     public static ArrayList<Task> taskList = new ArrayList<>();
     private static final StorageFile storage = new StorageFile();
 
