@@ -22,6 +22,17 @@ public class ExceptionTextUi {
         System.out.println("\n" + LINE);
     }
 
+    public static void invalidPersonalNameErrorMessage() {
+        String message = "The name is not correctly formatted,\n"
+                + "Rules for name :\n"
+                + "    * Uppercase and lowercase letters\n"
+                + "    * Spaces\n"
+                + "    * No numbers or special characters\n"
+                + "    * Cannot be \"null\"\n\n"
+                + "Please enter your name again.";
+        printDoubleLineMessage(message);
+    }
+
     // Error Messages
     public static void fileErrorMessage(String contactFilePath) {
         String message = "ConTech is unfortunately unable to access / create a\n" + " save file at " + contactFilePath

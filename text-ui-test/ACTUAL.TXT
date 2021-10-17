@@ -1,3 +1,13 @@
+As ConTech is unable to find your saved data,
+ it has created a new one for you at:
+data/contacts.txt
+____________________________________________________________
+
+As ConTech is unable to find any saved personal data, 
+ it has created a new one for you at: 
+data/me.txt
+____________________________________________________________
+
 ____________________________________________________________
    _____         _______        _     
   / ____|       |__   __|      | |    
@@ -10,11 +20,17 @@ ____________________________________________________________
 ____________________________________________________________
 
 Welcome to ConTech, your personal contact tracker.
+Can I get your name?
 ____________________________________________________________
 
-As ConTech is unable to find your saved data,
- it has created a new one for you at:
-data/contacts.txt
+____________________________________________________________
+Hello there, Le Zong.
+
+This is ConTech, your very own contact tracking application
+to manage computing-related contacts, like GitHub Accounts
+or even Emails.
+
+Enter "help" to see what you can do with ConTech.
 ____________________________________________________________
 
 ____________________________________________________________

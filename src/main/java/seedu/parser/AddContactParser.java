@@ -25,6 +25,7 @@ public class AddContactParser extends ContactParser {
      * @return String[] Returns an array of details
      * @throws InvalidFlagException If the flag given is not recognised
      */
+
     public String[] parseContactDetails(String userInput) throws InvalidFlagException, MissingArgException,
             InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
             InvalidLinkedinUsernameException, InvalidTwitterUsernameException,
