@@ -1,7 +1,7 @@
 package seedu.duke;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -16,7 +16,6 @@ import seedu.duke.model.module.ModuleList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.TaskList;
 import seedu.duke.commons.core.Messages;
-import seedu.duke.storage.exceptions.StorageException;
 import seedu.duke.ui.Ui;
 
 public class Duke {
@@ -38,19 +37,43 @@ public class Duke {
         initializeLogger();
         ui = new Ui();
         storage = new Storage();
+
         try {
-            taskList = new TaskList(TaskList.deserialize(storage.loadData(Storage.TASK_FILE_NAME)));
-            lessonList = new LessonList(LessonList.deserialize(storage.loadData(Storage.LESSON_FILE_NAME)));
-            moduleList = new ModuleList(); // todo add module list deserialization
-            fullModuleList = new FullModuleList();
-            ui.printMessage(Messages.SUCCESS_RETRIEVING_DATA);
-            LOGGER.info("Successfully retrieved data from the save file.");
-        } catch (DukeException | IOException e) {
-            LOGGER.warning("Failed to retrieve data from the save file.");
+            List<String> taskData = storage.loadData(Storage.PATH_TO_TASK_FILE);
+            // taskList = new TaskList(TaskList.deserialize(ui, taskData));
+            storage.saveData(taskList);
+            ui.printMessage(Messages.SUCCESS_RETRIEVING_TASK_DATA);
+            LOGGER.info(Messages.SUCCESS_RETRIEVING_TASK_DATA);
+        } catch (IOException e) {
+            LOGGER.warning(e.getMessage());
             ui.printMessage(e.getMessage());
-            storage.createNewData(ui);
+            storage.createNewDataFile(ui, "TASK");
             taskList = new TaskList();
+        }
+
+        try {
+            List<String> lessonData = storage.loadData(Storage.PATH_TO_LESSON_FILE);
+            lessonList = new LessonList(LessonList.deserialize(ui, lessonData));
+            storage.saveData(lessonList);
+            ui.printMessage(Messages.SUCCESS_RETRIEVING_LESSON_DATA);
+            LOGGER.info(Messages.SUCCESS_RETRIEVING_LESSON_DATA);
+        } catch (IOException e) {
+            LOGGER.warning(e.getMessage());
+            ui.printMessage(e.getMessage());
+            storage.createNewDataFile(ui, "LESSON");
             lessonList = new LessonList();
+        }
+
+        try {
+            List<String> moduleData = storage.loadData(Storage.PATH_TO_MODULE_FILE);
+            // moduleList = new ModuleList(ModuleList.deserialize(ui, moduleData));
+            storage.saveData(moduleList);
+            ui.printMessage(Messages.SUCCESS_RETRIEVING_MODULE_DATA);
+            LOGGER.info(Messages.SUCCESS_RETRIEVING_MODULE_DATA);
+        } catch (IOException e) {
+            LOGGER.warning(e.getMessage());
+            ui.printMessage(e.getMessage());
+            storage.createNewDataFile(ui, "MODULE");
             moduleList = new ModuleList();
         }
     }
@@ -66,7 +89,7 @@ public class Duke {
             try {
                 String userResponse = ui.readUserResponse();
                 Command command = Parser.parse(userResponse);
-                command.execute(ui, storage, taskList, lessonList);
+                command.execute(ui, storage, taskList, lessonList, moduleList);
                 isExit = command.isExit();
             } catch (DukeException | IOException e) {
                 LOGGER.warning("Invalid command.");
