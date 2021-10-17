@@ -12,11 +12,11 @@ import static seedu.typists.common.Messages.LOGO;
 import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
 import static seedu.typists.common.Messages.MESSAGE_HELP;
 import static seedu.typists.common.Messages.MESSAGE_WELCOME;
+import static seedu.typists.common.Messages.SUMMARY;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Scanner;
-
 /**
  * Text UI of the application.
  */
@@ -133,8 +133,10 @@ public class TextUi {
         out.println("Error rate:  " + String.format("%.2f", sentenceErrorRate));
     }
 
-    public void showSummary(int errorWordCount, double wpm, int totalWordTyped, double gameTime) {
+    public void showSummary(int errorWordCount, double errorPercentage, double wpm, int totalWordTyped, double gameTime) {
+        out.println(SUMMARY);
         out.println("Wrong words:  " + errorWordCount + "/" + totalWordTyped);
+        out.println("Error percentage: "+ String. format("%.2f", errorPercentage));
         out.println("WPM: " + String. format("%.2f", wpm));
         out.println("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds");
     }
