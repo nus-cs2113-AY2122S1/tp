@@ -20,22 +20,21 @@ public class AddPersonalContactParser extends RegexParser {
         TextUi.welcomeMessage();
     }
 
-
     public void startCollectingPersonalDetails() {
-        promptPersonalName();
+        parsePersonalName();
         TextUi.greetingMessage(personalContact);
         String userConfirmation = UserInputTextUi.getUserConfirmation();
         if (userConfirmation != null || userConfirmation.isBlank()) {
-            promptPersonalGithubUsername();
-            promptPersonalTelegramUsername();
-            promptPersonalTwitterUsername();
-            promptPersonalEmailAddress();
-            promptPersonalLinkedInUsername();
+            parsePersonalGithubUsername();
+            parsePersonalTelegramUsername();
+            parsePersonalTwitterUsername();
+            parsePersonalEmailAddress();
+            parsePersonalLinkedInUsername();
             TextUi.finishSetUpMessage();
         }
     }
 
-    private void promptPersonalName() {
+    private void parsePersonalName() {
         isValidDetail = false;
         do {
             try {
@@ -50,7 +49,7 @@ public class AddPersonalContactParser extends RegexParser {
         } while (!isValidDetail);
     }
 
-    private void promptPersonalGithubUsername() {
+    private void parsePersonalGithubUsername() {
         isValidDetail = false;
         TextUi.promptPersonalGithubUsernameMessage(this.personalContact.getName());
         do {
@@ -73,7 +72,7 @@ public class AddPersonalContactParser extends RegexParser {
         }
     }
 
-    private void promptPersonalTelegramUsername() {
+    private void parsePersonalTelegramUsername() {
         isValidDetail = false;
         TextUi.promptPersonalTelegramUsernameMessage();
         do {
@@ -96,7 +95,7 @@ public class AddPersonalContactParser extends RegexParser {
         }
     }
 
-    private void promptPersonalTwitterUsername() {
+    private void parsePersonalTwitterUsername() {
         isValidDetail = false;
         TextUi.promptPersonalTwitterUsernameMessage();
         do {
@@ -119,7 +118,7 @@ public class AddPersonalContactParser extends RegexParser {
         }
     }
 
-    private void promptPersonalEmailAddress() {
+    private void parsePersonalEmailAddress() {
         isValidDetail = false;
         TextUi.promptPersonalEmailMessage();
         do {
@@ -142,7 +141,7 @@ public class AddPersonalContactParser extends RegexParser {
         }
     }
 
-    private void promptPersonalLinkedInUsername() {
+    private void parsePersonalLinkedInUsername() {
         isValidDetail = false;
         TextUi.promptPersonalLinkedInUsernameMessage();
         do {
