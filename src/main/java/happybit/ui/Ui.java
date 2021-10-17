@@ -50,7 +50,7 @@ public class Ui {
     public void printGoalList(ArrayList<Goal> goals, int numOfGoals) {
         printDashes();
         assert (numOfGoals > 0) : "List cannot be empty here";
-        System.out.println("There are " + numOfGoals + " goal(s) in your list:");
+        System.out.println("There is/are " + numOfGoals + " goal(s) in your list:");
         for (Goal goal : goals) {
             System.out.println(goal.getDescription());
         }
@@ -86,7 +86,7 @@ public class Ui {
 
     public void printRemovedGoal(String goalDescription) {
         printDashes();
-        System.out.println("Your goal: " + goalDescription + "has been removed.");
+        System.out.println("Your goal: " + goalDescription + " has been removed.");
         printDashes();
     }
 

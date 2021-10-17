@@ -126,7 +126,6 @@ public class Storage {
     }
 
     protected Habit habitParser(String[] lineData) {
-        boolean isDone;
         Habit habit = new Habit(lineData[HABIT_NAME_INDEX]);
 
         if (lineData[DONE_INDEX].equals("1")) {
@@ -145,7 +144,7 @@ public class Storage {
 
             if (isDirCreated) {
                 System.out.println("Directory created: " + fileDir);
-                assert !storageDir.exists() : "directory should have been created";
+                assert storageDir.exists() : "directory should have been created";
             } else {
                 System.out.println("Directory not created");
             }
@@ -156,7 +155,7 @@ public class Storage {
 
             if (isFileCreated) {
                 System.out.println("File created: " + filePath);
-                assert !storageFile.exists() : "file should have been created";
+                assert storageFile.exists() : "file should have been created";
             } else {
                 System.out.println("File exists");
             }
