@@ -66,4 +66,9 @@ public class DataProcessor {
         }
         return errorCount;
     }
+
+    public double getErrorPercentage() {
+        double percentage = (double) getErrorWordCount() / (double) getTotalWordTyped();
+        return percentage;
+    }
 }
