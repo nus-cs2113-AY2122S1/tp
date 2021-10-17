@@ -6,7 +6,7 @@ import seedu.traveller.worldmap.exceptions.WorldMapException;
 
 public class WorldMap {
     protected static GraphList graphList = new GraphList();
-    protected static Loader loader = new Loader();
+    protected static DataLoader loader = new DataLoader();
     protected static Logic logic = new Logic();
 
     public static void initWorldMap() {
