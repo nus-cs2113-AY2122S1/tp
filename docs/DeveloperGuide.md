@@ -2,6 +2,14 @@
 
 ## Acknowledgements
 
+- Inspiration for App Idea and OOP Structure: AddressBook (Level 2) <br />
+  https://github.com/se-edu/addressbook-level2
+- Inspiration for User Guide and Developer Guide: AddressBook (Level 2) <br />
+  https://se-education.org/addressbook-level3/DeveloperGuide.html <br/>
+  https://se-education.org/addressbook-level3/UserGuide.html
+- Converting text for ConTech: <br />
+  https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20
+
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Design & implementation
