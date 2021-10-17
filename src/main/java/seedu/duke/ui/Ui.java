@@ -2,14 +2,15 @@ package seedu.duke.ui;
 
 import java.util.Scanner;
 
-import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
 
-import static seedu.duke.commons.core.DayOfTheWeek.getCurrentDayOfWeek;
-import static seedu.duke.commons.core.DayOfTheWeek.getNextDayOfWeek;
+import static seedu.duke.commons.util.DayUtil.getToday;
+import static seedu.duke.commons.util.DayUtil.getTomorrow;
+import static seedu.duke.commons.util.DayUtil.isToday;
+import static seedu.duke.commons.util.DayUtil.isTomorrow;
 
 public class Ui {
     public static final String LINE =
@@ -164,12 +165,12 @@ public class Ui {
      * @param period the specified period
      */
     public void printTasksWithPeriod(TaskList taskList, String period) {
-        if (period.equalsIgnoreCase(DayOfTheWeek.TODAY_PERIOD)) {
-            period = getCurrentDayOfWeek();
+        if (isToday(period)) {
+            period = getToday();
+        } else if (isTomorrow(period)) {
+            period = getTomorrow();
         }
-        if (period.equalsIgnoreCase(DayOfTheWeek.TOMORROW_PERIOD)) {
-            period = getNextDayOfWeek();
-        }
+
         TaskList filteredTaskList = taskList.filterTasksByPeriod(period);
 
         System.out.print(LINE);
@@ -254,12 +255,12 @@ public class Ui {
      * @param period the specified period
      */
     public void printLessonsWithPeriod(LessonList lessonList, String period) {
-        if (period.equalsIgnoreCase(DayOfTheWeek.TODAY_PERIOD)) {
-            period = getCurrentDayOfWeek();
+        if (isToday(period)) {
+            period = getToday();
+        } else if (isTomorrow(period)) {
+            period = getTomorrow();
         }
-        if (period.equalsIgnoreCase(DayOfTheWeek.TOMORROW_PERIOD)) {
-            period = getNextDayOfWeek();
-        }
+
         LessonList filteredLessonList = lessonList.filterLessonsByPeriod(period);
 
         System.out.print(LINE);
