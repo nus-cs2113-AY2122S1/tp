@@ -34,7 +34,34 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## <a name="design"></a>Design
+
+### <a name="sys-arch"></a>System Architecture
+
+![System Architecture](images/SystemArchitectureDiagram.png)
+
+The above **System Architecture** diagram shows the high-level design of ConTech.
+
+On launch, the `Main` class initialises the app components in the correct sequence and links them up
+with each other, in the correct sequence.
+
+ConTech comprises five main components, namely:
+- `TextUi`: Command Line User Interface of ConTech.
+- `MainParser`: Parser to parser user inputs from `TextUi` for `Command`.
+- `Command`: Command to be executed upon input parsing.
+- `ContactList`: Data structure to store `Contact`s while running ConTech.
+- `Storage`: Reads from and writes to [`LocalStorage`](#local-storage).
+
+The five main components interact with each other, as shown in the sequence diagram below.
+{ NEED SEQUENCE DIAGRAM }
+
+### <a name="text-ui"></a>TextUi
+### <a name="main-parser"></a>MainParser
+### <a name="command"></a>Command
+### <a name="contact-list"></a>ContactList
+### <a name="storage"></a>Storage
+
+## <a name="implementation"></a>Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
