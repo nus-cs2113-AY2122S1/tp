@@ -18,7 +18,7 @@ public class Import {
     private static final int TYPE_INDEX = 1;
     private static final String ERROR_INVALID_GOAL_INDEX = "There is no goal at that index.";
 
-    public static GoalList importStorage(String filePath) throws HaBitStorageException {
+    protected static GoalList importStorage(String filePath) throws HaBitStorageException {
         GoalList goalList = new GoalList();
         Scanner s;
         String line;
