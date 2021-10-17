@@ -21,7 +21,7 @@ public class DeleteContactCommand extends Command {
     private void deleteOnConfirmation(Contact deletedContact) {
         // ask for confirmation to delete from user
         TextUi.confirmDeleteMessage(deletedContact, contactIndex);
-        String userDeleteConfirmation = UserInputTextUi.getUserDeleteConfirmation();
+        String userDeleteConfirmation = UserInputTextUi.getUserConfirmation();
         if (userDeleteConfirmation.equalsIgnoreCase("y")) {
             this.contactList.deleteContact(contactIndex);
             TextUi.deleteContactMessage(deletedContact.getName(), contactList.getListSize());

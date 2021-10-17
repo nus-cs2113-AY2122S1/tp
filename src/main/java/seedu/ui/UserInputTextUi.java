@@ -15,8 +15,8 @@ public class UserInputTextUi {
         return userInput;
     }
 
-    public static String getUserDeleteConfirmation() {
-        String userDeleteConfirmation = scanner.nextLine().trim();
-        return userDeleteConfirmation;
+    public static String getUserConfirmation() {
+        String userConfirmation = scanner.nextLine().trim();
+        return userConfirmation;
     }
 }
