@@ -1,5 +1,5 @@
 0##G##[DF]##Exercise More##14102021##31122021
 0##H##0## Run 4km
-0##H##1## Run 6km
+0##H##0## Run 6km
 1##G##[DF]##Become Gudetama##14102021##31122021
 1##H##0## Sleep until 12pm
