@@ -19,6 +19,8 @@ public class Messages {
     public static final String LISTING_INCOME_MESSAGE = "Below is a list of all of your recent earnings!";
     public static final String EMPTY_INCOME_MESSAGE = "You have not entered any income!";
     public static final String EMPTY_EXPENSE_MESSAGE = "You have not spent anything!";
+    public static final String FOUND_LIST_MESSAGE = "Below is a list of all your findings!";
+
 
     public static final String BYE_MESSAGE = "██████  ██    ██ ███████        ██  \n"
             + "██   ██  ██  ██  ██          ██  ██ \n"
