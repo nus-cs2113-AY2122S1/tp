@@ -15,7 +15,7 @@ public class CommandParserTest {
     Ui ui = new Ui();
 
     @Test
-    public void processCommand_validCommand_expectExit() {
+    public void processCommand_exitCommand_expectExitObject() {
         try {
             Command command = CommandParser.processCommand("exit", Mode.STOCK);
             assertEquals(command.getClass(), ExitCommand.class);
@@ -25,7 +25,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void processCommand_validCommand_expectAddStock() {
+    public void processCommand_addCommand_expectAddStockObject() {
         try {
             Command command = CommandParser.processCommand("add", Mode.STOCK);
             assertEquals(command.getClass(), AddStock.class);
