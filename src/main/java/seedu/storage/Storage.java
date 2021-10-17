@@ -79,6 +79,7 @@ public class Storage {
             isFirstRun = true;
             // get new contact's name
             AddPersonalContactParser addPersonalContactParser = new AddPersonalContactParser();
+            addPersonalContactParser.startCollectingPersonalDetails();
             Contact personalContact = addPersonalContactParser.getPersonalContact();
             ContactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
             return personalContact;

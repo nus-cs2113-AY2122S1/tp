@@ -18,13 +18,21 @@ public class AddPersonalContactParser extends RegexParser {
 
     public AddPersonalContactParser() {
         TextUi.welcomeMessage();
+    }
+
+
+    public void startCollectingPersonalDetails() {
         promptPersonalName();
-        promptPersonalGithubUsername();
-        promptPersonalTelegramUsername();
-        promptPersonalTwitterUsername();
-        promptPersonalEmailAddress();
-        promptPersonalLinkedInUsername();
         TextUi.greetingMessage(personalContact);
+        String userConfirmation = UserInputTextUi.getUserConfirmation();
+        if (userConfirmation != null || userConfirmation.isBlank()) {
+            promptPersonalGithubUsername();
+            promptPersonalTelegramUsername();
+            promptPersonalTwitterUsername();
+            promptPersonalEmailAddress();
+            promptPersonalLinkedInUsername();
+            TextUi.finishSetUpMessage();
+        }
     }
 
     private void promptPersonalName() {

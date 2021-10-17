@@ -48,15 +48,23 @@ public abstract class TextUi {
     public static void greetingMessage(Contact personalContact) {
         String message = "Hello there, " + personalContact.getName() + ".\n\n"
                 + "This is ConTech, your very own contact tracking application\n"
-                + "to manage computing-related contacts, like GitHub Accounts\n"
-                + "or even Emails.\n\n"
-                + "Enter \"help\" to see what you can do with ConTech.";
+                + "to manage tech-related contacts, like GitHub Accounts or\n"
+                + "even Emails.\n\n"
+                + "Before we start, let's set up your personal contact, shall\n"
+                + "we?\n\n"
+                + "Enter anything to continue...";
+        printDoubleLineMessage(message);
+    }
+
+    public static void finishSetUpMessage() {
+        String message = "You have successfully set up your own personal contact.\n"
+                + "Don't worry, you can always edit your personal details \n"
+                + "later on.\n\nTo see what you can do with ConTech, enter \"help\".";
         printDoubleLineMessage(message);
     }
 
     public static void promptPersonalGithubUsernameMessage(String personalName) {
-        String message = "Hello, " + personalName + ".\n\n"
-                + "Please provide us with your Github Username\n"
+        String message = "Please provide us with your Github Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
     }
