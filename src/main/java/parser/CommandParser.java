@@ -51,14 +51,14 @@ public class CommandParser {
      * Processes the user input into a Command Object.
      *
      * @param command Input provided by user.
-     * @param mode The current mode of the program.
+     * @param mode    The current mode of the program.
      * @return A Command object.
      * @throws InvalidCommand If a command does not exist.
      */
     public static Command processCommand(String command, Mode mode) throws InvalidCommand {
         // Append user's command with mode
-        if (command.equals(ADD) || command.equals(LIST) || command.equals(UPDATE) ||
-                command.equals(DELETE)) {
+        if (command.equals(ADD) || command.equals(LIST) || command.equals(UPDATE)
+                || command.equals(DELETE)) {
             command = command + mode.name().toLowerCase();
         }
 
@@ -109,7 +109,7 @@ public class CommandParser {
      *
      * @param userInput String input from user.
      * @return Array of string with size 2 with index 0 representing the command and index 1 representing the
-     * command parameters.
+     *     command parameters.
      */
     public static String[] parseCommand(String userInput) {
         // Splits user input by spaces
@@ -134,7 +134,7 @@ public class CommandParser {
     public static LinkedHashMap<String, String> parseParameters(String parameterString) {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
 
-        if (parameterString.equals("")){ // Ensure parameter string is not empty
+        if (parameterString.equals("")) { // Ensure parameter string is not empty
             return parameters;
         }
 

@@ -1,36 +1,34 @@
 package parser;
 
+import command.Command;
+import command.ExitCommand;
+import command.medicine.AddStock;
 import errors.InvalidCommand;
-import inventory.Medicine;
 import org.junit.jupiter.api.Test;
 import ui.Ui;
-import storage.Storage;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandParserTest {
     Ui ui = new Ui();
-    Storage storage = new Storage();
-    ArrayList<Medicine> medicines = new ArrayList<>();
 
     @Test
     public void processCommand_validCommand_expectExit() {
         try {
-            Mode mode = CommandParser.processCommand(ui, "exit", medicines, Mode.STOCK, storage);
-            assertEquals(mode, Mode.EXIT);
+            Command command = CommandParser.processCommand("exit", Mode.STOCK);
+            assertEquals(command.getClass(), ExitCommand.class);
         } catch (InvalidCommand e) {
             e.printStackTrace();
         }
     }
 
     @Test
-    public void processCommand_exitCommand_expectOrder() {
+    public void processCommand_validCommand_expectAddStock() {
         try {
-            Mode mode = CommandParser.processCommand(ui, "order", medicines, Mode.STOCK, storage);
-            assertEquals(mode, Mode.ORDER);
+            Command command = CommandParser.processCommand("add", Mode.STOCK);
+            assertEquals(command.getClass(), AddStock.class);
         } catch (InvalidCommand e) {
             e.printStackTrace();
         }
