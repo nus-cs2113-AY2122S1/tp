@@ -1,6 +1,7 @@
 package command;
 
 import inventory.Medicine;
+import storage.Storage;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -13,7 +14,8 @@ import java.util.LinkedHashMap;
 public class HelpCommand extends Command {
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                        Storage storage) {
         ArrayList<CommandSyntax> commandSyntaxes = new ArrayList<>();
         commandSyntaxes.add(new CommandSyntax(CommandList.ADD_STOCK, CommandSyntax.ADD_STOCK_COMMAND));
         commandSyntaxes.add(new CommandSyntax(CommandList.LIST_STOCK, CommandSyntax.LIST_STOCK_COMMAND));

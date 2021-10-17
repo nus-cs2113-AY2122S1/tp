@@ -1,6 +1,7 @@
 package command;
 
 import inventory.Medicine;
+import storage.Storage;
 import ui.Ui;
 
 import java.util.ArrayList;
@@ -14,7 +15,9 @@ import java.util.LinkedHashMap;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines) {
+    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
+                        Storage storage) {
+        storage.saveData(medicines);
         ui.printExit();
     }
 }

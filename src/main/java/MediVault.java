@@ -6,6 +6,7 @@ import inventory.Stock;
 import parser.DateParser;
 import parser.Mode;
 import parser.CommandParser;
+import storage.Storage;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -23,13 +24,17 @@ import java.util.logging.Logger;
 public class MediVault {
     private ArrayList<Medicine> medicines;
     private Ui ui;
+    private Storage storage;
     private static Logger logger = Logger.getLogger("MediVault");
     private Mode mode = Mode.STOCK;
 
     public MediVault() {
-        medicines = new ArrayList<>();
+        //medicines = new ArrayList<>();
+        //generateData();
+        medicines = new Storage().loadData();
         ui = new Ui();
-        generateData();
+        storage = new Storage();
+
         logger.log(Level.INFO, "All variables are initialised.");
     }
 
@@ -54,7 +59,7 @@ public class MediVault {
             // Reads user input
             userInput = in.nextLine();
             try {
-                mode = CommandParser.processCommand(ui, userInput, medicines, mode);
+                mode = CommandParser.processCommand(ui, userInput, medicines, mode, storage);
                 if (mode == Mode.EXIT) { // User entered exit
                     break;
                 }

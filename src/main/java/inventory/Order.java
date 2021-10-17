@@ -67,4 +67,9 @@ public class Order extends Medicine {
             return "PENDING";
         }
     }
+
+    @Override
+    public String toFileFormat() {
+        return "";
+    }
 }

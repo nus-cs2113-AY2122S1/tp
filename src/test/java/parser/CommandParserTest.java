@@ -4,6 +4,7 @@ import errors.InvalidCommand;
 import inventory.Medicine;
 import org.junit.jupiter.api.Test;
 import ui.Ui;
+import storage.Storage;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -12,12 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CommandParserTest {
     Ui ui = new Ui();
+    Storage storage = new Storage();
     ArrayList<Medicine> medicines = new ArrayList<>();
 
     @Test
     public void processCommand_validCommand_expectExit() {
         try {
-            Mode mode = CommandParser.processCommand(ui, "exit", medicines, Mode.STOCK);
+            Mode mode = CommandParser.processCommand(ui, "exit", medicines, Mode.STOCK, storage);
             assertEquals(mode, Mode.EXIT);
         } catch (InvalidCommand e) {
             e.printStackTrace();
@@ -27,7 +29,7 @@ public class CommandParserTest {
     @Test
     public void processCommand_exitCommand_expectOrder() {
         try {
-            Mode mode = CommandParser.processCommand(ui, "order", medicines, Mode.STOCK);
+            Mode mode = CommandParser.processCommand(ui, "order", medicines, Mode.STOCK, storage);
             assertEquals(mode, Mode.ORDER);
         } catch (InvalidCommand e) {
             e.printStackTrace();
