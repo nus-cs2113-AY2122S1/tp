@@ -3,6 +3,7 @@ package seedu.duke.ingredients;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.storage.Storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -13,13 +14,21 @@ public class IngredientList {
     private static final String INVALID_NUMBER = "Ingredient number does not exist!";
 
     protected ArrayList<Ingredient> ingredientList;
+    private Storage storage;
     private static IngredientList instance = null;
 
-    public IngredientList() {
-        ingredientList = new ArrayList<Ingredient>(); //This is for v1.0
+    public IngredientList() throws DukeException {
+        try {
+            storage = new Storage();
+            ingredientList = storage.loadIngredientsFromMemory();
+        } catch (IOException e) {
+            //failsafe
+            ingredientList = new ArrayList<>();
+            throw new DukeException("Cannot read ingredients from memory!");
+        }
     }
 
-    public static IngredientList getInstance() {
+    public static IngredientList getInstance() throws DukeException {
         if (instance == null) {
             instance = new IngredientList();
         }
@@ -75,8 +84,9 @@ public class IngredientList {
      * Adds the new ingredient to the ingredient list.
      * @param ingredient The ingredient object to be added
      */
-    public void add(Ingredient ingredient) {
+    public void add(Ingredient ingredient) throws IOException {
         ingredientList.add(ingredient);
+        storage.writeIngredientsToMemory(ingredientList);
     }
 
     /**
@@ -84,8 +94,9 @@ public class IngredientList {
      * @param ingredientNumber The index of the ingredient to be updated
      * @param ingredient The update ingredient object
      */
-    public void set(int ingredientNumber, Ingredient ingredient) {
+    public void set(int ingredientNumber, Ingredient ingredient) throws IOException {
         ingredientList.set(ingredientNumber, ingredient);
+        storage.writeIngredientsToMemory(ingredientList);
     }
 
     /**

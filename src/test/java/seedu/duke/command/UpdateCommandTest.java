@@ -5,6 +5,7 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class UpdateCommandTest {
 
     @Test
-    public void updateCommandTest_dukeExceptionThrown() throws DukeException {
+    public void updateCommandTest_dukeExceptionThrown() throws DukeException, IOException {
         Ingredient ingredient1 = new Ingredient("Carrot", 300, "grams", "21st Oct");
         Ingredient ingredient2 = new Ingredient("Tomato", 200, "ounces", "1st Nov");
         Ingredient ingredient3 = new Ingredient("Carrot", 1.5, "kilograms", "2nd Oct");

@@ -1,7 +1,10 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
+
+import java.io.IOException;
 
 public class AddCommand implements Command {
 
@@ -18,12 +21,16 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public String run() {
-        IngredientList.getInstance().add(this.ingredient);
-        String resultMsg = ADDED_MESSAGE
-                + ingredient.toString() + '\n'
-                + "Currently inventory has " + IngredientList.getInstance().getInventoryStock()
-                + " items.";
-        return resultMsg;
+    public String run() throws DukeException {
+        try {
+            IngredientList.getInstance().add(this.ingredient);
+            String resultMsg = ADDED_MESSAGE
+                    + ingredient.toString() + '\n'
+                    + "Currently inventory has " + IngredientList.getInstance().getInventoryStock()
+                    + " items.";
+            return resultMsg;
+        } catch (IOException e) {
+            throw new DukeException("Cannot write ingredient to memory!");
+        }
     }
 }
