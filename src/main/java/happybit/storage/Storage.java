@@ -51,88 +51,9 @@ public class Storage {
     }
 
     public GoalList load() throws HaBitStorageException {
-        GoalList goalList = new GoalList();
-        Scanner s;
-        String line;
-
         createFile(this.filePath, this.fileDir);
 
-        File storageFile = new File(this.filePath);
-
-        try {
-            s = new Scanner(storageFile);
-
-            while (s.hasNext()) {
-                line = s.nextLine();
-                String[] lineData = line.split(DELIMITER);
-
-                switch (lineData[TYPE_INDEX]) {
-                case GOAL_TYPE:
-                    try {
-                        goalList.addGoal(goalParser(lineData));
-                    } catch (ParseException e) {
-                        throw new HaBitStorageException(e.toString());
-                    }
-                    break;
-                case HABIT_TYPE:
-                    Habit habit = habitParser(lineData);
-                    int goalIndex = Integer.parseInt(lineData[NUM_INDEX]);
-
-                    goalList.addHabitToGoal(habit, goalIndex);
-                    break;
-                default:
-                    throw new HaBitStorageException("error while loading");
-                }
-            }
-        } catch (FileNotFoundException e) {
-            throw new HaBitStorageException(e.toString());
-        } catch (HaBitCommandException e) {
-            throw new HaBitStorageException(ERROR_INVALID_GOAL_INDEX);
-        }
-
-        return goalList;
-    }
-
-    protected Goal goalParser(String[] lineData) throws ParseException {
-        GoalType goalType;
-        Date dateStart;
-        Date dateEnd;
-
-        SimpleDateFormat format = new SimpleDateFormat("ddMMyyyy");
-        dateStart = format.parse(lineData[GOAL_START_INDEX]);
-        dateEnd = format.parse(lineData[GOAL_END_INDEX]);
-
-        switch (lineData[GOAL_TYPE_INDEX]) {
-        case SLEEP:
-            goalType = GoalType.SLEEP;
-            break;
-        case FOOD:
-            goalType = GoalType.FOOD;
-            break;
-        case EXERCISE:
-            goalType = GoalType.EXERCISE;
-            break;
-        case STUDY:
-            goalType = GoalType.STUDY;
-            break;
-        default:
-            goalType = GoalType.DEFAULT;
-        }
-
-        return new Goal(lineData[GOAL_NAME_INDEX],
-                goalType,
-                dateStart,
-                dateEnd);
-    }
-
-    protected Habit habitParser(String[] lineData) {
-        Habit habit = new Habit(lineData[HABIT_NAME_INDEX]);
-
-        if (lineData[DONE_INDEX].equals("1")) {
-            habit.setCompleted();
-        }
-
-        return habit;
+        return Import.importStorage(this.filePath);
     }
 
     protected void createFile(String filePath, String fileDir) {
