@@ -1,27 +1,17 @@
 package seedu.parser;
 
-
-import seedu.command.ExitCommand;
-import seedu.command.FailedCommand;
-import seedu.command.HelpCommand;
-import seedu.command.ListContactsCommand;
 import seedu.contact.Contact;
 import seedu.exception.InvalidGithubUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
+import seedu.exception.InvalidLinkedinUsernameException;
+import seedu.exception.InvalidEmailException;
 import seedu.ui.ExceptionTextUi;
 import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 public class AddPersonalContactParser extends RegexParser {
-    public static final String NAME_FLAG = "n";
-    public static final String GITHUB_FLAG = "g";
-    public static final String TELEGRAM_FLAG = "te";
-    public static final String TWITTER_FLAG = "tw";
-    public static final String EMAIL_FLAG = "e";
-    public static final String LINKEDIN_FLAG = "l";
-
     private Contact personalContact = new Contact(null, null,null,null,
             null,null);
     private boolean isValidDetail = false;
@@ -32,6 +22,7 @@ public class AddPersonalContactParser extends RegexParser {
         promptPersonalGithubUsername();
         promptPersonalTelegramUsername();
         promptPersonalTwitterUsername();
+        promptPersonalEmailAddress();
         TextUi.greetingMessage(personalContact);
     }
 
@@ -63,7 +54,7 @@ public class AddPersonalContactParser extends RegexParser {
         } while (!isValidDetail);
     }
 
-    public void setGithubIfValid(String userInput) throws InvalidGithubUsernameException {
+    private void setGithubIfValid(String userInput) throws InvalidGithubUsernameException {
         if (userInput.isEmpty()) {
             isValidDetail = true;
         } else {
@@ -86,7 +77,7 @@ public class AddPersonalContactParser extends RegexParser {
         } while (!isValidDetail);
     }
 
-    public void setTelegramIfValid(String userInput) throws InvalidTelegramUsernameException {
+    private void setTelegramIfValid(String userInput) throws InvalidTelegramUsernameException {
         if (userInput.isEmpty()) {
             isValidDetail = true;
         } else {
@@ -109,7 +100,7 @@ public class AddPersonalContactParser extends RegexParser {
         } while (!isValidDetail);
     }
 
-    public void setTwitterIfValid(String userInput) throws InvalidTwitterUsernameException {
+    private void setTwitterIfValid(String userInput) throws InvalidTwitterUsernameException {
         if (userInput.isEmpty()) {
             isValidDetail = true;
         } else {
@@ -119,28 +110,29 @@ public class AddPersonalContactParser extends RegexParser {
         }
     }
 
+    private void promptPersonalEmailAddress() {
+        isValidDetail = false;
+        TextUi.promptPersonalEmailMessage();
+        do {
+            try {
+                String personalEmail = UserInputTextUi.getUserInput();
+                setEmailIfValid(personalEmail);
+            } catch (InvalidEmailException e) {
+                ExceptionTextUi.invalidPersonalEmailErrorMessage();
+            }
+        } while (!isValidDetail);
+    }
 
-//    private void setDetailsIfValid(String userInput, String flag) throws InvalidGithubUsernameException,
-//            InvalidTelegramUsernameException {
-//        if (userInput.isEmpty()) {
-//            isValidDetail = true;
-//            return;
-//        }
-//        switch (flag) {
-//        case GITHUB_FLAG:
-//            checkGithubUsernameRegex(userInput);
-//            isValidDetail = true;
-//            this.personalContact.setGithub(userInput);
-//            break;
-//        case TELEGRAM_FLAG:
-//            checkTelegramUsernameRegex(userInput);
-//            isValidDetail = true;
-//            this.personalContact.setTelegram(userInput);
-//            break;
-//        default:
-//            return;
-//        }
-//    }
+    private void setEmailIfValid(String userInput) throws InvalidEmailException {
+        if (userInput.isEmpty()) {
+            isValidDetail = true;
+        } else {
+            checkEmailRegex(userInput);
+            isValidDetail = true;
+            this.personalContact.setEmail(userInput);
+        }
+    }
+
 
     public Contact getPersonalContact() {
         return personalContact;
