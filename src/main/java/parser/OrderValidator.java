@@ -29,7 +29,6 @@ public class OrderValidator {
 
             switch (parameter) {
             case CommandParameters.ID:
-            case CommandParameters.ORDER_ID:
                 isValid = isValidOrderId(ui, parameterValue, medicines);
                 break;
             case CommandParameters.NAME:
@@ -38,9 +37,11 @@ public class OrderValidator {
             case CommandParameters.QUANTITY:
                 isValid = MedicineValidator.isValidQuantity(ui, parameterValue);
                 break;
-            case CommandParameters.SORT:
-            case CommandParameters.REVERSED_SORT:
-                //isValid = isValidColumn(ui, parameterValue);
+            case CommandParameters.DATE:
+                isValid = isValidDate(ui, parameterValue);
+                break;
+            case CommandParameters.STATUS:
+                isValid = isValidStatus(ui, parameterValue);
                 break;
             default:
                 ui.printInvalidParameter(parameter, commandSyntax);
@@ -85,6 +86,39 @@ public class OrderValidator {
         } catch (Exception e) {
             ui.print("Invalid order id provided!");
         }
+        return false;
+    }
+
+    /**
+     * Checks if a medicine order date is valid.
+     *
+     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param dateString Date of the medicine.
+     * @return Boolean value indicating if medicine expiry date is valid.
+     */
+    public static boolean isValidDate(Ui ui, String dateString) {
+        try {
+            DateParser.stringToDate(dateString);
+            return true;
+        } catch (Exception e) {
+            ui.print("Invalid date! Ensure date is in " + DateParser.OUTPUT_DATE_FORMAT + ".");
+        }
+        return false;
+    }
+
+    /**
+     * Checks if a medicine order status is valid.
+     *
+     * @param ui           Reference to the UI object passed by Main to print messages.
+     * @param statusString Status of medicine order.
+     * @return Boolean value indicating if medicine expiry date is valid.
+     */
+    public static boolean isValidStatus(Ui ui, String statusString) {
+        if (statusString.equalsIgnoreCase("PENDING")
+                || statusString.equalsIgnoreCase("DELIVERED")) {
+            return true;
+        }
+        ui.print("Invalid status! Ensure status is either PENDING or DELIVERED");
         return false;
     }
 
