@@ -29,14 +29,14 @@ public class DataManager {
         try {
             FileWriter writer = new FileWriter(FILENAME);
             BufferedWriter buffer = new BufferedWriter(writer);
-            ArrayList<Expense> expenses = financialTracker.listExpenses();
-            ArrayList<Income> incomes = financialTracker.listIncomes();
+            ArrayList<Expense> expenses = financialTracker.getExpenses();
+            ArrayList<Income> incomes = financialTracker.getIncomes();
             String data;
             String NEWLINE = "\n";
 
+            // Categories header for the CSV file
             buffer.write("entry_type, entry_description, amount, category, date");
             buffer.write(NEWLINE);
-
             for (Expense expense : expenses) {
                 data = parser.convertExpenseToData(expense);
                 buffer.write(data);

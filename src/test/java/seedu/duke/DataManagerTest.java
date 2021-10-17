@@ -36,18 +36,18 @@ public class DataManagerTest {
         Ui ui = new Ui();
         DataManager dataManager = new DataManager();
         dataManager.load(parser, financialTracker, ui);
-        assertEquals(12.5, financialTracker.listExpenses().get(0).getValue());
-        assertEquals("qwe", financialTracker.listExpenses().get(0).getDescription());
-        assertEquals("qwer", financialTracker.listExpenses().get(0).getCategory());
+        assertEquals(12.5, financialTracker.getExpenses().get(0).getValue());
+        assertEquals("qwe", financialTracker.getExpenses().get(0).getDescription());
+        assertEquals("qwer", financialTracker.getExpenses().get(0).getCategory());
         
-        assertEquals(.5, financialTracker.listExpenses().get(1).getValue());
-        assertEquals("qwe", financialTracker.listExpenses().get(1).getDescription());
+        assertEquals(.5, financialTracker.getExpenses().get(1).getValue());
+        assertEquals("qwe", financialTracker.getExpenses().get(1).getDescription());
 
-        assertEquals(12.5, financialTracker.listIncomes().get(0).getValue());
-        assertEquals("qwe", financialTracker.listIncomes().get(0).getDescription());
+        assertEquals(12.5, financialTracker.getIncomes().get(0).getValue());
+        assertEquals("qwe", financialTracker.getIncomes().get(0).getDescription());
         
-        assertEquals(12.5, financialTracker.listIncomes().get(1).getValue());
-        assertEquals("qwe", financialTracker.listIncomes().get(1).getDescription());
+        assertEquals(12.5, financialTracker.getIncomes().get(1).getValue());
+        assertEquals("qwe", financialTracker.getIncomes().get(1).getDescription());
     }
 
     @Test
