@@ -19,6 +19,7 @@ public class StonksXD {
         this.ui = new Ui();
         this.finances = new FinancialTracker();
         this.parser = new Parser();
+        this.dataManager = new DataManager();
     }
 
     public void run() {
