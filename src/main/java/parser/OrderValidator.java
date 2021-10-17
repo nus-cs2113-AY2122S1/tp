@@ -114,8 +114,8 @@ public class OrderValidator {
      * @return Boolean value indicating if medicine expiry date is valid.
      */
     public static boolean isValidStatus(Ui ui, String statusString) {
-        if (statusString.equalsIgnoreCase("PENDING") ||
-                statusString.equalsIgnoreCase("DELIVERED")) {
+        if (statusString.equalsIgnoreCase("PENDING")
+                || statusString.equalsIgnoreCase("DELIVERED")) {
             return true;
         }
         ui.print("Invalid status! Ensure status is either PENDING or DELIVERED");

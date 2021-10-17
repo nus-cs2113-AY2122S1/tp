@@ -32,7 +32,7 @@ public class ListOrder extends Command {
 
         String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
-                CommandParameters.DATE, CommandParameters.STATUS};
+            CommandParameters.DATE, CommandParameters.STATUS};
 
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters,
                 requiredParameters, optionalParameters, CommandSyntax.LIST_ORDER_COMMAND, false);
@@ -77,8 +77,8 @@ public class ListOrder extends Command {
                     try {
                         Date date = DateParser.stringToDate(parameterValue);
                         filteredOrders = (ArrayList<Order>) filteredOrders.stream().filter((m) ->
-                                (m).getDate().toInstant().isBefore(date.toInstant()) ||
-                                        (m).getDate().toInstant().equals(date.toInstant())).collect(Collectors.toList());
+                                (m).getDate().toInstant().isBefore(date.toInstant())
+                                || (m).getDate().toInstant().equals(date.toInstant())).collect(Collectors.toList());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
