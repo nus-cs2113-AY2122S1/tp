@@ -1,0 +1,28 @@
+@startuml
+!include <office/Users/user>
+!include style.puml
+
+Package "ConTech"<<Rectangle>>{
+    Class TextUi
+    Class MainParser
+    Class Storage
+    Class Command
+    Class ContactList
+    Class Main #grey
+}
+
+Class "<$user>" as User
+
+Command --> TextUi : Failed\nCommand
+TextUi -right-> MainParser
+MainParser -down-> Command
+Command -down-> ContactList : Pass\nCommand
+ContactList -right-> Storage
+Storage .left.> ContactList
+Main -up[#grey]-> MainParser
+Main -down[#grey]-> Storage
+Storage .right.> LocalStorage
+
+User ..> TextUi
+
+@enduml
