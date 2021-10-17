@@ -1,0 +1,6 @@
+skinparam MinClassWidth 50
+skinparam Shadowing false
+
+hide footbox
+hide members
+hide circle
