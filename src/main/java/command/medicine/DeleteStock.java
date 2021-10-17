@@ -51,7 +51,7 @@ public class DeleteStock extends Command {
 
         // Both fields should not be provided for deletion of stock.
         if (hasStockId && hasExpiryDate) {
-            ui.printInvalidCommandMessage();
+            ui.print("Deleted aborted! Please provide only one parameter");
             return;
         }
 
