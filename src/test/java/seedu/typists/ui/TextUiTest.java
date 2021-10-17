@@ -23,15 +23,16 @@ class TextUiTest {
     @Test
     void showSummary() {
         TextUi textUi = new TextUi();
-        String expected = SUMMARY + '\n'+
+        String expected = SUMMARY + '\n' +
                 "Wrong Words: 5/10\n" +
-                "Error Percentage: 50.00%\n"+
+                "Error Percentage: 50.00%\n" +
                 "WPM: 40.08\n" +
                 "Total Time taken for the game: 10.07 seconds\n";
-        textUi.showSummary(5,50.00000,40.08,10,10.07);
+        textUi.showSummary(5, 50.00000, 40.08, 10, 10.07);
         String actual = outputStreamCaptor.toString();
         assertEquals(expected, actual);
     }
+
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);
