@@ -53,6 +53,7 @@ public class EnterWorkoutCommand extends Command {
         }
         workoutMode = workoutIndex;
         LOGGER.info("Entering the " + workoutIndex + "th(st/nd/rd) Workout");
+        ui = new Ui();
         ui.showToUser(String.format(MESSAGE_SUCCESS, workouts.getAllWorkouts().get(workoutIndex - 1)));
     }
 }

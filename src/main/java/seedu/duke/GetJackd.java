@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 public class GetJackd {
     private static final Logger LOGGER = Logger.getLogger(GetJackd.class.getName());
     private final WorkoutList workouts;
-    private final Ui ui;
+    private Ui ui;
     private Storage storage;
 
     public GetJackd() {
@@ -36,7 +36,7 @@ public class GetJackd {
             storage = new Storage();
             storage.loadData(workouts);
         } catch (GetJackDException e) {
-            Ui.printErrorMessage(e);
+            ui.printErrorMessage(e);
         }
     }
 
@@ -76,10 +76,11 @@ public class GetJackd {
             String userInput = input.nextLine();
             try {
                 c = new CommandManager().generateCommand(userInput);
+                ui = new Ui();
                 c.executeUserCommand(workouts, ui, storage);
                 isExit = ExitCommand.isExit(c);
             } catch (GetJackDException e) {
-                Ui.printErrorMessage(e);
+                ui.printErrorMessage(e);
             }
         }
     }

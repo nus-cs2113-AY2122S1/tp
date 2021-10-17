@@ -1,19 +1,38 @@
 package seedu.duke.ui;
 
+import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
 
 import java.util.ArrayList;
 
 public class Ui {
-    private static final String NEW_LINE = "\n";
+    private static final String INDENT = "\t\t\t";
     private static final String DIVIDER = "________________________________________________________";
 
-    public static void printLineSeparator() {
-        System.out.println(DIVIDER);
+    private final boolean withIndent;
+    private final String prefix;
+    private final String newLine;
+
+    public Ui() {
+        withIndent = Command.workoutMode != 0;
+        if (withIndent) {
+            prefix = INDENT;
+            newLine = System.lineSeparator() + INDENT;
+        } else {
+            prefix = "";
+            newLine = System.lineSeparator();
+        }
+    }
+
+    private void printText(String message) {
+        System.out.println(prefix + message.replace("\n", newLine));
+    }
+
+    public void printLineSeparator() {
+        printText(DIVIDER);
     }
 
     public static void printWelcomeMessage() {
-
         String logo = "\n"
                 + "   ______          _        _____              __      _  ______\n"
                 + " .' ___  |        / |_     |_   _|            [  |  _ | ||_   _ `.\n"
@@ -26,18 +45,18 @@ public class Ui {
                 + "If you don't know where to start, type \"help\" for a list of possible commands.\n"
                 + "Enter your command below.");
 
-        printLineSeparator();
+        System.out.println(DIVIDER);
     }
 
     public static void printByeMessage() {
-        printLineSeparator();
+        System.out.println(DIVIDER);
         System.out.println("Bye. Hope you get your desired body soon, have a great day!");
-        printLineSeparator();
+        System.out.println(DIVIDER);
 
     }
 
     public static void printHelpMessage() {
-        printLineSeparator();
+        System.out.println(DIVIDER);
         System.out.println("Here's a list of commands and what they do.");
         System.out.println("To find out more information about the command, such as input format and parameters, "
                 + "enter \"help COMMAND\" where COMMAND is the command you want to know more about");
@@ -50,7 +69,7 @@ public class Ui {
         System.out.println("\"display\" : Shows all the exercises in a specified workout");
         System.out.println("\"search\" : Displays workouts or exercises that contain the specified keyword");
         System.out.println("\"bye\" : Ends the program");
-        printLineSeparator();
+        System.out.println(DIVIDER);
     }
 
     /**
@@ -58,35 +77,38 @@ public class Ui {
      *
      * @param e is the exception whose message we want to print
      */
-    public static void printErrorMessage(GetJackDException e) {
-        printLineSeparator();
-        System.out.println(e.getMessage());
-        printLineSeparator();
+    public void printErrorMessage(GetJackDException e) {
+        showToUser(e.getMessage());
     }
 
 
     /**
      * Prints out all the items in a list.
      *
-     * @param itemList is the list of items
+     * @param displayMessage message to be displayed to the user
+     * @param itemList       is the list of items
+     * @param bottomLineOnly if true, displays bottom line only, otherwise, display top and bottom line
      */
     public <T> void showItemListToUser(String displayMessage, ArrayList<T> itemList, boolean bottomLineOnly) {
         assert (!itemList.isEmpty());
         if (!bottomLineOnly) {
-            Ui.printLineSeparator();
+            printLineSeparator();
         }
-        System.out.println(displayMessage);
+        printText(displayMessage);
         if (!itemList.isEmpty()) {
             printList(itemList);
         }
+        printLineSeparator();
 
-        Ui.printLineSeparator();
+        if (withIndent) {
+            System.out.print(INDENT);
+        }
     }
 
     private <T> void printList(ArrayList<T> itemList) {
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i) != null) {
-                System.out.println((i + 1) + ". " + itemList.get(i));
+                printText((i + 1) + ". " + itemList.get(i));
             }
         }
     }
@@ -97,9 +119,15 @@ public class Ui {
      * @param message is the unique message to be shown
      */
     public void showToUser(String message) {
+
         assert (!message.isEmpty());
         printLineSeparator();
-        System.out.println(message.replace("\n", NEW_LINE));
+        printText(message);
         printLineSeparator();
+
+        if (withIndent) {
+            System.out.print(INDENT);
+        }
     }
+
 }
