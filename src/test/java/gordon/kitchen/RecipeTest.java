@@ -35,35 +35,6 @@ class RecipeTest {
     }
 
     @Test
-    public void testAdd() {
-        try {
-            Recipe r = new Recipe("Coffee");
-            r.addIngredient("Coffee beans");
-            r.addIngredient("Water");
-            r.addStep("Boil water");
-            r.addStep("Grind beans");
-            r.addStep("Pour water over grounds");
-            r.addIngredient("Test", 12);
-            fail();
-        } catch (GordonException g) {
-            System.out.println(g.getMessage());
-        }
-
-        try {
-            Recipe r = new Recipe("Coffee");
-            r.addIngredient("Coffee beans");
-            r.addIngredient("Water");
-            r.addStep("Boil water");
-            r.addStep("Grind beans");
-            r.addStep("Pour water over grounds");
-            r.addStep("Test", 12);
-            fail();
-        } catch (GordonException g) {
-            System.out.println(g.getMessage());
-        }
-    }
-
-    @Test
     public void testRemove() {
         try {
             Recipe r = new Recipe("Coffee");

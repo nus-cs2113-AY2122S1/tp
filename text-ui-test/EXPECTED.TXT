@@ -62,6 +62,23 @@ Searching by ingredient...
 2. Fried Fish
 GordonException: Command given cannot be recognized.
 GordonException: Command given cannot be recognized.
+Setting calories...
+Calories set successfully.
+Finding recipes called fried fish.....
+--------------------
+Fried Fish
+Calories:250kcal
+Ingredients needed: 
+1. Fish
+2. Olive Oil
+Method: 
+1. Preheat pan
+2. Add olive oil
+3. Add fish and fry on both sides until crispy 
+--------------------
+GordonException: Index is not a valid integer.
+Setting calories...
+GordonException: Search returns no result.
 GordonException: Index outside range.
 GordonException: Index is not a valid integer.
 OK! The recipe has been deleted from your cookbook.

@@ -1,6 +1,5 @@
 package gordon.command;
 
-import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
 
 public class ListCommand extends Command {

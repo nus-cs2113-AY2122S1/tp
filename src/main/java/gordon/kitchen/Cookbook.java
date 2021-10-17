@@ -24,6 +24,10 @@ public class Cookbook {
         return output.toString();
     }
 
+    public String saveString(int index) {
+        return recipes.get(index).toString();
+    }
+
     public int numRecipes() {
         return recipes.size();
     }
@@ -66,8 +70,17 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
-    public String saveString(int index) {
-        return recipes.get(index).toString();
+    public void setCalories(String name, int newCalories) throws GordonException {
+        for (Recipe recipe : recipes) {
+            // (?i) enables case insensitivity
+            // .* uses all characters except line break
+            if (recipe.getName().matches("(?i).*" + name + ".*")) {
+                recipe.setCalories(newCalories);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
     public ArrayList<Recipe> filterByIngredients(ArrayList<String> ingredients) {

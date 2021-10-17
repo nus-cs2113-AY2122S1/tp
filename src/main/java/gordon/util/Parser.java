@@ -1,13 +1,14 @@
 package gordon.util;
 
-import gordon.command.Command;
 import gordon.command.AddCommand;
-import gordon.command.DeleteCommand;
 import gordon.command.CheckCommand;
+import gordon.command.Command;
+import gordon.command.DeleteCommand;
+import gordon.command.FindIngredientsCommand;
 import gordon.command.HelpCommand;
 import gordon.command.ListCommand;
-import gordon.command.FindIngredientsCommand;
 import gordon.command.NullCommand;
+import gordon.command.SetCaloriesCommand;
 import gordon.exception.GordonException;
 import gordon.kitchen.Recipe;
 
@@ -41,6 +42,8 @@ public class Parser {
                 return new CheckCommand(parseName(line));
             } else if (parseCommand(line).equalsIgnoreCase("list")) {
                 return new ListCommand();
+            } else if (parseCommand(line).equalsIgnoreCase("set")) {
+                return setParse();
             } else if (parseCommand(line).equalsIgnoreCase("find")) {
                 return findParse();
             } else if (parseCommand(line).equalsIgnoreCase("help")) {
@@ -82,7 +85,7 @@ public class Parser {
         String newLine = line.substring(ingredientsIndex + INGREDIENTS_WORD_LENGTH);
         String[] ingredientsList = newLine.split("\\+");
         for (int i = 0; i < ingredientsList.length; i++) {
-            r.addIngredient(ingredientsList[i].trim(), i);
+            r.addIngredient(ingredientsList[i].trim());
         }
     }
 
@@ -134,6 +137,34 @@ public class Parser {
             return new DeleteCommand(index - 1);
         } catch (NumberFormatException e) {
             throw new GordonException(GordonException.INDEX_INVALID);
+        }
+    }
+
+    public Command setParse() throws GordonException {
+        String[] splitContent = line.split("/");
+        if (splitContent.length < 2) {
+            throw new GordonException(GordonException.COMMAND_INVALID);
+        }
+        String recipeName = parseName(splitContent[0]);
+        int spaceIndex = splitContent[1].indexOf(' ');
+        if (spaceIndex < 0) {
+            throw new GordonException(GordonException.COMMAND_INVALID);
+        }
+        String target = splitContent[1].substring(0, spaceIndex);
+        switch (target) {
+        case "calories":
+            try {
+                int index = Integer.parseInt(splitContent[1].substring(spaceIndex + 1).trim());
+                if (index < -1) {
+                    throw new GordonException(GordonException.INDEX_OOB);
+                }
+                return new SetCaloriesCommand(recipeName, index);
+            } catch (NumberFormatException e) {
+                throw new GordonException(GordonException.INDEX_INVALID);
+            }
+        case "tags":
+        default:
+            throw new GordonException(GordonException.COMMAND_INVALID);
         }
     }
 
