@@ -67,16 +67,32 @@ public class TextUi {
                 + DIVIDER);
     }
 
-    public static void showRecordsListView(AllRecordList list) {
+    public static void showRecordsListView(AllRecordList list, int month, boolean isListAll) {
         int i = 1;
-        System.out.println("Your budget for this month:" + list.getBudget(LocalDate.now().getMonthValue()) + LS
-                + "Your expenditures:");
-        System.out.printf("%-30.30s  %-30.30s %-30.30s%n", "  Description", "   | Amount", "   | Date ");
-        for (Expenditure a : list.getExpenditureRecords(LocalDate.now().getMonthValue())) {
-            System.out.println(i + "." + a);
-            i++;
+
+        if (isListAll) {
+            for (month = 1; month <= 12; month += 1) {
+                System.out.println("Your budget for this month:" + list.getBudget(month) + LS
+                        + "Your expenditures:");
+                System.out.printf("%-30.30s  %-30.30s %-30.30s%n", "  Description", "   | Amount", "   | Date ");
+                for (Expenditure a : list.getExpenditureRecords(month)) {
+                    System.out.println(i + "." + a);
+                    i++;
+                }
+                System.out.println(DIVIDER);
+
+                i = 1;
+            }
+        } else {
+            System.out.println("Your budget for this month:" + list.getBudget(month) + LS
+                    + "Your expenditures:");
+            System.out.printf("%-30.30s  %-30.30s %-30.30s%n", "  Description", "   | Amount", "   | Date ");
+            for (Expenditure a : list.getExpenditureRecords(month)) {
+                System.out.println(i + "." + a);
+                i++;
+            }
+            System.out.println(DIVIDER);
         }
-        System.out.println(DIVIDER);
     }
 
     public static void showExpenditureDeletedMessage(int indexOfDeletedExpenditure, Expenditure deletedExpenditure) {

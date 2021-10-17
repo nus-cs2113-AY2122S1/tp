@@ -2,12 +2,14 @@ package seedu.duke.data;
 
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
+import seedu.duke.textfiletools.WriteToTextFile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class AllRecordList {
-    private final ArrayList<RecordList> allRecordList;
+    public final ArrayList<RecordList> allRecordList;
+    public static String storageDirectory;
 
     /**
      * Constructor that creates 12 RecordLists upon construction.
@@ -19,8 +21,16 @@ public class AllRecordList {
         }
     }
 
-    public void addBudget(double spendingLimit, int month) {
-        allRecordList.get(month).addBudget(spendingLimit);
+    private void saveToStorage(String storageDirectory) {
+        WriteToTextFile textFileWriter = new WriteToTextFile();
+        textFileWriter.reloadArrayToStorage(allRecordList, storageDirectory);
+    }
+
+    public void addBudget(double spendingLimit, int month, boolean isLoadingStorage) {
+        allRecordList.get(month).addBudget(spendingLimit, month, isLoadingStorage);
+        if (!isLoadingStorage) {
+            saveToStorage(storageDirectory);
+        }
     }
 
     /**
@@ -33,14 +43,26 @@ public class AllRecordList {
     public void addExpenditure(String description, double amount, LocalDate date, boolean isLoadingStorage) {
         int month = date.getMonthValue();
         allRecordList.get(month).addExpenditure(description, amount, date, isLoadingStorage);
+        if (!isLoadingStorage) {
+            saveToStorage(storageDirectory);
+        }
+    }
+
+    public void clearAll() {
+        allRecordList.clear();
+        for (int i = 0; i <= 12; i++) {
+            allRecordList.add(new RecordList());
+        }
     }
 
     public void deleteBudget(int month) {
         allRecordList.get(month).deleteBudget();
+        saveToStorage(storageDirectory);
     }
 
     public void deleteExpenditure(int index, int month) {
         allRecordList.get(month).deleteExpenditure(index);
+        saveToStorage(storageDirectory);
     }
 
     public ArrayList<Expenditure> getExpenditureRecords(int month) {
@@ -72,5 +94,4 @@ public class AllRecordList {
 
     public void addBudgetList(String description, double spendingLimit, int month) {
     }
-
 }

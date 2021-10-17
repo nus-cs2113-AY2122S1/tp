@@ -4,17 +4,17 @@ import seedu.duke.commands.Command;
 import seedu.duke.data.AllRecordList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
+import seedu.duke.textfiletools.WriteToTextFile;
 import seedu.duke.ui.TextUi;
 
-import java.io.File;
 import java.io.IOException;
 
 
 public class Duke {
-
     private final TextUi textUi;
     private final Parser parser;
     private final AllRecordList recordList;
+    private final String recordListDirectory = "";
 
     public Duke() {
         recordList = new AllRecordList();
@@ -29,41 +29,16 @@ public class Duke {
     public void run() {
         TextUi.showWelcomeMessage();
         boolean isExit = false;
-
-        // To be placed somewhere else later
-        //----------------------------------------------------------------------
-        File dataDirectory = new File("./data");
-        File budgetList = new File("./data/BudgetList1.txt");
-        if (!(dataDirectory.exists())) {
-            dataDirectory.mkdir();
-            try {
-                budgetList.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (!budgetList.exists()) {
-            try {
-                budgetList.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        //----------------------------------------------------------------------
-
         Storage budgetStorage = new Storage();
-        try {
-            Storage.loadStorage(recordList);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
+        budgetStorage.makeStorageTextFile(recordListDirectory);
+        recordList.storageDirectory = budgetStorage.loadStorage(recordList, recordListDirectory);
 
         while (!isExit) {
             try {
                 String userInput = textUi.getUserInput();
                 Command command = parser.parseCommand(userInput);
                 command.setRecordList(recordList);
-                command.execute();
+                command.execute(false);
                 isExit = command.isExit();
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Error! Your inputs are missing or incorrect!");

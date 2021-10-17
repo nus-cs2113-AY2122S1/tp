@@ -11,7 +11,7 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public void execute(boolean isLoadingStorage) {
         TextUi.showInvalidCommandMessage(feedbackToUser);
     }
 }

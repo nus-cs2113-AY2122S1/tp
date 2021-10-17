@@ -17,4 +17,8 @@ public class Budget extends Record {
     public String toString() {
         return (" $" + this.amount);
     }
+
+    public Double getRawValue() {
+        return this.amount;
+    }
 }
