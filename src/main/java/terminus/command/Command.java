@@ -48,7 +48,7 @@ public abstract class Command {
             throws InvalidCommandException, InvalidArgumentException;
 
     /**
-     * Returns the module name
+     * Returns the module name.
      *
      * @return The String containing the module name
      */
@@ -57,7 +57,7 @@ public abstract class Command {
     }
 
     /**
-     * Sets the module name
+     * Sets the module name.
      *
      * @param moduleName The String containing the module name to set
      */

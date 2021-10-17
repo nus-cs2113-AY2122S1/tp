@@ -22,12 +22,12 @@ public class BackCommand extends Command {
     }
 
     /**
-     * Returns a command result containing the CommandParser object
+     * Returns a command result containing the CommandParser object.
      *
      * @param ui            The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult contains a CommandParser
-     * @throws InvalidCommandException
+     * @throws InvalidCommandException Throws if the command is invalid
      */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidCommandException {

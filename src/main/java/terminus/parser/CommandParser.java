@@ -101,7 +101,7 @@ public abstract class CommandParser {
     }
 
     /**
-     * Sets the existing workspace for the module
+     * Sets the existing workspace for the module.
      *
      * @param workspace The name of the workspace
      */

@@ -76,7 +76,7 @@ public class DeleteModuleCommand extends Command {
     }
 
     /**
-     * Returns a boolean if the index give is valid
+     * Returns a boolean if the index give is valid.
      *
      * @param index The index to check
      * @param listOfModule The full list of modules

@@ -11,7 +11,7 @@ public class ModuleManager {
     }
 
     /**
-     * Returns a NusModule Object given a module name
+     * Returns a NusModule Object given a module name.
      *
      * @param moduleName The module name
      * @return The NusModule Object for the given module name
@@ -21,7 +21,7 @@ public class ModuleManager {
     }
 
     /**
-     * Adds a new module to the moduleMap
+     * Adds a new module to the moduleMap.
      *
      * @param moduleName The module name of the new module
      */
@@ -30,7 +30,7 @@ public class ModuleManager {
     }
 
     /**
-     * Returns a String array contains the list of module names
+     * Returns a String array contains the list of module names.
      *
      * @return String array with the list of module names
      */
@@ -39,7 +39,7 @@ public class ModuleManager {
     }
 
     /**
-     * Deletes the specified module
+     * Deletes the specified module.
      *
      * @param moduleName The module name of the module to remove
      */

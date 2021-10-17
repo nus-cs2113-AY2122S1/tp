@@ -18,7 +18,7 @@ public abstract class InnerModuleCommandParser extends CommandParser {
     }
 
     /**
-     * Returns the module name for the current workspace
+     * Returns the module name for the current workspace.
      *
      * @return The string containing the module name
      */
@@ -27,7 +27,7 @@ public abstract class InnerModuleCommandParser extends CommandParser {
     }
 
     /**
-     * Sets the module name for the current workspace
+     * Sets the module name for the current workspace.
      *
      * @param moduleName The module name to set
      */
@@ -43,7 +43,7 @@ public abstract class InnerModuleCommandParser extends CommandParser {
     }
 
     /**
-     * Returns a workspace that contains the moduleName and the current work space
+     * Returns a workspace that contains the moduleName and the current work space.
      *
      * @return The consolidated workspace name
      */
