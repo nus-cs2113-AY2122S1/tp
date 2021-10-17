@@ -26,17 +26,17 @@ of features.
 This application reused some parts of the code from:
 * Developer's name: Daren Tan (find his profile [here](AboutUs.md))
 * Code source: CS2113T Individual Project
-* Link to code: https://github.com/DJ-Tan/ip.git
+* Link to code: <https://github.com/DJ-Tan/ip.git>
 
 This application referenced some parts of the code from:
 * Developer team: find the team [here](https://se-education.org/addressbook-level3/AboutUs.html)
 * Code source: AB-3
-* Link to code: https://github.com/se-edu/addressbook-level3.git
+* Link to code: <https://github.com/se-edu/addressbook-level3.git>
 
 This application adapted the Developer Guide and User Guide from:
 * Developer team: find the team [here](https://se-education.org/addressbook-level3/AboutUs.html)
-* Link to Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html
-* Link to User Guide: https://se-education.org/addressbook-level3/UserGuide.html#quick-start
+* Link to Developer Guide: <https://se-education.org/addressbook-level3/DeveloperGuide.html>
+* Link to User Guide: <https://se-education.org/addressbook-level3/UserGuide.html#quick-start>
 
 
 ## Design and Implementation
