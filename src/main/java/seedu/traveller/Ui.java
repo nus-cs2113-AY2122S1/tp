@@ -73,4 +73,12 @@ public class Ui {
         System.out.println("The distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
     }
 
+    public void printReadSave() {
+        System.out.println("Now reading save data.");
+    }
+
+    public void printWriteSave() {
+        System.out.println("\tNow saving all your trips.");
+    }
+
 }
