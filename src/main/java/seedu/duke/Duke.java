@@ -38,18 +38,20 @@ public class Duke {
         ui = new Ui();
         storage = new Storage();
 
-        try {
-            List<String> taskData = storage.loadData(Storage.PATH_TO_TASK_FILE);
-            // taskList = new TaskList(TaskList.deserialize(ui, taskData));
-            storage.saveData(taskList);
-            ui.printMessage(Messages.SUCCESS_RETRIEVING_TASK_DATA);
-            LOGGER.info(Messages.SUCCESS_RETRIEVING_TASK_DATA);
-        } catch (IOException e) {
-            LOGGER.warning(e.getMessage());
-            ui.printMessage(e.getMessage());
-            storage.createNewDataFile(ui, "TASK");
-            taskList = new TaskList();
-        }
+//        try {
+//            List<String> taskData = storage.loadData(Storage.PATH_TO_TASK_FILE);
+//            // taskList = new TaskList(TaskList.deserialize(ui, taskData));
+//            storage.saveData(taskList);
+//            ui.printMessage(Messages.SUCCESS_RETRIEVING_TASK_DATA);
+//            LOGGER.info(Messages.SUCCESS_RETRIEVING_TASK_DATA);
+//        } catch (IOException e) {
+//            LOGGER.warning(e.getMessage());
+//            ui.printMessage(e.getMessage());
+//            storage.createNewDataFile(ui, "TASK");
+//            taskList = new TaskList();
+//        }
+        taskList = new TaskList();
+        moduleList = new ModuleList();
 
         try {
             List<String> lessonData = storage.loadData(Storage.PATH_TO_LESSON_FILE);
@@ -64,18 +66,18 @@ public class Duke {
             lessonList = new LessonList();
         }
 
-        try {
-            List<String> moduleData = storage.loadData(Storage.PATH_TO_MODULE_FILE);
-            // moduleList = new ModuleList(ModuleList.deserialize(ui, moduleData));
-            storage.saveData(moduleList);
-            ui.printMessage(Messages.SUCCESS_RETRIEVING_MODULE_DATA);
-            LOGGER.info(Messages.SUCCESS_RETRIEVING_MODULE_DATA);
-        } catch (IOException e) {
-            LOGGER.warning(e.getMessage());
-            ui.printMessage(e.getMessage());
-            storage.createNewDataFile(ui, "MODULE");
-            moduleList = new ModuleList();
-        }
+//        try {
+//            List<String> moduleData = storage.loadData(Storage.PATH_TO_MODULE_FILE);
+//            // moduleList = new ModuleList(ModuleList.deserialize(ui, moduleData));
+//            storage.saveData(moduleList);
+//            ui.printMessage(Messages.SUCCESS_RETRIEVING_MODULE_DATA);
+//            LOGGER.info(Messages.SUCCESS_RETRIEVING_MODULE_DATA);
+//        } catch (IOException e) {
+//            LOGGER.warning(e.getMessage());
+//            ui.printMessage(e.getMessage());
+//            storage.createNewDataFile(ui, "MODULE");
+//            moduleList = new ModuleList();
+//        }
     }
 
     /**

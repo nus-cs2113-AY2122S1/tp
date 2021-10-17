@@ -11,6 +11,7 @@ import seedu.duke.model.lesson.exceptions.DeserializeLessonException;
 import seedu.duke.ui.Ui;
 
 import static seedu.duke.commons.core.DayOfTheWeek.is;
+import static seedu.duke.commons.core.DayOfTheWeek.toProper;
 
 public class Lesson {
     private final String title;
@@ -67,10 +68,12 @@ public class Lesson {
             String[] params = line.split("\\s*[|]\\s*");
 
             String title = params[0];
+
             String dayOfTheWeek = params[1];
             if (!is(dayOfTheWeek)) {
                 throw new DeserializeLessonException(Messages.ERROR_DESERIALIZING_LESSON);
             }
+            dayOfTheWeek = toProper(dayOfTheWeek);
 
             String startTime = LocalTime.parse(TimeUtil.parseTwelveHourClock(params[2]))
                     .format(DateTimeFormatter.ofPattern("hh:mm a"));

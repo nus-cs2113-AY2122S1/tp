@@ -12,6 +12,7 @@ import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
 import static seedu.duke.commons.core.DayOfTheWeek.is;
+import static seedu.duke.commons.core.DayOfTheWeek.toProper;
 import static seedu.duke.logic.parser.ParserUtil.hasCorrectFlagSequence;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
@@ -42,10 +43,12 @@ public class AddCommandParser {
         }
 
         String title = params[0].strip();
+
         String dayOfTheWeek = params[1].strip();
         if (!is(dayOfTheWeek)) {
-            throw new ParseException(Messages.ERROR_INVALID_DAY);
+            throw new ParseException(dayOfTheWeek + Messages.ERROR_INVALID_DAY);
         }
+        dayOfTheWeek = toProper(dayOfTheWeek);
 
         String startTime;
         String endTime;
@@ -61,7 +64,7 @@ public class AddCommandParser {
             if (!hasCorrectFlagSequence(userResponse, "-d", "-s", "-e")) {
                 throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
             }
-            return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, "");
+            return new AddLessonCommand(title, dayOfTheWeek, startTime, endTime, "-");
         case 5:
             if (!hasCorrectFlagSequence(userResponse, "-d", "-s", "-e", "-l")) {
                 throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
@@ -80,14 +83,16 @@ public class AddCommandParser {
         }
 
         String title = params[0].strip();
+
         String dayOfTheWeek = params[1].strip();
         if (!is(dayOfTheWeek)) {
             throw new ParseException(dayOfTheWeek + Messages.ERROR_INVALID_DAY);
         }
+        dayOfTheWeek = toProper(dayOfTheWeek);
 
         switch (params.length) {
         case 2:
-            return new AddTaskCommand(title, dayOfTheWeek, "");
+            return new AddTaskCommand(title, dayOfTheWeek, "-");
         case 3:
             if (!hasCorrectFlagSequence(userResponse, "-d", "-i")) {
                 throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);

@@ -8,6 +8,8 @@ import seedu.duke.logic.commands.lesson.ListLessonCommand;
 import seedu.duke.logic.commands.task.ListTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
+import static seedu.duke.commons.util.DayUtil.isToday;
+import static seedu.duke.commons.util.DayUtil.isTomorrow;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
@@ -32,7 +34,7 @@ public class ListCommandParser {
 
     private static Command parseListLessonCommand(String userResponse) throws ParseException {
         if (!userResponse.isBlank() && !DayOfTheWeek.is(userResponse)
-                && !DayOfTheWeek.isTodayOrTomorrow(userResponse)) {
+                && !isToday(userResponse) && !isTomorrow(userResponse)) {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 
@@ -41,7 +43,7 @@ public class ListCommandParser {
 
     private static Command parseListTaskCommand(String userResponse) throws ParseException {
         if (!userResponse.isBlank() && !DayOfTheWeek.is(userResponse)
-                && !DayOfTheWeek.isTodayOrTomorrow(userResponse)) {
+                && !isToday(userResponse) && !isTomorrow(userResponse)) {
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
 
