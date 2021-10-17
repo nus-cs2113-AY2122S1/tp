@@ -26,7 +26,9 @@
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+As computing professionals are often on their computer, ConTech allows them to have a platform to 
+manage their computing-related contacts locally and efficiently, without the need to use 
+additional devices or platforms.
 
 ## User Stories
 
