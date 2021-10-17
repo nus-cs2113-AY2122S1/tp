@@ -3,7 +3,6 @@ package seedu.ui;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
-import seedu.timetable.TimetableLesson;
 import seedu.exceptions.IntegerException;
 import java.util.ArrayList;
 
@@ -22,8 +21,8 @@ public class AddUI {
     private static final String LAB = "lab";
     private static final String LINE = "_______________________________________   |   ";
 
-    public void printLessonDetails(ArrayList<Lesson> lec, ArrayList<Lesson> tt,
-            ArrayList<Lesson> lab, Timetable timetable, Module module) throws IntegerException {
+    public void printLessonDetails(ArrayList<Lesson> lec, ArrayList<Lesson> tt, ArrayList<Lesson> lab,
+            Timetable timetable, Module module) throws IntegerException {
         ArrayList<String> lectureLessons;
         ArrayList<String> tutorialLessons;
         ArrayList<String> labLessons;
@@ -84,8 +83,7 @@ public class AddUI {
         }
     }
 
-    public void getCommand(ArrayList<Lesson> lessons,
-            Timetable timetable, Module module) throws IntegerException {
+    public void getCommand(ArrayList<Lesson> lessons, Timetable timetable, Module module) throws IntegerException {
         if (isArrayExist(lessons, 0)) {
             String select = TextUi.getLessonCommand(lessons.get(0).getLessonType());
             int indexOfLesson;
@@ -105,7 +103,7 @@ public class AddUI {
         assert (lessons.size() > 0);
         for (Lesson lesson : lessons) {
             if (lesson.getClassNo().equals(classNumber)) {
-                timetable.addLesson(new TimetableLesson(module, timetable.getSemester(), lesson));
+                timetable.addLesson(module, timetable.getSemester(), lesson);
             }
         }
     }

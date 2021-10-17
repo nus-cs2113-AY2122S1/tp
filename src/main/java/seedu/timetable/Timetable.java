@@ -2,6 +2,7 @@ package seedu.timetable;
 
 import seedu.exceptions.UniModsException;
 import seedu.logger.TimetableLogger;
+import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.ui.TextUi;
 import seedu.ui.TimetableUI;
@@ -10,11 +11,11 @@ import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-
 /**
- * The Timetable Class, which will track all added modules and lessons that you have signed up for.
- * Each cell in the timetable will display the module code, lesson type and venue of the lesson
- * Each Timetable should be assigned a semester number --> Academic Year semester (1 OR 2).
+ * The Timetable Class, which will track all added modules and lessons that you
+ * have signed up for. Each cell in the timetable will display the module code,
+ * lesson type and venue of the lesson Each Timetable should be assigned a
+ * semester number --> Academic Year semester (1 OR 2).
  */
 public class Timetable implements Comparable<Timetable> {
 
@@ -28,13 +29,13 @@ public class Timetable implements Comparable<Timetable> {
     private ArrayList<Module> modules;
     private TimetableLogger logger = new TimetableLogger();
 
-    private TimetableLesson[] monday = new TimetableLesson[24];
-    private TimetableLesson[] tuesday = new TimetableLesson[24];
-    private TimetableLesson[] wednesday = new TimetableLesson[24];
-    private TimetableLesson[] thursday = new TimetableLesson[24];
-    private TimetableLesson[] friday = new TimetableLesson[24];
-    private TimetableLesson[] saturday = new TimetableLesson[24];
-    private TimetableLesson[] sunday = new TimetableLesson[24];
+    private TimetableItem[] monday = new TimetableItem[24];
+    private TimetableItem[] tuesday = new TimetableItem[24];
+    private TimetableItem[] wednesday = new TimetableItem[24];
+    private TimetableItem[] thursday = new TimetableItem[24];
+    private TimetableItem[] friday = new TimetableItem[24];
+    private TimetableItem[] saturday = new TimetableItem[24];
+    private TimetableItem[] sunday = new TimetableItem[24];
 
     /**
      * Creates a Timetable assigned to a specific semester of the Academic Year.
@@ -48,41 +49,62 @@ public class Timetable implements Comparable<Timetable> {
         this.latestHour = DEFAULT_END;
     }
 
+    public Timetable(int semester, int earliestHour, int latestHour, ArrayList<Module> modules, TimetableItem[] mon,
+            TimetableItem[] tues, TimetableItem[] wed, TimetableItem[] thurs, TimetableItem[] fri, TimetableItem[] sat,
+            TimetableItem[] sun) {
+        this.semester = semester;
+        this.earliestHour = earliestHour;
+        this.latestHour = latestHour;
+        this.modules = modules;
+        this.monday = mon;
+        this.tuesday = tues;
+        this.wednesday = wed;
+        this.thursday = thurs;
+        this.friday = fri;
+        this.saturday = sat;
+        this.sunday = sun;
+    }
+
     /**
-     * Adds a Timetable Lesson to the timetable
-     * and adds the corresponding module to an internal list if not already added.
-     * This can be a Lecture, Tutorial or Laboratory
+     * Adds a Timetable Lesson to the timetable and adds the corresponding module to
+     * an internal list if not already added. This can be a Lecture, Tutorial or
+     * Laboratory
      *
-     * @param timetableLesson lesson to be added to the timetable
+     * @param module   module to be added to the timetable
+     * @param semester semester of the timetable
+     * @param lesson   lesson to be added to the timetable
      * @see TimetableLesson
      */
-    public void addLesson(TimetableLesson timetableLesson) {
+    public void addLesson(Module module, Integer semester, Lesson lesson) {
+        TimetableLesson timetableLesson = new TimetableLesson(module, semester, lesson);
 
         switch (timetableLesson.getDayOfWeek()) {
         case MONDAY:
-            addLessonToSchedule(timetableLesson, monday);
+            addItemToSchedule(timetableLesson, monday);
             break;
         case TUESDAY:
-            addLessonToSchedule(timetableLesson, tuesday);
+            addItemToSchedule(timetableLesson, tuesday);
             break;
         case WEDNESDAY:
-            addLessonToSchedule(timetableLesson, wednesday);
+            addItemToSchedule(timetableLesson, wednesday);
             break;
         case THURSDAY:
-            addLessonToSchedule(timetableLesson, thursday);
+            addItemToSchedule(timetableLesson, thursday);
             break;
         case FRIDAY:
-            addLessonToSchedule(timetableLesson, friday);
+            addItemToSchedule(timetableLesson, friday);
             break;
         case SATURDAY:
-            addLessonToSchedule(timetableLesson, saturday);
+            addItemToSchedule(timetableLesson, saturday);
             break;
         case SUNDAY:
-            addLessonToSchedule(timetableLesson, sunday);
+            addItemToSchedule(timetableLesson, sunday);
             break;
         default:
             break;
         }
+
+        addModuleToList(module);
 
         if (timetableLesson.getStartHour() < earliestHour) {
             earliestHour = timetableLesson.getStartHour();
@@ -91,32 +113,32 @@ public class Timetable implements Comparable<Timetable> {
         if (timetableLesson.getEndHour() > latestHour) {
             latestHour = timetableLesson.getEndHour();
         }
-        assert earliestHour < latestHour
-                : "Earliest hour of the day is should be earlier than latest hour of the day";
+        assert earliestHour < latestHour : "Earliest hour of the day is should be earlier than latest hour of the day";
 
         logger.log(Level.INFO, String.format("%s added to timetable",
-                timetableLesson.getModuleCode() + ", " + timetableLesson.getLessonType()));
+                timetableLesson.getTitle() + ", " + timetableLesson.getLessonType()));
     }
 
     /**
-     * Adds a lesson to a specific day schedule
-     * E.g. addLessonToSchedule(lesson, monday) will add the lesson to the monday schedule
+     * Adds a timetable item to a specific day schedule E.g.
+     * addLessonToSchedule(lesson, monday) will add the lesson to the monday
+     * schedule
      *
-     * @param timetableLesson Lesson to be added to a day's schedule
-     * @param schedule        Day's schedule (i.e monday/tuesday/.. etc) to add the lesson to
+     * @param timetableItem Item to be added to a day's schedule
+     * @param schedule      Day's schedule (i.e monday/tuesday/.. etc) to add the
+     *                      lesson to
      */
-    private void addLessonToSchedule(TimetableLesson timetableLesson, TimetableLesson[] schedule) {
-        int start = timetableLesson.getStartHour();
-        int end = timetableLesson.getEndHour();
+    private void addItemToSchedule(TimetableItem timetableItem, TimetableItem[] schedule) {
+        int start = timetableItem.getStartHour();
+        int end = timetableItem.getEndHour();
         for (int i = start; i < end; i++) {
-            schedule[i] = timetableLesson;
+            schedule[i] = timetableItem;
         }
-        addModuleToList(timetableLesson.getModule());
     }
 
     /**
-     * Adds the lesson's module to the internal tracking list.
-     * This is to be displayed later
+     * Adds the lesson's module to the internal tracking list. This is to be
+     * displayed later
      *
      * @param module Module to be added
      * @see Module
@@ -140,8 +162,7 @@ public class Timetable implements Comparable<Timetable> {
                 modules.remove(modules.get(i));
                 TextUi.printModuleDeleted(moduleCode);
                 deleteFromLessons(module);
-                logger.log(Level.INFO, String.format("%s added to timetable",
-                        module.getModuleCode()));
+                logger.log(Level.INFO, String.format("%s added to timetable", module.getModuleCode()));
                 return;
             }
         }
@@ -149,7 +170,8 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     /**
-     * Calls the function deleteFromSchedule to delete the module from the timetable's daily plan.
+     * Calls the function deleteFromSchedule to delete the module from the
+     * timetable's daily plan.
      *
      * @param module Module to be Deleted
      * @see Module
@@ -166,23 +188,25 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     /**
-     * Sets the TimetableLesson for the particular time slot to be null where the timetableLesson
-     * is scheduled for the module to be deleted.
-     * @param schedule Schedule contains the lessons of the user for a particular day of the week.
+     * Sets the TimetableLesson for the particular time slot to be null where the
+     * timetableLesson is scheduled for the module to be deleted.
+     * 
+     * @param schedule Schedule contains the lessons of the user for a particular
+     *                 day of the week.
      * @param module   Module to be Deleted
      * @see Module
      */
-    public void deleteFromSchedule(Module module, TimetableLesson[] schedule) {
+    public void deleteFromSchedule(Module module, TimetableItem[] schedule) {
         for (int i = 0; i < schedule.length; i++) {
-            if (schedule[i] != null && schedule[i].getModuleCode().equals(module.getModuleCode())) {
+            if (schedule[i] != null && schedule[i].getTitle().equals(module.getModuleCode())) {
                 schedule[i] = null;
             }
         }
     }
 
     /**
-     * Removes all modules from the list of modules taken by the user.
-     * Calls the clearTimetableFromLessons() function to delete all the scheduled lessons.
+     * Removes all modules from the list of modules taken by the user. Calls the
+     * clearTimetableFromLessons() function to delete all the scheduled lessons.
      */
     public void clearTimetable() throws UniModsException {
         if (modules.size() > 0) {
@@ -195,9 +219,9 @@ public class Timetable implements Comparable<Timetable> {
         }
     }
 
-
     /**
-     * Calls the function clearTimetableFromLessons() to clear the scheduled lessons from the timetable's daily plan.
+     * Calls the function clearTimetableFromLessons() to clear the scheduled lessons
+     * from the timetable's daily plan.
      */
     public void clearTimetableFromLessons() {
         clearSchedule(monday);
@@ -212,9 +236,10 @@ public class Timetable implements Comparable<Timetable> {
     /**
      * Clears the TimetableLesson for all non-null time slots .
      *
-     * @param schedule Schedule contains the lessons of the user for a particular day of the week.
+     * @param schedule Schedule contains the lessons of the user for a particular
+     *                 day of the week.
      */
-    public void clearSchedule(TimetableLesson[] schedule) {
+    public void clearSchedule(TimetableItem[] schedule) {
         assert (schedule.length > 0);
         for (int i = 0; i < schedule.length; i++) {
             if (schedule[i] != null) {
@@ -224,10 +249,10 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     /**
-     * Displays the timetable over Command Line Interface
-     * Draws a grid where the Horizontal Axis represents the hour timing
-     * and the Vertical Axis represents the Day (MON/TUES/WED/... etc.)
-     * Displays the lessons in each grid cell that had been added to the timetable
+     * Displays the timetable over Command Line Interface Draws a grid where the
+     * Horizontal Axis represents the hour timing and the Vertical Axis represents
+     * the Day (MON/TUES/WED/... etc.) Displays the lessons in each grid cell that
+     * had been added to the timetable
      *
      * <p>Also displays all the modules taken and the total number of MCs taken for the
      * timetable
@@ -245,35 +270,86 @@ public class Timetable implements Comparable<Timetable> {
     }
 
     public TimetableLesson getLesson(DayOfWeek day, int startHour) {
+        TimetableItem lesson;
         switch (day) {
         case MONDAY:
-            return monday[startHour];
+            lesson = monday[startHour];
+            break;
         case TUESDAY:
-            return tuesday[startHour];
+            lesson = tuesday[startHour];
+            break;
         case WEDNESDAY:
-            return wednesday[startHour];
+            lesson = wednesday[startHour];
+            break;
         case THURSDAY:
-            return thursday[startHour];
+            lesson = thursday[startHour];
+            break;
         case FRIDAY:
-            return friday[startHour];
+            lesson = friday[startHour];
+            break;
         case SATURDAY:
-            return saturday[startHour];
+            lesson = saturday[startHour];
+            break;
         case SUNDAY:
-            return sunday[startHour];
+            lesson = sunday[startHour];
+            break;
         default:
             return null;
         }
+        if (lesson instanceof TimetableLesson) {
+            return (TimetableLesson) lesson;
+        }
+        return null;
     }
 
-    public Integer getSemester() {
+    public int getSemester() {
         return semester;
     }
 
+    public int getEarliestHour() {
+        return earliestHour;
+    }
+
+    public int getLatesthour() {
+        return latestHour;
+    }
+
+    public ArrayList<Module> getModules() {
+        return this.modules;
+    }
+
+    public TimetableItem[] getMonday() {
+        return this.monday;
+    }
+
+    public TimetableItem[] getTuesday() {
+        return this.tuesday;
+    }
+
+    public TimetableItem[] getWednesday() {
+        return this.wednesday;
+    }
+
+    public TimetableItem[] getThursday() {
+        return this.thursday;
+    }
+
+    public TimetableItem[] getFriday() {
+        return this.friday;
+    }
+
+    public TimetableItem[] getSaturday() {
+        return this.saturday;
+    }
+
+    public TimetableItem[] getSunday() {
+        return this.sunday;
+    }
 
     @Override
     public int compareTo(Timetable timetable) {
         int flag = 0;
-        boolean isSemesterSame = this.getSemester().equals(timetable.getSemester());
+        boolean isSemesterSame = this.getSemester() == timetable.getSemester();
         boolean areModulesSame = this.modules.equals(timetable.modules);
         if (isSemesterSame && areModulesSame) {
             flag = 1;
