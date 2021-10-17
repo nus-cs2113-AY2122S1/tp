@@ -1,8 +1,7 @@
 package seedu.entry;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 
 public abstract class Entry {
     protected String description;
@@ -17,7 +16,7 @@ public abstract class Entry {
     public double getValue() {
         return this.value;
     }
-    
+
     public LocalDate getDate() {
         return this.date;
     }

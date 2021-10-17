@@ -22,7 +22,7 @@ public class Income extends Entry {
     @Override
     public String toString() {
         String valueTwoDecimalPoint = String.format("%.2f",value);
-        return "[I] on " + date.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + ": " 
-                + description + " (" + category + ")" + " - $" + valueTwoDecimalPoint;
+        return "[I] " + description + " - $" + valueTwoDecimalPoint + " ("
+                + date.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + ")";
     }
 }

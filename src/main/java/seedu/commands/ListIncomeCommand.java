@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ListIncomeCommand extends Command {
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        ArrayList<Income> incomes = finances.listIncomes(); 
+        ArrayList<Income> incomes = finances.getIncomes(); 
         ui.listIncome(incomes);
     }
 }

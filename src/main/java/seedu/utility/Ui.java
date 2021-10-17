@@ -1,5 +1,6 @@
 package seedu.utility;
 
+import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 
@@ -10,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Ui {
     private Scanner in;
 
@@ -18,19 +20,8 @@ public class Ui {
             + "███████    ██    ██    ██ ██ ██  ██ █████   ███████       ███   ██   ██ \n"
             + "     ██    ██    ██    ██ ██  ██ ██ ██  ██       ██      ██ ██  ██   ██ \n"
             + "███████    ██     ██████  ██   ████ ██   ██ ███████     ██   ██ ██████  ";
+    
 
-    private static final String BYE_MESSAGE = "██████  ██    ██ ███████        ██  \n"
-            + "██   ██  ██  ██  ██          ██  ██ \n"
-            + "██████    ████   █████           ██ \n"
-            + "██   ██    ██    ██          ██  ██ \n"
-            + "██████     ██    ███████        ██ ";
-
-    private static final String TYPE_SOMETHING_MESSAGE = "Type something!";
-    private static final String HELP_COMMAND_MESSAGE = "This is a list of commands and their format!";
-    private static final String LISTING_EXPENSE_MESSAGE = "Below is a list of all of your recent spending!";
-    private static final String LISTING_INCOME_MESSAGE = "Below is a list of all of your recent earnings!";
-    private static final String EMPTY_INCOME_MESSAGE = "You have not entered any income!";
-    private static final String EMPTY_EXPENSE_MESSAGE = "You have not spent anything!";
 
     private static final String HELP_FORMAT = "List Out All Commands: help";
     private static final String ADD_EXPENSE_FORMAT = "Adding Expense: add_ex d/DESCRIPTION a/AMOUNT";
@@ -46,11 +37,13 @@ public class Ui {
     private static final String INCOME_BETWEEN_FORMAT = "Show Total Income between 2 dates"
             + ": btw_in s/START_DATE e/END_DATE";
     private static final String END_FORMAT = "To Terminate The Program: end";
-
+    private static final String FIND_FORMAT = "To Find Using Date: find YYYY-MM-DD\n"
+            + "To Find Based On Keyword: find KEYWORD";
+    private static final String BALANCE_FORMAT = "To Display Total Balance: balance";
 
     private static final List<String> commands = Arrays.asList(HELP_FORMAT, ADD_EXPENSE_FORMAT, DEL_EXPENSE_FORMAT,
             LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, EXPENSE_BETWEEN_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT, 
-            LIST_INCOME_FORMAT, TOTAL_INCOME_FORMAT, INCOME_BETWEEN_FORMAT, END_FORMAT);
+            LIST_INCOME_FORMAT, TOTAL_INCOME_FORMAT, FIND_FORMAT, BALANCE_FORMAT, INCOME_BETWEEN_FORMAT, END_FORMAT);
 
 
 
@@ -75,7 +68,7 @@ public class Ui {
         printLine();
         System.out.println(PRODUCT_LOGO);
         printLine();
-        System.out.println(TYPE_SOMETHING_MESSAGE);
+        System.out.println(Messages.TYPE_SOMETHING_MESSAGE);
     }
 
     private void printLine() {
@@ -116,17 +109,40 @@ public class Ui {
         printLine();
     }
 
+    public void listFind(ArrayList<Entry> filteredEntries) {
+        printLine();
+        if (filteredEntries.isEmpty()) {
+            System.out.println(Messages.SEARCH_NO_MATCH_MESSAGE);
+        } else {
+            printFilteredList(filteredEntries);
+        }
+        printLine();
+    }
+    
     private void printEmptyIncomeListMessage() {
-        System.out.println(EMPTY_INCOME_MESSAGE);
+        System.out.println(Messages.EMPTY_INCOME_MESSAGE);
     }
 
     private void printEmptyExpenseListMessage() {
-        System.out.println(EMPTY_EXPENSE_MESSAGE);
+        System.out.println(Messages.EMPTY_EXPENSE_MESSAGE);
     }
 
+    private void printFilteredList(ArrayList<Entry> filteredEntries) {
+        assert filteredEntries.size() > 0;
+        System.out.println("Below is a list of all your findings!");
+        printLine();
+
+        int i = 1;
+        for (Entry entry : filteredEntries) {
+            System.out.print(i + ": ");
+            System.out.println(entry);
+            i++;
+        }
+    }
+    
     private void printIncomeList(ArrayList<Income> incomes) {
         assert incomes.size() > 0;
-        System.out.println(LISTING_INCOME_MESSAGE);
+        System.out.println(Messages.LISTING_INCOME_MESSAGE);
         printLine();
 
         int i = 1;
@@ -139,7 +155,7 @@ public class Ui {
 
     private void printExpenseList(ArrayList<Expense> expenses) {
         assert expenses.size() > 0;
-        System.out.println(LISTING_EXPENSE_MESSAGE);
+        System.out.println(Messages.LISTING_EXPENSE_MESSAGE);
         printLine();
 
         int i = 1;
@@ -204,6 +220,14 @@ public class Ui {
         printLine();
     }
 
+    public void printBalance(double balance) {
+        printLine();
+        System.out.printf("Your current balance is: $%.2f\n", balance);
+        printLine();
+    }
+    
+    
+    
     /**
      * Prints the feedback message for adding an expense to the financial tracker.
      *
@@ -257,7 +281,7 @@ public class Ui {
      */
     public void printHelp() {
         printLine();
-        System.out.println(HELP_COMMAND_MESSAGE);
+        System.out.println(Messages.HELP_COMMAND_MESSAGE);
         printLine();
         for (String command:commands) {
             System.out.println(command);
@@ -270,7 +294,7 @@ public class Ui {
      */
     public void printBye() {
         printLine();
-        System.out.println(BYE_MESSAGE);
+        System.out.println(Messages.BYE_MESSAGE);
         printLine();
     }
 
