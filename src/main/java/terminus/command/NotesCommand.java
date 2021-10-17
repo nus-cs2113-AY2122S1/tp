@@ -4,7 +4,7 @@ import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.parser.NoteCommandParser;
 
-public class NotesCommand extends InModuleCommand {
+public class NotesCommand extends InnerModuleCommand {
 
     public NotesCommand() {
         super(NoteCommandParser.getInstance());

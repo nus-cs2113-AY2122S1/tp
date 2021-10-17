@@ -4,7 +4,7 @@ import terminus.command.Command;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 
-public abstract class InModuleCommandParser extends CommandParser {
+public abstract class InnerModuleCommandParser extends CommandParser {
 
     private String moduleName;
 
@@ -13,14 +13,24 @@ public abstract class InModuleCommandParser extends CommandParser {
      *
      * @param workspace The name of the workspace.
      */
-    public InModuleCommandParser(String workspace) {
+    public InnerModuleCommandParser(String workspace) {
         super(workspace);
     }
 
+    /**
+     * Returns the module name for the current workspace
+     *
+     * @return The string containing the module name
+     */
     public String getModuleName() {
         return moduleName;
     }
 
+    /**
+     * Sets the module name for the current workspace
+     *
+     * @param moduleName The module name to set
+     */
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }
@@ -32,6 +42,11 @@ public abstract class InModuleCommandParser extends CommandParser {
         return cmd;
     }
 
+    /**
+     * Returns a workspace that contains the moduleName and the current work space
+     *
+     * @return The consolidated workspace name
+     */
     @Override
     public String getWorkspace() {
         return moduleName + " > " + super.getWorkspace();

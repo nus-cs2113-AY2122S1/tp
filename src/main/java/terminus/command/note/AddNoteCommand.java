@@ -44,7 +44,7 @@ public class AddNoteCommand extends Command {
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
         TerminusLogger.info("Parsing add note arguments");
-        if (arguments == null || arguments.isBlank()) {
+        if (CommonUtils.isStringNullOrEmpty(arguments)) {
             TerminusLogger.warning("Failed to parse arguments: arguments is empty");
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }

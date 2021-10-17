@@ -48,7 +48,11 @@ public class ViewModuleCommand extends Command {
         String[] listOfModules = IntStream.range(0, modules.length)
                 .mapToObj(i -> String.format("%d. %s", i + 1, modules[i]))
                 .toArray(String[]::new);
-        ui.printSection(listOfModules);
+        if (listOfModules.length == 0) {
+            ui.printSection("You do not have any modules");
+        } else {
+            ui.printSection(listOfModules);
+        }
         return new CommandResult(true);
     }
 }

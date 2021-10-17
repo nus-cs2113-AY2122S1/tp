@@ -1,5 +1,6 @@
 package terminus.command;
 
+import terminus.common.CommonUtils;
 import terminus.common.Messages;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
@@ -10,6 +11,7 @@ import terminus.ui.Ui;
 
 public class GoCommand extends WorkspaceCommand {
 
+    public static final String SPACE_DELIMITER = "\\s+";
     private String moduleName;
 
     public GoCommand() {
@@ -33,15 +35,15 @@ public class GoCommand extends WorkspaceCommand {
      */
     @Override
     public String getHelpMessage() {
-        return "Go to a specific module";
+        return "Go to a specific module's workspace";
     }
 
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
-        if (arguments == null || arguments.isBlank()) {
+        if (CommonUtils.isStringNullOrEmpty(arguments)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
-        String[] args = arguments.strip().split("\\s+", 2);
+        String[] args = arguments.strip().split(SPACE_DELIMITER, 2);
         moduleName = args[0];
         if (args.length > 1) {
             super.parseArguments(args[1]);

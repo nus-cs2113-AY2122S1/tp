@@ -22,7 +22,7 @@ public class MainCommandParser extends CommandParser {
     }
 
     @Override
-    public String getWorkspaceBanner(ModuleManager module) {
+    public String getWorkspaceBanner(ModuleManager moduleManager) {
         return Messages.MAIN_BANNER;
     }
 }

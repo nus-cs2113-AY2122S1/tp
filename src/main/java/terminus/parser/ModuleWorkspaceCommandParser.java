@@ -8,7 +8,6 @@ import terminus.common.CommonFormat;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
-import terminus.module.NusModule;
 
 public class ModuleWorkspaceCommandParser extends CommandParser {
 
@@ -39,7 +38,7 @@ public class ModuleWorkspaceCommandParser extends CommandParser {
     }
 
     @Override
-    public String getWorkspaceBanner(ModuleManager module) {
+    public String getWorkspaceBanner(ModuleManager moduleManager) {
         return "Entering " + getWorkspace() + " workspace";
     }
 }

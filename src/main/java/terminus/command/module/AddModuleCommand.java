@@ -13,6 +13,8 @@ import terminus.ui.Ui;
 
 public class AddModuleCommand extends Command {
 
+    public static final String SPACE_DELIMITER = "\\S+";
+    public static final int MODULE_ARGS_COUNT = 1;
     private String moduleName;
 
     /**
@@ -37,7 +39,7 @@ public class AddModuleCommand extends Command {
 
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
-        if (arguments == null || arguments.isBlank()) {
+        if (CommonUtils.isStringNullOrEmpty(arguments)) {
             TerminusLogger.warning("Failed to parse arguments: arguments is empty");
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
@@ -47,7 +49,7 @@ public class AddModuleCommand extends Command {
         }
 
         moduleName = argArray.get(0);
-        if (!moduleName.matches("\\S+")) {
+        if (!moduleName.matches(SPACE_DELIMITER)) {
             throw new InvalidArgumentException("Module name cannot contain any whitespaces!");
         }
     }
@@ -72,8 +74,8 @@ public class AddModuleCommand extends Command {
         return new CommandResult(true);
     }
 
-    private boolean isValidModuleArguments(ArrayList<String> argArray) {
-        if (argArray.size() != 1) {
+    private boolean isValidModuleArguments (ArrayList<String> argArray) {
+        if(argArray.size() != MODULE_ARGS_COUNT) {
             return false;
         } else {
             return !CommonUtils.hasEmptyString(argArray);

@@ -1,6 +1,7 @@
 package terminus.command;
 
 import terminus.common.CommonFormat;
+import terminus.common.CommonUtils;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.Content;
@@ -56,7 +57,7 @@ public class ViewCommand<T extends Content> extends Command {
      */
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
-        if (arguments == null || arguments.isBlank()) {
+        if (CommonUtils.isStringNullOrEmpty(arguments)) {
             displayAll = true;
             return;
         }

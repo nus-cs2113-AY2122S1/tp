@@ -8,10 +8,9 @@ import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.Note;
 import terminus.module.ModuleManager;
-import terminus.module.NusModule;
 
 
-public class NoteCommandParser extends InModuleCommandParser {
+public class NoteCommandParser extends InnerModuleCommandParser {
 
     public NoteCommandParser() {
         super(CommonFormat.COMMAND_NOTE);
@@ -27,8 +26,8 @@ public class NoteCommandParser extends InModuleCommandParser {
     }
 
     @Override
-    public String getWorkspaceBanner(ModuleManager module) {
+    public String getWorkspaceBanner(ModuleManager moduleManager) {
         return String.format(Messages.NOTE_BANNER,
-                module.getModule(getModuleName()).getContentManager(Note.class).getContents().size());
+                moduleManager.getModule(getModuleName()).getContentManager(Note.class).getContents().size());
     }
 }

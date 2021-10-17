@@ -64,7 +64,7 @@ public abstract class CommandParser {
         return commandMap.keySet();
     }
 
-    public abstract String getWorkspaceBanner(ModuleManager module);
+    public abstract String getWorkspaceBanner(ModuleManager moduleManager);
 
     /**
      * Returns the list of items in the help menu.
@@ -100,6 +100,11 @@ public abstract class CommandParser {
         return workspace;
     }
 
+    /**
+     * Sets the existing workspace for the module
+     *
+     * @param workspace The name of the workspace
+     */
     public void setWorkspace(String workspace) {
         this.workspace = workspace;
     }

@@ -3,6 +3,7 @@ package terminus.command.module;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
+import terminus.common.CommonUtils;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
@@ -36,7 +37,7 @@ public class DeleteModuleCommand extends Command {
 
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
-        if (arguments == null || arguments.isBlank()) {
+        if (CommonUtils.isStringNullOrEmpty(arguments)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         TerminusLogger.info("Parsing delete arguments");
@@ -64,17 +65,24 @@ public class DeleteModuleCommand extends Command {
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException {
-        if (!isValidIndex(itemNumber, moduleManager)) {
+        String[] listOfModule = moduleManager.getAllModules();
+        if (!isValidIndex(itemNumber, listOfModule)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
         }
-        String[] listOfModule = moduleManager.getAllModules();
+
         moduleManager.removeModule(listOfModule[itemNumber - 1]);
         ui.printSection(String.format("Deleted module %s.",listOfModule[itemNumber - 1]));
         return new CommandResult(true);
     }
 
-    private boolean isValidIndex(int index, ModuleManager moduleManager) {
-        String[] listOfModule = moduleManager.getAllModules();
+    /**
+     * Returns a boolean if the index give is valid
+     *
+     * @param index The index to check
+     * @param listOfModule The full list of modules
+     * @return True if the index is valid or else it is false
+     */
+    private boolean isValidIndex(int index, String [] listOfModule) {
         return listOfModule.length >= index && index > 0;
     }
 }

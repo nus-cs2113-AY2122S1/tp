@@ -49,7 +49,7 @@ public class DeleteCommand<T extends Content> extends Command {
      */
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
-        if (arguments == null || arguments.isBlank()) {
+        if (CommonUtils.isStringNullOrEmpty(arguments)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
         TerminusLogger.info("Parsing delete arguments");
@@ -70,7 +70,7 @@ public class DeleteCommand<T extends Content> extends Command {
      * removed from the arraylist.
      *
      * @param ui            The Ui object to send messages to the users.
-     * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
+     * @param moduleManager The ModuleManager that contains the NusModules.
      * @return CommandResult to indicate the success and additional information about the execution.
      * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.
      */

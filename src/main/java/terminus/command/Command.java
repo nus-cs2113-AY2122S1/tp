@@ -10,10 +10,6 @@ public abstract class Command {
     protected String arguments;
     private String moduleName;
 
-    public Command() {
-
-    }
-
     /**
      * Returns the format for the command.
      *
@@ -51,10 +47,20 @@ public abstract class Command {
     public abstract CommandResult execute(Ui ui, ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException;
 
+    /**
+     * Returns the module name
+     *
+     * @return The String containing the module name
+     */
     public String getModuleName() {
         return moduleName;
     }
 
+    /**
+     * Sets the module name
+     *
+     * @param moduleName The String containing the module name to set
+     */
     public void setModuleName(String moduleName) {
         this.moduleName = moduleName;
     }

@@ -21,6 +21,14 @@ public class BackCommand extends Command {
         return Messages.MESSAGE_COMMAND_BACK;
     }
 
+    /**
+     * Returns a command result containing the CommandParser object
+     *
+     * @param ui            The Ui object to send messages to the users.
+     * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
+     * @return CommandResult contains a CommandParser
+     * @throws InvalidCommandException
+     */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidCommandException {
         TerminusLogger.info("Executing Back Command");

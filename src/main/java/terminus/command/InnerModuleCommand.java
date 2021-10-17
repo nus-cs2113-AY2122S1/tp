@@ -3,15 +3,14 @@ package terminus.command;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
-import terminus.parser.CommandParser;
-import terminus.parser.InModuleCommandParser;
+import terminus.parser.InnerModuleCommandParser;
 import terminus.ui.Ui;
 
-public abstract class InModuleCommand extends WorkspaceCommand {
+public abstract class InnerModuleCommand extends WorkspaceCommand {
 
-    private InModuleCommandParser commandMap;
+    private InnerModuleCommandParser commandMap;
 
-    public InModuleCommand(InModuleCommandParser commandMap) {
+    public InnerModuleCommand(InnerModuleCommandParser commandMap) {
         super(commandMap);
         this.commandMap = commandMap;
     }

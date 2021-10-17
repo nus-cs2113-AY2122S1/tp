@@ -53,7 +53,7 @@ public class AddLinkCommand extends Command {
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
 
-        if (arguments == null || arguments.isBlank()) {
+        if (CommonUtils.isStringNullOrEmpty(arguments)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
 

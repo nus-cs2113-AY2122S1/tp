@@ -29,7 +29,7 @@ public class ModuleCommandParser extends CommandParser {
     }
 
     @Override
-    public String getWorkspaceBanner(ModuleManager module) {
-        return "Welcome to the workspace module";
+    public String getWorkspaceBanner(ModuleManager moduleManager) {
+        return String.format("You have %d modules", moduleManager.getAllModules().length);
     }
 }
