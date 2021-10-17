@@ -123,7 +123,7 @@ public class UiTest {
                + "1: [E] Bought a game - $19.73 (17 Oct 2021)" + newLine 
                + "2: [E] Bought cookies - $5.00 (17 Oct 2021)" + newLine
                + "3: [E] Bought cakes - $7.00 (17 Oct 2021)" + newLine
-               + "4: [I] Paycheck August - $25.00 (17 Oct 2021)"  +newLine   
+               + "4: [I] Paycheck August - $25.00 (17 Oct 2021)" + newLine   
                + "5: [I] Rob a bank - $2000.00 (17 Oct 2021)" + newLine
                + "6: [I] Paycheck July - $25.00 (17 Oct 2021)" + newLine 
                + SEPARATOR_LINE;
