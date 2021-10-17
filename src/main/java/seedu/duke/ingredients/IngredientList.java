@@ -28,7 +28,7 @@ public class IngredientList {
         }
     }
 
-    public static IngredientList getInstance() throws DukeException{
+    public static IngredientList getInstance() throws DukeException {
         if (instance == null) {
             instance = new IngredientList();
         }
