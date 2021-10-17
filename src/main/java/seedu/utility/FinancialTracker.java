@@ -107,29 +107,29 @@ public class FinancialTracker {
     
 
     public double getTotalExpenseBetween(LocalDate start, LocalDate end) {
-        List<Expense> accumulatedExpense =
+        List<Expense> filteredExpenses =
             expenses.stream()
                 .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start)) 
                         && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
                 .collect(Collectors.toList());
-        double count = 0;
-        for (Expense o: accumulatedExpense) {
-            count += o.getValue();    
+        double totalExpense = 0;
+        for (Expense expense: filteredExpenses) {
+            totalExpense += expense.getValue();    
         }
-        return count;
+        return totalExpense;
     }
 
     public double getTotalIncomeBetween(LocalDate start, LocalDate end) {
-        List<Income> accumulatedExpense =
+        List<Income> filteredIncomes =
                 incomes.stream()
                         .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start))
                                 && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
                         .collect(Collectors.toList());
-        double count = 0;
-        for (Income o: accumulatedExpense) {
-            count += o.getValue();
+        double totalIncome = 0;
+        for (Income income: filteredIncomes) {
+            totalIncome += income.getValue();
         }
-        return count;
+        return totalIncome;
     }
 
     //method used for testing
