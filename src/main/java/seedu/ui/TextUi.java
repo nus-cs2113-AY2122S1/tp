@@ -4,38 +4,13 @@ import seedu.contact.Contact;
 
 import java.util.Scanner;
 
-public class TextUi {
+public abstract class TextUi {
     private static final String LOGO = "   _____         _______        _     \n"
             + "  / ____|       |__   __|      | |    \n" + " | |     ___  _ __ | | ___  ___| |__  \n"
             + " | |    / _ \\| '_ \\| |/ _ \\/ __| '_ \\ \n" + " | |___| (_) | | | | |  __/ (__| | | |\n"
             + "  \\_____\\___/|_| |_|_|\\___|\\___|_| |_|\n" + "                                      \n";
 
     private static final String LINE = "____________________________________________________________\n";
-
-    private static final Scanner scanner = new Scanner(System.in);
-
-    public TextUi() {
-        initMessage();
-    }
-
-    public static String getUserInput() {
-        String userInput = scanner.nextLine().trim();
-        if (userInput.contains(",")) {
-            String newUserInput = userInput.replace(",", "");
-            ExceptionTextUi.forbiddenInputCommaMessage(newUserInput);
-            return newUserInput;
-        }
-        return userInput;
-    }
-
-    public static String getUserDeleteConfirmation(Contact deletedContact, int deletedIndex) {
-        String message = "Delete this contact?  (y/n)\n"
-                + deletedIndex + ". " + deletedContact.getName() + formatContactFields(deletedContact);
-        printDoubleLineMessage(message);
-
-        String userDeleteConfirmation = scanner.nextLine().trim();
-        return userDeleteConfirmation;
-    }
 
     // Used for print messages after user inputs
     private static void printDoubleLineMessage(String message) {
@@ -56,14 +31,39 @@ public class TextUi {
         System.out.println("\n" + LINE);
     }
 
-    private static void initMessage() {
+    public static void welcomeMessage() {
         printDoubleLineMessage(LOGO);
-        System.out.println("Welcome to ConTech, your personal contact tracker.\n" + LINE);
+        String message = "Welcome to ConTech, your personal contact tracker.\n"
+                + "Can I get your name?";
+        printBottomLineMessage(message);
+    }
+
+    public static void welcomeBackMessage(Contact personalContact) {
+        printDoubleLineMessage(LOGO);
+        String message = "Hello, " + personalContact.getName() + ". Welcome back to ConTech, "
+                + "your personal \ncontact tracker.";
+        printBottomLineMessage(message);
+    }
+
+    public static void greetingMessage(Contact personalContact) {
+        String message = "Hello there, " + personalContact.getName() + ".\n\n"
+                + "This is ConTech, your very own contact tracking application\n"
+                + "to manage computing-related contacts, like GitHub Accounts\n"
+                + "or even Emails.\n\n"
+                + "Enter \"help\" to see what you can do with ConTech.";
+        printDoubleLineMessage(message);
     }
 
     public static void createNewContactFileMessage(String contactFilePath) {
         String message = "As ConTech is unable to find your saved data,\n" + " it has created a new one for you at:\n"
                 + contactFilePath;
+        printBottomLineMessage(message);
+    }
+
+    public static void createNewPersonalContactFileMessage(String personalContactFilePath) {
+        String message = "As ConTech is unable to find any saved personal data, \n"
+                + " it has created a new one for you at: \n"
+                + personalContactFilePath;
         printBottomLineMessage(message);
     }
 
@@ -111,14 +111,20 @@ public class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void cancelDeleteContactMessage() {
-        String message = "Delete has been cancelled.";
+    public static void confirmDeleteMessage(Contact deletedContact, int deletedIndex) {
+        String message = "Delete this contact?  (y/n)\n"
+                + deletedIndex + ". " + deletedContact.getName() + formatContactFields(deletedContact);
         printDoubleLineMessage(message);
     }
 
     public static void deleteContactMessage(String contactName, int listSize) {
         String message = "ConTech has removed the specified contact: " + contactName + "\n" + "You now have " + listSize
                 + " contact(s).";
+        printDoubleLineMessage(message);
+    }
+
+    public static void cancelDeleteContactMessage() {
+        String message = "Delete has been cancelled.";
         printDoubleLineMessage(message);
     }
 
@@ -150,4 +156,5 @@ public class TextUi {
                 + " Example: help";
         printDoubleLineMessage(message);
     }
+
 }
