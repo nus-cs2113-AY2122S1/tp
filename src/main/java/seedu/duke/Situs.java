@@ -52,9 +52,8 @@ public class Situs {
 
         try {
             msg = Parser.parse(command);
-            Storage.save();
             return msg;
-        } catch (DukeException | IOException e) {
+        } catch (DukeException e) {
             LOGGER.log(Level.WARNING, "Error in parsing user command");
             return e.getMessage();
         }
