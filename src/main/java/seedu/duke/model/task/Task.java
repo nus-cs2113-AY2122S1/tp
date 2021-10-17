@@ -90,10 +90,9 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[T]" + getStatusIcon()
-                + " Title: " + title + " (Day: " + dayOfTheWeek + ")"
+        return getStatusIcon() + " " + title + " (" + dayOfTheWeek + ")"
                 + (information.isBlank()
                         ? ""
-                        : System.lineSeparator() + Ui.PADDING + "          Info: " + information);
+                        : System.lineSeparator() + Ui.PADDING + "       Info: " + information);
     }
 }
