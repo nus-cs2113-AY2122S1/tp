@@ -2,8 +2,9 @@ package seedu.duke.logic.commands.lesson;
 
 import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.LessonList;
-import seedu.duke.storage.Storage;
+import seedu.duke.model.module.ModuleList;
 import seedu.duke.model.task.TaskList;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 public class ListLessonCommand extends Command {
@@ -14,7 +15,7 @@ public class ListLessonCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList) {
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList) {
         if (period.isBlank()) {
             ui.printLessonList(lessonList);
         } else {
