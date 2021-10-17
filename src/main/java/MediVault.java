@@ -1,20 +1,27 @@
+import command.Command;
+import command.CommandList;
 import errors.InvalidCommand;
 import inventory.Dispense;
 import inventory.Medicine;
 import inventory.Order;
 import inventory.Stock;
+import parser.CommandParser;
 import parser.DateParser;
 import parser.Mode;
-import parser.CommandParser;
 import storage.Storage;
 import ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
+import static parser.Mode.DISPENSE;
+import static parser.Mode.ORDER;
+import static parser.Mode.STOCK;
 
 /**
  * Helps to start the application, and initialise all variables.
@@ -59,8 +66,23 @@ public class MediVault {
             // Reads user input
             userInput = in.nextLine();
             try {
-                mode = CommandParser.processCommand(ui, userInput, medicines, mode, storage);
-                if (mode == Mode.EXIT) { // User entered exit
+                String[] userCommand = CommandParser.parseCommand(userInput);
+                String commandString = userCommand[0];
+                String commandParameters = userCommand[1];
+
+                // Check is user is changing modes
+                if (commandString.equalsIgnoreCase(STOCK.name()) || commandString.equalsIgnoreCase(DISPENSE.name())
+                        || commandString.equalsIgnoreCase(ORDER.name())) {
+                    mode = CommandParser.changeMode(ui, commandString, mode);
+                    continue;
+                }
+
+                LinkedHashMap<String, String> parameters = CommandParser.parseParameters(commandParameters);
+
+                Command command = CommandParser.processCommand(commandString, mode);
+                command.execute(ui, parameters, medicines, storage);
+
+                if (commandString.equals(CommandList.EXIT)) { // User entered exit
                     break;
                 }
             } catch (InvalidCommand e) {
@@ -101,15 +123,15 @@ public class MediVault {
             medicines.add(new Order("AZITHROMYCIN", 100, DateParser.stringToDate("13-10-2021")));
             medicines.add(new Order("PANADOL", 50, DateParser.stringToDate("13-10-2021")));
             medicines.add(new Dispense("PANADOL", 10, "S1234567A",
-                    DateParser.stringToDate("9-10-2021"), "Jane",1));
+                    DateParser.stringToDate("9-10-2021"), "Jane", 1));
             medicines.add(new Dispense("VICODIN", 10, "S2345678B",
-                    DateParser.stringToDate("10-10-2021"), "Peter",3));
+                    DateParser.stringToDate("10-10-2021"), "Peter", 3));
             medicines.add(new Dispense("SIMVASTATIN", 10, "S1234567A",
-                    DateParser.stringToDate("11-10-2021"), "Sam",4));
+                    DateParser.stringToDate("11-10-2021"), "Sam", 4));
             medicines.add(new Dispense("LISINOPRIL", 10, "S3456789C",
-                    DateParser.stringToDate("12-10-2021"), "Jane",5));
+                    DateParser.stringToDate("12-10-2021"), "Jane", 5));
             medicines.add(new Dispense("AZITHROMYCIN", 10, "S2345678B",
-                    DateParser.stringToDate("13-10-2021"), "Peter",6));
+                    DateParser.stringToDate("13-10-2021"), "Peter", 6));
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
