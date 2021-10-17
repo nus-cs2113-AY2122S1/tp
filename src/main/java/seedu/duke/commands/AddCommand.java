@@ -157,7 +157,7 @@ public class AddCommand extends Command {
     }
 
     private static void addToEventList(Event event) {
-        Duke.eventList.add(event);
+        Duke.eventCatalog.add(event);
     }
 
     public CommandResult execute() {

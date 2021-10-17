@@ -37,7 +37,7 @@ public class ListCommand extends Command {
             Ui.printList(sortedList);
             break;
         case "event":
-            sortedList = new ArrayList<>(Duke.eventList);
+            sortedList = new ArrayList<>(Duke.eventCatalog);
             Parser.bubbleSortItems(sortedList);
             System.out.println("Here are all the events in your list:");
             Ui.printList(sortedList);

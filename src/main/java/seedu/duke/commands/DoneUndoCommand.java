@@ -44,7 +44,7 @@ public class DoneUndoCommand extends Command {
                             + "mark done or undo. ");
                 }
                 indexes = command[2].split(",");
-                sortedList = new ArrayList<>(Duke.eventList);
+                sortedList = new ArrayList<>(Duke.eventCatalog);
                 Parser.bubbleSortItems(sortedList);
             } else {
                 indexes = command[1].split(",");

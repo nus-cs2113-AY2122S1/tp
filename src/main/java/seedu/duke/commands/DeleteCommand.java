@@ -5,7 +5,7 @@ import seedu.duke.items.Item;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import static seedu.duke.Duke.eventList;
+import static seedu.duke.Duke.eventCatalog;
 import static seedu.duke.Duke.taskList;
 
 public class DeleteCommand extends Command {
@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
 
     public static void fillCombinedItemList() {
         combinedItemList.clear();
-        combinedItemList.addAll(eventList);
+        combinedItemList.addAll(eventCatalog);
         combinedItemList.addAll(taskList);
     }
 

@@ -10,10 +10,8 @@ import seedu.duke.commands.SelectCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.FindCommand;
-import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.NextCommand;
-import seedu.duke.commands.SelectCommand;
 import seedu.duke.commands.UpdateCommand;
 import seedu.duke.items.Item;
 
@@ -88,7 +86,7 @@ public class Parser {
 
     public static ArrayList<Item> makeMainList() {
         ArrayList<Item> sortedList = new ArrayList<>();
-        sortedList.addAll(Duke.eventList);
+        sortedList.addAll(Duke.eventCatalog);
         sortedList.addAll(Duke.taskList);
         return sortedList;
     }
