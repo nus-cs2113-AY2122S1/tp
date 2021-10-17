@@ -3,7 +3,7 @@ package seedu.duke.data;
 
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
-import seedu.duke.storage.ExpenditureStorage;
+import seedu.duke.storage.Storage;
 
 
 import java.time.LocalDate;
@@ -27,13 +27,19 @@ public class RecordList {
         expenditureRecords = new ArrayList<>();
     }
 
-    public void addBudget(double spendingLimit) {
+    public void addBudget(double spendingLimit, int month, boolean isLoadingStorage) {
         budget.clearAmount();
         budget.setAmount(spendingLimit);
         assert budget.getAmount() == spendingLimit;
         if (!hasBudget) {
             hasBudget = true;
         }
+        /*
+        if (!isLoadingStorage) {
+            Storage storeCurrentBudget = new Storage();
+            storeCurrentBudget.saveNewlyAddedBudget(spendingLimit, month);
+        }
+        */
     }
 
     /**
@@ -47,10 +53,12 @@ public class RecordList {
     public void addExpenditure(String description, double amount, LocalDate date, boolean isLoadingStorage) {
         expenditureRecords.add(new Expenditure(description, amount, date));
         numberOfRecords += 1;
+        /*
         if (!isLoadingStorage) {
-            ExpenditureStorage storeCurrentExpenditure = new ExpenditureStorage();
+            Storage storeCurrentExpenditure = new Storage();
             storeCurrentExpenditure.saveNewlyAddedExpenditure(description, amount, date);
         }
+        */
         assert getExpenditureListSize() == numberOfRecords;
     }
 

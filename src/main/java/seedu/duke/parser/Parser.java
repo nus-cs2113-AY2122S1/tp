@@ -11,6 +11,7 @@ import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
+import seedu.duke.commands.YearCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -59,10 +60,13 @@ public class Parser {
             command = prepareDeleteCommand(commandParams);
             break;
         case ListRecordsCommand.COMMAND_WORD:
-            command = new ListRecordsCommand();
+            command = prepareListMonthCommand(commandParams);
             break;
         case ExitCommand.COMMAND_WORD:
             command = new ExitCommand();
+            break;
+        case YearCommand.COMMAND_WORD:
+            command = prepareYearCommand(commandParams);;
             break;
         case HelpCommand.COMMAND_WORD:
         default:
@@ -70,6 +74,21 @@ public class Parser {
             break;
         }
         return command;
+    }
+
+    private Command prepareListMonthCommand(String commandParams) {
+        try {
+            String listOption = commandParams.substring(2, commandParams.length());
+            switch (listOption) {
+            case ("all"):
+                return new ListRecordsCommand();
+            default:
+                int listMonth = Integer.parseInt(listOption);
+                return new ListRecordsCommand(listMonth);
+            }
+        } catch (StringIndexOutOfBoundsException e) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
+        }
     }
 
     /**
@@ -103,7 +122,7 @@ public class Parser {
      * @throws ArrayIndexOutOfBoundsException if amount input does not exist.
      */
     private Command prepareAddBudgetCommand(String commandParams) throws ArrayIndexOutOfBoundsException {
-        String[] split = commandParams.substring(2).trim().split("a/|d/", 2);
+        String[] split = commandParams.substring(2).trim().split("a/|d/", 3);
         assert split[0].equals("");
         double amount = Double.parseDouble(split[1].trim());
         int month = Integer.parseInt(split[2].trim());
@@ -136,6 +155,15 @@ public class Parser {
             return new InvalidCommand(String.format(MESSAGE_INVALID_DATE, AddExpenditureCommand.MESSAGE_USAGE));
         }
 
+    }
+
+    private Command prepareYearCommand(String commandParams) {
+        try {
+            String directoryOfRecordList = "./data/" + commandParams + ".txt";
+            return new YearCommand(directoryOfRecordList);
+        } catch (StringIndexOutOfBoundsException e) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
+        }
     }
 
     /**

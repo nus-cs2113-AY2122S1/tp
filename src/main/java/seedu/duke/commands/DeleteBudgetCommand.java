@@ -15,7 +15,7 @@ public class DeleteBudgetCommand extends DeleteCommand {
     }
 
     @Override
-    public void execute() {
+    public void execute(boolean isLoadingStorage) {
         recordList.deleteBudget(LocalDate.now().getMonthValue());
         TextUi.showBudgetDeletedMessage();
     }

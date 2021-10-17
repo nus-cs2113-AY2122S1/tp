@@ -6,50 +6,79 @@ import seedu.duke.data.AllRecordList;
 import seedu.duke.data.RecordList;
 import seedu.duke.parser.Parser;
 import seedu.duke.textfiletools.ReadTextFile;
+import seedu.duke.textfiletools.WriteToTextFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Storage {
-    public static String dataStorageDirectory = "./data";
-    public static File directoryOfBudgetExpenditure = new File(dataStorageDirectory);
+    public static String dataStorageDirectory = "./data/";
 
-    public static int numberOfBudget = 0;
-    public static int numberOfExpenditure = 0;
+    public String loadStorage(AllRecordList recordList, String recordListDirectory) {
+        try {
+            LocalDate date = LocalDate.now();
+            if (recordListDirectory.equals("")) {
+                recordListDirectory = dataStorageDirectory + date.getYear() + ".txt";
+            }
+            ReadTextFile newReader = new ReadTextFile(recordListDirectory);
+            ArrayList<String> commandStorage = newReader.readTextFileToString();
+            Parser parser = new Parser();
+            int i;
 
-    public static void loadStorage(AllRecordList recordList) throws IOException {
-        ReadTextFile newReader = new ReadTextFile("./data/BudgetList1.txt");
-        ArrayList<String> commandStorage = newReader.readTextFileToString();
-        Parser parser = new Parser();
-        int i;
-        for (i = 0; i < commandStorage.size(); i += 1) {
-            String userInput = commandStorage.get(i);
-            AddCommand command = (AddCommand) parser.parseCommand(userInput);
-            command.setRecordList(recordList);
-            command.execute(true);
+            for (i = 0; i < commandStorage.size(); i += 1) {
+
+                String userInput = commandStorage.get(i);
+                System.out.println(userInput);
+                AddCommand command = (AddCommand) parser.parseCommand(userInput);
+                command.setRecordList(recordList);
+                command.execute(true);
+            }
+
+            assert i == commandStorage.size();
+        } catch (IOException i) {
+            System.out.println("Error");
         }
 
-        assert i == commandStorage.size();
+        return recordListDirectory;
     }
 
-    public static void makeStorageDirectory() {
-        if (directoryOfBudgetExpenditure.exists() == false) {
-            directoryOfBudgetExpenditure.mkdir();
+    public void makeStorageTextFile(String recordListDirectory) {
+        LocalDate date = LocalDate.now();
+        if (recordListDirectory.equals("")) {
+            recordListDirectory = dataStorageDirectory + date.getYear() + ".txt";
+        }
+        File dataDirectory = new File("./data");
+        File budgetList = new File(recordListDirectory);
+        if (!(dataDirectory.exists())) {
+            dataDirectory.mkdir();
+            try {
+                budgetList.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (!budgetList.exists()) {
+            try {
+                budgetList.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    // Catch IOException!
-    public static void makeBudgetFile(String budgetStorageName) throws IOException {
-        String newBudgetStorageDirectory = dataStorageDirectory + budgetStorageName;
-        File newBudgetStorageFile = new File(newBudgetStorageDirectory);
 
-        if (!newBudgetStorageFile.exists()) {
-            newBudgetStorageFile.createNewFile();
-        } else {
-            // Add exception here!
-            System.out.println("File already exist!");
-        }
+    //--------------------------------------------------------------------------------------
+    public void saveNewlyAddedExpenditure(String description, double spending, LocalDate date) {
+        String expenditureToAdd = "add e/";
+        expenditureToAdd += (description + " a/" + spending + " d/" + date);
+        assert expenditureToAdd.length() >= description.length();
+        WriteToTextFile.writeToStorage(expenditureToAdd, "./data/BudgetList1.txt");
     }
 
+    public void saveNewlyAddedBudget(double budgetLimit, int month) {
+        String expenditureToAdd = "add b/";
+        expenditureToAdd += (" a/" + budgetLimit + " d/" + month);
+        WriteToTextFile.writeToStorage(expenditureToAdd, "./data/BudgetList1.txt");
+    }
 }

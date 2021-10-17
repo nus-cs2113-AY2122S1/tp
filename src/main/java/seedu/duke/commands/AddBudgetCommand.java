@@ -17,13 +17,8 @@ public class AddBudgetCommand extends AddCommand {
         this.month = month;
     }
 
-    public void execute() {
-        recordList.addBudget(amount, month);
-        TextUi.showBudgetAddedMessage(amount);
-    }
-
     public void execute(boolean isLoadingStorage) {
-        recordList.addBudget(amount, month);
+        recordList.addBudget(amount, month, isLoadingStorage);
         TextUi.showBudgetAddedMessage(amount);
     }
 }
