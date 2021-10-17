@@ -37,6 +37,7 @@ public class ExitWorkoutCommand extends Command {
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) {
         workoutMode = 0;
         LOGGER.info("Exiting to main view");
+        ui = new Ui();
         ui.showToUser(MESSAGE_SUCCESS);
     }
 }
