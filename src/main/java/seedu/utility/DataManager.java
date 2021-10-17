@@ -23,7 +23,7 @@ import java.util.Scanner;
  * Also loads all saved entries when a new instance of StonksXD starts.
  */
 public class DataManager {
-    private final String FILE_NAME = "./StonksXD_Data.csv";
+    private static final String FILE_NAME = "./StonksXD_Data.csv";
 
     public void save(Parser parser, FinancialTracker financialTracker, Ui ui) {
         try {

@@ -34,9 +34,7 @@ public class StonksXD {
                 assert command.getClass() == ExitCommand.class;
                 exitFlag = false;
             }
-
             dataManager.save(parser, finances, ui);
-
         }
         ui.printBye();
     }
