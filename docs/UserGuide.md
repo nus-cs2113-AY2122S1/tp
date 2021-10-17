@@ -15,21 +15,23 @@ conventional GUI apps.
     * [Remove a Goal: `remove`](#remove-a-goal-remove)
     * [List all Goals: `list`](#list-all-goals-list)
     * [Add a Habit: `add`](#add-a-habit-add)
-    * [Complete Habit: `done`](#complete-habit-done)
-    * [Delete Habit: `delete`](#delete-habit-delete)
-    * [View Habit: `view`](#view-habit-view)
-    * [Exit Program: `bye`](#exit-program-bye)
+    * [Complete a Habit: `done`](#complete-a-habit-done)
+    * [Delete a Habit: `delete`](#delete-a-habit-delete)
+    * [View all Habit: `view`](#view-all-habits-view)
+    * [Exit the Program: `bye`](#exit-the-program-bye)
 * [About Loading and Saving Data](#about-loading-and-saving-data)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
+* [Useful Links](#useful-links)
 
 ## Quick Start
 
-1. Ensure you have Java 11 installed in your computer. If you do not have it installed, download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
-2. Download the latest tp.jar from [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0). 
-3. Copy the file to the folder you want to use as the home folder for your Ha(ppy)Bit.
-4. Open terminal of choice inside folder containing jar file
-5. Run jar file as java -jar tp.jar.
+1. Ensure you have Java 11 installed in your computer. If you do not have it installed, 
+download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
+2. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0). 
+3. Copy the file to the folder you want to use as the **home folder** for your Ha(ppy)Bit.
+4. Open your terminal of choice inside the folder containing `tp.jar` file.
+5. Run the file using `java -jar tp.jar`.
 
 ## Terminology
 
@@ -41,14 +43,15 @@ Habit | Checkpoints / Steps taken to achieve goal | `Run 5km`
 ## Features 
 
 Below are the commands that the app supports.
-Each section includes the function of the command and the command format.
+Each section describes the function of the command and the command format.
 
 ### Ask for Help: `help`
-Displays a  list of all possible commands. If a user types in an invalid command, it will invoke this method by default.
+Displays a list of all possible commands. 
+If a user types in an invalid command, it will invoke this method by default.
 
 Format: `help`
 
-Example:
+Output:
 ```
 Hello! These are all the possible commands for this habit tracker :) 
 (flags within {} brackets are optional)
@@ -77,6 +80,7 @@ Note:
    2. `fd` &#8594; Food
    3. `ex` &#8594; Exercise
    4. `sd` &#8594; Study
+4. Otherwise, it will be default goal type `DF`.
 
 Example:
 ```
@@ -89,7 +93,7 @@ Your goal: [DF] Reduce spending has been added.
 ```
 
 ### Remove a Goal: `remove`
-Removes a goal specified by index.
+Removes a goal specified by the index.
 
 Format: `remove <GOAL_INDEX>`
 
@@ -104,11 +108,11 @@ Your goal: [DF] Exercise More has been removed.
 ```
 
 ### List all Goals: `list`
-Lists all goals currently added and set by the user
+Lists all goals currently set by the user.
 
 Format: `list`
 
-Example:
+Output:
 ```
 There are 2 goal(s) in your list:
 [EX] Exercise More
@@ -131,7 +135,7 @@ Your habit:  Run 4km has been added to your goal: [DF] Exercise More
 ```
 
 
-### Complete Habit: `done`
+### Complete a Habit: `done`
 Marks a habit under a goal as done.
 
 Format: `done <GOAL_INDEX> <HABIT_INDEX>`
@@ -147,7 +151,7 @@ Your habit of " Run 6km" under the goal "[DF] Exercise More" has been set as don
 ```
 
 
-### Delete Habit: `delete`
+### Delete a Habit: `delete`
 Deletes a habit under a goal.
 
 Format: `delete <GOAL_INDEX> <HABIT_INDEX>`
@@ -162,8 +166,8 @@ Output:
 Your habit of " Run 6km" under the goal "[DF] Exercise More" has been deleted.
 ```
 
-### View Habits: `view`
-Lists all habits' user has added under a specific goal.
+### View all Habits: `view`
+Lists all habits under a specific goal.
 
 Format: `view <GOAL_INDEX>` 
 
@@ -179,7 +183,7 @@ Here are your 2 habit(s) under the goal "[EX] Exercise More".
 [X]  Run 6km
 ```
 
-### Exit Program: `bye`
+### Exit the Program: `bye`
 Exits the program.
 
 **Make sure to use this command before exiting the program
@@ -228,3 +232,6 @@ Delete habit  | `delete <GOAL_INDEX> <HABIT_INDEX>` | `delete 2 1`
 View habits | `view <GOAL_INDEX>` | `view 1`
 Exit Program | `bye` | `bye`
 
+## Useful Links
+
+Visit our [Main Page](README.md) to find more useful links.
