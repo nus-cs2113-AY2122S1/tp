@@ -1,6 +1,24 @@
 # Developer Guide
 
 ## Acknowledgements
+### Table of Content
+- [Acknowledgements](#acknowledgements)
+- [Design](#design)
+  - [System Architecture](#sys-arch)
+  - [TextUi](#text-ui)
+  - [MainParser](#main-parser)
+  - [Command](#command)
+  - [ContactList](#contact-list)
+  - [Storage](#storage)
+- [Implementation](#implementation)
+- [Product Scope](#scope)
+  - [Target user profile](#target)
+  - [Value proposition](#value)
+- [User Stories](#stories)
+- [Non-Function Requirements](#nf-req)
+- [Glossary](#glossary)
+- [Instructions for manual testing](#manual-test)
+
 
 - Inspiration for App Idea and OOP Structure: AddressBook (Level 2) <br />
   https://github.com/se-edu/addressbook-level2
