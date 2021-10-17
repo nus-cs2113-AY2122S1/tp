@@ -118,18 +118,14 @@ public class TaskList {
      *
      * @param data a list of strings representing the serialized data
      * @return deserialized task list
-     * @throws DeserializeTaskException if the data is invalid format
      */
-    public static List<Task> deserialize(List<String> data) throws DeserializeTaskException {
+    public static List<Task> deserialize(Ui ui, List<String> data) {
         List<Task> taskList = new ArrayList<>();
-        try {
-            for (String entry : data) {
-                if (entry.charAt(0) == 'T') {
-                    taskList.add(Task.deserialize(entry));
-                }
+        for (String line : data) {
+            Task task = Task.deserialize(ui, line);
+            if (task != null) {
+                taskList.add(task);
             }
-        } catch (IndexOutOfBoundsException e) {
-            throw new DeserializeTaskException(Messages.ERROR_DESERIALIZING_DATA);
         }
         return taskList;
     }

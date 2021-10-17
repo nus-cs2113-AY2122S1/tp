@@ -58,9 +58,8 @@ public class Task {
      *
      * @param line a line of string representing the serialized data
      * @return deserialized task data
-     * @throws DeserializeTaskException if the data is in invalid format
      */
-    public static Task deserialize(String line) throws DeserializeTaskException {
+    public static Task deserialize(Ui ui, String line) {
         try {
             String[] params = line.split("\\s*[|]\\s*");
 
@@ -82,8 +81,10 @@ public class Task {
             }
 
             return task;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DeserializeTaskException("Data storage file corrupted..");
+        } catch (ArrayIndexOutOfBoundsException | DeserializeTaskException e) {
+            // Ignoring the particular line
+            ui.printMessage(Messages.ERROR_DESERIALIZING_TASK);
+            return null;
         }
     }
 
