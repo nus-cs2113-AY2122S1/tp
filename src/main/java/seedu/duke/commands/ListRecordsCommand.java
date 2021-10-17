@@ -9,12 +9,12 @@ public class ListRecordsCommand extends Command {
     public static int month;
     public static boolean isListAll = false;
 
-    public ListRecordsCommand (int listOption) {
+    public ListRecordsCommand(int listOption) {
         this.month = listOption;
         this.isListAll = false;
     }
 
-    public ListRecordsCommand () {
+    public ListRecordsCommand() {
         this.isListAll = true;
     }
 
