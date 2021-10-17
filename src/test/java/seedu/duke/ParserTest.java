@@ -194,7 +194,7 @@ public class ParserTest {
     public void convertDataToExpense_invalidExpenseDataWithInvalidAmount_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidExpenseAmountException.class,
-                    () -> testParser.convertDataToExpense("E, asd, 12a, qwe, 21-11-11"));
+            () -> testParser.convertDataToExpense("E, asd, 12a, qwe, 21-11-11"));
     }
 
     @Test
@@ -210,27 +210,27 @@ public class ParserTest {
     public void convertDataToIncome_invalidIncomeDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidIncomeDataFormatException.class, 
-                    () -> testParser.convertDataToIncome("I, , 12, q, 2121-11-11"));
+            () -> testParser.convertDataToIncome("I, , 12, q, 2121-11-11"));
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithInvalidAmount_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidIncomeAmountException.class, 
-                    () -> testParser.convertDataToIncome("I, asd, 12a, q, 2121-11-11"));
+            () -> testParser.convertDataToIncome("I, asd, 12a, q, 2121-11-11"));
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithInvalidMarker_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidIncomeDataFormatException.class, 
-                    () -> testParser.convertDataToIncome("E, asd, 12a, q, 2121-11-11"));
+            () -> testParser.convertDataToIncome("E, asd, 12a, q, 2121-11-11"));
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithInvalidSeparator_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidIncomeDataFormatException.class, 
-                    () -> testParser.convertDataToIncome("I,asd, 12, q, 2121-11-11"));
+            () -> testParser.convertDataToIncome("I,asd, 12, q, 2121-11-11"));
     }
 }

@@ -52,14 +52,14 @@ public class DataManagerTest {
 
     @Test
     public void load_invalidFileContent_detectInvalidDataEntriesAndOutputWarningMessages() {
-        Parser parser = new Parser();
         FinancialTracker financialTracker = new FinancialTracker();
-        Ui ui = new Ui();
         LocalDate date = LocalDate.parse("2121-11-11", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         financialTracker.addExpense(new Expense("qwe", 12.5, "qwer", date));
         financialTracker.addIncome(new Income("qwe", 12.5, "qwer", date));
         financialTracker.addIncome(new Income("", 12.5, "qwer", date));
         DataManager dataManager = new DataManager();
+        Ui ui = new Ui();
+        Parser parser = new Parser();
         dataManager.save(parser, financialTracker, ui);
         dataManager.load(parser, financialTracker, ui);
     }
