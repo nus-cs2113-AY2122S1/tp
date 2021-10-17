@@ -17,7 +17,7 @@ public class IngredientsListTest {
     }
 
     @Test
-    public void getInstanceTest_noInputPattern_theSameInstancesReturned() {
+    public void getInstanceTest_noInputPattern_theSameInstancesReturned() throws DukeException {
         IngredientList list1 = IngredientList.getInstance();
         IngredientList list2 = IngredientList.getInstance();
 
