@@ -42,6 +42,9 @@ public final class Messages {
     public static final String ERROR_MODULE_LOAD_FAILED =
             "Sorry, there was an issue loading NUSMods module information.";
 
+    public static final String ERROR_MODULE_NOT_FOUND =
+            "Sorry, there is no module on NUSMods matching the module code you entered.";
+
     public static final String ERROR_RETRIEVING_DATA =
             "I can't retrieve the saved data. Creating new file..";
 

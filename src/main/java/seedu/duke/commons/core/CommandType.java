@@ -10,7 +10,8 @@ public enum CommandType {
     INVALID,
     LESSON,
     LIST,
-    TASK;
+    TASK,
+    MODULE;
 
     /**
      * Determines the correct command type from the input parameter.

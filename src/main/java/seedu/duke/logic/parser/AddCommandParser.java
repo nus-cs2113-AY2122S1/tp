@@ -8,6 +8,7 @@ import seedu.duke.commons.core.CommandType;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.AddLessonCommand;
+import seedu.duke.logic.commands.module.AddModuleCommand;
 import seedu.duke.logic.commands.task.AddTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
@@ -29,6 +30,9 @@ public class AddCommandParser {
         case TASK:
             simplifiedUserResponse = removeFirstParam(userResponse, "task");
             return parseAddTaskCommand(simplifiedUserResponse);
+        case MODULE:
+            simplifiedUserResponse = removeFirstParam(userResponse, "module");
+            return parseAddModuleCommand(simplifiedUserResponse);
         case INVALID:
             // Fallthrough
         default:
@@ -102,5 +106,10 @@ public class AddCommandParser {
         default:
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
         }
+    }
+
+    public static Command parseAddModuleCommand(String userResponse) {
+        String moduleCode = userResponse.strip().toUpperCase();
+        return new AddModuleCommand(moduleCode);
     }
 }
