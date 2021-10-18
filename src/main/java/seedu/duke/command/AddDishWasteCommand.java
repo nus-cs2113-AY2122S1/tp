@@ -27,25 +27,19 @@ public class AddDishWasteCommand extends Command {
         int dishIndex = DishList.find(dish);
         System.out.println(ui.getLineDivider());
         if (dishIndex == -1) {
-            System.out.println(ui.getDishNotExistMsg());
             logger.log(Level.INFO, "Dish does not exist", dishIndex);
+            throw new FoodoramaException("The dish " + parameters.get(0) + " does not exist");
         } else {
             assert (dishIndex != -1) : "The dishIndex cannot be -1";
             try {
-                System.out.println("Enter the wastage of " + dish + " in KG:");
-                Scanner in = new Scanner(System.in);
-                String dishWeight = in.nextLine();
-                double dishWeightValue = Double.parseDouble(dishWeight);
                 Dish currentDish = DishList.dishList.get(dishIndex);
-                currentDish.addWaste(dishWeightValue);
-                logger.log(Level.INFO, "Successfully recorded Dish waste "
-                        + dish
-                        + " "
-                        + dishWeightValue);
-            } catch (NumberFormatException e) {
+                currentDish.addWaste();
+                logger.log(Level.INFO, "Successfully recorded Dish waste of "
+                        + dish);
+            } catch (FoodoramaException e) {
                 //System.out.println(ui.getInvalidParamMsg());
                 //System.out.println(ui.getLineDivider());
-                throw new FoodoramaException("Sorry, please input a valid number.");
+                throw new FoodoramaException(e.getMessage());
             }
         }
         System.out.println(ui.getLineDivider());

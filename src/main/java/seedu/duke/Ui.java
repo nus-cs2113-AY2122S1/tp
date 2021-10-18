@@ -257,7 +257,6 @@ public class Ui {
         }
         System.out.println("You can use command 'add' to add new dishes!");
     }
-}
 
     public void printMatchedDishes(ArrayList<Dish> matchedDishList) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()

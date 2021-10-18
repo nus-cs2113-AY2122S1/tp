@@ -1,22 +1,31 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.FoodoramaException;
+
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Scanner;
 
 public class IngredientList {
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
     private static Ui ui = new Ui();
 
-    public static void add(String ingredientName, double ingredientWeight) {
-        if (IngredientList.find(ingredientName) == -1) {
-            Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeight);
-            ingredientList.add(ingredientToAdd);
-            System.out.println(ui.getLineDivider() + System.lineSeparator()
-                    + "Ingredient added to list: " + ingredientToAdd.getIngredientName()
-                    + " (Weight: " + ingredientWeight + " kg)");
-        } else {
-            System.out.println(ui.getIngrExistsMsg());
+    public static void add(String ingredientName) throws FoodoramaException {
+        System.out.println(ui.getLineDivider());
+        System.out.println("Enter the weight of " + ingredientName + " in KG:");
+        Scanner in = new Scanner(System.in);
+        String ingredientWeight = in.nextLine();
+        double ingredientWeightValue;
+        try {
+            ingredientWeightValue = Double.parseDouble(ingredientWeight);
+        } catch (NumberFormatException e) {
+            throw new FoodoramaException("Sorry, please input a valid number.");
         }
+        Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
+        ingredientList.add(ingredientToAdd);
+        System.out.println(ui.getLineDivider() + System.lineSeparator()
+                + "Ingredient added to list: " + ingredientToAdd.getIngredientName()
+                + " (Weight: " + ingredientWeight + " kg)");
+        System.out.println(ui.getLineDivider());
     }
 
     //Returns -1 if not present, index if present
