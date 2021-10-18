@@ -259,7 +259,7 @@ public class Ui {
     }
 
     public void printAddedIngredient(Ingredient ingredientToAdd, double ingredientWeight) {
-        System.out.println(LINE_DIVIDER+ System.lineSeparator()
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Ingredient added to list: " + ingredientToAdd.getIngredientName()
                 + " (Weight: " + ingredientWeight + " kg)" + System.lineSeparator()
                 + LINE_DIVIDER);
@@ -284,14 +284,14 @@ public class Ui {
     }
 
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
-        assert ingredientList !=null : "ingredientList cannot be null";
+        assert ingredientList != null : "ingredientList cannot be null";
         double max = IngredientList.getGreatestWaste();
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "Here are the dishes you have: ");
         for (int i = 0; i < ingredientList.size(); i++) {
             System.out.println((i + 1) + ". " + ingredientList.get(i).toGraph(max));
         }
-        System.out.println("You can use command 'add' to add new dishes!"+ System.lineSeparator()
+        System.out.println("You can use command 'add' to add new dishes!" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
@@ -331,7 +331,7 @@ public class Ui {
 
     public void printAddedConstituentOf(String ingredientName, String dishName) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + "Successfully added " + ingredientName + " as ingredient of " + dishName + "!" + System.lineSeparator()
+                + "Successfully added " + ingredientName + " as ingredient of " + dishName + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 

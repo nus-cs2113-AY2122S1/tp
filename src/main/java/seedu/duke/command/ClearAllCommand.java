@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class ClearAllCommand extends Command {
     private static final Logger logger = Logger.getLogger("ClearAllCommand.execute()");
+    private Ui ui = new Ui();
 
     ClearAllCommand() {
         LoggerManager.setupLogger(logger);
@@ -19,7 +20,7 @@ public class ClearAllCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) {
         logger.log(Level.INFO, "Start of process");
-        Ui ui = new Ui();
+
 
         DishList.clearList();
         IngredientList.clearList();
