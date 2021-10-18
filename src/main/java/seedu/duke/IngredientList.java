@@ -61,5 +61,6 @@ public class IngredientList {
 
     public static void clearList() {
         ingredientList.clear();
+        assert ingredientList.size() == 0 : "ingredientList should be of size 0";
     }
 }
