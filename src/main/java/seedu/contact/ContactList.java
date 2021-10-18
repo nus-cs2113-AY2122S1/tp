@@ -20,6 +20,7 @@ public class ContactList {
 
     public void addContact(Contact contact) {
         contacts.add(contact);
+        contacts.sort(new ContactComparator());
     }
 
     public void editContact(String[] contactDetails, int contactIndex) throws InvalidFlagException {
@@ -28,6 +29,7 @@ public class ContactList {
                 switch (i) {
                 case NAME_INDEX:
                     contacts.get(contactIndex).setName(contactDetails[i]);
+                    contacts.sort(new ContactComparator());
                     break;
                 case GITHUB_INDEX:
                     contacts.get(contactIndex).setGithub(contactDetails[i]);
@@ -62,6 +64,7 @@ public class ContactList {
     }
 
     public Contact getContactAtIndex(int index) {
+        contacts.sort(new ContactComparator());
         return contacts.get(index);
     }
 
