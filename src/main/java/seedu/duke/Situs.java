@@ -8,10 +8,10 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-public class Duke {
+public class Situs {
 
     private static UI ui;
-    private static final Logger LOGGER = Logger.getLogger(Duke.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Situs.class.getName());
 
     /**
      * Starts up the system by creating the UI.

@@ -49,6 +49,7 @@ public class Ingredient {
     public void setExpiry(String expiry) {
         this.expiry = expiry;
     }
+
     @Override
     public String toString() {
         return getName() + " | Amount Left: " + getAmount() + " " + getUnits() + " | Expiry Date: " + getExpiry();
