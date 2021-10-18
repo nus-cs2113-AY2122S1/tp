@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.Ui;
+import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Item;
 
 import java.util.ArrayList;
@@ -10,51 +11,80 @@ import static seedu.duke.Duke.taskList;
 
 public class DeleteCommand extends Command {
 
-    protected static final String TASK_OR_EVENT_FLAG = "-";
+    protected static final String EVENT_FLAG = "-e";
+    protected static final String TASK_FLAG = "-t";
 
     // input from user
-    public String taskToDelete;
-    public static ArrayList<Item> combinedItemList = new ArrayList<>();
+    private String itemFlag;
+    private int indexToDelete;
 
-    // v1.0: deleteCommand deletes purely based on index, i.e. delete [TASK_INDEX]
-    // converted command array to string for future uses, where input may have extra spaces
-    // such as 'delete foo bar'
-    public DeleteCommand(String[] itemDescription) {
-        taskToDelete = Arrays.toString(itemDescription);
+
+    // v2.0: deleteCommand deletes purely based on index, i.e. delete -t/-e [TASK_INDEX]
+    public DeleteCommand(String[] command) {
+        try {
+            if (command.length == 1) {
+                throw new DukeException("Please specify what you would like to delete");
+            }
+            prepareInputs(command);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public CommandResult execute() {
 
-        fillCombinedItemList();
-
-        String removedTaskTitle;
-        removedTaskTitle = deleteTask(taskToDelete);
-        return new CommandResult(Ui.getTaskDeletionMessage(removedTaskTitle));
+        String deletedItem;
+        if (isEventFlag(itemFlag)) {
+            deletedItem = deleteEvent(indexToDelete);
+        } else if (isTaskFlag(itemFlag)) {
+            deletedItem = deleteTask(indexToDelete);
+        } else {
+            return new CommandResult("Insert something here");
+        }
+        return new CommandResult(deletedItem);
     }
 
-    public static void fillCombinedItemList() {
-        combinedItemList.clear();
-        combinedItemList.addAll(eventCatalog);
-        combinedItemList.addAll(taskList);
-    }
-
-    // did not throw a custom exception if taskIndex > itemList.size(), already caught by ArrayIndexOutOfBoundsException
-    public static String deleteTask(String input) {
+    public void prepareInputs(String[] command) throws DukeException {
         try {
-            int taskIndex = getTaskIndex(input);
-            String taskTitle = combinedItemList.get(taskIndex).getTitle();
-            combinedItemList.remove(taskIndex);
-            return taskTitle;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return "That task does not exist";
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            return "Please tell me which task number to delete";
+            if (command[1].isEmpty()) {
+                throw new DukeException("Please enter a valid task or event flag!");
+            }
+            if (command[2].isEmpty()) {
+                throw new DukeException("Please enter the index of the item you wish to delete!");
+            }
+            itemFlag = command[1].trim();
+            indexToDelete = getIndex(command[2]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please enter a number for the index!");
         }
     }
 
-    public static int getTaskIndex(String command) {
-        // command will contain either a "-t" or "-e"
-        int taskIndexPosition = command.trim().indexOf(TASK_OR_EVENT_FLAG) + 2;
-        return Integer.parseInt(command.trim().substring(taskIndexPosition)) - 1;
+    public static String deleteEvent(int index) {
+        String eventTitle = eventCatalog.get(index).getTitle();
+        eventCatalog.remove(index);
+        return eventTitle;
+    }
+
+    public static String deleteTask(int index) {
+        String taskTitle = eventCatalog.get(index).getTitle();
+        eventCatalog.remove(index);
+        return taskTitle;
+    }
+
+    public static int getIndex(String indexAsString) {
+        return Integer.parseInt(indexAsString.trim());
+    }
+
+    public static boolean isEventFlag(String flag) {
+        return flag.trim().equalsIgnoreCase(EVENT_FLAG);
+    }
+
+    public static boolean isTaskFlag(String flag) {
+        return flag.trim().equalsIgnoreCase(TASK_FLAG);
+    }
+
+    public static boolean isDeleteAll(String command) {
+        return command.trim().equalsIgnoreCase("all");
     }
 }
+
