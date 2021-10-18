@@ -33,6 +33,9 @@ public class InputParser {
         case ADD_INGR:
         case ADD_DISH:
         case HELP:
+        case CLEAR_DISH:
+        case CLEAR_INGR:
+        case CLEAR_ALL:
         case LIST:
             parameters.add(parameterString);
             break;

@@ -116,6 +116,18 @@ public class Ui {
             + "Sorry, please input a valid number." + System.lineSeparator()
             + LINE_DIVIDER;
 
+    private static final String DISH_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()
+            + "Dish list has been cleared." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    private static final String INGR_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()
+            + "Ingredient list has been cleared." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    private static final String ALL_CLEARED = LINE_DIVIDER + System.lineSeparator()
+            + "Both Dish and Ingredient lists have been cleared." + System.lineSeparator()
+            + LINE_DIVIDER;
+
     protected static final String HELP_ME = LINE_DIVIDER + System.lineSeparator()
             + "Here are the commands you can use: \n"
             + "1. Adding a Dish : 'add dish [dishName]' \n"
@@ -188,6 +200,18 @@ public class Ui {
 
     public String getHelpMsg() {
         return HELP_ME;
+    }
+
+    public String getDishListCleared() {
+        return DISH_LIST_CLEARED;
+    }
+
+    public String getIngrListCleared() {
+        return INGR_LIST_CLEARED;
+    }
+
+    public String getAllCleared() {
+        return ALL_CLEARED;
     }
 
     public void printAddedDish(String dishName) {

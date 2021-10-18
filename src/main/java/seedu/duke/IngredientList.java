@@ -74,4 +74,9 @@ public class IngredientList {
             assert ingredientList.size() == (listSize - 1) : "ingredientList should be of size N-1";
         }
     }
+
+    public static void clearList() {
+        ingredientList.clear();
+        assert ingredientList.size() == 0 : "ingredientList should be of size 0";
+    }
 }

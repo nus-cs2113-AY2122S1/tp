@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
 Oct 18, 2021 10:07:06 PM seedu.duke.Duke main
@@ -96,3 +97,4 @@ Oct 18, 2021 10:07:13 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
 Oct 18, 2021 10:07:13 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
+

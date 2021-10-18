@@ -60,4 +60,9 @@ public class DishList {
             assert dishList.size() == (listSize - 1) : "dishList should be of size N-1";
         }
     }
+
+    public static void clearList() {
+        dishList.clear();
+        assert dishList.size() == 0 : "dishList should be of size 0";
+    }
 }
