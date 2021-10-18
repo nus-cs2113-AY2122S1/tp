@@ -4,6 +4,7 @@ import seedu.duke.enumerations.ListType;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
@@ -27,7 +28,7 @@ public class ListCommand extends Command {
                 System.out.println("Here are the modules in your list:");
                 for (int i = 0; i < moduleSelectedList.getSize(); i++) {
                     assert moduleSelectedList.get(i).getModuleCode() != null;
-                    System.out.println("[" + (i + 1) + "] " + moduleSelectedList.get(i).getModuleCode());
+                    Ui.printModule(moduleSelectedList.get(i), i + 1);
                 }
             }
             break;
@@ -40,7 +41,7 @@ public class ListCommand extends Command {
                 System.out.println("Here are the universities in your list:");
                 for (int i = 0; i < universitySelectedList.getSize(); i++) {
                     assert universitySelectedList.get(i).getName() != null;
-                    System.out.println("[" + (i + 1) + "] " + universitySelectedList.get(i).getName());
+                    Ui.printUniversity(universitySelectedList.get(i), i + 1);
                 }
             }
             break;
@@ -50,7 +51,7 @@ public class ListCommand extends Command {
             assert allUniversityList.size() > 0;
             for (int i = 0; i < allUniversityList.size(); i++) {
                 assert allUniversityList.get(i).getName() != null;
-                System.out.println("[" + (i + 1) + "] " + allUniversityList.get(i).getName());
+                Ui.printUniversity(allUniversityList.get(i), i + 1);
             }
             break;
         case ALLMODS:
@@ -59,7 +60,7 @@ public class ListCommand extends Command {
             assert allModuleList.size() > 0;
             for (int i = 0; i < allModuleList.size(); i++) {
                 assert allModuleList.get(i).getModuleCode() != null;
-                System.out.println("[" + (i + 1) + "] " + allModuleList.get(i).getModuleCode());
+                Ui.printModule(allModuleList.get(i), i + 1);
             }
             break;
         default:
