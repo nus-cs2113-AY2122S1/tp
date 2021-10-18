@@ -47,6 +47,7 @@ public class DeleteDispenseCommand extends Command {
         int dispenseId = Integer.parseInt(dispenseIdToDelete);
 
         assert dispenseId <= Dispense.getDispenseCount() : "Dispense Id should not exceed max dispense count";
+        
         int stockIdToDispense;
         int dispenseQuantity;
         for (Medicine medicine : medicines) {

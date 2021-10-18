@@ -96,7 +96,6 @@ public class AddStockCommand extends Command {
             String descriptionToAdd = parameters.get(CommandParameters.DESCRIPTION);
             String maxQuantityToAdd = parameters.get(CommandParameters.MAX_QUANTITY);
 
-
             Date formatExpiry = null;
             try {
                 formatExpiry = DateParser.stringToDate(expiryToAdd);
@@ -112,6 +111,7 @@ public class AddStockCommand extends Command {
                 ui.print("Unable to add. Quantity is more than Maximum Quantity.");
                 return;
             }
+
             addMedicine(ui, medicines, nameToAdd, descriptionToAdd, price, quantity, formatExpiry, maxQuantity);
             storage.saveData(medicines);
         }
