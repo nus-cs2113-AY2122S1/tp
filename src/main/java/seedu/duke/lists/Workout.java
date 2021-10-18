@@ -31,6 +31,7 @@ public class Workout {
      */
     public Workout(String workoutName, LocalDate deadlineDate) {
         assert !workoutName.isEmpty();
+        assert deadlineDate != null;
         exercises = new ArrayList<>();
         this.workoutName = workoutName;
         this.deadlineDate = deadlineDate;
@@ -44,6 +45,7 @@ public class Workout {
      */
     @Override
     public String toString() {
+        assert !deadline.isEmpty();
         return getWorkoutName() + " finish by: " + deadline;
     }
 
