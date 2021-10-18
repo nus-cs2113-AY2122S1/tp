@@ -5,12 +5,14 @@ import seedu.duke.exception.GetJackDException;
 import seedu.duke.exercises.Exercise;
 import seedu.duke.storage.models.WorkoutListModel;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class WorkoutTest {
 
-    private Workout testExercises = new Workout("Legs");
+    private Workout testExercises = new Workout("Legs", LocalDate.parse("2021-10-10"));
     private WorkoutListModel workoutListModel = new WorkoutListModel();
 
     @Test
