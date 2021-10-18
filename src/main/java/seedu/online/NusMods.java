@@ -109,6 +109,16 @@ public class NusMods {
     }
 
     /**
+     * Fetches a mod from NUSMods and prints its full information.
+     * @param moduleCode mod to fetch.
+     * @throws IOException if there is no connection.
+     */
+    public static void showModOnline(String moduleCode) throws IOException {
+        Module module = fetchModOnline(moduleCode);
+        TextUi.printModFullDescription(module);
+    }
+
+    /**
      * Fetches all mods from NUSMods and saves all of them into the local storage.
      * @throws IOException if there is no connection.
      */

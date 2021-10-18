@@ -131,7 +131,18 @@ public class ModStorage {
      * @return module that was loaded.
      * @throws IOException if there is an IO operation error.
      */
-    public static Module loadModInfo(String moduleCode) {
+    public static Module loadModInfo(String moduleCode) throws IOException {
+        File file = new File("./data/Modules/" + moduleCode + ".json");
+        InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
+        JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+        return new Gson().fromJson(reader, Module.class);
+    }
+
+    /**
+     * Shows mod information, loaded from local data.
+     * @param moduleCode module to display information from.
+     */
+    public static void showModOffline(String moduleCode) {
         try {
             File file = new File("./data/Modules/" + moduleCode + ".json");
             InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));

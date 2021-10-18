@@ -70,7 +70,7 @@ public class CommandParser {
      * @param text User input.
      * @return SearchCommand with searchTerm and all flags.
      */
-    public Command parseSearchCommand(String text) {
+    private Command parseSearchCommand(String text) {
         if (text.toLowerCase().contains(FLAG)) {
             return parseSearchCommandWithFlag(text);
         }
@@ -97,7 +97,6 @@ public class CommandParser {
         String moduleToBeChecked = text.substring(CHECK_LENGTH).trim();
         return new CheckCommand(moduleToBeChecked, Duke.getProfileInUse());
     }
-
 
     /**
      * Parses user input into a ShowCommand.

@@ -5,6 +5,7 @@ import java.util.Locale;
 import seedu.module.Lesson;
 import seedu.module.LessonType;
 import seedu.module.Module;
+import seedu.ui.TimetableUI.LineType;
 
 /**
  * Timetable Lesson that can be added to a timetable if the user is taking this
@@ -88,5 +89,23 @@ public class TimetableLesson extends TimetableItem {
         }
         return this.getTitle().equals(lesson.getTitle()) && this.getClassNo().equals(this.getClassNo())
                 && this.getLessonType().equals(lesson.getLessonType());
+    }
+
+    public String printTypeInfo(LineType type) {
+        String str = "|   ";
+        switch (type) {
+        case CODE:
+            str += getTitle();
+            break;
+        case LESSONTYPE:
+            str += String.format("%s[%s]", getLessonType().toString(), getClassNo());
+            break;
+        case VENUE:
+            str += getVenue();
+            break;
+        default:
+            str += "";
+        }
+        return str;
     }
 }

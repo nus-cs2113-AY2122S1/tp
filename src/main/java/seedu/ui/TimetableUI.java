@@ -5,6 +5,7 @@ import seedu.timetable.TimetableItem;
 import seedu.timetable.TimetableLesson;
 
 import java.util.List;
+import java.util.Objects;
 
 public class TimetableUI {
 
@@ -74,16 +75,26 @@ public class TimetableUI {
 
     private static void printLine(String day, TimetableItem[] schedule, int start, int end, LineType type) {
         String infoLine = addHeader(day, type);
-        TimetableLesson prevTimetableLesson = null;
-        for (int i = start; i <= end; i++) {
-            if (schedule[i] instanceof TimetableLesson) {
-                TimetableLesson modTimetableLesson = (TimetableLesson) schedule[i];
-                infoLine += addInfoToString(modTimetableLesson, prevTimetableLesson, type);
-                prevTimetableLesson = modTimetableLesson;
-            } else if (schedule[i] == null) {
-                infoLine += addInfoToString(null, prevTimetableLesson, type);
-                prevTimetableLesson = null;
+        TimetableItem prevItem = null;
+        TimetableItem curItem = null;
+        int i = start;
+        while (i < end) {
+            curItem = schedule[i];
+            if (curItem != null) {
+                infoLine += String.format(FIXED_LENGTH_FORMAT, curItem.printTypeInfo(type));
+                i += curItem.duration();
+                for (int j = 0; j < curItem.duration() - 1; j++) {
+                    infoLine += String.format(FIXED_LENGTH_FORMAT, "");
+                }
+            } else {
+                if (prevItem != null) {
+                    infoLine += String.format(FIXED_LENGTH_FORMAT, "|   ");
+                } else {
+                    infoLine += String.format(FIXED_LENGTH_FORMAT, "");
+                }
+                i++;
             }
+            prevItem = curItem;
         }
         System.out.println(infoLine);
     }
@@ -94,52 +105,6 @@ public class TimetableUI {
         } else {
             return "\t\t\t\t";
         }
-    }
-
-    private static String addInfoToString(TimetableLesson lesson, TimetableLesson prevLesson, LineType type) {
-        String str = "";
-        if ((lesson == null && prevLesson != null) || (lesson != null && !lesson.equals(prevLesson))) {
-            str = "|   ";
-            switch (type) {
-            case CODE:
-                str += addModuleCode(lesson);
-                break;
-            case LESSONTYPE:
-                str += addLessonType(lesson);
-                break;
-            case VENUE:
-                str += addVenue(lesson);
-                break;
-            default:
-                str += "";
-            }
-        }
-        return String.format(FIXED_LENGTH_FORMAT, str);
-    }
-
-    private static String addModuleCode(TimetableLesson timetableLesson) {
-        String str = "";
-        if (timetableLesson != null) {
-            str = timetableLesson.getTitle();
-        }
-        return str;
-    }
-
-    private static String addLessonType(TimetableLesson timetableLesson) {
-        String str = "";
-        if (timetableLesson != null) {
-            str += timetableLesson.getLessonType().toString();
-            str += "[" + timetableLesson.getClassNo() + "]";
-        }
-        return str;
-    }
-
-    private static String addVenue(TimetableLesson timetableLesson) {
-        String str = "";
-        if (timetableLesson != null) {
-            str = timetableLesson.getVenue();
-        }
-        return str;
     }
 
     /*------------- Timetable Storage ----------- */

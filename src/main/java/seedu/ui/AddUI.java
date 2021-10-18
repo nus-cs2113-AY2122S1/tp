@@ -98,8 +98,9 @@ public class AddUI {
         }
     }
 
-    public void addLessonToTimetable(ArrayList<Lesson> lessons, Timetable timetable, Module module,
-            String classNumber) {
+    public void addLessonToTimetable(ArrayList<Lesson> lessons,
+            Timetable timetable, Module module, String classNumber) {
+        assert (lessons.size() > 0);
         for (Lesson lesson : lessons) {
             if (lesson.getClassNo().equals(classNumber)) {
                 timetable.addLesson(module, timetable.getSemester(), lesson);
