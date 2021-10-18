@@ -47,7 +47,7 @@ public class DeleteDispenseCommand extends Command {
         int dispenseId = Integer.parseInt(dispenseIdToDelete);
 
         assert dispenseId <= Dispense.getDispenseCount() : "Dispense Id should not exceed max dispense count";
-        
+
         int stockIdToDispense;
         int dispenseQuantity;
         for (Medicine medicine : medicines) {
@@ -82,11 +82,11 @@ public class DeleteDispenseCommand extends Command {
      */
     private boolean setStockQuantity(Ui ui, ArrayList<Medicine> medicines, int stockIdToDispense,
                                      int dispenseQuantity) {
-        for (Medicine med : medicines) {
-            if (!(med instanceof Stock)) {
+        for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Stock)) {
                 continue;
             }
-            Stock stock = (Stock) med;
+            Stock stock = (Stock) medicine;
             if (stock.getStockID() == stockIdToDispense) {
                 int quantityToRestore = stock.getQuantity() + dispenseQuantity;
                 if (quantityToRestore > stock.getMaxQuantity()) {
