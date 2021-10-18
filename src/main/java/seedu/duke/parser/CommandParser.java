@@ -2,7 +2,7 @@ package seedu.duke.parser;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandEnum;
-import seedu.duke.command.ExitCommand;
+import seedu.duke.command.ByeCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.ListCommand;
@@ -43,7 +43,7 @@ public class CommandParser {
             }
         }
 
-        flagsToArguments.put("mainArgument", mainArgument.trim());
+        flagsToArguments.put(Command.MAIN_ARGUMENT, mainArgument.trim());
         return flagsToArguments;
     }
 
@@ -60,7 +60,7 @@ public class CommandParser {
 
         switch (commandEnum) {
         case BYE:
-            return new ExitCommand();
+            return new ByeCommand();
         case HELP:
             return new HelpCommand();
         case TODO:
