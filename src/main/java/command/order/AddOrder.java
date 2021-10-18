@@ -32,10 +32,6 @@ public class AddOrder extends Command {
                         Storage storage) {
         logger.log(Level.INFO, "Start addition of orders");
 
-        String nameToAdd = parameters.get(CommandParameters.NAME);
-        String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
-        String dateToAdd = parameters.get(CommandParameters.DATE);
-
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
         String[] optionalParameter = {};
 
@@ -51,6 +47,10 @@ public class AddOrder extends Command {
             return;
         }
 
+        String nameToAdd = parameters.get(CommandParameters.NAME);
+        String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
+        String dateToAdd = parameters.get(CommandParameters.DATE);
+
         Date orderDate = null;
         try {
             orderDate = DateParser.stringToDate(dateToAdd);
@@ -63,7 +63,7 @@ public class AddOrder extends Command {
     }
 
     /**
-     *
+     * Add order based on user input.
      * @param ui        Reference to the UI object passed by Main to print messages.
      * @param medicines Arraylist of all medicines.
      * @param name      Medication name to order.
