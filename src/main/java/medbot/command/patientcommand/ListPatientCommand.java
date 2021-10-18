@@ -1,6 +1,5 @@
-package medbot.command.patientCommand;
+package medbot.command.patientcommand;
 
-import medbot.command.Command;
 import medbot.Ui;
 import medbot.command.ListCommand;
 import medbot.list.PersonList;

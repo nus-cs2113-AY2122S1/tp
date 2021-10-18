@@ -1,4 +1,4 @@
-package medbot.command.staffCommand;
+package medbot.command.staffcommand;
 
 import medbot.command.EditCommand;
 import medbot.person.Staff;

@@ -1,4 +1,4 @@
-package medbot.command.patientCommand;
+package medbot.command.patientcommand;
 
 import medbot.command.DeleteCommand;
 import medbot.exceptions.MedBotException;
