@@ -61,6 +61,11 @@ public class CommandParser {
         return new ClearCommand(timetable);
     }
 
+    /**
+     * Parses user input into a SearchCommand.
+     * @param text User input.
+     * @return SearchCommand with searchTerm and all flags.
+     */
     public Command parseSearchCommand(String text) {
         if (text.toLowerCase().contains(FLAG)) {
             return parseSearchCommandWithFlag(text);
@@ -70,6 +75,11 @@ public class CommandParser {
         return new SearchCommand(searchTerm, new SearchFlags());
     }
 
+    /**
+     * Parses user input with detected flags into a SearchCommand.
+     * @param text User input.
+     * @return SearchCommand with searchTerm and all flags.
+     */
     private Command parseSearchCommandWithFlag(String text) {
         assert text.contains(FLAG) : "String should contain flag";
         int firstFlagPos = text.indexOf(FLAG);
@@ -79,6 +89,11 @@ public class CommandParser {
         return new SearchCommand(searchTerm, searchFlags);
     }
 
+    /**
+     * Parses user input into a ShowCommand.
+     * @param text User input.
+     * @return ShowCommand with searchTerm.
+     */
     public Command parseShowCommand(String text) {
         String str = text.substring(SHOW_LENGTH).trim();
         return new ShowCommand(str);
