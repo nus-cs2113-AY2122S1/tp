@@ -2,18 +2,18 @@ package seedu.duke;
 
 import seedu.duke.command.CommandNames;
 import seedu.duke.exceptions.CommandNotAvailableException;
+import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class InputParser {
-    public CommandNames getCommandName(String input) throws CommandNotAvailableException {
+    public CommandNames getCommandName(String input) throws FoodoramaException {
         for (CommandNames command : CommandNames.values()) {
             if (input.startsWith(command.getName())) {
                 return command;
             }
         }
-        throw new CommandNotAvailableException();
+        throw new FoodoramaException("Command not found");
     }
 
     public ArrayList<String> getParameters(String input, CommandNames inputCommand) {
