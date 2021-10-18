@@ -1,10 +1,9 @@
 package terminus.parser;
 
-import terminus.command.NotesCommand;
-import terminus.command.ScheduleCommand;
-import terminus.common.CommonFormat;
+import terminus.command.GoCommand;
+import terminus.command.module.ModuleCommand;
 import terminus.common.Messages;
-import terminus.module.NusModule;
+import terminus.module.ModuleManager;
 
 public class MainCommandParser extends CommandParser {
 
@@ -16,13 +15,13 @@ public class MainCommandParser extends CommandParser {
 
     public static MainCommandParser getInstance() {
         MainCommandParser parser = PARSER;
-        parser.addCommand(CommonFormat.COMMAND_NOTE, new NotesCommand());
-        parser.addCommand(CommonFormat.COMMAND_SCHEDULE, new ScheduleCommand());
+        parser.addCommand("module", new ModuleCommand());
+        parser.addCommand("go", new GoCommand());
         return parser;
     }
 
     @Override
-    public String getWorkspaceBanner(NusModule module) {
+    public String getWorkspaceBanner(ModuleManager moduleManager) {
         return Messages.MAIN_BANNER;
     }
 }

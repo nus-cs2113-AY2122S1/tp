@@ -13,21 +13,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.content.Link;
 import terminus.content.Note;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
 public class ModuleStorageTest {
-    
+
     private static final Path RESOURCE_FOLDER = Path.of("src", "test", "resources");
     private static final Path SAVE_FILE = RESOURCE_FOLDER.resolve("saveFile.json");
     private static final Path MALFORMED_FILE = RESOURCE_FOLDER.resolve("malformedFile.json");
     private static final Path VALID_FILE = RESOURCE_FOLDER.resolve("validFile.json");
-    private NusModule nusModule;
+    private ModuleManager moduleManager;
+
+    private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
-        nusModule = new NusModule();
-        nusModule.getContentManager(Note.class).add(new Note("test", "test"));
-        nusModule.getContentManager(Link.class).add(new Link("test", "tuesday",
+        moduleManager = new ModuleManager();
+        moduleManager.setModule(tempModule);
+        moduleManager.getModule(tempModule).getContentManager(Note.class).add(new Note("test", "test"));
+        moduleManager.getModule(tempModule).getContentManager(Link.class).add(new Link("test", "tuesday",
                 LocalTime.of(11, 11), "https://zoom.us/"));
     }
 
@@ -40,11 +44,11 @@ public class ModuleStorageTest {
     @Test
     void loadFile_success() throws IOException {
         ModuleStorage moduleStorage = new ModuleStorage(VALID_FILE);
-        NusModule module = moduleStorage.loadFile();
-        assertEquals(module.getContentManager(Note.class).listAllContents(),
-                nusModule.getContentManager(Note.class).listAllContents());
-        assertEquals(module.getContentManager(Link.class).listAllContents(),
-                nusModule.getContentManager(Link.class).listAllContents());
+        ModuleManager module = moduleStorage.loadFile();
+        assertEquals(module.getModule(tempModule).getContentManager(Note.class).listAllContents(),
+                moduleManager.getModule(tempModule).getContentManager(Note.class).listAllContents());
+        assertEquals(module.getModule(tempModule).getContentManager(Link.class).listAllContents(),
+                moduleManager.getModule(tempModule).getContentManager(Link.class).listAllContents());
     }
 
     @Test
@@ -52,11 +56,11 @@ public class ModuleStorageTest {
         ModuleStorage saveModuleStorage = new ModuleStorage(SAVE_FILE);
         assertThrows(NullPointerException.class, () -> saveModuleStorage.saveFile(null));
     }
-    
+
     @Test
     void saveFile_success() throws IOException {
         ModuleStorage saveModuleStorage = new ModuleStorage(SAVE_FILE);
-        saveModuleStorage.saveFile(nusModule);
+        saveModuleStorage.saveFile(moduleManager);
         assertTextFilesEqual(SAVE_FILE, VALID_FILE);
     }
 

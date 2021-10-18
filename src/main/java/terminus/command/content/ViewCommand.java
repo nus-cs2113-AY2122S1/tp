@@ -1,16 +1,20 @@
-package terminus.command;
+package terminus.command.content;
 
+import terminus.command.Command;
+import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
+import terminus.common.CommonUtils;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.Content;
 import terminus.content.ContentManager;
 import terminus.exception.InvalidArgumentException;
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
 /**
- * ViewCommand generic class which will manage the viewing of Content information specified by user command.
+ * ViewModuleCommand generic class which will manage the viewing of Content information specified by user command.
  *
  * @param <T> Content object type.
  */
@@ -26,7 +30,7 @@ public class ViewCommand<T extends Content> extends Command {
     private boolean displayAll;
 
     /**
-     * Creates a ViewCommand object with referenced to the provided class type.
+     * Creates a ViewModuleCommand object with referenced to the provided class type.
      *
      * @param type Content object type.
      */
@@ -46,16 +50,16 @@ public class ViewCommand<T extends Content> extends Command {
     }
 
     /**
-     * Parses the arguments to the ViewCommand object.
-     * The arguments are attributes to identify a Content object in an ArrayList. The arguments can be empty which
-     * refers to viewing a list all Content object in an ArrayList instead.
+     * Parses the arguments to the ViewModuleCommand object. The arguments are attributes to identify a Content object
+     * in an ArrayList. The arguments can be empty which refers to viewing a list all Content object in an ArrayList
+     * instead.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
      * @throws InvalidArgumentException when a non-empty argument provided is non-numeric or less than 1.
      */
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
-        if (arguments == null || arguments.isBlank()) {
+        if (CommonUtils.isStringNullOrEmpty(arguments)) {
             displayAll = true;
             return;
         }
@@ -74,17 +78,17 @@ public class ViewCommand<T extends Content> extends Command {
     }
 
     /**
-     * Executes the view command.
-     * Prints the relevant response to the Ui.
+     * Executes the view command. Prints the relevant response to the Ui.
      *
-     * @param ui The Ui object to send messages to the users.
-     * @param module The NusModule contain the ContentManager of all notes and schedules.
+     * @param ui            The Ui object to send messages to the users.
+     * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.
      */
     @Override
-    public CommandResult execute(Ui ui, NusModule module) throws InvalidArgumentException {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException {
         StringBuilder result = new StringBuilder();
+        NusModule module = moduleManager.getModule(getModuleName());
         ContentManager<T> contentManager = module.getContentManager(type);
         if (displayAll) {
             String fullList = contentManager.listAllContents();

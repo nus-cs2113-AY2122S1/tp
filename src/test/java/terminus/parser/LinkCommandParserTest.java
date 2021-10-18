@@ -6,24 +6,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.command.DeleteCommand;
+import terminus.command.content.DeleteCommand;
 import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
-import terminus.command.ViewCommand;
-import terminus.command.zoomlink.AddLinkCommand;
+import terminus.command.content.ViewCommand;
+import terminus.command.content.link.AddLinkCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
 
 public class LinkCommandParserTest {
 
     private LinkCommandParser linkCommandParser;
-    private NusModule nusModule;
+
+    private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
         this.linkCommandParser = LinkCommandParser.getInstance();
-        this.nusModule = new NusModule();
+        this.linkCommandParser.setModuleName(tempModule);
     }
 
     @Test
@@ -116,7 +116,7 @@ public class LinkCommandParserTest {
 
     @Test
     void getWorkspace_isSchedule() {
-        assertEquals("schedule", linkCommandParser.getWorkspace());
+        assertEquals(tempModule + " > schedule", linkCommandParser.getWorkspace());
     }
 
     @Test
