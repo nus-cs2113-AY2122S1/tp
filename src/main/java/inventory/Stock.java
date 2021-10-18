@@ -33,6 +33,7 @@ public class Stock extends Medicine {
     protected Date expiry;
     protected String description;
     protected int maxQuantity;
+    protected boolean isDeleted = false;
 
     public Stock(String name, double price, int quantity, Date expiry, String description, int maxQuantity) {
         super(name, quantity);
@@ -90,6 +91,14 @@ public class Stock extends Medicine {
 
     public void setMaxQuantity(int maxQuantity) {
         this.maxQuantity = maxQuantity;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     @Override

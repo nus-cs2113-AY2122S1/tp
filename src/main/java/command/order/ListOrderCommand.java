@@ -7,7 +7,6 @@ import inventory.Medicine;
 import inventory.Order;
 import parser.DateParser;
 import parser.OrderValidator;
-import storage.Storage;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -25,10 +24,16 @@ import java.util.stream.Collectors;
 public class ListOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("ListOrder");
 
+    public ListOrderCommand(LinkedHashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                        Storage storage) {
+    public void execute() {
         logger.log(Level.INFO, "Start listing of order");
+
+        Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,

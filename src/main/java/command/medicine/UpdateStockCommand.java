@@ -25,10 +25,17 @@ import java.util.logging.Logger;
 public class UpdateStockCommand extends Command {
     private static Logger logger = Logger.getLogger("UpdateStock");
 
+    public UpdateStockCommand(LinkedHashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                        Storage storage) {
+    public void execute() {
         logger.log(Level.INFO, "Start of UpdateStock command execution.");
+
+        Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
+
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.PRICE, CommandParameters.QUANTITY,
                 CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.NAME,
@@ -85,6 +92,7 @@ public class UpdateStockCommand extends Command {
         setUpdatesByStockID(parameters, filteredStocks, stock);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
         ui.printStocks(filteredStocks, medicines);
+        Storage storage = Storage.getInstance();
         storage.saveData(medicines);
         logger.log(Level.INFO, "End of UpdateStock command execution.");
     }

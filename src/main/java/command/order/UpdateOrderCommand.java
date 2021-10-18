@@ -24,10 +24,18 @@ import java.util.logging.Logger;
 public class UpdateOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("UpdateOrder");
 
+    public UpdateOrderCommand(LinkedHashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                        Storage storage) {
+    public void execute() {
         logger.log(Level.INFO, "Start of UpdateOrder command execution.");
+
+        Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
+        Storage storage = Storage.getInstance();
+
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
 

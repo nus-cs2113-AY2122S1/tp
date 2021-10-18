@@ -1,5 +1,7 @@
 package inventory;
 
+import java.util.ArrayList;
+
 /**
  * Represents the generic stock for the application. It contains the medicine name and quantity.
  * It is inherited by Dispense, Medicine and Order objects.
@@ -8,6 +10,19 @@ package inventory;
 public abstract class Medicine {
     protected String medicineName;
     protected int quantity;
+    private static ArrayList<Medicine> medicines = null;
+
+    /**
+     * Helps to create the medicine arraylist or returns the arraylist if it exists.
+     *
+     * @return The medicine's arraylist.
+     */
+    public static ArrayList<Medicine> getInstance() {
+        if (medicines == null) {
+            medicines = new ArrayList<>();
+        }
+        return medicines;
+    }
 
     public Medicine(String medicineName, int quantity) {
         this.medicineName = medicineName;

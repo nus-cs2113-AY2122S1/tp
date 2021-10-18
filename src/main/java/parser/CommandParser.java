@@ -6,7 +6,7 @@ import command.HelpCommand;
 import command.PurgeCommand;
 import command.dispense.AddDispenseCommand;
 import command.dispense.DeleteDispenseCommand;
-import command.dispense.ListDispense;
+import command.dispense.ListDispenseCommand;
 import command.medicine.AddStockCommand;
 import command.medicine.DeleteStockCommand;
 import command.medicine.ListStockCommand;
@@ -54,43 +54,46 @@ public class CommandParser {
     /**
      * Processes the user input into a Command Object.
      *
-     * @param command Input provided by user.
-     * @param mode    The current mode of the program.
+     * @param command          Input provided by user.
+     * @param parametersString String parameter entered by user.
+     * @param mode             The current mode of the program.
      * @return A Command object.
      * @throws InvalidCommand If a command does not exist.
      */
-    public static Command processCommand(String command, Mode mode) throws InvalidCommand {
+    public static Command processCommand(String command, String parametersString, Mode mode) throws InvalidCommand {
         // Append user's command with mode
         if (command.equals(ADD) || command.equals(LIST) || command.equals(UPDATE)
                 || command.equals(DELETE)) {
             command = command + mode.name().toLowerCase();
         }
 
+        LinkedHashMap<String, String> parameters = CommandParser.parseParameters(parametersString);
+
         switch (command) {
         case ADD_DISPENSE:
-            return new AddDispenseCommand();
+            return new AddDispenseCommand(parameters);
         case ADD_STOCK:
-            return new AddStockCommand();
+            return new AddStockCommand(parameters);
         case ADD_ORDER:
-            return new AddOrderCommand();
+            return new AddOrderCommand(parameters);
         /*case ARCHIVE:
-            break; */
+            break;*/
         case DELETE_DISPENSE:
-            return new DeleteDispenseCommand();
+            return new DeleteDispenseCommand(parameters);
         case DELETE_STOCK:
-            return new DeleteStockCommand();
+            return new DeleteStockCommand(parameters);
         case DELETE_ORDER:
-            return new DeleteOrderCommand();
+            return new DeleteOrderCommand(parameters);
         case EXIT:
             return new ExitCommand();
         case HELP:
             return new HelpCommand();
         case LIST_DISPENSE:
-            return new ListDispense();
+            return new ListDispenseCommand(parameters);
         case LIST_STOCK:
-            return new ListStockCommand();
+            return new ListStockCommand(parameters);
         case LIST_ORDER:
-            return new ListOrderCommand();
+            return new ListOrderCommand(parameters);
         case PURGE:
             return new PurgeCommand();
         /*case RECEIVE_ORDER:
@@ -98,11 +101,11 @@ public class CommandParser {
         case UNDO:
             break;*/
         case UPDATE_STOCK:
-            return new UpdateStockCommand();
+            return new UpdateStockCommand(parameters);
         /*case UPDATE_DISPENSE:
             break;*/
         case UPDATE_ORDER:
-            return new UpdateOrderCommand();
+            return new UpdateOrderCommand(parameters);
         default:
             throw new InvalidCommand();
         }
