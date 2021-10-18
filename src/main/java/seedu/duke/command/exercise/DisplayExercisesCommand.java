@@ -52,6 +52,7 @@ public class DisplayExercisesCommand extends Command {
         } else {
             String displayMessage = String.format(MESSAGE_DISPLAY_EXERCISES, workout.getWorkoutName());
             ui.showItemListToUser(displayMessage, exercises, true);
+            //ui.printExerciseTable(displayMessage, exercises);
         }
     }
 }

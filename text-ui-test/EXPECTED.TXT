@@ -143,14 +143,14 @@ delete: Deletes the workout corresponding to the workout index.
 Format: delete [Workout index]
 Parameters:
 	Workout index - Index of workout to delete
-Example: delete /w 1
+Example: delete 1
 ________________________________________________________
 ________________________________________________________
 delete: Deletes the workout corresponding to the workout index.
 Format: delete [Workout index]
 Parameters:
 	Workout index - Index of workout to delete
-Example: delete /w 1
+Example: delete 1
 ________________________________________________________
 ________________________________________________________
 Deleted workout: Legs finish by: 25 Dec 2021
