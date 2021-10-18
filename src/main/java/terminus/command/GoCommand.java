@@ -47,6 +47,8 @@ public class GoCommand extends WorkspaceCommand {
         moduleName = args[0];
         if (args.length > 1) {
             super.parseArguments(args[1]);
+        } else {
+            super.parseArguments(null);
         }
     }
 
