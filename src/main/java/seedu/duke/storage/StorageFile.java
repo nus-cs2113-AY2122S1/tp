@@ -55,6 +55,7 @@ public class StorageFile {
         File saveFile = new File(DEFAULT_FILE_PATH);
         try {
             List<String> encodedItems = getStringsFromFile(saveFile);
+            assert encodedItems.get(0).startsWith("e") : "First String in list should be an Event";
             for (String item : encodedItems) {
                 if (item.startsWith("e")) {
                     eventsList.add(EventDecoder.decodeEventFromString(item));
@@ -65,7 +66,7 @@ public class StorageFile {
                 }
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found!");
+            System.out.println("Oooh a new user!");
         }
     }
 
