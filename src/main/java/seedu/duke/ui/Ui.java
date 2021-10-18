@@ -1,7 +1,9 @@
 package seedu.duke.ui;
 
+import dnl.utils.text.table.TextTable;
 import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
+import seedu.duke.exercises.Exercise;
 
 import java.util.ArrayList;
 
@@ -111,6 +113,31 @@ public class Ui {
                 printText((i + 1) + ". " + itemList.get(i));
             }
         }
+    }
+
+    public void printExerciseTable(String displayMessage, ArrayList<Exercise> exerciseList) {
+        printLineSeparator();
+        printText(displayMessage);
+
+        String[] columnNames = {"Index", "Exercise name", "Sets", "Reps", "Done"};
+        String[][] data = exerciseListTo2DArray(columnNames.length, exerciseList);
+        TextTable tt = new TextTable(columnNames, data);
+        tt.printTable();
+
+        printLineSeparator();
+    }
+
+    private String[][] exerciseListTo2DArray(int numOfColumns, ArrayList<Exercise> exerciseList) {
+        String[][] data = new String[exerciseList.size()][numOfColumns];
+        for (int i = 0; i < exerciseList.size(); i++) {
+            Exercise e = exerciseList.get(i);
+            data[i][0] = String.valueOf(i + 1);
+            data[i][1] = e.getDescription();
+            data[i][2] = String.valueOf(e.getSets());
+            data[i][3] = String.valueOf(e.getReps());
+            data[i][4] = e.getIsDone() ? "X" : " ";
+        }
+        return data;
     }
 
     /**
