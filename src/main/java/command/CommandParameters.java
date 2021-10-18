@@ -19,5 +19,5 @@ public class CommandParameters {
     public static final String STAFF = "s";
     public static final String STATUS = "status";
     public static final String STOCK_ID = "sid";
-    public static final String ORDER_ID = "oid";
+    public static final String ORDER_ID = "i";
 }

@@ -59,7 +59,7 @@ public class DeleteOrderCommand extends Command {
             }
 
         }
-        ui.print("Order deleted: Order_Id=" + orderId);
+        ui.print("Order deleted for Order Id " + orderId);
         logger.log(Level.INFO, "Successful deletion of order");
 
     }
