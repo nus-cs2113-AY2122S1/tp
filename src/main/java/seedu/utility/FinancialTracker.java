@@ -105,33 +105,45 @@ public class FinancialTracker {
         return totalIncome;
     }
     
-
-    public double getTotalExpenseBetween(LocalDate start, LocalDate end) {
-        List<Expense> accumulatedExpense =
-            expenses.stream()
-                .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start)) 
+    public double calculateTotalExpenseBetweenDays(LocalDate start, LocalDate end) {
+        List<Expense> accumulatedExpense = getExpenseBetweenDays(start,end);
+        double totalExpense = 0;
+        for (Expense expense: accumulatedExpense) {
+            totalExpense += expense.getValue();    
+        }
+        return totalExpense;
+    }
+    
+    private List<Expense> getExpenseBetweenDays(LocalDate start, LocalDate end) {
+        return expenses.stream()
+                .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start))
                         && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
                 .collect(Collectors.toList());
-        double count = 0;
-        for (Expense o: accumulatedExpense) {
-            count += o.getValue();    
+    }
+    
+//    public List<Expense> getMonthlyExpense() {
+//        ArrayList<Double> totalMonthlyExpense = new ArrayList<Double>();
+//        expenses.stream()
+//                .filter(item -> (item.getDate().getYear() == LocalDate.now().getYear()))
+//                .filter()
+//    }
+
+    public double calculateTotalIncomeBetweenDays(LocalDate start, LocalDate end) {
+        List<Income> accumulatedIncome = getIncomeBetweenDays(start,end);
+        double totalIncome = 0;
+        for (Income income: accumulatedIncome) {
+            totalIncome += income.getValue();
         }
-        return count;
+        return totalIncome;
     }
 
-    public double getTotalIncomeBetween(LocalDate start, LocalDate end) {
-        List<Income> accumulatedExpense =
-                incomes.stream()
-                        .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start))
-                                && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
-                        .collect(Collectors.toList());
-        double count = 0;
-        for (Income o: accumulatedExpense) {
-            count += o.getValue();
-        }
-        return count;
+    private List<Income> getIncomeBetweenDays(LocalDate start, LocalDate end) {
+        return incomes.stream()
+                .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start))
+                        && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
+                .collect(Collectors.toList());
     }
-
+    
     //method used for testing
     public int getExpenseSize() {
         return expenses.size();

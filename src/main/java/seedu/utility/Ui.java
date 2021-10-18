@@ -308,5 +308,4 @@ public class Ui {
         System.out.println(errorMessage);
         printLine();
     }
-
 }
