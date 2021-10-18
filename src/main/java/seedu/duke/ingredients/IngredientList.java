@@ -102,7 +102,7 @@ public class IngredientList {
     /**
      * Gets the ingredient from a specific index in the ingredient list.
      * @param ingredientNumber The index of the ingredient to be located
-     * @returns The indexed ingredient object
+     * @return The indexed ingredient object
      * @throws DukeException The ingredient is out of bounds
      */
     public Ingredient get(int ingredientNumber) throws DukeException {

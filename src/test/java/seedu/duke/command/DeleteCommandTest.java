@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class DeleteCommandTest {
+    /*
     @Test
     public void deleteCommandTest_invalidNumberInput_expectException() {
         try {
@@ -17,4 +18,5 @@ public class DeleteCommandTest {
             assertEquals("Ingredient number does not exist!", e.getMessage());
         }
     }
+     */
 }

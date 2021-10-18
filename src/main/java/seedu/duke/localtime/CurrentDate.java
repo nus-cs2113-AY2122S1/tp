@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class CurrentDate {
-    private static final String DATE_FORMAT = "dd MMM yyyy";
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static LocalDate currentDate;
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DATE_FORMAT);
 

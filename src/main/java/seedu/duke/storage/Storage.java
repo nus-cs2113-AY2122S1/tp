@@ -3,6 +3,7 @@ package seedu.duke.storage;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
+import seedu.duke.localtime.CurrentDate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -66,7 +68,7 @@ public class Storage {
             String ingredientName = ingredientDetails[0].trim();
             double ingredientAmount = Double.parseDouble(ingredientDetails[1].trim());
             String ingredientUnits = ingredientDetails[2].trim();
-            String ingredientExpiry = ingredientDetails[3].trim();
+            LocalDate ingredientExpiry = Ingredient.stringToDate(ingredientDetails[3].trim());
             return new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
         } catch (NumberFormatException e) {
             throw new DukeException("Wrong ingredient format!");
@@ -77,7 +79,7 @@ public class Storage {
         FileWriter fw = new FileWriter(DATA_FILE_PATH);
         for (Ingredient i : ingredients) {
             fw.write(i.getName() + "|" + i.getAmount() + "|"
-                    + i.getUnits() + "|" + i.getExpiry() + System.lineSeparator());
+                    + i.getUnits() + "|" + Ingredient.dateToString(i.getExpiry()) + System.lineSeparator());
         }
         fw.close();
     }
