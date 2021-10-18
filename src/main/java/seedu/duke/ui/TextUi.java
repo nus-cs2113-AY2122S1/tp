@@ -59,12 +59,14 @@ public class TextUi {
         }
     }
 
-    public static void showBudgetAddedMessage(double amount) {
-        System.out.println("Your budget of "
-                + amount
-                + " for this month is successfully added!"
-                + LS
-                + DIVIDER);
+    public static void showBudgetAddedMessage(double amount, boolean isLoadingStorage) {
+        if (!isLoadingStorage) {
+            System.out.println("Your budget of "
+                    + amount
+                    + " for this month is successfully added!"
+                    + LS
+                    + DIVIDER);
+        }
     }
 
     public static void showRecordsListView(AllRecordList list, int month, boolean isListAll) {
@@ -74,7 +76,7 @@ public class TextUi {
             for (month = 1; month <= 12; month += 1) {
                 System.out.println("Your budget for this month:" + list.getBudget(month) + LS
                         + "Your expenditures:");
-                System.out.printf("%-30.30s  %-30.30s %-30.30s%n", "  Description", "   | Amount", "   | Date ");
+                System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
                 for (Expenditure a : list.getExpenditureRecords(month)) {
                     System.out.println(i + "." + a);
                     i++;
@@ -86,7 +88,7 @@ public class TextUi {
         } else {
             System.out.println("Your budget for this month:" + list.getBudget(month) + LS
                     + "Your expenditures:");
-            System.out.printf("%-30.30s  %-30.30s %-30.30s%n", "  Description", "   | Amount", "   | Date ");
+            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
             for (Expenditure a : list.getExpenditureRecords(month)) {
                 System.out.println(i + "." + a);
                 i++;

@@ -14,9 +14,9 @@ public class DeleteBudgetTest {
     void deleteBudget_budgetAmount_0() {
         int thisMonth = LocalDate.now().getMonthValue();
 
-        AllRecordList currentBudgetList = new AllRecordList();
-        currentBudgetList.addBudget(08.00, thisMonth);
-        currentBudgetList.deleteBudget(thisMonth);
-        assertEquals(0.00, currentBudgetList.getBudget(thisMonth).getAmount());
+        RecordList currentBudgetList = new RecordList(thisMonth);
+        currentBudgetList.addBudget(08.00, thisMonth, false);
+        currentBudgetList.deleteBudget();
+        assertEquals(0.00, currentBudgetList.getBudget().getAmount());
     }
 }

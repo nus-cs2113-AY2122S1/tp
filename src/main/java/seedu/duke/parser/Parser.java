@@ -22,11 +22,15 @@ import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_DATE;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
 
 public class Parser {
+
+    /** Offset required to convert between 1-indexing and 0-indexing.  */
+    public static final int DISPLAYED_INDEX_OFFSET = 1;
 
     private static String[] splitCommandWordAndArgs(String userInput) {
         final String[] split = userInput.trim().split(" ", 2);
@@ -78,7 +82,7 @@ public class Parser {
 
     private Command prepareListMonthCommand(String commandParams) {
         try {
-            String listOption = commandParams.substring(2, commandParams.length());
+            String listOption = commandParams.substring(2);
             switch (listOption) {
             case ("all"):
                 return new ListRecordsCommand();
@@ -87,7 +91,7 @@ public class Parser {
                 return new ListRecordsCommand(listMonth);
             }
         } catch (StringIndexOutOfBoundsException e) {
-            return new InvalidCommand(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
+            return new InvalidCommand(String.format(MESSAGE_INVALID_LIST_COMMAND, ListRecordsCommand.MESSAGE_USAGE));
         }
     }
 
@@ -122,7 +126,7 @@ public class Parser {
      * @throws ArrayIndexOutOfBoundsException if amount input does not exist.
      */
     private Command prepareAddBudgetCommand(String commandParams) throws ArrayIndexOutOfBoundsException {
-        String[] split = commandParams.substring(2).trim().split("a/|d/", 3);
+        String[] split = commandParams.substring(2).trim().split("a/|m/", 3);
         assert split[0].equals("");
         double amount = Double.parseDouble(split[1].trim());
         int month = Integer.parseInt(split[2].trim());

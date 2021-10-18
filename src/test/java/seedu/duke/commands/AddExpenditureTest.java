@@ -17,8 +17,8 @@ public class AddExpenditureTest {
         LocalDate date = LocalDate.of(2021, 10, 8);
         int month = date.getMonthValue();
 
-        AllRecordList currentExpenditureList = new AllRecordList();
+        RecordList currentExpenditureList = new RecordList(month);
         currentExpenditureList.addExpenditure(description, spending, date, false);
-        assertEquals(1, currentExpenditureList.getExpenditureListSize(month));
+        assertEquals(1, currentExpenditureList.getExpenditureListSize());
     }
 }

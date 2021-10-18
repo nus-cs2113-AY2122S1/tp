@@ -15,10 +15,10 @@ public class DeleteExpenditureTest {
         LocalDate date = LocalDate.now();
         int month = date.getMonthValue();
 
-        AllRecordList currentExpenditureList = new AllRecordList();
+        RecordList currentExpenditureList = new RecordList(month);
         currentExpenditureList.addExpenditure("TestExpenditure1", 08.00, date, false);
         currentExpenditureList.addExpenditure("TestExpenditure2", 10.00, date,false);
-        currentExpenditureList.deleteExpenditure(1, month);
-        assertEquals(1, currentExpenditureList.getExpenditureListSize(month));
+        currentExpenditureList.deleteExpenditure(1);
+        assertEquals(1, currentExpenditureList.getExpenditureListSize());
     }
 }

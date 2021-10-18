@@ -17,8 +17,7 @@ public class RecordList {
     private boolean hasBudget;
 
     /**
-     * Constructor for MonthlyRecordList for v1.0
-     * Kept for normal operation, should be removed by v2.0
+     * Constructor for MonthlyRecordList.
      */
     public RecordList(int month) {
         numberOfRecords = 0;
@@ -95,6 +94,7 @@ public class RecordList {
     //        }
     //        return allExpenditure;
     //    }
+
     public Expenditure getExpenditure(int index) {
         return expenditureRecords.get(index);
     }

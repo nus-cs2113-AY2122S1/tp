@@ -14,10 +14,10 @@ public class ViewExpenditureTest {
         LocalDate date = LocalDate.now();
         int month = date.getMonthValue();
 
-        AllRecordList currentExpenditureList = new AllRecordList();
+        RecordList currentExpenditureList = new RecordList(month);
         currentExpenditureList.addExpenditure("TestExpenditure1", 08.00, date, false);
         currentExpenditureList.addExpenditure("TestExpenditure2", 10.00, date,false);
         //currentExpenditureList.getExpenditureList(1, 2);
-        assertEquals(2, currentExpenditureList.getExpenditureListSize(month));
+        assertEquals(2, currentExpenditureList.getExpenditureListSize());
     }
 }

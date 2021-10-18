@@ -6,18 +6,23 @@ import seedu.duke.textfiletools.WriteToTextFile;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
+/**
+ * Stores 12 instances of (Integer month, RecordList monthRecordList) inside a Hashtable,
+ * where month ranges from 1 to 12.
+ */
 public class AllRecordList {
-    public final ArrayList<RecordList> allRecordList;
+    public final Hashtable<Integer, RecordList> allRecordList;
     public static String storageDirectory;
 
     /**
      * Constructor that creates 12 RecordLists upon construction.
      */
     public AllRecordList() {
-        allRecordList = new ArrayList<>();
-        for (int i = 0; i <= 12; i++) {
-            allRecordList.add(new RecordList(i));
+        allRecordList = new Hashtable<>();
+        for (int i = 1; i <= 12; i++) {
+            allRecordList.put(i, new RecordList(i));
         }
     }
 
@@ -50,8 +55,8 @@ public class AllRecordList {
 
     public void clearAll() {
         allRecordList.clear();
-        for (int i = 0; i <= 12; i++) {
-            allRecordList.add(new RecordList());
+        for (int i = 1; i <= 12; i++) {
+            allRecordList.put(i, new RecordList(i));
         }
     }
 
@@ -81,17 +86,11 @@ public class AllRecordList {
         return allRecordList.get(month).getExpenditure(index);
     }
 
-    public int getAllSize() {
+    /*public int getAllSize() {
         int size = 0;
         for (RecordList monthList : allRecordList) {
             size += monthList.getSize();
         }
         return size;
-    }
-
-    public void printRecord(int i) {
-    }
-
-    public void addBudgetList(String description, double spendingLimit, int month) {
-    }
+    }*/
 }
