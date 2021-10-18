@@ -1,10 +1,5 @@
 package command;
 
-import inventory.Medicine;
-import ui.Ui;
-import storage.Storage;
-
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 /**
@@ -12,6 +7,7 @@ import java.util.LinkedHashMap;
  */
 
 public abstract class Command {
-    public abstract void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                                 Storage storage);
+    protected LinkedHashMap<String, String> parameters;
+
+    public abstract void execute();
 }

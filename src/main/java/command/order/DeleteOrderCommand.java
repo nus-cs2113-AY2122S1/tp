@@ -20,10 +20,17 @@ import java.util.logging.Logger;
 public class DeleteOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("Delete Order");
 
+    public DeleteOrderCommand(LinkedHashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                        Storage storage) {
+    public void execute() {
         logger.log(Level.INFO, "Start deletion of order");
+
+        Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
+        Storage storage = Storage.getInstance();
 
         String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};

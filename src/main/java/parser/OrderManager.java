@@ -30,4 +30,25 @@ public class OrderManager {
         assert (order != null) : "Expected an order object but none extracted";
         return order;
     }
+
+    /**
+     * Retrieves the total order quantity for order with same name.
+     *
+     * @param medicines Arraylist of medicines.
+     * @param name      Medicine name.
+     * @return Total order quantity for the medicine.
+     */
+    public static int getTotalOrderQuantity(ArrayList<Medicine> medicines, String name) {
+        int existingQuantity = 0;
+        for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Order) || ((Order) medicine).isDelivered()) {
+                continue;
+            }
+            boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
+            if (isSameMedicineName) {
+                existingQuantity += medicine.getQuantity();
+            }
+        }
+        return existingQuantity;
+    }
 }

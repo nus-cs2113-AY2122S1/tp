@@ -24,10 +24,16 @@ import java.util.logging.Logger;
 public class DeleteStockCommand extends Command {
     private static Logger logger = Logger.getLogger("DeleteStock");
 
+    public DeleteStockCommand(LinkedHashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                        Storage storage) {
+    public void execute() {
         logger.log(Level.INFO, "Start deletion of stock");
+
+        Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.EXPIRY_DATE};
@@ -74,7 +80,7 @@ public class DeleteStockCommand extends Command {
                 }
                 Stock stock = (Stock) medicine;
                 if (stock.getStockID() == stockId) {
-                    medicines.remove(medicine);
+                    stock.setDeleted(true);
                     logger.log(Level.INFO, "Stock id found and deleted");
                     break;
                 }
@@ -85,7 +91,7 @@ public class DeleteStockCommand extends Command {
         if (!hasStockId && hasExpiryDate) {
             removeExpiredStocks(ui, parameters, medicines);
         }
-
+        Storage storage = Storage.getInstance();
         storage.saveData(medicines);
         logger.log(Level.INFO, "Successful deletion of stock");
     }

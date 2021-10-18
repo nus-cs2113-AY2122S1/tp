@@ -24,13 +24,19 @@ import java.util.logging.Logger;
  */
 
 public class AddOrderCommand extends Command {
-
     private static Logger logger = Logger.getLogger("AddOrder");
 
+    public AddOrderCommand(LinkedHashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                        Storage storage) {
+    public void execute() {
         logger.log(Level.INFO, "Start addition of orders");
+
+        Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
+        Storage storage = Storage.getInstance();
 
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
         String[] optionalParameter = {};

@@ -8,7 +8,6 @@ import inventory.Dispense;
 import inventory.Medicine;
 import parser.DateParser;
 import parser.DispenseValidator;
-import storage.Storage;
 import ui.Ui;
 
 import java.text.ParseException;
@@ -23,13 +22,20 @@ import java.util.stream.Collectors;
  * Helps to process the listdispense command together with filters and sort.
  */
 
-public class ListDispense extends Command {
+public class ListDispenseCommand extends Command {
     private static Logger logger = Logger.getLogger("ListDispenseCommand");
 
+    public ListDispenseCommand(LinkedHashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                        Storage storage) {
+    public void execute() {
         logger.log(Level.INFO, "Start listing of dispense records");
+
+        Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
+
         String[] requiredParameter = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
                 CommandParameters.CUSTOMER_ID, CommandParameters.DATE, CommandParameters.STAFF,
