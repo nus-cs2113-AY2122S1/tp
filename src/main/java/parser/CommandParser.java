@@ -5,6 +5,7 @@ import command.ExitCommand;
 import command.HelpCommand;
 import command.PurgeCommand;
 import command.dispense.AddDispenseCommand;
+import command.dispense.DeleteDispenseCommand;
 import command.dispense.ListDispense;
 import command.medicine.AddStockCommand;
 import command.medicine.DeleteStockCommand;
@@ -24,6 +25,7 @@ import static command.CommandList.ADD_DISPENSE;
 import static command.CommandList.ADD_ORDER;
 import static command.CommandList.ADD_STOCK;
 import static command.CommandList.DELETE;
+import static command.CommandList.DELETE_DISPENSE;
 import static command.CommandList.DELETE_STOCK;
 import static command.CommandList.DELETE_ORDER;
 import static command.CommandList.EXIT;
@@ -72,9 +74,9 @@ public class CommandParser {
         case ADD_ORDER:
             return new AddOrderCommand();
         /*case ARCHIVE:
-            break;
+            break; */
         case DELETE_DISPENSE:
-            break;*/
+            return new DeleteDispenseCommand();
         case DELETE_STOCK:
             return new DeleteStockCommand();
         case DELETE_ORDER:
