@@ -20,8 +20,8 @@ import static seedu.duke.lists.WorkoutList.LOGGER;
 public class Workout {
     private final String workoutName;
     private final ArrayList<Exercise> exercises;
-    private String deadline;
-    private LocalDate deadlineDate;
+    private final String deadline;
+    private final LocalDate deadlineDate;
 
     /**
      * Default Constructor.

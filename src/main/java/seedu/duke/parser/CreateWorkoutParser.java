@@ -17,6 +17,13 @@ public class CreateWorkoutParser extends Parser {
         this.userInputString = userInputString;
     }
 
+    /**
+     * Gets arguments required for a workout, such as workoutIndex, exerciseName, sets and reps.
+     * commandArgs passed in as [workoutName], [deadline]
+     * @param commandArgs user input without the command word.
+     * @return string array containing workoutName and deadline
+     * @throws GetJackDException thrown if any of the above-mentioned arguments are empty.
+     */
     static String[] getWorkoutArgs(String commandArgs) throws GetJackDException {
         if (!commandArgs.contains(PARAMETER_SEPARATOR)) {
             throw new GetJackDException("Invalid format for create workout. No deadline provided!");
