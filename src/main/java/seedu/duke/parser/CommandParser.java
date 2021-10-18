@@ -3,6 +3,7 @@ package seedu.duke.parser;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandEnum;
 import seedu.duke.command.ByeCommand;
+import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.ListCommand;
@@ -71,6 +72,8 @@ public class CommandParser {
             return new EventCommand(commandOptions);
         case LIST:
             return new ListCommand(commandOptions);
+        case DELETE:
+            return new DeleteCommand(commandOptions);
         default:
             return new InvalidCommand();
         }

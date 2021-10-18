@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import seedu.duke.exception.EmptyTasklistException;
+import seedu.duke.exception.InvalidTaskIndexException;
 import seedu.duke.log.Log;
 
 import java.util.ArrayList;
@@ -40,6 +41,10 @@ public class TaskManager {
         return taskList.size();
     }
 
+    public static boolean isEmpty() {
+        return taskList.size() == 0;
+    }
+
     public static Task getTask(int index) {
         return taskList.get(index);
     }
@@ -48,4 +53,18 @@ public class TaskManager {
         taskList.add(task);
     }
 
+    public static void checkIndexValid(int index) throws InvalidTaskIndexException {
+        if (index < 0 || index > getTaskListSize() - 1) {
+            throw new InvalidTaskIndexException(++index);
+        }
+    }
+
+    public static Task deleteTask(int index) throws InvalidTaskIndexException {
+        checkIndexValid(index);
+        return taskList.remove(index);
+    }
+
+    public static void clear() {
+        taskList.clear();
+    }
 }
