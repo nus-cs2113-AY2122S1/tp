@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TaskEncoderTest {
 
     @Test
-    void encodeTasksList_listOfTwoTaskls_expectListOfTwoStrings() {
+    void encodeTasksList_listOfTwoTasks_expectListOfTwoStrings() {
         // Setting up
         LocalDateTime task1Deadline = Parser.convertDateTime("19-02-2022 2359");
         Task task1 = new Task("Do homework", "CS2113T tp V1.0", task1Deadline);

@@ -5,7 +5,6 @@ import seedu.duke.Parser;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +12,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EventEncoderTest {
-
-    private final ArrayList<Event> eventsList = new ArrayList<>();
 
     @Test
     void encodeEventsList_listOfTwoEvents_expectListOfTwoStrings() {
