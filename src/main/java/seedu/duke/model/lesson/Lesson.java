@@ -1,20 +1,31 @@
 package seedu.duke.model.lesson;
 
-import seedu.duke.DukeException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import seedu.duke.commons.core.Messages;
+import seedu.duke.commons.util.TimeUtil;
+import seedu.duke.commons.util.exceptions.TimeParseException;
 import seedu.duke.model.lesson.exceptions.DeserializeLessonException;
+import seedu.duke.ui.Ui;
+
+import static seedu.duke.commons.core.DayOfTheWeek.is;
+import static seedu.duke.commons.core.DayOfTheWeek.toProper;
 
 public class Lesson {
     private final String title;
     private final String dayOfTheWeek;
     private final String startTime;
     private final String endTime;
+    private final String meetingUrl;
 
-    public Lesson(String title, String dayOfTheWeek, String startTime, String endTime) {
+    public Lesson(String title, String dayOfTheWeek, String startTime, String endTime, String meetingUrl) {
         this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.meetingUrl = meetingUrl;
     }
 
     public String getTitle() {
@@ -25,34 +36,66 @@ public class Lesson {
         return dayOfTheWeek;
     }
 
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String endTime() {
+        return endTime;
+    }
+
+    public String getMeetingUrl() {
+        return meetingUrl;
+    }
+
     /**
      * Serializes the lesson data into the correct format for storage file.
      *
      * @return serialized lesson data
      */
     public String serialize() {
-        return "L" + " | " + title + " | " + dayOfTheWeek + " | " + startTime + " | " + endTime;
+        return title + " | " + dayOfTheWeek + " | " + startTime + " | " + endTime + " | " + meetingUrl;
     }
 
     /**
      * Deserializes the lesson data from the storage file.
      *
-     * @param data a line of string representing the serialized data
+     * @param line a line of string representing the serialized data
      * @return deserialized lesson data
-     * @throws DeserializeLessonException if the data is in invalid format
      */
-    public static Lesson deserialize(String data) throws DeserializeLessonException {
+    public static Lesson deserialize(Ui ui, String line) {
         try {
-            String[] item = data.split(" \\| ");
-            return new Lesson(item[1], item[2], item[3], item[4]);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DeserializeLessonException(Messages.ERROR_DESERIALIZING_DATA);
+            String[] params = line.split("\\s*[|]\\s*");
+
+            String title = params[0];
+
+            String dayOfTheWeek = params[1];
+            if (!is(dayOfTheWeek)) {
+                throw new DeserializeLessonException(Messages.ERROR_DESERIALIZING_LESSON);
+            }
+            dayOfTheWeek = toProper(dayOfTheWeek);
+
+            String startTime = LocalTime.parse(TimeUtil.parseTwelveHourTime(params[2]))
+                    .format(DateTimeFormatter.ofPattern("hh:mm a"));
+
+            String endTime = LocalTime.parse(TimeUtil.parseTwelveHourTime(params[3]))
+                    .format(DateTimeFormatter.ofPattern("hh:mm a"));
+
+            String meetingUrl = params[4];
+
+            return new Lesson(title, dayOfTheWeek, startTime, endTime, meetingUrl);
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException | DeserializeLessonException
+                | TimeParseException e) {
+            // Ignoring the particular line
+            ui.printMessage(Messages.ERROR_DESERIALIZING_LESSON);
+            return null;
         }
     }
 
     @Override
     public String toString() {
-        return "[L] " + "Title: " + title + " (Day: " + dayOfTheWeek + ") "
-                + "(Start: " + startTime + ", End: " + endTime + ")";
+        return title + System.lineSeparator()
+                + Ui.PADDING + "   " + dayOfTheWeek + ", " + startTime + " - " + endTime + System.lineSeparator()
+                + Ui.PADDING + "   " + "Meeting URL: " + meetingUrl;
     }
 }

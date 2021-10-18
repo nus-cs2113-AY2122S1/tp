@@ -1,8 +1,6 @@
 package seedu.duke.model.lesson;
 
-import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
-import seedu.duke.model.lesson.exceptions.DeserializeLessonException;
 import seedu.duke.model.lesson.exceptions.LessonIndexException;
 import seedu.duke.ui.Ui;
 
@@ -99,18 +97,14 @@ public class LessonList {
      *
      * @param data a list of strings representing the serialized data
      * @return deserialized lesson list
-     * @throws DeserializeLessonException if the data is invalid format
      */
-    public static List<Lesson> deserialize(List<String> data) throws DeserializeLessonException {
+    public static List<Lesson> deserialize(Ui ui, List<String> data) {
         List<Lesson> lessonList = new ArrayList<>();
-        try {
-            for (String entry : data) {
-                if (entry.charAt(0) == 'L') {
-                    lessonList.add(Lesson.deserialize(entry));
-                }
+        for (String line : data) {
+            Lesson lesson = Lesson.deserialize(ui, line);
+            if (lesson != null) {
+                lessonList.add(lesson);
             }
-        } catch (IndexOutOfBoundsException e) {
-            throw new DeserializeLessonException(Messages.ERROR_DESERIALIZING_DATA);
         }
         return lessonList;
     }

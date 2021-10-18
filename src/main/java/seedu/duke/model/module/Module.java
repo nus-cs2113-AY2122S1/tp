@@ -1,5 +1,9 @@
 package seedu.duke.model.module;
 
+import seedu.duke.commons.core.Messages;
+import seedu.duke.model.module.exceptions.DeserializeModuleException;
+import seedu.duke.ui.Ui;
+
 public class Module {
     private String moduleCode;
     private String title;
@@ -13,6 +17,12 @@ public class Module {
     private String corequisite;
     // todo add additional information
 
+    public Module(String moduleCode, String title, String moduleCredit) {
+        // subject to change
+        this.moduleCode = moduleCode;
+        this.title = title;
+        this.moduleCredit = moduleCredit;
+    }
 
     public String getModuleCode() {
         return moduleCode;
@@ -48,6 +58,27 @@ public class Module {
 
     public String getCorequisite() {
         return corequisite;
+    }
+
+    public String serialize() {
+        // subject to change
+        return moduleCode + " | " + title + " | " + moduleCredit;
+    }
+
+    public static Module deserialize(Ui ui, String line) {
+        try {
+            String[] params = line.split("\\s*[|]\\s*");
+
+            String moduleCode = params[0];
+            String title = params[1];
+            String moduleCredit = params[2];
+
+            return new Module(moduleCode, title, moduleCredit);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            // Ignoring the particular line
+            ui.printMessage(Messages.ERROR_DESERIALIZING_TASK);
+            return null;
+        }
     }
 
     @Override

@@ -7,7 +7,16 @@ public final class Messages {
             "Sorry, I can't create a new save file.";
 
     public static final String ERROR_DESERIALIZING_DATA =
-            "The data is in invalid format. I can't deserialize it.";
+            "Sorry, I can't deserialize the save file. Overwriting file..";
+
+    public static final String ERROR_DESERIALIZING_LESSON =
+            "Saved lesson data is invalid format. Ignoring the line..";
+
+    public static final String ERROR_DESERIALIZING_MODULE =
+            "Saved module data is invalid format. Ignoring the line..";
+
+    public static final String ERROR_DESERIALIZING_TASK =
+            "Saved task data is invalid format. Ignoring the line..";
 
     public static final String ERROR_FILE_LOGGER =
             "Something went wrong with the file logger.";
@@ -27,11 +36,23 @@ public final class Messages {
     public static final String ERROR_INVALID_NUMBER =
             "Sorry, the input parameter is not a valid number.";
 
+    public static final String ERROR_INVALID_TIME_FORMAT =
+            "Sorry, the input time format should be HH:MM.";
+
     public static final String ERROR_MODULE_LOAD_FAILED =
             "Sorry, there was an issue loading NUSMods module information.";
 
     public static final String ERROR_RETRIEVING_DATA =
-            "I can't retrieve any data. Creating new file..";
+            "I can't retrieve the saved data. Creating new file..";
+
+    public static final String ERROR_RETRIEVING_LESSON_DATA =
+            "I can't retrieve the saved lesson data. Creating new file..";
+
+    public static final String ERROR_RETRIEVING_MODULE_DATA =
+            "I can't retrieve the saved module data. Creating new file..";
+
+    public static final String ERROR_RETRIEVING_TASK_DATA =
+            "I can't retrieve the saved task data. Creating new file..";
 
     public static final String ERROR_SAVING_DATA =
             "Sorry, something went wrong. I can't save the data.";
@@ -44,6 +65,12 @@ public final class Messages {
 
     // Success messages, sorted in alphabetical order.
 
-    public static final String SUCCESS_RETRIEVING_DATA =
-            "The previous data has been retrieved successfully.";
+    public static final String SUCCESS_RETRIEVING_LESSON_DATA =
+            "Successfully retrieved lesson data from the save file.";
+
+    public static final String SUCCESS_RETRIEVING_MODULE_DATA =
+            "Successfully retrieved module data from the save file.";
+
+    public static final String SUCCESS_RETRIEVING_TASK_DATA =
+            "Successfully retrieved task data from the save file.";
 }

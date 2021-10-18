@@ -1,14 +1,14 @@
 package seedu.duke.logic.commands.task;
 
-import seedu.duke.DukeException;
+import java.io.IOException;
+
 import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.LessonList;
+import seedu.duke.model.module.ModuleList;
 import seedu.duke.storage.Storage;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
 import seedu.duke.ui.Ui;
-
-import java.io.IOException;
 
 public class AddTaskCommand extends Command {
     private final String title;
@@ -23,11 +23,11 @@ public class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList)
-            throws DukeException, IOException {
+    public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
+            throws IOException {
         Task newTask = new Task(title, dayOfTheWeek, information);
         taskList.addTask(newTask);
-        storage.saveData(taskList, lessonList, Storage.TASK_FILE_NAME);
+        storage.saveData(taskList);
         ui.printTaskAdded(newTask, taskList.getSize());
     }
 }

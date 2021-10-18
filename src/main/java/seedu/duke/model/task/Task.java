@@ -1,8 +1,11 @@
 package seedu.duke.model.task;
 
-import seedu.duke.DukeException;
+import seedu.duke.commons.core.Messages;
 import seedu.duke.model.task.exceptions.DeserializeTaskException;
 import seedu.duke.ui.Ui;
+
+import static seedu.duke.commons.core.DayOfTheWeek.is;
+import static seedu.duke.commons.core.DayOfTheWeek.toProper;
 
 public class Task {
     private final String title;
@@ -47,36 +50,49 @@ public class Task {
      * @return serialized task data
      */
     public String serialize() {
-        return "T" + " | " + (isDone ? "1" : "0") + " | " + title + " | " + dayOfTheWeek + " | " + information;
+        return (isDone ? "1" : "0") + " | " + title + " | " + dayOfTheWeek + " | " + information;
     }
 
     /**
      * Deserializes the task data from the storage file.
      *
-     * @param data a line of string representing the serialized data
+     * @param line a line of string representing the serialized data
      * @return deserialized task data
-     * @throws DeserializeTaskException if the data is in invalid format
      */
-    public static Task deserialize(String data) throws DeserializeTaskException {
+    public static Task deserialize(Ui ui, String line) {
         try {
-            String[] item = data.split(" \\| ", -1);
-            Task task = new Task(item[2], item[3], item[4]);
-            boolean isTaskDone = item[1].equals("1");
+            String[] params = line.split("\\s*[|]\\s*");
+
+            String title = params[1];
+
+            String dayOfTheWeek = params[2];
+            if (!is(dayOfTheWeek)) {
+                throw new DeserializeTaskException(Messages.ERROR_DESERIALIZING_LESSON);
+            }
+            dayOfTheWeek = toProper(dayOfTheWeek);
+
+            String information = params[3];
+
+            Task task = new Task(title, dayOfTheWeek, information);
+
+            boolean isTaskDone = params[0].equals("1");
             if (isTaskDone) {
                 task.setDone();
             }
+
             return task;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DeserializeTaskException("Data storage file corrupted..");
+        } catch (ArrayIndexOutOfBoundsException | DeserializeTaskException e) {
+            // Ignoring the particular line
+            ui.printMessage(Messages.ERROR_DESERIALIZING_TASK);
+            return null;
         }
     }
 
     @Override
     public String toString() {
-        return "[T]" + getStatusIcon()
-                + " Title: " + title + " (Day: " + dayOfTheWeek + ")"
+        return getStatusIcon() + " " + title + " (" + dayOfTheWeek + ")"
                 + (information.isBlank()
                         ? ""
-                        : System.lineSeparator() + Ui.PADDING + "          Info: " + information);
+                        : System.lineSeparator() + Ui.PADDING + "       Info: " + information);
     }
 }

@@ -3,6 +3,8 @@ package seedu.duke.model.module;
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.model.module.exceptions.ModuleIndexException;
+import seedu.duke.model.task.Task;
+import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,19 +14,23 @@ import java.util.List;
  * commands.
  */
 public class ModuleList {
-    private List<Module> userModuleList;
+    private List<Module> moduleList;
 
     public ModuleList() {
-        userModuleList = new ArrayList<>();
+        moduleList = new ArrayList<>();
+    }
+
+    public ModuleList(List<Module> moduleList) {
+        this.moduleList = moduleList;
     }
 
     public int getSize() {
-        return userModuleList.size();
+        return moduleList.size();
     }
 
     public Module getModule(int moduleIndex) throws DukeException {
         try {
-            return userModuleList.get(moduleIndex);
+            return moduleList.get(moduleIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Messages.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
@@ -33,16 +39,16 @@ public class ModuleList {
     }
 
     public boolean isEmpty() {
-        return userModuleList.isEmpty();
+        return moduleList.isEmpty();
     }
 
     public void addModule(Module newModule) {
-        userModuleList.add(newModule);
+        moduleList.add(newModule);
     }
 
     public void deleteModule(int moduleIndex) throws ModuleIndexException {
         try {
-            userModuleList.remove(moduleIndex);
+            moduleList.remove(moduleIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new ModuleIndexException(Messages.ERROR_INVALID_INDEX);
         } catch (NumberFormatException e) {
@@ -50,7 +56,26 @@ public class ModuleList {
         }
     }
 
+    public String serialize() {
+        StringBuilder data = new StringBuilder();
+        for (Module module : moduleList) {
+            data.append(module.serialize()).append(System.lineSeparator());
+        }
+        return data.toString();
+    }
+
+    public static List<Module> deserialize(Ui ui, List<String> data) {
+        List<Module> moduleList = new ArrayList<>();
+        for (String line : data) {
+            Module module = Module.deserialize(ui, line);
+            if (module != null) {
+                moduleList.add(module);
+            }
+        }
+        return moduleList;
+    }
+
     public void deleteAllModules() {
-        userModuleList.clear();
+        moduleList.clear();
     }
 }

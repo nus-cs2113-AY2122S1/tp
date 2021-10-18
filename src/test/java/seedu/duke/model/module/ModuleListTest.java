@@ -18,8 +18,8 @@ class ModuleListTest {
     public void isEmpty_nonEmptyList_false() {
         try {
             ModuleList moduleList = new ModuleList();
-            moduleList.addModule(new Module());
-            moduleList.addModule(new Module());
+            moduleList.addModule(new Module("CS2105", "Introduction to Computer Networks", "4 MC"));
+            moduleList.addModule(new Module("CS2106", "Introduction to Operating Systems", "4 MC"));
             assertEquals(2, moduleList.getSize());
             moduleList.deleteModule(1);
             assertEquals(1, moduleList.getSize());
@@ -34,7 +34,7 @@ class ModuleListTest {
     public void deleteModule_indexOutOfBounds_exceptionThrown() {
         assertThrows(DukeException.class, () -> {
             ModuleList moduleList = new ModuleList();
-            moduleList.addModule(new Module());
+            moduleList.addModule(new Module("CS3244", "Machine Learning", "4 MC"));
             moduleList.deleteModule(1);
         });
     }
