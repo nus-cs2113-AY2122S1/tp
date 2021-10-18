@@ -109,16 +109,6 @@ public class NusMods {
     }
 
     /**
-     * Fetches a mod from NUSMods and prints its full information.
-     * @param moduleCode mod to fetch.
-     * @throws IOException if there is no connection.
-     */
-    public static void showModOnline(String moduleCode) throws IOException {
-        Module module = fetchModOnline(moduleCode);
-        TextUi.printModFullDescription(module);
-    }
-
-    /**
      * Fetches all mods from NUSMods and saves all of them into the local storage.
      * @throws IOException if there is no connection.
      */
@@ -143,5 +133,27 @@ public class NusMods {
         }
         reader.endArray();
         TextUi.printUpdateSuccessMessage();
+    }
+
+    /**
+     * Attempts to first fetch module info from online API.
+     * If fails, fetches module information from local save.
+     *
+     * @param moduleCode Module to be fetched
+     * @return a Module instance representing the relevant information
+     */
+    public static Module fetchMod(String moduleCode) {
+        Module module;
+        try {
+            module = fetchModOnline(moduleCode);
+            logger.log(Level.INFO, "Online search done");
+        } catch (IOException e) {
+            TextUi.printNoConnectionMessage();
+            logger.log(Level.INFO, "Unable to retrieve data from NUSMods, searching offline");
+            module = ModStorage.loadModInfo(moduleCode);
+            logger.log(Level.INFO, "Offline search done");
+            TextUi.printLocalSearchMessage();
+        }
+        return module;
     }
 }

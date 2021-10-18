@@ -3,10 +3,14 @@ package seedu.duke;
 import seedu.command.Command;
 import seedu.exceptions.AddException;
 import seedu.exceptions.IntegerException;
+import seedu.module.Module;
 import seedu.parser.CommandParser;
 import seedu.storage.TimetableStorage;
 import seedu.timetable.Timetable;
 import seedu.ui.TextUi;
+import seedu.user.Profile;
+
+import java.util.ArrayList;
 
 public class Duke {
     private static String path = "data/Modules.json";
@@ -14,6 +18,8 @@ public class Duke {
     public static Timetable timetable;
     public static TimetableStorage timetableStorage;
     public static CommandParser commandParser = new CommandParser();
+    public static ArrayList<Profile> profiles = new ArrayList<>();
+    private static Profile profileInUse;
 
     public static void main(String[] args) {
         // assert false : "dummy";
@@ -24,6 +30,9 @@ public class Duke {
         timetableStorage = new TimetableStorage(timetablePath);
         timetable = timetableStorage.loadSchedule();
         TextUi.printWelcomeMessage();
+        profiles.add(new Profile("test user", "CEG", "2"));
+        profileInUse = profiles.get(0);
+        profileInUse.getRecord().addModuleToRecord(new Module("CS1010"),'A');
         run();
     }
 
@@ -44,5 +53,9 @@ public class Duke {
         } catch (IntegerException e) {
             e.printMessage();
         }
+    }
+
+    public static Profile getProfileInUse() {
+        return profileInUse;
     }
 }

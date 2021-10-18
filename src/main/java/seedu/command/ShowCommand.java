@@ -1,5 +1,6 @@
 package seedu.command;
 
+import seedu.module.Module;
 import seedu.online.NusMods;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
@@ -23,14 +24,9 @@ public class ShowCommand extends Command {
      */
     public void execute() {
         String moduleCode = searchTerm.toUpperCase();
-        try {
-            NusMods.showModOnline(moduleCode);
-            logger.log(Level.INFO, "Online search done");
-        } catch (IOException e) {
-            TextUi.printNoConnectionMessage();
-            logger.log(Level.INFO, "Unable to retrieve data from NUSMods, searching offline");
-            ModStorage.showModOffline(moduleCode);
-            logger.log(Level.INFO, "Offline search done");
+        Module module = NusMods.fetchMod(moduleCode);
+        if (module != null) {
+            TextUi.printModFullDescription(module);
         }
     }
 }

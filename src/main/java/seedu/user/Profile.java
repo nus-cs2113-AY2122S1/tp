@@ -31,4 +31,8 @@ public class Profile {
     public String getName() {
         return username;
     }
+
+    public ModuleRecord getRecord() {
+        return record;
+    }
 }

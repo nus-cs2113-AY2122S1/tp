@@ -48,6 +48,14 @@ public class Module extends BaseModule {
         return null;
     }
 
+    public PrerequisiteTree getPrerequisiteTree() {
+        return prereqTree;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
+    }
+
     public Semester getSemester(int sem) {
         for (Semester s : semesterData) {
             if (s.getSemester() == sem) {

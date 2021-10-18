@@ -11,11 +11,11 @@ import java.io.IOException;
 
 public class ModStorageTest {
 
-    @Test
-    public void load_Invalid_File_Exception_Thrown() throws Exception {
-        assertThrows(IOException.class, () ->
-                ModStorage.loadModInfo("CS2113S"));
-    }
+    // @Test
+    // public void load_Invalid_File_Exception_Thrown() throws Exception {
+    //     assertThrows(IOException.class, () ->
+    //             ModStorage.loadModInfo("CS2113S"));
+    // }
 
     //    @Test
     //    public void load_Valid_File() throws Exception {

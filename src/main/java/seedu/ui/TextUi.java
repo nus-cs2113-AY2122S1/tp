@@ -29,6 +29,8 @@ public class TextUi {
     private static final String GREETING = "How can I help you today?";
     private static final String USER_PROMPT = "What would you like to do?";
     private static final String PROMPT_CURSOR = "==>";
+    private static final String PREREQ_SUCCESS = "Yes! You are eligible to take up: ";
+    private static final String PREREQ_FAIL = "Oops, you have not met the module's prerequisite: ";
     private static final String HELP_MESSAGE = LINE
             + "\tUNIMods accepts the following commands:-\n"
             + "\t\t| No.| Command Syntax          |            Command Action                      |\n"
@@ -46,6 +48,7 @@ public class TextUi {
     public static final String ERROR_INVALID_MODULE_CODE =
             "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
     public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
+
 
 
     /*------------- PUBLIC COMMANDS ----------- */
@@ -211,5 +214,14 @@ public class TextUi {
 
     public static boolean isExist(ArrayList<Lesson> lesson) {
         return lesson.size() > 0;
+    }
+
+    public static void printPrereqMet(boolean isPrereqMet, Module module) {
+        if (isPrereqMet) {
+            System.out.println(PREREQ_SUCCESS + module);
+        } else {
+            System.out.println(PREREQ_FAIL);
+            System.out.println(module.getPrerequisite());
+        }
     }
 }
