@@ -4,15 +4,52 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Design
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Architecture
 
+### Command
+
+### Utilities
+
+{combine ui, storage, parser, comparators?}
+
+### Inventory
+
+### Errors
+
+## Implementation
+
+### Main Logic
+
+### AddStockCommand
+
+### DeleteStockCommand
+
+### ListStockCommand
+
+### UpdateStockCommand
+
+MediVault initialises an UpdateStockCommand class when CommandParser identifies the
+`updatestock` or the `update` keyword in the `stock` mode.
+
+* MediVault updates medicine stock information when `parameter` and `parameterValues` provided
+by the user are valid. 
+* MediVault conducts another validation check on the provided `quantity`,`max_quantity` and `expiry` 
+against the stored medicine stock information.
+
+
+The sequence diagram for UpdateStockCommand is shown below.
+
+![UpdateStockSequenceDiagram](diagrams/diagram_images/UpdateStockSequenceDiagram.png)
 
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+* pharmacist handling storing, ordering and dispensing of medication
+* has a need to manage large number of stocks in the pharmacy
+* may forget how much medicine stock is left in the pharmacy
+* is a fast typist
 
 ### Value proposition
 
@@ -31,7 +68,8 @@
 
 ## Glossary
 
-* *glossary item* - Definition
+* `parameter` - Prefixes for MediVault to understand the type of information user provides.
+* `parameter values` - The actual information provided by the user for a given `parameter` type.
 
 ## Instructions for manual testing
 
