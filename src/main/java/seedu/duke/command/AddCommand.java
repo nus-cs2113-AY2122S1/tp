@@ -14,6 +14,7 @@ public class AddCommand implements Command {
 
     /**
      * Constructor method for <code>AddCommand</code>.
+     *
      * @param i the ingredient to add
      */
     public AddCommand(Ingredient i) {
@@ -26,11 +27,10 @@ public class AddCommand implements Command {
             IngredientList.getInstance().add(this.ingredient);
             String resultMsg = ADDED_MESSAGE
                     + ingredient.toString() + '\n'
-                    + "Currently inventory has " + IngredientList.getInstance().getInventoryStock()
+                    + "Current inventory has " + IngredientList.getInstance().getInventoryStock()
                     + " items.";
             return resultMsg;
         } catch (IOException e) {
             throw new DukeException("Cannot write ingredient to memory!");
         }
     }
-}

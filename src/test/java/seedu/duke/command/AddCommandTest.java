@@ -14,7 +14,7 @@ public class AddCommandTest {
         String resultMsg = new AddCommand(sampleIngredient).run();
         String expected = "Got it. This ingredient has been added to the inventory:\n"
                 + "\t" + sampleIngredient.toString() + '\n'
-                + "Currently inventory has " + IngredientList.getInstance().getInventoryStock()
+                + "Current inventory has " + IngredientList.getInstance().getInventoryStock()
                 + " items.";
 
         assertEquals(expected, resultMsg);
