@@ -34,6 +34,10 @@ public class Ingredient {
         System.out.println("Wastage of " + ingredientName + " is now " + totalWaste + " kg");
     }
 
+    public double getWastage() {
+        return ingredientWasteIngr + ingredientWasteDish;
+    }
+
     @Override
     public String toString() {
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
@@ -50,5 +54,21 @@ public class Ingredient {
 
     public void addDishWaste(Double value) {
         ingredientWasteDish += value;
+    }
+
+    public String toGraph(double max) {
+        double wastage = ingredientWasteDish + ingredientWasteDish;
+        String bar = "[";
+        int num = (int)(10 * wastage/max);
+        for (int i = 0; i < 10; i++) {
+            if(i < num) {
+                bar = bar + "█";
+            } else  {
+                bar = bar + " ";
+            }
+        }
+        bar = bar + "]";
+        return ingredientName + System.lineSeparator()
+                + "   Wastage: " + bar + " " + wastage + " kg";
     }
 }

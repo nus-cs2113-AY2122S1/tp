@@ -234,10 +234,30 @@ public class Ui {
         System.out.println("You can use command 'add' to add new dishes!");
     }
 
+    public void printDishListGraph(ArrayList<Dish> dishList) {
+        assert dishList != null : "dishList cannot be null";
+        double max = DishList.getGreatestWaste();
+        System.out.println("Here are the dishes you have: ");
+        for (int i = 0; i < dishList.size(); i++) {
+            System.out.println((i + 1) + ". " + dishList.get(i).toGraph(max));
+        }
+        System.out.println("You can use command 'add' to add new dishes!");
+    }
+
     public void printDishNameRemoved(String dishName) {
         assert dishName != null : "dishName cannot be null";
         System.out.println("Dish, " + dishName + " has been removed!");
     }
+
+    public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
+        double max = IngredientList.getGreatestWaste();
+        System.out.println("Here are the dishes you have: ");
+        for (int i = 0; i < ingredientList.size(); i++) {
+            System.out.println((i + 1) + ". " + ingredientList.get(i).toGraph(max));
+        }
+        System.out.println("You can use command 'add' to add new dishes!");
+    }
+}
 
     public void printMatchedDishes(ArrayList<Dish> matchedDishList) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()

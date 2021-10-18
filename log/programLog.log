@@ -1,50 +1,100 @@
-Oct 18, 2021 7:10:53 PM seedu.duke.logger.LoggerManager setupLogger
+<<<<<<< HEAD
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 18, 2021 7:10:53 PM seedu.duke.Duke main
+Oct 18, 2021 10:07:06 PM seedu.duke.Duke main
 INFO: Food-o-rama has begun running
-Oct 18, 2021 7:11:01 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 18, 2021 7:11:01 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 18, 2021 10:07:06 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 18, 2021 7:11:01 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 18, 2021 7:11:01 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 18, 2021 10:07:06 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:06 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 18, 2021 7:11:01 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 18, 2021 7:11:01 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 18, 2021 7:11:01 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 18, 2021 10:07:06 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:06 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:06 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 18, 2021 7:11:01 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 18, 2021 7:11:06 PM seedu.duke.logger.LoggerManager setupLogger
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
 INFO: Logger setup successful
-Oct 18, 2021 7:11:06 PM seedu.duke.Dish <init>
-INFO: Calling default constructor
-Oct 18, 2021 7:11:10 PM seedu.duke.command.AddIngrCommand execute
-INFO: Start of process
-Oct 18, 2021 7:11:14 PM seedu.duke.command.AddIngrCommand execute
-INFO: Successfully added Ingredient
-Oct 18, 2021 7:11:14 PM seedu.duke.command.AddIngrCommand execute
-INFO: End of process
-Oct 18, 2021 7:11:18 PM seedu.duke.command.AddIngrCommand execute
-INFO: Start of process
-Oct 18, 2021 7:11:19 PM seedu.duke.command.AddIngrCommand execute
-INFO: Successfully added Ingredient
-Oct 18, 2021 7:11:19 PM seedu.duke.command.AddIngrCommand execute
-INFO: End of process
-Oct 18, 2021 7:11:23 PM seedu.duke.Dish toString
-INFO: No constituents present for dish chicken rice
-Oct 18, 2021 7:11:33 PM seedu.duke.command.ClearDishCommand execute
-INFO: Start of process
-Oct 18, 2021 7:11:33 PM seedu.duke.command.ClearDishCommand execute
-INFO: Successfully cleared dishList
-Oct 18, 2021 7:11:33 PM seedu.duke.command.ClearDishCommand execute
-INFO: End of process
-Oct 18, 2021 7:11:39 PM seedu.duke.command.ClearIngrCommand execute
-INFO: Start of process
-Oct 18, 2021 7:11:39 PM seedu.duke.command.ClearIngrCommand execute
-INFO: Successfully cleared ingredientList
-Oct 18, 2021 7:11:39 PM seedu.duke.command.ClearIngrCommand execute
-INFO: End of process
+Oct 18, 2021 10:07:06 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:06 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:06 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:06 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:06 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:07 PM seedu.duke.Dish <init>
+INFO: Calling loading constructor
+Oct 18, 2021 10:07:13 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:13 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:13 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:13 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+Oct 18, 2021 10:07:13 PM seedu.duke.logger.LoggerManager setupLogger
+INFO: Logger setup successful
+

@@ -24,6 +24,7 @@ public class InputParser {
         switch (inputCommand) {
 
         //One parameter commands just add the parameterString
+        case GRAPH:
         case ADD_DISH_WASTE:
         case ADD_INGR_WASTE:
         case ADD_INGR_STORED:

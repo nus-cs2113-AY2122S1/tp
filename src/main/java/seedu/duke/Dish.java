@@ -35,6 +35,10 @@ public class Dish {
         return dishName;
     }
 
+    public Double getWastage() {
+        return wastage;
+    }
+
     public Double getIngredientContribution() {
         return ingredientContribution;
     }
@@ -93,6 +97,21 @@ public class Dish {
         return dishName + System.lineSeparator()
                 + "   Wastage: " + wastage + " kg" + System.lineSeparator()
                 + "   Constituents: " + constituentList;
+    }
+
+    public String toGraph(double max) {
+        String bar = "[";
+        int num = (int)(10 * wastage/max);
+        for (int i = 0; i < 10; i++) {
+            if(i < num) {
+                bar = bar + "█";
+            } else  {
+                bar = bar + " ";
+            }
+        }
+        bar = bar + "]";
+        return dishName + System.lineSeparator()
+                + "   Wastage: " + bar + " " + wastage + " kg";
     }
 
     public String formatData() {
