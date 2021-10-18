@@ -8,9 +8,9 @@ import command.dispense.AddDispense;
 import command.dispense.ListDispense;
 import command.medicine.AddStock;
 import command.medicine.DeleteStock;
-import command.medicine.ListStock;
+import command.medicine.ListStockCommand;
 import command.medicine.UpdateStock;
-import command.order.AddOrder;
+import command.order.AddOrderCommand;
 import command.order.DeleteOrder;
 import command.order.ListOrder;
 import command.order.UpdateOrder;
@@ -70,7 +70,7 @@ public class CommandParser {
         case ADD_STOCK:
             return new AddStock();
         case ADD_ORDER:
-            return new AddOrder();
+            return new AddOrderCommand();
         /*case ARCHIVE:
             break;
         case DELETE_DISPENSE:
@@ -86,7 +86,7 @@ public class CommandParser {
         case LIST_DISPENSE:
             return new ListDispense();
         case LIST_STOCK:
-            return new ListStock();
+            return new ListStockCommand();
         case LIST_ORDER:
             return new ListOrder();
         case PURGE:

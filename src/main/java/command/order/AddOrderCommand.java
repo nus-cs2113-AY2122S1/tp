@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * User input include medication name, quantity and the order date.
  */
 
-public class AddOrder extends Command {
+public class AddOrderCommand extends Command {
 
     private static Logger logger = Logger.getLogger("AddOrder");
 
