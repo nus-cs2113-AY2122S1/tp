@@ -49,7 +49,7 @@ public class AddModuleCommand extends Command {
         }
 
         moduleName = argArray.get(0);
-        if (!moduleName.matches(CommonFormat.SPACE_DELIMITER)) {
+        if (!moduleName.matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_WHITESPACE);
         }
     }

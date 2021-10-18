@@ -27,4 +27,5 @@ public class CommonFormat {
     public static final String COMMAND_MODULE_FORMAT = "module";
     public static final String COMMAND_ADD_MODULE_FORMAT = "add \"<module name>\"";
     public static final String COMMAND_VIEW_MODULE_FORMAT = "view";
+    public static final String SPACE_NEGATED_DELIMITER = "\\S+";
 }
