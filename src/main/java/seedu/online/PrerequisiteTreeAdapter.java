@@ -21,11 +21,10 @@ public class PrerequisiteTreeAdapter extends TypeAdapter<PrerequisiteTree> {
 
     @Override
     public void write(JsonWriter jsonWriter, PrerequisiteTree tree) throws IOException {
-        jsonWriter.name("prereqTree");
+
         if (tree.getCondition() == null) {
             writeAsString(jsonWriter, tree.getModules().get(0));
         } else {
-
             writeAsObject(jsonWriter,tree);
         }
     }

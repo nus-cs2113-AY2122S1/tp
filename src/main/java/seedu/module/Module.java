@@ -66,11 +66,6 @@ public class Module extends BaseModule {
         return new Semester();
     }
 
-    @Override
-    public String toString() {
-        return moduleCode + " " + title + " " + (int)moduleCredit + "MC";
-    }
-
     public String getFullInfo() {
         String isSUable = "No data";
         if (attributes != null) {
