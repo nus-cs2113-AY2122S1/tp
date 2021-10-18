@@ -15,6 +15,7 @@ class JsonUtilTest {
         try {
             JsonUtil jsonUtil = new JsonUtil();
             Module[] fullModuleList = jsonUtil.loadModulesFromJson();
+            assertNotNull(fullModuleList);
         } catch (ModuleLoadException | FileNotFoundException e) {
             fail(); // fail if there is any error loading the module information from ModuleInfo.json
         }
