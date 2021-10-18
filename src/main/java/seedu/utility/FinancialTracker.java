@@ -95,6 +95,14 @@ public class FinancialTracker {
         return totalExpense;
     }
 
+    private double getTotalExpense(List<Expense> accumulatedExpense) {
+        double totalExpense = 0;
+        for (Expense expense: accumulatedExpense) {
+            totalExpense += expense.getValue();
+        }
+        return totalExpense;
+    }
+
     public double getTotalIncome() {
         double totalIncome = 0;
         for (Income income : incomes) {
@@ -105,12 +113,12 @@ public class FinancialTracker {
         return totalIncome;
     }
 
-    private double getTotalExpense(List<Expense> accumulatedExpense) {
-        double totalExpense = 0;
-        for (Expense expense: accumulatedExpense) {
-            totalExpense += expense.getValue();    
+    private double getTotalIncome(List<Income> accumulatedIncome) {
+        double totalIncome = 0;
+        for (Income income: accumulatedIncome) {
+            totalIncome += income.getValue();
         }
-        return totalExpense;
+        return totalIncome;
     }
     
     //returns the total expense between a specific rage
@@ -140,14 +148,6 @@ public class FinancialTracker {
             monthlyBreakdown.add(getMonthlyExpense(i,yearlyAccumulatedExpense));
         }
         return monthlyBreakdown;
-    }
-
-    private double getTotalIncome(List<Income> accumulatedIncome) {
-        double totalIncome = 0;
-        for (Income income: accumulatedIncome) {
-            totalIncome += income.getValue();
-        }
-        return totalIncome;
     }
 
     //returns the total expense between a specific rage
