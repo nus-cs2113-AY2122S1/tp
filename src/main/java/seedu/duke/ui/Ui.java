@@ -6,6 +6,7 @@ import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
+import seedu.duke.model.module.Module;
 
 import static seedu.duke.commons.util.DayUtil.getToday;
 import static seedu.duke.commons.util.DayUtil.getTomorrow;
@@ -270,6 +271,23 @@ public class Ui {
             System.out.println(PADDING + "Here are the lessons on " + period.toUpperCase() + ":");
             System.out.print(filteredLessonList);
         }
+        System.out.println(LINE);
+    }
+
+    // Module-related methods
+
+    /**
+     * Displays a message to inform user that the specified module
+     * has been successfully added.
+     *
+     * @param module the specified module added
+     * @param size the number of modules in the list
+     */
+    public void printModuleAdded(Module module, int size) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Noted. I've added this module:");
+        System.out.println(PADDING + "  " + module);
+        System.out.println(PADDING + "Now you have " + size + " modules in the list.");
         System.out.println(LINE);
     }
 

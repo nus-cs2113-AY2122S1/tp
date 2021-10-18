@@ -10,6 +10,7 @@ public enum CommandType {
     INVALID,
     LESSON,
     LIST,
+    MODULE,
     TASK;
 
     /**

@@ -28,7 +28,7 @@ public class Duke {
     private TaskList taskList;
     private LessonList lessonList;
     private ModuleList moduleList;
-    private FullModuleList fullModuleList;
+    public static FullModuleList fullModuleList;
 
     /**
      * The constructor method. Initializes ui and storage objects.
