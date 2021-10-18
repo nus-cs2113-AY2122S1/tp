@@ -49,7 +49,12 @@ public class InputParser {
             }
             break;
 
-        default:
+        case FIND:
+            String[] splitFindInputs = parameterString.split(" ", 2);
+            parameters.addAll(List.of(splitFindInputs));
+            break;
+
+            default:
             break;
         }
 

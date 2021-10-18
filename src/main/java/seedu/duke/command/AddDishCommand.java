@@ -6,6 +6,7 @@ import seedu.duke.Ui;
 import java.util.ArrayList;
 
 public class AddDishCommand extends Command {
+
     @Override
     public void execute(ArrayList<String> parameters) {
         Ui ui = new Ui();

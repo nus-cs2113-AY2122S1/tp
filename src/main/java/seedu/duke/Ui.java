@@ -154,6 +154,10 @@ public class Ui {
             + System.lineSeparator()
             + LINE_DIVIDER;
 
+    public String FIND_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
+            + "Please enter a keyword!" + System.lineSeparator()
+            + LINE_DIVIDER;
+
     public String getLogo() {
         return START_LOGO;
     }
@@ -255,3 +259,37 @@ public class Ui {
     }
 }
 
+    public void printMatchedDishes(ArrayList<Dish> matchedDishList) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "As requested, here are the matching dishes in your list:");
+        if (DishList.dishList.size() == 0) {
+            System.out.println("There are no dishes recorded!");
+        } else if (matchedDishList.size() == 0) {
+            System.out.println("The keyword cannot be found!");
+        } else {
+            int taskCounter = 0;
+            for (Dish element : matchedDishList) {
+                System.out.println(taskCounter + 1 + ". " + element.toString());
+                taskCounter++;
+            }
+        }
+        System.out.println(LINE_DIVIDER);
+    }
+
+    public void printMatchedIngredients(ArrayList<Ingredient> matchedIngrList) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "As requested, here are the matching ingredients in your list:");
+        if (IngredientList.ingredientList.size() == 0) {
+            System.out.println("There are no ingredients recorded!");
+        } else if (matchedIngrList.size() == 0) {
+            System.out.println("The keyword cannot be found!");
+        } else {
+            int taskCounter = 0;
+            for (Ingredient element : matchedIngrList) {
+                System.out.println(taskCounter + 1 + ". " + element.toString());
+                taskCounter++;
+            }
+        }
+        System.out.println(LINE_DIVIDER);
+    }
+}
