@@ -3,6 +3,7 @@ package terminus.command.module;
 import java.util.ArrayList;
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
@@ -13,8 +14,7 @@ import terminus.ui.Ui;
 
 public class AddModuleCommand extends Command {
 
-    public static final String SPACE_DELIMITER = "\\S+";
-    public static final int MODULE_ARGS_COUNT = 1;
+    private static final int MODULE_ARGS_COUNT = 1;
     private String moduleName;
 
     /**
@@ -24,7 +24,7 @@ public class AddModuleCommand extends Command {
      */
     @Override
     public String getFormat() {
-        return "add \"<module name>\"";
+        return CommonFormat.COMMAND_ADD_MODULE_FORMAT;
     }
 
     /**
@@ -34,7 +34,7 @@ public class AddModuleCommand extends Command {
      */
     @Override
     public String getHelpMessage() {
-        return "Adds a module";
+        return Messages.MESSAGE_COMMAND_ADD_MODULE;
     }
 
     @Override
@@ -49,8 +49,8 @@ public class AddModuleCommand extends Command {
         }
 
         moduleName = argArray.get(0);
-        if (!moduleName.matches(SPACE_DELIMITER)) {
-            throw new InvalidArgumentException("Module name cannot contain any whitespaces!");
+        if (!moduleName.matches(CommonFormat.SPACE_DELIMITER)) {
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_WHITESPACE);
         }
     }
 
@@ -67,10 +67,10 @@ public class AddModuleCommand extends Command {
     public CommandResult execute(Ui ui, ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException {
         if (moduleManager.getModule(moduleName) != null) {
-            throw new InvalidArgumentException("Module already exist!");
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_EXIST);
         }
         moduleManager.setModule(moduleName);
-        ui.printSection(String.format("Module %s has been added", moduleName));
+        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_MODULE_ADD, moduleName));
         return new CommandResult(true);
     }
 

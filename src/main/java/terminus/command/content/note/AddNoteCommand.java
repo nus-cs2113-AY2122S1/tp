@@ -67,6 +67,7 @@ public class AddNoteCommand extends Command {
      * @return CommandResult to indicate the success and additional information about the execution.
      */
     public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+        assert getModuleName() != null;
         TerminusLogger.info("Executing Add Note Command");
         NusModule module = moduleManager.getModule(getModuleName());
         ContentManager contentManager = module.getContentManager(Note.class);

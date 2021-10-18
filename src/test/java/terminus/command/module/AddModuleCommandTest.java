@@ -8,12 +8,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
 import terminus.command.CommandResult;
-import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.ModuleCommandParser;
-import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
 
 public class AddModuleCommandTest {

@@ -8,7 +8,6 @@ import terminus.common.CommonFormat;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
-import terminus.module.NusModule;
 import terminus.parser.MainCommandParser;
 import terminus.ui.Ui;
 

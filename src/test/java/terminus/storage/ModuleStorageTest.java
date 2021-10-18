@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import terminus.content.Link;
 import terminus.content.Note;
 import terminus.module.ModuleManager;
-import terminus.module.NusModule;
 
 public class ModuleStorageTest {
 

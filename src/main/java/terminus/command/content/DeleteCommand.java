@@ -78,6 +78,7 @@ public class DeleteCommand<T extends Content> extends Command {
      */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException {
+        assert getModuleName() != null;
         NusModule module = moduleManager.getModule(getModuleName());
         ContentManager<T> contentManager = module.getContentManager(type);
         assert contentManager != null;

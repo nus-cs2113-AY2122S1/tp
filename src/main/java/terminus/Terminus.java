@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
@@ -18,10 +19,10 @@ import terminus.ui.Ui;
 public class Terminus {
 
     public static final String[] INVALID_JSON_MESSAGE = {
-        "Invalid file data detected.",
-        "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
-        "To save your current file, close your terminal (do not run exit).",
-        "Otherwise, you can continue using the program :)"
+            "Invalid file data detected.",
+            "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
+            "To save your current file, close your terminal (do not run exit).",
+            "Otherwise, you can continue using the program :)"
     };
     private Ui ui;
     private CommandParser parser;
@@ -30,7 +31,6 @@ public class Terminus {
     private ModuleStorage moduleStorage;
     private ModuleManager moduleManager;
 
-    private static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "Format: %s";
     private static final Path DATA_DIRECTORY = Path.of(System.getProperty("user.dir"), "data");
     private static final String MAIN_JSON = "main.json";
 
@@ -87,7 +87,7 @@ public class Terminus {
             TerminusLogger.debug("User entered: " + input);
             assert input != null : "Input should not be null.";
 
-            Command currentCommand = null;
+            Command currentCommand;
             try {
                 currentCommand = parser.parseCommand(input);
                 CommandResult result = currentCommand.execute(ui, moduleManager);
@@ -114,7 +114,8 @@ public class Terminus {
                 // Check if the exception specified a correct command format for the user to follow.
                 if (e.getFormat() != null) {
                     // Print the format of the command along with the error message to the user.
-                    ui.printSection(e.getMessage(), String.format(INVALID_ARGUMENT_FORMAT_MESSAGE, e.getFormat()));
+                    ui.printSection(e.getMessage(),
+                            String.format(Messages.INVALID_ARGUMENT_FORMAT_MESSAGE, e.getFormat()));
                 } else {
                     ui.printSection(e.getMessage());
                 }
