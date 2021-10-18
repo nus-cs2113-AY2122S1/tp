@@ -153,16 +153,21 @@ public class NusMods {
      * @return a Module instance representing the relevant information
      */
     public static Module fetchMod(String moduleCode) {
-        Module module;
+        Module module = null;
         try {
             module = fetchModOnline(moduleCode);
             logger.log(Level.INFO, "Online search done");
         } catch (IOException e) {
             TextUi.printNoConnectionMessage();
             logger.log(Level.INFO, "Unable to retrieve data from NUSMods, searching offline");
-            module = ModStorage.loadModInfo(moduleCode);
-            logger.log(Level.INFO, "Offline search done");
-            TextUi.printLocalSearchMessage();
+            try {
+                module = ModStorage.loadModInfo(moduleCode);
+                logger.log(Level.INFO, "Offline search done");
+                TextUi.printLocalSearchMessage();
+                return module;
+            } catch (IOException e2) {
+                logger.log(Level.INFO, "Unable to find mod locally.");
+            }
         }
         return module;
     }
