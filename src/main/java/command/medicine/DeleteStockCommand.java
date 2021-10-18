@@ -79,7 +79,7 @@ public class DeleteStockCommand extends Command {
                     break;
                 }
             }
-            ui.print("Medication deleted: Stock_Id=" + stockId);
+            ui.print("Deleted row with Stock Id: " + stockId);
         }
 
         if (!hasStockId && hasExpiryDate) {
