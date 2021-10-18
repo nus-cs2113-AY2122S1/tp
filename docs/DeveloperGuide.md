@@ -2,6 +2,16 @@
 
 ## Table of Content
 
+- [1. Introduction](#1-introduction)
+    * [1.1 Purpose](#11-purpose)
+    * [1.2 Using this Guide](#12-using-this-guide)
+- [2. Setting up](#2-setting-up)
+    * [2.1 Setting up the project in your computer](#21-setting-up-the-project-in-your-computer)
+        + [2.1.1 Prerequisite](#211-prerequisite)
+        + [2.1.2 Getting the project files](#212-getting-the-project-files)
+        + [2.1.3 Setting up on IntelliJ IDEA](#213-setting-up-on-intellij-idea)
+        + [2.1.4 Configuring the Coding Style](#214-configuring-the-coding-style)
+
 ## 1. Introduction
 
 **Welcome to TermiNUS!**
