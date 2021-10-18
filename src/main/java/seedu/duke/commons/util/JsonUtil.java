@@ -11,31 +11,25 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JsonUtil {
-    private Module[] modules;
-    private Map<String, Module> moduleMap;
-    private static Logger logger;
+    private static final Logger logger = Logger.getLogger(JsonUtil.class.getName());
     private static final String ROOT_DIRECTORY = System.getProperty("user.dir");
     private static final String MODULE_FILE_NAME = "ModuleInfo.json";
     private static final Path FULL_MODULE_FILEPATH = Paths.get(ROOT_DIRECTORY, "src", "main",
             "resources", MODULE_FILE_NAME);
 
     /**
-     * Constructor that handles translation from module information in json data to Module[] array that is used for
-     * internal module representation.
+     * Loads module information from ModuleInfo.json to an Array of Module objects.
      *
      * @throws ModuleLoadException exception thrown when the module information file ModuleInfo.json is corrupted
      * @throws FileNotFoundException exception thrown when ModuleInfo.json is not found
      */
-    public JsonUtil() throws ModuleLoadException, FileNotFoundException {
+    public Module[] loadModulesFromJson() throws ModuleLoadException, FileNotFoundException {
         Gson gson = new Gson();
-        moduleMap = new HashMap<>();
-        logger = Logger.getLogger(JsonUtil.class.getName());
+        Module[] modules;
 
         Reader reader = new FileReader(FULL_MODULE_FILEPATH.toString());
         modules = gson.fromJson(reader, Module[].class);
@@ -44,18 +38,8 @@ public class JsonUtil {
             throw new ModuleLoadException(Messages.ERROR_MODULE_LOAD_FAILED);
         }
 
-        for (int i = 0; i < modules.length; i++) {
-            moduleMap.put(modules[i].getModuleCode(), modules[i]);
-        }
-
         logger.log(Level.INFO, "successfully loaded NUSMods module information from json file");
-    }
 
-    public Module[] getModules() {
         return modules;
-    }
-
-    public Map<String, Module> getModuleMap() {
-        return moduleMap;
     }
 }

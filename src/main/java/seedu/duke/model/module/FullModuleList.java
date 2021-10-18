@@ -7,6 +7,7 @@ import seedu.duke.model.module.exceptions.ModuleNotFoundException;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,12 +20,21 @@ public class FullModuleList {
     private Map<String, Module> moduleMap;
 
     public FullModuleList() throws ModuleLoadException, FileNotFoundException {
-        initializeModuleLists(new JsonUtil());
+        loadModules();
     }
 
-    private void initializeModuleLists(JsonUtil jsonUtil) {
-        this.fullModuleList = Arrays.asList(jsonUtil.getModules()); // convert Module[] to ArrayList<Module>
-        this.moduleMap = jsonUtil.getModuleMap();
+    private void loadModules() throws ModuleLoadException, FileNotFoundException {
+        JsonUtil moduleLoader = new JsonUtil();
+        Module[] arrayOfModules = moduleLoader.loadModulesFromJson();
+        fullModuleList = Arrays.asList(arrayOfModules);
+        setModuleMap();
+    }
+
+    private void setModuleMap() {
+        moduleMap = new HashMap<>();
+        for (int i = 0; i < fullModuleList.size(); i++) {
+            moduleMap.put(fullModuleList.get(i).getModuleCode(), fullModuleList.get(i));
+        }
     }
 
     public List<Module> getFullModuleList() {
