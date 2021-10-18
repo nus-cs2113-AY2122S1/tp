@@ -17,10 +17,11 @@ public class ClearIngrCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) {
-        Ui ui = new Ui();
         logger.log(Level.INFO, "Start of process");
         IngredientList.clearList();
         logger.log(Level.INFO, "Successfully cleared ingredientList");
+
+        Ui ui = new Ui();
         System.out.println(ui.getIngrListCleared());
         logger.log(Level.INFO, "End of process");
     }

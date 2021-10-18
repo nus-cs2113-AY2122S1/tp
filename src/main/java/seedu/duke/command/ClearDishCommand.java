@@ -17,10 +17,11 @@ public class ClearDishCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) {
-        Ui ui = new Ui();
         logger.log(Level.INFO, "Start of process");
         DishList.clearList();
         logger.log(Level.INFO, "Successfully cleared dishList");
+
+        Ui ui = new Ui();
         System.out.println(ui.getDishListCleared());
         logger.log(Level.INFO, "End of process");
     }
