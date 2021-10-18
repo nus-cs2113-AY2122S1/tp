@@ -66,7 +66,7 @@ public class Ui {
     public static String getEventAddedMessage(Event event) {
         return String.format("Event added: %s\n"
                         + "Total number of events = %s",
-                event.getTitle(), Duke.eventList.size());
+                event.getTitle(), Duke.eventCatalog.size());
     }
 
     public static void printGreetingMessage() {
