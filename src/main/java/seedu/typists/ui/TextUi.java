@@ -12,6 +12,7 @@ import static seedu.typists.common.Messages.LOGO;
 import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
 import static seedu.typists.common.Messages.MESSAGE_HELP;
 import static seedu.typists.common.Messages.MESSAGE_WELCOME;
+import static seedu.typists.common.Messages.SUMMARY;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -50,14 +51,14 @@ public class TextUi {
     }
 
     public void printScreen(String... message) {
-        for (String m: message) {
+        for (String m : message) {
             out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
         }
     }
 
     public void printLine(String... message) {
         out.print(LINE_PREFIX);
-        for (String m: message) {
+        for (String m : message) {
             out.print(m + " ");
         }
         out.print("\n");
@@ -74,6 +75,7 @@ public class TextUi {
 
     /**
      * Print error message.
+     *
      * @param meg obtained from DukeException message
      */
     public void showText(String meg) {
@@ -133,9 +135,12 @@ public class TextUi {
         out.println("Error rate:  " + String.format("%.2f", sentenceErrorRate));
     }
 
-    public void showSummary(int errorWordCount, double wpm, int totalWordTyped, double gameTime) {
-        out.println("Wrong words:  " + errorWordCount + "/" + totalWordTyped);
-        out.println("WPM: " + String. format("%.2f", wpm));
-        out.println("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds");
+    public void showSummary(int errorWordCount, double errorPercentage, double wpm,
+                            int totalWordTyped, double gameTime) {
+        out.print(SUMMARY + '\n');
+        out.print("Wrong Words: " + errorWordCount + "/" + totalWordTyped + '\n');
+        out.print("Error Percentage: " + String.format("%.2f", errorPercentage) + "%\n");
+        out.print("WPM: " + String.format("%.2f", wpm) + '\n');
+        out.print("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds\n");
     }
 }
