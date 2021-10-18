@@ -9,6 +9,10 @@ import seedu.duke.command.HelpCommand;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
+import seedu.duke.localtime.CurrentDate;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 
 public class Parser {
@@ -22,9 +26,11 @@ public class Parser {
 
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
-    private static final String NUMBER_FORMAT_MESSAGE = "Invalid number format!";
+    private static final String NUMBER_FORMAT_ERROR_MESSAGE = "Invalid number format!";
     private static final String NOT_FOUND_MESSAGE = "Ingredient not found!";
     private static final String INSUFFICIENT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
+    private static final String EXPIRY_FORMAT_ERROR_MESSAGE = "Invalid expiry date format!"
+            + '\n' + "Please key in the expiry date in the format dd/mm/yyyy!";
 
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
@@ -104,7 +110,7 @@ public class Parser {
             String ingredientName = details[1];
             double ingredientAmount = Double.parseDouble(details[2]);
             String ingredientUnits = details[3];
-            String ingredientExpiry = details[4];
+            LocalDate ingredientExpiry = Ingredient.stringToDate(details[4]);
 
             Ingredient updatedIngredient =
                     new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
@@ -115,7 +121,9 @@ public class Parser {
             }
             return resultMsg;
         } catch (NumberFormatException e) {
-            throw new DukeException(NUMBER_FORMAT_MESSAGE);
+            throw new DukeException(NUMBER_FORMAT_ERROR_MESSAGE);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(EXPIRY_FORMAT_ERROR_MESSAGE);
         }
     }
 
@@ -146,13 +154,15 @@ public class Parser {
             String ingredientName = details[1];
             double ingredientAmount = Double.parseDouble(details[2]);
             String ingredientUnit = details[3];
-            String ingredientExpiry = details[4];
+            LocalDate ingredientExpiry = Ingredient.stringToDate(details[4]);
 
             Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,
                     ingredientUnit, ingredientExpiry);
             return new AddCommand(newIngredient).run();
         } catch (NumberFormatException e) {
-            throw new DukeException(NUMBER_FORMAT_MESSAGE);
+            throw new DukeException(NUMBER_FORMAT_ERROR_MESSAGE);
+        } catch (DateTimeParseException e) {
+            throw new DukeException(EXPIRY_FORMAT_ERROR_MESSAGE);
         }
     }
 
@@ -187,7 +197,7 @@ public class Parser {
             resultMsg = new DeleteCommand(ingredientRemoveNumber).run();
             return resultMsg;
         } catch (NumberFormatException e) {
-            throw new DukeException(NUMBER_FORMAT_MESSAGE);
+            throw new DukeException(NUMBER_FORMAT_ERROR_MESSAGE);
         }
     }
 

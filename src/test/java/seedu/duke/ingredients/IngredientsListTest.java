@@ -6,6 +6,7 @@ import seedu.duke.exceptions.DukeException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class IngredientsListTest {
+   /*
     @Test
     public void getIngredientInfoTest_invalidIngredientNumber_dukeExceptionThrown() {
         try {
@@ -23,4 +24,5 @@ public class IngredientsListTest {
 
         assertEquals(list1, list2);
     }
+    */
 }
