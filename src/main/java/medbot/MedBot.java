@@ -34,7 +34,7 @@ public class MedBot {
         while (isInteracting) {
             String userInput = ui.readInput();
             try {
-                Command command = Parser.parseViewType(userInput);
+                Command command = Parser.parseCommand(userInput);
                 isInteracting = !command.isExit();
                 command.execute(patientList, ui);
 

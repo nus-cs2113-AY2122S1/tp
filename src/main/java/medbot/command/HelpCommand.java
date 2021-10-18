@@ -5,39 +5,49 @@ import medbot.PatientList;
 import medbot.Ui;
 
 public class HelpCommand extends Command {
-    private static final String COMMAND_ADD = "add";
-    private static final String COMMAND_DELETE = "delete";
-    private static final String COMMAND_EDIT = "edit";
-    private static final String COMMAND_VIEW = "view";
-    private static final String COMMAND_LIST = "list";
-    private static final String COMMAND_EXIT = "exit";
-    private static final String COMMAND_HELP = "help";
 
-    private String secondCommand;
+    private CommandType commandType = null;
 
-    public HelpCommand(String secondCommand) {
-        this.secondCommand = secondCommand;
+    public HelpCommand() {
+    }
+
+    public HelpCommand(CommandType commandType) {
+        this.commandType = commandType;
     }
 
     @Override
     public void execute(PatientList patientList, Ui ui) {
         String output;
-        if (secondCommand.equals(COMMAND_HELP)) {
+        if (commandType == null) {
             output = ui.getCommandList();
-        } else if (secondCommand.equals(COMMAND_LIST)) {
-            output = ui.getListHelpMessage();
-        } else if (secondCommand.equals(COMMAND_VIEW)) {
-            output = ui.getViewHelpMessage();
-        } else if (secondCommand.equals(COMMAND_ADD)) {
+            ui.printOutput(output);
+            return;
+        }
+        switch (commandType) {
+        case ADD_PATIENT:
             output = ui.getAddHelpMessage();
-        } else if (secondCommand.equals(COMMAND_EDIT)) {
-            output = ui.getEditHelpMessage();
-        } else if (secondCommand.equals(COMMAND_DELETE)) {
+            break;
+        case DELETE_PATIENT:
             output = ui.getDeleteHelpMessage();
-        } else if (secondCommand.equals(COMMAND_EXIT)) {
+            break;
+        case EDIT_PATIENT:
+            output = ui.getEditHelpMessage();
+            break;
+        case EXIT:
             output = ui.getExitHelpMessage();
-        } else {
-            output = ui.getUnrecognisedCommandHelpMessage();
+            break;
+        case LIST_PATIENT:
+            output = ui.getListHelpMessage();
+            break;
+        case SWITCH:
+            output = ""; //todo
+            break;
+        case VIEW_PATIENT:
+            output = ui.getViewHelpMessage();
+            break;
+        default:
+            output = ui.getCommandList();
+            break;
         }
         ui.printOutput(output);
     }
