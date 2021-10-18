@@ -36,9 +36,9 @@ public class MediVault {
     private Mode mode = Mode.STOCK;
 
     public MediVault() {
-        //medicines = new ArrayList<>();
-        //generateData();
-        medicines = new Storage().loadData();
+        medicines = new ArrayList<>();
+        generateData();
+        //medicines = new Storage().loadData();
         ui = new Ui();
         storage = new Storage();
 

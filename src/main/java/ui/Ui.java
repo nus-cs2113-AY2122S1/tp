@@ -292,6 +292,13 @@ public class Ui {
         System.out.println("For more information, refer to User Guide: https://ay2122s1-cs2113t-t10-1.github.io/tp/");
     }
 
+
+    public void printOrder(Order order) {
+        ArrayList<Order> orders = new ArrayList<>();
+        orders.add(order);
+        printOrders(orders);
+    }
+
     /**
      * Prints out all the orders in the Arraylist in a table format.
      *
