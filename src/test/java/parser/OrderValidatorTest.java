@@ -23,7 +23,7 @@ public class OrderValidatorTest {
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
-        boolean isValid = OrderValidator.isValidOrderId(ui,"1", tempOrder);
+        boolean isValid = OrderValidator.isValidOrderId(ui, "1", tempOrder);
         assertTrue(isValid);
     }
 
@@ -35,7 +35,7 @@ public class OrderValidatorTest {
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
-        boolean isInvalid = OrderValidator.isValidOrderId(ui,"5", tempOrder);
+        boolean isInvalid = OrderValidator.isValidOrderId(ui, "5", tempOrder);
         assertFalse(isInvalid);
     }
 }
