@@ -106,6 +106,12 @@ public class AddStockCommand extends Command {
             int maxQuantity = Integer.parseInt(maxQuantityToAdd);
             int quantity = Integer.parseInt(quantityToAdd);
             double price = Double.parseDouble(priceToAdd);
+
+            if (quantity > maxQuantity) {
+                ui.print("Unable to add. Quantity is more than Maximum Quantity.");
+                return;
+            }
+
             addMedicine(ui, medicines, nameToAdd, descriptionToAdd, price, quantity, formatExpiry, maxQuantity);
             storage.saveData(medicines);
         }

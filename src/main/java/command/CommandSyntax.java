@@ -23,6 +23,7 @@ public class CommandSyntax {
     public static final String ADD_ORDER_COMMAND = "addorder n/NAME q/QUANTITY d/DATE";
     public static final String DELETE_STOCK_COMMAND = "deletestock [i/ID e/EXPIRY_DATE]";
     public static final String DELETE_ORDER_COMMAND = "deleteorder i/ID";
+    public static final String DELETE_DISPENSE_COMMAND = "deletedispense i/ID";
     public static final String EXIT_COMMAND = "exit";
     public static final String HELP_COMMAND = "help";
     public static final String LIST_DISPENSE_COMMAND = "listdispense {i/ID q/QUANTITY c/CUSTOMER_ID d/DATE "
