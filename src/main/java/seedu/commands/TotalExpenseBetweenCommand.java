@@ -18,7 +18,7 @@ public class TotalExpenseBetweenCommand extends Command {
     
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        double totalExpenseBetween = finances.calculateTotalExpenseBetweenDays(start,end);
+        double totalExpenseBetween = finances.getExpenseBetween(start,end);
         ui.printTotalExpenseBetween(totalExpenseBetween,start,end);
     }
 }

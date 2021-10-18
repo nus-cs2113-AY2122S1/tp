@@ -105,8 +105,7 @@ public class FinancialTracker {
         return totalIncome;
     }
     
-    public double calculateTotalExpenseBetweenDays(LocalDate start, LocalDate end) {
-        List<Expense> accumulatedExpense = getExpenseBetweenDays(start,end);
+    private double getTotalExpense(List<Expense> accumulatedExpense) {
         double totalExpense = 0;
         for (Expense expense: accumulatedExpense) {
             totalExpense += expense.getValue();    
@@ -114,22 +113,36 @@ public class FinancialTracker {
         return totalExpense;
     }
     
-    private List<Expense> getExpenseBetweenDays(LocalDate start, LocalDate end) {
-        return expenses.stream()
+    //returns the total expense between a specific rage
+    public double getExpenseBetween(LocalDate start, LocalDate end) {
+        List<Expense> accumulatedExpense = expenses.stream()
                 .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start))
                         && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
                 .collect(Collectors.toList());
+        return getTotalExpense(accumulatedExpense);
     }
     
-//    public List<Expense> getMonthlyExpense() {
-//        ArrayList<Double> totalMonthlyExpense = new ArrayList<Double>();
-//        expenses.stream()
-//                .filter(item -> (item.getDate().getYear() == LocalDate.now().getYear()))
-//                .filter()
-//    }
+    //returns the total expense in the month. Used for data visualisation
+    private double getMonthlyExpense(int inputMonth, List<Expense> yearlyExpense) {
+        List<Expense> monthlyAccumulatedExpense = yearlyExpense.stream()
+                .filter(item -> (item.getDate().getMonthValue() == inputMonth))
+                .collect(Collectors.toList());
+        return getTotalExpense(monthlyAccumulatedExpense);
+    }
 
-    public double calculateTotalIncomeBetweenDays(LocalDate start, LocalDate end) {
-        List<Income> accumulatedIncome = getIncomeBetweenDays(start,end);
+    //returns a list of total expense each month for the entire year. Used to plot on graph
+    public ArrayList<Double> getMonthlyExpenseBreakdown(int inputYear) {
+        List<Expense> yearlyAccumulatedExpense = expenses.stream()
+                .filter(item -> (item.getDate().getYear() == inputYear))
+                .collect(Collectors.toList());
+        ArrayList<Double> monthlyBreakdown = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            monthlyBreakdown.add(getMonthlyExpense(i,yearlyAccumulatedExpense));
+        }
+        return monthlyBreakdown;
+    }
+
+    private double getTotalIncome(List<Income> accumulatedIncome) {
         double totalIncome = 0;
         for (Income income: accumulatedIncome) {
             totalIncome += income.getValue();
@@ -137,11 +150,33 @@ public class FinancialTracker {
         return totalIncome;
     }
 
-    private List<Income> getIncomeBetweenDays(LocalDate start, LocalDate end) {
-        return incomes.stream()
+    //returns the total expense between a specific rage
+    public double getIncomeBetween(LocalDate start, LocalDate end) {
+        List<Income> accumulatedIncome = incomes.stream()
                 .filter(item -> (item.getDate().isAfter(start) || item.getDate().isEqual(start))
                         && (item.getDate().isBefore(end) || item.getDate().isEqual(end)))
                 .collect(Collectors.toList());
+        return getTotalIncome(accumulatedIncome);
+    }
+
+    //returns the total expense in the month. Used for data visualisation
+    private double getMonthlyIncome(int inputMonth, List<Income> yearlyIncome) {
+        List<Income> monthlyAccumulatedIncome = yearlyIncome.stream()
+                .filter(item -> (item.getDate().getMonthValue() == inputMonth))
+                .collect(Collectors.toList());
+        return getTotalIncome(monthlyAccumulatedIncome);
+    }
+
+    //returns a list of total expense each month for the entire year. Used to plot on graph
+    public ArrayList<Double> getMonthlyIncomeBreakdown(int inputYear) {
+        List<Income> yearlyAccumulatedIncome = incomes.stream()
+                .filter(item -> (item.getDate().getYear() == inputYear))
+                .collect(Collectors.toList());
+        ArrayList<Double> monthlyBreakdown = new ArrayList<>();
+        for (int i = 1; i <= 12; i++) {
+            monthlyBreakdown.add(getMonthlyIncome(i,yearlyAccumulatedIncome));
+        }
+        return monthlyBreakdown;
     }
     
     //method used for testing
