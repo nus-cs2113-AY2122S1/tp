@@ -7,6 +7,8 @@ import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CreateWorkoutCommandTest {
@@ -29,7 +31,7 @@ class CreateWorkoutCommandTest {
     void executeUserCommand_validDataAddToEmptyWorkoutList_exerciseAdded() throws GetJackDException {
         try {
             int initialSize = workoutList.getAllWorkouts().size();
-            CreateWorkoutCommand c = new CreateWorkoutCommand("workout");
+            CreateWorkoutCommand c = new CreateWorkoutCommand("workout", LocalDate.parse("2021-12-12"));
             c.executeUserCommand(workoutList, ui, storage);
             assertEquals(initialSize + 1, workoutList.getAllWorkouts().size());
         } catch (GetJackDException e) {
