@@ -31,6 +31,15 @@ public class FullModuleList {
         return fullModuleList;
     }
 
+    /**
+     * Locates the Module object matching a module code. The provided module code is checked against a hashmap
+     * matching module codes to their corresponding Module objects.
+     *
+     * @param moduleCode the code of the module to locate (eg. CS2113T)
+     * @return the Module object matching the code
+     * @throws ModuleNotFoundException the exception thrown when there is no corresponding module found in the
+     * NUSMods API
+     */
     public Module findModule(String moduleCode) throws ModuleNotFoundException {
         if (!moduleMap.containsKey(moduleCode)) {
             throw new ModuleNotFoundException(Messages.ERROR_MODULE_NOT_FOUND);
