@@ -104,12 +104,13 @@ public class ModuleStorage {
         }
     }
 
-    private void loadNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
+    public void loadNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
         Path modDirPath;
         modDirPath = Paths.get(filePath.getParent().toString(), mod);
         File folder = new File(modDirPath.toString());
         File[] listOfFiles = folder.listFiles();
         ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
+        contentManager.purgeData();
         for (File file : listOfFiles) {
             if (file.isFile()) {
                 contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
@@ -127,7 +128,7 @@ public class ModuleStorage {
         }
     }
 
-    private void saveNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
+    public void saveNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
         Path modDirPath;
         modDirPath = Paths.get(filePath.getParent().toString(), mod);
         assert CommonUtils.isValidFileName(mod);
