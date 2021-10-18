@@ -8,8 +8,9 @@ import command.dispense.AddDispense;
 import command.dispense.ListDispense;
 import command.medicine.AddStock;
 import command.medicine.DeleteStock;
-import command.medicine.ListStock;
+import command.medicine.ListStockCommand;
 import command.medicine.UpdateStock;
+import command.order.AddOrderCommand;
 import command.order.DeleteOrder;
 import command.order.ListOrder;
 import command.order.UpdateOrder;
@@ -20,20 +21,21 @@ import java.util.LinkedHashMap;
 
 import static command.CommandList.ADD;
 import static command.CommandList.ADD_DISPENSE;
+import static command.CommandList.ADD_ORDER;
 import static command.CommandList.ADD_STOCK;
 import static command.CommandList.DELETE;
-import static command.CommandList.DELETE_ORDER;
 import static command.CommandList.DELETE_STOCK;
+import static command.CommandList.DELETE_ORDER;
 import static command.CommandList.EXIT;
 import static command.CommandList.HELP;
 import static command.CommandList.LIST;
 import static command.CommandList.LIST_DISPENSE;
-import static command.CommandList.LIST_ORDER;
 import static command.CommandList.LIST_STOCK;
+import static command.CommandList.LIST_ORDER;
 import static command.CommandList.PURGE;
 import static command.CommandList.UPDATE;
-import static command.CommandList.UPDATE_ORDER;
 import static command.CommandList.UPDATE_STOCK;
+import static command.CommandList.UPDATE_ORDER;
 import static parser.Mode.DISPENSE;
 import static parser.Mode.ORDER;
 import static parser.Mode.STOCK;
@@ -67,9 +69,9 @@ public class CommandParser {
             return new AddDispense();
         case ADD_STOCK:
             return new AddStock();
-        /*case ADD_ORDER:
-            break;
-        case ARCHIVE:
+        case ADD_ORDER:
+            return new AddOrderCommand();
+        /*case ARCHIVE:
             break;
         case DELETE_DISPENSE:
             break;*/
@@ -84,7 +86,7 @@ public class CommandParser {
         case LIST_DISPENSE:
             return new ListDispense();
         case LIST_STOCK:
-            return new ListStock();
+            return new ListStockCommand();
         case LIST_ORDER:
             return new ListOrder();
         case PURGE:

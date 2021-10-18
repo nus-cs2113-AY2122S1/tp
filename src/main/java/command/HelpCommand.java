@@ -23,6 +23,7 @@ public class HelpCommand extends Command {
         commandSyntaxes.add(new CommandSyntax(CommandList.DELETE_STOCK, CommandSyntax.DELETE_STOCK_COMMAND));
         commandSyntaxes.add(new CommandSyntax(CommandList.ADD_DISPENSE, CommandSyntax.ADD_DISPENSE_COMMAND));
         commandSyntaxes.add(new CommandSyntax(CommandList.LIST_DISPENSE, CommandSyntax.LIST_DISPENSE_COMMAND));
+        commandSyntaxes.add(new CommandSyntax(CommandList.ADD_ORDER, CommandSyntax.ADD_ORDER_COMMAND));
         commandSyntaxes.add(new CommandSyntax(CommandList.LIST_ORDER, CommandSyntax.LIST_ORDER_COMMAND));
         commandSyntaxes.add(new CommandSyntax(CommandList.EXIT, CommandSyntax.EXIT_COMMAND));
         commandSyntaxes.add(new CommandSyntax(CommandList.HELP, CommandSyntax.HELP_COMMAND));
