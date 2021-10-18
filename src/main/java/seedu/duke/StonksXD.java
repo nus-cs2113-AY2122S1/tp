@@ -18,6 +18,9 @@ public class StonksXD {
 
     public void run() {
         ui.printWelcome();
+//        StonksGraph graph = new StonksGraph('x');
+//        System.out.println(graph);
+//        System.out.println("<Graph printed>");
 
         boolean exitFlag = true;
         while (exitFlag) {
