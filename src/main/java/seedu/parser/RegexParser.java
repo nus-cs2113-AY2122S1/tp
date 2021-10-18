@@ -1,3 +1,5 @@
+//@@author mayankp291
+
 package seedu.parser;
 
 import seedu.exception.InvalidEmailException;
@@ -9,7 +11,6 @@ import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 public abstract class RegexParser {
 
