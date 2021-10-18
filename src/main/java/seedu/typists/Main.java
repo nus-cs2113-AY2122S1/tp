@@ -7,7 +7,7 @@ import seedu.typists.game.TimeModeGame;
 import seedu.typists.parser.Parser;
 import seedu.typists.ui.TextUi;
 
-import seedu.typists.commands.NewGame;
+import seedu.typists.game.WordLimitGame;
 import seedu.typists.exception.FaultyInputException;
 import seedu.typists.exception.InvalidStringInputException;
 import seedu.typists.storage.StorageFile;
@@ -24,7 +24,7 @@ public class Main {
     public static final int LINE_LENGTH = 10;
     TextUi uiBot;
     //Parser parseBot;
-    NewGame wordLimitGame;
+    WordLimitGame wordLimitGame;
     StorageFile storage;
     Content content;
 
@@ -38,14 +38,10 @@ public class Main {
         uiBot.showWelcomeMessage(VERSION);
     }
 
-    public void startWordLimitGame() {
+    public void startWordLimitGame() throws InvalidStringInputException {
         uiBot.printKeyboard();
-        this.wordLimitGame = new NewGame();
-        try {
-            wordLimitGame.beginNewGame();
-        } catch (InvalidStringInputException e) {
-            //some error msg, @zhansen
-        }
+        this.wordLimitGame = new WordLimitGame(content.getContent());
+        wordLimitGame.beginNewGame();
     }
 
     public void startTimeLimitGame() {
@@ -60,7 +56,7 @@ public class Main {
         ErrorGame a = new ErrorGame(content.getContent(), LINE_LENGTH);
     }
 
-    public void executeCommand(Parser c, NewGame game, StorageFile storage) {
+    public void executeCommand(Parser c, StorageFile storage) throws InvalidStringInputException {
         switch (c.getCommand()) {
         case "content":
             content.setContent();
@@ -87,7 +83,7 @@ public class Main {
                 String fullCommand = uiBot.readCommand();
                 Parser c = new Parser(fullCommand);
                 c.parse();
-                executeCommand(c, wordLimitGame, storage);
+                executeCommand(c, storage);
                 isExit = c.getIsExit();
             } catch (StringIndexOutOfBoundsException e) {
                 uiBot.showText("OOPS!!! The description after this command word cannot be empty.");
@@ -99,13 +95,17 @@ public class Main {
                 uiBot.showText(e.getMessage());
             } catch (NoSuchElementException e) {
                 e.printStackTrace();
+            } catch (InvalidStringInputException e) {
+                e.printStackTrace();
             } finally {
                 uiBot.showLine();
             }
         }
+        assert isExit : "isExit should be true";
     }
 
     public void exit() {
+
         uiBot.showBye();
     }
 
