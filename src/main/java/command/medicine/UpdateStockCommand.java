@@ -6,7 +6,7 @@ import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Stock;
 import parser.DateParser;
-import parser.MedicineManager;
+import parser.StockManager;
 import parser.StockValidator;
 import storage.Storage;
 import ui.Ui;
@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * Update medication information based on user input given stock id.
  */
 
-public class UpdateStock extends Command {
+public class UpdateStockCommand extends Command {
     private static Logger logger = Logger.getLogger("UpdateStock");
 
     @Override
@@ -31,8 +31,8 @@ public class UpdateStock extends Command {
         logger.log(Level.INFO, "Start of UpdateStock command execution.");
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.PRICE, CommandParameters.QUANTITY,
-            CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.NAME,
-            CommandParameters.MAX_QUANTITY};
+                CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.NAME,
+                CommandParameters.MAX_QUANTITY};
 
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
                 optionalParameters, CommandSyntax.UPDATE_STOCK_COMMAND, true);
@@ -41,12 +41,12 @@ public class UpdateStock extends Command {
         }
 
         boolean isInvalidParameterValues = StockValidator.containsInvalidParameterValues(ui, parameters, medicines,
-            CommandSyntax.UPDATE_STOCK_COMMAND);
+                CommandSyntax.UPDATE_STOCK_COMMAND);
         if (isInvalidParameterValues) {
             return;
         }
 
-        Stock stock = MedicineManager.extractStockObject(parameters, medicines);
+        Stock stock = StockManager.extractStockObject(parameters, medicines);
         boolean isValidQuantityValues = processQuantityValues(ui, parameters, medicines, stock);
         if (!isValidQuantityValues) {
             return;
@@ -67,7 +67,7 @@ public class UpdateStock extends Command {
         // Default value for updating all affected rows
         int rowsAffected = filteredStocks.size();
         String[] affectedCommands = {CommandParameters.NAME, CommandParameters.DESCRIPTION,
-            CommandParameters.MAX_QUANTITY};
+                CommandParameters.MAX_QUANTITY};
         boolean isAffectedCommand = false;
         for (String affectedCommand : affectedCommands) {
             if (parameters.containsKey(affectedCommand)) {
@@ -143,7 +143,7 @@ public class UpdateStock extends Command {
 
         // initialise quantity and max quantity based on the different combinations of user inputs
         if (hasQuantity && hasMaxQuantity) {
-            totalStockQuantity = MedicineManager.getTotalStockQuantity(medicines, name);
+            totalStockQuantity = StockManager.getTotalStockQuantity(medicines, name);
             initialQuantity = stock.getQuantity();
             updatedQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
             quantity = totalStockQuantity - initialQuantity + updatedQuantity;
@@ -151,15 +151,15 @@ public class UpdateStock extends Command {
         }
 
         if (hasQuantity && !hasMaxQuantity) {
-            totalStockQuantity = MedicineManager.getTotalStockQuantity(medicines, name);
+            totalStockQuantity = StockManager.getTotalStockQuantity(medicines, name);
             initialQuantity = stock.getQuantity();
             updatedQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
             quantity = totalStockQuantity - initialQuantity + updatedQuantity;
-            maxQuantity = MedicineManager.getMaxStockQuantity(medicines, name);
+            maxQuantity = StockManager.getMaxStockQuantity(medicines, name);
         }
 
         if (!hasQuantity && hasMaxQuantity) {
-            quantity = MedicineManager.getTotalStockQuantity(medicines, name);
+            quantity = StockManager.getTotalStockQuantity(medicines, name);
             maxQuantity = Integer.parseInt(parameters.get(CommandParameters.MAX_QUANTITY));
         }
         logger.log(Level.INFO, "End processing quantity values for update stock.");

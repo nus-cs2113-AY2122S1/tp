@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-public class MedicineManagerTest {
+public class StockManagerTest {
 
     @Test
     void getTotalStockQuantity_validStock_expectCorrectQuantity() throws ParseException {
@@ -25,8 +25,8 @@ public class MedicineManagerTest {
         medicines.add(new Stock("AZITHROMYCIN", 20, 20, DateParser.stringToDate("14-9-2021"),
                 "USED FOR TREATING EAR, THROAT, AND SINUS INFECTIONS", 2000));
 
-        int panadolStockQuantity = MedicineManager.getTotalStockQuantity(medicines, "PANADOL");
-        int azithromycinStockQuantity = MedicineManager.getTotalStockQuantity(medicines, "AZITHROMYCIN");
+        int panadolStockQuantity = StockManager.getTotalStockQuantity(medicines, "PANADOL");
+        int azithromycinStockQuantity = StockManager.getTotalStockQuantity(medicines, "AZITHROMYCIN");
         assertEquals(40, panadolStockQuantity);
         assertEquals(20, azithromycinStockQuantity);
     }
@@ -34,7 +34,7 @@ public class MedicineManagerTest {
     @Test
     void getTotalStockQuantity_emptyStock_expectNoQuantity() {
         ArrayList<Medicine> medicines = new ArrayList<>();
-        int totalStockQuantity = MedicineManager.getTotalStockQuantity(medicines, "PANADOL");
+        int totalStockQuantity = StockManager.getTotalStockQuantity(medicines, "PANADOL");
         assertEquals(0, totalStockQuantity);
     }
 
@@ -49,8 +49,8 @@ public class MedicineManagerTest {
         medicines.add(new Stock("AZITHROMYCIN", 20, 20, DateParser.stringToDate("14-9-2021"),
                 "USED FOR TREATING EAR, THROAT, AND SINUS INFECTIONS", 2000));
 
-        int panadolMaxStockQuantity = MedicineManager.getMaxStockQuantity(medicines, "PANADOL");
-        int azithromycinMaxStockQuantity = MedicineManager.getMaxStockQuantity(medicines, "AZITHROMYCIN");
+        int panadolMaxStockQuantity = StockManager.getMaxStockQuantity(medicines, "PANADOL");
+        int azithromycinMaxStockQuantity = StockManager.getMaxStockQuantity(medicines, "AZITHROMYCIN");
         assertEquals(1000, panadolMaxStockQuantity);
         assertEquals(2000, azithromycinMaxStockQuantity);
     }
@@ -58,7 +58,7 @@ public class MedicineManagerTest {
     @Test
     void getMaxStockQuantity_emptyStock_assertionError() {
         ArrayList<Medicine> medicines = new ArrayList<>();
-        assertThrows(AssertionError.class, () -> MedicineManager.getMaxStockQuantity(medicines, "PANADOL"));
+        assertThrows(AssertionError.class, () -> StockManager.getMaxStockQuantity(medicines, "PANADOL"));
     }
 
     @Test
@@ -88,7 +88,7 @@ public class MedicineManagerTest {
         ArrayList<Medicine> medicines = new ArrayList<>();
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("i", "1");
-        assertThrows(AssertionError.class, () -> MedicineManager.extractStockObject(parameters, medicines));
+        assertThrows(AssertionError.class, () -> StockManager.extractStockObject(parameters, medicines));
     }
 
     @Test
@@ -100,7 +100,7 @@ public class MedicineManagerTest {
                 "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
         HashMap<String, String> parameters = new HashMap<>();
         parameters.put("i", "3");
-        assertThrows(AssertionError.class, () -> MedicineManager.extractStockObject(parameters, medicines));
+        assertThrows(AssertionError.class, () -> StockManager.extractStockObject(parameters, medicines));
     }
 
 

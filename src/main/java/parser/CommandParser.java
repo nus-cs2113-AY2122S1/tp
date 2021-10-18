@@ -9,11 +9,11 @@ import command.dispense.ListDispense;
 import command.medicine.AddStockCommand;
 import command.medicine.DeleteStock;
 import command.medicine.ListStockCommand;
-import command.medicine.UpdateStock;
 import command.order.AddOrderCommand;
 import command.order.DeleteOrderCommand;
+import command.medicine.UpdateStockCommand;
 import command.order.ListOrder;
-import command.order.UpdateOrder;
+import command.order.UpdateOrderCommand;
 import errors.InvalidCommand;
 import ui.Ui;
 
@@ -96,11 +96,11 @@ public class CommandParser {
         case UNDO:
             break;*/
         case UPDATE_STOCK:
-            return new UpdateStock();
+            return new UpdateStockCommand();
         /*case UPDATE_DISPENSE:
             break;*/
         case UPDATE_ORDER:
-            return new UpdateOrder();
+            return new UpdateOrderCommand();
         default:
             throw new InvalidCommand();
         }

@@ -7,7 +7,7 @@ import inventory.Dispense;
 import inventory.Medicine;
 import inventory.Stock;
 import parser.DispenseValidator;
-import parser.MedicineManager;
+import parser.StockManager;
 import storage.Storage;
 import ui.Ui;
 
@@ -45,7 +45,7 @@ public class AddDispenseCommand extends Command {
 
         int dispenseQuantity = Integer.parseInt(quantity);
         int quantityToDispense = dispenseQuantity;
-        int totalStock = MedicineManager.getTotalStockQuantity(medicines, medicationName);
+        int totalStock = StockManager.getTotalStockQuantity(medicines, medicationName);
         Date dispenseDate = new Date(); //dispense date will be today's date
         ArrayList<Stock> filteredStocks = new ArrayList<>();
 
