@@ -9,7 +9,7 @@ import seedu.duke.Ui;
 
 import java.util.ArrayList;
 
-public class FindCommand extends Command  {
+public class FindCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) {
         Ui ui = new Ui();
@@ -18,32 +18,32 @@ public class FindCommand extends Command  {
         String itemToFind = String.join(" ", parameters);
         // TODO exception here
         if (itemToFind.isBlank()) {
-            System.out.println(ui.FIND_MISSING_PARAM);
+            ui.printFindMissingParamMsg();
         } else {
             switch (commandToExecute) {
-                case "dish":
-                    ArrayList<Dish> matchedDishList = new ArrayList<>();
-                    for (Dish matchingDishes : DishList.dishList) {
-                        if (matchingDishes.getDishName().contains(itemToFind)) {
-                            matchedDishList.add(matchingDishes);
-                        }
+            case "dish":
+                ArrayList<Dish> matchedDishList = new ArrayList<>();
+                for (Dish matchingDishes : DishList.dishList) {
+                    if (matchingDishes.getDishName().contains(itemToFind)) {
+                        matchedDishList.add(matchingDishes);
                     }
-                    ui.printMatchedDishes(matchedDishList);
-                    break;
+                }
+                ui.printMatchedDishes(matchedDishList);
+                break;
 
-                case "ingr":
-                    ArrayList<Ingredient> matchedIngrList = new ArrayList<>();
-                    for (Ingredient matchingIngr : IngredientList.ingredientList) {
-                        if (matchingIngr.getIngredientName().contains(itemToFind)) {
-                            matchedIngrList.add(matchingIngr);
-                        }
+            case "ingr":
+                ArrayList<Ingredient> matchedIngrList = new ArrayList<>();
+                for (Ingredient matchingIngr : IngredientList.ingredientList) {
+                    if (matchingIngr.getIngredientName().contains(itemToFind)) {
+                        matchedIngrList.add(matchingIngr);
                     }
-                    ui.printMatchedIngredients(matchedIngrList);
-                    break;
+                }
+                ui.printMatchedIngredients(matchedIngrList);
+                break;
 
-                default:
-                    System.out.println("THATS THE WRONG NUMBER");
-                    break;
+            default:
+                ui.printFindIncorrectParamMsg();
+                break;
             }
         }
     }

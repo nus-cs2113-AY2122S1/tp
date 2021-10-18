@@ -21,12 +21,10 @@ public class AddDishIngrCommand extends Command {
         logger.log(Level.INFO, "Start of process");
         int dishIndex = DishList.find(parameters.get(0));
         if (dishIndex == -1) {
-            System.out.println(ui.getDishNotExistMsg());
+            ui.printDishNotExistMsg();
             logger.log(Level.INFO, "Dish does not exist", dishIndex);
         } else {
-            System.out.println(ui.getLineDivider());
             DishList.dishList.get(dishIndex).addConstituent(parameters.get(1));
-            System.out.println(ui.getLineDivider());
             logger.log(Level.INFO, "Successfully added dish ingredient");
         }
         logger.log(Level.INFO, "End of process");
