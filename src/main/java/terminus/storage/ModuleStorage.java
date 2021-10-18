@@ -99,12 +99,14 @@ public class ModuleStorage {
             if (!Files.isDirectory(modDirPath)) {
                 Files.createDirectories(modDirPath);
             } else {
-                loadNotesFromModule(moduleManager, modDirPath, mod);
+                loadNotesFromModule(moduleManager, mod);
             }
         }
     }
 
-    private void loadNotesFromModule(ModuleManager moduleManager, Path modDirPath, String mod) throws IOException {
+    private void loadNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
+        Path modDirPath;
+        modDirPath = Paths.get(filePath.getParent().toString(), mod);
         File folder = new File(modDirPath.toString());
         File[] listOfFiles = folder.listFiles();
         ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
@@ -120,21 +122,25 @@ public class ModuleStorage {
     }
 
     private void saveAllNotes(ModuleManager moduleManager) throws IOException {
-        Path modDirPath;
         for (String mod : moduleManager.getAllModules()) {
-            modDirPath = Paths.get(filePath.getParent().toString(), mod);
-            assert CommonUtils.isValidFileName(mod);
-            if (!Files.isDirectory(modDirPath)) {
-                Files.createDirectories(modDirPath);
-            }
-            ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
-            ArrayList<Note> noteArrayList = contentManager.getContents();
-            for (Note note : noteArrayList) {
-                assert Files.isDirectory(modDirPath);
-                assert CommonUtils.isValidFileName(note.getName());
-                Path filePath = Paths.get(modDirPath.toString(), note.getName() + ".txt");
-                Files.writeString(filePath, note.getData());
-            }
+            saveNotesFromModule(moduleManager, mod);
+        }
+    }
+
+    private void saveNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
+        Path modDirPath;
+        modDirPath = Paths.get(filePath.getParent().toString(), mod);
+        assert CommonUtils.isValidFileName(mod);
+        if (!Files.isDirectory(modDirPath)) {
+            Files.createDirectories(modDirPath);
+        }
+        ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
+        ArrayList<Note> noteArrayList = contentManager.getContents();
+        for (Note note : noteArrayList) {
+            assert Files.isDirectory(modDirPath);
+            assert CommonUtils.isValidFileName(note.getName());
+            Path filePath = Paths.get(modDirPath.toString(), note.getName() + ".txt");
+            Files.writeString(filePath, note.getData());
         }
     }
 
