@@ -6,9 +6,10 @@ import inventory.Medicine;
 import inventory.Order;
 import inventory.Stock;
 import parser.DateParser;
-import parser.MedicineManager;
+import parser.OrderManager;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Handles printing all messages in the application to the console.
@@ -17,6 +18,32 @@ import java.util.ArrayList;
 public class Ui {
     private static final int TABLE_PADDING = 2;
     private static final int DESCRIPTION_MAX_WIDTH = 45;
+    private static Ui ui = null;
+    private static Scanner scanner;
+
+    /**
+     * Helps to create the UI instance or returns the UI instance if it exists.
+     *
+     * @return The Ui instance.
+     */
+    public static Ui getInstance() {
+        if (ui == null) {
+            ui = new Ui();
+        }
+        return ui;
+    }
+
+    /**
+     * Helps to create the Scanner instance and returns the user input.
+     *
+     * @return The input given by user.
+     */
+    public String getInput() {
+        if (scanner == null) {
+            scanner = new Scanner(System.in);
+        }
+        return scanner.nextLine();
+    }
 
     /**
      * Prints the welcome command message.
@@ -118,7 +145,7 @@ public class Ui {
             nameWidth = Math.max(stock.getMedicineName().length(), nameWidth);
             priceWidth = Math.max(String.format("$%.2f", stock.getPrice()).length(), priceWidth);
             quantityWidth = Math.max(String.valueOf(stock.getQuantity()).length(), quantityWidth);
-            int orderQuantity = MedicineManager.getTotalOrderQuantity(medicines, stock.getMedicineName());
+            int orderQuantity = OrderManager.getTotalOrderQuantity(medicines, stock.getMedicineName());
             if (orderQuantity != 0) {
                 quantityWidth = Math.max(("PENDING: " + orderQuantity).length(), quantityWidth);
             }
@@ -154,7 +181,7 @@ public class Ui {
         for (Stock stock : stocks) {
             String description = stock.getDescription();
             String truncatedDescription = truncateDescription(description, 0);
-            int orderQuantity = MedicineManager.getTotalOrderQuantity(medicines, stock.getMedicineName());
+            int orderQuantity = OrderManager.getTotalOrderQuantity(medicines, stock.getMedicineName());
             int descriptionIndex = truncatedDescription.length();
 
             String row = String.format(idFormat, centerString(idWidth, String.valueOf(stock.getStockID())))

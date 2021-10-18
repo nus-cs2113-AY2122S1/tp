@@ -62,28 +62,6 @@ public class StockManagerTest {
     }
 
     @Test
-    void getTotalRows_threeRows_expectTwoRows() throws ParseException {
-        // Add dummy medicine values for testing
-        ArrayList<Medicine> medicines = new ArrayList<>();
-        medicines.add(new Stock("PANADOL", 10, 20, DateParser.stringToDate("13-9-2021"),
-                "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
-        medicines.add(new Stock("PANADOL", 30, 20, DateParser.stringToDate("14-9-2021"),
-                "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
-        medicines.add(new Stock("AZITHROMYCIN", 20, 20, DateParser.stringToDate("14-9-2021"),
-                "USED FOR TREATING EAR, THROAT, AND SINUS INFECTIONS", 2000));
-
-        int totalRows = MedicineManager.getTotalRows(medicines, "PANADOL");
-        assertEquals(2, totalRows);
-    }
-
-    @Test
-    void getTotalRows_noRows_expectNoRows() {
-        ArrayList<Medicine> medicines = new ArrayList<>();
-        int totalRows = MedicineManager.getTotalRows(medicines, "PANADOL");
-        assertEquals(0, totalRows);
-    }
-
-    @Test
     void extractStockObject_noStock_assertionError() {
         ArrayList<Medicine> medicines = new ArrayList<>();
         HashMap<String, String> parameters = new HashMap<>();

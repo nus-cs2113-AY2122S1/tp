@@ -1,9 +1,9 @@
 package storage;
 
-import inventory.Medicine;
-import inventory.Stock;
-import inventory.Order;
 import inventory.Dispense;
+import inventory.Medicine;
+import inventory.Order;
+import inventory.Stock;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,6 +26,19 @@ public class Storage {
     private static File stockFile;
     private static File orderFile;
     private static File dispenseFile;
+    private static Storage storage = null;
+
+    /**
+     * Helps to create the Storage instance or returns the Storage instance if it exists.
+     *
+     * @return The Storage instance.
+     */
+    public static Storage getInstance() {
+        if (storage == null) {
+            storage = new Storage();
+        }
+        return storage;
+    }
 
     /**
      * Constructor of Storage class.

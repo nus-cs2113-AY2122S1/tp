@@ -7,7 +7,6 @@ import inventory.Dispense;
 import inventory.Medicine;
 import inventory.Stock;
 import parser.DispenseValidator;
-
 import storage.Storage;
 import ui.Ui;
 
@@ -22,10 +21,17 @@ import java.util.logging.Logger;
 public class DeleteDispenseCommand extends Command {
     private static Logger logger = Logger.getLogger("DeleteDispense");
 
+    public DeleteDispenseCommand(LinkedHashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                        Storage storage) {
+    public void execute() {
         logger.log(Level.INFO, "Start deletion of dispense");
+
+        Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
+        Storage storage = Storage.getInstance();
 
         String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};

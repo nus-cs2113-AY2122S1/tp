@@ -17,7 +17,7 @@ public class CommandParserTest {
     @Test
     public void processCommand_exitCommand_expectExitObject() {
         try {
-            Command command = CommandParser.processCommand("exit", Mode.STOCK);
+            Command command = CommandParser.processCommand("exit", "", Mode.STOCK);
             assertEquals(command.getClass(), ExitCommand.class);
         } catch (InvalidCommand e) {
             e.printStackTrace();
@@ -27,7 +27,8 @@ public class CommandParserTest {
     @Test
     public void processCommand_addCommand_expectAddStockObject() {
         try {
-            Command command = CommandParser.processCommand("add", Mode.STOCK);
+            Command command = CommandParser.processCommand("add",
+                    "n/name p/10 q/20 e/10-10-2021 d/desc m/100", Mode.STOCK);
             assertEquals(command.getClass(), AddStockCommand.class);
         } catch (InvalidCommand e) {
             e.printStackTrace();

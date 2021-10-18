@@ -8,12 +8,10 @@ import inventory.Stock;
 import parser.CommandParser;
 import parser.DateParser;
 import parser.Mode;
-import storage.Storage;
 import ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -29,18 +27,13 @@ import static parser.Mode.STOCK;
  */
 
 public class MediVault {
-    private ArrayList<Medicine> medicines;
-    private Ui ui;
-    private Storage storage;
     private static Logger logger = Logger.getLogger("MediVault");
     private Mode mode = Mode.STOCK;
 
     public MediVault() {
-        //medicines = new ArrayList<>();
-        //generateData();
-        storage = new Storage();
-        medicines = storage.loadData();
-        ui = new Ui();
+        generateData();
+        //Storage storage = Storage.getInstance();
+        //storage.loadData();
 
         logger.log(Level.INFO, "All variables are initialised.");
     }
@@ -55,6 +48,7 @@ public class MediVault {
      * Prompts input from user and processes it indefinitely until "EXIT" is received.
      */
     private void run() {
+        Ui ui = Ui.getInstance();
         ui.printWelcomeMessage();
 
         String userInput = "";
@@ -64,7 +58,7 @@ public class MediVault {
         while (true) {
             System.out.print("[" + mode + "] > ");
             // Reads user input
-            userInput = in.nextLine();
+            userInput = ui.getInput();
             try {
                 String[] userCommand = CommandParser.parseCommand(userInput);
                 String commandString = userCommand[0];
@@ -77,10 +71,8 @@ public class MediVault {
                     continue;
                 }
 
-                LinkedHashMap<String, String> parameters = CommandParser.parseParameters(commandParameters);
-
-                Command command = CommandParser.processCommand(commandString, mode);
-                command.execute(ui, parameters, medicines, storage);
+                Command command = CommandParser.processCommand(commandString, commandParameters, mode);
+                command.execute();
 
                 if (commandString.equals(CommandList.EXIT)) { // User entered exit
                     break;
@@ -100,6 +92,7 @@ public class MediVault {
      */
     public void generateData() {
         try {
+            ArrayList<Medicine> medicines = Medicine.getInstance();
             medicines.add(new Stock("PANADOL", 20, 20, DateParser.stringToDate("13-9-2021"),
                     "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS", 1000));
             medicines.add(new Stock("PANADOL", 20, 10, DateParser.stringToDate("14-9-2021"),
@@ -133,6 +126,7 @@ public class MediVault {
             medicines.add(new Dispense("AZITHROMYCIN", 10, "S2345678B",
                     DateParser.stringToDate("13-10-2021"), "Peter", 6));
         } catch (ParseException e) {
+            Ui ui = Ui.getInstance();
             ui.print("Unable to parse date!");
         }
     }

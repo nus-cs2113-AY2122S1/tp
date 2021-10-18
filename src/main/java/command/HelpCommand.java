@@ -1,11 +1,8 @@
 package command;
 
-import inventory.Medicine;
-import storage.Storage;
 import ui.Ui;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 /**
  * Display help message containing command usage information.
@@ -14,8 +11,7 @@ import java.util.LinkedHashMap;
 public class HelpCommand extends Command {
 
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                        Storage storage) {
+    public void execute() {
         ArrayList<CommandSyntax> commandSyntaxes = new ArrayList<>();
         commandSyntaxes.add(new CommandSyntax(CommandList.ADD_STOCK, CommandSyntax.ADD_STOCK_COMMAND));
         commandSyntaxes.add(new CommandSyntax(CommandList.LIST_STOCK, CommandSyntax.LIST_STOCK_COMMAND));
@@ -29,6 +25,7 @@ public class HelpCommand extends Command {
         commandSyntaxes.add(new CommandSyntax(CommandList.HELP, CommandSyntax.HELP_COMMAND));
         commandSyntaxes.add(new CommandSyntax(CommandList.PURGE, CommandSyntax.PURGE_COMMAND));
 
+        Ui ui = Ui.getInstance();
         ui.printHelpMessage(commandSyntaxes);
     }
 }

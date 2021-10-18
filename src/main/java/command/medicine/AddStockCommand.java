@@ -25,10 +25,16 @@ import java.util.logging.Logger;
 public class AddStockCommand extends Command {
     private static Logger logger = Logger.getLogger("AddCommand");
 
+    public AddStockCommand(LinkedHashMap<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
     @Override
-    public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                        Storage storage) {
+    public void execute() {
         logger.log(Level.INFO, "Start addition of stock");
+
+        Ui ui = Ui.getInstance();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         boolean nameExist = false;
         String nameToAdd = parameters.get(CommandParameters.NAME);
@@ -80,7 +86,6 @@ public class AddStockCommand extends Command {
             ui.print("Medicine exists. Using existing description and maximum quantity.");
             addMedicine(ui, medicines, nameToAdd, existingDescription, price,
                     quantity, formatExpiry, existingMaxQuantity);
-            storage.saveData(medicines);
         } else {
             String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE,
                     CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
@@ -113,9 +118,9 @@ public class AddStockCommand extends Command {
             }
 
             addMedicine(ui, medicines, nameToAdd, descriptionToAdd, price, quantity, formatExpiry, maxQuantity);
-            storage.saveData(medicines);
         }
-
+        Storage storage = Storage.getInstance();
+        storage.saveData(medicines);
     }
 
     /**
