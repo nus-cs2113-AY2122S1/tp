@@ -22,11 +22,11 @@ public class AddIngrCommand extends Command {
         logger.log(Level.INFO, "Start of process");
         String ingredient = String.join(" ", parameters);
         if (IngredientList.find(ingredient) >= 0) {
-            System.out.println(ui.getIngrExistsMsg());
+            ui.printIngrExistsMsg();
             logger.log(Level.INFO, "Ingredient does not exist", ingredient);
+        // TODO shift to Ingredient class
         } else {
             System.out.println(ui.getLineDivider());
-            //String ingredientWeight = parameters.get(0);
             System.out.println("Enter the weight of " + ingredient + " in KG:");
             Scanner in = new Scanner(System.in);
             String ingredientWeight = in.nextLine();

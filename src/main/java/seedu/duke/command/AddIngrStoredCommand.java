@@ -25,8 +25,9 @@ public class AddIngrStoredCommand extends Command {
         int ingredientIndex = IngredientList.find(ingredient);
         System.out.println(ui.getLineDivider());
         if (ingredientIndex == -1) {
-            System.out.println(ui.getDishNotExistMsg());
+            ui.printIngrNotExistMsg();
             logger.log(Level.INFO, "Ingredient does not exist", ingredientIndex);
+        // TODO shift to Ingredient class
         } else {
             try {
                 System.out.println("Enter the weight of " + ingredient + " in KG:");
@@ -37,8 +38,7 @@ public class AddIngrStoredCommand extends Command {
                 currentIngredient.updateIngredientWeight(ingredientWeightValue);
                 logger.log(Level.INFO, "Successfully stored Ingredient");
             } catch (NumberFormatException e) {
-                System.out.println(ui.getInvalidParamMsg());
-                System.out.println(ui.getLineDivider());
+                ui.printInvalidParamMsg();
             }
         }
         System.out.println(ui.getLineDivider());

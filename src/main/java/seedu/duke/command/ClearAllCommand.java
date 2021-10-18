@@ -19,12 +19,14 @@ public class ClearAllCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) {
         logger.log(Level.INFO, "Start of process");
+        Ui ui = new Ui();
+
         DishList.clearList();
         IngredientList.clearList();
         logger.log(Level.INFO, "Successfully cleared both lists");
 
-        Ui ui = new Ui();
-        System.out.println(ui.getAllCleared());
+
+        ui.printAllCleared();
         logger.log(Level.INFO, "End of process");
     }
 }

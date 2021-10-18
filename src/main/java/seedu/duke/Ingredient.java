@@ -2,6 +2,7 @@ package seedu.duke;
 
 public class Ingredient {
 
+    private Ui ui = new Ui();
     private String ingredientName;
     private double ingredientWeight;
     private double ingredientWasteIngr;
@@ -25,13 +26,13 @@ public class Ingredient {
 
     public void updateIngredientWeight(double weightChange) {
         ingredientWeight += weightChange;
-        System.out.println("Storage of " + ingredientName + " is now " + ingredientWeight + " kg");
+        ui.printStorage(ingredientName, ingredientWeight);
     }
 
     public void addWaste(Double waste) {
         ingredientWasteIngr += waste;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
-        System.out.println("Wastage of " + ingredientName + " is now " + totalWaste + " kg");
+        ui.printWastage(ingredientName, totalWaste);
     }
 
     public double getWastage() {
@@ -59,9 +60,9 @@ public class Ingredient {
     public String toGraph(double max) {
         double wastage = ingredientWasteDish + ingredientWasteDish;
         String bar = "[";
-        int num = (int)(10 * wastage/max);
+        int num = (int)(10 * wastage / max);
         for (int i = 0; i < 10; i++) {
-            if(i < num) {
+            if (i < num) {
                 bar = bar + "█";
             } else  {
                 bar = bar + " ";

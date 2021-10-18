@@ -18,23 +18,17 @@ public class ListCommand extends Command {
     public void execute(ArrayList<String> parameters) {
         switch (parameters.get(0)) {
         case "dish":
-            System.out.println(ui.getLineDivider());
             DishList.list();
-            System.out.println(ui.getLineDivider());
-
             isDish = true;
             break;
 
         case "ingr":
-            System.out.println(ui.getLineDivider());
             IngredientList.list();
-            System.out.println(ui.getLineDivider());
-            
             isIngr = true;
             break;
 
         default:
-            System.out.println(ui.getListMissingParamMsg());
+            ui.printListMissingParamMsg();
             isOther = true;
             break;
         }
