@@ -29,8 +29,8 @@ class TaskEncoderTest {
         assertEquals(2, encodedTasksList.size());
 
         // Check the item is saved in the correct String format
-        String expectedResult1 = "Do homework | X | CS2113T tp V1.0 | 19-02-2022 2359";
-        String expectedResult2 = "Waking up |   | This is difficult... | 19-02-2022 0800";
+        String expectedResult1 = "t | Do homework | X | CS2113T tp V1.0 | 19-02-2022 2359";
+        String expectedResult2 = "t | Waking up |   | This is difficult... | 19-02-2022 0800";
         assertEquals(expectedResult1, encodedTasksList.get(0));
         assertEquals(expectedResult2, encodedTasksList.get(1));
     }
