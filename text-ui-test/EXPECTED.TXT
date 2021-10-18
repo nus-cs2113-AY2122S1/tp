@@ -22,7 +22,7 @@ Type any of the following to get started:
 > back
 
 [test] >>> Error: Missing arguments.
-Format: test > note add "<note name>" "<note content>"
+Format: note add "<note name>" "<note content>"
 [test] >>> Your note on 'CS2113T' has been added!
 [test] >>> List of Content
 ---------------
@@ -30,16 +30,16 @@ Format: test > note add "<note name>" "<note content>"
 
 Rerun the same command with an index behind to view the content.
 [test] >>> Error: Invalid numerical value provided.
-Format: test > note view {item number}
+Format: note view {item number}
 [test] >>> Error: Content not found.
 [test] >>> Name: CS2113T
 Content:
 Week 8 test
 
 [test] >>> Error: Missing arguments.
-Format: test > note delete <item number>
+Format: note delete <item number>
 [test] >>> Error: Invalid numerical value provided.
-Format: test > note delete <item number>
+Format: note delete <item number>
 [test] >>> Error: Content not found.
 [test] >>> Your note on 'CS2113T' has been deleted!
 [test] >>> 
@@ -61,11 +61,11 @@ back : Returns to the parent workspace.
 Format: back
 
 [test] >>> Error: Missing arguments.
-Format: test > schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
+Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
 [test] >>> Error: Missing arguments.
-Format: test > schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
+Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
 [test] >>> Error: Missing arguments.
-Format: test > schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
+Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<zoom_link>"
 [test] >>> Your schedule on 'CS2113T Tutorial' has been added!
 [test] >>> Your schedule on 'CS2113T Lecture' has been added!
 [test] >>> Command not found! Type 'help' for a list of commands.
@@ -78,7 +78,7 @@ Rerun the same command with an index behind to view the content.
 [test] >>> Error: Content not found.
 [test] >>> CS2113T Lecture (Friday, 16:00): https://zoom.us/test
 [test] >>> Error: Missing arguments.
-Format: test > schedule delete <item number>
+Format: schedule delete <item number>
 [test] >>> Error: Content not found.
 [test] >>> Your link on 'CS2113T Tutorial' has been deleted!
 [test] >>> List of Content
