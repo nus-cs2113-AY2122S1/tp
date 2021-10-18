@@ -13,7 +13,8 @@ public enum CommandNames {
     CLEAR_DISH("clear dish", new ClearDishCommand()),
     CLEAR_INGR("clear ingr", new ClearIngrCommand()),
     CLEAR_ALL("clear all", new ClearAllCommand()),
-    HELP("help", new HelpCommand());
+    HELP("help", new HelpCommand()),
+    SORT_DISH("sort dish", new SortDishCommand());
 
 
     private String name;
