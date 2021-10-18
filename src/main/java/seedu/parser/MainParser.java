@@ -125,6 +125,7 @@ public class MainParser {
         }
     }
 
+    //@@author mayankp291
     private Command parseInvalidDetailCommand(Exception e) {
         if (e instanceof InvalidNameException) {
             return new InvalidDetailCommand(FailedCommandType.INVALID_NAME);
@@ -151,6 +152,7 @@ public class MainParser {
         return new FailedCommand(FailedCommandType.GENERAL);
     }
 
+    //@@author
     private Command parseViewContact(String userInput) {
         try {
             int viewedIndex = IndexParser.getIndexFromInput(userInput);

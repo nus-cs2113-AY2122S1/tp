@@ -181,6 +181,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     public static void invalidNameInput() {
         String message = "The name is not correctly formatted,\n"
                 + "Rules for name :\n"
@@ -191,6 +192,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     public static void invalidGithubUsernameInput() {
         String message = "The github username is not correctly formatted,\n"
                 + "Rules for Github username :\n"
@@ -202,6 +204,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     public static void invalidTelegramUsernameInput() {
         String message = "The telegram username is not correctly formatted,\n"
                 + "Rules for Telegram username :\n"
@@ -211,6 +214,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     public static void invalidTwitterUsernameInput() {
         String message = "The twitter username is not correctly formatted,\n"
                 + "Rules for Twitter username :\n"
@@ -220,6 +224,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     //not full, need to update
     public static void invalidEmailInput() {
         String message = "The email id is not correctly formatted,\n"
@@ -230,6 +235,7 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
+    //@@author mayankp291
     public static void invalidLinkedinUsernameInput() {
         String message = "The linkedin username is not correctly formatted,\n"
                 + "Rules for Linkedin username :\n"
