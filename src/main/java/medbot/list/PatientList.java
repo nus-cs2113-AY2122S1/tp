@@ -1,27 +1,28 @@
-package medbot;
+package medbot.list;
 
 import medbot.exceptions.MedBotException;
+import medbot.list.PersonList;
 import medbot.person.Patient;
 
 public class PatientList extends PersonList {
 
-    public int addPatient(Patient patient) {
+    public int addPerson(Patient patient) {
         return super.addPerson(patient);
     }
 
-    public String getPatientInfo(int patientId) throws MedBotException {
+    public String getPersonInfo(int patientId) throws MedBotException {
         return super.getPersonInfo(patientId);
     }
 
-    public void editPatient(int patientId, Patient newPatientData) throws MedBotException {
+    public void editPerson(int patientId, Patient newPatientData) throws MedBotException {
         super.editPerson(patientId, newPatientData);
     }
 
-    public void deletePatient(int patientId) throws MedBotException {
+    public void deletePerson(int patientId) throws MedBotException {
         super.deletePerson(patientId);
     }
 
-    public String listPatients() {
+    public String listPersons() {
         return super.listPersons();
     }
 
@@ -29,7 +30,7 @@ public class PatientList extends PersonList {
         return "No Patient with ID " + super.getNoPersonIdErrorMessage(patientId);
     }
 
-    public void addPatientFromStorage(Patient patient) {
+    public void addPersonFromStorage(Patient patient) {
         super.addPersonFromStorage(patient);
     }
 }

@@ -1,5 +1,6 @@
-package medbot;
+package medbot.list;
 
+import medbot.Parser;
 import medbot.exceptions.MedBotException;
 import medbot.person.Person;
 import medbot.utilities.ViewType;
