@@ -40,10 +40,10 @@ public class Duke {
                 Storage.write("ingredient");
                 Storage.write("dish");
 
-            } catch (FoodoramaException e) {
+            } catch (FoodoramaException exception) {
                 //ui.printInvalidCommandMsg();
                 System.out.println(ui.getLineDivider());
-                System.out.println(e.getMessage());
+                System.out.println(exception.getMessage());
                 System.out.println(ui.getLineDivider());
             }
             userInput = input.nextLine();

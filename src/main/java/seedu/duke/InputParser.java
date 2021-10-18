@@ -1,7 +1,6 @@
 package seedu.duke;
 
 import seedu.duke.command.CommandNames;
-import seedu.duke.exceptions.CommandNotAvailableException;
 import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
@@ -13,15 +12,25 @@ public class InputParser {
                 return command;
             }
         }
-        throw new FoodoramaException("Command not found");
+        throw new FoodoramaException("Sorry, that is an invalid command.");
     }
 
-    public ArrayList<String> getParameters(String input, CommandNames inputCommand) {
+    public ArrayList<String> getParameters(String input, CommandNames inputCommand) throws FoodoramaException {
         ArrayList<String> parameters = new ArrayList<>();
 
         //Replace the first command part with null, and you'll be left with params
         String parameterString = input.replaceFirst(inputCommand.getName(), "").trim();
         switch (inputCommand) {
+
+        //No parameter commands
+        case CLEAR_DISH:
+        case CLEAR_INGR:
+        case CLEAR_ALL:
+        case HELP:
+            if(!parameterString.isBlank()) {
+                throw new FoodoramaException(inputCommand.getName() + " command doesn't require any additional parameters");
+            }
+            break;
 
         //One parameter commands just add the parameterString
         case GRAPH:
@@ -32,10 +41,6 @@ public class InputParser {
         case DELETE_INGR:
         case ADD_INGR:
         case ADD_DISH:
-        case HELP:
-        case CLEAR_DISH:
-        case CLEAR_INGR:
-        case CLEAR_ALL:
         case LIST:
             parameters.add(parameterString);
             break;

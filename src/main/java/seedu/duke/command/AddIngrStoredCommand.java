@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.Ingredient;
 import seedu.duke.IngredientList;
 import seedu.duke.Ui;
+import seedu.duke.exceptions.FoodoramaException;
 import seedu.duke.logger.LoggerManager;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class AddIngrStoredCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<String> parameters) {
+    public void execute(ArrayList<String> parameters) throws FoodoramaException {
         Ui ui = new Ui();
         logger.log(Level.INFO, "Start of process");
         String ingredient = String.join(" ", parameters);
@@ -37,8 +38,9 @@ public class AddIngrStoredCommand extends Command {
                 currentIngredient.updateIngredientWeight(ingredientWeightValue);
                 logger.log(Level.INFO, "Successfully stored Ingredient");
             } catch (NumberFormatException e) {
-                System.out.println(ui.getInvalidParamMsg());
-                System.out.println(ui.getLineDivider());
+                throw new FoodoramaException("Sorry, please input a valid number.");
+                //System.out.println(ui.getInvalidParamMsg());
+                //System.out.println(ui.getLineDivider());
             }
         }
         System.out.println(ui.getLineDivider());

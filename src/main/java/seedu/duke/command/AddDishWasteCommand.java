@@ -4,6 +4,7 @@ package seedu.duke.command;
 import seedu.duke.Dish;
 import seedu.duke.DishList;
 import seedu.duke.Ui;
+import seedu.duke.exceptions.FoodoramaException;
 import seedu.duke.logger.LoggerManager;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class AddDishWasteCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<String> parameters) {
+    public void execute(ArrayList<String> parameters) throws FoodoramaException {
         Ui ui = new Ui();
         logger.log(Level.INFO, "Start of process");
         String dish = String.join(" ", parameters);
@@ -42,8 +43,9 @@ public class AddDishWasteCommand extends Command {
                         + " "
                         + dishWeightValue);
             } catch (NumberFormatException e) {
-                System.out.println(ui.getInvalidParamMsg());
-                System.out.println(ui.getLineDivider());
+                //System.out.println(ui.getInvalidParamMsg());
+                //System.out.println(ui.getLineDivider());
+                throw new FoodoramaException("Sorry, please input a valid number.");
             }
         }
         System.out.println(ui.getLineDivider());
