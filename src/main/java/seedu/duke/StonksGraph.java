@@ -11,7 +11,7 @@ public class StonksGraph {
     private static final int ROWS_OFFSET = ROWS - 1;
     private static final int COLS_OFFSET = COLS - 1;
     private static final int BAR_VALUE = 200;
-    private char[][] grid = new char [ROWS][COLS];
+    private final char[][] grid = new char [ROWS][COLS];
     private static final char BORDER_CHAR = 'x';
 
     /**
@@ -60,7 +60,7 @@ public class StonksGraph {
         String convertedString = "";
         for (int x = 0; x < ROWS; x++) {
             for (int y = 0; y < COLS; y++) {
-                convertedString += (String.format("%c",grid[x][y]));
+                convertedString += (String.format("%c", grid[x][y]));
             }
             convertedString += (System.lineSeparator());
         }
