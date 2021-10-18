@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class IngredientList {
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
@@ -26,6 +27,22 @@ public class IngredientList {
             }
         }
         return -1;
+    }
+
+    public static double getGreatestWaste() {
+        double greatest = 0;
+        for (Ingredient ingr : ingredientList) {
+            double currWaste = ingr.getWastage();
+            if (currWaste > greatest) {
+                greatest = currWaste;
+            }
+        }
+        assert greatest != 0 : "Exception should have been thrown earlier if list is empty";
+        return greatest;
+    }
+
+    public static void graph() {
+        ui.printIngrListGraph(ingredientList);
     }
 
     public static void list() {
@@ -57,5 +74,10 @@ public class IngredientList {
             System.out.println("Ingredient, " + ingredientName + " has been removed!");
             assert ingredientList.size() == (listSize - 1) : "ingredientList should be of size N-1";
         }
+    }
+
+    public static void clearList() {
+        ingredientList.clear();
+        assert ingredientList.size() == 0 : "ingredientList should be of size 0";
     }
 }

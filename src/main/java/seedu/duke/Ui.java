@@ -116,6 +116,18 @@ public class Ui {
             + "Sorry, please input a valid number." + System.lineSeparator()
             + LINE_DIVIDER;
 
+    private static final String DISH_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()
+            + "Dish list has been cleared." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    private static final String INGR_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()
+            + "Ingredient list has been cleared." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    private static final String ALL_CLEARED = LINE_DIVIDER + System.lineSeparator()
+            + "Both Dish and Ingredient lists have been cleared." + System.lineSeparator()
+            + LINE_DIVIDER;
+
     protected static final String HELP_ME = LINE_DIVIDER + System.lineSeparator()
             + "Here are the commands you can use: \n"
             + "1. Adding a Dish : 'add dish [dishName]' \n"
@@ -140,6 +152,10 @@ public class Ui {
             + "11. Viewing this list of commands: help \n"
             + "12. Exiting the program: bye"
             + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    public String FIND_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
+            + "Please enter a keyword!" + System.lineSeparator()
             + LINE_DIVIDER;
 
     public String getLogo() {
@@ -190,6 +206,18 @@ public class Ui {
         return HELP_ME;
     }
 
+    public String getDishListCleared() {
+        return DISH_LIST_CLEARED;
+    }
+
+    public String getIngrListCleared() {
+        return INGR_LIST_CLEARED;
+    }
+
+    public String getAllCleared() {
+        return ALL_CLEARED;
+    }
+
     public void printAddedDish(String dishName) {
         assert dishName != null : "dishName cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
@@ -206,9 +234,62 @@ public class Ui {
         System.out.println("You can use command 'add' to add new dishes!");
     }
 
+    public void printDishListGraph(ArrayList<Dish> dishList) {
+        assert dishList != null : "dishList cannot be null";
+        double max = DishList.getGreatestWaste();
+        System.out.println("Here are the dishes you have: ");
+        for (int i = 0; i < dishList.size(); i++) {
+            System.out.println((i + 1) + ". " + dishList.get(i).toGraph(max));
+        }
+        System.out.println("You can use command 'add' to add new dishes!");
+    }
+
     public void printDishNameRemoved(String dishName) {
         assert dishName != null : "dishName cannot be null";
         System.out.println("Dish, " + dishName + " has been removed!");
     }
+
+    public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
+        double max = IngredientList.getGreatestWaste();
+        System.out.println("Here are the dishes you have: ");
+        for (int i = 0; i < ingredientList.size(); i++) {
+            System.out.println((i + 1) + ". " + ingredientList.get(i).toGraph(max));
+        }
+        System.out.println("You can use command 'add' to add new dishes!");
+    }
 }
 
+    public void printMatchedDishes(ArrayList<Dish> matchedDishList) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "As requested, here are the matching dishes in your list:");
+        if (DishList.dishList.size() == 0) {
+            System.out.println("There are no dishes recorded!");
+        } else if (matchedDishList.size() == 0) {
+            System.out.println("The keyword cannot be found!");
+        } else {
+            int taskCounter = 0;
+            for (Dish element : matchedDishList) {
+                System.out.println(taskCounter + 1 + ". " + element.toString());
+                taskCounter++;
+            }
+        }
+        System.out.println(LINE_DIVIDER);
+    }
+
+    public void printMatchedIngredients(ArrayList<Ingredient> matchedIngrList) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "As requested, here are the matching ingredients in your list:");
+        if (IngredientList.ingredientList.size() == 0) {
+            System.out.println("There are no ingredients recorded!");
+        } else if (matchedIngrList.size() == 0) {
+            System.out.println("The keyword cannot be found!");
+        } else {
+            int taskCounter = 0;
+            for (Ingredient element : matchedIngrList) {
+                System.out.println(taskCounter + 1 + ". " + element.toString());
+                taskCounter++;
+            }
+        }
+        System.out.println(LINE_DIVIDER);
+    }
+}

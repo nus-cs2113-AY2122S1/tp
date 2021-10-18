@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Dish {
+public class Dish implements Comparable<Dish>{
     private static Logger logger = Logger.getLogger("Dish class");
     private ArrayList<Ingredient> constituents = new ArrayList<>();
     private Ui ui = new Ui();
@@ -33,6 +33,10 @@ public class Dish {
 
     public String getDishName() {
         return dishName;
+    }
+
+    public Double getWastage() {
+        return wastage;
     }
 
     public Double getIngredientContribution() {
@@ -95,6 +99,21 @@ public class Dish {
                 + "   Constituents: " + constituentList;
     }
 
+    public String toGraph(double max) {
+        String bar = "[";
+        int num = (int)(10 * wastage/max);
+        for (int i = 0; i < 10; i++) {
+            if(i < num) {
+                bar = bar + "█";
+            } else  {
+                bar = bar + " ";
+            }
+        }
+        bar = bar + "]";
+        return dishName + System.lineSeparator()
+                + "   Wastage: " + bar + " " + wastage + " kg";
+    }
+
     public String formatData() {
         String output = "";
         output = output + dishName + "|" + wastage + "|" + ingredientContribution;
@@ -102,5 +121,10 @@ public class Dish {
             output = output + "|" + ingredient.getIngredientName();
         }
         return output;
+    }
+
+    @Override
+    public int compareTo(Dish o) {
+        return (int) (wastage - o.wastage);
     }
 }
