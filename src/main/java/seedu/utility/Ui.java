@@ -20,7 +20,10 @@ public class Ui {
             + "███████    ██    ██    ██ ██ ██  ██ █████   ███████       ███   ██   ██ \n"
             + "     ██    ██    ██    ██ ██  ██ ██ ██  ██       ██      ██ ██  ██   ██ \n"
             + "███████    ██     ██████  ██   ████ ██   ██ ███████     ██   ██ ██████  ";
-    
+
+    public static final String SEPARATOR_LINE = "-------------------------------------------------------------------"
+            + "----------------------------------";
+    private final String newLine = System.lineSeparator();
 
 
     private static final String HELP_FORMAT = "List Out All Commands: help";
@@ -72,10 +75,7 @@ public class Ui {
     }
 
     private void printLine() {
-        for (int i = 0; i <= 100; i++) {
-            System.out.print("-");
-        }
-        System.out.println(" ");
+        System.out.println(SEPARATOR_LINE);
     }
 
     /**
@@ -129,7 +129,7 @@ public class Ui {
 
     private void printFilteredList(ArrayList<Entry> filteredEntries) {
         assert filteredEntries.size() > 0;
-        System.out.println("Below is a list of all your findings!");
+        System.out.println(Messages.FOUND_LIST_MESSAGE);
         printLine();
 
         int i = 1;
@@ -165,9 +165,7 @@ public class Ui {
             i++;
         }
     }
-
-
-
+    
     /**
      * Prints the total expense of all expenses in the financial tracker to the standard output.
      *
@@ -176,7 +174,7 @@ public class Ui {
     public void printTotalExpense(double totalExpense) {
         assert totalExpense >= 0;
         printLine();
-        System.out.printf("Your total expense is: $%.2f\n", totalExpense);
+        System.out.printf("Your total expense is: $%.2f" + newLine, totalExpense);
         printLine();
     }
 
@@ -185,11 +183,11 @@ public class Ui {
         if (totalExpense == 0) {
             System.out.printf("You do not have any expense between " 
                     + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + "\n");
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + newLine);
         } else {
             System.out.printf("Your total expense between " 
                     + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f\n", totalExpense);
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f" + newLine, totalExpense);
         }
         printLine();
     }
@@ -199,11 +197,11 @@ public class Ui {
         if (totalExpense == 0) {
             System.out.printf("You do not have any income between " 
                     + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + "\n");
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + newLine);
         } else {
             System.out.printf("Your total income between " 
                     + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f\n", totalExpense);
+                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f" + newLine, totalExpense);
         }
         printLine();
     }
@@ -216,13 +214,13 @@ public class Ui {
     public void printTotalIncome(double totalIncome) {
         assert totalIncome >= 0;
         printLine();
-        System.out.printf("Your total income is: $%.2f\n", totalIncome);
+        System.out.printf("Your total income is: $%.2f" + newLine, totalIncome);
         printLine();
     }
 
     public void printBalance(double balance) {
         printLine();
-        System.out.printf("Your current balance is: $%.2f\n", balance);
+        System.out.printf("Your current balance is: $%.2f" + newLine, balance);
         printLine();
     }
     
