@@ -11,7 +11,7 @@ public class WorkoutListModel {
     }
 
     public WorkoutListModel(@JsonProperty("workouts") ArrayList<WorkoutModel> workouts) {
-        this.workouts = workouts;
+        WorkoutListModel.workouts = workouts;
     }
 
     public ArrayList<WorkoutModel> getWorkouts() {

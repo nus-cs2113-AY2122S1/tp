@@ -15,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +64,10 @@ public class Storage {
             ArrayList<WorkoutModel> workoutsStorageForm = convertFromJson(jsonString);
 
             for (WorkoutModel workoutModel : workoutsStorageForm) {
-                Workout workout = new Workout(workoutModel.getWorkoutName());
+                Workout workout = new Workout(
+                        workoutModel.getWorkoutName(),
+                        LocalDate.parse(workoutModel.getDeadline())
+                );
                 for (ExerciseModel exerciseModel : workoutModel.getExercises()) {
                     Exercise exercise = readExercise(exerciseModel);
                     workout.addExercise(exercise);

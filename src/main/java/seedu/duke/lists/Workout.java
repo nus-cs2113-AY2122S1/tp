@@ -6,27 +6,36 @@ import seedu.duke.storage.models.WorkoutListModel;
 import seedu.duke.storage.models.WorkoutModel;
 import seedu.duke.exercises.Exercise;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static seedu.duke.lists.WorkoutList.LOGGER;
 
 /**
  * A workout contains a list of exercises in the form of ArrayList of Exercise objects.
+ * It also contains a deadline set by the user.
  * Adding, deleting and other operations related to all exercises in the workout will be executed from here.
  */
 public class Workout {
     private final String workoutName;
     private final ArrayList<Exercise> exercises;
+    private final String deadline;
+    private final LocalDate deadlineDate;
 
     /**
      * Default Constructor.
      *
      * @param workoutName is the name that the user gives to the workout routine
+     * @param deadlineDate Workout deadline in the form of yyyy-mm-dd
      */
-    public Workout(String workoutName) {
+    public Workout(String workoutName, LocalDate deadlineDate) {
         assert !workoutName.isEmpty();
+        assert deadlineDate != null;
         exercises = new ArrayList<>();
         this.workoutName = workoutName;
+        this.deadlineDate = deadlineDate;
+        deadline = deadlineDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     /**
@@ -36,7 +45,8 @@ public class Workout {
      */
     @Override
     public String toString() {
-        return getWorkoutName();
+        assert !deadline.isEmpty();
+        return getWorkoutName() + " finish by: " + deadline;
     }
 
     /**
@@ -107,7 +117,7 @@ public class Workout {
      */
     public void convertToWorkoutStorageModel() {
         LOGGER.info("Generating WorkoutModel");
-        WorkoutModel workoutModel = new WorkoutModel(workoutName);
+        WorkoutModel workoutModel = new WorkoutModel(workoutName, deadlineDate.toString());
 
         for (Exercise exercise : exercises) {
             exercise.convertToExerciseStorageModel(workoutModel);
