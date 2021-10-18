@@ -13,23 +13,11 @@ public class RecommendWorkoutParser extends Parser {
     private Command prepareRecommendWorkout(String commandArgs) {
         String workoutLevel = commandArgs.trim();
 
-        switch (workoutLevel) {
-        case "beginner":
-            String beginnerDescription = "Biceps";
-            String[] beginnerExercises = {"Dumbell Curl", "ggghs"};
-
-            return new RecommendWorkoutCommand(beginnerDescription, beginnerExercises);
-        case "intermediate":
-            String intermediateDescription = "Shoulder";
-            String[] intermediateExercises = {"Overhead Press", "jrbhgjrg"};
-            return new RecommendWorkoutCommand(intermediateDescription, intermediateExercises);
-        case "pro":
-            String proDescription = "Push";
-            String[] proExercises = {"Bench Press", "sghj"};
-            return new RecommendWorkoutCommand(proDescription, proExercises);
-        default:
+        if (workoutLevel.length() == 0) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + RecommendWorkoutCommand.MESSAGE_USAGE);
         }
+
+        return new RecommendWorkoutCommand(workoutLevel);
     }
 
     @Override

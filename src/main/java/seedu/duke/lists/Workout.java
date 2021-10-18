@@ -116,8 +116,4 @@ public class Workout {
 
         WorkoutListModel.addToWorkoutListModel(workoutModel);
     }
-
-    public void recommendExercise(Exercise[] toAdd) {
-        exercises.addAll(Arrays.asList(toAdd));
-    }
 }

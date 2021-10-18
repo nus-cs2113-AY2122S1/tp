@@ -1,6 +1,8 @@
 package seedu.duke.ui;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.IncorrectCommand;
+import seedu.duke.command.RecommendWorkoutCommand;
 import seedu.duke.exception.GetJackDException;
 
 import java.util.ArrayList;
@@ -22,14 +24,6 @@ public class Ui {
             prefix = "";
             newLine = System.lineSeparator();
         }
-    }
-
-    private void printText(String message) {
-        System.out.println(prefix + message.replace("\n", newLine));
-    }
-
-    public void printLineSeparator() {
-        printText(DIVIDER);
     }
 
     public static void printWelcomeMessage() {
@@ -70,6 +64,14 @@ public class Ui {
         System.out.println("\"search\" : Displays workouts or exercises that contain the specified keyword");
         System.out.println("\"bye\" : Ends the program");
         System.out.println(DIVIDER);
+    }
+
+    private void printText(String message) {
+        System.out.println(prefix + message.replace("\n", newLine));
+    }
+
+    public void printLineSeparator() {
+        printText(DIVIDER);
     }
 
     /**
@@ -119,7 +121,6 @@ public class Ui {
      * @param message is the unique message to be shown
      */
     public void showToUser(String message) {
-
         assert (!message.isEmpty());
         printLineSeparator();
         printText(message);
@@ -130,4 +131,13 @@ public class Ui {
         }
     }
 
+    public void showRecommendedWorkouts(String workoutLevel) {
+        if (workoutLevel.equals("beginner")) {
+
+        } else if (workoutLevel.equals("intermediate")) {
+
+        } else if (workoutLevel.equals("pro")) {
+
+        }
+    }
 }

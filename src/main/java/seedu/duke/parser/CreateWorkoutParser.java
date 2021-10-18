@@ -15,9 +15,11 @@ public class CreateWorkoutParser extends Parser {
 
     private Command prepareCreateWorkout(String commandArgs) {
         String workoutName = commandArgs.trim();
+
         if (workoutName.length() == 0) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
         }
+
         return new CreateWorkoutCommand(workoutName);
     }
 
