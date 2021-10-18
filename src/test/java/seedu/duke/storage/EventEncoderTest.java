@@ -25,12 +25,12 @@ class EventEncoderTest {
         // Check the event is saved in the correct String format
         String expectedEvent1 = "e | Peppa Pig's Concert | X | Asia world tour "
                 + "| 19-02-2022 2000 | Indoor Stadium | 1000.9";
-        String expectedSubTask1 = "t | Hype myself up | X | Drink lots of sugar | 19-02-2022 1950";
-        String expectedSubTask2 = "t | Enter venue |   |  | 19-02-2022 1955";
-        String expectedEvent2 = "e | Funfair |   | For charity | 20-02-2022 2030 | Parade square | 2000.1";
         assertEquals(expectedEvent1, encodedEventsList.get(0));
+        String expectedSubTask1 = "t | Hype myself up | X | Drink lots of sugar | 19-02-2022 1950";
         assertEquals(expectedSubTask1, encodedEventsList.get(1));
+        String expectedSubTask2 = "t | Enter venue |   |  | 19-02-2022 1955";
         assertEquals(expectedSubTask2, encodedEventsList.get(2));
+        String expectedEvent2 = "e | Funfair |   | For charity | 20-02-2022 2030 | Parade square | 2000.1";
         assertEquals(expectedEvent2, encodedEventsList.get(3));
     }
 
