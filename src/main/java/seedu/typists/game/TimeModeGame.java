@@ -13,7 +13,6 @@ public class TimeModeGame extends Game {
 
     protected ArrayList<String> inputLines;
     protected int gameTime;
-    protected int displayTime;
     protected double realGameTime;
 
     public TimeModeGame(String targetWordSet, int wordsPerLine) {

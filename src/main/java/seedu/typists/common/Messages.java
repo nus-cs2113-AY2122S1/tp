@@ -43,28 +43,13 @@ public class Messages {
                     + "  (__)       ()__________)";
 
     public static final String CLOCK =
-            "       ,--.-----.--.\n"
-                    + "       |--|-----|--|\n"
-                    + "       |--|     |--|\n"
-                    + "       |  |-----|  |\n"
-                    + "     __|--|     |--|__\n"
-                    + "    /  |  |-----|  |  \\\n"
-                    + "   /   \\__|-----|__/   \\\n"
-                    + "  /   ______---______   \\/\\\n"
-                    + " /   /               \\   \\/\n"
-                    + "{   /    _     _   _  \\   }\n"
-                    + "|  {    | | . | | | |  }  |-,\n"
-                    + "|  |    |_| . |_| |_|  |  | |\n"
-                    + "|  {                   }  |-'\n"
-                    + "{   \\                 /   }\n"
-                    + " \\   `------___------'   /\\\n"
-                    + "  \\     __|-----|__     /\\/\n"
-                    + "   \\   /  |-----|  \\   /\n"
-                    + "    \\  |--|     |--|  /\n"
-                    + "     --|  |-----|  |--\n"
-                    + "       |--|     |--|\n"
-                    + "       |--|-----|--|\n"
-                    + "       `--'-----`--'";
+            ".'`~~~~~~~~~~~`'.\n"
+                    + "(  .'11 12 1'.  )\n"
+                    + "|  :10 \\|   2:  |\n"
+                    + "|  :9   @   3:  |\n"
+                    + "|  :8       4;  |\n"
+                    + "'. '..7 6 5..' .'\n"
+                    + " ~-------------~ ";
 
     public static final String MESSAGE_WELCOME = "Welcome to Typist -- the ultimate cli typing game.";
     public static final String MESSAGE_ACKNOWLEDGE = "Brought to you by -- AY2122S1-CS2113-T13-4.";
@@ -77,18 +62,18 @@ public class Messages {
 
     //This sample text is gotten from https://www.lipsum.com/
     public static final String SAMPLE_TEXT = "lorem ipsum is simply dummy text of the printing and typesetting "
-            + "imply dummy text of the printing and typesetting industry ipum is simply dummy"
-            + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
-            + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
-            + "industry industry industry industry industry industry industry industry industry industry industry "
-            + "industry industry industry industry industry industry industry industry industry industry industry "
-            + "industry industry industry industry industry industry industry industry industry industry industry "
-            + "industry industry industry industry industry industry industry industry industry industry industry "
-            + "industry industry industry industry industry industry industry industry industry industry industry "
-            + "industry industry industry industry industry industry industry industry industry industry industry "
-            + "industry industry industry industry industry industry industry industry industry industry industry "
-            + "industry industry industry industry industry industry industry industry industry industry industry "
-            + "industry industry industry industry industry industry industry industry industry industry industry ";
+           + "imply dummy text of the printing and typesetting industry ipum is simply dummy "
+           + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
+           + "dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy dummy "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry "
+           + "industry industry industry industry industry industry industry industry industry industry industry ";
 
     //public static final String MESSAGE_GOODBYE = "Goodbye!";
     //public static final String MESSAGE_INIT_FAILED = "Failed to initialise address book application. Exiting...";

@@ -20,7 +20,8 @@ public class Utils {
         int j = 0;
         String[] line = new String[lineLength];
         for (String w : wordList) {
-            if (j == lineLength) {
+            if (j == lineLength - 1) {
+                line[j] = w;
                 wordLines.add(line.clone());
                 j = 0;
             } else {
@@ -31,6 +32,7 @@ public class Utils {
         return wordLines;
     }
 
+    /** same function as getWordLines, but the param is ArrayList not string. */
     public static ArrayList<String[]> getWordLineFromStringArray(ArrayList<String> stringList) {
         ArrayList<String[]> wordLines = new ArrayList<>();
         for (String s : stringList) {
