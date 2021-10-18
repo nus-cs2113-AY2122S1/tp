@@ -60,3 +60,41 @@ on [link](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
     2. Under **Project SDK:** section, find and select JDK version 11.
        Eg: `Amazon Corretto version 11.0.12`.
     3. Under **Project language level:**, select `SDK default`.
+5. Verifying the setup
+    1. After performing the steps above, locate the file `src/main/java/terminus/Terminus.java`,
+       right-click and select `Run 'Terminus.main()'`.
+    2. If everything is correctly set up, you should see the following terminal.
+   ```
+   Welcome to TermiNUS!
+   
+   Type any of the following to get started:
+   > exit
+   > help
+   > note
+   > schedule
+   
+   [] >>>
+
+   ```
+
+#### 2.1.4 Configuring the Coding Style
+
+Import the coding style xml file into your IntelliJ IDEA.
+
+1. Go to IntelliJ IDEA settings page.
+    1. Located at the **top-right** of the app, click on the gear icon and select `Settings...`.
+2. Under the settings page, locate the `Code Style` tab.
+    1. `Editor`&rarr;`Code Style`
+3. Once you are at the `Code Style` tab, you will need to import the file `CS2113TStyle.xml`.
+    1. At the `Scheme` section, select the gear icon and select `Import Scheme`
+       &rarr;`IntelliJ IDEA code style XML`.
+    2. Locate and select the `CS2113TStyle.xml` file which is included in the TermiNUS project.
+    3. Once done, select `Apply` then `OK`.
+4. Now your IntelliJ IDEA should follow our Coding Style.
+
+> :bulb: IntelliJ IDEA have certain shortcut key to aid in auto-formatting of code. 
+> Once you are done with a piece of code, highlight the section you have just written and press the 
+> key `CTRL + SHIFT + L`.
+
+ 
+
