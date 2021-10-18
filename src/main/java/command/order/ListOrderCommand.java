@@ -66,8 +66,8 @@ public class ListOrderCommand extends Command {
                     break;
                 case CommandParameters.NAME:
                     filteredOrders = (ArrayList<Order>) filteredOrders.stream().filter((m) ->
-                                    (m.getMedicineName().toUpperCase()).contains(parameterValue.toUpperCase()))
-                                    .collect(Collectors.toList());
+                            (m.getMedicineName().toUpperCase()).contains(parameterValue.toUpperCase()))
+                            .collect(Collectors.toList());
                     break;
                 case CommandParameters.QUANTITY:
                     filteredOrders = (ArrayList<Order>) filteredOrders.stream().filter((m) ->
@@ -77,16 +77,14 @@ public class ListOrderCommand extends Command {
                     try {
                         Date date = DateParser.stringToDate(parameterValue);
                         filteredOrders = (ArrayList<Order>) filteredOrders.stream().filter((m) ->
-                                (m).getDate().toInstant().isBefore(date.toInstant())
-                                || (m).getDate().toInstant().equals(date.toInstant())).collect(Collectors.toList());
+                                (m).getDate().equals(date)).collect(Collectors.toList());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
                     break;
                 case CommandParameters.STATUS:
                     filteredOrders = (ArrayList<Order>) filteredOrders.stream().filter((m) ->
-                                    (m.getStatus()).equalsIgnoreCase(parameterValue))
-                                    .collect(Collectors.toList());
+                            (m.getStatus()).equalsIgnoreCase(parameterValue)).collect(Collectors.toList());
                     break;
                 default:
                     return;

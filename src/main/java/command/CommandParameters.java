@@ -17,6 +17,6 @@ public class CommandParameters {
     public static final String REVERSED_SORT = "rsort";
     public static final String SORT = "sort";
     public static final String STAFF = "s";
-    public static final String STATUS = "status";
+    public static final String STATUS = "s";
     public static final String STOCK_ID = "sid";
 }
