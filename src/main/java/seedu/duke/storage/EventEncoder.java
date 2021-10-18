@@ -15,7 +15,8 @@ public class EventEncoder {
     }
 
     private static String encodeEventToString(Event event) {
-        return event.getTitle()
+        return "e | "
+                + event.getTitle()
                 + " | "
                 + event.getStatusIcon()
                 + " | "
