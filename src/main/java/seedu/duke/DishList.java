@@ -44,4 +44,8 @@ public class DishList {
             assert dishList.size() == (listSize - 1) : "dishList should be of size N-1";
         }
     }
+
+    public static void clearList() {
+        dishList.clear();
+    }
 }
