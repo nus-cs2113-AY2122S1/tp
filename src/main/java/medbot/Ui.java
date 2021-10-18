@@ -1,5 +1,8 @@
 package medbot;
 
+import medbot.utilities.ViewType;
+
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -210,5 +213,58 @@ public class Ui {
         return "Sorry, that's not a recognised command. To view a list of commands, type:\n" + "help\n";
     }
 
+    /**
+     * Utility function that performs a pseudo-clear of the console. Use this for testing from within
+     * the IDE.
+     */
+    public static void clearConsoleFromIde() {
+        System.out.print("\n\n\n\n\n");
+    }
 
+    /**
+     * Utility function that clears the console. Does not work within the IDE console.
+     */
+    public static void clearConsole() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                Runtime.getRuntime().exec("clear");
+            }
+        } catch (IOException | InterruptedException e) {
+            System.out.println("Error clearing the console");
+        }
+    }
+
+    /**
+     * Prints switched view message.
+     */
+    public void printSwitchedViewMessage() {
+        ViewType viewType = Parser.getViewType();
+
+        if (viewType == ViewType.PATIENT_INFO) {
+            System.out.println("  ___  _ _____ ___ ___ _  _ _____ \n"
+                    + " | _ \\/_\\_   _|_ _| __| \\| |_   _|\n"
+                    + " |  _/ _ \\| |  | || _|| .` | | |  \n"
+                    + " |_|/_/ \\_\\_|_|___|___|_|\\_| |_|  \n"
+                    + " |_ _| \\| | __/ _ \\               \n"
+                    + "  | || .` | _| (_) |              \n"
+                    + " |___|_|\\_|_|_\\___/    __         \n"
+                    + " \\ \\ / /_ _| __\\ \\    / /         \n"
+                    + "  \\ V / | || _| \\ \\/\\/ /          \n"
+                    + "   \\_/ |___|___| \\_/\\_/           \n"
+                    + "                                  ");
+        } else if (viewType == ViewType.SCHEDULE) {
+            System.out.println("  ___  ___ _  _ ___ ___  _   _ _    ___ ___ \n"
+                    + " / __|/ __| || | __|   \\| | | | |  | __| _ \\\n"
+                    + " \\__ \\ (__| __ | _|| |) | |_| | |__| _||   /\n"
+                    + " |___/\\___|_||_|___|___/_\\___/|____|___|_|_\\\n"
+                    + " \\ \\ / /_ _| __\\ \\    / /                   \n"
+                    + "  \\ V / | || _| \\ \\/\\/ /                    \n"
+                    + "   \\_/ |___|___| \\_/\\_/                     \n"
+                    + "                                            ");
+        }
+
+        System.out.println("View has been switched to " + viewType);
+    }
 }

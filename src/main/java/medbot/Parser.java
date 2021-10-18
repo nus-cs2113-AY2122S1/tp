@@ -6,11 +6,14 @@ import medbot.command.DeletePatientCommand;
 import medbot.command.EditPatientCommand;
 import medbot.command.ExitCommand;
 import medbot.command.ListPatientCommand;
+import medbot.command.SwitchCommand;
 import medbot.command.ViewPatientCommand;
 import medbot.command.HelpCommand;
 import medbot.person.Patient;
 import medbot.person.Person;
+import medbot.utilities.ViewType;
 
+import javax.swing.text.View;
 import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
@@ -25,6 +28,7 @@ public class Parser {
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_HELP = "help";
+    private static final String COMMAND_SWITCH = "switch";
 
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
@@ -69,14 +73,35 @@ public class Parser {
 
     private static final String EMPTY_STRING = "";
 
+    private static ViewType viewType = ViewType.PATIENT_INFO;
+
     /**
-     * Parses the user input for commands and returns the relevant Command object.
+     * Checks the current view type that the parser is in and returns the relevant
+     * parseCommand object based on the view type.
      *
      * @param userInput String containing the full user input.
      * @return the corresponding Command object.
      * @throws MedBotException if command is unrecognised.
      */
-    public static Command parseCommand(String userInput) throws MedBotException {
+    public static Command parseViewType(String userInput) throws MedBotException {
+        if (Parser.viewType == ViewType.PATIENT_INFO) {
+            return parsePatientInfoCommand(userInput);
+        }
+        if (Parser.viewType == ViewType.SCHEDULE) {
+            return parseSchedulingCommand(userInput);
+        }
+
+        throw new MedBotException(WRONG_COMMAND_ERROR);
+    }
+
+    /**
+     * Parses the user input for patient information related commands and returns the relevant Command object.
+     *
+     * @param userInput String containing the full user input.
+     * @return the corresponding Command object.
+     * @throws MedBotException if command is unrecognised.
+     */
+    public static Command parsePatientInfoCommand(String userInput) throws MedBotException {
         userInput = preprocessInput(userInput);
         if (userInput.startsWith(COMMAND_ADD)) {
             return parseAddPatientCommand(userInput);
@@ -99,9 +124,20 @@ public class Parser {
         if (userInput.startsWith(COMMAND_HELP)) {
             return parseHelpCommand(userInput);
         }
-
+        if (userInput.equals(COMMAND_SWITCH)) {
+            return new SwitchCommand();
+        }
 
         throw new MedBotException(WRONG_COMMAND_ERROR);
+    }
+
+    //Update with relevant scheduling commands
+    public static Command parseSchedulingCommand(String userInput) throws MedBotException {
+        userInput = preprocessInput(userInput);
+        if (userInput.equals(COMMAND_SWITCH)) {
+            return new SwitchCommand();
+        }
+        return new ListPatientCommand(); //just using list as a placeholder/default cmd to be returned
     }
 
     /**
@@ -189,7 +225,6 @@ public class Parser {
         updateMultiplePersonalInformation(patient, parameters);
         return new EditPatientCommand(patientId, patient);
     }
-
 
     /**
      * Processes user input to create a new patient object with the corresponding information.
@@ -445,5 +480,16 @@ public class Parser {
         Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER);
         Matcher matcher = pattern.matcher(input);
         return matcher.replaceAll(replacementFunction);
+    }
+
+    /**
+     * Switches the view type of the parser.
+     */
+    public static void switchViewType() {
+        viewType = (viewType == ViewType.PATIENT_INFO) ? ViewType.SCHEDULE : ViewType.PATIENT_INFO;
+    }
+
+    public static ViewType getViewType() {
+        return viewType;
     }
 }

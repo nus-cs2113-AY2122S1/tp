@@ -4,11 +4,12 @@ import medbot.Parser;
 import medbot.PatientList;
 import medbot.Ui;
 
-public class ListPatientCommand extends Command {
+public class SwitchCommand extends Command {
 
     @Override
     public void execute(PatientList patientList, Ui ui) {
-        String allPatientsString = ui.getAllPatientsString(patientList);
-        ui.printOutput(allPatientsString);
+        Parser.switchViewType();
+        ui.clearConsoleFromIde();
+        ui.printSwitchedViewMessage();
     }
 }

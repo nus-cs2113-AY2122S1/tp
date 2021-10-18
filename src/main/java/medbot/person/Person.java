@@ -6,6 +6,7 @@ import static medbot.Ui.VERTICAL_LINE_SPACED;
 
 public abstract class Person {
 
+    private int personId = 0;
     protected String icNumber = "";
     protected String name = "";
     protected String phoneNumber = "";
@@ -56,6 +57,14 @@ public abstract class Person {
 
     public void setResidentialAddress(String residentialAddress) {
         this.residentialAddress = residentialAddress;
+    }
+
+    public int getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public void setNull() {
