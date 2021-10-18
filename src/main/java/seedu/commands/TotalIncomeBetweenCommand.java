@@ -1,9 +1,12 @@
 package seedu.commands;
 
+import seedu.entry.Expense;
+import seedu.entry.Income;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TotalIncomeBetweenCommand extends Command {
     private LocalDate start;
@@ -16,8 +19,8 @@ public class TotalIncomeBetweenCommand extends Command {
     
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        double totalExpenseBetween = finances.getTotalIncomeBetween(start,end);
-        ui.printTotalIncomeBetween(totalExpenseBetween,start,end);
+        double totalIncomeBetween = finances.getIncomeBetween(start,end);
+        ui.printTotalIncomeBetween(totalIncomeBetween,start,end);
     }
 }
 
