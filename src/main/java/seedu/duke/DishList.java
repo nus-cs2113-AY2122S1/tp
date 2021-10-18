@@ -61,6 +61,7 @@ public class DishList {
         }
     }
 
+
     public static void clearList() {
         dishList.clear();
         assert dishList.size() == 0 : "dishList should be of size 0";

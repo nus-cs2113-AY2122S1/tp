@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.CommandNames;
+import seedu.duke.command.SortDishCommand;
 import seedu.duke.exceptions.CommandNotAvailableException;
 
 import java.util.ArrayList;
@@ -36,7 +37,9 @@ public class InputParser {
         case CLEAR_DISH:
         case CLEAR_INGR:
         case CLEAR_ALL:
+        case SORT_DISH:
         case LIST:
+
             parameters.add(parameterString);
             break;
 
