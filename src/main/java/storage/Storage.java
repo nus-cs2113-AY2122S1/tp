@@ -1,16 +1,18 @@
 package storage;
 
+import errors.InvalidCommand;
+import errors.InvalidDataException;
 import inventory.Medicine;
 import inventory.Stock;
 import inventory.Order;
 import inventory.Dispense;
+import parser.FileParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -84,56 +86,24 @@ public class Storage {
         }
     }
 
-    private int parseStockID(String[] splitStockDetails) {
-        int stockID = Integer.parseInt(splitStockDetails[0]);
-        return stockID;
-    }
-
-    private String parseStockName(String[] splitStockDetails) {
-        String stockName = splitStockDetails[1];
-        return stockName;
-    }
-
-    private Double parseStockPrice(String[] splitStockDetails) {
-        double stockPrice = Double.parseDouble(splitStockDetails[2]);
-        return stockPrice;
-    }
-
-    private int parseStockQuantity(String[] splitStockDetails) {
-        int stockQuantity = Integer.parseInt(splitStockDetails[3]);
-        return stockQuantity;
-    }
-
-    private Date parseStockExpiry(String[] splitStockDetails) {
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-            Date stockExpiry = format.parse(splitStockDetails[4]);
-            return stockExpiry;
-        } catch (ParseException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
-        return null;
-    }
-
-    private String parseStockDescription(String[] splitStockDetails) {
-        String stockDescription = splitStockDetails[5];
-        return stockDescription;
-    }
-
-    private int parseStockMaxQuantity(String[] splitStockDetails) {
-        int stockMaxQuantity = Integer.parseInt(splitStockDetails[6]);
-        return stockMaxQuantity;
-    }
-
-    private Medicine parseStockData(String stockDetails) {
+    /**
+     * Parse stock data and create a stock object based on it.
+     *
+     * @param stockDetails String of data of specific stock from file data/stock.txt.
+     * @return stock object for adding into medicines.
+     */
+    private Medicine parseStockData(String stockDetails) throws InvalidDataException {
         String[] splitStockDetails = stockDetails.split("\\|");
-        int stockID = parseStockID(splitStockDetails);
-        String stockName = parseStockName(splitStockDetails);
-        double stockPrice = parseStockPrice(splitStockDetails);
-        int stockQuantity = parseStockQuantity(splitStockDetails);
-        Date stockExpiry = parseStockExpiry(splitStockDetails);
-        String stockDescription = parseStockDescription(splitStockDetails);
-        int stockMaxQuantity = parseStockMaxQuantity(splitStockDetails);
+        if (splitStockDetails.length != 7) { // If not all fields present. After addition of isDeleted will be 8
+            throw new InvalidDataException();
+        }
+        int stockID = FileParser.parseStockID(splitStockDetails);
+        String stockName = FileParser.parseStockName(splitStockDetails);
+        double stockPrice = FileParser.parseStockPrice(splitStockDetails);
+        int stockQuantity = FileParser.parseStockQuantity(splitStockDetails);
+        Date stockExpiry = FileParser.parseStockExpiry(splitStockDetails);
+        String stockDescription = FileParser.parseStockDescription(splitStockDetails);
+        int stockMaxQuantity = FileParser.parseStockMaxQuantity(splitStockDetails);
 
         Stock stock = new Stock(stockName, stockPrice, stockQuantity, stockExpiry, stockDescription, stockMaxQuantity);
         stock.setStockID(stockID);
@@ -144,16 +114,20 @@ public class Storage {
     /**
      * Read and process medicine stock details from file to restore medicine stock state in program.
      *
-     * @param file File object of data/duke.txt
-     * @throws FileNotFoundException If file is not found
+     * @param file File object of data/duke.txt.
+     * @throws FileNotFoundException If file is not found.
      */
     private ArrayList<Medicine> readFromStockFile(File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         ArrayList<Medicine> medicines = new ArrayList<>();
         while (sc.hasNextLine()) {
             String stockDetails = sc.nextLine();
-            Medicine parsedStock = parseStockData(stockDetails);
-            medicines.add(parsedStock);
+            try {
+                Medicine parsedStock = parseStockData(stockDetails);
+                medicines.add(parsedStock);
+            } catch (InvalidDataException e) {
+                System.out.println("Corrupted data detected in file"); // Maybe just log it instead of displaying?
+            }
         }
         return medicines;
     }

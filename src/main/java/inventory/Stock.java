@@ -1,5 +1,7 @@
 package inventory;
 
+import parser.DateParser;
+
 import java.util.Date;
 
 /**
@@ -95,7 +97,7 @@ public class Stock extends Medicine {
     @Override
     public String toFileFormat() {
         String fileFormat = getStockID() + "|" + getMedicineName() + "|" + getPrice() + "|" + getQuantity() + "|"
-                + getExpiry() + "|" +  getDescription() + "|" + getMaxQuantity();
+                + DateParser.dateToString(getExpiry()) + "|" +  getDescription() + "|" + getMaxQuantity();
         return fileFormat;
     }
 }
