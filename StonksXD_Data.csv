@@ -1,5 +1,12 @@
 entry_type, entry_description, amount, category, date
-E, qwe, 12.5, qwer, 2121-11-11
-E, qwe, 0.5, qwer, 2121-11-11
-I, qwe, 12.5, qwer, 2121-11-11
-I, qwe, 12.5, qwer, 2121-11-11
+E, pillow, 500.0, THINGS ON MY BED, 2021-10-18
+E, bought cookies, 500.0, bakery, 2021-01-18
+I, rob a bank, 800.0, Crime, 2021-10-18
+I, rob a church, 300.0, Crime, 2021-11-18
+I, rob a car, 400.0, Crime, 2021-12-18
+I, rob a home, 500.0, Crime, 2021-09-18
+I, rob a child, 600.0, Crime, 2021-08-18
+E, bought home, 555.0, bakery, 2021-07-18
+E, bought car, 4777.0, bakery, 2021-06-18
+E, bought condo, 87654888878.0, testcase, 2021-05-18
+
