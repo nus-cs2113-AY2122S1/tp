@@ -21,6 +21,16 @@ public class TimetableStorage {
      */
     public TimetableStorage(String path) {
         this.file = new File(path);
+
+        try {
+            if (!file.exists()) {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -32,8 +42,12 @@ public class TimetableStorage {
         try {
             FileReader timetableSaveReader = new FileReader(file);
             TimetableDto timetable = new Gson().fromJson(timetableSaveReader, TimetableDto.class);
+            if (timetable == null) {
+                return new Timetable(1);
+            }
             return timetable.toTimetable();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+            System.out.println(e);
             return new Timetable(1);
         }
     }

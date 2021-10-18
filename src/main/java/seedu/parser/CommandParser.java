@@ -1,6 +1,7 @@
 package seedu.parser;
 
 import seedu.command.AddCommand;
+import seedu.command.CheckCommand;
 import seedu.command.ClearCommand;
 import seedu.command.Command;
 import seedu.command.DeleteCommand;
@@ -17,6 +18,7 @@ import seedu.timetable.Timetable;
 
 public class CommandParser {
     private static final Integer SEARCH_LENGTH = 6;
+    private static final Integer CHECK_LENGTH = 5;
     private static final Integer SHOW_LENGTH = 4;
     private static final Integer ADD_LENGTH = 3;
     public static final Integer DELETE_LENGTH = 6;
@@ -44,6 +46,8 @@ public class CommandParser {
             command = new HelpCommand();
         } else if (lowerCaseText.startsWith("delete")) {
             command = parseDeleteCommand(text, timetable);
+        } else if (lowerCaseText.startsWith("check")) {
+            command = parseCheckCommand(text);
         } else if (lowerCaseText.startsWith("clear")) {
             command = parseClearCommand(timetable);
         } else {
@@ -66,7 +70,7 @@ public class CommandParser {
      * @param text User input.
      * @return SearchCommand with searchTerm and all flags.
      */
-    public Command parseSearchCommand(String text) {
+    private Command parseSearchCommand(String text) {
         if (text.toLowerCase().contains(FLAG)) {
             return parseSearchCommandWithFlag(text);
         }
@@ -89,19 +93,25 @@ public class CommandParser {
         return new SearchCommand(searchTerm, searchFlags);
     }
 
+    private Command parseCheckCommand(String text) {
+        String moduleToBeChecked = text.substring(CHECK_LENGTH).trim();
+        return new CheckCommand(moduleToBeChecked, Duke.getProfileInUse());
+    }
+
     /**
      * Parses user input into a ShowCommand.
      * @param text User input.
      * @return ShowCommand with searchTerm.
      */
-    public Command parseShowCommand(String text) {
+    private Command parseShowCommand(String text) {
         String str = text.substring(SHOW_LENGTH).trim();
         return new ShowCommand(str);
     }
 
-    public Command parseAddCommand(String input, Timetable timetable) {
+    private Command parseAddCommand(String input, Timetable timetable) {
         input = input.substring(ADD_LENGTH).trim();
         String moduleCode = input.toUpperCase();
         return new AddCommand(moduleCode, timetable);
     }
+
 }

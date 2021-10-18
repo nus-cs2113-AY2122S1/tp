@@ -144,12 +144,14 @@ public class ModStorage {
      */
     public static void showModOffline(String moduleCode) {
         try {
-            Module module = loadModInfo(moduleCode);
-            TextUi.printModFullDescription(module);
+            File file = new File("./data/Modules/" + moduleCode + ".json");
+            InputStream inputStream = new ByteArrayInputStream(Files.readAllBytes(file.toPath()));
+            JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+            return new Gson().fromJson(reader, Module.class);
         } catch (IOException e) {
             TextUi.printNotFoundMessage();
+            return null;
         }
-        TextUi.printLocalSearchMessage();
     }
 
     public static class FileErrorException extends Exception {

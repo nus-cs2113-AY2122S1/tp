@@ -1,19 +1,17 @@
 package seedu.module;
 
+import com.google.gson.annotations.JsonAdapter;
 import seedu.command.flags.SearchFlags;
+import seedu.online.PrerequisiteTreeAdapterFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.apache.commons.text.WordUtils.wrap;
 
-public class Module {
+public class Module extends BaseModule {
     private static final int FINALISE_INDEX = 1;
 
-    private String moduleCode;
-    private String title;
-    private String description;
-    private double moduleCredit;
     private String department;
     private String faculty;
     private String prerequisite;
@@ -23,31 +21,18 @@ public class Module {
     private Attributes attributes;
     private ArrayList<Semester> semesterData;
 
+    @JsonAdapter(PrerequisiteTreeAdapterFactory.class)
+    private PrerequisiteTree prereqTree;
+
     private static final int CODE_LENGTH = 4;
     private static final int THOUSAND = 1000;
 
-    public Module(String name) {
-        this.moduleCode = name;
+    public Module(String moduleCode) {
+        super(moduleCode);
     }
 
-    public double getModuleCredit() {
-        return moduleCredit;
-    }
-
-    public String getModuleCode() {
-        return moduleCode;
-    }
-
-    public void setModuleCredit(double moduleCredit) {
-        this.moduleCredit = moduleCredit;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
+    public GradedModule toGradedModule(char grade) {
+        return new GradedModule(this, grade);
     }
 
     public Lesson getLesson(int sem, int idx) {
@@ -61,6 +46,14 @@ public class Module {
 
     public List<Integer> getSemesters() {
         return null;
+    }
+
+    public PrerequisiteTree getPrerequisiteTree() {
+        return prereqTree;
+    }
+
+    public String getPrerequisite() {
+        return prerequisite;
     }
 
     public Semester getSemester(int sem) {
