@@ -1,8 +1,7 @@
 package medbot.command;
 
-import medbot.Parser;
-import medbot.PatientList;
 import medbot.Ui;
+import medbot.list.PersonList;
 
 public class ExitCommand extends Command {
 
@@ -11,7 +10,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(PatientList patientList, Ui ui) {
+    public void execute(PersonList personList, Ui ui) {
         String exitMessage = ui.getExitMessage();
         ui.printOutput(exitMessage);
     }
