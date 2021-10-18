@@ -38,9 +38,9 @@ public class MediVault {
     public MediVault() {
         //medicines = new ArrayList<>();
         //generateData();
-        medicines = new Storage().loadData();
-        ui = new Ui();
         storage = new Storage();
+        medicines = storage.loadData();
+        ui = new Ui();
 
         logger.log(Level.INFO, "All variables are initialised.");
     }

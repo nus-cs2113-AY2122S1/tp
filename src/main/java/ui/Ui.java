@@ -96,7 +96,7 @@ public class Ui {
     /**
      * Prints out all the stocks in the Arraylist in a table format.
      *
-     * @param stocks Arraylist of the stocks.
+     * @param stocks    Arraylist of the stocks.
      * @param medicines Arraylist of the medicines.
      */
     public void printStocks(ArrayList<Stock> stocks, ArrayList<Medicine> medicines) {
@@ -129,7 +129,7 @@ public class Ui {
         }
 
         int[] columnWidths = {idWidth, nameWidth, priceWidth, quantityWidth, expiryWidth, descriptionWidth,
-            maxQuantityWidth};
+                maxQuantityWidth};
 
         // Pad the data in the columns
         String idFormat = "| %1$-" + idWidth + "s | ";
@@ -141,7 +141,7 @@ public class Ui {
         String maxQuantityFormat = "%1$-" + maxQuantityWidth + "s | ";
 
         String[] formats = {idFormat, nameFormat, priceFormat, quantityFormat, expiryFormat, descriptionFormat,
-            maxQuantityFormat};
+                maxQuantityFormat};
         StringBuilder headers = new StringBuilder();
         for (int i = 0; i < columnWidths.length; i++) {
             headers.append(String.format(formats[i], centerString(columnWidths[i], Stock.COLUMNS[i])));
@@ -391,7 +391,7 @@ public class Ui {
         String stockIdFormat = "%1$-" + stockIdWidth + "s | ";
 
         String[] formats = {idFormat, nameFormat, quantityFormat, customerIdFormat, dateFormat, staffFormat,
-            stockIdFormat};
+                stockIdFormat};
 
         StringBuilder headers = new StringBuilder();
         for (int i = 0; i < columnWidths.length; i++) {
