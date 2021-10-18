@@ -6,13 +6,10 @@ import command.HelpCommand;
 import command.PurgeCommand;
 import command.dispense.AddDispenseCommand;
 import command.dispense.ListDispense;
-import command.medicine.AddStockCommand;
-import command.medicine.DeleteStock;
-import command.medicine.ListStockCommand;
+import command.medicine.*;
 import command.order.AddOrderCommand;
 import command.order.DeleteOrderCommand;
-import command.medicine.UpdateStockCommand;
-import command.order.ListOrder;
+import command.order.ListOrderCommand;
 import command.order.UpdateOrderCommand;
 import errors.InvalidCommand;
 import ui.Ui;
@@ -76,7 +73,7 @@ public class CommandParser {
         case DELETE_DISPENSE:
             break;*/
         case DELETE_STOCK:
-            return new DeleteStock();
+            return new DeleteStockCommand();
         case DELETE_ORDER:
             return new DeleteOrderCommand();
         case EXIT:
@@ -88,7 +85,7 @@ public class CommandParser {
         case LIST_STOCK:
             return new ListStockCommand();
         case LIST_ORDER:
-            return new ListOrder();
+            return new ListOrderCommand();
         case PURGE:
             return new PurgeCommand();
         /*case RECEIVE_ORDER:

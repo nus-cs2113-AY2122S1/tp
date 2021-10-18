@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * Helps to process the list command together with filters and sort.
  */
 
-public class ListOrder extends Command {
+public class ListOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("ListOrder");
 
     @Override
@@ -32,7 +32,7 @@ public class ListOrder extends Command {
 
         String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
-            CommandParameters.DATE, CommandParameters.STATUS};
+                CommandParameters.DATE, CommandParameters.STATUS};
 
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters,
                 requiredParameters, optionalParameters, CommandSyntax.LIST_ORDER_COMMAND, false);
@@ -78,7 +78,7 @@ public class ListOrder extends Command {
                         Date date = DateParser.stringToDate(parameterValue);
                         filteredOrders = (ArrayList<Order>) filteredOrders.stream().filter((m) ->
                                 (m).getDate().toInstant().isBefore(date.toInstant())
-                                || (m).getDate().toInstant().equals(date.toInstant())).collect(Collectors.toList());
+                                        || (m).getDate().toInstant().equals(date.toInstant())).collect(Collectors.toList());
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
