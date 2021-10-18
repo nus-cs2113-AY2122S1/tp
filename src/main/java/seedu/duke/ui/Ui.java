@@ -28,7 +28,7 @@ public class Ui {
         System.out.println(prefix + message.replace("\n", newLine));
     }
 
-    public void printLineSeparator() {
+    private void printLineSeparator() {
         printText(DIVIDER);
     }
 
