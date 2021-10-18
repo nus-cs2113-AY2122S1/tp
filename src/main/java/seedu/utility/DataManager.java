@@ -23,8 +23,17 @@ import java.util.Scanner;
  * Also loads all saved entries when a new instance of StonksXD starts.
  */
 public class DataManager {
+    
     private static final String FILE_NAME = "./StonksXD_Data.csv";
 
+    /**
+     * Saves all entries StonksXD is currently tracking into a csv file StonksXD_Data.csv.
+     * This allows users to not lose all their entries when program closes.
+     * 
+     * @param parser Does the conversion from entries to data for saving.
+     * @param financialTracker Provides the ArrayList of expenses and the ArrayList of incomes.
+     * @param ui Prints saving error.
+     */
     public void save(Parser parser, FinancialTracker financialTracker, Ui ui) {
         try {
             FileWriter writer = new FileWriter(FILE_NAME);
@@ -54,6 +63,14 @@ public class DataManager {
         }
     }
 
+    /**
+     * Loads all entries from StonksXD_Data.csv into StonksXD.
+     * This allows users to not lose all their entries when the previous instance of StonksXD closed.
+     *
+     * @param parser Does the conversion from data in csv file to income and expense entries.
+     * @param financialTracker Stores all expenses and incomes after being converted from data format.
+     * @param ui Prints loading errors.
+     */
     public void load(Parser parser, FinancialTracker financialTracker, Ui ui) {
         boolean hasCorruptedLines = false;
         FileInputStream fis;

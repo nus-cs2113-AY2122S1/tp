@@ -33,5 +33,5 @@ public class Messages {
             + "██████     ██    ███████        ██ ";
     public static final String BLANK_CATEGORY_MESSAGE = "Your category is empty!";
     public static final String DATE_FORMAT_MESSAGE = "Your start and end dates must be in a YYYY-MM-DD format!";
-
+    public static final String ALL_DATA_CLEARED = "All your entries have been cleared!";
 }

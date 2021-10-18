@@ -2,6 +2,7 @@ package seedu.duke;
 
 import seedu.commands.AddExpenseCommand;
 import seedu.commands.AddIncomeCommand;
+import seedu.commands.ClearAllEntriesCommand;
 import seedu.commands.Command;
 import seedu.commands.DeleteExpenseCommand;
 import seedu.commands.DeleteIncomeCommand;
@@ -95,9 +96,9 @@ public class Parser {
     private static final String FIND_KEYWORD = "find";
     private static final String BALANCE_KEYWORD = "balance";
     private static final String EXIT_KEYWORD = "end";
-
     private static final String EXPENSE_RANGE_KEYWORD = "btw_ex";
     private static final String INCOME_RANGE_KEYWORD = "btw_in";
+    private static final String CLEAR_ALL_ENTRIES_KEYWORD = "clear_all_entries";
     
     private static final String DATA_SEPARATOR = ", ";
 
@@ -107,6 +108,7 @@ public class Parser {
     private static final Pattern INCOME_DATA_FORMAT
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>[^/]+)" + DATA_SEPARATOR
             + "(?<amount>[^/]+)" + DATA_SEPARATOR + "(?<category>[^/]+)" + DATA_SEPARATOR + "(?<date>[^/]+)");
+    
 
     /**
      * Parses user input into command for execution.
@@ -154,6 +156,8 @@ public class Parser {
             return prepareExpenseRange(arguments);
         case INCOME_RANGE_KEYWORD:
             return prepareIncomeRange(arguments);
+        case CLEAR_ALL_ENTRIES_KEYWORD:
+            return prepareClearAllEntries(arguments);
         default:
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -345,6 +349,13 @@ public class Parser {
     private Command prepareTotalIncome(String arguments) {
         if (arguments.trim().isBlank()) {
             return new TotalIncomeCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+    
+    private Command prepareClearAllEntries(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new ClearAllEntriesCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
