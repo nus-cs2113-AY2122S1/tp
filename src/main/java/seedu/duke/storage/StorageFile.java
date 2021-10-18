@@ -20,14 +20,13 @@ public class StorageFile {
 
     private static final String EVENT_TASK_SEPARATOR = "Lzh5L9Cyy2qsmTWKy4gu2NwD57gjdEwmIZ";
 
-    public void save(ArrayList<Event> eventsList, ArrayList<Task> tasksList) {
+    public void save(ArrayList<Event> eventsList) {
 
         File saveFile = new File(DEFAULT_FILE_PATH);
         checkFileIsValid(saveFile);
         List<String> encodedEventsList = EventEncoder.encodeEventsList(eventsList);
-        List<String> encodedTasksList = TaskEncoder.encodeTasksList(tasksList);
         try {
-            writeToFile(saveFile, encodedEventsList, encodedTasksList);
+            writeToFile(saveFile, encodedEventsList);
         } catch (IOException e) {
             System.out.println("Error writing to file at path: " + DEFAULT_FILE_PATH);
         }
@@ -45,19 +44,14 @@ public class StorageFile {
         }
     }
 
-    private void writeToFile(File saveFile, List<String> encodedEventsList, List<String> encodedTasksList)
+    private void writeToFile(File saveFile, List<String> encodedEventsList)
             throws IOException {
+
         FileWriter eventsWriter = new FileWriter(saveFile);
-        for (String event : encodedEventsList) {
-            eventsWriter.write(event + "\n");
+        for (String item : encodedEventsList) {
+            eventsWriter.write(item + "\n");
         }
         eventsWriter.close();
-        FileWriter tasksWriter = new FileWriter(saveFile, true);
-        tasksWriter.write(EVENT_TASK_SEPARATOR + "\n");
-        for (String task : encodedTasksList) {
-            tasksWriter.write(task + "\n");
-        }
-        tasksWriter.close();
     }
 
     public void load(ArrayList<Event> eventsList, ArrayList<Task> tasksList) throws FileNotFoundException {
