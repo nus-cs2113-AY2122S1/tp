@@ -7,8 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
-import terminus.command.NotesCommand;
-import terminus.command.ScheduleCommand;
+import terminus.command.content.NotesCommand;
+import terminus.command.content.ScheduleCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 

@@ -1,5 +1,6 @@
-package terminus.command;
+package terminus.command.module;
 
+import terminus.command.WorkspaceCommand;
 import terminus.parser.ModuleCommandParser;
 
 public class ModuleCommand extends WorkspaceCommand {

@@ -2,8 +2,8 @@ package terminus.parser;
 
 import terminus.command.BackCommand;
 import terminus.command.Command;
-import terminus.command.NotesCommand;
-import terminus.command.ScheduleCommand;
+import terminus.command.content.NotesCommand;
+import terminus.command.content.ScheduleCommand;
 import terminus.common.CommonFormat;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;

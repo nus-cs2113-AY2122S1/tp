@@ -1,4 +1,4 @@
-package terminus.command.note;
+package terminus.command.content.note;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,7 +11,6 @@ import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
-import terminus.module.NusModule;
 import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
 

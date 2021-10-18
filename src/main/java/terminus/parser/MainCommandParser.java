@@ -1,10 +1,9 @@
 package terminus.parser;
 
 import terminus.command.GoCommand;
-import terminus.command.ModuleCommand;
+import terminus.command.module.ModuleCommand;
 import terminus.common.Messages;
 import terminus.module.ModuleManager;
-import terminus.module.NusModule;
 
 public class MainCommandParser extends CommandParser {
 

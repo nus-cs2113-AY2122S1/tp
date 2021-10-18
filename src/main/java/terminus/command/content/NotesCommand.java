@@ -1,4 +1,4 @@
-package terminus.command;
+package terminus.command.content;
 
 import terminus.common.CommonFormat;
 import terminus.common.Messages;

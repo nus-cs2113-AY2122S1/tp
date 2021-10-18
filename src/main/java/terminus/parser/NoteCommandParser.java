@@ -1,9 +1,9 @@
 package terminus.parser;
 
 import terminus.command.BackCommand;
-import terminus.command.DeleteCommand;
-import terminus.command.ViewCommand;
-import terminus.command.note.AddNoteCommand;
+import terminus.command.content.DeleteCommand;
+import terminus.command.content.ViewCommand;
+import terminus.command.content.note.AddNoteCommand;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.Note;

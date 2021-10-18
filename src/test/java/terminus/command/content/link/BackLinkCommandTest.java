@@ -1,4 +1,4 @@
-package terminus.command.note;
+package terminus.command.content.link;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,13 +9,14 @@ import terminus.command.CommandResult;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
+import terminus.parser.LinkCommandParser;
 import terminus.parser.ModuleWorkspaceCommandParser;
-import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
 
-public class BackNoteCommandTest {
 
-    private NoteCommandParser commandParser;
+public class BackLinkCommandTest {
+
+    private LinkCommandParser linkCommandParser;
     private ModuleManager moduleManager;
     private Ui ui;
 
@@ -23,8 +24,8 @@ public class BackNoteCommandTest {
 
     @BeforeEach
     void setUp() {
-        this.commandParser = NoteCommandParser.getInstance();
-        this.commandParser.setModuleName(tempModule);
+        this.linkCommandParser = LinkCommandParser.getInstance();
+        this.linkCommandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
         moduleManager.setModule(tempModule);
         this.ui = new Ui();
@@ -32,9 +33,10 @@ public class BackNoteCommandTest {
 
     @Test
     void execute_success() throws InvalidCommandException, InvalidArgumentException {
-        Command backCommand = commandParser.parseCommand("back");
+        Command backCommand = linkCommandParser.parseCommand("back");
         CommandResult backResult = backCommand.execute(ui, moduleManager);
         assertTrue(backResult.isOk());
         assertTrue(backResult.getAdditionalData() instanceof ModuleWorkspaceCommandParser);
     }
+
 }

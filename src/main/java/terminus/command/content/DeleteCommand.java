@@ -1,5 +1,7 @@
-package terminus.command;
+package terminus.command.content;
 
+import terminus.command.Command;
+import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
 import terminus.common.Messages;

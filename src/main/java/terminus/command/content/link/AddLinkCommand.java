@@ -1,4 +1,4 @@
-package terminus.command.zoomlink;
+package terminus.command.content.link;
 
 import static terminus.common.CommonUtils.isValidDay;
 import static terminus.common.CommonUtils.isValidUrl;

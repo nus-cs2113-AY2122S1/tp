@@ -10,7 +10,7 @@ import terminus.ui.Ui;
 public abstract class WorkspaceCommand extends Command {
 
     protected CommandParser commandMap;
-    private static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "%s %s";
+
 
     public WorkspaceCommand(CommandParser commandMap) {
         this.commandMap = commandMap;
@@ -31,20 +31,8 @@ public abstract class WorkspaceCommand extends Command {
         assert commandMap != null;
         TerminusLogger.info("Executing Workspace Command");
         if (isNotNullOrBlank()) {
-            try {
-                TerminusLogger.info("Parsing workspace command");
-                return commandMap.parseCommand(arguments).execute(ui, moduleManager);
-            } catch (InvalidArgumentException e) {
-                if (e.getFormat() == null) {
-                    throw e;
-                }
-                TerminusLogger.warning("Failed to parse command.");
-                TerminusLogger.warning(commandMap.getWorkspace() + " : " + e.getFormat());
-                throw new InvalidArgumentException(
-                        String.format(INVALID_ARGUMENT_FORMAT_MESSAGE, commandMap.getWorkspace(), e.getFormat()),
-                        e.getMessage()
-                );
-            }
+            TerminusLogger.info("Parsing workspace command");
+            return commandMap.parseCommand(arguments).execute(ui, moduleManager);
         } else {
             TerminusLogger.info("Switching workspace to: " + commandMap.getWorkspace());
             return new CommandResult(true, commandMap);

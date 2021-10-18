@@ -1,4 +1,4 @@
-package terminus.command.note;
+package terminus.command.content.note;
 
 import java.util.ArrayList;
 import terminus.command.Command;

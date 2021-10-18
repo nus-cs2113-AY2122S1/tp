@@ -51,4 +51,11 @@ public abstract class InnerModuleCommandParser extends CommandParser {
     public String getWorkspace() {
         return moduleName + " > " + super.getWorkspace();
     }
+
+    public String getWorkspace(boolean isOriginal) {
+        if (isOriginal) {
+            return super.getWorkspace();
+        }
+        return moduleName + " > " + super.getWorkspace();
+    }
 }

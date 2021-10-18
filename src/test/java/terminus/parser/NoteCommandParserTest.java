@@ -6,15 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.command.DeleteCommand;
+import terminus.command.content.DeleteCommand;
 import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
-import terminus.command.ViewCommand;
-import terminus.command.note.AddNoteCommand;
+import terminus.command.content.ViewCommand;
+import terminus.command.content.note.AddNoteCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
-import terminus.ui.Ui;
 
 public class NoteCommandParserTest {
 
