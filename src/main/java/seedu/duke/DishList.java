@@ -18,6 +18,18 @@ public class DishList {
         }
     }
 
+    public static double getGreatestWaste() {
+        double greatest = 0;
+        for (Dish dish : dishList) {
+            double currWaste = dish.getWastage();
+            if (currWaste > greatest) {
+                greatest = currWaste;
+            }
+        }
+        assert greatest != 0 : "Exception should have been thrown earlier if list is empty";
+        return greatest;
+    }
+
     //Returns -1 if not present, index if present
     public static int find(String dishName) {
         for (Dish dish : dishList) {
@@ -30,6 +42,10 @@ public class DishList {
 
     public static void list() {
         ui.printDishList(dishList);
+    }
+
+    public static void graph() {
+        ui.printDishListGraph(dishList);
     }
 
     public static void delete(String dishName) {

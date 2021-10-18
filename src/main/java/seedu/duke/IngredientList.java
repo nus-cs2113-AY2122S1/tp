@@ -28,6 +28,22 @@ public class IngredientList {
         return -1;
     }
 
+    public static double getGreatestWaste() {
+        double greatest = 0;
+        for (Ingredient ingr : ingredientList) {
+            double currWaste = ingr.getWastage();
+            if (currWaste > greatest) {
+                greatest = currWaste;
+            }
+        }
+        assert greatest != 0 : "Exception should have been thrown earlier if list is empty";
+        return greatest;
+    }
+
+    public static void graph() {
+        ui.printIngrListGraph(ingredientList);
+    }
+
     public static void list() {
         System.out.println("Here are the ingredients you have: ");
         for (int i = 0; i < ingredientList.size(); i++) {
