@@ -13,6 +13,6 @@ public class Budget {
 
     @Override
     public String toString() {
-        return value + "|";
+        return String.format(" %-10.2f |", value);
     }
 }
