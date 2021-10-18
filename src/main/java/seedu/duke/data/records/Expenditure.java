@@ -21,7 +21,7 @@ public class Expenditure extends Record {
     }
 
     public String toString() {
-        return String.format("%-30.30s  %-30.30s %-30.30s",
+        return String.format("%-20.20s  %-20.20s %-20.20s",
                 this.description, " | $" + this.amount, " | " + this.date.toString());
     }
 }

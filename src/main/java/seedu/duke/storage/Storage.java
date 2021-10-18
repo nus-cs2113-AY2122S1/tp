@@ -28,9 +28,7 @@ public class Storage {
             int i;
 
             for (i = 0; i < commandStorage.size(); i += 1) {
-
                 String userInput = commandStorage.get(i);
-                System.out.println(userInput);
                 AddCommand command = (AddCommand) parser.parseCommand(userInput);
                 command.setRecordList(recordList);
                 command.execute(true);
@@ -78,7 +76,7 @@ public class Storage {
 
     public void saveNewlyAddedBudget(double budgetLimit, int month) {
         String expenditureToAdd = "add b/";
-        expenditureToAdd += (" a/" + budgetLimit + " d/" + month);
+        expenditureToAdd += (" a/" + budgetLimit + " m/" + month);
         WriteToTextFile.writeToStorage(expenditureToAdd, "./data/BudgetList1.txt");
     }
 }

@@ -2,12 +2,14 @@ package seedu.duke.textfiletools;
 
 import seedu.duke.data.AllRecordList;
 import seedu.duke.data.RecordList;
+import seedu.duke.data.records.Expenditure;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class WriteToTextFile {
     /**
@@ -23,7 +25,7 @@ public class WriteToTextFile {
 
             FileWriter writeLineToFile = new FileWriter(storageDirectory, true);
 
-            if (fileIsEmpty == false) {
+            if (!fileIsEmpty) {
                 writeLineToFile.write("\n");
             }
 
@@ -34,7 +36,7 @@ public class WriteToTextFile {
         }
     }
 
-    public void reloadArrayToStorage(ArrayList<RecordList> monthlyRecordList, String storageDirectory) {
+    public void reloadArrayToStorage(Hashtable<Integer, RecordList> monthlyRecordList, String storageDirectory) {
         try {
             File inFile = new File(storageDirectory);
 
@@ -46,16 +48,17 @@ public class WriteToTextFile {
             String line = "";
             PrintWriter fileWrite = new PrintWriter(new FileWriter(storageDirectory));
 
-            for (int i = 0; i <= 12; i += 1) {
-                fileWrite.println("add b/ a/" + monthlyRecordList.get(i).getBudget().getRawValue() + " d/" + i);
+            for (int i = 1; i <= 12; i++) {
+                RecordList currentMonthRecordList = monthlyRecordList.get(i);
+                fileWrite.println("add b/ a/" + currentMonthRecordList.getBudget().getRawValue() + " m/" + i);
                 fileWrite.flush();
-                for (int j = 0; j < monthlyRecordList.get(i).getExpenditureListSize(); j += 1) {
-                    String description = monthlyRecordList.get(i).getExpenditureRecords().get(j).getDescription();
-                    fileWrite.print("add e/" + description);
-                    Double amount = monthlyRecordList.get(i).getExpenditureRecords().get(j).getAmount();
-                    fileWrite.print(" a/" + amount);
-                    String date = monthlyRecordList.get(i).getExpenditureRecords().get(j).getDate();
-                    fileWrite.println(" d/" + date);
+                for (int j = 0; j < currentMonthRecordList.getExpenditureListSize(); j++) {
+                    ArrayList<Expenditure> expenditureRecords = currentMonthRecordList.getExpenditureRecords();
+                    Expenditure currentExpenditure = expenditureRecords.get(j);
+                    String description = currentExpenditure.getDescription();
+                    double amount = currentExpenditure.getAmount();
+                    String date = currentExpenditure.getDate();
+                    fileWrite.println("add e/" + description + " a/" + amount + " d/" + date);
                     fileWrite.flush();
                 }
             }

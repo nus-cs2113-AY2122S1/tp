@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.data.AllRecordList;
 import seedu.duke.data.RecordList;
 
 import java.time.LocalDate;
@@ -14,8 +15,9 @@ public class AddExpenditureTest {
         String description = "JanuaryExpenditure";
         double spending = 20.00;
         LocalDate date = LocalDate.of(2021, 10, 8);
+        int month = date.getMonthValue();
 
-        RecordList currentExpenditureList = new RecordList();
+        RecordList currentExpenditureList = new RecordList(month);
         currentExpenditureList.addExpenditure(description, spending, date, false);
         assertEquals(1, currentExpenditureList.getExpenditureListSize());
     }

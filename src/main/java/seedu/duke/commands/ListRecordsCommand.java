@@ -6,6 +6,7 @@ public class ListRecordsCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
     public static final String COMMAND_DESC = "Displays all records as a list with index numbers.";
+    public static final String MESSAGE_USAGE = "list m/MONTH";
     public static int month;
     public static boolean isListAll = false;
 
