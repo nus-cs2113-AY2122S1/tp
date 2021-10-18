@@ -2,6 +2,7 @@ package seedu.duke.storage;
 
 import seedu.duke.Parser;
 import seedu.duke.items.Event;
+import seedu.duke.items.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,12 +11,13 @@ public class EventEncoder {
 
     public static List<String> encodeEventsList(ArrayList<Event> eventsToSave) {
         List<String> encodedEvents = new ArrayList<>();
-        eventsToSave.forEach(event -> encodedEvents.add(encodeEventToString(event)));
+        eventsToSave.forEach(event -> encodedEvents.addAll(encodeEventToString(event)));
         return encodedEvents;
     }
 
-    private static String encodeEventToString(Event event) {
-        return "e | "
+    private static List<String> encodeEventToString(Event event) {
+        List<String> encodedEvent = new ArrayList<>();
+        encodedEvent.add("e | "
                 + event.getTitle()
                 + " | "
                 + event.getStatusIcon()
@@ -26,6 +28,17 @@ public class EventEncoder {
                 + " | "
                 + event.getVenue()
                 + " | "
-                + event.getBudget();
+                + event.getBudget());
+
+        // Append the additional subtasks to the current event as new lines
+        List<String> encodedSubTasks = encodeSubTasksToString(event);
+        encodedEvent.addAll(encodedSubTasks);
+
+        return encodedEvent;
+    }
+
+    private static List<String> encodeSubTasksToString(Event event) {
+        ArrayList<Task> tasksToEncode = event.getTaskList();
+        return TaskEncoder.encodeTasksList(tasksToEncode);
     }
 }
