@@ -32,9 +32,9 @@ public class ListDispense extends Command {
         logger.log(Level.INFO, "Start listing of dispense records");
         String[] requiredParameter = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
-            CommandParameters.CUSTOMER_ID, CommandParameters.DATE, CommandParameters.STAFF,
-            CommandParameters.STOCK_ID,
-            CommandParameters.SORT, CommandParameters.REVERSED_SORT};
+                CommandParameters.CUSTOMER_ID, CommandParameters.DATE, CommandParameters.STAFF,
+                CommandParameters.STOCK_ID,
+                CommandParameters.SORT, CommandParameters.REVERSED_SORT};
 
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
                 optionalParameters, CommandSyntax.LIST_DISPENSE_COMMAND, false);
