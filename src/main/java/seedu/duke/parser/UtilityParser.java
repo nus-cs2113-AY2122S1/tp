@@ -11,6 +11,7 @@ public class UtilityParser {
 
 
     private static final String NOT_NULL_ASSERTION = "Cannot parse null string!";
+
     public static String getDateAsString(Date date) {
         DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         String strDate = dateFormat.format(date);
