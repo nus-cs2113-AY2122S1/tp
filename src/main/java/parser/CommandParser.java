@@ -4,14 +4,14 @@ import command.Command;
 import command.ExitCommand;
 import command.HelpCommand;
 import command.PurgeCommand;
-import command.dispense.AddDispense;
+import command.dispense.AddDispenseCommand;
 import command.dispense.ListDispense;
-import command.medicine.AddStock;
+import command.medicine.AddStockCommand;
 import command.medicine.DeleteStock;
 import command.medicine.ListStockCommand;
 import command.medicine.UpdateStock;
 import command.order.AddOrderCommand;
-import command.order.DeleteOrder;
+import command.order.DeleteOrderCommand;
 import command.order.ListOrder;
 import command.order.UpdateOrder;
 import errors.InvalidCommand;
@@ -66,9 +66,9 @@ public class CommandParser {
 
         switch (command) {
         case ADD_DISPENSE:
-            return new AddDispense();
+            return new AddDispenseCommand();
         case ADD_STOCK:
-            return new AddStock();
+            return new AddStockCommand();
         case ADD_ORDER:
             return new AddOrderCommand();
         /*case ARCHIVE:
@@ -78,7 +78,7 @@ public class CommandParser {
         case DELETE_STOCK:
             return new DeleteStock();
         case DELETE_ORDER:
-            return new DeleteOrder();
+            return new DeleteOrderCommand();
         case EXIT:
             return new ExitCommand();
         case HELP:

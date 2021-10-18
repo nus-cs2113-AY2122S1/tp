@@ -2,7 +2,7 @@ package parser;
 
 import command.Command;
 import command.ExitCommand;
-import command.medicine.AddStock;
+import command.medicine.AddStockCommand;
 import errors.InvalidCommand;
 import org.junit.jupiter.api.Test;
 import ui.Ui;
@@ -28,7 +28,7 @@ public class CommandParserTest {
     public void processCommand_addCommand_expectAddStockObject() {
         try {
             Command command = CommandParser.processCommand("add", Mode.STOCK);
-            assertEquals(command.getClass(), AddStock.class);
+            assertEquals(command.getClass(), AddStockCommand.class);
         } catch (InvalidCommand e) {
             e.printStackTrace();
         }
