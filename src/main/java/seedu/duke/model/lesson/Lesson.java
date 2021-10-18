@@ -75,10 +75,10 @@ public class Lesson {
             }
             dayOfTheWeek = toProper(dayOfTheWeek);
 
-            String startTime = LocalTime.parse(TimeUtil.parseTwelveHourClock(params[2]))
+            String startTime = LocalTime.parse(TimeUtil.parseTwelveHourTime(params[2]))
                     .format(DateTimeFormatter.ofPattern("hh:mm a"));
 
-            String endTime = LocalTime.parse(TimeUtil.parseTwelveHourClock(params[3]))
+            String endTime = LocalTime.parse(TimeUtil.parseTwelveHourTime(params[3]))
                     .format(DateTimeFormatter.ofPattern("hh:mm a"));
 
             String meetingUrl = params[4];

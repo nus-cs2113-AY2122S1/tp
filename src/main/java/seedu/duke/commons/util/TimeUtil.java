@@ -5,18 +5,18 @@ import seedu.duke.commons.util.exceptions.TimeParseException;
 
 public class TimeUtil {
     /**
-     * Parses 12-hour clock format to 24-hour clock format.
+     * Parses 12-hour time format to 24-hour time format.
      *
-     * @param clock 12-hour clock
-     * @return 24-hour clock
-     * @throws TimeParseException if input clock is invalid
+     * @param time 12-hour time
+     * @return 24-hour time
+     * @throws TimeParseException if input time is invalid
      */
-    public static String parseTwelveHourClock(String clock) throws TimeParseException {
-        if (clock.length() != 8) {
+    public static String parseTwelveHourTime(String time) throws TimeParseException {
+        if (time.length() != 8) {
             throw new TimeParseException(Messages.ERROR_INVALID_TIME_FORMAT);
         }
 
-        String hour = clock.substring(0, 2);
+        String hour = time.substring(0, 2);
         int hourToInt;
         try {
             hourToInt = Integer.parseInt(hour);
@@ -30,11 +30,11 @@ public class TimeUtil {
             hourToInt -= 12;
         }
 
-        if (clock.charAt(2) != ':') {
+        if (time.charAt(2) != ':') {
             throw new TimeParseException(Messages.ERROR_INVALID_TIME_FORMAT);
         }
 
-        String minute = clock.substring(3, 5);
+        String minute = time.substring(3, 5);
         int minuteToInt;
         try {
             minuteToInt = Integer.parseInt(minute);
@@ -45,7 +45,7 @@ public class TimeUtil {
             throw new TimeParseException(Messages.ERROR_INVALID_TIME_FORMAT);
         }
 
-        String period = clock.substring(6, 8);
+        String period = time.substring(6, 8);
         if (period.equals("PM")) {
             hourToInt += 12;
         }
