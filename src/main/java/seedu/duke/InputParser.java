@@ -4,6 +4,7 @@ import seedu.duke.command.CommandNames;
 import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InputParser {
     public CommandNames getCommandName(String input) throws FoodoramaException {
@@ -41,6 +42,7 @@ public class InputParser {
         case DELETE_INGR:
         case ADD_INGR:
         case ADD_DISH:
+        case SORT_DISH:
         case LIST:
             parameters.add(parameterString);
             break;
@@ -48,10 +50,15 @@ public class InputParser {
         //Multi param is same as one but will need to split further
         case ADD_CONSTITUENT:
             //TODO trim inputs
-            String[] splitString = parameterString.split("/", 2);
-            for (String param: splitString) {
+            String[] splitBySlash = parameterString.split("/", 2);
+            for (String param: splitBySlash) {
                 parameters.add(param.trim());
             }
+            break;
+
+        case FIND:
+            String[] splitBySpace = parameterString.split(" ", 2);
+            parameters.addAll(List.of(splitBySpace));
             break;
 
         default:

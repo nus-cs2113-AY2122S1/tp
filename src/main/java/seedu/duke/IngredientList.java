@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class IngredientList {
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();

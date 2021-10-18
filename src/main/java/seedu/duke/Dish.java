@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Dish {
+public class Dish implements Comparable<Dish>{
     private static Logger logger = Logger.getLogger("Dish class");
     private ArrayList<Ingredient> constituents = new ArrayList<>();
     private Ui ui = new Ui();
@@ -121,5 +121,10 @@ public class Dish {
             output = output + "|" + ingredient.getIngredientName();
         }
         return output;
+    }
+
+    @Override
+    public int compareTo(Dish o) {
+        return (int) (wastage - o.wastage);
     }
 }
