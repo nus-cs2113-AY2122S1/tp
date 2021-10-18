@@ -49,7 +49,7 @@ public abstract class InnerModuleCommandParser extends CommandParser {
      */
     @Override
     public String getWorkspace() {
-        return moduleName + " > " + super.getWorkspace();
+        return getWorkspace(false);
     }
 
     public String getWorkspace(boolean isOriginal) {
