@@ -1,7 +1,6 @@
 package seedu.duke.storage;
 
 import seedu.duke.items.Event;
-import seedu.duke.items.Task;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,8 +16,6 @@ public class StorageFile {
 
     private static final String DEFAULT_FILE_PATH = "data/slamData.txt";
     private static final String DEFAULT_DIRECTORY = "data";
-
-    private static final String EVENT_TASK_SEPARATOR = "Lzh5L9Cyy2qsmTWKy4gu2NwD57gjdEwmIZ";
 
     public void save(ArrayList<Event> eventsList) {
 
@@ -54,33 +51,32 @@ public class StorageFile {
         eventsWriter.close();
     }
 
-    public void load(ArrayList<Event> eventsList, ArrayList<Task> tasksList) throws FileNotFoundException {
+    public void load(ArrayList<Event> eventsList) {
         File saveFile = new File(DEFAULT_FILE_PATH);
-        List<String> encodedEvents = new ArrayList<>();
-        List<String> encodedTasks = new ArrayList<>();
-
-        separateEventAndTaskData(saveFile, encodedEvents, encodedTasks);
-        eventsList.addAll(EventDecoder.decodeEventsList(encodedEvents));
-        tasksList.addAll(TaskDecoder.decodeTasksList(encodedTasks));
+        try {
+            List<String> encodedItems = getStringsFromFile(saveFile);
+            for (String item : encodedItems) {
+                if (item.startsWith("e")) {
+                    eventsList.add(EventDecoder.decodeEventFromString(item));
+                }
+                if (item.startsWith("t")) {
+                    eventsList.get(eventsList.size() - 1).
+                            taskList.add(TaskDecoder.decodeTaskFromString(item));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+        }
     }
 
-    private void separateEventAndTaskData(File saveFile, List<String> encodedEvents, List<String> encodedTasks)
-            throws FileNotFoundException {
+    private List<String> getStringsFromFile(File saveFile) throws FileNotFoundException {
+        List<String> encodedItems = new ArrayList<>();
         Scanner myScanner = new Scanner(saveFile);
-
-        boolean hasFinishedScanningEvents = false;
-
         while (myScanner.hasNextLine()) {
             String data = myScanner.nextLine();
-            if (data.equals(EVENT_TASK_SEPARATOR)) {
-                hasFinishedScanningEvents = true;
-                continue;
-            }
-            if (!hasFinishedScanningEvents) {
-                encodedEvents.add(data);
-            } else {
-                encodedTasks.add(data);
-            }
+            encodedItems.add(data);
         }
+
+        return encodedItems;
     }
 }
