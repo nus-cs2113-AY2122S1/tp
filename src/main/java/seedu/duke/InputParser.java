@@ -25,6 +25,7 @@ public class InputParser {
         switch (inputCommand) {
 
         //One parameter commands just add the parameterString
+        case GRAPH:
         case ADD_DISH_WASTE:
         case ADD_INGR_WASTE:
         case ADD_INGR_STORED:
@@ -51,7 +52,12 @@ public class InputParser {
             }
             break;
 
-        default:
+        case FIND:
+            String[] splitFindInputs = parameterString.split(" ", 2);
+            parameters.addAll(List.of(splitFindInputs));
+            break;
+
+            default:
             break;
         }
 

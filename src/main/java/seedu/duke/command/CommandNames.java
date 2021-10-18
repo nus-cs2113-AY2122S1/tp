@@ -10,6 +10,8 @@ public enum CommandNames {
     DELETE_DISH("del dish", new DeleteDishCommand()),
     DELETE_INGR("del ingr", new DeleteIngrCommand()),
     LIST("list", new ListCommand()),
+    FIND("find", new findCommand()),
+    GRAPH("graph", new GraphCommand()),
     CLEAR_DISH("clear dish", new ClearDishCommand()),
     CLEAR_INGR("clear ingr", new ClearIngrCommand()),
     CLEAR_ALL("clear all", new ClearAllCommand()),
