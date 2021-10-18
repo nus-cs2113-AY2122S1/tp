@@ -1,6 +1,9 @@
 package terminus.common;
 
 import java.net.URL;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -116,5 +119,25 @@ public class CommonUtils {
 
     public static boolean isStringNullOrEmpty(String string) {
         return string == null || string.isBlank();
+    }
+
+    /**
+     * Checks if the given name is a valid file name.
+     *
+     * @param name The string to be checked.
+     * @return True if name is a valid file name, false otherwise.
+     */
+    public static boolean isValidFileName(String name) {
+        try {
+            Paths.get(name);
+            return true;
+        } catch (InvalidPathException e) {
+            return false;
+        }
+    }
+
+    public static String getFileNameOnly(String filename) {
+        String[] string = filename.split("\\.");
+        return string[0];
     }
 }

@@ -2,10 +2,19 @@ package terminus.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import terminus.common.CommonUtils;
 import terminus.common.TerminusLogger;
+import terminus.content.ContentManager;
+import terminus.content.Note;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 
@@ -53,7 +62,9 @@ public class ModuleStorage {
             return null;
         }
         TerminusLogger.info("Decoding JSON to object");
-        return gson.fromJson(Files.newBufferedReader(filePath), ModuleManager.class);
+        ModuleManager moduleManager = gson.fromJson(Files.newBufferedReader(filePath), ModuleManager.class);
+        loadAllNotes(moduleManager);
+        return moduleManager;
     }
 
     /**
@@ -73,6 +84,59 @@ public class ModuleStorage {
         TerminusLogger.info(String.format("Writing to file: %s", filePath.toString()));
         assert jsonString != null && !jsonString.isBlank() : "File saved is blank";
         Files.writeString(filePath, jsonString);
+        saveAllNotes(moduleManager);
     }
+
+    private void loadAllNotes(ModuleManager moduleManager) throws IOException {
+        Path modDirPath;
+        for (String mod : moduleManager.getAllModules()) {
+            modDirPath = Paths.get(filePath.getParent().toString(), mod);
+            // Check if module name is a valid file name
+            if (!CommonUtils.isValidFileName(mod)) {
+                moduleManager.removeModule(mod);
+            }
+            // Check if directory does not exist proceed to create directory, retrieve notes otherwise.
+            if (!Files.isDirectory(modDirPath)) {
+                Files.createDirectories(modDirPath);
+            } else {
+                loadNotesFromModule(moduleManager, modDirPath, mod);
+            }
+        }
+    }
+
+    private void loadNotesFromModule(ModuleManager moduleManager, Path modDirPath, String mod) throws IOException {
+        File folder = new File(modDirPath.toString());
+        File[] listOfFiles = folder.listFiles();
+        ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
+        for (File file : listOfFiles) {
+            if (file.isFile()) {
+                contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
+                        Files.readString(
+                                Paths.get(modDirPath.toString(), file.getName()), StandardCharsets.US_ASCII)));
+            } else {
+                file.delete();
+            }
+        }
+    }
+
+    private void saveAllNotes(ModuleManager moduleManager) throws IOException {
+        Path modDirPath;
+        for (String mod : moduleManager.getAllModules()) {
+            modDirPath = Paths.get(filePath.getParent().toString(), mod);
+            assert CommonUtils.isValidFileName(mod);
+            if (!Files.isDirectory(modDirPath)) {
+                Files.createDirectories(modDirPath);
+            }
+            ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
+            ArrayList<Note> noteArrayList = contentManager.getContents();
+            for (Note note : noteArrayList) {
+                assert Files.isDirectory(modDirPath);
+                assert CommonUtils.isValidFileName(note.getName());
+                Path filePath = Paths.get(modDirPath.toString(), note.getName() + ".txt");
+                Files.writeString(filePath, note.getData());
+            }
+        }
+    }
+
 
 }
