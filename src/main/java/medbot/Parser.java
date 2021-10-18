@@ -1,16 +1,15 @@
 package medbot;
 
-import medbot.command.AddPatientCommand;
+import medbot.command.patientCommand.AddPatientCommand;
 import medbot.command.Command;
 import medbot.command.CommandType;
-import medbot.command.DeletePatientCommand;
-import medbot.command.EditPatientCommand;
+import medbot.command.patientCommand.DeletePatientCommand;
+import medbot.command.patientCommand.EditPatientCommand;
 import medbot.command.ExitCommand;
-import medbot.command.ListPatientCommand;
+import medbot.command.patientCommand.ListPatientCommand;
 import medbot.command.SwitchCommand;
-import medbot.command.ViewPatientCommand;
+import medbot.command.patientCommand.ViewPatientCommand;
 import medbot.command.HelpCommand;
-import medbot.exceptions.MedBotException;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Patient;
 import medbot.person.Person;

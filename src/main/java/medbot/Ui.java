@@ -1,5 +1,7 @@
 package medbot;
 
+import medbot.list.PatientList;
+import medbot.list.PersonList;
 import medbot.utilities.ViewType;
 
 import java.io.IOException;
@@ -109,9 +111,10 @@ public class Ui {
      * @param patientList the list containing patients to be printed.
      * @return all Patients' information.
      */
-    public String getAllPatientsString(PatientList patientList) {
+
+    public String getAllPatientsString(PersonList patientList) {
         String output = "Here is a list of all patients:" + ENDLINE;
-        output += patientList.listPatients();
+        output += patientList.listPersons();
 
         return output;
     }
