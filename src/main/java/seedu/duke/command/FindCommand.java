@@ -9,7 +9,7 @@ import seedu.duke.Ui;
 
 import java.util.ArrayList;
 
-public class findCommand extends Command  {
+public class FindCommand extends Command  {
     @Override
     public void execute(ArrayList<String> parameters) {
         Ui ui = new Ui();
