@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 /**
  * Add order for medication based on user input.
- * User input include medication name, quantity and date of command.order.
+ * User input include medication name, quantity and the order date.
  */
 
 public class AddOrder extends Command {
@@ -73,7 +73,6 @@ public class AddOrder extends Command {
     private void addOrder(Ui ui, ArrayList<Medicine> medicines, String name, int quantity, Date date) {
         Order order = new Order(name, quantity, date);
         medicines.add(order);
-        ui.print("Order added: " + name + "\nQuantity: " + quantity + "\nDate ordered: " + date);
         ui.printOrder(order);
         logger.log(Level.INFO, "Successful addition of order");
     }
