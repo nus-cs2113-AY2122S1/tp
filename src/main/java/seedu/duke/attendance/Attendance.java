@@ -28,8 +28,7 @@ public class Attendance {
      */
     @Override
     public String toString() {
-        return String.format("Name: %s | Student Number: %s | Training Name: %s | Venue: %s | Time: %s",
-                member.getName(), member.getStudentNumber(), schedule.getTrainingName(),
-                schedule.getTrainingVenue(), schedule.getTrainingTime());
+        return String.format("Name: %s | Training Name: %s | Status: [%s] ",
+                member.getName(), schedule.getTrainingName(), member.getAttendance());
     }
 }
