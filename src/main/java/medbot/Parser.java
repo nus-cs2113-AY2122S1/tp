@@ -9,6 +9,8 @@ import medbot.command.ListPatientCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.ViewPatientCommand;
 import medbot.command.HelpCommand;
+import medbot.exceptions.MedBotException;
+import medbot.exceptions.MedBotParserException;
 import medbot.person.Patient;
 import medbot.person.Person;
 import medbot.utilities.ViewType;
