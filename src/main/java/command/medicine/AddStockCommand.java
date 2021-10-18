@@ -6,7 +6,7 @@ import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Stock;
 import parser.DateParser;
-import parser.MedicineManager;
+import parser.StockManager;
 import parser.StockValidator;
 import storage.Storage;
 import ui.Ui;
@@ -48,7 +48,7 @@ public class AddStockCommand extends Command {
 
         if (nameExist) {
             String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE,
-                CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
+                    CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE};
 
             if (checkValidParametersAndValues(ui, parameters, medicines, requiredParameters, optionalParameters)) {
                 return;
@@ -66,7 +66,7 @@ public class AddStockCommand extends Command {
 
             int quantity = Integer.parseInt(quantityToAdd);
             int existingMaxQuantity = existingStock.getMaxQuantity();
-            int totalStock = MedicineManager.getTotalStockQuantity(medicines, nameToAdd);
+            int totalStock = StockManager.getTotalStockQuantity(medicines, nameToAdd);
             assert totalStock > 0 : "Total Stock should be more than 0";
 
             if (checkDateAndQuantity(ui, medicines, nameToAdd, formatExpiry, quantity,
@@ -83,8 +83,8 @@ public class AddStockCommand extends Command {
             storage.saveData(medicines);
         } else {
             String[] requiredParameters = {CommandParameters.NAME, CommandParameters.PRICE,
-                CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
-                CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
+                    CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE,
+                    CommandParameters.DESCRIPTION, CommandParameters.MAX_QUANTITY};
 
             if (checkValidParametersAndValues(ui, parameters, medicines, requiredParameters, optionalParameters)) {
                 return;

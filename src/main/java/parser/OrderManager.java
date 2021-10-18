@@ -7,6 +7,9 @@ import inventory.Order;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+/**
+ * Manages medicines that are order objects.
+ */
 public class OrderManager {
 
     /**

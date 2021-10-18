@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * Update medication information based on user input given order id.
  */
 
-public class UpdateOrder extends Command {
+public class UpdateOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("UpdateOrder");
 
     @Override
