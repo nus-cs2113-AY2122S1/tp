@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * Add medication based on user input.
  * User input include name, price, quantity, expiry date, description and maximum quantity of medication.
  */
-public class AddStock extends Command {
+public class AddStockCommand extends Command {
     private static Logger logger = Logger.getLogger("AddCommand");
 
     @Override

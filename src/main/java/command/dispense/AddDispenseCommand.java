@@ -19,7 +19,7 @@ import java.util.LinkedHashMap;
  * Dispense medication based on user input.
  * User input includes medication name, quantity to dispense, Customer's NRIC and Staff name.
  */
-public class AddDispense extends Command {
+public class AddDispenseCommand extends Command {
 
     @Override
     public void execute(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
@@ -30,7 +30,7 @@ public class AddDispense extends Command {
         String staffName = parameters.get(CommandParameters.STAFF);
 
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY,
-            CommandParameters.CUSTOMER_ID, CommandParameters.STAFF};
+                CommandParameters.CUSTOMER_ID, CommandParameters.STAFF};
         String[] optionalParameters = {};
 
         if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,

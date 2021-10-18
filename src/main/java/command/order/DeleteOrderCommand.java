@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 /**
  * Delete order based on user input given order id.
  */
-public class DeleteOrder extends Command {
+public class DeleteOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("Delete Order");
 
     @Override
