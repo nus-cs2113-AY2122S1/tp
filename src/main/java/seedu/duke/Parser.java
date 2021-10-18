@@ -30,6 +30,7 @@ import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidIncomeIndexException;
 import seedu.utility.Messages;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -99,12 +100,13 @@ public class Parser {
     private static final String INCOME_RANGE_KEYWORD = "btw_in";
     
     private static final String DATA_SEPARATOR = ", ";
+
     private static final Pattern EXPENSE_DATA_FORMAT
             = Pattern.compile("E" + DATA_SEPARATOR + "(?<description>[^/]+)" + DATA_SEPARATOR
-            + "(?<amount>[^/]+)");
+            + "(?<amount>[^/]+)" + DATA_SEPARATOR + "(?<category>[^/]+)" + DATA_SEPARATOR + "(?<date>[^/]+)");
     private static final Pattern INCOME_DATA_FORMAT
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>[^/]+)" + DATA_SEPARATOR
-            + "(?<amount>[^/]+)");
+            + "(?<amount>[^/]+)" + DATA_SEPARATOR + "(?<category>[^/]+)" + DATA_SEPARATOR + "(?<date>[^/]+)");
 
     /**
      * Parses user input into command for execution.
@@ -407,43 +409,57 @@ public class Parser {
     }
 
     public String convertExpenseToData(Expense expense) {
-        return "E" + DATA_SEPARATOR + expense.getDescription() + DATA_SEPARATOR + expense.getValue();
+        return "E" + DATA_SEPARATOR + expense.getDescription() + DATA_SEPARATOR + expense.getValue() + DATA_SEPARATOR 
+                + expense.getCategory() + DATA_SEPARATOR + expense.getDate();
     }
 
     public String convertIncomeToData(Income income) {
-        return "I" + DATA_SEPARATOR + income.getDescription() + DATA_SEPARATOR + income.getValue();
+        return "I" + DATA_SEPARATOR + income.getDescription() + DATA_SEPARATOR + income.getValue() + DATA_SEPARATOR 
+                + income.getCategory() + DATA_SEPARATOR + income.getDate();
     }
-    /*
+    
     public Expense convertDataToExpense(String data) throws InvalidExpenseAmountException,
-            InvalidExpenseDataFormatException {
+            InvalidExpenseDataFormatException, DateTimeException {
         final Matcher matcher = EXPENSE_DATA_FORMAT.matcher(data);
         if (!matcher.matches()) {
             throw new InvalidExpenseDataFormatException();
         }
         
-        String expenseDescription = matcher.group("description");
+        String expenseDescription = matcher.group("description").trim();
         if (expenseDescription.isBlank()) {
             throw new InvalidExpenseDataFormatException();
         }
-        String dataAmount = matcher.group("amount");
+        String dataAmount = matcher.group("amount").trim();
         double expenseAmount = parseExpenseAmount(dataAmount);
-        return new Expense(expenseDescription, expenseAmount);
+        String expenseCategory = matcher.group("category").trim();
+        if (expenseCategory.isBlank()) {
+            throw new InvalidExpenseDataFormatException();
+        }
+        String date = matcher.group("date").trim();
+        LocalDate expenseDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return new Expense(expenseDescription, expenseAmount, expenseCategory, expenseDate);
     }
 
     public Income convertDataToIncome(String data) throws InvalidIncomeAmountException, 
-            InvalidIncomeDataFormatException {
+            InvalidIncomeDataFormatException, DateTimeException {
         final Matcher matcher = INCOME_DATA_FORMAT.matcher(data);
         if (!matcher.matches()) {
             throw new InvalidIncomeDataFormatException();
         }
         
-        String incomeDescription = matcher.group("description");
+        String incomeDescription = matcher.group("description").trim();
         if (incomeDescription.isBlank()) {
             throw new InvalidIncomeDataFormatException();
         }
-        String dataAmount = matcher.group("amount");
+        String dataAmount = matcher.group("amount").trim();
         double incomeAmount = parseIncomeAmount(dataAmount);
-        return new Income(incomeDescription, incomeAmount);
+        String incomeCategory = matcher.group("category").trim();
+        if (incomeCategory.isBlank()) {
+            throw new InvalidIncomeDataFormatException();
+        }
+        String date = matcher.group("date").trim();
+        LocalDate incomeDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return new Income(incomeDescription, incomeAmount, incomeCategory, incomeDate);
     }
-    */
+    
 }
