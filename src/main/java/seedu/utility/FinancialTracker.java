@@ -104,7 +104,7 @@ public class FinancialTracker {
         assert totalIncome >= 0;
         return totalIncome;
     }
-    
+
     private double getTotalExpense(List<Expense> accumulatedExpense) {
         double totalExpense = 0;
         for (Expense expense: accumulatedExpense) {
@@ -158,7 +158,7 @@ public class FinancialTracker {
                 .collect(Collectors.toList());
         return getTotalIncome(accumulatedIncome);
     }
-
+        
     //returns the total expense in the month. Used for data visualisation
     private double getMonthlyIncome(int inputMonth, List<Income> yearlyIncome) {
         List<Income> monthlyAccumulatedIncome = yearlyIncome.stream()
