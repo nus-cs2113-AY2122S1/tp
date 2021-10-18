@@ -26,10 +26,12 @@ public class Storage {
     private static final String STOCK_FILE_PATH = "data/stock.txt";
     private static final String ORDER_FILE_PATH = "data/order.txt";
     private static final String DISPENSE_FILE_PATH = "data/dispense.txt";
+    private static final int NUMBER_OF_STOCK_DATA_FIELDS = 7;
     private static File stockFile;
     private static File orderFile;
     private static File dispenseFile;
     private static Storage storage = null;
+
 
     /**
      * Helps to create the Storage instance or returns the Storage instance if it exists.
@@ -108,7 +110,7 @@ public class Storage {
      */
     private Medicine parseStockData(String stockDetails) throws InvalidDataException {
         String[] splitStockDetails = stockDetails.split("\\|");
-        if (splitStockDetails.length != 7) { // If not all fields present. After addition of isDeleted will be 8
+        if (splitStockDetails.length != NUMBER_OF_STOCK_DATA_FIELDS) { // If not all fields present.
             throw new InvalidDataException();
         }
         int stockID = FileParser.parseStockID(splitStockDetails);
