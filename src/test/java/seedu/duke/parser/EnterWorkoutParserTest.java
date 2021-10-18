@@ -7,6 +7,8 @@ import seedu.duke.command.IncorrectCommand;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class EnterWorkoutParserTest {
@@ -15,7 +17,7 @@ class EnterWorkoutParserTest {
 
     @BeforeEach
     public void setUp() {
-        Workout workout = new Workout("workout");
+        Workout workout = new Workout("workout", LocalDate.parse("2021-10-10"));
         workoutList = new WorkoutList();
         workoutList.addWorkout(workout);
     }
