@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Ui {
     public static final String VERTICAL_LINE_SPACED_ESCAPED = " \\| ";
     public static final String VERTICAL_LINE_SPACED = " | ";
+    public static final String ENDLINE = System.lineSeparator();
 
     private Scanner inputScanner = new Scanner(System.in);
 
@@ -39,14 +40,14 @@ public class Ui {
      * Prints a welcome message when MedBot is first loaded.
      */
     public void printWelcomeMessageOne() {
-        printOutput("Hello, I'm MedBot!" + System.lineSeparator());
+        printOutput("Hello, I'm MedBot!" + ENDLINE);
     }
 
     /**
      * Prints a welcome message when MedBot file storage is successfully loaded.
      */
     public void printWelcomeMessageTwo() {
-        printOutput("How can I help you today?" + System.lineSeparator() + System.lineSeparator());
+        printOutput("How can I help you today?" + System.lineSeparator() + ENDLINE);
     }
 
     /**
@@ -79,8 +80,8 @@ public class Ui {
      */
     public String getEditPatientMessage(int patientId, String patientInfo) {
         assert patientId > 0;
-        return "The information of patient with ID " + patientId + " has been edited to:"
-                + System.lineSeparator() + patientInfo;
+        return "The information of patient with ID " + patientId + " has been edited to:" + ENDLINE
+                + patientInfo;
     }
 
     /**
@@ -89,7 +90,7 @@ public class Ui {
      * @return the exit Message
      */
     public String getExitMessage() {
-        return "Thank you for using MedBot!" + System.lineSeparator() + "See you again!";
+        return "Thank you for using MedBot!" + ENDLINE + "See you again!";
     }
 
     /**
@@ -99,7 +100,7 @@ public class Ui {
      * @return the Patient information
      */
     public String getPatientInfo(String patientInfo) {
-        return "Here's the requested patient:" + System.lineSeparator() + patientInfo;
+        return "Here's the requested patient:" + ENDLINE + patientInfo;
     }
 
     /**
@@ -109,7 +110,7 @@ public class Ui {
      * @return all Patients' information.
      */
     public String getAllPatientsString(PatientList patientList) {
-        String output = "Here is a list of all patients:" + System.lineSeparator();
+        String output = "Here is a list of all patients:" + ENDLINE;
         output += patientList.listPatients();
 
         return output;
@@ -121,11 +122,11 @@ public class Ui {
      * @return all supported commands.
      */
     public String getCommandList() {
-        return "Here are the list of commands:\n\n"
-                + "help\n" + "add\n" + "list\n" + "view\n" + "edit\n" + "delete\n"
-                + "exit\n" + "\n"
-                + "To obtain more information on each command and their respective required inputs, type:\n"
-                + "help [COMMAND]\n\n"
+        return "Here are the list of commands:" + ENDLINE + ENDLINE
+                + "help" + ENDLINE + "add" + ENDLINE + "list" + ENDLINE + "view" + ENDLINE + "edit" + ENDLINE
+                + "delete" + ENDLINE + "exit" + ENDLINE + ENDLINE
+                + "To obtain more information on each command and their respective required inputs, type:" + ENDLINE
+                + "help [COMMAND]" + ENDLINE + ENDLINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes";
     }
 
@@ -135,12 +136,13 @@ public class Ui {
      * @return the information on list command.
      */
     public String getListHelpMessage() {
-        return "View information of all current patients.\n"
-                + "Format: list\n" + "Expected Output for 2 patients: \n"
+        return "View information of all current patients." + ENDLINE
+                + "Format: list" + ENDLINE
+                + "Expected Output for 2 patients: " + ENDLINE
                 + "Patient ID: [PATIENT_ID_1] IC: [PATIENT_IC]"
-                + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]\n"
+                + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]" + ENDLINE
                 + "Patient ID: [PATIENT_ID_2] IC: [PATIENT_IC]"
-                + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]\n";
+                + "Name: [PATIENT_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]" + ENDLINE;
     }
 
     /**
@@ -149,9 +151,11 @@ public class Ui {
      * @return the information on help command.
      */
     public String getViewHelpMessage() {
-        return "View a patient’s personal information.\n" + "Format: view PATIENT_ID\n"
-                + "Expected Output:\n" + "id: PATIENT_ID " + "name: NAME "
-                + "phone number: PHONE_NUMBER " + "email: EMAIL " + "address: ADDRESS\n";
+        return "View a patient’s personal information." + ENDLINE
+                + "Format: view PATIENT_ID" + ENDLINE
+                + "Expected Output:" + ENDLINE
+                + "id: PATIENT_ID " + "name: NAME " + "phone number: PHONE_NUMBER "
+                + "email: EMAIL " + "address: ADDRESS" + ENDLINE;
     }
 
     /**
@@ -160,10 +164,10 @@ public class Ui {
      * @return the information on add command.
      */
     public String getAddHelpMessage() {
-        return "Add a patient to the patient’s list.\n"
-                + "Format:\n"
-                + "add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
-                + "Expected output:\n"
+        return "Add a patient to the patient’s list." + ENDLINE
+                + "Format:" + ENDLINE
+                + "add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
+                + "Expected output:" + ENDLINE
                 + "Added patient with patient ID: PATIENT_ID";
     }
 
@@ -173,13 +177,13 @@ public class Ui {
      * @return the information on edit command.
      */
     public String getEditHelpMessage() {
-        return "Edit the personal and medical information of a patient in the list.\n"
-                + "Format:\n"
-                + "edit PATIENT ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]\n"
-                + "Expected output: \n"
-                + "The information of patient with ID PATIENT_ID has been edited to:\n"
+        return "Edit the personal and medical information of a patient in the list." + ENDLINE
+                + "Format:" + ENDLINE
+                + "edit PATIENT ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
+                + "Expected output: " + ENDLINE
+                + "The information of patient with ID PATIENT_ID has been edited to:" + ENDLINE
                 + "Patient ID: [PATIENT_ID] IC: [PATIENT_IC] Name: [NAME] H/P: [PHONE_NUMBER] "
-                + "Email: [EMAIL] Address: [ADDRESS] \n";
+                + "Email: [EMAIL] Address: [ADDRESS] " + ENDLINE;
     }
 
     /**
@@ -188,11 +192,11 @@ public class Ui {
      * @return the information on delete command.
      */
     public String getDeleteHelpMessage() {
-        return "Delete a patient from the list.\n"
-                + "Format:\n"
-                + "delete PATIENT_ID\n"
-                + "Expected Output:\n"
-                + "Patient with id PATIENT_ID deleted from system.\n";
+        return "Delete a patient from the list." + ENDLINE
+                + "Format:" + ENDLINE
+                + "delete PATIENT_ID" + ENDLINE
+                + "Expected Output:" + ENDLINE
+                + "Patient with id PATIENT_ID deleted from system." + ENDLINE;
     }
 
     /**
@@ -201,7 +205,7 @@ public class Ui {
      * @return the information on exot command.
      */
     public String getExitHelpMessage() {
-        return "Exits the program.\n" + "Format: exit\n";
+        return "Exits the program." + ENDLINE + "Format: exit" + ENDLINE;
     }
 
     /**
@@ -210,7 +214,7 @@ public class Ui {
      * @return the error message on unrecognised command.
      */
     public String getUnrecognisedCommandHelpMessage() {
-        return "Sorry, that's not a recognised command. To view a list of commands, type:\n" + "help\n";
+        return "Sorry, that's not a recognised command. To view a list of commands, type:" + ENDLINE + "help" + ENDLINE;
     }
 
     /**
@@ -218,7 +222,7 @@ public class Ui {
      * the IDE.
      */
     public static void clearConsoleFromIde() {
-        System.out.print("\n\n\n\n\n");
+        System.out.print(ENDLINE + ENDLINE + ENDLINE + ENDLINE + ENDLINE);
     }
 
     /**
@@ -254,7 +258,7 @@ public class Ui {
                     + "  \\ V / | || _| \\ \\/\\/ /          \n"
                     + "   \\_/ |___|___| \\_/\\_/           \n"
                     + "                                  ");
-        } else if (viewType == ViewType.SCHEDULE) {
+        } else if (viewType == ViewType.SCHEDULER) {
             System.out.println("  ___  ___ _  _ ___ ___  _   _ _    ___ ___ \n"
                     + " / __|/ __| || | __|   \\| | | | |  | __| _ \\\n"
                     + " \\__ \\ (__| __ | _|| |) | |_| | |__| _||   /\n"

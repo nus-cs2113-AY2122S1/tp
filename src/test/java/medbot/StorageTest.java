@@ -2,6 +2,7 @@ package medbot;
 
 import static medbot.Parser.updatePersonalInformation;
 
+import medbot.exceptions.MedBotException;
 import medbot.person.Patient;
 
 import java.io.File;

@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UiTest {
+    public static final String ENDLINE = System.lineSeparator();
+
     @Test
     public void testPrintAddPatientMessage() {
         int patientId = 2;
@@ -90,11 +92,11 @@ class UiTest {
     public void testGetCommandListMessage() {
         Ui ui = new Ui();
 
-        String expectedOutput = "Here are the list of commands:\n\n"
-                + "help\n" + "add\n" + "list\n" + "view\n" + "edit\n" + "delete\n"
-                + "exit\n" + "\n"
-                + "To obtain more information on each command and their respective required inputs, type:\n"
-                + "help [COMMAND]\n\n"
+        String expectedOutput = "Here are the list of commands:" + ENDLINE + ENDLINE
+                + "help" + ENDLINE + "add" + ENDLINE + "list" + ENDLINE + "view" + ENDLINE + "edit" + ENDLINE
+                + "delete" + ENDLINE + "exit" + ENDLINE + ENDLINE
+                + "To obtain more information on each command and their respective required inputs, type:" + ENDLINE
+                + "help [COMMAND]" + ENDLINE + ENDLINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes";
 
         assertEquals(ui.getCommandList(), expectedOutput);

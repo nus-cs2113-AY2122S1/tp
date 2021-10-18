@@ -1,5 +1,6 @@
 package medbot;
 
+import medbot.exceptions.MedBotException;
 import medbot.person.Patient;
 import medbot.utilities.Pair;
 
