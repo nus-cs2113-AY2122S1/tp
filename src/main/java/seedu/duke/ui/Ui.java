@@ -1,9 +1,9 @@
 package seedu.duke.ui;
 
+import dnl.utils.text.table.TextTable;
 import seedu.duke.command.Command;
-import seedu.duke.command.IncorrectCommand;
-import seedu.duke.command.RecommendWorkoutCommand;
 import seedu.duke.exception.GetJackDException;
+import seedu.duke.exercises.Exercise;
 
 import java.util.ArrayList;
 
@@ -24,6 +24,14 @@ public class Ui {
             prefix = "";
             newLine = System.lineSeparator();
         }
+    }
+
+    private void printText(String message) {
+        System.out.println(prefix + message.replace("\n", newLine));
+    }
+
+    private void printLineSeparator() {
+        printText(DIVIDER);
     }
 
     public static void printWelcomeMessage() {
@@ -60,18 +68,11 @@ public class Ui {
         System.out.println("\"create\" : Creates a new workout");
         System.out.println("\"delete\" : Deletes a workout");
         System.out.println("\"list\" : Lists all your workouts");
+        System.out.println("\"recommend\" : Recommends workouts of a given difficulty");
         System.out.println("\"display\" : Shows all the exercises in a specified workout");
         System.out.println("\"search\" : Displays workouts or exercises that contain the specified keyword");
         System.out.println("\"bye\" : Ends the program");
         System.out.println(DIVIDER);
-    }
-
-    private void printText(String message) {
-        System.out.println(prefix + message.replace("\n", newLine));
-    }
-
-    public void printLineSeparator() {
-        printText(DIVIDER);
     }
 
     /**
@@ -115,6 +116,31 @@ public class Ui {
         }
     }
 
+    public void printExerciseTable(String displayMessage, ArrayList<Exercise> exerciseList) {
+        printLineSeparator();
+        printText(displayMessage);
+
+        String[] columnNames = {"Index", "Exercise name", "Sets", "Reps", "Done"};
+        String[][] data = exerciseListTo2DArray(columnNames.length, exerciseList);
+        TextTable tt = new TextTable(columnNames, data);
+        tt.printTable();
+
+        printLineSeparator();
+    }
+
+    private String[][] exerciseListTo2DArray(int numOfColumns, ArrayList<Exercise> exerciseList) {
+        String[][] data = new String[exerciseList.size()][numOfColumns];
+        for (int i = 0; i < exerciseList.size(); i++) {
+            Exercise e = exerciseList.get(i);
+            data[i][0] = String.valueOf(i + 1);
+            data[i][1] = e.getDescription();
+            data[i][2] = String.valueOf(e.getSets());
+            data[i][3] = String.valueOf(e.getReps());
+            data[i][4] = e.getIsDone() ? "X" : " ";
+        }
+        return data;
+    }
+
     /**
      * Prints the specific message needed at specific points.
      *
@@ -131,13 +157,66 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows users recommend workouts based on the difficulty provided.
+     *
+     * @param workoutLevel is the difficulty of the workouts
+     */
     public void showRecommendedWorkouts(String workoutLevel) {
+        String[] Exercises;
+
         if (workoutLevel.equals("beginner")) {
 
+            System.out.println("Arm");
+            Exercises = new String[]{"jklavl","angsngv","kwsbgsdb"};
+            printRecommendTable(Exercises);
+
+            System.out.println("Abs");
+            Exercises = new String[]{"srthjh", "jkwfgjks", "sgkjsbg"};
+            printRecommendTable(Exercises);
         } else if (workoutLevel.equals("intermediate")) {
+            System.out.println("Shoulders");
+            Exercises = new String[]{"srthjh", "jkwfgjks", "sgkjsbg"};
+            printRecommendTable(Exercises);
 
+            System.out.println("Glutes");
+            Exercises = new String[]{"srthjh", "jkwfgjks", "sgkjsbg"};
+            printRecommendTable(Exercises);
         } else if (workoutLevel.equals("pro")) {
+            System.out.println("Push Workout");
+            Exercises = new String[]{"srthjh", "jkwfgjks", "sgkjsbg"};
+            printRecommendTable(Exercises);
 
+            System.out.println("Pull Workout");
+            Exercises = new String[]{"srthjh", "jkwfgjks", "sgkjsbg"};
+            printRecommendTable(Exercises);
+
+            System.out.println("Leg Workout");
+            Exercises = new String[]{"srthjh", "jkwfgjks", "sgkjsbg"};
+            printRecommendTable(Exercises);
         }
+    }
+
+    /**
+     * Prints a table of recommended exercises with the given list of workouts.
+     *
+     * @param Exercises is the pre set list of recommended exercises
+     */
+    private void printRecommendTable(String[] Exercises) {
+        String[][] data;
+        TextTable tt;
+        String[] columnNames = {"Index", "Exercise name", "Sets", "Reps"};
+
+        data = new String[Exercises.length][columnNames.length];
+        for (int i = 0; i < Exercises.length; i++) {
+            data[i][0] = String.valueOf(i + 1);
+            data[i][1] = Exercises[i];
+            data[i][2] = "2";
+            data[i][3] = "8";
+        }
+        tt = new TextTable(columnNames, data);
+        tt.printTable();
+
+        printLineSeparator();
     }
 }

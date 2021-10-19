@@ -8,6 +8,8 @@ import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ExitWorkoutCommandTest {
@@ -23,7 +25,7 @@ class ExitWorkoutCommandTest {
     }
 
     private void createOneWorkout() {
-        Workout workout = new Workout("workout");
+        Workout workout = new Workout("workout", LocalDate.parse("2021-10-10"));
         workoutList = new WorkoutList();
         workoutList.addWorkout(workout);
     }

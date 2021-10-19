@@ -14,8 +14,6 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
 public abstract class Parser {
     static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
     static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n\n";
-    public static String WORKOUT_KEYWORD = "/w ";
-    public static String EXERCISE_KEYWORD = "/e ";
     public static final String PARAMETER_SEPARATOR = ", ";
     protected String userInputString;
 

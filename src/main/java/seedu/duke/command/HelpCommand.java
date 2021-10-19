@@ -5,7 +5,7 @@ import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
 /**
- * Used to display a help message which shows the user the commands to use.
+ * To display a help message which shows the user the commands to use.
  */
 public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";

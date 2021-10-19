@@ -10,7 +10,6 @@ import seedu.duke.ui.Ui;
 import java.util.logging.Logger;
 
 import static seedu.duke.logger.LoggerUtil.setupLogger;
-import static seedu.duke.parser.Parser.WORKOUT_KEYWORD;
 
 /**
  * To delete a Workout.
@@ -22,7 +21,7 @@ public class DeleteWorkoutCommand extends Command {
             + "Format: delete [Workout index]\n"
             + "Parameters:\n"
             + "\tWorkout index - Index of workout to delete\n"
-            + "Example: " + COMMAND_WORD + " " + WORKOUT_KEYWORD + "1";
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Deleted workout: %s";
 

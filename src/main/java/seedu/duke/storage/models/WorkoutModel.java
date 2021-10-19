@@ -7,15 +7,19 @@ import java.util.ArrayList;
 public class WorkoutModel {
     private ArrayList<ExerciseModel> exercises = new ArrayList<>();
     private String workoutName;
+    private String deadline;
 
-    public WorkoutModel(String workoutName) {
+    public WorkoutModel(String workoutName, String deadline) {
         this.workoutName = workoutName;
+        this.deadline = deadline;
     }
 
     public WorkoutModel(@JsonProperty("exercises") ArrayList<ExerciseModel> exercises,
-                        @JsonProperty("workoutName") String workoutName) {
+                        @JsonProperty("workoutName") String workoutName,
+                        @JsonProperty("deadline") String deadline) {
         this.exercises = exercises;
         this.workoutName = workoutName;
+        this.deadline = deadline;
     }
 
     public ArrayList<ExerciseModel> getExercises() {
@@ -24,6 +28,10 @@ public class WorkoutModel {
 
     public String getWorkoutName() {
         return workoutName;
+    }
+
+    public String getDeadline() {
+        return deadline;
     }
 
     public void addToWorkoutModel(ExerciseModel exercise) {

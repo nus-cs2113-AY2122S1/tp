@@ -7,18 +7,21 @@ import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
+import java.time.LocalDate;
+
+import static seedu.duke.parser.Parser.PARAMETER_SEPARATOR;
+
 /**
  * To create a new Workout.
  */
-
-
 public class CreateWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "create";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new workout.\n"
             + "Format: create [workout description]\n"
             + "Parameters:\n"
             + "\tWorkout description - description or name of workout\n"
-            + "Example: " + COMMAND_WORD + " abs";
+            + "\tWorkout deadline - deadline of workout\n"
+            + "Example: " + COMMAND_WORD + " abs" + PARAMETER_SEPARATOR + "2021-12-25";
     public static final String MESSAGE_SUCCESS = "New workout created: %s";
 
     private final Workout toCreate;
@@ -28,8 +31,8 @@ public class CreateWorkoutCommand extends Command {
      *
      * @param description description of new workout.
      */
-    public CreateWorkoutCommand(String description) {
-        this.toCreate = new Workout(description);
+    public CreateWorkoutCommand(String description, LocalDate deadline) {
+        this.toCreate = new Workout(description, deadline);
     }
 
     /**

@@ -4,6 +4,9 @@ import seedu.duke.command.Command;
 import seedu.duke.command.IncorrectCommand;
 import seedu.duke.command.RecommendWorkoutCommand;
 
+/**
+ * Parses and processes input for the recommend command.
+ */
 public class RecommendWorkoutParser extends Parser {
 
     public RecommendWorkoutParser(String userInputString) {

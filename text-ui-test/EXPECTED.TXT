@@ -33,21 +33,23 @@ create: Creates a new workout.
 Format: create [workout description]
 Parameters:
 	Workout description - description or name of workout
-Example: create abs
+	Workout deadline - deadline of workout
+Example: create abs, 2021-12-25
 ________________________________________________________
 ________________________________________________________
 create: Creates a new workout.
 Format: create [workout description]
 Parameters:
 	Workout description - description or name of workout
-Example: create abs
+	Workout deadline - deadline of workout
+Example: create abs, 2021-12-25
 ________________________________________________________
 ________________________________________________________
-New workout created: Legs
+New workout created: Legs finish by: 25 Dec 2021
 ________________________________________________________
 ________________________________________________________
 Workout list:
-1. Legs
+1. Legs finish by: 25 Dec 2021
 ________________________________________________________
 ________________________________________________________
 Invalid command format
@@ -141,17 +143,17 @@ delete: Deletes the workout corresponding to the workout index.
 Format: delete [Workout index]
 Parameters:
 	Workout index - Index of workout to delete
-Example: delete /w 1
+Example: delete 1
 ________________________________________________________
 ________________________________________________________
 delete: Deletes the workout corresponding to the workout index.
 Format: delete [Workout index]
 Parameters:
 	Workout index - Index of workout to delete
-Example: delete /w 1
+Example: delete 1
 ________________________________________________________
 ________________________________________________________
-Deleted workout: Legs
+Deleted workout: Legs finish by: 25 Dec 2021
 ________________________________________________________
 ________________________________________________________
 Empty workout list
