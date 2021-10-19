@@ -1,5 +1,7 @@
 # StonksXD User Guide
 
+![](https://melmagazine.com/wp-content/uploads/2019/07/Stonks_Meme.jpg)
+
 ## Introduction
 
 - StonksXD is a smart money management application that tracks daily expenses, sets/adjusts spending limits and gives advice based on daily expenses. 
