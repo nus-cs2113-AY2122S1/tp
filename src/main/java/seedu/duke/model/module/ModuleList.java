@@ -3,7 +3,6 @@ package seedu.duke.model.module;
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.model.module.exceptions.ModuleIndexException;
-import seedu.duke.model.task.Task;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
@@ -77,5 +76,15 @@ public class ModuleList {
 
     public void deleteAllModules() {
         moduleList.clear();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < moduleList.size(); i++) {
+            Module module = moduleList.get(i);
+            s.append(Ui.PADDING).append(i + 1).append(". ").append(module).append(System.lineSeparator());
+        }
+        return s.toString();
     }
 }

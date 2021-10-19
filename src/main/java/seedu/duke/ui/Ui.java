@@ -2,8 +2,11 @@ package seedu.duke.ui;
 
 import java.util.Scanner;
 
+import seedu.duke.Duke;
+import seedu.duke.DukeException;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
+import seedu.duke.model.module.ModuleList;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
 import seedu.duke.model.module.Module;
@@ -289,6 +292,31 @@ public class Ui {
         System.out.println(PADDING + "  " + module);
         System.out.println(PADDING + "Now you have " + size + " modules in the list.");
         System.out.println(LINE);
+    }
+
+    /**
+     * Displays the list of modules with only the basic module information.
+     *
+     * @param moduleList the list of modules
+     */
+    public void printModuleList(ModuleList moduleList) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Here are the modules in your list:");
+        System.out.print(moduleList);
+        System.out.print(LINE);
+    }
+
+    /**
+     * Displays the list of modules with the full module information.
+     *
+     * @param moduleList the list of modules
+     * @throws DukeException when there is an error in retrieving the full module information of a module in the list
+     */
+    public void printModulesWithDetails(ModuleList moduleList) throws DukeException {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Here are the detailed information of your modules:");
+        System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
+        System.out.print(LINE);
     }
 
     // All-related methods

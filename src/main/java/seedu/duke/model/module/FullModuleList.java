@@ -1,5 +1,6 @@
 package seedu.duke.model.module;
 
+import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.util.JsonUtil;
 import seedu.duke.commons.util.exceptions.ModuleLoadException;
@@ -54,5 +55,22 @@ public class FullModuleList {
             throw new ModuleNotFoundException(Messages.ERROR_MODULE_NOT_FOUND);
         }
         return moduleMap.get(moduleCode);
+    }
+
+    /**
+     * Returns a ready-to-print string with the full module information of all the modules in the module list.
+     *
+     * @param moduleList the module list
+     * @return the ready-to-print string of full module information
+     * @throws DukeException when there is an error in getting the full module information of a module in the list
+     */
+    public String getModulesFull(ModuleList moduleList) throws DukeException {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < moduleList.getSize(); i++) {
+            Module module = moduleList.getModule(i);
+            module = findModule(module.getModuleCode());
+            s.append(module.getFullInfo());
+        }
+        return s.toString();
     }
 }

@@ -81,8 +81,31 @@ public class Module {
         }
     }
 
+    /**
+     * Returns the full module information as a string in a ready to print format. This should only be called
+     * on a module retrieved from FullModuleList.
+     *
+     * @return a string of the full module information
+     */
+    public String getFullInfo() {
+        StringBuilder s = new StringBuilder();
+        s.append(Ui.LINE).append(Ui.PADDING).append(this).append(System.lineSeparator());
+        s.append(Ui.PADDING).append("Department: ").append(department).append(System.lineSeparator());
+        s.append(Ui.PADDING).append("Faculty: ").append(faculty).append(System.lineSeparator());
+        s.append(Ui.PADDING).append("Preclusion: ").append(preclusion).append(System.lineSeparator());
+        s.append(Ui.PADDING).append("Pre-requisite: ").append(prerequisite).append(System.lineSeparator());
+        s.append(Ui.PADDING).append("Core Requisites: ").append(corequisite).append(System.lineSeparator())
+                .append(Ui.LINE);
+        return s.toString();
+    }
+
+    /**
+     * Returns a string of the basic module information only. (module code, title and module credits)
+     *
+     * @return a string of the basic module information
+     */
     @Override
     public String toString() {
-        return moduleCode + " " + title + System.lineSeparator();
+        return moduleCode + " " + title + " (" + moduleCredit + "MCs) ";
     }
 }
