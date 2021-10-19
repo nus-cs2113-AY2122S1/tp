@@ -39,8 +39,8 @@ public class MainParser {
     public static final int NAME_INDEX = 0;
 
     private ContactParser contactParser;
-    private AddContactParser addContactParser = new AddContactParser();
-    private EditContactParser editContactParser = new EditContactParser();
+    private final AddContactParser addContactParser = new AddContactParser();
+    private final EditContactParser editContactParser = new EditContactParser();
 
     public Command parseCommand(String userInput) {
         String commandType = getCommandWord(userInput);
@@ -125,6 +125,7 @@ public class MainParser {
         }
     }
 
+    //@@author mayankp291
     private Command parseInvalidDetailCommand(Exception e) {
         if (e instanceof InvalidNameException) {
             return new InvalidDetailCommand(FailedCommandType.INVALID_NAME);
@@ -151,6 +152,7 @@ public class MainParser {
         return new FailedCommand(FailedCommandType.GENERAL);
     }
 
+    //@@author
     private Command parseViewContact(String userInput) {
         try {
             int viewedIndex = IndexParser.getIndexFromInput(userInput);
