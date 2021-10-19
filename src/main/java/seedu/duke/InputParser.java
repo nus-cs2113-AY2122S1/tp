@@ -47,7 +47,7 @@ public class InputParser {
         case ADD_CONSTITUENT:
             //TODO trim inputs
             String[] splitString = parameterString.split("/", 2);
-            for (String param: splitString) {
+            for (String param : splitString) {
                 parameters.add(param.trim());
             }
             break;
@@ -57,7 +57,7 @@ public class InputParser {
             parameters.addAll(List.of(splitFindInputs));
             break;
 
-            default:
+        default:
             break;
         }
 
