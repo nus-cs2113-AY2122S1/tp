@@ -1,13 +1,14 @@
 package seedu.duke.universities;
 
 import seedu.duke.modules.Module;
+import seedu.duke.modules.ModuleList;
 import seedu.duke.modules.ModuleMapping;
 
 import java.util.ArrayList;
 
 public class University {
     protected String name;
-    protected ArrayList<ModuleMapping> list;
+    public ArrayList<ModuleMapping> list;
 
     public University(String name, ArrayList<ModuleMapping> list) {
         this.name = name;
@@ -18,11 +19,29 @@ public class University {
         list.add(new ModuleMapping(localModule, mappedModule));
     }
 
-    public void listMappings() {
+    public void listAllMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
-            String output = currentMapping.localModule.getModuleName()
-                    + " - " + currentMapping.mappedModule.getModuleName();
+            String output = (i + 1) + ". " +
+                    currentMapping.localModule.getModuleCode()
+                    + " - " + currentMapping.mappedModule.getModuleCode()
+                    + " : " + currentMapping.mappedModule.getModuleName();
+            System.out.println(output);
+        }
+    }
+
+    public void listSelectedMappings(ModuleList selectedModuleList) {
+        int mapCount = 0;
+        for (int i = 0; i < list.size(); i++) {
+            ModuleMapping currentMapping = list.get(i);
+            if (!selectedModuleList.searchModule(currentMapping.localModule.getModuleCode())) {
+                continue;
+            }
+            mapCount++;
+            String output = (mapCount) + ". " +
+                    currentMapping.localModule.getModuleCode()
+                    + " - " + currentMapping.mappedModule.getModuleCode()
+                    + " : " + currentMapping.mappedModule.getModuleName();
             System.out.println(output);
         }
     }
