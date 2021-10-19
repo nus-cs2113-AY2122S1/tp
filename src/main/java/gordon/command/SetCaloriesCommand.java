@@ -2,7 +2,6 @@ package gordon.command;
 
 import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
-import gordon.kitchen.Recipe;
 
 public class SetCaloriesCommand extends Command {
     String recipeName;

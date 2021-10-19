@@ -16,6 +16,7 @@ public class GordonException extends Exception {
     public static final String DUPLICATE_RECIPE_NAME = "No duplicate recipe names allowed.";
     public static final String EMPTY_RECIPE_NAME = "Please input name of recipe.";
     public static final String EMPTY_CALORIES = "Please input calories for the recipe.";
+    public static final String INVALID_DIFFICULTY = "Please input a valid difficulty.";
 
     public static final String COMMAND_INVALID = "Command given cannot be recognized.";
 

@@ -1,6 +1,7 @@
 package gordon.kitchen;
 
 import gordon.exception.GordonException;
+import gordon.util.Difficulty;
 import gordon.util.Tag;
 
 import java.util.ArrayList;
@@ -113,6 +114,19 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
+    public void setDifficulty(String name, Difficulty newDifficulty) throws GordonException {
+        for (Recipe recipe : recipes) {
+            // (?i) enables case insensitivity
+            // .* uses all characters except line break
+            if (recipe.getName().matches("(?i).*" + name + ".*")) {
+                recipe.setDifficulty(newDifficulty);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
+  
     public void addCookbookTag(Tag tag) {
         // Prevent duplicate master-Tags at Cookbook level
         if (!isCookbookTagExists(tag.getTagName())) {

@@ -17,15 +17,15 @@ class RecipeTest {
         r.addStep("Pour water over grounds");
         r.setCalories(10);
         String expected = "Coffee" + System.lineSeparator()
-                + "Calories:10kcal" + System.lineSeparator()
+                + "Calories (kcal): " + System.lineSeparator()
+                + "10" + System.lineSeparator()
                 + "Ingredients needed: " + System.lineSeparator()
                 + "1. Coffee beans" + System.lineSeparator()
                 + "2. Water" + System.lineSeparator()
                 + "Method: " + System.lineSeparator()
                 + "1. Boil water" + System.lineSeparator()
                 + "2. Grind beans" + System.lineSeparator()
-                + "3. Pour water over grounds" + System.lineSeparator()
-                + "Tags: " + System.lineSeparator();
+                + "3. Pour water over grounds" + System.lineSeparator();
         assertEquals(expected, r.toString());
     }
 
@@ -46,14 +46,12 @@ class RecipeTest {
             r.addStep("Pour water over grounds");
             r.removeStep(1);
             String expected = "Coffee" + System.lineSeparator()
-                    + "Calories:-1kcal" + System.lineSeparator()
                     + "Ingredients needed: " + System.lineSeparator()
                     + "1. Coffee beans" + System.lineSeparator()
                     + "2. Water" + System.lineSeparator()
                     + "Method: " + System.lineSeparator()
                     + "1. Boil water" + System.lineSeparator()
-                    + "2. Pour water over grounds" + System.lineSeparator()
-                    + "Tags: " + System.lineSeparator();
+                    + "2. Pour water over grounds" + System.lineSeparator();
             assertEquals(expected, r.toString());
             r.removeStep(3098);
             fail();
