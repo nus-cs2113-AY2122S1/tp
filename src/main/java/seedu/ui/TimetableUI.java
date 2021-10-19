@@ -48,7 +48,7 @@ public class TimetableUI {
     public static void printScheduleHours(int start, int end) {
         String infoLine = "\t\t\t\t";
         for (int u = start; u <= end; u++) {
-            infoLine += String.format(FIXED_LENGTH_FORMAT, u + "00");
+            infoLine += String.format(FIXED_LENGTH_FORMAT, u > 9 ? u + "00" : "0" + u + "00");
         }
         System.out.println(infoLine);
     }

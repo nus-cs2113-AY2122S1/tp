@@ -14,7 +14,6 @@ import seedu.exceptions.ModuleExistException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-//Indicate time clashes with current timetable in milestone v2.0 when adding lesson
 public class AddCommand extends Command {
     private static final String LECTURE = "Lecture";
     private static final String TUTORIAL = "Tutorial";
@@ -68,9 +67,13 @@ public class AddCommand extends Command {
         return completeList;
     }
 
-    public void checkModuleExist(Module module) throws ModuleExistException {
-        if (timetable.getModules().contains(module)) {
-            throw new ModuleExistException("Module already exist in your timetable");
+    public void checkModuleExist(Module mod) throws ModuleExistException {
+        for (Module module : timetable.getModules()) {
+            String moduleCode = module.getModuleCode();
+            if (moduleCode.equals(mod.getModuleCode())) {
+                throw new ModuleExistException("Module currently already exist in your timetable");
+            }
         }
+
     }
 }

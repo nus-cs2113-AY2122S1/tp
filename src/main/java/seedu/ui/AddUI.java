@@ -96,7 +96,9 @@ public class AddUI {
             }
             String classNumber = lessons.get(indexOfLesson).getClassNo();
             addLessonToTimetable(lessons, timetable, module, classNumber);
-            TextUi.printLessonAdded();
+            if (lessonType.equals(LAB)) {
+                TextUi.printLessonAdded();
+            }
         }
     }
 
@@ -145,20 +147,25 @@ public class AddUI {
 
     public void printLessonHeader(ArrayList<Lesson> lt, ArrayList<Lesson> tt, ArrayList<Lesson> lb) {
         String header;
-        if (isArrayExist(lt, 0) && isArrayExist(tt, 0) && isArrayExist(lb, 0)) {
+//        if (isArrayExist(lt, 0) && isArrayExist(tt, 0) && isArrayExist(lb, 0)) {
+//            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
+//        } else if (isArrayExist(lt, 0) && isArrayExist(tt, 0)) {
+//            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT;
+//        } else if (isArrayExist(lt, 0) && isArrayExist(lb, 0)) {
+//            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + LAB_SLOT;
+//        } else if (isArrayExist(tt, 0) && isArrayExist(lb, 0)) {
+//            header = SMALL_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
+//        } else if (isArrayExist(lt, 0)) {
+//            header = SMALL_GAP + LECTURE_SLOT;
+//        } else if (isArrayExist(tt, 0)) {
+//            header = SMALL_GAP + TUTORIAL_SLOT;
+//        } else if (isArrayExist(lb, 0)) {
+//            header = SMALL_GAP + LAB_SLOT;
+//        } else {
+//            header = "No Lesson Time Slots Found";
+//        }
+        if (isArrayExist(lt, 0) || isArrayExist(tt, 0) || isArrayExist(lb, 0)) {
             header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
-        } else if (isArrayExist(lt, 0) && isArrayExist(tt, 0)) {
-            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT;
-        } else if (isArrayExist(lt, 0) && isArrayExist(lb, 0)) {
-            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + LAB_SLOT;
-        } else if (isArrayExist(tt, 0) && isArrayExist(lb, 0)) {
-            header = SMALL_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
-        } else if (isArrayExist(lt, 0)) {
-            header = SMALL_GAP + LECTURE_SLOT;
-        } else if (isArrayExist(tt, 0)) {
-            header = SMALL_GAP + TUTORIAL_SLOT;
-        } else if (isArrayExist(lb, 0)) {
-            header = SMALL_GAP + LAB_SLOT;
         } else {
             header = "No Lesson Time Slots Found";
         }
