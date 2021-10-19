@@ -4,6 +4,7 @@ import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.log.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TaskManager {
 
@@ -31,6 +32,13 @@ public class TaskManager {
         Log.info("end of listTasklist - no issues detected");
         return tasks;
     }
+
+    public static String sortTasklist(HashMap<String, String> argument) throws EmptyTasklistException {
+
+        return "test";
+    }
+
+
 
     public static ArrayList<Task> getTaskList() {
         return taskList;
