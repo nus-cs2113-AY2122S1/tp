@@ -84,19 +84,17 @@ public class Ui {
         showToUser(e.getMessage());
     }
 
-
     /**
      * Prints out all the items in a list.
      *
      * @param displayMessage message to be displayed to the user
      * @param itemList       is the list of items
-     * @param bottomLineOnly if true, displays bottom line only, otherwise, display top and bottom line
      */
-    public <T> void showItemListToUser(String displayMessage, ArrayList<T> itemList, boolean bottomLineOnly) {
+    public <T> void showItemListToUser(String displayMessage, ArrayList<T> itemList) {
         assert (!itemList.isEmpty());
-        if (!bottomLineOnly) {
-            printLineSeparator();
-        }
+
+        printLineSeparator();
+
         printText(displayMessage);
         if (!itemList.isEmpty()) {
             printList(itemList);

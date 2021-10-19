@@ -39,7 +39,7 @@ public class SearchCommand extends Command {
         ArrayList<Workout> filteredWorkouts = getFilteredWorkoutsWithWorkoutIndex(workoutList);
         if (!filteredWorkouts.isEmpty()) {
             matchesFound = true;
-            ui.showItemListToUser("Matching workouts: ", filteredWorkouts, true);
+            ui.showItemListToUser("Matching workouts: ", filteredWorkouts);
         }
 
         for (int i = 0; i < workoutList.size(); i++) {
@@ -50,7 +50,7 @@ public class SearchCommand extends Command {
             if (!filteredExercises.isEmpty()) {
                 matchesFound = true;
                 String displayMessage = String.format("Matching exercises in %d. %s", displayIndex, w.getWorkoutName());
-                ui.showItemListToUser(displayMessage, filteredExercises, true);
+                ui.showItemListToUser(displayMessage, filteredExercises);
             }
         }
 

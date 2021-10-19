@@ -4,16 +4,17 @@
 - [Quick Start](#quick-start)
 - [Features](#features)
   1. [Creating a new workout: `create`](#1-creating-a-new-workout-create)
-  2. [Deleting a workout: `delete`](#2-deleting-a-workout-delete)
-  3. [Show all workouts: `list`](#3-show-all-workouts-list)
+  2. [Show all workouts: `list`](#2-show-all-workouts-list)
+  3. [Deleting a workout: `delete`](#3-deleting-a-workout-delete)
   4. [Adding an exercise to a workout: `add`](#4-adding-an-exercise-to-a-workout-add)
-  5. [Removing an exercise from a workout: `remove`](#5-removing-an-exercise-from-a-workout-remove)
-  6. [Mark an exercise done: `done`](#6-mark-an-exercise-done-done)
-  7. [Show all exercises from a workout: `display`](#7-show-all-exercises-from-a-workout-display)
+  5. [Mark an exercise done: `done`](#5-mark-an-exercise-done-done)
+  6. [Show all exercises from a workout: `display`](#6-show-all-exercises-from-a-workout-display)
+  7. [Removing an exercise from a workout: `remove`](#7-removing-an-exercise-from-a-workout-remove)
   8. [Entering into a Workout: `enter`](#8-entering-into-a-workout-enter)
   9. [Exiting from a workout: `back`](#9-exiting-from-a-workout-back)
-  10. [Saving data](#10-saving-data)
-  11. [Editable data file](#11-editable-data-file)
+  10. [Exiting the application: `bye`](#10-exiting-the-application-bye)
+  11. [Saving data](#11-saving-data)
+  12. [Editable data file](#12-editable-data-file)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -28,7 +29,7 @@ If you can type fast, Get Jack'd can manage your workouts faster than traditiona
 2. Download the latest `GetJackd.jar` from [here](https://github.com/AY2122S1-CS2113T-F12-2/tp/releases/)
 3. Go to the folder you saved `GetJackd.jar` and note the **absolute file path**.
 4. If you are using **Windows**, open up a Command prompt terminal `cmd.exe` or `powershell.exe` and
-   navigate to the folder where `iP.jar` is stored (using the file path).
+   navigate to the folder where `GetJackd.jar` is stored (using the file path).
 5. For **Mac** and **Linux** users, do the same as step 4 with the terminal of your respective systems.
 6. Execute `java -jar GetJackd.jar`in the terminal and the application will start running.
 
@@ -65,8 +66,34 @@ Usage examples:
 
 `create leg day, 2021-10-21`
 
+Expected outcome:
 
-### 2. Deleting a workout: `delete`
+```
+create abs, 2021-12-25
+________________________________________________________
+New workout created: abs finish by: 25 Dec 2021
+________________________________________________________
+```
+
+### 2. Show all workouts: `list`
+Shows you all the workouts in the current list of workouts
+
+Usage example:
+
+`list`
+
+Expected outcome:
+
+```
+list
+________________________________________________________
+Workout list:
+1. abs finish by: 25 Dec 2021
+2. leg day finish by: 21 Oct 2021
+________________________________________________________
+```
+
+### 3. Deleting a workout: `delete`
 Deletes a workout from the list of workouts
 
 Format: `delete [WORKOUT_INDEX]`
@@ -77,14 +104,14 @@ Usage example:
 
 `delete 1`
 
+Expected outcome:
 
-### 3. Show all workouts: `list`
-Shows you all the workouts in the current list of workouts
-
-Usage example:
-
-`list`
-
+```
+delete 1
+________________________________________________________
+Deleted workout: abs finish by: 25 Dec 2021
+________________________________________________________
+```
 
 ### 4. Adding an exercise to a workout: `add`
 Adds an exercise to a specified workout
@@ -95,21 +122,20 @@ Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
 
 Usage examples:
 
-`add push-ups, 5 20, 1`  = push-ups, 5 sets of 10 reps, add to workout 1
+`add squats, 5 10, 1`  = squats, 5 sets of 10 reps, add to workout 1
 
-`add bench press, 4 6, 2` = bench press, 4 sets of 6 reps, add to workout 2
+`add lunges, 4 8, 2` = lunges, 4 sets of 8 reps, add to workout 1
 
+Expected outcome:
 
-### 5. Removing an exercise from a workout: `remove`
-Removes an exercise from a specified workout
+```
+add squats, 5 10, 1
+________________________________________________________
+New exercise added: [ ] squats | 5 sets of 10 reps
+________________________________________________________
+```
 
-Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
-
-Examples of usage:
-
-`remove 1, 2` = remove exercise 1 from workout 2
-
-### 6. Mark an exercise done: `done`
+### 5. Mark an exercise done: `done`
 Marks an exercise from a specified workout as done
 
 Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
@@ -118,7 +144,16 @@ Usage example:
 
 `done 1, 2` = mark exercise 1 from workout 2 as done
 
-### 7. Show all exercises from a workout: `display`
+Expected outcome:
+
+```
+done 2, 1
+________________________________________________________
+Completed: [X] lunges | 4 sets of 8 reps
+________________________________________________________
+```
+
+### 6. Show all exercises from a workout: `display`
 Shows you all the exercises in a specified workout
 
 Format: `display [WORKOUT_INDEX]`
@@ -126,6 +161,35 @@ Format: `display [WORKOUT_INDEX]`
 Usage example:
 
 `display 1` = Show all exercises from workout 1
+
+Expected outcome:
+
+```
+display 1
+________________________________________________________
+Exercises in leg day
+1. [ ] squats | 5 sets of 10 reps
+2. [X] lunges | 4 sets of 8 reps
+________________________________________________________
+```
+
+### 7. Removing an exercise from a workout: `remove`
+Removes an exercise from a specified workout
+
+Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
+
+Examples of usage:
+
+`remove 1, 2` = remove exercise 1 from workout 2
+
+Expected outcome:
+
+```
+remove 2, 1
+________________________________________________________
+Removed exercise: [X] lunges | 4 sets of 8 reps
+________________________________________________________
+```
 
 ### 8. Entering into a Workout: `enter`
 Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
@@ -142,7 +206,7 @@ Allows you to exit back into the main view once you have entered into a workout.
 
 Format `back`
 
-Example interaction of `enter` and `back`:
+Expected outcome of `enter` and `back`:
 
 ```
 You: list
@@ -186,13 +250,26 @@ ________________________________________________________
 			
 ```
 
-### 10. Saving data
+### 10. Exiting the application: `bye`
+Allows you to exit from the application.
+
+Format `bye`
+
+Expected outcome:
+```
+bye
+________________________________________________________
+Bye. Hope you get your desired body soon, have a great day!
+________________________________________________________
+```
+
+### 11. Saving data
 
 GetJackd's workout list data is saved in the hard disk automatically after any command that changes the data (Adding 
 or editing workouts and exercises). There is no need to
 save manually.
 
-### 11. Editable data file
+### 12. Editable data file
 
 GetJackd's data is saved as a json file `[JAR file location]/data/workouts.json`. Advanced users are welcome to update data
 directly by editing that data file.
