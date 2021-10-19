@@ -34,8 +34,7 @@ public class Expense {
     /**
      * Prompts user for date.
      *
-     * @return today's date if user input is an empty string, otherwise keeps prompting user
-     * until a valid date is given
+     * @return today's date if user input is an empty string, otherwise keeps prompting user until a valid date is given
      */
     private LocalDate prompDate() {
         Scanner sc = Storage.getScanner();
