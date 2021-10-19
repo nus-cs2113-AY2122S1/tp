@@ -100,6 +100,9 @@ public class AddNoteCommand extends Command {
         } else if (CommonUtils.hasEmptyString(argArray)) {
             TerminusLogger.warning("Failed to parse arguments: some arguments found is empty");
             isValid = false;
+        } else if (!CommonUtils.isValidFileName(argArray.get(0))) {
+            TerminusLogger.warning("Failed to parse arguments: given note name is invalid");
+            isValid = false;
         }
         return isValid;
     }

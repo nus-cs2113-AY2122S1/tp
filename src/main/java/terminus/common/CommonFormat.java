@@ -28,4 +28,6 @@ public class CommonFormat {
     public static final String COMMAND_ADD_MODULE_FORMAT = "add \"<module name>\"";
     public static final String COMMAND_VIEW_MODULE_FORMAT = "view";
     public static final String SPACE_NEGATED_DELIMITER = "\\S+";
+
+    public static final String EXTENSION_TEXT_FILE = ".txt";
 }

@@ -136,6 +136,12 @@ public class CommonUtils {
         }
     }
 
+    /**
+     * Returns the filename without its file extension of a given full filename.
+     *
+     * @param filename The filename string to be extracted.
+     * @return A string of the file name without its file extension.
+     */
     public static String getFileNameOnly(String filename) {
         String[] string = filename.split("\\.");
         return string[0];

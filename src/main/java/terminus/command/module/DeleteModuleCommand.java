@@ -56,10 +56,10 @@ public class DeleteModuleCommand extends Command {
     /**
      * Executes the command. Prints the required result to the Ui.
      *
-     * @param ui            The Ui object to send messages to the users.
+     * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
-     * @throws InvalidCommandException  when the command could not be found.
+     * @throws InvalidCommandException when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
      */
     @Override
@@ -71,7 +71,7 @@ public class DeleteModuleCommand extends Command {
         }
 
         moduleManager.removeModule(listOfModule[itemNumber - 1]);
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_MODULE_DELETE,listOfModule[itemNumber - 1]));
+        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_MODULE_DELETE, listOfModule[itemNumber - 1]));
         return new CommandResult(true);
     }
 
@@ -82,7 +82,7 @@ public class DeleteModuleCommand extends Command {
      * @param listOfModule The full list of modules
      * @return True if the index is valid or else it is false
      */
-    private boolean isValidIndex(int index, String [] listOfModule) {
+    private boolean isValidIndex(int index, String[] listOfModule) {
         return listOfModule.length >= index && index > 0;
     }
 }

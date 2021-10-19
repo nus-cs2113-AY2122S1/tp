@@ -96,6 +96,9 @@ public class ContentManager<T extends Content> {
         return number < 1 || number > contents.size();
     }
 
+    /**
+     * Replaces the current ArrayList for a new empty ArrayList.
+     */
     public void purgeData() {
         this.contents = new ArrayList<>();
     }

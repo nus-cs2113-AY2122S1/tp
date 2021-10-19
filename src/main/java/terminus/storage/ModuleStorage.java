@@ -11,13 +11,16 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
 import terminus.module.ModuleManager;
 
-
+/**
+ * ModuleStorage is a class that handles any file I/O operation within TermiNUS.
+ */
 public class ModuleStorage {
 
     private final Path filePath;
@@ -93,6 +96,12 @@ public class ModuleStorage {
         Files.writeString(filePath, jsonString);
     }
 
+    /**
+     * Loads all notes data from existing modules if there is any.
+     *
+     * @param moduleManager The ModuleManager containing existing modules.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
     private void loadAllNotes(ModuleManager moduleManager) throws IOException {
         Path modDirPath;
         for (String mod : moduleManager.getAllModules()) {
@@ -110,6 +119,13 @@ public class ModuleStorage {
         }
     }
 
+    /**
+     * Loads all notes data from a specified module if any.
+     *
+     * @param moduleManager The ModuleManager containing existing modules.
+     * @param mod A module name in the moduleManager.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
     public void loadNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
         Path modDirPath;
         modDirPath = Paths.get(filePath.getParent().toString(), mod);
@@ -128,12 +144,25 @@ public class ModuleStorage {
         }
     }
 
+    /**
+     * Saves all notes from all modules into multiple text files separated by its module directory.
+     *
+     * @param moduleManager The ModuleManager containing all data from each module.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
     public void saveAllNotes(ModuleManager moduleManager) throws IOException {
         for (String mod : moduleManager.getAllModules()) {
             saveNotesFromModule(moduleManager, mod);
         }
     }
 
+    /**
+     * Saves all notes from a specified module into multiple text files inside the directory of its module name.
+     *
+     * @param moduleManager The ModuleManager containing all data from each module.
+     * @param mod A module name in the moduleManager.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
     public void saveNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
         Path modDirPath;
         modDirPath = Paths.get(filePath.getParent().toString(), mod);
@@ -147,11 +176,16 @@ public class ModuleStorage {
         for (Note note : noteArrayList) {
             assert Files.isDirectory(modDirPath);
             assert CommonUtils.isValidFileName(note.getName());
-            Path filePath = Paths.get(modDirPath.toString(), note.getName() + ".txt");
+            Path filePath = Paths.get(modDirPath.toString(), note.getName() + CommonFormat.EXTENSION_TEXT_FILE);
             Files.writeString(filePath, note.getData());
         }
     }
 
+    /**
+     * Deletes all files within a specified directory given by its full path.
+     *
+     * @param directoryPath Directory path where all files inside will be deleted.
+     */
     private void deleteAllFilesInDirectory(Path directoryPath) {
         File folder = new File(directoryPath.toString());
         File[] listOfFiles = folder.listFiles();
