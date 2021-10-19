@@ -7,7 +7,6 @@ import seedu.duke.items.Event;
 import seedu.duke.items.Task;
 import seedu.duke.storage.StorageFile;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Duke {
@@ -19,14 +18,11 @@ public class Duke {
     private static final StorageFile storage = new StorageFile();
 
     public static void main(String[] args) {
+
         Ui.printGreetingMessage();
-        try {
-            storage.load(eventCatalog, taskList);
-        } catch (FileNotFoundException e) {
-            System.out.println("Oooh a new user!");
-        }
+        storage.load(eventCatalog);
         runSlam();
-        storage.save(eventCatalog, taskList);
+        storage.save(eventCatalog);
     }
 
     protected static void runSlam() {
