@@ -23,6 +23,7 @@ public class ContactList {
         contacts.sort(new ContactComparator());
     }
 
+    //@@author ng-andre
     public void editContact(String[] contactDetails, int contactIndex) throws InvalidFlagException {
         for (int i = 0; i < contactDetails.length; i++) {
             if (contactDetails[i] != null) {
@@ -57,6 +58,48 @@ public class ContactList {
 
     public void deleteContact(int deletedIndex) {
         contacts.remove(deletedIndex);
+    }
+
+    //@@author ng-andre
+    public void searchContact(String query, int detailType) throws InvalidFlagException {
+        for (Contact contact : contacts) {
+            switch (detailType) {
+            case NAME_INDEX:
+                if (contact.getName().toLowerCase().contains(query)) {
+                    System.out.println(true);
+                }
+                break;
+            case GITHUB_INDEX:
+                if (contact.getGithub().toLowerCase().contains(query)) {
+                    System.out.println(true);
+                }
+                break;
+            case LINKEDIN_INDEX:
+                if (contact.getLinkedin().toLowerCase().contains(query)) {
+                    System.out.println(true);
+                }
+                break;
+            case TELEGRAM_INDEX:
+                if (contact.getTelegram().toLowerCase().contains(query)) {
+                    System.out.println(true);
+                }
+                break;
+            case TWITTER_INDEX:
+                if (contact.getTwitter().toLowerCase().contains(query)) {
+                    System.out.println(true);
+                }
+                break;
+            case EMAIL_INDEX:
+                if (contact.getEmail().toLowerCase().contains(query)) {
+                    System.out.println(true);
+                }
+                break;
+            default:
+                //control should never reach here
+                assert false;
+                throw new InvalidFlagException();
+            }
+        }
     }
 
     public int getIndexOfContact(Contact contact) {
