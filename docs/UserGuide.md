@@ -39,24 +39,82 @@ ________________________________________________________
 
 --------------------------------------
 
-## Features 
+## Features
 
-{Give detailed description of each feature}
+### Creating a new workout: `create`
+Adds a new workout to the list of workouts
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+Format: `create [Workout name]`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Usage examples: 
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+`create abs`
 
-Example of usage: 
+`create leg day`
 
-`todo n/Write the rest of the User Guide d/next week`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+### Deleting a workout: `delete`
+Deletes a workout from the list of workouts
 
+Format: `delete [workout index]`
+
+* Workout index is the index of the workout in the list
+
+Usage example:
+
+`delete 1`
+
+
+### Show all workouts: `list`
+Shows you all the workouts in the current list of workouts
+
+Usage example:
+
+`list`
+
+
+### Adding an exercise to a workout: `add`
+Adds an exercise to a specified workout
+
+Format: `add [Exercise description], [sets and reps], [workout index]`
+* Note the comma  `,`  separating the command arguments
+* Sets and reps are entered in the form of two numbers separated by a space 
+
+Usage examples:
+
+`add push-ups, 5 20, 1`  = push-ups, 5 sets of 10 reps, add to workout 1
+
+`add bench press, 4 6, 2` = bench press, 4 sets of 6 reps, add to workout 2
+
+
+### Removing an exercise from a workout: `remove`
+Removes an exercise from a specified workout
+
+Format: `remove [exercise index], [workout index]`
+
+Examples of usage:
+
+`remove 1, 2` = remove exercise 1 from workout 2
+
+### Mark an exercise done: `done`
+Marks an exercise from a specified workout as done
+
+Format: `done [exercise index], [workout index]`
+
+Usage example:
+
+`done 1, 2` = mark exercise 1 from workout 2 as done
+
+### Show all exercises from a workout: `display`
+Shows you all the exercises in a specified workout
+
+Format: `display [workout index]`
+
+Usage example:
+
+`display 1` = Show all exercises from workout 1
+
+``
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
