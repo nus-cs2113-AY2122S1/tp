@@ -70,48 +70,48 @@ public class TextUi {
     }
 
     public static String getMonth(int month) {
-        String Month = null;
+        String monthString = null;
         switch (month) {
         case 1:
-            Month = "January";
+            monthString = "January";
             break;
         case 2:
-            Month = "February";
+            monthString = "February";
             break;
         case 3:
-            Month = "March";
+            monthString = "March";
             break;
         case 4:
-            Month = "April";
+            monthString = "April";
             break;
         case 5:
-            Month = "May";
+            monthString = "May";
             break;
         case 6:
-            Month = "June";
+            monthString = "June";
             break;
         case 7:
-            Month = "July";
+            monthString = "July";
             break;
         case 8:
-            Month = "August";
+            monthString = "August";
             break;
         case 9:
-            Month = "September";
+            monthString = "September";
             break;
         case 10:
-            Month = "October";
+            monthString = "October";
             break;
         case 11:
-            Month = "November";
+            monthString = "November";
             break;
         case 12:
-            Month = "December";
+            monthString = "December";
             break;
         default:
             break;
         }
-        return Month;
+        return monthString;
     }
 
     public static void showRecordsListView(AllRecordList list, int month, boolean isListAll) {
@@ -119,19 +119,19 @@ public class TextUi {
 
         if (isListAll) {
             for (month = 1; month <= 12; month += 1) {
-                String Month = getMonth(month);
+                String monthString = getMonth(month);
                 if (list.checkOverspending(month)) {
-                    System.out.println("You are spending too much for " + Month + " !");
+                    System.out.println("You are spending too much for " + monthString + " !");
                 }
-                String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString(): " Not Set Yet";
-                System.out.println("Your budget for " + Month + ":" + budget + LS
+                String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString() : " Not Set";
+                System.out.println("Your budget for " + monthString + ":" + budget + LS
                         + "Your expenditures:");
                 if (list.getMonthListSize(month) > 0) {
-                System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
-                for (Expenditure a : list.getExpenditureRecords(month)) {
-                    System.out.println(i + "." + a);
-                    i++;
-                }
+                    System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
+                    for (Expenditure a : list.getExpenditureRecords(month)) {
+                        System.out.println(i + "." + a);
+                        i++;
+                    }
                 } else {
                     System.out.println(" None ");
                 }
@@ -140,12 +140,12 @@ public class TextUi {
                 i = 1;
             }
         } else {
-            String Month = getMonth(month);
+            String monthString = getMonth(month);
             if (list.checkOverspending(month)) {
-                System.out.println("You are spending too much for " + Month + " !");
+                System.out.println("You are spending too much for " + monthString + " !");
             }
-            String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString(): "Not Set Yet";
-            System.out.println("Your budget for " + Month + ":" + budget + LS
+            String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString() : "Not Set";
+            System.out.println("Your budget for " + monthString + ":" + budget + LS
                     + "Your expenditures:");
             if (list.getMonthListSize(month) > 0) {
                 System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
