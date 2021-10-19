@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
+import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
@@ -134,7 +135,7 @@ public class ModuleStorage {
         ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
         contentManager.purgeData();
         for (File file : listOfFiles) {
-            if (file.isFile()) {
+            if (file.isFile() && CommonUtils.isValidFileName(CommonUtils.getFileNameOnly(file.getName()))) {
                 contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
                         Files.readString(
                                 Paths.get(modDirPath.toString(), file.getName()), StandardCharsets.US_ASCII)));
@@ -190,9 +191,23 @@ public class ModuleStorage {
         File folder = new File(directoryPath.toString());
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
-            if(!file.delete()){
-                throw new IOException("Unable to delete file");
-            };
+            if (!file.delete()) {
+                throw new IOException(String.format(Messages.ERROR_MESSAGE_FILE, file.getAbsolutePath()));
+            }
+            ;
+        }
+    }
+
+    public void cleanAfterDeleteModule(ModuleManager moduleManager, String mod) throws IOException {
+        Path modDirPath = Paths.get(filePath.getParent().toString(), mod);
+        if (!Files.isDirectory(modDirPath)) {
+            // Directory does not exist yet, due to the fact that no note was added yet.
+            return;
+        }
+        deleteAllFilesInDirectory(modDirPath);
+        File folder = new File(modDirPath.toString());
+        if (!folder.delete()) {
+            throw new IOException(String.format(Messages.ERROR_MESSAGE_FOLDER, modDirPath.toString()));
         }
     }
 

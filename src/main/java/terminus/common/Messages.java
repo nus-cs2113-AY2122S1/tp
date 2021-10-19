@@ -22,6 +22,9 @@ public class Messages {
     public static final String ERROR_MESSAGE_INVALID_TIME_FORMAT = ERROR_MESSAGE_TAG + "Invalid time format %s.";
     public static final String ERROR_MESSAGE_INVALID_LINK = ERROR_MESSAGE_TAG + "Invalid link %s.";
     public static final String ERROR_MESSAGE_INVALID_DAY = ERROR_MESSAGE_TAG + "Invalid day %s.";
+
+    public static final String ERROR_MESSAGE_FILE = "Unable to save/load file: %s";
+    public static final String ERROR_MESSAGE_FOLDER = "Unable to save/load folder: %s";
     public static final String EMPTY_CONTENT_LIST_MESSAGE = "You do not have any content in this workspace.\n";
     public static final String CONTENT_MESSAGE_HEADER = "List of Content\n---------------\n";
     

@@ -1,5 +1,6 @@
 package terminus.command.module;
 
+import java.io.IOException;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
@@ -9,6 +10,7 @@ import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
+import terminus.storage.ModuleStorage;
 import terminus.ui.Ui;
 
 public class DeleteModuleCommand extends Command {
@@ -64,13 +66,17 @@ public class DeleteModuleCommand extends Command {
      */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         String[] listOfModule = moduleManager.getAllModules();
         if (!isValidIndex(itemNumber, listOfModule)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
         }
-
         moduleManager.removeModule(listOfModule[itemNumber - 1]);
+
+        // Delete all files and then its folder
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule(moduleManager, listOfModule[itemNumber - 1]);
+
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_MODULE_DELETE, listOfModule[itemNumber - 1]));
         return new CommandResult(true);
     }

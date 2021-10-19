@@ -57,10 +57,10 @@ public class AddModuleCommand extends Command {
     /**
      * Executes the command. Prints the required result to the Ui.
      *
-     * @param ui            The Ui object to send messages to the users.
+     * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
-     * @throws InvalidCommandException  when the command could not be found.
+     * @throws InvalidCommandException when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
      */
     @Override
@@ -77,8 +77,10 @@ public class AddModuleCommand extends Command {
     private boolean isValidModuleArguments(ArrayList<String> argArray) {
         if (argArray.size() != MODULE_ARGS_COUNT) {
             return false;
+        } else if (CommonUtils.hasEmptyString(argArray)) {
+            return false;
         } else {
-            return !CommonUtils.hasEmptyString(argArray);
+            return CommonUtils.isValidFileName(argArray.get(0));
         }
     }
 }

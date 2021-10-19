@@ -129,7 +129,7 @@ public class CommonUtils {
      */
     public static boolean isValidFileName(String name) {
         try {
-            if (name.length() > CommonFormat.MAX_FILENAME_LENGTH) {
+            if (name == null || name.length() > CommonFormat.MAX_FILENAME_LENGTH) {
                 return false;
             }
             Paths.get(name);
@@ -153,6 +153,9 @@ public class CommonUtils {
      */
     public static String getFileNameOnly(String filename) {
         String[] string = filename.split("\\" + CommonFormat.EXTENSION_TEXT_FILE);
-        return string[0];
+        if (string != null && string.length > 0) {
+            return string[0];
+        }
+        return null;
     }
 }
