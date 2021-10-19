@@ -6,6 +6,7 @@ import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 import seedu.duke.universities.UniversityList;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class Duke {
             Parser mainParser = new Parser(universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
             Command cmd = null;
+            Ui.welcome();
 
             do {
                 try {

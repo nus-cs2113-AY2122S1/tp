@@ -25,4 +25,11 @@ public class ModuleMapping {
         this.mappedModule = mappedModule;
     }
 
+    public void printModuleMapping() {
+        String mappingDetails = localModule.getModuleCode()
+                + " - " + mappedModule.getModuleCode()
+                + " : " + mappedModule.getModuleName();
+        System.out.println(mappingDetails);
+    }
+
 }

@@ -22,7 +22,7 @@ public class SearchMapCommandParserTest {
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
             SearchMapCommand command = new SearchMapCommandParser().parse("Aalto University",
                     universityMasterList, universitySelectedList, moduleSelectedList);
-            assertEquals("Aalto University", command.getUniversityToMap().getName());
+            assertEquals("Aalto University", command.getSelectedUniversity().getName());
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }

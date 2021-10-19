@@ -45,7 +45,7 @@ public class Storage {
             } else if (!curr.equals(attributes[0])) {
                 universityList.add(new University(curr, moduleMappingList));
                 curr = attributes[0];
-                moduleMappingList.clear();
+                moduleMappingList = new ArrayList<>();
             }
             assert parseDouble(attributes[3]) > 0 : "Local module credits should be positive";
             Module local = new Module(attributes[1], attributes[2], parseDouble(attributes[3]));
