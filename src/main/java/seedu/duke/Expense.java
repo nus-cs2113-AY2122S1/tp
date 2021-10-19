@@ -28,7 +28,7 @@ public class Expense {
         this.category = category;
         this.personsList = listOfPersons;
         this.date = prompDate();
-        assert(this.date != null);
+        assert (this.date != null);
     }
 
     /**
