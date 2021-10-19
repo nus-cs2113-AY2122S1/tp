@@ -5,17 +5,18 @@
 
 box Command COLOR_COMMAND_BOX
     participant ":UpdateStock" as updatestock COLOR_COMMAND
-end box
-
-box Utilities COLOR_UTILITIES_BOX
-    participant ":CommandSyntax" as commandsyntax COLOR_UTILITIES
-    participant ":StockValidator" as stockvalidator COLOR_UTILITIES
-    participant ":StockManager" as stockmanager COLOR_UTILITIES
-    participant ":Ui" as ui COLOR_UTILITIES
+    participant ":CommandSyntax" as commandsyntax COLOR_COMMAND
 end box
 
 box Inventory COLOR_INVENTORY_BOX
     participant ":Medicine" as medicine COLOR_INVENTORY
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant ":Ui" as ui COLOR_UTILITIES
+    participant ":StockValidator" as stockvalidator COLOR_UTILITIES
+    participant ":StockManager" as stockmanager COLOR_UTILITIES
+    participant ":Storage" as storage COLOR_UTILITIES
 end box
 
 autoactivate on
@@ -45,7 +46,22 @@ autoactivate on
                 updatestock --> updatestock: isValidExpDate
 
                 opt isValidExpDate
+                    updatestock -> stockmanager: getFilteredStocksByName()
+                    updatestock <-- stockmanager: oldFilteredStocks
+                    opt parameters contains name
+                        updatestock -> updatestock: addNewRowForUpdate()
+                        deactivate updatestock
+                        updatestock -> updatestock: getNewStock()
+                        deactivate updatestock
+                    end
+                    updatestock -> stockmanager: getFilteredStocksByName()
+                    updatestock <-- stockmanager: filteredStocks
                     updatestock -> updatestock: setUpdatesByStockId(stock)
+                    deactivate updatestock
+                    updatestock -> storage: getInstance()
+                    updatestock <-- storage
+                    updatestock -> storage: saveData()
+                    deactivate storage
                     deactivate updatestock
                 end
             end

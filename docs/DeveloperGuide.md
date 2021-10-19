@@ -77,6 +77,11 @@ The sequence diagram for UpdateStockCommand is shown below.
 
 ![UpdateStockSequenceDiagram](diagrams/diagram_images/UpdateStockSequenceDiagram.png)
 
+MediVault modifies the `STOCK_ID` when a user tries to update a medicine name. The old record
+still exists in MediVault, but it will not be visisble to user when listed.
+This approach solves the issue when a user is unable to delete a _dispense_ record 
+when the medicine _stock_ name gets updated.
+
 ## Product scope
 
 ### Target user profile
