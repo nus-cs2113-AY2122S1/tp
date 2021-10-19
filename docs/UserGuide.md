@@ -100,11 +100,16 @@ Example: `delete 1`
 
 _TO BE ADDED_
 
-### 2.7. [TBA] Show expiring ingredients
+### 2.7. Show expiring ingredients
 
-Lists the ingredients expiring before a given date.
+Lists the ingredients that will expire by a specified date.
 
-Format: `expiry` (TBA)
+Format: `expire [DATE]`
+
+The parameter used in the command is:
+* `DATE`: the date of interest
+
+Example: `expire 12/11/2021`
 
 ### 2.8. Exiting the program
 
