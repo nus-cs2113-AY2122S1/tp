@@ -6,7 +6,9 @@ import seedu.commands.AddIncomeCommand;
 import seedu.commands.DeleteExpenseCommand;
 import seedu.commands.DeleteIncomeCommand;
 import seedu.entry.Expense;
+import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
+import seedu.entry.IncomeCategory;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
@@ -19,7 +21,7 @@ public class CommandTest {
 
     @Test
     public void testAddExpenseCommand() {
-        Expense testExpense = new Expense("Bubble Tea", 4.80,"Food");
+        Expense testExpense = new Expense("Bubble Tea", 4.80, ExpenseCategory.FOOD);
         AddExpenseCommand testCommand = new AddExpenseCommand(testExpense);
         testCommand.execute(testTracker,testUi);
         assertEquals(1, testTracker.getExpenseSize());
@@ -27,7 +29,7 @@ public class CommandTest {
 
     @Test
     public void testAddIncomeCommand() {
-        Income testIncome = new Income("Pocket Money", 100, "Allowance");
+        Income testIncome = new Income("Pocket Money", 100, IncomeCategory.ALLOWANCE);
         AddIncomeCommand testCommand = new AddIncomeCommand(testIncome);
         testCommand.execute(testTracker, testUi);
         assertEquals(1, testTracker.getIncomeSize());
