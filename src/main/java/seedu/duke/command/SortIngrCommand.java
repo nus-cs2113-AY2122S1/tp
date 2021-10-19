@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 public class SortIngrCommand extends Command {
+    private static final Ui ui = new Ui();
     Comparator<Ingredient> ingrComparator;
 
     @Override
     public void execute(ArrayList<String> parameters) {
-        Ui ui = new Ui();
         IngredientList.ingredientList.sort(ingrComparator);
         ui.printSortIngrMsg();
         IngredientList.list();

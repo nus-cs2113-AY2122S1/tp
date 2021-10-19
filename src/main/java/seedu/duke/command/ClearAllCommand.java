@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 public class ClearAllCommand extends Command {
     private static final Logger logger = Logger.getLogger("ClearAllCommand.execute()");
-    private Ui ui = new Ui();
+    private static final Ui ui = new Ui();
 
     ClearAllCommand() {
         LoggerManager.setupLogger(logger);

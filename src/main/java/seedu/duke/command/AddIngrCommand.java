@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.IngredientList;
+import seedu.duke.Ui;
 import seedu.duke.exceptions.FoodoramaException;
 import seedu.duke.logger.LoggerManager;
 
@@ -10,6 +11,7 @@ import java.util.logging.Logger;
 
 public class AddIngrCommand extends Command {
     private static Logger logger = Logger.getLogger("AddIngrCommand.execute()");
+    private static final Ui ui = new Ui();
 
     AddIngrCommand() {
         LoggerManager.setupLogger(logger);
@@ -20,11 +22,11 @@ public class AddIngrCommand extends Command {
         logger.log(Level.INFO, "Start of process");
         String ingredient = String.join(" ", parameters);
         if (ingredient.isBlank()) {
-            throw new FoodoramaException("Ingredient name cannot be blank");
+            throw new FoodoramaException(ui.getIngrNameMissingMsg());
         }
         if (IngredientList.find(ingredient) >= 0) {
             logger.log(Level.INFO, "Ingredient already exists", ingredient);
-            throw new FoodoramaException("The ingredient " + parameters.get(0) + " already exists");
+            throw new FoodoramaException(ui.getIngrExistsMsg(parameters.get(0)));
         } else {
             try {
                 IngredientList.add(ingredient);
