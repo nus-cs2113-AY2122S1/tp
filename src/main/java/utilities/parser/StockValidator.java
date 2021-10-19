@@ -87,7 +87,7 @@ public class StockValidator {
                     continue;
                 }
                 Stock stock = (Stock) medicine;
-                if (stock.getStockID() == stockId) {
+                if (stock.getStockID() == stockId && !stock.isDeleted()) {
                     stockExist = true;
                     break;
                 }
@@ -223,13 +223,15 @@ public class StockValidator {
      * @return Boolean false if same expiry date exist
      */
     public static boolean dateValidityChecker(Ui ui, ArrayList<Medicine> medicines, Date expiryDate, String name) {
-        ArrayList<Stock> filteredMedicines = new ArrayList<>();
+        ArrayList<Stock> filteredStocks = new ArrayList<>();
         for (Medicine medicine : medicines) {
-            if (medicine instanceof Stock && name.equalsIgnoreCase(medicine.getMedicineName())) {
-                filteredMedicines.add((Stock) medicine);
+            boolean isSameName = name.equalsIgnoreCase(medicine.getMedicineName());
+            boolean isDeleted = ((Stock) medicine).isDeleted();
+            if (medicine instanceof Stock && isSameName && !isDeleted) {
+                filteredStocks.add((Stock) medicine);
             }
         }
-        for (Stock filteredStock : filteredMedicines) {
+        for (Stock filteredStock : filteredStocks) {
             if (expiryDate.equals(filteredStock.getExpiry())) {
                 ui.print("Same expiry date already exists!");
                 return false;
