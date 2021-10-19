@@ -12,6 +12,9 @@ public abstract class Person {
     private static final String PARAMETER_ADDRESS = "a/";
     private static final int PARAMETER_BUFFER = 2;
 
+    private static final String SPACE = " ";
+    private static final String ENDLINE = System.lineSeparator();
+
     private int personId = 0;
     protected String icNumber = "";
     protected String name = "";
@@ -21,8 +24,22 @@ public abstract class Person {
     protected PersonType personType;
 
     public String toString() {
-        return "IC: " + icNumber + " Name: " + name + " H/P: " + phoneNumber
-                + " Email: " + emailAddress + " Address: " + residentialAddress;
+        return  ENDLINE
+                + "IC: " + icNumber + ENDLINE
+                + "Name: " + name + ENDLINE
+                + "H/P: " + phoneNumber + ENDLINE
+                + "Email: " + emailAddress + ENDLINE
+                + "Address: " + residentialAddress;
+    }
+
+    public String getInfoInTableFormat() {
+        return "| " + getFormattedPersonId()
+                + " | " + getFormattedIcNumber()
+                + " | " + getFormattedName()
+                + " | " + getFormattedPhoneNumber()
+                + " | " + getFormattedEmail()
+                + " | " + getFormattedAddress()
+                + " |";
     }
 
     public String getIcNumber() {
@@ -139,5 +156,46 @@ public abstract class Person {
      */
     protected String setAsStorageParameterOrNull(String parameter) {
         return (parameter == null || parameter.isBlank()) ? "X" : parameter;
+    }
+
+    private String formattedAttribute(String attribute, int outputLength) {
+        int attributeLength = attribute.length();
+        String output = attribute;
+
+        if (attributeLength > outputLength) {
+            output = output.substring(0, outputLength - 3) + "...";
+        }
+
+        int remainingLength = outputLength - attributeLength;
+
+        for (int i = 0; i < remainingLength; i++) {
+            output += SPACE;
+        }
+
+        return output;
+    }
+
+    private String getFormattedPersonId() {
+        return formattedAttribute(Integer.toString(personId), 4);
+    }
+
+    private String getFormattedIcNumber() {
+        return formattedAttribute(icNumber, 9);
+    }
+
+    private String getFormattedName() {
+        return formattedAttribute(name, 20);
+    }
+
+    private String getFormattedPhoneNumber() {
+        return formattedAttribute(phoneNumber, 9);
+    }
+
+    private String getFormattedEmail() {
+        return formattedAttribute(emailAddress, 20);
+    }
+
+    private String getFormattedAddress() {
+        return formattedAttribute(residentialAddress, 20);
     }
 }

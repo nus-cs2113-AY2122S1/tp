@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PersonList {
-    private final String ENDLINE = System.lineSeparator();
+    private static final String ENDLINE = System.lineSeparator();
 
     private HashMap<Integer, Person> persons = new HashMap<>();
     private int lastId = 1;
@@ -72,7 +72,7 @@ public class PersonList {
      * @throws MedBotException when the Person ID cannot be found
      */
     public void editPerson(int personId, Person newPersonData) throws MedBotException {
-        assert (personId > 0) && (personId <= size());
+        assert (personId > 0);
         mergeEditPersonData(persons.get(personId), newPersonData);
     }
 
@@ -86,7 +86,7 @@ public class PersonList {
         if (!persons.containsKey(personId)) {
             throw new MedBotException(getNoPersonIdErrorMessage(personId));
         }
-        assert (personId > 0) && (personId <= size());
+        assert (personId > 0);
         persons.remove(personId);
     }
 
@@ -101,7 +101,7 @@ public class PersonList {
         for (int key : persons.keySet()) {
             Person currentPerson = persons.get(key);
             if (currentPerson.containsAllParameters(parameters)) {
-                filteredPersons.add(currentPerson.toString());
+                filteredPersons.add(currentPerson.getInfoInTableFormat());
             }
         }
 
@@ -115,9 +115,11 @@ public class PersonList {
      */
     public String listPersons() {
         String output = "";
+
         for (int key : persons.keySet()) {
-            output += persons.get(key) + ENDLINE;
+            output += persons.get(key).getInfoInTableFormat() + ENDLINE;
         }
+
         return output;
     }
 

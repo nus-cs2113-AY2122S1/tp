@@ -82,7 +82,7 @@ public class Ui {
      */
     public String getEditPatientMessage(int patientId, String patientInfo) {
         assert patientId > 0;
-        return "The information of patient with ID " + patientId + " has been edited to:" + ENDLINE
+        return "The information of patient with ID " + patientId + " has been edited to:" + ENDLINE + ENDLINE
                 + patientInfo + ENDLINE;
     }
 
@@ -93,13 +93,20 @@ public class Ui {
      * @return The information of the filtered patients
      */
     public String getFindPatientsMessage(List<String> patients) {
-        String output = "";
+        if (patients.size() == 0) {
+            return "There is no patient with such attributes." + ENDLINE;
+        }
+        String output = "Here is a list of all patients:" + ENDLINE;
+        output += "For full details of each patient, please use the command \"view PATIENT_ID\"" + ENDLINE;
+        output += getPatientTableRowSeparator();
+        output += "|  ID  | IC Number |         Name         |"
+                + " Phone No. |        Email         |       Address        |" + ENDLINE;
+        output += getPatientTableRowSeparator();
         for (String patient : patients) {
-            output += patient.toString() + ENDLINE;
+            output += patient;
         }
-        if (output.length() == 0) {
-            return "No patient with such attributes is found." + ENDLINE;
-        }
+        output += ENDLINE;
+        output += getPatientTableRowSeparator();
 
         return output;
     }
@@ -120,7 +127,7 @@ public class Ui {
      * @return the Patient information
      */
     public String getPatientInfo(String patientInfo) {
-        return "Here's the requested patient:" + ENDLINE
+        return "Here's the requested patient:" + ENDLINE + ENDLINE
                 + patientInfo + ENDLINE;
     }
 
@@ -130,12 +137,28 @@ public class Ui {
      * @param patientList the list containing patients to be printed.
      * @return all Patients' information.
      */
-
     public String getAllPatientsString(PersonList patientList) {
-        String output = "Here is a list of all patients:" + ENDLINE;
+        String output = getPatientTableHeader();
         output += patientList.listPersons();
+        output += getPatientTableRowSeparator();
 
         return output;
+    }
+
+    private String getPatientTableHeader() {
+        String output = "Here is a list of all patients:" + ENDLINE;
+        output += "For full details of each patient, please use the command \"view PATIENT_ID\"" + ENDLINE;
+        output += getPatientTableRowSeparator();
+        output += "|  ID  | IC Number |         Name         |"
+                + " Phone No. |        Email         |       Address        |" + ENDLINE;
+        output += getPatientTableRowSeparator();
+
+        return output;
+    }
+
+    private String getPatientTableRowSeparator() {
+        return "------------------------------------------------"
+                + "-----------------------------------------------------" + ENDLINE;
     }
 
     /**
@@ -146,7 +169,7 @@ public class Ui {
     public String getCommandList() {
         return "Here are the list of commands:" + ENDLINE + ENDLINE
                 + "help" + ENDLINE + "add" + ENDLINE + "list" + ENDLINE + "view" + ENDLINE + "edit" + ENDLINE
-                + "delete" + ENDLINE + "exit" + ENDLINE + ENDLINE
+                + "find" + ENDLINE + "delete" + ENDLINE + "exit" + ENDLINE + ENDLINE
                 + "To obtain more information on each command and their respective required inputs, type:" + ENDLINE
                 + "help [COMMAND]" + ENDLINE + ENDLINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes" + ENDLINE;
@@ -221,6 +244,11 @@ public class Ui {
                 + "Patient with id PATIENT_ID deleted from system." + ENDLINE;
     }
 
+    /**
+     * Prints information about find command.
+     *
+     * @return the information on find command.
+     */
     public String getFindHelpMessage() {
         return "Find patients from the list based on given attributes." + ENDLINE
                 + "Format:" + ENDLINE
@@ -228,7 +256,8 @@ public class Ui {
                 + "    * The attributes do not have to be in full." + ENDLINE
                 + "    * At least one attribute must be present." + ENDLINE
                 + "Expected Output:" + ENDLINE
-                + "Patient ID: PATIENT_ID IC: PATIENT_IC Name: NAME H/P: PHONE_NUMBER Email: EMAIL Address: ADDRESS" + ENDLINE;
+                + "Patient ID: PATIENT_ID IC: PATIENT_IC Name: NAME "
+                + "H/P: PHONE_NUMBER Email: EMAIL Address: ADDRESS" + ENDLINE;
     }
 
     /**
