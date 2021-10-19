@@ -1,32 +1,32 @@
 package expiryeliminator.commands;
 
 
-import expiryeliminator.data.IngredientList;
-import expiryeliminator.util.TestUtil;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.util.TestUtil;
 
 public class ListCommandTest {
 
 
     @Test
-    public void listCommand_sampleIngredientList_expectListString() {
-        IngredientList ingredientList = TestUtil.generateIngredientList();
-        assert ingredientList != null;
+    public void listCommand_sampleIngredientRepository_expectListString() {
+        IngredientRepository ingredientRepository = TestUtil.generateIngredientRepository();
+        assert ingredientRepository != null;
         Command command = new ListCommand();
-        String message = String.format(ListCommand.MESSAGE_SHOW_WHOLE_LIST, ingredientList.printWholeList(), 3);
-        assertEquals(command.execute(ingredientList, null), message);
+        String message = String.format(ListCommand.MESSAGE_SHOW_WHOLE_LIST, ingredientRepository.printWholeList(), 3);
+        assertEquals(command.execute(ingredientRepository, null), message);
     }
 
     @Test
-    public void listCommand_emptyIngredientList_emptyIngredientListMessage() {
-        IngredientList ingredientList = TestUtil.generateEmptyIngredientList();
+    public void listCommand_emptyIngredientRepository_emptyIngredientRepositoryMessage() {
+        IngredientRepository ingredientRepository = TestUtil.generateEmptyIngredientRepository();
         Command command = new ListCommand();
         String message = ListCommand.MESSAGE_EMPTY_INGREDIENT_LIST;
-        assertEquals(command.execute(ingredientList, null), message);
+        assertEquals(command.execute(ingredientRepository, null), message);
     }
-
 
 
 }

@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import expiryeliminator.commands.AddRecipeCommand;
 import expiryeliminator.commands.DeleteRecipeCommand;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.RecipeList;
+import expiryeliminator.util.TestUtil;
 
 class ParserTest {
     @Test
@@ -52,9 +55,11 @@ class ParserTest {
 
     @Test
     public void prepareAddRecipe_ingredientWithZeroQuantity_ErrorMessage() {
+        final IngredientRepository ingredientRepository = TestUtil.generateIngredientRepositoryForRecipe();
+        final RecipeList recipeList = TestUtil.generateEmptyRecipeList();
         String test = "add recipe r/Chicken Soup i/chicken q/0 i/salt q/20";
         assertEquals("Quantity of ingredients for recipe cannot be zero.",
-                parseCommand(test).execute(null, null));
+                parseCommand(test).execute(ingredientRepository, recipeList));
     }
 
     @Test
