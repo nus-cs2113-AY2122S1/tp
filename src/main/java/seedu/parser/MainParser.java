@@ -10,6 +10,7 @@ import seedu.command.ViewContactCommand;
 import seedu.command.FailedCommand;
 import seedu.command.ExitCommand;
 import seedu.command.ListContactsCommand;
+import seedu.command.SearchContactCommand;
 
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
@@ -33,6 +34,7 @@ public class MainParser {
     private static final String EXIT_COMD = "exit";
     private static final String LIST_COMD = "list";
     private static final String HELP_COMD = "help";
+    private static final String SEARCH_COMD = "search";
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
@@ -66,6 +68,9 @@ public class MainParser {
             break;
         case HELP_COMD:
             command = new HelpCommand();
+            break;
+        case SEARCH_COMD:
+            command = new parseSearchCommand(userInput);
             break;
         default:
             command = new FailedCommand(FailedCommandType.GENERAL);
