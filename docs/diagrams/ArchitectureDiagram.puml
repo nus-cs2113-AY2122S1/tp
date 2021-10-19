@@ -1,0 +1,51 @@
+@startuml
+!include <office/Concepts/globe_internet>
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
+skinparam Shadowing false
+skinparam MinClassWidth 50
+
+skinparam Class {
+    FontColor #FFFFFF
+    BorderThickness 1
+    BorderColor #FFFFFF
+    StereotypeFontColor #FFFFFF
+    FontName Arial
+}
+
+hide footbox
+hide members
+hide circle
+
+Package " "<<Rectangle>>{
+    Class UI #ForestGreen
+    Class Taa #Blue
+    Class Storage #DarkGoldenRod
+    Class Main #IndianRed
+    Class Command #DarkSlateBlue
+    Class Models #DarkRed
+    Class Commons #Purple
+    Class Dummy #White
+    Class Parser #Navy
+    Class Util #LightSeaGreen
+}
+Class "<$user>" as User #Red
+Class "<$documents>" as File #Gray
+
+Main -down-> Taa
+UI -> Taa
+Taa -> Command
+UI -down-> Command
+Command -right-> Storage
+Command -down-> Models
+Models -right[hidden]- Dummy
+Dummy .down.> Commons
+Dummy .down.> Commons
+Dummy .down.> Commons
+Commons -left- Parser
+Commons -down- Util
+
+UI <-up- User
+Storage -right-> File
+@enduml
