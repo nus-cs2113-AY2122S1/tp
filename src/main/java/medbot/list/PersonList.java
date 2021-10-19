@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class PersonList {
-    private static final String ENDLINE = System.lineSeparator();
+import static medbot.Ui.ENDLINE;
 
+public class PersonList {
     private HashMap<Integer, Person> persons = new HashMap<>();
     private int lastId = 1;
 
