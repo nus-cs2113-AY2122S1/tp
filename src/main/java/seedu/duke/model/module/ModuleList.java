@@ -3,7 +3,6 @@ package seedu.duke.model.module;
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.model.module.exceptions.ModuleIndexException;
-import seedu.duke.model.task.Task;
 import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;

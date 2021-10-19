@@ -2,6 +2,8 @@ package seedu.duke.ui;
 
 import java.util.Scanner;
 
+import seedu.duke.Duke;
+import seedu.duke.DukeException;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.module.ModuleList;
@@ -299,8 +301,8 @@ public class Ui {
         System.out.print(LINE);
     }
 
-    public void printModulesWithDetails(ModuleList moduleList) {
-        //
+    public void printModulesWithDetails(ModuleList moduleList) throws DukeException {
+        System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
     }
 
     // All-related methods
