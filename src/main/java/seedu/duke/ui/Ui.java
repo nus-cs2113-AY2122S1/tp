@@ -5,6 +5,7 @@ import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.universities.University;
 import seedu.duke.constants.Constants;
+import seedu.duke.universities.UniversityList;
 
 import static java.lang.System.out;
 public class Ui {
@@ -14,9 +15,9 @@ public class Ui {
         out.println(" " + mod.getModuleCode());
     }
 
-    public static void printUniversity(University uni, int index) {
+    public static void printUniversity(University uni, int index, UniversityList universityMasterList) {
         printIndex(index, false);
-        out.println(" " + uni.getName());
+        out.println(" " + uni.getMasterListIndex(universityMasterList) + "-" + uni.getName());
     }
 
     public static void printModuleMapping(ModuleMapping mm, int index) {
@@ -40,8 +41,9 @@ public class Ui {
     public static void printLogo() {
         out.println(AsciiConstants.LOGO);
     }
+
     public static void welcome() {
-        out.println(AsciiConstants.GLOBE);
-        out.println(AsciiConstants.LOGO);
+        printGlobe();
+        printLogo();
     }
 }

@@ -47,16 +47,18 @@ public class ListCommand extends Command {
     }
 
     private void showAllUnis() throws IOException {
-        ArrayList<University> allUniversityList = Storage.loadUniversities();
+        UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
         System.out.println("Here are all the universities available for you:");
-        assert allUniversityList.size() > 0;
-        for (int i = 0; i < allUniversityList.size(); i++) {
-            assert allUniversityList.get(i).getName() != null;
-            Ui.printUniversity(allUniversityList.get(i), i + 1);
+        assert universityMasterList.getSize() > 0;
+        for (int i = 0; i < universityMasterList.getSize(); i++) {
+            assert universityMasterList.get(i).getName() != null;
+            Ui.printUniversity(universityMasterList.get(i), i + 1, universityMasterList);
         }
     }
 
-    private void showSelectedUnis(UniversityList universitySelectedList, ModuleList moduleSelectedList) {
+    private void showSelectedUnis(UniversityList universitySelectedList, ModuleList moduleSelectedList)
+            throws IOException {
+        UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
         if (universitySelectedList.getSize() == 0) {
             assert moduleSelectedList.getSize() == 0;
             System.out.println("The university list is empty!");
@@ -66,16 +68,17 @@ public class ListCommand extends Command {
         }
     }
 
-    private void getUnisAndMods(UniversityList universitySelectedList) {
+    private void getUnisAndMods(UniversityList universitySelectedList) throws IOException {
+        UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
         System.out.println("Here are the universities and module mappings in your list:");
         for (int i = 0; i < universitySelectedList.getSize(); i++) {
             assert universitySelectedList.get(i).getName() != null;
-            showUnisAndMods(i + 1, universitySelectedList.get(i));
+            showUnisAndMods(i + 1, universitySelectedList.get(i), universityMasterList);
         }
     }
 
-    private void showUnisAndMods(int index, University university) {
-        Ui.printUniversity(university, index);
+    private void showUnisAndMods(int index, University university, UniversityList universityMasterList) {
+        Ui.printUniversity(university, index, universityMasterList);
         university.listMappings();
     }
 

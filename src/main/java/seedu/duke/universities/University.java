@@ -31,4 +31,13 @@ public class University {
         return name;
     }
 
+    public int getMasterListIndex(UniversityList universityMasterList) {
+        for (int i = 0; i < universityMasterList.getSize(); i++) {
+            if (name.equals(universityMasterList.get(i).getName())) {
+                return i + 1;
+            }
+        }
+        return 0;
+    }
+
 }
