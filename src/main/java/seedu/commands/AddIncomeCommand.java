@@ -13,6 +13,7 @@ public class AddIncomeCommand extends Command {
 
     @Override
     public void execute(FinancialTracker finances, Ui ui) {
-        ui.printIncomeAdded((Income) finances.addEntry(income));
+        finances.addIncome(income);
+        ui.printIncomeAdded(income);
     }
 }
