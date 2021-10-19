@@ -4,23 +4,17 @@
 !include style.puml
 
 box MediVault COLOR_MEDIVAULT_BOX
-    participant ": MediVault" as medivault COLOR_MEDIVAULT
+    participant ":MediVault" as medivault COLOR_MEDIVAULT
 end box
 
-box Storage COLOR_STORAGE_BOX
-    participant ": Storage" as storage COLOR_STORAGE
-end box
-
-box Ui COLOR_UI_BOX
-    participant ": Ui" as ui COLOR_UI
-end box
-
-box Parser COLOR_PARSER_BOX
-    participant ": CommandParser" as commandparser COLOR_PARSER
+box Utilities COLOR_UTILITIES_BOX
+    participant ":Storage" as storage COLOR_UTILITIES
+    participant ":Ui" as ui COLOR_UTILITIES
+    participant ":CommandParser" as commandparser COLOR_UTILITIES
 end box
 
 box Command COLOR_COMMAND_BOX
-    participant ": Command" as command COLOR_COMMAND
+    participant ":Command" as command COLOR_COMMAND
 end box
 
 autoactivate on
@@ -40,12 +34,12 @@ autoactivate on
             medivault -> commandparser : parseCommand(userInput : String)
             medivault <-- commandparser : userCommand, parameters
             medivault -> commandparser : processCommand()
-            commandparser -> commandparser : parseParameters()
+            commandparser -> commandparser : parseParameters(parametersString)
             commandparser --> commandparser : parameterValues
             create command
-            commandparser -> command : Command(parametersValues : LinkedHashMap<String, String>)
-            commandparser <-- command : command
-            medivault <-- commandparser : command
+            commandparser -> command : Command()
+            commandparser <-- command
+            medivault <-- commandparser
             medivault -> command : execute()
             deactivate command
         end

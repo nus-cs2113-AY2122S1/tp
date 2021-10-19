@@ -34,7 +34,6 @@ public class ListOrderCommand extends Command {
         logger.log(Level.INFO, "Start listing of order");
 
         Ui ui = Ui.getInstance();
-        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
@@ -47,6 +46,8 @@ public class ListOrderCommand extends Command {
             logger.log(Level.WARNING, "Invalid parameters given by user");
             return;
         }
+
+        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         boolean isInvalidParameterValues = OrderValidator.containsInvalidParameterValues(ui, parameters,
                 medicines, CommandSyntax.LIST_ORDER_COMMAND);

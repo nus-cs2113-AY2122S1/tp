@@ -32,9 +32,7 @@ public class ListDispenseCommand extends Command {
     @Override
     public void execute() {
         logger.log(Level.INFO, "Start listing of dispense records");
-
         Ui ui = Ui.getInstance();
-        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         String[] requiredParameter = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
@@ -49,6 +47,8 @@ public class ListDispenseCommand extends Command {
             logger.log(Level.WARNING, "Invalid parameters given by user");
             return;
         }
+
+        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         boolean isInvalidParameterValues = DispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.LIST_DISPENSE_COMMAND);

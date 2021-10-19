@@ -34,7 +34,6 @@ public class ListStockCommand extends Command {
         logger.log(Level.INFO, "Start listing of available stock");
 
         Ui ui = Ui.getInstance();
-        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         String[] requiredParameter = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.PRICE,
@@ -47,6 +46,8 @@ public class ListStockCommand extends Command {
             logger.log(Level.WARNING, "Invalid parameters given by user");
             return;
         }
+
+        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         boolean isInvalidParameterValues = StockValidator.containsInvalidParameterValues(ui, parameters,
                 medicines, CommandSyntax.LIST_STOCK_COMMAND);

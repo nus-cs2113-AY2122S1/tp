@@ -67,7 +67,7 @@ public class CommandParser {
             command = command + mode.name().toLowerCase();
         }
 
-        LinkedHashMap<String, String> parameters = CommandParser.parseParameters(parametersString);
+        LinkedHashMap<String, String> parameters = parseParameters(parametersString);
 
         switch (command) {
         case ADD_DISPENSE:
