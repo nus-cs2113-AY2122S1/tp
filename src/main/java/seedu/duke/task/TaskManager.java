@@ -1,5 +1,6 @@
 package seedu.duke.task;
 
+import seedu.duke.command.flags.ListFlag;
 import seedu.duke.command.flags.SortFlag;
 import seedu.duke.exception.EmptySortCriteriaException;
 import seedu.duke.exception.EmptyTasklistException;
@@ -17,8 +18,12 @@ public class TaskManager {
 
     private static ArrayList<Task> taskList = new ArrayList<>(128);
 
+    private static final String LIST_HEADER = "-------------\n"
+            + " MY TASKLIST\n"
+            + "-------------\n";
+
     //@@author APZH
-    public static String listTasklist() throws EmptyTasklistException {
+    public static String listTasklist(HashMap<String, String> filter) throws EmptyTasklistException {
         Log.info("listTasklist method called");
         assert taskList.size() >= 0 : "Tasklist cannot be negative";
 
@@ -27,16 +32,65 @@ public class TaskManager {
             throw new EmptyTasklistException();
         }
 
-        String tasks = "-------------\n"
-                + " MY TASKLIST\n"
-                + "-------------\n";
+        String taskEntries = "";
 
-        for (int i = 0; i < taskList.size(); i++) {
-            tasks += i + 1 + ". " + taskList.get(i).getTaskEntryDescription() + "\n";
+        ArrayList<Task> filteredTasks = (ArrayList<Task>)taskList.clone();
+        for (HashMap.Entry<String, String> entry : filter.entrySet()) {
+            String flag = entry.getKey();
+            String argument = entry.getValue();
+            switch (flag) {
+            case ListFlag.TASK_TYPE:
+                filteredTasks = filterListByTaskType(filteredTasks, argument);
+                break;
+            case ListFlag.PRIORITY:
+                filteredTasks = filterListByPriority(filteredTasks, argument);
+                break;
+            case ListFlag.RECURRENCE:
+                filteredTasks = filterListByRecurrence(filteredTasks, argument);
+                break;
+            default:
+                continue;
+            }
         }
 
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            taskEntries += i + 1 + ". " + filteredTasks.get(i).getTaskEntryDescription() + "\n";
+        }
         Log.info("end of listTasklist - no issues detected");
-        return tasks;
+        return LIST_HEADER + taskEntries;
+    }
+
+    public static ArrayList<Task> filterListByTaskType(ArrayList<Task> taskList, String taskTypeFilter) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            String currentTaskType = taskList.get(i).getTaskType().name();
+            if (currentTaskType.equalsIgnoreCase(taskTypeFilter)) {
+                filteredTasks.add(taskList.get(i));
+            }
+        }
+        return filteredTasks;
+    }
+
+    public static ArrayList<Task> filterListByPriority(ArrayList<Task> taskList, String priorityFilter) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            String currentPriority = taskList.get(i).getPriority().name();
+            if (currentPriority.equalsIgnoreCase(priorityFilter)) {
+                filteredTasks.add(taskList.get(i));
+            }
+        }
+        return filteredTasks;
+    }
+
+    public static ArrayList<Task> filterListByRecurrence(ArrayList<Task> taskList, String recurrenceFilter) {
+        ArrayList<Task> filteredTasks = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            String currentRecurrence = taskList.get(i).getRecurrence().name();
+            if (currentRecurrence.equalsIgnoreCase(recurrenceFilter)) {
+                filteredTasks.add(taskList.get(i));
+            }
+        }
+        return filteredTasks;
     }
 
     //@@author APZH
@@ -139,6 +193,15 @@ public class TaskManager {
 
     public static void addTask(Task task) {
         taskList.add(task);
+    }
+
+    private static void printArrayList(ArrayList<Task> filteredTasks) {
+        String tasks = "";
+        System.out.println("Printing filtered list...");
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            tasks += i + 1 + ". " + filteredTasks.get(i).getTaskEntryDescription() + "\n";
+        }
+        System.out.println(tasks);
     }
 
 }
