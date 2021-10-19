@@ -1,26 +1,26 @@
 package medbot;
 
-import medbot.command.AddPatientCommand;
+import medbot.command.patientcommand.AddPatientCommand;
 import medbot.command.Command;
 import medbot.command.CommandType;
-import medbot.command.DeletePatientCommand;
-import medbot.command.EditPatientCommand;
+import medbot.command.patientcommand.DeletePatientCommand;
+import medbot.command.patientcommand.EditPatientCommand;
 import medbot.command.ExitCommand;
-import medbot.command.ListPatientCommand;
-import medbot.command.SwitchCommand;
-import medbot.command.ViewPatientCommand;
+import medbot.command.patientcommand.FindPatientCommand;
 import medbot.command.HelpCommand;
-import medbot.exceptions.MedBotException;
+import medbot.command.SwitchCommand;
+import medbot.command.patientcommand.ListPatientCommand;
+import medbot.command.patientcommand.ViewPatientCommand;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Patient;
 import medbot.person.Person;
 import medbot.utilities.ViewType;
 
+import java.util.Arrays;
 import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Arrays;
 
 public class Parser {
     private static final String COMMAND_ADD = "add";
@@ -31,6 +31,7 @@ public class Parser {
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_SWITCH = "switch";
+    private static final String COMMAND_FIND = "find";
 
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
@@ -132,6 +133,9 @@ public class Parser {
         if (userInput.startsWith(COMMAND_EDIT)) {
             return parseEditPatientCommand(userInput);
         }
+        if (userInput.startsWith(COMMAND_FIND)) {
+            return parseFindPatientCommand(userInput);
+        }
         if (userInput.startsWith(COMMAND_HELP)) {
             return parseHelpCommand(userInput);
         }
@@ -202,6 +206,8 @@ public class Parser {
             return CommandType.SWITCH;
         case COMMAND_VIEW:
             return CommandType.VIEW_PATIENT;
+        case COMMAND_FIND:
+            return CommandType.FIND_PATIENT;
         default:
             throw new MedBotParserException(WRONG_COMMAND_ERROR);
         }
@@ -285,6 +291,11 @@ public class Parser {
         Patient patient = new Patient();
         updateMultiplePersonalInformation(patient, parameters);
         return new AddPatientCommand(patient);
+    }
+
+    private static FindPatientCommand parseFindPatientCommand(String userInput) throws MedBotParserException {
+        String[] parameters = getParameters(userInput);
+        return new FindPatientCommand(parameters);
     }
 
     /**

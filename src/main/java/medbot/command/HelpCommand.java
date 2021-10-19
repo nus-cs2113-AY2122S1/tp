@@ -1,8 +1,7 @@
 package medbot.command;
 
-import medbot.Parser;
-import medbot.PatientList;
 import medbot.Ui;
+import medbot.list.PersonList;
 
 public class HelpCommand extends Command {
 
@@ -16,7 +15,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(PatientList patientList, Ui ui) {
+    public void execute(PersonList personList, Ui ui) {
         String output;
         if (commandType == null) {
             output = ui.getCommandList();
@@ -41,6 +40,9 @@ public class HelpCommand extends Command {
             break;
         case SWITCH:
             output = ""; //todo
+            break;
+        case FIND_PATIENT:
+            output = ui.getFindHelpMessage();
             break;
         case VIEW_PATIENT:
             output = ui.getViewHelpMessage();

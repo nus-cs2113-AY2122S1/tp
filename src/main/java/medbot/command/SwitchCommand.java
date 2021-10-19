@@ -1,8 +1,8 @@
 package medbot.command;
 
 import medbot.Parser;
-import medbot.PatientList;
 import medbot.Ui;
+import medbot.list.PersonList;
 import medbot.utilities.ViewType;
 
 public class SwitchCommand extends Command {
@@ -17,7 +17,7 @@ public class SwitchCommand extends Command {
     }
 
     @Override
-    public void execute(PatientList patientList, Ui ui) {
+    public void execute(PersonList personList, Ui ui) {
         if (newViewType == null) {
             Parser.switchViewType();
         } else {

@@ -1,8 +1,10 @@
 package medbot;
 
+import medbot.list.PersonList;
 import medbot.utilities.ViewType;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -85,6 +87,24 @@ public class Ui {
     }
 
     /**
+     * Returns the information of the filtered patients.
+     *
+     * @param patients the filtered patients to be printed.
+     * @return The information of the filtered patients
+     */
+    public String getFindPatientsMessage(List<String> patients) {
+        String output = "";
+        for (String patient : patients) {
+            output += patient.toString() + ENDLINE;
+        }
+        if (output.length() == 0) {
+            return "No patient with such attributes is found.";
+        }
+
+        return output;
+    }
+
+    /**
      * Prints an exit message when MedBot is exiting.
      *
      * @return the exit Message
@@ -109,9 +129,10 @@ public class Ui {
      * @param patientList the list containing patients to be printed.
      * @return all Patients' information.
      */
-    public String getAllPatientsString(PatientList patientList) {
+
+    public String getAllPatientsString(PersonList patientList) {
         String output = "Here is a list of all patients:" + ENDLINE;
-        output += patientList.listPatients();
+        output += patientList.listPersons();
 
         return output;
     }
@@ -197,6 +218,16 @@ public class Ui {
                 + "delete PATIENT_ID" + ENDLINE
                 + "Expected Output:" + ENDLINE
                 + "Patient with id PATIENT_ID deleted from system." + ENDLINE;
+    }
+
+    public String getFindHelpMessage() {
+        return "Find patients from the list based on given attributes." + ENDLINE
+                + "Format:" + ENDLINE
+                + "find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
+                + "    * The attributes do not have to be in full." + ENDLINE
+                + "    * At least one attribute must be present." + ENDLINE
+                + "Expected Output:" + ENDLINE
+                + "Patient ID: PATIENT_ID IC: PATIENT_IC Name: NAME H/P: PHONE_NUMBER Email: EMAIL Address: ADDRESS";
     }
 
     /**
