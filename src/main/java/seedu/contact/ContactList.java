@@ -68,37 +68,37 @@ public class ContactList {
             Contact contact = getContactAtIndex(i);
             switch (detailType) {
             case NAME_INDEX:
-                if (contact.getName().toLowerCase().contains(query)) {
+                if (contact.getName() != null && contact.getName().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
                     searchResult = true;
                 }
                 break;
             case GITHUB_INDEX:
-                if (contact.getGithub().toLowerCase().contains(query)) {
+                if (contact.getGithub() != null && contact.getGithub().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
                     searchResult = true;
                 }
                 break;
             case LINKEDIN_INDEX:
-                if (contact.getLinkedin().toLowerCase().contains(query)) {
+                if (contact.getLinkedin() != null && contact.getLinkedin().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
                     searchResult = true;
                 }
                 break;
             case TELEGRAM_INDEX:
-                if (contact.getTelegram().toLowerCase().contains(query)) {
+                if (contact.getTelegram() != null && contact.getTelegram().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
                     searchResult = true;
                 }
                 break;
             case TWITTER_INDEX:
-                if (contact.getTwitter().toLowerCase().contains(query)) {
+                if (contact.getTwitter() != null && contact.getTwitter().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
                     searchResult = true;
                 }
                 break;
             case EMAIL_INDEX:
-                if (contact.getEmail().toLowerCase().contains(query)) {
+                if (contact.getEmail() != null && contact.getEmail().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
                     searchResult = true;
                 }
