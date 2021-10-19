@@ -300,8 +300,8 @@ public class Ui {
             headers.append(String.format(formats[i], centerString(columnWidths[i], CommandSyntax.COLUMNS[i])));
         }
         System.out.println("Welcome to the help page.");
-        System.out.println("Your current mode is indicated in the square brackets. It allows you to type add, list, "
-                + "update, delete without typing in the full command.");
+        System.out.println("Your current mode is indicated in the square brackets at the bottom left of the console.");
+        System.out.println("It allows you to type add, list, update, delete without typing in the full command.");
         System.out.println("Type stock, dispense or order to change to respective modes.");
         System.out.println("Note that parameters in {curly braces} are optional.");
         System.out.println("Parameters in [square braces] indicate that at least one of the parameter(s) must be "
