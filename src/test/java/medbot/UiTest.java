@@ -1,5 +1,6 @@
 package medbot;
 
+import medbot.list.PatientList;
 import medbot.person.Patient;
 
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ class UiTest {
         patient.setName("John Doe");
         patient.setEmailAddress("John@gmail.com");
 
-        patientList.addPatient(patient);
+        patientList.addPerson(patient);
         Ui ui = new Ui();
 
         patient.setName("Bob");
@@ -53,7 +54,7 @@ class UiTest {
         patient.setName("John Doe");
         patient.setEmailAddress("John@gmail.com");
 
-        patientList.addPatient(patient);
+        patientList.addPerson(patient);
         Ui ui = new Ui();
 
         String patientInfo = patient.toString();
@@ -70,12 +71,12 @@ class UiTest {
         Patient patient1 = new Patient();
         patient1.setName("John Doe");
         patient1.setEmailAddress("John@gmail.com");
-        patientList.addPatient(patient1);
+        patientList.addPerson(patient1);
 
         Patient patient2 = new Patient();
         patient2.setName("Bob");
         patient2.setPhoneNumber("88889999");
-        patientList.addPatient(patient2);
+        patientList.addPerson(patient2);
 
         Ui ui = new Ui();
 

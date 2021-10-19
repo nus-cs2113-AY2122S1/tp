@@ -3,7 +3,9 @@ package medbot;
 import medbot.command.Command;
 
 import java.io.FileNotFoundException;
+
 import medbot.exceptions.MedBotException;
+import medbot.list.PatientList;
 
 public class MedBot {
     public static void main(String[] args) {

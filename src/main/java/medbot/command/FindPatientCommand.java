@@ -1,8 +1,8 @@
 package medbot.command;
 
-import medbot.PatientList;
 import medbot.Ui;
 import medbot.exceptions.MedBotException;
+import medbot.list.PersonList;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ public class FindPatientCommand extends Command {
     }
 
     @Override
-    public void execute(PatientList patientList, Ui ui) throws MedBotException {
-        List<String> patients = patientList.findPatients(parameters);
+    public void execute(PersonList personList, Ui ui) throws MedBotException {
+        List<String> patients = personList.findPersons(parameters);
         String findPatientsMessage = ui.getFindPatientsMessage(patients);
         ui.printOutput(findPatientsMessage);
     }
