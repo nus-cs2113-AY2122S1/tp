@@ -1,0 +1,43 @@
+@startuml DeleteStockSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":DeleteStockCommand" as deleteStock COLOR_COMMAND
+    participant ":CommandSyntax" as commandSyntax COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant ":Ui" as ui COLOR_UTILITIES
+    participant ":StockValidator" as stockValidator COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant ":Medicine" as medicine COLOR_INVENTORY
+    participant ":Stock" as stock COLOR_INVENTORY
+end box
+
+autoactivate on
+mainFrame sd Deletion of stock by id
+activate deleteStock
+deleteStock -> deleteStock: deleteStockById()
+deleteStock -> stockValidator : isValidStockId()
+deleteStock <-- stockValidator : isAValidStockId
+opt isAValidStockId
+    loop medicines
+        deleteStock -> deleteStock : medicine
+        opt medicine instanceof Stock
+            deleteStock -> stock : getStockID()
+            deleteStock <-- stock
+            opt stock.getStockID() == stockId
+                deleteStock -> stock : setDeleted()
+                deleteStock <-- stock : setAsDeleted
+            end
+        end
+        deleteStock --> deleteStock
+    end
+deleteStock -> ui : print()
+deleteStock <-- ui
+end
+@enduml

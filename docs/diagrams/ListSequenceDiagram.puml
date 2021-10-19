@@ -30,7 +30,7 @@ opt !isInvalidParameter
     list -> medicine : getInstance()
     list <-- medicine
     list -> validator : containsInvalidParameterValues()
-    list <-- validator : isInvalidParameterValues()
+    list <-- validator : isInvalidParameterValues
 
     opt !isInvalidParameterValues
         list -> list : filter*()
