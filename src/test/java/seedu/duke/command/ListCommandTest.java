@@ -3,7 +3,11 @@ package seedu.duke.command;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.*;
+import seedu.duke.Dish;
+import seedu.duke.DishList;
+import seedu.duke.Ingredient;
+import seedu.duke.IngredientList;
+import seedu.duke.Ui;
 import seedu.duke.exceptions.FoodoramaException;
 
 import java.io.ByteArrayInputStream;
@@ -36,7 +40,7 @@ class ListCommandTest {
         ArrayList<String> inputArrayList = new ArrayList<>();
         ListCommand list = new ListCommand();
         //Dish
-        try{
+        try {
             inputArrayList.add("dish");
             Dish dishToAdd = new Dish("noodles");
             DishList.dishList.add(dishToAdd);
@@ -52,7 +56,7 @@ class ListCommandTest {
         }
 
         //Ingr
-        try{
+        try {
             inputArrayList.set(0,"ingr");
             Ingredient ingredientToAdd = new Ingredient("chocolate", 3.33);
             IngredientList.ingredientList.add(ingredientToAdd);

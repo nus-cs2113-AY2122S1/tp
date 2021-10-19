@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class Dish implements Comparable<Dish> {
     private static final Logger logger = Logger.getLogger("Dish class");
-    private static final ArrayList<Ingredient> constituents = new ArrayList<>();
+    private ArrayList<Ingredient> constituents = new ArrayList<>();
     private static final Ui ui = new Ui();
     private String dishName;
     private Double wastage;

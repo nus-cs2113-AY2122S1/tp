@@ -1,7 +1,13 @@
 package seedu.duke.command;
 
-import org.junit.jupiter.api.*;
-import seedu.duke.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import seedu.duke.Dish;
+import seedu.duke.DishList;
+import seedu.duke.Ingredient;
+import seedu.duke.IngredientList;
+import seedu.duke.Ui;
 import seedu.duke.exceptions.FoodoramaException;
 
 import java.io.ByteArrayInputStream;
@@ -10,7 +16,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GraphCommandTest {
     PrintStream originalOutputStream;
@@ -35,7 +42,7 @@ class GraphCommandTest {
         GraphCommand commandToTest = new GraphCommand();
         ByteArrayInputStream fakeInput;
         //Dish
-        try{
+        try {
             Dish dishToAdd = new Dish("carrot cake");
             fakeInput = new ByteArrayInputStream("2.33".getBytes());
             System.setIn(fakeInput);
@@ -57,7 +64,7 @@ class GraphCommandTest {
         }
 
         //Ingr
-        try{
+        try {
             inputs.set(0,"ingr");
             Ingredient ingredientToAdd = new Ingredient("chocolate", 3.33);
             fakeInput = new ByteArrayInputStream("7.25".getBytes());

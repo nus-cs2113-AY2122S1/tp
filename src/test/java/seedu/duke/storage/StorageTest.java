@@ -6,7 +6,7 @@ import seedu.duke.DishList;
 import seedu.duke.Ingredient;
 import seedu.duke.IngredientList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StorageTest {
 

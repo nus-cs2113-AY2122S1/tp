@@ -11,7 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddIngrWasteCommandTest {
     @Test
@@ -22,7 +22,7 @@ class AddIngrWasteCommandTest {
         inputs.add("carrot");
         AddIngrWasteCommand commandToTest = new AddIngrWasteCommand();
         //Add the dish and ingr to link
-        IngredientList.ingredientList.add(new Ingredient("carrot" , 2.34));
+        IngredientList.ingredientList.add(new Ingredient("carrot", 2.34));
         try {
             InputStream backupInputStream = System.in;
             ByteArrayInputStream fakeInput = new ByteArrayInputStream("3.56".getBytes());

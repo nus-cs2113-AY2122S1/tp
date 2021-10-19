@@ -11,7 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddIngrStoredCommandTest {
 
@@ -23,7 +23,7 @@ class AddIngrStoredCommandTest {
         inputs.add("flour");
         AddIngrStoredCommand commandToTest = new AddIngrStoredCommand();
         //Add the dish and ingr to link
-        IngredientList.ingredientList.add(new Ingredient("flour" , 2.34));
+        IngredientList.ingredientList.add(new Ingredient("flour", 2.34));
         try {
             InputStream backupInputStream = System.in;
             ByteArrayInputStream fakeInput = new ByteArrayInputStream("2".getBytes());

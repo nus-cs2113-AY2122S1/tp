@@ -9,7 +9,7 @@ import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AddDishIngrCommandTest {
     @Test
@@ -22,7 +22,7 @@ class AddDishIngrCommandTest {
         AddDishIngrCommand commandToTest = new AddDishIngrCommand();
         //Add the dish and ingr to link
         DishList.add("chicken rice");
-        IngredientList.ingredientList.add(new Ingredient("rice" , 2.34));
+        IngredientList.ingredientList.add(new Ingredient("rice", 2.34));
         try {
             commandToTest.execute(inputs);
             assertEquals(1,DishList.dishList.get(0).getConstituents().size());
