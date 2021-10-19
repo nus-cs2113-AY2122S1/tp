@@ -102,4 +102,11 @@ public class ContentManager<T extends Content> {
     public void purgeData() {
         this.contents = new ArrayList<>();
     }
+
+    public boolean isDuplicateName(String name) {
+        if (contents.size() < 1) {
+            return false;
+        }
+        return contents.stream().anyMatch(x -> x.getName().equals(name));
+    }
 }

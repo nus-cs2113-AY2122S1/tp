@@ -69,13 +69,15 @@ public class AddNoteCommand extends Command {
      * @return CommandResult to indicate the success and additional information about the execution.
      * @throws IOException when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws IOException {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws IOException, InvalidArgumentException {
         assert getModuleName() != null;
         TerminusLogger.info("Executing Add Note Command");
         NusModule module = moduleManager.getModule(getModuleName());
         ContentManager contentManager = module.getContentManager(Note.class);
         assert contentManager != null;
-
+        if (contentManager.isDuplicateName(name)) {
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_DUPLICATE_NAME);
+        }
         contentManager.add(new Note(name, data));
         TerminusLogger.info(String.format("Note(\"%s\",\"%s\") has been added", name, data));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE, name));
