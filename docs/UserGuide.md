@@ -126,15 +126,15 @@ ________________________________________________________
 
 | Action                                           | Format, Examples                                                                                       |
 |--------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| Add exercise                                     | Format: add [EXERCISE_DESCRIPTION], [SETS REPS], [WORKOUT_INDEX] <br /> Example: add Push-ups, 5 10, 1 |
-| Display exercises in <br /> a particular workout | Format: display [WORKOUT_INDEX] <br />Example: display 1                                               |
-| Mark exercise as done                            | Format: done [EXERCISE_INDEX], [WORKOUT_INDEX] <br />Example: done 5, 1                                |
-| Remove exercise                                  | Format: remove [EXERCISE_INDEX], [WORKOUT_INDEX] <br />Example: remove 5, 1                            |
-| Create workout                                   | Format: create [WORKOUT_DESCRIPTION] <br />Example: create abs                                         |
-| Delete workout                                   | Format: delete [WORKOUT_INDEX] <br />Example: delete 1                                                 |
-| List all workouts                                | Example: list                                                                                          |
-| Enter workout                                    | Format: enter [WORKOUT_INDEX] <br />Example: enter 1                                                   |
-| Exit workout                                     | Example: back                                                                                          |
-| Help                                             | Format: help {COMMAND_WORD} <br />Example: help add                                                    |
-| Search                                           | Format: search [KEYWORD] <br />Example: search legs                                                    |
-| Exit                                             | Example: bye                                                                                           |
+| List all workouts                                | Example: `list`                                                                                        |
+| Create workout                                   | Format: `create [WORKOUT_DESCRIPTION]` <br />Example: `create abs workout`                                         |
+| Delete workout                                   | Format: `delete [WORKOUT_INDEX]` <br />Example: `delete 1`                                                 |
+| Display exercises in <br /> a particular workout | Format: `display [WORKOUT_INDEX]` <br />Example: `display 1`                                               |
+| Add exercise                                     | Format: `add [EXERCISE_DESCRIPTION], [SETS REPS], [WORKOUT_INDEX]` <br /> Example: `add Push-ups, 5 10, 1` |
+| Mark exercise as done                            | Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]` <br />Example: `done 5, 1`                                |
+| Remove exercise                                  | Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]` <br />Example: `remove 5, 1`                            |
+| Enter workout                                    | Format: `enter [WORKOUT_INDEX]` <br />Example: `enter 1`                                                   |
+| Exit workout                                     | Example: `back`                                                                                          |
+| Help                                             | Format: `help {COMMAND_WORD}` <br />Example: `help add`                                                    |
+| Search                                           | Format: `search [KEYWORD]` <br />Example: `search legs`                                                    |
+| Exit                                             | Example: `bye`                                                                                           |
