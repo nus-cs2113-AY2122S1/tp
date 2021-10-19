@@ -35,7 +35,16 @@ public class TaskManager {
         return tasks;
     }
 
-    public static class ComparePriority implements Comparator<Task> {
+    public static class SortByDescription implements Comparator<Task> {
+        @Override
+        public int compare(Task o1, Task o2) {
+
+            return o1.getDescription().compareTo(o2.getDescription());
+
+        }
+    }
+
+    public static class SortByPriority implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
 
@@ -63,10 +72,15 @@ public class TaskManager {
         }
     }
 
+
+
     public static String sortTasklist(HashMap<String, String> argument) throws EmptyTasklistException {
 
-        ComparePriority comparePriority = new ComparePriority();
-        Collections.sort(taskList, comparePriority);
+        // SortByPriority sortByPriority = new SortByPriority();
+        // Collections.sort(taskList, sortByPriority);
+
+        SortByDescription sortByDescription = new SortByDescription();
+        Collections.sort(taskList, sortByDescription);
 
         return "Done sorting";
     }
