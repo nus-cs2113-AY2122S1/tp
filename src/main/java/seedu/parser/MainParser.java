@@ -39,8 +39,8 @@ public class MainParser {
     public static final int NAME_INDEX = 0;
 
     private ContactParser contactParser;
-    private AddContactParser addContactParser = new AddContactParser();
-    private EditContactParser editContactParser = new EditContactParser();
+    private final AddContactParser addContactParser = new AddContactParser();
+    private final EditContactParser editContactParser = new EditContactParser();
 
     public Command parseCommand(String userInput) {
         String commandType = getCommandWord(userInput);
