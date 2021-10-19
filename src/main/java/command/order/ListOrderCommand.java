@@ -5,9 +5,9 @@ import command.CommandParameters;
 import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Order;
-import parser.DateParser;
-import parser.OrderValidator;
-import ui.Ui;
+import utilities.parser.DateParser;
+import utilities.parser.OrderValidator;
+import utilities.ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;

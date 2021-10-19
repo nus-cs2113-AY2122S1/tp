@@ -5,9 +5,9 @@ import command.CommandParameters;
 import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Order;
-import parser.OrderValidator;
-import ui.Ui;
-import storage.Storage;
+import utilities.parser.OrderValidator;
+import utilities.ui.Ui;
+import utilities.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

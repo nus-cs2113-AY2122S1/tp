@@ -1,8 +1,8 @@
 package command;
 
 import inventory.Medicine;
-import storage.Storage;
-import ui.Ui;
+import utilities.storage.Storage;
+import utilities.ui.Ui;
 
 import java.util.ArrayList;
 

@@ -7,49 +7,49 @@ box Command COLOR_COMMAND_BOX
     participant ":UpdateStock" as updatestock COLOR_COMMAND
 end box
 
-box Parser COLOR_PARSER_BOX
-    participant ":CommandSyntax" as commandsyntax COLOR_PARSER
-    participant ":StockValidator" as stockvalidator COLOR_PARSER
-    participant ":StockManager" as stockmanager COLOR_PARSER
+box Utilities COLOR_UTILITIES_BOX
+    participant ":CommandSyntax" as commandsyntax COLOR_UTILITIES
+    participant ":StockValidator" as stockvalidator COLOR_UTILITIES
+    participant ":StockManager" as stockmanager COLOR_UTILITIES
+    participant ":Ui" as ui COLOR_UTILITIES
 end box
 
+box Inventory COLOR_INVENTORY_BOX
+    participant ":Medicine" as medicine COLOR_INVENTORY
+end box
+
+autoactivate on
+
 -> updatestock: execute()
-    activate updatestock
-        updatestock -> commandsyntax: containsInvalidParameters()
-        activate commandsyntax
-            updatestock <-- commandsyntax: isInvalidParameter
-        deactivate commandsyntax
+    updatestock -> ui: getInstance()
+    updatestock <-- ui
+    updatestock -> commandsyntax: containsInvalidParameters()
+    updatestock <-- commandsyntax: isInvalidParameter
 
-        opt !isInvalidParameter
+    opt !isInvalidParameter
+        updatestock -> medicine : getInstance()
+        updatestock <-- medicine
+
         updatestock -> stockvalidator: containsInvalidParameterValues()
-        activate stockvalidator
-            updatestock <-- stockvalidator: isInvalidParameterValues
-        deactivate stockvalidator
-            opt !isInvalidParameterValues
-                updatestock -> stockmanager: extractStock()
-                activate stockmanager
-                    updatestock <-- stockmanager: stock
-                deactivate stockmanager
+        updatestock <-- stockvalidator: isInvalidParameterValues
 
-                updatestock -> updatestock: processQuantityValues()
-                activate updatestock
-                    updatestock --> updatestock: isValidQuantityValues
-                deactivate updatestock
+        opt !isInvalidParameterValues
+            updatestock -> stockmanager: extractStockObject()
+            updatestock <-- stockmanager: stock
 
-                opt isValidQuantityValues
-                    updatestock -> updatestock: processDateInput()
-                    activate updatestock
-                        updatestock --> updatestock: isValidExpDate
+            updatestock -> updatestock: processQuantityValues()
+            updatestock --> updatestock: isValidQuantityValues
+
+            opt isValidQuantityValues
+                updatestock -> updatestock: processDateInput()
+                updatestock --> updatestock: isValidExpDate
+
+                opt isValidExpDate
+                    updatestock -> updatestock: setUpdatesByStockId(stock)
                     deactivate updatestock
-                    opt isValidExpDate
-                        updatestock -> updatestock: setUpdatesByStockId(stock)
-                        activate updatestock
-                        deactivate updatestock
-                    end
                 end
             end
         end
-
-    deactivate updatestock
+    end
 
 @enduml

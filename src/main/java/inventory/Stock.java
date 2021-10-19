@@ -1,6 +1,6 @@
 package inventory;
 
-import parser.DateParser;
+import utilities.parser.DateParser;
 
 import java.util.Date;
 
