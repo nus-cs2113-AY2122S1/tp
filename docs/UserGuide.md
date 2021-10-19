@@ -10,11 +10,13 @@
   5. [Mark an exercise done: `done`](#5-mark-an-exercise-done-done)
   6. [Show all exercises from a workout: `display`](#6-show-all-exercises-from-a-workout-display)
   7. [Removing an exercise from a workout: `remove`](#7-removing-an-exercise-from-a-workout-remove)
-  8. [Entering into a Workout: `enter`](#8-entering-into-a-workout-enter)
-  9. [Exiting from a workout: `back`](#9-exiting-from-a-workout-back)
-  10. [Exiting the application: `bye`](#10-exiting-the-application-bye)
-  11. [Saving data](#11-saving-data)
-  12. [Editable data file](#12-editable-data-file)
+  8. [Searching for workouts and exercises: `search`](#8-searching-for-workouts-and-exercises-search)
+  9. [Entering into a Workout: `enter`](#9-entering-into-a-workout-enter)
+  10. [Exiting from a workout: `back`](#10-exiting-from-a-workout-back)
+  11. [Recommend a workout: `recommend`](#11-recommend-a-workout-recommend)
+  12. [Exiting the application: `bye`](#12-exiting-the-application-bye)
+  13. [Saving data](#13-saving-data)
+  14. [Editable data file](#14-editable-data-file)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -190,8 +192,32 @@ ________________________________________________________
 Removed exercise: [X] lunges | 4 sets of 8 reps
 ________________________________________________________
 ```
+### 8. Searching for workouts and exercises: `search`
+Displays workouts or exercises that contain the specified keyword with the workout or exercise index the keyword.\n"
 
-### 8. Entering into a Workout: `enter`
+Format: `search [KEYWORD]`
+
+Example of usage: 
+
+`search squats` = search for workout names and exercise names that contain "squats"
+`search leg day` = search for workout names and exercise names that contain "leg day"
+
+Expected outcome:
+
+```
+search squats
+________________________________________________________
+Matching exercises in 1. leg day
+1. [ ] squats | 5 sets of 10 reps
+________________________________________________________
+search leg day
+________________________________________________________
+Matching workouts: 
+1. leg day finish by: 21 Oct 2021
+________________________________________________________
+```
+
+### 9. Entering into a Workout: `enter`
 Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
 in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
 
@@ -201,7 +227,7 @@ Example of usage:
 * `enter 1` = enter into the workout with index 1
 * `enter 2` = enter into the workout with index 2
 
-### 9. Exiting from a workout: `back`
+### 10. Exiting from a workout: `back`
 Allows you to exit back into the main view once you have entered into a workout.
 
 Format `back`
@@ -250,10 +276,40 @@ ________________________________________________________
 			
 ```
 
-### 10. Exiting the application: `bye`
+### 11. Recommend a workout: `recommend`
+
+Provides a given set of workouts with exercises.
+
+Format: `recommend [beginner/ intermediate/ pro]`
+
+Example of usage: `recommend beginner`
+
+Expected outcome:
+```
+recommend beginner
+Arm
+_____________________________________
+| Index| Exercise name   | Sets| Reps|
+|====================================|
+| 1    | Normal Pushups  | 2   | 8   |
+| 2    | Inclined Pushups| 2   | 8   |
+| 3    | Bench Dips      | 2   | 8   |
+| 4    | Bear Crawl      | 2   | 8   |
+________________________________________________________
+Abs
+__________________________________
+| Index| Exercise name| Sets| Reps|
+|=================================|
+| 1    | Situps       | 2   | 8   |
+| 2    | Plank        | 2   | 8   |
+________________________________________________________
+```
+
+### 12. Exiting the application: `bye`
+
 Allows you to exit from the application.
 
-Format `bye`
+Format: `bye`
 
 Expected outcome:
 ```
@@ -263,13 +319,13 @@ Bye. Hope you get your desired body soon, have a great day!
 ________________________________________________________
 ```
 
-### 11. Saving data
+### 13. Saving data
 
 GetJackd's workout list data is saved in the hard disk automatically after any command that changes the data (Adding 
 or editing workouts and exercises). There is no need to
 save manually.
 
-### 12. Editable data file
+### 14. Editable data file
 
 GetJackd's data is saved as a json file `[JAR file location]/data/workouts.json`. Advanced users are welcome to update data
 directly by editing that data file.
@@ -292,6 +348,7 @@ saved file format (json), GetJack'd will not run.
 | Create workout                                   | Format: `create [WORKOUT_DESCRIPTION], [DEADLINE]` <br />Example: `create abs workout, 2021-12-25`                                         |
 | Delete workout                                   | Format: `delete [WORKOUT_INDEX]` <br />Example: `delete 1`                                                 |
 | Display exercises in <br /> a particular workout | Format: `display [WORKOUT_INDEX]` <br />Example: `display 1`                                               |
+| Recommend workout                                | Format: `recommend [beginner/ intermediate/ pro]` <br />Example: `recommend beginner`                      |
 | Add exercise                                     | Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]` <br /> Example: `add Push-ups, 5 10, 1` |
 | Mark exercise as done                            | Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]` <br />Example: `done 5, 1`                                |
 | Remove exercise                                  | Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]` <br />Example: `remove 5, 1`                            |
