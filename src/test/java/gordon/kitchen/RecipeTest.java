@@ -24,7 +24,8 @@ class RecipeTest {
                 + "Method: " + System.lineSeparator()
                 + "1. Boil water" + System.lineSeparator()
                 + "2. Grind beans" + System.lineSeparator()
-                + "3. Pour water over grounds" + System.lineSeparator();
+                + "3. Pour water over grounds" + System.lineSeparator()
+                + "Tags: " + System.lineSeparator();
         assertEquals(expected, r.toString());
     }
 
@@ -51,7 +52,8 @@ class RecipeTest {
                     + "2. Water" + System.lineSeparator()
                     + "Method: " + System.lineSeparator()
                     + "1. Boil water" + System.lineSeparator()
-                    + "2. Pour water over grounds" + System.lineSeparator();
+                    + "2. Pour water over grounds" + System.lineSeparator()
+                    + "Tags: " + System.lineSeparator();
             assertEquals(expected, r.toString());
             r.removeStep(3098);
             fail();
