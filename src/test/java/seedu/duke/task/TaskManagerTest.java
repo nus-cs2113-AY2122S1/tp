@@ -76,6 +76,22 @@ class TaskManagerTest {
     }
 
     @Test
+    void testSortTasklistByTaskType() {
+
+        HashMap<String, String> commandArguments = new HashMap<>();
+        commandArguments.put("by", "type");
+
+        try {
+            System.out.println("Testing Sort by Task Type Command");
+            TaskManager.sortTasklist(commandArguments);
+            System.out.println(TaskManager.listTasklist());
+        } catch (Exception e) {
+            System.out.println("Exception occurred");
+        }
+
+    }
+
+    @Test
     void sortTasklist_ThrowsException_IfMissingByFlag() {
 
         HashMap<String, String> commandArguments = new HashMap<>();

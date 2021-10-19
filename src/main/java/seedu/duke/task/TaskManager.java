@@ -59,25 +59,36 @@ public class TaskManager {
         }
 
         switch (sortCriteria) {
+        case "type":
+            SortByTaskType sortByTaskType = new SortByTaskType();
+            Collections.sort(taskList, sortByTaskType);
+            break;
         case "description":
             SortByDescription sortByDescription = new SortByDescription();
             Collections.sort(taskList, sortByDescription);
-            return "Sorted Tasklist by Description";
+            break;
         case "priority":
             SortByPriority sortByPriority = new SortByPriority();
             Collections.sort(taskList, sortByPriority);
-            return "Sorted Tasklist by Priority";
+            break;
         default:
             return "The sort criteria entered is not valid";
+        }
+
+        return "[!] Tasklist has been sorted by " + sortCriteria;
+    }
+
+    public static class SortByTaskType implements Comparator<Task> {
+        @Override
+        public int compare(Task o1, Task o2) {
+            return o1.getTaskType().name().compareTo(o2.getTaskType().name());
         }
     }
 
     public static class SortByDescription implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
-
             return o1.getDescription().compareTo(o2.getDescription());
-
         }
     }
 
