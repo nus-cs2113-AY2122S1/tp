@@ -18,7 +18,8 @@
 
 ## Design
 ###Architecture
-![Architecture Diagram]("/images/Architecture.png")
+
+![Architecture Diagram](images/Architecture.png)
 
 The **architecture diagram** above presents a high-level overview of CCA Manager.
 
@@ -35,7 +36,7 @@ The **architecture diagram** above presents a high-level overview of CCA Manager
 
 The *sequence diagram* below shows how various components of the architecture interact with one another when a user inputs a **valid** command `"add /m Bob /s A01231234B /p 98765432"`
 
-![Architecture Sequence Diagram]("/images/ArchitectureSequence.png")
+![Architecture Sequence Diagram](images/ArchitectureSequence.png)
 
 *Note: More information will be updated in the future upon completion of v2.0*
 
