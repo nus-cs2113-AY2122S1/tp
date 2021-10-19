@@ -113,4 +113,8 @@ public class CommonUtils {
         }
         return false;
     }
+
+    public static boolean isStringNullOrEmpty(String string) {
+        return string == null || string.isBlank();
+    }
 }

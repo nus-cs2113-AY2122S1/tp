@@ -2,16 +2,13 @@ package terminus.command;
 
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
+import terminus.module.ModuleManager;
 import terminus.ui.Ui;
 
 public abstract class Command {
 
     protected String arguments;
-
-    public Command() {
-
-    }
+    private String moduleName;
 
     /**
      * Returns the format for the command.
@@ -39,15 +36,32 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command.
-     * Prints the required result to the Ui.
+     * Executes the command. Prints the required result to the Ui.
      *
-     * @param ui The Ui object to send messages to the users.
-     * @param module The NusModule contain the ContentManager of all notes and schedules.
+     * @param ui            The Ui object to send messages to the users.
+     * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
-     * @throws InvalidCommandException when the command could not be found.
+     * @throws InvalidCommandException  when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
      */
-    public abstract CommandResult execute(Ui ui, NusModule module)
+    public abstract CommandResult execute(Ui ui, ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException;
+
+    /**
+     * Returns the module name.
+     *
+     * @return The String containing the module name
+     */
+    public String getModuleName() {
+        return moduleName;
+    }
+
+    /**
+     * Sets the module name.
+     *
+     * @param moduleName The String containing the module name to set
+     */
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
 }

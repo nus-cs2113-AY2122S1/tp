@@ -1,6 +1,8 @@
 invalid
 note invalid
 invalid
+module add "test"
+go test
 note add a
 note add "CS2113T" "Week 8 test"
 note view

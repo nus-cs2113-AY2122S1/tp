@@ -1,4 +1,4 @@
-package terminus.command.link;
+package terminus.command.content.link;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,22 +11,26 @@ import terminus.command.CommandResult;
 import terminus.content.Link;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
+import terminus.module.ModuleManager;
 import terminus.parser.LinkCommandParser;
 import terminus.ui.Ui;
 
 public class ViewLinkCommandTest {
 
+    Class<Link> type = Link.class;
+
     private LinkCommandParser linkCommandParser;
-    private NusModule nusModule;
+    private ModuleManager moduleManager;
     private Ui ui;
 
-    Class<Link> type = Link.class;
+    private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
         this.linkCommandParser = LinkCommandParser.getInstance();
-        this.nusModule = new NusModule();
+        this.linkCommandParser.setModuleName(tempModule);
+        this.moduleManager = new ModuleManager();
+        moduleManager.setModule(tempModule);
         this.ui = new Ui();
     }
 
@@ -35,13 +39,13 @@ public class ViewLinkCommandTest {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
-            CommandResult addLinkResult = addLinkCommand.execute(ui, nusModule);
+            CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
-        assertEquals(5, nusModule.getContentManager(type).getTotalContents());
+        assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
 
         Command viewLinkCommand = linkCommandParser.parseCommand("view");
-        CommandResult viewLinkResult = viewLinkCommand.execute(ui, nusModule);
+        CommandResult viewLinkResult = viewLinkCommand.execute(ui, moduleManager);
         assertTrue(viewLinkResult.isOk());
     }
 
@@ -50,17 +54,17 @@ public class ViewLinkCommandTest {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
-            CommandResult addLinkResult = addLinkCommand.execute(ui, nusModule);
+            CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
-        assertEquals(5, nusModule.getContentManager(type).getTotalContents());
+        assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
 
         Command viewLinkCommand = linkCommandParser.parseCommand("view 1");
-        CommandResult viewLinkResult = viewLinkCommand.execute(ui, nusModule);
+        CommandResult viewLinkResult = viewLinkCommand.execute(ui, moduleManager);
         assertTrue(viewLinkResult.isOk());
 
         viewLinkCommand = linkCommandParser.parseCommand("view 5");
-        viewLinkResult = viewLinkCommand.execute(ui, nusModule);
+        viewLinkResult = viewLinkCommand.execute(ui, moduleManager);
         assertTrue(viewLinkResult.isOk());
     }
 
@@ -69,10 +73,10 @@ public class ViewLinkCommandTest {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
-            CommandResult addLinkResult = addLinkCommand.execute(ui, nusModule);
+            CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
-        assertEquals(5, nusModule.getContentManager(type).getTotalContents());
+        assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
 
         assertThrows(InvalidArgumentException.class, () -> linkCommandParser.parseCommand("view -1"));
         assertThrows(InvalidArgumentException.class, () -> linkCommandParser.parseCommand("view X"));
