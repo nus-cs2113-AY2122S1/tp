@@ -119,9 +119,9 @@ public class Parser {
      * e.g.
      * string: "add_module c/CS2113T n/Software Engineering and Object-oriented Programming", argumentKeys: {"c","n"}
      * Result: HashMap(
-     * "c":"CS2113T",
-     * "n":"Software Engineering and Object-oriented Programming"
-     * )
+     *             "c":"CS2113T",
+     *             "n":"Software Engineering and Object-oriented Programming"
+     *         )
      *
      * @param string       The string to parse.
      * @param argumentKeys The argument keys to find.
