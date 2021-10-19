@@ -1,28 +1,38 @@
 package seedu.duke;
 
 import seedu.duke.command.CommandNames;
-import seedu.duke.command.SortDishCommand;
-import seedu.duke.exceptions.CommandNotAvailableException;
+import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputParser {
-    public CommandNames getCommandName(String input) throws CommandNotAvailableException {
+    public CommandNames getCommandName(String input) throws FoodoramaException {
         for (CommandNames command : CommandNames.values()) {
             if (input.startsWith(command.getName())) {
                 return command;
             }
         }
-        throw new CommandNotAvailableException();
+        throw new FoodoramaException("Sorry, that is an invalid command.");
     }
 
-    public ArrayList<String> getParameters(String input, CommandNames inputCommand) {
+    public ArrayList<String> getParameters(String input, CommandNames inputCommand) throws FoodoramaException {
+        Ui ui  = new Ui();
         ArrayList<String> parameters = new ArrayList<>();
 
         //Replace the first command part with null, and you'll be left with params
         String parameterString = input.replaceFirst(inputCommand.getName(), "").trim();
         switch (inputCommand) {
+
+        //No parameter commands
+        case CLEAR_DISH:
+        case CLEAR_INGR:
+        case CLEAR_ALL:
+        case HELP:
+            if (!parameterString.isBlank()) {
+                ui.printInvalidParamMsg();
+            }
+            break;
 
         //One parameter commands just add the parameterString
         case GRAPH:
@@ -33,13 +43,8 @@ public class InputParser {
         case DELETE_INGR:
         case ADD_INGR:
         case ADD_DISH:
-        case HELP:
-        case CLEAR_DISH:
-        case CLEAR_INGR:
-        case CLEAR_ALL:
         case SORT_DISH:
         case LIST:
-
             parameters.add(parameterString);
             break;
 
@@ -53,8 +58,8 @@ public class InputParser {
             break;
 
         case FIND:
-            String[] splitFindInputs = parameterString.split(" ", 2);
-            parameters.addAll(List.of(splitFindInputs));
+            String[] splitBySpace = parameterString.split(" ", 2);
+            parameters.addAll(List.of(splitBySpace));
             break;
 
         default:

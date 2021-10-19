@@ -12,7 +12,6 @@ public class SortIngrCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) {
-        Ui ui = new Ui();
         IngredientList.ingredientList.sort(ingrComparator);
     }
 }

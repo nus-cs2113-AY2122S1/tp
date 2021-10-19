@@ -25,7 +25,6 @@ public class ClearAllCommand extends Command {
         IngredientList.clearList();
         logger.log(Level.INFO, "Successfully cleared both lists");
 
-
         ui.printAllCleared();
         logger.log(Level.INFO, "End of process");
     }
