@@ -17,6 +17,7 @@ public class TaskManager {
 
     private static ArrayList<Task> taskList = new ArrayList<>(128);
 
+    //@@author APZH
     public static String listTasklist() throws EmptyTasklistException {
         Log.info("listTasklist method called");
         assert taskList.size() >= 0 : "Tasklist cannot be negative";
@@ -38,6 +39,7 @@ public class TaskManager {
         return tasks;
     }
 
+    //@@author APZH
     public static String sortTasklist(HashMap<String, String> criteria) throws EmptyTasklistException,
             SortFormatException, EmptySortCriteriaException {
         Log.info("sortTasklist method called");
@@ -79,6 +81,7 @@ public class TaskManager {
         return "[!] Tasklist has been sorted by " + sortCriteria;
     }
 
+    //@@author APZH
     public static class SortByTaskType implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
@@ -86,6 +89,7 @@ public class TaskManager {
         }
     }
 
+    //@@author APZH
     public static class SortByDescription implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
@@ -93,6 +97,7 @@ public class TaskManager {
         }
     }
 
+    //@@author APZH
     public static class SortByPriority implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
