@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
 import seedu.command.flags.SearchFlags;
+import seedu.exceptions.FetchException;
 import seedu.module.Module;
 import seedu.storage.ModStorage;
 import seedu.ui.TextUi;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 
 public class NusMods {
 
-    private static Logger logger = Logger.getLogger("");
+    private static final Logger logger = Logger.getLogger("");
 
     private static final String MODULE_API = "https://api.nusmods.com/v2/2021-2022/modules/";
 
@@ -54,7 +55,11 @@ public class NusMods {
     public static boolean isMatch(Module module, String searchTerm, SearchFlags searchFlags) throws IOException {
         if (module.meetsPreliminaryConditions(searchTerm, searchFlags)) {
             String moduleCode = module.getModuleCode();
-            module = fetchModOnline(moduleCode);
+            try {
+                 module = fetchModOnline(moduleCode);
+            } catch (FetchException e) {
+                throw new IOException();
+            }
             if (module.meetsSecondaryConditions(searchFlags)) {
                 TextUi.printModBriefDescription(module);
                 return true;
@@ -67,15 +72,15 @@ public class NusMods {
      * Fetches a mod from NUSMods, saves it, then returns it.
      * @param moduleCode code of the module to fetch.
      * @return module that was fetched from NUSMods.
-     * @throws IOException if there is no connection.
+     * @throws FetchException if there is no connection.
      */
-    public static Module fetchModOnline(String moduleCode) throws IOException {
+    public static Module fetchModOnline(String moduleCode) throws FetchException {
         try {
             InputStream inputStream = getOnlineModInfo(moduleCode);
             ModStorage.saveModInfo(moduleCode, inputStream);
             return ModStorage.loadModInfo(moduleCode);
         } catch (Exception e) {
-            throw new IOException("Unable to fetch module");
+            throw new FetchException("Unable to fetch module");
         }
     }
 
@@ -114,7 +119,12 @@ public class NusMods {
      * @throws IOException if there is no connection.
      */
     public static void showModOnline(String moduleCode) throws IOException {
-        Module module = fetchModOnline(moduleCode);
+        Module module;
+        try {
+            module = fetchModOnline(moduleCode);
+        } catch (FetchException e) {
+            throw new IOException();
+        }
         TextUi.printModFullDescription(module);
     }
 
@@ -157,7 +167,7 @@ public class NusMods {
         try {
             module = fetchModOnline(moduleCode);
             logger.log(Level.INFO, "Online search done");
-        } catch (IOException e) {
+        } catch (FetchException e) {
             TextUi.printNoConnectionMessage();
             logger.log(Level.INFO, "Unable to retrieve data from NUSMods, searching offline");
             try {

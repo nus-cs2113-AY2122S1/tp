@@ -7,6 +7,9 @@ import seedu.exceptions.IntegerException;
 import java.util.ArrayList;
 
 public class AddUI {
+    private static final String LECTURE = "Lecture";
+    private static final String TUTORIAL = "Tutorial";
+    private static final String LAB = "Laboratory";
     private static final String SMALL_GAP = "         ";
     private static final String BIG_GAP = "                         ";
     private static final String LECTURE_SLOT = "Lecture Lesson Slots";
@@ -18,7 +21,6 @@ public class AddUI {
     private static final int GAP = 46;
     private static final String SPACE = " ";
     private static final String DIV = "|";
-    private static final String LAB = "lab";
     private static final String LINE = "_______________________________________   |   ";
 
     public void printLessonDetails(ArrayList<Lesson> lec, ArrayList<Lesson> tt, ArrayList<Lesson> lab,
@@ -33,9 +35,9 @@ public class AddUI {
         printLessonHeader(lec, tt, lab);
         printLessons(lectureLessons, tutorialLessons, labLessons);
         try {
-            getCommand(lec, timetable, module);
-            getCommand(tt, timetable, module);
-            getCommand(lab, timetable, module);
+            getCommand(lec, LECTURE, timetable, module);
+            getCommand(tt, TUTORIAL, timetable, module);
+            getCommand(lab, LAB, timetable, module);
         } catch (IntegerException e) {
             throw new IntegerException("Invalid Integer");
         }
@@ -83,9 +85,9 @@ public class AddUI {
         }
     }
 
-    public void getCommand(ArrayList<Lesson> lessons, Timetable timetable, Module module) throws IntegerException {
+    public void getCommand(ArrayList<Lesson> lessons, String lessonType, Timetable timetable, Module module) throws IntegerException {
         if (isArrayExist(lessons, 0)) {
-            String select = TextUi.getLessonCommand(lessons.get(0).getLessonType());
+            String select = TextUi.getLessonCommand(lessonType);
             int indexOfLesson;
             try {
                 indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
