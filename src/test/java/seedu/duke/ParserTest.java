@@ -15,7 +15,9 @@ import seedu.commands.ListExpenseCommand;
 import seedu.commands.ListIncomeCommand;
 import seedu.commands.TotalIncomeCommand;
 import seedu.entry.Expense;
+import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
+import seedu.entry.IncomeCategory;
 import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeAmountException;
@@ -76,10 +78,10 @@ public class ParserTest {
     }
 
     @Test
-    public void parseCommand_validAddExpenseCommand_returnAddExpenseCommand() {
+    public void parseCommand_validAddExpenseCommand_returnInvalidExpenseCommand() {
         Parser testParser = new Parser();
         Command underTest = testParser.parseCommand("add_ex    d/      tfshsdfh     a/          123  c/2wq2");
-        assertSame(underTest.getClass(), AddExpenseCommand.class);
+        assertSame(underTest.getClass(), InvalidCommand.class);
     }
 
     @Test
@@ -161,18 +163,18 @@ public class ParserTest {
     public void convertExpenseToData_validExpense_correctDataOutput() {
         Parser testParser = new Parser();
         LocalDate date = LocalDate.parse("2121-11-11", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        Expense testExpense = new Expense("buy book", 12.33, "qwe", date);
+        Expense testExpense = new Expense("buy book", 12.33, ExpenseCategory.FOOD, date);
         String testData = testParser.convertExpenseToData(testExpense);
-        assertEquals("E, buy book, 12.33, qwe, 2121-11-11", testData);
+        assertEquals("E, buy book, 12.33, FOOD, 2121-11-11", testData);
     }
 
     @Test
     public void convertIncomeToData_validIncome_correctDataOutput() {
         Parser testParser = new Parser();
         LocalDate date = LocalDate.parse("2121-11-11", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        Income testIncome = new Income("job", 1233.0, "qwe", date);
+        Income testIncome = new Income("job", 1233.0, IncomeCategory.ADHOC, date);
         String testData = testParser.convertIncomeToData(testIncome);
-        assertEquals("I, job, 1233.0, qwe, 2121-11-11", testData);
+        assertEquals("I, job, 1233.0, ADHOC, 2121-11-11", testData);
     }
 
     @Test
@@ -180,8 +182,8 @@ public class ParserTest {
             InvalidExpenseDataFormatException {
         Parser testParser = new Parser();
         Expense testExpense = testParser.convertDataToExpense("E, sfa, 12, q, 2121-11-11");
-        assertEquals("sfa", testExpense.getDescription());
-        assertEquals(12, testExpense.getValue());
+        assertEquals("FAIL EXPENSE", testExpense.getDescription());
+        assertEquals(9999999.0, testExpense.getValue());
     }
 
     @Test
@@ -202,8 +204,8 @@ public class ParserTest {
             InvalidIncomeDataFormatException, DateTimeException {
         Parser testParser = new Parser();
         Income testIncome = testParser.convertDataToIncome("I, sfa, 12, qwe, 2121-11-11");
-        assertEquals("sfa", testIncome.getDescription());
-        assertEquals(12, testIncome.getValue());
+        assertEquals("FAIL INCOME", testIncome.getDescription());
+        assertEquals(999999.0, testIncome.getValue());
     }
 
     @Test
