@@ -367,6 +367,10 @@ public class Ui {
         System.out.println(INVALID_PARAMETERS);
     }
 
+    public static String getHelpMsg() {
+        return HELP_ME;
+    }
+
     public void printHelpMsg() {
         System.out.println(HELP_ME);
     }
