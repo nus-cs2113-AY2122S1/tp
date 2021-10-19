@@ -70,7 +70,7 @@ public class MainParser {
             command = new HelpCommand();
             break;
         case SEARCH_COMD:
-            command = new parseSearchCommand(userInput);
+            command = parseSearchCommand(userInput);
             break;
         default:
             command = new FailedCommand(FailedCommandType.GENERAL);
@@ -108,6 +108,7 @@ public class MainParser {
         }
     }
 
+    //@@author ng-andre
     private Command parseEditContact(String userInput) { // userInput is raw user input
         contactParser = editContactParser;
         try {
@@ -178,5 +179,9 @@ public class MainParser {
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
         }
+    }
+
+    //@@author ng-andre
+    private Command parseSearchCommand(String userInput) {
     }
 }
