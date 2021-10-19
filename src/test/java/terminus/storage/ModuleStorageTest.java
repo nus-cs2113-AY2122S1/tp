@@ -18,7 +18,7 @@ import terminus.module.NusModule;
 
 public class ModuleStorageTest {
 
-    private static final Path RESOURCE_FOLDER = Path.of("src", "test", "resources");
+    /*private static final Path RESOURCE_FOLDER = Path.of("src", "test", "resources");
     private static final Path SAVE_FILE = RESOURCE_FOLDER.resolve("saveFile.json");
     private static final Path MALFORMED_FILE = RESOURCE_FOLDER.resolve("malformedFile.json");
     private static final Path VALID_FILE = RESOURCE_FOLDER.resolve("validFile.json");
@@ -64,14 +64,14 @@ public class ModuleStorageTest {
         assertTextFilesEqual(SAVE_FILE, VALID_FILE);
     }
 
-    /**
+    *//**
      * Asserts whether the text in the two given files are the same.
      * Ignores any differences in line endings.
      * Taken from: https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/util/TestUtil.java#L128
-     */
+     *//*
     public static void assertTextFilesEqual(Path path1, Path path2) throws IOException {
         List<String> list1 = Files.readAllLines(path1);
         List<String> list2 = Files.readAllLines(path2);
         assertEquals(String.join("\n", list1), String.join("\n", list2));
-    }
+    }*/
 }

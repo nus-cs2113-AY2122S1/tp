@@ -17,11 +17,14 @@ import terminus.content.ContentManager;
 import terminus.content.Note;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
+import terminus.parser.MainCommandParser;
 
 public class ModuleStorage {
 
     private final Path filePath;
     private final Gson gson;
+
+    private static ModuleStorage moduleStorage;
 
     /**
      * Initializes the ModuleStorage with a specific Path to the file.
@@ -31,6 +34,11 @@ public class ModuleStorage {
     public ModuleStorage(Path filePath) {
         this.filePath = filePath;
         this.gson = new GsonBuilder().setPrettyPrinting().create();
+        moduleStorage = this;
+    }
+
+    public static ModuleStorage getInstance() {
+        return moduleStorage;
     }
 
     private void initializeFile() throws IOException {
@@ -135,6 +143,7 @@ public class ModuleStorage {
         if (!Files.isDirectory(modDirPath)) {
             Files.createDirectories(modDirPath);
         }
+        deleteAllFilesInDirectory(modDirPath);
         ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
         ArrayList<Note> noteArrayList = contentManager.getContents();
         for (Note note : noteArrayList) {
@@ -142,6 +151,14 @@ public class ModuleStorage {
             assert CommonUtils.isValidFileName(note.getName());
             Path filePath = Paths.get(modDirPath.toString(), note.getName() + ".txt");
             Files.writeString(filePath, note.getData());
+        }
+    }
+
+    private void deleteAllFilesInDirectory(Path directoryPath) {
+        File folder = new File(directoryPath.toString());
+        File[] listOfFiles = folder.listFiles();
+        for (File file : listOfFiles) {
+            file.delete();
         }
     }
 
