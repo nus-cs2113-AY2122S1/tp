@@ -1,0 +1,64 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+'abstract class DGS
+'abstract AbstractCollection
+'interface List
+'interface Collection
+'
+'List <|-- AbstractList
+'Collection -- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+
+Content <|-- Note
+Content <|-- Link
+ContentManager --> "0..*" Content
+ContentManager ..  Note
+ContentManager ..  Link
+
+NusModule -> ContentManager: noteManager
+NusModule -> ContentManager: linkManager
+
+ModuleManager  --> "0..*" NusModule :  has >
+
+class ModuleManager {
+  + getAllModules(): String []
+  + getModule(moduleName: String): NusModule
+  + removeModule(moduleName: String): void
+  + setModule(moduleName: String): void
+}
+
+class NusModule {
+  + getContentManager (type: Class<T>): ContentManager<T>
+}
+
+class ContentManager <T extends Content> {
+  + add(content: T): void
+  + deleteContent(contentNumber: int): String
+  + getContentData(contentNumber: int): String
+  + getContents(contents: ArrayList<T> ): String
+  + getTotalContents() : int
+  + listAllContents(): String
+  + setContent(contents: ArrayList<T> ): void
+}
+
+class Content {
+  # name: String
+  # data: String
+  + Content(name: String)
+}
+
+class Link {
+  - day: String
+  - startTime: LocalTime
+  - link: String
+}
+
+class Note {
+}
+@enduml
