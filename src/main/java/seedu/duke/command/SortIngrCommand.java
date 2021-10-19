@@ -9,6 +9,7 @@ import java.util.Comparator;
 
 public class SortIngrCommand extends Command {
     Comparator<Ingredient> ingrComparator;
+
     @Override
     public void execute(ArrayList<String> parameters) {
         Ui ui = new Ui();
