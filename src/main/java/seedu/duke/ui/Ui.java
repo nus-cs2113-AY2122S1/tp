@@ -32,6 +32,6 @@ public class Ui {
 
     public static void welcome() {
         System.out.println(AsciiConstants.GLOBE);
-        System.out.println();
+        System.out.println(AsciiConstants.LOGO);
     }
 }
