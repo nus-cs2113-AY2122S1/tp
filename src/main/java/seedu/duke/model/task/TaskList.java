@@ -1,7 +1,6 @@
 package seedu.duke.model.task;
 
 import seedu.duke.commons.core.Messages;
-import seedu.duke.model.task.exceptions.DeserializeTaskException;
 import seedu.duke.model.task.exceptions.TaskIndexException;
 import seedu.duke.ui.Ui;
 

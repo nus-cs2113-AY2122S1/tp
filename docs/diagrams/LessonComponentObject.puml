@@ -1,0 +1,41 @@
+@startuml
+class Lesson {
+    title : String
+    dayOfTheWeek : String
+    startTime : String
+    endTime : String
+    meetingUrl : String
+
+    serialize() : String
+    {static} deserialize() : String
+}
+
+class LessonList {
+    getSize() : int
+    getLesson(lessonIndex: int) : Lesson
+    isEmpty() : boolean
+    addLesson(newLesson: Lesson)
+    deleteLesson(lessonIndex: int)
+    deleteAllLessons()
+    filterLessonsByKeyword(keyword: String): LessonList
+    filterLessonsByPeriod(period: String): LessonList
+    serialize()
+    {static} deserialize(ui: Ui, data: List<String>)
+}
+
+LessonList -> "*" Lesson : lessonList
+
+class AddLessonCommand
+class DeleteLessonCommand
+class FindLessonCommand
+class ListLessonCommand
+AddLessonCommand ..> Lesson
+AddLessonCommand ..> LessonList
+DeleteLessonCommand ..>Lesson
+DeleteLessonCommand ..> LessonList
+FindLessonCommand ..> Lesson
+FindLessonCommand ..> LessonList
+ListLessonCommand ..> Lesson
+ListLessonCommand ..> LessonList
+
+@enduml

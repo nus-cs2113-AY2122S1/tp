@@ -6,6 +6,36 @@
 
 ## Design & implementation
 
+### Model component
+The `model` package consists of three components: `Lesson`, `Task` and `Module`.
+#### Lesson component
+**API** : [`Lesson.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/lesson/Lesson.java)
+![LessonComponentObject](images/LessonComponentObject.png)
+
+The `Lesson` component,
+* stores data specific to a lesson as entered by the user 
+* stores all `Lesson` objects created by user commands in a `LessonList` object
+* does not depend on any of the other three components
+
+### Module component
+**API** [`Module.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/module/Module.java)
+![ModuleComponentObject](images/ModuleComponentObject.png)
+
+The `Module` component,
+* stores information regarding modules added by the user and on the NUSMods API
+* does not depend on any of the other three components
+* `FullModuleList` stores all `Module` objects corresponding to the modules found on NUSMods
+* `ModuleList` stores all user-added `Module` objects
+
+### Task Component
+**API** [`Task.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/task/Task.java)
+![TaskComponentObject](images/TaskComponentObject.png)
+
+The `Task` component,
+* stores data specific to a task as entered by the user
+* stores all `Task` objects as createed by user commands in a `TaskList` object
+* does not depend on any of the other three components
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/storage/Storage.java)  
