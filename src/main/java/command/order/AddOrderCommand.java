@@ -42,6 +42,12 @@ public class AddOrderCommand extends Command {
         ArrayList<Medicine> medicines = Medicine.getInstance();
         Storage storage = Storage.getInstance();
 
+        boolean nameExists = false;
+        String nameToAdd = parameters.get(CommandParameters.NAME);
+        String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
+        int orderQuantity = Integer.parseInt(quantityToAdd);
+        String dateToAdd = parameters.get(CommandParameters.DATE);
+
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY};
         String[] optionalParameter = {CommandParameters.DATE};
 
@@ -59,30 +65,57 @@ public class AddOrderCommand extends Command {
             return;
         }
 
-        String nameToAdd = parameters.get(CommandParameters.NAME);
-        String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
-        String dateToAdd = parameters.get(CommandParameters.DATE);
-
-        int maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
-        try {
-            int orderQuantity = Integer.parseInt(quantityToAdd);
-            if (orderQuantity > maxQuantity) {
-                ui.print("Unable to add order! Order quantity more than maximum order quantity.");
-                return;
+        if (parameters.containsKey(CommandParameters.NAME)) {
+            nameToAdd = parameters.get(CommandParameters.NAME);
+            for (Medicine medicine : medicines) {
+                if (medicine instanceof Order && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)) {
+                    nameExists = true;
+                    break;
+                }
             }
+        }
 
+        if (nameExists) {
+            int existingOrdersQuantity = OrderManager.getTotalOrderQuantity(medicines, nameToAdd);
+            int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
+            int maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
+
+            if (orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity) {
+                if (dateToAdd == null) {
+                    Date defaultDate = null;
+                    defaultDate = new Date(); //order date will be today's date if no user input for date parameter
+                    addOrder(ui, medicines, nameToAdd, orderQuantity, defaultDate);
+                    return;
+                }
+
+                try {
+                    Date orderDate = null;
+                    orderDate = DateParser.stringToDate(dateToAdd);
+                    addOrder(ui, medicines, nameToAdd, orderQuantity, orderDate);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                ui.print("Order name exists, unable to add order as total order quantity exceeds maximum " +
+                        "stock quantity.\n");
+            }
+        }
+        else {
             if (dateToAdd == null) {
                 Date defaultDate = null;
-                defaultDate = new Date(); //order date will be today's date if no user input for date parameter
+                defaultDate = new Date();
                 addOrder(ui, medicines, nameToAdd, orderQuantity, defaultDate);
                 return;
             }
 
-            Date orderDate = null;
-            orderDate = DateParser.stringToDate(dateToAdd);
-            addOrder(ui, medicines, nameToAdd, orderQuantity, orderDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
+            try {
+                Date orderDate = null;
+                orderDate = DateParser.stringToDate(dateToAdd);
+                addOrder(ui, medicines, nameToAdd, orderQuantity, orderDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 
