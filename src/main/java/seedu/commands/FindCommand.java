@@ -3,6 +3,7 @@ package seedu.commands;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
+import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
@@ -17,7 +18,7 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
     
-    public void execute(FinancialTracker finances, Ui ui) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager) {
         ArrayList<Entry> entries = finances.getEntries();
         ArrayList<Entry> filteredEntries = new ArrayList<>();
         

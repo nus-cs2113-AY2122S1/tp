@@ -2,6 +2,7 @@ package seedu.commands;
 
 import seedu.entry.Income;
 import seedu.exceptions.IncomeEntryNotFoundException;
+import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
@@ -13,7 +14,7 @@ public class DeleteIncomeCommand extends Command {
     }
 
     @Override
-    public void execute(FinancialTracker finances, Ui ui) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager) {
         try {
             Income deletedIncome = finances.removeIncome(incomeNumber);
             ui.printIncomeDeleted(deletedIncome);
