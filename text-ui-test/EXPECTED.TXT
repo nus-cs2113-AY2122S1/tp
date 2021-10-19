@@ -12,7 +12,6 @@ Method:
 2. Cut mozzarella into similar slices
 3. Arrange slices on plate
 4. Drizzle with olive oil
-Tags: 
 GordonException: Command given cannot be recognized.
 GordonException: Please use the word 'ingredients' before adding ingredients.
 GordonException: Command given cannot be recognized.
@@ -31,7 +30,6 @@ Method:
 2. Mix all ingredients together in a bowl
 3. Put in preheated oven for 20 mins
 4. Remove and let cool for 10 mins
-Tags: 
 GordonException: No duplicate recipe names allowed.
 1. Caprese Salad
 2. Cookies
@@ -49,7 +47,6 @@ Method:
 2. Mix all ingredients together in a bowl
 3. Put in preheated oven for 20 mins
 4. Remove and let cool for 10 mins
-Tags: 
 ====================
 Finding recipes called meatballs.....
 GordonException: Search returns no result.
@@ -64,7 +61,6 @@ Method:
 1. Preheat pan
 2. Add olive oil
 3. Add fish and fry on both sides until crispy
-Tags: 
 Searching by ingredient...
 1. Caprese Salad
 2. Fried Fish
@@ -84,7 +80,6 @@ Method:
 1. Preheat pan
 2. Add olive oil
 3. Add fish and fry on both sides until crispy
-Tags: 
 ====================
 GordonException: Index is not a valid integer.
 Setting calories...
@@ -92,7 +87,7 @@ GordonException: Search returns no result.
 Setting difficulty...
 Difficulty set successfully.
 Finding recipes called caprese.....
---------------------
+====================
 Caprese Salad
 Difficulty: 
 Easy
@@ -107,8 +102,8 @@ Method:
 1. Cut tomatoes into 1 inch slices
 2. Cut mozzarella into similar slices
 3. Arrange slices on plate
-4. Drizzle with olive oil 
---------------------
+4. Drizzle with olive oil
+====================
 Setting difficulty...
 GordonException: Search returns no result.
 GordonException: Please input a valid difficulty.
@@ -122,20 +117,20 @@ GordonException: Please input calories for the recipe.
 GordonException: Please input integer for calories.
 Added Duck Rice recipe! Yum!
 Duck Rice
-Calories:500kcal
+Calories (kcal): 
+500
 Ingredients needed: 
 1. Duck
 Method: 
 1. DucknRice
-Tags: 
 Added Chicken Rice recipe! Yum!
 Chicken Rice
-Calories:500kcal
+Calories (kcal): 
+500
 Ingredients needed: 
 1. Chicken
 Method: 
 1. ChickennRice
-Tags: 
 GordonException: Please use 'tag / recipeName / tagName1 + tagName2 + ...'
 GordonException: Please use 'tag / recipeName / tagName1 + tagName2 + ...'
 GordonException: Please input name of recipe.
@@ -162,12 +157,12 @@ Successfully untagged Chicken Rice under Favorite
 Finding recipes called Chicken Rice.....
 ====================
 Chicken Rice
-Calories:500kcal
+Calories (kcal): 
+500
 Ingredients needed: 
 1. Chicken
 Method: 
 1. ChickennRice
-Tags: 
 ====================
 1. Hawker Food
 2. Favorite
@@ -180,12 +175,12 @@ GordonException: No such tag exists.
 Finding recipes called Duck Rice.....
 ====================
 Duck Rice
-Calories:500kcal
+Calories (kcal): 
+500
 Ingredients needed: 
 1. Duck
 Method: 
 1. DucknRice
-Tags: 
 ====================
 Successfully tagged Chicken Rice under Hawker Food
 Successfully tagged Chicken Rice under Favorite
@@ -201,7 +196,8 @@ Successfully deleted Favorite
 Finding recipes called Duck Rice.....
 ====================
 Duck Rice
-Calories:500kcal
+Calories (kcal): 
+500
 Ingredients needed: 
 1. Duck
 Method: 

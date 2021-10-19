@@ -177,8 +177,8 @@ public class Recipe {
             outputString.append(System.lineSeparator());
         }
 
-        outputString.append("Tags: ").append(System.lineSeparator());
         if (recipeTags.size() > 0) {
+            outputString.append("Tags: ").append(System.lineSeparator());
             for (int k = 0; k < recipeTags.size(); k++) {
                 outputString.append(k + 1).append(". ");
                 outputString.append(recipeTags.get(k));
