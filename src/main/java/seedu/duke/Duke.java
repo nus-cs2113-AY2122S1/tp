@@ -2,13 +2,14 @@ package seedu.duke;
 
 import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
-import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
-import seedu.duke.storage.Storage;
+import seedu.duke.storage.ModuleStorage;
+import seedu.duke.storage.SelectedModuleStorage;
+import seedu.duke.storage.SelectedUniversityStorage;
+import seedu.duke.storage.UniversityStorage;
 import seedu.duke.universities.UniversityList;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
@@ -19,10 +20,12 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         try {
-            UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
-            ModuleList moduleMasterList = new ModuleList(Storage.loadModules());//ArrayList<>(Storage.loadModules());
-            UniversityList universitySelectedList = new UniversityList();
-            ModuleList moduleSelectedList = new ModuleList();
+            UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
+            ModuleList moduleMasterList = new ModuleList(ModuleStorage.load());
+            UniversityList universitySelectedList = new UniversityList(
+                    SelectedUniversityStorage.load());
+            ModuleList moduleSelectedList = new ModuleList(
+                    SelectedModuleStorage.load());
             Parser mainParser = new Parser(universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
             Command cmd = null;

@@ -3,7 +3,8 @@ package seedu.duke.commands;
 import seedu.duke.enumerations.ListType;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
-import seedu.duke.storage.Storage;
+import seedu.duke.storage.ModuleStorage;
+import seedu.duke.storage.UniversityStorage;
 import seedu.duke.ui.Ui;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
@@ -46,7 +47,7 @@ public class ListCommand extends Command {
             }
             break;
         case ALLUNIS:
-            ArrayList<University> allUniversityList = Storage.loadUniversities();
+            ArrayList<University> allUniversityList = UniversityStorage.load();
             System.out.println("Here are all the universities available for you:");
             assert allUniversityList.size() > 0;
             for (int i = 0; i < allUniversityList.size(); i++) {
@@ -55,7 +56,7 @@ public class ListCommand extends Command {
             }
             break;
         case ALLMODS:
-            ArrayList<Module> allModuleList = Storage.loadModules();
+            ArrayList<Module> allModuleList = ModuleStorage.load();
             System.out.println("Here are all the modules available for you:");
             assert allModuleList.size() > 0;
             for (int i = 0; i < allModuleList.size(); i++) {

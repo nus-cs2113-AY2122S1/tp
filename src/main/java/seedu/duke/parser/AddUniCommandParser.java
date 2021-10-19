@@ -6,6 +6,7 @@ import seedu.duke.modules.ModuleMapping;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -18,7 +19,7 @@ public class AddUniCommandParser {
 
     public AddUniCommand parse(String arguments, UniversityList universityMasterList,
                                UniversityList universitySelectedList, ModuleList moduleSelectedList)
-            throws ParseException {
+            throws ParseException, IOException {
 
         logger.log(Level.INFO, "Start parsing adduni command");
 
