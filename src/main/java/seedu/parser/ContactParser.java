@@ -74,7 +74,7 @@ public abstract class ContactParser extends RegexParser {
         contactDetails[indexToStore] = detailToStore;
     }
 
-    public int getIndexToStore(String flag) throws InvalidFlagException {
+    public static int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
         case NAME_FLAG:
