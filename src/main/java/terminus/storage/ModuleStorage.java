@@ -114,7 +114,7 @@ public class ModuleStorage {
      */
     private void loadAllNotes(ModuleManager moduleManager) throws IOException {
         Path modDirPath;
-        if(moduleManager == null){
+        if (moduleManager == null) {
             return;
         }
         for (String mod : moduleManager.getAllModules()) {
