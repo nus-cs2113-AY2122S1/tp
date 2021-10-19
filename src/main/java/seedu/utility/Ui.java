@@ -306,4 +306,13 @@ public class Ui {
         System.out.println(errorMessage);
         printLine();
     }
+
+    /**
+     * Prints a message to user through standard output confirming all entries have been cleared.
+     */
+    public void printAllEntriesCleared() {
+        printLine();
+        System.out.println(Messages.ALL_DATA_CLEARED);
+        printLine();
+    }
 }

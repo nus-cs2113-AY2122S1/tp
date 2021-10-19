@@ -2,9 +2,9 @@
 
 ## Introduction
 
-StonksXD is a smart and user-friendly financial tracker that allows students to easily organise their expenditures and sources of income.
+StonksXD is a smart money management application that tracks daily expenses, sets/adjusts spending limits and gives advice based on daily expenses. 
 
-It hosts a vast array of commands that allows any CLI enthusiast to manage a list of their various finances, without the need for mental notes or accounting after a day's worth of spending.
+It targets students who travel frequently and prefer logging their financial records daily. With the application, students will then be able to manage their finances in different currencies with functions optimised for daily logging.
 
 ## Table of Contents
 
@@ -218,5 +218,10 @@ Format: `end`
 | Delete income entry | `del_in i/INDEX` <br /> e.g., `del_in i/2` |
 | List all income entries | `list_in` |
 | View total income | `total_in` |
+| Find entry using date | `find YYYY-MM-DD` |
+| Find entry using keyword | `find KEYWORD` |
+| View total balance | `balance` |
+| Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` |
+| To terminate program | `end` |
 
 
