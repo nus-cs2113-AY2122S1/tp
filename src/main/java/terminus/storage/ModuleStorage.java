@@ -114,6 +114,9 @@ public class ModuleStorage {
      */
     private void loadAllNotes(ModuleManager moduleManager) throws IOException {
         Path modDirPath;
+        if(moduleManager == null){
+            return;
+        }
         for (String mod : moduleManager.getAllModules()) {
             modDirPath = Paths.get(filePath.getParent().toString(), mod);
             // Check if module name is a valid module and file name
