@@ -126,11 +126,13 @@ public class DeleteStockCommand extends Command {
             e.printStackTrace();
         }
 
+
         int rowsDeleted = 0;
         for (Medicine medicine : medicines) {
             if (!(medicine instanceof Stock)) {
                 continue;
             }
+
             Stock stock = (Stock) medicine;
             Date stockExpiryDate = stock.getExpiry();
             if (stockExpiryDate.before(date) || stockExpiryDate.equals(date)) {

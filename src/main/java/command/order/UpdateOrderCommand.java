@@ -5,9 +5,12 @@ import command.CommandParameters;
 import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Order;
+import inventory.Stock;
 import utilities.parser.DateParser;
 import utilities.parser.OrderManager;
 import utilities.parser.OrderValidator;
+import utilities.parser.StockManager;
+import utilities.parser.StockValidator;
 import utilities.storage.Storage;
 import utilities.ui.Ui;
 
@@ -55,6 +58,22 @@ public class UpdateOrderCommand extends Command {
         if (order.isDelivered()) {
             ui.print("Update aborted! Unable to update order that has been delivered");
             return;
+        }
+
+        int maxQuantity = StockManager.getMaxStockQuantity(medicines, order.getMedicineName());
+        assert maxQuantity >= 0 : "Max quantity must not be less than 0";
+        boolean existName = maxQuantity > 0;
+        boolean existQuantityParam = parameters.containsKey(CommandParameters.QUANTITY);
+        int actualTotalQuantity = 0;
+
+        if (existName && existQuantityParam) {
+            int totalQuantity = OrderManager.getTotalOrderQuantity(medicines, order.getMedicineName());
+            int orderQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
+            actualTotalQuantity = totalQuantity - order.getQuantity() + orderQuantity;
+            boolean isValidQuantity = StockValidator.quantityValidityChecker(ui, actualTotalQuantity, maxQuantity);
+            if (!isValidQuantity) {
+                return;
+            }
         }
 
         ArrayList<Order> filteredOrders = new ArrayList<>();
