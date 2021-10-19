@@ -5,10 +5,10 @@ import inventory.Dispense;
 import inventory.Medicine;
 import inventory.Order;
 import inventory.Stock;
-import parser.CommandParser;
-import parser.DateParser;
-import parser.Mode;
-import ui.Ui;
+import utilities.parser.CommandParser;
+import utilities.parser.DateParser;
+import utilities.parser.Mode;
+import utilities.ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -17,9 +17,9 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import static parser.Mode.DISPENSE;
-import static parser.Mode.ORDER;
-import static parser.Mode.STOCK;
+import static utilities.parser.Mode.DISPENSE;
+import static utilities.parser.Mode.ORDER;
+import static utilities.parser.Mode.STOCK;
 
 /**
  * Helps to start the application, and initialise all variables.

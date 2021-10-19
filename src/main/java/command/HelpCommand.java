@@ -1,6 +1,6 @@
 package command;
 
-import ui.Ui;
+import utilities.ui.Ui;
 
 import java.util.ArrayList;
 

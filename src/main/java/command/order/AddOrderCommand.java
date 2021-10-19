@@ -5,11 +5,11 @@ import command.CommandParameters;
 import command.CommandSyntax;
 import inventory.Order;
 import inventory.Medicine;
-import parser.DateParser;
-import parser.OrderValidator;
-import storage.Storage;
+import utilities.parser.DateParser;
+import utilities.parser.OrderValidator;
+import utilities.storage.Storage;
 
-import ui.Ui;
+import utilities.ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;

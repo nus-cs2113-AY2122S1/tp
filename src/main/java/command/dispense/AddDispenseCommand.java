@@ -6,10 +6,10 @@ import command.CommandSyntax;
 import inventory.Dispense;
 import inventory.Medicine;
 import inventory.Stock;
-import parser.DispenseValidator;
-import parser.StockManager;
-import storage.Storage;
-import ui.Ui;
+import utilities.parser.DispenseValidator;
+import utilities.parser.StockManager;
+import utilities.storage.Storage;
+import utilities.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -67,7 +67,7 @@ public class AddDispenseCommand extends Command {
             return;
         }
 
-        filteredStocks.sort(new comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
+        filteredStocks.sort(new utilities.comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
 
         for (Stock stock : filteredStocks) {
             int existingQuantity = stock.getQuantity();

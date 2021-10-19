@@ -3,12 +3,12 @@ package command.dispense;
 import command.Command;
 import command.CommandParameters;
 import command.CommandSyntax;
-import comparators.DispenseComparator;
+import utilities.comparators.DispenseComparator;
 import inventory.Dispense;
 import inventory.Medicine;
-import parser.DateParser;
-import parser.DispenseValidator;
-import ui.Ui;
+import utilities.parser.DateParser;
+import utilities.parser.DispenseValidator;
+import utilities.ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
