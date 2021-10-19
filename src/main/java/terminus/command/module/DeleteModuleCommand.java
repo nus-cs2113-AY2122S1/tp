@@ -32,7 +32,7 @@ public class DeleteModuleCommand extends Command {
      */
     @Override
     public String getHelpMessage() {
-        return "Deletes a module";
+        return Messages.MESSAGE_COMMAND_MODULE_DELETE;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class DeleteModuleCommand extends Command {
         }
 
         moduleManager.removeModule(listOfModule[itemNumber - 1]);
-        ui.printSection(String.format("Deleted module %s.",listOfModule[itemNumber - 1]));
+        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_MODULE_DELETE,listOfModule[itemNumber - 1]));
         return new CommandResult(true);
     }
 

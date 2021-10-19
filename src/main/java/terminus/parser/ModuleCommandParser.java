@@ -6,7 +6,6 @@ import terminus.command.module.DeleteModuleCommand;
 import terminus.command.module.ViewModuleCommand;
 import terminus.common.CommonFormat;
 import terminus.module.ModuleManager;
-import terminus.module.NusModule;
 
 public class ModuleCommandParser extends CommandParser {
 

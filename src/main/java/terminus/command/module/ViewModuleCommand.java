@@ -1,10 +1,10 @@
 package terminus.command.module;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.common.CommonFormat;
+import terminus.common.Messages;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
@@ -19,7 +19,7 @@ public class ViewModuleCommand extends Command {
      */
     @Override
     public String getFormat() {
-        return "view";
+        return CommonFormat.COMMAND_VIEW_MODULE_FORMAT;
     }
 
     /**
@@ -29,7 +29,7 @@ public class ViewModuleCommand extends Command {
      */
     @Override
     public String getHelpMessage() {
-        return "View all modules available";
+        return Messages.MESSAGE_COMMAND_MODULE_VIEW;
     }
 
     /**
@@ -46,10 +46,10 @@ public class ViewModuleCommand extends Command {
             throws InvalidCommandException, InvalidArgumentException {
         String[] modules = moduleManager.getAllModules();
         String[] listOfModules = IntStream.range(0, modules.length)
-                .mapToObj(i -> String.format("%d. %s", i + 1, modules[i]))
+                .mapToObj(i -> String.format(Messages.MESSAGE_RESPONSE_MODULE_FORMAT, i + 1, modules[i]))
                 .toArray(String[]::new);
         if (listOfModules.length == 0) {
-            ui.printSection("You do not have any modules");
+            ui.printSection(Messages.MESSAGE_RESPONSE_NO_MODULES);
         } else {
             ui.printSection(listOfModules);
         }

@@ -88,6 +88,7 @@ public class ViewCommand<T extends Content> extends Command {
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException {
         StringBuilder result = new StringBuilder();
+        assert getModuleName() != null;
         NusModule module = moduleManager.getModule(getModuleName());
         ContentManager<T> contentManager = module.getContentManager(type);
         if (displayAll) {

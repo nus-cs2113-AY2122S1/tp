@@ -6,9 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.command.content.DeleteCommand;
 import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
+import terminus.command.content.DeleteCommand;
 import terminus.command.content.ViewCommand;
 import terminus.command.content.link.AddLinkCommand;
 import terminus.exception.InvalidArgumentException;

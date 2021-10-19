@@ -3,7 +3,6 @@ package terminus.ui;
 import java.util.Arrays;
 import java.util.Scanner;
 import terminus.module.ModuleManager;
-import terminus.module.NusModule;
 import terminus.parser.CommandParser;
 
 public class Ui {
