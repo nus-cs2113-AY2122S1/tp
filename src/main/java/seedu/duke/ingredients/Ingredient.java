@@ -94,4 +94,5 @@ public class Ingredient {
     public static long daysFromCurrentDate(LocalDate expiryDate) {
         return ChronoUnit.DAYS.between(CurrentDate.getCurrentDate(), expiryDate);
     }
+
 }
