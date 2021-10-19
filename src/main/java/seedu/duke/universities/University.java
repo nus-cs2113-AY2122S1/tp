@@ -3,6 +3,7 @@ package seedu.duke.universities;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.modules.ModuleMapping;
+import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -22,26 +23,20 @@ public class University {
     public void listAllMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
-            String output = (i + 1) + ". " +
-                    currentMapping.localModule.getModuleCode()
-                    + " - " + currentMapping.mappedModule.getModuleCode()
-                    + " : " + currentMapping.mappedModule.getModuleName();
-            System.out.println(output);
+            Ui.printModuleMapping(currentMapping, i + 1);
         }
     }
 
     public void listSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = getSelectedMappings(selectedModuleList);
         for (int i = 0; i < selectedMappings.size(); i++) {
-            System.out.print((i + 1) + ". ");
-            selectedMappings.get(i).printModuleMapping();
+            Ui.printModuleMapping(selectedMappings.get(i), i + 1);
         }
     }
 
     public ArrayList<ModuleMapping> getSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            ModuleMapping currentMapping = list.get(i);
+        for (ModuleMapping currentMapping : list) {
             if (selectedModuleList.searchModule(currentMapping.localModule.getModuleCode())) {
                 selectedMappings.add(currentMapping);
             }
