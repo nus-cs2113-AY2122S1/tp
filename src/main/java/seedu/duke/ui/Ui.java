@@ -26,14 +26,6 @@ public class Ui {
         }
     }
 
-    private void printText(String message) {
-        System.out.println(prefix + message.replace("\n", newLine));
-    }
-
-    private void printLineSeparator() {
-        printText(DIVIDER);
-    }
-
     public static void printWelcomeMessage() {
         String logo = "\n"
                 + "   ______          _        _____              __      _  ______\n"
@@ -68,10 +60,19 @@ public class Ui {
         System.out.println("\"create\" : Creates a new workout");
         System.out.println("\"delete\" : Deletes a workout");
         System.out.println("\"list\" : Lists all your workouts");
+        System.out.println("\"recommend\" : Recommends workouts of a given difficulty");
         System.out.println("\"display\" : Shows all the exercises in a specified workout");
         System.out.println("\"search\" : Displays workouts or exercises that contain the specified keyword");
         System.out.println("\"bye\" : Ends the program");
         System.out.println(DIVIDER);
+    }
+
+    private void printText(String message) {
+        System.out.println(prefix + message.replace("\n", newLine));
+    }
+
+    private void printLineSeparator() {
+        printText(DIVIDER);
     }
 
     /**
@@ -146,7 +147,6 @@ public class Ui {
      * @param message is the unique message to be shown
      */
     public void showToUser(String message) {
-
         assert (!message.isEmpty());
         printLineSeparator();
         printText(message);
@@ -157,4 +157,68 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows users recommend workouts based on the difficulty provided.
+     *
+     * @param workoutLevel is the difficulty of the workouts
+     */
+    public void showRecommendedWorkouts(String workoutLevel) {
+        String[] exercises;
+
+        if (workoutLevel.equals("beginner")) {
+
+            System.out.println("Arm");
+            exercises = new String[]{"Normal Pushups", "Inclined Pushups", "Bench Dips", "Bear Crawl"};
+            printRecommendTable(exercises);
+
+            System.out.println("Abs");
+            exercises = new String[]{"Situps", "Plank"};
+            printRecommendTable(exercises);
+        } else if (workoutLevel.equals("intermediate")) {
+            System.out.println("Shoulders");
+            exercises = new String[]{"Pike Pushups", "Supported hand stand"};
+            printRecommendTable(exercises);
+
+            System.out.println("Glutes");
+            exercises = new String[]{"Kick Backs"};
+            printRecommendTable(exercises);
+        } else if (workoutLevel.equals("pro")) {
+            System.out.println("Push Workout");
+            exercises = new String[]{"Wide pushups"};
+            printRecommendTable(exercises);
+
+            System.out.println("Pull Workout");
+            exercises = new String[]{"Pullups"};
+            printRecommendTable(exercises);
+
+            System.out.println("Leg Workout");
+            exercises = new String[]{"Squats", "Lunges", "Explosive Jumps"};
+            printRecommendTable(exercises);
+        }
+    }
+
+    /**
+     * Prints a table of recommended exercises with the given list of workouts.
+     *
+     * @param exercises is the pre set list of recommended exercises
+     */
+    private void printRecommendTable(String[] exercises) {
+        assert exercises != null;
+
+        String[][] data;
+        TextTable tt;
+        String[] columnNames = {"Index", "Exercise name", "Sets", "Reps"};
+
+        data = new String[exercises.length][columnNames.length];
+        for (int i = 0; i < exercises.length; i++) {
+            data[i][0] = String.valueOf(i + 1);
+            data[i][1] = exercises[i];
+            data[i][2] = "2";
+            data[i][3] = "8";
+        }
+        tt = new TextTable(columnNames, data);
+        tt.printTable();
+
+        printLineSeparator();
+    }
 }

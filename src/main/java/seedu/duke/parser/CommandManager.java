@@ -2,12 +2,13 @@ package seedu.duke.parser;
 
 
 import seedu.duke.command.Command;
-import seedu.duke.command.EnterWorkoutCommand;
+import seedu.duke.command.workout.EnterWorkoutCommand;
 import seedu.duke.command.ExitCommand;
-import seedu.duke.command.ExitWorkoutCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.SearchCommand;
-import seedu.duke.command.IncorrectCommand;
+import seedu.duke.command.workout.ExitWorkoutCommand;
+import seedu.duke.command.misc.HelpCommand;
+import seedu.duke.command.workout.RecommendWorkoutCommand;
+import seedu.duke.command.misc.SearchCommand;
+import seedu.duke.command.misc.IncorrectCommand;
 import seedu.duke.command.exercise.AddExerciseCommand;
 import seedu.duke.command.exercise.DisplayExercisesCommand;
 import seedu.duke.command.exercise.MarkExerciseAsDoneCommand;
@@ -37,6 +38,9 @@ public class CommandManager {
             break;
         case DeleteWorkoutCommand.COMMAND_WORD:
             parser = new DeleteWorkoutParser(userInputString);
+            break;
+        case RecommendWorkoutCommand.COMMAND_WORD:
+            parser = new RecommendWorkoutParser(userInputString);
             break;
         case DisplayExercisesCommand.COMMAND_WORD:
             parser = new DisplayExerciseParser(userInputString);

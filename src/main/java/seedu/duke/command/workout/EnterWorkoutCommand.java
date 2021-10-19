@@ -1,5 +1,6 @@
-package seedu.duke.command;
+package seedu.duke.command.workout;
 
+import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
@@ -51,6 +52,7 @@ public class EnterWorkoutCommand extends Command {
             LOGGER.log(Level.SEVERE, "Error in entering Workout - Workout doesn't exist");
             throw new GetJackDException("Invalid Workout Index");
         }
+
         workoutMode = workoutIndex;
         LOGGER.info("Entering the " + workoutIndex + "th(st/nd/rd) Workout");
         ui = new Ui();

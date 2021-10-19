@@ -1,5 +1,6 @@
-package seedu.duke.command;
+package seedu.duke.command.workout;
 
+import seedu.duke.command.Command;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;

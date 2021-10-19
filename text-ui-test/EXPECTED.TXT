@@ -22,9 +22,26 @@ To find out more information about the command, such as input format and paramet
 "create" : Creates a new workout
 "delete" : Deletes a workout
 "list" : Lists all your workouts
+"recommend" : Recommends workouts of a given difficulty
 "display" : Shows all the exercises in a specified workout
 "search" : Displays workouts or exercises that contain the specified keyword
 "bye" : Ends the program
+________________________________________________________
+________________________________________________________
+Invalid command format
+
+recommend: Provides a given set of workouts with exercises.
+Format: recommend [Workout level]
+Parameters:
+	Workout level - difficulty of workout [beginner/intermediate/pro]
+Example: recommend beginner
+________________________________________________________
+________________________________________________________
+recommend: Provides a given set of workouts with exercises.
+Format: recommend [Workout level]
+Parameters:
+	Workout level - difficulty of workout [beginner/intermediate/pro]
+Example: recommend beginner
 ________________________________________________________
 ________________________________________________________
 Invalid command format
