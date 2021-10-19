@@ -90,10 +90,12 @@ public class Ui {
      * @param displayMessage message to be displayed to the user
      * @param itemList       is the list of items
      */
-    public <T> void showItemListToUser(String displayMessage, ArrayList<T> itemList) {
+    public <T> void showItemListToUser(String displayMessage, ArrayList<T> itemList, boolean bottomLineOnly) {
         assert (!itemList.isEmpty());
 
-        printLineSeparator();
+        if (!bottomLineOnly) {
+            printLineSeparator();
+        }
 
         printText(displayMessage);
         if (!itemList.isEmpty()) {
