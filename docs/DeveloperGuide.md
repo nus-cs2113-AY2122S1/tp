@@ -1,7 +1,7 @@
 # Developer Guide
 
 - [Acknowledgements](#acknowledgements)
-- [Design & Implementation](#design-&-implementation)
+- [Design & Implementation](#design--implementation)
   - [Data Component](#data-component)
   - [Storage Component](#storage-component)
 - [Product Scope](#product-scope)
