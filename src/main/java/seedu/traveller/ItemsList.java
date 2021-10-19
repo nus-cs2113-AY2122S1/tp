@@ -30,8 +30,8 @@ public class ItemsList {
     public void editItem(int i, Item item) {
         logger.log(Level.INFO, "Editing an item to itemsList");
         items.add(item);
-        Collections.swap(items, i, getSize()-1);
-        items.remove(getSize()-1);
+        Collections.swap(items, i, getSize() - 1);
+        items.remove(getSize() - 1);
     }
 
     public ArrayList<Item> searchItem(String s) {
