@@ -96,12 +96,7 @@ public class Ui {
         if (patients.size() == 0) {
             return "There is no patient with such attributes." + ENDLINE;
         }
-        String output = "Here is a list of all patients:" + ENDLINE;
-        output += "For full details of each patient, please use the command \"view PATIENT_ID\"" + ENDLINE;
-        output += getPatientTableRowSeparator();
-        output += "|  ID  | IC Number |         Name         |"
-                + " Phone No. |        Email         |       Address        |" + ENDLINE;
-        output += getPatientTableRowSeparator();
+        String output = getPatientTableHeader();
         for (String patient : patients) {
             output += patient;
         }
@@ -149,16 +144,16 @@ public class Ui {
         String output = "Here is a list of all patients:" + ENDLINE;
         output += "For full details of each patient, please use the command \"view PATIENT_ID\"" + ENDLINE;
         output += getPatientTableRowSeparator();
-        output += "|  ID  | IC Number |         Name         |"
-                + " Phone No. |        Email         |       Address        |" + ENDLINE;
+        output += " |  ID  | IC Number |         Name         |"
+                + " Phone No. |        Email         |       Address        | " + ENDLINE;
         output += getPatientTableRowSeparator();
 
         return output;
     }
 
     private String getPatientTableRowSeparator() {
-        return "------------------------------------------------"
-                + "-----------------------------------------------------" + ENDLINE;
+        return " ------------------------------------------------"
+                + "----------------------------------------------------- " + ENDLINE;
     }
 
     /**

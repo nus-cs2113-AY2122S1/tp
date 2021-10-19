@@ -2,6 +2,7 @@ package medbot.person;
 
 
 import static medbot.Ui.VERTICAL_LINE_SPACED;
+import static medbot.Ui.ENDLINE;
 
 
 public abstract class Person {
@@ -13,8 +14,6 @@ public abstract class Person {
     private static final int PARAMETER_BUFFER = 2;
 
     private static final String SPACE = " ";
-    private static final String ENDLINE = System.lineSeparator();
-    private static final String VERTICAL_LINE_SEPARATOR = "|";
 
     private static final int LENGTH_ID_COLUMN = 4;
     private static final int LENGTH_IC_COLUMN = 9;
@@ -42,13 +41,13 @@ public abstract class Person {
     }
 
     public String getInfoInTableFormat() {
-        return VERTICAL_LINE_SEPARATOR + SPACE + getFormattedPersonId()
-                + SPACE + VERTICAL_LINE_SEPARATOR + SPACE + getFormattedIcNumber()
-                + SPACE + VERTICAL_LINE_SEPARATOR + SPACE + getFormattedName()
-                + SPACE + VERTICAL_LINE_SEPARATOR + SPACE + getFormattedPhoneNumber()
-                + SPACE + VERTICAL_LINE_SEPARATOR + SPACE + getFormattedEmail()
-                + SPACE + VERTICAL_LINE_SEPARATOR + SPACE + getFormattedAddress()
-                + SPACE + VERTICAL_LINE_SEPARATOR;
+        return VERTICAL_LINE_SPACED + getFormattedPersonId()
+                + VERTICAL_LINE_SPACED + getFormattedIcNumber()
+                + VERTICAL_LINE_SPACED + getFormattedName()
+                + VERTICAL_LINE_SPACED + getFormattedPhoneNumber()
+                + VERTICAL_LINE_SPACED + getFormattedEmail()
+                + VERTICAL_LINE_SPACED + getFormattedAddress()
+                + VERTICAL_LINE_SPACED;
     }
 
     public String getIcNumber() {

@@ -92,17 +92,17 @@ class UiTest {
         String expectedOutput =
             "Here is a list of all patients:" + ENDLINE
             + "For full details of each patient, please use the command \"view PATIENT_ID\"" + ENDLINE
-            + "-----------------------------------------------------------------------------------------------------"
+            + " ----------------------------------------------------------------------------------------------------- "
             + ENDLINE
-            + "|  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        |"
+            + " |  ID  | IC Number |         Name         | Phone No. |        Email         |       Address        | "
             + ENDLINE
-            + "-----------------------------------------------------------------------------------------------------"
+            + " ----------------------------------------------------------------------------------------------------- "
             + ENDLINE
-            + "| 1    |           | John Doe             |           | John@gmail.com       |                      |"
+            + " | 1    |           | John Doe             |           | John@gmail.com       |                      | "
             + ENDLINE
-            + "| 2    |           | Bob                  | 88889999  |                      |                      |"
+            + " | 2    |           | Bob                  | 88889999  |                      |                      | "
             + ENDLINE
-            + "-----------------------------------------------------------------------------------------------------"
+            + " ----------------------------------------------------------------------------------------------------- "
             + ENDLINE;
 
         assertEquals(ui.getAllPatientsString(patientList), expectedOutput);
