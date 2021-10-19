@@ -108,7 +108,7 @@ public class Parser {
 
         switch (viewType) {
         case PATIENT_INFO:
-            return parsePatientInfoCommand(userInput);
+            return parsePatientCommand(userInput);
         case MEDICAL_STAFF_INFO:
             return parseMedicalStaffCommand(userInput);
         case SCHEDULER:
@@ -127,7 +127,7 @@ public class Parser {
      * @return the corresponding Command object.
      * @throws MedBotParserException if command is unrecognised.
      */
-    public static Command parsePatientInfoCommand(String userInput) throws MedBotParserException {
+    public static Command parsePatientCommand(String userInput) throws MedBotParserException {
         if (userInput.startsWith(COMMAND_ADD)) {
             return parseAddPatientCommand(userInput);
         }
@@ -152,7 +152,6 @@ public class Parser {
 
     //Update with relevant scheduling commands
     public static Command parseSchedulingCommand(String userInput) throws MedBotParserException {
-        userInput = preprocessInput(userInput);
         if (userInput.equals(COMMAND_SWITCH)) {
             return new SwitchCommand();
         }
@@ -161,7 +160,6 @@ public class Parser {
 
     //Update with relevant medical staff commands
     public static Command parseMedicalStaffCommand(String userInput) throws MedBotParserException {
-        userInput = preprocessInput(userInput);
         if (userInput.equals(COMMAND_SWITCH)) {
             return new SwitchCommand();
         }

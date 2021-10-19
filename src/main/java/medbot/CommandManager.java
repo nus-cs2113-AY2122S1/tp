@@ -20,6 +20,8 @@ public class CommandManager {
     public void executeCommand(Ui ui, Storage storage, Command command) throws MedBotException {
         switch (viewType) {
         case SCHEDULER:
+            //PlaceholderCode for the switch command to work
+            command.execute(patientList,ui);
             break;
         case PATIENT_INFO:
             command.execute(patientList, ui);
@@ -27,6 +29,7 @@ public class CommandManager {
             break;
         case MEDICAL_STAFF_INFO:
             command.execute(staffList, ui);
+            //Add a saveData here
             break;
         default:
         }
