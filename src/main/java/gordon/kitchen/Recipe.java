@@ -32,6 +32,10 @@ public class Recipe {
         this.difficulty = difficulty;
     }
 
+    public Difficulty getDifficulty() {
+        return this.difficulty;
+    }
+
     public void setTimes(int prepTime, int cookTime) {
         preparationTime = prepTime;
         cookingTime = cookTime;

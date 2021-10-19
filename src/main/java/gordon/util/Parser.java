@@ -4,6 +4,8 @@ import gordon.command.AddCommand;
 import gordon.command.CheckCommand;
 import gordon.command.Command;
 import gordon.command.DeleteRecipeCommand;
+import gordon.command.FindCaloriesCommand;
+import gordon.command.FindDifficultyCommand;
 import gordon.command.FindIngredientsCommand;
 import gordon.command.FindTagsCommand;
 import gordon.command.HelpCommand;
@@ -11,11 +13,9 @@ import gordon.command.ListRecipesCommand;
 import gordon.command.NullCommand;
 import gordon.command.SetCaloriesCommand;
 import gordon.command.SetDifficultyCommand;
-
 import gordon.command.TagAddCommand;
 import gordon.command.TagDeleteCommand;
 import gordon.command.TagUntagCommand;
-
 import gordon.exception.GordonException;
 import gordon.kitchen.Recipe;
 
@@ -182,21 +182,17 @@ public class Parser {
                 throw new GordonException(GordonException.INDEX_INVALID);
             }
         case "difficulty":
-            try {
-                Difficulty newDifficulty = null;
-                String difficultyString = splitContent[1].substring(spaceIndex + 1).trim();
-                for (Difficulty d : Difficulty.values()) {
-                    if (d.name().equalsIgnoreCase(difficultyString)) {
-                        newDifficulty = d;
-                    }
+            Difficulty newDifficulty = null;
+            String difficultyString = splitContent[1].substring(spaceIndex + 1).trim();
+            for (Difficulty d : Difficulty.values()) {
+                if (d.name().equalsIgnoreCase(difficultyString)) {
+                    newDifficulty = d;
                 }
-                if (newDifficulty == null) {
-                    throw new GordonException(GordonException.INVALID_DIFFICULTY);
-                } else {
-                    return new SetDifficultyCommand(recipeName, newDifficulty);
-                }
-            } catch (NumberFormatException e) {
-                throw new GordonException(GordonException.INDEX_INVALID);
+            }
+            if (newDifficulty == null) {
+                throw new GordonException(GordonException.INVALID_DIFFICULTY);
+            } else {
+                return new SetDifficultyCommand(recipeName, newDifficulty);
             }
         default:
             throw new GordonException(GordonException.COMMAND_INVALID);
@@ -218,6 +214,26 @@ public class Parser {
             ArrayList<String> ingredients = new ArrayList<>(Arrays.asList(splitContent[1]
                     .substring(spaceIndex + 1).split("\\+")));
             return new FindIngredientsCommand(ingredients);
+        case "calories":
+            try {
+                int cal = Integer.parseInt(splitContent[1].substring(spaceIndex + 1).trim());
+                return new FindCaloriesCommand(cal);
+            } catch (NumberFormatException e) {
+                throw new GordonException(GordonException.INDEX_INVALID);
+            }
+        case "difficulty":
+            Difficulty diff = null;
+            String difficultyString = splitContent[1].substring(spaceIndex + 1).trim();
+            for (Difficulty d : Difficulty.values()) {
+                if (d.name().equalsIgnoreCase(difficultyString)) {
+                    diff = d;
+                }
+            }
+            if (diff == null) {
+                throw new GordonException(GordonException.INVALID_DIFFICULTY);
+            } else {
+                return new FindDifficultyCommand(diff);
+            }
         case "tag":
             ArrayList<String> tags = new ArrayList<>(Arrays.asList(splitContent[1]
                     .substring(spaceIndex + 1).split("\\+")));

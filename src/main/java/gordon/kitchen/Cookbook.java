@@ -199,6 +199,12 @@ public class Cookbook {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public ArrayList<Recipe> filterByDifficulty(Difficulty difficulty) {
+        return recipes.stream()
+                .filter(r -> r.difficulty == difficulty)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
     public ArrayList<Recipe> filterByPrice(float price) {
         Comparator<Recipe> compareByPrice = Comparator.comparing(Recipe::getTotalPrice);
         return recipes.stream()
@@ -211,7 +217,7 @@ public class Cookbook {
         Comparator<Recipe> compareByCalories = Comparator.comparing(Recipe::getCalories);
         return recipes.stream()
                 .filter(r -> r.calories <= cal)
-                .sorted(compareByCalories)
+                .sorted(compareByCalories.reversed())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 

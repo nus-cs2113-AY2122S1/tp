@@ -21,6 +21,13 @@ set caprese /difficulty easy
 check caprese
 set meatballs /difficulty medium
 set fish /difficulty insane
+set fish /difficulty medium
+set cookies /difficulty easy
+find /calories 300
+find /calories 
+find /calories -1
+find /difficulty easy
+find /difficulty child's play
 deleteRecipe 5
 deleteRecipe cookies
 deleteRecipe 2
