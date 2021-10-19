@@ -10,7 +10,7 @@ public class MedicineValidator {
     /**
      * Checks if a medicine name is empty.
      *
-     * @param ui   Reference to the UI object passed by Main to print messages.
+     * @param ui   Reference to the UI object to print messages.
      * @param name Medicine name to be checked.
      * @return Boolean value indicating if medicine name is valid.
      */
@@ -25,7 +25,7 @@ public class MedicineValidator {
     /**
      * Checks if a medicine quantity is valid.
      *
-     * @param ui             Reference to the UI object passed by Main to print messages.
+     * @param ui             Reference to the UI object to print messages.
      * @param quantityString Quantity of the medicine.
      * @return Boolean value indicating if medicine quantity is valid.
      */

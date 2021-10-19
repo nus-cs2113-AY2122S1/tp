@@ -178,7 +178,7 @@ public class CommandParser {
     /**
      * Helps to set the mode of the program.
      *
-     * @param ui      Reference to the UI object passed by Main to print messages.
+     * @param ui      Reference to the UI object to print messages.
      * @param command Command entered by the user.
      * @param mode    Current mode of the program.
      * @return New mode requested by the user.

@@ -5,6 +5,7 @@ import command.CommandParameters;
 import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Order;
+import utilities.comparators.OrderComparator;
 import utilities.parser.DateParser;
 import utilities.parser.OrderValidator;
 import utilities.ui.Ui;
@@ -37,7 +38,8 @@ public class ListOrderCommand extends Command {
 
         String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
-                CommandParameters.DATE, CommandParameters.STATUS};
+                CommandParameters.DATE, CommandParameters.STATUS, CommandParameters.SORT,
+                CommandParameters.REVERSED_SORT};
 
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters,
                 requiredParameters, optionalParameters, CommandSyntax.LIST_ORDER_COMMAND, false);
@@ -90,6 +92,12 @@ public class ListOrderCommand extends Command {
                 case CommandParameters.STATUS:
                     filteredOrders = (ArrayList<Order>) filteredOrders.stream().filter((m) ->
                             (m.getStatus()).equalsIgnoreCase(parameterValue)).collect(Collectors.toList());
+                    break;
+                case CommandParameters.SORT:
+                    filteredOrders.sort(new OrderComparator(parameterValue.toLowerCase(), false));
+                    break;
+                case CommandParameters.REVERSED_SORT:
+                    filteredOrders.sort(new OrderComparator(parameterValue.toLowerCase(), true));
                     break;
                 default:
                     return;

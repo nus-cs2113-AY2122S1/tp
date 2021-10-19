@@ -7,6 +7,10 @@ box MediVault COLOR_MEDIVAULT_BOX
     participant ": MediVault" as medivault COLOR_MEDIVAULT
 end box
 
+box Storage COLOR_STORAGE_BOX
+    participant ": Storage" as storage COLOR_STORAGE
+end box
+
 box Ui COLOR_UI_BOX
     participant ": Ui" as ui COLOR_UI
 end box
@@ -22,7 +26,14 @@ end box
 autoactivate on
 
 -> medivault: create
-    medivault -> medivault: run
+    medivault -> storage : getInstance()
+    medivault <-- storage
+    medivault -> storage : loadData()
+    medivault <-- storage
+
+    medivault -> medivault : run
+    medivault -> ui : getInstance()
+    medivault <-- ui
         loop until exit is received
             medivault -> ui : getInput()
             medivault <-- ui : userInput
