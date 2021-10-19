@@ -12,7 +12,6 @@ public class Trip {
     private LocalDate dateOfTrip;
     private ArrayList<Expense> listOfExpenses = new ArrayList<>();
     private ArrayList<Person> listOfPersons = new ArrayList<>();
-    private ArrayList<String> listOfPersonsNames = new ArrayList<>();
     private double budget;
     private double exchangeRate;
     private String foreignCurrency;
@@ -37,11 +36,6 @@ public class Trip {
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
-    public void getWhoOwesMe() {
-        for (Person person : listOfPersons) {
-            Ui.printWhoOwesMe(person);
-        }
-    }
 
     public LocalDate getDateOfTrip() {
         return dateOfTrip;
@@ -86,9 +80,6 @@ public class Trip {
         return exchangeRate;
     }
 
-    public void setExchangeRate(double exchangeRate) {
-        this.exchangeRate = exchangeRate;
-    }
 
     /**
      * Parses an exchange rate entered by the user (as a {@link String}) into a {@link Double}.
@@ -154,6 +145,9 @@ public class Trip {
 
     public void addExpense(Expense expense) {
         listOfExpenses.add(expense);
+        for (Person person : expense.getPersonsList()){
+            person.addExpense(expense);
+        }
     }
 
     public ArrayList<Expense> getListOfExpenses() {
@@ -179,10 +173,13 @@ public class Trip {
     private ArrayList<Person> splitPeople(String peopleChained) {
         ArrayList<Person> listOfPeople = new ArrayList<>();
         for (String personName : peopleChained.split(",")) {
-            // Note that all people set to not as user
-            Person person = new Person(personName.trim(), false);
+            Person person = new Person(personName.trim());
             listOfPeople.add(person);
-            listOfPersonsNames.add(personName);
+        }
+        for (Person person : listOfPeople) {
+            for (Person personToAdd : listOfPeople) {
+                person.getMoneyOwed().put(personToAdd, 0.0);
+            }
         }
         return listOfPeople;
 

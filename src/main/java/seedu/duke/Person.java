@@ -1,17 +1,15 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Person {
     private String name;
-    private boolean isUser;
-    private float amtOwedToUser;
     private ArrayList<Expense> listOfExpenses = new ArrayList<>();
+    private HashMap<Person, Double> moneyOwed = new HashMap<>();
 
-    public Person(String name, Boolean isUser) {
+    public Person(String name) {
         this.name = name;
-        this.isUser = isUser;
-        amtOwedToUser = 0;
     }
 
     public String getName() {
@@ -22,18 +20,6 @@ public class Person {
         return listOfExpenses;
     }
 
-    public boolean getIsUser() {
-        return isUser;
-    }
-
-    public float getAmtOwedToUser() {
-        return amtOwedToUser;
-    }
-
-    public void setAmtOwedToUser(float amount) {
-        amtOwedToUser += amount;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -42,12 +28,12 @@ public class Person {
         listOfExpenses.add(expense);
     }
 
-    public float getTotalExpenditure() {
-        float total = 0;
-        for (Expense expense : listOfExpenses) {
-            total += expense.getCostPerPerson(); //Assuming everyone pays equally
-        }
-        return total;
+    public HashMap<Person, Double> getMoneyOwed() {
+        return this.moneyOwed;
+    }
+
+    public double getTotalExpenditure() {
+        return moneyOwed.get(this);
     }
 
     @Override

@@ -23,7 +23,7 @@ class DukeTest {
 
     @Test
     public void testSetName() {
-        Person person = new Person("CS2113T", true);
+        Person person = new Person("CS2113T");
         person.setName("Duke");
         assertEquals("Duke", person.getName());
     }
@@ -33,7 +33,7 @@ class DukeTest {
         Trip trip = new Trip();
         trip.setForeignCurrency("USD");
         trip.setRepaymentCurrency("SGD");
-        trip.setExchangeRate(1.3);
+        trip.setExchangeRate("1.3");
         assertEquals("USD", trip.getForeignCurrency());
         assertEquals("SGD", trip.getRepaymentCurrency());
         assertEquals(1.3, trip.getExchangeRate());
