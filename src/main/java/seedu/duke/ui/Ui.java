@@ -25,11 +25,12 @@ public class Ui {
             System.out.print(format);
         }
     }
+
     public static void printGlobe() {
         System.out.println(AsciiConstants.GLOBE);
     }
 
-    public static void Welcome() {
+    public static void welcome() {
         System.out.println(AsciiConstants.GLOBE);
         System.out.println();
     }
