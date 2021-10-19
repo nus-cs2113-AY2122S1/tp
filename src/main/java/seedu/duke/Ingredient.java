@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Ingredient implements  Comparable<Ingredient> {
 
-    private Ui ui = new Ui();
+    private static final Ui ui = new Ui();
     private String ingredientName;
     private double ingredientWeight;
     private double ingredientWasteIngr;
@@ -33,28 +33,28 @@ public class Ingredient implements  Comparable<Ingredient> {
     }
 
     public void updateIngredientWeight() throws FoodoramaException {
-        System.out.println("Enter the weight of " + ingredientName + " in KG:");
+        ui.printEnterWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String inputIngredientWeight = in.nextLine();
         double ingredientWeightValue;
         try {
             ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
         } catch (NumberFormatException e) {
-            throw new FoodoramaException("Sorry, please input a valid number.");
+            throw new FoodoramaException(ui.getInvalidNumberMsg());
         }
         ingredientWeight += ingredientWeightValue;
         ui.printStorage(ingredientName, ingredientWeight);
     }
 
     public void addWaste() throws FoodoramaException {
-        System.out.println("Enter the wastage of " + ingredientName + " in KG:");
+        ui.printEnterWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
         double ingredientWeightValue;
         try {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
         } catch (NumberFormatException e) {
-            throw new FoodoramaException("Sorry, please input a valid number.");
+            throw new FoodoramaException(ui.getInvalidNumberMsg());
         }
         ingredientWasteIngr += ingredientWeightValue;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
@@ -101,6 +101,6 @@ public class Ingredient implements  Comparable<Ingredient> {
 
     @Override
     public int compareTo(Ingredient o) {
-        return (int) (ingredientWasteIngr - o.ingredientWasteIngr);
+        return (int) (o.ingredientWasteIngr - ingredientWasteIngr);
     }
 }

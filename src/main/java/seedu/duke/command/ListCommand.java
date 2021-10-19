@@ -8,7 +8,7 @@ import seedu.duke.exceptions.FoodoramaException;
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
-    Ui ui = new Ui();
+    private static final Ui ui = new Ui();
 
     // For JUnit Testing
     public boolean isDish = false;
@@ -30,8 +30,7 @@ public class ListCommand extends Command {
 
         default:
             isOther = true;
-            throw new FoodoramaException("Sorry, please input: list [TYPE]." + System.lineSeparator()
-                    + "[TYPE]: dish to list dishes, ingr to list ingredients.");
+            throw new FoodoramaException(ui.getListMissingParamMsg());
         }
     }
 }

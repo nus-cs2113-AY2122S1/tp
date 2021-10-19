@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 public class AddDishWasteCommand extends Command {
     private static Logger logger = Logger.getLogger("AddDishWasteCommand.execute()");
+    private static final Ui ui = new Ui();
 
     AddDishWasteCommand() {
         LoggerManager.setupLogger(logger);
@@ -22,16 +23,14 @@ public class AddDishWasteCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         logger.log(Level.INFO, "Start of process");
-
         String dish = String.join(" ", parameters);
         int dishIndex = DishList.find(dish);
 
         if (dishIndex == -1) {
             logger.log(Level.INFO, "Dish does not exist", dishIndex);
-            throw new FoodoramaException("The dish " + parameters.get(0) + " does not exist");
+            throw new FoodoramaException(ui.getDishNotExistMsg(parameters.get(0)));
         } else {
             assert (dishIndex != -1) : "The dishIndex cannot be -1";
-            // TODO shift to Dish class
             try {
                 Dish currentDish = DishList.dishList.get(dishIndex);
                 currentDish.addWaste();

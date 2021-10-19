@@ -25,11 +25,15 @@ public class Duke {
         Scanner input = new Scanner(System.in);
         Ui ui =  new Ui();
 
+        // Start interfacing with user
+        ClearScreen.clearConsole();
         ui.printWelcomeMsg();
 
+        // Start program
         String userInput = input.nextLine().toLowerCase();
         while (!userInput.equals("bye")) {
             try {
+                ui.clearTerminalAndPrintNewPage();
                 //Get command name and parameters
                 CommandNames userCommandName = parser.getCommandName(userInput);
                 ArrayList<String> parameters = parser.getParameters(userInput, userCommandName);
@@ -41,13 +45,12 @@ public class Duke {
                 Storage.write("dish");
 
             } catch (FoodoramaException exception) {
-                //ui.printInvalidCommandMsg();
-                System.out.println(ui.getLineDivider());
                 System.out.println(exception.getMessage());
-                System.out.println(ui.getLineDivider());
             }
             userInput = input.nextLine();
         }
+        // Print exit message and close program
+        ClearScreen.clearConsole();
         ui.printExitMsg();
     }
 }

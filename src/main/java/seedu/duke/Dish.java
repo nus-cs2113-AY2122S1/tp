@@ -9,9 +9,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Dish implements Comparable<Dish> {
-    private static Logger logger = Logger.getLogger("Dish class");
-    private ArrayList<Ingredient> constituents = new ArrayList<>();
-    private Ui ui = new Ui();
+    private static final Logger logger = Logger.getLogger("Dish class");
+    private static final ArrayList<Ingredient> constituents = new ArrayList<>();
+    private static final Ui ui = new Ui();
     private String dishName;
     private Double wastage;
     //Each dish contributes a portion of its wastage to constituent ingredients
@@ -73,15 +73,14 @@ public class Dish implements Comparable<Dish> {
     }
 
     public void addWaste() throws FoodoramaException {
-        System.out.println(ui.getLineDivider());
-        System.out.println("Enter the weight of " + dishName + " in KG:");
+        ui.printEnterWeightOf(dishName);
         Scanner in = new Scanner(System.in);
         String dishWaste = in.nextLine();
         double inputWastage;
         try {
             inputWastage = Double.parseDouble(dishWaste);
         } catch (NumberFormatException e) {
-            throw new FoodoramaException("Sorry, please input a valid number.");
+            throw new FoodoramaException(ui.getInvalidNumberMsg());
         }
         assert inputWastage > 0 : "Adding negative waste is impossible";
         wastage += inputWastage;
@@ -140,6 +139,6 @@ public class Dish implements Comparable<Dish> {
 
     @Override
     public int compareTo(Dish o) {
-        return (int) (wastage - o.wastage);
+        return (int) (o.wastage - wastage);
     }
 }

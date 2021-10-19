@@ -8,7 +8,7 @@ import seedu.duke.exceptions.FoodoramaException;
 import java.util.ArrayList;
 
 public class GraphCommand extends Command {
-    Ui ui = new Ui();
+    private static final Ui ui = new Ui();
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
@@ -28,8 +28,7 @@ public class GraphCommand extends Command {
             break;
 
         default:
-            throw new FoodoramaException("Sorry, please input: graph [TYPE]." + System.lineSeparator()
-                    + "[TYPE]: dish to list dishes, ingr to list ingredients.");
+            throw new FoodoramaException(ui.getGraphInvalidParamMsg());
 
         }
     }

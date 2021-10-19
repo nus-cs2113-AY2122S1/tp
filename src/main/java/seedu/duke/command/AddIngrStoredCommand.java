@@ -11,7 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AddIngrStoredCommand extends Command {
-    private static Logger logger = Logger.getLogger("AddIngrStoredCommand.execute()");
+    private static final Logger logger = Logger.getLogger("AddIngrStoredCommand.execute()");
+    private static final Ui ui = new Ui();
 
     AddIngrStoredCommand() {
         LoggerManager.setupLogger(logger);
@@ -19,13 +20,13 @@ public class AddIngrStoredCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        Ui ui = new Ui();
+
         logger.log(Level.INFO, "Start of process");
         String ingredient = String.join(" ", parameters);
         int ingredientIndex = IngredientList.find(ingredient);
         if (ingredientIndex == -1) {
-            ui.printIngrNotExistMsg();
             logger.log(Level.INFO, "Ingredient does not exist", ingredientIndex);
+            throw new FoodoramaException(ui.getIngrNotExistMsg());
         } else {
             try {
                 Ingredient currentIngredient = IngredientList.ingredientList.get(ingredientIndex);

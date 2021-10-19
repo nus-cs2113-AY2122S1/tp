@@ -24,9 +24,8 @@ public class AddIngrWasteCommand extends Command {
         String ingredient = String.join(" ", parameters);
         int ingredientIndex = IngredientList.find(ingredient);
         if (ingredientIndex == -1) {
-            ui.printIngrNotExistMsg();
             logger.log(Level.INFO, "Ingredient does not exist", ingredientIndex);
-        // TODO shift to Ingredient class
+            throw new FoodoramaException(ui.getIngrNotExistMsg());
         } else {
             try {
                 Ingredient currentIngredient = IngredientList.ingredientList.get(ingredientIndex);
