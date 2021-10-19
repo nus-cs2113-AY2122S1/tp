@@ -14,14 +14,14 @@ public class GraphCommand extends Command {
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         switch (parameters.get(0)) {
         case "dish":
-            if(DishList.dishList.isEmpty()) {
+            if (DishList.dishList.isEmpty()) {
                 throw new FoodoramaException("List is empty, nothing to show");
             }
             DishList.graph();
             break;
 
         case "ingr":
-            if(IngredientList.ingredientList.isEmpty()) {
+            if (IngredientList.ingredientList.isEmpty()) {
                 throw new FoodoramaException("List is empty, nothing to show");
             }
             IngredientList.graph();

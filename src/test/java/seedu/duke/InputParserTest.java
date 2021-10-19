@@ -7,7 +7,7 @@ import seedu.duke.exceptions.FoodoramaException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InputParserTest {
 
@@ -50,24 +50,23 @@ class InputParserTest {
 
 
         //Define expected outputs
+        ArrayList<ArrayList<String>> outputs = new ArrayList<>();
         //Zero
         ArrayList<String> expectedParamArrayList0 = new ArrayList<>();
+        outputs.add(expectedParamArrayList0);
         //One
         ArrayList<String> expectedParamArrayList1 = new ArrayList<>();
         expectedParamArrayList1.add("chicken");
+        outputs.add(expectedParamArrayList1);
         //Two slash
         String [] expectedParams2 = {"chicken rice", "rice"};
         ArrayList<String> expectedParamArrayList2 = new ArrayList<>();
         expectedParamArrayList2.addAll(List.of(expectedParams2));
+        outputs.add(expectedParamArrayList2);
         //Two space
         String [] expectedParams3 = {"dish", "chicken rice"};
         ArrayList<String> expectedParamArrayList3 = new ArrayList<>();
         expectedParamArrayList3.addAll(List.of(expectedParams3));
-
-        ArrayList<ArrayList<String>> outputs = new ArrayList<>();
-        outputs.add(expectedParamArrayList0);
-        outputs.add(expectedParamArrayList1);
-        outputs.add(expectedParamArrayList2);
         outputs.add(expectedParamArrayList3);
 
         for (int i = 0; i < inputs.size(); i++) {
