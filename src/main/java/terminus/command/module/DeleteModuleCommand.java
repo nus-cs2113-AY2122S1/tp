@@ -63,6 +63,7 @@ public class DeleteModuleCommand extends Command {
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
+     * @throws IOException when files to be deleted is inaccessible (e.g. file is locked by OS).
      */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager)
@@ -75,7 +76,7 @@ public class DeleteModuleCommand extends Command {
 
         // Delete all files and then its folder
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule(moduleManager, listOfModule[itemNumber - 1]);
+        moduleStorage.cleanAfterDeleteModule(listOfModule[itemNumber - 1]);
 
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_MODULE_DELETE, listOfModule[itemNumber - 1]));
         return new CommandResult(true);

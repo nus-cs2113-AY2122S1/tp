@@ -3,10 +3,7 @@ package terminus.storage;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -41,10 +38,20 @@ public class ModuleStorage {
         moduleStorage = this;
     }
 
+    /**
+     * Returns the singleton object of ModuleStorage.
+     *
+     * @return ModuleStorage object of current session.
+     */
     public static ModuleStorage getInstance() {
         return moduleStorage;
     }
 
+    /**
+     * Creates main data folder and main JSON object containing TermiNUS information.
+     *
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
     private void initializeFile() throws IOException {
         assert filePath != null : "filePath should not be null";
         if (!Files.isDirectory(filePath.getParent())) {
@@ -61,8 +68,8 @@ public class ModuleStorage {
     }
 
     /**
-     * Loads a JSON file and parses it as a NusModule object based on GSON. Returns null if the file does not exist or
-     * the file is not in a valid format.
+     * Loads a JSON file and parses it as a ModuleManager object based on GSON followed by loading all notes content.
+     * Returns null if the file does not exist or the file is not in a valid format.
      *
      * @return NusModule based on the contents of the file.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
@@ -75,6 +82,7 @@ public class ModuleStorage {
         }
         TerminusLogger.info("Decoding JSON to object");
         ModuleManager moduleManager = gson.fromJson(Files.newBufferedReader(filePath), ModuleManager.class);
+        TerminusLogger.info("Loading notes content into ModuleManager");
         loadAllNotes(moduleManager);
         return moduleManager;
     }
@@ -90,7 +98,7 @@ public class ModuleStorage {
             throw new NullPointerException("module cannot be null!");
         }
         initializeFile();
-        TerminusLogger.info("Converting NusModule object into String...");
+        TerminusLogger.info("Converting ModuleManager object into String...");
         String jsonString = gson.toJson(moduleManager);
         TerminusLogger.info("String conversion completed.");
         TerminusLogger.info(String.format("Writing to file: %s", filePath.toString()));
@@ -110,13 +118,17 @@ public class ModuleStorage {
             modDirPath = Paths.get(filePath.getParent().toString(), mod);
             // Check if module name is a valid module and file name
             if (!CommonUtils.isValidFileName(mod) || !mod.matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
+                // Skip this module and remove from moduleManager
+                TerminusLogger.warning(String.format("Invalid module name detected: %s", mod));
                 moduleManager.removeModule(mod);
                 continue;
             }
-            // Check if directory does not exist proceed to create directory, retrieve notes otherwise.
-            if (!Files.isDirectory(modDirPath)) {
+            // Check if directory does not exist and proceed to create directory, otherwise retrieve notes.
+            if (Files.notExists(modDirPath)) {
+                TerminusLogger.info("Creating directory: " + modDirPath);
                 Files.createDirectories(modDirPath);
             } else {
+                // Load its notes file data if there is any.
                 loadNotesFromModule(moduleManager, mod);
             }
         }
@@ -138,8 +150,11 @@ public class ModuleStorage {
         contentManager.purgeData();
         for (File file : listOfFiles) {
             if (isValidFile(file)) {
+                TerminusLogger.info(String.format("Loading note file %s.", file.getAbsolutePath()));
                 contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
                         Files.readString(Paths.get(file.getAbsolutePath()))));
+            } else {
+                TerminusLogger.info(String.format("File %s is not a valid note file.", file.getAbsolutePath()));
             }
         }
     }
@@ -164,13 +179,20 @@ public class ModuleStorage {
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void saveNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
-        Path modDirPath;
-        modDirPath = Paths.get(filePath.getParent().toString(), mod);
+        Path modDirPath = Paths.get(filePath.getParent().toString(), mod);
         assert CommonUtils.isValidFileName(mod);
-        if (!Files.isDirectory(modDirPath)) {
+        // Create module folder if it is missing.
+        if (Files.notExists(modDirPath)) {
+            TerminusLogger.info("Creating directory: " + modDirPath);
             Files.createDirectories(modDirPath);
         }
+
+        // Remove all files within the folder, used when notes have been deleted.
+        TerminusLogger.info("Removing files from directory: " + modDirPath);
         deleteAllFilesInDirectory(modDirPath);
+
+        // Write to its specific note files.
+        TerminusLogger.info("Adding note files into directory: " + modDirPath);
         ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
         ArrayList<Note> noteArrayList = contentManager.getContents();
         for (Note note : noteArrayList) {
@@ -178,6 +200,7 @@ public class ModuleStorage {
             assert CommonUtils.isValidFileName(note.getName());
             Path filePath = Paths.get(modDirPath.toString(), note.getName() + CommonFormat.EXTENSION_TEXT_FILE);
             Files.writeString(filePath, note.getData());
+            TerminusLogger.info("Added file: " + filePath);
         }
     }
 
@@ -190,42 +213,63 @@ public class ModuleStorage {
         File folder = new File(directoryPath.toString());
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
-            cleanIncorrectItem(file);
+            cleanAllFilesInclusive(file);
             if (file.exists()) {
                 throw new IOException(Messages.ERROR_FILES_NOT_DELETED);
             }
         }
     }
 
-    public void cleanAfterDeleteModule(ModuleManager moduleManager, String mod) throws IOException {
+    /**
+     * Deletes all files from the deleted module folder.
+     *
+     * @param mod A module name in the moduleManager.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
+    public void cleanAfterDeleteModule(String mod) throws IOException {
+        TerminusLogger.info("Cleaning up deleted modules.");
         Path modDirPath = Paths.get(filePath.getParent().toString(), mod);
-        if (!Files.isDirectory(modDirPath)) {
-            // Directory does not exist yet, due to the fact that no note was added yet.
+        if (Files.notExists(modDirPath)) {
+            TerminusLogger.info("Directory does not exists: " + modDirPath);
             return;
         }
         File folder = new File(modDirPath.toString());
-        cleanIncorrectItem(folder);
+        cleanAllFilesInclusive(folder);
         if (folder.exists()) {
             throw new IOException(Messages.ERROR_FILES_NOT_DELETED);
         }
     }
 
-    private void cleanIncorrectItem(File file) throws IOException {
+    /**
+     * Deletes all files within itself and itself from a specified file.
+     *
+     * @param file The file to be deleted.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
+    private void cleanAllFilesInclusive(File file) throws IOException {
         Files.walk(Paths.get(file.getAbsolutePath()))
                 .sorted(Comparator.reverseOrder())
                 .map(Path::toFile)
                 .forEach(File::delete);
     }
 
+    /**
+     * Creates a module directory and checks if directory is empty.
+     *
+     * @param moduleName The name of the directory to be created.
+     * @return True if the directory created is empty.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
     public boolean createModuleDirectory(String moduleName) throws IOException {
         assert moduleName != null;
         assert CommonUtils.isValidFileName(moduleName);
         assert moduleName.matches(CommonFormat.SPACE_NEGATED_DELIMITER);
         Path modDirPath = Paths.get(filePath.getParent().toString(), moduleName);
-        if (!Files.isDirectory(modDirPath)) {
+        if (Files.notExists(modDirPath)) {
+            TerminusLogger.info("Creating directory: " + modDirPath);
             Files.createDirectories(modDirPath);
         } else {
-            // Nuke existing file
+            TerminusLogger.info("Removing files from directory: " + modDirPath);
             deleteAllFilesInDirectory(modDirPath);
         }
         return true;
@@ -233,7 +277,7 @@ public class ModuleStorage {
 
     private boolean isValidFile(File file) throws IOException {
         boolean isValid = true;
-        if (!file.isFile()) {
+        if (!Files.isReadable(Paths.get(file.getAbsolutePath()))) {
             isValid = false;
         } else if (!CommonUtils.isValidFileName(CommonUtils.getFileNameOnly(file.getName()))) {
             isValid = false;
