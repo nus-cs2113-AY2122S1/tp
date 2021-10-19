@@ -14,6 +14,8 @@ import terminus.module.ModuleManager;
  */
 public class LinkCommandParser extends InnerModuleCommandParser {
 
+    private static LinkCommandParser parser;
+
     public LinkCommandParser() {
         super(CommonFormat.COMMAND_SCHEDULE);
     }
@@ -24,11 +26,13 @@ public class LinkCommandParser extends InnerModuleCommandParser {
      * @return A LinkCommandParser object which contains the command map for the schedule workspace.
      */
     public static LinkCommandParser getInstance() {
-        LinkCommandParser parser = new LinkCommandParser();
-        parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
-        parser.addCommand(CommonFormat.COMMAND_ADD, new AddLinkCommand());
-        parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand(Link.class));
-        parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand(Link.class));
+        if (parser == null) {
+            parser = new LinkCommandParser();
+            parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
+            parser.addCommand(CommonFormat.COMMAND_ADD, new AddLinkCommand());
+            parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand(Link.class));
+            parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand(Link.class));
+        }
         return parser;
     }
 

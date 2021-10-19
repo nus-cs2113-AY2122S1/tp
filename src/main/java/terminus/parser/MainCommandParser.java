@@ -7,16 +7,18 @@ import terminus.module.ModuleManager;
 
 public class MainCommandParser extends CommandParser {
 
-    private static final MainCommandParser PARSER = new MainCommandParser();
+    private static MainCommandParser parser;
 
     public MainCommandParser() {
         super("");
     }
 
     public static MainCommandParser getInstance() {
-        MainCommandParser parser = PARSER;
-        parser.addCommand("module", new ModuleCommand());
-        parser.addCommand("go", new GoCommand());
+        if (parser == null) {
+            parser = new MainCommandParser();
+            parser.addCommand("module", new ModuleCommand());
+            parser.addCommand("go", new GoCommand());
+        }
         return parser;
     }
 
