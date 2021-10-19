@@ -1,7 +1,9 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.Ingredient;
-import expiryeliminator.data.IngredientList;
+import java.time.LocalDate;
+
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.NotFoundException;
 
@@ -17,10 +19,12 @@ public class IncrementCommand extends Command {
                     + "Example: " + COMMAND_WORD + " i/Red Apple q/3";
 
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
-    private static final String MESSAGE_INGREDIENT_INCREMENTED = "I've incremented this ingredient by %1$s:\n" + "%2$s";
+    private static final String MESSAGE_INGREDIENT_INCREMENTED = "I've incremented this ingredient by %1$s:\n"
+            + "\n%2$s";
 
     private final String ingredientName;
     private final int quantity;
+    private final LocalDate expiryDate;
 
     /**
      * Initialises command and stores relevant parameters.
@@ -28,24 +32,26 @@ public class IncrementCommand extends Command {
      * @param ingredientName Name of ingredient to be incremented.
      * @param quantity Quantity to increment by.
      */
-    public IncrementCommand(String ingredientName, int quantity) {
+    public IncrementCommand(String ingredientName, int quantity, LocalDate expiryDate) {
         assert ingredientName != null && !ingredientName.isBlank()
                 : "Ingredient name cannot be null and cannot be blank";
         assert quantity >= 0 : "Quantity cannot be negative";
+        assert expiryDate != null : "Expiry date cannot be null";
         this.ingredientName = ingredientName;
         this.quantity = quantity;
+        this.expiryDate = expiryDate;
     }
 
     @Override
-    public String execute(IngredientList ingredients, RecipeList recipes) {
-        assert ingredients != null : "Ingredient list cannot be null";
-        final Ingredient ingredient;
+    public String execute(IngredientRepository ingredients, RecipeList recipes) {
+        assert ingredients != null : "Ingredient repository cannot be null";
+        final IngredientStorage ingredientStorage;
         try {
-            ingredient = ingredients.find(ingredientName);
+            ingredientStorage = ingredients.find(ingredientName);
         } catch (NotFoundException e) {
             return MESSAGE_INGREDIENT_NOT_FOUND;
         }
-        ingredient.setQuantity(ingredient.getQuantity() + quantity);
-        return String.format(MESSAGE_INGREDIENT_INCREMENTED, quantity, ingredient);
+        ingredientStorage.add(quantity, expiryDate);
+        return String.format(MESSAGE_INGREDIENT_INCREMENTED, quantity, ingredientStorage);
     }
 }
