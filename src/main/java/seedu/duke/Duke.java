@@ -8,6 +8,7 @@ import seedu.duke.storage.ModuleStorage;
 import seedu.duke.storage.SelectedModuleStorage;
 import seedu.duke.storage.SelectedUniversityStorage;
 import seedu.duke.storage.UniversityStorage;
+import seedu.duke.ui.Ui;
 import seedu.duke.universities.UniversityList;
 
 import java.util.Scanner;
@@ -29,6 +30,7 @@ public class Duke {
             Parser mainParser = new Parser(universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
             Command cmd = null;
+            Ui.welcome();
 
             do {
                 try {

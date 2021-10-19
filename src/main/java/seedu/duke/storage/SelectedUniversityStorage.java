@@ -42,12 +42,12 @@ public class SelectedUniversityStorage {
             String line = scanner.nextLine();
             if (curr.equals(" ")) {
                 curr = line;
-            } else if (!curr.contains("|")) {
+            } else if (!curr.contains("#")) {
                 universities.add(new University(curr, moduleMappings));
                 curr = line;
                 moduleMappings = new ArrayList<>();
             } else {
-                String[] attributes = line.split(" //| ");
+                String[] attributes = line.split(" # ");
                 Module local = new Module(attributes[0], attributes[1],
                         parseDouble(attributes[2]));
                 Module mapped = new Module(attributes[3], attributes[4],

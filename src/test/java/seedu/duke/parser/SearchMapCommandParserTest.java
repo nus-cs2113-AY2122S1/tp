@@ -20,9 +20,9 @@ public class SearchMapCommandParserTest {
     public void testCorrectUniversityName_success() throws IOException {
         try {
             UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
-            SearchMapCommand command = new SearchMapCommandParser().parse("Aalto University",
+            SearchMapCommand command = new SearchMapCommandParser().parse("Boston University",
                     universityMasterList, universitySelectedList, moduleSelectedList);
-            assertEquals("Aalto University", command.getUniversityToMap().getName());
+            assertEquals("Boston University", command.getSelectedUniversity().getName());
         } catch (ParseException e) {
             System.out.println(e.getMessage());
         }

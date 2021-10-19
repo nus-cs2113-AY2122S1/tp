@@ -36,7 +36,7 @@ public class Module {
     }
 
     public String toFileFormat() {
-        return moduleCode + " | " + moduleName + " | " + moduleCredits +
+        return moduleCode + " # " + moduleName + " # " + moduleCredits +
                 System.lineSeparator();
     }
 }

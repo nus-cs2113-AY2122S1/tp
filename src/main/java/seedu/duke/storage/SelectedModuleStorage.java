@@ -36,7 +36,7 @@ public class SelectedModuleStorage {
         ArrayList<Module> modules = new ArrayList<>();
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            String[] attributes = line.split(" //| ");
+            String[] attributes = line.split(" # ");
             modules.add(new Module(attributes[0], attributes[1], parseDouble(attributes[2])));
         }
         logger.log(Level.INFO, "Modules stored in the file are successfully loaded");

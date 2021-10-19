@@ -7,21 +7,26 @@ import seedu.duke.universities.UniversityList;
 public class SearchMapCommand extends Command {
     public static final String COMMAND_WORD = "searchmap";
 
-    private final University universityToMap;
+    private final University selectedUniversity;
 
-    public SearchMapCommand(University universityToMap, UniversityList universitySelectedList,
+    public SearchMapCommand(University selectedUniversity, UniversityList universitySelectedList,
                             ModuleList moduleSelectedList) {
         super(universitySelectedList, moduleSelectedList);
-        assert universityToMap.getName() != null;
-        assert universityToMap.getClass() != null;
-        this.universityToMap = universityToMap;
-        System.out.println("Potential mappings for " + universityToMap.getName() + ": ");
-        universityToMap.listMappings();
+        assert selectedUniversity.getName() != null;
+        assert selectedUniversity.getClass() != null;
+        this.selectedUniversity = selectedUniversity;
+        if (selectedUniversity.getSelectedMappings(moduleSelectedList).isEmpty()) {
+            System.out.println("There is no potential mappings for " + selectedUniversity.getName());
+        } else {
+            System.out.println("Potential mappings for " + selectedUniversity.getName() + ": ");
+            selectedUniversity.listSelectedMappings(moduleSelectedList);
+        }
     }
 
-    public University getUniversityToMap() {
-        assert universityToMap.getName() != null;
-        assert universityToMap.getClass() != null;
-        return universityToMap;
+    public University getSelectedUniversity() {
+        assert selectedUniversity.getName() != null;
+        assert selectedUniversity.getClass() != null;
+        return selectedUniversity;
     }
+
 }
