@@ -62,4 +62,16 @@ public class University {
         return 0;
     }
 
+    public String toFileFormat() {
+        String result = name + System.lineSeparator();
+        for (int i = 0; i < list.size(); i++) {
+            Module local = list.get(i).getLocalModule();
+            Module mapped = list.get(i).getMappedModule();
+            result += (local.getModuleCode() + " # " + local.getModuleName()
+                    + " # " + local.getModuleCredits() + " # " + mapped.getModuleCode()
+                    + " # " + mapped.getModuleName() + " # " + mapped.getModuleCredits()
+                    + System.lineSeparator());
+        }
+        return result;
+    }
 }

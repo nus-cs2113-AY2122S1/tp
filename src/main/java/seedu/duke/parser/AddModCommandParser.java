@@ -5,8 +5,8 @@ import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.UniversityList;
 
+import java.io.IOException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,7 +16,7 @@ public class AddModCommandParser {
 
     public AddModCommand parse(String arguments, ModuleList moduleMasterList,
                                UniversityList universitySelectedList, ModuleList moduleSelectedList)
-            throws ParseException {
+            throws ParseException, IOException {
 
         logger.log(Level.INFO, "Start parsing addmod command");
 

@@ -6,6 +6,7 @@ import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +16,7 @@ public class RemoveCommandParser {
     private Logger logger = Logger.getLogger("RemoveCommandParserLog");
 
     public RemoveCommand parse(String arguments, UniversityList universitySelectedList,
-                               ModuleList moduleSelectedList) throws ParseException {
+                               ModuleList moduleSelectedList) throws ParseException, IOException {
 
         logger.log(Level.INFO, "Start parsing remove command");
 

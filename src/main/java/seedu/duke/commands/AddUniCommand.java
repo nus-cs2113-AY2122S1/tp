@@ -1,8 +1,11 @@
 package seedu.duke.commands;
 
 import seedu.duke.modules.ModuleList;
+import seedu.duke.storage.SelectedUniversityStorage;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
+
+import java.io.IOException;
 
 public class AddUniCommand extends Command {
     public static final String COMMAND_WORD = "adduni";
@@ -10,7 +13,7 @@ public class AddUniCommand extends Command {
     private final University universityToAdd;
 
     public AddUniCommand(University universityToAdd, UniversityList universitySelectedList,
-                         ModuleList moduleSelectedList) {
+                         ModuleList moduleSelectedList) throws IOException {
         super(universitySelectedList, moduleSelectedList);
         assert universityToAdd.getName() != null;
         assert universityToAdd.getClass() != null;
@@ -20,6 +23,7 @@ public class AddUniCommand extends Command {
         assert universitySelectedList.searchUniversity(universityToAdd.getName());
         assert universitySelectedList.get(universitySelectedList.getSize() - 1)
                 .getName().equals(universityToAdd.getName());
+        SelectedUniversityStorage.write(universitySelectedList);
         System.out.println("New university added: " + universityToAdd.getName());
     }
 }
