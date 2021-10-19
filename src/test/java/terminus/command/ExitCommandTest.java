@@ -2,6 +2,7 @@ package terminus.command;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.common.CommonFormat;
@@ -28,7 +29,7 @@ public class ExitCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidArgumentException, InvalidCommandException {
+    void execute_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command exitCommand = commandParser.parseCommand(CommonFormat.COMMAND_EXIT);
         CommandResult mainResult = exitCommand.execute(ui, moduleManager);
         assertTrue(mainResult.isOk() && mainResult.isExit());

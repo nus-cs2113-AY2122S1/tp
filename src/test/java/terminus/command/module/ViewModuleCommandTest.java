@@ -2,6 +2,7 @@ package terminus.command.module;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -29,7 +30,7 @@ public class ViewModuleCommandTest {
     }
 
     @Test
-    void execute_viewModule_success() throws InvalidArgumentException, InvalidCommandException {
+    void execute_viewModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("view");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());

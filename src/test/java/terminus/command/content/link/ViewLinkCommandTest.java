@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -35,7 +36,7 @@ public class ViewLinkCommandTest {
     }
 
     @Test
-    void execute_viewAll_success() throws InvalidCommandException, InvalidArgumentException {
+    void execute_viewAll_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
@@ -50,7 +51,7 @@ public class ViewLinkCommandTest {
     }
 
     @Test
-    void execute_viewLink_success() throws InvalidCommandException, InvalidArgumentException {
+    void execute_viewLink_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
@@ -69,7 +70,7 @@ public class ViewLinkCommandTest {
     }
 
     @Test
-    void execute_viewLink_exceptionThrown() throws InvalidCommandException, InvalidArgumentException {
+    void execute_viewLink_exceptionThrown() throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");

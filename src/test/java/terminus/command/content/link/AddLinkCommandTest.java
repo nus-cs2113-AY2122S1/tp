@@ -3,6 +3,7 @@ package terminus.command.content.link;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,7 +47,7 @@ public class AddLinkCommandTest {
     }
 
     @Test
-    void execute_addLinkCommand_success() throws InvalidCommandException, InvalidArgumentException {
+    void execute_addLinkCommand_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command addLinkCommand = linkCommandParser.parseCommand("add \"test\" \"Monday\" \"00:00\" \"https://zoom.us/test\"");
         CommandResult addResult = addLinkCommand.execute(ui, moduleManager);
         assertTrue(addResult.isOk());

@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import terminus.TestFilePath;
 import terminus.content.Link;
 import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
@@ -15,6 +18,7 @@ import terminus.parser.LinkCommandParser;
 import terminus.parser.MainCommandParser;
 import terminus.parser.ModuleWorkspaceCommandParser;
 import terminus.parser.NoteCommandParser;
+import terminus.storage.ModuleStorage;
 import terminus.ui.Ui;
 
 public class GoCommandTest {
@@ -22,19 +26,28 @@ public class GoCommandTest {
     private MainCommandParser commandParser;
     private ModuleManager moduleManager;
     private Ui ui;
+    private ModuleStorage moduleStorage;
 
     private String tempModule = "test";
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
+        this.moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        this.moduleStorage.createModuleDirectory(tempModule);
         this.commandParser = MainCommandParser.getInstance();
         this.moduleManager = new ModuleManager();
         moduleManager.setModule(tempModule);
         this.ui = new Ui();
     }
 
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
+
     @Test
-    void execute_go_success() throws InvalidArgumentException, InvalidCommandException {
+    void execute_go_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("go " + tempModule);
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());
@@ -48,7 +61,7 @@ public class GoCommandTest {
     }
 
     @Test
-    void execute_goAdvance_success() throws InvalidArgumentException, InvalidCommandException {
+    void execute_goAdvance_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("go " + tempModule + " note");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());

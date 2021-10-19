@@ -4,35 +4,47 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import terminus.TestFilePath;
 import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.MainCommandParser;
 import terminus.parser.NoteCommandParser;
+import terminus.storage.ModuleStorage;
 import terminus.ui.Ui;
 
 public class NoteCommandTest {
 
     private MainCommandParser commandParser;
     private Ui ui;
-
     private ModuleManager moduleManager;
+    private ModuleStorage moduleStorage;
 
     private String tempModule = "test";
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IOException {
+        this.moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        this.moduleStorage.createModuleDirectory(tempModule);
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
         moduleManager.setModule(tempModule);
         ui = new Ui();
     }
 
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
+
     @Test
-    void execute_scheduleAdvance_success() throws InvalidArgumentException, InvalidCommandException {
+    void execute_scheduleAdvance_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command mainCommand = commandParser.parseCommand("go " + tempModule + " note");
         CommandResult changeResult = mainCommand.execute(ui, moduleManager);
         assertTrue(changeResult.isOk());

@@ -4,33 +4,44 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import terminus.TestFilePath;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.MainCommandParser;
 import terminus.parser.ModuleCommandParser;
+import terminus.storage.ModuleStorage;
 import terminus.ui.Ui;
 
 public class ModuleCommandTest {
 
     private MainCommandParser commandParser;
     private Ui ui;
-
+    private ModuleStorage moduleStorage;
     private ModuleManager moduleManager;
 
     private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
+        this.moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
         ui = new Ui();
     }
 
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
+
     @Test
-    void execute_module_success() throws InvalidArgumentException, InvalidCommandException {
+    void execute_module_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("module");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());
