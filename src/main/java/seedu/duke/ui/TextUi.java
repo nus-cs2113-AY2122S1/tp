@@ -123,7 +123,8 @@ public class TextUi {
                 if (list.checkOverspending(month)) {
                     System.out.println("You are spending too much for " + monthString + " !");
                 }
-                String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString() : " Not Set";
+                String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString()
+                        : " Not Set";
                 System.out.println("Your budget for " + monthString + ":" + budget + LS
                         + "Your expenditures:");
                 if (list.getMonthListSize(month) > 0) {
