@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+skinparam actorStyle awesome
+Actor User as user
+Participant ":UI" as ui
+Participant ":Parser" as parser
+Participant ":Member" as member
+Participant ":MemberStorage" as storage
+
+user -> ui : "add /m Bob /s A01231234B /p 98765432"
+activate ui
+
+ui -> parser
+activate parser
+
+parser -> member : makeMemberEntry()
+activate member
+
+member -> storage : writeMemberFile()
+activate storage
+
+storage -> storage : Save to file
+activate storage
+storage --> storage
+deactivate storage
+
+storage --> member
+deactivate storage
+
+member --> parser
+deactivate member
+
+parser --> ui
+deactivate parser
+
+ui --> user
+deactivate ui
+@enduml
