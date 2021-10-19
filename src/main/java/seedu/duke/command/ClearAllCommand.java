@@ -21,7 +21,6 @@ public class ClearAllCommand extends Command {
     public void execute(ArrayList<String> parameters) {
         logger.log(Level.INFO, "Start of process");
 
-
         DishList.clearList();
         IngredientList.clearList();
         logger.log(Level.INFO, "Successfully cleared both lists");

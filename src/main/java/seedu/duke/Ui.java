@@ -144,7 +144,7 @@ public class Ui {
             + "    Example: 'add ingr stored chicken' ; '1.5' \n"
             + "7. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]' \n"
             + "    Example: 'add ingr waste chicken' ; '0.7' \n"
-            + "8. Linking an Ingredient to a Dish : 'add dish constituent [dishName] / [ingrName]'\n"
+            + "8. Linking an Ingredient to a Dish : 'add constituent [dishName] / [ingrName]'\n"
             + "    Example: 'add constituent chicken rice / chicken' \n"
             + "9. Deleting an Ingredient : 'del [ingrName]' \n"
             + "    Example: 'del ingr chicken' \n"
