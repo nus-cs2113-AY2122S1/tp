@@ -349,6 +349,25 @@ You can use command 'add' to add new ingredients!
 ____________________________________________________________
 ```
 
+### Display a graph: `graph`
+Add a new Dish to your Dish list
+
+Format: `add dish dishName`
+
+* The `dishName` can be in a natural language format.
+
+Example of usage:
+
+`add dish chicken rice`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Dish added to list: chicken rice
+____________________________________________________________
+```
+
 ### Exit Food-O-Rama: `bye`
 Exit Food-O-Rama and save all data entries.
 

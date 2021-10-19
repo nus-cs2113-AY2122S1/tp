@@ -80,7 +80,7 @@ public class Ingredient implements  Comparable<Ingredient> {
     }
 
     public String toGraph(double max) {
-        double wastage = ingredientWasteDish + ingredientWasteDish;
+        double wastage = ingredientWasteDish + ingredientWasteIngr;
         String bar = "[";
         int num = (int)(10 * wastage / max);
         for (int i = 0; i < 10; i++) {
