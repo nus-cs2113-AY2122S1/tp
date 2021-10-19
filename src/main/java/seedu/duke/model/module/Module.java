@@ -82,7 +82,8 @@ public class Module {
     }
 
     /**
-     * Returns the full module information as a string in a ready to print format.
+     * Returns the full module information as a string in a ready to print format. This should only be called
+     * on a module retrieved from FullModuleList.
      *
      * @return a string of the full module information
      */

@@ -313,7 +313,10 @@ public class Ui {
      * @throws DukeException when there is an error in retrieving the full module information of a module in the list
      */
     public void printModulesWithDetails(ModuleList moduleList) throws DukeException {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Here are the detailed information of your modules:");
         System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
+        System.out.print(LINE);
     }
 
     // All-related methods

@@ -1,6 +1,5 @@
 package seedu.duke.model.module;
 
-import seedu.duke.Duke;
 import seedu.duke.DukeException;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.commons.util.JsonUtil;
