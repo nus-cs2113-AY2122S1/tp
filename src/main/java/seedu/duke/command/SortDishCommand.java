@@ -13,7 +13,9 @@ public class SortDishCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) {
+        Ui ui =  new Ui();
         DishList.dishList.sort(dishComparator);
-
+        ui.printSortDishMsg();
+        DishList.list();
     }
 }
