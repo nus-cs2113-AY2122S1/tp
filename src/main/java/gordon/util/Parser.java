@@ -99,8 +99,8 @@ public class Parser {
         }
         String newLine = line.substring(ingredientsIndex + INGREDIENTS_WORD_LENGTH);
         String[] ingredientsList = newLine.split("\\+");
-        for (int i = 0; i < ingredientsList.length; i++) {
-            r.addIngredient(ingredientsList[i].trim());
+        for (String s : ingredientsList) {
+            r.addIngredient(s.trim());
         }
     }
 

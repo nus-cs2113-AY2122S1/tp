@@ -125,6 +125,7 @@ public class Cookbook {
         }
 
         throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
   
     public void addCookbookTag(Tag tag) {
         // Prevent duplicate master-Tags at Cookbook level
