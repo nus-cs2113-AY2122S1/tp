@@ -88,8 +88,6 @@ public class AddNoteCommandTest {
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("add \".......\" \"test\"").execute(ui, moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"       test     \" \"test\"").execute(ui, moduleManager));
-        assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("add \"\" \"test\"").execute(ui, moduleManager));
         String s = "a".repeat(31);
         assertThrows(InvalidArgumentException.class,
