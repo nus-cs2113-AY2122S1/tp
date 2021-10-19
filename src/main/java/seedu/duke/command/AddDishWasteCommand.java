@@ -20,16 +20,20 @@ public class AddDishWasteCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) {
-        Ui ui = new Ui();
         logger.log(Level.INFO, "Start of process");
+
+        Ui ui = new Ui();
         String dish = String.join(" ", parameters);
         int dishIndex = DishList.find(dish);
         System.out.println(ui.getLineDivider());
+
         if (dishIndex == -1) {
-            System.out.println(ui.getDishNotExistMsg());
+            ui.printDishNotExistMsg();
             logger.log(Level.INFO, "Dish does not exist", dishIndex);
         } else {
             assert (dishIndex != -1) : "The dishIndex cannot be -1";
+
+            // TODO shift to Dish class
             try {
                 System.out.println("Enter the wastage of " + dish + " in KG:");
                 Scanner in = new Scanner(System.in);
@@ -42,8 +46,7 @@ public class AddDishWasteCommand extends Command {
                         + " "
                         + dishWeightValue);
             } catch (NumberFormatException e) {
-                System.out.println(ui.getInvalidParamMsg());
-                System.out.println(ui.getLineDivider());
+                ui.printInvalidParamMsg();
             }
         }
         System.out.println(ui.getLineDivider());

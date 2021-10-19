@@ -11,11 +11,9 @@ public class IngredientList {
         if (IngredientList.find(ingredientName) == -1) {
             Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeight);
             ingredientList.add(ingredientToAdd);
-            System.out.println(ui.getLineDivider() + System.lineSeparator()
-                    + "Ingredient added to list: " + ingredientToAdd.getIngredientName()
-                    + " (Weight: " + ingredientWeight + " kg)");
+            ui.printAddedIngredient(ingredientToAdd, ingredientWeight);
         } else {
-            System.out.println(ui.getIngrExistsMsg());
+            ui.printIngrExistsMsg();
         }
     }
 
@@ -46,18 +44,14 @@ public class IngredientList {
     }
 
     public static void list() {
-        System.out.println("Here are the ingredients you have: ");
-        for (int i = 0; i < ingredientList.size(); i++) {
-            System.out.println((i + 1) + ". " + ingredientList.get(i));
-        }
-        System.out.println("You can use command 'add' to add new ingredients!");
+        ui.printIngrList(ingredientList);
     }
 
     public static void delete(String ingredientName) {
         int listSize = ingredientList.size(); //listSize = N
         int ingredientIndex = IngredientList.find(ingredientName);
         if (ingredientIndex == -1) {
-            System.out.println(ui.getIngrNotExistMsg());
+            ui.printIngrNotExistMsg();
             assert ingredientList.size() == listSize : "ingredientList should be of size N";
         } else {
             //Get all dishes
@@ -71,7 +65,7 @@ public class IngredientList {
                 }
             }
             ingredientList.remove(ingredientIndex);
-            System.out.println("Ingredient, " + ingredientName + " has been removed!");
+            ui.printIngrNameRemoved(ingredientName);
             assert ingredientList.size() == (listSize - 1) : "ingredientList should be of size N-1";
         }
     }

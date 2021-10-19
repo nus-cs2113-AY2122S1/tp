@@ -14,7 +14,7 @@ public class DishList {
             ui.printAddedDish(dishToAdd.getDishName());
         } else {
             assert DishList.find(dishName) >= 0;
-            System.out.println(ui.getDishExistsMsg());
+            ui.printDishExistsMsg();
         }
     }
 
@@ -52,7 +52,7 @@ public class DishList {
         int listSize = dishList.size(); //listSize = N
         int dishIndex = DishList.find(dishName);
         if (dishIndex == -1) {
-            System.out.println(ui.getDishNotExistMsg());
+            ui.printDishNotExistMsg();
             assert dishList.size() == listSize : "dishList should be of size N";
         } else {
             dishList.remove(dishIndex);

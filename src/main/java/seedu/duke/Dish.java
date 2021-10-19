@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Dish implements Comparable<Dish>{
+public class Dish implements Comparable<Dish> {
     private static Logger logger = Logger.getLogger("Dish class");
     private ArrayList<Ingredient> constituents = new ArrayList<>();
     private Ui ui = new Ui();
@@ -50,16 +50,19 @@ public class Dish implements Comparable<Dish>{
     public void addConstituent(String ingredientName) {
         int ingredientIndex = IngredientList.find(ingredientName);
         if (ingredientIndex == -1) {
-            System.out.println(ui.getIngrNotExistMsg());
+            ui.printIngrNotExistMsg();
         } else {
             //Subtract the old contribution if it exists
             for (Ingredient ingredient : constituents) {
                 ingredient.addDishWaste(-ingredientContribution);
             }
             constituents.add(IngredientList.ingredientList.get(ingredientIndex));
-            System.out.println("Added " + ingredientName + " as ingredient of " + dishName);
+
+            ui.printAddedConstituentOf(ingredientName, dishName);
+
             //Modify the ingredient contribution to reflect the change
             ingredientContribution = wastage / constituents.size();
+
             //Add new contribution
             for (Ingredient ingredient : constituents) {
                 ingredient.addDishWaste(ingredientContribution);
@@ -70,7 +73,8 @@ public class Dish implements Comparable<Dish>{
     public void addWaste(Double value) {
         assert value > 0 : "Adding negative waste is impossible";
         wastage += value;
-        System.out.println("Wastage of " + dishName + " is now " + wastage + " kg");
+        ui.printWastage(dishName, wastage);
+
         if (!constituents.isEmpty()) {
             //Todo proportion stuff and prevent feedback loop
             ingredientContribution = wastage / constituents.size();
@@ -101,9 +105,9 @@ public class Dish implements Comparable<Dish>{
 
     public String toGraph(double max) {
         String bar = "[";
-        int num = (int)(10 * wastage/max);
+        int num = (int)(10 * wastage / max);
         for (int i = 0; i < 10; i++) {
-            if(i < num) {
+            if (i < num) {
                 bar = bar + "█";
             } else  {
                 bar = bar + " ";
