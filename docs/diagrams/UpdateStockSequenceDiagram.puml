@@ -1,0 +1,55 @@
+@startuml UpdateStockSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":UpdateStock" as updatestock COLOR_COMMAND
+end box
+
+box Parser COLOR_PARSER_BOX
+    participant ":CommandSyntax" as commandsyntax COLOR_PARSER
+    participant ":StockValidator" as stockvalidator COLOR_PARSER
+    participant ":StockManager" as stockmanager COLOR_PARSER
+end box
+
+-> updatestock: execute()
+    activate updatestock
+        updatestock -> commandsyntax: containsInvalidParameters()
+        activate commandsyntax
+            updatestock <-- commandsyntax: isInvalidParameter
+        deactivate commandsyntax
+
+        opt !isInvalidParameter
+        updatestock -> stockvalidator: containsInvalidParameterValues()
+        activate stockvalidator
+            updatestock <-- stockvalidator: isInvalidParameterValues
+        deactivate stockvalidator
+            opt !isInvalidParameterValues
+                updatestock -> stockmanager: extractStock()
+                activate stockmanager
+                    updatestock <-- stockmanager: stock
+                deactivate stockmanager
+
+                updatestock -> updatestock: processQuantityValues()
+                activate updatestock
+                    updatestock --> updatestock: isValidQuantityValues
+                deactivate updatestock
+
+                opt isValidQuantityValues
+                    updatestock -> updatestock: processDateInput()
+                    activate updatestock
+                        updatestock --> updatestock: isValidExpDate
+                    deactivate updatestock
+                    opt isValidExpDate
+                        updatestock -> updatestock: setUpdatesByStockId(stock)
+                        activate updatestock
+                        deactivate updatestock
+                    end
+                end
+            end
+        end
+
+    deactivate updatestock
+
+@enduml
