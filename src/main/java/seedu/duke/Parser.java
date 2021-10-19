@@ -212,7 +212,10 @@ public class Parser {
         String expenseCategory = expenseInfo[1].toLowerCase();
         ArrayList<Person> listOfPersonsIncluded = checkValidPersons(Storage.getOpenTrip(), expenseInfo[2]);
         String expenseDescription = getDescription(expenseInfo[2]);
-        currTrip.addExpense(new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription));
+
+        Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
+        newExpense.setDate(newExpense.prompDate());
+        currTrip.addExpense(newExpense);
         Ui.printExpenseAddedSuccess();
     }
 

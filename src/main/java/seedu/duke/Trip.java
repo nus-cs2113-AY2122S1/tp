@@ -159,6 +159,7 @@ public class Trip {
     public void viewAllExpenses() {
         for (Expense expense : listOfExpenses) {
             Ui.printExpenseDetails(expense);
+            System.out.println();
         }
     }
 

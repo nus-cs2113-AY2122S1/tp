@@ -27,8 +27,6 @@ public class Expense {
         this.description = description;
         this.category = category;
         this.personsList = listOfPersons;
-        this.date = prompDate();
-        assert (this.date != null);
     }
 
     /**
@@ -36,7 +34,7 @@ public class Expense {
      *
      * @return today's date if user input is an empty string, otherwise keeps prompting user until a valid date is given
      */
-    private LocalDate prompDate() {
+    public LocalDate prompDate() {
         Scanner sc = Storage.getScanner();
         System.out.println("Enter date of expense:");
         System.out.println("\tPress enter to use today's date");
@@ -58,8 +56,8 @@ public class Expense {
             LocalDate.parse(date, pattern);
             return true;
         } catch (DateTimeParseException e) {
-            Storage.getLogger().log(Level.INFO, "Invalid date format");
-            System.out.println("Please enter date as DD-MM-YYYY");
+            Storage.getLogger().log(Level.INFO, "Invalid date format entered");
+            System.out.println("\tPlease enter date as DD-MM-YYYY, or enter nothing to use today's date");
             return false;
         }
     }
