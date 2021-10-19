@@ -4,19 +4,25 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Income extends Entry {
-
-    public Income(String description, double value, String category) {
+    IncomeCategory category;
+    
+    public Income(String description, double value, IncomeCategory category) {
         this.description = description;
         this.value = value;
         this.date = LocalDate.now();
         this.category = category;
     }
 
-    public Income(String description, double value, String category, LocalDate date) {
+    public Income(String description, double value, IncomeCategory category, LocalDate date) {
         this.description = description;
         this.value = value;
         this.date = date;
         this.category = category;
+    }
+
+    @Override
+    public IncomeCategory getCategory() {
+        return category;
     }
 
     @Override
