@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.commands.AddExpenseCommand;
 import seedu.commands.Command;
 import seedu.commands.DeleteIncomeCommand;
 import seedu.commands.HelpCommand;
@@ -22,6 +21,7 @@ import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeAmountException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
+import seedu.utility.Parser;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;

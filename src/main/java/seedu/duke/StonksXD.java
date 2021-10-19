@@ -6,6 +6,7 @@ import seedu.commands.ExitCommand;
 import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
 
+import seedu.utility.Parser;
 import seedu.utility.Ui;
 
 
@@ -25,8 +26,8 @@ public class StonksXD {
     public void run() {
         dataManager.load(parser, finances, ui);
         ui.printWelcome();
-        //StonksGraph graph = new StonksGraph(finances);
-        //System.out.println(graph);
+//        StonksGraph graph = new StonksGraph(finances);
+//        System.out.println(graph);
         boolean exitFlag = true;
         while (exitFlag) {
             String fullCommand = ui.readCommand();

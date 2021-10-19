@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.utility;
 
 
 import seedu.utility.FinancialTracker;
