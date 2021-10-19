@@ -5,8 +5,11 @@ import command.CommandParameters;
 import command.CommandSyntax;
 import inventory.Order;
 import inventory.Medicine;
+import inventory.Stock;
 import utilities.parser.DateParser;
+import utilities.parser.OrderManager;
 import utilities.parser.OrderValidator;
+import utilities.parser.StockManager;
 import utilities.storage.Storage;
 
 import utilities.ui.Ui;
@@ -15,6 +18,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Date;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,17 +42,19 @@ public class AddOrderCommand extends Command {
         ArrayList<Medicine> medicines = Medicine.getInstance();
         Storage storage = Storage.getInstance();
 
-        String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
-        String[] optionalParameter = {};
+        String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY};
+        String[] optionalParameter = {CommandParameters.DATE};
 
-        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameter, CommandSyntax.ADD_ORDER_COMMAND, false)) {
+        boolean isInvalidParameters = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
+                optionalParameter, CommandSyntax.ADD_ORDER_COMMAND, false);
+        if (isInvalidParameters) {
             logger.log(Level.WARNING, "Invalid parameters given by user");
             return;
         }
 
-        if (OrderValidator.containsInvalidParameterValues(ui, parameters, medicines,
-                CommandSyntax.ADD_ORDER_COMMAND)) {
+        boolean isInvalidParameterValues = OrderValidator.containsInvalidParameterValues(ui, parameters, medicines,
+                CommandSyntax.ADD_ORDER_COMMAND);
+        if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");
             return;
         }
@@ -57,15 +63,27 @@ public class AddOrderCommand extends Command {
         String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
         String dateToAdd = parameters.get(CommandParameters.DATE);
 
-        Date orderDate = null;
+        int maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
         try {
+            int orderQuantity = Integer.parseInt(quantityToAdd);
+            if (orderQuantity > maxQuantity) {
+                ui.print("Unable to add order! Order quantity more than maximum order quantity.");
+                return;
+            }
+
+            if (dateToAdd == null) {
+                Date defaultDate = null;
+                defaultDate = new Date(); //order date will be today's date if no user input for date parameter
+                addOrder(ui, medicines, nameToAdd, orderQuantity, defaultDate);
+                return;
+            }
+
+            Date orderDate = null;
             orderDate = DateParser.stringToDate(dateToAdd);
+            addOrder(ui, medicines, nameToAdd, orderQuantity, orderDate);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        int orderQuantity = Integer.parseInt(quantityToAdd);
-        addOrder(ui, medicines, nameToAdd, orderQuantity, orderDate);
     }
 
     /**
