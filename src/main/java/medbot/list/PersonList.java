@@ -1,5 +1,6 @@
 package medbot.list;
 
+import medbot.CommandManager;
 import medbot.Parser;
 import medbot.exceptions.MedBotException;
 import medbot.person.Person;
@@ -120,7 +121,7 @@ public class PersonList {
     }
 
     public String getNoPersonIdErrorMessage(int personId) {
-        if (Parser.getViewType() == ViewType.PATIENT_INFO) {
+        if (CommandManager.getViewType() == ViewType.PATIENT_INFO) {
             return "No patient with ID " + personId + " found.";
         }
         return "No person with ID " + personId + " found.";

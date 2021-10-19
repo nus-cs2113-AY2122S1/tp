@@ -275,7 +275,7 @@ public class Ui {
      * Prints switched view message.
      */
     public void printSwitchedViewMessage() {
-        ViewType viewType = Parser.getViewType();
+        ViewType viewType = CommandManager.getViewType();
 
         if (viewType == ViewType.PATIENT_INFO) {
             System.out.println("  ___  _ _____ ___ ___ _  _ _____ \n"

@@ -82,8 +82,6 @@ public class Parser {
 
     private static final String EMPTY_STRING = "";
 
-    private static ViewType viewType = ViewType.PATIENT_INFO;
-
     /**
      * Checks the current view type that the parser is in and returns the relevant
      * parseCommand object based on the view type.
@@ -92,19 +90,20 @@ public class Parser {
      * @return the corresponding Command object.
      * @throws MedBotParserException if command is unrecognised.
      */
-    public static Command parseCommand(String userInput) throws MedBotParserException {
-        if (Parser.viewType == ViewType.PATIENT_INFO) {
+    public static Command parseCommand(String userInput, ViewType viewType) throws MedBotParserException {
+        switch (viewType) {
+        case PATIENT_INFO:
             return parsePatientInfoCommand(userInput);
-        }
-        if (Parser.viewType == ViewType.SCHEDULER) {
-            return parseSchedulingCommand(userInput);
-        }
-        if (Parser.viewType == ViewType.MEDICAL_STAFF_INFO) {
+        case MEDICAL_STAFF_INFO:
             return parseMedicalStaffCommand(userInput);
+        case SCHEDULER:
+            return parseSchedulingCommand(userInput);
+        default:
+            assert false;
+            throw new MedBotParserException(WRONG_COMMAND_ERROR);
         }
-        assert false;
-        throw new MedBotParserException(WRONG_COMMAND_ERROR);
     }
+
 
     /**
      * Parses the user input for patient information related commands and returns the relevant Command object.
@@ -572,29 +571,4 @@ public class Parser {
         return matcher.replaceAll(replacementFunction);
     }
 
-    /**
-     * Switches the view type of the parser.
-     */
-    public static void switchViewType() {
-        switch (viewType) {
-        case PATIENT_INFO:
-            viewType = ViewType.MEDICAL_STAFF_INFO;
-            break;
-        case MEDICAL_STAFF_INFO:
-            viewType = ViewType.SCHEDULER;
-            break;
-        case SCHEDULER:
-            viewType = ViewType.PATIENT_INFO;
-            break;
-        default:
-        }
-    }
-
-    public static void setViewType(ViewType newViewType) {
-        viewType = newViewType;
-    }
-
-    public static ViewType getViewType() {
-        return viewType;
-    }
 }
