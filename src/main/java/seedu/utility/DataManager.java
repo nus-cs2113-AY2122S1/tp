@@ -1,6 +1,5 @@
 package seedu.utility;
 
-import seedu.duke.Parser;
 import seedu.entry.Expense;
 import seedu.entry.Income;
 import seedu.exceptions.InvalidExpenseAmountException;

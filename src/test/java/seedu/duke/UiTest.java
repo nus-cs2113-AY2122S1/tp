@@ -4,7 +4,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.entry.Expense;
+import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
+import seedu.entry.IncomeCategory;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Messages;
 import seedu.utility.Ui;
@@ -42,12 +44,12 @@ public class UiTest {
     private final FinancialTracker financialTracker = new FinancialTracker();
 
     public void initialiseFinancialTracker() {
-        financialTracker.addIncome(new Income("Paycheck August", 25.0, "Salary"));
-        financialTracker.addExpense(new Expense("Bought a game", 19.73, "Game"));
-        financialTracker.addExpense(new Expense("Bought cookies", 5.0, "Bakery"));
-        financialTracker.addExpense(new Expense("Bought cakes", 7.0, "Bakery"));
-        financialTracker.addIncome(new Income("Rob a bank", 2000.0, "Crime"));
-        financialTracker.addIncome(new Income("Paycheck July", 25.0, "Salary"));
+        financialTracker.addIncome(new Income("Paycheck August", 25.0, IncomeCategory.SALARY));
+        financialTracker.addExpense(new Expense("Bought a game", 19.73, ExpenseCategory.FOOD));
+        financialTracker.addExpense(new Expense("Bought cookies", 5.0, ExpenseCategory.FOOD));
+        financialTracker.addExpense(new Expense("Bought cakes", 7.0, ExpenseCategory.FOOD));
+        financialTracker.addIncome(new Income("Rob a bank", 2000.0, IncomeCategory.ADHOC));
+        financialTracker.addIncome(new Income("Paycheck July", 25.0, IncomeCategory.SALARY));
     }
     
     @Test
@@ -107,7 +109,7 @@ public class UiTest {
                 + "[E] Bought cookies - $5.00 " + currentDate + newLine
                 + SEPARATOR_LINE;
 
-        testUI.printExpenseAdded(new Expense("Bought cookies", 5.0, "Bakery"));
+        testUI.printExpenseAdded(new Expense("Bought cookies", 5.0, ExpenseCategory.FOOD));
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
@@ -117,7 +119,7 @@ public class UiTest {
                 + "Your most recent earning: " + newLine
                 + "[I] Salary August - $5.00 " + currentDate + newLine
                 + SEPARATOR_LINE;
-        testUI.printIncomeAdded(new Income("Salary August", 5.0, "Salary"));
+        testUI.printIncomeAdded(new Income("Salary August", 5.0, IncomeCategory.SALARY));
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
     }
 
