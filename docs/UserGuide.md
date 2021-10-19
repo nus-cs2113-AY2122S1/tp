@@ -201,7 +201,7 @@ Example: `adddispense n/panadol q/5 s/john c/123`
 
 Expected Output:
 ```
-Dispensed:panadol Quantity:5 Expiry date:Mon Sep 13 00:00:00 SGT 2021
+Dispensed:panadol Quantity:5 Expiry Date:13-09-2021
 ```
 
 ### Deleting a dispense record: `deletedispense`

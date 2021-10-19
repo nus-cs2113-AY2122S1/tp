@@ -7,6 +7,7 @@ import inventory.Dispense;
 import inventory.Medicine;
 import inventory.Stock;
 import utilities.parser.DispenseValidator;
+import utilities.parser.DateParser;
 import utilities.parser.StockManager;
 import utilities.storage.Storage;
 import utilities.ui.Ui;
@@ -82,6 +83,7 @@ public class AddDispenseCommand extends Command {
             int existingQuantity = stock.getQuantity();
             int existingId = stock.getStockID();
             Date existingExpiry = stock.getExpiry();
+
             int setStockValue = 0;
 
             if (existingQuantity == quantityToDispense) {
@@ -125,11 +127,12 @@ public class AddDispenseCommand extends Command {
     private void dispense(Ui ui, ArrayList<Medicine> medicines, String medicationName, String customerId,
                           String staffName, int quantityToDispense, Date dispenseDate, Stock stock,
                           int existingId, Date existingExpiry, int setStockValue) {
+        String expiry = DateParser.dateToString(existingExpiry);
         stock.setQuantity(setStockValue);
         medicines.add(new Dispense(medicationName, quantityToDispense, customerId, dispenseDate,
                 staffName, existingId));
         ui.print("Dispensed:" + medicationName + " Quantity:" + quantityToDispense + " Expiry "
-                + "date:" + existingExpiry);
+                + "Date:" + expiry);
     }
 
 }

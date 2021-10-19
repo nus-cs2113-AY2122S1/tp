@@ -37,8 +37,7 @@ public class DeleteDispenseCommand extends Command {
         String[] optionalParameters = {};
 
         boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameters,
-                CommandSyntax.DELETE_DISPENSE_COMMAND, true);
+                optionalParameters, CommandSyntax.DELETE_DISPENSE_COMMAND, true);
 
         if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
