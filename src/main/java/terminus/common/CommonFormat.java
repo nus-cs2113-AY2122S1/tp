@@ -29,4 +29,5 @@ public class CommonFormat {
     public static final String COMMAND_VIEW_MODULE_FORMAT = "view";
     public static final String SPACE_NEGATED_DELIMITER = "\\S+";
     public static final String COMMAND_MODULE = "module";
+    public static final String COMMAND_GO = "go";
 }

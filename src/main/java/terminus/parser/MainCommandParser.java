@@ -2,6 +2,7 @@ package terminus.parser;
 
 import terminus.command.GoCommand;
 import terminus.command.module.ModuleCommand;
+import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.module.ModuleManager;
 
@@ -16,8 +17,8 @@ public class MainCommandParser extends CommandParser {
     public static MainCommandParser getInstance() {
         if (parser == null) {
             parser = new MainCommandParser();
-            parser.addCommand("module", new ModuleCommand());
-            parser.addCommand("go", new GoCommand());
+            parser.addCommand(CommonFormat.COMMAND_MODULE, new ModuleCommand());
+            parser.addCommand(CommonFormat.COMMAND_GO, new GoCommand());
         }
         return parser;
     }
