@@ -19,13 +19,21 @@ public class SearchMapCommandParser {
                                   UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws ParseException {
         logger.log(Level.INFO, "start parsing searchmap command");
-        String universityName = arguments.trim();
-        if (universityName.length() == 0) {
+        String input = arguments.trim();
+        if (input.length() == 0) {
             logger.log(Level.WARNING, "no university given");
             throw new ParseException("no description given", 1);
         }
 
-        University university = searchForUniversity(universityName, universityMasterList);
+        University university;
+
+        if (isNumeric(input)) {
+            int index = Integer.parseInt(input);
+            university = universityMasterList.get(index - 1);
+        } else {
+            university = searchForUniversity(input, universityMasterList);
+        }
+
         if (university == null) {
             logger.log(Level.WARNING, "university not found");
             throw new ParseException("university does not exist", 1);
@@ -35,18 +43,18 @@ public class SearchMapCommandParser {
         return new SearchMapCommand(university, universitySelectedList, moduleSelectedList);
     }
 
+    private static boolean isNumeric(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
     private University searchForUniversity(String universityName, UniversityList universityMasterList) {
         for (University university : universityMasterList.getList()) {
             if (universityName.equals(university.getName())) {
-//                System.out.println("Supposed to be : " + universityName);
-//                System.out.println("Actually is : " + university.getName());
-                //debugging
-//                ArrayList<ModuleMapping> mappingList;
-//                mappingList = university.list;
-//                for (int i = 0; i < mappingList.size(); i++) {
-//                    System.out.println(mappingList.get(i).localModule.getModuleName() + " " + mappingList.get(i).mappedModule.getModuleName());
-//                }
-                //debugging end
                 return university;
             }
         }
