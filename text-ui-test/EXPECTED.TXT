@@ -23,7 +23,7 @@ Welcome to ConTech, your personal contact tracker.
 Can I get your name?
 ____________________________________________________________
 
-Name:____________________________________________________________
+Name: ____________________________________________________________
 Hello there, Le Zong.
 
 This is ConTech, your very own contact tracking application
@@ -41,7 +41,7 @@ Please provide us with your Github Username
 or press ENTER if you would like to skip.
 ____________________________________________________________
 
-GitHub Username:____________________________________________________________
+GitHub Username: ____________________________________________________________
 Please provide us with your Telegram Handle
 or press ENTER if you would like to skip.
 ____________________________________________________________
@@ -51,12 +51,12 @@ Please provide us with your Twitter Username
 or press ENTER if you would like to skip.
 ____________________________________________________________
 
-Twitter Username:____________________________________________________________
+Twitter Username: ____________________________________________________________
 Please provide us with your Email Address
 or press ENTER if you would like to skip.
 ____________________________________________________________
 
-Email Address:____________________________________________________________
+Email Address: ____________________________________________________________
 The email id is not correctly formatted,
 Rules for email id :
     * Lowercase letters only
@@ -67,12 +67,12 @@ Please enter your email again
 or press ENTER to skip.
 ____________________________________________________________
 
-Email Address:____________________________________________________________
+Email Address: ____________________________________________________________
 Please provide us with your LinkedIn Username
 or press ENTER if you would like to skip.
 ____________________________________________________________
 
-LinkedIn Username:____________________________________________________________
+LinkedIn Username: ____________________________________________________________
 You have successfully set up your own personal contact.
 Don't worry, you can always edit your personal details 
 later on.
