@@ -76,7 +76,7 @@ public class Storage {
                 Pair<Integer, ArrayList<String>> patientDetails = parseStorageLine(storageLine);
                 patient = createPatient(patientDetails);
                 patientList.addPersonFromStorage(patient);
-                lastId = patient.getPatientId();
+                lastId = patient.getPersonId();
 
             } catch (Exception e) {
                 loadStorageErrorMessage += loadStorageLineErrorMessage(lineNumber);
@@ -141,7 +141,7 @@ public class Storage {
         int patientId = patientDetails.first;
         ArrayList<String> prefixPlusPersonParameters = patientDetails.second;
 
-        patient.setPatientId(patientId);
+        patient.setPersonId(patientId);
 
         for (String prefixPlusPersonParameter : prefixPlusPersonParameters) {
             //updatePersonalInformation does error-checking of patient details

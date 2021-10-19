@@ -1,8 +1,6 @@
 package medbot.list;
 
 import medbot.exceptions.MedBotException;
-import medbot.list.PersonList;
-import medbot.person.Patient;
 import medbot.person.Staff;
 
 public class MedicalStaffList extends PersonList {

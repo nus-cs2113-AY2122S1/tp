@@ -120,7 +120,7 @@ class StorageTest {
         Patient[] patients = {patient1, patient2, patient3, patient4, patient5, patient6, patient7};
 
         for (Patient p : patients) {
-            testPatientList.setLastId(p.getPatientId());
+            testPatientList.setLastId(p.getPersonId());
             testPatientList.addPerson(p);
         }
 
@@ -145,7 +145,7 @@ class StorageTest {
             throws MedBotException {
 
         Patient patient = new Patient();
-        patient.setPatientId(id);
+        patient.setPersonId(id);
         String[] parameterPrefixes = {"i/", "n/", "p/", "e/", "a/"};
         String[] parameters = {icNumber, name, phoneNumber, emailAddress, residentialAddress};
         ArrayList<String> prefixPlusPersonParameters = new ArrayList<>();

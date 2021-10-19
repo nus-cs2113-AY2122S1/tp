@@ -1,6 +1,6 @@
 package medbot.command;
 
-import medbot.Parser;
+import medbot.CommandManager;
 import medbot.Ui;
 import medbot.list.PersonList;
 import medbot.utilities.ViewType;
@@ -19,9 +19,9 @@ public class SwitchCommand extends Command {
     @Override
     public void execute(PersonList personList, Ui ui) {
         if (newViewType == null) {
-            Parser.switchViewType();
+            CommandManager.switchViewType();
         } else {
-            Parser.setViewType(newViewType);
+            CommandManager.setViewType(newViewType);
         }
 
         ui.clearConsoleFromIde();
