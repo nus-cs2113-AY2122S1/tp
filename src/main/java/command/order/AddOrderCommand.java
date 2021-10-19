@@ -95,13 +95,11 @@ public class AddOrderCommand extends Command {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
+            } else {
+                ui.print("Order name exists, unable to add order as total order quantity exceeds maximum "
+                        + "stock quantity.\n");
             }
-            else {
-                ui.print("Order name exists, unable to add order as total order quantity exceeds maximum " +
-                        "stock quantity.\n");
-            }
-        }
-        else {
+        } else {
             if (dateToAdd == null) {
                 Date defaultDate = null;
                 defaultDate = new Date();
@@ -118,6 +116,7 @@ public class AddOrderCommand extends Command {
             }
         }
     }
+
 
     /**
      * Add order based on user input.
