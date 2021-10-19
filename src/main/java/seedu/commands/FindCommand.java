@@ -1,6 +1,8 @@
 package seedu.commands;
 
-import seedu.entry.*;
+import seedu.entry.Entry;
+import seedu.entry.ExpenseCategory;
+import seedu.entry.IncomeCategory;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
