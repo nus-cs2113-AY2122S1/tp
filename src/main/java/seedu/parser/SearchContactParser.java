@@ -11,6 +11,9 @@ public class SearchContactParser implements ContactDetails {
     public String parseSearchQuery(String userInput) throws MissingArgException {
         String[] destructuredInputs = userInput.trim().split(" ", NUMBER_OF_SEARCH_ARGS);
         if (destructuredInputs.length == 2) { //search for name if no flag specified
+            if (destructuredInputs[1].trim().charAt(0) == '-') { //if only flag is specified
+                throw new MissingArgException();
+            }
             return destructuredInputs[1].toLowerCase().trim();
         } else if (destructuredInputs.length == NUMBER_OF_SEARCH_ARGS) { //search for name with flag
             return destructuredInputs[2].toLowerCase().trim();
