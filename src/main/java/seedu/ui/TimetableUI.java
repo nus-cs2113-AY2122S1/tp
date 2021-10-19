@@ -13,6 +13,7 @@ public class TimetableUI {
         CODE, LESSONTYPE, VENUE,
     }
 
+    private static final int NINE_AM = 9;
     private static final String FIXED_LENGTH_FORMAT = "%-16.16s";
     private static final String DIVIDER = "----------------";
     private static final String MODULES_HEADER = "Modules taken this semester: \n";
@@ -47,8 +48,14 @@ public class TimetableUI {
      */
     public static void printScheduleHours(int start, int end) {
         String infoLine = "\t\t\t\t";
+        String time;
         for (int u = start; u <= end; u++) {
-            infoLine += String.format(FIXED_LENGTH_FORMAT, u > 9 ? u + "00" : "0" + u + "00");
+            if (u > NINE_AM) {
+                time = u + "00";
+            } else {
+                time = "0" + u + "00";
+            }
+            infoLine += String.format(FIXED_LENGTH_FORMAT, time);
         }
         System.out.println(infoLine);
     }
