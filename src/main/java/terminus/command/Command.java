@@ -1,5 +1,6 @@
 package terminus.command;
 
+import java.io.IOException;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
@@ -45,7 +46,7 @@ public abstract class Command {
      * @throws InvalidArgumentException when arguments parsing fails.
      */
     public abstract CommandResult execute(Ui ui, ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException;
+            throws InvalidCommandException, InvalidArgumentException, IOException;
 
     /**
      * Returns the module name.

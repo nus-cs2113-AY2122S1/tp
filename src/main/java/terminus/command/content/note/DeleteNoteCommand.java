@@ -20,15 +20,11 @@ public class DeleteNoteCommand extends DeleteCommand {
     }
 
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException, IOException {
         CommandResult result = super.execute(ui, moduleManager);
         // Update file accordingly
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        try {
-            moduleStorage.saveNotesFromModule(moduleManager, getModuleName());
-        } catch (IOException e) {
-            // throw file exception here
-        }
+        moduleStorage.saveNotesFromModule(moduleManager, getModuleName());
         return result;
     }
 }

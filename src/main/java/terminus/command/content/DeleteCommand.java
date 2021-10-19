@@ -1,5 +1,6 @@
 package terminus.command.content;
 
+import java.io.IOException;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
@@ -77,7 +78,7 @@ public class DeleteCommand<T extends Content> extends Command {
      * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException, IOException {
         assert getModuleName() != null;
         NusModule module = moduleManager.getModule(getModuleName());
         ContentManager<T> contentManager = module.getContentManager(type);

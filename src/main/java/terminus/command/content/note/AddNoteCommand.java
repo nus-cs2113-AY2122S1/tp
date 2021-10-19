@@ -68,7 +68,7 @@ public class AddNoteCommand extends Command {
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      */
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws IOException {
         assert getModuleName() != null;
         TerminusLogger.info("Executing Add Note Command");
         NusModule module = moduleManager.getModule(getModuleName());
@@ -81,11 +81,7 @@ public class AddNoteCommand extends Command {
 
         // Save to file
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        try {
-            moduleStorage.saveNotesFromModule(moduleManager, getModuleName());
-        } catch (IOException e) {
-            // throw file exception here
-        }
+        moduleStorage.saveNotesFromModule(moduleManager, getModuleName());
         return new CommandResult(true, false);
     }
 
