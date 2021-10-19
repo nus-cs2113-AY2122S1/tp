@@ -1,18 +1,18 @@
 package terminus.parser;
 
 import terminus.command.BackCommand;
-import terminus.command.DeleteCommand;
-import terminus.command.ViewCommand;
-import terminus.command.zoomlink.AddLinkCommand;
+import terminus.command.content.DeleteCommand;
+import terminus.command.content.ViewCommand;
+import terminus.command.content.link.AddLinkCommand;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.Link;
-import terminus.module.NusModule;
+import terminus.module.ModuleManager;
 
 /**
  * LinkCommandParser class to manage schedule-related commands.
  */
-public class LinkCommandParser extends CommandParser {
+public class LinkCommandParser extends InnerModuleCommandParser {
 
     public LinkCommandParser() {
         super(CommonFormat.COMMAND_SCHEDULE);
@@ -35,11 +35,12 @@ public class LinkCommandParser extends CommandParser {
     /**
      * Returns the opening description of the workspace.
      *
-     * @param module The current module containing the array list of all the links.
+     * @param moduleManager The current module containing the array list of all the links.
      * @return The string containing a description of the number of links in the workspace.
      */
     @Override
-    public String getWorkspaceBanner(NusModule module) {
-        return String.format(Messages.SCHEDULE_BANNER, module.getContentManager(Link.class).getContents().size());
+    public String getWorkspaceBanner(ModuleManager moduleManager) {
+        return String.format(Messages.SCHEDULE_BANNER,
+                moduleManager.getModule(getModuleName()).getContentManager(Link.class).getContents().size());
     }
 }

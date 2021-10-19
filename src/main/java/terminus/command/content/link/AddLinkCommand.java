@@ -1,4 +1,4 @@
-package terminus.command.zoomlink;
+package terminus.command.content.link;
 
 import static terminus.common.CommonUtils.isValidDay;
 import static terminus.common.CommonUtils.isValidUrl;
@@ -13,9 +13,8 @@ import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Link;
-
 import terminus.exception.InvalidArgumentException;
-
+import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.ui.Ui;
 
@@ -52,7 +51,7 @@ public class AddLinkCommand extends Command {
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
 
-        if (arguments == null || arguments.isBlank()) {
+        if (CommonUtils.isStringNullOrEmpty(arguments)) {
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
         }
 
@@ -85,11 +84,13 @@ public class AddLinkCommand extends Command {
      * Prints the relevant response to the Ui.
      *
      * @param ui The Ui object to send messages to the users.
-     * @param module The NusModule contain the list of all notes and schedules.
+     * @param moduleManager The NusModule contain the list of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      */
     @Override
-    public CommandResult execute(Ui ui, NusModule module) {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+        assert getModuleName() != null;
+        NusModule module = moduleManager.getModule(getModuleName());
         ContentManager contentManager = module.getContentManager(Link.class);
         assert contentManager != null;
 

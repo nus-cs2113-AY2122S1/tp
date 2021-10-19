@@ -8,22 +8,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
-import terminus.command.content.DeleteCommand;
-import terminus.command.content.ViewCommand;
-import terminus.command.content.note.AddNoteCommand;
+import terminus.command.module.AddModuleCommand;
+import terminus.command.module.DeleteModuleCommand;
+import terminus.command.module.ViewModuleCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 
-public class NoteCommandParserTest {
+public class ModuleCommandParserTest {
 
-    private NoteCommandParser commandParser;
-
-    private String tempModule = "test";
+    private ModuleCommandParser commandParser;
 
     @BeforeEach
     void setUp() {
-        this.commandParser = NoteCommandParser.getInstance();
-        this.commandParser.setModuleName(tempModule);
+        commandParser = ModuleCommandParser.getInstance();
     }
 
     @Test
@@ -58,16 +55,16 @@ public class NoteCommandParserTest {
     void parseCommand_resolveAddCommand_exceptionThrown()
             throws InvalidCommandException, InvalidArgumentException {
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add"));
-        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add \"test1\"test2\""));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"test\" \"test1\" \"test2\""));
+            () -> commandParser.parseCommand("add \"test\" \"test1\" "));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add \"    test     \" "));
     }
 
     @Test
     void parseCommand_resolveAddCommand_success() throws InvalidCommandException, InvalidArgumentException {
-        assertTrue(commandParser.parseCommand("add \"test\" \"test1\"") instanceof AddNoteCommand);
-        assertTrue(commandParser.parseCommand("add \"    test     \" \"    test1   \"") instanceof AddNoteCommand);
-        assertTrue(commandParser.parseCommand("add \"username\" \"password\"") instanceof AddNoteCommand);
+        assertTrue(commandParser.parseCommand("add \"test\" ") instanceof AddModuleCommand);
+        assertTrue(commandParser.parseCommand("add \"username\"") instanceof AddModuleCommand);
+        assertTrue(commandParser.parseCommand("add \"test1\"test2\"") instanceof AddModuleCommand);
     }
 
     @Test
@@ -80,20 +77,13 @@ public class NoteCommandParserTest {
     @Test
     void parseCommand_resolveDeleteCommand_success()
             throws InvalidCommandException, InvalidArgumentException {
-        assertTrue(commandParser.parseCommand("delete 1") instanceof DeleteCommand);
-        assertTrue(commandParser.parseCommand("delete 2") instanceof DeleteCommand);
-    }
-
-    @Test
-    void parseCommand_resolveViewCommand_exceptionThrown()
-            throws InvalidCommandException, InvalidArgumentException {
-        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("view abcd"));
+        assertTrue(commandParser.parseCommand("delete 1") instanceof DeleteModuleCommand);
+        assertTrue(commandParser.parseCommand("delete 2") instanceof DeleteModuleCommand);
     }
 
     @Test
     void parseCommand_resolveViewCommand_success() throws InvalidCommandException, InvalidArgumentException {
-        assertTrue(commandParser.parseCommand("view") instanceof ViewCommand);
-        assertTrue(commandParser.parseCommand("view 1") instanceof ViewCommand);
+        assertTrue(commandParser.parseCommand("view") instanceof ViewModuleCommand);
     }
 
     @Test
@@ -107,12 +97,13 @@ public class NoteCommandParserTest {
     }
 
     @Test
-    void getWorkspace_isNote() {
-        assertEquals(tempModule + " > note", commandParser.getWorkspace());
+    void getWorkspace_isModule() {
+        assertEquals("module", commandParser.getWorkspace());
     }
 
     @Test
     void getHelpMenu_isNotEmpty() {
         assertTrue(commandParser.getHelpMenu().length > 0);
     }
+
 }

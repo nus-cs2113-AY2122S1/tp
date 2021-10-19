@@ -28,4 +28,16 @@ public class Messages {
     public static final String MAIN_BANNER = "Welcome to TermiNUS!";
     public static final String NOTE_BANNER = "You have %d note(s) inside this workspace.";
     public static final String SCHEDULE_BANNER = "You have %d link(s) in this workspace.";
+    public static final String INVALID_ARGUMENT_FORMAT_MESSAGE_EXCEPTION = "%s %s";
+    public static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "Format: %s";
+    public static final String MESSAGE_COMMAND_MODULE = "Move to the module workspace";
+    public static final String MESSAGE_COMMAND_ADD_MODULE = "Adds a module";
+    public static final String ERROR_MESSAGE_MODULE_WHITESPACE = "Module name cannot contain any whitespaces!";
+    public static final String ERROR_MESSAGE_MODULE_EXIST = "Module already exist!";
+    public static final String MESSAGE_RESPONSE_MODULE_ADD = "Module %s has been added";
+    public static final String MESSAGE_RESPONSE_MODULE_DELETE = "Deleted module %s.";
+    public static final String MESSAGE_COMMAND_MODULE_DELETE = "Deletes a module";
+    public static final String MESSAGE_COMMAND_MODULE_VIEW = "View all modules available";
+    public static final String MESSAGE_RESPONSE_MODULE_FORMAT = "%d. %s";
+    public static final String MESSAGE_RESPONSE_NO_MODULES = "You do not have any modules.";
 }
