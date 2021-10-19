@@ -23,6 +23,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
+    private static final String ENDLINE = System.lineSeparator();
+
     private static final String COMMAND_ADD = "add";
     private static final String COMMAND_DELETE = "delete";
     private static final String COMMAND_EDIT = "edit";
@@ -44,30 +46,30 @@ public class Parser {
     private static final String VIEW_TYPE_MEDICAL_STAFF_VIEW = "m";
     private static final String VIEW_TYPE_SCHEDULER_VIEW = "s";
 
-    private static final String WRONG_COMMAND_ERROR = "Unable to parse command.";
-    private static final String WRONG_NUMBER_ERROR = "Unable to parse number.";
+    private static final String WRONG_COMMAND_ERROR = "Unable to parse command." + ENDLINE;
+    private static final String WRONG_NUMBER_ERROR = "Unable to parse number." + ENDLINE;
 
-    private static final String ERROR_NO_PARAMETER = "No parameters given";
+    private static final String ERROR_NO_PARAMETER = "No parameters given" + ENDLINE;
 
-    private static final String ERROR_PATIENT_ID_NOT_SPECIFIED = "Patient ID not specified.";
+    private static final String ERROR_PATIENT_ID_NOT_SPECIFIED = "Patient ID not specified." + ENDLINE;
 
-    private static final String ERROR_INVALID_VIEW_TYPE = "Invalid view type code.";
+    private static final String ERROR_INVALID_VIEW_TYPE = "Invalid view type code." + ENDLINE;
 
-    private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified";
+    private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified" + ENDLINE;
 
-    private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified";
-    private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format";
+    private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified" + ENDLINE;
+    private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format" + ENDLINE;
 
-    private static final String ERROR_PHONE_NUMBER_NOT_SPECIFIED = "Phone number not specified";
-    private static final String ERROR_PHONE_NUMBER_TOO_FEW_DIGITS = "Phone number has too few digits";
-    private static final String ERROR_PHONE_NUMBER_TOO_MANY_DIGITS = "Phone number has too many digits";
+    private static final String ERROR_PHONE_NUMBER_NOT_SPECIFIED = "Phone number not specified" + ENDLINE;
+    private static final String ERROR_PHONE_NUMBER_TOO_FEW_DIGITS = "Phone number has too few digits" + ENDLINE;
+    private static final String ERROR_PHONE_NUMBER_TOO_MANY_DIGITS = "Phone number has too many digits" + ENDLINE;
     private static final String ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS =
-            "Phone number contains unexpected characters";
+            "Phone number contains unexpected characters" + ENDLINE;
 
-    private static final String ERROR_EMAIL_ADDRESS_NOT_SPECIFIED = "Email address not specified";
-    private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "Incorrect email address format";
+    private static final String ERROR_EMAIL_ADDRESS_NOT_SPECIFIED = "Email address not specified" + ENDLINE;
+    private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "Incorrect email address format" + ENDLINE;
 
-    private static final String ERROR_ADDRESS_NOT_SPECIFIED = "Address not specified";
+    private static final String ERROR_ADDRESS_NOT_SPECIFIED = "Address not specified" + ENDLINE;
 
     private static final String REGEX_VERTICAL_LINE = "\\|";
     private static final String REGEX_INPUT_PARAMETER = " [a-zA-Z]{1,2}/";

@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static medbot.Ui.ENDLINE;
+
 public class PersonList {
     private HashMap<Integer, Person> persons = new HashMap<>();
     private int lastId = 1;
@@ -71,7 +73,7 @@ public class PersonList {
      * @throws MedBotException when the Person ID cannot be found
      */
     public void editPerson(int personId, Person newPersonData) throws MedBotException {
-        assert (personId > 0) && (personId <= size());
+        assert (personId > 0);
         mergeEditPersonData(persons.get(personId), newPersonData);
     }
 
@@ -85,7 +87,7 @@ public class PersonList {
         if (!persons.containsKey(personId)) {
             throw new MedBotException(getNoPersonIdErrorMessage(personId));
         }
-        assert (personId > 0) && (personId <= size());
+        assert (personId > 0);
         persons.remove(personId);
     }
 
@@ -100,7 +102,7 @@ public class PersonList {
         for (int key : persons.keySet()) {
             Person currentPerson = persons.get(key);
             if (currentPerson.containsAllParameters(parameters)) {
-                filteredPersons.add(currentPerson.toString());
+                filteredPersons.add(currentPerson.getInfoInTableFormat());
             }
         }
 
@@ -114,17 +116,19 @@ public class PersonList {
      */
     public String listPersons() {
         String output = "";
+
         for (int key : persons.keySet()) {
-            output += persons.get(key) + System.lineSeparator();
+            output += persons.get(key).getInfoInTableFormat() + ENDLINE;
         }
+
         return output;
     }
 
     public String getNoPersonIdErrorMessage(int personId) {
         if (CommandManager.getViewType() == ViewType.PATIENT_INFO) {
-            return "No patient with ID " + personId + " found.";
+            return "No patient with ID " + personId + " found." + ENDLINE;
         }
-        return "No person with ID " + personId + " found.";
+        return "No person with ID " + personId + " found." + ENDLINE;
     }
 
     /**
@@ -137,7 +141,7 @@ public class PersonList {
         for (int key : persons.keySet()) {
             Person person = persons.get(key);
             String personStorageString = person.getStorageString();
-            output += personStorageString + System.lineSeparator();
+            output += personStorageString + ENDLINE;
         }
         return output;
     }
