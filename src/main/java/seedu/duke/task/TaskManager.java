@@ -1,7 +1,9 @@
 package seedu.duke.task;
 
+import seedu.duke.command.flags.SortFlag;
 import seedu.duke.exception.EmptySortCriteriaException;
 import seedu.duke.exception.EmptyTasklistException;
+import seedu.duke.exception.SortFormatException;
 import seedu.duke.log.Log;
 
 import java.util.ArrayList;
@@ -37,15 +39,20 @@ public class TaskManager {
     }
 
     public static String sortTasklist(HashMap<String, String> criteria) throws EmptyTasklistException,
-            EmptySortCriteriaException {
-
+            SortFormatException, EmptySortCriteriaException {
         Log.info("sortTasklist method called");
+        String sortCriteria = "";
+
         if (taskList.size() == 0) {
             Log.warning("tasklist is empty, throwing EmptyTasklistException");
             throw new EmptyTasklistException();
         }
-
-        String sortCriteria = criteria.get("by");
+        if (criteria.containsKey(SortFlag.SORT_BY)) {
+            Log.warning("user did not indicate 'by' flag, throwing SortFormatException");
+            sortCriteria = criteria.get(SortFlag.SORT_BY);
+        } else {
+            throw new SortFormatException();
+        }
         if (sortCriteria.isEmpty()) {
             Log.warning("user did not indicate any sort criteria, throwing EmptySortCriteriaException");
             throw new EmptySortCriteriaException();
@@ -100,8 +107,6 @@ public class TaskManager {
             return 0;
         }
     }
-
-
 
     public static ArrayList<Task> getTaskList() {
         return taskList;
