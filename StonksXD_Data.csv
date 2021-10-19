@@ -1,12 +1,8 @@
 entry_type, entry_description, amount, category, date
-E, bought cookies, 500.0, bakery, 2021-01-18
-E, bought home, 555.0, bakery, 2021-07-18
-E, bought car, 4777.0, bakery, 2021-06-18
-E, bought condo, 8.7654888878E10, testcase, 2021-05-18
-E, KFC lunch, 10.2, FOOD, 2021-10-19
-I, rob a church, 300.0, Crime, 2021-11-18
-I, rob a car, 400.0, Crime, 2021-12-18
-I, rob a home, 500.0, Crime, 2021-09-18
-I, rob a child, 600.0, Crime, 2021-08-18
-I, lunch money, 1000.0, ALLOWANCE, 2021-10-19
-I, Birthday Money!, 200.0, ADHOC, 2021-10-19
+E, qwe, 12.5, FOOD, 2121-11-11
+E, qwe, 0.5, FOOD, 2121-11-11
+E, food, 100.0, FOOD, 2021-10-19
+E, qwe, 1000.2, FOOD, 2021-10-19
+E, qwe, 1000.2, FOOD, 2021-11-19
+I, qwe, 12.5, ALLOWANCE, 2121-11-11
+I, qwe, 12.5, ALLOWANCE, 2121-11-11
