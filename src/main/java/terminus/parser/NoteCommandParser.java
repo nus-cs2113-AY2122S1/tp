@@ -1,9 +1,9 @@
 package terminus.parser;
 
 import terminus.command.BackCommand;
-import terminus.command.content.DeleteCommand;
 import terminus.command.content.ViewCommand;
 import terminus.command.content.note.AddNoteCommand;
+import terminus.command.content.note.DeleteNoteCommand;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.Note;
@@ -21,7 +21,7 @@ public class NoteCommandParser extends InnerModuleCommandParser {
         parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
         parser.addCommand(CommonFormat.COMMAND_ADD, new AddNoteCommand());
         parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand(Note.class));
-        parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand(Note.class));
+        parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteNoteCommand(Note.class));
         return parser;
     }
 

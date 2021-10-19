@@ -1,5 +1,6 @@
 package terminus.command.content.note;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import terminus.command.Command;
 import terminus.command.CommandResult;
@@ -12,6 +13,7 @@ import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
+import terminus.storage.ModuleStorage;
 import terminus.ui.Ui;
 
 /**
@@ -76,6 +78,14 @@ public class AddNoteCommand extends Command {
         contentManager.add(new Note(name, data));
         TerminusLogger.info(String.format("Note(\"%s\",\"%s\") has been added", name, data));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE, name));
+
+        // Save to file
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        try {
+            moduleStorage.saveNotesFromModule(moduleManager, getModuleName());
+        } catch (IOException e) {
+            // throw file exception here
+        }
         return new CommandResult(true, false);
     }
 

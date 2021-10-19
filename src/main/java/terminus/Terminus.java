@@ -19,10 +19,10 @@ import terminus.ui.Ui;
 public class Terminus {
 
     public static final String[] INVALID_JSON_MESSAGE = {
-        "Invalid file data detected.",
-        "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
-        "To save your current file, close your terminal (do not run exit).",
-        "Otherwise, you can continue using the program :)"
+            "Invalid file data detected.",
+            "TermiNUS will still run, but the file will be overwritten when the next command is ran.",
+            "To save your current file, close your terminal (do not run exit).",
+            "Otherwise, you can continue using the program :)"
     };
     private Ui ui;
     private CommandParser parser;
@@ -140,6 +140,7 @@ public class Terminus {
         TerminusLogger.info("Saving data into file...");
         try {
             this.moduleStorage.saveFile(moduleManager);
+            this.moduleStorage.saveAllNotes(moduleManager);
             TerminusLogger.info("Save completed.");
         } catch (IOException e) {
             TerminusLogger.warning("File saving has failed.");

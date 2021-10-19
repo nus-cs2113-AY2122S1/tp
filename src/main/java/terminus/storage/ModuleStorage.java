@@ -91,7 +91,6 @@ public class ModuleStorage {
         TerminusLogger.info(String.format("Writing to file: %s", filePath.toString()));
         assert jsonString != null && !jsonString.isBlank() : "File saved is blank";
         Files.writeString(filePath, jsonString);
-        saveAllNotes(moduleManager);
     }
 
     private void loadAllNotes(ModuleManager moduleManager) throws IOException {
@@ -129,7 +128,7 @@ public class ModuleStorage {
         }
     }
 
-    private void saveAllNotes(ModuleManager moduleManager) throws IOException {
+    public void saveAllNotes(ModuleManager moduleManager) throws IOException {
         for (String mod : moduleManager.getAllModules()) {
             saveNotesFromModule(moduleManager, mod);
         }
