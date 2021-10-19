@@ -63,37 +63,44 @@ public class ContactList {
 
     //@@author ng-andre
     public void searchContact(String query, int detailType) throws InvalidFlagException {
+        boolean searchResult = false;
         for (int i = 0; i < contacts.size(); i++) {
             Contact contact = getContactAtIndex(i);
             switch (detailType) {
             case NAME_INDEX:
                 if (contact.getName().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
+                    searchResult = true;
                 }
                 break;
             case GITHUB_INDEX:
                 if (contact.getGithub().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
+                    searchResult = true;
                 }
                 break;
             case LINKEDIN_INDEX:
                 if (contact.getLinkedin().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
+                    searchResult = true;
                 }
                 break;
             case TELEGRAM_INDEX:
                 if (contact.getTelegram().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
+                    searchResult = true;
                 }
                 break;
             case TWITTER_INDEX:
                 if (contact.getTwitter().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
+                    searchResult = true;
                 }
                 break;
             case EMAIL_INDEX:
                 if (contact.getEmail().toLowerCase().contains(query)) {
                     TextUi.viewContactMessage(contact, i);
+                    searchResult = true;
                 }
                 break;
             default:
@@ -101,6 +108,9 @@ public class ContactList {
                 assert false;
                 throw new InvalidFlagException();
             }
+        }
+        if (!searchResult) {
+            TextUi.searchNoResultsFoundMessage();
         }
     }
 
