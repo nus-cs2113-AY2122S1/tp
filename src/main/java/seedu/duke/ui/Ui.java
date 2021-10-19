@@ -30,6 +30,9 @@ public class Ui {
         System.out.println(AsciiConstants.GLOBE);
     }
 
+    public static void printLogo() {
+        System.out.println(AsciiConstants.LOGO);
+    }
     public static void welcome() {
         System.out.println(AsciiConstants.GLOBE);
         System.out.println(AsciiConstants.LOGO);
