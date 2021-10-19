@@ -112,27 +112,23 @@ public class DeleteStockCommand extends Command {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        ArrayList<Stock> stocks = new ArrayList<>();
-        int totalRows = medicines.size();
+
+        int rowsAffected = 0;
         for (Medicine medicine : medicines) {
             if (!(medicine instanceof Stock)) {
                 continue;
             }
-            stocks.add((Stock) medicine);
-        }
-        for (Stock stock : stocks) {
-            Date stockDate = stock.getExpiry();
-            if (stockDate.before(date)) {
-                medicines.remove(stock);
+            Date stockDate = ((Stock) medicine).getExpiry();
+            boolean isDeleted = ((Stock) medicine).isDeleted();
+            if (!isDeleted && stockDate.before(date)) {
+                ((Stock) medicine).setDeleted(true);
+                rowsAffected++;
             }
         }
-        int remainingRows = medicines.size();
-        int rowsDeleted = totalRows - remainingRows;
-
-        assert rowsDeleted >= 0 : "Rows deleted cannot be negative";
-        if (rowsDeleted > 0) {
-            logger.log(Level.INFO, "Expired stock found: deleted " + rowsDeleted);
-            ui.print("Deleted expired medications! Rows deleted: " + rowsDeleted);
+        assert rowsAffected >= 0 : "Rows deleted cannot be negative";
+        if (rowsAffected > 0) {
+            logger.log(Level.INFO, "Expired stock found: deleted " + rowsAffected);
+            ui.print("Deleted expired medications! Rows deleted: " + rowsAffected);
         } else {
             logger.log(Level.INFO, "No expired stocks found");
             ui.print("Delete aborted! Unable to find expired medications!");
