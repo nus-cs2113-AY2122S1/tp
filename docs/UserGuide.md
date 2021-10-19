@@ -104,7 +104,7 @@ _TO BE ADDED_
 
 Lists the ingredients expiring before a given date.
 
-Format: `expiry` (TBA)
+Format: `expiry d/date` (TBA)
 
 ### 2.8. Exiting the program
 
