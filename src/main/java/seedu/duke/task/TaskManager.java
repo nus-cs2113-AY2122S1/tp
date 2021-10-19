@@ -75,6 +75,7 @@ public class TaskManager {
             return "The sort criteria entered is not valid";
         }
 
+        Log.info("end of sortTasklist - no issues detected");
         return "[!] Tasklist has been sorted by " + sortCriteria;
     }
 
