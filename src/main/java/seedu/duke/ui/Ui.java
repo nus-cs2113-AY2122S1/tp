@@ -294,6 +294,11 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays the list of modules with only the basic module information.
+     *
+     * @param moduleList the list of modules
+     */
     public void printModuleList(ModuleList moduleList) {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the modules in your list:");
@@ -301,6 +306,12 @@ public class Ui {
         System.out.print(LINE);
     }
 
+    /**
+     * Displays the list of modules with the full module information.
+     *
+     * @param moduleList the list of modules
+     * @throws DukeException when there is an error in retrieving the full module information of a module in the list
+     */
     public void printModulesWithDetails(ModuleList moduleList) throws DukeException {
         System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
     }

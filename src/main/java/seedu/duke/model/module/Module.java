@@ -81,6 +81,11 @@ public class Module {
         }
     }
 
+    /**
+     * Returns the full module information as a string in a ready to print format.
+     *
+     * @return a string of the full module information
+     */
     public String getFullInfo() {
         StringBuilder s = new StringBuilder();
         s.append(Ui.LINE).append(Ui.PADDING).append(this).append(System.lineSeparator());
@@ -93,6 +98,11 @@ public class Module {
         return s.toString();
     }
 
+    /**
+     * Returns a string of the basic module information only. (module code, title and module credits)
+     *
+     * @return a string of the basic module information
+     */
     @Override
     public String toString() {
         return moduleCode + " " + title + " (" + moduleCredit + "MCs) ";
