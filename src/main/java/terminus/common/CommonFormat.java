@@ -23,4 +23,9 @@ public class CommonFormat {
             + "\"<day>\" \"<start_time " + LOCAL_TIME_FORMAT + ">\" \"<zoom_link>\"";
     public static final String COMMAND_ADD_NOTE_FORMAT = COMMAND_ADD + " \"<note name>\" \"<note content>\"";
 
+    public static final String SPACE_DELIMITER = "\\s+";
+    public static final String COMMAND_MODULE_FORMAT = "module";
+    public static final String COMMAND_ADD_MODULE_FORMAT = "add \"<module name>\"";
+    public static final String COMMAND_VIEW_MODULE_FORMAT = "view";
+    public static final String SPACE_NEGATED_DELIMITER = "\\S+";
 }

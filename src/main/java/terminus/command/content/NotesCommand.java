@@ -1,10 +1,10 @@
-package terminus.command;
+package terminus.command.content;
 
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.parser.NoteCommandParser;
 
-public class NotesCommand extends WorkspaceCommand {
+public class NotesCommand extends InnerModuleCommand {
 
     public NotesCommand() {
         super(NoteCommandParser.getInstance());
