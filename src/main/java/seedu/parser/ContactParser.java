@@ -16,24 +16,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public abstract class ContactParser extends RegexParser {
-    public static final int CONTACT_PARAMS_START_INDEX = 1;
-    public static final int NUMBER_OF_DETAILS = 2;
-    public static final int NUMBER_OF_ADD_ARGS = 2;
-    public static final int NUMBER_OF_EDIT_ARGS = 3;
-    public static final int NUMBER_OF_FIELDS = 6;
+public abstract class ContactParser extends RegexParser implements ContactDetails {
 
-    public static final String DETAIL_SEPARATOR = " -";
-    public static final int FLAG_INDEX_IN_DETAILS = 0;
-    public static final int DETAIL_INDEX_IN_DETAILS = 1;
-    public static final int USER_INFO_INDEX = 2;
-
-    public static final String NAME_FLAG = "n";
-    public static final String GITHUB_FLAG = "g";
-    public static final String TELEGRAM_FLAG = "te";
-    public static final String TWITTER_FLAG = "tw";
-    public static final String EMAIL_FLAG = "e";
-    public static final String LINKEDIN_FLAG = "l";
 
     private static final Logger LOGGER = Logger.getLogger(ContactParser.class.getName());
 
@@ -71,33 +55,5 @@ public abstract class ContactParser extends RegexParser {
         checkRegex(flag, detailToStore);
         indexToStore = getIndexToStore(flag);
         contactDetails[indexToStore] = detailToStore;
-    }
-
-
-    private int getIndexToStore(String flag) throws InvalidFlagException {
-        int indexToStore;
-        switch (flag) {
-        case NAME_FLAG:
-            indexToStore = DetailType.NAME.getIndex();
-            break;
-        case GITHUB_FLAG:
-            indexToStore = DetailType.GITHUB.getIndex();
-            break;
-        case TELEGRAM_FLAG:
-            indexToStore = DetailType.TELEGRAM.getIndex();
-            break;
-        case TWITTER_FLAG:
-            indexToStore = DetailType.TWITTER.getIndex();
-            break;
-        case EMAIL_FLAG:
-            indexToStore = DetailType.EMAIL.getIndex();
-            break;
-        case LINKEDIN_FLAG:
-            indexToStore = DetailType.LINKEDIN.getIndex();
-            break;
-        default:
-            throw new InvalidFlagException();
-        }
-        return indexToStore;
     }
 }
