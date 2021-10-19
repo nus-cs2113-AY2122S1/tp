@@ -4,6 +4,7 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.storage.Storage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -65,6 +66,10 @@ public class IngredientList {
         }
     }
 
+    public LocalDate getIngredientExpiry(int ingredientNumber) {
+        return ingredientList.get(ingredientNumber - 1).getExpiry();
+    }
+
     /**
      * Removes an ingredient from the list.
      * @param ingredientNumber ingredient number to remove
@@ -112,5 +117,6 @@ public class IngredientList {
             throw new DukeException(INVALID_NUMBER);
         }
     }
+
 
 }

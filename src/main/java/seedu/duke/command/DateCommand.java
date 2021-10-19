@@ -14,7 +14,7 @@ public class DateCommand implements Command {
     private String date;
     private LocalDate formattedDate;
 
-    private static final String DATE_FORMAT = "dd MMM yyyy";
+    private static final String DATE_FORMAT = "dd MM yyyy";
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
     public DateCommand(String date) {

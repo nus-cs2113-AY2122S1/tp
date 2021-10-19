@@ -1,11 +1,12 @@
 package seedu.duke;
 
-import seedu.duke.command.UpdateCommand;
 import seedu.duke.command.AddCommand;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.ListCommand;
-import seedu.duke.command.DateCommand;
 import seedu.duke.command.HelpCommand;
+import seedu.duke.command.ListCommand;
+import seedu.duke.command.UpdateCommand;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.DateCommand;
+import seedu.duke.command.ExpireCommand;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
@@ -23,6 +24,7 @@ public class Parser {
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_DATE = "date";
+    private static final String COMMAND_EXPIRE = "expire";
 
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
@@ -68,6 +70,8 @@ public class Parser {
             return parseDateCommand(command);
         case COMMAND_HELP:
             return parseHelpCommand();
+        case COMMAND_EXPIRE:
+            return parseExpireCommand(command);
         case COMMAND_EXIT:
             return "";
         default:
@@ -212,5 +216,18 @@ public class Parser {
         String detail = command.substring(COMMAND_DATE.length()).trim();
 
         return new DateCommand(detail).run();
+    }
+
+    /**
+     * Parses and executes the expire command.
+     */
+    private static String parseExpireCommand(String command) throws DukeException {
+        String detail = command.substring(COMMAND_EXPIRE.length()).trim();
+        try {
+            LocalDate expireBeforeDate = Ingredient.stringToDate(detail);
+            return new ExpireCommand(expireBeforeDate).run();
+        } catch (DateTimeParseException e) {
+            throw new DukeException(EXPIRY_FORMAT_ERROR_MESSAGE);
+        }
     }
 }
