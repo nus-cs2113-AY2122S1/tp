@@ -25,6 +25,11 @@ purchase of raw ingredients and enables more efficient allocation to the cooking
   * [Graphical representatioon of Dishes wasteage](#graphical-representatioon-of-dishes-wasteage-graph-dish)
   * [Find Ingredients with matching keyword](#find-ingredients-with-matching-keyword-find-ingr)
   * [Find Dishes with matching keyword](#find-dishes-with-matching-keyword-find-dish)
+  * [Clears Ingredient entries in the list of Ingredients totally](#clears-all-ingredient-entries-in-the-list-of-ingredients-clear-ingr)
+  * [Clears Dish entries in the list of Dishes totally](#clears-all-dish-entries-in-the-list-of-dishes-clear-dish)
+  * [Clears Ingredient & Dish entries in the list of Dishes totally](#clears-all-ingredient--dish-entries-in-the-list-of-dishes-clear-all)
+  * [Sort the Ingredients by amount of wastage](#sort-the-dishes-by-amount-of-wastage-sort-ingr)
+  * [Sort the Dishes by amount of wastage](#sort-the-dishes-by-amount-of-wastage-sort-dish)
   * [Exit Food-O-Rama](#exit-food-o-rama-bye)
 
 ## Quick Start
@@ -76,6 +81,11 @@ ____________________________________________________________
 |Display a graph for Dishes wastage| graph dish|
 |Find an Ingredient| find ingr|
 |Find a Dish| find dish|
+|Removes Ingredients totally| clear ingr|
+|Removes Dishes totally| clear dish|
+|Removes Ingredients & Dishes totally| clear all|
+|Sort the Ingredients by amount of wastage| sort ingr|
+|Sort the Dishes by amount of wastage| sort dish|
 |Exit Food-O-Rama| bye|
 
 ## Features 
@@ -458,6 +468,131 @@ As requested, here are the matching dishes in your list:
    Constituents: None
 ____________________________________________________________
 
+```
+
+### Clears Ingredient entries in the list of Ingredients totally: `clear ingr`
+Removes all existing Ingredients from the list of ingredients.
+
+Format: `clear ingr`
+
+* * `clear ingr` does not require additional parameters
+
+Example of usage:
+
+`clear ingr`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Ingredient list has been cleared.
+____________________________________________________________
+
+```
+
+### Clears Dish entries in the list of Dishes totally: `clear dish`
+Removes all existing Dishes from the list of ingredients.
+
+Format: `clear dish`
+
+* * `clear dish` does not require additional parameters
+
+Example of usage:
+
+`clear dish`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Dish list has been cleared.
+____________________________________________________________
+```
+
+### Clears Ingredient & Dish entries in the list of Dishes totally: `clear all`
+Removes all existing Ingredients & Dishes from the list of ingredients & list of Dishes.
+
+Format: `clear all`
+
+* * `clear all` does not require additional parameters
+
+Example of usage:
+
+`clear all`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Both Dish and Ingredient lists have been cleared.
+____________________________________________________________
+```
+
+### Sort the Ingredients by amount of wastage: `sort ingr`
+Sorts all Ingredients in descending order of wastage.
+
+Format: `sort ingr`
+
+* * `sort ingr` does not require additional parameters
+
+Example of usage:
+
+`sort ingr`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+List of Ingredients has been sorted.
+____________________________________________________________
+____________________________________________________________
+Here are the ingredients you have: 
+1. chicken
+   Storage: 9.0 kg
+   Wastage: 14.0 kg
+2. beef
+   Storage: 8.0 kg
+   Wastage: 13.0 kg
+3. pork
+   Storage: 6.0 kg
+   Wastage: 9.0 kg
+4. fish
+   Storage: 7.0 kg
+   Wastage: 4.0 kg
+You can use command 'add' to add new ingredients!
+____________________________________________________________
+```
+
+### Sort the Dishes by amount of wastage: `sort dish`
+Sorts all Dishes in descending order of wastage.
+
+Format: `sort dish`
+
+* * `sort dish` does not require additional parameters
+
+Example of usage:
+
+`sort dish`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+List of Dishes has been sorted.
+____________________________________________________________
+____________________________________________________________
+Here are the dishes you have:
+1. krabby patty
+   Wastage: 9.0 kg
+   Constituents: chicken,beef,fish
+2. chicken rice
+   Wastage: 8.0 kg
+   Constituents: chicken,beef,fish
+3. meatballs spaghetti
+   Wastage: 7.0 kg
+   Constituents: chicken,beef,fish
+You can use command 'add' to add new dishes!
+____________________________________________________________
 ```
 
 ### Exit Food-O-Rama: `bye`
