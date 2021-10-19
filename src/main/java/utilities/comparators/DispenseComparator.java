@@ -37,8 +37,8 @@ public class DispenseComparator implements Comparator<Dispense> {
             return dispense1.getMedicineName().compareTo(dispense2.getMedicineName());
         case Dispense.QUANTITY_LOWERCASE:
         case CommandParameters.QUANTITY:
-            return Double.compare(dispense1.getQuantity(), dispense2.getQuantity());
-        case Dispense.CUSTOMERS_ID_LOWERCASE:
+            return Integer.compare(dispense1.getQuantity(), dispense2.getQuantity());
+        case Dispense.CUSTOMER_ID_LOWERCASE:
         case CommandParameters.CUSTOMER_ID:
             return dispense1.getCustomerId().compareTo(dispense2.getCustomerId());
         case Dispense.DATE_LOWERCASE:
