@@ -10,6 +10,8 @@ public class Messages {
     public static final String MESSAGE_COMMAND_HELP = "Prints the help page.";
     public static final String MESSAGE_COMMAND_NOTE = "Move to notes workspace.";
     public static final String MESSAGE_COMMAND_SCHEDULE = "Move to schedules workspace.";
+    public static final String MESSAGE_COMMAND_QUESTION = "Move to questions workspace.";
+    public static final String MESSAGE_COMMAND_TEST_QUESTION = "Test yourself with Active Recall.";
 
     public static final String MESSAGE_RESPONSE_DELETE = "Your %s on '%s' has been deleted!";
     public static final String MESSAGE_RESPONSE_ADD = "Your %s on '%s' has been added!";
@@ -28,6 +30,7 @@ public class Messages {
     public static final String MAIN_BANNER = "Welcome to TermiNUS!";
     public static final String NOTE_BANNER = "You have %d note(s) inside this workspace.";
     public static final String SCHEDULE_BANNER = "You have %d link(s) in this workspace.";
+    public static final String QUESTION_BANNER = "You have %d question(s) in this workspace.";
     public static final String INVALID_ARGUMENT_FORMAT_MESSAGE_EXCEPTION = "%s %s";
     public static final String INVALID_ARGUMENT_FORMAT_MESSAGE = "Format: %s";
     public static final String MESSAGE_COMMAND_MODULE = "Move to the module workspace";

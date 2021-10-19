@@ -3,6 +3,7 @@ package terminus.parser;
 import terminus.command.BackCommand;
 import terminus.command.Command;
 import terminus.command.content.NotesCommand;
+import terminus.command.content.QuestionCommand;
 import terminus.command.content.ScheduleCommand;
 import terminus.common.CommonFormat;
 import terminus.exception.InvalidArgumentException;
@@ -25,6 +26,7 @@ public class ModuleWorkspaceCommandParser extends CommandParser {
         parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
         parser.addCommand(CommonFormat.COMMAND_NOTE, new NotesCommand());
         parser.addCommand(CommonFormat.COMMAND_SCHEDULE, new ScheduleCommand());
+        parser.addCommand(CommonFormat.COMMAND_QUESTION, new QuestionCommand());
         return parser;
     }
 
