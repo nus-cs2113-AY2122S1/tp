@@ -117,7 +117,7 @@ public class Parser {
         case COMMAND_LIST_GOAL:
             return new ListGoalsCommand();
         case COMMAND_LIST_HABIT:
-            return ListParser.parseListHabitCommand(details);
+            return ListHabitParser.parseListHabitCommand(details);
         case COMMAND_DELETE_GOAL:
             return DeleteParser.parseDeleteGoalCommand(details);
         case COMMAND_DELETE_HABIT:
