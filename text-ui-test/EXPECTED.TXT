@@ -11,7 +11,8 @@ Method:
 1. Cut tomatoes into 1 inch slices
 2. Cut mozzarella into similar slices
 3. Arrange slices on plate
-4. Drizzle with olive oil 
+4. Drizzle with olive oil
+Tags: 
 GordonException: Command given cannot be recognized.
 GordonException: Please use the word 'ingredients' before adding ingredients.
 GordonException: Command given cannot be recognized.
@@ -29,12 +30,13 @@ Method:
 1. Set oven to 160 degrees Celcius
 2. Mix all ingredients together in a bowl
 3. Put in preheated oven for 20 mins
-4. Remove and let cool for 10 mins 
+4. Remove and let cool for 10 mins
+Tags: 
 GordonException: No duplicate recipe names allowed.
 1. Caprese Salad
 2. Cookies
 Finding recipes called cookies.....
---------------------
+====================
 Cookies
 Calories (kcal): 
 300
@@ -46,8 +48,9 @@ Method:
 1. Set oven to 160 degrees Celcius
 2. Mix all ingredients together in a bowl
 3. Put in preheated oven for 20 mins
-4. Remove and let cool for 10 mins 
---------------------
+4. Remove and let cool for 10 mins
+Tags: 
+====================
 Finding recipes called meatballs.....
 GordonException: Search returns no result.
 Added Fried Fish recipe! Yum!
@@ -60,7 +63,8 @@ Ingredients needed:
 Method: 
 1. Preheat pan
 2. Add olive oil
-3. Add fish and fry on both sides until crispy 
+3. Add fish and fry on both sides until crispy
+Tags: 
 Searching by ingredient...
 1. Caprese Salad
 2. Fried Fish
@@ -69,7 +73,7 @@ GordonException: Command given cannot be recognized.
 Setting calories...
 Calories set successfully.
 Finding recipes called fried fish.....
---------------------
+====================
 Fried Fish
 Calories (kcal): 
 250
@@ -79,8 +83,9 @@ Ingredients needed:
 Method: 
 1. Preheat pan
 2. Add olive oil
-3. Add fish and fry on both sides until crispy 
---------------------
+3. Add fish and fry on both sides until crispy
+Tags: 
+====================
 GordonException: Index is not a valid integer.
 Setting calories...
 GordonException: Search returns no result.
@@ -114,4 +119,94 @@ OK! The recipe has been deleted from your cookbook.
 2. Fried Fish
 GordonException: Command given cannot be recognized.
 GordonException: Please input calories for the recipe.
+GordonException: Please input integer for calories.
+Added Duck Rice recipe! Yum!
+Duck Rice
+Calories:500kcal
+Ingredients needed: 
+1. Duck
+Method: 
+1. DucknRice
+Tags: 
+Added Chicken Rice recipe! Yum!
+Chicken Rice
+Calories:500kcal
+Ingredients needed: 
+1. Chicken
+Method: 
+1. ChickennRice
+Tags: 
+GordonException: Please use 'tag / recipeName / tagName1 + tagName2 + ...'
+GordonException: Please use 'tag / recipeName / tagName1 + tagName2 + ...'
+GordonException: Please input name of recipe.
+GordonException: No such recipe exists.
+Successfully tagged Chicken Rice under Hawker Food
+Successfully tagged Chicken Rice under Favorite
+GordonException: No duplicate tag names allowed within the same recipe.
+Successfully tagged Chicken Rice under Hawker Food
+Successfully tagged Duck Rice under Hawker Food
+GordonException: No such recipe exists.
+1. Hawker Food
+2. Favorite
+GordonException: Command given cannot be recognized.
+GordonException: Search returns no result.
+Searching by tags...
+1. Duck Rice
+2. Chicken Rice
+Searching by tags...
+1. Chicken Rice
+GordonException: No tags detected, try again.
+GordonException: Please input name of recipe.
+Successfully untagged Chicken Rice under Hawker Food
+Successfully untagged Chicken Rice under Favorite
+Finding recipes called Chicken Rice.....
+====================
+Chicken Rice
+Calories:500kcal
+Ingredients needed: 
+1. Chicken
+Method: 
+1. ChickennRice
+Tags: 
+====================
+1. Hawker Food
+2. Favorite
+GordonException: Please use 'deleteTag / tagName1 + tagName2 + ...'
+GordonException: No tags detected, try again.
+GordonException: Please say which tags you wish to delete.
+Successfully deleted Hawker Food
+Successfully deleted Favorite
+GordonException: No such tag exists.
+Finding recipes called Duck Rice.....
+====================
+Duck Rice
+Calories:500kcal
+Ingredients needed: 
+1. Duck
+Method: 
+1. DucknRice
+Tags: 
+====================
+Successfully tagged Chicken Rice under Hawker Food
+Successfully tagged Chicken Rice under Favorite
+Successfully tagged Duck Rice under Hawker Food
+Successfully tagged Duck Rice under Favorite
+Successfully tagged Duck Rice under Poultry
+1. Hawker Food
+2. Favorite
+3. Poultry
+Successfully deleted Hawker Food
+Successfully deleted Favorite
+1. Poultry
+Finding recipes called Duck Rice.....
+====================
+Duck Rice
+Calories:500kcal
+Ingredients needed: 
+1. Duck
+Method: 
+1. DucknRice
+Tags: 
+1. Poultry
+====================
 Pack your bags, you're off the show

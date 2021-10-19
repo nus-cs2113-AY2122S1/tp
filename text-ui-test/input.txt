@@ -6,7 +6,7 @@ eat food
 add Cookies /ingredients Butter+Flour+Sugar // / / //
 add Cookies /ingredients Butter+Flour+Sugar /steps Set oven to 160 degrees Celcius+Mix all ingredients together in a bowl+Put in preheated oven for 20 mins+Remove and let cool for 10 mins /calories 300
 add Caprese Salad /ingredients 1+2+3 /steps a+b+c /calories 400
-list
+listRecipes
 check cookies
 check meatballs
 add Fried Fish /ingredients Fish+Olive Oil /steps Preheat pan+Add olive oil+Add fish and fry on both sides until crispy /calories 200
@@ -21,10 +21,44 @@ set caprese /difficulty easy
 check caprese
 set meatballs /difficulty medium
 set fish /difficulty insane
-delete 5
-delete cookies
-delete 2
-list
+deleteRecipe 5
+deleteRecipe cookies
+deleteRecipe 2
+listRecipes
 add Duck Rice /ingredients Duck /steps DucknRice
 add Duck Rice /ingredients Duck /steps DucknRice /calories
+add Duck Rice /ingredients Duck /steps DucknRice /calories eee
+add Duck Rice /ingredients Duck /steps DucknRice /calories 500
+add Chicken Rice /ingredients Chicken /steps ChickennRice /calories 500
+tag ////
+tag / /
+tag / / Hawker Food
+tag / NoExistFood / Hawker Food
+tag / Chicken Rice / Hawker Food + Favorite
+tag / Chicken Rice / Hawker Food
+tag / Duck Rice / Hawker Food
+tag / Duck Rice + Chicken Rice / Hawker Food
+listTags
+find /tag
+find /tag NoExistTag
+find /tag Hawker Food
+find /tag Hawker Food + Favorite
+untag / Chicken Rice / ++
+untag / /Hawker Food
+untag / Chicken Rice / Hawker Food + Favorite
+check Chicken Rice
+listTags
+deleteTag /
+deleteTag /++
+deleteTag / + +
+deleteTag /Hawker Food + + Favorite
+deleteTag /Hawker Food
+listTags
+check Duck Rice
+tag / Chicken Rice / Hawker Food + Favorite
+tag / Duck Rice / Hawker Food + Favorite + Poultry
+listTags
+deleteTag / Hawker Food + Favorite
+listTags
+check Duck Rice
 exit
