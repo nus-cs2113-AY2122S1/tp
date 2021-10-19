@@ -60,12 +60,25 @@ The five main components interact with each other, as shown in the sequence diag
 ### <a name="command"></a>Command
 ### <a name="contact-list"></a>ContactList
 ### <a name="storage"></a>Storage
+**API** :`Storage.java`
+
+![Storage Class Diagram](images/StorageClassDiagram.png)
+
+The `Storage` component is responsible for saving both contacts data and personal contact data locally inside the file 
+paths, `data/contacts.txt` and `data/me.txt`. `Storage` is also responsible for loading these data back into their 
+corresponding `ContactList` and `Contact` objects. It is thus dependent on the classes, `ContactList` and 
+`Contact`.
+
 
 ## <a name="implementation"></a>Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 {NOT DONE}
+
+### <a name="Delete"></a>Deleting a contact: `rm`
+
+
 
 ## <a name="scope"></a>Product scope
 ### <a name="target"></a>Target user profile

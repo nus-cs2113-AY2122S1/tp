@@ -41,9 +41,6 @@ public class ContactsDecoder {
         return personalContact;
     }
 
-    public void getPersonalContactDetails() {
-
-    }
 
     private static Contact decodePersonalContact(String contactText, Contact contact) {
         String[] destructuredInputs = contactText.split(SEPARATOR);

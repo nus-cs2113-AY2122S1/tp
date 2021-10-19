@@ -21,12 +21,14 @@ public class DeleteContactCommand extends Command {
     private void deleteOnConfirmation(Contact deletedContact) {
         // ask for confirmation to delete from user
         TextUi.confirmDeleteMessage(deletedContact, contactIndex);
-        String userDeleteConfirmation = UserInputTextUi.getUserConfirmation();
-        if (userDeleteConfirmation.equalsIgnoreCase("y")) {
+        String userConfirmation = UserInputTextUi.getUserConfirmation();
+        if (userConfirmation.equalsIgnoreCase("y")) {
             this.contactList.deleteContact(contactIndex);
-            TextUi.deleteContactMessage(deletedContact.getName(), contactList.getListSize());
+            String deletedName = deletedContact.getName();
+            int contactListSize = contactList.getListSize();
+            TextUi.deleteContactMessage(deletedName, contactListSize);
         } else {
-            assert !userDeleteConfirmation.equalsIgnoreCase("y");
+            assert !userConfirmation.equalsIgnoreCase("y");
             TextUi.cancelDeleteContactMessage();
         }
     }
