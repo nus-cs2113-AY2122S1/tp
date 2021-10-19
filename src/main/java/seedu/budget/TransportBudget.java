@@ -1,9 +1,12 @@
 package seedu.budget;
 
+import seedu.entry.ExpenseCategory;
+
 public class TransportBudget extends Budget {
 
     public TransportBudget(int limit) {
-        this.name = "TRANSPORT";
+        this.category = ExpenseCategory.TRANSPORT;
+        this.name = ExpenseCategory.TRANSPORT.toString();
         this.limit = limit;
     }
 }

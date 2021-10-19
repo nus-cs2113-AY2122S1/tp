@@ -1,7 +1,11 @@
 package seedu.utility;
 
+import seedu.budget.BillsBudget;
 import seedu.budget.Budget;
+import seedu.budget.EntertainmentBudget;
 import seedu.budget.FoodBudget;
+import seedu.budget.MedicalBudget;
+import seedu.budget.MiscBudget;
 import seedu.budget.OverallBudget;
 import seedu.budget.TransportBudget;
 import seedu.entry.Expense;
@@ -10,9 +14,13 @@ import java.util.ArrayList;
 
 public class BudgetManager {
     private double threshold;
-    OverallBudget overallBudget = new OverallBudget(500);
+    OverallBudget overallBudget = new OverallBudget(5000);
     FoodBudget foodBudget = new FoodBudget(2000);
     TransportBudget transportBudget = new TransportBudget(0);
+    MedicalBudget medicalBudget = new MedicalBudget(0);
+    BillsBudget billsBudget = new BillsBudget(0);
+    EntertainmentBudget entertainmentBudget = new EntertainmentBudget(100);
+    MiscBudget miscBudget = new MiscBudget(0);
 
     public BudgetManager() {
         this.threshold = 0.1;
@@ -22,11 +30,23 @@ public class BudgetManager {
         checkBudget(expense, expenses, overallBudget);
 
         switch (expense.getCategory()) {
-        case "FOOD":
+        case FOOD:
             checkBudget(expense, expenses, foodBudget);
             break;
-        case "TRANSPORT":
+        case TRANSPORT:
             checkBudget(expense, expenses, transportBudget);
+            break;
+        case MEDICAL:
+            checkBudget(expense, expenses, medicalBudget);
+            break;
+        case BILLS:
+            checkBudget(expense, expenses, billsBudget);
+            break;
+        case ENTERTAINMENT:
+            checkBudget(expense, expenses, entertainmentBudget);
+            break;
+        case MISC:
+            checkBudget(expense, expenses, miscBudget);
             break;
         }
     }

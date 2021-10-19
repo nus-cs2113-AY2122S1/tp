@@ -1,11 +1,18 @@
 package seedu.budget;
 
 import seedu.entry.Expense;
+import seedu.entry.ExpenseCategory;
+
 import java.util.ArrayList;
 
 public abstract class Budget {
+    protected ExpenseCategory category;
     protected String name;
     protected int limit;
+
+    public ExpenseCategory getCategory() {
+        return this.category;
+    }
 
     public String getName() {
         return this.name;
@@ -22,7 +29,7 @@ public abstract class Budget {
     public int calAmount(ArrayList<Expense> entries) {
         int amount = 0;
         for (Expense expense : entries) {
-            if (expense.getCategory().equals(name)) {
+            if (expense.getCategory() == this.category) {
                 amount += expense.getValue();
             }
         }

@@ -18,9 +18,6 @@ public class FinancialTracker {
     private ArrayList<Expense> expenses;
     private ArrayList<Income> incomes;
     private double balance;
-    OverallBudget overallBudget = new OverallBudget(500);
-    FoodBudget foodBudget = new FoodBudget(2000);
-    TransportBudget transportBudget = new TransportBudget(0);
     
     public FinancialTracker() {
         this.expenses = new ArrayList<>();
@@ -211,5 +208,10 @@ public class FinancialTracker {
     //method used for testing
     public Income getIncome(int incomeIndex) {
         return incomes.get(incomeIndex);
+    }
+    
+    public void clearAllEntries() {
+        expenses.clear();
+        incomes.clear();
     }
 }

@@ -1,7 +1,8 @@
-package seedu.duke;
+package seedu.utility;
 
 import seedu.commands.AddExpenseCommand;
 import seedu.commands.AddIncomeCommand;
+import seedu.commands.ClearAllEntriesCommand;
 import seedu.commands.Command;
 import seedu.commands.DeleteExpenseCommand;
 import seedu.commands.DeleteIncomeCommand;
@@ -10,6 +11,7 @@ import seedu.commands.HelpCommand;
 import seedu.commands.InvalidCommand;
 import seedu.commands.ListExpenseCommand;
 import seedu.commands.ListIncomeCommand;
+import seedu.commands.ShowGraphCommand;
 import seedu.commands.TotalExpenseBetweenCommand;
 import seedu.commands.TotalExpenseCommand;
 import seedu.commands.TotalIncomeBetweenCommand;
@@ -20,15 +22,16 @@ import seedu.commands.BalanceCommand;
 
 
 import seedu.entry.Expense;
+import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 
+import seedu.entry.IncomeCategory;
 import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidExpenseIndexException;
 import seedu.exceptions.InvalidIncomeAmountException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidIncomeIndexException;
-import seedu.utility.Messages;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -95,9 +98,9 @@ public class Parser {
     private static final String FIND_KEYWORD = "find";
     private static final String BALANCE_KEYWORD = "balance";
     private static final String EXIT_KEYWORD = "end";
-
     private static final String EXPENSE_RANGE_KEYWORD = "btw_ex";
     private static final String INCOME_RANGE_KEYWORD = "btw_in";
+    private static final String CLEAR_ALL_ENTRIES_KEYWORD = "clear_all_entries";
     
     private static final String DATA_SEPARATOR = ", ";
 
@@ -107,6 +110,8 @@ public class Parser {
     private static final Pattern INCOME_DATA_FORMAT
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>[^/]+)" + DATA_SEPARATOR
             + "(?<amount>[^/]+)" + DATA_SEPARATOR + "(?<category>[^/]+)" + DATA_SEPARATOR + "(?<date>[^/]+)");
+    public static final String SHOW_GRAPH_KEYWORD = "show_graph";
+
 
     /**
      * Parses user input into command for execution.
@@ -154,6 +159,10 @@ public class Parser {
             return prepareExpenseRange(arguments);
         case INCOME_RANGE_KEYWORD:
             return prepareIncomeRange(arguments);
+        case CLEAR_ALL_ENTRIES_KEYWORD:
+            return prepareClearAllEntries(arguments);
+        case SHOW_GRAPH_KEYWORD:
+            return prepareShowGraph(arguments);
         default:
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -241,7 +250,29 @@ public class Parser {
         if (expenseCategory.isBlank()) {
             return new InvalidCommand(Messages.BLANK_CATEGORY_MESSAGE);
         }
-        Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory);
+        Expense expense;
+        switch (expenseCategory) {
+        case "FOOD":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.FOOD);
+            break;
+        case "TRANSPORT":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.TRANSPORT);
+            break;
+        case "MEDICAL":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.MEDICAL);
+            break;
+        case "BILLS":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.BILLS);
+            break;
+        case "ENTERTAINMENT":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.ENTERTAINMENT);
+            break;
+        case "MISC":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.MISC);
+            break;
+        default:
+            return new InvalidCommand(Messages.INVALID_EXPENSE_CATEGORY_MESSAGE);
+        }
         return new AddExpenseCommand(expense);
     }
 
@@ -273,7 +304,23 @@ public class Parser {
         if (incomeCategory.isBlank()) {
             return new InvalidCommand(Messages.BLANK_CATEGORY_MESSAGE);
         }
-        Income income = new Income(incomeDescription, incomeAmount, incomeCategory);
+        Income income;
+        switch (incomeCategory) {
+        case "ALLOWANCE":
+            income = new Income(incomeDescription, incomeAmount, IncomeCategory.ALLOWANCE);
+            break;
+        case "SALARY":
+            income = new Income(incomeDescription, incomeAmount, IncomeCategory.SALARY);
+            break;
+        case "ADHOC":
+            income = new Income(incomeDescription, incomeAmount, IncomeCategory.ADHOC);
+            break;
+        case "OTHERS":
+            income = new Income(incomeDescription, incomeAmount, IncomeCategory.OTHERS);
+            break;
+        default:
+            return new InvalidCommand(Messages.INVALID_INCOME_CATEGORY_MESSAGE);
+        }
         return new AddIncomeCommand(income);
     }
 
@@ -345,6 +392,20 @@ public class Parser {
     private Command prepareTotalIncome(String arguments) {
         if (arguments.trim().isBlank()) {
             return new TotalIncomeCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+    
+    private Command prepareClearAllEntries(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new ClearAllEntriesCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+
+    private Command prepareShowGraph(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new ShowGraphCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
@@ -437,7 +498,31 @@ public class Parser {
         }
         String date = matcher.group("date").trim();
         LocalDate expenseDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return new Expense(expenseDescription, expenseAmount, expenseCategory, expenseDate);
+        Expense expense;
+        switch (expenseCategory) {
+        case "FOOD":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.FOOD, expenseDate);
+            break;
+        case "TRANSPORT":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.TRANSPORT, expenseDate);
+            break;
+        case "MEDICAL":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.MEDICAL, expenseDate);
+            break;
+        case "BILLS":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.BILLS, expenseDate);
+            break;
+        case "ENTERTAINMENT":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.ENTERTAINMENT, expenseDate);
+            break;
+        case "MISC":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.MISC, expenseDate);
+            break;
+        //this is the fail case. Not sure how we wna implement this
+        default:
+            expense = new Expense("FAIL EXPENSE", 9999999, ExpenseCategory.NULL, expenseDate);
+        }
+        return expense;
     }
 
     public Income convertDataToIncome(String data) throws InvalidIncomeAmountException, 
@@ -459,7 +544,25 @@ public class Parser {
         }
         String date = matcher.group("date").trim();
         LocalDate incomeDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return new Income(incomeDescription, incomeAmount, incomeCategory, incomeDate);
+        Income income;
+        switch (incomeCategory) {
+        case "ALLOWANCE":
+            income = new Income(incomeDescription, incomeAmount, IncomeCategory.ALLOWANCE, incomeDate);
+            break;
+        case "SALARY":
+            income = new Income(incomeDescription, incomeAmount, IncomeCategory.SALARY, incomeDate);
+            break;
+        case "ADHOC":
+            income = new Income(incomeDescription, incomeAmount, IncomeCategory.ADHOC, incomeDate);
+            break;
+        case "OTHERS":
+            income = new Income(incomeDescription, incomeAmount, IncomeCategory.OTHERS, incomeDate);
+            break;
+        //this is the fail case. Not sure how we wna implement this
+        default:
+            income = new Income("FAIL INCOME", 999999, IncomeCategory.NULL, incomeDate);
+        }
+        return income;
     }
     
 }
