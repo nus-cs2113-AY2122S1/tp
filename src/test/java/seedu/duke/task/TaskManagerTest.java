@@ -19,8 +19,8 @@ class TaskManagerTest {
     Task newToDo;
     Task newDeadline;
     Task newEvent;
-    private static final String VALID_DATE1 = "14-02-1998 02:00:00";
-    private static final String VALID_DATE2 = "14-02-1998 03:30:00";
+    private static final String VALID_DATE1 = "22-10-2021 02:00:00";
+    private static final String VALID_DATE2 = "22-10-2021 05:00:00";
 
     private TaskManagerTest() throws ParseDateFailedException {
         Date startDate = UtilityParser.getStringAsDate(VALID_DATE1);
@@ -35,9 +35,11 @@ class TaskManagerTest {
 
     @Test
     void testListTasklistFormat() {
+        HashMap<String, String> listArguments = new HashMap<>();
+        listArguments.put("random_flag", "random_criteria");
         try {
             System.out.println("Testing List Command");
-            System.out.println(TaskManager.listTasklist());
+            System.out.println(TaskManager.listTasklist(listArguments));
         } catch (EmptyTasklistException e) {
             System.out.println(e);
         }
@@ -46,13 +48,15 @@ class TaskManagerTest {
     @Test
     void testSortTasklistByPriority() {
 
-        HashMap<String, String> commandArguments = new HashMap<>();
-        commandArguments.put("by", "priority");
+        HashMap<String, String> sortArguments = new HashMap<>();
+        sortArguments.put("by", "priority");
+
+        HashMap<String, String> listArguments = new HashMap<>();
 
         try {
             System.out.println("Testing Sort by Priority Command");
-            TaskManager.sortTasklist(commandArguments);
-            System.out.println(TaskManager.listTasklist());
+            TaskManager.sortTasklist(sortArguments);
+            System.out.println(TaskManager.listTasklist(listArguments));
         } catch (Exception e) {
             System.out.println("Exception occurred");
         }
@@ -62,13 +66,15 @@ class TaskManagerTest {
     @Test
     void testSortTasklistByDescription() {
 
-        HashMap<String, String> commandArguments = new HashMap<>();
-        commandArguments.put("by", "description");
+        HashMap<String, String> sortArguments = new HashMap<>();
+        sortArguments.put("by", "description");
+
+        HashMap<String, String> listArguments = new HashMap<>();
 
         try {
             System.out.println("Testing Sort by Description Command");
-            TaskManager.sortTasklist(commandArguments);
-            System.out.println(TaskManager.listTasklist());
+            TaskManager.sortTasklist(sortArguments);
+            System.out.println(TaskManager.listTasklist(listArguments));
         } catch (Exception e) {
             System.out.println("Exception occurred");
         }
@@ -78,13 +84,15 @@ class TaskManagerTest {
     @Test
     void testSortTasklistByTaskType() {
 
-        HashMap<String, String> commandArguments = new HashMap<>();
-        commandArguments.put("by", "type");
+        HashMap<String, String> sortArguments = new HashMap<>();
+        sortArguments.put("by", "type");
+
+        HashMap<String, String> listArguments = new HashMap<>();
 
         try {
             System.out.println("Testing Sort by Task Type Command");
-            TaskManager.sortTasklist(commandArguments);
-            System.out.println(TaskManager.listTasklist());
+            TaskManager.sortTasklist(sortArguments);
+            System.out.println(TaskManager.listTasklist(listArguments));
         } catch (Exception e) {
             System.out.println("Exception occurred");
         }
@@ -94,11 +102,11 @@ class TaskManagerTest {
     @Test
     void sortTasklist_ThrowsException_IfMissingByFlag() {
 
-        HashMap<String, String> commandArguments = new HashMap<>();
-        commandArguments.put("random_flag", "random_criteria");
+        HashMap<String, String> sortArguments = new HashMap<>();
+        sortArguments.put("random_flag", "random_criteria");
 
         try {
-            TaskManager.sortTasklist(commandArguments);
+            TaskManager.sortTasklist(sortArguments);
             fail(); // the test should not reach here
         } catch (Exception e) {
             System.out.println("SortFormatException caught");
