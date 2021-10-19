@@ -1,0 +1,35 @@
+package gordon.util;
+
+import java.util.ArrayList;
+
+public class Tag {
+    protected String tagName;
+    protected ArrayList<String> associatedRecipeNames = new ArrayList<>();
+
+    public Tag(String tagName, String associatedRecipeName) {
+        this.tagName = tagName;
+        associatedRecipeNames.add(associatedRecipeName);
+    }
+
+    public String getTagName() {
+        return tagName;
+    }
+
+    public boolean containsAssociatedRecipeNames(String recipeNames) {
+        for (String associatedRecipeName : associatedRecipeNames) {
+            if (associatedRecipeName.equals(recipeNames)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addAssociatedRecipeName(String recipeName) {
+        associatedRecipeNames.add(recipeName);
+    }
+
+    public void removeAssociatedRecipeName(String recipeName) {
+        associatedRecipeNames.remove(recipeName);
+    }
+
+}

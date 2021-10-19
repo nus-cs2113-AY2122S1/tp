@@ -2,6 +2,7 @@ package gordon.kitchen;
 
 import gordon.exception.GordonException;
 import gordon.util.Difficulty;
+import gordon.util.Tag;
 
 import java.util.ArrayList;
 
@@ -14,13 +15,13 @@ public class Recipe {
     protected ArrayList<String> steps;
     protected float totalPrice = -1;
     protected int calories = -1;
-    protected ArrayList<String> tags;
+    protected ArrayList<String> recipeTags;
 
     public Recipe(String name) {
         this.name = name;
         ingredients = new ArrayList<>();
         steps = new ArrayList<>();
-        tags = new ArrayList<>();
+        recipeTags = new ArrayList<>();
     }
 
     public String getName() {
@@ -71,13 +72,37 @@ public class Recipe {
         }
     }
 
-    public void addTag(String tag) {
-        tags.add(tag.toLowerCase());
+    public void addTag(Tag tag) {
+        try {
+            // Checking if tag has been linked to recipe before
+            if (isRecipeTagExists(tag.getTagName())) {
+                throw new GordonException(GordonException.DUPLICATE_TAG_NAME);
+            }
+            recipeTags.add(tag.getTagName());
+        } catch (GordonException e) {
+            System.out.println("GordonException: " + e.getMessage());
+        }
+    }
+
+    public void deleteTag(Tag tag) {
+        recipeTags.remove(tag.getTagName());
+    }
+
+    public boolean isRecipeTagExists(String tagName) {
+        for (String recipeTag : recipeTags) {
+            if (recipeTag.equals(tagName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public boolean containsTags(ArrayList<String> search) {
-        ArrayList<String> tagsToLowercase = new ArrayList<>(tags);
+        ArrayList<String> tagsToLowercase = new ArrayList<>(recipeTags);
+        tagsToLowercase.replaceAll(String::trim);
         tagsToLowercase.replaceAll(String::toLowerCase);
+        search.replaceAll(String::trim);
         search.replaceAll(String::toLowerCase);
         return tagsToLowercase.containsAll(search);
     }
@@ -143,11 +168,11 @@ public class Recipe {
             outputString.append(System.lineSeparator());
         }
 
-        if (tags.size() > 0) {
-            outputString.append("Tags: ").append(System.lineSeparator());
-            for (int k = 0; k < tags.size(); k++) {
+        outputString.append("Tags: ").append(System.lineSeparator());
+        if (recipeTags.size() > 0) {
+            for (int k = 0; k < recipeTags.size(); k++) {
                 outputString.append(k + 1).append(". ");
-                outputString.append(tags.get(k));
+                outputString.append(recipeTags.get(k));
                 outputString.append(System.lineSeparator());
             }
         }
