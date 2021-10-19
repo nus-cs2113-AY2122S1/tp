@@ -11,6 +11,7 @@ import seedu.commands.HelpCommand;
 import seedu.commands.InvalidCommand;
 import seedu.commands.ListExpenseCommand;
 import seedu.commands.ListIncomeCommand;
+import seedu.commands.ShowGraphCommand;
 import seedu.commands.TotalExpenseBetweenCommand;
 import seedu.commands.TotalExpenseCommand;
 import seedu.commands.TotalIncomeBetweenCommand;
@@ -31,7 +32,6 @@ import seedu.exceptions.InvalidExpenseIndexException;
 import seedu.exceptions.InvalidIncomeAmountException;
 import seedu.exceptions.InvalidIncomeDataFormatException;
 import seedu.exceptions.InvalidIncomeIndexException;
-import seedu.utility.Messages;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -110,7 +110,8 @@ public class Parser {
     private static final Pattern INCOME_DATA_FORMAT
             = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>[^/]+)" + DATA_SEPARATOR
             + "(?<amount>[^/]+)" + DATA_SEPARATOR + "(?<category>[^/]+)" + DATA_SEPARATOR + "(?<date>[^/]+)");
-    
+    public static final String SHOW_GRAPH_KEYWORD = "show_graph";
+
 
     /**
      * Parses user input into command for execution.
@@ -160,6 +161,8 @@ public class Parser {
             return prepareIncomeRange(arguments);
         case CLEAR_ALL_ENTRIES_KEYWORD:
             return prepareClearAllEntries(arguments);
+        case SHOW_GRAPH_KEYWORD:
+            return prepareShowGraph(arguments);
         default:
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -390,6 +393,13 @@ public class Parser {
     private Command prepareClearAllEntries(String arguments) {
         if (arguments.trim().isBlank()) {
             return new ClearAllEntriesCommand();
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+
+    private Command prepareShowGraph(String arguments) {
+        if (arguments.trim().isBlank()) {
+            return new ShowGraphCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }

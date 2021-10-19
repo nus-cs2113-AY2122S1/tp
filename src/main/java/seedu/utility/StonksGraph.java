@@ -1,8 +1,8 @@
 package seedu.utility;
 
 
-import seedu.utility.FinancialTracker;
-
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 public class StonksGraph {
@@ -116,9 +116,13 @@ public class StonksGraph {
         drawXAxis();
         ArrayList<Double> monthlyIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(2021);
         ArrayList<Double> monthlyExpenseBreakdowns = finances.getMonthlyExpenseBreakdown(2021);
-
-        System.out.println("October total expense: " + monthlyExpenseBreakdowns.get(9));
-        System.out.println("October total income: " + monthlyIncomeBreakdowns.get(9));
+        
+        int currentMonthInIndex = currentMonthInIndex();
+        Month currentMonth = currentMonth();
+        System.out.printf("Current month (" + currentMonth + ") total expense: " 
+                + "$%.2f\n", monthlyExpenseBreakdowns.get(currentMonthInIndex));
+        System.out.printf("Current month (" + currentMonth + ") total income: " 
+                + "$%.2f\n", monthlyIncomeBreakdowns.get(currentMonthInIndex));
         for (int x = 0; x < ROWS; x++) {
             for (int y = 0; y < COLS; y++) {
 
@@ -193,5 +197,14 @@ public class StonksGraph {
             grid[x][y] = '#';
         }
     }
-
+    
+    private int currentMonthInIndex() {
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getMonthValue();
+    }
+    
+    private Month currentMonth() {
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getMonth();
+    }
 }

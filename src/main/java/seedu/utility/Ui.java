@@ -315,4 +315,10 @@ public class Ui {
         System.out.println(Messages.ALL_DATA_CLEARED);
         printLine();
     }
+    
+    public void printGraph(String graph) {
+        printLine();
+        System.out.println(graph);
+        printLine();
+    }
 }
