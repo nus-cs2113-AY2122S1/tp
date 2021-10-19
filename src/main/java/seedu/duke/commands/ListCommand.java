@@ -79,7 +79,7 @@ public class ListCommand extends Command {
 
     private void showUnisAndMods(int index, University university, UniversityList universityMasterList) {
         Ui.printUniversity(university, index, universityMasterList);
-        university.listMappings();
+        university.listAllMappings();
     }
 
     private void showSelectedMods(ModuleList moduleSelectedList) {
