@@ -2,12 +2,64 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Inspired by AB3's [Developer Guide](https://se-education.org/addressbook-level3/DeveloperGuide.html). 
 
-## Design & implementation
+## Design 
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Architecture
 
+## Implementation
+
+This section describes some noteworthy details on how certain features are implemented.
+### Switch view feature
+
+#### Implementation
+
+The switch view mechanism is heavily linked to the `Parser` class. By having a
+`ViewType` enumeration property in `Parser`, the view of the console can be switched by 
+executing the appropriate `SwitchCommand` class, which modifies the corresponding `ViewType`
+of the `Parser`. The 3 possible views and the corresponding user input commands are as follows:
+
+* `switch patientinfo` - switches to the patient info view.
+* `switch staffinfo` - switches to the medical staff info view.
+* `switch scheduler` - switches to the scheduler view.
+* `switch` - will switch to a another view depending on the current view. 
+
+Each command essentially evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
+`ViewType` property in the `Parser` class.
+
+By having different views, we can execute different commands given the same
+user input. This will be demonstrated in the example usage scenario below, and how
+the switch view mechanism works for different views.
+
+![Image of Sequence Diagram]()
+
+<!--
+Update with image + explanation
+-->
+
+#### Design Considerations
+
+**Aspect: How different views are identified**
+
+Currently, a enum property in the `Parser` class is used to
+differentiate between views.
+
+Pros: 
+* Straightforward to implement
+
+Cons: 
+* Maintainability concerns as complexity of Uis increase
+
+#### Alternatives Considered
+
+3 sub `Ui` classes & sub `Parser` classes that inherit from the main `Ui` and `Parser` class.
+
+Pros:
+* Potential for reduced coupling where only sub `Ui` or sub `Parser` classes affected by changes in other class
+
+Cons:
+* Less straightforward implementation
 
 ## Product scope
 ### Target user profile
