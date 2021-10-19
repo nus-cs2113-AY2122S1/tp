@@ -2,9 +2,13 @@
 
 ## Introduction
 
-StonksXD is a smart money management application that tracks daily expenses, sets/adjusts spending limits and gives advice based on daily expenses. 
+- StonksXD is a smart money management application that tracks daily expenses, sets/adjusts spending limits and gives advice based on daily expenses. 
 
-It targets students who travel frequently and prefer logging their financial records daily. With the application, students will then be able to manage their finances in different currencies with functions optimised for daily logging.
+
+- As a user you could view your financial records in different forms of currencies and in the forms of graphs to help you better understand your finances.
+
+
+- It targets students who travel frequently and prefer logging their financial records daily. With the application, students will then be able to manage their finances in different currencies with functions optimised for daily logging.
 
 ## Table of Contents
 
@@ -30,12 +34,30 @@ It targets students who travel frequently and prefer logging their financial rec
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
-3. Copy the file to the folder you want to use as the home folder for your `StonksXD`.
-4. Type the command in the CLI and press Enter to execute it. e.g. typing `help` and pressing Enter will
-show you all the available commands and their format.
-5. Refer to the [Features](#features) below for details of each command.
 
+
+2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
+
+
+3. Copy the file to the folder you want to use as the home folder for your `StonksXD`.
+
+
+4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run `java -jar tp.java` in the command line. `StonksXD` will start up.
+
+
+5. In `StonksXD`, type the command in the CLI and press Enter to execute it. (Tip: type `help` to show all available commands and their format.)
+
+
+6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `StonksXD`.
+
+
+7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `StonksXD`.
+
+
+8. Type `balance` to view your net saving.
+
+
+9. Refer to the [Features](#features) below for the full details of each command.
 ## Features 
 
 ### Notes
@@ -53,14 +75,15 @@ Format: `help`
 ### Create expense entry: `add_ex`
 Adds an expense entry.
 
-Format: `add_ex d/DESCRIPTION a/AMOUNT`
+Format: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
 - `DESCRIPTION` has to be non-empty.
 - `AMOUNT` has to be a positive amount.
+- `CATEGORY` has to be either `food`, `transport`, `bills`, `medical`, or `entertainment`.
 
 Examples:
 
-- `add_ex d/KFC lunch a/10.20` Adds an expense entry regarding lunch that costs $10.20.
+- `add_ex d/KFC lunch a/10.20 c/food` Adds an expense entry regarding lunch that costs $10.20.
 
 <br>
 
@@ -99,14 +122,15 @@ Format: `total_ex`
 
 Adds an income entry.
 
-Format: `add_in d/DESCRIPTION a/AMOUNT`
+Format: `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY`
 
 - `DESCRIPTION` has to be non-empty.
 - `AMOUNT` has to be a positive amount.
+- `CATEGORY` has to be either `salary`, `allowance`, or `adhoc`.
 
 Examples:
 
-- `add_in d/Allowance a/1000` Adds an income entry regarding an allowance of $1000.
+- `add_in d/lunch money a/1000 c/allowance` Adds an income entry regarding an allowance of $1000.
 
 <br>
 
@@ -147,8 +171,7 @@ Finds and displays the income or expense entries recorded on the given date.
 
 Format: `find YYYY-MM-DD`
 
-- `YYYY-MM-DD` has to be a valid non-empty date
-- `YYYY-MM-DD` has to be positive
+- If the date given is not in the recognised format, it will be treated as a String and be passed into keyword search.
 
 Examples:
 
@@ -167,7 +190,7 @@ Format: `find KEYWORD`
 
 Examples:
 
-- `find FOOD` returns income and/or expense entries that contain the keyword `FOOD` in their description.
+- `find FOOD` returns income and/or expense entries that contain the keyword `FOOD` in their description or categories.
 
 <br>
 
