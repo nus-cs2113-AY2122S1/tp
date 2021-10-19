@@ -1,6 +1,5 @@
 package seedu.typists.content;
 
-import seedu.typists.exception.FaultyInputException;
 import seedu.typists.exception.InvalidArticleException;
 import seedu.typists.ui.TextUi;
 

@@ -94,10 +94,6 @@ public class TextUi {
         System.out.println("Your progress:" + String.valueOf(a) + "/" + String.valueOf(b));
     }
 
-    public void printSuccess() {
-        System.out.println("Finished!");
-    }
-
     public void printKeyboard() {
         out.println(KEYBOARD);
     }
@@ -133,6 +129,11 @@ public class TextUi {
     public void showErrorSummary(int wrongWordCount, int totalWordCount, double sentenceErrorRate) {
         out.println("Wrong words:  " + wrongWordCount + "/" + totalWordCount);
         out.println("Error rate:  " + String.format("%.2f", sentenceErrorRate));
+    }
+
+    public void showWordLimitSummary(int errorWordCount, int totalWordTyped) {
+        out.print(SUMMARY + '\n');
+        out.print("Wrong Words: " + errorWordCount + "/" + totalWordTyped + '\n');
     }
 
     public void showSummary(int errorWordCount, double errorPercentage, double wpm,
