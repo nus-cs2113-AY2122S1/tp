@@ -21,6 +21,15 @@ purchase of raw ingredients and enables more efficient allocation to the cooking
   * [Link Ingredient to Dish](#link-ingredient-to-dish-add-constituent)
   * [Delete Existing Ingredient](#delete-existing-ingredient-del-ingr)
   * [View Exising Ingredients](#view-all-exising-ingredients-list-ingr)
+  * [Graphical representatioon of Ingredients wasteage](#graphical-representatioon-of-ingredients-wasteage-graph-ingr)
+  * [Graphical representatioon of Dishes wasteage](#graphical-representatioon-of-dishes-wasteage-graph-dish)
+  * [Find Ingredients with matching keyword](#find-ingredients-with-matching-keyword-find-ingr)
+  * [Find Dishes with matching keyword](#find-dishes-with-matching-keyword-find-dish)
+  * [Clears Ingredient entries in the list of Ingredients totally](#clears-all-ingredient-entries-in-the-list-of-ingredients-clear-ingr)
+  * [Clears Dish entries in the list of Dishes totally](#clears-all-dish-entries-in-the-list-of-dishes-clear-dish)
+  * [Clears Ingredient & Dish entries in the list of Dishes totally](#clears-all-ingredient--dish-entries-in-the-list-of-dishes-clear-all)
+  * [Sort the Ingredients by amount of wastage](#sort-the-dishes-by-amount-of-wastage-sort-ingr)
+  * [Sort the Dishes by amount of wastage](#sort-the-dishes-by-amount-of-wastage-sort-dish)
   * [Exit Food-O-Rama](#exit-food-o-rama-bye)
 
 ## Quick Start
@@ -68,6 +77,15 @@ ____________________________________________________________
 |Link a Dish to a Ingredient| add constituent [dishName] / [ingrName]|
 |Delete an Ingredient | del [ingrName]|
 |View all Ingredients| list ingr|
+|Display a graph for Ingredients wastage| graph ingr|
+|Display a graph for Dishes wastage| graph dish|
+|Find an Ingredient| find ingr|
+|Find a Dish| find dish|
+|Removes Ingredients totally| clear ingr|
+|Removes Dishes totally| clear dish|
+|Removes Ingredients & Dishes totally| clear all|
+|Sort the Ingredients by amount of wastage| sort ingr|
+|Sort the Dishes by amount of wastage| sort dish|
 |Exit Food-O-Rama| bye|
 
 ## Features 
@@ -346,6 +364,234 @@ Here are the ingredients you have:
    Storage: 7.0 kg
    Wastage: 0.0 kg
 You can use command 'add' to add new ingredients!
+____________________________________________________________
+```
+
+### Graphical representatioon of Ingredients wasteage: `graph ingr`
+Displays a graph to show Ingredient wasteage.
+
+Format: `graph ingr`
+
+* `graph ingr` does not require additional parameters
+
+Example of usage:
+
+`graph ingr`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Here are the dishes you have: 
+1. fish
+   Wastage: [██████████] 10.0 kg
+2. chicken
+   Wastage: [█         ] 1.5 kg
+You can use command 'add' to add new dishes!
+____________________________________________________________
+```
+
+### Graphical representatioon of Dishes wasteage: `graph dish`
+Displays a graph to show Dish wasteage.
+
+Format: `graph dish`
+
+* `graph dish` does not require additional parameters
+
+Example of usage:
+
+`graph dish`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Here are the dishes you have:
+1. chicken rice
+   Wastage: [██████████] 2.5 kg
+2. pasta
+   Wastage: [████      ] 1.0 kg
+You can use command 'add' to add new dishes!
+____________________________________________________________
+
+```
+
+### Find Ingredients with matching keyword: `find ingr`
+Retrieves a list of Ingredients inclusive of the matching keyword.
+
+Format: `find ingr keyword`
+
+* `find ingr` comes before `keyword`.
+* The `keyword` does not necessarily need to be in natural language format.
+
+Example of usage:
+
+`find ingr chi`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+As requested, here are the matching ingredients in your list:
+1. chicken
+   Storage: 7.0 kg
+   Wastage: 1.5 kg
+2. chickpea
+   Storage: 3.5 kg
+   Wastage: 2.0 kg
+____________________________________________________________
+
+```
+
+### Find Dishes with matching keyword: `find dish`
+Retrieves a list of Dishes inclusive of the matching keyword.
+
+Format: `find dish keyword`
+
+* `find dish` comes before `keyword`.
+* The `keyword` does not necessarily need to be in natural language format.
+
+Example of usage:
+
+`find dish pa`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+As requested, here are the matching dishes in your list:
+1. pasta
+   Wastage: 1.0 kg
+   Constituents: None
+2. krabby patty
+   Wastage: 0.0 kg
+   Constituents: None
+____________________________________________________________
+
+```
+
+### Clears Ingredient entries in the list of Ingredients totally: `clear ingr`
+Removes all existing Ingredients from the list of ingredients.
+
+Format: `clear ingr`
+
+* * `clear ingr` does not require additional parameters
+
+Example of usage:
+
+`clear ingr`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Ingredient list has been cleared.
+____________________________________________________________
+
+```
+
+### Clears Dish entries in the list of Dishes totally: `clear dish`
+Removes all existing Dishes from the list of ingredients.
+
+Format: `clear dish`
+
+* * `clear dish` does not require additional parameters
+
+Example of usage:
+
+`clear dish`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Dish list has been cleared.
+____________________________________________________________
+```
+
+### Clears Ingredient & Dish entries in the list of Dishes totally: `clear all`
+Removes all existing Ingredients & Dishes from the list of ingredients & list of Dishes.
+
+Format: `clear all`
+
+* * `clear all` does not require additional parameters
+
+Example of usage:
+
+`clear all`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Both Dish and Ingredient lists have been cleared.
+____________________________________________________________
+```
+
+### Sort the Ingredients by amount of wastage: `sort ingr`
+Sorts all Ingredients in descending order of wastage.
+
+Format: `sort ingr`
+
+* * `sort ingr` does not require additional parameters
+
+Example of usage:
+
+`sort ingr`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+List of Ingredients has been sorted.
+____________________________________________________________
+____________________________________________________________
+Here are the ingredients you have: 
+1. chicken
+   Storage: 9.0 kg
+   Wastage: 14.0 kg
+2. beef
+   Storage: 8.0 kg
+   Wastage: 13.0 kg
+3. pork
+   Storage: 6.0 kg
+   Wastage: 9.0 kg
+4. fish
+   Storage: 7.0 kg
+   Wastage: 4.0 kg
+You can use command 'add' to add new ingredients!
+____________________________________________________________
+```
+
+### Sort the Dishes by amount of wastage: `sort dish`
+Sorts all Dishes in descending order of wastage.
+
+Format: `sort dish`
+
+* * `sort dish` does not require additional parameters
+
+Example of usage:
+
+`sort dish`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+List of Dishes has been sorted.
+____________________________________________________________
+____________________________________________________________
+Here are the dishes you have:
+1. krabby patty
+   Wastage: 9.0 kg
+   Constituents: chicken,beef,fish
+2. chicken rice
+   Wastage: 8.0 kg
+   Constituents: chicken,beef,fish
+3. meatballs spaghetti
+   Wastage: 7.0 kg
+   Constituents: chicken,beef,fish
+You can use command 'add' to add new dishes!
 ____________________________________________________________
 ```
 
