@@ -6,9 +6,12 @@ import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
+import seedu.duke.task.TypeEnum;
 import seedu.duke.task.reminder.Reminder;
 
 public class Todo extends Task {
+
+    private final TypeEnum taskType = TypeEnum.TODO;
 
     private static final String TODO_DATE_DESCRIPTION_REGEX = " (doOn: %s)";
 
@@ -50,6 +53,10 @@ public class Todo extends Task {
         setRecurrence(recurrence);
     }
 
+    public TypeEnum getTaskType() {
+        return this.taskType;
+    }
+
     public Date getDoOnDate() {
         return doOnDate;
     }
@@ -60,7 +67,6 @@ public class Todo extends Task {
             reminder = new Reminder(doOnDate);
         }
     }
-
 
     public String getReminder(LocalDateTime now) {
         return reminder.getRecurrenceMessage(now, getTaskEntryDescription(), getRecurrence());

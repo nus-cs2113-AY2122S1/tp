@@ -2,11 +2,15 @@ package seedu.duke.task.type;
 
 import seedu.duke.nusmods.NusModsParser;
 import seedu.duke.task.Task;
+import seedu.duke.task.TypeEnum;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 
 public class Lesson extends Task {
+
+    private final TypeEnum taskType = TypeEnum.LESSON;
+
     public String getModuleCode() {
         return moduleCode;
     }
@@ -25,6 +29,10 @@ public class Lesson extends Task {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    public TypeEnum getTaskType() {
+        return this.taskType;
     }
 
     @Override

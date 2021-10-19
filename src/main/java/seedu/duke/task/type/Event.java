@@ -6,9 +6,12 @@ import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
+import seedu.duke.task.TypeEnum;
 import seedu.duke.task.reminder.Reminder;
 
 public class Event extends Task {
+
+    private final TypeEnum taskType = TypeEnum.EVENT;
 
     private static final String DEADLINE_DATE_DESCRIPTION_REGEX = " (startDate: %s - endDate: %s)";
 
@@ -42,6 +45,9 @@ public class Event extends Task {
         setRecurrence(recurrence);
     }
 
+    public TypeEnum getTaskType() {
+        return this.taskType;
+    }
 
     public Date getStartDate() {
         return startDate;

@@ -83,4 +83,6 @@ public abstract class Task {
         return optionalTaskArguments + String.format(argumentFormat,
             TaskFlag.RECURRENCE + " " + RecurrenceEnum.getRecurrencesListString(argumentSplit));
     }
+
+    public abstract TypeEnum getTaskType();
 }

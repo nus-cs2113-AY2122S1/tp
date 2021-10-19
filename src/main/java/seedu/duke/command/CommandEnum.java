@@ -10,6 +10,7 @@ public enum CommandEnum {
     BYE("bye"),
     HELP("help"),
     LIST("list"),
+    SORT("sort"),
     DELETE("delete <index>"),
     TODO("todo <description> [%s %s]"),
     DEADLINE("deadline <description> <%s %s>"),
