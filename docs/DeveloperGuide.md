@@ -17,6 +17,7 @@
 {list project requirements needed}
 
 ## Design
+
 ###Architecture
 
 ![Architecture Diagram](images/Architecture.png)
