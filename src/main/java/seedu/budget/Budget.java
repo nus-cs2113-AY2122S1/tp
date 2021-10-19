@@ -3,6 +3,7 @@ package seedu.budget;
 import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public abstract class Budget {
@@ -29,7 +30,7 @@ public abstract class Budget {
     public int calAmount(ArrayList<Expense> entries) {
         int amount = 0;
         for (Expense expense : entries) {
-            if (expense.getCategory() == this.category) {
+            if ((expense.getCategory() == this.category) & (expense.getDate().getMonth() == LocalDate.now().getMonth())){
                 amount += expense.getValue();
             }
         }

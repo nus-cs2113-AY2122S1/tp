@@ -8,6 +8,7 @@ import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
 
 import seedu.utility.Parser;
+import seedu.utility.StonksGraph;
 import seedu.utility.Ui;
 
 

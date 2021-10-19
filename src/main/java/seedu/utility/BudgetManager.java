@@ -10,6 +10,7 @@ import seedu.budget.OverallBudget;
 import seedu.budget.TransportBudget;
 import seedu.entry.Expense;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BudgetManager {
@@ -53,15 +54,16 @@ public class BudgetManager {
 
     private void checkBudget(Expense expense, ArrayList<Expense> expenses, Budget budget) {
         if (budget.getLimit() != 0) {
+            String month = LocalDate.now().getMonth().toString();
             int currAmount = budget.calAmount(expenses);
             int limit = budget.getLimit();
             int diff = limit - currAmount;
             if ((diff < threshold*limit) & (diff > 0)) {
-                System.out.println("You are almost reaching the " + budget.getName() + " budget of $" + limit + "!");
-                System.out.println("Would you like to readjust your " + budget.getName() + " budget?");
+                System.out.println("You are almost reaching the " + month + " " + budget.getName() + " budget: $" + currAmount + "/$" + limit);
+                System.out.println("Would you like to readjust your " + month + " " + budget.getName() + " budget?");
             } else if (diff < 0) {
-                System.out.println("You have exceeded the " + budget.getName() + " budget of $" + limit + "!");
-                System.out.println("Would you like to readjust your " + budget.getName() + " budget?");
+                System.out.println("You have exceeded the " + month + " " + budget.getName() + " budget: $" + currAmount + "/$" + limit);
+                System.out.println("Would you like to readjust your " + month + " " + budget.getName() + " budget?");
             }
         }
     }
