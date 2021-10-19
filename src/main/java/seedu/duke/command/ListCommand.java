@@ -4,8 +4,6 @@ import java.util.HashMap;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.task.TaskManager;
 
-import java.util.Map;
-
 public class ListCommand extends Command {
     private static final CommandEnum COMMAND = CommandEnum.LIST;
 
@@ -14,11 +12,11 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public CommandResult executeCommand() throws Exception {
+    public CommandResult executeCommand() {
         String message = "";
 
         try {
-            message = TaskManager.listTasklist();
+            message = TaskManager.listTasklist(commandArguments);
         } catch (EmptyTasklistException e) {
             message = e.toString();
         }
