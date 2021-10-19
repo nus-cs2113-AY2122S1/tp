@@ -21,6 +21,7 @@ public abstract class ContactParser extends RegexParser {
     public static final int NUMBER_OF_DETAILS = 2;
     public static final int NUMBER_OF_ADD_ARGS = 2;
     public static final int NUMBER_OF_EDIT_ARGS = 3;
+    public static final int NUMBER_OF_SEARCH_ARGS = 3;
     public static final int NUMBER_OF_FIELDS = 6;
 
     public static final String DETAIL_SEPARATOR = " -";
@@ -73,8 +74,7 @@ public abstract class ContactParser extends RegexParser {
         contactDetails[indexToStore] = detailToStore;
     }
 
-
-    private int getIndexToStore(String flag) throws InvalidFlagException {
+    public int getIndexToStore(String flag) throws InvalidFlagException {
         int indexToStore;
         switch (flag) {
         case NAME_FLAG:
