@@ -36,7 +36,7 @@ exercises (in the form of an `Exercise` object). Lastly, `Exercise` stores the e
 * `reps` corresponding to the number of times the exercise is done in a given set.
 * `sets` corresponding to the number of times the whole exercise is repeated.
 
-Storage.models: `addToWorkoutListModel(WorkoutModel workout)` and `addToWorkoutModel(ExerciseModel exercise)` from the `storage.models` component
+__Storage.models__: `addToWorkoutListModel(WorkoutModel workout)` and `addToWorkoutModel(ExerciseModel exercise)` from the `storage.models` component
 are called in the methods of `Workout` and `Exercise` respectively. This causes the dependency on `WorkoutModel` and `WorkoutListModel` as seen in the UML Diagram.
 
 ### Storage Component
@@ -71,7 +71,11 @@ Manage fitness routines quickly
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|fit user|create my own workouts|follow the workouts that I created|
+|v1.0|over-ambitious user|delete my workouts|remove really hard workouts that I thought I could do but realised I couldn't|
+|v2.0|busy user|enter into workouts|add exercises without the workout index parameter and save time|
+|v2.0|unfit user|be suggested workouts|so that I can follow them to achieve basic fitness|
+|v2.0|forgetful user| be constantly reminded of the syntax for commands|so that I can easily correct any incorrect input while using the app|
 
 ## Non-Functional Requirements
 

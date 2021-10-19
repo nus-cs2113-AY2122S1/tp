@@ -39,23 +39,140 @@ ________________________________________________________
 
 --------------------------------------
 
-## Features 
+## Features
 
-{Give detailed description of each feature}
+###1. Creating a new workout: `create`
+Adds a new workout to the list of workouts
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+Format: `create [WORKOUT_DESCRIPTION]`
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+Usage examples: 
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+`create abs`
 
-Example of usage: 
+`create leg day`
 
-`todo n/Write the rest of the User Guide d/next week`
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+###2. Deleting a workout: `delete`
+Deletes a workout from the list of workouts
+
+Format: `delete [WORKOUT_INDEX]`
+
+* Workout index is the index of the workout in the list
+
+Usage example:
+
+`delete 1`
+
+
+###3. Show all workouts: `list`
+Shows you all the workouts in the current list of workouts
+
+Usage example:
+
+`list`
+
+
+###4. Adding an exercise to a workout: `add`
+Adds an exercise to a specified workout
+
+Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
+* Note the comma  `,`  separating the command arguments
+* Sets and reps are entered in the form of two numbers separated by a space 
+
+Usage examples:
+
+`add push-ups, 5 20, 1`  = push-ups, 5 sets of 10 reps, add to workout 1
+
+`add bench press, 4 6, 2` = bench press, 4 sets of 6 reps, add to workout 2
+
+
+###5. Removing an exercise from a workout: `remove`
+Removes an exercise from a specified workout
+
+Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
+
+Examples of usage:
+
+`remove 1, 2` = remove exercise 1 from workout 2
+
+###6. Mark an exercise done: `done`
+Marks an exercise from a specified workout as done
+
+Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
+
+Usage example:
+
+`done 1, 2` = mark exercise 1 from workout 2 as done
+
+###7. Show all exercises from a workout: `display`
+Shows you all the exercises in a specified workout
+
+Format: `display [WORKOUT_INDEX]`
+
+Usage example:
+
+`display 1` = Show all exercises from workout 1
+
+###8. Entering into a Workout: `enter`
+Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
+in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
+
+Format: `enter [WORKOUT_INDEX]`
+
+Example of usage:
+* `enter 1` = enter into the workout with index 1
+* `enter 2` = enter into the workout with index 2
+
+###9. Exiting from a workout: `back`
+Allows you to exit back into the main view once you have entered into a workout.
+
+Format `back`
+
+Example interaction of `enter` and `back`:
+
+```
+You: list
+
+GetJackd:
+________________________________________________________
+Workout list:
+1. workout2 finish by: 11 Nov 2102
+2. workout3 finish by: 25 Dec 2020
+________________________________________________________
+
+You: enter 1
+
+GetJackd:
+			________________________________________________________
+			Now inside Workout: workout2 finish by: 11 Nov 2102
+			________________________________________________________
+			
+			You: add pushups, 5 20
+			
+			GetJackd:
+
+			________________________________________________________
+			New exercise added: [ ] pushups | 5 sets of 20 reps
+			________________________________________________________
+			
+			You: display
+			
+			GetJackd:
+			
+			Exercises in workout2
+			1. [ ] pushups | 5 sets of 20 reps
+			________________________________________________________
+			
+			You: back
+
+GetJackd:
+________________________________________________________
+Back to Main View
+________________________________________________________
+			
+```
+
 
 ## FAQ
 
@@ -67,15 +184,15 @@ Example of usage:
 
 | Action                                           | Format, Examples                                                                                       |
 |--------------------------------------------------|--------------------------------------------------------------------------------------------------------|
-| Add exercise                                     | Format: add [EXERCISE_DESCRIPTION], [SETS REPS], [WORKOUT_INDEX] <br /> Example: add Push-ups, 5 10, 1 |
-| Display exercises in <br /> a particular workout | Format: display [WORKOUT_INDEX] <br />Example: display 1                                               |
-| Mark exercise as done                            | Format: done [EXERCISE_INDEX], [WORKOUT_INDEX] <br />Example: done 5, 1                                |
-| Remove exercise                                  | Format: remove [EXERCISE_INDEX], [WORKOUT_INDEX] <br />Example: remove 5, 1                            |
-| Create workout                                   | Format: create [WORKOUT_DESCRIPTION] <br />Example: create abs                                         |
-| Delete workout                                   | Format: delete [WORKOUT_INDEX] <br />Example: delete 1                                                 |
-| List all workouts                                | Example: list                                                                                          |
-| Enter workout                                    | Format: enter [WORKOUT_INDEX] <br />Example: enter 1                                                   |
-| Exit workout                                     | Example: back                                                                                          |
-| Help                                             | Format: help {COMMAND_WORD} <br />Example: help add                                                    |
-| Search                                           | Format: search [KEYWORD] <br />Example: search legs                                                    |
-| Exit                                             | Example: bye                                                                                           |
+| List all workouts                                | Example: `list`                                                                                        |
+| Create workout                                   | Format: `create [WORKOUT_DESCRIPTION]` <br />Example: `create abs workout`                                         |
+| Delete workout                                   | Format: `delete [WORKOUT_INDEX]` <br />Example: `delete 1`                                                 |
+| Display exercises in <br /> a particular workout | Format: `display [WORKOUT_INDEX]` <br />Example: `display 1`                                               |
+| Add exercise                                     | Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]` <br /> Example: `add Push-ups, 5 10, 1` |
+| Mark exercise as done                            | Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]` <br />Example: `done 5, 1`                                |
+| Remove exercise                                  | Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]` <br />Example: `remove 5, 1`                            |
+| Enter workout                                    | Format: `enter [WORKOUT_INDEX]` <br />Example: `enter 1`                                                   |
+| Exit workout                                     | Example: `back`                                                                                          |
+| Help                                             | Format: `help [COMMAND_WORD]` <br />Example: `help add`                                                    |
+| Search                                           | Format: `search [KEYWORD]` <br />Example: `search legs`                                                    |
+| Exit                                             | Example: `bye`                                                                                           |
