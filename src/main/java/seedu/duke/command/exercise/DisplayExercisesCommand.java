@@ -1,12 +1,12 @@
 package seedu.duke.command.exercise;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
+import seedu.duke.exercises.Exercise;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
-import seedu.duke.exercises.Exercise;
-import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
 
@@ -38,21 +38,21 @@ public class DisplayExercisesCommand extends Command {
      * Executes display exercise command to show all the exercises list.
      *
      * @param workouts is the list of Workouts
-     * @param ui       is a user-interface object
      * @param storage  is a storage object
      * @throws GetJackDException if there is an invalid index used
      */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         Workout workout = workouts.getWorkout(workoutIndex);
         ArrayList<Exercise> exercises = workout.getAllExercises();
 
         if (exercises.isEmpty()) {
-            ui.showToUser(MESSAGE_EMPTY_WORKOUT);
+            //ui.showToUser(MESSAGE_EMPTY_WORKOUT);
+            return new CommandResult(MESSAGE_EMPTY_WORKOUT);
         } else {
             String displayMessage = String.format(MESSAGE_DISPLAY_EXERCISES, workout.getWorkoutName());
-            ui.showItemListToUser(displayMessage, exercises, false);
-            //ui.printExerciseTable(displayMessage, exercises);
+            //ui.showItemListToUser(displayMessage, exercises, false);
+            return new CommandResult(displayMessage, exercises);
         }
     }
 }

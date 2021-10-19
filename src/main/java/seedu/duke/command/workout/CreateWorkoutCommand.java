@@ -1,11 +1,11 @@
 package seedu.duke.command.workout;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
 import java.time.LocalDate;
 
@@ -39,16 +39,16 @@ public class CreateWorkoutCommand extends Command {
      * Executes create workout command to create a new workout into the workout list.
      *
      * @param workouts is the list of Workouts
-     * @param ui       is a user-interface object
      * @param storage  is a storage object
      * @throws GetJackDException if an error occurs within the storage
      */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         workouts.addWorkout(toCreate);
-        ui.showToUser(String.format(MESSAGE_SUCCESS, toCreate));
+        //ui.showToUser(String.format(MESSAGE_SUCCESS, toCreate));
 
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
     }
 }

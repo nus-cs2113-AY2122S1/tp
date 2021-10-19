@@ -1,10 +1,10 @@
 package seedu.duke.command.misc;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
 import java.util.logging.Logger;
 
@@ -33,12 +33,11 @@ public class IncorrectCommand extends Command {
      * Executes command to show that the user has written an invalid command.
      *
      * @param workouts is the list of Workouts
-     * @param ui       is a user-interface object
      * @param storage  is a storage object
      * @throws GetJackDException if invalid command is used
      */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         LOGGER.info("Invalid command entered");
         throw new GetJackDException(feedbackToUser);
     }

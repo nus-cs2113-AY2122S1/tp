@@ -1,11 +1,11 @@
 package seedu.duke.command.workout;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
 import java.util.logging.Logger;
 
@@ -47,16 +47,17 @@ public class DeleteWorkoutCommand extends Command {
      * Executes delete workout command to delete the workout of the given index from the workout list.
      *
      * @param workouts is the list of Workouts
-     * @param ui       is a user-interface object
      * @param storage  is a storage object
      * @throws GetJackDException if there is an invalid index used or an error occurs within the storage
      */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         Workout toDelete = workouts.removeWorkout(workoutIndex);
-        ui.showToUser(String.format(MESSAGE_SUCCESS, toDelete));
+        //ui.showToUser(String.format(MESSAGE_SUCCESS, toDelete));
 
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
     }
 }

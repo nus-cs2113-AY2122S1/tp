@@ -1,14 +1,16 @@
 package seedu.duke.command.misc;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.exercises.Exercise;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Finds all relevant workouts and exercises that contain a particular substring in the workout name
@@ -20,6 +22,9 @@ public class SearchCommand extends Command {
             + "specified keyword with the workout or exercise index the keyword.\n"
             + "\tParameters: KEYWORD\n"
             + "\tExample: " + COMMAND_WORD + " abs";
+    public static final String MESSAGE_MATCHING_WORKOUTS = "Matching workouts: ";
+    public static final String MESSAGE_NO_MATCHES_FOUND = "No matches found. ";
+    public static final String MESSAGE_MATCHING_EXERCISES_IN_WORKOUT = "Matching exercises in %d) %s";
 
     private final String filterString;
 
@@ -33,14 +38,32 @@ public class SearchCommand extends Command {
     }
 
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
-        boolean matchesFound = false;
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
+        Map<String, ArrayList> map = new HashMap<>();
         ArrayList<Workout> workoutList = workouts.getAllWorkouts();
+
+        boolean matchingWorkoutsFound = getMatchingWorkouts(map, workoutList);
+        boolean matchingExercisesFound = getMatchingExercises(map, workoutList);
+
+        if (!matchingExercisesFound && !matchingWorkoutsFound) {
+            return new CommandResult(MESSAGE_NO_MATCHES_FOUND);
+        }
+
+        return new CommandResult(map);
+    }
+
+    private boolean getMatchingWorkouts(Map<String, ArrayList> map, ArrayList<Workout> workoutList) {
+        boolean matchesFound = false;
         ArrayList<Workout> filteredWorkouts = getFilteredWorkoutsWithWorkoutIndex(workoutList);
         if (!filteredWorkouts.isEmpty()) {
             matchesFound = true;
-            ui.showItemListToUser("Matching workouts: ", filteredWorkouts, true);
+            map.put(MESSAGE_MATCHING_WORKOUTS, filteredWorkouts);
         }
+        return matchesFound;
+    }
+
+    private boolean getMatchingExercises(Map<String, ArrayList> map, ArrayList<Workout> workoutList) {
+        boolean matchingWorkouts = false;
 
         for (int i = 0; i < workoutList.size(); i++) {
             int displayIndex = i + 1;
@@ -48,15 +71,13 @@ public class SearchCommand extends Command {
             ArrayList<Exercise> exercises = w.getAllExercises();
             ArrayList<Exercise> filteredExercises = getFilteredExercisesWithExerciseIndex(exercises);
             if (!filteredExercises.isEmpty()) {
-                matchesFound = true;
-                String displayMessage = String.format("Matching exercises in %d. %s", displayIndex, w.getWorkoutName());
-                ui.showItemListToUser(displayMessage, filteredExercises, true);
+                matchingWorkouts = true;
+                String matchingExerciseMessage = String.format(MESSAGE_MATCHING_EXERCISES_IN_WORKOUT,
+                        displayIndex, w.getWorkoutName());
+                map.put(matchingExerciseMessage, filteredExercises);
             }
         }
-
-        if (!matchesFound) {
-            ui.showToUser("No matches found");
-        }
+        return matchingWorkouts;
     }
 
     private ArrayList<Workout> getFilteredWorkoutsWithWorkoutIndex(ArrayList<Workout> workoutList) {

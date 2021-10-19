@@ -1,9 +1,9 @@
 package seedu.duke.command.workout;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
 import java.util.logging.Logger;
 
@@ -37,12 +37,12 @@ public class RecommendWorkoutCommand extends Command {
      * Executes recommend command to display the workouts of the given difficulty.
      *
      * @param workouts is the list of Workouts
-     * @param ui       is a user-interface object
      * @param storage  is a storage object
      */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) {
         LOGGER.info("Showing the recommended " + workoutLevel + " Workouts");
-        ui.showRecommendedWorkouts(workoutLevel);
+        //ui.showRecommendedWorkouts(workoutLevel);
+        return new CommandResult("recommend workout command");
     }
 }

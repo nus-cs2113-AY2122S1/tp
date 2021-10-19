@@ -2,10 +2,12 @@ package seedu.duke.ui;
 
 import dnl.utils.text.table.TextTable;
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.exercises.Exercise;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class Ui {
     private static final String INDENT = "\t\t\t";
@@ -49,22 +51,23 @@ public class Ui {
 
     }
 
-    public static void printHelpMessage() {
-        System.out.println(DIVIDER);
-        System.out.println("Here's a list of commands and what they do.");
-        System.out.println("To find out more information about the command, such as input format and parameters, "
-                + "enter \"help COMMAND\" where COMMAND is the command you want to know more about");
-        System.out.println("\"add\" : Adds an exercise to a workout");
-        System.out.println("\"done\" : Marks an exercise as done");
-        System.out.println("\"remove\" : Removes an exercise from a workout");
-        System.out.println("\"create\" : Creates a new workout");
-        System.out.println("\"delete\" : Deletes a workout");
-        System.out.println("\"list\" : Lists all your workouts");
-        System.out.println("\"recommend\" : Recommends workouts of a given difficulty");
-        System.out.println("\"display\" : Shows all the exercises in a specified workout");
-        System.out.println("\"search\" : Displays workouts or exercises that contain the specified keyword");
-        System.out.println("\"bye\" : Ends the program");
-        System.out.println(DIVIDER);
+    public static String getHelpMessage() {
+
+        return DIVIDER + "\n"
+                + "Here's a list of commands and what they do.\n"
+                + "To find out more information about the command, such as input format and parameters, "
+                + "enter \"help COMMAND\" where COMMAND is the command you want to know more about\n"
+                + "\"add\" : Adds an exercise to a workout\n"
+                + "\"done\" : Marks an exercise as done\n"
+                + "\"remove\" : Removes an exercise from a workout\n"
+                + "\"create\" : Creates a new workout\n"
+                + "\"delete\" : Deletes a workout\n"
+                + "\"list\" : Lists all your workouts\n"
+                + "\"recommend\" : Recommends workouts of a given difficulty\n"
+                + "\"display\" : Shows all the exercises in a specified workout\n"
+                + "\"search\" : Displays workouts or exercises that contain the specified keyword\n"
+                + "\"bye\" : Ends the program\n"
+                + DIVIDER;
     }
 
     private void printText(String message) {
@@ -81,26 +84,11 @@ public class Ui {
      * @param e is the exception whose message we want to print
      */
     public void printErrorMessage(GetJackDException e) {
-        showToUser(e.getMessage());
-    }
+        String errorMessage = e.getMessage();
+        assert (!errorMessage.isEmpty());
 
-    /**
-     * Prints out all the items in a list.
-     *
-     * @param displayMessage message to be displayed to the user
-     * @param itemList       is the list of items
-     */
-    public <T> void showItemListToUser(String displayMessage, ArrayList<T> itemList, boolean bottomLineOnly) {
-        assert (!itemList.isEmpty());
-
-        if (!bottomLineOnly) {
-            printLineSeparator();
-        }
-
-        printText(displayMessage);
-        if (!itemList.isEmpty()) {
-            printList(itemList);
-        }
+        printLineSeparator();
+        printText(errorMessage);
         printLineSeparator();
 
         if (withIndent) {
@@ -108,11 +96,18 @@ public class Ui {
         }
     }
 
-    private <T> void printList(ArrayList<T> itemList) {
+    private void printList(ArrayList itemList) {
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i) != null) {
                 printText((i + 1) + ". " + itemList.get(i));
             }
+        }
+    }
+
+    private void printMap(Map<String, ArrayList> map) {
+        for (Map.Entry<String, ArrayList> m : map.entrySet()) {
+            printText(m.getKey());
+            printList(m.getValue());
         }
     }
 
@@ -142,30 +137,16 @@ public class Ui {
     }
 
     /**
-     * Prints the specific message needed at specific points.
-     *
-     * @param message is the unique message to be shown
-     */
-    public void showToUser(String message) {
-        assert (!message.isEmpty());
-        printLineSeparator();
-        printText(message);
-        printLineSeparator();
-
-        if (withIndent) {
-            System.out.print(INDENT);
-        }
-    }
-
-    /**
      * Shows users recommend workouts based on the difficulty provided.
      *
      * @param workoutLevel is the difficulty of the workouts
      */
     public void showRecommendedWorkouts(String workoutLevel) {
+
         String[] exercises;
 
-        if (workoutLevel.equals("beginner")) {
+        switch (workoutLevel) {
+        case "beginner":
 
             System.out.println("Arm");
             exercises = new String[]{"Normal Pushups", "Inclined Pushups", "Bench Dips", "Bear Crawl"};
@@ -174,7 +155,8 @@ public class Ui {
             System.out.println("Abs");
             exercises = new String[]{"Situps", "Plank"};
             printRecommendTable(exercises);
-        } else if (workoutLevel.equals("intermediate")) {
+            break;
+        case "intermediate":
             System.out.println("Shoulders");
             exercises = new String[]{"Pike Pushups", "Supported hand stand"};
             printRecommendTable(exercises);
@@ -182,7 +164,8 @@ public class Ui {
             System.out.println("Glutes");
             exercises = new String[]{"Kick Backs"};
             printRecommendTable(exercises);
-        } else if (workoutLevel.equals("pro")) {
+            break;
+        case "pro":
             System.out.println("Push Workout");
             exercises = new String[]{"Wide pushups"};
             printRecommendTable(exercises);
@@ -194,6 +177,7 @@ public class Ui {
             System.out.println("Leg Workout");
             exercises = new String[]{"Squats", "Lunges", "Explosive Jumps"};
             printRecommendTable(exercises);
+            break;
         }
     }
 
@@ -203,6 +187,7 @@ public class Ui {
      * @param exercises is the pre set list of recommended exercises
      */
     private void printRecommendTable(String[] exercises) {
+        //AsciiTable at = new AsciiTable();
         assert exercises != null;
 
         String[][] data;
@@ -220,5 +205,25 @@ public class Ui {
         tt.printTable();
 
         printLineSeparator();
+    }
+
+    public void showResultToUser(CommandResult result) {
+        printLineSeparator();
+
+        if (result.feedbackToUser != null) {
+            printText(result.feedbackToUser);
+        }
+        if (result.itemList != null) {
+            printList(result.itemList);
+        }
+        if (result.map != null) {
+            printMap(result.map);
+        }
+
+        printLineSeparator();
+
+        if (withIndent) {
+            System.out.println(INDENT);
+        }
     }
 }

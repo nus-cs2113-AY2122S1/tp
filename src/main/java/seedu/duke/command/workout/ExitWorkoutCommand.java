@@ -1,9 +1,9 @@
 package seedu.duke.command.workout;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
 import java.util.logging.Logger;
 
@@ -31,14 +31,12 @@ public class ExitWorkoutCommand extends Command {
      * Executes exit workout command to exit out from the current workout.
      *
      * @param workouts is the list of Workouts
-     * @param ui       is a user-interface object
      * @param storage  is a storage object
      */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) {
         workoutMode = 0;
         LOGGER.info("Exiting to main view");
-        ui = new Ui();
-        ui.showToUser(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }
