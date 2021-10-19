@@ -80,4 +80,18 @@ public class ContactsDecoder {
             ExceptionTextUi.corruptLineMessage(contactText);
         }
     }
+
+    private static String[] decodeDetails(String contactText) throws IndexOutOfBoundsException {
+        String[] destructuredInputs = contactText.split(SEPARATOR);
+        String[] compiledDetails = new String[NUMBER_OF_FIELDS];
+        for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
+            if (destructuredInputs[i].equals("null")) {
+                compiledDetails[i] = null;
+            } else {
+                compiledDetails[i] = destructuredInputs[i];
+            }
+        }
+        assert destructuredInputs.length == compiledDetails.length;
+        return compiledDetails;
+    }
 }
