@@ -5,7 +5,9 @@ import medbot.exceptions.MedBotException;
 import medbot.person.Person;
 import medbot.utilities.ViewType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class PersonList {
     private HashMap<Integer, Person> persons = new HashMap<>();
@@ -84,6 +86,24 @@ public class PersonList {
         }
         assert (personId > 0) && (personId <= size());
         persons.remove(personId);
+    }
+
+    /**
+     * Filters persons in the list based on specified attributes.
+     *
+     * @param parameters The attributes to filter persons.
+     * @return The filtered persons.
+     */
+    public List<String> findPersons(String[] parameters) {
+        List<String> filteredPersons = new ArrayList<>();
+        for (int key : persons.keySet()) {
+            Person currentPerson = persons.get(key);
+            if (currentPerson.containsAllParameters(parameters)) {
+                filteredPersons.add(currentPerson.toString());
+            }
+        }
+
+        return filteredPersons;
     }
 
     /**
