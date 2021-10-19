@@ -1,5 +1,6 @@
 package seedu.duke.ui;
 
+import seedu.duke.constants.AsciiConstants;
 import seedu.duke.modules.Module;
 import seedu.duke.universities.University;
 import seedu.duke.constants.Constants;
@@ -23,5 +24,14 @@ public class Ui {
         } else {
             System.out.print(format);
         }
+    }
+
+    public static void printGlobe() {
+        System.out.println(AsciiConstants.GLOBE);
+    }
+
+    public static void welcome() {
+        System.out.println(AsciiConstants.GLOBE);
+        System.out.println();
     }
 }
