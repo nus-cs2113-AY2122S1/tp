@@ -31,19 +31,22 @@ public class University {
     }
 
     public void listSelectedMappings(ModuleList selectedModuleList) {
-        int mapCount = 0;
+        ArrayList<ModuleMapping> selectedMappings = getSelectedMappings(selectedModuleList);
+        for (int i = 0; i < selectedMappings.size(); i++) {
+            System.out.print((i + 1) + ". ");
+            selectedMappings.get(i).printModuleMapping();
+        }
+    }
+
+    public ArrayList<ModuleMapping> getSelectedMappings(ModuleList selectedModuleList) {
+        ArrayList<ModuleMapping> selectedMappings = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
-            if (!selectedModuleList.searchModule(currentMapping.localModule.getModuleCode())) {
-                continue;
+            if (selectedModuleList.searchModule(currentMapping.localModule.getModuleCode())) {
+                selectedMappings.add(currentMapping);
             }
-            mapCount++;
-            String output = (mapCount) + ". " +
-                    currentMapping.localModule.getModuleCode()
-                    + " - " + currentMapping.mappedModule.getModuleCode()
-                    + " : " + currentMapping.mappedModule.getModuleName();
-            System.out.println(output);
         }
+        return selectedMappings;
     }
 
     public String getName() {

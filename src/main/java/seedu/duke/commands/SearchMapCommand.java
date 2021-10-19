@@ -15,8 +15,12 @@ public class SearchMapCommand extends Command {
         assert selectedUniversity.getName() != null;
         assert selectedUniversity.getClass() != null;
         this.selectedUniversity = selectedUniversity;
-        System.out.println("Potential mappings for " + selectedUniversity.getName() + ": ");
-        selectedUniversity.listSelectedMappings(moduleSelectedList);
+        if (selectedUniversity.getSelectedMappings(moduleSelectedList).isEmpty()) {
+            System.out.println("There is no potential mappings for " + selectedUniversity.getName());
+        } else {
+            System.out.println("Potential mappings for " + selectedUniversity.getName() + ": ");
+            selectedUniversity.listSelectedMappings(moduleSelectedList);
+        }
     }
 
     public University getSelectedUniversity() {
