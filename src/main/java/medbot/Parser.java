@@ -6,7 +6,7 @@ import medbot.command.CommandType;
 import medbot.command.patientcommand.DeletePatientCommand;
 import medbot.command.patientcommand.EditPatientCommand;
 import medbot.command.ExitCommand;
-import medbot.command.FindPatientCommand;
+import medbot.command.patientcommand.FindPatientCommand;
 import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.patientcommand.ListPatientCommand;

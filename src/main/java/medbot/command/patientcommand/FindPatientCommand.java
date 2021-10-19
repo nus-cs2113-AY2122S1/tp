@@ -1,6 +1,7 @@
-package medbot.command;
+package medbot.command.patientcommand;
 
 import medbot.Ui;
+import medbot.command.Command;
 import medbot.exceptions.MedBotException;
 import medbot.list.PersonList;
 
