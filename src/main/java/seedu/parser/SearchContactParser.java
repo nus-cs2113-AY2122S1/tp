@@ -1,18 +1,18 @@
 package seedu.parser;
 
+import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
 import seedu.exception.MissingArgException;
 
 import static seedu.parser.ContactParser.NUMBER_OF_SEARCH_ARGS;
-import static seedu.parser.ContactParser.getIndexToStore;
 
-public class SearchContactParser {
+public class SearchContactParser implements ContactDetails {
     //return only search query as a String
     public String parseSearchQuery(String userInput) throws MissingArgException {
         String[] destructuredInputs = userInput.split(" ", NUMBER_OF_SEARCH_ARGS);
         if (destructuredInputs.length == 2) { //search for name if no flag specified
             return destructuredInputs[1].toLowerCase().trim();
-        } else if (destructuredInputs.length == 3) { //search for name with flag
+        } else if (destructuredInputs.length == NUMBER_OF_SEARCH_ARGS) { //search for name with flag
             return destructuredInputs[2].toLowerCase().trim();
         }
         //no query specified
@@ -26,10 +26,14 @@ public class SearchContactParser {
         if (destructuredInputs.length < 2) { //no arguments specified, only "search"
             throw new MissingArgException();
         } else if (destructuredInputs.length == 2) { //no flag specified
-            return -1;
+            return DetailType.NAME.getIndex(); //search names
         } else {
             assert destructuredInputs.length == 3;
-            return getIndexToStore(destructuredInputs[2]);
+            if (destructuredInputs[1].contains("-")) { //check for flag
+                String flag = destructuredInputs[1].trim().substring(1);
+                return getIndexToStore(flag);
+            }
+            throw new InvalidFlagException();
         }
     }
 }
