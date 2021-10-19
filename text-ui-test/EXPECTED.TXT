@@ -107,6 +107,19 @@ Method:
 Setting difficulty...
 GordonException: Search returns no result.
 GordonException: Please input a valid difficulty.
+Setting difficulty...
+Difficulty set successfully.
+Setting difficulty...
+Difficulty set successfully.
+Searching by calories...
+1. Cookies (Calories (kcal): 300)
+2. Fried Fish (Calories (kcal): 250)
+GordonException: Index is not a valid integer.
+Searching by calories...
+Searching by difficulty...
+1. Caprese Salad (Difficulty: Easy)
+2. Cookies (Difficulty: Easy)
+GordonException: Please input a valid difficulty.
 GordonException: Index outside range.
 GordonException: Index is not a valid integer.
 OK! The recipe has been deleted from your cookbook.
