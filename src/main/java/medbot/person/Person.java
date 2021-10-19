@@ -5,6 +5,12 @@ import static medbot.Ui.VERTICAL_LINE_SPACED;
 
 
 public abstract class Person {
+    private static final String PARAMETER_NAME = "n/";
+    private static final String PARAMETER_PHONE = "p/";
+    private static final String PARAMETER_EMAIL = "e/";
+    private static final String PARAMETER_IC = "i/";
+    private static final String PARAMETER_ADDRESS = "a/";
+    private static final int PARAMETER_BUFFER = 2;
 
     private int personId = 0;
     protected String icNumber = "";
@@ -87,6 +93,42 @@ public abstract class Person {
                 + setAsStorageParameterOrNull(phoneNumber) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(emailAddress) + VERTICAL_LINE_SPACED
                 + setAsStorageParameterOrNull(residentialAddress);
+    }
+
+    /**
+     * Checks whether this person contains all the parameters specified.
+     *
+     * @param parameters the attributes to check.
+     * @return true if all parameters are found, false otherwise.
+     */
+    public boolean containsAllParameters(String[] parameters) {
+        for (String parameter : parameters) {
+            if (!containsParameter(parameter)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean containsParameter(String parameter) {
+        String trimmedParameter = parameter.substring(PARAMETER_BUFFER).trim().toLowerCase();
+        if (parameter.startsWith(PARAMETER_NAME)) {
+            return getName().toLowerCase().contains(trimmedParameter);
+        }
+        if (parameter.startsWith(PARAMETER_IC)) {
+            return getIcNumber().toLowerCase().contains(trimmedParameter);
+        }
+        if (parameter.startsWith(PARAMETER_PHONE)) {
+            return getPhoneNumber().toLowerCase().contains(trimmedParameter);
+        }
+        if (parameter.startsWith(PARAMETER_EMAIL)) {
+            return getEmailAddress().toLowerCase().contains(trimmedParameter);
+        }
+        if (parameter.startsWith(PARAMETER_ADDRESS)) {
+            return getResidentialAddress().toLowerCase().contains(trimmedParameter);
+        }
+
+        return false;
     }
 
     /**

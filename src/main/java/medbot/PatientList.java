@@ -3,6 +3,8 @@ package medbot;
 import medbot.exceptions.MedBotException;
 import medbot.person.Patient;
 
+import java.util.List;
+
 public class PatientList extends PersonList {
 
     public int addPatient(Patient patient) {
@@ -19,6 +21,10 @@ public class PatientList extends PersonList {
 
     public void deletePatient(int patientId) throws MedBotException {
         super.deletePerson(patientId);
+    }
+
+    public List<String> findPatients(String[] parameters) throws MedBotException {
+        return super.findPersons(parameters);
     }
 
     public String listPatients() {

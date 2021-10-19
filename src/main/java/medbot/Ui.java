@@ -3,6 +3,7 @@ package medbot;
 import medbot.utilities.ViewType;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -82,6 +83,24 @@ public class Ui {
         assert patientId > 0;
         return "The information of patient with ID " + patientId + " has been edited to:" + ENDLINE
                 + patientInfo;
+    }
+
+    /**
+     * Returns the information of the filtered patients.
+     *
+     * @param patients the filtered patients to be printed.
+     * @return The information of the filtered patients
+     */
+    public String getFindPatientsMessage(List<String> patients) {
+        String output = "";
+        for (String patient : patients) {
+            output += patient.toString() + ENDLINE;
+        }
+        if (output.length() == 0) {
+            return "No patient with such attributes is found.";
+        }
+
+        return output;
     }
 
     /**
