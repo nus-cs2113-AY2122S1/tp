@@ -1,5 +1,6 @@
 package seedu.duke.task;
 
+import seedu.duke.exception.EmptySortCriteriaException;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.log.Log;
 
@@ -35,6 +36,35 @@ public class TaskManager {
         return tasks;
     }
 
+    public static String sortTasklist(HashMap<String, String> criteria) throws EmptyTasklistException,
+            EmptySortCriteriaException {
+
+        Log.info("sortTasklist method called");
+        if (taskList.size() == 0) {
+            Log.warning("tasklist is empty, throwing EmptyTasklistException");
+            throw new EmptyTasklistException();
+        }
+
+        String sortCriteria = criteria.get("by");
+        if (sortCriteria.isEmpty()) {
+            Log.warning("user did not indicate any sort criteria, throwing EmptySortCriteriaException");
+            throw new EmptySortCriteriaException();
+        }
+
+        switch (sortCriteria) {
+        case "description":
+            SortByDescription sortByDescription = new SortByDescription();
+            Collections.sort(taskList, sortByDescription);
+            return "Sorted Tasklist by Description";
+        case "priority":
+            SortByPriority sortByPriority = new SortByPriority();
+            Collections.sort(taskList, sortByPriority);
+            return "Sorted Tasklist by Priority";
+        default:
+            return "The sort criteria entered is not valid";
+        }
+    }
+
     public static class SortByDescription implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
@@ -68,22 +98,9 @@ public class TaskManager {
 
             // Returns 0 if both priorities are equal
             return 0;
-
         }
     }
 
-
-
-    public static String sortTasklist(HashMap<String, String> argument) throws EmptyTasklistException {
-
-        // SortByPriority sortByPriority = new SortByPriority();
-        // Collections.sort(taskList, sortByPriority);
-
-        SortByDescription sortByDescription = new SortByDescription();
-        Collections.sort(taskList, sortByDescription);
-
-        return "Done sorting";
-    }
 
 
     public static ArrayList<Task> getTaskList() {
