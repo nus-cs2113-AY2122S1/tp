@@ -156,6 +156,11 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void searchNoResultsFoundMessage() {
+        String message = "No search results found.";
+        printDoubleLineMessage(message);
+    }
+
     public static void confirmDeleteMessage(Contact deletedContact, int deletedIndex) {
         String message = "Delete this contact?  (y/n)\n"
                 + deletedIndex + ". " + deletedContact.getName() + formatContactFields(deletedContact);
@@ -197,6 +202,10 @@ public abstract class TextUi {
                 + " Parameter: INDEX\n"
                 + " Note: Index starts from 0.\n"
                 + " Example: rm 0\n\n"
+                + "search: Search for a contact containing a specified query.\n"
+                + " Note: Flags may be used to specify a detail type to search.\n"
+                + "       If no flag is specified, contact name is searched by default.\n"
+                + " Example: search -g QUERY\n\n"
                 + "help: Displays application usage instructions.\n"
                 + " Example: help";
         printDoubleLineMessage(message);
