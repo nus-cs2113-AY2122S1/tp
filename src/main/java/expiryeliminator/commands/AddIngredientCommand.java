@@ -2,8 +2,8 @@ package expiryeliminator.commands;
 
 import java.time.LocalDate;
 
-import expiryeliminator.data.Ingredient;
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 
@@ -19,35 +19,60 @@ public class AddIngredientCommand extends Command {
             + "Parameters: i/INGREDIENT q/QUANTITY e/EXPIRY_DATE\n"
             + "Example: " + COMMAND_WORD + " i/Red Apple q/5 e/2021-12-25";
 
-    private static final String MESSAGE_INGREDIENT_ADDED = "I've added this ingredient:\n" + "%1$s\n"
+    private static final String MESSAGE_INGREDIENT_ADDED = "I've added this ingredient:\n" + "\n%1$s\n"
             + "Now you have %2$s ingredient(s)";
     private static final String MESSAGE_INGREDIENT_ALREADY_EXISTS = "Unable to add ingredient: %1$s\n"
             + "You already have it in your list";
 
-    private final Ingredient ingredient;
+    private final String name;
+    private final String unit;
+    private int quantity;
+    private LocalDate expiryDate;
+
 
     /**
-     * Instantiates ingredient with the specified name, quantity, and expiry date.
+     * Instantiates ingredient with the specified name and unit.
      *
      * @param name Name of ingredient to be added.
+     * @param unit Unit for ingredient to be added.
+     */
+    public AddIngredientCommand(String name, String unit) {
+        assert name != null && !name.isBlank() : "Ingredient name cannot be null and cannot be blank";
+        this.name = name;
+        this.unit = unit;
+    }
+
+    /**
+     * Instantiates ingredient with the specified name, unit, quantity, and expiry date.
+     *
+     * @param name Name of ingredient to be added.
+     * @param unit Unit for ingredient to be added.
      * @param quantity Quantity of ingredient to be added.
      * @param expiryDate Expiry date of ingredient to be added.
      */
-    public AddIngredientCommand(String name, int quantity, LocalDate expiryDate) {
+    public AddIngredientCommand(String name, String unit, int quantity, LocalDate expiryDate) {
         assert name != null && !name.isBlank() : "Ingredient name cannot be null and cannot be blank";
         assert quantity >= 0 : "Quantity cannot be negative";
         assert expiryDate != null : "Expiry date cannot be null";
-        ingredient = new Ingredient(name, quantity, expiryDate);
+        this.name = name;
+        this.unit = unit;
+        this.quantity = quantity;
+        this.expiryDate = expiryDate;
     }
 
     @Override
-    public String execute(IngredientList ingredients, RecipeList recipes) {
-        assert ingredients != null : "Ingredient list cannot be null";
+    public String execute(IngredientRepository ingredients, RecipeList recipes) {
+        assert ingredients != null : "Ingredient repository cannot be null";
+        final IngredientStorage ingredientStorage;
         try {
-            ingredients.add(ingredient);
+            if (expiryDate == null) {
+                ingredientStorage = ingredients.add(name, unit);
+            } else {
+                ingredientStorage = ingredients.add(name, unit, quantity, expiryDate);
+            }
         } catch (DuplicateDataException e) {
-            return String.format(MESSAGE_INGREDIENT_ALREADY_EXISTS, ingredient.getName());
+            return String.format(MESSAGE_INGREDIENT_ALREADY_EXISTS, name);
         }
-        return String.format(MESSAGE_INGREDIENT_ADDED, ingredient, ingredients.size());
+        return String.format(MESSAGE_INGREDIENT_ADDED, ingredientStorage, ingredients.size());
     }
 }

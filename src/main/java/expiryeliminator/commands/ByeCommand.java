@@ -4,7 +4,7 @@ package expiryeliminator.commands;
 // Reused from https://github.com/bernardboey/ip/blob/master/src/main/java/duke/commands/ByeCommand.java
 // with minor modifications
 
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
 /**
@@ -19,7 +19,7 @@ public class ByeCommand extends Command {
     private static final String MESSAGE_FAREWELL = "Bye. Hope to see you again soon!";
 
     @Override
-    public String execute(IngredientList ingredientList, RecipeList recipes) {
+    public String execute(IngredientRepository ingredientRepository, RecipeList recipes) {
         return MESSAGE_FAREWELL;
     }
 

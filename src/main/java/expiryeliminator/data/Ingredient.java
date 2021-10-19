@@ -1,28 +1,31 @@
 package expiryeliminator.data;
 
-import java.time.LocalDate;
-
 /**
  * Represents an ingredient.
  */
-public class Ingredient {
+class Ingredient {
     private final String name;
-    private int quantity;
-    private final LocalDate expiryDate;
+    private String unit;
 
     /**
-     * Initialises an ingredient.
+     * Initialises an ingredient without specifying a unit.
      *
      * @param name The name of the ingredient.
-     * @param quantity The quantity of the ingredient.
-     * @param expiryDate The expiry date of the ingredient.
      */
-    public Ingredient(String name, int quantity, LocalDate expiryDate) {
+    Ingredient(String name) {
         assert name != null && !name.isBlank();
-        assert quantity >= 0;
         this.name = name;
-        this.quantity = quantity;
-        this.expiryDate = expiryDate;
+    }
+
+    /**
+     * Initialises an ingredient with a unit.
+     *
+     * @param name The name of the ingredient.
+     * @param unit The unit for the ingredient.
+     */
+    Ingredient(String name, String unit) {
+        this(name);
+        this.unit = unit;
     }
 
     /**
@@ -30,40 +33,30 @@ public class Ingredient {
      *
      * @return The name of the ingredient.
      */
-    public String getName() {
+    String getName() {
         return name;
     }
 
     /**
-     * Returns the quantity of the ingredient.
+     * Returns the unit for the ingredient.
      *
-     * @return The quantity of the ingredient.
+     * @return The unit for the ingredient.
      */
-    public int getQuantity() {
-        return quantity;
+    String getUnit() {
+        return unit;
     }
 
     /**
-     * Sets the quantity of the ingredient.
+     * Sets the unit for the ingredient.
      *
-     * @param quantity Quantity of the ingredient.
+     * @param unit The unit for the ingredient.
      */
-    public void setQuantity(int quantity) {
-        assert quantity >= 0;
-        this.quantity = quantity;
-    }
-
-    /**
-     * Returns the expiry date of the ingredient.
-     *
-     * @return The expiry date of the ingredient.
-     */
-    public LocalDate getExpiryDate() {
-        return expiryDate;
+    void setUnit(String unit) {
+        this.unit = unit;
     }
 
     @Override
     public String toString() {
-        return name + " (qty: " + quantity + ") (expiry: " + expiryDate + ")";
+        return name;
     }
 }

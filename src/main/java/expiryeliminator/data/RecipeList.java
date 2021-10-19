@@ -1,6 +1,6 @@
 package expiryeliminator.data;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.NotFoundException;
@@ -9,13 +9,13 @@ import expiryeliminator.data.exception.NotFoundException;
  * Represents the recipe list and contains methods to add and remove recipes.
  */
 public class RecipeList {
-    private final HashMap<String, Recipe> recipes;
+    private final TreeMap<String, Recipe> recipes;
 
     /**
      * Constructs Recipe List with no recipes.
      */
     public RecipeList() {
-        recipes = new HashMap<>();
+        recipes = new TreeMap<>();
     }
 
     /**
@@ -65,7 +65,7 @@ public class RecipeList {
     public String getWholeRecipeList() {
         StringBuilder wholeRecipeList = new StringBuilder();
         for (Recipe recipe : recipes.values()) {
-            wholeRecipeList.append(recipe.toString()).append("\n");
+            wholeRecipeList.append("\n").append(recipe.toString());
         }
         return wholeRecipeList.toString();
     }

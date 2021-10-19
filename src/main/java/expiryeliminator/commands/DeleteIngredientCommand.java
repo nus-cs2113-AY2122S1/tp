@@ -1,7 +1,7 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.Ingredient;
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.NotFoundException;
 
@@ -34,9 +34,11 @@ public class DeleteIngredientCommand extends Command {
     }
 
     @Override
-    public String execute(IngredientList ingredients, RecipeList recipes) {
-        assert ingredients != null : "Ingredient list cannot be null";
-        final Ingredient ingredient;
+    public String execute(IngredientRepository ingredients, RecipeList recipes) {
+        // TODO: Don't allow deleting ingredient if there is a recipe that uses that ingredient
+
+        assert ingredients != null : "Ingredient repository cannot be null";
+        final IngredientStorage ingredient;
         try {
             ingredient = ingredients.remove(ingredientName);
         } catch (NotFoundException e) {
