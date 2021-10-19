@@ -80,5 +80,18 @@ User can update CCA information faster than using a GUI, and offers a centralize
 3. A User with above average typing speed should be able to get tasks done faster with the use of CCA Manager compared to using a mouse
 
 
-## Instructions for manual testing
+## Appendix: Manual Testing
 
+###Setup
+1. Download the latest release from [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/releases)
+
+###Initial Launch
+1. Place `tP.jar` in your folder of choice
+2. Run CCA Manager by calling `java -jar tP.jar` on `cmd`
+
+###Running Commands
+1. You can refer to the list of commands [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/docs/UserGuide.md)
+2. Upon a successful command run, data will be saved to `DukeMembers.csv`
+
+###Exit
+1. Call `bye` to exit CCA Manager
