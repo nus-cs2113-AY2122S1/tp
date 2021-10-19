@@ -18,7 +18,8 @@
 
 ## Design
 
-###Architecture
+### Architecture
+
 
 ![Architecture Diagram](images/Architecture.png)
 
