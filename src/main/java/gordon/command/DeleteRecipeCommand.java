@@ -4,10 +4,10 @@ import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
 import gordon.kitchen.Recipe;
 
-public class DeleteCommand extends Command {
+public class DeleteRecipeCommand extends Command {
     int index;
 
-    public DeleteCommand(int index) {
+    public DeleteRecipeCommand(int index) {
         this.index = index;
     }
 

@@ -27,10 +27,11 @@ public class Storage {
             Scanner loadScanner = new Scanner(load);
 
             while (loadScanner.hasNext()) {
-                Recipe r = new Recipe(loadScanner.nextLine().trim());
+                Recipe r = new Recipe(loadScanner.nextLine());
                 loadCalories(r, loadScanner);
                 loadIngredients(r, loadScanner);
                 loadSteps(r, loadScanner);
+                loadTags(r, loadScanner, cookbook);
                 cookbook.addRecipe(r);
             }
 
@@ -90,6 +91,29 @@ public class Storage {
             String parsedStep = line.substring(dotIndex + 2);
             r.addStep(parsedStep);
         }
+    }
+
+    public void loadTags(Recipe r, Scanner loadScanner, Cookbook cookbook) {
+        while (loadScanner.hasNext()) {
+            String line = loadScanner.nextLine().trim();
+            int dotIndex = line.indexOf('.');
+
+            if (dotIndex < 0) {
+                break;
+            }
+
+            String parsedStep = line.substring(dotIndex + 2);
+            Tag createdTag = new Tag(parsedStep, r.getName());
+
+            if (!cookbook.isCookbookTagExists(parsedStep)) {
+                cookbook.addCookbookTag(createdTag);
+                r.addTag(createdTag);
+            } else {
+                cookbook.appendRecipeToCookbookTag(createdTag.getTagName(), r.getName());
+                r.addTag(createdTag);
+            }
+        }
+
     }
 
     public void saveCookbook(Cookbook cookbook) {

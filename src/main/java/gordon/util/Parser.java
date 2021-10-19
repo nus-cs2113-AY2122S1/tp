@@ -3,12 +3,17 @@ package gordon.util;
 import gordon.command.AddCommand;
 import gordon.command.CheckCommand;
 import gordon.command.Command;
-import gordon.command.DeleteCommand;
+import gordon.command.DeleteRecipeCommand;
 import gordon.command.FindIngredientsCommand;
+import gordon.command.FindTagsCommand;
 import gordon.command.HelpCommand;
-import gordon.command.ListCommand;
+import gordon.command.ListRecipesCommand;
 import gordon.command.NullCommand;
 import gordon.command.SetCaloriesCommand;
+import gordon.command.TagAddCommand;
+import gordon.command.TagDeleteCommand;
+import gordon.command.TagUntagCommand;
+
 import gordon.exception.GordonException;
 import gordon.kitchen.Recipe;
 
@@ -35,19 +40,27 @@ public class Parser {
     public Command parseMaster() {
         try {
             if (parseCommand(line).equalsIgnoreCase("add")) {
-                return addParse();
-            } else if (parseCommand(line).equalsIgnoreCase("delete")) {
-                return deleteParse();
+                return addRecipeParse();
+            } else if (parseCommand(line).equalsIgnoreCase("deleteRecipe")) {
+                return deleteRecipeParse();
+            } else if (parseCommand(line).equalsIgnoreCase("deleteTag")) {
+                return deleteTagParse();
             } else if (parseCommand(line).equalsIgnoreCase("check")) {
                 return new CheckCommand(parseName(line));
-            } else if (parseCommand(line).equalsIgnoreCase("list")) {
-                return new ListCommand();
+            } else if (parseCommand(line).equalsIgnoreCase("listRecipes")) {
+                return new ListRecipesCommand("listRecipes");
+            } else if (parseCommand(line).equalsIgnoreCase("listTags")) {
+                return new ListRecipesCommand("listTags");
             } else if (parseCommand(line).equalsIgnoreCase("set")) {
                 return setParse();
             } else if (parseCommand(line).equalsIgnoreCase("find")) {
                 return findParse();
             } else if (parseCommand(line).equalsIgnoreCase("help")) {
                 return new HelpCommand();
+            } else if (parseCommand(line).equalsIgnoreCase("tag")) {
+                return addTagParse();
+            } else if (parseCommand(line).equalsIgnoreCase("untag")) {
+                return untagParse();
             } else {
                 throw new GordonException(GordonException.COMMAND_INVALID);
             }
@@ -97,7 +110,7 @@ public class Parser {
         String newLine = line.substring(stepsIndex + STEPS_WORD_LENGTH);
         String[] stepsList = newLine.split("\\+");
         for (int i = 0; i < stepsList.length; i++) {
-            r.addStep(stepsList[i], i);
+            r.addStep(stepsList[i].trim(), i);
         }
     }
 
@@ -109,15 +122,19 @@ public class Parser {
             r.setCalories(calories);
         } catch (IndexOutOfBoundsException e) {
             throw new GordonException(GordonException.EMPTY_CALORIES);
+        } catch (NumberFormatException e) {
+            throw new GordonException(GordonException.CALORIES_FORMAT);
         }
     }
 
-    public AddCommand addParse() throws GordonException {
+    public AddCommand addRecipeParse() throws GordonException {
         String[] splitContent = line.split("/");
         if (splitContent.length < 4) {
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
-        assert splitContent.length == 4 : "Your add input should have exactly 3 '/' separating them.";
+
+        //assert splitContent.length == 4 : "Your add input should have exactly 3 '/' separating them.";
+
         Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
         parseIngredients(splitContent[INGREDIENTS_INDEX], r);
         parseSteps(splitContent[STEPS_INDEX], r);
@@ -125,7 +142,7 @@ public class Parser {
         return new AddCommand(r);
     }
 
-    public DeleteCommand deleteParse() throws GordonException {
+    public DeleteRecipeCommand deleteRecipeParse() throws GordonException {
         nameRecipe = parseName(line);
         String inputIndex = line.contains(" ") ? line.substring(line.indexOf(" ") + 1) : " ";
         if (inputIndex.isEmpty() || inputIndex.equals(" ")) {
@@ -134,7 +151,7 @@ public class Parser {
         try {
             int index = Integer.parseInt(inputIndex);
             assert index > 0 : "Your input should be a number greater than 0";
-            return new DeleteCommand(index - 1);
+            return new DeleteRecipeCommand(index - 1);
         } catch (NumberFormatException e) {
             throw new GordonException(GordonException.INDEX_INVALID);
         }
@@ -183,9 +200,88 @@ public class Parser {
             ArrayList<String> ingredients = new ArrayList<>(Arrays.asList(splitContent[1]
                     .substring(spaceIndex + 1).split("\\+")));
             return new FindIngredientsCommand(ingredients);
-        case "tags":
+        case "tag":
+            ArrayList<String> tags = new ArrayList<>(Arrays.asList(splitContent[1]
+                    .substring(spaceIndex + 1).split("\\+")));
+            return new FindTagsCommand(tags);
         default:
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
+    }
+
+    public Command addTagParse() throws GordonException {
+        String[] splitContent = line.split("/");
+
+        if (splitContent.length < 3) {
+            throw new GordonException(GordonException.TAG_FORMAT_TOOSHORT);
+        }
+
+        String recipeName = splitContent[1].trim();
+        String tagNames = splitContent[2].trim();
+        String[] splitTagNames = tagNames.split("\\+");
+
+        try {
+            if (splitTagNames[0].trim().equals("")) {
+                throw new GordonException(GordonException.TAG_FORMAT_NOTAGS);
+            }
+
+            if (recipeName.equals("")) {
+                throw new GordonException(GordonException.EMPTY_RECIPE_NAME);
+            }
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.TAG_NONE_DETECTED);
+        }
+
+        return new TagAddCommand(recipeName, splitTagNames);
+    }
+
+    public Command deleteTagParse() throws GordonException {
+        String[] splitContent = line.split("/");
+
+        if (splitContent.length < 2) {
+            throw new GordonException(GordonException.DELETETAG_FORMAT_TOOSHORT);
+        }
+
+        String tagNames = splitContent[1].trim();
+        String[] splitTagNames = tagNames.split("\\+");
+
+        try {
+            if (splitTagNames[0].trim().equals("")) {
+                throw new GordonException(GordonException.DELETETAG_FORMAT_NOTAGS);
+            }
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.TAG_NONE_DETECTED);
+        }
+
+        return new TagDeleteCommand(splitTagNames);
+    }
+
+    public Command untagParse() throws GordonException {
+        String[] splitContent = line.split("/");
+
+        if (splitContent.length < 3) {
+            throw new GordonException(GordonException.UNTAG_FORMAT_TOOSHORT);
+        }
+
+        String recipeName = splitContent[1].trim();
+        String tagNames = splitContent[2].trim();
+        String[] splitTagNames = tagNames.split("\\+");
+
+        try {
+            if (splitTagNames[0].trim().equals("")) {
+                throw new GordonException(GordonException.UNTAG_FORMAT_NOTAGS);
+            }
+
+            if (recipeName.equals("")) {
+                throw new GordonException(GordonException.EMPTY_RECIPE_NAME);
+            }
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new GordonException(GordonException.TAG_NONE_DETECTED);
+        }
+
+        return new TagUntagCommand(recipeName, splitTagNames);
     }
 }
