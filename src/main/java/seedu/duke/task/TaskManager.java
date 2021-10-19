@@ -4,6 +4,8 @@ import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.log.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class TaskManager {
@@ -22,8 +24,8 @@ public class TaskManager {
         }
 
         String tasks = "-------------\n"
-            + " MY TASKLIST\n"
-            + "-------------\n";
+                + " MY TASKLIST\n"
+                + "-------------\n";
 
         for (int i = 0; i < taskList.size(); i++) {
             tasks += i + 1 + ". " + taskList.get(i).getTaskEntryDescription() + "\n";
@@ -33,11 +35,41 @@ public class TaskManager {
         return tasks;
     }
 
-    public static String sortTasklist(HashMap<String, String> argument) throws EmptyTasklistException {
+    public static class ComparePriority implements Comparator<Task> {
+        @Override
+        public int compare(Task o1, Task o2) {
 
-        return "test";
+            if (o1.getPriority().equals(PriorityEnum.LOW) && (o2.getPriority().equals(PriorityEnum.MEDIUM)
+                    || o2.getPriority().equals(PriorityEnum.HIGH))) {
+                return -1;
+            }
+
+            if (o1.getPriority().equals(PriorityEnum.MEDIUM) && o2.getPriority().equals(PriorityEnum.HIGH)) {
+                return -1;
+            }
+
+            if (o1.getPriority().equals(PriorityEnum.HIGH) && (o2.getPriority().equals(PriorityEnum.MEDIUM)
+                    || o2.getPriority().equals(PriorityEnum.LOW))) {
+                return 1;
+            }
+
+            if (o1.getPriority().equals(PriorityEnum.MEDIUM) && o2.getPriority().equals(PriorityEnum.LOW)) {
+                return 1;
+            }
+
+            // Returns 0 if both priorities are equal
+            return 0;
+
+        }
     }
 
+    public static String sortTasklist(HashMap<String, String> argument) throws EmptyTasklistException {
+
+        ComparePriority comparePriority = new ComparePriority();
+        Collections.sort(taskList, comparePriority);
+
+        return "Done sorting";
+    }
 
 
     public static ArrayList<Task> getTaskList() {
