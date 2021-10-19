@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public class Ingredient {
+public class Ingredient implements  Comparable<Ingredient> {
 
     private Ui ui = new Ui();
     private String ingredientName;
@@ -71,5 +71,10 @@ public class Ingredient {
         bar = bar + "]";
         return ingredientName + System.lineSeparator()
                 + "   Wastage: " + bar + " " + wastage + " kg";
+    }
+
+    @Override
+    public int compareTo(Ingredient o) {
+        return (int) (ingredientWasteIngr - o.ingredientWasteIngr);
     }
 }
