@@ -6,7 +6,7 @@ import medbot.command.CommandType;
 import medbot.command.patientcommand.DeletePatientCommand;
 import medbot.command.patientcommand.EditPatientCommand;
 import medbot.command.ExitCommand;
-import medbot.command.FindPatientCommand;
+import medbot.command.patientcommand.FindPatientCommand;
 import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.patientcommand.ListPatientCommand;
@@ -206,6 +206,8 @@ public class Parser {
             return CommandType.SWITCH;
         case COMMAND_VIEW:
             return CommandType.VIEW_PATIENT;
+        case COMMAND_FIND:
+            return CommandType.FIND_PATIENT;
         default:
             throw new MedBotParserException(WRONG_COMMAND_ERROR);
         }

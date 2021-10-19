@@ -1,6 +1,5 @@
 package medbot;
 
-import medbot.list.PatientList;
 import medbot.list.PersonList;
 import medbot.utilities.ViewType;
 
@@ -219,6 +218,16 @@ public class Ui {
                 + "delete PATIENT_ID" + ENDLINE
                 + "Expected Output:" + ENDLINE
                 + "Patient with id PATIENT_ID deleted from system." + ENDLINE;
+    }
+
+    public String getFindHelpMessage() {
+        return "Find patients from the list based on given attributes." + ENDLINE
+                + "Format:" + ENDLINE
+                + "find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
+                + "    * The attributes do not have to be in full." + ENDLINE
+                + "    * At least one attribute must be present." + ENDLINE
+                + "Expected Output:" + ENDLINE
+                + "Patient ID: PATIENT_ID IC: PATIENT_IC Name: NAME H/P: PHONE_NUMBER Email: EMAIL Address: ADDRESS";
     }
 
     /**

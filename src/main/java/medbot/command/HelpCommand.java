@@ -41,6 +41,9 @@ public class HelpCommand extends Command {
         case SWITCH:
             output = ""; //todo
             break;
+        case FIND_PATIENT:
+            output = ui.getFindHelpMessage();
+            break;
         case VIEW_PATIENT:
             output = ui.getViewHelpMessage();
             break;
