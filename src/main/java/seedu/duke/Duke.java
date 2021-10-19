@@ -20,7 +20,6 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         try {
-            Ui.welcome();
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
             ModuleList moduleMasterList = new ModuleList(Storage.loadModules());//ArrayList<>(Storage.loadModules());
             UniversityList universitySelectedList = new UniversityList();
@@ -28,6 +27,7 @@ public class Duke {
             Parser mainParser = new Parser(universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
             Command cmd = null;
+            Ui.welcome();
 
             do {
                 try {
