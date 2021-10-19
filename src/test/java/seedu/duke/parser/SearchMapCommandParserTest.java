@@ -52,6 +52,4 @@ public class SearchMapCommandParserTest {
             assertEquals("no description given", e.getMessage());
         }
     }
-
-
 }

@@ -67,10 +67,10 @@ public class University {
         for (int i = 0; i < list.size(); i++) {
             Module local = list.get(i).getLocalModule();
             Module mapped = list.get(i).getMappedModule();
-            result += (local.getModuleCode() + " # " + local.getModuleName() +
-                    " # " + local.getModuleCredits() + " # " + mapped.getModuleCode() +
-                    " # " + mapped .getModuleName() + " # " + mapped.getModuleCredits() +
-                    System.lineSeparator());
+            result += (local.getModuleCode() + " # " + local.getModuleName()
+                    + " # " + local.getModuleCredits() + " # " + mapped.getModuleCode()
+                    + " # " + mapped.getModuleName() + " # " + mapped.getModuleCredits()
+                    + System.lineSeparator());
         }
         return result;
     }
