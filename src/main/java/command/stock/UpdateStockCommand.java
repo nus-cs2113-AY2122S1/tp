@@ -64,12 +64,14 @@ public class UpdateStockCommand extends Command {
             return;
         }
 
-        ArrayList<Stock> filteredStocks = new ArrayList<>();
-        for (Medicine medicine : medicines) {
-            if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(stock.getMedicineName())) {
-                filteredStocks.add((Stock) medicine);
-            }
+        ArrayList<Stock> oldFilteredStocks = StockManager.getFilteredStocksByName(medicines, stock.getMedicineName());
+
+        if (parameters.containsKey(CommandParameters.NAME)) {
+            addNewRowForUpdates(oldFilteredStocks, medicines);
+            stock = getNewStock(medicines, stock);
         }
+
+        ArrayList<Stock> filteredStocks = StockManager.getFilteredStocksByName(medicines, stock.getMedicineName());
 
         // Default value for updating all affected rows
         int rowsAffected = filteredStocks.size();
@@ -91,10 +93,78 @@ public class UpdateStockCommand extends Command {
 
         setUpdatesByStockID(parameters, filteredStocks, stock);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
+        if (parameters.containsKey(CommandParameters.NAME)) {
+            ui.print("Stock Id changed from:");
+            for (int i = 0; i < filteredStocks.size(); i++) {
+                ui.print(oldFilteredStocks.get(i).getStockID() + " -> " + filteredStocks.get(i).getStockID());
+            }
+        }
         ui.printStocks(filteredStocks, medicines);
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);
         logger.log(Level.INFO, "End of UpdateStock command execution.");
+    }
+
+    /**
+     * Retrieves the updated stock object.
+     *
+     * @param medicines Arraylist of all medicines.
+     * @param stock     Stock object of the given stock id.
+     * @return The updated stock object.
+     */
+    private Stock getNewStock(ArrayList<Medicine> medicines, Stock stock) {
+        Stock newStock = null;
+        for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Stock)) {
+                continue;
+            }
+            if (((Stock) medicine).isDeleted()) {
+                continue;
+            }
+            boolean isSameName = medicine.getMedicineName().equalsIgnoreCase(stock.getMedicineName());
+            boolean isSameExpDate = ((Stock) medicine).getExpiry().equals(stock.getExpiry());
+            if (isSameName && isSameExpDate) {
+                String newStockId = String.valueOf(((Stock) medicine).getStockID());
+                parameters.put(CommandParameters.ID, newStockId);
+                newStock = (Stock) medicine;
+                break;
+            }
+        }
+        return newStock;
+    }
+
+    /**
+     * Add new rows when medicine name gets updated.
+     *
+     * @param filteredStocks Arraylist of filtered medicine stocks.
+     * @param medicines      Arraylist of all medicines.
+     */
+    private void addNewRowForUpdates(ArrayList<Stock> filteredStocks,
+                                     ArrayList<Medicine> medicines) {
+        // Initialise new stock to get a new Stock Id
+        for (Stock stock : filteredStocks) {
+            String name = stock.getMedicineName();
+            double price = stock.getPrice();
+            int quantity = stock.getQuantity();
+            Date expiryDate = stock.getExpiry();
+            String description = stock.getDescription();
+            int maxQuantity = stock.getMaxQuantity();
+            Stock newStock = new Stock(name, price, quantity, expiryDate, description, maxQuantity);
+            medicines.add(newStock);
+        }
+
+        for (Stock stock : filteredStocks) {
+            for (Medicine medicine : medicines) {
+                if (!(medicine instanceof Stock)) {
+                    continue;
+                }
+                int stockId = ((Stock) medicine).getStockID();
+                if (stockId == stock.getStockID()) {
+                    ((Stock) medicine).setDeleted(true);
+                    medicine.setQuantity(0);
+                }
+            }
+        }
     }
 
     /**
