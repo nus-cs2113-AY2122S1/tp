@@ -36,7 +36,7 @@ exercises (in the form of an `Exercise` object). Lastly, `Exercise` stores the e
 * `reps` corresponding to the number of times the exercise is done in a given set.
 * `sets` corresponding to the number of times the whole exercise is repeated.
 
-Storage.models: `addToWorkoutListModel(WorkoutModel workout)` and `addToWorkoutModel(ExerciseModel exercise)` from the `storage.models` component
+__Storage.models__: `addToWorkoutListModel(WorkoutModel workout)` and `addToWorkoutModel(ExerciseModel exercise)` from the `storage.models` component
 are called in the methods of `Workout` and `Exercise` respectively. This causes the dependency on `WorkoutModel` and `WorkoutListModel` as seen in the UML Diagram.
 
 ### Storage Component

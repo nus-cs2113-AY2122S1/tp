@@ -57,6 +57,65 @@ Example of usage:
 
 `todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
+### Entering into a Workout: `enter`
+Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
+in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
+
+Format: `enter [WORKOUT_INDEX]`
+
+Example of usage:
+ * `enter 1`
+ * `enter 2`
+
+### Exiting from a workout: `back`
+Allows you to exit back into the main view once you have entered into a workout.
+
+Format `back`
+
+Example interaction of `enter` and `back`:
+
+```
+You: list
+
+GetJackd:
+________________________________________________________
+Workout list:
+1. workout2 finish by: 11 Nov 2102
+2. workout3 finish by: 25 Dec 2020
+________________________________________________________
+
+You: enter 1
+
+GetJackd:
+			________________________________________________________
+			Now inside Workout: workout2 finish by: 11 Nov 2102
+			________________________________________________________
+			
+			You: add pushups, 5 20
+			
+			GetJackd:
+
+			________________________________________________________
+			New exercise added: [ ] pushups | 5 sets of 20 reps
+			________________________________________________________
+			
+			You: display
+			
+			GetJackd:
+			
+			Exercises in workout2
+			1. [ ] pushups | 5 sets of 20 reps
+			________________________________________________________
+			
+			You: back
+
+GetJackd:
+________________________________________________________
+Back to Main View
+________________________________________________________
+			
+```
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
