@@ -2,6 +2,8 @@ package seedu.duke.command;
 
 import java.util.HashMap;
 import seedu.duke.exception.EmptyTasklistException;
+import seedu.duke.exception.ListFormatException;
+import seedu.duke.exception.MissingFilterArgumentException;
 import seedu.duke.task.TaskManager;
 
 public class ListCommand extends Command {
@@ -17,8 +19,12 @@ public class ListCommand extends Command {
 
         try {
             message = TaskManager.listTasklist(commandArguments);
-        } catch (EmptyTasklistException e) {
-            message = e.toString();
+        } catch (EmptyTasklistException ete) {
+            message = ete.toString();
+        } catch (ListFormatException lfe) {
+            message = lfe.toString();
+        } catch (MissingFilterArgumentException mfae) {
+            message = mfae.toString();
         }
 
         return new CommandResult(message, false, false);
