@@ -5,11 +5,13 @@ import seedu.duke.commons.core.DayOfTheWeek;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.ListLessonCommand;
+import seedu.duke.logic.commands.module.ListModuleCommand;
 import seedu.duke.logic.commands.task.ListTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
 import static seedu.duke.commons.util.DayUtil.isToday;
 import static seedu.duke.commons.util.DayUtil.isTomorrow;
+import static seedu.duke.logic.parser.ParserUtil.isAll;
 import static seedu.duke.logic.parser.ParserUtil.parseCommandType;
 import static seedu.duke.logic.parser.ParserUtil.removeFirstParam;
 
@@ -25,6 +27,9 @@ public class ListCommandParser {
         case TASK:
             simplifiedUserResponse = removeFirstParam(userResponse, "task");
             return parseListTaskCommand(simplifiedUserResponse);
+        case MODULE:
+            simplifiedUserResponse = removeFirstParam(userResponse, "module");
+            return parseListModuleCommand(simplifiedUserResponse);
         case INVALID:
             // Fallthrough
         default:
@@ -48,5 +53,13 @@ public class ListCommandParser {
         }
 
         return new ListTaskCommand(userResponse.toLowerCase());
+    }
+
+    private static Command parseListModuleCommand(String userResponse) throws ParseException {
+        if (!userResponse.isBlank() && !isAll(userResponse)) {
+            throw new ParseException(Messages.ERROR_INVALID_COMMAND);
+        }
+
+        return new ListModuleCommand(userResponse.toLowerCase());
     }
 }

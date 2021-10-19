@@ -30,4 +30,8 @@ public class ParserUtil {
     public static String removeFirstParam(String userResponse, String firstParam) {
         return userResponse.replaceFirst(firstParam, "").strip();
     }
+
+    public static boolean isAll(String userResponse) {
+        return userResponse.equalsIgnoreCase("all");
+    }
 }

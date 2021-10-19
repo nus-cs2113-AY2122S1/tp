@@ -121,7 +121,7 @@ public class Storage {
         try {
             FileWriter fout = new FileWriter(PATH_TO_MODULE_FILE.toString());
             BufferedWriter bout = new BufferedWriter(fout);
-            // bout.write(moduleList.serialize());
+            bout.write(moduleList.serialize());
             bout.close();
         } catch (IOException e) {
             throw new IOException(Messages.ERROR_SAVING_DATA);

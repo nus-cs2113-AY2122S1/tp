@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
+import seedu.duke.model.module.ModuleList;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
 import seedu.duke.model.module.Module;
@@ -289,6 +290,17 @@ public class Ui {
         System.out.println(PADDING + "  " + module);
         System.out.println(PADDING + "Now you have " + size + " modules in the list.");
         System.out.println(LINE);
+    }
+
+    public void printModuleList(ModuleList moduleList) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Here are the modules in your list:");
+        System.out.print(moduleList);
+        System.out.print(LINE);
+    }
+
+    public void printModulesWithDetails(ModuleList moduleList) {
+        //
     }
 
     // All-related methods

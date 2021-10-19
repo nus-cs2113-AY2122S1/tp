@@ -78,4 +78,14 @@ public class ModuleList {
     public void deleteAllModules() {
         moduleList.clear();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < moduleList.size(); i++) {
+            Module module = moduleList.get(i);
+            s.append(Ui.PADDING).append(i + 1).append(". ").append(module).append(System.lineSeparator());
+        }
+        return s.toString();
+    }
 }

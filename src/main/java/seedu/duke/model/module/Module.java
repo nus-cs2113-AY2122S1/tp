@@ -83,6 +83,6 @@ public class Module {
 
     @Override
     public String toString() {
-        return moduleCode + " " + title + System.lineSeparator();
+        return moduleCode + " " + title + " (" + moduleCredit + ") ";
     }
 }
