@@ -1,7 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.command.Command;
-import seedu.duke.command.IncorrectCommand;
+import seedu.duke.command.misc.IncorrectCommand;
 import seedu.duke.command.workout.CreateWorkoutCommand;
 import seedu.duke.exception.GetJackDException;
 

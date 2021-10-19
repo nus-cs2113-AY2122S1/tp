@@ -2,8 +2,8 @@ package seedu.duke.parser;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.command.EnterWorkoutCommand;
-import seedu.duke.command.IncorrectCommand;
+import seedu.duke.command.workout.EnterWorkoutCommand;
+import seedu.duke.command.misc.IncorrectCommand;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 

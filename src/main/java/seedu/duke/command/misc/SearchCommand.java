@@ -1,5 +1,6 @@
-package seedu.duke.command;
+package seedu.duke.command.misc;
 
+import seedu.duke.command.Command;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.exercises.Exercise;
 import seedu.duke.lists.Workout;

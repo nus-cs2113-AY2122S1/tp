@@ -3,11 +3,10 @@ package seedu.duke.parser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.Command;
-import seedu.duke.command.IncorrectCommand;
+import seedu.duke.command.misc.IncorrectCommand;
 import seedu.duke.command.exercise.AddExerciseCommand;
 import seedu.duke.command.exercise.MarkExerciseAsDoneCommand;
 import seedu.duke.command.workout.DeleteWorkoutCommand;
-import seedu.duke.exception.GetJackDException;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;

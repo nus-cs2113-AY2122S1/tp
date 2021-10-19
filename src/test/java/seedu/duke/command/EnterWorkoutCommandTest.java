@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.workout.EnterWorkoutCommand;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;

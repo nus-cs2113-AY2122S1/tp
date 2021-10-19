@@ -1,5 +1,6 @@
-package seedu.duke.command;
+package seedu.duke.command.workout;
 
+import seedu.duke.command.Command;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
@@ -11,7 +12,7 @@ public class RecommendWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "recommend";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Provides a given set of workouts with exercises.\n"
             + "Format: recommend [Workout level]\n"
-            + "Parameters: \n"
+            + "Parameters:\n"
             + "\tWorkout level - difficulty of workout [beginner/intermediate/pro]\n"
             + "Example: " + COMMAND_WORD + " beginner";
     private final String workoutLevel;
