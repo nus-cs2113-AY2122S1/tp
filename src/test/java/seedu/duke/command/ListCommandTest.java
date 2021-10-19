@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.DishList;
+import seedu.duke.IngredientList;
 import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
@@ -18,7 +20,13 @@ class ListCommandTest {
         inputArrayList.add("notaCommand");
 
         ListCommand list = new ListCommand();
-        list.execute(inputArrayList);
+        try {
+            list.execute(inputArrayList);
+        } catch (FoodoramaException e) {
+            //this is empty
+        }
         assertTrue(list.isOther);
+        DishList.clearList();
+        IngredientList.clearList();
     }
 }

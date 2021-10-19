@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.DishList;
+import seedu.duke.IngredientList;
 import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
@@ -26,5 +27,7 @@ class ClearDishCommandTest {
         Command testClearDishCommand = new ClearDishCommand();
         testClearDishCommand.execute(inputParams);
         assertEquals(0, DishList.dishList.size());
+        DishList.clearList();
+        IngredientList.clearList();
     }
 }

@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.DishList;
 import seedu.duke.IngredientList;
 import seedu.duke.exceptions.FoodoramaException;
 
@@ -36,5 +37,7 @@ class ClearIngrCommandTest {
         clearIngrCommand.execute(inputParams);
 
         assertEquals(0, IngredientList.ingredientList.size());
+        DishList.clearList();
+        IngredientList.clearList();
     }
 }

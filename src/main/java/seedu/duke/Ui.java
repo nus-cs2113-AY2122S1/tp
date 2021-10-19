@@ -113,7 +113,7 @@ public class Ui {
             + LINE_DIVIDER;
 
     private static final String INVALID_PARAMETERS = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, please input a valid number." + System.lineSeparator()
+            + "Sorry, please input a valid parameter." + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String DISH_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()

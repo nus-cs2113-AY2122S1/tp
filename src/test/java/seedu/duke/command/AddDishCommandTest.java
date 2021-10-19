@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.DishList;
+import seedu.duke.IngredientList;
 import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
@@ -19,5 +20,7 @@ class AddDishCommandTest {
         testAddDishCommand.execute(inputParams);
 
         assertEquals("chicken rice", DishList.dishList.get(0).getDishName());
+        DishList.clearList();
+        IngredientList.clearList();
     }
 }

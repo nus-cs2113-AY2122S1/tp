@@ -17,6 +17,7 @@ public class InputParser {
     }
 
     public ArrayList<String> getParameters(String input, CommandNames inputCommand) throws FoodoramaException {
+        Ui ui  = new Ui();
         ArrayList<String> parameters = new ArrayList<>();
 
         //Replace the first command part with null, and you'll be left with params
@@ -28,8 +29,8 @@ public class InputParser {
         case CLEAR_INGR:
         case CLEAR_ALL:
         case HELP:
-            if(!parameterString.isBlank()) {
-                throw new FoodoramaException(inputCommand.getName() + " command doesn't require any additional parameters");
+            if (!parameterString.isBlank()) {
+                ui.printInvalidParamMsg();
             }
             break;
 

@@ -19,7 +19,7 @@ public class AddIngrCommand extends Command {
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         logger.log(Level.INFO, "Start of process");
         String ingredient = String.join(" ", parameters);
-        if(ingredient.isBlank()) {
+        if (ingredient.isBlank()) {
             throw new FoodoramaException("Ingredient name cannot be blank");
         }
         if (IngredientList.find(ingredient) >= 0) {

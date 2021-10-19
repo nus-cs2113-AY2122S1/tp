@@ -47,5 +47,7 @@ class ClearAllCommandTest {
 
         assertEquals(0, DishList.dishList.size());
         assertEquals(0, IngredientList.ingredientList.size());
+        DishList.clearList();
+        IngredientList.clearList();
     }
 }
