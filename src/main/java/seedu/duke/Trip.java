@@ -36,7 +36,6 @@ public class Trip {
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
-
     public LocalDate getDateOfTrip() {
         return dateOfTrip;
     }
@@ -107,7 +106,6 @@ public class Trip {
     public double getBudgetLeft() {
         return getBudget() - getTotalExpenses();
     }
-
 
 
     public String getForeignCurrency() {

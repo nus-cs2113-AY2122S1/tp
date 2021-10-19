@@ -105,6 +105,10 @@ public class Parser {
             }
             break;
 
+        case "help":
+            Ui.displayHelp();
+            break;
+
         default:
             Ui.printUnknownCommandError();
         }

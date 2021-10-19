@@ -2,7 +2,10 @@ package seedu.duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
 
 /**
  * Constructor requires a Person class which is the user, amount spent, and a description.
@@ -16,13 +19,50 @@ public class Expense {
     private final ArrayList<Person> personsList;
     private final String category;
     private LocalDate date;
+    private static final DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
 
     public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons, String description) {
         this.amountSpent = amountSpent;
-        this.date = LocalDate.now();
         this.description = description;
         this.category = category;
         this.personsList = listOfPersons;
+        this.date = prompDate();
+        assert(this.date != null);
+    }
+
+    /**
+     * Prompts user for date.
+     *
+     * @return today's date if user input is an empty string, otherwise keeps prompting user
+     * until a valid date is given
+     */
+    private LocalDate prompDate() {
+        Scanner sc = Storage.getScanner();
+        System.out.println("Enter date of expense:");
+        System.out.println("\tPress enter to use today's date");
+        String inputDate = sc.nextLine();
+        while (!isDateValid(inputDate)) {
+            inputDate = sc.nextLine();
+        }
+        if (inputDate.isEmpty()) {
+            return LocalDate.now();
+        }
+        return LocalDate.parse(inputDate, pattern);
+    }
+
+    private Boolean isDateValid(String date) {
+        if (date.isEmpty()) {
+            return true;
+        }
+        try {
+            LocalDate.parse(date, pattern);
+            return true;
+        } catch (DateTimeParseException e) {
+            Storage.getLogger().log(Level.INFO, "Invalid date format");
+            System.out.println("Please enter date as DD-MM-YYYY");
+            return false;
+        }
     }
 
     public double getCostPerPerson() {
