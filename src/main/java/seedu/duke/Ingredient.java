@@ -97,6 +97,6 @@ public class Ingredient implements  Comparable<Ingredient> {
 
     @Override
     public int compareTo(Ingredient o) {
-        return (int) (ingredientWasteIngr - o.ingredientWasteIngr);
+        return (int) (o.ingredientWasteIngr - ingredientWasteIngr);
     }
 }

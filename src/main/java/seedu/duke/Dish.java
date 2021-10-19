@@ -140,6 +140,6 @@ public class Dish implements Comparable<Dish> {
 
     @Override
     public int compareTo(Dish o) {
-        return (int) (wastage - o.wastage);
+        return (int) (o.wastage - wastage);
     }
 }
