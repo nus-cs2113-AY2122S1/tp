@@ -48,22 +48,4 @@ public class AttendanceList {
     public int getAttendanceListSize() { //added by xy
         return attendanceList.size();
     }
-
-    /*public String getStudentNumber(int index ) {
-         AttendanceList.get(index);
-    }
-
-    public String getTrainingName(int index ) {
-
-    }
-
-    public String getVenue(int index ) {
-
-    }
-
-    public String getTime(int index ) {
-
-    }
-    */
-
 }

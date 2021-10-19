@@ -289,6 +289,7 @@ public class Parser {
         String trainingName = "";
         String venue = "";
         String time = "";
+        String presentOrLate = "";
 
         int wordIndex = 1;
         while (matcher.find()) {
@@ -296,24 +297,18 @@ public class Parser {
             case "/m":
                 memberName = words[wordIndex].trim();
                 break;
-            case "/s":
-                studentNumber = words[wordIndex].trim();
-                break;
             case "/n":
                 trainingName = words[wordIndex].trim();
                 break;
-            case "/a":
-                time = words[wordIndex].trim();
-                break;
-            case "/v":
-                venue = words[wordIndex].trim();
+            case "/d":
+                presentOrLate = words[wordIndex].trim();
                 break;
             default:
                 break;
             }
             wordIndex++;
         }
-        Member member = new Member(memberName, studentNumber, gender, phoneNumber);
+        Member member = new Member(memberName, studentNumber, gender, phoneNumber, presentOrLate);
         TrainingSchedule training = new TrainingSchedule(trainingName, venue, time);
         return new Attendance(member, training);
     }

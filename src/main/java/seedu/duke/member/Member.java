@@ -11,6 +11,9 @@ public class Member {
     /* Status of member. True if still in team, False if left the team */
     protected boolean isActive;
 
+    /* True if present for training, False if late for training, member won't be added to attendance list if absent. */
+    String presentOrLate;
+
     protected int phoneNumber;
 
     /**
@@ -27,11 +30,10 @@ public class Member {
         setAsActiveMember();
         setGender(gender);
         setPhoneNumber(phoneNumber);
+        setPresentOrLate(presentOrLate);
     }
 
-    public Member() {
-
-    }
+    public Member() {}
 
     public Member(String name, String studentNumber, String gender, String phoneNumber) {
         setName(name);
@@ -39,12 +41,24 @@ public class Member {
         setAsActiveMember();
         setGender(gender);
         setPhoneNumber(phoneNumber);
+        setPresentOrLate(presentOrLate);
+
+    }
+
+    public Member(String name, String studentNumber, char gender, int phoneNumber, String presentOrLate) {
+        setName(name);
+        setStudentNumber(studentNumber);
+        setAsActiveMember();
+        setGender(gender);
+        setPhoneNumber(phoneNumber);
+        setPresentOrLate(presentOrLate);
     }
 
     public Member(String name, String studentNumber) {
         setName(name);
         setStudentNumber(studentNumber);
         setAsActiveMember();
+        setPresentOrLate(presentOrLate);
     }
 
 
@@ -54,6 +68,7 @@ public class Member {
         setAsActiveMember();
         setGender(member.gender);
         setPhoneNumber(member.phoneNumber);
+        setPresentOrLate(presentOrLate);
     }
 
     public void setName(String name) {
@@ -76,9 +91,7 @@ public class Member {
         return isActive;
     }
 
-    public void setAsActiveMember() {
-        this.isActive = true;
-    }
+    public void setAsActiveMember() { this.isActive = true; }
 
     public void setAsInActiveMember() {
         this.isActive = false;
@@ -92,6 +105,8 @@ public class Member {
         this.phoneNumber = Integer.parseInt(phoneNumber);
     }
 
+    public void setPresentOrLate(String presentOrLate) { this.presentOrLate = presentOrLate; }
+
     public String getName() {
         return name;
     }
@@ -99,6 +114,8 @@ public class Member {
     public String getStudentNumber() {
         return studentNumber;
     }
+
+    public String getAttendance() { return presentOrLate; }
 
     /**
      * Formats description of member to be displayed to user.
