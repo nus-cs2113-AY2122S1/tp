@@ -61,5 +61,8 @@ class FindCommandTest {
         testFindIngrCommand.execute(inputParamsIngr);
         String actualOutIngr = ingrOutput.toString().trim();
         assertTrue(actualOutIngr.contains("fragrant rice"));
+
+        DishList.clearList();
+        IngredientList.clearList();
     }
 }

@@ -13,6 +13,7 @@ class InputParserTest {
 
     @Test
     void getCommandName() {
+        Ui ui = new Ui();
         InputParser inputParser = new InputParser();
         String input1 = "list dish";
         String input2 = "not a command";
@@ -21,7 +22,7 @@ class InputParserTest {
             assertEquals("list", command.getName());
             command = inputParser.getCommandName(input2); //Should fail and throw exception
         } catch (FoodoramaException e) {
-            assertEquals("Sorry, that is an invalid command.", e.getMessage());
+            assertEquals(ui.getInvalidCommandMsg(), e.getMessage());
         }
 
         DishList.clearList();

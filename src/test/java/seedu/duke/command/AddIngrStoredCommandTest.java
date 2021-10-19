@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.DishList;
 import seedu.duke.Ingredient;
 import seedu.duke.IngredientList;
+import seedu.duke.Ui;
 import seedu.duke.exceptions.FoodoramaException;
 
 import java.io.ByteArrayInputStream;
@@ -17,6 +18,7 @@ class AddIngrStoredCommandTest {
     @Test
     void execute() {
         //Define inputs
+        Ui ui = new Ui();
         ArrayList<String> inputs = new ArrayList<>();
         inputs.add("flour");
         AddIngrStoredCommand commandToTest = new AddIngrStoredCommand();
@@ -35,8 +37,7 @@ class AddIngrStoredCommandTest {
             //Test case if dish not present
             commandToTest.execute(inputs);
         } catch (FoodoramaException e) {
-            //Unreachable
-            assertEquals("The ingredient flour does not exist", e.getMessage());
+            assertEquals(ui.getIngrNotExistMsg(), e.getMessage());
         }
     }
 }

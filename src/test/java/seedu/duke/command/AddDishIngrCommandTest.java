@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.DishList;
 import seedu.duke.Ingredient;
 import seedu.duke.IngredientList;
+import seedu.duke.Ui;
 import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ class AddDishIngrCommandTest {
     @Test
     void execute() {
         //Define inputs
+        Ui ui = new Ui();
         ArrayList<String> inputs = new ArrayList<>();
         inputs.add("chicken rice");
         inputs.add("rice");
@@ -30,7 +32,7 @@ class AddDishIngrCommandTest {
             //Test case if dish not present
             commandToTest.execute(inputs);
         } catch (FoodoramaException e) {
-            assertEquals("The dish chicken rice does not exist", e.getMessage());
+            assertEquals(ui.getDishNotExistMsg("chicken rice"), e.getMessage());
         }
     }
 }
