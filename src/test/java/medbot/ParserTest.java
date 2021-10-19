@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ParserTest {
-    private final String ENDLINE = System.lineSeparator();
+    private static final String ENDLINE = System.lineSeparator();
 
     @Test
     public void testParseEmailAddress() throws Exception {

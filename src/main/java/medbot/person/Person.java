@@ -14,6 +14,15 @@ public abstract class Person {
 
     private static final String SPACE = " ";
     private static final String ENDLINE = System.lineSeparator();
+    private static final String VERTICAL_LINE_SEPARATOR = "|";
+
+    private static final int LENGTH_ID_COLUMN = 4;
+    private static final int LENGTH_IC_COLUMN = 9;
+    private static final int LENGTH_NAME_COLUMN = 20;
+    private static final int LENGTH_PHONE_NUM_COLUMN = 9;
+    private static final int LENGTH_EMAIL_COLUMN = 20;
+    private static final int LENGTH_ADDRESS_COLUMN = 20;
+
 
     private int personId = 0;
     protected String icNumber = "";
@@ -33,13 +42,13 @@ public abstract class Person {
     }
 
     public String getInfoInTableFormat() {
-        return "| " + getFormattedPersonId()
-                + " | " + getFormattedIcNumber()
-                + " | " + getFormattedName()
-                + " | " + getFormattedPhoneNumber()
-                + " | " + getFormattedEmail()
-                + " | " + getFormattedAddress()
-                + " |";
+        return VERTICAL_LINE_SEPARATOR + SPACE + getFormattedPersonId()
+                + SPACE + VERTICAL_LINE_SEPARATOR + SPACE + getFormattedIcNumber()
+                + SPACE + VERTICAL_LINE_SEPARATOR + SPACE + getFormattedName()
+                + SPACE + VERTICAL_LINE_SEPARATOR + SPACE + getFormattedPhoneNumber()
+                + SPACE + VERTICAL_LINE_SEPARATOR + SPACE + getFormattedEmail()
+                + SPACE + VERTICAL_LINE_SEPARATOR + SPACE + getFormattedAddress()
+                + SPACE + VERTICAL_LINE_SEPARATOR;
     }
 
     public String getIcNumber() {
@@ -176,26 +185,26 @@ public abstract class Person {
     }
 
     private String getFormattedPersonId() {
-        return formattedAttribute(Integer.toString(personId), 4);
+        return formattedAttribute(Integer.toString(personId), LENGTH_ID_COLUMN);
     }
 
     private String getFormattedIcNumber() {
-        return formattedAttribute(icNumber, 9);
+        return formattedAttribute(icNumber, LENGTH_IC_COLUMN);
     }
 
     private String getFormattedName() {
-        return formattedAttribute(name, 20);
+        return formattedAttribute(name, LENGTH_NAME_COLUMN);
     }
 
     private String getFormattedPhoneNumber() {
-        return formattedAttribute(phoneNumber, 9);
+        return formattedAttribute(phoneNumber, LENGTH_PHONE_NUM_COLUMN);
     }
 
     private String getFormattedEmail() {
-        return formattedAttribute(emailAddress, 20);
+        return formattedAttribute(emailAddress, LENGTH_EMAIL_COLUMN);
     }
 
     private String getFormattedAddress() {
-        return formattedAttribute(residentialAddress, 20);
+        return formattedAttribute(residentialAddress, LENGTH_ADDRESS_COLUMN);
     }
 }
