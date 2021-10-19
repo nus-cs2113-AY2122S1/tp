@@ -7,23 +7,21 @@ import java.util.Scanner;
 
 public class IngredientList {
     public static ArrayList<Ingredient> ingredientList = new ArrayList<>();
-    private static Ui ui = new Ui();
+    private static final Ui ui = new Ui();
 
     public static void add(String ingredientName) throws FoodoramaException {
-        System.out.println(ui.getLineDivider());
-        System.out.println("Enter the weight of " + ingredientName + " in KG:");
+        ui.printEnterWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);
         String ingredientWeight = in.nextLine();
         double ingredientWeightValue;
         try {
             ingredientWeightValue = Double.parseDouble(ingredientWeight);
         } catch (NumberFormatException e) {
-            throw new FoodoramaException("Sorry, please input a valid number.");
+            throw new FoodoramaException(ui.getInvalidNumberMsg());
         }
         Ingredient ingredientToAdd = new Ingredient(ingredientName, ingredientWeightValue);
         ingredientList.add(ingredientToAdd);
         ui.printAddedIngredient(ingredientToAdd, ingredientWeightValue);
-        System.out.println(ui.getLineDivider());
     }
 
     //Returns -1 if not present, index if present
