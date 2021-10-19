@@ -20,7 +20,7 @@ public class ExpireCommand implements Command {
 
     @Override
     public String run() throws DukeException {
-        String resultMsg = EXPIRE_MESSAGE + Ingredient.dateToString(expireBeforeDate) + ":\n";
+        String resultMsg = EXPIRE_MESSAGE + Ingredient.dateToString(expireBeforeDate) + ":" + LIST_NEWLINE_INDENT;
 
         int currentStock = IngredientList.getInstance().getInventoryStock();
         for (int i = 0; i < currentStock; i++) {
