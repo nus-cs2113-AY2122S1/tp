@@ -3,6 +3,17 @@
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Features](#features)
+  1. [Creating a new workout: `create`](#1-creating-a-new-workout-create)
+  2. [Deleting a workout: `delete`](#2-deleting-a-workout-delete)
+  3. [Show all workouts: `list`](#3-show-all-workouts-list)
+  4. [Adding an exercise to a workout: `add`](#4-adding-an-exercise-to-a-workout-add)
+  5. [Removing an exercise from a workout: `remove`](#5-removing-an-exercise-from-a-workout-remove)
+  6. [Mark an exercise done: `done`](#6-mark-an-exercise-done-done)
+  7. [Show all exercises from a workout: `display`](#7-show-all-exercises-from-a-workout-display)
+  8. [Entering into a Workout: `enter`](#8-entering-into-a-workout-enter)
+  9. [Exiting from a workout: `back`](#9-exiting-from-a-workout-back)
+  10. [Saving data](#10-saving-data)
+  11. [Editable data file](#11-editable-data-file)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -41,19 +52,21 @@ ________________________________________________________
 
 ## Features
 
-###1. Creating a new workout: `create`
+### 1. Creating a new workout: `create`
 Adds a new workout to the list of workouts
 
-Format: `create [WORKOUT_DESCRIPTION]`
+Format: `create [WORKOUT_DESCRIPTION], [DEADLINE]`
+
+⚠️  `DEADLINE` needs to be in format `yyyy-MM-dd`.
 
 Usage examples: 
 
-`create abs`
+`create abs, 2021-12-25`
 
-`create leg day`
+`create leg day, 2021-10-21`
 
 
-###2. Deleting a workout: `delete`
+### 2. Deleting a workout: `delete`
 Deletes a workout from the list of workouts
 
 Format: `delete [WORKOUT_INDEX]`
@@ -65,7 +78,7 @@ Usage example:
 `delete 1`
 
 
-###3. Show all workouts: `list`
+### 3. Show all workouts: `list`
 Shows you all the workouts in the current list of workouts
 
 Usage example:
@@ -73,7 +86,7 @@ Usage example:
 `list`
 
 
-###4. Adding an exercise to a workout: `add`
+### 4. Adding an exercise to a workout: `add`
 Adds an exercise to a specified workout
 
 Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]`
@@ -87,7 +100,7 @@ Usage examples:
 `add bench press, 4 6, 2` = bench press, 4 sets of 6 reps, add to workout 2
 
 
-###5. Removing an exercise from a workout: `remove`
+### 5. Removing an exercise from a workout: `remove`
 Removes an exercise from a specified workout
 
 Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
@@ -96,7 +109,7 @@ Examples of usage:
 
 `remove 1, 2` = remove exercise 1 from workout 2
 
-###6. Mark an exercise done: `done`
+### 6. Mark an exercise done: `done`
 Marks an exercise from a specified workout as done
 
 Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]`
@@ -105,7 +118,7 @@ Usage example:
 
 `done 1, 2` = mark exercise 1 from workout 2 as done
 
-###7. Show all exercises from a workout: `display`
+### 7. Show all exercises from a workout: `display`
 Shows you all the exercises in a specified workout
 
 Format: `display [WORKOUT_INDEX]`
@@ -114,7 +127,7 @@ Usage example:
 
 `display 1` = Show all exercises from workout 1
 
-###8. Entering into a Workout: `enter`
+### 8. Entering into a Workout: `enter`
 Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
 in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
 
@@ -124,7 +137,7 @@ Example of usage:
 * `enter 1` = enter into the workout with index 1
 * `enter 2` = enter into the workout with index 2
 
-###9. Exiting from a workout: `back`
+### 9. Exiting from a workout: `back`
 Allows you to exit back into the main view once you have entered into a workout.
 
 Format `back`
@@ -173,19 +186,33 @@ ________________________________________________________
 			
 ```
 
+### 10. Saving data
+
+GetJackd's workout list data is saved in the hard disk automatically after any command that changes the data (Adding 
+or editing workouts and exercises). There is no need to
+save manually.
+
+### 11. Editable data file
+
+GetJackd's data is saved as a json file `[JAR file location]/data/workouts.json`. Advanced users are welcome to update data
+directly by editing that data file.
+
+❗  **Caution**: If your changes to the data file is detected to be corrupted or does not conform to GetJackd's
+saved file format (json), GetJack'd will not run.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Go to the folder you saved `GetJackd.jar`, save a copy of the `data` folder and copy it to the folder 
+`GetJackd.jar` is saved on your other computer.
 
 ## Command Summary
 
 | Action                                           | Format, Examples                                                                                       |
 |--------------------------------------------------|--------------------------------------------------------------------------------------------------------|
 | List all workouts                                | Example: `list`                                                                                        |
-| Create workout                                   | Format: `create [WORKOUT_DESCRIPTION]` <br />Example: `create abs workout`                                         |
+| Create workout                                   | Format: `create [WORKOUT_DESCRIPTION], [DEADLINE]` <br />Example: `create abs workout, 2021-12-25`                                         |
 | Delete workout                                   | Format: `delete [WORKOUT_INDEX]` <br />Example: `delete 1`                                                 |
 | Display exercises in <br /> a particular workout | Format: `display [WORKOUT_INDEX]` <br />Example: `display 1`                                               |
 | Add exercise                                     | Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]` <br /> Example: `add Push-ups, 5 10, 1` |
