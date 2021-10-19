@@ -44,6 +44,26 @@ Given below is the sequence diagram for the interactions within the main applica
 ### AddStockCommand
 
 ### DeleteStockCommand
+MediVault initialises an DeleteStockCommand class when CommandParser identifies the
+`deletestock` or the `delete` keyword in the `stock` mode.
+* MediVault allow for deletion of stock by stock id through `deletestock i/STOCK_ID`.
+* MediVault allow for deletion of stock by expiry date through `deletestock e/EXPIRY_DATE`.
+* MediVault delete medicine stock information when parameter and parameterValues provided by the user are valid.
+* MediVault perform a check to determine if it is executing deletion by stock id or deletion by expiry and executes 
+accordingly.
+
+The sequence diagram for DeleteStockCommand is shown below.
+![DeleteStockSequenceDiagram](diagrams/diagram_images/DeleteStockSequenceDiagram.png)
+
+After MediVault determines that it is executing deletion by stock id, it will execute accordingly.
+
+The sequence diagram for deletion by stock id is shown below.
+![DeletionOfStockByIdSequenceDiagram](diagrams/diagram_images/DeletionOfStockByIdSequenceDiagram.png)
+
+After MediVault determines that it is executing deletion by expiry date, it will execute accordingly.
+
+The sequence diagram for delete by expiry date is shown below.
+![DeletionOfStockByIdSequenceDiagram](diagrams/diagram_images/DeletionOfStockByExpirySequenceDiagram.png)
 
 ### ListCommand
 

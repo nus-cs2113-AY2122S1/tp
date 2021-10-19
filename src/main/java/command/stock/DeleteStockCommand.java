@@ -38,8 +38,9 @@ public class DeleteStockCommand extends Command {
         String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.EXPIRY_DATE};
 
-        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
-                CommandSyntax.DELETE_STOCK_COMMAND, true)) {
+        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
+                optionalParameters, CommandSyntax.DELETE_STOCK_COMMAND, true);
+        if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of stock");
             return;
@@ -62,38 +63,50 @@ public class DeleteStockCommand extends Command {
         }
 
         if (hasStockId && !hasExpiryDate) {
-            String stockIdToDelete = parameters.get(CommandParameters.ID);
-            if (!StockValidator.isValidStockId(ui, stockIdToDelete, medicines)) {
-                logger.log(Level.WARNING, "Invalid stock id is specified by user");
-                logger.log(Level.INFO, "Unsuccessful deletion of stock");
-                return;
-            }
-
-            int stockId = Integer.parseInt(stockIdToDelete);
-
-            assert stockId > 0 : "Stock Id should be more than 0";
-            assert stockId <= Stock.getStockCount() : "Stock Id should not exceed max stock count";
-
-            for (Medicine medicine : medicines) {
-                if (!(medicine instanceof Stock)) {
-                    continue;
-                }
-                Stock stock = (Stock) medicine;
-                if (stock.getStockID() == stockId) {
-                    stock.setDeleted(true);
-                    logger.log(Level.INFO, "Stock id found and deleted");
-                    break;
-                }
-            }
-            ui.print("Deleted row with Stock Id: " + stockId);
+            deleteStockById(ui, parameters, medicines);
+        } else if (!hasStockId && hasExpiryDate) {
+            deleteStockByExpiry(ui, parameters, medicines);
         }
 
-        if (!hasStockId && hasExpiryDate) {
-            removeExpiredStocks(ui, parameters, medicines);
-        }
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);
         logger.log(Level.INFO, "Successful deletion of stock");
+    }
+
+    /**
+     * Deletion of stock given an id.
+     *
+     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines  Arraylist of all medicines.
+     */
+    private static void deleteStockById(Ui ui, LinkedHashMap<String, String> parameters,
+                                        ArrayList<Medicine> medicines) {
+        String stockIdToDelete = parameters.get(CommandParameters.ID);
+        boolean isAValidStockId = StockValidator.isValidStockId(ui, stockIdToDelete, medicines);
+        if (!isAValidStockId) {
+            logger.log(Level.WARNING, "Invalid stock id is specified by user");
+            logger.log(Level.INFO, "Unsuccessful deletion of stock");
+            return;
+        }
+
+        int stockId = Integer.parseInt(stockIdToDelete);
+
+        assert stockId > 0 : "Stock Id should be more than 0";
+        assert stockId <= Stock.getStockCount() : "Stock Id should not exceed max stock count";
+
+        for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Stock)) {
+                continue;
+            }
+            Stock stock = (Stock) medicine;
+            if (stock.getStockID() == stockId) {
+                stock.setDeleted(true);
+                logger.log(Level.INFO, "Stock id found and deleted");
+                break;
+            }
+        }
+        ui.print("Deleted row with Stock Id: " + stockId);
     }
 
     /**
@@ -103,7 +116,7 @@ public class DeleteStockCommand extends Command {
      * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param medicines  Arraylist of all medicines.
      */
-    private static void removeExpiredStocks(Ui ui, LinkedHashMap<String, String> parameters,
+    private static void deleteStockByExpiry(Ui ui, LinkedHashMap<String, String> parameters,
                                             ArrayList<Medicine> medicines) {
         String dateString = parameters.get(CommandParameters.EXPIRY_DATE);
         Date date = null;
@@ -112,22 +125,19 @@ public class DeleteStockCommand extends Command {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        ArrayList<Stock> stocks = new ArrayList<>();
-        int totalRows = medicines.size();
+
+        int rowsDeleted = 0;
         for (Medicine medicine : medicines) {
             if (!(medicine instanceof Stock)) {
                 continue;
             }
-            stocks.add((Stock) medicine);
-        }
-        for (Stock stock : stocks) {
-            Date stockDate = stock.getExpiry();
-            if (stockDate.before(date)) {
-                medicines.remove(stock);
+            Stock stock = (Stock) medicine;
+            Date stockExpiryDate = stock.getExpiry();
+            if (stockExpiryDate.before(date) || stockExpiryDate.equals(date)) {
+                stock.setDeleted(true);
+                rowsDeleted++;
             }
         }
-        int remainingRows = medicines.size();
-        int rowsDeleted = totalRows - remainingRows;
 
         assert rowsDeleted >= 0 : "Rows deleted cannot be negative";
         if (rowsDeleted > 0) {
