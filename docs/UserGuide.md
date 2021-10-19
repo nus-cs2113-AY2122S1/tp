@@ -21,6 +21,10 @@ purchase of raw ingredients and enables more efficient allocation to the cooking
   * [Link Ingredient to Dish](#link-ingredient-to-dish-add-constituent)
   * [Delete Existing Ingredient](#delete-existing-ingredient-del-ingr)
   * [View Exising Ingredients](#view-all-exising-ingredients-list-ingr)
+  * [Graphical representatioon of Ingredients wasteage](#graphical-representatioon-of-ingredients-wasteage-graph-ingr)
+  * [Graphical representatioon of Dishes wasteage](#graphical-representatioon-of-dishes-wasteage-graph-dish)
+  * [Find Ingredients with matching keyword](#find-ingredients-with-matching-keyword-find-ingr)
+  * [Find Dishes with matching keyword](#find-dishes-with-matching-keyword-find-dish)
   * [Exit Food-O-Rama](#exit-food-o-rama-bye)
 
 ## Quick Start
@@ -68,6 +72,10 @@ ____________________________________________________________
 |Link a Dish to a Ingredient| add constituent [dishName] / [ingrName]|
 |Delete an Ingredient | del [ingrName]|
 |View all Ingredients| list ingr|
+|Display a graph for Ingredients wastage| graph ingr|
+|Display a graph for Dishes wastage| graph dish|
+|Find an Ingredient| find ingr|
+|Find a Dish| find dish|
 |Exit Food-O-Rama| bye|
 
 ## Features 
@@ -347,6 +355,109 @@ Here are the ingredients you have:
    Wastage: 0.0 kg
 You can use command 'add' to add new ingredients!
 ____________________________________________________________
+```
+
+### Graphical representatioon of Ingredients wasteage: `graph ingr`
+Displays a graph to show Ingredient wasteage.
+
+Format: `graph ingr`
+
+* `graph ingr` does not require additional parameters
+
+Example of usage:
+
+`graph ingr`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Here are the dishes you have: 
+1. fish
+   Wastage: [██████████] 10.0 kg
+2. chicken
+   Wastage: [█         ] 1.5 kg
+You can use command 'add' to add new dishes!
+____________________________________________________________
+```
+
+### Graphical representatioon of Dishes wasteage: `graph dish`
+Displays a graph to show Dish wasteage.
+
+Format: `graph dish`
+
+* `graph dish` does not require additional parameters
+
+Example of usage:
+
+`graph dish`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+Here are the dishes you have:
+1. chicken rice
+   Wastage: [██████████] 2.5 kg
+2. pasta
+   Wastage: [████      ] 1.0 kg
+You can use command 'add' to add new dishes!
+____________________________________________________________
+
+```
+
+### Find Ingredients with matching keyword: `find ingr`
+Retrieves a list of Ingredients inclusive of the matching keyword.
+
+Format: `find ingr keyword`
+
+* `find ingr` comes before `keyword`.
+* The `keyword` does not necessarily need to be in natural language format.
+
+Example of usage:
+
+`find ingr chi`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+As requested, here are the matching ingredients in your list:
+1. chicken
+   Storage: 7.0 kg
+   Wastage: 1.5 kg
+2. chickpea
+   Storage: 3.5 kg
+   Wastage: 2.0 kg
+____________________________________________________________
+
+```
+
+### Find Dishes with matching keyword: `find dish`
+Retrieves a list of Dishes inclusive of the matching keyword.
+
+Format: `find dish keyword`
+
+* `find dish` comes before `keyword`.
+* The `keyword` does not necessarily need to be in natural language format.
+
+Example of usage:
+
+`find dish pa`
+
+Expected Outcome:
+
+```
+____________________________________________________________
+As requested, here are the matching dishes in your list:
+1. pasta
+   Wastage: 1.0 kg
+   Constituents: None
+2. krabby patty
+   Wastage: 0.0 kg
+   Constituents: None
+____________________________________________________________
+
 ```
 
 ### Exit Food-O-Rama: `bye`
