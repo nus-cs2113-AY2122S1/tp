@@ -206,6 +206,8 @@ public class Parser {
             return CommandType.SWITCH;
         case COMMAND_VIEW:
             return CommandType.VIEW_PATIENT;
+        case COMMAND_FIND:
+            return CommandType.FIND_PATIENT;
         default:
             throw new MedBotParserException(WRONG_COMMAND_ERROR);
         }
