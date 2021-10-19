@@ -1,6 +1,7 @@
 package terminus.parser;
 
 import terminus.command.GoCommand;
+import terminus.command.TimetableCommand;
 import terminus.command.module.ModuleCommand;
 import terminus.common.Messages;
 import terminus.module.ModuleManager;
@@ -17,6 +18,7 @@ public class MainCommandParser extends CommandParser {
         MainCommandParser parser = PARSER;
         parser.addCommand("module", new ModuleCommand());
         parser.addCommand("go", new GoCommand());
+        parser.addCommand("timetable", new TimetableCommand());
         return parser;
     }
 

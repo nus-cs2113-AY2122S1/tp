@@ -10,6 +10,7 @@ public class Messages {
     public static final String MESSAGE_COMMAND_HELP = "Prints the help page.";
     public static final String MESSAGE_COMMAND_NOTE = "Move to notes workspace.";
     public static final String MESSAGE_COMMAND_SCHEDULE = "Move to schedules workspace.";
+    public static final String MESSAGE_COMMAND_TIMETABLE = "Displays all your schedule.";
 
     public static final String MESSAGE_RESPONSE_DELETE = "Your %s on '%s' has been deleted!";
     public static final String MESSAGE_RESPONSE_ADD = "Your %s on '%s' has been added!";

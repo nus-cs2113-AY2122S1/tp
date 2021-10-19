@@ -14,6 +14,7 @@ public class CommonFormat {
     public static final String COMMAND_EXIT = "exit";
     public static final String COMMAND_HELP = "help";
     public static final String COMMAND_SCHEDULE = "schedule";
+    public static final String COMMAND_TIMETABLE = "timetable";
 
     public static final String LOCAL_TIME_FORMAT = "HH:mm";
 
@@ -22,6 +23,7 @@ public class CommonFormat {
     public static final String COMMAND_ADD_SCHEDULE_FORMAT = COMMAND_ADD + " \"<link description>\" "
             + "\"<day>\" \"<start_time " + LOCAL_TIME_FORMAT + ">\" \"<zoom_link>\"";
     public static final String COMMAND_ADD_NOTE_FORMAT = COMMAND_ADD + " \"<note name>\" \"<note content>\"";
+    public static final String COMMAND_TIMETABLE_FORMAT = COMMAND_TIMETABLE + " {day}";
 
     public static final String SPACE_DELIMITER = "\\s+";
     public static final String COMMAND_MODULE_FORMAT = "module";
