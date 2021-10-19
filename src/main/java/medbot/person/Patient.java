@@ -8,16 +8,16 @@ public class Patient extends Person {
         super.personType = PersonType.PATIENT;
     }
 
-    public int getPatientId() {
+    public int getPersonId() {
         return super.getPersonId();
     }
 
-    public void setPatientId(int patientId) {
+    public void setPersonId(int patientId) {
         super.setPersonId(patientId);
     }
 
     public String toString() {
-        return "Patient ID: " + getPatientId() + " " + super.toString();
+        return "Patient ID: " + getPersonId() + " " + super.toString();
     }
 
     /**
@@ -27,7 +27,7 @@ public class Patient extends Person {
      */
     @Override
     public String getStorageString() {
-        return getPatientId() + VERTICAL_LINE_SPACED
+        return getPersonId() + VERTICAL_LINE_SPACED
                 + super.getStorageString();
     }
 }
