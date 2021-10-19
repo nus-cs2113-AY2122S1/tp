@@ -8,7 +8,7 @@ import medbot.utilities.ViewType;
 
 public class CommandManager {
     private PatientList patientList;
-    private MedicalStaffList staffList ;
+    private MedicalStaffList staffList;
     private static ViewType viewType;
 
     public CommandManager(PatientList patientList, MedicalStaffList staffList) {
