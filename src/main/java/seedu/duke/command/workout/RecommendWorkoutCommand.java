@@ -5,6 +5,10 @@ import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 
+import java.util.logging.Logger;
+
+import static seedu.duke.logger.LoggerUtil.setupLogger;
+
 /**
  * To recommend workouts with exercises of a difficulty level provided by the user.
  */
@@ -15,15 +19,18 @@ public class RecommendWorkoutCommand extends Command {
             + "Parameters:\n"
             + "\tWorkout level - difficulty of workout [beginner/intermediate/pro]\n"
             + "Example: " + COMMAND_WORD + " beginner";
+    private static final Logger LOGGER = Logger.getLogger(RecommendWorkoutCommand.class.getName());
     private final String workoutLevel;
 
     /**
      * Instantiates object and sets parameters for recommending workouts based on workout difficulty.
      *
-     * @param workoutLevel is the difficulty of the workouts.
+     * @param workoutLevel is the difficulty of the workouts
      */
     public RecommendWorkoutCommand(String workoutLevel) {
+        assert workoutLevel != null;
         this.workoutLevel = workoutLevel;
+        setupLogger(LOGGER);
     }
 
     /**
@@ -35,6 +42,7 @@ public class RecommendWorkoutCommand extends Command {
      */
     @Override
     public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) {
+        LOGGER.info("Showing the recommended " + workoutLevel + " Workouts");
         ui.showRecommendedWorkouts(workoutLevel);
     }
 }

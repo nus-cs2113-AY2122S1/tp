@@ -52,6 +52,7 @@ public class EnterWorkoutCommand extends Command {
             LOGGER.log(Level.SEVERE, "Error in entering Workout - Workout doesn't exist");
             throw new GetJackDException("Invalid Workout Index");
         }
+
         workoutMode = workoutIndex;
         LOGGER.info("Entering the " + workoutIndex + "th(st/nd/rd) Workout");
         ui = new Ui();

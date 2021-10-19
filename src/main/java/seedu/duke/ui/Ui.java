@@ -203,6 +203,8 @@ public class Ui {
      * @param exercises is the pre set list of recommended exercises
      */
     private void printRecommendTable(String[] exercises) {
+        assert exercises != null;
+
         String[][] data;
         TextTable tt;
         String[] columnNames = {"Index", "Exercise name", "Sets", "Reps"};
