@@ -28,6 +28,10 @@ public class Ingredient implements  Comparable<Ingredient> {
         return ingredientName;
     }
 
+    public double getIngredientWeight() {
+        return ingredientWeight;
+    }
+
     public void updateIngredientWeight() throws FoodoramaException {
         System.out.println("Enter the weight of " + ingredientName + " in KG:");
         Scanner in = new Scanner(System.in);
