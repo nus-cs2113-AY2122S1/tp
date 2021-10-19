@@ -20,6 +20,7 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
     public static final int NUMBER_OF_DETAILS = 2;
     public static final int NUMBER_OF_ADD_ARGS = 2;
     public static final int NUMBER_OF_EDIT_ARGS = 3;
+    public static final int NUMBER_OF_SEARCH_ARGS = 3;
     public static final int NUMBER_OF_FIELDS = 6;
 
     public static final String DETAIL_SEPARATOR = " -";
@@ -29,27 +30,29 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
 
     private static final Logger LOGGER = Logger.getLogger(ContactParser.class.getName());
 
-    public abstract String[] parseContactDetails(String userInput) throws InvalidFlagException,
-            MissingArgException, MissingDetailException, ForbiddenDetailException,
+    public abstract String[] parseContactDetails(String userInput)
+            throws InvalidFlagException, MissingArgException, MissingDetailException, ForbiddenDetailException,
             InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
             InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException;
 
     /**
-     * This method takes in the contactDetails array and populates it with contact details.
-     * It will sift out the flags to decide what details to populate, using the
-     * enumeration from DetailType.
+     * This method takes in the contactDetails array and populates it with contact
+     * details. It will sift out the flags to decide what details to populate, using
+     * the enumeration from DetailType.
      *
      * @param contactDetails String array containing contact details
      * @param detail         Unparsed detail
      * @throws InvalidFlagException If the flag given is not recognised
      */
     public void parseDetail(String[] contactDetails, String detail)
-            throws InvalidFlagException, MissingDetailException, ForbiddenDetailException,
-            InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
-            InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException {
+            throws InvalidFlagException, MissingDetailException, ForbiddenDetailException, InvalidNameException,
+            InvalidGithubUsernameException, InvalidTelegramUsernameException, InvalidLinkedinUsernameException,
+            InvalidTwitterUsernameException, InvalidEmailException {
         String[] destructuredDetails = detail.split(" ", NUMBER_OF_DETAILS);
-        //for commands that specify a flag, but do not specify any argument for that flag
-        //IndexOutOfBoundsException should not be thrown as the first if case will be true
+        // for commands that specify a flag, but do not specify any argument for that
+        // flag
+        // IndexOutOfBoundsException should not be thrown as the first if case will be
+        // true
         if (destructuredDetails.length == 1 || destructuredDetails[1].isBlank()) {
             throw new MissingDetailException();
         }

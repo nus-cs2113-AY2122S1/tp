@@ -64,4 +64,11 @@ add -n asdasd -l kusdd__ -g adasdas -e .adadas@com
 add -n lezai  -g lezongmun  -e lezongmun@gmail.com   -linkedin  lezongmun
 add -n lezai3  -g lezongmun  -e lezongmun@gmail.com   -l  lezongmun
 add -n lezongggg    -te testTelegram
+search
+search
+search -g
+search boris
+search -n bory
+search -g lezong
+search -zxca lezong
 exit
