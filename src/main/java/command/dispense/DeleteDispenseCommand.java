@@ -36,15 +36,18 @@ public class DeleteDispenseCommand extends Command {
         String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};
 
-        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
-                CommandSyntax.DELETE_DISPENSE_COMMAND, true)) {
+        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
+                optionalParameters, CommandSyntax.DELETE_DISPENSE_COMMAND, true);
+
+        if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of dispense");
             return;
         }
         String dispenseIdToDelete = parameters.get(CommandParameters.ID);
 
-        if (!DispenseValidator.isValidDispenseId(ui, dispenseIdToDelete, medicines)) {
+        boolean isValidDispenseId = DispenseValidator.isValidDispenseId(ui, dispenseIdToDelete, medicines);
+        if (!isValidDispenseId) {
             logger.log(Level.WARNING, "Invalid dispense id is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of dispense");
             return;
@@ -68,13 +71,11 @@ public class DeleteDispenseCommand extends Command {
                     return;
                 }
                 medicines.remove(dispense);
+                ui.print("Dispense deleted for Dispense Id " + dispenseId);
+                logger.log(Level.INFO, "Successful deletion of Dispense");
                 return;
             }
         }
-
-        ui.print("Dispense deleted for Dispense Id " + dispenseId);
-        logger.log(Level.INFO, "Successful deletion of Dispense");
-
     }
 
     /**

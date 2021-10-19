@@ -7,6 +7,7 @@ import inventory.Dispense;
 import inventory.Medicine;
 import inventory.Stock;
 import utilities.parser.DispenseValidator;
+import utilities.parser.DateParser;
 import utilities.parser.StockManager;
 import utilities.storage.Storage;
 import utilities.ui.Ui;
@@ -40,19 +41,22 @@ public class AddDispenseCommand extends Command {
                 CommandParameters.CUSTOMER_ID, CommandParameters.STAFF};
         String[] optionalParameters = {};
 
-        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
-                CommandSyntax.ADD_DISPENSE_COMMAND, false)) {
+        boolean isInvalidParameters = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
+                optionalParameters, CommandSyntax.ADD_DISPENSE_COMMAND, false);
+
+        if (isInvalidParameters) {
             return;
         }
 
-        if (DispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
-                CommandSyntax.ADD_DISPENSE_COMMAND)) {
+        boolean isInvalidParameterValues = DispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
+                CommandSyntax.ADD_DISPENSE_COMMAND);
+        if (isInvalidParameterValues) {
             return;
         }
 
         int dispenseQuantity = Integer.parseInt(quantity);
         int quantityToDispense = dispenseQuantity;
-        int totalStock = StockManager.getTotalStockQuantity(medicines, medicationName);
+
         Date dispenseDate = new Date(); //dispense date will be today's date
         ArrayList<Stock> filteredStocks = new ArrayList<>();
 
@@ -68,18 +72,19 @@ public class AddDispenseCommand extends Command {
         }
 
         filteredStocks.sort(new utilities.comparators.StockComparator(CommandParameters.EXPIRY_DATE, false));
+        int totalStock = StockManager.getTotalStockQuantity(medicines, medicationName);
+        if (dispenseQuantity > totalStock) {
+            ui.print("Unable to Dispense! Dispense quantity is more than stock available!");
+            ui.print("Dispense quantity: " + dispenseQuantity + " Stock available: " + totalStock);
+            return;
+        }
 
         for (Stock stock : filteredStocks) {
             int existingQuantity = stock.getQuantity();
             int existingId = stock.getStockID();
             Date existingExpiry = stock.getExpiry();
-            int setStockValue = 0;
 
-            if (dispenseQuantity > totalStock) {
-                ui.print("Unable to Dispense! Dispense quantity is more than stock available!");
-                ui.print("Dispense quantity: " + dispenseQuantity + " Stock available: " + totalStock);
-                return;
-            }
+            int setStockValue = 0;
 
             if (existingQuantity == quantityToDispense) {
                 dispense(ui, medicines, medicationName, customerId, staffName, existingQuantity, dispenseDate,
@@ -122,11 +127,12 @@ public class AddDispenseCommand extends Command {
     private void dispense(Ui ui, ArrayList<Medicine> medicines, String medicationName, String customerId,
                           String staffName, int quantityToDispense, Date dispenseDate, Stock stock,
                           int existingId, Date existingExpiry, int setStockValue) {
+        String expiry = DateParser.dateToString(existingExpiry);
         stock.setQuantity(setStockValue);
         medicines.add(new Dispense(medicationName, quantityToDispense, customerId, dispenseDate,
                 staffName, existingId));
         ui.print("Dispensed:" + medicationName + " Quantity:" + quantityToDispense + " Expiry "
-                + "date:" + existingExpiry);
+                + "Date:" + expiry);
     }
 
 }
