@@ -1,8 +1,10 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.FoodoramaException;
 import seedu.duke.logger.LoggerManager;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,17 +72,26 @@ public class Dish implements Comparable<Dish> {
         }
     }
 
-    public void addWaste(Double value) {
-        assert value > 0 : "Adding negative waste is impossible";
-        wastage += value;
+    public void addWaste() throws FoodoramaException {
+        System.out.println(ui.getLineDivider());
+        System.out.println("Enter the weight of " + dishName + " in KG:");
+        Scanner in = new Scanner(System.in);
+        String dishWaste = in.nextLine();
+        double inputWastage;
+        try {
+            inputWastage = Double.parseDouble(dishWaste);
+        } catch (NumberFormatException e) {
+            throw new FoodoramaException("Sorry, please input a valid number.");
+        }
+        assert inputWastage > 0 : "Adding negative waste is impossible";
+        wastage += inputWastage;
         ui.printWastage(dishName, wastage);
-
         if (!constituents.isEmpty()) {
             //Todo proportion stuff and prevent feedback loop
             ingredientContribution = wastage / constituents.size();
             for (Ingredient ingredient : constituents) {
                 //Change in contribution is change in wastage / num of constituents
-                ingredient.addDishWaste(value / constituents.size());
+                ingredient.addDishWaste(inputWastage / constituents.size());
             }
         }
     }

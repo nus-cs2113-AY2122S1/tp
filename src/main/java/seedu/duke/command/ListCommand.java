@@ -3,6 +3,7 @@ package seedu.duke.command;
 import seedu.duke.DishList;
 import seedu.duke.IngredientList;
 import seedu.duke.Ui;
+import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class ListCommand extends Command {
     public boolean isOther = false;
 
     @Override
-    public void execute(ArrayList<String> parameters) {
+    public void execute(ArrayList<String> parameters) throws FoodoramaException {
         switch (parameters.get(0)) {
         case "dish":
             DishList.list();
@@ -28,9 +29,9 @@ public class ListCommand extends Command {
             break;
 
         default:
-            ui.printListMissingParamMsg();
             isOther = true;
-            break;
+            throw new FoodoramaException("Sorry, please input: list [TYPE]." + System.lineSeparator()
+                    + "[TYPE]: dish to list dishes, ingr to list ingredients.");
         }
     }
 }

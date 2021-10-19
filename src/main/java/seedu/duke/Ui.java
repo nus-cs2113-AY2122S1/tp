@@ -113,7 +113,7 @@ public class Ui {
             + LINE_DIVIDER;
 
     private static final String INVALID_PARAMETERS = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, please input a valid number." + System.lineSeparator()
+            + "Sorry, please input a valid parameter." + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String DISH_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()
@@ -144,7 +144,7 @@ public class Ui {
             + "    Example: 'add ingr stored chicken' ; '1.5' \n"
             + "7. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]' \n"
             + "    Example: 'add ingr waste chicken' ; '0.7' \n"
-            + "8. Linking an Ingredient to a Dish : 'add dish constituent [dishName] / [ingrName]'\n"
+            + "8. Linking an Ingredient to a Dish : 'add constituent [dishName] / [ingrName]'\n"
             + "    Example: 'add constituent chicken rice / chicken' \n"
             + "9. Deleting an Ingredient : 'del [ingrName]' \n"
             + "    Example: 'del ingr chicken' \n"

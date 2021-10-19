@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.FoodoramaException;
+
+import java.util.Scanner;
+
 public class Ingredient implements  Comparable<Ingredient> {
 
     private Ui ui = new Ui();
@@ -24,13 +28,31 @@ public class Ingredient implements  Comparable<Ingredient> {
         return ingredientName;
     }
 
-    public void updateIngredientWeight(double weightChange) {
-        ingredientWeight += weightChange;
+    public void updateIngredientWeight() throws FoodoramaException {
+        System.out.println("Enter the weight of " + ingredientName + " in KG:");
+        Scanner in = new Scanner(System.in);
+        String inputIngredientWeight = in.nextLine();
+        double ingredientWeightValue;
+        try {
+            ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
+        } catch (NumberFormatException e) {
+            throw new FoodoramaException("Sorry, please input a valid number.");
+        }
+        ingredientWeight += ingredientWeightValue;
         ui.printStorage(ingredientName, ingredientWeight);
     }
 
-    public void addWaste(Double waste) {
-        ingredientWasteIngr += waste;
+    public void addWaste() throws FoodoramaException {
+        System.out.println("Enter the wastage of " + ingredientName + " in KG:");
+        Scanner in = new Scanner(System.in);
+        String ingredientWeight = in.nextLine();
+        double ingredientWeightValue;
+        try {
+            ingredientWeightValue = Double.parseDouble(ingredientWeight);
+        } catch (NumberFormatException e) {
+            throw new FoodoramaException("Sorry, please input a valid number.");
+        }
+        ingredientWasteIngr += ingredientWeightValue;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
         ui.printWastage(ingredientName, totalWaste);
     }

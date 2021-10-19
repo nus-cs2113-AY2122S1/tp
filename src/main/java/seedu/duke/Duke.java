@@ -2,7 +2,7 @@ package seedu.duke;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandNames;
-import seedu.duke.exceptions.CommandNotAvailableException;
+import seedu.duke.exceptions.FoodoramaException;
 import seedu.duke.logger.LoggerManager;
 import seedu.duke.storage.Storage;
 
@@ -40,8 +40,11 @@ public class Duke {
                 Storage.write("ingredient");
                 Storage.write("dish");
 
-            } catch (CommandNotAvailableException e) {
-                ui.printInvalidCommandMsg();
+            } catch (FoodoramaException exception) {
+                //ui.printInvalidCommandMsg();
+                System.out.println(ui.getLineDivider());
+                System.out.println(exception.getMessage());
+                System.out.println(ui.getLineDivider());
             }
             userInput = input.nextLine();
         }
