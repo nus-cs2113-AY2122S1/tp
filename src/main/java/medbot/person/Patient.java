@@ -8,14 +8,6 @@ public class Patient extends Person {
         super.personType = PersonType.PATIENT;
     }
 
-    public int getPersonId() {
-        return super.getPersonId();
-    }
-
-    public void setPersonId(int patientId) {
-        super.setPersonId(patientId);
-    }
-
     public String toString() {
         return "Patient ID: " + getPersonId() + " " + super.toString();
     }
