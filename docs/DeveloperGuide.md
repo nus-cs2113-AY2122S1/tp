@@ -43,6 +43,30 @@ Given below is the sequence diagram for the interactions within the main applica
 
 ### AddStockCommand
 
+MediVault initialises a AddStockCommand when CommandParser identifies the `addstock` or  `add` in the stock mode.
+
+* MediVault adds medicine stock when the `parameter` and `parameterValues` provided by the user are valid.
+* User will not be able to input medication if `max_quantity` is less than `quantity`.
+* User will not be able to input medication if the same name exist and the `expiry_date` is same.
+* MediVault will ignore the `description` and `max_quantity` of user input if the same medication name already exist.
+
+The sequence diagram for AddStockCommand is shown below.
+
+![AddStockSequenceDiagram](diagrams/diagram_images/AddStockSequenceDiagram.png)
+
+### AddDispenseCommand
+
+MediVault initialises a AddDispenseCommand when CommandParser identifies the `adddispense` or  `add` in the dispense mode.
+
+* MediVault adds dispense when the `parameter` and `parameterValues` provided by the user are valid.
+* MediVault will update the quantity left in the stock automatically after dispense.
+* MediVault will dispense medication with the earliest date if there are medication with multiple expiry date.
+* User will not be able to dispense medication if the quantity is more than the total stock quantity.
+
+The sequence diagram for AddDispenseCommand is shown below.
+
+![AddDispenseCommandDiagram](diagrams/diagram_images/AddDispenseSequenceDiagram.png)
+
 ### DeleteStockCommand
 MediVault initialises an DeleteStockCommand class when CommandParser identifies the
 `deletestock` or the `delete` keyword in the `stock` mode.
@@ -64,6 +88,26 @@ After MediVault determines that it is executing deletion by expiry date, it will
 
 The sequence diagram for delete by expiry date is shown below.
 ![DeletionOfStockByIdSequenceDiagram](diagrams/diagram_images/DeletionOfStockByExpirySequenceDiagram.png)
+
+### DeleteDispenseCommand
+MediVault initialises a DeleteDispenseCommand when CommandParser identifies the `deletedispense` or  `delete` in the dispense mode.
+* MediVault delete dispense when the `parameter` and `parameterValues` provided by the user are valid.
+* MediVault will delete dispense based on the user input of `DISPENSE_ID`.
+* MediVault will add dispense quantity to the stock quantity after successful deletion of dispense.
+* User will not be able to delete dispense if the total quantity after dispense will be more than the maximum quantity.
+
+The sequence diagram for DeleteDispenseCommand is shown below.
+
+![DeleteDispenseCommandDiagram](diagrams/diagram_images/DeleteDispenseSequenceDiagram.png)
+### DeleteOrderCommand
+
+MediVault initialises a DeleteOrderCommand when CommandParser identifies the `deleteorder` or  `delete` in the order mode.
+
+* MediVault delete order when the `parameter` and `parameterValues` provided by the user are valid.
+
+The sequence diagram for DeleteOrderCommand is shown below.
+
+![DeleteOrderCommandDiagram](diagrams/diagram_images/DeleteOrderSequenceDiagram.png)
 
 ### ListCommand
 

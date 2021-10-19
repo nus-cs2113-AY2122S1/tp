@@ -171,15 +171,17 @@ public class AddStockCommand extends Command {
     private boolean checkValidParametersAndValues(Ui ui, LinkedHashMap<String, String> parameters,
                                                   ArrayList<Medicine> medicines, String[] requiredParameters,
                                                   String[] optionalParameters) {
-
-        if (CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameters,
-                CommandSyntax.ADD_STOCK_COMMAND, false)) {
+        boolean isInvalidParameters = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
+                optionalParameters,
+                CommandSyntax.ADD_STOCK_COMMAND, false);
+        if (isInvalidParameters) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
             logger.log(Level.INFO, "Unsuccessful addition of stock");
             return true;
         }
-
-        if (StockValidator.containsInvalidParameterValues(ui, parameters, medicines, CommandSyntax.ADD_STOCK_COMMAND)) {
+        boolean isInvalidParameterValues = StockValidator.containsInvalidParameterValues(ui, parameters,
+                medicines, CommandSyntax.ADD_STOCK_COMMAND);
+        if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
             logger.log(Level.INFO, "Unsuccessful addition of stock");
             return true;

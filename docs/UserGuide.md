@@ -10,7 +10,7 @@ It is an integrated solution that provides real-time tracking of stock, orders a
 * [Quick Start](#quick-start)
 * [Features](#features)
     * [Changing modes](#changing-modes)
-    * [Add medication stock](#adding-a-medication-stock-add)
+    * [Add medication stock](#adding-a-medication-stock-addstock)
     * [Delete medication stock](#deleting-a-medication-stock-delete)
     * [Update medication stock](#updating-medication-stock-information-update)
     * [List medication stock](#listing-medication-stock--list)
@@ -71,40 +71,35 @@ Mode has changed to DISPENSE.
 [DISPENSE] > 
 ```
 
-### Adding a medication stock: `add`
-
+### Adding a medication stock: `addstock`
 Adds medication into the inventory.
+* If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION m/MAX_QUANTITY` parameter, it will be ignored, MediVault will add with the existing description and existing maximum quantity.
 
-* If medication exists, description and maximum quantity will be optional parameters. If you
-  include `d/DESCRIPTION m/MAX_QUANTITY` parameter, it will be ignored, MediVault will add with the existing description
-  and existing maximum quantity.
+Format: `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE [d/DESCRIPTION m/MAX_QUANTITY]`
 
-Format: `add n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE [d/DESCRIPTION m/MAX_QUANTITY]`
-
-Example 1 (If medication exists): `add n/panadol p/5 q/50 e/19-09-2021`
+Example 1 (If medication exists): `addstock n/panadol p/5 q/50 e/19-09-2021`
 
 Expected Output 1:
-
 ```
+Medicine exists. Using existing description and maximum quantity.
 Medication added: panadol
-+====+=========+=======+==========+=============+==================================================+==============+
-| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE |                   DESCRIPTION                    | MAX_QUANTITY | 
-+====+=========+=======+==========+=============+==================================================+==============+
-| 1  | panadol | $5.00 |    50    | 19-09-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS |     1000     | 
-+----+---------+-------+----------+-------------+--------------------------------------------------+--------------+
++====+=========+=======+==========+=============+===============================================+==============+
+| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE |                  DESCRIPTION                  | MAX_QUANTITY | 
++====+=========+=======+==========+=============+===============================================+==============+
+| 7  | panadol | $5.00 |    50    | 19-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND   |     1000     | 
+|    |         |       |          |             |                     PAINS                     |              | 
++----+---------+-------+----------+-------------+-----------------------------------------------+--------------+
 ```
-
-Example 2 (If medication does not exists): `add n/vicodin q/10 p/10 e/02-11-2021 d/popular drug for treating pain m/500`
+Example 2 (If medication does not exists): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
 
 Expected Output 2:
-
 ```
-Medication added: vicodin
-+====+=========+========+==========+=============+================================+==============+
-| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE |          DESCRIPTION           | MAX_QUANTITY | 
-+====+=========+========+==========+=============+================================+==============+
-| 2  | vicodin | $10.00 |    10    | 02-11-2021  | popular drug for treating pain |     500      | 
-+----+---------+--------+----------+-------------+--------------------------------+--------------+
+Medication added: paracetamol
++====+=============+========+==========+=============+==============================+==============+
+| ID |    NAME     | PRICE  | QUANTITY | EXPIRY_DATE |         DESCRIPTION          | MAX_QUANTITY | 
++====+=============+========+==========+=============+==============================+==============+
+| 10 | paracetamol | $10.00 |    10    | 02-11-2021  | used to treat fever and pain |     500      | 
++----+-------------+--------+----------+-------------+------------------------------+--------------+
 ```
 
 ### Deleting a medication stock: `delete`
@@ -198,8 +193,28 @@ Expected output:
 ```
 
 ### Adding a dispense record: `adddispense`
+Add a dispense.
+
+Format: `adddispense n/NAME q/QUANTITY s/STAFF c/CUSTOMER_ID`
+
+Example: `adddispense n/panadol q/5 s/john c/123`
+
+Expected Output:
+```
+Dispensed:panadol Quantity:5 Expiry date:Mon Sep 13 00:00:00 SGT 2021
+```
 
 ### Deleting a dispense record: `deletedispense`
+Deletes dispense by specifying the dispense Id.
+
+Format: `deletedispense i/DISPENSE_ID`
+
+Example: `deletedispense i/3`
+
+Expected output:
+```
+Dispense deleted for Dispense Id 3
+```
 
 ### Updating dispense record: `updatedispense`
 
@@ -256,6 +271,16 @@ Expected output:
 ### Adding an order: `addorder`
 
 ### Deleting an order: `deleteorder`
+Deletes order by specifying the order Id.
+
+Format: `deleteorder i/ORDER_ID`
+
+Example: `deleteorder i/1`
+
+Expected output:
+```
+Order deleted for Order Id 1
+```
 
 ### Updating order: `updateorder`
 
