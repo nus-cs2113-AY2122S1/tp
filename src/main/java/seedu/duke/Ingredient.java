@@ -28,6 +28,10 @@ public class Ingredient implements  Comparable<Ingredient> {
         return ingredientName;
     }
 
+    public double getIngredientWeight() {
+        return ingredientWeight;
+    }
+
     public void updateIngredientWeight() throws FoodoramaException {
         ui.printEnterWeightOf(ingredientName);
         Scanner in = new Scanner(System.in);

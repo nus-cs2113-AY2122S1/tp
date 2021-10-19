@@ -13,8 +13,10 @@ class AddDishCommandTest {
 
     @Test
     void execute_inputParameters_add() throws FoodoramaException {
+        //Define inputs
         ArrayList<String> inputParams = new ArrayList<>();
         inputParams.add("chicken rice");
+
 
         Command testAddDishCommand = new AddDishCommand();
         testAddDishCommand.execute(inputParams);

@@ -20,16 +20,13 @@ public class ListCommand extends Command {
         switch (parameters.get(0)) {
         case "dish":
             DishList.list();
-            isDish = true;
             break;
 
         case "ingr":
             IngredientList.list();
-            isIngr = true;
             break;
 
         default:
-            isOther = true;
             throw new FoodoramaException(ui.getListMissingParamMsg());
         }
     }
