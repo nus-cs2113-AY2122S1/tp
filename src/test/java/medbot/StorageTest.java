@@ -3,6 +3,7 @@ package medbot;
 import static medbot.Parser.updatePersonalInformation;
 
 import medbot.exceptions.MedBotException;
+import medbot.list.PatientList;
 import medbot.person.Patient;
 
 import java.io.File;
@@ -120,7 +121,7 @@ class StorageTest {
 
         for (Patient p : patients) {
             testPatientList.setLastId(p.getPatientId());
-            testPatientList.addPatient(p);
+            testPatientList.addPerson(p);
         }
 
         return testPatientList;

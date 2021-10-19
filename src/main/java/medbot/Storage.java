@@ -1,6 +1,7 @@
 package medbot;
 
 import medbot.exceptions.MedBotException;
+import medbot.list.PatientList;
 import medbot.person.Patient;
 import medbot.utilities.Pair;
 
@@ -74,7 +75,7 @@ public class Storage {
                 String storageLine = s.nextLine();
                 Pair<Integer, ArrayList<String>> patientDetails = parseStorageLine(storageLine);
                 patient = createPatient(patientDetails);
-                patientList.addPatientFromStorage(patient);
+                patientList.addPersonFromStorage(patient);
                 lastId = patient.getPatientId();
 
             } catch (Exception e) {
