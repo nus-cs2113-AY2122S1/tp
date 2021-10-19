@@ -10,6 +10,7 @@ import seedu.command.ViewContactCommand;
 import seedu.command.FailedCommand;
 import seedu.command.ExitCommand;
 import seedu.command.ListContactsCommand;
+import seedu.command.SearchContactCommand;
 
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
@@ -33,6 +34,7 @@ public class MainParser {
     private static final String EXIT_COMD = "exit";
     private static final String LIST_COMD = "list";
     private static final String HELP_COMD = "help";
+    private static final String SEARCH_COMD = "search";
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
@@ -41,6 +43,7 @@ public class MainParser {
     private ContactParser contactParser;
     private final AddContactParser addContactParser = new AddContactParser();
     private final EditContactParser editContactParser = new EditContactParser();
+    private final SearchContactParser searchContactParser = new SearchContactParser();
 
     public Command parseCommand(String userInput) {
         String commandType = getCommandWord(userInput);
@@ -66,6 +69,9 @@ public class MainParser {
             break;
         case HELP_COMD:
             command = new HelpCommand();
+            break;
+        case SEARCH_COMD:
+            command = parseSearchCommand(userInput);
             break;
         default:
             command = new FailedCommand(FailedCommandType.GENERAL);
@@ -103,6 +109,7 @@ public class MainParser {
         }
     }
 
+    //@@author ng-andre
     private Command parseEditContact(String userInput) { // userInput is raw user input
         contactParser = editContactParser;
         try {
@@ -172,6 +179,19 @@ public class MainParser {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
         } catch (NumberFormatException e) {
             return new FailedCommand(FailedCommandType.INVALID_INDEX);
+        }
+    }
+
+    //@@author ng-andre
+    private Command parseSearchCommand(String userInput) {
+        try {
+            String query = searchContactParser.parseSearchQuery(userInput);
+            int detailFlag = searchContactParser.getDetailFlag(userInput);
+            return new SearchContactCommand(query, detailFlag);
+        } catch (MissingArgException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (InvalidFlagException e) {
+            return new FailedCommand(FailedCommandType.INVALID_FLAG);
         }
     }
 }
