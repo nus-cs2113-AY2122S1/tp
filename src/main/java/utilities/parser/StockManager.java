@@ -75,4 +75,25 @@ public class StockManager {
         return stock;
     }
 
+    /**
+     * Extracts the filtered stock for stocks with same name.
+     *
+     * @param medicines Arraylist of all medicines.
+     * @param stockName Stock name for a given stock.
+     * @return ArrayList of filteredStocks of the same stock name.
+     */
+    public static ArrayList<Stock> getFilteredStocksByName(ArrayList<Medicine> medicines, String stockName) {
+        ArrayList<Stock> filteredStocks = new ArrayList<>();
+        for (Medicine medicine : medicines) {
+            boolean isSameName = medicine.getMedicineName().equalsIgnoreCase(stockName);
+            if (medicine instanceof Stock && isSameName) {
+                boolean isDeleted = ((Stock) medicine).isDeleted();
+                if (!isDeleted) {
+                    filteredStocks.add((Stock) medicine);
+                }
+            }
+        }
+        return filteredStocks;
+    }
+
 }
