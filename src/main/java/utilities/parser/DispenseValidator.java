@@ -17,7 +17,7 @@ public class DispenseValidator {
     /**
      * Checks if parameter values are valid for Dispense objects.
      *
-     * @param ui            Reference to the UI object passed by Main to print messages.
+     * @param ui            Reference to the UI object to print messages.
      * @param parameters    LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param medicines     Arraylist of all medicines.
      * @param commandSyntax The command's valid syntax.
@@ -69,7 +69,7 @@ public class DispenseValidator {
     /**
      * Checks if a dispense ID is valid.
      *
-     * @param ui        Reference to the UI object passed by Main to print messages.
+     * @param ui        Reference to the UI object to print messages.
      * @param id        ID of the dispense record to be checked.
      * @param medicines List of all medicines.
      * @return Boolean value indicating if Dispense ID is valid.
@@ -105,7 +105,7 @@ public class DispenseValidator {
     /**
      * Checks if a customer ID is valid.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param ui         Reference to the UI object to print messages.
      * @param customerId Customer ID to be checked.
      * @return Boolean value indicating if Customer ID is valid.
      */
@@ -120,7 +120,7 @@ public class DispenseValidator {
     /**
      * Checks if a Staff Name is valid.
      *
-     * @param ui        Reference to the UI object passed by Main to print messages.
+     * @param ui        Reference to the UI object to print messages.
      * @param staffName Staff Name to be checked.
      * @return Boolean value indicating if Staff Name is valid.
      */
@@ -135,14 +135,14 @@ public class DispenseValidator {
     /**
      * Checks if a dispense column/alias exists.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param ui         Reference to the UI object to print messages.
      * @param columnName Column name/alias to be validated.
      * @return Boolean value indicating column is valid.
      */
     public static boolean isValidColumn(Ui ui, String columnName) {
         String[] columnAlias = new String[]{CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
-            CommandParameters.CUSTOMER_ID, CommandParameters.DATE, CommandParameters.STAFF,
-            CommandParameters.STOCK_ID};
+                CommandParameters.CUSTOMER_ID, CommandParameters.DATE, CommandParameters.STAFF,
+                CommandParameters.STOCK_ID};
         if (Arrays.asList(Dispense.COLUMNS).contains(columnName.toUpperCase()) || Arrays.asList(columnAlias)
                 .contains(columnName.toLowerCase())) {
             return true;
@@ -155,7 +155,7 @@ public class DispenseValidator {
     /**
      * Checks if a dispense date is valid.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param ui         Reference to the UI object to print messages.
      * @param dateString Date of the dispense.
      * @return Boolean value indicating if the date is valid.
      */

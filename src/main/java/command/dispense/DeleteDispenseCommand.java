@@ -80,7 +80,7 @@ public class DeleteDispenseCommand extends Command {
     /**
      * Check stock if stock exist. If stock exist, add the quantity to the stock quantity.
      *
-     * @param ui                Reference to the UI object passed by Main to print messages.
+     * @param ui                Reference to the UI object to print messages.
      * @param medicines         Arraylist of medicines
      * @param stockIdToDispense Stock ID dispensed.
      * @param dispenseQuantity  Quantity dispensed.

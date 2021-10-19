@@ -107,7 +107,7 @@ public class AddDispenseCommand extends Command {
     /**
      * Change the stock quantity based on dispense quantity. Add dispense medication to dispense list.
      *
-     * @param ui                 Reference to the UI object passed by Main to print messages.
+     * @param ui                 Reference to the UI object to print messages.
      * @param medicines          Arraylist of all medicines.
      * @param medicationName     Medication to dispense.
      * @param customerId         Customer ID whom medicine will be dispensed to.

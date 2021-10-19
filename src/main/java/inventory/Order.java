@@ -13,6 +13,13 @@ public class Order extends Medicine {
     public static final String DATE = "DATE";
     public static final String STATUS = "STATUS";
 
+    // Used for sorting
+    public static final String ID_LOWERCASE = "id";
+    public static final String NAME_LOWERCASE = "name";
+    public static final String QUANTITY_LOWERCASE = "quantity";
+    public static final String DATE_LOWERCASE = "date";
+    public static final String STATUS_LOWERCASE = "status";
+
     public static final String[] COLUMNS = {ID, NAME, QUANTITY, DATE, STATUS};
 
     private static int orderCount = 0;

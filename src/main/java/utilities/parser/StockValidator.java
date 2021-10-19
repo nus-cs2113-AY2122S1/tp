@@ -70,7 +70,7 @@ public class StockValidator {
     /**
      * Checks if the given stock id is valid.
      *
-     * @param ui        Reference to the UI object passed by Main to print messages.
+     * @param ui        Reference to the UI object to print messages.
      * @param id        ID of the medicine to be checked.
      * @param medicines List of all medicines.
      * @return Boolean value indicating if medicine ID is valid.
@@ -106,7 +106,7 @@ public class StockValidator {
     /**
      * Checks if a medicine price is valid.
      *
-     * @param ui          Reference to the UI object passed by Main to print messages.
+     * @param ui          Reference to the UI object to print messages.
      * @param priceString Price of the medicine to be checked.
      * @return Boolean value indicating if medicine price is valid.
      */
@@ -126,7 +126,7 @@ public class StockValidator {
     /**
      * Checks if a medicine expiry date is valid.
      *
-     * @param ui           Reference to the UI object passed by Main to print messages.
+     * @param ui           Reference to the UI object to print messages.
      * @param expiryString Expiry date of the medicine.
      * @return Boolean value indicating if medicine expiry date is valid.
      */
@@ -143,7 +143,7 @@ public class StockValidator {
     /**
      * Checks if a medicine description is empty.
      *
-     * @param ui          Reference to the UI object passed by Main to print messages.
+     * @param ui          Reference to the UI object to print messages.
      * @param description Medicine description to be checked.
      * @return Boolean value indicating if medicine name is valid.
      */
@@ -158,7 +158,7 @@ public class StockValidator {
     /**
      * Checks if a medicine max quantity is valid.
      *
-     * @param ui                Reference to the UI object passed by Main to print messages.
+     * @param ui                Reference to the UI object to print messages.
      * @param maxQuantityString Max quantity of the medicine.
      * @return Boolean value indicating if max medicine quantity is valid.
      */
@@ -178,14 +178,14 @@ public class StockValidator {
     /**
      * Checks if a medicine column/alias exists.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param ui         Reference to the UI object to print messages.
      * @param columnName Column name/alias to be validated.
      * @return Boolean value indicating if column name is value.
      */
     public static boolean isValidColumn(Ui ui, String columnName) {
         String[] columnAlias = new String[]{CommandParameters.ID, CommandParameters.NAME, CommandParameters.PRICE,
-            CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
-            CommandParameters.MAX_QUANTITY};
+                CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
+                CommandParameters.MAX_QUANTITY};
         if (Arrays.asList(Stock.COLUMNS).contains(columnName.toUpperCase()) || Arrays.asList(columnAlias)
                 .contains(columnName.toLowerCase())) {
             return true;
@@ -198,7 +198,7 @@ public class StockValidator {
     /**
      * Checks if total quantity of medicine is below max quantity.
      *
-     * @param ui          Reference to the UI object passed by Main to print messages.
+     * @param ui          Reference to the UI object to print messages.
      * @param quantity    Quantity of the medicines.
      * @param maxQuantity Max quantity of medicines.
      * @return Boolean value indicating if total quantity is less than max quantity.
@@ -216,7 +216,7 @@ public class StockValidator {
     /**
      * Checks if input date for medicine already exists.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param ui         Reference to the UI object to print messages.
      * @param medicines  List of all medicines.
      * @param expiryDate Expiry date given by user
      * @param name       Medicine name to check against

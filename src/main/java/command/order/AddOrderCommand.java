@@ -71,7 +71,7 @@ public class AddOrderCommand extends Command {
     /**
      * Add order based on user input.
      * 
-     * @param ui        Reference to the UI object passed by Main to print messages.
+     * @param ui        Reference to the UI object to print messages.
      * @param medicines Arraylist of all medicines.
      * @param name      Medication name to order.
      * @param quantity  Quantity of medication to order.
