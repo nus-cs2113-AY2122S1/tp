@@ -152,8 +152,8 @@ public class CommonUtils {
      * @return A string of the file name without its file extension.
      */
     public static String getFileNameOnly(String filename) {
-        String[] string = filename.split("\\" + CommonFormat.EXTENSION_TEXT_FILE);
-        if (string != null && string.length > 0) {
+        String[] string = filename.split("\\.");
+        if (string != null && string.length == 2) {
             return string[0];
         }
         return null;

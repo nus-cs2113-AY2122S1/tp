@@ -11,6 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
+import javax.imageio.IIOException;
 import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
 import terminus.common.Messages;
@@ -107,9 +109,10 @@ public class ModuleStorage {
         Path modDirPath;
         for (String mod : moduleManager.getAllModules()) {
             modDirPath = Paths.get(filePath.getParent().toString(), mod);
-            // Check if module name is a valid file name
-            if (!CommonUtils.isValidFileName(mod)) {
+            // Check if module name is a valid module and file name
+            if (!CommonUtils.isValidFileName(mod) || !mod.matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
                 moduleManager.removeModule(mod);
+                continue;
             }
             // Check if directory does not exist proceed to create directory, retrieve notes otherwise.
             if (!Files.isDirectory(modDirPath)) {
@@ -131,6 +134,7 @@ public class ModuleStorage {
         Path modDirPath;
         modDirPath = Paths.get(filePath.getParent().toString(), mod);
         File folder = new File(modDirPath.toString());
+        assert folder != null;
         File[] listOfFiles = folder.listFiles();
         ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
         contentManager.purgeData();
@@ -139,8 +143,6 @@ public class ModuleStorage {
                 contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
                         Files.readString(
                                 Paths.get(modDirPath.toString(), file.getName()), StandardCharsets.US_ASCII)));
-            } else {
-                file.delete();
             }
         }
     }
@@ -191,10 +193,10 @@ public class ModuleStorage {
         File folder = new File(directoryPath.toString());
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
-            if (!file.delete()) {
-                throw new IOException(String.format(Messages.ERROR_MESSAGE_FILE, file.getAbsolutePath()));
+            cleanIncorrectItem(file);
+            if (file.exists()) {
+                throw new IOException(Messages.ERROR_FILES_NOT_DELETED);
             }
-            ;
         }
     }
 
@@ -204,11 +206,32 @@ public class ModuleStorage {
             // Directory does not exist yet, due to the fact that no note was added yet.
             return;
         }
-        deleteAllFilesInDirectory(modDirPath);
         File folder = new File(modDirPath.toString());
-        if (!folder.delete()) {
-            throw new IOException(String.format(Messages.ERROR_MESSAGE_FOLDER, modDirPath.toString()));
+        cleanIncorrectItem(folder);
+        if (folder.exists()) {
+            throw new IOException(Messages.ERROR_FILES_NOT_DELETED);
         }
+    }
+
+    private void cleanIncorrectItem(File file) throws IOException {
+        Files.walk(Paths.get(file.getAbsolutePath()))
+                .sorted(Comparator.reverseOrder())
+                .map(Path::toFile)
+                .forEach(File::delete);
+    }
+
+    public boolean createModuleDirectory(String moduleName) throws IOException {
+        assert moduleName != null;
+        assert CommonUtils.isValidFileName(moduleName);
+        assert moduleName.matches(CommonFormat.SPACE_NEGATED_DELIMITER);
+        Path modDirPath = Paths.get(filePath.getParent().toString(), moduleName);
+        if (!Files.isDirectory(modDirPath)) {
+            Files.createDirectories(modDirPath);
+        } else {
+            // Nuke existing file
+            deleteAllFilesInDirectory(modDirPath);
+        }
+        return true;
     }
 
 
