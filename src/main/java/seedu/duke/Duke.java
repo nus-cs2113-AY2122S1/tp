@@ -20,7 +20,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         try {
-            Ui.Welcome();
+            Ui.welcome();
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
             ModuleList moduleMasterList = new ModuleList(Storage.loadModules());//ArrayList<>(Storage.loadModules());
             UniversityList universitySelectedList = new UniversityList();
