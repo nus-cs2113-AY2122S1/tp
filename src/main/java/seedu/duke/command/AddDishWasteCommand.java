@@ -21,28 +21,26 @@ public class AddDishWasteCommand extends Command {
 
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
-        Ui ui = new Ui();
         logger.log(Level.INFO, "Start of process");
+
         String dish = String.join(" ", parameters);
         int dishIndex = DishList.find(dish);
-        System.out.println(ui.getLineDivider());
+
         if (dishIndex == -1) {
             logger.log(Level.INFO, "Dish does not exist", dishIndex);
             throw new FoodoramaException("The dish " + parameters.get(0) + " does not exist");
         } else {
             assert (dishIndex != -1) : "The dishIndex cannot be -1";
+            // TODO shift to Dish class
             try {
                 Dish currentDish = DishList.dishList.get(dishIndex);
                 currentDish.addWaste();
                 logger.log(Level.INFO, "Successfully recorded Dish waste of "
                         + dish);
             } catch (FoodoramaException e) {
-                //System.out.println(ui.getInvalidParamMsg());
-                //System.out.println(ui.getLineDivider());
                 throw new FoodoramaException(e.getMessage());
             }
         }
-        System.out.println(ui.getLineDivider());
         logger.log(Level.INFO, "End of process");
     }
 

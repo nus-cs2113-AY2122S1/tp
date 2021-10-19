@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.IngredientList;
+import seedu.duke.exceptions.FoodoramaException;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class DeleteIngrCommandTest {
 
     @Test
-    void execute() {
+    void execute() throws FoodoramaException {
         ArrayList<String> inputParams = new ArrayList<>();
         inputParams.add("chicken");
         AddIngrCommand myIngrCommand = new AddIngrCommand();

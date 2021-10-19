@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ class ListCommandTest {
     // methodBeingTested_inputGiven_expectedOutcome
     // Input, one parameter, print.
     @Test
-    void execute_arrayList_print() {
+    void execute_arrayList_print() throws FoodoramaException {
         ArrayList<String> inputArrayList = new ArrayList<>();
         inputArrayList.add("notaCommand");
 

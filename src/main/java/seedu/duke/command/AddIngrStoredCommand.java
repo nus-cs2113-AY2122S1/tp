@@ -7,7 +7,6 @@ import seedu.duke.exceptions.FoodoramaException;
 import seedu.duke.logger.LoggerManager;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,26 +23,18 @@ public class AddIngrStoredCommand extends Command {
         logger.log(Level.INFO, "Start of process");
         String ingredient = String.join(" ", parameters);
         int ingredientIndex = IngredientList.find(ingredient);
-        System.out.println(ui.getLineDivider());
         if (ingredientIndex == -1) {
-            System.out.println(ui.getDishNotExistMsg());
+            ui.printIngrNotExistMsg();
             logger.log(Level.INFO, "Ingredient does not exist", ingredientIndex);
         } else {
             try {
-                System.out.println("Enter the weight of " + ingredient + " in KG:");
-                Scanner in = new Scanner(System.in);
-                String ingredientWeight = in.nextLine();
-                double ingredientWeightValue = Double.parseDouble(ingredientWeight);
                 Ingredient currentIngredient = IngredientList.ingredientList.get(ingredientIndex);
-                currentIngredient.updateIngredientWeight(ingredientWeightValue);
+                currentIngredient.updateIngredientWeight();
                 logger.log(Level.INFO, "Successfully stored Ingredient");
-            } catch (NumberFormatException e) {
-                throw new FoodoramaException("Sorry, please input a valid number.");
-                //System.out.println(ui.getInvalidParamMsg());
-                //System.out.println(ui.getLineDivider());
+            } catch (FoodoramaException e) {
+                throw new FoodoramaException(e.getMessage());
             }
         }
-        System.out.println(ui.getLineDivider());
         logger.log(Level.INFO, "End of process");
     }
 }

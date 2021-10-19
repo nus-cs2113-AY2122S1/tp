@@ -10,7 +10,7 @@ import seedu.duke.exceptions.FoodoramaException;
 
 import java.util.ArrayList;
 
-public class FindCommand extends Command  {
+public class FindCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         Ui ui = new Ui();
@@ -21,32 +21,31 @@ public class FindCommand extends Command  {
         if (itemToFind.isBlank()) {
             throw new FoodoramaException("You're missing a search term"
                     + System.lineSeparator() + "Please input: find [TYPE] [KEYWORD].");
-            //System.out.println(ui.FIND_MISSING_PARAM);
         } else {
             switch (commandToExecute) {
-                case "dish":
-                    ArrayList<Dish> matchedDishList = new ArrayList<>();
-                    for (Dish matchingDishes : DishList.dishList) {
-                        if (matchingDishes.getDishName().contains(itemToFind)) {
-                            matchedDishList.add(matchingDishes);
-                        }
+            case "dish":
+                ArrayList<Dish> matchedDishList = new ArrayList<>();
+                for (Dish matchingDishes : DishList.dishList) {
+                    if (matchingDishes.getDishName().contains(itemToFind)) {
+                        matchedDishList.add(matchingDishes);
                     }
-                    ui.printMatchedDishes(matchedDishList);
-                    break;
+                }
+                ui.printMatchedDishes(matchedDishList);
+                break;
 
-                case "ingr":
-                    ArrayList<Ingredient> matchedIngrList = new ArrayList<>();
-                    for (Ingredient matchingIngr : IngredientList.ingredientList) {
-                        if (matchingIngr.getIngredientName().contains(itemToFind)) {
-                            matchedIngrList.add(matchingIngr);
-                        }
+            case "ingr":
+                ArrayList<Ingredient> matchedIngrList = new ArrayList<>();
+                for (Ingredient matchingIngr : IngredientList.ingredientList) {
+                    if (matchingIngr.getIngredientName().contains(itemToFind)) {
+                        matchedIngrList.add(matchingIngr);
                     }
-                    ui.printMatchedIngredients(matchedIngrList);
-                    break;
+                }
+                ui.printMatchedIngredients(matchedIngrList);
+                break;
 
-                default:
-                    throw new FoodoramaException("Sorry, please input: find [TYPE] [KEYWORD]." + System.lineSeparator()
-                            + "[TYPE]: dish to list dishes, ingr to list ingredients.");
+            default:
+                throw new FoodoramaException("Sorry, please input: find [TYPE] [KEYWORD]." + System.lineSeparator()
+                        + "[TYPE]: dish to list dishes, ingr to list ingredients.");
             }
         }
     }

@@ -3,7 +3,6 @@ package seedu.duke;
 import java.util.ArrayList;
 
 public class Ui {
-    //Todo help
     private static final String LINE_DIVIDER = "____________________________________________________________";
     private static final String START_LOGO =
             "######################################################"
@@ -110,7 +109,8 @@ public class Ui {
             + LINE_DIVIDER;
 
     private static final String INGR_EXISTS = LINE_DIVIDER + System.lineSeparator()
-            + "Sorry, this ingredient already exists in your list.";
+            + "Sorry, this ingredient already exists in your list." + System.lineSeparator()
+            + LINE_DIVIDER;
 
     private static final String INVALID_PARAMETERS = LINE_DIVIDER + System.lineSeparator()
             + "Sorry, please input a valid number." + System.lineSeparator()
@@ -144,7 +144,7 @@ public class Ui {
             + "    Example: 'add ingr stored chicken' ; '1.5' \n"
             + "7. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]' \n"
             + "    Example: 'add ingr waste chicken' ; '0.7' \n"
-            + "8. Linking an Ingredient to a Dish : 'add dish constituent [dishName] / [ingrName]'\n"
+            + "8. Linking an Ingredient to a Dish : 'add constituent [dishName] / [ingrName]'\n"
             + "    Example: 'add constituent chicken rice / chicken' \n"
             + "9. Deleting an Ingredient : 'del [ingrName]' \n"
             + "    Example: 'del ingr chicken' \n"
@@ -154,12 +154,15 @@ public class Ui {
             + System.lineSeparator()
             + LINE_DIVIDER;
 
-    public String FIND_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
+    public static final String FIND_MISSING_PARAM = LINE_DIVIDER + System.lineSeparator()
             + "Please enter a keyword!" + System.lineSeparator()
             + LINE_DIVIDER;
+    public static final String FIND_INCORRECT_PARAM = LINE_DIVIDER + System.lineSeparator()
+            + "Incorrect paramater! Please type find <dish/ingredient>" + System.lineSeparator()
+            + LINE_DIVIDER;
 
-    public String getLogo() {
-        return START_LOGO;
+    public void printLogo() {
+        System.out.println(START_LOGO);
     }
 
     public void printWelcomeMsg() {
@@ -178,44 +181,44 @@ public class Ui {
         System.out.println(INVALID_COMMAND);
     }
 
-    public String getListMissingParamMsg() {
-        return LIST_MISSING_PARAM;
+    public void printListMissingParamMsg() {
+        System.out.println(LIST_MISSING_PARAM);
     }
 
-    public String getDishNotExistMsg() {
-        return DISH_NOTEXIST;
+    public void printDishNotExistMsg() {
+        System.out.println(DISH_NOTEXIST);
     }
 
-    public String getDishExistsMsg() {
-        return DISH_EXISTS;
+    public void printDishExistsMsg() {
+        System.out.println(DISH_EXISTS);
     }
 
-    public String getIngrNotExistMsg() {
-        return INGR_NOTEXIST;
+    public void printIngrNotExistMsg() {
+        System.out.println(INGR_NOTEXIST);
     }
 
-    public String getIngrExistsMsg() {
-        return INGR_EXISTS;
+    public void printIngrExistsMsg() {
+        System.out.println(INGR_EXISTS);
     }
 
-    public String getInvalidParamMsg() {
-        return INVALID_PARAMETERS;
+    public void printInvalidParamMsg() {
+        System.out.println(INVALID_PARAMETERS);
     }
 
-    public String getHelpMsg() {
-        return HELP_ME;
+    public void printHelpMsg() {
+        System.out.println(HELP_ME);
     }
 
-    public String getDishListCleared() {
-        return DISH_LIST_CLEARED;
+    public void printDishListCleared() {
+        System.out.println(DISH_LIST_CLEARED);
     }
 
-    public String getIngrListCleared() {
-        return INGR_LIST_CLEARED;
+    public void printIngrListCleared() {
+        System.out.println(INGR_LIST_CLEARED);
     }
 
-    public String getAllCleared() {
-        return ALL_CLEARED;
+    public void printAllCleared() {
+        System.out.println(ALL_CLEARED);
     }
 
     public void printAddedDish(String dishName) {
@@ -227,35 +230,69 @@ public class Ui {
 
     public void printDishList(ArrayList<Dish> dishList) {
         assert dishList != null : "dishList cannot be null";
-        System.out.println("Here are the dishes you have: ");
+        System.out.println(getLineDivider());
+        System.out.println("Here are the dishes you have:");
         for (int i = 0; i < dishList.size(); i++) {
             System.out.println((i + 1) + ". " + dishList.get(i));
         }
         System.out.println("You can use command 'add' to add new dishes!");
+        System.out.println(getLineDivider());
     }
 
     public void printDishListGraph(ArrayList<Dish> dishList) {
         assert dishList != null : "dishList cannot be null";
         double max = DishList.getGreatestWaste();
-        System.out.println("Here are the dishes you have: ");
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Here are the dishes you have:");
         for (int i = 0; i < dishList.size(); i++) {
             System.out.println((i + 1) + ". " + dishList.get(i).toGraph(max));
         }
-        System.out.println("You can use command 'add' to add new dishes!");
+        System.out.println("You can use command 'add' to add new dishes!" + System.lineSeparator()
+                + LINE_DIVIDER);
     }
 
     public void printDishNameRemoved(String dishName) {
         assert dishName != null : "dishName cannot be null";
-        System.out.println("Dish, " + dishName + " has been removed!");
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + dishName + " has been removed!" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printAddedIngredient(Ingredient ingredientToAdd, double ingredientWeight) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Ingredient added to list: " + ingredientToAdd.getIngredientName()
+                + " (Weight: " + ingredientWeight + " kg)" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printIngrList(ArrayList<Ingredient> ingredientList) {
+        assert ingredientList != null : "ingredientList cannot be null";
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Here are the ingredients you have: ");
+        for (int i = 0; i < ingredientList.size(); i++) {
+            System.out.println((i + 1) + ". " + ingredientList.get(i));
+        }
+        System.out.println("You can use command 'add' to add new ingredients!" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printIngrNameRemoved(String ingredientName) {
+        assert ingredientName != null : "ingredientName cannot be null";
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + ingredientName + " has been removed!" + System.lineSeparator()
+                + LINE_DIVIDER);
     }
 
     public void printIngrListGraph(ArrayList<Ingredient> ingredientList) {
+        assert ingredientList != null : "ingredientList cannot be null";
         double max = IngredientList.getGreatestWaste();
-        System.out.println("Here are the dishes you have: ");
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Here are the dishes you have: ");
         for (int i = 0; i < ingredientList.size(); i++) {
             System.out.println((i + 1) + ". " + ingredientList.get(i).toGraph(max));
         }
-        System.out.println("You can use command 'add' to add new dishes!");
+        System.out.println("You can use command 'add' to add new dishes!" + System.lineSeparator()
+                + LINE_DIVIDER);
     }
 
     public void printMatchedDishes(ArrayList<Dish> matchedDishList) {
@@ -290,5 +327,34 @@ public class Ui {
             }
         }
         System.out.println(LINE_DIVIDER);
+    }
+
+    public void printAddedConstituentOf(String ingredientName, String dishName) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Successfully added " + ingredientName + " as ingredient of " + dishName + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printFindMissingParamMsg() {
+        System.out.println(FIND_MISSING_PARAM);
+    }
+
+    public void printFindIncorrectParamMsg() {
+        System.out.println(FIND_INCORRECT_PARAM);
+    }
+
+    public void printWastage(String name, double wastage) {
+        System.out.println("Wastage of " + name + " is now " + wastage + " kg");
+    }
+
+    public void printStorage(String name, double storage) {
+        System.out.println("Storage of " + name + " is now " + storage + " kg");
+    }
+
+    public void clearTerminal() {
+        for (int i = 0; i < 1000; i++) {
+            System.out.println("");
+        }
+        System.out.flush();
     }
 }

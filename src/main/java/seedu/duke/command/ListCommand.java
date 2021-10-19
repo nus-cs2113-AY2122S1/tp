@@ -19,18 +19,12 @@ public class ListCommand extends Command {
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         switch (parameters.get(0)) {
         case "dish":
-            System.out.println(ui.getLineDivider());
             DishList.list();
-            System.out.println(ui.getLineDivider());
-
             isDish = true;
             break;
 
         case "ingr":
-            System.out.println(ui.getLineDivider());
             IngredientList.list();
-            System.out.println(ui.getLineDivider());
-            
             isIngr = true;
             break;
 
@@ -38,7 +32,6 @@ public class ListCommand extends Command {
             isOther = true;
             throw new FoodoramaException("Sorry, please input: list [TYPE]." + System.lineSeparator()
                     + "[TYPE]: dish to list dishes, ingr to list ingredients.");
-            //System.out.println(ui.getListMissingParamMsg());
         }
     }
 }

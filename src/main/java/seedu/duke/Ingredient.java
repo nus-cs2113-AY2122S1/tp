@@ -1,7 +1,12 @@
 package seedu.duke;
 
+import seedu.duke.exceptions.FoodoramaException;
+
+import java.util.Scanner;
+
 public class Ingredient {
 
+    private Ui ui = new Ui();
     private String ingredientName;
     private double ingredientWeight;
     private double ingredientWasteIngr;
@@ -23,15 +28,33 @@ public class Ingredient {
         return ingredientName;
     }
 
-    public void updateIngredientWeight(double weightChange) {
-        ingredientWeight += weightChange;
-        System.out.println("Storage of " + ingredientName + " is now " + ingredientWeight + " kg");
+    public void updateIngredientWeight() throws FoodoramaException {
+        System.out.println("Enter the weight of " + ingredientName + " in KG:");
+        Scanner in = new Scanner(System.in);
+        String inputIngredientWeight = in.nextLine();
+        double ingredientWeightValue;
+        try {
+            ingredientWeightValue = Double.parseDouble(inputIngredientWeight);
+        } catch (NumberFormatException e) {
+            throw new FoodoramaException("Sorry, please input a valid number.");
+        }
+        ingredientWeight += ingredientWeightValue;
+        ui.printStorage(ingredientName, ingredientWeight);
     }
 
-    public void addWaste(Double waste) {
-        ingredientWasteIngr += waste;
+    public void addWaste() throws FoodoramaException {
+        System.out.println("Enter the wastage of " + ingredientName + " in KG:");
+        Scanner in = new Scanner(System.in);
+        String ingredientWeight = in.nextLine();
+        double ingredientWeightValue;
+        try {
+            ingredientWeightValue = Double.parseDouble(ingredientWeight);
+        } catch (NumberFormatException e) {
+            throw new FoodoramaException("Sorry, please input a valid number.");
+        }
+        ingredientWasteIngr += ingredientWeightValue;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
-        System.out.println("Wastage of " + ingredientName + " is now " + totalWaste + " kg");
+        ui.printWastage(ingredientName, totalWaste);
     }
 
     public double getWastage() {
@@ -59,9 +82,9 @@ public class Ingredient {
     public String toGraph(double max) {
         double wastage = ingredientWasteDish + ingredientWasteDish;
         String bar = "[";
-        int num = (int)(10 * wastage/max);
+        int num = (int)(10 * wastage / max);
         for (int i = 0; i < 10; i++) {
-            if(i < num) {
+            if (i < num) {
                 bar = bar + "█";
             } else  {
                 bar = bar + " ";

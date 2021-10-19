@@ -14,15 +14,11 @@ public class GraphCommand extends Command {
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         switch (parameters.get(0)) {
         case "dish":
-            System.out.println(ui.getLineDivider());
             DishList.graph();
-            System.out.println(ui.getLineDivider());
             break;
 
         case "ingr":
-            System.out.println(ui.getLineDivider());
             IngredientList.graph();
-            System.out.println(ui.getLineDivider());
             break;
 
         default:

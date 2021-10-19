@@ -3,17 +3,18 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.DishList;
 import seedu.duke.IngredientList;
+import seedu.duke.exceptions.FoodoramaException;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ClearAllCommandTest {
 
     @Test
-    void execute() {
+    void execute() throws FoodoramaException {
         ArrayList<String> inputParamsDish = new ArrayList<>();
         inputParamsDish.add("chicken rice");
         Command testAddDishCommand = new AddDishCommand();
