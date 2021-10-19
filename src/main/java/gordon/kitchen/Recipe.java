@@ -27,6 +27,10 @@ public class Recipe {
         return name;
     }
 
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
     public void setTimes(int prepTime, int cookTime) {
         preparationTime = prepTime;
         cookingTime = cookTime;
@@ -98,12 +102,17 @@ public class Recipe {
     public String toString() {
         StringBuilder outputString = new StringBuilder(name + System.lineSeparator());
 
-        outputString.append("Calories:").append(calories).append("kcal").append(System.lineSeparator());
-
         if (difficulty != Difficulty.None) {
             outputString.append("Difficulty: ")
                     .append(System.lineSeparator())
                     .append(difficulty)
+                    .append(System.lineSeparator());
+        }
+
+        if (calories > -1) {
+            outputString.append("Calories (kcal): ")
+                    .append(System.lineSeparator())
+                    .append(calories)
                     .append(System.lineSeparator());
         }
 

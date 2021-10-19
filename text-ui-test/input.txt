@@ -17,6 +17,10 @@ set fried fish /calories 250
 check fried fish
 set fried fish /calories xyz
 set meatballs /calories 150
+set caprese /difficulty easy
+check caprese
+set meatballs /difficulty medium
+set fish /difficulty insane
 delete 5
 delete cookies
 delete 2

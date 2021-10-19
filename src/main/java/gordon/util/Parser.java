@@ -9,6 +9,7 @@ import gordon.command.HelpCommand;
 import gordon.command.ListCommand;
 import gordon.command.NullCommand;
 import gordon.command.SetCaloriesCommand;
+import gordon.command.SetDifficultyCommand;
 import gordon.exception.GordonException;
 import gordon.kitchen.Recipe;
 
@@ -162,7 +163,23 @@ public class Parser {
             } catch (NumberFormatException e) {
                 throw new GordonException(GordonException.INDEX_INVALID);
             }
-        case "tags":
+        case "difficulty":
+            try {
+                Difficulty newDifficulty = null;
+                String difficultyString = splitContent[1].substring(spaceIndex + 1).trim();
+                for (Difficulty d : Difficulty.values()) {
+                    if (d.name().equalsIgnoreCase(difficultyString)) {
+                        newDifficulty = d;
+                    }
+                }
+                if (newDifficulty == null) {
+                    throw new GordonException(GordonException.INVALID_DIFFICULTY);
+                } else {
+                    return new SetDifficultyCommand(recipeName, newDifficulty);
+                }
+            } catch (NumberFormatException e) {
+                throw new GordonException(GordonException.INDEX_INVALID);
+            }
         default:
             throw new GordonException(GordonException.COMMAND_INVALID);
         }

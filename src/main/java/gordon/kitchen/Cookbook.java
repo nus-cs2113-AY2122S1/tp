@@ -1,6 +1,7 @@
 package gordon.kitchen;
 
 import gordon.exception.GordonException;
+import gordon.util.Difficulty;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -76,6 +77,19 @@ public class Cookbook {
             // .* uses all characters except line break
             if (recipe.getName().matches("(?i).*" + name + ".*")) {
                 recipe.setCalories(newCalories);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
+
+    public void setDifficulty(String name, Difficulty newDifficulty) throws GordonException {
+        for (Recipe recipe : recipes) {
+            // (?i) enables case insensitivity
+            // .* uses all characters except line break
+            if (recipe.getName().matches("(?i).*" + name + ".*")) {
+                recipe.setDifficulty(newDifficulty);
                 return;
             }
         }
