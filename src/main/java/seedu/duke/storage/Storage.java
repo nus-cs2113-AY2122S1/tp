@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,7 +55,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println("\tCannot open the saved memory file!");
         } catch (DukeException e) {
-            System.out.println("\tWrong ingredient format!");
+            System.out.println(e.getMessage());
         }
 
         return extractedIngredients;
@@ -71,7 +72,9 @@ public class Storage {
             LocalDate ingredientExpiry = Ingredient.stringToDate(ingredientDetails[3].trim());
             return new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
         } catch (NumberFormatException e) {
-            throw new DukeException("Wrong ingredient format!");
+            throw new DukeException("Wrong ingredient amount format!");
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Wrong expiry date format!");
         }
     }
 
