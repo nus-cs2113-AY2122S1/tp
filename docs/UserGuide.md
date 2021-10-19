@@ -2,7 +2,9 @@
 
 ## Introduction
 
-StonksXD is a ...
+StonksXD is a smart and user-friendly financial tracker that allows students to easily organise their expenditures and sources of income.
+
+It hosts a vast array of commands that allows any CLI enthusiast to manage a list of their various finances, without the need for mental notes or accounting after a day's worth of spending.
 
 ## Table of Contents
 
@@ -17,6 +19,11 @@ StonksXD is a ...
     - [Delete income entry: `del_in`](#delete-income-entry-del_in)
     - [List all income entries: `list_in`](#list-all-income-entries-list_in)
     - [View total income: `total_in`](#view-total-income-total_in)
+    - [Find entry using date: `find YYYY-MM-DD`](#find-entry-using-date-find YYYY-MM-DD)
+    - [Find entry using keyword: `find KEYWORD`](#find-entry-using-keyword-find KEYWORD)
+    - [View total balance: `balance`](#view-total-balance-balance)
+    - [Show total income between 2 dates: `btw_in s/START_DATE e/END_DATE`](#show-total-income-between-2-dates-btw_in)
+    - [To terminate program: `end`](#to-terminate-program-end)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -39,7 +46,9 @@ show you all the available commands and their format.
 ### View all possible commands: `help`
 Shows a list of all possible commands.
 
-Format: `help
+Format: `help`
+
+<br>
 
 ### Create expense entry: `add_ex`
 Adds an expense entry.
@@ -53,25 +62,141 @@ Examples:
 
 - `add_ex d/KFC lunch a/10.20` Adds an expense entry regarding lunch that costs $10.20.
 
+<br>
+
 ### Delete expense entry: `del_ex`
 
+Delete unwanted expense entries by providing the index of said entry.
+
+Format: `del_ex i/INDEX`
+
+- `INDEX` has to be non-empty.
+- `INDEX` has to be a valid non-negative integer.
+
+Examples:
+
+- `del_ex i/1` Deletes the 1st entry from the expense list.
+
+<br>
 
 ### List all expense entries: `list_ex`
 
+Displays the previously added expense entries in the form of a list.
+
+Format: `list_ex`
+
+<br>
 
 ### View total expense: `total_ex`
 
+Displays the total amount of all expenses in your list.
+
+Format: `total_ex`
+
+<br>
 
 ### Create income entry: `add_in`
 
+Adds an income entry.
+
+Format: `add_in d/DESCRIPTION a/AMOUNT`
+
+- `DESCRIPTION` has to be non-empty.
+- `AMOUNT` has to be a positive amount.
+
+Examples:
+
+- `add_in d/Allowance a/1000` Adds an income entry regarding an allowance of $1000.
+
+<br>
 
 ### Delete income entry: `del_in`
 
+Delete unwanted income entries by providing the index of said entry.
+
+Format: `del_in i/INDEX`
+
+- `INDEX` has to be non-empty.
+- `INDEX` has to be a valid non-negative integer.
+
+Examples:
+
+- `del_in i/1` Deletes the 1st entry from the income list.
+
+<br>
 
 ### List all income entries: `list_in`
 
+Displays the previously added income entries in the form of a list.
+
+Format: `list_in`
+
+<br>
 
 ### View total income: `total_in`
+
+Displays the total amount of all income entries in your list.
+
+Format: `total_in`
+
+<br>
+
+### Find entry using date: `find YYYY-MM-DD`
+
+Finds and displays the income or expense entries recorded on the given date.
+
+Format: `find YYYY-MM-DD`
+
+- `YYYY-MM-DD` has to be a valid non-empty date
+- `YYYY-MM-DD` has to be positive
+
+Examples:
+
+- `find 1999-07-23` returns income and/or expense entries recorded on the given date.
+
+<br>
+
+### Find entry using keyword: `find KEYWORD`
+
+Finds and displays the income or expense entries that contain the given keyword.
+
+Format: `find KEYWORD`
+
+- `KEYWORD` has to be a non-empty
+- `KEYWORD` can be any alpha-numeric string
+
+Examples:
+
+- `find FOOD` returns income and/or expense entries that contain the keyword `FOOD` in their description.
+
+<br>
+
+### View total balance: `balance`
+
+Shows the net balance you have leftover from your expenses and incomes.
+
+Format: `balance`
+
+<br>
+
+### Show total income between 2 dates: `btw_in`
+
+Shows the total income you had accumulated during a given time period.
+
+Format: `btw_in s/START_DATE e/END_DATE`
+
+- `START_DATE` & `END_DATE` are of the form YYYY-MM-DD
+- `START_DATE` & `END_DATE` have to be valid and non-empty
+
+Examples: `btw_in s/1987-12-06 e/1999-11-21` will return the total income of all entries between the given dates.
+
+<br>
+
+### Terminate program: `end`
+
+Exits the program when the user is done.
+
+Format: `end`
 
 
 ## FAQ
