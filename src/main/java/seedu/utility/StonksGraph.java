@@ -45,11 +45,11 @@ public class StonksGraph {
     }
 
 
-    private void writeToGraph(int rowCounnt,int colCount, String toAdd) {
+    private void writeToGraph(int rowCount, int colCount, String toAdd) {
         int stringLength = toAdd.length();
         int i = 0;
         while (i < stringLength) {
-            grid[rowCounnt][colCount] = toAdd.charAt(i);
+            grid[rowCount][colCount] = toAdd.charAt(i);
             colCount++;
             i++;
         }

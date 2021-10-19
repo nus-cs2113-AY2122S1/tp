@@ -93,7 +93,6 @@ public class Ui {
         printLine();
     }
 
-
     /**
      * Prints the filtered list of incomes in the financial tracker to the standard output.
      *
@@ -134,8 +133,7 @@ public class Ui {
 
         int i = 1;
         for (Entry entry : filteredEntries) {
-            System.out.print(i + ": ");
-            System.out.println(entry);
+            System.out.print(i + ": " + entry + newLine);
             i++;
         }
     }
@@ -147,8 +145,7 @@ public class Ui {
 
         int i = 1;
         for (Income income : incomes) {
-            System.out.print(i + ": ");
-            System.out.println(income);
+            System.out.print(i + ": " + income + newLine);
             i++;
         }
     }
@@ -160,8 +157,7 @@ public class Ui {
 
         int i = 1;
         for (Expense expense : expenses) {
-            System.out.print(i + ": ");
-            System.out.println(expense);
+            System.out.print(i + ": " + expense + newLine);
             i++;
         }
     }
@@ -175,34 +171,6 @@ public class Ui {
         assert totalExpense >= 0;
         printLine();
         System.out.printf("Your total expense is: $%.2f" + newLine, totalExpense);
-        printLine();
-    }
-
-    public void printTotalExpenseBetween(double totalExpense, LocalDate start, LocalDate end) {
-        printLine();
-        if (totalExpense == 0) {
-            System.out.printf("You do not have any expense between " 
-                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + newLine);
-        } else {
-            System.out.printf("Your total expense between " 
-                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f" + newLine, totalExpense);
-        }
-        printLine();
-    }
-
-    public void printTotalIncomeBetween(double totalExpense, LocalDate start, LocalDate end) {
-        printLine();
-        if (totalExpense == 0) {
-            System.out.printf("You do not have any income between " 
-                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + newLine);
-        } else {
-            System.out.printf("Your total income between " 
-                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f" + newLine, totalExpense);
-        }
         printLine();
     }
 
@@ -224,8 +192,6 @@ public class Ui {
         printLine();
     }
     
-    
-    
     /**
      * Prints the feedback message for adding an expense to the financial tracker.
      *
@@ -233,8 +199,7 @@ public class Ui {
      */
     public void printExpenseAdded(Expense expense) {
         printLine();
-        System.out.println("Your most recent spending: ");
-        System.out.println(expense);
+        System.out.println("Your most recent spending: " + newLine + expense);
         printLine();
     }
 
@@ -245,8 +210,7 @@ public class Ui {
      */
     public void printExpenseDeleted(Expense expense) {
         printLine();
-        System.out.println("You removed this: ");
-        System.out.println(expense);
+        System.out.println("You removed this: " + newLine + expense);
         printLine();
     }
 
@@ -257,8 +221,7 @@ public class Ui {
      */
     public void printIncomeAdded(Income income) {
         printLine();
-        System.out.println("Your most recent earning: ");
-        System.out.println(income);
+        System.out.println("Your most recent earning: " + newLine + income);
         printLine();
     }
 
@@ -269,9 +232,59 @@ public class Ui {
      */
     public void printIncomeDeleted(Income income) {
         printLine();
-        System.out.println("You removed this: ");
-        System.out.println(income);
+        System.out.println("You removed this: " + newLine + income);
         printLine();
+    }
+
+
+    public void printTotalExpenseBetween(double totalExpense, LocalDate start, LocalDate end) {
+        printLine();
+        if (totalExpense == 0) {
+            printNoExpenseBetweenMessage(start, end);
+        } else {
+            printExpenseBetweenMessage(totalExpense, start, end);
+        }
+        printLine();
+    }
+
+
+    public void printTotalIncomeBetween(double totalExpense, LocalDate start, LocalDate end) {
+        printLine();
+        if (totalExpense == 0) {
+            printNoIncomeBetweenMessage(start, end);
+        } else {
+            printIncomeBetweenMessage(totalExpense, start, end);
+        }
+        printLine();
+    }
+
+    private void printExpenseBetweenMessage(double totalExpense, LocalDate start, LocalDate end) {
+        String startString = start.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        String endString = end.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        System.out.printf("Your total expense between %s and %s is $%.2f", startString, endString, totalExpense);
+        System.out.print(newLine);
+    }
+
+    private void printNoExpenseBetweenMessage(LocalDate start, LocalDate end) {
+        String startString = start.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        String endString = end.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        System.out.printf("You do not have any expense between %s and %s", startString, endString);
+        System.out.print(newLine);
+    }
+
+    private void printIncomeBetweenMessage(double totalExpense, LocalDate start, LocalDate end) {
+        String startString = start.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        String endString = end.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        System.out.printf("Your total income between %s and %s is $%.2f", startString, endString, totalExpense);
+        System.out.print(newLine);
+    }
+
+    private void printNoIncomeBetweenMessage(LocalDate start, LocalDate end) {
+        String startString = start.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        String endString = end.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        System.out.printf("You do not have any income between %s and %s", startString, endString);
+        System.out.print(newLine);
+
     }
 
     /**
