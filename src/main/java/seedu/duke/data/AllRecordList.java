@@ -86,6 +86,14 @@ public class AllRecordList {
         return allRecordList.get(month).getExpenditure(index);
     }
 
+    public boolean checkOverspending(int month) {
+        return allRecordList.get(month).checkOverspending();
+    }
+
+    public int getMonthListSize(int month) {
+        return allRecordList.get(month).getSize();
+    }
+
     /*public int getAllSize() {
         int size = 0;
         for (RecordList monthList : allRecordList) {
