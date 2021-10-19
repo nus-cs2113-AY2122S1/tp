@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.EmptyTasklistException;
+import seedu.duke.exception.ListFormatException;
+import seedu.duke.exception.MissingFilterArgumentException;
 import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.type.Deadline;
@@ -40,8 +42,12 @@ class TaskManagerTest {
         try {
             System.out.println("Testing List Command");
             System.out.println(TaskManager.listTasklist(listArguments));
-        } catch (EmptyTasklistException e) {
-            System.out.println(e);
+        } catch (EmptyTasklistException ete) {
+            System.out.println(ete);
+        } catch (ListFormatException lfe) {
+            System.out.println(lfe);
+        } catch (MissingFilterArgumentException mfae) {
+            System.out.println(mfae);
         }
     }
 
