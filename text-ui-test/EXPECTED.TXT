@@ -19,6 +19,7 @@ date: 2021-10-19
 Amount Spent: 8.00
 People involved: [yikai, yuzhao]
 Category: food
+
 Enter your command: Sorry, no such expense number exists. Please check your expense number and try again.
 Enter your command: Your expense of 8.0 has been successfully removed
 Enter your command: Sorry, no such expense number exists. Please check your expense number and try again.
