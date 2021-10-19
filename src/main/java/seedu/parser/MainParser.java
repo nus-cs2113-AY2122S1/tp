@@ -43,6 +43,7 @@ public class MainParser {
     private ContactParser contactParser;
     private final AddContactParser addContactParser = new AddContactParser();
     private final EditContactParser editContactParser = new EditContactParser();
+    private final SearchContactParser searchContactParser = new SearchContactParser();
 
     public Command parseCommand(String userInput) {
         String commandType = getCommandWord(userInput);
@@ -183,5 +184,14 @@ public class MainParser {
 
     //@@author ng-andre
     private Command parseSearchCommand(String userInput) {
+        try {
+            String query = searchContactParser.parseSearchQuery(userInput);
+            int detailFlag = searchContactParser.getDetailFlag(userInput);
+            return new SearchContactCommand(query, detailFlag);
+        } catch (MissingArgException e) {
+            return new FailedCommand(FailedCommandType.MISSING_ARG);
+        } catch (InvalidFlagException e) {
+            return new FailedCommand(FailedCommandType.INVALID_FLAG);
+        }
     }
 }
