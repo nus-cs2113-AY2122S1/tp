@@ -139,11 +139,11 @@ public class ModuleStorage {
         ContentManager<Note> contentManager = moduleManager.getModule(mod).getContentManager(Note.class);
         contentManager.purgeData();
         for (File file : listOfFiles) {
-            if (file.isFile() && CommonUtils.isValidFileName(CommonUtils.getFileNameOnly(file.getName()))) {
+            if (isValidFile(file)) {
                 contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
-                        Files.readString(
-                                Paths.get(modDirPath.toString(), file.getName()), StandardCharsets.US_ASCII)));
+                        Files.readString(Paths.get(file.getAbsolutePath()), StandardCharsets.US_ASCII)));
             }
+
         }
     }
 
@@ -232,6 +232,22 @@ public class ModuleStorage {
             deleteAllFilesInDirectory(modDirPath);
         }
         return true;
+    }
+
+    private boolean isValidFile(File file) throws IOException {
+        boolean isValid = true;
+        if (!file.isFile()) {
+            isValid = false;
+        } else if (!CommonUtils.isValidFileName(CommonUtils.getFileNameOnly(file.getName()))) {
+            isValid = false;
+        } else if (!isValidFileSize(file)) {
+            isValid = false;
+        }
+        return isValid;
+    }
+
+    private boolean isValidFileSize(File file) throws IOException {
+        return Files.size(Paths.get(file.getAbsolutePath())) <= CommonFormat.MAX_FILE_SIZE;
     }
 
 

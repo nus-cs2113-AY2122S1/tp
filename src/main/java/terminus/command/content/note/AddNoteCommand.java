@@ -104,6 +104,9 @@ public class AddNoteCommand extends Command {
         } else if (!CommonUtils.isValidFileName(argArray.get(0))) {
             TerminusLogger.warning("Failed to parse arguments: given note name is invalid");
             isValid = false;
+        } else if (argArray.get(1).length() > CommonFormat.MAX_FILE_SIZE) {
+            TerminusLogger.warning("Failed to parse arguments: given note data is too long");
+            isValid = false;
         }
         return isValid;
     }

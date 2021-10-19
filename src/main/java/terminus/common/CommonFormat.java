@@ -39,4 +39,5 @@ public class CommonFormat {
     public static final int MAX_FILENAME_LENGTH = 30;
     public static final int STARTING_ASCII = 32;
     public static final int ENDING_ASCII = 126;
+    public static final long MAX_FILE_SIZE = 1000000;
 }
