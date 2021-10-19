@@ -3,6 +3,7 @@
 * [Acknowledgements](#acknowledgements)
 * [Getting Started](#getting-started)
 * [Design](#design)
+  * [Architecture](#architecture)
 * [Appendix: Requirements](#appendix-requirements)
   * [Product Scope](#product-scope)
   * [User Stories](#user-stories)
