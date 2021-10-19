@@ -206,4 +206,9 @@ public class FinancialTracker {
     public Income getIncome(int incomeIndex) {
         return incomes.get(incomeIndex);
     }
+    
+    public void clearAllEntries() {
+        expenses.clear();
+        incomes.clear();
+    }
 }
