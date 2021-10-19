@@ -26,7 +26,8 @@ public class StockManager {
                 continue;
             }
             boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
-            if (isSameMedicineName) {
+            boolean isDeleted = ((Stock) medicine).isDeleted();
+            if (isSameMedicineName && !isDeleted) {
                 existingQuantity += medicine.getQuantity();
             }
         }
@@ -47,7 +48,8 @@ public class StockManager {
                 continue;
             }
             boolean isSameMedicineName = medicine.getMedicineName().equalsIgnoreCase(name);
-            if (isSameMedicineName) {
+            boolean isDeleted = ((Stock) medicine).isDeleted();
+            if (isSameMedicineName && !isDeleted) {
                 existingMaxQuantity = ((Stock) medicine).getMaxQuantity();
                 break;
             }
@@ -72,6 +74,7 @@ public class StockManager {
             }
         }
         assert (stock != null) : "Expected a stock object but none extracted";
+        assert (stock.isDeleted() == false) : "Stock object should not be deleted";
         return stock;
     }
 
@@ -85,12 +88,13 @@ public class StockManager {
     public static ArrayList<Stock> getFilteredStocksByName(ArrayList<Medicine> medicines, String stockName) {
         ArrayList<Stock> filteredStocks = new ArrayList<>();
         for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Stock)) {
+                continue;
+            }
             boolean isSameName = medicine.getMedicineName().equalsIgnoreCase(stockName);
-            if (medicine instanceof Stock && isSameName) {
-                boolean isDeleted = ((Stock) medicine).isDeleted();
-                if (!isDeleted) {
-                    filteredStocks.add((Stock) medicine);
-                }
+            boolean isDeleted = ((Stock) medicine).isDeleted();
+            if (isSameName && !isDeleted) {
+                filteredStocks.add((Stock) medicine);
             }
         }
         return filteredStocks;
