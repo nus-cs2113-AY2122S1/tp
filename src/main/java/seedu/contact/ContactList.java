@@ -1,6 +1,7 @@
 package seedu.contact;
 
 import seedu.exception.InvalidFlagException;
+import seedu.ui.TextUi;
 
 import java.util.ArrayList;
 
@@ -62,36 +63,37 @@ public class ContactList {
 
     //@@author ng-andre
     public void searchContact(String query, int detailType) throws InvalidFlagException {
-        for (Contact contact : contacts) {
+        for (int i = 0; i < contacts.size(); i++) {
+            Contact contact = getContactAtIndex(i);
             switch (detailType) {
             case NAME_INDEX:
                 if (contact.getName().toLowerCase().contains(query)) {
-                    System.out.println(true);
+                    TextUi.viewContactMessage(contact, i);
                 }
                 break;
             case GITHUB_INDEX:
                 if (contact.getGithub().toLowerCase().contains(query)) {
-                    System.out.println(true);
+                    TextUi.viewContactMessage(contact, i);
                 }
                 break;
             case LINKEDIN_INDEX:
                 if (contact.getLinkedin().toLowerCase().contains(query)) {
-                    System.out.println(true);
+                    TextUi.viewContactMessage(contact, i);
                 }
                 break;
             case TELEGRAM_INDEX:
                 if (contact.getTelegram().toLowerCase().contains(query)) {
-                    System.out.println(true);
+                    TextUi.viewContactMessage(contact, i);
                 }
                 break;
             case TWITTER_INDEX:
                 if (contact.getTwitter().toLowerCase().contains(query)) {
-                    System.out.println(true);
+                    TextUi.viewContactMessage(contact, i);
                 }
                 break;
             case EMAIL_INDEX:
                 if (contact.getEmail().toLowerCase().contains(query)) {
-                    System.out.println(true);
+                    TextUi.viewContactMessage(contact, i);
                 }
                 break;
             default:
