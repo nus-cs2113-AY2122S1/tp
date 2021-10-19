@@ -2,7 +2,8 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
+original source as well}
 
 ## Design
 
@@ -22,28 +23,62 @@
 
 ### Main Logic
 
+The main application logic shows how the commands are handled throughout the application. Below is the outline of the
+logic:
+
+* MediVault is called by the `main` method which calls the constructor of MediVault. Data is then loaded from the
+  `Storage` class to the application.
+* MediVault gets the user input via the `Ui` class and uses the `CommandParser` class to parse the input given by the
+  user.
+* The parameters will be parsed to a `LinkedHashMap` to make the parameters easily accessible.
+* If a valid command is received, the `CommandParser` will call the `Command` object constructor and return the object
+  to MediVault.
+* MediVault will then invoke the `execute()` function of the `Command` object to execute the command.
+* Should there be an invalid command, `CommandParser` will throw `InvalidCommand` and MediVault will display the error
+  message using the `Ui` class.
+
+Given below is the sequence diagram for the interactions within the main application logic.
+
+![MainLogicSequenceDiagram](diagrams/diagram_images/MainLogicSequenceDiagram.png)
+
 ### AddStockCommand
 
 ### DeleteStockCommand
 
-### ListStockCommand
+### ListCommand
+
+There are three variations of the list command.
+
+1. `liststock`
+2. `listdispense`
+3. `listorders`
+
+The sequence diagram below shows how the `list` operation works.
+
+![ListSequenceDiagram](diagrams/diagram_images/ListSequenceDiagram.png)
+
+Note: Replace `*` with `Stock`, `Dispense` or `Order` depending on the command entered.
+
+All three variations of `list` are similar as they are implemented by iterating through the `Medicine` ArrayList and
+filtering out the respective object types. If the parameter `sort` or `rsort` is provided, the respective constructor of
+the `Comparator` classes will be invoked to help sort the ArrayList. At the end of the execution the
+respective `print()` method from the `Ui` class will be called to display the respective tables.
 
 ### UpdateStockCommand
 
 MediVault initialises an UpdateStockCommand class when CommandParser identifies the
 `updatestock` or the `update` keyword in the `stock` mode.
 
-* MediVault updates medicine stock information when `parameter` and `parameterValues` provided
-by the user are valid. 
-* MediVault conducts another validation check on the provided `quantity`,`max_quantity` and `expiry` 
-against the stored medicine stock information.
-
+* MediVault updates medicine stock information when `parameter` and `parameterValues` provided by the user are valid.
+* MediVault conducts another validation check on the provided `quantity`,`max_quantity` and `expiry`
+  against the stored medicine stock information.
 
 The sequence diagram for UpdateStockCommand is shown below.
 
 ![UpdateStockSequenceDiagram](diagrams/diagram_images/UpdateStockSequenceDiagram.png)
 
 ## Product scope
+
 ### Target user profile
 
 * pharmacist handling storing, ordering and dispensing of medication
