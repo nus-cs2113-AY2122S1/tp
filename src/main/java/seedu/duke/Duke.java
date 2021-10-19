@@ -6,6 +6,7 @@ import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
 import seedu.duke.storage.Storage;
+import seedu.duke.ui.Ui;
 import seedu.duke.universities.UniversityList;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Duke {
         Scanner in = new Scanner(System.in);
 
         try {
+            Ui.Welcome();
             UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
             ModuleList moduleMasterList = new ModuleList(Storage.loadModules());//ArrayList<>(Storage.loadModules());
             UniversityList universitySelectedList = new UniversityList();
