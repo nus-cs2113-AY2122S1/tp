@@ -6,15 +6,8 @@ public class Staff extends Person {
         super.personType = PersonType.STAFF;
     }
 
-    public int getStaffId() {
-        return super.getPersonId();
-    }
-
-    public void setStaffId(int staffId) {
-        super.setPersonId(staffId);
-    }
-
+    @Override
     public String toString() {
-        return "Staff ID: " + getStaffId() + " " + super.toString();
+        return "Staff ID: " + getPersonId() + " " + super.toString();
     }
 }

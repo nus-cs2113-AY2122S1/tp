@@ -10,6 +10,7 @@ public class EditStaffCommand extends EditCommand {
     public EditStaffCommand(int staffId, Staff staff) {
         super(staffId, staff);
     }
+
     @Override
     public void execute(PersonList personList, Ui ui) throws MedBotException {
         personList.editPerson(personId, person);
