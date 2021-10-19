@@ -186,11 +186,13 @@ public class ModuleStorage {
      *
      * @param directoryPath Directory path where all files inside will be deleted.
      */
-    private void deleteAllFilesInDirectory(Path directoryPath) {
+    private void deleteAllFilesInDirectory(Path directoryPath) throws IOException {
         File folder = new File(directoryPath.toString());
         File[] listOfFiles = folder.listFiles();
         for (File file : listOfFiles) {
-            file.delete();
+            if(!file.delete()){
+                throw new IOException("Unable to delete file");
+            };
         }
     }
 

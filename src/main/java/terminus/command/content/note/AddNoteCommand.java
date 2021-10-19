@@ -67,6 +67,7 @@ public class AddNoteCommand extends Command {
      * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
+     * @throws IOException when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
     public CommandResult execute(Ui ui, ModuleManager moduleManager) throws IOException {
         assert getModuleName() != null;

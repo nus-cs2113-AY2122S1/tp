@@ -1,5 +1,6 @@
 package terminus.command;
 
+import java.io.IOException;
 import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
 import terminus.common.Messages;
@@ -54,7 +55,7 @@ public class GoCommand extends WorkspaceCommand {
 
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         NusModule module = moduleManager.getModule(moduleName);
         if (module == null) {
             throw new InvalidArgumentException("Module not found! Type 'module view' for the list of modules.");

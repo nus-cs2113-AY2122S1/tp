@@ -129,7 +129,16 @@ public class CommonUtils {
      */
     public static boolean isValidFileName(String name) {
         try {
+            if (name.length() > CommonFormat.MAX_FILENAME_LENGTH) {
+                return false;
+            }
             Paths.get(name);
+            boolean isOnlyAscii = name.chars()
+                    .allMatch(c -> CommonFormat.STARTING_ASCII <= c && c <= CommonFormat.ENDING_ASCII);
+            boolean hasIllegalChar = name.chars().anyMatch(x -> CommonFormat.ILLEGAL_CHARACTERS.contains((char) x));
+            if (!isOnlyAscii || hasIllegalChar) {
+                return false;
+            }
             return true;
         } catch (InvalidPathException e) {
             return false;
@@ -143,7 +152,7 @@ public class CommonUtils {
      * @return A string of the file name without its file extension.
      */
     public static String getFileNameOnly(String filename) {
-        String[] string = filename.split("\\.");
+        String[] string = filename.split("\\" + CommonFormat.EXTENSION_TEXT_FILE);
         return string[0];
     }
 }

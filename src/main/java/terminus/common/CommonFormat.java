@@ -1,6 +1,9 @@
 package terminus.common;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * CommonFormat class that contains formats that are used across different packages.
  */
@@ -30,4 +33,10 @@ public class CommonFormat {
     public static final String SPACE_NEGATED_DELIMITER = "\\S+";
 
     public static final String EXTENSION_TEXT_FILE = ".txt";
+
+    public static final ArrayList<Character> ILLEGAL_CHARACTERS = new ArrayList<>(
+            Arrays.asList('/', '\n', '\r', '\t', '\0', '\f', '`', '?', '*', '\\', '<', '>', '|', '\"', ':', '.'));
+    public static final int MAX_FILENAME_LENGTH = 30;
+    public static final int STARTING_ASCII = 32;
+    public static final int ENDING_ASCII = 126;
 }
