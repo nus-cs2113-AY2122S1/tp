@@ -1,6 +1,6 @@
-# Developer Guide
+# Developer Guide for SITUS
 
-PUT LINKS TO ALL PARTS HERE
+
 
 ## Acknowledgements
 
@@ -9,19 +9,47 @@ PUT LINKS TO ALL PARTS HERE
 * [HighWater Design Specification Document](http://www.cci.drexel.edu/seniordesign/2016_2017/HighWater/HighWaterDesignDocument.pdf) - Reference
 * [FDsys System Design Document](https://www.govinfo.gov/media/FDsys_Architecture.pdf) - Reference
 
-## Introduction
+## Table of contents
+[1. Introduction](#1-introduction) <br>
+&nbsp;&nbsp;[1.1. Purpose](#11-purpose) <br>
+&nbsp;&nbsp;[1.2. Audience](#12-audience) <br>
+[2. First-time setup](#2-first-time-setup) <br>
+&nbsp;&nbsp;[2.1. Prerequisites](#21-prerequisites) <br>
+&nbsp;&nbsp;[2.2. Setting up the project on the computer](#22-setting-up-the-project-on-the-computer) <br>
+[3. Design](#3-design) <br>
+&nbsp;&nbsp;[3.1. Architecture](#31-architecture) <br>
+[4. Implementation](#4-implementation) <br>
+&nbsp;&nbsp;[4.1. Alerts](#41-alerts) <br>
 
-### Purpose
+## 1. Introduction
+
+### 1.1. Purpose
 This document specified the architectural and software design decisions in the implementation of the Smart Inventory
 Tracking and Updating System (SITUS).
 
-### Audience
+### 1.2. Audience
 The intended audience for this document are developers looking to introduce new functionalities based on their needs.
 
+## 2. First-time setup
+### 2.1. Prerequisites
+1. **Java JDK 11** installed on computer
+2. **IntelliJ IDEA** most recent version
 
-## Design
+### 2.2. Setting up the project on the computer
+1. Clone **this** repo onto your computer.
+2. Open IntelliJ (if you are not in welcome screen, click **`File`** > **`Close Project`** to close the existing project first).
+3. Set up the correct JDK 11 for IntelliJ.
+   1. Click **`File`** > **`Project Structure..`** > **`Project`**.
+   2. Click the arrow drop-down button in **`Project SDK`**.
+   3. Choose **`11 Amazon Correcto version 11.0.12`**.
+   4. In the same dialog, set the Project language level field to the SDK default option.
+   5. Click **`Apply`** and **`OK`**.
+4. Click **`File`** > **`Open`** 
+5. Locate and select the cloned project directory.
+6. Accept all defaults as prompted by IntelliJ.
+## 3. Design
 
-### Architecture
+### 3.1. Architecture
 
 The **_Architecture Diagram_** above explains the high-level design of the application.
 
@@ -44,11 +72,11 @@ enters the input `add n/carrot a/1 e/2021-11-12`
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-## Implementation
+## 4. Implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
-### Alerts
+### 4.1. Alerts
 
 On startup, the `Alerts` class is instantiated and its `getAlerts()` method is called. There are 2 types of alerts:
 
