@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
-import javax.imageio.IIOException;
 import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
 import terminus.common.Messages;
@@ -131,8 +130,7 @@ public class ModuleStorage {
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void loadNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
-        Path modDirPath;
-        modDirPath = Paths.get(filePath.getParent().toString(), mod);
+        Path modDirPath = Paths.get(filePath.getParent().toString(), mod);
         File folder = new File(modDirPath.toString());
         assert folder != null;
         File[] listOfFiles = folder.listFiles();
@@ -141,9 +139,8 @@ public class ModuleStorage {
         for (File file : listOfFiles) {
             if (isValidFile(file)) {
                 contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
-                        Files.readString(Paths.get(file.getAbsolutePath()), StandardCharsets.US_ASCII)));
+                        Files.readString(Paths.get(file.getAbsolutePath()))));
             }
-
         }
     }
 
