@@ -15,9 +15,17 @@ import seedu.exception.MissingDetailException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 public abstract class ContactParser extends RegexParser implements ContactDetails {
+    public static final int CONTACT_PARAMS_START_INDEX = 1;
+    public static final int NUMBER_OF_DETAILS = 2;
+    public static final int NUMBER_OF_ADD_ARGS = 2;
+    public static final int NUMBER_OF_EDIT_ARGS = 3;
+    public static final int NUMBER_OF_FIELDS = 6;
 
+    public static final String DETAIL_SEPARATOR = " -";
+    public static final int FLAG_INDEX_IN_DETAILS = 0;
+    public static final int DETAIL_INDEX_IN_DETAILS = 1;
+    public static final int USER_INFO_INDEX = 2;
 
     private static final Logger LOGGER = Logger.getLogger(ContactParser.class.getName());
 
