@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PersonList {
+    private final String ENDLINE = System.lineSeparator();
+
     private HashMap<Integer, Person> persons = new HashMap<>();
     private int lastId = 1;
 
@@ -114,16 +116,16 @@ public class PersonList {
     public String listPersons() {
         String output = "";
         for (int key : persons.keySet()) {
-            output += persons.get(key) + System.lineSeparator();
+            output += persons.get(key) + ENDLINE;
         }
         return output;
     }
 
     public String getNoPersonIdErrorMessage(int personId) {
         if (Parser.getViewType() == ViewType.PATIENT_INFO) {
-            return "No patient with ID " + personId + " found.";
+            return "No patient with ID " + personId + " found." + ENDLINE;
         }
-        return "No person with ID " + personId + " found.";
+        return "No person with ID " + personId + " found." + ENDLINE;
     }
 
     /**
@@ -136,7 +138,7 @@ public class PersonList {
         for (int key : persons.keySet()) {
             Person person = persons.get(key);
             String personStorageString = person.getStorageString();
-            output += personStorageString + System.lineSeparator();
+            output += personStorageString + ENDLINE;
         }
         return output;
     }
