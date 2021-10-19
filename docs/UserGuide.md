@@ -218,5 +218,10 @@ Format: `end`
 | Delete income entry | `del_in i/INDEX` <br /> e.g., `del_in i/2` |
 | List all income entries | `list_in` |
 | View total income | `total_in` |
+| Find entry using date | `find YYYY-MM-DD` |
+| Find entry using keyword | `find KEYWORD` |
+| View total balance | `balance` |
+| Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` |
+| To terminate program | `end` |
 
 
