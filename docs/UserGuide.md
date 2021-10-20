@@ -277,7 +277,7 @@ Expected output:
 Lists all order records in the application.
 
 * All parameters for `listorder` command are optional, you can choose to list the records by any of the parameters.
-* You are able to listorder by id, name, quantity, date, status and also sort/rsort by columns
+* You are able to listorder by id, name, quantity, date, status and also sort/rsort by columns.
 * Example 1 demonstrates the list of all order records without parameters.
 * Example 2 demonstrates the list of all orders that are PENDING.
 
