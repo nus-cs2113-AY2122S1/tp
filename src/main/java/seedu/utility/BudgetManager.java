@@ -44,7 +44,8 @@ public class BudgetManager {
             double limit = budget.getLimit();
             assert limit >= 0;
             double diff = limit - currAmount;
-            if ((diff < threshold * limit) & (diff > 0)) {
+            double thresholdLimit = threshold * limit;
+            if ((diff > 0) & (diff < thresholdLimit)) {
                 ui.printBudgetWarning(month, budget.getName(), currAmount, limit);
             } else if (diff < 0) {
                 ui.printBudgetExceeded(month, budget.getName(), currAmount, limit);
