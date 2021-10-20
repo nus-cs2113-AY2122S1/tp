@@ -113,7 +113,7 @@ public class Ui {
                 "    delete [/t <TRAINING_INDEX_NUMBER>] \n" +
                 "    delete [/att <ATTENDANCE_INDEX_NUMBER>] \n" +
                 "    edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE "
-                + "NUMBER>]\n " +
+                + "NUMBER>]\n" +
                 "    edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>] \n" +
                 "    list [/m] [/t] [/att]");
     }
