@@ -50,7 +50,8 @@ public class Export {
                 String habitToWrite = index + DELIMITER
                         + HABIT_TYPE + DELIMITER
                         + doneValue + DELIMITER
-                        + habit.getHabitName() + NEWLINE;
+                        + habit.getHabitName() + DELIMITER
+                        + habit.getInterval() + NEWLINE;
 
                 fileWriter.write(habitToWrite);
             }
