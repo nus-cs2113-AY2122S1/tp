@@ -50,7 +50,7 @@ public class Import {
                     throw new HaBitStorageException("error while loading");
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | NumberFormatException e) {
             throw new HaBitStorageException(e.toString());
         } catch (HaBitCommandException e) {
             throw new HaBitStorageException(ERROR_INVALID_GOAL_INDEX);

@@ -1,7 +1,8 @@
 # User Guide
 
-_Ha(ppy)Bit_ is a desktop app aimed to assist **students** to improve their **physical and mental lifestyle**, 
-through the setting and tracking of goals to cultivate good habits. 
+_Ha(ppy)Bit_ is a desktop app aimed to **empower students** to improve their **well-being**,
+amidst the hectic and stressful **university life**. 
+The app enables students to cultivate **good habits**, through the setting and tracking of **goals**.
 The app operates on a Command Line Interface (CLI) while still 
 comprising features typically found in a Graphical User Interface (GUI). 
 Students who type fast will find that _Ha(ppy)Bit_ performs habit tracking more efficiently than your 
@@ -36,10 +37,10 @@ download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-
 
 ## Terminology
 
-Name | Description | Example
-------- | ------------------------------------------------ | -------------------
-Goal | A long term achievement you wish to accomplish | `Lose 5kg by Dec` 
-Habit | Checkpoints / Steps taken to achieve goal | `Run 5km`         
+Name  | Description | Example
+----- | --------------------------------------------------------- | -------------------
+Goal  | A long term achievement you wish to accomplish.           |`Lose 5kg by Dec`
+Habit | Checkpoints; actionable tasks to be done to achieve goal. | `Run 5km`         
 
 ## Features 
 
