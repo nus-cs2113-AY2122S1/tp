@@ -1,10 +1,11 @@
 package seedu.situs;
 
-import seedu.situs.alerts.Alerts;
+import seedu.situs.command.AlertCommand;
 import seedu.situs.exceptions.DukeException;
 import seedu.situs.localtime.CurrentDate;
 import seedu.situs.parser.Parser;
 import seedu.situs.ui.UI;
+
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
@@ -14,7 +15,6 @@ import java.util.logging.Logger;
 public class Situs {
 
     private static UI ui;
-    private static Alerts alerts;
     private static final Logger LOGGER = Logger.getLogger(Situs.class.getName());
 
     /**
@@ -23,9 +23,12 @@ public class Situs {
     public static void initialize() {
         CurrentDate.setCurrentDate();
         ui = new UI();
-        alerts = new Alerts();
 
-        ui.printCommandOutput(alerts.getAlerts());
+        try {
+            ui.printCommandOutput(new AlertCommand().run());
+        } catch (DukeException e) {
+            ui.printCommandOutput(e.getMessage());
+        }
 
         LogManager.getLogManager().reset();
         LOGGER.setLevel(Level.ALL);

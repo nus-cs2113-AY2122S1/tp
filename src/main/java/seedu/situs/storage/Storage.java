@@ -36,7 +36,6 @@ public class Storage {
      * Checks for the existence of the {@code data} folder, and creates one if it does not exist.
      *
      * @return loadedTaskList The Tasks read from the data file.
-     * @throws DukeException if there is an error when reading the file.
      */
     public ArrayList<Ingredient> loadIngredientsFromMemory() {
         ArrayList<Ingredient> extractedIngredients = new ArrayList<>();

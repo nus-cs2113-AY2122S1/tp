@@ -1,6 +1,5 @@
 package seedu.situs.ui;
 
-
 import java.util.Scanner;
 
 public class UI {
@@ -20,16 +19,15 @@ public class UI {
         System.out.print(WELCOME_MESSAGE);
     }
 
-    public String getUserCommand() {
-        return line.nextLine().trim().toLowerCase();
-    }
-
-    public void printGoodbye() {
+    public static void printGoodbye() {
         System.out.print(GOODBYE_MESSAGE);
     }
 
-    public void printCommandOutput(String commandOutput) {
+    public static void printCommandOutput(String commandOutput) {
         System.out.print(DIVIDER + commandOutput + "\n" + DIVIDER);
     }
 
+    public String getUserCommand() {
+        return line.nextLine().trim().toLowerCase();
+    }
 }

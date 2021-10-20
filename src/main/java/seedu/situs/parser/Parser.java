@@ -1,3 +1,4 @@
+
 package seedu.situs.parser;
 
 import seedu.situs.command.AddCommand;
@@ -10,11 +11,16 @@ import seedu.situs.command.ExpireCommand;
 import seedu.situs.command.HelpCommand;
 import seedu.situs.command.ListCommand;
 import seedu.situs.command.UpdateCommand;
+import seedu.situs.command.FindCommand;
 import seedu.situs.exceptions.DukeException;
 import seedu.situs.ingredients.Ingredient;
+import seedu.situs.ingredients.IngredientList;
+
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class Parser {
@@ -26,6 +32,7 @@ public class Parser {
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_DATE = "date";
     private static final String COMMAND_EXPIRE = "expire";
+    private static final String COMMAND_FIND = "find";
     private static final String COMMAND_ALERTS = "alerts";
     private static final String COMMAND_SET_THRESHOLD = "set";
 
@@ -33,9 +40,11 @@ public class Parser {
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
     private static final String NUMBER_FORMAT_ERROR_MESSAGE = "Invalid number format!";
     private static final String NOT_FOUND_MESSAGE = "Ingredient not found!";
-    private static final String INSUFFICIENT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
+    private static final String INCORRECT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
     private static final String EXPIRY_FORMAT_ERROR_MESSAGE = "Invalid expiry date format!"
             + '\n' + "Please key in the expiry date in the format dd/mm/yyyy!";
+    private static final String NO_RESULTS_MESSAGE_START = "I could not find any results for \"";
+    private static final String NO_RESULTS_MESSAGE_END = "\"!";
     private static final String INVALID_ALERT_TYPE_MESSAGE = "Not an alert type!";
 
     private static final String SPACE_SEPARATOR = " ";
@@ -76,6 +85,8 @@ public class Parser {
             return parseHelpCommand();
         case COMMAND_EXPIRE:
             return parseExpireCommand(command);
+        case COMMAND_FIND:
+            return parseFindCommand(command);
         case COMMAND_ALERTS:
             return parseAlertsCommand(command);
         case COMMAND_SET_THRESHOLD:
@@ -85,6 +96,42 @@ public class Parser {
         default:
             return INVALID_COMMAND_MESSAGE;
         }
+    }
+
+    /**
+     * Parses "find" command for keywords and executes find command.
+     *
+     * @param command The user input String
+     * @return Search results for entered keywords
+     * @throws DukeException If no keywords are entered
+     */
+    private static String parseFindCommand(String command) throws DukeException {
+        String[] keywords = command.replace(COMMAND_FIND, "").trim().split(SPACE_SEPARATOR);
+
+        assert (keywords != null);
+
+        for (int i = 0; i < keywords.length; i++) {
+            if (keywords[i].isEmpty()) {
+                throw new DukeException(INCORRECT_PARAMETERS_MESSAGE);
+            }
+            keywords[i] = keywords[i].trim();
+        }
+
+        String resultMsg = "";
+        for (int i = 0; i < keywords.length; i++) {
+            String keyword = keywords[i];
+            List<Ingredient> searchResults = IngredientList.getInstance().getIngredientList().stream()
+                    .filter(result -> result.getName().toLowerCase().contains(keyword)).collect(Collectors.toList());
+            if (i > 0) {
+                resultMsg += "\n";
+            }
+            if (searchResults.isEmpty()) {
+                resultMsg += NO_RESULTS_MESSAGE_START + keyword + NO_RESULTS_MESSAGE_END;
+            } else {
+                resultMsg += new FindCommand(keyword, searchResults).run();
+            }
+        }
+        return resultMsg;
     }
 
     /**
@@ -106,7 +153,7 @@ public class Parser {
         String[] details = command.split(DELIMITER);
 
         if (details.length != UPDATE_COMMAND_ARGUMENT_COUNT) {
-            throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+            throw new DukeException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
         assert (details.length == UPDATE_COMMAND_ARGUMENT_COUNT);
@@ -114,7 +161,7 @@ public class Parser {
         for (int i = 1; i < UPDATE_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
             if (details[i].equals(EMPTY_STRING)) {
-                throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+                throw new DukeException(INCORRECT_PARAMETERS_MESSAGE);
             }
         }
 
@@ -150,7 +197,7 @@ public class Parser {
         String[] details = command.split(DELIMITER);
 
         if (details.length != ADD_COMMAND_ARGUMENT_COUNT) {
-            throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+            throw new DukeException(INCORRECT_PARAMETERS_MESSAGE);
         }
 
         assert (details.length == ADD_COMMAND_ARGUMENT_COUNT);
@@ -158,7 +205,7 @@ public class Parser {
         for (int i = 1; i < ADD_COMMAND_ARGUMENT_COUNT; i++) {
             details[i] = details[i].trim();
             if (details[i].equals(EMPTY_STRING)) {
-                throw new DukeException(INSUFFICIENT_PARAMETERS_MESSAGE);
+                throw new DukeException(INCORRECT_PARAMETERS_MESSAGE);
             }
         }
 
