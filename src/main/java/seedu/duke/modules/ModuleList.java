@@ -44,4 +44,8 @@ public class ModuleList {
         }
         return false;
     }
+
+    public ArrayList<Module> getList() {
+        return list;
+    }
 }
