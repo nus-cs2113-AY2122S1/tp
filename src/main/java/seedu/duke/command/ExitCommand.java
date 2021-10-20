@@ -2,7 +2,6 @@ package seedu.duke.command;
 
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
 import java.util.logging.Logger;
 
@@ -14,6 +13,7 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
     public static final String MESSAGE_USAGE = "bye: Closes the program" + "\tExample: bye";
+    public static final String MESSAGE_GOODBYE = "Bye. Hope you get your desired body soon, have a great day!";
     private static final Logger LOGGER = Logger.getLogger(ExitCommand.class.getName());
 
     /**
@@ -32,10 +32,10 @@ public class ExitCommand extends Command {
      * Makes no changes in the task list or storage.
      *
      * @param workouts is the list of Workouts
-     * @param ui       is a user-interface object
      * @param storage  is a storage object
      */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) {
+        return new CommandResult(MESSAGE_GOODBYE);
     }
 }

@@ -1,11 +1,11 @@
 package seedu.duke.command.exercise;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
+import seedu.duke.exercises.Exercise;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
-import seedu.duke.exercises.Exercise;
-import seedu.duke.ui.Ui;
 
 import java.util.logging.Logger;
 
@@ -46,18 +46,18 @@ public class RemoveExerciseCommand extends Command {
      * Executes remove exercise command to remove an exercise of given index from the list.
      *
      * @param workouts is the list of Workouts
-     * @param ui       is a user-interface object
      * @param storage  is a storage object
      * @throws GetJackDException if there is an invalid index used or an error occurs within the storage
      */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         try {
             Exercise toRemove = workouts.getWorkout(workoutIndex).removeExercise(exerciseIndex);
-            ui.showToUser(String.format(MESSAGE_SUCCESS, toRemove.toString()));
 
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
+
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
         } catch (IndexOutOfBoundsException e) {
             LOGGER.info("remove exercise failed - exercise not found");
             throw new GetJackDException(ERROR_MESSAGE_EXERCISE_NOT_FOUND);

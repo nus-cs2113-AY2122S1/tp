@@ -1,10 +1,11 @@
 package seedu.duke.command.workout;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
+import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,12 +43,11 @@ public class EnterWorkoutCommand extends Command {
      * Executes enter workout command to enter into the workout of the given index from the workout list.
      *
      * @param workouts is the list of Workouts
-     * @param ui       is a user-interface object
      * @param storage  is a storage object
      * @throws GetJackDException if there is an invalid index used
      */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) throws GetJackDException {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         if (workoutIndex <= 0 || workoutIndex > workouts.getAllWorkouts().size()) {
             LOGGER.log(Level.SEVERE, "Error in entering Workout - Workout doesn't exist");
             throw new GetJackDException("Invalid Workout Index");
@@ -55,7 +55,7 @@ public class EnterWorkoutCommand extends Command {
 
         workoutMode = workoutIndex;
         LOGGER.info("Entering the " + workoutIndex + "th(st/nd/rd) Workout");
-        ui = new Ui();
-        ui.showToUser(String.format(MESSAGE_SUCCESS, workouts.getAllWorkouts().get(workoutIndex - 1)));
+        Workout workoutEntered = workouts.getAllWorkouts().get(workoutIndex - 1);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, workoutEntered));
     }
 }

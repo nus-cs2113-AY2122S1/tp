@@ -1,6 +1,7 @@
 package seedu.duke.command.misc;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandResult;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
@@ -32,15 +33,13 @@ public class HelpCommand extends Command {
      * Executes help command to show user the help message.
      *
      * @param workouts List of Workouts
-     * @param ui       User-Interface object
      * @param storage  Storage object
      */
     @Override
-    public void executeUserCommand(WorkoutList workouts, Ui ui, Storage storage) {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) {
         if (commandDescription == null) {
-            Ui.printHelpMessage();
-        } else {
-            ui.showToUser(commandDescription);
+            return new CommandResult(Ui.getHelpMessage());
         }
+        return new CommandResult(commandDescription);
     }
 }
