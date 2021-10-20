@@ -17,7 +17,7 @@ public class StudentTest {
     void setMarks_newMarksArguments_marksAddedCorrectly() {
         Student student = new Student("A0123456X", "Jim");
         AssessmentList assessments = new AssessmentList();
-        assessments.addAssessment(new Assessment("Midterms", 20));
+        assessments.addAssessment(new Assessment("Midterms", 100, 20));
         student.setMarks("Midterms", 99.9);
         assertEquals(99.9, student.getMarks("Midterms"));
     }
