@@ -64,6 +64,14 @@ public class Ui {
         System.out.println("\tYou have just deleted a trip called " + tripName + ".");
     }
 
+    public void printDeleteDay(String tripName, int index) {
+        System.out.println("\tYou have just deleted day " + index + " of " + tripName);
+    }
+
+    public void printDeleteItem(String tripName, int dayIndex, int itemIndex) {
+        System.out.println("\tYou have just deleted item " + itemIndex + " of " + tripName + " day " + dayIndex);
+    }
+
     public void printEdit(String tripName) {
         System.out.println("\tYou have just edited a trip called " + tripName + ".");
     }

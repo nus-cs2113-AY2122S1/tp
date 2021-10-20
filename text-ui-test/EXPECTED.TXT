@@ -1,5 +1,4 @@
-	Flight data cannot be found, is the database file under ./flightData/flights.txt?
-____________________________________________________________
+No file
   ______                      ____         
  /_  __/________ __   _____  / / /__  _____
   / / / ___/ __ `/ | / / _ \/ / / _ \/ ___/
@@ -10,6 +9,4 @@ Your one stop travel planner.
 
 ____________________________________________________________
 	Bye! Have fun on your trips! :)
-____________________________________________________________
-The system cannot find the path specified
 ____________________________________________________________

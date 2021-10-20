@@ -1,8 +1,6 @@
 package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
-import seedu.traveller.items.Dining;
-import seedu.traveller.items.Housing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -16,21 +14,21 @@ public class DayTest {
 
     @Test
     public void addItem_success() {
-        Housing housingItem = new Housing("HolidayInn", "Check-in 7pm");
-        Dining diningItem = new Dining("Collins", "Booked at 8pm");
-        day.addItem(housingItem);
-        day.addItem(diningItem);
-        assertEquals(housingItem, day.getItem(0));
-        assertEquals(diningItem, day.getItem(1));
+        Item item1 = new Item("7-9pm", "Eat dinner");
+        Item item2 = new Item("12am", "See northern lights");
+        day.addItem(item1);
+        day.addItem(item2);
+        assertEquals(item1, day.getItem(0));
+        assertEquals(item2, day.getItem(1));
     }
 
     @Test
     public void deleteDay_success() {
-        Housing housingItem = new Housing("HolidayInn", "Check-in 7pm");
-        Dining diningItem = new Dining("Collins", "Booked at 8pm");
-        day.addItem(housingItem);
-        day.addItem(diningItem);
+        Item item1 = new Item("7-9pm", "Eat dinner");
+        Item item2 = new Item("12am", "See northern lights");
+        day.addItem(item1);
+        day.addItem(item2);
         day.deleteItem(0);
-        assertEquals(diningItem, day.getItem(0));
+        assertEquals(item2, day.getItem(0));
     }
 }

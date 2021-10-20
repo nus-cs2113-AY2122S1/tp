@@ -1,40 +1,35 @@
-package seedu.traveller.commands.additemcommands;
+package seedu.traveller.commands;
 
 import seedu.traveller.Day;
 import seedu.traveller.Trip;
 import seedu.traveller.TripsList;
 import seedu.traveller.Ui;
-import seedu.traveller.commands.Command;
-import seedu.traveller.commands.NewCommand;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.items.Item;
+import seedu.traveller.Item;
 
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public abstract class AddItemCommand extends Command {
+public class AddItemCommand extends Command {
     private static final Logger logger = Logger.getLogger(NewCommand.class.getName());
     private final String tripName;
     private final int dayIndex;
     private final String itemName;
-    private final String details;
-    protected Item item;
+    private final String itemTime;
 
-    protected abstract void createItem();
-
-    public AddItemCommand(String tripName, int dayIndex, String itemName, String details) {
+    public AddItemCommand(String tripName, int dayIndex, String itemTime, String itemName) {
         logger.setLevel(Level.INFO);
         this.tripName = tripName;
         this.dayIndex = dayIndex;
+        this.itemTime = itemTime;
         this.itemName = itemName;
-        this.details = details;
-        createItem();
         logger.log(Level.INFO, "Created an addItem command: \n" + this);
     }
 
     public String getTripName() {
-        return this.tripName;
+        return tripName;
     }
 
     public int getDayIndex() {
@@ -45,12 +40,8 @@ public abstract class AddItemCommand extends Command {
         return itemName;
     }
 
-    public String getDetails() {
-        return details;
-    }
-
-    public Item getItem() {
-        return item;
+    public String getItemTime() {
+        return itemTime;
     }
 
     /**
@@ -62,9 +53,8 @@ public abstract class AddItemCommand extends Command {
         return "AddItem command:"
                 + "\n\ttripName: " + getTripName()
                 + "\n\tdayIndex: " + getDayIndex()
-                + "\n\titemType: " + getItem().getItemType()
-                + "\n\titemName: " + getItemName()
-                + "\n\tdetails: " + getDetails();
+                + "\n\titemTime: " + getItemTime()
+                + "\n\titemName: " + getItemName();
     }
 
     /**
@@ -78,7 +68,12 @@ public abstract class AddItemCommand extends Command {
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
         Trip trip = tripsList.getTrip(getTripName());
         Day day = trip.getDay(getDayIndex());
-        day.addItem(getItem());
+        Item newItem = new Item(getItemTime(), getItemName());
+        assert Objects.equals(newItem.getItemTime(), getItemTime()) :
+                "Item time in created item and command do not match.";
+        assert Objects.equals(newItem.getItemName(), getItemName()) :
+                "Item name in created item and command do not match.";
+        day.addItem(newItem);
         ui.printAddItemToDay(getTripName(), getDayIndex(), getItemName());
     }
 }
