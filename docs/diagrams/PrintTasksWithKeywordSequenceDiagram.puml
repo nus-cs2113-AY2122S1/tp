@@ -3,7 +3,7 @@ participant ":Ui" as ui
 participant ":TaskList" as tasks
 participant "out:PrintStream" as out
 
-hide footbox
+!include Style.puml
 
 [-> ui : printTasksWithKeyword(taskList, keyword)
 activate ui
@@ -18,6 +18,7 @@ alt filteredTaskList.isEmpty()
 
 ui -> out : println("There is no matching task in your list.")
 activate out
+
 out --> ui
 deactivate out
 
@@ -25,11 +26,13 @@ else else
 
 ui -> out : println("Here are the matching tasks in your list:")
 activate out
+
 out --> ui
 deactivate out
 
 ui -> out : println(filteredTaskList)
 activate out
+
 out --> ui
 deactivate out
 
