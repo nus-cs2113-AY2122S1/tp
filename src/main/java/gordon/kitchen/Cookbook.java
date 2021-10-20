@@ -114,6 +114,17 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
+    public void setPrice(String name, float newPrice) throws GordonException {
+        for (Recipe recipe : recipes) {
+            if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
+                recipe.setTotalPrice(newPrice);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
+
     public void setDifficulty(String name, Difficulty newDifficulty) throws GordonException {
         for (Recipe recipe : recipes) {
             // (?i) enables case insensitivity

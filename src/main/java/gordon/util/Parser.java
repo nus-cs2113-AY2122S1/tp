@@ -13,6 +13,7 @@ import gordon.command.ListRecipesCommand;
 import gordon.command.NullCommand;
 import gordon.command.SetCaloriesCommand;
 import gordon.command.SetDifficultyCommand;
+import gordon.command.SetPriceCommand;
 import gordon.command.TagAddCommand;
 import gordon.command.TagDeleteCommand;
 import gordon.command.TagUntagCommand;
@@ -173,11 +174,11 @@ public class Parser {
         switch (target) {
         case "calories":
             try {
-                int index = Integer.parseInt(splitContent[1].substring(spaceIndex + 1).trim());
-                if (index < -1) {
+                int cal = Integer.parseInt(splitContent[1].substring(spaceIndex + 1).trim());
+                if (cal < -1) {
                     throw new GordonException(GordonException.INDEX_OOB);
                 }
-                return new SetCaloriesCommand(recipeName, index);
+                return new SetCaloriesCommand(recipeName, cal);
             } catch (NumberFormatException e) {
                 throw new GordonException(GordonException.INDEX_INVALID);
             }
@@ -193,6 +194,16 @@ public class Parser {
                 throw new GordonException(GordonException.INVALID_DIFFICULTY);
             } else {
                 return new SetDifficultyCommand(recipeName, newDifficulty);
+            }
+        case "price":
+            try {
+                float price = Float.parseFloat(splitContent[1].substring(spaceIndex + 1).trim());
+                if (price < -1) {
+                    throw new GordonException(GordonException.INDEX_OOB);
+                }
+                return new SetPriceCommand(recipeName, price);
+            } catch (NumberFormatException e) {
+                throw new GordonException(GordonException.FLOAT_INVALID);
             }
         default:
             throw new GordonException(GordonException.COMMAND_INVALID);
