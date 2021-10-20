@@ -111,7 +111,7 @@ public class TextUi {
     }
 
     public void printBookSelection() {
-        System.out.println("Input '0' to go back.\n"
+        printScreen("Input '0' to go back.\n"
                 + "Content list:\n"
                 + "1. A Confederacy of Dunces\n"
                 + "2. Moby Dick\n"

@@ -70,7 +70,7 @@ public class WordLimitGame extends Game {
 
             actualWord += temp;
             temp = temp.trim();
-            ui.showText(temp);
+            ui.printLine(temp);
             String fullCommand = ui.readCommand();
             inputWord += fullCommand + " ";
 
