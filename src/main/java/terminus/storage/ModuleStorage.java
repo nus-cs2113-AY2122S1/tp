@@ -223,6 +223,7 @@ public class ModuleStorage {
         }
         File deleteFile = new File(
                 Paths.get(modDirPath.toString(), noteName + CommonFormat.EXTENSION_TEXT_FILE).toString());
+        TerminusLogger.info("Removing file: " + deleteFile.getAbsolutePath());
         deleteFile.delete();
     }
 
