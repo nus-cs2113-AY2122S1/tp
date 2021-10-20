@@ -104,6 +104,8 @@ public class Parser {
             keyword = Keyword.FIND_TRAINING_KEYWORD;
         } else if (hasEditTrainingKeyword(query)) {
             keyword = Keyword.EDIT_TRAINING_KEYWORD;
+        } else if (query.trim().equals("--help")) {
+            keyword = Keyword.HELP_KEYWORD;
         } else {
             keyword = Keyword.NO_KEYWORD;
         }
@@ -398,7 +400,7 @@ public class Parser {
     }
 
     public static void wrongInputTypeMessage() {
-        //Leave for later
+        System.out.println("Wrong input. Please key in --help for some help on how to use the programme.");
     }
 
     public static void deleteTraining(TrainingList trainings, String query) {
