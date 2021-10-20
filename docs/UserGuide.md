@@ -12,9 +12,8 @@ SchedUrMods can help you manage your daily tasks faster than traditional GUI app
         - [2.2.3 Event: `event`](#223-event-event)
     - [2.3 Listing all tasks: `list`](#23-listing-all-tasks-list)
     - [2.4 Sorting the tasklist: `sort`](#24-sorting-the-tasklist-sort)
-    - [2.5 Deleting a task: `delete`](#25-deleting-a-task-delete)
-    - [2.6 Finding a task with a keyword: `find`](#26-finding-a-task-with-a-keyword-find)
-    - [2.7 Exiting the program: `bye`](#27-exiting-the-program-bye)
+    - [2.5 Deleting tasks: `delete`](#25-deleting-tasks-delete)
+    - [2.7 Exiting the program: `bye`](#26-exiting-the-program-bye)
 - [3. FAQ](#3-faq)
 - [4. Command Summary](#4-command-summary)
 
@@ -223,7 +222,8 @@ Deletes tasks specified in comma-seperated argument.
 - task indexes should be comma seperated.
   - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
   - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
-  - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.
+  - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.  
+ >💡 **Note**: Whether there are any spaces between the commas, it does not matter.
 
 **Example:** `delete 1-3, 5`
 - delete tasks with indexes 1, 2, 3 and 5.
