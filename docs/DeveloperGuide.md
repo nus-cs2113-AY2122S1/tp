@@ -52,8 +52,13 @@ ConTech comprises five main components, namely:
 - `ContactList`: Data structure to store `Contact`s while running ConTech.
 - `Storage`: Reads from and writes to [`LocalStorage`](#local-storage).
 
-The five main components interact with each other, as shown in the sequence diagram below.
-{ NEED SEQUENCE DIAGRAM }
+**How the architecture components interact with each other**
+
+The five main components interact with each other, as shown in the sequence diagram below
+for the example "view 2"
+
+![Sysem Architecture Sequence Diagram](images/SystemArchitectureSequence.png)
+
 
 ### <a name="text-ui"></a>TextUi
 ### <a name="main-parser"></a>MainParser
