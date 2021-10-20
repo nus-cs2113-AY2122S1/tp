@@ -37,18 +37,27 @@ public class Recipe {
      * @param ingredientName Name of ingredient to be added.
      * @param quantity Quantity of ingredient to be added.
      * @param ingredientRepository Ingredient repository.
-     * @throws NotFoundException If ingredient does not exist in the ingredient repository.
      * @throws DuplicateDataException If ingredient already exists in the recipe.
      * @throws IllegalValueException If quantity is less than or equal to 0.
      */
-    public void add(String ingredientName, int quantity, IngredientRepository ingredientRepository)
-            throws NotFoundException, DuplicateDataException, IllegalValueException {
-        final Ingredient ingredient = ingredientRepository.find(ingredientName).getIngredient();
+    public String add(String ingredientName, int quantity, IngredientRepository ingredientRepository)
+            throws DuplicateDataException, IllegalValueException {
+        String ingredientNameIfNotInList = "";
+        final IngredientStorage ingredientStorage = ingredientRepository.findWithNullReturn(ingredientName);
+        Ingredient ingredient;
+        if (ingredientStorage == null) {
+            ingredientRepository.add(ingredientName,"");
+            ingredientNameIfNotInList = ingredientName + "\n";
+            ingredient = new Ingredient(ingredientName,"");
+        } else {
+            ingredient = ingredientStorage.getIngredient();
+        }
         final IngredientQuantity ingredientQuantity = new IngredientQuantity(ingredient, quantity);
         if (ingredientQuantities.containsKey(ingredientQuantity.getName())) {
             throw new DuplicateDataException();
         }
         ingredientQuantities.put(ingredientQuantity.getName(), ingredientQuantity);
+        return ingredientNameIfNotInList;
     }
 
     @Override
