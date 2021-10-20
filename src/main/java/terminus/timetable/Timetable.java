@@ -10,15 +10,18 @@ import terminus.module.NusModule;
 
 public class Timetable {
 
-    private static int index = 0;
+    private int index = 0;
+
+    public Timetable() {
+    }
 
     /**
      * Lists all the schedule for a particular day.
      *
-     * @param contentManager ContentManager object containing all user's links
-     * @return StringBuilder of all the schedules for the particular day
+     * @param contentManager ContentManager object containing all user's links.
+     * @return StringBuilder of all the schedules for the particular day.
      */
-    public static StringBuilder listDailySchedule(ContentManager<Link> contentManager, String currentDay) {
+    public StringBuilder listDailySchedule(ContentManager<Link> contentManager, String currentDay) {
         StringBuilder dailySchedule = new StringBuilder();
         for (Link schedule : contentManager.getContents()) {
             if (schedule.getDay().equalsIgnoreCase(currentDay)) {
@@ -32,10 +35,10 @@ public class Timetable {
     /**
      * Retrieve and format all the user's schedule for the particular day.
      *
-     * @param result The string containing the retrieved user schedule
-     * @param moduleManager ModuleManager object containing all the module from which the schedules are retrieved
+     * @param result The string containing the retrieved user schedule.
+     * @param moduleManager ModuleManager object containing all the module from which the schedules are retrieved.
      */
-    public static boolean getDailySchedule(StringBuilder result, ModuleManager moduleManager, String today) {
+    public boolean getDailySchedule(StringBuilder result, ModuleManager moduleManager, String today) {
         String[] modules = moduleManager.getAllModules();
 
         for (String moduleName : modules) {
@@ -56,10 +59,10 @@ public class Timetable {
     /**
      * Retrieve and format all the user's schedule for the week.
      *
-     * @param result The string containing the retrieved user schedule
-     * @param moduleManager ModuleManager object containing all the module from which the schedules are retrieved
+     * @param result The string containing the retrieved user schedule.
+     * @param moduleManager ModuleManager object containing all the module from which the schedules are retrieved.
      */
-    public static void getWeeklySchedule(StringBuilder result, ModuleManager moduleManager) {
+    public void getWeeklySchedule(StringBuilder result, ModuleManager moduleManager) {
         for (DaysOfWeekEnum currentDay : DaysOfWeekEnum.values()) {
             StringBuilder dailyResult = new StringBuilder();
             String today = currentDay.toString();
@@ -78,9 +81,9 @@ public class Timetable {
     /**
      * Print empty message for empty user schedule.
      *
-     * @param result The string containing the retrieved user schedule
+     * @param result The string containing the retrieved user schedule.
      */
-    public static void checkEmptySchedule(StringBuilder result) {
+    public void checkEmptySchedule(StringBuilder result) {
         if (result.toString().isBlank()) {
             TerminusLogger.info("There is no schedule in the user's timetable");
             result.append(Messages.EMPTY_CONTENT_LIST_MESSAGE);

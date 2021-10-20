@@ -6,9 +6,9 @@ import terminus.command.module.ModuleCommand;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.module.ModuleManager;
+import terminus.timetable.Timetable;
 
 import static terminus.common.CommonUtils.getCurrentDay;
-import static terminus.timetable.Timetable.getDailySchedule;
 
 public class MainCommandParser extends CommandParser {
 
@@ -38,8 +38,9 @@ public class MainCommandParser extends CommandParser {
         StringBuilder result = new StringBuilder();
         StringBuilder dailySchedule = new StringBuilder();
         String currentDay = getCurrentDay();
+        Timetable timetable = new Timetable();
 
-        if (getDailySchedule(dailySchedule, moduleManager, currentDay)) {
+        if (timetable.getDailySchedule(dailySchedule, moduleManager, currentDay)) {
             result.append(Messages.MAIN_REMINDER);
             result.append(dailySchedule);
         } else {

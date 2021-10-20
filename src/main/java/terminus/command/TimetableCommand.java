@@ -5,13 +5,11 @@ import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
+import terminus.timetable.Timetable;
 import terminus.ui.Ui;
 
 import static terminus.common.CommonUtils.isStringNullOrEmpty;
 import static terminus.common.CommonUtils.isValidDay;
-import static terminus.timetable.Timetable.getWeeklySchedule;
-import static terminus.timetable.Timetable.getDailySchedule;
-import static terminus.timetable.Timetable.checkEmptySchedule;
 
 public class TimetableCommand extends Command {
 
@@ -20,7 +18,7 @@ public class TimetableCommand extends Command {
     /**
      * Returns the format of the command.
      *
-     * @return The string object holding the appropriate format for the timetable command
+     * @return The string object holding the appropriate format for the timetable command.
      */
     @Override
     public String getFormat() {
@@ -41,7 +39,7 @@ public class TimetableCommand extends Command {
      * Parses remaining arguments for the timetable command.
      *
      * @param arguments The string arguments to be parsed in to the respective fields.
-     * @throws InvalidArgumentException when arguments are invalid
+     * @throws InvalidArgumentException when arguments are invalid.
      */
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
@@ -63,16 +61,17 @@ public class TimetableCommand extends Command {
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager) {
         StringBuilder result = new StringBuilder();
+        Timetable timetable = new Timetable();
 
         if (isStringNullOrEmpty(day)) {
-            getWeeklySchedule(result, moduleManager);
+            timetable.getWeeklySchedule(result, moduleManager);
         } else {
             assert day != null;
             String currentDay = day;
-            getDailySchedule(result, moduleManager, currentDay);
+            timetable.getDailySchedule(result, moduleManager, currentDay);
         }
 
-        checkEmptySchedule(result);
+        timetable.checkEmptySchedule(result);
         ui.printSection(result.toString());
         return new CommandResult(true, false);
     }
