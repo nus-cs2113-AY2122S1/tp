@@ -39,6 +39,8 @@ Refer to the guide [Setting up and getting started](https://www.google.com).
 
 # Implementation
 
+## Tasks
+
 The creation of tasks is done using Task Factories  
 <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/TodoFactory%20Sequence%20Diagram.JPG?raw=true" alt="TodoFactory Sequence Diagram" width="400"/>  
 The example above shows the creation of a Todo Task using TodoFactory.
@@ -46,7 +48,8 @@ The example above shows the creation of a Todo Task using TodoFactory.
 1. After that it parses the dates, priority and recurrence arguments into the appropriate objects that are stored in the Task object
 1. Finally, it calls getConstructor() with the parameters. getConstructor()'s logic will find and call the appropriate Task constructor and return the Task created.  
 
-The same logical structure is used in the Deadline and Event factories.
+The same logical structure is used in the Deadline and Event factories.  
+
 # Documentation, logging, testing, configuration, dev-ops
 
 - [Documentation guide](https://www.google.com)
