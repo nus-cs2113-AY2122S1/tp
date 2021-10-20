@@ -15,23 +15,23 @@ public class Flight {
         fromDate = values[4];
     }
 
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public String getToDestination(){
+    public String getToDestination() {
         return toDestination;
     }
 
-    public String getFromDestination(){
+    public String getFromDestination() {
         return fromDestination;
     }
 
-    public String getToDate(){
+    public String getToDate() {
         return toDate;
     }
 
-    public String getFromDate(){
+    public String getFromDate() {
         return fromDate;
     }
 }
