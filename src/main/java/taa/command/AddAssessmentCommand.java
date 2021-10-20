@@ -29,7 +29,7 @@ public class AddAssessmentCommand extends Command {
             + "Weightage must be between %,.2f and %,.2f (inclusive)";
     private static final String MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS = "Invalid maximum marks. "
             + "Maximum marks must be larger than %d (inclusive)";
-    private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED = "Assessment added:\n"
+    private static final String MESSAGE_FORMAT_ASSESSMENT_ADDED = "Assessment added to %s:\n"
             + "  %s\nThere are %d assessments in the %s.";
 
     public AddAssessmentCommand(String argument) {
@@ -102,6 +102,7 @@ public class AddAssessmentCommand extends Command {
         Assessment assessment = new Assessment(name, maximumMarks, weightage);
 
         AssessmentList assessmentList = module.getAssessmentList();
+        assert assessmentList != null : "assessment list should exist.";
         boolean isSuccessful = assessmentList.addAssessment(assessment);
         if (!isSuccessful) {
             throw new TaaException(MESSAGE_FAIL_TO_ADD);
@@ -111,7 +112,7 @@ public class AddAssessmentCommand extends Command {
         storage.save(moduleList);
 
         assert ui != null : "ui should exist.";
-        ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_ADDED,
+        ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_ADDED, moduleCode,
                 assessment, assessmentList.getSize(), module));
     }
 

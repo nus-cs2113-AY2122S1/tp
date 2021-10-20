@@ -40,7 +40,7 @@ public class AssessmentList implements ClassChecker {
      * or total weightage exceed the maximum weightage after adding.
      *
      * @param assessment The assessment object to be added.
-     * @return tue if success, else false.
+     * @return True if success, else false.
      */
     public boolean addAssessment(Assessment assessment) {
         double totalWeightage = 0;
@@ -60,6 +60,25 @@ public class AssessmentList implements ClassChecker {
 
         assessments.add(assessment);
         return true;
+    }
+
+    /**
+     * Deletes an assessment from the list of assessments in a particular module.
+     *
+     * @param assessmentName The name of the assessment object to be removed.
+     * @return The removed assessment object.
+     */
+    public Assessment deleteAssessment(String assessmentName) {
+        int indexOfAssessmentToRemove = 0;
+        for (Assessment assessment : assessments) {
+            String name = assessment.getName();
+            if (name.equalsIgnoreCase(assessmentName)) {
+                return assessments.remove(indexOfAssessmentToRemove);
+            }
+            indexOfAssessmentToRemove += 1;
+        }
+
+        return null;
     }
 
     /**
