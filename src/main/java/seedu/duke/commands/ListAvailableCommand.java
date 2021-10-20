@@ -4,12 +4,14 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
+import static seedu.duke.common.Messages.DIVIDER;
 import static seedu.duke.common.Messages.LIST_AVAILABLE_MESSAGE;
 
 /**
- * Class encapsulating an exit command.
+ * Command that lists out all available items.
  */
 public class ListAvailableCommand extends Command {
+    public static final String COMMAND_WORD = "list available";
 
     /**
      * Single constructor, no parameters.
@@ -18,17 +20,20 @@ public class ListAvailableCommand extends Command {
     }
 
     /**
-     * Prints exit message.
+     * Prints all available items in the list.
      * Overrides method from parent class.
      * @param ui Object that handles user IO
+     * @param catalogue Object that stores the list of all items
      */
     @Override
     public void execute(TextUI ui, Catalogue catalogue) {
         ui.print(LIST_AVAILABLE_MESSAGE);
+        ui.print(DIVIDER);
         for (Item temp : catalogue.getAllItems()) {
             if (temp.getStatus().equals("Available")) {
-                System.out.println(temp);
+                ui.print(temp);
             }
         }
+        ui.print(DIVIDER);
     }
 }

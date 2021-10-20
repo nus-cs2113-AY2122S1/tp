@@ -8,7 +8,7 @@ public class Item {
     private String id;
     private String status;
 
-    private String separator = " | ";
+    protected String separator = " | ";
 
     /**
      * Constructor for class item.
@@ -47,8 +47,8 @@ public class Item {
     }
 
     /**
-     * Setter method that sets the id attribute.
-     * @param id The input id to be set.
+     * Setter method that returns the id attribute.
+     * @param id The id of the item in String.
      */
     public void setID(String id) {
         this.id = id;
@@ -63,7 +63,7 @@ public class Item {
     }
 
     /**
-     * Getter method that sets the status method.
+     * Setter method that sets the status method.
      * @param status The input status to be set.
      */
     public void setStatus(String status) {

@@ -5,18 +5,17 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.common.Messages.LOAN_MESSAGE;
-import static seedu.duke.common.Messages.NO_ID;
-import static seedu.duke.common.Messages.RM_INVALID_ID;
+import static seedu.duke.common.Messages.LOAN_SUCCESS;
+import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
 
 /**
  * Class encapsulating command to update the status of the item to be loaned out.
  */
 public class LoanCommand extends Command {
-
-    private static final String BORROWED_STATUS = "Loaned";
+    public static final String COMMAND_WORD = "loan";
     private static final String AVAILABLE_STATUS = "Available";
+    private static final String LOANED_STATUS = "Loaned";
     protected String args; // Format: loan [ID]
     protected String id;
 
@@ -36,14 +35,14 @@ public class LoanCommand extends Command {
      */
     public void handleLoanCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         if (!args.contains(" ")) {
-            throw new LibmgrException(NO_ID);
+            throw new LibmgrException(INVALID_ID);
         }
         id = args.split(" ")[1];
         Item toBeLoaned = catalogue.getItem(id);
+
         if (toBeLoaned.getStatus().equals(AVAILABLE_STATUS)) {
-            toBeLoaned.setStatus(BORROWED_STATUS);
-            ui.print(LOAN_MESSAGE);
-            ui.print(toBeLoaned.getID() + " " + toBeLoaned.getTitle());
+            toBeLoaned.setStatus(LOANED_STATUS);
+            ui.print(LOAN_SUCCESS, toBeLoaned);
         } else {
             ui.print(UNAVAILABLE_ITEM_MESSAGE);
         }
@@ -59,9 +58,9 @@ public class LoanCommand extends Command {
         try {
             handleLoanCommand(ui, catalogue);
         } catch (IndexOutOfBoundsException e) {
-            ui.print(RM_INVALID_ID);
+            ui.print(INVALID_ID);
         } catch (NullPointerException e) {
-            ui.print(RM_INVALID_ID);
+            ui.print(INVALID_ID);
         } catch (LibmgrException e) {
             ui.print(e.getMessage());
         }

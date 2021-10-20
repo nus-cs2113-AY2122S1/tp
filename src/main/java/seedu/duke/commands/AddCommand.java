@@ -5,16 +5,16 @@ import seedu.duke.data.Item;
 import seedu.duke.LibmgrException;
 import seedu.duke.ui.TextUI;
 
-import static seedu.duke.commands.Parser.COMMAND_ADD;
 import static seedu.duke.common.Messages.FORMAT_INCORRECT;
-import static seedu.duke.common.Messages.NO_TITLE;
-import static seedu.duke.common.Messages.NO_ID;
+import static seedu.duke.common.Messages.INVALID_TITLE;
+import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.ADD_MESSAGE;
 
 /**
  * Class encapsulating an add command.
  */
 public class AddCommand extends Command {
+    public static final String COMMAND_WORD = "add";
     protected String args; // Format: add t/TITLE i/ID
     protected String title;
     protected String id;
@@ -39,28 +39,28 @@ public class AddCommand extends Command {
         if (args.length() <= 4 || !args.contains("t/") || !args.contains("i/")) {
             throw new LibmgrException(FORMAT_INCORRECT);
         }
-        String parameters = args.substring(COMMAND_ADD.length() + 1);
+        String parameters = args.substring(COMMAND_WORD.length() + 1);
         String[] argList = parameters.split("/");
         int endIndex = argList[1].length() - 1;
         if (endIndex <= 0) {
-            throw new LibmgrException(NO_TITLE);
+            throw new LibmgrException(INVALID_TITLE);
         }
         title = argList[1].substring(0, endIndex).trim();
         if (title.equals("")) {
-            throw new LibmgrException(NO_TITLE);
+            throw new LibmgrException(INVALID_TITLE);
         }
         if (argList.length < 3) {
-            throw new LibmgrException(NO_ID);
+            throw new LibmgrException(INVALID_ID);
         }
         id = argList[2].trim();
         if (id.equals("")) {
-            throw new LibmgrException(NO_ID);
+            throw new LibmgrException(INVALID_ID);
         }
         Item newItem = new Item(title, id, "Available");
         catalogue.add(newItem);
-        ui.print(ADD_MESSAGE);
-        ui.print("[" + newItem.getStatus() + "] " + newItem.getTitle());
+        ui.print(ADD_MESSAGE, newItem);
     }
+
 
     /**
      * Executes add command.
