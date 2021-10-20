@@ -12,17 +12,21 @@ import terminus.module.ModuleManager;
 
 public class QuestionCommandParser extends InnerModuleCommandParser {
     
+    private static QuestionCommandParser parser;
+    
     public QuestionCommandParser() {
         super(CommonFormat.COMMAND_QUESTION);
     }
 
     public static QuestionCommandParser getInstance() {
-        QuestionCommandParser parser = new QuestionCommandParser();
-        parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
-        parser.addCommand(CommonFormat.COMMAND_ADD, new AddQuestionCommand());
-        parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand<>(Question.class));
-        parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand<>(Question.class));
-        parser.addCommand(CommonFormat.COMMAND_TEST, new TestCommand());
+        if (parser == null) {
+            parser = new QuestionCommandParser();
+            parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
+            parser.addCommand(CommonFormat.COMMAND_ADD, new AddQuestionCommand());
+            parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand<>(Question.class));
+            parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand<>(Question.class));
+            parser.addCommand(CommonFormat.COMMAND_TEST, new TestCommand());
+        }
         return parser;
     }
 

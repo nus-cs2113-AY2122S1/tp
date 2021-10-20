@@ -1,5 +1,6 @@
 package terminus.ui;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import terminus.module.ModuleManager;
@@ -12,7 +13,11 @@ public class Ui {
     private final Scanner scanner;
 
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        this(System.in);
+    }
+    
+    public Ui(InputStream in) {
+        this.scanner = new Scanner(in);
     }
 
     /**

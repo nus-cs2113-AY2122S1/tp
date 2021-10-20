@@ -61,7 +61,7 @@ public class TestCommand extends Command {
             throw new InvalidCommandException(Messages.NO_QUESTIONS_ERROR_MESSAGE);
         }
 
-        new GameEnvironment(ui, questions, questionCount).run(); 
+        GameEnvironment.createNewEnvironment(ui, questions, questionCount).run(); 
         
         return new CommandResult(true);
     }

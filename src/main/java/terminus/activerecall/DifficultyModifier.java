@@ -1,6 +1,6 @@
 package terminus.activerecall;
 
-public class DifficultyTweaker {
+public class DifficultyModifier {
     
     private static final double MIN_VALUE = 0.2;
     private static final double MAX_VALUE = 0.9;
@@ -15,9 +15,9 @@ public class DifficultyTweaker {
      * @return The increment or decrement to apply to the question randomness weight.
      */
     private static double getCurveValue(double x) {
-        double exponentValue = -1 * DifficultyTweaker.GROWTH_RATE * (x - DifficultyTweaker.LOG_CURVE_MIDPOINT);
+        double exponentValue = -1 * DifficultyModifier.GROWTH_RATE * (x - DifficultyModifier.LOG_CURVE_MIDPOINT);
         double denominator = (1 + Math.exp(exponentValue));
-        return DifficultyTweaker.MAX_INCREASE / denominator;
+        return DifficultyModifier.MAX_INCREASE / denominator;
     }
 
     /**
@@ -31,7 +31,7 @@ public class DifficultyTweaker {
             return MIN_VALUE;
         }
         double difference = initial - MIN_VALUE;
-        return initial - getCurveValue(difference);
+        return Math.max(MIN_VALUE, initial - getCurveValue(difference));
     }
 
     /**
@@ -45,7 +45,7 @@ public class DifficultyTweaker {
             return MAX_VALUE;
         }
         double difference = MAX_VALUE - initial;
-        return initial + getCurveValue(difference);
+        return Math.min(MAX_VALUE, initial + getCurveValue(difference));
     }
     
 }

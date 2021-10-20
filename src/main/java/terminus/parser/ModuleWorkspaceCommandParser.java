@@ -27,6 +27,7 @@ public class ModuleWorkspaceCommandParser extends CommandParser {
             parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
             parser.addCommand(CommonFormat.COMMAND_NOTE, new NotesCommand());
             parser.addCommand(CommonFormat.COMMAND_SCHEDULE, new ScheduleCommand());
+            parser.addCommand(CommonFormat.COMMAND_QUESTION, new QuestionCommand());
         }
         return parser;
     }

@@ -3,6 +3,8 @@ package terminus.activerecall;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import terminus.common.Messages;
 import terminus.content.Question;
 import terminus.ui.Ui;
@@ -12,11 +14,14 @@ public class GameEnvironment {
     private final Ui ui;
     private final QuestionGenerator questionGenerator;
 
-    public GameEnvironment(Ui ui, List<Question> questionList, int questionCount) {
+    GameEnvironment(Ui ui, QuestionGenerator generator) {
         this.ui = ui;
-        this.questionGenerator = new QuestionGenerator(questionList, questionCount);
+        this.questionGenerator = generator;
     }
-    
+
+    /**
+     * Starts the active recall session.
+     */
     public void run() {
         showPreGameInformation();
         while (questionGenerator.hasNext()) {
@@ -32,7 +37,7 @@ public class GameEnvironment {
     }
 
     private void showPreGameInformation() {
-        int questions = questionGenerator.getQuestionPool();
+        int questions = questionGenerator.getQuestionPoolSize();
         ui.printSection(
             "---[Active Recall]---",
             "",
@@ -68,24 +73,18 @@ public class GameEnvironment {
         int difficulty = 0;
         do {
             ui.printSection(Messages.ACTIVE_RECALL_ASK_QUESTION_DIFFICULTY_MESSAGE);
-            String input = ui.getUserInput("[1/2/3/E] >> ");
-            switch (input.trim()) {
-            case "1":
-            case "2":
-            case "3":
-                difficulty = Integer.parseInt(input);
-                break;
-            case "e":
-            case "E":
+            String input = ui.getUserInput("[1/2/3/E] >> ").trim().toLowerCase();
+            Pattern inputPattern = Pattern.compile("^[123e]$");
+            Matcher matcher = inputPattern.matcher(input);
+            if (!matcher.matches()) {
+                ui.printSection(Messages.ERROR_MESSAGE_INVALID_INPUT);
+                continue;
+            } else if (input.equalsIgnoreCase("e")) {
                 difficulty = -1;
                 break;
-            default:
-                break;
             }
+            difficulty = Integer.parseInt(input);
             
-            if (difficulty == 0) {
-                ui.printSection(Messages.ERROR_MESSAGE_INVALID_INPUT);
-            }
         } while (difficulty == 0);
         assert difficulty <= 3 && difficulty >= -1;
         return difficulty;
@@ -93,15 +92,30 @@ public class GameEnvironment {
     
     private void postQuestionFeedback(Question question, int difficulty) {
         assert difficulty >= 1 && difficulty <= 3;
+        double weight = question.getWeight();
         if (difficulty == 1) {
-            question.setWeight(DifficultyTweaker.tweakEasyQuestionDifficulty(question.getWeight()));
+            double newWeight = DifficultyModifier.tweakEasyQuestionDifficulty(weight);
+            question.setWeight(newWeight);
         } else if (difficulty == 3) {
-            question.setWeight(DifficultyTweaker.tweakHardQuestionDifficulty(question.getWeight()));
+            double newWeight = DifficultyModifier.tweakHardQuestionDifficulty(weight);
+            question.setWeight(newWeight);
         }
         ui.printSection("");
         if (questionGenerator.hasNext()) {
             ui.getUserInput(Messages.ACTIVE_RECALL_ENTER_TO_CONTINUE_MESSAGE);
         }
+    }
+
+    /**
+     * Create a new GameEnvironment instance.
+     * 
+     * @param ui The UI to handle all input and output.
+     * @param questions The list of questions to ask from.
+     * @param questionCount The maximum number of questions.
+     * @return The new GameEnvironment to start the Active Recall.
+     */
+    public static GameEnvironment createNewEnvironment(Ui ui, List<Question> questions, int questionCount) {
+        return new GameEnvironment(ui, new QuestionGenerator(questions, questionCount));
     }
 
 }
