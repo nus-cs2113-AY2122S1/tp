@@ -24,7 +24,6 @@ public class RemoveCommandParser {
 
         logger.log(Level.INFO, "Start parsing remove command");
 
-        String type;
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
 
         if (argumentsSubstrings.length < 2) {
@@ -32,54 +31,25 @@ public class RemoveCommandParser {
             throw new ParseException("No flags or description found.", 1);
         }
         String flag = argumentsSubstrings[0];
-        String description = argumentsSubstrings[1].trim();
+        int index = Integer.parseInt(argumentsSubstrings[1]);
 
         switch (flag) {
         case Constants.FLAG_UNIVERSITY:
-            return new RemoveUniCommand(index, universitySelectedList);
-            if (!isUniversityExist(description, universitySelectedList)) {
+            if (index > universitySelectedList.getSize()) {
                 logger.log(Level.WARNING, "University not found");
                 throw new ParseException("university not in list", 1);
             }
-            type = "u";
-            break;
+            return new RemoveUniCommand(index, universitySelectedList);
         case Constants.FLAG_MODULE:
-            return new RemoveModCommand(index, moduleSelectedList);
-            if (!isModuleExist(description, moduleSelectedList)) {
+            if (index > moduleSelectedList.getSize()) {
                 logger.log(Level.WARNING, "module not found");
                 throw new ParseException("module does not exist", 1);
             }
-            type = "m";
-            break;
+            return new RemoveModCommand(index, moduleSelectedList);
         case Constants.FLAG_MAP:
-            return new RemoveMapCommand(index, universitySelectedList)
+            return new RemoveMapCommand(index, universitySelectedList);
         default:
             throw new ParseException("Wrong flags passed", 1);
         }
-
-        assert description.length() != 0;
-        logger.log(Level.INFO, "parse success");
-
-        return new RemoveCommand(type, description, universitySelectedList, moduleSelectedList);
     }
-
-    public boolean isUniversityExist(String universityName, UniversityList universitySelectedList) {
-        for (University university : universitySelectedList.getList()) {
-            if (universityName.equals(university.getName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    public boolean isModuleExist(String moduleCode, ModuleList moduleSelectedList) {
-        for (int i = 0; i < moduleSelectedList.getSize(); i++) {
-            if (moduleCode.equals(moduleSelectedList.get(i).getModuleCode())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
