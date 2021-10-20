@@ -84,7 +84,7 @@ The `Parser` class
 
 ### `Expense` Class
 The `Expense` class deals with most functionalities related to adding an expense inside a trip. The sequence diagram below shows how an expense is initialised.
-
+![](../Resources/Expense%20Sequence%20Diagram.jpeg)
 
 When `Parser` calls the `executeExpense` method, it creates an expense object, and also calls the `promptDate` method to set that expense object’s date. `promptDate` calls `isDateValid` to validate user input.
 
