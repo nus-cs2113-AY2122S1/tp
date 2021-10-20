@@ -89,4 +89,14 @@ public class ParserTest {
         String resultMsg = Parser.parse(inputString2);
         assertEquals("Ingredient not found!", resultMsg);
     }
+
+    @Test
+    public void parseFindCommand_incorrectParameters_expectException() {
+        try {
+            String inputString = "find";
+            String resultMsg = Parser.parse(inputString);
+        } catch (DukeException e) {
+            assertEquals("The number of parameters is wrong!", e.getMessage());
+        }
+    }
 }
