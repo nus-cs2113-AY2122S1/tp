@@ -8,6 +8,11 @@ cd ..
 
 cd text-ui-test
 
+if [ -e "./StonksXD_Data.csv" ]
+then
+    rm StonksXD_Data.csv
+fi
+
 java  -jar $(find ../build/libs/ -mindepth 1 -print -quit) < input.txt > ACTUAL.TXT
 
 cp EXPECTED.TXT EXPECTED-UNIX.TXT
