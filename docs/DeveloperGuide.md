@@ -77,7 +77,7 @@ The methods in the `Ui` component may call methods from `TaskList`, `LessonList`
 
 ![UiClassDiagram](images/UiClassDiagram.png)
 
-#### Printing tasks filtered by day of the week:
+#### Printing tasks containing a keyword:
 ![UiPrintTasksWithKeyword](images/PrintTasksWithKeywordSequenceDiagram.png)
 
 ### Logic component
