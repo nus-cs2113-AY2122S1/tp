@@ -49,11 +49,7 @@ public class AddCommand extends Command {
         ArrayList<Lesson> laboratory;
         laboratory = getLessonDetails(semesterData.getTimetable(), LAB);
 
-        try {
-            addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
-        } catch (IntegerException e) {
-            throw new IntegerException("Invalid Integer");
-        }
+        addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
     }
 
     public ArrayList<Lesson> getLessonDetails(ArrayList<Lesson> lessons, String lessonType) {
