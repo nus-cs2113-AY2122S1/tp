@@ -16,9 +16,9 @@ public class TagDeleteCommand extends Command {
         try {
             for (String tagName : tagNames) {
                 if (!tagName.equals(" ")) {
-                    Tag extractedTag = cookbook.extractTag(tagName.trim());    // Tag must exist to be untagged
-                    cookbook.deleteRecipeTag(extractedTag);                    // remove from every recipe that has it
-                    cookbook.deleteCookbookTag(extractedTag);                  // remove from master-Tag (Cookbook)
+                    Tag extractedTag = cookbook.extractCookbookTag(tagName.trim());
+                    cookbook.deleteTagFromRecipes(extractedTag);
+                    cookbook.deleteCookbookTag(extractedTag);
                     System.out.println("Successfully deleted " + extractedTag.getTagName());
                 }
             }

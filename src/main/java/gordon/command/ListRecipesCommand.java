@@ -14,7 +14,7 @@ public class ListRecipesCommand extends Command {
         if (listType.equals("listRecipes")) {
             System.out.print(cookbook);
         } else {
-            System.out.print(cookbook.listTags());
+            System.out.print(cookbook.listCookbookTags());
         }
     }
 }

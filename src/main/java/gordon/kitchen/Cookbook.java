@@ -67,24 +67,6 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RECIPE_FOUND);
     }
 
-    public Tag extractTag(String tagName) throws GordonException {
-        for (Tag tag : cookbookTags) {
-            if (tag.getTagName().toLowerCase().contains(tagName.toLowerCase())) {
-                return tag;
-            }
-        }
-        throw new GordonException(GordonException.NO_TAG_FOUND);
-    }
-
-    public boolean isCookbookTagExists(String tagName) {
-        for (Tag cookbookTag : cookbookTags) {
-            if (cookbookTag.getTagName().trim().toLowerCase().contains(tagName.trim().toLowerCase())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void checkRecipe(String name) throws GordonException {
         boolean isRecipeFound = false;
 
@@ -138,30 +120,12 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
   
+
+    /////////////////////////// TAGGING FUNCTIONALITIES ///////////////////////////
     public void addCookbookTag(Tag tag) {
         // Prevent duplicate master-Tags at Cookbook level
-        if (!isCookbookTagExists(tag.getTagName())) {
+        if (!doesCookbookTagExists(tag.getTagName())) {
             cookbookTags.add(tag);
-        }
-    }
-
-    public void appendRecipeToCookbookTag(String tagName, String recipeName) {
-        // only if tag already exists in Cookbook
-        try {
-            Tag extractedTag = extractTag(tagName.trim());
-            extractedTag.addAssociatedRecipeName(recipeName);
-        } catch (GordonException e) {
-            System.out.println("GordonException: " + e.getMessage());
-        }
-    }
-
-    public void removeRecipeFromCookbookTag(String tagName, String recipeName) {
-        // only if tag already exists in Cookbook
-        try {
-            Tag extractedTag = extractTag(tagName.trim());
-            extractedTag.removeAssociatedRecipeName(recipeName.trim());
-        } catch (GordonException e) {
-            System.out.println("GordonException: " + e.getMessage());
         }
     }
 
@@ -169,26 +133,46 @@ public class Cookbook {
         cookbookTags.remove(tag);
     }
 
-    public void addRecipeTag(Tag tag) throws GordonException {
+    public void appendRecipeToCookbookTag(String tagName, String recipeName) {
+        // only if tag already exists in Cookbook
+        try {
+            Tag extractedTag = extractCookbookTag(tagName);
+            extractedTag.addAssociatedRecipeName(recipeName);
+        } catch (GordonException e) {
+            System.out.println("GordonException: " + e.getMessage());
+        }
+    }
+
+    public void deleteRecipeFromCookbookTag(String tagName, String recipeName) {
+        // only if tag already exists in Cookbook
+        try {
+            Tag extractedTag = extractCookbookTag(tagName);
+            extractedTag.removeAssociatedRecipeName(recipeName);
+        } catch (GordonException e) {
+            System.out.println("GordonException: " + e.getMessage());
+        }
+    }
+
+    public void addTagToRecipes(Tag tag) throws GordonException {
         for (Recipe recipe : recipes) {
             // ensure that Tag corresponds to correct recipe
             if (tag.containsAssociatedRecipeNames(recipe.getName())) {
-                recipe.addTag(tag);
+                recipe.addTagToRecipe(tag, recipe.getName());
             }
         }
     }
 
-    public void deleteRecipeTag(Tag tag) {
+    public void deleteTagFromRecipes(Tag tag) {
         for (Recipe recipe : recipes) {
             // ensure that Tag corresponds to correct recipe
-            if (tag.containsAssociatedRecipeNames(recipe.getName().trim())) {
-                recipe.deleteTag(tag);
+            if (tag.containsAssociatedRecipeNames(recipe.getName())) {
+                recipe.deleteTagFromRecipe(tag);
                 tag.removeAssociatedRecipeName(recipe.getName());
             }
         }
     }
 
-    public String listTags() {
+    public String listCookbookTags() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < cookbookTags.size(); i++) {
             output.append(i + 1).append(". ");
@@ -198,6 +182,25 @@ public class Cookbook {
         return output.toString();
     }
 
+    public Tag extractCookbookTag(String tagName) throws GordonException {
+        for (Tag tag : cookbookTags) {
+            if (tag.getTagName().toLowerCase().contains(tagName.toLowerCase())) {
+                return tag;
+            }
+        }
+        throw new GordonException(GordonException.NO_TAG_FOUND);
+    }
+
+    public boolean doesCookbookTagExists(String tagName) {
+        for (Tag cookbookTag : cookbookTags) {
+            if (cookbookTag.getTagName().toLowerCase().contains(tagName.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /////////////////////////// FILTER FUNCTIONALITIES ///////////////////////////
     public ArrayList<Recipe> filterByIngredients(ArrayList<String> ingredients) {
         return recipes.stream()
                 .filter(r -> r.containsIngredients(ingredients))
