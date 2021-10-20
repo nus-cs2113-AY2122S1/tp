@@ -109,5 +109,7 @@ public class AddContactCommand extends Command {
         return stringCleaner(saved).equals(stringCleaner(input));
     }
 
+    public String stringCleaner(String input) {
+        return input.replace(" ", "").toLowerCase();
     }
 }
