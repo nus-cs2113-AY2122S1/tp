@@ -41,6 +41,11 @@ public class AddCommand extends Command {
         }
         String parameters = args.substring(COMMAND_WORD.length() + 1);
         String[] argList = parameters.split("/");
+        int stringLen = argList[1].length();
+        // Check for wrong format order: i/ID t/TITLE
+        if (!argList[0].equals("t") || !argList[1].substring(stringLen - 1).equals("i")) {
+            throw new LibmgrException(FORMAT_INCORRECT);
+        }
         int endIndex = argList[1].length() - 1;
         if (endIndex <= 0) {
             throw new LibmgrException(INVALID_TITLE);
