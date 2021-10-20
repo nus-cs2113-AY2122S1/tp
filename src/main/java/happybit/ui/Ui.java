@@ -118,6 +118,12 @@ public class Ui {
         printDashes();
     }
 
+    public void printUpdatedGoal(String oldGoalDescription, String goalDescription) {
+        printDashes();
+        System.out.println("Your goal \"" + oldGoalDescription + "\" has been changed to \"" + goalDescription + "\".");
+        printDashes();
+    }
+
     public void showError(String message) {
         printDashes();
         System.out.println(message);

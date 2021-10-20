@@ -137,7 +137,7 @@ public class GoalList {
     }
 
     /**
-     * List all the goals in the goalList.
+     * Lists all the goals in the goalList.
      *
      * @param ui User Interface class for printing goalList to output.
      * @throws HaBitCommandException If there are no items in the goalList.
@@ -150,7 +150,7 @@ public class GoalList {
     }
 
     /**
-     * List all the habits of a goal.
+     * Lists all the habits of a goal.
      *
      * @param goalIndex Integer index of goal in goalList.
      * @param ui        User Interface class for printing habitList to output.
@@ -165,6 +165,23 @@ public class GoalList {
             throw new HaBitCommandException(ERROR_EMPTY_HABIT_LIST);
         }
         ui.printHabitList(goal.getDescription(), habitList, numOfHabits);
+    }
+
+    /**
+     * Changes and updates the name of a goal with a new name from user.
+     *
+     * @param goalIndex Index of the goal in goalList.
+     * @param newGoalName New name user wants to change the goal to.
+     * @param ui User Interface class for printing the update made to output.
+     * @throws HaBitCommandException If the goalIndex is not within the range of the goalList.
+     */
+    public void updateGoalName(int goalIndex, String newGoalName, Ui ui) throws HaBitCommandException {
+        Goal goal = getGoal(goalIndex);
+        String oldGoalName = goal.getGoalName();
+        goal.setGoalName(newGoalName);
+
+        goalList.set(goalIndex, goal);
+        ui.printUpdatedGoal(oldGoalName, newGoalName);
     }
 
     /*

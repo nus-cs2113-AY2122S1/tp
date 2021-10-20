@@ -1,10 +1,10 @@
 # User Guide
 
-Ha(ppy)Bit is a desktop app aimed to improve both the **physical and mental lifestyle of students**, 
+_Ha(ppy)Bit_ is a desktop app aimed to assist **students** to improve their **physical and mental lifestyle**, 
 through the setting and tracking of goals to cultivate good habits. 
 The app operates on a Command Line Interface (CLI) while still 
 comprising features typically found in a Graphical User Interface (GUI). 
-Students who type fast will find that Ha(ppy)Bit performs habit tracking more efficiently than your 
+Students who type fast will find that _Ha(ppy)Bit_ performs habit tracking more efficiently than your 
 conventional GUI apps.
 
 * [Quick Start](#quick-start)
@@ -12,6 +12,7 @@ conventional GUI apps.
 * [Features](#features)
     * [Ask for Help: `help`](#ask-for-help-help)
     * [Set a Goal: `set`](#set-a-goal-set)
+    * [Update a Goal: `update`](#update-a-goal-update)
     * [Remove a Goal: `remove`](#remove-a-goal-remove)
     * [List all Goals: `list`](#list-all-goals-list)
     * [Add a Habit: `add`](#add-a-habit-add)
@@ -29,7 +30,7 @@ conventional GUI apps.
 1. Ensure you have Java 11 installed in your computer. If you do not have it installed, 
 download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
 2. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0). 
-3. Copy the file to the folder you want to use as the **home folder** for your Ha(ppy)Bit.
+3. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
 4. Open your terminal of choice inside the folder containing `tp.jar` file.
 5. Run the file using `java -jar tp.jar`.
 
@@ -91,9 +92,25 @@ Output:
 ```
 Your goal: [DF] Reduce spending has been added.
 ```
+### Update a Goal: `Update`
+Updates the name of a goal specified by its index.
+
+Format: `update <GOAL_INDEX> <NEW_GOAL_NAME>`
+
+Note: As of now, only goal name may be updated. To update other goal features you just have to wait :p 
+
+Example:
+
+```
+update 3 Reach for the Stars
+```
+Output:
+```
+Your goal "Reach for the Moon" has been changed to "Reach for the Stars".
+```
 
 ### Remove a Goal: `remove`
-Removes a goal specified by the index.
+Removes a goal specified by its index.
 
 Format: `remove <GOAL_INDEX>`
 
