@@ -179,6 +179,7 @@ public class ModuleStorage {
      *
      * @param moduleManager The ModuleManager containing all data from each module.
      * @param mod A module name in the moduleManager.
+     * @param toDeleteAll True if files in directory should be removed first, otherwise false.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void saveNotesFromModule(ModuleManager moduleManager, String mod, Boolean toDeleteAll) throws IOException {
