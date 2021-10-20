@@ -30,6 +30,7 @@ public class AddRecipeCommand extends Command {
             + "Parameters: r/RECIPE NAME i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...\n"
             + "Example: " + COMMAND_WORD
             + " r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2";
+    public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero.";
 
     private final String name;
     private final ArrayList<String> ingredientNames;
@@ -60,7 +61,7 @@ public class AddRecipeCommand extends Command {
             } catch (DuplicateDataException e) {
                 return String.format(MESSAGE_DUPLICATE_INGREDIENT, name, ingredientNames.get(i));
             } catch (IllegalValueException e) {
-                return "Quantity of ingredients for recipe cannot be zero.";
+                return MESSAGE_ILLEGAL_VALUE_ERROR;
             }
         }
 
