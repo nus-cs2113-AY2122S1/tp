@@ -1,8 +1,12 @@
 package seedu.command;
 
 import seedu.contact.Contact;
+import seedu.contact.ContactList;
 import seedu.contact.DetailType;
 import seedu.ui.TextUi;
+import seedu.ui.UserInputTextUi;
+
+import java.util.ArrayList;
 
 public class AddContactCommand extends Command {
     private final String name;
@@ -47,7 +51,13 @@ public class AddContactCommand extends Command {
 
     public void execute() {
         Contact addedContact = new Contact(name, github, linkedin, telegram, twitter, email);
-        contactList.addContact(addedContact);
-        TextUi.addContactMessage(addedContact, contactList.getListSize());
+        if (duplicateCatcher(addedContact, contactList)) {
+            TextUi.ignoreAddContact();
+        } else {
+            contactList.addContact(addedContact);
+            TextUi.addContactMessage(addedContact, contactList.getListSize());
+        }
+    }
+
     }
 }
