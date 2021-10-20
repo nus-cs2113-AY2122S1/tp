@@ -238,7 +238,8 @@ public class Storage {
         String dispenseStaff = FileParser.parseDispenseStaff(splitDispenseDetails);
         int dispenseStockId = FileParser.parseDispenseStockId(splitDispenseDetails);
 
-        Dispense dispense = new Dispense(dispenseName, dispenseQuantity, dispenseCustomerId, dispenseDate, dispenseStaff, dispenseStockId);
+        Dispense dispense = new Dispense(dispenseName, dispenseQuantity, dispenseCustomerId, dispenseDate,
+                dispenseStaff, dispenseStockId);
         dispense.setDispenseId(dispenseId);
         dispense.setDispenseCount(dispenseId);
         return dispense;
