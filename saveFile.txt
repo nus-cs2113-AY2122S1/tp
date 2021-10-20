@@ -1,16 +1,14 @@
-Chicken Rice
-Calories:400kcal
+Caprese Salad
+Calories (kcal): 
+400
 Ingredients needed: 
-1. Chicken
+1. Tomatoes
+2. Mozzarella
+3. Basil
+4. Olive Oil
 Method: 
-1. Cook
 Tags: 
-
-Duck Rice
-Calories:400kcal
-Ingredients needed: 
-1. Chicken
-Method: 
-1. Cook
-Tags: 
+1. Cut mozzarella into similar slices
+2. Arrange slices on plate
+3. Drizzle with olive oil
 
