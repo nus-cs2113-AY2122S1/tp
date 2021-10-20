@@ -1,0 +1,51 @@
+@startuml
+participant ":Ui" as ui #lightgreen
+participant ":DayUtil" as dayutil
+participant ":TaskList" as tasks
+participant "out:PrintStream" as out
+
+[-> ui : printTasksWithKeyword(taskList, keyword)
+activate ui
+
+opt isToday(period)
+ui -> dayutil : getToday()
+activate dayutil
+dayutil -> ui : period: String
+deactivate dayutil
+
+else isTomorrow(period)
+ui -> dayutil : getTomorrow()
+activate dayutil
+dayutil -> ui : period: String
+deactivate dayutil
+
+end
+
+ui -> tasks : filterTasksByPeriod(period)
+activate tasks
+
+tasks --> ui : :TaskList
+deactivate tasks
+
+alt filteredTaskList.isEmpty()
+
+ui -> out : println("There is no matching task in your list.")
+activate out
+out --> ui
+deactivate out
+
+else else
+
+ui -> out : println("Here are the matching tasks in your list:")
+activate out
+out --> ui
+deactivate out
+
+ui -> out : println(filteredTaskList)
+activate out
+out --> ui
+deactivate out
+
+end
+[<-- ui
+@enduml

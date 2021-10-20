@@ -1,0 +1,23 @@
+@startuml
+participant ":Ui" as ui #lightgreen
+participant ":Scanner" as scanner
+participant ":String" as string
+
+[-> ui : readUserResponse()
+activate ui
+
+ui -> scanner : nextLine()
+activate scanner
+
+scanner --> ui : result: String
+deactivate scanner
+
+ui -> string : strip()
+activate string
+
+string --> ui : ret: String
+deactivate string
+
+[<-- ui : String
+deactivate ui
+@enduml
