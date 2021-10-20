@@ -33,18 +33,24 @@ public class AddExerciseParser extends Parser {
             throw new GetJackDException("Error. Missing exercise parameters");
         }
 
-        String exerciseDescription = arguments[0];
-        String[] setsAndReps = arguments[1].split(" ");
-        String sets = setsAndReps[0];
-        String reps = setsAndReps[1];
-        String workoutIdentifier = (Command.workoutMode == 0) ? arguments[2] : null;
+        try {
+            String exerciseDescription = arguments[0];
+            String[] setsAndReps = arguments[1].split(" ");
+            String sets = setsAndReps[0];
+            String reps = setsAndReps[1];
+            String workoutIdentifier = (Command.workoutMode == 0) ? arguments[2] : null;
 
-        String[] exerciseArgs = new String[]{exerciseDescription, sets, reps, workoutIdentifier};
-        for (String s : exerciseArgs) {
-            assert (!s.contains(PARAMETER_SEPARATOR));
+            String[] exerciseArgs = new String[]{exerciseDescription, sets, reps, workoutIdentifier};
+            for (String s : exerciseArgs) {
+                assert (!s.contains(PARAMETER_SEPARATOR));
+            }
+
+            return exerciseArgs;
+            
+        } catch (ArrayIndexOutOfBoundsException e) {
+            LOGGER.info("Missing exercise arguments");
+            throw new GetJackDException("Error. Missing sets or reps parameters");
         }
-
-        return exerciseArgs;
     }
 
     private Command prepareAddExercise(String commandArgs) {
