@@ -81,26 +81,6 @@ Expected Output >
 			 Days: 
 ```
 
-### 2.3. Searching trip(s): `search`
-Searches and shows you details of all your trips that is saved in Traveller which contain the origin and destination country.
-
-#### Format: `search /from [origin country] /to [destination country]`
-
-#### Usage Example:
-
-Input > `search /from SKR /to JPN`
-
-Expected Output >
-```
-	Here are all your trips: 
-		TripName: myTrip
-			 Origin: SIN
-			 Destination: MLY
-			 Path: [SIN, MLY]
-			 Distances: [1.0]
-			 Days: 
-```
-
 
 ## 3. FAQ
 
