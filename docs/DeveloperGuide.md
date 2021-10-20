@@ -74,6 +74,37 @@ The `Storage` component,
 - can save workout list data in json format, and read them back into corresponding Java objects.
 - depends on some classes in the `Models` component within Storage (because the Storage component can only save/retrieve objects that belong to the Model).
 
+
+### CommandManager Component
+Location: `seedu.duke.parser`
+
+
+![img.png](umldg/CommandManager.png)
+
+__Note:__
+* `CommandManager` : Creates command objects based on User input
+* `Parser` : Deals with processing raw user input and returns information to the Command Manager on what commands to create
+
+The `CommandManager` component deals with taking the raw input String from the user and making sense of it.
+It's primary purpose is to take the user input and create a Command object corresponding to the user input. 
+
+The `generateCommand()` method in the CommandManager class creates a Parser object based on the type of command the user entered.
+The parser will then extract the relevant information and command arguments from the input String, then create a new Command object
+with the correct parameters.
+
+The basic `Parser` parent class has all the required methods to:
+* Identify the type of command the user inputs
+* Extract the command arguments
+
+`XYZCommandParser` are child classes which inherit from the `Parser` class and implement command-specific parsing and Command creation.
+
+Not all the Commands will have a defined Parser, as some commands do not take arguments and will always execute the same way
+(e.g. `bye` or `list`)
+
+Other commands that require parsing the command arguments in different ways, such are extracting exercise and workout index, will require
+further processing. This additional processing is defined by each Command's corresponding Parser. 
+
+
 ## Product scope
 ### Target user profile
 
