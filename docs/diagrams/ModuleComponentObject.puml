@@ -1,0 +1,36 @@
+@startuml
+class Module {
+    moduleCode : String
+    title : String
+    moduleCredit : String
+
+    serialize()
+    {static} deserialize()
+}
+
+class ModuleList {
+    getSize()
+    getModule(moduleIndex: int): Module
+    isEmpty()
+    addModule(newModule: Module)
+    deleteModule(moduleIndex: int)
+    serialize()
+    {static} deserialize(ui: Ui, data: List<String>)
+    deleteAllModules()
+}
+
+class FullModuleList {
+    loadModules()
+    getFullModuleList(): List<Module>
+    findModule(moduleCode: String): Module
+}
+
+ModuleList -> "*" Module : moduleList
+FullModuleList -> "*" Module : fullModuleList
+FullModuleList -> "*" Module : moduleMap
+
+class AddModuleCommand
+AddModuleCommand ..> Module
+AddModuleCommand ..> ModuleList
+AddModuleCommand ..> FullModuleList
+@enduml

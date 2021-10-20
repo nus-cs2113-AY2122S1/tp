@@ -40,7 +40,7 @@ public class Lesson {
         return startTime;
     }
 
-    public String endTime() {
+    public String getEndTime() {
         return endTime;
     }
 

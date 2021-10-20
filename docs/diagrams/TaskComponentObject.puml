@@ -1,0 +1,44 @@
+@startuml
+class Task {
+    title: String
+    dayOfTheWeek: String
+    information: String
+    isDone: boolean
+
+    serialize()
+    {static} deserialize()
+}
+
+class TaskList {
+    getSize(): int
+    getTask(taskIndex: int): Task
+    getNumberOfPendingTasks(): int
+    isEmpty(): boolean
+    addTask(newTask: Task)
+    deleteTask(taskIndex: int)
+    deleteAllTasks()
+    markTaskAsDone(taskIndex: int)
+    filterTasksByKeyword(keyword: String): TaskList
+    filterTasksByPeriod(period: String): TaskList
+    serialize()
+    {static} deserialize(ui: Ui, data: List<String>)
+}
+
+TaskList -> "*" Task : taskList
+
+class AddTaskCommand
+class DeleteTaskCommand
+class DoneTaskCommand
+class FindTaskCommand
+class ListTaskCommand
+AddTaskCommand ..> Task
+AddTaskCommand ..> TaskList
+DeleteTaskCommand ..>Task
+DeleteTaskCommand ..> TaskList
+DoneTaskCommand ..> Task
+DoneTaskCommand ..> TaskList
+FindTaskCommand ..> Task
+FindTaskCommand ..> TaskList
+ListTaskCommand ..> Task
+ListTaskCommand ..> TaskList
+@enduml
