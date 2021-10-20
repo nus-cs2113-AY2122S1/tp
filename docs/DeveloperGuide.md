@@ -83,7 +83,12 @@ program.
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+- Accessibility requirements: the application should be accessible by anyone with the `.jar` file
+- Constrains: the CSV files created by the application should be able to run on different machines running the same application
+- Fault tolerance requirements: the application should handle inputs with a reasonable amount of errors
+- Interoperability requirements: the application should run on macOS, Windows and Linux operating systems
+- Stability requirements: Application should run without internet so that user can access the application anywhere without having to connect to the internet
+
 
 ## Glossary
 
