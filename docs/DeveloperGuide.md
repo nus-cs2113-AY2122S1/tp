@@ -2,11 +2,38 @@
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+Third party library used: GSON under Apache License 2.0
 
-## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+## Design 
+
+###Architecture
+The ***Architecture Diagram*** given above explains the high-level design of the App.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main components of the architecture**
+
+`Main` is responsible for initialising the different components correctly at app launch, and connecting them with one another.
+
+`Commons` represents a collection of classes used by multiple components.
+The major classes in `Commons` are `Trip`, `Expense` and `Person`.  
+Further elaboration on these classes will be in the following sections later.
+
+The remaining components are as follows:
+
+`Ui`: The User Interface of the App
+`Parser`: The command executor
+`Storage`: Holds the data of the App in memory, and also reads and writes data to the hard disk
+
+**How the architecture components interact with one another**
+
+The ***Sequence Diagram*** below shows how the components interact with each other.
+For this particular interaction, the user has issued the command
+`create` with the correct input parameters.
+
+The sections below provide more details of the components and classes in them.
+
 
 ### `Trip` Class
 
