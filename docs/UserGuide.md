@@ -2,7 +2,10 @@
 
 ## Introduction
 
-StonksXD is a ...
+StonksXD is a smart money management application that tracks daily expenses, 
+sets/adjusts spending limits and gives advice based on daily expenses. 
+It is optimised for a once-a-day logging system and allows you to 
+view your financial records through both text and graphs in different currencies!
 
 ## Table of Contents
 
@@ -25,9 +28,12 @@ StonksXD is a ...
 1. Ensure that you have Java 11 or above installed.
 2. Down the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
 3. Copy the file to the folder you want to use as the home folder for your `StonksXD`.
-4. Type the command in the CLI and press Enter to execute it. e.g. typing `help` and pressing Enter will
-show you all the available commands and their format.
-5. Refer to the [Features](#features) below for details of each command.
+4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run `java -jar tp.java` in the command line. `StonksXD` will start up.
+5. In `StonksXD`, type the command in the CLI and press Enter to execute it. (Tip: type `help` to show all available commands and their format.)
+6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `StonksXD`.
+7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `StonksXD`.
+8. Type `balance` to view your net saving.
+9. Refer to the [Features](#features) below for details of each command.
 
 ## Features 
 
