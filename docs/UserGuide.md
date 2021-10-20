@@ -104,6 +104,24 @@ Date: 2021-08-20
 
 ### Swiching Database Year: `year`
 
+Selection of the database year.
+
+Format: `year <year>`
+
+* The <year> must strictly be 4 characters long and must only be numeric.
+
+Example of usage:
+
+`year 2020`
+
+Expected outcome: A message will be shown to alert the user that the database have been switched to 2020.
+
+```
+========================================================
+You are currently working on year 2020 database!
+========================================================
+```
+
 ## `find`
 
 ### Finding a Particular Expenditure/Budget: `find`
