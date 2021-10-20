@@ -5,6 +5,10 @@ Snippets of code from Baeldung’s guide to unit testing of system.out.println()
 
 Source: https://www.baeldung.com/java-testing-system-out-println
 
+Snippets of code from addressbook-level2’s Parser.java were used.
+
+Source: https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
+
 ## Design & implementation
 
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
@@ -14,6 +18,32 @@ The Ui’s main role is to provide feedback whenever the user enters a command t
 handles the indexing of each element in the listing methods before printing out to the standard output for users to see.
 
 ![img_1.png](img_1.png)
+
+### Data Saving Component
+The saving and loading of data is handled by the `DataManager` class. Data will be saved and loaded from 
+`StonksXD_Data.csv`, which is located in the same directory as the program. DataManager requires an instance of the 
+`Parser`, `FinancialTracker` and `Ui` class to function. 
+
+- When saving data into the csv file, `DataManager` uses Java's `FileWriter` and `BufferedWriter` class to 
+interact with the csv file.
+- When loading data from the csv file, `DataManager` uses Java's `FileInputStream` and `Scanner` to interact with 
+the csv file. 
+
+The image below illustrates the class diagram in the context of data saving and loading.
+
+![img_2.png](DataManagerCD.drawio.png)
+
+The image below illustrates the sequence diagram in the context of saving data into `StonksXD_Data.csv`.
+
+-Work in progress-
+
+The image below illustrates the sequence diagram in the context of loading data from `StonksXD_Data.csv` into the 
+program.
+
+-Work in progress-
+
+
+
 
 ## Product scope
 ### Target user profile
@@ -53,7 +83,12 @@ handles the indexing of each element in the listing methods before printing out 
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+- Accessibility requirements: the application should be accessible by anyone with the `.jar` file
+- Constrains: the CSV files created by the application should be able to run on different machines running the same application
+- Fault tolerance requirements: the application should handle inputs with a reasonable amount of errors
+- Interoperability requirements: the application should run on macOS, Windows and Linux operating systems
+- Stability requirements: Application should run without internet so that user can access the application anywhere without having to connect to the internet
+
 
 ## Glossary
 
