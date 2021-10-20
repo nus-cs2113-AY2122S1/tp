@@ -178,8 +178,8 @@ public class Ui {
     }
 
     public static void printIncorrectAmount(double amount) {
-        System.out.println("The amount you have entered is incorrect, it is either too high or low. The total " +
-                "of the expense should equal " + amount);
+        System.out.println("The amount you have entered is incorrect, it is either too high or low. The total "
+                + "of the expense should equal " + amount);
     }
 
     public static void printPeopleInvolved(ArrayList<Person> personArrayList) {

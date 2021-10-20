@@ -30,16 +30,16 @@ public class Expense {
         this.description = description;
         this.category = category;
         this.personsList = listOfPersons;
-        for (Person person : listOfPersons){
+        for (Person person : listOfPersons) {
             amountSplit.put(person, 0.0);
         }
     }
 
-    public void setPayer(Person person){
+    public void setPayer(Person person) {
         this.payer = person;
     }
 
-    public void setAmountSplit(Person person, double amount){
+    public void setAmountSplit(Person person, double amount) {
         amountSplit.put(person, amount);
     }
 
