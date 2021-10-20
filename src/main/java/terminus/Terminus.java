@@ -140,6 +140,7 @@ public class Terminus {
         TerminusLogger.info("Saving data into file...");
         try {
             this.moduleStorage.saveFile(moduleManager);
+            this.moduleStorage.saveAllNotes(moduleManager);
             TerminusLogger.info("Save completed.");
         } catch (IOException e) {
             TerminusLogger.warning("File saving has failed.");

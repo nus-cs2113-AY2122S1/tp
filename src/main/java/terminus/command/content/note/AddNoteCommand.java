@@ -84,7 +84,7 @@ public class AddNoteCommand extends Command {
 
         // Save to file
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.saveNotesFromModule(moduleManager, getModuleName());
+        moduleStorage.saveNotesFromModule(moduleManager, getModuleName(), false);
         return new CommandResult(true, false);
     }
 

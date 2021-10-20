@@ -170,7 +170,7 @@ public class ModuleStorage {
      */
     public void saveAllNotes(ModuleManager moduleManager) throws IOException {
         for (String mod : moduleManager.getAllModules()) {
-            saveNotesFromModule(moduleManager, mod);
+            saveNotesFromModule(moduleManager, mod, false);
         }
     }
 
@@ -181,7 +181,7 @@ public class ModuleStorage {
      * @param mod A module name in the moduleManager.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
-    public void saveNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
+    public void saveNotesFromModule(ModuleManager moduleManager, String mod, Boolean toDeleteAll) throws IOException {
         Path modDirPath = Paths.get(filePath.getParent().toString(), mod);
         assert CommonUtils.isValidFileName(mod);
         // Create module folder if it is missing.
@@ -190,9 +190,11 @@ public class ModuleStorage {
             Files.createDirectories(modDirPath);
         }
 
-        // Remove all files within the folder, used when notes have been deleted.
-        TerminusLogger.info("Removing files from directory: " + modDirPath);
-        deleteAllFilesInDirectory(modDirPath);
+        if (toDeleteAll) {
+            // Remove all files within the folder, used when notes have been deleted.
+            TerminusLogger.info("Removing files from directory: " + modDirPath);
+            deleteAllFilesInDirectory(modDirPath);
+        }
 
         // Write to its specific note files.
         TerminusLogger.info("Adding note files into directory: " + modDirPath);

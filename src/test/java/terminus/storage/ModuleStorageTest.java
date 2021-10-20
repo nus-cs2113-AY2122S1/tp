@@ -34,7 +34,7 @@ public class ModuleStorageTest {
         moduleManager = new ModuleManager();
         moduleManager.setModule(tempModule);
         moduleManager.getModule(tempModule).getContentManager(Note.class).add(new Note("test", "test"));
-        moduleStorage.saveNotesFromModule(moduleManager,tempModule);
+        moduleStorage.saveNotesFromModule(moduleManager,tempModule,true);
         moduleManager.getModule(tempModule).getContentManager(Link.class).add(new Link("test", "tuesday",
                 LocalTime.of(11, 11), "https://zoom.us/"));
     }
