@@ -44,7 +44,9 @@ The creation of tasks is done using Task Factories
 The example above shows the creation of a Todo Task using TodoFactory.
 1. It checks if it has the required arguments and then throws an exception for any required argument that does not exist e.g. description.
 1. After that it parses the dates, priority and recurrence arguments into the appropriate objects that are stored in the Task object
-1. Finally, it calls getConstructor() with the parameters. getConstructor()'s logic will find and call the appropriate Task constructor and return the Task created.
+1. Finally, it calls getConstructor() with the parameters. getConstructor()'s logic will find and call the appropriate Task constructor and return the Task created.  
+
+The same logical structure is used in the Deadline and Event factories.
 # Documentation, logging, testing, configuration, dev-ops
 
 - [Documentation guide](https://www.google.com)
