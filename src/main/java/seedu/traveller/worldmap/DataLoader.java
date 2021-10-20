@@ -11,8 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class Loader {
-    private static final Logger logger = Logger.getLogger(Loader.class.getName());
+public class DataLoader {
+    private static final Logger logger = Logger.getLogger(DataLoader.class.getName());
     private final int numberOfCities = 5;
     private final String filePath = "./flightData/flights.txt";
     private final String separator = "\\|";
