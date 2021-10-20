@@ -55,9 +55,9 @@ public class Recipe {
         final IngredientStorage ingredientStorage = ingredientRepository.findWithNullReturn(ingredientName);
         Ingredient ingredient;
         if (ingredientStorage == null) {
-            ingredientRepository.add(ingredientName, "");
+            ingredientRepository.add(ingredientName);
             ingredientNameIfNotInList = ingredientName + "\n";
-            ingredient = new Ingredient(ingredientName, "");
+            ingredient = new Ingredient(ingredientName);
         } else {
             ingredient = ingredientStorage.getIngredient();
         }

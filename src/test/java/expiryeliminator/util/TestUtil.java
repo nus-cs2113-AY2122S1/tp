@@ -115,8 +115,8 @@ public class TestUtil {
     public static IngredientRepository generateIngredientRepositoryWithoutUnitsForRecipe() {
         final IngredientRepository ingredientRepository = new IngredientRepository();
         try {
-            ingredientRepository.add("Chicken", "");
-            ingredientRepository.add("Salt", "");
+            ingredientRepository.add("Chicken");
+            ingredientRepository.add("Salt");
             return ingredientRepository;
         } catch (DuplicateDataException e) {
             fail("Ingredient repository should be valid by definition");
