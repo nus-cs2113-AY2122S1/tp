@@ -1,6 +1,1 @@
-# Rachel - Project Portfolio Page
-
-## Overview
-
-
-### Summary of Contributions
+Hi, I'm Rachel.
