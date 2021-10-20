@@ -8,8 +8,8 @@ import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.NewCommand;
 import seedu.traveller.commands.SearchCommand;
 import seedu.traveller.commands.ViewAllCommand;
-import seedu.traveller.commands.DeleteDayCommand;
 import seedu.traveller.commands.DeleteItemCommand;
+import seedu.traveller.commands.DeleteDayCommand;
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidAddItemFormatException;
@@ -49,39 +49,39 @@ public class Parser {
         String userCommand = userInput[0].toLowerCase();
 
         switch (userCommand) {
-        case "new":
-            command = parseNewCommand(userInput[1]);
-            break;
-        case "edit":
-            command = parseEditCommand(userInput[1]);
-            break;
-        case "delete":
-            command = parseDeleteCommand(userInput[1]);
-            break;
-        case "viewall":
-            command = parseViewallCommand();
-            break;
-        case "search":
-            command = parseSearchCommand(userInput[1]);
-            break;
-        case "add-day":
-            command = parseAddDayCommand(userInput[1]);
-            break;
-        case "add-item":
-            command = parseAddItemCommand(userInput[1]);
-            break;
-        case "delete-day":
-            command = parseDeleteDayCommand(userInput[1]);
-            break;
-        case "delete-item":
-            command = parseDeleteItemCommand(userInput[1]);
-            break;
-        case "exit":
-            command = parseExitCommand();
-            break;
-        default:
-            logger.log(Level.WARNING, "Invalid command input!");
-            throw new CommandNotFoundException(rawInput);
+            case "new":
+                command = parseNewCommand(userInput[1]);
+                break;
+            case "edit":
+                command = parseEditCommand(userInput[1]);
+                break;
+            case "delete":
+                command = parseDeleteCommand(userInput[1]);
+                break;
+            case "viewall":
+                command = parseViewallCommand();
+                break;
+            case "search":
+                command = parseSearchCommand(userInput[1]);
+                break;
+            case "add-day":
+                command = parseAddDayCommand(userInput[1]);
+                break;
+            case "add-item":
+                command = parseAddItemCommand(userInput[1]);
+                break;
+            case "delete-day":
+                command = parseDeleteDayCommand(userInput[1]);
+                break;
+            case "delete-item":
+                command = parseDeleteItemCommand(userInput[1]);
+                break;
+            case "exit":
+                command = parseExitCommand();
+                break;
+            default:
+                logger.log(Level.WARNING, "Invalid command input!");
+                throw new CommandNotFoundException(rawInput);
         }
         return command;
     }
