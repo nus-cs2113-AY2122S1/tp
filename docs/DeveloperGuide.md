@@ -13,8 +13,7 @@
 * __Instructions for manual testing__ 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
+* __EduRec:__ For the list of possible module mappings
 
 ## Getting started 
 Refer to our user guide [here](https://placeholder.com)
@@ -24,6 +23,15 @@ Refer to our user guide [here](https://placeholder.com)
 <img src="images/Placeholder_person.png" width = "280"/>  
 
 The ***Architecture Diagram*** above explains the high-level design of the App. 
+
+### Storage
+
+The storage component can implement the below features:
+
+* Read the list of module mappings offered by each university from the CSV file.
+* Read the list of NUS modules which can be mapped from the CSV file.
+* Save both user's module mappings for each university and their selected NUS modules in text
+  file and read them back into corresponding objects.
 
 ## Product scope
 ### Target user profile
