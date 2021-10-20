@@ -12,5 +12,5 @@
 Welcome to libmgr
 > Sorry, I don't understand what you mean
 >   (+) Added new item to catalogue:
-  123 | Available | The Hunger Games
+  123 | AVAILABLE | The Hunger Games
 > See you soon!
