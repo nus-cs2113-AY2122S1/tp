@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Income extends Entry {
     IncomeCategory category;
-    
+
     public Income(String description, double value, IncomeCategory category) {
         this.description = description;
         this.value = value;
@@ -27,8 +27,7 @@ public class Income extends Entry {
 
     @Override
     public String toString() {
-        String valueTwoDecimalPoint = String.format("%.2f",value);
-        return "[I] " + description + " - $" + valueTwoDecimalPoint + " ("
-                + date.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + ")";
+        String incomeDate = date.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        return String.format("[I] %s - $%.2f (%s)", description, value, incomeDate);
     }
 }

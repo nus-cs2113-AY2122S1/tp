@@ -17,7 +17,7 @@ Ui contains a Scanner object that takes in user inputs from the command line.
 The Ui’s main role is to provide feedback whenever the user enters a command through the form of messages. It also 
 handles the indexing of each element in the listing methods before printing out to the standard output for users to see.
 
-![img_1.png](img_1.png)
+![img_1](https://user-images.githubusercontent.com/69465661/138105673-1d21722d-0f77-4dcf-86d6-d38bffc08a40.png)
 
 ### Command Component
 

@@ -26,8 +26,6 @@ public class StonksXD {
     public void run() {
         dataManager.load(parser, finances, ui);
         ui.printWelcome();
-        //StonksGraph graph = new StonksGraph(finances);
-        //System.out.println(graph);
         boolean exitFlag = true;
         while (exitFlag) {
             String fullCommand = ui.readCommand();
