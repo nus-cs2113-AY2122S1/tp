@@ -14,11 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
-    public static final String COMMAND_WORD = Constants.COMMAND_LIST;
-
     public ListCommand(ListType type, UniversityList universitySelectedList,
                        ModuleList moduleSelectedList) throws IOException {
-        super(universitySelectedList, moduleSelectedList);
         assert type != null;
         switch (type) {
         case SELECTEDMODS:

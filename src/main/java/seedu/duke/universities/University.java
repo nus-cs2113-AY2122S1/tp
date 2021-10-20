@@ -44,6 +44,30 @@ public class University {
         return selectedMappings;
     }
 
+    public ModuleMapping getMapping(Module selectedLocalModule, ModuleList selectedModuleList) {
+        ModuleMapping selectedMapping = null;
+        for (int i = 0; i < list.size(); i++) {
+            ModuleMapping currentMapping = list.get(i);
+            if (currentMapping.localModule.getModuleCode()
+                    .equals(selectedLocalModule.getModuleCode())) {
+                selectedMapping = currentMapping;
+            }
+        }
+        return selectedMapping;
+    }
+
+    public Module getMappedModule(Module selectedLocalModule, ModuleList selectedModuleList) {
+        String mappedModuleCode = "";
+        for (int i = 0; i < list.size(); i++) {
+            ModuleMapping currentMapping = list.get(i);
+            if (currentMapping.localModule.getModuleCode()
+                    .equals(selectedLocalModule.getModuleCode())) {
+                mappedModuleCode = currentMapping.getMappedModule().getModuleCode();
+            }
+        }
+        return selectedModuleList.getModule(mappedModuleCode);
+    }
+
     public String getName() {
         return name;
     }

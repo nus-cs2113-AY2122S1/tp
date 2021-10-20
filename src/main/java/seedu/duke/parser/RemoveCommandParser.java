@@ -39,7 +39,7 @@ public class RemoveCommandParser {
                 logger.log(Level.WARNING, "University not found");
                 throw new ParseException("university not in list", 1);
             }
-            return new RemoveUniCommand(index, universitySelectedList);
+            return new RemoveUniCommand(index, universityMasterList, universitySelectedList);
         case Constants.FLAG_MODULE:
             if (index > moduleSelectedList.getSize()) {
                 logger.log(Level.WARNING, "module not found");

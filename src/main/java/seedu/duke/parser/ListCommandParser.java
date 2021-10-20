@@ -1,6 +1,8 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.ListCommand;
+import seedu.duke.commands.ListModCommand;
+import seedu.duke.commands.ListUniCommand;
 import seedu.duke.constants.Constants;
 import seedu.duke.enumerations.ListType;
 import seedu.duke.modules.ModuleList;

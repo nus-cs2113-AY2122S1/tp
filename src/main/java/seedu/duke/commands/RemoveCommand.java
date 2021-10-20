@@ -13,7 +13,6 @@ public class RemoveCommand extends Command {
     public RemoveCommand(String type, String description,
                          UniversityList universitySelectedList,
                          ModuleList moduleSelectedList) throws IOException {
-        super(universitySelectedList, moduleSelectedList);
         assert type != null;
         switch (type) {
         case "m":
