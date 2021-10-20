@@ -4,6 +4,7 @@ import seedu.duke.command.flags.ListFlag;
 import seedu.duke.command.flags.SortFlag;
 import seedu.duke.exception.EmptySortCriteriaException;
 import seedu.duke.exception.EmptyTasklistException;
+import seedu.duke.exception.InvalidTaskIndexException;
 import seedu.duke.exception.ListFormatException;
 import seedu.duke.exception.MissingFilterArgumentException;
 import seedu.duke.exception.SortFormatException;
@@ -203,12 +204,32 @@ public class TaskManager {
         return taskList.size();
     }
 
+    public static boolean isEmpty() {
+        return taskList.size() == 0;
+    }
+
     public static Task getTask(int index) {
         return taskList.get(index);
     }
 
     public static void addTask(Task task) {
         taskList.add(task);
+    }
+
+
+    public static void checkIndexValid(int index) throws InvalidTaskIndexException {
+        if (index < 0 || index > getTaskListSize() - 1) {
+            throw new InvalidTaskIndexException(++index);
+        }
+    }
+
+    public static Task deleteTask(int index) throws InvalidTaskIndexException {
+        checkIndexValid(index);
+        return taskList.remove(index);
+    }
+
+    public static void clear() {
+        taskList.clear();
     }
 
     private static void printArrayList(ArrayList<Task> filteredTasks) {
