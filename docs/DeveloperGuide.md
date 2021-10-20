@@ -25,6 +25,10 @@ original source as well}
 
 ## Implementation
 
+### Storage 
+
+The storage stores the add command
+
 ## Product scope
 
 ### Target user profile
