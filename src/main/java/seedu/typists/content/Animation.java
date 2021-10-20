@@ -48,6 +48,7 @@ public class Animation {
     public void resetAnimLeft() {
         animLeft = 1;
     }
+
     public void resetAnimRight() {
         animRight = 1;
     }
@@ -78,24 +79,24 @@ public class Animation {
 
     public void animateRight(String s) {
         switch (animRight) {
-            case 1:
-                print("| " + s);
-                break;
-            case 2:
-                print(" | " + s);
-                break;
-            case 3:
-                print("  | " + s);
-                break;
-            case 4:
-                print("   | " + s);
-                break;
-            case 5:
-                print("    | " + s);
-                break;
-            default:
-                animRight = 0;
-                print("     | " + s);
+        case 1:
+            print("| " + s);
+            break;
+        case 2:
+            print(" | " + s);
+            break;
+        case 3:
+            print("  | " + s);
+            break;
+        case 4:
+            print("   | " + s);
+            break;
+        case 5:
+            print("    | " + s);
+            break;
+        default:
+            animRight = 0;
+            print("     | " + s);
         }
         animRight++;
     }
