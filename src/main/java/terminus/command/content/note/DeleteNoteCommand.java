@@ -10,11 +10,6 @@ import terminus.ui.Ui;
 
 public class DeleteNoteCommand extends DeleteCommand {
 
-    /**
-     * Creates a DeleteCommand object with referenced to the provided class type.
-     *
-     * @param type Content object type.
-     */
     public DeleteNoteCommand(Class type) {
         super(type);
     }

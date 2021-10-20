@@ -128,17 +128,18 @@ public class CommonUtils {
      * @return True if name is a valid file name, false otherwise.
      */
     public static boolean isValidFileName(String name) {
+
+        if (name == null || name.isBlank() || name.length() > CommonFormat.MAX_FILENAME_LENGTH) {
+            return false;
+        }
+        boolean isOnlyAscii = name.chars()
+                .allMatch(c -> CommonFormat.STARTING_ASCII <= c && c <= CommonFormat.ENDING_ASCII);
+        boolean hasIllegalChar = name.chars().anyMatch(x -> CommonFormat.ILLEGAL_CHARACTERS.contains((char) x));
+        if (!isOnlyAscii || hasIllegalChar) {
+            return false;
+        }
         try {
-            if (name == null || name.length() > CommonFormat.MAX_FILENAME_LENGTH) {
-                return false;
-            }
             Paths.get(name);
-            boolean isOnlyAscii = name.chars()
-                    .allMatch(c -> CommonFormat.STARTING_ASCII <= c && c <= CommonFormat.ENDING_ASCII);
-            boolean hasIllegalChar = name.chars().anyMatch(x -> CommonFormat.ILLEGAL_CHARACTERS.contains((char) x));
-            if (!isOnlyAscii || hasIllegalChar) {
-                return false;
-            }
             return true;
         } catch (InvalidPathException e) {
             return false;
@@ -152,6 +153,7 @@ public class CommonUtils {
      * @return A string of the file name without its file extension.
      */
     public static String getFileNameOnly(String filename) {
+        assert filename != null;
         String[] string = filename.split("\\.");
         if (string != null && string.length == 2) {
             return string[0];
