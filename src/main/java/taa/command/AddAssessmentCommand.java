@@ -107,8 +107,10 @@ public class AddAssessmentCommand extends Command {
             throw new TaaException(MESSAGE_FAIL_TO_ADD);
         }
 
+        assert storage != null : "storage should exist.";
         storage.save(moduleList);
 
+        assert ui != null : "ui should exist.";
         ui.printMessage(String.format(MESSAGE_FORMAT_ASSESSMENT_ADDED,
                 assessment, assessmentList.getSize(), module));
     }
