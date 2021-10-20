@@ -1,4 +1,8 @@
 package seedu.duke.commands;
 
-public class RemoveModCommand {
+import seedu.duke.modules.ModuleList;
+
+public class RemoveModCommand extends Command {
+    public RemoveModCommand(int index, ModuleList moduleSelectedList) {
+    }
 }

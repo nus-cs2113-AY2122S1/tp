@@ -55,7 +55,7 @@ public class Parser {
             return new AddCommandParser().parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
         case Constants.COMMAND_EXIT:
-            return new ExitCommandParser().parse(universitySelectedList, moduleSelectedList);
+            return new ExitCommandParser().parse();
         default:
             throw new ParseException("Command not found", 1);
         }
