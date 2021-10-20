@@ -5,7 +5,6 @@ import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
 public class SearchMapCommand extends Command {
-    public static final String COMMAND_WORD = "searchmap";
 
     private final University selectedUniversity;
 
