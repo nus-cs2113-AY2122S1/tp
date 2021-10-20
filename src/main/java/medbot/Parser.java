@@ -72,25 +72,25 @@ public class Parser {
 
     private static final String ERROR_INVALID_VIEW_TYPE = "Invalid view type code." + END_LINE;
 
-    private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified" + END_LINE;
+    private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified." + END_LINE;
 
-    private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified" + END_LINE;
-    private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format" + END_LINE;
+    private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified." + END_LINE;
+    private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format." + END_LINE;
 
-    private static final String ERROR_PHONE_NUMBER_NOT_SPECIFIED = "Phone number not specified" + END_LINE;
-    private static final String ERROR_PHONE_NUMBER_TOO_FEW_DIGITS = "Phone number has too few digits" + END_LINE;
-    private static final String ERROR_PHONE_NUMBER_TOO_MANY_DIGITS = "Phone number has too many digits" + END_LINE;
+    private static final String ERROR_PHONE_NUMBER_NOT_SPECIFIED = "Phone number not specified." + END_LINE;
+    private static final String ERROR_PHONE_NUMBER_TOO_FEW_DIGITS = "Phone number has too few digits." + END_LINE;
+    private static final String ERROR_PHONE_NUMBER_TOO_MANY_DIGITS = "Phone number has too many digits." + END_LINE;
     private static final String ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS =
-            "Phone number contains unexpected characters" + END_LINE;
+            "Phone number contains unexpected characters." + END_LINE;
 
-    private static final String ERROR_EMAIL_ADDRESS_NOT_SPECIFIED = "Email address not specified" + END_LINE;
-    private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "Incorrect email address format" + END_LINE;
+    private static final String ERROR_EMAIL_ADDRESS_NOT_SPECIFIED = "Email address not specified." + END_LINE;
+    private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "Incorrect email address format." + END_LINE;
 
-    private static final String ERROR_ADDRESS_NOT_SPECIFIED = "Address not specified" + END_LINE;
+    private static final String ERROR_ADDRESS_NOT_SPECIFIED = "Address not specified." + END_LINE;
 
     private static final String REGEX_VERTICAL_LINE = "\\|";
     private static final String REGEX_INPUT_PARAMETER = " [a-zA-Z]{1,2}/";
-    private static final String REGEX_EMAIL = "(([\\w&&[^_]][\\w-\\.]*[\\w&&[^_]])|[\\w&&[^_]])\\@([\\w]+\\.)+[\\w]+";
+    private static final String REGEX_EMAIL = "(([a-zA-Z0-9][\\w-.]*[a-zA-Z0-9])|[a-zA-Z0-9])@([\\w]+\\.)+[\\w]+";
     private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
     private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
     private static final String REGEX_PHONE_NUMBER_SEPARATOR = "[- _+()]";
@@ -533,7 +533,6 @@ public class Parser {
             if (!numberString.matches(REGEX_PHONE_NUMBER)) {
                 throw new MedBotParserException(ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS);
             }
-            assert numberString.length() == 8;
             return numberString;
         } catch (IndexOutOfBoundsException ie) {
             throw new MedBotParserException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
