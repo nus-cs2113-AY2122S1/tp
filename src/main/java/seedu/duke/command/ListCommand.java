@@ -10,11 +10,6 @@ import java.util.ArrayList;
 public class ListCommand extends Command {
     private static final Ui ui = new Ui();
 
-    // For JUnit Testing
-    public boolean isDish = false;
-    public boolean isIngr = false;
-    public boolean isOther = false;
-
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         switch (parameters.get(0)) {

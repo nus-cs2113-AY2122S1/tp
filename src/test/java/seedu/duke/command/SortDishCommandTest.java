@@ -18,7 +18,6 @@ class SortDishCommandTest {
     @Test
     void execute() throws FoodoramaException {
         //define inputs
-        ArrayList<String> testInputs = new ArrayList<>();
 
         ByteArrayInputStream fakeInput;
         Dish dishToAdd = new Dish("hamburger");
@@ -44,6 +43,7 @@ class SortDishCommandTest {
 
         //run command
         SortDishCommand testCommand = new SortDishCommand();
+        ArrayList<String> testInputs = new ArrayList<>();
         testCommand.execute(testInputs);
 
         //checking
