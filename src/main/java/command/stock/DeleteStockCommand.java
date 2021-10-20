@@ -101,6 +101,7 @@ public class DeleteStockCommand extends Command {
             }
             Stock stock = (Stock) medicine;
             if (stock.getStockID() == stockId) {
+                stock.setQuantity(0);
                 stock.setDeleted(true);
                 logger.log(Level.INFO, "Stock id found and deleted");
                 break;
@@ -136,6 +137,7 @@ public class DeleteStockCommand extends Command {
             Stock stock = (Stock) medicine;
             Date stockExpiryDate = stock.getExpiry();
             if (stockExpiryDate.before(date) || stockExpiryDate.equals(date)) {
+                stock.setQuantity(0);
                 stock.setDeleted(true);
                 rowsDeleted++;
             }

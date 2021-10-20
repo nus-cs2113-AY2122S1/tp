@@ -26,12 +26,12 @@ public class Storage {
     private static final String ORDER_FILE_PATH = "data/order.txt";
     private static final String DISPENSE_FILE_PATH = "data/dispense.txt";
     private static final int NUMBER_OF_STOCK_DATA_FIELDS = 8;
-    private static final int NUMBER_OF_ORDER_DATA_FIELDS = 7;
+    private static final int NUMBER_OF_ORDER_DATA_FIELDS = 5;
+    private static final int NUMBER_OF_DISPENSE_DATA_FIELDS = 7;
     private static File stockFile;
     private static File orderFile;
     private static File dispenseFile;
     private static Storage storage = null;
-
 
     /**
      * Helps to create the Storage instance or returns the Storage instance if it exists.
@@ -53,18 +53,6 @@ public class Storage {
         stockFile = new File(STOCK_FILE_PATH);
         orderFile = new File(ORDER_FILE_PATH);
         dispenseFile = new File(DISPENSE_FILE_PATH);
-    }
-
-    /**
-     * Write data into file corresponding files.
-     *
-     * @param data Data to be written into the file.
-     * @throws IOException If unable to write into file.
-     */
-    private void writeToFile(String data) throws IOException {
-        FileWriter fw = new FileWriter(STOCK_FILE_PATH);
-        fw.write(data);
-        fw.close();
     }
 
     /**
@@ -92,14 +80,90 @@ public class Storage {
 
         try {
             stockFile.createNewFile();
-            writeToFile(stockData);
+            writeToFile(stockData, STOCK_FILE_PATH);
             orderFile.createNewFile();
-            writeToFile(stockData);
+            writeToFile(orderData, ORDER_FILE_PATH);
             dispenseFile.createNewFile();
-            writeToFile(stockData);
+            writeToFile(dispenseData, DISPENSE_FILE_PATH);
         } catch (IOException e) {
             System.out.println("Something went wrong: " + e.getMessage());
         }
+    }
+
+    /**
+     * Write data into file corresponding files.
+     *
+     * @param data Data to be written into the file.
+     * @throws IOException If unable to write into file.
+     */
+    private void writeToFile(String data, String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(data);
+        fw.close();
+    }
+
+    /**
+     * Load saved data from data/stock.txt, data/order.txt, data/dispense.txt.
+     */
+    public ArrayList<Medicine> loadData() {
+        ArrayList<Medicine> medicines = new ArrayList<>();
+        if (stockFile.exists()) {
+            try {
+                medicines.addAll(readFromFile("STOCK", stockFile));
+            } catch (FileNotFoundException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
+        if (orderFile.exists()) {
+            try {
+                medicines.addAll(readFromFile("ORDER", orderFile));
+            } catch (FileNotFoundException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
+        if (dispenseFile.exists()) {
+            try {
+                medicines.addAll(readFromFile("DISPENSE", dispenseFile));
+            } catch (FileNotFoundException e) {
+                System.out.println("Something went wrong: " + e.getMessage());
+            }
+        }
+        return medicines;
+    }
+
+    /**
+     * Read and process medicine details from corresponding file to restore medicine state in program.
+     *
+     * @param file File object of data/stock.txt, data/order.txt, or data/dispense.txt
+     * @throws FileNotFoundException If file is not found.
+     */
+    private ArrayList<Medicine> readFromFile(String fileType, File file) throws FileNotFoundException {
+        Scanner sc = new Scanner(file);
+        ArrayList<Medicine> medicines = new ArrayList<>();
+        while (sc.hasNextLine()) {
+            String stockDetails = sc.nextLine();
+            try {
+                switch (fileType) {
+                case "STOCK":
+                    Medicine parsedStock = parseStockData(stockDetails);
+                    medicines.add(parsedStock);
+                    break;
+                case "ORDER":
+                    Medicine parsedOrder = parseOrderData(stockDetails);
+                    medicines.add(parsedOrder);
+                    break;
+                case "DISPENSE":
+                    Medicine parsedDispense = parseDispenseData(stockDetails);
+                    medicines.add(parsedDispense);
+                    break;
+                default:
+                    break;
+                }
+            } catch (InvalidDataException e) {
+                System.out.println("Corrupted data detected in file"); // Maybe just log it instead of displaying?
+            }
+        }
+        return medicines;
     }
 
     /**
@@ -129,90 +193,55 @@ public class Storage {
         return stock;
     }
 
-    //    /**
-    //     * Read and process medicine order details from file to restore medicine order state in program.
-    //     *
-    //     * @param file File object of data/order.txt.
-    //     * @throws FileNotFoundException If file is not found.
-    //     */
-    //    private ArrayList<Medicine> readFromOrderFile(File file) throws FileNotFoundException {
-    //        Scanner sc = new Scanner(file);
-    //        ArrayList<Medicine> medicines = new ArrayList<>();
-    //        while (sc.hasNextLine()) {
-    //            String orderDetails = sc.nextLine();
-    //            try {
-    //                Medicine parsedOrder = parseOrderData(orderDetails);
-    //                medicines.add(parsedOrder);
-    //            } catch (InvalidDataException e) {
-    //                System.out.println("Corrupted data detected in file"); // Maybe just log it instead of displaying?
-    //            }
-    //        }
-    //        return medicines;
-    //    }
-
-    //    /**
-    //     * Parse order data and create an order object based on it.
-    //     *
-    //     * @param orderDetails String of data of specific order from file data/order.txt.
-    //     * @return Order object for adding into medicines.
-    //     */
-    //    private Medicine parseOrderData(String orderDetails) throws InvalidDataException {
-    //        String[] orderStockDetails = orderDetails.split("\\|");
-    //        if (orderStockDetails.length != NUMBER_OF_ORDER_DATA_FIELDS) { // If not all fields present.
-    //            throw new InvalidDataException();
-    //        }
-    //
-    //        Order order = new Order();
-    //        return order;
-    //    }
-
     /**
-     * Read and process medicine stock details from file to restore medicine stock state in program.
+     * Parse order data and create an order object based on it.
      *
-     * @param file File object of data/stock.txt.
-     * @throws FileNotFoundException If file is not found.
+     * @param orderDetails String of data of specific order from file data/order.txt.
+     * @return Order object for adding into medicines.
      */
-    private ArrayList<Medicine> readFromStockFile(File file) throws FileNotFoundException {
-        Scanner sc = new Scanner(file);
-        ArrayList<Medicine> medicines = new ArrayList<>();
-        while (sc.hasNextLine()) {
-            String stockDetails = sc.nextLine();
-            try {
-                Medicine parsedStock = parseStockData(stockDetails);
-                medicines.add(parsedStock);
-            } catch (InvalidDataException e) {
-                System.out.println("Corrupted data detected in file"); // Maybe just log it instead of displaying?
-            }
+    private Medicine parseOrderData(String orderDetails) throws InvalidDataException {
+        String[] orderStockDetails = orderDetails.split("\\|"); //what if call split when no delimiter
+        if (orderStockDetails.length != NUMBER_OF_ORDER_DATA_FIELDS) { // If not all fields present.
+            throw new InvalidDataException();
         }
-        return medicines;
+        int orderId = FileParser.parseOrderId(orderStockDetails);
+        String orderName = FileParser.parseOrderName(orderStockDetails);
+        int orderQuantity = FileParser.parseOrderQuantity(orderStockDetails);
+        Date orderDate = FileParser.parseOrderDate(orderStockDetails);
+        boolean orderStatus = FileParser.parseOrderStatus(orderStockDetails);
+
+        Order order = new Order(orderName, orderQuantity, orderDate);
+        if (orderStatus) {
+            order.setDelivered();
+        }
+        order.setOrderId(orderId);
+        order.setOrderCount(orderId);
+        return order;
     }
 
     /**
-     * Load saved data from data/stock.txt, data/order.txt, data/dispense.txt.
+     * Parse dispense data and create a dispense object based on it.
+     *
+     * @param dispenseDetails String of data of specific stock from file data/dispense.txt.
+     * @return Dispense object for adding into medicines.
      */
-    public ArrayList<Medicine> loadData() {
-        ArrayList<Medicine> medicines = new ArrayList<>();
-        if (stockFile.exists()) {
-            try {
-                medicines.addAll(readFromStockFile(stockFile));
-            } catch (FileNotFoundException e) {
-                System.out.println("Something went wrong: " + e.getMessage());
-            }
+    private Medicine parseDispenseData(String dispenseDetails) throws InvalidDataException {
+        String[] splitDispenseDetails = dispenseDetails.split("\\|");
+        if (splitDispenseDetails.length != NUMBER_OF_DISPENSE_DATA_FIELDS) { // If not all fields present.
+            throw new InvalidDataException();
         }
-        //        if (orderFile.exists()) {
-        //            try {
-        //                medicines.addAll(readFromFile(orderFile));
-        //            } catch (FileNotFoundException e) {
-        //                System.out.println("Something went wrong: " + e.getMessage());
-        //            }
-        //        }
-        //        if (dispenseFile.exists()) {
-        //            try {
-        //                medicines.addAll(readFromFile(stockFile));
-        //            } catch (FileNotFoundException e) {
-        //                System.out.println("Something went wrong: " + e.getMessage());
-        //            }
-        //        }
-        return medicines;
+        int dispenseId = FileParser.parseDispenseId(splitDispenseDetails);
+        String dispenseName = FileParser.parseDispenseName(splitDispenseDetails);
+        int dispenseQuantity = FileParser.parseDispenseQuantity(splitDispenseDetails);
+        String dispenseCustomerId = FileParser.parseDispenseCustomerId(splitDispenseDetails);
+        Date dispenseDate = FileParser.parseDispenseDate(splitDispenseDetails);
+        String dispenseStaff = FileParser.parseDispenseStaff(splitDispenseDetails);
+        int dispenseStockId = FileParser.parseDispenseStockId(splitDispenseDetails);
+
+        Dispense dispense = new Dispense(dispenseName, dispenseQuantity, dispenseCustomerId, dispenseDate,
+                dispenseStaff, dispenseStockId);
+        dispense.setDispenseId(dispenseId);
+        dispense.setDispenseCount(dispenseId);
+        return dispense;
     }
 }

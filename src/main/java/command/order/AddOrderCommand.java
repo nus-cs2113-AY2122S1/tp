@@ -114,8 +114,6 @@ public class AddOrderCommand extends Command {
                 e.printStackTrace();
             }
         }
-        Storage storage = Storage.getInstance();
-        storage.saveData(medicines);
     }
 
 
@@ -132,6 +130,8 @@ public class AddOrderCommand extends Command {
         Order order = new Order(name, quantity, date);
         medicines.add(order);
         ui.printOrder(order);
+        Storage storage = Storage.getInstance();
+        storage.saveData(medicines);
         logger.log(Level.INFO, "Successful addition of order");
     }
 }

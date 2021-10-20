@@ -99,6 +99,7 @@ public class UpdateStockCommand extends Command {
                 ui.print(oldFilteredStocks.get(i).getStockID() + " -> " + filteredStocks.get(i).getStockID());
             }
         }
+
         ui.printStocks(filteredStocks, medicines);
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);

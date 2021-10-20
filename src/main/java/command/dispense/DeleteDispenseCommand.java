@@ -31,7 +31,6 @@ public class DeleteDispenseCommand extends Command {
 
         Ui ui = Ui.getInstance();
         ArrayList<Medicine> medicines = Medicine.getInstance();
-        Storage storage = Storage.getInstance();
 
         String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};
@@ -72,6 +71,8 @@ public class DeleteDispenseCommand extends Command {
                 }
                 medicines.remove(dispense);
                 ui.print("Dispense deleted for Dispense Id " + dispenseId);
+                Storage storage = Storage.getInstance();
+                storage.saveData(medicines);
                 logger.log(Level.INFO, "Successful deletion of Dispense");
                 return;
             }
