@@ -10,6 +10,8 @@ import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.NewCommand;
 import seedu.traveller.commands.SearchCommand;
 import seedu.traveller.commands.ViewAllCommand;
+import seedu.traveller.commands.DeleteDayCommand;
+import seedu.traveller.commands.DeleteItemCommand;
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidAddItemFormatException;
 import seedu.traveller.exceptions.InvalidEditFormatException;
@@ -70,6 +72,12 @@ public class Parser {
             break;
         case "add-item":
             command = parseAddItemCommand(userInput[1]);
+            break;
+        case "delete-day":
+            command = parseDeleteDayCommand(userInput[1]);
+            break;
+        case "delete-item":
+            command = parseDeleteItemCommand(userInput[1]);
             break;
         case "exit":
             command = parseExitCommand();
@@ -193,6 +201,32 @@ public class Parser {
         Command command;
         logger.log(Level.INFO, "Delete command input");
         command = new DeleteCommand(userInput);
+        return command;
+    }
+
+    /**
+     * Parses user input to give a <code>DeleteDayCommand</code>.
+     * @param userInput Raw user input, with the first command option (delete-day) removed.
+     * @return Command A <code>DeleteDayCommand</code> object.
+     */
+    private static Command parseDeleteDayCommand(String userInput) {
+        Command command;
+        logger.log(Level.INFO, "Delete command input");
+        String[] input = userInput.split(" ");
+        command = new DeleteDayCommand(input[0],Integer.valueOf(input[1]));
+        return command;
+    }
+
+    /**
+     * Parses user input to give a <code>DeleteItemCommand</code>.
+     * @param userInput Raw user input, with the first command option (delete-item) removed.
+     * @return A <code>DeleteItemCommand</code> object.
+     */
+    private static Command parseDeleteItemCommand(String userInput) {
+        Command command;
+        logger.log(Level.INFO, "Delete command input");
+        String[] input = userInput.split(" ");
+        command = new DeleteItemCommand(input[0],Integer.valueOf(input[1]),Integer.valueOf(input[2]));
         return command;
     }
 
