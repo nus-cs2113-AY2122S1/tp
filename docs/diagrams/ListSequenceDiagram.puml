@@ -49,7 +49,7 @@ opt !isInvalidParameter
                 list <-- comparator : reverseSorted*
                 deactivate comparator
             else else
-                loop (Medicines : Medicines)
+                loop (* : Medicines)
                     list -> object : getAttributeValue()
                     list <-- object
                 end
