@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.constants.Constants;
 import seedu.duke.enumerations.ListType;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
@@ -13,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ListCommand extends Command {
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = Constants.COMMAND_LIST;
 
     public ListCommand(ListType type, UniversityList universitySelectedList,
                        ModuleList moduleSelectedList) throws IOException {
