@@ -1,12 +1,10 @@
 package seedu.duke.commands;
 
-import seedu.duke.modules.ModuleList;
 import seedu.duke.ui.Ui;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class FindUniCommand extends Command {
