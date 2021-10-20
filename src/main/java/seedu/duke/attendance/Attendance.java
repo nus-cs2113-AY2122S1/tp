@@ -13,17 +13,22 @@ public class Attendance {
         setSchedule(schedule);
     }
 
-    public void setMember(Member member) { this.member = member; }
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
-    public void setSchedule(TrainingSchedule schedule) { this.schedule = schedule; }
+    public void setSchedule(TrainingSchedule schedule) {
+        this.schedule = schedule;
+    }
 
     /**
-     * Formats description of attendance to be displayed to user
+     * Formats description of attendance to be displayed to user.
      *
      * @return Formatted string of an attendance
      */
     @Override
     public String toString() {
-        return "\n" + schedule.toString() + "\n" + member.toString();
+        return String.format("Name: %s | Training Name: %s | Status: [%s] ",
+                member.getName(), schedule.getTrainingName(), member.getAttendance());
     }
 }

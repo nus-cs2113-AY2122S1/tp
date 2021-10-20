@@ -2,19 +2,19 @@
 
 ## Introduction
 
-Duke is an greenfield application aimed to assist CCA's with their administrative issues.
+Duke is an greenfield application aimed to assist CCAs with their administrative issues.
 
-Duke is designed for users who are familiar with Command Line Interface operations
+Duke is designed for users who are familiar with Command Line Interface (CLI) operations.
 
-- [Pre-requisites](#Pre-requisites)
-- [Commands](#Commands)
-- [Command Summary](#Command-Summary)
+- [Pre-requisites](#pre-requisites)
+- [Commands](#commands)
+- [Command Summary](#command-summary)
 
 ## Pre-requisites
 1. Duke runs on Java 11. Please ensure you have `Java 11` installed on your workstation.
    1. You can download Java [here](https://java.com/en/download/) 
 2. Download the latest .jar of Duke [here](https://github.com/AY2122S1-CS2113T-F12-4/tp/releases)
-3. Run Duke with the command `java -jar duke.jar` on your Command Prompt `cmd.exe`
+3. Run Duke with the command `java -jar tP.jar` on your Command Prompt `cmd.exe`
 4. You should see the following screen if you have successfully run Duke
    ```
    Hello from
@@ -31,53 +31,85 @@ Duke is designed for users who are familiar with Command Line Interface operatio
 ## Commands 
 
 1. `add` This adds entries to the Entry List stored in Duke.
-    * The `add` keyword takes in 2 different arguments:
-      * `/m` adds member related information.
-        * use `/n` to input _name_ of your member.
+    * The `add` keyword takes in 3 different arguments:
+      * `/m` adds member-related information.
+        * use `/n` to input _name_ of your member. 
         * use `/s` to input _student number_ of your member.
-      * `/t` adds training related information.
-        * use `/at` to input _timing_ of the training entry.
+        * use `/g` to input _gender_ of your member.
+        * use `/p` to input _phone number_ of your member.
+      * `/t` adds training-related information.
+        * use `/n` to input _name_ of the training entry.
+        * use `/a` to input _timing_ of the training entry.
         * use `/v` to input _venue_ of the training entry.
-    * Format: add [/m </n MEMBER_NAME> </s STUDENT_NUMBER>] [/t </at TRAINING_TIME> </v TRAINING_VENUE>] 
+      * `/att` adds attendance-related information.
+        * use `/m` to input _name_ of your member.
+        * use `/a` to input _timing_ of the training entry.
+        * use `/d` to input _attendance status_ of your member, O for present and X for late.
+    * **Format:**
+      * add [/m </n MEMBER_NAME> </s STUDENT_NUMBER>]
+      * add [/t </a TRAINING_TIME> </v TRAINING_VENUE>]
+      * add [/att </m MEMBER_NAME>  </n TRAINING_NAME> </d PRESENT_OR_LATE>]
     * **Examples:**
-      - `add /m John Hwee /s A0248192K`
+      - `add /m /n John Hwee /s A0248192K /g M /p 91128888`
       - `add /t /n Weekly December Training 2 /a 12 Dec 2022 /v MPSH 2`
+      - `add /att /m Mark /n Monday Training /d !`
       
     * **Expected Output:**
    ```
-   Added a Member: Name: John Hwee | Student Number: A0248192K | Gender:   | Phone Number: 0   
+   Added a Member: Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
    
    Added a Training entry:
-   Training Name: Weekly December Training 2 | Venue: MPSH2 | Time: 12 Dec 2022 
+   Training Name: Weekly December Training 2 | Venue: MPSH2 | Time: 12 Dec 2022
+   
+   Added an Attendance entry:
+   Name: Mark | Training Name: Monday Training | Status: [!]
    ```
 
 2. `list` This lists out entries in Duke's Entry List.
    * The `list` keyword takes in 2 different arguments:
       * `/m` lists members and member related information.
       * `/t` lists trainings and training related information.
-   * Format: list [/m] [/t]
+      * `/att` lists attendance entries, each consisting of a member and the training they attended.
+   * Format: list [/m] [/t] [/att]
    * **Examples:**
       - `list /m`
       - `list /t`
+      - `list /att`
    
    * **Expected Output:**
    ```
-    [1] Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
-   ```
+   [1] Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888   
+    ```
+    ```
+   [1] Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
+    ```
+    ```
+   [1] Name: Mark | Training Name: Monday Training | Status: [!]
+    ```
 
 3. `delete` This deletes entries from the Entry List in Duke.
     * The `delete` keyword removes entries based on their index:
       * `/m <INDEX>` is used to delete a member from the members list 
       * `/t <INDEX>` is used to delete a training schedule from the trainings list
-      * You can get the index of a member or training by calling `list /m` or `list /t` respectively
+      * `/att <INDEX>` is used to delete an attendance entry from the attendance list
+      * You can get the index of a member or training by calling `list /m`, `list /t` or `list /att` respectively
     * **Examples:**
       - `delete /m 1`
-      - `delete /t 1`
+      - `delete /t 2`
+      - `delete /att 3`
     
     * **Expected Output:**
+    ```
+    You have removed member:
+    Member Name: John Hwee | Student Number: A0248192K | Gender: M | Phone Number: 91128888
    ```
-   You have deleted: 
-   Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
+   ```
+    You have removed training entry:
+    Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
+   ```
+   ```
+    You have removed attendance entry:
+    Name: Mark | Training Name: Monday Training | Status: [!]
    ```
 4. `edit` This edits an existing entry from either the members list or training list
     * Entries are referenced using their index
@@ -90,7 +122,7 @@ Duke is designed for users who are familiar with Command Line Interface operatio
       * `/v <NEW_VENUE>` edits the current training _venue_
       
     * **Examples:**
-      - `edit /m 1 /n Juan Hwee /s A0123456B`
+      - `edit /m 1 /n Juan Hwee /s A0123456B /g F /p 90001111`
       - `edit /t 1 /n Weekly December Training 3 /a 13 Dec 2022 /v MPSH 3 | list /t`
     
     * **Expected Output:**
@@ -103,6 +135,14 @@ Duke is designed for users who are familiar with Command Line Interface operatio
 
 A 'cheat sheet' of commands here
 
-* add [/m </n MEMBER_NAME> </s STUDENT_NUMBER>] [/t </at TRAINING_TIME> </v TRAINING_VENUE>]
-* delete [/m <MEMBER_NAME> <MEMBER_INDEX_NUMBER>] [/t </at TRAINING_TIME> </v TRAINING_VENUE>]
-* list [/m] [/t]
+Action| Syntax |Remarks|
+|-----|----------|----|
+|add member| add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| 
+|add training| add [/t </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| 
+|add attendance| add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>]|
+|delete member| delete [/m <MEMBER_INDEX_NUMBER>]| Get the index by calling `list /m`
+|delete training|delete [/t <TRAINING_INDEX_NUMBER>]| Get the index by calling `list /t`
+|delete attendance|delete [/att <ATTENDANCE_INDEX_NUMBER>]| Get the index by calling `list /att`
+|edit member|edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| Index is compulsory, the rest are optional fields
+|edit training|edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| Index is compulsory, the rest are optional fields
+|list| list [/m] [/t] [/att]| /m for Member, /t for Training/ /att for Attendance
