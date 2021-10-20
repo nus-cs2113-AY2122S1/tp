@@ -1,5 +1,7 @@
 package seedu.duke.data;
 
+import seedu.duke.Status;
+
 public class Magazine extends Item {
     private String publisher;
     private String edition;
@@ -14,7 +16,7 @@ public class Magazine extends Item {
      * @param publisher The publisher of the magazine.
      * @param edition The edition of the magazine.
      */
-    public Magazine(String title, String id, String status, String publisher, String edition) {
+    public Magazine(String title, String id, Status status, String publisher, String edition) {
         super(title, id, status);
         this.publisher = publisher;
         this.edition = edition;
