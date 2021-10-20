@@ -14,7 +14,7 @@ public class NoteCommandParser extends InnerModuleCommandParser {
 
     private static NoteCommandParser parser;
 
-    public NoteCommandParser() {
+    private NoteCommandParser() {
         super(CommonFormat.COMMAND_NOTE);
     }
 

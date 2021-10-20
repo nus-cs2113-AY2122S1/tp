@@ -10,7 +10,7 @@ public class MainCommandParser extends CommandParser {
 
     private static MainCommandParser parser;
 
-    public MainCommandParser() {
+    private MainCommandParser() {
         super("");
     }
 
