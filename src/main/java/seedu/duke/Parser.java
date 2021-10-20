@@ -259,7 +259,8 @@ public class Parser {
                 } else {
                     amountBeingPaid.put(person, amount);
                 }
-            } if (total < expense.getAmountSpent()) {
+            }
+            if (total < expense.getAmountSpent()) {
                 Ui.printIncorrectAmount(expense.getAmountSpent());
                 getAdditionalExpenseInfo(expense);
             } else {
@@ -276,10 +277,10 @@ public class Parser {
         }
     }
 
-    private static Person checkValidPersonInExpense(String name, Expense expense){
+    private static Person checkValidPersonInExpense(String name, Expense expense) {
         for (Person person : expense.getPersonsList()) {
             if (name.equalsIgnoreCase(person.getName())) {
-                    return person;
+                return person;
             }
         }
         return null;
