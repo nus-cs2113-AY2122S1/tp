@@ -40,7 +40,9 @@ public class BudgetManager {
         if (budget.getLimit() != 0) {
             String month = LocalDate.now().getMonth().toString();
             double currAmount = budget.calAmount(expenses);
+            assert currAmount >= 0;
             double limit = budget.getLimit();
+            assert limit >= 0;
             double diff = limit - currAmount;
             if ((diff < threshold*limit) & (diff > 0)) {
                 ui.printBudgetWarning(month, budget.getName(), currAmount, limit);
@@ -51,20 +53,25 @@ public class BudgetManager {
     }
 
     public void setThreshold(double threshold) {
+        assert (threshold >= 0) & (threshold <= 1);
         this.threshold = threshold;
     }
 
     public void setBudget(double amount, ExpenseCategory category) {
+        assert amount >= 0;
+        assert category != ExpenseCategory.NULL;
         Budget budget = expenseCategoryToBudget(category);
         budget.setLimit(amount);
     }
 
     public double getBudget(ExpenseCategory category) {
+        assert category != ExpenseCategory.NULL;
         Budget budget = expenseCategoryToBudget(category);
         return budget.getLimit();
     }
 
     private Budget expenseCategoryToBudget(ExpenseCategory category) {
+        assert category != ExpenseCategory.NULL;
         Budget budget;
         switch (category) {
         case FOOD:

@@ -18,6 +18,7 @@ public class OverallBudget extends Budget {
         for (Expense expense : entries) {
             amount += expense.getValue();
         }
+        assert amount >= 0;
         return amount;
     }
 }

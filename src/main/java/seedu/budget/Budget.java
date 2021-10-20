@@ -34,6 +34,7 @@ public abstract class Budget {
                 amount += expense.getValue();
             }
         }
+        assert amount >= 0;
         return amount;
     }
 }
