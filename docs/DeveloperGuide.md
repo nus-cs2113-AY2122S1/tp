@@ -4,6 +4,8 @@
 - [Design & Implementation](#design--implementation)
   - [Data Component](#data-component)
   - [Storage Component](#storage-component)
+  - [Command Component](#command-component)
+  - [Command Manager Component](#commandmanager-component)
 - [Product Scope](#product-scope)
   - [Target User Profile](#target-user-profile)
   - [Value Proposition](#value-proposition)
@@ -74,10 +76,51 @@ The `Storage` component,
 - can save workout list data in json format, and read them back into corresponding Java objects.
 - depends on some classes in the `Models` component within Storage (because the Storage component can only save/retrieve objects that belong to the Model).
 
+### Command Component
+
+Location : `seedu.duke.command`
+
+![img.png](umldg/CommandDiagram.png)
+
+__Note:__
+
+* `Command` : Deals with executing user commands on `workout` and `workoutList`.
+* `XYZExerciseCommand` are child classes which inherit from the `Command` class and implement/execute exercise related
+commands.
+* `XYZWorkoutCommand` are child classes which inherit from the `Command` class and implement/execute workout related
+commands.
+* `XYZCommand` are child classes which inherit from the `Command` class and implement/execute miscellaneous commands.
+
+`ExitCommand` is also one of the commands that checks whether the command called from `main()` is an exitCommand or not.
+
+Exercise commands
+* `AddExerciseCommand` : To add a new exercise to a workout.
+* `DisplayExerciseCommand` : To display all the exercises in a workout.
+* `MarkExerciseAsDoneCommand` : To mark an exercise of a user given index as completed in a workout. 
+* `RemoveExerciseCommand` : To remove an exercise of a user given index from the workout.
+
+Workout commands
+* `CreateWorkoutCommand` : To create a new workout.
+* `DeleteWorkoutCommand` : To delete an existing workout.
+* `EnterWorkoutCommand` : To enter inside a workout in order to make necessary changes pertaining to that workout.
+* `ExitWorkoutCommand` : To exit from a workout to the main page.
+* `ListWorkoutsCommand` : To list all the workouts.
+* `RecommendWorkoutCommand` : To suggest pre-set workouts based on user given difficulty level.
+
+Miscellaneous commands
+* `HelpCommand` : To display the help message for a particular command when typed incorrectly.
+* `IncorrectCommand` : To show error message when command is invalid.
+* `SearchCommand` : To list all workouts or exercises matching the keyword.
+
+The basic `Command` parent class mainly has a method to execute necessary actions involving the `workout` 
+and `workoutList`, storage of data and the user interface.
+
+Most commands require the use of `workoutIndex` and `exerciseIndex` to execute commands for the user mentioned 
+workout/exercise. However, there are other commands which do not need them such as `HelpCommand`, `ListWorkoutsCommand` 
+and a few more.
 
 ### CommandManager Component
 Location: `seedu.duke.parser`
-
 
 ![img.png](umldg/CommandManager.png)
 
@@ -102,8 +145,7 @@ Not all the Commands will have a defined Parser, as some commands do not take ar
 (e.g. `bye` or `list`)
 
 Other commands that require parsing the command arguments in different ways, such are extracting exercise and workout index, will require
-further processing. This additional processing is defined by each Command's corresponding Parser. 
-
+further processing. This additional processing is defined by each Command's corresponding Parser.
 
 ## Product scope
 ### Target user profile
@@ -115,8 +157,6 @@ further processing. This additional processing is defined by each Command's corr
 
 ### Value proposition: 
 Manage fitness routines quickly
-
-
 
 ## User Stories
 
