@@ -16,7 +16,7 @@
 * __EduRec:__ For the list of possible module mappings
 
 ## Getting started 
-Refer to our user guide [here](https://placeholder.com)
+Refer to our user guide [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob/master/docs/UserGuide.md)
 
 ## Design & implementation
 
@@ -40,7 +40,7 @@ __SEPlanner__ is targeted at Computer Engineering students in NUS planning for t
 
 ### Value proposition
 
-Student Exchange is one of the most stressful and difficult things to plan for in a NUS students life. 
+Student Exchange Program is one of the most stressful and difficult things to plan for in a NUS students life. 
 With multiple sources of information and a frustrating webpage to navigate, SEPlanner aims to organise 
 a list of potential exchange Universities based on the users study plan, module requirements and personal preference.
 
@@ -59,11 +59,11 @@ a list of potential exchange Universities based on the users study plan, module 
 |v1.0|user|interact with the application on the command line in an efficient way|
 |v2.0|familiar user|save my university and module information|maintain access to my information when I restart the application|
 |v2.0|new user|view the program instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a University by name|locate a University without having to go through the entire list|
+|v2.0|familiar user|find a University by name|locate a University without having to go through the entire list|
 |v2.0|familiar user|search the available module mappings for a University based on the selected module list|get a list of module mappings for this university based on my selected modules|
 |v2.0|familiar user|add a pair of module mapping for a university|save a module mapping under the university that I selected|
 |v2.0|familiar user|delete a mapping pair of module for a university|remove a module mapping under a selected university|
-|v2.0|familiar user|input the command using name or index|modifying the list by keying in name of index of universities or modules|
+|v2.0|familiar user|pass in University as command argument using its index in the master list|access the exact University I want without having to type out its full name and facing bugs caused by typo|
 
 ## Non-Functional Requirements
 
