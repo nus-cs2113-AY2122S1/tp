@@ -88,6 +88,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses "find" command for keywords and executes find command.
+     *
+     * @param command The user input String
+     * @return Search results for entered keywords
+     * @throws DukeException If no keywords are entered
+     */
     private static String parseFindCommand(String command) throws DukeException {
         String[] keywords = command.replace(COMMAND_FIND, "").trim().split(SPACE_SEPARATOR);
 

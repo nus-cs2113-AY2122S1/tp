@@ -6,7 +6,7 @@ import seedu.duke.ingredients.IngredientList;
 
 import java.util.List;
 
-public class FindCommand implements Command {
+public class FindCommand extends Command {
 
     private static final String FIND_MESSAGE_START = "I found these ingredients for \"";
     private static final String FIND_MESSAGE_END = "\":";
