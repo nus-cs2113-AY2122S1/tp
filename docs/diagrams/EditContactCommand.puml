@@ -1,0 +1,40 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+
+-> ":MainParser": execute()
+activate ":MainParser"
+
+":MainParser" -> ":MainParser" :getCommandWord(userInput:String)
+":MainParser" -> ":EditContactParser" :EditContactParser(userInput:String)
+activate ":EditContactParser"
+
+":EditContactParser" -> ":EditContactParser" :parseContactDetails(userInput:String)
+
+":EditContactParser" -> ":IndexParser" :getIndexFromInput(userInput:String)
+activate ":IndexParser"
+":IndexParser" --> ":EditContactParser" :userIndex:int
+deactivate ":IndexParser"
+
+":EditContactParser" -> ":EditContactCommand" : execute(contactDetails:String[], contactIndex:int)
+activate ":EditContactCommand"
+
+":EditContactCommand" -> ":ContactList" : editContact(contactDetails:String[], contactIndex:int)
+activate ":ContactList"
+
+loop until all contactDetails have been updated
+alt#gold #lightgreen NAME_INDEX
+    ":ContactList" -> ":ContactList" : setName(contactDetails(i))
+    else GITHUB_INDEX
+    ":ContactList" -> ":ContactList" : setGithub(contactDetails(i))
+    else LINKEDIN_INDEX
+    ":ContactList" -> ":ContactList" : setLinkedin(contactDetails(i))
+    else TELEGRAM_INDEX
+    ":ContactList" -> ":ContactList" : setTelegram(contactDetails(i))
+    else TWITTER_INDEX
+    ":ContactList" -> ":ContactList" : setTwitter(contactDetails(i))
+    else EMAIL_INDEX
+    ":ContactList" -> ":ContactList" : setEmail(contactDetails(i))
+end
+end
+@enduml
