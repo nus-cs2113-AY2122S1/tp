@@ -85,10 +85,6 @@ public class Workout {
         return exercises.remove(displayIndex - 1);
     }
 
-    public ArrayList<Exercise> getArrayList() {
-        return getAllExercises();
-    }
-
     /**
      * To get all Exercises in the workout routine.
      *

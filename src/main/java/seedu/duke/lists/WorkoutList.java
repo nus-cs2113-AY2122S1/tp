@@ -48,10 +48,6 @@ public class WorkoutList {
         return workouts.remove(displayIndex - 1);
     }
 
-    public ArrayList<Workout> getArrayList() {
-        return getAllWorkouts();
-    }
-
     /**
      * To get all workout routines stored currently.
      *
