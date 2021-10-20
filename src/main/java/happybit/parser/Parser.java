@@ -1,9 +1,10 @@
 package happybit.parser;
 
 import happybit.command.Command;
-import happybit.command.HelpCommand;
-import happybit.command.ExitCommand;
 import happybit.command.ListGoalsCommand;
+import happybit.command.ExitCommand;
+import happybit.command.HelpCommand;
+import happybit.command.ReturnCommand;
 import happybit.exception.HaBitParserException;
 
 public class Parser {
@@ -19,6 +20,7 @@ public class Parser {
     private static final String COMMAND_DELETE_HABIT = "delete";
     private static final String COMMAND_COMPLETE_HABIT = "done";
     private static final String COMMAND_EXIT = "bye";
+    private static final String COMMAND_RETURN = "return";
 
     /**
      * Parses the user input.
@@ -126,6 +128,8 @@ public class Parser {
             return DoneParser.parseDoneHabitCommand(details);
         case COMMAND_EXIT:
             return new ExitCommand();
+        case COMMAND_RETURN:
+            return new ReturnCommand();
         case COMMAND_HELP:
         default:
             return new HelpCommand();

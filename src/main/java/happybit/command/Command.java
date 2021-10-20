@@ -27,4 +27,14 @@ public abstract class Command {
         return false;
     }
 
+    /**
+     * Checks if the return command is being called.
+     *
+     * @return True if Command subclass is returnCommand.
+     *         False if other Command subclasses.
+     */
+    public boolean isReturn() {
+        return false;
+    }
+
 }

@@ -5,15 +5,15 @@ import happybit.goal.GoalList;
 import happybit.storage.Storage;
 import happybit.ui.Ui;
 
-public class ExitCommand extends Command {
+public class ReturnCommand extends Command {
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-        // do nothing
+        isReturn();
     }
 
     @Override
-    public boolean isExit() {
+    public boolean isReturn() {
         return true;
     }
 
