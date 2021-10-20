@@ -52,7 +52,7 @@ public class RemoveCommandParser {
             type = "m";
             break;
         case Constants.FLAG_MAP:
-            return new RemoveMapCommand(index, universitySelectedList)
+            return new RemoveMapCommand(index, universitySelectedList);
         default:
             throw new ParseException("Wrong flags passed", 1);
         }
