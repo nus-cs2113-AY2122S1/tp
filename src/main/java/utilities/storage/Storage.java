@@ -130,7 +130,7 @@ public class Storage {
     }
 
     //    /**
-    //     * Read and process medicine stock details from file to restore medicine stock state in program.
+    //     * Read and process medicine order details from file to restore medicine order state in program.
     //     *
     //     * @param file File object of data/order.txt.
     //     * @throws FileNotFoundException If file is not found.
@@ -167,7 +167,7 @@ public class Storage {
     //    }
 
     /**
-     * Read and process medicine order details from file to restore medicine stock state in program.
+     * Read and process medicine stock details from file to restore medicine stock state in program.
      *
      * @param file File object of data/stock.txt.
      * @throws FileNotFoundException If file is not found.
