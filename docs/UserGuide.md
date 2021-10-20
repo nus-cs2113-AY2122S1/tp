@@ -86,9 +86,9 @@ Adds a **todo** task to the tasklist.
 Adds a **deadline** task to the tasklist.
 
 **Format:** `deadline <description> <--due dd-MM-yyyy hh:mm:ss> [--flag <argument>]`
-- `[description]` specifies the description of the todo.
+- `[description]` specifies the description of the deadline.
 - `<--due dd-MM-yyyy hh:mm:ss>` is a mandatory flag.
-- `[--flag <argument>]` specifies additional details of the todo.
+- `[--flag <argument>]` specifies additional details of the deadline.
   - When the task is due: `[--due dd-MM-yyyy hh:mm:ss]`
   - The priority of the task: `[--priority high|medium|low]`
   - How often the task is to repeat: `[--recur daily|weekly|monthly|yearly]`
@@ -113,9 +113,9 @@ Adds a **deadline** task to the tasklist.
 Adds a **event** task to the tasklist.
 
 **Format:** `event <description> <--start dd-MM-yyyy hh:mm:ss> <--end dd-MM-yyyy hh:mm:ss> [--flag <argument>]`
-- `[description]` specifies the description of the todo.
+- `[description]` specifies the description of the event.
 - `<--start dd-MM-yyyy hh:mm:ss>` and `<--end dd-MM-yyyy hh:mm:ss>` are mandatory flags.
-- `[--flag <argument>]` specifies additional details of the todo.
+- `[--flag <argument>]` specifies additional details of the event.
   - When the event starts: `[--start dd-MM-yyyy hh:mm:ss]`
   - When the event ends: `[--end dd-MM-yyyy hh:mm:ss]`
   - The priority of the event: `[--priority high|medium|low]`
