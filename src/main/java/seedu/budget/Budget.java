@@ -30,7 +30,8 @@ public abstract class Budget {
     public double calAmount(ArrayList<Expense> entries) {
         double amount = 0;
         for (Expense expense : entries) {
-            if ((expense.getCategory() == this.category) & (expense.getDate().getMonth() == LocalDate.now().getMonth())){
+            if ((expense.getCategory() == this.category)
+                    & (expense.getDate().getMonth() == LocalDate.now().getMonth())) {
                 amount += expense.getValue();
             }
         }

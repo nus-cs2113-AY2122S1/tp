@@ -592,7 +592,6 @@ public class Parser {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
 
-        String expenseCategory = matcher.group("category").trim().toUpperCase();
         String dataAmount = matcher.group("amount").trim();
         if (dataAmount.isBlank()) {
             return new InvalidCommand(Messages.BLANK_AMOUNT_MESSAGE);
@@ -607,6 +606,7 @@ public class Parser {
             return new InvalidCommand(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
         }
 
+        String expenseCategory = matcher.group("category").trim().toUpperCase();
         switch (expenseCategory) {
         case "FOOD":
             return new SetBudgetCommand(ExpenseCategory.FOOD, budgetAmount);

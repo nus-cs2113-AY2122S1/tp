@@ -343,7 +343,8 @@ public class Ui {
 
     public void printBudgetWarning(String month, String budgetName, double currAmount, double limit) {
         printLine();
-        System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f", month, budgetName, currAmount, limit);
+        System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f",
+                month, budgetName, currAmount, limit);
         System.out.print(newLine);
         System.out.println("Would you like to readjust your " + month + " " + budgetName + " budget?");
         printLine();
