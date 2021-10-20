@@ -3,6 +3,8 @@ participant ":Ui" as ui #lightgreen
 participant ":Scanner" as scanner
 participant ":String" as string
 
+hide footbox
+
 [-> ui : readUserResponse()
 activate ui
 

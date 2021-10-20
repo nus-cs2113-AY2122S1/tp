@@ -3,6 +3,8 @@ participant ":Ui" as ui #lightgreen
 participant ":TaskList" as tasks
 participant "out:PrintStream" as out
 
+hide footbox
+
 [-> ui : printTasksWithKeyword(taskList, keyword)
 activate ui
 
@@ -34,4 +36,5 @@ deactivate out
 end
 [<-- ui
 deactivate ui
+destroy tasks
 @enduml

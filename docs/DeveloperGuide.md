@@ -75,8 +75,10 @@ The `Ui` component contains:
 
 The methods in the `Ui` component may call methods from `TaskList`, `LessonList` or `ModuleList` to get information from the respective components.
 
+![UiClassDiagram](images/UiClassDiagram.png)
+
 #### Printing tasks filtered by day of the week:
-![UiPrintTasksWithPeriodSequence](images/UiPrintTasksWithPeriodSequence.png)
+![UiPrintTasksWithKeyword](images/PrintTasksWithKeywordSequenceDiagram.png)
 
 ### Logic component
 
