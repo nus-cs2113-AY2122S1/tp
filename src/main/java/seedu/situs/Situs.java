@@ -1,13 +1,11 @@
-package seedu.duke;
+package seedu.situs;
 
-import seedu.duke.alerts.Alerts;
-import seedu.duke.command.AlertExpiringSoonCommand;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.localtime.CurrentDate;
-import seedu.duke.storage.Storage;
-import seedu.duke.ui.UI;
+import seedu.situs.alerts.Alerts;
+import seedu.situs.exceptions.DukeException;
+import seedu.situs.localtime.CurrentDate;
+import seedu.situs.parser.Parser;
+import seedu.situs.ui.UI;
 
-import java.io.IOException;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
