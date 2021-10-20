@@ -17,10 +17,21 @@ class CookbookTest {
             r.addStep("Boil water");
             r.addStep("Grind beans");
             r.addStep("Pour water over grounds");
+            r.addStep("Serve in cup");
             r.setCalories(10);
             Cookbook c = new Cookbook();
             c.addRecipe(r);
-            assertEquals("1. Coffee" + System.lineSeparator(), c.toString());
+            Recipe r3 = new Recipe( "Milo");
+            r3.addIngredient("Milo powder");
+            r3.addIngredient("Hot water");
+            r3.addStep("Put milo powder into cup");
+            r3.addStep("Boil Water");
+            r3.addStep("Add hot water to cup");
+            r3.addStep("Stir well");
+            r3.addStep("Drink");
+            r3.setCalories(200);
+            c.addRecipe(r3);
+            assertEquals("1. Coffee" + System.lineSeparator() + "2. Milo" + System.lineSeparator(), c.toString() );
         } catch (GordonException g) {
             g.printStackTrace();
         }
