@@ -59,6 +59,8 @@ public class TimetableCommand extends Command {
         if (result.toString().isBlank()) {
             result.append(Messages.EMPTY_CONTENT_LIST_MESSAGE);
         }
+
+        index = 0;
         ui.printSection(result.toString());
         return new CommandResult(true, false);
     }
