@@ -21,6 +21,13 @@ If you can type fast, TAA can help keep track of your modules and students faste
 
 ## Features 
 
+### Viewing help: `help`
+Displays the available commands and how to use them
+
+Format: `help`
+
+<br>
+
 ### Listing all modules: `list_modules`
 Shows a list of all modules in the module list.
 
@@ -41,6 +48,47 @@ Examples:
 
 <br>
 
+### Adding a student to a specified module: `add_student`
+Adds a student to a particular module
+
+Format: `add_student c/<MODULE_CODE> i/<STUDENT_ID> n/<STUDENT_NAME>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `STUDENT_ID` refers to the ID of the student (e.g. A0217978J)
+* `STUDENT_NAME` refers to the name of the student (e.g. Jon Lim)
+
+Examples:
+* `add_student c/cs2113t i/a0212345x n/Jon Lim`
+* `add_student c/cs2113t n/Jonny Lims i/a1234567i`
+
+<br>
+
+### Edits a student information: `edit_student`
+Edits student information from a particular module
+
+Format: `edit_student c/<MODULE_CODE> s/<STUDENT_INDEX> i/<STUDENT_ID> n/<STUDENT_NAME>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `STUDENT_INDEX` refers to the index of the student in the module list
+* `STUDENT_ID` refers to the updated ID of the student (e.g. A0217978J)
+* `STUDENT_NAME` refers to the updated name of the student (e.g. Jon Limbs)
+
+Examples:
+* `edit_student c/cs2113t s/1 i/a03452345x n/Jon Lim`
+* `edit_student c/cs2113t s/5 n/Jonny Lims i/a120067i`
+
+<br>
+
+### Deletes a student information: `delete_student`
+Deletes student information from a particular module
+
+Format: `delete_student c/<MODULE_CODE> s/<STUDENT_INDEX>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `STUDENT_INDEX` refers to the index of the student in the module list
+
+Examples:
+* `delete_student c/cs2113t s/1`
+
+<br>
+
 ### Listing all students in a module: `list_students`
 Shows a list of all students in a particular module.
 
@@ -52,6 +100,24 @@ Examples:
 * `list_students c/CS2101`
 
 <br>
+
+### Find students in a module given a keyword: `find_student`
+Displays all students in the module matching the keyword along with their index
+
+Format: `find_student c/<MODULE_CODE> k/<KEYWORD`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `KEYWORD` refers to the keyword used to search the student list
+
+Examples:
+* `find_student c/CS2113T k/123`
+* `find_students c/CS2101 k/Jon`
+
+<br>
+
+### Exit the program: `exit`
+Exits the program
+
+Format: `exit`
 
 ## FAQ
 

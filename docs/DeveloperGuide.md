@@ -74,11 +74,15 @@ created `Module` object into the `modules` ArrayList within `ModuleList`.
 ## Product scope
 ### Target user profile
 
-{Describe the target user profile}
+* Teaching assistant who has a need to manage a significant number of students and their information
+* prefers desktop app over other types
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+* Manage student information faster than a typical mouse/GUI driven app
 
 ## User Stories
 
