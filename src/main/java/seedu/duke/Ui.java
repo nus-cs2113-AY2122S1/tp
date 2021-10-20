@@ -30,7 +30,9 @@ public class Ui {
             display++;
         }
     }
-
+    public static void printWrongInputMessage() {
+        System.out.println("Wrong input. Please key in --help for some help on how to use the programme.");
+    }
     public static void printHelp() {
         System.out.println("usage: " + "\n" +
                 "    add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>] \n" +
