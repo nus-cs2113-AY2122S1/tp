@@ -2,9 +2,7 @@ package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.traveller.items.Dining;
-import seedu.traveller.items.Housing;
-import seedu.traveller.items.Item;
+import seedu.traveller.Item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,31 +42,31 @@ public class ItemsListTest {
 
     @Test
     public void editItem_success() {
-        Housing housingItem = new Housing("HolidayInn", "Check-in 7pm");
-        Dining diningItem = new Dining("Collins", "Booked at 8pm");
-        itemsList.addItem(housingItem);
-        itemsList.addItem(diningItem);
+        Item item1 = new Item("7pm", "Check-in HolidayInn");
+        Item item2 = new Item("8pm", "Dinner at Collins");
+        itemsList.addItem(item1);
+        itemsList.addItem(item2);
 
-        Housing housingItem2 = new Housing("HotelCalifornia", "Check-in 2pm");
+        Item item3 = new Item("2pm", "Check-in HotelCalifornia");
 
-        itemsList.editItem(0, housingItem2);
-        assertEquals(housingItem2, itemsList.getItem(0));
+        itemsList.editItem(0, item3);
+        assertEquals(item3, itemsList.getItem(0));
     }
 
     @Test
     public void searchItem_success() {
-        Housing housingItem = new Housing("HolidayInn", "Check-in 7pm");
-        Housing housingItem2 = new Housing("HotelCalifornia", "Check-in 2pm");
-        Dining diningItem = new Dining("Collins", "Booked at 8pm");
-        Dining diningItem2 = new Dining("AnotherCollins", "Booked at 5pm");
-        itemsList.addItem(housingItem);
-        itemsList.addItem(housingItem2);
-        itemsList.addItem(diningItem);
-        itemsList.addItem(diningItem2);
+        Item item1 = new Item("7pm", "Check-in HolidayInn");
+        Item item2 = new Item("8pm", "Dinner at Collins");
+        Item item3 = new Item("2pm", "Check-in HotelCalifornia");
+        Item item4 = new Item("5pm", "Dinner at AnotherCollins");
+        itemsList.addItem(item1);
+        itemsList.addItem(item2);
+        itemsList.addItem(item3);
+        itemsList.addItem(item4);
 
         List<Item> ans = new ArrayList<>();
-        ans.add(diningItem);
-        ans.add(diningItem2);
+        ans.add(item2);
+        ans.add(item4);
 
         assertEquals(ans.toString(), itemsList.searchItem("Collins").toString());
     }

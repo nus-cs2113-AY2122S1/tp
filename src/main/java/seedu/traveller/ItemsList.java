@@ -36,7 +36,7 @@ public class ItemsList {
         ArrayList<Item> ans = new ArrayList<>();
         logger.log(Level.INFO, "Searching for keyword in itemsList");
         for (Item i: items) {
-            if (i.getItemName().contains(s) || i.getDetails().contains(s)) {
+            if (i.getItemName().contains(s) || i.getItemTime().contains(s)) {
                 ans.add(i);
             }
         }
