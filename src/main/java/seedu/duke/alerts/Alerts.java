@@ -1,6 +1,6 @@
 package seedu.duke.alerts;
 
-import seedu.duke.command.ExpireAtStartupCommand;
+import seedu.duke.command.AlertExpiringSoonCommand;
 import seedu.duke.exceptions.DukeException;
 
 public class Alerts {
@@ -12,7 +12,7 @@ public class Alerts {
 
     private String getExpiryAlerts() {
         try {
-            String resultMsg = new ExpireAtStartupCommand().run();
+            String resultMsg = new AlertExpiringSoonCommand().run();
             return resultMsg;
         } catch (DukeException e) {
             return e.getMessage();
