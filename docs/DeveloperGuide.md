@@ -111,6 +111,12 @@ will be created and executed in `Duke`. The sequence diagram below shows how the
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 
 
+### <a name="List"></a>Listing all contacts: `list`
+This feature is processed using `MainParser`. The control is sent to `ListContactsCommand` under `Command` to execute the
+command which uses a loop to get the Contact object at every available index and print it using the `printContactWithIndex`
+function in `TextUi` class.
+
+
 ## <a name="scope"></a>Product scope
 ### <a name="target"></a>Target user profile
 - Has a need to store a significant amount of computing-related contacts
