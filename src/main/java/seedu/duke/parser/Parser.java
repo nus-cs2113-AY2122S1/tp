@@ -6,7 +6,9 @@ import seedu.duke.commands.AddExpenditureCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteBudgetCommand;
 import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.DeleteExpenditureCommand;
+import seedu.duke.commands.DeleteSingleExpenditureCommand;
+import seedu.duke.commands.DeleteMultipleExpenditureCommand;
+import seedu.duke.commands.DeleteAllExpenditureCommand;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
@@ -21,6 +23,7 @@ import static seedu.duke.common.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH_OF_BUDGET;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_DATE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 
@@ -181,7 +184,7 @@ public class Parser {
             String deleteType = commandParams.substring(0, 2);
             switch (deleteType) {
             case ("b/"):
-                return new DeleteBudgetCommand(commandParams);
+                return prepareDeleteBudgetCommand(commandParams);
             case ("e/"):
                 return prepareDeleteExpenditureCommand(commandParams);
             default:
@@ -193,20 +196,59 @@ public class Parser {
     }
 
     /**
-     * Splits the commandParams to get index of expenditure to be deleted.
+     * Splits the commandParams to get which month of budget to be deleted.
+     *
+     * @param commandParams raw String input
+     * @return an DeleteBudgetCommand with proper parameters
+     */
+    private Command prepareDeleteBudgetCommand(String commandParams) {
+        try {
+            String[] split = commandParams.trim().split("b/|m/", 3);
+            assert split[0].equals("");
+            assert split[1].equals("");
+            String indexOfMonthString = split[2].trim();
+            int month = Integer.parseInt(indexOfMonthString);
+            return new DeleteBudgetCommand(month);
+        } catch (NumberFormatException nfe) {
+            return new InvalidCommand(
+                    String.format(MESSAGE_INVALID_MONTH_OF_BUDGET, DeleteBudgetCommand.MESSAGE_USAGE)
+            );
+        }
+    }
+
+    /**
+     * Splits the commandParams to get index/s of expenditure to be deleted.
      *
      * @param commandParams raw String input
      * @return an DeleteExpenditureCommand with proper parameters
      */
     private Command prepareDeleteExpenditureCommand(String commandParams) {
         try {
-            String[] split = commandParams.trim().split("/|", 2);
-            String indexString = split[1].trim();
-            int index = Integer.parseInt(indexString);
-            return new DeleteExpenditureCommand(index);
+            String[] split = commandParams.trim().split("e/|m/", 3);
+            assert split[0].equals("");
+            String indexOfMonthString = split[2].trim();
+            int month = Integer.parseInt(indexOfMonthString);
+            String indexOfExpenditureToBeDeleted = split[1].trim();
+            if (indexOfExpenditureToBeDeleted.length() == 1) {
+                int index;
+                index = Integer.parseInt(indexOfExpenditureToBeDeleted);
+                return new DeleteSingleExpenditureCommand(index, month);
+            } else if (indexOfExpenditureToBeDeleted.length() > 1) {
+                int startIndex;
+                int endIndex;
+                String[] index_split = indexOfExpenditureToBeDeleted.trim().split("-|",2);
+                String index1 = index_split[0].trim();
+                String index2 = index_split[1].trim();
+                startIndex = Integer.parseInt(index1);
+                endIndex = Integer.parseInt(index2);
+                return new DeleteMultipleExpenditureCommand(startIndex, endIndex, month);
+            }
+
+            return new DeleteAllExpenditureCommand(month);
+
         } catch (NumberFormatException nfe) {
             return new InvalidCommand(
-                    String.format(MESSAGE_INVALID_INDEX_OF_EXPENDITURE, DeleteExpenditureCommand.MESSAGE_USAGE)
+                    String.format(MESSAGE_INVALID_INDEX_OF_EXPENDITURE, DeleteSingleExpenditureCommand.MESSAGE_USAGE)
             );
         }
     }

@@ -1,6 +1,5 @@
 package seedu.duke.ui;
 
-
 import seedu.duke.data.AllRecordList;
 import seedu.duke.data.RecordList;
 import seedu.duke.data.records.Expenditure;
@@ -161,9 +160,21 @@ public class TextUi {
         }
     }
 
-    public static void showExpenditureDeletedMessage(int indexOfDeletedExpenditure, Expenditure deletedExpenditure) {
+    public static void showSingleExpenditureDeletedMessage(int indexOfDeletedExpenditure, Expenditure deletedExpenditure) {
         System.out.println("Successfully deleted Expenditure " + indexOfDeletedExpenditure + "." + deletedExpenditure);
         System.out.println(DIVIDER);
+    }
+
+    public static void showAllExpenditureDeletedMessage() {
+        System.out.println("Successfully deleted all Expenditures in this month!");
+        System.out.println(DIVIDER);
+    }
+
+    public static void showMultipleExpenditureDeletedMessage(int index, int endIndex, Expenditure deletedExpenditure) {
+        System.out.println("Successfully deleted Expenditure " + index + "." + deletedExpenditure);
+        if (index == endIndex) {
+            System.out.println(DIVIDER);
+        }
     }
 
     public static void showBudgetDeletedMessage() {
