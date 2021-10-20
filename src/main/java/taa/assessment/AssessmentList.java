@@ -53,7 +53,8 @@ public class AssessmentList implements ClassChecker {
         }
 
         double newTotalWeightage = totalWeightage + assessment.getWeightage();
-        if (!Assessment.isWeightageWithinRange(newTotalWeightage)) {
+        if (!Assessment.isWeightageWithinRange(newTotalWeightage)
+                || !Assessment.isMaximumMarksWithinRange(assessment.getMaximumMarks())) {
             return false;
         }
 
@@ -126,6 +127,10 @@ public class AssessmentList implements ClassChecker {
             } else {
                 assessmentNames.add(name.toLowerCase());
                 totalWeightage += assessment.getWeightage();
+            }
+
+            if (!Assessment.isMaximumMarksWithinRange(assessment.getMaximumMarks())) {
+                return false;
             }
         }
 
