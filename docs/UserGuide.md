@@ -85,27 +85,56 @@ Adds a **todo** task to the tasklist.
 ### 2.2.2 Deadline: `deadline`
 Adds a **deadline** task to the tasklist.
 
-**Format:**
+**Format:** `deadline <description> <--due dd-MM-yyyy hh:mm:ss> [--flag <argument>]`
+- `[description]` specifies the description of the todo.
+- `<--due dd-MM-yyyy hh:mm:ss>` is a mandatory flag.
+- `[--flag <argument>]` specifies additional details of the todo.
+  - When the task is due: `[--due dd-MM-yyyy hh:mm:ss]`
+  - The priority of the task: `[--priority high|medium|low]`
+  - How often the task is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
-**Example:**
+**Example:** `deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00`
+- Adds a deadline task with description `CS2106 Lab 3` to the tasklist.
+- Specifies the priority to be `high`.
+- Specifies the task is to be done on `20-10-2021 02:00:00`.
+- with no recurrence.
 
 **Expected Outcome:**
 
 ```
-
+-------------------------------------------------------------------------
+[user]: deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00
+|| Task created!
+|| CS2106 Lab 3 [high] (dueDate: 20-10-2021 02:00:00)
+-------------------------------------------------------------------------
 ```
 
 ### 2.2.3 Event: `event`
 Adds a **event** task to the tasklist.
 
-**Format:**
+**Format:** `event <description> <--start dd-MM-yyyy hh:mm:ss> <--end dd-MM-yyyy hh:mm:ss> [--flag <argument>]`
+- `[description]` specifies the description of the todo.
+- `<--start dd-MM-yyyy hh:mm:ss>` and `<--end dd-MM-yyyy hh:mm:ss>` are mandatory flags.
+- `[--flag <argument>]` specifies additional details of the todo.
+  - When the event starts: `[--start dd-MM-yyyy hh:mm:ss]`
+  - When the event ends: `[--end dd-MM-yyyy hh:mm:ss]`
+  - The priority of the event: `[--priority high|medium|low]`
+  - How often the event is to repeat: `[--recur daily|weekly|monthly|yearly]`
 
-**Example:**
+**Example:** `event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00:00`
+- Adds an event task with description `Marquee Christmas Party` to the tasklist.
+- Specifies the priority to be `high`.
+- Specifies the task to start on `25-12-2020 22:00:00` and end on `26-12-2020 04:00:00`.
+- with no recurrence.
 
 **Expected Outcome:**
 
 ```
-
+-------------------------------------------------------------------------
+[user]: event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00:00
+|| Task created!
+|| Marquee Christmas Party [high] (startDate: 25-12-2020 10:00:00 - endDate: 26-12-2020 04:00:00)
+-------------------------------------------------------------------------
 ```
 
 ### 2.3 Listing all tasks: `list`
@@ -187,33 +216,61 @@ Sorts the tasklist by a given criteria.
 -------------------------------------------------------------------------
 ```
 
-### 2.5 Deleting a task: `delete`
-Deletes an existing task in the tasklist.
+### 2.5 Deleting tasks: `delete`
+Deletes tasks specified in comma-seperated argument.
 
-**Format:**
+**Format:** `delete <indexes of tasks to delete>`
+- tasks would be comma seperated.
+  - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
+  - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
+  - `delete 1-3,5` would delete tasks with indexes 1, 2, 3 and 5.
 
-**Example:**
+**Example:** `delete 1-3,5`
+- delete tasks with indexes 1, 2, 3 and 5.
 
+**List before deletion:**
+
+```
+-------------------------------------------------------------------------
+[user]: list
+|| -------------
+||  MY TASKLIST
+|| -------------
+|| 1. read book [low] (doOn: 20-10-2021 02:00:00)
+|| 2. return book [medium] (dueDate: 21-10-2021 03:00:00)
+|| 3. project meeting [high] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
+|| 4. wash clothes [medium] (doOn: 20-10-2021 02:00:00)
+|| 5. homework [low] (dueDate: 21-10-2021 03:00:00)
+|| 6. movie screening [low] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
+-----
+```
 **Expected Outcome:**
 
 ```
-
+-------------------------------------------------------------------------
+[user]: delete 1-3,5
+|| Tasks deleted:
+|| read book [low] (doOn: 20-10-2021 02:00:00)
+|| return book [medium] (dueDate: 21-10-2021 03:00:00)
+|| project meeting [high] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
+|| homework [low] (dueDate: 21-10-2021 03:00:00)
+-------------------------------------------------------------------------
 ```
 
-### 2.6 Finding a task with a keyword: `find`
-Find tasks whose description contains a given keyword.
-
-**Format:** 
-
-**Example:** 
-
-**Expected Outcome:**
+**List after deletion:**
 
 ```
-
+-------------------------------------------------------------------------
+[user]: list
+|| -------------
+||  MY TASKLIST
+|| -------------
+|| 1. wash clothes [medium] (doOn: 20-10-2021 02:00:00)
+|| 2. movie screening [low] (startDate: 22-10-2021 04:00:00 - endDate: 22-10-2021 05:00:00)
+-------------------------------------------------------------------------
 ```
 
-### 2.7 Exiting the program: `bye`
+### 2.6 Exiting the program: `bye`
 Displays goodbye message and exits the program.
 
 **Format:** `bye`
@@ -231,14 +288,13 @@ Displays goodbye message and exits the program.
 
 ## 4. Command Summary
 
-Action   | Format                                  | Example                                    |
--------- | --------------------------------------- | ------------------------------------------ |
-help     | `help`                                  | `help`                                     |
-todo     | `todo <description> [--flag <argument>]`| `todo read book`                           |
-deadline |                                         |                                            |
-event    |                                         |                                            |
-list     | `list [--filter <argument>]`            | `list` or `list --type todo --priority low`|
-sort     | `sort --by <criteria>`                  | `sort --by priority`                       |
-delete   |                                         |                                            |
-find     |                                         |                                            |
-bye      | `bye`                                   | `bye`                                      |
+Action   | Format                                      | Example                                                                                              |
+-------- | --------------------------------------------| -----------------------------------------------------------------------------------------------------|
+help     | `help`                                      | `help`                                                                                               |
+todo     | `todo <description> [--flag <argument>]`    | `todo read book`                                                                                     |
+deadline | `deadline <description> [--flag <argument>]`|`deadline CS2106 Lab 3 --priority high --due 20-10-2021 02:00:00`                                     |
+event    | `event <description> [--flag <argument>]`   | `event Marquee Christmas Party --priority high --start 25-12-2020 22:00:00 --end 26-12-2020 04:00:00`|
+list     | `list [--filter <argument>]`                | `list` or `list --type todo --priority low`                                                          |
+sort     | `sort --by <criteria>`                      | `sort --by priority`                                                                                 |
+delete   | `delete <indexes of tasks to delete>`       | `delete 1, 2, 4-7`                                                                                   |
+bye      | `bye`                                       | `bye`                                                                                                |
