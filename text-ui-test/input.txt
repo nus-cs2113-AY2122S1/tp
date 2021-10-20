@@ -33,6 +33,7 @@ tag / NoExistFood / Hawker Food
 tag / Chicken Rice / Hawker Food + Favorite
 tag / Chicken Rice / Hawker Food
 tag / Duck Rice / Hawker Food
+tag / Duck Rice / Hawker Food
 tag / Duck Rice + Chicken Rice / Hawker Food
 listTags
 find /tag

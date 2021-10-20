@@ -12,12 +12,12 @@ public class Tag {
     }
 
     public String getTagName() {
-        return tagName;
+        return tagName.trim();
     }
 
     public boolean containsAssociatedRecipeNames(String recipeNames) {
         for (String associatedRecipeName : associatedRecipeNames) {
-            if (associatedRecipeName.equals(recipeNames)) {
+            if (associatedRecipeName.equalsIgnoreCase(recipeNames)) {
                 return true;
             }
         }
@@ -25,11 +25,12 @@ public class Tag {
     }
 
     public void addAssociatedRecipeName(String recipeName) {
-        associatedRecipeNames.add(recipeName);
+        if (!containsAssociatedRecipeNames(recipeName)) {
+            associatedRecipeNames.add(recipeName);
+        }
     }
 
     public void removeAssociatedRecipeName(String recipeName) {
         associatedRecipeNames.remove(recipeName);
     }
-
 }

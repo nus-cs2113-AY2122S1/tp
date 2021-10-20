@@ -19,17 +19,16 @@ public class TagAddCommand extends Command {
         try {
             cookbook.isRecipeExist(recipeName);    // Tag cannot exist without accompanying recipe
             for (String tagName : tagNames) {
-                Tag createdTag = new Tag(tagName.trim(), recipeName.trim());
+                Tag createdTag = new Tag(tagName.trim(), recipeName);
 
                 // if master-Tag doesn't exist in Cookbook
-                if (!cookbook.isCookbookTagExists(tagName)) {
+                if (!cookbook.doesCookbookTagExists(tagName.trim())) {
                     cookbook.addCookbookTag(createdTag);     // create a master-Tag in Cookbook
                 } else {
-                    cookbook.appendRecipeToCookbookTag(tagName, recipeName);    // modify master-Tag in Cookbook
+                    cookbook.appendRecipeToCookbookTag(tagName.trim(), recipeName);    // modify master-Tag in Cookbook
                 }
 
-                cookbook.addRecipeTag(createdTag);
-                System.out.println("Successfully tagged " + recipeName + " under " + tagName.trim());
+                cookbook.addTagToRecipes(createdTag);
             }
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());

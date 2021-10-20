@@ -24,19 +24,6 @@ public class Recipe {
         recipeTags = new ArrayList<>();
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setTimes(int prepTime, int cookTime) {
-        preparationTime = prepTime;
-        cookingTime = cookTime;
-    }
-
-    public int getTotalTime() {
-        return preparationTime + cookingTime;
-    }
-
     public void addIngredient(String ingredient) {
         ingredients.add(ingredient);
     }
@@ -72,25 +59,27 @@ public class Recipe {
         }
     }
 
-    public void addTag(Tag tag) {
+    /////////////////////////// TAGGING FUNCTIONALITIES ///////////////////////////
+    public void addTagToRecipe(Tag tag, String recipeName) {
         try {
             // Checking if tag has been linked to recipe before
-            if (isRecipeTagExists(tag.getTagName())) {
+            if (doesRecipeTagExists(tag.getTagName())) {
                 throw new GordonException(GordonException.DUPLICATE_TAG_NAME);
             }
             recipeTags.add(tag.getTagName());
+            System.out.println("Successfully tagged " + recipeName + " under " + tag.getTagName());
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());
         }
     }
 
-    public void deleteTag(Tag tag) {
+    public void deleteTagFromRecipe(Tag tag) {
         recipeTags.remove(tag.getTagName());
     }
 
-    public boolean isRecipeTagExists(String tagName) {
+    public boolean doesRecipeTagExists(String tagName) {
         for (String recipeTag : recipeTags) {
-            if (recipeTag.equals(tagName)) {
+            if (recipeTag.toLowerCase().trim().equals(tagName.toLowerCase())) {
                 return true;
             }
         }
@@ -105,6 +94,20 @@ public class Recipe {
         search.replaceAll(String::trim);
         search.replaceAll(String::toLowerCase);
         return tagsToLowercase.containsAll(search);
+    }
+
+    /////////////////////////// GET/SET FUNCTIONALITIES ///////////////////////////
+    public String getName() {
+        return name.trim();
+    }
+
+    public void setTimes(int prepTime, int cookTime) {
+        preparationTime = prepTime;
+        cookingTime = cookTime;
+    }
+
+    public int getTotalTime() {
+        return preparationTime + cookingTime;
     }
 
     public float getTotalPrice() {
