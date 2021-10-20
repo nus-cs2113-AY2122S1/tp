@@ -1,5 +1,5 @@
 @startuml
-participant ":Ui" as ui #lightgreen
+participant ":Ui" as ui
 participant ":TaskList" as tasks
 participant "out:PrintStream" as out
 
