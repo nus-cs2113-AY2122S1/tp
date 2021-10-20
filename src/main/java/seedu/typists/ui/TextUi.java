@@ -162,7 +162,10 @@ public class TextUi {
         viewAnimateRight("Sentence Error Rate: " + sentenceErrorRate);
     }
 
-    public void showAnimatedError(ArrayList<String> content, ArrayList<String> typed, int totalWord) throws InterruptedException {
+    public void showAnimatedError(ArrayList<String> content,
+                                  ArrayList<String> typed,
+                                  int totalWord)
+            throws InterruptedException {
         TextUi ui = new TextUi();
         out.println(SUMMARY);
         Error error = new Error();
