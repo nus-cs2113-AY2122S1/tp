@@ -1,12 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.AddUniCommand;
 import seedu.duke.commands.Command;
-import seedu.duke.commands.AddModCommand;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.ListCommand;
-import seedu.duke.commands.RemoveCommand;
-import seedu.duke.commands.SearchMapCommand;
 import seedu.duke.constants.Constants;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.UniversityList;
@@ -55,7 +49,7 @@ public class Parser {
             return new AddCommandParser().parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
         case Constants.COMMAND_EXIT:
-            return new ExitCommandParser().parse(universitySelectedList, moduleSelectedList);
+            return new ExitCommandParser().parse();
         default:
             throw new ParseException("Command not found", 1);
         }

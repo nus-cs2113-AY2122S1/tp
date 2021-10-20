@@ -45,6 +45,18 @@ public class University {
         return selectedMappings;
     }
 
+    public ModuleMapping getMapping(Module SelectedlocalModule, ModuleList selectedModuleList) {
+        ModuleMapping selectedMapping = null;
+        for (int i = 0; i < list.size(); i++) {
+            ModuleMapping currentMapping = list.get(i);
+            if (currentMapping.localModule.getModuleCode()
+                    .equals(SelectedlocalModule.getModuleCode())) {
+                selectedMapping = currentMapping;
+            }
+        }
+        return selectedMapping;
+    }
+
     public Module getMappedModule(Module SelectedlocalModule, ModuleList selectedModuleList) {
         String mappedModuleCode = "";
         for (int i = 0; i < list.size(); i++) {

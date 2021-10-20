@@ -5,13 +5,11 @@ import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
 public class SearchMapCommand extends Command {
-    public static final String COMMAND_WORD = "searchmap";
 
     private final University selectedUniversity;
 
     public SearchMapCommand(University selectedUniversity, UniversityList universitySelectedList,
                             ModuleList moduleSelectedList) {
-        super(universitySelectedList, moduleSelectedList);
         assert selectedUniversity.getName() != null;
         assert selectedUniversity.getClass() != null;
         this.selectedUniversity = selectedUniversity;

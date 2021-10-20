@@ -10,7 +10,7 @@ import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
 
-public class AddUniCommand extends AddCommand {
+public class AddUniCommand extends Command {
     private final University universityToAdd;
     private final int universityIndexToAdd;
 

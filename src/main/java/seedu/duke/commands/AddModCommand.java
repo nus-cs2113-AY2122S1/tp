@@ -8,7 +8,7 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
-public class AddModCommand extends AddCommand {
+public class AddModCommand extends Command {
 
     private final Module moduleToAdd;
     private final int moduleIndexToAdd;

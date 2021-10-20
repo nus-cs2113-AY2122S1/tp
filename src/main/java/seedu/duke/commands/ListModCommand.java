@@ -1,4 +1,8 @@
 package seedu.duke.commands;
 
-public class ListModCommand {
+import seedu.duke.modules.ModuleList;
+
+public class ListModCommand extends Command {
+    public ListModCommand(ModuleList moduleList) {
+    }
 }
