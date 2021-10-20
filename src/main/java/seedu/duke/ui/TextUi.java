@@ -69,29 +69,93 @@ public class TextUi {
         }
     }
 
+    public static String getMonth(int month) {
+        String monthString = null;
+        switch (month) {
+        case 1:
+            monthString = "January";
+            break;
+        case 2:
+            monthString = "February";
+            break;
+        case 3:
+            monthString = "March";
+            break;
+        case 4:
+            monthString = "April";
+            break;
+        case 5:
+            monthString = "May";
+            break;
+        case 6:
+            monthString = "June";
+            break;
+        case 7:
+            monthString = "July";
+            break;
+        case 8:
+            monthString = "August";
+            break;
+        case 9:
+            monthString = "September";
+            break;
+        case 10:
+            monthString = "October";
+            break;
+        case 11:
+            monthString = "November";
+            break;
+        case 12:
+            monthString = "December";
+            break;
+        default:
+            break;
+        }
+        return monthString;
+    }
+
     public static void showRecordsListView(AllRecordList list, int month, boolean isListAll) {
         int i = 1;
 
         if (isListAll) {
             for (month = 1; month <= 12; month += 1) {
-                System.out.println("Your budget for this month:" + list.getBudget(month) + LS
+                String monthString = getMonth(month);
+                if (list.checkOverspending(month)) {
+                    System.out.println("You are spending too much for " + monthString + " !");
+                }
+                String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString()
+                        : " Not Set";
+                System.out.println("Your budget for " + monthString + ":" + budget + LS
                         + "Your expenditures:");
-                System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
-                for (Expenditure a : list.getExpenditureRecords(month)) {
-                    System.out.println(i + "." + a);
-                    i++;
+                if (list.getMonthListSize(month) > 0) {
+                    System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
+                    for (Expenditure a : list.getExpenditureRecords(month)) {
+                        System.out.println(i + "." + a);
+                        i++;
+                    }
+                } else {
+                    System.out.println(" None ");
                 }
                 System.out.println(DIVIDER);
 
                 i = 1;
             }
         } else {
-            System.out.println("Your budget for this month:" + list.getBudget(month) + LS
+            String monthString = getMonth(month);
+            if (list.checkOverspending(month)) {
+                System.out.println("You are spending too much for " + monthString + " !");
+            }
+            String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString() : "Not Set";
+            System.out.println("Your budget for " + monthString + ":" + budget + LS
                     + "Your expenditures:");
-            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
-            for (Expenditure a : list.getExpenditureRecords(month)) {
-                System.out.println(i + "." + a);
-                i++;
+            if (list.getMonthListSize(month) > 0) {
+                System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
+                for (Expenditure a : list.getExpenditureRecords(month)) {
+                    System.out.println(i + "." + a);
+                    i++;
+                }
+            } else {
+                System.out.println(" None ");
             }
             System.out.println(DIVIDER);
         }

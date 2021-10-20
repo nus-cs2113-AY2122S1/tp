@@ -3,6 +3,7 @@ package seedu.duke.data;
 
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
+import seedu.duke.data.records.Record;
 import seedu.duke.storage.Storage;
 
 
@@ -97,6 +98,18 @@ public class RecordList {
 
     public Expenditure getExpenditure(int index) {
         return expenditureRecords.get(index);
+    }
+
+    public boolean checkOverspending() {
+        double sum = 0;
+        for (Record a: expenditureRecords) {
+            sum += a.getAmount();
+        }
+        if (sum > budget.getAmount() && budget.getAmount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public int getSize() {
