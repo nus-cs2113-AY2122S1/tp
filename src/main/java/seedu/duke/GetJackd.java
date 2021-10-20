@@ -60,8 +60,6 @@ public class GetJackd {
 
         Ui.printWelcomeMessage();
         new GetJackd().run();
-        Ui.printByeMessage();
-
         exit();
     }
 

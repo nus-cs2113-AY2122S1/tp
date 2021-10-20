@@ -13,7 +13,7 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
 public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "bye";
     public static final String MESSAGE_USAGE = "bye: Closes the program" + "\tExample: bye";
-    public static final String MESSAGE_GOODBYE = "bye bye";
+    public static final String MESSAGE_GOODBYE = "Bye. Hope you get your desired body soon, have a great day!";
     private static final Logger LOGGER = Logger.getLogger(ExitCommand.class.getName());
 
     /**

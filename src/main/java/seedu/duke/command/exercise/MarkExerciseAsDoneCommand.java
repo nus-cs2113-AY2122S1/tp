@@ -59,8 +59,6 @@ public class MarkExerciseAsDoneCommand extends Command {
 
             LOGGER.info("Set workout " + workoutIndex + ", exercise " + exerciseIndex + " done");
 
-            //ui.showToUser(String.format(MESSAGE_SUCCESS, toMarkDone));
-
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toMarkDone));

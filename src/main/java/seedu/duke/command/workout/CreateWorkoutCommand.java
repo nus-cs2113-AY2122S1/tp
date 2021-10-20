@@ -45,7 +45,6 @@ public class CreateWorkoutCommand extends Command {
     @Override
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         workouts.addWorkout(toCreate);
-        //ui.showToUser(String.format(MESSAGE_SUCCESS, toCreate));
 
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);

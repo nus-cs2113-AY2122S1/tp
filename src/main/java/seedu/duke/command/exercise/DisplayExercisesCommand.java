@@ -47,11 +47,9 @@ public class DisplayExercisesCommand extends Command {
         ArrayList<Exercise> exercises = workout.getAllExercises();
 
         if (exercises.isEmpty()) {
-            //ui.showToUser(MESSAGE_EMPTY_WORKOUT);
             return new CommandResult(MESSAGE_EMPTY_WORKOUT);
         } else {
             String displayMessage = String.format(MESSAGE_DISPLAY_EXERCISES, workout.getWorkoutName());
-            //ui.showItemListToUser(displayMessage, exercises, false);
             return new CommandResult(displayMessage, exercises);
         }
     }

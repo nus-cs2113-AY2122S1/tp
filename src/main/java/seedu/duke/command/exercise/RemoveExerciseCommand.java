@@ -53,7 +53,6 @@ public class RemoveExerciseCommand extends Command {
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         try {
             Exercise toRemove = workouts.getWorkout(workoutIndex).removeExercise(exerciseIndex);
-            //ui.showToUser(String.format(MESSAGE_SUCCESS, toRemove.toString()));
 
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);

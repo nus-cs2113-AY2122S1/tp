@@ -60,7 +60,6 @@ public class AddExerciseCommand extends Command {
         }
 
         workouts.getWorkout(workoutIndex).addExercise(toAdd);
-        //ui.showToUser(String.format(MESSAGE_SUCCESS, toAdd));
 
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);

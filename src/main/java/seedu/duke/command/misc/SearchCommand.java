@@ -49,7 +49,7 @@ public class SearchCommand extends Command {
             return new CommandResult(MESSAGE_NO_MATCHES_FOUND);
         }
 
-        return new CommandResult(map);
+        return new CommandResult(map, false);
     }
 
     private boolean getMatchingWorkouts(Map<String, ArrayList> map, ArrayList<Workout> workoutList) {
