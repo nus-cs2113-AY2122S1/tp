@@ -43,7 +43,8 @@ public class DeadlineFactory {
         }
     }
 
-    private static void checkForRequiredArguments(HashMap<String, String> flags) throws RequiredArgmentNotProvidedException {
+    private static void checkForRequiredArguments(HashMap<String, String> flags)
+            throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : DeadlineFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);
             if (flag == null) {

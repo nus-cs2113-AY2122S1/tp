@@ -52,7 +52,7 @@ public class EventFactory {
     }
 
     private static void checkForRequiredArguments(HashMap<String, String> flags)
-        throws RequiredArgmentNotProvidedException {
+            throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : EventFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);
             if (flag == null) {
