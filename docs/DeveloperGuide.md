@@ -54,7 +54,7 @@ Fixed values such as priority and recurrence are stored as an enum to ensure sta
 <img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/Task%20Enums.jpeg?raw=true" alt="TodoFactory Sequence Diagram" width="600"/>  
 
 The creation of tasks with the td, deadline r event cmmands are done using their respecive Task Factories  
-<img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/TodoFactory%20Sequence%20Diagram.JPG?raw=true" alt="TodoFactory Sequence Diagram" width="400"/>  
+<img src="https://github.com/AY2122S1-CS2113T-W13-3/tp/blob/master/docs/images/TodoFactory%20Sequence%20Diagram.JPG?raw=true" alt="TodoFactory Sequence Diagram" width="500"/>  
 The sequence diagram above shows the creation of a Todo Task using TodoFactory.
 1. It checks if it has the required arguments and then throws an exception for any required argument that does not exist e.g. description.
 1. After that it parses the dates, priority and recurrence arguments into the appropriate objects that are stored in the Task object
