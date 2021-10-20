@@ -12,11 +12,11 @@ Method:
 2. Cut mozzarella into similar slices
 3. Arrange slices on plate
 4. Drizzle with olive oil
-GordonException: Command given cannot be recognized.
-GordonException: Please use the word 'ingredients' before adding ingredients.
-GordonException: Command given cannot be recognized.
-GordonException: Command given cannot be recognized.
-GordonException: Please use the word 'steps' to kickstart the adding of steps.
+GordonException: You donkey! What are you talking about?
+GordonException: Please use the word '/ingredients' before adding ingredients.
+GordonException: You donkey! What are you talking about?
+GordonException: You donkey! What are you talking about?
+GordonException: Please use the word '/steps' to kickstart the adding of steps.
 Added Cookies recipe! Yum!
 Cookies
 Calories (kcal): 
@@ -64,8 +64,8 @@ Method:
 Searching by ingredient...
 1. Caprese Salad
 2. Fried Fish
-GordonException: Command given cannot be recognized.
-GordonException: Command given cannot be recognized.
+GordonException: You donkey! What are you talking about?
+GordonException: You donkey! What are you talking about?
 Setting calories...
 Calories set successfully.
 Finding recipes called fried fish.....
@@ -175,9 +175,9 @@ GordonException: Index is not a valid integer.
 OK! The recipe has been deleted from your cookbook.
 1. Caprese Salad
 2. Fried Fish
-GordonException: Command given cannot be recognized.
+GordonException: You donkey! What are you talking about?
 GordonException: Please input calories for the recipe.
-GordonException: Please input integer for calories.
+GordonException: Please input a number for calories.
 Added Duck Rice recipe! Yum!
 Duck Rice
 Calories (kcal): 
@@ -196,7 +196,7 @@ Method:
 1. ChickennRice
 GordonException: Please use 'tag / recipeName / tagName1 + tagName2 + ...'
 GordonException: Please use 'tag / recipeName / tagName1 + tagName2 + ...'
-GordonException: Please input name of recipe.
+GordonException: Please input the name of the recipe.
 GordonException: No such recipe exists.
 Successfully tagged Chicken Rice under Hawker Food
 Successfully tagged Chicken Rice under Favorite
@@ -206,7 +206,7 @@ GordonException: No duplicate tag names allowed within the same recipe.
 GordonException: No such recipe exists.
 1. Hawker Food
 2. Favorite
-GordonException: Command given cannot be recognized.
+GordonException: You donkey! What are you talking about?
 GordonException: Search returns no result.
 Searching by tags...
 1. Duck Rice
@@ -214,7 +214,7 @@ Searching by tags...
 Searching by tags...
 1. Chicken Rice
 GordonException: No tags detected, try again.
-GordonException: Please input name of recipe.
+GordonException: Please input the name of the recipe.
 Successfully untagged Chicken Rice under Hawker Food
 Successfully untagged Chicken Rice under Favorite
 Finding recipes called Chicken Rice.....
@@ -269,3 +269,4 @@ Tags:
 1. Poultry
 ====================
 Pack your bags, you're off the show
+
