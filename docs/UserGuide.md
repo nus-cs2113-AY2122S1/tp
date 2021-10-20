@@ -183,13 +183,34 @@ add "recipe name" "/ingredients" 1+2+3 "steps" 1+2+3
 
 ---
 
+### 7. Find a recipe: `find`
+
+Searches for any recipes that contain the keyword that you have entered.
+
+#### Format: `find KEYWORD`
+
+#### Example of usage:
+
+`find` fried rice
+
+#### Expected outcome
+
+Added fried rice recipe! Yum!
+
+---
+
 ## Cheat sheet
 
 Instruction | Command format
 ------------ | -------------
 Add a recipe | `add RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
-Delete a recipe | `delete RECIPE_INDEX`
+Delete a recipe | `deleteRecipe RECIPE_INDEX`
 Look up a recipe | `check RECIPE_NAME`
-Display all recipes | `list`
+Display all recipes | `listRecipes`
 Exit Gordon | `exit`
 Get some help | `help`
+Find a recipe | `find`
+Tag a recipe | `tag`
+Untag a recipe | `untag`
+List all tags | `listTags`
+Delete a tag | `deleteTag`
