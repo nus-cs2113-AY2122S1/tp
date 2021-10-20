@@ -260,4 +260,9 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void ignoreEditContact() {
+        String message = "Contact was not edited.";
+        printDoubleLineMessage(message);
+    }
+
 }
