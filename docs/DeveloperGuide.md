@@ -96,7 +96,14 @@ diagram below shows how the `execute()` function of `DeleteContactCommand` works
 ![Delete Sequence Diagram](images/DeleteContactCommandSequenceDiagram.png)
 
 
+### <a name="Search"></a>Searching a contact: `edit`
+This feature is processed using `SearchContactParser` under `MainParser`. In order to edit a contact in the contact list,
+a user must enter a command in the form `search [FLAG] [SEARCH QUERY]`. If no flag is specified, the search will be done
+on contact names buy default. From the user input, the search query and the search flag are obtained from the 
+`parseSearchQuery` and the `getDetailFlag` methods respectively. A `SearchContactCommand` with the specified parameters
+will be created and executed in `Duke`. The sequence diagram below shows how the whole process is carried out.
 
+![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
 
 
 ## <a name="scope"></a>Product scope
