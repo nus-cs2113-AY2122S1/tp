@@ -55,18 +55,18 @@ public class ListOrderCommand extends Command {
             return;
         }
 
-        ArrayList<Order> filteredOrder = new ArrayList<>();
+        ArrayList<Order> filteredOrders = new ArrayList<>();
 
-        assert (filteredOrder != null) : "Array is not initialised";
+        assert (filteredOrders != null) : "Array is not initialised";
 
         for (Medicine medicine : medicines) {
             if (medicine instanceof Order) {
-                filteredOrder.add((Order) medicine);
+                filteredOrders.add((Order) medicine);
             }
         }
-        filteredOrder = filterOrder(parameters, filteredOrder);
+        filteredOrders = filterOrders(parameters, filteredOrders);
 
-        ui.printOrders(filteredOrder);
+        ui.printOrders(filteredOrders);
         logger.log(Level.INFO, "Successful listing of order");
     }
 
@@ -75,32 +75,32 @@ public class ListOrderCommand extends Command {
      * Helps to filter order records based on the user's input.
      *
      * @param parameters    HashMap Key-Value set for parameter and user specified parameter value.
-     * @param filteredOrder Arraylist of Order objects.
+     * @param filteredOrders Arraylist of Order objects.
      * @return Arraylist of filtered Order objects based on the user's parameters values.
      */
-    private ArrayList<Order> filterOrder(LinkedHashMap<String, String> parameters,
-                                         ArrayList<Order> filteredOrder) {
+    private ArrayList<Order> filterOrders(LinkedHashMap<String, String> parameters,
+                                         ArrayList<Order> filteredOrders) {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
             case CommandParameters.ID:
-                filteredOrder = (ArrayList<Order>) filteredOrder.stream()
+                filteredOrders = (ArrayList<Order>) filteredOrders.stream()
                         .filter((m) -> (m).getOrderId() == Integer.parseInt(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.NAME:
-                filteredOrder = (ArrayList<Order>) filteredOrder.stream()
+                filteredOrders = (ArrayList<Order>) filteredOrders.stream()
                         .filter((m) -> (m.getMedicineName().toUpperCase()).contains(parameterValue.toUpperCase()))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.QUANTITY:
-                filteredOrder = (ArrayList<Order>) filteredOrder.stream().filter((m) ->
+                filteredOrders = (ArrayList<Order>) filteredOrders.stream().filter((m) ->
                         m.getQuantity() == Integer.parseInt(parameterValue)).collect(Collectors.toList());
                 break;
             case CommandParameters.DATE:
                 try {
                     Date date = DateParser.stringToDate(parameterValue);
-                    filteredOrder = (ArrayList<Order>) filteredOrder.stream()
+                    filteredOrders = (ArrayList<Order>) filteredOrders.stream()
                             .filter((m) -> (m).getDate().equals(date))
                             .collect(Collectors.toList());
                 } catch (ParseException e) {
@@ -108,20 +108,20 @@ public class ListOrderCommand extends Command {
                 }
                 break;
             case CommandParameters.STATUS:
-                filteredOrder = (ArrayList<Order>) filteredOrder.stream()
+                filteredOrders = (ArrayList<Order>) filteredOrders.stream()
                         .filter((m) -> (m.getStatus()).equalsIgnoreCase(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.SORT:
-                filteredOrder.sort(new OrderComparator(parameterValue.toLowerCase(), false));
+                filteredOrders.sort(new OrderComparator(parameterValue.toLowerCase(), false));
                 break;
             case CommandParameters.REVERSED_SORT:
-                filteredOrder.sort(new OrderComparator(parameterValue.toLowerCase(), true));
+                filteredOrders.sort(new OrderComparator(parameterValue.toLowerCase(), true));
                 break;
             default:
-                return filteredOrder;
+                return filteredOrders;
             }
         }
-        return filteredOrder;
+        return filteredOrders;
     }
 }
