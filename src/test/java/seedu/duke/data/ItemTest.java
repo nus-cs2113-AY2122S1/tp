@@ -2,7 +2,7 @@ package seedu.duke.data.item;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.*;
+import seedu.duke.Status;
 import seedu.duke.data.Item;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
