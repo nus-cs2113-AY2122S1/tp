@@ -413,6 +413,17 @@ public class Parser {
     }
 
     /**
+     * Function finds tasks with descriptions matching the user's query and adds them to a new ArrayList. If no matching
+     * words are found, the user will be notified.
+     *
+     * @param attendanceList ArrayList of tasks
+     * @param query   user input
+     */
+    public static void findInAttendanceEntries(AttendanceList attendanceList, String query) {
+        //Leave for v2.0
+    }
+
+    /**
      * Function deletes a member from the MemberList class.
      *
      * @param members MemberList which contains list of members
