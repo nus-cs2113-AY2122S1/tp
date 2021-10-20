@@ -1,0 +1,50 @@
+@startuml
+!include Style.puml
+skinparam sequence {
+ParticipantBorderColor black
+LifeLineBorderColor black
+LifeLineBackgroundColor peachpuff
+}
+
+skinparam sequenceArrowColor black
+
+Gordon -> Parser: addRecipeParse
+activate Parser
+
+Parser -> Parser: parseName
+activate Parser
+
+Parser --> Parser
+deactivate Parser
+
+Parser -> Recipe: <<create>>
+activate Recipe
+
+Parser -> Parser: parseIngredients
+activate Parser
+Parser -> Recipe: addIngredient
+
+Parser --> Parser
+deactivate Parser
+
+Parser -> Parser: parseSteps
+activate Parser
+Parser -> Recipe: addSteps
+
+Parser --> Parser
+deactivate Parser
+
+Parser -> Parser: parseCalories
+activate Parser
+
+Parser -> Recipe: addCalories
+
+Parser --> Parser
+deactivate Parser
+
+Recipe --> Parser: r
+deactivate Recipe
+
+Parser --> Gordon: addCommand
+deactivate Parser
+@enduml
