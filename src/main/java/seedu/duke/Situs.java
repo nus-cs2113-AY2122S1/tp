@@ -1,7 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.alerts.Alerts;
-import seedu.duke.command.ExpireAtStartupCommand;
+import seedu.duke.command.AlertExpiringSoonCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.localtime.CurrentDate;
 import seedu.duke.storage.Storage;

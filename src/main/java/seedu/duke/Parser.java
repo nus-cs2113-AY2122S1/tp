@@ -1,16 +1,17 @@
 package seedu.duke;
 
 import seedu.duke.command.AddCommand;
+import seedu.duke.command.AlertCommand;
+import seedu.duke.command.AlertExpiringSoonCommand;
+import seedu.duke.command.AlertLowStockCommand;
+import seedu.duke.command.DateCommand;
+import seedu.duke.command.DeleteCommand;
+import seedu.duke.command.ExpireCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.UpdateCommand;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.DateCommand;
-import seedu.duke.command.ExpireCommand;
-
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
-import seedu.duke.localtime.CurrentDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -25,6 +26,8 @@ public class Parser {
     private static final String COMMAND_EXIT = "exit";
     private static final String COMMAND_DATE = "date";
     private static final String COMMAND_EXPIRE = "expire";
+    private static final String COMMAND_ALERTS = "alerts";
+    private static final String COMMAND_SET_THRESHOLD = "set";
 
     private static final String INVALID_COMMAND_MESSAGE = "Invalid command!";
     private static final String DELETE_ERROR_MESSAGE = "Nothing to remove!";
@@ -33,6 +36,7 @@ public class Parser {
     private static final String INSUFFICIENT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
     private static final String EXPIRY_FORMAT_ERROR_MESSAGE = "Invalid expiry date format!"
             + '\n' + "Please key in the expiry date in the format dd/mm/yyyy!";
+    private static final String INVALID_ALERT_TYPE_MESSAGE = "Not an alert type!";
 
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
@@ -72,6 +76,10 @@ public class Parser {
             return parseHelpCommand();
         case COMMAND_EXPIRE:
             return parseExpireCommand(command);
+        case COMMAND_ALERTS:
+            return parseAlertsCommand(command);
+        case COMMAND_SET_THRESHOLD:
+            return parseSetCommand(command);
         case COMMAND_EXIT:
             return "";
         default:
@@ -228,6 +236,38 @@ public class Parser {
             return new ExpireCommand(expireBeforeDate).run();
         } catch (DateTimeParseException e) {
             throw new DukeException(EXPIRY_FORMAT_ERROR_MESSAGE);
+        }
+    }
+
+    private static String parseAlertsCommand(String command) throws DukeException {
+        String detail = command.substring(COMMAND_ALERTS.length()).trim();
+        switch (detail) {
+        case "all":
+            return new AlertCommand().run();
+        case "expiry":
+            return new AlertExpiringSoonCommand().run();
+        case "stock":
+            return new AlertLowStockCommand().run();
+        default:
+            throw new DukeException(INVALID_ALERT_TYPE_MESSAGE);
+        }
+    }
+
+    private static String parseSetCommand(String command) throws DukeException {
+        String[] details = command.split(" ", 3);
+        try {
+            switch (details[1].trim()) {
+            case "expiry":
+                AlertExpiringSoonCommand.setExpiryThreshold(Long.parseLong(details[2].trim()));
+                return "Successfully set expiry threshold to " + details[2].trim() + "days";
+            case "stock":
+                AlertLowStockCommand.setLowStockThreshold(Double.parseDouble(details[2].trim()));
+                return "Successfully set low stock threshold to " + details[2].trim() + "kg";
+            default:
+                throw new DukeException("Invalid Input");
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException(NUMBER_FORMAT_ERROR_MESSAGE);
         }
     }
 }
