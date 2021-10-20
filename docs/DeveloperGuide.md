@@ -5,6 +5,7 @@
   - [Data Component](#data-component)
   - [Storage Component](#storage-component)
   - [Command Component](#command-component)
+  - [Command Manager Component](#commandmanager-component)
 - [Product Scope](#product-scope)
   - [Target User Profile](#target-user-profile)
   - [Value Proposition](#value-proposition)
@@ -116,7 +117,35 @@ and `workoutList`, storage of data and the user interface.
 
 Most commands require the use of `workoutIndex` and `exerciseIndex` to execute commands for the user mentioned 
 workout/exercise. However, there are other commands which do not need them such as `HelpCommand`, `ListWorkoutsCommand` 
-and a few more. 
+and a few more.
+
+### CommandManager Component
+Location: `seedu.duke.parser`
+
+![img.png](umldg/CommandManager.png)
+
+__Note:__
+* `CommandManager` : Creates command objects based on User input
+* `Parser` : Deals with processing raw user input and returns information to the Command Manager on what commands to create
+
+The `CommandManager` component deals with taking the raw input String from the user and making sense of it.
+It's primary purpose is to take the user input and create a Command object corresponding to the user input. 
+
+The `generateCommand()` method in the CommandManager class creates a Parser object based on the type of command the user entered.
+The parser will then extract the relevant information and command arguments from the input String, then create a new Command object
+with the correct parameters.
+
+The basic `Parser` parent class has all the required methods to:
+* Identify the type of command the user inputs
+* Extract the command arguments
+
+`XYZCommandParser` are child classes which inherit from the `Parser` class and implement command-specific parsing and Command creation.
+
+Not all the Commands will have a defined Parser, as some commands do not take arguments and will always execute the same way
+(e.g. `bye` or `list`)
+
+Other commands that require parsing the command arguments in different ways, such are extracting exercise and workout index, will require
+further processing. This additional processing is defined by each Command's corresponding Parser.
 
 ## Product scope
 ### Target user profile
@@ -128,8 +157,6 @@ and a few more.
 
 ### Value proposition: 
 Manage fitness routines quickly
-
-
 
 ## User Stories
 
