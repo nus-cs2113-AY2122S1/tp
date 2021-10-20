@@ -299,10 +299,9 @@ public class Ui {
     /**
      * Prints switched view message.
      */
-    public void printSwitchedViewMessage() {
-        ViewType viewType = CommandManager.getViewType();
-
-        if (viewType == ViewType.PATIENT_INFO) {
+    public void printSwitchedViewMessage(ViewType viewType) {
+        switch (viewType) {
+        case PATIENT_INFO:
             System.out.println("  ___  _ _____ ___ ___ _  _ _____ \n"
                     + " | _ \\/_\\_   _|_ _| __| \\| |_   _|\n"
                     + " |  _/ _ \\| |  | || _|| .` | | |  \n"
@@ -314,7 +313,8 @@ public class Ui {
                     + "  \\ V / | || _| \\ \\/\\/ /          \n"
                     + "   \\_/ |___|___| \\_/\\_/           \n"
                     + "                                  ");
-        } else if (viewType == ViewType.SCHEDULER) {
+            break;
+        case SCHEDULER:
             System.out.println("  ___  ___ _  _ ___ ___  _   _ _    ___ ___ \n"
                     + " / __|/ __| || | __|   \\| | | | |  | __| _ \\\n"
                     + " \\__ \\ (__| __ | _|| |) | |_| | |__| _||   /\n"
@@ -323,6 +323,11 @@ public class Ui {
                     + "  \\ V / | || _| \\ \\/\\/ /                    \n"
                     + "   \\_/ |___|___| \\_/\\_/                     \n"
                     + "                                            ");
+            break;
+        case MEDICAL_STAFF_INFO:
+            break;
+        default:
+            break;
         }
 
         System.out.println("View has been switched to " + viewType);

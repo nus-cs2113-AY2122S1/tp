@@ -1,9 +1,9 @@
 package medbot.command.patientcommand;
 
+import medbot.Scheduler;
 import medbot.command.ViewPersonCommand;
 import medbot.exceptions.MedBotException;
 import medbot.Ui;
-import medbot.list.PersonList;
 
 public class ViewPatientCommand extends ViewPersonCommand {
 
@@ -12,8 +12,9 @@ public class ViewPatientCommand extends ViewPersonCommand {
     }
 
     @Override
-    public void execute(PersonList personList, Ui ui) throws MedBotException {
-        String patientInfo = personList.getPersonInfo(personId);
-        ui.printOutput(ui.getPatientInfo(patientInfo));
+    public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
+        String patientInfo = scheduler.getPatientList().getPersonInfo(personId);
+        String viewPatientMessage = ui.getPatientInfo(patientInfo);
+        ui.printOutput(viewPatientMessage);
     }
 }

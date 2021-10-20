@@ -16,8 +16,7 @@ public class MedBot {
 
     public static void interactWithUser() {
 
-        PatientList patientList = new PatientList();
-        MedicalStaffList staffList = new MedicalStaffList();
+        Scheduler scheduler = new Scheduler();
         Ui ui = new Ui();
         Storage storage = null;
         ViewType viewContext;
@@ -26,7 +25,7 @@ public class MedBot {
         ui.printWelcomeMessageOne();
         try {
             storage = new Storage();
-            String loadStorageErrorMessage = storage.loadStorage(patientList);
+            String loadStorageErrorMessage = storage.loadStorage(scheduler.getPatientList());
 
             if (!loadStorageErrorMessage.isBlank()) {
                 ui.printOutput(loadStorageErrorMessage);
@@ -37,13 +36,12 @@ public class MedBot {
             ui.printOutput(e.getMessage());
         }
 
-        CommandManager commandManager = new CommandManager(patientList,staffList);
         while (isInteracting) {
             String userInput = ui.readInput();
             try {
-                viewContext = commandManager.getViewType();
-                Command command = Parser.parseCommand(userInput, viewContext);
-                commandManager.executeCommand(ui, storage, command);
+                Command command = Parser.parseCommand(userInput);
+                command.execute(scheduler, ui);
+                storage.saveData(scheduler.getPatientList());
                 isInteracting = !command.isExit();
 
             } catch (MedBotException mbe) {

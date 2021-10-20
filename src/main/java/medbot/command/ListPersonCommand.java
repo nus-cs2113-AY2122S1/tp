@@ -1,11 +1,5 @@
 package medbot.command;
 
-import medbot.Ui;
-import medbot.list.PersonList;
+public abstract class ListPersonCommand extends Command {
 
-public class ListPersonCommand extends Command {
-    @Override
-    public void execute(PersonList personList, Ui ui) {
-        System.out.println("Print a list of people");
-    }
 }

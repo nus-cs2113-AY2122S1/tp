@@ -103,6 +103,16 @@ public class Parser {
 
     private static final String EMPTY_STRING = "";
 
+    private static ViewType viewType =  ViewType.PATIENT_INFO;
+
+    public static ViewType getViewType() {
+        return viewType;
+    }
+
+    public static void setViewType(ViewType viewType) {
+        Parser.viewType = viewType;
+    }
+
     /**
      * Checks the current view type that the parser is in and returns the relevant
      * parseCommand object based on the view type.
@@ -111,7 +121,7 @@ public class Parser {
      * @return the corresponding Command object.
      * @throws MedBotParserException if command is unrecognised.
      */
-    public static Command parseCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    public static Command parseCommand(String userInput) throws MedBotParserException {
         userInput = preprocessInput(userInput);
         //commands valid in all viewTypes
         if (userInput.startsWith(COMMAND_SWITCH)) {
@@ -198,9 +208,6 @@ public class Parser {
 
     //Update with relevant scheduling commands
     public static Command parseSchedulingCommand(String userInput) throws MedBotParserException {
-        if (userInput.equals(COMMAND_SWITCH)) {
-            return new SwitchCommand();
-        }
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
@@ -384,15 +391,15 @@ public class Parser {
      * @throws MedBotParserException if an invalid view type code is specified
      */
     private static SwitchCommand parseSwitchCommand(String userInput) throws MedBotParserException {
-        String newType = EMPTY_STRING;
+        String newType;
         try {
             newType = userInput.substring(6).strip();
         } catch (IndexOutOfBoundsException ie) {
-            return new SwitchCommand();
+            newType = EMPTY_STRING;
         }
         switch (newType) {
         case EMPTY_STRING:
-            return new SwitchCommand();
+            return new SwitchCommand(ViewType.getNextView(viewType));
         case VIEW_TYPE_PATIENT_VIEW:
             return new SwitchCommand(ViewType.PATIENT_INFO);
         case VIEW_TYPE_MEDICAL_STAFF_VIEW:
