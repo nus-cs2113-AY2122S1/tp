@@ -1,5 +1,7 @@
 @startuml
 skinparam classAttributeIconSize 0
+skinparam stereotypeCBackgroundColor White
+hide circle
 package "logger" {
 class LoggerUtil #LightBlue##Blue {
 +setupLogger(Logger) {static}

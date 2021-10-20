@@ -1,0 +1,22 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+hide empty members
+
+class GetJackd #LightGrey ##Black
+class WorkoutList #Pink
+class Storage #LightGreen ##Green
+class Ui #White ##Black
+class LoggerUtil #LightBlue ##Blue
+class CommandManager #Yellow ##edba02
+class Command #Orange
+
+GetJackd --> "workouts 1" WorkoutList 
+GetJackd --> "1  " Storage
+GetJackd .right.> Command 
+GetJackd .right.> CommandManager
+GetJackd .down.> LoggerUtil
+GetJackd -right-> "1" Ui
+WorkoutList ..> LoggerUtil
+Storage ..> LoggerUtil
+@enduml
