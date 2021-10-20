@@ -44,15 +44,15 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
       * `/att` adds attendance-related information.
         * use `/m` to input _name_ of your member.
         * use `/a` to input _timing_ of the training entry.
-        * use `/d` to input _attendance status_ of your member, O for present and X for late.
+        * use `/d` to input _attendance status_ of your member, 1 for present and 0 for absent.
     * **Format:**
       * add [/m </n MEMBER_NAME> </s STUDENT_NUMBER>]
       * add [/t </a TRAINING_TIME> </v TRAINING_VENUE>]
-      * add [/att </m MEMBER_NAME>  </n TRAINING_NAME> </d PRESENT_OR_LATE>]
+      * add [/att </m MEMBER_NAME>  </n TRAINING_NAME> </d 1_OR_0>]
     * **Examples:**
       - `add /m /n John Hwee /s A0248192K /g M /p 91128888`
       - `add /t /n Weekly December Training 2 /a 12 Dec 2022 /v MPSH 2`
-      - `add /att /m Mark /n Monday Training /d !`
+      - `add /att /m Mark /n Monday Training /d 1`
       
     * **Expected Output:**
    ```
@@ -62,14 +62,14 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    Training Name: Weekly December Training 2 | Venue: MPSH2 | Time: 12 Dec 2022
    
    Added an Attendance entry:
-   Name: Mark | Training Name: Monday Training | Status: [!]
+   Name: Mark | Training Name: Monday Training | Present: [1]
    ```
 
 2. `list` This lists out entries in Duke's Entry List.
    * The `list` keyword takes in 2 different arguments:
       * `/m` lists members and member related information.
       * `/t` lists trainings and training related information.
-      * `/att` lists attendance entries, each consisting of a member and the training they attended.
+      * `/att` lists attendance entries, each consisting of a member and whether they attended a particular training.
    * Format: list [/m] [/t] [/att]
    * **Examples:**
       - `list /m`
@@ -84,7 +84,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    [1] Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
     ```
     ```
-   [1] Name: Mark | Training Name: Monday Training | Status: [!]
+   [1] Name: Mark | Training Name: Monday Training | Present: [1]
     ```
 
 3. `delete` This deletes entries from the Entry List in Duke.
@@ -109,7 +109,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    ```
    ```
     You have removed attendance entry:
-    Name: Mark | Training Name: Monday Training | Status: [!]
+    Name: Mark | Training Name: Monday Training | Present: [1]
    ```
 4. `edit` This edits an existing entry from either the members list or training list
     * Entries are referenced using their index

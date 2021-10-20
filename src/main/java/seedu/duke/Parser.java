@@ -289,7 +289,7 @@ public class Parser {
         String trainingName = "";
         String venue = "";
         String time = "";
-        String presentOrLate = "";
+        String presentOrAbsent = "";
 
         int wordIndex = 1;
         while (matcher.find()) {
@@ -301,14 +301,14 @@ public class Parser {
                 trainingName = words[wordIndex].trim();
                 break;
             case "/d":
-                presentOrLate = words[wordIndex].trim();
+                presentOrAbsent = words[wordIndex].trim();
                 break;
             default:
                 break;
             }
             wordIndex++;
         }
-        Member member = new Member(memberName, studentNumber, gender, phoneNumber, presentOrLate);
+        Member member = new Member(memberName, studentNumber, gender, phoneNumber, presentOrAbsent);
         TrainingSchedule training = new TrainingSchedule(trainingName, venue, time);
         return new Attendance(member, training);
     }
