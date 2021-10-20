@@ -151,6 +151,16 @@ You now have 4 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
+One of your saved contacts has a duplicate field:
+
+3. ng andre
+Github:   github.com/ng-andre
+
+Do you still want to add the contact?  (y/n)
+
+____________________________________________________________
+
+____________________________________________________________
 ConTech has added the specified contact:
 Name:     andre
 Github:   github.com/ng-andre
@@ -414,6 +424,16 @@ Due to the storage nature of ConTech, we will remove
 commas (","), and attempt to parse it as:
 add -n lezong mun -g    lezaimun
 ____________________________________________________________
+One of your saved contacts has a duplicate field:
+
+2. lezongmun
+Github:   github.com/lezong
+
+Do you still want to add the contact?  (y/n)
+
+____________________________________________________________
+
+____________________________________________________________
 ConTech has added the specified contact:
 Name:     lezong mun
 Github:   github.com/lezaimun
@@ -440,6 +460,16 @@ You now have 8 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
+One of your saved contacts has a duplicate field:
+
+4. lezongmun
+Github:   github.com/lezong
+
+Do you still want to edit the contact?  (y/n)
+
+____________________________________________________________
+
+____________________________________________________________
 ConTech has edited the specified contact:
 Name:     lezong mun
 Github:   github.com/new-git
@@ -454,19 +484,26 @@ Rules for Twitter username :
 ____________________________________________________________
 
 ____________________________________________________________
+ConTech is unable to understand your request.
+Please try again with a valid command.
+____________________________________________________________
+
+____________________________________________________________
+One of your saved contacts has a duplicate field:
+
+0. asjoda sadfsd
+Telegram: t.me/_123adad
+
+Do you still want to add the contact?  (y/n)
+
+____________________________________________________________
+
+____________________________________________________________
 ConTech has added the specified contact:
 Name:     asjoda sadfsd
 Twitter:  twitter.com/123_adad
 
 You now have 9 contact(s).
-____________________________________________________________
-
-____________________________________________________________
-The email id is not correctly formatted,
-Rules for email id :
-    * Lowercase letters only
-    * Numbers, underscore, hyphen and dot allowed
-    * @ cannot be at the start or end
 ____________________________________________________________
 
 ____________________________________________________________
