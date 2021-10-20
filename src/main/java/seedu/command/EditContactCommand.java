@@ -107,4 +107,36 @@ public class EditContactCommand extends Command {
     }
 
 
+    public Contact editTempContact(String[] contactDetails, Contact preEditContact) throws InvalidFlagException {
+        Contact tempContact = duplicateContact(preEditContact);
+        for (int i = 0; i < contactDetails.length; i++) {
+            if (contactDetails[i] != null) {
+                switch (i) {
+                case NAME_INDEX:
+                    tempContact.setName(contactDetails[i]);
+                    break;
+                case GITHUB_INDEX:
+                    tempContact.setGithub(contactDetails[i]);
+                    break;
+                case LINKEDIN_INDEX:
+                    tempContact.setLinkedin(contactDetails[i]);
+                    break;
+                case TELEGRAM_INDEX:
+                    tempContact.setTelegram(contactDetails[i]);
+                    break;
+                case TWITTER_INDEX:
+                    tempContact.setTwitter(contactDetails[i]);
+                    break;
+                case EMAIL_INDEX:
+                    tempContact.setEmail(contactDetails[i]);
+                    break;
+                default:
+                    //control should never reach here
+                    assert false;
+                    throw new InvalidFlagException();
+                }
+            }
+        }
+        return tempContact;
+    }
 }
