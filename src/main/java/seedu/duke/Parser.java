@@ -216,7 +216,7 @@ public class Parser {
         Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
         newExpense.setDate(newExpense.prompDate());
         currTrip.addExpense(newExpense);
-        getAdditionalExpenseInfo(currExpense);
+        getAdditionalExpenseInfo(newExpense);
         Ui.printExpenseAddedSuccess();
     }
 
