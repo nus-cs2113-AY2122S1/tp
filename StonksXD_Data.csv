@@ -1,9 +1,5 @@
 entry_type, entry_description, amount, category, date
 E, qwe, 12.5, FOOD, 2121-11-11
 E, qwe, 0.5, FOOD, 2121-11-11
-E, bought cookies, 20.02, FOOD, 2021-10-20
-E, cake, 800.0, FOOD, 2021-10-20
-E, chiwawa, 9000.0, FOOD, 2021-10-21
 I, qwe, 12.5, ALLOWANCE, 2121-11-11
 I, qwe, 12.5, ALLOWANCE, 2121-11-11
-I, Salary, 900.0, SALARY, 2021-10-21

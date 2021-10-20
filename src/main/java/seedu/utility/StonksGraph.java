@@ -121,7 +121,7 @@ public class StonksGraph {
         drawXAxis();
         ArrayList<Double> monthlyIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(2021);
         ArrayList<Double> monthlyExpenseBreakdowns = finances.getMonthlyExpenseBreakdown(2021);
-        drawCurrentMonthDetails(monthlyIncomeBreakdowns, monthlyExpenseBreakdowns);
+        drawCurrentMonth(monthlyIncomeBreakdowns, monthlyExpenseBreakdowns);
 
         for (int x = 0; x < ROWS; x++) {
             for (int y = 0; y < COLS; y++) {
@@ -141,17 +141,17 @@ public class StonksGraph {
         }
     }
 
-    private void drawCurrentMonthDetails(ArrayList<Double> monthlyIncomeBreakdowns, ArrayList<Double> monthlyExpenseBreakdowns) {
+    private void drawCurrentMonth(ArrayList<Double> monthIncomeBreakdowns, ArrayList<Double> monthExpenseBreakdowns) {
         Month currentMonth = currentMonth();
         int currentMonthInIndex = currentMonthInIndex();
-        double currentMonthExpense = monthlyExpenseBreakdowns.get(currentMonthInIndex);
-        double currentMonthIncome = monthlyIncomeBreakdowns.get(currentMonthInIndex);
+        double currentMonthExpense = monthExpenseBreakdowns.get(currentMonthInIndex);
+        double currentMonthIncome = monthIncomeBreakdowns.get(currentMonthInIndex);
         String currentMonthExpenseAsString =
                 String.format("Current month (" + currentMonth + ") total expense: " + "$%.2f", currentMonthExpense);
         String currentMonthIncomeAsString =
                 String.format("Current month (" + currentMonth + ") total income: " + "$%.2f", currentMonthIncome);
-        writeToGraph(3,4 , currentMonthExpenseAsString);
-        writeToGraph(4,4 , currentMonthIncomeAsString);
+        writeToGraph(3,4, currentMonthExpenseAsString);
+        writeToGraph(4,4, currentMonthIncomeAsString);
     }
 
     private boolean isWithinRowsConsistingOfBarGraph(int x) {
