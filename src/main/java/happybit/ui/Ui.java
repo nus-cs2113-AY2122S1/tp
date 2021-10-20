@@ -64,10 +64,11 @@ public class Ui {
                 + goalDescription + "\".");
         String prefix = "[ ]";
         for (Habit habit : habits) {
+            String intervalPrint = "(every " + habit.getInterval() + " days)";
             if (habit.getDone()) {
                 prefix = "[X]";
             }
-            System.out.println(prefix + " " + habit.getHabitName());
+            System.out.println(prefix + " " + habit.getHabitName() + " " + intervalPrint);
         }
         printDashes();
     }
