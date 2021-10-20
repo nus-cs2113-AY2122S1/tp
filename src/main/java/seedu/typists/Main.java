@@ -1,7 +1,6 @@
 package seedu.typists;
 
 import seedu.typists.content.Content;
-import seedu.typists.game.ErrorGame;
 import seedu.typists.game.DataProcessor;
 import seedu.typists.game.TimeModeGame;
 import seedu.typists.parser.Parser;
@@ -38,25 +37,21 @@ public class Main {
         uiBot.showWelcomeMessage(VERSION);
     }
 
-    public void startWordLimitGame() throws InvalidStringInputException {
+    public void startWordLimitGame() throws InvalidStringInputException, InterruptedException {
         uiBot.printKeyboard();
         this.wordLimitGame = new WordLimitGame(content.getContent());
         wordLimitGame.beginNewGame();
     }
 
-    public void startTimeLimitGame() {
+    public void startTimeLimitGame() throws InterruptedException {
         uiBot.printClock();
         TimeModeGame g = new TimeModeGame(content.getContent(), LINE_LENGTH);
         DataProcessor p = new DataProcessor(g);
-        uiBot.showSummary(p.getErrorWordCount(), p.getErrorPercentage(), p.getWordPerMinute(),
+        uiBot.showAnimatedSummary(p.getErrorWordCount(), p.getErrorPercentage(), p.getWordPerMinute(),
                 p.getTotalWordTyped(), p.totalTime);
     }
 
-    public void startErrorGame() {
-        ErrorGame a = new ErrorGame(content.getContent(), LINE_LENGTH);
-    }
-
-    public void executeCommand(Parser c, StorageFile storage) throws InvalidStringInputException {
+    public void executeCommand(Parser c, StorageFile storage) throws InvalidStringInputException, InterruptedException {
         switch (c.getCommand()) {
         case "content":
             content.setContent();
@@ -66,9 +61,6 @@ public class Main {
             break;
         case "time":
             startTimeLimitGame();
-            break;
-        case "error":
-            startErrorGame();
             break;
         default:
             break;
@@ -97,6 +89,8 @@ public class Main {
                 e.printStackTrace();
             } catch (InvalidStringInputException e) {
                 e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             } finally {
                 uiBot.showLine();
             }
@@ -120,7 +114,7 @@ public class Main {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         new Main().run();
     }
 }

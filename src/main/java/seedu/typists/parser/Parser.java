@@ -31,7 +31,6 @@ public class Parser {
         return isExit;
     }
 
-
     public void parse() throws FaultyInputException {
         switch (input) {
         case "bye":
@@ -43,9 +42,6 @@ public class Parser {
             break;
         case "time":
             command = "time";
-            break;
-        case "error":
-            command = "error";
             break;
         case "content":
             command = "content";

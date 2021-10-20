@@ -70,6 +70,7 @@ public class Content {
             setContent();
         } else {
             this.content = Books.getBook(selection - 1);
+            assert this.content.length() > 0;
             ui.showText("Content set");
         }
     }
@@ -90,6 +91,7 @@ public class Content {
                     String temp = wi.getArticle(title);
                     articleNotFound = false;
                     this.content = temp;
+                    assert this.content.length() > 0;
                     ui.showText("Content set");
                 } catch (InvalidArticleException e) {
                     ui.showText(e.getMessage());
@@ -120,6 +122,7 @@ public class Content {
                 s += (rg.randomString(r.nextInt(10) + 5) + " ");
             }
             this.content = s;
+            assert this.content.length() > 0;
             ui.showText("Content set");
         }
     }
