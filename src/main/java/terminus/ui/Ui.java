@@ -40,8 +40,7 @@ public class Ui {
         if (validatedWorkspaceName == null) {
             validatedWorkspaceName = "";
         }
-        System.out.printf(PROMPT, validatedWorkspaceName);
-        return scanner.nextLine();
+        return getUserInput(String.format(PROMPT, validatedWorkspaceName));
     }
 
     /**
@@ -58,5 +57,15 @@ public class Ui {
      */
     public void printExitMessage() {
         System.out.println("Goodbye!");
+    }
+
+    /**
+     * Get the input of the user through the Scanner.
+     * 
+     * @return The user input from the Scanner.
+     */
+    public String getUserInput(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine();
     }
 }

@@ -10,6 +10,14 @@ public class Question extends Content {
         super(question, answer);
         this.weight = 0.5;
     }
+    
+    public String getQuestion() {
+        return this.name;
+    }
+    
+    public String getAnswer() {
+        return this.data;
+    }
 
     public double getWeight() {
         return weight;

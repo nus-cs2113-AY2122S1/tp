@@ -4,6 +4,7 @@ import terminus.command.BackCommand;
 import terminus.command.content.DeleteCommand;
 import terminus.command.content.ViewCommand;
 import terminus.command.content.question.AddQuestionCommand;
+import terminus.command.content.question.TestCommand;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.content.Question;
@@ -21,6 +22,7 @@ public class QuestionCommandParser extends InnerModuleCommandParser {
         parser.addCommand(CommonFormat.COMMAND_ADD, new AddQuestionCommand());
         parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand<>(Question.class));
         parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteCommand<>(Question.class));
+        parser.addCommand(CommonFormat.COMMAND_TEST, new TestCommand());
         return parser;
     }
 

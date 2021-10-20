@@ -43,4 +43,7 @@ public class Messages {
     public static final String MESSAGE_COMMAND_MODULE_VIEW = "View all modules available";
     public static final String MESSAGE_RESPONSE_MODULE_FORMAT = "%d. %s";
     public static final String MESSAGE_RESPONSE_NO_MODULES = "You do not have any modules.";
+    public static final String NO_QUESTIONS_ERROR_MESSAGE =
+        "There are no questions to be tested on. Type 'questions add' to get started";
+    public static final String ACTIVE_RECALL_ENTER_TO_CONTINUE_MESSAGE = "When you are ready, press [Enter] to continue.";
 }
