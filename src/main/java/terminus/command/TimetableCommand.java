@@ -52,6 +52,7 @@ public class TimetableCommand extends Command {
             TerminusLogger.warning(String.format("Invalid Day: %s", day));
             throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DAY, day));
         }
+        TerminusLogger.info(String.format("Parsed arguments (day = %s) to Timetable Command", day));
     }
 
     /**
@@ -83,7 +84,9 @@ public class TimetableCommand extends Command {
         for (String moduleName : modules) {
             NusModule module = moduleManager.getModule(moduleName);
             ContentManager<Link> contentManager = module.getContentManager(Link.class);
+            assert contentManager != null;
             result.append(listDailySchedule(contentManager, today));
+            TerminusLogger.info(String.format("Successfully acquire %s's schedule for %s", moduleName, today));
         }
         index = 0;
         if (result.toString().isEmpty()) {
@@ -105,9 +108,12 @@ public class TimetableCommand extends Command {
             day = currentDay.toString();
             String today = day;
             if (getDailySchedule(dailyResult, moduleManager, today)) {
+                assert dailyResult != null;
                 String header = String.format("%s:\n", day);
                 result.append(header.toUpperCase());
                 result.append(dailyResult);
+                assert result != null;
+                TerminusLogger.info(String.format("Successfully acquire %s's schedule", day));
             }
             index = 0;
         }
@@ -120,6 +126,7 @@ public class TimetableCommand extends Command {
      */
     public void checkEmptySchedule(StringBuilder result) {
         if (result.toString().isBlank()) {
+            TerminusLogger.info("There is no schedule in the user's timetable");
             result.append(Messages.EMPTY_CONTENT_LIST_MESSAGE);
         }
     }
@@ -137,6 +144,7 @@ public class TimetableCommand extends Command {
         if (isStringNullOrEmpty(day)) {
             getWeeklySchedule(result, moduleManager);
         } else {
+            assert day != null;
             String currentDay = day;
             getDailySchedule(result, moduleManager, currentDay);
         }
