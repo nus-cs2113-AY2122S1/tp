@@ -3,42 +3,51 @@ package seedu.traveller.commands;
 import seedu.traveller.Trip;
 import seedu.traveller.TripsList;
 import seedu.traveller.Ui;
-import seedu.traveller.exceptions.DuplicateTripException;
 import seedu.traveller.exceptions.TravellerException;
-import seedu.traveller.mapper.Vertex;
+import seedu.traveller.exceptions.TripNotFoundException;
+import seedu.traveller.worldmap.Country;
+import seedu.traveller.worldmap.MinCalcResult;
+import seedu.traveller.worldmap.WorldMap;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 public class EditCommand extends Command {
-    private int tripIndex = -1;
+    private static final Logger logger = Logger.getLogger(EditCommand.class.getName());
     private final String tripName;
-    private String startCountry;
-    private String endCountry;
-    private List<Vertex> path;
+    private final String startCountry;
+    private final String endCountry;
 
-    public EditCommand(String tripName, String startCountry, String endCountry, List<Vertex> path) {
+    public EditCommand(String tripName, String startCountry, String endCountry) {
+        logger.setLevel(Level.INFO);
         this.tripName = tripName;
         this.startCountry = startCountry;
         this.endCountry = endCountry;
-        this.path = path;
+        logger.log(Level.INFO, "Created an edit command: \n" + this);
     }
 
     @Override
-    public void execute(TripsList tripsList, Ui ui) throws TravellerException {
-        for (int i = 0; i < TripsList.getSize(); i++) {
-            Trip trip = TripsList.getTrip(i);
-            if (tripName.equals(trip.getTripName())) {
-                tripIndex = i;
-                break;
-            }
-        }
+    public String toString() {
+        return "Edit command:"
+                + "\n\ttripName: " + tripName
+                + "\n\tstartCountry: " + startCountry
+                + "\n\tendCountry: " + endCountry;
+    }
 
+    public void execute(TripsList tripsList, Ui ui) throws TravellerException {
+        int tripIndex = tripsList.getTripIndex(this.tripName);
         if (tripIndex == -1) {
-            System.out.println("This trip does not exist.");
-            return;
+            throw new TripNotFoundException();
         }
-        TripsList.deleteTrip(tripIndex);
-        Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry, this.path);
+        assert tripIndex < tripsList.getSize() && tripIndex > -1 : "The trip index is out of bound.";
+
+        tripsList.deleteTrip(tripIndex);
+        MinCalcResult result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
+        List<Country> path = result.getPath();
+        List<Double> distances = result.getDistances();
+        Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry, path, distances);
         tripsList.addTrip(trip);
         ui.printEdit(tripName);
     }

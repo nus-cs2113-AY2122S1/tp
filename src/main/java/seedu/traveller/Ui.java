@@ -1,10 +1,18 @@
 package seedu.traveller;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class Ui {
+    private static final Logger logger = Logger.getLogger(Ui.class.getName());
     private final Scanner scanner = new Scanner(System.in);
+
+    public Ui() {
+        logger.setLevel(Level.INFO);
+        logger.log(Level.FINE, "Created a ui");
+    }
 
     public String readCommand() {
         return scanner.nextLine();
@@ -33,9 +41,14 @@ public class Ui {
     }
 
     public void printAllTrips(TripsList tripsList) {
-        System.out.println("\tHere are all your trips: ");
-        for (int i = 0; i < tripsList.getSize(); i++) {
-            printTrip(tripsList.getTrip(i));
+        if (tripsList.getSize() == 0) {
+            System.out.println("\tThere are no trips created yet.");
+        } else {
+            assert tripsList.getSize() > 0 : "There should be trips in the tripsList.";
+            System.out.println("\tHere are all your trips: ");
+            for (int i = 0; i < tripsList.getSize(); i++) {
+                printTrip(tripsList.getTrip(i));
+            }
         }
     }
 
@@ -55,4 +68,23 @@ public class Ui {
         System.out.println("\tYou have just edited a trip called " + tripName + ".");
     }
 
+    public void printSearch(String startCountry, String endCountry, double distance) {
+        System.out.println("The distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
+    }
+
+    public void printAddDayToTrip(String tripName) {
+        System.out.println("Added a new day to trip " + tripName + ".");
+    }
+
+    public void printAddItemToDay(String tripName, int dayIndex, String itemName) {
+        System.out.println("Added a new item to day " + dayIndex + " of trip " + tripName + ".");
+    }
+
+    public void printReadSave() {
+        System.out.println("Now reading save data.");
+    }
+
+    public void printWriteSave() {
+        System.out.println("\tNow saving all your trips.");
+    }
 }
