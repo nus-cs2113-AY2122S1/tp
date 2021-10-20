@@ -1,13 +1,13 @@
 package medbot.command.patientcommand;
 
 import medbot.Ui;
-import medbot.command.FindCommand;
+import medbot.command.FindPersonCommand;
 import medbot.exceptions.MedBotException;
 import medbot.list.PersonList;
 
 import java.util.List;
 
-public class FindPatientCommand extends FindCommand {
+public class FindPatientCommand extends FindPersonCommand {
     public FindPatientCommand(String[] parameters) {
         super(parameters);
     }

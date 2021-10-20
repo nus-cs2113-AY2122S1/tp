@@ -5,11 +5,11 @@ import medbot.exceptions.MedBotException;
 import medbot.list.PersonList;
 import medbot.person.Person;
 
-public class EditCommand extends Command {
+public class EditPersonCommand extends Command {
     protected int personId;
     protected Person person;
 
-    public EditCommand(int personId, Person person) {
+    public EditPersonCommand(int personId, Person person) {
         this.personId = personId;
         this.person = person;
     }

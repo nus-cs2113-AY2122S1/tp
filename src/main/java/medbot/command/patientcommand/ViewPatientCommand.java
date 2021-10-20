@@ -1,11 +1,11 @@
 package medbot.command.patientcommand;
 
-import medbot.command.ViewCommand;
+import medbot.command.ViewPersonCommand;
 import medbot.exceptions.MedBotException;
 import medbot.Ui;
 import medbot.list.PersonList;
 
-public class ViewPatientCommand extends ViewCommand {
+public class ViewPatientCommand extends ViewPersonCommand {
 
     public ViewPatientCommand(int patientId) {
         super(patientId);

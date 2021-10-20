@@ -4,10 +4,10 @@ import medbot.Ui;
 import medbot.exceptions.MedBotException;
 import medbot.list.PersonList;
 
-public class ViewCommand extends Command {
+public class ViewPersonCommand extends Command {
     protected int personId = 0;
 
-    public ViewCommand(int personId) {
+    public ViewPersonCommand(int personId) {
         this.personId = personId;
     }
 

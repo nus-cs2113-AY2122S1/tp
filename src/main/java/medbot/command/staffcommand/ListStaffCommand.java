@@ -1,10 +1,10 @@
 package medbot.command.staffcommand;
 
 import medbot.Ui;
-import medbot.command.ListCommand;
+import medbot.command.ListPersonCommand;
 import medbot.list.PersonList;
 
-public class ListStaffCommand extends ListCommand {
+public class ListStaffCommand extends ListPersonCommand {
 
     @Override
     public void execute(PersonList personList, Ui ui) {

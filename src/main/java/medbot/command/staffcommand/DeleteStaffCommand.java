@@ -1,11 +1,11 @@
 package medbot.command.staffcommand;
 
 import medbot.Ui;
-import medbot.command.DeleteCommand;
+import medbot.command.DeletePersonCommand;
 import medbot.exceptions.MedBotException;
 import medbot.list.PersonList;
 
-public class DeleteStaffCommand extends DeleteCommand {
+public class DeleteStaffCommand extends DeletePersonCommand {
     public DeleteStaffCommand(int staffId) {
         super(staffId);
     }

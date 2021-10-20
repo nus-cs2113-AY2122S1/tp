@@ -1,12 +1,12 @@
 package medbot.command.staffcommand;
 
 import medbot.Ui;
-import medbot.command.EditCommand;
+import medbot.command.EditPersonCommand;
 import medbot.exceptions.MedBotException;
 import medbot.list.PersonList;
 import medbot.person.Staff;
 
-public class EditStaffCommand extends EditCommand {
+public class EditStaffCommand extends EditPersonCommand {
     public EditStaffCommand(int staffId, Staff staff) {
         super(staffId, staff);
     }

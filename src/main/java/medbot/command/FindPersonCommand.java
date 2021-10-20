@@ -4,15 +4,15 @@ import medbot.Ui;
 import medbot.exceptions.MedBotException;
 import medbot.list.PersonList;
 
-public class DeleteCommand extends Command {
-    protected int personId;
+public class FindPersonCommand extends Command {
+    protected String[] parameters;
 
-    public DeleteCommand(int personId) {
-        this.personId = personId;
+    public FindPersonCommand(String[] parameters) {
+        this.parameters = parameters;
     }
 
     @Override
     public void execute(PersonList personList, Ui ui) throws MedBotException {
-        personList.deletePerson(personId);
+        personList.findPersons(parameters);
     }
 }

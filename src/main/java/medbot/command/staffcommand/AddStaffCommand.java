@@ -1,11 +1,11 @@
 package medbot.command.staffcommand;
 
 import medbot.Ui;
-import medbot.command.AddCommand;
+import medbot.command.AddPersonCommand;
 import medbot.list.PersonList;
 import medbot.person.Staff;
 
-public class AddStaffCommand extends AddCommand {
+public class AddStaffCommand extends AddPersonCommand {
     public AddStaffCommand(Staff staff) {
         super(staff);
     }

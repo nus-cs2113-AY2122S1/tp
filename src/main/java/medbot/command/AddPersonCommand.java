@@ -4,10 +4,10 @@ import medbot.Ui;
 import medbot.list.PersonList;
 import medbot.person.Person;
 
-public class AddCommand extends Command {
+public class AddPersonCommand extends Command {
     protected Person person;
 
-    public AddCommand(Person person) {
+    public AddPersonCommand(Person person) {
         this.person = person;
     }
 

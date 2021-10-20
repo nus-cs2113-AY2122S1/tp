@@ -1,10 +1,10 @@
 package medbot;
 
-import medbot.command.DeleteCommand;
-import medbot.command.ViewCommand;
-import medbot.command.AddCommand;
-import medbot.command.EditCommand;
-import medbot.command.FindCommand;
+import medbot.command.AddPersonCommand;
+import medbot.command.DeletePersonCommand;
+import medbot.command.EditPersonCommand;
+import medbot.command.ViewPersonCommand;
+import medbot.command.FindPersonCommand;
 import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.Command;
@@ -231,10 +231,10 @@ public class Parser {
      * Parses user input to pass relevant parameters into the ViewPatientCommand constructor.
      *
      * @param userInput String containing the full user input.
-     * @return ViewCommand object.
+     * @return ViewPersonCommand object.
      * @throws MedBotParserException when patient id given is out of range, or no id is specified.
      */
-    private static ViewCommand parseViewCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    private static ViewPersonCommand parseViewCommand(String userInput, ViewType viewType) throws MedBotParserException {
         int personId;
         try {
             personId = Integer.parseInt(userInput.substring(4).strip());
@@ -258,10 +258,10 @@ public class Parser {
      * Parses user input to pass relevant parameters into the DeletePatientCommand constructor.
      *
      * @param userInput String containing the full user input.
-     * @return DeleteCommand object.
+     * @return DeletePersonCommand object.
      * @throws MedBotParserException when patient id given is out of range, or no id is specified.
      */
-    private static DeleteCommand parseDeleteCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    private static DeletePersonCommand parseDeleteCommand(String userInput, ViewType viewType) throws MedBotParserException {
         int personId;
         try {
             personId = Integer.parseInt(userInput.substring(6).strip());
@@ -285,10 +285,10 @@ public class Parser {
      * Processes user input for the editPatientInformation command.
      *
      * @param userInput String containing the full user input.
-     * @return EditCommand objects
+     * @return EditPersonCommand objects
      * @throws MedBotParserException when the parameters given cannot be parsed
      */
-    private static EditCommand parseEditCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    private static EditPersonCommand parseEditCommand(String userInput, ViewType viewType) throws MedBotParserException {
         int personId;
         try {
             String personIdString = userInput.substring(4).stripLeading();
@@ -324,10 +324,10 @@ public class Parser {
      * Processes user input to create a new patient object with the corresponding information.
      *
      * @param userInput String containing the full user input.
-     * @return AddCommand object.
+     * @return AddPersonCommand object.
      * @throws MedBotParserException when no parameters are specified.
      */
-    private static AddCommand parseAddCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    private static AddPersonCommand parseAddCommand(String userInput, ViewType viewType) throws MedBotParserException {
         String[] parameters = getParameters(userInput);
         switch (viewType) {
         case PATIENT_INFO:
@@ -343,7 +343,7 @@ public class Parser {
         }
     }
 
-    private static FindCommand parseFindCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    private static FindPersonCommand parseFindCommand(String userInput, ViewType viewType) throws MedBotParserException {
         String[] parameters = getParameters(userInput);
         switch (viewType) {
         case PATIENT_INFO:
@@ -413,7 +413,7 @@ public class Parser {
      * @return user input without leading white space and vertical lines present.
      */
     private static String preprocessInput(String userInput) {
-        return userInput.stripLeading().replace(VERTICAL_LINE, EMPTY_STRING);
+        return userInput.strip().replace(VERTICAL_LINE, EMPTY_STRING);
     }
 
     /**
