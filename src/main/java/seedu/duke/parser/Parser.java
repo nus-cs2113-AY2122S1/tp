@@ -236,9 +236,9 @@ public class Parser {
             } else if (indexOfExpenditureToBeDeleted.length() > 1) {
                 int startIndex;
                 int endIndex;
-                String[] index_split = indexOfExpenditureToBeDeleted.trim().split("-|",2);
-                String index1 = index_split[0].trim();
-                String index2 = index_split[1].trim();
+                String[] indexSplit = indexOfExpenditureToBeDeleted.trim().split("-|",2);
+                String index1 = indexSplit[0].trim();
+                String index2 = indexSplit[1].trim();
                 startIndex = Integer.parseInt(index1);
                 endIndex = Integer.parseInt(index2);
                 return new DeleteMultipleExpenditureCommand(startIndex, endIndex, month);
@@ -252,5 +252,4 @@ public class Parser {
             );
         }
     }
-
 }

@@ -160,8 +160,8 @@ public class TextUi {
         }
     }
 
-    public static void showSingleExpenditureDeletedMessage(int indexOfDeletedExpenditure, Expenditure deletedExpenditure) {
-        System.out.println("Successfully deleted Expenditure " + indexOfDeletedExpenditure + "." + deletedExpenditure);
+    public static void showSingleExpenditureDeletedMessage(int indexOfExpenditure, Expenditure deletedExpenditure) {
+        System.out.println("Successfully deleted Expenditure " + indexOfExpenditure + "." + deletedExpenditure);
         System.out.println(DIVIDER);
     }
 
