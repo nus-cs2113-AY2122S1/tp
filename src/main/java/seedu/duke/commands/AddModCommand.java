@@ -9,14 +9,13 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 
 public class AddModCommand extends Command {
-
     private final Module moduleToAdd;
     private final int moduleIndexToAdd;
 
     public AddModCommand(int moduleIndexToAdd, ModuleList moduleMasterList, ModuleList moduleSelectedList)
             throws IOException {
         this.moduleIndexToAdd = moduleIndexToAdd;
-        this.moduleToAdd = moduleMasterList.get(moduleIndexToAdd-1);
+        this.moduleToAdd = moduleMasterList.get(moduleIndexToAdd - 1);
         assert moduleToAdd.getModuleCode() != null;
         moduleSelectedList.addModule(moduleToAdd);
         assert moduleSelectedList.getSize() != 0;
@@ -31,7 +30,8 @@ public class AddModCommand extends Command {
     }
 
     public AddModCommand(Module moduleToAdd, UniversityList universitySelectedList,
-                         ModuleList moduleSelectedList) throws IOException{
+                         ModuleList moduleSelectedList) throws IOException {
+
         this.moduleToAdd = moduleToAdd;
         this.moduleIndexToAdd = moduleToAdd.getModuleIndex(moduleSelectedList);
         assert moduleToAdd.getModuleCode() != null;

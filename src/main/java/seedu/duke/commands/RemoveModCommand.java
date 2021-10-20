@@ -17,7 +17,7 @@ public class RemoveModCommand extends Command {
             assert moduleSelectedList.getSize() == 0;
             System.out.println("The module list is empty!");
         } else {
-            Module moduleToRemove = moduleMasterList.get(moduleIndexToRemove-1);
+            Module moduleToRemove = moduleMasterList.get(moduleIndexToRemove - 1);
             assert moduleToRemove.getModuleName() != null;
             assert moduleSelectedList.getSize() != 0;
             moduleSelectedList.removeModule(moduleToRemove.getModuleCode());
