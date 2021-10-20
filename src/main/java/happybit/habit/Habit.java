@@ -16,6 +16,16 @@ public class Habit {
     }
 
     /**
+     * Setter for name of habit.
+     * Used to edit the name of the goal.
+     *
+     * @param habitName New name the habit is to be updated with.
+     */
+    public void setHabitName(String habitName) {
+        this.habitName = habitName;
+    }
+
+    /**
      * Getter for habitName.
      *
      * @return String containing name of habit.

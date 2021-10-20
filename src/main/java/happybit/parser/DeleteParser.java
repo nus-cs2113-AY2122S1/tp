@@ -12,6 +12,13 @@ public class DeleteParser {
     private static final String ERROR_HABIT_NOT_EXIST = "Habit index does not exist.";
     private static final String ERROR_INCOMPLETE = "Instruction incomplete or improper.";
 
+    /**
+     * Parses detail from user to figure out which goal to be deleted.
+     *
+     * @param commandInstruction Details from the user.
+     * @return A Command class with the goalIndex information.
+     * @throws HaBitParserException If commandInstruction is blank or does not have a number for goalIndex.
+     */
     public static Command parseDeleteGoalCommand(String commandInstruction) throws HaBitParserException  {
         if (commandInstruction == null) {
             throw new HaBitParserException(ERROR_BLANK);
@@ -30,6 +37,13 @@ public class DeleteParser {
 
     }
 
+    /**
+     * Parses detail from user to figure out which habit to be deleted.
+     *
+     * @param commandInstruction Details from the user.
+     * @return A Command class with the goalIndex and habitIndex information.
+     * @throws HaBitParserException If commandInstruction is blank, missing information, or not numbers.
+     */
     public static Command parseDeleteHabitCommand(String commandInstruction) throws HaBitParserException {
         if (commandInstruction == null) {
             throw new HaBitParserException(ERROR_BLANK);
@@ -52,8 +66,6 @@ public class DeleteParser {
 
         } catch (NumberFormatException e) {
             throw new HaBitParserException(ERROR_NOT_NUM);
-        } catch (IndexOutOfBoundsException e) {
-            throw new HaBitParserException(ERROR_HABIT_NOT_EXIST);
         }
     }
 
