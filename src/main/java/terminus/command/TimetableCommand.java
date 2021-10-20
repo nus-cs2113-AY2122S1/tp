@@ -15,7 +15,6 @@ import static terminus.common.CommonUtils.isValidDay;
 
 public class TimetableCommand extends Command {
     private String day;
-
     static int index = 0;
 
     public TimetableCommand() {
@@ -38,7 +37,7 @@ public class TimetableCommand extends Command {
         }
     }
 
-    public StringBuilder listAllSchedule( ContentManager<Link> contentManager) {
+    public StringBuilder listAllSchedule (ContentManager<Link> contentManager) {
         StringBuilder schedules = new StringBuilder();
         for (Link schedule : contentManager.getContents()) {
             index++;
@@ -47,19 +46,51 @@ public class TimetableCommand extends Command {
         return schedules;
     }
 
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+    public StringBuilder listDailySchedule (ContentManager<Link> contentManager) {
+        StringBuilder dailySchedule = new StringBuilder();
+        for (Link schedule : contentManager.getContents()) {
+            if (schedule.getDay().equalsIgnoreCase(day)) {
+                index++;
+                dailySchedule.append(String.format("%d. %s\n", index, schedule.getViewDescription()));
+            }
+        }
+        return dailySchedule;
+    }
+
+    public void getWeeklySchedule (StringBuilder result, ModuleManager moduleManager) {
         String[] modules = moduleManager.getAllModules();
-        StringBuilder result = new StringBuilder();
         for (String moduleName : modules) {
             NusModule module = moduleManager.getModule(moduleName);
             ContentManager<Link> contentManager = module.getContentManager(Link.class);
             result.append(listAllSchedule(contentManager));
         }
+    }
 
+    public void getDailySchedule (StringBuilder result, ModuleManager moduleManager) {
+        String[] modules = moduleManager.getAllModules();
+        for (String moduleName : modules) {
+            NusModule module = moduleManager.getModule(moduleName);
+            ContentManager<Link> contentManager = module.getContentManager(Link.class);
+            result.append(listDailySchedule(contentManager));
+        }
+    }
+
+    public void checkEmptySchedule (StringBuilder result) {
         if (result.toString().isBlank()) {
             result.append(Messages.EMPTY_CONTENT_LIST_MESSAGE);
         }
+    }
 
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+        StringBuilder result = new StringBuilder();
+
+        if (isStringNullOrEmpty(day)) {
+            getWeeklySchedule(result, moduleManager);
+        } else {
+            getDailySchedule(result, moduleManager);
+        }
+
+        checkEmptySchedule(result);
         index = 0;
         ui.printSection(result.toString());
         return new CommandResult(true, false);
