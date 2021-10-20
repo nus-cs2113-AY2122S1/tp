@@ -32,8 +32,11 @@ class AssessmentListTest {
         command1.execute(moduleList, ui, storage);
         Command command2 = Parser.parseUserInput(assessmentInput);
         command2.execute(moduleList, ui, storage);
-        assertEquals("Midterms", moduleList.getModule("cs2113t").getAssessmentList().getAssessment("Midterms").getName());
-        assertEquals(50, moduleList.getModule("cs2113t").getAssessmentList().getAssessment("Midterms").getMaximumMarks());
-        assertEquals(20, moduleList.getModule("cs2113t").getAssessmentList().getAssessment("Midterms").getWeightage());
+        assertEquals("Midterms", moduleList.getModule("cs2113t").
+                getAssessmentList().getAssessment("Midterms").getName());
+        assertEquals(50, moduleList.getModule("cs2113t").
+                getAssessmentList().getAssessment("Midterms").getMaximumMarks());
+        assertEquals(20, moduleList.getModule("cs2113t").
+                getAssessmentList().getAssessment("Midterms").getWeightage());
     }
 }
