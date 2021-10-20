@@ -94,6 +94,9 @@ public class DeleteDispenseCommand extends Command {
                 continue;
             }
             Stock stock = (Stock) medicine;
+            if (stock.isDeleted()) {
+                stock.setDeleted(false);
+            }
             if (stock.getStockID() == stockIdToDispense) {
                 int quantityToRestore = stock.getQuantity() + dispenseQuantity;
                 if (quantityToRestore > stock.getMaxQuantity()) {
