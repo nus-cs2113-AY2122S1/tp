@@ -1,7 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.alerts.Alerts;
-import seedu.duke.command.AlertExpiringSoonCommand;
+import seedu.duke.command.AlertCommand;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.localtime.CurrentDate;
 import seedu.duke.storage.Storage;
@@ -16,7 +15,6 @@ import java.util.logging.Logger;
 public class Situs {
 
     private static UI ui;
-    private static Alerts alerts;
     private static final Logger LOGGER = Logger.getLogger(Situs.class.getName());
 
     /**
@@ -25,9 +23,12 @@ public class Situs {
     public static void initialize() {
         CurrentDate.setCurrentDate();
         ui = new UI();
-        alerts = new Alerts();
 
-        ui.printCommandOutput(alerts.getAlerts());
+        try {
+            ui.printCommandOutput(new AlertCommand().run());
+        } catch (DukeException e) {
+            ui.printCommandOutput(e.getMessage());
+        }
 
         LogManager.getLogManager().reset();
         LOGGER.setLevel(Level.ALL);
