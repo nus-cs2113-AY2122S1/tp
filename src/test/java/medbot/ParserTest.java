@@ -21,10 +21,10 @@ class ParserTest {
                 {"john_tan@example.com", "john_tan@example.com"},
                 {"john.tan@example.com", "john.tan@example.com"},
                 {" johntan@example.com ", "johntan@example.com"},
-                {"   ", "Email address not specified" + ENDLINE},
-                {"johntan_@example.com", "Incorrect email address format" + ENDLINE},
-                {"_johntan@example.com", "Incorrect email address format" + ENDLINE},
-                {"johntan@example", "Incorrect email address format" + ENDLINE}
+                {"   ", "Email address not specified." + ENDLINE},
+                {"johntan_@example.com", "Incorrect email address format." + ENDLINE},
+                {"_johntan@example.com", "Incorrect email address format." + ENDLINE},
+                {"johntan@example", "Incorrect email address format." + ENDLINE}
         };
 
         Method method = Parser.class.getDeclaredMethod("parseEmailAddress", String.class);
@@ -45,10 +45,10 @@ class ParserTest {
                 {"81234567", "81234567"},
                 {"8123 4567", "81234567"},
                 {"8123_4567", "81234567"},
-                {"8123456", "Phone number has too few digits" + ENDLINE},
-                {"812345678", "Phone number has too many digits" + ENDLINE},
-                {"   ", "Phone number not specified" + ENDLINE},
-                {"8123456A", "Phone number contains unexpected characters" + ENDLINE},
+                {"8123456", "Phone number has too few digits." + ENDLINE},
+                {"812345678", "Phone number has too many digits." + ENDLINE},
+                {"   ", "Phone number not specified." + ENDLINE},
+                {"8123456A", "Phone number contains unexpected characters." + ENDLINE},
         };
 
         Method method = Parser.class.getDeclaredMethod("parsePhoneNumber", String.class);
@@ -73,7 +73,7 @@ class ParserTest {
                 {"john tan", "John Tan"},
                 {"john-tan", "John-Tan"},
                 {"JOHN TAN", "John Tan"},
-                {"   ", "Name not specified" + ENDLINE}
+                {"   ", "Name not specified." + ENDLINE}
         };
 
         for (String[] testName : testNames) {
@@ -92,11 +92,11 @@ class ParserTest {
         String[][] testIcNumbers = {
                 {"S1234567A", "S1234567A"},
                 {"F1234567A", "F1234567A"},
-                {"Z1234567A", "Incorrect IC number format" + ENDLINE},
-                {"F1234567", "Incorrect IC number format" + ENDLINE},
-                {"F1234A", "Incorrect IC number format" + ENDLINE},
-                {"   ", "IC number not specified" + ENDLINE},
-                {"1234567A", "Incorrect IC number format" + ENDLINE}
+                {"Z1234567A", "Incorrect IC number format." + ENDLINE},
+                {"F1234567", "Incorrect IC number format." + ENDLINE},
+                {"F1234A", "Incorrect IC number format." + ENDLINE},
+                {"   ", "IC number not specified." + ENDLINE},
+                {"1234567A", "Incorrect IC number format." + ENDLINE}
         };
         for (String[] testIcNumber : testIcNumbers) {
             try {
@@ -115,7 +115,7 @@ class ParserTest {
                 {"12 Lower Kent Ridge", "12 Lower Kent Ridge"},
                 {"12 lower kent ridge", "12 Lower Kent Ridge"},
                 {"12 LOWER KENT RIDGE", "12 Lower Kent Ridge"},
-                {"   ", "Address not specified" + ENDLINE}
+                {"   ", "Address not specified." + ENDLINE}
         };
         for (String[] testResidentialAddress : testResidentialAddresses) {
             try {

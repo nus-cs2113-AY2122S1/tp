@@ -1,19 +1,19 @@
 package medbot.command.patientcommand;
 
-import medbot.command.DeleteCommand;
+import medbot.Scheduler;
+import medbot.command.DeletePersonCommand;
 import medbot.exceptions.MedBotException;
 import medbot.Ui;
-import medbot.list.PersonList;
 
-public class DeletePatientCommand extends DeleteCommand {
+public class DeletePatientCommand extends DeletePersonCommand {
 
     public DeletePatientCommand(int patientId) {
         super(patientId);
     }
 
     @Override
-    public void execute(PersonList personList, Ui ui) throws MedBotException {
-        personList.deletePerson(personId);
+    public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
+        scheduler.getPatientList().deletePerson(personId);
         String deletePatientMessage = ui.getDeletePatientMessage(personId);
         ui.printOutput(deletePatientMessage);
     }

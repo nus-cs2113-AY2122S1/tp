@@ -1,20 +1,21 @@
 package medbot.command.staffcommand;
 
+import medbot.Scheduler;
 import medbot.Ui;
-import medbot.command.AddCommand;
-import medbot.list.PersonList;
+import medbot.command.AddPersonCommand;
+import medbot.exceptions.MedBotException;
 import medbot.person.Staff;
 
-public class AddStaffCommand extends AddCommand {
+public class AddStaffCommand extends AddPersonCommand {
     public AddStaffCommand(Staff staff) {
         super(staff);
     }
 
     @Override
-    public void execute(PersonList personList, Ui ui) {
-        int patientId = personList.addPerson(person);
-        //Need to change
-        String successMessage = ui.getAddPatientMessage(patientId);
-        ui.printOutput(successMessage);
+    public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
+        int staffId = scheduler.getMedicalStaffList().addPerson(person);
+        //todo change to getAddStaffMessage
+        String addStaffMessage = ui.getAddPatientMessage(staffId);
+        ui.printOutput(addStaffMessage);
     }
 }

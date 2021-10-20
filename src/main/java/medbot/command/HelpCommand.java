@@ -1,5 +1,6 @@
 package medbot.command;
 
+import medbot.Scheduler;
 import medbot.Ui;
 import medbot.list.PersonList;
 
@@ -15,7 +16,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(PersonList personList, Ui ui) {
+    public void execute(Scheduler scheduler, Ui ui) {
         String output;
         if (commandType == null) {
             output = ui.getCommandList();
