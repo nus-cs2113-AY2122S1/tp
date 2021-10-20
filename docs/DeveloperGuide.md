@@ -76,6 +76,17 @@ corresponding `ContactList` and `Contact` objects. It is thus dependent on the c
 
 {NOT DONE}
 
+### <a name="Edit"></a>Editing a contact: `edit`
+This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list, 
+a user must enter a command in the form `edit [CONTACT INDEX] [DETAILS WITH FLAGS]` where the details with flags are 
+specified in the form `-flag detail` with up to 6 details i.e. `-g github-username -tw twitter_handle`. The user input
+will be parsed by `EditContactParser` methods `getIndexToStore` and `parseContactDetails` to obtain a String array with
+the details to be edited. An `EditContactCommand` with the specified parameters will then be created and executed in 
+`Duke`. The sequence diagram below shows how the whole process is carried out.
+
+![Edit Sequence Diagram](images/EditContactCommandSequenceDiagram.png)
+
+
 ### <a name="Delete"></a>Deleting a contact: `rm`
 This feature is processed using the `DeleteContactCommand`. Whenever the user wants to remove a contact from the contact
 list using the `rm` command, `DeleteContactCommand` is created in the `MainParser` and executed in`Duke`. The sequence 
