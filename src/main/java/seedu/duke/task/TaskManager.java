@@ -1,5 +1,6 @@
 package seedu.duke.task;
 
+import seedu.duke.command.Command;
 import seedu.duke.command.flags.ListFlag;
 import seedu.duke.command.flags.SortFlag;
 import seedu.duke.command.flags.TaskFlag;
@@ -42,7 +43,7 @@ public class TaskManager {
         for (HashMap.Entry<String, String> entry : filter.entrySet()) {
             String flag = entry.getKey();
             String argument = entry.getValue();
-            if (flag.equals("mainArgument")) {
+            if (flag.equals(Command.MAIN_ARGUMENT)) {
                 continue;
             }
             switch (flag) {
