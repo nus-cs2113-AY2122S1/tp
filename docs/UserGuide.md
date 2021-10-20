@@ -2,8 +2,11 @@
 
 ## Introduction
 
-StonksXD is a smart money management application that tracks daily expenses, 
-sets/adjusts spending limits and gives advice based on daily expenses. 
+StonksXD is a smart money management application that does the following: 
+- tracks daily expenses, 
+- sets/adjusts spending limits
+- gives advice based on available data
+
 It is optimised for a once-a-day logging system and allows you to 
 view your financial records through both text and graphs in different currencies!
 
