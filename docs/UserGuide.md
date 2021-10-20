@@ -14,19 +14,19 @@ ingredient inventory.**
 
 ## Contents
 
-[**1. Quick Start**](#1-quick-start) <br>
-[**2. Features**](#2-features) <br>
-&nbsp;&nbsp;[2.1. View Help](#21-view-help) <br>
-&nbsp;&nbsp;[2.2. Add Ingredients](#22-add-an-ingredient) <br>
-&nbsp;&nbsp;[2.3. List Ingredients](#23-list-all-ingredients) <br>
-&nbsp;&nbsp;[2.4 Update Ingredients](#24-update-an-ingredient) <br>
-&nbsp;&nbsp;[2.5. Delete Ingredients](#25-delete-an-ingredient) <br>
-&nbsp;&nbsp;[2.7. Show Expiring Ingredients](#27-show-expiring-ingredients) <br>
-&nbsp;&nbsp;[2.8. Show Alerts](#28-show-alerts) <br>
-&nbsp;&nbsp;[2.9. Set Thresholds](#29-set-thresholds) <br>
-&nbsp;&nbsp;[2.10. Search For Ingredients](#210-search-for-ingredients) <br>
-&nbsp;&nbsp;[2.11. View/ Set Current Date](#211-view-set-current-date) <br>
-&nbsp;&nbsp;[2.12. Exit Program](#212-exit-program) <br>
+[**1. Quick Start**](#1-quick-start)  <br>
+[**2. Features**](#2-features)  <br>
+&nbsp;&nbsp;[2.1. Viewing Help](#21-viewing-help) <br>
+&nbsp;&nbsp;[2.2. Adding Ingredients](#22-adding-an-ingredient) <br>
+&nbsp;&nbsp;[2.3. Listing Ingredients](#23-listing-all-ingredients) <br>
+&nbsp;&nbsp;[2.4 Updating Ingredients](#24-updating-an-ingredient) <br>
+&nbsp;&nbsp;[2.5. Delete Ingredients](#25-stop-tracking-an-ingredient) <br>
+&nbsp;&nbsp;[2.6. Show Expiring Ingredients](#26-tba-show-expiring-ingredients) <br>
+&nbsp;&nbsp;[2.7. Displaying Alerts](#27-displaying-alerts) <br>
+&nbsp;&nbsp;[2.8. Setting Thresholds](#28-setting-thresholds) <br>
+&nbsp;&nbsp;[2.9. Search For Ingredients](#210-search-for-ingredients) <br>
+&nbsp;&nbsp;[2.10. View/ Set Current Date](#211-view-set-current-date) <br>
+&nbsp;&nbsp;[2.11. Exit Program](#29-exiting-the-program) <br>
 [**3. FAQ**](#3-faq) <br>
 [**4.Command Summary**](#command-summary) <br>
 
@@ -102,7 +102,7 @@ The parameter used in the command is:
 
 Example: `delete 1`
 
-### 2.7. Show Expiring Ingredients
+### 2.6. Show expiring ingredients
 
 List the ingredients that will expire by a specified date.
 
@@ -113,22 +113,30 @@ The parameter used in the command is:
 
 Example: `expire 12/11/2021`
 
-### 2.8. Show Alerts 
+### 2.7 Displaying alerts
 
-List ingredients that are expiring within a certain period or are running low on stock, or both.
+Displays the specified type of alert
 
-Format: `alert [ALERT_TYPE]`
-* `ALERT_TYPE`: the type of alert required. There are three types of alerts; `expiry`, `stock` and `all`.
+Format: `alerts [TYPE]`
 
-### 2.9. Set Thresholds
+There are 3 possible `[TYPE]`:
+1. `expiry`: displays the ingredients expiring within a threshold number of days
+2. `stock`: displays the ingredients with stock less than a threshold value
+3. `all`: displays both of the above
 
-Set the thresholds that trigger the `expiry` and `stock` alerts.
+For more about thresholds and setting them, see [here](#28-setting-thresholds).
 
-Format: `set [THRESHOLD_TYPE] [VALUE]`
-* `THRESHOLD_TYPE`: the type of threshold to be set. Either `expiry` or `stock`.
-* `VALUE`: the threshold value. Units are days for `expiry` and kilograms for `stock`.
+### 2.8 Setting thresholds
 
-Examples: `set expiry 5`, `set stock 10`
+Sets the expiry threshold or the stock threshold for the `[alerts](#27-displaying-alerts) function.
+
+Format: `set [TYPE] [NEW_VALUE]`
+
+The parameters used in the command are:
+* `TYPE`: either `expiry` or `stock`
+* `NEW_VALUE`: the new threshold for which alerts will be displayed
+
+### 2.9. Exiting the program
 
 ### 2.10. Search For Ingredients
 

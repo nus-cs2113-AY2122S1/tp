@@ -42,8 +42,6 @@ public class Parser {
     private static final String INCORRECT_PARAMETERS_MESSAGE = "The number of parameters is wrong!";
     private static final String EXPIRY_FORMAT_ERROR_MESSAGE = "Invalid expiry date format!"
             + '\n' + "Please key in the expiry date in the format dd/mm/yyyy!";
-    private static final String NO_RESULTS_MESSAGE_START = "I could not find any results for \"";
-    private static final String NO_RESULTS_MESSAGE_END = "\"!";
     private static final String INVALID_ALERT_TYPE_MESSAGE = "Not an alert type!";
 
     private static final String SPACE_SEPARATOR = " ";
@@ -119,16 +117,10 @@ public class Parser {
         String resultMsg = "";
         for (int i = 0; i < keywords.length; i++) {
             String keyword = keywords[i];
-            List<Ingredient> searchResults = IngredientList.getInstance().getIngredientList().stream()
-                    .filter(result -> result.getName().toLowerCase().contains(keyword)).collect(Collectors.toList());
             if (i > 0) {
                 resultMsg += "\n";
             }
-            if (searchResults.isEmpty()) {
-                resultMsg += NO_RESULTS_MESSAGE_START + keyword + NO_RESULTS_MESSAGE_END;
-            } else {
-                resultMsg += new FindCommand(keyword, searchResults).run();
-            }
+            resultMsg += new FindCommand(keyword).run();
         }
         return resultMsg;
     }
