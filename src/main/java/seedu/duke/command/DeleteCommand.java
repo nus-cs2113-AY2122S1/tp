@@ -4,7 +4,7 @@ import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
 import seedu.duke.ingredients.IngredientList;
 
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
 
     private static final String DELETE_MESSAGE = "Got it. This ingredient has been removed:\n" + "\t";
 

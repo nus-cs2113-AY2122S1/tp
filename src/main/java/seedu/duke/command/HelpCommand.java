@@ -1,6 +1,6 @@
 package seedu.duke.command;
 
-public class HelpCommand implements Command {
+public class HelpCommand extends Command {
 
     private static final String HELP_MESSAGE = "These are the commands I can currently carry out:\n"
             + "\t(intended action - command format)\n"

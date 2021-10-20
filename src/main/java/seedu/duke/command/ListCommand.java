@@ -6,7 +6,7 @@ import seedu.duke.ingredients.IngredientList;
 /**
  * Represents a list command.
  */
-public class ListCommand implements Command {
+public class ListCommand extends Command {
 
     private static final String LIST_EMPTY_MESSAGE = "Your inventory is empty!";
     private static final String LIST_MESSAGE = "Here is the list of the ingredients currently in inventory:\n" + "\t";
