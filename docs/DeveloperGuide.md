@@ -1,10 +1,84 @@
 # Developer Guide
 
+## Table of contents
+
+* [Acknowledgements](#acknowledgements)
+* [Setting up, getting started](#setting-up-getting-started)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [UI component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Implementation](#implementation)
+    * [Saving data](#saving-data)
+    * [Loading data](#loading-data)
+* [Appendix: Requirements](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Setting up, getting started
+
+## Design
+
+### Architecture
+
+![ArchitectureDiagram](images/ArchitectureDiagram.png)
+
+The **Architecture Diagram** given above explains the high-level design of the App.
+
+Given below is a quick overview of main components and how they interact with each other.
+
+**Main components of the architecture**
+
+`Main` has two classes called `Duke` and `DukeException`.
+
+`Duke` is responsible for:
+* **At app launch:** Initializes the components in the correct sequence, and connects them up with each other.
+* **At shut down:** Shuts down the components and invokes cleanup methods where necessary.
+
+`DukeException` is responsible for:
+* Manages Duke-related exceptions.
+
+`Commons` represents a collection of classes used by multiple other components.
+
+The rest of the App consists of four components.
+* `UI`: The UI of the App.
+* `Logic`: The parser and command executor.
+* `Model`: Holds the various data structures of the App.
+* `Storage`: Reads data from, and writes data to, the hard disk.
+
+**How the architecture components interact with each other**
+
+The **Sequence Diagram** below shows how the components interact with each other for the scenario where the 
+user issues the command `add task homework -d mon`.
+
+![ArchitectureDemoSequenceDiagram](images/ArchitectureDemoSequenceDiagram.png)
+
+### UI component
+**API** : [`Ui.java`](../src/main/java/seedu/duke/ui/Ui.java)
+
+The `Ui` component contains:
+* the method `readUserResponse()` to read from the standard input.
+* methods to print messages as strings to the standard output.
+* constant strings, such as `LINE` and `PADDING`, which are used to format the printed messages.
+
+The methods in the `Ui` component may call methods from `TaskList`, `LessonList` or `ModuleList` to get information from the respective components.
+
+#### Printing tasks filtered by day of the week:
+![UiPrintTasksWithPeriodSequence](images/UiPrintTasksWithPeriodSequence.png)
+
+### Logic component
 
 ### Model component
 The `model` package consists of three components: `Lesson`, `Task` and `Module`.
@@ -33,7 +107,7 @@ The `Module` component,
 
 The `Task` component,
 * stores data specific to a task as entered by the user
-* stores all `Task` objects as createed by user commands in a `TaskList` object
+* stores all `Task` objects as created by user commands in a `TaskList` object
 * does not depend on any of the other three components
 
 ### Storage component
@@ -50,49 +124,41 @@ The `Storage` component has methods that:
 
 The following sequence diagrams below show how task data is [saved](#saving-data) and [loaded](#loading-data) using the Storage class.
 
-#### Saving data:
-![StorageSaveSequence](images/StorageSaveSequence.png)
+### Common classes
 
-#### Loading data:
-![StorageLoadSequence](images/StorageLoadSequence.png)
+## Documentation, logging, testing, configuration, dev-ops
 
-### User Interface (UI) component
-**API** : [`Ui.java`](../src/main/java/seedu/duke/ui/Ui.java)
+## Implementation
 
-The `Ui` component contains:
-* the method `readUserResponse()` to read from the standard input.
-* methods to print messages as strings to the standard output.
-* constant strings, such as `LINE` and `PADDING`, which are used to format the printed messages.
+### Saving data
+![StorageSaveSequence](images/SaveDataSequenceDiagram.png)
 
-The methods in the `Ui` component may call methods from `TaskList`, `LessonList` or `ModuleList` to get information from the respective components.
+### Loading data
+![StorageLoadSequence](images/LoadDataSequenceDiagram.png)
 
-#### Printing tasks filtered by day of the week:
-![UiPrintTasksWithPeriodSequence](images/UiPrintTasksWithPeriodSequence.png)
+## Appendix: Requirements
 
-## Product scope
-### Target user profile
+### Product scope
 
-{Describe the target user profile}
+{Describe the product scope}
 
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
-
-## User Stories
+### User stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
-## Non-Functional Requirements
+### Use cases
+
+{Describe the use cases}
+
+### Non-Functional Requirements
 
 {Give non-functional requirements}
 
-## Glossary
+### Glossary
 
-* *glossary item* - Definition
-
-## Instructions for manual testing
+## Appendix: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
