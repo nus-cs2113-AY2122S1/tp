@@ -17,8 +17,14 @@ public class FindPriceCommand extends Command {
         System.out.println("Searching by price...");
         ArrayList<Recipe> priceFilter = cookbook.filterByPrice(price);
         for (int i = 0; i < priceFilter.size(); i++) {
-            System.out.println((i + 1) + ". " + priceFilter.get(i).getName()
-                    + " (Price: $" + String.format("%.2f", priceFilter.get(i).getTotalPrice()) + ")");
+            float getPrice = priceFilter.get(i).getTotalPrice();
+            if (getPrice > 0) {
+                System.out.println((i + 1) + ". " + priceFilter.get(i).getName()
+                        + " (Price: $" + String.format("%.2f", getPrice) + ")");
+            } else {
+                System.out.println((i + 1) + ". " + priceFilter.get(i).getName()
+                        + " (Price: Not set)");
+            }
         }
     }
 }
