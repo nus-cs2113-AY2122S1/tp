@@ -57,6 +57,10 @@ public class BudgetManager {
         this.threshold = threshold;
     }
 
+    public double getThreshold() {
+        return this.threshold;
+    }
+
     public void setBudget(double amount, ExpenseCategory category) {
         assert amount >= 0;
         assert category != ExpenseCategory.NULL;
