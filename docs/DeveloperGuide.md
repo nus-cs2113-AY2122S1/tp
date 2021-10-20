@@ -26,6 +26,19 @@ The following sequence diagrams below show how task data is [saved](#saving-data
 #### Loading data:
 ![StorageLoadSequence](images/StorageLoadSequence.png)
 
+### User Interface (UI) component
+**API** : [`Ui.java`](../src/main/java/seedu/duke/ui/Ui.java)
+
+The `Ui` component contains:
+* the method `readUserResponse()` to read from the standard input.
+* methods to print messages as strings to the standard output.
+* constant strings, such as `LINE` and `PADDING`, which are used to format the printed messages.
+
+The methods in the `Ui` component may call methods from `TaskList`, `LessonList` or `ModuleList` to get information from the respective components.
+
+#### Printing tasks filtered by day of the week:
+![UiPrintTasksWithPeriodSequence](images/UiPrintTasksWithPeriodSequence.png)
+
 ## Product scope
 ### Target user profile
 
