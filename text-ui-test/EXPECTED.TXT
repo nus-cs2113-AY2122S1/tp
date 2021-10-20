@@ -1,11 +1,13 @@
 
 Welcome to TermiNUS!
+You have no schedule for today.
 
 Type any of the following to get started:
 > exit
 > help
 > module
 > go
+> timetable
 
 [] >>> Command not found! Type 'help' for a list of commands.
 [] >>> Command not found! Type 'help' for a list of commands.
