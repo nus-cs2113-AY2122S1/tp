@@ -137,6 +137,19 @@ public class Cookbook {
 
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
+
+    public void setTimes(String name, int prep, int cook) throws GordonException {
+        for (Recipe recipe : recipes) {
+            // (?i) enables case insensitivity
+            // .* uses all characters except line break
+            if (recipe.getName().matches("(?i).*" + name + ".*")) {
+                recipe.setTimes(prep, cook);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
   
     public void addCookbookTag(Tag tag) {
         // Prevent duplicate master-Tags at Cookbook level
@@ -236,7 +249,7 @@ public class Cookbook {
         Comparator<Recipe> compareByTime = Comparator.comparing(Recipe::getTotalTime);
         return recipes.stream()
                 .filter(r -> r.getTotalTime() <= time)
-                .sorted(compareByTime)
+                .sorted(compareByTime.reversed())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 }
