@@ -42,12 +42,6 @@ public class AddOrderCommand extends Command {
         ArrayList<Medicine> medicines = Medicine.getInstance();
         Storage storage = Storage.getInstance();
 
-        boolean nameExists = false;
-        String nameToAdd = parameters.get(CommandParameters.NAME);
-        String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
-        int orderQuantity = Integer.parseInt(quantityToAdd);
-        String dateToAdd = parameters.get(CommandParameters.DATE);
-
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY};
         String[] optionalParameter = {CommandParameters.DATE};
 
@@ -64,6 +58,12 @@ public class AddOrderCommand extends Command {
             logger.log(Level.WARNING, "Invalid parameters values given by user");
             return;
         }
+
+        boolean nameExists = false;
+        String nameToAdd = parameters.get(CommandParameters.NAME);
+        String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
+        int orderQuantity = Integer.parseInt(quantityToAdd);
+        String dateToAdd = parameters.get(CommandParameters.DATE);
 
         if (parameters.containsKey(CommandParameters.NAME)) {
             nameToAdd = parameters.get(CommandParameters.NAME);
