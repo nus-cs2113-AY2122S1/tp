@@ -1,6 +1,7 @@
 package seedu.commands;
 
 import seedu.entry.Entry;
+import seedu.utility.BudgetManager;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.IncomeCategory;
 import seedu.utility.FinancialTracker;
@@ -17,7 +18,7 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
     
-    public void execute(FinancialTracker finances, Ui ui) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager) {
         ArrayList<Entry> entries = finances.getEntries();
         ArrayList<Entry> filteredEntries = new ArrayList<>();
         
@@ -55,6 +56,9 @@ public class FindCommand extends Command {
                 case "ENTERTAINMENT":
                     filterCategory = ExpenseCategory.ENTERTAINMENT;
                     break;
+                case "MISC":
+                    filterCategory = ExpenseCategory.MISC;
+                    break;
                 case "SALARY":
                     filterCategory = IncomeCategory.SALARY;
                     break;
@@ -63,6 +67,9 @@ public class FindCommand extends Command {
                     break;
                 case "ADHOC":
                     filterCategory = IncomeCategory.ADHOC;
+                    break;
+                case "OTHERS":
+                    filterCategory = IncomeCategory.OTHERS;
                     break;
                 default:
                     filterCategory = ExpenseCategory.NULL;

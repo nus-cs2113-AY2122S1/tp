@@ -10,14 +10,81 @@ Snippets of code from addressbook-level2’s Parser.java were used.
 Source: https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
 
 ## Design & implementation
-
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Architecture
+
+![](../docs/team/Images/Architecture.png)
+
+The __Architecture Diagram__ above explains the high-level design of the StonksXD app.
+Given below is a quick overview of the main components of the application and how they interact with each other: <p>
+
+`Ui` is the class responsible for interfacing with the user. 
+It receives user input and passes it to`StonksXD`.
+It also receives data from `Command` to output to the user. <p>
+
+`Ui` &rarr; `StonksXD` <p>
+`Ui` &larr; `Command` <p>
+
+`StonksXD` is the main class of the app. It has 2 main functions: 
+1. Upon opening the app, it loads saved data from `DataManager`. Before closing the app, it pushes save data to `DataManager`.
+2. Runs a loop receiving new user input from `Ui` and passing it to `Parser`. <p>
+
+`Ui` &rarr; `StonksXD` &rlarr; `DataManager` <p>
+`StonksXD` &rarr; `Parser` <p>
+
+`Parser` is the class responsible for interpreting the user input. 
+It ensures the appropriate input format, and passes the input data to the appropriate command. <p>
+
+`StonksXD` &rarr; `Parser` &rarr; `Command` <p>
+
+`Command` is the class responsible for the execution of all commands.
+It contains child classes for all possible commands.
+It interacts with `FinancialTracker` and `BudgetManager` to execute commands, before sending information to `Ui` for output. <p>
+
+`Parser` &rarr; `Command` &rlarr; `FinancialTracker` <p>
+`Parser` &rarr; `Command` &rlarr; `BudgetManager` <p>
+`Ui` &rlarr; `Command` <p>
+
+`FinancialTracker` is the class containing and handling all income and expense entries input by the user.
+It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data. <p>
+
+`Command` &rlarr; `FinancialTracker` <p>
+`FinancialTracker` &rarr; `DataManager` <p>
+
+`BudgetManager` is the class containing and handling all budget information.
+It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data. <p>
+
+`Command` &rlarr; `BudgetManager` <p>
+`BudgetManager` &rarr; `DataManager` <p>
+
+`DataManager` is the class responsible for reading data from the `StonksXD_data.csv` file upon boot up,
+and writing save data to the file before terminating the program.
+It receives data from `FinancialTracker` and `BudgetManager` and interacts with `StonksXD`. <p>
+
+`FinancialTracker` &rarr; `DataManager` &rarr; `StonksXD_data.csv` <p>
+`BudgetManager` &rarr; `DataManager` &rarr; `StonksXD_data.csv` <p>
+`StonksXD` &rlarr; `DataManager` &rlarr; `StonksXD_data.csv` <p>
+
+The sections below provide more information on the respective components.
+
 ### Ui Component
 Ui contains a Scanner object that takes in user inputs from the command line.
 The Ui’s main role is to provide feedback whenever the user enters a command through the form of messages. It also 
 handles the indexing of each element in the listing methods before printing out to the standard output for users to see.
 
 ![img_1.png](img_1.png)
+
+### Command Component
+
+The `Command` class is a parent class that contains all the basic command features required to operate on incoming income or expense data.
+
+Each method is abstracted into an appropriate child class (for e.g. `AddExpenseCommand`) in accordance with SLAP and OOP rules to handle only one function.
+
+After obtaining the attributes of an entry from the `entry` class and the required command given by the user from the `parser` class, it directs the inputs to the respective methods for execution.
+
+UML Diagram 
+
+_------Work in Progress------_
 
 ### Data Saving Component
 The saving and loading of data is handled by the `DataManager` class. Data will be saved and loaded from 
@@ -96,4 +163,118 @@ program.
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+###Initial start-up guide:
+
+1. Ensure that you have Java 11 or above installed.
+
+
+2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
+
+
+3. Copy the file to the folder you want to use as the home folder for your `StonksXD`.
+
+
+4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run `java -jar tp.java` in the command line. `StonksXD` will start up.
+
+
+###Testing Guide:
+
+Below are a few types of testing that you can perform:
+
+- Manual Testing
+- JUnit Testing
+- Gradle Daemon Testing
+- I/O Re-direction Testing
+
+
+### Manual Testing
+
+This is a non-exhaustive list of some common manual tests that can given as commands during run-time to test code defensibility:
+
+- ####_Adding Income/ Expense entries_
+  1. Test Case: `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY`. </p>
+     Expected : Adds an expense item to the list. Displays confirmation message with timestamp.
+  
+  <br>
+  
+  2. Test Case: `add_ex` but leave `d/`, `/a`, `/c` or all  empty. </p>
+     Expected : No item is added. Error message displayed showing correct syntax.
+  
+  <br>
+  
+  3. Test Case: `add_ex` but give non-existent category for `/c`.
+     Expected : No item added. Error message displayed showing available categories.
+
+- ####_Delete Income/ Expense entries_
+  1. Pre-requisite: List expense or income using `list_ex`/ `list_in. Must have one or more entries.
+  
+  <br>
+  
+  2. Test Case: `del_in i/1` or `del_ex i/1` </p>
+     Expected : Deletes the 1st entry in Income/ Expense list. Displays confirmation message.
+  
+  <br>
+  
+  3. Test Case: `del_in i/0`, `del_in i/ABC` or `del_in i/-3`. </p>
+     Expected : Displays error message saying invalid index.
+
+  <br>
+
+  4. Test Case: `del_in i/x` where x is larger than list size.
+     Expected : Similar error message as before.
+
+- ####_List Income/ Expense entries_
+  1. Test Case: `list_ex` or `list_in` </p>
+     Expected : Lists all entries added so far.
+  
+  <br>
+  
+  2. Test Case: `list_ex` or `list_in` but no items in both lists.
+     Expected : Displays message saying no items in list.
+
+### JUnit Testing 
+
+JUnit testing modules are available in the test folder. They can be run separately or all together based on developer requirements.
+
+Below is a list of the currently available tests:
+
+- _CommandTest:_ Tests if commands like add, delete, list etc. are calling their respective methods and providing with the appropriate parameters.
+
+
+- _DataManagerTest:_ Tests the data saving function of program.
+
+
+- _DukeTest:_ Used as driver to run main().
+
+
+- _ExpenseTest:_ Tests if expense entries are processed correctly into their appropriate attributes.
+
+
+- _IncomeTest:_ Tests if income entries are processed into their appropriate attributes.
+
+
+- _FinancialTrackerTest:_ 
+
+### Gradle Daemon Testing
+
+Intellij comes with an in-built Gradle Daemon that can be used to run the following test:
+
+- `.\gradlew test` to check if all test files have passed.
+- `.\graldew checkStyleTest` to check if test files comply with certain coding standards and conventions.
+- `.\gradlew checkStyleMain` to check if main program complies with all JAVA coding standards.
+<br>
+
+### I/O Re-direction Testing
+
+This form of testing involves loading sample data stored in the `text-ui-test` folder. It can be performed as follows:
+
+1. Enter new sample data or use the pre-existing test data that can be found in the `input.txt` file.
+
+
+3. Open CLI terminal and navigate to the `text-ui-test` directory using the following command - `cd /text-ui-test`
+
+
+2. Run `.\runtest.bat` in CLI and see if you receive the message `"Test Passed!"`.
+
+
+3. The IDE will compare the output in the `EXPECTED.TXT` and `ACTUAL.TXT` files to see if they are exactly the same to pass this test.
