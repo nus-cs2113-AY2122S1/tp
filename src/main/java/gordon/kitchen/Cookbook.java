@@ -223,7 +223,7 @@ public class Cookbook {
         Comparator<Recipe> compareByPrice = Comparator.comparing(Recipe::getTotalPrice);
         return recipes.stream()
                 .filter(r -> r.totalPrice <= price)
-                .sorted(compareByPrice)
+                .sorted(compareByPrice.reversed())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 

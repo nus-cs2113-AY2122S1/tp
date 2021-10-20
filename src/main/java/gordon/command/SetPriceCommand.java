@@ -2,7 +2,6 @@ package gordon.command;
 
 import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
-import gordon.util.Difficulty;
 
 public class SetPriceCommand extends Command {
     String recipeName;

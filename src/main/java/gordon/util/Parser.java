@@ -7,6 +7,7 @@ import gordon.command.DeleteRecipeCommand;
 import gordon.command.FindCaloriesCommand;
 import gordon.command.FindDifficultyCommand;
 import gordon.command.FindIngredientsCommand;
+import gordon.command.FindPriceCommand;
 import gordon.command.FindTagsCommand;
 import gordon.command.HelpCommand;
 import gordon.command.ListRecipesCommand;
@@ -244,6 +245,13 @@ public class Parser {
                 throw new GordonException(GordonException.INVALID_DIFFICULTY);
             } else {
                 return new FindDifficultyCommand(diff);
+            }
+        case "price":
+            try {
+                float price = Float.parseFloat(splitContent[1].substring(spaceIndex + 1).trim());
+                return new FindPriceCommand(price);
+            } catch (NumberFormatException e) {
+                throw new GordonException(GordonException.FLOAT_INVALID);
             }
         case "tag":
             ArrayList<String> tags = new ArrayList<>(Arrays.asList(splitContent[1]
