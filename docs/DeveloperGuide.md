@@ -24,6 +24,13 @@ there must be at least one trip added by the user (either through input or throu
 save file) in order for any other features to be available. If there are no trips added, the program 
 will repeatedly prompt the user to add a new trip.
 
+### `Person` Class
+The  Person Class,
+* Represents an individual that participated in an expense or a whole trip.
+* A user-defined amount of `Person` objects will be created by the user during the create function of the `Trip` Class.
+* Every time an object is created of the `Expense` Class, the user may define the people who were involved in the expense, however the people who are added to the expense must be already a `Person` object in the `Trip` object that the expense was made.
+* One `Person` object who was involved in the expense will then be appointed as the payer of the group, the user will then have to indicate how much (in foreign currency) each of the participating persons spent for that particular expense. This is then stored and updated in each of the respective `Person` object’s `moneyOwed` HashMap,  where a positive double refers to how much the person owes the respective Person object (i.e. the key of the HashMap) and a negative double refers to how much the Person object (i.e. the key of the HashMap) owes to that instance of the Person object.
+  * Example: If the HashMap = {person2 = 22, person3 = -11} in the person1 object, then person1 owes person2 $22 and person3 owes person1 $11.
 
 
 ## Product scope
