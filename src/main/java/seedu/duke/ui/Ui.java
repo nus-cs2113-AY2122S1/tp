@@ -22,7 +22,11 @@ public class Ui {
 
     public static void printModuleMapping(ModuleMapping mm, int index) {
         printIndex(index, false);
-        out.print(" " + mm.localModule + Constants.MODULE_MAPPING_SEPARATOR + mm.mappedModule);
+        String mappingDetails
+                = " " + mm.mappedModule.getModuleCode()
+                + " - " + mm.mappedModule.getModuleCode()
+                + " : " + mm.mappedModule.getModuleName();
+        System.out.println(mappingDetails);
     }
     
     public static void printIndex(int index, boolean println) {

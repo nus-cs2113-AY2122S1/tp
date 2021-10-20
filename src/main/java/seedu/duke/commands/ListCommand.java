@@ -3,7 +3,8 @@ package seedu.duke.commands;
 import seedu.duke.enumerations.ListType;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
-import seedu.duke.storage.Storage;
+import seedu.duke.storage.ModuleStorage;
+import seedu.duke.storage.UniversityStorage;
 import seedu.duke.ui.Ui;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
@@ -37,7 +38,7 @@ public class ListCommand extends Command {
     }
 
     private void showAllMods() throws IOException {
-        ArrayList<Module> allModuleList = Storage.loadModules();
+        ArrayList<Module> allModuleList = ModuleStorage.load();
         System.out.println("Here are all the modules available for you:");
         assert allModuleList.size() > 0;
         for (int i = 0; i < allModuleList.size(); i++) {
@@ -47,7 +48,7 @@ public class ListCommand extends Command {
     }
 
     private void showAllUnis() throws IOException {
-        UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
+        UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
         System.out.println("Here are all the universities available for you:");
         assert universityMasterList.getSize() > 0;
         for (int i = 0; i < universityMasterList.getSize(); i++) {
@@ -58,18 +59,17 @@ public class ListCommand extends Command {
 
     private void showSelectedUnis(UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws IOException {
-        UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
         if (universitySelectedList.getSize() == 0) {
-            assert moduleSelectedList.getSize() == 0;
+            assert moduleSelectedList.getSize() >= 0;
             System.out.println("The university list is empty!");
         } else {
-            assert moduleSelectedList.getSize() > 0;
+            assert moduleSelectedList.getSize() >= 0;
             getUnisAndMods(universitySelectedList);
         }
     }
 
     private void getUnisAndMods(UniversityList universitySelectedList) throws IOException {
-        UniversityList universityMasterList = new UniversityList(Storage.loadUniversities());
+        UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
         System.out.println("Here are the universities and module mappings in your list:");
         for (int i = 0; i < universitySelectedList.getSize(); i++) {
             assert universitySelectedList.get(i).getName() != null;

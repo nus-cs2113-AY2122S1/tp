@@ -35,4 +35,8 @@ public class Module {
         this.moduleCredits = moduleCredits;
     }
 
+    public String toFileFormat() {
+        return moduleCode + " # " + moduleName + " # " + moduleCredits
+                + System.lineSeparator();
+    }
 }

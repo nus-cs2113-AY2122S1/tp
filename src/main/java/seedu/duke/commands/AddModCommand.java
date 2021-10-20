@@ -2,14 +2,18 @@ package seedu.duke.commands;
 
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
+import seedu.duke.storage.SelectedModuleStorage;
 import seedu.duke.universities.UniversityList;
+
+import java.io.IOException;
 
 public class AddModCommand extends Command {
     public static final String COMMAND_WORD = "addmod";
 
     private final Module moduleToAdd;
 
-    public AddModCommand(Module moduleToAdd, UniversityList universitySelectedList, ModuleList moduleSelectedList) {
+    public AddModCommand(Module moduleToAdd, UniversityList universitySelectedList,
+                         ModuleList moduleSelectedList) throws IOException {
         super(universitySelectedList, moduleSelectedList);
         this.moduleToAdd = moduleToAdd;
         assert moduleToAdd.getModuleCode() != null;
@@ -20,6 +24,7 @@ public class AddModCommand extends Command {
                 .getModuleName().equals(moduleToAdd.getModuleName());
         assert moduleSelectedList.get(moduleSelectedList.getSize() - 1)
                 .getModuleCode().equals(moduleToAdd.getModuleCode());
+        SelectedModuleStorage.write(moduleSelectedList);
         System.out.println("New module added: " + moduleToAdd.getModuleCode());
     }
 }
