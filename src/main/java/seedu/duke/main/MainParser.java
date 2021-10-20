@@ -15,7 +15,7 @@ public class MainParser {
         DishParser dishParser = new DishParser();
         IngredientParser ingredientParser = new IngredientParser();
 
-        String[] command = userInput.trim().split("\\|", 3);
+        String[] command = userInput.trim().split("/", 3);
 
         switch (command[0]) {
         case "add-employee":
