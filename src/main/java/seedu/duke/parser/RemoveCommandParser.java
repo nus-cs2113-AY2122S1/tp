@@ -1,10 +1,11 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.*;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.RemoveMapCommand;
+import seedu.duke.commands.RemoveModCommand;
+import seedu.duke.commands.RemoveUniCommand;
 import seedu.duke.constants.Constants;
-import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
-import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
@@ -19,13 +20,12 @@ public class RemoveCommandParser {
     public Command parse(String arguments, UniversityList universitySelectedList,
                          ModuleList moduleSelectedList) throws ParseException, IOException {
 
-        logger.log(Level.INFO, "Start parsing remove command");
+        logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
 
         String[] argumentsSubstrings = arguments.trim().split(" ", 3);
-
         if (argumentsSubstrings.length < 2) {
-            logger.log(Level.INFO, "not enough arguments");
-            throw new ParseException("No flags or description found.", 1);
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
         String flag = argumentsSubstrings[0];
         int index;
@@ -34,26 +34,26 @@ public class RemoveCommandParser {
         case Constants.FLAG_UNIVERSITY:
             index = Integer.parseInt(argumentsSubstrings[1]);
             if (index > universitySelectedList.getSize()) {
-                logger.log(Level.WARNING, "University not found");
-                throw new ParseException("university not in list", 1);
+                logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
             return new RemoveUniCommand(index, universitySelectedList);
         case Constants.FLAG_MODULE:
             index = Integer.parseInt(argumentsSubstrings[1]);
             if (index > moduleSelectedList.getSize()) {
-                logger.log(Level.WARNING, "module not found");
-                throw new ParseException("module does not exist", 1);
+                logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
+                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
             return new RemoveModCommand(index, moduleSelectedList);
         case Constants.FLAG_MAP:
             int uniIndex = Integer.parseInt(argumentsSubstrings[1]);
             if (argumentsSubstrings.length < 3) {
-                throw new ParseException("missing argument", 1);
+                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
             }
             int mapIndex = Integer.parseInt(argumentsSubstrings[3].trim());
             return new RemoveMapCommand(uniIndex, mapIndex, universitySelectedList);
         default:
-            throw new ParseException("Wrong flags passed", 1);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
         }
     }
 }
