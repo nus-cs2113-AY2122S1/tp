@@ -1,6 +1,6 @@
 package seedu.duke.training;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class TrainingList {
 
@@ -18,8 +18,27 @@ public class TrainingList {
         return trainingList;
     }
 
+    public int getTrainingListSize() { //added by xy
+        return trainingList.size();
+    }
+
     public void addTrainingSchedule(TrainingSchedule schedule) {
         trainingList.add(schedule);
+    }
+
+    public String getTrainingName(int index) {
+        assert (index - 1) >= 0;
+        return trainingList.get(index - 1).getTrainingName();
+    }
+
+    public String getTrainingTime(int index) {
+        assert (index - 1) >= 0;
+        return trainingList.get(index - 1).getTrainingTime();
+    }
+
+    public String getTrainingVenue(int index) {
+        assert (index - 1) >= 0;
+        return trainingList.get(index - 1).getTrainingVenue();
     }
 
     /**
@@ -32,6 +51,7 @@ public class TrainingList {
     public TrainingSchedule deleteTrainingSchedule(int trainingNum) throws IndexOutOfBoundsException {
         try {
             int indexToDelete = trainingNum - 1;
+            assert indexToDelete >= 0;
             TrainingSchedule training = trainingList.get(indexToDelete);
             trainingList.remove(indexToDelete);
             return training;
