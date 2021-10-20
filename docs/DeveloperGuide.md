@@ -32,9 +32,9 @@ The App contains the `command`, `exception`, `kitchen`, and `util` packages that
 
 *How do these components interact with each other*
 
-The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
-"Diagram Here"
+![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138092234-f7f768c7-d9d8-4a6f-b75b-1780d2158436.png)
 
 ### Kitchen component
 
