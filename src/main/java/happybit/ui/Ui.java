@@ -1,6 +1,5 @@
 package happybit.ui;
 
-import happybit.exception.HaBitUiException;
 import happybit.goal.Goal;
 import happybit.habit.Habit;
 
@@ -31,19 +30,6 @@ public class Ui {
     private static final String NEWLINE = System.lineSeparator();
     private static final String DASHES = "______________________________________________________________"
             + "__________________________________________________________";
-
-    private UiStartup uiStartup = new UiStartup();
-
-    /**
-     * Runs the interface for startup menu.
-     */
-    public void startupMenu() {
-        try {
-            uiStartup.run();
-        } catch (HaBitUiException e) {
-            showError(e.getMessage());
-        }
-    }
 
     public void printCommandList() {
         printDashes();

@@ -1,7 +1,6 @@
 package happybit.goal;
 
 import happybit.exception.HaBitCommandException;
-import happybit.exception.HaBitParserException;
 import happybit.habit.Habit;
 import happybit.ui.Ui;
 
@@ -15,13 +14,33 @@ public class GoalList {
     private static final String ERROR_INVALID_HABIT_INDEX = "There are no habits at this index in your goal.";
 
     protected ArrayList<Goal> goalList;
+    protected int goalNumber;
 
     public GoalList() {
         this.goalList = new ArrayList<>();
+        this.goalNumber = -1;
     }
 
     public ArrayList<Goal> getGoalList() {
         return goalList;
+    }
+
+    /**
+     * Getter for goal number.
+     *
+     * @return Integer index of a goal.
+     */
+    public int getGoalNumber() {
+        return goalNumber;
+    }
+
+    /**
+     * Sets a goal number to be the index of a goal in the goalList.
+     *
+     * @param goalNumber Integer index of a goal.
+     */
+    public void setGoalNumber(int goalNumber) {
+        this.goalNumber = goalNumber;
     }
 
     public int getListLength() {

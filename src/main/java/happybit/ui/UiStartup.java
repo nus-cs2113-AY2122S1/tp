@@ -9,20 +9,11 @@ import java.net.URISyntaxException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class UiStartup {
+public class UiStartup extends UiOverall {
 
     private static final String UG_URI = "https://ay2122s1-cs2113t-f14-1.github.io/tp/UserGuide.html";
     private static final String DG_URI = "https://ay2122s1-cs2113t-f14-1.github.io/tp/DeveloperGuide.html";
     private static final String DEMO_URI = "https://github.com/AY2122S1-CS2113T-F14-1/tp"; // To be changed (currently links to github repo)
-
-    private static final String S_TAB = "    ";
-    private static final String LS = System.lineSeparator();
-    private static final String BAR = "=============================================================================\n";
-    private static final String LOGO = " _  _   __   ____  ____  _  _  ____  __  ____ \n"
-            + "/ )( \\ / _\\ (  _ \\(  _ \\( \\/ )(  _ \\(  )(_  _)\n"
-            + ") __ (/    \\ ) __/ ) __/ )  /  ) _ ( )(   )(  \n"
-            + "\\_)(_/\\_/\\_/(__)  (__)  (__/  (____/(__) (__) ";
-    private static final String SLOGAN = "tracking habits made fun...\n";
 
     private static final String MENU = "Select from one of the following menu items:"
             + LS + S_TAB + "[1] About HappyBit"
@@ -82,36 +73,12 @@ public class UiStartup {
      */
 
     /**
-     * Prints the logo enclosed between double bars.
-     */
-    private void printLogo() {
-        System.out.println(BAR + LOGO + S_TAB + SLOGAN + BAR);
-    }
-
-    /**
      * Prints the default display.
      */
     private void defaultDisplay() {
         clearConsoleScreen();
         printLogo();
         System.out.println(WELCOME_MESSAGE + MENU);
-    }
-
-    /**
-     * Clears the console screen.
-     */
-    private void clearConsoleScreen() {
-        try {
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            final String os = System.getProperty("os.name");
-            if (os.contains("Windows")) {
-                Runtime.getRuntime().exec("cls");
-            } else {
-                Runtime.getRuntime().exec("clear");
-            }
-        } catch (final Exception e) {
-            // do nothing
-        }
     }
 
     /**

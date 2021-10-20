@@ -14,6 +14,7 @@ public class Parser {
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_ADD_GOAL = "set";
     private static final String COMMAND_ADD_HABIT = "add";
+    private static final String COMMAND_SET_GOAL = "goal";
     private static final String COMMAND_UPDATE_GOAL_NAME = "update";
     private static final String COMMAND_UPDATE_HABIT_NAME = "change";
     private static final String COMMAND_LIST_GOAL = "list";
@@ -21,8 +22,9 @@ public class Parser {
     private static final String COMMAND_DELETE_GOAL = "remove";
     private static final String COMMAND_DELETE_HABIT = "delete";
     private static final String COMMAND_COMPLETE_HABIT = "done";
-    private static final String COMMAND_EXIT = "bye";
     private static final String COMMAND_RETURN = "return";
+    private static final String COMMAND_EXIT = "bye";
+
 
     /**
      * Parses the user input.
@@ -118,6 +120,8 @@ public class Parser {
             return AddParser.parseAddGoalCommand(details);
         case COMMAND_ADD_HABIT:
             return AddParser.parseAddHabitCommand(details);
+        case COMMAND_SET_GOAL:
+            return SetParser.parseSetGoalCommand(details);
         case COMMAND_LIST_GOAL:
             return new ListGoalsCommand();
         case COMMAND_LIST_HABIT:
