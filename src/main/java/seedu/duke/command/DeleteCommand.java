@@ -78,7 +78,7 @@ public class DeleteCommand extends Command {
         TaskManager.checkIndexValid(indexes.last() - 1);
         for (Integer index : indexes) {
             Task deletedTask = TaskManager.deleteTask(index - 1 - offset++);
-            message += deletedTask.getTaskEntryDescription();
+            message += deletedTask.getTaskEntryDescription() + '\n';
         }
         return message;
     }
