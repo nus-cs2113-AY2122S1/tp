@@ -2,10 +2,7 @@ package seedu.ui;
 
 import seedu.module.Module;
 import seedu.timetable.TimetableItem;
-import seedu.timetable.TimetableLesson;
-
 import java.util.List;
-import java.util.Objects;
 
 public class TimetableUI {
 
@@ -13,8 +10,9 @@ public class TimetableUI {
         CODE, LESSONTYPE, VENUE,
     }
 
-    private static final int NINE_AM = 9;
+    private static final int TIME_MULTIPLIER = 100;
     private static final String FIXED_LENGTH_FORMAT = "%-16.16s";
+    private static final String FIXED_TIME_FORMAT = "%04d";
     private static final String DIVIDER = "----------------";
     private static final String MODULES_HEADER = "Modules taken this semester: \n";
     private static final String CREDIT_COUNT_HEADER = "\nTotal MCs taken this semester: ";
@@ -50,12 +48,8 @@ public class TimetableUI {
         String infoLine = "\t\t\t\t";
         String time;
         for (int u = start; u <= end; u++) {
-            if (u > NINE_AM) {
-                time = u + "00";
-            } else {
-                time = "0" + u + "00";
-            }
-            infoLine += String.format(FIXED_LENGTH_FORMAT, time);
+            time = String.format(FIXED_TIME_FORMAT, u * TIME_MULTIPLIER);
+            infoLine =  infoLine.concat(String.format(FIXED_LENGTH_FORMAT, time));
         }
         System.out.println(infoLine);
     }

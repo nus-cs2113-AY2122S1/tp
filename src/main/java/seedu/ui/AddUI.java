@@ -114,13 +114,11 @@ public class AddUI {
 
     public String printLessonInfo(int serial, Lesson lesson) {
         String output = serial + ": " + lesson.lessonDetails();
-        if (!lesson.getLessonType().equals(LAB)) {
-            for (int index = output.length(); GAP > index; index++) {
-                if (index == DIVIDER) {
-                    output = output.concat(DIV);
-                } else {
-                    output = output.concat(SPACE);
-                }
+        for (int index = output.length(); GAP > index; index++) {
+            if (index == DIVIDER) {
+                output = output.concat(DIV);
+            } else {
+                output = output.concat(SPACE);
             }
         }
         return output;
