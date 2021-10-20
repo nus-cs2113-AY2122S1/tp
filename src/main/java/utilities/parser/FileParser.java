@@ -51,7 +51,7 @@ public class FileParser {
     }
 
     public static int parseOrderId(String[] splitOrderDetails) {
-        int orderId= Integer.parseInt(splitOrderDetails[0]);
+        int orderId = Integer.parseInt(splitOrderDetails[0]);
         return orderId;
     }
 
