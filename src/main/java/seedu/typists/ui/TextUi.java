@@ -24,7 +24,7 @@ import java.util.Scanner;
 public class TextUi {
     private final SimpleDateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    private static final String DIVIDER = "****************************************************************";
+    private static final String DIVIDER = "===========================================================";
     private static final String LINE_PREFIX = "     | ";
     private static final String LS = lineSeparator();
 

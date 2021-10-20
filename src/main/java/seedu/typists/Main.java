@@ -48,8 +48,13 @@ public class Main {
         uiBot.printClock();
         TimeModeGame g = new TimeModeGame(content.getContent(), LINE_LENGTH);
         DataProcessor p = new DataProcessor(g);
-        uiBot.showSummary(p.getErrorWordCount(), p.getErrorPercentage(), p.getWordPerMinute(),
-                p.getTotalWordTyped(), p.totalTime);
+        uiBot.showSummary(
+                p.getErrorWordCount(),
+                p.getErrorPercentage(),
+                p.getWordPerMinute(),
+                p.getTotalWordTyped(),
+                p.totalTime
+        );
     }
 
     public void startErrorGame() {
@@ -91,21 +96,15 @@ public class Main {
                 uiBot.showText("OOPS!!! It's out of range.");
             } catch (NumberFormatException e) {
                 uiBot.showText("OOPS!!! Number not found. ");
-            } catch (FaultyInputException e) {
-                uiBot.showText(e.getMessage());
-            } catch (NoSuchElementException e) {
-                e.printStackTrace();
-            } catch (InvalidStringInputException e) {
+            } catch (NoSuchElementException | InvalidStringInputException e) {
                 e.printStackTrace();
             } finally {
                 uiBot.showLine();
             }
         }
-        assert isExit : "isExit should be true";
     }
 
     public void exit() {
-
         uiBot.showBye();
     }
 

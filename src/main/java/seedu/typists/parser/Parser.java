@@ -32,7 +32,7 @@ public class Parser {
     }
 
 
-    public void parse() throws FaultyInputException {
+    public void parse() {
         switch (input) {
         case "bye":
             isExit = true;
