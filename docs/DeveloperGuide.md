@@ -116,6 +116,8 @@ This feature is processed using `MainParser`. The control is sent to `ListContac
 command which uses a loop to get the Contact object at every available index and print it using the `printContactWithIndex`
 function in `TextUi` class.
 
+![List Sequence Diagram](images/ListContactCommandSequenceDiagram.png)
+
 
 ## <a name="scope"></a>Product scope
 ### <a name="target"></a>Target user profile
