@@ -77,12 +77,5 @@ public abstract class Task {
         this.recurrence = recurrence;
     }
 
-    public static String getOptionalTaskArguments(String argumentFormat, String argumentSplit) {
-        String optionalTaskArguments = String.format(argumentFormat,
-            TaskFlag.PRIORITY + " " + PriorityEnum.getPrioritiesListString(argumentSplit)) + " ";
-        return optionalTaskArguments + String.format(argumentFormat,
-            TaskFlag.RECURRENCE + " " + RecurrenceEnum.getRecurrencesListString(argumentSplit));
-    }
-
     public abstract TypeEnum getTaskType();
 }

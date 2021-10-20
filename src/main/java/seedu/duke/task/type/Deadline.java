@@ -12,7 +12,7 @@ import seedu.duke.task.reminder.Reminder;
 
 public class Deadline extends Task {
 
-    private final TypeEnum taskType = TypeEnum.DEADLINE;
+    private static final TypeEnum TASK_TYPE = TypeEnum.DEADLINE;
 
     private static final String DEADLINE_DATE_DESCRIPTION_REGEX = " (dueDate: %s)";
 
@@ -44,7 +44,7 @@ public class Deadline extends Task {
     }
 
     public TypeEnum getTaskType() {
-        return this.taskType;
+        return this.TASK_TYPE;
     }
 
     public Date getDueDate() {

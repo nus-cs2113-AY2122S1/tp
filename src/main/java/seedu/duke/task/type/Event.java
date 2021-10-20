@@ -11,7 +11,7 @@ import seedu.duke.task.reminder.Reminder;
 
 public class Event extends Task {
 
-    private final TypeEnum taskType = TypeEnum.EVENT;
+    private static final TypeEnum TASK_TYPE = TypeEnum.EVENT;
 
     private static final String DEADLINE_DATE_DESCRIPTION_REGEX = " (startDate: %s - endDate: %s)";
 
@@ -46,7 +46,7 @@ public class Event extends Task {
     }
 
     public TypeEnum getTaskType() {
-        return this.taskType;
+        return this.TASK_TYPE;
     }
 
     public Date getStartDate() {

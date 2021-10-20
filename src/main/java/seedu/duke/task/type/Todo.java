@@ -11,7 +11,7 @@ import seedu.duke.task.reminder.Reminder;
 
 public class Todo extends Task {
 
-    private final TypeEnum taskType = TypeEnum.TODO;
+    private static final TypeEnum TASK_TYPE = TypeEnum.TODO;
 
     private static final String TODO_DATE_DESCRIPTION_REGEX = " (doOn: %s)";
 
@@ -54,7 +54,7 @@ public class Todo extends Task {
     }
 
     public TypeEnum getTaskType() {
-        return this.taskType;
+        return this.TASK_TYPE;
     }
 
     public Date getDoOnDate() {
