@@ -15,6 +15,7 @@ alt#gold #lightgreen listSize == 0
     activate ":TextUi"
     ":TextUi" --> ":ListContactsCommand"
     deactivate ":TextUi"
+
 else #lightblue else
     ":ListContactsCommand" -> ":ListContactsCommand" : listAllContacts(listSize:int)
     activate ":ListContactsCommand"
@@ -25,14 +26,15 @@ else #lightblue else
 
     loop #lightgrey listSize times
 
-        ":ListContactsCommand" -> ":ContactList" : getContactName(index:int)
-        activate ":ContactList"
-        ":ContactList" --> ":ListContactsCommand"
-        deactivate ":ContactList"
-        ":ListContactsCommand" -> ":TextUi" : printContactWithIndex(index:int)
-        activate ":TextUi"
-        deactivate ":TextUi"
+    ":ListContactsCommand" -> ":ContactList" : getContactName(index:int)
+    activate ":ContactList"
+    ":ContactList" --> ":ListContactsCommand"
+    deactivate ":ContactList"
+    ":ListContactsCommand" -> ":TextUi" : printContactWithIndex(index:int)
+    activate ":TextUi"
+    deactivate ":TextUi"
     end
+
     deactivate ":ListContactsCommand"
 end
 @enduml
