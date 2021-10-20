@@ -16,6 +16,7 @@ import static terminus.common.CommonUtils.isValidDay;
 
 public class TimetableCommand extends Command {
     private String day;
+    static int index = 0;
 
     public TimetableCommand() {
 
@@ -59,13 +60,12 @@ public class TimetableCommand extends Command {
      * @param contentManager ContentManager object containing all user's links
      * @return StringBuilder of all the schedules for the particular day
      */
-    public StringBuilder listDailySchedule(ContentManager<Link> contentManager) {
+    public static StringBuilder listDailySchedule(ContentManager<Link> contentManager, String currentDay) {
         StringBuilder dailySchedule = new StringBuilder();
-        int i = 0;
         for (Link schedule : contentManager.getContents()) {
-            if (schedule.getDay().equalsIgnoreCase(day)) {
-                i++;
-                dailySchedule.append(String.format("%d. %s\n", i, schedule.getViewDescription()));
+            if (schedule.getDay().equalsIgnoreCase(currentDay)) {
+                index++;
+                dailySchedule.append(String.format("%d. %s\n", index, schedule.getViewDescription()));
             }
         }
         return dailySchedule;
@@ -77,16 +77,19 @@ public class TimetableCommand extends Command {
      * @param result The string containing the retrieved user schedule
      * @param moduleManager ModuleManager object containing all the module from which the schedules are retrieved
      */
-    public void getDailySchedule(StringBuilder result, ModuleManager moduleManager) {
+    public static boolean getDailySchedule(StringBuilder result, ModuleManager moduleManager, String today) {
         String[] modules = moduleManager.getAllModules();
+
         for (String moduleName : modules) {
             NusModule module = moduleManager.getModule(moduleName);
             ContentManager<Link> contentManager = module.getContentManager(Link.class);
-            if (listDailySchedule(contentManager).length() != 0) {
-                String header = String.format("%s:\n", day);
-                result.append(header.toUpperCase());
-                result.append(listDailySchedule(contentManager));
-            }
+            result.append(listDailySchedule(contentManager, today));
+        }
+        index = 0;
+        if (result.toString().isEmpty()) {
+            return false;
+        } else {
+            return true;
         }
     }
 
@@ -98,8 +101,15 @@ public class TimetableCommand extends Command {
      */
     public void getWeeklySchedule(StringBuilder result, ModuleManager moduleManager) {
         for (DaysOfWeekEnum currentDay : DaysOfWeekEnum.values()) {
+            StringBuilder dailyResult = new StringBuilder();
             day = currentDay.toString();
-            getDailySchedule(result, moduleManager);
+            String today = day;
+            if (getDailySchedule(dailyResult, moduleManager, today)) {
+                String header = String.format("%s:\n", day);
+                result.append(header.toUpperCase());
+                result.append(dailyResult);
+            }
+            index = 0;
         }
     }
 
@@ -127,7 +137,8 @@ public class TimetableCommand extends Command {
         if (isStringNullOrEmpty(day)) {
             getWeeklySchedule(result, moduleManager);
         } else {
-            getDailySchedule(result, moduleManager);
+            String currentDay = day;
+            getDailySchedule(result, moduleManager, currentDay);
         }
 
         checkEmptySchedule(result);

@@ -15,6 +15,8 @@ public class CommonFormat {
     public static final String COMMAND_HELP = "help";
     public static final String COMMAND_SCHEDULE = "schedule";
     public static final String COMMAND_TIMETABLE = "timetable";
+    public static final String COMMAND_MODULE = "module";
+    public static final String COMMAND_GO = "go";
 
     public static final String LOCAL_TIME_FORMAT = "HH:mm";
 
@@ -30,6 +32,5 @@ public class CommonFormat {
     public static final String COMMAND_ADD_MODULE_FORMAT = "add \"<module name>\"";
     public static final String COMMAND_VIEW_MODULE_FORMAT = "view";
     public static final String SPACE_NEGATED_DELIMITER = "\\S+";
-    public static final String COMMAND_MODULE = "module";
-    public static final String COMMAND_GO = "go";
+
 }

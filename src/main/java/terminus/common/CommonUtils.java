@@ -1,6 +1,7 @@
 package terminus.common;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -116,5 +117,15 @@ public class CommonUtils {
 
     public static boolean isStringNullOrEmpty(String string) {
         return string == null || string.isBlank();
+    }
+
+    /**
+     * Function to get today's day of the week.
+     *
+     * @return A string indicating today's day
+     */
+    public static String getCurrentDay() {
+        String currentDay = LocalDate.now().getDayOfWeek().toString();
+        return currentDay;
     }
 }
