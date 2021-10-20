@@ -1,4 +1,5 @@
 #Developer Guide Draft
+
 ##Architecture
 The Main component has 2 classes, MainParser and MainUI. It is responsible for parsing user commands and displaying messages to interact with the user.
 
@@ -13,13 +14,15 @@ The rest of the app consists of 4 components:
 4.Storage: Reads and writes data to and from the hard disk  
 
 ###Employee Component
-The employee component consists of the *Employee*, *EmployeeList*, and *EmployeeParser* classes.  
+The employee component consists of the following four classes: *Employee*, *EmployeeList*, *EmployeeParser* and *EmployeeUI*.
 
-·*Employee* stores the name and phone number of an individual employee working at the restaurant, as well as methods to retrieve employee information.  
+·*Employee* stores the name and phone number of an individual employee working at the restaurant, as well as methods to retrieve employee information.
 
-·*EmployeeList* is an array list of Employees.  
+·*EmployeeList* is an array list of Employees.
 
-·*EmployeeParser* contains operations that decode user inputs into meaningful commands, and modifies the list of employees accordingly.  
+·*EmployeeParser* contains operations that decode user inputs into meaningful commands, and modifies the list of employees accordingly.
+
+·*EmployeeUI* contains methods that display messages that interacts with the user.
 
 ###Ingredient Component
 The ingredient component consists of the *Ingredient*, *IngredientList*, *IngredientParser*, and *IngredientUI* classes.  
