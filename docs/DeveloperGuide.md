@@ -29,7 +29,7 @@ After obtaining the attributes of an entry from the `entry` class and the requir
 
 UML Diagram 
 
-_----Work in Progress----_
+_------Work in Progress------_
 
 ### Data Saving Component
 The saving and loading of data is handled by the `DataManager` class. Data will be saved and loaded from 
