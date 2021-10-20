@@ -31,7 +31,7 @@ public class ExpireCommand extends Command {
         }
 
         if (expiringCount == 0) {
-            resultMsg = "No ingredients expiring by: " + expireBeforeDate;
+            resultMsg = "No ingredients expiring by " + expireBeforeDate;
             return resultMsg;
         }
 
