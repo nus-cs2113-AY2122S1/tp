@@ -8,10 +8,10 @@ import utils.Money;
 
 import java.util.concurrent.Callable;
 
-import static constants.ErrorMessage.addBudgetErrorMsg;
+import static constants.ErrorMessage.updateBudgetErrorMsg;
 
-@Command(name = "add", mixinStandardHelpOptions = true, description = "Adds a budget plan for the current month.")
-public class AddBudgetCommand implements Callable<Integer> {
+@Command(name = "update", mixinStandardHelpOptions = true, description = "Updates a budget plan for the current month.")
+public class UpdateBudgetCommand implements Callable<Integer> {
 
     @Option(names = {"-v", "--value"}, required = true, description = "Value of the current month's budget")
     Double value;
@@ -22,13 +22,10 @@ public class AddBudgetCommand implements Callable<Integer> {
 
         try {
             Double budgetValue = Money.truncate(value);
-            BudgetManager.addBudget(budgetValue);
-            
-
+            BudgetManager.updateBudget(budgetValue);
         } catch (Exception error) {
-            ui.printMessage(addBudgetErrorMsg);
+            ui.printMessage(updateBudgetErrorMsg);
         }
         return 0;
     }
 }
-
