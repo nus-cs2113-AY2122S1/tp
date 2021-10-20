@@ -273,6 +273,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates Attendance object from input given by user.
+     *
+     * @param query user raw data input.
+     * @return Attendance according to user input.
+     */
     public static Attendance getAttendanceDetails(String query) {
         String regex = "(\\/[a-z])+";
 
@@ -546,6 +552,12 @@ public class Parser {
         return attNumber;
     }
 
+    /**
+     * Removes an entry from a AttendanceList based on input index.
+     *
+     * @param attendanceList AttendanceList containing all Attendance entries.
+     * @param query     String input that contains the integer index of the entry to remove.
+     */
     public static void deleteAttendance(AttendanceList attendanceList, String query) {
         try {
             int attNumber = getAttendanceIndex(query);

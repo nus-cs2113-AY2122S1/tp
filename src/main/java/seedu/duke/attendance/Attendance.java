@@ -8,6 +8,11 @@ public class Attendance {
     protected Member member;
     protected TrainingSchedule schedule;
 
+    /**
+     * Constructor for any type of Attendance.
+     * @param member          Name of member
+     * @param schedule        Name of training event
+     */
     public Attendance(Member member, TrainingSchedule schedule) {
         setMember(member);
         setSchedule(schedule);
