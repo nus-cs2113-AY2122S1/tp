@@ -7,16 +7,17 @@ import java.time.LocalDate;
 public class DeleteBudgetCommand extends DeleteCommand {
 
     public static final String MESSAGE_USAGE = "Delete a budget record.\n"
-            + "Parameters: b/";
-    public final String commandParams;
+            + "Parameters: b/ m/MONTH";
 
-    public DeleteBudgetCommand(String commandParams) {
-        this.commandParams = commandParams;
+    private final int month;
+
+    public DeleteBudgetCommand(int month) {
+        this.month = month;
     }
 
     @Override
     public void execute(boolean isLoadingStorage) {
-        recordList.deleteBudget(LocalDate.now().getMonthValue());
+        recordList.deleteBudget(month);
         TextUi.showBudgetDeletedMessage();
     }
 }
