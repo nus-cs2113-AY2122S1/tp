@@ -6,7 +6,7 @@ import seedu.duke.ingredients.IngredientList;
 
 import java.io.IOException;
 
-public class UpdateCommand implements Command {
+public class UpdateCommand extends Command {
 
     private static final String UPDATE_MESSAGE = "Got it. This ingredient has been updated:\n" + "\t";
     private static final String LIST_EMPTY_MESSAGE = "Your inventory is empty!";
