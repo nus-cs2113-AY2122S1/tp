@@ -21,10 +21,10 @@ public class TourList {
     }
 
     public Tour getTour(String code) {
-        for (int i = 0; i < tourCount; i++){
-           if (tours.get(i).getCode().equals(code)){
-               return tours.get(i);
-           }
+        for (int i = 0; i < tourCount; i++) {
+            if (tours.get(i).getCode().equals(code)) {
+                return tours.get(i);
+            }
         }
         return null;
     }
