@@ -30,12 +30,12 @@ public class ExpireCommand extends Command {
             }
         }
 
-        if(expiringCount == 0) {
+        if (expiringCount == 0) {
             resultMsg = "No ingredients expiring by: " + expireBeforeDate;
             return resultMsg;
         }
 
-        return "There are " + expiringCount +
-                " ingredients expiring by: " + expireBeforeDate + LIST_NEWLINE_INDENT +resultMsg;
+        return "There are " + expiringCount
+                + " ingredients expiring by: " + expireBeforeDate + LIST_NEWLINE_INDENT + resultMsg;
     }
 }
