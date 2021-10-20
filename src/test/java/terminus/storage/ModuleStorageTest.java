@@ -14,6 +14,7 @@ import java.nio.file.Paths;
 import java.time.LocalTime;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.TestFilePath;
@@ -35,7 +36,8 @@ public class ModuleStorageTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        this.moduleStorage = new ModuleStorage(SAVE_FILE);
+        this.moduleStorage = ModuleStorage.getInstance();
+        this.moduleStorage.init(SAVE_FILE);
         moduleManager = new ModuleManager();
         moduleManager.setModule(tempModule);
         moduleManager.getModule(tempModule).getContentManager(Note.class).add(new Note("test", "test"));
@@ -44,21 +46,26 @@ public class ModuleStorageTest {
                 LocalTime.of(11, 11), "https://zoom.us/"));
     }
 
+    @AfterEach
+    void reset_filepath() {
+        this.moduleStorage.init(SAVE_FILE);
+    }
+
     @AfterAll
     static void reset() throws IOException {
-        ModuleStorage moduleStorage = new ModuleStorage(SAVE_FILE);
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
         moduleStorage.cleanAfterDeleteModule("test");
     }
 
     @Test
     void loadFile_invalidJson_exceptionThrown() {
-        ModuleStorage moduleStorage = new ModuleStorage(MALFORMED_FILE);
+        this.moduleStorage.init(MALFORMED_FILE);
         assertThrows(JsonSyntaxException.class, moduleStorage::loadFile);
     }
 
     @Test
     void loadFile_success() throws IOException {
-        ModuleStorage moduleStorage = new ModuleStorage(VALID_FILE);
+        this.moduleStorage.init(VALID_FILE);
         ModuleManager module = moduleStorage.loadFile();
         assertEquals(module.getModule(tempModule).getContentManager(Note.class).listAllContents(),
                 moduleManager.getModule(tempModule).getContentManager(Note.class).listAllContents());
@@ -68,14 +75,14 @@ public class ModuleStorageTest {
 
     @Test
     void saveFile_nullArgument_exceptionThrown() {
-        ModuleStorage saveModuleStorage = new ModuleStorage(SAVE_FILE);
-        assertThrows(NullPointerException.class, () -> saveModuleStorage.saveFile(null));
+        this.moduleStorage.init(SAVE_FILE);
+        assertThrows(NullPointerException.class, () -> moduleStorage.saveFile(null));
     }
 
     @Test
     void saveFile_success() throws IOException {
-        ModuleStorage saveModuleStorage = new ModuleStorage(SAVE_FILE);
-        saveModuleStorage.saveFile(moduleManager);
+        this.moduleStorage.init(SAVE_FILE);
+        moduleStorage.saveFile(moduleManager);
         assertTextFilesEqual(SAVE_FILE, VALID_FILE);
     }
 

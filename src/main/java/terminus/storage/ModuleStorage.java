@@ -22,21 +22,25 @@ import terminus.module.ModuleManager;
  */
 public class ModuleStorage {
 
-    private final Path filePath;
+    private Path filePath;
     private final Gson gson;
 
     private static ModuleStorage moduleStorage;
 
-    /**
-     * Initializes the ModuleStorage with a specific Path to the file.
-     *
-     * @param filePath The Path to the file to store at.
-     */
-    public ModuleStorage(Path filePath) {
-        this.filePath = filePath;
+    private ModuleStorage() {
+        this.filePath = null;
         this.gson = new GsonBuilder().setPrettyPrinting().create();
-        moduleStorage = this;
     }
+
+    /**
+     * Stores the given filepath for the singleton ModuleStorage.
+     *
+     * @param filePath The path to the file to store at.
+     */
+    public void init(Path filePath) {
+        this.filePath = filePath;
+    }
+
 
     /**
      * Returns the singleton object of ModuleStorage.
@@ -45,7 +49,7 @@ public class ModuleStorage {
      */
     public static ModuleStorage getInstance() {
         if (moduleStorage == null) {
-            moduleStorage = new ModuleStorage(Path.of(System.getProperty("user.dir"), "data"));
+            moduleStorage = new ModuleStorage();
         }
         return moduleStorage;
     }

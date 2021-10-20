@@ -32,7 +32,8 @@ public class ViewNoteCommandTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        this.moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        this.moduleStorage = ModuleStorage.getInstance();
+        this.moduleStorage.init(TestFilePath.SAVE_FILE);
         this.moduleStorage.createModuleDirectory(tempModule);
         this.moduleManager = new ModuleManager();
         moduleManager.setModule(tempModule);
@@ -43,7 +44,7 @@ public class ViewNoteCommandTest {
 
     @AfterAll
     static void reset() throws IOException {
-        ModuleStorage moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
         moduleStorage.cleanAfterDeleteModule("test");
     }
 

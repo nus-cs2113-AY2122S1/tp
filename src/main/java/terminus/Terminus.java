@@ -57,7 +57,8 @@ public class Terminus {
             this.ui = new Ui();
             this.parser = MainCommandParser.getInstance();
             this.workspace = "";
-            this.moduleStorage = new ModuleStorage(DATA_DIRECTORY.resolve(MAIN_JSON));
+            this.moduleStorage = ModuleStorage.getInstance();
+            this.moduleStorage.init(DATA_DIRECTORY.resolve(MAIN_JSON));
             this.moduleManager = new ModuleManager();
             TerminusLogger.info("Loading file...");
             this.moduleManager = moduleStorage.loadFile();

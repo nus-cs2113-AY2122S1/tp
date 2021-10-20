@@ -27,7 +27,8 @@ public class AddModuleCommandTest {
 
     @BeforeEach
     void setUp() {
-        this.moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        this.moduleStorage = ModuleStorage.getInstance();
+        this.moduleStorage.init(TestFilePath.SAVE_FILE);
         this.moduleManager = new ModuleManager();
         this.commandParser = ModuleCommandParser.getInstance();
         this.ui = new Ui();
@@ -35,7 +36,7 @@ public class AddModuleCommandTest {
 
     @AfterAll
     static void reset() throws IOException {
-        ModuleStorage moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
         moduleStorage.cleanAfterDeleteModule("test");
     }
 

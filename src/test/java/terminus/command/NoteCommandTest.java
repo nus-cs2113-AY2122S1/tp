@@ -29,7 +29,8 @@ public class NoteCommandTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        this.moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        this.moduleStorage = ModuleStorage.getInstance();
+        this.moduleStorage.init(TestFilePath.SAVE_FILE);
         this.moduleStorage.createModuleDirectory(tempModule);
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
@@ -39,7 +40,7 @@ public class NoteCommandTest {
 
     @AfterAll
     static void reset() throws IOException {
-        ModuleStorage moduleStorage = new ModuleStorage(TestFilePath.SAVE_FILE);
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
         moduleStorage.cleanAfterDeleteModule("test");
     }
 
