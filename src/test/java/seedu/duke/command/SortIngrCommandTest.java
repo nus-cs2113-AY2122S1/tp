@@ -18,7 +18,6 @@ class SortIngrCommandTest {
     @Test
     void execute() throws FoodoramaException {
         //define inputs
-        ArrayList<String> testInputs = new ArrayList<>();
 
         ByteArrayInputStream fakeInput;
         Ingredient ingredientToAdd = new Ingredient("egg", 1.55);
@@ -44,6 +43,7 @@ class SortIngrCommandTest {
 
         //run command
         SortIngrCommand testCommand = new SortIngrCommand();
+        ArrayList<String> testInputs = new ArrayList<>();
         testCommand.execute(testInputs);
 
         //checking
