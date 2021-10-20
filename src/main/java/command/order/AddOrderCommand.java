@@ -40,7 +40,6 @@ public class AddOrderCommand extends Command {
 
         Ui ui = Ui.getInstance();
         ArrayList<Medicine> medicines = Medicine.getInstance();
-        Storage storage = Storage.getInstance();
 
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY};
         String[] optionalParameter = {CommandParameters.DATE};
@@ -115,6 +114,8 @@ public class AddOrderCommand extends Command {
                 e.printStackTrace();
             }
         }
+        Storage storage = Storage.getInstance();
+        storage.saveData(medicines);
     }
 
 
