@@ -1,8 +1,10 @@
 @startuml
 skinparam classAttributeIconSize 0
 skinparam stereotypeBackgroundColor White
+hide circle
+hide empty members
 skinparam class {
-BackgroundColor Pink
+BackgroundColor Orange
 ArrowColor Red
 }
 together {
@@ -51,7 +53,7 @@ class ListWorkoutsCommand extends Command {
 +executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage)
 }
 }
-abstract Command #lightgrey ##[bold]grey {
+abstract Command {
 +executeUserCommand(workouts:WorkoutList, ui:Ui, storage:Storage) {abstract}
 }
 class ExitCommand extends Command {

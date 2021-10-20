@@ -17,6 +17,27 @@
 - Libraries used: [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
 
 ## Design & implementation
+
+### Basic Architecture
+
+![img.png](umldg/BasicArchitecture.png)
+
+__Note:__
+* `GetJackd` : Main of whole application.
+* `Ui` : In charge of reading user input and printing the results on the terminal.
+* `WorkoutList` : Contains list of all workouts the user has added.
+* `Storage` : In charge of storing and loading user data.
+* `CommandManager` : Parses user input and returns Command object.
+* `Command` : Holds all information related to a type of command and can be executed.
+* `LoggerUtil` : Contains method to set up the logger for each class.
+
+Basic sequence of events:
+1. User inputs data which is read by `Ui` inside `GetJackd`
+2. `GetJackd` makes a new `CommandManager` Object
+3. The user input is passed into `CommandManager` which parses it to return a `Command`
+4. The `Command` object is executed.
+5. `Ui` acknowledges the command and shows the result of the Command if any.
+
 ### Data Component
 
 Location : `seedu.duke.data`
@@ -79,7 +100,7 @@ Manage fitness routines quickly
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+* Able to store data in a file so that user data can be saved.
 
 ## Glossary
 
