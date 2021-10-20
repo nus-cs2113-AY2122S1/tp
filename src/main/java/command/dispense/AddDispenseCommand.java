@@ -30,7 +30,6 @@ public class AddDispenseCommand extends Command {
     public void execute() {
         Ui ui = Ui.getInstance();
         ArrayList<Medicine> medicines = Medicine.getInstance();
-        Storage storage = Storage.getInstance();
 
         String medicationName = parameters.get(CommandParameters.NAME);
         String quantity = parameters.get(CommandParameters.QUANTITY);
@@ -133,6 +132,8 @@ public class AddDispenseCommand extends Command {
                 staffName, existingId));
         ui.print("Dispensed:" + medicationName + " Quantity:" + quantityToDispense + " Expiry "
                 + "Date:" + expiry);
+        Storage storage = Storage.getInstance();
+        storage.saveData(medicines);
     }
 
 }

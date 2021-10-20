@@ -1,5 +1,7 @@
 package inventory;
 
+import utilities.parser.DateParser;
+
 import java.util.Date;
 
 /**
@@ -77,6 +79,8 @@ public class Order extends Medicine {
 
     @Override
     public String toFileFormat() {
-        return "";
+        String fileFormat = getOrderId() + "|" + getMedicineName() + "|" + getQuantity() + "|"
+                + DateParser.dateToString(getDate()) + "|" +  getStatus();
+        return fileFormat;
     }
 }

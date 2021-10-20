@@ -30,7 +30,7 @@ public class DeleteOrderCommand extends Command {
 
         Ui ui = Ui.getInstance();
         ArrayList<Medicine> medicines = Medicine.getInstance();
-        Storage storage = Storage.getInstance();
+
 
         String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};
@@ -68,8 +68,9 @@ public class DeleteOrderCommand extends Command {
             }
         }
         ui.print("Order deleted for Order Id " + orderId);
+        Storage storage = Storage.getInstance();
+        storage.saveData(medicines);
         logger.log(Level.INFO, "Successful deletion of order");
-
     }
 }
 
