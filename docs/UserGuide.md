@@ -43,18 +43,16 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
         * use `/v` to input _venue_ of the training entry.
       * `/att` adds attendance-related information.
         * use `/m` to input _name_ of your member.
-        * use `/s` to input _student number_ of your member.
-        * use `/n` to input _name_ of the training entry.
         * use `/a` to input _timing_ of the training entry.
-        * use `/v` to input _venue_ of the training entry.
+        * use `/d` to input _attendance status_ of your member, O for present and X for late.
     * **Format:**
       * add [/m </n MEMBER_NAME> </s STUDENT_NUMBER>]
       * add [/t </a TRAINING_TIME> </v TRAINING_VENUE>]
-      * add [/att </m MEMBER_NAME> </s STUDENT_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]
+      * add [/att </m MEMBER_NAME>  </n TRAINING_NAME> </d PRESENT_OR_LATE>]
     * **Examples:**
       - `add /m /n John Hwee /s A0248192K /g M /p 91128888`
       - `add /t /n Weekly December Training 2 /a 12 Dec 2022 /v MPSH 2`
-      - `add /att /m Mark /s A0123456Z /n Monday Training /a 1800 /v MPSH 6`
+      - `add /att /m Mark /n Monday Training /d !`
       
     * **Expected Output:**
    ```
@@ -64,7 +62,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    Training Name: Weekly December Training 2 | Venue: MPSH2 | Time: 12 Dec 2022
    
    Added an Attendance entry:
-   Name: Mark | Student Number: A0123456Z | Training Name: Monday Training | Venue: MPSH6 | Time: 1800
+   Name: Mark | Training Name: Monday Training | Status: [!]
    ```
 
 2. `list` This lists out entries in Duke's Entry List.
@@ -86,7 +84,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    [1] Training Name: Weekly December Training 2 | Venue: MPSH 2 | Time: 12 Dec 2022
     ```
     ```
-   [1] Name: Mark | Student Number: A0123456Z | Training Name: Monday Training | Venue: MPSH6 | Time: 1800
+   [1] Name: Mark | Training Name: Monday Training | Status: [!]
     ```
 
 3. `delete` This deletes entries from the Entry List in Duke.
@@ -111,7 +109,7 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
    ```
    ```
     You have removed attendance entry:
-    Name: Mark | Student Number: A0123456Z | Training Name: Monday Training | Venue: MPSH6 | Time: 1800
+    Name: Mark | Training Name: Monday Training | Status: [!]
    ```
 4. `edit` This edits an existing entry from either the members list or training list
     * Entries are referenced using their index
@@ -141,7 +139,7 @@ Action| Syntax |Remarks|
 |-----|----------|----|
 |add member| add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| 
 |add training| add [/t </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| 
-|add attendance| add [/att </m MEMBER_NAME> </s STUDENT_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]|
+|add attendance| add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>]|
 |delete member| delete [/m <MEMBER_INDEX_NUMBER>]| Get the index by calling `list /m`
 |delete training|delete [/t <TRAINING_INDEX_NUMBER>]| Get the index by calling `list /t`
 |delete attendance|delete [/att <ATTENDANCE_INDEX_NUMBER>]| Get the index by calling `list /att`
