@@ -4,7 +4,6 @@ import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
 import seedu.duke.items.Event;
-import seedu.duke.items.Item;
 import seedu.duke.items.Task;
 import seedu.duke.storage.StorageFile;
 
