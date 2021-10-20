@@ -34,9 +34,21 @@ The App is organized by the `command`, `exception`, `kitchen`, and `util` packag
 
 The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
-![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138092234-f7f768c7-d9d8-4a6f-b75b-1780d2158436.png)
+![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138106749-06ea568e-6234-4e01-883b-30c18712a2fa.png)
 
-### Kitchen component
+### Cookbook component
+
+The Diagram below is the class diagram for the ``Cookbook`` class
+
+![Cookbook Class Diagram](https://user-images.githubusercontent.com/65898007/138097202-bfbc1c11-5b6a-44e6-8913-4a8042a7d179.png)
+
+
+### Recipe component
+
+The Diagram below is the class diagram for the Recipe class
+
+![Recipe Class Diagram](https://user-images.githubusercontent.com/65898007/138097156-7f23bda4-f1bc-41e3-8e85-36eeac273dec.png)
+
 
 ### Parser component
 
