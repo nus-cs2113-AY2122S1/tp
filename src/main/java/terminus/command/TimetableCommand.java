@@ -21,14 +21,30 @@ public class TimetableCommand extends Command {
 
     }
 
+    /**
+     * Returns the format of the command.
+     *
+     * @return The string object holding the appropriate format for the timetable command
+     */
     public String getFormat() {
         return CommonFormat.COMMAND_TIMETABLE_FORMAT;
     }
 
+    /**
+     * Returns the description for the command.
+     *
+     * @return The String object containing the description for the timetable command.
+     */
     public String getHelpMessage() {
         return Messages.MESSAGE_COMMAND_TIMETABLE;
     }
 
+    /**
+     * Parses remaining arguments for the timetable command.
+     *
+     * @param arguments The string arguments to be parsed in to the respective fields.
+     * @throws InvalidArgumentException when arguments are invalid
+     */
     public void parseArguments(String arguments) throws InvalidArgumentException {
         day = arguments;
         if (!isStringNullOrEmpty(day) && !isValidDay(day)) {
@@ -37,6 +53,12 @@ public class TimetableCommand extends Command {
         }
     }
 
+    /**
+     * Lists all the schedule for a particular day.
+     *
+     * @param contentManager ContentManager object containing all user's links
+     * @return StringBuilder of all the schedules for the particular day
+     */
     public StringBuilder listDailySchedule(ContentManager<Link> contentManager) {
         StringBuilder dailySchedule = new StringBuilder();
         int i = 0;
@@ -49,30 +71,56 @@ public class TimetableCommand extends Command {
         return dailySchedule;
     }
 
+    /**
+     * Retrieve and format all the user's schedule for the particular day.
+     *
+     * @param result The string containing the retrieved user schedule
+     * @param moduleManager ModuleManager object containing all the module from which the schedules are retrieved
+     */
     public void getDailySchedule(StringBuilder result, ModuleManager moduleManager) {
         String[] modules = moduleManager.getAllModules();
         for (String moduleName : modules) {
             NusModule module = moduleManager.getModule(moduleName);
             ContentManager<Link> contentManager = module.getContentManager(Link.class);
-            result.append(listDailySchedule(contentManager));
+            if (listDailySchedule(contentManager).length() != 0) {
+                String header = String.format("%s:\n", day);
+                result.append(header.toUpperCase());
+                result.append(listDailySchedule(contentManager));
+            }
         }
     }
 
+    /**
+     * Retrieve and format all the user's schedule for the week.
+     *
+     * @param result The string containing the retrieved user schedule
+     * @param moduleManager ModuleManager object containing all the module from which the schedules are retrieved
+     */
     public void getWeeklySchedule(StringBuilder result, ModuleManager moduleManager) {
         for (DaysOfWeekEnum currentDay : DaysOfWeekEnum.values()) {
             day = currentDay.toString();
-            String header = String.format("%s:\n", day);
-            result.append(header);
             getDailySchedule(result, moduleManager);
         }
     }
 
+    /**
+     * Print empty message for empty user schedule.
+     *
+     * @param result The string containing the retrieved user schedule
+     */
     public void checkEmptySchedule(StringBuilder result) {
         if (result.toString().isBlank()) {
             result.append(Messages.EMPTY_CONTENT_LIST_MESSAGE);
         }
     }
 
+    /**
+     * Executes the timetable command. Prints the relevant response to the Ui.
+     *
+     * @param ui The Ui object to send messages to the users.
+     * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
+     * @return CommandResult to indicate the success and additional information about the execution.
+     */
     public CommandResult execute(Ui ui, ModuleManager moduleManager) {
         StringBuilder result = new StringBuilder();
 
