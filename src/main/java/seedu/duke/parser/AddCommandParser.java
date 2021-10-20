@@ -3,7 +3,7 @@ package seedu.duke.parser;
 import seedu.duke.commands.AddMapCommand;
 import seedu.duke.commands.AddModCommand;
 import seedu.duke.commands.AddUniCommand;
-import seedu.duke.commands.Command;
+import seedu.duke.commands.AddCommand;
 import seedu.duke.constants.Constants;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.UniversityList;
@@ -13,7 +13,7 @@ import java.text.ParseException;
 
 public class AddCommandParser {
 
-    public Command parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList,
+    public AddCommand parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList,
                          UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws ParseException, IOException {
 
@@ -23,6 +23,7 @@ public class AddCommandParser {
         }
         String flag = argumentsSubstrings[0];
         int index = Integer.parseInt(argumentsSubstrings[1].trim());
+        int index2 = Integer.parseInt(argumentsSubstrings[2].trim());
 
         //
         switch (flag) {
@@ -40,12 +41,11 @@ public class AddCommandParser {
             return new AddUniCommand(index, universitySelectedList);
         case Constants.FLAG_MAP:
             int uniIndex = Integer.parseInt(argumentsSubstrings[1]);
-            if (argumentsSubstrings.length < 3) {
+            if (argumentsSubstrings.length < 4) {
                 throw new ParseException("missing argument", 1);
             }
             int mapIndex = Integer.parseInt(argumentsSubstrings[3].trim());
-            return new AddMapCommand(index, universitySelectedList);
-            break;
+            return new AddMapCommand(index, index2, universitySelectedList, moduleSelectedList);
         default:
             throw new ParseException("flag not found", 1);
         }

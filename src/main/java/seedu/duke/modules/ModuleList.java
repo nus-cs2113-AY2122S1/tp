@@ -44,4 +44,13 @@ public class ModuleList {
         }
         return false;
     }
+
+    public Module getModule(String moduleCode) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).moduleCode.equals(moduleCode)) {
+                return list.get(i);
+            }
+        }
+        return null;
+    }
 }
