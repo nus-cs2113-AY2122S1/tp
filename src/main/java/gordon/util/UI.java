@@ -12,7 +12,7 @@ public class UI {
     }
 
     public void printHelp() {
-        System.out.println("1. Add a recipe: add \"recipe name\" \"/ingredients\" 1+2+3 \"/steps\" 1+2+3 \"/calories\" 123");
+        System.out.println("1. Add a recipe: add \"recipe name\" \"/ingredients\" 1+2 \"/steps\" 1+2 \"/calories\" x");
         System.out.println("2. Delete a recipe: deleteRecipe \"Index of recipe\"");
         System.out.println("3. List all your recipes: listRecipes");
         System.out.println("4. Find a recipe: find \"Keyword\"");
