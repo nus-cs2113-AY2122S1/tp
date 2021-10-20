@@ -1,25 +1,16 @@
 package seedu.duke.alerts;
 
-import seedu.duke.command.AlertExpiringSoonCommand;
+import seedu.duke.command.AlertCommand;
 import seedu.duke.exceptions.DukeException;
 
 public class Alerts {
-    public String getAlerts() {
-        // TODO: add the string with getLowStockAlerts() later
-        String resultMsg = getExpiryAlerts();
-        return resultMsg;
-    }
 
-    private String getExpiryAlerts() {
+    public String getAlerts() {
         try {
-            String resultMsg = new AlertExpiringSoonCommand().run();
-            return resultMsg;
+            return new AlertCommand().run();
         } catch (DukeException e) {
             return e.getMessage();
         }
     }
 
-    private void getLowStockAlerts() {
-
-    }
 }
