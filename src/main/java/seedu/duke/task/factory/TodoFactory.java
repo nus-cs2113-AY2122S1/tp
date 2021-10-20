@@ -20,7 +20,7 @@ public class TodoFactory {
 
     public static Todo getTodo(HashMap<String, String> flags) throws GetTaskFailedException {
         try {
-            hasRequiredArguments(flags);
+            checkForRequiredArguments(flags);
 
             String description = flags.get(TodoFlag.DESCRIPTION);
             String priority = flags.get(TodoFlag.PRIORITY);
@@ -51,7 +51,7 @@ public class TodoFactory {
         }
     }
 
-    private static void hasRequiredArguments(HashMap<String, String> flags)
+    private static void checkForRequiredArguments(HashMap<String, String> flags)
             throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : TodoFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);

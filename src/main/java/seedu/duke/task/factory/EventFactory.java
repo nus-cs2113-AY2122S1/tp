@@ -20,7 +20,7 @@ public class EventFactory {
 
     public static Event getEvent(HashMap<String, String> flags) throws GetTaskFailedException {
         try {
-            hasRequiredArguments(flags);
+            checkForRequiredArguments(flags);
 
             String description = flags.get(EventFlag.DESCRIPTION);
             String start = flags.get(EventFlag.START_DATE);
@@ -51,7 +51,7 @@ public class EventFactory {
         }
     }
 
-    private static void hasRequiredArguments(HashMap<String, String> flags)
+    private static void checkForRequiredArguments(HashMap<String, String> flags)
         throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : EventFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);
