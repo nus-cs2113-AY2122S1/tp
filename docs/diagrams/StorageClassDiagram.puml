@@ -1,0 +1,38 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+'List <|-- AbstractList
+'Collection <|-- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <. AbstractList
+'AbstractList <|-- ArrayList
+Storage .left.> ContactsDecoder
+Storage .right.> ContactsEncoder
+'Storage  -up->"contactFile 0..1"File
+'Storage  -up->"personalContactFile 0..1"File
+ContactsEncoder ..> Storage
+
+'class File {
+'}
+
+class Storage {
+-File contactFile
+-File personalContactFile
+'-hasExistingPersonalContactFile() : boolean
+'-hasEmptyExistingPersonalContactFile() : boolean
+'-hasExistingContactFile() : boolean
++loadExistingContact() : ContactList
++loadExistingPersonalContact() : Contact
+}
+
+class ContactsEncoder {
+}
+
+class ContactsDecoder {
+}
+
+
+
+@enduml

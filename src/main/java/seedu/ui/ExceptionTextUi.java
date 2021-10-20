@@ -31,7 +31,7 @@ public class ExceptionTextUi {
                 + "    * Cannot be \"null\"\n\n"
                 + "Please enter your name again.";
         printDoubleLineMessage(message);
-        System.out.print("Name:");
+        System.out.print("Name: ");
     }
 
     public static void invalidPersonalGithubUsernameErrorMessage() {
@@ -45,7 +45,7 @@ public class ExceptionTextUi {
                 + "Please enter your github username again\n"
                 + "or press ENTER to skip.";
         printDoubleLineMessage(message);
-        System.out.print("GitHub Username:");
+        System.out.print("GitHub Username: ");
     }
 
     public static void invalidPersonalTelegramUsernameErrorMessage() {
@@ -69,7 +69,7 @@ public class ExceptionTextUi {
                 + "Please enter your twitter username again\n"
                 + "or press ENTER to skip.";
         printDoubleLineMessage(message);
-        System.out.print("Twitter Username:");
+        System.out.print("Twitter Username: ");
     }
 
     public static void invalidPersonalEmailErrorMessage() {
@@ -81,7 +81,7 @@ public class ExceptionTextUi {
                 + "Please enter your email again\n"
                 + "or press ENTER to skip.";
         printDoubleLineMessage(message);
-        System.out.print("Email Address:");
+        System.out.print("Email Address: ");
     }
 
     public static void invalidPersonalLinkedinUsernameErrorMessage() {
@@ -93,7 +93,7 @@ public class ExceptionTextUi {
                 + "Please enter your linkedin username again\n"
                 + "or press ENTER to skip.";
         printDoubleLineMessage(message);
-        System.out.print("LinkedIn Username:");
+        System.out.print("LinkedIn Username: ");
     }
 
     // Error Messages

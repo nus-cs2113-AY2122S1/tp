@@ -36,7 +36,7 @@ public abstract class TextUi {
         String message = "Welcome to ConTech, your personal contact tracker.\n"
                 + "Can I get your name?";
         printBottomLineMessage(message);
-        System.out.print("Name:");
+        System.out.print("Name: ");
     }
 
     public static void welcomeBackMessage(Contact personalContact) {
@@ -68,7 +68,7 @@ public abstract class TextUi {
         String message = "Please provide us with your Github Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
-        System.out.print("GitHub Username:");
+        System.out.print("GitHub Username: ");
     }
 
     public static void promptPersonalTelegramUsernameMessage() {
@@ -82,21 +82,21 @@ public abstract class TextUi {
         String message = "Please provide us with your Twitter Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
-        System.out.print("Twitter Username:");
+        System.out.print("Twitter Username: ");
     }
 
     public static void promptPersonalEmailMessage() {
         String message = "Please provide us with your Email Address\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
-        System.out.print("Email Address:");
+        System.out.print("Email Address: ");
     }
 
     public static void promptPersonalLinkedInUsernameMessage() {
         String message = "Please provide us with your LinkedIn Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
-        System.out.print("LinkedIn Username:");
+        System.out.print("LinkedIn Username: ");
     }
 
     public static void createNewContactFileMessage(String contactFilePath) {
