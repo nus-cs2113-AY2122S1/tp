@@ -98,4 +98,8 @@ public class EditContactCommand extends Command {
         return new Contact(name, github, linkedin, telegram, twitter, email);
     }
 
+    public Boolean duplicateField(String input, String saved) {
+        return stringCleaner(saved).equals(stringCleaner(input));
+    }
+
 }
