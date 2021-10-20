@@ -192,7 +192,7 @@ public class ParserTest {
                 + "1. Add chicken" + System.lineSeparator()
                 + "2. Add rice" + System.lineSeparator()
                 + "3. Mix" + System.lineSeparator()
-                + "GordonException: Command given cannot be recognized." + System.lineSeparator()
+                + "GordonException: You donkey! What are you talking about?" + System.lineSeparator()
                 + "Setting calories..." + System.lineSeparator()
                 + "GordonException: Search returns no result." + System.lineSeparator()
                 + "GordonException: Index is not a valid integer." + System.lineSeparator()
