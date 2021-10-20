@@ -51,7 +51,8 @@ public class Habit {
     }
 
     /**
-     * Next Date depending on interval user set
+     * Next Date depending on interval user set.
+     *
      * @return String formatted next date milestone for user
      */
     public String getNextDate() {
@@ -65,7 +66,9 @@ public class Habit {
     }
 
     /**
+     * Get interval set by the user.
      *
+     * @return Integer of interval set by user
      */
     public int getInterval() {
         return this.interval;
