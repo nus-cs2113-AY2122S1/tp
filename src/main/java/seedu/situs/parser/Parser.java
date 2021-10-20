@@ -46,7 +46,7 @@ public class Parser {
     private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 5;
 
 
-    static boolean isExit(String command) {
+    public static boolean isExit(String command) {
         return (command.equals(COMMAND_EXIT));
     }
 
