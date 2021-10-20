@@ -1,8 +1,8 @@
-package medbot.command.staffcommand;
+package medbot.command.personcommand.staffcommand;
 
 import medbot.Scheduler;
 import medbot.Ui;
-import medbot.command.ViewPersonCommand;
+import medbot.command.personcommand.ViewPersonCommand;
 import medbot.exceptions.MedBotException;
 
 public class ViewStaffCommand extends ViewPersonCommand {

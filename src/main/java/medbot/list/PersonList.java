@@ -1,10 +1,7 @@
 package medbot.list;
 
-import medbot.CommandManager;
-import medbot.Parser;
 import medbot.exceptions.MedBotException;
 import medbot.person.Person;
-import medbot.utilities.ViewType;
 
 import java.util.ArrayList;
 import java.util.HashMap;

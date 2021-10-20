@@ -1,29 +1,24 @@
 package medbot;
 
-import medbot.command.AddPersonCommand;
-import medbot.command.DeletePersonCommand;
-import medbot.command.EditPersonCommand;
-import medbot.command.ViewPersonCommand;
-import medbot.command.FindPersonCommand;
 import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.Command;
 import medbot.command.ExitCommand;
 import medbot.command.CommandType;
 
-import medbot.command.patientcommand.AddPatientCommand;
-import medbot.command.patientcommand.DeletePatientCommand;
-import medbot.command.patientcommand.EditPatientCommand;
-import medbot.command.patientcommand.FindPatientCommand;
-import medbot.command.patientcommand.ListPatientCommand;
-import medbot.command.patientcommand.ViewPatientCommand;
+import medbot.command.personcommand.patientcommand.AddPatientCommand;
+import medbot.command.personcommand.patientcommand.DeletePatientCommand;
+import medbot.command.personcommand.patientcommand.EditPatientCommand;
+import medbot.command.personcommand.patientcommand.FindPatientCommand;
+import medbot.command.personcommand.patientcommand.ListPatientCommand;
+import medbot.command.personcommand.patientcommand.ViewPatientCommand;
 
-import medbot.command.staffcommand.AddStaffCommand;
-import medbot.command.staffcommand.DeleteStaffCommand;
-import medbot.command.staffcommand.EditStaffCommand;
-import medbot.command.staffcommand.FindStaffCommand;
-import medbot.command.staffcommand.ListStaffCommand;
-import medbot.command.staffcommand.ViewStaffCommand;
+import medbot.command.personcommand.staffcommand.AddStaffCommand;
+import medbot.command.personcommand.staffcommand.DeleteStaffCommand;
+import medbot.command.personcommand.staffcommand.EditStaffCommand;
+import medbot.command.personcommand.staffcommand.FindStaffCommand;
+import medbot.command.personcommand.staffcommand.ListStaffCommand;
+import medbot.command.personcommand.staffcommand.ViewStaffCommand;
 
 
 import medbot.exceptions.MedBotParserException;
@@ -133,12 +128,12 @@ public class Parser {
         if (userInput.startsWith(COMMAND_HELP)) {
             return parseHelpCommand(userInput);
         }
-
+        //commands valid in only some viewTypes
         switch (viewType) {
         case PATIENT_INFO:
-            return parsePatientCommand(userInput, ViewType.PATIENT_INFO);
+            return parsePatientCommand(userInput);
         case MEDICAL_STAFF_INFO:
-            return parseStaffCommand(userInput, ViewType.MEDICAL_STAFF_INFO);
+            return parseStaffCommand(userInput);
         case SCHEDULER:
             return parseSchedulingCommand(userInput);
         default:
@@ -155,7 +150,7 @@ public class Parser {
      * @return the corresponding Command object.
      * @throws MedBotParserException if command is unrecognised.
      */
-    public static Command parsePatientCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    public static Command parsePatientCommand(String userInput) throws MedBotParserException {
         if (userInput.startsWith(COMMAND_ADD)) {
             return parseAddPatientCommand(userInput);
         }
@@ -184,7 +179,7 @@ public class Parser {
      * @return the corresponding Command object.
      * @throws MedBotParserException if command is unrecognised.
      */
-    public static Command parseStaffCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    public static Command parseStaffCommand(String userInput) throws MedBotParserException {
         if (userInput.startsWith(COMMAND_ADD)) {
             return parseAddStaffCommand(userInput);
         }

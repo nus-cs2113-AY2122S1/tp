@@ -1,5 +1,6 @@
-package medbot.command;
+package medbot.command.personcommand;
 
+import medbot.command.Command;
 import medbot.person.Person;
 
 public abstract class EditPersonCommand extends Command {
