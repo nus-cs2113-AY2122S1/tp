@@ -1,9 +1,7 @@
 package seedu.typists.game;
 
-import seedu.typists.common.Error;
 import seedu.typists.exception.InvalidStringInputException;
 import seedu.typists.ui.TextUi;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 

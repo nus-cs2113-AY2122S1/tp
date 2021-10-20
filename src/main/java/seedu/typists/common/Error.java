@@ -1,15 +1,9 @@
 package seedu.typists.common;
 
-import seedu.typists.ui.TextUi;
-
-import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.ArrayList;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.min;
-import static java.lang.System.out;
-import static seedu.typists.common.Messages.SUMMARY;
 
 /**
  * Error rate calculator.
