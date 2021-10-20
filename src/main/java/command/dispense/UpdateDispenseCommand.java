@@ -55,11 +55,6 @@ public class UpdateDispenseCommand extends Command {
         Dispense dispense = DispenseManager.extractDispenseObject(parameters, medicines);
         assert (dispense != null) : "Dispense object should not be null";
         boolean hasNameParam = parameters.containsKey(CommandParameters.NAME);
-        boolean hasQuantityParam = parameters.containsKey(CommandParameters.QUANTITY);
-        boolean hasCustomerParam = parameters.containsKey(CommandParameters.CUSTOMER_ID);
-        boolean hasStaffParam = parameters.containsKey(CommandParameters.STAFF);
-        boolean hasDateParam = parameters.containsKey(CommandParameters.DATE);
-
         if (hasNameParam) {
             String currentName = dispense.getMedicineName();
             String updatedName = parameters.get(CommandParameters.NAME);
@@ -68,6 +63,7 @@ public class UpdateDispenseCommand extends Command {
             }
         }
 
+        boolean hasDateParam = parameters.containsKey(CommandParameters.DATE);
         Date date = null;
         String customerId;
         String staffName;
@@ -81,17 +77,22 @@ public class UpdateDispenseCommand extends Command {
             date = dispense.getDate();
         }
         assert date != null : "Date should not be null";
+
+        boolean hasCustomerParam = parameters.containsKey(CommandParameters.CUSTOMER_ID);
         if (hasCustomerParam) {
             customerId = parameters.get(CommandParameters.CUSTOMER_ID);
         } else {
             customerId = dispense.getCustomerId();
         }
+
+        boolean hasStaffParam = parameters.containsKey(CommandParameters.STAFF);
         if (hasStaffParam) {
             staffName = parameters.get(CommandParameters.STAFF);
         } else {
             staffName = dispense.getStaff();
         }
 
+        boolean hasQuantityParam = parameters.containsKey(CommandParameters.QUANTITY);
         boolean isSuccessfulUpdate = false;
         if (hasNameParam && hasQuantityParam) {
             isSuccessfulUpdate = processGivenNameAndQuantity(medicines, dispense, customerId, date, staffName);
@@ -125,7 +126,7 @@ public class UpdateDispenseCommand extends Command {
         String currentName = dispense.getMedicineName();
         int currentStockId = dispense.getStockId();
         String updatedName = parameters.get(CommandParameters.NAME);
-        String updatedQuantity = parameters.get(CommandParameters.QUANTITY);
+
         Stock targetRestoreStock = StockManager.extractStockObject(medicines, currentName, currentStockId);
         if (targetRestoreStock == null) {
             ui.print("Medicine not found in stock");
@@ -146,6 +147,7 @@ public class UpdateDispenseCommand extends Command {
             ui.print("Medicine name does not exist in stock!");
             return false;
         }
+        String updatedQuantity = parameters.get(CommandParameters.QUANTITY);
         int dispenseQuantity = Integer.parseInt(updatedQuantity);
         int availableQuantity = StockManager.getTotalStockQuantity(medicines, updatedName);
         boolean isValidDispense = StockValidator.quantityValidityChecker(ui, dispenseQuantity, availableQuantity);
@@ -324,7 +326,6 @@ public class UpdateDispenseCommand extends Command {
      */
     private boolean processOtherFields(ArrayList<Medicine> medicines, Dispense dispense, String customerId, Date date,
                                        String staffName) {
-        Ui ui = Ui.getInstance();
         if (dispense == null) {
             return false;
         }
@@ -342,6 +343,7 @@ public class UpdateDispenseCommand extends Command {
         }
         ArrayList<Dispense> newDispenses = new ArrayList<>();
         newDispenses.add(dispense);
+        Ui ui = Ui.getInstance();
         ui.print("Updated dispense information!");
         ui.printDispenses(newDispenses);
         return true;
