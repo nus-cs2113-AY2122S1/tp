@@ -8,7 +8,7 @@ import seedu.duke.data.Item;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ItemTest {
-    Item item = new Item("Junglebook", "1", "available");
+    Item item = new Item("Junglebook", "1", Status.AVAILABLE);
 
     @Test
     void testGetTitle() {
