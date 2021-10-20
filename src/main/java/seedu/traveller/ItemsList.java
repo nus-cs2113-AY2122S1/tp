@@ -1,7 +1,5 @@
 package seedu.traveller;
 
-import seedu.traveller.items.Item;
-
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +45,7 @@ public class ItemsList {
     public String toString() {
         StringBuilder itemsListString = new StringBuilder();
         for (int i = 0; i < getSize(); i++) {
-            String itemEntry = "\n\t\t\t\t\t" + i + ": " + getItem(i).toString();
+            String itemEntry = "\n\t\t\t\t\t" + i + ":\t" + getItem(i).toString();
             itemsListString.append(itemEntry);
         }
         return itemsListString.toString();
