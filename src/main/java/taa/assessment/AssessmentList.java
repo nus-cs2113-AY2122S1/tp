@@ -121,6 +121,7 @@ public class AssessmentList implements ClassChecker {
         ArrayList<Assessment> duplicatedAssessments = new ArrayList<>();
         double totalWeightage = 0;
         for (Assessment assessment : assessments) {
+            assert assessment != null : "assessment should exist.";
             String name = assessment.getName();
             if (assessmentNames.contains(name.toLowerCase())) {
                 duplicatedAssessments.add(assessment);
