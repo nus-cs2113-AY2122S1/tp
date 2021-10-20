@@ -26,9 +26,9 @@ public class GameEnvironment {
             if (difficulty == -1) {
                 break;
             }
-            postQuestionFeedback();
+            postQuestionFeedback(question, difficulty);
         }
-        ui.printSection("Ending the training session.", "Returning you back to main program.");
+        ui.printSection(Messages.ACTIVE_RECALL_SESSION_END_MESSAGE);
     }
 
     private void showPreGameInformation() {
@@ -53,7 +53,7 @@ public class GameEnvironment {
             question.getQuestion(),
             ""
         );
-        ui.getUserInput("Press [Enter] to reveal the answer.");
+        ui.getUserInput(Messages.ACTIVE_RECALL_ENTER_TO_CONTINUE_MESSAGE);
         
         long duration = Duration.between(start, Instant.now()).getSeconds();
         ui.printSection(
@@ -67,13 +67,9 @@ public class GameEnvironment {
     private int getUserFeedback() {
         int difficulty = 0;
         do {
-            ui.printSection(
-                "",
-                "How did you find the question? (Compare against past attempts if any)",
-                "[1] Easy; [2] Normal; [3] Hard; [E] Exit"
-            );
+            ui.printSection(Messages.ACTIVE_RECALL_ASK_QUESTION_DIFFICULTY_MESSAGE);
             String input = ui.getUserInput("[1/2/3/E] >> ");
-            switch (input) {
+            switch (input.trim()) {
             case "1":
             case "2":
             case "3":
@@ -82,18 +78,26 @@ public class GameEnvironment {
             case "e":
             case "E":
                 difficulty = -1;
+                break;
+            default:
+                break;
             }
             
             if (difficulty == 0) {
-                ui.printSection("Invalid input provided!");
+                ui.printSection(Messages.ERROR_MESSAGE_INVALID_INPUT);
             }
         } while (difficulty == 0);
         assert difficulty <= 3 && difficulty >= -1;
         return difficulty;
     }
     
-    private void postQuestionFeedback() {
-        // TODO: Tweak Question Difficulty Here
+    private void postQuestionFeedback(Question question, int difficulty) {
+        assert difficulty >= 1 && difficulty <= 3;
+        if (difficulty == 1) {
+            question.setWeight(DifficultyTweaker.tweakEasyQuestionDifficulty(question.getWeight()));
+        } else if (difficulty == 3) {
+            question.setWeight(DifficultyTweaker.tweakHardQuestionDifficulty(question.getWeight()));
+        }
         ui.printSection("");
         if (questionGenerator.hasNext()) {
             ui.getUserInput(Messages.ACTIVE_RECALL_ENTER_TO_CONTINUE_MESSAGE);

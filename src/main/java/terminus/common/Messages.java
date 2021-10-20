@@ -18,6 +18,7 @@ public class Messages {
 
     public static final String ERROR_MESSAGE_TAG = "Error: ";
 
+    public static final String ERROR_MESSAGE_INVALID_INPUT = ERROR_MESSAGE_TAG + "Invalid input provided.";
     public static final String ERROR_MESSAGE_MISSING_ARGUMENTS = ERROR_MESSAGE_TAG + "Missing arguments.";
     public static final String ERROR_MESSAGE_EMPTY_CONTENTS = ERROR_MESSAGE_TAG + "Content not found.";
     public static final String ERROR_MESSAGE_INVALID_NUMBER = ERROR_MESSAGE_TAG + "Invalid numerical value provided.";
@@ -45,5 +46,11 @@ public class Messages {
     public static final String MESSAGE_RESPONSE_NO_MODULES = "You do not have any modules.";
     public static final String NO_QUESTIONS_ERROR_MESSAGE =
         "There are no questions to be tested on. Type 'questions add' to get started";
-    public static final String ACTIVE_RECALL_ENTER_TO_CONTINUE_MESSAGE = "When you are ready, press [Enter] to continue.";
+    public static final String ACTIVE_RECALL_ENTER_TO_CONTINUE_MESSAGE =
+        "When you are ready, press [Enter] to continue.";
+    public static final String[] ACTIVE_RECALL_SESSION_END_MESSAGE = {"This training session has ended.",
+        "Returning you back to main program."};
+    public static final String[] ACTIVE_RECALL_ASK_QUESTION_DIFFICULTY_MESSAGE = {"",
+        "How did you find the question? (Compare against past attempts if any)",
+        "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
 }
