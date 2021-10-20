@@ -36,11 +36,11 @@ public class MainCommandParser extends CommandParser {
 
     public String getMainReminder(ModuleManager moduleManager) {
         StringBuilder result = new StringBuilder();
-        StringBuilder dailySchedule = new StringBuilder();
         String currentDay = getCurrentDay();
-        Timetable timetable = new Timetable();
+        Timetable timetable = new Timetable(moduleManager);
+        String dailySchedule = timetable.getDailySchedule(currentDay);
 
-        if (timetable.getDailySchedule(dailySchedule, moduleManager, currentDay)) {
+        if (dailySchedule != null) {
             result.append(Messages.MAIN_REMINDER);
             result.append(dailySchedule);
         } else {

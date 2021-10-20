@@ -61,17 +61,16 @@ public class TimetableCommand extends Command {
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager) {
         StringBuilder result = new StringBuilder();
-        Timetable timetable = new Timetable();
+        Timetable timetable = new Timetable(moduleManager);
+        String schedule;
 
         if (isStringNullOrEmpty(day)) {
-            timetable.getWeeklySchedule(result, moduleManager);
+            schedule = timetable.getWeeklySchedule();
         } else {
             assert day != null;
-            String currentDay = day;
-            timetable.getDailySchedule(result, moduleManager, currentDay);
+            schedule = timetable.getDailySchedule(day);
         }
-
-        timetable.checkEmptySchedule(result);
+        result.append(timetable.checkEmptySchedule(schedule, day));
         ui.printSection(result.toString());
         return new CommandResult(true, false);
     }
