@@ -71,20 +71,22 @@ user issues the command `add task homework -d mon`.
 
 ### Model component
 
-### Model component
 The `model` package consists of three components: `Lesson`, `Task` and `Module`.
-#### Lesson component
-**API** : [`Lesson.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/lesson/Lesson.java)
-![LessonComponentObject](images/LessonComponentObject.png)
 
-The `Lesson` component,
+#### Lesson component
+
+**API** : [`Lesson.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/lesson/Lesson.java)
+
+![LessonComponentObject](images/LessonComponentDiagram.png)
+
+The `Lesson` component
 * stores data specific to a lesson as entered by the user 
 * stores all `Lesson` objects created by user commands in a `LessonList` object
 * does not depend on any of the other three components
 
 ### Module component
 **API** [`Module.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/module/Module.java)
-![ModuleComponentObject](images/ModuleComponentObject.png)
+![ModuleComponentObject](images/ModuleComponentDiagram.png)
 
 The `Module` component,
 * stores information regarding modules added by the user and on the NUSMods API
@@ -94,7 +96,7 @@ The `Module` component,
 
 ### Task Component
 **API** [`Task.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/task/Task.java)
-![TaskComponentObject](images/TaskComponentObject.png)
+![TaskComponentObject](images/TaskComponentDiagram.png)
 
 The `Task` component,
 * stores data specific to a task as entered by the user

@@ -1,4 +1,7 @@
 @startuml
+hide circle
+skinparam classAttributeIconSize 0
+
 class Lesson {
     title : String
     dayOfTheWeek : String
