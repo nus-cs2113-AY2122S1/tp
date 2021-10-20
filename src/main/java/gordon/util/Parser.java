@@ -9,7 +9,6 @@ import gordon.command.FindDifficultyCommand;
 import gordon.command.FindIngredientsCommand;
 import gordon.command.FindPriceCommand;
 import gordon.command.FindTagsCommand;
-import gordon.command.HelpCommand;
 import gordon.command.ListRecipesCommand;
 import gordon.command.NullCommand;
 import gordon.command.SetCaloriesCommand;
