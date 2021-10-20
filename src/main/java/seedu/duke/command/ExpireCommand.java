@@ -6,32 +6,36 @@ import seedu.duke.ingredients.IngredientList;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
-public class ExpireCommand implements Command {
+public class ExpireCommand extends Command {
 
     private final LocalDate expireBeforeDate;
-    private static final String EXPIRE_MESSAGE = "The following items expire by ";
     private static final String LIST_NEWLINE_INDENT = "\n" + "\t";
 
     public ExpireCommand(LocalDate expireBeforeDate) {
         this.expireBeforeDate = expireBeforeDate;
     }
 
-
     @Override
     public String run() throws DukeException {
-        String resultMsg = EXPIRE_MESSAGE + Ingredient.dateToString(expireBeforeDate) + ":" + LIST_NEWLINE_INDENT;
+        int expiringCount = 0;
+        String resultMsg = "";
+        ArrayList<Ingredient> ingredientList = IngredientList.getInstance().getIngredientList();
 
-        int currentStock = IngredientList.getInstance().getInventoryStock();
-        for (int i = 0; i < currentStock; i++) {
-            if (ChronoUnit.DAYS.between(IngredientList.getInstance().getIngredientExpiry(i + 1),
-                    expireBeforeDate) >= 0) {
-                resultMsg += IngredientList.getInstance().getIngredientInfo(i + 1);
-                if (i < currentStock - 1) {
-                    resultMsg += LIST_NEWLINE_INDENT;
-                }
+        for (Ingredient ingredient : ingredientList) {
+            if (getNumDaysBetween(ingredient.getExpiry(), expireBeforeDate) >= 0) {
+                resultMsg += ingredient + LIST_NEWLINE_INDENT;
+                expiringCount += 1;
             }
         }
-        return resultMsg;
+
+        if (expiringCount == 0) {
+            resultMsg = "No ingredients expiring by: " + expireBeforeDate;
+            return resultMsg;
+        }
+
+        return "There are " + expiringCount
+                + " ingredients expiring by: " + expireBeforeDate + LIST_NEWLINE_INDENT + resultMsg;
     }
 }

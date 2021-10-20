@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents a command to fetch and update the system's date.
  */
-public class DateCommand implements Command {
+public class DateCommand extends Command {
     private String date;
     private LocalDate formattedDate;
 
