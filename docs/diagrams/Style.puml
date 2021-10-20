@@ -1,0 +1,8 @@
+hide circle
+hide footbox
+hide members
+
+skinparam Class {
+    BorderThickness 1
+    BorderColor #000000
+}
