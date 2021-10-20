@@ -1,1 +1,4 @@
 new s1 /from SIN /to MLY
+new my trip /from SIN /to JPN
+new trip1 /from SIN /to MLY
+new myTrip /from SKR /to JPN

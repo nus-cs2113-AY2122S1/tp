@@ -1,6 +1,7 @@
 package seedu.traveller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +23,24 @@ public class ItemsList {
     public void addItem(Item item) {
         logger.log(Level.INFO, "Added an item to itemsList");
         items.add(item);
+    }
+
+    public void editItem(int i, Item item) {
+        logger.log(Level.INFO, "Editing an item to itemsList");
+        items.add(item);
+        Collections.swap(items, i, getSize() - 1);
+        items.remove(getSize() - 1);
+    }
+
+    public ArrayList<Item> searchItem(String s) {
+        ArrayList<Item> ans = new ArrayList<>();
+        logger.log(Level.INFO, "Searching for keyword in itemsList");
+        for (Item i: items) {
+            if (i.getItemName().contains(s) || i.getDetails().contains(s)) {
+                ans.add(i);
+            }
+        }
+        return ans;
     }
 
     public Item getItem(int i) {
