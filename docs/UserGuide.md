@@ -34,17 +34,17 @@ such as its employees, dishes and ingredients in storage via a **Command Line In
 
 **Notes about the command format:**
 * Words in UPPER_CASE are the parameters to be supplied by the user. 
-  e.g. in `add-employee|EMPLOYEE_NAME|PHONE_NUMBER`, `EMPLOYEE_NAME` and `PHONE_NUMBER` are 
-  parameters which can be used as `add-employee|John|81145812`.
+  e.g. in `add-employee/EMPLOYEE_NAME/PHONE_NUMBER`, `EMPLOYEE_NAME` and `PHONE_NUMBER` are 
+  parameters which can be used as `add-employee/John/81145812`.
 
 ### Adding an employee: `add-employee`
 
 Adds an employee to the employee list.
 
-Format: `add-employee|EMPLOYEE_NAME|PHONE_NUMBER`
+Format: `add-employee/EMPLOYEE_NAME/PHONE_NUMBER`
 
 Example:
-`add-employee|John|81145812` Adds the employee named John with 81145812 as his phone number to the employee list.
+`add-employee/John/81145812` Adds the employee named John with 81145812 as his phone number to the employee list.
 ```
 ---------------------------------------------
 I have added: 
@@ -57,10 +57,10 @@ You now have 1 employees.
 
 Removes an employee from the employee list.
 
-Format: `remove-employee|EMPLOYEE_INDEX`
+Format: `remove-employee/EMPLOYEE_INDEX`
 
 Example:
-`remove-employee|1` Removes the first employee from the employee list.
+`remove-employee/1` Removes the first employee from the employee list.
 ```
 ---------------------------------------------
 I have deleted: 
@@ -87,10 +87,10 @@ Here are the employees in your list:
 
 Adds a dish to the menu.
 
-Format: `add-dish|DISH_NAME|PRICE`
+Format: `add-dish/DISH_NAME/PRICE`
 
 Example:
-`add-dish|Pizza|5.80` Adds Pizza which costs $5.80 to the menu.
+`add-dish/Pizza/5.80` Adds Pizza which costs $5.80 to the menu.
 ```
 ---------------------------------------------
  I have added the following dish to the menu:
@@ -102,10 +102,10 @@ Example:
 
 Removes a dish from the menu.
 
-Format: `remove-dish|DISH_INDEX`
+Format: `remove-dish/DISH_INDEX`
 
 Example:
-`remove-dish|1` Removes the first dish from the menu.
+`remove-dish/1` Removes the first dish from the menu.
 ```
 ---------------------------------------------
  I have removed the following dish from the menu:
@@ -117,10 +117,10 @@ Example:
 
 Edits the price of a dish in the menu.
 
-Format: `edit-dish|DISH_INDEX|NEW_PRICE`
+Format: `edit-dish/DISH_INDEX/NEW_PRICE`
 
 Example:
-`edit-dish|1|10` Increases the price of the first dish in the menu to $10.
+`edit-dish/1/10` Increases the price of the first dish in the menu to $10.
 ```
 ---------------------------------------------
  Got it! The updated price of the dish is as follows:
@@ -132,10 +132,10 @@ Example:
 
 Adds a discount to a dish in the menu.
 
-Format: `discount-dish|DISH_INDEX|DISCOUNT(%)`
+Format: `discount-dish/DISH_INDEX/DISCOUNT(%)`
 
 Example:
-`discount-dish|1|30` Adds a 30% discount to the first dish in the menu.
+`discount-dish/1/30` Adds a 30% discount to the first dish in the menu.
 ```
 ---------------------------------------------
  Got it! I have added the discount to the dish!
@@ -163,10 +163,10 @@ Example:
 
 Adds an ingredient to the ingredient list.
 
-Format: `add-ingredient|INGREDIENT_NAME|QUANTITY`
+Format: `add-ingredient/INGREDIENT_NAME/QUANTITY`
 
 Example:
-`add-ingredient|Carrot|50` Adds 50 carrots to the ingredient list.
+`add-ingredient/Carrot/50` Adds 50 carrots to the ingredient list.
 ```
 ---------------------------------------------
 Got it. This ingredient was added:
@@ -179,10 +179,10 @@ Ingredient Quantity: 50
 
 Removes an ingredient from the ingredient list.
 
-Format: `remove-ingredient|INGREDIENT_INDEX`
+Format: `remove-ingredient/INGREDIENT_INDEX`
 
 Example:
-`remove-ingredient|1` Removes the first ingredient from the ingredient list.
+`remove-ingredient/1` Removes the first ingredient from the ingredient list.
 ```
 ---------------------------------------------
 Got it. This ingredient was deleted:
