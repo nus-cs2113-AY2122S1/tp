@@ -25,11 +25,13 @@ view your financial records through both text and graphs in different currencies
     - [Delete income entry: `del_in`](#delete-income-entry-del_in)
     - [List all income entries: `list_in`](#list-all-income-entries-list_in)
     - [View total income: `total_in`](#view-total-income-total_in)
-    - [Find entry using date: `find YYYY-MM-DD`](#find-entry-using-date-find YYYY-MM-DD)
-    - [Find entry using keyword: `find KEYWORD`](#find-entry-using-keyword-find KEYWORD)
+    - [Find entry using date: `find YYYY-MM-DD`](#find-entry-using-date-find-yyyy-mm-dd)
+    - [Find entry using keyword: `find KEYWORD`](#find-entry-using-keyword-find-keyword)
     - [View total balance: `balance`](#view-total-balance-balance)
+    - [Show total expense between 2 dates: `btw_ex s/START_DATE e/END_DATE`](#show-total-expense-between-2-dates-btw_ex)
     - [Show total income between 2 dates: `btw_in s/START_DATE e/END_DATE`](#show-total-income-between-2-dates-btw_in)
-    - [To terminate program: `end`](#to-terminate-program-end)
+    - [Clear all entries: `clear_all_entries`](#clear-all-entries-clear_all_entries)
+    - [Terminate program: `end`](#terminate-program-end)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -430,6 +432,29 @@ Wow, you are way too poor.... :(
 </details>
 <br>
 
+### Show total expense between 2 dates: `btw_ex`
+
+Shows the total expense you had accumulated during a given time period.
+
+Format: `btw_ex s/START_DATE e/END_DATE`
+
+Examples:
+- `btw_ex s/1987-12-06 e/1999-11-21` will return the total income of all entries between the given dates.
+<details>
+  <summary> Expected output in run window </summary>
+
+If you wish to find your income between 10th Aug 2021 and 23rd Oct 2021:
+
+- Give the command `btw_ex s/2021-07-10 e/2021-10-23`:
+````
+-----------------------------------------------------------------------------------------------------
+Your total expense between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
+-----------------------------------------------------------------------------------------------------
+````
+
+</details>
+<br>
+
 ### Show total income between 2 dates: `btw_in`
 
 Shows the total income you had accumulated during a given time period.
@@ -450,6 +475,27 @@ If you wish to find your income between 10th Aug 2021 and 23rd Oct 2021:
 ````
 -----------------------------------------------------------------------------------------------------
 Your total income between 10 Jul 2021 and 23 Oct 2021 is : $2300.00
+-----------------------------------------------------------------------------------------------------
+````
+
+</details>
+<br>
+
+### Clear all entries: `clear_all_entries`
+
+Clears all the income and expense entries StonksXD is currently keeping track of.
+
+Format: `clear_all_entries`
+
+<details>
+  <summary> Expected output in run window </summary>
+
+If you wish to clear all your entries and start afresh:
+
+- Give the command `clear_all_entries`:
+````
+-----------------------------------------------------------------------------------------------------
+All your entries have been cleared!
 -----------------------------------------------------------------------------------------------------
 ````
 
@@ -496,10 +542,12 @@ Format: `end`
 | Delete income entry | `del_in i/INDEX` <br /> e.g., `del_in i/2` |
 | List all income entries | `list_in` |
 | View total income | `total_in` |
-| Find entry using date | `find YYYY-MM-DD` |
-| Find entry using keyword | `find KEYWORD` |
+| Find entry using date | `find YYYY-MM-DD` <br /> e.g., `find 2021-10-19` |
+| Find entry using keyword | `find KEYWORD` <br /> e.g., `find FOOD` |
 | View total balance | `balance` |
-| Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` |
+| Show total expense between 2 dates | `btw_ex s/START_DATE e/END_DATE` <br /> e.g., `btw_ex s/2021-07-10 e/2021-10-23` |
+| Show total income between 2 dates | `btw_in s/START_DATE e/END_DATE` <br /> e.g., `btw_in s/2021-07-10 e/2021-10-23` |
+| Clear all entries | `clear_all_entries` |
 | To terminate program | `end` |
 
 

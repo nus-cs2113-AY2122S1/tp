@@ -1,5 +1,8 @@
 package seedu.utility;
 
+import seedu.budget.OverallBudget;
+import seedu.budget.FoodBudget;
+import seedu.budget.TransportBudget;
 import seedu.entry.Entry;
 import seedu.entry.Expense;
 import seedu.entry.Income;
