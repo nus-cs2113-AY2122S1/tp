@@ -1,9 +1,11 @@
 package seedu.duke.items;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Event extends Item {
 
+    public ArrayList<Task> taskList = new ArrayList<>();
     private LocalDateTime dateTime;
     private String venue;
     private double budget;
@@ -42,6 +44,10 @@ public class Event extends Item {
 
     public double getBudget() {
         return budget;
+    }
+
+    public ArrayList<Task> getTaskList() {
+        return taskList;
     }
 
     @Override
