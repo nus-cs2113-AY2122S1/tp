@@ -10,7 +10,7 @@
 
 ### Architecture
 
-"Diagram Here"
+![Test image babee](https://user-images.githubusercontent.com/65898007/138078585-1bcaf48f-e9d6-443f-af37-307a426692b0.png)
 
 The Diagram above explains how the App is designed and will function
 
