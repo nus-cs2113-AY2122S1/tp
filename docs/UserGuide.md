@@ -174,7 +174,7 @@ Format: `exit`
 | Delete ingredient | `delete [INGREDIENT_NUMBER]` |
 | Show expiring ingredients | `expire [DATE]` |
 | Show alerts | `alert [ALERT_TYPE]` |
-| Set thresholds | `set [THRESHOLD_TYPE] [VALUE]` |
+| Set thresholds | `set [TYPE] [NEW_VALUE]` |
 | Search for ingredients | `find [INGREDIENT_NAMES]` |
 | View/set current date | `date [NEW_DATE]` |
 | Exit program | `exit` |
