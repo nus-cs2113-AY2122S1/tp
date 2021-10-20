@@ -1,8 +1,9 @@
 package seedu.duke.commands;
 
+import seedu.duke.LibmgrException;
+import seedu.duke.Status;
 import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
-import seedu.duke.LibmgrException;
 import seedu.duke.ui.TextUI;
 
 import static seedu.duke.common.Messages.FORMAT_INCORRECT;
@@ -56,7 +57,7 @@ public class AddCommand extends Command {
         if (id.equals("")) {
             throw new LibmgrException(INVALID_ID);
         }
-        Item newItem = new Item(title, id, "Available");
+        Item newItem = new Item(title, id, Status.AVAILABLE);
         catalogue.add(newItem);
         ui.print(ADD_MESSAGE, newItem);
     }

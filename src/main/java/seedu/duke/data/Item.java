@@ -1,12 +1,14 @@
 package seedu.duke.data;
 
+import seedu.duke.Status;
+
 /**
  * The Item class is a class representing a item in the library.
  */
 public class Item {
     private String title;
     private String id;
-    private String status;
+    private Status status;
 
     protected String separator = " | ";
 
@@ -16,7 +18,7 @@ public class Item {
      * @param id The unique attribute of the item.
      * @param status The status of the item, can be either "Loaned" or "Available".
      */
-    public Item(String title, String id, String status) {
+    public Item(String title, String id, Status status) {
         this.title = title;
         this.id = id;
         this.status = status;
@@ -58,7 +60,7 @@ public class Item {
      * Getter method that returns the status attribute.
      * @return status The status of the item in String.
      */
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
@@ -66,7 +68,7 @@ public class Item {
      * Setter method that sets the status method.
      * @param status The input status to be set.
      */
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

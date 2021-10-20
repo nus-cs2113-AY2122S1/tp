@@ -5,6 +5,8 @@ import seedu.duke.data.Catalogue;
 import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
+import static seedu.duke.Status.AVAILABLE;
+import static seedu.duke.Status.LOANED;
 import static seedu.duke.common.Messages.LOAN_SUCCESS;
 import static seedu.duke.common.Messages.INVALID_ID;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
@@ -14,8 +16,6 @@ import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
  */
 public class LoanCommand extends Command {
     public static final String COMMAND_WORD = "loan";
-    private static final String AVAILABLE_STATUS = "Available";
-    private static final String LOANED_STATUS = "Loaned";
     protected String args; // Format: loan [ID]
     protected String id;
 
@@ -40,8 +40,8 @@ public class LoanCommand extends Command {
         id = args.split(" ")[1];
         Item toBeLoaned = catalogue.getItem(id);
 
-        if (toBeLoaned.getStatus().equals(AVAILABLE_STATUS)) {
-            toBeLoaned.setStatus(LOANED_STATUS);
+        if (toBeLoaned.getStatus().equals(AVAILABLE)) {
+            toBeLoaned.setStatus(LOANED);
             ui.print(LOAN_SUCCESS, toBeLoaned);
         } else {
             ui.print(UNAVAILABLE_ITEM_MESSAGE);

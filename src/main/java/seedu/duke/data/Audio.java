@@ -1,5 +1,7 @@
 package seedu.duke.data;
 
+import seedu.duke.Status;
+
 public class Audio extends Item {
     private String artist;
     private String duration;
@@ -13,7 +15,7 @@ public class Audio extends Item {
      * @param artist The artist of the video.
      * @param duration The duration of the video.
      */
-    public Audio(String title, String id, String status, String artist, String duration) {
+    public Audio(String title, String id, Status status, String artist, String duration) {
         super(title, id, status);
         this.artist = artist;
         this.duration = duration;

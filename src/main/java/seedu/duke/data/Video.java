@@ -1,5 +1,7 @@
 package seedu.duke.data;
 
+import seedu.duke.Status;
+
 public class Video extends Item {
     private String publisher;
     private String duration;
@@ -13,7 +15,7 @@ public class Video extends Item {
      * @param publisher The publisher of the video.
      * @param duration The duration of the video.
      */
-    public Video(String title, String id, String status, String publisher, String duration) {
+    public Video(String title, String id, Status status, String publisher, String duration) {
         super(title, id, status);
         this.publisher = publisher;
         this.duration = duration;
