@@ -86,9 +86,9 @@ public class ParserTest {
                 + "Method: " + System.lineSeparator()
                 + "1. Add ingredients to glass" + System.lineSeparator()
                 + "2. Mix" + System.lineSeparator()
-                +"GordonException: Index outside range." + System.lineSeparator()
-                +"GordonException: Index is not a valid integer." + System.lineSeparator()
-                +"OK! The recipe has been deleted from your cookbook." + System.lineSeparator();
+                + "GordonException: Index outside range." + System.lineSeparator()
+                + "GordonException: Index is not a valid integer." + System.lineSeparator()
+                + "OK! The recipe has been deleted from your cookbook." + System.lineSeparator();
         inputOutputTest(input, expected);
     }
 
