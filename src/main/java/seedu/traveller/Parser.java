@@ -1,9 +1,7 @@
 package seedu.traveller;
 
-import seedu.traveller.commands.additemcommands.AddDiningItemCommand;
-import seedu.traveller.commands.additemcommands.AddHousingItemCommand;
 import seedu.traveller.commands.AddDayCommand;
-import seedu.traveller.commands.Command;
+import seedu.traveller.commands.AddItemCommand;
 import seedu.traveller.commands.DeleteCommand;
 import seedu.traveller.commands.EditCommand;
 import seedu.traveller.commands.ExitCommand;
@@ -12,10 +10,10 @@ import seedu.traveller.commands.SearchCommand;
 import seedu.traveller.commands.ViewAllCommand;
 import seedu.traveller.commands.DeleteDayCommand;
 import seedu.traveller.commands.DeleteItemCommand;
+import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidAddItemFormatException;
 import seedu.traveller.exceptions.InvalidEditFormatException;
-import seedu.traveller.exceptions.InvalidItemTypeException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
 import seedu.traveller.exceptions.InvalidSearchFormatException;
 import seedu.traveller.exceptions.TravellerException;
@@ -32,9 +30,8 @@ public class Parser {
     private static final int FROM_LENGTH = 7;
     private static final int TO_LENGTH = 5;
     private static final int DAY_LENGTH = 6;
-    private static final int TYPE_LENGTH = 7;
     private static final int NAME_LENGTH = 7;
-    private static final int DETAILS_LENGTH = 10;
+    private static final int TIME_LENGTH = 7;
 
 
     /**
@@ -100,42 +97,29 @@ public class Parser {
         Command command;
         String tripName;
         int dayIndex;
-        String itemType;
         String itemName;
-        String details;
+        String itemTime;
 
         try {
             String daySeparator = " /day ";
             int dayIdx = userInput.indexOf(daySeparator);
             tripName = userInput.substring(0, dayIdx);
 
-            String typeSeparator = " /type ";
-            int typeIdx = userInput.indexOf(typeSeparator);
-            dayIndex = Integer.parseInt(userInput.substring(dayIdx + DAY_LENGTH, typeIdx));
+            String timeSeparator = " /time ";
+            int timeIdx = userInput.indexOf(timeSeparator);
+            dayIndex = Integer.parseInt(userInput.substring(dayIdx + DAY_LENGTH, timeIdx));
 
             String nameSeparator = " /name ";
             int nameIdx = userInput.indexOf(nameSeparator);
-            itemType = userInput.substring(typeIdx + TYPE_LENGTH, nameIdx).toLowerCase();
+            itemTime = userInput.substring(timeIdx + TIME_LENGTH, nameIdx);
 
-            String detailsSeparator = " /details ";
-            int detailsIdx = userInput.indexOf(detailsSeparator);
-            itemName = userInput.substring(nameIdx + NAME_LENGTH, detailsIdx);
-
-            details = userInput.substring(detailsIdx + DETAILS_LENGTH);
+            itemName = userInput.substring(nameIdx + NAME_LENGTH);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidAddItemFormatException();
         }
 
-        switch (itemType) {
-        case ("housing"):
-            command = new AddHousingItemCommand(tripName, dayIndex, itemName, details);
-            break;
-        case ("dining"):
-            command = new AddDiningItemCommand(tripName, dayIndex, itemName, details);
-            break;
-        default:
-            throw new InvalidItemTypeException(itemType);
-        }
+        command = new AddItemCommand(tripName, dayIndex, itemTime, itemName);
+
         return command;
     }
 

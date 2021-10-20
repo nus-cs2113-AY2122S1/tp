@@ -1,6 +1,7 @@
 package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
+import seedu.traveller.commands.AddItemCommand;
 import seedu.traveller.commands.DeleteCommand;
 import seedu.traveller.commands.EditCommand;
 import seedu.traveller.commands.NewCommand;
@@ -8,8 +9,6 @@ import seedu.traveller.commands.ViewAllCommand;
 import seedu.traveller.commands.SearchCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
-import seedu.traveller.commands.additemcommands.AddDiningItemCommand;
-import seedu.traveller.commands.additemcommands.AddHousingItemCommand;
 import seedu.traveller.exceptions.TravellerException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,8 +21,7 @@ public class ParserTest {
     private final ViewAllCommand viewAllCommand;
     private final SearchCommand searchCommand;
     private final AddDayCommand addDayCommand;
-    private final AddDiningItemCommand addDiningItemCommand;
-    private final AddHousingItemCommand addHousingItemCommand;
+    private final AddItemCommand addItemCommand;
     private final ExitCommand exitCommand;
 
     public ParserTest() {
@@ -33,8 +31,7 @@ public class ParserTest {
         viewAllCommand = new ViewAllCommand();
         searchCommand = new SearchCommand("SKR", "JPN");
         addDayCommand = new AddDayCommand("trip3");
-        addDiningItemCommand = new AddDiningItemCommand("trip4", 3, "Collins", "Booked 8pm");
-        addHousingItemCommand = new AddHousingItemCommand("trip5", 0, "Pan Pacific", "Rm 12-34");
+        addItemCommand = new AddItemCommand("trip4", 0, "1-2am", "sleep at home");
         exitCommand = new ExitCommand();
     }
 
@@ -47,10 +44,8 @@ public class ParserTest {
             assertEquals(viewAllCommand.toString(), Parser.parse("viewall").toString());
             assertEquals(searchCommand.toString(), Parser.parse("search /from SKR /to JPN").toString());
             assertEquals(addDayCommand.toString(), Parser.parse("add-day trip3").toString());
-            assertEquals(addDiningItemCommand.toString(), Parser.parse("add-item trip4 /day 3 /type dining "
-                    + "/name Collins /details Booked 8pm").toString());
-            assertEquals(addHousingItemCommand.toString(), Parser.parse("add-item trip5 /day 0 /type housing "
-                    + "/name Pan Pacific /details Rm 12-34").toString());
+            assertEquals(addItemCommand.toString(),
+                    Parser.parse("add-item trip4 /day 0 /time 1-2am /name sleep at home").toString());
             assertEquals(exitCommand.toString(), Parser.parse("exit").toString());
         } catch (TravellerException e) {
             System.out.println(e.getMessage());
