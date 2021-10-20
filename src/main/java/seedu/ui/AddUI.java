@@ -7,6 +7,9 @@ import seedu.exceptions.IntegerException;
 import java.util.ArrayList;
 
 public class AddUI {
+
+    private static final String FIXED_LENGTH_FORMAT = "%-46.46s";
+    private static final String FIXED_HEADER_FORMAT = "%79.79s";
     private static final String LECTURE = "Lecture";
     private static final String TUTORIAL = "Tutorial";
     private static final String LAB = "Laboratory";
@@ -17,11 +20,12 @@ public class AddUI {
     private static final String LAB_SLOT = "Laboratory Lesson Slots";
     private static final int BALANCE_ARRAY = 1;
     private static final int SERIAL_STARTING = 1;
-    private static final int DIVIDER = 42;
-    private static final int GAP = 46;
-    private static final String SPACE = " ";
-    private static final String DIV = "|";
+    private static final int ZERO = 0;
     private static final String LINE = "_______________________________________   |   ";
+    private static final String NO_LESSON_FOUND = "No Lesson Time Slots Found";
+    private static final String NO_LECTURE_FOUND = "       *Module has no Lectures*";
+    private static final String NO_TUTORIAL_FOUND = "      *Module has no Tutorials*";
+    private static final String NO_LAB_FOUND = "         *Module has no Labs*";
 
     public void printLessonDetails(ArrayList<Lesson> lec, ArrayList<Lesson> tt, ArrayList<Lesson> lab,
             Timetable timetable, Module module) throws IntegerException {
@@ -29,9 +33,9 @@ public class AddUI {
         ArrayList<String> tutorialLessons;
         ArrayList<String> labLessons;
         int length = Math.max(lec.size(), Math.max(tt.size(), lab.size()));
-        lectureLessons = getLessonDetails(lec, length);
-        tutorialLessons = getLessonDetails(tt, length);
-        labLessons = getLessonDetails(lab, length);
+        lectureLessons = getLessonDetails(lec, length, LECTURE);
+        tutorialLessons = getLessonDetails(tt, length, TUTORIAL);
+        labLessons = getLessonDetails(lab, length, LAB);
         printLessonHeader(lec, tt, lab);
         printLessons(lectureLessons, tutorialLessons, labLessons);
         try {
@@ -43,19 +47,35 @@ public class AddUI {
         }
     }
 
-    public ArrayList<String> getLessonDetails(ArrayList<Lesson> lessonType, int length) {
+    public ArrayList<String> getLessonDetails(ArrayList<Lesson> lessons, int length, String lessonType) {
         ArrayList<String> completeList = new ArrayList<>();
         int serial = SERIAL_STARTING;
+        String detail;
         for (int i = 0; length > i; i++) {
-            if (isArrayExist(lessonType, i)) {
-                Lesson lesson = lessonType.get(i);
-                String detail = printLessonInfo(serial, lesson);
+            if (isArrayExist(lessons, i)) {
+                Lesson lesson = lessons.get(i);
+                detail = printLessonInfo(serial, lesson);
                 completeList.add(detail);
-                if (classNumberGap(lessonType, lesson)) {
+                if (classNumberGap(lessons, lesson)) {
                     completeList.add(LINE);
                     serial++;
                 }
             }
+        }
+        if (!isExist(completeList, ZERO)) {
+            System.out.println(lessonType);
+            switch(lessonType) {
+            case "Lecture":
+                detail = String.format(FIXED_LENGTH_FORMAT, NO_LECTURE_FOUND);
+                break;
+            case "Tutorial":
+                detail = String.format(FIXED_LENGTH_FORMAT, NO_TUTORIAL_FOUND);
+                break;
+            default:
+                detail = String.format(FIXED_LENGTH_FORMAT, NO_LAB_FOUND);
+                break;
+            }
+            completeList.add(detail);
         }
         return completeList;
     }
@@ -65,18 +85,14 @@ public class AddUI {
         for (int j = 0; index > j; j++) {
             String output = "";
             if (isExist(lec, j)) {
-                output = output.concat(lec.get(j));
+                output = lec.get(j);
             } else if (isExist(tt, j) && !isExist(lec, j)) {
-                for (int i = 0; GAP > i; i++) {
-                    output = output.concat(SPACE);
-                }
+                output = String.format(FIXED_LENGTH_FORMAT, "");
             }
             if (isExist(tt, j)) {
                 output = output.concat(tt.get(j));
             } else if (isExist(lab, j) && !isExist(tt, j)) {
-                for (int i = 0; GAP > i; i++) {
-                    output = output.concat(SPACE);
-                }
+                output = output.concat(String.format(FIXED_LENGTH_FORMAT, ""));
             }
             if (isExist(lab, j)) {
                 output = output.concat(lab.get(j));
@@ -86,7 +102,7 @@ public class AddUI {
     }
 
     public void getCommand(ArrayList<Lesson> lessons, String lessonType, Timetable timetable, Module module) throws IntegerException {
-        if (isArrayExist(lessons, 0)) {
+        if (isArrayExist(lessons, ZERO)) {
             String select = TextUi.getLessonCommand(lessonType);
             int indexOfLesson;
             try {
@@ -102,9 +118,18 @@ public class AddUI {
         }
     }
 
+    /**
+     * Add lesson(s) from the list of lessons with the same class number selected
+     * into the timetable
+     *
+     * @param lessons the list of lessons
+     * @param timetable the timetable where the lesson is to be added
+     * @param module the module of the lesson
+     * @param classNumber the class number of the lesson
+     */
     public void addLessonToTimetable(ArrayList<Lesson> lessons,
             Timetable timetable, Module module, String classNumber) {
-        assert (lessons.size() > 0);
+        assert (lessons.size() > ZERO);
         for (Lesson lesson : lessons) {
             if (lesson.getClassNo().equals(classNumber)) {
                 timetable.addLesson(module, timetable.getSemester(), lesson);
@@ -114,13 +139,7 @@ public class AddUI {
 
     public String printLessonInfo(int serial, Lesson lesson) {
         String output = serial + ": " + lesson.lessonDetails();
-        for (int index = output.length(); GAP > index; index++) {
-            if (index == DIVIDER) {
-                output = output.concat(DIV);
-            } else {
-                output = output.concat(SPACE);
-            }
-        }
+        output = String.format(FIXED_LENGTH_FORMAT, output);
         return output;
     }
 
@@ -135,37 +154,44 @@ public class AddUI {
         return true;
     }
 
+    /**
+     * Function checks whether the array of lesson details
+     * exist and a String in the index specified contains a lesson
+     *
+     * @param lesson the list of Strings that contain lesson details
+     * @param index the index specified
+     * @return return true if the array and the lesson detail exist, otherwise false
+     */
     public boolean isExist(ArrayList<String> lesson, int index) {
-        return lesson.size() > 0 && lesson.size() > index;
+        return lesson.size() > ZERO && lesson.size() > index;
     }
 
+    /**
+     * Function checks whether the array exist and a lesson in
+     * the index specified contains a lesson
+     *
+     * @param lesson the list of lessons
+     * @param index the index specified
+     * @return return true if the array and the lesson exist, otherwise false
+     */
     public boolean isArrayExist(ArrayList<Lesson> lesson, int index) {
-        return lesson.size() > 0 && lesson.size() > index;
+        return lesson.size() > ZERO && lesson.size() > index;
     }
 
+    /**
+     * Function prints out the header to label each corresponding lesson
+     * type in the module lessons
+     *
+     * @param lt The list of lessons that are lectures
+     * @param tt The list of lessons that are tutorials
+     * @param lb The list of lessons that are laboratory
+     */
     public void printLessonHeader(ArrayList<Lesson> lt, ArrayList<Lesson> tt, ArrayList<Lesson> lb) {
         String header;
-//        if (isArrayExist(lt, 0) && isArrayExist(tt, 0) && isArrayExist(lb, 0)) {
-//            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
-//        } else if (isArrayExist(lt, 0) && isArrayExist(tt, 0)) {
-//            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT;
-//        } else if (isArrayExist(lt, 0) && isArrayExist(lb, 0)) {
-//            header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + LAB_SLOT;
-//        } else if (isArrayExist(tt, 0) && isArrayExist(lb, 0)) {
-//            header = SMALL_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
-//        } else if (isArrayExist(lt, 0)) {
-//            header = SMALL_GAP + LECTURE_SLOT;
-//        } else if (isArrayExist(tt, 0)) {
-//            header = SMALL_GAP + TUTORIAL_SLOT;
-//        } else if (isArrayExist(lb, 0)) {
-//            header = SMALL_GAP + LAB_SLOT;
-//        } else {
-//            header = "No Lesson Time Slots Found";
-//        }
-        if (isArrayExist(lt, 0) || isArrayExist(tt, 0) || isArrayExist(lb, 0)) {
+        if (isArrayExist(lt, ZERO) || isArrayExist(tt, ZERO) || isArrayExist(lb, ZERO)) {
             header = SMALL_GAP + LECTURE_SLOT + BIG_GAP + TUTORIAL_SLOT + BIG_GAP + LAB_SLOT;
         } else {
-            header = "No Lesson Time Slots Found";
+            header = String.format(FIXED_HEADER_FORMAT, NO_LESSON_FOUND);
         }
         System.out.println(header);
     }
