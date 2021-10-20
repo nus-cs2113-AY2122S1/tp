@@ -9,21 +9,23 @@ import terminus.module.ModuleManager;
 
 public class ModuleCommandParser extends CommandParser {
 
-    private static final ModuleCommandParser MODULE_PARSER = new ModuleCommandParser();
+    private static ModuleCommandParser parser;
 
     /**
      * Initializes the commandMap. Adds some default commands to it.
      */
     public ModuleCommandParser() {
-        super("module");
+        super(CommonFormat.COMMAND_MODULE);
     }
 
     public static ModuleCommandParser getInstance() {
-        ModuleCommandParser parser = MODULE_PARSER;
-        parser.addCommand("add", new AddModuleCommand());
-        parser.addCommand("view", new ViewModuleCommand());
-        parser.addCommand("delete", new DeleteModuleCommand());
-        parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
+        if (parser == null) {
+            parser = new ModuleCommandParser();
+            parser.addCommand(CommonFormat.COMMAND_ADD, new AddModuleCommand());
+            parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewModuleCommand());
+            parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteModuleCommand());
+            parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
+        }
         return parser;
     }
 
