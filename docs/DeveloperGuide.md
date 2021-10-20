@@ -49,6 +49,7 @@ a list of potential exchange Universities based on the users study plan, module 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see the list of possible schools for exchange|view my options for SEP|
+|v1.0|new user|see the list of possible NUS modules for mapping|view my module options for SEP|
 |v1.0|beginner user|add a University to my preferred list|view the Universities that I am interested in|
 |v1.0|beginner user|add a Module to my preferred list|save my module preferences for the future|
 |v1.0|beginner user|delete a University from the selected list|remove the University that I am not interested in|
