@@ -6,15 +6,15 @@ import java.util.ArrayList;
 
 public class OverallBudget extends Budget {
 
-    public OverallBudget(int limit) {
+    public OverallBudget(double limit) {
         this.category = null;
         this.name = "OVERALL";
         this.limit = limit;
     }
 
     @Override
-    public int calAmount(ArrayList<Expense> entries) {
-        int amount = 0;
+    public double calAmount(ArrayList<Expense> entries) {
+        double amount = 0;
         for (Expense expense : entries) {
             amount += expense.getValue();
         }

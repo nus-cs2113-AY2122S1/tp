@@ -10,6 +10,7 @@ public class Messages {
     public static final String N0N_NUMERIC_INDEX_MESSAGE = "Only numeric inputs are allowed for index.";
     public static final String NON_POSITIVE_AMOUNT_MESSAGE = "Only positive values are allowed for amount.";
     public static final String NON_POSITIVE_INDEX_MESSAGE = "Only positive values are allowed for index.";
+    public static final String BLANK_AMOUNT_MESSAGE = "No amount inputted!";
     public static final String UNABLE_TO_DELETE_MESSAGE = "Entry not deleted because entry not found!";
     public static final String BLANK_DESCRIPTION_MESSAGE = "Your description is empty!";
     public static final String HAS_CORRUPTED_DATA_ENTRIES = "StonksXD_Data.csv has corrupted entries, " 
@@ -38,4 +39,6 @@ public class Messages {
             + "Transport, Bills, Medical or Entertainment.";
     public static final String INVALID_INCOME_CATEGORY_MESSAGE = "Input only 1 of these 3 categories: Salary, " 
             + "Allowance or Adhoc.";
+    public static final String INVALID_BUDGET_CATEGORY_MESSAGE = "Input only 1 of these 6 categories: Food, "
+            + "Transport, Bills, Medical, Entertainment or Overall";
 }

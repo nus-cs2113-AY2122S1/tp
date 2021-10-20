@@ -2,6 +2,7 @@ package seedu.utility;
 
 import seedu.entry.Entry;
 import seedu.entry.Expense;
+import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 
 import java.time.LocalDate;
@@ -332,6 +333,36 @@ public class Ui {
     public void printGraph(String graph) {
         printLine();
         System.out.println(graph);
+        printLine();
+    }
+
+    public void printBudgetWarning(String month, String budgetName, double currAmount, double limit) {
+        printLine();
+        System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f", month, budgetName, currAmount, limit);
+        System.out.print(newLine);
+        System.out.println("Would you like to readjust your " + month + " " + budgetName + " budget?");
+        printLine();
+    }
+
+    public void printBudgetExceeded(String month, String budgetName, double currAmount, double limit) {
+        printLine();
+        System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f", month, budgetName, currAmount, limit);
+        System.out.print(newLine);
+        System.out.println("Would you like to readjust your " + month + " " + budgetName + " budget?");
+        printLine();
+    }
+
+    public void printBudgetSetConfirmation(double amount, ExpenseCategory category) {
+        printLine();
+        System.out.printf("%s budget has been set to $%.2f", category.toString(), amount);
+        System.out.print(newLine);
+        printLine();
+    }
+
+    public void printBudget(ExpenseCategory category, double budgetLimit) {
+        printLine();
+        System.out.printf("Current %s limit is $%.2f", category.toString(), budgetLimit);
+        System.out.print(newLine);
         printLine();
     }
 }

@@ -9,61 +9,43 @@ import seedu.budget.MiscBudget;
 import seedu.budget.OverallBudget;
 import seedu.budget.TransportBudget;
 import seedu.entry.Expense;
+import seedu.entry.ExpenseCategory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BudgetManager {
     private double threshold;
-    OverallBudget overallBudget = new OverallBudget(5000);
-    FoodBudget foodBudget = new FoodBudget(2000);
+    OverallBudget overallBudget = new OverallBudget(0);
+    FoodBudget foodBudget = new FoodBudget(0);
     TransportBudget transportBudget = new TransportBudget(0);
     MedicalBudget medicalBudget = new MedicalBudget(0);
     BillsBudget billsBudget = new BillsBudget(0);
-    EntertainmentBudget entertainmentBudget = new EntertainmentBudget(100);
+    EntertainmentBudget entertainmentBudget = new EntertainmentBudget(0);
     MiscBudget miscBudget = new MiscBudget(0);
 
     public BudgetManager() {
         this.threshold = 0.1;
     }
 
-    public void handleBudget(Expense expense, ArrayList<Expense> expenses) {
-        checkBudget(expense, expenses, overallBudget);
-
-        switch (expense.getCategory()) {
-        case FOOD:
-            checkBudget(expense, expenses, foodBudget);
-            break;
-        case TRANSPORT:
-            checkBudget(expense, expenses, transportBudget);
-            break;
-        case MEDICAL:
-            checkBudget(expense, expenses, medicalBudget);
-            break;
-        case BILLS:
-            checkBudget(expense, expenses, billsBudget);
-            break;
-        case ENTERTAINMENT:
-            checkBudget(expense, expenses, entertainmentBudget);
-            break;
-        case MISC:
-            checkBudget(expense, expenses, miscBudget);
-            break;
+    public void handleBudget(Expense expense, ArrayList<Expense> expenses, Ui ui) {
+        checkBudget(expense, expenses, overallBudget, ui);
+        Budget budget = expenseCategoryToBudget(expense.getCategory());
+        if (budget != overallBudget) {
+            checkBudget(expense, expenses, budget, ui);
         }
     }
 
-    private void checkBudget(Expense expense, ArrayList<Expense> expenses, Budget budget) {
+    private void checkBudget(Expense expense, ArrayList<Expense> expenses, Budget budget, Ui ui) {
         if (budget.getLimit() != 0) {
             String month = LocalDate.now().getMonth().toString();
-            int currAmount = budget.calAmount(expenses);
-            int limit = budget.getLimit();
-            int diff = limit - currAmount;
+            double currAmount = budget.calAmount(expenses);
+            double limit = budget.getLimit();
+            double diff = limit - currAmount;
             if ((diff < threshold*limit) & (diff > 0)) {
-                System.out.println("You are almost reaching the " + month + " " + budget.getName() + " budget: $" + currAmount + "/$" + limit);
-                System.out.println("Would you like to readjust your " + month + " " + budget.getName() + " budget?");
+                ui.printBudgetWarning(month, budget.getName(), currAmount, limit);
             } else if (diff < 0) {
-                System.out.println("You have exceeded the " + month + " " + budget.getName() + " budget: $" + currAmount + "/$" + limit);
-                System.out.println("Would you like to readjust your " + month + " " + budget.getName() + " budget?");
+                ui.printBudgetExceeded(month, budget.getName(), currAmount, limit);
             }
         }
     }
@@ -72,7 +54,41 @@ public class BudgetManager {
         this.threshold = threshold;
     }
 
-    public void setBudget(int amount, Budget budget) {
+    public void setBudget(double amount, ExpenseCategory category) {
+        Budget budget = expenseCategoryToBudget(category);
         budget.setLimit(amount);
+    }
+
+    public double getBudget(ExpenseCategory category) {
+        Budget budget = expenseCategoryToBudget(category);
+        return budget.getLimit();
+    }
+
+    private Budget expenseCategoryToBudget(ExpenseCategory category) {
+        Budget budget;
+        switch (category) {
+        case FOOD:
+            budget = foodBudget;
+            break;
+        case TRANSPORT:
+            budget = transportBudget;
+            break;
+        case MEDICAL:
+            budget = medicalBudget;
+            break;
+        case BILLS:
+            budget = billsBudget;
+            break;
+        case ENTERTAINMENT:
+            budget = entertainmentBudget;
+            break;
+        case MISC:
+            budget = miscBudget;
+            break;
+        default:
+            budget = overallBudget;
+            break;
+        }
+        return budget;
     }
 }

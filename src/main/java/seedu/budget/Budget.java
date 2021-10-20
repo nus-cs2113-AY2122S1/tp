@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public abstract class Budget {
     protected ExpenseCategory category;
     protected String name;
-    protected int limit;
+    protected double limit;
 
     public ExpenseCategory getCategory() {
         return this.category;
@@ -19,16 +19,16 @@ public abstract class Budget {
         return this.name;
     }
 
-    public void setLimit(int amount) {
+    public void setLimit(double amount) {
         this.limit = amount;
     }
 
-    public int getLimit() {
+    public double getLimit() {
         return this.limit;
     }
 
-    public int calAmount(ArrayList<Expense> entries) {
-        int amount = 0;
+    public double calAmount(ArrayList<Expense> entries) {
+        double amount = 0;
         for (Expense expense : entries) {
             if ((expense.getCategory() == this.category) & (expense.getDate().getMonth() == LocalDate.now().getMonth())){
                 amount += expense.getValue();
