@@ -23,6 +23,7 @@ public abstract class Command {
     public static final String COMMAND_DELETE_STUDENT = "delete_student";
     public static final String COMMAND_SET_ATTENDANCE = "set_attendance";
     public static final String COMMAND_ADD_ASSESSMENT = "add_assessment";
+    public static final String COMMAND_DELETE_ASSESSMENT = "delete_assessment";
     public static final String COMMAND_SET_MARKS = "set_marks";
     public static final String COMMAND_HELP = "help";
 
