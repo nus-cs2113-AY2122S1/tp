@@ -17,7 +17,7 @@ public class ListCommand extends Command {
 
     public ListCommand(ListType type, UniversityList universitySelectedList,
                        ModuleList moduleSelectedList) throws IOException {
-        super(universitySelectedList, moduleSelectedList);
+//        super(universitySelectedList, moduleSelectedList);
         assert type != null;
         switch (type) {
         case SELECTEDMODS:
