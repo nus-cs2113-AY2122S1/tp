@@ -168,27 +168,6 @@ public class Storage {
     }
 
     /**
-     * Read and process medicine stock details from file to restore medicine stock state in program.
-     *
-     * @param file File object of data/stock.txt.
-     * @throws FileNotFoundException If file is not found.
-     */
-    private ArrayList<Medicine> readFromStockFile(File file) throws FileNotFoundException {
-        Scanner sc = new Scanner(file);
-        ArrayList<Medicine> medicines = new ArrayList<>();
-        while (sc.hasNextLine()) {
-            String stockDetails = sc.nextLine();
-            try {
-                Medicine parsedStock = parseStockData(stockDetails);
-                medicines.add(parsedStock);
-            } catch (InvalidDataException e) {
-                System.out.println("Corrupted data detected in file"); // Maybe just log it instead of displaying?
-            }
-        }
-        return medicines;
-    }
-
-    /**
      * Parse stock data and create a stock object based on it.
      *
      * @param stockDetails String of data of specific stock from file data/stock.txt.
@@ -213,27 +192,6 @@ public class Storage {
         stock.setStockCount(stockID);
         stock.setDeleted(stockIsDeleted);
         return stock;
-    }
-
-    /**
-     * Read and process medicine order details from file to restore medicine order state in program.
-     *
-     * @param file File object of data/order.txt.
-     * @throws FileNotFoundException If file is not found.
-     */
-    private ArrayList<Medicine> readFromOrderFile(File file) throws FileNotFoundException {
-        Scanner sc = new Scanner(file);
-        ArrayList<Medicine> medicines = new ArrayList<>();
-        while (sc.hasNextLine()) {
-            String orderDetails = sc.nextLine();
-            try {
-                Medicine parsedOrder = parseOrderData(orderDetails);
-                medicines.add(parsedOrder);
-            } catch (InvalidDataException e) {
-                System.out.println("Corrupted data detected in file"); // Maybe just log it instead of displaying?
-            }
-        }
-        return medicines;
     }
 
     /**
@@ -262,27 +220,6 @@ public class Storage {
         return order;
     }
 
-//    /**
-//     * Read and process medicine dispense details from file to restore medicine dispense state in program.
-//     *
-//     * @param file File object of data/dispense.txt.
-//     * @throws FileNotFoundException If file is not found.
-//     */
-//    private ArrayList<Medicine> readFromDispenseFile(File file) throws FileNotFoundException {
-//        Scanner sc = new Scanner(file);
-//        ArrayList<Medicine> medicines = new ArrayList<>();
-//        while (sc.hasNextLine()) {
-//            String dispenseDetails = sc.nextLine();
-//            try {
-//                Medicine parsedStock = parseStockData(stockDetails);
-//                medicines.add(parsedStock);
-//            } catch (InvalidDataException e) {
-//                System.out.println("Corrupted data detected in file"); // Maybe just log it instead of displaying?
-//            }
-//        }
-//        return medicines;
-//    }
-
     /**
      * Parse dispense data and create a dispense object based on it.
      *
@@ -307,11 +244,4 @@ public class Storage {
         dispense.setDispenseCount(dispenseId);
         return dispense;
     }
-    public static final String ID = "ID";
-    public static final String NAME = "NAME";
-    public static final String QUANTITY = "QUANTITY";
-    public static final String CUSTOMER_ID = "CUSTOMER ID";
-    public static final String DATE = "DATE";
-    public static final String STAFF = "STAFF";
-    public static final String STOCK_ID = "STOCK ID";
 }
