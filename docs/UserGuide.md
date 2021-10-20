@@ -220,12 +220,12 @@ Sorts the tasklist by a given criteria.
 Deletes tasks specified in comma-seperated argument.
 
 **Format:** `delete <indexes of tasks to delete>`
-- tasks would be comma seperated.
+- task indexes should be comma seperated.
   - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
   - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
-  - `delete 1-3,5` would delete tasks with indexes 1, 2, 3 and 5.
+  - `delete 1-3, 5` would delete tasks with indexes 1, 2, 3 and 5.
 
-**Example:** `delete 1-3,5`
+**Example:** `delete 1-3, 5`
 - delete tasks with indexes 1, 2, 3 and 5.
 
 **List before deletion:**
