@@ -13,21 +13,25 @@
 
 ## Features 
 
-{Give detailed description of each feature}
 
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
+###View Summary of expenses
 
-Format: `todo n/TODO_NAME d/DEADLINE`
+```summary trip-index```
 
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
+Example:
+Viewing summary of South Korea trip
 
-Example of usage: 
+Input:
+```summary 1```
 
-`todo n/Write the rest of the User Guide d/next week`
+Output:
+```
+This is the summary for your South Korea trip 13/12/2018.
+Total budget for this trip: $2000.00
+Total expenditure so far: $1247.00
+Current budget left for this trip: $753.00
+```
 
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
 ## FAQ
 
