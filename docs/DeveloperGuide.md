@@ -92,10 +92,10 @@ The following sequence diagrams below show how task data is [saved](#saving-data
 ## Implementation
 
 ### Saving data
-![StorageSaveSequence](images/StorageSaveSequence.png)
+![StorageSaveSequence](images/SaveDataSequenceDiagram.png)
 
 ### Loading data
-![StorageLoadSequence](images/StorageLoadSequence.png)
+![StorageLoadSequence](images/LoadDataSequenceDiagram.png)
 
 ## Appendix: Requirements
 
