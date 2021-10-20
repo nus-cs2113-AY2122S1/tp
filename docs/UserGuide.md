@@ -157,24 +157,17 @@ Example of usage:
 
 #### Listing the budget - `list`
 
+Shows the current budget, as specified by the user.
+
 Format: `budget list`
 
 <br />
 
 #### Deleting the budget - `delete`
 
-Format: `budget delete -n [NAME] -i [ID]`
+Deletes the budget for current month, or effectively setting it to 0.
 
-Arguments:
-- `NAME`
-  - The names of the expense are case sensitive, and can contain any characters except for “-”.
-  - The length of the name is limited to 64 characters.
-  - If there are multiple repeated names, then all these expenses will be deleted.
-- `ID`
-  - The id number shall be an positive integer.
-  - If not a positive integer is provided, then an error message is shown.
-
-Both arguments are mutually exclusive. This means that if both the name and id are specified, an error message is displayed.
+Format: `budget delete`
 
 <hr />
 
@@ -196,4 +189,5 @@ Both arguments are mutually exclusive. This means that if both the name and id a
 | Delete income | `income delete -n [NAME] -i [ID]` |
 | List incomes | `income list` |
 | Add budget | `budget add -v [VALUE]` |
-| Delete budget | `budget delete -n [NAME] -i [ID]` |
+| List budget | `budget list` |
+| Delete budget | `budget delete` |
