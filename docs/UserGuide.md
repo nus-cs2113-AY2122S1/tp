@@ -21,12 +21,12 @@ ingredient inventory.**
 &nbsp;&nbsp;[2.3. Listing Ingredients](#23-listing-all-ingredients) <br>
 &nbsp;&nbsp;[2.4 Updating Ingredients](#24-updating-an-ingredient) <br>
 &nbsp;&nbsp;[2.5. Delete Ingredients](#25-stop-tracking-an-ingredient) <br>
-&nbsp;&nbsp;[2.6. Show Expiring Ingredients](#26-tba-show-expiring-ingredients) <br>
+&nbsp;&nbsp;[2.6. Showing Expiring Ingredients](#26-showing-expiring-ingredients) <br>
 &nbsp;&nbsp;[2.7. Displaying Alerts](#27-displaying-alerts) <br>
 &nbsp;&nbsp;[2.8. Setting Thresholds](#28-setting-thresholds) <br>
-&nbsp;&nbsp;[2.9. Search For Ingredients](#210-search-for-ingredients) <br>
-&nbsp;&nbsp;[2.10. View/ Set Current Date](#211-view-set-current-date) <br>
-&nbsp;&nbsp;[2.11. Exit Program](#29-exiting-the-program) <br>
+&nbsp;&nbsp;[2.9. Searching For Ingredients](#29-searching-for-ingredients) <br>
+&nbsp;&nbsp;[2.10. Viewing/ Setting Current Date](#210-viewing-setting-current-date) <br>
+&nbsp;&nbsp;[2.11. Exiting Program](#211-exiting-program) <br>
 [**3. FAQ**](#3-faq) <br>
 [**4.Command Summary**](#command-summary) <br>
 
@@ -47,13 +47,13 @@ ingredient inventory.**
 
 This section covers the commands SITUS can execute, and how to use them.
 
-### 2.1. View Help
+### 2.1. Viewing Help
 
 Shows a list of available commands and their syntax.
 
 Format: `help`
 
-### 2.2. Add An Ingredient
+### 2.2. Adding An Ingredient
 
 Add an ingredient to the ingredient list.
 
@@ -69,13 +69,13 @@ Examples:
 * `add n/carrot a/200 u/sticks e/22/10/2021`
 * `add n/potato a/500 u/g e/25/10/2021`
 
-### 2.3. List All Ingredients
+### 2.3. Listing All Ingredients
 
 Display a list of all ingredients in the ingredient list
 
 Format: `list`
 
-### 2.4. Update An Ingredient
+### 2.4. Updating An Ingredient
 
 Update the amount, unit and expiry of an ingredient in the ingredient list
 
@@ -91,7 +91,7 @@ Examples:
 * `update n/carrot a/100 u/sticks e/21/10/2021`
 * `update n/potato a/0.6 u/kg e/27/10/2021`
 
-### 2.5. Delete An Ingredient
+### 2.5. Stop Tracking An Ingredient
 
 Delete an ingredient from the ingredient list based on its index in the list.
 
@@ -102,7 +102,7 @@ The parameter used in the command is:
 
 Example: `delete 1`
 
-### 2.6. Show expiring ingredients
+### 2.6. Showing expiring ingredients
 
 List the ingredients that will expire by a specified date.
 
@@ -136,9 +136,7 @@ The parameters used in the command are:
 * `TYPE`: either `expiry` or `stock`
 * `NEW_VALUE`: the new threshold for which alerts will be displayed
 
-### 2.9. Exiting the program
-
-### 2.10. Search For Ingredients
+### 2.9. Searching For Ingredients
 
 Search for ingredients using keywords in their names.
 
@@ -147,14 +145,14 @@ Format: `find [INGREDIENT_NAMES]`
 
 Examples: `find carrot`, `find bean apple`
 
-### 2.11. View/ Set Current Date
+### 2.10. Viewing/ Setting Current Date
 
 View or set the system's current date. 
 
 Format: `date [NEW_DATE]`
 * `NEW_DATE`: The date to be set as the current date. If blank, the current date is shown.
 
-### 2.12. Exit Program
+### 2.11. Exiting Program
 
 Exit the program once done.
 
