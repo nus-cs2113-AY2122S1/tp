@@ -22,50 +22,45 @@ you manage your daily tasks faster than traditional GUI application.
   - [Non-Functional Requirements](#4-command-summary)
   - [Glossary](#4-command-summary)
 - [Appendix: Instructions for manual testing](#4-command-summary)
-  - [Launch and shutdown](#4-command-summary)
-  - [Deleting a person](#4-command-summary)
-
---------------------
+  - Launch and shutdown
+  - Deleting a person
   
 # Acknowledgements
 
---------------------
-
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
---------------------
 
 # Setting up, getting started
 
---------------------
-
 Refer to the guide [Setting up and getting started](https://www.google.com).
-
---------------------
 
 # Design
 
---------------------
+{Describe the design of the product. Use UML diagrams and short code snippets where applicable.}
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+# Implementation
 
---------------------
+{Describe the implementation of the product. Use UML diagrams and short code snippets where applicable.}
+
+# Documentation, logging, testing, configuration, dev-ops
+
+- [Documentation guide](https://www.google.com)
+- [Testing guide](https://www.google.com)
+- [Logging guide](https://www.google.com)
+- [Configuration guide](https://www.google.com)
+- [DevOps guide](https://www.google.com)
+
+# Appendix: Requirements
 
 ## Product scope
-### Target user profile
 
-{Describe the target user profile}
-
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
-
-## User Stories
+## User stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+
+## Use cases
 
 ## Non-Functional Requirements
 
@@ -75,6 +70,6 @@ Refer to the guide [Setting up and getting started](https://www.google.com).
 
 * *glossary item* - Definition
 
-## Instructions for manual testing
+# Appendix: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
