@@ -14,7 +14,7 @@
 
 ## Acknowledgements
 
-- Libraries used: [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+- Libraries used: [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5), [Ascii Table](https://mvnrepository.com/artifact/de.vandermeer/asciitable)
 
 ## Design & implementation
 
@@ -104,6 +104,19 @@ Not all the Commands will have a defined Parser, as some commands do not take ar
 Other commands that require parsing the command arguments in different ways, such are extracting exercise and workout index, will require
 further processing. This additional processing is defined by each Command's corresponding Parser. 
 
+
+### Ui Component
+
+Location: `seedu.duke.ui`
+
+![img.png](umldg/UI.png)
+
+__Note:__
+* `CommandResult` : Contains all the information we want to display to the user.
+* `Command` : Abstract class that tells us whether we are in the main level or in a workout.
+* `Ui` : Handles the display of information to the user.
+
+In the Ui class, `withIndent` is true if the user is in `workoutMode`, false otherwise.
 
 ## Product scope
 ### Target user profile
