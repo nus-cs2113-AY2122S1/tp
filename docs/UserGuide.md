@@ -6,13 +6,13 @@
 * [Features](#features)
 * [Commands](#commands)
   * [Add](#add) 
-    * [Add Budget](#add-budget)
-    * [Add Expenditure](#add-expenditure)
-    * [Add Loan](#add-loan)
+    * [Budget: `b/`](#add-budget)
+    * [Expenditure: `e/`](#add-expenditure)
+    * [Loan: `l/`](#add-loan)
   * [Edit](#edit)
-    * [Edit Budget](#edit-budget)
-    * [Edit Expenditure](#edit-expenditure)
-    * [Edit Loan](#edit-loan)
+    * [Budget: `b/`](#edit-budget)
+    * [Expenditure: `e/`](#edit-expenditure)
+    * [Loan: `l/`](#edit-loan)
   * [Database Selector](#dbselect)
 	* [year](#year)
   * [Find & Filter](#find&filter)
@@ -40,18 +40,27 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 ## Features
 
+### Notes about the command format:
+Words in UPPER_CASE are the parameters to be supplied by the user. <br />
+e.g. in `add b/ a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add b/ a/500 m/12`
+
+<br />
+
 ## Commands
 
 ## `add`
 
-### `add` a Budget
+The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
+The type of record is determined by the first prefix after the `add` command word.
+
+### `b/` - Add a Budget
 
 Adds a new budget to a specific month.
 
-Format: `add b/ a/<amount> m/<month>`
+Format: `add b/ a/AMOUNT m/MONTH`
 
-* The `amount` can be entered with 2 decimal places or without decimal places.
-* The 'month' must strictly be within the range of 1 to 12.
+* The `AMOUNT` can be entered with 2 decimal places or without decimal places and cannot be empty.
+* The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
 
 Example of usage:
 
@@ -65,15 +74,17 @@ Your budget of 500.0 for this month is successfully added!
 ========================================================
 ```
 
-### Adding an Expenditure: `add`
+### `e/` - Add an expenditure
 
-Adds a new expenduture to a specific budget of a month.
+Adds a new expenditure to a month.
 
-Format: `add e/<description> a/<amount> d/<date>`
+Format: `add e/DESCRIPTION a/AMOUNT d/<date>`
 
-* The `description` can be in a natural language format.
-* The `amount` can be entered with 2 decimal places or without decimal places.
-* The 'date' must strictly be in the form of YYYY-MM-DD.
+* The `DESCRIPTION` can be in a natural language format. It can be left empty if the user does not wish
+* to add specific information about the expenditure.
+* The `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
+* The `<date>` must strictly be in the form of YYYY-MM-DD. If left empty, the current date according to the
+* system will be entered by default.
 
 Example of usage:
 
@@ -102,7 +113,7 @@ Date: 2021-08-20
 
 ## `year`
 
-### Swiching Database Year: `year`
+### Switching Database Year: `year`
 
 Selection of the database year.
 
@@ -130,7 +141,7 @@ You are currently working on year 2020 database!
 
 ### Listing all Budget & Expenditure: `list`
 
-Adds a new expenduture to a specific budget of a month.
+Adds a new expenditure to a specific budget of a month.
 
 Format: `list m/all`
 
@@ -200,7 +211,7 @@ Your expenditures:
 
 ### Listing Budget & Expenditure for a Particular Month: `list`
 
-Adds a new expenduture to a specific budget of a month.
+Adds a new expenditure to a specific budget of a month.
 
 Format: `list m/<month>`
 
@@ -281,9 +292,9 @@ Parameters: l/DEBTOR_NAME a/AMOUNT [d/DATE_OF_LOAN]
 
 ## `bye`
 
-### Exiting the App: `bye`
+### Exiting the program: `bye`
  
-Exits the app. 
+Exits the program. 
 
 Format: `bye`
 
@@ -310,8 +321,8 @@ Bye, see you again soon!
 ## Command Summary
 | `no.` | `Command` | `Description` |
 | --- | --- | --- |
-| `1` | `add b/ a/<amount> m/<month>` | `add budget of <amount> to <month>` |
-| `2` | `add e/<description> a/<amount> d/<date>` | `add <description> expenditure of <amount> at <date>` |
+| `1` | `add b/ a/AMOUNT m/MONTH` | `add budget of AMOUNT to MONTH` |
+| `2` | `add e/DESCRIPTION a/AMOUNT d/DATE` | `add <description> expenditure of <amount> at <date>` |
 | `3` | `` | `` |
 | `4` | `` | `` |
 | `5` | `` | `` |
