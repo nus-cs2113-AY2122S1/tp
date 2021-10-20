@@ -4,7 +4,7 @@ package expiryeliminator.commands;
 // Reused from https://github.com/bernardboey/ip/blob/master/src/main/java/duke/commands/Command.java
 // with minor modifications
 
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
 /**
@@ -14,11 +14,11 @@ public abstract class Command {
     /**
      * Executes the appropriate actions.
      *
-     * @param ingredientList Ingredient list.
+     * @param ingredients Ingredient repository.
      * @param recipes Recipe List.
      * @return Feedback about what was executed.
      */
-    public abstract String execute(IngredientList ingredientList, RecipeList recipes);
+    public abstract String execute(IngredientRepository ingredients, RecipeList recipes);
 
     /**
      * Indicates whether the command is an exit command.
