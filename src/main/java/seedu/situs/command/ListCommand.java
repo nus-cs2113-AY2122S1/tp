@@ -1,7 +1,7 @@
-package seedu.duke.command;
+package seedu.situs.command;
 
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.IngredientList;
+import seedu.situs.exceptions.DukeException;
+import seedu.situs.ingredients.IngredientList;
 
 /**
  * Represents a list command.

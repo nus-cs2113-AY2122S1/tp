@@ -1,12 +1,4 @@
-package seedu.duke.command;
-
-import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
-
-import java.io.IOException;
-import java.util.ArrayList;
+package seedu.situs.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

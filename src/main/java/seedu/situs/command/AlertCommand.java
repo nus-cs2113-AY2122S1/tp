@@ -1,6 +1,6 @@
-package seedu.duke.command;
+package seedu.situs.command;
 
-import seedu.duke.exceptions.DukeException;
+import seedu.situs.exceptions.DukeException;
 
 public class AlertCommand extends Command {
 

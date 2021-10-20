@@ -1,8 +1,8 @@
-package seedu.duke.command;
+package seedu.situs.command;
 
-import seedu.duke.exceptions.DukeException;
+import seedu.situs.exceptions.DukeException;
 
-import seedu.duke.localtime.CurrentDate;
+import seedu.situs.localtime.CurrentDate;
 
 import java.time.LocalDate;
 

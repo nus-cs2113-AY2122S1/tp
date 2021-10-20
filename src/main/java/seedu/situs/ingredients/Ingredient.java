@@ -1,11 +1,10 @@
-package seedu.duke.ingredients;
+package seedu.situs.ingredients;
 
-import seedu.duke.localtime.CurrentDate;
+import seedu.situs.localtime.CurrentDate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.time.Month;
 
 /**
  * Represents an Ingredient.

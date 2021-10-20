@@ -1,9 +1,8 @@
-package seedu.duke;
+package seedu.situs;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
+import seedu.situs.exceptions.DukeException;
+import seedu.situs.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

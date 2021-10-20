@@ -1,7 +1,7 @@
-package seedu.duke.ingredients;
+package seedu.situs.ingredients;
 
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.storage.Storage;
+import seedu.situs.exceptions.DukeException;
+import seedu.situs.storage.Storage;
 
 import java.io.IOException;
 import java.time.LocalDate;

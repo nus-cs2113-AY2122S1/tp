@@ -1,7 +1,4 @@
-package seedu.duke.command;
-
-import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.DukeException;
+package seedu.situs.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

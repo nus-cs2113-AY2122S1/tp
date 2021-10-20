@@ -1,17 +1,17 @@
-package seedu.duke;
+package seedu.situs.parser;
 
-import seedu.duke.command.AddCommand;
-import seedu.duke.command.AlertCommand;
-import seedu.duke.command.AlertExpiringSoonCommand;
-import seedu.duke.command.AlertLowStockCommand;
-import seedu.duke.command.DateCommand;
-import seedu.duke.command.DeleteCommand;
-import seedu.duke.command.ExpireCommand;
-import seedu.duke.command.HelpCommand;
-import seedu.duke.command.ListCommand;
-import seedu.duke.command.UpdateCommand;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.Ingredient;
+import seedu.situs.command.AddCommand;
+import seedu.situs.command.AlertCommand;
+import seedu.situs.command.AlertExpiringSoonCommand;
+import seedu.situs.command.AlertLowStockCommand;
+import seedu.situs.command.DateCommand;
+import seedu.situs.command.DeleteCommand;
+import seedu.situs.command.ExpireCommand;
+import seedu.situs.command.HelpCommand;
+import seedu.situs.command.ListCommand;
+import seedu.situs.command.UpdateCommand;
+import seedu.situs.exceptions.DukeException;
+import seedu.situs.ingredients.Ingredient;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
