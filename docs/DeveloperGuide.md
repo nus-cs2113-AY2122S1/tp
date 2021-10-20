@@ -27,7 +27,8 @@ original source as well}
 
 ### Storage 
 
-The storage stores the add command
+The storage stores the exact add command of budget and expenditures into the text file containing 
+the 
 
 ## Product scope
 
