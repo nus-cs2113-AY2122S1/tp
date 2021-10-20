@@ -1,0 +1,26 @@
+@startuml
+title Save Functionality
+
+-> StorageFile: save(eventsList : ArrayList<Event>)
+activate StorageFile #yellow
+
+create File
+StorageFile -> File:new File(DEFAULT_FILE_PATH)
+activate File #lightblue
+return saveFile: File
+|||
+StorageFile -> StorageFile: checkFileIsValid(saveFile)
+activate StorageFile #orange
+return
+|||
+StorageFile -> EventEncoder: encodeEventsList(eventsList)
+activate EventEncoder #lightblue
+return encodedEvents: List<String>
+|||
+StorageFile -> StorageFile: writeToFile
+activate StorageFile #orange
+return
+|||
+return
+
+@enduml
