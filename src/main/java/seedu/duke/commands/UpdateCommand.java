@@ -67,7 +67,7 @@ public class UpdateCommand extends Command {
     protected void updateDate(Integer index, String attribute) {
         try {
             if (this.listType.equalsIgnoreCase("-e")) {
-                Event itemToBeUpdated = Duke.eventList.get(index);
+                Event itemToBeUpdated = Duke.eventCatalog.get(index);
                 String newDate = retrieveItemAttribute(attribute, DATE_FLAG);
                 itemToBeUpdated.setDateTime(Parser.convertDateTime(newDate));
             } else if (this.listType.equalsIgnoreCase("-t")) {
@@ -83,7 +83,7 @@ public class UpdateCommand extends Command {
 
     protected void updateTitle(Integer index, String attribute) {
         if (this.listType.equalsIgnoreCase("-e")) {
-            Event itemToBeUpdated = Duke.eventList.get(index);
+            Event itemToBeUpdated = Duke.eventCatalog.get(index);
             String newTitle = retrieveItemAttribute(attribute, TITLE_FLAG);
             itemToBeUpdated.setTitle(newTitle);
         } else if (this.listType.equalsIgnoreCase("-t")) {
@@ -95,7 +95,7 @@ public class UpdateCommand extends Command {
 
     protected void updateVenue(Integer index, String attribute) {
         if (this.listType.equalsIgnoreCase("-e")) {
-            Event itemToBeUpdated = Duke.eventList.get(index);
+            Event itemToBeUpdated = Duke.eventCatalog.get(index);
             String newVenue = retrieveItemAttribute(attribute, VENUE_FLAG);
             itemToBeUpdated.setVenue(newVenue);
         } else if (this.listType.equalsIgnoreCase("-t")) {
@@ -106,7 +106,7 @@ public class UpdateCommand extends Command {
     protected void updateBudget(Integer index, String attribute) {
         try {
             if (this.listType.equalsIgnoreCase("-e")) {
-                Event itemToBeUpdated = Duke.eventList.get(index);
+                Event itemToBeUpdated = Duke.eventCatalog.get(index);
                 double newBudget = retrieveEventBudget(attribute);
                 itemToBeUpdated.setBudget(newBudget);
             } else if (this.listType.equalsIgnoreCase("-t")) {
@@ -119,7 +119,7 @@ public class UpdateCommand extends Command {
 
     protected void updateDescription(Integer index, String attribute) {
         if (this.listType.equalsIgnoreCase("-e")) {
-            Event itemToBeUpdated = Duke.eventList.get(index);
+            Event itemToBeUpdated = Duke.eventCatalog.get(index);
             String newDescription = retrieveItemAttribute(attribute, DESCRIPTION_FLAG);
             itemToBeUpdated.setDescription(newDescription);
         } else if (this.listType.equalsIgnoreCase("-t")) {
