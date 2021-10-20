@@ -12,16 +12,20 @@ import terminus.module.ModuleManager;
 
 public class NoteCommandParser extends InnerModuleCommandParser {
 
+    private static NoteCommandParser parser;
+
     public NoteCommandParser() {
         super(CommonFormat.COMMAND_NOTE);
     }
 
     public static NoteCommandParser getInstance() {
-        NoteCommandParser parser = new NoteCommandParser();
-        parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
-        parser.addCommand(CommonFormat.COMMAND_ADD, new AddNoteCommand());
-        parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand(Note.class));
-        parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteNoteCommand(Note.class));
+        if (parser == null) {
+            parser = new NoteCommandParser();
+            parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
+            parser.addCommand(CommonFormat.COMMAND_ADD, new AddNoteCommand());
+            parser.addCommand(CommonFormat.COMMAND_VIEW, new ViewCommand(Note.class));
+            parser.addCommand(CommonFormat.COMMAND_DELETE, new DeleteNoteCommand(Note.class));
+        }
         return parser;
     }
 

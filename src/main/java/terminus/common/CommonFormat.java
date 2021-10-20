@@ -32,6 +32,7 @@ public class CommonFormat {
     public static final String COMMAND_VIEW_MODULE_FORMAT = "view";
     public static final String SPACE_NEGATED_DELIMITER = "\\S+";
 
+
     public static final String EXTENSION_TEXT_FILE = ".txt";
 
     public static final ArrayList<Character> ILLEGAL_CHARACTERS = new ArrayList<>(
@@ -40,4 +41,8 @@ public class CommonFormat {
     public static final int STARTING_ASCII = 32;
     public static final int ENDING_ASCII = 126;
     public static final long MAX_FILE_SIZE = 1000000;
+
+    public static final String COMMAND_MODULE = "module";
+    public static final String COMMAND_GO = "go";
+
 }
