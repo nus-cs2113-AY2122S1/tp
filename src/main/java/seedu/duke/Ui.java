@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.ArrayList;
+
 public class Ui {
 
     public static void printPendingCommand() {
@@ -161,5 +163,25 @@ public class Ui {
 
     public static void printInvalidDeleteFormatError() {
         System.out.println("Your current format is wrong. Please follow the proper format of 'delete type index'.");
+    }
+
+    public static void printGetPersonPaid(){
+        System.out.print("Who paid for the expense?: ");
+    }
+
+    public static void printHowMuchDidPersonSpend(String name){
+        System.out.print("How much did " + name + " spend?: ");
+    }
+
+    public static void printPersonNotInExpense(){
+        System.out.println("The person you entered is not in the expense, please try again.");
+    }
+
+    public static void printPeopleInvolved(ArrayList<Person> personArrayList){
+        System.out.println("These are the people who are involved in the expense: ");
+        for (Person person : personArrayList){
+            System.out.println(person.getName() + " ");
+        }
+        System.out.println();
     }
 }

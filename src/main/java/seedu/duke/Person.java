@@ -16,6 +16,11 @@ public class Person {
         return name;
     }
 
+    public void setMoneyOwed(Person person, double amount){
+        double originalAmount = moneyOwed.get(person);
+        moneyOwed.put(person, originalAmount + amount);
+    }
+
     public ArrayList<Expense> getListOfExpenses() {
         return listOfExpenses;
     }

@@ -3,6 +3,7 @@ package seedu.duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Constructor requires a Person class which is the user, amount spent, and a description.
@@ -13,9 +14,11 @@ public class Expense {
     private double amountSpent;
     private String description;
     private String location;
-    private final ArrayList<Person> personsList;
-    private final String category;
+    private ArrayList<Person> personsList;
+    private String category;
     private LocalDate date;
+    private Person payer;
+    private HashMap<Person, Double> amountSplit = new HashMap<>();
 
     public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons, String description) {
         this.amountSpent = amountSpent;
@@ -23,6 +26,17 @@ public class Expense {
         this.description = description;
         this.category = category;
         this.personsList = listOfPersons;
+        for (Person person : listOfPersons){
+            amountSplit.put(person, 0.0);
+        }
+    }
+
+    public void setPayer(Person person){
+        this.payer = person;
+    }
+
+    public void setAmountSplit(Person person, double amount){
+        amountSplit.put(person, amount);
     }
 
     public double getCostPerPerson() {

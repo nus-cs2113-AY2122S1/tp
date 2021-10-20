@@ -208,9 +208,52 @@ public class Parser {
         String expenseCategory = expenseInfo[1].toLowerCase();
         ArrayList<Person> listOfPersonsIncluded = checkValidPersons(Storage.getOpenTrip(), expenseInfo[2]);
         String expenseDescription = getDescription(expenseInfo[2]);
-        currTrip.addExpense(new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription));
+        Expense currExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
+        currTrip.addExpense(currExpense);
+        getAdditionalExpenseInfo(currExpense);
         Ui.printExpenseAddedSuccess();
     }
+
+    //Todo: Ensure amount entered for individuals matches original input amount
+    private static void getAdditionalExpenseInfo(Expense expense){
+        Ui.printGetPersonPaid();
+        String input = Storage.getScanner().nextLine().strip();
+        Person payer = checkValidPersonInExpense(input, expense);
+        if (payer != null){
+            expense.setPayer(payer);
+            double total = 0.0;
+            for (Person person : expense.getPersonsList()) {
+                Ui.printHowMuchDidPersonSpend(person.getName());
+                String amountString = Storage.getScanner().nextLine().strip();
+                double amount;
+                if (amountString.equalsIgnoreCase("equal")){
+                    amount = expense.getAmountSpent()/
+                } else {
+                    amount = Double.parseDouble(Storage.getScanner().nextLine().strip());
+                }
+                payer.setMoneyOwed(person, amount);
+                person.setMoneyOwed(payer, -amount);
+                person.addExpense(expense);
+                total += amount;
+            } if (total != expense.getAmountSpent()){
+                Ui.printMissingMoney;
+                getAdditionalExpenseInfo(expense);
+            }
+        } else {
+            Ui.printPersonNotInExpense();
+            Ui.printPeopleInvolved(expense.getPersonsList());
+            getAdditionalExpenseInfo(expense);
+        }
+    }
+
+    private static Person checkValidPersonInExpense(String name, Expense expense){
+        for (Person person : expense.getPersonsList()) {
+            if (name.equalsIgnoreCase(person.getName())){
+                    return person;
+                }
+            }
+        return null;
+        }
 
     private static boolean checkValidCommand(String inputCommand) {
         return Storage.getValidCommands().contains(inputCommand);
