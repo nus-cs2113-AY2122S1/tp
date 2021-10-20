@@ -111,6 +111,49 @@ Setting difficulty...
 Difficulty set successfully.
 Setting difficulty...
 Difficulty set successfully.
+Setting price...
+Price set successfully.
+Finding recipes called fried fish.....
+====================
+Fried Fish
+Difficulty: 
+Medium
+Calories (kcal): 
+250
+Total price of ingredients: 
+$6.50
+Ingredients needed: 
+1. Fish
+2. Olive Oil
+Method: 
+1. Preheat pan
+2. Add olive oil
+3. Add fish and fry on both sides until crispy
+====================
+GordonException: Index is not a valid float.
+Setting price...
+Price set successfully.
+Finding recipes called cookies.....
+====================
+Cookies
+Difficulty: 
+Easy
+Calories (kcal): 
+300
+Total price of ingredients: 
+$1.09
+Ingredients needed: 
+1. Butter
+2. Flour
+3. Sugar
+Method: 
+1. Set oven to 160 degrees Celcius
+2. Mix all ingredients together in a bowl
+3. Put in preheated oven for 20 mins
+4. Remove and let cool for 10 mins
+====================
+Setting price...
+Price set successfully.
 Searching by calories...
 1. Cookies (Calories (kcal): 300)
 2. Fried Fish (Calories (kcal): 250)

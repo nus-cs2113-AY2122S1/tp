@@ -23,6 +23,12 @@ set meatballs /difficulty medium
 set fish /difficulty insane
 set fish /difficulty medium
 set cookies /difficulty easy
+set fried fish /price 6.50
+check fried fish
+set fried fish /price xyz
+set cookies /price 1.09090909090909
+check cookies
+set caprese /price 1.20
 find /calories 300
 find /calories 
 find /calories -1

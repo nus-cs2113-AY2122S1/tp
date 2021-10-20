@@ -119,6 +119,10 @@ public class Recipe {
         return totalPrice;
     }
 
+    public void setTotalPrice(float newPrice) {
+        this.totalPrice = newPrice;
+    }
+
     public int getCalories() {
         return calories;
     }
