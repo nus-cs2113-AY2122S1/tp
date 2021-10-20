@@ -20,6 +20,9 @@ package "Model" <<Rectangle>> {
 package "Storage" <<Rectangle>> {
 }
 
+package "Ui" <<Rectangle>> {
+}
+
 Parser .down[LOGIC_COLOR_T1].> ParserUtil
 Parser .down[LOGIC_COLOR_T1].> XYZCommandParser : returns >
 
@@ -29,7 +32,9 @@ XYZCommandParser .right[LOGIC_COLOR_T1].> ParserUtil
 XYZCommand -up[LOGIC_COLOR_T1]-|> "{abstract} \n Command"
 
 "{abstract} \n Command" .left[LOGIC_COLOR_T1].> Model
+"{abstract} \n Command" .left[LOGIC_COLOR_T1].> Ui
 "{abstract} \n Command" .down[LOGIC_COLOR_T1].> Storage
 
+Storage -left[hidden]-> Ui
 Model -down[hidden]-> Storage
 @enduml
