@@ -40,8 +40,6 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 ## Features
 
-{Give detailed description of each feature}
-
 ## Commands
 
 ## `add`
