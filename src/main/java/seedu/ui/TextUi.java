@@ -216,17 +216,35 @@ public abstract class TextUi {
     public static void confirmAddDuplicateMessage(ArrayList<Integer> duplicatedIndex, ContactList contactList) {
         if (duplicatedIndex.size() == 1) {
             Contact currentContact = contactList.getContactAtIndex(duplicatedIndex.get(0));
-            String message = "One of your saved contacts has a similar field:\n"
+            String message = "One of your saved contacts has a duplicate field:\n"
                     + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
                     + formatContactFields(currentContact) + "\n\nDo you still want to add the contact?  (y/n)\n";
             printDoubleLineMessage(message);
         } else {
             System.out.println(LINE);
-            System.out.println("These contacts are duplicates:\n");
+            System.out.println("These contacts have duplicate fields:\n");
             for (Integer index : duplicatedIndex) {
                 duplicatedContactsMessage(contactList.getContactAtIndex(index), index);
             }
             System.out.println("Do you still want to add the contact?  (y/n)\n");
+            System.out.println(LINE);
+        }
+    }
+
+    public static void confirmEditDuplicateMessage(ArrayList<Integer> duplicatedIndex, ContactList contactList) {
+        if (duplicatedIndex.size() == 1) {
+            Contact currentContact = contactList.getContactAtIndex(duplicatedIndex.get(0));
+            String message = "One of your saved contacts has a duplicate field:\n"
+                    + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
+                    + formatContactFields(currentContact) + "\n\nDo you still want to edit the contact?  (y/n)\n";
+            printDoubleLineMessage(message);
+        } else {
+            System.out.println(LINE);
+            System.out.println("These contacts have duplicate fields:\n");
+            for (Integer index : duplicatedIndex) {
+                duplicatedContactsMessage(contactList.getContactAtIndex(index), index);
+            }
+            System.out.println("Do you still want to edit the contact?  (y/n)\n");
             System.out.println(LINE);
         }
     }
