@@ -1,1 +1,1 @@
-add-employee|asdsd|12312
+add-dish|Pizza|10.0|30.0
