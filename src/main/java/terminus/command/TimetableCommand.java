@@ -16,6 +16,8 @@ import static terminus.common.CommonUtils.isValidDay;
 public class TimetableCommand extends Command {
     private String day;
 
+    static int index = 0;
+
     public TimetableCommand() {
 
     }
@@ -36,14 +38,22 @@ public class TimetableCommand extends Command {
         }
     }
 
+    public StringBuilder listAllSchedule( ContentManager<Link> contentManager) {
+        StringBuilder schedules = new StringBuilder();
+        for (Link schedule : contentManager.getContents()) {
+            index++;
+            schedules.append(String.format("%d. %s\n", index, schedule.getViewDescription()));
+        }
+        return schedules;
+    }
+
     public CommandResult execute(Ui ui, ModuleManager moduleManager) {
         String[] modules = moduleManager.getAllModules();
         StringBuilder result = new StringBuilder();
         for (String moduleName : modules) {
             NusModule module = moduleManager.getModule(moduleName);
             ContentManager<Link> contentManager = module.getContentManager(Link.class);
-            String schedules =  contentManager.listAllContents();
-            result.append(schedules);
+            result.append(listAllSchedule(contentManager));
         }
 
         if (result.toString().isBlank()) {
