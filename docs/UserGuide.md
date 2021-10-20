@@ -27,6 +27,8 @@ It is an integrated solution that provides real-time tracking of stock, orders a
     * [Purge data](#purging-existing-data--purge)
     * [Help](#showing-help-page--help)
     * [Exit](#exiting-medivault--exit)
+    * [Data Storage](#data-storage)
+    * [Data Editing](#data-editing)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -104,16 +106,27 @@ Medication added: paracetamol
 
 ### Deleting a medication stock: `delete`
 
-Deletes medication from the inventory by specifying stock Id.
+Deletes medication from the inventory.
 
-Format: `delete i/STOCK_ID`
+* Able to delete a specific stock by specifying stock Id using `i/STOCK_ID`.
+* Able to delete multiple stocks that have expiry date before and equals to specified date using `e/EXPIRY_DATE`.
 
-Example: `delete i/3`
+Format: `deletestock [i/STOCK_ID e/EXPIRY_DATE]`
+
+Example 1 (Deletion by stock Id): `deletestock i/3`
 
 Expected output:
 
 ```
-Medication deleted: Stock_Id=3
+Deleted row with Stock Id: 3
+```
+
+Example 2 (Deletion by expiry date): `deletestock e/10-10-2021`
+
+Expected output:
+
+```
+Deleted expired medications! Rows deleted: 4
 ```
 
 ### Updating medication stock information: `update`
@@ -286,6 +299,61 @@ Order deleted for Order Id 1
 
 ### Listing order : `listorder`
 
+Lists all order records in the application.
+
+* All parameters for `listorder` command are optional, you can choose to list the records by any of the parameters.
+* You are able to listorder by id, name, quantity, date, status and also sort/rsort by columns.
+* Example 1 demonstrates the list of all order records without parameters.
+* Example 2 demonstrates the list of all orders that are PENDING.
+
+Format: `listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN NAME}`
+
+Example 1: `listorder`
+
+Expected output:
+
+```
++====+==============+==========+============+===========+
+| ID |     NAME     | QUANTITY |    DATE    |  STATUS   | 
++====+==============+==========+============+===========+
+| 1  |   PANADOL    |   100    | 09-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+| 2  |   VICODIN    |    30    | 09-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+| 3  |   VICODIN    |    50    | 10-10-2021 | DELIVERED | 
++----+--------------+----------+------------+-----------+
+| 4  | SIMVASTATIN  |    20    | 11-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+| 5  |  LISINOPRIL  |   200    | 12-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+| 6  | AZITHROMYCIN |   100    | 13-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+| 7  |   PANADOL    |    50    | 13-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+```
+
+Example 2: `listorder s/pending`
+
+Expended output:
+
+```
++====+==============+==========+============+=========+
+| ID |     NAME     | QUANTITY |    DATE    | STATUS  | 
++====+==============+==========+============+=========+
+| 1  |   PANADOL    |   100    | 09-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+| 2  |   VICODIN    |    30    | 09-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+| 4  | SIMVASTATIN  |    20    | 11-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+| 5  |  LISINOPRIL  |   200    | 12-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+| 6  | AZITHROMYCIN |   100    | 13-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+| 7  |   PANADOL    |    50    | 13-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+```
+
 ### Receiving order : `receiveorder`
 
 ### Archiving data : `archive`
@@ -371,11 +439,30 @@ Expected output:
 Quitting MediVault...
 ```
 
+### Data Storage
+MediVault will automatically save data after any operation that modifies stock, order or dispense. The data will be 
+stored in 3 separate files (data/stock.txt, data/order.txt, data/dispense.txt). Data is saved in a specific format with
+fields delimited by a pipe `|`. 
+* For data/stock.txt
+  * `ID|NAME|PRICE|QUANTITY|EXPIRY_DATE|DESCRIPTION|MAX_QUANTITY`
+* For data/order.txt
+  * `ID|NAME|QUANTITY|DATE|STATUS`
+* For data/dispense.txt
+  * `ID|NAME|QUANTITY|CUSTOMER_ID|DATE|STAFF|STOCK_ID`
+
+### Data Editing
+It is possible to directly edit the data files but it is **NOT** recommended unless you know exactly what you are doing.
+If MediVault detects corruption or invalid data, you may not be able to load the data into the program. In that case, 
+either fix the data or in the worst case scenario, delete the corresponding data file.
+Also, it may result in unintended behaviour if data file is tampered with while the program is running.
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Unfortunately, MediVault does not support saving information to files in v1.0.
+**A**: You can transfer data to another computer by moving the 3 data files into the folder where MediVault.jar is. 
+Ensure that the data files are in a folder named `data`. You should expect to see `stock.txt, order.txt, dispense.txt`
+in that folder.
 
 ## Command Summary
 
