@@ -36,7 +36,9 @@ public class Recipe {
      *
      * @return Ingredients and the respective quantities of the recipe.
      */
-    public TreeMap<String, IngredientQuantity> getIngredientQuantities() { return ingredientQuantities; }
+    public TreeMap<String, IngredientQuantity> getIngredientQuantities() {
+        return ingredientQuantities;
+    }
 
     /**
      * Adds an ingredient and its associated quantity to the recipe.
@@ -53,9 +55,9 @@ public class Recipe {
         final IngredientStorage ingredientStorage = ingredientRepository.findWithNullReturn(ingredientName);
         Ingredient ingredient;
         if (ingredientStorage == null) {
-            ingredientRepository.add(ingredientName,"");
+            ingredientRepository.add(ingredientName, "");
             ingredientNameIfNotInList = ingredientName + "\n";
-            ingredient = new Ingredient(ingredientName,"");
+            ingredient = new Ingredient(ingredientName, "");
         } else {
             ingredient = ingredientStorage.getIngredient();
         }
