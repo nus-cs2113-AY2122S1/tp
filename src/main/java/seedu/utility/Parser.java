@@ -543,6 +543,8 @@ public class Parser {
         default:
             expense = new Expense("FAIL EXPENSE", 9999999, ExpenseCategory.NULL, expenseDate);
         }
+        assert expenseAmount > 0;
+        assert !expenseDescription.isBlank();
         return expense;
     }
 
@@ -583,6 +585,8 @@ public class Parser {
         default:
             income = new Income("FAIL INCOME", 999999, IncomeCategory.NULL, incomeDate);
         }
+        assert incomeAmount > 0;
+        assert !incomeDescription.isBlank();
         return income;
     }
 
