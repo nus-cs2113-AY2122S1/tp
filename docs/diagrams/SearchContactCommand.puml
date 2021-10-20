@@ -1,0 +1,64 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+
+-> ":MainParser": execute()
+activate ":MainParser"
+
+":MainParser" -> ":MainParser" :getCommandWord(userInput:String)
+":MainParser" -> ":SearchContactParser" :parseSearchQuery(userInput:String)
+activate ":SearchContactParser"
+
+":SearchContactParser" -> ":SearchContactParser" :parseSearchQuery(userInput:String)
+":SearchContactParser" -> ":SearchContactParser" :getDetailFlag(userInput:String)
+
+
+":SearchContactParser" -> ":SearchContactCommand" : execute(query:String, detailIndex:int)
+activate ":SearchContactCommand"
+
+":SearchContactCommand" -> ":ContactList" : searchContact(query:String, detailIndex:int)
+activate ":ContactList"
+
+loop for all contacts
+":ContactList" -> ":ContactList" :getDetailFlag(userInput:String)
+alt#gold #lightgreen NAME_INDEX
+    alt contact.getName().contains(query)
+    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
+    activate ":TextUI"
+    deactivate ":TextUI"
+    end
+
+    else GITHUB_INDEX
+    alt contact.getGithub().contains(query)
+    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
+    activate ":TextUI"
+    deactivate ":TextUI"
+    end
+
+    else LINKEDIN_INDEX
+    alt contact.getLinkedIn().contains(query)
+    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
+    activate ":TextUI"
+    deactivate ":TextUI"
+    end
+
+    else TELEGRAM_INDEX
+    alt contact.getTelegram().contains(query)
+    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
+    activate ":TextUI"
+    deactivate ":TextUI"
+    end
+    else TWITTER_INDEX
+    alt contact.getTwitter().contains(query)
+    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
+    activate ":TextUI"
+    deactivate ":TextUI"
+    end
+    else EMAIL_INDEX
+    alt contact.getEmail().contains(query)
+    ":ContactList" -> ":TextUI" : viewContactMessage(contact, i)
+    activate ":TextUI"
+    deactivate ":TextUI"
+    end end
+end
+@enduml
