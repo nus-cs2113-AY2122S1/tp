@@ -44,10 +44,15 @@ public class Ui {
     private static final String FIND_FORMAT = "To Find Using Date: find YYYY-MM-DD\n"
             + "To Find Based On Keyword: find KEYWORD";
     private static final String BALANCE_FORMAT = "To Display Total Balance: balance";
+    private static final String SET_BUDGET_FORMAT = "To Set Budgets: set_budget c/CATEGORY a/AMOUNT";
+    private static final String CHECK_BUDGET_FORMAT = "To Check Budgets: check_budget c/CATEGORY";
+    private static final String SET_THRESHOLD_FORMAT = "To Set Threshold Value for Reminders: "
+            + "set_threshold t/THRESHOLD";
 
     private static final List<String> commands = Arrays.asList(HELP_FORMAT, ADD_EXPENSE_FORMAT, DEL_EXPENSE_FORMAT,
             LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, EXPENSE_BETWEEN_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT, 
-            LIST_INCOME_FORMAT, TOTAL_INCOME_FORMAT, FIND_FORMAT, BALANCE_FORMAT, INCOME_BETWEEN_FORMAT, END_FORMAT);
+            LIST_INCOME_FORMAT, TOTAL_INCOME_FORMAT, FIND_FORMAT, BALANCE_FORMAT, INCOME_BETWEEN_FORMAT,
+            SET_BUDGET_FORMAT, CHECK_BUDGET_FORMAT, SET_THRESHOLD_FORMAT, END_FORMAT);
 
 
 
@@ -363,6 +368,12 @@ public class Ui {
         printLine();
         System.out.printf("Current %s limit is $%.2f", category.toString(), budgetLimit);
         System.out.print(newLine);
+        printLine();
+    }
+
+    public void printThresholdConfirmation(double threshold) {
+        printLine();
+        System.out.println("Threshold for budget reminders set to " + threshold);
         printLine();
     }
 }

@@ -13,6 +13,7 @@ import seedu.commands.InvalidCommand;
 import seedu.commands.ListExpenseCommand;
 import seedu.commands.ListIncomeCommand;
 import seedu.commands.SetBudgetCommand;
+import seedu.commands.SetThresholdCommand;
 import seedu.commands.ShowGraphCommand;
 import seedu.commands.TotalExpenseBetweenCommand;
 import seedu.commands.TotalExpenseCommand;
@@ -93,6 +94,9 @@ public class Parser {
 
     private static final Pattern CHECK_BUDGET_ARGUMENT_FORMAT =
             Pattern.compile("c/(?<category>[^/]+)");
+
+    private static final Pattern SET_THRESHOLD_ARGUMENT_FORMAT =
+            Pattern.compile("t/(?<threshold>[^/]+)");
     
     private static final String HELP_COMMAND_KEYWORD = "help";
     private static final String ADD_EXPENSE_KEYWORD = "add_ex";
@@ -111,6 +115,7 @@ public class Parser {
     private static final String CLEAR_ALL_ENTRIES_KEYWORD = "clear_all_entries";
     private static final String SET_BUDGET_KEYWORD = "set_budget";
     private static final String CHECK_BUDGET_KEYWORD = "check_budget";
+    private static final String SET_THRESHOLD_KEYWORD = "set_threshold";
     
     private static final String DATA_SEPARATOR = ", ";
 
@@ -177,6 +182,8 @@ public class Parser {
             return prepareSetBudget(arguments);
         case CHECK_BUDGET_KEYWORD:
             return prepareCheckBudget(arguments);
+        case SET_THRESHOLD_KEYWORD:
+            return prepareSetThreshold(arguments);
         default:
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -590,7 +597,15 @@ public class Parser {
         if (dataAmount.isBlank()) {
             return new InvalidCommand(Messages.BLANK_AMOUNT_MESSAGE);
         }
-        double budgetAmount = Double.parseDouble(dataAmount);
+        double budgetAmount;
+        try {
+            budgetAmount = Double.parseDouble(dataAmount);
+        } catch (NumberFormatException e) {
+            return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        }
+        if (budgetAmount < 0) {
+            return new InvalidCommand(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        }
 
         switch (expenseCategory) {
         case "FOOD":
@@ -641,5 +656,25 @@ public class Parser {
         default:
             return new InvalidCommand(Messages.INVALID_BUDGET_CATEGORY_MESSAGE);
         }
+    }
+
+    private Command prepareSetThreshold(String arguments) {
+        final Matcher matcher = SET_THRESHOLD_ARGUMENT_FORMAT.matcher(arguments.trim());
+        if (!matcher.matches()) {
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+        }
+
+        String thresholdString = matcher.group("threshold").trim();
+        double thresholdValue;
+        try {
+            thresholdValue = Double.parseDouble(thresholdString);
+        } catch (NumberFormatException e) {
+            return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        }
+        if ((thresholdValue < 0) | (thresholdValue > 1)) {
+            return new InvalidCommand(Messages.INVALID_THRESHOLD_MESSAGE);
+        }
+
+        return new SetThresholdCommand(thresholdValue);
     }
 }

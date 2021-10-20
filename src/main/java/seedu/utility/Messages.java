@@ -41,4 +41,5 @@ public class Messages {
             + "Allowance or Adhoc.";
     public static final String INVALID_BUDGET_CATEGORY_MESSAGE = "Input only 1 of these 6 categories: Food, "
             + "Transport, Bills, Medical, Entertainment or Overall";
+    public static final String INVALID_THRESHOLD_MESSAGE = "Threshold value should between 0 and 1.";
 }
