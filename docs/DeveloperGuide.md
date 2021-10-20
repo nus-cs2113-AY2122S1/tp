@@ -66,7 +66,7 @@ user issues the command `add task homework -d mon`.
 ![ArchitectureDemoSequenceDiagram](images/ArchitectureDemoSequenceDiagram.png)
 
 ### UI component
-**API** : [`Ui.java`](../src/main/java/seedu/duke/ui/Ui.java)
+**API** : [`Ui.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/ui/Ui.java)
 
 The `Ui` component contains:
 * the method `readUserResponse()` to read from the standard input.
