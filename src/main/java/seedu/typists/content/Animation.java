@@ -10,8 +10,9 @@ public class Animation {
             for (int i = 0; i < lastLine.length(); i++) {
                 temp += " ";
             }
-            if (temp.length() > 1)
+            if (temp.length() > 1) {
                 System.out.print("\r" + temp);
+            }
         }
         System.out.print("\r" + line);
         lastLine = line;
@@ -25,18 +26,18 @@ public class Animation {
 
     public void animateWait(String s) {
         switch (animWait) {
-            case 1:
-                print("[ \\ ] " + s);
-                break;
-            case 2:
-                print("[ | ] " + s);
-                break;
-            case 3:
-                print("[ / ] " + s);
-                break;
-            default:
-                animWait = 0;
-                print("[ - ] " + s);
+        case 1:
+            print("[ \\ ] " + s);
+            break;
+        case 2:
+            print("[ | ] " + s);
+            break;
+        case 3:
+            print("[ / ] " + s);
+            break;
+        default:
+            animWait = 0;
+            print("[ - ] " + s);
         }
         animWait++;
     }
@@ -53,24 +54,24 @@ public class Animation {
 
     public void animateLeft(String s) {
         switch (animLeft) {
-            case 1:
-                print("     | " + s);
-                break;
-            case 2:
-                print("    | " + s);
-                break;
-            case 3:
-                print("   | " + s);
-                break;
-            case 4:
-                print("  | " + s);
-                break;
-            case 5:
-                print(" | " + s);
-                break;
-            default:
-                animLeft = 0;
-                print("| " + s);
+        case 1:
+            print("     | " + s);
+            break;
+        case 2:
+            print("    | " + s);
+            break;
+        case 3:
+            print("   | " + s);
+            break;
+        case 4:
+            print("  | " + s);
+            break;
+        case 5:
+            print(" | " + s);
+            break;
+        default:
+            animLeft = 0;
+            print("| " + s);
         }
         animLeft++;
     }

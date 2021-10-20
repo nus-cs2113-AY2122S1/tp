@@ -43,8 +43,7 @@ public class ErrorGame extends Game {
                 userInput = in.nextLine();
                 if (userInput.equals("!bye")) {
                     break;
-                }
-                else {
+                } else {
                     inputLines.add(userInput);
                     Animation animation = new Animation();
                     animation.resetAnimLeft();
