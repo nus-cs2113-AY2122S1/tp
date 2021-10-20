@@ -7,8 +7,8 @@ import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.module.ModuleManager;
 
-import static terminus.command.TimetableCommand.getDailySchedule;
 import static terminus.common.CommonUtils.getCurrentDay;
+import static terminus.timetable.Timetable.getDailySchedule;
 
 public class MainCommandParser extends CommandParser {
 
