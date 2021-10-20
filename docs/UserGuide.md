@@ -137,7 +137,14 @@ Duke is designed for users who are familiar with Command Line Interface (CLI) op
 
 A 'cheat sheet' of commands here
 
-* add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>] [/t </at TRAINING_TIME> </v TRAINING_VENUE>] [/att </m MEMBER_NAME> </s STUDENT_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]
-* delete [/m <MEMBER_INDEX_NUMBER>] [/t <TRAINING_INDEX_NUMBER>] [/att <ATTENDANCE_INDEX_NUMBER>]
-* edit
-* list [/m] [/t] [/att]
+Action| Syntax |Remarks|
+|-----|----------|----|
+|add member| add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| 
+|add training| add [/t </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| 
+|add attendance| add [/att </m MEMBER_NAME> </s STUDENT_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]|
+|delete member| delete [/m <MEMBER_INDEX_NUMBER>]| Get the index by calling `list /m`
+|delete training|delete [/t <TRAINING_INDEX_NUMBER>]| Get the index by calling `list /t`
+|delete attendance|delete [/att <ATTENDANCE_INDEX_NUMBER>]| Get the index by calling `list /att`
+|edit member|edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>]| Index is compulsory, the rest are optional fields
+|edit training|edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>]| Index is compulsory, the rest are optional fields
+|list| list [/m] [/t] [/att]| /m for Member, /t for Training/ /att for Attendance
