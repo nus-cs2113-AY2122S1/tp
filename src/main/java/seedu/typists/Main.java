@@ -105,7 +105,6 @@ public class Main {
     }
 
     public void exit() {
-
         uiBot.showBye();
     }
 
@@ -121,7 +120,7 @@ public class Main {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new Main().run();
     }
 }

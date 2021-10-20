@@ -1,5 +1,6 @@
 package seedu.typists.game;
 
+import seedu.typists.content.Animation;
 import seedu.typists.ui.TextUi;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -16,31 +17,47 @@ public class ErrorGame extends Game {
         ui = new TextUi();
         inputLines = new ArrayList<>();
         wordLines = getWordLine(targetWordSet, wordsPerLine);
-        startGame();
+        try {
+            startGame();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean readyToStartGame() {
         Scanner in = new Scanner(System.in);
         String command = "";
         while (!command.equals("yes")) {
-            ui.printScreen("Do you want to start now?");
+            ui.printScreen("Do you want to start now? (enter !bye to quit the game at any time)");
             command = in.nextLine();
         }
         return true;
     }
 
-    public void startGame() {
+    public void startGame() throws InterruptedException {
         if (readyToStartGame()) {
+            String userInput = "";
+            Scanner in = new Scanner(System.in);
             for (int i = 0; i < wordLines.size(); i++) {
                 ui.printLine(wordLines.get(i));
+                userInput = in.nextLine();
+                if (userInput.equals("!bye")) {
+                    break;
+                }
+                else {
+                    inputLines.add(userInput);
+                    Animation animation = new Animation();
+                    animation.resetAnimLeft();
+                    int k = 0;
+                    while (k < 6) {
+                        animation.animateLeft("Line " + (i + 1) + " out of " + wordLines.size());
+                        Thread.sleep(300);
+                        k++;
+                    }
+                    System.out.println("");
+                }
             }
+            System.out.println("Game Finished.");
         }
-        Scanner in = new Scanner(System.in);
-        for (int i = 0; i < wordLines.size(); i++) {
-            String userInput = in.nextLine();
-            inputLines.add(userInput);
-            i++;
-        }
-        System.out.println("Game Finished.");
     }
 }

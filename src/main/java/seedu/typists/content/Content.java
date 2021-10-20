@@ -120,7 +120,7 @@ public class Content {
                 s += (rg.randomString(r.nextInt(10) + 5) + " ");
             }
             this.content = s;
-            ui.showText("Content set " + this.content);
+            ui.showText("Content set");
         }
     }
 }
