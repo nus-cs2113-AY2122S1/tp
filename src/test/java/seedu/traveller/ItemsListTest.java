@@ -70,4 +70,8 @@ public class ItemsListTest {
 
         assertEquals(ans.toString(), itemsList.searchItem("Collins").toString());
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 1a73959b5f6c23170726104a455ad54c6eb80228
