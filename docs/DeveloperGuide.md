@@ -49,15 +49,18 @@ The intended audience for this document are developers looking to introduce new 
 6. Accept all defaults as prompted by IntelliJ.
 ## 3. Design
 
-### 3.1. Architecture
+### 3.1. System Architecture
+
+![System Architecture](images/SysArch%20Diagram.png)
 
 The **_Architecture Diagram_** above explains the high-level design of the application.
 
+
 The App consists of 6 major components:
+* `Main`: Initializes and connects the components together
 * `UI`: Class that deals with the interaction with the user.
-* `Main`: The main body of the application.
 * `Parser`: Class that processes inputs and executes commands.
-* `Commands`: A set of classes covering the functionalities of the App.
+* `Command`: A set of classes covering the functionalities of the App.
 * `IngredientList`: Class that holds the information of ingredients.
 * `Storage`: Reads data from, and writes data
 
@@ -66,11 +69,47 @@ The App consists of 6 major components:
 The _sequence diagram_ below shows how the components interact with each other given a scenario where the user 
 enters the input `add n/carrot a/1 e/2021-11-12`
 
+<<insert sequence diagram here>>
 
+Each of the 5 components (apart from `main`) can be found in their respective packages.
 
+### 3.2 UI component
 
+The **UI** component can be found in the `UI` package.
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+<<description here>>
+
+### 3.3 Parser component
+
+The **Parser** component can be found in the `parser` package
+
+<<description here>>
+
+### 3.4 IngredientList component
+
+The **IngredientList** component can be found in the `ingredients` package
+
+Below is a partial class diagram of the `IngredientList` component
+
+![image](images/IngredientListDiagram.png)
+
+The `IngredientList` class 
+* receives stored data(if any) from `Storage` when the first command is executed
+* stores all of the `Ingredient` objects in an ArrayList. 
+* sends the stored data to the `Storage` class for storage after command execution 
+
+Each of the `Ingredient` objects contains information about an ingredient, namely its `name`, `amount` in stock and the `expiry` date.
+
+### 3.5 Storage component
+
+The **Storage** component can be found in the `Storage` package
+
+### 3.6 Command component
+
+The **Command** component can be found in the `command` package
+
+The package consists of an abstract class `command` and `classes` corresponding to each functionality.
+
 
 ## 4. Implementation
 
