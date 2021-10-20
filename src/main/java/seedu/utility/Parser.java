@@ -128,7 +128,7 @@ public class Parser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String arguments = matcher.group("arguments").trim();
 
         switch (commandWord) {
         case HELP_COMMAND_KEYWORD:
@@ -169,7 +169,7 @@ public class Parser {
     }
 
     private Command prepareIncomeRange(String arguments) {
-        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -185,7 +185,7 @@ public class Parser {
     }
     
     private Command prepareExpenseRange(String arguments) {
-        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -201,22 +201,22 @@ public class Parser {
     }
     
     private Command prepareBalance(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new BalanceCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
     private Command prepareFind(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
-        return new FindCommand(arguments.trim());
+        return new FindCommand(arguments);
     }
     
     
     private Command prepareHelp(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new HelpCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
@@ -227,7 +227,7 @@ public class Parser {
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private Command prepareAddExpense(String arguments) {
-        final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -278,7 +278,7 @@ public class Parser {
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private Command prepareAddIncome(String arguments) {
-        final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -323,7 +323,7 @@ public class Parser {
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private Command prepareDeleteExpense(String arguments) {
-        final Matcher matcher = DELETE_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = DELETE_EXPENSE_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -345,7 +345,7 @@ public class Parser {
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private Command prepareDeleteIncome(String arguments) {
-        final Matcher matcher = DELETE_INCOME_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = DELETE_INCOME_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -363,49 +363,49 @@ public class Parser {
     }
 
     private Command prepareListExpense(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new ListExpenseCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareListIncome(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new ListIncomeCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareTotalExpense(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new TotalExpenseCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareTotalIncome(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new TotalIncomeCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
     private Command prepareClearAllEntries(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new ClearAllEntriesCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareShowGraph(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new ShowGraphCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareExit(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new ExitCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);

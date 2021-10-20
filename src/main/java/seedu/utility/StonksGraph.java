@@ -121,9 +121,9 @@ public class StonksGraph {
         drawXAxis();
         ArrayList<Double> monthlyIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(2021);
         ArrayList<Double> monthlyExpenseBreakdowns = finances.getMonthlyExpenseBreakdown(2021);
-        
-        int currentMonthInIndex = currentMonthInIndex();
+
         Month currentMonth = currentMonth();
+        int currentMonthInIndex = currentMonthInIndex();
         double currentMonthExpense = monthlyExpenseBreakdowns.get(currentMonthInIndex);
         double currentMonthIncome = monthlyIncomeBreakdowns.get(currentMonthInIndex);
         System.out.printf("Current month (" + currentMonth + ") total expense: " + "$%.2f\n", currentMonthExpense);
@@ -135,7 +135,7 @@ public class StonksGraph {
                 int incomeBar = (int)(monthlyIncomeBreakdowns.get(monthIndex) / BAR_VALUE);
                 int expenseBar = (int)(monthlyExpenseBreakdowns.get(monthIndex) / BAR_VALUE);
 
-                if (x >= 7 && x < 17) {
+                if (isWithinRowsConsistingOfBarGraph(x)) {
                     if (isExpenseBar(y)) {
                         setExpenseBar(x, y, expenseBar);
                     }
@@ -145,6 +145,10 @@ public class StonksGraph {
                 }
             }
         }
+    }
+
+    private boolean isWithinRowsConsistingOfBarGraph(int x) {
+        return x >= 7 && x < 17;
     }
 
     private void drawLegend() {
@@ -204,7 +208,7 @@ public class StonksGraph {
     
     private int currentMonthInIndex() {
         LocalDate currentDate = LocalDate.now();
-        return currentDate.getMonthValue();
+        return currentDate.getMonthValue() - 1;
     }
     
     private Month currentMonth() {

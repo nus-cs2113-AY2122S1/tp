@@ -4,7 +4,7 @@ package seedu.utility;
  * Contains all the warning messages to be sent to the user when an invalid input is given.
  */
 public class Messages {
-    public static final String INVALID_COMMAND_MESSAGE = 
+    public static final String INVALID_COMMAND_MESSAGE =
             "Invalid command. Use \"help\" to show the list of possible commands.";
     public static final String NON_NUMERIC_AMOUNT_MESSAGE = "Only numeric inputs are allowed for amount.";
     public static final String N0N_NUMERIC_INDEX_MESSAGE = "Only numeric inputs are allowed for index.";
@@ -25,12 +25,6 @@ public class Messages {
     public static final String EMPTY_INCOME_MESSAGE = "You have not entered any income!";
     public static final String EMPTY_EXPENSE_MESSAGE = "You have not spent anything!";
     public static final String FOUND_LIST_MESSAGE = "Below is a list of all your findings!";
-
-    public static final String BYE_MESSAGE = "██████  ██    ██ ███████        ██  \n"
-            + "██   ██  ██  ██  ██          ██  ██ \n"
-            + "██████    ████   █████           ██ \n"
-            + "██   ██    ██    ██          ██  ██ \n"
-            + "██████     ██    ███████        ██ ";
     public static final String BLANK_CATEGORY_MESSAGE = "Your category is empty!";
     public static final String DATE_FORMAT_MESSAGE = "Your start and end dates must be in a YYYY-MM-DD format!";
     public static final String ALL_DATA_CLEARED = "All your entries have been cleared!";
@@ -38,4 +32,23 @@ public class Messages {
             + "Transport, Bills, Medical or Entertainment.";
     public static final String INVALID_INCOME_CATEGORY_MESSAGE = "Input only 1 of these 3 categories: Salary, " 
             + "Allowance or Adhoc.";
+
+
+
+    public static final String SEPARATOR_MESSAGE = "----------------------------------------------------------------"
+            + "-------------------------------------";
+
+    public static final String BYE_MESSAGE = "██████  ██    ██ ███████        ██  \n"
+            + "██   ██  ██  ██  ██          ██  ██ \n"
+            + "██████    ████   █████           ██ \n"
+            + "██   ██    ██    ██          ██  ██ \n"
+            + "██████     ██    ███████        ██ ";
+
+    public static final String LOGO_MESSAGE = "███████ ████████  ██████  ███    ██ ██   ██ ███████"
+            + "     ██   ██ ██████  \n██         ██    ██    ██ ████   ██ ██  ██  ██           ██ ██  ██   ██ \n"
+            + "███████    ██    ██    ██ ██ ██  ██ █████   ███████       ███   ██   ██ \n"
+            + "     ██    ██    ██    ██ ██  ██ ██ ██  ██       ██      ██ ██  ██   ██ \n"
+            + "███████    ██     ██████  ██   ████ ██   ██ ███████     ██   ██ ██████  ";
+
+
 }
