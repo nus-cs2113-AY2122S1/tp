@@ -50,7 +50,7 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "   __3__, , _");
         new DeleteCommand(arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist().contains(TO_DELETE));
+        assertFalse(TaskManager.listTasklist(new HashMap<String, String>()).contains(TO_DELETE));
     }
 
     @Test
@@ -76,7 +76,7 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "  _3-5      ");
         new DeleteCommand(arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist().contains(TO_DELETE));
+        assertFalse(TaskManager.listTasklist(new HashMap<String, String>()).contains(TO_DELETE));
     }
 
     @Test
@@ -102,7 +102,7 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "  _3-5,   1   ");
         new DeleteCommand(arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist().contains(TO_DELETE));
+        assertFalse(TaskManager.listTasklist(new HashMap<String, String>()).contains(TO_DELETE));
     }
 
     @Test
@@ -128,7 +128,7 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "1, _ _ 3    _,_   5");
         new DeleteCommand(arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist().contains(TO_DELETE));
+        assertFalse(TaskManager.listTasklist(new HashMap<String, String>()).contains(TO_DELETE));
     }
 
     @Test
@@ -154,7 +154,7 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "1-2, _ _ 4    _,_   5");
         new DeleteCommand(arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist().contains(TO_DELETE));
+        assertFalse(TaskManager.listTasklist(new HashMap<String, String>()).contains(TO_DELETE));
     }
 
     @Test

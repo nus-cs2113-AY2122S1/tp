@@ -19,7 +19,7 @@ public class DeadlineFactory {
 
     public static Deadline getDeadline(HashMap<String, String> flags) throws GetTaskFailedException {
         try {
-            hasRequiredArguments(flags);
+            checkForRequiredArguments(flags);
 
             String description = flags.get(DeadlineFlag.DESCRIPTION);
             String due = flags.get(DeadlineFlag.DUE_DATE);
@@ -43,7 +43,8 @@ public class DeadlineFactory {
         }
     }
 
-    private static void hasRequiredArguments(HashMap<String, String> flags) throws RequiredArgmentNotProvidedException {
+    private static void checkForRequiredArguments(HashMap<String, String> flags)
+            throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : DeadlineFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);
             if (flag == null) {
