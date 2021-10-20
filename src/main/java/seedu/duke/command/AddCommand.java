@@ -7,7 +7,7 @@ import seedu.duke.localtime.CurrentDate;
 
 import java.io.IOException;
 
-public class AddCommand implements Command {
+public class AddCommand extends Command {
 
     private static final String ADDED_MESSAGE = "Got it. This ingredient has been added to the inventory:\n" + "\t";
 
