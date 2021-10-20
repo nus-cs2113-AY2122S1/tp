@@ -1,5 +1,8 @@
 package seedu.duke.modules;
 
+
+import seedu.duke.modules.ModuleList;
+
 public class Module {
     protected String moduleCode;
     protected String moduleName;
@@ -21,6 +24,15 @@ public class Module {
 
     public double getModuleCredits() {
         return moduleCredits;
+    }
+
+    public int getModuleIndex(ModuleList ModuleMasterList) {
+        for (int i = 0; i < ModuleMasterList.getSize(); i++) {
+            if (moduleName.equals(ModuleMasterList.get(i).getModuleName())) {
+                return i + 1;
+            }
+        }
+        return 0;
     }
 
     public void setModuleCode(String moduleCode) {
