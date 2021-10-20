@@ -7,6 +7,7 @@ import seedu.duke.command.DeleteCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.InvalidCommand;
 import seedu.duke.command.ListCommand;
+import seedu.duke.command.SortCommand;
 import seedu.duke.command.addtask.DeadlineCommand;
 import seedu.duke.command.addtask.EventCommand;
 import seedu.duke.command.addtask.TodoCommand;
@@ -74,6 +75,8 @@ public class CommandParser {
             return new ListCommand(commandOptions);
         case DELETE:
             return new DeleteCommand(commandOptions);
+        case SORT:
+            return new SortCommand(commandOptions);
         default:
             return new InvalidCommand();
         }

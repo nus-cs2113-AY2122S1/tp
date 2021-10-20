@@ -7,14 +7,16 @@ import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
+import seedu.duke.task.TypeEnum;
 import seedu.duke.task.reminder.Reminder;
 
 public class Deadline extends Task {
 
+    private final TypeEnum taskType = TypeEnum.DEADLINE;
+
     private static final String DEADLINE_DATE_DESCRIPTION_REGEX = " (dueDate: %s)";
 
     private static final String DUE_DATE_NOT_NULL_ASSERTION = "dueDate for Deadline cannot be null.";
-
 
     private Reminder reminder;
 
@@ -39,6 +41,10 @@ public class Deadline extends Task {
         this(description, dueDate);
         setPriority(priority);
         setRecurrence(recurrence);
+    }
+
+    public TypeEnum getTaskType() {
+        return this.taskType;
     }
 
     public Date getDueDate() {
