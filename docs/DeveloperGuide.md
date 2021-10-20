@@ -54,10 +54,16 @@ a list of potential exchange Universities based on the users study plan, module 
 |v1.0|beginner user|add a NUS Module to my preferred list|save my module preferences for the future|
 |v1.0|beginner user|list down all Universities in my preferred list|keep track of my target schools for SEP|
 |v1.0|beginner user|list down all NUS modules in my preferred list|keep track of the list of NUS modules I want to complete during SEP|
+|v1.0|beginner user|delete a University from the selected list|remove the University that I am not interested in|
+|v1.0|beginner user|delete a module from the selected list|remove the module that I do not consider to enrol in the future|
 |v1.0|user|interact with the application on the command line in an efficient way|
-|v2.0|familiar user|save my university and module information|access my information when I restart the application|
+|v2.0|familiar user|save my university and module information|maintain access to my information when I restart the application|
 |v2.0|new user|view the program instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a University by name|locate a University without having to go through the entire list|
+|v2.0|familiar user|search the available module mappings for a University based on the selected module list|get a list of module mappings for this university based on my selected modules|
+|v2.0|familiar user|add a pair of module mapping for a university|save a module mapping under the university that I selected|
+|v2.0|familiar user|delete a mapping pair of module for a university|remove a module mapping under a selected university|
+|v2.0|familiar user|input the command using name or index|modifying the list by keying in name of index of universities or modules|
 
 ## Non-Functional Requirements
 
