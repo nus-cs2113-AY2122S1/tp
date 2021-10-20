@@ -1,23 +1,26 @@
 @startuml
 skinparam classAttributeIconSize 0
 skinparam stereotypeBackgroundColor White
+hide circle
+hide empty members
+
 
 skinparam class {
-BackgroundColor Pink
+BackgroundColor Yellow
 ArrowColor Red
 }
 
 together {
 package "parser" {
-abstract Parser #lightgrey ##[bold]grey {
+abstract Parser #yellow ##[bold]grey {
 ~LOGGER:Logger {static}
 #userInputString:String
 +Parser(userInputString:String)
 +getCommandType(userInputString:String):String
 #getCommandArguments(userInputString:String):String
 +parseInput():Command {abstract}
-getExerciseArgs(commandArgs:String):String {static}
-getWorkoutAndExerciseIndices(commandArgs:String):String {static}
+parseWorkoutIndex(commandArgs:String): int
+parseWorkoutAndExerciseIndex(commandArgs:String): int[]
 splitCommandWordsAndArgs(input:String, keyword:String):String {static}
 parseArgsAsIndex(index:String):Integer {static}
 }
@@ -25,39 +28,10 @@ class CommandManager {
 -commandType:String
 +generateCommand(userInputString:String):Command
 }
-class AddExerciseParser extends Parser {
-+AddExerciseParser(userInputString:String)
--prepareAddExercise(commandArgs:String):Command
-+parseInput():Command
-}
-class CreateWorkoutParser extends Parser {
-+CreateWorkoutParser(userInputString:String)
--prepareCreateWorkout(commandArgs:String):Command
-+parseInput():Command
-}
-class DeleteWorkoutParser extends Parser {
-+DeleteWorkoutParser(userInputString:String)
--prepareDeleteWorkout(commandArgs:String):Command
-+parseInput():Command
-}
-class DisplayExerciseParser extends Parser {
-+DisplayExerciseParser(userInputString:String)
--prepareDisplayExercises(commandArgs:String):Command
-+parseInput():Command
-}
-class HelpParser extends Parser {
-+HelpParser(userInputString:String)
--prepareHelpMessage(commandArgs:String):Command
-+parseInput():Command
-}
-class MarkExerciseAsDoneParser extends Parser {
-+MarkExerciseAsDoneParser(userInputString:String)
--prepareMarkExerciseAsDone(commandArgs:String):Command
-+parseInput():Command
-}
-class RemoveExerciseParser extends Parser {
-+RemoveExerciseParser(userInputString:String)
--prepareRemoveExercise(commandArgs:String):Command
+class XYZCommandParser extends Parser {
++XYZCommandParser(userInputString:String)
+-parseCommandArguments(commandArgs:String)
+-prepareCommandParser(commandArgs:String)
 +parseInput():Command
 }
 }
@@ -66,8 +40,6 @@ package "logger" {
 class LoggerUtil #LightBlue##Blue
 }
 
-hide AddExerciseParser
-hide RemoveExerciseParser
 CommandManager --> "1  parser" Parser
 Parser ..> LoggerUtil
 }
