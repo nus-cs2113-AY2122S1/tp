@@ -59,5 +59,50 @@ public class AddContactCommand extends Command {
         }
     }
 
+    public Boolean duplicateCatcher(Contact addedContact, ContactList contactList) {
+        ArrayList<Integer> duplicatedIndex = new ArrayList<>();
+        for (int i = 0; i < contactList.getListSize(); i++) {
+            Contact currentContact = contactList.getContactAtIndex(i);
+            if (duplicateField(addedContact.getName(), currentContact.getName())) {
+                duplicatedIndex.add(i);
+                continue;
+            }
+            if (addedContact.getGithub() != null && currentContact.getGithub() != null) {
+                if (duplicateField(addedContact.getGithub(), currentContact.getGithub())) {
+                    duplicatedIndex.add(i);
+                    continue;
+                }
+            }
+            if (addedContact.getEmail() != null && currentContact.getEmail() != null) {
+                if (duplicateField(addedContact.getEmail(), currentContact.getEmail())) {
+                    duplicatedIndex.add(i);
+                    continue;
+                }
+            }
+            if (addedContact.getTelegram() != null && currentContact.getTelegram() != null) {
+                if (duplicateField(addedContact.getTelegram(), currentContact.getTelegram())) {
+                    duplicatedIndex.add(i);
+                    continue;
+                }
+            }
+            if (addedContact.getLinkedin() != null && currentContact.getLinkedin() != null) {
+                if (duplicateField(addedContact.getLinkedin(), currentContact.getLinkedin())) {
+                    duplicatedIndex.add(i);
+                    continue;
+                }
+            }
+            if (addedContact.getTwitter() != null && currentContact.getTwitter() != null) {
+                if (duplicateField(addedContact.getTwitter(), currentContact.getTwitter())) {
+                    duplicatedIndex.add(i);
+                }
+            }
+        }
+        if (!duplicatedIndex.isEmpty()) {
+            TextUi.confirmAddDuplicateMessage(duplicatedIndex, contactList);
+            String userAddConfirmation = UserInputTextUi.getUserConfirmation();
+            return userAddConfirmation.equalsIgnoreCase("n");
+        }
+        return false;
+    }
     }
 }
