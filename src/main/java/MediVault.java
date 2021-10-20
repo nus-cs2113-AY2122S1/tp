@@ -8,6 +8,7 @@ import inventory.Stock;
 import utilities.parser.CommandParser;
 import utilities.parser.DateParser;
 import utilities.parser.Mode;
+import utilities.storage.Storage;
 import utilities.ui.Ui;
 
 import java.text.ParseException;
@@ -31,10 +32,12 @@ public class MediVault {
     private Mode mode = Mode.STOCK;
 
     public MediVault() {
+        // For testing, uncomment generateData() && comment the 3 lines
+        // For storage, comment generateData() && uncomment the 3 lines
         generateData();
+        //ArrayList<Medicine> medicines = Medicine.getInstance();
         //Storage storage = Storage.getInstance();
-        //storage.loadData();
-
+        //medicines.addAll(storage.loadData());
         logger.log(Level.INFO, "All variables are initialised.");
     }
 

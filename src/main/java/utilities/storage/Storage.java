@@ -25,7 +25,8 @@ public class Storage {
     private static final String STOCK_FILE_PATH = "data/stock.txt";
     private static final String ORDER_FILE_PATH = "data/order.txt";
     private static final String DISPENSE_FILE_PATH = "data/dispense.txt";
-    private static final int NUMBER_OF_STOCK_DATA_FIELDS = 7;
+    private static final int NUMBER_OF_STOCK_DATA_FIELDS = 8;
+    private static final int NUMBER_OF_ORDER_DATA_FIELDS = 7;
     private static File stockFile;
     private static File orderFile;
     private static File dispenseFile;
@@ -105,7 +106,7 @@ public class Storage {
      * Parse stock data and create a stock object based on it.
      *
      * @param stockDetails String of data of specific stock from file data/stock.txt.
-     * @return stock object for adding into medicines.
+     * @return Stock object for adding into medicines.
      */
     private Medicine parseStockData(String stockDetails) throws InvalidDataException {
         String[] splitStockDetails = stockDetails.split("\\|");
@@ -119,17 +120,56 @@ public class Storage {
         Date stockExpiry = FileParser.parseStockExpiry(splitStockDetails);
         String stockDescription = FileParser.parseStockDescription(splitStockDetails);
         int stockMaxQuantity = FileParser.parseStockMaxQuantity(splitStockDetails);
+        boolean stockIsDeleted = FileParser.parseStockIsDeleted(splitStockDetails);
 
         Stock stock = new Stock(stockName, stockPrice, stockQuantity, stockExpiry, stockDescription, stockMaxQuantity);
         stock.setStockID(stockID);
         stock.setStockCount(stockID);
+        stock.setDeleted(stockIsDeleted);
         return stock;
     }
+
+    //    /**
+    //     * Read and process medicine order details from file to restore medicine order state in program.
+    //     *
+    //     * @param file File object of data/order.txt.
+    //     * @throws FileNotFoundException If file is not found.
+    //     */
+    //    private ArrayList<Medicine> readFromOrderFile(File file) throws FileNotFoundException {
+    //        Scanner sc = new Scanner(file);
+    //        ArrayList<Medicine> medicines = new ArrayList<>();
+    //        while (sc.hasNextLine()) {
+    //            String orderDetails = sc.nextLine();
+    //            try {
+    //                Medicine parsedOrder = parseOrderData(orderDetails);
+    //                medicines.add(parsedOrder);
+    //            } catch (InvalidDataException e) {
+    //                System.out.println("Corrupted data detected in file"); // Maybe just log it instead of displaying?
+    //            }
+    //        }
+    //        return medicines;
+    //    }
+
+    //    /**
+    //     * Parse order data and create an order object based on it.
+    //     *
+    //     * @param orderDetails String of data of specific order from file data/order.txt.
+    //     * @return Order object for adding into medicines.
+    //     */
+    //    private Medicine parseOrderData(String orderDetails) throws InvalidDataException {
+    //        String[] orderStockDetails = orderDetails.split("\\|");
+    //        if (orderStockDetails.length != NUMBER_OF_ORDER_DATA_FIELDS) { // If not all fields present.
+    //            throw new InvalidDataException();
+    //        }
+    //
+    //        Order order = new Order();
+    //        return order;
+    //    }
 
     /**
      * Read and process medicine stock details from file to restore medicine stock state in program.
      *
-     * @param file File object of data/duke.txt.
+     * @param file File object of data/stock.txt.
      * @throws FileNotFoundException If file is not found.
      */
     private ArrayList<Medicine> readFromStockFile(File file) throws FileNotFoundException {

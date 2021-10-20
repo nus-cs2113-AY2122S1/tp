@@ -44,4 +44,9 @@ public class FileParser {
         int stockMaxQuantity = Integer.parseInt(splitStockDetails[6]);
         return stockMaxQuantity;
     }
+
+    public static boolean parseStockIsDeleted(String[] splitStockDetails) {
+        boolean stockIsDeleted = Boolean.parseBoolean(splitStockDetails[7]);
+        return stockIsDeleted;
+    }
 }
