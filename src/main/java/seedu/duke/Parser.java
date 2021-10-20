@@ -108,6 +108,8 @@ public class Parser {
             keyword = Keyword.EDIT_TRAINING_KEYWORD;
         } else if (hasEditMemberKeyword(query)) {
             keyword = Keyword.EDIT_MEMBER_KEYWORD;
+        } else if (query.trim().equals("--help")) {
+            keyword = Keyword.HELP_KEYWORD;
         } else if (hasExitKeyword(query)) {
             keyword = Keyword.EXIT_KEYWORD;
         } else {
@@ -433,7 +435,7 @@ public class Parser {
     }
 
     public static void wrongInputTypeMessage() {
-        Ui.printWrongInputMessage();
+        System.out.println("Wrong input. Please key in --help for some help on how to use the programme.");
     }
 
     /**

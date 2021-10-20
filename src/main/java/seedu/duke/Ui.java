@@ -104,4 +104,18 @@ public class Ui {
             display++;
         }
     }
+
+    public static void printHelp() {
+        System.out.println("usage: " + "\n" +
+                "    add [/m </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE NUMBER>] \n" +
+                "    add [/t </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>] \n" +
+                "    add [/att </m MEMBER_NAME> </n TRAINING_NAME> </d 1_OR_0>] \n" +
+                "    delete [/m <MEMBER_INDEX_NUMBER>] \n" +
+                "    delete [/t <TRAINING_INDEX_NUMBER>] \n" +
+                "    delete [/att <ATTENDANCE_INDEX_NUMBER>] \n" +
+                "    edit [/m <MEMBER_INDEX_NUMBER> </n MEMBER_NAME> </s STUDENT_NUMBER> </g GENDER> </p PHONE "
+                + "NUMBER>]\n " +
+                "    edit [/t <TRAINING_INDEX_NUMBER> </n TRAINING_NAME> </a TRAINING_TIME> </v TRAINING_VENUE>] \n" +
+                "    list [/m] [/t] [/att]");
+    }
 }
