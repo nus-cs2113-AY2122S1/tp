@@ -1,7 +1,7 @@
-package gordon.kitchen;
+package gordon.util;
 
 import gordon.command.Command;
-import gordon.util.Parser;
+import gordon.kitchen.Cookbook;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;

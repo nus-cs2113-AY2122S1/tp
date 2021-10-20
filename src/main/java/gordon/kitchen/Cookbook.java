@@ -6,6 +6,7 @@ import gordon.util.Tag;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Cookbook {
@@ -26,6 +27,19 @@ public class Cookbook {
             output.append(System.lineSeparator());
         }
         return output.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Cookbook cookbook = (Cookbook) o;
+        return Objects.equals(recipes, cookbook.recipes)
+                && Objects.equals(cookbookTags, cookbook.cookbookTags);
     }
 
     public String saveString(int index) {

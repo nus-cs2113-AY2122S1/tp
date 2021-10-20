@@ -5,6 +5,7 @@ import gordon.util.Storage;
 import gordon.kitchen.Cookbook;
 import gordon.util.UI;
 
+import java.nio.file.Paths;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
@@ -19,7 +20,8 @@ public class Gordon {
         logger.setLevel(Level.SEVERE);
         parser = new Parser();
         mainCookbook = new Cookbook();
-        storage = new Storage(mainCookbook);
+        String pathname = Paths.get("").toAbsolutePath().toString();
+        storage = new Storage(pathname, mainCookbook);
     }
 
     public void run() {

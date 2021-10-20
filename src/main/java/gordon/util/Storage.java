@@ -8,29 +8,29 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Storage {
-    public static final String PATHNAME = Paths.get("saveFile.txt").toString();
+    public static final String FILENAME = "saveFile.txt";
     static Logger logger;
 
-    public Storage(Cookbook cookbook) {
+    public Storage(String baseDir, Cookbook cookbook) {
         logger = Logger.getLogger(GordonException.loggerName);
-        File load = new File(PATHNAME);
+        File load = new File(baseDir, FILENAME);
 
         try {
             Scanner loadScanner = new Scanner(load);
 
             while (loadScanner.hasNext()) {
                 Recipe r = new Recipe(loadScanner.nextLine());
-                loadCalories(r, loadScanner);
-                loadIngredients(r, loadScanner);
-                loadSteps(r, loadScanner);
+                String buffer = loadScanner.nextLine();
+                buffer = loadDifficulty(r, buffer, loadScanner);
+                buffer = loadCalories(r, buffer, loadScanner);
+                buffer = loadTimes(r, buffer, loadScanner);
+                buffer = loadIngredients(r, buffer, loadScanner);
+                loadSteps(r, buffer, loadScanner);
                 loadTags(r, loadScanner, cookbook);
                 cookbook.addRecipe(r);
             }
@@ -49,24 +49,44 @@ public class Storage {
         }
     }
 
-    public void loadCalories(Recipe r, Scanner loadScanner) {
-        String line = loadScanner.nextLine().trim();
-        assert (line.contains("Calories"));
-        String[] lineSplit = line.split(":");
-
-        // Regex to extract integers from String
-        Pattern p = Pattern.compile("\\d+");
-        Matcher m = p.matcher(lineSplit[1]);
-        while (m.find()) {
-            r.setCalories(Integer.parseInt(m.group()));
+    public String loadDifficulty(Recipe r, String buffer, Scanner loadScanner) {
+        if (buffer.trim().equals("Difficulty:")) {
+            String line = loadScanner.nextLine().trim();
+            for (Difficulty d : Difficulty.values()) {
+                if (line.equals(d.name())) {
+                    r.setDifficulty(d);
+                }
+            }
+            return null;
+        } else {
+            return buffer;
         }
     }
 
-    public void loadIngredients(Recipe r, Scanner loadScanner) {
-        String line = loadScanner.nextLine().trim();
-        if (line.equals("Ingredients needed:")) {
+    public String loadCalories(Recipe r, String buffer, Scanner loadScanner) {
+        if (buffer.trim().equals("Calories (kcal):")) {
+            String line = loadScanner.nextLine().trim();
+            r.setCalories(Integer.parseInt(line));
+            return loadScanner.nextLine();
+        } else {
+            return buffer;
+        }
+    }
+
+    //Not implemented yet
+    public String loadTimes(Recipe r, String buffer, Scanner loadScanner) {
+        if (buffer.trim().equals("Preparation time:")) {
+            String line = loadScanner.nextLine().trim();
+            return loadScanner.nextLine();
+        } else {
+            return buffer;
+        }
+    }
+
+    public String loadIngredients(Recipe r, String buffer, Scanner loadScanner) {
+        if (buffer.trim().equals("Ingredients needed:")) {
             while (loadScanner.hasNext()) {
-                line = loadScanner.nextLine().trim();
+                String line = loadScanner.nextLine().trim();
                 int dotIndex = line.indexOf('.');
 
                 if (dotIndex < 0) {
@@ -76,20 +96,28 @@ public class Storage {
                 String parsedIngredient = line.substring(dotIndex + 2);
                 r.addIngredient(parsedIngredient);
             }
+            return loadScanner.nextLine();
+        } else {
+            return buffer;
         }
     }
 
-    public void loadSteps(Recipe r, Scanner loadScanner) {
-        while (loadScanner.hasNext()) {
-            String line = loadScanner.nextLine().trim();
-            int dotIndex = line.indexOf('.');
+    public String loadSteps(Recipe r, String buffer, Scanner loadScanner) {
+        if (buffer.trim().equals("Method:")) {
+            while (loadScanner.hasNext()) {
+                String line = loadScanner.nextLine().trim();
+                int dotIndex = line.indexOf('.');
 
-            if (dotIndex < 0) {
-                break;
+                if (dotIndex < 0) {
+                    break;
+                }
+
+                String parsedStep = line.substring(dotIndex + 2);
+                r.addStep(parsedStep);
             }
-
-            String parsedStep = line.substring(dotIndex + 2);
-            r.addStep(parsedStep);
+            return loadScanner.nextLine();
+        } else {
+            return buffer;
         }
     }
 
@@ -112,7 +140,6 @@ public class Storage {
             }
             r.addTagToRecipe(createdTag, r.getName());
         }
-
     }
 
     public void saveCookbook(Cookbook cookbook) {
@@ -122,7 +149,7 @@ public class Storage {
             output.append(System.lineSeparator());
         }
         try {
-            FileWriter writer = new FileWriter(PATHNAME);
+            FileWriter writer = new FileWriter(FILENAME);
             writer.write(output.toString());
             writer.close();
         } catch (IOException e) {

@@ -5,6 +5,7 @@ import gordon.util.Difficulty;
 import gordon.util.Tag;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Recipe {
     protected String name;
@@ -198,5 +199,24 @@ public class Recipe {
         }
 
         return outputString.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Recipe recipe = (Recipe) o;
+        return preparationTime == recipe.preparationTime
+                && cookingTime == recipe.cookingTime
+                && Float.compare(recipe.totalPrice, totalPrice) == 0
+                && calories == recipe.calories && Objects.equals(name, recipe.name)
+                && difficulty == recipe.difficulty
+                && Objects.equals(ingredients, recipe.ingredients)
+                && Objects.equals(steps, recipe.steps)
+                && Objects.equals(recipeTags, recipe.recipeTags);
     }
 }
