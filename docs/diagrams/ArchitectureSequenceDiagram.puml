@@ -1,0 +1,45 @@
+@startuml
+
+Actor User as user
+Participant ":UI" as ui
+Participant ":Taa" as taa
+Participant ":Command" as command
+Participant ":ModuleList" as modulelist
+Participant ":Storage" as storage
+
+note left of modulelist: Model
+
+user -> ui : "add_module c/CS2113T\nn/Software Engineering"
+activate ui
+
+ui -> taa
+activate taa
+
+taa -> command : execute()
+activate command
+
+command -> modulelist : addModule(module)
+activate modulelist
+
+modulelist --> command
+deactivate modulelist
+
+command -> storage : save(moduleList)
+activate storage
+
+storage --> command
+deactivate storage
+
+command -> ui : printMessage(...)
+ui --> command
+
+command --> taa
+deactivate command
+
+taa --> ui
+deactivate taa
+
+ui --> user
+deactivate ui
+
+@enduml
