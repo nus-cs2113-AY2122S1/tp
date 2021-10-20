@@ -7,6 +7,7 @@ import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.ListCommand;
 import seedu.duke.commands.RemoveCommand;
 import seedu.duke.commands.SearchMapCommand;
+import seedu.duke.constants.Constants;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.UniversityList;
 
@@ -41,22 +42,19 @@ public class Parser {
         String arguments = matcher.group("arguments");
 
         switch (commandWord) {
-        case ListCommand.COMMAND_WORD:
-            return new ListCommandParser().parse(arguments, universitySelectedList,
-                    moduleSelectedList);
-        case RemoveCommand.COMMAND_WORD:
+        case Constants.COMMAND_LIST:
+            return new ListCommandParser().parse(arguments, universityMasterList, moduleMasterList,
+                    universitySelectedList, moduleSelectedList);
+        case Constants.COMMAND_REMOVE:
             return new RemoveCommandParser().parse(arguments, universitySelectedList,
                     moduleSelectedList);
-        case SearchMapCommand.COMMAND_WORD:
+        case Constants.COMMAND_SEARCHMAP:
             return new SearchMapCommandParser().parse(arguments, universityMasterList,
                     universitySelectedList, moduleSelectedList);
-        case AddModCommand.COMMAND_WORD:
-            return new AddModCommandParser().parse(arguments, moduleMasterList,
+        case Constants.COMMAND_ADD:
+            return new AddCommandParser().parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
-        case AddUniCommand.COMMAND_WORD:
-            return new AddUniCommandParser().parse(arguments, universityMasterList,
-                    universitySelectedList, moduleSelectedList);
-        case ExitCommand.COMMAND_WORD:
+        case Constants.COMMAND_EXIT:
             return new ExitCommandParser().parse(universitySelectedList, moduleSelectedList);
         default:
             throw new ParseException("Command not found", 1);

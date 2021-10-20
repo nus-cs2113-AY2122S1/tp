@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.constants.Constants;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.SelectedModuleStorage;
@@ -8,7 +9,7 @@ import seedu.duke.universities.UniversityList;
 import java.io.IOException;
 
 public class AddModCommand extends Command {
-    public static final String COMMAND_WORD = "addmod";
+    public static final String COMMAND_WORD = Constants.COMMAND_ADD;
 
     private final Module moduleToAdd;
 

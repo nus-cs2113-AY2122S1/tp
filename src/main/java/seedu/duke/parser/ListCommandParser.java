@@ -1,6 +1,7 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.ListCommand;
+import seedu.duke.constants.Constants;
 import seedu.duke.enumerations.ListType;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.UniversityList;
@@ -15,36 +16,35 @@ public class ListCommandParser {
 
     private Logger logger = Logger.getLogger("ListCommandParserLog");
 
-    public ListCommand parse(String arguments,
+    public ListCommand parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList,
                              UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws ParseException, IOException {
 
         logger.log(Level.INFO, "Start parsing list command");
 
-        ListType type;
         if (arguments.trim().length() == 0) {
             throw new ParseException("no flags passed", 1);
         }
         switch (arguments.trim()) {
-        case "/m":
-            type = ListType.ALLMODS;
+        case Constants.FLAG_MASTER_UNIVERSITYLIST:
+            logger.log(Level.INFO, "parse success");
+            return new ListUniCommand(universityMasterList);
             break;
-        case "/u":
-            type = ListType.ALLUNIS;
+        case Constants.FLAG_MASTER_MODULELIST:
+            logger.log(Level.INFO, "parse success");
+            return new ListModCommand(moduleMasterList);
             break;
-        case "/s":
-            type = ListType.SELECTEDUNIS;
+        case Constants.FLAG_SELECTED_UNIVERSITYLIST:
+            logger.log(Level.INFO, "parse success");
+            return ListUniCommand(universitySelectedList);
             break;
-        case "/t":
-            type = ListType.SELECTEDMODS;
+        case Constants.FLAG_SELECTED_MODULELIST:
+            logger.log(Level.INFO, "parse success");
+            return ListModCommand(moduleSelectedList);
             break;
         default:
             logger.log(Level.WARNING, "incorrect flags");
             throw new ParseException("Incorrect flags passed.", 1);
         }
-
-        logger.log(Level.INFO, "parse success");
-
-        return new ListCommand(type, universitySelectedList, moduleSelectedList);
     }
 }

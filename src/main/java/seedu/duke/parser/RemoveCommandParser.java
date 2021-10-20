@@ -1,6 +1,10 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.RemoveCommand;
+import seedu.duke.commands.RemoveMapCommand;
+import seedu.duke.commands.RemoveModCommand;
+import seedu.duke.commands.RemoveUniCommand;
+import seedu.duke.constants.Constants;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.University;
@@ -31,20 +35,24 @@ public class RemoveCommandParser {
         String description = argumentsSubstrings[1].trim();
 
         switch (flag) {
-        case "/u":
+        case Constants.FLAG_UNIVERSITY:
+            return new RemoveUniCommand(index, universitySelectedList);
             if (!isUniversityExist(description, universitySelectedList)) {
                 logger.log(Level.WARNING, "University not found");
                 throw new ParseException("university not in list", 1);
             }
             type = "u";
             break;
-        case "/m":
+        case Constants.FLAG_MODULE:
+            return new RemoveModCommand(index, moduleSelectedList);
             if (!isModuleExist(description, moduleSelectedList)) {
                 logger.log(Level.WARNING, "module not found");
                 throw new ParseException("module does not exist", 1);
             }
             type = "m";
             break;
+        case Constants.FLAG_MAP:
+            return new RemoveMapCommand(index, universitySelectedList)
         default:
             throw new ParseException("Wrong flags passed", 1);
         }
