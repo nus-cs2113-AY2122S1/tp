@@ -24,6 +24,14 @@ public class Recipe {
         recipeTags = new ArrayList<>();
     }
 
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public Difficulty getDifficulty() {
+        return this.difficulty;
+    }
+
     public void addIngredient(String ingredient) {
         ingredients.add(ingredient);
     }
@@ -114,6 +122,10 @@ public class Recipe {
         return totalPrice;
     }
 
+    public void setTotalPrice(float newPrice) {
+        this.totalPrice = newPrice;
+    }
+
     public int getCalories() {
         return calories;
     }
@@ -126,12 +138,17 @@ public class Recipe {
     public String toString() {
         StringBuilder outputString = new StringBuilder(name + System.lineSeparator());
 
-        outputString.append("Calories:").append(calories).append("kcal").append(System.lineSeparator());
-
         if (difficulty != Difficulty.None) {
             outputString.append("Difficulty: ")
                     .append(System.lineSeparator())
                     .append(difficulty)
+                    .append(System.lineSeparator());
+        }
+
+        if (calories > -1) {
+            outputString.append("Calories (kcal): ")
+                    .append(System.lineSeparator())
+                    .append(calories)
                     .append(System.lineSeparator());
         }
 
@@ -171,8 +188,8 @@ public class Recipe {
             outputString.append(System.lineSeparator());
         }
 
-        outputString.append("Tags: ").append(System.lineSeparator());
         if (recipeTags.size() > 0) {
+            outputString.append("Tags: ").append(System.lineSeparator());
             for (int k = 0; k < recipeTags.size(); k++) {
                 outputString.append(k + 1).append(". ");
                 outputString.append(recipeTags.get(k));

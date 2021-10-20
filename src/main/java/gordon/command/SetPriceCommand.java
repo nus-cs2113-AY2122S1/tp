@@ -2,22 +2,23 @@ package gordon.command;
 
 import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
+import gordon.util.Difficulty;
 
-public class SetCaloriesCommand extends Command {
+public class SetPriceCommand extends Command {
     String recipeName;
-    int newCalories;
+    float newPrice;
 
-    public SetCaloriesCommand(String recipeName, int newCalories) {
+    public SetPriceCommand(String recipeName, float newPrice) {
         this.recipeName = recipeName;
-        this.newCalories = newCalories;
+        this.newPrice = newPrice;
     }
 
     @Override
     public void execute(Cookbook cookbook) {
-        System.out.println("Setting calories...");
+        System.out.println("Setting price...");
         try {
-            cookbook.setCalories(recipeName, newCalories);
-            System.out.println("Calories set successfully.");
+            cookbook.setPrice(recipeName, newPrice);
+            System.out.println("Price set successfully.");
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());
         }

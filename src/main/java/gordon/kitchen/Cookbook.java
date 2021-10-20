@@ -1,6 +1,7 @@
 package gordon.kitchen;
 
 import gordon.exception.GordonException;
+import gordon.util.Difficulty;
 import gordon.util.Tag;
 
 import java.util.ArrayList;
@@ -95,6 +96,30 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
+    public void setPrice(String name, float newPrice) throws GordonException {
+        for (Recipe recipe : recipes) {
+            if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
+                recipe.setTotalPrice(newPrice);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
+
+    public void setDifficulty(String name, Difficulty newDifficulty) throws GordonException {
+        for (Recipe recipe : recipes) {
+            // (?i) enables case insensitivity
+            // .* uses all characters except line break
+            if (recipe.getName().matches("(?i).*" + name + ".*")) {
+                recipe.setDifficulty(newDifficulty);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
+  
 
     /////////////////////////// TAGGING FUNCTIONALITIES ///////////////////////////
     public void addCookbookTag(Tag tag) {
@@ -188,6 +213,12 @@ public class Cookbook {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public ArrayList<Recipe> filterByDifficulty(Difficulty difficulty) {
+        return recipes.stream()
+                .filter(r -> r.difficulty == difficulty)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
     public ArrayList<Recipe> filterByPrice(float price) {
         Comparator<Recipe> compareByPrice = Comparator.comparing(Recipe::getTotalPrice);
         return recipes.stream()
@@ -200,7 +231,7 @@ public class Cookbook {
         Comparator<Recipe> compareByCalories = Comparator.comparing(Recipe::getCalories);
         return recipes.stream()
                 .filter(r -> r.calories <= cal)
-                .sorted(compareByCalories)
+                .sorted(compareByCalories.reversed())
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 

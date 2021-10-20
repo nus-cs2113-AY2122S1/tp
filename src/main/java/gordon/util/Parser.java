@@ -4,16 +4,19 @@ import gordon.command.AddCommand;
 import gordon.command.CheckCommand;
 import gordon.command.Command;
 import gordon.command.DeleteRecipeCommand;
+import gordon.command.FindCaloriesCommand;
+import gordon.command.FindDifficultyCommand;
 import gordon.command.FindIngredientsCommand;
 import gordon.command.FindTagsCommand;
 import gordon.command.HelpCommand;
 import gordon.command.ListRecipesCommand;
 import gordon.command.NullCommand;
 import gordon.command.SetCaloriesCommand;
+import gordon.command.SetDifficultyCommand;
+import gordon.command.SetPriceCommand;
 import gordon.command.TagAddCommand;
 import gordon.command.TagDeleteCommand;
 import gordon.command.TagUntagCommand;
-
 import gordon.exception.GordonException;
 import gordon.kitchen.Recipe;
 
@@ -97,8 +100,8 @@ public class Parser {
         }
         String newLine = line.substring(ingredientsIndex + INGREDIENTS_WORD_LENGTH);
         String[] ingredientsList = newLine.split("\\+");
-        for (int i = 0; i < ingredientsList.length; i++) {
-            r.addIngredient(ingredientsList[i].trim());
+        for (String s : ingredientsList) {
+            r.addIngredient(s.trim());
         }
     }
 
@@ -171,15 +174,37 @@ public class Parser {
         switch (target) {
         case "calories":
             try {
-                int index = Integer.parseInt(splitContent[1].substring(spaceIndex + 1).trim());
-                if (index < -1) {
+                int cal = Integer.parseInt(splitContent[1].substring(spaceIndex + 1).trim());
+                if (cal < -1) {
                     throw new GordonException(GordonException.INDEX_OOB);
                 }
-                return new SetCaloriesCommand(recipeName, index);
+                return new SetCaloriesCommand(recipeName, cal);
             } catch (NumberFormatException e) {
                 throw new GordonException(GordonException.INDEX_INVALID);
             }
-        case "tags":
+        case "difficulty":
+            Difficulty newDifficulty = null;
+            String difficultyString = splitContent[1].substring(spaceIndex + 1).trim();
+            for (Difficulty d : Difficulty.values()) {
+                if (d.name().equalsIgnoreCase(difficultyString)) {
+                    newDifficulty = d;
+                }
+            }
+            if (newDifficulty == null) {
+                throw new GordonException(GordonException.INVALID_DIFFICULTY);
+            } else {
+                return new SetDifficultyCommand(recipeName, newDifficulty);
+            }
+        case "price":
+            try {
+                float price = Float.parseFloat(splitContent[1].substring(spaceIndex + 1).trim());
+                if (price < -1) {
+                    throw new GordonException(GordonException.INDEX_OOB);
+                }
+                return new SetPriceCommand(recipeName, price);
+            } catch (NumberFormatException e) {
+                throw new GordonException(GordonException.FLOAT_INVALID);
+            }
         default:
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
@@ -200,6 +225,26 @@ public class Parser {
             ArrayList<String> ingredients = new ArrayList<>(Arrays.asList(splitContent[1]
                     .substring(spaceIndex + 1).split("\\+")));
             return new FindIngredientsCommand(ingredients);
+        case "calories":
+            try {
+                int cal = Integer.parseInt(splitContent[1].substring(spaceIndex + 1).trim());
+                return new FindCaloriesCommand(cal);
+            } catch (NumberFormatException e) {
+                throw new GordonException(GordonException.INDEX_INVALID);
+            }
+        case "difficulty":
+            Difficulty diff = null;
+            String difficultyString = splitContent[1].substring(spaceIndex + 1).trim();
+            for (Difficulty d : Difficulty.values()) {
+                if (d.name().equalsIgnoreCase(difficultyString)) {
+                    diff = d;
+                }
+            }
+            if (diff == null) {
+                throw new GordonException(GordonException.INVALID_DIFFICULTY);
+            } else {
+                return new FindDifficultyCommand(diff);
+            }
         case "tag":
             ArrayList<String> tags = new ArrayList<>(Arrays.asList(splitContent[1]
                     .substring(spaceIndex + 1).split("\\+")));

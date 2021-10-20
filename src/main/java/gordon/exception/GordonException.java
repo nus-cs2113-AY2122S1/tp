@@ -9,6 +9,7 @@ public class GordonException extends Exception {
 
     public static final String INDEX_OOB = "Index outside range.";
     public static final String INDEX_INVALID = "Index is not a valid integer.";
+    public static final String FLOAT_INVALID = "Index is not a valid float.";
 
     public static final String INGREDIENTS_FORMAT = "Please use the word 'ingredients' before adding ingredients.";
     public static final String STEPS_FORMAT = "Please use the word 'steps' to kickstart the adding of steps.";
@@ -16,6 +17,7 @@ public class GordonException extends Exception {
     public static final String DUPLICATE_RECIPE_NAME = "No duplicate recipe names allowed.";
     public static final String EMPTY_RECIPE_NAME = "Please input name of recipe.";
     public static final String EMPTY_CALORIES = "Please input calories for the recipe.";
+    public static final String INVALID_DIFFICULTY = "Please input a valid difficulty.";
 
     public static final String COMMAND_INVALID = "Command given cannot be recognized.";
 
