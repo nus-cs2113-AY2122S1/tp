@@ -1,10 +1,17 @@
 # Developer Guide
+* [Acknowledgements](#acknowledgements)
+* [Design](#design)
+* [Implementation](#implementation)
+* [Project scope](#product-scope)
+* [User Stories](#user-stories)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
 
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Design & implementation
+## Design
 ### Architecture
 ![ArchitectureDiagram](diagrams/ArchitectureDiagram.png)
 <br>
@@ -12,7 +19,7 @@ _Figure 1. Architecture Diagram_<br>
 <br>
 The _Architecture Diagram_ shown above explains the high-level design of the Application.<br>
 <br>
-Overview of components:
+**Overview of components**
 * `Main`
   * On app launch: Creates and runs an instance of `Duke`.
 * `UI`
@@ -22,7 +29,7 @@ Overview of components:
   * On run: Loads data saved in `Storage`, receives and processes user input from `UI`.
 * `Command`
   * Defines how a command is to be executed.
-* `Models`
+* `Model`
   * Represents a collection of classes that holds the data of the application in-memory.
   * Includes: `ModuleList`, `Modules`, `StudentList` , `Student`, `AssessmentList` , `Assessment`, `AttendanceList` , `Attendance`
 * `Storage`
@@ -32,7 +39,16 @@ Overview of components:
   * `Parser`: Used to translate user input into a `Command` and to parse an argument string into its various values.
   * `Util`: Contains utility functions used by other classes.
 
-### Add module feature
+<br>
+
+**Interactions between components**
+<br>
+
+![ArchitectureSequenceDiagram](diagrams/ArchitectureSequenceDiagram.png)
+_Figure 2. An example of interactions between components for `add_module c/CS2113T n/Software Engineering`._
+
+## Implementation
+### Add module
 The add module mechanism is facilitated by `AddModuleCommand`. It extends `Command` and uses `ModuleList` which stores
 module internally as an ArrayList `modules`.<br>
 
@@ -78,7 +94,3 @@ created `Module` object into the `modules` ArrayList within `ModuleList`.
 ## Glossary
 
 * *glossary item* - Definition
-
-## Instructions for manual testing
-
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
