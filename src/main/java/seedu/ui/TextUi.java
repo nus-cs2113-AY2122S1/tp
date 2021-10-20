@@ -249,4 +249,10 @@ public abstract class TextUi {
         }
     }
 
+    public static void duplicatedContactsMessage(Contact viewingContact, int index) {
+        String viewName = ViewMessageFormatterUi.viewNameFormatter(viewingContact);
+        String message = index + ". " + viewName + formatContactFields(viewingContact);
+        System.out.println(message + "\n");
+    }
+
 }
