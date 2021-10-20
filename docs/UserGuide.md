@@ -13,7 +13,7 @@ SchedUrMods can help you manage your daily tasks faster than traditional GUI app
     - [2.3 Listing all tasks: `list`](#23-listing-all-tasks-list)
     - [2.4 Sorting the tasklist: `sort`](#24-sorting-the-tasklist-sort)
     - [2.5 Deleting tasks: `delete`](#25-deleting-tasks-delete)
-    - [2.7 Exiting the program: `bye`](#26-exiting-the-program-bye)
+    - [2.6 Exiting the program: `bye`](#26-exiting-the-program-bye)
 - [3. FAQ](#3-faq)
 - [4. Command Summary](#4-command-summary)
 
