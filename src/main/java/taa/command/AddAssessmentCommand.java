@@ -15,10 +15,10 @@ public class AddAssessmentCommand extends Command {
     private static final String KEY_WEIGHTAGE = "w";
     private static final String KEY_MAXIMUM_MARKS = "m";
     private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {
-            KEY_MODULE_CODE,
-            KEY_ASSESSMENT_NAME,
-            KEY_MAXIMUM_MARKS,
-            KEY_WEIGHTAGE
+        KEY_MODULE_CODE,
+        KEY_ASSESSMENT_NAME,
+        KEY_MAXIMUM_MARKS,
+        KEY_WEIGHTAGE
     };
 
     private static final String MESSAGE_FAIL_TO_ADD = "Fail to add assessment.";
