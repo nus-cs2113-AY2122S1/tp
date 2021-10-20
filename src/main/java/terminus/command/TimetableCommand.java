@@ -1,6 +1,7 @@
 package terminus.command;
 
 import terminus.common.CommonFormat;
+import terminus.common.DaysOfWeekEnum;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
@@ -15,7 +16,6 @@ import static terminus.common.CommonUtils.isValidDay;
 
 public class TimetableCommand extends Command {
     private String day;
-    static int index = 0;
 
     public TimetableCommand() {
 
@@ -37,36 +37,19 @@ public class TimetableCommand extends Command {
         }
     }
 
-    public StringBuilder listAllSchedule (ContentManager<Link> contentManager) {
-        StringBuilder schedules = new StringBuilder();
-        for (Link schedule : contentManager.getContents()) {
-            index++;
-            schedules.append(String.format("%d. %s\n", index, schedule.getViewDescription()));
-        }
-        return schedules;
-    }
-
-    public StringBuilder listDailySchedule (ContentManager<Link> contentManager) {
+    public StringBuilder listDailySchedule(ContentManager<Link> contentManager) {
         StringBuilder dailySchedule = new StringBuilder();
+        int i = 0;
         for (Link schedule : contentManager.getContents()) {
             if (schedule.getDay().equalsIgnoreCase(day)) {
-                index++;
-                dailySchedule.append(String.format("%d. %s\n", index, schedule.getViewDescription()));
+                i++;
+                dailySchedule.append(String.format("%d. %s\n", i, schedule.getViewDescription()));
             }
         }
         return dailySchedule;
     }
 
-    public void getWeeklySchedule (StringBuilder result, ModuleManager moduleManager) {
-        String[] modules = moduleManager.getAllModules();
-        for (String moduleName : modules) {
-            NusModule module = moduleManager.getModule(moduleName);
-            ContentManager<Link> contentManager = module.getContentManager(Link.class);
-            result.append(listAllSchedule(contentManager));
-        }
-    }
-
-    public void getDailySchedule (StringBuilder result, ModuleManager moduleManager) {
+    public void getDailySchedule(StringBuilder result, ModuleManager moduleManager) {
         String[] modules = moduleManager.getAllModules();
         for (String moduleName : modules) {
             NusModule module = moduleManager.getModule(moduleName);
@@ -75,7 +58,16 @@ public class TimetableCommand extends Command {
         }
     }
 
-    public void checkEmptySchedule (StringBuilder result) {
+    public void getWeeklySchedule(StringBuilder result, ModuleManager moduleManager) {
+        for (DaysOfWeekEnum currentDay : DaysOfWeekEnum.values()) {
+            day = currentDay.toString();
+            String header = String.format("%s:\n", day);
+            result.append(header);
+            getDailySchedule(result, moduleManager);
+        }
+    }
+
+    public void checkEmptySchedule(StringBuilder result) {
         if (result.toString().isBlank()) {
             result.append(Messages.EMPTY_CONTENT_LIST_MESSAGE);
         }
@@ -91,7 +83,6 @@ public class TimetableCommand extends Command {
         }
 
         checkEmptySchedule(result);
-        index = 0;
         ui.printSection(result.toString());
         return new CommandResult(true, false);
     }
