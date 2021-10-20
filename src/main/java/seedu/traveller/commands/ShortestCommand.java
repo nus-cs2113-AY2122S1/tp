@@ -10,12 +10,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class SearchCommand extends Command {
-    private static final Logger logger = Logger.getLogger(SearchCommand.class.getName());
+public class ShortestCommand extends Command {
+    private static final Logger logger = Logger.getLogger(ShortestCommand.class.getName());
     private final String startCountry;
     private final String endCountry;
 
-    public SearchCommand(String startCountry, String endCountry) {
+    public ShortestCommand(String startCountry, String endCountry) {
         logger.setLevel(Level.INFO);
         this.startCountry = startCountry;
         this.endCountry = endCountry;
