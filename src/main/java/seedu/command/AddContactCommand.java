@@ -104,5 +104,10 @@ public class AddContactCommand extends Command {
         }
         return false;
     }
+
+    public Boolean duplicateField(String input, String saved) {
+        return stringCleaner(saved).equals(stringCleaner(input));
+    }
+
     }
 }
