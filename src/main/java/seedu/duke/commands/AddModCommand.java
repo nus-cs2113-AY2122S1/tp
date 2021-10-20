@@ -1,6 +1,5 @@
 package seedu.duke.commands;
 
-import seedu.duke.constants.Constants;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.SelectedModuleStorage;
@@ -9,15 +8,15 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
-public class AddModCommand extends Command {
-    public static final String COMMAND_WORD = Constants.COMMAND_ADD;
+public class AddModCommand extends AddCommand {
 
     private final Module moduleToAdd;
+    private final int moduleIndexToAdd;
 
-    public AddModCommand(Module moduleToAdd, UniversityList universitySelectedList,
-                         ModuleList moduleSelectedList) throws IOException {
-        super(universitySelectedList, moduleSelectedList);
-        this.moduleToAdd = moduleToAdd;
+    public AddModCommand(int moduleIndexToAdd, ModuleList moduleSelectedList)
+            throws IOException {
+        this.moduleIndexToAdd = moduleIndexToAdd;
+        this.moduleToAdd = moduleSelectedList.get(moduleIndexToAdd);
         assert moduleToAdd.getModuleCode() != null;
         moduleSelectedList.addModule(moduleToAdd);
         assert moduleSelectedList.getSize() != 0;
@@ -28,7 +27,24 @@ public class AddModCommand extends Command {
                 .getModuleCode().equals(moduleToAdd.getModuleCode());
         SelectedModuleStorage.write(moduleSelectedList);
         System.out.println("New module added: ");
-        Ui.printIndex(indexToAdd, 0);
-        Ui.printModule(moduleToAdd, indexToAdd);
+        Ui.printModule(moduleToAdd, moduleIndexToAdd);
+    }
+
+    public AddModCommand(Module moduleToAdd, UniversityList universitySelectedList,
+                         ModuleList moduleSelectedList) throws IOException{
+        this.moduleToAdd = moduleToAdd;
+        this.moduleIndexToAdd = moduleToAdd.getModuleIndex(moduleSelectedList);
+        assert moduleToAdd.getModuleCode() != null;
+        moduleSelectedList.addModule(moduleToAdd);
+        assert moduleSelectedList.getSize() != 0;
+        assert moduleSelectedList.searchModule(moduleToAdd.getModuleCode());
+        assert moduleSelectedList.get(moduleSelectedList.getSize() - 1)
+                .getModuleName().equals(moduleToAdd.getModuleName());
+        assert moduleSelectedList.get(moduleSelectedList.getSize() - 1)
+                .getModuleCode().equals(moduleToAdd.getModuleCode());
+        SelectedModuleStorage.write(moduleSelectedList);
+        System.out.println("New module added: ");
+        Ui.printIndex(moduleIndexToAdd, false);
+        Ui.printModule(moduleToAdd, moduleIndexToAdd);
     }
 }
