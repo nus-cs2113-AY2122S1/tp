@@ -11,12 +11,13 @@ import seedu.duke.universities.UniversityList;
 import java.io.IOException;
 
 public class RemoveModCommand extends Command {
-    public RemoveModCommand(int moduleIndexToRemove, ModuleList moduleSelectedList) throws IOException {
+    public RemoveModCommand(int moduleIndexToRemove, ModuleList moduleMasterList,
+                            ModuleList moduleSelectedList) throws IOException {
         if (moduleSelectedList.getSize() == 0) {
             assert moduleSelectedList.getSize() == 0;
             System.out.println("The module list is empty!");
         } else {
-            Module moduleToRemove = moduleSelectedList.get(moduleIndexToRemove);
+            Module moduleToRemove = moduleMasterList.get(moduleIndexToRemove-1);
             assert moduleToRemove.getModuleName() != null;
             assert moduleSelectedList.getSize() != 0;
             moduleSelectedList.removeModule(moduleToRemove.getModuleCode());

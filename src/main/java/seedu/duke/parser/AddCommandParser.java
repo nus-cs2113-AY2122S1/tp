@@ -29,20 +29,21 @@ public class AddCommandParser {
             if (index > moduleMasterList.getSize()) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
-            return new AddModCommand(index, moduleSelectedList);
+            return new AddModCommand(index, moduleMasterList, moduleSelectedList);
         case Constants.FLAG_UNIVERSITY:
             index = Integer.parseInt(argumentsSubstrings[1].trim());
             if (index > universityMasterList.getSize()) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
-            return new AddUniCommand(index, universitySelectedList);
+            return new AddUniCommand(index, universityMasterList, universitySelectedList);
         case Constants.FLAG_MAP:
             int uniIndex = Integer.parseInt(argumentsSubstrings[1]);
             if (argumentsSubstrings.length < 3) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
             }
             int mapIndex = Integer.parseInt(argumentsSubstrings[3].trim());
-            return new AddMapCommand(uniIndex, mapIndex, universitySelectedList, moduleSelectedList);
+            return new AddMapCommand(uniIndex, mapIndex, universityMasterList,
+                    moduleMasterList, universitySelectedList, moduleSelectedList);
         default:
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
         }
