@@ -24,10 +24,16 @@ Each computer will have their own CLI, such as the window's Powershell and the M
 
 ## Contents Table
 
-1. [Quick Start](#1.-quick-start)
-2. [Features](#2.-features)
-3. [FAQ](#3.-FAQ)
-4. [Command Summary](#4.-command-summary)
+**[1. Quick Start](#1-quick-start)**
+
+**[2. Features](#2-features)**
+  * [2.1 new](#21-creating-a-trip-new)
+  * [2.2 viewall](#22-viewing-all-trips-viewall)
+
+**[3. FAQ](#3-faq)**
+
+**[4. Command Summary](#4-command-summary)**
+
 
 ## 1. Quick Start
 This sections provides a guide on how to get Traveller up and running on your computer.
@@ -55,7 +61,7 @@ insert elaboration here
 
 `todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
 
-### 2.1. Viewing all trips: `viewall`
+### 2.2. Viewing all trips: `viewall`
 Shows you details of all your trips that is saved in Traveller.
 
 #### Format: `viewall`
