@@ -78,13 +78,14 @@ public class AddNoteCommand extends Command {
         if (contentManager.isDuplicateName(name)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_DUPLICATE_NAME);
         }
-        contentManager.add(new Note(name, data));
+        Note newNote = new Note(name, data);
+        contentManager.add(newNote);
         TerminusLogger.info(String.format("Note(\"%s\",\"%s\") has been added", name, data));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE, name));
 
         // Save to file
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.saveNotesFromModule(moduleManager, getModuleName(), false);
+        moduleStorage.addNoteFromModule(getModuleName(), newNote);
         return new CommandResult(true, false);
     }
 

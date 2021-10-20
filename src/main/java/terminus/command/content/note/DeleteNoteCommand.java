@@ -24,7 +24,7 @@ public class DeleteNoteCommand extends DeleteCommand {
         CommandResult result = super.execute(ui, moduleManager);
         // Update file accordingly
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.saveNotesFromModule(moduleManager, getModuleName(),true);
+        moduleStorage.removeNoteFromModule(getModuleName(), super.deletedContentName);
         return result;
     }
 }

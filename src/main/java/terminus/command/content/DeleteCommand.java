@@ -24,6 +24,8 @@ public class DeleteCommand<T extends Content> extends Command {
     private final Class<T> type;
     private int itemNumber;
 
+    protected String deletedContentName;
+
     /**
      * Creates a DeleteCommand object with referenced to the provided class type.
      *
@@ -76,6 +78,7 @@ public class DeleteCommand<T extends Content> extends Command {
      * @param moduleManager The ModuleManager that contains the NusModules.
      * @return CommandResult to indicate the success and additional information about the execution.
      * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.
+     * @throws IOException when file is inaccessible.
      */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException, IOException {
@@ -84,7 +87,7 @@ public class DeleteCommand<T extends Content> extends Command {
         ContentManager<T> contentManager = module.getContentManager(type);
         assert contentManager != null;
         TerminusLogger.info("Executing Delete Command");
-        String deletedContentName = contentManager.deleteContent(itemNumber);
+        this.deletedContentName = contentManager.deleteContent(itemNumber);
         assert deletedContentName != null && !deletedContentName.isBlank();
         TerminusLogger.info(
                 String.format("%s(%s) has been deleted", CommonUtils.getClassName(type), deletedContentName));

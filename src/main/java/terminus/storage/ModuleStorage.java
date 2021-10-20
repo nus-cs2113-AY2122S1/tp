@@ -204,16 +204,50 @@ public class ModuleStorage {
         for (Note note : noteArrayList) {
             assert Files.isDirectory(modDirPath);
             assert CommonUtils.isValidFileName(note.getName());
-            Path filePath = Paths.get(modDirPath.toString(), note.getName() + CommonFormat.EXTENSION_TEXT_FILE);
-            Files.writeString(filePath, note.getData());
-            TerminusLogger.info("Added file: " + filePath);
+            createNoteFile(modDirPath, note);
         }
+    }
+
+    /**
+     * Removes deleted note file from module folder.
+     *
+     * @param moduleName The module name related to the new note.
+     * @param noteName The note removed from moduleManager.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
+    public void removeNoteFromModule(String moduleName, String noteName) throws IOException {
+        Path modDirPath = Paths.get(filePath.getParent().toString(), moduleName);
+        if (Files.notExists(modDirPath)) {
+            TerminusLogger.info("Module directory not found: " + modDirPath);
+            return;
+        }
+        File deleteFile = new File(
+                Paths.get(modDirPath.toString(), noteName + CommonFormat.EXTENSION_TEXT_FILE).toString());
+        deleteFile.delete();
+    }
+
+    /**
+     * Add new notes file into module folder.
+     *
+     * @param moduleName The module name related to the new note.
+     * @param newNote The new note added to moduleManager.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
+    public void addNoteFromModule(String moduleName, Note newNote) throws IOException {
+        Path modDirPath = Paths.get(filePath.getParent().toString(), moduleName);
+        if (Files.notExists(modDirPath)) {
+            TerminusLogger.info("Creating directory: " + modDirPath);
+            Files.createDirectories(modDirPath);
+        }
+        createNoteFile(modDirPath, newNote);
+
     }
 
     /**
      * Deletes all files within a specified directory given by its full path.
      *
      * @param directoryPath Directory path where all files inside will be deleted.
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     private void deleteAllFilesInDirectory(Path directoryPath) throws IOException {
         File folder = new File(directoryPath.toString());
@@ -295,6 +329,12 @@ public class ModuleStorage {
 
     private boolean isValidFileSize(File file) throws IOException {
         return Files.size(Paths.get(file.getAbsolutePath())) <= CommonFormat.MAX_FILE_SIZE;
+    }
+
+    private void createNoteFile(Path modDirPath, Note note) throws IOException {
+        Path filePath = Paths.get(modDirPath.toString(), note.getName() + CommonFormat.EXTENSION_TEXT_FILE);
+        Files.writeString(filePath, note.getData());
+        TerminusLogger.info("Added file: " + filePath);
     }
 
 
