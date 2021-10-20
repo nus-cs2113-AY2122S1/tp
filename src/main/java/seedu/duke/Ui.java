@@ -88,7 +88,7 @@ public class Ui {
     }
 
     public static void printUnknownCommandError() {
-        System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter -help "
+        System.out.println("Sorry, we didn't recognize your entry. Please try again, or enter help "
                 + "to learn more.");
     }
 
@@ -187,6 +187,13 @@ public class Ui {
         for (Person person : personArrayList){
             System.out.println(person.getName() + " ");
         }
+
+    public static void displayHelp() {
+        System.out.println("Create a trip to get started!");
+        System.out.println("create [place] [date] [exchange rate] [budget] [people]");
+        System.out.println();
+        System.out.println("Type [open] to open your trip");
+        System.out.println("While a trip is open, type [expense] to create an expense for that trip");
         System.out.println();
     }
 }

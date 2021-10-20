@@ -106,6 +106,10 @@ public class Parser {
             }
             break;
 
+        case "help":
+            Ui.displayHelp();
+            break;
+
         default:
             Ui.printUnknownCommandError();
         }
@@ -209,8 +213,9 @@ public class Parser {
         String expenseCategory = expenseInfo[1].toLowerCase();
         ArrayList<Person> listOfPersonsIncluded = checkValidPersons(Storage.getOpenTrip(), expenseInfo[2]);
         String expenseDescription = getDescription(expenseInfo[2]);
-        Expense currExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
-        currTrip.addExpense(currExpense);
+        Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
+        newExpense.setDate(newExpense.prompDate());
+        currTrip.addExpense(newExpense);
         getAdditionalExpenseInfo(currExpense);
         Ui.printExpenseAddedSuccess();
     }

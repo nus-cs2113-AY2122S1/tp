@@ -3,6 +3,7 @@ open 1
 list
 edit 1 budget 2000
 expense 8.00 food yikai,yuzhao /this is what i want to type
+19-10-2021
 list
 view
 delete expense 2

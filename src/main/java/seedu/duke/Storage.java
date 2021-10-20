@@ -15,7 +15,8 @@ public class Storage {
     private static Logger logger;
 
     private static final ArrayList<String> validCommands = new ArrayList<>(
-            Arrays.asList("create", "edit", "view", "open", "list", "summary", "delete", "expense", "quit"));
+            Arrays.asList("create", "edit", "view", "open", "list", "summary",
+                    "delete", "expense", "quit", "help"));
 
     public static Scanner getScanner() {
         return scanner;
