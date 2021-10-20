@@ -4,13 +4,13 @@
 
 ## Introduction
 
-- StonksXD is a smart money management application that tracks daily expenses, sets/adjusts spending limits and gives advice based on daily expenses.
+StonksXD is a smart money management application that does the following: 
+- tracks daily expenses, 
+- sets/adjusts spending limits
+- gives advice based on available data
 
-
-- As a user you could view your financial records in different forms of currencies and in the forms of graphs to help you better understand your finances.
-
-
-- It targets students who travel frequently and prefer logging their financial records daily. With the application, students will then be able to manage their finances in different currencies with functions optimised for daily logging.
+It is optimised for a once-a-day logging system and allows you to 
+view your financial records through both text and graphs in different currencies!
 
 ## Table of Contents
 
@@ -38,30 +38,15 @@
 ## Quick Start
 
 1. Ensure that you have Java 11 or above installed.
-
-
 2. Download the latest version of `StonksXD.jar` from [here](https://github.com/AY2122S1-CS2113T-T12-3/tp/releases).
-
-
 3. Copy the file to the folder you want to use as the home folder for your `StonksXD`.
-
-
 4. Open the Command-Line interface (CLI) and navigate to the directory where you saved the `.jar` file and run `java -jar tp.java` in the command line. `StonksXD` will start up.
-
-
 5. In `StonksXD`, type the command in the CLI and press Enter to execute it. (Tip: type `help` to show all available commands and their format.)
-
-
 6. Use the format `add_ex d/DESCRIPTION a/AMOUNT c/CATEGORY` to add expense entries to `StonksXD`.
-
-
 7. Use the format `add_in d/DESCRIPTION a/AMOUNT c/CATEGORY` to add income entries to `StonksXD`.
-
-
 8. Type `balance` to view your net saving.
+9. Refer to the [Features](#features) below for details of each command.
 
-
-9. Refer to the [Features](#features) below for the full details of each command.
 ## Features 
 
 ### Notes
