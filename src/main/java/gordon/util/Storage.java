@@ -133,13 +133,12 @@ public class Storage {
             String parsedStep = line.substring(dotIndex + 2);
             Tag createdTag = new Tag(parsedStep, r.getName());
 
-            if (!cookbook.isCookbookTagExists(parsedStep)) {
+            if (!cookbook.doesCookbookTagExists(parsedStep)) {
                 cookbook.addCookbookTag(createdTag);
-                r.addTag(createdTag);
             } else {
                 cookbook.appendRecipeToCookbookTag(createdTag.getTagName(), r.getName());
-                r.addTag(createdTag);
             }
+            r.addTagToRecipe(createdTag, r.getName());
         }
     }
 

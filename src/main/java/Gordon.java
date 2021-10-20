@@ -3,6 +3,7 @@ import gordon.exception.GordonException;
 import gordon.util.Parser;
 import gordon.util.Storage;
 import gordon.kitchen.Cookbook;
+import gordon.util.UI;
 
 import java.nio.file.Paths;
 import java.util.logging.Logger;
@@ -26,12 +27,15 @@ public class Gordon {
     public void run() {
         assert (parser != null && mainCookbook != null);
         logger.log(Level.INFO, "Processing start.");
+        UI ui = new UI();
+        ui.printIntro();
+        ui.printHelp();
         while (parser.parseNextLine()) {
             Command command = parser.parseMaster();
             command.execute(mainCookbook);
             storage.saveCookbook(mainCookbook);
         }
-        System.out.println("Pack your bags, you're off the show");
+        ui.printExitMessage();
         logger.log(Level.INFO, "Processing end.");
     }
 
