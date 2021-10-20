@@ -26,8 +26,7 @@ public class Ui {
     }
 
     public static void printWrongInputMessage() {
-        System.out.println("Wrong commands have been input. To get help on the overview and guide of how to use the "
-                + "programme, please take a look at our user guide at https://github.com/AY2122S1-CS2113T-F12-4/tp");
+        System.out.println("Wrong input. Please key in --help for some help on how to use the programme.");
     }
 
     public static void printMatchingTrainingList(TrainingList trainings, String query) {

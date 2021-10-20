@@ -435,7 +435,7 @@ public class Parser {
     }
 
     public static void wrongInputTypeMessage() {
-        System.out.println("Wrong input. Please key in --help for some help on how to use the programme.");
+        Ui.printWrongInputMessage();
     }
 
     /**
