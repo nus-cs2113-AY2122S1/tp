@@ -4,16 +4,19 @@ import seedu.duke.employee.EmployeeList;
 import seedu.duke.employee.EmployeeParser;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientParser;
+import seedu.duke.finance.FinanceList;
+import seedu.duke.finance.FinanceParser;
 import seedu.duke.dish.Menu;
 import seedu.duke.dish.DishParser;
 
 public class MainParser {
 
     public static boolean handleCommand(EmployeeList employeeList, Menu menu, IngredientList ingredientList,
-                                        String userInput) {
+                                        FinanceList financeList, String userInput) {
         EmployeeParser employeeParser = new EmployeeParser();
         DishParser dishParser = new DishParser();
         IngredientParser ingredientParser = new IngredientParser();
+        FinanceParser financeParser = new FinanceParser();
 
         String[] command = userInput.trim().split("/", 3);
 
@@ -50,6 +53,21 @@ public class MainParser {
             break;
         case "list-ingredient":
             ingredientParser.listIngredient(ingredientList);
+            break;
+        case "add-finance":
+            financeParser.addFinance(command, financeList);
+            break;
+        case "remove-finance":
+            financeParser.deleteFinance(command, financeList);
+            break;
+        case "list-finance":
+            financeParser.listFinance(financeList);
+            break;
+        case "show-finance":
+            financeParser.showFinance(financeList);
+            break;
+        case "edit-finance":
+            financeParser.editFinance(command, financeList);
             break;
         case "bye":
             return true;
