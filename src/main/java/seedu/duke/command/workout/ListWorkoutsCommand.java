@@ -32,6 +32,6 @@ public class ListWorkoutsCommand extends Command {
         if (allWorkouts.isEmpty()) {
             return new CommandResult(MESSAGE_EMPTY_WORKOUT_LIST);
         }
-        return new CommandResult("Workout list: ", allWorkouts);
+        return new CommandResult("Workout list:", allWorkouts);
     }
 }

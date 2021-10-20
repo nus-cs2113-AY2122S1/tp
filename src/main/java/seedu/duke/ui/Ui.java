@@ -45,8 +45,7 @@ public class Ui {
 
     public static String getHelpMessage() {
 
-        return DIVIDER + "\n"
-                + "Here's a list of commands and what they do.\n"
+        return "Here's a list of commands and what they do.\n"
                 + "To find out more information about the command, such as input format and parameters, "
                 + "enter \"help COMMAND\" where COMMAND is the command you want to know more about\n"
                 + "\"add\" : Adds an exercise to a workout\n"
@@ -58,8 +57,7 @@ public class Ui {
                 + "\"recommend\" : Recommends workouts of a given difficulty\n"
                 + "\"display\" : Shows all the exercises in a specified workout\n"
                 + "\"search\" : Displays workouts or exercises that contain the specified keyword\n"
-                + "\"bye\" : Ends the program\n"
-                + DIVIDER;
+                + "\"bye\" : Ends the program";
     }
 
     private void printText(String message) {
