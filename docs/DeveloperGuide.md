@@ -24,6 +24,28 @@ there must be at least one trip added by the user (either through input or throu
 save file) in order for any other features to be available. If there are no trips added, the program 
 will repeatedly prompt the user to add a new trip.
 
+###`Ui` Class
+
+The `Ui` class handles everything that the user sees, which includes exception handling messages, outputs to users and feedback.
+
+`Ui` class consists of multiple print methods, where some are listed above in the UML diagram. `Ui` depends on other classes, 
+such as `Storage`, `Parser`, `Trip` and `Expense` to obtain information stored in these classes.
+
+The `Ui` class,
+- Obtains information from Storage, Parser, Trip and Expense components.
+- Prints the information through the terminal.
+
+###`Parser` Class
+
+The `Parser` class handles all input and executes the corresponding actions based on the user input. 
+It consists of methods that will execute most commands that is crucial to the functionality of our program.
+
+`Parser` depends on other classes for the respective inputs and outputs.`Duke` calls the `Parser` class in order for the 
+necessary commands to be executed. However, not all functionality is stored here. Rather, `Parser` acts like an interface 
+that handles all the logic required to pass in the correct information into the different classes to execute.
+
+The `Parser` class
+- Contains the logic to check user commands and break the input into the necessary contents for other classes to use
 
 
 ## Product scope
