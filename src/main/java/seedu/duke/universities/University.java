@@ -20,6 +20,9 @@ public class University {
         list.add(new ModuleMapping(localModule, mappedModule));
     }
 
+    public void removeMapping(Module localModule, Module mappedModule) {
+        list.remove(new ModuleMapping(localModule, mappedModule));
+    }
 
     public void listAllMappings() {
         for (int i = 0; i < list.size(); i++) {
@@ -94,4 +97,5 @@ public class University {
         }
         return result;
     }
+
 }
