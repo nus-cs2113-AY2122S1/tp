@@ -4,7 +4,7 @@ import seedu.duke.command.flags.DeadlineFlag;
 import seedu.duke.command.flags.EventFlag;
 import seedu.duke.command.flags.TodoFlag;
 import seedu.duke.parser.DateParser;
-import seedu.duke.task.Task;
+import seedu.duke.task.TaskManager;
 
 public enum CommandEnum {
     BYE("bye"),
@@ -51,7 +51,7 @@ public enum CommandEnum {
         default:
             return usage;
         }
-        return usage + ' ' + Task.getOptionalTaskArguments(OPTIONAL_ARGUMENT_FORMAT, ARGUMENT_SPLIT);
+        return usage + ' ' + TaskManager.getOptionalTaskArguments(OPTIONAL_ARGUMENT_FORMAT, ARGUMENT_SPLIT);
     }
 
     @Override
