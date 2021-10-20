@@ -1,0 +1,35 @@
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+
+actor User
+database Computer
+
+rectangle Gordon {
+}
+
+rectangle Cookbook {
+}
+
+rectangle Recipe {
+}
+
+rectangle Parser {
+}
+
+rectangle Tag {
+}
+
+rectangle Storage {
+}
+
+User .> Gordon
+Gordon --> Parser
+Gordon --> Cookbook
+Parser --> Recipe
+Cookbook --> Recipe
+Cookbook --> Tag
+Gordon --> Storage
+Storage ..> Computer
+
+@enduml

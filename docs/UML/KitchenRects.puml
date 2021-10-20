@@ -1,5 +1,4 @@
 @startuml
-'https://plantuml.com/class-diagram
 !include Style.puml
 skinparam ArrowColor LOGIC_BLUE_5
 
@@ -21,5 +20,4 @@ rectangle "Kitchen" {
     Cookbook *- Recipe
     Cookbook *--- Tag
 }
-
 @enduml
