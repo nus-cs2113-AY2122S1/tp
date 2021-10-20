@@ -12,7 +12,7 @@ import terminus.module.ModuleManager;
 
 public class ModuleWorkspaceCommandParser extends CommandParser {
 
-    private static final ModuleWorkspaceCommandParser PARSER = new ModuleWorkspaceCommandParser();
+    private static ModuleWorkspaceCommandParser parser;
 
     /**
      * Initializes the commandMap. Adds some default commands to it.
@@ -22,11 +22,12 @@ public class ModuleWorkspaceCommandParser extends CommandParser {
     }
 
     public static ModuleWorkspaceCommandParser getInstance() {
-        ModuleWorkspaceCommandParser parser = new ModuleWorkspaceCommandParser();
-        parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
-        parser.addCommand(CommonFormat.COMMAND_NOTE, new NotesCommand());
-        parser.addCommand(CommonFormat.COMMAND_SCHEDULE, new ScheduleCommand());
-        parser.addCommand(CommonFormat.COMMAND_QUESTION, new QuestionCommand());
+        if (parser == null) {
+            parser = new ModuleWorkspaceCommandParser();
+            parser.addCommand(CommonFormat.COMMAND_BACK, new BackCommand());
+            parser.addCommand(CommonFormat.COMMAND_NOTE, new NotesCommand());
+            parser.addCommand(CommonFormat.COMMAND_SCHEDULE, new ScheduleCommand());
+        }
         return parser;
     }
 
