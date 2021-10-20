@@ -82,6 +82,12 @@ that handles all the logic required to pass in the correct information into the 
 The `Parser` class
 - Contains the logic to check user commands and break the input into the necessary contents for other classes to use
 
+### `Expense` Class
+The `Expense` class deals with most functionalities related to adding an expense inside a trip. The sequence diagram below shows how an expense is initialised.
+
+
+When `Parser` calls the `executeExpense` method, it creates an expense object, and also calls the `promptDate` method to set that expense object’s date. `promptDate` calls `isDateValid` to validate user input.
+
 
 ## Product scope
 ### Target user profile
