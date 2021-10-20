@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class SortDishCommand extends Command {
-    private static final Ui ui =  new Ui();
+    private static final Ui ui = new Ui();
     Comparator<Dish> dishComparator;
 
     @Override
