@@ -1,0 +1,83 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":AddStock" as addstock COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant ":CommandSyntax" as commandsyntax COLOR_UTILITIES
+    participant ":StockValidator" as stockvalidator COLOR_UTILITIES
+    participant ":StockManager" as stockmanager COLOR_UTILITIES
+    participant ":Ui" as ui COLOR_UTILITIES
+    participant ":Storage" as storage COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant ":Medicine" as medicine COLOR_INVENTORY
+end box
+
+autoactivate on
+
+-> addstock: execute()
+    addstock -> ui: getInstance()
+    addstock <-- ui
+    addstock -> medicine : getInstance()
+    addstock <-- medicine
+
+    alt nameExist
+
+        addstock -> addstock : checkValidParametersAndValues()
+        opt !isInvalidParameter
+            addstock -> commandsyntax : containsInvalidParameters()
+            addstock <-- commandsyntax : isInvalidParameter
+            opt !isInvalidParameterValues
+                addstock -> stockvalidator : containsInvalidParameterValues()
+                addstock <-- stockvalidator : isInvalidParameterValues
+
+                end
+            end
+            addstock --> addstock : isCheckValidParametersAndValues
+
+                addstock -> stockmanager: getTotalStockQuantity()
+                addstock <-- stockmanager: totalStock
+
+
+                addstock -> addstock : checkDateAndQuantity()
+                    opt isValidDate
+                        addstock -> stockvalidator : dateValidityChecker()
+                        addstock <-- stockvalidator : isValidDate
+                        opt isValidQuantity
+                            addstock -> stockvalidator : quantityValidityChecker()
+                            addstock <-- stockvalidator : isValidQuantity
+
+                        end
+                    end
+                    addstock --> addstock : isCheckDateAndQuantity
+
+
+
+    else !nameExist
+        addstock -> addstock : checkValidParametersAndValues()
+        opt !isInvalidParameter
+            addstock -> commandsyntax : containsInvalidParameters()
+            addstock <-- commandsyntax : isInvalidParameter
+            opt !isInvalidParameterValues
+            addstock -> stockvalidator : containsInvalidParameterValues()
+            addstock <-- stockvalidator : isInvalidParameterValues
+            end
+        end
+        addstock --> addstock : isCheckValidParametersAndValues
+
+    addstock -> storage: getInstance()
+    addstock <-- storage
+    addstock -> storage: saveData()
+    deactivate storage
+
+    end
+
+
+
+@enduml

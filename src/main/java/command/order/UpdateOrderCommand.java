@@ -37,7 +37,6 @@ public class UpdateOrderCommand extends Command {
 
         Ui ui = Ui.getInstance();
         ArrayList<Medicine> medicines = Medicine.getInstance();
-        Storage storage = Storage.getInstance();
 
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
@@ -99,6 +98,8 @@ public class UpdateOrderCommand extends Command {
         setUpdatesByOrderId(parameters, filteredOrders, order);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
         ui.printOrders(filteredOrders);
+        Storage storage = Storage.getInstance();
+        storage.saveData(medicines);
         logger.log(Level.INFO, "End of UpdateOrder command execution.");
     }
 

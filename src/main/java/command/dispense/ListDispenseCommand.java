@@ -58,18 +58,18 @@ public class ListDispenseCommand extends Command {
             return;
         }
 
-        ArrayList<Dispense> filteredDispense = new ArrayList<>();
+        ArrayList<Dispense> filteredDispenses = new ArrayList<>();
 
-        assert (filteredDispense != null) : "Array is not initialised";
+        assert (filteredDispenses != null) : "Array is not initialised";
 
         for (Medicine medicine : medicines) {
             if (medicine instanceof Dispense) {
-                filteredDispense.add((Dispense) medicine);
+                filteredDispenses.add((Dispense) medicine);
             }
         }
-        filteredDispense = filterDispense(parameters, filteredDispense);
+        filteredDispenses = filterDispenses(parameters, filteredDispenses);
 
-        ui.printDispenses(filteredDispense);
+        ui.printDispenses(filteredDispenses);
         logger.log(Level.INFO, "Successful listing of dispense");
     }
 
@@ -78,38 +78,38 @@ public class ListDispenseCommand extends Command {
      * Helps to filter dispense records based on the user's input.
      *
      * @param parameters       HashMap Key-Value set for parameter and user specified parameter value.
-     * @param filteredDispense Arraylist of Dispense objects.
+     * @param filteredDispenses Arraylist of Dispense objects.
      * @return Arraylist of filtered Dispense objects based on the user's parameters values.
      */
-    private ArrayList<Dispense> filterDispense(LinkedHashMap<String, String> parameters,
-                                               ArrayList<Dispense> filteredDispense) {
+    private ArrayList<Dispense> filterDispenses(LinkedHashMap<String, String> parameters,
+                                                ArrayList<Dispense> filteredDispenses) {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {
             case CommandParameters.ID:
-                filteredDispense = (ArrayList<Dispense>) filteredDispense.stream()
+                filteredDispenses = (ArrayList<Dispense>) filteredDispenses.stream()
                         .filter((d) -> d.getDispenseId() == Integer.parseInt(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.NAME:
-                filteredDispense = (ArrayList<Dispense>) filteredDispense.stream()
+                filteredDispenses = (ArrayList<Dispense>) filteredDispenses.stream()
                         .filter((d) -> d.getMedicineName().toUpperCase().contains(parameterValue.toUpperCase()))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.QUANTITY:
-                filteredDispense = (ArrayList<Dispense>) filteredDispense.stream()
+                filteredDispenses = (ArrayList<Dispense>) filteredDispenses.stream()
                         .filter((d) -> d.getQuantity() == Integer.parseInt(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.CUSTOMER_ID:
-                filteredDispense = (ArrayList<Dispense>) filteredDispense.stream()
+                filteredDispenses = (ArrayList<Dispense>) filteredDispenses.stream()
                         .filter((d) -> d.getCustomerId().toUpperCase().contains(parameterValue.toUpperCase()))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.DATE:
                 try {
                     Date date = DateParser.stringToDate(parameterValue);
-                    filteredDispense = (ArrayList<Dispense>) filteredDispense.stream()
+                    filteredDispenses = (ArrayList<Dispense>) filteredDispenses.stream()
                             .filter((m) -> m.getDate().equals(date))
                             .collect(Collectors.toList());
                 } catch (ParseException e) {
@@ -117,25 +117,25 @@ public class ListDispenseCommand extends Command {
                 }
                 break;
             case CommandParameters.STAFF:
-                filteredDispense = (ArrayList<Dispense>) filteredDispense.stream()
+                filteredDispenses = (ArrayList<Dispense>) filteredDispenses.stream()
                         .filter((d) -> d.getStaff().toUpperCase().contains(parameterValue.toUpperCase()))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.STOCK_ID:
-                filteredDispense = (ArrayList<Dispense>) filteredDispense.stream()
+                filteredDispenses = (ArrayList<Dispense>) filteredDispenses.stream()
                         .filter((d) -> d.getStockId() == Integer.parseInt(parameterValue))
                         .collect(Collectors.toList());
                 break;
             case CommandParameters.SORT:
-                filteredDispense.sort(new DispenseComparator(parameterValue.toLowerCase(), false));
+                filteredDispenses.sort(new DispenseComparator(parameterValue.toLowerCase(), false));
                 break;
             case CommandParameters.REVERSED_SORT:
-                filteredDispense.sort(new DispenseComparator(parameterValue.toLowerCase(), true));
+                filteredDispenses.sort(new DispenseComparator(parameterValue.toLowerCase(), true));
                 break;
             default:
-                return filteredDispense;
+                return filteredDispenses;
             }
         }
-        return filteredDispense;
+        return filteredDispenses;
     }
 }

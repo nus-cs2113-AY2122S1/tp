@@ -10,10 +10,10 @@ It is an integrated solution that provides real-time tracking of stock, orders a
 * [Quick Start](#quick-start)
 * [Features](#features)
     * [Changing modes](#changing-modes)
-    * [Add medication stock](#adding-a-medication-stock-add)
+    * [Add medication stock](#adding-a-medication-stock-addstock)
     * [Delete medication stock](#deleting-a-medication-stock-delete)
     * [Update medication stock](#updating-medication-stock-information-update)
-    * [List medication stock](#listing-medication-stock--list)
+    * [List medication stock](#listing-medication-stock--liststock)
     * [Add dispense record](#adding-a-dispense-record-adddispense)
     * [Delete dispense record](#deleting-a-dispense-record-deletedispense)
     * [Update dispense record](#updating-dispense-record-updatedispense)
@@ -27,6 +27,8 @@ It is an integrated solution that provides real-time tracking of stock, orders a
     * [Purge data](#purging-existing-data--purge)
     * [Help](#showing-help-page--help)
     * [Exit](#exiting-medivault--exit)
+    * [Data Storage](#data-storage)
+    * [Data Editing](#data-editing)
 * [FAQ](#faq)
 * [Command Summary](#command-summary)
 
@@ -71,54 +73,60 @@ Mode has changed to DISPENSE.
 [DISPENSE] > 
 ```
 
-### Adding a medication stock: `add`
-
+### Adding a medication stock: `addstock`
 Adds medication into the inventory.
+* If medication exists, description and maximum quantity will be optional parameters. If you include `d/DESCRIPTION m/MAX_QUANTITY` parameter, it will be ignored, MediVault will add with the existing description and existing maximum quantity.
 
-* If medication exists, description and maximum quantity will be optional parameters. If you
-  include `d/DESCRIPTION m/MAX_QUANTITY` parameter, it will be ignored, MediVault will add with the existing description
-  and existing maximum quantity.
+Format: `addstock n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE [d/DESCRIPTION m/MAX_QUANTITY]`
 
-Format: `add n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE [d/DESCRIPTION m/MAX_QUANTITY]`
-
-Example 1 (If medication exists): `add n/panadol p/5 q/50 e/19-09-2021`
+Example 1 (If medication exists): `addstock n/panadol p/5 q/50 e/19-09-2021`
 
 Expected Output 1:
-
 ```
+Medicine exists. Using existing description and maximum quantity.
 Medication added: panadol
-+====+=========+=======+==========+=============+==================================================+==============+
-| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE |                   DESCRIPTION                    | MAX_QUANTITY | 
-+====+=========+=======+==========+=============+==================================================+==============+
-| 1  | panadol | $5.00 |    50    | 19-09-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS |     1000     | 
-+----+---------+-------+----------+-------------+--------------------------------------------------+--------------+
++====+=========+=======+==========+=============+===============================================+==============+
+| ID |  NAME   | PRICE | QUANTITY | EXPIRY_DATE |                  DESCRIPTION                  | MAX_QUANTITY | 
++====+=========+=======+==========+=============+===============================================+==============+
+| 7  | panadol | $5.00 |    50    | 19-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND   |     1000     | 
+|    |         |       |          |             |                     PAINS                     |              | 
++----+---------+-------+----------+-------------+-----------------------------------------------+--------------+
 ```
-
-Example 2 (If medication does not exists): `add n/vicodin q/10 p/10 e/02-11-2021 d/popular drug for treating pain m/500`
+Example 2 (If medication does not exists): `addstock n/paracetamol q/10 p/10 e/02-11-2021 d/used to treat fever and pain m/500`
 
 Expected Output 2:
-
 ```
-Medication added: vicodin
-+====+=========+========+==========+=============+================================+==============+
-| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE |          DESCRIPTION           | MAX_QUANTITY | 
-+====+=========+========+==========+=============+================================+==============+
-| 2  | vicodin | $10.00 |    10    | 02-11-2021  | popular drug for treating pain |     500      | 
-+----+---------+--------+----------+-------------+--------------------------------+--------------+
+Medication added: paracetamol
++====+=============+========+==========+=============+==============================+==============+
+| ID |    NAME     | PRICE  | QUANTITY | EXPIRY_DATE |         DESCRIPTION          | MAX_QUANTITY | 
++====+=============+========+==========+=============+==============================+==============+
+| 10 | paracetamol | $10.00 |    10    | 02-11-2021  | used to treat fever and pain |     500      | 
++----+-------------+--------+----------+-------------+------------------------------+--------------+
 ```
 
 ### Deleting a medication stock: `delete`
 
-Deletes medication from the inventory by specifying stock Id.
+Deletes medication from the inventory.
 
-Format: `delete i/STOCK_ID`
+* Able to delete a specific stock by specifying stock Id using `i/STOCK_ID`.
+* Able to delete multiple stocks that have expiry date before and equals to specified date using `e/EXPIRY_DATE`.
 
-Example: `delete i/3`
+Format: `deletestock [i/STOCK_ID e/EXPIRY_DATE]`
+
+Example 1 (Deletion by stock Id): `deletestock i/3`
 
 Expected output:
 
 ```
-Medication deleted: Stock_Id=3
+Deleted row with Stock Id: 3
+```
+
+Example 2 (Deletion by expiry date): `deletestock e/10-10-2021`
+
+Expected output:
+
+```
+Deleted expired medications! Rows deleted: 4
 ```
 
 ### Updating medication stock information: `update`
@@ -148,58 +156,83 @@ Updated! Number of rows affected: 1
 +----+---------+--------+----------+-------------+-------------------------------------------------+--------------+
 ```
 
-### Listing medication stock : `list`
+### Listing medication stock : `liststock`
 
 Lists all existing medication in the inventory.
 
-* All parameters for `list` command are optional, you can choose to list medication by any of the parameters.
+* All parameters for `liststock` command are optional, you can choose to list medication by any of the parameters.
 * Example 1 demonstrates the list of all medication without parameters.
 * Example 2 demonstrates list by medication name.
 
-Format: `list {i/STOCK_ID n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
+Format: `liststock {i/STOCK_ID n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY sort/COLUMN_NAME rsort/COLUMN_NAME}`
 
-Example 1: `list`
-
-Expected output:
-
-```
-+====+==============+========+==========+=============+====================================================+==============+
-| ID |     NAME     | PRICE  | QUANTITY | EXPIRY_DATE |                    DESCRIPTION                     | MAX_QUANTITY |
-+====+==============+========+==========+=============+====================================================+==============+
-| 1  |   PANADOL    | $20.00 |    20    | 13-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS  |     1000     |
-+----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
-| 2  |   PANADOL    | $20.00 |    10    | 14-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS  |     1000     |
-+----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
-| 3  |   VICODIN    | $10.00 |    20    | 30-09-2021  |    POPULAR DRUG FOR TREATING ACUTE OR CHRONIC      |     500      |
-|    |              |        |          |             |         MODERATE TO MODERATELY SEVERE PAIN         |              |
-+----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
-| 4  | SIMVASTATIN  | $20.00 |    25    | 10-10-2021  |  TREATS HIGH CHOLESTEROL AND REDUCES THE RISK OF   |     800      |
-|    |              |        |          |             |                       STROKE                       |              |
-+----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
-| 5  |  LISINOPRIL  | $20.00 |    25    | 15-10-2021  |          USED FOR TREATING HYPOTHYROIDISM          |     800      |
-+----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
-| 6  | AZITHROMYCIN | $20.00 |    35    | 15-10-2021  |     USED FOR TREATING EAR, THROAT, AND SINUS       |     100      |
-|    |              |        |          |             |                     INFECTIONS                     |              |
-+----+--------------+--------+----------+-------------+----------------------------------------------------+--------------+
-```
-
-Example 2: `list n/panadol`
+Example 1: `liststock`
 
 Expected output:
 
 ```
-+====+=========+========+==========+=============+==================================================+==============+
-| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE |                   DESCRIPTION                    | MAX_QUANTITY |
-+====+=========+========+==========+=============+==================================================+==============+
-| 1  | PANADOL | $20.00 |    20    | 13-09-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS |     1000     |
-+----+---------+--------+----------+-------------+--------------------------------------------------+--------------+
-| 2  | PANADOL | $20.00 |    10    | 14-09-2021  | BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS |     1000     |
-+----+---------+--------+----------+-------------+--------------------------------------------------+--------------+
++====+==============+========+==============+=============+===============================================+==============+
+| ID |     NAME     | PRICE  |   QUANTITY   | EXPIRY_DATE |                  DESCRIPTION                  | MAX_QUANTITY | 
++====+==============+========+==============+=============+===============================================+==============+
+| 1  |   PANADOL    | $20.00 |      20      | 13-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND   |     1000     | 
+|    |              |        | PENDING: 150 |             |                     PAINS                     |              | 
++----+--------------+--------+--------------+-------------+-----------------------------------------------+--------------+
+| 2  |   PANADOL    | $20.00 |      10      | 14-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND   |     1000     | 
+|    |              |        | PENDING: 150 |             |                     PAINS                     |              | 
++----+--------------+--------+--------------+-------------+-----------------------------------------------+--------------+
+| 3  |   VICODIN    | $10.00 |      20      | 30-09-2021  |  POPULAR DRUG FOR TREATING ACUTE OR CHRONIC   |     500      | 
+|    |              |        | PENDING: 30  |             |      MODERATE TO MODERATELY SEVERE PAIN       |              | 
++----+--------------+--------+--------------+-------------+-----------------------------------------------+--------------+
+| 4  | SIMVASTATIN  | $20.00 |      25      | 10-10-2021  |   TREATS HIGH CHOLESTEROL AND REDUCES THE     |     800      | 
+|    |              |        | PENDING: 20  |             |                RISK OF STROKE                 |              | 
++----+--------------+--------+--------------+-------------+-----------------------------------------------+--------------+
+| 5  |  LISINOPRIL  | $20.00 |      25      | 15-10-2021  |       USED FOR TREATING HYPOTHYROIDISM        |     800      | 
+|    |              |        | PENDING: 200 |             |                                               |              | 
++----+--------------+--------+--------------+-------------+-----------------------------------------------+--------------+
+| 6  | AZITHROMYCIN | $20.00 |      35      | 15-10-2021  |   USED FOR TREATING EAR, THROAT, AND SINUS    |     100      | 
+|    |              |        | PENDING: 100 |             |                  INFECTIONS                   |              | 
++----+--------------+--------+--------------+-------------+-----------------------------------------------+--------------+
+```
+
+Example 2: `liststock n/panadol`
+
+Expected output:
+
+```
++====+=========+========+==============+=============+===============================================+==============+
+| ID |  NAME   | PRICE  |   QUANTITY   | EXPIRY_DATE |                  DESCRIPTION                  | MAX_QUANTITY | 
++====+=========+========+==============+=============+===============================================+==============+
+| 1  | PANADOL | $20.00 |      20      | 13-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND   |     1000     | 
+|    |         |        | PENDING: 150 |             |                     PAINS                     |              | 
++----+---------+--------+--------------+-------------+-----------------------------------------------+--------------+
+| 2  | PANADOL | $20.00 |      10      | 14-09-2021  |  BEST MEDICINE TO CURE HEADACHES, FEVER AND   |     1000     | 
+|    |         |        | PENDING: 150 |             |                     PAINS                     |              | 
++----+---------+--------+--------------+-------------+-----------------------------------------------+--------------+
 ```
 
 ### Adding a dispense record: `adddispense`
+Add a dispense.
+
+Format: `adddispense n/NAME q/QUANTITY s/STAFF c/CUSTOMER_ID`
+
+Example: `adddispense n/panadol q/5 s/john c/123`
+
+Expected Output:
+```
+Dispensed:panadol Quantity:5 Expiry Date:13-09-2021
+```
 
 ### Deleting a dispense record: `deletedispense`
+Deletes dispense by specifying the dispense Id.
+
+Format: `deletedispense i/DISPENSE_ID`
+
+Example: `deletedispense i/3`
+
+Expected output:
+```
+Dispense deleted for Dispense Id 3
+```
 
 ### Updating dispense record: `updatedispense`
 
@@ -256,10 +289,75 @@ Expected output:
 ### Adding an order: `addorder`
 
 ### Deleting an order: `deleteorder`
+Deletes order by specifying the order Id.
+
+Format: `deleteorder i/ORDER_ID`
+
+Example: `deleteorder i/1`
+
+Expected output:
+```
+Order deleted for Order Id 1
+```
 
 ### Updating order: `updateorder`
 
 ### Listing order : `listorder`
+
+Lists all order records in the application.
+
+* All parameters for `listorder` command are optional, you can choose to list the records by any of the parameters.
+* You are able to listorder by id, name, quantity, date, status and also sort/rsort by columns.
+* Example 1 demonstrates the list of all order records without parameters.
+* Example 2 demonstrates the list of all orders that are PENDING.
+
+Format: `listorder {i/ID n/NAME q/QUANTITY d/DATE s/STATUS sort/COLUMN_NAME rsort/COLUMN NAME}`
+
+Example 1: `listorder`
+
+Expected output:
+
+```
++====+==============+==========+============+===========+
+| ID |     NAME     | QUANTITY |    DATE    |  STATUS   | 
++====+==============+==========+============+===========+
+| 1  |   PANADOL    |   100    | 09-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+| 2  |   VICODIN    |    30    | 09-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+| 3  |   VICODIN    |    50    | 10-10-2021 | DELIVERED | 
++----+--------------+----------+------------+-----------+
+| 4  | SIMVASTATIN  |    20    | 11-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+| 5  |  LISINOPRIL  |   200    | 12-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+| 6  | AZITHROMYCIN |   100    | 13-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+| 7  |   PANADOL    |    50    | 13-10-2021 |  PENDING  | 
++----+--------------+----------+------------+-----------+
+```
+
+Example 2: `listorder s/pending`
+
+Expended output:
+
+```
++====+==============+==========+============+=========+
+| ID |     NAME     | QUANTITY |    DATE    | STATUS  | 
++====+==============+==========+============+=========+
+| 1  |   PANADOL    |   100    | 09-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+| 2  |   VICODIN    |    30    | 09-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+| 4  | SIMVASTATIN  |    20    | 11-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+| 5  |  LISINOPRIL  |   200    | 12-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+| 6  | AZITHROMYCIN |   100    | 13-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+| 7  |   PANADOL    |    50    | 13-10-2021 | PENDING | 
++----+--------------+----------+------------+---------+
+```
 
 ### Receiving order : `receiveorder`
 
@@ -346,11 +444,30 @@ Expected output:
 Quitting MediVault...
 ```
 
+### Data Storage
+MediVault will automatically save data after any operation that modifies stock, order or dispense. The data will be 
+stored in 3 separate files (data/stock.txt, data/order.txt, data/dispense.txt). Data is saved in a specific format with
+fields delimited by a pipe `|`. 
+* For data/stock.txt
+  * `ID|NAME|PRICE|QUANTITY|EXPIRY_DATE|DESCRIPTION|MAX_QUANTITY`
+* For data/order.txt
+  * `ID|NAME|QUANTITY|DATE|STATUS`
+* For data/dispense.txt
+  * `ID|NAME|QUANTITY|CUSTOMER_ID|DATE|STAFF|STOCK_ID`
+
+### Data Editing
+It is possible to directly edit the data files but it is **NOT** recommended unless you know exactly what you are doing.
+If MediVault detects corruption or invalid data, you may not be able to load the data into the program. In that case, 
+either fix the data or in the worst case scenario, delete the corresponding data file.
+Also, it may result in unintended behaviour if data file is tampered with while the program is running.
+
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?
 
-**A**: Unfortunately, MediVault does not support saving information to files in v1.0.
+**A**: You can transfer data to another computer by moving the 3 data files into the folder where MediVault.jar is. 
+Ensure that the data files are in a folder named `data`. You should expect to see `stock.txt, order.txt, dispense.txt`
+in that folder.
 
 ## Command Summary
 

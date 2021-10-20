@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
- * Helps to process the list command together with filters and sort.
+ * Helps to process the liststock command together with filters and sort.
  */
 
 public class ListStockCommand extends Command {

@@ -1,0 +1,37 @@
+@startuml UpdateStockSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":DeleteOrder" as deleteorder COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant ":CommandSyntax" as commandsyntax COLOR_UTILITIES
+    participant ":OrderValidator" as ordervalidator COLOR_UTILITIES
+    participant ":Ui" as ui COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant ":Medicine" as medicine COLOR_INVENTORY
+end box
+autoactivate on
+
+-> deleteorder: execute()
+   deleteorder -> ui: getInstance()
+   deleteorder <-- ui
+   deleteorder -> medicine : getInstance()
+   deleteorder <-- medicine
+
+opt !isInvalidParameter
+deleteorder -> commandsyntax : containsInvalidParameters()
+deleteorder <-- commandsyntax : isInvalidParameter
+    opt isValidOrderId
+    deleteorder -> ordervalidator : isValidOrderId()
+    deleteorder <-- ordervalidator : isValidOrderId
+    end
+end
+
+
+@enduml

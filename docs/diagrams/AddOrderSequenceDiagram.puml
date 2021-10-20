@@ -1,0 +1,59 @@
+@startuml AddOrderSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":AddOrder" as addorder COLOR_COMMAND
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant ":CommandSyntax" as commandsyntax COLOR_UTILITIES
+    participant ":OrderValidator" as ordervalidator COLOR_UTILITIES
+    participant ":Ui" as ui COLOR_UTILITIES
+    participant ":Storage" as storage COLOR_UTILITIES
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant ":Medicine" as medicine COLOR_INVENTORY
+end box
+
+autoactivate on
+
+-> addorder: execute()
+    addorder -> ui: getInstance()
+    addorder <-- ui
+    addorder -> commandsyntax: containsInvalidParameters()
+    addorder <-- commandsyntax: isInvalidParameter
+
+    opt !isInvalidParameter
+        addorder -> medicine : getInstance()
+        addorder <-- medicine
+
+        addorder -> ordervalidator: containsInvalidParametersValues()
+        addorder <-- ordervalidator: isInvalidParameterValues
+
+        opt !isInvalidParameterValues
+            alt nameExist
+                alt orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity
+                    alt dateToAdd == null
+                        addorder -> addorder : addOrder(defaultDate)
+                    else dateToAdd != null
+                        addorder -> addorder : addOrder(orderDate)
+                    end
+                else ui.print()
+                end
+            else !nameExist
+                alt dateToAdd == null
+                    addorder -> addorder : addOrder(defaultDate)
+                else dateToAdd != null
+                    addorder -> addorder : addOrder(orderDate)
+                end
+            end
+        end
+        addorder -> storage: getInstance()
+        addorder <-- storage
+        addorder -> storage: saveData()
+    deactivate addorder
+    deactivate storage
+@enduml
