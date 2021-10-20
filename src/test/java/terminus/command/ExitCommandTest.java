@@ -45,12 +45,12 @@ public class ExitCommandTest {
         assertTrue(scheduleExitResult.isOk() && scheduleExitResult.isExit());
 
         Command goCommandExitCommand = commandParser.parseCommand("go " + tempModule + " " + CommonFormat.COMMAND_EXIT);
-        CommandResult goCommandExitCommandResult = scheduleExitCommand.execute(ui, moduleManager);
+        CommandResult goCommandExitCommandResult = goCommandExitCommand.execute(ui, moduleManager);
         assertTrue(goCommandExitCommandResult.isOk() && goCommandExitCommandResult.isExit());
 
         Command moduleCommandExitCommand =
                 commandParser.parseCommand("module " + CommonFormat.COMMAND_EXIT);
-        CommandResult moduleCommandExitCommandResult = scheduleExitCommand.execute(ui, moduleManager);
+        CommandResult moduleCommandExitCommandResult = moduleCommandExitCommand.execute(ui, moduleManager);
         assertTrue(moduleCommandExitCommandResult.isOk() && moduleCommandExitCommandResult.isExit());
     }
 }
