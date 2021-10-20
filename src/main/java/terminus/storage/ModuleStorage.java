@@ -44,6 +44,9 @@ public class ModuleStorage {
      * @return ModuleStorage object of current session.
      */
     public static ModuleStorage getInstance() {
+        if (moduleStorage == null) {
+            moduleStorage = new ModuleStorage(Path.of(System.getProperty("user.dir"), "data"));
+        }
         return moduleStorage;
     }
 
