@@ -30,6 +30,8 @@ public class InputParser {
         case CLEAR_DISH:
         case CLEAR_INGR:
         case CLEAR_ALL:
+        case SORT_DISH:
+        case SORT_INGR:
         case HELP:
             if (!parameterString.isBlank()) {
                 ui.printInvalidParamMsg();
@@ -45,7 +47,6 @@ public class InputParser {
         case DELETE_INGR:
         case ADD_INGR:
         case ADD_DISH:
-        case SORT_DISH:
         case LIST:
             parameters.add(parameterString);
             break;
