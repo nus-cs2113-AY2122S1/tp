@@ -61,6 +61,45 @@ Pros:
 Cons:
 * Less straightforward implementation
 
+<br>
+
+### Find feature
+
+#### Functionality
+This command will find a list of `Person` that match the given attributes in a table format.
+
+#### Implementation
+
+The `find` feature is facilitated by the `FindCommand` class. It extends from `Command` class and overrides
+the `execute()` method to achieve the desired functionality.
+
+The example below gives a direction on how this command behaves.
+
+Step 1.
+<br>
+A User execute the `find n/John` command. The `Parser#parseCommand()` method will parse this command
+and eventually returns a `new FindPatientCommand()` object.
+
+Step 2.
+<br>
+A `CommandManager` object will run the `execute()` method in the `new FindPatientCommand()` object.
+
+Step 3.
+<br>
+The `execute()` method will call `PersonList#findPersons()` method with the parameter `n/John` passed in.
+
+Step 4.
+<br>
+`PersonList#findPersons()` will check all the `persons` list and returns all `Person` in the list whose name contains
+the string `john`. The attribute match is case-insensitive.
+
+Step 5.
+<br>
+The filtered `Person` list is then passed into the `Ui` class to be displayed into a table format through
+`Ui#getFindPatientsMessage()`.
+
+
+
 ## Product scope
 ### Target user profile
 
