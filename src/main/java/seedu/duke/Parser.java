@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 
 public class Parser {
@@ -214,30 +215,54 @@ public class Parser {
         Ui.printExpenseAddedSuccess();
     }
 
-    //Todo: Ensure amount entered for individuals matches original input amount
     private static void getAdditionalExpenseInfo(Expense expense){
         Ui.printGetPersonPaid();
         String input = Storage.getScanner().nextLine().strip();
         Person payer = checkValidPersonInExpense(input, expense);
         if (payer != null){
             expense.setPayer(payer);
+            HashMap<Person, Double> amountBeingPaid = new HashMap<>();
             double total = 0.0;
             for (Person person : expense.getPersonsList()) {
                 Ui.printHowMuchDidPersonSpend(person.getName());
                 String amountString = Storage.getScanner().nextLine().strip();
-                double amount;
-                if (amountString.equalsIgnoreCase("equal")){
-                    amount = expense.getAmountSpent()/
-                } else {
-                    amount = Double.parseDouble(Storage.getScanner().nextLine().strip());
+                if (amountString.equalsIgnoreCase("equal") && amountBeingPaid.isEmpty()) {
+                    for (Person people : expense.getPersonsList()) {
+                        amountBeingPaid.put(people, expense.getAmountSpent() / expense.getPersonsList().size());
+                        total += expense.getAmountSpent() / expense.getPersonsList().size();
+                    }
+                    //This will cause to bear the deficit or surplus
+                    if (total != expense.getAmountSpent()){
+                        double payerAmount = amountBeingPaid.get(payer) + (total - expense.getAmountSpent());
+                        amountBeingPaid.put(payer, payerAmount);
+                    }
+                    break;
                 }
-                payer.setMoneyOwed(person, amount);
-                person.setMoneyOwed(payer, -amount);
-                person.addExpense(expense);
+                try {
+                    Double.parseDouble(amountString);
+                } catch (NumberFormatException e){
+                    Ui.argNotNumber();
+                    getAdditionalExpenseInfo(expense);
+                    return;
+                }
+                double amount = Double.parseDouble(amountString);
                 total += amount;
-            } if (total != expense.getAmountSpent()){
-                Ui.printMissingMoney;
+                if (total > expense.getAmountSpent()) {
+                    Ui.printIncorrectAmount(expense.getAmountSpent());
+                    getAdditionalExpenseInfo(expense);
+                    return;
+                } else {
+                    amountBeingPaid.put(person, amount);
+                }
+            } if (total < expense.getAmountSpent()){
+                Ui.printIncorrectAmount(expense.getAmountSpent());
                 getAdditionalExpenseInfo(expense);
+            } else {
+                for (Person person : expense.getPersonsList()){
+                    payer.setMoneyOwed(person, amountBeingPaid.get(person));
+                    person.setMoneyOwed(payer, -amountBeingPaid.get(person));
+                    person.addExpense(expense);
+                }
             }
         } else {
             Ui.printPersonNotInExpense();
