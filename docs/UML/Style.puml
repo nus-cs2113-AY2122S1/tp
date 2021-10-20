@@ -1,0 +1,14 @@
+!define LOGIC_BLUE_1 #b3dff3
+!define LOGIC_BLUE_2 #a1d1fd
+!define LOGIC_BLUE_3 #a7d3f7
+!define LOGIC_BLUE_4 #1e75d9
+!define LOGIC_BLUE_5 #1f408e
+
+!define LOGIC_PINK_1 #F3B3DF
+
+!define LOGIC_GREEN_1 #DFF3B3
+
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2

@@ -156,4 +156,9 @@ public class Storage {
             System.out.println(e.getMessage());
         }
     }
+
+    public void deleteSaveFile(String baseDir) {
+        File load = new File(baseDir, FILENAME);
+        load.delete();
+    }
 }

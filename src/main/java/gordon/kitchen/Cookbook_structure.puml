@@ -1,0 +1,212 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": ""
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false // root node is included
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "gordon.kitchen.Cookbook"
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_2138676377 { 
+   	label=Gordon
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Gordon2138676377[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Gordon</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   mainCookbook: Cookbook [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   parser: Parser [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   storage: Storage [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+<TR><TD ALIGN="LEFT" >+ run()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3600386 { 
+   	label=util
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Tag479386711[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Tag</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   associatedRecipeNames: ArrayList&lt;String&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   tagName: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addAssociatedRecipeName(recipeName: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ containsAssociatedRecipeNames(recipeNames: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeAssociatedRecipeName(recipeName: String)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_705112156 { 
+   	label=kitchen
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Cookbook53219119[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Cookbook</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   cookbookTags: ArrayList&lt;Tag&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   recipes: ArrayList&lt;Recipe&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addCookbookTag(tag: Tag)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addRecipe(r: Recipe)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addTagToRecipes(tag: Tag)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ appendRecipeToCookbookTag(tagName: String, recipeName: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ checkRecipe(name: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteCookbookTag(tag: Tag)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteRecipeFromCookbookTag(tagName: String, recipeName: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteTagFromRecipes(tag: Tag)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ doesCookbookTagExists(tagName: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ extractCookbookTag(tagName: String): Tag</TD></TR>
+<TR><TD ALIGN="LEFT" >+ filterByCalories(cal: int): ArrayList&lt;Recipe&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ filterByDifficulty(difficulty: Difficulty): ArrayList&lt;Recipe&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ filterByIngredients(ingredients: ArrayList&lt;String&gt;): ArrayList&lt;Recipe&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ filterByPrice(price: float): ArrayList&lt;Recipe&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ filterByTags(tags: ArrayList&lt;String&gt;): ArrayList&lt;Recipe&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ filterByTime(time: int): ArrayList&lt;Recipe&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isRecipeExist(name: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ listCookbookTags(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ numRecipes(): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeRecipe(index: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ saveString(index: int): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Recipe53219119[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Recipe</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >#   calories: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   cookingTime: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   difficulty: Difficulty [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   ingredients: ArrayList&lt;String&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   name: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   preparationTime: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   recipeTags: ArrayList&lt;String&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   steps: ArrayList&lt;String&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >#   totalPrice: float [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addIngredient(ingredient: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addStep(step: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addStep(step: String, index: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ addTagToRecipe(tag: Tag, recipeName: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ containsIngredients(search: ArrayList&lt;String&gt;): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ containsTags(search: ArrayList&lt;String&gt;): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ deleteTagFromRecipe(tag: Tag)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ doesRecipeTagExists(tagName: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeStep(index: int)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Cookbook53219119 -> Recipe53219119[label="recipes
+[0..*]"];
+Cookbook53219119 -> Tag479386711[label="cookbookTags
+[0..*]"];
+Gordon2138676377 -> Cookbook53219119[label="mainCookbook
+[0..1]"];
+    
+}
+@enduml
