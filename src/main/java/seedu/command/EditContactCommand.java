@@ -88,4 +88,14 @@ public class EditContactCommand extends Command {
         return false;
     }
 
+    public Contact duplicateContact(Contact contact) {
+        String name = contact.getName();
+        String github = contact.getGithub();
+        String linkedin = contact.getLinkedin();
+        String telegram = contact.getTelegram();
+        String twitter = contact.getTwitter();
+        String email = contact.getEmail();
+        return new Contact(name, github, linkedin, telegram, twitter, email);
+    }
+
 }
