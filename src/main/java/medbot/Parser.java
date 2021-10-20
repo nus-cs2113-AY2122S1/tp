@@ -63,12 +63,13 @@ public class Parser {
     private static final String VIEW_TYPE_SCHEDULER_VIEW = "s";
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
-    private static final String ERROR_WRONG_NUMBER = "Unable to parse number." + END_LINE;
     private static final String ERROR_NO_VIEW_FOUND = "Unidentified view." + END_LINE;
 
     private static final String ERROR_NO_PARAMETER = "No parameters given" + END_LINE;
 
+    private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number." + END_LINE;
     private static final String ERROR_PATIENT_ID_NOT_SPECIFIED = "Patient ID not specified." + END_LINE;
+    private static final String ERROR_STAFF_ID_NOT_SPECIFIED = "Staff ID not specified." + END_LINE;
 
     private static final String ERROR_INVALID_VIEW_TYPE = "Invalid view type code." + END_LINE;
 
@@ -94,6 +95,7 @@ public class Parser {
     private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
     private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
     private static final String REGEX_PHONE_NUMBER_SEPARATOR = "[- _+()]";
+    private static final String REGEX_PERSON_ID = "([0-9]+$)|([0-9]+ )";
     private static final String REGEX_CAPITALISE_POSITION = "(\\A|[ _-])[a-z]";
 
     private static final String VERTICAL_LINE = "|";
@@ -199,7 +201,6 @@ public class Parser {
         }
         CommandType commandType = parseHelpCommandType(commandTypeString);
         return new HelpCommand(commandType);
-
     }
 
     private static CommandType parseHelpCommandType(String commandTypeString) throws MedBotParserException {
@@ -234,15 +235,9 @@ public class Parser {
      * @return ViewPersonCommand object.
      * @throws MedBotParserException when patient id given is out of range, or no id is specified.
      */
-    private static ViewPersonCommand parseViewCommand(String userInput, ViewType viewType) throws MedBotParserException {
-        int personId;
-        try {
-            personId = Integer.parseInt(userInput.substring(4).strip());
-        } catch (NumberFormatException ne) {
-            throw new MedBotParserException(ERROR_WRONG_NUMBER);
-        } catch (IndexOutOfBoundsException ie) {
-            throw new MedBotParserException(ERROR_PATIENT_ID_NOT_SPECIFIED);
-        }
+    private static ViewPersonCommand parseViewCommand(String userInput, ViewType viewType)
+            throws MedBotParserException {
+        int personId = parsePersonId(userInput.substring(4));
 
         switch (viewType) {
         case PATIENT_INFO:
@@ -261,15 +256,9 @@ public class Parser {
      * @return DeletePersonCommand object.
      * @throws MedBotParserException when patient id given is out of range, or no id is specified.
      */
-    private static DeletePersonCommand parseDeleteCommand(String userInput, ViewType viewType) throws MedBotParserException {
-        int personId;
-        try {
-            personId = Integer.parseInt(userInput.substring(6).strip());
-        } catch (NumberFormatException ne) {
-            throw new MedBotParserException(ERROR_WRONG_NUMBER);
-        } catch (IndexOutOfBoundsException ie) {
-            throw new MedBotParserException(ERROR_PATIENT_ID_NOT_SPECIFIED);
-        }
+    private static DeletePersonCommand parseDeleteCommand(String userInput, ViewType viewType)
+            throws MedBotParserException {
+        int personId = parsePersonId(userInput.substring(6));
 
         switch (viewType) {
         case PATIENT_INFO:
@@ -288,20 +277,9 @@ public class Parser {
      * @return EditPersonCommand objects
      * @throws MedBotParserException when the parameters given cannot be parsed
      */
-    private static EditPersonCommand parseEditCommand(String userInput, ViewType viewType) throws MedBotParserException {
-        int personId;
-        try {
-            String personIdString = userInput.substring(4).stripLeading();
-            int endSpaceIndex = personIdString.indexOf(' ');
-            if (endSpaceIndex != -1) {
-                personIdString = personIdString.substring(0, endSpaceIndex);
-            }
-            personId = Integer.parseInt(personIdString);
-        } catch (NumberFormatException ne) {
-            throw new MedBotParserException(ERROR_WRONG_NUMBER);
-        } catch (IndexOutOfBoundsException ie) {
-            throw new MedBotParserException(ERROR_PATIENT_ID_NOT_SPECIFIED);
-        }
+    private static EditPersonCommand parseEditCommand(String userInput, ViewType viewType)
+            throws MedBotParserException {
+        int personId = parsePersonId(userInput.substring(4));
         String[] parameters = getParameters(userInput);
 
         switch (viewType) {
@@ -343,7 +321,8 @@ public class Parser {
         }
     }
 
-    private static FindPersonCommand parseFindCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    private static FindPersonCommand parseFindCommand(String userInput, ViewType viewType)
+            throws MedBotParserException {
         String[] parameters = getParameters(userInput);
         switch (viewType) {
         case PATIENT_INFO:
@@ -583,6 +562,28 @@ public class Parser {
             throw new MedBotParserException(ERROR_ADDRESS_NOT_SPECIFIED);
         }
     }
+
+
+    private static int parsePersonId(String userInput) throws MedBotParserException {
+        userInput = userInput.strip();
+        if (userInput.equals(EMPTY_STRING)) {
+            throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+        }
+        Pattern pattern = Pattern.compile(REGEX_PERSON_ID);
+        Matcher matcher = pattern.matcher(userInput);
+        if (matcher.lookingAt()) {
+            int id;
+            try {
+                id = Integer.parseInt(matcher.group().stripTrailing());
+            } catch (NumberFormatException ne) {
+                assert false;
+                throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+            }
+            return id;
+        }
+        throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+    }
+
 
     /**
      * Sets the first letter of each word of each word to uppercase and sets all others to lowercase.
