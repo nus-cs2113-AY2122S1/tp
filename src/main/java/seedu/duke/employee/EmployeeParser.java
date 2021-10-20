@@ -26,6 +26,7 @@ public class EmployeeParser {
         masterList.employeeList.add(employee);
         masterList.totalEmployee += 1;
 
+        MainUI.printSingleLine();
         System.out.println("I have added: ");
         System.out.println(masterList.employeeList.get(masterList.totalEmployee - 1));
         System.out.println("You now have " + masterList.totalEmployee + " employees.");
@@ -65,6 +66,7 @@ public class EmployeeParser {
             logger.log(Level.FINE, "index from user input for removing employee is out of range");
             return;
         }
+        MainUI.printSingleLine();
         System.out.println("I have deleted: ");
         System.out.println(masterList.employeeList.get(employeeIndex));
         MainUI.printSingleLine();

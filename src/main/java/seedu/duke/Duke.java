@@ -4,23 +4,22 @@ import seedu.duke.employee.EmployeeList;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.main.MainParser;
 import seedu.duke.main.MainUI;
-import seedu.duke.menu.MenuList;
+import seedu.duke.dish.Menu;
 import seedu.duke.finance.FinanceList;
 import seedu.duke.storage.Storage;
 
-import java.io.File;
 import java.util.Scanner;
 
 public class Duke {
 
     public static void main(String[] args) {
         EmployeeList employeeList = new EmployeeList();
-        MenuList menuList = new MenuList();
+        Menu menu = new Menu();
         IngredientList ingredientList = new IngredientList();
         FinanceList financeList = new FinanceList();
 
         // Load Storage
-        Storage.loadStorage(employeeList, menuList, ingredientList, financeList);
+        Storage.loadStorage(employeeList, menu, ingredientList, financeList);
 
         // Hello
         MainUI.printWelcomeMessage();
@@ -34,14 +33,14 @@ public class Duke {
             //store input into String
             userInput = input.nextLine();
             //process input
-            isBye = MainParser.handleCommand(employeeList, menuList, ingredientList, financeList, userInput);
+            isBye = MainParser.handleCommand(employeeList, menu, ingredientList, financeList, userInput);
         }
 
         // Bye
         MainUI.printGoodbyeMessage();
 
         // Save Storage
-        Storage.saveStorage(employeeList, menuList, ingredientList, financeList);
+        Storage.saveStorage(employeeList, menu, ingredientList, financeList);
         MainUI.printStorageSaved();
     }
 
