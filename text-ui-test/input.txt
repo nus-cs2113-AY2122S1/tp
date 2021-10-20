@@ -34,6 +34,9 @@ find /calories
 find /calories -1
 find /difficulty easy
 find /difficulty child's play
+find /price 1.50
+find /price 2
+find /price abc
 deleteRecipe 5
 deleteRecipe cookies
 deleteRecipe 2
