@@ -21,26 +21,26 @@ public class ListCommandParser {
                          UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws ParseException, IOException {
 
-        logger.log(Level.INFO, "Start parsing list command");
+        logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
 
         if (arguments.trim().length() == 0) {
-            throw new ParseException("no flags passed", 1);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
         switch (arguments.trim()) {
         case Constants.FLAG_MASTER_UNIVERSITYLIST:
-            logger.log(Level.INFO, "parse success");
+            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new ListUniCommand(universityMasterList);
         case Constants.FLAG_MASTER_MODULELIST:
-            logger.log(Level.INFO, "parse success");
+            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new ListModCommand(moduleMasterList);
         case Constants.FLAG_SELECTED_UNIVERSITYLIST:
-            logger.log(Level.INFO, "parse success");
+            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new ListUniCommand(universitySelectedList);
         case Constants.FLAG_SELECTED_MODULELIST:
-            logger.log(Level.INFO, "parse success");
+            logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
             return new ListModCommand(moduleSelectedList);
         default:
-            logger.log(Level.WARNING, "incorrect flags");
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException("Incorrect flags passed.", 1);
         }
     }
