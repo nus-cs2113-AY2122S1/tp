@@ -10,7 +10,7 @@
 
 ### Architecture
 
-![Test image babee](https://user-images.githubusercontent.com/65898007/138084343-26f6c228-63e2-4d24-8952-037742f61da6.png)
+![Architecture Diagram](https://user-images.githubusercontent.com/65898007/138084343-26f6c228-63e2-4d24-8952-037742f61da6.png)
 
 The Diagram above explains how the App is designed and will function
 
@@ -23,12 +23,12 @@ Given below we have a quick overview of all the main components of Gordon as wel
 1. Once the App is launched, `main` will call `run` to initialize the necessary components for the App to function properly
 2. On exit, the App will print the corresponding messages and execute the necessary cleanup methods.
 
-The App contains the `command`, `exception`, `kitchen`, and `util` packages that represent a collection of various different classes that are deal with different parts of the functions of the App
+The App is organized by the `command`, `exception`, `kitchen`, and `util` packages that represent a collection of various different components that are deal with different parts of the functions of the App
 
-1. `command`: Contains all the classes that deal with the inputs that the user is able to make.
-2. `exception`: Contains all the Gordon specific exceptions that are used throughout the App
-3. `kitchen`: Contains the classes that deal with the management of the cookbook
-4. `util`: Contains the classes that deal with the functionality of the App
+1. `command`: Contains all the `XYZ_Command` components that deal with the inputs that the user is able to make.
+2. `exception`: Contains all the the `GordonException` component that is used throughout the App
+3. `kitchen`: Contains the `Cookbook` and `Recipe` components that deal with the management of the cookbook
+4. `util`: Contains the `Difficulty`, `Parser`, `Tag` and `UI` components that deal with the functionality of the App
 
 *How do these components interact with each other*
 
