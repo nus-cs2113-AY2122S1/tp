@@ -255,4 +255,9 @@ public abstract class TextUi {
         System.out.println(message + "\n");
     }
 
+    public static void ignoreAddContact() {
+        String message = "Contact was not added.";
+        printDoubleLineMessage(message);
+    }
+
 }
