@@ -10,6 +10,7 @@ public class UpdateCommand extends Command {
 
     private static final String UPDATE_MESSAGE = "Got it. This ingredient has been updated:\n" + "\t";
     private static final String LIST_EMPTY_MESSAGE = "Your inventory is empty!";
+    private static final String INVALID_NUMBER = "Ingredient number does not exist!";
 
     private Ingredient updatedIngredient;
 
@@ -39,6 +40,8 @@ public class UpdateCommand extends Command {
             return resultMsg;
         } catch (IOException e) {
             throw new DukeException("Cannot write ingredient to memory!");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(INVALID_NUMBER);
         }
     }
 }
