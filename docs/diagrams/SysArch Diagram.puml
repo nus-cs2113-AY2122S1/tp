@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include <office/Users/user>
+!include style.puml
+
+Package "SITUS"<<Rectangle>>{
+    Class UI UI_COLOUR
+    Class Parser PARSER_COLOUR
+    Class Storage STORAGE_COLOUR
+    Class Command COMMAND_COLOUR
+    Class IngredientList INGREDIENTLIST_COLOUR
+    Class Main MAIN_COLOUR
+}
+
+Class "<$user>" as User
+
+User -d[#black].> UI
+Main -u[MAIN_COLOUR]-> UI
+Main -up[MAIN_COLOUR]-> Parser
+UI -r[UI_COLOUR]->Parser
+Parser -d[PARSER_COLOUR]->Command
+Command -d[COMMAND_COLOUR]-> IngredientList
+Command -l[COMMAND_COLOUR]-> UI
+IngredientList -r[INGREDIENTLIST_COLOUR]-> Storage
+Storage -r[STORAGE_COLOUR]..> LocalStorage
+Storage -l[STORAGE_COLOUR]..> IngredientList
+
+'UI -d--> Main
+'Main -r--> Parser
+'Main --> UI
+'Parser --> Command
+'Command --> IngredientList
+'IngredientList --> Storage
+'Storage -r..>LocalStorage
+'Storage -u..> IngredientList
+'Command --> Main: CommandOutput
+@enduml
