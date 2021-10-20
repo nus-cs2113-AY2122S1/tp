@@ -21,7 +21,7 @@ class CookbookTest {
             r.setCalories(10);
             Cookbook c = new Cookbook();
             c.addRecipe(r);
-            Recipe r3 = new Recipe( "Milo");
+            Recipe r3 = new Recipe("Milo");
             r3.addIngredient("Milo powder");
             r3.addIngredient("Hot water");
             r3.addStep("Put milo powder into cup");
@@ -31,7 +31,7 @@ class CookbookTest {
             r3.addStep("Drink");
             r3.setCalories(200);
             c.addRecipe(r3);
-            assertEquals("1. Coffee" + System.lineSeparator() + "2. Milo" + System.lineSeparator(), c.toString() );
+            assertEquals("1. Coffee" + System.lineSeparator() + "2. Milo" + System.lineSeparator(), c.toString());
         } catch (GordonException g) {
             g.printStackTrace();
         }
