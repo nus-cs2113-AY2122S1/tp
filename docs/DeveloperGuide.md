@@ -58,20 +58,26 @@ This application adapted the Developer Guide and User Guide from:
 
 ## Appendix A: Product Scope
 
-### Target user profile
-
-{Describe the target user profile}
+### Target user profile:
+* wants to have a work-life balance but is often consumed by work/school
+* have goals and aspirations but falls short of them; lacklustre commitment or game plan for action
+* doesn't want to rely on smartphone (They're doing everything these days, sheesh!)
+* prefers desktop app, 
+* familiar and comfortable with CLI apps, or willing to learn to use
 
 ### Value proposition
 
 {Describe the value proposition: what problem does it solve?}
+
+Users with _Ha(ppy)Bit_ will find themselves cultivating good habits despite hectic 
+workload/commitments from school (we targeting work and school?). 
 
 
 ## Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
+|v1.0|new user|see usage instructions|refer to them when I forget how to use the application| 
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
 
