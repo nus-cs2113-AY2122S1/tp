@@ -1,4 +1,6 @@
 @startuml
+!include Style.puml
+
 Class Lesson {
 }
 
@@ -18,32 +20,11 @@ Class ModuleList {
 }
 
 Class Ui {
-Line: String
-Padding: String
-Logo: String
-sc: Scanner
-readUserResponse(): String
-printGreeting(): void
-printExit(): void
-printMessage(message: String): void
-printTaskAdded(task: Task, size: int): void
-printTaskDeleted(task: Task, size: int): void
-printTaskMarkedAsDone(taskList: TaskList, task: Task): void
-printTaskList(taskList: TaskList): void
-printTasksWithKeyword(taskList: TaskList, keyword: String): void
-printTasksWithPeriod(taskList: TaskList, period: String): void
-printLessonAdded(lesson: Lesson, size: int): void
-printLessonDeleted(lesson: Lesson, size: int): void
-printLessonList(lesson: Lesson): void
-printLessonsWithKeyword(lesson: Lesson, keyword: String): void
-printLessonsWithPeriod(lesson: Lesson, period: String): void
-printModuleAdded(module: Module, size: int): void
 }
 
-
-TaskList -down-> "*" Task : taskList
-LessonList -down-> "*" Lesson : lessonList
-ModuleList -down-> "*" Module : moduleList
+TaskList *--> "*" Task : taskList
+LessonList *--> "*" Lesson : lessonList
+ModuleList *--> "*" Module : moduleList
 
 Ui ..> TaskList
 Ui ..> LessonList
