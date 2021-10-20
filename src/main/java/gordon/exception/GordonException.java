@@ -11,15 +11,15 @@ public class GordonException extends Exception {
     public static final String INDEX_INVALID = "Index is not a valid integer.";
     public static final String FLOAT_INVALID = "Index is not a valid float.";
 
-    public static final String INGREDIENTS_FORMAT = "Please use the word 'ingredients' before adding ingredients.";
-    public static final String STEPS_FORMAT = "Please use the word 'steps' to kickstart the adding of steps.";
-    public static final String CALORIES_FORMAT = "Please input integer for calories.";
+    public static final String INGREDIENTS_FORMAT = "Please use the word '/ingredients' before adding ingredients.";
+    public static final String STEPS_FORMAT = "Please use the word '/steps' to kickstart the adding of steps.";
+    public static final String CALORIES_FORMAT = "Please input a number for calories.";
     public static final String DUPLICATE_RECIPE_NAME = "No duplicate recipe names allowed.";
-    public static final String EMPTY_RECIPE_NAME = "Please input name of recipe.";
+    public static final String EMPTY_RECIPE_NAME = "Please input the name of the recipe.";
     public static final String EMPTY_CALORIES = "Please input calories for the recipe.";
     public static final String INVALID_DIFFICULTY = "Please input a valid difficulty.";
 
-    public static final String COMMAND_INVALID = "Command given cannot be recognized.";
+    public static final String COMMAND_INVALID = "You donkey! What are you talking about?";
 
     public static final String NO_RESULT_FOUND = "Search returns no result.";
     public static final String NO_RECIPE_FOUND = "No such recipe exists.";

@@ -36,6 +36,7 @@ public class Parser {
     public static final int CALORIES_INDEX = 3;
     public static final int INGREDIENTS_WORD_LENGTH = 12;
     public static final int STEPS_WORD_LENGTH = 6;
+    UI message = new UI();
 
     public Parser() {
         in = new Scanner(System.in);
@@ -60,7 +61,7 @@ public class Parser {
             } else if (parseCommand(line).equalsIgnoreCase("find")) {
                 return findParse();
             } else if (parseCommand(line).equalsIgnoreCase("help")) {
-                return new HelpCommand();
+                message.printHelp();
             } else if (parseCommand(line).equalsIgnoreCase("tag")) {
                 return addTagParse();
             } else if (parseCommand(line).equalsIgnoreCase("untag")) {
