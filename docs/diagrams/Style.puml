@@ -6,7 +6,7 @@ hide members
 !define UI_COLOR_T1 #orangered
 
 !define LOGIC_COLOR #skyblue
-!define LOGIC_COLOR_T1 #royalblue
+!define LOGIC_COLOR_T1 #darkblue
 
 !define MODEL_COLOR #plum
 !define MODEL_COLOR_T1 #darkviolet
