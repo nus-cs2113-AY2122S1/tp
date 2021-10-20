@@ -52,8 +52,13 @@ ConTech comprises five main components, namely:
 - `ContactList`: Data structure to store `Contact`s while running ConTech.
 - `Storage`: Reads from and writes to [`LocalStorage`](#local-storage).
 
-The five main components interact with each other, as shown in the sequence diagram below.
-{ NEED SEQUENCE DIAGRAM }
+**How the architecture components interact with each other**
+
+The five main components interact with each other, as shown in the sequence diagram below
+for the example "view 2"
+
+![Sysem Architecture Sequence Diagram](images/SystemArchitectureSequence.png)
+
 
 ### <a name="text-ui"></a>TextUi
 ### <a name="main-parser"></a>MainParser
@@ -104,6 +109,14 @@ on contact names buy default. From the user input, the search query and the sear
 will be created and executed in `Duke`. The sequence diagram below shows how the whole process is carried out.
 
 ![Search Sequence Diagram](images/SearchContactCommandSequenceDiagram.png)
+
+
+### <a name="List"></a>Listing all contacts: `list`
+This feature is processed using `MainParser`. The control is sent to `ListContactsCommand` under `Command` to execute the
+command which uses a loop to get the Contact object at every available index and print it using the `printContactWithIndex`
+function in `TextUi` class.
+
+![List Sequence Diagram](images/ListContactsCommandSequenceDiagram.png)
 
 
 ## <a name="scope"></a>Product scope
