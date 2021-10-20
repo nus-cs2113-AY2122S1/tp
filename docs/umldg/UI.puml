@@ -1,27 +1,29 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+together {
+package "Command" {
+class CommandResult #pink ##red {
+feedbackToUser: String
+itemList: ArrayList
+map: Map<String, ArrayList>
+}
+abstract class Command #pink ##red {
+workoutMode: int {static}
+}
+}
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+package "Ui" {
+class Ui {
+withIndent: boolean
+showResultToUser(result: CommandResult):void()
+printErrorMessage(e: GetJackDException):void()
+printWelcomeMessage():void() {static}
 }
+}
+
+CommandResult   ---|>    Ui: result
+Command ---|> Ui
 
 @enduml
