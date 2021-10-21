@@ -92,7 +92,7 @@ public abstract class TextUi {
         System.out.print("Email Address: ");
     }
 
-    public static void promptPersonalLinkedInUsernameMessage() {
+    public static void promptPersonalLinkedinUsernameMessage() {
         String message = "Please provide us with your LinkedIn Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);

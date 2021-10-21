@@ -14,7 +14,6 @@ import seedu.ui.UserInputTextUi;
 public class AddPersonalContactParser extends RegexParser {
     private Contact personalContact = new Contact(null, null,null,null,
             null,null);
-    private boolean isValidDetail = false;
 
     public AddPersonalContactParser() {
         TextUi.welcomeMessage();
@@ -29,13 +28,13 @@ public class AddPersonalContactParser extends RegexParser {
             parsePersonalTelegramUsername();
             parsePersonalTwitterUsername();
             parsePersonalEmailAddress();
-            parsePersonalLinkedInUsername();
+            parsePersonalLinkedinUsername();
             TextUi.finishSetUpMessage();
         }
     }
 
     private void parsePersonalName() {
-        isValidDetail = false;
+        boolean isValidDetail = false;
         do {
             try {
                 String personalName = UserInputTextUi.getUserInput();
@@ -50,119 +49,160 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void parsePersonalGithubUsername() {
-        isValidDetail = false;
+        boolean isValidDetail = false;
         TextUi.promptPersonalGithubUsernameMessage(this.personalContact.getName());
         do {
             try {
                 String personalGithubUsername = UserInputTextUi.getUserInput();
-                setGithubIfValid(personalGithubUsername);
+                isValidDetail = checkGithubValidity(personalGithubUsername);
+                setGithubUsername(personalGithubUsername);
             } catch (InvalidGithubUsernameException e) {
                 ExceptionTextUi.invalidPersonalGithubUsernameErrorMessage();
             }
         } while (!isValidDetail);
     }
 
-    private void setGithubIfValid(String userInput) throws InvalidGithubUsernameException {
+    private boolean checkGithubValidity(String userInput) throws InvalidGithubUsernameException {
         if (userInput.isEmpty() || userInput == null) {
-            isValidDetail = true;
+            return true;
+        }
+        // if exception is thrown in there, it will not return true, so isValidDetail will remain false
+        checkGithubUsernameRegex(userInput);
+        return true;
+    }
+
+    private void setGithubUsername(String userInput) {
+        if (userInput.isEmpty() || userInput == null) {
+            this.personalContact.setGithub(null);
         } else {
-            checkGithubUsernameRegex(userInput);
-            isValidDetail = true;
             this.personalContact.setGithub(userInput);
         }
     }
 
     private void parsePersonalTelegramUsername() {
-        isValidDetail = false;
+        boolean isValidDetail = false;
         TextUi.promptPersonalTelegramUsernameMessage();
         do {
             try {
-                String personalTelegram = UserInputTextUi.getUserInput();
-                setTelegramIfValid(personalTelegram);
+                String personalTelegramUsername = UserInputTextUi.getUserInput();
+                isValidDetail = checkTelegramValidity(personalTelegramUsername);
+                setTelegramUsername(personalTelegramUsername);
             } catch (InvalidTelegramUsernameException e) {
                 ExceptionTextUi.invalidPersonalTelegramUsernameErrorMessage();
             }
         } while (!isValidDetail);
     }
 
-    private void setTelegramIfValid(String userInput) throws InvalidTelegramUsernameException {
+    private boolean checkTelegramValidity(String userInput) throws InvalidTelegramUsernameException {
         if (userInput.isEmpty() || userInput == null) {
-            isValidDetail = true;
+            return true;
+        }
+        // if exception is thrown in there, it will not return true, so isValidDetail will remain false
+        checkTelegramUsernameRegex(userInput);
+        return true;
+    }
+
+    private void setTelegramUsername(String userInput) {
+        if (userInput.isEmpty() || userInput == null) {
+            this.personalContact.setTelegram(null);
         } else {
-            checkTelegramUsernameRegex(userInput);
-            isValidDetail = true;
             this.personalContact.setTelegram(userInput);
         }
     }
 
     private void parsePersonalTwitterUsername() {
-        isValidDetail = false;
+        boolean isValidDetail = false;
         TextUi.promptPersonalTwitterUsernameMessage();
         do {
             try {
-                String personalTwitter = UserInputTextUi.getUserInput();
-                setTwitterIfValid(personalTwitter);
+                String personalTwitterUsername = UserInputTextUi.getUserInput();
+                isValidDetail = checkTwitterValidity(personalTwitterUsername);
+                setTwitterUsername(personalTwitterUsername);
             } catch (InvalidTwitterUsernameException e) {
                 ExceptionTextUi.invalidPersonalTwitterUsernameErrorMessage();
             }
         } while (!isValidDetail);
     }
 
-    private void setTwitterIfValid(String userInput) throws InvalidTwitterUsernameException {
+    private boolean checkTwitterValidity(String userInput) throws InvalidTwitterUsernameException {
         if (userInput.isEmpty() || userInput == null) {
-            isValidDetail = true;
+            return true;
+        }
+        // if exception is thrown in there, it will not return true, so isValidDetail will remain false
+        checkTwitterUsernameRegex(userInput);
+        return true;
+    }
+
+    private void setTwitterUsername(String userInput) {
+        if (userInput.isEmpty() || userInput == null) {
+            this.personalContact.setTwitter(null);
         } else {
-            checkTwitterUsernameRegex(userInput);
-            isValidDetail = true;
             this.personalContact.setTwitter(userInput);
         }
     }
 
     private void parsePersonalEmailAddress() {
-        isValidDetail = false;
+        boolean isValidDetail = false;
         TextUi.promptPersonalEmailMessage();
         do {
             try {
-                String personalEmail = UserInputTextUi.getUserInput();
-                setEmailIfValid(personalEmail);
+                String personalEmailAddress = UserInputTextUi.getUserInput();
+                isValidDetail = checkEmailValidity(personalEmailAddress);
+                setEmailAddress(personalEmailAddress);
             } catch (InvalidEmailException e) {
                 ExceptionTextUi.invalidPersonalEmailErrorMessage();
             }
         } while (!isValidDetail);
     }
 
-    private void setEmailIfValid(String userInput) throws InvalidEmailException {
+    private boolean checkEmailValidity(String userInput) throws InvalidEmailException {
         if (userInput.isEmpty() || userInput == null) {
-            isValidDetail = true;
+            return true;
+        }
+        // if exception is thrown in there, it will not return true, so isValidDetail will remain false
+        checkEmailRegex(userInput);
+        return true;
+    }
+
+    private void setEmailAddress(String userInput) {
+        if (userInput.isEmpty() || userInput == null) {
+            this.personalContact.setEmail(null);
         } else {
-            checkEmailRegex(userInput);
-            isValidDetail = true;
             this.personalContact.setEmail(userInput);
         }
     }
 
-    private void parsePersonalLinkedInUsername() {
-        isValidDetail = false;
-        TextUi.promptPersonalLinkedInUsernameMessage();
+    private void parsePersonalLinkedinUsername() {
+        boolean isValidDetail = false;
+        TextUi.promptPersonalLinkedinUsernameMessage();
         do {
             try {
-                String personalLinkedIn = UserInputTextUi.getUserInput();
-                setLinkedInIfValid(personalLinkedIn);
+                String personalLinkedinUsername = UserInputTextUi.getUserInput();
+                isValidDetail = checkLinkedinValidity(personalLinkedinUsername);
+                setLinkedinUsername(personalLinkedinUsername);
             } catch (InvalidLinkedinUsernameException e) {
                 ExceptionTextUi.invalidPersonalLinkedinUsernameErrorMessage();
             }
         } while (!isValidDetail);
     }
 
-    private void setLinkedInIfValid(String userInput) throws InvalidLinkedinUsernameException {
+    private boolean checkLinkedinValidity(String userInput) throws InvalidLinkedinUsernameException {
         if (userInput.isEmpty() || userInput == null) {
-            isValidDetail = true;
+            return true;
+        }
+        // if exception is thrown in there, it will not return true, so isValidDetail will remain false
+        checkLinkedinUsernameRegex(userInput);
+        return true;
+    }
+
+    private void setLinkedinUsername(String userInput) {
+        if (userInput.isEmpty() || userInput == null) {
+            this.personalContact.setLinkedin(null);
         } else {
-            checkLinkedinUsernameRegex(userInput);
-            isValidDetail = true;
             this.personalContact.setLinkedin(userInput);
         }
     }
+
 
     public Contact getPersonalContact() {
         return personalContact;

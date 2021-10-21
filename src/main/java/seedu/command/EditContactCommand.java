@@ -15,10 +15,14 @@ public class EditContactCommand extends Command {
 
     public void execute() {
         try {
-            contactList.editContact(contactDetails, contactIndex);
-            TextUi.editContactMessage(contactList.getContactAtIndex(contactIndex));
+            if (contactIndex == -1) {
+                contactList.editPersonalContact(contactDetails);
+            } else {
+                contactList.editContact(contactDetails, contactIndex);
+                TextUi.editContactMessage(contactList.getContactAtIndex(contactIndex));
+            }
         } catch (IndexOutOfBoundsException | InvalidFlagException e) {
-            ExceptionTextUi.invalidIndexMessage();
+            ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());
         }
     }
 }
