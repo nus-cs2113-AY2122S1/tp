@@ -168,7 +168,7 @@ public class IngredientRepository {
             IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
 
             for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
-                if(expiryDate.isAfter(currentDate) && expiryDate.isBefore(currentDatePlusAWeek)) {
+                if (expiryDate.isAfter(currentDate) && expiryDate.isBefore(currentDatePlusAWeek)) {
                     expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
                 }
             }
