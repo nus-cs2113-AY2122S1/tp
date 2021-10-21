@@ -17,13 +17,76 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
 ## Features 
 
 
-### Viewing all universities available for SEP: `list /muni`
-Displays the master list of CEG SEP partner universities.
-Format: `list /muni`
 
-### Viewing all available NUS modules: `list /mmod`
-Displays the master list of NUS modules.
-Format: `list /suni`
+### Viewing all master universities: `list /muni`
+Displays all universities from the master list.
+Format: `list /muni`  
+Examples:
+```list /muni
+Here are the modules in the list:  
+[1] ACC1701X : Accounting for Decision Makers  
+[2] ACC2706 : Managerial Accounting  
+[3] AR2102 : Design 4  
+...  
+[803] TR3008 : Technological Innovation  
+[804] UD5221 : Urban Design Theory and Disco  
+[805] UD5628 : Critique of Contemporary Urban Design  
+```
+
+### Viewing all master modules: `list /mmod`
+Displays all modules from the master list.  
+Format: `list /mmod`  
+Examples: 
+```list /mmod
+Here are the universities and module mappings in the list:  
+[1] - Aarhus School of Business  
+[2] - Aarhus University  
+[3] - Arizona State University  
+...  
+[78] - Uppsala University  
+[79] - Waseda University  
+[80] - Western University  
+```
+
+### Adding a partner university: add /uni
+Adds a university that the user is interested in into the university list. 
+* The argument required here is the index of the university instead of its name.
+  This is to prevent too much typing by the user.  
+  Format: `add /uni UNIVERSITY_INDEX  `  
+  Example:  
+  Input    -> `add /uni 47`  
+  Output   -> `New university added: [47] - The University of Hong Kong`
+
+### Adding a NUS module: add /mod
+Adds a NUS module that the user wants to complete during SEP.
+* The argument required can be either the module code, or the module index.  
+  Format: add /mod MODULE_CODE add /mod MODULE_INDEX  
+  Examples:  
+  Input   -> `add /mod CS1010`  
+  Output  -> `New module added: [77] CS1010 : Programming Methodology`
+  Input   -> `add /mod 77`  
+  Output  -> `New module added: [77] CS1010 : Programming Methodology`
+
+### Viewing all selected universities: `list /suni`
+Displays all universities added by the user.
+Format: `list /suni`  
+Examples:
+```list /suni 
+[35] Singapore Management Univeristy  
+[69] University of Leeds  
+[77] - University of Waterloo  
+```
+
+### Viewing all selected modules: `list /smod`
+Displays all modules added by the user.  
+Format: `list /smod`  
+Examples:
+```list /smod
+Here are the modules in the list:  
+[1] CS1010 : Programming Methodology  
+[2] CS1231 : Discrete Structures  
+[3] CS3233 : Competitive Programming
+``` 
 
 ### Finding a specific university: `find /uni`
 Displays detail of universities that matches the keyword by the user.  
@@ -87,14 +150,25 @@ CS1231 - CAS CS131 : Combinatoric Structures
 ```
 
 ## FAQ
-_Q_: How do I transfer my data to another Computer?  
-_A_: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: How do I transfer my data to another Computer?  
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
+contains the data of your previous AddressBook home folder.
+
+
+**Q**: How do I save my selected universities and modules? 
+
+**A**: All your universities, modules and module mappings are automatically saved at 
+each command and will be auto-loaded on program start. 
+
 
 ## Command Summary
 
 Command | Format | Purpose
 --------|---------|-----------
-`add` | `add <FLAG> <INDEX>` FLAGS: `/uni` `/mod` `/map` | Add a university/module/mapping
-`list` | `list <FLAG>` FLAGS: `/muni` `mmod` `suni` `smod` | List master/selected university list or module list
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+`add` | `add /uni <UNI_INDEX>` `add /mod <MOD_INDEX>` `add /map <UNI_INDEX> <MAP_INDEX>` | Add a university/module/mapping
+`remove` | `remove /uni <UNI_INDEX>` `remove /mod <MOD_INDEX>` `remove /map <UNI_INDEX> <MAP_INDEX>` | Remove a university/module/mapping
+`list` | `list /muni` `list /mmod` `list /suni` `list /smod` | List master/selected university list or module list
+`searchmap` | `searchmap <UNI_INDEX>`| Search for potential mappings for the selected university
+`find` | `find /uni <UNI_NAME>` `find /mod <MOD_CODE>` | Find the possible university or module
+`exit` | `exit` | Exit the application
