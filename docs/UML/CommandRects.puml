@@ -1,0 +1,34 @@
+@startuml
+!include Style.puml
+skinparam ArrowColor LOGIC_GREEN_4
+
+rectangle "Command" {
+    rectangle "{abstract}\nCommand" LOGIC_GREEN_1 {
+    }
+
+    rectangle AddCommand LOGIC_GREEN_1 {
+    }
+
+    rectangle DeleteCommand LOGIC_GREEN_1 {
+    }
+
+    rectangle CheckCommand LOGIC_GREEN_1 {
+    }
+
+    rectangle ListRecipesCommand LOGIC_GREEN_1 {
+    }
+
+    rectangle HelpCommand LOGIC_GREEN_1 {
+    }
+
+    rectangle NullCommand LOGIC_GREEN_1 {
+    }
+
+    "{abstract}\nCommand" <|-- AddCommand
+    "{abstract}\nCommand" <|-- DeleteCommand
+    "{abstract}\nCommand" <|--- CheckCommand
+    "{abstract}\nCommand" <|--- ListRecipesCommand
+    "{abstract}\nCommand" <|-- HelpCommand
+    "{abstract}\nCommand" <|-- NullCommand
+}
+@enduml

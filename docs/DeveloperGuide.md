@@ -9,6 +9,12 @@
 ### Architecture
 
 ![Architecture Diagram](https://user-images.githubusercontent.com/65898007/138207279-86dc6196-82b2-407f-afd9-c7ebeaa19e13.png)
+```puml
+@startuml
+!include ArchitectureDiagram.puml
+scale 2
+@enduml
+```
 
 The Diagram above explains how the App is designed and will function
 
@@ -33,6 +39,12 @@ The App is organized by the `command`, `exception`, `kitchen`, and `util` packag
 The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
 ![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138207270-83d59ba2-b753-4a0f-bf46-7710921511d6.png)
+```puml
+@startuml
+!include AddSequence.puml
+scale 2
+@enduml
+```
 
 ### Cookbook component
 
@@ -80,10 +92,20 @@ The Diagram below is the class diagram for the Recipe class
 
 ![Recipe Class Diagram](https://user-images.githubusercontent.com/65898007/138097156-7f23bda4-f1bc-41e3-8e85-36eeac273dec.png)
 
+```puml
+@startuml
+!include KitchenRects.puml
+@enduml
+```
 
 ### Parser component
 
 ### Command component
+```puml
+@startuml
+!include CommandRects.puml
+@enduml
+```
 
 ### Storage component
 
