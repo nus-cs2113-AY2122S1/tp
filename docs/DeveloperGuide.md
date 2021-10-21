@@ -31,7 +31,7 @@
 
 ### Architecture
 
-![Architecture Diagram](./RenderedUML/ArchitectureDiagram.svg)
+![Architecture Diagram](https://user-images.githubusercontent.com/65898007/138207279-86dc6196-82b2-407f-afd9-c7ebeaa19e13.png)
 
 The Diagram above explains how the App is designed and will function
 
@@ -55,13 +55,13 @@ The App is organized by the `command`, `exception`, `kitchen`, and `util` packag
 
 The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
-![Sequence Diagram](./RenderedUML/AddSequence.svg)
+![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138207270-83d59ba2-b753-4a0f-bf46-7710921511d6.png)
 
 ### Cookbook component
 
 The Diagram below is the class diagram for the ``Cookbook`` class
 
-![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
+![Cookbook Class Diagram](https://user-images.githubusercontent.com/65898007/138207292-1d989a95-f4b2-468a-9076-94ce74e8248b.png)
 
 The `Cookbook` Class is instantiated by the `Gordon` Class, and manages the recipes and tags of the cookbook.
 
@@ -98,10 +98,6 @@ The `Cookbook` class can be classified into 3 main functionalities:
   - Filter recipes in the `recipes` array by time using the `filterByTime` method
 
 ### Recipe component
-
-The Diagram below is the class diagram for the Recipe class
-
-![Recipe Class Diagram](https://user-images.githubusercontent.com/65898007/138097156-7f23bda4-f1bc-41e3-8e85-36eeac273dec.png)
 
 ### Parser component
 
