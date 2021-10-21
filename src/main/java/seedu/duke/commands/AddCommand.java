@@ -182,6 +182,7 @@ public class AddCommand extends Command {
                     try {
                         if (!Duke.eventCatalog.isEmpty()) {
                             Ui.printEventCatalog();
+                            Ui.printLineBreak();
                         }
                         int eventIndex = Integer.parseInt(Ui.readInput());
                         Task task = new Task(itemTitle, itemDescription, itemDateTime);

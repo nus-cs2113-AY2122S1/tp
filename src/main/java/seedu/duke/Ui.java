@@ -104,7 +104,6 @@ public class Ui {
 
     public static void printEventCatalog() {
         printList(Duke.eventCatalog);
-        printLineBreak();
     }
 
     public static String getTask(Task task) {
