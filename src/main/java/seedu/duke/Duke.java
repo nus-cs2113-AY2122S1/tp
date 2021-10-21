@@ -48,6 +48,7 @@ public class Duke {
             command.setPersonalContact(personalContact);
             command.execute();
             ContactsEncoder.saveContacts(contactFilePath, contactList);
+            ContactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
         } catch (FileErrorException e) {
             ExceptionTextUi.fileErrorMessage(contactFilePath);
         }

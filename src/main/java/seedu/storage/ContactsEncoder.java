@@ -2,6 +2,7 @@ package seedu.storage;
 
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
+import seedu.contact.PersonalContact;
 import seedu.exception.FileErrorException;
 
 import java.io.FileWriter;
@@ -10,7 +11,7 @@ import java.io.IOException;
 import static seedu.storage.Storage.SEPARATOR;
 
 public class ContactsEncoder {
-    public static void savePersonalContact(String contactFilePath, Contact personalContact) throws FileErrorException {
+    public static void savePersonalContact(String contactFilePath, PersonalContact personalContact) throws FileErrorException {
         try {
             FileWriter fileWriter = new FileWriter(contactFilePath);
             String encodedContact = encodeContact(personalContact);
