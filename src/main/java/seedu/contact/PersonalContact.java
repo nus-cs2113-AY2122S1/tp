@@ -1,8 +1,5 @@
 package seedu.contact;
 
-import seedu.exception.InvalidFlagException;
-
-//should be interface?
 public class PersonalContact extends Contact {
     public static final int NAME_INDEX = 0;
     public static final int GITHUB_INDEX = 1;
@@ -45,7 +42,5 @@ public class PersonalContact extends Contact {
             }
         }
     }
-
-
 
 }

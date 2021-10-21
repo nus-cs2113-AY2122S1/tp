@@ -57,7 +57,6 @@ public class ContactList {
         }
     }
 
-
     public void deleteContact(int deletedIndex) {
         contacts.remove(deletedIndex);
     }
