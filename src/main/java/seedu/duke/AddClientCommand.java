@@ -27,12 +27,9 @@ public class AddClientCommand extends Command {
 
     /**
      * Executes the addition of client to client list.
-     *
-     * @param clients existing list of clients
-     * @param ui      user interface of TourPlanner
      */
     @Override
-    public void execute(ClientList clients, FlightList flights, TourList tours, Ui ui) {
+    public void execute() {
         int newClientCount = clients.getClientCount() + 1;
         clients.add(client, ui);
         assert newClientCount == clients.getClientCount();

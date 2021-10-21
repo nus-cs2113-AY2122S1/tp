@@ -5,7 +5,7 @@ package seedu.duke;
  */
 public class ClearCommand extends Command {
 
-    public void execute(ClientList clients, FlightList flights, TourList tours, Ui ui) {
+    public void execute() {
 
         try {
             clients.clearAllClients();

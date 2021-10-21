@@ -4,14 +4,24 @@ package seedu.duke;
  * Abstract command that outlines the 'execute' and 'isExit' method.
  */
 public abstract class Command {
+    protected ClientList clients;
+    protected FlightList flights;
+    protected TourList tours;
+    protected ClientPackageList packages;
+    protected Ui ui;
 
     /**
      * Executes the specific command depending on the command constructed.
-     *
-     * @param clients the existing list of clients
-     * @param ui      user interface of TourPlanner
      */
-    public abstract void execute(ClientList clients, FlightList flights, TourList tours, Ui ui);
+    public abstract void execute();
+
+    public void setData(ClientList clients, FlightList flights, TourList tours, ClientPackageList packages, Ui ui) {
+        this.clients = clients;
+        this.flights = flights;
+        this.tours = tours;
+        this.packages = packages;
+        this.ui = ui;
+    }
 
     /**
      * Function that controls the exit condition of the loop.
