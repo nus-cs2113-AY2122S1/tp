@@ -17,10 +17,10 @@ public class SetTimeCommand extends Command {
 
     @Override
     public void execute(Cookbook cookbook) {
-        System.out.println("Setting preparation time...");
+        System.out.println("Setting times...");
         try {
             cookbook.setTimes(recipeName, prepTime, cookTime);
-            System.out.println("Preparation time set successfully.");
+            System.out.println("Times set successfully.");
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());
         }

@@ -1,38 +1,20 @@
-Coffee
+test
+Difficulty: 
+Hard
 Calories (kcal): 
-30
+123
 Preparation time: 
-1 minute(s)
+19 minute(s)
 Cooking time: 
-2 minute(s)
+89 minute(s)
+Total price of ingredients: 
+$5.99
 Ingredients needed: 
+1. i1
+2. i2
+3. i3
 Method: 
-
-Ingredients needed: 
-Ingredients needed: 
-Method: 
-
-Method: 
-Ingredients needed: 
-Method: 
-
-Ingredients needed: 
-Ingredients needed: 
-Method: 
-
-Method: 
-Ingredients needed: 
-Method: 
-
-Ingredients needed: 
-Ingredients needed: 
-Method: 
-
-Method: 
-Ingredients needed: 
-Method: 
-
-Ingredients needed: 
-Ingredients needed: 
-Method: 
+1. s1
+2. s2
+3. s3
 
