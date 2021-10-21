@@ -189,6 +189,12 @@ public class ExceptionTextUi {
         System.out.println(contactFilePath + ":" + lineIndex + " - There is an invalid field.");
     }
 
+    public static void missingImportFileMessage() {
+        String message = "ConTech is unable to find the import file.\n"
+                + "Please kindly ensure that you have saved the file as data/import.txt.";
+        printDoubleLineMessage(message);
+    }
+
     //@@author mayankp291
     public static void invalidNameInput() {
         String message = "The name is not correctly formatted,\n"
