@@ -1,4 +1,4 @@
-package gordon.command.BasicCommands;
+package gordon.command.basic;
 
 import gordon.command.Command;
 import gordon.kitchen.Cookbook;

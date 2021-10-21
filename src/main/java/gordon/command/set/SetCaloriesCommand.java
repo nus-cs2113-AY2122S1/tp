@@ -1,4 +1,4 @@
-package gordon.command.SetCommands;
+package gordon.command.set;
 
 import gordon.command.Command;
 import gordon.exception.GordonException;

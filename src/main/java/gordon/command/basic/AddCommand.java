@@ -1,22 +1,23 @@
-package gordon.command.BasicCommands;
+package gordon.command.basic;
 
 import gordon.command.Command;
 import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
 import gordon.kitchen.Recipe;
 
-public class DeleteRecipeCommand extends Command {
-    int index;
+public class AddCommand extends Command {
+    Recipe recipe;
 
-    public DeleteRecipeCommand(int index) {
-        this.index = index;
+    public AddCommand(Recipe recipe) {
+        this.recipe = recipe;
     }
 
     @Override
     public void execute(Cookbook cookbook) {
         try {
-            cookbook.removeRecipe(index);
-            System.out.println("OK! The recipe has been deleted from your cookbook.");
+            cookbook.addRecipe(recipe);
+            System.out.println("Added " + recipe.getName() + " recipe! Yum!");
+            System.out.print(recipe);
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());
         }
