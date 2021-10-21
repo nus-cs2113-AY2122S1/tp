@@ -4,6 +4,7 @@ import de.vandermeer.asciitable.AsciiTable;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
+import seedu.duke.exercises.Exercise;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -101,24 +102,23 @@ public class Ui {
         }
     }
 
-    private void printTable(Map<String, ArrayList> map) {
+    private void printTable(Map<Exercise, ArrayList> map) {
         assert !map.isEmpty();
 
-
-        for (Map.Entry<String, ArrayList> m : map.entrySet()) {
+        for (Map.Entry<Exercise, ArrayList> m : map.entrySet()) {
             AsciiTable at = new AsciiTable();
             at.addRule();
             String[] columnNames = {"Index", "Exercise name", "Sets", "Reps"};
             at.addRow((Object[]) columnNames);
             at.addRule();
-            String workoutName = m.getKey();
-            printText(workoutName);
+            Exercise workoutName = m.getKey();
+            System.out.println(prefix + workoutName.getDescription().replace("\n", newLine));
             ArrayList exercises = m.getValue();
             for (int i = 0; i < exercises.size(); i++) {
                 String displayIndex = String.valueOf(i + 1);
                 String exerciseName = (String) exercises.get(i);
-                String sets = String.valueOf(2);
-                String reps = String.valueOf(8);
+                int sets = workoutName.getSets();
+                int reps = workoutName.getReps();
                 at.addRow(displayIndex, exerciseName, sets, reps);
                 at.addRule();
             }
@@ -135,13 +135,13 @@ public class Ui {
         if (result.itemList != null) {
             printList(result.itemList);
         }
-        if (result.map != null) {
+        /*        if (result.map != null) {
             if (result.isTable) {
                 printTable(result.map);
             } else {
-                printMap(result.map);
+                //printMap(result.map);
             }
-        }
+        }*/
 
         printLineSeparator();
 

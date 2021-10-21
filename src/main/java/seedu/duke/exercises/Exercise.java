@@ -16,6 +16,7 @@ public class Exercise {
     protected String description;
     protected int sets;
     protected int reps;
+
     protected Boolean isDone = false;
 
     public Exercise(String description, int sets, int reps) {
