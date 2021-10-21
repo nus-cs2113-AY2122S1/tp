@@ -3,6 +3,8 @@ package seedu.duke.commands;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
 import java.util.Scanner;
+import java.util.logging.*;
+
 import static seedu.duke.Duke.eventCatalog;
 
 
@@ -19,14 +21,20 @@ public class DeleteCommand extends Command {
     private boolean isDeleteAll;
     private boolean isCorrectFormat;
 
+    // create logger
+    private final static Logger logger = Logger.getLogger("Logger");
+
+
 
     // v2.0: deleteCommand deletes purely based on index, i.e. delete -t/-e [TASK_INDEX]
     public DeleteCommand(String[] command) {
 
         isCorrectFormat = true;
         isDeleteAll = false;
+        logger.setLevel(Level.INFO);
 
         try {
+            logger.log(Level.INFO, "going to start processing");
             if (command.length == 1) {
                 throw new DukeException("Please specify what you wish to delete.");
             }
@@ -36,6 +44,7 @@ public class DeleteCommand extends Command {
             } else if (isEventFlag(itemFlag) || isTaskFlag(itemFlag)) {
                 prepareInputs(command);
             } else {
+                logger.log(Level.WARNING, "processing error");
                 throw new DukeException("Invalid item flag entered. Please specify event '-e' " +
                         "or task '-t'.");
             }
@@ -61,9 +70,11 @@ public class DeleteCommand extends Command {
 
             String deletedItem;
             if (isEventFlag(itemFlag)) {
+                assert indexToDelete < eventCatalog.size();
                 deletedItem = deleteEvent(indexToDelete);
                 return new CommandResult("I have deleted this event: " + deletedItem);
             } else if (isTaskFlag(itemFlag)) {
+                assert indexToDelete < eventCatalog.size();
                 deletedItem = deleteTask(indexToDelete);
                 return new CommandResult("I have deleted this task: " + deletedItem);
             }
@@ -72,7 +83,6 @@ public class DeleteCommand extends Command {
     }
 
     private void prepareInputs(String[] command) throws DukeException {
-        // delete -e/-t with no index
         if (command.length == 2) {
             throw new DukeException("Please give me the index of the event you wish to delete!");
         } else if (isEventFlag(itemFlag) || isTaskFlag(itemFlag)) {
