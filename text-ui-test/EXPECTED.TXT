@@ -2,7 +2,7 @@ I'm Gordon! How are you.
 Let's get to work shall we.
 Here's what we can get started with.
 
-1. Add a recipe: add "recipe name" "/ingredients" 1+2 "/steps" 1+2 "/calories" x
+1. Add a recipe: addRecipe "recipe name" "/ingredients" 1+2 "/steps" 1+2
 2. Delete a recipe: deleteRecipe "Index of recipe"
 3. List all your recipes: listRecipes
 4. Find a recipe: find "Keyword"

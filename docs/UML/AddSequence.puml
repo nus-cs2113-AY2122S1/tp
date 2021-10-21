@@ -43,15 +43,6 @@ end
 Parser --> Parser
 deactivate Parser
 
-' Calories
-Parser -> Parser: parseCalories
-activate Parser
-
-Parser -> Recipe: addCalories
-
-Parser --> Parser
-deactivate Parser
-
 Recipe --> Parser: r
 deactivate Recipe
 
