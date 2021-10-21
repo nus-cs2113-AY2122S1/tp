@@ -66,6 +66,19 @@ user issues the command `add task homework -d mon`.
 ![ArchitectureDemoSequenceDiagram](images/ArchitectureDemoSequenceDiagram.png)
 
 ### UI component
+**API** : [`Ui.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/ui/Ui.java)
+
+The `Ui` component contains:
+* the method `readUserResponse()` to read from the standard input.
+* methods to print messages as strings to the standard output.
+* constant strings, such as `LINE` and `PADDING`, which are used to format the printed messages.
+
+The methods in the `Ui` component may call methods from `TaskList`, `LessonList` or `ModuleList` to get information from the respective components.
+
+![UiClassDiagram](images/UiClassDiagram.png)
+
+#### Printing tasks containing a keyword:
+![UiPrintTasksWithKeyword](images/PrintTasksWithKeywordSequenceDiagram.png)
 
 ### Logic component
 
@@ -119,7 +132,7 @@ The `Module` component,
 
 The `Task` component,
 * stores data specific to a task as entered by the user
-* stores all `Task` objects as createed by user commands in a `TaskList` object
+* stores all `Task` objects as created by user commands in a `TaskList` object
 * does not depend on any of the other three components
 
 ### Storage component
@@ -173,6 +186,6 @@ The following sequence diagrams below show how task data is [saved](#saving-data
 
 ### Glossary
 
-## Appendix: Instructions for manual testing]
+## Appendix: Instructions for manual testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}

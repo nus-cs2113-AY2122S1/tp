@@ -1,0 +1,32 @@
+@startuml
+!include Style.puml
+
+Class Lesson {
+}
+
+Class LessonList {
+}
+
+Class Task {
+}
+
+Class TaskList {
+}
+
+Class Module {
+}
+
+Class ModuleList {
+}
+
+Class Ui {
+}
+
+TaskList *--> "*" Task : taskList
+LessonList *--> "*" Lesson : lessonList
+ModuleList *--> "*" Module : moduleList
+
+Ui ..> TaskList
+Ui ..> LessonList
+Ui ..> ModuleList
+@enduml
