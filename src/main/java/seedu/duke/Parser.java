@@ -184,7 +184,7 @@ public class Parser {
     private static void correctBalances(Expense expense) {
         Person payer = expense.getPayer();
         for (Person person : expense.getPersonsList()) {
-            if (person == payer){
+            if (person == payer) {
                 payer.setMoneyOwed(payer, -expense.getAmountSplit().get(person));
                 continue;
             }
