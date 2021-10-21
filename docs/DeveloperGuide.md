@@ -24,6 +24,15 @@ Refer to our user guide [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob
 
 The ***Architecture Diagram*** above explains the high-level design of the App. 
 
+### Ui
+The Ui component consolidates and formats the output of the program before displaying it to the user
+in the command line. 
+
+The UI component 
+* Displays different object types such as University, Module and Module mapping.
+* Provides means of customization for display formatting. 
+* Summarizes different parts of the program into callable methods. 
+
 ### Storage
 
 The storage component can implement the below features:
