@@ -25,6 +25,26 @@ original source as well}
 
 ## Implementation
 
+### Listing
+
+The list commands traverse through each of the 12 Budget list in ALlRecordList for each month and 
+retrieve the Budget amount for that particular month and then enumerates all the expenditures in
+the particular month.
+
+The result is a list of budget followed by expenditure for each month. 
+
+### Storage 
+
+The storage stores the exact add command of budget and expenditures into the text file containing 
+in the current ArrayList. The reason it is implemented in this manner is that we could reuse
+code that have been written for adding of budget and expenditures directly when loading from storage.
+
+Everytime a deleted, edit or add command is called, the txt file is automatically wiped and re-written 
+from the ArrayList to ensure that data is saved at every step. 
+
+The yearly Records is stored in the form of <year>.txt. Each year contains all the monthly budget as
+well as all the expenditure tied to that month.
+
 ## Product scope
 
 ### Target user profile

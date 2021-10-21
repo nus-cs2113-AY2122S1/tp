@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+[-> Storage: loadStorage(AllRecordList recordList, String recordListDirectory)
+
+Storage -> LocalDate: now()
+activate LocalDate
+
+Storage <--
+deactivate LocalDate
+
+alt recordListDirectory.equals("")
+    recordListDirectory <- String: Load Directory '
+end
+
+[<--Storage
+@enduml
