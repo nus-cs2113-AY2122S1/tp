@@ -78,6 +78,7 @@ While the Sequence Diagram represents the normal flow of logic, there is a recur
 6. If the boolean value is false, `handleState()` would pass the call back to `:HappyBit`
 
 ### Command component
+
 When the user runs the Program, the main function dealing with the user's inputs is the `handleUserInput()` function
 which obtains a `Command` object after parsing the input using the `Parser` component.
 
@@ -134,6 +135,12 @@ execute a certain command.
 ### GoalList component
 
 ### Storage component
+
+**API:** `Storage.java`
+
+![Storage Class Diagram](Diagram%20Images/StorageClassDiagram.png)
+
+The Storage Class allows data to be read and saved to a storage file
 
 ## Appendix A: Product Scope
 
