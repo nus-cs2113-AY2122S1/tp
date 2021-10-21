@@ -10,6 +10,7 @@ public class Messages {
     public static final String MESSAGE_COMMAND_HELP = "Prints the help page.";
     public static final String MESSAGE_COMMAND_NOTE = "Move to notes workspace.";
     public static final String MESSAGE_COMMAND_SCHEDULE = "Move to schedules workspace.";
+    public static final String MESSAGE_COMMAND_TIMETABLE = "Displays all your schedule.";
 
     public static final String MESSAGE_RESPONSE_DELETE = "Your %s on '%s' has been deleted!";
     public static final String MESSAGE_RESPONSE_ADD = "Your %s on '%s' has been added!";
@@ -32,7 +33,10 @@ public class Messages {
     public static final String EMPTY_CONTENT_LIST_MESSAGE = "You do not have any content in this workspace.\n";
     public static final String CONTENT_MESSAGE_HEADER = "List of Content\n---------------\n";
 
-    public static final String MAIN_BANNER = "Welcome to TermiNUS!";
+    public static final String EMPTY_SCHEDULE_FOR_THE_DAY = "You have no schedule for %s\n";
+    
+    public static final String MAIN_BANNER = "Welcome to TermiNUS!\n";
+    public static final String MAIN_REMINDER = "This is your schedule today:\n";
     public static final String NOTE_BANNER = "You have %d note(s) inside this workspace.";
     public static final String SCHEDULE_BANNER = "You have %d link(s) in this workspace.";
     public static final String INVALID_ARGUMENT_FORMAT_MESSAGE_EXCEPTION = "%s %s";
@@ -47,4 +51,5 @@ public class Messages {
     public static final String MESSAGE_COMMAND_MODULE_VIEW = "View all modules available";
     public static final String MESSAGE_RESPONSE_MODULE_FORMAT = "%d. %s";
     public static final String MESSAGE_RESPONSE_NO_MODULES = "You do not have any modules.";
+    public static final String MESSAGE_EMPTY_DAILY_SCHEDULE = "You have no schedule for today.";
 }

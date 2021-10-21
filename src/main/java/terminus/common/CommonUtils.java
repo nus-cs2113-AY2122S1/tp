@@ -2,8 +2,8 @@ package terminus.common;
 
 import java.net.URL;
 import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -122,6 +122,7 @@ public class CommonUtils {
     }
 
     /**
+     * <<<<<<< HEAD
      * Checks if the given name is a valid file name.
      *
      * @param name The string to be checked.
@@ -159,5 +160,15 @@ public class CommonUtils {
             return string[0];
         }
         return null;
+    }
+
+    /**
+     * Function to get today's day of the week.
+     *
+     * @return A string indicating today's day
+     */
+    public static String getCurrentDay() {
+        String currentDay = LocalDate.now().getDayOfWeek().toString();
+        return currentDay;
     }
 }
