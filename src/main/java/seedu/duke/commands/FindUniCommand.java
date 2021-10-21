@@ -13,8 +13,12 @@ public class FindUniCommand extends Command {
         ArrayList<University> result = (ArrayList<University>) universityMasterList.getList().stream()
                 .filter((university) -> university.getName().toLowerCase().contains(userInput.toLowerCase()))
                 .collect(Collectors.toList());
-        for (int i = 0; i < result.size(); i++) {
-            Ui.printUniversity(result.get(i), universityMasterList);
+        if (result.size() == 0) {
+            System.out.println("No university found");
+        } else {
+            for (University university : result) {
+                Ui.printUniversity(university, universityMasterList);
+            }
         }
     }
 
