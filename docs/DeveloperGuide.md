@@ -115,7 +115,7 @@ Functions of the Parser class:
 
 The Diagram below is the class diagram for the Command Class
 
-![Command Class Diagram](https://user-images.githubusercontent.com/65898007/138222993-ad90002c-80bc-4d74-aa2a-f267765d812c.png)
+![Command Class Diagram](https://user-images.githubusercontent.com/70201525/138242999-f95dd9a9-6ece-419d-ba99-816e6ec4733d.png)
 
 The `Command` class contains all the basic functionality of the Gordon cookbook, and is the Class that executes specific commands given by the user.
 
