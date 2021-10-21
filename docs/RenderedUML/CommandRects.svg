@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="308px" preserveAspectRatio="none" style="width:679px;height:308px;background:#FFFFFF;" version="1.1" viewBox="0 0 679 308" width="679px" zoomAndPan="magnify"><defs/><g><!--MD5=[7ea3f7332222999d7939fca1b8e1fb19]
+cluster Command--><rect fill="#FFFFFF" height="295" style="stroke:#000000;stroke-width:1.5;" width="666" x="7" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="305.5" y="22.1318">Command</text><!--MD5=[ee234901cc14ce4ccf9222c6e4f6e77d]
+entity {abstract}\nCommand--><rect fill="#DFF3B3" height="52.1973" style="stroke:#000000;stroke-width:1.5;" width="84" x="305" y="42"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="61" x="315" y="65.1318">{abstract}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="64" x="315" y="81.2305">Command</text><!--MD5=[8de6e499e49f97ea3e42f8539c029b5a]
+entity AddCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="109" x="23.5" y="154"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="89" x="33.5" y="177.1318">AddCommand</text><!--MD5=[5b037da89b657f1acf0babb5f3016ea1]
+entity DeleteCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="125" x="167.5" y="154"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="105" x="177.5" y="177.1318">DeleteCommand</text><!--MD5=[a5c0212f6afaa6e3607a798eeadca312]
+entity CheckCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="124" x="197" y="250"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="104" x="207" y="273.1318">CheckCommand</text><!--MD5=[07ff9f18cf12a916a165d965513cc662]
+entity ListRecipesCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="157" x="356.5" y="250"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="137" x="366.5" y="273.1318">ListRecipesCommand</text><!--MD5=[78ee5539c100dd89d3e39af7f9352b77]
+entity HelpCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="112" x="402" y="154"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="92" x="412" y="177.1318">HelpCommand</text><!--MD5=[7a41efbc9d6b58d31babbb88d6dbd69b]
+entity NullCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="107" x="549.5" y="154"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="87" x="559.5" y="177.1318">NullCommand</text><!--MD5=[af925c83a93922fd32be53537cd8ffc4]
+reverse link {abstract}\nCommand to AddCommand--><path d="M286,92.13 C236.4,110.94 167.54,137.05 122.87,153.98 " fill="none" id="{abstract}\nCommand-backto-AddCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="283.79,85.48,304.97,84.94,288.75,98.57,283.79,85.48" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[b90732a940bbdcd90349e13a8bfde88c]
+reverse link {abstract}\nCommand to DeleteCommand--><path d="M302.74,107.58 C284.49,123.49 264.28,141.12 249.8,153.74 " fill="none" id="{abstract}\nCommand-backto-DeleteCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="298.4,102.08,318.08,94.21,307.6,112.63,298.4,102.08" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[caa5b3d04402d49a4e19d28f85fe3618]
+reverse link {abstract}\nCommand to CheckCommand--><path d="M336.56,113.98 C330.34,137.27 321.41,165.82 310,190 C299.67,211.9 283.78,234.75 272.49,249.82 " fill="none" id="{abstract}\nCommand-backto-CheckCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="329.83,112.03,341.51,94.35,343.41,115.45,329.83,112.03" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[84e4c636aedacfc7525d9c83f71f534c]
+reverse link {abstract}\nCommand to ListRecipesCommand--><path d="M357.97,113.93 C364.43,137.2 373.58,165.75 385,190 C395.25,211.77 410.81,234.65 421.84,249.75 " fill="none" id="{abstract}\nCommand-backto-ListRecipesCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="351.13,115.43,352.81,94.31,364.67,111.87,351.13,115.43" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[ea19872fe4ef70d936b2d35dc1f083f2]
+reverse link {abstract}\nCommand to HelpCommand--><path d="M389.25,107.82 C406.5,123.67 425.55,141.18 439.22,153.74 " fill="none" id="{abstract}\nCommand-backto-HelpCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="384.43,112.9,374.44,94.21,393.9,102.59,384.43,112.9" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[eb954358225e6e60b68243035ec8fb24]
+reverse link {abstract}\nCommand to NullCommand--><path d="M407.94,93.28 C454.88,111.98 518.59,137.37 560.24,153.96 " fill="none" id="{abstract}\nCommand-backto-NullCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="405.26,99.75,389.27,85.84,410.44,86.74,405.26,99.75" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[f1076279cde630de9742c57cdf9e44a1]
+@startuml
+!include Style.puml
+skinparam ArrowColor LOGIC_GREEN_4
+
+rectangle "Command" {
+    rectangle "{abstract}\nCommand" LOGIC_GREEN_1 {
+    }
+
+    rectangle AddCommand LOGIC_GREEN_1 {
+    }
+
+    rectangle DeleteCommand LOGIC_GREEN_1 {
+    }
+
+    rectangle CheckCommand LOGIC_GREEN_1 {
+    }
+
+    rectangle ListRecipesCommand LOGIC_GREEN_1 {
+    }
+
+    rectangle HelpCommand LOGIC_GREEN_1 {
+    }
+
+    rectangle NullCommand LOGIC_GREEN_1 {
+    }
+
+    "{abstract}\nCommand" <|- - AddCommand
+    "{abstract}\nCommand" <|- - DeleteCommand
+    "{abstract}\nCommand" <|- - - CheckCommand
+    "{abstract}\nCommand" <|- - - ListRecipesCommand
+    "{abstract}\nCommand" <|- - HelpCommand
+    "{abstract}\nCommand" <|- - NullCommand
+}
+@enduml
+
+@startuml
+
+
+
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2
+skinparam ArrowColor #3c5648
+
+rectangle "Command" {
+    rectangle "{abstract}\nCommand" #DFF3B3 {
+    }
+
+    rectangle AddCommand #DFF3B3 {
+    }
+
+    rectangle DeleteCommand #DFF3B3 {
+    }
+
+    rectangle CheckCommand #DFF3B3 {
+    }
+
+    rectangle ListRecipesCommand #DFF3B3 {
+    }
+
+    rectangle HelpCommand #DFF3B3 {
+    }
+
+    rectangle NullCommand #DFF3B3 {
+    }
+
+    "{abstract}\nCommand" <|- - AddCommand
+    "{abstract}\nCommand" <|- - DeleteCommand
+    "{abstract}\nCommand" <|- - - CheckCommand
+    "{abstract}\nCommand" <|- - - ListRecipesCommand
+    "{abstract}\nCommand" <|- - HelpCommand
+    "{abstract}\nCommand" <|- - NullCommand
+}
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: US
+--></g></svg>
