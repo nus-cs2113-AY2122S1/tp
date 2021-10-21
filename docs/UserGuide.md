@@ -17,6 +17,12 @@ The product aims to aid student in organizing their academic schedule and enhanc
     * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<zoom_link>"`](#Adding-a-Schedule)
     * [Delete a Schedule : `delete <index>`](#Delete-a-Schedule)
     * [View Schedule : `view`](#View-Schedule)
+* [Section: Question](#Section:-Question)
+    * [Accessing Question : `note`](#Accessing-Note)
+    * [Adding a Question : `add "<question>" "<answer>"`](#Adding-a-Question)
+    * [Delete a Question : `delete <index>`](#Delete-a-Question)
+    * [View Question : `view {index}`](#View-Question)
+    * [Testing Yourself with Active Recall: `test {count}`](#Testing-Yourself-with-Active-Recall)
 * [Exiting the Program: `exit`](#Exiting-the-Program)
 * [Accessing Help: `help`](#Accessing-Help)
 * [FAQ](#faq)
@@ -166,6 +172,146 @@ You have 3 schedules inside:
 [schedule] >>> 
 ```
 
+
+## Section: Question
+
+### Accessing Question
+**Format:** `question`  
+Accessing the question workspace
+After running the question command, you can see the following:
+
+```
+[] >>> question
+
+You have 0 question(s) in this workspace.
+
+Type any of the following to get started:
+> add
+> exit
+> help
+> view
+> test
+> back
+> delete
+ 
+[question] >>> 
+```
+
+### Adding a Question
+**Format:** `add "<question>" "<answer>"`  
+Adding a question when in the question workspace
+```
+[question] >>> add "What is 1+1?" "2" 
+Your question on 'What is 1+1?' has been added!
+[question] >>> 
+```
+
+### Delete a Question
+**Format:** `delete <index>`  
+Deletes the specified question given by its index.
+```
+[question] >>> delete 1
+Your question on 'What is 1+1?' has been deleted!
+[question] >>> 
+```
+
+### View Question
+**Format:** `view` or `view {index}`  
+Two ways to use this command simply running view or view [index]
+View by itself will list all questions
+```
+[question] >>> view 
+List of Content
+---------------
+1. What is segmentation?
+2. What is paging?
+3. What is the pro of Fixed Partitioning in Contiguous Memory allocation?
+
+Rerun the same command with an index behind to view the content.
+[question] >>> 
+```
+
+The second way to use view is with an index view [index]
+
+```
+[question] >>> view 1 
+Name: What is segmentation?
+Content:
+Placing different data regions into different frames
+
+[question] >>> 
+```
+
+### Testing Yourself with Active Recall
+**Format:** `test` or `test {count}`  
+You can start an Active Recall session by running the `test` command.
+
+By default, it will test 10 questions (or less if there are not enough questions). You may specify 
+how many questions you wish to run in that session by keying in the number of questions after the 
+`test` command.
+
+When you begin, you will be prompted with the following (do note that the question pool may be 
+smaller if there are not enough questions in the workspace). Press the <kbd>Enter</kbd> key to
+start.
+
+```
+[question] >>> test 3
+---[Active Recall]---
+
+We will be starting your active recall training session.
+This session will consist of 3 questions.
+
+When you are ready, press [Enter] to continue.
+```
+
+The first question will be displayed, and once you are ready to reveal the answer, press the 
+<kbd>Enter</kbd> key again.
+
+```
+---
+
+Question:
+What is segmentation?
+
+When you are ready, press [Enter] to continue.
+```
+
+After revealing the answer, provide feedback to TermiNUS to allow it to know if the question should 
+appear more often in the future. 
+
+- Key in `1` if you felt it was easy.
+- Key in `2` if you felt it was normal.
+- Key in `3` if you felt it was hard.
+- Key in `E` if you wish to exit the session.
+
+```
+You took 172 seconds to reveal the answer.
+
+Answer:
+Placing different data regions into different frames
+
+How did you find the question? (Compare against past attempts if any)
+[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit
+[1/2/3/E] >> 
+```
+
+After choosing your difficulty, you may proceed to reveal the next question by pressing 
+<kbd>Enter</kbd> key again.
+
+```
+[1/2/3/E] >> 2
+
+When you are ready, press [Enter] to continue.
+```
+
+Once the question pool is empty, or when you decided to stop, TermiNUS will drop you back into the 
+command prompt.
+
+```
+This training session has ended.
+Returning you back to main program.
+[question] >>> 
+```
 
 ## Exiting the Program
 **Format:** `exit`  

@@ -11,6 +11,11 @@ import terminus.ui.Ui;
 
 public class GameEnvironment {
 
+    private static final int INVALID_DIFFICULTY = 0; 
+    public static final int EASY_DIFFICULTY = 1;
+    public static final int NORMAL_DIFFICULTY = 2;
+    public static final int HARD_DIFFICULTY = 3;
+    public static final int EXIT_CODE = -1;
     private final Ui ui;
     private final QuestionGenerator questionGenerator;
 
@@ -25,13 +30,12 @@ public class GameEnvironment {
     public void run() {
         showPreGameInformation();
         while (questionGenerator.hasNext()) {
-            Question question = questionGenerator.next();
-            promptQuestion(question);
+            Question question = promptQuestion();
             int difficulty = getUserFeedback();
-            if (difficulty == -1) {
+            if (difficulty == EXIT_CODE) {
                 break;
             }
-            postQuestionFeedback(question, difficulty);
+            updateQuestionDifficulty(question, difficulty);
         }
         ui.printSection(Messages.ACTIVE_RECALL_SESSION_END_MESSAGE);
     }
@@ -48,7 +52,8 @@ public class GameEnvironment {
         ui.getUserInput(Messages.ACTIVE_RECALL_ENTER_TO_CONTINUE_MESSAGE);
     }
 
-    private void promptQuestion(Question question) {
+    private Question promptQuestion() {
+        Question question = questionGenerator.next();
         Instant start = Instant.now(); 
         ui.printSection(
             "",
@@ -67,10 +72,11 @@ public class GameEnvironment {
             "Answer:", 
             question.getAnswer()
         );
+        return question;
     }
 
     private int getUserFeedback() {
-        int difficulty = 0;
+        int difficulty = INVALID_DIFFICULTY;
         do {
             ui.printSection(Messages.ACTIVE_RECALL_ASK_QUESTION_DIFFICULTY_MESSAGE);
             String input = ui.getUserInput("[1/2/3/E] >> ").trim().toLowerCase();
@@ -80,23 +86,23 @@ public class GameEnvironment {
                 ui.printSection(Messages.ERROR_MESSAGE_INVALID_INPUT);
                 continue;
             } else if (input.equalsIgnoreCase("e")) {
-                difficulty = -1;
+                difficulty = EXIT_CODE;
                 break;
             }
             difficulty = Integer.parseInt(input);
             
-        } while (difficulty == 0);
-        assert difficulty <= 3 && difficulty >= -1;
+        } while (difficulty == INVALID_DIFFICULTY);
+        assert difficulty <= HARD_DIFFICULTY && difficulty >= -EASY_DIFFICULTY;
         return difficulty;
     }
     
-    private void postQuestionFeedback(Question question, int difficulty) {
-        assert difficulty >= 1 && difficulty <= 3;
+    private void updateQuestionDifficulty(Question question, int difficulty) {
+        assert difficulty >= EASY_DIFFICULTY && difficulty <= HARD_DIFFICULTY;
         double weight = question.getWeight();
-        if (difficulty == 1) {
+        if (difficulty == EASY_DIFFICULTY) {
             double newWeight = DifficultyModifier.tweakEasyQuestionDifficulty(weight);
             question.setWeight(newWeight);
-        } else if (difficulty == 3) {
+        } else if (difficulty == HARD_DIFFICULTY) {
             double newWeight = DifficultyModifier.tweakHardQuestionDifficulty(weight);
             question.setWeight(newWeight);
         }
