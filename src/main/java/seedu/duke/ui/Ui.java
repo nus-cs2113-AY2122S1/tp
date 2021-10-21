@@ -39,6 +39,14 @@ public class Ui {
         }
     }
 
+    public static void printFindModNull() {
+        out.println("No modules found");
+    }
+
+    public static void printFindUniNull() {
+        out.println("No universities found");
+    }
+
     public static void printGlobe() {
         out.println(AsciiConstants.GLOBE);
     }
