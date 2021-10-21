@@ -24,6 +24,28 @@ Refer to our user guide [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob
 
 The ***Architecture Diagram*** above explains the high-level design of the App. 
 
+### Command Implementation
+
+Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can executes `list /mmod` command.
+
+Step 2. The user then module executes `add /uni Boston University` command to call `addUniCommand(university, list)` and add his preferred university to the selected university list. The other option for the user is to execute `add /uni 4` command to call `addUniCommand(index, list)` to add to the list.
+
+Step 3. The user executes `add /mod CS1231` command to call `addModCommand(module, list)` and add his preferred NUS module to the selected module list. The other option for the user is to execute `add /uni 81` command to call `addModCommand(index, list)` to add to the list.
+
+Step 4. The user executes `list /suni` to see his selected university list. The user executes `list /smod` command to see his selected module list.
+
+Step 5. The user executes `remove /mod 81` command to delete unwanted modules from see his selected module list. The user executes `list /uni 4` command to delete unwanted university see his selected university list.
+
+Step 6. The user executes `find CS1231` to find the master index of the module. The user executes find Boston University to find the master index of the university.
+
+Step 7. The user executes `searchmap 4` command to see the module mapping of all modules in the selected module list in Boston University.
+
+Step 8. The user executes `add /map  4 81` command to add a particular module mapping of the module CS1231 under Boston University.
+
+Step 9. The user executes `remove /map  4 81` command to remove the unwanted module mapping.
+
+Step 10. The user executes `exit` command to terminate the program.
+
 ### Ui
 The Ui component consolidates and formats the output of the program before displaying it to the user
 in the command line. 
@@ -31,7 +53,7 @@ in the command line.
 The UI component 
 * Displays different object types such as University, Module and Module mapping.
 * Provides means of customization for display formatting. 
-* Summarizes different parts of the program into callable methods. 
+* Summarizes different parts of the program into callable methods.
 
 ### Storage
 
