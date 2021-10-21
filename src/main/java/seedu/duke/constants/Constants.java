@@ -4,7 +4,8 @@ public class Constants {
     // Ui
     public static final String INDEX_WRAP_FRONT = "[";
     public static final String INDEX_WRAP_BACK = "]";
-    public static final String MODULE_MAPPING_SEPARATOR = "-";
+    public static final String MODULE_MAPPING_SEPARATOR = " - ";
+    public static final String MODULE_NAME_SEPARATOR = " : ";
 
     // Commands
     public static final String COMMAND_REMOVE = "remove";
