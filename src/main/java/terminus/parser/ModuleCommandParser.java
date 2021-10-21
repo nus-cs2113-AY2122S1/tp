@@ -14,7 +14,7 @@ public class ModuleCommandParser extends CommandParser {
     /**
      * Initializes the commandMap. Adds some default commands to it.
      */
-    public ModuleCommandParser() {
+    private ModuleCommandParser() {
         super(CommonFormat.COMMAND_MODULE);
     }
 

@@ -57,7 +57,8 @@ public class Terminus {
             this.ui = new Ui();
             this.parser = MainCommandParser.getInstance();
             this.workspace = "";
-            this.moduleStorage = new ModuleStorage(DATA_DIRECTORY.resolve(MAIN_JSON));
+            this.moduleStorage = ModuleStorage.getInstance();
+            this.moduleStorage.init(DATA_DIRECTORY.resolve(MAIN_JSON));
             this.moduleManager = new ModuleManager();
             TerminusLogger.info("Loading file...");
             this.moduleManager = moduleStorage.loadFile();
@@ -130,7 +131,7 @@ public class Terminus {
         TerminusLogger.severe("Save file is inaccessible.");
         TerminusLogger.severe(e.getMessage(), e.getCause());
         ui.printSection(
-                "Unable to save/load file: " + DATA_DIRECTORY.resolve(MAIN_JSON),
+                String.format(Messages.ERROR_MESSAGE_FILE, e.getMessage()),
                 "TermiNUS may still run, but your changes may not be saved.",
                 "Check 'terminus.log' for more information."
         );
@@ -140,6 +141,7 @@ public class Terminus {
         TerminusLogger.info("Saving data into file...");
         try {
             this.moduleStorage.saveFile(moduleManager);
+            this.moduleStorage.saveAllNotes(moduleManager);
             TerminusLogger.info("Save completed.");
         } catch (IOException e) {
             TerminusLogger.warning("File saving has failed.");

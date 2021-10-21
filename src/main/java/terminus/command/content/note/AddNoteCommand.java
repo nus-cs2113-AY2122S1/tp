@@ -1,5 +1,6 @@
 package terminus.command.content.note;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import terminus.command.Command;
 import terminus.command.CommandResult;
@@ -12,6 +13,7 @@ import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
+import terminus.storage.ModuleStorage;
 import terminus.ui.Ui;
 
 /**
@@ -65,17 +67,25 @@ public class AddNoteCommand extends Command {
      * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
+     * @throws IOException when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws IOException, InvalidArgumentException {
         assert getModuleName() != null;
         TerminusLogger.info("Executing Add Note Command");
         NusModule module = moduleManager.getModule(getModuleName());
         ContentManager contentManager = module.getContentManager(Note.class);
         assert contentManager != null;
-
-        contentManager.add(new Note(name, data));
+        if (contentManager.isDuplicateName(name)) {
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_DUPLICATE_NAME);
+        }
+        Note newNote = new Note(name, data);
+        contentManager.add(newNote);
         TerminusLogger.info(String.format("Note(\"%s\",\"%s\") has been added", name, data));
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_NOTE, name));
+
+        // Save to file
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.addNoteFromModule(getModuleName(), newNote);
         return new CommandResult(true, false);
     }
 
@@ -93,6 +103,12 @@ public class AddNoteCommand extends Command {
             isValid = false;
         } else if (CommonUtils.hasEmptyString(argArray)) {
             TerminusLogger.warning("Failed to parse arguments: some arguments found is empty");
+            isValid = false;
+        } else if (!CommonUtils.isValidFileName(argArray.get(0))) {
+            TerminusLogger.warning("Failed to parse arguments: given note name is invalid");
+            isValid = false;
+        } else if (argArray.get(1).length() > CommonFormat.MAX_FILE_SIZE) {
+            TerminusLogger.warning("Failed to parse arguments: given note data is too long");
             isValid = false;
         }
         return isValid;

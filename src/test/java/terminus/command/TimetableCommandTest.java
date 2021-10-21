@@ -1,5 +1,6 @@
 package terminus.command;
 
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.exception.InvalidArgumentException;
@@ -32,7 +33,7 @@ public class TimetableCommandTest {
     }
 
     @Test
-    void execute_viewWeekly_success() throws InvalidArgumentException, InvalidCommandException {
+    void execute_viewWeekly_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
@@ -68,7 +69,7 @@ public class TimetableCommandTest {
     }
 
     @Test
-    void execute_viewDaily_success() throws InvalidArgumentException, InvalidCommandException {
+    void execute_viewDaily_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Tuesday\" \"00:00\" \"https://zoom.us/test\"");
@@ -108,7 +109,7 @@ public class TimetableCommandTest {
     }
 
     @Test
-    void execute_viewDaily_exceptionThrown() throws InvalidArgumentException, InvalidCommandException {
+    void execute_viewDaily_exceptionThrown() throws InvalidArgumentException, InvalidCommandException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
