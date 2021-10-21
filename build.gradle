@@ -45,6 +45,7 @@ task coverage(type: JacocoReport) {
         xml.required = true
     }
 }
+
 application {
     mainClassName = "terminus.Terminus"
 }
