@@ -22,7 +22,7 @@ class DeleteCommandTest {
         command1.execute();
         assertEquals(1, eventCatalog.size());
 
-        InputStream sysInBackup = System.in;
+        final InputStream sysInBackup = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("Y".getBytes());
         System.setIn(in);
 
