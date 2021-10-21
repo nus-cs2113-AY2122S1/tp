@@ -67,6 +67,21 @@ The sequence diagram for AddDispenseCommand is shown below.
 
 ![AddDispenseCommandDiagram](diagrams/diagram_images/AddDispenseSequenceDiagram.png)
 
+### AddOrderCommand
+
+MediVault initialises an AddOrderCommandclass when CommandParser identifies the
+`addorder` or the `add` keyword in the `order` mode.
+
+* Medivault adds order information when `parameter` and `parameterValues` provided by the
+user are valid.
+* As the order date is an optional parameter, Medivault will use the date the order was
+made by the user as the default date.
+* User will not be unable to add order if the order quantity exceeds maximum stock quantity.
+
+The sequence diagram for AddOrderCommand is shown below.
+
+![AddOrderCommandDiagram](diagrams/diagram_images/AddOrderSequenceDiagram.png)
+
 ### DeleteStockCommand
 MediVault initialises an DeleteStockCommand class when CommandParser identifies the
 `deletestock` or the `delete` keyword in the `stock` mode.

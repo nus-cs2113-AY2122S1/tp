@@ -34,23 +34,22 @@ autoactivate on
         addorder <-- ordervalidator: isInvalidParameterValues
 
         opt !isInvalidParameterValues
-            alt nameExist
-                alt orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity
-                    alt dateToAdd == null
-                        addorder -> addorder : addOrder(defaultDate)
-                    else dateToAdd != null
-                        addorder -> addorder : addOrder(orderDate)
+            alt nameExistsInorder
+                alt !nameExistsInStock
+                    alt orderQuantity < maxQuantity
+                        addorder -> addorder : addDate()
+                        addorder -> addorder : addOrder()
                     end
-                else ui.print()
-                end
-            else !nameExist
-                alt dateToAdd == null
-                    addorder -> addorder : addOrder(defaultDate)
-                else dateToAdd != null
-                    addorder -> addorder : addOrder(orderDate)
-                end
+                else nameExistsInStock
+                    alt orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity
+                        addorder -> addorder : addDate()
+                        addorder -> addorder : addOrder()
+                    else ui.print()
+                    end
+            else !nameExistsInorder
+                addorder -> addorder : addDate()
+                addorder -> addorder : addOrder()
             end
-        end
         addorder -> storage: getInstance()
         addorder <-- storage
         addorder -> storage: saveData()

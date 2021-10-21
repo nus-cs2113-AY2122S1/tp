@@ -18,7 +18,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Date;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -44,84 +43,72 @@ public class AddOrderCommand extends Command {
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY};
         String[] optionalParameter = {CommandParameters.DATE};
 
-        boolean isInvalidParameters = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
-                optionalParameter, CommandSyntax.ADD_ORDER_COMMAND, false);
+        boolean isInvalidParameters = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameter, CommandSyntax.ADD_ORDER_COMMAND, false);
         if (isInvalidParameters) {
             logger.log(Level.WARNING, "Invalid parameters given by user");
             return;
         }
 
-        boolean isInvalidParameterValues = OrderValidator.containsInvalidParameterValues(ui, parameters, medicines,
-                CommandSyntax.ADD_ORDER_COMMAND);
+        boolean isInvalidParameterValues = OrderValidator.containsInvalidParameterValues(ui, parameters, medicines, CommandSyntax.ADD_ORDER_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");
             return;
         }
 
-        boolean nameExists = false;
+        boolean nameExistsInOrder = false;
+        boolean nameExistsInStock = false;
         String nameToAdd = parameters.get(CommandParameters.NAME);
         String quantityToAdd = parameters.get(CommandParameters.QUANTITY);
         int orderQuantity = Integer.parseInt(quantityToAdd);
         String dateToAdd = parameters.get(CommandParameters.DATE);
+        int maxQuantity = Integer.MAX_VALUE;
 
         if (parameters.containsKey(CommandParameters.NAME)) {
             nameToAdd = parameters.get(CommandParameters.NAME);
             for (Medicine medicine : medicines) {
                 if (medicine instanceof Order && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)) {
-                    nameExists = true;
+                    nameExistsInOrder = true;
                     break;
                 }
             }
         }
 
-        if (nameExists) {
-            int existingOrdersQuantity = OrderManager.getTotalOrderQuantity(medicines, nameToAdd);
-            int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
-            int maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
-
-            if (orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity) {
-                if (dateToAdd == null) {
-                    Date defaultDate = null;
-                    defaultDate = new Date(); //order date will be today's date if no user input for date parameter
-                    addOrder(ui, medicines, nameToAdd, orderQuantity, defaultDate);
-                    return;
+        if (nameExistsInOrder) {
+            if (parameters.containsKey(CommandParameters.NAME)) {
+                nameToAdd = parameters.get(CommandParameters.NAME);
+                for (Medicine medicine : medicines) {
+                    if (medicine instanceof Stock && medicine.getMedicineName().equalsIgnoreCase(nameToAdd)) {
+                        nameExistsInStock = true;
+                        break;
+                    }
                 }
+            }
 
-                try {
-                    Date orderDate = null;
-                    orderDate = DateParser.stringToDate(dateToAdd);
-                    addOrder(ui, medicines, nameToAdd, orderQuantity, orderDate);
-                } catch (ParseException e) {
-                    e.printStackTrace();
+            if (!nameExistsInStock) {
+                if (orderQuantity < maxQuantity) {
+                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
                 }
             } else {
-                ui.print("Order name exists, unable to add order as total order quantity exceeds maximum "
-                        + "stock quantity.\n");
+                int existingOrdersQuantity = OrderManager.getTotalOrderQuantity(medicines, nameToAdd);
+                int existingStockQuantity = StockManager.getTotalStockQuantity(medicines, nameToAdd);
+                maxQuantity = StockManager.getMaxStockQuantity(medicines, nameToAdd);
+
+                if (orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity) {
+                    addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
+                } else {
+                    ui.print("Order for " + nameToAdd + " exists. Unable to add order as total order quantity " + "exceeds maximum stock quantity.\n");
+                }
             }
         } else {
-            if (dateToAdd == null) {
-                Date defaultDate = null;
-                defaultDate = new Date();
-                addOrder(ui, medicines, nameToAdd, orderQuantity, defaultDate);
-                return;
-            }
-
-            try {
-                Date orderDate = null;
-                orderDate = DateParser.stringToDate(dateToAdd);
-                addOrder(ui, medicines, nameToAdd, orderQuantity, orderDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
         }
         Storage storage = Storage.getInstance();
         storage.saveData(medicines);
     }
 
-
     /**
      * Add order based on user input.
-     * 
+     *
      * @param ui        Reference to the UI object to print messages.
      * @param medicines Arraylist of all medicines.
      * @param name      Medication name to order.
@@ -133,5 +120,22 @@ public class AddOrderCommand extends Command {
         medicines.add(order);
         ui.printOrder(order);
         logger.log(Level.INFO, "Successful addition of order");
+    }
+
+    private Date addDate(Ui ui, String dateToAdd) {
+        if (dateToAdd == null) {
+            Date defaultDate = null;
+            defaultDate = new Date();
+            return defaultDate;
+        }
+
+        try {
+            Date orderDate = null;
+            orderDate = DateParser.stringToDate(dateToAdd);
+            return orderDate;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
