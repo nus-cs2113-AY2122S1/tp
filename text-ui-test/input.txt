@@ -83,4 +83,7 @@ edit 0 -te ashrafjfr
 y
 edit 0 -e ashrafjfr@gmail.com
 view 0
+import
+search -n lezai
+search -n badgithub
 exit

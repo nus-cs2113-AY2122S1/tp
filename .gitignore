@@ -14,6 +14,8 @@ src/main/resources/docs/
 bin/
 
 
-/data
-# ensure that no existing data exists on remote, so that runtest.sh is always on fresh build
-/text-ui-test/data/
+/data/contacts.txt
+/data/me.txt
+# ensure that no existing contact data exists on remote, so that runtest.sh is always on fresh build
+/text-ui-test/data/contacts.txt
+/text-ui-test/data/me.txt

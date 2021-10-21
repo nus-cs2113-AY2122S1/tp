@@ -655,6 +655,31 @@ Email:    ashrafjfr@gmail.com
 Telegram: t.me/ashrafjfr
 ____________________________________________________________
 
+data/import.txt:3 - "andre,null" is corrupted and not loaded.
+data/import.txt:5 - There is an invalid field.
+____________________________________________________________
+The github username is not correctly formatted,
+Rules for Github username :
+    * Only contain alphanumeric characters or hyphens
+    * Only lowercase allowed
+    * Maximum 39 characters allowed
+    * Cannot have multiple consecutive hyphens
+    * Cannot begin or end with a hyphen
+____________________________________________________________
+
+____________________________________________________________
+ConTech has successfully imported 3 lines
+____________________________________________________________
+
+____________________________________________________________
+7. lezai
+Github:   github.com/lezongmun
+____________________________________________________________
+
+____________________________________________________________
+No search results found.
+____________________________________________________________
+
 ____________________________________________________________
 ConTech will now shutdown.
 We hope you have enjoyed using it.

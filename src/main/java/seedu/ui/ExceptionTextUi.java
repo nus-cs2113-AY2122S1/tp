@@ -164,8 +164,12 @@ public class ExceptionTextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void corruptLineMessage(String line) {
-        printBottomLineMessage("Line \"" + line + "\" is corrupted and not loaded.");
+    public static void corruptLineMessage(String line, int lineIndex, String contactFilePath) {
+        System.out.println(contactFilePath + ":" + lineIndex + " - \"" + line + "\" is corrupted and not loaded.");
+    }
+
+    public static void corruptPersonalContactMessage() {
+        printBottomLineMessage("Your personal contact file at data/me.txt is corrupted and not loaded.");
     }
 
     public static void forbiddenInputCommaMessage(String newUserInput) {
@@ -178,6 +182,16 @@ public class ExceptionTextUi {
     public static void forbiddenDetailMessage() {
         String message = "As one of the details to be stored is \"null\",\n"
                 + "ConTech is unable to process it";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidLoadedLineMessage(int lineIndex, String contactFilePath) {
+        System.out.println(contactFilePath + ":" + lineIndex + " - There is an invalid field.");
+    }
+
+    public static void missingImportFileMessage() {
+        String message = "ConTech is unable to find the import file.\n"
+                + "Please kindly ensure that you have saved the file as data/import.txt.";
         printDoubleLineMessage(message);
     }
 
