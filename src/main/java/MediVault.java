@@ -8,12 +8,10 @@ import inventory.Stock;
 import utilities.parser.CommandParser;
 import utilities.parser.DateParser;
 import utilities.parser.Mode;
-import utilities.storage.Storage;
 import utilities.ui.Ui;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -55,7 +53,6 @@ public class MediVault {
         ui.printWelcomeMessage();
 
         String userInput = "";
-        Scanner in = new Scanner(System.in);
 
         // Loops till exit is received
         while (true) {

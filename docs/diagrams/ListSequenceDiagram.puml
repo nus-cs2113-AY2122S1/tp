@@ -5,17 +5,17 @@
 
 box Command COLOR_COMMAND_BOX
     participant ":List*Command" as list COLOR_COMMAND
-    participant ":CommandSyntax" as commandSyntax COLOR_COMMAND
+    participant "<<class>>\nCommandSyntax" as commandSyntax COLOR_COMMAND
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant ":Ui" as ui COLOR_UTILITIES
-    participant ":*Validator" as validator COLOR_UTILITIES
+    participant "<<class>>\nUi" as ui COLOR_UTILITIES
+    participant "<<class>>\n *Validator" as validator COLOR_UTILITIES
     participant ":*Comparator" as comparator COLOR_UTILITIES
 end box
 
 box Inventory COLOR_INVENTORY_BOX
-    participant ":Medicine" as medicine COLOR_INVENTORY
+    participant "<<class>>\nMedicine" as medicine COLOR_INVENTORY
     participant ":*" as object COLOR_INVENTORY
 end box
 
@@ -48,8 +48,8 @@ opt !isInvalidParameter
                 list -> comparator : new *Comparator()
                 list <-- comparator : reverseSorted*
                 deactivate comparator
-            else else
-                loop (* : Medicines)
+            else default
+                loop until end of all * objects
                     list -> object : getAttributeValue()
                     list <-- object
                 end
@@ -57,7 +57,6 @@ opt !isInvalidParameter
             end
 
         end
-
 
         list --> list : filtered*
 
