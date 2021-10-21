@@ -64,10 +64,11 @@ public class Ui {
                 + goalDescription + "\".");
         String prefix = "[ ]";
         for (Habit habit : habits) {
+            String intervalPrint = "(every " + habit.getInterval() + " days)";
             if (habit.getDone()) {
                 prefix = "[X]";
             }
-            System.out.println(prefix + " " + habit.getHabitName());
+            System.out.println(prefix + " " + habit.getHabitName() + " " + intervalPrint);
         }
         printDashes();
     }
@@ -101,6 +102,12 @@ public class Ui {
         printDashes();
         System.out.println("Your habit of \"" + habitName + "\" under the goal \""
                 + goalDescription + "\" has been set as done.");
+        printDashes();
+    }
+
+    public void printUpdatedGoal(String oldGoalDescription, String goalDescription) {
+        printDashes();
+        System.out.println("Your goal \"" + oldGoalDescription + "\" has been changed to \"" + goalDescription + "\".");
         printDashes();
     }
 
