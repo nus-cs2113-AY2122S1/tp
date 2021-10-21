@@ -153,6 +153,26 @@ The following activity diagram summarizes the following steps.
 
 ### <u>Design Considerations</u>
 
-*  Alternative: only iterate through the ```Package``` List.
+* Alternative: only iterate through the ```Package``` List.
    * Pros: fast querying time.
    * Cons: If the client has not subscribed to a package, none of their information can be accessed, including their contact number.
+
+### <u>Listing clients, tours and flights</u>
+
+It implements these following types of list commands:
+* `list -c`: Lists all existing clients and their contact numbers
+* `list -t`: Lists all existing tours
+* `list -p`: Lists all clients and their corresponding tours and flights
+
+Given below is an example usage of command `list -c`:
+
+**Step 1**: After adding a few clients to the database, user inputs `list -c`. This command is passed to `parse()` method in the `Parser` class.
+
+**Step 2**: `parse()` identifies the command type `ListCCommand` based on the user input and returns it.
+
+**Step 3**: Then, `execute()` method in `ListCCommand` is called, where it loops through the current `clientList` and prints out all client names and their details.
+
+Depending on the type of list command being called, these command types will be returned:
+* `list -c`: `ListCCommand`
+* `list -t`: `ListTCommand`
+* `list -p`: `ListPCommand`
