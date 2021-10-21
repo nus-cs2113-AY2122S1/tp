@@ -1,10 +1,10 @@
 @startuml
 !include Style.puml
 
--> ":DoneHabitCommand": runCommand(goalList: GoalList,\nui: Ui, storage: Storage)
+-> ":DoneHabitCommand": runCommand(goalList: GoalList,\nprintManager:PrintManager, storage: Storage)
 activate ":DoneHabitCommand"
 
-":DoneHabitCommand" -> "goalList:GoalList": doneHabitFromGoal(goalIndex: int,\nhabitIndex: int, ui: Ui)
+":DoneHabitCommand" -> "goalList:GoalList": doneHabitFromGoal(goalIndex: int,\nhabitIndex: int, printManager: PrintManager)
 activate "goalList:GoalList"
 "goalList:GoalList" -> "goalList:GoalList": getGoal(goalIndex: int)
 activate "goalList:GoalList"
@@ -22,9 +22,9 @@ deactivate "habits:ArrayList<Habit>"
 "goalList:GoalList" -> "goal:Goal": doneHabit(habitIndex:int)
 deactivate "goal:Goal"
 
-"goalList:GoalList" -> "ui:Ui": printDoneHabit(goalDescription: String, habitName: String)
-activate "ui:Ui"
-deactivate "ui:Ui"
+"goalList:GoalList" -> "printManager:PrintManager": printDoneHabit(goalDescription: String, habitName: String)
+activate "printManager:PrintManager"
+deactivate "printManager:PrintManager"
 deactivate "goalList:GoalList"
 deactivate ":DoneHabitCommand"
 

@@ -10,7 +10,7 @@ import happybit.storage.Storage;
 
 import java.util.Scanner;
 
-public class UiMain extends UiOverall {
+public class UiMain extends UiManager {
 
     private static final String SLEEP_LOGO = "              .-.,\n"
             + "      .------;,' |     ____  __    ____  ____  ____ \n"
@@ -39,12 +39,12 @@ public class UiMain extends UiOverall {
     private static final String RETURN_MESSAGE = "Press enter to return to command mode...\n";
 
     protected GoalList goalList;
-    protected Ui ui;
+    protected PrintManager printManager;
     protected Storage storage;
 
-    public UiMain(GoalList goalList, Ui ui, Storage storage) {
+    public UiMain(GoalList goalList, PrintManager printManager, Storage storage) {
         this.goalList = goalList;
-        this.ui = ui;
+        this.printManager = printManager;
         this.storage = storage;
     }
 
@@ -80,12 +80,12 @@ public class UiMain extends UiOverall {
             userInput = readUserInput(in);
             try {
                 Command command = Parser.parse(userInput);
-                command.runCommand(goalList, ui, storage);
+                command.runCommand(goalList, printManager, storage);
                 isExit = isExitCommand(command);
                 isReturn = isReturnCommand(command);
                 checkFlags(isExit, isReturn);
             } catch (HaBitParserException | HaBitCommandException e) {
-                ui.showError(e.getMessage());
+                printManager.showError(e.getMessage());
                 waitApp(2);
                 resetDisplay();
             }

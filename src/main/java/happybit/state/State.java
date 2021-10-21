@@ -3,19 +3,19 @@ package happybit.state;
 import happybit.exception.HaBitUiException;
 import happybit.goal.GoalList;
 import happybit.storage.Storage;
-import happybit.ui.Ui;
+import happybit.ui.PrintManager;
 import happybit.ui.UiMain;
 import happybit.ui.UiStartup;
 
 public class State {
 
     protected GoalList goalList;
-    protected Ui ui;
+    protected PrintManager printManager;
     protected Storage storage;
 
-    public State(GoalList goalList, Ui ui, Storage storage) {
+    public State(GoalList goalList, PrintManager printManager, Storage storage) {
         this.goalList = goalList;
-        this.ui = ui;
+        this.printManager = printManager;
         this.storage = storage;
     }
 
@@ -37,7 +37,7 @@ public class State {
             UiStartup uiStartup = new UiStartup();
             uiStartup.run();
         } catch (HaBitUiException e) {
-            ui.showError(e.getMessage());
+            printManager.showError(e.getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ public class State {
      */
     private boolean mainState() {
         boolean isReturn = false;
-        UiMain uiMain = new UiMain(goalList, ui, storage);
+        UiMain uiMain = new UiMain(goalList, printManager, storage);
         isReturn = uiMain.run();
         return isReturn;
     }
