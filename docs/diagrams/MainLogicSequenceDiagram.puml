@@ -8,9 +8,10 @@ box MediVault COLOR_MEDIVAULT_BOX
 end box
 
 box Utilities COLOR_UTILITIES_BOX
-    participant ":Storage" as storage COLOR_UTILITIES
-    participant ":Ui" as ui COLOR_UTILITIES
-    participant ":CommandParser" as commandparser COLOR_UTILITIES
+    participant "<<class>>\nStorage" as storage COLOR_UTILITIES
+    participant "<<class>>\nUi" as uiclass COLOR_UTILITIES
+    participant "Ui" as ui COLOR_UTILITIES
+    participant "<<class>>\nCommandParser" as commandparser COLOR_UTILITIES
 end box
 
 box Command COLOR_COMMAND_BOX
@@ -26,22 +27,29 @@ autoactivate on
     medivault <-- storage
 
     medivault -> medivault : run
-    medivault -> ui : getInstance()
-    medivault <-- ui
+    medivault -> uiclass : getInstance()
+    medivault <-- uiclass
         loop until exit is received
             medivault -> ui : getInput()
             medivault <-- ui : userInput
-            medivault -> commandparser : parseCommand(userInput : String)
-            medivault <-- commandparser : userCommand, parameters
-            medivault -> commandparser : processCommand()
-            commandparser -> commandparser : parseParameters(parametersString)
-            commandparser --> commandparser : parameterValues
-            create command
-            commandparser -> command : Command()
-            commandparser <-- command
-            medivault <-- commandparser
-            medivault -> command : execute()
-            deactivate command
+
+            alt command equals modes
+                medivault -> commandparser : changeMode()
+                medivault <-- commandparser
+            else else
+                medivault -> commandparser : parseCommand(userInput : String)
+                medivault <-- commandparser : userCommand, parameters
+                medivault -> commandparser : processCommand()
+                commandparser -> commandparser : parseParameters(parametersString)
+                commandparser --> commandparser : parameterValues
+                create command
+                commandparser -> command : Command()
+                commandparser <-- command
+                medivault <-- commandparser
+                medivault -> command : execute()
+                deactivate command
+            end
+
         end
 note right of command
 Note that Command throws
