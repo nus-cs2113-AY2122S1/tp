@@ -2,7 +2,6 @@ package seedu.command;
 
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
-import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
 import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
@@ -19,6 +18,7 @@ public class EditContactCommand extends Command {
     public static final int TWITTER_INDEX = 4;
     public static final int EMAIL_INDEX = 5;
     public static final int NUMBER_OF_FIELDS = 6;
+    public static final String EDIT_TYPE = "edit";
     String[] contactDetails;
     int contactIndex;
 
@@ -48,7 +48,7 @@ public class EditContactCommand extends Command {
 
     private void handleDuplicates(Contact postEditContact) throws IndexOutOfBoundsException, InvalidFlagException {
         if (hasDuplicates(postEditContact, contactList, contactIndex)) {
-            TextUi.ignoreContact("edit");
+            TextUi.ignoreContact(EDIT_TYPE);
         } else {
             updateContact(postEditContact);
         }
@@ -62,43 +62,30 @@ public class EditContactCommand extends Command {
 
     private Boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
             throws InvalidFlagException {
-        ArrayList<Integer> duplicatedIndexes = new ArrayList<>();
+        ArrayList<Integer> duplicatedIndex = new ArrayList<>();
         String[] postEditContactDetails = extractContactDetails(postEditContact);
         for (int i = 0; i < contactList.getListSize(); i++) {
             if (i == contactIndex) {
                 continue;
             }
-            String[] currContactDetails = extractContactDetails(contactList.getContactAtIndex(i));
-            //check for any field that is duplicated for all the fields in contact details
-            checkCurrContactDetails(duplicatedIndexes, i, postEditContactDetails, currContactDetails);
+            String[] currentContactDetails = extractContactDetails(contactList.getContactAtIndex(i));
+            for (int j = 0; j < NUMBER_OF_FIELDS; j++) {
+                if (postEditContactDetails[j] != null && currentContactDetails[j] != null) {
+                    if (hasDuplicateField(postEditContactDetails[j], currentContactDetails[j])) {
+                        duplicatedIndex.add(i);
+                        break;
+                    }
+                }
+            }
+
         }
-        if (!duplicatedIndexes.isEmpty()) {
-            TextUi.confirmDuplicateMessage(duplicatedIndexes, contactList, "edit");
+        if (!duplicatedIndex.isEmpty()) {
+            TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, EDIT_TYPE);
             String userEditConfirmation = UserInputTextUi.getUserConfirmation();
             return userEditConfirmation.equalsIgnoreCase("n");
         }
         return false;
     }
-
-    private void checkCurrContactDetails(ArrayList<Integer> duplicatedIndexes, int currContactIndex,
-                                         String[] postEditContactDetails, String[] currContactDetails) {
-        for (int j = 0; j < NUMBER_OF_FIELDS; j++) {
-            boolean isDuplicatedField =
-                    checkDuplicatedField(postEditContactDetails[j], currContactDetails[j]);
-            if (isDuplicatedField) {
-                duplicatedIndexes.add(currContactIndex);
-                break;
-            }
-        }
-    }
-
-    private boolean checkDuplicatedField(String postEditField, String currentField) {
-        if (postEditField != null && currentField != null) {
-            return (hasDuplicateField(postEditField, currentField));
-        }
-        return false;
-    }
-
 
     private Contact duplicateContact(Contact contact) {
         String name = contact.getName();
@@ -111,10 +98,10 @@ public class EditContactCommand extends Command {
     }
 
     private Boolean hasDuplicateField(String input, String saved) {
-        return cleanString(saved).equals(cleanString(input));
+        return stringCleaner(saved).equals(stringCleaner(input));
     }
 
-    private String cleanString(String input) {
+    private String stringCleaner(String input) {
         return input.replace(" ", "").toLowerCase();
     }
 
