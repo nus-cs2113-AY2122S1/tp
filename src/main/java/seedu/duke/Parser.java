@@ -234,11 +234,11 @@ public class Parser {
         Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
         newExpense.setDate(newExpense.prompDate());
         currTrip.addExpense(newExpense);
-        getAdditionalExpenseInfo(newExpense);
+        updateIndividualSpending(newExpense);
         Ui.printExpenseAddedSuccess();
     }
 
-    private static void getAdditionalExpenseInfo(Expense expense) {
+    private static void updateIndividualSpending(Expense expense) {
         Ui.printGetPersonPaid();
         String input = Storage.getScanner().nextLine().strip();
         Person payer = checkValidPersonInExpense(input, expense);
@@ -250,57 +250,36 @@ public class Parser {
                 Ui.printHowMuchDidPersonSpend(person.getName());
                 String amountString = Storage.getScanner().nextLine().strip();
                 if (amountString.equalsIgnoreCase("equal") && amountBeingPaid.isEmpty()) {
-                    double amount = Double.parseDouble(String.format("%.02f",
-                            (expense.getAmountSpent() / expense.getPersonsList().size())));
-                    for (Person people : expense.getPersonsList()) {
-                        amountBeingPaid.put(people, amount);
-                        total += amount;
-                    }
-                    //This will cause payer to bear the deficit or surplus
-                    if (total != expense.getAmountSpent()) {
-                        double payerAmount = amountBeingPaid.get(payer) + (expense.getAmountSpent() - total);
-                        amountBeingPaid.put(payer, payerAmount);
-                        total = expense.getAmountSpent();
-                    }
-                    break;
-                }
-                try {
-                    Double.parseDouble(amountString);
-                } catch (NumberFormatException e) {
-                    Ui.argNotNumber();
-                    getAdditionalExpenseInfo(expense);
-                    return;
-                }
-                double amount = Double.parseDouble(amountString);
-                total += amount;
-                if (total > expense.getAmountSpent()) {
-                    Ui.printIncorrectAmount(expense.getAmountSpent());
-                    getAdditionalExpenseInfo(expense);
+                    assignEqualAmounts(payer, expense, amountBeingPaid);
                     return;
                 } else {
-                    amountBeingPaid.put(person, amount);
+                    try {
+                        double amount = Double.parseDouble(amountString);
+                        total += amount;
+                        if (total > expense.getAmountSpent()) {
+                            Ui.printIncorrectAmount(expense.getAmountSpent());
+                            updateIndividualSpending(expense);
+                            return;
+                        } else {
+                            amountBeingPaid.put(person, amount);
+                        }
+                    } catch (NumberFormatException e) {
+                        Ui.argNotNumber();
+                        updateIndividualSpending(expense);
+                        return;
+                    }
                 }
             }
             if (total < expense.getAmountSpent()) {
                 Ui.printIncorrectAmount(expense.getAmountSpent());
-                getAdditionalExpenseInfo(expense);
+                updateIndividualSpending(expense);
             } else {
-                for (Person person : expense.getPersonsList()) {
-                    if (person == payer) {
-                        person.setMoneyOwed(person, amountBeingPaid.get(person));
-                        expense.setAmountSplit(person, amountBeingPaid.get(person));
-                        continue;
-                    }
-                    payer.setMoneyOwed(person, amountBeingPaid.get(person));
-                    person.setMoneyOwed(payer, -amountBeingPaid.get(person));
-                    person.setMoneyOwed(person, amountBeingPaid.get(person));
-                    expense.setAmountSplit(person, amountBeingPaid.get(person));
-                }
+                assignAmounts(payer, expense, amountBeingPaid);
             }
         } else {
             Ui.printPersonNotInExpense();
             Ui.printPeopleInvolved(expense.getPersonsList());
-            getAdditionalExpenseInfo(expense);
+            updateIndividualSpending(expense);
         }
     }
 
@@ -311,6 +290,35 @@ public class Parser {
             }
         }
         return null;
+    }
+
+    private static void assignEqualAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid) {
+        double total = 0.0;
+        double amount = Double.parseDouble(String.format("%.02f",
+                (expense.getAmountSpent() / expense.getPersonsList().size())));
+        for (Person people : expense.getPersonsList()) {
+            amountBeingPaid.put(people, amount);
+            total += amount;
+        }
+        //This will cause payer to bear the deficit or surplus
+        if (total != expense.getAmountSpent()) {
+            double payerAmount = amountBeingPaid.get(payer) + (expense.getAmountSpent() - total);
+            amountBeingPaid.put(payer, payerAmount);
+        }
+    }
+
+    private static void assignAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid) {
+        for (Person person : expense.getPersonsList()) {
+            if (person == payer) {
+                person.setMoneyOwed(person, amountBeingPaid.get(person));
+                expense.setAmountSplit(person, amountBeingPaid.get(person));
+                continue;
+            }
+            payer.setMoneyOwed(person, amountBeingPaid.get(person));
+            person.setMoneyOwed(payer, -amountBeingPaid.get(person));
+            person.setMoneyOwed(person, amountBeingPaid.get(person));
+            expense.setAmountSplit(person, amountBeingPaid.get(person));
+        }
     }
 
     private static void executeAmount(String name) {
