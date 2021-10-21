@@ -91,6 +91,10 @@ public class AddCommand extends Command {
     }
 
     private void prepareTask(String response) throws DukeException {
+        if (Duke.eventCatalog.isEmpty()) {
+            throw new DukeException("There is no event to assign this task to! Please add "
+                    + "an event using the flag '-e'. ");
+        }
         if (!response.contains(TITLE_FLAG)) {
             throw new DukeException("Please add a title for your task using 'n/<title>'. ");
         }
@@ -152,12 +156,12 @@ public class AddCommand extends Command {
         }
     }
 
-    private static void addToTaskList(Task task) {
-        Duke.taskList.add(task);
+    private static void addToEventCatalog(Event event) {
+        Duke.eventCatalog.add(event);
     }
 
-    private static void addToEventList(Event event) {
-        Duke.eventCatalog.add(event);
+    private void addTaskToEvent(int eventIndex, Task task) {
+        Duke.eventCatalog.get(eventIndex - 1).addToTaskList(task);
     }
 
     public CommandResult execute() {
@@ -166,13 +170,16 @@ public class AddCommand extends Command {
             itemDescription = Ui.readInput();
             Ui.printLineBreak();
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
+                Ui.promptForEventIndex();
+                // add exception for input not being an integer or index out of bounds
+                int eventIndex = Integer.parseInt(Ui.readInput());
                 Task task = new Task(itemTitle, itemDescription, itemDateTime);
-                addToTaskList(task);
+                addTaskToEvent(eventIndex, task);
                 return new CommandResult(Ui.getTaskAddedMessage(task));
             }
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);
-                addToEventList(event);
+                addToEventCatalog(event);
                 return new CommandResult(Ui.getEventAddedMessage(event));
             }
         }

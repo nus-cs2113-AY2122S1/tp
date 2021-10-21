@@ -53,6 +53,11 @@ public class Ui {
         printLineBreak();
     }
 
+    public static void promptForEventIndex() {
+        System.out.println("Please choose which event you want to add your task to. ");
+        printLineBreak();
+    }
+
     public static String getTaskDeletionMessage(String taskTitle) {
         return String.format("This task has been removed: %s\n", taskTitle);
     }
@@ -107,7 +112,7 @@ public class Ui {
 
     public static String getEvent(Event event) {
         return event.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(event.getDateValue()) + System.lineSeparator();
+                + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator();
     }
 
     public static void printTask(Task task) {

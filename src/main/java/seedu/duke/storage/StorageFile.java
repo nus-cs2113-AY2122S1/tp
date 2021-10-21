@@ -62,7 +62,7 @@ public class StorageFile {
                 }
                 if (item.startsWith("t")) {
                     eventsList.get(eventsList.size() - 1)
-                            .taskList.add(TaskDecoder.decodeTaskFromString(item));
+                            .addToTaskList(TaskDecoder.decodeTaskFromString(item));
                 }
             }
         } catch (FileNotFoundException e) {

@@ -49,11 +49,11 @@ class EventEncoderTest {
                 "Indoor Stadium", 1000.90);
 
         LocalDateTime task1DateTime = Parser.convertDateTime("19-02-2022 1950");
-        event1.taskList.add(new Task("Hype myself up", "Drink lots of sugar", task1DateTime));
-        event1.taskList.get(0).markAsDone();
+        event1.addToTaskList(new Task("Hype myself up", "Drink lots of sugar", task1DateTime));
+        event1.getFromTaskList(0).markAsDone();
 
         LocalDateTime task2DateTime = Parser.convertDateTime("19-02-2022 1955");
-        event1.taskList.add(new Task("Enter venue", "", task2DateTime));
+        event1.addToTaskList(new Task("Enter venue", "", task2DateTime));
 
         event1.markAsDone();
 
