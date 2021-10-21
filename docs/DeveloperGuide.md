@@ -8,6 +8,25 @@ Inspired by AB3's [Developer Guide](https://se-education.org/addressbook-level3/
 
 ### Architecture
 
+Given below is a quick overview of the main components of MedBot and how they interact with one another.
+
+#### Main Components
+
+The main class of MedBot is the `MedBot` class. It is responsible for initialising the other core components of 
+MedBot at application startup and for handling the interactions between these components.
+
+The 4 core components of MedBot are:
+* `Ui`: Handles the UI of MedBot.
+* `Parser`: Parses user inputs and creates `Command` objects.
+* `Scheduler`: Holds data in memory and contains the methods to read and write to it.
+* `Storage`: Loads data from, and stores data to the hard disk.
+
+In addition, the `Command` class facilitates the execution of user instructions.
+
+#### Component Interaction
+
+
+
 ## Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -23,7 +42,7 @@ of the `Parser`. The 3 possible views and the corresponding user input commands 
 * `switch patientinfo` - switches to the patient info view.
 * `switch staffinfo` - switches to the medical staff info view.
 * `switch scheduler` - switches to the scheduler view.
-* `switch` - will switch to a another view depending on the current view. 
+* `switch` - will switch to another view depending on the current view. 
 
 Each command essentially evokes the `Parser#setViewType(ViewType)` method, which will set the corresponding
 `ViewType` property in the `Parser` class.
@@ -42,7 +61,7 @@ Update with image + explanation
 
 **Aspect: How different views are identified**
 
-Currently, a enum property in the `Parser` class is used to
+Currently, an enum property in the `Parser` class is used to
 differentiate between views.
 
 Pros: 
