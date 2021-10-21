@@ -1,0 +1,97 @@
+@startuml
+class seedu.duke.command.ListCommand {
+- {static} Ui ui
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.DeleteIngrCommand {
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.AddDishIngrCommand {
+- {static} Logger logger
+- {static} Ui ui
++ void execute(ArrayList<String>)
+}
+abstract class seedu.duke.command.Command {
++ {abstract}void execute(ArrayList<String>)
+}
+class seedu.duke.command.ClearAllCommand {
+- {static} Logger logger
+- {static} Ui ui
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.DeleteDishCommand {
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.ClearIngrCommand {
+- {static} Logger logger
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.AddDishWasteCommand {
+- {static} Logger logger
+- {static} Ui ui
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.AddIngrCommand {
+- {static} Logger logger
+- {static} Ui ui
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.SortIngrCommand {
+- {static} Ui ui
+~ Comparator<Ingredient> ingrComparator
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.AddIngrWasteCommand {
+- {static} Logger logger
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.AddIngrStoredCommand {
+- {static} Logger logger
+- {static} Ui ui
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.FindCommand {
+- {static} Ui ui
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.GraphCommand {
+- {static} Ui ui
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.HelpCommand {
+- {static} Ui ui
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.AddDishCommand {
+- {static} Ui ui
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.SortDishCommand {
+- {static} Ui ui
+~ Comparator<Dish> dishComparator
++ void execute(ArrayList<String>)
+}
+class seedu.duke.command.ClearDishCommand {
+- {static} Logger logger
++ void execute(ArrayList<String>)
+}
+
+
+seedu.duke.command.Command <|-- seedu.duke.command.ListCommand
+seedu.duke.command.Command <|-- seedu.duke.command.DeleteIngrCommand
+seedu.duke.command.Command <|-- seedu.duke.command.AddDishIngrCommand
+seedu.duke.command.Command <|--- seedu.duke.command.ClearAllCommand
+seedu.duke.command.Command <|--- seedu.duke.command.DeleteDishCommand
+seedu.duke.command.Command <|--- seedu.duke.command.ClearIngrCommand
+seedu.duke.command.Command <|---- seedu.duke.command.AddDishWasteCommand
+seedu.duke.command.Command <|---- seedu.duke.command.AddIngrCommand
+seedu.duke.command.Command <|---- seedu.duke.command.SortIngrCommand
+seedu.duke.command.Command <|----- seedu.duke.command.AddIngrWasteCommand
+seedu.duke.command.Command <|----- seedu.duke.command.AddIngrStoredCommand
+seedu.duke.command.Command <|----- seedu.duke.command.FindCommand
+seedu.duke.command.Command <|---- seedu.duke.command.GraphCommand
+seedu.duke.command.Command <|---- seedu.duke.command.HelpCommand
+seedu.duke.command.Command <|---- seedu.duke.command.AddDishCommand
+seedu.duke.command.Command <|--- seedu.duke.command.SortDishCommand
+seedu.duke.command.Command <|--- seedu.duke.command.ClearDishCommand
+@enduml

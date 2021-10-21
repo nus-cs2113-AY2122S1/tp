@@ -2,12 +2,11 @@ package seedu.duke;
 
 import seedu.duke.command.CommandNames;
 import seedu.duke.exceptions.FoodoramaException;
-import seedu.duke.Ui;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputParser {
-    private static final Ui ui = new Ui();
+    public Ui ui = new Ui();
 
     public CommandNames getCommandName(String input) throws FoodoramaException {
         for (CommandNames command : CommandNames.values()) {

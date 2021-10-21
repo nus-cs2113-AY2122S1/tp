@@ -6,7 +6,32 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+###General Flow
+
+![](images/main_sequence.png)
+
+* User is greeted by welcome screen
+* User begins typing inputs
+* Inputs get parsed by input parser returning the appropriate command
+* Command gets executed and respective output gets displayed
+* Once user is done using the application, he can send a bye message prompting a goodbye message
+* Application ends
+
+###Input parsing
+* Gets command name of user input by checking if the users input starts with any of the strings that are defined for commands (add dish, list dish, help etc.)
+* Throws an exception if no matching command is found
+* Takes rest of user input as parameterString
+* Based on command name splits the parameterString into respective parameters to respective command classes for execution
+
+###Storage
+* After every operation writes the names of the Ingredient weight of ingredient stored, weight of ingredient wasted, into a text file called ingredients.txt
+* After every operation writes the names of the dish, weight of dish waste,constituents of the dish if there are any, into a text file called dish.txt
+
+
+###Data Structures
+
+![](images/dish_ingredient.png)
+
 
 ### Ui Component
 
@@ -45,6 +70,18 @@ The command it sends to the terminal is as follows:
         }
     }
 ```
+###Exceptions
+Handles errors such as unrecognised user commands and improper parameters by calling UI to print error messages that prompt user to type in correct commands/parameters
+
+
+###Command abstraction
+
+![](images/command.png)
+
+* Different Command Classes that perform different tasks by calling various functions of Objects  
+* All inherit from an abstract Command class with one execute method that takes a Arraylist<String> as input
+
+
 ## Product scope
 ### Target user profile
 
