@@ -69,7 +69,7 @@ How the `Ui` component works:
 The Sequence Diagram below illustrates the interactions within the `Ui` component when `run()` is called in the main
 class `HappyBit.java`
 
-![Ui Diagram](UML Diagrams/UiDiagramCopy.png)
+![Ui Diagram](Diagram Images/UiDiagramCopy.png)
 
 While the Sequence Diagram represents the normal flow of logic, there is a recursive definition that is not represented.
 1. `:HappyBit` calls the method `handleState()` in `:State`
