@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="290px" preserveAspectRatio="none" style="width:306px;height:290px;background:#FFFFFF;" version="1.1" viewBox="0 0 306 290" width="306px" zoomAndPan="magnify"><defs/><g><!--MD5=[41f2db2ca7aecd6a21c8c9517294992e]
+entity Gordon--><rect fill="#FFFFFF" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="68" x="112" y="25.5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="48" x="122" y="48.6318">Gordon</text><!--MD5=[741b219722399659f6f45f15f8778079]
+entity Cookbook--><rect fill="#FFFFFF" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="84" x="104" y="142.5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="64" x="114" y="165.6318">Cookbook</text><!--MD5=[547e5be7f563143869b00d49076986bb]
+entity Recipe--><rect fill="#FFFFFF" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="64" x="15" y="243"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="44" x="25" y="266.1318">Recipe</text><!--MD5=[b8966a4a60ec894312d4f55fd40cce21]
+entity Parser--><rect fill="#FFFFFF" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="62" x="7" y="142.5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="42" x="17" y="165.6318">Parser</text><!--MD5=[c32e2cb6c119bdb95b21c18c90004fcb]
+entity Tag--><rect fill="#FFFFFF" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="45" x="123.5" y="243"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="25" x="133.5" y="266.1318">Tag</text><!--MD5=[cf25d34b6f9695ab689953484c0b6ae1]
+entity Storage--><rect fill="#FFFFFF" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="70" x="223" y="142.5"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="50" x="233" y="165.6318">Storage</text><!--MD5=[fee662a292a0353a69bd162820bae93b]
+entity User--><ellipse cx="62" cy="14" fill="#FEFECE" rx="8" ry="8" style="stroke:#A80036;stroke-width:1.5;"/><path d="M62,22 L62,49 M49,30 L75,30 M62,49 L49,64 M62,49 L75,64 " fill="none" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="29" x="47.5" y="79.6318">User</text><!--MD5=[9a257c091ea724fcab3aa14fba5221ab]
+entity Computer--><path d="M217,248.5 C217,238.5 258,238.5 258,238.5 C258,238.5 299,238.5 299,248.5 L299,273.5986 C299,283.5986 258,283.5986 258,283.5986 C258,283.5986 217,283.5986 217,273.5986 L217,248.5 " fill="#FEFECE" style="stroke:#000000;stroke-width:1.5;"/><path d="M217,248.5 C217,258.5 258,258.5 258,258.5 C258,258.5 299,258.5 299,248.5 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="62" x="227" y="275.6318">Computer</text><!--MD5=[fb2ec184cdcca323bee4a2fefc75fd2c]
+link User to Gordon--><path d="M76.77,43.5 C86.75,43.5 96.73,43.5 106.7,43.5 " fill="none" id="User-to-Gordon" style="stroke:#000000;stroke-width:2.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#000000" points="111.92,43.5,102.92,39.5,106.92,43.5,102.92,47.5,111.92,43.5" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[fccd09dadfd2ae6cd3e8c6d5f9633688]
+link Gordon to Parser--><path d="M129.6,61.97 C110.3,82.52 78.27,116.61 57.66,138.56 " fill="none" id="Gordon-to-Parser" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="54.2,142.25,63.2811,138.4377,57.6268,138.609,57.4555,132.9547,54.2,142.25" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[f7fdfe1210dc69bc196ba4f16763d598]
+link Gordon to Cookbook--><path d="M146,61.97 C146,82.09 146,115.21 146,137.19 " fill="none" id="Gordon-to-Cookbook" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="146,142.25,150,133.25,146,137.25,142,133.25,146,142.25" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[8cbd3f9a77946142da424e1048cf6164]
+link Parser to Recipe--><path d="M39.57,178.66 C41.06,194.94 43.3,219.52 44.93,237.39 " fill="none" id="Parser-to-Recipe" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="45.42,242.71,48.5815,233.3824,44.9635,237.7309,40.6149,234.1128,45.42,242.71" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[715f7ef2130ffb82fd90f08502bd9772]
+link Cookbook to Recipe--><path d="M128.76,178.66 C111.97,195.36 86.41,220.79 68.34,238.77 " fill="none" id="Cookbook-to-Recipe" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="64.38,242.71,73.5795,239.193,67.9227,239.1816,67.9341,233.5248,64.38,242.71" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[3c3075692205822d712cafcfcd4e3411]
+link Cookbook to Tag--><path d="M146,178.66 C146,194.94 146,219.52 146,237.39 " fill="none" id="Cookbook-to-Tag" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="146,242.71,150,233.71,146,237.71,142,233.71,146,242.71" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[98bae1954b1fe6593e4f2df2463b5756]
+link Gordon to Storage--><path d="M163.01,61.97 C183.03,82.52 216.23,116.61 237.61,138.56 " fill="none" id="Gordon-to-Storage" style="stroke:#000000;stroke-width:2.0;"/><polygon fill="#000000" points="241.2,142.25,237.7759,133.0155,237.7075,138.672,232.051,138.6035,241.2,142.25" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[abd12613f08bc6378f15c013f4a56f77]
+link Storage to Computer--><path d="M258,178.66 C258,193.64 258,215.65 258,233 " fill="none" id="Storage-to-Computer" style="stroke:#000000;stroke-width:2.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#000000" points="258,238.22,262,229.22,258,233.22,254,229.22,258,238.22" style="stroke:#000000;stroke-width:2.0;"/><!--MD5=[3000e3ba64c5c9594c7e40b1f2465420]
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+
+actor User
+database Computer
+
+rectangle Gordon {
+}
+
+rectangle Cookbook {
+}
+
+rectangle Recipe {
+}
+
+rectangle Parser {
+}
+
+rectangle Tag {
+}
+
+rectangle Storage {
+}
+
+User .> Gordon
+Gordon - -> Parser
+Gordon - -> Cookbook
+Parser - -> Recipe
+Cookbook - -> Recipe
+Cookbook - -> Tag
+Gordon - -> Storage
+Storage ..> Computer
+@enduml
+
+@startuml
+
+
+
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam arrowThickness 2
+skinparam ArrowColor black
+
+actor User
+database Computer
+
+rectangle Gordon {
+}
+
+rectangle Cookbook {
+}
+
+rectangle Recipe {
+}
+
+rectangle Parser {
+}
+
+rectangle Tag {
+}
+
+rectangle Storage {
+}
+
+User .> Gordon
+Gordon - -> Parser
+Gordon - -> Cookbook
+Parser - -> Recipe
+Cookbook - -> Recipe
+Cookbook - -> Tag
+Gordon - -> Storage
+Storage ..> Computer
+@enduml
+
+PlantUML version 1.2021.11(Sat Oct 02 21:26:11 SGT 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: US
+--></g></svg>
