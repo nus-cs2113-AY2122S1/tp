@@ -16,6 +16,7 @@ public class EditContactCommand extends Command {
     public static final int TELEGRAM_INDEX = 3;
     public static final int TWITTER_INDEX = 4;
     public static final int EMAIL_INDEX = 5;
+    public static final int NUMBER_OF_FIELDS = 6;
     String[] contactDetails;
     int contactIndex;
 
@@ -28,8 +29,8 @@ public class EditContactCommand extends Command {
         try {
             Contact preEditContact = duplicateContact(contactList.getContactAtIndex(contactIndex));
             Contact postEditContact = editTempContact(contactDetails,preEditContact);
-            if (duplicateCatcher(postEditContact, contactList, contactIndex)) {
-                TextUi.ignoreEditContact();
+            if (hasDuplicates(postEditContact, contactList, contactIndex)) {
+                TextUi.ignoreContact("edit");
             } else {
                 contactList.editContact(contactDetails, contactIndex);
                 TextUi.editContactMessage(postEditContact);
@@ -98,16 +99,16 @@ public class EditContactCommand extends Command {
         return new Contact(name, github, linkedin, telegram, twitter, email);
     }
 
-    public Boolean duplicateField(String input, String saved) {
+    private Boolean hasDuplicateField(String input, String saved) {
         return stringCleaner(saved).equals(stringCleaner(input));
     }
 
-    public String stringCleaner(String input) {
+    private String stringCleaner(String input) {
         return input.replace(" ", "").toLowerCase();
     }
 
 
-    public Contact editTempContact(String[] contactDetails, Contact preEditContact) throws InvalidFlagException {
+    private Contact editTempContact(String[] contactDetails, Contact preEditContact) throws InvalidFlagException {
         Contact tempContact = duplicateContact(preEditContact);
         for (int i = 0; i < contactDetails.length; i++) {
             if (contactDetails[i] != null) {
@@ -131,7 +132,6 @@ public class EditContactCommand extends Command {
                     tempContact.setEmail(contactDetails[i]);
                     break;
                 default:
-                    //control should never reach here
                     assert false;
                     throw new InvalidFlagException();
                 }
