@@ -161,6 +161,12 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void viewPersonalContactMessage(Contact personalContact) {
+        String personalName = ViewMessageFormatterUi.viewNameFormatter(personalContact);
+        String message = "Name:     " + personalName + formatContactFields(personalContact);
+        printDoubleLineMessage(message);
+    }
+
     public static void confirmDeleteMessage(Contact deletedContact, int deletedIndex) {
         String message = "Delete this contact?  (y/n)\n"
                 + deletedIndex + ". " + deletedContact.getName() + formatContactFields(deletedContact);

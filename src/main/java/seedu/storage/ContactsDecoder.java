@@ -34,7 +34,7 @@ public class ContactsDecoder {
             Scanner fileScanner = new Scanner(personalContactFile);
             if (fileScanner.hasNext()) {
                 String contactText = fileScanner.nextLine();
-                personalContact = decodePersonalContact(contactText, personalContact);
+                personalContact = decodePersonalContact(personalContact, contactText);
             }
         } catch (FileNotFoundException e) {
             throw new FileErrorException();
@@ -43,16 +43,16 @@ public class ContactsDecoder {
     }
 
 
-    private static Contact decodePersonalContact(String contactText, Contact contact) {
-        String[] destructuredInputs = contactText.split(SEPARATOR);
+    private static Contact decodePersonalContact(Contact contact, String contactText) {
         Contact personalContact = contact;
         try {
-            String contactName = destructuredInputs[DetailType.NAME.getIndex()];
-            String contactGithub = destructuredInputs[DetailType.GITHUB.getIndex()];
-            String contactLinkedin = destructuredInputs[DetailType.LINKEDIN.getIndex()];
-            String contactTelegram = destructuredInputs[DetailType.TELEGRAM.getIndex()];
-            String contactTwitter = destructuredInputs[DetailType.TWITTER.getIndex()];
-            String contactEmail = destructuredInputs[DetailType.EMAIL.getIndex()];
+            String[] compiledDetails = decodeDetails(contactText);
+            String contactName = compiledDetails[DetailType.NAME.getIndex()];
+            String contactGithub = compiledDetails[DetailType.GITHUB.getIndex()];
+            String contactLinkedin = compiledDetails[DetailType.LINKEDIN.getIndex()];
+            String contactTelegram = compiledDetails[DetailType.TELEGRAM.getIndex()];
+            String contactTwitter = compiledDetails[DetailType.TWITTER.getIndex()];
+            String contactEmail = compiledDetails[DetailType.EMAIL.getIndex()];
             personalContact = new Contact(contactName, contactGithub, contactLinkedin, contactTelegram,
                     contactTwitter, contactEmail);
         } catch (IndexOutOfBoundsException e) {
