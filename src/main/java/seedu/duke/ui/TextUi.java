@@ -1,10 +1,14 @@
 package seedu.duke.ui;
 
 import seedu.duke.data.AllRecordList;
+import seedu.duke.data.RecordList;
+import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
+import seedu.duke.data.records.Record;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 
 public class TextUi {
@@ -125,26 +129,47 @@ public class TextUi {
         return monthString;
     }
 
-    public static void showRecordsListView(AllRecordList list, int month, boolean isListAll) {
+    public static void showRecordsListView(AllRecordList records, int month, boolean isListAll) {
         if (isListAll) {
             for (int i = 1; i <= 12; i++) {
-                String monthString = getMonth(i);
-                if (list.checkOverspending(i)) {
-                    System.out.println("You are spending too much for " + monthString + " !");
-                }
-                String budget = (list.getBudget(i).getRawValue() > 0) ? list.getBudget(i).toString()
-                        : " Not Set";
-                getMonthListView(list, i, monthString, budget);
+                printRecordList(records, i);
             }
         } else {
-            String monthString = getMonth(month);
-            if (list.checkOverspending(month)) {
-                System.out.println("You are spending too much for " + monthString + " !");
-            }
-            String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString() : "Not Set";
-            getMonthListView(list, month, monthString, budget);
+            printRecordList(records, month);
         }
 
+    }
+
+    private static void printRecordList(AllRecordList records, int i) {
+        String monthString = getMonth(i);
+        double totalSpending = 0.0;
+        double currentMonthBudget = records.getBudget(i).getRawValue();
+        ArrayList<Expenditure> currentMonthRecordList = records.getExpenditureRecords(i);
+
+        for (int j = 0; j < currentMonthRecordList.size(); j++) {
+            totalSpending += currentMonthRecordList.get(j).getAmount();
+        }
+        String budget = "";
+        boolean printInfo = true;
+
+        if (currentMonthBudget == 0) {
+            budget = " Budget have not been allocated!";
+            printInfo = false;
+        } else {
+            budget = records.getBudget(i).toString();
+        }
+
+        if (totalSpending > currentMonthBudget && currentMonthBudget > 0 && printInfo) {
+            System.out.println("You are spending too much for " + monthString + "!");
+            double percentage = (totalSpending / currentMonthBudget) * 100;
+            System.out.printf("%.2f", percentage);
+            System.out.println("% is spent");
+        } else if (printInfo) {
+            System.out.println("You did not overspend for " + monthString + ", Good JOB!");
+            double percentage = (totalSpending / currentMonthBudget) * 100;
+            System.out.println(percentage + "% is spent");
+        }
+        getMonthListView(records, i, monthString, budget);
     }
 
     private static void getMonthListView(AllRecordList list, int month, String monthString, String budget) {

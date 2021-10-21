@@ -111,11 +111,12 @@ public class RecordList {
     }
 
     public boolean checkOverspending() {
-        double sum = 0;
-        for (Record a: expenditureRecords) {
-            sum += a.getAmount();
+        double totalSpending = 0.0;
+        for (Record record: expenditureRecords) {
+            totalSpending += record.getAmount();
         }
-        if (sum > budget.getAmount() && budget.getAmount() > 0) {
+
+        if (totalSpending > budget.getAmount() && budget.getAmount() > 0) {
             return true;
         } else {
             return false;
@@ -131,6 +132,4 @@ public class RecordList {
 
     public void addBudgetList(String description, double spendingLimit, int month) {
     }
-
-
 }

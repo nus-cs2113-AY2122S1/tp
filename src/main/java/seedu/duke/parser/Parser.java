@@ -1,20 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.AddBudgetCommand;
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.AddExpenditureCommand;
-import seedu.duke.commands.AddLoanCommand;
-import seedu.duke.commands.Command;
-import seedu.duke.commands.DeleteAllExpenditureCommand;
-import seedu.duke.commands.DeleteBudgetCommand;
-import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.DeleteMultipleExpenditureCommand;
-import seedu.duke.commands.DeleteSingleExpenditureCommand;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.HelpCommand;
-import seedu.duke.commands.InvalidCommand;
-import seedu.duke.commands.ListRecordsCommand;
-import seedu.duke.commands.YearCommand;
+import seedu.duke.commands.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -77,8 +63,13 @@ public class Parser {
             command = prepareYearCommand(commandParams);;
             break;
         case HelpCommand.COMMAND_WORD:
-        default:
             command = new HelpCommand();
+            break;
+        case FindCommand.COMMAND_WORD:
+            command = prepareFindCommand(commandParams);
+            break;
+        default:
+            command = new InvalidCommand("Sorry. I don't understand your command!");
             break;
         }
         return command;
@@ -185,6 +176,14 @@ public class Parser {
             return new InvalidCommand(String.format(MESSAGE_INVALID_DATE, AddExpenditureCommand.MESSAGE_USAGE));
         }
 
+    }
+
+    private Command prepareFindCommand(String commandParams) {
+        try {
+            return new FindCommand(commandParams);
+        } catch (StringIndexOutOfBoundsException e) {
+            return new InvalidCommand(String.format("Add message later pleasee", AddCommand.MESSAGE_USAGE));
+        }
     }
 
     private Command prepareYearCommand(String commandParams) {
