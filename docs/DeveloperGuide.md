@@ -142,12 +142,17 @@ additional devices or platforms.
 
 ## <a name="stories"></a>User Stories
 
-{NOT DONE}
-
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|programmer|add my colleague's account usernames|easily access it|
+|v1.0|programmer|edit my colleague's account usernames|update it if there is a change|
+|v1.0|programmer|save contact data locally on my hard drive|access it without internet|
+|v1.0|programmer|view various contact details of my colleague|contact him easily on different platforms|
+|v1.0|programmer|see the names and index of saved contacts|know the contacts I have saved|
+|v1.0|programmer|delete a specific contact||
+|v1.0|programmer|be able to copy and paste the displayed contact's URLs|visit the contact's accounts|
+|v2.0|programmer|save my personal details|the application is aware of the user|
+|v2.0|forgetful user|be able to search for my contacts by name|find their contact details|
 
 ## <a name="nf-req"></a>Non-Functional Requirements
 
