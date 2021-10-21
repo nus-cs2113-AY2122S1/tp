@@ -1,7 +1,8 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.Ingredient;
+import seedu.situs.command.Command;
+import seedu.situs.exceptions.DukeException;
+import seedu.situs.ingredients.Ingredient;
 
 import java.util.List;
 

@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeException;
+import seedu.situs.command.Command;
+import seedu.situs.exceptions.DukeException;
 
 public class DeleteCommand extends Command {
 
