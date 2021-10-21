@@ -1,6 +1,9 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.*;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.RemoveMapCommand;
+import seedu.duke.commands.RemoveModCommand;
+import seedu.duke.commands.RemoveUniCommand;
 import seedu.duke.constants.Constants;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
