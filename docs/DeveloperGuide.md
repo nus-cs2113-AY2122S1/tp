@@ -52,3 +52,42 @@ upon.
     - `exit` : Exits the app.
     - Refer to the [User Guide](https://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html) for details of each command.
 
+## Design
+
+### Architecture
+
+The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of main
+components and how they interact with each other.
+
+### UI component
+
+### Logic component
+
+### Online component
+
+### Timetable component
+
+### Storage component
+
+### Common classes
+
+## Implementation
+
+### Fetching Module Data
+
+### Search/Show/Update module feature
+
+### Maintaining Timetable
+
+#### Initialization
+
+#### Save
+
+#### Add
+
+#### Delete
+
+#### Clear Timetable
+
+#### Show Timetable
+
