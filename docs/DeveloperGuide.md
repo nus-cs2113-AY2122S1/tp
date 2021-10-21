@@ -112,7 +112,38 @@ Functions of the Parser class:
 * Prints responses to the console by implementing the `UI` class
 
 ### Command component
+
+The Diagram below is the class diagram for the Command Class
+
 ![Command Class Diagram](./RenderedUML/CommandRects.svg)
+
+The `Command` class contains all the basic functionality of the Gordon cookbook, and is the Class that executes specific commands given by the user.
+
+The `Command` class can be classified into 4 main functionalities:
+
+1. Basic Commands: 
+   * The Commands that are required for the basic feature set of the Gordon cookbook are contained here
+   * `AddCommand` is where the `addRecipe` feature is executed
+   * `CheckCommand` is where the `checkRecipe` feature is executed
+   * `DeleteRecipeCommand` is where the `deleteRecipe` feature is executed
+   * `ListRecipesCommand` is where the `listRecipes` feature is executed
+   * `HelpCommand` is where the `help` feature is executed
+2. Find Commands:
+   * The Commands that are required for the `find` feature of Gordon are contained here
+   * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed 
+   * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed
+   * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed
+   * `FindPriceCommand` is where the `find` /price feature of gordon is executed
+3. Set Commands:
+   * The Commands that are required for the `set` feature of Gordon are contained here
+   * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed
+   * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed
+   * `SetPriceCommand` is where the `set` /price feature of gordon is executed
+4. Tag Commands:
+   * The Commands that are required for the  `tag` feature of Gordon are contained here
+   * `TagAddCommand` is where the `tag` feature of gordon is executed
+   * `TagDeleteCommand` is where the `deleteTag` feature of gordon is executed
+   * `TagUntagCommand` is where the `untag` feature of gordon is executed
 
 ### Storage component
 
