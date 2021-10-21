@@ -3,6 +3,7 @@ package seedu.storage;
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.contact.DetailType;
+import seedu.contact.PersonalContact;
 import seedu.exception.FileErrorException;
 import seedu.ui.ExceptionTextUi;
 
@@ -28,8 +29,8 @@ public class ContactsDecoder {
         return updatedContactList;
     }
 
-    public static Contact readPersonalContact(File personalContactFile) throws FileErrorException {
-        Contact personalContact = new Contact(null, null, null, null, null, null);
+    public static PersonalContact readPersonalContact(File personalContactFile) throws FileErrorException {
+        PersonalContact personalContact = new PersonalContact(null, null, null, null, null, null);
         try {
             Scanner fileScanner = new Scanner(personalContactFile);
             if (fileScanner.hasNext()) {
@@ -43,8 +44,8 @@ public class ContactsDecoder {
     }
 
 
-    private static Contact decodePersonalContact(Contact contact, String contactText) {
-        Contact personalContact = contact;
+    private static PersonalContact decodePersonalContact(PersonalContact contact, String contactText) {
+        PersonalContact personalContact = contact;
         try {
             String[] compiledDetails = decodeDetails(contactText);
             String contactName = compiledDetails[DetailType.NAME.getIndex()];
@@ -53,7 +54,7 @@ public class ContactsDecoder {
             String contactTelegram = compiledDetails[DetailType.TELEGRAM.getIndex()];
             String contactTwitter = compiledDetails[DetailType.TWITTER.getIndex()];
             String contactEmail = compiledDetails[DetailType.EMAIL.getIndex()];
-            personalContact = new Contact(contactName, contactGithub, contactLinkedin, contactTelegram,
+            personalContact = new PersonalContact(contactName, contactGithub, contactLinkedin, contactTelegram,
                     contactTwitter, contactEmail);
         } catch (IndexOutOfBoundsException e) {
             ExceptionTextUi.corruptLineMessage(contactText);

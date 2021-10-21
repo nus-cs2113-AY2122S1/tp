@@ -16,7 +16,8 @@ public class EditContactCommand extends Command {
     public void execute() {
         try {
             if (contactIndex == -1) {
-                contactList.editPersonalContact(contactDetails);
+                personalContact.editPersonalContact(contactDetails);
+                TextUi.editPersonalContactMessage(personalContact);
             } else {
                 contactList.editContact(contactDetails, contactIndex);
                 TextUi.editContactMessage(contactList.getContactAtIndex(contactIndex));

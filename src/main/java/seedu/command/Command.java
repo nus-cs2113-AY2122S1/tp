@@ -1,17 +1,17 @@
 package seedu.command;
 
-import seedu.contact.Contact;
 import seedu.contact.ContactList;
+import seedu.contact.PersonalContact;
 
 public abstract class Command {
     protected ContactList contactList;
-    protected Contact personalContact;
+    protected PersonalContact personalContact;
 
     public void setContactList(ContactList contactList) {
         this.contactList = contactList;
     }
 
-    public void setPersonalContact(Contact personalContact) {
+    public void setPersonalContact(PersonalContact personalContact) {
         this.personalContact = personalContact;
     }
 

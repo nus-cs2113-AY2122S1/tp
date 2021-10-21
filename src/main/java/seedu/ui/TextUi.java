@@ -1,6 +1,7 @@
 package seedu.ui;
 
 import seedu.contact.Contact;
+import seedu.contact.PersonalContact;
 
 import java.util.Scanner;
 
@@ -39,14 +40,14 @@ public abstract class TextUi {
         System.out.print("Name: ");
     }
 
-    public static void welcomeBackMessage(Contact personalContact) {
+    public static void welcomeBackMessage(PersonalContact personalContact) {
         printDoubleLineMessage(LOGO);
         String message = "Hello, " + personalContact.getName() + ". \nWelcome back to ConTech, "
                 + "your personal contact tracker.";
         printBottomLineMessage(message);
     }
 
-    public static void greetingMessage(Contact personalContact) {
+    public static void greetingMessage(PersonalContact personalContact) {
         String message = "Hello there, " + personalContact.getName() + ".\n\n"
                 + "This is ConTech, your very own contact tracking application\n"
                 + "to manage tech-related contacts, like GitHub Accounts or\n"
@@ -161,9 +162,16 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void viewPersonalContactMessage(Contact personalContact) {
+    public static void viewPersonalContactMessage(PersonalContact personalContact) {
         String personalName = ViewMessageFormatterUi.viewNameFormatter(personalContact);
         String message = "Name:     " + personalName + formatContactFields(personalContact);
+        printDoubleLineMessage(message);
+    }
+
+    public static void editPersonalContactMessage(PersonalContact personalContact) {
+        String message = "ConTech has edited your personal contact:\n"
+                + "Name:     " + personalContact.getName()
+                + formatContactFields(personalContact);
         printDoubleLineMessage(message);
     }
 

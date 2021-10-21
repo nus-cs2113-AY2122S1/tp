@@ -2,6 +2,7 @@ package seedu.storage;
 
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
+import seedu.contact.PersonalContact;
 import seedu.exception.FileErrorException;
 import seedu.parser.AddPersonalContactParser;
 import seedu.ui.TextUi;
@@ -74,17 +75,17 @@ public class Storage {
         return ContactsDecoder.readContacts(contactFile);
     }
 
-    public Contact loadExistingPersonalContact() throws FileErrorException {
+    public PersonalContact loadExistingPersonalContact() throws FileErrorException {
         if (!hasExistingPersonalContactFile() || hasEmptyExistingPersonalContactFile()) {
             isFirstRun = true;
             // get new contact's name
             AddPersonalContactParser addPersonalContactParser = new AddPersonalContactParser();
             addPersonalContactParser.startCollectingPersonalDetails();
-            Contact personalContact = addPersonalContactParser.getPersonalContact();
+            PersonalContact personalContact = addPersonalContactParser.getPersonalContact();
             ContactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
             return personalContact;
         }
-        Contact personalContact = ContactsDecoder.readPersonalContact(personalContactFile);
+        PersonalContact personalContact = ContactsDecoder.readPersonalContact(personalContactFile);
         TextUi.welcomeBackMessage(personalContact);
         return personalContact;
     }
