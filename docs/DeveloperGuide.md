@@ -178,7 +178,7 @@ respective `print()` method from the `Ui` class will be called to display the re
 MediVault initialises an UpdateStockCommand class when CommandParser identifies the
 `updatestock` or the `update` keyword in the `stock` mode.
 
-* MediVault updates medicine stock information when `parameter` and `parameterValues` provided by the user are valid.
+* MediVault checks if `parameters` and `parameterValues` provided by the user are valid.
 * MediVault conducts another validation check on the provided `quantity`,`max_quantity` and `expiry`
   against the stored medicine stock information.
 
