@@ -8,6 +8,11 @@ public class Attendance {
     protected Member member;
     protected TrainingSchedule schedule;
 
+    /**
+     * Constructor for any type of Attendance.
+     * @param member          Name of member
+     * @param schedule        Name of training event
+     */
     public Attendance(Member member, TrainingSchedule schedule) {
         setMember(member);
         setSchedule(schedule);
@@ -28,7 +33,7 @@ public class Attendance {
      */
     @Override
     public String toString() {
-        return String.format("Name: %s | Training Name: %s | Status: [%s] ",
+        return String.format("Name: %s | Training Name: %s | Present: [%s] ",
                 member.getName(), schedule.getTrainingName(), member.getAttendance());
     }
 }

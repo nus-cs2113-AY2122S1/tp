@@ -108,6 +108,8 @@ public class Parser {
             keyword = Keyword.EDIT_TRAINING_KEYWORD;
         } else if (hasEditMemberKeyword(query)) {
             keyword = Keyword.EDIT_MEMBER_KEYWORD;
+        } else if (query.trim().equals("--help")) {
+            keyword = Keyword.HELP_KEYWORD;
         } else if (hasExitKeyword(query)) {
             keyword = Keyword.EXIT_KEYWORD;
         } else {
@@ -273,6 +275,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates Attendance object from input given by user.
+     *
+     * @param query user raw data input.
+     * @return Attendance according to user input.
+     */
     public static Attendance getAttendanceDetails(String query) {
         String regex = "(\\/[a-z])+";
 
@@ -289,7 +297,7 @@ public class Parser {
         String trainingName = "";
         String venue = "";
         String time = "";
-        String presentOrLate = "";
+        String presentOrAbsent = "";
 
         int wordIndex = 1;
         while (matcher.find()) {
@@ -301,14 +309,14 @@ public class Parser {
                 trainingName = words[wordIndex].trim();
                 break;
             case "/d":
-                presentOrLate = words[wordIndex].trim();
+                presentOrAbsent = words[wordIndex].trim();
                 break;
             default:
                 break;
             }
             wordIndex++;
         }
-        Member member = new Member(memberName, studentNumber, gender, phoneNumber, presentOrLate);
+        Member member = new Member(memberName, studentNumber, gender, phoneNumber, presentOrAbsent);
         TrainingSchedule training = new TrainingSchedule(trainingName, venue, time);
         return new Attendance(member, training);
     }
@@ -546,6 +554,12 @@ public class Parser {
         return attNumber;
     }
 
+    /**
+     * Removes an entry from a AttendanceList based on input index.
+     *
+     * @param attendanceList AttendanceList containing all Attendance entries.
+     * @param query     String input that contains the integer index of the entry to remove.
+     */
     public static void deleteAttendance(AttendanceList attendanceList, String query) {
         try {
             int attNumber = getAttendanceIndex(query);
