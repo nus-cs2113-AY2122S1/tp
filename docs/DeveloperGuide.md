@@ -69,22 +69,41 @@ user issues the command `add task homework -d mon`.
 
 ### Logic component
 
-### Model component
+Here is the class diagram of the `Logic` component:
+
+![LogicComponentDiagram](images/LogicComponentDiagram.png)
+
+> 📝 **Note:** XYZ is a placeholder for specific command name (e.g., AddModuleCommand).
+
+How the `Logic` component works:
+
+* When `Logic` is called upon to execute a command, it uses the `Parser` class to parse the user command.
+* This results in a `Command` object (more precisely, an object of one of its subclasses e.g., 
+  AddModuleCommand) which is then executed.
+* The `Command` can communicate with the `Model` class when it is executed (e.g. to add a module).
+* If the operations above are successful, the `Command` will save the `Model` data by using the `Storage` class.
+* The result is then printed to user by the `Ui` class.
 
 ### Model component
+
 The `model` package consists of three components: `Lesson`, `Task` and `Module`.
-#### Lesson component
-**API** : [`Lesson.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/lesson/Lesson.java)
-![LessonComponentObject](images/LessonComponentObject.png)
 
-The `Lesson` component,
+#### Lesson component
+
+**API** : [`Lesson.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/lesson/Lesson.java)
+
+![LessonComponentObject](images/LessonComponentDiagram.png)
+
+The `Lesson` component
 * stores data specific to a lesson as entered by the user 
 * stores all `Lesson` objects created by user commands in a `LessonList` object
 * does not depend on any of the other three components
 
-### Module component
+#### Module component
+
 **API** [`Module.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/module/Module.java)
-![ModuleComponentObject](images/ModuleComponentObject.png)
+
+![ModuleComponentObject](images/ModuleComponentDiagram.png)
 
 The `Module` component,
 * stores information regarding modules added by the user and on the NUSMods API
@@ -92,9 +111,11 @@ The `Module` component,
 * `FullModuleList` stores all `Module` objects corresponding to the modules found on NUSMods
 * `ModuleList` stores all user-added `Module` objects
 
-### Task Component
+#### Task Component
+
 **API** [`Task.java`](https://github.com/AY2122S1-CS2113T-W11-3/tp/blob/master/src/main/java/seedu/duke/model/task/Task.java)
-![TaskComponentObject](images/TaskComponentObject.png)
+
+![TaskComponentObject](images/TaskComponentDiagram.png)
 
 The `Task` component,
 * stores data specific to a task as entered by the user
@@ -122,9 +143,11 @@ The following sequence diagrams below show how task data is [saved](#saving-data
 ## Implementation
 
 ### Saving data
+
 ![StorageSaveSequence](images/SaveDataSequenceDiagram.png)
 
 ### Loading data
+
 ![StorageLoadSequence](images/LoadDataSequenceDiagram.png)
 
 ## Appendix: Requirements

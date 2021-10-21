@@ -1,4 +1,7 @@
 @startuml
+hide Circle
+skinparam classAttributeIconSize 0
+
 class Module {
     moduleCode : String
     title : String
