@@ -51,7 +51,7 @@ In the sections below, we will be explaining in detail how each compomponent wor
 
 ### UI component
 
-**API** : `Ui.java`
+**API:** `Ui.java`
 
 How the `Ui` component works:
 1. The `Ui` is called in 2 main classes - `GoalList` and `UiOverall`
@@ -165,11 +165,11 @@ the user's data.
 
 ### Storage component
 
-**API:** `Storage.java`
+The Storage Class allows data to be read from and saved to a storage file.
 
 ![Storage Class Diagram](Diagram%20Images/StorageClassDiagram.png)
 
-The Storage Class allows data to be read from and saved to a storage file. When a user exits the program, the 
+When a user exits the program, the 
 information entered by the user during the program will be exported and saved into a `HappyBit.txt` file. The next time
 the program is run by the user, this data will be imported back into the program to allow the user to pick up and 
 continue from where they left off.
