@@ -49,6 +49,7 @@ This sections provides a guide on how to get Traveller up and running on your co
    You should see Traveller's welcome message as shown below.
 
 ![Welcome](./documentationPics/welcome.png)
+
 5. Enter a command to execute it.
    Some of our basic commands are:
    * `new FamilyTrip2021 /from SIN /to MLY` : Creates a new trip called `FamilyTrip2021` from Singapore (`SIN`) to Malaysia (`MLY`).
