@@ -5,8 +5,6 @@ import medbot.command.Command;
 import java.io.FileNotFoundException;
 
 import medbot.exceptions.MedBotException;
-import medbot.list.MedicalStaffList;
-import medbot.list.PatientList;
 import medbot.utilities.ViewType;
 
 public class MedBot {
@@ -19,7 +17,6 @@ public class MedBot {
         Scheduler scheduler = new Scheduler();
         Ui ui = new Ui();
         Storage storage = null;
-        ViewType viewContext;
         boolean isInteracting = true;
 
         ui.printWelcomeMessageOne();
