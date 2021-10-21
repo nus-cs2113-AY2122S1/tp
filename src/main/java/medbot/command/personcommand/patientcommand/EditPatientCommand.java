@@ -1,7 +1,7 @@
-package medbot.command.patientcommand;
+package medbot.command.personcommand.patientcommand;
 
 import medbot.Scheduler;
-import medbot.command.EditPersonCommand;
+import medbot.command.personcommand.EditPersonCommand;
 import medbot.exceptions.MedBotException;
 import medbot.Ui;
 import medbot.person.Patient;

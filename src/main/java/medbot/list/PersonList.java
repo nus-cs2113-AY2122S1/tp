@@ -1,10 +1,7 @@
 package medbot.list;
 
-import medbot.CommandManager;
-import medbot.Parser;
 import medbot.exceptions.MedBotException;
 import medbot.person.Person;
-import medbot.utilities.ViewType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -122,6 +119,13 @@ public class PersonList {
         }
 
         return output;
+    }
+
+    public PersonalAppointmentList getPersonalAppointmentList(int personId) throws MedBotException {
+        if (!persons.containsKey(personId)) {
+            throw new MedBotException(getNoPersonIdErrorMessage(personId));
+        }
+        return persons.get(personId).getPersonalAppointmentList();
     }
 
     public String getNoPersonIdErrorMessage(int personId) {

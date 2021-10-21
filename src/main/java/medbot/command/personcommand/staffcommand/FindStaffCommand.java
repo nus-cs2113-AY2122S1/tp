@@ -1,8 +1,8 @@
-package medbot.command.staffcommand;
+package medbot.command.personcommand.staffcommand;
 
 import medbot.Scheduler;
 import medbot.Ui;
-import medbot.command.FindPersonCommand;
+import medbot.command.personcommand.FindPersonCommand;
 import medbot.exceptions.MedBotException;
 
 import java.util.List;

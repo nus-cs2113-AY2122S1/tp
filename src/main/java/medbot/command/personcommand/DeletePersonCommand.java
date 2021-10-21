@@ -1,5 +1,7 @@
-package medbot.command;
+package medbot.command.personcommand;
 
+
+import medbot.command.Command;
 
 public abstract class DeletePersonCommand extends Command {
     protected int personId;

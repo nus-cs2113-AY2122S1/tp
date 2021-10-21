@@ -1,10 +1,8 @@
 package medbot.command;
 
-import medbot.CommandManager;
 import medbot.Parser;
 import medbot.Scheduler;
 import medbot.Ui;
-import medbot.list.PersonList;
 import medbot.utilities.ViewType;
 
 public class SwitchCommand extends Command {
