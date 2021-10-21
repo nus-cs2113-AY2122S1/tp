@@ -181,9 +181,9 @@ public class Parser {
         }
     }
 
-    private static void correctBalances(Expense expense){
+    private static void correctBalances(Expense expense) {
         Person payer = expense.getPayer();
-        for (Person person : expense.getPersonsList()){
+        for (Person person : expense.getPersonsList()) {
             payer.setMoneyOwed(person, -expense.getAmountSplit().get(person));
             person.setMoneyOwed(payer, expense.getAmountSplit().get(person));
         }
@@ -284,7 +284,7 @@ public class Parser {
                 getAdditionalExpenseInfo(expense);
             } else {
                 for (Person person : expense.getPersonsList()) {
-                    if (person == payer){
+                    if (person == payer) {
                         person.setMoneyOwed(person, amountBeingPaid.get(person));
                         expense.setAmountSplit(person, amountBeingPaid.get(person));
                         continue;

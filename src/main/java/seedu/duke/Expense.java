@@ -35,13 +35,14 @@ public class Expense {
         this.payer = person;
     }
 
-    public Person getPayer(){
+    public Person getPayer() {
         return payer;
     }
 
     public void setAmountSplit(Person person, double amount) {
         amountSplit.put(person, amount);
     }
+
     public HashMap<Person, Double> getAmountSplit() {
         return amountSplit;
     }
