@@ -84,6 +84,10 @@ public class RecordList {
         return expenditureRecords;
     }
 
+    public ArrayList<Loan> getLoanRecords() {
+        return loanRecords;
+    }
+
     public Budget getBudget() {
         return budget;
     }

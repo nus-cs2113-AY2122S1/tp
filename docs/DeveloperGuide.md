@@ -75,11 +75,22 @@ Given below is an example usage scenario and how the ```edit``` mechanism behave
 
 ### Listing
 
-The list commands traverse through each of the 12 Budget list in ALlRecordList for each month and 
-retrieve the Budget amount for that particular month and then enumerates all the expenditures in
-the particular month.
+The list feature works with Parser, Recordlist and TextUi, and allows users to see the listing of the budget and expenditures in either a specific month or every month.
 
-The result is a list of budget followed by expenditure for each month. 
+When user keys list ```m/Month```, The Parser class will analyse the whole command, extract “m/” and “MONTH”, and analyse whether MONTH is an integer or “all”. The boolean isListAll will be assigned as true if the value after “m/” is “all”. Then the class ListRecordsCommand will execute the listing by using TextUi.showRecordsListView(recordList, MONTH, isListAll)).
+
+Similarly, we have our Parser to parse the commands for listing of expenditures
+* ```list m/Month``` — If the value at the position after ‘m/’ is an integer, we use hashtable to list the budget and all expenditures of a  specific month.
+* ```list m/all``` — If the value at the position after ‘m/’ is “all”, we use for loop to list all the budget and expenditures of every month.
+
+Given below is an example usage scenario and how the list feature behaves at each step.
+
+**Step 1**. The user launches the application for the first time.
+<br/> **Step 2**. The user adds a budget and some expenditures to the current month.
+<br/> **Step 3**. The user forgets what the budget and expenditures added, thus the user wants to see the budget and the list of the expenditures.
+<br/> **Step 4**. After consideration, the user decides to see the budget and list of May, so he keys ```list m/5```
+<br/> **Step 5**. The Parser starts to parse the command, it extracts month 5. As this is a specific month to be listed, the Parser class calls ListRecordsCommand to work. By finding May, the expenditures list and budget of May are successfully found and prints out a showRecordsListView from TextUi class.
+
 
 ### Storage 
 

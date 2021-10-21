@@ -7,9 +7,6 @@ import seedu.duke.data.records.Loan;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static seedu.duke.common.Messages.MESSAGE_EXIT;
-
-
 public class TextUi {
 
     /**
@@ -27,7 +24,7 @@ public class TextUi {
             + "                     __/ |\n"
             + "                    |___/";
 
-    private static final int DISPLAY_INDEX_OFFSET = 1;
+    private static final String MESSAGE_EXIT = "Bye, see you again soon!";
 
     private final Scanner in;
 
@@ -159,14 +156,27 @@ public class TextUi {
         } else {
             System.out.println("No Expenditure records yet.");
         }
+        System.out.println("Your loans: ");
+        if (list.getLoanListSize(month) > 0) {
+            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Debtorname", "   | Amount", "   | Date ");
+            printEnumeratedLoanList(list.getLoanRecords(month));
+        } else {
+            System.out.println("No Loan records.");
+        }
         System.out.println(DIVIDER);
     }
 
     private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList) {
         for (int i = 0; i < monthExpenditureList.size(); i++) {
             Expenditure currentExpenditure = monthExpenditureList.get(i);
-            int displayedIndex = i + DISPLAY_INDEX_OFFSET;
-            System.out.println(displayedIndex + "." + currentExpenditure);
+            System.out.println(i + 1 + "." + currentExpenditure);
+        }
+    }
+
+    private static void printEnumeratedLoanList(ArrayList<Loan> monthLoanList) {
+        for (int i = 0; i < monthLoanList.size(); i++) {
+            Loan currentLoan = monthLoanList.get(i);
+            System.out.println(i + 1 + "." + currentLoan);
         }
     }
 
