@@ -13,22 +13,28 @@
 
 ## Features 
 
-{Give detailed description of each feature}
-
-### Adding a todo: `todo`
-Adds a new item to the list of todo items.
-
-Format: `todo n/TODO_NAME d/DEADLINE`
-
-* The `DEADLINE` can be in a natural language format.
-* The `TODO_NAME` cannot contain punctuation.  
-
-Example of usage: 
-
-`todo n/Write the rest of the User Guide d/next week`
-
-`todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
-
+### Searching for available module mappings: searchmap
+Displays all available module mappings for a specific university.
+The mappings displayed will be based on the list of selected modules.
+* Mappings here are labeled with an index, this index will be used for subsequent commands.  
+  Format: searchmap UNIVERSITY_INDEX
+  Examples:
+  ```
+  searchmap 4
+  Potential mappings for Boston University:
+  [1] CS1231 - MET CS 248 : Discrete Mathematics
+  [2] CS1231 - CAS CS131 : Combinatoric Structures
+  ```
+### Adding a module mapping: add /map
+Adds a specific pair of module mapping under a selected university.
+Format: add /map UNIVERSITY_INDEX MODULE_MAPPING_INDEX  
+Examples:
+```
+add /map 4 2
+The following module mapping has been added under:
+[4] Boston University
+CS1231 - CAS CS131 : Combinatoric Structures
+```
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
