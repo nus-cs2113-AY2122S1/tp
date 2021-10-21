@@ -2,14 +2,11 @@ package seedu.typists.game;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import seedu.typists.ui.TextUi;
 import static seedu.typists.common.Utils.getWordLine;
 
 public class TimeModeGame extends Game {
-    private static final Logger logger = Logger.getLogger("Foo");
     private final TextUi ui;
 
     protected final ArrayList<String[]> wordLines;
@@ -19,10 +16,9 @@ public class TimeModeGame extends Game {
     protected double realGameTime;
 
     public TimeModeGame(String targetWordSet, int wordsPerLine) {
-        assert targetWordSet != null : "text passed into Time Game should not be null.";
-        this.ui = new TextUi();
-        this.inputLines = new ArrayList<>();
-        this.wordLines = getWordLine(targetWordSet, wordsPerLine);
+        ui = new TextUi();
+        inputLines = new ArrayList<>();
+        wordLines = getWordLine(targetWordSet, wordsPerLine);
         this.gameTime = getGameTime();
         startGame();
     }

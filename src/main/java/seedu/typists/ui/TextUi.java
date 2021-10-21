@@ -2,11 +2,12 @@ package seedu.typists.ui;
 
 import seedu.typists.common.Error;
 import seedu.typists.content.Animation;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+
 import static java.lang.System.lineSeparator;
 import static java.lang.System.out;
 import static seedu.typists.common.Messages.CLOCK;
@@ -17,17 +18,9 @@ import static seedu.typists.common.Messages.MESSAGE_ACKNOWLEDGE;
 import static seedu.typists.common.Messages.MESSAGE_HELP;
 import static seedu.typists.common.Messages.MESSAGE_WELCOME;
 import static seedu.typists.common.Messages.SUMMARY;
+
 import java.util.ArrayList;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Logger;
-import java.util.logging.LogManager;
-import java.util.logging.Level;
-import java.util.logging.SimpleFormatter;
-import java.util.logging.FileHandler;
-import java.util.logging.ConsoleHandler;
 
 /**
  * Text UI of the application.
@@ -35,10 +28,9 @@ import java.util.logging.ConsoleHandler;
 public class TextUi {
     private final SimpleDateFormat timeFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    private static final String DIVIDER = "===========================================================";
+    private static final String DIVIDER = "****************************************************************";
     private static final String LINE_PREFIX = "     | ";
     private static final String LS = lineSeparator();
-    private static final Logger LOGGER = Logger.getLogger(TextUi.class.getName());
 
     //get current timestamp
     //unused because it interferes with the EXPECTED.TXT in runtest
@@ -190,19 +182,12 @@ public class TextUi {
         ui.showAnimatedSentenceErrorRateSummary(rounded);
     }
 
-    public void showSummary(int errorWordCount, double errorPercentage, List<String> errorWords, double wpm,
-                            int totalWordTyped, double gameTime) {
-        assert errorWordCount >= 0;
-        assert errorPercentage >= 0;
-        assert totalWordTyped >= 0;
-        assert gameTime > 0;
-        assert wpm >= 0;
 
+    public void showSummary(int errorWordCount, double errorPercentage, double wpm,
+                            int totalWordTyped, double gameTime) {
         out.print(SUMMARY + '\n');
-        out.print("Number of Wrong Words: " + errorWordCount + "/" + totalWordTyped + '\n');
-        out.print("Error Percentage of Wrong Words: " + String.format("%.2f", errorPercentage) + "%\n");
-        out.print("Wrong Words:\n");
-        printErrorWords(errorWords);
+        out.print("Wrong Words: " + errorWordCount + "/" + totalWordTyped + '\n');
+        out.print("Error Percentage: " + String.format("%.2f", errorPercentage) + "%\n");
         out.print("WPM: " + String.format("%.2f", wpm) + '\n');
         out.print("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds\n");
     }
@@ -214,45 +199,5 @@ public class TextUi {
         viewAnimateRight("Error Percentage: " + String.format("%.2f", errorPercentage));
         viewAnimateRight("WPM: " + String.format("%.2f", wpm));
         viewAnimateRight("Total Time taken for the game: " + String.format("%.2f", gameTime) + " seconds");
-
-    void printErrorWords(List<String> errorWords) {
-        setUpLog();
-        if (errorWords == null) {
-            out.print("No words typed wrongly.\n");
-            return;
-        }
-        for (int i = 0; i < errorWords.size(); i++) {
-            assert errorWords != null;
-            if (i != 0 && i % 8 == 0) {
-                out.print("\n");
-            }
-            out.print(errorWords.get(i));
-            if (i != (errorWords.size() - 1)) {
-                out.print("|");
-            }
-        }
-        if ((errorWords.size() - 1) % 8 != 0) {
-            out.print("\n");
-        }
-    }
-
-    public void setUpLog() {
-        LogManager.getLogManager().reset();
-        LOGGER.setLevel(Level.ALL);
-
-        ConsoleHandler ch = new ConsoleHandler();
-        ch.setLevel(Level.SEVERE);
-        LOGGER.addHandler(ch);
-
-        try {
-            FileHandler fh = new FileHandler(TextUi.class.getName() + ".log");
-            fh.setFormatter(new SimpleFormatter());
-            fh.setLevel(Level.FINE);
-            LOGGER.addHandler(fh);
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "File logger failed to set up\n", e);
-        }
-
-        LOGGER.info("Set up log in TextUi");
     }
 }
