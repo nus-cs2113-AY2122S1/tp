@@ -102,30 +102,36 @@ public class Ui {
         }
     }
 
-    private void printTable(Map<String, ArrayList<?>> map) {
+    private AsciiTable getExerciseTable(Map.Entry<String, ArrayList<?>> m) {
+        AsciiTable at = new AsciiTable();
+        at.addRule();
+        String[] columnNames = {"Index", "Exercise name", "Sets", "Reps"};
+        at.addRow((Object[]) columnNames);
+        at.addRule();
+
+        ArrayList<?> list = m.getValue();
+        for (int i = 0; i < list.size(); i++) {
+            Object e = list.get(i);
+            if (e instanceof Exercise) {
+                int displayIndex = i + 1;
+                String description = ((Exercise) e).getDescription();
+                int sets = ((Exercise) e).getSets();
+                int reps = ((Exercise) e).getReps();
+                at.addRow(displayIndex, description, sets, reps);
+                at.addRule();
+            }
+        }
+        return at;
+    }
+
+    private void printExerciseTable(Map<String, ArrayList<?>> map) {
+        assert map != null;
         assert !map.isEmpty();
 
-        for (Map.Entry<String, ArrayList<?>> m : map.entrySet()) {
-            AsciiTable at = new AsciiTable();
-            at.addRule();
-            String[] columnNames = {"Index", "Exercise name", "Sets", "Reps"};
-            at.addRow((Object[]) columnNames);
-            at.addRule();
-            String workoutName = m.getKey();
+        for (Map.Entry<String, ArrayList<?>> workout : map.entrySet()) {
+            String workoutName = workout.getKey();
             printText(workoutName);
-
-            ArrayList<?> list = m.getValue();
-            for (int i = 0; i < list.size(); i++) {
-                Object e = list.get(i);
-                if (e instanceof Exercise) {
-                    String displayIndex = String.valueOf(i + 1);
-                    String exerciseName = ((Exercise) e).getDescription();
-                    int sets = ((Exercise) e).getSets();
-                    int reps = ((Exercise) e).getReps();
-                    at.addRow(displayIndex, exerciseName, sets, reps);
-                    at.addRule();
-                }
-            }
+            AsciiTable at = getExerciseTable(workout);
             System.out.println(at.render());
         }
     }
@@ -139,19 +145,14 @@ public class Ui {
         if (result.itemList != null) {
             printList(result.itemList);
         }
-
         if (result.map != null) {
             if (result.isTable) {
-                printTable(result.map);
+                printExerciseTable(result.map);
             } else {
                 printMap(result.map);
             }
         }
 
         printLineSeparator();
-
-        if (withIndent) {
-            System.out.println(INDENT);
-        }
     }
 }
