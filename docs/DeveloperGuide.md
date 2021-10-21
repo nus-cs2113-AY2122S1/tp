@@ -8,7 +8,7 @@
 
 ### Architecture
 
-![Architecture Diagram](./RenderedUML/ArchitectureDiagram.svg)
+![Sequence Diagram](./RenderedUML/ArchitectureDiagram.svg)
 
 The Diagram above explains how the App is designed and will function
 
