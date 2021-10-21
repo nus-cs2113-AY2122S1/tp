@@ -178,7 +178,7 @@ public class TextUi {
         }
     }
 
-    void setUpLog(){
+    void setUpLog() {
         LogManager.getLogManager().reset();
         LOGGER.setLevel(Level.ALL);
 
@@ -187,12 +187,12 @@ public class TextUi {
         LOGGER.addHandler(ch);
 
         try {
-            FileHandler fh = new FileHandler(TextUi.class.getName()+".log");
+            FileHandler fh = new FileHandler(TextUi.class.getName() + ".log");
             fh.setFormatter(new SimpleFormatter());
             fh.setLevel(Level.FINE);
             LOGGER.addHandler(fh);
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE,"File logger failed to set up\n", e);
+            LOGGER.log(Level.SEVERE, "File logger failed to set up\n", e);
         }
 
         LOGGER.info("Set up log in TextUi");
