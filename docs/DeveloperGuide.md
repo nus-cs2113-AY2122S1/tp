@@ -1,7 +1,7 @@
 # Developer Guide
 
 This developer guide documents the design and implementation of the application,
-Ha(ppy)Bit. It will provide an insight into the design considerations, and implementation
+_Ha(ppy)Bit_. It will provide an insight into the design considerations, and implementation
 of features.
 
 * [Acknowledgements](#acknowledgements)
@@ -20,6 +20,7 @@ of features.
 * [Appendix D: Glossary](#appendix-d-glossary)
 * [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 
+---------------------------------------------------------------------------------------------------------
 
 ## Acknowledgements
 
@@ -38,6 +39,7 @@ This application adapted the Developer Guide and User Guide from:
 * Link to Developer Guide: <https://se-education.org/addressbook-level3/DeveloperGuide.html>
 * Link to User Guide: <https://se-education.org/addressbook-level3/UserGuide.html#quick-start>
 
+---------------------------------------------------------------------------------------------------------
 
 ## Design and Implementation
 
@@ -187,6 +189,8 @@ information entered by the user during the program will be exported and saved in
 the program is run by the user, this data will be imported back into the program to allow the user to pick up and 
 continue from where they left off.
 
+---------------------------------------------------------------------------------------------------------
+
 ## Appendix A: Product Scope
 
 ### Target user profile:
@@ -222,14 +226,20 @@ workload or commitments.
 
 ## Appendix C: Non-Functional Requirements
 
-{Give non-functional requirements}
-
+|Non-Functional Requirements | Requirement Type |
+| :---------- | :---: |
+|App should be operable on Windows, macOS, and Ubuntu running Java `11` or above.|Technical|
+|App can be learned anyone who is familiar with computer within minutes of use.|Quality|
+|App should be a helpful, encouraging, and a joy to use.|Quality|
+| |Performance|
 
 ## Appendix D: Glossary
 
-* *glossary item* - Definition
+* **Goal**: A long term achievement you wish to accomplish
+* **Habit**: Checkpoints; actionable tasks to be done to achieve goal
 
 
 ## Appendix E: Instructions for Manual Testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+{Someone shall give instructions on how to do a manual product testing 
+e.g., how to load sample data to be used for testing}
