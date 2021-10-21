@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 
 import expiryeliminator.commands.Command;
 import expiryeliminator.common.LogsCenter;
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.parser.Parser;
 import expiryeliminator.ui.Ui;
@@ -16,7 +16,7 @@ import expiryeliminator.ui.Ui;
  */
 public class ExpiryEliminator {
     private static Ui ui;
-    private static IngredientList ingredients;
+    private static IngredientRepository ingredients;
     private static RecipeList recipes;
     private static final Logger logger = LogsCenter.getLogger(ExpiryEliminator.class);
 
@@ -25,7 +25,7 @@ public class ExpiryEliminator {
      */
     public ExpiryEliminator() {
         ui = new Ui();
-        ingredients = new IngredientList();
+        ingredients = new IngredientRepository();
         recipes = new RecipeList();
     }
 

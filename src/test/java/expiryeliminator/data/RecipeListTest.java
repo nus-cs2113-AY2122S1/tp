@@ -1,18 +1,19 @@
 package expiryeliminator.data;
 
-import expiryeliminator.data.exception.DuplicateDataException;
-import expiryeliminator.data.exception.NotFoundException;
-import expiryeliminator.util.TestUtil;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
+import expiryeliminator.data.exception.DuplicateDataException;
+import expiryeliminator.data.exception.NotFoundException;
+import expiryeliminator.util.TestUtil;
+
 public class RecipeListTest {
     @Test
     public void add_correctRecipeInput_correctRecipe() {
-        Recipe recipe = new Recipe(TestUtil.EXAMPLE_RECIPE_NAME, TestUtil.generateIngredientListForRecipe());
+        Recipe recipe = TestUtil.generateRecipe();
         RecipeList recipes = new RecipeList();
         try {
             recipes.add(recipe);
@@ -24,12 +25,11 @@ public class RecipeListTest {
 
     @Test
     public void add_duplicateRecipeName_ExceptionThrown() {
-        Recipe recipe = new Recipe(TestUtil.EXAMPLE_RECIPE_NAME, TestUtil.generateIngredientListForRecipe());
+        Recipe recipe = TestUtil.generateRecipe();
         RecipeList recipes = new RecipeList();
         try {
             recipes.add(recipe);
-            Recipe duplicateRecipe = new Recipe(TestUtil.EXAMPLE_RECIPE_NAME,
-                    TestUtil.generateIngredientListForRecipe());
+            Recipe duplicateRecipe = TestUtil.generateRecipe();
             assertThrows(DuplicateDataException.class, () -> {
                 recipes.add(duplicateRecipe);
             });
@@ -40,7 +40,7 @@ public class RecipeListTest {
 
     @Test
     public void remove_recipeNameNotInList_ExceptionThrown() {
-        Recipe recipe = new Recipe(TestUtil.EXAMPLE_RECIPE_NAME, TestUtil.generateIngredientListForRecipe());
+        Recipe recipe = TestUtil.generateRecipe();
         RecipeList recipes = new RecipeList();
         try {
             recipes.add(recipe);
@@ -54,7 +54,7 @@ public class RecipeListTest {
 
     @Test
     public void remove_recipeNameInList_recipeRemoved() {
-        Recipe recipe = new Recipe(TestUtil.EXAMPLE_RECIPE_NAME, TestUtil.generateIngredientListForRecipe());
+        Recipe recipe = TestUtil.generateRecipe();
         RecipeList recipes = new RecipeList();
         try {
             recipes.add(recipe);

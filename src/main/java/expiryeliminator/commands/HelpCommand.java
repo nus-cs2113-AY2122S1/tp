@@ -1,6 +1,6 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
 public class HelpCommand extends Command {
@@ -11,7 +11,7 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_SHOW_INSTRUCTION = "Here are the instructions:";
 
     @Override
-    public String execute(IngredientList ingredientList, RecipeList recipes) {
+    public String execute(IngredientRepository ingredientRepository, RecipeList recipes) {
         return MESSAGE_SHOW_INSTRUCTION
                 + "\n\n" + AddIngredientCommand.MESSAGE_USAGE
                 + "\n\n" + AddRecipeCommand.MESSAGE_USAGE

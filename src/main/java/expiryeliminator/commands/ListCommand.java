@@ -1,6 +1,6 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
 /**
@@ -13,19 +13,20 @@ public class ListCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists out all the ingredients in the repository.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SHOW_WHOLE_LIST = "Here are the ingredients in your list:\n" + "\n%1$s\n"
+    public static final String MESSAGE_SHOW_WHOLE_LIST = "Here are the ingredients in your list:\n" + "%1$s\n"
             + "You have a total of %2$s ingredient(s)";
 
     public static final String MESSAGE_EMPTY_INGREDIENT_LIST = "The ingredient repository is currently empty!";
 
 
     @Override
-    public String execute(IngredientList ingredientList, RecipeList recipes) {
-        if (ingredientList.size() == 0) {
+    public String execute(IngredientRepository ingredientRepository, RecipeList recipes) {
+        if (ingredientRepository.size() == 0) {
             return MESSAGE_EMPTY_INGREDIENT_LIST;
         } else {
-            assert ingredientList.size() > 0;
-            return String.format(MESSAGE_SHOW_WHOLE_LIST, ingredientList.printWholeList(), ingredientList.size());
+            assert ingredientRepository.size() > 0;
+            return String.format(MESSAGE_SHOW_WHOLE_LIST, ingredientRepository.printWholeList(),
+                    ingredientRepository.size());
         }
     }
 }

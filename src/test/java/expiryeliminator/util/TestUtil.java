@@ -1,38 +1,87 @@
 package expiryeliminator.util;
 
-import expiryeliminator.data.Ingredient;
-import expiryeliminator.data.IngredientList;
-import expiryeliminator.data.Recipe;
-import expiryeliminator.data.RecipeList;
-import expiryeliminator.data.exception.DuplicateDataException;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.Recipe;
+import expiryeliminator.data.RecipeList;
+import expiryeliminator.data.exception.DuplicateDataException;
+import expiryeliminator.data.exception.IllegalValueException;
 
 public class TestUtil {
 
     public static final String EXAMPLE_RECIPE_NAME = "Chicken Soup";
 
+    public static final String EXAMPLE_INGREDIENT_NAME = "Chicken";
+
     public static final String RANDOM_INPUT_RECIPE_NAME = "Foo";
 
-    public static IngredientList generateIngredientListForRecipe() {
-        Ingredient firstIngredient = new Ingredient("Chicken", 1,null);
-        Ingredient secondIngredient = new Ingredient("Salt", 20,null);
-        IngredientList ingredientsForRecipe = new IngredientList();
+    public static final String INGREDIENTS_TO_UPDATE_UNITS = "Chicken\nSalt\n";
+
+    public static void addIngredientsToRecipe(Recipe recipe) {
+        final IngredientRepository ingredientRepository = generateIngredientRepositoryForRecipe();
+        assert ingredientRepository != null;
         try {
-            ingredientsForRecipe.add(firstIngredient);
-            ingredientsForRecipe.add(secondIngredient);
-            return ingredientsForRecipe;
-        } catch (DuplicateDataException e) {
+            recipe.add("Chicken", 1, ingredientRepository);
+            recipe.add("Salt", 20, ingredientRepository);
+        } catch (DuplicateDataException | IllegalValueException e) {
             fail("Recipe should be valid by definition");
-            return null;
+        }
+    }
+
+    public static void addIngredientsWithoutUnitsToRecipe(Recipe recipe) {
+        final IngredientRepository ingredientRepository = generateIngredientRepositoryWithoutUnitsForRecipe();
+        assert ingredientRepository != null;
+        try {
+            recipe.add("Chicken", 1, ingredientRepository);
+            recipe.add("Salt", 20, ingredientRepository);
+        } catch (DuplicateDataException | IllegalValueException e) {
+            fail("Recipe should be valid by definition");
         }
     }
 
     public static Recipe generateRecipe() {
-        return new Recipe("Chicken Soup", generateIngredientListForRecipe());
+        final Recipe recipe = new Recipe("Chicken Soup");
+        addIngredientsToRecipe(recipe);
+        return recipe;
+    }
+
+    public static Recipe generateRecipeWithoutUnits() {
+        final Recipe recipe = new Recipe("Chicken Soup");
+        addIngredientsWithoutUnitsToRecipe(recipe);
+        return recipe;
+    }
+
+    public static ArrayList<String> generateIngredientNamesForRecipe() {
+        final ArrayList<String> ingredientNames = new ArrayList<>();
+        ingredientNames.add("Chicken");
+        ingredientNames.add("Salt");
+        return ingredientNames;
+    }
+
+    public static ArrayList<String> generateDuplicateIngredientNamesForRecipe() {
+        final ArrayList<String> ingredientNames = new ArrayList<>();
+        ingredientNames.add("Chicken");
+        ingredientNames.add("Chicken");
+        return ingredientNames;
+    }
+
+    public static ArrayList<Integer> generateQuantitiesForRecipe() {
+        final ArrayList<Integer> quantities = new ArrayList<>();
+        quantities.add(1);
+        quantities.add(20);
+        return quantities;
+    }
+
+    public static ArrayList<Integer> generateZeroQuantityForRecipe() {
+        final ArrayList<Integer> quantities = new ArrayList<>();
+        quantities.add(1);
+        quantities.add(0);
+        return quantities;
     }
 
     public static RecipeList generateRecipeList() {
@@ -47,34 +96,57 @@ public class TestUtil {
         }
     }
 
-    public static IngredientList generateIngredientList() {
-        LocalDate pastDate = LocalDate.of(2021,10,8);
-        LocalDate currentDate = LocalDate.now();
-        LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
-        LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);
+    public static RecipeList generateEmptyRecipeList() {
+        return new RecipeList();
+    }
 
-        //expired
-        Ingredient firstIngredient = new Ingredient("Red Apple", 1,pastDate);
-        //expiring
-        Ingredient secondIngredient = new Ingredient("Blue Apple", 2,currentDatePlusThreeDays);
-        //fresh
-        Ingredient thirdIngredient = new Ingredient("Green Apple", 3,currentDatePlusThreeWeeks);
-
-        IngredientList ingredientList = new IngredientList();
-
+    public static IngredientRepository generateIngredientRepositoryForRecipe() {
+        final IngredientRepository ingredientRepository = new IngredientRepository();
         try {
-            ingredientList.add(firstIngredient);
-            ingredientList.add(secondIngredient);
-            ingredientList.add(thirdIngredient);
-            return ingredientList;
+            ingredientRepository.add("Chicken", "grams");
+            ingredientRepository.add("Salt", "grams");
+            return ingredientRepository;
         } catch (DuplicateDataException e) {
-            fail("Ingredient List should be valid by definition");
+            fail("Ingredient repository should be valid by definition");
             return null;
         }
     }
 
-    public static IngredientList generateEmptyIngredientList() {
-        IngredientList ingredientList = new IngredientList();
-        return ingredientList;
+    public static IngredientRepository generateIngredientRepositoryWithoutUnitsForRecipe() {
+        final IngredientRepository ingredientRepository = new IngredientRepository();
+        try {
+            ingredientRepository.add("Chicken");
+            ingredientRepository.add("Salt");
+            return ingredientRepository;
+        } catch (DuplicateDataException e) {
+            fail("Ingredient repository should be valid by definition");
+            return null;
+        }
+    }
+
+    public static IngredientRepository generateIngredientRepository() {
+        final LocalDate pastDate = LocalDate.of(2021, 10, 8);
+        final LocalDate currentDate = LocalDate.now();
+        final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
+        final LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);
+
+        final IngredientRepository ingredientRepository = new IngredientRepository();
+
+        try {
+            //expired
+            ingredientRepository.add("Red Apple", null, 1, pastDate);
+            //expiring
+            ingredientRepository.add("Blue Apple", null, 2, currentDatePlusThreeDays);
+            //fresh
+            ingredientRepository.add("Green Apple", null, 3, currentDatePlusThreeWeeks);
+            return ingredientRepository;
+        } catch (DuplicateDataException e) {
+            fail("Ingredient repository should be valid by definition");
+            return null;
+        }
+    }
+
+    public static IngredientRepository generateEmptyIngredientRepository() {
+        return new IngredientRepository();
     }
 }

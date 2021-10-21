@@ -1,6 +1,6 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.NotFoundException;
@@ -29,7 +29,7 @@ public class ViewRecipeCommand extends Command {
     }
 
     @Override
-    public String execute(IngredientList ingredientList, RecipeList recipeList) {
+    public String execute(IngredientRepository ingredientRepository, RecipeList recipeList) {
         try {
             final Recipe recipe = recipeList.findRecipe(recipeDescription);
             return String.format(MESSAGE_SHOW_RECIPE, recipe);

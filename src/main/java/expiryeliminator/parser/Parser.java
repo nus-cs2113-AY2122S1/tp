@@ -21,18 +21,17 @@ import expiryeliminator.commands.ListIngredientsExpiredCommand;
 import expiryeliminator.commands.ListRecipeCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ViewRecipeCommand;
-import expiryeliminator.data.Ingredient;
-import expiryeliminator.data.IngredientList;
-import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
 import expiryeliminator.parser.argparser.QuantityParser;
 import expiryeliminator.parser.argparser.RecipeParser;
+import expiryeliminator.parser.argparser.UnitParser;
 import expiryeliminator.parser.exception.InvalidArgFormatException;
 import expiryeliminator.parser.exception.InvalidPrefixException;
 import expiryeliminator.parser.exception.MissingPrefixException;
 import expiryeliminator.parser.exception.MultipleArgsException;
 import expiryeliminator.parser.prefix.MultipleArgPrefix;
+import expiryeliminator.parser.prefix.OptionalArgPrefix;
 import expiryeliminator.parser.prefix.SingleArgPrefix;
 
 
@@ -53,6 +52,9 @@ public class Parser {
     private static final SingleArgPrefix PREFIX_INGREDIENT = new SingleArgPrefix("i");
     private static final SingleArgPrefix PREFIX_QUANTITY = new SingleArgPrefix("q");
     private static final SingleArgPrefix PREFIX_EXPIRY = new SingleArgPrefix("e");
+    private static final OptionalArgPrefix PREFIX_OPTIONAL_UNIT = new OptionalArgPrefix("u");
+    private static final OptionalArgPrefix PREFIX_OPTIONAL_QUANTITY = new OptionalArgPrefix(PREFIX_QUANTITY);
+    private static final OptionalArgPrefix PREFIX_OPTIONAL_EXPIRY = new OptionalArgPrefix(PREFIX_EXPIRY);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_INGREDIENT = new MultipleArgPrefix(PREFIX_INGREDIENT);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_QUANTITY = new MultipleArgPrefix(PREFIX_QUANTITY);
 
@@ -117,18 +119,30 @@ public class Parser {
     //@@author
 
     private static Command prepareAddIngredient(String args) throws InvalidArgFormatException {
-        final ArgParser argParser = new ArgParser(PREFIX_INGREDIENT, PREFIX_QUANTITY, PREFIX_EXPIRY);
+        final ArgParser argParser = new ArgParser(PREFIX_INGREDIENT, PREFIX_OPTIONAL_UNIT, PREFIX_OPTIONAL_QUANTITY,
+                PREFIX_OPTIONAL_EXPIRY);
         try {
             argParser.parse(args);
         } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIngredientCommand.MESSAGE_USAGE));
         }
+        final String unitString = argParser.getSingleArg(PREFIX_OPTIONAL_UNIT);
+        final String quantityString = argParser.getSingleArg(PREFIX_OPTIONAL_QUANTITY);
+        final String expiryString = argParser.getSingleArg(PREFIX_OPTIONAL_EXPIRY);
 
         final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
-        final int quantity = new QuantityParser().parse(argParser.getSingleArg(PREFIX_QUANTITY));
-        final LocalDate expiry = new ExpiryDateParser().parse(argParser.getSingleArg(PREFIX_EXPIRY));
-        return new AddIngredientCommand(ingredient, quantity, expiry);
+        final String unit = unitString == null ? null : new UnitParser().parse(unitString);
+
+        if (quantityString != null && expiryString != null) {
+            final int quantity = new QuantityParser().parse(quantityString);
+            final LocalDate expiry = new ExpiryDateParser().parse(expiryString);
+            return new AddIngredientCommand(ingredient, unit, quantity, expiry);
+        } else if (quantityString != null || expiryString != null) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIngredientCommand.MESSAGE_USAGE));
+        }
+        return new AddIngredientCommand(ingredient, unit);
     }
 
     private static Command prepareDecrementIngredient(String args) throws InvalidArgFormatException {
@@ -145,7 +159,7 @@ public class Parser {
     }
 
     private static Command prepareIncrementIngredient(String args) throws InvalidArgFormatException {
-        final ArgParser argParser = new ArgParser(PREFIX_INGREDIENT, PREFIX_QUANTITY);
+        final ArgParser argParser = new ArgParser(PREFIX_INGREDIENT, PREFIX_QUANTITY, PREFIX_EXPIRY);
         try {
             argParser.parse(args);
         } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
@@ -154,7 +168,8 @@ public class Parser {
 
         final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
         final int quantity = new QuantityParser().parse(argParser.getSingleArg(PREFIX_QUANTITY));
-        return new IncrementCommand(ingredient, quantity);
+        final LocalDate expiry = new ExpiryDateParser().parse(argParser.getSingleArg(PREFIX_EXPIRY));
+        return new IncrementCommand(ingredient, quantity, expiry);
     }
 
     private static Command prepareDeleteIngredient(String args) throws InvalidArgFormatException {
@@ -190,13 +205,12 @@ public class Parser {
                 new IngredientParser().parse(argParser.getArgList(PREFIX_MULTIPLE_INGREDIENT));
         final ArrayList<Integer> quantities =
                 new QuantityParser().parse(argParser.getArgList(PREFIX_MULTIPLE_QUANTITY));
-        final IngredientList ingredientList = new IngredientList();
-        final IncorrectCommand error = addIngredients(ingredients, quantities, ingredientList);
-        if (error != null) {
-            return error;
+
+        if (ingredients.size() != quantities.size()) {
+            return new IncorrectCommand("Should have same number of ingredient names and quantities");
         }
         assert !recipe.isBlank();
-        return new AddRecipeCommand(recipe, ingredientList);
+        return new AddRecipeCommand(recipe, ingredients, quantities);
     }
 
     /**
@@ -217,35 +231,6 @@ public class Parser {
         final String recipe = new RecipeParser().parse(argParser.getSingleArg(PREFIX_RECIPE));
         assert !recipe.isBlank();
         return new DeleteRecipeCommand(recipe);
-    }
-
-    /**
-     * Adds the ingredients into the ingredient list.
-     *
-     * @param ingredientNames Array of name of ingredients
-     * @param quantities Array of quantity of ingredients
-     * @param ingredients Ingredient list to store the ingredients
-     * @return null if there's no error and an IncorrectCommand if there is.
-     */
-    private static IncorrectCommand addIngredients(ArrayList<String> ingredientNames, ArrayList<Integer> quantities,
-                                                   IngredientList ingredients) {
-        if (ingredientNames.size() != quantities.size()) {
-            return new IncorrectCommand("Should have same number of ingredient names and quantities");
-        }
-        for (int i = 0; i < ingredientNames.size(); i++) {
-            if (quantities.get(i) == 0) {
-                return new IncorrectCommand("Quantity of ingredients for recipe cannot be zero.");
-            }
-            Ingredient ingredient = new Ingredient(ingredientNames.get(i), quantities.get(i), null);
-            assert !ingredientNames.get(i).isBlank();
-            assert quantities.get(i) != null && quantities.get(i) != 0;
-            try {
-                ingredients.add(ingredient);
-            } catch (DuplicateDataException e) {
-                return new IncorrectCommand(MESSAGE_INVALID_COMMAND_FORMAT);
-            }
-        }
-        return null;
     }
 
     private static Command prepareViewIngredient(String args) throws InvalidArgFormatException {

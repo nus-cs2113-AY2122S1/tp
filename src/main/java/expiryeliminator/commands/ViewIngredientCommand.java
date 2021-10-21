@@ -1,7 +1,7 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.Ingredient;
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.NotFoundException;
 
@@ -19,22 +19,22 @@ public class ViewIngredientCommand extends Command {
     public static final String MESSAGE_SHOW_INGREDIENT = "Here is the ingredient in your list:\n" + "\n%1$s\n";
     public static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
 
-    private final String ingredientDescription;
+    private final String ingredientName;
 
     /**
      * Initialises command and stores relevant parameters.
      *
-     * @param ingredientDescription Name of ingredient to find.
+     * @param ingredientName Name of ingredient to find.
      */
-    public ViewIngredientCommand(String ingredientDescription) {
-        assert ingredientDescription != null && !ingredientDescription.isBlank();
-        this.ingredientDescription = ingredientDescription;
+    public ViewIngredientCommand(String ingredientName) {
+        assert ingredientName != null && !ingredientName.isBlank();
+        this.ingredientName = ingredientName;
     }
 
     @Override
-    public String execute(IngredientList ingredientList, RecipeList recipes) {
+    public String execute(IngredientRepository ingredientRepository, RecipeList recipes) {
         try {
-            final Ingredient ingredient = ingredientList.find(ingredientDescription);
+            final IngredientStorage ingredient = ingredientRepository.find(ingredientName);
             return String.format(MESSAGE_SHOW_INGREDIENT, ingredient);
         } catch (NotFoundException e) {
             return MESSAGE_INGREDIENT_NOT_FOUND;

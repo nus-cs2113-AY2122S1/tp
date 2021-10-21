@@ -1,22 +1,23 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.IngredientList;
-import expiryeliminator.util.TestUtil;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.util.TestUtil;
 
 public class ListIngredientsExpiringCommandTest {
 
     @Test
-    public void listIngredientsExpiringCommand_sampleIngredientList_expectExpiringIngredientString() {
-        IngredientList ingredientList = TestUtil.generateIngredientList();
-        assert ingredientList != null;
+    public void listIngredientsExpiringCommand_sampleIngredientRepository_expectExpiringIngredientString() {
+        IngredientRepository ingredientRepository = TestUtil.generateIngredientRepository();
+        assert ingredientRepository != null;
         Command command = new ListIngredientExpiringCommand();
-        String message =  String.format(ListIngredientExpiringCommand.MESSAGE_SHOW_WHOLE_LIST,
-                ingredientList.findExpiringIngredients());
+        String message = String.format(ListIngredientExpiringCommand.MESSAGE_SHOW_WHOLE_LIST,
+                ingredientRepository.findExpiringIngredients());
 
-        assertEquals(command.execute(ingredientList, null), message);
+        assertEquals(command.execute(ingredientRepository, null), message);
     }
 
 

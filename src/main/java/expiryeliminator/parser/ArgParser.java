@@ -10,6 +10,7 @@ import expiryeliminator.parser.exception.InvalidPrefixException;
 import expiryeliminator.parser.exception.MissingPrefixException;
 import expiryeliminator.parser.exception.MultipleArgsException;
 import expiryeliminator.parser.prefix.MultipleArgPrefix;
+import expiryeliminator.parser.prefix.OptionalArgPrefix;
 import expiryeliminator.parser.prefix.Prefix;
 import expiryeliminator.parser.prefix.SingleArgPrefix;
 
@@ -82,7 +83,7 @@ public class ArgParser {
     private void checkAllArgsPresent() throws MissingPrefixException, MultipleArgsException {
         for (Prefix prefix : prefixList) {
             final ArrayList<String> argList = prefixesToArgs.get(prefix.getPrefix());
-            if (argList.size() == 0) {
+            if (!(prefix instanceof OptionalArgPrefix) && argList.size() == 0) {
                 throw new MissingPrefixException(prefix);
             }
             if (prefix instanceof SingleArgPrefix && argList.size() > 1) {
@@ -95,15 +96,20 @@ public class ArgParser {
      * Returns the arg that corresponds to the given prefix.
      *
      * @param prefix Single arg prefix.
-     * @return Arg that corresponds to the given prefix.
+     * @return Arg that corresponds to the given prefix, or null if there is none (only for optional args).
      */
     public String getSingleArg(SingleArgPrefix prefix) {
         assert prefix != null && prefixList.contains(prefix)
                 : "Prefix cannot be null and must be present in the arg parser's prefix list";
         final ArrayList<String> argList = prefixesToArgs.get(prefix.getPrefix());
         assert argList != null
-                : "Arg list should not be null because we should have already checked that all args are present";
-        assert argList.size() == 1 : "There should be one arg because we should have already checked that beforehand";
+                : "Arg list should not be null because we should have already initialised with an empty array list";
+        if (prefix instanceof OptionalArgPrefix) {
+            if (argList.size() == 0) {
+                return null;
+            }
+        }
+        assert argList.size() == 1 : "There should be one arg because we should have eliminated all other cases";
         return argList.get(0);
     }
 
@@ -118,7 +124,7 @@ public class ArgParser {
                 : "Prefix cannot be null and must be present in the arg parser's prefix list";
         final ArrayList<String> argList = prefixesToArgs.get(prefix.getPrefix());
         assert argList != null
-                : "Arg list should not be null because we should have already checked that all args are present";
+                : "Arg list should not be null because we should have already initialised with an empty array list";
         return argList;
     }
 }

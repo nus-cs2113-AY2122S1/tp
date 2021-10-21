@@ -13,6 +13,8 @@ add i/Red Apple q/5 e/2021-12-25
 list
 add i/Green Apple q/3 e/2021-12-14
 list
+add i/Flour u/grams
+list
 
 
 increment i/Red Apple
@@ -20,7 +22,7 @@ increment q/3
 increment i/Red Apple q/three
 increment i/James Gosling
 
-increment i/Red Apple q/3
+increment i/Red Apple q/3 e/2021-12-01
 list
 
 
@@ -30,7 +32,7 @@ decrement i/Red Apple q/five
 decrement i/James Gosling
 decrement i/Red Apple q/100
 
-decrement i/Red Apple q/5
+decrement i/Red Apple q/4
 list
 
 
@@ -41,21 +43,17 @@ view i/Red     Apple
 view i/James Gosling
 
 
-delete i/Red Apple
-delete i/James Gosling
-list
-
-
 add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple
 add recipe r/Apple Pie i/Red Apple q/4 q/4
 add recipe r/Apple Pie
 add recipe i/Red Apple q/4 i/Green Apple q/4
 add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple q/0
 add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple q/four
+add recipe r/Apple Pie i/Red Apple q/4 i/Blue Apple q/4
 
 add recipe r/Apple Pie i/Red Apple q/4 i/Green Apple q/4
 list recipes
-add recipe r/Apple Cake i/Red Apple q/2 i/Green Apple q/2
+add recipe r/Apple Cake i/Red Apple q/2 i/Green Apple q/2 i/Flour q/400
 list recipes
 
 
@@ -64,8 +62,14 @@ view recipe r/James Gosling
 
 
 delete recipe r/Apple Pie
+delete recipe r/Apple Cake
 delete recipe r/James Gosling
 list recipes
+
+
+delete i/Red Apple
+delete i/James Gosling
+list
 
 
 bye

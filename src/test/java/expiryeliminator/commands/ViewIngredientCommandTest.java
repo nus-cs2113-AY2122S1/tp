@@ -1,26 +1,31 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.Ingredient;
-import expiryeliminator.data.IngredientList;
-import expiryeliminator.util.TestUtil;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientStorage;
+import expiryeliminator.data.exception.NotFoundException;
+import expiryeliminator.util.TestUtil;
 
 public class ViewIngredientCommandTest {
 
     @Test
-    public void viewIngredientCommand_sampleIngredientList_expectRedAppleString() {
-        IngredientList ingredientList = TestUtil.generateIngredientList();
-        assert ingredientList != null;
+    public void viewIngredientCommand_sampleIngredientRepository_expectRedAppleString() {
+        IngredientRepository ingredientRepository = TestUtil.generateIngredientRepository();
+        assert ingredientRepository != null;
         Command command = new ViewIngredientCommand("Red Apple");
 
-        LocalDate pastDate = LocalDate.of(2021,10,8);
-        Ingredient ingredient = new Ingredient("Red Apple", 1,pastDate);
-        String message =  String.format(ViewIngredientCommand.MESSAGE_SHOW_INGREDIENT, ingredient);
+        IngredientStorage ingredientStorage = null;
+        try {
+            ingredientStorage = ingredientRepository.find("Red Apple");
+        } catch (NotFoundException e) {
+            fail("Ingredient should exist by definition");
+        }
+        String message = String.format(ViewIngredientCommand.MESSAGE_SHOW_INGREDIENT, ingredientStorage);
 
-        assertEquals(command.execute(ingredientList, null), message);
+        assertEquals(command.execute(ingredientRepository, null), message);
     }
 }

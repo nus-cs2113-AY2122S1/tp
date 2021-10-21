@@ -1,6 +1,6 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
 
@@ -19,8 +19,8 @@ public class ListIngredientExpiringCommand extends Command {
             + "\n%1$s\n";
 
     @Override
-    public String execute(IngredientList ingredientList, RecipeList recipes) {
-        return String.format(MESSAGE_SHOW_WHOLE_LIST, ingredientList.findExpiringIngredients());
+    public String execute(IngredientRepository ingredientRepository, RecipeList recipes) {
+        return String.format(MESSAGE_SHOW_WHOLE_LIST, ingredientRepository.findExpiringIngredients());
 
     }
 }

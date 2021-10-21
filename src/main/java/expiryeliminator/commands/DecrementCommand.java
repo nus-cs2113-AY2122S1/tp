@@ -1,8 +1,9 @@
 package expiryeliminator.commands;
 
-import expiryeliminator.data.Ingredient;
-import expiryeliminator.data.IngredientList;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
+import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
 
 /**
@@ -18,8 +19,9 @@ public class DecrementCommand extends Command {
 
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
     private static final String MESSAGE_QUANTITY_NEGATIVE = "Sorry, you currently only have %1$s of this ingredient.\n"
-            + "You cannot decrease it by %2$s.\n" + "%3$s";
-    private static final String MESSAGE_INGREDIENT_DECREMENTED = "I've decremented this ingredient by %1$s:\n" + "%2$s";
+            + "You cannot decrease it by %2$s.\n" + "\n%3$s";
+    private static final String MESSAGE_INGREDIENT_DECREMENTED = "I've decremented this ingredient by %1$s:\n"
+            + "\n%2$s";
 
     private final String ingredientName;
     private final int quantity;
@@ -39,19 +41,20 @@ public class DecrementCommand extends Command {
     }
 
     @Override
-    public String execute(IngredientList ingredients, RecipeList recipes) {
-        assert ingredients != null : "Ingredient list cannot be null";
-        final Ingredient ingredient;
+    public String execute(IngredientRepository ingredients, RecipeList recipes) {
+        assert ingredients != null : "Ingredient repository cannot be null";
+        final IngredientStorage ingredientStorage;
         try {
-            ingredient = ingredients.find(ingredientName);
+            ingredientStorage = ingredients.find(ingredientName);
         } catch (NotFoundException e) {
             return MESSAGE_INGREDIENT_NOT_FOUND;
         }
-        final int newQuantity = ingredient.getQuantity() - quantity;
-        if (newQuantity < 0) {
-            return String.format(MESSAGE_QUANTITY_NEGATIVE, ingredient.getQuantity(), quantity, ingredient);
+        try {
+            ingredientStorage.remove(quantity);
+        } catch (IllegalValueException e) {
+            return String.format(MESSAGE_QUANTITY_NEGATIVE, ingredientStorage.getQuantity(), quantity,
+                    ingredientStorage);
         }
-        ingredient.setQuantity(newQuantity);
-        return String.format(MESSAGE_INGREDIENT_DECREMENTED, quantity, ingredient);
+        return String.format(MESSAGE_INGREDIENT_DECREMENTED, quantity, ingredientStorage);
     }
 }
