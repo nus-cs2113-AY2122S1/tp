@@ -102,7 +102,7 @@ Below is a partial class diagram of the `IngredientList` component
 
 The `IngredientList` class 
 * receives stored data(if any) from `Storage` when the first command is executed
-* stores all of the `Ingredient` objects in an ArrayList. 
+* stores each group of `Ingredient` objects in `IngredientGroup`, grouped by their `name`
 * sends the stored data to the `Storage` class for storage after command execution 
 
 Each of the `Ingredient` objects contains information about an ingredient, namely its `name`, `amount` in stock and the `expiry` date.
@@ -137,29 +137,42 @@ The package consists of an abstract class `command` and `classes` corresponding 
 
 ### 4.1. Alerts
 
-On startup, the `Alerts` class is instantiated and its `getAlerts()` method is called. There are 2 types of alerts:
+Alerts are displayed automatically on startup, and when the user enters the command to display alerts. There are 3 types of commands:
+* `alerts all`: displays alerts for both alert types below
+* `alerts expiry`: displays alerts for ingredients expiring within a threshold number of days
+* `alerts stock`: displays alerts for ingredients with stock lower than a threshold amount
 
-1. `getExpiryAlerts()` - gets a list of expiring products 
-2. `getLowStockAlerts()` - gets a list of running low products
+The user is able to call any of the 3 methods on their own, while on startup, the `alerts all` command is automatically called via the `AlertCommand` class.
 
-These 2 alert functions are called in order, with the list obtained from the ingredient list loaded from storage. The process is as follows:
+The sequence diagram for when the user inputs `alerts all` is shown below.
 
-Step 1: The User launches the application and the `Alerts` class is instantiated.
+![image](images/AlertsAllSequenceDiagram.png)
 
-Step 2: The application calls the `getAlerts()` method, which executes `getExpiryAlerts()` and `getLowStockAlerts()`.
+All constructors for the command classes are called right before the relevant `run()` methods, as in `new XXXCommand().run()`. These are not shown in the diagram for simplicity. 
 
-Step 3: The `getExpiryAlerts()` method creates an instance of the `IngredientList` class when trying to get an instance of it.
+The `alerts all` command is passed into the `parser` class's `parse` command, which invokes the `parseAlertsCommand` method.
 
-Step 4: The `IngredientList` class calls on the `storage` class to `load()` the saved data, if it exists.
+Next, an `AlertCommand` class is instantiated and `run` is called. This further calls 2 classes and runs them
+1. The `AlertExpiringSoonCommand` class: Returns a list of ingredients expiring by a calculated date 
+2. The `AlertLowStockCommand` class: Returns a list of ingredients with stock lesser than the threshold 
 
-Step 5: The `IngredientList` class loops through the loaded list to obtain a list of expiring ingredients and returns it to `getExpiryAlerts()`. If there is no data stored, then it returns nothing.
+Each of the classes returns a String after `run`, which the `AlertCommand` class sends back to the parser to be returned.
 
-Step 6: The `getLowStockAlerts()` method is called, the `IngredientList` instance returns a list of low stock ingredients. If there is no data, it returns nothing.
+The sequence diagram for the `AlertExpiringSoonCommand.run()` is shown below. The user can also call this via `alerts expiry`
 
-Step 7: The `getAlerts()` method sends the data to the UI to display to the user.
+![image](images/AlertExpirySequenceDiagram.png)
 
+The current date is obtained via the `CurrentDate` class, with which the threshold number of days is added to obtain the threshold date.
 
+The expiry date of `Ingredient` object in each `IngredientGroup` in the `IngredientList` class is taken and compared to the threshold date. 
+The information of the `Ingredient` is taken note of to be printed when the function returns.
 
+For `AlertLowStockCommand`, it is less complicated, and the sequence diagram shown below. The user can also call this via `alerts stock`
+
+![image](images/AlertStockSequenceDiagram.png)
+
+The `totalAmount` for each `IngredientGroup` in the `IngredientList` is obtained and compared to the threshold amount. The 
+information of the `IngredientGroup` is taken note of to be printed when the function is returned.
 
 
 ## Product scope
