@@ -16,6 +16,11 @@ import java.util.Date;
 
 public class AddParser {
 
+    private static final String EMPTY_INTERVAL =
+            "Please provide an interval of for how often you wish to carry out this habit eg. #1 for daily.";
+    private static final String INVALID_INTERVAL =
+            "Please enter a valid integer for your interval value.";
+
     public static Command parseAddGoalCommand(String commandInstruction) throws HaBitParserException {
         checkNoDescription(commandInstruction);
         GoalType goalType = getTypeFlag(commandInstruction);
@@ -31,7 +36,8 @@ public class AddParser {
         checkNoDescription(commandInstruction);
         int goalIndex = getGoalIndex(commandInstruction);
         String habitName = getHabitDescription(commandInstruction);
-        Habit habit = new Habit(habitName);
+        int interval = getHabitInterval(commandInstruction);
+        Habit habit = new Habit(habitName, interval);
         return new AddHabitCommand(habit, goalIndex);
     }
 
@@ -114,8 +120,9 @@ public class AddParser {
         String[] improperFlagArray = {" -sl", " -fd", " -ex", " -sd", " -df",
             "-sl ", "-fd ", "-ex ", "-sd ", "-df ",
             "-sl", "-fd", "-ex", "-sd", "-df"};
-        if (countInstancesInString(input, improperFlagArray) != 0) {
-            throw new HaBitParserException("Flags should be defined with a space before and after.");
+        int flagCount = countInstancesInString(input, improperFlagArray);
+        if (flagCount == 1 || flagCount == 2) {
+            throw new HaBitParserException("Flags should be defined after name and before date with spaces.");
         }
     }
 
@@ -360,9 +367,10 @@ public class AddParser {
      * @throws HaBitParserException If habit description (name) is empty.
      */
     private static String getHabitDescription(String input) throws HaBitParserException {
+        // description is up to '/' indicating interval
         String description;
         try {
-            description = input.substring(input.indexOf(' '));
+            description = input.substring(input.indexOf(' '), input.indexOf('#')).trim();
         } catch (StringIndexOutOfBoundsException e) {
             throw new HaBitParserException("Habit name cannot be empty.");
         }
@@ -370,6 +378,21 @@ public class AddParser {
             throw new HaBitParserException("Habit name cannot be empty.");
         }
         return description;
+    }
+
+    private static int getHabitInterval(String input) throws HaBitParserException {
+        // get everything behind '#'
+        int interval;
+        try {
+            String intervalString = input.substring(input.indexOf('#') + 1).trim();
+            interval = Integer.parseInt(intervalString);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new HaBitParserException(EMPTY_INTERVAL);
+        } catch (NumberFormatException e) {
+            throw new HaBitParserException(INVALID_INTERVAL);
+        }
+
+        return interval;
     }
 
 }
