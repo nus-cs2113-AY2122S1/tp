@@ -77,11 +77,17 @@ public class AddCommandParser {
         case Constants.FLAG_MAP:
             argumentsSubstrings = arguments.trim().split(" ", 3);
             int uniIndex = Integer.parseInt(argumentsSubstrings[1].trim());
+            int modIndex = Integer.parseInt(argumentsSubstrings[2].trim());
             if (argumentsSubstrings.length < 3) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
             }
-            int mapIndex = Integer.parseInt(argumentsSubstrings[2].trim());
-            return new AddMapCommand(uniIndex, mapIndex, universityMasterList,
+            University university = universityMasterList.get(uniIndex - 1);
+            Module moduleToMap = moduleMasterList.get(modIndex - 1);
+            Module mappedModule = university.getMappedModule(moduleToMap, moduleSelectedList);
+            if (mappedModule == null) {
+                throw new ParseException("There is no available module mapping.", 1);
+            }
+            return new AddMapCommand(uniIndex, modIndex, universityMasterList,
                     moduleMasterList, universitySelectedList, moduleSelectedList);
         default:
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);

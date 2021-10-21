@@ -25,7 +25,7 @@ public class Ui {
     public static void printModuleMapping(ModuleMapping mm, int index) {
         printIndex(index, false);
         String mappingDetails
-                = " " + mm.mappedModule.getModuleCode()
+                = " " + mm.localModule.getModuleCode()
                 + Constants.MODULE_MAPPING_SEPARATOR + mm.mappedModule.getModuleCode()
                 + Constants.MODULE_NAME_SEPARATOR + mm.mappedModule.getModuleName();
         System.out.println(mappingDetails);
