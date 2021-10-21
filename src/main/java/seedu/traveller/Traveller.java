@@ -38,6 +38,7 @@ public class Traveller {
     }
 
     public static void main(String[] args) {
+
         LogManager.getLogManager().reset();
         Traveller traveller = new Traveller();
         WorldMap.initWorldMap();
