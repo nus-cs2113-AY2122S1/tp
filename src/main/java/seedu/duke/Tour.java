@@ -22,4 +22,12 @@ public class Tour {
     public String getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+
+        return "Tour code: " + code + System.lineSeparator()
+                + "Tour name: " + name + System.lineSeparator()
+                + "Tour price: " + price;
+    }
 }

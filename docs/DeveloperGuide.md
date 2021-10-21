@@ -79,10 +79,17 @@ extractValue(/n Hokkaido-A) --> Hokkaido-A
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+|Priority| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|`* * *`|new user|see usage instructions|refer to them when I forget how to use the application|
+|`* * *`|user|add a new client| |
+|`* * *`|user|delete a new client|remove clients that cancelled their travel plans|
+|`* * *`|user|add a new tour package|update the tour package database|
+|`* * *`|user|delete a tour package|update the tour package database|
+|`* * *`|user|add flight timings|keep track of flights|
+
 
 ## Non-Functional Requirements
 

@@ -34,4 +34,14 @@ public class Flight {
     public String getFromDate() {
         return fromDate;
     }
+
+    @Override
+    public String toString() {
+
+        return "Flight's id: " + id + System.lineSeparator()
+                + "Flight's to destination: " + toDestination + System.lineSeparator()
+                + "Client's from destination: " + fromDestination + System.lineSeparator()
+                + "Client's to date: " + toDate + System.lineSeparator()
+                + "Client's from date: " + fromDate;
+    }
 }

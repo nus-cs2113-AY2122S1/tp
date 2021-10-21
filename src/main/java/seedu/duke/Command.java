@@ -11,7 +11,7 @@ public abstract class Command {
      * @param clients the existing list of clients
      * @param ui      user interface of TourPlanner
      */
-    public abstract void execute(ClientList clients, Ui ui);
+    public abstract void execute(ClientList clients, FlightList flights, TourList tours, Ui ui);
 
     /**
      * Function that controls the exit condition of the loop.

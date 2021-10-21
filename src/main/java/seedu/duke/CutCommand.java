@@ -22,7 +22,7 @@ public class CutCommand extends Command {
      * @param ui      user interface of TourPlanner
      */
     @Override
-    public void execute(ClientList clients, Ui ui) {
+    public void execute(ClientList clients, FlightList flights, TourList tours, Ui ui) {
         try {
             int newClientCount = clients.getClientCount() - 1;
             clients.cut(clientIndex, ui);
