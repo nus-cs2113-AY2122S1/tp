@@ -72,7 +72,8 @@ public class ContactsDecoder extends RegexParser {
             ExceptionTextUi.invalidFlagMessage();
         } catch (InvalidGithubUsernameException | InvalidNameException | InvalidTelegramUsernameException
                 | InvalidLinkedinUsernameException | InvalidTwitterUsernameException | InvalidEmailException e) {
-
+            // For @lezongmun, from @marcusbory
+            ExceptionTextUi.invalidNameInput();
         }
         return personalContact;
     }

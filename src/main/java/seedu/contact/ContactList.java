@@ -66,8 +66,8 @@ public class ContactList {
     //@@author ng-andre
     private boolean hasDetailMatches(String query, int detailType, int index, Contact contact) {
         String[] contactStringArray = contact.getContactStringArray();
-        if (contactStringArray[detailType] != null &&
-                contactStringArray[detailType].toLowerCase().contains(query)) {
+        if (contactStringArray[detailType] != null
+                && contactStringArray[detailType].toLowerCase().contains(query)) {
             TextUi.viewContactMessage(contact, index);
             return true;
         }
@@ -79,7 +79,7 @@ public class ContactList {
         int matches = 0;
         for (int i = 0; i < contacts.size(); i++) {
             Contact contact = getContactAtIndex(i);
-            if(hasDetailMatches(query, detailType, i, contact)) {
+            if (hasDetailMatches(query, detailType, i, contact)) {
                 matches++;
             }
         }
