@@ -305,6 +305,7 @@ public class Parser {
             double payerAmount = amountBeingPaid.get(payer) + (expense.getAmountSpent() - total);
             amountBeingPaid.put(payer, payerAmount);
         }
+        assignAmounts(payer, expense, amountBeingPaid);
     }
 
     private static void assignAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid) {
