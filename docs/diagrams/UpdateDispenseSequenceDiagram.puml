@@ -1,0 +1,67 @@
+@startuml UpdateDispenseSequenceDiagram
+'https://plantuml.com/sequence-diagram
+
+!include style.puml
+
+box Command COLOR_COMMAND_BOX
+    participant ":UpdateDispense" as updatedispense COLOR_COMMAND
+end box
+
+box Inventory COLOR_INVENTORY_BOX
+    participant "<<class>>\n:Medicine" as medicine COLOR_INVENTORY
+end box
+
+box Utilities COLOR_UTILITIES_BOX
+    participant "<<class>>\n:Ui" as ui COLOR_UTILITIES
+    participant ":DispenseValidator" as dispensevalidator COLOR_UTILITIES
+    participant ":StockValidator" as stockvalidator COLOR_UTILITIES
+    participant "<<class>>\n:DispenseManager" as dispensemanager COLOR_UTILITIES
+    participant "<<class>>\n:Storage" as storage COLOR_UTILITIES
+end box
+
+autoactivate on
+
+-> updatedispense: execute()
+    updatedispense -> ui: getInstance()
+    updatedispense <-- ui
+    create dispensevalidator
+    updatedispense -> dispensevalidator: new DispenseValidator()
+    updatedispense <-- dispensevalidator
+    updatedispense -> dispensevalidator: containsInvalidParameters()
+    updatedispense <-- dispensevalidator: isInvalidParameter
+    opt !isInvalidParameter
+        updatedispense -> medicine: getInstance()
+        updatedispense <-- medicine
+        updatedispense -> dispensevalidator: containsInvalidParameterValues()
+        updatedispense <-- dispensevalidator: isInvalidParameterValues
+        opt !isInvalidParameterValues
+            updatedispense -> dispensemanager: extractDispenseObject()
+            updatedispense <-- dispensemanager
+            create stockvalidator
+            updatedispense -> stockvalidator: new StockValidator()
+            updatedispense <-- stockvalidator
+            alt hasNameParam && hasQuantityParam
+                updatedispense -> updatedispense: processGivenNameAndQuantity()
+                updatedispense --> updatedispense: isSuccessfulUpdate
+            else hasNameParam && !hasQuantityParam
+                updatedispense -> updatedispense: processGivenName()
+                updatedispense --> updatedispense: isSuccessfulUpdate
+            else !hasNameParam && hasQuantityParam
+                updatedispense -> updatedispense: processGivenQuantity()
+                updatedispense --> updatedispense: isSuccessfulUpdate
+            else containsParamOtherThanNameAndQuantity
+                updatedispense -> updatedispense: processOtherFields()
+                updatedispense --> updatedispense: isSuccessfulUpdate
+            end
+
+            opt isSuccessfulUpdate
+                updatedispense -> storage: getInstance()
+                updatedispense <-- storage
+                updatedispense -> storage: saveData()
+                updatedispense <-- storage
+            end
+        end
+    end
+
+
+@enduml
