@@ -42,7 +42,7 @@ public class IngredientStorage {
     }
 
     /**
-     * Returns the total quantity of the ingredient.
+     * Returns the different batches of ingredients and their respective quantity and expiry date.
      *
      * @return The different batches of the ingredient
      */

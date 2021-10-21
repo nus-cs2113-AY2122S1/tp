@@ -1,11 +1,11 @@
 package expiryeliminator.commands;
 
 import expiryeliminator.data.IngredientRepository;
-import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.RecipeList;
-import expiryeliminator.data.exception.IllegalValueException;
-import expiryeliminator.data.exception.NotFoundException;
 
+/**
+ * Deletes all expired ingredients one shot
+ */
 public class DeleteExpiredIngredientCommand extends Command {
 
     /** Unique word associated with the command. */

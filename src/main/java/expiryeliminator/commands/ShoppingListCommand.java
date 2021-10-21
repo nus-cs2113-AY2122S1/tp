@@ -5,9 +5,12 @@ import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
-
 import java.util.ArrayList;
 
+
+/**
+ * Lists ingredients required to be bought depending on recipe/recipes user choosees to make
+ */
 public class ShoppingListCommand extends Command{
 
     /** Unique word associated with the command. */
@@ -16,11 +19,15 @@ public class ShoppingListCommand extends Command{
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SHOW_SHOPPING_LIST = "Here is your shopping list!\n";
-    public static final String MESSAGE_EMPTY_SHOPPING_LIST = "Your shopping list is empty!";
     public static final String MESSAGE_RECIPE_NOT_FOUND = "Sorry. No matching recipes found!";
 
     private final ArrayList<String> recipeDescriptions;
 
+    /**
+     * Initialises command and stores relevant parameter.
+     *
+     * @param recipeDescriptions Name of recipe/recipes user wants to generate shopping list for.
+     */
     public ShoppingListCommand(ArrayList<String> recipeDescriptions) {
         this.recipeDescriptions = recipeDescriptions;
     }
@@ -34,7 +41,7 @@ public class ShoppingListCommand extends Command{
                 recipeList.add(recipe);
             }
             String shoppingList = ingredients.generateShoppingList(recipeList);
-            return shoppingList;
+            return (MESSAGE_SHOW_SHOPPING_LIST + "\n" + shoppingList);
         } catch (NotFoundException | IllegalValueException e) {
             return MESSAGE_RECIPE_NOT_FOUND;
         }
