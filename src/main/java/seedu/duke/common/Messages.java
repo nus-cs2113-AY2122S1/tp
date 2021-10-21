@@ -11,5 +11,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_LIST_COMMAND = "Parameters of list command entered is invalid\n%1$s";
     public static final String MESSAGE_INVALID_DELETE_COMMAND = "Parameters of delete command entered is invalid\n%1$s";
     public static final String MESSAGE_INVALID_COMMAND = "Sorry, I did not understand your command.";
+    public static final String MESSAGE_EXIT = "Bye, see you again soon!";
 
 }
