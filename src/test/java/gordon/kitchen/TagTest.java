@@ -99,7 +99,12 @@ public class TagTest {
                 + "tag / Duck Rice / Hawker Food + Poultry"
                 + System.lineSeparator()
                 + "listTags";
-        String expected = "1. Hawker Food\n2. Poultry\n3. Favorite\n";
+        String expected = "1. Hawker Food"
+                + System.lineSeparator()
+                +"2. Poultry"
+                + System.lineSeparator()
+                + "3. Favorite"
+                + System.lineSeparator();
         inputOutputTest(input,expected);
     }
 
@@ -130,7 +135,12 @@ public class TagTest {
                 + "tag / Duck Rice / Hawker Food + Poultry"
                 + System.lineSeparator()
                 + "find /tag Hawker Food + Poultry";
-        String expected = "Searching by tags...\n1. Chicken Rice\n2. Duck Rice\n";
+        String expected = "Searching by tags..."
+                + System.lineSeparator()
+                + "1. Chicken Rice"
+                + System.lineSeparator()
+                + "2. Duck Rice"
+                + System.lineSeparator();
         inputOutputTest(input,expected);
     }
 
@@ -183,7 +193,8 @@ public class TagTest {
                 + System.lineSeparator()
                 + "1. Favorite"
                 + System.lineSeparator()
-                + "====================\n";
+                + "===================="
+                + System.lineSeparator();
         inputOutputTest(input,expected);
     }
 
@@ -196,7 +207,12 @@ public class TagTest {
                 + "untag / Chicken Rice / Hawker Food + Poultry"
                 + System.lineSeparator()
                 + "listTags";
-        String expected = "1. Hawker Food\n2. Favorite\n3. Poultry\n";
+        String expected = "1. Hawker Food"
+                + System.lineSeparator()
+                + "2. Favorite"
+                + System.lineSeparator()
+                + "3. Poultry"
+                + System.lineSeparator();
         inputOutputTest(input,expected);
     }
 
@@ -251,7 +267,8 @@ public class TagTest {
                 + System.lineSeparator()
                 + "1. Poultry"
                 + System.lineSeparator()
-                + "====================\n";
+                + "===================="
+                + System.lineSeparator();
         inputOutputTest(input,expected);
     }
 }
