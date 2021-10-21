@@ -7,7 +7,6 @@ import seedu.exception.FileErrorException;
 import seedu.parser.MainParser;
 import seedu.storage.ContactsEncoder;
 import seedu.storage.Storage;
-import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
 import seedu.ui.UserInputTextUi;
 

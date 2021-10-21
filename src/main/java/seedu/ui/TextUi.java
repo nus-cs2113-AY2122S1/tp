@@ -42,7 +42,7 @@ public abstract class TextUi {
     public static void welcomeBackMessage(Contact personalContact) {
         printDoubleLineMessage(LOGO);
         String message = "Hello, " + personalContact.getName() + ". \nWelcome back to ConTech, "
-                + "your personal \ncontact tracker.";
+                + "your personal contact tracker.";
         printBottomLineMessage(message);
     }
 
