@@ -1,0 +1,17 @@
+@startuml
+!include Style.puml
+skinparam ArrowColor LOGIC_BLUE_5
+skinparam classBorderColor LOGIC_BLUE_4
+skinparam classBackgroundColor LOGIC_BLUE_1
+
+rectangle "Command" {
+    class Command
+}
+
+rectangle "Kitchen" {
+    class Cookbook
+    class Recipe
+
+    Recipe --> Command
+    Cookbook *- Recipe
+@enduml
