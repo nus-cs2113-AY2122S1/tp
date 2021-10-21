@@ -11,15 +11,15 @@ public class Tour {
         price = values[2];
     }
 
-    public String getCode(){
+    public String getCode() {
         return code;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public String getPrice(){
+    public String getPrice() {
         return price;
     }
 }
