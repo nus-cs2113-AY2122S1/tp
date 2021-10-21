@@ -55,7 +55,7 @@ public class ContactsDecoder {
             personalContact = new Contact(contactName, contactGithub, contactLinkedin, contactTelegram,
                     contactTwitter, contactEmail);
         } catch (IndexOutOfBoundsException e) {
-            ExceptionTextUi.corruptLineMessage(contactText);
+            ExceptionTextUi.corruptPersonalContactMessage();
         }
         return personalContact;
     }
