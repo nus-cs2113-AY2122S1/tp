@@ -8,7 +8,7 @@
 
 ### Architecture
 
-![Architecture Diagram](https://user-images.githubusercontent.com/65898007/138084343-26f6c228-63e2-4d24-8952-037742f61da6.png)
+![Architecture Diagram](https://user-images.githubusercontent.com/65898007/138207279-86dc6196-82b2-407f-afd9-c7ebeaa19e13.png)
 ```puml
 @startuml
 !include ArchitectureDiagram.puml
@@ -38,7 +38,7 @@ The App is organized by the `command`, `exception`, `kitchen`, and `util` packag
 
 The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
-![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138092234-f7f768c7-d9d8-4a6f-b75b-1780d2158436.png)
+![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138207270-83d59ba2-b753-4a0f-bf46-7710921511d6.png)
 ```puml
 @startuml
 !include AddSequence.puml
@@ -46,7 +46,52 @@ scale 2
 @enduml
 ```
 
-### Kitchen component
+### Cookbook component
+
+The Diagram below is the class diagram for the ``Cookbook`` class
+
+![Cookbook Class Diagram](https://user-images.githubusercontent.com/65898007/138207292-1d989a95-f4b2-468a-9076-94ce74e8248b.png)
+
+The `Cookbook` Class is instantiated by the `Gordon` Class, and manages the recipes and tags of the cookbook.
+
+The `Cookbook` class consists of 2 main attributes
+1. The array `recipes` that stores all the main recipes currently in Gordon.
+2. The array `cookbookTags` that stores all the tags currently in Gordon.
+
+The `Cookbook` class can be classified into 3 main functionalities:
+
+1. Recipe Management : 
+  - Add recipes using the `addRecipe` method
+  - Remove recipes using the `removeRecipe` method
+  - Check whether a recipe exist using the `checkRecipe` method
+  - Add calories to a recipe using the `setCalories` method
+  - Add price to a recipe using the `setPrice` method
+  - Add preparation time to a recipe using the `setTimes` method
+
+2. Tag Management :
+  - Add a new tag to the `cookbookTags` array using the `addCookbookTag` method
+  - Delete a tag from the `cookbookTags` array using the `deleteCookbookTag` method
+  - Add a recipe to the list of recipes associated with a particular tag using the `appendRecipeToCookbookTag` method
+  - Remove a recipe to the list of recipes associated with a particular tag using the `deleteRecipeToCookBookTag` method
+  - Add a tag to a recipe using the `addTagToRecipes` method
+  - Delete a tag from a recipe using the `deleteTagFromRecipes` method
+  - List all tags in the `cookbookTags` array using the `listCookBookTags` method
+  - Check whether a particular tag exists using the `doesCookBookTagExist` method
+
+3. Filter Recipes : 
+  - Filter recipes in the `recipes` array by ingredients using the `filterByIngredients` method
+  - Filter recipes in the `recipes` array by tags using the `filterByTags` method
+  - Filter recipes in the `recipes` array by difficulty using the `filterByDifficulty` method
+  - Filter recipes in the `recipes` array by price using the `filterByPrice` method
+  - Filter recipes in the `recipes` array by calories using the `filterByCalories` method
+  - Filter recipes in the `recipes` array by time using the `filterByTime` method
+
+### Recipe component
+
+The Diagram below is the class diagram for the Recipe class
+
+![Recipe Class Diagram](https://user-images.githubusercontent.com/65898007/138097156-7f23bda4-f1bc-41e3-8e85-36eeac273dec.png)
+
 ```puml
 @startuml
 !include KitchenRects.puml
