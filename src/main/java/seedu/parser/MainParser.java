@@ -5,6 +5,7 @@ import seedu.command.EditContactCommand;
 import seedu.command.DeleteContactCommand;
 import seedu.command.Command;
 import seedu.command.HelpCommand;
+import seedu.command.ImportContactCommand;
 import seedu.command.InvalidDetailCommand;
 import seedu.command.ViewContactCommand;
 import seedu.command.FailedCommand;
@@ -35,6 +36,7 @@ public class MainParser {
     private static final String LIST_COMD = "list";
     private static final String HELP_COMD = "help";
     private static final String SEARCH_COMD = "search";
+    private static final String IMPORT_COMD = "import";
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
@@ -72,6 +74,9 @@ public class MainParser {
             break;
         case SEARCH_COMD:
             command = parseSearchCommand(userInput);
+            break;
+        case IMPORT_COMD:
+            command = new ImportContactCommand();
             break;
         default:
             command = new FailedCommand(FailedCommandType.GENERAL);
