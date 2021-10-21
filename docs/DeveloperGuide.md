@@ -12,26 +12,26 @@
         + [2.1.3 Setting up on IntelliJ IDEA](#213-setting-up-on-intellij-idea)
         + [2.1.4 Configuring the Coding Style](#214-configuring-the-coding-style)
 - [3. Design](#3-design)
-  * [3.1 Architecture](#31-architecture)
-  * [3.2 UI](#32-ui-component)
-  * [3.3 Parser](#33-parser-component)
-  * [3.4 Command](#34-command-component)
-  * [3.5 Module](#35-module-component)
-  * [3.6 Content](#36-content-component)
-  * [3.7 Active Recall](#37-active-recall-component)
-  * [3.8 Storage](#38-storage-component)
+    * [3.1 Architecture](#31-architecture)
+    * [3.2 UI](#32-ui-component)
+    * [3.3 Parser](#33-parser-component)
+    * [3.4 Command](#34-command-component)
+    * [3.5 Module](#35-module-component)
+    * [3.6 Content](#36-content-component)
+    * [3.7 Active Recall](#37-active-recall-component)
+    * [3.8 Storage](#38-storage-component)
 - [4. Implementation]()
-  * [4.1 Timetable]()
-  * [4.2 Active Recall]()
-  * [4.3 Workspace]()
-  * [4.4 Adding and Deleting Content]()
-  * [4.5 Storage]()
+    * [4.1 Timetable]()
+    * [4.2 Active Recall]()
+    * [4.3 Workspace]()
+    * [4.4 Adding and Deleting Content]()
+    * [4.5 Storage]()
 - [5. Documentation, Logging, Testing and DevOps]()
 - [Appendix A: Product Scope]()
 - [Appendix B: User Stories ]()
 - [Appendix C: Non Functional Requirements]()
 - [Appendix D: Glossary]()
-- [Appendix E: Instructions for Manual Testing]()  
+- [Appendix E: Instructions for Manual Testing]()
 
 ## 1. Introduction
 
@@ -123,8 +123,8 @@ Import the coding style xml file into your IntelliJ IDEA.
     3. Once done, select `Apply` then `OK`.
 4. Now your IntelliJ IDEA should follow our Coding Style.
 
-> :bulb: IntelliJ IDEA have certain shortcut key to aid in auto-formatting of code. 
-> Once you are done with a piece of code, highlight the section you have just written and press the 
+> :bulb: IntelliJ IDEA have certain shortcut key to aid in auto-formatting of code.
+> Once you are done with a piece of code, highlight the section you have just written and press the
 > key `CTRL + SHIFT + L`.
 
 ## 3. Design
@@ -136,17 +136,18 @@ Import the coding style xml file into your IntelliJ IDEA.
 ### 3.3 Parser Component
 
 ### 3.4 Command Component
- 
+
 ### 3.5 Module Component
+
 ![](attachments/Module.png)
 
 The Module Components consists of the `ModuleManager` which contains a collection of `NusModule` and
-maps a module name to a specific `NusModule`.
-The `NusModule` consist of `ContentManager` which help to manage `Link` and `Note`. 
-The `ContentManager` accepts a `Content` type generic
-and manages an `ArrayList` of `Content` either being a `Note` or a `Link`.
+maps a module name to a specific `NusModule`. The `NusModule` consist of `ContentManager` which help
+to manage `Link` and `Note`. The `ContentManager` accepts a `Content` type generic and manages
+an `ArrayList` of `Content` either being a `Note` or a `Link`.
 
 The `ModuleManager`
+
 - add,delete or retrieve a specific `NusModule`
 - list all module names
 
@@ -155,3 +156,16 @@ The `ModuleManager`
 ### 3.7 Active Recall Component
 
 ### 3.8 Storage Component
+
+![](attachments/StorageComponent.png)
+
+The Module Storage handles any file I/O operations of TermiNUS.
+
+The `ModuleStorage` component:
+
+- can create folder for each module provided by the user.
+- can save modules, schedules and links data in a `.json` file.
+- can save notes into multiple `.txt` files.
+
+`TermiNUS` saved these data as either a `.json` or `.txt` file so users will be able to edit saved
+data easily with any available text editor.
