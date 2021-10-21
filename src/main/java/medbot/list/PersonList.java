@@ -125,9 +125,6 @@ public class PersonList {
     }
 
     public String getNoPersonIdErrorMessage(int personId) {
-        if (CommandManager.getViewType() == ViewType.PATIENT_INFO) {
-            return "No patient with ID " + personId + " found." + ENDLINE;
-        }
         return "No person with ID " + personId + " found." + ENDLINE;
     }
 

@@ -1,10 +1,10 @@
 package medbot;
 
-import medbot.command.DeleteCommand;
-import medbot.command.ViewCommand;
-import medbot.command.AddCommand;
-import medbot.command.EditCommand;
-import medbot.command.FindCommand;
+import medbot.command.AddPersonCommand;
+import medbot.command.DeletePersonCommand;
+import medbot.command.EditPersonCommand;
+import medbot.command.ViewPersonCommand;
+import medbot.command.FindPersonCommand;
 import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.Command;
@@ -63,43 +63,55 @@ public class Parser {
     private static final String VIEW_TYPE_SCHEDULER_VIEW = "s";
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
-    private static final String ERROR_WRONG_NUMBER = "Unable to parse number." + END_LINE;
     private static final String ERROR_NO_VIEW_FOUND = "Unidentified view." + END_LINE;
 
     private static final String ERROR_NO_PARAMETER = "No parameters given" + END_LINE;
 
+    private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number." + END_LINE;
     private static final String ERROR_PATIENT_ID_NOT_SPECIFIED = "Patient ID not specified." + END_LINE;
+    private static final String ERROR_STAFF_ID_NOT_SPECIFIED = "Staff ID not specified." + END_LINE;
 
     private static final String ERROR_INVALID_VIEW_TYPE = "Invalid view type code." + END_LINE;
 
-    private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified" + END_LINE;
+    private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified." + END_LINE;
 
-    private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified" + END_LINE;
-    private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format" + END_LINE;
+    private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified." + END_LINE;
+    private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format." + END_LINE;
 
-    private static final String ERROR_PHONE_NUMBER_NOT_SPECIFIED = "Phone number not specified" + END_LINE;
-    private static final String ERROR_PHONE_NUMBER_TOO_FEW_DIGITS = "Phone number has too few digits" + END_LINE;
-    private static final String ERROR_PHONE_NUMBER_TOO_MANY_DIGITS = "Phone number has too many digits" + END_LINE;
+    private static final String ERROR_PHONE_NUMBER_NOT_SPECIFIED = "Phone number not specified." + END_LINE;
+    private static final String ERROR_PHONE_NUMBER_TOO_FEW_DIGITS = "Phone number has too few digits." + END_LINE;
+    private static final String ERROR_PHONE_NUMBER_TOO_MANY_DIGITS = "Phone number has too many digits." + END_LINE;
     private static final String ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS =
-            "Phone number contains unexpected characters" + END_LINE;
+            "Phone number contains unexpected characters." + END_LINE;
 
-    private static final String ERROR_EMAIL_ADDRESS_NOT_SPECIFIED = "Email address not specified" + END_LINE;
-    private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "Incorrect email address format" + END_LINE;
+    private static final String ERROR_EMAIL_ADDRESS_NOT_SPECIFIED = "Email address not specified." + END_LINE;
+    private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "Incorrect email address format." + END_LINE;
 
-    private static final String ERROR_ADDRESS_NOT_SPECIFIED = "Address not specified" + END_LINE;
+    private static final String ERROR_ADDRESS_NOT_SPECIFIED = "Address not specified." + END_LINE;
 
     private static final String REGEX_VERTICAL_LINE = "\\|";
     private static final String REGEX_INPUT_PARAMETER = " [a-zA-Z]{1,2}/";
-    private static final String REGEX_EMAIL = "(([\\w&&[^_]][\\w-\\.]*[\\w&&[^_]])|[\\w&&[^_]])\\@([\\w]+\\.)+[\\w]+";
+    private static final String REGEX_EMAIL = "(([a-zA-Z0-9][\\w-.]*[a-zA-Z0-9])|[a-zA-Z0-9])@([\\w]+\\.)+[\\w]+";
     private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
     private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
     private static final String REGEX_PHONE_NUMBER_SEPARATOR = "[- _+()]";
+    private static final String REGEX_PERSON_ID = "([0-9]+$)|([0-9]+ )";
     private static final String REGEX_CAPITALISE_POSITION = "(\\A|[ _-])[a-z]";
 
     private static final String VERTICAL_LINE = "|";
     private static final String SEPARATOR_SPACE = " ";
 
     private static final String EMPTY_STRING = "";
+
+    private static ViewType viewType =  ViewType.PATIENT_INFO;
+
+    public static ViewType getViewType() {
+        return viewType;
+    }
+
+    public static void setViewType(ViewType viewType) {
+        Parser.viewType = viewType;
+    }
 
     /**
      * Checks the current view type that the parser is in and returns the relevant
@@ -109,9 +121,9 @@ public class Parser {
      * @return the corresponding Command object.
      * @throws MedBotParserException if command is unrecognised.
      */
-    public static Command parseCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    public static Command parseCommand(String userInput) throws MedBotParserException {
         userInput = preprocessInput(userInput);
-
+        //commands valid in all viewTypes
         if (userInput.startsWith(COMMAND_SWITCH)) {
             return parseSwitchCommand(userInput);
         }
@@ -124,9 +136,9 @@ public class Parser {
 
         switch (viewType) {
         case PATIENT_INFO:
-            return parsePersonCommand(userInput, ViewType.PATIENT_INFO);
+            return parsePatientCommand(userInput, ViewType.PATIENT_INFO);
         case MEDICAL_STAFF_INFO:
-            return parsePersonCommand(userInput, ViewType.MEDICAL_STAFF_INFO);
+            return parseStaffCommand(userInput, ViewType.MEDICAL_STAFF_INFO);
         case SCHEDULER:
             return parseSchedulingCommand(userInput);
         default:
@@ -143,38 +155,59 @@ public class Parser {
      * @return the corresponding Command object.
      * @throws MedBotParserException if command is unrecognised.
      */
-    public static Command parsePersonCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    public static Command parsePatientCommand(String userInput, ViewType viewType) throws MedBotParserException {
         if (userInput.startsWith(COMMAND_ADD)) {
-            return parseAddCommand(userInput, viewType);
+            return parseAddPatientCommand(userInput);
         }
         if (userInput.startsWith(COMMAND_DELETE)) {
-            return parseDeleteCommand(userInput, viewType);
+            return parseDeletePatientCommand(userInput);
         }
         if (userInput.startsWith(COMMAND_VIEW)) {
-            return parseViewCommand(userInput, viewType);
+            return parseViewPatientCommand(userInput);
         }
         if (userInput.equals(COMMAND_LIST)) {
-            if (viewType == ViewType.PATIENT_INFO) {
-                return new ListPatientCommand();
-            } else {
-                return new ListStaffCommand();
-            }
+            return new ListPatientCommand();
         }
         if (userInput.startsWith(COMMAND_EDIT)) {
-            return parseEditCommand(userInput, viewType);
+            return parseEditPatientCommand(userInput);
         }
         if (userInput.startsWith(COMMAND_FIND)) {
-            return parseFindCommand(userInput, viewType);
+            return parseFindPatientCommand(userInput);
         }
+        throw new MedBotParserException(ERROR_WRONG_COMMAND);
+    }
 
+    /**
+     * Parses the user input for patient information related commands and returns the relevant Command object.
+     *
+     * @param userInput String containing the full user input.
+     * @return the corresponding Command object.
+     * @throws MedBotParserException if command is unrecognised.
+     */
+    public static Command parseStaffCommand(String userInput, ViewType viewType) throws MedBotParserException {
+        if (userInput.startsWith(COMMAND_ADD)) {
+            return parseAddStaffCommand(userInput);
+        }
+        if (userInput.startsWith(COMMAND_DELETE)) {
+            return parseDeleteStaffCommand(userInput);
+        }
+        if (userInput.startsWith(COMMAND_VIEW)) {
+            return parseViewStaffCommand(userInput);
+        }
+        if (userInput.equals(COMMAND_LIST)) {
+            return new ListStaffCommand();
+        }
+        if (userInput.startsWith(COMMAND_EDIT)) {
+            return parseEditStaffCommand(userInput);
+        }
+        if (userInput.startsWith(COMMAND_FIND)) {
+            return parseFindStaffCommand(userInput);
+        }
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
     //Update with relevant scheduling commands
     public static Command parseSchedulingCommand(String userInput) throws MedBotParserException {
-        if (userInput.equals(COMMAND_SWITCH)) {
-            return new SwitchCommand();
-        }
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
@@ -199,7 +232,6 @@ public class Parser {
         }
         CommandType commandType = parseHelpCommandType(commandTypeString);
         return new HelpCommand(commandType);
-
     }
 
     private static CommandType parseHelpCommandType(String commandTypeString) throws MedBotParserException {
@@ -228,131 +260,124 @@ public class Parser {
     }
 
     /**
-     * Parses user input to pass relevant parameters into the ViewPatientCommand constructor.
+     * Parses user input and returns ViewPatientCommand with the specified patient ID.
      *
      * @param userInput String containing the full user input.
-     * @return ViewCommand object.
-     * @throws MedBotParserException when patient id given is out of range, or no id is specified.
+     * @return ViewPatientCommand object.
+     * @throws MedBotParserException when patient id is not specified or not a number.
      */
-    private static ViewCommand parseViewCommand(String userInput, ViewType viewType) throws MedBotParserException {
-        int personId;
-        try {
-            personId = Integer.parseInt(userInput.substring(4).strip());
-        } catch (NumberFormatException ne) {
-            throw new MedBotParserException(ERROR_WRONG_NUMBER);
-        } catch (IndexOutOfBoundsException ie) {
-            throw new MedBotParserException(ERROR_PATIENT_ID_NOT_SPECIFIED);
-        }
-
-        switch (viewType) {
-        case PATIENT_INFO:
-            return new ViewPatientCommand(personId);
-        case MEDICAL_STAFF_INFO:
-            return new ViewStaffCommand(personId);
-        default:
-            throw new MedBotParserException(ERROR_NO_VIEW_FOUND);
-        }
+    private static ViewPatientCommand parseViewPatientCommand(String userInput) throws MedBotParserException {
+        int personId = parsePersonId(userInput.substring(4));
+        return new ViewPatientCommand(personId);
     }
 
     /**
-     * Parses user input to pass relevant parameters into the DeletePatientCommand constructor.
+     * Parses user input and returns ViewStaffCommand with the specified staff ID.
      *
      * @param userInput String containing the full user input.
-     * @return DeleteCommand object.
-     * @throws MedBotParserException when patient id given is out of range, or no id is specified.
+     * @return ViewStaffCommand object.
+     * @throws MedBotParserException when staff id is not specified or not a number.
      */
-    private static DeleteCommand parseDeleteCommand(String userInput, ViewType viewType) throws MedBotParserException {
-        int personId;
-        try {
-            personId = Integer.parseInt(userInput.substring(6).strip());
-        } catch (NumberFormatException ne) {
-            throw new MedBotParserException(ERROR_WRONG_NUMBER);
-        } catch (IndexOutOfBoundsException ie) {
-            throw new MedBotParserException(ERROR_PATIENT_ID_NOT_SPECIFIED);
-        }
-
-        switch (viewType) {
-        case PATIENT_INFO:
-            return new DeletePatientCommand(personId);
-        case MEDICAL_STAFF_INFO:
-            return new DeleteStaffCommand(personId);
-        default:
-            throw new MedBotParserException(ERROR_NO_VIEW_FOUND);
-        }
+    private static ViewStaffCommand parseViewStaffCommand(String userInput) throws MedBotParserException {
+        int personId = parsePersonId(userInput.substring(4));
+        return new ViewStaffCommand(personId);
     }
 
     /**
-     * Processes user input for the editPatientInformation command.
+     * Parses user input and returns DeletePatientCommand with the specified patient ID.
      *
      * @param userInput String containing the full user input.
-     * @return EditCommand objects
-     * @throws MedBotParserException when the parameters given cannot be parsed
+     * @return DeletePatientCommand object.
+     * @throws MedBotParserException when patient id given is not specified or not a number.
      */
-    private static EditCommand parseEditCommand(String userInput, ViewType viewType) throws MedBotParserException {
-        int personId;
-        try {
-            String personIdString = userInput.substring(4).stripLeading();
-            int endSpaceIndex = personIdString.indexOf(' ');
-            if (endSpaceIndex != -1) {
-                personIdString = personIdString.substring(0, endSpaceIndex);
-            }
-            personId = Integer.parseInt(personIdString);
-        } catch (NumberFormatException ne) {
-            throw new MedBotParserException(ERROR_WRONG_NUMBER);
-        } catch (IndexOutOfBoundsException ie) {
-            throw new MedBotParserException(ERROR_PATIENT_ID_NOT_SPECIFIED);
-        }
-        String[] parameters = getParameters(userInput);
-
-        switch (viewType) {
-        case PATIENT_INFO:
-            Patient patient = new Patient();
-            patient.setNull();
-            updateMultiplePersonalInformation(patient, parameters);
-            return new EditPatientCommand(personId, patient);
-        case MEDICAL_STAFF_INFO:
-            Staff staff = new Staff();
-            staff.setNull();
-            updateMultiplePersonalInformation(staff, parameters);
-            return new EditStaffCommand(personId, staff);
-        default:
-            throw new MedBotParserException(ERROR_NO_VIEW_FOUND);
-        }
+    private static DeletePatientCommand parseDeletePatientCommand(String userInput) throws MedBotParserException {
+        int personId = parsePersonId(userInput.substring(6));
+        return new DeletePatientCommand(personId);
     }
 
     /**
-     * Processes user input to create a new patient object with the corresponding information.
+     * Parses user input and returns DeleteStaffCommand with the specified staff ID.
      *
      * @param userInput String containing the full user input.
-     * @return AddCommand object.
-     * @throws MedBotParserException when no parameters are specified.
+     * @return DeleteStaffCommand object.
+     * @throws MedBotParserException when staff id given is not specified or not a number.
      */
-    private static AddCommand parseAddCommand(String userInput, ViewType viewType) throws MedBotParserException {
-        String[] parameters = getParameters(userInput);
-        switch (viewType) {
-        case PATIENT_INFO:
-            Patient patient = new Patient();
-            updateMultiplePersonalInformation(patient, parameters);
-            return new AddPatientCommand(patient);
-        case MEDICAL_STAFF_INFO:
-            Staff staff = new Staff();
-            updateMultiplePersonalInformation(staff, parameters);
-            return new AddStaffCommand(staff);
-        default:
-            throw new MedBotParserException(ERROR_NO_VIEW_FOUND);
-        }
+    private static DeleteStaffCommand parseDeleteStaffCommand(String userInput) throws MedBotParserException {
+        int personId = parsePersonId(userInput.substring(6));
+        return new DeleteStaffCommand(personId);
     }
 
-    private static FindCommand parseFindCommand(String userInput, ViewType viewType) throws MedBotParserException {
+    /**
+     * Parses user input and returns EditPatientCommand with the specified patient ID and parameters.
+     *
+     * @param userInput String containing the full user input.
+     * @return EditPatientCommand object.
+     * @throws MedBotParserException when patient id given is not specified or not a number, or when
+     *                               the parameters given cannot be parsed.
+     */
+    private static EditPatientCommand parseEditPatientCommand(String userInput) throws MedBotParserException {
+        int patientId = parsePersonId(userInput.substring(4));
         String[] parameters = getParameters(userInput);
-        switch (viewType) {
-        case PATIENT_INFO:
-            return new FindPatientCommand(parameters);
-        case MEDICAL_STAFF_INFO:
-            return new FindStaffCommand(parameters);
-        default:
-            throw new MedBotParserException(ERROR_NO_VIEW_FOUND);
-        }
+        Patient patient = new Patient();
+        patient.setNull();
+        updateMultiplePersonalInformation(patient, parameters);
+        return new EditPatientCommand(patientId, patient);
+    }
+
+    /**
+     * Parses user input and returns EditStaffCommand with the specified patient ID and parameters.
+     *
+     * @param userInput String containing the full user input.
+     * @return EditStaffCommand objects
+     * @throws MedBotParserException when staff id given is not specified or not a number, or when
+     *                               the parameters given cannot be parsed.
+     */
+    private static EditStaffCommand parseEditStaffCommand(String userInput) throws MedBotParserException {
+        int staffId = parsePersonId(userInput.substring(4));
+        String[] parameters = getParameters(userInput);
+        Staff staff = new Staff();
+        staff.setNull();
+        updateMultiplePersonalInformation(staff, parameters);
+        return new EditStaffCommand(staffId, staff);
+    }
+
+    /**
+     * Parses user input and returns AddPatientCommand with the specified parameters.
+     *
+     * @param userInput String containing the full user input.
+     * @return AddPatientCommand object.
+     * @throws MedBotParserException when no parameters are specified, or when the parameters given cannot be parsed.
+     */
+    private static AddPatientCommand parseAddPatientCommand(String userInput) throws MedBotParserException {
+        String[] parameters = getParameters(userInput);
+        Patient patient = new Patient();
+        updateMultiplePersonalInformation(patient, parameters);
+        return new AddPatientCommand(patient);
+    }
+
+    /**
+     * Parses user input and returns AddStaffCommand with the specified parameters.
+     *
+     * @param userInput String containing the full user input.
+     * @return AddStaffCommand object.
+     * @throws MedBotParserException when no parameters are specified, or when the parameters given cannot be parsed.
+     */
+    private static AddStaffCommand parseAddStaffCommand(String userInput) throws MedBotParserException {
+        String[] parameters = getParameters(userInput);
+        Staff staff = new Staff();
+        updateMultiplePersonalInformation(staff, parameters);
+        return new AddStaffCommand(staff);
+
+    }
+
+    private static FindPatientCommand parseFindPatientCommand(String userInput) throws MedBotParserException {
+        String[] parameters = getParameters(userInput);
+        return new FindPatientCommand(parameters);
+    }
+
+    private static FindStaffCommand parseFindStaffCommand(String userInput) throws MedBotParserException {
+        String[] parameters = getParameters(userInput);
+        return new FindStaffCommand(parameters);
     }
 
     /**
@@ -366,15 +391,15 @@ public class Parser {
      * @throws MedBotParserException if an invalid view type code is specified
      */
     private static SwitchCommand parseSwitchCommand(String userInput) throws MedBotParserException {
-        String newType = EMPTY_STRING;
+        String newType;
         try {
             newType = userInput.substring(6).strip();
         } catch (IndexOutOfBoundsException ie) {
-            return new SwitchCommand();
+            newType = EMPTY_STRING;
         }
         switch (newType) {
         case EMPTY_STRING:
-            return new SwitchCommand();
+            return new SwitchCommand(ViewType.getNextView(viewType));
         case VIEW_TYPE_PATIENT_VIEW:
             return new SwitchCommand(ViewType.PATIENT_INFO);
         case VIEW_TYPE_MEDICAL_STAFF_VIEW:
@@ -413,7 +438,7 @@ public class Parser {
      * @return user input without leading white space and vertical lines present.
      */
     private static String preprocessInput(String userInput) {
-        return userInput.stripLeading().replace(VERTICAL_LINE, EMPTY_STRING);
+        return userInput.strip().replace(VERTICAL_LINE, EMPTY_STRING);
     }
 
     /**
@@ -533,7 +558,6 @@ public class Parser {
             if (!numberString.matches(REGEX_PHONE_NUMBER)) {
                 throw new MedBotParserException(ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS);
             }
-            assert numberString.length() == 8;
             return numberString;
         } catch (IndexOutOfBoundsException ie) {
             throw new MedBotParserException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
@@ -584,6 +608,28 @@ public class Parser {
             throw new MedBotParserException(ERROR_ADDRESS_NOT_SPECIFIED);
         }
     }
+
+
+    private static int parsePersonId(String userInput) throws MedBotParserException {
+        userInput = userInput.strip();
+        if (userInput.equals(EMPTY_STRING)) {
+            throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+        }
+        Pattern pattern = Pattern.compile(REGEX_PERSON_ID);
+        Matcher matcher = pattern.matcher(userInput);
+        if (matcher.lookingAt()) {
+            int id;
+            try {
+                id = Integer.parseInt(matcher.group().stripTrailing());
+            } catch (NumberFormatException ne) {
+                assert false;
+                throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+            }
+            return id;
+        }
+        throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+    }
+
 
     /**
      * Sets the first letter of each word of each word to uppercase and sets all others to lowercase.

@@ -1,21 +1,22 @@
 package medbot.command.staffcommand;
 
+import medbot.Scheduler;
 import medbot.Ui;
-import medbot.command.EditCommand;
+import medbot.command.EditPersonCommand;
 import medbot.exceptions.MedBotException;
-import medbot.list.PersonList;
 import medbot.person.Staff;
 
-public class EditStaffCommand extends EditCommand {
+public class EditStaffCommand extends EditPersonCommand {
     public EditStaffCommand(int staffId, Staff staff) {
         super(staffId, staff);
     }
 
     @Override
-    public void execute(PersonList personList, Ui ui) throws MedBotException {
-        personList.editPerson(personId, person);
-        String patientInfo = personList.getPersonInfo(personId);
-        String editPatientMessage = ui.getEditPatientMessage(personId, patientInfo);
-        ui.printOutput(editPatientMessage);
+    public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
+        scheduler.getMedicalStaffList().editPerson(personId, person);
+        String staffInfo = scheduler.getMedicalStaffList().getPersonInfo(personId);
+        //todo change to getEditStaffMessage()
+        String editStaffMessage = ui.getEditPatientMessage(personId, staffInfo);
+        ui.printOutput(editStaffMessage);
     }
 }
