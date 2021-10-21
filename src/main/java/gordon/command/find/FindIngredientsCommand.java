@@ -1,4 +1,4 @@
-package gordon.command.FindCommands;
+package gordon.command.find;
 
 import gordon.command.Command;
 import gordon.exception.GordonException;

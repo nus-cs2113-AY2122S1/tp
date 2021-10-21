@@ -1,4 +1,4 @@
-package gordon.command.TagCommands;
+package gordon.command.tag;
 
 import gordon.command.Command;
 import gordon.exception.GordonException;
