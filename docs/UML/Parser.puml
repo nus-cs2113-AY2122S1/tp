@@ -1,46 +1,34 @@
 @startuml
-'https://plantuml.com/class-diagram
+!include Style.puml
+skinparam ArrowColor black
+skinparam classBorderColor black
 
-Gordon --> Parser
-Parser --> Command
-Parser -> UI
-
-class Gordon {
+class Gordon #white {
 Parser parser
 Gordon()
 Run()
 }
 
-class Parser {
-public static final int NAME_INDEX
-public static final int INGREDIENTS_INDEX
-public static final int STEPS_INDEX
-public static final int CALORIES_INDEX
-public static final int INGREDIENTS_WORD_LENGTH
-public static final int STEPS_WORD_LENGTH
-Parser()
-parseMaster()
-parseNextLine()
-parseCommand()
-parseName()
-parseIngredients()
-parseSteps()
-parseCalories()
-addRecipeParse()
-deleteRecipeParse()
-setParse()
-findParse()
-addTagParse()
-deleteTagParse()
-untagParse()
+rectangle Util {
+    class Parser {
+    Parser()
+    parseMaster()
+    parseNextLine()
+    }
+
+    class Command {
+    execute()
+    }
+
+    class UI {
+    printIntro()
+    printExitMessage()
+    printHelp()
+    }
 }
 
-class Command {
-}
+Gordon --> Parser
+Parser --> Command
+Parser -> UI
 
-class UI {
-printIntro()
-printExitMessage()
-printHelp()
-}
 @enduml

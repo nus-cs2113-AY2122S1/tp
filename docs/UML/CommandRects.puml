@@ -66,10 +66,10 @@ rectangle "Command" {
             }
         }
 
-    "Basic Commands" --|> "{abstract}\nCommand"
+    "{abstract}\nCommand" <|-- "Basic Commands"
     "Tag Commands" --|> "{abstract}\nCommand"
-    "{abstract}\nCommand" <|-- "Find Commands"
-    "{abstract}\nCommand" <|-- "Set Commands"
+    "Find Commands" --|> "{abstract}\nCommand"
+    "{abstract}\nCommand" <|-left- "Set Commands"
 
 }
 @enduml

@@ -103,7 +103,7 @@ The `Cookbook` class can be classified into 3 main functionalities:
 
 The diagram below is the class diagram for the `Parser` class
 
-
+![Command Class Diagram](./RenderedUML/Parser.svg)
 
 Functions of the Parser class:
 * Reads in user input by implementing the `Scanner` class
