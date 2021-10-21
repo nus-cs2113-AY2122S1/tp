@@ -6,8 +6,8 @@ import java.util.Map;
 public class CommandResult {
 
     public final String feedbackToUser;
-    public final ArrayList itemList;
-    public final Map<String, ArrayList> map;
+    public final ArrayList<?> itemList;
+    public final Map<String, ArrayList<?>> map;
     public final boolean isTable;
 
     public CommandResult(String feedbackToUser) {
@@ -17,7 +17,7 @@ public class CommandResult {
         this.isTable = false;
     }
 
-    public CommandResult(String feedbackToUser, ArrayList itemList) {
+    public CommandResult(String feedbackToUser, ArrayList<?> itemList) {
         this.feedbackToUser = feedbackToUser;
         this.itemList = itemList;
         this.map = null;
@@ -25,7 +25,7 @@ public class CommandResult {
     }
 
     // Search, Recommend
-    public CommandResult(Map<String, ArrayList> map, boolean isTable) {
+    public CommandResult(Map<String, ArrayList<?>> map, boolean isTable) {
         this.feedbackToUser = null;
         this.itemList = null;
         this.map = map;
