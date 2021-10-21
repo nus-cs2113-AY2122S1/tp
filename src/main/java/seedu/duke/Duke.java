@@ -3,7 +3,7 @@ package seedu.duke;
 import seedu.duke.commands.ByeCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.CommandResult;
-import seedu.duke.items.Event;
+import seedu.duke.items.EventCatalog;
 import seedu.duke.items.Task;
 import seedu.duke.storage.StorageFile;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    public static ArrayList<Event> eventCatalog = new ArrayList<>();
+    public static EventCatalog eventCatalog = EventCatalog.getInstance();
     /*TODO: Delete the ArrayList of tasks below once the project has been restructured to fully utilize the new
     *  ArrayList of Task objects within each Event*/
     public static ArrayList<Task> taskList = new ArrayList<>();

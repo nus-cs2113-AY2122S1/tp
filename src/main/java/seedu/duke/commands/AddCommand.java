@@ -158,10 +158,16 @@ public class AddCommand extends Command {
 
     private static void addToEventCatalog(Event event) {
         Duke.eventCatalog.add(event);
+        Duke.eventCatalog.sortCatalog();
     }
 
-    private void addTaskToEvent(int eventIndex, Task task) {
-        Duke.eventCatalog.get(eventIndex - 1).addToTaskList(task);
+    private void addTaskToEvent(int eventIndex, Task task) throws DukeException {
+        try {
+            Duke.eventCatalog.get(eventIndex - 1).addToTaskList(task);
+            Duke.eventCatalog.sortCatalog();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("No such event. Please enter a valid event for your task. ");
+        }
     }
 
     public CommandResult execute() {
@@ -171,11 +177,27 @@ public class AddCommand extends Command {
             Ui.printLineBreak();
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
                 Ui.promptForEventIndex();
-                // add exception for input not being an integer or index out of bounds
-                int eventIndex = Integer.parseInt(Ui.readInput());
-                Task task = new Task(itemTitle, itemDescription, itemDateTime);
-                addTaskToEvent(eventIndex, task);
-                return new CommandResult(Ui.getTaskAddedMessage(task));
+                boolean isCorrectEvent = false;
+                while (!isCorrectEvent) {
+                    try {
+                        if (!Duke.eventCatalog.isEmpty()) {
+                            Ui.printEventCatalog();
+                        }
+                        int eventIndex = Integer.parseInt(Ui.readInput());
+                        Task task = new Task(itemTitle, itemDescription, itemDateTime);
+                        addTaskToEvent(eventIndex, task);
+                        isCorrectEvent = true;
+                        return new CommandResult(Ui.getTaskAddedMessage(eventIndex, task));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter the number corresponding to the event "
+                                + "you want to add to. ");
+                        Ui.printLineBreak();
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                        Ui.printLineBreak();
+                    }
+                }
+
             }
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);

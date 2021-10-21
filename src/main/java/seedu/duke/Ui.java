@@ -55,17 +55,16 @@ public class Ui {
 
     public static void promptForEventIndex() {
         System.out.println("Please choose which event you want to add your task to. ");
-        printLineBreak();
     }
 
     public static String getTaskDeletionMessage(String taskTitle) {
         return String.format("This task has been removed: %s\n", taskTitle);
     }
 
-    public static String getTaskAddedMessage(Task task) {
+    public static String getTaskAddedMessage(int eventIndex, Task task) {
         return String.format("Task added: %s\n"
-                        + "Total number of tasks = %s",
-                task.getTitle(), Duke.taskList.size());
+                        + "Total number of tasks in this event = %s",
+                task.getTitle(), Duke.eventCatalog.get(eventIndex - 1).getTaskList().size());
     }
 
     public static String getEventAddedMessage(Event event) {
@@ -98,11 +97,15 @@ public class Ui {
                 + getEvent(event) + System.lineSeparator() + getLineBreak();
     }
 
-    public static void printList(ArrayList<Item> list) {
+    public static <T extends Item> void printList(ArrayList<T> list) {
         AtomicInteger i = new AtomicInteger();
         list.forEach(item -> System.out.println(i.getAndIncrement() + 1 + ". " + item));
     }
 
+    public static void printEventCatalog() {
+        printList(Duke.eventCatalog);
+        printLineBreak();
+    }
 
     public static String getTask(Task task) {
         return task.getTitle() + System.lineSeparator()
