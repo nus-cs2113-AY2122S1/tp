@@ -44,15 +44,30 @@ public class Trip {
             return;
         }
         try {
-            if (expenseCategory.equals("category")) {
-                findMatchingCategoryExpenses(listOfCurrentExpenses, expenseAttribute);
-            } else if (expenseCategory.equals("description")) {
-                findMatchingDescriptionExpenses(listOfCurrentExpenses, expenseAttribute);
+            switch (expenseCategory) {
+                case "category":
+                    findMatchingCategoryExpenses(listOfCurrentExpenses, expenseAttribute);
+                    break;
+                case "description":
+                    findMatchingDescriptionExpenses(listOfCurrentExpenses, expenseAttribute);
+                    break;
+                case "payer":
+                    findMatchingPayerExpenses(listOfCurrentExpenses, expenseAttribute);
+                    break;
             }
         } catch (IndexOutOfBoundsException e) {
             Ui.printFilterFormatError();
         }
 
+    }
+
+    private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
+        for (Expense e : listOfCurrentExpenses) {
+            if(e.getPayer().getName().equals(expenseAttribute)) {
+                int index = listOfCurrentExpenses.indexOf(e);
+                Ui.printFilteredExpenses(e, index);
+            }
+        }
     }
 
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
