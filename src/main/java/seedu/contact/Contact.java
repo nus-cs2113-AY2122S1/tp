@@ -64,4 +64,9 @@ public class Contact {
     public void setTelegram(String telegram) {
         this.telegram = telegram;
     }
+
+    //@@author ng-andre
+    public String[] getContactStringArray() {
+        return new String[]{ name, github, linkedin, telegram, twitter, email };
+    }
 }

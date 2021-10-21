@@ -13,14 +13,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class RegexParser {
-
     public static final String NAME_FLAG = "n";
     public static final String GITHUB_FLAG = "g";
+    public static final String LINKEDIN_FLAG = "l";
     public static final String TELEGRAM_FLAG = "te";
     public static final String TWITTER_FLAG = "tw";
     public static final String EMAIL_FLAG = "e";
-    public static final String LINKEDIN_FLAG = "l";
 
+    protected static final String[] FLAG_SEQUENCE = {NAME_FLAG, GITHUB_FLAG, LINKEDIN_FLAG,
+        TELEGRAM_FLAG, TWITTER_FLAG, EMAIL_FLAG};
     private static final Logger LOGGER = Logger.getLogger(RegexParser.class.getName());
 
     public void checkRegex(String flag, String detailToParse)

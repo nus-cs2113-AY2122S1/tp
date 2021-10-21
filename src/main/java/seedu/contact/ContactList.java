@@ -5,6 +5,8 @@ import seedu.ui.TextUi;
 
 import java.util.ArrayList;
 
+import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
+
 public class ContactList {
     public static final int NAME_INDEX = 0;
     public static final int GITHUB_INDEX = 1;
@@ -62,54 +64,26 @@ public class ContactList {
     }
 
     //@@author ng-andre
+    private boolean hasDetailMatches(String query, int detailType, int index, Contact contact) {
+        String[] contactStringArray = contact.getContactStringArray();
+        if (contactStringArray[detailType] != null
+                && contactStringArray[detailType].toLowerCase().contains(query)) {
+            TextUi.viewContactMessage(contact, index);
+            return true;
+        }
+        return false;
+    }
+
+    //@@author ng-andre
     public void searchContact(String query, int detailType) throws InvalidFlagException {
-        boolean searchResult = false;
+        int matches = 0;
         for (int i = 0; i < contacts.size(); i++) {
             Contact contact = getContactAtIndex(i);
-            switch (detailType) {
-            case NAME_INDEX:
-                if (contact.getName() != null && contact.getName().toLowerCase().contains(query)) {
-                    TextUi.viewContactMessage(contact, i);
-                    searchResult = true;
-                }
-                break;
-            case GITHUB_INDEX:
-                if (contact.getGithub() != null && contact.getGithub().toLowerCase().contains(query)) {
-                    TextUi.viewContactMessage(contact, i);
-                    searchResult = true;
-                }
-                break;
-            case LINKEDIN_INDEX:
-                if (contact.getLinkedin() != null && contact.getLinkedin().toLowerCase().contains(query)) {
-                    TextUi.viewContactMessage(contact, i);
-                    searchResult = true;
-                }
-                break;
-            case TELEGRAM_INDEX:
-                if (contact.getTelegram() != null && contact.getTelegram().toLowerCase().contains(query)) {
-                    TextUi.viewContactMessage(contact, i);
-                    searchResult = true;
-                }
-                break;
-            case TWITTER_INDEX:
-                if (contact.getTwitter() != null && contact.getTwitter().toLowerCase().contains(query)) {
-                    TextUi.viewContactMessage(contact, i);
-                    searchResult = true;
-                }
-                break;
-            case EMAIL_INDEX:
-                if (contact.getEmail() != null && contact.getEmail().toLowerCase().contains(query)) {
-                    TextUi.viewContactMessage(contact, i);
-                    searchResult = true;
-                }
-                break;
-            default:
-                //control should never reach here
-                assert false;
-                throw new InvalidFlagException();
+            if (hasDetailMatches(query, detailType, i, contact)) {
+                matches++;
             }
         }
-        if (!searchResult) {
+        if (matches == 0) {
             TextUi.searchNoResultsFoundMessage();
         }
     }
