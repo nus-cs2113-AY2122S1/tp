@@ -11,16 +11,16 @@ import taa.student.Student;
 import taa.student.StudentList;
 import taa.util.Util;
 
-public class EditMarkCommand extends Command{
+public class EditMarkCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String KEY_ASSESSMENT_NAME = "a";
     private static final String KEY_NEW_MARKS = "m";
     private static final String[] EDIT_MARKS_ARGUMENT_KEYS = {
-            KEY_MODULE_CODE,
-            KEY_STUDENT_INDEX,
-            KEY_ASSESSMENT_NAME,
-            KEY_NEW_MARKS
+        KEY_MODULE_CODE,
+        KEY_STUDENT_INDEX,
+        KEY_ASSESSMENT_NAME,
+        KEY_NEW_MARKS
     };
 
     private static final String MESSAGE_FORMAT_EDIT_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "

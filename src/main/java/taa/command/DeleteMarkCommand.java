@@ -11,19 +11,20 @@ import taa.student.Student;
 import taa.student.StudentList;
 import taa.util.Util;
 
-public class DeleteMarkCommand extends Command{
+public class DeleteMarkCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String KEY_ASSESSMENT_NAME = "a";
     private static final String[] DELETE_MARK_ARGUMENT_KEYS = {
-            KEY_MODULE_CODE,
-            KEY_STUDENT_INDEX,
-            KEY_ASSESSMENT_NAME
+        KEY_MODULE_CODE,
+        KEY_STUDENT_INDEX,
+        KEY_ASSESSMENT_NAME
     };
-    private static final String MESSAGE_FORMAT_DELETE_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> " +
-            "%s/<ASSESSMENT_NAME>";
-    private static final String MESSAGE_FORMAT_MARKS_DELETED = "Marks for student '%s' have been deleted for" +
-            " assessment '%s'";
+    private static final String MESSAGE_FORMAT_DELETE_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> "
+            + "%s/<ASSESSMENT_NAME>";
+    private static final String MESSAGE_FORMAT_MARKS_DELETED = "Marks for student '%s' have been deleted for"
+            + " assessment '%s'";
+
     public DeleteMarkCommand(String argument) {
         super(argument, DELETE_MARK_ARGUMENT_KEYS);
     }
