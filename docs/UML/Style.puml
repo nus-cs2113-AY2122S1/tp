@@ -19,6 +19,7 @@
 !define LOGIC_YELLOW_5 #DFF3B3
 
 !define LOGIC_RED_1 #E1300A
+!define LOGIC_RED_2 #FF5151
 
 !define LOGIC_MAGENTA_1 #FA21E3
 

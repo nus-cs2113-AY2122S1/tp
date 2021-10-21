@@ -12,6 +12,7 @@ public class Recipe {
     protected Difficulty difficulty = Difficulty.None;
     protected int preparationTime = -1;
     protected int cookingTime = -1;
+    protected int totalTime = preparationTime + cookingTime;
     protected ArrayList<String> ingredients;
     protected ArrayList<String> steps;
     protected float totalPrice = -1;
@@ -115,8 +116,8 @@ public class Recipe {
         cookingTime = cookTime;
     }
 
-    public int getTotalTime() {
-        return preparationTime + cookingTime;
+    public float getTotalTime() {
+        return totalTime;
     }
 
     public float getTotalPrice() {
@@ -157,6 +158,7 @@ public class Recipe {
             outputString.append("Preparation time: ")
                     .append(System.lineSeparator())
                     .append(preparationTime)
+                    .append(" minute(s)")
                     .append(System.lineSeparator());
         }
 
@@ -164,6 +166,7 @@ public class Recipe {
             outputString.append("Cooking time: ")
                     .append(System.lineSeparator())
                     .append(cookingTime)
+                    .append(" minute(s)")
                     .append(System.lineSeparator());
         }
 
