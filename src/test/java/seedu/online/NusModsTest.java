@@ -1,6 +1,7 @@
 package seedu.online;
 
 import org.junit.jupiter.api.Test;
+import seedu.exceptions.FetchException;
 import seedu.module.Module;
 
 import java.io.IOException;
@@ -11,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class NusModsTest {
 
     @Test
-    public void load_Invalid_Mod_Exception_Thrown() throws Exception {
-        assertThrows(IOException.class, () ->
+    public void load_Invalid_Mod_Exception_Thrown() throws FetchException {
+        assertThrows(FetchException.class, () ->
                 NusMods.fetchModOnline("This mod does not exist"));
     }
 

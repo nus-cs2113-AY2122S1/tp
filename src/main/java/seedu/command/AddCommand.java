@@ -1,6 +1,7 @@
 package seedu.command;
 
 import seedu.comparator.ClassNumComparator;
+import seedu.exceptions.FetchException;
 import seedu.exceptions.IntegerException;
 import seedu.module.Lesson;
 import seedu.module.Module;
@@ -9,19 +10,14 @@ import seedu.online.NusMods;
 import seedu.timetable.Timetable;
 import seedu.ui.AddUI;
 import seedu.ui.TextUi;
-import seedu.exceptions.AddException;
-import java.io.IOException;
+import seedu.exceptions.ModuleExistException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-//Indicate time clashes with current timetable in milestone v2.0 when adding lesson
 public class AddCommand extends Command {
-    private static final int SERIAL_STARTING = 1;
     private static final String LECTURE = "Lecture";
     private static final String TUTORIAL = "Tutorial";
     private static final String LAB = "Laboratory";
-    private static final String SPACE = " ";
-    private static final String DIV = "|";
     private final String moduleCode;
     private final int semester;
     private final Timetable timetable;
@@ -33,12 +29,13 @@ public class AddCommand extends Command {
         this.timetable = timetable;
     }
 
-    public void execute() throws AddException, IntegerException {
+    public void execute() throws FetchException, ModuleExistException, IntegerException {
         Module module;
         try {
             module = NusMods.fetchModOnline(moduleCode);
-        } catch (IOException e) {
-            throw new AddException("Module Code does not exist");
+            checkModuleExist(module);
+        } catch (FetchException | ModuleExistException e) {
+            throw e;
         }
         TextUi.printAddMessage(moduleCode);
 
@@ -52,11 +49,7 @@ public class AddCommand extends Command {
         ArrayList<Lesson> laboratory;
         laboratory = getLessonDetails(semesterData.getTimetable(), LAB);
 
-        try {
-            addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
-        } catch (IntegerException e) {
-            throw new IntegerException("Invalid Integer");
-        }
+        addUI.printLessonDetails(lecture, tutorial, laboratory, timetable, module);
     }
 
     public ArrayList<Lesson> getLessonDetails(ArrayList<Lesson> lessons, String lessonType) {
@@ -68,5 +61,15 @@ public class AddCommand extends Command {
         }
         Collections.sort(completeList, new ClassNumComparator());
         return completeList;
+    }
+
+    public void checkModuleExist(Module mod) throws ModuleExistException {
+        for (Module module : timetable.getModules()) {
+            String moduleCode = module.getModuleCode();
+            if (moduleCode.equals(mod.getModuleCode())) {
+                throw new ModuleExistException("Module currently already exist in your timetable");
+            }
+        }
+
     }
 }

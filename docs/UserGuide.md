@@ -175,9 +175,30 @@ You can also apply the following flags to refine the search:
 
 ## Add to timetable: `add <MODULE_CODE>`
 
-You want to start planning your timetable and your semester workload. Try adding your first module!
+You have finally decided on the modules you want to take. Try adding your first module to your timetable! 
 
-Let's add for example, `CS2113T` to the timetable
+Let's add for example, `CG2271` to the timetable
+
+You can type `add CG2271` to see all the available lessons.
+
+```shell
+~$ add CG2271
+Now adding CG2271 into timetable
+         Lecture Lesson Slots                         Tutorial Lesson Slots                         Laboratory Lesson Slots
+1: Wednesday, 0900-1100, 01, E-Learn_A    |   1: Thursday, 1100-1200, 01, E-Learn_A     |   1: Friday, 0800-1000, 01, E4A-04-08       |   
+_______________________________________   |   _______________________________________   |   _______________________________________   |   
+                                              2: Tuesday, 0800-0900, 02, E-Learn_A      |   2: Friday, 1000-1200, 02, E4A-04-08       |   
+                                              _______________________________________   |   _______________________________________   |   
+                                              3: Friday, 1400-1500, 03, E-Learn_A       |   
+                                              _______________________________________   | 
+```
+
+If lessons are found, a prompt to indicate a choice for each lesson type will be shown as such.
+
+```shell
+Which Lecture would you like to choose? 
+```
+
 
 <br>
 

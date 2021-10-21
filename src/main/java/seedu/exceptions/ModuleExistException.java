@@ -1,9 +1,9 @@
 package seedu.exceptions;
 
-public class IntegerException extends Exception {
+public class ModuleExistException extends Exception {
     String message;
 
-    public IntegerException(String input) {
+    public ModuleExistException(String input) {
         this.message = input;
     }
 

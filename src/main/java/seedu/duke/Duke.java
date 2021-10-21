@@ -2,7 +2,9 @@ package seedu.duke;
 
 import seedu.command.Command;
 import seedu.exceptions.AddException;
+import seedu.exceptions.FetchException;
 import seedu.exceptions.IntegerException;
+import seedu.exceptions.ModuleExistException;
 import seedu.module.Module;
 import seedu.parser.CommandParser;
 import seedu.storage.TimetableStorage;
@@ -48,9 +50,11 @@ public class Duke {
     private void executeCommand(Command command) {
         try {
             command.execute();
-        } catch (AddException e) {
+        } catch (FetchException e) {
             e.printMessage();
         } catch (IntegerException e) {
+            e.printMessage();
+        } catch (ModuleExistException e) {
             e.printMessage();
         }
     }

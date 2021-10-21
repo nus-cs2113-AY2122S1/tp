@@ -202,7 +202,6 @@ public class Timetable implements Comparable<Timetable> {
         deleteFromSchedule(module, friday);
         deleteFromSchedule(module, saturday);
         deleteFromSchedule(module, sunday);
-
     }
 
     /**
@@ -373,5 +372,19 @@ public class Timetable implements Comparable<Timetable> {
             flag = 1;
         }
         return flag;
+    }
+
+    public boolean isConflict(Lesson lesson) {
+        ArrayList<Integer> duration = lesson.getStartToEndTime();
+        for (Integer time : duration) {
+            if (isLessonExist(lesson, time)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean isLessonExist(Lesson lesson, Integer time) {
+        return getLesson(lesson.getParsedDay(), time) != null;
     }
 }

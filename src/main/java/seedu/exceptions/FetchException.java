@@ -1,9 +1,10 @@
 package seedu.exceptions;
 
-public class IntegerException extends Exception {
+public class FetchException extends Exception {
+
     String message;
 
-    public IntegerException(String input) {
+    public FetchException(String input) {
         this.message = input;
     }
 

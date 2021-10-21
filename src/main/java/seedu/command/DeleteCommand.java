@@ -1,5 +1,6 @@
 package seedu.command;
 
+import seedu.exceptions.FetchException;
 import seedu.exceptions.UniModsException;
 import seedu.module.Module;
 import seedu.online.NusMods;
@@ -28,7 +29,7 @@ public class DeleteCommand extends Command {
             module = NusMods.fetchModOnline(moduleToBeDeleted);
             timetable.deleteModuleFromList(module);
             logger.log(Level.INFO, "The module was deleted successfully!");
-        } catch (IOException e) {
+        } catch (FetchException e) {
             System.out.println(TextUi.ERROR_INVALID_MODULE_CODE);
             logger.log(Level.WARNING, "The module code entered is invalid!");
         } catch (UniModsException e) {
