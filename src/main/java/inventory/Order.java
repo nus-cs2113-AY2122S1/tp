@@ -79,7 +79,7 @@ public class Order extends Medicine {
 
     public String toFileFormat() {
         String fileFormat = getOrderId() + "|" + getMedicineName() + "|" + getQuantity() + "|"
-                + DateParser.dateToString(getDate()) + "|" +  getStatus();
+                + DateParser.dateToString(getDate()) + "|" + getStatus();
         return fileFormat;
     }
 

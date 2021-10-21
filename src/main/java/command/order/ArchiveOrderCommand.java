@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Delete order based on user input given order id.
+ * Archive orders based on user input given date.
  */
 public class ArchiveOrderCommand extends Command {
     private static Logger logger = Logger.getLogger("Delete Order");

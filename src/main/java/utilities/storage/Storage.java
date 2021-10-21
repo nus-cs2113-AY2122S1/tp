@@ -97,7 +97,7 @@ public class Storage {
     }
 
     /**
-     * Save data into specific files after categorising them into Stock, Order and Dispense.
+     * Archive data into specific files after categorising them into Order and Dispense.
      */
     public void archiveData(ArrayList<Medicine> medicines) {
         String orderArchiveData = "";

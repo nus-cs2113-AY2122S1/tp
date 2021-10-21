@@ -105,7 +105,7 @@ public class Stock extends Medicine {
 
     public String toFileFormat() {
         String fileFormat = getStockID() + "|" + getMedicineName() + "|" + getPrice() + "|" + getQuantity() + "|"
-                + DateParser.dateToString(getExpiry()) + "|" +  getDescription() + "|" + getMaxQuantity() + "|"
+                + DateParser.dateToString(getExpiry()) + "|" + getDescription() + "|" + getMaxQuantity() + "|"
                 + isDeleted();
         return fileFormat;
     }
