@@ -1,16 +1,12 @@
-Chicken Rice
+Coffee
 Calories (kcal): 
-500
+10
 Ingredients needed: 
-1. Chicken
+1. Coffee beans
+2. Water
+3. Sugar
 Method: 
-
-Calories (kcal): 
-Ingredients needed: 
-Method: 
-
-1. Duck
-Ingredients needed: 
-Method: 
-1. Cook
+1. Boil water
+2. Grind beans
+3. Pour water over grounds
 

@@ -68,7 +68,7 @@ public class TagTest {
 
     @Test
     public void testTag_NoDuplicateTagsAllowed() {
-        String input = "add Chicken Rice /ingredients Chicken /steps Cook /calories 500"
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
                 + "tag / Chicken Rice / Hawker Food + Favorite"
                 + System.lineSeparator()
@@ -79,9 +79,9 @@ public class TagTest {
 
     @Test
     public void testTag_MultipleRecipes() {
-        String input = "add Chicken Rice /ingredients Chicken /steps Cook /calories 500"
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
-                + "add Duck Rice / ingredients Duck /steps Cook /calories 500"
+                + "addRecipe Duck Rice / ingredients Duck /steps Cook"
                 + System.lineSeparator()
                 + "tag / Chicken Rice + Duck Rice / Hawker Food";
         String expected = formatException(GordonException.NO_RECIPE_FOUND);
@@ -90,9 +90,9 @@ public class TagTest {
 
     @Test
     public void testTag_ListTags() {
-        String input = "add Chicken Rice /ingredients Chicken /steps Cook /calories 500"
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
-                + "add Duck Rice / ingredients Duck /steps Cook /calories 500"
+                + "addRecipe Duck Rice / ingredients Duck /steps Cook"
                 + System.lineSeparator()
                 + "tag / Chicken Rice / Hawker Food + Poultry + Favorite"
                 + System.lineSeparator()
@@ -112,7 +112,7 @@ public class TagTest {
 
     @Test
     public void testFindTag_NoTagExists() {
-        String input = "add Chicken Rice /ingredients Chicken /steps Cook /calories 500"
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
                 + "find /tag NoExistsTag";
         String expected = formatException(GordonException.NO_RESULT_FOUND);
@@ -121,9 +121,9 @@ public class TagTest {
 
     @Test
     public void testFindTag_MultipleCriteria() {
-        String input = "add Chicken Rice /ingredients Chicken /steps Cook /calories 500"
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
-                + "add Duck Rice / ingredients Duck /steps Cook /calories 500"
+                + "addRecipe Duck Rice / ingredients Duck /steps Cook"
                 + System.lineSeparator()
                 + "tag / Chicken Rice / Hawker Food + Poultry + Favorite"
                 + System.lineSeparator()
@@ -136,7 +136,7 @@ public class TagTest {
 
     @Test
     public void testUnTag_FormatWrong1() {
-        String input = "add Chicken Rice /ingredients Chicken /steps Cook /calories 500"
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
                 + "tag / Chicken Rice / Hawker Food + Poultry + Favorite"
                 + System.lineSeparator()
@@ -147,7 +147,7 @@ public class TagTest {
 
     @Test
     public void testUnTag_FormatWrong2() {
-        String input = "add Chicken Rice /ingredients Chicken /steps Cook /calories 500"
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
                 + "tag / Chicken Rice / Hawker Food"
                 + System.lineSeparator()
@@ -158,7 +158,7 @@ public class TagTest {
 
     @Test
     public void testUnTag_MultipleCriteria1() {
-        String input = "add Chicken Rice /ingredients Chicken /steps Cook /calories 500"
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
                 + "tag / Chicken Rice / Hawker Food + Favorite + Poultry"
                 + System.lineSeparator()
@@ -171,9 +171,6 @@ public class TagTest {
                 + System.lineSeparator()
                 + "Chicken Rice"
                 + System.lineSeparator()
-                + "Calories (kcal): "
-                + System.lineSeparator()
-                + "500" + System.lineSeparator()
                 + "Ingredients needed: "
                 + System.lineSeparator()
                 + "1. Chicken"
@@ -192,7 +189,7 @@ public class TagTest {
 
     @Test
     public void testUnTag_MultipleCriteria2() {
-        String input = "add Chicken Rice /ingredients Chicken /steps Cook /calories 500"
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
                 + "tag / Chicken Rice / Hawker Food + Favorite + Poultry"
                 + System.lineSeparator()
@@ -226,9 +223,9 @@ public class TagTest {
 
     @Test
     public void testDeleteTag_MultipleCriteria() {
-        String input = "add Chicken Rice /ingredients Chicken /steps Cook /calories 500"
+        String input = "addRecipe Chicken Rice /ingredients Chicken /steps Cook"
                 + System.lineSeparator()
-                + "add Duck Rice / ingredients Duck /steps Cook /calories 500"
+                + "addRecipe Duck Rice / ingredients Duck /steps Cook"
                 + System.lineSeparator()
                 + "tag / Chicken Rice / Hawker Food + Favorite"
                 + System.lineSeparator()
@@ -241,10 +238,6 @@ public class TagTest {
                 + "===================="
                 + System.lineSeparator()
                 + "Duck Rice"
-                + System.lineSeparator()
-                + "Calories (kcal): "
-                + System.lineSeparator()
-                + "500"
                 + System.lineSeparator()
                 + "Ingredients needed: "
                 + System.lineSeparator()
