@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -159,5 +160,37 @@ class ParserTest {
         assertEquals(patient.getEmailAddress(), "john_tan@gmail.com");
         assertEquals(patient.getPhoneNumber(), "81234567");
         assertEquals(patient.getResidentialAddress(), "123 Bishan St 24 #05-19");
+    }
+
+    @Test
+    void testPreprocessInput() throws Exception {
+        Method method = Parser.class.getDeclaredMethod("preprocessInput", String.class);
+        method.setAccessible(true);
+        String[][] testInputStrings = {
+                {"  add n/John Tan   ",
+                "add n/John Tan"},
+                {"add n/John Tan",
+                "add n/John Tan"},
+                {"add n/Tim| lee ",
+                "add n/Tim lee"},
+                {"add i/S8712345G||",
+                "add i/S8712345G"}
+        };
+        for (String[] testInputString : testInputStrings) {
+            assertEquals(testInputString[1], method.invoke(method, testInputString[0]));
+        }
+    }
+
+    @Test
+    void testParsePersonId() throws Exception {
+        Method method = Parser.class.getDeclaredMethod("parsePersonId", String.class);
+        method.setAccessible(true);
+        HashMap<String, Integer> testCases = new HashMap<>();
+        testCases.put("5", 5);
+        testCases.put("  5   ", 5);
+        testCases.put("35", 35);
+        for (String key : testCases.keySet()) {
+            assertEquals(testCases.get(key), method.invoke(method, key));
+        }
     }
 }
