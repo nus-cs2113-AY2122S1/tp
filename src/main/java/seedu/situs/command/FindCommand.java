@@ -2,6 +2,7 @@ package seedu.situs.command;
 
 import seedu.situs.exceptions.DukeException;
 import seedu.situs.ingredients.Ingredient;
+import seedu.situs.ingredients.IngredientGroup;
 import seedu.situs.ingredients.IngredientList;
 
 
@@ -26,17 +27,17 @@ public class FindCommand extends Command {
     @Override
     public String run() throws DukeException {
         String resultMsg = "";
-        /*List<Ingredient> searchResults = IngredientList.getInstance().getIngredientList().stream()
-                .filter(result -> result.getName().toLowerCase().contains(keyword)).collect(Collectors.toList());
+        List<IngredientGroup> searchResults = IngredientList.getIngredientList().stream()
+                .filter(result -> result.getIngredientGroupName().toLowerCase().contains(keyword)).collect(Collectors.toList());
         if (searchResults.isEmpty()) {
             resultMsg += NO_RESULTS_MESSAGE_START + keyword + NO_RESULTS_MESSAGE_END;
         } else {
             resultMsg += FIND_MESSAGE_START + keyword + FIND_MESSAGE_END;
-            for (Ingredient ingredient : searchResults) {
-                resultMsg += LIST_NEWLINE_INDENT + (IngredientList.getInstance().getIngredientList()
-                        .indexOf(ingredient) + 1) + ". " + ingredient;
+            for (IngredientGroup group : searchResults) {
+                resultMsg += LIST_NEWLINE_INDENT + (IngredientList.getIngredientList()
+                        .indexOf(group) + 1) + ". " + group;
             }
-        }*/
+        }
         return resultMsg;
     }
 }
