@@ -20,7 +20,11 @@ public class HelpCommand extends Command {
      * @param ui The <code>Ui</code> that will be used to print out the outcome of the execution.
      */
     public void execute(TripsList tripsList, Ui ui) {
-       System.out.println("this is the help");
+       System.out.println("Some of our basic commands are:\n" +
+               "new FamilyTrip2021 /from SIN /to MLY : Adds a new trip called FamilyTrip2021 from Singapore (SIN) to Malaysia (MLY).\n" +
+               "viewall : Views all your existing trips and their details.\n" +
+               "delete FamilyTrip2021 : Deletes the trip called FamilyTrip2021.\n" +
+               "exit : Exits the program.");
     }
 
     @Override
