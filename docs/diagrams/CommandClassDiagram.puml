@@ -1,0 +1,153 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+!include style.puml
+
+' hide the circles in the diagram
+hide circle
+' hide the icons for access modifiers
+skinparam classAttributeIconSize 0
+' to join all the arrows
+skinparam groupInheritance 3
+skinparam classBackgroundColor COLOR_COMMAND_BOX
+skinparam arrowColor #000000
+
+package "Command Component" <<Rectangle>> {
+    class "{abstract}\nCommand" as Command
+    class AddDispenseCommand
+    class AddStockCommand
+    class AddOrderCommand
+    class Archive
+    class DeleteDispenseCommand
+    class DeleteStockCommand
+    class DeleteOrderCommand
+    class ExitCommand
+    class HelpCommand
+    class ListDispenseCommand
+    class ListStockCommand
+    class ListOrderCommand
+    class PurgeCommand
+    class ReceiveOrderCommand
+    class UpdateDispenseCommand
+    class UpdateStockCommand
+    class UpdateOrderCommand
+
+}
+
+class Command {
+    #parameters: LinkedHashMap<String, String>
+    +execute(): void{abstract}
+}
+
+class AddDispenseCommand {
+    +AddDispenseCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+    -dispense(medicationName: String, customerId: String, staffName: String, quantityToDispense: int, dispenseDate: Date, stock: Stock, existingId: int, existingExpiry: Date, setStockValue: int): void
+}
+
+class AddStockCommand {
+    +AddStockCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+    -checkDateAndQuantity(nameToAdd: String, formatExpiry: Date, quantity: int, existingMaxQuantity: int, totalStock: int): boolean
+    -addMedicine(name: String, description: String, price: double, quantity: int, expiryDate: Date, maxQuantity: int): void
+}
+
+class AddOrderCommand {
+    +AddOrderCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+    -addOrder(name: String, quantity: int, date: Date): void
+}
+
+class Archive {
+    'to fill up
+}
+
+class DeleteDispenseCommand {
+    +DeleteDispenseCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+    -setStockQuantity(stockIdToDispense: int, dispenseQuantity: int): boolean
+}
+
+class DeleteStockCommand {
+    +DeleteStockCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+    -deleteStockById(): void
+    -deleteStockByExpiry(): void
+}
+
+class DeleteOrderCommand {
+    +DeleteOrderCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+}
+
+class ExitCommand {
+    +execute(): void
+}
+
+class HelpCommand {
+    +execute(): void
+}
+
+class ListDispenseCommand {
+    +ListDispenseCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+    -filterDispenses(filteredDispenses: ArrayList<Dispense>): ArrayList<Dispense>
+}
+
+class ListStockCommand {
+    +ListStockCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+}
+
+class ListOrderCommand {
+    +ListOrderCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+    -filterOrders(filteredOrders: ArrayList<Order>): ArrayList<Order>
+}
+
+class PurgeCommand {
+    +execute(): void
+}
+
+class UpdateDispenseCommand {
+    +UpdateDispenseCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+    -processGivenNameAndQuantity(dispense: Dispense, customerId: String, date: Date, staffName: String): boolean
+    -processGivenName(dispense: Dispense, customerId: String, date: Date, staffName: String): boolean
+    -processGivenQuantity(dispense: Dispense, customerId: String, date: Date, staffName: String): boolean
+    -processOtherFields(dispense: Dispense, customerId: String, date: Date, staffName: String): boolean
+}
+
+class UpdateOrderCommand {
+    +UpdateOrderCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+    -setUpdatesByOrderId(filteredOrders: ArrayList<Order>, order: Order): void
+}
+
+class UpdateStockCommand {
+    +UpdateStockCommand(parameters: LinkedHashMap<String, String>)
+    +execute(): void
+    -getNewStock(stock: Stock): Stock
+    -addNewRowForUpdates(filteredStocks: ArrayList<Stock>): void
+    -processDateInput(stock: Stock): boolean
+    -processQuantityValues(stock: Stock): boolean
+    -setUpdatesByStockId(filteredStocks: ArrayList<Stock>, stock: Stock): void
+}
+
+AddDispenseCommand ---|> Command
+AddStockCommand ---|> Command
+AddOrderCommand ---|> Command
+DeleteDispenseCommand --|> Command
+DeleteStockCommand --|> Command
+DeleteOrderCommand --|> Command
+ExitCommand --|> Command
+HelpCommand --|> Command
+ListDispenseCommand --up|> Command
+ListStockCommand --up|> Command
+ListOrderCommand --up|> Command
+PurgeCommand --|> Command
+UpdateOrderCommand ---up|> Command
+UpdateDispenseCommand ---up|> Command
+UpdateStockCommand ---up|> Command
+
+@enduml

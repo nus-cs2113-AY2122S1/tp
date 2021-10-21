@@ -11,6 +11,25 @@ original source as well}
 
 ### Command
 
+![CommandClassDiagram](diagrams/diagram_images/CommandClassDiagram.png)
+
+The **Command** class diagram above shows how **Command** interact with other classes
+in MediVault.
+
+The Command Component consists of **17** subclasses where each subclass represents
+a command feature.
+
+Let `*` be either of the three class: `Stock`, `Order` or `Dispense`.
+* `Add*Command`: Adds a new `*` information into MediVault.
+* `Delete*Command`: Removes the visibility of the `*` record in MediVault.
+* `List*Command`: Lists the `*` records.
+* `Update*Command`: Updates the `*` information.
+* `ReceiveOrderCommand`: Marks an order as received and adds the ordered medication into the current stocks.
+* `ArchiveCommand`: Archives all the records before a given date. 
+* `PurgeCommand`: Wipes all record in MediVault.
+* `HelpCommand`: Shows the help page.
+* `ExitCommand`: Exits MediVault.
+
 ### Utilities
 
 {combine ui, storage, parser, comparators?}
@@ -159,7 +178,7 @@ respective `print()` method from the `Ui` class will be called to display the re
 MediVault initialises an UpdateStockCommand class when CommandParser identifies the
 `updatestock` or the `update` keyword in the `stock` mode.
 
-* MediVault updates medicine stock information when `parameter` and `parameterValues` provided by the user are valid.
+* MediVault checks if `parameters` and `parameterValues` provided by the user are valid.
 * MediVault conducts another validation check on the provided `quantity`,`max_quantity` and `expiry`
   against the stored medicine stock information.
 
@@ -167,9 +186,42 @@ The sequence diagram for UpdateStockCommand is shown below.
 
 ![UpdateStockSequenceDiagram](diagrams/diagram_images/UpdateStockSequenceDiagram.png)
 
-MediVault modifies the `STOCK_ID` when a user tries to update a medicine name. The old record still exists in MediVault,
-but it will not be visisble to user when listed. This approach solves the issue when a user is unable to delete a _
+MediVault adds a new _stock_ record when a user updates contains the `n/NAME` parameter. 
+The old stock record still exists in MediVault, but it will not be visible to user when listed. 
+This approach solves the issue when a user is unable to delete a _
 dispense_ record when the medicine _stock_ name gets updated.
+
+### UpdateDispenseCommand
+
+MediVault initialises an UpdateDispenseCommand class when CommandParser identifies the
+`updatedispense` or the `update` keyword in the `dispense` mode.
+
+* MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
+* When a user updates dispense information containing either `n/NAME`, `q/QUANTITY` or both,
+MediVault restores the dispensed stocks or dispense more stocks depending on the user input. 
+
+The sequence diagram for UpdateDispenseCommand is shown below.
+
+![UpdateDispenseSequenceDiagram](diagrams/diagram_images/UpdateDispenseSequenceDiagram.png)
+
+MediVault adds a new _dispense_ record when a user updates contains either the `n/NAME`, `q/QUANTITY`
+parameter or both. The old _dispense_ record is permanently removed from MediVault.
+This approach solves the issue when a user dispenses a medication with an amount 
+that is more than the current batch of stock with the same _stock_ id but less than
+the total stock quantity. 
+MediVault will correctly add new _dispense_ records with the corresponding _stock_ Id.
+
+### UpdateOrderCommand
+
+MediVault initialises an UpdateOrderCommand class when CommandParser identifies the
+`updateorder` or the `update` keyword in the `order` mode.
+
+* MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
+* MediVault restricts updating of order information that are already **delivered**.
+
+The sequence diagram for UpdateOrderCommand is shown below.
+
+![UpdateOrderSequenceDiagram](diagrams/diagram_images/UpdateOrderSequenceDiagram.png)
 
 ## Product scope
 

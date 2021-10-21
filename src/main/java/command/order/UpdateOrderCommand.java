@@ -35,7 +35,6 @@ public class UpdateOrderCommand extends Command {
         logger.log(Level.INFO, "Start of UpdateOrder command execution.");
 
         Ui ui = Ui.getInstance();
-        ArrayList<Medicine> medicines = Medicine.getInstance();
 
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
@@ -47,6 +46,7 @@ public class UpdateOrderCommand extends Command {
             return;
         }
 
+        ArrayList<Medicine> medicines = Medicine.getInstance();
         boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.UPDATE_ORDER_COMMAND);
         if (isInvalidParameterValues) {
