@@ -79,6 +79,29 @@ public class StockManager {
     }
 
     /**
+     * Extracts the stock object by a given medicine name and stock Id.
+     *
+     * @param medicines Arraylist of all medicines.
+     * @param name      Name of the medicine.
+     * @param stockId        Stock Id of the medicine.
+     * @return Stock object of the provided stock id by user
+     */
+    public static Stock extractStockObject(ArrayList<Medicine> medicines, String name, int stockId) {
+        for (Medicine medicine : medicines) {
+            if (!(medicine instanceof Stock)) {
+                continue;
+            }
+            Stock stock = (Stock) medicine;
+            boolean isSameName = name.equalsIgnoreCase(stock.getMedicineName());
+            boolean isSameId = stockId == stock.getStockID();
+            if (isSameName && isSameId) {
+                return stock;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Extracts the filtered stock for stocks with same name.
      *
      * @param medicines Arraylist of all medicines.

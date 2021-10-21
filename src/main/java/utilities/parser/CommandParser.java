@@ -7,6 +7,7 @@ import command.PurgeCommand;
 import command.dispense.AddDispenseCommand;
 import command.dispense.DeleteDispenseCommand;
 import command.dispense.ListDispenseCommand;
+import command.dispense.UpdateDispenseCommand;
 import command.stock.AddStockCommand;
 import command.stock.DeleteStockCommand;
 import command.stock.ListStockCommand;
@@ -36,6 +37,7 @@ import static command.CommandList.LIST_STOCK;
 import static command.CommandList.LIST_ORDER;
 import static command.CommandList.PURGE;
 import static command.CommandList.UPDATE;
+import static command.CommandList.UPDATE_DISPENSE;
 import static command.CommandList.UPDATE_STOCK;
 import static command.CommandList.UPDATE_ORDER;
 import static utilities.parser.Mode.DISPENSE;
@@ -102,8 +104,8 @@ public class CommandParser {
             break;*/
         case UPDATE_STOCK:
             return new UpdateStockCommand(parameters);
-        /*case UPDATE_DISPENSE:
-            break;*/
+        case UPDATE_DISPENSE:
+            return new UpdateDispenseCommand(parameters);
         case UPDATE_ORDER:
             return new UpdateOrderCommand(parameters);
         default:
