@@ -112,12 +112,17 @@ public class ContactsDecoder extends RegexParser {
         }
     }
 
+    private String[] decodeDetails(String contactText) throws IndexOutOfBoundsException,
+            InvalidGithubUsernameException, InvalidNameException, InvalidFlagException,
+            InvalidTelegramUsernameException, InvalidTwitterUsernameException,
+            InvalidLinkedinUsernameException, InvalidEmailException {
         String[] destructuredInputs = contactText.split(SEPARATOR);
         String[] compiledDetails = new String[NUMBER_OF_FIELDS];
         for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
             if (destructuredInputs[i].equals("null")) {
                 compiledDetails[i] = null;
             } else {
+                checkRegex(FLAG_SEQUENCE[i], destructuredInputs[i]);
                 compiledDetails[i] = destructuredInputs[i];
             }
         }
