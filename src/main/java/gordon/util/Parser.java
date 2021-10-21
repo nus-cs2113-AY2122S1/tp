@@ -74,6 +74,11 @@ public class Parser {
         return new NullCommand();
     }
 
+    // used for JUnit purposes
+    public boolean parserHasNextLine() {
+        return in.hasNextLine();
+    }
+
     public boolean parseNextLine() {
         line = in.nextLine();
         return !line.trim().equalsIgnoreCase("exit");
