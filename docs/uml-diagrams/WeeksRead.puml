@@ -12,10 +12,12 @@ deactivate WeeksAdapterFactory
 alt BEGIN_ARRAY
     WeeksAdapter -> WeeksAdapter : getWeeksIntArray()
     activate WeeksAdapter
+    WeeksAdapter --> WeeksAdapter
     deactivate WeeksAdapter
 else BEGIN_OBJECT
     WeeksAdapter -> WeeksAdapter : getWeeksObject()
     activate WeeksAdapter
+    WeeksAdapter --> WeeksAdapter
     deactivate WeeksAdapter
 else
     <-- WeeksAdapter : Throw IOException

@@ -12,10 +12,12 @@ deactivate WeeksAdapterFactory
 alt weeks != null
     WeeksAdapter -> WeeksAdapter : writeAsIntArray()
     activate WeeksAdapter
+    WeeksAdapter --> WeeksAdapter
     deactivate WeeksAdapter
 else else
     WeeksAdapter -> WeeksAdapter : writeAsObject()
     activate WeeksAdapter
+    WeeksAdapter --> WeeksAdapter
     deactivate WeeksAdapter
 end
 
