@@ -10,6 +10,7 @@ public class UpdateCommand implements Command {
 
     private static final String UPDATE_MESSAGE = "Got it. This ingredient has been updated:\n" + "\t";
     private static final String LIST_EMPTY_MESSAGE = "Your inventory is empty!";
+    private static final String INCORRECT_UPDATE = "Your inventory is empty!";
 
     private Ingredient updatedIngredient;
 
@@ -32,13 +33,15 @@ public class UpdateCommand implements Command {
 
             for (i = 0; i < IngredientList.getInstance().getInventoryStock(); i++) {
                 if (this.updatedIngredient.getName().equals((IngredientList.getInstance()).get(i + 1).getName())) {
-                    IngredientList.getInstance().set(i, this.updatedIngredient);
-                    resultMsg = UPDATE_MESSAGE + this.updatedIngredient.toString();
+                        IngredientList.getInstance().set(i, this.updatedIngredient);
+                        resultMsg = UPDATE_MESSAGE + this.updatedIngredient.toString();
+                    }
+
                 }
-            }
             return resultMsg;
-        } catch (IOException e) {
+            } catch (IOException e) {
             throw new DukeException("Cannot write ingredient to memory!");
         }
     }
+
 }

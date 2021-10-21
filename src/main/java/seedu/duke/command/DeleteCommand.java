@@ -25,4 +25,5 @@ public class DeleteCommand implements Command {
         String resultMsg = DELETE_MESSAGE + removedIngredient.toString();
         return resultMsg;
     }
+
 }

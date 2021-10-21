@@ -71,6 +71,9 @@ Step 6: The `getLowStockAlerts()` method is called, the `IngredientList` instanc
 
 Step 7: The `getAlerts()` method sends the data to the UI to display to the user.
 
+### Update
+
+On command, the `UpdateCommand` class instantiates it's `UpdateCommand` constructor with the input ingredient information.
 
 
 

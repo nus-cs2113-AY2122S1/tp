@@ -1,5 +1,7 @@
 package seedu.duke.command;
 
+import seedu.duke.exceptions.DukeException;
+
 public class HelpCommand implements Command {
 
     private static final String HELP_MESSAGE = "These are the commands I can currently carry out:\n"
@@ -16,4 +18,5 @@ public class HelpCommand implements Command {
     public String run() {
         return HELP_MESSAGE;
     }
+
 }

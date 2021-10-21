@@ -7,6 +7,7 @@ import seedu.duke.localtime.CurrentDate;
 
 import java.io.IOException;
 
+//public class AddCommand implements Command {
 public class AddCommand implements Command {
 
     private static final String ADDED_MESSAGE = "Got it. This ingredient has been added to the inventory:\n" + "\t";
@@ -23,7 +24,7 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public String run() throws DukeException {
+     public String run() throws DukeException {
         try {
             IngredientList.getInstance().add(this.ingredient);
             String resultMsg = ADDED_MESSAGE
@@ -36,4 +37,5 @@ public class AddCommand implements Command {
             throw new DukeException("Cannot write ingredient to memory!");
         }
     }
+
 }
