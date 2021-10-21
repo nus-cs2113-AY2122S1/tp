@@ -4,6 +4,8 @@ package medbot.person;
 import static medbot.Ui.VERTICAL_LINE_SPACED;
 import static medbot.Ui.ENDLINE;
 
+import medbot.list.PersonalAppointmentList;
+
 
 public abstract class Person {
     private static final String PARAMETER_NAME = "n/";
@@ -30,9 +32,10 @@ public abstract class Person {
     protected String emailAddress = "";
     protected String residentialAddress = "";
     protected PersonType personType;
+    protected PersonalAppointmentList personalAppointmentList = new PersonalAppointmentList();
 
     public String toString() {
-        return  ENDLINE
+        return ENDLINE
                 + "IC: " + icNumber + ENDLINE
                 + "Name: " + name + ENDLINE
                 + "H/P: " + phoneNumber + ENDLINE
@@ -104,6 +107,10 @@ public abstract class Person {
         phoneNumber = null;
         emailAddress = null;
         residentialAddress = null;
+    }
+
+    public PersonalAppointmentList getPersonalAppointmentList() {
+        return personalAppointmentList;
     }
 
     /**

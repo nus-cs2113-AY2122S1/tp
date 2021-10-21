@@ -1,11 +1,18 @@
 package medbot;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import medbot.command.appointmentcommand.AddAppointmentCommand;
 import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.Command;
 import medbot.command.ExitCommand;
 import medbot.command.CommandType;
 
+import medbot.command.appointmentcommand.DeleteAppointmentCommand;
+import medbot.command.appointmentcommand.EditAppointmentCommand;
+import medbot.command.appointmentcommand.ListAppointmentCommand;
 import medbot.command.personcommand.patientcommand.AddPatientCommand;
 import medbot.command.personcommand.patientcommand.DeletePatientCommand;
 import medbot.command.personcommand.patientcommand.EditPatientCommand;
@@ -53,9 +60,18 @@ public class Parser {
     private static final String PARAMETER_ADDRESS = "a/";
     private static final int PARAMETER_BUFFER = 2;
 
+    private static final String PARAMETER_APPOINTMENT_PATIENT_ID = "p/";
+    private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_1 = "m/";
+    private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_2 = "s/";
+    private static final String PARAMETER_APPOINTMENT_DATE_TIME_1 = "d/";
+    private static final String PARAMETER_APPOINTMENT_DATE_TIME_2 = "t/";
+
     private static final String VIEW_TYPE_PATIENT_VIEW = "p";
+    private static final String VIEW_TYPE_PATIENT_VIEW_ALT = "1";
     private static final String VIEW_TYPE_MEDICAL_STAFF_VIEW = "m";
+    private static final String VIEW_TYPE_MEDICAL_STAFF_VIEW_ALT = "2";
     private static final String VIEW_TYPE_SCHEDULER_VIEW = "s";
+    private static final String VIEW_TYPE_SCHEDULER_VIEW_ALT = "3";
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
     private static final String ERROR_NO_VIEW_FOUND = "Unidentified view." + END_LINE;
@@ -98,7 +114,10 @@ public class Parser {
 
     private static final String EMPTY_STRING = "";
 
-    private static ViewType viewType =  ViewType.PATIENT_INFO;
+    private static final String DATE_TIME_FORMATTER_PATTERN = "dd/MM/yy HH00";
+    private static final ZoneOffset zoneOffset = ZoneOffset.ofHours(8);
+
+    private static ViewType viewType = ViewType.PATIENT_INFO;
 
     public static ViewType getViewType() {
         return viewType;
@@ -203,6 +222,18 @@ public class Parser {
 
     //Update with relevant scheduling commands
     public static Command parseSchedulingCommand(String userInput) throws MedBotParserException {
+        if (userInput.startsWith(COMMAND_ADD)) {
+            return parseAddAppointmentCommand(userInput);
+        }
+        if (userInput.startsWith(COMMAND_DELETE)) {
+            return parseDeleteAppointmentCommand(userInput);
+        }
+        if (userInput.startsWith(COMMAND_EDIT)) {
+            return parseEditAppointmentCommand(userInput);
+        }
+        if (userInput.equals(COMMAND_LIST)) {
+            return new ListAppointmentCommand();
+        }
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
@@ -262,7 +293,7 @@ public class Parser {
      * @throws MedBotParserException when patient id is not specified or not a number.
      */
     private static ViewPatientCommand parseViewPatientCommand(String userInput) throws MedBotParserException {
-        int personId = parsePersonId(userInput.substring(4));
+        int personId = parseId(userInput.substring(4));
         return new ViewPatientCommand(personId);
     }
 
@@ -274,7 +305,7 @@ public class Parser {
      * @throws MedBotParserException when staff id is not specified or not a number.
      */
     private static ViewStaffCommand parseViewStaffCommand(String userInput) throws MedBotParserException {
-        int personId = parsePersonId(userInput.substring(4));
+        int personId = parseId(userInput.substring(4));
         return new ViewStaffCommand(personId);
     }
 
@@ -286,7 +317,7 @@ public class Parser {
      * @throws MedBotParserException when patient id given is not specified or not a number.
      */
     private static DeletePatientCommand parseDeletePatientCommand(String userInput) throws MedBotParserException {
-        int personId = parsePersonId(userInput.substring(6));
+        int personId = parseId(userInput.substring(6));
         return new DeletePatientCommand(personId);
     }
 
@@ -298,7 +329,7 @@ public class Parser {
      * @throws MedBotParserException when staff id given is not specified or not a number.
      */
     private static DeleteStaffCommand parseDeleteStaffCommand(String userInput) throws MedBotParserException {
-        int personId = parsePersonId(userInput.substring(6));
+        int personId = parseId(userInput.substring(6));
         return new DeleteStaffCommand(personId);
     }
 
@@ -311,7 +342,7 @@ public class Parser {
      *                               the parameters given cannot be parsed.
      */
     private static EditPatientCommand parseEditPatientCommand(String userInput) throws MedBotParserException {
-        int patientId = parsePersonId(userInput.substring(4));
+        int patientId = parseId(userInput.substring(4));
         String[] parameters = getParameters(userInput);
         Patient patient = new Patient();
         patient.setNull();
@@ -328,7 +359,7 @@ public class Parser {
      *                               the parameters given cannot be parsed.
      */
     private static EditStaffCommand parseEditStaffCommand(String userInput) throws MedBotParserException {
-        int staffId = parsePersonId(userInput.substring(4));
+        int staffId = parseId(userInput.substring(4));
         String[] parameters = getParameters(userInput);
         Staff staff = new Staff();
         staff.setNull();
@@ -362,7 +393,6 @@ public class Parser {
         Staff staff = new Staff();
         updateMultiplePersonalInformation(staff, parameters);
         return new AddStaffCommand(staff);
-
     }
 
     private static FindPatientCommand parseFindPatientCommand(String userInput) throws MedBotParserException {
@@ -396,10 +426,13 @@ public class Parser {
         case EMPTY_STRING:
             return new SwitchCommand(ViewType.getNextView(viewType));
         case VIEW_TYPE_PATIENT_VIEW:
+        case VIEW_TYPE_PATIENT_VIEW_ALT:
             return new SwitchCommand(ViewType.PATIENT_INFO);
         case VIEW_TYPE_MEDICAL_STAFF_VIEW:
+        case VIEW_TYPE_MEDICAL_STAFF_VIEW_ALT:
             return new SwitchCommand(ViewType.MEDICAL_STAFF_INFO);
         case VIEW_TYPE_SCHEDULER_VIEW:
+        case VIEW_TYPE_SCHEDULER_VIEW_ALT:
             return new SwitchCommand(ViewType.SCHEDULER);
         default:
             throw new MedBotParserException(ERROR_INVALID_VIEW_TYPE);
@@ -407,8 +440,56 @@ public class Parser {
     }
 
 
+    private static AddAppointmentCommand parseAddAppointmentCommand(String userInput) throws MedBotParserException {
+        String[] attributeStrings = getParameters(userInput);
+        Appointment appointment = new Appointment();
+        updateMultipleAppointmentInformation(appointment, attributeStrings);
+        return new AddAppointmentCommand(appointment);
+    }
+
+    private static DeleteAppointmentCommand parseDeleteAppointmentCommand(String userInput)
+            throws MedBotParserException {
+        int appointmentId = parseId(userInput.substring(6));
+        return new DeleteAppointmentCommand(appointmentId);
+    }
+
+    private static EditAppointmentCommand parseEditAppointmentCommand(String userInput) throws MedBotParserException {
+        int appointmentId = parseId(userInput.substring(4));
+        String[] attributeStrings = getParameters(userInput);
+        Appointment appointment = new Appointment();
+        updateMultipleAppointmentInformation(appointment, attributeStrings);
+        return new EditAppointmentCommand(appointmentId, appointment);
+    }
+
+    private static void updateMultipleAppointmentInformation(Appointment appointment, String[] attributeStrings)
+            throws MedBotParserException {
+        for (String attributeString : attributeStrings) {
+            updateAppointmentInformation(appointment, attributeString);
+        }
+    }
+
+    private static void updateAppointmentInformation(Appointment appointment, String attributeString)
+            throws MedBotParserException {
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_PATIENT_ID)) {
+            int patientId = parseId(attributeString.substring(PARAMETER_BUFFER));
+            appointment.setPatientId(patientId);
+            return;
+        }
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_1)
+                || attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_2)) {
+            int medicalStaffId = parseId(attributeString.substring(PARAMETER_BUFFER));
+            appointment.setMedicalStaffId(medicalStaffId);
+            return;
+        }
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_DATE_TIME_1)
+                || attributeString.startsWith(PARAMETER_APPOINTMENT_DATE_TIME_2)) {
+            int dateTimeCode = parseDateTime(attributeString.substring(PARAMETER_BUFFER).strip());
+            appointment.setDateTimeCode(dateTimeCode);
+        }
+    }
+
     /**
-     * Parses user input to the correct patient information format.
+     * Parses user input to the correct person information format.
      *
      * @param userInput String containing the full user input.
      * @return The parameters list given by user.
@@ -477,6 +558,7 @@ public class Parser {
         if (attributeString.startsWith(PARAMETER_IC)) {
             String icNumber = parseIcNumber(attributeString.substring(PARAMETER_BUFFER));
             person.setIcNumber(icNumber);
+            return;
         }
         if (attributeString.startsWith(PARAMETER_ADDRESS)) {
             String address = parseResidentialAddress(attributeString.substring(PARAMETER_BUFFER));
@@ -605,7 +687,7 @@ public class Parser {
     }
 
 
-    private static int parsePersonId(String userInput) throws MedBotParserException {
+    private static int parseId(String userInput) throws MedBotParserException {
         userInput = userInput.strip();
         if (userInput.equals(EMPTY_STRING)) {
             throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
@@ -668,6 +750,12 @@ public class Parser {
         Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER);
         Matcher matcher = pattern.matcher(input);
         return matcher.replaceAll(replacementFunction);
+    }
+
+    private static int parseDateTime(String dateTimeString) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER_PATTERN);
+        LocalDateTime parsedDate = LocalDateTime.parse(dateTimeString, dateTimeFormatter);
+        return (int) (parsedDate.toEpochSecond(zoneOffset) / 60);
     }
 
 }

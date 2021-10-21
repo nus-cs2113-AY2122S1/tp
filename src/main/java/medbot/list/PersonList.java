@@ -121,6 +121,13 @@ public class PersonList {
         return output;
     }
 
+    public PersonalAppointmentList getPersonalAppointmentList(int personId) throws MedBotException {
+        if (!persons.containsKey(personId)) {
+            throw new MedBotException(getNoPersonIdErrorMessage(personId));
+        }
+        return persons.get(personId).getPersonalAppointmentList();
+    }
+
     public String getNoPersonIdErrorMessage(int personId) {
         return "No person with ID " + personId + " found." + ENDLINE;
     }
