@@ -81,6 +81,14 @@ corresponding `ContactList` and `Contact` objects. It is thus dependent on the c
 
 {NOT DONE}
 
+### <a name="View"></a>Viewing a contact: `view`
+This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the 
+contact list, user can input `view [INDEX]` with the index of the desired contact displayed from the `list` feature. 
+`ViewContactCommand` is then created in the `MainParser` and executed in `Duke`.
+The sequence diagram below illustrates the `execute()` function in `ViewContactCommand`.
+
+![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
+
 ### <a name="Edit"></a>Editing a contact: `edit`
 This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list, 
 a user must enter a command in the form `edit [CONTACT INDEX] [DETAILS WITH FLAGS]` where the details with flags are 
@@ -134,12 +142,17 @@ additional devices or platforms.
 
 ## <a name="stories"></a>User Stories
 
-{NOT DONE}
-
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|programmer|add my colleague's account usernames|easily access it|
+|v1.0|programmer|edit my colleague's account usernames|update it if there is a change|
+|v1.0|programmer|save contact data locally on my hard drive|access it without internet|
+|v1.0|programmer|view various contact details of my colleague|contact him easily on different platforms|
+|v1.0|programmer|see the names and index of saved contacts|know the contacts I have saved|
+|v1.0|programmer|delete a specific contact||
+|v1.0|programmer|be able to copy and paste the displayed contact's URLs|visit the contact's accounts|
+|v2.0|programmer|save my personal details|the application is aware of the user|
+|v2.0|forgetful user|be able to search for my contacts by name|find their contact details|
 
 ## <a name="nf-req"></a>Non-Functional Requirements
 
