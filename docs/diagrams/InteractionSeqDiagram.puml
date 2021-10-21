@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+
+skinparam maxMessageSize 150
+actor User as U
+participant UI UI_COLOUR
+participant Main as M MAIN_COLOUR
+participant Parser as P PARSER_COLOUR
+participant Ingredient as I
+participant Command as C COMMAND_COLOUR
+participant IngredientList as IL INGREDIENTLIST_COLOUR
+participant Storage as S STORAGE_COLOUR
+
+M -> UI: getUserCommand()
+activate M
+activate UI
+U -> UI: "add n/carrot a/1 e/2021-11-12"
+UI --> M: "add n/carrot a/1 e/2021-11-12"
+deactivate UI
+M -> M: runCommand("add n/carrot a/1 e/2021-11-12")
+activate M
+M -> P: parse("add n/carrot a/1 e/2021-11-12")
+activate P
+P -> P: parseAddCommand("add n/carrot a/1 e/2021-11-12")
+activate P
+P -> I **: Ingredient(carrot, 1, date)
+activate I
+return i
+P -> C **: AddCommand(i)
+activate C
+return
+P -> C: run()
+activate C
+C -> IL: add(i)
+activate IL
+IL -> S: writeIngredientsToMemory()
+activate S
+return
+return
+return resultMsg
+return resultMsg
+return resultMsg
+return resultMsg
+M -> UI: printCommandOutput(resultMsg)
+activate UI
+UI --> U
+deactivate UI
+@enduml
