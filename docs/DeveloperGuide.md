@@ -55,13 +55,13 @@ The App is organized by the `command`, `exception`, `kitchen`, and `util` packag
 
 The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
-![Sequence Diagram](./RenderedUML/AddSequence.svg)
+![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138207270-83d59ba2-b753-4a0f-bf46-7710921511d6.png)
 
 ### Cookbook component
 
 The Diagram below is the class diagram for the ``Cookbook`` class
 
-![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
+![Cookbook Class Diagram](https://user-images.githubusercontent.com/65898007/138207292-1d989a95-f4b2-468a-9076-94ce74e8248b.png)
 
 The `Cookbook` Class is instantiated by the `Gordon` Class, and manages the recipes and tags of the cookbook.
 
@@ -99,10 +99,6 @@ The `Cookbook` class can be classified into 3 main functionalities:
 
 ### Recipe component
 
-The Diagram below is the class diagram for the Recipe class
-
-![Recipe Class Diagram](https://user-images.githubusercontent.com/65898007/138097156-7f23bda4-f1bc-41e3-8e85-36eeac273dec.png)
-
 ### Parser component
 
 The diagram below is the class diagram for the `Parser` class
@@ -119,7 +115,7 @@ Functions of the Parser class:
 
 The Diagram below is the class diagram for the Command Class
 
-![Command Class Diagram](./RenderedUML/CommandRects.svg)
+![Command Class Diagram](https://user-images.githubusercontent.com/65898007/138222993-ad90002c-80bc-4d74-aa2a-f267765d812c.png)
 
 The `Command` class contains all the basic functionality of the Gordon cookbook, and is the Class that executes specific commands given by the user.
 
