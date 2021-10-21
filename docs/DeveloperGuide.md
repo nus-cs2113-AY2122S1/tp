@@ -24,6 +24,8 @@ Refer to our user guide [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob
 
 The ***Architecture Diagram*** above explains the high-level design of the App. 
 
+## Command ImplementationStep
+
 ### Storage
 
 The storage component can implement the below features:
