@@ -53,6 +53,14 @@ public class AllRecordList {
         }
     }
 
+    public void addLoan(String name, double amount, LocalDate date, boolean isLoadingStorage) {
+        int month = date.getMonthValue();
+        allRecordList.get(month).addLoan(name, amount, date, isLoadingStorage);
+        if (!isLoadingStorage) {
+            saveToStorage(storageDirectory);
+        }
+    }
+
     public void clearAll() {
         allRecordList.clear();
         for (int i = 1; i <= 12; i++) {
@@ -93,6 +101,8 @@ public class AllRecordList {
     public int getMonthListSize(int month) {
         return allRecordList.get(month).getSize();
     }
+
+
 
     /*public int getAllSize() {
         int size = 0;

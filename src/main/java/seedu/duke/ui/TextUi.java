@@ -1,10 +1,9 @@
 package seedu.duke.ui;
 
 import seedu.duke.data.AllRecordList;
-import seedu.duke.data.RecordList;
 import seedu.duke.data.records.Expenditure;
+import seedu.duke.data.records.Loan;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class TextUi {
@@ -63,6 +62,18 @@ public class TextUi {
             System.out.println("Your budget of "
                     + amount
                     + " for this month is successfully added!"
+                    + LS
+                    + DIVIDER);
+        }
+    }
+
+    public static void showLoanAddedMessage(Loan newLoan, boolean isLoadingStorage) {
+        if (!isLoadingStorage) {
+            System.out.println("Loan successfully added!"
+                    + LS
+                    + newLoan.getName() + " owes you: $" + newLoan.getAmount()
+                    + LS
+                    + "Date of loan: " + newLoan.getDate()
                     + LS
                     + DIVIDER);
         }
@@ -204,6 +215,7 @@ public class TextUi {
     public static void printDivider() {
         System.out.println(DIVIDER);
     }
+
 
     /**
      * Reads the text entered by the user.
