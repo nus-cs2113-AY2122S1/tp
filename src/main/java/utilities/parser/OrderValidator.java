@@ -12,7 +12,10 @@ import java.util.LinkedHashMap;
 /**
  * Contains all the methods to validate if an Order's input parameters are valid.
  */
-public class OrderValidator {
+public class OrderValidator extends MedicineValidator {
+    public OrderValidator() {
+    }
+
     /**
      * Checks if parameter values are valid for Order objects.
      *
@@ -22,8 +25,8 @@ public class OrderValidator {
      * @param commandSyntax The command's valid syntax.
      * @return A boolean value indicating whether parameter values are valid.
      */
-    public static boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
-                                                         ArrayList<Medicine> medicines, String commandSyntax) {
+    public boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
+                                                  ArrayList<Medicine> medicines, String commandSyntax) {
         for (String parameter : parameters.keySet()) {
             boolean isValid = false;
             String parameterValue = parameters.get(parameter);
@@ -33,10 +36,10 @@ public class OrderValidator {
                 isValid = isValidOrderId(ui, parameterValue, medicines);
                 break;
             case CommandParameters.NAME:
-                isValid = MedicineValidator.isValidName(ui, parameterValue);
+                isValid = isValidName(ui, parameterValue);
                 break;
             case CommandParameters.QUANTITY:
-                isValid = MedicineValidator.isValidQuantity(ui, parameterValue);
+                isValid = isValidQuantity(ui, parameterValue);
                 break;
             case CommandParameters.DATE:
                 isValid = isValidDate(ui, parameterValue);
@@ -67,7 +70,7 @@ public class OrderValidator {
      * @param medicines List of all medicines.
      * @return Boolean value indicating if order ID is valid.
      */
-    public static boolean isValidOrderId(Ui ui, String oid, ArrayList<Medicine> medicines) {
+    public boolean isValidOrderId(Ui ui, String oid, ArrayList<Medicine> medicines) {
         try {
             int orderId = Integer.parseInt(oid);
             if (orderId <= 0 || orderId > Order.getOrderCount()) {
@@ -101,7 +104,7 @@ public class OrderValidator {
      * @param dateString Date of the medicine.
      * @return Boolean value indicating if medicine expiry date is valid.
      */
-    public static boolean isValidDate(Ui ui, String dateString) {
+    public boolean isValidDate(Ui ui, String dateString) {
         try {
             DateParser.stringToDate(dateString);
             return true;
@@ -118,7 +121,7 @@ public class OrderValidator {
      * @param statusString Status of medicine order.
      * @return Boolean value indicating if medicine expiry date is valid.
      */
-    public static boolean isValidStatus(Ui ui, String statusString) {
+    public boolean isValidStatus(Ui ui, String statusString) {
         if (statusString.equalsIgnoreCase("PENDING")
                 || statusString.equalsIgnoreCase("DELIVERED")) {
             return true;
@@ -134,7 +137,7 @@ public class OrderValidator {
      * @param columnName Column name/alias to be validated.
      * @return Boolean value indicating if column name is value.
      */
-    public static boolean isValidColumn(Ui ui, String columnName) {
+    public boolean isValidColumn(Ui ui, String columnName) {
         String[] columnAlias = new String[]{CommandParameters.ID, CommandParameters.NAME, CommandParameters.QUANTITY,
                 CommandParameters.DATE, CommandParameters.STATUS};
         if (Arrays.asList(Order.COLUMNS).contains(columnName.toUpperCase()) || Arrays.asList(columnAlias)

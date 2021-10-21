@@ -38,7 +38,8 @@ public class DeleteStockCommand extends Command {
         String[] requiredParameters = {};
         String[] optionalParameters = {CommandParameters.ID, CommandParameters.EXPIRY_DATE};
 
-        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
+        StockValidator stockValidator = new StockValidator();
+        boolean isInvalidParameter = stockValidator.containsInvalidParameters(ui, parameters, requiredParameters,
                 optionalParameters, CommandSyntax.DELETE_STOCK_COMMAND, true);
         if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameter is specified by user");
@@ -46,7 +47,7 @@ public class DeleteStockCommand extends Command {
             return;
         }
 
-        boolean isInvalidParameterValues = StockValidator.containsInvalidParameterValues(ui, parameters, medicines,
+        boolean isInvalidParameterValues = stockValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.DELETE_STOCK_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameter value specified by user");
@@ -63,7 +64,7 @@ public class DeleteStockCommand extends Command {
         }
 
         if (hasStockId && !hasExpiryDate) {
-            deleteStockById(ui, parameters, medicines);
+            deleteStockById(ui, parameters, medicines, stockValidator);
         } else if (!hasStockId && hasExpiryDate) {
             deleteStockByExpiry(ui, parameters, medicines);
         }
@@ -76,14 +77,15 @@ public class DeleteStockCommand extends Command {
     /**
      * Deletion of stock given an id.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
-     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines  Arraylist of all medicines.
+     * @param ui             Reference to the UI object to print messages.
+     * @param parameters     LinkedHashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines      Arraylist of all medicines.
+     * @param stockValidator Reference to StockValidator object.
      */
     private static void deleteStockById(Ui ui, LinkedHashMap<String, String> parameters,
-                                        ArrayList<Medicine> medicines) {
+                                        ArrayList<Medicine> medicines, StockValidator stockValidator) {
         String stockIdToDelete = parameters.get(CommandParameters.ID);
-        boolean isAValidStockId = StockValidator.isValidStockId(ui, stockIdToDelete, medicines);
+        boolean isAValidStockId = stockValidator.isValidStockId(ui, stockIdToDelete, medicines);
         if (!isAValidStockId) {
             logger.log(Level.WARNING, "Invalid stock id is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of stock");
@@ -113,7 +115,7 @@ public class DeleteStockCommand extends Command {
     /**
      * Deletion of expired stocks given a date.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
+     * @param ui         Reference to the UI object to print messages.
      * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
      * @param medicines  Arraylist of all medicines.
      */

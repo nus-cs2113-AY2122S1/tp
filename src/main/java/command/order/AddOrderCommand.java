@@ -43,14 +43,15 @@ public class AddOrderCommand extends Command {
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY};
         String[] optionalParameter = {CommandParameters.DATE};
 
-        boolean isInvalidParameters = CommandSyntax.containsInvalidParameters(ui, parameters,
+        OrderValidator orderValidator = new OrderValidator();
+        boolean isInvalidParameters = orderValidator.containsInvalidParameters(ui, parameters,
                 requiredParameters, optionalParameter, CommandSyntax.ADD_ORDER_COMMAND, false);
         if (isInvalidParameters) {
             logger.log(Level.WARNING, "Invalid parameters given by user");
             return;
         }
 
-        boolean isInvalidParameterValues = OrderValidator.containsInvalidParameterValues(ui, parameters,
+        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters,
                 medicines, CommandSyntax.ADD_ORDER_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");

@@ -35,7 +35,8 @@ public class DeleteDispenseCommand extends Command {
         String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};
 
-        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
+        DispenseValidator dispenseValidator = new DispenseValidator();
+        boolean isInvalidParameter = dispenseValidator.containsInvalidParameters(ui, parameters, requiredParameters,
                 optionalParameters, CommandSyntax.DELETE_DISPENSE_COMMAND, true);
 
         if (isInvalidParameter) {
@@ -45,7 +46,7 @@ public class DeleteDispenseCommand extends Command {
         }
         String dispenseIdToDelete = parameters.get(CommandParameters.ID);
 
-        boolean isValidDispenseId = DispenseValidator.isValidDispenseId(ui, dispenseIdToDelete, medicines);
+        boolean isValidDispenseId = dispenseValidator.isValidDispenseId(ui, dispenseIdToDelete, medicines);
         if (!isValidDispenseId) {
             logger.log(Level.WARNING, "Invalid dispense id is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of dispense");

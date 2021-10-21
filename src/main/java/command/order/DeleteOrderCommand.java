@@ -35,7 +35,8 @@ public class DeleteOrderCommand extends Command {
         String[] requiredParameters = {CommandParameters.ID};
         String[] optionalParameters = {};
 
-        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
+        OrderValidator orderValidator = new OrderValidator();
+        boolean isInvalidParameter = orderValidator.containsInvalidParameters(ui, parameters, requiredParameters,
                 optionalParameters, CommandSyntax.DELETE_ORDER_COMMAND, true);
 
         if (isInvalidParameter) {
@@ -45,7 +46,7 @@ public class DeleteOrderCommand extends Command {
         }
 
         String orderIdToDelete = parameters.get(CommandParameters.ID);
-        boolean isValidOrderId = OrderValidator.isValidOrderId(ui, orderIdToDelete, medicines);
+        boolean isValidOrderId = orderValidator.isValidOrderId(ui, orderIdToDelete, medicines);
         if (!isValidOrderId) {
             logger.log(Level.WARNING, "Invalid order id is specified by user");
             logger.log(Level.INFO, "Unsuccessful deletion of order");
