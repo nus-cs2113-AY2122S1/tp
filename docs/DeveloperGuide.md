@@ -48,6 +48,18 @@ The *sequence diagram* below shows how various components of the architecture in
 
 *Note: More information will be updated in the future upon completion of v2.0*
 
+The sections below give more details of each component.
+
+### Attendance component
+**API** : [`Attendance.java`](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/attendance/Attendance.java)
+
+![Attendance Component Diagram](images/AttendanceComponent.png)
+
+The `Attendance` component,
+* instantiates an `Attendance` object comprising of 1 `Member` object and 1 `TrainingSchedule` object.
+* stores inputted `Attendance` objects in a list as an `ArrayList<Attendance>` in `AttendanceList` class.
+* stores the `AttendanceList` object in a csv file with the help of `AttendanceStorage`.
+
 ## Appendix: Requirements
 ### Product scope
 #### **Target user profile**
