@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+Box
+-> Duke: User input
+Duke -> InputParser: getCommandName()
+activate InputParser
+Duke <-- InputParser: userCommandName
+
+Duke -> InputParser: getCommandParameters()
+
+return parameters
+
+Duke -> Command: execute()
+activate Command
+UI <- Command: results of execution
+activate UI
+ <-- UI: output to be displayed
+
+@enduml
