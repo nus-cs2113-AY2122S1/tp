@@ -21,7 +21,7 @@
 
 ## Design & implementation
 
-###General Flow
+### General Flow
 
 ![](images/main_sequence.png)
 
@@ -32,18 +32,18 @@
 * Once user is done using the application, he can send a bye message prompting a goodbye message
 * Application ends
 
-###Input parsing
+### Input parsing
 * Gets command name of user input by checking if the users input starts with any of the strings that are defined for commands (add dish, list dish, help etc.)
 * Throws an exception if no matching command is found
 * Takes rest of user input as parameterString
 * Based on command name splits the parameterString into respective parameters to respective command classes for execution
 
-###Storage
+### Storage
 * After every operation writes the names of the Ingredient weight of ingredient stored, weight of ingredient wasted, into a text file called ingredients.txt
 * After every operation writes the names of the dish, weight of dish waste,constituents of the dish if there are any, into a text file called dish.txt
 
 
-###Data Structures
+### Data Structures
 
 ![](images/dish_ingredient.png)
 
@@ -85,11 +85,11 @@ The command it sends to the terminal is as follows:
         }
     }
 ```
-###Exceptions
+### Exceptions
 Handles errors such as unrecognised user commands and improper parameters by calling UI to print error messages that prompt user to type in correct commands/parameters
 
 
-###Command abstraction
+### Command abstraction
 
 ![](images/command.png)
 
