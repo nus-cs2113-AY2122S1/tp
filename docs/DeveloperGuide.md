@@ -149,7 +149,7 @@ execute a certain command.
 {Describe the value proposition: what problem does it solve?}
 
 Users with _Ha(ppy)Bit_ will find themselves cultivating good habits despite hectic 
-workload/commitments from school (we targeting work and school?). 
+workload or commitments. 
 
 
 ## Appendix B: User Stories
