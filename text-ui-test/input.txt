@@ -20,6 +20,7 @@ add -n mayank -g mayankp123
 rm 9909
 add -n bory -g marcus
 add       -n   andre   -g ng-andre
+y
 list
 view 1
 add -n bory -g
@@ -54,11 +55,14 @@ add -n asjoda sadfsd -te _123adad
 view 0
    add  -n   -g
       add -n le,zong, mun -g    lezaimun
+      y
        add   -n null  -g legit
        add -n name -g null
        add   -n dev -g nullptr
     edit 3 -g new-git
+    y
     add -n asjoda sadfsd -tw _123  adad
+    y
     add -n asjoda sadfsd -tw 123_adad
 add -n name -l linkedin -g github -e lasdas@ -tw twitter -te telegram
 add -n asdasd -l kusdd__ -g adasdas -e .adadas@com

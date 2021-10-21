@@ -1,10 +1,24 @@
 package seedu.command;
 
+import seedu.contact.Contact;
+import seedu.contact.ContactList;
+import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
 import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
+import seedu.ui.UserInputTextUi;
+
+import java.util.ArrayList;
 
 public class EditContactCommand extends Command {
+    public static final int PERSONAL_CONTACT_INDEX = -1;
+    public static final int NAME_INDEX = 0;
+    public static final int GITHUB_INDEX = 1;
+    public static final int LINKEDIN_INDEX = 2;
+    public static final int TELEGRAM_INDEX = 3;
+    public static final int TWITTER_INDEX = 4;
+    public static final int EMAIL_INDEX = 5;
+    public static final int NUMBER_OF_FIELDS = 6;
     String[] contactDetails;
     int contactIndex;
 
@@ -15,15 +29,155 @@ public class EditContactCommand extends Command {
 
     public void execute() {
         try {
-            if (contactIndex == -1) {
-                personalContact.editPersonalContact(contactDetails);
-                TextUi.editPersonalContactMessage(personalContact);
+            if (contactIndex == PERSONAL_CONTACT_INDEX) {
+                updatePersonalContact();
             } else {
-                contactList.editContact(contactDetails, contactIndex);
-                TextUi.editContactMessage(contactList.getContactAtIndex(contactIndex));
+                Contact preEditContact = duplicateContact(contactList.getContactAtIndex(contactIndex));
+                Contact postEditContact = editTempContact(contactDetails,preEditContact);
+                handleDuplicates(postEditContact);
             }
         } catch (IndexOutOfBoundsException | InvalidFlagException e) {
             ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());
         }
+    }
+
+    private void updatePersonalContact() {
+        personalContact.editPersonalContact(contactDetails);
+        TextUi.editPersonalContactMessage(personalContact);
+    }
+
+    private void handleDuplicates(Contact postEditContact) throws IndexOutOfBoundsException, InvalidFlagException {
+        if (hasDuplicates(postEditContact, contactList, contactIndex)) {
+            TextUi.ignoreContact("edit");
+        } else {
+            updateContact(postEditContact);
+        }
+    }
+
+    private void updateContact(Contact postEditContact)
+            throws IndexOutOfBoundsException, InvalidFlagException {
+        contactList.editContact(contactDetails, contactIndex);
+        TextUi.editContactMessage(postEditContact);
+    }
+
+    private Boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
+            throws InvalidFlagException {
+        ArrayList<Integer> duplicatedIndexes = new ArrayList<>();
+        String[] postEditContactDetails = extractContactDetails(postEditContact);
+        for (int i = 0; i < contactList.getListSize(); i++) {
+            if (i == contactIndex) {
+                continue;
+            }
+            String[] currContactDetails = extractContactDetails(contactList.getContactAtIndex(i));
+            //check for any field that is duplicated for all the fields in contact details
+            checkCurrContactDetails(duplicatedIndexes, i, postEditContactDetails, currContactDetails);
+        }
+        if (!duplicatedIndexes.isEmpty()) {
+            TextUi.confirmDuplicateMessage(duplicatedIndexes, contactList, "edit");
+            String userEditConfirmation = UserInputTextUi.getUserConfirmation();
+            return userEditConfirmation.equalsIgnoreCase("n");
+        }
+        return false;
+    }
+
+    private void checkCurrContactDetails(ArrayList<Integer> duplicatedIndexes, int currContactIndex,
+                                         String[] postEditContactDetails, String[] currContactDetails) {
+        for (int j = 0; j < NUMBER_OF_FIELDS; j++) {
+            boolean isDuplicatedField =
+                    checkDuplicatedField(postEditContactDetails[j], currContactDetails[j]);
+            if (isDuplicatedField) {
+                duplicatedIndexes.add(currContactIndex);
+                break;
+            }
+        }
+    }
+
+    private boolean checkDuplicatedField(String postEditField, String currentField) {
+        if (postEditField != null && currentField != null) {
+            return (hasDuplicateField(postEditField, currentField));
+        }
+        return false;
+    }
+
+
+    private Contact duplicateContact(Contact contact) {
+        String name = contact.getName();
+        String github = contact.getGithub();
+        String linkedin = contact.getLinkedin();
+        String telegram = contact.getTelegram();
+        String twitter = contact.getTwitter();
+        String email = contact.getEmail();
+        return new Contact(name, github, linkedin, telegram, twitter, email);
+    }
+
+    private Boolean hasDuplicateField(String input, String saved) {
+        return cleanString(saved).equals(cleanString(input));
+    }
+
+    private String cleanString(String input) {
+        return input.replace(" ", "").toLowerCase();
+    }
+
+
+    private Contact editTempContact(String[] contactDetails, Contact preEditContact) throws InvalidFlagException {
+        Contact tempContact = duplicateContact(preEditContact);
+        for (int i = 0; i < contactDetails.length; i++) {
+            if (contactDetails[i] != null) {
+                switch (i) {
+                case NAME_INDEX:
+                    tempContact.setName(contactDetails[i]);
+                    break;
+                case GITHUB_INDEX:
+                    tempContact.setGithub(contactDetails[i]);
+                    break;
+                case LINKEDIN_INDEX:
+                    tempContact.setLinkedin(contactDetails[i]);
+                    break;
+                case TELEGRAM_INDEX:
+                    tempContact.setTelegram(contactDetails[i]);
+                    break;
+                case TWITTER_INDEX:
+                    tempContact.setTwitter(contactDetails[i]);
+                    break;
+                case EMAIL_INDEX:
+                    tempContact.setEmail(contactDetails[i]);
+                    break;
+                default:
+                    assert false;
+                    throw new InvalidFlagException();
+                }
+            }
+        }
+        return tempContact;
+    }
+
+    private String[] extractContactDetails(Contact contact) throws InvalidFlagException {
+        String[] contactDetails = new String[NUMBER_OF_FIELDS];
+        for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
+            switch (i) {
+            case NAME_INDEX:
+                contactDetails[NAME_INDEX] = contact.getName();
+                break;
+            case GITHUB_INDEX:
+                contactDetails[GITHUB_INDEX] = contact.getGithub();
+                break;
+            case LINKEDIN_INDEX:
+                contactDetails[LINKEDIN_INDEX] = contact.getLinkedin();
+                break;
+            case TELEGRAM_INDEX:
+                contactDetails[TELEGRAM_INDEX] = contact.getTelegram();
+                break;
+            case TWITTER_INDEX:
+                contactDetails[TWITTER_INDEX] = contact.getTwitter();
+                break;
+            case EMAIL_INDEX:
+                contactDetails[EMAIL_INDEX] = contact.getEmail();
+                break;
+            default:
+                assert false;
+                throw new InvalidFlagException();
+            }
+        }
+        return contactDetails;
     }
 }

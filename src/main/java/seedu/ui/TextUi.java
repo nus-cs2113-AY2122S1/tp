@@ -2,8 +2,8 @@ package seedu.ui;
 
 import seedu.contact.Contact;
 import seedu.contact.PersonalContact;
-
-import java.util.Scanner;
+import seedu.contact.ContactList;
+import java.util.ArrayList;
 
 public abstract class TextUi {
     private static final String LOGO = "   _____         _______        _     \n"
@@ -222,6 +222,52 @@ public abstract class TextUi {
                 + " Example: search -g QUERY\n\n"
                 + "help: Displays application usage instructions.\n"
                 + " Example: help";
+        printDoubleLineMessage(message);
+    }
+
+    public static void confirmDuplicateMessage(ArrayList<Integer> duplicatedIndex,
+                                               ContactList contactList, String type) {
+        if (duplicatedIndex.size() == 1) {
+            Contact currentContact = contactList.getContactAtIndex(duplicatedIndex.get(0));
+            String message;
+            if (type.equals("add")) {
+                message = "One of your saved contacts has a duplicate field:\n"
+                        + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
+                        + formatContactFields(currentContact) + "\n\nDo you still want to add the contact?  (y/n)\n";
+            } else {
+                message = "One of your saved contacts has a duplicate field:\n"
+                        + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
+                        + formatContactFields(currentContact) + "\n\nDo you still want to edit the contact?  (y/n)\n";
+            }
+            printDoubleLineMessage(message);
+        } else {
+            System.out.println(LINE);
+            System.out.println("These contacts have duplicate fields:\n");
+            for (Integer index : duplicatedIndex) {
+                duplicatedContactsMessage(contactList.getContactAtIndex(index), index);
+            }
+            if (type.equals("add")) {
+                System.out.println("Do you still want to add the contact?  (y/n)\n");
+            } else {
+                System.out.println("Do you still want to edit the contact?  (y/n)\n");
+            }
+            System.out.println(LINE);
+        }
+    }
+
+    public static void duplicatedContactsMessage(Contact viewingContact, int index) {
+        String viewName = ViewMessageFormatterUi.viewNameFormatter(viewingContact);
+        String message = index + ". " + viewName + formatContactFields(viewingContact);
+        System.out.println(message + "\n");
+    }
+
+    public static void ignoreContact(String type) {
+        String message;
+        if (type.equals("add")) {
+            message = "Contact was not added.";
+        } else {
+            message = "Contact was not edited.";
+        }
         printDoubleLineMessage(message);
     }
 
