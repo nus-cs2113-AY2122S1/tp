@@ -14,11 +14,11 @@ public class AddUniCommand extends Command {
     private final University universityToAdd;
     private final int universityIndexToAdd;
 
-    public AddUniCommand(int universityIndexToAdd, UniversityList universityListMasterList,
+    public AddUniCommand(int universityIndexToAdd, UniversityList universityMasterList,
                          UniversityList universitySelectedList)
             throws IOException {
         this.universityIndexToAdd = universityIndexToAdd;
-        this.universityToAdd = universityListMasterList.get(universityIndexToAdd - 1);
+        this.universityToAdd = universityMasterList.get(universityIndexToAdd - 1);
         assert universityToAdd.getName() != null;
         assert universityToAdd.getClass() != null;
         universitySelectedList.addUniversity(universityToAdd);
@@ -31,12 +31,13 @@ public class AddUniCommand extends Command {
         Ui.printUniversity(universityToAdd, universityIndexToAdd, universitySelectedList);
     }
 
-    public AddUniCommand(University universityToAdd, UniversityList universitySelectedList) throws IOException {
+    public AddUniCommand(University universityToAdd, UniversityList universityMasterList,
+                         UniversityList universitySelectedList) throws IOException {
         this.universityToAdd = universityToAdd;
         assert universityToAdd.getName() != null;
         assert universityToAdd.getClass() != null;
         universitySelectedList.addUniversity(universityToAdd);
-        this.universityIndexToAdd = universityToAdd.getMasterListIndex(universitySelectedList);
+        this.universityIndexToAdd = universityToAdd.getMasterListIndex(universityMasterList);
         assert universitySelectedList.getSize() != 0;
         assert universitySelectedList.searchUniversity(universityToAdd.getName());
         assert universitySelectedList.get(universitySelectedList.getSize() - 1)

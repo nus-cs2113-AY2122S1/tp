@@ -1,5 +1,7 @@
 package seedu.duke.universities;
 
+import seedu.duke.modules.Module;
+
 import java.util.ArrayList;
 
 public class UniversityList {
@@ -63,6 +65,15 @@ public class UniversityList {
             }
         }
         return false;
+    }
+
+    public University getUniversity(String universityName) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).name.equals(universityName)) {
+                return list.get(i);
+            }
+        }
+        return null;
     }
 
 }
