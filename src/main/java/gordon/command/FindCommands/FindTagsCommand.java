@@ -1,25 +1,27 @@
-package gordon.command;
+package gordon.command.FindCommands;
 
+import gordon.command.Command;
 import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
 import gordon.kitchen.Recipe;
 
 import java.util.ArrayList;
 
-public class FindIngredientsCommand extends Command {
-    ArrayList<String> ingredients;
+public class FindTagsCommand extends Command {
 
-    public FindIngredientsCommand(ArrayList<String> ingredients) {
-        this.ingredients = ingredients;
+    ArrayList<String> tags;
+
+    public FindTagsCommand(ArrayList<String> tags) {
+        this.tags = tags;
     }
 
     @Override
     public void execute(Cookbook cookbook) {
-        ArrayList<Recipe> result = cookbook.filterByIngredients(ingredients);
+        ArrayList<Recipe> result = cookbook.filterByTags(tags);
         if (result.size() == 0) {
             System.out.println("GordonException: " + GordonException.NO_RESULT_FOUND);
         } else {
-            System.out.println("Searching by ingredient...");
+            System.out.println("Searching by tags...");
             for (int i = 0; i < result.size(); i++) {
                 System.out.println((i + 1) + ". " + result.get(i).getName());
             }

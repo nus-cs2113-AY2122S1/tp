@@ -1,5 +1,6 @@
-package gordon.command;
+package gordon.command.BasicCommands;
 
+import gordon.command.Command;
 import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
 import gordon.kitchen.Recipe;

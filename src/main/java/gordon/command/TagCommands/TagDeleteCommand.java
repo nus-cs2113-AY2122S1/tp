@@ -1,5 +1,6 @@
-package gordon.command;
+package gordon.command.TagCommands;
 
+import gordon.command.Command;
 import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
 import gordon.util.Tag;

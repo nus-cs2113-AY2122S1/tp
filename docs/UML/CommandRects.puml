@@ -48,10 +48,23 @@ rectangle "Command" {
     rectangle SetPriceCommand LOGIC_RED_1 {
     }
 
+    rectangle TagAddCommand LOGIC_MAGENTA_1 {
+    }
+
+    rectangle TagUntagCommand LOGIC_MAGENTA_1 {
+    }
+
+    rectangle TagDeleteCommand LOGIC_MAGENTA_1 {
+    }
+
 
     "{abstract}\nCommand" <|-down- "BasicCommands"
     "{abstract}\nCommand" <|-left- "FindCommands"
     "{abstract}\nCommand" <|-right- "SetCommands"
+    "{abstract}\nCommand" <|-- "TagCommands"
+    "TagCommands" <|-- TagAddCommand
+    "TagCommands" <|-- TagUntagCommand
+    "TagCommands" <|-- TagDeleteCommand
     "BasicCommands" <|-- AddCommand
     "BasicCommands" <|-- DeleteCommand
     "BasicCommands" <|--- CheckCommand
