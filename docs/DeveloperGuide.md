@@ -166,14 +166,18 @@ the user's data.
 ### Storage component
 
 The `Storage` class allows data to be read from and saved to a storage file.
+The class diagram shows the interactions between the different classes.
 
 ![Storage Class Diagram](Diagram%20Images/StorageClassDiagram.png)
 
-The class diagram shows how `Storage` class imports data from the storage file.
+The program uses `Storage` class to import data from the storage file.
 * `Storage` interacts with `Import` to access the data stored in storage file.
-* `Import` will depend on `ImportParser` to decipher
+* `Import` will depend on `ImportParser` to decipher the data stored, and return 
+a `Goal` or `Habit` object back to `Import` correspondingly.
+* `Import` will then populate `GoalList` with `Goal` and `Habit` objects accordingly
+before returning `GoalList` back to `Storage` and back to user.
 
-Storage class interacts with Export class to export data to storage file.
+`Storage` class can also export data to storage file with `Export` class.
 
 
 ## Appendix A: Product Scope
