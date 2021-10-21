@@ -33,6 +33,7 @@ The storage component can implement the below features:
 * Save both user's module mappings for each university and their selected NUS modules in text
   file and read them back into corresponding objects.
 
+
 ### University and module related classes
 This component consist of the following classes:  
 #### University
@@ -50,6 +51,13 @@ of all available NUS modules, as well as the selected modules the user wants to 
 #### ModuleMapping 
 The ModuleMapping class consists of two modules, local and mapped module. It represents the pair of modules as 
 an available pair of module mapping in the user's SEP application. 
+
+### Parser
+
+The parser component can implement the following features:
+* Identify the command word and invoke the respective argument parser for the command.
+* Handle the arguments and return the respective Command object.
+
 
 ## Product scope
 ### Target user profile
@@ -74,7 +82,7 @@ a list of potential exchange Universities based on the users study plan, module 
 |v1.0|beginner user|list down all NUS modules in my preferred list|keep track of the list of NUS modules I want to complete during SEP|
 |v1.0|beginner user|delete a University from the selected list|remove the University that I am not interested in|
 |v1.0|beginner user|delete a module from the selected list|remove the module that I do not consider to enrol in the future|
-|v1.0|user|interact with the application on the command line in an efficient way|
+|v1.0|user|enter commands and arguments to the application|interact with the application on the command line in an efficient way
 |v2.0|familiar user|save my university and module information|maintain access to my information when I restart the application|
 |v2.0|new user|view the program instructions|refer to them when I forget how to use the application|
 |v2.0|familiar user|find a University by name|locate a University without having to go through the entire list|
