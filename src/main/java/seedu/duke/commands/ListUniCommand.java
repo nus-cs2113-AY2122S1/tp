@@ -19,7 +19,6 @@ public class ListUniCommand extends Command {
             for (int i = 0; i < universityList.getSize(); i++) {
                 assert universityList.get(i).getName() != null;
                 Ui.printUniversity(universityList.get(i), i + 1, universityList);
-                universityList.get(i).listAllMappings();
             }
         }
     }
