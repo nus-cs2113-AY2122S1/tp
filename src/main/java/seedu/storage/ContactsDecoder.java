@@ -54,19 +54,25 @@ public class ContactsDecoder extends RegexParser {
 
 
     private Contact decodePersonalContact(String contactText, Contact contact) {
-        String[] destructuredInputs = contactText.split(SEPARATOR);
         Contact personalContact = contact;
         try {
-            String contactName = destructuredInputs[DetailType.NAME.getIndex()];
-            String contactGithub = destructuredInputs[DetailType.GITHUB.getIndex()];
-            String contactLinkedin = destructuredInputs[DetailType.LINKEDIN.getIndex()];
-            String contactTelegram = destructuredInputs[DetailType.TELEGRAM.getIndex()];
-            String contactTwitter = destructuredInputs[DetailType.TWITTER.getIndex()];
-            String contactEmail = destructuredInputs[DetailType.EMAIL.getIndex()];
+            String[] compiledDetails = decodeDetails(contactText);
+            String contactName = compiledDetails[DetailType.NAME.getIndex()];
+            String contactGithub = compiledDetails[DetailType.GITHUB.getIndex()];
+            String contactLinkedin = compiledDetails[DetailType.LINKEDIN.getIndex()];
+            String contactTelegram = compiledDetails[DetailType.TELEGRAM.getIndex()];
+            String contactTwitter = compiledDetails[DetailType.TWITTER.getIndex()];
+            String contactEmail = compiledDetails[DetailType.EMAIL.getIndex()];
             personalContact = new Contact(contactName, contactGithub, contactLinkedin, contactTelegram,
                     contactTwitter, contactEmail);
         } catch (IndexOutOfBoundsException e) {
             ExceptionTextUi.corruptPersonalContactMessage();
+        } catch (InvalidFlagException e) {
+            assert false; // Control should not arrive here since flags are predetermined by FLAG_SEQUENCE
+            ExceptionTextUi.invalidFlagMessage();
+        } catch (InvalidGithubUsernameException | InvalidNameException | InvalidTelegramUsernameException
+                | InvalidLinkedinUsernameException | InvalidTwitterUsernameException | InvalidEmailException e) {
+
         }
         return personalContact;
     }
