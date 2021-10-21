@@ -95,5 +95,4 @@ public class AddCommandParser {
     public Module searchForModule(String moduleCode, ModuleList moduleMasterList) {
         return moduleMasterList.getModule(moduleCode);
     }
-
 }
