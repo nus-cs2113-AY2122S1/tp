@@ -34,6 +34,7 @@ public class AddCommand extends Command {
     public AddCommand(String[] command, String response) {
 
         isCorrectFormat = true;
+        assert command[0].equals("add") : "Command must be 'add'";
 
         try {
             if (command.length == 1) {
@@ -78,14 +79,22 @@ public class AddCommand extends Command {
     private double retrieveEventBudget(String response) {
         int startOfEventBudget = response.indexOf(BUDGET_FLAG) + 2;
         int endOfEventBudget = response.indexOf("/", startOfEventBudget) - 2;
+        double budget;
         try {
             if (endOfEventBudget < 0) {
-                return Double.parseDouble(response.trim().substring(startOfEventBudget));
+                budget = Double.parseDouble(response.trim().substring(startOfEventBudget));
+            } else {
+                budget = Double.parseDouble(response.trim().substring(startOfEventBudget, endOfEventBudget));
             }
-            return Double.parseDouble(response.trim().substring(startOfEventBudget, endOfEventBudget));
+            if (budget < 0) {
+                System.out.print("Event budget needs to be a positive number. ");
+                // Returns -1 to signify that the budget entered was not a positive number
+                return -1;
+            }
+            return budget;
         } catch (NumberFormatException e) {
             System.out.print("Event budget needs to be a number. ");
-            // Returns -1 to signify that the budget entered was not a valid integer
+            // Returns -1 to signify that the budget entered was not a valid number
             return -1;
         }
     }
@@ -147,12 +156,13 @@ public class AddCommand extends Command {
         }
 
         eventBudget = retrieveEventBudget(response);
+        if (eventBudget == -1) {
+            throw new DukeException("Please re-enter your event. ");
+        }
+        assert eventBudget >= 0 : "Event budget cannot be a negative number";
         if (BigDecimal.valueOf(eventBudget).scale() > 2) {
             throw new DukeException("Event budget cannot have more than 2 decimal places. Please re-enter "
                     + "your event. ");
-        }
-        if (eventBudget == -1) {
-            throw new DukeException("Please re-enter your event. ");
         }
     }
 
@@ -180,10 +190,9 @@ public class AddCommand extends Command {
                 boolean isCorrectEvent = false;
                 while (!isCorrectEvent) {
                     try {
-                        if (!Duke.eventCatalog.isEmpty()) {
-                            Ui.printEventCatalog();
-                            Ui.printLineBreak();
-                        }
+                        assert !Duke.eventCatalog.isEmpty() : "The event catalog should not be empty";
+                        Ui.printEventCatalog();
+                        Ui.printLineBreak();
                         int eventIndex = Integer.parseInt(Ui.readInput());
                         Task task = new Task(itemTitle, itemDescription, itemDateTime);
                         addTaskToEvent(eventIndex, task);

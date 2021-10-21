@@ -61,7 +61,13 @@ public class Ui {
         return String.format("This task has been removed: %s\n", taskTitle);
     }
 
+    public static String getEventDeletionMessage(String eventTitle) {
+        return String.format("This event has been removed: %s\n", eventTitle);
+    }
+
     public static String getTaskAddedMessage(int eventIndex, Task task) {
+        assert eventIndex < Duke.eventCatalog.size() : "Number entered cannot be more than "
+                + "number of events";
         return String.format("Task added: %s\n"
                         + "Total number of tasks in this event = %s",
                 task.getTitle(), Duke.eventCatalog.get(eventIndex - 1).getTaskList().size());

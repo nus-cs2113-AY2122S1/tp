@@ -8,6 +8,8 @@ import seedu.duke.items.Event;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.duke.Duke.eventCatalog;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 
 
@@ -16,9 +18,17 @@ class DeleteCommandTest {
     @Test
     void deleteOneEvent_listOfTwoEvents_oneEventRemaining() {
         setUp();
-        Command command = Parser.parseCommand("delete -e 2");
-        command.execute();
+        Command command1 = Parser.parseCommand("delete -e 2");
+        command1.execute();
         assertEquals(1, eventCatalog.size());
+
+        InputStream sysInBackup = System.in;
+        ByteArrayInputStream in = new ByteArrayInputStream("Y".getBytes());
+        System.setIn(in);
+
+        Command command2 = Parser.parseCommand("delete all");
+        command2.execute();
+        System.setIn(sysInBackup);
     }
 
 
