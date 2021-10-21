@@ -13,26 +13,38 @@
 
 ## Features 
 
-### Searching for available module mappings: searchmap
+### Searching for available module mappings: `searchmap`
 Displays all available module mappings for a specific university.
 The mappings displayed will be based on the list of selected modules.
-* Mappings here are labeled with an index, this index will be used for subsequent commands.  
-  Format: searchmap UNIVERSITY_INDEX
-  Examples:
+
+Mappings here are labeled with an index, this index will be used for subsequent commands.  
+  
+Format: searchmap UNIVERSITY_INDEX
+  
+Examples:
+  
+* Input: `searchmap 4`
+
+* Output:
   ```
-  searchmap 4
   Potential mappings for Boston University:
   [1] CS1231 - MET CS 248 : Discrete Mathematics
   [2] CS1231 - CAS CS131 : Combinatoric Structures
   ```
 ### Adding a module mapping: add /map
 Adds a specific pair of module mapping under a selected university.
-Format: add /map UNIVERSITY_INDEX MODULE_MAPPING_INDEX  
+
+Format: add /map UNIVERSITY_INDEX MODULE_MAPPING_INDEX 
+
 Examples:
+
+* Input: `add /map 4 2`
+
+* Output:
 ```
-add /map 4 2
 The following module mapping has been added under:
 [4] Boston University
+CS1231 - MET CS 248 : Discrete Mathematics
 CS1231 - CAS CS131 : Combinatoric Structures
 ```
 ## FAQ
