@@ -37,6 +37,9 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+Command | Format | Purpose
+--------|---------|-----------
+`add` | `add <FLAG> <INDEX>` FLAGS: `/uni` `/mod` `/map` | Add a university/module/mapping
+`list` | `list <FLAG>` FLAGS: `/muni` `mmod` `suni` `smod` | List master/selected university list or module list
 
 * Add todo `todo n/TODO_NAME d/DEADLINE`
