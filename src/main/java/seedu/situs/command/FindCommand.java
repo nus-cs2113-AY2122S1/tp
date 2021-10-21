@@ -28,7 +28,8 @@ public class FindCommand extends Command {
     public String run() throws DukeException {
         String resultMsg = "";
         List<IngredientGroup> searchResults = IngredientList.getIngredientList().stream()
-                .filter(result -> result.getIngredientGroupName().toLowerCase().contains(keyword)).collect(Collectors.toList());
+                .filter(result -> result.getIngredientGroupName().toLowerCase().contains(keyword))
+                .collect(Collectors.toList());
         if (searchResults.isEmpty()) {
             resultMsg += NO_RESULTS_MESSAGE_START + keyword + NO_RESULTS_MESSAGE_END;
         } else {
