@@ -43,13 +43,15 @@ public class AddOrderCommand extends Command {
         String[] requiredParameters = {CommandParameters.NAME, CommandParameters.QUANTITY};
         String[] optionalParameter = {CommandParameters.DATE};
 
-        boolean isInvalidParameters = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters, optionalParameter, CommandSyntax.ADD_ORDER_COMMAND, false);
+        boolean isInvalidParameters = CommandSyntax.containsInvalidParameters(ui, parameters,
+                requiredParameters, optionalParameter, CommandSyntax.ADD_ORDER_COMMAND, false);
         if (isInvalidParameters) {
             logger.log(Level.WARNING, "Invalid parameters given by user");
             return;
         }
 
-        boolean isInvalidParameterValues = OrderValidator.containsInvalidParameterValues(ui, parameters, medicines, CommandSyntax.ADD_ORDER_COMMAND);
+        boolean isInvalidParameterValues = OrderValidator.containsInvalidParameterValues(ui, parameters,
+                medicines, CommandSyntax.ADD_ORDER_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");
             return;
@@ -96,7 +98,8 @@ public class AddOrderCommand extends Command {
                 if (orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity) {
                     addOrder(ui, medicines, nameToAdd, orderQuantity, addDate(ui, dateToAdd));
                 } else {
-                    ui.print("Order for " + nameToAdd + " exists. Unable to add order as total order quantity " + "exceeds maximum stock quantity.\n");
+                    ui.print("Order for " + nameToAdd + " exists. Unable to add order as total order quantity "
+                            + "exceeds maximum stock quantity.\n");
                 }
             }
         } else {
