@@ -50,9 +50,10 @@ Example of usage:
 
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I save my selected universities and modules? 
 
-**A**: {your answer here}
+**A**: All your universities, modules and module mappings are automatically saved at 
+each command and will be auto-loaded on program start. 
 
 ## Command Summary
 
