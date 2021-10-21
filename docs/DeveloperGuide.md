@@ -24,6 +24,32 @@ original source as well}
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 ## Implementation
+###Delete feature
+The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains two usages which are deletion of Budget and deletion of Expenditure.
+
+When user keys delete b/ m/MONTH , The Parser class will analyse the whole command, and extract “b/” and “MONTH”. Then the class DeleteBudgetCommand will execute the deletion by using recordList.deleteBudget(MONTH).
+
+Similarly, we have our Parser to parse the commands for deletion of expenditures:
+* ```delete e/ m/MONTH``` — If the value at the position after ‘e/’ is “”, we use for loop to delete all expenditures within a month.
+* ```delete e/INDEX m/MONTH``` — If the value at the position after ‘e/’ is an integer, we use DeleteSingleExpenditureCommand to delete this specific expenditure in this specific month.
+* ```delete e/INDEX-INDEX m/MONTH``` — If the value at the position after ‘e/’ is a range of integers, we firstly use split[] to extract the starting and ending integers, and then we use DeleteMultipleExpenditureCommand to delete the expenditures in this range in this specific month. (also by using for loop)
+
+<br/>
+
+All the delete command classes (DeleteAllExpenditureCommand, DeleteSingleExpenditureCommand, DeleteMultipleExpenditureCommand, and DeleteBudgetCommand) extend from DeleteCommand class, and DeleteCommand class extends from Command class. Inside each command class, we have a constructor and an override function called execute to execute the specific deletion task assigned to them.
+
+<br/>
+
+Given below is an example usage scenario and how the delete feature behaves at each step.
+
+<br/>
+
+**Step 1**. The user launches the application for the first time.
+<br/> **Step 2**. The user adds a budget and some expenditures to the current month.
+<br/> **Step 3**. The user finds that the budget is a bit insufficient, thus the user wants to delete some of the expenditures.
+<br/> **Step 4**. After consideration, the user decides to delete expenditure 3-5, so he keys ```delete e/3-5 m/10```
+<br/> **Step 5**. The Parser starts to parse the command, it extracts starting index 3, ending index 5, and month 10. As this is a range of expenditures to be deleted, the Parser class calls DeleteMultipleExpenditureCommand to work. By using a for loop, the 3 expenditures are successfully deleted and prints out a showMultipleExpenditureDeletedMessage from TextUi class.
+
 
 ###Edit feature
 
