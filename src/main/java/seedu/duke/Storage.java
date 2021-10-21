@@ -16,7 +16,7 @@ public class Storage {
 
     private static final ArrayList<String> validCommands = new ArrayList<>(
             Arrays.asList("create", "edit", "view", "open", "list", "summary",
-                    "delete", "expense", "quit", "help"));
+                    "delete", "expense", "quit", "help", "amount"));
 
     public static Scanner getScanner() {
         return scanner;

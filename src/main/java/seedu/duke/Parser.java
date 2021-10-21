@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -106,6 +108,10 @@ public class Parser {
             }
             break;
 
+        case "amount":
+            executeAmount(inputParams);
+            break;
+
         case "help":
             Ui.displayHelp();
             break;
@@ -167,10 +173,19 @@ public class Parser {
             Trip currentTrip = Storage.getOpenTrip();
             Expense expenseToDelete = currentTrip.getListOfExpenses().get(expenseIndex);
             Double expenseAmount = expenseToDelete.getAmountSpent();
+            correctBalances(expenseToDelete);
             currentTrip.removeExpense(expenseIndex);
             Ui.printDeleteExpenseSuccessful(expenseAmount);
         } catch (IndexOutOfBoundsException e) {
             Ui.printUnknownExpenseIndexError();
+        }
+    }
+
+    private static void correctBalances(Expense expense){
+        Person payer = expense.getPayer();
+        for (Person person : expense.getPersonsList()){
+            payer.setMoneyOwed(person, -expense.getAmountSplit().get(person));
+            person.setMoneyOwed(payer, expense.getAmountSplit().get(person));
         }
     }
 
@@ -222,6 +237,7 @@ public class Parser {
 
     private static void getAdditionalExpenseInfo(Expense expense) {
         Ui.printGetPersonPaid();
+        NumberFormat formatter = new DecimalFormat("#0.00");
         String input = Storage.getScanner().nextLine().strip();
         Person payer = checkValidPersonInExpense(input, expense);
         if (payer != null) {
@@ -232,14 +248,17 @@ public class Parser {
                 Ui.printHowMuchDidPersonSpend(person.getName());
                 String amountString = Storage.getScanner().nextLine().strip();
                 if (amountString.equalsIgnoreCase("equal") && amountBeingPaid.isEmpty()) {
+                    double amount = Double.parseDouble(String.format("%.02f",
+                            (expense.getAmountSpent() / expense.getPersonsList().size())));
                     for (Person people : expense.getPersonsList()) {
-                        amountBeingPaid.put(people, expense.getAmountSpent() / expense.getPersonsList().size());
-                        total += expense.getAmountSpent() / expense.getPersonsList().size();
+                        amountBeingPaid.put(people, amount);
+                        total += amount;
                     }
                     //This will cause to bear the deficit or surplus
                     if (total != expense.getAmountSpent()) {
-                        double payerAmount = amountBeingPaid.get(payer) + (total - expense.getAmountSpent());
+                        double payerAmount = amountBeingPaid.get(payer) + (expense.getAmountSpent() - total);
                         amountBeingPaid.put(payer, payerAmount);
+                        total = expense.getAmountSpent();
                     }
                     break;
                 }
@@ -265,9 +284,15 @@ public class Parser {
                 getAdditionalExpenseInfo(expense);
             } else {
                 for (Person person : expense.getPersonsList()) {
+                    if (person == payer){
+                        person.setMoneyOwed(person, amountBeingPaid.get(person));
+                        expense.setAmountSplit(person, amountBeingPaid.get(person));
+                        continue;
+                    }
                     payer.setMoneyOwed(person, amountBeingPaid.get(person));
                     person.setMoneyOwed(payer, -amountBeingPaid.get(person));
-                    person.addExpense(expense);
+                    person.setMoneyOwed(person, amountBeingPaid.get(person));
+                    expense.setAmountSplit(person, amountBeingPaid.get(person));
                 }
             }
         } else {
@@ -279,6 +304,25 @@ public class Parser {
 
     private static Person checkValidPersonInExpense(String name, Expense expense) {
         for (Person person : expense.getPersonsList()) {
+            if (name.equalsIgnoreCase(person.getName())) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    private static void executeAmount(String name) {
+        Trip trip = Storage.getOpenTrip();
+        Person toBeChecked = checkValidPersonInTrip(name, trip);
+        if (toBeChecked == null) {
+            Ui.printPersonNotInTrip();
+        } else {
+            Ui.printAmount(toBeChecked, trip);
+        }
+    }
+
+    private static Person checkValidPersonInTrip(String name, Trip trip) {
+        for (Person person : trip.getListOfPersons()) {
             if (name.equalsIgnoreCase(person.getName())) {
                 return person;
             }

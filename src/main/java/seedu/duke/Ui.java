@@ -24,9 +24,8 @@ public class Ui {
     }
 
 
-    public static void printMoney(double val) {
-        String money = String.format("%.02f", val);
-        System.out.println(money);
+    public static String StringMoney(double val) {
+        return String.format("%.02f", val);
     }
 
     public static void printExpenseDetails(Expense e) {
@@ -35,12 +34,9 @@ public class Ui {
 
     public static void printExpensesSummary(Trip t) {
         System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
-        System.out.print("Total budget for this trip: ");
-        printMoney(t.getBudget());
-        System.out.print("Total expenditure so far: ");
-        printMoney(t.getTotalExpenses());
-        System.out.print("Current budget left for this trip: ");
-        printMoney(t.getBudgetLeft());
+        System.out.println("Total budget for this trip: " + StringMoney(t.getBudget()));
+        System.out.println("Total expenditure so far: " + StringMoney(t.getTotalExpenses()));
+        System.out.println("Current budget left for this trip: " + StringMoney(t.getBudgetLeft()));
     }
 
     public static void printExpenseAddedSuccess() {
@@ -48,8 +44,8 @@ public class Ui {
     }
 
     public static void printExpensesInList(Expense expense, int index) {
-        System.out.print(index + ". " + expense.getDescription() + " | Cost: ");
-        printMoney(expense.getAmountSpent());
+        System.out.println(index + ". " + expense.getDescription() + " | Cost: "
+                + StringMoney(expense.getAmountSpent()));
     }
 
     public static void printOpenTripMessage(Trip trip) {
@@ -175,6 +171,28 @@ public class Ui {
 
     public static void printPersonNotInExpense() {
         System.out.println("The person you entered is not in the expense, please try again.");
+    }
+
+    public static void printPersonNotInTrip() {
+        System.out.println("The person you entered is not in the opened trip, please try again.");
+    }
+
+    public static void printAmount(Person person, Trip trip){
+        System.out.println(person.getName() + " spent $" + StringMoney(person.getMoneyOwed().get(person))
+                + " on the trip so far");
+        for (Person otherPerson : trip.getListOfPersons()){
+            if (otherPerson != person) {
+                if (person.getMoneyOwed().get(otherPerson) > 0) {
+                    System.out.println(otherPerson.getName() + " owes $"
+                            + StringMoney(person.getMoneyOwed().get(otherPerson)) + " to " + person.getName());
+                } else if (person.getMoneyOwed().get(otherPerson) < 0){
+                    System.out.println(person.getName() + " owes $"
+                            + StringMoney(-person.getMoneyOwed().get(otherPerson)) + " to " + otherPerson.getName());
+                } else {
+                    System.out.println(person.getName() + " does not owe anything to " + otherPerson.getName());
+                }
+            }
+        }
     }
 
     public static void printIncorrectAmount(double amount) {

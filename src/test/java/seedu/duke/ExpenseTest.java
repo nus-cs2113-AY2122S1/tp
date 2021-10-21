@@ -19,6 +19,6 @@ class ExpenseTest {
 
     @Test
     void getExpenseSummary() {
-        assertEquals(8.00, exp.getCostPerPerson());
+        assertEquals(8.00, exp.getAmountSpent());
     }
 }

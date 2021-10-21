@@ -17,7 +17,6 @@ import java.util.logging.Level;
 public class Expense {
     private double amountSpent;
     private String description;
-    private String location;
     private ArrayList<Person> personsList;
     private String category;
     private LocalDate date;
@@ -30,17 +29,21 @@ public class Expense {
         this.description = description;
         this.category = category;
         this.personsList = listOfPersons;
-        for (Person person : listOfPersons) {
-            amountSplit.put(person, 0.0);
-        }
     }
 
     public void setPayer(Person person) {
         this.payer = person;
     }
 
+    public Person getPayer(){
+        return payer;
+    }
+
     public void setAmountSplit(Person person, double amount) {
         amountSplit.put(person, amount);
+    }
+    public HashMap<Person, Double> getAmountSplit() {
+        return amountSplit;
     }
 
     /**
@@ -76,10 +79,6 @@ public class Expense {
         }
     }
 
-    public double getCostPerPerson() {
-        return amountSpent / personsList.size();
-    }
-
     public void addPerson(Person p) {
         personsList.add(p);
     }
@@ -112,14 +111,6 @@ public class Expense {
 
     public String getCategory() {
         return category;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public double getAmountSpent() {

@@ -143,9 +143,6 @@ public class Trip {
 
     public void addExpense(Expense expense) {
         listOfExpenses.add(expense);
-        for (Person person : expense.getPersonsList()) {
-            person.addExpense(expense);
-        }
     }
 
     public ArrayList<Expense> getListOfExpenses() {
