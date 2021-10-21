@@ -60,7 +60,6 @@ view 0
        add -n name -g null
        add   -n dev -g nullptr
     edit 3 -g new-git
-    y
     add -n asjoda sadfsd -tw _123  adad
     y
     add -n asjoda sadfsd -tw 123_adad
@@ -76,4 +75,12 @@ search boris
 search -n bory
 search -g lezong
 search -zxca lezong
+list
+add -n ashraf -g ashrafjfr
+add -n ashraf -te ashrafjfr
+y
+edit 0 -te ashrafjfr
+y
+edit 0 -e ashrafjfr@gmail.com
+view 0
 exit
