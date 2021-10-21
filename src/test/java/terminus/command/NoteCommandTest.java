@@ -45,7 +45,7 @@ public class NoteCommandTest {
     }
 
     @Test
-    void execute_scheduleAdvance_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_noteAdvance_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command mainCommand = commandParser.parseCommand("go " + tempModule + " note");
         CommandResult changeResult = mainCommand.execute(ui, moduleManager);
         assertTrue(changeResult.isOk());
@@ -60,7 +60,7 @@ public class NoteCommandTest {
     }
 
     @Test
-    void execute_scheduleAdvance_throwsException() throws InvalidArgumentException, InvalidCommandException {
+    void execute_noteAdvance_throwsException() throws InvalidArgumentException, InvalidCommandException {
         assertThrows(InvalidCommandException.class,
             () -> commandParser.parseCommand("go " + tempModule + " note -1").execute(ui, moduleManager));
         assertThrows(InvalidArgumentException.class,

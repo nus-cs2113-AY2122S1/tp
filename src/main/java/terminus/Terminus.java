@@ -131,7 +131,7 @@ public class Terminus {
         TerminusLogger.severe("Save file is inaccessible.");
         TerminusLogger.severe(e.getMessage(), e.getCause());
         ui.printSection(
-                e.getMessage(),
+                String.format(Messages.ERROR_MESSAGE_FILE, e.getMessage()),
                 "TermiNUS may still run, but your changes may not be saved.",
                 "Check 'terminus.log' for more information."
         );

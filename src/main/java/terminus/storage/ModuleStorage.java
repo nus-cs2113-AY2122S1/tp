@@ -232,7 +232,7 @@ public class ModuleStorage {
                 Paths.get(modDirPath.toString(), noteName + CommonFormat.EXTENSION_TEXT_FILE).toString());
         TerminusLogger.info("Removing file: " + deleteFile.getAbsolutePath());
         if (!deleteFile.delete()) {
-            throw new IOException(Messages.ERROR_FILE_NOT_DELETED);
+            throw new IOException(deleteFile.getAbsolutePath());
         }
     }
 
@@ -265,7 +265,7 @@ public class ModuleStorage {
         for (File file : listOfFiles) {
             cleanAllFilesInclusive(file);
             if (file.exists()) {
-                throw new IOException(Messages.ERROR_FILES_NOT_DELETED);
+                throw new IOException(file.getAbsolutePath());
             }
         }
     }
@@ -286,7 +286,7 @@ public class ModuleStorage {
         File folder = new File(modDirPath.toString());
         cleanAllFilesInclusive(folder);
         if (folder.exists()) {
-            throw new IOException(Messages.ERROR_FILES_NOT_DELETED);
+            throw new IOException(folder.getAbsolutePath());
         }
     }
 
