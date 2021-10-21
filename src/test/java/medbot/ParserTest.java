@@ -4,12 +4,12 @@ import medbot.command.Command;
 import medbot.command.ExitCommand;
 import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
-import medbot.command.patientcommand.AddPatientCommand;
-import medbot.command.patientcommand.DeletePatientCommand;
-import medbot.command.patientcommand.EditPatientCommand;
-import medbot.command.patientcommand.FindPatientCommand;
-import medbot.command.patientcommand.ListPatientCommand;
-import medbot.command.patientcommand.ViewPatientCommand;
+import medbot.command.personcommand.patientcommand.AddPatientCommand;
+import medbot.command.personcommand.patientcommand.DeletePatientCommand;
+import medbot.command.personcommand.patientcommand.EditPatientCommand;
+import medbot.command.personcommand.patientcommand.FindPatientCommand;
+import medbot.command.personcommand.patientcommand.ListPatientCommand;
+import medbot.command.personcommand.patientcommand.ViewPatientCommand;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Patient;
 import medbot.person.Person;
@@ -195,7 +195,7 @@ class ParserTest {
 
     @Test
     void testParsePersonId() throws Exception {
-        Method method = Parser.class.getDeclaredMethod("parsePersonId", String.class);
+        Method method = Parser.class.getDeclaredMethod("parseId", String.class);
         method.setAccessible(true);
         HashMap<String, Integer> testCases = new HashMap<>();
         testCases.put("5", 5);

@@ -1,8 +1,8 @@
-package medbot.command.staffcommand;
+package medbot.command.personcommand.staffcommand;
 
 import medbot.Scheduler;
 import medbot.Ui;
-import medbot.command.DeletePersonCommand;
+import medbot.command.personcommand.DeletePersonCommand;
 import medbot.exceptions.MedBotException;
 
 public class DeleteStaffCommand extends DeletePersonCommand {

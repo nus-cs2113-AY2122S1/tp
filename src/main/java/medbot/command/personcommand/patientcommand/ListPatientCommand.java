@@ -1,8 +1,8 @@
-package medbot.command.patientcommand;
+package medbot.command.personcommand.patientcommand;
 
 import medbot.Scheduler;
 import medbot.Ui;
-import medbot.command.ListPersonCommand;
+import medbot.command.personcommand.ListPersonCommand;
 
 
 public class ListPatientCommand extends ListPersonCommand {
