@@ -18,7 +18,8 @@ public class Ui {
 
     public static void printUniversity(University uni, int index, UniversityList universityMasterList) {
         printIndex(index, false);
-        out.println(" " + uni.getMasterListIndex(universityMasterList) + Constants.MODULE_MAPPING_SEPARATOR + uni.getName());
+        out.println(" " + uni.getMasterListIndex(universityMasterList)
+                + Constants.MODULE_MAPPING_SEPARATOR + uni.getName());
     }
 
     public static void printModuleMapping(ModuleMapping mm, int index) {
