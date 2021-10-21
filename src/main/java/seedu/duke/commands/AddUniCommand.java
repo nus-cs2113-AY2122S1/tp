@@ -10,14 +10,15 @@ import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
 
-public class AddUniCommand extends AddCommand {
+public class AddUniCommand extends Command {
     private final University universityToAdd;
     private final int universityIndexToAdd;
 
-    public AddUniCommand(int universityIndexToAdd, UniversityList universitySelectedList)
+    public AddUniCommand(int universityIndexToAdd, UniversityList universityListMasterList,
+                         UniversityList universitySelectedList)
             throws IOException {
         this.universityIndexToAdd = universityIndexToAdd;
-        this.universityToAdd = universitySelectedList.get(universityIndexToAdd);
+        this.universityToAdd = universityListMasterList.get(universityIndexToAdd - 1);
         assert universityToAdd.getName() != null;
         assert universityToAdd.getClass() != null;
         universitySelectedList.addUniversity(universityToAdd);

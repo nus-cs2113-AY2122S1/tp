@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class AddModCommandParser {
 
-    private Logger logger = Logger.getLogger("AddModCommandParserLog");
+    private final Logger logger = Logger.getLogger("AddModCommandParserLog");
 
     public AddModCommand parse(String arguments, ModuleList moduleMasterList,
                                UniversityList universitySelectedList, ModuleList moduleSelectedList)

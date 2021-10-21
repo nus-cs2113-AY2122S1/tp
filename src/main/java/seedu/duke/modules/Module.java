@@ -26,9 +26,9 @@ public class Module {
         return moduleCredits;
     }
 
-    public int getModuleIndex(ModuleList ModuleMasterList) {
-        for (int i = 0; i < ModuleMasterList.getSize(); i++) {
-            if (moduleName.equals(ModuleMasterList.get(i).getModuleName())) {
+    public int getModuleIndex(ModuleList moduleMasterList) {
+        for (int i = 0; i < moduleMasterList.getSize(); i++) {
+            if (moduleName.equals(moduleMasterList.get(i).getModuleName())) {
                 return i + 1;
             }
         }

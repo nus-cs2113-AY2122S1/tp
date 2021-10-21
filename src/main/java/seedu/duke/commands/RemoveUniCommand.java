@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.SelectedUniversityStorage;
 import seedu.duke.ui.Ui;
 import seedu.duke.universities.University;
@@ -25,3 +26,18 @@ public class RemoveUniCommand extends Command {
         }
     }
 }
+//            University universityToRemove = universityMasterList.get(universityIndexToRemove-1);
+//            if (!universitySelectedList.searchUniversity(universityToRemove.getName())) {
+//                System.out.println("This university is not in the selected list.");
+//            } else {
+//                assert universityToRemove.getName() != null;
+//                assert universitySelectedList.getSize() != 0;
+//                universitySelectedList.removeUniversity(universityToRemove.getName());
+//                assert !universitySelectedList.searchUniversity(universityToRemove.getName());
+//                SelectedUniversityStorage.write(universitySelectedList);
+//                System.out.println("This university is removed: ");
+//                Ui.printUniversity(universityToRemove, universityIndexToRemove, universitySelectedList);
+//            }
+//        }
+//    }
+//}

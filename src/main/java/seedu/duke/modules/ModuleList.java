@@ -53,4 +53,8 @@ public class ModuleList {
         }
         return null;
     }
+
+    public ArrayList<Module> getList() {
+        return list;
+    }
 }
