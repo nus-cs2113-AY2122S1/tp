@@ -236,7 +236,7 @@ public class TextUi {
         }
     }
 
-    void setUpLog() {
+    public void setUpLog() {
         LogManager.getLogManager().reset();
         LOGGER.setLevel(Level.ALL);
 
