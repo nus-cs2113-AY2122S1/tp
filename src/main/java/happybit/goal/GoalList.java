@@ -134,7 +134,8 @@ public class GoalList {
      * @throws HaBitCommandException If the goalIndex is not within the index range of the goalList.
      *                               If the habitIndex is not within the index range of the habitList.
      */
-    public void deleteHabitFromGoal(int goalIndex, int habitIndex, PrintManager printManager) throws HaBitCommandException {
+    public void deleteHabitFromGoal(int goalIndex, int habitIndex, PrintManager printManager)
+            throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         ArrayList<Habit> habits = goal.getHabitList();
         Habit habit;
@@ -157,7 +158,8 @@ public class GoalList {
      * @throws HaBitCommandException If goalIndex is not within index range of goalList.
      *                               if habitIndex is not within index range of the habitList
      */
-    public void doneHabitFromGoal(int goalIndex, int habitIndex, PrintManager printManager) throws HaBitCommandException {
+    public void doneHabitFromGoal(int goalIndex, int habitIndex, PrintManager printManager)
+            throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         ArrayList<Habit> habits = goal.getHabitList();
         Habit habit;
@@ -209,7 +211,8 @@ public class GoalList {
      * @param printManager User Interface class for printing the update made to output.
      * @throws HaBitCommandException If the goalIndex is not within the range of the goalList.
      */
-    public void updateGoalName(int goalIndex, String newGoalName, PrintManager printManager) throws HaBitCommandException {
+    public void updateGoalName(int goalIndex, String newGoalName, PrintManager printManager)
+            throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
         String oldGoalName = goal.getGoalName();
         goal.setGoalName(newGoalName);

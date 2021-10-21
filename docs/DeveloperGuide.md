@@ -7,7 +7,7 @@ of features.
 * [Acknowledgements](#acknowledgements)
 * [Design and Implementation](#design-and-implementation)
   * [Architecture](#architecture)
-  * [UI component](#printManager-component)
+  * [UI component](#ui-component)
   * [Command component](#command-component)
   * [Parser logic component](#parser-logic-component)
   * [GoalList component](#goallist-component)
@@ -138,9 +138,25 @@ can type to execute a certain command.
 
 ### Parser logic component
 
-The `Parser` logic component 
+The `Parser` logic component handles the parsing of the input passed in by the user and returns a suitable `Command` 
+object that will be executed. Within the component itself, there are more specific and detailed `Parser` classes for 
+handling various inputs from the user.
+
+* `AddParser` - Handles the parsing of inputs starting with `set` and `add` keywords
+* `DeleteParser` - Handles the parsing of inputs starting with `remove` and `delete`
+* `DoneParser` - Handles the parsing of inputs starting with `done`
+* `ListParser` - Handles the parsing of inputs starting with `view`
+* `SetParser` - Handles the parsing of inputs starting with `goal`
+
+For inputs of `bye`, `help` `list` their respective functions are run immediately without the need to parse further.
+
+For any other invalid inputs that do not start with the listed keywords, the `HelpCommand` functionality is invoked.
 
 ### GoalList component
+
+The `GoalList` component is the component that holds and manipulates the list of all the Goals set by the user.
+All `runCommands` of all of the `Command` objects directly access the `GoalList` component to retrieve and change      
+the user's data.
 
 ### Storage component
 
@@ -148,7 +164,10 @@ The `Parser` logic component
 
 ![Storage Class Diagram](Diagram%20Images/StorageClassDiagram.png)
 
-The Storage Class allows data to be read and saved to a storage file
+The Storage Class allows data to be read from and saved to a storage file. When a user exits the program, the 
+information entered by the user during the program will be exported and saved into a `HappyBit.txt` file. The next time
+the program is run by the user, this data will be imported back into the program to allow the user to pick up and 
+continue from where they left off.
 
 ## Appendix A: Product Scope
 
@@ -161,7 +180,7 @@ The Storage Class allows data to be read and saved to a storage file
 
 ### Value proposition
 
-Users with _Ha(ppy)Bit_ will find themselves cultivating good habits despite hectic 
+Users with _Ha(ppy)Bit_ will find themselves cultivating good habits and breaking bad habits despite hectic 
 workload or commitments. 
 
 
@@ -170,7 +189,17 @@ workload or commitments.
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application| 
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|set a new goal I wish to accomplish|start working towards completing the goal|
+|v1.0|user|add habits i wish to carry out in the process of accomplishing my goal|break down the journey of achieving my goal into smaller manageable steps
+|v1.0|user|remove a goal from my list of goals|remove goals that I no longer wish to work towards|
+|v1.0|user|delete a habit added under a goal|remove a habit that I no longer wish to carry out|
+|v1.0|user|mark a habit as done|indicate that I have completed that habit|
+|v1.0|user|list out all the goals I have|remind myself of the goals I am working towards|
+|v1.0|user|view all the habits I have set for each goal|check which habits I have yet to complete|
+|v1.0|user|have import and export functionality in the program|access goals and habits previously set from a local data storage
+|v2.0|user|have recurring habits at a regular interval|habitually carry out the habits I set for myself|
+|v2.0|user|be able to view my progress for any goal|motivate myself in the process|
+|v2.0|user|view all my habits due for the day upon entering the program|remember to carry out these habits by the end of the day|
 
 
 ## Appendix C: Non-Functional Requirements

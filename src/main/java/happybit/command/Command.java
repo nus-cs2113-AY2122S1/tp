@@ -15,7 +15,8 @@ public abstract class Command {
      * @param storage  Reference to the file where data is stored.
      * @throws HaBitCommandException If exception is thrown by Command subclasses.
      */
-    public abstract void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException;
+    public abstract void runCommand(GoalList goalList, PrintManager printManager, Storage storage)
+            throws HaBitCommandException;
 
     /**
      * Checks if the exit command is being called.
