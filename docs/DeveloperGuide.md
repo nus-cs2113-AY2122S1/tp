@@ -103,6 +103,11 @@ In the sections below we will be providing implementation details for each of th
 
 #### `AddGoalCommand`
 
+When the `runCommand` function is executed for the `AddGoalCommand` object, the following steps as indicated by the
+sequence diagram below is carried out.
+
+![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
+
 #### `AddHabitCommand`
 
 #### `DeleteGoalCommand`
