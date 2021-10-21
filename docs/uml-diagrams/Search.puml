@@ -8,6 +8,7 @@ alt Able to connect
     activate NusMods
     NusMods -> NusMods : getOnlineModList()
     activate NusMods
+    NusMods --> NusMods
     deactivate NusMods
     loop for each mod
             alt Module Code Match
@@ -15,6 +16,7 @@ alt Able to connect
                     activate NusMods
                     NusMods -> NusMods : getOnlineModInfo()
                     activate NusMods
+                    NusMods --> NusMods
                     deactivate NusMods
                     NusMods -> ModStorage : saveModInfo()
                     activate ModStorage
@@ -46,6 +48,7 @@ else No connection or Quicksearch
         alt Module Code Match
             ModStorage -> ModStorage : loadModInfo()
             activate ModStorage
+            ModStorage --> ModStorage
             deactivate ModStorage
             alt All Flags Match
                 ModStorage -> TextUI : PrintModBriefDescription()
