@@ -4,11 +4,34 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+## Getting started
+
+### Recommended software (for optimal compatibility)
+
+* Github
+* Sourcetree (for version control)
+* IntelliJ IDEA (IDE)
+* Amazon Coretto
+
+### Setting up this project in your computer
+
+1. **On Github, fork this repo by clicking on the fork button**
+1. **In Sourcetree, clone the fork into your computer**
+   1. Open a new tab
+   1. Select the clone button at the top of the menu
+   1. Key in the details of this repository
+1. **Configure the JDK:** Follow the guide [Project Configuration/ SDKs](https://www.jetbrains.com/help/idea/sdk.html) to ensure that Intellij is configured to use JDK 11.
+1. **Import the project as a Gradle project:** Follow the guide [Intellij IDEA: Importing a Gradle project
+   ](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
+1. **Verify the setup:**
+   1. Run the seedu.address.Main and try a few commands.
+   1. Run the tests to ensure they all pass.
+
 ## Design
 
 ### Architecture
 
-![Architecture Diagram](https://user-images.githubusercontent.com/65898007/138207279-86dc6196-82b2-407f-afd9-c7ebeaa19e13.png)
+![Architecture Diagram](./RenderedUML/ArchitectureDiagram.svg)
 
 The Diagram above explains how the App is designed and will function
 
@@ -32,13 +55,13 @@ The App is organized by the `command`, `exception`, `kitchen`, and `util` packag
 
 The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
-![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138207270-83d59ba2-b753-4a0f-bf46-7710921511d6.png)
+![Sequence Diagram](./RenderedUML/AddSequence.svg)
 
 ### Cookbook component
 
 The Diagram below is the class diagram for the ``Cookbook`` class
 
-![Cookbook Class Diagram](https://user-images.githubusercontent.com/65898007/138207292-1d989a95-f4b2-468a-9076-94ce74e8248b.png)
+![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
 
 The `Cookbook` Class is instantiated by the `Gordon` Class, and manages the recipes and tags of the cookbook.
 
@@ -76,16 +99,55 @@ The `Cookbook` class can be classified into 3 main functionalities:
 
 ### Recipe component
 
-The Diagram below is the class diagram for the Recipe class
-
-![Recipe Class Diagram](https://user-images.githubusercontent.com/65898007/138097156-7f23bda4-f1bc-41e3-8e85-36eeac273dec.png)
-
-
 ### Parser component
+
+The diagram below is the class diagram for the `Parser` class
+
+![Command Class Diagram](./RenderedUML/Parser.svg)
+
+Functions of the Parser class:
+* Reads in user input by implementing the `Scanner` class
+  * The parseMaster() method parses through the user's input to find the best match for the user's intended command
+  * The corresponding command is then returned to the `Gordon` class
+* Prints responses to the console by implementing the `UI` class
 
 ### Command component
 
+The Diagram below is the class diagram for the Command Class
+
+![Command Class Diagram](./RenderedUML/CommandRects.svg)
+
+The `Command` class contains all the basic functionality of the Gordon cookbook, and is the Class that executes specific commands given by the user.
+
+The `Command` class can be classified into 4 main functionalities:
+
+1. Basic Commands: 
+   * The Commands that are required for the basic feature set of the Gordon cookbook are contained here
+   * `AddCommand` is where the `addRecipe` feature is executed
+   * `CheckCommand` is where the `checkRecipe` feature is executed
+   * `DeleteRecipeCommand` is where the `deleteRecipe` feature is executed
+   * `ListRecipesCommand` is where the `listRecipes` feature is executed
+   * `HelpCommand` is where the `help` feature is executed
+2. Find Commands:
+   * The Commands that are required for the `find` feature of Gordon are contained here
+   * `FindCaloriesCommand` is where the `find` /calories feature of gordon is executed 
+   * `FindDifficultyCommand` is where the `find` /difficulty feature of gordon is executed
+   * `FindIngredientsCommand` is where the `find` /ingredients feature of gordon is executed
+   * `FindPriceCommand` is where the `find` /price feature of gordon is executed
+3. Set Commands:
+   * The Commands that are required for the `set` feature of Gordon are contained here
+   * `SetCaloriesCommand` is where the `set` /calories feature of gordon is executed
+   * `SetDifficultyCommand` is where the `set` /difficulty feature of gordon is executed
+   * `SetPriceCommand` is where the `set` /price feature of gordon is executed
+4. Tag Commands:
+   * The Commands that are required for the  `tag` feature of Gordon are contained here
+   * `TagAddCommand` is where the `tag` feature of gordon is executed
+   * `TagDeleteCommand` is where the `deleteTag` feature of gordon is executed
+   * `TagUntagCommand` is where the `untag` feature of gordon is executed
+
 ### Storage component
+
+### UI Component
 
 ## Implementation
 
@@ -116,10 +178,13 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 |***|v1.0|user|check my stored recipes|refer to them while cooking|
 |***|v1.0|user|add recipes to my cookbook|try them in the future|
 |***|v1.0|user|delete recipes from my cookbook|remove recipes I'm no longer interested in|
+|***|v1.0|user|list out all the recipes|see all of the recipes in my cookbook|
 |**|v2.0|disorganised user|find recipes by ingredient|see what recipes I can make with the food in my pantry|
+|**|v2.0|health-conscious user|find recipes by calorie count|eat healthier by managing calories|
+|**|v2.0|budget-conscious user|find recipes by pricing|go for the most cost-efficient recipe|
+|**|v2.0|cooking newbie user|find recipes by difficulty|choose the difficulty of the recipe depending on my skill level|
+|**|v2.0|organised user|find recipes by my own tags|sort by my own metric|
 |**|v2.0|user|save and load my recipes from memory|refer to them whenever I want to|
-|**|v2.0|health-conscious user|set the amount of calories a recipe has|choose the healthier option|
-|*|v2.0|organized user|add tags to a recipe|classify my recipes however I feel like|
 |*|v2.0|developer|add my own functionality to Gordon in a modular fashion|improve the app to my needs|
 
 ## Use Cases
@@ -142,18 +207,6 @@ Use case ends.
 
 Use case ends
 
-**Use case: `check`**
-
-**MSS:**
-1. User requests to check recipes
-2. Gordon shows a list of all currently stored recipes
-
-Use case ends.
-
-**Extensions** 
-* The list is empty.
-  * Use case ends.
-
 **Use case: `add`**
 
 **MSS:**
@@ -168,7 +221,7 @@ Use case ends.
   * Gordon shows an error message
   * Use case resumes on step 1
 
-**Use case: `delete`**
+**Use case: `deleteRecipe`**
 
 **MSS:**
 1. User requests a list of all recipes
@@ -185,12 +238,38 @@ Use case ends.
   * Gordon shows an error message
   * Use case resumes from step 2
 
+**Use case: `listRecipes`**
+
+**MSS:**
+1. User requests to see all their recipes
+2. Gordon shows a list of all currently stored recipes
+
+Use case ends.
+
+**Extensions**
+* The list is empty.
+    * Use case ends.
+
+**Use case: `check`**
+
+**MSS:**
+1. User requests to check a specific recipe
+2. Gordon brings up the specified recipe for the user to peruse
+
+Use case ends.
+
+**Extensions**
+* The recipe does not exist.
+    * Use case ends.
+* Input was entered incorrectly
+  * Use case resumes from step 1
+
 **Use case: `find`**
 
 **MSS:**
 1. User has a large cookbook
-2. User searches for a specific recipe by a keyword
-3. Gordon returns a list of all the recipes which contain that keyword
+2. User searches for a specific recipe by either keyword, calories, difficulty, ingredients, price or tags.
+3. Gordon returns a list of all the recipes which contain what the user is looking for
 4. User checks the recipe for cooking
 
 Use case ends.
@@ -216,6 +295,31 @@ Use case ends.
 * The given recipe does not exist
   * Gordon shows an error message
   * Use case resumes from step 2
+
+**Use case: `untag`**
+
+**MSS:**
+1. User wants to remove a tag from a specific recipe
+2. Gordon removes the tag from the recipe
+3. User can now add a different tag to that recipe
+
+Use case ends.
+
+**Extensions**
+* The tag does not exist
+    * Use case ends.
+
+**Use case: `deleteTag`**
+
+**MSS:**
+1. User wants to delete a master tag from the database
+2. Gordon deletes the master tag from the cookbook
+
+Use case ends.
+
+**Extensions**
+* The tag does not exist
+    * Use case ends.
 
 ## Non-Functional Requirements
 

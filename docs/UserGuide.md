@@ -24,11 +24,11 @@ It's absolutely bonkers. Now let's get down to business.
 
 ## What can Gordon do?
 
-### 1. Add a recipe: `add`
+### 1. Add a recipe: `addRecipe`
 
 Adds a new recipe to my database of recipes.
 
-#### Format: `add RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
+#### Format: `addRecipe RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
 
 * The `RECIPE_NAME` can be in a natural language format.
 * Each individual ingredient in `INGREDIENTS` can be separated by a '+' sign.
@@ -36,7 +36,7 @@ Adds a new recipe to my database of recipes.
 
 #### Example of usage: 
 
-`add Chicken Rice /ingredients Chicken+Rice /steps Cook+Mix`
+`addRecipe Chicken Rice /ingredients Chicken+Rice /steps Cook+Mix`
 
 #### Expected outcome:
 
@@ -203,7 +203,7 @@ Added fried rice recipe! Yum!
 
 Instruction | Command format
 ------------ | -------------
-Add a recipe | `add RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
+Add a recipe | `addRecipe RECIPE_NAME /ingredients INGREDIENTS /steps STEPS`
 Delete a recipe | `deleteRecipe RECIPE_INDEX`
 Look up a recipe | `check RECIPE_NAME`
 Display all recipes | `listRecipes`

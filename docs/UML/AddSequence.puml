@@ -11,6 +11,7 @@ skinparam sequenceArrowColor black
 Gordon -> Parser: addRecipeParse
 activate Parser
 
+' Name
 Parser -> Parser: parseName
 activate Parser
 
@@ -20,24 +21,24 @@ deactivate Parser
 Parser -> Recipe: <<create>>
 activate Recipe
 
+' Ingredients
 Parser -> Parser: parseIngredients
 activate Parser
+
+loop for all ingredients
 Parser -> Recipe: addIngredient
+end
 
 Parser --> Parser
 deactivate Parser
 
+' Steps
 Parser -> Parser: parseSteps
 activate Parser
+
+loop for all steps
 Parser -> Recipe: addSteps
-
-Parser --> Parser
-deactivate Parser
-
-Parser -> Parser: parseCalories
-activate Parser
-
-Parser -> Recipe: addCalories
+end
 
 Parser --> Parser
 deactivate Parser
@@ -47,4 +48,5 @@ deactivate Recipe
 
 Parser --> Gordon: addCommand
 deactivate Parser
+
 @enduml

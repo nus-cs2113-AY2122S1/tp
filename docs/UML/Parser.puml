@@ -1,0 +1,34 @@
+@startuml
+!include Style.puml
+skinparam ArrowColor black
+skinparam classBorderColor black
+
+class Gordon #white {
+Parser parser
+Gordon()
+Run()
+}
+
+rectangle Util {
+    class Parser {
+    Parser()
+    parseMaster()
+    parseNextLine()
+    }
+
+    class Command {
+    execute()
+    }
+
+    class UI {
+    printIntro()
+    printExitMessage()
+    printHelp()
+    }
+}
+
+Gordon --> Parser
+Parser --> Command
+Parser -> UI
+
+@enduml
