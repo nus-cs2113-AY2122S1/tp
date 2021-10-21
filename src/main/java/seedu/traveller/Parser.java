@@ -1,16 +1,6 @@
 package seedu.traveller;
 
-import seedu.traveller.commands.AddDayCommand;
-import seedu.traveller.commands.AddItemCommand;
-import seedu.traveller.commands.DeleteCommand;
-import seedu.traveller.commands.EditCommand;
-import seedu.traveller.commands.ExitCommand;
-import seedu.traveller.commands.NewCommand;
-import seedu.traveller.commands.SearchCommand;
-import seedu.traveller.commands.ViewAllCommand;
-import seedu.traveller.commands.DeleteItemCommand;
-import seedu.traveller.commands.DeleteDayCommand;
-import seedu.traveller.commands.Command;
+import seedu.traveller.commands.*;
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.InvalidAddItemFormatException;
 import seedu.traveller.exceptions.InvalidEditFormatException;
@@ -79,6 +69,10 @@ public class Parser {
         case "exit":
             command = parseExitCommand();
             break;
+
+        case "help":
+             command = parseHelpCommand();
+             break;
         default:
             logger.log(Level.WARNING, "Invalid command input!");
             throw new CommandNotFoundException(rawInput);
@@ -86,7 +80,7 @@ public class Parser {
         return command;
     }
 
-    
+
     /**
      * Parses user input to give an <code>AddItemCommand</code>.
      * @param userInput Raw user input, with the first command option (add-item) removed.
@@ -267,4 +261,14 @@ public class Parser {
         logger.log(Level.INFO, "Exit command input");
         return new ExitCommand();
     }
+
+    /**
+     * Launches help menu
+     * @return Command An <code>ExitCommand</code> object.
+     */
+    private static Command parseHelpCommand() {
+        logger.log(Level.INFO, "Help command input");
+        return new HelpCommand();
+    }
 }
+
