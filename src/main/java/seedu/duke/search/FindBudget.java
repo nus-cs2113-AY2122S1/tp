@@ -27,9 +27,7 @@ public class FindBudget {
             } else {
                 for (int j = 0; j < sizeOfMatchedList; j += 1) {
                     System.out.print((j + 1) + ". ");
-                    System.out.print(matchedExpenditureList.get(j).getDescription() + " ");
-                    System.out.print(matchedExpenditureList.get(j).get + " ");
-                    System.out.println(matchedExpenditureList.get(j).getDate());
+                    System.out.print(matchedExpenditureList.get(j).toString());
                 }
             }
 
