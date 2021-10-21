@@ -2,6 +2,7 @@ package seedu.duke.data;
 
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
+import seedu.duke.data.records.Loan;
 import seedu.duke.textfiletools.WriteToTextFile;
 
 import java.time.LocalDate;
@@ -82,12 +83,20 @@ public class AllRecordList {
         return allRecordList.get(month).getExpenditureRecords();
     }
 
+    public ArrayList<Loan> getLoanRecords(int month) {
+        return allRecordList.get(month).getLoanRecords();
+    }
+
     public Budget getBudget(int month) {
         return allRecordList.get(month).getBudget();
     }
 
     public int getExpenditureListSize(int month) {
         return allRecordList.get(month).getExpenditureListSize();
+    }
+
+    public int getLoanListSize(int month) {
+        return allRecordList.get(month).getLoanListSize();
     }
 
     public Expenditure getExpenditure(int index, int month) {

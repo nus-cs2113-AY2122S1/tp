@@ -156,13 +156,27 @@ public class TextUi {
         } else {
             System.out.println("No Expenditure records yet.");
         }
+        System.out.println("Your loans: ");
+        if (list.getLoanListSize(month) > 0) {
+            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Debtorname", "   | Amount", "   | Date ");
+            printEnumeratedLoanList(list.getLoanRecords(month));
+        } else {
+            System.out.println("No Loan records.");
+        }
         System.out.println(DIVIDER);
     }
 
     private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList) {
         for (int i = 0; i < monthExpenditureList.size(); i++) {
             Expenditure currentExpenditure = monthExpenditureList.get(i);
-            System.out.println(i + "." + currentExpenditure);
+            System.out.println(i + 1 + "." + currentExpenditure);
+        }
+    }
+
+    private static void printEnumeratedLoanList(ArrayList<Loan> monthLoanList) {
+        for (int i = 0; i < monthLoanList.size(); i++) {
+            Loan currentLoan = monthLoanList.get(i);
+            System.out.println(i + 1 + "." + currentLoan);
         }
     }
 
