@@ -36,11 +36,11 @@ public class RemoveCommandParser {
         switch (flag) {
         case Constants.FLAG_UNIVERSITY:
             index = Integer.parseInt(argumentsSubstrings[1]);
-            if (index > universitySelectedList.getSize()) {
+            if (index > universityMasterList.getSize()) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
-            return new RemoveUniCommand(index, universityMasterList, universitySelectedList);
+            return new RemoveUniCommand(index - 1, universityMasterList, universitySelectedList);
         case Constants.FLAG_MODULE:
             index = Integer.parseInt(argumentsSubstrings[1]);
             if (index > moduleSelectedList.getSize()) {

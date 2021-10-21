@@ -28,7 +28,7 @@ public class AddUniCommand extends Command {
                 .getName().equals(universityToAdd.getName());
         SelectedUniversityStorage.write(universitySelectedList);
         System.out.println("New university added: ");
-        Ui.printUniversity(universityToAdd, universityIndexToAdd, universitySelectedList);
+        Ui.printUniversity(universityToAdd, universityMasterList);
     }
 
     public AddUniCommand(University universityToAdd, UniversityList universityMasterList,
@@ -44,6 +44,6 @@ public class AddUniCommand extends Command {
                 .getName().equals(universityToAdd.getName());
         SelectedUniversityStorage.write(universitySelectedList);
         System.out.println("New university added: ");
-        Ui.printUniversity(universityToAdd, universityIndexToAdd, universitySelectedList);
+        Ui.printUniversity(universityToAdd, universitySelectedList);
     }
 }
