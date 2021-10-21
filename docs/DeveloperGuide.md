@@ -25,6 +25,28 @@ original source as well}
 
 ## Implementation
 
+###Edit feature
+
+The edit mechanism is facilitated by AllRecordList which extends from RecordList. It implements the following operations:
+* ```AllRecordList#editBudget()``` — Edits a budget to the record list.
+* ```AllRecordList#editExpenditure()``` — Edits an expenditure to the record list.
+* ```AllRecordList#editLoan()``` —Edits a loan record to the record list.
+
+<br/>
+
+These operations are exposed in the ```EditBudgetCommand```, ```EditExpenditureCommand``` and ```EditLoanCommand``` classes, which extend from the ```Command``` subclass as ```EditBudget#execute()```, ```EditExpenditure#execute()``` and ```EditLoan#execute()``` respectively.
+
+<br/>
+
+Given below is an example usage scenario and how the ```edit``` mechanism behaves at each step.
+
+<br/>
+
+**Step 1**. The user launches the application for the first time. The ```AllRecordList``` will be initialized with the initial record list state.
+<br/> **Step 2**. The user executes add …  to ```add``` a new record into the record list. The add command also calls Storage#saveToStorage(), causing a modified record list state to be saved into the storage file.
+<br/> **Step 3**. The user now realises that there was a mistake in the record added, and decides to edit the record by executing the ```edit``` command. The edit command will call ```AllRecordList#edit…``` based on the record type.
+
+
 ### Listing
 
 The list commands traverse through each of the 12 Budget list in ALlRecordList for each month and 
