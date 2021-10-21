@@ -86,7 +86,7 @@ public class Parser {
 
         switch (identifier) {
         case "-c":
-            prefixes = Arrays.asList("/cn");
+            prefixes = Arrays.asList("/cn", "/m");
             break;
         case "-t":
             prefixes = Arrays.asList("/n", "/p");
@@ -147,8 +147,8 @@ public class Parser {
             extractedValues.add(value);
         }
 
-        String finalPrefix = prefixes.get(4);
-        int finalIndex = indexes.get(4);
+        String finalPrefix = prefixes.get(indexes.size()-1);
+        int finalIndex = indexes.get(indexes.size()-1);
 
 //        int inputIndex = obtainArrayIndex(finalPrefix);
         String value = extractValue(argString, finalPrefix, finalIndex, argString.length());

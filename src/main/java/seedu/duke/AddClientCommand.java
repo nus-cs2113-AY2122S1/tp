@@ -33,8 +33,6 @@ public class AddClientCommand extends Command {
      */
     @Override
     public void execute(ClientList clients, FlightList flights, TourList tours, Ui ui) {
-        int newClientCount = clients.getClientCount() + 1;
         clients.add(client, ui);
-        assert newClientCount == clients.getClientCount();
     }
 }
