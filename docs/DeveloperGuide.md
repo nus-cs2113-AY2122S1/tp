@@ -20,8 +20,8 @@
   * [3.6 Content](#36-content-component)
   * [3.7 Active Recall](#37-active-recall-component)
   * [3.8 Storage](#38-storage-component)
-- [4. Implementation]()
-  * [4.1 Timetable]()
+- [4. Implementation](#4-implementation)
+  * [4.1 Timetable](#41-timetable)
   * [4.2 Active Recall]()
   * [4.3 Workspace]()
   * [4.4 Adding and Deleting Content]()
@@ -155,3 +155,25 @@ The `ModuleManager`
 ### 3.7 Active Recall Component
 
 ### 3.8 Storage Component
+
+## 4. Implementation
+
+### 4.1 Timetable
+
+The `timetable` feature is one of TermiNUS' features which can be accessed from the main workspace. 
+
+The `timetable` feature has 2 variations:
+- **Daily** Timetable
+- **Weekly** timetable.
+
+The following sequence diagram shows how the timetable operation works:
+![](attachments/Timetable.png)
+
+The **Daily** and **Weekly** `timetable` feature differs by a user argument which is parsed as the `day`.
+
+The **Daily** `timetable` feature works by iterating through a collection of `NusModule` which are stored inside a `ModuleManager`.
+Within the `NusModule`, the `ContentManager`, which stores all the `Link` is accessed.
+All the `Link` inside `ContentManager` is iterated through to acquire all the schedule which has the same attribute `day` as the user argument.
+
+The **Weekly** `timetable` feature is an extension of the **Daily** `timetable` feature.
+It is implemented by iterating through a `DaysOfWeekEnum` and acquires the **daily** `timetable` for each day in the week.

@@ -1,0 +1,44 @@
+@startuml
+Activate Timetable #FFBBBB
+Timetable -> ModuleManager: getAllModules()
+Activate ModuleManager #FFBBBB
+Timetable -> StringBuilder: <<create>>
+Activate StringBuilder #FFBBBB
+ModuleManager -> NusModule: getAllModules()
+Activate NusModule #FFBBBB
+NusModule --> ModuleManager: modules
+
+
+loop For each NusModule in modules
+    ModuleManager -> NusModule: getModule(NusModule)
+
+    NusModule -> ContentManager : getContentManager()
+    Activate ContentManager #FFBBBB
+
+        loop For each Link in ContentManager
+
+            ContentManager -> Link: getContents()
+            Activate Link #FFBBBB
+
+            Link->Link: getDay()
+            Activate Link #DarkSalmon
+            Link --> Link: currentDay
+
+            alt if currentDay equals to user argument Day
+            Deactivate Link
+
+            Link -> Link: getViewDescription()
+            Activate Link #DarkSalmon
+
+            Link --> Link: description
+            Deactivate Link
+            Link -> StringBuilder: append(description)
+        end
+end
+end
+StringBuilder -> StringBuilder: toString()
+Activate StringBuilder #DarkSalmon
+StringBuilder --> StringBuilder: dailySchedule 
+Deactivate StringBuilder
+StringBuilder --> Timetable: dailySchedule
+@enduml
