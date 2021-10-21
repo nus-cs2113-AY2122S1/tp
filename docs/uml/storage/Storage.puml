@@ -1,0 +1,52 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+
+'abstract class DGS
+'abstract AbstractCollection
+'interface List
+'interface Collection
+'
+'List <|-- AbstractList
+'Collection -- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+
+Terminus "1" --> "1  " ModuleStorage: moduleStorage
+
+Command "0..*  " ..> "0..1 " ModuleStorage: uses >
+
+class Terminus {
+  + main(): void {static}
+  + run(): void
+  - start(): void
+  - runUntilCommandExit(): void
+  - handleIoException(e: IOException): void
+  - exit(): void
+}
+
+class ModuleStorage {
+  - filePath: Path
+  - gson: Gson
+  - ModuleStorage()
+  + init(filePath: Path): void
+  + getInstance(): ModuleStorage {static}
+  + loadFile(): ModuleManager
+  + saveFile(moduleManager: ModuleManager): void
+  + loadNotesFromModule(moduleManager: ModuleManager, mod: String): void
+  + saveAllNotes(moduleManager: ModuleManager): void
+  + saveNotesFromModule(moduleManager: ModuleManager, mod: String, toDeleteAll: Boolean): void
+  + removeNoteFromModule(moduleName: String, noteName, String): void
+  + addNoteFromModule(moduleName: String, newNote: Note): void
+  + createModuleDirectory(moduleName: String): boolean
+  + cleanAfterDeleteModule(mod: String): void
+}
+
+abstract Command {
+
+}
+
+@enduml

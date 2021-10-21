@@ -31,7 +31,7 @@
 - [Appendix B: User Stories ]()
 - [Appendix C: Non Functional Requirements]()
 - [Appendix D: Glossary]()
-- [Appendix E: Instructions for Manual Testing]()  
+- [Appendix E: Instructions for Manual Testing]()
 
 ## 1. Introduction
 
@@ -123,8 +123,8 @@ Import the coding style xml file into your IntelliJ IDEA.
     3. Once done, select `Apply` then `OK`.
 4. Now your IntelliJ IDEA should follow our Coding Style.
 
-> :bulb: IntelliJ IDEA have certain shortcut key to aid in auto-formatting of code. 
-> Once you are done with a piece of code, highlight the section you have just written and press the 
+> :bulb: IntelliJ IDEA have certain shortcut key to aid in auto-formatting of code.
+> Once you are done with a piece of code, highlight the section you have just written and press the
 > key `CTRL + SHIFT + L`.
 
 ## 3. Design
@@ -136,8 +136,9 @@ Import the coding style xml file into your IntelliJ IDEA.
 ### 3.3 Parser Component
 
 ### 3.4 Command Component
- 
+
 ### 3.5 Module Component
+
 ![](attachments/Module.png)
 
 The Module Components consists of the `ModuleManager` which contains a collection of `NusModule` and
@@ -187,6 +188,20 @@ For further details on the implementation, head to
 ### 3.8 Storage Component
 
 
+![](attachments/StorageComponent.png)
+
+The Module Storage handles any file I/O operations of TermiNUS.
+
+The `ModuleStorage` component:
+
+- can create folder for each module provided by the user.
+- can save modules, schedules and links data in a `.json` file.
+- can save notes into multiple `.txt` files.
+
+`TermiNUS` saved these data as either a `.json` or `.txt` file so users will be able to edit saved
+data easily with any available text editor.
+
+
 ## 4. Implementation
 
 ### 4.1 Timetable
@@ -208,6 +223,7 @@ All the `Link` inside `ContentManager` is iterated through to acquire all the sc
 
 The **Weekly** `timetable` feature is an extension of the **Daily** `timetable` feature.
 It is implemented by iterating through a `DaysOfWeekEnum` and acquires the **daily** `timetable` for each day in the week.
+
 
 ### 4.2 Active Recall Implementation
 ![Active Recall Sequence Diagram](attachments/ActiveRecallSequenceDiagram.png)
@@ -283,3 +299,4 @@ issues.
 Once the adjustment of weights of the question is done, the process is repeated if there are 
 questions left inside `QuestionGenerator`. Otherwise, the Active Recall session will be terminated, 
 and the input will be passed back to the `CommandParser`.
+
