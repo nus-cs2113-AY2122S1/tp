@@ -47,6 +47,38 @@ This application adapted the Developer Guide and User Guide from:
 
 ### UI component
 
+**API** : `Ui.java`
+
+How the `Ui` component works:
+1. The `Ui` is called in 2 main classes - `GoalList` and `UiOverall`
+2. For `GoalList`, functions that require printing of information will call `Ui`
+   1. confirmation message of `addGoal()`
+   2. confirmation message of `addHabitToGoal()`
+   3. removed goal of `deleteGoal()`
+   4. removed habit of `deleteHabitFromGoal()`
+   5. confirmation message of `doneHabitFromGoal()`
+   6. update message of `updateGoalName()`
+   7. list of goals of `listGoals()`
+   8. list of habits of `listHabitsFromGoal()`
+3. For `UiOverall`, there is an inheritance of 2 classes - `UiStartup` and `UiMain`
+   1. `UiStartup` handles the interface that provides a brief introduction to the application, and links to external 
+      documentation.
+   2. `UiMain` handles the interface for the main application.
+4. The `Ui` is responsible for printing error messages raised by exceptions.
+
+The Sequence Diagram below illustrates the interactions within the `Ui` component when `run()` is called in the main
+class `HappyBit.java`
+
+![Ui Diagram](UML Diagrams/UiDiagramCopy.png)
+
+While the Sequence Diagram represents the normal flow of logic, there is a recursive definition that is not represented.
+1. `:HappyBit` calls the method `handleState()` in `:State`
+2. `handleState()` calls another method `mainState()` also in `:State`
+3. `mainState()` will create a new `:UiMain` and calls a method `run()` on itself
+4. `run()` returns a boolean value equivalent to whether the recursive call should be made
+5. If the boolean value is true, `handleState()` would recursively call itself
+6. If the boolean value is false, `handleState()` would pass the call back to `:HappyBit`
+
 ### Command component
 
 ### Parser logic component
@@ -58,20 +90,26 @@ This application adapted the Developer Guide and User Guide from:
 
 ## Appendix A: Product Scope
 
-### Target user profile
-
-{Describe the target user profile}
+### Target user profile:
+* wants to have a work-life balance but is often consumed by work/school
+* have goals and aspirations but falls short of them; lacklustre commitment or game plan for action
+* doesn't want to rely on smartphone (They're doing everything these days, sheesh!)
+* prefers desktop app, 
+* familiar and comfortable with CLI apps, or willing to learn to use
 
 ### Value proposition
 
 {Describe the value proposition: what problem does it solve?}
+
+Users with _Ha(ppy)Bit_ will find themselves cultivating good habits despite hectic 
+workload/commitments from school (we targeting work and school?). 
 
 
 ## Appendix B: User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
+|v1.0|new user|see usage instructions|refer to them when I forget how to use the application| 
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
 

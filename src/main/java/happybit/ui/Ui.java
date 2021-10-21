@@ -111,12 +111,6 @@ public class Ui {
         printDashes();
     }
 
-    public void showWelcome() {
-        printDashes();
-        System.out.println("Howdy! Welcome to Ha(ppy)Bit!");
-        printDashes();
-    }
-
     public void showError(String message) {
         printDashes();
         System.out.println(message);
