@@ -57,6 +57,10 @@ public class Assessment implements ClassChecker {
         return weightage;
     }
 
+    public boolean isMarksValid(double marks) {
+        return ((marks >= 0) && (marks <= maximumMarks));
+    }
+
     public int getMaximumMarks() {
         return maximumMarks;
     }

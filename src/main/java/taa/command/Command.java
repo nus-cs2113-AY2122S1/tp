@@ -26,6 +26,8 @@ public abstract class Command {
     public static final String COMMAND_ADD_ASSESSMENT = "add_assessment";
     public static final String COMMAND_DELETE_ASSESSMENT = "delete_assessment";
     public static final String COMMAND_SET_MARKS = "set_marks";
+    public static final String COMMAND_EDIT_MARK = "edit_mark";
+    public static final String COMMAND_DELETE_MARK = "delete_mark";
     public static final String COMMAND_HELP = "help";
 
     // Common messages
@@ -35,6 +37,8 @@ public abstract class Command {
     protected static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
     protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
     protected static final String MESSAGE_NO_STUDENTS = "There are no students in this module";
+    protected static final String MESSAGE_NO_MARKS = "This student has not been marked yet.";
+    protected static final String MESSAGE_ALREADY_MARKED = "This student has already been marked.";
 
     // Common message formats
     protected static final String MESSAGE_FORMAT_GENERIC_USAGE = "%s";

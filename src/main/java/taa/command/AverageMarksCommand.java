@@ -16,7 +16,7 @@ import taa.student.StudentList;
 public class AverageMarksCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_ASSESSMENT_NAME = "a";
-    private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_ASSESSMENT_NAME};
+    private static final String[] AVERAGE_MARKS_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_ASSESSMENT_NAME};
 
     private static final String MESSAGE_FORMAT_AVERAGE_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<ASSESSMENT_NAME>";
     private static final String MESSAGE_FORMAT_AVERAGE_MARKS = "Average marks for %s is %,.2f";
@@ -24,7 +24,7 @@ public class AverageMarksCommand extends Command {
             + "Note that %d student(s) have yet to be marked!";
 
     public AverageMarksCommand(String argument) {
-        super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);
+        super(argument, AVERAGE_MARKS_ARGUMENT_KEYS);
     }
 
     /**

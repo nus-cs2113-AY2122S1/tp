@@ -1,6 +1,8 @@
 package taa.student;
 
 import taa.ClassChecker;
+import taa.assessment.Assessment;
+import taa.assessment.AssessmentList;
 import taa.attendance.AttendanceList;
 
 import java.util.HashMap;
@@ -98,6 +100,15 @@ public class Student implements ClassChecker {
     }
 
     /**
+     * Deletes the marks for the given assessment.
+     *
+     * @param assessmentName Assessment whose marks are to be deleted.
+     */
+    public void deleteMark(String assessmentName) {
+        results.remove(assessmentName);
+    }
+
+    /**
      * Gets the marks for the given assessment.
      *
      * @param assessmentName Assessment to get marks for.
@@ -145,7 +156,7 @@ public class Student implements ClassChecker {
         if (id.isEmpty() || name.isEmpty()) {
             return false;
         }
-
+        //do this in module instead
         for (String assessmentName : results.keySet()) {
             if (!isMarksWithinRange(results.get(assessmentName))) {
                 return false;

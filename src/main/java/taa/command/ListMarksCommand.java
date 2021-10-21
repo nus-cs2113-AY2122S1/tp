@@ -16,16 +16,15 @@ import taa.student.StudentList;
 public class ListMarksCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_ASSESSMENT_NAME = "a";
-    private static final String[] ADD_ASSESSMENT_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_ASSESSMENT_NAME};
+    private static final String[] LIST_MARKS_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_ASSESSMENT_NAME};
 
     private static final String MESSAGE_LIST_MARKS_HEADER = "Here is the list of students and "
         + "their marks for %s:";
     private static final String MARKS_LIST_EMPTY = "There are no marks inputted!";
-
     private static final String MESSAGE_FORMAT_LIST_MARKS_USAGE = "%s %s/<MODULE_CODE> %s/<ASSESSMENT_NAME>";
 
     public ListMarksCommand(String argument) {
-        super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);
+        super(argument, LIST_MARKS_ARGUMENT_KEYS);
     }
 
     /**
