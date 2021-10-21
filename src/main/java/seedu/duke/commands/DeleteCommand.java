@@ -2,8 +2,10 @@ package seedu.duke.commands;
 
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
+
 import java.util.Scanner;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static seedu.duke.Duke.eventCatalog;
 
@@ -22,8 +24,7 @@ public class DeleteCommand extends Command {
     private boolean isCorrectFormat;
 
     // create logger
-    private final static Logger logger = Logger.getLogger("Logger");
-
+    private static final Logger logger = Logger.getLogger("Logger");
 
 
     // v2.0: deleteCommand deletes purely based on index, i.e. delete -t/-e [TASK_INDEX]
@@ -45,8 +46,8 @@ public class DeleteCommand extends Command {
                 prepareInputs(command);
             } else {
                 logger.log(Level.WARNING, "processing error");
-                throw new DukeException("Invalid item flag entered. Please specify event '-e' " +
-                        "or task '-t'.");
+                throw new DukeException("Invalid item flag entered. Please specify event '-e' "
+                        + "or task '-t'.");
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
