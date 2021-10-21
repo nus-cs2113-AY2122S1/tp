@@ -1,6 +1,5 @@
 @startuml
-'https://plantuml.com/component-diagram
-hide footbox
+!include Style.puml
 
 -> ":ListHabitsCommand": runCommand(goalList: GoalList,\nui:Ui, storage:Storage)
 activate ":ListHabitsCommand"
