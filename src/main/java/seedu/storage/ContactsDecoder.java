@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class ContactsDecoder {
+public class ContactsDecoder extends RegexParser {
         ContactList updatedContactList = new ContactList();
         try {
             Scanner fileScanner = new Scanner(contactFile);
