@@ -3,6 +3,7 @@ package terminus.command.content.question;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -35,7 +36,7 @@ public class AddQuestionCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test1\"");
         CommandResult addResult = addCommand.execute(ui, moduleManager);
         assertTrue(addResult.isOk());

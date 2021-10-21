@@ -2,6 +2,7 @@ package terminus.command.content.question;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -32,7 +33,7 @@ public class BackQuestionCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command backCommand = commandParser.parseCommand("back");
         CommandResult backResult = backCommand.execute(ui, moduleManager);
         assertTrue(backResult.isOk());

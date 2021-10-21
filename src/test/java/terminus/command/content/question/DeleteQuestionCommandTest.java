@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -37,7 +38,7 @@ public class DeleteQuestionCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(ui, moduleManager);
