@@ -6,11 +6,7 @@ import gordon.command.basic.CheckCommand;
 import gordon.command.basic.DeleteRecipeCommand;
 import gordon.command.basic.ListRecipesCommand;
 import gordon.command.basic.NullCommand;
-import gordon.command.find.FindCaloriesCommand;
-import gordon.command.find.FindDifficultyCommand;
-import gordon.command.find.FindIngredientsCommand;
-import gordon.command.find.FindPriceCommand;
-import gordon.command.find.FindTagsCommand;
+import gordon.command.find.*;
 import gordon.command.set.SetCaloriesCommand;
 import gordon.command.set.SetDifficultyCommand;
 import gordon.command.set.SetPriceCommand;
@@ -269,6 +265,13 @@ public class Parser {
             ArrayList<String> tags = new ArrayList<>(Arrays.asList(splitContent[1]
                     .substring(spaceIndex + 1).split("\\+")));
             return new FindTagsCommand(tags);
+        case "time":
+            try {
+                int time = Integer.parseInt(splitContent[1].substring(spaceIndex + 1).trim());
+                return new FindTimeCommand(time);
+            } catch (NumberFormatException e) {
+                throw new GordonException(GordonException.INDEX_INVALID);
+            }
         default:
             throw new GordonException(GordonException.COMMAND_INVALID);
         }

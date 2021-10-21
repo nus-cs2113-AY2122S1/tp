@@ -12,7 +12,7 @@ public class Recipe {
     protected Difficulty difficulty = Difficulty.None;
     protected int preparationTime = -1;
     protected int cookingTime = -1;
-    protected int totalTime = preparationTime + cookingTime;
+    protected int totalTime = -1;
     protected ArrayList<String> ingredients;
     protected ArrayList<String> steps;
     protected float totalPrice = -1;
@@ -114,9 +114,10 @@ public class Recipe {
     public void setTimes(int prepTime, int cookTime) {
         preparationTime = prepTime;
         cookingTime = cookTime;
+        totalTime = prepTime + cookTime;
     }
 
-    public float getTotalTime() {
+    public int getTotalTime() {
         return totalTime;
     }
 
