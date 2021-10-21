@@ -17,6 +17,8 @@ public class AttendanceList implements ClassChecker {
         return attendances.size();
     }
 
+    public static int ATTENDANCE_NOT_FOUND = -1;
+
     /**
      * Gets the list of attendances. Note: This returns a new ArrayList instance.
      *
@@ -50,6 +52,46 @@ public class AttendanceList implements ClassChecker {
     public void addAttendance(Attendance attendance) {
         attendances.add(attendance);
         sortAttendances();
+    }
+
+    /**
+     * Checks if an index is valid with respect to the attendance ArrayList.
+     *
+     * @param index The index to check.
+     * @return true if valid, else false.
+     */
+    public boolean isValidIndex(int index) {
+        return (index >= 0 && index < getSize());
+    }
+
+    /**
+     * Deletes a record of attendance from the attendance list.
+     *
+     * @param lessonNumInput The inputted lesson Num to delete.
+     * @return An Attendance object if successfully deleted, else null.
+     */
+    public Attendance deleteAttendance(String lessonNumInput) {
+        int attendanceIndex = findAttendanceIndex(lessonNumInput);
+        if (isValidIndex(attendanceIndex)) {
+            return attendances.remove(attendanceIndex);
+        }
+        return null;
+    }
+
+    /**
+     * Gets the index of a particular student's lesson attendance in attendance list.
+     *
+     * @param lessonNumInput The inputted lesson Num to search for.
+     * @return A index of student's lesson attendance in attendance list.
+     */
+    public int findAttendanceIndex(String lessonNumInput) {
+        for (Attendance attendance : attendances) {
+            int lessonNumber = attendance.getLessonNumber();
+            if (lessonNumber == Integer.parseInt(lessonNumInput)) {
+                return attendances.indexOf(attendance);
+            }
+        }
+        return ATTENDANCE_NOT_FOUND;
     }
 
     /**

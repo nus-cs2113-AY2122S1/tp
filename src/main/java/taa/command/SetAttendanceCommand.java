@@ -64,7 +64,7 @@ public class SetAttendanceCommand extends Command {
 
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         if (!Util.isStringInteger(studentIndexInput)) {
-            throw new TaaException(MESSAGE_INVALID_LESSON_INDEX);
+            throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
 
