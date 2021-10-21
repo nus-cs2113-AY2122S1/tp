@@ -42,6 +42,15 @@ public class IngredientStorage {
     }
 
     /**
+     * Returns the total quantity of the ingredient.
+     *
+     * @return The different batches of the ingredient
+     */
+    public TreeMap<LocalDate, Integer> getIngredientBatches() {
+        return ingredientBatches;
+    }
+
+    /**
      * Adds a batch of ingredients to the storage.
      *
      * @param quantity Quantity of batch of ingredients to be added.

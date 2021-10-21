@@ -151,14 +151,18 @@ public class IngredientRepository {
 
         StringBuilder expiringIngredientsList = new StringBuilder();
 
-        // TODO: Need to re-implement.
+        for (IngredientStorage ingredientStorage : ingredients.values()) {
+            IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
 
-        // for (IngredientStorage ingredientStorage : ingredients.values()) {
-        //     if (ingredient.getExpiryDate().isAfter(currentDate)
-        //             && ingredient.getExpiryDate().isBefore(currentDatePlusAWeek)) {
-        //         expiringIngredientsList.append(ingredient).append("\n");
-        //     }
-        // }
+            for( LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
+                if(expiryDate.isAfter(currentDate) && expiryDate.isBefore(currentDatePlusAWeek)) {
+                    expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
+                }
+            }
+            expiringIngredientsList.append(expiredIngredientStorage);
+            expiringIngredientsList.append("\n");
+
+        }
         return expiringIngredientsList.toString();
     }
 
@@ -172,13 +176,18 @@ public class IngredientRepository {
 
         StringBuilder expiredIngredientsList = new StringBuilder();
 
-        // TODO: Need to re-implement.
+        for (IngredientStorage ingredientStorage : ingredients.values()) {
+            IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
 
-        // for (IngredientStorage ingredientStorage : ingredients.values()) {
-        //     if (ingredient.getExpiryDate().isBefore(currentDate)) {
-        //         expiredIngredientsList.append(ingredient).append("\n");
-        //     }
-        // }
+            for( LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
+                if(expiryDate.isBefore(currentDate)) {
+                    expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
+                }
+            }
+            expiredIngredientsList.append(expiredIngredientStorage);
+            expiredIngredientsList.append("\n");
+
+        }
         return expiredIngredientsList.toString();
     }
 }
