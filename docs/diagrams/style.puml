@@ -7,7 +7,8 @@
 !define PARSER_COLOUR #DarkOrchid
 !define PARSER_COLOUR_S1 #Orchid
 !define INGREDIENTLIST_COLOUR #DeepSkyBlue
-!define INGREDIENT_COLOUR #SkyBlue
+!define INGREDIENTGROUP_COLOUR #SkyBlue
+!define INGREDIENT_COLOUR #LightBlue
 !define STORAGE_COLOUR #GoldenRod
 !define COMMAND_COLOUR #Crimson
 !define COMMAND_COLOUR_S1 #Pink

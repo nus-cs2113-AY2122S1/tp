@@ -102,7 +102,7 @@ Below is a partial class diagram of the `IngredientList` component
 
 The `IngredientList` class 
 * receives stored data(if any) from `Storage` when the first command is executed
-* stores all of the `Ingredient` objects in an ArrayList. 
+* stores each group of `Ingredient` objects in `IngredientGroup`, grouped by their `name`
 * sends the stored data to the `Storage` class for storage after command execution 
 
 Each of the `Ingredient` objects contains information about an ingredient, namely its `name`, `amount` in stock and the `expiry` date.
@@ -146,18 +146,33 @@ The user is able to call any of the 3 methods on their own, while on startup, th
 
 The sequence diagram for when the user inputs `alerts all` is shown below.
 
-<<sequence diagram>>
+![image](images/AlertsAllSequenceDiagram.png)
 
 All constructors for the command classes are called right before the relevant `run()` methods, as in `new XXXCommand().run()`. These are not shown in the diagram for simplicity. 
 
 The `alerts all` command is passed into the `parser` class's `parse` command, which invokes the `parseAlertsCommand` method.
 
 Next, an `AlertCommand` class is instantiated and `run` is called. This further calls 2 classes and runs them
-1. The `AlertExpiringSoonCommand` class: Gets the current date from the `CurrentDate` class, adds the threshold and calls the `ExpireCommand` class with the calculated date.
-   The `ExpireCommand` class's `run` method looks for the ingredients expiring before the calculated date 
-2. The `AlertLowStockCommand` class: It's `run` method looks for ingredients with amounts less than the specified threshold. 
+1. The `AlertExpiringSoonCommand` class: Returns a list of ingredients expiring by a calculated date 
+2. The `AlertLowStockCommand` class: Returns a list of ingredients with stock lesser than the threshold 
 
 Each of the classes returns a String after `run`, which the `AlertCommand` class sends back to the parser to be returned.
+
+The sequence diagram for the `AlertExpiringSoonCommand.run()` is shown below. The user can also call this via `alerts expiry`
+
+![image](images/AlertExpirySequenceDiagram.png)
+
+The current date is obtained via the `CurrentDate` class, with which the threshold number of days is added to obtain the threshold date.
+
+The expiry date of `Ingredient` object in each `IngredientGroup` in the `IngredientList` class is taken and compared to the threshold date. 
+The information of the `Ingredient` is taken note of to be printed when the function returns.
+
+For `AlertLowStockCommand`, it is less complicated, and the sequence diagram shown below. The user can also call this via `alerts stock`
+
+![image](images/AlertStockSequenceDiagram.png)
+
+The `totalAmount` for each `IngredientGroup` in the `IngredientList` is obtained and compared to the threshold amount. The 
+information of the `IngredientGroup` is taken note of to be printed when the function is returned.
 
 
 ## Product scope
