@@ -1,23 +1,30 @@
 package seedu.typists.game;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static seedu.typists.Main.LINE_LENGTH;
 import static seedu.typists.common.Utils.getWordLineFromStringArray;
 
 public class DataProcessor {
-    private final ArrayList<String[]> checkerWordLines;
-    private final ArrayList<String[]> userWordLines;
+    private static final Logger logger = Logger.getLogger("Foo");
+    private final List<String[]> checkerWordLines;
+    private final List<String[]> userWordLines;
     public final double totalTime;
+    private final List<String> errorWords;
 
     public DataProcessor(TimeModeGame tg) {
         this.checkerWordLines = tg.wordLines;
         this.userWordLines = getWordLineFromStringArray(tg.inputLines);
         this.totalTime = tg.realGameTime;
+        this.errorWords = getErrorWords();
     }
 
-    public int getErrorWordCount() {
-        int errorWordCount = 0;
+    /** Get the list of words that the user made mistakes on. */
+    public List<String> getErrorWords() {
+        List<String> errorWords = new ArrayList<>();
         int i = 0;
         for (String[] sa : userWordLines) {
             String[] checker = checkerWordLines.get(i);
@@ -25,16 +32,21 @@ public class DataProcessor {
             for (String s : checker) {
                 try {
                     if (!s.equals(sa[ii])) {
-                        errorWordCount++;
+                        errorWords.add(s);
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    errorWordCount++;
+                    logger.log(Level.INFO, "word(s) missed during input.");
                 }
                 ii++;
             }
             i++;
         }
-        return errorWordCount;
+        return errorWords;
+    }
+
+    /** Get the total number of wrong words typed.*/
+    public int getErrorWordCount() {
+        return errorWords.size();
     }
 
     public int getTotalWordTyped() {
@@ -68,7 +80,6 @@ public class DataProcessor {
     }
 
     public double getErrorPercentage() {
-        double percentage = (double) getErrorWordCount() / (double) getTotalWordTyped();
-        return percentage;
+        return (double) getErrorWordCount() / (double) getTotalWordTyped();
     }
 }
