@@ -1,4 +1,7 @@
 # Food-O-Rama
+<p align="center">
+  <img width="493" height="153" src="https://user-images.githubusercontent.com/69526313/138156694-3a7ccb62-2a06-4adc-b272-badde4bc6230.png">
+</p>
 
 Food-O-Rama is a food wastage tracking application for restaurant owners and hawkers to 
 keep track of their food resources. It provides the user with insight on the amount of ingredients 

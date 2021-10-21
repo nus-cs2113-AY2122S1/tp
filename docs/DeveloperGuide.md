@@ -22,8 +22,12 @@
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|Restaurant owner|I can delete an entry for a particular dish|Change the tracking to adapt to a change in my menu|
+|v1.0|Restaurant owner| I can use a help function|help me get familiar with the application|
+|v1.0|Restaurant owner|I can add a ingredient to be tracked|keep track of the ingredient storage|
+|v1.0|Restaurant owner|I can add a dish to be tracked|So I can track its wastage and its ingredients’ wastage|
+|v1.0|Restaurant owner|I can add the weight of wastage of a dish|Know how much of a certain dish is being wasted|
+|v1.0|Restaurant owner|I can calculate the Ingredients and Dishes wasted|Plan for future meal services to reduce food wastage|
 
 ## Non-Functional Requirements
 
