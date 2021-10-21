@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class IngredientList {
 
     private static final String INVALID_NUMBER = "Ingredient number does not exist!";
-    protected ArrayList<IngredientGroup> ingredientList;
+    protected static ArrayList<IngredientGroup> ingredientList;
     private static IngredientList instance = null;
 
     public IngredientList() {
@@ -49,7 +49,15 @@ public class IngredientList {
     }
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/duke/ingredients/IngredientList.java
+     * Gets ingredient list
+     *
+     * @return ingredient list
+     */
+    public static ArrayList<IngredientGroup> getIngredientList() {
+        return ingredientList;
+    }
+
+    /**
      * Uses ingredient name as key to search if ingredient currently exists in ingredient list.
      *
      * @param ingredientName ingredient to be searched

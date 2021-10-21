@@ -4,8 +4,6 @@ import seedu.situs.exceptions.DukeException;
 import seedu.situs.ingredients.Ingredient;
 import seedu.situs.ingredients.IngredientList;
 
-import java.io.IOException;
-
 public class AddCommand extends Command {
 
     private static final String ADDED_MESSAGE = "Got it. This ingredient has been added to the inventory:\n" + "\t";
@@ -26,7 +24,7 @@ public class AddCommand extends Command {
         //try {
         IngredientList.getInstance().add(this.ingredient);
         String resultMsg = ADDED_MESSAGE
-                + ingredient.toString() + '\n'
+                + ingredient.getName() + " | " + ingredient.toString() + '\n'
                 + "Current inventory has " + IngredientList.getInstance().getSize()
                 + " items." + '\n' + "This ingredient will expire in "
                 + Ingredient.daysFromCurrentDate(ingredient.getExpiry()) + " days.";
