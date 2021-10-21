@@ -1,12 +1,16 @@
 package seedu.command;
 
 import seedu.contact.Contact;
+import seedu.contact.ContactComparator;
 import seedu.contact.ContactList;
 import seedu.contact.DetailType;
+import seedu.exception.InvalidFlagException;
+import seedu.ui.ExceptionTextUi;
 import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AddContactCommand extends Command {
     private final String name;
@@ -15,6 +19,13 @@ public class AddContactCommand extends Command {
     private final String telegram;
     private final String twitter;
     private final String email;
+    public static final int NUMBER_OF_FIELDS = 6;
+    public static final int NAME_INDEX = 0;
+    public static final int GITHUB_INDEX = 1;
+    public static final int LINKEDIN_INDEX = 2;
+    public static final int TELEGRAM_INDEX = 3;
+    public static final int TWITTER_INDEX = 4;
+    public static final int EMAIL_INDEX = 5;
 
     public String getLinkedin() {
         return linkedin;
@@ -50,55 +61,35 @@ public class AddContactCommand extends Command {
     }
 
     public void execute() {
-        Contact addedContact = new Contact(name, github, linkedin, telegram, twitter, email);
-        if (duplicateCatcher(addedContact, contactList)) {
-            TextUi.ignoreAddContact();
-        } else {
-            contactList.addContact(addedContact);
-            TextUi.addContactMessage(addedContact, contactList.getListSize());
+        try {
+            Contact addedContact = new Contact(name, github, linkedin, telegram, twitter, email);
+            if (hasDuplicates(addedContact, contactList)) {
+                TextUi.ignoreContact("add");
+            } else {
+                contactList.addContact(addedContact);
+                TextUi.addContactMessage(addedContact, contactList.getListSize());
+            }
+        } catch (InvalidFlagException e) {
+            ExceptionTextUi.invalidIndexMessage();
         }
     }
 
-    public Boolean duplicateCatcher(Contact addedContact, ContactList contactList) {
+    private Boolean hasDuplicates(Contact addedContact, ContactList contactList) throws InvalidFlagException {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
+        String[] addedContactDetails = extractContactDetails(addedContact);
         for (int i = 0; i < contactList.getListSize(); i++) {
-            Contact currentContact = contactList.getContactAtIndex(i);
-            if (duplicateField(addedContact.getName(), currentContact.getName())) {
-                duplicatedIndex.add(i);
-                continue;
-            }
-            if (addedContact.getGithub() != null && currentContact.getGithub() != null) {
-                if (duplicateField(addedContact.getGithub(), currentContact.getGithub())) {
-                    duplicatedIndex.add(i);
-                    continue;
-                }
-            }
-            if (addedContact.getEmail() != null && currentContact.getEmail() != null) {
-                if (duplicateField(addedContact.getEmail(), currentContact.getEmail())) {
-                    duplicatedIndex.add(i);
-                    continue;
-                }
-            }
-            if (addedContact.getTelegram() != null && currentContact.getTelegram() != null) {
-                if (duplicateField(addedContact.getTelegram(), currentContact.getTelegram())) {
-                    duplicatedIndex.add(i);
-                    continue;
-                }
-            }
-            if (addedContact.getLinkedin() != null && currentContact.getLinkedin() != null) {
-                if (duplicateField(addedContact.getLinkedin(), currentContact.getLinkedin())) {
-                    duplicatedIndex.add(i);
-                    continue;
-                }
-            }
-            if (addedContact.getTwitter() != null && currentContact.getTwitter() != null) {
-                if (duplicateField(addedContact.getTwitter(), currentContact.getTwitter())) {
-                    duplicatedIndex.add(i);
+            String[] currentContactDetails = extractContactDetails(contactList.getContactAtIndex(i));
+            for (int j = 0; j < NUMBER_OF_FIELDS; j++) {
+                if (addedContactDetails[j] != null && currentContactDetails[j] != null) {
+                    if (hasDuplicateField(addedContactDetails[j], currentContactDetails[j])) {
+                        duplicatedIndex.add(i);
+                        break;
+                    }
                 }
             }
         }
         if (!duplicatedIndex.isEmpty()) {
-            TextUi.confirmAddDuplicateMessage(duplicatedIndex, contactList);
+            TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, "add");
             String userAddConfirmation = UserInputTextUi.getUserConfirmation();
             return userAddConfirmation.equalsIgnoreCase("n");
         }
