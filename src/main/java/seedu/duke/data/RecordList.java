@@ -3,18 +3,17 @@ package seedu.duke.data;
 
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
+import seedu.duke.data.records.Loan;
 import seedu.duke.data.records.Record;
-import seedu.duke.storage.Storage;
-
 
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 
 public class RecordList {
     public static int numberOfRecords;
     private final Budget budget;
     private final ArrayList<Expenditure> expenditureRecords;
+    private final ArrayList<Loan> loanRecords;
     private boolean hasBudget;
 
     /**
@@ -25,6 +24,7 @@ public class RecordList {
         budget = new Budget(0.00, month);
         hasBudget = false;
         expenditureRecords = new ArrayList<>();
+        loanRecords = new ArrayList<>();
     }
 
     public void addBudget(double spendingLimit, int month, boolean isLoadingStorage) {
@@ -62,6 +62,12 @@ public class RecordList {
         assert getExpenditureListSize() == numberOfRecords;
     }
 
+    public void addLoan(String name, double amount, LocalDate date, boolean isLoadingStorage) {
+        loanRecords.add(new Loan(name, amount, date));
+        numberOfRecords += 1;
+        assert getLoanListSize() == numberOfRecords;
+    }
+
     public void deleteBudget() {
         budget.clearAmount();
         assert budget.getAmount() == 0.00;
@@ -84,6 +90,10 @@ public class RecordList {
 
     public int getExpenditureListSize() {
         return expenditureRecords.size();
+    }
+
+    public int getLoanListSize() {
+        return loanRecords.size();
     }
 
     //    public RecordList getExpenditureList(int startMonth, int endMonth) {
@@ -121,4 +131,6 @@ public class RecordList {
 
     public void addBudgetList(String description, double spendingLimit, int month) {
     }
+
+
 }

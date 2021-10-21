@@ -3,12 +3,13 @@ package seedu.duke.parser;
 import seedu.duke.commands.AddBudgetCommand;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.AddExpenditureCommand;
+import seedu.duke.commands.AddLoanCommand;
 import seedu.duke.commands.Command;
+import seedu.duke.commands.DeleteAllExpenditureCommand;
 import seedu.duke.commands.DeleteBudgetCommand;
 import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.DeleteSingleExpenditureCommand;
 import seedu.duke.commands.DeleteMultipleExpenditureCommand;
-import seedu.duke.commands.DeleteAllExpenditureCommand;
+import seedu.duke.commands.DeleteSingleExpenditureCommand;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
@@ -21,11 +22,11 @@ import java.time.format.DateTimeParseException;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_ADD_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_AMOUNT;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_COMMAND;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_DATE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
-import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH_OF_BUDGET;
-import static seedu.duke.common.Messages.MESSAGE_INVALID_DATE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH_OF_BUDGET;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
@@ -112,6 +113,8 @@ public class Parser {
                 return prepareAddBudgetCommand(commandParams);
             case ("e/"):
                 return prepareAddExpenditureCommand(commandParams);
+            case ("l/"):
+                return prepareAddLoanCommand(commandParams);
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
             }
@@ -119,6 +122,26 @@ public class Parser {
             return new InvalidCommand(String.format(MESSAGE_INVALID_ADD_COMMAND, AddCommand.MESSAGE_USAGE));
         }
 
+    }
+
+    private Command prepareAddLoanCommand(String commandParams) {
+        try {
+            String[] split = commandParams.trim().split("l/|a/|d/", 4);
+            assert split[0].equals("");
+            String name = split[1].trim();
+            double amount = Double.parseDouble(split[2].trim());
+            LocalDate date;
+            if (split[3].equals("")) {
+                date = LocalDate.now();
+            } else {
+                date = LocalDate.parse(split[3].trim());
+            }
+            return new AddLoanCommand(name, amount, date);
+        } catch (NumberFormatException nfe) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_AMOUNT, AddExpenditureCommand.MESSAGE_USAGE));
+        } catch (DateTimeParseException dtpe) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_DATE, AddExpenditureCommand.MESSAGE_USAGE));
+        }
     }
 
     /**
