@@ -11,6 +11,27 @@
         + [2.1.2 Getting the project files](#212-getting-the-project-files)
         + [2.1.3 Setting up on IntelliJ IDEA](#213-setting-up-on-intellij-idea)
         + [2.1.4 Configuring the Coding Style](#214-configuring-the-coding-style)
+- [3. Design](#3-design)
+  * [3.1 Architecture](#31-architecture)
+  * [3.2 UI](#32-ui-component)
+  * [3.3 Parser](#33-parser-component)
+  * [3.4 Command](#34-command-component)
+  * [3.5 Module](#35-module-component)
+  * [3.6 Content](#36-content-component)
+  * [3.7 Active Recall](#37-active-recall-component)
+  * [3.8 Storage](#38-storage-component)
+- [4. Implementation]()
+  * [4.1 Timetable]()
+  * [4.2 Active Recall](#42-active-recall-implementation)
+  * [4.3 Workspace]()
+  * [4.4 Adding and Deleting Content]()
+  * [4.5 Storage]()
+- [5. Documentation, Logging, Testing and DevOps]()
+- [Appendix A: Product Scope]()
+- [Appendix B: User Stories ]()
+- [Appendix C: Non Functional Requirements]()
+- [Appendix D: Glossary]()
+- [Appendix E: Instructions for Manual Testing]()  
 
 ## 1. Introduction
 
@@ -74,6 +95,7 @@ on [link](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
     1. After performing the steps above, locate the file `src/main/java/terminus/Terminus.java`,
        right-click and select `Run 'Terminus.main()'`.
     2. If everything is correctly set up, you should see the following terminal.
+   
    ```
    Welcome to TermiNUS!
    
@@ -106,5 +128,122 @@ Import the coding style xml file into your IntelliJ IDEA.
 > Once you are done with a piece of code, highlight the section you have just written and press the 
 > key `CTRL + SHIFT + L`.
 
- 
+## 3. Design
 
+### 3.1 Architecture
+
+### 3.2 UI Component
+
+### 3.3 Parser Component
+
+### 3.4 Command Component
+ 
+### 3.5 Module Component
+![](attachments/Module.png)
+
+The Module Components consists of the `ModuleManager` which contains a collection of `NusModule` and
+maps a module name to a specific `NusModule`.
+The `NusModule` consist of `ContentManager` which help to manage `Link` and `Note`. 
+The `ContentManager` accepts a `Content` type generic
+and manages an `ArrayList` of `Content` either being a `Note` or a `Link`.
+
+The `ModuleManager`
+- add,delete or retrieve a specific `NusModule`
+- list all module names
+
+### 3.6 Content Component
+
+### 3.7 Active Recall Component
+![Active Recall Class Diagram](attachments/ActiveRecallClassDiagram.png)
+
+The Active Recall Component consists of the `GameEnvironment` as the centre of the design.
+The `GameEnvironment` consists of a `QuestionGenerator` which will only exist if there is a 
+`GameEnvironment`, and a `Ui` instance to handle user input and printing of information. The 
+decision to re-use the `Ui` is to allow easier upgrades to the `Ui` if there is a need in the 
+future.
+The `QuestionGenerator` takes in a list of `Question` and a maximum question count to randomly
+generate questions based on `Random`. If `Random` is not provided, a new `Random` with a random seed
+will be created to generate the `Question` order.  
+The `DifficultyModifier` is a utility class used to calculate and tweak the weights of `Question`
+after the user has provided feedback on the difficulty of the question. It uses a 
+[logistic curve](https://en.wikipedia.org/wiki/Logistic_function) to calculate the change in weight.
+
+For further details on the implementation, head to 
+[4.2 Active Recall Implementation](#42-active-recall-implementation).
+
+### 3.8 Storage Component
+
+### 4.2 Active Recall Implementation
+![Active Recall Sequence Diagram](attachments/ActiveRecallSequenceDiagram.png)
+
+To view the high-level diagram, head to 
+[3.7 Active Recall Component](#37-active-recall-component).
+
+When the user executes the `TestCommand`, the `GameEnvironment` will be created with the static 
+method `GameEnvironment.createNewEnvironment()`, where it will handle the creation of
+`QuestionGenerator` as well. 
+
+The `QuestionGenerator` creates a `NavigableMap<Double, Question>` to store all the questions, where
+the `Double` is the `question.getWeight() + total`, where total is the current sum of all the 
+weights currently in the bank. The rationale for the `NavigableMap` and key value will be explained 
+at `promptQuestion()` below.
+
+The newly created `GameEnvironment` will be returned to `TestCommand` where it would call the `run` 
+method within the object.
+
+The `run()` method consists of 4 main steps (with step 2 to 4 repeating for every question):
+1. `showPreGameInformation()`
+2. `promptQuestion()`
+3. `getUserFeedback()`
+4. `updateQuestionDifficulty(question, difficulty)`
+
+The `showPreGameInformation()` method will print the information once on the current Active Recall 
+session, such as the actual question pool size, and may include more information and statistics in 
+the future.
+
+Next, the `run()` method will start a loop and check if there are questions in the local 
+`questionGenerator` to ensure that the session can continue. After which, the `promptQuestion()` is 
+called, where the next question is pulled from `questionGenerator.next()` and displayed to the user.
+
+Within the `next()` method in the `QuestionGenerator`, it will find a random `double` number from 
+`0` to `total`, and look up a `Question` that is closest to the value. This was the reason for 
+using `NavigableMap` as it provides a method called `.higherEntry(key)`, which guarantees a 
+`Question` is returned provided the value never exceeds the total weight of the question pool (which
+should never happen as the random number generator can only generate between `0` and `total`).
+
+To prevent the user from viewing the answers before they are ready, we have decided to require the 
+user to press Enter to display the answer as a method of confirmation, as it is the most effective 
+way to ensure the answer does not get revealed unless the user intents to view it. The answer is 
+then displayed when the <kbd>Enter</kbd> key is hit, and the `promptQuestion()` passes the 
+`Question` asked back to the `run()` method.
+
+The program now runs `getUserFeedback()` to collect user feedback. This is where we utilized the 
+same `Ui` class to handle the input of the user data for consistency and future-proofing, and return
+the difficulty back to `run()` after cleaning the input. This is also when the user can decide if 
+they wish to quit the session, and if they do, the difficulty value will be set to `EXIT_CODE = -1`.
+
+If the `difficulty` is checked to be the `EXIT_CODE`, the loop will break and return. Otherwise, the
+`Question`'s difficulty will now be changed in the `updateQuestionDifficulty(question, difficulty)` 
+method, where we use the difference between the extremes and the current difficulty to apply into 
+the logistic curve to determine the amount to increase or decrease the weight of the randomness by. 
+
+The parameters of the logistic curve can be viewed here:
+https://www.desmos.com/calculator/qefovvnuhx.  
+The input `x` value is the difference between the extreme and the current weight (e.g. if the weight 
+is `0.5` the extreme is the `MAX_VALUE = 0.9` when the question is deemed hard, then the difference
+`x` will be `0.9 - 0.5 = 0.4`). The resultant `y` value is used to add or subtract the existing
+weight if the question is deemed hard or easy to increase or decrease the chances of the questions 
+appearing respectively (e.g. using the same `x = 0.4` value, the `y` value will be `0.225` and it 
+will be added to `0.5` to form the new weight `0.725`).
+
+The rationale behind using the logistic curve is to ensure that as harder questions appear more 
+often and easier questions appear less. We also want to ensure once the user finds a hard question 
+easy, it should quickly move down a difficulty and vice versa. The application of the logistic curve
+also prevents the values from increasing too rapidly, and dominating the question pools. It also 
+prevents the case where easy questions disappear entirely from the question pool due to low weights. 
+We will continue to seek user feedback and tweak the curve parameters if needed if there are any 
+issues.
+
+Once the adjustment of weights of the question is done, the process is repeated if there are 
+questions left inside `QuestionGenerator`. Otherwise, the Active Recall session will be terminated, 
+and the input will be passed back to the `CommandParser`.
