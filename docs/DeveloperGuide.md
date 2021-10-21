@@ -83,7 +83,7 @@ The `Cookbook` class can be classified into 3 main functionalities:
   - Add a new tag to the `cookbookTags` array using the `addCookbookTag` method
   - Delete a tag from the `cookbookTags` array using the `deleteCookbookTag` method
   - Add a recipe to the list of recipes associated with a particular tag using the `appendRecipeToCookbookTag` method
-  - Remove a recipe to the list of recipes associated with a particular tag using the `deleteRecipeToCookBookTag` method
+  - Remove a recipe from the list of recipes associated with a particular tag using the `deleteRecipeToCookBookTag` method
   - Add a tag to a recipe using the `addTagToRecipes` method
   - Delete a tag from a recipe using the `deleteTagFromRecipes` method
   - List all tags in the `cookbookTags` array using the `listCookBookTags` method
@@ -148,6 +148,13 @@ The `Command` class can be classified into 4 main functionalities:
 ### Storage component
 
 ### UI Component
+
+### Tag Component
+The `Tag` class contains the basic functionalities related to a _Tag_, and encapsulates the behavior of a _Tag_.
+1. `getTagName` returns the _Tag Name_.
+2. `containsAssociatedRecipeNames` checks for the existence of a particular _Recipe Name_ within a _Tag_.
+3. `addAssociatedRecipeName` adds a _Recipe Name_ to the `ArrayList<String>` containing all such names. 
+4. 'removeAssociatedRecipeName' removes a _Recipe Name_ from the `ArrayList<String` containing all such names.
 
 ## Implementation
 
