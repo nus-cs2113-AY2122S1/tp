@@ -8,31 +8,31 @@ upon.
 
 ## Contents
 
-- Acknowledgements
-- Setting up, getting started
-- Design
-    * Architecture
-    * UI component
-    * Logic component
-    * Model component
-    * Storage component
-    * Common classes
-- Implementation
-    * Add, Delete, Save, Clear, Show Modules, Display timetable
-        * Proposed Implementation
-        * Design considerations:
-    * [Proposed] Data archiving
-- Documentation, logging, testing, configuration, dev-ops
-- Appendix: Requirements
-    * Product scope
-    * User stories
-    * Use cases
-    * Non-Functional Requirements
-    * Glossary
-- Appendix: Instructions for manual testing
-    * Launch and shutdown
-    * Deleting a person
-    * Saving data
+- [Acknowledgements]()
+- [Setting up, getting started]()
+- [Design]()
+    * [Architecture]()
+    * [UI component]()
+    * [Logic component]()
+    * [Model component]()
+    * [Storage component]()
+    * [Common classes]()
+- [Implementation]()
+    * [Add, Delete, Save, Clear, Show Modules, Display timetable]()
+        * [Proposed Implementation]()
+        * [Design considerations]()
+    * [[Proposed] Data archiving]()
+- [Documentation, logging, testing, configuration, dev-ops]()
+- [Appendix: Requirements]()
+    * [Product scope]()
+    * [User stories]()
+    * [Use cases]()
+    * [Non-Functional Requirements]()
+    * [Glossary]()
+- [Appendix: Instructions for manual testing]()
+    * [Launch and shutdown]()
+    * [Deleting a person]()
+    * [Saving data]()
 
 ## Acknowledgements
 
