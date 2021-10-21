@@ -139,4 +139,34 @@ public class EditContactCommand extends Command {
         }
         return tempContact;
     }
+
+    private String[] extractContactDetails(Contact contact) throws InvalidFlagException {
+        String[] contactDetails = new String[NUMBER_OF_FIELDS];
+        for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
+            switch (i) {
+            case NAME_INDEX:
+                contactDetails[NAME_INDEX] = contact.getName();
+                break;
+            case GITHUB_INDEX:
+                contactDetails[GITHUB_INDEX] = contact.getGithub();
+                break;
+            case LINKEDIN_INDEX:
+                contactDetails[LINKEDIN_INDEX] = contact.getLinkedin();
+                break;
+            case TELEGRAM_INDEX:
+                contactDetails[TELEGRAM_INDEX] = contact.getTelegram();
+                break;
+            case TWITTER_INDEX:
+                contactDetails[TWITTER_INDEX] = contact.getTwitter();
+                break;
+            case EMAIL_INDEX:
+                contactDetails[EMAIL_INDEX] = contact.getEmail();
+                break;
+            default:
+                assert false;
+                throw new InvalidFlagException();
+            }
+        }
+        return contactDetails;
+    }
 }
