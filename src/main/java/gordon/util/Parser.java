@@ -234,6 +234,7 @@ public class Parser {
 
     public Command findParse() throws GordonException {
         String[] splitContent = line.split("/");
+        assert (splitContent.length != 0);
         if (splitContent.length < 2) {
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
