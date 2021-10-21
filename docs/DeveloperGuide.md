@@ -15,7 +15,9 @@
 
 ## Getting Started
 
-{list project requirements needed}
+This is a project for a greenfield Java project. CCA Manager is a CLI application, and it is designed to help CCA's manage their administrative issues.
+
+Prerequisites: JDK 11, update Intellij to the most recent version.
 
 ## Design
 
@@ -40,6 +42,9 @@ The **architecture diagram** above presents a high-level overview of CCA Manager
 The *sequence diagram* below shows how various components of the architecture interact with one another when a user inputs a **valid** command `"add /m Bob /s A01231234B /p 98765432"`
 
 ![Architecture Sequence Diagram](images/ArchitectureSequence.png)
+
+The *sequence diagram* below shows how various components of the architecture interact with one another when a user inputs a **valid** command `"delete /m 1"`
+![Architecture Sequence Diagram2](images/deleteMemberArchitecture.PNG)
 
 *Note: More information will be updated in the future upon completion of v2.0*
 

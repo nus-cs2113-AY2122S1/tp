@@ -70,6 +70,9 @@ public class Entry {
         case NO_KEYWORD:
             Parser.wrongInputTypeMessage();
             break;
+        case HELP_KEYWORD:
+            Ui.printHelp();
+            break;
         case EXIT_KEYWORD:
             Ui.printExitMessage();
             break;
