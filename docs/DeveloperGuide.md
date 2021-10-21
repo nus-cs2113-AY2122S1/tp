@@ -10,14 +10,84 @@ Snippets of code from addressbook-level2’s Parser.java were used.
 Source: https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
 
 ## Design & implementation
-
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+### Architecture
+
+![](../docs/team/Images/Architecture.png)
+
+The __Architecture Diagram__ above explains the high-level design of the StonksXD app.
+Given below is a quick overview of the main components of the application and how they interact with each other:
+
+`Ui` is the class responsible for interfacing with the user. 
+It receives user input and passes it to`StonksXD`.
+It also receives data from `Command` to output to the user.
+
+`Ui` &rarr; `StonksXD`
+
+`Ui` &larr; `Command`
+
+
+`StonksXD` is the main class of the app. It has 2 main functions: 
+1. Upon opening the app, it loads saved data from `DataManager`. Before closing the app, it pushes save data to `DataManager`.
+2. Runs a loop receiving new user input from `Ui` and passing it to `Parser`.
+
+`Ui` &rarr; `StonksXD` &rlarr; `DataManager`
+
+`StonksXD` &rarr; `Parser`
+
+
+`Parser` is the class responsible for interpreting the user input. 
+It ensures the appropriate input format, and passes the input data to the appropriate command.
+
+`StonksXD` &rarr; `Parser` &rarr; `Command`
+
+
+`Command` is the class responsible for the execution of all commands.
+It contains child classes for all possible commands.
+It interacts with `FinancialTracker` and `BudgetManager` to execute commands, before sending information to `Ui` for output.
+
+`Parser` &rarr; `Command` &rlarr; `FinancialTracker`
+
+`Parser` &rarr; `Command` &rlarr; `BudgetManager`
+
+`Ui` &rlarr; `Command`
+
+
+`FinancialTracker` is the class containing and handling all income and expense entries input by the user.
+It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data.
+
+`Command` &rlarr; `FinancialTracker`
+
+`FinancialTracker` &rarr; `DataManager`
+
+
+`BudgetManager` is the class containing and handling all budget information.
+It interacts with `Command` to execute tasks, and writes to `DataManager` to save its data.
+
+`Command` &rlarr; `BudgetManager`
+
+`BudgetManager` &rarr; `DataManager`
+
+
+`DataManager` is the class responsible for reading data from the `StonksXD_data.csv` file upon boot up,
+and writing save data to the file before terminating the program.
+It receives data from `FinancialTracker` and `BudgetManager` and interacts with `StonksXD`.
+
+`FinancialTracker` &rarr; `DataManager` &rarr; `StonksXD_data.csv`
+
+`BudgetManager` &rarr; `DataManager` &rarr; `StonksXD_data.csv`
+
+`StonksXD` &rlarr; `DataManager` &rlarr; `StonksXD_data.csv`
+
+
+The sections below provide more information on the respective components.
+
 ### Ui Component
 Ui contains a Scanner object that takes in user inputs from the command line.
 The Ui’s main role is to provide feedback whenever the user enters a command through the form of messages. It also 
 handles the indexing of each element in the listing methods before printing out to the standard output for users to see.
 
-![img_1.png](img_1.png)
+![img_1](https://user-images.githubusercontent.com/69465661/138105673-1d21722d-0f77-4dcf-86d6-d38bffc08a40.png)
 
 ### Command Component
 

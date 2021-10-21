@@ -2,6 +2,7 @@ package seedu.utility;
 
 import seedu.commands.AddExpenseCommand;
 import seedu.commands.AddIncomeCommand;
+import seedu.commands.CheckBudgetCommand;
 import seedu.commands.ClearAllEntriesCommand;
 import seedu.commands.Command;
 import seedu.commands.DeleteExpenseCommand;
@@ -11,6 +12,8 @@ import seedu.commands.HelpCommand;
 import seedu.commands.InvalidCommand;
 import seedu.commands.ListExpenseCommand;
 import seedu.commands.ListIncomeCommand;
+import seedu.commands.SetBudgetCommand;
+import seedu.commands.SetThresholdCommand;
 import seedu.commands.ShowGraphCommand;
 import seedu.commands.TotalExpenseBetweenCommand;
 import seedu.commands.TotalExpenseCommand;
@@ -84,7 +87,16 @@ public class Parser {
     private static final Pattern DATE_RANGE_ARGUMENT_FORMAT =
             Pattern.compile("s/(?<start>[^/]+)"
                     + "e/(?<end>[^/]+)");
-    
+
+    private static final Pattern SET_BUDGET_ARGUMENT_FORMAT =
+            Pattern.compile("c/(?<category>[^/]+)"
+                    + "a/(?<amount>[^/]+)");
+
+    private static final Pattern CHECK_BUDGET_ARGUMENT_FORMAT =
+            Pattern.compile("c/(?<category>[^/]+)");
+
+    private static final Pattern SET_THRESHOLD_ARGUMENT_FORMAT =
+            Pattern.compile("t/(?<threshold>[^/]+)");
     
     private static final String HELP_COMMAND_KEYWORD = "help";
     private static final String ADD_EXPENSE_KEYWORD = "add_ex";
@@ -101,6 +113,9 @@ public class Parser {
     private static final String EXPENSE_RANGE_KEYWORD = "btw_ex";
     private static final String INCOME_RANGE_KEYWORD = "btw_in";
     private static final String CLEAR_ALL_ENTRIES_KEYWORD = "clear_all_entries";
+    private static final String SET_BUDGET_KEYWORD = "set_budget";
+    private static final String CHECK_BUDGET_KEYWORD = "check_budget";
+    private static final String SET_THRESHOLD_KEYWORD = "set_threshold";
     
     private static final String DATA_SEPARATOR = ", ";
 
@@ -128,7 +143,7 @@ public class Parser {
         }
 
         final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
+        final String arguments = matcher.group("arguments").trim();
 
         switch (commandWord) {
         case HELP_COMMAND_KEYWORD:
@@ -163,13 +178,19 @@ public class Parser {
             return prepareClearAllEntries(arguments);
         case SHOW_GRAPH_KEYWORD:
             return prepareShowGraph(arguments);
+        case SET_BUDGET_KEYWORD:
+            return prepareSetBudget(arguments);
+        case CHECK_BUDGET_KEYWORD:
+            return prepareCheckBudget(arguments);
+        case SET_THRESHOLD_KEYWORD:
+            return prepareSetThreshold(arguments);
         default:
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
     }
 
     private Command prepareIncomeRange(String arguments) {
-        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -185,7 +206,7 @@ public class Parser {
     }
     
     private Command prepareExpenseRange(String arguments) {
-        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = DATE_RANGE_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -201,22 +222,22 @@ public class Parser {
     }
     
     private Command prepareBalance(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new BalanceCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
     private Command prepareFind(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
-        return new FindCommand(arguments.trim());
+        return new FindCommand(arguments);
     }
     
     
     private Command prepareHelp(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new HelpCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
@@ -227,7 +248,7 @@ public class Parser {
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private Command prepareAddExpense(String arguments) {
-        final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -267,6 +288,9 @@ public class Parser {
         case "ENTERTAINMENT":
             expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.ENTERTAINMENT);
             break;
+        case "MISC":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.MISC);
+            break;
         default:
             return new InvalidCommand(Messages.INVALID_EXPENSE_CATEGORY_MESSAGE);
         }
@@ -278,7 +302,7 @@ public class Parser {
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private Command prepareAddIncome(String arguments) {
-        final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -312,6 +336,9 @@ public class Parser {
         case "ADHOC":
             income = new Income(incomeDescription, incomeAmount, IncomeCategory.ADHOC);
             break;
+        case "OTHERS":
+            income = new Income(incomeDescription, incomeAmount, IncomeCategory.OTHERS);
+            break;
         default:
             return new InvalidCommand(Messages.INVALID_INCOME_CATEGORY_MESSAGE);
         }
@@ -323,7 +350,7 @@ public class Parser {
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private Command prepareDeleteExpense(String arguments) {
-        final Matcher matcher = DELETE_EXPENSE_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = DELETE_EXPENSE_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -345,7 +372,7 @@ public class Parser {
      * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
      */
     private Command prepareDeleteIncome(String arguments) {
-        final Matcher matcher = DELETE_INCOME_ARGUMENT_FORMAT.matcher(arguments.trim());
+        final Matcher matcher = DELETE_INCOME_ARGUMENT_FORMAT.matcher(arguments);
         if (!matcher.matches()) {
             return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
         }
@@ -363,49 +390,49 @@ public class Parser {
     }
 
     private Command prepareListExpense(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new ListExpenseCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareListIncome(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new ListIncomeCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareTotalExpense(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new TotalExpenseCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareTotalIncome(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new TotalIncomeCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
     
     private Command prepareClearAllEntries(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new ClearAllEntriesCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareShowGraph(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new ShowGraphCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
     private Command prepareExit(String arguments) {
-        if (arguments.trim().isBlank()) {
+        if (arguments.isBlank()) {
             return new ExitCommand();
         }
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
@@ -509,10 +536,15 @@ public class Parser {
         case "ENTERTAINMENT":
             expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.ENTERTAINMENT, expenseDate);
             break;
+        case "MISC":
+            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.MISC, expenseDate);
+            break;
         //this is the fail case. Not sure how we wna implement this
         default:
             expense = new Expense("FAIL EXPENSE", 9999999, ExpenseCategory.NULL, expenseDate);
         }
+        assert expenseAmount > 0;
+        assert !expenseDescription.isBlank();
         return expense;
     }
 
@@ -546,11 +578,107 @@ public class Parser {
         case "ADHOC":
             income = new Income(incomeDescription, incomeAmount, IncomeCategory.ADHOC, incomeDate);
             break;
+        case "OTHERS":
+            income = new Income(incomeDescription, incomeAmount, IncomeCategory.OTHERS, incomeDate);
+            break;
         //this is the fail case. Not sure how we wna implement this
         default:
             income = new Income("FAIL INCOME", 999999, IncomeCategory.NULL, incomeDate);
         }
+        assert incomeAmount > 0;
+        assert !incomeDescription.isBlank();
         return income;
     }
-    
+
+    private Command prepareSetBudget(String arguments) {
+        final Matcher matcher = SET_BUDGET_ARGUMENT_FORMAT.matcher(arguments.trim());
+        if (!matcher.matches()) {
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+        }
+
+        String dataAmount = matcher.group("amount").trim();
+        if (dataAmount.isBlank()) {
+            return new InvalidCommand(Messages.BLANK_AMOUNT_MESSAGE);
+        }
+        double budgetAmount;
+        try {
+            budgetAmount = Double.parseDouble(dataAmount);
+        } catch (NumberFormatException e) {
+            return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        }
+        if (budgetAmount < 0) {
+            return new InvalidCommand(Messages.NON_POSITIVE_AMOUNT_MESSAGE);
+        }
+
+        String expenseCategory = matcher.group("category").trim().toUpperCase();
+        switch (expenseCategory) {
+        case "FOOD":
+            return new SetBudgetCommand(ExpenseCategory.FOOD, budgetAmount);
+        case "TRANSPORT":
+            return new SetBudgetCommand(ExpenseCategory.TRANSPORT, budgetAmount);
+        case "MEDICAL":
+            return new SetBudgetCommand(ExpenseCategory.MEDICAL, budgetAmount);
+        case "BILLS":
+            return new SetBudgetCommand(ExpenseCategory.BILLS, budgetAmount);
+        case "ENTERTAINMENT":
+            return new SetBudgetCommand(ExpenseCategory.ENTERTAINMENT, budgetAmount);
+        case "MISC":
+            return new SetBudgetCommand(ExpenseCategory.MISC, budgetAmount);
+        case "OVERALL":
+            return new SetBudgetCommand(ExpenseCategory.OVERALL, budgetAmount);
+        default:
+            return new InvalidCommand(Messages.INVALID_BUDGET_CATEGORY_MESSAGE);
+        }
+    }
+
+    private Command prepareCheckBudget(String arguments) {
+        final Matcher matcher = CHECK_BUDGET_ARGUMENT_FORMAT.matcher(arguments.trim());
+        if (!matcher.matches()) {
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+        }
+
+        String expenseCategory = matcher.group("category").trim().toUpperCase();
+        if (expenseCategory.isBlank()) {
+            return new InvalidCommand(Messages.BLANK_CATEGORY_MESSAGE);
+        }
+
+        switch (expenseCategory) {
+        case "FOOD":
+            return new CheckBudgetCommand(ExpenseCategory.FOOD);
+        case "TRANSPORT":
+            return new CheckBudgetCommand(ExpenseCategory.TRANSPORT);
+        case "MEDICAL":
+            return new CheckBudgetCommand(ExpenseCategory.MEDICAL);
+        case "BILLS":
+            return new CheckBudgetCommand(ExpenseCategory.BILLS);
+        case "ENTERTAINMENT":
+            return new CheckBudgetCommand(ExpenseCategory.ENTERTAINMENT);
+        case "MISC":
+            return new CheckBudgetCommand(ExpenseCategory.MISC);
+        case "OVERALL":
+            return new CheckBudgetCommand(ExpenseCategory.OVERALL);
+        default:
+            return new InvalidCommand(Messages.INVALID_BUDGET_CATEGORY_MESSAGE);
+        }
+    }
+
+    private Command prepareSetThreshold(String arguments) {
+        final Matcher matcher = SET_THRESHOLD_ARGUMENT_FORMAT.matcher(arguments.trim());
+        if (!matcher.matches()) {
+            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+        }
+
+        String thresholdString = matcher.group("threshold").trim();
+        double thresholdValue;
+        try {
+            thresholdValue = Double.parseDouble(thresholdString);
+        } catch (NumberFormatException e) {
+            return new InvalidCommand(Messages.NON_NUMERIC_AMOUNT_MESSAGE);
+        }
+        if ((thresholdValue < 0) | (thresholdValue > 1)) {
+            return new InvalidCommand(Messages.INVALID_THRESHOLD_MESSAGE);
+        }
+
+        return new SetThresholdCommand(thresholdValue);
+    }
 }
