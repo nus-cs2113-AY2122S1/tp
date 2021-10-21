@@ -17,7 +17,9 @@ import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class CommandTest {
     private FinancialTracker testTracker = new FinancialTracker();
@@ -53,6 +55,7 @@ public class CommandTest {
         testCommand.execute(testTracker, testUi, budgetManager);
         assertTrue(testTracker.isIncomesEmpty());
     }
+
     @Test
     public void testClearAllEntriesCommand() {
         ClearAllEntriesCommand testCommand = new ClearAllEntriesCommand();
