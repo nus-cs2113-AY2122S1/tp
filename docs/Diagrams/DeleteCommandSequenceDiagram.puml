@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+!include Style.puml
+-> ": DeleteGoalCommand": runCommand(goalList: GoalList, \n ui: Ui, storage: Storage)
+activate ": DeleteGoalCommand"
+
+": DeleteGoalCommand" -> "goalList: GoalList": deleteGoal(goalIndex: int, ui: Ui)
+activate "goalList: GoalList"
+
+"goalList: GoalList" -> "goalList: GoalList": getGoal(goalIndex: int)
+activate "goalList: GoalList"
+
+"goalList: GoalList" --> "goalList: GoalList": goal
+deactivate "goalList: GoalList"
+
+"goalList: GoalList" -> "goalList: GoalList": remove(goal.getDescription(): String)
+activate "goalList: GoalList"
+deactivate "goalList: GoalList"
+
+"goalList: GoalList" -> ": Ui"
+activate ": Ui"
+deactivate ": Ui"
+
+@enduml
