@@ -72,6 +72,14 @@ public class EditContactCommand extends Command {
         return false;
     }
 
+    private Boolean[] hasEditedFieldChecker(String[] contactDetails) {
+        Boolean[] hasEditedField = new Boolean[NUMBER_OF_FIELDS];
+        for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
+            hasEditedField[i] = (contactDetails[i] != null);
+        }
+        return hasEditedField;
+    }
+
     private Contact duplicateContact(Contact contact) {
         String name = contact.getName();
         String github = contact.getGithub();
