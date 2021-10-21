@@ -8,10 +8,9 @@ import java.util.ArrayList;
 
 public class AddUI {
 
-    private static final String FIXED_LENGTH_FORMAT = "%-46.46s";
-    private static final String FIXED_HEADER_FORMAT = "%-45.45s";
-    private static final String SMALL_GAP = "%9s";
-    private static final String FIXED_FORMAT = "%79.79s";
+    private static final String FIXED_LENGTH_FORMAT = "%-56.56s";
+    private static final String SMALL_GAP = "%14s";
+    private static final String FIXED_FORMAT = "%88.88s";
     private static final String LECTURE = "Lecture";
     private static final String TUTORIAL = "Tutorial";
     private static final String LAB = "Laboratory";
@@ -21,11 +20,13 @@ public class AddUI {
     private static final int BALANCE_ARRAY = 1;
     private static final int SERIAL_STARTING = 1;
     private static final int ZERO = 0;
-    private static final String LINE = "_______________________________________   |   ";
+    private static final String LINE = "_________________________________________________   |   ";
     private static final String NO_LESSON_FOUND = "No Lesson Time Slots Found";
     private static final String NO_LECTURE_FOUND = "       *Module has no Lectures*";
     private static final String NO_TUTORIAL_FOUND = "      *Module has no Tutorials*";
     private static final String NO_LAB_FOUND = "         *Module has no Labs*";
+    private static final String DISCLAIMER = " [CONFLICT]";
+
 
     /**
      * Function initialises arraylist for each lesson type and add the details of
@@ -46,9 +47,9 @@ public class AddUI {
         ArrayList<String> tutorialLessons;
         ArrayList<String> labLessons;
         int length = Math.max(lec.size(), Math.max(tt.size(), lab.size()));
-        lectureLessons = getLessonDetails(lec, length, LECTURE);
-        tutorialLessons = getLessonDetails(tt, length, TUTORIAL);
-        labLessons = getLessonDetails(lab, length, LAB);
+        lectureLessons = getLessonDetails(lec, length, LECTURE, timetable);
+        tutorialLessons = getLessonDetails(tt, length, TUTORIAL, timetable);
+        labLessons = getLessonDetails(lab, length, LAB, timetable);
         printLessonHeader(lec, tt, lab);
         printLessons(lectureLessons, tutorialLessons, labLessons);
         try {
@@ -69,7 +70,8 @@ public class AddUI {
      * @param lessonType the lesson type of the list of lessons
      * @return returns a list of Strings containing the lesson detail of the specified lesson type
      */
-    public ArrayList<String> getLessonDetails(ArrayList<Lesson> lessons, int length, String lessonType) {
+    public ArrayList<String> getLessonDetails(ArrayList<Lesson> lessons, int length,
+            String lessonType, Timetable timetable) {
 
         ArrayList<String> completeList = new ArrayList<>();
         int serial = SERIAL_STARTING;
@@ -77,7 +79,7 @@ public class AddUI {
         for (int i = 0; length > i; i++) {
             if (isArrayExist(lessons, i)) {
                 Lesson lesson = lessons.get(i);
-                detail = printLessonInfo(serial, lesson);
+                detail = printLessonInfo(serial, lesson, timetable);
                 completeList.add(detail);
                 if (classNumberGap(lessons, lesson)) {
                     completeList.add(LINE);
@@ -182,9 +184,11 @@ public class AddUI {
         }
     }
 
-    public String printLessonInfo(int serial, Lesson lesson) {
-
+    public String printLessonInfo(int serial, Lesson lesson, Timetable timetable) {
         String output = serial + ": " + lesson.lessonDetails();
+        if (timetable.isConflict(lesson)) {
+            output = output.concat(DISCLAIMER);
+        }
         output = String.format(FIXED_LENGTH_FORMAT, output);
         return output;
     }
@@ -244,8 +248,8 @@ public class AddUI {
 
         String header;
         if (isArrayExist(lt, ZERO) || isArrayExist(tt, ZERO) || isArrayExist(lb, ZERO)) {
-            header = String.format(SMALL_GAP, "") + String.format(FIXED_HEADER_FORMAT, LECTURE_SLOT)
-                    + String.format(FIXED_HEADER_FORMAT, TUTORIAL_SLOT) + LAB_SLOT;
+            header = String.format(SMALL_GAP, "") + String.format(FIXED_LENGTH_FORMAT, LECTURE_SLOT)
+                    + String.format(FIXED_LENGTH_FORMAT, TUTORIAL_SLOT) + LAB_SLOT;
         } else {
             header = String.format(FIXED_FORMAT, NO_LESSON_FOUND);
         }
