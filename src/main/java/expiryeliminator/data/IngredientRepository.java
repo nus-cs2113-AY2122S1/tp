@@ -167,7 +167,7 @@ public class IngredientRepository {
         for (IngredientStorage ingredientStorage : ingredients.values()) {
             IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
 
-            for( LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
+            for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
                 if(expiryDate.isAfter(currentDate) && expiryDate.isBefore(currentDatePlusAWeek)) {
                     expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
                 }
@@ -192,8 +192,8 @@ public class IngredientRepository {
         for (IngredientStorage ingredientStorage : ingredients.values()) {
             IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
 
-            for( LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
-                if(expiryDate.isBefore(currentDate)) {
+            for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
+                if (expiryDate.isBefore(currentDate)) {
                     expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
                 }
             }
@@ -213,8 +213,8 @@ public class IngredientRepository {
 
         for (IngredientStorage ingredientStorage : ingredients.values()) {
             ArrayList<LocalDate> expiryDatesToRemove = new ArrayList<>();
-            for( LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
-                if(expiryDate.isBefore(currentDate)) {
+            for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
+                if (expiryDate.isBefore(currentDate)) {
                     expiryDatesToRemove.add(expiryDate);
                 }
             }
@@ -236,10 +236,10 @@ public class IngredientRepository {
         StringBuilder shoppingList = new StringBuilder();
         TreeMap<String, IngredientQuantity> totalIngredients = new TreeMap<>();
 
-        for(Recipe recipe : recipes) {
-            for(String ingredientName : recipe.getIngredientQuantities().keySet()) {
+        for (Recipe recipe : recipes) {
+            for (String ingredientName : recipe.getIngredientQuantities().keySet()) {
                 int quantity = recipe.getIngredientQuantities().get(ingredientName).getQuantity();
-                if(totalIngredients.containsKey(ingredientName)) {
+                if (totalIngredients.containsKey(ingredientName)) {
                     try {
                         int previousQuantity = totalIngredients.get(ingredientName).getQuantity();
                         totalIngredients.get(ingredientName).setQuantity(quantity + previousQuantity);
@@ -254,17 +254,18 @@ public class IngredientRepository {
             }
         }
 
-        for(String ingredientName : totalIngredients.keySet()) {
+        for (String ingredientName : totalIngredients.keySet()) {
             IngredientQuantity ingredientAndQuantityItem = totalIngredients.get(ingredientName);
             int quantityRequired = ingredientAndQuantityItem.getQuantity();
             Ingredient ingredient = ingredientAndQuantityItem.getIngredient();
 
-            if(ingredients.containsKey(ingredientName)) {
+            if (ingredients.containsKey(ingredientName)) {
                 IngredientStorage ingredientStorage = ingredients.get(ingredientName);
                 int quantityAvailable = ingredientStorage.getQuantity();
-                if(quantityAvailable < quantityRequired) {
+                if (quantityAvailable < quantityRequired) {
                     try {
-                        IngredientQuantity shoppingItem = new IngredientQuantity(ingredient, quantityRequired - quantityAvailable);
+                        IngredientQuantity shoppingItem = new IngredientQuantity(ingredient,
+                                quantityRequired - quantityAvailable);
                         shoppingList.append("\n").append(shoppingItem);
                     } catch (IllegalValueException e) {
                         e.printStackTrace();

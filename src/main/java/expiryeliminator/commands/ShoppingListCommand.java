@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 
 /**
- * Lists ingredients required to be bought depending on recipe/recipes user choosees to make
+ * Lists ingredients required to be bought depending on recipe/recipes user chooses to make.
  */
-public class ShoppingListCommand extends Command{
+public class ShoppingListCommand extends Command {
 
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "shopping list";

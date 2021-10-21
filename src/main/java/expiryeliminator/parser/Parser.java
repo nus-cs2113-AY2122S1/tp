@@ -270,7 +270,8 @@ public class Parser {
         try {
             argParser.parse(args);
         } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShoppingListCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShoppingListCommand.MESSAGE_USAGE));
         }
         final ArrayList<String> recipe = new RecipeParser().parse(argParser.getArgList(PREFIX_MULTIPLE_RECIPE));
         return new ShoppingListCommand(recipe);

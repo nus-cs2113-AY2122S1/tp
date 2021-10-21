@@ -4,7 +4,7 @@ import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
 /**
- * Deletes all expired ingredients one shot
+ * Deletes all expired ingredients one shot.
  */
 public class DeleteExpiredIngredientCommand extends Command {
 
