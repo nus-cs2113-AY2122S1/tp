@@ -45,13 +45,13 @@ rectangle "Command" {
     }
 
     rectangle "Set Commands" {
-        rectangle SetCaloriesCommand LOGIC_RED_1 {
+        rectangle SetCaloriesCommand LOGIC_RED_2 {
         }
 
-        rectangle SetDifficultyCommand LOGIC_RED_1 {
+        rectangle SetDifficultyCommand LOGIC_RED_2 {
         }
 
-        rectangle SetPriceCommand LOGIC_RED_1 {
+        rectangle SetPriceCommand LOGIC_RED_2 {
         }
     }
 

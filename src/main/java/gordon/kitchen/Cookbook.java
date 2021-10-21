@@ -110,6 +110,19 @@ public class Cookbook {
         throw new GordonException(GordonException.NO_RESULT_FOUND);
     }
 
+    public void setTimes(String name, int prepTime, int cookTime) throws GordonException {
+        for (Recipe recipe : recipes) {
+            // (?i) enables case insensitivity
+            // .* uses all characters except line break
+            if (recipe.getName().matches("(?i).*" + name + ".*")) {
+                recipe.setTimes(prepTime, cookTime);
+                return;
+            }
+        }
+
+        throw new GordonException(GordonException.NO_RESULT_FOUND);
+    }
+
     public void setPrice(String name, float newPrice) throws GordonException {
         for (Recipe recipe : recipes) {
             if (recipe.getName().toLowerCase().contains(name.toLowerCase())) {
@@ -127,19 +140,6 @@ public class Cookbook {
             // .* uses all characters except line break
             if (recipe.getName().matches("(?i).*" + name + ".*")) {
                 recipe.setDifficulty(newDifficulty);
-                return;
-            }
-        }
-
-        throw new GordonException(GordonException.NO_RESULT_FOUND);
-    }
-
-    public void setTimes(String name, int prep, int cook) throws GordonException {
-        for (Recipe recipe : recipes) {
-            // (?i) enables case insensitivity
-            // .* uses all characters except line break
-            if (recipe.getName().matches("(?i).*" + name + ".*")) {
-                recipe.setTimes(prep, cook);
                 return;
             }
         }
