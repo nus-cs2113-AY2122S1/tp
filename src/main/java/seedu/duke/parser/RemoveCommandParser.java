@@ -48,10 +48,10 @@ public class RemoveCommandParser {
             return new RemoveModCommand(index, moduleMasterList, moduleSelectedList);
         case Constants.FLAG_MAP:
             int uniIndex = Integer.parseInt(argumentsSubstrings[1]);
-            if (argumentsSubstrings.length < 4) {
+            if (argumentsSubstrings.length < 3) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
             }
-            int mapIndex = Integer.parseInt(argumentsSubstrings[3].trim());
+            int mapIndex = Integer.parseInt(argumentsSubstrings[2].trim());
             return new RemoveMapCommand(uniIndex, mapIndex, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
         default:

@@ -29,8 +29,7 @@ public class AddModCommand extends Command {
         Ui.printModule(moduleToAdd, moduleIndexToAdd);
     }
 
-    public AddModCommand(Module moduleToAdd, UniversityList universitySelectedList,
-                         ModuleList moduleSelectedList) throws IOException {
+    public AddModCommand(Module moduleToAdd, ModuleList moduleSelectedList) throws IOException {
 
         this.moduleToAdd = moduleToAdd;
         this.moduleIndexToAdd = moduleToAdd.getModuleIndex(moduleSelectedList);

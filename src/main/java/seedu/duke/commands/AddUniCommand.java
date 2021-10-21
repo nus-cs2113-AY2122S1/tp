@@ -31,8 +31,7 @@ public class AddUniCommand extends Command {
         Ui.printUniversity(universityToAdd, universityIndexToAdd, universitySelectedList);
     }
 
-    public AddUniCommand(University universityToAdd, UniversityList universitySelectedList,
-                         ModuleList moduleSelectedListint) throws IOException {
+    public AddUniCommand(University universityToAdd, UniversityList universitySelectedList) throws IOException {
         this.universityToAdd = universityToAdd;
         assert universityToAdd.getName() != null;
         assert universityToAdd.getClass() != null;
