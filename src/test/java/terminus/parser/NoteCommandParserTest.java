@@ -66,7 +66,6 @@ public class NoteCommandParserTest {
     @Test
     void parseCommand_resolveAddCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("add \"test\" \"test1\"") instanceof AddNoteCommand);
-        assertTrue(commandParser.parseCommand("add \"    test     \" \"    test1   \"") instanceof AddNoteCommand);
         assertTrue(commandParser.parseCommand("add \"username\" \"password\"") instanceof AddNoteCommand);
     }
 
