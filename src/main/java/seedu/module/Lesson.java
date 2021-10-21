@@ -9,17 +9,17 @@ import java.util.ArrayList;
 public class Lesson {
     private static final String GAP = ", ";
     private static final int DIVISOR = 100;
-    private String classNo;
-    private String startTime;
-    private String endTime;
+    private final String classNo;
+    private final String startTime;
+    private final String endTime;
 
     @JsonAdapter(WeeksAdapterFactory.class)
     private Weeks weeks;
 
-    private String venue;
-    private String day;
-    private String lessonType; //placeholder
-    private int size;
+    private final String venue;
+    private final String day;
+    private final String lessonType; //placeholder
+    private final int size;
 
     public Lesson(String classNo, String startTime, String endTime, String venue,
                   String lessonType, String day) {
