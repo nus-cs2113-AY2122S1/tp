@@ -1,0 +1,33 @@
+/'
+ ' Color Palettes Webpage Reference
+ ' https://plantuml-documentation.readthedocs.io/en/latest/formatting/color-names.html#all-color-names
+ '/
+
+!define UI_COLOUR #LimeGreen
+!define PARSER_COLOUR #DarkOrchid
+!define PARSER_COLOUR_S1 #Orchid
+!define INGREDIENTLIST_COLOUR #DeepSkyBlue
+!define INGREDIENTGROUP_COLOUR #SkyBlue
+!define INGREDIENT_COLOUR #LightBlue
+!define STORAGE_COLOUR #GoldenRod
+!define COMMAND_COLOUR #Crimson
+!define COMMAND_COLOUR_S1 #Pink
+!define COMMAND_COLOUR_S2 #DarkSalmon
+!define DATE_COLOUR #Khaki
+!define MAIN_COLOUR #Grey
+
+skinparam MinClassWidth 50
+skinparam MaxClassWidth 200
+skinparam ParticipantPadding 10
+skinparam Shadowing false
+skinparam DefaultTextAlignment center
+skinparam packageStyle Rectangle
+
+skinparam Class {
+    BorderThickness 1
+    BorderColor #FFFFFF
+}
+
+hide footbox
+hide members
+hide circle

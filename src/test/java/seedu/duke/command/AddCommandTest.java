@@ -1,10 +1,5 @@
 package seedu.duke.command;
 
-import org.junit.jupiter.api.Test;
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AddCommandTest {
@@ -15,7 +10,7 @@ public class AddCommandTest {
         String resultMsg = new AddCommand(sampleIngredient).run();
         String expected = "Got it. This ingredient has been added to the inventory:\n"
                 + "\t" + sampleIngredient.toString() + '\n'
-                + "Current inventory has " + IngredientList.getInstance().getInventoryStock()
+                + "Current inventory has " + IngredientGroup.getInstance().getIngredientGroupSize()
                 + " items.";
 
         assertEquals(expected, resultMsg);

@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+'!include style.puml
+
+
+
+Package "Storage"<<RECTANGLE>> {
+    class "Storage" #DeepSkyBlue
+    class "File" #DeepSkyBlue
+}
+
+Storage -->"0..1" "File"
+
+@enduml

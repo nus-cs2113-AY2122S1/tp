@@ -1,0 +1,30 @@
+@startuml
+
+skinparam arrowColor #Crimson
+skinparam class {
+    BorderThickness 1
+    BorderColor #Black
+}
+
+
+Package "IngredientList"<<RECTANGLE>>{
+    class IngredientList #DeepSkyBlue
+    class IngredientGroup #DeepSkyBlue
+    class Ingredient #DeepSkyBlue
+ }
+
+class Storage #GoldenRod
+
+IngredientList -- "0..*" IngredientGroup
+IngredientGroup : totalAmount: Double
+IngredientGroup : groupName: String
+
+IngredientGroup -- "1..*" Ingredient
+Ingredient : name: String
+Ingredient : amount: Double
+Ingredient : expiry: LocalDate
+
+IngredientList -r--> Storage
+Storage -l..>IngredientList
+
+@enduml

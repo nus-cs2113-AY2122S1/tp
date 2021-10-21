@@ -1,10 +1,9 @@
 package seedu.duke.command;
 
-import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
+import seedu.situs.command.Command;
+import seedu.situs.exceptions.DukeException;
 
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
 
     private static final String DELETE_MESSAGE = "Got it. This ingredient has been removed:\n" + "\t";
 
@@ -21,9 +20,10 @@ public class DeleteCommand implements Command {
 
     @Override
     public String run() throws DukeException {
-        Ingredient removedIngredient = IngredientList.getInstance().remove(this.ingredientNumber);
+        /*Ingredient removedIngredient = IngredientGroup.remove(this.ingredientNumber);
         String resultMsg = DELETE_MESSAGE + removedIngredient.toString();
-        return resultMsg;
+        return resultMsg;*/
+        return "";
     }
 
 }
