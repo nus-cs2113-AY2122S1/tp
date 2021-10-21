@@ -26,6 +26,17 @@ public class TerminusLogger {
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
     }
+    
+    /**
+     * Initializes TerminusLogger that prints only warnings and above.
+     *
+     */
+    public static void initializeLoggerWarnings() {
+        LogManager.getLogManager().reset();
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.WARNING);
+        LOGGER.addHandler(consoleHandler);
+    }
 
     /**
      * Writes a debug message to the Logger.
