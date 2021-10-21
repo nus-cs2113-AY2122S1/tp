@@ -54,7 +54,7 @@ public class EmployeeParser {
         int employeeIndex = Integer.parseInt(command[1]) - 1;
         if (masterList.totalEmployee < 1) {
             MainUI.printSingleLine();
-            System.out.println("You have no employee.");
+            EmployeeUI.printNoEmployeeMessage();
             MainUI.printSingleLine();
             return;
         }
@@ -80,7 +80,7 @@ public class EmployeeParser {
     public void listEmployee(EmployeeList masterList) {
         if (masterList.totalEmployee < 1) {
             MainUI.printSingleLine();
-            System.out.println("You have no employee.");
+            EmployeeUI.printNoEmployeeMessage();
             MainUI.printSingleLine();
             return;
         }
