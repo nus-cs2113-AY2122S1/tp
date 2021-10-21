@@ -1,7 +1,6 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.Command;
-import seedu.duke.commands.ListCommand;
 import seedu.duke.constants.Constants;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.UniversityList;

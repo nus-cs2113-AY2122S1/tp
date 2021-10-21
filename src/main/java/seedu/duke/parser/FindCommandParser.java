@@ -13,7 +13,8 @@ import seedu.duke.constants.Constants;
 
 public class FindCommandParser {
 
-    public Command parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList) throws ParseException {
+    public Command parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList)
+            throws ParseException {
 
         String[] argumentsSubstrings = arguments.trim().split(" ", 2);
         if (argumentsSubstrings.length < 2) {

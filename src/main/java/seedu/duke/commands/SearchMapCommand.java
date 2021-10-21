@@ -10,7 +10,6 @@ public class SearchMapCommand extends Command {
 
     public SearchMapCommand(University selectedUniversity, UniversityList universitySelectedList,
                             ModuleList moduleSelectedList) {
-//        super(universitySelectedList, moduleSelectedList);
         assert selectedUniversity.getName() != null;
         assert selectedUniversity.getClass() != null;
         this.selectedUniversity = selectedUniversity;

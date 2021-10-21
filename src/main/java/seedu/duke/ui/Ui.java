@@ -8,6 +8,7 @@ import seedu.duke.constants.Constants;
 import seedu.duke.universities.UniversityList;
 
 import static java.lang.System.out;
+
 public class Ui {
 
     public static void printModule(Module mod, int index) {

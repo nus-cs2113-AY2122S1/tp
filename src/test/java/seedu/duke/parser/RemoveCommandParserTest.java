@@ -1,7 +1,6 @@
 package seedu.duke.parser;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.commands.RemoveCommand;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.UniversityList;
 

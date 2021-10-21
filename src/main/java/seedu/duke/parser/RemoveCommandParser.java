@@ -18,7 +18,8 @@ public class RemoveCommandParser {
     private Logger logger = Logger.getLogger("RemoveCommandParserLog");
 
     public Command parse(String arguments, UniversityList universitySelectedList,
-                         ModuleList moduleSelectedList) throws ParseException, IOException {
+                         ModuleList moduleSelectedList, UniversityList universityMasterList,
+                         ModuleList moduleMasterList) throws ParseException, IOException {
 
         logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
 
@@ -37,21 +38,22 @@ public class RemoveCommandParser {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
-            return new RemoveUniCommand(index, universitySelectedList);
+            return new RemoveUniCommand(index, universityMasterList, universitySelectedList);
         case Constants.FLAG_MODULE:
             index = Integer.parseInt(argumentsSubstrings[1]);
             if (index > moduleSelectedList.getSize()) {
                 logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
-            return new RemoveModCommand(index, moduleSelectedList);
+            return new RemoveModCommand(index, moduleMasterList, moduleSelectedList);
         case Constants.FLAG_MAP:
             int uniIndex = Integer.parseInt(argumentsSubstrings[1]);
-            if (argumentsSubstrings.length < 3) {
+            if (argumentsSubstrings.length < 4) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
             }
             int mapIndex = Integer.parseInt(argumentsSubstrings[3].trim());
-            return new RemoveMapCommand(uniIndex, mapIndex, universitySelectedList);
+            return new RemoveMapCommand(uniIndex, mapIndex, universityMasterList, moduleMasterList,
+                    universitySelectedList, moduleSelectedList);
         default:
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
         }
