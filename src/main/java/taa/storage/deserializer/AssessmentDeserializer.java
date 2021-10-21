@@ -13,7 +13,8 @@ import java.lang.reflect.Type;
 public class AssessmentDeserializer extends StorageDeserializer implements JsonDeserializer<Assessment> {
     private static final String MEMBER_NAME = "name";
     private static final String MEMBER_WEIGHTAGE = "weightage";
-    private static final String[] MEMBERS = {MEMBER_NAME, MEMBER_WEIGHTAGE};
+    private static final String MEMBER_MAXIMUM_MARKS = "maximumMarks";
+    private static final String[] MEMBERS = {MEMBER_NAME, MEMBER_MAXIMUM_MARKS, MEMBER_WEIGHTAGE};
 
     @Override
     public Assessment deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
@@ -32,7 +33,13 @@ public class AssessmentDeserializer extends StorageDeserializer implements JsonD
         }
         double weightage = weightageJson.getAsDouble();
 
-        Assessment assessment = new Assessment(name, weightage);
+        JsonElement maximumMarksJson = jsonObject.get(MEMBER_MAXIMUM_MARKS);
+        if (!Util.isStringInteger(maximumMarksJson.getAsString())) {
+            return null;
+        }
+        int maximumMarks = maximumMarksJson.getAsInt();
+
+        Assessment assessment = new Assessment(name, maximumMarks, weightage);
         if (!assessment.verify()) {
             return null;
         }

@@ -3,21 +3,24 @@ package taa;
 import taa.command.AddAssessmentCommand;
 import taa.command.AddModuleCommand;
 import taa.command.AddStudentCommand;
-import taa.command.HelpCommand;
-import taa.command.SetAttendanceCommand;
 import taa.command.AverageMarksCommand;
 import taa.command.Command;
+import taa.command.DeleteAssessmentCommand;
 import taa.command.DeleteStudentCommand;
 import taa.command.EditStudentCommand;
 import taa.command.ExitCommand;
 import taa.command.FindStudentCommand;
+import taa.command.HelpCommand;
 import taa.command.ListAssessmentsCommand;
+import taa.command.ListAttendanceCommand;
 import taa.command.ListMarksCommand;
 import taa.command.ListModulesCommand;
 import taa.command.ListStudentsCommand;
-import taa.command.ListAttendanceCommand;
+import taa.command.SetAttendanceCommand;
 import taa.command.SetMarksCommand;
+
 import taa.command.DeleteAttendanceCommand;
+
 
 import taa.exception.TaaException;
 
@@ -79,6 +82,10 @@ public class Parser {
             command = new ListAssessmentsCommand(argument);
             break;
 
+        case Command.COMMAND_DELETE_ASSESSMENT:
+            command = new DeleteAssessmentCommand(argument);
+            break;
+
         case Command.COMMAND_SET_ATTENDANCE:
             command = new SetAttendanceCommand(argument);
             break;
@@ -124,9 +131,9 @@ public class Parser {
      * e.g.
      * string: "add_module c/CS2113T n/Software Engineering and Object-oriented Programming", argumentKeys: {"c","n"}
      * Result: HashMap(
-     * "c":"CS2113T",
-     * "n":"Software Engineering and Object-oriented Programming"
-     * )
+     *             "c":"CS2113T",
+     *             "n":"Software Engineering and Object-oriented Programming"
+     *         )
      *
      * @param string       The string to parse.
      * @param argumentKeys The argument keys to find.

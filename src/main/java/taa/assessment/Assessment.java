@@ -4,12 +4,15 @@ import taa.ClassChecker;
 
 public class Assessment implements ClassChecker {
     private static final double[] WEIGHTAGE_RANGE = {0, 100};
+    private static final int MAXIMUM_MARKS_RANGE = 0;
 
     private String name;
+    private int maximumMarks;
     private double weightage;
 
-    public Assessment(String name, double weightage) {
+    public Assessment(String name, int maximumMarks, double weightage) {
         this.name = name;
+        this.maximumMarks = maximumMarks;
         this.weightage = weightage;
     }
 
@@ -24,6 +27,16 @@ public class Assessment implements ClassChecker {
     }
 
     /**
+     * Checks if a maximum marks is valid.
+     *
+     * @param maximumMarks The maximum marks to check.
+     * @return true if valid, else false.
+     */
+    public static boolean isMaximumMarksWithinRange(int maximumMarks) {
+        return (maximumMarks >= MAXIMUM_MARKS_RANGE);
+    }
+
+    /**
      * Gets the weightage range.
      *
      * @return A double array of size 2: [0] - Min weightage, [1] Max weightage.
@@ -32,12 +45,20 @@ public class Assessment implements ClassChecker {
         return WEIGHTAGE_RANGE;
     }
 
+    public static int getMaximumMarksRange() {
+        return MAXIMUM_MARKS_RANGE;
+    }
+
     public String getName() {
         return name;
     }
 
     public double getWeightage() {
         return weightage;
+    }
+
+    public int getMaximumMarks() {
+        return maximumMarks;
     }
 
     /**
@@ -49,7 +70,7 @@ public class Assessment implements ClassChecker {
      */
     @Override
     public String toString() {
-        return String.format("%s (%,.2f%%)", name, weightage);
+        return String.format("%s (%d, %,.2f%%)", name, maximumMarks, weightage);
     }
 
     /**

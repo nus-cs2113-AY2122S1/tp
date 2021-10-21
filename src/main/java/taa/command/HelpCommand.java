@@ -14,6 +14,7 @@ public class HelpCommand extends Command {
         new AddStudentCommand(""),
         new AverageMarksCommand(""),
         new DeleteStudentCommand(""),
+        new DeleteAssessmentCommand(""),
         new EditStudentCommand(""),
         new FindStudentCommand(""),
         new ExitCommand(""),
