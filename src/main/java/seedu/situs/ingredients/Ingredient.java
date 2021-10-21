@@ -12,15 +12,13 @@ import java.time.temporal.ChronoUnit;
 public class Ingredient {
     protected String name;
     protected Double amount;
-    protected String units;
     protected LocalDate expiry;
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
-    public Ingredient(String name, double amount, String units, LocalDate expiry) {
+    public Ingredient(String name, double amount, LocalDate expiry) {
         this.name = name;
         this.amount = amount;
-        this.units = units;
         this.expiry = expiry;
     }
 
@@ -32,9 +30,6 @@ public class Ingredient {
         return amount;
     }
 
-    public String getUnits() {
-        return units;
-    }
 
     public LocalDate getExpiry() {
         return expiry;
@@ -48,9 +43,6 @@ public class Ingredient {
         this.amount = amount;
     }
 
-    public void setUnits(String units) {
-        this.units = units;
-    }
 
     public void setExpiry(LocalDate expiry) {
         this.expiry = expiry;
@@ -58,8 +50,8 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return getName() + " | Amount Left: " + getAmount() + " " + getUnits()
-                + " | Expiry Date: " + Ingredient.dateToString(getExpiry());
+        return "Amount Left: " + getAmount() + " kg | Expiry Date: "
+                 + Ingredient.dateToString(getExpiry());
     }
 
     /**

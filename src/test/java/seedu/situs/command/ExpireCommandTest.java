@@ -13,7 +13,7 @@ public class ExpireCommandTest {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    @Test
+    /*@Test
     public void expireCommandTest_fiveInputs_expectThreeResults() throws DukeException {
         LocalDate expiryDate1 = LocalDate.parse("25/10/2000", DATE_FORMATTER);
         LocalDate expiryDate2 = LocalDate.parse("26/10/2000", DATE_FORMATTER);
@@ -41,5 +41,5 @@ public class ExpireCommandTest {
                 + "\n\t";
 
         assertEquals(expected, resultMsg);
-    }
+    }*/
 }

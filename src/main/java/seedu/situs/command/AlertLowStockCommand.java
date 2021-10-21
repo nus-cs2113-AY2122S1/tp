@@ -2,6 +2,7 @@ package seedu.situs.command;
 
 import seedu.situs.exceptions.DukeException;
 import seedu.situs.ingredients.Ingredient;
+import seedu.situs.ingredients.IngredientGroup;
 import seedu.situs.ingredients.IngredientList;
 
 import java.util.ArrayList;
@@ -19,11 +20,11 @@ public class AlertLowStockCommand extends Command {
     public String run() throws DukeException {
         int lowStockCount = 0;
         String resultMsg = "";
-        ArrayList<Ingredient> ingredientList = IngredientList.getInstance().getIngredientList();
+        ArrayList<IngredientGroup> ingredientList = IngredientList.getInstance().getIngredientList();
 
-        for (Ingredient ingredient : ingredientList) {
-            if (ingredient.getAmount() <= lowStockThreshold) {
-                resultMsg += ingredient + LIST_NEWLINE_INDENT;
+        for (IngredientGroup ingredientGroup : ingredientList) {
+            if (ingredientGroup.getTotalAmount() <= lowStockThreshold) {
+                resultMsg += ingredientGroup + LIST_NEWLINE_INDENT;
                 lowStockCount += 1;
             }
         }

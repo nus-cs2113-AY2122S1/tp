@@ -47,6 +47,15 @@ The intended audience for this document are developers looking to introduce new 
 4. Click **`File`** > **`Open`** 
 5. Locate and select the cloned project directory.
 6. Accept all defaults as prompted by IntelliJ.
+
+### 2.3. Running the program for the first time
+1. Run the main SITUS program in `src/main/java/seedu.situs/Situs`.
+2. Key in a few commands to make sure the program works.
+>:exclamation: **Note**: Before proceeding with step 3, make sure all the contents in the file `data/ingredients.txt`
+> are fully deleted. The Junit tests in step 3 will not pass if there are contents already in the storage file.
+3. Run the Junit tests in `/src/test/java/seedu.situs` to make sure the programs passes all tests.
+
+
 ## 3. Design
 
 ### 3.1. System Architecture
@@ -69,15 +78,13 @@ The App consists of 6 major components:
 The _sequence diagram_ below shows how the components interact with each other given a scenario where the user 
 enters the input `add n/carrot a/1 e/2021-11-12`
 
-<<insert sequence diagram here>>
+![image](images/InteractionSeqDiagram.png)
 
 Each of the 5 components (apart from `main`) can be found in their respective packages.
 
 ### 3.2 UI component
 
-The **UI** component can be found in the `UI` package.
-
-<<description here>>
+The **UI** component can be found in the `UI` package. The UI reads commands from the user, sends the command to `Main` to be executed and prints an output message upon completion of the command or if an error occurred.
 
 ### 3.3 Parser component
 
@@ -103,6 +110,19 @@ Each of the `Ingredient` objects contains information about an ingredient, namel
 ### 3.5 Storage component
 
 The **Storage** component can be found in the `Storage` package
+
+Below is a partial class diagram of the `Storage` component
+
+![image](images/StorageDiagram.png)
+
+The `Storage` class
+* loads/makes storage data file in memory when its constructor is called.
+* has a public method to return the `ArrayList` of `Ingredient` type in the storage file.
+* has a public method can take an `ArrayList` of `Ingredient` to write to the memory file.
+
+The two public methods mentioned above are the most essential for the storage capablility of the program.
+`IngredientList` object will only use `loadIngredientsFromMemory()` and `writeIngredientsToMemory()` methods
+of the storage class only when there is a change in the ingredient list of the program.
 
 ### 3.6 Command component
 
@@ -154,15 +174,23 @@ Each of the classes returns a String after `run`, which the `AlertCommand` class
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|view my inventory|save time/labour|
+|v1.0|user|add new ingredients|keep track of new ingredients|
+|v1.0|user|remove ingredients|stop tracking ingredients that are no longer in use|
+|v1.0|user|update ingredient amount|change the amount of an ingredient if I have bought/ used some|
+|v2.0|user|receive alerts of ingredients expiring|use the ingredients before they expire and avoid wastage|
+|v2.0|user|receive alerts of ingredients that are running out|place orders to replenish stock preemptively|
+|v2.0|user|determine the threshold for alerts myself|adjust when I receive alerts based on demand and supply|
+|v2.0|user|find stock of an ingredient by name|view stock of an ingredient without having to go through the entire list|
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any *mainstream OS* with Java `11` or above installed.
+2. Users proficient at typing should be able to complete tasks faster using commands than using a mouse with a GUI.
 
 ## Glossary
 
-* *glossary item* - Definition
+* **Mainstream OS** - Windows, Linux, Unix, macOS
 
 ## Instructions for manual testing
 

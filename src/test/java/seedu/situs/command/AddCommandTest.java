@@ -19,7 +19,7 @@ public class AddCommandTest {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    @Test
+    /*@Test
     public void addCommandTest_sampleIngredient() throws DukeException {
         LocalDate expiryDate = LocalDate.parse("10/08/2021", DATE_FORMATTER);
         Ingredient sampleIngredient = new Ingredient("onion", 15.0, "kg", expiryDate);
@@ -32,6 +32,6 @@ public class AddCommandTest {
                 + " days.";
 
         assertEquals(expected, resultMsg);
-    }
+    }*/
 
 }

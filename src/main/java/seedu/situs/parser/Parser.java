@@ -1,4 +1,3 @@
-
 package seedu.situs.parser;
 
 import seedu.situs.command.AddCommand;
@@ -19,8 +18,6 @@ import seedu.situs.ingredients.IngredientList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class Parser {
@@ -47,10 +44,10 @@ public class Parser {
 
     private static final String SPACE_SEPARATOR = " ";
     private static final String EMPTY_STRING = "";
-    private static final String DELIMITER = "n/|a/|u/|e/";
+    private static final String DELIMITER = "n/|a/|e/";
 
-    private static final int ADD_COMMAND_ARGUMENT_COUNT = 5;
-    private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 5;
+    private static final int ADD_COMMAND_ARGUMENT_COUNT = 4;
+    private static final int UPDATE_COMMAND_ARGUMENT_COUNT = 4;
 
 
     public static boolean isExit(String command) {
@@ -160,11 +157,10 @@ public class Parser {
         try {
             String ingredientName = details[1];
             double ingredientAmount = Double.parseDouble(details[2]);
-            String ingredientUnits = details[3];
-            LocalDate ingredientExpiry = Ingredient.stringToDate(details[4]);
+            LocalDate ingredientExpiry = Ingredient.stringToDate(details[3]);
 
             Ingredient updatedIngredient =
-                    new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
+                    new Ingredient(ingredientName, ingredientAmount,  ingredientExpiry);
             String resultMsg = new UpdateCommand(updatedIngredient).run();
 
             if (resultMsg.equals(EMPTY_STRING)) {
@@ -204,11 +200,10 @@ public class Parser {
         try {
             String ingredientName = details[1];
             double ingredientAmount = Double.parseDouble(details[2]);
-            String ingredientUnit = details[3];
-            LocalDate ingredientExpiry = Ingredient.stringToDate(details[4]);
+            LocalDate ingredientExpiry = Ingredient.stringToDate(details[3]);
 
             Ingredient newIngredient = new Ingredient(ingredientName, ingredientAmount,
-                    ingredientUnit, ingredientExpiry);
+                     ingredientExpiry);
             return new AddCommand(newIngredient).run();
         } catch (NumberFormatException e) {
             throw new DukeException(NUMBER_FORMAT_ERROR_MESSAGE);
@@ -298,10 +293,10 @@ public class Parser {
             switch (details[1].trim()) {
             case "expiry":
                 AlertExpiringSoonCommand.setExpiryThreshold(Long.parseLong(details[2].trim()));
-                return "Successfully set expiry threshold to " + details[2].trim() + "days";
+                return "Successfully set expiry threshold to " + details[2].trim() + " days";
             case "stock":
                 AlertLowStockCommand.setLowStockThreshold(Double.parseDouble(details[2].trim()));
-                return "Successfully set low stock threshold to " + details[2].trim() + "kg";
+                return "Successfully set low stock threshold to " + details[2].trim() + " kg";
             default:
                 throw new DukeException("Invalid Input");
             }

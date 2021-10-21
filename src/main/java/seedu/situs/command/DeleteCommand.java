@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String run() throws DukeException {
-        try {
+        /*try {
             Ingredient removedIngredient = IngredientList.getInstance().remove(this.ingredientNumber);
             String resultMsg = DELETE_MESSAGE + removedIngredient.toString();
             return resultMsg;
@@ -32,6 +32,7 @@ public class DeleteCommand extends Command {
             throw new DukeException(INVALID_NUMBER);
         } catch (IOException e) {
             throw new DukeException("Cannot remove ingredients from memory!");
-        }
+        }*/
+        return "";
     }
 }

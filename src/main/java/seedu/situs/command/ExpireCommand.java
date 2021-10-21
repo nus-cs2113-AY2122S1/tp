@@ -2,6 +2,7 @@ package seedu.situs.command;
 
 import seedu.situs.exceptions.DukeException;
 import seedu.situs.ingredients.Ingredient;
+import seedu.situs.ingredients.IngredientGroup;
 import seedu.situs.ingredients.IngredientList;
 
 import java.time.LocalDate;
@@ -20,12 +21,16 @@ public class ExpireCommand extends Command {
     public String run() throws DukeException {
         int expiringCount = 0;
         String resultMsg = "";
-        ArrayList<Ingredient> ingredientList = IngredientList.getInstance().getIngredientList();
+        ArrayList<IngredientGroup> ingredientList = IngredientList.getInstance().getIngredientList();
 
-        for (Ingredient ingredient : ingredientList) {
-            if (getNumDaysBetween(ingredient.getExpiry(), expireBeforeDate) >= 0) {
-                resultMsg += ingredient + LIST_NEWLINE_INDENT;
-                expiringCount += 1;
+        for (IngredientGroup ingredientGroup : ingredientList) {
+            int entryCount = ingredientGroup.getIngredientGroupSize();
+            for (int i = 0; i < entryCount; i++) {
+                if (getNumDaysBetween(ingredientGroup.getIngredientExpiry(i + 1), expireBeforeDate) >= 0) {
+                    resultMsg += ingredientGroup.get(i + 1).getName() + " | "
+                            + ingredientGroup.getIngredientInfo(i + 1) + LIST_NEWLINE_INDENT;
+                    expiringCount += 1;
+                }
             }
         }
 

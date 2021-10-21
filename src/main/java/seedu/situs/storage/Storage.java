@@ -63,9 +63,8 @@ public class Storage {
             String[] ingredientDetails = savedIngredientString.split("\\|", 4);
             String ingredientName = ingredientDetails[0].trim();
             double ingredientAmount = Double.parseDouble(ingredientDetails[1].trim());
-            String ingredientUnits = ingredientDetails[2].trim();
-            LocalDate ingredientExpiry = Ingredient.stringToDate(ingredientDetails[3].trim());
-            return new Ingredient(ingredientName, ingredientAmount, ingredientUnits, ingredientExpiry);
+            LocalDate ingredientExpiry = Ingredient.stringToDate(ingredientDetails[2].trim());
+            return new Ingredient(ingredientName, ingredientAmount, ingredientExpiry);
         } catch (NumberFormatException e) {
             throw new DukeException("Wrong ingredient amount format!");
         } catch (DateTimeParseException e) {
@@ -77,7 +76,7 @@ public class Storage {
         FileWriter fw = new FileWriter(DATA_FILE_PATH);
         for (Ingredient i : ingredients) {
             fw.write(i.getName() + "|" + i.getAmount() + "|"
-                    + i.getUnits() + "|" + Ingredient.dateToString(i.getExpiry()) + System.lineSeparator());
+                    + Ingredient.dateToString(i.getExpiry()) + System.lineSeparator());
         }
         fw.close();
     }

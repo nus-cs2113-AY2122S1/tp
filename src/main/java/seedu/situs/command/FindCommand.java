@@ -26,7 +26,7 @@ public class FindCommand extends Command {
     @Override
     public String run() throws DukeException {
         String resultMsg = "";
-        List<Ingredient> searchResults = IngredientList.getInstance().getIngredientList().stream()
+        /*List<Ingredient> searchResults = IngredientList.getInstance().getIngredientList().stream()
                 .filter(result -> result.getName().toLowerCase().contains(keyword)).collect(Collectors.toList());
         if (searchResults.isEmpty()) {
             resultMsg += NO_RESULTS_MESSAGE_START + keyword + NO_RESULTS_MESSAGE_END;
@@ -36,7 +36,7 @@ public class FindCommand extends Command {
                 resultMsg += LIST_NEWLINE_INDENT + (IngredientList.getInstance().getIngredientList()
                         .indexOf(ingredient) + 1) + ". " + ingredient;
             }
-        }
+        }*/
         return resultMsg;
     }
 }
