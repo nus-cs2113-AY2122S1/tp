@@ -95,6 +95,7 @@ on [link](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
     1. After performing the steps above, locate the file `src/main/java/terminus/Terminus.java`,
        right-click and select `Run 'Terminus.main()'`.
     2. If everything is correctly set up, you should see the following terminal.
+   
    ```
    Welcome to TermiNUS!
    
@@ -105,7 +106,6 @@ on [link](https://docs.github.com/en/get-started/quickstart/fork-a-repo).
    > schedule
    
    [] >>>
-
    ```
 
 #### 2.1.4 Configuring the Coding Style
@@ -143,14 +143,27 @@ Import the coding style xml file into your IntelliJ IDEA.
 The Module Components consists of the `ModuleManager` which contains a collection of `NusModule` and
 maps a module name to a specific `NusModule`.
 The `NusModule` consist of `ContentManager` which help to manage `Link` and `Note`. 
-The `ContentManager` accepts a `Content` type generic
-and manages an `ArrayList` of `Content` either being a `Note` or a `Link`.
+The `ContentManager` accepts a `Content` type generic which is from the Content Component
 
 The `ModuleManager`
-- add,delete or retrieve a specific `NusModule`
+- add, delete or retrieve a specific `NusModule`
 - list all module names
+- grants access to the different types of content stored by `NusModule`
 
 ### 3.6 Content Component
+![](attachments/Content.png)
+
+The Content Component consist of objects such as `Link`, `Questions` and `Note`
+which inherit from the abstract `Content` class. The `ContentManager` allows a generic 
+`<T extends Content>` which must belong to the `Content` type or its children. The 
+`ContentManager` manages an `ArrayList` of Content type and provide the following functionality:
+
+- adding of any Content type
+- removing any Content
+- accessing the Content and the inner data attribute
+- getting the total number of content
+- listing all contents
+- accessing the arraylist of contents
 
 ### 3.7 Active Recall Component
 
