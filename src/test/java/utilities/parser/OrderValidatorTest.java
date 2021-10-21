@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OrderValidatorTest {
     private Ui ui = new Ui();
+    OrderValidator orderValidator = new OrderValidator();
 
     @Test
     public void checkValidOrderId_validId_expectTrue() {
@@ -23,7 +24,7 @@ public class OrderValidatorTest {
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
-        boolean isValid = OrderValidator.isValidOrderId(ui, "1", tempOrder);
+        boolean isValid = orderValidator.isValidOrderId(ui, "1", tempOrder);
         assertTrue(isValid);
     }
 
@@ -35,7 +36,7 @@ public class OrderValidatorTest {
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
-        boolean isInvalid = OrderValidator.isValidOrderId(ui, "5", tempOrder);
+        boolean isInvalid = orderValidator.isValidOrderId(ui, "5", tempOrder);
         assertFalse(isInvalid);
     }
 }

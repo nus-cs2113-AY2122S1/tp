@@ -39,7 +39,8 @@ public class ListOrderCommand extends Command {
                 CommandParameters.DATE, CommandParameters.STATUS, CommandParameters.SORT,
                 CommandParameters.REVERSED_SORT};
 
-        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters,
+        OrderValidator orderValidator = new OrderValidator();
+        boolean isInvalidParameter = orderValidator.containsInvalidParameters(ui, parameters,
                 requiredParameters, optionalParameters, CommandSyntax.LIST_ORDER_COMMAND, false);
         if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameters given by user");
@@ -48,7 +49,7 @@ public class ListOrderCommand extends Command {
 
         ArrayList<Medicine> medicines = Medicine.getInstance();
 
-        boolean isInvalidParameterValues = OrderValidator.containsInvalidParameterValues(ui, parameters,
+        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters,
                 medicines, CommandSyntax.LIST_ORDER_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");
@@ -74,12 +75,12 @@ public class ListOrderCommand extends Command {
     /**
      * Helps to filter order records based on the user's input.
      *
-     * @param parameters    HashMap Key-Value set for parameter and user specified parameter value.
+     * @param parameters     HashMap Key-Value set for parameter and user specified parameter value.
      * @param filteredOrders Arraylist of Order objects.
      * @return Arraylist of filtered Order objects based on the user's parameters values.
      */
     private ArrayList<Order> filterOrders(LinkedHashMap<String, String> parameters,
-                                         ArrayList<Order> filteredOrders) {
+                                          ArrayList<Order> filteredOrders) {
         for (String parameter : parameters.keySet()) {
             String parameterValue = parameters.get(parameter);
             switch (parameter) {

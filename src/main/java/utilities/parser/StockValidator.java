@@ -14,7 +14,7 @@ import java.util.LinkedHashMap;
  * Contains all the methods to validate if a Medicine's input parameters are valid.
  */
 
-public class StockValidator {
+public class StockValidator extends MedicineValidator {
     /**
      * Checks if parameter values are valid for Stock objects.
      *
@@ -24,8 +24,8 @@ public class StockValidator {
      * @param commandSyntax The command's valid syntax.
      * @return A boolean value indicating whether parameter values are valid.
      */
-    public static boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
-                                                         ArrayList<Medicine> medicines, String commandSyntax) {
+    public boolean containsInvalidParameterValues(Ui ui, LinkedHashMap<String, String> parameters,
+                                                  ArrayList<Medicine> medicines, String commandSyntax) {
         for (String parameter : parameters.keySet()) {
             boolean isValid = false;
             String parameterValue = parameters.get(parameter);
@@ -35,13 +35,13 @@ public class StockValidator {
                 isValid = isValidStockId(ui, parameterValue, medicines);
                 break;
             case CommandParameters.NAME:
-                isValid = MedicineValidator.isValidName(ui, parameterValue);
+                isValid = isValidName(ui, parameterValue);
                 break;
             case CommandParameters.PRICE:
                 isValid = isValidPrice(ui, parameterValue);
                 break;
             case CommandParameters.QUANTITY:
-                isValid = MedicineValidator.isValidQuantity(ui, parameterValue);
+                isValid = isValidQuantity(ui, parameterValue);
                 break;
             case CommandParameters.EXPIRY_DATE:
                 isValid = isValidExpiry(ui, parameterValue);
@@ -75,7 +75,7 @@ public class StockValidator {
      * @param medicines List of all medicines.
      * @return Boolean value indicating if medicine ID is valid.
      */
-    public static boolean isValidStockId(Ui ui, String id, ArrayList<Medicine> medicines) {
+    public boolean isValidStockId(Ui ui, String id, ArrayList<Medicine> medicines) {
         try {
             int stockId = Integer.parseInt(id);
             if (stockId <= 0 || stockId > Stock.getStockCount()) {
@@ -110,7 +110,7 @@ public class StockValidator {
      * @param priceString Price of the medicine to be checked.
      * @return Boolean value indicating if medicine price is valid.
      */
-    public static boolean isValidPrice(Ui ui, String priceString) {
+    public boolean isValidPrice(Ui ui, String priceString) {
         try {
             double price = Double.parseDouble(priceString);
             if (price < 0) {
@@ -130,7 +130,7 @@ public class StockValidator {
      * @param expiryString Expiry date of the medicine.
      * @return Boolean value indicating if medicine expiry date is valid.
      */
-    public static boolean isValidExpiry(Ui ui, String expiryString) {
+    public boolean isValidExpiry(Ui ui, String expiryString) {
         try {
             DateParser.stringToDate(expiryString);
             return true;
@@ -147,7 +147,7 @@ public class StockValidator {
      * @param description Medicine description to be checked.
      * @return Boolean value indicating if medicine name is valid.
      */
-    public static boolean isValidDescription(Ui ui, String description) {
+    public boolean isValidDescription(Ui ui, String description) {
         if (description.equals("")) {
             ui.print("Description cannot be empty!");
             return false;
@@ -162,7 +162,7 @@ public class StockValidator {
      * @param maxQuantityString Max quantity of the medicine.
      * @return Boolean value indicating if max medicine quantity is valid.
      */
-    public static boolean isValidMaxQuantity(Ui ui, String maxQuantityString) {
+    public boolean isValidMaxQuantity(Ui ui, String maxQuantityString) {
         try {
             int maxQuantity = Integer.parseInt(maxQuantityString);
             if (maxQuantity < 0) {
@@ -182,7 +182,7 @@ public class StockValidator {
      * @param columnName Column name/alias to be validated.
      * @return Boolean value indicating if column name is value.
      */
-    public static boolean isValidColumn(Ui ui, String columnName) {
+    public boolean isValidColumn(Ui ui, String columnName) {
         String[] columnAlias = new String[]{CommandParameters.ID, CommandParameters.NAME, CommandParameters.PRICE,
                 CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
                 CommandParameters.MAX_QUANTITY};
@@ -203,7 +203,7 @@ public class StockValidator {
      * @param maxQuantity Max quantity of medicines.
      * @return Boolean value indicating if total quantity is less than max quantity.
      */
-    public static boolean quantityValidityChecker(Ui ui, int quantity, int maxQuantity) {
+    public boolean quantityValidityChecker(Ui ui, int quantity, int maxQuantity) {
         if (quantity > maxQuantity) {
             String message = "Quantity: " + quantity + ", Max Quantity: " + maxQuantity;
             ui.print("Quantity cannot be more than maximum quantity!");
@@ -222,7 +222,7 @@ public class StockValidator {
      * @param name       Medicine name to check against
      * @return Boolean false if same expiry date exist
      */
-    public static boolean dateValidityChecker(Ui ui, ArrayList<Medicine> medicines, Date expiryDate, String name) {
+    public boolean dateValidityChecker(Ui ui, ArrayList<Medicine> medicines, Date expiryDate, String name) {
         ArrayList<Stock> filteredStocks = new ArrayList<>();
         for (Medicine medicine : medicines) {
             if (!(medicine instanceof Stock)) {

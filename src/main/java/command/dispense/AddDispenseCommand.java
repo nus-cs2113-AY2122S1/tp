@@ -40,14 +40,16 @@ public class AddDispenseCommand extends Command {
                 CommandParameters.CUSTOMER_ID, CommandParameters.STAFF};
         String[] optionalParameters = {};
 
-        boolean isInvalidParameters = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameters,
+        DispenseValidator dispenseValidator = new DispenseValidator();
+
+        boolean isInvalidParameters = dispenseValidator.containsInvalidParameters(ui, parameters, requiredParameters,
                 optionalParameters, CommandSyntax.ADD_DISPENSE_COMMAND, false);
 
         if (isInvalidParameters) {
             return;
         }
 
-        boolean isInvalidParameterValues = DispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
+        boolean isInvalidParameterValues = dispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.ADD_DISPENSE_COMMAND);
         if (isInvalidParameterValues) {
             return;

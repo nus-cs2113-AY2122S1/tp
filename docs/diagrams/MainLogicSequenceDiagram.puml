@@ -11,7 +11,7 @@ box Utilities COLOR_UTILITIES_BOX
     participant "<<class>>\nStorage" as storage COLOR_UTILITIES
     participant "<<class>>\nUi" as uiclass COLOR_UTILITIES
     participant "Ui" as ui COLOR_UTILITIES
-    participant "<<class>>\nCommandParser" as commandparser COLOR_UTILITIES
+    participant "CommandParser" as commandparser COLOR_UTILITIES
 end box
 
 box Command COLOR_COMMAND_BOX
@@ -29,6 +29,12 @@ autoactivate on
     medivault -> medivault : run
     medivault -> uiclass : getInstance()
     medivault <-- uiclass
+    medivault -> uiclass : printWelcomeMessage()
+    medivault <-- uiclass
+    create commandparser
+    medivault -> commandparser : CommandParser()
+    medivault <-- commandparser
+
         loop until exit is received
             medivault -> ui : getInput()
             medivault <-- ui : userInput

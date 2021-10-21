@@ -40,13 +40,15 @@ public class UpdateDispenseCommand extends Command {
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY,
                 CommandParameters.CUSTOMER_ID, CommandParameters.STAFF, CommandParameters.DATE};
 
-        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
+        DispenseValidator dispenseValidator = new DispenseValidator();
+        StockValidator stockValidator = new StockValidator();
+        boolean isInvalidParameter = dispenseValidator.containsInvalidParameters(ui, parameters, requiredParameter,
                 optionalParameters, CommandSyntax.UPDATE_DISPENSE_COMMAND, true);
         if (isInvalidParameter) {
             return;
         }
 
-        boolean isInvalidParameterValues = DispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
+        boolean isInvalidParameterValues = dispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.UPDATE_DISPENSE_COMMAND);
         if (isInvalidParameterValues) {
             return;
@@ -95,11 +97,12 @@ public class UpdateDispenseCommand extends Command {
         boolean hasQuantityParam = parameters.containsKey(CommandParameters.QUANTITY);
         boolean isSuccessfulUpdate = false;
         if (hasNameParam && hasQuantityParam) {
-            isSuccessfulUpdate = processGivenNameAndQuantity(medicines, dispense, customerId, date, staffName);
+            isSuccessfulUpdate = processGivenNameAndQuantity(medicines, dispense, customerId, date, staffName,
+                    stockValidator);
         } else if (hasNameParam && !hasQuantityParam) {
-            isSuccessfulUpdate = processGivenName(medicines, dispense, customerId, date, staffName);
+            isSuccessfulUpdate = processGivenName(medicines, dispense, customerId, date, staffName, stockValidator);
         } else if (!hasNameParam && hasQuantityParam) {
-            isSuccessfulUpdate = processGivenQuantity(medicines, dispense, customerId, date, staffName);
+            isSuccessfulUpdate = processGivenQuantity(medicines, dispense, customerId, date, staffName, stockValidator);
         } else {
             isSuccessfulUpdate = processOtherFields(medicines, dispense, customerId, date, staffName);
         }
@@ -113,15 +116,16 @@ public class UpdateDispenseCommand extends Command {
     /**
      * Processes name and quantity field provided by user for updating dispense information.
      *
-     * @param medicines  Arraylist of all medicines.
-     * @param dispense   The associated dispense object.
-     * @param customerId CustomerId of customers.
-     * @param date       Date of dispense.
-     * @param staffName  Staff responsible for the dispensing of medication.
+     * @param medicines      Arraylist of all medicines.
+     * @param dispense       The associated dispense object.
+     * @param customerId     CustomerId of customers.
+     * @param date           Date of dispense.
+     * @param staffName      Staff responsible for the dispensing of medication.
+     * @param stockValidator Reference to StockValidator object.
      * @return Boolean value true if update is successful.
      */
     private boolean processGivenNameAndQuantity(ArrayList<Medicine> medicines, Dispense dispense, String customerId,
-                                                Date date, String staffName) {
+                                                Date date, String staffName, StockValidator stockValidator) {
         Ui ui = Ui.getInstance();
         String currentName = dispense.getMedicineName();
         int currentStockId = dispense.getStockId();
@@ -136,7 +140,7 @@ public class UpdateDispenseCommand extends Command {
         int restoredQuantity = dispense.getQuantity();
         int totalQuantity = restoredQuantity + restoreStockQuantity;
         int restoreMaxQuantity = targetRestoreStock.getMaxQuantity();
-        boolean isValidRestore = StockValidator.quantityValidityChecker(ui, totalQuantity, restoreMaxQuantity);
+        boolean isValidRestore = stockValidator.quantityValidityChecker(ui, totalQuantity, restoreMaxQuantity);
         if (!isValidRestore) {
             ui.print("Restoring of medication aborted!");
             return false;
@@ -150,7 +154,7 @@ public class UpdateDispenseCommand extends Command {
         String updatedQuantity = parameters.get(CommandParameters.QUANTITY);
         int dispenseQuantity = Integer.parseInt(updatedQuantity);
         int availableQuantity = StockManager.getTotalStockQuantity(medicines, updatedName);
-        boolean isValidDispense = StockValidator.quantityValidityChecker(ui, dispenseQuantity, availableQuantity);
+        boolean isValidDispense = stockValidator.quantityValidityChecker(ui, dispenseQuantity, availableQuantity);
         if (!isValidDispense) {
             ui.print("Dispensing of medication aborted!");
             return false;
@@ -174,15 +178,16 @@ public class UpdateDispenseCommand extends Command {
     /**
      * Processes name field provided by user for updating dispense information.
      *
-     * @param medicines  Arraylist of all medicines.
-     * @param dispense   The associated dispense object.
-     * @param customerId CustomerId of customers.
-     * @param date       Date of dispense.
-     * @param staffName  Staff responsible for the dispensing of medication.
+     * @param medicines      Arraylist of all medicines.
+     * @param dispense       The associated dispense object.
+     * @param customerId     CustomerId of customers.
+     * @param date           Date of dispense.
+     * @param staffName      Staff responsible for the dispensing of medication.
+     * @param stockValidator Reference to StockValidator object.
      * @return Boolean value true if update is successful.
      */
     private boolean processGivenName(ArrayList<Medicine> medicines, Dispense dispense, String customerId, Date date,
-                                     String staffName) {
+                                     String staffName, StockValidator stockValidator) {
         Ui ui = Ui.getInstance();
         String currentName = dispense.getMedicineName();
         int currentStockId = dispense.getStockId();
@@ -196,7 +201,7 @@ public class UpdateDispenseCommand extends Command {
         int restoredQuantity = dispense.getQuantity();
         int totalQuantity = restoredQuantity + restoreStockQuantity;
         int restoreMaxQuantity = targetRestoreStock.getMaxQuantity();
-        boolean isValidRestore = StockValidator.quantityValidityChecker(ui, totalQuantity, restoreMaxQuantity);
+        boolean isValidRestore = stockValidator.quantityValidityChecker(ui, totalQuantity, restoreMaxQuantity);
         if (!isValidRestore) {
             ui.print("Restoring of medication aborted!");
             return false;
@@ -208,7 +213,7 @@ public class UpdateDispenseCommand extends Command {
             return false;
         }
         int availableQuantity = StockManager.getTotalStockQuantity(medicines, updatedName);
-        boolean isValidDispense = StockValidator.quantityValidityChecker(ui, restoredQuantity, availableQuantity);
+        boolean isValidDispense = stockValidator.quantityValidityChecker(ui, restoredQuantity, availableQuantity);
         if (!isValidDispense) {
             ui.print("Dispensing of medication aborted!");
             return false;
@@ -234,15 +239,16 @@ public class UpdateDispenseCommand extends Command {
     /**
      * Processes quantity field provided by user for updating dispense information.
      *
-     * @param medicines  Arraylist of all medicines.
-     * @param dispense   The associated dispense object.
-     * @param customerId CustomerId of customers.
-     * @param date       Date of dispense.
-     * @param staffName  Staff responsible for the dispensing of medication.
+     * @param medicines      Arraylist of all medicines.
+     * @param dispense       The associated dispense object.
+     * @param customerId     CustomerId of customers.
+     * @param date           Date of dispense.
+     * @param staffName      Staff responsible for the dispensing of medication.
+     * @param stockValidator Reference to StockValidator object.
      * @return Boolean value true if update is successful.
      */
     private boolean processGivenQuantity(ArrayList<Medicine> medicines, Dispense dispense, String customerId,
-                                         Date date, String staffName) {
+                                         Date date, String staffName, StockValidator stockValidator) {
         Ui ui = Ui.getInstance();
         String currentName = dispense.getMedicineName();
         int currentStockId = dispense.getStockId();
@@ -259,7 +265,7 @@ public class UpdateDispenseCommand extends Command {
             int stockQuantity = stock.getQuantity();
             int stockMaxQuantity = stock.getMaxQuantity();
             int totalQuantity = stockQuantity + restoreQuantity;
-            boolean isValidRestore = StockValidator.quantityValidityChecker(ui, totalQuantity, stockMaxQuantity);
+            boolean isValidRestore = stockValidator.quantityValidityChecker(ui, totalQuantity, stockMaxQuantity);
             if (!isValidRestore) {
                 ui.print("Restoring of medication aborted!");
                 return false;
@@ -284,7 +290,7 @@ public class UpdateDispenseCommand extends Command {
             }
             int dispensedQuantity = updatedQuantity - currentQuantity;
             int stockQuantity = StockManager.getTotalStockQuantity(medicines, currentName);
-            boolean isValidDispense = StockValidator.quantityValidityChecker(ui, dispensedQuantity, stockQuantity);
+            boolean isValidDispense = stockValidator.quantityValidityChecker(ui, dispensedQuantity, stockQuantity);
             if (!isValidDispense) {
                 ui.print("Dispensing of medication aborted!");
                 return false;

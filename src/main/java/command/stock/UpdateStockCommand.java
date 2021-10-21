@@ -40,26 +40,27 @@ public class UpdateStockCommand extends Command {
                 CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION, CommandParameters.NAME,
                 CommandParameters.MAX_QUANTITY};
 
-        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
+        StockValidator stockValidator = new StockValidator();
+        boolean isInvalidParameter = stockValidator.containsInvalidParameters(ui, parameters, requiredParameter,
                 optionalParameters, CommandSyntax.UPDATE_STOCK_COMMAND, true);
         if (isInvalidParameter) {
             return;
         }
 
         ArrayList<Medicine> medicines = Medicine.getInstance();
-        boolean isInvalidParameterValues = StockValidator.containsInvalidParameterValues(ui, parameters, medicines,
+        boolean isInvalidParameterValues = stockValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.UPDATE_STOCK_COMMAND);
         if (isInvalidParameterValues) {
             return;
         }
 
         Stock stock = StockManager.extractStockObject(parameters, medicines);
-        boolean isValidQuantityValues = processQuantityValues(ui, parameters, medicines, stock);
+        boolean isValidQuantityValues = processQuantityValues(ui, parameters, medicines, stock, stockValidator);
         if (!isValidQuantityValues) {
             return;
         }
 
-        boolean isValidExpDate = processDateInput(ui, parameters, medicines, stock);
+        boolean isValidExpDate = processDateInput(ui, parameters, medicines, stock, stockValidator);
         if (!isValidExpDate) {
             return;
         }
@@ -171,14 +172,15 @@ public class UpdateStockCommand extends Command {
     /**
      * Process valid date input to be updated given a stock id.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
-     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines  Arraylist of all medicines.
-     * @param stock      Stock object of the given stock id.
+     * @param ui             Reference to the UI object passed by Main to print messages.
+     * @param parameters     LinkedHashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines      Arraylist of all medicines.
+     * @param stock          Stock object of the given stock id.
+     * @param stockValidator Reference to the StockValidator object.
      * @return Boolean value indicating if quantity values are valid.
      */
     private boolean processDateInput(Ui ui, LinkedHashMap<String, String> parameters, ArrayList<Medicine> medicines,
-                                     Stock stock) {
+                                     Stock stock, StockValidator stockValidator) {
         logger.log(Level.INFO, "Processing date input for update stock...");
 
         boolean hasExpiryDate = parameters.containsKey(CommandParameters.EXPIRY_DATE);
@@ -194,20 +196,21 @@ public class UpdateStockCommand extends Command {
         }
         String name = stock.getMedicineName();
         logger.log(Level.INFO, "End processing date input for update stock.");
-        return StockValidator.dateValidityChecker(ui, medicines, expiryDate, name);
+        return stockValidator.dateValidityChecker(ui, medicines, expiryDate, name);
     }
 
     /**
      * Process quantity values to be updated given a stock id.
      *
-     * @param ui         Reference to the UI object passed by Main to print messages.
-     * @param parameters LinkedHashMap Key-Value set for parameter and user specified parameter value.
-     * @param medicines  Arraylist of all medicines.
-     * @param stock      Stock object of the given stock id.
+     * @param ui             Reference to the UI object passed by Main to print messages.
+     * @param parameters     LinkedHashMap Key-Value set for parameter and user specified parameter value.
+     * @param medicines      Arraylist of all medicines.
+     * @param stock          Stock object of the given stock id.
+     * @param stockValidator Reference to the StockValidator object.
      * @return Boolean value indicating if quantity values are valid.
      */
     private boolean processQuantityValues(Ui ui, LinkedHashMap<String, String> parameters,
-                                          ArrayList<Medicine> medicines, Stock stock) {
+                                          ArrayList<Medicine> medicines, Stock stock, StockValidator stockValidator) {
         logger.log(Level.INFO, "Processing quantity values for update stock...");
         String name = stock.getMedicineName();
 
@@ -242,7 +245,7 @@ public class UpdateStockCommand extends Command {
             maxQuantity = Integer.parseInt(parameters.get(CommandParameters.MAX_QUANTITY));
         }
         logger.log(Level.INFO, "End processing quantity values for update stock.");
-        return StockValidator.quantityValidityChecker(ui, quantity, maxQuantity);
+        return stockValidator.quantityValidityChecker(ui, quantity, maxQuantity);
     }
 
     /**

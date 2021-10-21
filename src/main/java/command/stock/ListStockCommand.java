@@ -40,7 +40,8 @@ public class ListStockCommand extends Command {
                 CommandParameters.QUANTITY, CommandParameters.EXPIRY_DATE, CommandParameters.DESCRIPTION,
                 CommandParameters.MAX_QUANTITY, CommandParameters.SORT, CommandParameters.REVERSED_SORT};
 
-        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters,
+        StockValidator stockValidator = new StockValidator();
+        boolean isInvalidParameter = stockValidator.containsInvalidParameters(ui, parameters,
                 requiredParameter, optionalParameters, CommandSyntax.LIST_STOCK_COMMAND, false);
         if (isInvalidParameter) {
             logger.log(Level.WARNING, "Invalid parameters given by user");
@@ -49,7 +50,7 @@ public class ListStockCommand extends Command {
 
         ArrayList<Medicine> medicines = Medicine.getInstance();
 
-        boolean isInvalidParameterValues = StockValidator.containsInvalidParameterValues(ui, parameters,
+        boolean isInvalidParameterValues = stockValidator.containsInvalidParameterValues(ui, parameters,
                 medicines, CommandSyntax.LIST_STOCK_COMMAND);
         if (isInvalidParameterValues) {
             logger.log(Level.WARNING, "Invalid parameters values given by user");

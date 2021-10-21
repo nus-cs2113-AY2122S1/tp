@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StockValidatorTest {
     private Ui ui = new Ui();
+    StockValidator stockValidator = new StockValidator();
 
     @Test
     public void checkValidStockId_validId_expectTrue() {
@@ -26,7 +27,7 @@ public class StockValidatorTest {
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
-        boolean isValid = StockValidator.isValidStockId(ui,"1", tempMedicines);
+        boolean isValid = stockValidator.isValidStockId(ui, "1", tempMedicines);
         assertTrue(isValid);
     }
 
@@ -39,77 +40,77 @@ public class StockValidatorTest {
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
         }
-        boolean isInvalid = StockValidator.isValidStockId(ui,"5", tempMedicines);
+        boolean isInvalid = stockValidator.isValidStockId(ui, "5", tempMedicines);
         assertFalse(isInvalid);
     }
 
     @Test
     public void checkValidPrice_validPrice_expectTrue() {
         String inputPrice = "20";
-        boolean isValid = StockValidator.isValidPrice(ui, inputPrice);
+        boolean isValid = stockValidator.isValidPrice(ui, inputPrice);
         assertTrue(isValid);
     }
 
     @Test
     public void checkValidPrice_validPrice_expectFalse() {
         String inputPrice = "-1";
-        boolean isInvalid = StockValidator.isValidPrice(ui, inputPrice);
+        boolean isInvalid = stockValidator.isValidPrice(ui, inputPrice);
         assertFalse(isInvalid);
     }
 
     @Test
     public void checkValidExpiry_validDate_expectTrue() {
         String inputDate = "08-10-2021";
-        boolean isValid = StockValidator.isValidExpiry(ui, inputDate);
+        boolean isValid = stockValidator.isValidExpiry(ui, inputDate);
         assertTrue(isValid);
     }
 
     @Test
     public void checkValidExpiry_validDate_expectFalse() {
         String inputDate = "8 Oct 2021";
-        boolean isInvalid = StockValidator.isValidExpiry(ui, inputDate);
+        boolean isInvalid = stockValidator.isValidExpiry(ui, inputDate);
         assertFalse(isInvalid);
     }
 
     @Test
     public void checkValidDescription_validDescription_expectTrue() {
         String inputDescription = "BEST MEDICINE TO CURE HEADACHES, FEVER AND PAINS";
-        boolean isValid = StockValidator.isValidDescription(ui, inputDescription);
+        boolean isValid = stockValidator.isValidDescription(ui, inputDescription);
         assertTrue(isValid);
     }
 
     @Test
     public void checkValidDescription_validDescription_expectFalse() {
         String inputDescription = "";
-        boolean isInvalid = StockValidator.isValidDescription(ui, inputDescription);
+        boolean isInvalid = stockValidator.isValidDescription(ui, inputDescription);
         assertFalse(isInvalid);
     }
 
     @Test
     public void checkValidMax_validQuantity_expectTrue() {
         String inputMaxQuantity = "100";
-        boolean isValid = StockValidator.isValidMaxQuantity(ui, inputMaxQuantity);
+        boolean isValid = stockValidator.isValidMaxQuantity(ui, inputMaxQuantity);
         assertTrue(isValid);
     }
 
     @Test
     public void checkValidMax_validQuantity_expectFalse() {
         String inputMaxQuantity = "";
-        boolean isInvalid = StockValidator.isValidMaxQuantity(ui, inputMaxQuantity);
+        boolean isInvalid = stockValidator.isValidMaxQuantity(ui, inputMaxQuantity);
         assertFalse(isInvalid);
     }
 
     @Test
     public void checkValidColumn_validColumn_expectTrue() {
         String inputColumnName = "NAME";
-        boolean isValid = StockValidator.isValidColumn(ui, inputColumnName);
+        boolean isValid = stockValidator.isValidColumn(ui, inputColumnName);
         assertTrue(isValid);
     }
 
     @Test
     public void checkValidColumn_validColumn_expectFalse() {
         String inputColumnName = "panadol";
-        boolean isInvalid = StockValidator.isValidColumn(ui, inputColumnName);
+        boolean isInvalid = stockValidator.isValidColumn(ui, inputColumnName);
         assertFalse(isInvalid);
     }
 
@@ -117,7 +118,7 @@ public class StockValidatorTest {
     public void checkValidity_checkQuantity_expectTrue() {
         int quantity = 10;
         int maxQuantity = 100;
-        boolean isValid = StockValidator.quantityValidityChecker(ui, quantity, maxQuantity);
+        boolean isValid = stockValidator.quantityValidityChecker(ui, quantity, maxQuantity);
         assertTrue(isValid);
     }
 
@@ -125,7 +126,7 @@ public class StockValidatorTest {
     public void checkValidity_checkQuantity_expectFalse() {
         int quantity = 10;
         int maxQuantity = 1;
-        boolean isInvalid = StockValidator.quantityValidityChecker(ui, quantity, maxQuantity);
+        boolean isInvalid = stockValidator.quantityValidityChecker(ui, quantity, maxQuantity);
         assertFalse(isInvalid);
     }
 
@@ -140,7 +141,7 @@ public class StockValidatorTest {
             final Date expiryDate = DateFor.parse("10-10-2021");
             String inputName = "panadol";
 
-            boolean isValid = StockValidator.dateValidityChecker(ui,tempMedicines, expiryDate, inputName);
+            boolean isValid = stockValidator.dateValidityChecker(ui, tempMedicines, expiryDate, inputName);
             assertTrue(isValid);
         } catch (ParseException e) {
             ui.print("Unable to parse date!");
@@ -158,7 +159,7 @@ public class StockValidatorTest {
             final Date expiryDate = DateFor.parse("13-9-2021");
             String inputName = "panadol";
 
-            boolean isInvalid = StockValidator.dateValidityChecker(ui,tempMedicines, expiryDate, inputName);
+            boolean isInvalid = stockValidator.dateValidityChecker(ui, tempMedicines, expiryDate, inputName);
             assertFalse(isInvalid);
         } catch (ParseException e) {
             ui.print("Unable to parse date!");

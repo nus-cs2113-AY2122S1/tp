@@ -40,7 +40,8 @@ public class ListDispenseCommand extends Command {
                 CommandParameters.STOCK_ID,
                 CommandParameters.SORT, CommandParameters.REVERSED_SORT};
 
-        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
+        DispenseValidator dispenseValidator = new DispenseValidator();
+        boolean isInvalidParameter = dispenseValidator.containsInvalidParameters(ui, parameters, requiredParameter,
                 optionalParameters, CommandSyntax.LIST_DISPENSE_COMMAND, false);
 
         if (isInvalidParameter) {
@@ -50,7 +51,7 @@ public class ListDispenseCommand extends Command {
 
         ArrayList<Medicine> medicines = Medicine.getInstance();
 
-        boolean isInvalidParameterValues = DispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
+        boolean isInvalidParameterValues = dispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.LIST_DISPENSE_COMMAND);
 
         if (isInvalidParameterValues) {
@@ -77,7 +78,7 @@ public class ListDispenseCommand extends Command {
     /**
      * Helps to filter dispense records based on the user's input.
      *
-     * @param parameters       HashMap Key-Value set for parameter and user specified parameter value.
+     * @param parameters        HashMap Key-Value set for parameter and user specified parameter value.
      * @param filteredDispenses Arraylist of Dispense objects.
      * @return Arraylist of filtered Dispense objects based on the user's parameters values.
      */

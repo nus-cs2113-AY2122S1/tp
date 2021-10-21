@@ -51,6 +51,7 @@ public class MediVault {
     private void run() {
         Ui ui = Ui.getInstance();
         ui.printWelcomeMessage();
+        CommandParser commandParser = new CommandParser();
 
         String userInput = "";
 
@@ -60,18 +61,18 @@ public class MediVault {
             // Reads user input
             userInput = ui.getInput();
             try {
-                String[] userCommand = CommandParser.parseCommand(userInput);
+                String[] userCommand = commandParser.parseCommand(userInput);
                 String commandString = userCommand[0];
                 String commandParameters = userCommand[1];
 
                 // Check is user is changing modes
                 if (commandString.equalsIgnoreCase(STOCK.name()) || commandString.equalsIgnoreCase(DISPENSE.name())
                         || commandString.equalsIgnoreCase(ORDER.name())) {
-                    mode = CommandParser.changeMode(ui, commandString, mode);
+                    mode = commandParser.changeMode(ui, commandString, mode);
                     continue;
                 }
 
-                Command command = CommandParser.processCommand(commandString, commandParameters, mode);
+                Command command = commandParser.processCommand(commandString, commandParameters, mode);
                 command.execute();
 
                 if (commandString.equals(CommandList.EXIT)) { // User entered exit

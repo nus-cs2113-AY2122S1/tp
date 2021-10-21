@@ -5,7 +5,6 @@ import command.CommandParameters;
 import command.CommandSyntax;
 import inventory.Medicine;
 import inventory.Order;
-import inventory.Stock;
 import utilities.parser.DateParser;
 import utilities.parser.OrderManager;
 import utilities.parser.OrderValidator;
@@ -41,13 +40,14 @@ public class UpdateOrderCommand extends Command {
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY, CommandParameters.DATE};
 
-        boolean isInvalidParameter = CommandSyntax.containsInvalidParameters(ui, parameters, requiredParameter,
+        OrderValidator orderValidator = new OrderValidator();
+        boolean isInvalidParameter = orderValidator.containsInvalidParameters(ui, parameters, requiredParameter,
                 optionalParameters, CommandSyntax.UPDATE_ORDER_COMMAND, true);
         if (isInvalidParameter) {
             return;
         }
 
-        boolean isInvalidParameterValues = OrderValidator.containsInvalidParameterValues(ui, parameters, medicines,
+        boolean isInvalidParameterValues = orderValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.UPDATE_ORDER_COMMAND);
         if (isInvalidParameterValues) {
             return;
@@ -69,7 +69,8 @@ public class UpdateOrderCommand extends Command {
             int totalQuantity = OrderManager.getTotalOrderQuantity(medicines, order.getMedicineName());
             int orderQuantity = Integer.parseInt(parameters.get(CommandParameters.QUANTITY));
             actualTotalQuantity = totalQuantity - order.getQuantity() + orderQuantity;
-            boolean isValidQuantity = StockValidator.quantityValidityChecker(ui, actualTotalQuantity, maxQuantity);
+            StockValidator stockValidator = new StockValidator();
+            boolean isValidQuantity = stockValidator.quantityValidityChecker(ui, actualTotalQuantity, maxQuantity);
             if (!isValidQuantity) {
                 return;
             }
