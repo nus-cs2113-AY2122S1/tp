@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/component-diagram
+hide footbox
+
+-> ":ListHabitsCommand": runCommand(goalList: GoalList,\nui:Ui, storage:Storage)
+activate ":ListHabitsCommand"
+
+":ListHabitsCommand" -> "goalList:GoalList" :listHabitsFromGoal(goatIndex:int, ui:Ui)
+activate "goalList:GoalList"
+"goalList:GoalList" -> "goalList:GoalList" :getGoal(goalIndex:int)
+activate "goalList:GoalList"
+"goalList:GoalList" --> "goalList:GoalList" :goal:Goal
+deactivate "goalList:GoalList"
+
+"goalList:GoalList" -> "goal:Goal": getHabitList()
+activate "goal:Goal"
+"goal:Goal" --> "goalList:GoalList": habitList: ArrayList<Habit>
+"goalList:GoalList" -> "goal:Goal": numberOfHabits()
+"goal:Goal" --> "goalList:GoalList" :numOfHabits: int
+deactivate "goal:Goal"
+
+alt#gold #lightblue numOfHabits = 0
+    "goalList:GoalList" -> ":HabitCommandException": HabitCommandException(message:String)
+    activate ":HabitCommandException"
+    deactivate ":HabitCommandException"
+else #lightgreen
+    "goalList:GoalList" -> "ui:Ui": printHabitList(goalDescription: String, habitList: ArrayList<Habit>, numOfHabits: int)
+    activate "ui:Ui"
+    deactivate "ui:Ui"
+end
+
+deactivate "goalList:GoalList"
+deactivate ":ListHabitsCommand"
+
+@enduml

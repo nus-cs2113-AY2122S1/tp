@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+hide footbox
+
+-> ":ListGoalsCommand": runCommand(goalList: GoalList,\nui:Ui,storage:Storage)
+activate ":ListGoalsCommand"
+
+":ListGoalsCommand" -> "goalList:GoalList":  listGoals(ui: Ui)
+activate "goalList:GoalList"
+alt#gold #lightblue goalList.size == 0
+    "goalList:GoalList" -> ":HabitCommandException": HabitCommandException(message:String)
+    activate ":HabitCommandException"
+    deactivate ":HabitCommandException"
+
+else #lightgreen
+    "goalList:GoalList" -> "ui: Ui": printGoalList(goalList: ArrayList<Goal>,  goalList.size: int)
+    activate "ui: Ui"
+    deactivate "ui: Ui"
+end
+deactivate "goalList:GoalList"
+deactivate ":ListGoalsCommand"
+
+@enduml
