@@ -1,7 +1,0 @@
-@startuml
-!include style.puml
-Class Storage
-Class Export
-Class Import
-Class ImportParser
-@enduml
