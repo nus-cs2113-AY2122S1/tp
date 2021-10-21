@@ -7,6 +7,9 @@ import seedu.duke.data.records.Loan;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static seedu.duke.common.Messages.MESSAGE_EXIT;
+
+
 public class TextUi {
 
     /**
@@ -24,7 +27,7 @@ public class TextUi {
             + "                     __/ |\n"
             + "                    |___/";
 
-    private static final String MESSAGE_EXIT = "Bye, see you again soon!";
+    private static final int DISPLAY_INDEX_OFFSET = 1;
 
     private final Scanner in;
 
@@ -162,7 +165,8 @@ public class TextUi {
     private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList) {
         for (int i = 0; i < monthExpenditureList.size(); i++) {
             Expenditure currentExpenditure = monthExpenditureList.get(i);
-            System.out.println(i + "." + currentExpenditure);
+            int displayedIndex = i + DISPLAY_INDEX_OFFSET;
+            System.out.println(displayedIndex + "." + currentExpenditure);
         }
     }
 

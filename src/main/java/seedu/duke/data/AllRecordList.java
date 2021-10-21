@@ -102,13 +102,4 @@ public class AllRecordList {
         return allRecordList.get(month).getSize();
     }
 
-
-
-    /*public int getAllSize() {
-        int size = 0;
-        for (RecordList monthList : allRecordList) {
-            size += monthList.getSize();
-        }
-        return size;
-    }*/
 }
