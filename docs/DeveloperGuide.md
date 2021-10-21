@@ -178,10 +178,13 @@ A digital cookbook that works in Command-Line Interface that can provide all the
 |***|v1.0|user|check my stored recipes|refer to them while cooking|
 |***|v1.0|user|add recipes to my cookbook|try them in the future|
 |***|v1.0|user|delete recipes from my cookbook|remove recipes I'm no longer interested in|
+|***|v1.0|user|list out all the recipes|see all of the recipes in my cookbook|
 |**|v2.0|disorganised user|find recipes by ingredient|see what recipes I can make with the food in my pantry|
+|**|v2.0|health-conscious user|find recipes by calorie count|eat healthier by managing calories|
+|**|v2.0|budget-conscious user|find recipes by pricing|go for the most cost-efficient recipe|
+|**|v2.0|cooking newbie user|find recipes by difficulty|choose the difficulty of the recipe depending on my skill level|
+|**|v2.0|organised user|find recipes by my own tags|sort by my own metric|
 |**|v2.0|user|save and load my recipes from memory|refer to them whenever I want to|
-|**|v2.0|health-conscious user|set the amount of calories a recipe has|choose the healthier option|
-|*|v2.0|organized user|add tags to a recipe|classify my recipes however I feel like|
 |*|v2.0|developer|add my own functionality to Gordon in a modular fashion|improve the app to my needs|
 
 ## Use Cases
@@ -204,18 +207,6 @@ Use case ends.
 
 Use case ends
 
-**Use case: `check`**
-
-**MSS:**
-1. User requests to check recipes
-2. Gordon shows a list of all currently stored recipes
-
-Use case ends.
-
-**Extensions** 
-* The list is empty.
-  * Use case ends.
-
 **Use case: `add`**
 
 **MSS:**
@@ -230,7 +221,7 @@ Use case ends.
   * Gordon shows an error message
   * Use case resumes on step 1
 
-**Use case: `delete`**
+**Use case: `deleteRecipe`**
 
 **MSS:**
 1. User requests a list of all recipes
@@ -247,12 +238,38 @@ Use case ends.
   * Gordon shows an error message
   * Use case resumes from step 2
 
+**Use case: `listRecipes`**
+
+**MSS:**
+1. User requests to see all their recipes
+2. Gordon shows a list of all currently stored recipes
+
+Use case ends.
+
+**Extensions**
+* The list is empty.
+    * Use case ends.
+
+**Use case: `check`**
+
+**MSS:**
+1. User requests to check a specific recipe
+2. Gordon brings up the specified recipe for the user to peruse
+
+Use case ends.
+
+**Extensions**
+* The recipe does not exist.
+    * Use case ends.
+* Input was entered incorrectly
+  * Use case resumes from step 1
+
 **Use case: `find`**
 
 **MSS:**
 1. User has a large cookbook
-2. User searches for a specific recipe by a keyword
-3. Gordon returns a list of all the recipes which contain that keyword
+2. User searches for a specific recipe by either keyword, calories, difficulty, ingredients, price or tags.
+3. Gordon returns a list of all the recipes which contain what the user is looking for
 4. User checks the recipe for cooking
 
 Use case ends.
@@ -278,6 +295,31 @@ Use case ends.
 * The given recipe does not exist
   * Gordon shows an error message
   * Use case resumes from step 2
+
+**Use case: `untag`**
+
+**MSS:**
+1. User wants to remove a tag from a specific recipe
+2. Gordon removes the tag from the recipe
+3. User can now add a different tag to that recipe
+
+Use case ends.
+
+**Extensions**
+* The tag does not exist
+    * Use case ends.
+
+**Use case: `deleteTag`**
+
+**MSS:**
+1. User wants to delete a master tag from the database
+2. Gordon deletes the master tag from the cookbook
+
+Use case ends.
+
+**Extensions**
+* The tag does not exist
+    * Use case ends.
 
 ## Non-Functional Requirements
 

@@ -16,7 +16,6 @@ Calories (kcal):
 Ingredients needed: 
 1. water
 Method: 
-1. lol
 
 fried rice
 Calories (kcal): 
@@ -24,5 +23,4 @@ Calories (kcal):
 Ingredients needed: 
 1. 1
 Method: 
-1. 2
 
