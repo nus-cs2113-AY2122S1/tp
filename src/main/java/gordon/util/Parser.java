@@ -43,7 +43,7 @@ public class Parser {
 
     public Command parseMaster() {
         try {
-            if (parseCommand(line).equalsIgnoreCase("add")) {
+            if (parseCommand(line).equalsIgnoreCase("addRecipe")) {
                 return addRecipeParse();
             } else if (parseCommand(line).equalsIgnoreCase("deleteRecipe")) {
                 return deleteRecipeParse();
@@ -133,7 +133,7 @@ public class Parser {
 
     public AddCommand addRecipeParse() throws GordonException {
         String[] splitContent = line.split("/");
-        if (splitContent.length < 4) {
+        if (splitContent.length < 3) {
             throw new GordonException(GordonException.COMMAND_INVALID);
         }
 
@@ -142,7 +142,6 @@ public class Parser {
         Recipe r = new Recipe(parseName(splitContent[NAME_INDEX]));
         parseIngredients(splitContent[INGREDIENTS_INDEX], r);
         parseSteps(splitContent[STEPS_INDEX], r);
-        parseCalories(splitContent[CALORIES_INDEX], r);
         return new AddCommand(r);
     }
 
