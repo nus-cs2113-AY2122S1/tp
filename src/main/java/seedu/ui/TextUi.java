@@ -209,7 +209,10 @@ public abstract class TextUi {
                 + "       If no flag is specified, contact name is searched by default.\n"
                 + " Example: search -g QUERY\n\n"
                 + "help: Displays application usage instructions.\n"
-                + " Example: help";
+                + " Example: help\n\n"
+                + "import: Imports contacts from a CSV Text File.\n"
+                + " Note: Please ensure that data is saved in data/import.txt\n"
+                + " Example: import";
         printDoubleLineMessage(message);
     }
 
