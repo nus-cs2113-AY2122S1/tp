@@ -11,6 +11,25 @@ original source as well}
 
 ### Command
 
+![CommandClassDiagram](diagrams/diagram_images/CommandClassDiagram.png)
+
+The **Command** class diagram above shows how **Command** interact with other classes
+in MediVault.
+
+The Command Component consists of **17** subclasses where each subclass represents
+a command feature.
+
+Let `*` be either of the three class: `Stock`, `Order` or `Dispense`.
+* `Add*Command`: Adds a new `*` information into MediVault.
+* `Delete*Command`: Removes the visibility of the `*` record in MediVault.
+* `List*Command`: Lists the `*` records.
+* `Update*Command`: Updates the `*` information.
+* `ReceiveOrderCommand`: Marks an order as received and adds the ordered medication into the current stocks.
+* `ArchiveCommand`: Archives all the records before a given date. 
+* `PurgeCommand`: Wipes all record in MediVault.
+* `HelpCommand`: Shows the help page.
+* `ExitCommand`: Exits MediVault.
+
 ### Utilities
 
 {combine ui, storage, parser, comparators?}
