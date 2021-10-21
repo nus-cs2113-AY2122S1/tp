@@ -185,13 +185,30 @@ public class TextUi {
         System.out.println(DIVIDER);
     }
 
+    public static void showSingleLoanDeletedMessage(int indexOfLoan, Loan deletedLoan) {
+        System.out.println("Successfully deleted Loan " + indexOfLoan + "." + deletedLoan);
+        System.out.println(DIVIDER);
+    }
+
     public static void showAllExpenditureDeletedMessage() {
         System.out.println("Successfully deleted all Expenditures in this month!");
         System.out.println(DIVIDER);
     }
 
+    public static void showAllLoanDeletedMessage() {
+        System.out.println("Successfully deleted all Loans in this month!");
+        System.out.println(DIVIDER);
+    }
+
     public static void showMultipleExpenditureDeletedMessage(int index, int endIndex, Expenditure deletedExpenditure) {
         System.out.println("Successfully deleted Expenditure " + index + "." + deletedExpenditure);
+        if (index == endIndex) {
+            System.out.println(DIVIDER);
+        }
+    }
+
+    public static void showMultipleLoanDeletedMessage(int index, int endIndex, Loan deletedLoan) {
+        System.out.println("Successfully deleted Loan " + index + "." + deletedLoan);
         if (index == endIndex) {
             System.out.println(DIVIDER);
         }

@@ -79,6 +79,11 @@ public class AllRecordList {
         saveToStorage(storageDirectory);
     }
 
+    public void deleteLoan(int index, int month) {
+        allRecordList.get(month).deleteLoan(index);
+        saveToStorage(storageDirectory);
+    }
+
     public ArrayList<Expenditure> getExpenditureRecords(int month) {
         return allRecordList.get(month).getExpenditureRecords();
     }
@@ -101,6 +106,10 @@ public class AllRecordList {
 
     public Expenditure getExpenditure(int index, int month) {
         return allRecordList.get(month).getExpenditure(index);
+    }
+
+    public Loan getLoan(int index, int month) {
+        return allRecordList.get(month).getLoan(index);
     }
 
     public boolean checkOverspending(int month) {

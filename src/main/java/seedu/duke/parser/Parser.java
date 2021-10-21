@@ -6,10 +6,13 @@ import seedu.duke.commands.AddExpenditureCommand;
 import seedu.duke.commands.AddLoanCommand;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.DeleteAllExpenditureCommand;
+import seedu.duke.commands.DeleteAllLoanCommand;
 import seedu.duke.commands.DeleteBudgetCommand;
 import seedu.duke.commands.DeleteCommand;
 import seedu.duke.commands.DeleteMultipleExpenditureCommand;
 import seedu.duke.commands.DeleteSingleExpenditureCommand;
+import seedu.duke.commands.DeleteMultipleLoanCommand;
+import seedu.duke.commands.DeleteSingleLoanCommand;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
@@ -210,6 +213,8 @@ public class Parser {
                 return prepareDeleteBudgetCommand(commandParams);
             case ("e/"):
                 return prepareDeleteExpenditureCommand(commandParams);
+            case ("l/"):
+                return prepareDeleteLoanCommand(commandParams);
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
             }
@@ -272,6 +277,43 @@ public class Parser {
         } catch (NumberFormatException nfe) {
             return new InvalidCommand(
                     String.format(MESSAGE_INVALID_INDEX_OF_EXPENDITURE, DeleteSingleExpenditureCommand.MESSAGE_USAGE)
+            );
+        }
+    }
+
+    /**
+     * Splits the commandParams to get index/s of loan to be deleted.
+     *
+     * @param commandParams raw String input
+     * @return an DeleteExpenditureCommand with proper parameters
+     */
+    private Command prepareDeleteLoanCommand(String commandParams) {
+        try {
+            String[] split = commandParams.trim().split("l/|m/", 3);
+            assert split[0].equals("");
+            String indexOfMonthString = split[2].trim();
+            int month = Integer.parseInt(indexOfMonthString);
+            String indexOfLoanToBeDeleted = split[1].trim();
+            if (indexOfLoanToBeDeleted.length() == 1) {
+                int index;
+                index = Integer.parseInt(indexOfLoanToBeDeleted);
+                return new DeleteSingleLoanCommand(index, month);
+            } else if (indexOfLoanToBeDeleted.length() > 1) {
+                int startIndex;
+                int endIndex;
+                String[] indexSplit = indexOfLoanToBeDeleted.trim().split("-|",2);
+                String index1 = indexSplit[0].trim();
+                String index2 = indexSplit[1].trim();
+                startIndex = Integer.parseInt(index1);
+                endIndex = Integer.parseInt(index2);
+                return new DeleteMultipleLoanCommand(startIndex, endIndex, month);
+            }
+
+            return new DeleteAllLoanCommand(month);
+
+        } catch (NumberFormatException nfe) {
+            return new InvalidCommand(
+                    String.format(MESSAGE_INVALID_INDEX_OF_EXPENDITURE, DeleteSingleLoanCommand.MESSAGE_USAGE)
             );
         }
     }
