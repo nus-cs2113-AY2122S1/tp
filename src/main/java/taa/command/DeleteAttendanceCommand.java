@@ -10,14 +10,18 @@ import taa.storage.Storage;
 import taa.student.Student;
 import taa.util.Util;
 
-public class DeleteAttendanceCommand extends Command{
+public class DeleteAttendanceCommand extends Command {
     private static final String KEY_MODULE_CODE = "c";
     private static final String KEY_STUDENT_INDEX = "s";
     private static final String KEY_LESSON_NUMBER = "l";
-    private static final String[] DELETE_ATTENDANCE_ARGUMENT_KEYS = {KEY_MODULE_CODE, KEY_STUDENT_INDEX, KEY_LESSON_NUMBER};
+    private static final String[] DELETE_ATTENDANCE_ARGUMENT_KEYS = {
+        KEY_MODULE_CODE, 
+        KEY_STUDENT_INDEX,
+        KEY_LESSON_NUMBER
+    };
 
     private static final String MESSAGE_FORMAT_DELETE_ATTENDANCE_USAGE =
-        "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER>";
+            "%s %s/<MODULE_CODE> %s/<STUDENT_INDEX> %s/<LESSON_NUMBER>";
 
     private static final String MESSAGE_FORMAT_ATTENDANCE_DELETED = "Attendance removed for %s:\n  Lesson %s";
 
