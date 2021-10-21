@@ -1,5 +1,6 @@
-package gordon.command;
+package gordon.command.FindCommands;
 
+import gordon.command.Command;
 import gordon.kitchen.Cookbook;
 import gordon.kitchen.Recipe;
 import gordon.util.Difficulty;
