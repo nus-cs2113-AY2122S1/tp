@@ -7,7 +7,6 @@ import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
-import expiryeliminator.data.exception.NotFoundException;
 
 /**
  * Adds a recipe, together with the ingredients needed.
@@ -18,6 +17,9 @@ public class AddRecipeCommand extends Command {
 
     public static final String MESSAGE_RECIPE_ADDED = "I've added this recipe:\n" + "\n%1$s\n"
             + "Now you have %2$s recipe(s)";
+    public static final String MESSAGE_RECIPE_ADDED_WITH_REMINDER = "I've added this recipe:\n" + "\n%1$s\n"
+            + "Now you have %2$s recipe(s)\n" + "\nI've also added these ingredients:\n" + "\n%3$s\n"
+            + "Please update the unit if required.";
     public static final String MESSAGE_RECIPE_ALREADY_EXISTS = "Unable to add recipe: %1$s\n"
             + "You already have it in your list";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "Unable to add recipe: %1$s\n"
@@ -28,17 +30,18 @@ public class AddRecipeCommand extends Command {
             + "Parameters: r/RECIPE NAME i/INGREDIENT q/QUANTITY i/INGREDIENT q/QUANTITY ...\n"
             + "Example: " + COMMAND_WORD
             + " r/Chicken Soup i/Chicken q/1 i/Salt q/20 i/Ginger q/2";
+    public static final String MESSAGE_ILLEGAL_VALUE_ERROR = "Quantity of ingredients for recipe cannot be zero.";
 
     private final String name;
     private final ArrayList<String> ingredientNames;
     private final ArrayList<Integer> quantities;
 
     public AddRecipeCommand(String name, ArrayList<String> ingredientNames, ArrayList<Integer> quantities) {
-        assert name != null;
-        assert ingredientNames != null;
-        assert quantities != null;
-        assert ingredientNames.size() != 0;
-        assert ingredientNames.size() == quantities.size();
+        assert name != null : "Recipe name cannot be null";
+        assert ingredientNames != null : "Ingredient list cannot be null";
+        assert quantities != null : "Quantity list cannot be null";
+        assert ingredientNames.size() != 0 : "Ingredient list cannot be empty";
+        assert ingredientNames.size() == quantities.size() : "Quantity list cannot be empty";
         this.name = name;
         this.ingredientNames = ingredientNames;
         this.quantities = quantities;
@@ -50,16 +53,15 @@ public class AddRecipeCommand extends Command {
         assert recipes != null : "Recipe list cannot be null";
 
         final Recipe recipe = new Recipe(name);
+        String message = "";
 
         for (int i = 0; i < ingredientNames.size(); i++) {
             try {
-                recipe.add(ingredientNames.get(i), quantities.get(i), ingredients);
-            } catch (NotFoundException e) {
-                return "Ingredient does not exist";
+                message += recipe.add(ingredientNames.get(i), quantities.get(i), ingredients);
             } catch (DuplicateDataException e) {
                 return String.format(MESSAGE_DUPLICATE_INGREDIENT, name, ingredientNames.get(i));
             } catch (IllegalValueException e) {
-                return "Quantity of ingredients for recipe cannot be zero.";
+                return MESSAGE_ILLEGAL_VALUE_ERROR;
             }
         }
 
@@ -68,6 +70,9 @@ public class AddRecipeCommand extends Command {
         } catch (DuplicateDataException e) {
             return String.format(MESSAGE_RECIPE_ALREADY_EXISTS, name);
         }
-        return String.format(MESSAGE_RECIPE_ADDED, recipe, recipes.size());
+        if (message.equals("")) {
+            return String.format(MESSAGE_RECIPE_ADDED, recipe, recipes.size());
+        }
+        return String.format(MESSAGE_RECIPE_ADDED_WITH_REMINDER, recipe, recipes.size(),message);
     }
 }

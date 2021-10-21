@@ -141,6 +141,18 @@ public class IngredientRepository {
     }
 
     /**
+     * Returns the ingredient storage object corresponding to the given ingredient name. Allows null to be returned
+     * to allow ingredients to be added into storage if it's not found.
+     *
+     * @param ingredientName Name of ingredient.
+     * @return Ingredient storage object corresponding to the given ingredient name.
+     * @throws NotFoundException If ingredient does not exist in the repository.
+     */
+    public IngredientStorage findWithNullReturn(String ingredientName) {
+        return ingredients.get(ingredientName);
+    }
+
+    /**
      * Looks for the ingredients that are expiring within the week.
      *
      * @return the string representing the list of expiring ingredients.
