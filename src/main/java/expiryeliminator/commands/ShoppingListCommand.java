@@ -3,7 +3,10 @@ package expiryeliminator.commands;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
+import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
+
+import java.util.ArrayList;
 
 public class ShoppingListCommand extends Command{
 
@@ -16,19 +19,23 @@ public class ShoppingListCommand extends Command{
     public static final String MESSAGE_EMPTY_SHOPPING_LIST = "Your shopping list is empty!";
     public static final String MESSAGE_RECIPE_NOT_FOUND = "Sorry. No matching recipes found!";
 
-    private final String recipeDescription;
+    private final ArrayList<String> recipeDescriptions;
 
-    public ShoppingListCommand(String recipeDescription) {
-        this.recipeDescription = recipeDescription;
+    public ShoppingListCommand(ArrayList<String> recipeDescriptions) {
+        this.recipeDescriptions = recipeDescriptions;
     }
 
     @Override
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
         try {
-            Recipe recipe = recipes.findRecipe(recipeDescription);
-            String shoppingList = ingredients.generateShoppingList(recipe);
+            ArrayList<Recipe> recipeList = new ArrayList<>();
+            for (String recipeDescription : recipeDescriptions) {
+                Recipe recipe = recipes.findRecipe(recipeDescription);
+                recipeList.add(recipe);
+            }
+            String shoppingList = ingredients.generateShoppingList(recipeList);
             return shoppingList;
-        } catch (NotFoundException e) {
+        } catch (NotFoundException | IllegalValueException e) {
             return MESSAGE_RECIPE_NOT_FOUND;
         }
     }

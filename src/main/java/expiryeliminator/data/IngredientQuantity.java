@@ -49,6 +49,10 @@ public class IngredientQuantity {
         return quantity;
     }
 
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
     /**
      * Sets quantity associated with the ingredient.
      *

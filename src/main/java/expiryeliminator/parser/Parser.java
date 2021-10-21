@@ -59,6 +59,7 @@ public class Parser {
     private static final OptionalArgPrefix PREFIX_OPTIONAL_EXPIRY = new OptionalArgPrefix(PREFIX_EXPIRY);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_INGREDIENT = new MultipleArgPrefix(PREFIX_INGREDIENT);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_QUANTITY = new MultipleArgPrefix(PREFIX_QUANTITY);
+    private static final MultipleArgPrefix PREFIX_MULTIPLE_RECIPE = new MultipleArgPrefix(PREFIX_RECIPE);
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n%1$s";
     public static final String MESSAGE_INVALID_ARGUMENT_FORMAT = "Invalid argument format!\n%1$s";
@@ -109,7 +110,7 @@ public class Parser {
             case ViewRecipeCommand.COMMAND_WORD:
                 return prepareViewRecipe(args);
             case ShoppingListCommand.COMMAND_WORD:
-                return new ShoppingListCommand(args);
+                return prepareShoppingList(args);
             case ByeCommand.COMMAND_WORD:
                 return new ByeCommand();
             case HelpCommand.COMMAND_WORD:
@@ -262,5 +263,16 @@ public class Parser {
 
         final String recipe = new RecipeParser().parse(argParser.getSingleArg(PREFIX_RECIPE));
         return new ViewRecipeCommand(recipe);
+    }
+
+    private static Command prepareShoppingList(String args) throws InvalidArgFormatException {
+        final ArgParser argParser = new ArgParser(PREFIX_MULTIPLE_RECIPE);
+        try {
+            argParser.parse(args);
+        } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShoppingListCommand.MESSAGE_USAGE));
+        }
+        final ArrayList<String> recipe = new RecipeParser().parse(argParser.getArgList(PREFIX_MULTIPLE_RECIPE));
+        return new ShoppingListCommand(recipe);
     }
 }

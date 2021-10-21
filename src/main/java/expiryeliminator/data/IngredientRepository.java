@@ -220,12 +220,55 @@ public class IngredientRepository {
         }
     }
 
-    public String generateShoppingList(Recipe recipe) {
-        for(String ingredient : recipe.getIngredientQuantities().keySet()) {
+    public String generateShoppingList(ArrayList<Recipe> recipes) throws IllegalValueException {
 
+        StringBuilder shoppingList = new StringBuilder();
+        TreeMap<String, IngredientQuantity> totalIngredients = new TreeMap<>();
+
+        for(Recipe recipe : recipes) {
+            for(String ingredient : recipe.getIngredientQuantities().keySet()) {
+                int quantity = recipe.getIngredientQuantities().get(ingredient).getQuantity();
+                if(totalIngredients.containsKey(ingredient)) {
+                    try {
+                        int previousQuantity = totalIngredients.get(ingredient).getQuantity();
+                        totalIngredients.get(ingredient).setQuantity(quantity + previousQuantity);
+                    } catch (IllegalValueException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Ingredient ingredientItem = new Ingredient(ingredient);
+                    IngredientQuantity ingredientAndQuantityItem = new IngredientQuantity(ingredientItem, quantity);
+                    totalIngredients.put(ingredient, ingredientAndQuantityItem);
+                }
+            }
         }
-        return null;
-    }
 
+        for(String ingredientName : totalIngredients.keySet()) {
+            //get quantity in all recipes
+            IngredientQuantity ingredientAndQuantityItem = totalIngredients.get(ingredientName);
+            int quantityRequired = ingredientAndQuantityItem.getQuantity();
+            Ingredient ingredient = ingredientAndQuantityItem.getIngredient();
+
+            if(ingredients.containsKey(ingredientName)) {
+                //get quantity in fridge
+                IngredientStorage ingredientStorage = ingredients.get(ingredientName);
+                int quantityAvailable = ingredientStorage.getQuantity();
+                //compare
+                if(quantityAvailable < quantityRequired) {
+                    try {
+                        IngredientQuantity shoppingItem = new IngredientQuantity(ingredient, quantityRequired - quantityAvailable);
+                        shoppingList.append("\n").append(shoppingItem);
+                        //shoppingList.add(shoppingItem);
+                    } catch (IllegalValueException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                shoppingList.append("\n").append(ingredientAndQuantityItem);
+            }
+        }
+        return  shoppingList.toString();
+
+    }
 
 }
