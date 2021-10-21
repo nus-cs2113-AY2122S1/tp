@@ -166,6 +166,8 @@ public class ExceptionTextUi {
 
     public static void corruptLineMessage(String line) {
         printBottomLineMessage("Line \"" + line + "\" is corrupted and not loaded.");
+    public static void corruptPersonalContactMessage() {
+        printBottomLineMessage("Your personal contact file at data/me.txt is corrupted and not loaded.");
     }
 
     public static void forbiddenInputCommaMessage(String newUserInput) {
