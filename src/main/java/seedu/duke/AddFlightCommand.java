@@ -26,12 +26,9 @@ public class AddFlightCommand extends Command {
 
     /**
      * Executes the addition of flight to flight list.
-     *
-     * @param flights existing list of flights
-     * @param ui      user interface of TourPlanner
      */
     @Override
-    public void execute(ClientList clients, FlightList flights, TourList tours, Ui ui) {
+    public void execute() {
         flights.add(flight, ui);
         ui.showAddFlight(flight);
     }

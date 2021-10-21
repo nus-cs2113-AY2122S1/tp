@@ -8,11 +8,8 @@ public class ListCommand extends Command {
     /**
      * Executes listing of all clients in the existing client list.
      * If the list is empty, breaks out from execute early with an error message.
-     *
-     * @param clients existing list of clients
-     * @param ui         user interface of TourPlanner
      */
-    public void execute(ClientList clients, FlightList flights, TourList tours, Ui ui) {
+    public void execute() {
         int count = clients.getClientCount();
         if (count == 0) {
             System.out.println("I'm sorry, There seems to be no clients.");

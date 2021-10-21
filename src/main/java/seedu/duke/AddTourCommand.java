@@ -8,7 +8,7 @@ public class AddTourCommand extends Command {
     }
 
     @Override
-    public void execute(ClientList clients, FlightList flights, TourList tours, Ui ui) {
+    public void execute() {
         tours.add(tour);
         ui.showAddTour(tour);
     }

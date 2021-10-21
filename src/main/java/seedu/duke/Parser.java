@@ -83,23 +83,29 @@ public class Parser {
             throws TourPlannerException {
 
         List<String> prefixes = null;
+        int repeatPrefixChecker = 0;
 
         switch (identifier) {
         case "-c":
             prefixes = Arrays.asList("/cn", "/m");
+            repeatPrefixChecker = 3;
             break;
         case "-t":
             prefixes = Arrays.asList("/n", "/p");
+            repeatPrefixChecker = 3;
             break;
         case "-f":
             prefixes = Arrays.asList("/t", "/f", "/dt", "/df");
+            repeatPrefixChecker = 5;
             break;
         case "-p":
             prefixes = Arrays.asList("/c", "/t", "/f");
+            repeatPrefixChecker = 4;
             break;
         default:
             break;
         }
+
 //        if (!containAllPrefixes(argString, identifier)) {
 //            throw new TourPlannerException(ERROR_MISSING_PREFIXES);
 //        }
@@ -111,11 +117,11 @@ public class Parser {
             prefixIndexes.put(prefixIndex, prefix);
         });
 
-//        boolean isUniqueIndex = prefixIndexes.size() == 5;
+        boolean hasUniquePrefixes = prefixIndexes.size() == repeatPrefixChecker;
 
-//        if (!isUniqueIndex) {
-//            throw new TourPlannerException(ERROR_MISSING_NAME);
-//        }
+        if (!hasUniquePrefixes) {
+            throw new TourPlannerException(ERROR_MISSING_NAME);
+        }
         return prefixIndexes;
     }
 
@@ -147,8 +153,8 @@ public class Parser {
             extractedValues.add(value);
         }
 
-        String finalPrefix = prefixes.get(indexes.size()-1);
-        int finalIndex = indexes.get(indexes.size()-1);
+        String finalPrefix = prefixes.get(indexes.size() - 1);
+        int finalIndex = indexes.get(indexes.size() - 1);
 
 //        int inputIndex = obtainArrayIndex(finalPrefix);
         String value = extractValue(argString, finalPrefix, finalIndex, argString.length());
