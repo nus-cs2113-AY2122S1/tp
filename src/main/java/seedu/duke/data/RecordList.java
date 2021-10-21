@@ -80,6 +80,12 @@ public class RecordList {
         assert getExpenditureListSize() == numberOfRecords;
     }
 
+    public void deleteLoan(int index) {
+        loanRecords.remove(index - 1);
+        numberOfRecords -= 1;
+        assert getLoanListSize() == numberOfRecords;
+    }
+
     public ArrayList<Expenditure> getExpenditureRecords() {
         return expenditureRecords;
     }
@@ -112,6 +118,10 @@ public class RecordList {
 
     public Expenditure getExpenditure(int index) {
         return expenditureRecords.get(index);
+    }
+
+    public Loan getLoan(int index) {
+        return loanRecords.get(index);
     }
 
     public boolean checkOverspending() {
