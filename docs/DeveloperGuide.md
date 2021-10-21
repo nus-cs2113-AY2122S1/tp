@@ -154,7 +154,14 @@ Step 7: The `getAlerts()` method sends the data to the UI to display to the user
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|view my inventory|save time/labour|
+|v1.0|user|add new ingredients|keep track of new ingredients|
+|v1.0|user|remove ingredients|stop tracking ingredients that are no longer in use|
+|v1.0|user|update ingredient amount|change the amount of an ingredient if I have bought/ used some|
+|v2.0|user|receive alerts of ingredients expiring|use the ingredients before they expire and avoid wastage|
+|v2.0|user|receive alerts of ingredients that are running out|place orders to replenish stock preemptively|
+|v2.0|user|determine the threshold for alerts myself|adjust when I receive alerts based on demand and supply|
+|v2.0|user|find stock of an ingredient by name|view stock of an ingredient without having to go through the entire list|
 
 ## Non-Functional Requirements
 
