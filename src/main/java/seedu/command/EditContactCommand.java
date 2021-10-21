@@ -7,7 +7,9 @@ import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
 import seedu.ui.UserInputTextUi;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EditContactCommand extends Command {
     public static final int NAME_INDEX = 0;
@@ -43,6 +45,7 @@ public class EditContactCommand extends Command {
     private Boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
             throws InvalidFlagException {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
+        Boolean[] hasEditedField = hasEditedFieldChecker(contactDetails);
         String[] postEditContactDetails = extractContactDetails(postEditContact);
         for (int i = 0; i < contactList.getListSize(); i++) {
             if (i == contactIndex) {
@@ -50,6 +53,9 @@ public class EditContactCommand extends Command {
             }
             String[] currentContactDetails = extractContactDetails(contactList.getContactAtIndex(i));
             for (int j = 0; j < NUMBER_OF_FIELDS; j++) {
+                if (!hasEditedField[j]) {
+                    continue;
+                }
                 if (postEditContactDetails[j] != null && currentContactDetails[j] != null) {
                     if (hasDuplicateField(postEditContactDetails[j], currentContactDetails[j])) {
                         duplicatedIndex.add(i);
@@ -57,7 +63,6 @@ public class EditContactCommand extends Command {
                     }
                 }
             }
-
         }
         if (!duplicatedIndex.isEmpty()) {
             TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, "edit");
