@@ -47,9 +47,14 @@ public class Main {
         uiBot.printClock();
         TimeModeGame g = new TimeModeGame(content.getContent(), LINE_LENGTH);
         DataProcessor p = new DataProcessor(g);
-        uiBot.showAnimatedSummary(p.getErrorWordCount(), p.getErrorPercentage(), p.getWordPerMinute(),
-                p.getTotalWordTyped(), p.totalTime);
-    }
+        uiBot.showSummary(
+                p.getErrorWordCount(),
+                p.getErrorPercentage(),
+                p.getErrorWords(),
+                p.getWordPerMinute(),
+                p.getTotalWordTyped(),
+                p.totalTime
+        );    }
 
     public void executeCommand(Parser c, StorageFile storage) throws InvalidStringInputException, InterruptedException {
         switch (c.getCommand()) {

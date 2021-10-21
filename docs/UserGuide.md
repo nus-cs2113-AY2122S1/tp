@@ -11,8 +11,22 @@
 1. Ensure that you have Java 11 or above installed.
 1. Down the latest version of `Duke` from [here](http://link.to/duke).
 
+## Features
 ### Usage
 ### Open Game
+
+### {Feature name}: {`Keyword`}
+Description of feature  
+Format: {format of command}
+* Explanation 1 of format
+* Explanation 2 of format
+<!-- -->
+Examples
+* command example 1
+* command example 2
+<!-- -->
+
+
 
 ### `Keyword` - Describe action
 
@@ -29,6 +43,9 @@ List of the keywords are shown below:
 `error`-Enter a error detecting game mode
 
 `bye`-Exit the program.
+
+### Showing summary of a game
+Statistics of game is shown automatically after a game is finished.
 
 ## Example of usage:
 
