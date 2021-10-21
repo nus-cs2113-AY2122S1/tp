@@ -69,6 +69,11 @@ public class TimetableLesson extends TimetableItem {
         return parseLessonType(this.type);
     }
 
+    @Override
+    public String getType() {
+        return getLessonType().toString() + "[" + getClassNo() + "]";
+    }
+
     /**
      * Getter for the Venue that Lesson is held at.
      * 
@@ -90,21 +95,4 @@ public class TimetableLesson extends TimetableItem {
                 && this.getLessonType().equals(lesson.getLessonType());
     }
 
-    public String printTypeInfo(LineType type) {
-        String str = "|   ";
-        switch (type) {
-        case CODE:
-            str += getTitle();
-            break;
-        case LESSONTYPE:
-            str += String.format("%s[%s]", getLessonType().toString(), getClassNo());
-            break;
-        case VENUE:
-            str += getVenue();
-            break;
-        default:
-            str += "";
-        }
-        return str;
-    }
 }
