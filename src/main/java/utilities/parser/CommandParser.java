@@ -50,6 +50,8 @@ import static utilities.parser.Mode.STOCK;
  */
 
 public class CommandParser {
+    public CommandParser(){
+    }
 
     private static final String DELIMITER = "/";
 
@@ -62,7 +64,7 @@ public class CommandParser {
      * @return A Command object.
      * @throws InvalidCommand If a command does not exist.
      */
-    public static Command processCommand(String command, String parametersString, Mode mode) throws InvalidCommand {
+    public Command processCommand(String command, String parametersString, Mode mode) throws InvalidCommand {
         // Append user's command with mode
         if (command.equals(ADD) || command.equals(LIST) || command.equals(UPDATE)
                 || command.equals(DELETE)) {
@@ -120,7 +122,7 @@ public class CommandParser {
      * @return Array of string with size 2 with index 0 representing the command and index 1 representing the
      *     command parameters.
      */
-    public static String[] parseCommand(String userInput) {
+    public String[] parseCommand(String userInput) {
         // Splits user input by spaces
         String[] userInputSplit = userInput.split("\\s+", 2);
 
@@ -140,7 +142,7 @@ public class CommandParser {
      * @param parameterString String of parameters.
      * @return HashMap with parameter as key and parameter contents as value.
      */
-    public static LinkedHashMap<String, String> parseParameters(String parameterString) {
+    public LinkedHashMap<String, String> parseParameters(String parameterString) {
         LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
 
         if (parameterString.equals("")) { // Ensure parameter string is not empty
@@ -185,7 +187,7 @@ public class CommandParser {
      * @param mode    Current mode of the program.
      * @return New mode requested by the user.
      */
-    public static Mode changeMode(Ui ui, String command, Mode mode) {
+    public Mode changeMode(Ui ui, String command, Mode mode) {
         Mode newMode = mode;
         if (command.equalsIgnoreCase(STOCK.name()) && !mode.name().equalsIgnoreCase(STOCK.name())) {
             newMode = STOCK;
