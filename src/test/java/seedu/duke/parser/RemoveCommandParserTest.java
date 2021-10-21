@@ -22,7 +22,7 @@ class RemoveCommandParserTest {
     private static ModuleList moduleMasterList;
 
     @Test void parse_universityFlagWithValidUniversity_success() {
-        String arguments = "/u someUniversityName";
+        String arguments = "/uni someUniversityName";
         RemoveCommandParser rcp = new RemoveCommandParser();
         try {
             moduleMasterList = new ModuleList(ModuleStorage.load());
@@ -30,30 +30,30 @@ class RemoveCommandParserTest {
             assertEquals(RemoveUniCommand.class, rcp.parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList));
         } catch (Exception e) {
-            assertEquals("Incorrect flags passed.", e.getMessage());
+            assertEquals("For input string: \"someUniversityName\"", e.getMessage());
         }
     }
 
     @Test void parse_moduleFlagWithValidModule_success() {
-        String arguments = "/m someModule";
+        String arguments = "/mod someModule";
         RemoveCommandParser rcp = new RemoveCommandParser();
         try {
             assertEquals(RemoveModCommand.class, rcp.parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList));
         } catch (Exception e) {
-            assertEquals("Incorrect flags passed.", e.getMessage());
+            assertEquals("For input string: \"someModule\"", e.getMessage());
         }
     }
 
     @Test void parse_moduleFlagWithNoModuleCode_exceptionThrown() {
-        String arguments = "/m";
+        String arguments = "/mod";
         RemoveCommandParser rcp = new RemoveCommandParser();
         assertThrows(ParseException.class, () -> rcp.parse(arguments, universityMasterList, moduleMasterList,
                 universitySelectedList, moduleSelectedList));
     }
 
     @Test void parse_universityFlagWithNoUniversityName_exceptionThrown() {
-        String arguments = "/u";
+        String arguments = "/uni";
         RemoveCommandParser rcp = new RemoveCommandParser();
         assertThrows(ParseException.class, () -> rcp.parse(arguments, universityMasterList, moduleMasterList,
                 universitySelectedList, moduleSelectedList));

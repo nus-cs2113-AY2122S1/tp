@@ -43,7 +43,6 @@ public class AddModCommand extends Command {
                 .getModuleCode().equals(moduleToAdd.getModuleCode());
         SelectedModuleStorage.write(moduleSelectedList);
         System.out.println("New module added: ");
-        Ui.printIndex(moduleIndexToAdd, false);
         Ui.printModule(moduleToAdd, moduleIndexToAdd);
     }
 }
