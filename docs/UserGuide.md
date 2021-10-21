@@ -311,6 +311,31 @@ Expected output:
 ```
 
 ### Adding an order: `addorder`
+Adds an order for medicine.
+* The date parameter is optional, if there is no input for date, MediVault will set it as the date you added in the order. 
+  * Assuming you place an order on 21 October 2021:
+    * `addorder n/panadol q/150 d/21-10-2021` is the same as `addorder n/panadol q/150`
+* If the order quantity exceeds the maximum stock quantity allowed, you are unable to add that order.
+
+Format: `addorder n/NAME q/QUANTITY {d/DATE}`
+
+Example 1: `addorder n/panadol q/150 d/21-10-2021`
+
+Expected Output:
+```
++====+=========+==========+============+=========+
+| ID |  NAME   | QUANTITY |    DATE    | STATUS  |
++====+=========+==========+============+=========+
+| 1  | panadol |   150    | 21-10-2021 | PENDING |
++----+---------+----------+------------+---------+
+```
+
+Example 2: `addorder n/panadol q/1000`
+
+Expected Output:
+```
+Order for panadol exists. Unable to add order as total order quantity exceeds maximum stock quantity.
+```
 
 ### Deleting an order: `deleteorder`
 Deletes order by specifying the order Id.

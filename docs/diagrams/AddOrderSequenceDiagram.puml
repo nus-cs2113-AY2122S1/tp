@@ -38,17 +38,23 @@ autoactivate on
                 alt !nameExistsInStock
                     alt orderQuantity < maxQuantity
                         addorder -> addorder : addDate()
+                        addorder --> addorder : orderDate
                         addorder -> addorder : addOrder()
+                        addorder --> addorder
                     end
                 else nameExistsInStock
                     alt orderQuantity + existingOrdersQuantity + existingStockQuantity <= maxQuantity
                         addorder -> addorder : addDate()
+                        addorder --> addorder : orderDate
                         addorder -> addorder : addOrder()
+                        addorder --> addorder
                     else ui.print()
                     end
             else !nameExistsInorder
                 addorder -> addorder : addDate()
+                addorder --> addorder : orderDate
                 addorder -> addorder : addOrder()
+                addorder --> addorder
             end
         addorder -> storage: getInstance()
         addorder <-- storage
