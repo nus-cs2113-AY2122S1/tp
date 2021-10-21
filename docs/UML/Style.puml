@@ -18,6 +18,10 @@
 !define LOGIC_YELLOW_4 #3c5648
 !define LOGIC_YELLOW_5 #DFF3B3
 
+!define LOGIC_RED_1 #E1300A
+
+!define LOGIC_MAGENTA_1 #FA21E3
+
 skinparam backgroundColor white
 skinparam defaultFontName Arial
 skinparam shadowing false

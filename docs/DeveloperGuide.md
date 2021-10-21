@@ -4,11 +4,34 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+## Getting started
+
+### Recommended software (for optimal compatibility)
+
+* Github
+* Sourcetree (for version control)
+* IntelliJ IDEA (IDE)
+* Amazon Coretto
+
+### Setting up this project in your computer
+
+1. **On Github, fork this repo by clicking on the fork button**
+1. **In Sourcetree, clone the fork into your computer**
+   1. Open a new tab
+   1. Select the clone button at the top of the menu
+   1. Key in the details of this repository
+1. **Configure the JDK:** Follow the guide [Project Configuration/ SDKs](https://www.jetbrains.com/help/idea/sdk.html) to ensure that Intellij is configured to use JDK 11.
+1. **Import the project as a Gradle project:** Follow the guide [Intellij IDEA: Importing a Gradle project
+   ](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
+1. **Verify the setup:**
+   1. Run the seedu.address.Main and try a few commands.
+   1. Run the tests to ensure they all pass.
+
 ## Design
 
 ### Architecture
 
-![Sequence Diagram](./RenderedUML/ArchitectureDiagram.svg)
+![Architecture Diagram](./RenderedUML/ArchitectureDiagram.svg)
 
 The Diagram above explains how the App is designed and will function
 
@@ -32,13 +55,13 @@ The App is organized by the `command`, `exception`, `kitchen`, and `util` packag
 
 The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
-![Sequence Diagram](./RenderedUML/AddSequence.svg)
+![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138207270-83d59ba2-b753-4a0f-bf46-7710921511d6.png)
 
 ### Cookbook component
 
 The Diagram below is the class diagram for the ``Cookbook`` class
 
-![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
+![Cookbook Class Diagram](https://user-images.githubusercontent.com/65898007/138207292-1d989a95-f4b2-468a-9076-94ce74e8248b.png)
 
 The `Cookbook` Class is instantiated by the `Gordon` Class, and manages the recipes and tags of the cookbook.
 
@@ -76,16 +99,24 @@ The `Cookbook` class can be classified into 3 main functionalities:
 
 ### Recipe component
 
-The Diagram below is the class diagram for the Recipe class
-
-![Recipe Class Diagram](https://user-images.githubusercontent.com/65898007/138097156-7f23bda4-f1bc-41e3-8e85-36eeac273dec.png)
-
 ### Parser component
 
+The diagram below is the class diagram for the `Parser` class
+
+
+
+Functions of the Parser class:
+* Reads in user input by implementing the `Scanner` class
+  * The parseMaster() method parses through the user's input to find the best match for the user's intended command
+  * The corresponding command is then returned to the `Gordon` class
+* Prints responses to the console by implementing the `UI` class
+
 ### Command component
-![Command Class Diagram](./RenderedUML/CommandRects.svg)
+![Command Class Diagram](https://user-images.githubusercontent.com/65898007/138222993-ad90002c-80bc-4d74-aa2a-f267765d812c.png)
 
 ### Storage component
+
+### UI Component
 
 ## Implementation
 
