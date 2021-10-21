@@ -5,12 +5,11 @@
 
 box Command COLOR_COMMAND_BOX
     participant ":List*Command" as list COLOR_COMMAND
-    participant "<<class>>\nCommandSyntax" as commandSyntax COLOR_COMMAND
 end box
 
 box Utilities COLOR_UTILITIES_BOX
     participant "<<class>>\nUi" as ui COLOR_UTILITIES
-    participant "<<class>>\n *Validator" as validator COLOR_UTILITIES
+    participant ":*Validator" as validator COLOR_UTILITIES
     participant ":*Comparator" as comparator COLOR_UTILITIES
 end box
 
@@ -24,8 +23,12 @@ autoactivate on
 -> list: execute()
 list -> ui : getInstance()
 list <-- ui
-list -> commandSyntax : containsInvalidParameters()
-list <-- commandSyntax : isInvalidParameter
+
+create validator
+list -> validator : new *Validator()
+list <-- validator
+list -> validator : containsInvalidParameters()
+list <-- validator : isInvalidParameter
 
 opt !isInvalidParameter
     list -> medicine : getInstance()
