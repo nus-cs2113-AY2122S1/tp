@@ -10,7 +10,8 @@ import seedu.duke.universities.UniversityList;
 import java.io.IOException;
 
 public class ListUniCommand extends Command {
-    public ListUniCommand(UniversityList universityList, UniversityList universityMasterList, ListType type) throws IOException {
+    public ListUniCommand(UniversityList universityList, UniversityList universityMasterList,
+                          ListType type) throws IOException {
         if (universityList.getSize() == 0) {
             assert universityList.getSize() == 0;
             System.out.println("The university list is empty!");
