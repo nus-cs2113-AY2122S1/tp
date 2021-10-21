@@ -42,7 +42,7 @@ public class SelectedUniversityStorage {
             String line = scanner.nextLine();
             if (curr.equals(" ")) {
                 curr = line;
-            } else if (!curr.contains("#")) {
+            } else if (!line.contains("#")) {
                 universities.add(new University(curr, moduleMappings));
                 curr = line;
                 moduleMappings = new ArrayList<>();

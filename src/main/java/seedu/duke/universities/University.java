@@ -11,6 +11,11 @@ public class University {
     protected String name;
     public ArrayList<ModuleMapping> list;
 
+    public University(String name) {
+        this.name = name;
+        this.list = new ArrayList<>();
+    }
+
     public University(String name, ArrayList<ModuleMapping> list) {
         this.name = name;
         this.list = list;
