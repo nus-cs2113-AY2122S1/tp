@@ -87,7 +87,7 @@ public class Ui {
         }
     }
 
-    private void printList(ArrayList itemList) {
+    private void printList(ArrayList<?> itemList) {
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i) != null) {
                 printText((i + 1) + ". " + itemList.get(i));
@@ -95,32 +95,36 @@ public class Ui {
         }
     }
 
-    private void printMap(Map<String, ArrayList> map) {
-        for (Map.Entry<String, ArrayList> m : map.entrySet()) {
+    private void printMap(Map<String, ArrayList<?>> map) {
+        for (Map.Entry<String, ArrayList<?>> m : map.entrySet()) {
             printText(m.getKey());
             printList(m.getValue());
         }
     }
 
-    private void printTable(Map<Exercise, ArrayList> map) {
+    private void printTable(Map<String, ArrayList<?>> map) {
         assert !map.isEmpty();
 
-        for (Map.Entry<Exercise, ArrayList> m : map.entrySet()) {
+        for (Map.Entry<String, ArrayList<?>> m : map.entrySet()) {
             AsciiTable at = new AsciiTable();
             at.addRule();
             String[] columnNames = {"Index", "Exercise name", "Sets", "Reps"};
             at.addRow((Object[]) columnNames);
             at.addRule();
-            Exercise workoutName = m.getKey();
-            System.out.println(prefix + workoutName.getDescription().replace("\n", newLine));
-            ArrayList exercises = m.getValue();
-            for (int i = 0; i < exercises.size(); i++) {
-                String displayIndex = String.valueOf(i + 1);
-                String exerciseName = (String) exercises.get(i);
-                int sets = workoutName.getSets();
-                int reps = workoutName.getReps();
-                at.addRow(displayIndex, exerciseName, sets, reps);
-                at.addRule();
+            String workoutName = m.getKey();
+            printText(workoutName);
+
+            ArrayList<?> list = m.getValue();
+            for (int i = 0; i < list.size(); i++) {
+                Object e = list.get(i);
+                if (e instanceof Exercise) {
+                    String displayIndex = String.valueOf(i + 1);
+                    String exerciseName = ((Exercise) e).getDescription();
+                    int sets = ((Exercise) e).getSets();
+                    int reps = ((Exercise) e).getReps();
+                    at.addRow(displayIndex, exerciseName, sets, reps);
+                    at.addRule();
+                }
             }
             System.out.println(at.render());
         }
@@ -135,13 +139,14 @@ public class Ui {
         if (result.itemList != null) {
             printList(result.itemList);
         }
-        /*        if (result.map != null) {
+
+        if (result.map != null) {
             if (result.isTable) {
                 printTable(result.map);
             } else {
-                //printMap(result.map);
+                printMap(result.map);
             }
-        }*/
+        }
 
         printLineSeparator();
 

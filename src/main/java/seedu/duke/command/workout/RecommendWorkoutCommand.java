@@ -56,7 +56,7 @@ public class RecommendWorkoutCommand extends Command {
      *
      * @param workoutLevel is the difficulty of the workouts
      */
-    private Map<String, ArrayList> getRecommendedWorkouts(String workoutLevel) {
+    private Map<String, ArrayList<?>> getRecommendedWorkouts(String workoutLevel) {
         switch (workoutLevel) {
         case "beginner":
             return getBeginnerWorkout();
@@ -88,8 +88,8 @@ public class RecommendWorkoutCommand extends Command {
         return abExercises;
     }
 
-    private Map<String, ArrayList> getBeginnerWorkout() {
-        Map<String, ArrayList> map = new HashMap<>();
+    private Map<String, ArrayList<?>> getBeginnerWorkout() {
+        Map<String, ArrayList<?>> map = new HashMap<>();
         ArrayList<Exercise> armExercises = getBeginnerArmWorkout();
         map.put("Arm", armExercises);
 
@@ -117,8 +117,8 @@ public class RecommendWorkoutCommand extends Command {
         return glutesExercises;
     }
 
-    private Map<String, ArrayList> getIntermediateWorkout() {
-        Map<String, ArrayList> map = new HashMap<>();
+    private Map<String, ArrayList<?>> getIntermediateWorkout() {
+        Map<String, ArrayList<?>> map = new HashMap<>();
 
         ArrayList<Exercise> shoulderExercises = getIntermediateShoulderWorkout();
         map.put("Shoulders", shoulderExercises);
@@ -156,8 +156,8 @@ public class RecommendWorkoutCommand extends Command {
         return legExercises;
     }
 
-    private Map<String, ArrayList> getProWorkout() {
-        Map<String, ArrayList> map = new HashMap<>();
+    private Map<String, ArrayList<?>> getProWorkout() {
+        Map<String, ArrayList<?>> map = new HashMap<>();
 
         ArrayList<Exercise> pushExercises = getProPushWorkout();
         map.put("Push Workout", pushExercises);

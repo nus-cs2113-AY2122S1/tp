@@ -39,7 +39,7 @@ public class SearchCommand extends Command {
 
     @Override
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
-        Map<String, ArrayList> map = new HashMap<>();
+        Map<String, ArrayList<?>> map = new HashMap<>();
         ArrayList<Workout> workoutList = workouts.getAllWorkouts();
 
         boolean matchingWorkoutsFound = getMatchingWorkouts(map, workoutList);
@@ -52,7 +52,7 @@ public class SearchCommand extends Command {
         return new CommandResult(map, false);
     }
 
-    private boolean getMatchingWorkouts(Map<String, ArrayList> map, ArrayList<Workout> workoutList) {
+    private boolean getMatchingWorkouts(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
         boolean matchesFound = false;
         ArrayList<Workout> filteredWorkouts = getFilteredWorkoutsWithWorkoutIndex(workoutList);
         if (!filteredWorkouts.isEmpty()) {
@@ -62,7 +62,7 @@ public class SearchCommand extends Command {
         return matchesFound;
     }
 
-    private boolean getMatchingExercises(Map<String, ArrayList> map, ArrayList<Workout> workoutList) {
+    private boolean getMatchingExercises(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
         boolean matchingWorkouts = false;
 
         for (int i = 0; i < workoutList.size(); i++) {
