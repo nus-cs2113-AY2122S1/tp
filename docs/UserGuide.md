@@ -11,8 +11,8 @@ It is an integrated solution that provides real-time tracking of stock, orders a
 * [Features](#features)
     * [Changing modes](#changing-modes)
     * [Add medication stock](#adding-a-medication-stock-addstock)
-    * [Delete medication stock](#deleting-a-medication-stock-delete)
-    * [Update medication stock](#updating-medication-stock-information-update)
+    * [Delete medication stock](#deleting-a-medication-stock-deletestock)
+    * [Update medication stock](#updating-medication-stock-information-updatestock)
     * [List medication stock](#listing-medication-stock--liststock)
     * [Add dispense record](#adding-a-dispense-record-adddispense)
     * [Delete dispense record](#deleting-a-dispense-record-deletedispense)
@@ -104,7 +104,7 @@ Medication added: paracetamol
 +----+-------------+--------+----------+-------------+------------------------------+--------------+
 ```
 
-### Deleting a medication stock: `delete`
+### Deleting a medication stock: `deletestock`
 
 Deletes medication from the inventory.
 
@@ -129,31 +129,34 @@ Expected output:
 Deleted expired medications! Rows deleted: 4
 ```
 
-### Updating medication stock information: `update`
+### Updating medication stock information: `updatestock`
 
-Edit an existing medication information in the inventory.
+Edits an existing medication stock information in the inventory.
 
 * Edits the optional parameters specified by the stock Id that you input.
-    * The stock Id must exist in MediVault.
-* You cannot update the stock Id.
-* If you include the `n/NAME`, `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, MediVault updates all entries that has
-  same existing medication name given the
-  `i/STOCK_ID` with your input values for these parameters.
+    * The Stock Id must exist in MediVault.
+* You cannot update the Stock Id. The allocation of Id is determined by MediVault.
+* If you include the `n/NAME`, `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, MediVault updates 
+**all** entries that has same existing medication name given the `i/STOCK_ID` with your input values for these parameters.
+* A new Stock Id will be assigned to the current stock if you update a medication stock information. 
 
-Format: `update i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
+Format: `updatestock i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
 
 Example:
-`update i/1 n/panadol p/20 q/50 e/01-12-2021 d/Best medicine to cure headache, fever and pains m/100`
+`update i/3 n/amoxil p/20 q/50 e/01-12-2021 d/Treats infections to ear, nose, throat, skin, or urinary tract m/100`
 
 Expected output:
 
 ```
 Updated! Number of rows affected: 1
-+====+=========+========+==========+=============+=================================================+==============+
-| ID |  NAME   | PRICE  | QUANTITY | EXPIRY_DATE |                   DESCRIPTION                   | MAX_QUANTITY | 
-+====+=========+========+==========+=============+=================================================+==============+
-| 1  | panadol | $20.00 |    50    | 01-12-2021  | Best medicine to cure headache, fever and pains |     100      | 
-+----+---------+--------+----------+-------------+-------------------------------------------------+--------------+
+Stock Id changed from:
+3 -> 7
++====+========+========+==========+=============+===============================================+==============+
+| ID |  NAME  | PRICE  | QUANTITY | EXPIRY_DATE |                  DESCRIPTION                  | MAX_QUANTITY | 
++====+========+========+==========+=============+===============================================+==============+
+| 7  | amoxil | $20.00 |    50    | 01-12-2021  | Treats infections to ear, nose, throat, skin, |     100      | 
+|    |        |        |          |             |                or urinary tract               |              | 
++----+--------+--------+----------+-------------+-----------------------------------------------+--------------+
 ```
 
 ### Listing medication stock : `liststock`
@@ -211,7 +214,7 @@ Expected output:
 ```
 
 ### Adding a dispense record: `adddispense`
-Add a dispense.
+Adds a dispense.
 
 Format: `adddispense n/NAME q/QUANTITY s/STAFF c/CUSTOMER_ID`
 
@@ -235,6 +238,27 @@ Dispense deleted for Dispense Id 3
 ```
 
 ### Updating dispense record: `updatedispense`
+
+Edits an existing medication dispense information in the inventory.
+
+* A new Dispense Id will be assigned to the current dispense record if you update a medication dispense information.
+* You cannot update either the Stock or the Dispense Id. The allocation of Id is determined by MediVault.
+* When you update a dispense information, the stock information may be affected as well
+
+Format: `updatedispense i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
+
+Example: `updatedispense i/1 q/5`
+
+Expected output:
+```
+Restored 5 PANADOL
+Updated dispense information!
++====+=========+==========+=============+============+=======+==========+
+| ID |  NAME   | QUANTITY | CUSTOMER ID |    DATE    | STAFF | STOCK ID | 
++====+=========+==========+=============+============+=======+==========+
+| 6  | PANADOL |    5     |  S1234567A  | 09-10-2021 | Jane  |    1     | 
++----+---------+----------+-------------+------------+-------+----------+
+```
 
 ### Listing dispense record : `listdispense`
 
@@ -301,6 +325,27 @@ Order deleted for Order Id 1
 ```
 
 ### Updating order: `updateorder`
+
+Edits an existing medication order information in the inventory.
+
+* You cannot update the Order Id or the status of the order.
+  * The allocation of Id is determined by MediVault.
+  * The status of the order will only be changed when you run the `receiveorder` command.
+* When you update an order information, MediVault reflects the pending stocks shown in the current medication stocks.
+
+Format: `updateorder i/ID [n/name q/QUANTITY c/CUSTOMER_ID d/DATE s/STAFF_NAME]`
+
+Example: `updateorder i/1 q/50`
+
+Expected output:
+```
+Updated! Number of rows affected: 1
++====+=========+==========+============+=========+
+| ID |  NAME   | QUANTITY |    DATE    | STATUS  | 
++====+=========+==========+============+=========+
+| 1  | PANADOL |    50    | 09-10-2021 | PENDING | 
++----+---------+----------+------------+---------+
+```
 
 ### Listing order : `listorder`
 
