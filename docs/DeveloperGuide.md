@@ -6,8 +6,21 @@
 
 ## Design & implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+{TO DELETE: Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
+This section describes some noteworthy details on how certain features are designed and implemented.
+
+### Storage component
+
+#### Save Functionality
+
+![](images/SaveDiagram.png)
+
+How the `save` functionality works: 
+1. When the `save` method is called, it constructs a new `File` object using the configured `DEFAULT_FILE_PATH`
+2. Checks for the presence of the `File` object on the local system and creates the `data` directory and `.txt` file if required.
+3. For each `Event` in the provided `eventsList`, the `encodeEventsList` method will be called to parse each event and its respective tasks into an overall `ArrayList<String>` and return this. 
+4. The `writeToFile` method will be called to write the returned `ArrayList<String>` into the `.txt` save file locally for future uses of the program.
 
 ## Product scope
 ### Target user profile
