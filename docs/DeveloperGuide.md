@@ -24,14 +24,73 @@ original source as well}
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 ## Implementation
+###Delete feature
+The delete feature collaborates with other classes like Parser, RecordList, etc. Basically it contains two usages which are deletion of Budget and deletion of Expenditure.
+
+When user keys delete b/ m/MONTH , The Parser class will analyse the whole command, and extract “b/” and “MONTH”. Then the class DeleteBudgetCommand will execute the deletion by using recordList.deleteBudget(MONTH).
+
+Similarly, we have our Parser to parse the commands for deletion of expenditures:
+* ```delete e/ m/MONTH``` — If the value at the position after ‘e/’ is “”, we use for loop to delete all expenditures within a month.
+* ```delete e/INDEX m/MONTH``` — If the value at the position after ‘e/’ is an integer, we use DeleteSingleExpenditureCommand to delete this specific expenditure in this specific month.
+* ```delete e/INDEX-INDEX m/MONTH``` — If the value at the position after ‘e/’ is a range of integers, we firstly use split[] to extract the starting and ending integers, and then we use DeleteMultipleExpenditureCommand to delete the expenditures in this range in this specific month. (also by using for loop)
+
+<br/>
+
+All the delete command classes (DeleteAllExpenditureCommand, DeleteSingleExpenditureCommand, DeleteMultipleExpenditureCommand, and DeleteBudgetCommand) extend from DeleteCommand class, and DeleteCommand class extends from Command class. Inside each command class, we have a constructor and an override function called execute to execute the specific deletion task assigned to them.
+
+<br/>
+
+Given below is an example usage scenario and how the delete feature behaves at each step.
+
+<br/>
+
+**Step 1**. The user launches the application for the first time.
+<br/> **Step 2**. The user adds a budget and some expenditures to the current month.
+<br/> **Step 3**. The user finds that the budget is a bit insufficient, thus the user wants to delete some of the expenditures.
+<br/> **Step 4**. After consideration, the user decides to delete expenditure 3-5, so he keys ```delete e/3-5 m/10```
+<br/> **Step 5**. The Parser starts to parse the command, it extracts starting index 3, ending index 5, and month 10. As this is a range of expenditures to be deleted, the Parser class calls DeleteMultipleExpenditureCommand to work. By using a for loop, the 3 expenditures are successfully deleted and prints out a showMultipleExpenditureDeletedMessage from TextUi class.
+
+
+###Edit feature
+
+The edit mechanism is facilitated by AllRecordList which extends from RecordList. It implements the following operations:
+* ```AllRecordList#editBudget()``` — Edits a budget to the record list.
+* ```AllRecordList#editExpenditure()``` — Edits an expenditure to the record list.
+* ```AllRecordList#editLoan()``` —Edits a loan record to the record list.
+
+<br/>
+
+These operations are exposed in the ```EditBudgetCommand```, ```EditExpenditureCommand``` and ```EditLoanCommand``` classes, which extend from the ```Command``` subclass as ```EditBudget#execute()```, ```EditExpenditure#execute()``` and ```EditLoan#execute()``` respectively.
+
+<br/>
+
+Given below is an example usage scenario and how the ```edit``` mechanism behaves at each step.
+
+<br/>
+
+**Step 1**. The user launches the application for the first time. The ```AllRecordList``` will be initialized with the initial record list state.
+<br/> **Step 2**. The user executes add …  to ```add``` a new record into the record list. The add command also calls Storage#saveToStorage(), causing a modified record list state to be saved into the storage file.
+<br/> **Step 3**. The user now realises that there was a mistake in the record added, and decides to edit the record by executing the ```edit``` command. The edit command will call ```AllRecordList#edit…``` based on the record type.
+
 
 ### Listing
 
-The list commands traverse through each of the 12 Budget list in ALlRecordList for each month and 
-retrieve the Budget amount for that particular month and then enumerates all the expenditures in
-the particular month.
+The list feature works with Parser, Recordlist and TextUi, and allows users to see the listing of the budget and expenditures in either a specific month or every month.
 
-The result is a list of budget followed by expenditure for each month. 
+When user keys list ```m/Month```, The Parser class will analyse the whole command, extract “m/” and “MONTH”, and analyse whether MONTH is an integer or “all”. The boolean isListAll will be assigned as true if the value after “m/” is “all”. Then the class ListRecordsCommand will execute the listing by using TextUi.showRecordsListView(recordList, MONTH, isListAll)).
+
+Similarly, we have our Parser to parse the commands for listing of expenditures
+* ```list m/Month``` — If the value at the position after ‘m/’ is an integer, we use hashtable to list the budget and all expenditures of a  specific month.
+* ```list m/all``` — If the value at the position after ‘m/’ is “all”, we use for loop to list all the budget and expenditures of every month.
+
+Given below is an example usage scenario and how the list feature behaves at each step.
+
+**Step 1**. The user launches the application for the first time.
+<br/> **Step 2**. The user adds a budget and some expenditures to the current month.
+<br/> **Step 3**. The user forgets what the budget and expenditures added, thus the user wants to see the budget and the list of the expenditures.
+<br/> **Step 4**. After consideration, the user decides to see the budget and list of May, so he keys ```list m/5```
+<br/> **Step 5**. The Parser starts to parse the command, it extracts month 5. As this is a specific month to be listed, the Parser class calls ListRecordsCommand to work. By finding May, the expenditures list and budget of May are successfully found and prints out a showRecordsListView from TextUi class.
+
 
 ### Storage 
 
