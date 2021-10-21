@@ -1,24 +1,20 @@
-package gordon.command.SetCommands;
+package gordon.command.basic;
 
 import gordon.command.Command;
 import gordon.exception.GordonException;
 import gordon.kitchen.Cookbook;
 
-public class SetPriceCommand extends Command {
+public class CheckCommand extends Command {
     String recipeName;
-    float newPrice;
 
-    public SetPriceCommand(String recipeName, float newPrice) {
+    public CheckCommand(String recipeName) {
         this.recipeName = recipeName;
-        this.newPrice = newPrice;
     }
 
     @Override
     public void execute(Cookbook cookbook) {
-        System.out.println("Setting price...");
         try {
-            cookbook.setPrice(recipeName, newPrice);
-            System.out.println("Price set successfully.");
+            cookbook.checkRecipe(recipeName);
         } catch (GordonException e) {
             System.out.println("GordonException: " + e.getMessage());
         }

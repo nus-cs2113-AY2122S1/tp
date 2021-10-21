@@ -1,10 +1,22 @@
 package gordon.util;
 
-import gordon.command.BasicCommands.*;
 import gordon.command.Command;
-import gordon.command.FindCommands.*;
-import gordon.command.SetCommands.*;
-import gordon.command.TagCommands.*;
+import gordon.command.basic.AddCommand;
+import gordon.command.basic.CheckCommand;
+import gordon.command.basic.DeleteRecipeCommand;
+import gordon.command.basic.ListRecipesCommand;
+import gordon.command.basic.NullCommand;
+import gordon.command.find.FindCaloriesCommand;
+import gordon.command.find.FindDifficultyCommand;
+import gordon.command.find.FindIngredientsCommand;
+import gordon.command.find.FindPriceCommand;
+import gordon.command.find.FindTagsCommand;
+import gordon.command.set.SetCaloriesCommand;
+import gordon.command.set.SetDifficultyCommand;
+import gordon.command.set.SetPriceCommand;
+import gordon.command.tag.TagAddCommand;
+import gordon.command.tag.TagDeleteCommand;
+import gordon.command.tag.TagUntagCommand;
 import gordon.exception.GordonException;
 import gordon.kitchen.Recipe;
 
