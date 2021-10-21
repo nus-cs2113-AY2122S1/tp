@@ -6,6 +6,8 @@ import seedu.duke.items.Item;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
+
 import static seedu.duke.Duke.eventCatalog;
 import static seedu.duke.Duke.taskList;
 
@@ -17,12 +19,18 @@ public class DeleteCommand extends Command {
     // input from user
     private String itemFlag;
     private int indexToDelete;
+    private boolean isDeleteAll = false;
+    private boolean isCorrectFormat = true;
 
 
     // v2.0: deleteCommand deletes purely based on index, i.e. delete -t/-e [TASK_INDEX]
     public DeleteCommand(String[] command) {
         try {
-            if (command.length == 1) {
+            if (command[1].trim().equalsIgnoreCase("all")) {
+                isDeleteAll = true;
+            }
+            if (command.length == 2) {
+                isCorrectFormat = false;
                 throw new DukeException("Please specify what you would like to delete");
             }
             prepareInputs(command);
@@ -32,24 +40,40 @@ public class DeleteCommand extends Command {
     }
 
     public CommandResult execute() {
-
-        String deletedItem;
-        if (isEventFlag(itemFlag)) {
-            deletedItem = deleteEvent(indexToDelete);
-        } else if (isTaskFlag(itemFlag)) {
-            deletedItem = deleteTask(indexToDelete);
-        } else {
-            return new CommandResult("Insert something here");
+        if (isCorrectFormat) {
+            if (isDeleteAll) {
+                System.out.println("Are you sure you want to delete all events? (Y/N)");
+                String userInput;
+                Scanner in = new Scanner(System.in);
+                userInput = in.nextLine();
+                if (userInput.trim().equalsIgnoreCase("y")) {
+                    eventCatalog.clear();
+                    return new CommandResult("I have deleted everything!");
+                } else {
+                    return new CommandResult("I will not delete anything!");
+                }
+            }
+            String deletedItem;
+            if (isEventFlag(itemFlag)) {
+                deletedItem = deleteEvent(indexToDelete);
+            } else if (isTaskFlag(itemFlag)) {
+                deletedItem = deleteTask(indexToDelete);
+            } else {
+                return new CommandResult("Insert something here");
+            }
+            return new CommandResult(deletedItem);
         }
-        return new CommandResult(deletedItem);
+        return new CommandResult("");
     }
 
     public void prepareInputs(String[] command) throws DukeException {
         try {
             if (command[1].isEmpty()) {
+                isCorrectFormat = false;
                 throw new DukeException("Please enter a valid task or event flag!");
             }
             if (command[2].isEmpty()) {
+                isCorrectFormat = false;
                 throw new DukeException("Please enter the index of the item you wish to delete!");
             }
             itemFlag = command[1].trim();
@@ -72,7 +96,7 @@ public class DeleteCommand extends Command {
     }
 
     public static int getIndex(String indexAsString) {
-        return Integer.parseInt(indexAsString.trim());
+        return Integer.parseInt(indexAsString.trim()) - 1;
     }
 
     public static boolean isEventFlag(String flag) {
