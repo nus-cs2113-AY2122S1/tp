@@ -10,7 +10,7 @@ end box
 
 box Utilities COLOR_UTILITIES_BOX
     participant "<<class>>\nUi" as ui COLOR_UTILITIES
-    participant ":<<class>>\n *Validator" as validator COLOR_UTILITIES
+    participant "<<class>>\n *Validator" as validator COLOR_UTILITIES
     participant ":*Comparator" as comparator COLOR_UTILITIES
 end box
 
