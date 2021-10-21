@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+Package Attendance <<Rectangle>> {
+Class Attendance
+Class AttendanceList
+}
+
+Package Member <<Rectangle>> {
+Class Member
+}
+
+Package Training <<Rectangle>> {
+Class TrainingSchedule
+}
+
+Package Storage <<Rectangle>> {
+Class AttendanceStorage
+}
+
+AttendanceStorage ..> AttendanceList
+AttendanceList ..> "*" Attendance
+Attendance *-left- "1" Member
+Attendance *-right- "1" TrainingSchedule
+
+hide members
+hide circle
+@enduml
