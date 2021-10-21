@@ -45,7 +45,7 @@ public abstract class Medicine {
         this.quantity = quantity;
     }
 
-    public String toFileFormat() {
-        return "";
-    }
+    public abstract String toFileFormat();
+
+    public abstract String toArchiveFormat();
 }

@@ -10,6 +10,8 @@ public class CommandList {
     public static final String ADD_STOCK = "addstock";
     public static final String ADD_ORDER = "addorder";
     public static final String ARCHIVE = "archive";
+    public static final String ARCHIVE_ORDER = "archiveorder";
+    public static final String ARCHIVE_DISPENSE = "archivedispense";
     public static final String DELETE = "delete";
     public static final String DELETE_DISPENSE = "deletedispense";
     public static final String DELETE_STOCK = "deletestock";
