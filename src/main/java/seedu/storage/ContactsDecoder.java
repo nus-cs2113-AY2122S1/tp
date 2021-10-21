@@ -4,6 +4,14 @@ import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.contact.DetailType;
 import seedu.exception.FileErrorException;
+import seedu.exception.InvalidEmailException;
+import seedu.exception.InvalidFlagException;
+import seedu.exception.InvalidGithubUsernameException;
+import seedu.exception.InvalidLinkedinUsernameException;
+import seedu.exception.InvalidNameException;
+import seedu.exception.InvalidTelegramUsernameException;
+import seedu.exception.InvalidTwitterUsernameException;
+import seedu.parser.RegexParser;
 import seedu.ui.ExceptionTextUi;
 
 import static seedu.storage.Storage.SEPARATOR;
@@ -77,7 +85,30 @@ public class ContactsDecoder extends RegexParser {
                     contactTwitter, contactEmail);
             contactList.addContact(newContact);
         } catch (IndexOutOfBoundsException e) {
-            ExceptionTextUi.corruptLineMessage(contactText);
+            ExceptionTextUi.corruptLineMessage(contactText, lineIndex, contactFilePath);
+        } catch (InvalidFlagException e) {
+            assert false; // Control should not arrive here since flags are predetermined by FLAG_SEQUENCE
+            ExceptionTextUi.invalidFlagMessage();
+        } catch (InvalidGithubUsernameException | InvalidNameException | InvalidTelegramUsernameException
+                | InvalidLinkedinUsernameException | InvalidTwitterUsernameException | InvalidEmailException e) {
+            handleInvalidNames(e, lineIndex, contactFilePath);
+        }
+    }
+
+    private void handleInvalidNames(Exception e, int lineIndex, String contactFilePath) {
+        ExceptionTextUi.invalidLoadedLineMessage(lineIndex, contactFilePath);
+        if (e instanceof InvalidNameException) {
+            ExceptionTextUi.invalidNameInput();
+        } else if (e instanceof InvalidGithubUsernameException) {
+            ExceptionTextUi.invalidGithubUsernameInput();
+        } else if (e instanceof InvalidEmailException) {
+            ExceptionTextUi.invalidEmailInput();
+        } else if (e instanceof InvalidTelegramUsernameException) {
+            ExceptionTextUi.invalidTelegramUsernameInput();
+        } else if (e instanceof InvalidTwitterUsernameException) {
+            ExceptionTextUi.invalidTelegramUsernameInput();
+        } else if (e instanceof InvalidLinkedinUsernameException) {
+            ExceptionTextUi.invalidLinkedinUsernameInput();
         }
     }
 
