@@ -8,10 +8,10 @@ import seedu.ui.TimetableUI.LineType;
 
 public abstract class TimetableItem {
 
-    private String title;
-    private DayOfWeek dayOfWeek;
-    private String startTime;
-    private String endTime;
+    private final String title;
+    private final DayOfWeek dayOfWeek;
+    private final String startTime;
+    private final String endTime;
 
     public abstract String printTypeInfo(LineType type);
 

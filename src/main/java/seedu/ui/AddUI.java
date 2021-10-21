@@ -93,8 +93,11 @@ public class AddUI {
             case TUTORIAL:
                 detail = String.format(FIXED_LENGTH_FORMAT, NO_TUTORIAL_FOUND);
                 break;
-            default:
+            case LAB:
                 detail = String.format(FIXED_LENGTH_FORMAT, NO_LAB_FOUND);
+                break;
+            default:
+                detail = null;
                 break;
             }
             completeList.add(detail);

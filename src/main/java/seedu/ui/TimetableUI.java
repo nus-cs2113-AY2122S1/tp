@@ -77,21 +77,21 @@ public class TimetableUI {
     private static void printLine(String day, TimetableItem[] schedule, int start, int end, LineType type) {
         String infoLine = addHeader(day, type);
         TimetableItem prevItem = null;
-        TimetableItem curItem = null;
+        TimetableItem curItem;
         int i = start;
         while (i < end) {
             curItem = schedule[i];
             if (curItem != null) {
-                infoLine += String.format(FIXED_LENGTH_FORMAT, curItem.printTypeInfo(type));
+                infoLine = infoLine.concat(String.format(FIXED_LENGTH_FORMAT, curItem.printTypeInfo(type)));
                 i += curItem.duration();
                 for (int j = 0; j < curItem.duration() - 1; j++) {
-                    infoLine += String.format(FIXED_LENGTH_FORMAT, "");
+                    infoLine = infoLine.concat(String.format(FIXED_LENGTH_FORMAT, ""));
                 }
             } else {
                 if (prevItem != null) {
-                    infoLine += String.format(FIXED_LENGTH_FORMAT, "|   ");
+                    infoLine = infoLine.concat(String.format(FIXED_LENGTH_FORMAT, "|   "));
                 } else {
-                    infoLine += String.format(FIXED_LENGTH_FORMAT, "");
+                    infoLine = infoLine.concat(String.format(FIXED_LENGTH_FORMAT, ""));
                 }
                 i++;
             }
