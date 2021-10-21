@@ -20,8 +20,8 @@
   * [3.6 Content](#36-content-component)
   * [3.7 Active Recall](#37-active-recall-component)
   * [3.8 Storage](#38-storage-component)
-- [4. Implementation]()
-  * [4.1 Timetable]()
+- [4. Implementation](#4-implementation)
+  * [4.1 Timetable](#41-timetable)
   * [4.2 Active Recall](#42-active-recall-implementation)
   * [4.3 Workspace]()
   * [4.4 Adding and Deleting Content]()
@@ -31,7 +31,7 @@
 - [Appendix B: User Stories ]()
 - [Appendix C: Non Functional Requirements]()
 - [Appendix D: Glossary]()
-- [Appendix E: Instructions for Manual Testing]()  
+- [Appendix E: Instructions for Manual Testing]()
 
 ## 1. Introduction
 
@@ -123,8 +123,8 @@ Import the coding style xml file into your IntelliJ IDEA.
     3. Once done, select `Apply` then `OK`.
 4. Now your IntelliJ IDEA should follow our Coding Style.
 
-> :bulb: IntelliJ IDEA have certain shortcut key to aid in auto-formatting of code. 
-> Once you are done with a piece of code, highlight the section you have just written and press the 
+> :bulb: IntelliJ IDEA have certain shortcut key to aid in auto-formatting of code.
+> Once you are done with a piece of code, highlight the section you have just written and press the
 > key `CTRL + SHIFT + L`.
 
 ## 3. Design
@@ -136,8 +136,9 @@ Import the coding style xml file into your IntelliJ IDEA.
 ### 3.3 Parser Component
 
 ### 3.4 Command Component
- 
+
 ### 3.5 Module Component
+
 ![](attachments/Module.png)
 
 The Module Components consists of the `ModuleManager` which contains a collection of `NusModule` and
@@ -157,6 +158,7 @@ The Content Component consist of objects such as `Link`, `Questions` and `Note`
 which inherit from the abstract `Content` class. The `ContentManager` allows a generic 
 `<T extends Content>` which must belong to the `Content` type or its children. The 
 `ContentManager` manages an `ArrayList` of Content type and provide the following functionality:
+
 
 - adding of any Content type
 - removing any Content
@@ -184,6 +186,44 @@ For further details on the implementation, head to
 [4.2 Active Recall Implementation](#42-active-recall-implementation).
 
 ### 3.8 Storage Component
+
+
+![](attachments/StorageComponent.png)
+
+The Module Storage handles any file I/O operations of TermiNUS.
+
+The `ModuleStorage` component:
+
+- can create folder for each module provided by the user.
+- can save modules, schedules and links data in a `.json` file.
+- can save notes into multiple `.txt` files.
+
+`TermiNUS` saved these data as either a `.json` or `.txt` file so users will be able to edit saved
+data easily with any available text editor.
+
+
+## 4. Implementation
+
+### 4.1 Timetable
+
+The `timetable` feature is one of TermiNUS' features which can be accessed from the main workspace.
+
+The `timetable` feature has 2 variations:
+- **Daily** Timetable
+- **Weekly** timetable.
+
+The following sequence diagram shows how the timetable operation works:
+![](attachments/Timetable.png)
+
+The **Daily** and **Weekly** `timetable` feature differs by a user argument which is parsed as the `day`.
+
+The **Daily** `timetable` feature works by iterating through a collection of `NusModule` which are stored inside a `ModuleManager`.
+Within the `NusModule`, the `ContentManager`, which stores all the `Link` is accessed.
+All the `Link` inside `ContentManager` is iterated through to acquire all the schedule which has the same attribute `day` as the user argument.
+
+The **Weekly** `timetable` feature is an extension of the **Daily** `timetable` feature.
+It is implemented by iterating through a `DaysOfWeekEnum` and acquires the **daily** `timetable` for each day in the week.
+
 
 ### 4.2 Active Recall Implementation
 ![Active Recall Sequence Diagram](attachments/ActiveRecallSequenceDiagram.png)
@@ -259,3 +299,4 @@ issues.
 Once the adjustment of weights of the question is done, the process is repeated if there are 
 questions left inside `QuestionGenerator`. Otherwise, the Active Recall session will be terminated, 
 and the input will be passed back to the `CommandParser`.
+
