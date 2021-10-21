@@ -3,12 +3,14 @@ package seedu.duke;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.entry.Expense;
-import seedu.entry.ExpenseCategory;
+import seedu.entry.Entry;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
+import seedu.entry.ExpenseCategory;
+import seedu.entry.Expense;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Messages;
+import seedu.utility.StonksGraph;
 import seedu.utility.Ui;
 
 
@@ -16,6 +18,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,7 +26,9 @@ public class UiTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final String newLine = System.lineSeparator();
-    
+
+
+
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
@@ -87,7 +92,7 @@ public class UiTest {
     @Test
     public void listFind_givenFilteredList_printFilteredList() {
         initialiseFinancialTracker();
-        final String expectedOutput = SEPARATOR_LINE + newLine
+        String expectedOutput = SEPARATOR_LINE + newLine
                 + Messages.FOUND_LIST_MESSAGE + newLine
                 + SEPARATOR_LINE + newLine
                 + "1: [E] Bought a game - $19.73 " + currentDate + newLine
@@ -132,6 +137,171 @@ public class UiTest {
         
         testUI.printBalance(financialTracker.getBalance());
         assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void listExpense_emptyFinancialTracker_emptyExpenseListMessage() {
+        final String expectedOutput = SEPARATOR_LINE + newLine
+                + "You have not spent anything!" + newLine
+                + SEPARATOR_LINE;
+
+        testUI.listExpense(financialTracker.getExpenses());
+
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void listIncome_emptyFinancialTracker_emptyIncomeListMessage() {
+        final String expectedOutput = SEPARATOR_LINE + newLine
+                + "You have not entered any income!" + newLine
+                + SEPARATOR_LINE;
+
+        testUI.listIncome(financialTracker.getIncomes());
+
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void listFind_emptyFilteredList_notFoundMessage() {
+        final String expectedOutput = SEPARATOR_LINE + newLine
+                + "Your search did not match any of the entries!" + newLine
+                + SEPARATOR_LINE;
+        ArrayList<Entry> entries = new ArrayList<>();
+        testUI.listFind(entries);
+
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+
+    @Test
+    public void printTotalExpense_doubleExpense_totalExpenseMessage() {
+        double totalExpense = 98.72923;
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Your total expense is: $98.73" + newLine
+                + SEPARATOR_LINE;
+        testUI.printTotalExpense(totalExpense);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printTotalIncome_doubleIncome_totalIncomeMessage() {
+        double totalIncome = 98.72923;
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Your total income is: $98.73" + newLine
+                + SEPARATOR_LINE;
+        testUI.printTotalIncome(totalIncome);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void expenseDeleted_oneExpenseDeleted_deletedExpenseMessage() {
+        initialiseFinancialTracker();
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You removed this: " + newLine
+                + "[E] chocolate - $56.12 " + currentDate + newLine
+                + SEPARATOR_LINE;
+        Expense toBeDeletedExpense = new Expense("chocolate", 56.12, ExpenseCategory.FOOD);
+        testUI.printExpenseDeleted(toBeDeletedExpense);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void incomeDeleted_oneIncomeDeleted_deletedIncomeMessage() {
+        initialiseFinancialTracker();
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You removed this: " + newLine
+                + "[I] august paycheck - $567.12 " + currentDate + newLine
+                + SEPARATOR_LINE;
+        Income toBeDeletedIncome = new Income("august paycheck", 567.12, IncomeCategory.SALARY);
+        testUI.printIncomeDeleted(toBeDeletedIncome);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printTotalExpenseBetween_noExpenseBetween_printNoExpenseBetweenMessage() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You do not have any expense between 30 Aug 2090 and 30 Aug 2092" + newLine
+                + SEPARATOR_LINE;
+        LocalDate testDate1 = LocalDate.of(2090,8,30);
+        LocalDate testDate2 = LocalDate.of(2092,8,30);
+
+        double totalExpense = 0;
+        testUI.printTotalExpenseBetween(totalExpense, testDate1, testDate2);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printTotalExpenseBetween_gotExpenseBetween_printTotalExpenseBetweenMessage() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Your total expense between 30 Aug 2090 and 30 Aug 2092 is $7512.00" + newLine
+                + SEPARATOR_LINE;
+        LocalDate testDate1 = LocalDate.of(2090,8,30);
+        LocalDate testDate2 = LocalDate.of(2092,8,30);
+
+        double totalExpense = 7512;
+        testUI.printTotalExpenseBetween(totalExpense, testDate1, testDate2);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printTotalIncomeBetween_noIncomeBetween_printNoIncomeBetweenMessage() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You do not have any income between 30 Aug 2090 and 30 Aug 2092" + newLine
+                + SEPARATOR_LINE;
+        LocalDate testDate1 = LocalDate.of(2090,8,30);
+        LocalDate testDate2 = LocalDate.of(2092,8,30);
+
+        double totalIncome = 0;
+        testUI.printTotalIncomeBetween(totalIncome, testDate1, testDate2);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printTotalIncomeBetween_gotIncomeBetween_printTotalIncomeBetweenMessage() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Your total income between 30 Aug 2090 and 30 Aug 2092 is $988.10" + newLine
+                + SEPARATOR_LINE;
+        LocalDate testDate1 = LocalDate.of(2090,8,30);
+        LocalDate testDate2 = LocalDate.of(2092,8,30);
+
+        double totalIncome = 988.1;
+        testUI.printTotalIncomeBetween(totalIncome, testDate1, testDate2);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printGraph_validStonksGraph_printCorrectGraph() {
+        //empty financialtracker
+        StonksGraph stonksGraph = new StonksGraph(financialTracker);
+        String expectedOutput = SEPARATOR_LINE
+                + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                + "x                                                                                                  x"
+                + "x   Account Balance: $0.0                                                  Legend:                 x"
+                + "x   Current month ( MONTH ) total expense: $0.00                                 # is Expense      x"
+                + "x   Current month ( MONTH ) total income: $0.00                                  o is Expense      x"
+                + "x   Your Yearly Report                                                                             x"
+                + "x ------------------------------------------------------------------------------------------------ x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x                                                                                                  x"
+                + "x ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ x"
+                + "x   Jan     Feb     Mar     Apr     May     Jun     Jul     Aug     Sept    Oct     Nov     Dec    x"
+                + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                + SEPARATOR_LINE;
+        testUI.printGraph(stonksGraph);
+
+        String fullOutput = outputStreamCaptor.toString().trim();
+        String fullOutputWithoutNewLine = fullOutput.replace(System.lineSeparator(),"");
+        String outputToBeTested = fullOutputWithoutNewLine.replaceAll("\\(.*?\\)","( MONTH )");
+
+        assertEquals(expectedOutput, outputToBeTested);
     }
 }
 
