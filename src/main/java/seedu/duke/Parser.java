@@ -10,16 +10,12 @@ import seedu.duke.command.ExpireCommand;
 import seedu.duke.command.HelpCommand;
 import seedu.duke.command.ListCommand;
 import seedu.duke.command.UpdateCommand;
-import seedu.duke.command.FindCommand;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class Parser {
@@ -117,9 +113,9 @@ public class Parser {
         }
 
         String resultMsg = "";
-        for (int i = 0; i < keywords.length; i++) {
+        /*for (int i = 0; i < keywords.length; i++) {
             String keyword = keywords[i];
-            List<Ingredient> searchResults = IngredientList.getInstance().getIngredientList().stream()
+            List<Ingredient> searchResults = IngredientGroup.getIngredientList().stream()
                     .filter(result -> result.getName().toLowerCase().contains(keyword)).collect(Collectors.toList());
             if (i > 0) {
                 resultMsg += "\n";
@@ -129,7 +125,7 @@ public class Parser {
             } else {
                 resultMsg += new FindCommand(keyword, searchResults).run();
             }
-        }
+        }*/
         return resultMsg;
     }
 

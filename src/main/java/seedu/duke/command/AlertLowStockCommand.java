@@ -1,10 +1,6 @@
 package seedu.duke.command;
 
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
-
-import java.util.ArrayList;
 
 public class AlertLowStockCommand extends Command {
 
@@ -19,7 +15,7 @@ public class AlertLowStockCommand extends Command {
     public String run() throws DukeException {
         int lowStockCount = 0;
         String resultMsg = "";
-        ArrayList<Ingredient> ingredientList = IngredientList.getInstance().getIngredientList();
+        /*ArrayList<Ingredient> ingredientList = IngredientGroup.getIngredientList();
 
         for (Ingredient ingredient : ingredientList) {
             if (ingredient.getAmount() <= lowStockThreshold) {
@@ -31,7 +27,7 @@ public class AlertLowStockCommand extends Command {
         if (lowStockCount == 0) {
             resultMsg = "No ingredients with stock less than " + lowStockThreshold + " kg";
             return resultMsg;
-        }
+        }*/
 
         return "There are " + lowStockCount
                 + " ingredients with stock less than " + lowStockThreshold + " kg" + LIST_NEWLINE_INDENT + resultMsg;

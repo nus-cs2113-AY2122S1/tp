@@ -59,7 +59,7 @@ public class Ingredient {
 
     @Override
     public String toString() {
-        return getName() + " | Amount Left: " + getAmount() + " " + getUnits()
+        return '\t' + "Amount Left: " + getAmount() + " " + getUnits()
                 + " | Expiry Date: " + Ingredient.dateToString(getExpiry());
     }
 

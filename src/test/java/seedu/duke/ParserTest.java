@@ -2,8 +2,6 @@ package seedu.duke;
 
 import org.junit.jupiter.api.Test;
 import seedu.duke.exceptions.DukeException;
-import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -20,7 +18,7 @@ public class ParserTest {
         }
     }
 
-    @Test
+    /*@Test
     public void parseDeleteCommand_taskNumberInvalidInput_expectException() {
         try {
             String inputString = "delete -1";
@@ -29,7 +27,7 @@ public class ParserTest {
         } catch (DukeException e) {
             assertEquals("Ingredient number does not exist!", e.getMessage());
         }
-    }
+    }*/
 
     @Test
     public void parseCommand_invalidCommandInput_success() throws DukeException {

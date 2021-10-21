@@ -2,7 +2,6 @@ package seedu.duke.command;
 
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.ingredients.Ingredient;
-import seedu.duke.ingredients.IngredientList;
 
 import java.util.List;
 
@@ -23,11 +22,11 @@ public class FindCommand extends Command {
     @Override
     public String run() throws DukeException {
         String resultMsg = "";
-        resultMsg += FIND_MESSAGE_START + keyword + FIND_MESSAGE_END;
+        /*resultMsg += FIND_MESSAGE_START + keyword + FIND_MESSAGE_END;
         for (Ingredient ingredient : searchResults) {
-            resultMsg += LIST_NEWLINE_INDENT + (IngredientList.getInstance().getIngredientList()
+            resultMsg += LIST_NEWLINE_INDENT + (IngredientGroup.getIngredientList()
                     .indexOf(ingredient) + 1) + ". " + ingredient;
-        }
+        }*/
         return resultMsg;
     }
 }

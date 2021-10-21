@@ -11,7 +11,7 @@ public class IngredientsListTest {
     public void getIngredientInfoTest_invalidIngredientNumber_dukeExceptionThrown() {
         try {
             int ingredientNumber = -1;
-            IngredientList.getInstance().getIngredientInfo(ingredientNumber);
+            IngredientGroup.getInstance().getIngredientInfo(ingredientNumber);
         } catch (DukeException e) {
             assertEquals("Ingredient number does not exist!", e.getMessage());
         }
@@ -19,8 +19,8 @@ public class IngredientsListTest {
 
     @Test
     public void getInstanceTest_noInputPattern_theSameInstancesReturned() throws DukeException {
-        IngredientList list1 = IngredientList.getInstance();
-        IngredientList list2 = IngredientList.getInstance();
+        IngredientGroup list1 = IngredientGroup.getInstance();
+        IngredientGroup list2 = IngredientGroup.getInstance();
 
         assertEquals(list1, list2);
     }
