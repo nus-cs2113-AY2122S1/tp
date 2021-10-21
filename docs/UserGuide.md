@@ -63,7 +63,7 @@ The parameters used in the command are:
 * `INGREDIENT_NAME`: name of the ingredient.
 * `AMOUNT`: amount of the ingredient.
 * `UNITS`: units specified to associate with `AMOUNT`.
-* `EXPIRY`: expiration date of ingredient, in format of [TBA]
+* `EXPIRY`: expiration date of ingredient, in format of `dd/mm/yyyy`.
 
 Examples:
 * `add n/carrot a/200 u/sticks e/22/10/2021`
@@ -85,7 +85,7 @@ The parameters used in the command are:
 * `INGREDIENT_NAME`: name of the ingredient.
 * `AMOUNT`: updated amount of the ingredient.
 * `UNITS`: updated unit of the ingredient.
-* `EXPIRY`: updated expiration date of the ingredient.
+* `EXPIRY`: updated expiration date of the ingredient, in format of `dd/mm/yyyy`.
 
 Examples:
 * `update n/carrot a/100 u/sticks e/21/10/2021`
@@ -94,6 +94,8 @@ Examples:
 ### 2.5. Stop Tracking An Ingredient
 
 Delete an ingredient from the ingredient list based on its index in the list.
+> User are recommended to use `list` first to see which ingredients they are planning to remove.
+> However, removing a non-existed ingredient would just cause the program to show a corresponding warning.
 
 Format: `delete [INGREDIENT_NUMBER]`
 
@@ -109,7 +111,7 @@ List the ingredients that will expire by a specified date.
 Format: `expire [DATE]`
 
 The parameter used in the command is:
-* `DATE`: the date of interest
+* `DATE`: the date of interest, in format of `dd/mm/yyyy`.
 
 Example: `expire 12/11/2021`
 
