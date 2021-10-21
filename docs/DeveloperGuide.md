@@ -133,8 +133,6 @@ The package consists of an abstract class `command` and `classes` corresponding 
 
 ## 4. Implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### 4.1. Alerts
 
 Alerts are displayed automatically on startup, and when the user enters the command to display alerts. There are 3 types of commands:
