@@ -70,7 +70,7 @@ This command will find a list of `Person` that match the given attributes in a t
 
 #### Implementation
 
-The `find` feature is facilitated by the `FindCommand` class. It extends from `Command` class and overrides
+The `find` feature is facilitated by the `FindPersonCommand` class. It extends from `Command` class and overrides
 the `execute()` method to achieve the desired functionality.
 
 The example below gives a direction on how this command behaves.
@@ -82,7 +82,7 @@ and eventually returns a `new FindPatientCommand()` object.
 
 Step 2.
 <br>
-A `CommandManager` object will run the `execute()` method in the `new FindPatientCommand()` object.
+The `MedBot#interactWithUser()` method will run the `execute()` method in the `new FindPatientCommand()` object.
 
 Step 3.
 <br>
@@ -98,7 +98,40 @@ Step 5.
 The filtered `Person` list is then passed into the `Ui` class to be displayed into a table format through
 `Ui#getFindPatientsMessage()`.
 
+### Edit feature
 
+#### Functionality
+This command will edit a specified `Person` object with the attributes given in the command.
+
+#### Implementation
+
+The `edit` feature is facilitated by the `EditPersonCommand` class. It extends from `Command` class and overrides
+the `execute()` method to achieve the desired functionality.
+
+The example below gives a direction on how this command behaves.
+
+Step 1.
+<br>
+A User execute the `edit n/John` command when the attribute `Parser#viewType` is `PATIENT_INFO`. 
+The `Parser#parseCommand()` method will parse this command and eventually returns a `new EditPatientCommand()` object.
+
+Step 2.
+<br>
+The `MedBot#interactWithUser()` method will run the `execute()` method in the `new EditPatientCommand()` object.
+
+Step 3.
+<br>
+The `execute()` method will call `PersonList#editPerson()` method with the new `Person` object having the parameter 
+`n/John` passed in. (All other attributes of the object are set to `null`)
+
+Step 4.
+<br>
+`PersonList#editPerson()` will attempt to replace all attributes of the old `Person` 
+object with the non-null attributes given in the new `Person`.
+
+Step 5.
+<br>
+The edited `Person` is then passed into the `Ui` class to be displayed through`Ui#getEditPatientMessage()`.
 
 ## Product scope
 ### Target user profile
@@ -108,6 +141,9 @@ The filtered `Person` list is then passed into the `Ui` class to be displayed in
 ### Value proposition
 
 {Describe the value proposition: what problem does it solve?}
+1. Easily manage patient info, consultation requirements
+2. Easily manage nurse/doctor schedules
+3. Assign nurses/doctors to visit patients at specific times
 
 ## User Stories
 
