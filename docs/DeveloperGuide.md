@@ -31,7 +31,7 @@
 
 ### Architecture
 
-![Architecture Diagram](https://user-images.githubusercontent.com/65898007/138207279-86dc6196-82b2-407f-afd9-c7ebeaa19e13.png)
+![Architecture Diagram](./RenderedUML/ArchitectureDiagram.svg)
 
 The Diagram above explains how the App is designed and will function
 
