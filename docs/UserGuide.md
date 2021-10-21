@@ -13,7 +13,24 @@
 
 ## Features 
 
-{Give detailed description of each feature}
+### Viewing all selected universities: list /suni
+Displays all universities added by the user.
+Format: list /suni  
+Examples:  
+list /suni
+[35] Singapore Management Univeristy
+[69] University of Leeds
+[77] - University of Waterloo
+
+### Viewing all selected modules: list /smod
+Displays all modules added by the user.  
+Format: list /smod  
+Examples:
+list /smod
+Here are the modules in the list:
+[1] CS1010 : Programming Methodology
+[2] CS1231 : Discrete Structures
+[3] CS3233 : Competitive Programming
 
 ### Adding a todo: `todo`
 Adds a new item to the list of todo items.
