@@ -225,10 +225,14 @@ public class StockValidator {
     public static boolean dateValidityChecker(Ui ui, ArrayList<Medicine> medicines, Date expiryDate, String name) {
         ArrayList<Stock> filteredStocks = new ArrayList<>();
         for (Medicine medicine : medicines) {
-            boolean isSameName = name.equalsIgnoreCase(medicine.getMedicineName());
-            boolean isDeleted = ((Stock) medicine).isDeleted();
-            if (medicine instanceof Stock && isSameName && !isDeleted) {
-                filteredStocks.add((Stock) medicine);
+            if (!(medicine instanceof Stock)) {
+                continue;
+            }
+            Stock stock = (Stock) medicine;
+            boolean isSameName = name.equalsIgnoreCase(stock.getMedicineName());
+            boolean isDeleted = stock.isDeleted();
+            if (isSameName && !isDeleted) {
+                filteredStocks.add(stock);
             }
         }
         for (Stock filteredStock : filteredStocks) {
