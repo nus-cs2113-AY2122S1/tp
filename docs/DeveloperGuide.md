@@ -45,6 +45,7 @@ The _Architecture Diagram_ shown above explains the high-level design of the App
 <br>
 
 ![ArchitectureSequenceDiagram](diagrams/ArchitectureSequenceDiagram.png)
+<br>
 _Figure 2. An example of interactions between components for `add_module c/CS2113T n/Software Engineering`._
 
 ## Implementation
