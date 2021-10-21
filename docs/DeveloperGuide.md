@@ -9,6 +9,7 @@
 {Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
 
 
+
 ## Product scope
 ### Target user profile
 
@@ -22,8 +23,11 @@
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|add an ingredient|record what ingredients I have|
+|v1.0|user|delete an ingredient|remove ingredients that I no longer have|
+|v1.0|user|increment quantities for a particular ingredient|record how much of that ingredient I have|
+|v1.0|user|decrement quantities for a particular ingredient|know how many ingredients are left|
+|v1.0|user|add the expiry date for a specific ingredient|record when it must be used by|
 
 ## Non-Functional Requirements
 
