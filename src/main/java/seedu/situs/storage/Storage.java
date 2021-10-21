@@ -2,6 +2,7 @@ package seedu.situs.storage;
 
 import seedu.situs.exceptions.DukeException;
 import seedu.situs.ingredients.Ingredient;
+import seedu.situs.ingredients.IngredientGroup;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -72,12 +73,32 @@ public class Storage {
         }
     }
 
+    /*
     public void writeIngredientsToMemory(ArrayList<Ingredient> ingredients) throws IOException {
         FileWriter fw = new FileWriter(DATA_FILE_PATH);
         for (Ingredient i : ingredients) {
             fw.write(i.getName() + "|" + i.getAmount() + "|"
                     + Ingredient.dateToString(i.getExpiry()) + System.lineSeparator());
         }
+        fw.close();
+    }
+    */
+
+    public void writeIngredientsToMemory(ArrayList<IngredientGroup> ingredientGroups) throws IOException,
+            IndexOutOfBoundsException {
+        FileWriter fw = new FileWriter(DATA_FILE_PATH);
+
+        for (IngredientGroup ig : ingredientGroups) {
+            String dataToWrite = ig.getIngredientGroupName() + '|' + ig.getTotalAmount() + '|';
+
+            for (int i = 1; i <= ig.getIngredientGroupSize(); i++) {
+                dataToWrite += ig.get(i).getAmount() + '%' + Ingredient.dateToString(ig.get(i).getExpiry()) + '|';
+            }
+
+            dataToWrite += System.lineSeparator();
+            fw.write(dataToWrite);
+        }
+
         fw.close();
     }
 }

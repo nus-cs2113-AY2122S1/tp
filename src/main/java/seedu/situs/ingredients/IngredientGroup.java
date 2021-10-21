@@ -167,11 +167,7 @@ public class IngredientGroup {
      * @return The indexed ingredient object
      * @throws DukeException The ingredient is out of bounds
      */
-    public Ingredient get(int ingredientNumber) throws DukeException {
-        try {
-            return ingredientGroup.get(ingredientNumber - 1);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(INVALID_NUMBER);
-        }
+    public Ingredient get(int ingredientNumber) throws IndexOutOfBoundsException {
+        return ingredientGroup.get(ingredientNumber - 1);
     }
 }
