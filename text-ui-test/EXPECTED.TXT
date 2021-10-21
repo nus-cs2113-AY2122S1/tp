@@ -10,19 +10,78 @@ Enter your command: Your trip to America on 02 Feb 2021 has been successfully ad
 Enter your command: You have opened the following trip: 
 America | 02 Feb 2021
 Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
+Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
+Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
 Enter your command: Enter your command: Enter date of expense:
 	Press enter to use today's date
-Who paid for the expense?: How much did yikai spend?: Your expense has been added successfully
-Enter your command: 1. this is what i want to type | Cost: 8.00
-Enter your command: this is what i want to type
+Who paid for the expense?: How much did yikai spend?: How much did yuzhao spend?: How much did qian spend?: Your expense has been added successfully
+Enter your command: Enter date of expense:
+	Press enter to use today's date
+Who paid for the expense?: How much did yikai spend?: How much did josh spend?: How much did xiyuan spend?: Your expense has been added successfully
+Enter your command: Enter date of expense:
+	Press enter to use today's date
+Who paid for the expense?: How much did yikai spend?: How much did josh spend?: Your expense has been added successfully
+Enter your command: 1. c a b
 date: 2021-10-19
 Amount Spent: 8.00
-People involved: [yikai, yuzhao]
-Category: food
+People involved: [yikai, yuzhao, qian]
+Category: breakfast
+3. d a c
+date: 2021-10-19
+Amount Spent: 2.00
+People involved: [yikai, josh]
+Category: breakfast
+Enter your command: 2. d a c
+date: 2021-10-19
+Amount Spent: 1.00
+People involved: [yikai, josh, xiyuan]
+Category: lunch
+Enter your command: 2. d a c
+date: 2021-10-19
+Amount Spent: 1.00
+People involved: [yikai, josh, xiyuan]
+Category: lunch
+3. d a c
+date: 2021-10-19
+Amount Spent: 2.00
+People involved: [yikai, josh]
+Category: breakfast
+Enter your command: 1. c a b
+date: 2021-10-19
+Amount Spent: 8.00
+People involved: [yikai, yuzhao, qian]
+Category: breakfast
+Enter your command: 3. d a c
+date: 2021-10-19
+Amount Spent: 2.00
+People involved: [yikai, josh]
+Category: breakfast
+Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
+Enter your command: Sorry, we didn't recognize your entry. Please try again, or enter help to learn more.
+Enter your command: 1. c a b | Cost: 8.00
+2. d a c | Cost: 1.00
+3. d a c | Cost: 2.00
+Enter your command: c a b
+date: 2021-10-19
+Amount Spent: 8.00
+People involved: [yikai, yuzhao, qian]
+Category: breakfast
 
-Enter your command: Sorry, no such expense number exists. Please check your expense number and try again.
+d a c
+date: 2021-10-19
+Amount Spent: 1.00
+People involved: [yikai, josh, xiyuan]
+Category: lunch
+
+d a c
+date: 2021-10-19
+Amount Spent: 2.00
+People involved: [yikai, josh]
+Category: breakfast
+
+Enter your command: Your expense of 1.0 has been successfully removed
 Enter your command: Your expense of 8.0 has been successfully removed
-Enter your command: Sorry, no such expense number exists. Please check your expense number and try again.
+Enter your command: Your expense of 2.0 has been successfully removed
 Enter your command: This is the summary for your America trip 02 Feb 2021
 Total budget for this trip: 2000.00
 Total expenditure so far: 0.00
