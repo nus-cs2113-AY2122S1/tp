@@ -14,7 +14,7 @@ public class FindUniCommand extends Command {
                 .filter((university) -> university.getName().toLowerCase().contains(userInput.toLowerCase()))
                 .collect(Collectors.toList());
         if (result.size() == 0) {
-            System.out.println("No university found");
+            Ui.printFindUniNull();
         } else {
             for (University university : result) {
                 Ui.printUniversity(university, universityMasterList);

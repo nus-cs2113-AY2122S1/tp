@@ -14,7 +14,7 @@ public class FindModCommand extends Command {
                 .filter((module) -> module.getModuleCode().toLowerCase().contains(userInput.toLowerCase()))
                 .collect(Collectors.toList());
         if (result.size() == 0) {
-            System.out.println("No Module found");
+            Ui.printFindModNull();
         } else {
             for (int i = 0; i < result.size(); i++) {
                 Ui.printModule(result.get(i), i + 1);
