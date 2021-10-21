@@ -3,6 +3,7 @@ package seedu.situs.ingredients;
 import seedu.situs.exceptions.DukeException;
 import seedu.situs.storage.Storage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /*
@@ -22,9 +23,16 @@ public class IngredientList {
     private static final String INVALID_NUMBER = "Ingredient number does not exist!";
     protected static ArrayList<IngredientGroup> ingredientList;
     private static IngredientList instance = null;
+    private static Storage storage;
 
-    public IngredientList() {
-        ingredientList = new ArrayList<>();
+    public IngredientList() throws DukeException {
+        try {
+            storage = new Storage();
+            ingredientList = storage.loadIngredientsFromMemory();
+        } catch (IOException e) {
+            ingredientList = new ArrayList<>();
+            throw new DukeException("Cannot open the memory file!");
+        }
     }
 
     /**
@@ -32,7 +40,7 @@ public class IngredientList {
      *
      * @return ingredient list
      */
-    public static IngredientList getInstance() {
+    public static IngredientList getInstance() throws DukeException {
         if (instance == null) {
             instance = new IngredientList();
         }
@@ -94,7 +102,7 @@ public class IngredientList {
      *
      * @param ingredient ingredient to be added
      */
-    public void add(Ingredient ingredient) {
+    public void add(Ingredient ingredient) throws IOException, IndexOutOfBoundsException {
         String ingredientName = ingredient.getName();
         boolean repeatedName = searchIngredientInList(ingredientName);
 
@@ -108,6 +116,7 @@ public class IngredientList {
             newGroup.setIngredientGroupName(ingredientName);
             newGroup.add(ingredient);
         }
+        storage.writeIngredientsToMemory(ingredientList);
     }
 
     /**

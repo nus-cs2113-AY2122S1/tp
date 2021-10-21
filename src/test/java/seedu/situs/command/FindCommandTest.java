@@ -24,7 +24,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void findCommandTest_ingredientFound_success() throws DukeException {
+    public void findCommandTest_ingredientFound_success() throws DukeException, IOException {
         LocalDate expiryDate1 = LocalDate.parse("21/10/2021", DATE_FORMATTER);
         Ingredient ingredient1 = new Ingredient("testxyz", 3, expiryDate1);
         IngredientList.getInstance().add(ingredient1);

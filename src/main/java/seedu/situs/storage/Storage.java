@@ -2,6 +2,7 @@ package seedu.situs.storage;
 
 import seedu.situs.exceptions.DukeException;
 import seedu.situs.ingredients.Ingredient;
+import seedu.situs.ingredients.IngredientGroup;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,15 +38,16 @@ public class Storage {
      *
      * @return loadedTaskList The Tasks read from the data file.
      */
-    public ArrayList<Ingredient> loadIngredientsFromMemory() {
-        ArrayList<Ingredient> extractedIngredients = new ArrayList<>();
+
+    public ArrayList<IngredientGroup> loadIngredientsFromMemory() {
+        ArrayList<IngredientGroup> extractedIngredients = new ArrayList<>();
 
         try {
             Scanner scanner = new Scanner(this.dataFile);
 
             while (scanner.hasNextLine()) {
-                Ingredient ingredient = readStoredIngredients(scanner.nextLine());
-                extractedIngredients.add(ingredient);
+                IngredientGroup ingredientGroup = readStoredIngredients(scanner.nextLine());
+                extractedIngredients.add(ingredientGroup);
             }
         } catch (FileNotFoundException e) {
             System.out.println("\tCannot open the saved memory file!");
@@ -58,13 +60,24 @@ public class Storage {
 
 
 
-    private Ingredient readStoredIngredients(String savedIngredientString) throws DukeException {
+    private IngredientGroup readStoredIngredients(String savedIngredientString) throws DukeException {
         try {
-            String[] ingredientDetails = savedIngredientString.split("\\|", 4);
-            String ingredientName = ingredientDetails[0].trim();
-            double ingredientAmount = Double.parseDouble(ingredientDetails[1].trim());
-            LocalDate ingredientExpiry = Ingredient.stringToDate(ingredientDetails[2].trim());
-            return new Ingredient(ingredientName, ingredientAmount, ingredientExpiry);
+
+            String[] ingredientDetails = savedIngredientString.split("\\|");
+            IngredientGroup ingredientGroup = new IngredientGroup();
+
+            String ingredientGroupName = ingredientDetails[0].trim();
+            ingredientGroup.setIngredientGroupName(ingredientGroupName);
+
+            for (int i = 1; i < ingredientDetails.length; i++) {
+                String[] amountAndExpiry = ingredientDetails[i].split("%");
+                double ingredientAmount = Double.parseDouble(amountAndExpiry[0]);
+                LocalDate ingredientExpiry = Ingredient.stringToDate(amountAndExpiry[1]);
+
+                ingredientGroup.add(new Ingredient(ingredientGroupName, ingredientAmount, ingredientExpiry));
+            }
+
+            return ingredientGroup;
         } catch (NumberFormatException e) {
             throw new DukeException("Wrong ingredient amount format!");
         } catch (DateTimeParseException e) {
@@ -72,12 +85,22 @@ public class Storage {
         }
     }
 
-    public void writeIngredientsToMemory(ArrayList<Ingredient> ingredients) throws IOException {
+
+    public void writeIngredientsToMemory(ArrayList<IngredientGroup> ingredientGroups) throws IOException,
+            IndexOutOfBoundsException {
         FileWriter fw = new FileWriter(DATA_FILE_PATH);
-        for (Ingredient i : ingredients) {
-            fw.write(i.getName() + "|" + i.getAmount() + "|"
-                    + Ingredient.dateToString(i.getExpiry()) + System.lineSeparator());
+
+        for (IngredientGroup ig : ingredientGroups) {
+            String dataToWrite = ig.getIngredientGroupName() + "|";
+
+            for (int i = 1; i <= ig.getIngredientGroupSize(); i++) {
+                dataToWrite += ig.get(i).getAmount() + "%" + Ingredient.dateToString(ig.get(i).getExpiry()) + "|";
+            }
+
+            dataToWrite += System.lineSeparator();
+            fw.write(dataToWrite);
         }
+
         fw.close();
     }
 }
