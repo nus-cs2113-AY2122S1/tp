@@ -110,12 +110,9 @@ public class IngredientStorage {
      *
      * @param expiryDate Expiry date of batch of ingredients to be removed.
      */
-    public void remove(LocalDate expiryDate) throws IllegalValueException {
-        assert expiryDate != null : "Expiry date cannot be null";
+    public void remove(LocalDate expiryDate) {
+        //assert expiryDate != null : "Expiry date cannot be null";
         final Integer quantity = ingredientBatches.remove(expiryDate);
-        if (quantity == null) {
-            throw new IllegalValueException();
-        }
         this.quantity -= quantity;
     }
 

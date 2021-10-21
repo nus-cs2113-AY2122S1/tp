@@ -190,4 +190,20 @@ public class IngredientRepository {
         }
         return expiredIngredientsList.toString();
     }
+
+    public void deleteExpiredIngredients() throws IllegalValueException {
+        LocalDate currentDate = LocalDate.now();
+
+        for (IngredientStorage ingredientStorage : ingredients.values()) {
+
+            for( LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
+                if(expiryDate.isBefore(currentDate)) {
+                    //ingredientStorage.getIngredientBatches().remove(expiryDate);
+                    ingredientStorage.remove(expiryDate);
+                }
+            }
+        }
+    }
+
+
 }

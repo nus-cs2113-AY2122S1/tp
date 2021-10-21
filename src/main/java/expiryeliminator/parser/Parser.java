@@ -18,9 +18,11 @@ import expiryeliminator.commands.IncrementCommand;
 import expiryeliminator.commands.ListCommand;
 import expiryeliminator.commands.ListIngredientExpiringCommand;
 import expiryeliminator.commands.ListIngredientsExpiredCommand;
+import expiryeliminator.commands.DeleteExpiredIngredientCommand;
 import expiryeliminator.commands.ListRecipeCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ViewRecipeCommand;
+import expiryeliminator.commands.ShoppingListCommand;
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
 import expiryeliminator.parser.argparser.QuantityParser;
@@ -94,6 +96,8 @@ public class Parser {
                 return new ListIngredientExpiringCommand();
             case ListIngredientsExpiredCommand.COMMAND_WORD:
                 return new ListIngredientsExpiredCommand();
+            case DeleteExpiredIngredientCommand.COMMAND_WORD:
+                return new DeleteExpiredIngredientCommand();
             case ViewIngredientCommand.COMMAND_WORD:
                 return prepareViewIngredient(args);
             case AddRecipeCommand.COMMAND_WORD:
@@ -104,6 +108,8 @@ public class Parser {
                 return new ListRecipeCommand();
             case ViewRecipeCommand.COMMAND_WORD:
                 return prepareViewRecipe(args);
+            case ShoppingListCommand.COMMAND_WORD:
+                return new ShoppingListCommand(args);
             case ByeCommand.COMMAND_WORD:
                 return new ByeCommand();
             case HelpCommand.COMMAND_WORD:
