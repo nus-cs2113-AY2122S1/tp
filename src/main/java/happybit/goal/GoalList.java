@@ -14,11 +14,11 @@ public class GoalList {
     private static final String ERROR_INVALID_HABIT_INDEX = "There are no habits at this index in your goal.";
 
     protected ArrayList<Goal> goalList;
-    protected int goalNumber;
+    protected int chosenGoalIndex;
 
     public GoalList() {
         this.goalList = new ArrayList<>();
-        this.goalNumber = -1;
+        this.chosenGoalIndex = -1;
     }
 
     public ArrayList<Goal> getGoalList() {
@@ -26,21 +26,37 @@ public class GoalList {
     }
 
     /**
-     * Getter for goal number.
-     *
-     * @return Integer index of a goal.
+     * Getter for index of chosen goal.
+     * @return Integer index of chosen goal.
      */
-    public int getGoalNumber() {
-        return goalNumber;
+    public int getChosenGoalIndex() {
+        return chosenGoalIndex;
+    }
+
+    /**
+     * Gets the goal type of the chosen goal.
+     *
+     * @return Goal type of the chosen goal.
+     */
+    public GoalType getChosenGoalType() {
+        GoalType goalType = GoalType.DEFAULT;
+        try {
+            goalType = getGoal(chosenGoalIndex).goalType;
+        } catch (HaBitCommandException e) {
+            // Exception should never be thrown here
+        }
+        return goalType;
     }
 
     /**
      * Sets a goal number to be the index of a goal in the goalList.
      *
-     * @param goalNumber Integer index of a goal.
+     * @param goalIndex Integer index of a goal.
      */
-    public void setGoalNumber(int goalNumber) {
-        this.goalNumber = goalNumber;
+    public void setChosenGoalIndex(int goalIndex) throws HaBitCommandException {
+        getGoal(goalIndex);  // Checks if goal corresponding to goal index exists
+        this.chosenGoalIndex = goalIndex;
+
     }
 
     public int getListLength() {
@@ -104,6 +120,7 @@ public class GoalList {
      */
     public void deleteGoal(int goalIndex, Ui ui) throws HaBitCommandException {
         Goal goal = getGoal(goalIndex);
+        updateChosenGoalIndex(goalIndex);
         goalList.remove(goal);
         ui.printRemovedGoal(goal.getDescription());
     }
@@ -118,16 +135,15 @@ public class GoalList {
      *                               If the habitIndex is not within the index range of the habitList.
      */
     public void deleteHabitFromGoal(int goalIndex, int habitIndex, Ui ui) throws HaBitCommandException {
-        Goal goal;
+        Goal goal = getGoal(goalIndex);
+        ArrayList<Habit> habits = goal.getHabitList();
         Habit habit;
         try {
-            goal = getGoal(goalIndex);
-            ArrayList<Habit> habits = goal.getHabitList();
-            habit = habits.get(habitIndex); // index out of bounds exception thrown here if invalid
-            goal.removeHabit(habitIndex);
+            habit = habits.get(habitIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new HaBitCommandException(ERROR_INVALID_HABIT_INDEX);
         }
+        goal.removeHabit(habitIndex);
         ui.printRemovedHabit(goal.getDescription(), habit.getHabitName());
     }
 
@@ -142,16 +158,15 @@ public class GoalList {
      *                               if habitIndex is not within index range of the habitList
      */
     public void doneHabitFromGoal(int goalIndex, int habitIndex, Ui ui) throws HaBitCommandException {
-        Goal goal;
+        Goal goal = getGoal(goalIndex);
+        ArrayList<Habit> habits = goal.getHabitList();
         Habit habit;
         try {
-            goal = getGoal(goalIndex);
-            ArrayList<Habit> habits = goal.getHabitList();
-            habit = habits.get(habitIndex); // index out of bounds exception thrown here if invalid
-            goal.doneHabit(habitIndex);
+            habit = habits.get(habitIndex);
         } catch (IndexOutOfBoundsException e) {
             throw new HaBitCommandException(ERROR_INVALID_HABIT_INDEX);
         }
+        goal.doneHabit(habitIndex);
         ui.printDoneHabit(goal.getDescription(), habit.getHabitName());
     }
 
@@ -198,7 +213,6 @@ public class GoalList {
         Goal goal = getGoal(goalIndex);
         String oldGoalName = goal.getGoalName();
         goal.setGoalName(newGoalName);
-
         goalList.set(goalIndex, goal);
         ui.printUpdatedGoal(oldGoalName, newGoalName);
     }
@@ -226,6 +240,19 @@ public class GoalList {
             throw new HaBitCommandException(ERROR_INVALID_GOAL_INDEX);
         }
         return goal;
+    }
+
+    /**
+     * Updates the chosen goal index when a goal is deleted.
+     *
+     * @param deletedGoalIndex Goal index to be deleted.
+     */
+    private void updateChosenGoalIndex(int deletedGoalIndex) {
+        if (this.chosenGoalIndex == deletedGoalIndex) {
+            this.chosenGoalIndex = -1;
+        } else if (this.chosenGoalIndex > deletedGoalIndex) {
+            this.chosenGoalIndex -= 1;
+        }
     }
 
 }

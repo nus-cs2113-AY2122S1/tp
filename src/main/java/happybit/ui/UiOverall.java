@@ -1,5 +1,7 @@
 package happybit.ui;
 
+import java.util.concurrent.TimeUnit;
+
 public class UiOverall {
 
     protected static final String S_TAB = "    ";
@@ -24,7 +26,7 @@ public class UiOverall {
      */
     protected void clearConsoleScreen() {
         try {
-            new ProcessBuilder("clear", "cls").inheritIO().start().waitFor();
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             final String os = System.getProperty("os.name");
             if (os.contains("Windows")) {
                 Runtime.getRuntime().exec("cls");
@@ -33,6 +35,17 @@ public class UiOverall {
             }
         } catch (final Exception e) {
             // do nothing
+        }
+    }
+
+    /**
+     * Waits for 'time' seconds before proceeding with the next method.
+     */
+    protected void waitApp(int time) {
+        try {
+            TimeUnit.SECONDS.sleep(time);
+        } catch (InterruptedException e) {
+            // Do nothing
         }
     }
 

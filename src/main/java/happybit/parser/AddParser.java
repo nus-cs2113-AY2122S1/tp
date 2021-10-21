@@ -120,8 +120,9 @@ public class AddParser {
         String[] improperFlagArray = {" -sl", " -fd", " -ex", " -sd", " -df",
             "-sl ", "-fd ", "-ex ", "-sd ", "-df ",
             "-sl", "-fd", "-ex", "-sd", "-df"};
-        if (countInstancesInString(input, improperFlagArray) != 0) {
-            throw new HaBitParserException("Flags should be defined with a space before and after.");
+        int flagCount = countInstancesInString(input, improperFlagArray);
+        if (flagCount == 1 || flagCount == 2) {
+            throw new HaBitParserException("Flags should be defined after name and before date with spaces.");
         }
     }
 

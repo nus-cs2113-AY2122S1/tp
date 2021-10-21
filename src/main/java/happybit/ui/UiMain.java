@@ -83,10 +83,12 @@ public class UiMain extends UiOverall {
                 command.runCommand(goalList, ui, storage);
                 isExit = isExitCommand(command);
                 isReturn = isReturnCommand(command);
+                checkFlags(isExit, isReturn);
             } catch (HaBitParserException | HaBitCommandException e) {
                 ui.showError(e.getMessage());
+                waitApp(2);
+                resetDisplay();
             }
-            checkFlags(isExit, isReturn);
         }
         return isReturn;
     }
@@ -99,7 +101,7 @@ public class UiMain extends UiOverall {
      */
     private String readUserInput(Scanner in) {
         System.out.print("Command: ");
-        String userInput = in.next();
+        String userInput = in.nextLine();
         System.out.print(LS);
         return userInput;
     }
@@ -140,7 +142,7 @@ public class UiMain extends UiOverall {
      * Wait for user to press Enter.
      */
     private void waitForEnter() {
-        System.out.println(RETURN_MESSAGE);
+        System.out.println(LS + RETURN_MESSAGE);
         Scanner in = new Scanner(System.in);
         String userInput = null;
         while (userInput == null) {
@@ -161,7 +163,7 @@ public class UiMain extends UiOverall {
      * Prints the title depending on goalType (if a goal has been set).
      */
     private void printTitle() {
-        GoalType goalType = getGoalType();
+        GoalType goalType = goalList.getChosenGoalType();
         switch (goalType) {
         case SLEEP:
             System.out.print(BAR + SLEEP_LOGO + BAR);
@@ -180,26 +182,21 @@ public class UiMain extends UiOverall {
         }
     }
 
+    // More work to be done next week before v2.0
 
-    private GoalType getGoalType() {
-
-        return GoalType.DEFAULT; // To be changed
+    private void printChosenGoal() {
+        if (goalList.getChosenGoalIndex() == -1) {
+            System.out.println("You may choose to view a goal with 'goal <GOAL_INDEX>'.");
+        } else {
+            printHabitList();
+        }
     }
 
-    private void getHabitForTheDay() {
-
-    }
-
-    private void getGoalNumber() {
-
-    }
-
-    private void getGoal() {
+    private void printHabitList() {
 
     }
 
-    private void getHabitList() {
+    private void printProgressBar() {
 
     }
-
 }

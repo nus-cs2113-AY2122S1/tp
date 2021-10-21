@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class UiStartup extends UiOverall {
 
@@ -92,17 +91,6 @@ public class UiStartup extends UiOverall {
         String userInput = in.next();
         System.out.print(LS);
         return userInput;
-    }
-
-    /**
-     * Waits for 'time' seconds before proceeding with the next method.
-     */
-    private void waitApp(int time) {
-        try {
-            TimeUnit.SECONDS.sleep(time);
-        } catch (InterruptedException e) {
-            // Do nothing
-        }
     }
 
     /**

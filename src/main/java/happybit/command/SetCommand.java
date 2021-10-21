@@ -15,6 +15,6 @@ public class SetCommand extends Command {
 
     @Override
     public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-        goalList.setGoalNumber(goalIndex);
+        goalList.setChosenGoalIndex(goalIndex);
     }
 }
