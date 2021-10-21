@@ -5,27 +5,27 @@ import java.util.ArrayList;
 import seedu.module.Module;
 
 public class TimetableDto {
-    private int semester;
-    private int earliestHour;
-    private int latestHour;
+    private final int semester;
+    private final int earliestHour;
+    private final int latestHour;
 
-    private ArrayList<Module> modules;
+    private final ArrayList<Module> modules;
 
-    private TimetableLesson[] mondayLesson = new TimetableLesson[24];
-    private TimetableLesson[] tuesdayLesson = new TimetableLesson[24];
-    private TimetableLesson[] wednesdayLesson = new TimetableLesson[24];
-    private TimetableLesson[] thursdayLesson = new TimetableLesson[24];
-    private TimetableLesson[] fridayLesson = new TimetableLesson[24];
-    private TimetableLesson[] saturdayLesson = new TimetableLesson[24];
-    private TimetableLesson[] sundayLesson = new TimetableLesson[24];
+    private final TimetableLesson[] mondayLesson = new TimetableLesson[24];
+    private final TimetableLesson[] tuesdayLesson = new TimetableLesson[24];
+    private final TimetableLesson[] wednesdayLesson = new TimetableLesson[24];
+    private final TimetableLesson[] thursdayLesson = new TimetableLesson[24];
+    private final TimetableLesson[] fridayLesson = new TimetableLesson[24];
+    private final TimetableLesson[] saturdayLesson = new TimetableLesson[24];
+    private final TimetableLesson[] sundayLesson = new TimetableLesson[24];
 
-    private TimetableUserItem[] mondayUserItems = new TimetableUserItem[24];
-    private TimetableUserItem[] tuesdayUserItems = new TimetableUserItem[24];
-    private TimetableUserItem[] wednesdayUserItems = new TimetableUserItem[24];
-    private TimetableUserItem[] thursdayUserItems = new TimetableUserItem[24];
-    private TimetableUserItem[] fridayUserItems = new TimetableUserItem[24];
-    private TimetableUserItem[] saturdayUserItems = new TimetableUserItem[24];
-    private TimetableUserItem[] sundayUserItems = new TimetableUserItem[24];
+    private final TimetableUserItem[] mondayUserItems = new TimetableUserItem[24];
+    private final TimetableUserItem[] tuesdayUserItems = new TimetableUserItem[24];
+    private final TimetableUserItem[] wednesdayUserItems = new TimetableUserItem[24];
+    private final TimetableUserItem[] thursdayUserItems = new TimetableUserItem[24];
+    private final TimetableUserItem[] fridayUserItems = new TimetableUserItem[24];
+    private final TimetableUserItem[] saturdayUserItems = new TimetableUserItem[24];
+    private final TimetableUserItem[] sundayUserItems = new TimetableUserItem[24];
 
     public TimetableDto(Timetable timetable) {
         this.semester = timetable.getSemester();
@@ -69,12 +69,16 @@ public class TimetableDto {
     public TimetableItem[] mergeTimetableItems(TimetableLesson[] lessons, TimetableUserItem[] userItems) {
         TimetableItem[] day = new TimetableItem[24];
         for (int i = 0; i < day.length; i++) {
-            if (lessons[i] != null) {
-                day[i] = lessons[i];
-            } else if (userItems[i] != null) {
-                day[i] = userItems[i];
-            } else {
-                day[i] = null;
+            try {
+                if (lessons[i] != null) {
+                    day[i] = lessons[i];
+                } else if (userItems[i] != null) {
+                    day[i] = userItems[i];
+                } else {
+                    day[i] = null;
+                }
+            } catch (NullPointerException e) {
+
             }
         }
         return day;

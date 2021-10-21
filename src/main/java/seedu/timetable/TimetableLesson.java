@@ -12,11 +12,10 @@ import seedu.ui.TimetableUI.LineType;
  * lesson.
  */
 public class TimetableLesson extends TimetableItem {
-
-    private int semester;
-    private String type;
-    private String venue;
-    private String classNo;
+    private final int semester;
+    private final String type;
+    private final String venue;
+    private final String classNo;
 
     /**
      * Creates a Timetable Lesson based off a valid Lesson in a Module.
