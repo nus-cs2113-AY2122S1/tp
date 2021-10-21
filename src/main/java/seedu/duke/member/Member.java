@@ -33,7 +33,8 @@ public class Member {
         setPresentOrLate(presentOrLate);
     }
 
-    public Member() {}
+    public Member() {
+    }
 
     public Member(String name, String studentNumber, String gender, String phoneNumber) {
         setName(name);
@@ -91,7 +92,9 @@ public class Member {
         return isActive;
     }
 
-    public void setAsActiveMember() { this.isActive = true; }
+    public void setAsActiveMember() { 
+        this.isActive = true; 
+    }
 
     public void setAsInActiveMember() {
         this.isActive = false;
@@ -105,7 +108,9 @@ public class Member {
         this.phoneNumber = Integer.parseInt(phoneNumber);
     }
 
-    public void setPresentOrLate(String presentOrLate) { this.presentOrLate = presentOrLate; }
+    public void setPresentOrLate(String presentOrLate) {
+        this.presentOrLate = presentOrLate; 
+    }
 
     public String getName() {
         return name;
@@ -115,7 +120,9 @@ public class Member {
         return studentNumber;
     }
 
-    public String getAttendance() { return presentOrLate; }
+    public String getAttendance() {
+        return presentOrLate; 
+    }
 
     /**
      * Formats description of member to be displayed to user.
