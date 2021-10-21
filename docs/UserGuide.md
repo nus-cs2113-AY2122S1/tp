@@ -16,19 +16,19 @@ ingredient inventory.**
 
 [**1. Quick Start**](#1-quick-start)  <br>
 [**2. Features**](#2-features)  <br>
-&nbsp;&nbsp;[2.1. Viewing Help](#21-viewing-help) <br>
-&nbsp;&nbsp;[2.2. Adding Ingredients](#22-adding-an-ingredient) <br>
-&nbsp;&nbsp;[2.3. Listing Ingredients](#23-listing-all-ingredients) <br>
-&nbsp;&nbsp;[2.4 Updating Ingredients](#24-updating-an-ingredient) <br>
-&nbsp;&nbsp;[2.5. Delete Ingredients](#25-stop-tracking-an-ingredient) <br>
-&nbsp;&nbsp;[2.6. Showing Expiring Ingredients](#26-showing-expiring-ingredients) <br>
-&nbsp;&nbsp;[2.7. Displaying Alerts](#27-displaying-alerts) <br>
-&nbsp;&nbsp;[2.8. Setting Thresholds](#28-setting-thresholds) <br>
-&nbsp;&nbsp;[2.9. Searching For Ingredients](#29-searching-for-ingredients) <br>
-&nbsp;&nbsp;[2.10. Viewing/ Setting Current Date](#210-viewing-setting-current-date) <br>
-&nbsp;&nbsp;[2.11. Exiting Program](#211-exiting-program) <br>
+&nbsp;&nbsp;[2.1. Help](#21-viewing-help) <br>
+&nbsp;&nbsp;[2.2. Add Ingredients](#22-add-ingredients) <br>
+&nbsp;&nbsp;[2.3. List Ingredients](#23-list-ingredients) <br>
+&nbsp;&nbsp;[2.4. Update Ingredients](#24-update-ingredients) <br>
+&nbsp;&nbsp;[2.5. Delete Ingredients](#25-delete-ingredients) <br>
+&nbsp;&nbsp;[2.6. Show Expiring Ingredients](#26-show-expiring-ingredients) <br>
+&nbsp;&nbsp;[2.7. Display Alerts](#27-display-alerts) <br>
+&nbsp;&nbsp;[2.8. Set Thresholds](#28-set-thresholds) <br>
+&nbsp;&nbsp;[2.9. Search Ingredients](#29-search-ingredients) <br>
+&nbsp;&nbsp;[2.10. View/ Set Current Date](#210-view-set-current-date) <br>
+&nbsp;&nbsp;[2.11. Exit Program](#211-exit-program) <br>
 [**3. FAQ**](#3-faq) <br>
-[**4.Command Summary**](#command-summary) <br>
+[**4. Command Summary**](#command-summary) <br>
 
 ## 1. Quick Start
 
@@ -37,27 +37,54 @@ ingredient inventory.**
 3. Copy the jar file to the folder that you want to use SITUS.
 4. Open a terminal and navigate to the folder containing the jar file.
 5. Type `java -jar Situs.jar` in the terminal window.
-6. If successful, you will see the following message:
+6. If successful, you should see the following message when the program starts up:
 
-   ![Welcome message](images/welcome.png)
+```
+____________________________________________________
+Welcome to SITUS!
+What would you like to do first?
+To see what I can do, use "help"
+____________________________________________________
+____________________________________________________
+No ingredients expiring by [5 days from current date]
+No ingredients with stock less than 1.0 kg
+____________________________________________________
+```
 
-   *Figure 1: welcome message in terminal*
    
 ## 2. Features
 
-This section covers the commands SITUS can execute, and how to use them.
+This section covers the commands SITUS can execute - how to use them and the expected output. 
 
 ### 2.1. Viewing Help
 
 Shows a list of available commands and their syntax.
 
-Format: `help`
+Command: `help`
+```
+help
+____________________________________________________
+These are the commands I can currently carry out:
+	(intended action - command format)
+	1. add an ingredient - add n/INGREDIENT_NAME a/AMOUNT u/UNITS e/EXPIRY
+	2. list all ingredients - list
+	3. update an ingredient - update n/INGREDIENT_NAME a/AMOUNT u/UNITS e/EXPIRY
+	4. delete an ingredient - delete INDEX
+	5. view SITUS's current date - date
+	6. edit SITUS's current date - date yyyy-mm-dd
+	7. exit SITUS - exit
+____________________________________________________
+```
 
-### 2.2. Adding An Ingredient
+
+
+### 2.2. Add Ingredients
 
 Add an ingredient to the ingredient list.
 
-Format: `add n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]`
+Command:
+\
+`add n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]`
 
 The parameters used in the command are:
 * `INGREDIENT_NAME`: name of the ingredient.
@@ -65,100 +92,249 @@ The parameters used in the command are:
 * `UNITS`: units specified to associate with `AMOUNT`.
 * `EXPIRY`: expiration date of ingredient, in format of `dd/mm/yyyy`.
 
+> Note: Ensure *ALL* parameters are specified when entering the command.
+
 Examples:
-* `add n/carrot a/200 u/sticks e/22/10/2021`
-* `add n/potato a/500 u/g e/25/10/2021`
+* `add n/carrot a/200 u/sticks e/01/03/2022`
+* `add n/potato a/500 u/g e/25/12/2021`
 
-### 2.3. Listing All Ingredients
+Output:
+```
+add n/carrot a/200 u/sticks e/01/03/2022
+____________________________________________________
+Got it. This ingredient has been added to the inventory:
+	Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
+Current inventory has 1 items.
+This ingredient will expire in 131 days.
+____________________________________________________
+```
+```
+add n/potato a/500 u/g e/25/12/2021
+____________________________________________________
+Got it. This ingredient has been added to the inventory:
+	Potato | Amount Left: 500.0 g | Expiry Date: 25/12/2021
+Current inventory has 2 items.
+This ingredient will expire in 65 days.
+____________________________________________________
+```
 
-Display a list of all ingredients in the ingredient list
+### 2.3. List Ingredients
 
-Format: `list`
+Displays a list of all ingredients in the ingredient list
 
-### 2.4. Updating An Ingredient
+Command: `list`
+```
+list
+____________________________________________________
+Here is the list of the ingredients currently in inventory:
+	1. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
+	2. Potato | Amount Left: 500.0 g | Expiry Date: 25/12/2021
+____________________________________________________
+```
+
+
+### 2.4. Update Ingredients
 
 Update the amount, unit and expiry of an ingredient in the ingredient list
 
-Format: `update n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]`
+Command: 
+\
+`update n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]`
 
 The parameters used in the command are:
-* `INGREDIENT_NAME`: name of the ingredient.
-* `AMOUNT`: updated amount of the ingredient.
-* `UNITS`: updated unit of the ingredient.
-* `EXPIRY`: updated expiration date of the ingredient, in format of `dd/mm/yyyy`.
+* `INGREDIENT_NAME`: name of the ingredient
+* `AMOUNT`: updated amount of the ingredient
+* `UNITS`: updated unit of the ingredient
+* `EXPIRY`: updated expiration date of the ingredient, in format of `dd/mm/yyyy`
 
 Examples:
-* `update n/carrot a/100 u/sticks e/21/10/2021`
-* `update n/potato a/0.6 u/kg e/27/10/2021`
+* `update n/carrot a/100 u/sticks e/05/04/2022`
+* `update n/potato a/0.6 u/kg e/30/12/2021`
 
-### 2.5. Stop Tracking An Ingredient
+```
+update n/carrot a/100 u/sticks e/05/04/2022
+____________________________________________________
+Got it. This ingredient has been updated:
+	Carrot | Amount Left: 100.0 sticks | Expiry Date: 05/04/2022
+____________________________________________________
+```
+```
+update n/potato a/0.6 u/kg e/30/12/2021
+____________________________________________________
+Got it. This ingredient has been updated:
+	Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+____________________________________________________
+```
 
-Delete an ingredient from the ingredient list based on its index in the list.
-> User are recommended to use `list` first to see which ingredients they are planning to remove.
-> However, removing a non-existed ingredient would just cause the program to show a corresponding warning.
+### 2.5. Delete Ingredients
 
-Format: `delete [INGREDIENT_NUMBER]`
+Delete an ingredient from the ingredient list based on its number in the list.
+> Note: Users are recommended to use the `list` command *prior* to deleting to confirm the ingredient number of the ingredient  they intend to remove.
+
+Command: `delete [INGREDIENT_NUMBER]`
 
 The parameter used in the command is:
 * `INGREDIENT_NUMBER`: the ingredient number to remove
 
 Example: `delete 1`
+```
+delete 1
+____________________________________________________
+Got it. This ingredient has been removed:
+	Carrot | Amount Left: 100.0 sticks | Expiry Date: 05/04/2022
+____________________________________________________
+```
 
-### 2.6. Showing expiring ingredients
+### 2.6. Show Expiring Ingredients
 
-List the ingredients that will expire by a specified date.
+List all ingredients that will expire by a specified date.
 
-Format: `expire [DATE]`
+Command: `expire [DATE]`
 
 The parameter used in the command is:
-* `DATE`: the date of interest, in format of `dd/mm/yyyy`.
+* `DATE`: the date of interest, in the format of `dd/mm/yyyy`.
 
-Example: `expire 12/11/2021`
+Example: `expire 30/01/2022`
 
-### 2.7 Displaying alerts
+Full ingredient List: 
+```
+list
+____________________________________________________
+Here is the list of the ingredients currently in inventory:
+	1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+	2. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
+	3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+	4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+____________________________________________________
+```
+```
+expire 30/01/2022
+____________________________________________________
+There are 3 ingredients expiring by: 2022-01-30
+	Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+	Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+	Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021	
+____________________________________________________
+```
+
+### 2.7 Display Alerts
 
 Displays the specified type of alert
 
-Format: `alerts [ALERT_TYPE]`
+Command: `alerts [ALERT_TYPE]`
 
 There are 3 possible `[ALERT_TYPE]`:
-1. `expiry`: displays the ingredients expiring within a threshold number of days
-2. `stock`: displays the ingredients with stock less than a threshold value
+1. `expiry`: displays all ingredients expiring within the *number of days* as specified by the threshold
+2. `stock`: displays all ingredients with stock lower than the threshold value
 3. `all`: displays both of the above
 
-For more about thresholds and setting them, see [here](#28-setting-thresholds).
+Full Ingredient List: 
+```
+list
+____________________________________________________
+Here is the list of the ingredients currently in inventory:
+	1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+	2. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
+	3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+	4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+____________________________________________________
+```
+```
+alerts expiry
+____________________________________________________
+No ingredients expiring by 2021-11-20
+____________________________________________________
+alerts stock
+____________________________________________________
+There are 1 ingredients with stock less than 5.0 kg
+	Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+____________________________________________________
+```
 
-### 2.8 Setting thresholds
+For more information about setting thresholds, see [here](#28-set-thresholds).
 
-Sets the expiry threshold or the stock threshold for the `[alerts](#27-displaying-alerts) function.
+### 2.8 Set thresholds
 
-Format: `set [TYPE] [NEW_VALUE]`
+Sets the expiry threshold or the stock threshold for the [alerts](#27-display-alerts) command.
+
+Command: `set [TYPE] [NEW_VALUE]`
 
 The parameters used in the command are:
 * `TYPE`: either `expiry` or `stock`
 * `NEW_VALUE`: the new threshold for which alerts will be displayed
+```
+set expiry 30
+____________________________________________________
+Successfully set expiry threshold to 30days
+____________________________________________________
+```
+```
+set stock 5
+____________________________________________________
+Successfully set low stock threshold to 5kg
+____________________________________________________
+```
 
-### 2.9. Searching For Ingredients
+### 2.9. Search Ingredients
 
 Search for ingredients using keywords in their names.
 
-Format: `find [INGREDIENT_NAMES]`
-* `INGREDIENT_NAMES`: The words to search for in the ingredient list. Can be one or more names.
+Command: `find [INGREDIENT_NAMES]`
+* `INGREDIENT_NAMES`: The words to search for in the ingredient list 
+> Note: One or more ingredient names can be entered. Separate them using *spaces*.
 
-Examples: `find carrot`, `find bean apple`
+Examples: `find radish`, `find potato tomato`
 
-### 2.10. Viewing/ Setting Current Date
+```
+find radish
+____________________________________________________
+I found these ingredients for "radish":
+	3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+____________________________________________________
+```
+```
+find potato tomato
+____________________________________________________
+I found these ingredients for "potato":
+	1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+I found these ingredients for "tomato":
+	4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+____________________________________________________
+```
+
+### 2.10. View/ Set Current Date
 
 View or set the system's current date. 
 
-Format: `date [NEW_DATE]`
-* `NEW_DATE`: The date to be set as the current date. If blank, the current date is shown.
+Command: `date [NEW_DATE]`
+* `NEW_DATE`: The date in the format of yyyy/mm/dd. 
+  * To view current date: Leave field empty
+  * To set a new current date: Key in the new date
+  
+```
+date
+____________________________________________________
+Current session date is: 21/10/2021
+____________________________________________________
+```
+```
+date 2022-01-01
+____________________________________________________
+The current session date has been changed to 01 01 2022
+____________________________________________________
+```
 
-### 2.11. Exiting Program
+### 2.11. Exit Program
 
-Exit the program once done.
+Exit the program once inventory check is completed.
 
-Format: `exit`
+Command: `exit`
+```
+exit
+____________________________________________________
+Okay, see you soon! Goodbye.
+____________________________________________________
+```
 
 ## 3. FAQ
 
