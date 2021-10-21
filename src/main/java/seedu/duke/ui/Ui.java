@@ -13,12 +13,12 @@ public class Ui {
 
     public static void printModule(Module mod, int index) {
         printIndex(index, false);
-        out.println(" " + mod.getModuleCode() + ": " + mod.getModuleName());
+        out.println(" " + mod.getModuleCode() + Constants.MODULE_NAME_SEPARATOR + mod.getModuleName());
     }
 
     public static void printUniversity(University uni, int index, UniversityList universityMasterList) {
         printIndex(index, false);
-        out.println(" " + uni.getMasterListIndex(universityMasterList) + "-" + uni.getName());
+        out.println(" " + uni.getMasterListIndex(universityMasterList) + Constants.MODULE_MAPPING_SEPARATOR + uni.getName());
     }
 
     public static void printModuleMapping(ModuleMapping mm, int index) {
