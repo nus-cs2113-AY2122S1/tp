@@ -50,6 +50,8 @@ public class Parser {
                     universitySelectedList, moduleSelectedList);
         case Constants.COMMAND_FIND:
             return new FindCommandParser().parse(arguments, universityMasterList, moduleMasterList);
+        case Constants.COMMAND_HELP:
+            return new HelpCommandParser().parse();
         case Constants.COMMAND_EXIT:
             return new ExitCommandParser().parse();
         default:
