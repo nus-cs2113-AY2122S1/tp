@@ -14,12 +14,15 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ContactsDecoder extends RegexParser {
+    public ContactList readContacts(File contactFile, String contactFilePath) throws FileErrorException {
         ContactList updatedContactList = new ContactList();
         try {
             Scanner fileScanner = new Scanner(contactFile);
+            int lineIndex = 1;
             while (fileScanner.hasNext()) {
                 String contactText = fileScanner.nextLine();
-                decodeContact(updatedContactList, contactText);
+                decodeContact(updatedContactList, contactText, lineIndex, contactFilePath);
+                lineIndex++;
             }
         } catch (FileNotFoundException e) {
             throw new FileErrorException();
