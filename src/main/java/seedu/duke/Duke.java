@@ -45,6 +45,7 @@ public class Duke {
     private void runCommandProcedure(Command command) {
         try {
             command.setContactList(contactList);
+            command.setPersonalContact(personalContact);
             command.execute();
             ContactsEncoder.saveContacts(contactFilePath, contactList);
         } catch (FileErrorException e) {
