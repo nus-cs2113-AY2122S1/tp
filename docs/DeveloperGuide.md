@@ -72,14 +72,17 @@ ensure that there is no existing module with code `CS2113T`.
 and `Software Engineering` set as its code and name respectively. Then, `ModuleList#addModule` is called to add the newly
 created `Module` object into the `modules` ArrayList within `ModuleList`.
 
+### Set marks
+he set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command`.<br>
+
 ## Product scope
 ### Target user profile
 
 * Teaching assistant who has a need to manage a significant number of students and their information
-* prefers desktop app over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+* Prefers desktop app over other types
+* Can type fast
+* Prefers typing to mouse interactions
+* Reasonably comfortable using CLI apps
 
 ### Value proposition
 
