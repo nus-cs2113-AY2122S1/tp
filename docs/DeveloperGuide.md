@@ -27,12 +27,18 @@ Young adults who are living in their own home.
 |v1.0|user|delete an ingredient|remove ingredients that I no longer have|
 |v1.0|user|increment quantities for a particular ingredient|record how much of that ingredient I have|
 |v1.0|user|decrement quantities for a particular ingredient|know how many ingredients are left|
+|v1.0|user|list the ingredients with quantities and expiry dates|know the ingredients I have at a glance|
+|v1.0|user|view the quantities for a particular ingredient|know how much of a specific ingredient I have|
+|v1.0|user|list ingredients expiring within the week|know which ingredients I should use up first|
+|v1.0|user|list ingredients that have expired already|know which ingredients to throw away|
 |v1.0|user|add the expiry date for a specific ingredient|record when it must be used by|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v1.0|user|add a recipe and its constituent ingredients|keep track of what I want to cook|
 |v1.0|user|delete a recipe|retain only recipes I want|
 |v2.0|user|be able to indicate that I have cooked a recipe|keep my ingredient repository accurate|
 |v2.0|user|list recipes i can cook based on the ingredients I have|save time on checking the ingredients I have|
+|v2.0|user|generate a shopping list for a particular recipe/recipes|know what ingredients to buy|
+|v2.0|user|delete all ingredients that have expired at one go|all ingredients I keep track of are not expired|
 
 ## Non-Functional Requirements
 
