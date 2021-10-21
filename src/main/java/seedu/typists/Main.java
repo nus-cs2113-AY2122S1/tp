@@ -51,6 +51,7 @@ public class Main {
         uiBot.showSummary(
                 p.getErrorWordCount(),
                 p.getErrorPercentage(),
+                p.getErrorWords(),
                 p.getWordPerMinute(),
                 p.getTotalWordTyped(),
                 p.totalTime
