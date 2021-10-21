@@ -76,7 +76,7 @@ Edits student information from a particular module
 
 Format: `edit_student c/<MODULE_CODE> s/<STUDENT_INDEX> i/<STUDENT_ID> n/<STUDENT_NAME>`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
-* `STUDENT_INDEX` refers to the index of the student in the module list
+* `STUDENT_INDEX` refers to the index of the student in the module
 * `STUDENT_ID` refers to the updated ID of the student (e.g. A0217978J)
 * `STUDENT_NAME` refers to the updated name of the student (e.g. Jon Limbs)
 
@@ -91,7 +91,7 @@ Deletes student information from a particular module
 
 Format: `delete_student c/<MODULE_CODE> s/<STUDENT_INDEX>`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
-* `STUDENT_INDEX` refers to the index of the student in the module list
+* `STUDENT_INDEX` refers to the index of the student in the module
 
 Examples:
 * `delete_student c/cs2113t s/1`
@@ -141,7 +141,7 @@ Add a student's marks for an assessment.
 
 Format: `set_marks c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
-* `STUDENT_INDEX` refers to the index of the student in the module list.
+* `STUDENT_INDEX` refers to the index of the student in the module.
 * `ASSESSMENT_NAME` refers to the name of the assessment that is to be marked.
 * `MARKS` refers to the marks given for the assessment.
 
@@ -156,7 +156,7 @@ Edits a student's mark for an assessment.
 
 Format: `edit_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
-* `STUDENT_INDEX` refers to the index of the student in the module list.
+* `STUDENT_INDEX` refers to the index of the student in the module.
 * `ASSESSMENT_NAME` refers to the name of the assessment that is to be remarked.
 * `NEW_MARKS` refers to the new marks to be given for the assessment.
 
@@ -171,7 +171,7 @@ Deletes a student's marks for an assessment.
 
 Format: `set_marks c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
-* `STUDENT_INDEX` refers to the index of the student in the module list.
+* `STUDENT_INDEX` refers to the index of the student in the module.
 * `ASSESSMENT_NAME` refers to the name of the assessment that is to be marked.
 
 Examples:
