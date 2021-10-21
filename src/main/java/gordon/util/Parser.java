@@ -215,6 +215,9 @@ public class Parser {
         case "time":
             try {
                 String[] splitTime = splitContent[1].substring(spaceIndex + 1).split(",");
+                if (splitTime.length < 2) {
+                    throw new GordonException(GordonException.COMMAND_INVALID);
+                }
                 int prepTime = Integer.parseInt(splitTime[0].trim());
                 int cookTime = Integer.parseInt(splitTime[1].trim());
                 if (prepTime < -1 || cookTime < -1) {
