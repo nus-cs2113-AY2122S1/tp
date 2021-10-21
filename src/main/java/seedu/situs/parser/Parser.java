@@ -293,10 +293,10 @@ public class Parser {
             switch (details[1].trim()) {
             case "expiry":
                 AlertExpiringSoonCommand.setExpiryThreshold(Long.parseLong(details[2].trim()));
-                return "Successfully set expiry threshold to " + details[2].trim() + "days";
+                return "Successfully set expiry threshold to " + details[2].trim() + " days";
             case "stock":
                 AlertLowStockCommand.setLowStockThreshold(Double.parseDouble(details[2].trim()));
-                return "Successfully set low stock threshold to " + details[2].trim() + "kg";
+                return "Successfully set low stock threshold to " + details[2].trim() + " kg";
             default:
                 throw new DukeException("Invalid Input");
             }

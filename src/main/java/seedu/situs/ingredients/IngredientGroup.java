@@ -53,6 +53,15 @@ public class IngredientGroup {
     }
 
     /**
+     * Gets the total amount of an ingredient.
+     *
+     * @return the total amount of an ingredient
+     */
+    public double getTotalAmount() {
+        return totalAmount;
+    }
+
+    /**
      * Gets the string representation of an ingredient in the list.
      *
      * @param ingredientNumber ingredient number to get information
@@ -96,7 +105,7 @@ public class IngredientGroup {
 
         for (int i = 1; i <= getIngredientGroupSize(); i++) {
             try {
-                printedGroup += '\t' + getIngredientInfo(i);
+                printedGroup += "\t\t" + getIngredientInfo(i);
                 if (i < getIngredientGroupSize()) {
                     printedGroup += '\n';
                 }
