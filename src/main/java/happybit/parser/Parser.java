@@ -1,9 +1,10 @@
 package happybit.parser;
 
 import happybit.command.Command;
-import happybit.command.HelpCommand;
-import happybit.command.ExitCommand;
 import happybit.command.ListGoalsCommand;
+import happybit.command.ExitCommand;
+import happybit.command.HelpCommand;
+import happybit.command.ReturnCommand;
 import happybit.exception.HaBitParserException;
 
 public class Parser {
@@ -13,6 +14,7 @@ public class Parser {
     private static final String COMMAND_HELP = "help";
     private static final String COMMAND_ADD_GOAL = "set";
     private static final String COMMAND_ADD_HABIT = "add";
+    private static final String COMMAND_SET_GOAL = "goal";
     private static final String COMMAND_UPDATE_GOAL_NAME = "update";
     private static final String COMMAND_UPDATE_HABIT_NAME = "change";
     private static final String COMMAND_LIST_GOAL = "list";
@@ -20,7 +22,9 @@ public class Parser {
     private static final String COMMAND_DELETE_GOAL = "remove";
     private static final String COMMAND_DELETE_HABIT = "delete";
     private static final String COMMAND_COMPLETE_HABIT = "done";
+    private static final String COMMAND_RETURN = "return";
     private static final String COMMAND_EXIT = "bye";
+
 
     /**
      * Parses the user input.
@@ -116,10 +120,12 @@ public class Parser {
             return AddParser.parseAddGoalCommand(details);
         case COMMAND_ADD_HABIT:
             return AddParser.parseAddHabitCommand(details);
+        case COMMAND_SET_GOAL:
+            return SetParser.parseSetGoalCommand(details);
         case COMMAND_LIST_GOAL:
             return new ListGoalsCommand();
         case COMMAND_LIST_HABIT:
-            return ListParser.parseListHabitCommand(details);
+            return ListHabitParser.parseListHabitCommand(details);
         case COMMAND_DELETE_GOAL:
             return DeleteParser.parseDeleteGoalCommand(details);
         case COMMAND_DELETE_HABIT:
@@ -130,6 +136,8 @@ public class Parser {
             return UpdateParser.parseUpdateGoalNameCommand(details);
         case COMMAND_EXIT:
             return new ExitCommand();
+        case COMMAND_RETURN:
+            return new ReturnCommand();
         case COMMAND_HELP:
         default:
             return new HelpCommand();

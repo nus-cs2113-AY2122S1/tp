@@ -1,6 +1,5 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-hide footbox
+!include Style.puml
 
 -> ":ListGoalsCommand": runCommand(goalList: GoalList,\nui:Ui,storage:Storage)
 activate ":ListGoalsCommand"

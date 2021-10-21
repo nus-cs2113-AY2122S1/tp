@@ -1,21 +1,17 @@
 package happybit;
 
-import happybit.command.Command;
-import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitStorageException;
-import happybit.exception.HaBitParserException;
 import happybit.goal.GoalList;
-import happybit.parser.Parser;
+import happybit.state.State;
 import happybit.storage.Storage;
 import happybit.ui.Ui;
-
-import java.util.Scanner;
 
 public class HappyBit {
 
     private Storage storage;
     private GoalList goalList;
     private Ui ui;
+    private State state;
 
     /**
      * Duke class constructor that also loads in tasks data from an external save file.
@@ -26,6 +22,7 @@ public class HappyBit {
         ui = new Ui();
         storage = new Storage(filePath, fileDir);
         goalList = new GoalList();
+        state = new State(goalList, ui, storage);
         loadData();
     }
 
@@ -59,36 +56,24 @@ public class HappyBit {
     }
 
     /**
-     * Executes the main body of HappyBit.
+     * Exports data to an external storage.
      */
-    private void run() {
-        ui.showWelcome();
-        handleUserInput();
+    private void exportData() {
         try {
             storage.export(goalList.getGoalList());
         } catch (HaBitStorageException e) {
             ui.showError(e.getMessage());
         }
-        ui.showGoodbye();
     }
 
     /**
-     * Takes in the user input and performs the relevant commands.
+     * Executes the main body of HappyBit.
      */
-    private void handleUserInput() {
-        String userInput;
-        boolean isExit = false;
-        Scanner in = new Scanner(System.in);
-        while (!isExit) {
-            userInput = in.nextLine();
-            try {
-                Command command = Parser.parse(userInput);
-                command.runCommand(goalList, ui, storage);
-                isExit = command.isExit();
-            } catch (HaBitParserException | HaBitCommandException e) {
-                ui.showError(e.getMessage());
-            }
-        }
+    private void run() {
+        state.startupState();
+        state.handleState();
+        exportData();
+        ui.showGoodbye();
     }
 
 }

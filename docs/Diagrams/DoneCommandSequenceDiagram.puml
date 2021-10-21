@@ -1,5 +1,5 @@
 @startuml
-hide footbox
+!include Style.puml
 
 -> ":DoneHabitCommand": runCommand(goalList: GoalList,\nui: Ui, storage: Storage)
 activate ":DoneHabitCommand"
