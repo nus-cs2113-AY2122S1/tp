@@ -88,6 +88,15 @@ The `training schedule` component
 *can save trainings schedules and read them back into the `TrainingList` object. 
 *automatically deletes in the file whenever a training schedule is deleted from the `TrainingList` object
 
+**API** : [`Member.java`](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/member/Member.java)
+
+![Member Component Diagram](images/MemberComponent.png)
+
+The `Member` component,
+* instantiates an `MemberList` object comprising of 0 `Member` object.
+* stores inputted `Member` objects in a list as an `ArrayList<Member>` in `MemberList` class.
+* stores the `MemberList` object in a csv file with the help of `MemberStorage`.
+
 ## Appendix: Requirements
 ### Product scope
 #### **Target user profile**
