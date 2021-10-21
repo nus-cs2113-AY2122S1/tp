@@ -4,6 +4,29 @@
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
+## Getting started
+
+### Recommended software (for optimal compatibility)
+
+* Github
+* Sourcetree (for version control)
+* IntelliJ IDEA (IDE)
+* Amazon Coretto
+
+### Setting up this project in your computer
+
+1. **On Github, fork this repo by clicking on the fork button**
+1. **In Sourcetree, clone the fork into your computer**
+   1. Open a new tab
+   1. Select the clone button at the top of the menu
+   1. Key in the details of this repository
+1. **Configure the JDK:** Follow the guide [Project Configuration/ SDKs](https://www.jetbrains.com/help/idea/sdk.html) to ensure that Intellij is configured to use JDK 11.
+1. **Import the project as a Gradle project:** Follow the guide [Intellij IDEA: Importing a Gradle project
+   ](https://se-education.org/guides/tutorials/intellijImportGradleProject.html)
+1. **Verify the setup:**
+   1. Run the seedu.address.Main and try a few commands.
+   1. Run the tests to ensure they all pass.
+
 ## Design
 
 ### Architecture
@@ -82,6 +105,16 @@ The Diagram below is the class diagram for the Recipe class
 
 ### Parser component
 
+The diagram below is the class diagram for the `Parser` class
+
+
+
+Functions of the Parser class:
+* Reads in user input by implementing the `Scanner` class
+  * The parseMaster() method parses through the user's input to find the best match for the user's intended command
+  * The corresponding command is then returned to the `Gordon` class
+* Prints responses to the console by implementing the `UI` class
+
 ### Command component
 
 The Diagram below is the class diagram for the Command Class
@@ -117,6 +150,8 @@ The `Command` class can be classified into 4 main functionalities:
    * `TagUntagCommand` is where the `untag` feature of gordon is executed
 
 ### Storage component
+
+### UI Component
 
 ## Implementation
 
