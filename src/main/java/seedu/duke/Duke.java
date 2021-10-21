@@ -1,33 +1,25 @@
 package seedu.duke;
 
 import seedu.duke.employee.EmployeeList;
-import seedu.duke.employee.EmployeeParser;
 import seedu.duke.ingredient.IngredientList;
-import seedu.duke.ingredient.IngredientParser;
 import seedu.duke.main.MainParser;
 import seedu.duke.main.MainUI;
-import seedu.duke.menu.MenuList;
-import seedu.duke.menu.MenuParser;
+import seedu.duke.dish.Menu;
+import seedu.duke.finance.FinanceList;
 import seedu.duke.storage.Storage;
 
-import java.io.File;
 import java.util.Scanner;
 
 public class Duke {
 
     public static void main(String[] args) {
-
         EmployeeList employeeList = new EmployeeList();
-        EmployeeParser employeeParser = new EmployeeParser();
-
-        MenuList menuList = new MenuList();
-        MenuParser menuParser = new MenuParser();
-
+        Menu menu = new Menu();
         IngredientList ingredientList = new IngredientList();
-        IngredientParser ingredientParser = new IngredientParser();
+        FinanceList financeList = new FinanceList();
 
         // Load Storage
-        File file = Storage.loadStorage(employeeList, employeeParser, menuList, menuParser, ingredientList, ingredientParser);
+        Storage.loadStorage(employeeList, menu, ingredientList, financeList);
 
         // Hello
         MainUI.printWelcomeMessage();
@@ -41,16 +33,15 @@ public class Duke {
             //store input into String
             userInput = input.nextLine();
             //process input
-            isBye = MainParser.handleCommand(employeeList, employeeParser, menuList, menuParser, ingredientList, ingredientParser, userInput);
+            isBye = MainParser.handleCommand(employeeList, menu, ingredientList, financeList, userInput);
         }
 
         // Bye
         MainUI.printGoodbyeMessage();
 
         // Save Storage
-        Storage.saveStorage(employeeList, menuList, ingredientList, file);
+        Storage.saveStorage(employeeList, menu, ingredientList, financeList);
         MainUI.printStorageSaved();
-
     }
 
 }

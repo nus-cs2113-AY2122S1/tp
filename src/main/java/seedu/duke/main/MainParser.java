@@ -1,23 +1,24 @@
 package seedu.duke.main;
 
-import seedu.duke.employee.Employee;
 import seedu.duke.employee.EmployeeList;
 import seedu.duke.employee.EmployeeParser;
-import seedu.duke.ingredient.Ingredient;
 import seedu.duke.ingredient.IngredientList;
 import seedu.duke.ingredient.IngredientParser;
-import seedu.duke.menu.MenuItem;
-import seedu.duke.menu.MenuList;
-import seedu.duke.menu.MenuParser;
+import seedu.duke.finance.FinanceList;
+import seedu.duke.finance.FinanceParser;
+import seedu.duke.dish.Menu;
+import seedu.duke.dish.DishParser;
 
 public class MainParser {
 
-    public static boolean handleCommand(EmployeeList employeeList, EmployeeParser employeeParser,
-                                        MenuList menuList, MenuParser menuParser,
-                                        IngredientList ingredientList, IngredientParser ingredientParser,
-                                        String userInput) {
+    public static boolean handleCommand(EmployeeList employeeList, Menu menu, IngredientList ingredientList,
+                                        FinanceList financeList, String userInput) {
+        EmployeeParser employeeParser = new EmployeeParser();
+        DishParser dishParser = new DishParser();
+        IngredientParser ingredientParser = new IngredientParser();
+        FinanceParser financeParser = new FinanceParser();
 
-        String[] command = userInput.trim().split("\\|", 3);
+        String[] command = userInput.trim().split("/", 3);
 
         switch (command[0]) {
         case "add-employee":
@@ -29,14 +30,20 @@ public class MainParser {
         case "list-employee":
             employeeParser.listEmployee(employeeList);
             break;
-        case "add-menu":
-            menuParser.addMenu(command, menuList);
+        case "add-dish":
+            dishParser.addDish(command, menu);
             break;
-        case "remove-menu":
-            menuParser.deleteMenu(command, menuList);
+        case "remove-dish":
+            dishParser.removeDish(command, menu);
+            break;
+        case "edit-dish":
+            dishParser.editDish(command, menu);
+            break;
+        case "discount-dish":
+            dishParser.discountDish(command, menu);
             break;
         case "list-menu":
-            menuParser.listMenu(menuList);
+            dishParser.listMenu(menu);
             break;
         case "add-ingredient":
             ingredientParser.addIngredient(command, ingredientList);
@@ -47,13 +54,28 @@ public class MainParser {
         case "list-ingredient":
             ingredientParser.listIngredient(ingredientList);
             break;
+        case "add-finance":
+            financeParser.addFinance(command, financeList);
+            break;
+        case "remove-finance":
+            financeParser.deleteFinance(command, financeList);
+            break;
+        case "list-finance":
+            financeParser.listFinance(financeList);
+            break;
+        case "show-finance":
+            financeParser.showFinance(financeList);
+            break;
+        case "edit-finance":
+            financeParser.editFinance(command, financeList);
+            break;
         case "bye":
             return true;
         default:
             MainUI.printWrongCommandMessage();
+            break;
         }
         return false;
-
     }
 
 }
