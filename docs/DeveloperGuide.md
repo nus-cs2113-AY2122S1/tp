@@ -210,6 +210,19 @@ This approach solves the issue when a user dispenses a medication with an amount
 that is more than the current batch of stock with the same _stock_ id but less than
 the total stock quantity. 
 MediVault will correctly add new _dispense_ records with the corresponding _stock_ Id.
+
+### UpdateOrderCommand
+
+MediVault initialises an UpdateOrderCommand class when CommandParser identifies the
+`updateorder` or the `update` keyword in the `order` mode.
+
+* MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
+* MediVault restricts updating of order information that are already **delivered**.
+
+The sequence diagram for UpdateOrderCommand is shown below.
+
+![UpdateOrderSequenceDiagram](diagrams/diagram_images/UpdateOrderSequenceDiagram.png)
+
 ## Product scope
 
 ### Target user profile
