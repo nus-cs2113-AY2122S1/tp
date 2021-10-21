@@ -5,7 +5,6 @@ import seedu.contact.ContactList;
 import seedu.exception.FileErrorException;
 import seedu.parser.AddPersonalContactParser;
 import seedu.ui.TextUi;
-import seedu.ui.UserInputTextUi;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,14 +14,19 @@ public class Storage {
     private final File contactFile;
     private final String personalContactFilePath;
     private final File personalContactFile;
+    private final ContactsDecoder contactsDecoder;
+    private final ContactsEncoder contactsEncoder;
     public static final String SEPARATOR = ",";
     private static boolean isFirstRun = false;
 
-    public Storage(String contactFilePath, String personalContactFilePath) {
+    public Storage(String contactFilePath, String personalContactFilePath, ContactsDecoder contactsDecoder,
+                   ContactsEncoder contactsEncoder) {
         this.contactFilePath = contactFilePath;
         this.contactFile = new File(contactFilePath);
         this.personalContactFilePath = personalContactFilePath;
         this.personalContactFile = new File(personalContactFilePath);
+        this.contactsDecoder = contactsDecoder;
+        this.contactsEncoder  = contactsEncoder;
     }
 
     public static boolean getIsFirstRun() {
@@ -71,7 +75,7 @@ public class Storage {
         if (!hasExistingContactFile()) {
             return new ContactList();
         }
-        return ContactsDecoder.readContacts(contactFile);
+        return contactsDecoder.readContacts(contactFile, contactFilePath);
     }
 
     public Contact loadExistingPersonalContact() throws FileErrorException {
@@ -81,10 +85,10 @@ public class Storage {
             AddPersonalContactParser addPersonalContactParser = new AddPersonalContactParser();
             addPersonalContactParser.startCollectingPersonalDetails();
             Contact personalContact = addPersonalContactParser.getPersonalContact();
-            ContactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
+            contactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
             return personalContact;
         }
-        Contact personalContact = ContactsDecoder.readPersonalContact(personalContactFile);
+        Contact personalContact = contactsDecoder.readPersonalContact(personalContactFile);
         TextUi.welcomeBackMessage(personalContact);
         return personalContact;
     }
