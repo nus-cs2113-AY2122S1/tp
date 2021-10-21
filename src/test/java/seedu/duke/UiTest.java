@@ -303,5 +303,51 @@ public class UiTest {
 
         assertEquals(expectedOutput, outputToBeTested);
     }
+
+    @Test
+    public void printBudgetWarning_givenBudget_printBudgetWarningMsg() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You are almost reaching the OCTOBER food budget: $49.00/$50.00" + newLine
+                + "Would you like to readjust your OCTOBER food budget?" + newLine
+                + SEPARATOR_LINE;
+        testUI.printBudgetWarning("OCTOBER", "food", 49, 50);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printBudgetExceeded_exceeded_printBudgetExceededMsg() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "You have exceeded the OCTOBER food budget: $900.00/$50.00" + newLine
+                + "Would you like to readjust your OCTOBER food budget?" + newLine
+                + SEPARATOR_LINE;
+        testUI.printBudgetExceeded("OCTOBER", "food", 900, 50);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printBudgetSetConfirmation_setBudget_printBudgetSetMessage() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "FOOD budget has been set to $56.71" + newLine + SEPARATOR_LINE;
+        testUI.printBudgetSetConfirmation(56.71, ExpenseCategory.FOOD);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printBudget_givenBudget_printBudgetMsg() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Current FOOD limit is $58.71" + newLine
+                + SEPARATOR_LINE;
+        testUI.printBudget(ExpenseCategory.FOOD, 58.71);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
+
+    @Test
+    public void printThresholdConfirmation_validThreshold_printThresholdMsg() {
+        String expectedOutput = SEPARATOR_LINE + newLine
+                + "Threshold for budget reminders set to 58.71" + newLine
+                + SEPARATOR_LINE;
+        testUI.printThresholdConfirmation(58.71);
+        assertEquals(expectedOutput, outputStreamCaptor.toString().trim());
+    }
 }
 
