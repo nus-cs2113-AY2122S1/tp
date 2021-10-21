@@ -101,7 +101,7 @@ public class TagTest {
                 + "listTags";
         String expected = "1. Hawker Food"
                 + System.lineSeparator()
-                +"2. Poultry"
+                + "2. Poultry"
                 + System.lineSeparator()
                 + "3. Favorite"
                 + System.lineSeparator();
