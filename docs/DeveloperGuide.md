@@ -47,6 +47,15 @@ The intended audience for this document are developers looking to introduce new 
 4. Click **`File`** > **`Open`** 
 5. Locate and select the cloned project directory.
 6. Accept all defaults as prompted by IntelliJ.
+
+### 2.3. Running the program for the first time
+1. Run the main SITUS program in `src/main/java/seedu.situs/Situs`.
+2. Key in a few commands to make sure the program works.
+>:exclamation: **Note**: Before proceeding with step 3, make sure all the contents in the file `data/ingredients.txt`
+> are fully deleted. The Junit tests in step 3 will not pass if there are contents already in the storage file.
+3. Run the Junit tests in `/src/test/java/seedu.situs` to make sure the programs passes all tests.
+
+
 ## 3. Design
 
 ### 3.1. System Architecture
@@ -103,6 +112,19 @@ Each of the `Ingredient` objects contains information about an ingredient, namel
 ### 3.5 Storage component
 
 The **Storage** component can be found in the `Storage` package
+
+Below is a partial class diagram of the `Storage` component
+
+![image](images/StorageDiagram.png)
+
+The `Storage` class
+* loads/makes storage data file in memory when its constructor is called.
+* has a public method to return the `ArrayList` of `Ingredient` type in the storage file.
+* has a public method can take an `ArrayList` of `Ingredient` to write to the memory file.
+
+The two public methods mentioned above are the most essential for the storage capablility of the program.
+`IngredientList` object will only use `loadIngredientsFromMemory()` and `writeIngredientsToMemory()` methods
+of the storage class only when there is a change in the ingredient list of the program.
 
 ### 3.6 Command component
 
