@@ -16,7 +16,14 @@ Exchange Programme, optimised for use via Command Line Interface (CLI).
 
 ## Features 
 
-
+### Viewing all selected universities: `list /suni`
+Displays all universities added by the user.
+Format: `list /suni`  
+Examples:
+`list /suni`  
+[35] Singapore Management Univeristy  
+[69] University of Leeds  
+[77] - University of Waterloo
 
 ### Viewing all master universities: `list /muni`
 Displays all universities from the master list.
@@ -112,6 +119,40 @@ find /mod CS10
 [4] CS1010S : Programming Methodology
 ```
 
+### Searching for available module mappings: `searchmap`
+Displays all available module mappings for a specific university.
+The mappings displayed will be based on the list of selected modules.
+
+Mappings here are labeled with an index, this index will be used for subsequent commands.
+
+Format: searchmap UNIVERSITY_INDEX
+
+Examples:
+
+* Input: `searchmap 4`
+
+* Output:
+  ```
+  Potential mappings for Boston University:
+  [1] CS1231 - MET CS 248 : Discrete Mathematics
+  [2] CS1231 - CAS CS131 : Combinatoric Structures
+  ```
+### Adding a module mapping: add /map
+Adds a specific pair of module mapping under a selected university.
+
+Format: add /map UNIVERSITY_INDEX MODULE_MAPPING_INDEX
+
+Examples:
+
+* Input: `add /map 4 2`
+
+* Output:
+```
+The following module mapping has been added under:
+[4] Boston University
+CS1231 - MET CS 248 : Discrete Mathematics
+CS1231 - CAS CS131 : Combinatoric Structures
+```
 
 ### Removing a selected university: `remove /uni`  
 Removes a university from the selected list.
