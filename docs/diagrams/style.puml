@@ -5,9 +5,14 @@
 
 !define UI_COLOUR #LimeGreen
 !define PARSER_COLOUR #DarkOrchid
+!define PARSER_COLOUR_S1 #Orchid
 !define INGREDIENTLIST_COLOUR #DeepSkyBlue
+!define INGREDIENT_COLOUR #SkyBlue
 !define STORAGE_COLOUR #GoldenRod
 !define COMMAND_COLOUR #Crimson
+!define COMMAND_COLOUR_S1 #Pink
+!define COMMAND_COLOUR_S2 #DarkSalmon
+!define DATE_COLOUR #Khaki
 !define MAIN_COLOUR #Grey
 
 skinparam MinClassWidth 50

@@ -117,9 +117,9 @@ Example: `expire 12/11/2021`
 
 Displays the specified type of alert
 
-Format: `alerts [TYPE]`
+Format: `alerts [ALERT_TYPE]`
 
-There are 3 possible `[TYPE]`:
+There are 3 possible `[ALERT_TYPE]`:
 1. `expiry`: displays the ingredients expiring within a threshold number of days
 2. `stock`: displays the ingredients with stock less than a threshold value
 3. `all`: displays both of the above
