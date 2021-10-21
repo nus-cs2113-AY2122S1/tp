@@ -10,5 +10,6 @@ public class AddTourCommand extends Command {
     @Override
     public void execute() {
         tours.add(tour);
+        ui.showAddTour(tour);
     }
 }

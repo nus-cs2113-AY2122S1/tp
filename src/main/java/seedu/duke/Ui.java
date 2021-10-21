@@ -93,6 +93,10 @@ public class Ui {
         show(ADD_MESSAGE + "\n" + flight);
     }
 
+    public void showAddTour(Tour tour) {
+        show(ADD_MESSAGE + "\n" + tour);
+    }
+
     /**
      * Prints an exit message to the text Ui to acknowledge exiting the application.
      */
