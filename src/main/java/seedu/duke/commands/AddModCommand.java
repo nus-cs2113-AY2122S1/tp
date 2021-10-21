@@ -29,10 +29,11 @@ public class AddModCommand extends Command {
         Ui.printModule(moduleToAdd, moduleIndexToAdd);
     }
 
-    public AddModCommand(Module moduleToAdd, ModuleList moduleSelectedList) throws IOException {
+    public AddModCommand(Module moduleToAdd, ModuleList moduleMasterList,
+                         ModuleList moduleSelectedList) throws IOException {
 
         this.moduleToAdd = moduleToAdd;
-        this.moduleIndexToAdd = moduleToAdd.getModuleIndex(moduleSelectedList);
+        this.moduleIndexToAdd = moduleToAdd.getModuleIndex(moduleMasterList);
         assert moduleToAdd.getModuleCode() != null;
         moduleSelectedList.addModule(moduleToAdd);
         assert moduleSelectedList.getSize() != 0;

@@ -24,7 +24,7 @@ public class AddCommandParser {
                          UniversityList universitySelectedList, ModuleList moduleSelectedList)
             throws ParseException, IOException {
 
-        String[] argumentsSubstrings = arguments.trim().split(" ", 3);
+        String[] argumentsSubstrings = arguments.trim().split(" ", 2);
         if (argumentsSubstrings.length < 2) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
@@ -52,7 +52,7 @@ public class AddCommandParser {
                     throw new ParseException("module does not exist", 1);
                 }
                 assert module.getModuleCode() != null;
-                return new AddModCommand(module, moduleSelectedList);
+                return new AddModCommand(module, moduleMasterList, moduleSelectedList);
             }
         case Constants.FLAG_UNIVERSITY:
             if (!textMatches) {
@@ -66,21 +66,28 @@ public class AddCommandParser {
                 if (universityName.length() == 0) {
                     throw new ParseException("no university given", 1);
                 }
-                if (!universityMasterList.searchUniversity(universityName)) {
+                University university = universityMasterList.getUniversity(universityName);
+                if (university == null) {
                     throw new ParseException("university does not exist", 1);
                 }
-                ArrayList<ModuleMapping> list = new ArrayList<>();
-                University university = new University(universityName, list);
+                university.list = new ArrayList<>();
                 assert university.getName() != null;
-                return new AddUniCommand(university, universitySelectedList);
+                return new AddUniCommand(university, universityMasterList, universitySelectedList);
             }
         case Constants.FLAG_MAP:
+            argumentsSubstrings = arguments.trim().split(" ", 3);
             int uniIndex = Integer.parseInt(argumentsSubstrings[1].trim());
+            int modIndex = Integer.parseInt(argumentsSubstrings[2].trim());
             if (argumentsSubstrings.length < 3) {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
             }
-            int mapIndex = Integer.parseInt(argumentsSubstrings[2].trim());
-            return new AddMapCommand(uniIndex, mapIndex, universityMasterList,
+            University university = universityMasterList.get(uniIndex - 1);
+            Module moduleToMap = moduleMasterList.get(modIndex - 1);
+            Module mappedModule = university.getMappedModule(moduleToMap, moduleSelectedList);
+            if (mappedModule == null) {
+                throw new ParseException("There is no available module mapping.", 1);
+            }
+            return new AddMapCommand(uniIndex, modIndex, universityMasterList,
                     moduleMasterList, universitySelectedList, moduleSelectedList);
         default:
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
@@ -94,5 +101,4 @@ public class AddCommandParser {
     public Module searchForModule(String moduleCode, ModuleList moduleMasterList) {
         return moduleMasterList.getModule(moduleCode);
     }
-
 }
