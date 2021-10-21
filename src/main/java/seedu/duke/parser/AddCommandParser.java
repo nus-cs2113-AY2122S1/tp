@@ -33,7 +33,8 @@ public class AddCommandParser {
         String regex = ".*[a-zA-Z].*";  // regex to check if string contains any letters
         Pattern pattern = Pattern.compile(regex);  // compiles the regex
         Matcher matcherText = pattern.matcher(argumentsSubstrings[1]);
-        Boolean textMatches = matcherText.matches();
+        boolean textMatches = matcherText.matches();
+
         switch (flag) {
         case Constants.FLAG_MODULE:
             if (!textMatches) {

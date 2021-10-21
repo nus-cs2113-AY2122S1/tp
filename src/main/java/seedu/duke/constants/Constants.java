@@ -13,6 +13,7 @@ public class Constants {
     public static final String COMMAND_EXIT = "exit";
     public static final String COMMAND_LIST = "list";
     public static final String COMMAND_SEARCHMAP = "searchmap";
+    public static final String COMMAND_HELP = "help";
     public static final String COMMAND_FIND = "find";
 
     // Flags
@@ -28,9 +29,12 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS = "Incorrect flags passed.";
     public static final String ERRORMSG_PARSEEXCEPTION_INCORRECTCOMMAND = "Incorrect command passed.";
     public static final String ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS = "Missing arguments.";
-    public static final String ERRORMSG_PARSEEXCEPTION_UNINOTFOUND = "University not found";
-    public static final String ERRORMSG_PARSEEXCEPTION_MODNOTFOUND = "Module not found";
-    public static final String ERRORMSG_PARSEEXCEPTION_MATCHERCLASS = "Matcher class exception";
+    public static final String ERRORMSG_PARSEEXCEPTION_UNINOTFOUND = "University not found.";
+    public static final String ERRORMSG_PARSEEXCEPTION_MODNOTFOUND = "Module not found.";
+    public static final String ERRORMSG_PARSEEXCEPTION_MATCHERCLASS = "Matcher class exception.";
+    public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMOD = "This module has already been added.";
+    public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEUNI = "This university has already been added.";
+    public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP = "This mapping has already been added.";
 
     // Logging messages
     public static final String LOGMSG_PARSESUCCESS = "Parse completed successfully";
