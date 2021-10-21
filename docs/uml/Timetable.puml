@@ -11,79 +11,26 @@ TimetableCommand -> Timetable: Timetable(moduleManager)
 Activate Timetable #FFBBBB
 Timetable --> TimetableCommand
 Deactivate Timetable
-Deactivate TimetableCommand
 
 
 alt isStringNullOrEmpty(day)
 TimetableCommand -> Timetable: getWeeklySchedule()
-Activate TimetableCommand #FFBBBB
 Activate Timetable #FFBBBB
-
-loop For each day in DaysOfWeekEnum
 
 Timetable -> StringBuilder: StringBuilder()
 Activate StringBuilder #FFBBBB
 StringBuilder --> Timetable
 Deactivate StringBuilder
 
-Timetable -> ModuleManager: getAllModules()
-Activate ModuleManager #FFBBBB
-NusModule --> ModuleManager: modules
-Activate NusModule #FFBBBB
-
-loop For each NusModule in modules
-    ModuleManager -> NusModule: getModule(NusModule)
-
-
-    Deactivate ModuleManager
-
-    NusModule -> ContentManager : getContentManager()
-
-    Activate ContentManager #FFBBBB
-    Deactivate NusModule
-
-        loop For each Link in ContentManager
-
-            ContentManager -> Link: getContents()
-            Activate Link #FFBBBB
-            Deactivate ContentManager
-
-            Link->Link: getDay()
-            Activate Link #DarkSalmon
-            Link --> Link: currentDay
-
-            opt if currentDay equals to user argument Day
-            Deactivate Link
-
-            Link -> Link: getViewDescription()
-            Activate Link #DarkSalmon
-
-            Link --> Link: description
-            Deactivate Link
-            Link -> StringBuilder: append(description)
-            Activate StringBuilder #FFBBBB
-            Deactivate Link
-        end
-
+loop For each day in DaysOfWeekEnum
+ref over TimetableCommand, StringBuilder, Timetable, ModuleManager, NusModule, ContentManager, Link: getDailySchedule
 end
-StringBuilder -> StringBuilder: toString()
-Activate StringBuilder #DarkSalmon
-StringBuilder --> StringBuilder: dailySchedule
-Deactivate StringBuilder
-StringBuilder --> Timetable: dailySchedule
-Deactivate StringBuilder
-end
-end
-
-
 Timetable --> TimetableCommand: weeklyScehdule
 Deactivate Timetable
-Deactivate TimetableCommand
 
 
-else isStringNullOrEmpty(day)
+else else
 TimetableCommand -> Timetable: getDailySchedule()
-Activate TimetableCommand #FFBBBB
 Activate Timetable #FFBBBB
 
 Timetable -> StringBuilder: StringBuilder()
