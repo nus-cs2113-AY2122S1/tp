@@ -60,7 +60,7 @@ module internally as an ArrayList `modules`.<br>
 * `ModuleList#getSize()` - Returns the no. of modules currently in the list.
 * `ModuleList#getModules()` - Returns an ArrayList containing all the modules.
 * `ModuleList#getModule(code:String)` - Returns a module with a particular code.
-* `ModuleList#isValidIndex()` - Checks if an index is valid w.r.t the `modules` ArrayList.
+* `ModuleList#isValidIndex(index:int)` - Checks if an index is valid w.r.t the `modules` ArrayList.
 * `ModuleList#addModule(module:Module)` - Adds a module to the `modules` ArrayList.
 * `ModuleList#getModuleAt(index:int)` - Returns a `Module` object at the specified `index` within the `modules` ArrayList.
 
@@ -71,6 +71,36 @@ ensure that there is no existing module with code `CS2113T`.
 * Step 2 - If no existing module with code `CS2113T` is found, a new `Module` object with code and name set to `CS2113T`
 and `Software Engineering` set as its code and name respectively. Then, `ModuleList#addModule` is called to add the newly
 created `Module` object into the `modules` ArrayList within `ModuleList`.
+
+### Set attendance
+The set attendance mechanism is facilitated by SetAttendanceCommand. It extends `Command` and
+uses  `AttendanceList` which stores a student's lessons attendance as an
+ArrayList `attendances`. <br>
+
+`SetAttendanceCommand` implements the following methods:
+* `SetAttendanceCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Performs operations for the command.
+
+`AttendanceList` implements the following methods:
+* `AttendanceList#getSize()` - Returns the no. of attendance currently in the list.
+* `AttendanceList#getAttendances()` - Returns an ArrayList containing all the attendances.
+* `AttendanceList#getAttendance(lessonNumber:String)` - Returns an attendance with a particular lesson number.
+* `AttendanceList#isValidIndex(index:int)` - Checks if an index is valid w.r.t the `attendances` ArrayList.
+* `AttendanceList#addAttendance(attendance:Attendance)` - Adds an attendance to the `attendances` ArrayList.
+* `AttendnaceList#getAttendnaceIndex(lessonNumInput:String)` - Returns the attendance index in the `attendances` ArrayList.
+* `AttendanceList#deleteAttendance(lessonNumInput:String)` - Deletes an attendance with a particular lesson number.
+* `AttendanceList#sortAttendances` - Sorts the attendance in the `attendances` ArrayList in ascending order based on lesson number.
+
+Below is an example scenario of how the set attendance feature behaves at each step:
+* Step 1 - The user executes `set_attendance c/CS2113T s/1 l/1 p/1` to set an attendance to `Present` for student at 
+index `1`, lesson number `1` to set a student's attendance for a lesson. The `set_attendance` command calls the `SetAttendanceCommand#execute` method. Within 
+`SetAttendanceCommand#execute`, `AttendanceList#getAttendance("1")` is called to ensure that there is no existing attendance with the
+lesson number `1`for student at index `1`.
+* Step 2 - If no existing attendance object with lesson number `1` for student at index `1` is found, a new `Attendance` object
+with lesson number `1` and attendance record `Present` is set as its lesson number and attendance record respectively.
+Then, `AttendanceList#addAttendance` is called to add the newly created `Attendance` object into the `attendances` 
+ArrayList within `AttendanceList`.
+
+
 
 ### Set marks
 he set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command`.<br>
