@@ -16,11 +16,11 @@ public class ListRecordsCommand extends Command {
     }
 
     public ListRecordsCommand() {
-        this.isListAll = true;
+        isListAll = true;
     }
 
     @Override
     public void execute(boolean isLoadingStorage) {
-        TextUi.showRecordsListView(recordList, this.month, isListAll);
+        TextUi.showRecordsListView(recordList, month, isListAll);
     }
 }
