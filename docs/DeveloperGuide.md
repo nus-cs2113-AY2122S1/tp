@@ -10,7 +10,7 @@ of features.
   * [UI component](#ui-component)
   * [Command component](#command-component)
   * [Parser logic component](#parser-logic-component)
-  * [Goal list component](#goal-list-component)
+  * [GoalList component](#goallist-component)
   * [Storage component](#storage-component)
 * [Appendix A: Product Scope](#appendix-a-product-scope)
   * [Target user profile](#target-user-profile)
@@ -41,9 +41,13 @@ This application adapted the Developer Guide and User Guide from:
 
 ## Design and Implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### Architecture
+
+The diagram below shows the higher-level implementation of the interactions of all the components within `HappyBit` 
+
+![Ui Diagram](Diagram Images/SystemArchitecture.png)
+
+In the sections below, we will be explaining in detail how each compomponent works.
 
 ### UI component
 
@@ -69,7 +73,7 @@ How the `Ui` component works:
 The Sequence Diagram below illustrates the interactions within the `Ui` component when `run()` is called in the main
 class `HappyBit.java`
 
-![Ui Diagram](UML Diagrams/UiDiagramCopy.png)
+![Ui Diagram](Diagram Images/UiDiagramCopy.png)
 
 While the Sequence Diagram represents the normal flow of logic, there is a recursive definition that is not represented.
 1. `:HappyBit` calls the method `handleState()` in `:State`
@@ -81,12 +85,94 @@ While the Sequence Diagram represents the normal flow of logic, there is a recur
 
 ### Command component
 
+When the user runs the Program, the main function dealing with the user's inputs is the `handleUserInput()` function
+which obtains a `Command` object after parsing the input using the `Parser` component.
+
+`Command` objects available are:
+* `AddGoalCommand` - Adds a new Goal to the GoalList.
+* `AddHabitCommand` - Adds a new Habit object to a specified Goal set by the user.
+* `DeleteGoalCommand` - Deletes a Goal from the GoalList
+* `DeleteHabitCommand` - Deletes a Habit object from a specified Goal set by the user.
+* `DoneHabitCommand` - Marks a Habit object under a Goal as done.
+* `ListGoalCommand` - Lists out all the Goals set by the user.
+* `ListHabitCommand` - Lists out all the Habits set under a Goal.
+* `HelpCommand` - Prints out message indicating all the available Commands
+
+The respective `runCommand` functions of the returned command object is then executed.
+In the sections below we will be providing implementation details for each of the commands.
+
+#### `AddGoalCommand`
+
+When the `runCommand` function is executed for the `AddGoalCommand` object, the following steps as indicated by the
+sequence diagram below is carried out.
+
+![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
+
+#### `AddHabitCommand`
+
+#### `DeleteGoalCommand`
+
+#### `DeleteHabitCommand`
+
+#### `DoneHabitCommand`
+
+When the `runCommand` function is executed for the `DoneHabitCommand` object, the following steps as indicated by the 
+sequence diagram below is carried out.
+
+![](Diagram Images/DoneCommandSequenceDiagram.png)
+
+#### `ListGoalCommand`
+
+When the `runCommand` function is executed for the `ListGoalsCommand` object, the following steps as indicated by the
+sequence diagram below is carried out.
+
+![](Diagram Images/ListGoalsCommandSequenceDiagram.png)
+
+#### `ListHabitCommand`
+
+When the `runCommand` function is executed for the `ListHabitsCommand` object, the following steps as indicated by the
+sequence diagram below is carried out.
+
+![](Diagram Images/ListHabitsCommandSequenceDiagram.png)
+
+#### `HelpCommand`
+
+When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and 
+calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
+can type to execute a certain command.
+
 ### Parser logic component
 
-### Goal list component
+The `Parser` logic component handles the parsing of the input passed in by the user and returns a suitable `Command` 
+object that will be executed. Within the component itself, there are more specific and detailed `Parser` classes for 
+handling various inputs from the user.
+
+* `AddParser` - Handles the parsing of inputs starting with `set` and `add` keywords
+* `DeleteParser` - Handles the parsing of inputs starting with `remove` and `delete`
+* `DoneParser` - Handles the parsing of inputs starting with `done`
+* `ListParser` - Handles the parsing of inputs starting with `view`
+* `SetParser` - Handles the parsing of inputs starting with `goal`
+
+For inputs of `bye`, `help` `list` their respective functions are run immediately without the need to parse further.
+
+For any other invalid inputs that do not start with the listed keywords, the `HelpCommand` functionality is invoked.
+
+### GoalList component
+
+The `GoalList` component is the component that holds and manipulates the list of all the Goals set by the user.
+All `runCommands` of all of the `Command` objects directly access the `GoalList` component to retrieve and change      
+the user's data.
 
 ### Storage component
 
+**API:** `Storage.java`
+
+![Storage Class Diagram](Diagram%20Images/StorageClassDiagram.png)
+
+The Storage Class allows data to be read from and saved to a storage file. When a user exits the program, the 
+information entered by the user during the program will be exported and saved into a `HappyBit.txt` file. The next time
+the program is run by the user, this data will be imported back into the program to allow the user to pick up and 
+continue from where they left off.
 
 ## Appendix A: Product Scope
 
@@ -99,10 +185,8 @@ While the Sequence Diagram represents the normal flow of logic, there is a recur
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
-
-Users with _Ha(ppy)Bit_ will find themselves cultivating good habits despite hectic 
-workload/commitments from school (we targeting work and school?). 
+Users with _Ha(ppy)Bit_ will find themselves cultivating good habits and breaking bad habits despite hectic 
+workload or commitments. 
 
 
 ## Appendix B: User Stories
@@ -110,7 +194,17 @@ workload/commitments from school (we targeting work and school?).
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application| 
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|set a new goal I wish to accomplish|start working towards completing the goal|
+|v1.0|user|add habits i wish to carry out in the process of accomplishing my goal|break down the journey of achieving my goal into smaller manageable steps
+|v1.0|user|remove a goal from my list of goals|remove goals that I no longer wish to work towards|
+|v1.0|user|delete a habit added under a goal|remove a habit that I no longer wish to carry out|
+|v1.0|user|mark a habit as done|indicate that I have completed that habit|
+|v1.0|user|list out all the goals I have|remind myself of the goals I am working towards|
+|v1.0|user|view all the habits I have set for each goal|check which habits I have yet to complete|
+|v1.0|user|have import and export functionality in the program|access goals and habits previously set from a local data storage
+|v2.0|user|have recurring habits at a regular interval|habitually carry out the habits I set for myself|
+|v2.0|user|be able to view my progress for any goal|motivate myself in the process|
+|v2.0|user|view all my habits due for the day upon entering the program|remember to carry out these habits by the end of the day|
 
 
 ## Appendix C: Non-Functional Requirements

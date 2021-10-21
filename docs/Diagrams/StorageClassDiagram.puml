@@ -1,7 +1,26 @@
 @startuml
 !include Style.puml
+
+package "storage" {
 class Storage
 class Import
 class ImportParser
 class Export
+
+Storage --> Import
+Import --> ImportParser
+Storage --> Export
+}
+
+class Habit
+
+package "goal" {
+class Goal
+class GoalList
+Goal <-- ImportParser
+Goal "*" <- GoalList
+Goal --> "*" Habit
+GoalList <-- Import
+}
+
 @enduml

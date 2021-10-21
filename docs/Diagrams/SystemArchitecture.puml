@@ -1,0 +1,36 @@
+@startuml
+!include Style.puml
+
+Package "HappyBit"<<Rectangle>>{
+    Class UiMain
+    Class UiStartUp
+    Class Parser
+    Class Storage
+    Class Command
+    Class GoalList
+    Class State
+    Class PrintManager
+    Class Main #lightblue
+}
+
+Class "Data" as Data
+
+Class "User" as User
+
+User .down.> UiMain
+User .down.> UiStartUp
+Main -> Storage
+Storage -> GoalList: Import Data
+GoalList -> Storage: Export Data
+Main --> State
+State --> UiMain
+State --> UiStartUp
+Storage .left.> Data
+UiMain --> Parser
+Parser --> Command
+Command --> GoalList
+GoalList --> PrintManager
+
+
+
+@enduml

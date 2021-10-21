@@ -5,7 +5,7 @@ import happybit.habit.Habit;
 
 import java.util.ArrayList;
 
-public class Ui {
+public class PrintManager {
     private static final String COMMAND_LIST_GREETING =
             "Hello! These are all the possible commands for this habit tracker :)"
                     + " (flags within {} brackets are optional)";

@@ -3,7 +3,7 @@ package happybit.command;
 import happybit.exception.HaBitCommandException;
 import happybit.goal.GoalList;
 import happybit.storage.Storage;
-import happybit.ui.Ui;
+import happybit.ui.PrintManager;
 
 public class DeleteHabitCommand extends DeleteCommand {
 
@@ -16,8 +16,8 @@ public class DeleteHabitCommand extends DeleteCommand {
     }
 
     @Override
-    public void runCommand(GoalList goalList, Ui ui, Storage storage) throws HaBitCommandException {
-        goalList.deleteHabitFromGoal(goalIndex, habitIndex, ui);
+    public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
+        goalList.deleteHabitFromGoal(goalIndex, habitIndex, printManager);
     }
 
 }

@@ -4,13 +4,13 @@ import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.state.State;
 import happybit.storage.Storage;
-import happybit.ui.Ui;
+import happybit.ui.PrintManager;
 
 public class HappyBit {
 
     private Storage storage;
     private GoalList goalList;
-    private Ui ui;
+    private PrintManager printManager;
     private State state;
 
     /**
@@ -19,10 +19,10 @@ public class HappyBit {
      * @param filePath File path of the external save file
      */
     public HappyBit(String filePath, String fileDir) {
-        ui = new Ui();
+        printManager = new PrintManager();
         storage = new Storage(filePath, fileDir);
         goalList = new GoalList();
-        state = new State(goalList, ui, storage);
+        state = new State(goalList, printManager, storage);
         loadData();
     }
 
@@ -51,7 +51,7 @@ public class HappyBit {
         try {
             goalList = storage.load();
         } catch (HaBitStorageException e) {
-            ui.showError(e.getMessage());
+            printManager.showError(e.getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ public class HappyBit {
         try {
             storage.export(goalList.getGoalList());
         } catch (HaBitStorageException e) {
-            ui.showError(e.getMessage());
+            printManager.showError(e.getMessage());
         }
     }
 
@@ -73,7 +73,7 @@ public class HappyBit {
         state.startupState();
         state.handleState();
         exportData();
-        ui.showGoodbye();
+        printManager.showGoodbye();
     }
 
 }
