@@ -56,7 +56,7 @@ public class NusMods {
         if (module.meetsPreliminaryConditions(searchTerm, searchFlags)) {
             String moduleCode = module.getModuleCode();
             try {
-                 module = fetchModOnline(moduleCode);
+                module = fetchModOnline(moduleCode);
             } catch (FetchException e) {
                 throw new IOException();
             }
