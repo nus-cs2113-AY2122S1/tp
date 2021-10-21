@@ -3,33 +3,36 @@ package seedu.situs.ingredients;
 import seedu.situs.exceptions.DukeException;
 import seedu.situs.storage.Storage;
 
-import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-/**
- * Represents the list of ingredients.
+/*
+ * Represents a list of multiple ingredients (multiple ingredient groups).
+ *
+ * E.g. (2 ingredient groups)
+ * 1. Carrot | Total Amount: 3.5 kg
+ *      Amount Left: 1.0 kg | Expiry Date: 04/11/2021
+ *      Amount Left: 2.5 kg | Expiry Date: 10/12/2021
+ *
+ * 2. Radish | Total Amount: 1.0 kg
+ *      Amount Left: 1.0 kg | Expiry Date: 18/02/2022
  */
+
 public class IngredientList {
 
     private static final String INVALID_NUMBER = "Ingredient number does not exist!";
-
-    protected ArrayList<Ingredient> ingredientList;
-    private Storage storage;
+    protected ArrayList<IngredientGroup> ingredientList;
     private static IngredientList instance = null;
 
-    public IngredientList() throws DukeException {
-        try {
-            storage = new Storage();
-            ingredientList = storage.loadIngredientsFromMemory();
-        } catch (IOException e) {
-            //failsafe
-            ingredientList = new ArrayList<>();
-            throw new DukeException("Cannot read ingredients from memory!");
-        }
+    public IngredientList() {
+        ingredientList = new ArrayList<>();
     }
 
-    public static IngredientList getInstance() throws DukeException {
+    /**
+     * Gets instance of ingredient list.
+     *
+     * @return ingredient list
+     */
+    public static IngredientList getInstance() {
         if (instance == null) {
             instance = new IngredientList();
         }
@@ -37,76 +40,80 @@ public class IngredientList {
     }
 
     /**
-     * Gets the current list of ingredients.
-     * @return the list of ingredients.
+     * Gets size of ingredient list.
+     *
+     * @return size
      */
-    public ArrayList<Ingredient> getIngredientList() {
-        return ingredientList;
-    }
-
-    /**
-     * Gets the size of the current inventory, not including the amount of individual ingredient.
-     * @return the size of current inventory
-     */
-    public int getInventoryStock() {
+    public int getSize() {
         return ingredientList.size();
     }
 
     /**
-     * Gets the string representation of an ingredient in the list.
-     * @param ingredientNumber ingredient number to get information
-     * @return String representation of the ingredient
-     * @throws IndexOutOfBoundsException if the ingredient number have not existed
+<<<<<<< HEAD:src/main/java/seedu/duke/ingredients/IngredientList.java
+     * Uses ingredient name as key to search if ingredient currently exists in ingredient list.
+     *
+     * @param ingredientName ingredient to be searched
+     * @return true if ingredient already exists, false if otherwise
      */
-    public String getIngredientInfo(int ingredientNumber) throws IndexOutOfBoundsException {
-        return ingredientList.get(ingredientNumber - 1).toString();
-    }
-
-    public LocalDate getIngredientExpiry(int ingredientNumber) {
-        return ingredientList.get(ingredientNumber - 1).getExpiry();
+    public boolean searchIngredientInList(String ingredientName) {
+        for (int i = 0; i < getSize(); i++) {
+            if (ingredientList.get(i).getIngredientGroupName().equals(ingredientName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
-     * Removes an ingredient from the list.
-     * @param ingredientNumber ingredient number to remove
-     * @return The removed ingredient
-     * @throws DukeException if the ingredient number has not existed
+     * Uses ingredient name as key to find the index of the corresponding ingredient.
+     * in the ingredient list.
+     *
+     * @param ingredientName name of ingredient
+     * @return index of ingredient, -1 if not found
      */
-    public Ingredient remove(int ingredientNumber) throws IndexOutOfBoundsException, IOException {
-        Ingredient removedIngredient = ingredientList.remove(ingredientNumber - 1);
-        storage.writeIngredientsToMemory(ingredientList);
-        return removedIngredient;
+    public int findIngredientIndexInList(String ingredientName) {
+        for (int i = 0; i < getSize(); i++) {
+            IngredientGroup currentIngredient = ingredientList.get(i);
+            if (ingredientName.equals(currentIngredient.getIngredientGroupName())) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
-     * Adds the new ingredient to the ingredient list.
-     * @param ingredient The ingredient object to be added
+     * Adds ingredient to ingredient list.
+     *
+     * @param ingredient ingredient to be added
      */
-    public void add(Ingredient ingredient) throws IOException {
-        ingredientList.add(ingredient);
-        storage.writeIngredientsToMemory(ingredientList);
+    public void add(Ingredient ingredient) {
+        String ingredientName = ingredient.getName();
+        boolean repeatedName = searchIngredientInList(ingredientName);
+
+        if (repeatedName) { //ingredient already exists, add to current ingredient group
+            int ingredientIndex = findIngredientIndexInList(ingredientName);
+            ingredientList.get(ingredientIndex).add(ingredient);
+
+        } else { //create new ingredient group
+            IngredientGroup newGroup = new IngredientGroup();
+            ingredientList.add(newGroup);
+            newGroup.setIngredientGroupName(ingredientName);
+            newGroup.add(ingredient);
+        }
     }
 
     /**
-     * Sets the update ingredient to an indexed ingredient in the ingredient list.
-     * @param ingredientNumber The index of the ingredient to be updated
-     * @param ingredient The update ingredient object
-     * @throws IOException if the ingredient cannot be written into the memory
-     * @throws IndexOutOfBoundsException if the ingredient number has not existed
+     * Get ingredient group based on ingredient number (i.e. all duplicates of the same ingredient).
+     *
+     * @param ingredientNumber ingredient number
+     * @return ingredient group
+     * @throws DukeException index out of bounds, cannot access
      */
-    public void set(int ingredientNumber, Ingredient ingredient) throws IOException, IndexOutOfBoundsException {
-        ingredientList.set(ingredientNumber, ingredient);
-        storage.writeIngredientsToMemory(ingredientList);
+    public IngredientGroup getIngredientGroup(int ingredientNumber) throws DukeException {
+        try {
+            return ingredientList.get(ingredientNumber - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(INVALID_NUMBER);
+        }
     }
-
-    /**
-     * Gets the ingredient from a specific index in the ingredient list.
-     * @param ingredientNumber The index of the ingredient to be located
-     * @return The indexed ingredient object
-     * @throws IndexOutOfBoundsException The ingredient is out of bounds
-     */
-    public Ingredient get(int ingredientNumber) throws IndexOutOfBoundsException {
-        return ingredientList.get(ingredientNumber - 1);
-    }
-
 }

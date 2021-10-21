@@ -21,19 +21,19 @@ public class UpdateCommand extends Command {
 
     @Override
     public String run() throws DukeException {
-        try {
+        /*try {
             String resultMsg = "";
             int i;
 
-            if (IngredientList.getInstance().getInventoryStock() == 0) {
+            if (IngredientGroup.getIngredientGroupSize() == 0) {
                 resultMsg = LIST_EMPTY_MESSAGE;
                 return resultMsg;
             }
 
 
-            for (i = 0; i < IngredientList.getInstance().getInventoryStock(); i++) {
-                if (this.updatedIngredient.getName().equals((IngredientList.getInstance()).get(i + 1).getName())) {
-                    IngredientList.getInstance().set(i, this.updatedIngredient);
+            for (i = 0; i < IngredientGroup.getIngredientGroupSize(); i++) {
+                if (this.updatedIngredient.getName().equals((IngredientGroup.getInstance()).get(i + 1).getName())) {
+                    IngredientGroup.getInstance().set(i, this.updatedIngredient);
                     resultMsg = UPDATE_MESSAGE + this.updatedIngredient.toString();
                 }
             }
@@ -42,6 +42,7 @@ public class UpdateCommand extends Command {
             throw new DukeException("Cannot write ingredient to memory!");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(INVALID_NUMBER);
-        }
+        }*/
+        return "";
     }
 }

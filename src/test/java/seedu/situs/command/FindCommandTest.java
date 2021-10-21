@@ -14,12 +14,12 @@ public class FindCommandTest {
 
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    @Test
+    /*@Test
     public void findCommandTest_ingredientNotFound_success() throws DukeException, IOException {
         LocalDate expiryDate1 = LocalDate.parse("21/10/2021", DATE_FORMATTER);
         Ingredient ingredient1 = new Ingredient("Carrot", 300, "grams", expiryDate1);
         IngredientList.getInstance().add(ingredient1);
         String resultMsg = new FindCommand("xyz").run();
         assertEquals("I could not find any results for \"xyz\"!", resultMsg);
-    }
+    }*/
 }

@@ -19,7 +19,7 @@ public class ParserTest {
         }
     }
 
-    @Test
+    /*@Test
     public void parseDeleteCommand_taskNumberInvalidInput_expectException() {
         try {
             String inputString = "delete -1";
@@ -28,7 +28,7 @@ public class ParserTest {
         } catch (DukeException e) {
             assertEquals("Ingredient number does not exist!", e.getMessage());
         }
-    }
+    }*/
 
     @Test
     public void parseCommand_invalidCommandInput_success() throws DukeException {
