@@ -18,6 +18,7 @@ import seedu.duke.commands.HelpCommand;
 import seedu.duke.commands.InvalidCommand;
 import seedu.duke.commands.ListRecordsCommand;
 import seedu.duke.commands.YearCommand;
+import seedu.duke.commands.FindCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -80,8 +81,13 @@ public class Parser {
             command = prepareYearCommand(commandParams);;
             break;
         case HelpCommand.COMMAND_WORD:
-        default:
             command = new HelpCommand();
+            break;
+        case FindCommand.COMMAND_WORD:
+            command = prepareFindCommand(commandParams);
+            break;
+        default:
+            command = new InvalidCommand("Sorry. I don't understand your command!");
             break;
         }
         return command;
@@ -188,6 +194,14 @@ public class Parser {
             return new InvalidCommand(String.format(MESSAGE_INVALID_DATE, AddExpenditureCommand.MESSAGE_USAGE));
         }
 
+    }
+
+    private Command prepareFindCommand(String commandParams) {
+        try {
+            return new FindCommand(commandParams);
+        } catch (StringIndexOutOfBoundsException e) {
+            return new InvalidCommand(String.format("Add message later pleasee", AddCommand.MESSAGE_USAGE));
+        }
     }
 
     private Command prepareYearCommand(String commandParams) {
