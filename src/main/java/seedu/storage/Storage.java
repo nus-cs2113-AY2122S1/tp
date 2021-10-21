@@ -80,7 +80,7 @@ public class Storage {
             isFirstRun = true;
             // get new contact's name
             AddPersonalContactParser addPersonalContactParser = new AddPersonalContactParser();
-            addPersonalContactParser.startCollectingPersonalDetails();
+            addPersonalContactParser.collectPersonalDetails();
             PersonalContact personalContact = addPersonalContactParser.getPersonalContact();
             ContactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
             return personalContact;

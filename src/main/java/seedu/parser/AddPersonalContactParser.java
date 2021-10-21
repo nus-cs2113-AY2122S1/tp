@@ -13,14 +13,15 @@ import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 public class AddPersonalContactParser extends RegexParser {
-    private PersonalContact personalContact = new PersonalContact(null, null,null,null,
-            null,null);
+    private PersonalContact personalContact;
 
     public AddPersonalContactParser() {
-        TextUi.welcomeMessage();
+        personalContact = new PersonalContact(null, null,null,null,
+                null,null);
     }
 
-    public void startCollectingPersonalDetails() {
+    public void collectPersonalDetails() {
+        TextUi.welcomeMessage();
         parsePersonalName();
         TextUi.greetingMessage(personalContact);
         String userConfirmation = UserInputTextUi.getUserConfirmation();
@@ -56,7 +57,7 @@ public class AddPersonalContactParser extends RegexParser {
             try {
                 String personalGithubUsername = UserInputTextUi.getUserInput();
                 isValidDetail = checkGithubValidity(personalGithubUsername);
-                setGithubUsername(personalGithubUsername);
+                setParsedGithubUsername(personalGithubUsername);
             } catch (InvalidGithubUsernameException e) {
                 ExceptionTextUi.invalidPersonalGithubUsernameErrorMessage();
             }
@@ -72,7 +73,7 @@ public class AddPersonalContactParser extends RegexParser {
         return true;
     }
 
-    private void setGithubUsername(String userInput) {
+    private void setParsedGithubUsername(String userInput) {
         if (userInput.isEmpty() || userInput == null) {
             this.personalContact.setGithub(null);
         } else {
@@ -87,7 +88,7 @@ public class AddPersonalContactParser extends RegexParser {
             try {
                 String personalTelegramUsername = UserInputTextUi.getUserInput();
                 isValidDetail = checkTelegramValidity(personalTelegramUsername);
-                setTelegramUsername(personalTelegramUsername);
+                setParsedTelegramUsername(personalTelegramUsername);
             } catch (InvalidTelegramUsernameException e) {
                 ExceptionTextUi.invalidPersonalTelegramUsernameErrorMessage();
             }
@@ -103,7 +104,7 @@ public class AddPersonalContactParser extends RegexParser {
         return true;
     }
 
-    private void setTelegramUsername(String userInput) {
+    private void setParsedTelegramUsername(String userInput) {
         if (userInput.isEmpty() || userInput == null) {
             this.personalContact.setTelegram(null);
         } else {
@@ -118,7 +119,7 @@ public class AddPersonalContactParser extends RegexParser {
             try {
                 String personalTwitterUsername = UserInputTextUi.getUserInput();
                 isValidDetail = checkTwitterValidity(personalTwitterUsername);
-                setTwitterUsername(personalTwitterUsername);
+                setParsedTwitterUsername(personalTwitterUsername);
             } catch (InvalidTwitterUsernameException e) {
                 ExceptionTextUi.invalidPersonalTwitterUsernameErrorMessage();
             }
@@ -134,7 +135,7 @@ public class AddPersonalContactParser extends RegexParser {
         return true;
     }
 
-    private void setTwitterUsername(String userInput) {
+    private void setParsedTwitterUsername(String userInput) {
         if (userInput.isEmpty() || userInput == null) {
             this.personalContact.setTwitter(null);
         } else {
@@ -149,7 +150,7 @@ public class AddPersonalContactParser extends RegexParser {
             try {
                 String personalEmailAddress = UserInputTextUi.getUserInput();
                 isValidDetail = checkEmailValidity(personalEmailAddress);
-                setEmailAddress(personalEmailAddress);
+                setParsedEmailAddress(personalEmailAddress);
             } catch (InvalidEmailException e) {
                 ExceptionTextUi.invalidPersonalEmailErrorMessage();
             }
@@ -165,7 +166,7 @@ public class AddPersonalContactParser extends RegexParser {
         return true;
     }
 
-    private void setEmailAddress(String userInput) {
+    private void setParsedEmailAddress(String userInput) {
         if (userInput.isEmpty() || userInput == null) {
             this.personalContact.setEmail(null);
         } else {
@@ -180,7 +181,7 @@ public class AddPersonalContactParser extends RegexParser {
             try {
                 String personalLinkedinUsername = UserInputTextUi.getUserInput();
                 isValidDetail = checkLinkedinValidity(personalLinkedinUsername);
-                setLinkedinUsername(personalLinkedinUsername);
+                setParsedLinkedinUsername(personalLinkedinUsername);
             } catch (InvalidLinkedinUsernameException e) {
                 ExceptionTextUi.invalidPersonalLinkedinUsernameErrorMessage();
             }
@@ -196,14 +197,13 @@ public class AddPersonalContactParser extends RegexParser {
         return true;
     }
 
-    private void setLinkedinUsername(String userInput) {
+    private void setParsedLinkedinUsername(String userInput) {
         if (userInput.isEmpty() || userInput == null) {
             this.personalContact.setLinkedin(null);
         } else {
             this.personalContact.setLinkedin(userInput);
         }
     }
-
 
     public PersonalContact getPersonalContact() {
         return personalContact;
