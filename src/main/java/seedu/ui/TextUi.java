@@ -44,7 +44,7 @@ public abstract class TextUi {
     public static void welcomeBackMessage(Contact personalContact) {
         printDoubleLineMessage(LOGO);
         String message = "Hello, " + personalContact.getName() + ". \nWelcome back to ConTech, "
-                + "your personal \ncontact tracker.";
+                + "your personal contact tracker.";
         printBottomLineMessage(message);
     }
 
@@ -160,6 +160,12 @@ public abstract class TextUi {
 
     public static void searchNoResultsFoundMessage() {
         String message = "No search results found.";
+        printDoubleLineMessage(message);
+    }
+
+    public static void viewPersonalContactMessage(Contact personalContact) {
+        String personalName = ViewMessageFormatterUi.viewNameFormatter(personalContact);
+        String message = "Name:     " + personalName + formatContactFields(personalContact);
         printDoubleLineMessage(message);
     }
 

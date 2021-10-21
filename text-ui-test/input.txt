@@ -6,6 +6,7 @@ lezongg
 @gmail.com
 lezongmun@gmail.com
 
+me
 rm 1
 add -n ng andre -g ng-andre
 rm 2

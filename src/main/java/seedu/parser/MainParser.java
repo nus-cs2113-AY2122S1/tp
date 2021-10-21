@@ -1,17 +1,18 @@
 package seedu.parser;
 
+
 import seedu.command.AddContactCommand;
-import seedu.command.EditContactCommand;
-import seedu.command.DeleteContactCommand;
 import seedu.command.Command;
+import seedu.command.DeleteContactCommand;
+import seedu.command.EditContactCommand;
+import seedu.command.ExitCommand;
+import seedu.command.FailedCommand;
 import seedu.command.HelpCommand;
 import seedu.command.InvalidDetailCommand;
-import seedu.command.ViewContactCommand;
-import seedu.command.FailedCommand;
-import seedu.command.ExitCommand;
 import seedu.command.ListContactsCommand;
+import seedu.command.PersonalContactCommand;
 import seedu.command.SearchContactCommand;
-
+import seedu.command.ViewContactCommand;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
@@ -35,6 +36,7 @@ public class MainParser {
     private static final String LIST_COMD = "list";
     private static final String HELP_COMD = "help";
     private static final String SEARCH_COMD = "search";
+    private static final String PERSONAL_CONTACT_COMD = "me";
 
     private static final int COMD_WORD_INDEX = 0;
     private static final int ISOLATE_COMD_WORD = 2;
@@ -73,11 +75,15 @@ public class MainParser {
         case SEARCH_COMD:
             command = parseSearchCommand(userInput);
             break;
+        case PERSONAL_CONTACT_COMD:
+            command = parsePersonalContact();
+            break;
         default:
             command = new FailedCommand(FailedCommandType.GENERAL);
         }
         return command;
     }
+
 
     public String getCommandWord(String userInput) {
         String[] destructuredInputs = userInput.split(" ", ISOLATE_COMD_WORD);
@@ -171,6 +177,7 @@ public class MainParser {
         }
     }
 
+    //@@author lezongmun
     private Command parseDeleteContact(String userInput) {
         try {
             int deletedIndex = IndexParser.getIndexFromInput(userInput);
@@ -193,5 +200,10 @@ public class MainParser {
         } catch (InvalidFlagException e) {
             return new FailedCommand(FailedCommandType.INVALID_FLAG);
         }
+    }
+
+    //@author lezongmun
+    private Command parsePersonalContact() {
+        return new PersonalContactCommand();
     }
 }

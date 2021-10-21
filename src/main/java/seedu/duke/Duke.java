@@ -7,7 +7,6 @@ import seedu.exception.FileErrorException;
 import seedu.parser.MainParser;
 import seedu.storage.ContactsEncoder;
 import seedu.storage.Storage;
-import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
 import seedu.ui.UserInputTextUi;
 
@@ -45,6 +44,7 @@ public class Duke {
     private void runCommandProcedure(Command command) {
         try {
             command.setContactList(contactList);
+            command.setPersonalContact(personalContact);
             command.execute();
             ContactsEncoder.saveContacts(contactFilePath, contactList);
         } catch (FileErrorException e) {
