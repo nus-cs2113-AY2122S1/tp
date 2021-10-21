@@ -18,11 +18,7 @@ public class DeleteExpiredIngredientCommand extends Command {
 
     @Override
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
-        try {
-            ingredients.deleteExpiredIngredients();
-            return MESSAGE_DELETED_ALL_EXPIRED;
-        } catch (IllegalValueException e) {
-            return MESSAGE_DELETED_ALL_EXPIRED;
-        }
+        ingredients.deleteExpiredIngredients();
+        return MESSAGE_DELETED_ALL_EXPIRED;
     }
 }

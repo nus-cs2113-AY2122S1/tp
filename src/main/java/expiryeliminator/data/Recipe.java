@@ -31,6 +31,10 @@ public class Recipe {
         return name;
     }
 
+    public TreeMap<String, IngredientQuantity> getIngredientQuantities() {
+        return ingredientQuantities;
+    }
+
     /**
      * Adds an ingredient and its associated quantity to the recipe.
      *

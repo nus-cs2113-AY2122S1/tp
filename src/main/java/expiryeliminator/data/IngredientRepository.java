@@ -2,6 +2,7 @@ package expiryeliminator.data;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
@@ -191,18 +192,27 @@ public class IngredientRepository {
         return expiredIngredientsList.toString();
     }
 
-    public void deleteExpiredIngredients() throws IllegalValueException {
+    public void deleteExpiredIngredients() {
         LocalDate currentDate = LocalDate.now();
 
         for (IngredientStorage ingredientStorage : ingredients.values()) {
-
+            ArrayList<LocalDate> expiryDatesToRemove = new ArrayList<>();
             for( LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
                 if(expiryDate.isBefore(currentDate)) {
-                    //ingredientStorage.getIngredientBatches().remove(expiryDate);
-                    ingredientStorage.remove(expiryDate);
+                    expiryDatesToRemove.add(expiryDate);
                 }
             }
+            for (LocalDate expiryDate : expiryDatesToRemove) {
+                ingredientStorage.remove(expiryDate);
+            }
         }
+    }
+
+    public String generateShoppingList(Recipe recipe) {
+        for(String ingredient : recipe.getIngredientQuantities().keySet()) {
+
+        }
+        return null;
     }
 
 
