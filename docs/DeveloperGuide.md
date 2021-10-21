@@ -106,5 +106,31 @@ Import the coding style xml file into your IntelliJ IDEA.
 > Once you are done with a piece of code, highlight the section you have just written and press the 
 > key `CTRL + SHIFT + L`.
 
- 
+## 3. Design
+
+### 3.1 Architecture
+
+### 3.2 Module Components
+![](attachments/Module.png)
+
+The Module Components consists of the `ModuleManager` which contains a collection of `NusModule`. 
+The `NusModule` consist of `ContentManager` which help to manage `Link` and `Note`. 
+The `ContentManager` accepts a `Content` type generic which `Link` and `Note` inherit from.
+
+The `ModuleManager` is passed to the `Command` so that they can make any changes for specific
+`NusModule`. A `HashMap` is used to implement the `name` (String) to `NusModule`,
+key-value referencing for `ModuleManager`. The underlying `NusModule` stores multiple `ContentManager` which uses a
+`ArrayList<Contents>` to store any require `Content` type object like `Note` or `Link`.
+
+The abstract `Content` class was implemented to allow easier creation of features that 
+had common functionality to be managed by `ContentManager`. While `ContentManger` is able to
+manage a specific type of `Content`, `NusModule` was made to interface with the different types of
+content for each module as each module can contain multiple types of different `Content`. 
+`ModuleManager` is made to identify which `NusModule` belong to which specific module name.
+
+Other alternative consideration for implementing was to store multiple `ArrayList` 
+with different Objects without a common parent (standalone object) inside of `NusModule`. 
+This would be a more viable solution if our Objects did not share many common methods between them.
+However, since many of the object like `Note` and `Link` share common attributes and require similar
+functionality, a common parent `Content` was implemented.
 
