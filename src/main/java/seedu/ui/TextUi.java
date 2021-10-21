@@ -213,12 +213,20 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void confirmAddDuplicateMessage(ArrayList<Integer> duplicatedIndex, ContactList contactList) {
+    public static void confirmDuplicateMessage(ArrayList<Integer> duplicatedIndex,
+                                               ContactList contactList, String type) {
         if (duplicatedIndex.size() == 1) {
             Contact currentContact = contactList.getContactAtIndex(duplicatedIndex.get(0));
-            String message = "One of your saved contacts has a duplicate field:\n"
-                    + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
-                    + formatContactFields(currentContact) + "\n\nDo you still want to add the contact?  (y/n)\n";
+            String message;
+            if (type.equals("add")) {
+                message = "One of your saved contacts has a duplicate field:\n"
+                        + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
+                        + formatContactFields(currentContact) + "\n\nDo you still want to add the contact?  (y/n)\n";
+            } else {
+                message = "One of your saved contacts has a duplicate field:\n"
+                        + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
+                        + formatContactFields(currentContact) + "\n\nDo you still want to edit the contact?  (y/n)\n";
+            }
             printDoubleLineMessage(message);
         } else {
             System.out.println(LINE);
@@ -226,25 +234,11 @@ public abstract class TextUi {
             for (Integer index : duplicatedIndex) {
                 duplicatedContactsMessage(contactList.getContactAtIndex(index), index);
             }
-            System.out.println("Do you still want to add the contact?  (y/n)\n");
-            System.out.println(LINE);
-        }
-    }
-
-    public static void confirmEditDuplicateMessage(ArrayList<Integer> duplicatedIndex, ContactList contactList) {
-        if (duplicatedIndex.size() == 1) {
-            Contact currentContact = contactList.getContactAtIndex(duplicatedIndex.get(0));
-            String message = "One of your saved contacts has a duplicate field:\n"
-                    + "\n" + duplicatedIndex.get(0) + ". " + currentContact.getName()
-                    + formatContactFields(currentContact) + "\n\nDo you still want to edit the contact?  (y/n)\n";
-            printDoubleLineMessage(message);
-        } else {
-            System.out.println(LINE);
-            System.out.println("These contacts have duplicate fields:\n");
-            for (Integer index : duplicatedIndex) {
-                duplicatedContactsMessage(contactList.getContactAtIndex(index), index);
+            if (type.equals("add")) {
+                System.out.println("Do you still want to add the contact?  (y/n)\n");
+            } else {
+                System.out.println("Do you still want to edit the contact?  (y/n)\n");
             }
-            System.out.println("Do you still want to edit the contact?  (y/n)\n");
             System.out.println(LINE);
         }
     }
