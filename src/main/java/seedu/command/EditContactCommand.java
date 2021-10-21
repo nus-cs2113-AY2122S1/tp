@@ -77,7 +77,6 @@ public class EditContactCommand extends Command {
                     }
                 }
             }
-
         }
         if (!duplicatedIndex.isEmpty()) {
             TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, EDIT_TYPE);
