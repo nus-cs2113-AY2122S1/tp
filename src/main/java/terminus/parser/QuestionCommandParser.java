@@ -14,7 +14,7 @@ public class QuestionCommandParser extends InnerModuleCommandParser {
     
     private static QuestionCommandParser parser;
     
-    public QuestionCommandParser() {
+    private QuestionCommandParser() {
         super(CommonFormat.COMMAND_QUESTION);
     }
 

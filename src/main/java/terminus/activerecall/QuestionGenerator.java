@@ -38,6 +38,7 @@ public class QuestionGenerator {
     }
     
     private void addQuestion(Question question) {
+        assert question.getWeight() > 0;
         total += question.getWeight();
         questionBank.put(total, question);
     }

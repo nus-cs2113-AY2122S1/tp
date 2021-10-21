@@ -1,8 +1,8 @@
 package terminus.content;
 
-public class Question extends Content {
+import terminus.activerecall.DifficultyModifier;
 
-    public static final String TYPE = "Q";
+public class Question extends Content {
     
     private double weight;
 
@@ -19,11 +19,21 @@ public class Question extends Content {
         return this.data;
     }
 
+    private void setWeightSafely() {
+        if (weight < DifficultyModifier.MIN_VALUE) {
+            this.weight = DifficultyModifier.MIN_VALUE;
+        } else if (weight > DifficultyModifier.MAX_VALUE) {
+            this.weight = DifficultyModifier.MAX_VALUE;
+        }
+    }
+    
     public double getWeight() {
+        setWeightSafely();
         return weight;
     }
 
     public void setWeight(double weight) {
         this.weight = weight;
+        setWeightSafely();
     }
 }

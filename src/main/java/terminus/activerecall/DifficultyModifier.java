@@ -2,8 +2,8 @@ package terminus.activerecall;
 
 public class DifficultyModifier {
     
-    private static final double MIN_VALUE = 0.2;
-    private static final double MAX_VALUE = 0.9;
+    public static final double MIN_VALUE = 0.2;
+    public static final double MAX_VALUE = 0.9;
     private static final double MAX_INCREASE = 0.45;
     private static final double GROWTH_RATE = 8;
     private static final double LOG_CURVE_MIDPOINT = 0.4;
