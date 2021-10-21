@@ -25,9 +25,9 @@ public class ExpireCommand extends Command {
 
         for (IngredientGroup ingredientGroup : ingredientList) {
             int entryCount = ingredientGroup.getIngredientGroupSize();
-            for (int i = 0; i < entryCount; i ++) {
+            for (int i = 0; i < entryCount; i++) {
                 if (getNumDaysBetween(ingredientGroup.getIngredientExpiry(i + 1), expireBeforeDate) >= 0) {
-                    resultMsg += ingredientGroup.get(i+1).getName() + " | "
+                    resultMsg += ingredientGroup.get(i + 1).getName() + " | "
                             + ingredientGroup.getIngredientInfo(i + 1) + LIST_NEWLINE_INDENT;
                     expiringCount += 1;
                 }

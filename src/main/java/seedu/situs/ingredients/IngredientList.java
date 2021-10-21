@@ -49,7 +49,7 @@ public class IngredientList {
     }
 
     /**
-     * Gets ingredient list
+     * Gets ingredient list.
      *
      * @return ingredient list
      */
