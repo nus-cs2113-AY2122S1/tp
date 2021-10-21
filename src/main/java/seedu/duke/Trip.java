@@ -36,6 +36,44 @@ public class Trip {
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
+    public static void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
+        Trip currentTrip = Storage.getOpenTrip();
+        ArrayList<Expense> listOfCurrentExpenses = currentTrip.getListOfExpenses();
+        if (listOfCurrentExpenses.size() == 0) {
+            Ui.printNoExpensesError();
+            return;
+        }
+        try {
+            if (expenseCategory.equals("category")) {
+                findMatchingCategoryExpenses(listOfCurrentExpenses, expenseAttribute);
+            } else if (expenseCategory.equals("description")) {
+                findMatchingDescriptionExpenses(listOfCurrentExpenses, expenseAttribute);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            Ui.printFilterFormatError();
+        }
+
+    }
+
+    private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
+        for (Expense e : listOfCurrentExpenses) {
+            if(e.getDescription().equals(expenseAttribute)) {
+                int index = listOfCurrentExpenses.indexOf(e);
+                Ui.printFilteredExpenses(e, index);
+            }
+        }
+    }
+
+    private static void findMatchingCategoryExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
+        for (Expense e : listOfCurrentExpenses) {
+            if (e.getCategory().equals(expenseAttribute)) {
+                int index = listOfCurrentExpenses.indexOf(e);
+                Ui.printFilteredExpenses(e, index);
+            }
+        }
+
+    }
+
     public LocalDate getDateOfTrip() {
         return dateOfTrip;
     }
