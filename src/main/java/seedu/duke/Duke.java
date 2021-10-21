@@ -9,6 +9,8 @@ import seedu.duke.ui.TextUi;
 
 import java.io.IOException;
 
+import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH;
+
 
 public class Duke {
     private final TextUi textUi;
@@ -43,6 +45,8 @@ public class Duke {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Error! Your inputs are missing or incorrect!");
                 TextUi.printDivider();
+            } catch (NullPointerException npe) {
+                System.out.println(MESSAGE_INVALID_MONTH);
             }
         }
     }

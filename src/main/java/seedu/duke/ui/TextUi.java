@@ -4,6 +4,7 @@ import seedu.duke.data.AllRecordList;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TextUi {
@@ -125,30 +126,15 @@ public class TextUi {
     }
 
     public static void showRecordsListView(AllRecordList list, int month, boolean isListAll) {
-        int i = 1;
-
         if (isListAll) {
-            for (month = 1; month <= 12; month += 1) {
-                String monthString = getMonth(month);
-                if (list.checkOverspending(month)) {
+            for (int i = 1; i <= 12; i++) {
+                String monthString = getMonth(i);
+                if (list.checkOverspending(i)) {
                     System.out.println("You are spending too much for " + monthString + " !");
                 }
-                String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString()
+                String budget = (list.getBudget(i).getRawValue() > 0) ? list.getBudget(i).toString()
                         : " Not Set";
-                System.out.println("Your budget for " + monthString + ":" + budget + LS
-                        + "Your expenditures:");
-                if (list.getMonthListSize(month) > 0) {
-                    System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
-                    for (Expenditure a : list.getExpenditureRecords(month)) {
-                        System.out.println(i + "." + a);
-                        i++;
-                    }
-                } else {
-                    System.out.println(" None ");
-                }
-                System.out.println(DIVIDER);
-
-                i = 1;
+                getMonthListView(list, i, monthString, budget);
             }
         } else {
             String monthString = getMonth(month);
@@ -156,18 +142,27 @@ public class TextUi {
                 System.out.println("You are spending too much for " + monthString + " !");
             }
             String budget = (list.getBudget(month).getRawValue() > 0) ? list.getBudget(month).toString() : "Not Set";
-            System.out.println("Your budget for " + monthString + ":" + budget + LS
-                    + "Your expenditures:");
-            if (list.getMonthListSize(month) > 0) {
-                System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
-                for (Expenditure a : list.getExpenditureRecords(month)) {
-                    System.out.println(i + "." + a);
-                    i++;
-                }
-            } else {
-                System.out.println(" None ");
-            }
-            System.out.println(DIVIDER);
+            getMonthListView(list, month, monthString, budget);
+        }
+
+    }
+
+    private static void getMonthListView(AllRecordList list, int month, String monthString, String budget) {
+        System.out.println("Your budget for " + monthString + ":" + budget + LS
+                + "Your expenditures:");
+        if (list.getMonthListSize(month) > 0) {
+            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
+            printEnumeratedExpenditureList(list.getExpenditureRecords(month));
+        } else {
+            System.out.println("No Expenditure records yet.");
+        }
+        System.out.println(DIVIDER);
+    }
+
+    private static void printEnumeratedExpenditureList(ArrayList<Expenditure> monthExpenditureList) {
+        for (int i = 0; i < monthExpenditureList.size(); i++) {
+            Expenditure currentExpenditure = monthExpenditureList.get(i);
+            System.out.println(i + "." + currentExpenditure);
         }
     }
 
