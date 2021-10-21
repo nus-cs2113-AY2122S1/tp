@@ -1,0 +1,18 @@
+@startuml
+hide footbox
+'https://plantuml.com/sequence-diagram
+-> ":ViewContactCommand": execute()
+activate ":ViewContactCommand"
+
+":ViewContactCommand" -> ":IndexParser" :getContactFromIndex(contactIndex:int, contactList:ContactList)
+activate ":IndexParser"
+":IndexParser" --> ":ViewContactCommand" :viewingContact:Contact
+deactivate ":IndexParser"
+
+":ViewContactCommand" -> ":TextUi":viewContactMessage(viewingContact:Contact, contactIndex:int)
+activate ":TextUi"
+":TextUi" --> ":ViewContactCommand"
+deactivate ":TextUi"
+
+deactivate ":ViewContactCommand"
+@enduml
