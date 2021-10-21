@@ -42,11 +42,18 @@ The **architecture diagram** above presents a high-level overview of CCA Manager
 The *sequence diagram* below shows how various components of the architecture interact with one another when a user inputs a **valid** command `"add /m Bob /s A01231234B /p 98765432"`
 
 ![Architecture Sequence Diagram](images/ArchitectureSequence.png)
+### **Note:**
+* `makeMemberEntry()`: Creates a member in the memberList.
+* `writeMemberFile()`: Writes the data to the csv file.
 
 The *sequence diagram* below shows how various components of the architecture interact with one another when a user inputs a **valid** command `"delete /m 1"`
 ![Architecture Sequence Diagram2](images/deleteMemberArchitecture.PNG)
 
-*Note: More information will be updated in the future upon completion of v2.0*
+### **Note:**
+* `getKeywordStatus()`: Gets the keyword value from the Keyword enum class.
+* `deleteMember(members, entry)`: Deletes the member from the memberList.
+* `deleteMemeber(memberNumber)`: Deletes the member using the index number provided by the user.
+* `writeMemberFile()`: Writes the data to the csv file.
 
 The sections below give more details of each component.
 
