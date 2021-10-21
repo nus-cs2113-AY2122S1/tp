@@ -7,9 +7,9 @@ class Import
 class ImportParser
 class Export
 
-Storage -- Import
-Import -- ImportParser
-Storage -- Export
+Storage --> Import
+Import --> ImportParser
+Storage --> Export
 }
 
 class Habit
@@ -17,10 +17,10 @@ class Habit
 package "goal" {
 class Goal
 class GoalList
-Goal -- ImportParser
-Goal "*" - GoalList
-Goal -- "*" Habit
-GoalList -- Import
+Goal <-- ImportParser
+Goal "*" <- GoalList
+Goal --> "*" Habit
+GoalList <-- Import
 }
 
 @enduml
