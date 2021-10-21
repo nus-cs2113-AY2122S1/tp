@@ -15,6 +15,9 @@
             "name": "test"
           }
         ]
+      },
+      "questionManager": {
+        "contents": []
       }
     }
   }

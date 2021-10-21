@@ -21,6 +21,7 @@ Type any of the following to get started:
 > help
 > note
 > schedule
+> question
 > back
 
 [test] >>> Error: Missing arguments.
@@ -58,6 +59,9 @@ Format: note
 
 schedule : Move to schedules workspace.
 Format: schedule
+
+question : Move to questions workspace.
+Format: question
 
 back : Returns to the parent workspace.
 Format: back

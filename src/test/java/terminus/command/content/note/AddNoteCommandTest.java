@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import terminus.TestFilePath;
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.common.TerminusLogger;
 import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
@@ -109,6 +110,7 @@ public class AddNoteCommandTest {
 
     @Test
     void execute_longNoteData_exceptionThrown() {
+        TerminusLogger.initializeLoggerWarnings();
         String s = "a".repeat(1000001);
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("add \"test\" \"" + s + "\"").execute(ui, moduleManager));
