@@ -138,7 +138,7 @@ Edits an existing medication stock information in the inventory.
 * You cannot update the Stock Id. The allocation of Id is determined by MediVault.
 * If you include the `n/NAME`, `d/DESCRIPTION` or `m/MAX_QUANTITY` parameter, MediVault updates 
 **all** entries that has same existing medication name given the `i/STOCK_ID` with your input values for these parameters.
-* A new Stock Id will be assigned to the current stock if you update a medication stock information. 
+* A new Stock Id will be assigned to the current stock if your update has the `n/NAME` parameter. 
 
 Format: `updatestock i/STOCK_ID [n/NAME p/PRICE q/QUANTITY e/EXPIRY_DATE d/DESCRIPTION m/MAX_QUANTITY]`
 
