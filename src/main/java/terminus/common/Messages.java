@@ -12,6 +12,7 @@ public class Messages {
     public static final String MESSAGE_COMMAND_SCHEDULE = "Move to schedules workspace.";
     public static final String MESSAGE_COMMAND_QUESTION = "Move to questions workspace.";
     public static final String MESSAGE_COMMAND_TEST_QUESTION = "Test yourself with Active Recall.";
+    public static final String MESSAGE_COMMAND_TIMETABLE = "Displays all your schedule.";
 
     public static final String MESSAGE_RESPONSE_DELETE = "Your %s on '%s' has been deleted!";
     public static final String MESSAGE_RESPONSE_ADD = "Your %s on '%s' has been added!";
@@ -27,8 +28,10 @@ public class Messages {
     public static final String ERROR_MESSAGE_INVALID_DAY = ERROR_MESSAGE_TAG + "Invalid day %s.";
     public static final String EMPTY_CONTENT_LIST_MESSAGE = "You do not have any content in this workspace.\n";
     public static final String CONTENT_MESSAGE_HEADER = "List of Content\n---------------\n";
+    public static final String EMPTY_SCHEDULE_FOR_THE_DAY = "You have no schedule for %s\n";
     
-    public static final String MAIN_BANNER = "Welcome to TermiNUS!";
+    public static final String MAIN_BANNER = "Welcome to TermiNUS!\n";
+    public static final String MAIN_REMINDER = "This is your schedule today:\n";
     public static final String NOTE_BANNER = "You have %d note(s) inside this workspace.";
     public static final String SCHEDULE_BANNER = "You have %d link(s) in this workspace.";
     public static final String QUESTION_BANNER = "You have %d question(s) in this workspace.";
@@ -53,4 +56,5 @@ public class Messages {
     public static final String[] ACTIVE_RECALL_ASK_QUESTION_DIFFICULTY_MESSAGE = {"",
         "How did you find the question? (Compare against past attempts if any)",
         "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
+    public static final String MESSAGE_EMPTY_DAILY_SCHEDULE = "You have no schedule for today.";
 }

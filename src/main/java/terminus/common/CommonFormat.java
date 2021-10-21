@@ -16,6 +16,9 @@ public class CommonFormat {
     public static final String COMMAND_SCHEDULE = "schedule";
     public static final String COMMAND_QUESTION = "question";
     public static final String COMMAND_TEST = "test";
+    public static final String COMMAND_TIMETABLE = "timetable";
+    public static final String COMMAND_MODULE = "module";
+    public static final String COMMAND_GO = "go";
 
     public static final String LOCAL_TIME_FORMAT = "HH:mm";
 
@@ -26,12 +29,12 @@ public class CommonFormat {
     public static final String COMMAND_ADD_NOTE_FORMAT = COMMAND_ADD + " \"<note name>\" \"<note content>\"";
     public static final String COMMAND_ADD_QUESTION_FORMAT = COMMAND_ADD + " \"<question>\" \"<answer>\"";
     public static final String COMMAND_TEST_QUESTION_FORMAT = COMMAND_TEST + " {question count}";
+    public static final String COMMAND_TIMETABLE_FORMAT = COMMAND_TIMETABLE + " {day}";
 
     public static final String SPACE_DELIMITER = "\\s+";
     public static final String COMMAND_MODULE_FORMAT = "module";
     public static final String COMMAND_ADD_MODULE_FORMAT = "add \"<module name>\"";
     public static final String COMMAND_VIEW_MODULE_FORMAT = "view";
     public static final String SPACE_NEGATED_DELIMITER = "\\S+";
-    public static final String COMMAND_MODULE = "module";
-    public static final String COMMAND_GO = "go";
+
 }
