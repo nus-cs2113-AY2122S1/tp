@@ -9,6 +9,12 @@
 ### Architecture
 
 ![Architecture Diagram](https://user-images.githubusercontent.com/65898007/138084343-26f6c228-63e2-4d24-8952-037742f61da6.png)
+```puml
+@startuml
+!include ArchitectureDiagram.puml
+scale 2
+@enduml
+```
 
 The Diagram above explains how the App is designed and will function
 
@@ -33,12 +39,28 @@ The App is organized by the `command`, `exception`, `kitchen`, and `util` packag
 The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
 ![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138092234-f7f768c7-d9d8-4a6f-b75b-1780d2158436.png)
+```puml
+@startuml
+!include AddSequence.puml
+scale 2
+@enduml
+```
 
 ### Kitchen component
+```puml
+@startuml
+!include KitchenRects.puml
+@enduml
+```
 
 ### Parser component
 
 ### Command component
+```puml
+@startuml
+!include CommandRects.puml
+@enduml
+```
 
 ### Storage component
 
