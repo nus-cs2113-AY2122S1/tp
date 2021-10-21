@@ -46,36 +46,4 @@ add Duck Rice /ingredients Duck /steps DucknRice /calories
 add Duck Rice /ingredients Duck /steps DucknRice /calories eee
 add Duck Rice /ingredients Duck /steps DucknRice /calories 500
 add Chicken Rice /ingredients Chicken /steps ChickennRice /calories 500
-tag ////
-tag / /
-tag / / Hawker Food
-tag / NoExistFood / Hawker Food
-tag / Chicken Rice / Hawker Food + Favorite
-tag / Chicken Rice / Hawker Food
-tag / Duck Rice / Hawker Food
-tag / Duck Rice / Hawker Food
-tag / Duck Rice + Chicken Rice / Hawker Food
-listTags
-find /tag
-find /tag NoExistTag
-find /tag Hawker Food
-find /tag Hawker Food + Favorite
-untag / Chicken Rice / ++
-untag / /Hawker Food
-untag / Chicken Rice / Hawker Food + Favorite
-check Chicken Rice
-listTags
-deleteTag /
-deleteTag /++
-deleteTag / + +
-deleteTag /Hawker Food + + Favorite
-deleteTag /Hawker Food
-listTags
-check Duck Rice
-tag / Chicken Rice / Hawker Food + Favorite
-tag / Duck Rice / Hawker Food + Favorite + Poultry
-listTags
-deleteTag / Hawker Food + Favorite
-listTags
-check Duck Rice
 exit
