@@ -146,8 +146,6 @@ execute a certain command.
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
-
 Users with _Ha(ppy)Bit_ will find themselves cultivating good habits despite hectic 
 workload or commitments. 
 
