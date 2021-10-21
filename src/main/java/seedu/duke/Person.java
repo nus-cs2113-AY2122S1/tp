@@ -28,10 +28,6 @@ public class Person {
         return this.moneyOwed;
     }
 
-    public double getTotalExpenditure() {
-        return moneyOwed.get(this);
-    }
-
     @Override
     public String toString() {
         return this.getName();

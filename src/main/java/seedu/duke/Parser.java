@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -242,7 +240,6 @@ public class Parser {
 
     private static void getAdditionalExpenseInfo(Expense expense) {
         Ui.printGetPersonPaid();
-        NumberFormat formatter = new DecimalFormat("#0.00");
         String input = Storage.getScanner().nextLine().strip();
         Person payer = checkValidPersonInExpense(input, expense);
         if (payer != null) {
@@ -259,7 +256,7 @@ public class Parser {
                         amountBeingPaid.put(people, amount);
                         total += amount;
                     }
-                    //This will cause to bear the deficit or surplus
+                    //This will cause payer to bear the deficit or surplus
                     if (total != expense.getAmountSpent()) {
                         double payerAmount = amountBeingPaid.get(payer) + (expense.getAmountSpent() - total);
                         amountBeingPaid.put(payer, payerAmount);
