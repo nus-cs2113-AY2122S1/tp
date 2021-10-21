@@ -11,7 +11,7 @@ import java.io.IOException;
 import static seedu.storage.Storage.SEPARATOR;
 
 public class ContactsEncoder {
-    public static void savePersonalContact(String contactFilePath, PersonalContact personalContact) throws FileErrorException {
+    public void savePersonalContact(String contactFilePath, PersonalContact personalContact) throws FileErrorException {
         try {
             FileWriter fileWriter = new FileWriter(contactFilePath);
             String encodedContact = encodeContact(personalContact);
@@ -22,7 +22,7 @@ public class ContactsEncoder {
         }
     }
 
-    public static void saveContacts(String contactFilePath, ContactList contactList) throws FileErrorException {
+    public void saveContacts(String contactFilePath, ContactList contactList) throws FileErrorException {
         try {
             FileWriter fileWriter = new FileWriter(contactFilePath);
             for (int i = 0; i < contactList.getListSize(); i++) {
@@ -36,7 +36,7 @@ public class ContactsEncoder {
         }
     }
 
-    private static String encodeContact(Contact contact) {
+    private String encodeContact(Contact contact) {
         String stringifiedContact = contact.getName() + SEPARATOR + contact.getGithub() + SEPARATOR
                 + contact.getLinkedin() + SEPARATOR + contact.getTelegram() + SEPARATOR
                 + contact.getTwitter() + SEPARATOR + contact.getEmail() + "\n";

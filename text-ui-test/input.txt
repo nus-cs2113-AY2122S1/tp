@@ -7,6 +7,9 @@ lezongg
 lezongmun@gmail.com
 
 me
+edit me -n Marcus Bory
+edit me
+edit me -e lezongmun
 rm 1
 add -n ng andre -g ng-andre
 rm 2
@@ -76,4 +79,7 @@ search boris
 search -n bory
 search -g lezong
 search -zxca lezong
+import
+search -n lezai
+search -n badgithub
 exit

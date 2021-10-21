@@ -22,7 +22,7 @@ public class AddPersonalContactParser extends RegexParser {
 
     public void collectPersonalDetails() {
         TextUi.welcomeMessage();
-        parsePersonalName();
+        parsePersonalName(true);
         TextUi.greetingMessage(personalContact);
         String userConfirmation = UserInputTextUi.getUserConfirmation();
         if (userConfirmation != null || userConfirmation.isBlank()) {
@@ -35,8 +35,21 @@ public class AddPersonalContactParser extends RegexParser {
         }
     }
 
-    private void parsePersonalName() {
+    public void recallPersonalDetails() {
+        String userConfirmation = UserInputTextUi.getUserConfirmation();
+        if (userConfirmation != null || userConfirmation.isBlank()) {
+            parsePersonalName(false);
+            parsePersonalGithubUsername();
+            parsePersonalTelegramUsername();
+            parsePersonalTwitterUsername();
+            parsePersonalEmailAddress();
+            parsePersonalLinkedinUsername();
+        }
+    }
+
+    private void parsePersonalName(boolean isFirstTime) {
         boolean isValidDetail = false;
+        TextUi.promptPersonalNameMessage(isFirstTime);
         do {
             try {
                 String personalName = UserInputTextUi.getUserInput();
@@ -52,7 +65,7 @@ public class AddPersonalContactParser extends RegexParser {
 
     private void parsePersonalGithubUsername() {
         boolean isValidDetail = false;
-        TextUi.promptPersonalGithubUsernameMessage(this.personalContact.getName());
+        TextUi.promptPersonalGithubUsernameMessage();
         do {
             try {
                 String personalGithubUsername = UserInputTextUi.getUserInput();

@@ -33,11 +33,7 @@ public abstract class TextUi {
     }
 
     public static void welcomeMessage() {
-        printDoubleLineMessage(LOGO);
-        String message = "Welcome to ConTech, your personal contact tracker.\n"
-                + "Can I get your name?";
-        printBottomLineMessage(message);
-        System.out.print("Name: ");
+        printTopLineMessage(LOGO);
     }
 
     public static void welcomeBackMessage(PersonalContact personalContact) {
@@ -65,7 +61,19 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void promptPersonalGithubUsernameMessage(String personalName) {
+    public static void promptPersonalNameMessage(boolean isFirstTime) {
+        String message;
+        if (isFirstTime) {
+            message = "Welcome to ConTech, your personal contact tracker.\n"
+                    + "Please provide us with your Name.";
+        } else {
+            message = "Please provide us with your Name.";
+        }
+        printDoubleLineMessage(message);
+        System.out.print("Name: ");
+    }
+
+    public static void promptPersonalGithubUsernameMessage() {
         String message = "Please provide us with your Github Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
@@ -221,7 +229,10 @@ public abstract class TextUi {
                 + "       If no flag is specified, contact name is searched by default.\n"
                 + " Example: search -g QUERY\n\n"
                 + "help: Displays application usage instructions.\n"
-                + " Example: help";
+                + " Example: help\n\n"
+                + "import: Imports contacts from a CSV Text File.\n"
+                + " Note: Please ensure that data is saved in data/import.txt\n"
+                + " Example: import";
         printDoubleLineMessage(message);
     }
 
@@ -268,6 +279,11 @@ public abstract class TextUi {
         } else {
             message = "Contact was not edited.";
         }
+        printDoubleLineMessage(message);
+    }
+
+    public static void successfulImportMessage(int numberOfLines) {
+        String message = "ConTech has successfully imported " + numberOfLines + " lines";
         printDoubleLineMessage(message);
     }
 
