@@ -9,7 +9,7 @@ import seedu.duke.universities.UniversityList;
 import java.io.IOException;
 
 public class ListUniCommand extends Command {
-    public ListUniCommand(UniversityList universityList) throws IOException {
+    public ListUniCommand(UniversityList universityList, UniversityList universityMasterList) throws IOException {
         if (universityList.getSize() == 0) {
             assert universityList.getSize() == 0;
             System.out.println("The university list is empty!");
@@ -18,7 +18,7 @@ public class ListUniCommand extends Command {
             System.out.println("Here are the universities and module mappings in the list:");
             for (int i = 0; i < universityList.getSize(); i++) {
                 assert universityList.get(i).getName() != null;
-                Ui.printUniversity(universityList.get(i), i + 1, universityList);
+                Ui.printUniversity(universityList.get(i), universityMasterList);
             }
         }
     }

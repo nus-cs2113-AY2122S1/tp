@@ -15,14 +15,14 @@ public class RemoveUniCommand extends Command {
             assert universitySelectedList.getSize() == 0;
             System.out.println("The university list is empty!");
         } else {
-            University universityToRemove = universitySelectedList.get(universityIndexToRemove);
+            University universityToRemove = universityMasterList.get(universityIndexToRemove);
             assert universityToRemove.getName() != null;
             assert universitySelectedList.getSize() != 0;
             universitySelectedList.removeUniversity(universityToRemove.getName());
             assert !universitySelectedList.searchUniversity(universityToRemove.getName());
             SelectedUniversityStorage.write(universitySelectedList);
             System.out.println("This university is removed: ");
-            Ui.printUniversity(universityToRemove, universityIndexToRemove, universitySelectedList);
+            Ui.printUniversity(universityToRemove, universityMasterList);
         }
     }
 }
