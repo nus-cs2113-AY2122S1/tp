@@ -57,6 +57,7 @@ public class ListCommandParserTest {
     public void test_emptyFlag_exceptionThrown() {
         String flag = "";
         ListCommandParser lcp = new ListCommandParser();
+
         assertThrows(ParseException.class, () -> lcp.parse(flag, universitySelectedList,
                 moduleSelectedList, universityMasterList, moduleMasterList));
     }
