@@ -17,7 +17,7 @@ public class ModuleWorkspaceCommandParser extends CommandParser {
     /**
      * Initializes the commandMap. Adds some default commands to it.
      */
-    public ModuleWorkspaceCommandParser() {
+    private ModuleWorkspaceCommandParser() {
         super("");
     }
 

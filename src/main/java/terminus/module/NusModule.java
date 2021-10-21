@@ -12,7 +12,7 @@ import terminus.content.Question;
  */
 public class NusModule {
 
-    private final ContentManager<Note> noteManager;
+    private final transient ContentManager<Note> noteManager;
     private final ContentManager<Link> linkManager;
     private final ContentManager<Question> questionManager;
 
