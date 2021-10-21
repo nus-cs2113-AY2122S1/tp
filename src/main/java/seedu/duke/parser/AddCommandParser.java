@@ -86,4 +86,13 @@ public class AddCommandParser {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
         }
     }
+
+    public boolean isUniversityExist(String universityName, UniversityList universityMasterList) {
+        return universityMasterList.searchUniversity(universityName);
+    }
+
+    public Module searchForModule(String moduleCode, ModuleList moduleMasterList) {
+        return moduleMasterList.getModule(moduleCode);
+    }
+
 }
