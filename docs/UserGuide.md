@@ -13,24 +13,52 @@
 
 ## Features 
 
-### Viewing all selected universities: list /suni
+### Viewing all selected universities: `list /suni`
 Displays all universities added by the user.
-Format: list /suni  
-Examples:  
-list /suni
-[35] Singapore Management Univeristy
-[69] University of Leeds
-[77] - University of Waterloo
-
-### Viewing all selected modules: list /smod
-Displays all modules added by the user.  
-Format: list /smod  
+Format: `list /suni`  
 Examples:
-list /smod
-Here are the modules in the list:
-[1] CS1010 : Programming Methodology
-[2] CS1231 : Discrete Structures
+`list /suni`  
+[35] Singapore Management Univeristy  
+[69] University of Leeds  
+[77] - University of Waterloo  
+
+### Viewing all selected modules: `list /smod`
+Displays all modules added by the user.  
+Format: `list /smod`  
+Examples:
+`list /smod`  
+Here are the modules in the list:  
+[1] CS1010 : Programming Methodology  
+[2] CS1231 : Discrete Structures  
 [3] CS3233 : Competitive Programming
+
+### Viewing all master universities: `list /muni`
+Displays all universities from the master list.
+Format: `list /muni`  
+Examples:
+`list /muni`  
+Here are the modules in the list:  
+[1] ACC1701X : Accounting for Decision Makers  
+[2] ACC2706 : Managerial Accounting  
+[3] AR2102 : Design 4  
+...  
+[803] TR3008 : Technological Innovation  
+[804] UD5221 : Urban Design Theory and Disco  
+[805] UD5628 : Critique of Contemporary Urban Design  
+
+### Viewing all master modules: `list /mmod`
+Displays all modules from the master list.  
+Format: `list /mmod`  
+Examples: 
+`list /mmod`  
+Here are the universities and module mappings in the list:  
+[1] - Aarhus School of Business  
+[2] - Aarhus University  
+[3] - Arizona State University  
+...  
+[78] - Uppsala University  
+[79] - Waseda University  
+[80] - Western University  
 
 ### Adding a todo: `todo`
 Adds a new item to the list of todo items.
