@@ -226,4 +226,7 @@ public class Ui {
         System.out.println();
     }
 
+    public static void printInvalidFilterError() {
+
+    }
 }
