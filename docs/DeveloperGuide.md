@@ -112,7 +112,7 @@ Functions of the Parser class:
 * Prints responses to the console by implementing the `UI` class
 
 ### Command component
-![Command Class Diagram](./RenderedUML/CommandRects.svg)
+![Command Class Diagram](https://user-images.githubusercontent.com/65898007/138222993-ad90002c-80bc-4d74-aa2a-f267765d812c.png)
 
 ### Storage component
 
