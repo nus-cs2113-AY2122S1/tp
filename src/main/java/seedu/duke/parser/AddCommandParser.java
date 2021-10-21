@@ -60,7 +60,7 @@ public class AddCommandParser {
                 if (index > universityMasterList.getSize()) {
                     throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
                 }
-            return new AddUniCommand(index, universityMasterList, universitySelectedList);
+                return new AddUniCommand(index, universityMasterList, universitySelectedList);
             } else {
                 String universityName = argumentsSubstrings[1].trim();
                 if (universityName.length() == 0) {
