@@ -19,8 +19,8 @@ public class AddMapCommand extends Command {
         Module mappedModule = universityToMap.getMappedModule(moduleToMap, moduleSelectedList);
         ModuleMapping selectedMapping = universityToMap.getMapping(moduleToMap, moduleSelectedList);
         universityToMap.addMapping(moduleToMap, mappedModule);
-        SelectedUniversityStorage.write(universitySelectedList);
         System.out.println("New module mapping added: ");
         Ui.printModuleMapping(selectedMapping, moduleIndexToMap);
+        SelectedUniversityStorage.write(universitySelectedList);
     }
 }
