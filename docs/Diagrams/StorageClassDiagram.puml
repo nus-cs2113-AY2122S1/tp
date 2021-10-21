@@ -8,18 +8,19 @@ class ImportParser
 class Export
 
 Storage --> Import
-Import --> ImportParser
+Import -> ImportParser
 Storage --> Export
 }
 
 class Habit
 
+ImportParser -> Habit
+
 package "goal" {
 class Goal
 class GoalList
 Goal <-- ImportParser
-Goal "*" <- GoalList
-Goal --> "*" Habit
+Goal "*" <-- GoalList
 GoalList <-- Import
 }
 

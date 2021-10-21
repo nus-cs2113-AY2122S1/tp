@@ -165,14 +165,16 @@ the user's data.
 
 ### Storage component
 
-The Storage Class allows data to be read from and saved to a storage file.
+The `Storage` class allows data to be read from and saved to a storage file.
 
 ![Storage Class Diagram](Diagram%20Images/StorageClassDiagram.png)
 
-When a user exits the program, the 
-information entered by the user during the program will be exported and saved into a `HappyBit.txt` file. The next time
-the program is run by the user, this data will be imported back into the program to allow the user to pick up and 
-continue from where they left off.
+The class diagram shows how `Storage` class imports data from the storage file.
+* `Storage` interacts with `Import` to access the data stored in storage file.
+* `Import` will depend on `ImportParser` to decipher
+
+Storage class interacts with Export class to export data to storage file.
+
 
 ## Appendix A: Product Scope
 
