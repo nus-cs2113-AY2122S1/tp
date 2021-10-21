@@ -81,6 +81,14 @@ corresponding `ContactList` and `Contact` objects. It is thus dependent on the c
 
 {NOT DONE}
 
+### <a name="View"></a>Viewing a contact: `view`
+This feature is processed using `ViewContactCommand`. Whenever a user wants to view a specific contact from the 
+contact list, user can input `view [INDEX]` with the index of the desired contact displayed from the `list` feature. 
+`ViewContactCommand` is then created in the `MainParser` and executed in `Duke`.
+The sequence diagram below illustrates the `execute()` function in `ViewContactCommand`.
+
+![View Sequence Diagram](images/ViewContactCommandSequenceDiagram.png)
+
 ### <a name="Edit"></a>Editing a contact: `edit`
 This feature is processed using `EditContactParser` under `MainParser`. In order to edit a contact in the contact list, 
 a user must enter a command in the form `edit [CONTACT INDEX] [DETAILS WITH FLAGS]` where the details with flags are 
