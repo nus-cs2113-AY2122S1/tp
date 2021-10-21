@@ -55,13 +55,13 @@ The App is organized by the `command`, `exception`, `kitchen`, and `util` packag
 
 The Sequence Diagram below will show how the components interact with each other for the scenario where the user issues the command `add`.
 
-![Sequence Diagram](https://user-images.githubusercontent.com/65898007/138207270-83d59ba2-b753-4a0f-bf46-7710921511d6.png)
+![Sequence Diagram](./RenderedUML/AddSequence.svg)
 
 ### Cookbook component
 
 The Diagram below is the class diagram for the ``Cookbook`` class
 
-![Cookbook Class Diagram](https://user-images.githubusercontent.com/65898007/138207292-1d989a95-f4b2-468a-9076-94ce74e8248b.png)
+![Cookbook Class Diagram](./RenderedUML/Kitchen.svg)
 
 The `Cookbook` Class is instantiated by the `Gordon` Class, and manages the recipes and tags of the cookbook.
 
@@ -112,7 +112,7 @@ Functions of the Parser class:
 * Prints responses to the console by implementing the `UI` class
 
 ### Command component
-![Command Class Diagram](https://user-images.githubusercontent.com/65898007/138222993-ad90002c-80bc-4d74-aa2a-f267765d812c.png)
+![Command Class Diagram](./RenderedUML/CommandRects.svg)
 
 ### Storage component
 

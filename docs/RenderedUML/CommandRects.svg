@@ -1,108 +1,108 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="416px" preserveAspectRatio="none" style="width:1053px;height:416px;background:#FFFFFF;" version="1.1" viewBox="0 0 1053 416" width="1053px" zoomAndPan="magnify"><defs/><g><!--MD5=[7ea3f7332222999d7939fca1b8e1fb19]
-cluster Command--><rect fill="#FFFFFF" height="403" style="stroke:#000000;stroke-width:1.5;" width="1040" x="7" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="492.5" y="22.1318">Command</text><!--MD5=[3c02243fc536781fdad892b06842fd73]
-class BasicCommands--><rect fill="#FEFECE" height="48" id="BasicCommands" style="stroke:#A80036;stroke-width:1.5;" width="129" x="515.5" y="154"/><ellipse cx="530.5" cy="170" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M532.5,166.5 Q532.7031,166 532.9375,165.75 Q533.1719,165.5 533.4375,165.5 Q533.9063,165.5 534.2031,165.7813 Q534.5,166.0625 534.5,166.7188 L534.5,168.2813 Q534.5,168.9375 534.2188,169.2188 Q533.9375,169.5 533.5,169.5 Q533.1094,169.5 532.8594,169.3281 Q532.6094,169.1563 532.5,168.7031 Q532.4531,168.3906 532.2813,168.2188 Q531.9688,167.8906 531.4063,167.7031 Q530.8438,167.5 530.2813,167.5 Q529.5781,167.5 528.9844,167.7813 Q528.4063,168.0625 527.9531,168.6875 Q527.5,169.3125 527.5,170.1719 L527.5,171.0938 Q527.5,172.125 528.3438,172.8125 Q529.1875,173.5 530.6875,173.5 Q531.5781,173.5 532.2031,173.2969 Q532.5625,173.1875 532.9688,172.8281 Q533.2344,172.625 533.375,172.5625 Q533.5156,172.5 533.6875,172.5 Q534.0156,172.5 534.25,172.7656 Q534.5,173.0156 534.5,173.375 Q534.5,173.7188 534.1563,174.125 Q533.6563,174.7188 532.8594,175.0469 Q531.8125,175.5 530.5313,175.5 Q529.0313,175.5 527.8281,174.9063 Q526.8594,174.4375 526.1719,173.4219 Q525.5,172.4063 525.5,171.2031 L525.5,170.1094 Q525.5,168.8594 526.0938,167.7656 Q526.7031,166.6719 527.75,166.0938 Q528.8125,165.5 530,165.5 Q530.7188,165.5 531.3438,165.75 Q531.9688,166 532.5,166.5 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="97" x="544.5" y="174.3564">BasicCommands</text><line style="stroke:#A80036;stroke-width:1.5;" x1="516.5" x2="643.5" y1="186" y2="186"/><line style="stroke:#A80036;stroke-width:1.5;" x1="516.5" x2="643.5" y1="194" y2="194"/><!--MD5=[5869485496aaa7fe7ac7d405956b3f59]
-class FindCommands--><rect fill="#FEFECE" height="48" id="FindCommands" style="stroke:#A80036;stroke-width:1.5;" width="122" x="381" y="44"/><ellipse cx="396" cy="60" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M398,56.5 Q398.2031,56 398.4375,55.75 Q398.6719,55.5 398.9375,55.5 Q399.4063,55.5 399.7031,55.7813 Q400,56.0625 400,56.7188 L400,58.2813 Q400,58.9375 399.7188,59.2188 Q399.4375,59.5 399,59.5 Q398.6094,59.5 398.3594,59.3281 Q398.1094,59.1563 398,58.7031 Q397.9531,58.3906 397.7813,58.2188 Q397.4688,57.8906 396.9063,57.7031 Q396.3438,57.5 395.7813,57.5 Q395.0781,57.5 394.4844,57.7813 Q393.9063,58.0625 393.4531,58.6875 Q393,59.3125 393,60.1719 L393,61.0938 Q393,62.125 393.8438,62.8125 Q394.6875,63.5 396.1875,63.5 Q397.0781,63.5 397.7031,63.2969 Q398.0625,63.1875 398.4688,62.8281 Q398.7344,62.625 398.875,62.5625 Q399.0156,62.5 399.1875,62.5 Q399.5156,62.5 399.75,62.7656 Q400,63.0156 400,63.375 Q400,63.7188 399.6563,64.125 Q399.1563,64.7188 398.3594,65.0469 Q397.3125,65.5 396.0313,65.5 Q394.5313,65.5 393.3281,64.9063 Q392.3594,64.4375 391.6719,63.4219 Q391,62.4063 391,61.2031 L391,60.1094 Q391,58.8594 391.5938,57.7656 Q392.2031,56.6719 393.25,56.0938 Q394.3125,55.5 395.5,55.5 Q396.2188,55.5 396.8438,55.75 Q397.4688,56 398,56.5 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="90" x="410" y="64.3564">FindCommands</text><line style="stroke:#A80036;stroke-width:1.5;" x1="382" x2="502" y1="76" y2="76"/><line style="stroke:#A80036;stroke-width:1.5;" x1="382" x2="502" y1="84" y2="84"/><!--MD5=[b3d587c3f73fd254fc9938a899bdaae4]
-class SetCommands--><rect fill="#FEFECE" height="48" id="SetCommands" style="stroke:#A80036;stroke-width:1.5;" width="116" x="701" y="44"/><ellipse cx="716" cy="60" fill="#ADD1B2" rx="11" ry="11" style="stroke:#A80036;stroke-width:1.0;"/><path d="M718,56.5 Q718.2031,56 718.4375,55.75 Q718.6719,55.5 718.9375,55.5 Q719.4063,55.5 719.7031,55.7813 Q720,56.0625 720,56.7188 L720,58.2813 Q720,58.9375 719.7188,59.2188 Q719.4375,59.5 719,59.5 Q718.6094,59.5 718.3594,59.3281 Q718.1094,59.1563 718,58.7031 Q717.9531,58.3906 717.7813,58.2188 Q717.4688,57.8906 716.9063,57.7031 Q716.3438,57.5 715.7813,57.5 Q715.0781,57.5 714.4844,57.7813 Q713.9063,58.0625 713.4531,58.6875 Q713,59.3125 713,60.1719 L713,61.0938 Q713,62.125 713.8438,62.8125 Q714.6875,63.5 716.1875,63.5 Q717.0781,63.5 717.7031,63.2969 Q718.0625,63.1875 718.4688,62.8281 Q718.7344,62.625 718.875,62.5625 Q719.0156,62.5 719.1875,62.5 Q719.5156,62.5 719.75,62.7656 Q720,63.0156 720,63.375 Q720,63.7188 719.6563,64.125 Q719.1563,64.7188 718.3594,65.0469 Q717.3125,65.5 716.0313,65.5 Q714.5313,65.5 713.3281,64.9063 Q712.3594,64.4375 711.6719,63.4219 Q711,62.4063 711,61.2031 L711,60.1094 Q711,58.8594 711.5938,57.7656 Q712.2031,56.6719 713.25,56.0938 Q714.3125,55.5 715.5,55.5 Q716.2188,55.5 716.8438,55.75 Q717.4688,56 718,56.5 Z " fill="#000000"/><text fill="#000000" font-family="Arial" font-size="12" lengthAdjust="spacing" textLength="84" x="730" y="64.3564">SetCommands</text><line style="stroke:#A80036;stroke-width:1.5;" x1="702" x2="816" y1="76" y2="76"/><line style="stroke:#A80036;stroke-width:1.5;" x1="702" x2="816" y1="84" y2="84"/><!--MD5=[ee234901cc14ce4ccf9222c6e4f6e77d]
-entity {abstract}\nCommand--><rect fill="#F3B3DF" height="52.1973" style="stroke:#000000;stroke-width:1.5;" width="84" x="538" y="42"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="61" x="548" y="65.1318">{abstract}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="64" x="548" y="81.2305">Command</text><!--MD5=[8de6e499e49f97ea3e42f8539c029b5a]
-entity AddCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="109" x="759.5" y="262"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="89" x="769.5" y="285.1318">AddCommand</text><!--MD5=[5b037da89b657f1acf0babb5f3016ea1]
-entity DeleteCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="125" x="903.5" y="262"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="105" x="913.5" y="285.1318">DeleteCommand</text><!--MD5=[a5c0212f6afaa6e3607a798eeadca312]
-entity CheckCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="124" x="306" y="358"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="104" x="316" y="381.1318">CheckCommand</text><!--MD5=[07ff9f18cf12a916a165d965513cc662]
-entity ListRecipesCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="157" x="465.5" y="358"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="137" x="475.5" y="381.1318">ListRecipesCommand</text><!--MD5=[78ee5539c100dd89d3e39af7f9352b77]
-entity HelpCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="112" x="658" y="358"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="92" x="668" y="381.1318">HelpCommand</text><!--MD5=[7a41efbc9d6b58d31babbb88d6dbd69b]
-entity NullCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="107" x="617.5" y="262"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="87" x="627.5" y="285.1318">NullCommand</text><!--MD5=[f70cc934ac79ee250998534058ed291b]
-entity FindCaloriesCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="164" x="182" y="50"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="144" x="192" y="73.1318">FindCaloriesCommand</text><!--MD5=[f9df87af8e792586e70cf6a432ff58aa]
-entity FindDifficultyCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="165" x="23.5" y="160"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="145" x="33.5" y="183.1318">FindDifficultyCommand</text><!--MD5=[5cc512b67834fbfcef6773565ac71326]
-entity FindIngredientsCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="182" x="224" y="160"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="162" x="234" y="183.1318">FindIngredientsCommand</text><!--MD5=[cf04f692de35c8535e4f005419abe9a6]
-entity FindPriceCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="144" x="148" y="262"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="124" x="158" y="285.1318">FindPriceCommand</text><!--MD5=[366f58ef1c1e5a57991e1fc8c696358e]
-entity FindTagsCommand--><rect fill="#B3DFF3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="144" x="327" y="262"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="124" x="337" y="285.1318">FindTagsCommand</text><!--MD5=[8e61c98bd0fc9999a186ed5ca153b7d8]
-entity SetCaloriesCommand--><rect fill="#E1300A" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="157" x="873.5" y="160"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="137" x="883.5" y="183.1318">SetCaloriesCommand</text><!--MD5=[0b236d1536c57880937deeae8ff2742a]
-entity SetDifficultyCommand--><rect fill="#E1300A" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="158" x="680" y="160"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="138" x="690" y="183.1318">SetDifficultyCommand</text><!--MD5=[1940e8542e7194e5a2ba70212ea1b21b]
-entity SetPriceCommand--><rect fill="#E1300A" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="137" x="852.5" y="50"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="117" x="862.5" y="73.1318">SetPriceCommand</text><!--MD5=[3b44ea3481479195811f36787f0b97ce]
-reverse link {abstract}\nCommand to BasicCommands--><path codeLine="51" d="M580,114.34 C580,127.98 580,142.38 580,153.93 " fill="none" id="{abstract}\nCommand-backto-BasicCommands" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="573,114.05,580,94.05,587,114.05,573,114.05" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[e898651700a71e230d32dd18d15516c6]
-link FindCommands to {abstract}\nCommand--><path codeLine="52" d="M503.18,68 C508.08,68 512.97,68 517.87,68 " fill="none" id="FindCommands-to-{abstract}\nCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="517.99,61,537.99,68,517.99,75,517.99,61" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[479f23c268ffc580e1f991cbb8d89fad]
-reverse link {abstract}\nCommand to SetCommands--><path codeLine="53" d="M642.54,68 C661.96,68 681.38,68 700.8,68 " fill="none" id="{abstract}\nCommand-backto-SetCommands" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="642.3,75,622.3,68,642.3,61,642.3,75" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[caf20ace5df51eb41e4962633618fe91]
-reverse link BasicCommands to AddCommand--><path codeLine="54" d="M652.61,210.03 C692.69,227.16 740.93,247.77 774.17,261.98 " fill="none" id="BasicCommands-backto-AddCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="649.62,216.36,633.98,202.07,655.12,203.49,649.62,216.36" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[8817eac9760fd734b0f9038b16b56d2b]
-reverse link BasicCommands to DeleteCommand--><path codeLine="55" d="M664.24,202.26 C758.11,227.09 845.83,249.17 903.22,263.46 " fill="none" id="BasicCommands-backto-DeleteCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="662.29,208.99,644.76,197.09,665.88,195.45,662.29,208.99" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[e89f6bc3c5e1beb3a88553d4ce16e649]
-reverse link BasicCommands to CheckCommand--><path codeLine="56" d="M554.1,219.25 C537.13,243.75 513.44,274.69 488,298 C461.44,322.33 426.31,343.87 400.93,357.94 " fill="none" id="BasicCommands-backto-CheckCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="548.47,215.08,565.43,202.39,560.08,222.89,548.47,215.08" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[db88565690f5878a2dd3c24aaa31ef44]
-reverse link BasicCommands to ListRecipesCommand--><path codeLine="57" d="M572.08,222.11 C564.26,264.7 552.68,327.72 547.16,357.8 " fill="none" id="BasicCommands-backto-ListRecipesCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="565.23,220.66,575.73,202.25,579,223.19,565.23,220.66" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[24f3155572a63ed31e7267a2ceff683a]
-reverse link BasicCommands to HelpCommand--><path codeLine="58" d="M579.18,222.53 C580.63,246.47 585.68,275.74 600,298 C617.51,325.22 648.42,345.19 673.64,357.97 " fill="none" id="BasicCommands-backto-HelpCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="572.17,222.56,578.7,202.4,586.17,222.23,572.17,222.56" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[30d10bc73b19a87583797cca922c2f90]
-reverse link BasicCommands to NullCommand--><path codeLine="59" d="M614.93,217.38 C628.9,232.74 644.29,249.65 655.41,261.87 " fill="none" id="BasicCommands-backto-NullCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="609.39,221.7,601.11,202.19,619.74,212.27,609.39,221.7" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[ce179784a2caa711125cc0ac6384d2ee]
-link FindCaloriesCommand to FindCommands--><path codeLine="60" d="M346.05,68 C350.95,68 355.85,68 360.75,68 " fill="none" id="FindCaloriesCommand-to-FindCommands" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="360.9,61,380.9,68,360.9,75,360.9,61" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[dc9415a06f54122dd2d54f01e2617627]
-reverse link FindCommands to FindDifficultyCommand--><path codeLine="61" d="M361.67,94.82 C298.93,114.99 213.53,142.44 159.07,159.94 " fill="none" id="FindCommands-backto-FindDifficultyCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="359.58,88.14,380.76,88.68,363.86,101.47,359.58,88.14" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[b37422a593dd45e1d70aa41bc16c5ce2]
-reverse link FindCommands to FindIngredientsCommand--><path codeLine="62" d="M399.42,105.21 C377.72,123.66 352.35,145.24 335.13,159.88 " fill="none" id="FindCommands-backto-FindIngredientsCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="394.98,99.79,414.76,92.17,404.05,110.46,394.98,99.79" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[7624366853cf5e26b363c85a8a05ac1e]
-reverse link FindCommands to FindPriceCommand--><path codeLine="63" d="M446.45,112.71 C446.97,141.04 442.88,177.17 423,202 C405.21,224.22 337.78,247.01 285.46,261.98 " fill="none" id="FindCommands-backto-FindPriceCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="439.45,112.81,445.3,92.45,453.43,112.02,439.45,112.81" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[1b82d7a02a45323b68c5b8cb793216c5]
-reverse link FindCommands to FindTagsCommand--><path codeLine="64" d="M452.59,111.88 C457.27,138.39 459.93,172.81 451,202 C443.97,224.98 427.5,247.3 414.97,261.93 " fill="none" id="FindCommands-backto-FindTagsCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="445.71,113.17,448.49,92.16,459.42,110.32,445.71,113.17" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[4295954a42b20473d4411d1656afd5bc]
-reverse link SetCommands to SetCaloriesCommand--><path codeLine="65" d="M817.97,102 C852.13,121.11 893.71,144.38 921.41,159.88 " fill="none" id="SetCommands-backto-SetCaloriesCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="814.44,108.04,800.4,92.17,821.27,95.83,814.44,108.04" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[2f215e9715c87a81955dfae121f4cded]
-reverse link SetCommands to SetDifficultyCommand--><path codeLine="66" d="M759,112.36 C759,129.02 759,147.1 759,159.88 " fill="none" id="SetCommands-backto-SetDifficultyCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="752,112.17,759,92.17,766,112.17,752,112.17" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[56790cfdd2a84339278af94835dc439d]
-reverse link SetCommands to SetPriceCommand--><path codeLine="67" d="M837.33,68 C842.38,68 847.44,68 852.49,68 " fill="none" id="SetCommands-backto-SetPriceCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="837.22,75,817.22,68,837.22,61,837.22,75" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[03c1952398d6f349911d124b8202549d]
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="704px" preserveAspectRatio="none" style="width:697px;height:704px;background:#FFFFFF;" version="1.1" viewBox="0 0 697 704" width="697px" zoomAndPan="magnify"><defs/><g><!--MD5=[7ea3f7332222999d7939fca1b8e1fb19]
+cluster Command--><rect fill="#FFFFFF" height="691" style="stroke:#000000;stroke-width:1.5;" width="684" x="7" y="7"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="69" x="314.5" y="22.1318">Command</text><!--MD5=[1b07b997d5c762603c89609a43912d16]
+cluster Basic Commands--><rect fill="#FFFFFF" height="442" style="stroke:#000000;stroke-width:1.5;" width="189" x="31" y="161"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="119" x="66" y="176.1318">Basic Commands</text><!--MD5=[6fca3368c595f27a4448d10066ee04a5]
+cluster Find Commands--><rect fill="#FFFFFF" height="371" style="stroke:#000000;stroke-width:1.5;" width="214" x="453" y="303"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="112" x="504" y="318.1318">Find Commands</text><!--MD5=[0d14904dee78962aad6049756b61630f]
+cluster Set Commands--><rect fill="#FFFFFF" height="229" style="stroke:#000000;stroke-width:1.5;" width="190" x="465" y="50"/><text fill="#000000" font-family="Arial" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="104" x="508" y="65.1318">Set Commands</text><!--MD5=[ee234901cc14ce4ccf9222c6e4f6e77d]
+entity {abstract}\nCommand--><rect fill="#DFF3B3" height="52.1973" style="stroke:#000000;stroke-width:1.5;" width="84" x="264" y="366"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="61" x="274" y="389.1318">{abstract}</text><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="64" x="274" y="405.2305">Command</text><!--MD5=[8de6e499e49f97ea3e42f8539c029b5a]
+entity AddCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="109" x="71" y="196"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="89" x="81" y="219.1318">AddCommand</text><!--MD5=[5b037da89b657f1acf0babb5f3016ea1]
+entity DeleteCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="125" x="63" y="267"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="105" x="73" y="290.1318">DeleteCommand</text><!--MD5=[a5c0212f6afaa6e3607a798eeadca312]
+entity CheckCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="124" x="63.5" y="338"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="104" x="73.5" y="361.1318">CheckCommand</text><!--MD5=[07ff9f18cf12a916a165d965513cc662]
+entity ListRecipesCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="157" x="47" y="409"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="137" x="57" y="432.1318">ListRecipesCommand</text><!--MD5=[78ee5539c100dd89d3e39af7f9352b77]
+entity HelpCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="112" x="69.5" y="480"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="92" x="79.5" y="503.1318">HelpCommand</text><!--MD5=[7a41efbc9d6b58d31babbb88d6dbd69b]
+entity NullCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="107" x="72" y="551"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="87" x="82" y="574.1318">NullCommand</text><!--MD5=[f70cc934ac79ee250998534058ed291b]
+entity FindCaloriesCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="164" x="478" y="622"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="144" x="488" y="645.1318">FindCaloriesCommand</text><!--MD5=[f9df87af8e792586e70cf6a432ff58aa]
+entity FindDifficultyCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="165" x="477.5" y="551"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="145" x="487.5" y="574.1318">FindDifficultyCommand</text><!--MD5=[5cc512b67834fbfcef6773565ac71326]
+entity FindIngredientsCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="182" x="469" y="480"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="162" x="479" y="503.1318">FindIngredientsCommand</text><!--MD5=[cf04f692de35c8535e4f005419abe9a6]
+entity FindPriceCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="144" x="488" y="409"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="124" x="498" y="432.1318">FindPriceCommand</text><!--MD5=[366f58ef1c1e5a57991e1fc8c696358e]
+entity FindTagsCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="144" x="488" y="338"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="124" x="498" y="361.1318">FindTagsCommand</text><!--MD5=[8e61c98bd0fc9999a186ed5ca153b7d8]
+entity SetCaloriesCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="157" x="481.5" y="227"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="137" x="491.5" y="250.1318">SetCaloriesCommand</text><!--MD5=[0b236d1536c57880937deeae8ff2742a]
+entity SetDifficultyCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="158" x="481" y="156"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="138" x="491" y="179.1318">SetDifficultyCommand</text><!--MD5=[1940e8542e7194e5a2ba70212ea1b21b]
+entity SetPriceCommand--><rect fill="#DFF3B3" height="36.0986" style="stroke:#000000;stroke-width:1.5;" width="137" x="491.5" y="85"/><text fill="#000000" font-family="Arial" font-size="14" lengthAdjust="spacing" textLength="117" x="501.5" y="108.1318">SetPriceCommand</text><!--MD5=[fbf94fbcccba2d864ed3c1396c811789]
+link AddCommand to {abstract}\nCommand--><path d="M180.17,224.43 C196.87,229.67 214.44,237.47 228,249 C258.23,274.69 278.48,315.33 290.6,346.73 " fill="none" id="AddCommand-to-{abstract}\nCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="297.27,344.59,297.41,365.78,284.09,349.31,297.27,344.59" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[54bac89f0886c703d5c47203fa9a9a55]
+link DeleteCommand to {abstract}\nCommand--><path d="M188.21,301.64 C201.81,306.56 215.78,312.64 228,320 C242.17,328.53 255.94,340.02 267.81,351.3 " fill="none" id="DeleteCommand-to-{abstract}\nCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="273.06,346.65,282.22,365.76,263.14,356.53,273.06,346.65" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[e7816184a53845108ca8d137159612b3]
+link CheckCommand to {abstract}\nCommand--><path d="M187.93,368.39 C206.08,372.05 225.93,376.05 244.04,379.71 " fill="none" id="CheckCommand-to-{abstract}\nCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="245.72,372.9,263.94,383.72,242.95,386.63,245.72,372.9" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[01e2cc19d7b62a6dab37e2c018d78d3f]
+link ListRecipesCommand to {abstract}\nCommand--><path d="M204.01,411.8 C217.31,409.19 230.97,406.52 243.77,404.01 " fill="none" id="ListRecipesCommand-to-{abstract}\nCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="242.66,397.09,263.64,400.11,245.36,410.83,242.66,397.09" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[d791863c25dde6fd232b64672792ba99]
+link HelpCommand to {abstract}\nCommand--><path d="M181.76,482.85 C197.29,477.42 213.8,470.5 228,462 C241.64,453.84 255,443.01 266.67,432.32 " fill="none" id="HelpCommand-to-{abstract}\nCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="262.14,426.96,281.38,418.09,271.87,437.03,262.14,426.96" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[a6db6f8004a3a238bd3c43cd863cb3cb]
+link NullCommand to {abstract}\nCommand--><path d="M179.09,558.29 C196.1,552.87 214.13,544.83 228,533 C257.63,507.74 277.85,468.1 290.1,437.27 " fill="none" id="NullCommand-to-{abstract}\nCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="283.69,434.42,297.18,418.08,296.83,439.26,283.69,434.42" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[370963fe6353b1a928e3f5e4f7c7c190]
+reverse link {abstract}\nCommand to FindCaloriesCommand--><path d="M325.1,436.82 C346.72,484.88 387.35,560.19 445,604 C454.83,611.47 466.25,617.42 477.99,622.14 " fill="none" id="{abstract}\nCommand-backto-FindCaloriesCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="318.63,439.49,317.12,418.35,331.48,433.94,318.63,439.49" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[db7ff8b1fb9466f750d6d541f73e888e]
+reverse link {abstract}\nCommand to FindDifficultyCommand--><path d="M338.5,433.9 C364.06,465.24 402.7,507.01 445,533 C456.76,540.23 470.1,546.13 483.41,550.9 " fill="none" id="{abstract}\nCommand-backto-FindDifficultyCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="332.96,438.19,326.03,418.17,343.94,429.5,332.96,438.19" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[51c014fa9b75cc0e976729430ad5cfbc]
+reverse link {abstract}\nCommand to FindIngredientsCommand--><path d="M366.02,424.62 C390.1,437.21 418.47,451.17 445,462 C461.04,468.55 478.75,474.66 495.33,479.92 " fill="none" id="{abstract}\nCommand-backto-FindIngredientsCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="362.51,430.68,348.14,415.11,369.09,418.32,362.51,430.68" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[26ceec5208596adfba8c81da230b78fb]
+reverse link {abstract}\nCommand to FindPriceCommand--><path d="M368.06,400.48 C404.19,405.5 450.14,411.88 487.91,417.13 " fill="none" id="{abstract}\nCommand-backto-FindPriceCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="366.9,407.39,348.05,397.7,368.82,393.52,366.9,407.39" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[e27c1af254aafb9635470701a81993bc]
+reverse link {abstract}\nCommand to FindTagsCommand--><path d="M368.06,383.28 C404.19,378.12 450.14,371.55 487.91,366.16 " fill="none" id="{abstract}\nCommand-backto-FindTagsCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="368.84,390.24,348.05,386.14,366.86,376.38,368.84,390.24" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[18af7f87473c07527eecedbccffe9793]
+reverse link {abstract}\nCommand to SetCaloriesCommand--><path d="M365.36,357.96 C416.04,328.39 487.48,286.72 527.92,263.13 " fill="none" id="{abstract}\nCommand-backto-SetCaloriesCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="368.85,364.02,348.05,368.05,361.8,351.93,368.85,364.02" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[f64da43114e3b191493a6e4edd1c184b]
+reverse link {abstract}\nCommand to SetDifficultyCommand--><path d="M329.59,347.87 C353.06,306.26 393.54,245.06 445,209 C455.77,201.45 468.21,195.5 480.83,190.81 " fill="none" id="{abstract}\nCommand-backto-SetDifficultyCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="335.59,351.49,319.89,365.71,323.29,344.8,335.59,351.49" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[d67995f13c16d618e782117d4148aed0]
+reverse link {abstract}\nCommand to SetPriceCommand--><path d="M319.97,346.39 C338.47,289.47 377.85,192.91 445,138 C458.3,127.12 474.96,119.62 491.4,114.44 " fill="none" id="{abstract}\nCommand-backto-SetPriceCommand" style="stroke:#3C5648;stroke-width:2.0;"/><polygon fill="none" points="326.57,348.72,313.98,365.76,313.2,344.59,326.57,348.72" style="stroke:#3C5648;stroke-width:2.0;"/><!--MD5=[2de5f7c54586114016cfba7fba36666d]
 @startuml
 !include Style.puml
 skinparam ArrowColor LOGIC_GREEN_4
+left to right direction
 
 rectangle "Command" {
-    rectangle "{abstract}\nCommand" LOGIC_PINK_1 {
+    rectangle "{abstract}\nCommand" LOGIC_GREEN_1 {
     }
 
-    rectangle AddCommand LOGIC_GREEN_1 {
+    rectangle "Basic Commands" {
+        rectangle AddCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle DeleteCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle CheckCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle ListRecipesCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle HelpCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle NullCommand LOGIC_GREEN_1 {
+        }
     }
 
-    rectangle DeleteCommand LOGIC_GREEN_1 {
+    Rectangle "Find Commands" {
+        rectangle FindCaloriesCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle FindDifficultyCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle FindIngredientsCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle FindPriceCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle FindTagsCommand LOGIC_GREEN_1 {
+        }
     }
 
-    rectangle CheckCommand LOGIC_GREEN_1 {
+    rectangle "Set Commands" {
+        rectangle SetCaloriesCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle SetDifficultyCommand LOGIC_GREEN_1 {
+        }
+
+        rectangle SetPriceCommand LOGIC_GREEN_1 {
+        }
     }
 
-    rectangle ListRecipesCommand LOGIC_GREEN_1 {
-    }
-
-    rectangle HelpCommand LOGIC_GREEN_1 {
-    }
-
-    rectangle NullCommand LOGIC_GREEN_1 {
-    }
-
-    rectangle FindCaloriesCommand LOGIC_BLUE_1 {
-    }
-
-    rectangle FindDifficultyCommand LOGIC_BLUE_1 {
-    }
-
-    rectangle FindIngredientsCommand LOGIC_BLUE_1 {
-    }
-
-    rectangle FindPriceCommand LOGIC_BLUE_1 {
-    }
-
-    rectangle FindTagsCommand LOGIC_BLUE_1 {
-    }
-
-    rectangle SetCaloriesCommand LOGIC_RED_1 {
-    }
-
-    rectangle SetDifficultyCommand LOGIC_RED_1 {
-    }
-
-    rectangle SetPriceCommand LOGIC_RED_1 {
-    }
-
-
-    "{abstract}\nCommand" <|-down- "BasicCommands"
-    "{abstract}\nCommand" <|-left- "FindCommands"
-    "{abstract}\nCommand" <|-right- "SetCommands"
-    "BasicCommands" <|- - AddCommand
-    "BasicCommands" <|- - DeleteCommand
-    "BasicCommands" <|- - - CheckCommand
-    "BasicCommands" <|- - - ListRecipesCommand
-    "BasicCommands" <|- - - HelpCommand
-    "BasicCommands" <|- - NullCommand
-    "FindCommands" <|-left- FindCaloriesCommand
-    "FindCommands" <|- - FindDifficultyCommand
-    "FindCommands" <|- - FindIngredientsCommand
-    "FindCommands" <|- - - FindPriceCommand
-    "FindCommands" <|- - - FindTagsCommand
-    "SetCommands" <|- - SetCaloriesCommand
-    "SetCommands" <|- - SetDifficultyCommand
-    "SetCommands" <|- SetPriceCommand
+    AddCommand - -|> "{abstract}\nCommand"
+    DeleteCommand - -|> "{abstract}\nCommand"
+    CheckCommand - -|> "{abstract}\nCommand"
+    ListRecipesCommand - -|> "{abstract}\nCommand"
+    HelpCommand - -|> "{abstract}\nCommand"
+    NullCommand - -|> "{abstract}\nCommand"
+    "{abstract}\nCommand" <|- - - FindCaloriesCommand
+    "{abstract}\nCommand" <|- - - FindDifficultyCommand
+    "{abstract}\nCommand" <|- - - FindIngredientsCommand
+    "{abstract}\nCommand" <|- - - FindPriceCommand
+    "{abstract}\nCommand" <|- - - FindTagsCommand
+    "{abstract}\nCommand" <|- - - SetCaloriesCommand
+    "{abstract}\nCommand" <|- - SetDifficultyCommand
+    "{abstract}\nCommand" <|- - SetPriceCommand
 }
 @enduml
 
@@ -118,71 +118,74 @@ skinparam defaultFontName Arial
 skinparam shadowing false
 skinparam arrowThickness 2
 skinparam ArrowColor #3c5648
+left to right direction
 
 rectangle "Command" {
-    rectangle "{abstract}\nCommand" #F3B3DF {
+    rectangle "{abstract}\nCommand" #DFF3B3 {
     }
 
-    rectangle AddCommand #DFF3B3 {
+    rectangle "Basic Commands" {
+        rectangle AddCommand #DFF3B3 {
+        }
+
+        rectangle DeleteCommand #DFF3B3 {
+        }
+
+        rectangle CheckCommand #DFF3B3 {
+        }
+
+        rectangle ListRecipesCommand #DFF3B3 {
+        }
+
+        rectangle HelpCommand #DFF3B3 {
+        }
+
+        rectangle NullCommand #DFF3B3 {
+        }
     }
 
-    rectangle DeleteCommand #DFF3B3 {
+    Rectangle "Find Commands" {
+        rectangle FindCaloriesCommand #DFF3B3 {
+        }
+
+        rectangle FindDifficultyCommand #DFF3B3 {
+        }
+
+        rectangle FindIngredientsCommand #DFF3B3 {
+        }
+
+        rectangle FindPriceCommand #DFF3B3 {
+        }
+
+        rectangle FindTagsCommand #DFF3B3 {
+        }
     }
 
-    rectangle CheckCommand #DFF3B3 {
+    rectangle "Set Commands" {
+        rectangle SetCaloriesCommand #DFF3B3 {
+        }
+
+        rectangle SetDifficultyCommand #DFF3B3 {
+        }
+
+        rectangle SetPriceCommand #DFF3B3 {
+        }
     }
 
-    rectangle ListRecipesCommand #DFF3B3 {
-    }
-
-    rectangle HelpCommand #DFF3B3 {
-    }
-
-    rectangle NullCommand #DFF3B3 {
-    }
-
-    rectangle FindCaloriesCommand #b3dff3 {
-    }
-
-    rectangle FindDifficultyCommand #b3dff3 {
-    }
-
-    rectangle FindIngredientsCommand #b3dff3 {
-    }
-
-    rectangle FindPriceCommand #b3dff3 {
-    }
-
-    rectangle FindTagsCommand #b3dff3 {
-    }
-
-    rectangle SetCaloriesCommand #E1300A {
-    }
-
-    rectangle SetDifficultyCommand #E1300A {
-    }
-
-    rectangle SetPriceCommand #E1300A {
-    }
-
-
-    "{abstract}\nCommand" <|-down- "BasicCommands"
-    "{abstract}\nCommand" <|-left- "FindCommands"
-    "{abstract}\nCommand" <|-right- "SetCommands"
-    "BasicCommands" <|- - AddCommand
-    "BasicCommands" <|- - DeleteCommand
-    "BasicCommands" <|- - - CheckCommand
-    "BasicCommands" <|- - - ListRecipesCommand
-    "BasicCommands" <|- - - HelpCommand
-    "BasicCommands" <|- - NullCommand
-    "FindCommands" <|-left- FindCaloriesCommand
-    "FindCommands" <|- - FindDifficultyCommand
-    "FindCommands" <|- - FindIngredientsCommand
-    "FindCommands" <|- - - FindPriceCommand
-    "FindCommands" <|- - - FindTagsCommand
-    "SetCommands" <|- - SetCaloriesCommand
-    "SetCommands" <|- - SetDifficultyCommand
-    "SetCommands" <|- SetPriceCommand
+    AddCommand - -|> "{abstract}\nCommand"
+    DeleteCommand - -|> "{abstract}\nCommand"
+    CheckCommand - -|> "{abstract}\nCommand"
+    ListRecipesCommand - -|> "{abstract}\nCommand"
+    HelpCommand - -|> "{abstract}\nCommand"
+    NullCommand - -|> "{abstract}\nCommand"
+    "{abstract}\nCommand" <|- - - FindCaloriesCommand
+    "{abstract}\nCommand" <|- - - FindDifficultyCommand
+    "{abstract}\nCommand" <|- - - FindIngredientsCommand
+    "{abstract}\nCommand" <|- - - FindPriceCommand
+    "{abstract}\nCommand" <|- - - FindTagsCommand
+    "{abstract}\nCommand" <|- - - SetCaloriesCommand
+    "{abstract}\nCommand" <|- - SetDifficultyCommand
+    "{abstract}\nCommand" <|- - SetPriceCommand
 }
 @enduml
 
@@ -192,5 +195,5 @@ Java Runtime: OpenJDK Runtime Environment
 JVM: OpenJDK 64-Bit Server VM
 Default Encoding: Cp1252
 Language: en
-Country: SG
+Country: US
 --></g></svg>
