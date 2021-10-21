@@ -13,9 +13,9 @@ public class Dish implements Comparable<Dish> {
     private ArrayList<Ingredient> constituents = new ArrayList<>();
     private static final Ui ui = new Ui();
     private String dishName;
-    private Double wastage;
+    private double wastage;
     //Each dish contributes a portion of its wastage to constituent ingredients
-    private Double ingredientContribution;
+    private double ingredientContribution;
 
     public Dish(String dishName) {
         LoggerManager.setupLogger(logger);
@@ -37,11 +37,11 @@ public class Dish implements Comparable<Dish> {
         return dishName;
     }
 
-    public Double getWastage() {
+    public double getWastage() {
         return wastage;
     }
 
-    public Double getIngredientContribution() {
+    public double getIngredientContribution() {
         return ingredientContribution;
     }
 

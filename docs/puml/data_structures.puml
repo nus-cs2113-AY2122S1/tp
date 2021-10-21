@@ -1,0 +1,66 @@
+@startuml
+class seedu.duke.IngredientList {
++ {static} ArrayList<Ingredient> ingredientList
+- {static} Ui ui
++ {static} void add(String)
++ {static} int find(String)
++ {static} double getGreatestWaste()
++ {static} void graph()
++ {static} void list()
++ {static} void delete(String)
++ {static} void clearList()
+}
+class seedu.duke.Dish {
+- {static} Logger logger
+- ArrayList<Ingredient> constituents
+- {static} Ui ui
+- String dishName
+- double wastage
+- double ingredientContribution
++ String getDishName()
++ double getWastage()
++ double getIngredientContribution()
++ ArrayList<Ingredient> getConstituents()
++ void addConstituent(String)
++ void addWaste()
++ String toString()
++ String toGraph(double)
++ String formatData()
++ int compareTo(Dish)
+}
+class seedu.duke.DishList {
++ {static} ArrayList<Dish> dishList
++ {static} Ui ui
++ {static} void add(String)
++ {static} double getGreatestWaste()
++ {static} int find(String)
++ {static} void list()
++ {static} void graph()
++ {static} void delete(String)
++ {static} void clearList()
+}
+class seedu.duke.Ingredient {
+- {static} Ui ui
+- String ingredientName
+- double ingredientWeight
+- double ingredientWasteIngr
++ double ingredientWasteDish
++ String getIngredientName()
++ double getIngredientWeight()
++ void updateIngredientWeight()
++ void addWaste()
++ double getWastage()
++ String toString()
++ String formatData()
++ void addDishWaste(Double)
++ String toGraph(double)
++ int compareTo(Ingredient)
+}
+
+
+seedu.duke.Comparable <|.. seedu.duke.Dish
+seedu.duke.DishList o-- seedu.duke.Dish : dishList
+seedu.duke.Comparable <|.. seedu.duke.Ingredient
+seedu.duke.IngredientList o-- seedu.duke.Ingredient :ingredientList
+seedu.duke.Dish o- seedu.duke.Ingredient :constituents
+@enduml

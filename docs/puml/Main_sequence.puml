@@ -15,6 +15,10 @@ Duke -> Command: execute()
 activate Command
 UI <- Command: results of execution
 activate UI
+UI -> ClearScreen: ClearScreen()
+activate ClearScreen
+ClearScreen -> ClearScreen : clearConsole()
+return
  <-- UI: output to be displayed
 
 @enduml
