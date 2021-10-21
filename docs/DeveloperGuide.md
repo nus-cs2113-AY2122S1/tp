@@ -67,6 +67,16 @@ The `Attendance` component,
 * stores inputted `Attendance` objects in a list as an `ArrayList<Attendance>` in `AttendanceList` class.
 * stores the `AttendanceList` object in a csv file with the help of `AttendanceStorage`.
 
+### Member component
+**API** : [`Member.java`](https://github.com/AY2122S1-CS2113T-F12-4/tp/blob/master/src/main/java/seedu/duke/member/Member.java)
+
+![Member Component Diagram](images/MemberComponent.png)
+
+The `Member` component,
+* instantiates an `MemberList` object comprising of 0 `Member` object.
+* stores inputted `Member` objects in a list as an `ArrayList<Member>` in `MemberList` class.
+* stores the `MemberList` object in a csv file with the help of `MemberStorage`.
+
 ## Appendix: Requirements
 ### Product scope
 #### **Target user profile**
