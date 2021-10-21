@@ -5,6 +5,7 @@ import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.exception.FileErrorException;
 import seedu.parser.MainParser;
+import seedu.storage.ContactsDecoder;
 import seedu.storage.ContactsEncoder;
 import seedu.storage.Storage;
 import seedu.ui.TextUi;
@@ -18,12 +19,16 @@ public class Duke {
     private ContactList contactList;
     private String personalContactFilePath;
     private Contact personalContact;
+    private final ContactsDecoder contactsDecoder;
+    private final ContactsEncoder contactsEncoder;
 
     public Duke(String contactFilePath, String personalContactFilePath) {
         this.contactFilePath = contactFilePath;
         this.personalContactFilePath = personalContactFilePath;
         this.parser = new MainParser();
-        this.storage = new Storage(contactFilePath, personalContactFilePath);
+        this.contactsDecoder = new ContactsDecoder();
+        this.contactsEncoder = new ContactsEncoder();
+        this.storage = new Storage(contactFilePath, personalContactFilePath, contactsDecoder, contactsEncoder);
 
         try {
             this.contactList = storage.loadExistingContacts();
@@ -46,7 +51,7 @@ public class Duke {
         try {
             command.setContactList(contactList);
             command.execute();
-            ContactsEncoder.saveContacts(contactFilePath, contactList);
+            contactsEncoder.saveContacts(contactFilePath, contactList);
         } catch (FileErrorException e) {
             ExceptionTextUi.fileErrorMessage(contactFilePath);
         }
