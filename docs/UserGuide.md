@@ -37,6 +37,11 @@ Example of usage:
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
-
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+Command | Format | Purpose
+--------|---------|-----------
+`add` | `add /uni <UNI_INDEX>` `add /mod <MOD_INDEX>` `add /map <UNI_INDEX> <MAP_INDEX>` | Add a university/module/mapping
+`remove` | `remove /uni <UNI_INDEX>` `remove /mod <MOD_INDEX>` `remove /map <UNI_INDEX> <MAP_INDEX>` | Remove a university/module/mapping
+`list` | `list /muni` `list /mmod` `list /suni` `list /smod` | List master/selected university list or module list
+`searchmap` | `searchmap <UNI_INDEX>`| Search for potential mappings for the selected university
+`find` | `find /uni <UNI_NAME>` `find /mod <MOD_CODE>` | Find the possible university or module
+`exit` | `exit` | Exit the application

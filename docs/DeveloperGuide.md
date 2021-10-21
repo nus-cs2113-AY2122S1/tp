@@ -24,7 +24,36 @@ Refer to our user guide [here](https://github.com/AY2122S1-CS2113T-T09-2/tp/blob
 
 The ***Architecture Diagram*** above explains the high-level design of the App. 
 
-## Command ImplementationStep
+### Command Implementation
+
+Step 1. When the beginner user launches the application, to see the list of all universities available for the SEP program, the user executes `list /muni` command. To see the list of all NUS modules available for the SEP program, the user can executes `list /mmod` command.
+
+Step 2. The user then module executes `add /uni Boston University` command to call `addUniCommand(university, list)` and add his preferred university to the selected university list. The other option for the user is to execute `add /uni 4` command to call `addUniCommand(index, list)` to add to the list.
+
+Step 3. The user executes `add /mod CS1231` command to call `addModCommand(module, list)` and add his preferred NUS module to the selected module list. The other option for the user is to execute `add /uni 81` command to call `addModCommand(index, list)` to add to the list.
+
+Step 4. The user executes `list /suni` to see his selected university list. The user executes `list /smod` command to see his selected module list.
+
+Step 5. The user executes `remove /mod 81` command to delete unwanted modules from see his selected module list. The user executes `list /uni 4` command to delete unwanted university see his selected university list.
+
+Step 6. The user executes `find CS1231` to find the master index of the module. The user executes find Boston University to find the master index of the university.
+
+Step 7. The user executes `searchmap 4` command to see the module mapping of all modules in the selected module list in Boston University.
+
+Step 8. The user executes `add /map  4 81` command to add a particular module mapping of the module CS1231 under Boston University.
+
+Step 9. The user executes `remove /map  4 81` command to remove the unwanted module mapping.
+
+Step 10. The user executes `exit` command to terminate the program.
+
+### Ui
+The Ui component consolidates and formats the output of the program before displaying it to the user
+in the command line. 
+
+The UI component 
+* Displays different object types such as University, Module and Module mapping.
+* Provides means of customization for display formatting. 
+* Summarizes different parts of the program into callable methods.
 
 ### Storage
 
@@ -34,6 +63,32 @@ The storage component can implement the below features:
 * Read the list of NUS modules which can be mapped from the CSV file.
 * Save both user's module mappings for each university and their selected NUS modules in text
   file and read them back into corresponding objects.
+
+
+### University and module related classes
+This component consist of the following classes:  
+#### University
+The University class consists of basic information of the school, including its name, 
+and an array list to store module mappings under this university.  
+#### Module 
+The Module class consists of basic information of a specific module, including its module code, 
+module name, and the number of modular credits.
+#### UniversityList
+The UniversityList class consists of an array list of University objects. This class is used to store 
+our master list of all available universities, as well as the selected universities chosen by our user.
+#### ModuleList
+The ModuleList class consists of an array list of Module objects. It is used to store our master list 
+of all available NUS modules, as well as the selected modules the user wants to complete for his/her exchange.
+#### ModuleMapping 
+The ModuleMapping class consists of two modules, local and mapped module. It represents the pair of modules as 
+an available pair of module mapping in the user's SEP application. 
+
+### Parser
+
+The parser component can implement the following features:
+* Identify the command word and invoke the respective argument parser for the command.
+* Handle the arguments and return the respective Command object.
+
 
 ## Product scope
 ### Target user profile
@@ -58,7 +113,7 @@ a list of potential exchange Universities based on the users study plan, module 
 |v1.0|beginner user|list down all NUS modules in my preferred list|keep track of the list of NUS modules I want to complete during SEP|
 |v1.0|beginner user|delete a University from the selected list|remove the University that I am not interested in|
 |v1.0|beginner user|delete a module from the selected list|remove the module that I do not consider to enrol in the future|
-|v1.0|user|interact with the application on the command line in an efficient way|
+|v1.0|user|enter commands and arguments to the application|interact with the application on the command line in an efficient way
 |v2.0|familiar user|save my university and module information|maintain access to my information when I restart the application|
 |v2.0|new user|view the program instructions|refer to them when I forget how to use the application|
 |v2.0|familiar user|find a University by name|locate a University without having to go through the entire list|
