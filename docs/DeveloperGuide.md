@@ -1,5 +1,20 @@
 # Developer Guide
-
+* [Acknowledgements](#acknowledgements)
+* [Design & Implementations](#design--implementation)
+  * [General Flow](#general-flow)
+  * [Input Parsing](#input-parsing)
+  * [Storage](#storage)
+  * [Data Structures](#data-structures)
+  * [User-Interface Component](#user-interface-component)
+  * [Exceptions](#exceptions)
+  * [Command Abstraction](#command-abstraction)
+* [Product Scope](#product-scope)
+  * [Target User Profile](#target-user-profile)
+  * [Value Proposition](#value-proposition)
+*[User Stories](#user-stories)
+*[Non-Functional Requirements](#non-functional-requirements)
+*[Glossary](#glossary)
+*[Instructions for Manual Testing](#instructions-for-manual-testing)
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -33,7 +48,7 @@
 ![](images/dish_ingredient.png)
 
 
-### Ui Component
+### User-Interface Component
 
 ![](images/UiClass.png)
 
@@ -83,12 +98,12 @@ Handles errors such as unrecognised user commands and improper parameters by cal
 
 
 ## Product scope
-### Target user profile
+### Target User Profile
 
 Restaurant owners who will delegate their Inventory Management to Managers who are fast typists with experience in using
 the Command Line Interface.
 
-### Value proposition
+### Value Proposition
 
 By presenting the wastage statistics, we can help restaurant owners figure out which dishes are contributing the most to
 wastage at the restaurant. This way, they can allocate their resources more efficiently to better doing dishes. Thus we 
@@ -130,6 +145,6 @@ without crash
 * <i>Dish </i> - Food prepared using a combination of Ingredients
 * <i>Wastage </i> - Weight of Dish or Ingredient wasted
 
-## Instructions for manual testing
+## Instructions for Manual Testing
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
