@@ -63,13 +63,6 @@ public class Timetable implements Comparable<Timetable> {
         this.friday = fri;
         this.saturday = sat;
         this.sunday = sun;
-
-        addItemToSchedule(new TimetableUserItem(
-                "Test Item",
-                "Monday",
-                "1400",
-                "1700",
-                "Test description"), monday);
     }
 
     /**
@@ -378,13 +371,13 @@ public class Timetable implements Comparable<Timetable> {
         ArrayList<Integer> duration = lesson.getStartToEndTime();
         for (Integer time : duration) {
             if (isLessonExist(lesson, time)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public boolean isLessonExist(Lesson lesson, Integer time) {
-        return getLesson(lesson.getParsedDay(), time) == null;
+        return getLesson(lesson.getParsedDay(), time) != null;
     }
 }

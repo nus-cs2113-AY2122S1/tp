@@ -69,16 +69,12 @@ public class TimetableDto {
     public TimetableItem[] mergeTimetableItems(TimetableLesson[] lessons, TimetableUserItem[] userItems) {
         TimetableItem[] day = new TimetableItem[24];
         for (int i = 0; i < day.length; i++) {
-            try {
-                if (lessons[i] != null) {
-                    day[i] = lessons[i];
-                } else if (userItems[i] != null) {
-                    day[i] = userItems[i];
-                } else {
-                    day[i] = null;
-                }
-            } catch (NullPointerException e) {
-
+            if (lessons[i] != null) {
+                day[i] = lessons[i];
+            } else if (userItems[i] != null) {
+                day[i] = userItems[i];
+            } else {
+                day[i] = null;
             }
         }
         return day;

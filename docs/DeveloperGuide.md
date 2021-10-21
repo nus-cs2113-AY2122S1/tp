@@ -84,7 +84,13 @@ components and how they interact with each other.
 #### Save
 
 #### Add
-
+Utilizes `getLessonDetails` for each LessonType found in the Semester of the module. 
+Details of all lessons will be displayed and sorted based on classNo. 
+In the event where the lesson conflicts (another lesson is within the same time slot) 
+with any existing lessons, a `<CONFLICT>` line will be displayed beside the lesson. 
+For each lessonType, `getCommand` is utilized to collect input of the Lesson to be added into the timetable. 
+The `addModuleToList()` and `addLesson()` functions are called, and the modules are added to the module 
+list and each applicable timetable slot.
 #### Delete
 
 #### Clear Timetable

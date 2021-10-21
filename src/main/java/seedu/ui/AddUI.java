@@ -20,11 +20,12 @@ public class AddUI {
     private static final int BALANCE_ARRAY = 1;
     private static final int SERIAL_STARTING = 1;
     private static final int ZERO = 0;
+    private static final int ONE = 1;
     private static final String LINE = "_________________________________________________   |   ";
     private static final String NO_LESSON_FOUND = "No Lesson Time Slots Found";
-    private static final String NO_LECTURE_FOUND = "       *Module has no Lectures*";
-    private static final String NO_TUTORIAL_FOUND = "      *Module has no Tutorials*";
-    private static final String NO_LAB_FOUND = "         *Module has no Labs*";
+    private static final String NO_LECTURE_FOUND = "            *Module has no Lectures*";
+    private static final String NO_TUTORIAL_FOUND = "            *Module has no Tutorials*";
+    private static final String NO_LAB_FOUND = "               *Module has no Labs*";
     private static final String DISCLAIMER = " [CONFLICT]";
 
 
@@ -120,7 +121,7 @@ public class AddUI {
             String output = "";
             if (isExist(lec, j)) {
                 output = lec.get(j);
-            } else if (isExist(tt, j) && !isExist(lec, j)) {
+            } else if ((isExist(tt, j) && !isExist(lec, j)) || isExist(lab, j)) {
                 output = String.format(FIXED_LENGTH_FORMAT, "");
             }
             if (isExist(tt, j)) {
@@ -146,17 +147,36 @@ public class AddUI {
     public void getCommand(ArrayList<Lesson> lessons, String lessonType,
                            Timetable timetable, Module module) throws IntegerException {
 
+        String classNumber = "";
         if (isArrayExist(lessons, ZERO)) {
+            int flag;
             try {
-                String select = TextUi.getLessonCommand(lessonType);
-                int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
-                String classNumber = lessons.get(indexOfLesson).getClassNo();
-                addLessonToTimetable(lessons, timetable, module, classNumber);
+                flag = ONE;
+                while (flag == ONE) {
+                    String select = TextUi.getLessonCommand(lessonType);
+                    int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
+                    Lesson selectedLesson = lessons.get(indexOfLesson);
+                    classNumber = selectedLesson.getClassNo();
+                    if (timetable.isConflict(selectedLesson)) {
+                        String choice = TextUi.printAskConfirmation(selectedLesson);
+                        if (choice.equals("y") || choice.equals("yes")) {
+                            flag = ZERO;
+                        } else if (choice.equals("n") || choice.equals("no")){
+                            System.out.println("Alright bitch do it properly this time");
+                        } else {
+                            System.out.println("Invalid Command, Try Again Dumb Ass");
+                        }
+                    } else {
+                        flag = ZERO;
+                    }
+                }
             } catch (NumberFormatException e) {
                 throw new IntegerException("Input is not an integer, try adding the module again");
             } catch (IndexOutOfBoundsException e) {
                 throw new IntegerException("Input is out of range, try adding the module again");
             }
+
+            addLessonToTimetable(lessons, timetable, module, classNumber);
 
             if (lessonType.equals(LAB)) {
                 TextUi.printLessonAdded();
