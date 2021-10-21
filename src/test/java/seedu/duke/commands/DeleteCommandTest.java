@@ -4,12 +4,12 @@ package seedu.duke.commands;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Parser;
 import seedu.duke.items.Event;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.duke.Duke.eventCatalog;
 
 import java.time.LocalDateTime;
 
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class DeleteCommandTest {
 
