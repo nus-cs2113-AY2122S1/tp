@@ -40,56 +40,34 @@ public class EditContactCommand extends Command {
         }
     }
 
-    public Boolean duplicateCatcher(Contact postEditContact, ContactList contactList, int contactIndex) {
+    private Boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
+            throws InvalidFlagException {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
+        String[] postEditContactDetails = extractContactDetails(postEditContact);
         for (int i = 0; i < contactList.getListSize(); i++) {
             if (i == contactIndex) {
                 continue;
             }
-            Contact currentContact = contactList.getContactAtIndex(i);
-            if (duplicateField(postEditContact.getName(), currentContact.getName())) {
-                duplicatedIndex.add(i);
-                continue;
-            }
-            if (postEditContact.getGithub() != null && currentContact.getGithub() != null) {
-                if (duplicateField(postEditContact.getGithub(), currentContact.getGithub())) {
-                    duplicatedIndex.add(i);
-                    continue;
+            String[] currentContactDetails = extractContactDetails(contactList.getContactAtIndex(i));
+            for (int j = 0; j < NUMBER_OF_FIELDS; j++) {
+                if (postEditContactDetails[j] != null && currentContactDetails[j] != null) {
+                    if (hasDuplicateField(postEditContactDetails[j], currentContactDetails[j])) {
+                        duplicatedIndex.add(i);
+                        break;
+                    }
                 }
             }
-            if (postEditContact.getEmail() != null && currentContact.getEmail() != null) {
-                if (duplicateField(postEditContact.getEmail(), currentContact.getEmail())) {
-                    duplicatedIndex.add(i);
-                    continue;
-                }
-            }
-            if (postEditContact.getTelegram() != null && currentContact.getTelegram() != null) {
-                if (duplicateField(postEditContact.getTelegram(), currentContact.getTelegram())) {
-                    duplicatedIndex.add(i);
-                    continue;
-                }
-            }
-            if (postEditContact.getLinkedin() != null && currentContact.getLinkedin() != null) {
-                if (duplicateField(postEditContact.getLinkedin(), currentContact.getLinkedin())) {
-                    duplicatedIndex.add(i);
-                    continue;
-                }
-            }
-            if (postEditContact.getTwitter() != null && currentContact.getTwitter() != null) {
-                if (duplicateField(postEditContact.getTwitter(), currentContact.getTwitter())) {
-                    duplicatedIndex.add(i);
-                }
-            }
+
         }
         if (!duplicatedIndex.isEmpty()) {
-            TextUi.confirmEditDuplicateMessage(duplicatedIndex, contactList);
+            TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, "edit");
             String userEditConfirmation = UserInputTextUi.getUserConfirmation();
             return userEditConfirmation.equalsIgnoreCase("n");
         }
         return false;
     }
 
-    public Contact duplicateContact(Contact contact) {
+    private Contact duplicateContact(Contact contact) {
         String name = contact.getName();
         String github = contact.getGithub();
         String linkedin = contact.getLinkedin();
