@@ -1,0 +1,15 @@
+@startuml
+!include Style.puml
+
+Package "HappyBit"<<Rectangle>>{
+    Class Ui
+    Class Parser
+    Class Storage
+    Class Command
+    Class GoalList
+    Class Main #lightblue
+}
+
+
+
+@enduml
