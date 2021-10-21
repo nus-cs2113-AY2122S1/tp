@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.enumerations.ListType;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.ModuleStorage;
@@ -9,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ListModCommand extends Command {
-    public ListModCommand(ModuleList moduleList) {
+    public ListModCommand(ModuleList moduleList, ListType type) {
         if (moduleList.getSize() == 0) {
             assert moduleList.getSize() == 0;
             System.out.println("The module list is empty!");
