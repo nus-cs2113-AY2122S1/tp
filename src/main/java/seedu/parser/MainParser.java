@@ -1,7 +1,18 @@
 package seedu.parser;
 
-import seedu.command.*;
 
+import seedu.command.AddContactCommand;
+import seedu.command.Command;
+import seedu.command.DeleteContactCommand;
+import seedu.command.EditContactCommand;
+import seedu.command.ExitCommand;
+import seedu.command.FailedCommand;
+import seedu.command.HelpCommand;
+import seedu.command.InvalidDetailCommand;
+import seedu.command.ListContactsCommand;
+import seedu.command.PersonalContactCommand;
+import seedu.command.SearchContactCommand;
+import seedu.command.ViewContactCommand;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
