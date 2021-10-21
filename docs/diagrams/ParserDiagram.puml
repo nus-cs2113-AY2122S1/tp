@@ -1,0 +1,19 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Command #pink {
++ {abstract} run() : String
+}
+
+class Parser #deepSkyBlue {
+- {static} parseXYZCommand(command : String) : String
+}
+
+class XYZCommand #orchid {
++ run() : String
+}
+
+XYZCommand --|> Command
+Parser "executes" --> XYZCommand
+
+@enduml
