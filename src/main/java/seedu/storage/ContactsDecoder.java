@@ -14,7 +14,6 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ContactsDecoder {
-    public static ContactList readContacts(File contactFile) throws FileErrorException {
         ContactList updatedContactList = new ContactList();
         try {
             Scanner fileScanner = new Scanner(contactFile);
@@ -28,7 +27,7 @@ public class ContactsDecoder {
         return updatedContactList;
     }
 
-    public static Contact readPersonalContact(File personalContactFile) throws FileErrorException {
+    public Contact readPersonalContact(File personalContactFile) throws FileErrorException {
         Contact personalContact = new Contact(null, null, null, null, null, null);
         try {
             Scanner fileScanner = new Scanner(personalContactFile);
@@ -43,7 +42,7 @@ public class ContactsDecoder {
     }
 
 
-    private static Contact decodePersonalContact(String contactText, Contact contact) {
+    private Contact decodePersonalContact(String contactText, Contact contact) {
         String[] destructuredInputs = contactText.split(SEPARATOR);
         Contact personalContact = contact;
         try {
@@ -61,7 +60,7 @@ public class ContactsDecoder {
         return personalContact;
     }
 
-    private static void decodeContact(ContactList contactList, String contactText) {
+    private void decodeContact(ContactList contactList, String contactText, int lineIndex, String contactFilePath) {
         // Add the decoded details into the contact list
         try {
             String[] compiledDetails = decodeDetails(contactText);
@@ -79,7 +78,6 @@ public class ContactsDecoder {
         }
     }
 
-    private static String[] decodeDetails(String contactText) throws IndexOutOfBoundsException {
         String[] destructuredInputs = contactText.split(SEPARATOR);
         String[] compiledDetails = new String[NUMBER_OF_FIELDS];
         for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
