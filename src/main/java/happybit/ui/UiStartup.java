@@ -8,7 +8,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Scanner;
 
-public class UiStartup extends UiOverall {
+public class UiStartup extends UiManager {
 
     private static final String UG_URI = "https://ay2122s1-cs2113t-f14-1.github.io/tp/UserGuide.html";
     private static final String DG_URI = "https://ay2122s1-cs2113t-f14-1.github.io/tp/DeveloperGuide.html";

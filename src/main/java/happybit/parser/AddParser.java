@@ -372,7 +372,7 @@ public class AddParser {
         try {
             description = input.substring(input.indexOf(' '), input.indexOf('#')).trim();
         } catch (StringIndexOutOfBoundsException e) {
-            throw new HaBitParserException("Habit name cannot be empty.");
+            throw new HaBitParserException(EMPTY_INTERVAL);
         }
         if (description.isEmpty()) {
             throw new HaBitParserException("Habit name cannot be empty.");

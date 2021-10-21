@@ -7,7 +7,7 @@ of features.
 * [Acknowledgements](#acknowledgements)
 * [Design and Implementation](#design-and-implementation)
   * [Architecture](#architecture)
-  * [UI component](#ui-component)
+  * [UI component](#printManager-component)
   * [Command component](#command-component)
   * [Parser logic component](#parser-logic-component)
   * [GoalList component](#goallist-component)
@@ -42,6 +42,12 @@ This application adapted the Developer Guide and User Guide from:
 ## Design and Implementation
 
 ### Architecture
+
+The diagram below shows the higher-level implementation of the interactions of all the components within `HappyBit` 
+
+![Ui Diagram](Diagram Images/SystemArchitecture.png)
+
+In the sections below, we will be explaining in detail how each compomponent works.
 
 ### UI component
 
@@ -125,11 +131,13 @@ sequence diagram below is carried out.
 
 #### `HelpCommand`
 
-When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `Ui` object and calls the
-`printCommandList` method which prints out a pre-set message informing the user of all the inputs they can type to 
-execute a certain command.
+When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `PrintManager` object and 
+calls the `printCommandList` method which prints out a pre-set message informing the user of all the inputs they
+can type to execute a certain command.
 
 ### Parser logic component
+
+The `Parser` logic component 
 
 ### GoalList component
 

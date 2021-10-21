@@ -1,10 +1,10 @@
 @startuml
 !include Style.puml
 
--> ":ListHabitsCommand": runCommand(goalList: GoalList,\nui:Ui, storage:Storage)
+-> ":ListHabitsCommand": runCommand(goalList: GoalList,\nprintManager:PrintManager, storage:Storage)
 activate ":ListHabitsCommand"
 
-":ListHabitsCommand" -> "goalList:GoalList" :listHabitsFromGoal(goatIndex:int, ui:Ui)
+":ListHabitsCommand" -> "goalList:GoalList" :listHabitsFromGoal(goatIndex:int,\nprintManager:PrintManager)
 activate "goalList:GoalList"
 "goalList:GoalList" -> "goalList:GoalList" :getGoal(goalIndex:int)
 activate "goalList:GoalList"
@@ -23,9 +23,9 @@ alt#gold #lightblue numOfHabits = 0
     activate ":HabitCommandException"
     deactivate ":HabitCommandException"
 else #lightgreen
-    "goalList:GoalList" -> "ui:Ui": printHabitList(goalDescription: String, habitList: ArrayList<Habit>, numOfHabits: int)
-    activate "ui:Ui"
-    deactivate "ui:Ui"
+    "goalList:GoalList" -> "printManager:PrintManager": printHabitList(goalDescription: String, habitList: ArrayList<Habit>, numOfHabits: int)
+    activate "printManager:PrintManager"
+    deactivate "printManager:PrintManager"
 end
 
 deactivate "goalList:GoalList"
