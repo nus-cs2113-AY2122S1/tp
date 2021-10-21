@@ -49,11 +49,16 @@ well as all the expenditure tied to that month.
 
 ### Target user profile
 
-{Describe the target user profile}
+- has a need to manage a significant number of expenditures
+- prefer desktop apps over other types
+- can type fast
+- prefers typing to mouse interactions
+- is reasonably comfortable using CLI apps
 
 ### Value proposition
 
-{Describe the value proposition: what problem does it solve?}
+Value proposition: allow users to record and track expenses more conveniently,
+and thereby encourage them to have greater control over their finances.
 
 ## User Stories
 
