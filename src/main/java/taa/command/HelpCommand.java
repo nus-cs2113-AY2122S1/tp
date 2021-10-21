@@ -12,9 +12,13 @@ public class HelpCommand extends Command {
         new AddAssessmentCommand(""),
         new AddModuleCommand(""),
         new AddStudentCommand(""),
+        new SetAttendanceCommand(""),
+        new SetMarksCommand(""),
         new AverageMarksCommand(""),
         new DeleteStudentCommand(""),
         new DeleteAssessmentCommand(""),
+        new DeleteMarkCommand(""),
+        new EditMarkCommand(""),
         new EditStudentCommand(""),
         new FindStudentCommand(""),
         new ExitCommand(""),
@@ -23,9 +27,7 @@ public class HelpCommand extends Command {
         new ListAttendanceCommand(""),
         new ListMarksCommand(""),
         new ListModulesCommand(""),
-        new ListStudentsCommand(""),
-        new SetAttendanceCommand(""),
-        new SetMarksCommand("")
+        new ListStudentsCommand("")
     };
 
     public HelpCommand(String argument) {
