@@ -1,5 +1,4 @@
 @startuml
-'https://plantuml.com/component-diagram
 hide footbox
 
 -> ":DoneHabitCommand": runCommand(goalList: GoalList,\nui: Ui, storage: Storage)

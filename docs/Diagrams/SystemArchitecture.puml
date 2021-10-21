@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+Package "HappyBit"<<Rectangle>>{
+    Class Ui
+    Class Parser
+    Class Storage
+    Class Command
+    Class GoalList
+    Class Main #lightblue
+}
+
+
+
+@enduml

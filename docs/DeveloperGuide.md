@@ -10,7 +10,7 @@ of features.
   * [UI component](#ui-component)
   * [Command component](#command-component)
   * [Parser logic component](#parser-logic-component)
-  * [Goal list component](#goal-list-component)
+  * [GoalList component](#goallist-component)
   * [Storage component](#storage-component)
 * [Appendix A: Product Scope](#appendix-a-product-scope)
   * [Target user profile](#target-user-profile)
@@ -41,20 +41,67 @@ This application adapted the Developer Guide and User Guide from:
 
 ## Design and Implementation
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
-
 ### Architecture
 
 ### UI component
 
 ### Command component
+When the user runs the Program, the main function dealing with the user's inputs is the `handleUserInput()` function
+which obtains a `Command` object after parsing the input using the `Parser` component.
+
+`Command` objects available are:
+* `AddGoalCommand` - Adds a new Goal to the GoalList.
+* `AddHabitCommand` - Adds a new Habit object to a specified Goal set by the user.
+* `DeleteGoalCommand` - Deletes a Goal from the GoalList
+* `DeleteHabitCommand` - Deletes a Habit object from a specified Goal set by the user.
+* `DoneHabitCommand` - Marks a Habit object under a Goal as done.
+* `ListGoalCommand` - Lists out all the Goals set by the user.
+* `ListHabitCommand` - Lists out all the Habits set under a Goal.
+* `HelpCommand` - Prints out message indicating all the available Commands
+
+The respective `runCommand` functions of the returned command object is then executed.
+In the sections below we will be providing implementation details for each of the commands.
+
+#### `AddGoalCommand`
+
+#### `AddHabitCommand`
+
+#### `DeleteGoalCommand`
+
+#### `DeleteHabitCommand`
+
+#### `DoneHabitCommand`
+
+When the `runCommand` function is executed for the `DoneHabitCommand` object, the following steps as indicated by the 
+sequence diagram below is carried out.
+
+![](Diagram Images/DoneCommandSequenceDiagram.png)
+
+#### `ListGoalCommand`
+
+When the `runCommand` function is executed for the `ListGoalsCommand` object, the following steps as indicated by the
+sequence diagram below is carried out.
+
+![](Diagram Images/ListGoalsCommandSequenceDiagram.png)
+
+#### `ListHabitCommand`
+
+When the `runCommand` function is executed for the `ListHabitsCommand` object, the following steps as indicated by the
+sequence diagram below is carried out.
+
+![](Diagram Images/ListHabitsCommandSequenceDiagram.png)
+
+#### `HelpCommand`
+
+When the `runCommand` function is executed for the `HelpCommand` object, it instantiates a `Ui` object and calls the
+`printCommandList` method which prints out a pre-set message informing the user of all the inputs they can type to 
+execute a certain command.
 
 ### Parser logic component
 
-### Goal list component
+### GoalList component
 
 ### Storage component
-
 
 ## Appendix A: Product Scope
 
