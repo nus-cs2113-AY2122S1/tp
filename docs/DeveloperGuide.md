@@ -91,6 +91,7 @@ which obtains a `Command` object after parsing the input using the `Parser` comp
 `Command` objects available are:
 * `AddGoalCommand` - Adds a new Goal to the GoalList.
 * `AddHabitCommand` - Adds a new Habit object to a specified Goal set by the user.
+* `UpdateGoalNameCommand` - Updates the name of a Goal specified by the user.
 * `DeleteGoalCommand` - Deletes a Goal from the GoalList
 * `DeleteHabitCommand` - Deletes a Habit object from a specified Goal set by the user.
 * `DoneHabitCommand` - Marks a Habit object under a Goal as done.
@@ -104,34 +105,46 @@ In the sections below we will be providing implementation details for each of th
 #### `AddGoalCommand`
 
 When the `runCommand` function is executed for the `AddGoalCommand` object, the following steps as indicated by the
-sequence diagram below is carried out.
+sequence diagram below is carried out:
 
 ![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
 
 #### `AddHabitCommand`
 
+#### `UpdateGoalNameCommand`
+
 #### `DeleteGoalCommand`
 
+When the `runCommand` function is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
+sequence diagram below is carried out:
+
+![](Diagram Images/DeleteGoalCommandSequenceDiagram.png)
+
 #### `DeleteHabitCommand`
+
+When the `runCommand` function is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
+sequence diagram below is carried out:
+
+![](Diagram Images/DeleteHabitCommandSequenceDiagram.png)
 
 #### `DoneHabitCommand`
 
 When the `runCommand` function is executed for the `DoneHabitCommand` object, the following steps as indicated by the 
-sequence diagram below is carried out.
+sequence diagram below is carried out:
 
 ![](Diagram Images/DoneCommandSequenceDiagram.png)
 
 #### `ListGoalCommand`
 
 When the `runCommand` function is executed for the `ListGoalsCommand` object, the following steps as indicated by the
-sequence diagram below is carried out.
+sequence diagram below is carried out:
 
 ![](Diagram Images/ListGoalsCommandSequenceDiagram.png)
 
 #### `ListHabitCommand`
 
 When the `runCommand` function is executed for the `ListHabitsCommand` object, the following steps as indicated by the
-sequence diagram below is carried out.
+sequence diagram below is carried out:
 
 ![](Diagram Images/ListHabitsCommandSequenceDiagram.png)
 
