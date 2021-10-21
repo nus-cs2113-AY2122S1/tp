@@ -81,7 +81,7 @@ placed as the default date.
 
 The sequence diagram for AddOrderCommand is shown below.
 
-![AddOrderCommandDiagram](diagrams/diagram_images/AddOrderSequenceDiagram.png)s
+![AddOrderCommandDiagram](diagrams/diagram_images/AddOrderSequenceDiagram.png)
 
 ### DeleteStockCommand
 
