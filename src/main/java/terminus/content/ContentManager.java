@@ -96,5 +96,17 @@ public class ContentManager<T extends Content> {
         return number < 1 || number > contents.size();
     }
 
+    /**
+     * Replaces the current ArrayList for a new empty ArrayList.
+     */
+    public void purgeData() {
+        this.contents = new ArrayList<>();
+    }
 
+    public boolean isDuplicateName(String name) {
+        if (contents.size() < 1) {
+            return false;
+        }
+        return contents.stream().anyMatch(x -> x.getName().equals(name));
+    }
 }

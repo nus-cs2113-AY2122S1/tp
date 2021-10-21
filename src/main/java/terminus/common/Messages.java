@@ -23,8 +23,16 @@ public class Messages {
     public static final String ERROR_MESSAGE_INVALID_TIME_FORMAT = ERROR_MESSAGE_TAG + "Invalid time format %s.";
     public static final String ERROR_MESSAGE_INVALID_LINK = ERROR_MESSAGE_TAG + "Invalid link %s.";
     public static final String ERROR_MESSAGE_INVALID_DAY = ERROR_MESSAGE_TAG + "Invalid day %s.";
+    public static final String ERROR_MESSAGE_DUPLICATE_NAME = ERROR_MESSAGE_TAG + "Duplicate name found.";
+
+    public static final String ERROR_FILE_TOO_LARGE = "Unable to read large files.";
+    public static final String ERROR_FILE_NOT_DELETED = "Unable to delete the file.";
+    public static final String ERROR_FILES_NOT_DELETED = "Unable to delete some file.";
+    public static final String ERROR_MESSAGE_FILE = "Unable to save/load file: %s";
+    public static final String ERROR_MESSAGE_FOLDER = "Unable to save/load folder: %s";
     public static final String EMPTY_CONTENT_LIST_MESSAGE = "You do not have any content in this workspace.\n";
     public static final String CONTENT_MESSAGE_HEADER = "List of Content\n---------------\n";
+
     public static final String EMPTY_SCHEDULE_FOR_THE_DAY = "You have no schedule for %s\n";
     
     public static final String MAIN_BANNER = "Welcome to TermiNUS!\n";

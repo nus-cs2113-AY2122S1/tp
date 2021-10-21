@@ -16,7 +16,7 @@ public class LinkCommandParser extends InnerModuleCommandParser {
 
     private static LinkCommandParser parser;
 
-    public LinkCommandParser() {
+    private LinkCommandParser() {
         super(CommonFormat.COMMAND_SCHEDULE);
     }
 

@@ -13,7 +13,7 @@ import terminus.content.Link;
 import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 
-public class CommonFormatTest {
+public class CommonUtilsTest {
 
     private ArrayList<String> resultExpected;
 
@@ -196,6 +196,44 @@ public class CommonFormatTest {
     void isValidUrl_invalidInput_exceptionThrown() {
         assertThrows(InvalidArgumentException.class, () -> CommonUtils.isValidUrl(""));
         assertThrows(InvalidArgumentException.class, () -> CommonUtils.isValidUrl(".."));
+    }
+
+    @Test
+    void isStringNullOrEmpty_success() {
+        assertTrue(CommonUtils.isStringNullOrEmpty(null));
+        assertTrue(CommonUtils.isStringNullOrEmpty(""));
+        assertFalse(CommonUtils.isStringNullOrEmpty("test"));
+    }
+
+    @Test
+    void isValidFileName_success() {
+        assertTrue(CommonUtils.isValidFileName("test"));
+        assertTrue(CommonUtils.isValidFileName("CS2113T"));
+    }
+
+    @Test
+    void isValidFileName_invalidFileName() {
+        assertFalse(CommonUtils.isValidFileName(""));
+        assertFalse(CommonUtils.isValidFileName(null));
+        assertFalse(CommonUtils.isValidFileName("\\uD83D\\uDE00"));
+        String s = "a".repeat(31);
+        assertFalse(CommonUtils.isValidFileName(s));
+    }
+
+    @Test
+    void getFileNameOnly_success() {
+        assertEquals("test", CommonUtils.getFileNameOnly("test.txt"));
+    }
+
+    @Test
+    void getFileNameOnly_invalidFileName() {
+        assertEquals(null, CommonUtils.getFileNameOnly("test.txt.txt"));
+        assertEquals(null, CommonUtils.getFileNameOnly(""));
+    }
+
+    @Test
+    void getFileNameOnly_nullInput_exceptionThrown() {
+        assertThrows(AssertionError.class, () -> CommonUtils.getFileNameOnly(null));
     }
 
 }
