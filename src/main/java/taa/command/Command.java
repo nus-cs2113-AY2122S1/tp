@@ -23,6 +23,7 @@ public abstract class Command {
     public static final String COMMAND_DELETE_STUDENT = "delete_student";
     public static final String COMMAND_SET_ATTENDANCE = "set_attendance";
     public static final String COMMAND_ADD_ASSESSMENT = "add_assessment";
+    public static final String COMMAND_DELETE_ATTENDANCE = "delete_attendance";
     public static final String COMMAND_SET_MARKS = "set_marks";
     public static final String COMMAND_HELP = "help";
 
@@ -30,7 +31,7 @@ public abstract class Command {
     protected static final String MESSAGE_UNKNOWN_USAGE = "Unknown usage.";
     protected static final String MESSAGE_MODULE_NOT_FOUND = "Module not found.";
     protected static final String MESSAGE_INVALID_STUDENT_INDEX = "Invalid student index.";
-    protected static final String MESSAGE_INVALID_LESSON_INDEX = "Invalid lesson index.";
+    protected static final String MESSAGE_INVALID_LESSON_NUMBER = "Invalid lesson number.";
     protected static final String MESSAGE_INVALID_ASSESSMENT_NAME = "Invalid assessment name.";
     protected static final String MESSAGE_NO_STUDENTS = "There are no students in this module";
 

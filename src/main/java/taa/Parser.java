@@ -17,6 +17,7 @@ import taa.command.ListModulesCommand;
 import taa.command.ListStudentsCommand;
 import taa.command.ListAttendanceCommand;
 import taa.command.SetMarksCommand;
+import taa.command.DeleteAttendanceCommand;
 
 import taa.exception.TaaException;
 
@@ -84,6 +85,10 @@ public class Parser {
 
         case Command.COMMAND_LIST_ATTENDANCE:
             command = new ListAttendanceCommand(argument);
+            break;
+
+        case Command.COMMAND_DELETE_ATTENDANCE:
+            command = new DeleteAttendanceCommand(argument);
             break;
 
         case Command.COMMAND_SET_MARKS:
