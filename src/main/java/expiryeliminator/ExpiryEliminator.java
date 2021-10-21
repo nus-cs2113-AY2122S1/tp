@@ -1,14 +1,14 @@
 package expiryeliminator;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import expiryeliminator.commands.Command;
 import expiryeliminator.common.LogsCenter;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 import expiryeliminator.parser.Parser;
 import expiryeliminator.ui.Ui;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Entry point of the ExpiryEliminator application.
