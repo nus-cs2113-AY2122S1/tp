@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
+
 
 /**
  * Constructor requires a Person class which is the user, amount spent, and a description.
@@ -15,18 +17,34 @@ import java.util.logging.Level;
 public class Expense {
     private double amountSpent;
     private String description;
-    private String location;
-    private final ArrayList<Person> personsList;
-    private final String category;
+    private ArrayList<Person> personsList;
+    private String category;
     private LocalDate date;
+    private Person payer;
+    private HashMap<Person, Double> amountSplit = new HashMap<>();
     private static final DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
 
     public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons, String description) {
         this.amountSpent = amountSpent;
         this.description = description;
         this.category = category;
         this.personsList = listOfPersons;
+    }
+
+    public void setPayer(Person person) {
+        this.payer = person;
+    }
+
+    public Person getPayer() {
+        return payer;
+    }
+
+    public void setAmountSplit(Person person, double amount) {
+        amountSplit.put(person, amount);
+    }
+
+    public HashMap<Person, Double> getAmountSplit() {
+        return amountSplit;
     }
 
     /**
@@ -62,10 +80,6 @@ public class Expense {
         }
     }
 
-    public double getCostPerPerson() {
-        return amountSpent / personsList.size();
-    }
-
     public void addPerson(Person p) {
         personsList.add(p);
     }
@@ -98,14 +112,6 @@ public class Expense {
 
     public String getCategory() {
         return category;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public double getAmountSpent() {

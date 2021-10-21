@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.ArrayList;
+
 public class Ui {
 
     public static void printPendingCommand() {
@@ -22,9 +24,8 @@ public class Ui {
     }
 
 
-    public static void printMoney(double val) {
-        String money = String.format("%.02f", val);
-        System.out.println(money);
+    public static String stringMoney(double val) {
+        return String.format("%.02f", val);
     }
 
     public static void printExpenseDetails(Expense e) {
@@ -33,12 +34,9 @@ public class Ui {
 
     public static void printExpensesSummary(Trip t) {
         System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
-        System.out.print("Total budget for this trip: ");
-        printMoney(t.getBudget());
-        System.out.print("Total expenditure so far: ");
-        printMoney(t.getTotalExpenses());
-        System.out.print("Current budget left for this trip: ");
-        printMoney(t.getBudgetLeft());
+        System.out.println("Total budget for this trip: " + stringMoney(t.getBudget()));
+        System.out.println("Total expenditure so far: " + stringMoney(t.getTotalExpenses()));
+        System.out.println("Current budget left for this trip: " + stringMoney(t.getBudgetLeft()));
     }
 
     public static void printExpenseAddedSuccess() {
@@ -46,8 +44,8 @@ public class Ui {
     }
 
     public static void printExpensesInList(Expense expense, int index) {
-        System.out.print(index + ". " + expense.getDescription() + " | Cost: ");
-        printMoney(expense.getAmountSpent());
+        System.out.println(index + ". " + expense.getDescription() + " | Cost: "
+                + stringMoney(expense.getAmountSpent()));
     }
 
     public static void printOpenTripMessage(Trip trip) {
@@ -161,6 +159,52 @@ public class Ui {
 
     public static void printInvalidDeleteFormatError() {
         System.out.println("Your current format is wrong. Please follow the proper format of 'delete type index'.");
+    }
+
+    public static void printGetPersonPaid() {
+        System.out.print("Who paid for the expense?: ");
+    }
+
+    public static void printHowMuchDidPersonSpend(String name) {
+        System.out.print("How much did " + name + " spend?: ");
+    }
+
+    public static void printPersonNotInExpense() {
+        System.out.println("The person you entered is not in the expense, please try again.");
+    }
+
+    public static void printPersonNotInTrip() {
+        System.out.println("The person you entered is not in the opened trip, please try again.");
+    }
+
+    public static void printAmount(Person person, Trip trip) {
+        System.out.println(person.getName() + " spent $" + stringMoney(person.getMoneyOwed().get(person))
+                + " on the trip so far");
+        for (Person otherPerson : trip.getListOfPersons()) {
+            if (otherPerson != person) {
+                if (person.getMoneyOwed().get(otherPerson) > 0) {
+                    System.out.println(otherPerson.getName() + " owes $"
+                            + stringMoney(person.getMoneyOwed().get(otherPerson)) + " to " + person.getName());
+                } else if (person.getMoneyOwed().get(otherPerson) < 0) {
+                    System.out.println(person.getName() + " owes $"
+                            + stringMoney(-person.getMoneyOwed().get(otherPerson)) + " to " + otherPerson.getName());
+                } else {
+                    System.out.println(person.getName() + " does not owe anything to " + otherPerson.getName());
+                }
+            }
+        }
+    }
+
+    public static void printIncorrectAmount(double amount) {
+        System.out.println("The amount you have entered is incorrect, it is either too high or low. The total "
+                + "of the expense should equal " + amount);
+    }
+
+    public static void printPeopleInvolved(ArrayList<Person> personArrayList) {
+        System.out.println("These are the people who are involved in the expense: ");
+        for (Person person : personArrayList) {
+            System.out.println(person.getName() + " ");
+        }
     }
 
     public static void displayHelp() {

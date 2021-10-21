@@ -12,7 +12,7 @@ America | 02 Feb 2021
 Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
 Enter your command: Enter your command: Enter date of expense:
 	Press enter to use today's date
-Your expense has been added successfully
+Who paid for the expense?: How much did yikai spend?: Your expense has been added successfully
 Enter your command: 1. this is what i want to type | Cost: 8.00
 Enter your command: this is what i want to type
 date: 2021-10-19
