@@ -249,13 +249,13 @@ public abstract class TextUi {
         System.out.println(message + "\n");
     }
 
-    public static void ignoreAddContact() {
-        String message = "Contact was not added.";
-        printDoubleLineMessage(message);
-    }
-
-    public static void ignoreEditContact() {
-        String message = "Contact was not edited.";
+    public static void ignoreContact(String type) {
+        String message;
+        if (type.equals("add")) {
+            message = "Contact was not added.";
+        } else {
+            message = "Contact was not edited.";
+        }
         printDoubleLineMessage(message);
     }
 
