@@ -33,21 +33,19 @@ public class UpdateDispenseCommand extends Command {
     @Override
     public void execute() {
         Ui ui = Ui.getInstance();
-        ArrayList<Medicine> medicines = Medicine.getInstance();
-        Storage storage = Storage.getInstance();
 
         String[] requiredParameter = {CommandParameters.ID};
         String[] optionalParameters = {CommandParameters.NAME, CommandParameters.QUANTITY,
                 CommandParameters.CUSTOMER_ID, CommandParameters.STAFF, CommandParameters.DATE};
 
         DispenseValidator dispenseValidator = new DispenseValidator();
-        StockValidator stockValidator = new StockValidator();
         boolean isInvalidParameter = dispenseValidator.containsInvalidParameters(ui, parameters, requiredParameter,
                 optionalParameters, CommandSyntax.UPDATE_DISPENSE_COMMAND, true);
         if (isInvalidParameter) {
             return;
         }
 
+        ArrayList<Medicine> medicines = Medicine.getInstance();
         boolean isInvalidParameterValues = dispenseValidator.containsInvalidParameterValues(ui, parameters, medicines,
                 CommandSyntax.UPDATE_DISPENSE_COMMAND);
         if (isInvalidParameterValues) {
@@ -94,6 +92,7 @@ public class UpdateDispenseCommand extends Command {
             staffName = dispense.getStaff();
         }
 
+        StockValidator stockValidator = new StockValidator();
         boolean hasQuantityParam = parameters.containsKey(CommandParameters.QUANTITY);
         boolean isSuccessfulUpdate = false;
         if (hasNameParam && hasQuantityParam) {
@@ -111,6 +110,8 @@ public class UpdateDispenseCommand extends Command {
             return;
         }
 
+        Storage storage = Storage.getInstance();
+        storage.saveData(medicines);
     }
 
     /**
