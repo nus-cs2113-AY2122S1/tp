@@ -54,7 +54,8 @@ public class Main {
                 p.getWordPerMinute(),
                 p.getTotalWordTyped(),
                 p.totalTime
-        );    }
+        );
+    }
 
     public void executeCommand(Parser c, StorageFile storage) throws InvalidStringInputException, InterruptedException {
         switch (c.getCommand()) {
