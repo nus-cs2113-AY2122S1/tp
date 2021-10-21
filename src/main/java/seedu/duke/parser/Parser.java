@@ -40,8 +40,8 @@ public class Parser {
             return new ListCommandParser().parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
         case Constants.COMMAND_REMOVE:
-            return new RemoveCommandParser().parse(arguments, universityMasterList, moduleMasterList,
-                    universitySelectedList, moduleSelectedList);
+            return new RemoveCommandParser().parse(arguments, universitySelectedList, moduleMasterList,
+                    universityMasterList, moduleSelectedList);
         case Constants.COMMAND_SEARCHMAP:
             return new SearchMapCommandParser().parse(arguments, universityMasterList,
                     universitySelectedList, moduleSelectedList);
