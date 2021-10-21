@@ -45,16 +45,6 @@ public class AttendanceList implements ClassChecker {
     }
 
     /**
-     * Adds an Attendance object to the list of attendances. The attendances ArrayList is sorted after adding.
-     *
-     * @param attendance The attendance object to add.
-     */
-    public void addAttendance(Attendance attendance) {
-        attendances.add(attendance);
-        sortAttendances();
-    }
-
-    /**
      * Checks if an index is valid with respect to the attendance ArrayList.
      *
      * @param index The index to check.
@@ -65,17 +55,13 @@ public class AttendanceList implements ClassChecker {
     }
 
     /**
-     * Deletes a record of attendance from the attendance list.
+     * Adds an Attendance object to the list of attendances. The attendances ArrayList is sorted after adding.
      *
-     * @param lessonNumInput The inputted lesson Num to delete.
-     * @return An Attendance object if successfully deleted, else null.
+     * @param attendance The attendance object to add.
      */
-    public Attendance deleteAttendance(String lessonNumInput) {
-        int attendanceIndex = findAttendanceIndex(lessonNumInput);
-        if (isValidIndex(attendanceIndex)) {
-            return attendances.remove(attendanceIndex);
-        }
-        return null;
+    public void addAttendance(Attendance attendance) {
+        attendances.add(attendance);
+        sortAttendances();
     }
 
     /**
@@ -84,7 +70,7 @@ public class AttendanceList implements ClassChecker {
      * @param lessonNumInput The inputted lesson Num to search for.
      * @return A index of student's lesson attendance in attendance list.
      */
-    public int findAttendanceIndex(String lessonNumInput) {
+    public int getAttendanceIndex(String lessonNumInput) {
         for (Attendance attendance : attendances) {
             int lessonNumber = attendance.getLessonNumber();
             if (lessonNumber == Integer.parseInt(lessonNumInput)) {
@@ -92,6 +78,20 @@ public class AttendanceList implements ClassChecker {
             }
         }
         return ATTENDANCE_NOT_FOUND;
+    }
+
+    /**
+     * Deletes a record of attendance from the attendance list.
+     *
+     * @param lessonNumInput The inputted lesson Num to delete.
+     * @return An Attendance object if successfully deleted, else null.
+     */
+    public Attendance deleteAttendance(String lessonNumInput) {
+        int attendanceIndex = getAttendanceIndex(lessonNumInput);
+        if (isValidIndex(attendanceIndex)) {
+            return attendances.remove(attendanceIndex);
+        }
+        return null;
     }
 
     /**
