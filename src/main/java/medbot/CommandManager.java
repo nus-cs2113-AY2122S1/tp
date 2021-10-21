@@ -1,7 +1,5 @@
 package medbot;
 
-import medbot.command.Command;
-import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
 import medbot.utilities.ViewType;

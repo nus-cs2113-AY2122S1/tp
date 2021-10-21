@@ -1,10 +1,5 @@
 package medbot;
 
-import medbot.command.AddPersonCommand;
-import medbot.command.DeletePersonCommand;
-import medbot.command.EditPersonCommand;
-import medbot.command.ViewPersonCommand;
-import medbot.command.FindPersonCommand;
 import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.Command;
