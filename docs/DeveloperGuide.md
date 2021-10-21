@@ -78,15 +78,13 @@ The App consists of 6 major components:
 The _sequence diagram_ below shows how the components interact with each other given a scenario where the user 
 enters the input `add n/carrot a/1 e/2021-11-12`
 
-<<insert sequence diagram here>>
+![image](images/InteractionSeqDiagram.png)
 
 Each of the 5 components (apart from `main`) can be found in their respective packages.
 
 ### 3.2 UI component
 
-The **UI** component can be found in the `UI` package.
-
-<<description here>>
+The **UI** component can be found in the `UI` package. The UI reads commands from the user, sends the command to `Main` to be executed and prints an output message upon completion of the command or if an error occurred.
 
 ### 3.3 Parser component
 
@@ -178,15 +176,23 @@ Step 7: The `getAlerts()` method sends the data to the UI to display to the user
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|view my inventory|save time/labour|
+|v1.0|user|add new ingredients|keep track of new ingredients|
+|v1.0|user|remove ingredients|stop tracking ingredients that are no longer in use|
+|v1.0|user|update ingredient amount|change the amount of an ingredient if I have bought/ used some|
+|v2.0|user|receive alerts of ingredients expiring|use the ingredients before they expire and avoid wastage|
+|v2.0|user|receive alerts of ingredients that are running out|place orders to replenish stock preemptively|
+|v2.0|user|determine the threshold for alerts myself|adjust when I receive alerts based on demand and supply|
+|v2.0|user|find stock of an ingredient by name|view stock of an ingredient without having to go through the entire list|
 
 ## Non-Functional Requirements
 
-{Give non-functional requirements}
+1. Should work on any *mainstream OS* with Java `11` or above installed.
+2. Users proficient at typing should be able to complete tasks faster using commands than using a mouse with a GUI.
 
 ## Glossary
 
-* *glossary item* - Definition
+* **Mainstream OS** - Windows, Linux, Unix, macOS
 
 ## Instructions for manual testing
 
