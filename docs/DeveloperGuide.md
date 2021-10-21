@@ -1,5 +1,26 @@
 #Developer Guide Draft
 
+##Introduction
+Restaurant Buddy is a command-line-interface (CLI) application for **restaurant managers** to 
+help **keep track of restaurant data** such as its employees, dishes and ingredients in storage.
+
+##Contents
+* Architecture
+  * Employee Component
+  * Ingredient Component
+  * Dish Component
+  * Storage Component
+
+* Design and Implementation
+* Appendix
+  * Product Scope
+  * User Stories
+  * Non Functional Requirements
+  * Glossary
+  * Instructions for Manual Testing
+
+
+
 ##Architecture
 The Main component has 2 classes, MainParser and MainUI. It is responsible for parsing user commands and 
 displaying messages to interact with the user.
