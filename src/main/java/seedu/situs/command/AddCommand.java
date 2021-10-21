@@ -4,6 +4,8 @@ import seedu.situs.exceptions.DukeException;
 import seedu.situs.ingredients.Ingredient;
 import seedu.situs.ingredients.IngredientList;
 
+import java.io.IOException;
+
 public class AddCommand extends Command {
 
     private static final String ADDED_MESSAGE = "Got it. This ingredient has been added to the inventory:\n" + "\t";
@@ -21,7 +23,7 @@ public class AddCommand extends Command {
 
     @Override
     public String run() throws DukeException {
-        //try {
+        try {
         IngredientList.getInstance().add(this.ingredient);
         String resultMsg = ADDED_MESSAGE
                 + ingredient.getName() + " | " + ingredient.toString() + '\n'
@@ -29,8 +31,10 @@ public class AddCommand extends Command {
                 + " items." + '\n' + "This ingredient will expire in "
                 + Ingredient.daysFromCurrentDate(ingredient.getExpiry()) + " days.";
         return resultMsg;
-        /*} catch (IOException e) {
+        } catch (IOException e) {
             throw new DukeException("Cannot write ingredient to memory!");
-        }*/
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 }
