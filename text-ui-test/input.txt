@@ -75,4 +75,7 @@ search boris
 search -n bory
 search -g lezong
 search -zxca lezong
+import
+search -n lezai
+search -n badgithub
 exit
