@@ -262,4 +262,9 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
+    public static void successfulImportMessage(int numberOfLines) {
+        String message = "ConTech has successfully imported " + numberOfLines + " lines";
+        printDoubleLineMessage(message);
+    }
+
 }
