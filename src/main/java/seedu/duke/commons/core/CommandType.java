@@ -7,10 +7,12 @@ public enum CommandType {
     DONE,
     EXIT,
     FIND,
+    GRADE,
     INVALID,
     LESSON,
     LIST,
     MODULE,
+    SET,
     TASK;
 
     /**
