@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Trip {
@@ -76,8 +75,11 @@ public class Trip {
 
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
+        String descriptionToLowerCase;
+        String attributeToLowerCase = expenseAttribute.toLowerCase();
         for (Expense e : listOfCurrentExpenses) {
-            if (e.getDescription().equals(expenseAttribute)) {
+            descriptionToLowerCase = e.getDescription().toLowerCase();
+            if (descriptionToLowerCase.contains(attributeToLowerCase)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
             }
