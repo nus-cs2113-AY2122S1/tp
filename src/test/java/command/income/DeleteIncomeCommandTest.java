@@ -20,7 +20,7 @@ public class DeleteIncomeCommandTest {
     }
 
     @Test
-    public void TestDeleteIncomeById() {
+    public void testDeleteIncomeById() {
         Income income = new Income("Salary", 1000, "14-Nov-2011");
         IncomeList.addIncome(income);
 

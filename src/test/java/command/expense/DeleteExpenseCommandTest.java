@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeleteExpenseCommandTest {
 
     @Test
-    public void TestDeleteExpenseByName() {
+    public void testDeleteExpenseByName() {
         Expense expense = new Expense("Eat Lunch", 10.99, "21-Nov-2021");
         ExpenseList.addExpense(expense);
         CommandLine cmd = CommandLineFactory.getCmd();
@@ -19,7 +19,7 @@ public class DeleteExpenseCommandTest {
     }
 
     @Test
-    public void TestDeleteExpenseById() {
+    public void testDeleteExpenseById() {
         Expense expense = new Expense("Eat Lunch", 10.99, "21-Nov-2021");
         ExpenseList.addExpense(expense);
         CommandLine cmd = CommandLineFactory.getCmd();

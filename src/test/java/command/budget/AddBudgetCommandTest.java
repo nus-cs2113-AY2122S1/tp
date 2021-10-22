@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AddBudgetCommandTest {
 
     @Test
-    public void TestAddBudget() {
+    public void testAddBudget() {
         CommandLine cmd = CommandLineFactory.getCmd();
         int exitCode = cmd.execute("budget", "add", "-v=1000");
         assertEquals(0, exitCode);

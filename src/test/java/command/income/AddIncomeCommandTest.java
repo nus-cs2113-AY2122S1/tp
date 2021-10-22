@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AddIncomeCommandTest {
 
     @Test
-    public void TestAddIncome() {
+    public void testAddIncome() {
         CommandLine cmd = CommandLineFactory.getCmd();
         int exitCode = cmd.execute("income", "add", "Salary", "-v 1000");
 

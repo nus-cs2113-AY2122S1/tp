@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeleteBudgetCommandTest {
 
     @Test
-    public void TestDeleteBudget() {
+    public void testDeleteBudget() {
         Budget budget = new Budget(1000);
         BudgetList.addBudget(budget);
 
