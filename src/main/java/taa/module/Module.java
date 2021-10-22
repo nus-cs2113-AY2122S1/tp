@@ -76,13 +76,7 @@ public class Module implements ClassChecker {
             return false;
         }
 
-        if (!studentList.verify()) {
-            return false;
-        }
-
-        if (!assessmentList.verify()) {
-            return false;
-        }
+        assert (assessmentList != null && studentList != null);
 
         HashMap<String, Assessment> assessmentMap = new HashMap<>();
         for (Assessment assessment : assessmentList.getAssessments()) {
