@@ -335,7 +335,7 @@ To view the high-level diagram, head to
 ![](attachments/StorageInitializeSequenceDiagram.png)
 
 When `Terminus` just started, it will need to initialize a ModuleStorage object and loads any
-related data from the `data` directory containing all previously saved data if any.
+related data from the `data` directory containing all previously saved data.
 
 Firstly, `Terminus` will initialise an instance of `ModuleStorage` which is a singleton class
 object. `Terminus` will then set the filepath of the `ModuleStorage` with the main `.json` file
