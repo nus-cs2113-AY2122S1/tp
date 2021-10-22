@@ -475,7 +475,7 @@ Removes all existing Ingredients from the list of ingredients.
 
 Format: `clear ingr`
 
-* * `clear ingr` does not require additional parameters
+* `clear ingr` does not require additional parameters
 
 Example of usage:
 
@@ -495,7 +495,7 @@ Removes all existing Dishes from the list of ingredients.
 
 Format: `clear dish`
 
-* * `clear dish` does not require additional parameters
+* `clear dish` does not require additional parameters
 
 Example of usage:
 
@@ -514,7 +514,7 @@ Removes all existing Ingredients & Dishes from the list of ingredients & list of
 
 Format: `clear all`
 
-* * `clear all` does not require additional parameters
+* `clear all` does not require additional parameters
 
 Example of usage:
 
@@ -533,7 +533,7 @@ Sorts all Ingredients in descending order of wastage.
 
 Format: `sort ingr`
 
-* * `sort ingr` does not require additional parameters
+* `sort ingr` does not require additional parameters
 
 Example of usage:
 
@@ -568,7 +568,7 @@ Sorts all Dishes in descending order of wastage.
 
 Format: `sort dish`
 
-* * `sort dish` does not require additional parameters
+* `sort dish` does not require additional parameters
 
 Example of usage:
 
