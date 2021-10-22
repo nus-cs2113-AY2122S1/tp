@@ -1,0 +1,42 @@
+@startuml
+
+Content <|-- Note
+Content <|-- Link
+Content <|-- Question
+
+ContentManager  --> "0..*" Content : contents
+ContentManager ..>  Note
+ContentManager ..>  Link
+ContentManager ..> Question
+
+
+!startsub CONTENTMANAGER
+class ContentManager <T extends Content> {
+  + add(content: T): void
+  + deleteContent(contentNumber: int): String
+  + getContentData(contentNumber: int): String
+  + getContents(contents: ArrayList<T> ): String
+  + getTotalContents() : int
+  + listAllContents(): String
+  + setContent(contents: ArrayList<T> ): void
+}
+!endsub
+abstract class Content {
+  # name: String
+  # data: String
+}
+
+class Link {
+  - day: String
+  - startTime: LocalTime
+  - link: String
+  + Link(name: String, day: String, startTime: LocalTime, link: String)
+}
+
+class Note
+
+class Question {
+   - weight: double
+   + Question(question: String, answer: String)
+}
+@enduml

@@ -4,7 +4,7 @@ import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
+import terminus.module.ModuleManager;
 import terminus.ui.Ui;
 
 public class ExitCommand extends Command {
@@ -20,7 +20,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidCommandException {
         TerminusLogger.info("Executing Exit Command");
         return new CommandResult(true, true);
     }

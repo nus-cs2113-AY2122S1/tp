@@ -4,52 +4,60 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.content.Note;
+import terminus.content.Link;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
+import terminus.module.ModuleManager;
+import terminus.parser.LinkCommandParser;
 import terminus.parser.MainCommandParser;
-import terminus.parser.NoteCommandParser;
 import terminus.ui.Ui;
 
 public class ScheduleCommandTest {
 
     private MainCommandParser commandParser;
     private Ui ui;
-    private NusModule nusModule;
+    private ModuleManager moduleManager;
+
+    private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
         commandParser = MainCommandParser.getInstance();
+        moduleManager = new ModuleManager();
+        moduleManager.setModule(tempModule);
         ui = new Ui();
-        nusModule = new NusModule();
     }
 
     @Test
-    void execute_scheduleAdvance_success() throws InvalidArgumentException, InvalidCommandException {
-        Command mainCommand = commandParser.parseCommand("note");
-        CommandResult changeResult = mainCommand.execute(ui, nusModule);
+    void execute_linkAdvance_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+        Command mainCommand = commandParser.parseCommand("go " + tempModule + " schedule");
+        CommandResult changeResult = mainCommand.execute(ui, moduleManager);
         assertTrue(changeResult.isOk());
-        assertTrue(changeResult.getAdditionalData() instanceof NoteCommandParser);
-        mainCommand = commandParser.parseCommand("note add \"username\" \"password\"");
-        changeResult = mainCommand.execute(ui, nusModule);
+        assertTrue(changeResult.getAdditionalData() instanceof LinkCommandParser);
+        mainCommand = commandParser.parseCommand("go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" "
+                + "\"https://zoom.us\"");
+        changeResult = mainCommand.execute(ui, moduleManager);
         assertTrue(changeResult.isOk());
-        assertEquals(1, nusModule.getContentManager(Note.class).getTotalContents());
-        mainCommand = commandParser.parseCommand("note view");
-        changeResult = mainCommand.execute(ui, nusModule);
+        assertEquals(1, moduleManager.getModule(tempModule).getContentManager(Link.class).getTotalContents());
+        mainCommand = commandParser.parseCommand("go " + tempModule + " schedule view");
+        changeResult = mainCommand.execute(ui, moduleManager);
         assertTrue(changeResult.isOk());
     }
 
     @Test
-    void execute_scheduleAdvance_throwsException() throws InvalidArgumentException, InvalidCommandException {
+    void execute_linkAdvance_throwsException() throws InvalidArgumentException, InvalidCommandException {
         assertThrows(InvalidCommandException.class,
-            () -> commandParser.parseCommand("schedule -1").execute(ui, nusModule));
+            () -> commandParser.parseCommand("go " + tempModule + " schedule -1").execute(ui, moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("schedule view 100").execute(ui, nusModule));
+            () -> commandParser.parseCommand(
+                            "go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" \"test.com\"")
+                    .execute(ui, moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("note delete -1").execute(ui, nusModule));
+            () -> commandParser.parseCommand("go " + tempModule + " schedule delete -1")
+                    .execute(ui, moduleManager));
 
     }
 }
