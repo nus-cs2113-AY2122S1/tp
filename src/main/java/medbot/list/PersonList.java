@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static medbot.Ui.ENDLINE;
+import static medbot.ui.Ui.END_LINE;
 
 public class PersonList {
     private HashMap<Integer, Person> persons = new HashMap<>();
@@ -115,7 +115,7 @@ public class PersonList {
         String output = "";
 
         for (int key : persons.keySet()) {
-            output += persons.get(key).getInfoInTableFormat() + ENDLINE;
+            output += persons.get(key).getInfoInTableFormat() + END_LINE;
         }
 
         return output;
@@ -129,7 +129,7 @@ public class PersonList {
     }
 
     public String getNoPersonIdErrorMessage(int personId) {
-        return "No person with ID " + personId + " found." + ENDLINE;
+        return "No person with ID " + personId + " found." + END_LINE;
     }
 
     /**
@@ -142,7 +142,7 @@ public class PersonList {
         for (int key : persons.keySet()) {
             Person person = persons.get(key);
             String personStorageString = person.getStorageString();
-            output += personStorageString + ENDLINE;
+            output += personStorageString + END_LINE;
         }
         return output;
     }

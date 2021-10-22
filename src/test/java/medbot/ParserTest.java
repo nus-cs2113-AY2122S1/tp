@@ -274,7 +274,7 @@ class ParserTest {
         assertSame(Parser.getViewType(), ViewType.PATIENT_INFO);
         HashMap<String, Command> testCases = new HashMap<>();
         testCases.put("exit", new ExitCommand());
-        testCases.put("help ", new HelpCommand());
+        testCases.put("help ", new HelpCommand(ViewType.PATIENT_INFO));
         testCases.put("switch 2", new SwitchCommand(null));
         testCases.put("add n/John Tan ", new AddPatientCommand(null));
         testCases.put("edit 1 n/John Tan ", new EditPatientCommand(1, null));
@@ -301,7 +301,7 @@ class ParserTest {
         assertSame(Parser.getViewType(), ViewType.MEDICAL_STAFF_INFO);
         HashMap<String, Command> testCases = new HashMap<>();
         testCases.put("exit", new ExitCommand());
-        testCases.put("help ", new HelpCommand());
+        testCases.put("help ", new HelpCommand(ViewType.MEDICAL_STAFF_INFO));
         testCases.put("switch 3", new SwitchCommand(null));
         testCases.put("add n/John Tan ", new AddStaffCommand(null));
         testCases.put("edit 1 n/John Tan ", new EditStaffCommand(1, null));
@@ -330,7 +330,7 @@ class ParserTest {
         assertSame(Parser.getViewType(), ViewType.SCHEDULER);
         HashMap<String, Command> testCases = new HashMap<>();
         testCases.put("exit", new ExitCommand());
-        testCases.put("help ", new HelpCommand());
+        testCases.put("help ", new HelpCommand(ViewType.SCHEDULER));
         testCases.put("switch 1", new SwitchCommand(null));
         testCases.put("add p/1 m/1 d/18/10/21 1800 ", new AddAppointmentCommand(null));
         testCases.put("add 1 p/1 s/1 t/18/10/21 1800 ", new AddAppointmentCommand(null));

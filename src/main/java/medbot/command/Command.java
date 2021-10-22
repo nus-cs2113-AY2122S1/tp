@@ -2,7 +2,7 @@ package medbot.command;
 
 import medbot.Scheduler;
 import medbot.exceptions.MedBotException;
-import medbot.Ui;
+import medbot.ui.Ui;
 
 public abstract class Command {
     /**

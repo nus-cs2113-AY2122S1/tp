@@ -3,7 +3,8 @@ package medbot.command.personcommand.patientcommand;
 import medbot.Scheduler;
 import medbot.command.personcommand.DeletePersonCommand;
 import medbot.exceptions.MedBotException;
-import medbot.Ui;
+import medbot.ui.Ui;
+import medbot.utilities.ViewType;
 
 public class DeletePatientCommand extends DeletePersonCommand {
 
@@ -14,7 +15,7 @@ public class DeletePatientCommand extends DeletePersonCommand {
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
         scheduler.getPatientList().deletePerson(personId);
-        String deletePatientMessage = ui.getDeletePatientMessage(personId);
+        String deletePatientMessage = Ui.getDeleteMessage(personId, ViewType.PATIENT_INFO);
         ui.printOutput(deletePatientMessage);
     }
 }

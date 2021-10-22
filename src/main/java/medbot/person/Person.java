@@ -1,8 +1,8 @@
 package medbot.person;
 
 
-import static medbot.Ui.VERTICAL_LINE_SPACED;
-import static medbot.Ui.ENDLINE;
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
+import static medbot.ui.Ui.END_LINE;
 
 import medbot.list.PersonalAppointmentList;
 
@@ -35,11 +35,11 @@ public abstract class Person {
     protected PersonalAppointmentList personalAppointmentList = new PersonalAppointmentList();
 
     public String toString() {
-        return ENDLINE
-                + "IC: " + icNumber + ENDLINE
-                + "Name: " + name + ENDLINE
-                + "H/P: " + phoneNumber + ENDLINE
-                + "Email: " + emailAddress + ENDLINE
+        return END_LINE
+                + "IC: " + icNumber + END_LINE
+                + "Name: " + name + END_LINE
+                + "H/P: " + phoneNumber + END_LINE
+                + "Email: " + emailAddress + END_LINE
                 + "Address: " + residentialAddress;
     }
 
