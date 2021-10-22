@@ -60,6 +60,7 @@ public class PersonalAppointmentList {
         String output = "";
         for (int dateTimeCode:appointments.keySet()) {
             output += appointments.get(dateTimeCode);
+            output += "\n";
         }
         return output;
     }

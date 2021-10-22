@@ -13,6 +13,7 @@ import medbot.command.CommandType;
 import medbot.command.appointmentcommand.DeleteAppointmentCommand;
 import medbot.command.appointmentcommand.EditAppointmentCommand;
 import medbot.command.appointmentcommand.ListAppointmentCommand;
+import medbot.command.appointmentcommand.ViewAppointmentCommand;
 import medbot.command.personcommand.patientcommand.AddPatientCommand;
 import medbot.command.personcommand.patientcommand.DeletePatientCommand;
 import medbot.command.personcommand.patientcommand.EditPatientCommand;
@@ -31,6 +32,7 @@ import medbot.command.personcommand.staffcommand.ViewStaffCommand;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Patient;
 import medbot.person.Person;
+import medbot.person.PersonType;
 import medbot.person.Staff;
 import medbot.utilities.ViewType;
 
@@ -239,6 +241,9 @@ public class Parser {
         if (userInput.equals(COMMAND_LIST)) {
             return new ListAppointmentCommand();
         }
+        if (userInput.startsWith(COMMAND_VIEW)) {
+            return parseViewAppointmentCommand(userInput);
+        }
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
@@ -312,6 +317,21 @@ public class Parser {
     private static ViewStaffCommand parseViewStaffCommand(String userInput) throws MedBotParserException {
         int personId = parseId(userInput.substring(4));
         return new ViewStaffCommand(personId);
+    }
+
+    private static Command parseViewAppointmentCommand(String userInput) throws MedBotParserException {
+        String attributeString = userInput.substring(4).strip();
+        PersonType personType = null;
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_PATIENT_ID)) {
+            personType = PersonType.PATIENT;
+        } else if (attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_1)) {
+            personType = PersonType.STAFF;
+        }
+        assert personType != null;
+        int personId = parseId(attributeString.substring(PARAMETER_BUFFER));
+        return new ViewAppointmentCommand(personId, personType);
+
+
     }
 
     /**
