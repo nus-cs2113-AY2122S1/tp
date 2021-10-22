@@ -89,7 +89,6 @@ public class Timetable {
             }
             index = 0;
         }
-        //return dailyResult.toString();
 
         if (isStringNullOrEmpty(dailyResult.toString())) {
             return null;
