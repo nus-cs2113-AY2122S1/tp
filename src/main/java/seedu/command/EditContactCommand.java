@@ -56,28 +56,19 @@ public class EditContactCommand extends Command {
                 if (!hasEditedField[j]) {
                     continue;
                 }
-                if (postEditContactDetails[j] != null && currentContactDetails[j] != null) {
-                    if (hasDuplicateField(postEditContactDetails[j], currentContactDetails[j])) {
+                if ((postEditContactDetails[j] != null && currentContactDetails[j] != null)
+                        && hasDuplicateField(postEditContactDetails[j], currentContactDetails[j])) {
                         duplicatedIndex.add(i);
                         break;
                     }
                 }
             }
-        }
         if (!duplicatedIndex.isEmpty()) {
-            TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, "edit");
+            TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, EDIT_TYPE);
             String userEditConfirmation = UserInputTextUi.getUserConfirmation();
             return userEditConfirmation.equalsIgnoreCase("n");
         }
         return false;
-    }
-
-    private boolean[] hasEditedFields(String[] contactDetails) {
-        boolean[] hasEditedField = new boolean[NUMBER_OF_FIELDS];
-        for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
-            hasEditedField[i] = (contactDetails[i] != null);
-        }
-        return hasEditedField;
     }
 
     private Contact duplicateContact(Contact contact) {
