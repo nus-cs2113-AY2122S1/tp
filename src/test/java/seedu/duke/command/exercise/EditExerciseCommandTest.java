@@ -64,8 +64,14 @@ class EditExerciseCommandTest {
     }
 
     @Test
-    void executeUserCommand_invalidSetsReps_exceptionThrown() {
-        EditExerciseCommand c = new EditExerciseCommand(1, 1, "description", -3, 10);
+    void executeUserCommand_invalidWorkoutIndex_exceptionThrown() {
+        EditExerciseCommand c = new EditExerciseCommand(1, 10, "description", 3, 10);
+        assertThrows(GetJackDException.class, () -> c.executeUserCommand(workoutList, storage));
+    }
+
+    @Test
+    void executeUserCommand_invalidExerciseIndex_exceptionThrown() {
+        EditExerciseCommand c = new EditExerciseCommand(10, 1, "description", 3, 10);
         assertThrows(GetJackDException.class, () -> c.executeUserCommand(workoutList, storage));
     }
 }
