@@ -3,7 +3,6 @@ package seedu.duke;
 import seedu.command.Command;
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
-import seedu.contact.PersonalContact;
 import seedu.exception.FileErrorException;
 import seedu.parser.MainParser;
 import seedu.storage.ContactsDecoder;
@@ -18,7 +17,7 @@ public class Duke {
     private MainParser parser;
     private ContactList contactList;
     private String personalContactFilePath;
-    private PersonalContact personalContact;
+    private Contact personalContact;
     private final ContactsDecoder contactsDecoder;
     private final ContactsEncoder contactsEncoder;
 
@@ -64,6 +63,7 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        new Duke("data/contacts.txt", "data/me.txt").runConTech();
+        new Duke("data/contacts.txt",
+                "data/me.txt").runConTech();
     }
 }

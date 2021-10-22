@@ -1,6 +1,7 @@
 package seedu.command;
 
 import seedu.contact.Contact;
+import seedu.contact.ContactComparator;
 import seedu.contact.ContactList;
 import seedu.exception.InvalidFlagException;
 import seedu.ui.TextUi;
@@ -33,7 +34,8 @@ public class EditContactCommand extends Command {
                 updatePersonalContact();
             } else {
                 Contact preEditContact = duplicateContact(contactList.getContactAtIndex(contactIndex));
-                Contact postEditContact = editTempContact(contactDetails,preEditContact);
+                preEditContact.editContact(contactDetails);
+                Contact postEditContact = preEditContact;
                 handleDuplicates(postEditContact);
             }
         } catch (IndexOutOfBoundsException | InvalidFlagException e) {
@@ -41,8 +43,8 @@ public class EditContactCommand extends Command {
         }
     }
 
-    private void updatePersonalContact() {
-        personalContact.editPersonalContact(contactDetails);
+    private void updatePersonalContact() throws InvalidFlagException {
+        personalContact.editContact(contactDetails);
         TextUi.editPersonalContactMessage(personalContact);
     }
 
@@ -55,10 +57,13 @@ public class EditContactCommand extends Command {
     }
 
     private void updateContact(Contact postEditContact)
-            throws IndexOutOfBoundsException, InvalidFlagException {
-        contactList.editContact(contactDetails, contactIndex);
+            throws IndexOutOfBoundsException {
+        contactList.editContact(contactDetails,contactIndex);
+        //sort the contact list based on name after a contact has been edited
+        contactList.sortContacts();
         TextUi.editContactMessage(postEditContact);
     }
+
 
     private Boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
             throws InvalidFlagException {
@@ -102,39 +107,6 @@ public class EditContactCommand extends Command {
 
     private String stringCleaner(String input) {
         return input.replace(" ", "").toLowerCase();
-    }
-
-
-    private Contact editTempContact(String[] contactDetails, Contact preEditContact) throws InvalidFlagException {
-        Contact tempContact = duplicateContact(preEditContact);
-        for (int i = 0; i < contactDetails.length; i++) {
-            if (contactDetails[i] != null) {
-                switch (i) {
-                case NAME_INDEX:
-                    tempContact.setName(contactDetails[i]);
-                    break;
-                case GITHUB_INDEX:
-                    tempContact.setGithub(contactDetails[i]);
-                    break;
-                case LINKEDIN_INDEX:
-                    tempContact.setLinkedin(contactDetails[i]);
-                    break;
-                case TELEGRAM_INDEX:
-                    tempContact.setTelegram(contactDetails[i]);
-                    break;
-                case TWITTER_INDEX:
-                    tempContact.setTwitter(contactDetails[i]);
-                    break;
-                case EMAIL_INDEX:
-                    tempContact.setEmail(contactDetails[i]);
-                    break;
-                default:
-                    assert false;
-                    throw new InvalidFlagException();
-                }
-            }
-        }
-        return tempContact;
     }
 
     private String[] extractContactDetails(Contact contact) throws InvalidFlagException {

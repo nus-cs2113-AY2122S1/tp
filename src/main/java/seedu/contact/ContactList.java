@@ -5,16 +5,7 @@ import seedu.ui.TextUi;
 
 import java.util.ArrayList;
 
-import static seedu.parser.ContactParser.NUMBER_OF_FIELDS;
-
 public class ContactList {
-    public static final int NAME_INDEX = 0;
-    public static final int GITHUB_INDEX = 1;
-    public static final int LINKEDIN_INDEX = 2;
-    public static final int TELEGRAM_INDEX = 3;
-    public static final int TWITTER_INDEX = 4;
-    public static final int EMAIL_INDEX = 5;
-
     private ArrayList<Contact> contacts;
 
     public ContactList() {
@@ -23,44 +14,16 @@ public class ContactList {
 
     public void addContact(Contact contact) {
         contacts.add(contact);
-        contacts.sort(new ContactComparator());
-    }
-
-    //@@author ng-andre
-    public void editContact(String[] contactDetails, int contactIndex) throws InvalidFlagException {
-        for (int i = 0; i < contactDetails.length; i++) {
-            if (contactDetails[i] != null) {
-                switch (i) {
-                case NAME_INDEX:
-                    contacts.get(contactIndex).setName(contactDetails[i]);
-                    contacts.sort(new ContactComparator());
-                    break;
-                case GITHUB_INDEX:
-                    contacts.get(contactIndex).setGithub(contactDetails[i]);
-                    break;
-                case LINKEDIN_INDEX:
-                    contacts.get(contactIndex).setLinkedin(contactDetails[i]);
-                    break;
-                case TELEGRAM_INDEX:
-                    contacts.get(contactIndex).setTelegram(contactDetails[i]);
-                    break;
-                case TWITTER_INDEX:
-                    contacts.get(contactIndex).setTwitter(contactDetails[i]);
-                    break;
-                case EMAIL_INDEX:
-                    contacts.get(contactIndex).setEmail(contactDetails[i]);
-                    break;
-                default:
-                    //control should never reach here
-                    assert false;
-                    throw new InvalidFlagException();
-                }
-            }
-        }
+        sortContacts();
     }
 
     public void deleteContact(int deletedIndex) {
         contacts.remove(deletedIndex);
+    }
+
+    public void editContact(String[] contactDetails, int editIndex) {
+        Contact contactToEdit = getContactAtIndex(editIndex);
+        contactToEdit.editContact(contactDetails);
     }
 
     //@@author ng-andre
@@ -93,8 +56,16 @@ public class ContactList {
     }
 
     public Contact getContactAtIndex(int index) {
-        contacts.sort(new ContactComparator());
+        sortContacts();
         return contacts.get(index);
+    }
+
+    public ArrayList<Contact> getContactList() {
+        return contacts;
+    }
+
+    public void sortContacts() {
+        contacts.sort(new ContactComparator());
     }
 
     public int getListSize() {

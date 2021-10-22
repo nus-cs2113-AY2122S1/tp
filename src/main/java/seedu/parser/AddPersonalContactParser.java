@@ -1,7 +1,7 @@
 package seedu.parser;
 
 import seedu.contact.Contact;
-import seedu.contact.PersonalContact;
+
 import seedu.exception.InvalidGithubUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
@@ -13,11 +13,10 @@ import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 public class AddPersonalContactParser extends RegexParser {
-    private PersonalContact personalContact;
+    private Contact personalContact;
 
     public AddPersonalContactParser() {
-        personalContact = new PersonalContact(null, null,null,null,
-                null,null);
+        personalContact = new Contact(null, null,null,null, null,null);
     }
 
     public void collectPersonalDetails() {
@@ -218,7 +217,7 @@ public class AddPersonalContactParser extends RegexParser {
         }
     }
 
-    public PersonalContact getPersonalContact() {
+    public Contact getPersonalContact() {
         return personalContact;
     }
 }

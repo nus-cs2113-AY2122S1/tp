@@ -3,7 +3,6 @@ package seedu.storage;
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
 import seedu.contact.DetailType;
-import seedu.contact.PersonalContact;
 import seedu.exception.FileErrorException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
@@ -40,10 +39,9 @@ public class ContactsDecoder extends RegexParser {
         return updatedContactList;
     }
 
-    public PersonalContact readPersonalContact(File personalContactFile)
+    public Contact readPersonalContact(File personalContactFile)
             throws FileErrorException {
-        PersonalContact personalContact = new PersonalContact(null, null, null, null,
-                null, null);
+        Contact personalContact = new Contact(null, null, null, null, null, null);
         try {
             Scanner fileScanner = new Scanner(personalContactFile);
             if (fileScanner.hasNext()) {
@@ -57,8 +55,8 @@ public class ContactsDecoder extends RegexParser {
     }
 
 
-    private PersonalContact decodePersonalContact(String contactText, PersonalContact contact) {
-        PersonalContact personalContact = contact;
+    private Contact decodePersonalContact(String contactText, Contact contact) {
+        Contact personalContact = contact;
         try {
             String[] compiledDetails = decodeDetails(contactText);
             String contactName = compiledDetails[DetailType.NAME.getIndex()];
@@ -67,7 +65,7 @@ public class ContactsDecoder extends RegexParser {
             String contactTelegram = compiledDetails[DetailType.TELEGRAM.getIndex()];
             String contactTwitter = compiledDetails[DetailType.TWITTER.getIndex()];
             String contactEmail = compiledDetails[DetailType.EMAIL.getIndex()];
-            personalContact = new PersonalContact(contactName, contactGithub, contactLinkedin, contactTelegram,
+            personalContact = new Contact(contactName, contactGithub, contactLinkedin, contactTelegram,
                     contactTwitter, contactEmail);
         } catch (IndexOutOfBoundsException e) {
             ExceptionTextUi.corruptPersonalContactMessage();
