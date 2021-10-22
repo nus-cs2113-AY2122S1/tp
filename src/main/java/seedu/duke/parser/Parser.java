@@ -12,16 +12,16 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
  * To make sense of user commands by extracting keywords and descriptions.
  */
 public abstract class Parser {
+    public static final String PARAMETER_SEPARATOR = ", ";
     static final Logger LOGGER = Logger.getLogger(Parser.class.getName());
     static final String MESSAGE_INVALID_COMMAND = "Invalid command format\n\n";
-    public static final String PARAMETER_SEPARATOR = ", ";
     protected String userInputString;
 
     public Parser(String userInputString) {
         this.userInputString = userInputString;
         setupLogger(LOGGER);
     }
-    
+
     protected Parser() {
     }
 
@@ -43,7 +43,6 @@ public abstract class Parser {
         return commandArgs;
     }
 
-
     static int parseWorkoutIndex(String commandArgs) throws GetJackDException {
         String arg = commandArgs.trim();
         int workoutIndex = (Command.workoutMode == 0) ? parseArgsAsIndex(arg) : Command.workoutMode;
@@ -52,10 +51,13 @@ public abstract class Parser {
 
     /**
      * For parsing workout and exercise index for "done" and "remove" commands.
+     *
      * @param commandArgs command arguments from user, in the format "workoutIndex, exerciseIndex"
      * @return int[2] the indices of workout and exercise
      * @throws GetJackDException when workout or exercise indices are not valid
      */
+
+    //1, 1, crunches, 5 10 -> "1", "1", "crunches", "5 10"
     static int[] parseWorkoutAndExerciseIndex(String commandArgs) throws GetJackDException {
         String[] args = commandArgs.split(PARAMETER_SEPARATOR);
         if ((args.length < 2 && Command.workoutMode == 0) || args.length < 1) {
@@ -102,6 +104,51 @@ public abstract class Parser {
         } catch (NumberFormatException e) {
             LOGGER.info("Invalid workout or exercise index");
             throw new GetJackDException("Error. Invalid workout or exercise index.");
+        }
+    }
+
+    /**
+     * Gets arguments required for an exercise, such as workoutIndex, exerciseName, sets and reps.
+     * commandArgs passed in as [exercise description], [sets and reps], [workout index or name]
+     *
+     * @param commandArgs user input without the command word.
+     * @return string array containing workoutIndex, exerciseName, sets and reps.
+     * @throws GetJackDException if any of the above-mentioned arguments are empty.
+     */
+    static String[] getExerciseArgs(String commandArgs, boolean isEdit) throws GetJackDException {
+        if (!commandArgs.contains(PARAMETER_SEPARATOR)) {
+            throw new GetJackDException("Invalid format for add exercise.");
+        }
+
+        String[] arguments = commandArgs.split(PARAMETER_SEPARATOR);
+        if (!isEdit) {
+            if ((arguments.length < 3 && Command.workoutMode == 0) || arguments.length < 2) {
+                LOGGER.info("Missing exercise arguments");
+                throw new GetJackDException("Error. Missing exercise parameters");
+            }
+        }
+
+        try {
+            String exerciseDescription = arguments[0];
+            String[] setsAndReps = arguments[1].split(" ");
+            String sets = setsAndReps[0];
+            String reps = setsAndReps[1];
+            String workoutIdentifier;
+            if (!isEdit) {
+                workoutIdentifier = (Command.workoutMode == 0) ? arguments[2] : null;
+            } else {
+                workoutIdentifier = String.valueOf(EditExerciseParser.getWorkoutIndex());
+            }
+            String[] exerciseArgs = new String[]{exerciseDescription, sets, reps, workoutIdentifier};
+            for (String s : exerciseArgs) {
+                assert (!s.contains(PARAMETER_SEPARATOR));
+            }
+
+            return exerciseArgs;
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            LOGGER.info("Missing exercise arguments");
+            throw new GetJackDException("Error. Missing sets or reps parameters");
         }
     }
 
