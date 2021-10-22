@@ -28,7 +28,7 @@ Each computer will have their own CLI, such as the window's Powershell and the M
 
 **[2. Features](#2-features)**
   * [2.1 new](#21-creating-a-trip-new)
-  * [2.2 viewall](#22-viewing-all-trips-viewall)
+  * [2.2 view](#22-viewing-trips-view)
   * [2.3 delete](#23-delete-a-trip-delete)
   * [2.4 edit](#24-edit-a-trip-edit)
   * [2.5 exit](#25-exiting-the-program-exit)
@@ -53,7 +53,7 @@ This sections provides a guide on how to get Traveller up and running on your co
 5. Enter a command to execute it.
    Some of our basic commands are:
    * `new FamilyTrip2021 /from SIN /to MLY` : Creates a new trip called `FamilyTrip2021` from Singapore (`SIN`) to Malaysia (`MLY`).
-   * `viewall` : Shows all your existing trips and their details.
+   * `view FamilyTrip2021` : Shows your existing trips and their details.
    * `delete FamilyTrip2021` : Deletes the trip called `FamilyTrip2021`.
    * `exit` : Exits the program.
 
@@ -75,14 +75,14 @@ The CLI then returns the shortest path from one point to another.
    * `new Vacation /from SKR /to JPN` creates a new trip called `Vacation` from South Korea (`SKR`) to Japan (`JPN`).
 
 
-### 2.2. Viewing all trips: `viewall`
-Shows you details of all your existing trips.
+### 2.2. Viewing trips: `view`
+Shows you details of your existing trips.
 
-#### Format: `viewall`
+#### Format: `view TRIP_NAME`
 
 #### Usage Example:
 
-Input > `viewall`
+Input > `view myTrip`
 
 Expected Output >
 ```
@@ -94,6 +94,9 @@ Expected Output >
 			 Distances: [1.0]
 			 Days: 
 ```
+
+![](documentationPics/tip.png)Tip:
+* To view all trips, simply enter `view all`.
 
 ### 2.3. Delete a trip: `delete`
 Deletes an existing trip from the trip list.
@@ -141,7 +144,7 @@ A summary of all commands available in Traveller is detailed here.
 Action | Format
 --- | ---
 **new** | `new TRIP_NAME /from START /to END`
-**viewall** | `viewall`
+**view** | `view TRIP_NAME`
 **delete** | `delete TRIP_NAME`
 **edit** | `edit TRIP_NAME /from START /to END`
 **exit** | `exit`

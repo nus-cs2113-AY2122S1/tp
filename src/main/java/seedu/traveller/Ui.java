@@ -37,18 +37,15 @@ public class Ui {
     }
 
     public void printTrip(Trip trip) {
+        assert !trip.getTripName().equals("all") : "`all` is an invalid tripName.";
         System.out.println(trip);
     }
 
     public void printAllTrips(TripsList tripsList) {
-        if (tripsList.getSize() == 0) {
-            System.out.println("\tThere are no trips created yet.");
-        } else {
-            assert tripsList.getSize() > 0 : "There should be trips in the tripsList.";
-            System.out.println("\tHere are all your trips: ");
-            for (int i = 0; i < tripsList.getSize(); i++) {
-                printTrip(tripsList.getTrip(i));
-            }
+        assert tripsList.getSize() > 0 : "There are no trips in the tripsList.";
+        System.out.println("\tHere are all your trips: ");
+        for (int i = 0; i < tripsList.getSize(); i++) {
+            printTrip(tripsList.getTrip(i));
         }
     }
 

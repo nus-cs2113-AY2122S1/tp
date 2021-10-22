@@ -7,13 +7,14 @@ import seedu.traveller.commands.EditCommand;
 import seedu.traveller.commands.DeleteCommand;
 import seedu.traveller.commands.DeleteDayCommand;
 import seedu.traveller.commands.DeleteItemCommand;
-import seedu.traveller.commands.ViewAllCommand;
+import seedu.traveller.commands.ViewCommand;
 import seedu.traveller.commands.SearchCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.HelpCommand;
 
 import seedu.traveller.exceptions.CommandNotFoundException;
+import seedu.traveller.exceptions.IllegalTripNameException;
 import seedu.traveller.exceptions.InvalidAddItemFormatException;
 import seedu.traveller.exceptions.InvalidEditFormatException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
@@ -60,8 +61,8 @@ public class Parser {
         case "delete":
             command = parseDeleteCommand(userInput[1]);
             break;
-        case "viewall":
-            command = parseViewallCommand();
+        case "view":
+            command = parseViewCommand(userInput[1]);
             break;
         case "search":
             command = parseSearchCommand(userInput[1]);
@@ -145,6 +146,9 @@ public class Parser {
             int fromIdx = userInput.indexOf(fromSeparator);
             int toIdx = userInput.indexOf(toSeparator);
             String tripName = userInput.substring(0, fromIdx);
+            if (tripName.equals("all")) {
+                throw new IllegalTripNameException(tripName);
+            }
             String startCountryCode = userInput.substring(fromIdx + FROM_LENGTH, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
@@ -222,12 +226,14 @@ public class Parser {
     }
 
     /**
-     * Parses user input to give a <code>ViewallCommand</code>.
-     * @return Command A <code>ViewallCommand</code> object.
+     * Parses user input to give a <code>ViewCommand</code>.
+     * @return Command A <code>ViewCommand</code> object.
      */
-    private static Command parseViewallCommand() {
-        logger.log(Level.INFO, "Viewall command input");
-        return new ViewAllCommand();
+    private static Command parseViewCommand(String userInput) {
+        Command command;
+        logger.log(Level.INFO, "View command input");
+        command = new ViewCommand(userInput);
+        return command;
     }
 
     /**
