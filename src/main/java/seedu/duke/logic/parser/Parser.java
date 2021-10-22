@@ -29,6 +29,9 @@ public class Parser {
         case LIST:
             simplifiedUserResponse = removeFirstParam(userResponse, "list");
             return ListCommandParser.parse(simplifiedUserResponse);
+        case SET:
+            simplifiedUserResponse = removeFirstParam(userResponse, "set");
+            return SetCommandParser.parse(simplifiedUserResponse);
         case EXIT:
             return ExitCommandParser.parse();
         case INVALID:
