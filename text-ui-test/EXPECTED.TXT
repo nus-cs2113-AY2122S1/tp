@@ -24,6 +24,7 @@ To find out more information about the command, such as input format and paramet
 "list" : Lists all your workouts
 "recommend" : Recommends workouts of a given difficulty
 "display" : Shows all the exercises in a specified workout
+"edit" : Edits a specific exercise in a specified workout
 "search" : Displays workouts or exercises that contain the specified keyword
 "bye" : Ends the program
 ________________________________________________________
@@ -113,6 +114,27 @@ ________________________________________________________
 ________________________________________________________
 Invalid command format
 
+edit: Edits the exercise in the workout.
+Format: edit [exercise index], [workout index], [new Description], [sets and reps]
+Parameters:
+	Exercise index - Index of exercise to edit
+	Workout index - Index of workout containing exercise to edit
+Example: edit 1, 2, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps from workout 2
+________________________________________________________
+________________________________________________________
+edit: Edits the exercise in the workout.
+Format: edit [exercise index], [workout index], [new Description], [sets and reps]
+Parameters:
+	Exercise index - Index of exercise to edit
+	Workout index - Index of workout containing exercise to edit
+Example: edit 1, 2, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps from workout 2
+________________________________________________________
+________________________________________________________
+The edited exercise: [X] Lunges | 8 sets of 4 reps
+________________________________________________________
+________________________________________________________
+Invalid command format
+
 display: Displays all exercises in the particular workout.
 Format: display [Workout index]
 Parameters:
@@ -128,7 +150,7 @@ Example: display 3
 ________________________________________________________
 ________________________________________________________
 Exercises in Legs
-1. [X] Squats | 3 sets of 10 reps
+1. [X] Lunges | 8 sets of 4 reps
 ________________________________________________________
 ________________________________________________________
 Invalid command format
@@ -149,7 +171,7 @@ Parameters:
 Example: remove 1, 2  - remove exercise 1 from workout 2
 ________________________________________________________
 ________________________________________________________
-Removed exercise: [X] Squats | 3 sets of 10 reps
+Removed exercise: [X] Lunges | 8 sets of 4 reps
 ________________________________________________________
 ________________________________________________________
 You have no exercises.
