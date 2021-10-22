@@ -70,6 +70,55 @@ public class Module {
         return corequisite;
     }
 
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
+    public void setTargetGrade(Grade targetGrade) {
+        this.targetGrade = targetGrade;
+    }
+
+    public String getGradeAsString() {
+        return Grade.gradeToString(grade);
+    }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public Grade getTargetGrade() {
+        return targetGrade;
+    }
+
+    public double getGradePoint(Grade grade) {
+        switch (grade) {
+        case A_PLUS:
+            //Fallthrough
+        case A:
+            return 5.0;
+        case A_MINUS:
+            return 4.5;
+        case B_PLUS:
+            return 4.0;
+        case B:
+            return 3.5;
+        case B_MINUS:
+            return 3.0;
+        case C_PLUS:
+            return 2.5;
+        case C:
+            return 2.0;
+        case D_PLUS:
+            return 1.5;
+        case D:
+            return 1.0;
+        case F:
+            return 0;
+        default:
+            return -1;
+        }
+    }
+
     public String serialize() {
         // subject to change
         return moduleCode + " | " + title + " | " + moduleCredit + " | " + grade;
