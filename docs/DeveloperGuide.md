@@ -10,6 +10,19 @@
 
 This section describes some noteworthy details on how certain features are designed and implemented.
 
+### Logic component
+
+**API**: `Parser.java` {NOTE: this may change based on further implementations}
+
+(insert relevant information here about taking in user input and parsing it etc.)
+
+####Delete Functionality
+How deleting an `Event` or a `Task` works:
+
+1. 
+
+
+
 ### Storage component
 
 #### Save Functionality
