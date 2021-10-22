@@ -26,8 +26,17 @@ you manage your daily tasks faster than traditional GUI application.
   - Deleting a person
   
 # Acknowledgements
-
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+## Code structure
+[Duke, by Peh Zhenhao, Amos](https://github.com/APZH/ip)
+## Third-party library
+### Development
+- [Checkstyle](https://checkstyle.sourceforge.io/)
+  - [Configuration file, from AddressBook Level 3 project](https://github.com/se-edu/addressbook-level3/tree/master/config/checkstyle)
+- [JUnit](https://junit.org)
+### Implementation
+- [iCal4J](http://ical4j.github.io/)
+- [Gson](https://github.com/google/gson)
+- [Apache Commons IO](https://commons.apache.org/proper/commons-io/)
 
 # Setting up, getting started
 
