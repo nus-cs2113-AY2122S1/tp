@@ -175,7 +175,7 @@ public class Ui {
         show("Flight " + ADD_MESSAGE + "\n" + flight);
     }
 
-    public void showListFlight(FlightList flights){
+    public void showListFlight(FlightList flights) {
         int count = flights.getFlightCount();
         if (count == 0) {
             System.out.println(LIST_NO_MESSAGE + "flights");
