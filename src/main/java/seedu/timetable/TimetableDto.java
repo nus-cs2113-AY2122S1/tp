@@ -78,7 +78,7 @@ public class TimetableDto {
                     day[i] = null;
                 }
             } catch (NullPointerException e) {
-
+                //TODO
             }
         }
         return day;
