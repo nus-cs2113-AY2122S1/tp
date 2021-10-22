@@ -7,6 +7,9 @@ lezongg
 lezongmun@gmail.com
 
 me
+edit me -n Marcus Bory
+edit me
+edit me -e lezongmun
 rm 1
 add -n ng andre -g ng-andre
 rm 2
