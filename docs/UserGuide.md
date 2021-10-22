@@ -2,28 +2,41 @@
 
 ## Table of Contents
 
-* [Getting Start](#Getting-Started)
-* [Section: Note](#Section:-Note)
-    * [Accessing Note : `note`](#Accessing-Note)
-    * [Adding a note : `add "<name>" "<content>"`](#Adding-a-Note)
-    * [Delete a note : `delete <index>`](#Delete-a-Note)
-    * [View note : `view {index}`](#View-Note)
-* [Section: Schedule](#Section:-Schedule)
-    * [Accessing Schedule : `schedule`](#Accessing-Schedule)
-    * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<zoom_link>"`](#Adding-a-Schedule)
-    * [Delete a Schedule : `delete <index>`](#Delete-a-Schedule)
-    * [View Schedule : `view`](#View-Schedule)
-* [Section: Question](#Section:-Question)
-    * [Accessing Question : `note`](#Accessing-Note)
-    * [Adding a Question : `add "<question>" "<answer>"`](#Adding-a-Question)
-    * [Delete a Question : `delete <index>`](#Delete-a-Question)
-    * [View Question : `view {index}`](#View-Question)
-    * [Testing Yourself with Active Recall: `test {count}`](#Testing-Yourself-with-Active-Recall)
-* [Exiting the Program: `exit`](#Exiting-the-Program)
-* [Accessing Help: `help`](#Accessing-Help)
-* [FAQ](#faq)
-* [Command Summary](#Command-Summary)
-* [Advanced Command Summary](#Advanced-Command-Summary)
+- [Introduction](#introduction)
+- [Purpose](#purpose)
+- [Getting Started](#getting-started)
+- [Using this Guide](#using-this-guide)
+- [Section: Module Management](#section--module-management)
+    * [Accessing the module management workspace : `module`](#accessing-the-module-management-workspace)
+    * [Adding a new module : `add "<module_code>"`](#adding-a-new-module)
+    * [Deleting a module : `delete <index>`](#deleting-a-module)
+    * [Viewing module information `view`](#viewing-module-information)
+- [Section: Module](#section--module)
+    * [Accessing module workspace : `go <module_code>`](#accessing-module-workspace)
+- [Section: Note](#section--note)
+    * [Accessing note workspace : `note`](#accessing-note-workspace)
+    * [Adding a Note : `add "<name>" "<content>"`](#adding-a-note)
+    * [Deleting a Note : `delete <index>`](#deleting-a-note)
+    * [Viewing note information : `view {index}`](#viewing-note-information)
+- [Section: Schedule](#section--schedule)
+    * [Accessing schedule workspace : `schedule`](#accessing-schedule-workspace)
+    * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<zoom_link>"`](#adding-a-schedule)
+    * [Deleting a Schedule : `delete <index>`](#deleting-a-schedule)
+    * [Viewing schedule information : `view`](#viewing-schedule-information)
+- [Section: Question](#section--question)
+    * [Accessing question workspace : `question`](#accessing-question-workspace)
+    * [Adding a Question : `add "<question>" "<answer>"` ](#adding-a-question)
+    * [Deleting a Question : `delete <index>`](#deleting-a-question)
+    * [Viewing question information : `view {index}`](#viewing-question-information)
+    * [Testing Yourself with Active Recall : `test {count}`](#testing-yourself-with-active-recall)
+- [Displaying all schedules across all modules : `timetable {day}`](#displaying-all-schedules-across-all-modules)
+- [Returning to previous workspace : `back`](#returning-to-previous-workspace)
+- [Exiting TermiNUS : `exit`](#exiting-terminus)
+- [Accessing Help : `help`](#accessing-help)
+- [Advanced Usage of Commands](#advanced-usage-of-commands)
+- [FAQ](#faq)
+- [Workspace Command Summary](#workspace-command-summary)
+- [Command Summary](#command-summary)
 
 ## Introduction
 
@@ -828,21 +841,6 @@ ___
 |**ALL**|exit the program|`exit`|-|
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
