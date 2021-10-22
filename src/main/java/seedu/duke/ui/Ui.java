@@ -6,6 +6,7 @@ import seedu.duke.Duke;
 import seedu.duke.DukeException;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
+import seedu.duke.model.module.Grade;
 import seedu.duke.model.module.Module;
 import seedu.duke.model.module.ModuleList;
 import seedu.duke.model.task.Task;
@@ -316,6 +317,36 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Here are the detailed information of your modules:");
         System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
+        System.out.print(LINE);
+    }
+
+    public void printModulesWithGrade(ModuleList moduleList) throws DukeException {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Here are the modules in your list:");
+        for (int i = 0; i < moduleList.getSize(); i++) {
+            Module module = moduleList.getModule(i);
+            System.out.println(PADDING + (i + 1) + ". " + module);
+            System.out.println(PADDING + "   Grade: " + Grade.gradeToString(module.getGrade()));
+        }
+        printCap(moduleList);
+        System.out.print(LINE);
+    }
+
+    private void printCap(ModuleList moduleList) {
+        double cap = moduleList.calculateCap();
+        if (cap >= 0) {
+            cap = moduleList.calculateCap();
+            System.out.println(PADDING + "Your current CAP is: " + cap);
+        } else {
+            System.out.println(PADDING + "If you have received grades for your modules, set them to see your CAP!");
+        }
+    }
+
+    public void printModuleWithGradeChanged(Module module) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "You have changed your grade for this module: ");
+        System.out.println(PADDING + "   " + module);
+        System.out.println(PADDING + "   Grade: " + Grade.gradeToString(module.getGrade()));
         System.out.print(LINE);
     }
 
