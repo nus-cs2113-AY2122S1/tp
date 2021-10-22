@@ -1,7 +1,14 @@
 package seedu.traveller;
 
 import org.junit.jupiter.api.Test;
-import seedu.traveller.commands.*;
+import seedu.traveller.commands.AddItemCommand;
+import seedu.traveller.commands.DeleteCommand;
+import seedu.traveller.commands.EditCommand;
+import seedu.traveller.commands.NewCommand;
+import seedu.traveller.commands.ViewCommand;
+import seedu.traveller.commands.ShortestCommand;
+import seedu.traveller.commands.AddDayCommand;
+import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.exceptions.TravellerException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
