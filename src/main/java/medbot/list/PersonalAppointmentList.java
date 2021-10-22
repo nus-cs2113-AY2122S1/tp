@@ -1,7 +1,11 @@
 package medbot.list;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.NavigableSet;
+import java.util.TreeSet;
+
 import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 
@@ -10,7 +14,15 @@ public class PersonalAppointmentList {
     private static final String ERROR_ADD_APPOINTMENT_CLASH = "New appointment clashes with another appointment.";
     private static final String ERROR_EDIT_APPOINTMENT_CLASH = "New appointment time clashes with another appointment.";
 
-    protected HashMap<Integer, Appointment> appointments = new HashMap<>();
+    protected NavigableSet<Appointment> appointments = new TreeSet<>((o1, o2) -> {
+        if (o1.getDateTimeCode() > o2.getDateTimeCode()) {
+            return 1;
+        } else if ( o1.getDateTimeCode() < o2.getDateTimeCode()) {
+            return -1;
+        }
+        assert o1.getDateTimeCode() == o2.getDateTimeCode();
+        return 0;
+    });
 
     public PersonalAppointmentList() {
 
@@ -22,26 +34,34 @@ public class PersonalAppointmentList {
         if (appointmentId == 0) {
             throw new MedBotException(ERROR_APPOINTMENT_ID_NOT_SET);
         }
-        if (!appointments.containsKey(dateTimeCode)) {
-            appointments.put(dateTimeCode, appointment);
-            return;
+        boolean isNotClash = appointments.add(appointment);
+        if (!isNotClash) {
+            throw new MedBotException(ERROR_ADD_APPOINTMENT_CLASH);
         }
-        throw new MedBotException(ERROR_ADD_APPOINTMENT_CLASH);
+
     }
 
     public int getAppointmentId(int dateTimeCode) {
-        Appointment appointment = appointments.get(dateTimeCode);
-        if (appointment != null) {
-            return appointment.getAppointmentId();
+        Iterator<Appointment> it = appointments.iterator();
+        while (it.hasNext()) {
+            Appointment appointment = it.next();
+            if (appointment.getDateTimeCode() == dateTimeCode && appointment != null) {
+                return appointment.getAppointmentId();
+            }
         }
         return -1;
     }
 
     public void deleteAppointmentByTime(int dateTimeCode) throws MedBotException {
-        if (!appointments.containsKey(dateTimeCode)) {
-            throw new MedBotException(getAppointmentNotFoundErrorMessage(dateTimeCode));
+        Iterator<Appointment> it = appointments.iterator();
+        while (it.hasNext()) {
+            Appointment appointment = it.next();
+            if (appointment.getDateTimeCode() == dateTimeCode) {
+                it.remove();
+                return;
+            }
         }
-        appointments.remove(dateTimeCode);
+        throw new MedBotException(getAppointmentNotFoundErrorMessage(dateTimeCode));
     }
 
     private void mergeAppointmentDataByTime(Appointment oldAppointment, Appointment newAppointment) {
@@ -58,8 +78,9 @@ public class PersonalAppointmentList {
 
     public String listAppointments() {
         String output = "";
-        for (int dateTimeCode:appointments.keySet()) {
-            output += appointments.get(dateTimeCode);
+        Iterator<Appointment> it = appointments.iterator();
+        while (it.hasNext()) {
+            output += it.next();
             output += "\n";
         }
         return output;
