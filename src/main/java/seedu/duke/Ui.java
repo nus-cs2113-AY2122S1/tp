@@ -99,7 +99,7 @@ public class Ui {
         show("Client" + ADD_MESSAGE + "\n" + client);
     }
 
-    public void showListClient(ClientList clients){
+    public void showListClient(ClientList clients) {
         int count = clients.getClientCount();
         if (count == 0) {
             System.out.println(LIST_NO_MESSAGE + "clients");
@@ -121,7 +121,7 @@ public class Ui {
         show("Tour" + ADD_MESSAGE + "\n" + tour);
     }
 
-    public void showListTour(TourList tours){
+    public void showListTour(TourList tours) {
         int count = tours.getTourCount();
         if (count == 0) {
             System.out.println(LIST_NO_MESSAGE + "tours");
