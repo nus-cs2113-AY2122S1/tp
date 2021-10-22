@@ -63,7 +63,7 @@ public class ModuleList implements ClassChecker {
      * @param code The module code to search for.
      * @return A Module object if found, else null.
      */
-    public Module getModule(String code) {
+    public Module getModuleWithCode(String code) {
         for (Module module : modules) {
             if (module.getCode().equals(code)) {
                 return module;
