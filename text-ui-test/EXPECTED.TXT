@@ -130,7 +130,7 @@ Parameters:
 Example: edit 1, 2, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps from workout 2
 ________________________________________________________
 ________________________________________________________
-The edited exercise: [X] Lunges | 8 sets of 4 reps
+The edited exercise: [X] Lunges | 4 sets of 8 reps
 ________________________________________________________
 ________________________________________________________
 Invalid command format
@@ -150,7 +150,7 @@ Example: display 3
 ________________________________________________________
 ________________________________________________________
 Exercises in Legs
-1. [X] Lunges | 8 sets of 4 reps
+1. [X] Lunges | 4 sets of 8 reps
 ________________________________________________________
 ________________________________________________________
 Invalid command format
@@ -171,7 +171,7 @@ Parameters:
 Example: remove 1, 2  - remove exercise 1 from workout 2
 ________________________________________________________
 ________________________________________________________
-Removed exercise: [X] Lunges | 8 sets of 4 reps
+Removed exercise: [X] Lunges | 4 sets of 8 reps
 ________________________________________________________
 ________________________________________________________
 You have no exercises.
