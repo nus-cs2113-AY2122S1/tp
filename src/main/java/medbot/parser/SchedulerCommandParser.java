@@ -119,7 +119,8 @@ public abstract class SchedulerCommandParser {
         return new HelpSchedulerCommand(commandType);
     }
 
-    private static CommandType parseHelpSchedulerViewCommandType(String commandTypeString) throws MedBotParserException {
+    private static CommandType parseHelpSchedulerViewCommandType(String commandTypeString)
+            throws MedBotParserException {
         switch (commandTypeString) {
         case COMMAND_ADD:
             return CommandType.ADD_APPOINTMENT;
