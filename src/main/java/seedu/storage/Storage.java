@@ -55,7 +55,6 @@ public class Storage {
         return false;
     }
 
-
     private boolean hasExistingContactFile() throws FileErrorException {
         try {
             if (!contactFile.exists()) {
@@ -83,14 +82,14 @@ public class Storage {
             isFirstRun = true;
             // get new contact's name
             AddPersonalContactParser addPersonalContactParser = new AddPersonalContactParser();
-            addPersonalContactParser.startCollectingPersonalDetails();
+            addPersonalContactParser.collectPersonalDetails();
             Contact personalContact = addPersonalContactParser.getPersonalContact();
             contactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
             return personalContact;
         }
         Contact personalContact = contactsDecoder.readPersonalContact(personalContactFile);
+        contactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
         TextUi.welcomeBackMessage(personalContact);
         return personalContact;
     }
-
 }

@@ -169,7 +169,18 @@ public class ExceptionTextUi {
     }
 
     public static void corruptPersonalContactMessage() {
-        printBottomLineMessage("Your personal contact file at data/me.txt is corrupted and not loaded.");
+        String message = "Your personal contact file at data/me.txt is corrupted and\n"
+                + "not loaded. We would need to set up your personal contact\n"
+                + "again.\n\n"
+                + "Enter anything to continue...";
+        printDoubleLineMessage(message);
+    }
+
+    public static void invalidPersonalContactFileMessage() {
+        String message = "It seems that your personal contact at data/me.txt has been"
+                + "\naltered. We would need to set up your personal contact again.\n\n"
+                + "Enter anything to continue...";
+        printDoubleLineMessage(message);
     }
 
     public static void forbiddenInputCommaMessage(String newUserInput) {

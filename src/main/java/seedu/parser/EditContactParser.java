@@ -18,13 +18,15 @@ public class EditContactParser extends ContactParser {
             throws InvalidFlagException, MissingDetailException, MissingArgException, ForbiddenDetailException,
             InvalidNameException, InvalidGithubUsernameException, InvalidTelegramUsernameException,
             InvalidLinkedinUsernameException, InvalidTwitterUsernameException, InvalidEmailException {
+
         String[] inputDetails = userInput.split(" ", NUMBER_OF_EDIT_ARGS);
         if (inputDetails.length < NUMBER_OF_EDIT_ARGS) {
             //if arguments are missing e.g. edit 2
             throw new MissingArgException();
         }
+
         assert (inputDetails.length == NUMBER_OF_EDIT_ARGS);
-        String[] contactDetails = new String[NUMBER_OF_FIELDS]; //initialise null array of strings
+
         //buffer is used to ensure first flag can be read
         String[] destructuredInputs = (BUFFER + inputDetails[USER_INFO_INDEX]).split(DETAIL_SEPARATOR);
         //handles illegal input "edit 0 -" and "edit 0 [invalid string]"
@@ -32,10 +34,13 @@ public class EditContactParser extends ContactParser {
         if (destructuredInputs.length < 2) {
             throw new MissingArgException();
         }
+
+        //initialise null array of strings
+        String[] contactDetails = new String[NUMBER_OF_FIELDS];
         for (int i = CONTACT_PARAMS_START_INDEX; i < destructuredInputs.length; i++) {
             parseDetail(contactDetails, destructuredInputs[i]);
         }
+
         return contactDetails;
     }
-
 }
