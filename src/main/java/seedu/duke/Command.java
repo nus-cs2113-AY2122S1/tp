@@ -7,7 +7,7 @@ public abstract class Command {
     protected ClientList clients;
     protected FlightList flights;
     protected TourList tours;
-    protected ClientPackageList packages;
+    protected ClientPackageList clientPackages;
     protected Ui ui;
 
     /**
@@ -15,11 +15,11 @@ public abstract class Command {
      */
     public abstract void execute();
 
-    public void setData(ClientList clients, FlightList flights, TourList tours, ClientPackageList packages, Ui ui) {
+    public void setData(ClientList clients, FlightList flights, TourList tours, ClientPackageList clientPackages, Ui ui) {
         this.clients = clients;
         this.flights = flights;
         this.tours = tours;
-        this.packages = packages;
+        this.clientPackages = clientPackages;
         this.ui = ui;
     }
 
