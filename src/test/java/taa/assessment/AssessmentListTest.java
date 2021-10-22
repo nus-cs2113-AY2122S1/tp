@@ -64,6 +64,9 @@ class AssessmentListTest {
         command2.execute(moduleList, ui, storage);
         Command command3 = Parser.parseUserInput(deleteAssessmentInput);
         command3.execute(moduleList, ui, storage);
-        assertEquals(new AssessmentList().getSize(), moduleList.getModuleWithCode("cs2113t").getAssessmentList().getSize());
+        assertEquals(
+            new AssessmentList().getSize(),
+            moduleList.getModuleWithCode("cs2113t").getAssessmentList().getSize()
+        );
     }
 }
