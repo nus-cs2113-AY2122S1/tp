@@ -2,16 +2,15 @@ package medbot.command;
 
 import medbot.Scheduler;
 import medbot.Ui;
-import medbot.list.PersonList;
 
-public class HelpCommand extends Command {
+public class HelpSchedulerCommand extends Command {
 
     private CommandType commandType = null;
 
-    public HelpCommand() {
+    public HelpSchedulerCommand() {
     }
 
-    public HelpCommand(CommandType commandType) {
+    public HelpSchedulerCommand(CommandType commandType) {
         this.commandType = commandType;
     }
 
@@ -24,29 +23,26 @@ public class HelpCommand extends Command {
             return;
         }
         switch (commandType) {
-        case ADD_PATIENT:
-            output = ui.getAddHelpMessage();
+        case ADD_APPOINTMENT:
+            output = ui.getAddAppointmentHelpMessage();
             break;
-        case DELETE_PATIENT:
-            output = ui.getDeleteHelpMessage();
+        case DELETE_APPOINTMENT:
+            output = ui.getDeleteAppointmentHelpMessage();
             break;
-        case EDIT_PATIENT:
-            output = ui.getEditHelpMessage();
+        case EDIT_APPOINTMENT:
+            output = ui.getEditAppointmentHelpMessage();
+            break;
+        case LIST_APPOINTMENT:
+            output = ui.getListAppointmentHelpMessage();
+            break;
+        case VIEW_APPOINTMENT:
+            output = ui.getViewAppointmentHelpMessage();
+            break;
+        case SWITCH:
+            output = ui.getSwitchHelpMessage();
             break;
         case EXIT:
             output = ui.getExitHelpMessage();
-            break;
-        case LIST_PATIENT:
-            output = ui.getListHelpMessage();
-            break;
-        case SWITCH:
-            output = ""; //todo
-            break;
-        case FIND_PATIENT:
-            output = ui.getFindHelpMessage();
-            break;
-        case VIEW_PATIENT:
-            output = ui.getViewHelpMessage();
             break;
         default:
             output = ui.getCommandList();

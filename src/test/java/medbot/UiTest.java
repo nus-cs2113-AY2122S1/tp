@@ -114,7 +114,7 @@ class UiTest {
 
         String expectedOutput = "Here are the list of commands:" + ENDLINE + ENDLINE
                 + "help" + ENDLINE + "add" + ENDLINE + "list" + ENDLINE + "view" + ENDLINE + "edit" + ENDLINE
-                + "find" + ENDLINE + "delete" + ENDLINE + "exit" + ENDLINE + ENDLINE
+                + "find" + ENDLINE + "delete" + ENDLINE + "switch" + ENDLINE + "exit" + ENDLINE + ENDLINE
                 + "To obtain more information on each command and their respective required inputs, type:" + ENDLINE
                 + "help [COMMAND]" + ENDLINE + ENDLINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes" + ENDLINE;

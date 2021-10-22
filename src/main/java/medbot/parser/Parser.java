@@ -1,6 +1,7 @@
 package medbot.parser;
 
-import medbot.command.HelpCommand;
+import medbot.command.HelpInfoCommand;
+import medbot.command.HelpSchedulerCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.Command;
 import medbot.command.ExitCommand;
@@ -65,9 +66,7 @@ public abstract class Parser {
         if (userInput.equals(COMMAND_EXIT)) {
             return new ExitCommand();
         }
-        if (userInput.startsWith(COMMAND_HELP)) {
-            return parseHelpCommand(userInput);
-        }
+
         //commands valid in only some viewTypes
         switch (viewType) {
         case PATIENT_INFO:
@@ -79,52 +78,6 @@ public abstract class Parser {
         default:
             assert false;
             throw new MedBotParserException(ERROR_NO_VIEW_FOUND);
-        }
-    }
-
-    /**
-     * Parses user input to pass relevant parameters into the HelpCommand constructor.
-     *
-     * @param userInput String containing the full user input.
-     * @return HelpCommand object.
-     * @throws MedBotParserException if parameters.length < 1 && > 2
-     */
-    private static HelpCommand parseHelpCommand(String userInput) throws MedBotParserException {
-        String commandTypeString = EMPTY_STRING;
-        try {
-            commandTypeString = userInput.substring(4).strip();
-        } catch (IndexOutOfBoundsException ie) {
-            return new HelpCommand();
-        }
-        if (commandTypeString.equals(EMPTY_STRING)) {
-            return new HelpCommand();
-        }
-        CommandType commandType = parseHelpCommandType(commandTypeString);
-        return new HelpCommand(commandType);
-    }
-
-    private static CommandType parseHelpCommandType(String commandTypeString) throws MedBotParserException {
-        switch (commandTypeString) {
-        case COMMAND_ADD:
-            return CommandType.ADD_PATIENT;
-        case COMMAND_DELETE:
-            return CommandType.DELETE_PATIENT;
-        case COMMAND_EDIT:
-            return CommandType.EDIT_PATIENT;
-        case COMMAND_EXIT:
-            return CommandType.EXIT;
-        case COMMAND_HELP:
-            return CommandType.HELP;
-        case COMMAND_LIST:
-            return CommandType.LIST_PATIENT;
-        case COMMAND_SWITCH:
-            return CommandType.SWITCH;
-        case COMMAND_VIEW:
-            return CommandType.VIEW_PATIENT;
-        case COMMAND_FIND:
-            return CommandType.FIND_PATIENT;
-        default:
-            throw new MedBotParserException(ERROR_WRONG_COMMAND);
         }
     }
 

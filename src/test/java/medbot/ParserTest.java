@@ -2,7 +2,7 @@ package medbot;
 
 import medbot.command.Command;
 import medbot.command.ExitCommand;
-import medbot.command.HelpCommand;
+import medbot.command.HelpInfoCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.personcommand.patientcommand.AddPatientCommand;
 import medbot.command.personcommand.patientcommand.DeletePatientCommand;
@@ -263,7 +263,7 @@ class ParserTest {
         assertSame(Parser.getViewType(), ViewType.PATIENT_INFO);
         HashMap<String, Command> testCases = new HashMap<>();
         testCases.put("exit", new ExitCommand());
-        testCases.put("help ", new HelpCommand());
+        testCases.put("help ", new HelpInfoCommand());
         testCases.put("switch", new SwitchCommand(null));
         testCases.put("add n/John Tan ", new AddPatientCommand(null));
         testCases.put("edit 1 n/John Tan ", new EditPatientCommand(1, null));

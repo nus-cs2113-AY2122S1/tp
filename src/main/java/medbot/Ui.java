@@ -156,6 +156,18 @@ public class Ui {
                 + "----------------------------------------------------- " + ENDLINE;
     }
 
+
+    /**
+     *
+     *
+     *
+     * HELP COMMANDS BELOW
+     *
+     *
+     *
+     */
+
+
     /**
      * Prints a list of all available commands.
      *
@@ -164,18 +176,18 @@ public class Ui {
     public String getCommandList() {
         return "Here are the list of commands:" + ENDLINE + ENDLINE
                 + "help" + ENDLINE + "add" + ENDLINE + "list" + ENDLINE + "view" + ENDLINE + "edit" + ENDLINE
-                + "find" + ENDLINE + "delete" + ENDLINE + "exit" + ENDLINE + ENDLINE
+                + "find" + ENDLINE + "delete" + ENDLINE + "switch" + ENDLINE + "exit" + ENDLINE + ENDLINE
                 + "To obtain more information on each command and their respective required inputs, type:" + ENDLINE
                 + "help [COMMAND]" + ENDLINE + ENDLINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes" + ENDLINE;
     }
 
     /**
-     * Prints information about list command.
+     * Prints information about list command for the info views.
      *
      * @return the information on list command.
      */
-    public String getListHelpMessage() {
+    public String getListInfoHelpMessage() {
         return "View information of all current patients." + ENDLINE
                 + "Format: list" + ENDLINE
                 + "Expected Output for 2 patients: " + ENDLINE
@@ -186,11 +198,20 @@ public class Ui {
     }
 
     /**
-     * Prints information about help command.
+     * Prints information about list command for the scheduler view.
      *
-     * @return the information on help command.
+     * @return the information on list command.
      */
-    public String getViewHelpMessage() {
+    public String getListAppointmentHelpMessage() {
+        return "View list of all appointments in the scheduler.";
+    }
+
+    /**
+     * Prints information about view command for the info views.
+     *
+     * @return the information on view command.
+     */
+    public String getViewInfoHelpMessage() {
         return "View a patient’s personal information." + ENDLINE
                 + "Format: view PATIENT_ID" + ENDLINE
                 + "Expected Output:" + ENDLINE
@@ -199,11 +220,20 @@ public class Ui {
     }
 
     /**
+     * Prints information about view command for the scheduler view.
+     *
+     * @return the information on view command.
+     */
+    public String getViewAppointmentHelpMessage() {
+        return "View a list of appointments that a person has.";
+    }
+
+    /**
      * Prints information about add command.
      *
      * @return the information on add command.
      */
-    public String getAddHelpMessage() {
+    public String getAddInfoHelpMessage() {
         return "Add a patient to the patient’s list." + ENDLINE
                 + "Format:" + ENDLINE
                 + "add i/PATIENT_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
@@ -211,12 +241,16 @@ public class Ui {
                 + "Added patient with patient ID: PATIENT_ID" + ENDLINE;
     }
 
+    public String getAddAppointmentHelpMessage() {
+        return "Add an appointment to the scheduler as well as to each individual's appointment lists.";
+    }
+
     /**
      * Prints information about edit command.
      *
      * @return the information on edit command.
      */
-    public String getEditHelpMessage() {
+    public String getEditInfoHelpMessage() {
         return "Edit the personal and medical information of a patient in the list." + ENDLINE
                 + "Format:" + ENDLINE
                 + "edit PATIENT ID [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
@@ -226,12 +260,16 @@ public class Ui {
                 + "Email: [EMAIL] Address: [ADDRESS] " + ENDLINE;
     }
 
+    public String getEditAppointmentHelpMessage() {
+        return "Edit an appointment within the list.";
+    }
+
     /**
      * Prints information about delete command.
      *
      * @return the information on delete command.
      */
-    public String getDeleteHelpMessage() {
+    public String getDeleteInfoHelpMessage() {
         return "Delete a patient from the list." + ENDLINE
                 + "Format:" + ENDLINE
                 + "delete PATIENT_ID" + ENDLINE
@@ -239,15 +277,18 @@ public class Ui {
                 + "Patient with id PATIENT_ID deleted from system." + ENDLINE;
     }
 
+    public String getDeleteAppointmentHelpMessage() {
+        return "Delete an appointment from the list.";
+    }
+
     /**
      * Prints information about find command.
      *
      * @return the information on find command.
      */
-    public String getFindHelpMessage() {
+    public String getFindInfoHelpMessage() {
         return "Find patients from the list based on given attributes." + ENDLINE
-                + "Format:" + ENDLINE
-                + "find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
+                + "Format: find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
                 + "    * The attributes do not have to be in full." + ENDLINE
                 + "    * At least one attribute must be present." + ENDLINE
                 + "Expected Output:" + ENDLINE
@@ -256,9 +297,25 @@ public class Ui {
     }
 
     /**
+     * Prints information about switch command.
+     *
+     * @return the information on switch command.
+     */
+    public String getSwitchHelpMessage() {
+        return "Switches between the different views of MedBot." + ENDLINE
+                + "Format: switch [VIEW_TYPE]" + ENDLINE
+                + "    * If the switch command is called without any parameters, the view that" + ENDLINE
+                + "    * is switched to will depend on the current view." + ENDLINE
+                + "(PATIENT_INFO --> MEDICAL_STAFF_INFO --> SCHEDULER --> PATIENT_INFO)" + ENDLINE
+                + "Expected Output:" + ENDLINE
+                + "[VIEW_TYPE_ASCI_TEXT_BANNER]" + ENDLINE + ENDLINE
+                + "View has been switched to [VIEW_TYPE]";
+    }
+
+    /**
      * Prints information about exit command.
      *
-     * @return the information on exot command.
+     * @return the information on exit command.
      */
     public String getExitHelpMessage() {
         return "Exits the program." + ENDLINE + "Format: exit" + ENDLINE;
@@ -344,4 +401,6 @@ public class Ui {
 
         System.out.println("View has been switched to " + viewType);
     }
+
+
 }
