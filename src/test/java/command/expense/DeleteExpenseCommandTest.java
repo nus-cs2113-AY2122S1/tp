@@ -23,7 +23,7 @@ public class DeleteExpenseCommandTest {
         Expense expense = new Expense("Eat Lunch", 10.99, "21-Nov-2021");
         ExpenseList.addExpense(expense);
         CommandLine cmd = CommandLineFactory.getCmd();
-        int exitCode = cmd.execute("expense", "delete", "-i 1");
+        int exitCode = cmd.execute("expense", "delete", "-i=1");
         assertEquals(0, exitCode);
     }
 }
