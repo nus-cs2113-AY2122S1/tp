@@ -26,6 +26,8 @@ public class Messages {
     public static final String ERROR_MESSAGE_INVALID_TIME_FORMAT = ERROR_MESSAGE_TAG + "Invalid time format %s.";
     public static final String ERROR_MESSAGE_INVALID_LINK = ERROR_MESSAGE_TAG + "Invalid link %s.";
     public static final String ERROR_MESSAGE_INVALID_DAY = ERROR_MESSAGE_TAG + "Invalid day %s.";
+    public static final String ERROR_MESSAGE_INVALID_DURATION = ERROR_MESSAGE_TAG + "Invalid duration %d.";
+    public static final String ERROR_MESSAGE_SCHEDULE_OVERFLOW = ERROR_MESSAGE_TAG + "Please set schedule on a separate day.";
     public static final String ERROR_MESSAGE_DUPLICATE_NAME = ERROR_MESSAGE_TAG + "Duplicate name found.";
 
     public static final String ERROR_FILE_TOO_LARGE = "Unable to read large files.";
