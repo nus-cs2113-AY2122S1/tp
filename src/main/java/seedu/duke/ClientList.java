@@ -21,11 +21,10 @@ public class ClientList {
      * Main method for adding a client.
      *
      * @param client the client to-be-added
-     * @param ui     user interface of TourPlanner
      */
     public void add(Client client) {
+        clientCount++;
         clients.add(client);
-        ui.showAddClient(client);
     }
 
     /**

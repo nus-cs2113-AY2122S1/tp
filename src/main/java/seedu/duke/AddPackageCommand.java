@@ -1,5 +1,7 @@
 package seedu.duke;
 
+import java.util.Arrays;
+
 public class AddPackageCommand extends Command {
     private ClientPackage clientPackage;
     private String[] rawClientPackage;
@@ -30,7 +32,7 @@ public class AddPackageCommand extends Command {
     }
 
     private Tour extractTour(String tourCode) {
-        return tours.getTour(tourCode);
+        return tours.getTourByCode(tourCode);
     }
 
     private Flight extractFlight(String flightId) {

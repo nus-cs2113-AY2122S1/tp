@@ -13,12 +13,11 @@ public class ClientPackage {
 
     @Override
     public String toString() {
-        return "Client Package:\n\n" +
-                "Client: " + "\n" +
-                client + "\n\n" +
-                "Tour: " + "\n" +
-                tour + "\n\n" +
-                "Flight: " + "\n" +
-                flight + "\n";
+        return "Client: " + "\n"
+                + client + "\n\n"
+                + "Tour: " + "\n"
+                + tour + "\n\n"
+                + "Flight: " + "\n"
+                + flight + "\n";
     }
 }
