@@ -294,6 +294,14 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public void printModuleDeleted(Module module, int size) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Ok. The following module has been deleted:");
+        System.out.println(PADDING + "  " + module);
+        System.out.println(PADDING + "Now you have " + size + " module(s) in the list.");
+        System.out.println(LINE);
+    }
+
     /**
      * Displays the list of modules with only the basic module information.
      *

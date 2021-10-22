@@ -4,6 +4,7 @@ import seedu.duke.commons.core.CommandType;
 import seedu.duke.commons.core.Messages;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.logic.commands.lesson.DeleteLessonCommand;
+import seedu.duke.logic.commands.module.DeleteModuleCommand;
 import seedu.duke.logic.commands.task.DeleteTaskCommand;
 import seedu.duke.logic.parser.exceptions.ParseException;
 
@@ -23,6 +24,9 @@ public class DeleteCommandParser {
         case TASK:
             simplifiedUserResponse = removeFirstParam(userResponse, "task");
             return parseDeleteTaskCommand(simplifiedUserResponse);
+        case MODULE:
+            simplifiedUserResponse = removeFirstParam(userResponse, "module");
+            return parseDeleteModuleCommand(simplifiedUserResponse);
         case INVALID:
             // Fallthrough
         default:
@@ -43,6 +47,15 @@ public class DeleteCommandParser {
         try {
             int taskIndex = parseToZeroIndex(Integer.parseInt(userResponse));
             return new DeleteTaskCommand(taskIndex);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.ERROR_INVALID_NUMBER);
+        }
+    }
+
+    private static Command parseDeleteModuleCommand(String userResponse) throws ParseException {
+        try {
+            int moduleIndex = parseToZeroIndex(Integer.parseInt(userResponse));
+            return new DeleteModuleCommand(moduleIndex);
         } catch (NumberFormatException e) {
             throw new ParseException(Messages.ERROR_INVALID_NUMBER);
         }
