@@ -18,6 +18,7 @@ import java.util.Scanner;
 public class Ui {
     private static final int TABLE_PADDING = 2;
     private static final int DESCRIPTION_MAX_WIDTH = 45;
+    private static final int HELP_MAX_WIDTH = 90;
     private static Ui ui = null;
     private static Scanner scanner;
 
@@ -150,10 +151,10 @@ public class Ui {
                 quantityWidth = Math.max(("PENDING: " + orderQuantity).length(), quantityWidth);
             }
             expiryWidth = Math.max(DateParser.dateToString(stock.getExpiry()).length(), expiryWidth);
-            descriptionWidth = Math.min(Math.max(stock.getDescription().length(), descriptionWidth),
-                    DESCRIPTION_MAX_WIDTH);
+            descriptionWidth = Math.max(stock.getDescription().length(), descriptionWidth);
             maxQuantityWidth = Math.max(String.valueOf(stock.getMaxQuantity()).length(), maxQuantityWidth);
         }
+        descriptionWidth = Math.min(descriptionWidth, DESCRIPTION_MAX_WIDTH);
 
         int[] columnWidths = {idWidth, nameWidth, priceWidth, quantityWidth, expiryWidth, descriptionWidth,
                 maxQuantityWidth};
@@ -180,7 +181,7 @@ public class Ui {
 
         for (Stock stock : stocks) {
             String description = stock.getDescription();
-            String truncatedDescription = truncateDescription(description, 0);
+            String truncatedDescription = truncateDescription(description, 0, DESCRIPTION_MAX_WIDTH);
             int orderQuantity = OrderManager.getTotalOrderQuantity(medicines, stock.getMedicineName());
             int descriptionIndex = truncatedDescription.length();
 
@@ -195,7 +196,7 @@ public class Ui {
                     String.valueOf(stock.getMaxQuantity())));
 
             while (descriptionIndex < description.length() || orderQuantity != 0) {
-                truncatedDescription = truncateDescription(description, descriptionIndex);
+                truncatedDescription = truncateDescription(description, descriptionIndex, DESCRIPTION_MAX_WIDTH);
                 descriptionIndex += truncatedDescription.length();
 
                 row += "\n" + String.format(idFormat, "") + String.format(nameFormat, "")
@@ -212,15 +213,16 @@ public class Ui {
     }
 
     /**
-     * Helps to truncate the description of the Stock and ensure that it does not break a word in the middle.
+     * Helps to truncate the description of a table column and ensure that it does not break a word in the middle.
      * It will ensure that the truncated description returned contains valid words.
      *
-     * @param description   Description of the Stock.
+     * @param description   Description value in the column.
      * @param startingIndex The starting index to truncate the description.
+     * @param maxWidth The maximum number of characters allowed per row.
      */
-    private String truncateDescription(String description, int startingIndex) {
+    private String truncateDescription(String description, int startingIndex, int maxWidth) {
         String truncatedDescription = "";
-        int descriptionIndex = Math.min(description.length(), startingIndex + DESCRIPTION_MAX_WIDTH);
+        int descriptionIndex = Math.min(description.length(), startingIndex + maxWidth);
         truncatedDescription = description.substring(startingIndex, descriptionIndex);
 
         String[] descriptionSplit = truncatedDescription.split("\\s"); // Split by spaces
@@ -289,6 +291,7 @@ public class Ui {
             commandWidth = Math.max(commandWidth, commandSyntax.getCommandName().length());
             commandSyntaxWidth = Math.max(commandSyntaxWidth, commandSyntax.getCommandSyntax().length());
         }
+        commandSyntaxWidth = Math.min(commandSyntaxWidth, HELP_MAX_WIDTH);
         int[] columnWidths = {commandWidth, commandSyntaxWidth};
 
         String commandFormat = "| %1$-" + commandWidth + "s | ";
@@ -311,9 +314,22 @@ public class Ui {
         printHeaderBorder(columnWidths);
 
         for (CommandSyntax commandSyntax : commandSyntaxes) {
+            String commandSyntaxString = commandSyntax.getCommandSyntax();
+            int currentIndex = 0;
+            String truncatedCommandSyntax = truncateDescription(commandSyntaxString, currentIndex, HELP_MAX_WIDTH);
+            currentIndex += truncatedCommandSyntax.length();
             String row = String.format(commandFormat, centerString(commandWidth, commandSyntax.getCommandName()))
-                    + String.format(commandSyntaxFormat, commandSyntax.getCommandSyntax());
+                    + String.format(commandSyntaxFormat, truncatedCommandSyntax);
             System.out.println(row);
+            // Truncate the help command syntax
+            while (currentIndex < commandSyntaxString.length()) {
+                truncatedCommandSyntax = truncateDescription(commandSyntaxString, currentIndex, HELP_MAX_WIDTH);
+                row = String.format(commandFormat, centerString(commandWidth, ""))
+                        + String.format(commandSyntaxFormat, truncatedCommandSyntax);
+                System.out.println(row);
+                currentIndex += truncatedCommandSyntax.length();
+            }
+
             printRowBorder(columnWidths);
         }
         System.out.println("For more information, refer to User Guide: https://ay2122s1-cs2113t-t10-1.github.io/tp/");
