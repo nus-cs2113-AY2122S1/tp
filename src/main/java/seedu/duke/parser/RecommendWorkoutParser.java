@@ -14,8 +14,8 @@ public class RecommendWorkoutParser extends Parser {
     }
 
     private boolean isIncorrectParam(String workoutLevel) {
-        return !workoutLevel.contains("beginner") | !workoutLevel.contains("intermediate") |
-                !workoutLevel.contains("pro");
+        return !workoutLevel.contains("beginner") | !workoutLevel.contains("intermediate")
+                | !workoutLevel.contains("pro");
     }
 
     private Command prepareRecommendWorkout(String commandArgs) {

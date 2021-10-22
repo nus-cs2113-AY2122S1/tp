@@ -102,7 +102,7 @@ public class Ui {
         }
     }
 
-    private AsciiTable getExerciseTable(Map.Entry<String, ArrayList<?>> m) {
+    public AsciiTable getExerciseTable(Map.Entry<String, ArrayList<?>> m) {
         AsciiTable at = new AsciiTable();
         at.addRule();
         String[] columnNames = {"Index", "Exercise name", "Sets", "Reps"};
@@ -124,7 +124,7 @@ public class Ui {
         return at;
     }
 
-    private void printExerciseTable(Map<String, ArrayList<?>> map) {
+    public void printExerciseTable(Map<String, ArrayList<?>> map) {
         assert map != null;
         assert !map.isEmpty();
 

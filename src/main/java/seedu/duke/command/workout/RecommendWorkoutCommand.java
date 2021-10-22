@@ -26,7 +26,7 @@ public class RecommendWorkoutCommand extends Command {
             + "Example: " + COMMAND_WORD + " beginner";
     private static final Logger LOGGER = Logger.getLogger(RecommendWorkoutCommand.class.getName());
     private final String workoutLevel;
-    
+
     /**
      * Instantiates object and sets parameters for recommending workouts based on workout difficulty.
      *
@@ -87,6 +87,11 @@ public class RecommendWorkoutCommand extends Command {
         return abExercises;
     }
 
+    /**
+     * To create a map of list of beginner exercises for arms and abs.
+     *
+     * @return map of the lists of exercises under a certain muscle group.
+     */
     private Map<String, ArrayList<?>> getBeginnerWorkout() {
         Map<String, ArrayList<?>> map = new HashMap<>();
         ArrayList<Exercise> armExercises = getBeginnerArmWorkout();
@@ -116,6 +121,11 @@ public class RecommendWorkoutCommand extends Command {
         return glutesExercises;
     }
 
+    /**
+     * To create map of list of intermediate exercises for shoulders and glutes.
+     *
+     * @return map of the lists of exercises under a certain muscle group.
+     */
     private Map<String, ArrayList<?>> getIntermediateWorkout() {
         Map<String, ArrayList<?>> map = new HashMap<>();
 
@@ -155,6 +165,11 @@ public class RecommendWorkoutCommand extends Command {
         return legExercises;
     }
 
+    /**
+     * To create map of list of pro exercises for push(chest and triceps), pull(back and biceps) and legs.
+     *
+     * @return map of the lists of exercises under a certain muscle group.
+     */
     private Map<String, ArrayList<?>> getProWorkout() {
         Map<String, ArrayList<?>> map = new HashMap<>();
 
@@ -169,4 +184,5 @@ public class RecommendWorkoutCommand extends Command {
 
         return map;
     }
+
 }
