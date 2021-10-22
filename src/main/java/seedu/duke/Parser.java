@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import java.util.*;
+import java.util;
 
 /**
  * Sense-makes the inputs given and distributes the information to other parts of the program.
@@ -44,10 +44,7 @@ public class Parser {
 //                throw new TourPlannerException(ERROR_INVALID_CLIENT_INDEX);
 //            }
         case "list":
-            if (!params.equals("")) {
-                throw new TourPlannerException(ERROR_EXTRA_INPUT);
-            }
-            return new ListCommand();
+            return parseList(params);
         case "clear":
             if (!params.equals("")) {
                 throw new TourPlannerException(ERROR_EXTRA_INPUT);
@@ -138,7 +135,8 @@ public class Parser {
      * @return the array containing client's information in a sorted fashion
      * @throws TourPlannerException if there are duplicate prefixes found
      */
-    private static ArrayList<String> extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes, String argString, String identifier)
+    private static ArrayList<String> extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes, 
+                                                            String argString, String identifier)
             throws TourPlannerException {
         ArrayList<String> extractedValues = new ArrayList<>();
         initialiseArrayList(extractedValues);
@@ -194,12 +192,13 @@ public class Parser {
         return value;
     }
 
-    /**
+     /**
      * Obtains array index that corresponds to the prefix given.
      *
      * @param prefix prefix of value extracted
      * @return array index of values according to prefix
      */
+
     private static int obtainArrayIndex(String prefix, String identifier) {
         int index = 0;
         switch (identifier) {
@@ -340,6 +339,24 @@ public class Parser {
             return new AddTourCommand(tour);
         case "-p":
             return new AddPackageCommand(values);
+        default:
+            break;
+        }
+        return null;
+    }
+
+    private static Command parseList(String params) throws TourPlannerException {
+        switch (params) {
+        case "-c":
+            return new ListClientCommand();
+        case "-t":
+            return new ListTourCommand();
+        case "-f":
+            return new ListFlightCommand();
+        case "-p":
+            return new ListPackageCommand();
+        default:
+            break;
         }
         return null;
     }

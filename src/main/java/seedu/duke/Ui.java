@@ -6,15 +6,15 @@ import java.util.Scanner;
  * Text UI of the application.
  */
 public class Ui {
+    private static final String ADD_MESSAGE = " has been added:";
+    private static final String LIST_NO_MESSAGE = "I'm sorry, there seems to be no ";
+    private static final String LIST_MESSAGE = "Here is a list of all ";
 
+
+    private static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
     private static final String CLEAR_MESSAGE = "All clients have been deleted";
     private static final String CUT_MESSAGE = "Client has been deleted:";
-    private static final String ADD_MESSAGE = "Client has been added:";
-    private static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
 
-    private static final String ADD_TOUR_MESSAGE = "A new tour has been added:";
-    private static final String LIST_NO_TOURS_MESSAGE = "I'm sorry, there seems to be no tours.";
-    private static final String LIST_TOUR_MESSAGE = "Here is a list of all tours:";
     private static final String FIND_NO_TOURS_MESSAGE = "I'm sorry, there seems no tour that has the code ";
     private static final String FIND_TOUR_MESSAGE = "This is the tour that matches your search";
     private static final String SORT_TOUR_ALPHA_MESSAGE = "Sorted by code alphabetically";
@@ -93,12 +93,23 @@ public class Ui {
      *
      * @param client the client that was just added
      */
+
+    //Client Functions
     public void showAddClient(Client client) {
-        show(ADD_MESSAGE + "\n" + client);
+        show("Client" + ADD_MESSAGE + "\n" + client);
     }
 
-    public void showAddFlight(Flight flight) {
-        show(ADD_MESSAGE + "\n" + flight);
+    public void showListClient(ClientList clients) {
+        int count = clients.getClientCount();
+        if (count == 0) {
+            System.out.println(LIST_NO_MESSAGE + "clients");
+            return;
+        }
+        System.out.println(LIST_MESSAGE + "clients:");
+        for (int i = 1; i <= count; i++) {
+            Client currClient = clients.getClient(i - 1);
+            System.out.println(i + ". " + "\n" + currClient);
+        }
     }
 
     public void showAddTour(Tour tour) {
@@ -115,16 +126,16 @@ public class Ui {
 
     //Tour Functions
     public void showAddTour(Tour tour) {
-        show(ADD_TOUR_MESSAGE + "\n" + tour);
+        show("Tour" + ADD_MESSAGE + "\n" + tour);
     }
 
-    public void showListTour(TourList tours){
+    public void showListTour(TourList tours) {
         int count = tours.getTourCount();
         if (count == 0) {
-            System.out.println(LIST_NO_TOURS_MESSAGE);
+            System.out.println(LIST_NO_MESSAGE + "tours");
             return;
         }
-        System.out.println(LIST_TOUR_MESSAGE);
+        System.out.println(LIST_MESSAGE + "tours:");
         for (int i = 1; i <= count; i++) {
             Tour currTour = tours.getTourByIndex(i - 1);
             System.out.println(i + ". " + "\n" + currTour);
@@ -164,6 +175,24 @@ public class Ui {
                     break;
                 }
             }
+        }
+    }
+
+    //Flight Functions
+    public void showAddFlight(Flight flight) {
+        show("Flight " + ADD_MESSAGE + "\n" + flight);
+    }
+
+    public void showListFlight(FlightList flights) {
+        int count = flights.getFlightCount();
+        if (count == 0) {
+            System.out.println(LIST_NO_MESSAGE + "flights");
+            return;
+        }
+        System.out.println(LIST_MESSAGE + "flights:");
+        for (int i = 1; i <= count; i++) {
+            Flight currFlight = flights.getFlight(i - 1);
+            System.out.println(i + ". " + "\n" + currFlight);
         }
     }
 

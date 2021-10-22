@@ -46,8 +46,8 @@ public class Client {
     @Override
     public String toString() {
 
-        return "Client's name: " + name + System.lineSeparator()
-                + "Client's contactNum: " + contactNum + System.lineSeparator()
-                + "Client's email: " + email;
+        return "Name: " + name + System.lineSeparator()
+                + "Contact Number: " + contactNum + System.lineSeparator()
+                + "Email: " + email;
     }
 }
