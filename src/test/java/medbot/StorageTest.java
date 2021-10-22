@@ -1,6 +1,6 @@
 package medbot;
 
-import static medbot.Parser.updatePersonalInformation;
+import static medbot.parser.ParserUtils.updatePersonalInformation;
 
 import medbot.exceptions.MedBotException;
 import medbot.list.PatientList;

@@ -1,6 +1,6 @@
 package medbot.command;
 
-import medbot.Parser;
+import medbot.parser.Parser;
 import medbot.Scheduler;
 import medbot.Ui;
 import medbot.utilities.ViewType;

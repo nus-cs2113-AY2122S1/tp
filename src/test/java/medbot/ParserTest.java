@@ -22,6 +22,8 @@ import medbot.command.personcommand.staffcommand.ListStaffCommand;
 import medbot.command.personcommand.staffcommand.ViewStaffCommand;
 
 import medbot.exceptions.MedBotParserException;
+import medbot.parser.Parser;
+import medbot.parser.ParserUtils;
 import medbot.person.Patient;
 import medbot.person.Person;
 import medbot.utilities.ViewType;
@@ -55,7 +57,7 @@ class ParserTest {
                 {"johntan@example", "Incorrect email address format." + END_LINE}
         };
 
-        Method method = Parser.class.getDeclaredMethod("parseEmailAddress", String.class);
+        Method method = ParserUtils.class.getDeclaredMethod("parseEmailAddress", String.class);
         method.setAccessible(true);
 
         for (String[] testEmail : testEmails) {
@@ -79,7 +81,7 @@ class ParserTest {
                 {"8123456A", "Phone number contains unexpected characters." + END_LINE},
         };
 
-        Method method = Parser.class.getDeclaredMethod("parsePhoneNumber", String.class);
+        Method method = ParserUtils.class.getDeclaredMethod("parsePhoneNumber", String.class);
         method.setAccessible(true);
 
 
@@ -94,7 +96,7 @@ class ParserTest {
 
     @Test
     public void testParseName() throws Exception {
-        Method method = Parser.class.getDeclaredMethod("parseName", String.class);
+        Method method = ParserUtils.class.getDeclaredMethod("parseName", String.class);
         method.setAccessible(true);
         String[][] testNames = {
                 {"John Tan", "John Tan"},
@@ -115,7 +117,7 @@ class ParserTest {
 
     @Test
     public void testParseIcNumber() throws Exception {
-        Method method = Parser.class.getDeclaredMethod("parseIcNumber", String.class);
+        Method method = ParserUtils.class.getDeclaredMethod("parseIcNumber", String.class);
         method.setAccessible(true);
         String[][] testIcNumbers = {
                 {"S1234567A", "S1234567A"},
@@ -137,7 +139,7 @@ class ParserTest {
 
     @Test
     void testParseResidentialAddress() throws Exception {
-        Method method = Parser.class.getDeclaredMethod("parseResidentialAddress", String.class);
+        Method method = ParserUtils.class.getDeclaredMethod("parseResidentialAddress", String.class);
         method.setAccessible(true);
         String[][] testResidentialAddresses = {
                 {"12 Lower Kent Ridge", "12 Lower Kent Ridge"},
@@ -156,7 +158,7 @@ class ParserTest {
 
     @Test
     void testPreprocessMultiAttributeInput() throws Exception {
-        Method method = Parser.class.getDeclaredMethod("preprocessMultiAttributeInput", String.class);
+        Method method = ParserUtils.class.getDeclaredMethod("preprocessMultiAttributeInput", String.class);
         method.setAccessible(true);
         String[][] testInputStrings = {
                 {"add n/John Tan i/S8712345G e/john@gmail.com p/8123 4567 a/123 bishan st 24 #05-19",
@@ -175,7 +177,7 @@ class ParserTest {
 
     @Test
     void testUpdateMultiplePersonalInformation() throws Exception {
-        Method method = Parser.class.getDeclaredMethod("updateMultiplePersonalInformation", Person.class,
+        Method method = ParserUtils.class.getDeclaredMethod("updateMultiplePersonalInformation", Person.class,
                 String[].class);
         method.setAccessible(true);
         Patient patient = new Patient();
@@ -191,7 +193,7 @@ class ParserTest {
 
     @Test
     void testPreprocessInput() throws Exception {
-        Method method = Parser.class.getDeclaredMethod("preprocessInput", String.class);
+        Method method = ParserUtils.class.getDeclaredMethod("preprocessInput", String.class);
         method.setAccessible(true);
         String[][] testInputStrings = {
                 {"  add n/John Tan   ", "add n/John Tan"},
@@ -205,8 +207,8 @@ class ParserTest {
     }
 
     @Test
-    void testParsePersonId() throws Exception {
-        Method method = Parser.class.getDeclaredMethod("parseId", String.class);
+    void testParseId() throws Exception {
+        Method method = ParserUtils.class.getDeclaredMethod("parseId", String.class);
         method.setAccessible(true);
         HashMap<String, Integer> testCases = new HashMap<>();
         testCases.put("5", 5);
@@ -234,7 +236,7 @@ class ParserTest {
 
     @Test
     void testGetParameters() throws Exception {
-        Method method = Parser.class.getDeclaredMethod("getParameters", String.class);
+        Method method = ParserUtils.class.getDeclaredMethod("getParameters", String.class);
         method.setAccessible(true);
         String[] resultParameters = {"n/John Tan ", "i/S8712345G ", "e/john_tan@gmail.com ", "p/8123 4567"};
         String[] inputCommands = {

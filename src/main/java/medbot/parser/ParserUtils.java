@@ -1,0 +1,382 @@
+package medbot.parser;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.function.Function;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import medbot.Appointment;
+import medbot.exceptions.MedBotParserException;
+import medbot.person.Person;
+
+public abstract class ParserUtils {
+    private static final String END_LINE = System.lineSeparator();
+    private static final String PARAMETER_NAME = "n/";
+    private static final String PARAMETER_PHONE = "p/";
+    private static final String PARAMETER_EMAIL = "e/";
+    private static final String PARAMETER_IC = "i/";
+    private static final String PARAMETER_ADDRESS = "a/";
+    private static final int PARAMETER_BUFFER = 2;
+    private static final String PARAMETER_APPOINTMENT_PATIENT_ID = "p/";
+    private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_1 = "m/";
+    private static final String PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_2 = "s/";
+    private static final String PARAMETER_APPOINTMENT_DATE_TIME_1 = "d/";
+    private static final String PARAMETER_APPOINTMENT_DATE_TIME_2 = "t/";
+    private static final String ERROR_NO_PARAMETER = "No parameters given" + END_LINE;
+    private static final String ERROR_ID_NOT_SPECIFIED = "ID not specified or not a number." + END_LINE;
+    private static final String ERROR_NAME_NOT_SPECIFIED = "Name not specified." + END_LINE;
+    private static final String ERROR_IC_NUMBER_NOT_SPECIFIED = "IC number not specified." + END_LINE;
+    private static final String ERROR_IC_NUMBER_INCORRECT_FORMAT = "Incorrect IC number format." + END_LINE;
+    private static final String ERROR_PHONE_NUMBER_NOT_SPECIFIED = "Phone number not specified." + END_LINE;
+    private static final String ERROR_PHONE_NUMBER_TOO_FEW_DIGITS = "Phone number has too few digits." + END_LINE;
+    private static final String ERROR_PHONE_NUMBER_TOO_MANY_DIGITS = "Phone number has too many digits." + END_LINE;
+    private static final String ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS =
+            "Phone number contains unexpected characters." + END_LINE;
+    private static final String ERROR_EMAIL_ADDRESS_NOT_SPECIFIED = "Email address not specified." + END_LINE;
+    private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "Incorrect email address format." + END_LINE;
+    private static final String ERROR_ADDRESS_NOT_SPECIFIED = "Address not specified." + END_LINE;
+    private static final String REGEX_VERTICAL_LINE = "\\|";
+    private static final String REGEX_INPUT_PARAMETER = " [a-zA-Z]{1,2}/";
+    private static final String REGEX_EMAIL = "(([a-zA-Z0-9][\\w-.]*[a-zA-Z0-9])|[a-zA-Z0-9])@([\\w]+\\.)+[\\w]+";
+    private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
+    private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
+    private static final String REGEX_PHONE_NUMBER_SEPARATOR = "[- _+()]";
+    private static final String REGEX_PERSON_ID = "([0-9]+$)|([0-9]+ )";
+    private static final String REGEX_CAPITALISE_POSITION = "(\\A|[ _-])[a-z]";
+    private static final String VERTICAL_LINE = "|";
+    private static final String SEPARATOR_SPACE = " ";
+    private static final String EMPTY_STRING = "";
+    private static final String DATE_TIME_FORMATTER_PATTERN = "dd/MM/yy HH00";
+    private static final ZoneOffset zoneOffset = ZoneOffset.ofHours(8);
+
+    /**
+     * Parses attributeStrings array and modifies all the corresponding attribute in appointment.
+     *
+     * @param appointment      Appointment whose information will be updated
+     * @param attributeStrings String Array containing Strings of an attribute specifier and the corresponding
+     *                         appointment information
+     * @throws MedBotParserException if the attributeString contains missing/invalid information
+     */
+    static void updateMultipleAppointmentInformation(Appointment appointment, String[] attributeStrings)
+            throws MedBotParserException {
+        for (String attributeString : attributeStrings) {
+            updateAppointmentInformation(appointment, attributeString);
+        }
+    }
+
+    /**
+     * Parses attributeString and modifies the corresponding attribute in appointment.
+     *
+     * @param appointment     Appointment whose information will be updated
+     * @param attributeString String containing an attribute specifier and the corresponding appointment information
+     * @throws MedBotParserException if the attributeString contains missing/invalid information
+     */
+    private static void updateAppointmentInformation(Appointment appointment, String attributeString)
+            throws MedBotParserException {
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_PATIENT_ID)) {
+            int patientId = parseId(attributeString.substring(PARAMETER_BUFFER));
+            appointment.setPatientId(patientId);
+            return;
+        }
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_1)
+                || attributeString.startsWith(PARAMETER_APPOINTMENT_MEDICAL_STAFF_ID_2)) {
+            int medicalStaffId = parseId(attributeString.substring(PARAMETER_BUFFER));
+            appointment.setMedicalStaffId(medicalStaffId);
+            return;
+        }
+        if (attributeString.startsWith(PARAMETER_APPOINTMENT_DATE_TIME_1)
+                || attributeString.startsWith(PARAMETER_APPOINTMENT_DATE_TIME_2)) {
+            int dateTimeCode = parseDateTime(attributeString.substring(PARAMETER_BUFFER).strip());
+            appointment.setDateTimeCode(dateTimeCode);
+        }
+    }
+
+    /**
+     * Parses user input and separates it into a list of Strings containing the given parameters.
+     *
+     * @param userInput String containing the full user input.
+     * @return list of parameters given by user.
+     * @throws MedBotParserException when no parameters are specified.
+     */
+    static String[] getParameters(String userInput) throws MedBotParserException {
+        String processedInput = preprocessMultiAttributeInput(userInput);
+        String[] words = processedInput.split(REGEX_VERTICAL_LINE);
+        if (words.length == 1) {
+            throw new MedBotParserException(ERROR_NO_PARAMETER);
+        }
+        assert words.length > 1;
+        String[] parameters = Arrays.copyOfRange(words, 1, words.length);
+        assert parameters.length >= 1;
+        return parameters;
+    }
+
+    /**
+     * Preprocesses user input to remove invalid substring that can not be parsed.
+     *
+     * @param userInput The initial user input.
+     * @return user input without leading white space and vertical lines present.
+     */
+    static String preprocessInput(String userInput) {
+        return userInput.strip().replace(VERTICAL_LINE, EMPTY_STRING);
+    }
+
+    /**
+     * Parses attributeStrings array and modifies all the corresponding attribute in person.
+     *
+     * @param person           Person whose personal information will be updated
+     * @param attributeStrings String Array containing Strings of an attribute specifier and the corresponding
+     *                         personal information
+     * @throws MedBotParserException if the attributeString contains missing/invalid information
+     */
+    static void updateMultiplePersonalInformation(Person person, String[] attributeStrings)
+            throws MedBotParserException {
+        for (String attributeString : attributeStrings) {
+            updatePersonalInformation(person, attributeString);
+        }
+    }
+
+    /**
+     * Parses attributeString and modifies the corresponding attribute in person.
+     *
+     * @param person          Person whose personal information will be updated
+     * @param attributeString String containing an attribute specifier and the corresponding personal information
+     * @throws MedBotParserException if the attributeString contains missing/invalid information
+     */
+    public static void updatePersonalInformation(Person person, String attributeString) throws MedBotParserException {
+        if (attributeString.startsWith(PARAMETER_NAME)) {
+            String name = parseName(attributeString.substring(PARAMETER_BUFFER));
+            person.setName(name);
+            return;
+        }
+        if (attributeString.startsWith(PARAMETER_PHONE)) {
+            String phoneNumber = parsePhoneNumber(attributeString.substring(PARAMETER_BUFFER));
+            person.setPhoneNumber(phoneNumber);
+            return;
+        }
+        if (attributeString.startsWith(PARAMETER_EMAIL)) {
+            String email = parseEmailAddress(attributeString.substring(PARAMETER_BUFFER));
+            person.setEmailAddress(email);
+            return;
+        }
+        if (attributeString.startsWith(PARAMETER_IC)) {
+            String icNumber = parseIcNumber(attributeString.substring(PARAMETER_BUFFER));
+            person.setIcNumber(icNumber);
+            return;
+        }
+        if (attributeString.startsWith(PARAMETER_ADDRESS)) {
+            String address = parseResidentialAddress(attributeString.substring(PARAMETER_BUFFER));
+            person.setResidentialAddress(address);
+        }
+    }
+
+    /**
+     * Returns a String containing the names specified in attributeString, with each name capitalised.
+     *
+     * @param attributeString String containing the name to be parsed
+     * @return String containing the name specified in attributeString
+     * @throws MedBotParserException if no name is given
+     */
+    private static String parseName(String attributeString) throws MedBotParserException {
+        try {
+            String name = attributeString.strip();
+            if (name.equals(EMPTY_STRING)) {
+                throw new MedBotParserException(ERROR_NAME_NOT_SPECIFIED);
+            }
+            return capitaliseEachWord(name);
+        } catch (IndexOutOfBoundsException ie) {
+            throw new MedBotParserException(ERROR_NAME_NOT_SPECIFIED);
+        }
+    }
+
+    /**
+     * Returns a String containing the IC number specified in attributeString.
+     *
+     * <p>Checks if the resultant String is of the right IC number format
+     *
+     * @param attributeString String containing the IC number to be parsed
+     * @return String containing the IC number specified in attributeString
+     * @throws MedBotParserException if IC number is not specified, or is in the wrong format
+     */
+    private static String parseIcNumber(String attributeString) throws MedBotParserException {
+        try {
+            String icString = attributeString.toUpperCase().strip();
+            if (icString.equals(EMPTY_STRING)) {
+                throw new MedBotParserException(ERROR_IC_NUMBER_NOT_SPECIFIED);
+            }
+            if (!icString.matches(REGEX_IC)) {
+                throw new MedBotParserException(ERROR_IC_NUMBER_INCORRECT_FORMAT);
+            }
+            assert icString.length() == 9;
+            return icString;
+        } catch (IndexOutOfBoundsException ie) {
+            throw new MedBotParserException(ERROR_IC_NUMBER_NOT_SPECIFIED);
+        }
+    }
+
+    /**
+     * Returns a String containing the phone number specified in attributeString.
+     *
+     * <p>Removes special characters "- _+()" and checks if the length of the resultant String is 8
+     *
+     * @param attributeString String containing the phone number to be parsed
+     * @return String containing the phone number specified in attributeString
+     * @throws MedBotParserException if the phone number is not specified,
+     *                               has too many/few digits or contains unexpected characters
+     */
+    private static String parsePhoneNumber(String attributeString) throws MedBotParserException {
+        try {
+            String numberString = attributeString.replaceAll(REGEX_PHONE_NUMBER_SEPARATOR, EMPTY_STRING).strip();
+            if (numberString.equals(EMPTY_STRING)) {
+                throw new MedBotParserException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
+            }
+            if (numberString.length() > 8) {
+                throw new MedBotParserException(ERROR_PHONE_NUMBER_TOO_MANY_DIGITS);
+            }
+            if (numberString.length() < 8) {
+                throw new MedBotParserException(ERROR_PHONE_NUMBER_TOO_FEW_DIGITS);
+            }
+            if (!numberString.matches(REGEX_PHONE_NUMBER)) {
+                throw new MedBotParserException(ERROR_PHONE_NUMBER_UNEXPECTED_CHARACTERS);
+            }
+            return numberString;
+        } catch (IndexOutOfBoundsException ie) {
+            throw new MedBotParserException(ERROR_PHONE_NUMBER_NOT_SPECIFIED);
+        }
+    }
+
+    /**
+     * Returns a String containing the email address specified in attributeString.
+     *
+     * <p>Checks if the resultant String is of the right email format
+     *
+     * @param attributeString String containing the email address to be parsed
+     * @return String containing the email address specified in attributeString
+     * @throws MedBotParserException if the email address is not specified or is in the wrong format
+     */
+    private static String parseEmailAddress(String attributeString) throws MedBotParserException {
+        try {
+            String emailString = attributeString.strip();
+            if (emailString.equals(EMPTY_STRING)) {
+                throw new MedBotParserException(ERROR_EMAIL_ADDRESS_NOT_SPECIFIED);
+            }
+            if (!emailString.matches(REGEX_EMAIL)) {
+                throw new MedBotParserException(ERROR_EMAIL_ADDRESS_WRONG_FORMAT);
+            }
+            return emailString;
+        } catch (IndexOutOfBoundsException ie) {
+            throw new MedBotParserException(ERROR_EMAIL_ADDRESS_NOT_SPECIFIED);
+        }
+    }
+
+    /**
+     * Returns the String containing the address specified in attributeString, with each word capitalised.
+     *
+     * <p>Capitalises each word in the address
+     *
+     * @param attributeString String containing the address to be parsed
+     * @return String containing the address specified in attributeString
+     * @throws MedBotParserException if address is not specified
+     */
+    private static String parseResidentialAddress(String attributeString) throws MedBotParserException {
+        try {
+            String addressString = attributeString.strip();
+            if (addressString.equals(EMPTY_STRING)) {
+                throw new MedBotParserException(ERROR_ADDRESS_NOT_SPECIFIED);
+            }
+            return capitaliseEachWord(addressString);
+        } catch (IndexOutOfBoundsException ie) {
+            throw new MedBotParserException(ERROR_ADDRESS_NOT_SPECIFIED);
+        }
+    }
+
+    /**
+     * Reads a String and returns the integer at the start of the String.
+     *
+     * <p>Finds an integer at the start of the String that is immediately followed by a space character or the
+     * end of the String. Returns that integer.
+     *
+     * @param string String that starts with an integer
+     * @return integer that was found
+     * @throws MedBotParserException if no integer is found
+     */
+    static int parseId(String string) throws MedBotParserException {
+        string = string.strip();
+        if (string.equals(EMPTY_STRING)) {
+            throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+        }
+        Pattern pattern = Pattern.compile(REGEX_PERSON_ID);
+        Matcher matcher = pattern.matcher(string);
+        if (matcher.lookingAt()) {
+            int id;
+            try {
+                id = Integer.parseInt(matcher.group().stripTrailing());
+            } catch (NumberFormatException ne) {
+                //matched substring should only consist of [0-9], exception should not be thrown by parseInt method
+                assert false;
+                throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+            }
+            return id;
+        }
+        throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
+    }
+
+    /**
+     * Sets the first letter of each word of each word to uppercase and sets all others to lowercase.
+     *
+     * <p>A letter is considered the first letter of a word if it is the first letter of the input String or
+     * is immediately after any of the characters " _-".
+     *
+     * @param input String which will be capitalised
+     * @return String with each word capitalised
+     */
+    private static String capitaliseEachWord(String input) {
+        input = input.toLowerCase();
+        Function<MatchResult, String> multiAttributeReplacementFunction = x -> {
+            String match = x.group();
+            if (match.length() == 1) {
+                //if substring is the first character of the string
+                return match.toUpperCase();
+            } else {
+                //if substring consists of one of the characters " _-" followed by a letter
+                return match.charAt(0) + match.substring(1).toUpperCase();
+            }
+        };
+        Pattern pattern = Pattern.compile(REGEX_CAPITALISE_POSITION);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.replaceAll(multiAttributeReplacementFunction);
+    }
+
+    /**
+     * Places a "|" separator before each attribute specifier in input and returns the resultant string.
+     *
+     * <p>Attribute specifiers are in the following formats "a/" or "ab/" where a and b can be any uppercase
+     * or lowercase alphabet.
+     *
+     * @param input userInput String containing attribute specifiers
+     * @return String containing added separator characters
+     */
+    private static String preprocessMultiAttributeInput(String input) {
+        //replacement function to add a "|" character before an attribute specifier
+        Function<MatchResult, String> replacementFunction = x ->
+                SEPARATOR_SPACE + VERTICAL_LINE + x.group().substring(1);
+        Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.replaceAll(replacementFunction);
+    }
+
+    /**
+     * Parses a String that corresponds to a date and time and returns the number of hours since Unix epoch that
+     * it corresponds to, rounded down.
+     *
+     * @param dateTimeString String corresponding to a date and time
+     * @return the number of hours since Unix epoch, rounded down to the nearest hour
+     */
+    private static int parseDateTime(String dateTimeString) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER_PATTERN);
+        LocalDateTime parsedDate = LocalDateTime.parse(dateTimeString, dateTimeFormatter);
+        return (int) (parsedDate.toEpochSecond(zoneOffset) / 60);
+    }
+}
