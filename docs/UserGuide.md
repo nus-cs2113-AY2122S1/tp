@@ -111,6 +111,8 @@ enable users to create, delete and view `modules` within TermiNUS.
 
 **Format:** `module`
 
+Enters the Module Management workspace.
+
 Example: `module`
 
 Expected Output:
@@ -206,17 +208,6 @@ enter the module workspace in Terminus.
 
 > 💡 The module mentioned here are the modules created within the **module management workspace**. Please refer to [Section: Module Management](#section-module-management) for more information.
 
-List of Module workspace commands:
-
-| Command      | Description |
-| ----------- | ----------- |
-|note|enter the note workspace|
-|schedule|enter the schedule workspace|
-|question|enter the question workspace|
-|help|view all commands and their usage within its module workspace|
-|back|escape and return to the default workspace|
-|exit|exit and closes TermiNUS|
-
 ### Accessing module workspace
 
 **Format:** `go <module code>`
@@ -243,77 +234,136 @@ Type any of the following to get started:
 [CS2113T] >>> 
 ```
 
+List of Module workspace commands:
+
+| Command      | Description |
+| ----------- | ----------- |
+|note|enter the note workspace|
+|schedule|enter the schedule workspace|
+|question|enter the question workspace|
+|help|view all commands and their usage within its module workspace|
+|back|escape and return to the default workspace|
+|exit|exit and closes TermiNUS|
+
 ---
 
 ## Section: Note
 
-### Accessing Note
+All commands related to the workspace `Note` will be displayed in these section. These commands
+enable users to create, delete and view `notes` within the module.
 
-**Format:** `note`  
-Accessing the note workspace After running the note command, you can see the following:
+### Accessing note workspace
+
+**Format:** `note`
+
+Enters the Note workspace.
+
+Example: `note`
+
+Expected Output:
 
 ```
-[] >>> note
-You have 0 note(s) inside this workspace 
+[CS2113T] >>> note
 
-Type any of  the following to get started: 
-> add 
+You have 0 note(s) inside this workspace.
+
+Type any of the following to get started:
+> add
 > exit
 > help
 > view
 > back
-> delete 
- 
-[note] >>> 
+> delete
+
+[CS2113T > note] >>> 
 ```
+
+List of Note workspace commands:
+
+| Command      | Description |
+| ----------- | ----------- |
+|add|add a note for the module|
+|delete|delete a note from the module|
+|view|view notes information from the module|
+|help|view all commands and their usage in the note workspace|
+|back|escape and return to the module workspace|
+|exit|exit and closes TermiNUS|
 
 ### Adding a Note
 
 **Format:** `add "<name>" "<content>"`  
-Adding a note when in the note workspace
+
+Adds a note when in the note workspace.
+
+> 💡 When executing this command, it will add the note into its module and creates a `.txt` file inside the module folder. The `.txt` file will be named after the newly added note name.
+
+> ❗ If there exists a file with the same name of the newly added note, all contents in that file will be overwritten.
+
+Example: `add "coding style" "switch case identation should be aligned."` 
+
+Expected Output:
 
 ```
-[note] >>> add “Remind Cabbin” “Cabbin was here” 
-Note has been added! 
-[note] >>> 
+[CS2113T > note] >>> add "coding style" "switch case identation should be aligned."
+Your note on 'coding style' has been added!
+[CS2113T > note] >>> 
 ```
 
-### Delete a Note
+### Deleting a Note
 
-**Format:** `delete <index>`  
-Deletes the specified note given by its index.
+**Format:** `delete <index>`
 
-```
-[note] >>> delete 1
-Note `Remind Cabbin` has been deleted!
-[note] >>> 
-```
+Deletes the specified note given by its **index** when in the note workspace.
 
-### View Note
+> ❗ When the specified note is being deleted, the file that stores the note will be deleted.
 
-**Format:** `view` or `view {index}`  
-Two ways to use this command simply running view or view [index]
-View by itself will list all notes
+Example: `delete 1`
+
+Expected Output:
 
 ```
-[note] >>> view 
-You have 3 notes inside: 
-1. Remind Cabbin 
-2. Name1 
-3. Name2 
-
-[note] >>> 
+[CS2113T > note] >>> delete 1
+Your note on 'coding style' has been deleted!
+[CS2113T > note] >>> 
 ```
 
-The second way to use view is with an index view [index]
+### Viewing note information
+
+**Format:** `view {index}`  
+
+Views a list of note in the module or views all information for that specific note.
+
+Two ways to use this command simply running view or view [index] View by itself will list all notes
+
+Example 1: `view`
+
+Expected Output 1:
 
 ```
-[note] >>> view 1 
-Name: Remind Cabbin 
-Content: Cabbin was here 
+[CS2113T > note] >>> view
+List of Content
+---------------
+1. coding style
+2. coding comments
 
-[note] >>> 
+Rerun the same command with an index behind to view the content.
+[CS2113T > note] >>> 
 ```
+
+Example 2: `view 1`
+
+Expected Output 2:
+
+```
+[CS2113T > note] >>> view 1
+Name: coding style
+Content:
+switch case identation should be aligned.
+
+[CS2113T > note] >>> 
+```
+
+---
 
 ## Section: Schedule
 
