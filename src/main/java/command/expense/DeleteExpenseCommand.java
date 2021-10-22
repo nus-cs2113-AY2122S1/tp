@@ -32,6 +32,7 @@ public class DeleteExpenseCommand implements Callable<Integer> {
             }
         } catch (Exception error) {
             ui.printMessage(deleteExpenseErrorMsg);
+            return 1;
         }
         return 0;
     }

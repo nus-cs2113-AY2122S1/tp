@@ -32,6 +32,7 @@ public class AddExpenseCommand implements Callable<Integer> {
 
         } catch (Exception error) {
             ui.printMessage(addExpenseErrorMsg);
+            return 1;
         }
         return 0;
     }

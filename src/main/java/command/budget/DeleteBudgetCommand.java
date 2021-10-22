@@ -19,6 +19,7 @@ public class DeleteBudgetCommand implements Callable<Integer> {
             BudgetManager.deleteBudget();
         } catch (Exception error) {
             ui.printMessage(deleteBudgetErrorMsg);
+            return 1;
         }
         return 0;
     }

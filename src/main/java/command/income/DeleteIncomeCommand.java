@@ -30,6 +30,7 @@ public class DeleteIncomeCommand implements Callable<Integer> {
             }
         } catch (Exception error) {
             ui.printMessage(deleteIncomeErrorMsg);
+            return 1;
         }
         return 0;
     }
