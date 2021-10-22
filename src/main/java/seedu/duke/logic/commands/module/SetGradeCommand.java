@@ -4,7 +4,6 @@ import seedu.duke.DukeException;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.LessonList;
 import seedu.duke.model.module.Grade;
-import seedu.duke.model.module.GradeType;
 import seedu.duke.model.module.Module;
 import seedu.duke.model.module.ModuleList;
 import seedu.duke.model.task.TaskList;
@@ -15,7 +14,6 @@ import java.io.IOException;
 
 public class SetGradeCommand extends Command {
     private int index;
-    private GradeType gradeType;
     private Grade grade;
 
     public SetGradeCommand(int index, Grade grade) {
