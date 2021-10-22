@@ -31,7 +31,7 @@
 - [Appendix B: User Stories ]()
 - [Appendix C: Non Functional Requirements]()
 - [Appendix D: Glossary]()
-- [Appendix E: Instructions for Manual Testing]()  
+- [Appendix E: Instructions for Manual Testing]()
 
 ## 1. Introduction
 
@@ -123,8 +123,8 @@ Import the coding style xml file into your IntelliJ IDEA.
     3. Once done, select `Apply` then `OK`.
 4. Now your IntelliJ IDEA should follow our Coding Style.
 
-> :bulb: IntelliJ IDEA have certain shortcut key to aid in auto-formatting of code. 
-> Once you are done with a piece of code, highlight the section you have just written and press the 
+> 💡 IntelliJ IDEA have certain shortcut key to aid in auto-formatting of code.
+> Once you are done with a piece of code, highlight the section you have just written and press the
 > key `CTRL + SHIFT + L`.
 
 ## 3. Design
@@ -134,18 +134,43 @@ Import the coding style xml file into your IntelliJ IDEA.
 ### 3.2 UI Component
 
 ### 3.3 Parser Component
+![](attachments/ParserClassDiagram.png)
+
+The CommandParser Component consist the the `CommandParser` and multiple `XYZCommandParser`, 
+each representing a specific type command parser. The `CommandParser` will receive a command in 
+`parseCommand` function and check the according `HashMap<String, Command>` before 
+returning the according `Command` object back. 
+
+The `CommandParser` implements the following functionality:
+- parsing the command string and giving the respective `Command` object 
+- Keeps track of the workspace
+- Provides functionality to list all commands for the help `Command`
+
 
 ### 3.4 Command Component
- 
+![](attachments/CommandClassDiagram.png)
+
+The Command Component `Command` class, `CommandResult` class and multiple `XYZCommand` 
+each representing a specific type of command. Each `Command` will `parseArguments` and set them 
+to private variables, and then `execute` would run specific operation specified by `XYZCommand`.
+The `Command` would then modify the required changes in `ModuleManager` and 
+print the required to be output to `Ui` before returning a `CommandResult`.   
+
+The `CommandResult` will contains certain attributes to indicate if the `Terminus` loop should be 
+terminated or if the `CommandParser` might require changing through the `additionData` attribute.
+The `CommandParser` maybe used to change workspace.
+
+
 ### 3.5 Module Component
+
 ![](attachments/Module.png)
 
 The Module Components consists of the `ModuleManager` which contains a collection of `NusModule` and
 maps a module name to a specific `NusModule`.
-The `NusModule` consist of `ContentManager` which help to manage `Link` and `Note`. 
+The `NusModule` consist of `ContentManager` which help to manage `Content`.
 The `ContentManager` accepts a `Content` type generic which is from the Content Component
 
-The `ModuleManager`
+The `ModuleManager` implements the below functionality:
 - add, delete or retrieve a specific `NusModule`
 - list all module names
 - grants access to the different types of content stored by `NusModule`
@@ -153,7 +178,7 @@ The `ModuleManager`
 ### 3.6 Content Component
 ![](attachments/Content.png)
 
-The Content Component consist of objects such as `Link`, `Questions` and `Note`
+The Content Component consist of objects such as `Link`, `Question` and `Note`
 which inherit from the abstract `Content` class. The `ContentManager` allows a generic 
 `<T extends Content>` which must belong to the `Content` type or its children. The 
 `ContentManager` manages an `ArrayList` of Content type and provide the following functionality:
@@ -187,6 +212,20 @@ For further details on the implementation, head to
 ### 3.8 Storage Component
 
 
+![](attachments/StorageComponent.png)
+
+The Module Storage handles any file I/O operations of TermiNUS.
+
+The `ModuleStorage` component:
+
+- can create folder for each module provided by the user.
+- can save modules, schedules and links data in a `.json` file.
+- can save notes into multiple `.txt` files.
+
+`TermiNUS` saved these data as either a `.json` or `.txt` file so users will be able to edit saved
+data easily with any available text editor.
+
+
 ## 4. Implementation
 
 ### 4.1 Timetable
@@ -208,6 +247,7 @@ All the `Link` inside `ContentManager` is iterated through to acquire all the sc
 
 The **Weekly** `timetable` feature is an extension of the **Daily** `timetable` feature.
 It is implemented by iterating through a `DaysOfWeekEnum` and acquires the **daily** `timetable` for each day in the week.
+
 
 ### 4.2 Active Recall Implementation
 ![Active Recall Sequence Diagram](attachments/ActiveRecallSequenceDiagram.png)
@@ -283,3 +323,4 @@ issues.
 Once the adjustment of weights of the question is done, the process is repeated if there are 
 questions left inside `QuestionGenerator`. Otherwise, the Active Recall session will be terminated, 
 and the input will be passed back to the `CommandParser`.
+
