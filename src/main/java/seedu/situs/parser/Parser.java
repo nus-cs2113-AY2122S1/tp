@@ -93,7 +93,7 @@ public class Parser {
     }
 
     /**
-     * Parses "find" command for keywords and executes find command.
+     * Parses and executes the {@code find} command.
      *
      * @param command The user input String
      * @return Search results for entered keywords
@@ -123,7 +123,7 @@ public class Parser {
     }
 
     /**
-     * Calls and executes help command.
+     * Calls and executes the {@code help} command.
      *
      * @return a message summarising all possible commands recognised by SITUS
      */
@@ -132,7 +132,7 @@ public class Parser {
     }
 
     /**
-     * Parses update command and splits input into ingredient parameters.
+     * Parses and executes the {@code update} command.
      *
      * @param command 1 line of user input
      * @return Ingredient updated message
@@ -174,8 +174,7 @@ public class Parser {
     }
 
     /**
-     * Parses add command and splits input into ingredient parameters,
-     * then calls and executes the add command.
+     * Parses and executes the {@code add} command.
      *
      * @param command The user input String
      * @return Ingredient added message
@@ -212,7 +211,7 @@ public class Parser {
     }
 
     /**
-     * Calls and Executes the List Command.
+     * Calls and executes the {@code list} command.
      *
      * @return List of ingredients
      * @throws SitusException if trying to access non-existing ingredients
@@ -222,7 +221,7 @@ public class Parser {
     }
 
     /**
-     * Calls and Executes the Delete Command.
+     * Calls and executes the {@code delete} command.
      *
      * @param command The user input String
      * @return Ingredient Deleted Message
@@ -247,10 +246,10 @@ public class Parser {
     }
 
     /**
-     * Parses and executes the date command.
+     * Parses and executes the {@code date} command.
      *
      * @param command The user's input string
-     * @return the result message
+     * @return Date changed success message
      * @throws SitusException if the date format is incorrect
      */
     private static String parseDateCommand(String command) throws SitusException {
@@ -260,7 +259,11 @@ public class Parser {
     }
 
     /**
-     * Parses and executes the expire command.
+     * Parses and executes the {@code expire} command.
+     *
+     * @param command The user's input string
+     * @return List of ingredients expiring by the specified date
+     * @throws SitusException if the date format is incorrect
      */
     private static String parseExpireCommand(String command) throws SitusException {
         String detail = command.substring(COMMAND_EXPIRE.length()).trim();
@@ -272,6 +275,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses and executes the {@code alerts} command.
+     *
+     * @param command The user's input string
+     * @return The list of ingredients for each alert type
+     * @throws SitusException if alert type, date format or amount format is incorrect
+     */
     private static String parseAlertsCommand(String command) throws SitusException {
         String detail = command.substring(COMMAND_ALERTS.length()).trim();
         switch (detail) {
@@ -286,6 +296,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses and executes the {@code set} command.
+     *
+     * @param command The user's input string
+     * @return threshold successfully set message
+     * @throws SitusException if threshold type, date format or amount format is incorrect
+     */
     private static String parseSetCommand(String command) throws SitusException {
         String[] details = command.split(" ", 3);
         try {
