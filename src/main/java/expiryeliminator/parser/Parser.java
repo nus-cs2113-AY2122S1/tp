@@ -18,9 +18,11 @@ import expiryeliminator.commands.IncrementCommand;
 import expiryeliminator.commands.ListCommand;
 import expiryeliminator.commands.ListIngredientExpiringCommand;
 import expiryeliminator.commands.ListIngredientsExpiredCommand;
+import expiryeliminator.commands.DeleteExpiredIngredientCommand;
 import expiryeliminator.commands.ListRecipeCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ViewRecipeCommand;
+import expiryeliminator.commands.ShoppingListCommand;
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
 import expiryeliminator.parser.argparser.QuantityParser;
@@ -57,6 +59,7 @@ public class Parser {
     private static final OptionalArgPrefix PREFIX_OPTIONAL_EXPIRY = new OptionalArgPrefix(PREFIX_EXPIRY);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_INGREDIENT = new MultipleArgPrefix(PREFIX_INGREDIENT);
     private static final MultipleArgPrefix PREFIX_MULTIPLE_QUANTITY = new MultipleArgPrefix(PREFIX_QUANTITY);
+    private static final MultipleArgPrefix PREFIX_MULTIPLE_RECIPE = new MultipleArgPrefix(PREFIX_RECIPE);
 
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format!\n%1$s";
     public static final String MESSAGE_INVALID_ARGUMENT_FORMAT = "Invalid argument format!\n%1$s";
@@ -94,6 +97,8 @@ public class Parser {
                 return new ListIngredientExpiringCommand();
             case ListIngredientsExpiredCommand.COMMAND_WORD:
                 return new ListIngredientsExpiredCommand();
+            case DeleteExpiredIngredientCommand.COMMAND_WORD:
+                return new DeleteExpiredIngredientCommand();
             case ViewIngredientCommand.COMMAND_WORD:
                 return prepareViewIngredient(args);
             case AddRecipeCommand.COMMAND_WORD:
@@ -104,6 +109,8 @@ public class Parser {
                 return new ListRecipeCommand();
             case ViewRecipeCommand.COMMAND_WORD:
                 return prepareViewRecipe(args);
+            case ShoppingListCommand.COMMAND_WORD:
+                return prepareShoppingList(args);
             case ByeCommand.COMMAND_WORD:
                 return new ByeCommand();
             case HelpCommand.COMMAND_WORD:
@@ -256,5 +263,17 @@ public class Parser {
 
         final String recipe = new RecipeParser().parse(argParser.getSingleArg(PREFIX_RECIPE));
         return new ViewRecipeCommand(recipe);
+    }
+
+    private static Command prepareShoppingList(String args) throws InvalidArgFormatException {
+        final ArgParser argParser = new ArgParser(PREFIX_MULTIPLE_RECIPE);
+        try {
+            argParser.parse(args);
+        } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShoppingListCommand.MESSAGE_USAGE));
+        }
+        final ArrayList<String> recipe = new RecipeParser().parse(argParser.getArgList(PREFIX_MULTIPLE_RECIPE));
+        return new ShoppingListCommand(recipe);
     }
 }

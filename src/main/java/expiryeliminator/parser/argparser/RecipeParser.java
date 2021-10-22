@@ -6,7 +6,7 @@ import expiryeliminator.parser.exception.InvalidArgFormatException;
 /**
  * Parses recipe name.
  */
-public class RecipeParser extends SingleArgParser<String> {
+public class RecipeParser extends MultipleArgParser<String> {
     /**
      * Parses recipe name and converts to title case.
      *

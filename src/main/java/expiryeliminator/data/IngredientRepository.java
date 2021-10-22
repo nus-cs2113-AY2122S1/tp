@@ -2,6 +2,7 @@ package expiryeliminator.data;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
@@ -163,14 +164,18 @@ public class IngredientRepository {
 
         StringBuilder expiringIngredientsList = new StringBuilder();
 
-        // TODO: Need to re-implement.
+        for (IngredientStorage ingredientStorage : ingredients.values()) {
+            IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
 
-        // for (IngredientStorage ingredientStorage : ingredients.values()) {
-        //     if (ingredient.getExpiryDate().isAfter(currentDate)
-        //             && ingredient.getExpiryDate().isBefore(currentDatePlusAWeek)) {
-        //         expiringIngredientsList.append(ingredient).append("\n");
-        //     }
-        // }
+            for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
+                if (expiryDate.isAfter(currentDate) && expiryDate.isBefore(currentDatePlusAWeek)) {
+                    expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
+                }
+            }
+            expiringIngredientsList.append(expiredIngredientStorage);
+            expiringIngredientsList.append("\n");
+
+        }
         return expiringIngredientsList.toString();
     }
 
@@ -184,13 +189,93 @@ public class IngredientRepository {
 
         StringBuilder expiredIngredientsList = new StringBuilder();
 
-        // TODO: Need to re-implement.
+        for (IngredientStorage ingredientStorage : ingredients.values()) {
+            IngredientStorage expiredIngredientStorage = new IngredientStorage(ingredientStorage.getIngredient());
 
-        // for (IngredientStorage ingredientStorage : ingredients.values()) {
-        //     if (ingredient.getExpiryDate().isBefore(currentDate)) {
-        //         expiredIngredientsList.append(ingredient).append("\n");
-        //     }
-        // }
+            for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
+                if (expiryDate.isBefore(currentDate)) {
+                    expiredIngredientStorage.add(ingredientStorage.getIngredientBatches().get(expiryDate), expiryDate);
+                }
+            }
+            expiredIngredientsList.append(expiredIngredientStorage);
+            expiredIngredientsList.append("\n");
+
+        }
         return expiredIngredientsList.toString();
     }
+
+    /**
+     * Deletes all ingredients that have expired.
+     *
+     */
+    public void deleteExpiredIngredients() {
+        LocalDate currentDate = LocalDate.now();
+
+        for (IngredientStorage ingredientStorage : ingredients.values()) {
+            ArrayList<LocalDate> expiryDatesToRemove = new ArrayList<>();
+            for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
+                if (expiryDate.isBefore(currentDate)) {
+                    expiryDatesToRemove.add(expiryDate);
+                }
+            }
+            for (LocalDate expiryDate : expiryDatesToRemove) {
+                ingredientStorage.remove(expiryDate);
+            }
+        }
+    }
+
+    /**
+     * Generates a list of ingredients and quantity to buy depending on what recipe/recipes the user wants to make.
+     *
+     * @param recipes The list of recipes the user wants to make.
+     *
+     * @return the string representing the list ingredients and its quantities to be bought.
+     */
+    public String generateShoppingList(ArrayList<Recipe> recipes) throws IllegalValueException {
+
+        StringBuilder shoppingList = new StringBuilder();
+        TreeMap<String, IngredientQuantity> totalIngredients = new TreeMap<>();
+
+        for (Recipe recipe : recipes) {
+            for (String ingredientName : recipe.getIngredientQuantities().keySet()) {
+                int quantity = recipe.getIngredientQuantities().get(ingredientName).getQuantity();
+                if (totalIngredients.containsKey(ingredientName)) {
+                    try {
+                        int previousQuantity = totalIngredients.get(ingredientName).getQuantity();
+                        totalIngredients.get(ingredientName).setQuantity(quantity + previousQuantity);
+                    } catch (IllegalValueException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Ingredient ingredientItem = new Ingredient(ingredientName);
+                    IngredientQuantity ingredientAndQuantityItem = new IngredientQuantity(ingredientItem, quantity);
+                    totalIngredients.put(ingredientName, ingredientAndQuantityItem);
+                }
+            }
+        }
+
+        for (String ingredientName : totalIngredients.keySet()) {
+            IngredientQuantity ingredientAndQuantityItem = totalIngredients.get(ingredientName);
+            int quantityRequired = ingredientAndQuantityItem.getQuantity();
+            Ingredient ingredient = ingredientAndQuantityItem.getIngredient();
+
+            if (ingredients.containsKey(ingredientName)) {
+                IngredientStorage ingredientStorage = ingredients.get(ingredientName);
+                int quantityAvailable = ingredientStorage.getQuantity();
+                if (quantityAvailable < quantityRequired) {
+                    try {
+                        IngredientQuantity shoppingItem = new IngredientQuantity(ingredient,
+                                quantityRequired - quantityAvailable);
+                        shoppingList.append("\n").append(shoppingItem);
+                    } catch (IllegalValueException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } else {
+                shoppingList.append("\n").append(ingredientAndQuantityItem);
+            }
+        }
+        return  shoppingList.toString();
+    }
+
 }
