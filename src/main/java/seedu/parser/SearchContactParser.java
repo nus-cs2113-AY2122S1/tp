@@ -6,14 +6,15 @@ import seedu.exception.MissingArgException;
 
 import java.util.Locale;
 
+import static seedu.parser.ContactParser.FLAG_INDEX_IN_DETAILS;
 import static seedu.parser.ContactParser.NUMBER_OF_DETAILS;
 import static seedu.parser.ContactParser.NUMBER_OF_SEARCH_ARGS;
 
 public class SearchContactParser implements ContactDetails {
     //return only search query as a String
     public String parseSearchQuery(String searchInput) throws MissingArgException {
-        String[] destructuredInputs = searchInput.trim().split(" ", NUMBER_OF_SEARCH_ARGS);
-        if (searchInput.trim().charAt(0) == '-') { //if there is a flag, remove it
+        String[] destructuredInputs = searchInput.trim().split(" ", NUMBER_OF_DETAILS);
+        if (searchInput.trim().charAt(FLAG_INDEX_IN_DETAILS) == '-') { //if there is a flag, remove it
             if (destructuredInputs.length < 2) { //input starts with - but only flag or weird input
                 throw new MissingArgException();
             }
@@ -26,8 +27,7 @@ public class SearchContactParser implements ContactDetails {
 
     public int getDetailFlag(String searchInput) throws MissingArgException, InvalidFlagException {
         //userInput is not null since searchInput was obtained from getSearchInput
-        System.out.println(searchInput.trim().charAt(0));
-        if (searchInput.trim().charAt(0) == '-') {
+        if (searchInput.trim().charAt(FLAG_INDEX_IN_DETAILS) == '-') {
             //if a flag is specified then parse the flag
             //handles inputs "search -g" which is missing search query
             String[] destructuredInputs = searchInput.trim().split(" ", NUMBER_OF_DETAILS);
