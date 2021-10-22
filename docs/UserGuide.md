@@ -2,8 +2,15 @@
 
 ## Introduction
 
-TermiNUS is a CLI (command line interface) program for NUS Students who wish to organize their NUS academic materials through a CLI.  
-The product aims to aid student in organizing their academic schedule and enhancing their learning experiences.
+TermiNUS is a CLI (command line interface) program for NUS Students who wish to consolidate their 
+NUS academic materials such as zoom links, questions and notes for the modules that they are taking. 
+With TermiNUS, it aims to aid Students and improve their learning experiences while studying in NUS.
+
+## Purpose
+
+This documents aims to provide you with instruction on how to use `TermiNUS` and tips & tricks 
+included to improve your experiences while using it. The document will bring you through a 
+detailed guide on all existing commands as well as aiding you in installing `TerminNUS`.
 
 ## Contents
 * [Getting Start](#Getting-Started)
@@ -31,7 +38,7 @@ The product aims to aid student in organizing their academic schedule and enhanc
 
 ## Getting Started
 
-1. Ensure that you have Java 11 or above installed.
+1. Ensure that you have Java 11 or above installed. You can 
 2. Download the latest version of `TermiNUS` from [here](https://github.com/AY2122S1-CS2113T-T10-2/tp/releases/).
 3. When you first start the program, you will be greeted with our banner:  
 
