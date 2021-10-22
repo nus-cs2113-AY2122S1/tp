@@ -11,6 +11,7 @@ ingredient inventory.**
 * Words/phrases within square brackets `[square bracket]` are user's inputs. <br>
   For example in `delete [INGREDIENT_NUMBER]`, `INGREDIENT_NUMBER` is the user's input,
   such as `delete 1`.
+* All information about ingredients expiring in **x** days is calculated based on the current date of the system.
 
 ## Contents
 
@@ -83,38 +84,36 @@ ____________________________________________________
 Add an ingredient to the ingredient list.
 
 Command:
-\
-`add n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]`
+`add n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]`
 
 The parameters used in the command are:
 * `INGREDIENT_NAME`: name of the ingredient.
-* `AMOUNT`: amount of the ingredient.
-* `UNITS`: units specified to associate with `AMOUNT`.
+* `AMOUNT`: amount of the ingredient in kilograms.
 * `EXPIRY`: expiration date of ingredient, in format of `dd/mm/yyyy`.
 
 > Note: Ensure *ALL* parameters are specified when entering the command.
 
 Examples:
-* `add n/carrot a/200 u/sticks e/01/03/2022`
-* `add n/potato a/500 u/g e/25/12/2021`
+* `add n/carrot a/2.0 e/11/11/2021`
+* `add n/potato a/5.0 e/25/12/2021`
 
 Output:
 ```
-add n/carrot a/200 u/sticks e/01/03/2022
+add n/carrot a/2.0 e/11/11/2021
 ____________________________________________________
 Got it. This ingredient has been added to the inventory:
-	Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
+	Carrot | Amount Left: 2.0 kg | Expiry Date: 11/11/2021
 Current inventory has 1 items.
-This ingredient will expire in 131 days.
+This ingredient will expire in 20 days.
 ____________________________________________________
 ```
 ```
-add n/potato a/500 u/g e/25/12/2021
+add n/potato a/5.0 e/25/12/2021
 ____________________________________________________
 Got it. This ingredient has been added to the inventory:
-	Potato | Amount Left: 500.0 g | Expiry Date: 25/12/2021
+	Potato | Amount Left: 5.0 kg | Expiry Date: 25/12/2021
 Current inventory has 2 items.
-This ingredient will expire in 65 days.
+This ingredient will expire in 64 days.
 ____________________________________________________
 ```
 
@@ -127,29 +126,30 @@ Command: `list`
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
-	2. Potato | Amount Left: 500.0 g | Expiry Date: 25/12/2021
+	1. Carrot | Total Amount: 3.0 kg
+		Amount Left: 2.0 kg | Expiry Date: 11/11/2021
+		Amount Left: 1.0 kg | Expiry Date: 30/12/2021
+
+	2. Potato | Total Amount: 5.0 kg
+		Amount Left: 5.0 kg | Expiry Date: 25/12/2021
 ____________________________________________________
 ```
 
+### 2.4. Update Ingredients [to be updated]
 
-### 2.4. Update Ingredients
+Update the amount, unit and expiry of an ingredient in the ingredient list.
 
-Update the amount, unit and expiry of an ingredient in the ingredient list
-
-Command: 
-\
+Command:
 `update n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]`
 
 The parameters used in the command are:
-* `INGREDIENT_NAME`: name of the ingredient
-* `AMOUNT`: updated amount of the ingredient
-* `UNITS`: updated unit of the ingredient
-* `EXPIRY`: updated expiration date of the ingredient, in format of `dd/mm/yyyy`
+* `INGREDIENT_NAME`: name of the ingredient.
+* `AMOUNT`: updated amount of the ingredient in kilograms.
+* `EXPIRY`: updated expiration date of the ingredient, in format of `dd/mm/yyyy`.
 
 Examples:
-* `update n/carrot a/100 u/sticks e/05/04/2022`
-* `update n/potato a/0.6 u/kg e/30/12/2021`
+* `update n/carrot a/100 e/05/04/2022`
+* `update n/potato a/0.6 e/30/12/2021`
 
 ```
 update n/carrot a/100 u/sticks e/05/04/2022
@@ -166,7 +166,7 @@ Got it. This ingredient has been updated:
 ____________________________________________________
 ```
 
-### 2.5. Delete Ingredients
+### 2.5. Delete Ingredients [to be updated]
 
 Delete an ingredient from the ingredient list based on its number in the list.
 > Note: Users are recommended to use the `list` command *prior* to deleting to confirm the ingredient number of the ingredient  they intend to remove.
@@ -194,26 +194,27 @@ Command: `expire [DATE]`
 The parameter used in the command is:
 * `DATE`: the date of interest, in the format of `dd/mm/yyyy`.
 
-Example: `expire 30/01/2022`
+Example: `expire 26/12/2022`
 
 Full ingredient List: 
 ```
-list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
-	2. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
-	3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
-	4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+	1. Carrot | Total Amount: 3.0 kg
+		Amount Left: 2.0 kg | Expiry Date: 11/11/2021
+		Amount Left: 1.0 kg | Expiry Date: 30/12/2021
+
+	2. Potato | Total Amount: 5.0 kg
+		Amount Left: 5.0 kg | Expiry Date: 25/12/2021
 ____________________________________________________
 ```
 ```
-expire 30/01/2022
+expire 26/12/2021
 ____________________________________________________
-There are 3 ingredients expiring by: 2022-01-30
-	Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
-	Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
-	Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021	
+There are 2 ingredients expiring by: 26/12/2021
+	Carrot | Amount Left: 2.0 kg | Expiry Date: 11/11/2021
+	Potato | Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+	
 ____________________________________________________
 ```
 
@@ -242,12 +243,15 @@ ____________________________________________________
 ```
 alerts expiry
 ____________________________________________________
-No ingredients expiring by 2021-11-20
+No ingredients expiring by 27/10/2021
 ____________________________________________________
 alerts stock
 ____________________________________________________
-There are 1 ingredients with stock less than 5.0 kg
-	Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+There are 1 ingredients with stock less than 4.0 kg
+	Carrot | Total Amount: 3.0 kg
+		Amount Left: 2.0 kg | Expiry Date: 11/11/2021
+		Amount Left: 1.0 kg | Expiry Date: 30/12/2021
+	
 ____________________________________________________
 ```
 
@@ -265,13 +269,13 @@ The parameters used in the command are:
 ```
 set expiry 30
 ____________________________________________________
-Successfully set expiry threshold to 30days
+Successfully set expiry threshold to 30 days
 ____________________________________________________
 ```
 ```
-set stock 5
+set stock 4.0
 ____________________________________________________
-Successfully set low stock threshold to 5kg
+Successfully set low stock threshold to 4.0 kg
 ____________________________________________________
 ```
 
@@ -286,19 +290,24 @@ Command: `find [INGREDIENT_NAMES]`
 Examples: `find radish`, `find potato tomato`
 
 ```
-find radish
+find carrot
 ____________________________________________________
-I found these ingredients for "radish":
-	3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+I found these ingredients for "carrot":
+	1. Carrot | Total Amount: 3.0 kg
+		Amount Left: 2.0 kg | Expiry Date: 11/11/2021
+		Amount Left: 1.0 kg | Expiry Date: 30/12/2021
 ____________________________________________________
 ```
 ```
-find potato tomato
+find carrot potato
 ____________________________________________________
+I found these ingredients for "carrot":
+	1. Carrot | Total Amount: 3.0 kg
+		Amount Left: 2.0 kg | Expiry Date: 11/11/2021
+		Amount Left: 1.0 kg | Expiry Date: 30/12/2021
 I found these ingredients for "potato":
-	1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
-I found these ingredients for "tomato":
-	4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+	2. Potato | Total Amount: 5.0 kg
+		Amount Left: 5.0 kg | Expiry Date: 25/12/2021
 ____________________________________________________
 ```
 
