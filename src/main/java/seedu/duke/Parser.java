@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import java.util.*;
+import java.util;
 
 /**
  * Sense-makes the inputs given and distributes the information to other parts of the program.
@@ -130,7 +130,8 @@ public class Parser {
      * @return the array containing client's information in a sorted fashion
      * @throws TourPlannerException if there are duplicate prefixes found
      */
-    private static ArrayList<String> extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes, String argString, String identifier)
+    private static ArrayList<String> extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes, 
+                                                            String argString, String identifier)
             throws TourPlannerException {
         ArrayList<String> extractedValues = new ArrayList<>();
         ArrayList<Integer> indexes = new ArrayList<>();
@@ -180,12 +181,13 @@ public class Parser {
         return value;
     }
 
-    /**
+     /**
      * Obtains array index that corresponds to the prefix given.
      *
      * @param prefix prefix of value extracted
      * @return array index of values according to prefix
      */
+    
     private static int obtainArrayIndex(String prefix) {
         int index = 0;
         switch (prefix) {
@@ -299,6 +301,8 @@ public class Parser {
             return new ListFlightCommand();
         case "-p":
             return new ListPackageCommand();
+        default:
+            break;
         }
         return null;
     }
