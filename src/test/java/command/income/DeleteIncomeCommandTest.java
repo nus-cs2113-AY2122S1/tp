@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DeleteIncomeCommandTest {
 
     @Test
-    public void TestDeleteIncomeByName() {
+    public void testDeleteIncomeByName() {
         Income income = new Income("Salary", 1000, "14-Nov-2011");
         IncomeList.addIncome(income);
 
