@@ -1,7 +1,7 @@
 package medbot.command.appointmentcommand;
 
 import medbot.Scheduler;
-import medbot.Ui;
+import medbot.ui.Ui;
 import medbot.command.Command;
 import medbot.exceptions.MedBotException;
 

@@ -94,35 +94,35 @@ public abstract class Parser {
         try {
             commandTypeString = userInput.substring(4).strip();
         } catch (IndexOutOfBoundsException ie) {
-            return new HelpCommand();
+            return new HelpCommand(getViewType());
         }
         if (commandTypeString.equals(EMPTY_STRING)) {
-            return new HelpCommand();
+            return new HelpCommand(getViewType());
         }
         CommandType commandType = parseHelpCommandType(commandTypeString);
-        return new HelpCommand(commandType);
+        return new HelpCommand(commandType,getViewType());
     }
 
     private static CommandType parseHelpCommandType(String commandTypeString) throws MedBotParserException {
         switch (commandTypeString) {
         case COMMAND_ADD:
-            return CommandType.ADD_PATIENT;
+            return CommandType.ADD;
         case COMMAND_DELETE:
-            return CommandType.DELETE_PATIENT;
+            return CommandType.DELETE;
         case COMMAND_EDIT:
-            return CommandType.EDIT_PATIENT;
+            return CommandType.EDIT;
         case COMMAND_EXIT:
             return CommandType.EXIT;
         case COMMAND_HELP:
             return CommandType.HELP;
         case COMMAND_LIST:
-            return CommandType.LIST_PATIENT;
+            return CommandType.LIST;
         case COMMAND_SWITCH:
             return CommandType.SWITCH;
         case COMMAND_VIEW:
-            return CommandType.VIEW_PATIENT;
+            return CommandType.VIEW;
         case COMMAND_FIND:
-            return CommandType.FIND_PATIENT;
+            return CommandType.FIND;
         default:
             throw new MedBotParserException(ERROR_WRONG_COMMAND);
         }

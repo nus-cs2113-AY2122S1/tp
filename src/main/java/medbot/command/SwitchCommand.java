@@ -2,7 +2,7 @@ package medbot.command;
 
 import medbot.parser.Parser;
 import medbot.Scheduler;
-import medbot.Ui;
+import medbot.ui.Ui;
 import medbot.utilities.ViewType;
 
 public class SwitchCommand extends Command {

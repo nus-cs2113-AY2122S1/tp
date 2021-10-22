@@ -1,8 +1,7 @@
 package medbot.command;
 
 import medbot.Scheduler;
-import medbot.Ui;
-import medbot.list.PersonList;
+import medbot.ui.Ui;
 
 public class ExitCommand extends Command {
 
