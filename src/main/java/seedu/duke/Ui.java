@@ -93,12 +93,20 @@ public class Ui {
      *
      * @param client the client that was just added
      */
-    public void showAdd(Client client) {
+    public void showAddClient(Client client) {
         show(ADD_MESSAGE + "\n" + client);
     }
 
     public void showAddFlight(Flight flight) {
         show(ADD_MESSAGE + "\n" + flight);
+    }
+
+    public void showAddTour(Tour tour) {
+        show(ADD_MESSAGE + "\n" + tour);
+    }
+
+    public void showAddClientPackage(ClientPackage clientPackage) {
+        show(ADD_MESSAGE + "\n" + clientPackage);
     }
 
     /**

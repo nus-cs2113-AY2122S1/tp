@@ -16,4 +16,13 @@ public class FlightList {
         flightCount++;
     }
 
+    public Flight getFlight(String flightId) {
+        for (int i = 0; i < flightCount; i++) {
+            if (flights.get(i).getId().equals(flightId)) {
+                return flights.get(i);
+            }
+        }
+        return null;
+    }
+
 }

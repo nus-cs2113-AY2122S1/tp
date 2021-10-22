@@ -13,6 +13,7 @@ public class Parser {
     public static final String ERROR_INVALID_INPUT = "Invalid input! Please enter a valid command.";
     public static final String ERROR_EXTRA_INPUT = "Extra input! Refrain from doing so.";
     public static final String ERROR_INVALID_CUT_INDEX = "Invalid cut index!";
+    public static final String ERROR_INVALID_CLIENT_INDEX = "Invalid client index!";
     public static final String ERROR_DUPLICATE_PREFIXES = "Duplicate prefixes! Please try again.";
     public static final String ERROR_MISSING_PREFIXES
             = "Missing prefixes! Did you miss out some fields? Please try again.";
@@ -37,7 +38,11 @@ public class Parser {
             }
             return new ByeCommand();
         case "add":
-            return parseAdd(params);
+//            try {
+                return parseAdd(params);
+//            } catch (NullPointerException | NumberFormatException e) {
+//                throw new TourPlannerException(ERROR_INVALID_CLIENT_INDEX);
+//            }
         case "list":
             if (!params.equals("")) {
                 throw new TourPlannerException(ERROR_EXTRA_INPUT);
@@ -99,8 +104,8 @@ public class Parser {
             repeatPrefixChecker = 5;
             break;
         case "-p":
-            prefixes = Arrays.asList("/c", "/t", "/f");
-            repeatPrefixChecker = 4;
+            prefixes = Arrays.asList("/t", "/f");
+            repeatPrefixChecker = 3;
             break;
         default:
             break;
@@ -332,8 +337,9 @@ public class Parser {
 
         case "-t":
             Tour tour = new Tour(values);
-            //return new AddTourCommand(tour);
-            break;
+            return new AddTourCommand(tour);
+        case "-p":
+            return new AddPackageCommand(values);
         }
         return null;
     }
