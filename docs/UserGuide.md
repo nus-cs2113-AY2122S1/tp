@@ -92,20 +92,23 @@ The below table represents what each means.
 | `{value}` |  The value is optional, and including it may provide different results.|
 | `<value>` | The value is required for the command to work properly.|
 |`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
+|`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hournotation**. For example, `14:20` is valid which represents `2:20 pm`.|
+|`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
 
 Terminologies used throughout this guide:
 
 | Terminology | Description |
 | ----------- | ----------- |
 | workspace |  A workspace is the environment in which you are currently assessing. For example, when you want to access some files inside a folder, you will need to enter the folder first. As such the folder is a **workspace**.|
+|default workspace|The very first workspace when executing the TermiNUS program.|
 |module|A module refers to a NUS module. For example, `CS2113T` is a module.|
 
 ---
 
 ## Section: Module Management
 
-All commands related to the workspace `Module Management` will be displayed in these section. These commands
-enable users to create, delete and view `modules` within TermiNUS.
+All commands related to the workspace `Module Management` will be displayed in this section. These
+commands enable users to create, delete and view `modules` within TermiNUS.
 
 ### Accessing the module management workspace
 
@@ -146,9 +149,11 @@ List of Module Management workspace commands:
 
 ### Adding a new module
 
-**Format:** `add "<module code>"`
+**Format:** `add "<module_code>"`
 
 Adds a module when in the module management workspace.
+
+> ⚠️The `<module code>` cannot be more than **30** characters and cannot have any `spaces` in it.
 
 > 💡 When executing this command, it will add the module into TermiNUS and creates a folder with the module code.
 
@@ -210,7 +215,7 @@ enter the module workspace in Terminus.
 
 ### Accessing module workspace
 
-**Format:** `go <module code>`
+**Format:** `go <module_code>`
 
 Enters the module workspace to access data within the module.
 
@@ -249,7 +254,7 @@ List of Module workspace commands:
 
 ## Section: Note
 
-All commands related to the workspace `Note` will be displayed in these section. These commands
+All commands related to the workspace `Note` will be displayed in this section. These commands
 enable users to create, delete and view `notes` within the module.
 
 ### Accessing note workspace
@@ -291,15 +296,17 @@ List of Note workspace commands:
 
 ### Adding a Note
 
-**Format:** `add "<name>" "<content>"`  
+**Format:** `add "<name>" "<content>"`
 
 Adds a note when in the note workspace.
+
+> ⚠️The `<name>` cannot be more than **30** characters.
 
 > 💡 When executing this command, it will add the note into its module and creates a `.txt` file inside the module folder. The `.txt` file will be named after the newly added note name.
 
 > ❗ If there exists a file with the same name of the newly added note, all contents in that file will be overwritten.
 
-Example: `add "coding style" "switch case identation should be aligned."` 
+Example: `add "coding style" "switch case identation should be aligned."`
 
 Expected Output:
 
@@ -329,11 +336,10 @@ Your note on 'coding style' has been deleted!
 
 ### Viewing note information
 
-**Format:** `view {index}`  
+**Format:** `view {index}`
 
-Views a list of note in the module or views all information for that specific note.
-
-Two ways to use this command simply running view or view [index] View by itself will list all notes
+Views a list of notes in the module or views all information for that specific note when in the note
+workspace.
 
 Example 1: `view`
 
@@ -367,73 +373,124 @@ switch case identation should be aligned.
 
 ## Section: Schedule
 
-### Accessing Schedule
+All commands related to the workspace `Schedule` will be displayed in this section. These commands
+enable users to create, delete and view `schedule` within the module.
 
-**Format:** `schedule`  
-After running the schedule command, you can see the following:
+### Accessing schedule workspace
+
+**Format:** `schedule`
+
+Enters the Schedule workspace.
+
+Example: `schedule`
+
+Expected Output:
 
 ```
-[] >>> schedule
+[CS2113T] >>> schedule
+
 You have 0 link(s) in this workspace.
 
-Type any of the following to get started: 
-> add 
-> edit
+Type any of the following to get started:
+> add
+> exit
 > help
 > view
 > back
-> delete 
+> delete
 
-[schedule] >>> 
+[CS2113T > schedule] >>> 
 ```
+
+List of Schedule workspace commands:
+
+| Command      | Description |
+| ----------- | ----------- |
+|add|add a schedule for the module|
+|delete|delete a schedule from the module|
+|view|view schedule information from the module|
+|help|view all commands and their usage in the schedule workspace|
+|back|escape and return to the module workspace|
+|exit|exit and closes TermiNUS|
 
 ### Adding a Schedule
 
-**Format:** `add "<description>" "<day>" "<start_time>" "<zoom_link>"`  
-Adding a new schedule when in the schedule’s workspace
+**Format:** `add "<description>" "<day>" "<start_time>" "<zoom_link>"`
+
+Adds a schedule when in the schedule workspace.
+
+> ⚠️The `<day>` must be a valid **day spelled fully**. For example, `monday` is a valid day but `mon` is not.
+
+> ⚠️The `<start_time>` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.
+
+Example: `add "CS2113T Tutorial 1" "Thursday" "10:00" "https://zoom.us/test"`
+
+Expected Output:
 
 ```
-[schedule] >>> add “Module1 Tut1” "Thursday" "10:00" "https://zoom.us/test"  
-You have added Module1 Tut’s scheduled zoom link! 
-[schedule] >>> 
+[CS2113T > schedule] >>> add "CS2113T Tutorial 1" "Thursday" "10:00" "https://zoom.us/test"
+Your schedule on 'CS2113T Tutorial 1' has been added!
+[CS2113T > schedule] >>> 
 ```
 
-### Delete a Schedule
+### Deleting a Schedule
 
-**Format:** `delete <index>`  
-Delete schedule when in the schedule’s workspace
+**Format:** `delete <index>`
 
-```
-[schedule] >>> delete 1 
-You have deleted your 1st schedule. 
-Schedule `Module1 Tut, Thursday, 10:00, https://zoom.us/test` has been deleted! 
-[schedule] >>> 
-```
+Deletes the specified schedule given by its **index** when in the schedule workspace.
 
-### View Schedule
+Example: `delete 1`
 
-**Format:** `view`  
-View all schedules when in the schedule’s workspace
+Expected Output:
 
 ```
-[schedule] >>> view 
-You have 3 schedules inside: 
-1. Module1 Tut, Thursday, 10:00, https://zoom.us/test 
-2. Module2 Lecture, Friday, 14:00, https://zoom.us/test 
-3. Module1 Tut1, Thursday, 10:00, https://zoom.us/test
-
-[schedule] >>> 
+[CS2113T > schedule] >>> delete 1
+Your link on 'CS2113T Tutorial 1' has been deleted!
+[CS2113T > schedule] >>> 
 ```
+
+### Viewing schedule information
+
+**Format:** `view`
+
+Views a list of schedules in the module when in the schedule workspace.
+
+Example: `view`
+
+Expected Output:
+
+```
+[CS2113T > schedule] >>> view
+List of Content
+---------------
+1. CS2113T Tutorial 1 (Thursday, 10:00): https://zoom.us/test
+2. CS2113T Lab 1 (Friday, 12:30): https://zoom.us/test
+
+Rerun the same command with an index behind to view the content.
+[CS2113T > schedule] >>> 
+```
+
+---
 
 ## Section: Question
 
-### Accessing Question
+All commands related to the workspace Question will be displayed in this section. These commands
+enable users to create, delete and view questions within the module.
 
-**Format:** `question`  
-Accessing the question workspace After running the question command, you can see the following:
+In addition, users can test themselves with the question added into the module.
+
+### Accessing question workspace
+
+**Format:** `question`
+
+Enters the Question workspace.
+
+Example: `question`
+
+Expected Output:
 
 ```
-[] >>> question
+[CS2113T] >>> question
 
 You have 0 question(s) in this workspace.
 
@@ -445,64 +502,81 @@ Type any of the following to get started:
 > test
 > back
 > delete
- 
-[question] >>> 
+
+[CS2113T > question] >>> 
 ```
 
 ### Adding a Question
 
-**Format:** `add "<question>" "<answer>"`  
-Adding a question when in the question workspace
+**Format:** `add "<question>" "<answer>"`
+
+Adds a question when in the question workspace.
+
+Example: `add "What is 1+1?" "2"`
+
+Expected Output:
 
 ```
-[question] >>> add "What is 1+1?" "2" 
+[CS2113T > question] >>> add "What is 1+1?" "2"
 Your question on 'What is 1+1?' has been added!
-[question] >>> 
+[CS2113T > question] >>> 
 ```
 
-### Delete a Question
+### Deleting a Question
 
-**Format:** `delete <index>`  
-Deletes the specified question given by its index.
+**Format:** `delete <index>`
+
+Deletes the specified question given by its **index** when in the question workspace.
+
+Example: `delete 1`
+
+Expected Output:
 
 ```
-[question] >>> delete 1
+[CS2113T > question] >>> delete 1
 Your question on 'What is 1+1?' has been deleted!
-[question] >>> 
+[CS2113T > question] >>> 
 ```
 
-### View Question
+### Viewing question information
 
-**Format:** `view` or `view {index}`  
-Two ways to use this command simply running view or view [index]
-View by itself will list all questions
+**Format:** `view {index}`
+
+Views a list of questions in the module or views all information for that specific question when in
+the question workspace.
+
+Example 1: `view`
+
+Expected Output 1:
 
 ```
-[question] >>> view 
+[CS2113T > question] >>> view
 List of Content
 ---------------
-1. What is segmentation?
-2. What is paging?
-3. What is the pro of Fixed Partitioning in Contiguous Memory allocation?
+1. What is EP?
+2. What is UML?
+3. What is SUT?
 
 Rerun the same command with an index behind to view the content.
-[question] >>> 
+[CS2113T > question] >>> 
 ```
 
-The second way to use view is with an index view [index]
+Example 2: `view 1`
+
+Expected Output 2:
 
 ```
-[question] >>> view 1 
-Name: What is segmentation?
+[CS2113T > question] >>> view 1
+Name: What is EP?
 Content:
-Placing different data regions into different frames
+Equivalence partitioning
 
-[question] >>> 
+[CS2113T > question] >>> 
 ```
 
 ### Testing Yourself with Active Recall
 
-**Format:** `test` or `test {count}`  
+**Format:** `test {count}`  
 You can start an Active Recall session by running the `test` command.
 
 By default, it will test 10 questions (or less if there are not enough questions). You may specify
@@ -514,7 +588,7 @@ smaller if there are not enough questions in the workspace). Press the <kbd>Ente
 start.
 
 ```
-[question] >>> test 3
+[CS2113T > question] >>> test 3
 ---[Active Recall]---
 
 We will be starting your active recall training session.
@@ -530,7 +604,7 @@ The first question will be displayed, and once you are ready to reveal the answe
 ---
 
 Question:
-What is segmentation?
+What is EP?
 
 When you are ready, press [Enter] to continue.
 ```
@@ -547,7 +621,7 @@ appear more often in the future.
 You took 172 seconds to reveal the answer.
 
 Answer:
-Placing different data regions into different frames
+Equivalence partitioning
 
 How did you find the question? (Compare against past attempts if any)
 [1] Easy; [2] Normal / Same; [3] Hard; [E] Exit
@@ -569,12 +643,79 @@ command prompt.
 ```
 This training session has ended.
 Returning you back to main program.
-[question] >>> 
+[CS2113T > question] >>> 
 ```
 
-## Exiting the Program
+---
 
-**Format:** `exit`  
+## Displaying all schedules across all modules
+
+**Format:** `timetable {day}`
+
+Displays all schedules from all modules in TermiNUS or displays certain schedules that falls on the
+specified day.
+
+> ⚠️The `<day>` must be a valid **day spelled fully**. For example, `monday` is a valid day but `mon` is not.
+
+Example 1: `timetable`
+
+Expected Output 2:
+
+```
+[] >>> timetable
+THURSDAY:
+1. CS2113T Tutorial 1 (Thursday, 10:00): https://zoom.us/test
+FRIDAY:
+1. CS2113T Lab 1 (Friday, 12:30): https://zoom.us/test
+
+[] >>> 
+```
+
+Example 2: `timetable thursday`
+
+Expected Output 2:
+
+```
+[] >>> timetable thursday
+1. CS2113T Tutorial 1 (Thursday, 10:00): https://zoom.us/test
+
+[] >>> 
+```
+
+## Returning to previous workspace
+
+**Format:** `back`
+
+Returns to the previous workspace prior to the current workspace you are in.
+
+> 💡 The **default** workspace is the only workspace that has no `back` command. This is because this workspace is the very first workspace of TermiNUS.
+
+Example: `back` from note workspace
+
+Expected Output:
+
+```
+[CS2113T > note] >>> back
+
+Entering CS2113T workspace
+
+Type any of the following to get started:
+> exit
+> help
+> note
+> schedule
+> question
+> back
+
+[CS2113T] >>> 
+```
+
+> 💡 Notice how the workspace indicator changes from `[CS2113T > note]` to `[CS2113T]`.
+
+## Exiting TermiNUS
+
+**Format:** `exit`
+
 To exit the program, simply run the following command:
 
 ```
@@ -584,56 +725,72 @@ Goodbye!
 
 ## Accessing Help
 
-**Format:** `help`  
+**Format:** `help`
+
 Depending on your current workspace, you may get different help messages.  
-The following shows the help message in the main workspace:
+The following shows the help message in the default workspace:
 
 ```
-[] >>> help 
+[] >>> help
 
-You can run the following commands in the workspace: 
-> note 
-    - Access all your notes that you have made.  
-> schedule 
-    - Access all your schedules that you have scheduled. 
-> help 
-    - Prints this. 
-> quit 
-    - Quits TermiNUS 
+Help Menu
+---------
+exit : Exits the program.
+Format: exit
 
-You can also run the following to quickly do certain tasks: 
-> note add Water “Drinking more water will make me hydrated” 
-> schedule view 
+help : Prints the help page.
+Format: help
 
-Running `help [command]` will print the help for the specific workspace. 
+module : Move to the module workspace
+Format: module
+
+go : Go to a specific module's workspace
+Format: go <module name>
+
+timetable : Displays all your schedule.
+Format: timetable {day}
 
 [] >>> 
 ```
 
 ## Advanced Usage of Commands
 
-User can access workspace command directly without entering its environment. Seen below are some
+**Format:** `<workspace> <available workspace command>`
+
+Users can access workspace command directly without entering its environment. Seen below are some
 command examples.
 
 A workspace command is a command that will bring you to its own workspace. Current workspace command
-includes notes and schedules.
+includes note, schedule, question, and module.
 
-Command syntax: <workspace> <available workspace command>
+> 💡 To access the module in TermiNUS, you will need to use the `go` command. For more information, please refer to [Section: Module](#section-module).
 
-Adding a note without entering the note workspace.
+> ⚠️This advance command do not allow any chaining with the `back` command.
+
+Example:
+
+- Adding a note without entering the note workspace.
 
 ```
-[] >>> note add “Remind Cabbin” “Cabbin was here” 
-Note has been added! 
+[CS2113T] >>> note add "Advance command"  "Advance command is cool"
+Your note on 'Advance command' has been added!
+[CS2113T] >>> 
+```
+
+- Adding a schedule without entering the schedule workspace.
+
+```
+[CS2113T] >>> schedule add "Lecture" "Friday" "16:00" "https://zoom.us/test"
+Your schedule on 'Lecture' has been added!
+[CS2113T] >>> 
+```
+
+- Adding a question without entering the module workspace.
+
+```
+[] >>> go CS2113T question add "What is Java?" "It is a programming language."
+Your question on 'What is Java?' has been added!
 [] >>> 
-```
-
-Adding a schedule without entering the schedule workspace.
-
-```dtd
-[] >>> schedule add “Module1 Tut” Thursday 10:00 https://zoom.us/test
-  You have added Module1 Tut’s scheduled zoom link!
-  [] >>> 
 ```
 
 ___  
@@ -642,31 +799,37 @@ ___
 
 ___  
 
-## Command Summary
+## Workspace Command Summary
 
-| **Action** | **Format, Examples** |
-| ------------ | -------------  |
-|**access note workspace**|`note`|
-|**access schedule workspace**|`schedule`|
-|**add**|`add "<name>" "<content>"` <br>e.g. `add note1 note_content`|
-|**delete**|`delete <index>` <br>e.g. `delete 1`|
-|**view**|`view` or `view {index}`<br>e.g. `view` or `view 1`|
-|**help**|`help`|
-|**exit**|`exit`|
+| Action | Format| Examples |
+| ----------- | ----------- |----------- |
+|access **module management** workspace|`module`|-|
+|access **module** workspace|`go <module_code>` | `go CS2113T`|
+|access **note** workspace|`note`|-|
+|access **schedule** workspace|`schedule`|-|
+|access **question** workspace|`question`|-|
 
 ___  
 
-## Advanced Command Summary
+## Command Summary
 
-| **Action** | **Format, Examples** |
-| ------------ | ------------- |
-|**add note**|`note add "<name>" "<content>"` <br>e.g. `note add note1 note_content`|
-|**add
-schedule**|`schedule add "<description>" "<day>" "<start_time>" "<zoom_link>"` <br>e.g. `schedule add “Module1 Tut” "Thursday" "10:00" "https://zoom.us/test"`|
-|**delete note**|`note delete <index>` <br>e.g. `note delete 1`|
-|**delete schedule**|`schedule delete <index>` <br>e.g. `schedule delete 1`|
-|**view note**|`note view` or `note view {index}` <br>e.g. `note view 1`|
-|**view schedule**|`schedule view` <br>e.g. `schedule view`|
+| Workspace   | Action | Format| Examples |
+| ----------- | ----------- | ----------- |----------- |
+|module management|add module|`add "<module_code>"`|`add "CS2113T"`|
+|note|add note|`add "<name>" "<content>"`|`add "Note1" "Hello world."`|
+|schedule|add schedule|`add "<description>" "<day>" "<start_time>" "<zoom_link>"`|`add "CS2113T Tutorial 1" "Thursday" "10:00" "https://zoom.us/test"`|
+|question|add question|`add "<question>" "<answer>"`|`add "What is 1+1?" "2"`|
+|question|active learning|`test {count}`|`test`, `test 3`|
+|default|view timetable|`timetable {day}`|`timetable`, `timetable Thursday`|
+|**ALL** except module|delete item|`delete <index>`|`delete 1`|
+|**ALL** except module|view item information|`view {index}`|`view`, `view 1`|
+|**ALL**|help|`help`|-|
+|**ALL** except default|go back to previous workspace|`back`|-|
+|**ALL**|exit the program|`exit`|-|
+
+---
+
+
 
 
 
