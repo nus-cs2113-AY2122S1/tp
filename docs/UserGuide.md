@@ -1,18 +1,7 @@
 # TermiNUS User Guide
 
-## Introduction
+## Table of Contents
 
-TermiNUS is a CLI (command line interface) program for NUS Students who wish to consolidate their 
-NUS academic materials such as zoom links, questions and notes for the modules that they are taking. 
-With TermiNUS, it aims to aid Students and improve their learning experiences while studying in NUS.
-
-## Purpose
-
-This documents aims to provide you with instruction on how to use `TermiNUS` and tips & tricks 
-included to improve your experiences while using it. The document will bring you through a 
-detailed guide on all existing commands as well as aiding you in installing `TerminNUS`.
-
-## Contents
 * [Getting Start](#Getting-Started)
 * [Section: Note](#Section:-Note)
     * [Accessing Note : `note`](#Accessing-Note)
@@ -36,38 +25,79 @@ detailed guide on all existing commands as well as aiding you in installing `Ter
 * [Command Summary](#Command-Summary)
 * [Advanced Command Summary](#Advanced-Command-Summary)
 
+## Introduction
+
+TermiNUS is a CLI (command line interface) program for NUS Students who wish to consolidate their
+NUS academic materials such as zoom links, questions and notes for the modules that they are taking.
+With TermiNUS, it aims to aid Students and improve their learning experiences while studying in NUS.
+
+## Purpose
+
+This documents aims to provide you with instruction on how to use `TermiNUS` and tips & tricks
+included to improve your experiences while using it. The document will bring you through a detailed
+guide on all existing commands as well as aiding you in installing `TerminNUS`.
+
+---
+
 ## Getting Started
 
-1. Ensure that you have Java 11 or above installed. You can 
-2. Download the latest version of `TermiNUS` from [here](https://github.com/AY2122S1-CS2113T-T10-2/tp/releases/).
-3. When you first start the program, you will be greeted with our banner:  
+1. Ensure that you
+   have [Java 11](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) or
+   above installed.
+2. Download the latest version of `TermiNUS.jar`
+   from [here](https://github.com/AY2122S1-CS2113T-T10-2/tp/releases/).
+3. Copy the file to the folder you want to use for `Terminus`.
+    1. This is because `Terminus` will store all its saved data in the folder it is currently in.
+4. Open your command prompt and go into the folder containing the `TermiNUS.jar` file.
+    1. You can do so by `win + R` and run `cmd`.
+    2. Next, a console will appear, type in the following `cd C:/folder` where `folder` is the
+       folder containing the `TermiNUS.jar` file.
+5. Next to run `TermiNUS`, in the command prompt type in `java -jar TermiNUS.jar`.
+6. When you first start the `TermiNUS`, you will be greeted with our banner:
 
     ```
-    Welcome to TermiNUS! 
+    Welcome to TermiNUS!
+    You have no schedule for today.
     
-    Type any of the following to get started: 
-    > note
-    > schedule
-    > help 
-    > exit 
-     
-    [] >>> 
+    Type any of the following to get started:
+    > exit
+    > help
+    > module
+    > go
+    > timetable
+    
+    [] >>>  
     ```
-4. To get started, you can run the following commands:
 
-   - note
-   - schedule
-   - help
-   - exit
+7. To get started, you can run the following commands:
 
-___  
+    - module
+    - go
+    - timetable
+    - help
+    - exit
+8. For more information of each command, please refer to the [Features](#Section:-Note) below.
+
+___
+
+## Using this Guide
+
+Along the way, you might encounter commands with specific brackets around some arguments such
+as `{}` and `<>`. The below table represents what each means.
+
+| Command options | Description |
+| ----------- | ----------- |
+| `{argument}` |  This means the argument is optional.|
+| `<argument>` | This means the argument is compulsory.|
+
+---
 
 ## Section: Note
 
 ### Accessing Note
+
 **Format:** `note`  
-Accessing the note workspace
-After running the note command, you can see the following:  
+Accessing the note workspace After running the note command, you can see the following:
 
 ```
 [] >>> note
@@ -85,8 +115,10 @@ Type any of  the following to get started:
 ```
 
 ### Adding a Note
+
 **Format:** `add "<name>" "<content>"`  
-Adding a note when in the note workspace  
+Adding a note when in the note workspace
+
 ```
 [note] >>> add “Remind Cabbin” “Cabbin was here” 
 Note has been added! 
@@ -94,8 +126,10 @@ Note has been added!
 ```
 
 ### Delete a Note
+
 **Format:** `delete <index>`  
 Deletes the specified note given by its index.
+
 ```
 [note] >>> delete 1
 Note `Remind Cabbin` has been deleted!
@@ -103,9 +137,11 @@ Note `Remind Cabbin` has been deleted!
 ```
 
 ### View Note
+
 **Format:** `view` or `view {index}`  
 Two ways to use this command simply running view or view [index]
 View by itself will list all notes
+
 ```
 [note] >>> view 
 You have 3 notes inside: 
@@ -126,12 +162,13 @@ Content: Cabbin was here
 [note] >>> 
 ```
 
-
 ## Section: Schedule
 
 ### Accessing Schedule
+
 **Format:** `schedule`  
 After running the schedule command, you can see the following:
+
 ```
 [] >>> schedule
 You have 0 link(s) in this workspace.
@@ -148,8 +185,10 @@ Type any of the following to get started:
 ```
 
 ### Adding a Schedule
+
 **Format:** `add "<description>" "<day>" "<start_time>" "<zoom_link>"`  
 Adding a new schedule when in the schedule’s workspace
+
 ```
 [schedule] >>> add “Module1 Tut1” "Thursday" "10:00" "https://zoom.us/test"  
 You have added Module1 Tut’s scheduled zoom link! 
@@ -157,8 +196,10 @@ You have added Module1 Tut’s scheduled zoom link!
 ```
 
 ### Delete a Schedule
+
 **Format:** `delete <index>`  
 Delete schedule when in the schedule’s workspace
+
 ```
 [schedule] >>> delete 1 
 You have deleted your 1st schedule. 
@@ -167,8 +208,10 @@ Schedule `Module1 Tut, Thursday, 10:00, https://zoom.us/test` has been deleted!
 ```
 
 ### View Schedule
+
 **Format:** `view`  
 View all schedules when in the schedule’s workspace
+
 ```
 [schedule] >>> view 
 You have 3 schedules inside: 
@@ -179,13 +222,12 @@ You have 3 schedules inside:
 [schedule] >>> 
 ```
 
-
 ## Section: Question
 
 ### Accessing Question
+
 **Format:** `question`  
-Accessing the question workspace
-After running the question command, you can see the following:
+Accessing the question workspace After running the question command, you can see the following:
 
 ```
 [] >>> question
@@ -205,8 +247,10 @@ Type any of the following to get started:
 ```
 
 ### Adding a Question
+
 **Format:** `add "<question>" "<answer>"`  
 Adding a question when in the question workspace
+
 ```
 [question] >>> add "What is 1+1?" "2" 
 Your question on 'What is 1+1?' has been added!
@@ -214,8 +258,10 @@ Your question on 'What is 1+1?' has been added!
 ```
 
 ### Delete a Question
+
 **Format:** `delete <index>`  
 Deletes the specified question given by its index.
+
 ```
 [question] >>> delete 1
 Your question on 'What is 1+1?' has been deleted!
@@ -223,9 +269,11 @@ Your question on 'What is 1+1?' has been deleted!
 ```
 
 ### View Question
+
 **Format:** `view` or `view {index}`  
 Two ways to use this command simply running view or view [index]
 View by itself will list all questions
+
 ```
 [question] >>> view 
 List of Content
@@ -250,14 +298,15 @@ Placing different data regions into different frames
 ```
 
 ### Testing Yourself with Active Recall
+
 **Format:** `test` or `test {count}`  
 You can start an Active Recall session by running the `test` command.
 
-By default, it will test 10 questions (or less if there are not enough questions). You may specify 
-how many questions you wish to run in that session by keying in the number of questions after the 
+By default, it will test 10 questions (or less if there are not enough questions). You may specify
+how many questions you wish to run in that session by keying in the number of questions after the
 `test` command.
 
-When you begin, you will be prompted with the following (do note that the question pool may be 
+When you begin, you will be prompted with the following (do note that the question pool may be
 smaller if there are not enough questions in the workspace). Press the <kbd>Enter</kbd> key to
 start.
 
@@ -271,7 +320,7 @@ This session will consist of 3 questions.
 When you are ready, press [Enter] to continue.
 ```
 
-The first question will be displayed, and once you are ready to reveal the answer, press the 
+The first question will be displayed, and once you are ready to reveal the answer, press the
 <kbd>Enter</kbd> key again.
 
 ```
@@ -283,8 +332,8 @@ What is segmentation?
 When you are ready, press [Enter] to continue.
 ```
 
-After revealing the answer, provide feedback to TermiNUS to allow it to know if the question should 
-appear more often in the future. 
+After revealing the answer, provide feedback to TermiNUS to allow it to know if the question should
+appear more often in the future.
 
 - Key in `1` if you felt it was easy.
 - Key in `2` if you felt it was normal.
@@ -302,7 +351,7 @@ How did you find the question? (Compare against past attempts if any)
 [1/2/3/E] >> 
 ```
 
-After choosing your difficulty, you may proceed to reveal the next question by pressing 
+After choosing your difficulty, you may proceed to reveal the next question by pressing
 <kbd>Enter</kbd> key again.
 
 ```
@@ -311,7 +360,7 @@ After choosing your difficulty, you may proceed to reveal the next question by p
 When you are ready, press [Enter] to continue.
 ```
 
-Once the question pool is empty, or when you decided to stop, TermiNUS will drop you back into the 
+Once the question pool is empty, or when you decided to stop, TermiNUS will drop you back into the
 command prompt.
 
 ```
@@ -321,14 +370,17 @@ Returning you back to main program.
 ```
 
 ## Exiting the Program
+
 **Format:** `exit`  
 To exit the program, simply run the following command:
+
 ```
 [] >>> exit 
 Goodbye! 
 ```
 
 ## Accessing Help
+
 **Format:** `help`  
 Depending on your current workspace, you may get different help messages.  
 The following shows the help message in the main workspace:
@@ -356,25 +408,29 @@ Running `help [command]` will print the help for the specific workspace.
 ```
 
 ## Advanced Usage of Commands
-User can access workspace command directly without entering its environment. Seen below are some command examples.  
 
-A workspace command is a command that will bring you to its own workspace. Current workspace command includes notes and schedules.  
+User can access workspace command directly without entering its environment. Seen below are some
+command examples.
 
-Command syntax: <workspace> <available workspace command>  
+A workspace command is a command that will bring you to its own workspace. Current workspace command
+includes notes and schedules.
 
+Command syntax: <workspace> <available workspace command>
 
 Adding a note without entering the note workspace.
+
 ```
 [] >>> note add “Remind Cabbin” “Cabbin was here” 
 Note has been added! 
 [] >>> 
 ```
 
-Adding a schedule without entering the schedule workspace.  
+Adding a schedule without entering the schedule workspace.
+
 ```dtd
 [] >>> schedule add “Module1 Tut” Thursday 10:00 https://zoom.us/test
-You have added Module1 Tut’s scheduled zoom link!
-[] >>> 
+  You have added Module1 Tut’s scheduled zoom link!
+  [] >>> 
 ```
 
 ___  
@@ -383,7 +439,7 @@ ___
 
 ___  
 
-## Command Summary  
+## Command Summary
 
 | **Action** | **Format, Examples** |
 | ------------ | -------------  |
@@ -397,12 +453,13 @@ ___
 
 ___  
 
-## Advanced Command Summary    
+## Advanced Command Summary
 
 | **Action** | **Format, Examples** |
 | ------------ | ------------- |
 |**add note**|`note add "<name>" "<content>"` <br>e.g. `note add note1 note_content`|
-|**add schedule**|`schedule add "<description>" "<day>" "<start_time>" "<zoom_link>"` <br>e.g. `schedule add “Module1 Tut” "Thursday" "10:00" "https://zoom.us/test"`|
+|**add
+schedule**|`schedule add "<description>" "<day>" "<start_time>" "<zoom_link>"` <br>e.g. `schedule add “Module1 Tut” "Thursday" "10:00" "https://zoom.us/test"`|
 |**delete note**|`note delete <index>` <br>e.g. `note delete 1`|
 |**delete schedule**|`schedule delete <index>` <br>e.g. `schedule delete 1`|
 |**view note**|`note view` or `note view {index}` <br>e.g. `note view 1`|
