@@ -42,6 +42,18 @@ public class Assessment implements ClassChecker {
         return maximumMarks;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setMaximumMarks(int maximumMarks) {
+        this.maximumMarks = maximumMarks;
+    }
+
+    public void setWeightage(double weightage) {
+        this.weightage = weightage;
+    }
+
     /**
      * Format the string to print out the assessment.
      * For Midterms with 20% weightage,
