@@ -13,6 +13,7 @@ deactivate ":IndexParser"
 activate ":DeleteContactCommand"
 ":DeleteContactCommand" -> ":TextUi":ConfirmDeleteMessage(deletedContact:Contact, contactIndex:int)
 activate ":TextUi"
+":TextUi" --> ":DeleteContactCommand"
 deactivate ":TextUi"
 
 ":DeleteContactCommand" -> ":UserInputTextUi":getUserConfirmation()
@@ -23,6 +24,7 @@ deactivate ":UserInputTextUi"
 alt#gold #lightgreen userConfirmation.equalsIgnoreCase("y")
     ":DeleteContactCommand" -> ":ContactList": deleteContact(contactIndex:int)
     activate ":ContactList"
+    ":ContactList" --> ":DeleteContactCommand"
     deactivate ":ContactList"
     ":DeleteContactCommand" -> ":Contact" :getName()
     activate ":Contact"
@@ -36,12 +38,16 @@ alt#gold #lightgreen userConfirmation.equalsIgnoreCase("y")
 
     ":DeleteContactCommand" -> ":TextUi":deleteContactMessage(deletedName:String, contactListSize:int)
     activate ":TextUi"
+    ":TextUi" --> ":DeleteContactCommand"
     deactivate ":TextUi"
+
 
 else #lightblue else
     ":DeleteContactCommand" -> ":TextUi":cancelDeleteContactMessage()
     activate ":TextUi"
+    ":TextUi" --> ":DeleteContactCommand"
     deactivate ":TextUi"
+
 end
 deactivate ":DeleteContactCommand"
 deactivate ":DeleteContactCommand"

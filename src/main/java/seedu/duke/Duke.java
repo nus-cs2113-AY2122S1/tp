@@ -52,6 +52,8 @@ public class Duke {
             command.setPersonalContact(personalContact);
             command.execute();
             contactsEncoder.saveContacts(contactFilePath, contactList);
+            contactsEncoder.savePersonalContact(personalContactFilePath, personalContact);
+
         } catch (FileErrorException e) {
             ExceptionTextUi.fileErrorMessage(contactFilePath);
         }
@@ -61,6 +63,7 @@ public class Duke {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        new Duke("data/contacts.txt", "data/me.txt").runConTech();
+        new Duke("data/contacts.txt",
+                "data/me.txt").runConTech();
     }
 }

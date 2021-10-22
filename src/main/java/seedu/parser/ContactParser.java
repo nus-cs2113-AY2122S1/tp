@@ -62,9 +62,8 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
         if (detailToStore.equals("null")) {
             throw new ForbiddenDetailException();
         }
-        int indexToStore;
         checkRegex(flag, detailToStore);
-        indexToStore = getIndexToStore(flag);
+        int indexToStore = getIndexToStore(flag);
         contactDetails[indexToStore] = detailToStore;
     }
 }

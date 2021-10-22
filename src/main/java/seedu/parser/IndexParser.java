@@ -22,8 +22,14 @@ public class IndexParser {
         assert destructuredInputs.length == 2;
         // split index string into words
         String[] indexSplit = destructuredInputs[INDEX_POSITION].trim().split(" ");
+        // contact index that is important and what we want
+        // can be "me" or an integer
+        String significantIndex = indexSplit[SIGNIFICANT_INDEX_POSITION].trim();
+        if (significantIndex.equalsIgnoreCase("me")) {
+            return -1;
+        }
         // takes only the first word/ element as given user input, and throws NumberFormatExcept if it is not integer
-        return Integer.parseInt(indexSplit[SIGNIFICANT_INDEX_POSITION].trim());
+        return Integer.parseInt(significantIndex);
     }
 
     public static Contact getContactFromIndex(int index, ContactList contactList) throws IndexOutOfBoundsException {

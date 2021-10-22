@@ -2,9 +2,7 @@ package seedu.ui;
 
 import seedu.contact.Contact;
 import seedu.contact.ContactList;
-
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public abstract class TextUi {
     private static final String LOGO = "   _____         _______        _     \n"
@@ -34,11 +32,7 @@ public abstract class TextUi {
     }
 
     public static void welcomeMessage() {
-        printDoubleLineMessage(LOGO);
-        String message = "Welcome to ConTech, your personal contact tracker.\n"
-                + "Can I get your name?";
-        printBottomLineMessage(message);
-        System.out.print("Name: ");
+        printTopLineMessage(LOGO);
     }
 
     public static void welcomeBackMessage(Contact personalContact) {
@@ -66,7 +60,19 @@ public abstract class TextUi {
         printDoubleLineMessage(message);
     }
 
-    public static void promptPersonalGithubUsernameMessage(String personalName) {
+    public static void promptPersonalNameMessage(boolean isFirstTime) {
+        String message;
+        if (isFirstTime) {
+            message = "Welcome to ConTech, your personal contact tracker.\n"
+                    + "Please provide us with your Name.";
+        } else {
+            message = "Please provide us with your Name.";
+        }
+        printDoubleLineMessage(message);
+        System.out.print("Name: ");
+    }
+
+    public static void promptPersonalGithubUsernameMessage() {
         String message = "Please provide us with your Github Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
@@ -94,7 +100,7 @@ public abstract class TextUi {
         System.out.print("Email Address: ");
     }
 
-    public static void promptPersonalLinkedInUsernameMessage() {
+    public static void promptPersonalLinkedinUsernameMessage() {
         String message = "Please provide us with your LinkedIn Username\n"
                 + "or press ENTER if you would like to skip.";
         printDoubleLineMessage(message);
@@ -166,6 +172,13 @@ public abstract class TextUi {
     public static void viewPersonalContactMessage(Contact personalContact) {
         String personalName = ViewMessageFormatterUi.viewNameFormatter(personalContact);
         String message = "Name:     " + personalName + formatContactFields(personalContact);
+        printDoubleLineMessage(message);
+    }
+
+    public static void editPersonalContactMessage(Contact personalContact) {
+        String message = "ConTech has edited your personal contact:\n"
+                + "Name:     " + personalContact.getName()
+                + formatContactFields(personalContact);
         printDoubleLineMessage(message);
     }
 

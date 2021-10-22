@@ -11,6 +11,7 @@ import seedu.exception.InvalidLinkedinUsernameException;
 import seedu.exception.InvalidNameException;
 import seedu.exception.InvalidTelegramUsernameException;
 import seedu.exception.InvalidTwitterUsernameException;
+import seedu.parser.AddPersonalContactParser;
 import seedu.parser.RegexParser;
 import seedu.ui.ExceptionTextUi;
 
@@ -38,7 +39,8 @@ public class ContactsDecoder extends RegexParser {
         return updatedContactList;
     }
 
-    public Contact readPersonalContact(File personalContactFile) throws FileErrorException {
+    public Contact readPersonalContact(File personalContactFile)
+            throws FileErrorException {
         Contact personalContact = new Contact(null, null, null, null, null, null);
         try {
             Scanner fileScanner = new Scanner(personalContactFile);
@@ -67,13 +69,18 @@ public class ContactsDecoder extends RegexParser {
                     contactTwitter, contactEmail);
         } catch (IndexOutOfBoundsException e) {
             ExceptionTextUi.corruptPersonalContactMessage();
+            AddPersonalContactParser addPersonalContactParser = new AddPersonalContactParser();
+            addPersonalContactParser.recallPersonalDetails();
+            return addPersonalContactParser.getPersonalContact();
         } catch (InvalidFlagException e) {
             assert false; // Control should not arrive here since flags are predetermined by FLAG_SEQUENCE
             ExceptionTextUi.invalidFlagMessage();
         } catch (InvalidGithubUsernameException | InvalidNameException | InvalidTelegramUsernameException
                 | InvalidLinkedinUsernameException | InvalidTwitterUsernameException | InvalidEmailException e) {
-            // For @lezongmun, from @marcusbory
-            ExceptionTextUi.invalidNameInput();
+            ExceptionTextUi.invalidPersonalContactFileMessage();
+            AddPersonalContactParser addPersonalContactParser = new AddPersonalContactParser();
+            addPersonalContactParser.recallPersonalDetails();
+            return addPersonalContactParser.getPersonalContact();
         }
         return personalContact;
     }
