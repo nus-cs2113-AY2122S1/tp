@@ -8,6 +8,7 @@ import seedu.traveller.commands.DeleteCommand;
 import seedu.traveller.commands.DeleteDayCommand;
 import seedu.traveller.commands.DeleteItemCommand;
 import seedu.traveller.commands.ViewCommand;
+import seedu.traveller.commands.SearchItemCommand;
 import seedu.traveller.commands.ShortestCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
@@ -67,9 +68,9 @@ public class Parser {
         case "shortest":
             command = parseShortestCommand(userInput[1]);
             break;
-//        case "search":
-//            command = parseSearchCommand(userInput[1]);
-//            break;
+        case "search":
+            command = parseSearchItemCommand(userInput[1]);
+            break;
         case "add-day":
             command = parseAddDayCommand(userInput[1]);
             break;
@@ -225,6 +226,14 @@ public class Parser {
         logger.log(Level.INFO, "Delete command input");
         String[] input = userInput.split(" ");
         command = new DeleteItemCommand(input[0],Integer.valueOf(input[1]),Integer.valueOf(input[2]));
+        return command;
+    }
+
+    private static Command parseSearchItemCommand(String userInput) {
+        Command command;
+        logger.log(Level.INFO, "Search command input");
+        String[] input = userInput.split(" ");
+        command = new SearchItemCommand(input[0],input[1]);
         return command;
     }
 

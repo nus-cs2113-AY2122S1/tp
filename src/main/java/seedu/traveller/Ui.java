@@ -69,11 +69,15 @@ public class Ui {
         System.out.println("\tYou have just deleted item " + itemIndex + " of " + tripName + " day " + dayIndex);
     }
 
+    public void printSearchItem(String tripName, String item) {
+        System.out.println("\tYou have just search item keyword " + item + " in trip called " + tripName);
+    }
+
     public void printEdit(String tripName) {
         System.out.println("\tYou have just edited a trip called " + tripName + ".");
     }
 
-    public void printSearch(String startCountry, String endCountry, double distance) {
+    public void printShortest(String startCountry, String endCountry, double distance) {
         System.out.println("The distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
     }
 
