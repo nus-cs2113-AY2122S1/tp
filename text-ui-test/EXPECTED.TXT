@@ -488,16 +488,6 @@ You now have 8 contact(s).
 ____________________________________________________________
 
 ____________________________________________________________
-One of your saved contacts has a duplicate field:
-
-4. lezongmun
-Github:   github.com/lezong
-
-Do you still want to edit the contact?  (y/n)
-
-____________________________________________________________
-
-____________________________________________________________
 ConTech has edited the specified contact:
 Name:     lezong mun
 Github:   github.com/new-git
@@ -610,6 +600,82 @@ Please try again with a valid flag.
   -e EMAIL
 ____________________________________________________________
 
+____________________________________________________________
+ConTech has 10 contacts stored.
+Here's the list :
+____________________________________________________________
+
+0. asjoda sadfsd
+1. asjoda sadfsd
+2. bory
+3. dev
+4. lezong mun
+5. lezongggg
+6. lezongmun
+7. mayank
+8. ng andre
+9. yusdhsdsd
+
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact:
+Name:     ashraf
+Github:   github.com/ashrafjfr
+
+You now have 11 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+One of your saved contacts has a duplicate field:
+
+0. ashraf
+Github:   github.com/ashrafjfr
+
+Do you still want to add the contact?  (y/n)
+
+____________________________________________________________
+
+____________________________________________________________
+ConTech has added the specified contact:
+Name:     ashraf
+Telegram: t.me/ashrafjfr
+
+You now have 12 contact(s).
+____________________________________________________________
+
+____________________________________________________________
+One of your saved contacts has a duplicate field:
+
+1. ashraf
+Telegram: t.me/ashrafjfr
+
+Do you still want to edit the contact?  (y/n)
+
+____________________________________________________________
+
+____________________________________________________________
+ConTech has edited the specified contact:
+Name:     ashraf
+Github:   github.com/ashrafjfr
+Telegram: t.me/ashrafjfr
+____________________________________________________________
+
+____________________________________________________________
+ConTech has edited the specified contact:
+Name:     ashraf
+Github:   github.com/ashrafjfr
+Email:    ashrafjfr@gmail.com
+Telegram: t.me/ashrafjfr
+____________________________________________________________
+
+____________________________________________________________
+0. ashraf
+Github:   github.com/ashrafjfr
+Email:    ashrafjfr@gmail.com
+Telegram: t.me/ashrafjfr
+____________________________________________________________
+
 data/import.txt:3 - "andre,null" is corrupted and not loaded.
 data/import.txt:5 - There is an invalid field.
 ____________________________________________________________
@@ -627,7 +693,7 @@ ConTech has successfully imported 3 lines
 ____________________________________________________________
 
 ____________________________________________________________
-5. lezai
+7. lezai
 Github:   github.com/lezongmun
 ____________________________________________________________
 

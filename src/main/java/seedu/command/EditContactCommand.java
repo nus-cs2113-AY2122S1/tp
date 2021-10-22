@@ -8,7 +8,9 @@ import seedu.ui.TextUi;
 import seedu.ui.ExceptionTextUi;
 import seedu.ui.UserInputTextUi;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EditContactCommand extends Command {
     public static final int PERSONAL_CONTACT_INDEX = -1;
@@ -33,10 +35,9 @@ public class EditContactCommand extends Command {
             if (contactIndex == PERSONAL_CONTACT_INDEX) {
                 updatePersonalContact();
             } else {
-                Contact preEditContact = duplicateContact(contactList.getContactAtIndex(contactIndex));
-                preEditContact.editContact(contactDetails);
-                Contact postEditContact = preEditContact;
-                handleDuplicates(postEditContact);
+                Contact editedContact = duplicateContact(contactList.getContactAtIndex(contactIndex));
+                editedContact.editContact(contactDetails);
+                handleDuplicates(editedContact);
             }
         } catch (IndexOutOfBoundsException | InvalidFlagException e) {
             ExceptionTextUi.numOutOfRangeMessage(contactList.getListSize());
@@ -56,8 +57,7 @@ public class EditContactCommand extends Command {
         }
     }
 
-    private void updateContact(Contact postEditContact)
-            throws IndexOutOfBoundsException {
+    private void updateContact(Contact postEditContact) throws IndexOutOfBoundsException {
         contactList.editContactAtIndex(contactDetails,contactIndex);
         //sort the contact list based on name after a contact has been edited
         contactList.sortContacts();
@@ -65,9 +65,10 @@ public class EditContactCommand extends Command {
     }
 
 
-    private Boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
+    private boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
             throws InvalidFlagException {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
+        boolean[] hasEditedField = hasEditedFields(contactDetails);
         String[] postEditContactDetails = extractContactDetails(postEditContact);
         for (int i = 0; i < contactList.getListSize(); i++) {
             if (i == contactIndex) {
@@ -75,11 +76,13 @@ public class EditContactCommand extends Command {
             }
             String[] currentContactDetails = extractContactDetails(contactList.getContactAtIndex(i));
             for (int j = 0; j < NUMBER_OF_FIELDS; j++) {
-                if (postEditContactDetails[j] != null && currentContactDetails[j] != null) {
-                    if (hasDuplicateField(postEditContactDetails[j], currentContactDetails[j])) {
-                        duplicatedIndex.add(i);
-                        break;
-                    }
+                if (!hasEditedField[j]) {
+                    continue;
+                }
+                if ((postEditContactDetails[j] != null && currentContactDetails[j] != null)
+                        && hasDuplicateField(postEditContactDetails[j], currentContactDetails[j])) {
+                    duplicatedIndex.add(i);
+                    break;
                 }
             }
         }
@@ -101,7 +104,15 @@ public class EditContactCommand extends Command {
         return new Contact(name, github, linkedin, telegram, twitter, email);
     }
 
-    private Boolean hasDuplicateField(String input, String saved) {
+    private boolean[] hasEditedFields(String[] contactDetails) {
+        boolean[] hasEditedField = new boolean[NUMBER_OF_FIELDS];
+        for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
+            hasEditedField[i] = (contactDetails[i] != null);
+        }
+        return hasEditedField;
+    }
+
+    private boolean hasDuplicateField(String input, String saved) {
         return stringCleaner(saved).equals(stringCleaner(input));
     }
 

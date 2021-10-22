@@ -10,7 +10,6 @@ import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AddContactCommand extends Command {
     private final String name;
@@ -74,7 +73,7 @@ public class AddContactCommand extends Command {
         }
     }
 
-    private Boolean hasDuplicates(Contact addedContact, ContactList contactList) throws InvalidFlagException {
+    private boolean hasDuplicates(Contact addedContact, ContactList contactList) throws InvalidFlagException {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
         String[] addedContactDetails = extractContactDetails(addedContact);
         for (int i = 0; i < contactList.getListSize(); i++) {
@@ -126,7 +125,7 @@ public class AddContactCommand extends Command {
         return contactDetails;
     }
 
-    private Boolean hasDuplicateField(String input, String saved) {
+    private boolean hasDuplicateField(String input, String saved) {
         return stringCleaner(saved).equals(stringCleaner(input));
     }
 
