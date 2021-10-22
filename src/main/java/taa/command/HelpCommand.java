@@ -20,6 +20,7 @@ public class HelpCommand extends Command {
         new FindStudentCommand(""),
         new ListAssessmentsCommand(""),
         new AddAssessmentCommand(""),
+        new EditAssessmentCommand(""),
         new DeleteAssessmentCommand(""),
         new ListMarksCommand(""),
         new SetMarksCommand(""),

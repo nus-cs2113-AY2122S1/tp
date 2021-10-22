@@ -1,29 +1,6 @@
 package taa;
 
-import taa.command.AddAssessmentCommand;
-import taa.command.AddModuleCommand;
-import taa.command.AddStudentCommand;
-import taa.command.AverageMarksCommand;
-import taa.command.Command;
-import taa.command.DeleteAssessmentCommand;
-import taa.command.DeleteMarkCommand;
-import taa.command.DeleteModuleCommand;
-import taa.command.DeleteStudentCommand;
-import taa.command.EditMarkCommand;
-import taa.command.EditModuleCommand;
-import taa.command.EditStudentCommand;
-import taa.command.ExitCommand;
-import taa.command.FindStudentCommand;
-import taa.command.HelpCommand;
-import taa.command.ListAssessmentsCommand;
-import taa.command.ListAttendanceCommand;
-import taa.command.ListMarksCommand;
-import taa.command.ListModulesCommand;
-import taa.command.ListStudentsCommand;
-import taa.command.SetAttendanceCommand;
-import taa.command.SetMarksCommand;
-
-import taa.command.DeleteAttendanceCommand;
+import taa.command.*;
 
 
 import taa.exception.TaaException;
@@ -92,6 +69,10 @@ public class Parser {
 
         case Command.COMMAND_LIST_ASSESSMENTS:
             command = new ListAssessmentsCommand(argument);
+            break;
+
+        case Command.COMMAND_EDIT_ASSESSMENT:
+            command = new EditAssessmentCommand(argument);
             break;
 
         case Command.COMMAND_DELETE_ASSESSMENT:

@@ -65,8 +65,41 @@ class AssessmentListTest {
         Command command3 = Parser.parseUserInput(deleteAssessmentInput);
         command3.execute(moduleList, ui, storage);
         assertEquals(
-            new AssessmentList().getSize(),
-            moduleList.getModuleWithCode("cs2113t").getAssessmentList().getSize()
+                new AssessmentList().getSize(),
+                moduleList.getModuleWithCode("cs2113t").getAssessmentList().getSize()
         );
+    }
+
+    @Test
+    void editAssessment_userInputFourEdits_assessmentEditedCorrectly() throws TaaException {
+        Ui ui = new Ui();
+        Storage storage = new Storage("./data/taa_data.json");
+        ModuleList moduleList = new ModuleList();
+        String moduleInput = "add_module c/cs2113t n/software engineering";
+        String assessmentInput = "add_assessment c/cs2113t n/Midterms m/50 w/20";
+        String editAssessment1 = "edit_assessment c/cs2113t n/midterms nn/finals";
+        String editAssessment2 = "edit_assessment c/cs2113t n/finals m/100";
+        String editAssessment3 = "edit_assessment c/cs2113t n/finals w/50";
+        String editAssessment4 = "edit_assessment c/cs2113t n/finals nn/midterms m/50 w/20";
+        Command command1 = Parser.parseUserInput(moduleInput);
+        command1.execute(moduleList, ui, storage);
+        Command command2 = Parser.parseUserInput(assessmentInput);
+        command2.execute(moduleList, ui, storage);
+        Assessment assessment = moduleList.getModuleWithCode("cs2113t").getAssessmentList().
+                getAssessment("midterms");
+        Command command3 = Parser.parseUserInput(editAssessment1);
+        command3.execute(moduleList, ui, storage);
+        assertEquals("finals", assessment.getName());
+        Command command4 = Parser.parseUserInput(editAssessment2);
+        command4.execute(moduleList, ui, storage);
+        assertEquals(100, assessment.getMaximumMarks());
+        Command command5 = Parser.parseUserInput(editAssessment3);
+        command5.execute(moduleList, ui, storage);
+        assertEquals(50, assessment.getWeightage());
+        Command command6 = Parser.parseUserInput(editAssessment4);
+        command6.execute(moduleList, ui, storage);
+        assertEquals("midterms", assessment.getName());
+        assertEquals(50, assessment.getMaximumMarks());
+        assertEquals(20, assessment.getWeightage());
     }
 }
