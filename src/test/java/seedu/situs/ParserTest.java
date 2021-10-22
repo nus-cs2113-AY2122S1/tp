@@ -15,7 +15,7 @@ public class ParserTest {
             String resultMsg = Parser.parse(inputString);
             fail();
         } catch (SitusException e) {
-            assertEquals("Invalid number format!", e.getMessage());
+            assertEquals("The number of parameters is wrong!", e.getMessage());
         }
     }
 

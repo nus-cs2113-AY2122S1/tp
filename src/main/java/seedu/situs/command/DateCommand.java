@@ -14,7 +14,7 @@ public class DateCommand extends Command {
     private String date;
     private LocalDate formattedDate;
 
-    private static final String DATE_FORMAT = "dd MM yyyy";
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
     public DateCommand(String date) {
@@ -31,14 +31,14 @@ public class DateCommand extends Command {
         }
 
         try {
-            formattedDate = LocalDate.parse(date);
+            formattedDate = LocalDate.parse(date, dateFormat);
             CurrentDate.overwriteCurrentDate(formattedDate);
 
             resultMsg = "The current session date has been changed to " + formattedDate.format(dateFormat);
             return resultMsg;
         } catch (DateTimeParseException e) {
-            throw new SitusException("Please write the date in this format: yyyy-mm-dd\n"
-                + "e.g 2021-10-14");
+            throw new SitusException("Please write the date in this format: dd-mm-yyyy\n"
+                + "e.g 14/10/2021");
         }
     }
 }
