@@ -6,8 +6,10 @@ import seedu.duke.Duke;
 import seedu.duke.DukeException;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
+import seedu.duke.model.module.FullModuleList;
 import seedu.duke.model.module.Module;
 import seedu.duke.model.module.ModuleList;
+import seedu.duke.model.module.exceptions.ModuleNotFoundException;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
 
@@ -325,6 +327,11 @@ public class Ui {
         System.out.println(PADDING + "Here are the detailed information of your modules:");
         System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
         System.out.print(LINE);
+    }
+
+    public void printModuleInfo(String moduleCode) throws ModuleNotFoundException {
+        Module module = Duke.fullModuleList.findModule(moduleCode);
+        System.out.print(module.getFullInfo());
     }
 
     // All-related methods
