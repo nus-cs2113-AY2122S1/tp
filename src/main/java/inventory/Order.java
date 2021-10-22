@@ -77,10 +77,15 @@ public class Order extends Medicine {
         }
     }
 
-    @Override
     public String toFileFormat() {
         String fileFormat = getOrderId() + "|" + getMedicineName() + "|" + getQuantity() + "|"
-                + DateParser.dateToString(getDate()) + "|" +  getStatus();
+                + DateParser.dateToString(getDate()) + "|" + getStatus();
         return fileFormat;
+    }
+
+    public String toArchiveFormat() {
+        String archiveFormat = "[ORDER ID: " + getOrderId() + "] " + getQuantity() + " " + getMedicineName()
+                + " WAS ORDERED ON " + DateParser.dateToString(getDate()) + ". STATUS: " + getStatus();
+        return archiveFormat;
     }
 }

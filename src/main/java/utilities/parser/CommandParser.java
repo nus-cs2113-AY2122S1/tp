@@ -5,6 +5,7 @@ import command.ExitCommand;
 import command.HelpCommand;
 import command.PurgeCommand;
 import command.dispense.AddDispenseCommand;
+import command.dispense.ArchiveDispenseCommand;
 import command.dispense.DeleteDispenseCommand;
 import command.dispense.ListDispenseCommand;
 import command.dispense.UpdateDispenseCommand;
@@ -13,6 +14,7 @@ import command.stock.DeleteStockCommand;
 import command.stock.ListStockCommand;
 import command.stock.UpdateStockCommand;
 import command.order.AddOrderCommand;
+import command.order.ArchiveOrderCommand;
 import command.order.DeleteOrderCommand;
 import command.order.ListOrderCommand;
 import command.order.UpdateOrderCommand;
@@ -25,6 +27,9 @@ import static command.CommandList.ADD;
 import static command.CommandList.ADD_DISPENSE;
 import static command.CommandList.ADD_ORDER;
 import static command.CommandList.ADD_STOCK;
+import static command.CommandList.ARCHIVE;
+import static command.CommandList.ARCHIVE_DISPENSE;
+import static command.CommandList.ARCHIVE_ORDER;
 import static command.CommandList.DELETE;
 import static command.CommandList.DELETE_DISPENSE;
 import static command.CommandList.DELETE_STOCK;
@@ -67,7 +72,7 @@ public class CommandParser {
     public Command processCommand(String command, String parametersString, Mode mode) throws InvalidCommand {
         // Append user's command with mode
         if (command.equals(ADD) || command.equals(LIST) || command.equals(UPDATE)
-                || command.equals(DELETE)) {
+                || command.equals(DELETE) || command.equals(ARCHIVE)) {
             command = command + mode.name().toLowerCase();
         }
 
@@ -80,8 +85,10 @@ public class CommandParser {
             return new AddStockCommand(parameters);
         case ADD_ORDER:
             return new AddOrderCommand(parameters);
-        /*case ARCHIVE:
-            break;*/
+        case ARCHIVE_ORDER:
+            return new ArchiveOrderCommand(parameters);
+        case ARCHIVE_DISPENSE:
+            return new ArchiveDispenseCommand(parameters);
         case DELETE_DISPENSE:
             return new DeleteDispenseCommand(parameters);
         case DELETE_STOCK:

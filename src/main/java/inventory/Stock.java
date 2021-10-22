@@ -103,11 +103,16 @@ public class Stock extends Medicine {
         isDeleted = deleted;
     }
 
-    @Override
     public String toFileFormat() {
         String fileFormat = getStockID() + "|" + getMedicineName() + "|" + getPrice() + "|" + getQuantity() + "|"
-                + DateParser.dateToString(getExpiry()) + "|" +  getDescription() + "|" + getMaxQuantity() + "|"
+                + DateParser.dateToString(getExpiry()) + "|" + getDescription() + "|" + getMaxQuantity() + "|"
                 + isDeleted();
         return fileFormat;
+    }
+
+    // Dummy method since Stock does not use archive.
+    public String toArchiveFormat() {
+        String archiveFormat = "";
+        return archiveFormat;
     }
 }

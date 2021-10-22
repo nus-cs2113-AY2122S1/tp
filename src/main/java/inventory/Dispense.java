@@ -94,11 +94,17 @@ public class Dispense extends Medicine {
         this.stockId = stockId;
     }
 
-    @Override
     public String toFileFormat() {
         String fileFormat = getDispenseId() + "|" + getMedicineName() + "|" + getQuantity() + "|"
                 + getCustomerId() + "|" + DateParser.dateToString(getDate()) + "|" + getStaff() + "|" + getStockId();
         return fileFormat;
+    }
+
+    public String toArchiveFormat() {
+        String archiveFormat = "[DISPENSE ID: " + getDispenseId() + "] " + getQuantity() + " " + getMedicineName()
+                + " [STOCK ID: " + getStockId() + "] WAS DISPENSED BY " + getStaff().toUpperCase() + " TO "
+                + getCustomerId().toUpperCase() + " ON " + DateParser.dateToString(getDate());
+        return archiveFormat;
     }
 
 }

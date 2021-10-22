@@ -25,12 +25,16 @@ public class Storage {
     private static final String STOCK_FILE_PATH = "data/stock.txt";
     private static final String ORDER_FILE_PATH = "data/order.txt";
     private static final String DISPENSE_FILE_PATH = "data/dispense.txt";
+    private static final String ORDER_ARCHIVE_FILE_PATH = "data/order_archive.txt";
+    private static final String DISPENSE_ARCHIVE_FILE_PATH = "data/dispense_archive.txt";
     private static final int NUMBER_OF_STOCK_DATA_FIELDS = 8;
     private static final int NUMBER_OF_ORDER_DATA_FIELDS = 5;
     private static final int NUMBER_OF_DISPENSE_DATA_FIELDS = 7;
     private static File stockFile;
     private static File orderFile;
     private static File dispenseFile;
+    private static File orderArchiveFile;
+    private static File dispenseArchiveFile;
     private static Storage storage = null;
 
     /**
@@ -47,12 +51,14 @@ public class Storage {
 
     /**
      * Constructor of Storage class.
-     * Initializes myFile variable with file data/duke.txt.
+     * Initializes all files objects.
      */
     public Storage() {
         stockFile = new File(STOCK_FILE_PATH);
         orderFile = new File(ORDER_FILE_PATH);
         dispenseFile = new File(DISPENSE_FILE_PATH);
+        orderArchiveFile = new File(ORDER_ARCHIVE_FILE_PATH);
+        dispenseArchiveFile = new File(DISPENSE_ARCHIVE_FILE_PATH);
     }
 
     /**
@@ -91,6 +97,38 @@ public class Storage {
     }
 
     /**
+     * Archive data into specific files after categorising them into Order and Dispense.
+     */
+    public void archiveData(ArrayList<Medicine> medicines) {
+        String orderArchiveData = "";
+        String dispenseArchiveData = "";
+        for (Medicine medicine : medicines) {
+            String data = medicine.toArchiveFormat() + System.lineSeparator();
+            if (medicine instanceof Stock) {
+                continue; // No archive for stock
+            } else if (medicine instanceof Order) {
+                orderArchiveData += data;
+            } else if (medicine instanceof Dispense) {
+                dispenseArchiveData += data;
+            }
+        }
+
+        File dataDirectory = new File(DIRECTORY_PATH);
+        if (!dataDirectory.exists()) {
+            dataDirectory.mkdir();
+        }
+
+        try {
+            orderArchiveFile.createNewFile();
+            appendToFile(orderArchiveData, ORDER_ARCHIVE_FILE_PATH);
+            dispenseArchiveFile.createNewFile();
+            appendToFile(dispenseArchiveData, DISPENSE_ARCHIVE_FILE_PATH);
+        } catch (IOException e) {
+            System.out.println("Something went wrong: " + e.getMessage());
+        }
+    }
+
+    /**
      * Write data into file corresponding files.
      *
      * @param data Data to be written into the file.
@@ -98,6 +136,18 @@ public class Storage {
      */
     private void writeToFile(String data, String filePath) throws IOException {
         FileWriter fw = new FileWriter(filePath);
+        fw.write(data);
+        fw.close();
+    }
+
+    /**
+     * Append data into file corresponding files.
+     *
+     * @param data Data to be appended into the file.
+     * @throws IOException If unable to append into file.
+     */
+    private void appendToFile(String data, String filePath) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
         fw.write(data);
         fw.close();
     }
