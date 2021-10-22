@@ -1,4 +1,6 @@
-# About us
+# About Us
+
+Get to know more about the Food-O-Rama team! Please do contact us for any enquiries.
 
 Display | Name | Github Profile | Portfolio 
 --------|:----:|:--------------:|:---------:

@@ -8,7 +8,10 @@ keep track of their food resources. It provides the user with insight on the amo
 in their storage and how much food is wasted. This allows the user to better plan their 
 purchase of raw ingredients and enables more efficient allocation to the cooking of dishes which ultimately saves cost.
 
-Useful links:
-* [User Guide](UserGuide.md)
-* [Developer Guide](DeveloperGuide.md)
-* [About Us](AboutUs.md)
+We at the Food-O-Rama team take pride in what we aim to do; help to reduce the global food wastage one step at a time.
+Check out our project guides at the links below! 😄
+
+💗 Useful links:
+* [📘 User Guide](UserGuide.md)
+* [📗 Developer Guide](DeveloperGuide.md)
+* [🧑‍🤝‍🧑 About Us](AboutUs.md)
