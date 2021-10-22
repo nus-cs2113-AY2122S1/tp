@@ -296,6 +296,13 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays a message to inform user that the specified module
+     * has been successfully deleted.
+     *
+     * @param module the Module type object that has been deleted
+     * @param size the number of remaining modules in the list
+     */
     public void printModuleDeleted(Module module, int size) {
         System.out.print(LINE);
         System.out.println(PADDING + "Ok. The following module has been deleted:");
@@ -329,8 +336,14 @@ public class Ui {
         System.out.print(LINE);
     }
 
+    /**
+     * Displays the full module information of the specified module code.
+     *
+     * @param moduleCode the module code
+     * @throws ModuleNotFoundException when there is no module in FullModuleList with a matching module code
+     */
     public void printModuleInfo(String moduleCode) throws ModuleNotFoundException {
-        Module module = Duke.fullModuleList.findModule(moduleCode);
+        Module module = Duke.fullModuleList.findModule(moduleCode.toUpperCase());
         System.out.print(module.getFullInfo());
     }
 

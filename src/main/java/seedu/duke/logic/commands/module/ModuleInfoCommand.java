@@ -20,6 +20,6 @@ public class ModuleInfoCommand extends Command {
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
             throws DukeException, IOException {
-        ui.printModuleInfo(moduleCode.toUpperCase());
+        ui.printModuleInfo(moduleCode);
     }
 }
