@@ -11,10 +11,12 @@ box Utilities COLOR_UTILITIES_BOX
     participant ":CommandSyntax" as commandsyntax COLOR_UTILITIES
     participant ":OrderValidator" as ordervalidator COLOR_UTILITIES
     participant ":Ui" as ui COLOR_UTILITIES
+    participant ":Storage" as storage COLOR_UTILITIES
 end box
 
 box Inventory COLOR_INVENTORY_BOX
     participant ":Medicine" as medicine COLOR_INVENTORY
+    participant ":Order" as order COLOR_INVENTORY
 end box
 autoactivate on
 
@@ -30,8 +32,25 @@ deleteorder <-- commandsyntax : isInvalidParameter
     opt isValidOrderId
     deleteorder -> ordervalidator : isValidOrderId()
     deleteorder <-- ordervalidator : isValidOrderId
+    loop medicines
+        deleteorder -> deleteorder : medicine
+        opt medicine instanceof Order
+            deleteorder -> order : getOrderId()
+            deleteorder <-- order
+            opt order.getOrderId() == order.orderId
+                deleteorder -> medicine : remove()
+                deleteorder <-- medicine :
+            end
+        end
+
+    end
     end
 end
 
+    deleteorder -> storage: getInstance()
+    deleteorder <-- storage
+    deleteorder -> storage: saveData()
+    deactivate storage
+    deactivate deleteorder
 
 @enduml

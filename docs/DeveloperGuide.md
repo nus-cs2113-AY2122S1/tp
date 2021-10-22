@@ -1,9 +1,64 @@
 # Developer Guide
 
-## Acknowledgements
+## Table of Contents
+* [Acknowledgements](#Acknowledgements)
+* [Setting up, getting started](#Setting-up,-getting-started)
+  * [Setting up](#setting-up)
+  * [Before writing code](#before-writing-code)
+* [Design](#Design)
+  * [Architecture](#Architecture)
+  * [Command](#Command)
+  * [Utilities](#Utilities)
+  * [Inventory](#Inventory)
+  * [Errors](#Errors)
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the
-original source as well}
+* [Implementation](#Implementation)
+  * [Main Logic](#Main-Logic)
+  * [AddStockCommand](#AddStockCommand)
+  * [AddDispenseCommand](#AddDispenseCommand)
+  * [AddOrderCommand](#AddOrderCommand)
+  * [DeleteStockCommand](#DeleteStockCommand)
+  * [DeleteDispenseCommand](#DeleteDispenseCommand)
+  * [DeleteOrderCommand](#DeleteOrderCommand)
+  * [ListCommand](#ListCommand)
+  * [UpdateStockCommand](#UpdateStockCommand)
+  * [UpdateDispenseCommand](#UpdateDispenseCommand)
+  * [UpdateOrderCommand](#UpdateOrderCommand)
+* [Product scope](#Product-scope)
+* [Target user profile](#Target-user-profile)
+* [Value proposition](#Value-proposition)
+* [User Stories](#User-Stories)
+* [Non-Functional Requirements](#Non-Functional-Requirements)
+* [Glossary](#Glossary)
+* [Instructions for manual testing](#Instructions-for-manual-testing)
+
+
+
+## Acknowledgements
+* Inspiration for App Idea and OOP Structure :https://github.com/se-edu/addressbook-level2
+* Inspiration for User Guide: https://se-education.org/addressbook-level3/UserGuide.html
+* Inspiration for Developer Guide: https://se-education.org/addressbook-level3/DeveloperGuide.html
+* PlantUML Tutorial: https://se-education.org/guides/tutorials/plantUml.html
+
+
+## Setting up, getting started
+###Setting up
+1. Fork [this](https://github.com/AY2122S1-CS2113T-T10-1/tp/) repo, and clone the fork into your computer.
+2. Ensure that you have [IntelliJ IDEA](https://www.jetbrains.com/idea/download/#section=windows) and [JDK 11](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) installed.
+3. Configure the JDK
+   * Follow the guide at [se-edu/guides IDEA: Configuring the JDK](https://se-education.org/guides/tutorials/intellijJdk.html) to ensure Intellij is configured to use JDK 11.
+4. Import the project as a Gradle project
+   * Follow the guide [se-edu/guides IDEA: Importing a Gradle project](https://se-education.org/guides/tutorials/intellijImportGradleProject.html) to import the project into IDEA.
+   * Note: Importing a Gradle project is slightly different from importing a normal Java project.
+5. Verify the setup
+   * Locate the file `src/main/java/MediVault.java` then run the `MediVault.main()` and try a few commands 
+   * Run the [test](https://se-education.org/addressbook-level3/Testing.html) to ensure they all pass.
+### Before writing code
+1. Configure the coding style
+   * If using IDEA, follow the guide [se-edu/guides IDEA: Configuring the code style](https://se-education.org/guides/tutorials/intellijCodeStyle.html) to set up IDEA’s coding style to match ours.
+2. Set up CI
+   * This project comes with a GitHub Actions config files (in `.github/workflows folder`). When GitHub detects those files, it will run the CI for your project automatically at each push to the `master` branch or to any PR. No set up required.
+
 
 ## Design
 
@@ -25,7 +80,7 @@ Let `*` be either of the three class: `Stock`, `Order` or `Dispense`.
 * `List*Command`: Lists the `*` records.
 * `Update*Command`: Updates the `*` information.
 * `ReceiveOrderCommand`: Marks an order as received and adds the ordered medication into the current stocks.
-* `ArchiveCommand`: Archives all the records before a given date. 
+* `ArchiveCommand`: Archives all the records before a given date.
 * `PurgeCommand`: Wipes all record in MediVault.
 * `HelpCommand`: Shows the help page.
 * `ExitCommand`: Exits MediVault.
@@ -93,9 +148,9 @@ MediVault initialises an AddOrderCommand class when CommandParser identifies the
 `addorder` or the `add` keyword in the `order` mode.
 
 * MediVault adds order information when `parameter` and `parameterValues` provided by the
-user are valid.
+  user are valid.
 * As the order date is an optional parameter, MediVault will use the date the order was
-placed as the default date.
+  placed as the default date.
 * User will not be unable to add order if the order quantity exceeds maximum stock quantity.
 
 The sequence diagram for AddOrderCommand is shown below.
@@ -186,8 +241,8 @@ The sequence diagram for UpdateStockCommand is shown below.
 
 ![UpdateStockSequenceDiagram](diagrams/diagram_images/UpdateStockSequenceDiagram.png)
 
-MediVault adds a new _stock_ record when a user updates contains the `n/NAME` parameter. 
-The old stock record still exists in MediVault, but it will not be visible to user when listed. 
+MediVault adds a new _stock_ record when a user updates contains the `n/NAME` parameter.
+The old stock record still exists in MediVault, but it will not be visible to user when listed.
 This approach solves the issue when a user is unable to delete a _
 dispense_ record when the medicine _stock_ name gets updated.
 
@@ -198,7 +253,7 @@ MediVault initialises an UpdateDispenseCommand class when CommandParser identifi
 
 * MediVault checks if the `parameters` and `parameterValues` provided by the user are valid.
 * When a user updates dispense information containing either `n/NAME`, `q/QUANTITY` or both,
-MediVault restores the dispensed stocks or dispense more stocks depending on the user input. 
+  MediVault restores the dispensed stocks or dispense more stocks depending on the user input.
 
 The sequence diagram for UpdateDispenseCommand is shown below.
 
@@ -206,9 +261,9 @@ The sequence diagram for UpdateDispenseCommand is shown below.
 
 MediVault adds a new _dispense_ record when a user updates contains either the `n/NAME`, `q/QUANTITY`
 parameter or both. The old _dispense_ record is permanently removed from MediVault.
-This approach solves the issue when a user dispenses a medication with an amount 
+This approach solves the issue when a user dispenses a medication with an amount
 that is more than the current batch of stock with the same _stock_ id but less than
-the total stock quantity. 
+the total stock quantity.
 MediVault will correctly add new _dispense_ records with the corresponding _stock_ Id.
 
 ### UpdateOrderCommand

@@ -27,7 +27,7 @@ autoactivate on
     addstock -> medicine : getInstance()
     addstock <-- medicine
 
-    alt nameExist
+
 
         addstock -> addstock : checkValidParametersAndValues()
         opt !isInvalidParameter
@@ -40,7 +40,7 @@ autoactivate on
                 end
             end
             addstock --> addstock : isCheckValidParametersAndValues
-
+            alt nameExist
                 addstock -> stockmanager: getTotalStockQuantity()
                 addstock <-- stockmanager: totalStock
 
@@ -71,12 +71,13 @@ autoactivate on
         end
         addstock --> addstock : isCheckValidParametersAndValues
 
+    end
     addstock -> storage: getInstance()
     addstock <-- storage
     addstock -> storage: saveData()
     deactivate storage
+    deactivate addstock
 
-    end
 
 
 

@@ -57,4 +57,9 @@ adddispense <-- commandsyntax : isInvalidParameter
         end
     end
 end
+        adddispense -> storage: getInstance()
+        adddispense <-- storage
+        adddispense -> storage: saveData()
+    deactivate adddispense
+    deactivate storage
 @enduml
