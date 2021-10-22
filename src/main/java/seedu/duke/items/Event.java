@@ -5,8 +5,7 @@ import java.util.ArrayList;
 
 public class Event extends Item {
 
-    public ArrayList<Task> taskList = new ArrayList<>();
-    private LocalDateTime dateTime;
+    private final ArrayList<Task> taskList = new ArrayList<>();
     private String venue;
     private double budget;
 
@@ -16,18 +15,6 @@ public class Event extends Item {
         super("event", title, description, dateTime);
         this.venue = venue;
         this.budget = budget;
-    }
-
-    public LocalDateTime getDateValue() {
-        return dateTime;
-    }
-
-    public String getItemType() {
-        return "event";
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
     }
 
     public void setVenue(String venue) {
@@ -44,6 +31,14 @@ public class Event extends Item {
 
     public double getBudget() {
         return budget;
+    }
+
+    public void addToTaskList(Task task) {
+        taskList.add(task);
+    }
+
+    public Task getFromTaskList(int index) {
+        return taskList.get(index);
     }
 
     public ArrayList<Task> getTaskList() {

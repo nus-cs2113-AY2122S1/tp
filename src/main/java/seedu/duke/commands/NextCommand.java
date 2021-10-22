@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.Parser;
 import seedu.duke.Ui;
 import seedu.duke.items.Event;
+import seedu.duke.items.EventCatalog;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
 
@@ -16,7 +17,7 @@ public class NextCommand extends Command {
 
     public CommandResult execute() {
         sortedList = Parser.makeMainList();
-        Parser.bubbleSortItems(sortedList);
+        EventCatalog.bubbleSortItems(sortedList);
         Item nextItem = sortedList.get(0);
         if (nextItem.getItemType().equalsIgnoreCase("task")) {
             Ui.printTask((Task) nextItem);
