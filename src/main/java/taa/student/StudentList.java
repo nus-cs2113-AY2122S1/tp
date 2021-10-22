@@ -58,12 +58,12 @@ public class StudentList implements ClassChecker {
     }
 
     /**
-     * Deletes a student from the student list.
+     * Deletes a student with a particular index from the student list.
      *
      * @param index The index of the student.
      * @return A Student object if successfully deleted, else null.
      */
-    public Student deleteStudent(int index) {
+    public Student deleteStudentAt(int index) {
         if (isValidIndex(index)) {
             return students.remove(index);
         }

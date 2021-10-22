@@ -50,13 +50,13 @@ public class SetMarksCommand extends Command {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
-
-        if (!checkArguments()) {
+      
+        if (!hasAllArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModule(moduleCode);
+        Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }

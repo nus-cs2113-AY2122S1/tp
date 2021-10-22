@@ -63,7 +63,7 @@ public class ModuleList implements ClassChecker {
      * @param code The module code to search for.
      * @return A Module object if found, else null.
      */
-    public Module getModule(String code) {
+    public Module getModuleWithCode(String code) {
         for (Module module : modules) {
             if (module.getCode().equals(code)) {
                 return module;
@@ -71,6 +71,18 @@ public class ModuleList implements ClassChecker {
         }
 
         return null;
+    }
+
+    /**
+     * Deletes a particular module from the list.
+     *
+     * @param module The module object to delete.
+     * @return true if successfully removed, else false.
+     */
+    public boolean deleteModule(Module module) {
+        assert module != null;
+
+        return modules.remove(module);
     }
 
     @Override

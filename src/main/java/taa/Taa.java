@@ -2,6 +2,7 @@ package taa;
 
 import taa.command.Command;
 import taa.exception.TaaException;
+import taa.logger.TaaLogger;
 import taa.module.ModuleList;
 import taa.storage.Storage;
 
@@ -15,6 +16,11 @@ public class Taa {
     public Taa() {
         this.ui = new Ui();
         this.storage = new Storage(DATA_FILENAME);
+    }
+
+    public Taa(boolean isLoggingEnabled) {
+        this();
+        TaaLogger.setEnabled(isLoggingEnabled);
     }
 
     public void run() {
@@ -56,7 +62,14 @@ public class Taa {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        Taa taa = new Taa();
+        boolean isLoggingEnabled = false;
+        for (String arg : args) {
+            if (arg.equals("-log")) {
+                isLoggingEnabled = true;
+            }
+        }
+
+        Taa taa = new Taa(isLoggingEnabled);
         taa.run();
     }
 }

@@ -40,7 +40,7 @@ public class AssessmentList implements ClassChecker {
      * or total weightage exceed the maximum weightage after adding.
      *
      * @param assessment The assessment object to be added.
-     * @return True if success, else false.
+     * @return true if success, else false.
      */
     public boolean addAssessment(Assessment assessment) {
         double totalWeightage = 0;
@@ -54,7 +54,7 @@ public class AssessmentList implements ClassChecker {
 
         double newTotalWeightage = totalWeightage + assessment.getWeightage();
         if (!Assessment.isWeightageWithinRange(newTotalWeightage)
-                || !Assessment.isMaximumMarksWithinRange(assessment.getMaximumMarks())) {
+                || assessment.getMaximumMarks() < Assessment.MINIMUM_MARKS) {
             return false;
         }
 
@@ -147,10 +147,6 @@ public class AssessmentList implements ClassChecker {
             } else {
                 assessmentNames.add(name.toLowerCase());
                 totalWeightage += assessment.getWeightage();
-            }
-
-            if (!Assessment.isMaximumMarksWithinRange(assessment.getMaximumMarks())) {
-                return false;
             }
         }
 
