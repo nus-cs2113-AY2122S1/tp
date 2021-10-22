@@ -82,15 +82,119 @@ ___
 
 ## Using this Guide
 
-Along the way, you might encounter commands with specific brackets around some arguments such
-as `{}` and `<>`. The below table represents what each means.
+Along the way, you might encounter commands with specific brackets around some values such as `{}`
+and `<>`.
+
+The below table represents what each means.
 
 | Command options | Description |
 | ----------- | ----------- |
-| `{argument}` |  This means the argument is optional.|
-| `<argument>` | This means the argument is compulsory.|
+| `{value}` |  The value is optional, and including it may provide different results.|
+| `<value>` | The value is required for the command to work properly.|
+|`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
+
+Terminologies used throughout this guide:
+
+| Terminology | Description |
+| ----------- | ----------- |
+| workspace |  A workspace is the environment in which you are currently assessing. For example, when you want to access some files inside a folder, you will need to enter the folder first. As such the folder is a **workspace**.|
+|module|A module refers to a NUS module. For example, `CS2113T` is a module.|
 
 ---
+
+## Section: Module
+
+All commands related to the workspace `Module` will be displayed in these section. These commands
+enable users to create, delete and view `modules` within TermiNUS.
+
+### Accessing the module workspace
+
+**Format:** `module`
+
+Example: `module`
+
+Expected Output:
+
+```
+[] >>> module
+
+You have 0 modules
+
+Type any of the following to get started:
+> add
+> exit
+> help
+> view
+> back
+> delete
+
+[module] >>> 
+```
+
+List of Module workspace commands:
+
+| Command      | Description |
+| ----------- | ----------- |
+|add|add a module in TermiNUS|
+|delete|delete a module in TermiNUS|
+|view|view modules information currently in TermiNUS|
+|help|view all commands and its usage within the module workspace|
+|back|escape and return to the default workspace|
+|exit|exit and closes TermiNUS|
+
+### Adding a new module
+
+**Format:** `add "<module code>"`
+
+Adds a module when in the module workspace.
+
+> 💡 When executing this command, it will add the module into TermiNUS and creates a folder with the module code.
+
+> ❗ If there exists a folder with the same code of the newly added module, all contents in that folder will be wiped.
+
+Example: `add "CS2113T"`
+
+Expected Output:
+
+```
+[module] >>> add "CS2113T"
+Module CS2113T has been added
+[module] >>> 
+```
+
+### Deleting a module
+
+**Format:** `delete <index>`
+
+Deletes the specified module given by its **index** when in the module workspace. 
+
+Example: `delete 1`
+
+Expected Output:
+
+```
+[module] >>> delete 1
+Deleted module CS2113T.
+[module] >>> 
+```
+
+### Viewing module information
+
+**Format:** `view`
+
+Views all modules when in the module workspace.
+
+Example: `view` 
+
+Expected Output:
+
+```
+[module] >>> view
+1. CS2113T
+2. CS2106
+[module] >>> 
+```
+
 
 ## Section: Note
 
