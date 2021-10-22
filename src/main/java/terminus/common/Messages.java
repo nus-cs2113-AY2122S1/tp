@@ -39,7 +39,8 @@ public class Messages {
     public static final String EMPTY_CONTENT_LIST_MESSAGE = "You do not have any content in this workspace.\n";
     public static final String CONTENT_MESSAGE_HEADER = "List of Content\n---------------\n";
 
-    public static final String EMPTY_SCHEDULE_FOR_THE_DAY = "You have no schedule for %s\n";
+    public static final String EMPTY_SCHEDULE_FOR_THE_DAY = "You have no schedule for %s.\n";
+    public static final String EMPTY_SCHEDULE_FOR_THE_WEEK = "You have no schedule for the week.\n";
     
     public static final String MAIN_BANNER = "Welcome to TermiNUS!\n";
     public static final String MAIN_REMINDER = "This is your schedule today:\n";

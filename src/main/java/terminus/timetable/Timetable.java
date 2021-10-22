@@ -89,6 +89,11 @@ public class Timetable {
             }
             index = 0;
         }
+        //return dailyResult.toString();
+
+        if (isStringNullOrEmpty(dailyResult.toString())) {
+            return null;
+        }
         return dailyResult.toString();
     }
 
@@ -99,9 +104,12 @@ public class Timetable {
      * @param day      The day corresponding to the retrieved schedule
      */
     public String checkEmptySchedule(String schedule, String day) {
-        if (schedule == null) {
+        if (schedule == null && day != null) {
             TerminusLogger.info("There is no schedule in the user's timetable");
             schedule = String.format(Messages.EMPTY_SCHEDULE_FOR_THE_DAY, day);
+        } else if (schedule == null && day == null) {
+            TerminusLogger.info("There is no schedule in the user's timetable");
+            schedule = Messages.EMPTY_SCHEDULE_FOR_THE_WEEK;
         }
         return schedule;
     }
