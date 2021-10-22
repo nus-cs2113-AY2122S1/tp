@@ -25,8 +25,8 @@ public class Tour {
 
     @Override
     public String toString() {
-        return  name + System.lineSeparator()
+        return  "Name: " + name + System.lineSeparator()
                 + "Code: " + code + System.lineSeparator()
-                + "Price per pax: $" + price + System.lineSeparator();
+                + "Price per pax: $" + String.format("%.02f",price);
     }
 }

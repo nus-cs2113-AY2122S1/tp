@@ -22,10 +22,10 @@ class CutCommandTest {
      */
     @Test
     void cutCommand_validData_correctlyDeleted() {
-        Command add = new AddCommand(testClient);
-        add.execute(clientList, ui);
+        Command add = new AddClientCommand(testClient);
+        add.execute();
         Command cut = new CutCommand(0);
-        cut.execute(clientList, ui);
+        cut.execute();
 
         int length = clientList.getClientCount();
         assertEquals(0, length);
@@ -36,10 +36,10 @@ class CutCommandTest {
      */
     @Test
     void cutCommand_invalidData_correctlyDeleted() {
-        Command add = new AddCommand(testClient);
-        add.execute(clientList, ui);
+        Command add = new AddClientCommand(testClient);
+        add.execute();
         Command cut = new CutCommand(-1);
-        cut.execute(clientList, ui);
+        cut.execute();
 
         int length = clientList.getClientCount();
         assertEquals(1, length);

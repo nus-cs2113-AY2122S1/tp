@@ -1,6 +1,6 @@
 package seedu.duke;
 
-import java.util.*;
+import java.util;
 
 /**
  * Sense-makes the inputs given and distributes the information to other parts of the program.
@@ -13,6 +13,7 @@ public class Parser {
     public static final String ERROR_INVALID_INPUT = "Invalid input! Please enter a valid command.";
     public static final String ERROR_EXTRA_INPUT = "Extra input! Refrain from doing so.";
     public static final String ERROR_INVALID_CUT_INDEX = "Invalid cut index!";
+    public static final String ERROR_INVALID_CLIENT_INDEX = "Invalid client index!";
     public static final String ERROR_DUPLICATE_PREFIXES = "Duplicate prefixes! Please try again.";
     public static final String ERROR_MISSING_PREFIXES
             = "Missing prefixes! Did you miss out some fields? Please try again.";
@@ -37,12 +38,13 @@ public class Parser {
             }
             return new ByeCommand();
         case "add":
-            return parseAdd(params);
+//            try {
+                return parseAdd(params);
+//            } catch (NullPointerException | NumberFormatException e) {
+//                throw new TourPlannerException(ERROR_INVALID_CLIENT_INDEX);
+//            }
         case "list":
-            if (!params.equals("")) {
-                throw new TourPlannerException(ERROR_EXTRA_INPUT);
-            }
-            return new ListCommand();
+            return parseList(params);
         case "clear":
             if (!params.equals("")) {
                 throw new TourPlannerException(ERROR_EXTRA_INPUT);
@@ -99,8 +101,8 @@ public class Parser {
             repeatPrefixChecker = 5;
             break;
         case "-p":
-            prefixes = Arrays.asList("/c", "/t", "/f");
-            repeatPrefixChecker = 4;
+            prefixes = Arrays.asList("/t", "/f");
+            repeatPrefixChecker = 3;
             break;
         default:
             break;
@@ -133,7 +135,8 @@ public class Parser {
      * @return the array containing client's information in a sorted fashion
      * @throws TourPlannerException if there are duplicate prefixes found
      */
-    private static ArrayList<String> extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes, String argString, String identifier)
+    private static ArrayList<String> extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes, 
+                                                            String argString, String identifier)
             throws TourPlannerException {
         ArrayList<String> extractedValues = new ArrayList<>();
         initialiseArrayList(extractedValues);
@@ -189,12 +192,13 @@ public class Parser {
         return value;
     }
 
-    /**
+     /**
      * Obtains array index that corresponds to the prefix given.
      *
      * @param prefix prefix of value extracted
      * @return array index of values according to prefix
      */
+
     private static int obtainArrayIndex(String prefix, String identifier) {
         int index = 0;
         switch (identifier) {
@@ -332,7 +336,26 @@ public class Parser {
 
         case "-t":
             Tour tour = new Tour(values);
-            //return new AddTourCommand(tour);
+            return new AddTourCommand(tour);
+        case "-p":
+            return new AddPackageCommand(values);
+        default:
+            break;
+        }
+        return null;
+    }
+
+    private static Command parseList(String params) throws TourPlannerException {
+        switch (params) {
+        case "-c":
+            return new ListClientCommand();
+        case "-t":
+            return new ListTourCommand();
+        case "-f":
+            return new ListFlightCommand();
+        case "-p":
+            return new ListPackageCommand();
+        default:
             break;
         }
         return null;

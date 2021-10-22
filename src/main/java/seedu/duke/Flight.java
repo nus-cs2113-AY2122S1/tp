@@ -2,17 +2,17 @@ package seedu.duke;
 
 public class Flight {
     private final String id;
-    private final String toDestination;
     private final String fromDestination;
-    private final String toDate;
+    private final String toDestination;
     private final String fromDate;
+    private final String toDate;
 
     public Flight(String[] values) {
         id = values[0];
-        toDestination = values[1];
-        fromDestination = values[2];
-        toDate = values[3];
-        fromDate = values[4];
+        fromDestination = values[1];
+        toDestination = values[2];
+        fromDate = values[3];
+        toDate = values[4];
     }
 
     public String getId() {
@@ -37,11 +37,8 @@ public class Flight {
 
     @Override
     public String toString() {
-
-        return "Flight's id: " + id + System.lineSeparator()
-                + "Flight's to destination: " + toDestination + System.lineSeparator()
-                + "Client's from destination: " + fromDestination + System.lineSeparator()
-                + "Client's to date: " + toDate + System.lineSeparator()
-                + "Client's from date: " + fromDate;
+        return "Flight ID: " + id + System.lineSeparator()
+                + "FROM: " + fromDestination + ", " + fromDate + System.lineSeparator()
+                + "TO: " + toDestination + ", " + toDate;
     }
 }

@@ -30,6 +30,7 @@ public class AddClientCommand extends Command {
      */
     @Override
     public void execute() {
-        clients.add(client, ui);
+        clients.add(client);
+        ui.showAddClient(client);
     }
 }
