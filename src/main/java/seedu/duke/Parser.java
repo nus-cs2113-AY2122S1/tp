@@ -287,7 +287,8 @@ public class Parser {
 
         case "-t":
             Tour tour = new Tour(values);
-            return new AddTourCommand(tour);
+            //return new AddTourCommand(tour);
+            break;
         }
         return null;
     }
