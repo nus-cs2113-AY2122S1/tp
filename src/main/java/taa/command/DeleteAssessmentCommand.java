@@ -34,7 +34,6 @@ public class DeleteAssessmentCommand extends Command {
             throw new TaaException(getUsageMessage());
         }
 
-        if (!checkArguments()) {
         if (!hasAllArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }

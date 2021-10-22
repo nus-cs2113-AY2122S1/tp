@@ -38,7 +38,6 @@ public class EditMarkCommand extends Command {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
-        if (!checkArguments()) {
         if (!hasAllArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
