@@ -1,6 +1,6 @@
 package seedu.situs.storage;
 
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.Ingredient;
 import seedu.situs.ingredients.IngredientGroup;
 
@@ -51,7 +51,7 @@ public class Storage {
             }
         } catch (FileNotFoundException e) {
             System.out.println("\tCannot open the saved memory file!");
-        } catch (DukeException e) {
+        } catch (SitusException e) {
             System.out.println(e.getMessage());
         }
 
@@ -60,7 +60,7 @@ public class Storage {
 
 
 
-    private IngredientGroup readStoredIngredients(String savedIngredientString) throws DukeException {
+    private IngredientGroup readStoredIngredients(String savedIngredientString) throws SitusException {
         try {
 
             String[] ingredientDetails = savedIngredientString.split("\\|");
@@ -79,9 +79,9 @@ public class Storage {
 
             return ingredientGroup;
         } catch (NumberFormatException e) {
-            throw new DukeException("Wrong ingredient amount format!");
+            throw new SitusException("Wrong ingredient amount format!");
         } catch (DateTimeParseException e) {
-            throw new DukeException("Wrong expiry date format!");
+            throw new SitusException("Wrong expiry date format!");
         }
     }
 

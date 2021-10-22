@@ -1,6 +1,6 @@
 package seedu.situs.command;
 
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.IngredientList;
 
 /**
@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     private static final String LIST_NEWLINE_INDENT = "\n" + "\n" + "\t";
 
     @Override
-    public String run() throws DukeException {
+    public String run() throws SitusException {
         String resultMsg = "";
 
         if (IngredientList.getInstance().getSize() == 0) {

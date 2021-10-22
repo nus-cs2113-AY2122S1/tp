@@ -1,7 +1,7 @@
 package seedu.situs.exceptions;
 
-public class DukeException extends Exception {
-    public DukeException(String message) {
+public class SitusException extends Exception {
+    public SitusException(String message) {
         super(message);
     }
 }
