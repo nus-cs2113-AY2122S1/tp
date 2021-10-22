@@ -25,7 +25,8 @@
   * [4.2 Active Recall](#42-active-recall-implementation)
   * [4.3 Workspace]()
   * [4.4 Adding and Deleting Content]()
-  * [4.5 Storage]()
+  * [4.5 Storage](#45-storage-implementation)
+    + [4.5.1 Initialize Storage](#451-initialize-storage-implementation)
 - [5. Documentation, Logging, Testing and DevOps]()
 - [Appendix A: Product Scope]()
 - [Appendix B: User Stories ]()
@@ -324,3 +325,54 @@ Once the adjustment of weights of the question is done, the process is repeated 
 questions left inside `QuestionGenerator`. Otherwise, the Active Recall session will be terminated, 
 and the input will be passed back to the `CommandParser`.
 
+### 4.5 Storage Implementation
+
+To view the high-level diagram, head to
+[3.8 Storage](#38-storage-component).
+
+#### 4.5.1 Initialize Storage Implementation
+
+![](attachments/StorageInitializeSequenceDiagram.png)
+
+When `Terminus` just started, it will need to initialize a ModuleStorage object and loads any
+related data from the `data` directory containing all previously saved data if any.
+
+Firstly, `Terminus` will initialise an instance of `ModuleStorage` which is a singleton class
+object. `Terminus` will then set the filepath of the `ModuleStorage` with the main `.json` file
+filepath which contains data such as `module`, `questions` and `schedules`. `Terminus` do so by
+calling the `init()` function provided by `ModuleStorage`.
+
+Next, `Terminus` will proceed to load any data from the `data` directory by calling `loadFile()`
+provided by `ModuleStorage`. Within the `ModuleStorage` method `loadFile()`, it will first check if
+the main directory of `data` exists. This is because for first time execution of `Terminus`, there
+should not be any `data` folder within the same folder in which `Terminus` was executed from. Hence,
+if no `data` directory was found, it will create a `data` directory and create the main `.json`
+file as well. However, if `data` directory exists, it will locate the main `.json` file within
+the `data` directory. This main `.json` file is very important in telling `Terminus` what `modules`
+does it have before this current execution of `Terminus`.
+
+After which, the main `.json` contents will be loaded into `ModuleManager` by using
+plugin `GsonBuilder`. This `ModuleManager` will then be used throughout the execution of `Terminus`.
+For more information, please refer to ModuleManager Section.
+
+Next, `ModuleStorage` will proceed to load any note data from the `modules` stated within
+the `ModuleManager` object. Firstly, due to the restriction of `Terminus workspace`, it will filter
+out any `modules` whose name does not fit the criteria of a valid `module` name. Subsequently, it
+will check if the `module` has an existing folder with the same name as the provided `module` name.
+If no folder was found that means that it does not have any note data and hence it will create a
+folder for that `module` and proceed to check on other `modules` in the `ModuleManager`. If the
+specified `module` folder was found, it will proceed to load any `.txt` file within that folder as
+note data for that `module`.
+
+`Note data` is stored in such a format where the `name` of the `.txt`
+file is the `name` of the note and the `contents` of the `.txt` file will be the data for
+that `Note` object. For example, if a `module` has **5** `Note` objects in Terminus, it should
+have **5** `text` files in its `module` folder.
+
+These `.txt` files are then processed accordingly, checking whether if its **accessible**, **less
+than 1MB** and **filename is a valid note name**. They are then loaded as `Note` object for
+the `module`. For the rest that failed the criteria of a valid `Note` object, these files will then
+be ignored.
+
+Lastly, after `ModuleStorage` has loaded all content data for all `modules` in the ModuleManager, it
+will return the `ModuleManager` back to `Terminus` for further operations.
