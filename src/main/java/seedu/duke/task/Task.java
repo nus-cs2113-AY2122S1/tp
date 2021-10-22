@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import java.time.LocalDateTime;
+import seedu.duke.command.flags.TaskFlag;
 
 public abstract class Task {
 
@@ -75,4 +76,6 @@ public abstract class Task {
         assert recurrence != null : RECURRENCE_ASSERTION;
         this.recurrence = recurrence;
     }
+
+    public abstract TypeEnum getTaskType();
 }

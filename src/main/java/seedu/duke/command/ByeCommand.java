@@ -1,6 +1,12 @@
 package seedu.duke.command;
 
-public class ExitCommand extends Command {
+public class ByeCommand extends Command {
+
+    private static final CommandEnum COMMAND = CommandEnum.BYE;
+
+    public ByeCommand() {
+        super(COMMAND);
+    }
 
     private static final String EXIT_MSG = "Exiting program!";
 

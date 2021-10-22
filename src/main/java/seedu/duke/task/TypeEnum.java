@@ -3,7 +3,7 @@ package seedu.duke.task;
 import seedu.duke.exception.InvalidTaskTypeException;
 
 public enum TypeEnum {
-    TODO, DEADLINE, EVENT;
+    TODO, DEADLINE, EVENT, LESSON;
 
     @Override
     public String toString() {

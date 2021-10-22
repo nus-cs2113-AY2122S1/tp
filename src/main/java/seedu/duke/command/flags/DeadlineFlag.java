@@ -1,8 +1,9 @@
 package seedu.duke.command.flags;
 
-public class DeadlineFlag extends TaskFlag {
+import seedu.duke.command.CommandEnum;
 
-    public static final String DUE_DATE = "--due";
+public class DeadlineFlag extends TaskFlag {
+    public static final String DUE_DATE = "due";
 
     public static final String[] REQUIRED_FLAGS = {DESCRIPTION, DUE_DATE};
 }
