@@ -16,8 +16,8 @@ public class Module {
     private String prerequisite;
     private String corequisite;
     // todo add additional information
-    private Grade grade = Grade.NONE;
-    private Grade targetGrade = Grade.NONE; //not in use
+    private Grade grade;
+    private Grade targetGrade; //not in use
 
     public Module(String moduleCode, String title, String moduleCredit) {
         // subject to change

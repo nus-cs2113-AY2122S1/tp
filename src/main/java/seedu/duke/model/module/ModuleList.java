@@ -42,6 +42,7 @@ public class ModuleList {
     }
 
     public void addModule(Module newModule) {
+        newModule.setGrade(Grade.NONE);
         moduleList.add(newModule);
     }
 
@@ -76,6 +77,25 @@ public class ModuleList {
 
     public void deleteAllModules() {
         moduleList.clear();
+    }
+
+    public double calculateCap() {
+        int totalModuleCredit = 0;
+        double totalWeightedGradePoint = 0;
+        for (Module module : moduleList) {
+            Grade actualGrade = module.getGrade();
+            double gradePoint = module.getGradePoint(actualGrade);
+            boolean isGradePointValid = (gradePoint >= 0);
+            if (isGradePointValid) {
+                int moduleCredit = Integer.parseInt(module.getModuleCredit());
+                totalModuleCredit += moduleCredit;
+                totalWeightedGradePoint += moduleCredit * gradePoint;
+            }
+        }
+        if (totalModuleCredit == 0) {
+            return -1;
+        }
+        return totalWeightedGradePoint / totalModuleCredit;
     }
 
     @Override
