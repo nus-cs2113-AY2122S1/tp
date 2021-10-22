@@ -17,7 +17,7 @@ public class PersonalAppointmentList {
     protected NavigableSet<Appointment> appointments = new TreeSet<>((o1, o2) -> {
         if (o1.getDateTimeCode() > o2.getDateTimeCode()) {
             return 1;
-        } else if ( o1.getDateTimeCode() < o2.getDateTimeCode()) {
+        } else if (o1.getDateTimeCode() < o2.getDateTimeCode()) {
             return -1;
         }
         assert o1.getDateTimeCode() == o2.getDateTimeCode();
