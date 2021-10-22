@@ -52,5 +52,5 @@ public class CommonFormat {
     public static final long MAX_FILE_SIZE = 1000000;
 
 
-
+    public static final String COMMAND_EXPORT = "export";
 }

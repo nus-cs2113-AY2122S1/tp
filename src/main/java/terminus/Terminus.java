@@ -2,6 +2,7 @@ package terminus;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import java.nio.file.Path;
 import terminus.command.Command;
@@ -122,6 +123,8 @@ public class Terminus {
             } catch (IOException e) {
                 TerminusLogger.warning("File saving has failed.");
                 handleIoException(e);
+            } catch (DocumentException e) {
+                e.printStackTrace();
             }
         }
     }

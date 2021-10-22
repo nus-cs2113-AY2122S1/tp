@@ -1,5 +1,6 @@
 package terminus.command;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
@@ -21,15 +22,16 @@ public abstract class WorkspaceCommand extends Command {
     /**
      * Returns the Command Result after execution. If no other arguments, returns the workspace.
      *
-     * @param ui The Ui object to send messages to the users.
+     * @param ui            The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the list of all notes and schedules.
      * @return The CommandResult containing success or failure of command and CommandParser Object.
      * @throws InvalidCommandException when the command could not be found.
-     * @throws IOException when the file to be saved is inaccessible (e.g. file is locked by OS).
+     * @throws IOException             when the file to be saved is inaccessible (e.g. file is locked by OS).
+     * @throws DocumentException       When unable to write to a pdf file
      */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
         assert commandMap != null;
         TerminusLogger.info("Executing Workspace Command");
         if (isNotNullOrBlank()) {
