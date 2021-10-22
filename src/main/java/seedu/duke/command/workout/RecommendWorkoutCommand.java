@@ -2,6 +2,7 @@ package seedu.duke.command.workout;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
+import seedu.duke.exception.GetJackDException;
 import seedu.duke.exercises.Exercise;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
@@ -26,15 +27,18 @@ public class RecommendWorkoutCommand extends Command {
             + "Example: " + COMMAND_WORD + " beginner";
     private static final Logger LOGGER = Logger.getLogger(RecommendWorkoutCommand.class.getName());
     private final String workoutLevel;
-    private Exercise toAdd;
 
     /**
      * Instantiates object and sets parameters for recommending workouts based on workout difficulty.
      *
      * @param workoutLevel is the difficulty of the workouts
      */
-    public RecommendWorkoutCommand(String workoutLevel) {
+    public RecommendWorkoutCommand(String workoutLevel) throws GetJackDException {
         assert workoutLevel != null;
+        if (!workoutLevel.contains("beginner") & !workoutLevel.contains("intermediate")
+                & !workoutLevel.contains("pro")) {
+            throw new GetJackDException("Invalid command parameter provided!");
+        }
         this.workoutLevel = workoutLevel;
         setupLogger(LOGGER);
     }
@@ -88,6 +92,11 @@ public class RecommendWorkoutCommand extends Command {
         return abExercises;
     }
 
+    /**
+     * To create a map of list of beginner exercises for arms and abs.
+     *
+     * @return map of the lists of exercises under a certain muscle group.
+     */
     private Map<String, ArrayList<?>> getBeginnerWorkout() {
         Map<String, ArrayList<?>> map = new HashMap<>();
         ArrayList<Exercise> armExercises = getBeginnerArmWorkout();
@@ -117,6 +126,11 @@ public class RecommendWorkoutCommand extends Command {
         return glutesExercises;
     }
 
+    /**
+     * Creates map of list of intermediate exercises for shoulders and glutes.
+     *
+     * @return map of the lists of exercises under a certain muscle group.
+     */
     private Map<String, ArrayList<?>> getIntermediateWorkout() {
         Map<String, ArrayList<?>> map = new HashMap<>();
 
@@ -156,6 +170,11 @@ public class RecommendWorkoutCommand extends Command {
         return legExercises;
     }
 
+    /**
+     * Creates map of list of pro exercises for push(chest and triceps), pull(back and biceps) and legs.
+     *
+     * @return map of the lists of exercises under a certain muscle group.
+     */
     private Map<String, ArrayList<?>> getProWorkout() {
         Map<String, ArrayList<?>> map = new HashMap<>();
 
@@ -170,4 +189,5 @@ public class RecommendWorkoutCommand extends Command {
 
         return map;
     }
+
 }
