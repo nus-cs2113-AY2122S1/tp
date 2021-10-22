@@ -60,7 +60,11 @@ public class Ui {
         printLogo();
     }
 
-    public static void promptInput() { out.print("Enter a command: "); }
+    public static void promptInput() {
+        out.print("Enter a command: ");
+    }
 
-    public static void printLineSeparator() { out.println(Constants.LINE_SEPARATOR); }
+    public static void printLineSeparator() {
+        out.println(Constants.LINE_SEPARATOR);
+    }
 }
