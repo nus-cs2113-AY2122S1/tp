@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public abstract class FindTourCommand extends Command{
+public abstract class FindTourCommand extends Command {
     private final String code;
 
     public FindTourCommand(String code) {
