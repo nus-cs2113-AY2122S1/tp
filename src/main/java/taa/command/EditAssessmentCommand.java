@@ -55,8 +55,8 @@ public class EditAssessmentCommand extends Command {
         boolean hasNewAssessmentName = argumentMap.containsKey(KEY_NEW_ASSESSMENT_NAME);
         boolean hasNewMaximumMarks = argumentMap.containsKey(KEY_NEW_MAXIMUM_MARKS);
         boolean hasNewWeightage = argumentMap.containsKey(KEY_NEW_WEIGHTAGE);
-        boolean hasNecessaryArguments = hasModuleCode && hasAssessmentName &&
-                (hasNewAssessmentName || hasNewMaximumMarks || hasNewWeightage);
+        boolean hasNecessaryArguments = hasModuleCode && hasAssessmentName
+                && (hasNewAssessmentName || hasNewMaximumMarks || hasNewWeightage);
         if (!hasNecessaryArguments) {
             throw new TaaException(getMissingArgumentMessage());
         }
