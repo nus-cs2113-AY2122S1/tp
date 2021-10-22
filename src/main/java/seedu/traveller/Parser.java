@@ -1,17 +1,6 @@
 package seedu.traveller;
 
-import seedu.traveller.commands.Command;
-import seedu.traveller.commands.NewCommand;
-import seedu.traveller.commands.AddItemCommand;
-import seedu.traveller.commands.EditCommand;
-import seedu.traveller.commands.DeleteCommand;
-import seedu.traveller.commands.DeleteDayCommand;
-import seedu.traveller.commands.DeleteItemCommand;
-import seedu.traveller.commands.ViewCommand;
-import seedu.traveller.commands.SearchCommand;
-import seedu.traveller.commands.AddDayCommand;
-import seedu.traveller.commands.ExitCommand;
-import seedu.traveller.commands.HelpCommand;
+import seedu.traveller.commands.*;
 
 import seedu.traveller.exceptions.CommandNotFoundException;
 import seedu.traveller.exceptions.IllegalTripNameException;
@@ -64,9 +53,12 @@ public class Parser {
         case "view":
             command = parseViewCommand(userInput[1]);
             break;
-        case "search":
-            command = parseSearchCommand(userInput[1]);
+        case "shortest":
+            command = parseShortestCommand(userInput[1]);
             break;
+//        case "search":
+//            command = parseSearchCommand(userInput[1]);
+//            break;
         case "add-day":
             command = parseAddDayCommand(userInput[1]);
             break;
@@ -237,12 +229,12 @@ public class Parser {
     }
 
     /**
-     * Parses user input to give a <code>SearchCommand</code>.
+     * Parses user input to give a <code>ShortestCommand</code>.
      * @param userInput Raw user input, with the first command option (search) removed.
-     * @return Command A <code>SearchCommand</code> object.
+     * @return Command A <code>ShortestCommand</code> object.
      * @throws TravellerException Will be thrown if the user input cannot be understood.
      */
-    private static Command parseSearchCommand(String userInput) throws TravellerException {
+    private static Command parseShortestCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
         Command command;
         try {
@@ -252,7 +244,7 @@ public class Parser {
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
-            command = new SearchCommand(startCountryCode, endCountryCode);
+            command = new ShortestCommand(startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidSearchFormatException();
         }
