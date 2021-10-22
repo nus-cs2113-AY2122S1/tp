@@ -24,8 +24,18 @@ The 4 core components of MedBot are:
 In addition, the `Command` class facilitates the execution of user instructions.
 
 #### Component Interaction
+Given below is a sequence diagram of how the core components of MedBot interact with each other 
+when the user inputs the command `delete 1`.
 
+![MedBot Architecture](/docs/diagrams/MedBot_architecture.png)
 
+### Ui Component
+
+### Parser Component
+
+### Scheduler Component
+
+### Storage Component
 
 ## Implementation
 
