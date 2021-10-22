@@ -42,10 +42,10 @@ public class EditContactCommand extends Command {
         }
     }
 
-    private Boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
+    private boolean hasDuplicates(Contact postEditContact, ContactList contactList, int contactIndex)
             throws InvalidFlagException {
         ArrayList<Integer> duplicatedIndex = new ArrayList<>();
-        Boolean[] hasEditedField = hasEditedFieldChecker(contactDetails);
+        boolean[] hasEditedField = hasEditedFields(contactDetails);
         String[] postEditContactDetails = extractContactDetails(postEditContact);
         for (int i = 0; i < contactList.getListSize(); i++) {
             if (i == contactIndex) {
@@ -72,8 +72,8 @@ public class EditContactCommand extends Command {
         return false;
     }
 
-    private Boolean[] hasEditedFieldChecker(String[] contactDetails) {
-        Boolean[] hasEditedField = new Boolean[NUMBER_OF_FIELDS];
+    private boolean[] hasEditedFields(String[] contactDetails) {
+        boolean[] hasEditedField = new boolean[NUMBER_OF_FIELDS];
         for (int i = 0; i < NUMBER_OF_FIELDS; i++) {
             hasEditedField[i] = (contactDetails[i] != null);
         }
@@ -90,7 +90,7 @@ public class EditContactCommand extends Command {
         return new Contact(name, github, linkedin, telegram, twitter, email);
     }
 
-    private Boolean hasDuplicateField(String input, String saved) {
+    private boolean hasDuplicateField(String input, String saved) {
         return stringCleaner(saved).equals(stringCleaner(input));
     }
 
