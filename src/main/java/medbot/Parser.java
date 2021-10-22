@@ -128,8 +128,7 @@ public class Parser {
     }
 
     /**
-     * Checks the current view type that the parser is in and returns the relevant
-     * parseCommand object based on the view type.
+     * Parses the user input and returns the corresponding command based on the parser's view type.
      *
      * @param userInput String containing the full user input.
      * @return the corresponding Command object.
@@ -163,11 +162,11 @@ public class Parser {
 
 
     /**
-     * Parses the user input for patient information related commands and returns the relevant Command object.
+     * Parses the user input and returns the corresponding command when the view type is PATIENT_INFO.
      *
      * @param userInput String containing the full user input.
      * @return the corresponding Command object.
-     * @throws MedBotParserException if command is unrecognised.
+     * @throws MedBotParserException if user input is not a recognised command or contains invalid information.
      */
     public static Command parsePatientCommand(String userInput) throws MedBotParserException {
         if (userInput.startsWith(COMMAND_ADD)) {
@@ -192,11 +191,11 @@ public class Parser {
     }
 
     /**
-     * Parses the user input for patient information related commands and returns the relevant Command object.
+     * Parses the user input and returns the corresponding command when the view type is MEDICAL_STAFF_INFO.
      *
      * @param userInput String containing the full user input.
      * @return the corresponding Command object.
-     * @throws MedBotParserException if command is unrecognised.
+     * @throws MedBotParserException if user input is not a recognised command or contains invalid information.
      */
     public static Command parseStaffCommand(String userInput) throws MedBotParserException {
         if (userInput.startsWith(COMMAND_ADD)) {
@@ -220,7 +219,13 @@ public class Parser {
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
-    //Update with relevant scheduling commands
+    /**
+     * Parses the user input and returns the corresponding command when the view type is SCHEDULER.
+     *
+     * @param userInput String containing the full user input.
+     * @return the corresponding Command object.
+     * @throws MedBotParserException if user input is not a recognised command or contains invalid information.
+     */
     public static Command parseSchedulingCommand(String userInput) throws MedBotParserException {
         if (userInput.startsWith(COMMAND_ADD)) {
             return parseAddAppointmentCommand(userInput);
@@ -439,7 +444,14 @@ public class Parser {
         }
     }
 
-
+    /**
+     * Parses user input and returns an AddAppointmentCommand with the specified appointment information.
+     *
+     * @param userInput String containing the full user input.
+     * @return AddAppointmentCommand with the specified appointment information.
+     * @throws MedBotParserException when there is missing appointment information given or when the information is
+     *                               invalid
+     */
     private static AddAppointmentCommand parseAddAppointmentCommand(String userInput) throws MedBotParserException {
         String[] attributeStrings = getParameters(userInput);
         Appointment appointment = new Appointment();
@@ -447,12 +459,28 @@ public class Parser {
         return new AddAppointmentCommand(appointment);
     }
 
+    /**
+     * Parses user input and returns a DeleteAppointmentCommand with the specified appointment ID.
+     *
+     * @param userInput String containing the full user input.
+     * @return DeleteAppointmentCommand with the specified appointment ID.
+     * @throws MedBotParserException if the appointment ID is not specified or not a number
+     */
     private static DeleteAppointmentCommand parseDeleteAppointmentCommand(String userInput)
             throws MedBotParserException {
         int appointmentId = parseId(userInput.substring(6));
         return new DeleteAppointmentCommand(appointmentId);
     }
 
+    /**
+     * Parses user input and returns a EditAppointmentCommand with the specified appointment ID and appointment
+     * information to be updated.
+     *
+     * @param userInput String containing the full user input.
+     * @return EditAppointmentCommand with the specified appointment ID and appointment information.
+     * @throws MedBotParserException if the appointment ID is not specified or not a number, or when the appointment
+     *                               information given is invalid
+     */
     private static EditAppointmentCommand parseEditAppointmentCommand(String userInput) throws MedBotParserException {
         int appointmentId = parseId(userInput.substring(4));
         String[] attributeStrings = getParameters(userInput);
@@ -461,6 +489,15 @@ public class Parser {
         return new EditAppointmentCommand(appointmentId, appointment);
     }
 
+
+    /**
+     * Parses attributeStrings array and modifies all the corresponding attribute in appointment.
+     *
+     * @param appointment      Appointment whose information will be updated
+     * @param attributeStrings String Array containing Strings of an attribute specifier and the corresponding
+     *                         appointment information
+     * @throws MedBotParserException if the attributeString contains missing/invalid information
+     */
     private static void updateMultipleAppointmentInformation(Appointment appointment, String[] attributeStrings)
             throws MedBotParserException {
         for (String attributeString : attributeStrings) {
@@ -468,6 +505,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses attributeString and modifies the corresponding attribute in appointment.
+     *
+     * @param appointment     Appointment whose information will be updated
+     * @param attributeString String containing an attribute specifier and the corresponding appointment information
+     * @throws MedBotParserException if the attributeString contains missing/invalid information
+     */
     private static void updateAppointmentInformation(Appointment appointment, String attributeString)
             throws MedBotParserException {
         if (attributeString.startsWith(PARAMETER_APPOINTMENT_PATIENT_ID)) {
@@ -489,10 +533,10 @@ public class Parser {
     }
 
     /**
-     * Parses user input to the correct person information format.
+     * Parses user input and separates it into a list of Strings containing the given parameters.
      *
      * @param userInput String containing the full user input.
-     * @return The parameters list given by user.
+     * @return list of parameters given by user.
      * @throws MedBotParserException when no parameters are specified.
      */
     private static String[] getParameters(String userInput) throws MedBotParserException {
@@ -686,19 +730,29 @@ public class Parser {
         }
     }
 
-
-    private static int parseId(String userInput) throws MedBotParserException {
-        userInput = userInput.strip();
-        if (userInput.equals(EMPTY_STRING)) {
+    /**
+     * Reads a String and returns the integer at the start of the String.
+     *
+     * <p>Finds an integer at the start of the String that is immediately followed by a space character or the
+     * end of the String. Returns that integer.
+     *
+     * @param string String that starts with an integer
+     * @return integer that was found
+     * @throws MedBotParserException if no integer is found
+     */
+    private static int parseId(String string) throws MedBotParserException {
+        string = string.strip();
+        if (string.equals(EMPTY_STRING)) {
             throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
         }
         Pattern pattern = Pattern.compile(REGEX_PERSON_ID);
-        Matcher matcher = pattern.matcher(userInput);
+        Matcher matcher = pattern.matcher(string);
         if (matcher.lookingAt()) {
             int id;
             try {
                 id = Integer.parseInt(matcher.group().stripTrailing());
             } catch (NumberFormatException ne) {
+                //matched substring should only consist of [0-9], exception should not be thrown by parseInt method
                 assert false;
                 throw new MedBotParserException(ERROR_ID_NOT_SPECIFIED);
             }
@@ -752,6 +806,13 @@ public class Parser {
         return matcher.replaceAll(replacementFunction);
     }
 
+    /**
+     * Parses a String that corresponds to a date and time and returns the number of hours since Unix epoch that
+     * it corresponds to, rounded down.
+     *
+     * @param dateTimeString String corresponding to a date and time
+     * @return the number of hours since Unix epoch, rounded down to the nearest hour
+     */
     private static int parseDateTime(String dateTimeString) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMATTER_PATTERN);
         LocalDateTime parsedDate = LocalDateTime.parse(dateTimeString, dateTimeFormatter);
