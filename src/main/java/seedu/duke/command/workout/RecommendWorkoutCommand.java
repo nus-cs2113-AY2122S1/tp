@@ -2,6 +2,7 @@ package seedu.duke.command.workout;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
+import seedu.duke.exception.GetJackDException;
 import seedu.duke.exercises.Exercise;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
@@ -32,8 +33,12 @@ public class RecommendWorkoutCommand extends Command {
      *
      * @param workoutLevel is the difficulty of the workouts
      */
-    public RecommendWorkoutCommand(String workoutLevel) {
+    public RecommendWorkoutCommand(String workoutLevel) throws GetJackDException {
         assert workoutLevel != null;
+        if (!workoutLevel.contains("beginner") & !workoutLevel.contains("intermediate")
+                & !workoutLevel.contains("pro")) {
+            throw new GetJackDException("Invalid command parameter provided!");
+        }
         this.workoutLevel = workoutLevel;
         setupLogger(LOGGER);
     }
@@ -122,7 +127,7 @@ public class RecommendWorkoutCommand extends Command {
     }
 
     /**
-     * To create map of list of intermediate exercises for shoulders and glutes.
+     * Creates map of list of intermediate exercises for shoulders and glutes.
      *
      * @return map of the lists of exercises under a certain muscle group.
      */
@@ -166,7 +171,7 @@ public class RecommendWorkoutCommand extends Command {
     }
 
     /**
-     * To create map of list of pro exercises for push(chest and triceps), pull(back and biceps) and legs.
+     * Creates map of list of pro exercises for push(chest and triceps), pull(back and biceps) and legs.
      *
      * @return map of the lists of exercises under a certain muscle group.
      */

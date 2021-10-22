@@ -2,6 +2,7 @@ invalid command
 help
 recommend
 help recommend
+recommend beginner
 create
 help create
 create Legs, 2021-12-25
