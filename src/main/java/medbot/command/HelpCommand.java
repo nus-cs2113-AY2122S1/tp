@@ -40,7 +40,7 @@ public class HelpCommand extends Command {
             output = ui.getListHelpMessage();
             break;
         case SWITCH:
-            output = ""; //todo
+            output = ui.getSwitchHelpMessage();
             break;
         case FIND_PATIENT:
             output = ui.getFindHelpMessage();

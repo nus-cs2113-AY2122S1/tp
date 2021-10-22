@@ -164,7 +164,7 @@ public class Ui {
     public String getCommandList() {
         return "Here are the list of commands:" + ENDLINE + ENDLINE
                 + "help" + ENDLINE + "add" + ENDLINE + "list" + ENDLINE + "view" + ENDLINE + "edit" + ENDLINE
-                + "find" + ENDLINE + "delete" + ENDLINE + "exit" + ENDLINE + ENDLINE
+                + "find" + ENDLINE + "delete" + ENDLINE + "switch" + ENDLINE + "exit" + ENDLINE + ENDLINE
                 + "To obtain more information on each command and their respective required inputs, type:" + ENDLINE
                 + "help [COMMAND]" + ENDLINE + ENDLINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes" + ENDLINE;
@@ -246,8 +246,7 @@ public class Ui {
      */
     public String getFindHelpMessage() {
         return "Find patients from the list based on given attributes." + ENDLINE
-                + "Format:" + ENDLINE
-                + "find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
+                + "Format: find [i/PATIENT_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + ENDLINE
                 + "    * The attributes do not have to be in full." + ENDLINE
                 + "    * At least one attribute must be present." + ENDLINE
                 + "Expected Output:" + ENDLINE
@@ -256,9 +255,25 @@ public class Ui {
     }
 
     /**
+     * Prints information about switch command.
+     *
+     * @return the information on switch command.
+     */
+    public String getSwitchHelpMessage() {
+        return "Switches between the different views of MedBot." + ENDLINE
+                + "Format: switch [VIEW_TYPE]" + ENDLINE
+                + "    * If the switch command is called without any parameters, the view that" + ENDLINE
+                + "    * is switched to will depend on the current view." + ENDLINE
+                + "(PATIENT_INFO --> MEDICAL_STAFF_INFO --> SCHEDULER --> PATIENT_INFO)" + ENDLINE
+                + "Expected Output:" + ENDLINE
+                + "[VIEW_TYPE_ASCI_TEXT_BANNER]" + ENDLINE + ENDLINE
+                + "View has been switched to [VIEW_TYPE]";
+    }
+
+    /**
      * Prints information about exit command.
      *
-     * @return the information on exot command.
+     * @return the information on exit command.
      */
     public String getExitHelpMessage() {
         return "Exits the program." + ENDLINE + "Format: exit" + ENDLINE;
@@ -344,4 +359,6 @@ public class Ui {
 
         System.out.println("View has been switched to " + viewType);
     }
+
+
 }
