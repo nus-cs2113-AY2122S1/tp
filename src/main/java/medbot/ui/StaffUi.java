@@ -59,7 +59,8 @@ public class StaffUi {
                 + "Format:" + END_LINE
                 + "delete STAFF_ID" + END_LINE
                 + "Expected Output:" + END_LINE
-                + "Staff with id STAFF_ID deleted from system." + END_LINE;    }
+                + "Staff with id STAFF_ID deleted from system." + END_LINE;
+    }
 
     /**
      * Prints a message when viewing the profile of a staff.
