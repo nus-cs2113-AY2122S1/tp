@@ -46,24 +46,30 @@ public class SetMarksCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
+
         if (!checkArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
+
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModule(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
+
         String studentIndexInput = argumentMap.get(KEY_STUDENT_INDEX);
         int studentIndex = Integer.parseInt(studentIndexInput) - 1;
+
         StudentList studentList = module.getStudentList();
         Student student = studentList.getStudentAt(studentIndex);
         if (student == null || !Util.isStringInteger(studentIndexInput)) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
+
         AssessmentList assessmentList = module.getAssessmentList();
         String assessmentName = argumentMap.get(KEY_ASSESSMENT_NAME);
         Assessment assessment = assessmentList.getAssessment(assessmentName);
@@ -73,11 +79,12 @@ public class SetMarksCommand extends Command {
         if (student.marksExist(assessmentName)) {
             throw new TaaException(MESSAGE_ALREADY_MARKED);
         }
+
         String marksInput = argumentMap.get(KEY_MARKS);
         double marks = Double.parseDouble(marksInput);
-        double maximumMarks = assessment.getMaximumMarks();
+        double maxMarks = assessment.getMaximumMarks();
         if ((!Util.isStringDouble(marksInput)) || !(assessment.isMarksValid(marks))) {
-            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, 0, maximumMarks));
+            throw new TaaException(String.format(MESSAGE_FORMAT_INVALID_MARKS, 0, maxMarks));
         }
         setMarks(ui, student, assessmentName, marks);
         storage.save(moduleList);

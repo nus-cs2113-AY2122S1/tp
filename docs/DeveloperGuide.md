@@ -141,15 +141,15 @@ The set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command
 ## Product scope
 ### Target user profile
 
-* Teaching assistant who has a need to manage a significant number of students and their information
-* Prefers desktop app over other types
-* Can type fast
-* Prefers typing to mouse interactions
-* Reasonably comfortable using CLI apps
+* Teaching assistant who has a need to manage a significant number of students and their information.
+* Prefers desktop app over other types of apps.
+* Can type fast.
+* Prefers typing to mouse interactions.
+* Reasonably comfortable using CLI apps.
 
 ### Value proposition
 
-* Manage student information faster than a typical mouse/GUI driven app
+* Manage student information faster than a typical mouse/GUI driven app.
 
 ## User Stories
 
