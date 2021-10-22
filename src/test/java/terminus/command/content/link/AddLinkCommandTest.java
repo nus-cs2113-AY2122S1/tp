@@ -1,9 +1,7 @@
 package terminus.command.content.link;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +13,12 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.LinkCommandParser;
+import terminus.timetable.ConflictManager;
 import terminus.ui.Ui;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class AddLinkCommandTest {
 
@@ -24,7 +27,6 @@ public class AddLinkCommandTest {
     private Ui ui;
 
     private String tempModule = "test";
-
     Class<Link> type = Link.class;
 
     @BeforeEach
@@ -59,11 +61,15 @@ public class AddLinkCommandTest {
         assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("2"));
         assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("https://zoom.us/test"));
 
+        Link newLink = new Link("test conflict", "Saturday", LocalTime.of(9, 00), 3, "https://zoom.us/test");
+        ConflictManager conflictManager = new ConflictManager(moduleManager, newLink);
+
         for (int i = 0; i < 5; i++) {
             addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Saturday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Saturday\" \"10:00\" \"2\" \"https://zoom.us/test\"");
             addResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addResult.isOk());
+            assertNotNull(conflictManager.getConflictingSchedule());
         }
         assertEquals(6, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
     }
