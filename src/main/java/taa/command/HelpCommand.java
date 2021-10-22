@@ -9,25 +9,27 @@ public class HelpCommand extends Command {
     private static final String MESSAGE_FORMAT_OUTPUT = "Available commands:\n%s";
 
     private static final Command[] commands = {
-        new AddAssessmentCommand(""),
-        new AddModuleCommand(""),
-        new AddStudentCommand(""),
-        new SetAttendanceCommand(""),
-        new SetMarksCommand(""),
-        new AverageMarksCommand(""),
-        new DeleteStudentCommand(""),
-        new DeleteAssessmentCommand(""),
-        new DeleteMarkCommand(""),
-        new EditMarkCommand(""),
-        new EditStudentCommand(""),
-        new FindStudentCommand(""),
-        new ExitCommand(""),
-        new HelpCommand(""),
-        new ListAssessmentsCommand(""),
-        new ListAttendanceCommand(""),
-        new ListMarksCommand(""),
         new ListModulesCommand(""),
-        new ListStudentsCommand("")
+        new AddModuleCommand(""),
+        new EditModuleCommand(""),
+        new DeleteModuleCommand(""),
+        new ListStudentsCommand(""),
+        new AddStudentCommand(""),
+        new EditStudentCommand(""),
+        new DeleteStudentCommand(""),
+        new FindStudentCommand(""),
+        new ListAssessmentsCommand(""),
+        new AddAssessmentCommand(""),
+        new DeleteAssessmentCommand(""),
+        new ListMarksCommand(""),
+        new SetMarksCommand(""),
+        new EditMarkCommand(""),
+        new DeleteMarkCommand(""),
+        new AverageMarksCommand(""),
+        new ListAttendanceCommand(""),
+        new SetAttendanceCommand(""),
+        new ExitCommand(""),
+        new HelpCommand("")
     };
 
     public HelpCommand(String argument) {

@@ -7,8 +7,10 @@ import taa.command.AverageMarksCommand;
 import taa.command.Command;
 import taa.command.DeleteAssessmentCommand;
 import taa.command.DeleteMarkCommand;
+import taa.command.DeleteModuleCommand;
 import taa.command.DeleteStudentCommand;
 import taa.command.EditMarkCommand;
+import taa.command.EditModuleCommand;
 import taa.command.EditStudentCommand;
 import taa.command.ExitCommand;
 import taa.command.FindStudentCommand;
@@ -54,6 +56,14 @@ public class Parser {
 
         case Command.COMMAND_ADD_MODULE:
             command = new AddModuleCommand(argument);
+            break;
+
+        case Command.COMMAND_EDIT_MODULE:
+            command = new EditModuleCommand(argument);
+            break;
+
+        case Command.COMMAND_DELETE_MODULE:
+            command = new DeleteModuleCommand(argument);
             break;
 
         case Command.COMMAND_ADD_STUDENT:

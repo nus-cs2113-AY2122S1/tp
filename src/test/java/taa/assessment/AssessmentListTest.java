@@ -8,8 +8,6 @@ import taa.exception.TaaException;
 import taa.module.ModuleList;
 import taa.storage.Storage;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AssessmentListTest {
@@ -34,11 +32,11 @@ class AssessmentListTest {
         command1.execute(moduleList, ui, storage);
         Command command2 = Parser.parseUserInput(assessmentInput);
         command2.execute(moduleList, ui, storage);
-        assertEquals("Midterms", moduleList.getModule("cs2113t")
+        assertEquals("Midterms", moduleList.getModuleWithCode("cs2113t")
                 .getAssessmentList().getAssessment("Midterms").getName());
-        assertEquals(50, moduleList.getModule("cs2113t")
+        assertEquals(50, moduleList.getModuleWithCode("cs2113t")
                 .getAssessmentList().getAssessment("Midterms").getMaximumMarks());
-        assertEquals(20, moduleList.getModule("cs2113t")
+        assertEquals(20, moduleList.getModuleWithCode("cs2113t")
                 .getAssessmentList().getAssessment("Midterms").getWeightage());
     }
 
@@ -66,6 +64,9 @@ class AssessmentListTest {
         command2.execute(moduleList, ui, storage);
         Command command3 = Parser.parseUserInput(deleteAssessmentInput);
         command3.execute(moduleList, ui, storage);
-        assertEquals(new AssessmentList().getSize(), moduleList.getModule("cs2113t").getAssessmentList().getSize());
+        assertEquals(
+            new AssessmentList().getSize(),
+            moduleList.getModuleWithCode("cs2113t").getAssessmentList().getSize()
+        );
     }
 }

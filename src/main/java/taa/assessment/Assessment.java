@@ -3,8 +3,8 @@ package taa.assessment;
 import taa.ClassChecker;
 
 public class Assessment implements ClassChecker {
-    private static final double[] WEIGHTAGE_RANGE = {0, 100};
-    private static final int MAXIMUM_MARKS_RANGE = 0;
+    public static final double[] WEIGHTAGE_RANGE = {0, 100};
+    public static final int MINIMUM_MARKS = 0;
 
     private String name;
     private int maximumMarks;
@@ -26,29 +26,6 @@ public class Assessment implements ClassChecker {
         return (weightage >= WEIGHTAGE_RANGE[0] && weightage <= WEIGHTAGE_RANGE[1]);
     }
 
-    /**
-     * Checks if a maximum marks is valid.
-     *
-     * @param maximumMarks The maximum marks to check.
-     * @return true if valid, else false.
-     */
-    public static boolean isMaximumMarksWithinRange(int maximumMarks) {
-        return (maximumMarks >= MAXIMUM_MARKS_RANGE);
-    }
-
-    /**
-     * Gets the weightage range.
-     *
-     * @return A double array of size 2: [0] - Min weightage, [1] Max weightage.
-     */
-    public static double[] getWeightageRange() {
-        return WEIGHTAGE_RANGE;
-    }
-
-    public static int getMaximumMarksRange() {
-        return MAXIMUM_MARKS_RANGE;
-    }
-
     public String getName() {
         return name;
     }
@@ -58,7 +35,7 @@ public class Assessment implements ClassChecker {
     }
 
     public boolean isMarksValid(double marks) {
-        return ((marks >= 0) && (marks <= maximumMarks));
+        return ((marks >= MINIMUM_MARKS) && (marks <= maximumMarks));
     }
 
     public int getMaximumMarks() {
@@ -84,7 +61,7 @@ public class Assessment implements ClassChecker {
      */
     @Override
     public boolean verify() {
-        if (name.isEmpty() || !isWeightageWithinRange(weightage)) {
+        if (name.isEmpty() || !isWeightageWithinRange(weightage) || maximumMarks < MINIMUM_MARKS) {
             return false;
         }
 
