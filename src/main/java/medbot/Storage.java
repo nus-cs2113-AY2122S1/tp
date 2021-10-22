@@ -5,7 +5,7 @@ import medbot.list.PatientList;
 import medbot.person.Patient;
 import medbot.utilities.Pair;
 
-import static medbot.Parser.updatePersonalInformation;
+import static medbot.parser.ParserUtils.updatePersonalInformation;
 import static medbot.Ui.VERTICAL_LINE_SPACED_ESCAPED;
 
 import java.io.File;
