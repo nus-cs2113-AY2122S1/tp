@@ -1,7 +1,9 @@
 package seedu.duke;
 
-public class ListTourCommand extends Command {
-    public void execute() {
 
+public class ListTourCommand extends TourCommand {
+
+    public void execute(TourList tours, Ui ui) {
+        ui.showListTour(tours);
     }
 }

@@ -3,12 +3,12 @@ package seedu.duke;
 public class Tour {
     private final String code;
     private final String name;
-    private final String price;
+    private final float price;
 
     public Tour(String[] values) {
         code = values[0];
         name = values[1];
-        price = values[2];
+        price = Float.parseFloat(values[2]);
     }
 
     public String getCode() {
@@ -19,15 +19,14 @@ public class Tour {
         return name;
     }
 
-    public String getPrice() {
+    public float getPrice() {
         return price;
     }
 
     @Override
     public String toString() {
-
-        return "Tour code: " + code + System.lineSeparator()
-                + "Tour name: " + name + System.lineSeparator()
-                + "Tour price: " + price;
+        return  name + System.lineSeparator()
+                + "Code: " + code + System.lineSeparator()
+                + "Price per pax: $" + price + System.lineSeparator();
     }
 }
