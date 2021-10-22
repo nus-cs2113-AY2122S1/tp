@@ -55,46 +55,42 @@ public class AddAssessmentCommand extends Command {
         }
 
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModule(moduleCode);
+        Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
 
         String maximumMarksString = argumentMap.get(KEY_MAXIMUM_MARKS);
         if (!Util.isStringInteger(maximumMarksString)) {
-            int maximumMarksRange = Assessment.getMaximumMarksRange();
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
-                    maximumMarksRange)
+                    Assessment.MINIMUM_MARKS)
             );
         }
 
         int maximumMarks = Integer.parseInt(maximumMarksString);
-        if (!Assessment.isMaximumMarksWithinRange(maximumMarks)) {
-            int maximumMarksRange = Assessment.getMaximumMarksRange();
+        if (maximumMarks < Assessment.MINIMUM_MARKS) {
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
-                    maximumMarksRange)
+                    Assessment.MINIMUM_MARKS)
             );
         }
 
         String weightageString = argumentMap.get(KEY_WEIGHTAGE);
         if (!Util.isStringDouble(weightageString)) {
-            double[] weightageRange = Assessment.getWeightageRange();
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_WEIGHTAGE,
-                    weightageRange[0],
-                    weightageRange[1])
+                    Assessment.WEIGHTAGE_RANGE[0],
+                    Assessment.WEIGHTAGE_RANGE[1])
             );
         }
 
         double weightage = Double.parseDouble(weightageString);
         if (!Assessment.isWeightageWithinRange(weightage)) {
-            double[] weightageRange = Assessment.getWeightageRange();
             throw new TaaException(String.format(
                     MESSAGE_FORMAT_INVALID_WEIGHTAGE,
-                    weightageRange[0],
-                    weightageRange[1])
+                    Assessment.WEIGHTAGE_RANGE[0],
+                    Assessment.WEIGHTAGE_RANGE[1])
             );
         }
 

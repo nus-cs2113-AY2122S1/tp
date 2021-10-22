@@ -48,7 +48,7 @@ public class DeleteAttendanceCommand extends Command {
         }
 
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModule(moduleCode);
+        Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }

@@ -40,7 +40,7 @@ public class DeleteStudentCommand extends Command {
         }
 
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
-        Module module = moduleList.getModule(moduleCode);
+        Module module = moduleList.getModuleWithCode(moduleCode);
         if (module == null) {
             throw new TaaException(MESSAGE_MODULE_NOT_FOUND);
         }
@@ -53,7 +53,7 @@ public class DeleteStudentCommand extends Command {
 
         StudentList studentList = module.getStudentList();
         assert studentIndex >= 0 && studentIndex < module.getStudentList().getSize();
-        Student student = studentList.deleteStudent(studentIndex);
+        Student student = studentList.deleteStudentAt(studentIndex);
         if (student == null) {
             throw new TaaException(MESSAGE_INVALID_STUDENT_INDEX);
         }
