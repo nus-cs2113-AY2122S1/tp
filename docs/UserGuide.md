@@ -102,12 +102,12 @@ Terminologies used throughout this guide:
 
 ---
 
-## Section: Module
+## Section: Module Management
 
-All commands related to the workspace `Module` will be displayed in these section. These commands
+All commands related to the workspace `Module Management` will be displayed in these section. These commands
 enable users to create, delete and view `modules` within TermiNUS.
 
-### Accessing the module workspace
+### Accessing the module management workspace
 
 **Format:** `module`
 
@@ -131,14 +131,14 @@ Type any of the following to get started:
 [module] >>> 
 ```
 
-List of Module workspace commands:
+List of Module Management workspace commands:
 
 | Command      | Description |
 | ----------- | ----------- |
 |add|add a module in TermiNUS|
 |delete|delete a module in TermiNUS|
 |view|view modules information currently in TermiNUS|
-|help|view all commands and its usage within the module workspace|
+|help|view all commands and their usage within the module management workspace|
 |back|escape and return to the default workspace|
 |exit|exit and closes TermiNUS|
 
@@ -146,7 +146,7 @@ List of Module workspace commands:
 
 **Format:** `add "<module code>"`
 
-Adds a module when in the module workspace.
+Adds a module when in the module management workspace.
 
 > 💡 When executing this command, it will add the module into TermiNUS and creates a folder with the module code.
 
@@ -166,7 +166,9 @@ Module CS2113T has been added
 
 **Format:** `delete <index>`
 
-Deletes the specified module given by its **index** when in the module workspace. 
+Deletes the specified module given by its **index** when in the module management workspace.
+
+> ❗ When the specified module is being deleted, all contents in its folder will be wiped.
 
 Example: `delete 1`
 
@@ -182,9 +184,9 @@ Deleted module CS2113T.
 
 **Format:** `view`
 
-Views all modules when in the module workspace.
+Views all modules when in the module management workspace.
 
-Example: `view` 
+Example: `view`
 
 Expected Output:
 
@@ -195,6 +197,53 @@ Expected Output:
 [module] >>> 
 ```
 
+---
+
+## Section: Module
+
+All commands related to accessing the existing modules in TermiNUS. These commands enable users to
+enter the module workspace in Terminus.
+
+> 💡 The module mentioned here are the modules created within the **module management workspace**. Please refer to [Section: Module Management](#section-module-management) for more information.
+
+List of Module workspace commands:
+
+| Command      | Description |
+| ----------- | ----------- |
+|note|enter the note workspace|
+|schedule|enter the schedule workspace|
+|question|enter the question workspace|
+|help|view all commands and their usage within its module workspace|
+|back|escape and return to the default workspace|
+|exit|exit and closes TermiNUS|
+
+### Accessing module workspace
+
+**Format:** `go <module code>`
+
+Enters the module workspace to access data within the module.
+
+Example: `go CS2113T`
+
+Expected Output:
+
+```
+[] >>> go CS2113T
+
+Entering CS2113T workspace
+
+Type any of the following to get started:
+> exit
+> help
+> note
+> schedule
+> question
+> back
+
+[CS2113T] >>> 
+```
+
+---
 
 ## Section: Note
 
