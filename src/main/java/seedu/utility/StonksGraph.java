@@ -161,7 +161,7 @@ public class StonksGraph {
     private void drawLegend() {
         writeToGraph(2, 75, "Legend:");
         writeToGraph(3, 80, " # is Expense");
-        writeToGraph(4, 80, " o is Expense");
+        writeToGraph(4, 80, " o is Income ");
     }
 
     private boolean isExpenseBar(int y) {

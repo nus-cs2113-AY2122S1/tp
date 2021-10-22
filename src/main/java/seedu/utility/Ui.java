@@ -294,12 +294,14 @@ public class Ui {
         System.out.println(Messages.ALL_DATA_CLEARED);
         printLine();
     }
-    
-    public void printGraph(String graph) {
+
+
+    public void printGraph(StonksGraph stonksGraph) {
         printLine();
-        System.out.print(graph);
+        System.out.print(stonksGraph);
         printLine();
     }
+
 
     public void printBudgetWarning(String month, String budgetName, double currAmount, double limit) {
         printLine();
