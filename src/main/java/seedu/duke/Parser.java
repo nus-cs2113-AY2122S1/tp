@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 
 public class Parser {
@@ -105,6 +106,10 @@ public class Parser {
             }
             break;
 
+        case "amount":
+            executeAmount(inputParams);
+            break;
+
         case "help":
             Ui.displayHelp();
             break;
@@ -166,10 +171,24 @@ public class Parser {
             Trip currentTrip = Storage.getOpenTrip();
             Expense expenseToDelete = currentTrip.getListOfExpenses().get(expenseIndex);
             Double expenseAmount = expenseToDelete.getAmountSpent();
+            correctBalances(expenseToDelete);
             currentTrip.removeExpense(expenseIndex);
             Ui.printDeleteExpenseSuccessful(expenseAmount);
         } catch (IndexOutOfBoundsException e) {
             Ui.printUnknownExpenseIndexError();
+        }
+    }
+
+    private static void correctBalances(Expense expense) {
+        Person payer = expense.getPayer();
+        for (Person person : expense.getPersonsList()) {
+            if (person == payer) {
+                payer.setMoneyOwed(payer, -expense.getAmountSplit().get(person));
+                continue;
+            }
+            payer.setMoneyOwed(person, -expense.getAmountSplit().get(person));
+            person.setMoneyOwed(payer, expense.getAmountSplit().get(person));
+            person.setMoneyOwed(person, -expense.getAmountSplit().get(person));
         }
     }
 
@@ -212,11 +231,114 @@ public class Parser {
         String expenseCategory = expenseInfo[1].toLowerCase();
         ArrayList<Person> listOfPersonsIncluded = checkValidPersons(Storage.getOpenTrip(), expenseInfo[2]);
         String expenseDescription = getDescription(expenseInfo[2]);
-
         Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
         newExpense.setDate(newExpense.prompDate());
         currTrip.addExpense(newExpense);
+        updateIndividualSpending(newExpense);
         Ui.printExpenseAddedSuccess();
+    }
+
+    private static void updateIndividualSpending(Expense expense) {
+        Ui.printGetPersonPaid();
+        String input = Storage.getScanner().nextLine().strip();
+        Person payer = checkValidPersonInExpense(input, expense);
+        if (payer != null) {
+            expense.setPayer(payer);
+            HashMap<Person, Double> amountBeingPaid = new HashMap<>();
+            double total = 0.0;
+            for (Person person : expense.getPersonsList()) {
+                Ui.printHowMuchDidPersonSpend(person.getName());
+                String amountString = Storage.getScanner().nextLine().strip();
+                if (amountString.equalsIgnoreCase("equal") && amountBeingPaid.isEmpty()) {
+                    assignEqualAmounts(payer, expense, amountBeingPaid);
+                    return;
+                } else {
+                    try {
+                        double amount = Double.parseDouble(amountString);
+                        total += amount;
+                        if (total > expense.getAmountSpent()) {
+                            Ui.printIncorrectAmount(expense.getAmountSpent());
+                            updateIndividualSpending(expense);
+                            return;
+                        } else {
+                            amountBeingPaid.put(person, amount);
+                        }
+                    } catch (NumberFormatException e) {
+                        Ui.argNotNumber();
+                        updateIndividualSpending(expense);
+                        return;
+                    }
+                }
+            }
+            if (total < expense.getAmountSpent()) {
+                Ui.printIncorrectAmount(expense.getAmountSpent());
+                updateIndividualSpending(expense);
+            } else {
+                assignAmounts(payer, expense, amountBeingPaid);
+            }
+        } else {
+            Ui.printPersonNotInExpense();
+            Ui.printPeopleInvolved(expense.getPersonsList());
+            updateIndividualSpending(expense);
+        }
+    }
+
+    private static Person checkValidPersonInExpense(String name, Expense expense) {
+        for (Person person : expense.getPersonsList()) {
+            if (name.equalsIgnoreCase(person.getName())) {
+                return person;
+            }
+        }
+        return null;
+    }
+
+    private static void assignEqualAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid) {
+        double total = 0.0;
+        double amount = Double.parseDouble(String.format("%.02f",
+                (expense.getAmountSpent() / expense.getPersonsList().size())));
+        for (Person people : expense.getPersonsList()) {
+            amountBeingPaid.put(people, amount);
+            total += amount;
+        }
+        //This will cause payer to bear the deficit or surplus
+        if (total != expense.getAmountSpent()) {
+            double payerAmount = amountBeingPaid.get(payer) + (expense.getAmountSpent() - total);
+            amountBeingPaid.put(payer, payerAmount);
+        }
+        assignAmounts(payer, expense, amountBeingPaid);
+    }
+
+    private static void assignAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid) {
+        for (Person person : expense.getPersonsList()) {
+            if (person == payer) {
+                person.setMoneyOwed(person, amountBeingPaid.get(person));
+                expense.setAmountSplit(person, amountBeingPaid.get(person));
+                continue;
+            }
+            payer.setMoneyOwed(person, amountBeingPaid.get(person));
+            person.setMoneyOwed(payer, -amountBeingPaid.get(person));
+            person.setMoneyOwed(person, amountBeingPaid.get(person));
+            expense.setAmountSplit(person, amountBeingPaid.get(person));
+        }
+    }
+
+    private static void executeAmount(String name) {
+        Trip trip = Storage.getOpenTrip();
+        Person toBeChecked = checkValidPersonInTrip(name, trip);
+        if (toBeChecked == null) {
+            Ui.printPersonNotInTrip();
+        } else {
+            Ui.printAmount(toBeChecked, trip);
+        }
+    }
+
+    private static Person checkValidPersonInTrip(String name, Trip trip) {
+        for (Person person : trip.getListOfPersons()) {
+            if (name.equalsIgnoreCase(person.getName())) {
+                return person;
+            }
+        }
+        return null;
     }
 
     private static boolean checkValidCommand(String inputCommand) {
