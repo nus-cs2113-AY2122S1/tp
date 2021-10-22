@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.Parser;
 import seedu.duke.Duke;
 import seedu.duke.Ui;
+import seedu.duke.items.EventCatalog;
 import seedu.duke.items.Item;
 
 import java.util.ArrayList;
@@ -32,19 +33,19 @@ public class ListCommand extends Command {
         switch (listType) {
         case "list":
             sortedList = Parser.makeMainList();
-            Parser.bubbleSortItems(sortedList);
+            EventCatalog.bubbleSortItems(sortedList);
             System.out.println("Here is your overall schedule:");
             Ui.printList(sortedList);
             break;
         case "event":
             sortedList = new ArrayList<>(Duke.eventCatalog);
-            Parser.bubbleSortItems(sortedList);
+            EventCatalog.bubbleSortItems(sortedList);
             System.out.println("Here are all the events in your list:");
             Ui.printList(sortedList);
             break;
         case "task":
             sortedList = new ArrayList<>(Duke.taskList);
-            Parser.bubbleSortItems(sortedList);
+            EventCatalog.bubbleSortItems(sortedList);
             System.out.println("Here are all the tasks in your list:");
             Ui.printList(sortedList);
             break;

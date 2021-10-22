@@ -73,11 +73,11 @@ public class DeleteCommand extends Command {
             if (isEventFlag(itemFlag)) {
                 assert indexToDelete < eventCatalog.size();
                 deletedItem = deleteEvent(indexToDelete);
-                return new CommandResult("I have deleted this event: " + deletedItem);
+                return new CommandResult(Ui.getEventDeletionMessage(deletedItem));
             } else if (isTaskFlag(itemFlag)) {
                 assert indexToDelete < eventCatalog.size();
                 deletedItem = deleteTask(indexToDelete);
-                return new CommandResult("I have deleted this task: " + deletedItem);
+                return new CommandResult(Ui.getTaskDeletionMessage(deletedItem));
             }
         }
         return new CommandResult("Unable to delete item!");
