@@ -24,7 +24,7 @@ public class AddPersonalContactParser extends RegexParser {
         parsePersonalName(true);
         TextUi.greetingMessage(personalContact);
         String userConfirmation = UserInputTextUi.getUserConfirmation();
-        if (userConfirmation != null || userConfirmation.isBlank()) {
+        if (userConfirmation.isBlank()) {
             parsePersonalGithubUsername();
             parsePersonalTelegramUsername();
             parsePersonalTwitterUsername();
@@ -36,7 +36,7 @@ public class AddPersonalContactParser extends RegexParser {
 
     public void recallPersonalDetails() {
         String userConfirmation = UserInputTextUi.getUserConfirmation();
-        if (userConfirmation != null || userConfirmation.isBlank()) {
+        if (userConfirmation.isBlank()) {
             parsePersonalName(false);
             parsePersonalGithubUsername();
             parsePersonalTelegramUsername();
@@ -77,7 +77,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private boolean checkGithubValidity(String userInput) throws InvalidGithubUsernameException {
-        if (userInput.isEmpty() || userInput == null) {
+        if (userInput.isEmpty()) {
             return true;
         }
         // if exception is thrown in there, it will not return true, so isValidDetail will remain false
@@ -86,7 +86,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void setParsedGithubUsername(String userInput) {
-        if (userInput.isEmpty() || userInput == null) {
+        if (userInput.isEmpty()) {
             this.personalContact.setGithub(null);
         } else {
             this.personalContact.setGithub(userInput);
@@ -108,7 +108,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private boolean checkTelegramValidity(String userInput) throws InvalidTelegramUsernameException {
-        if (userInput.isEmpty() || userInput == null) {
+        if (userInput.isEmpty()) {
             return true;
         }
         // if exception is thrown in there, it will not return true, so isValidDetail will remain false
@@ -117,7 +117,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void setParsedTelegramUsername(String userInput) {
-        if (userInput.isEmpty() || userInput == null) {
+        if (userInput.isEmpty()) {
             this.personalContact.setTelegram(null);
         } else {
             this.personalContact.setTelegram(userInput);
@@ -139,7 +139,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private boolean checkTwitterValidity(String userInput) throws InvalidTwitterUsernameException {
-        if (userInput.isEmpty() || userInput == null) {
+        if (userInput.isEmpty()) {
             return true;
         }
         // if exception is thrown in there, it will not return true, so isValidDetail will remain false
@@ -148,7 +148,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void setParsedTwitterUsername(String userInput) {
-        if (userInput.isEmpty() || userInput == null) {
+        if (userInput.isEmpty()) {
             this.personalContact.setTwitter(null);
         } else {
             this.personalContact.setTwitter(userInput);
@@ -170,7 +170,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private boolean checkEmailValidity(String userInput) throws InvalidEmailException {
-        if (userInput.isEmpty() || userInput == null) {
+        if (userInput.isEmpty()) {
             return true;
         }
         // if exception is thrown in there, it will not return true, so isValidDetail will remain false
@@ -179,7 +179,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void setParsedEmailAddress(String userInput) {
-        if (userInput.isEmpty() || userInput == null) {
+        if (userInput.isEmpty()) {
             this.personalContact.setEmail(null);
         } else {
             this.personalContact.setEmail(userInput);
@@ -201,7 +201,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private boolean checkLinkedinValidity(String userInput) throws InvalidLinkedinUsernameException {
-        if (userInput.isEmpty() || userInput == null) {
+        if (userInput.isEmpty()) {
             return true;
         }
         // if exception is thrown in there, it will not return true, so isValidDetail will remain false
@@ -210,7 +210,7 @@ public class AddPersonalContactParser extends RegexParser {
     }
 
     private void setParsedLinkedinUsername(String userInput) {
-        if (userInput.isEmpty() || userInput == null) {
+        if (userInput.isEmpty()) {
             this.personalContact.setLinkedin(null);
         } else {
             this.personalContact.setLinkedin(userInput);
