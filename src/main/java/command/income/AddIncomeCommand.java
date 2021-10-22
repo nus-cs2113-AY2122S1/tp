@@ -31,6 +31,7 @@ public class AddIncomeCommand implements Callable<Integer> {
 
         } catch (Exception error) {
             ui.printMessage(addIncomeErrorMsg);
+            return 1;
         }
         return 0;
     }

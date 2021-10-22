@@ -26,6 +26,7 @@ public class AddBudgetCommand implements Callable<Integer> {
 
         } catch (Exception error) {
             ui.printMessage(addBudgetErrorMsg);
+            return 1;
         }
         return 0;
     }
