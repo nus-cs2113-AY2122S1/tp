@@ -7,6 +7,10 @@ import seedu.duke.exercises.Exercise;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 
+import java.util.logging.Logger;
+
+import static seedu.duke.logger.LoggerUtil.setupLogger;
+
 /**
  * To edit an existing exercise in a workout.
  */
@@ -20,6 +24,7 @@ public class EditExerciseCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1, 2, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps "
             + "from workout 2";
     public static final String MESSAGE_SUCCESS = "The edited exercise: %1$s";
+    private static final Logger LOGGER = Logger.getLogger(RemoveExerciseCommand.class.getName());
 
     private final String newDescription;
 
@@ -47,6 +52,9 @@ public class EditExerciseCommand extends Command {
 
         assert workoutIndex >= 0;
         assert exerciseIndex >= 0;
+        assert !newDescription.isEmpty();
+        assert newReps >= 1 && newSets >= 1;
+        setupLogger(LOGGER);
     }
 
     /**
@@ -60,6 +68,8 @@ public class EditExerciseCommand extends Command {
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         try {
             Exercise toEdit = workouts.getWorkout(workoutIndex).getExercise(exerciseIndex);
+
+            LOGGER.info("Editing current exercise parameters with new exercise parameters");
             toEdit.setDescription(newDescription);
             toEdit.setReps(newReps);
             toEdit.setSets(newSets);
@@ -68,7 +78,8 @@ public class EditExerciseCommand extends Command {
             storage.saveData(jsonString);
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, toEdit));
-        } catch (NumberFormatException e) {
+        } catch (IndexOutOfBoundsException e) {
+            LOGGER.info("Edit exercise failed - exercise not found");
             throw new GetJackDException(ERROR_MESSAGE_EXERCISE_NOT_FOUND);
         }
     }

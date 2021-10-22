@@ -59,7 +59,7 @@ public class RemoveExerciseCommand extends Command {
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
         } catch (IndexOutOfBoundsException e) {
-            LOGGER.info("remove exercise failed - exercise not found");
+            LOGGER.info("Remove exercise failed - exercise not found");
             throw new GetJackDException(ERROR_MESSAGE_EXERCISE_NOT_FOUND);
         }
     }
