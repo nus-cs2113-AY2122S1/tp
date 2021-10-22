@@ -73,6 +73,10 @@ public class Ui {
         System.out.println("\tYou have just search item keyword " + item + " in trip called " + tripName);
     }
 
+    public void printEditItem(String tripName, int itemIndex) {
+        System.out.println("\tYou have just edited item " + itemIndex + " of " + tripName);
+    }
+
     public void printEdit(String tripName) {
         System.out.println("\tYou have just edited a trip called " + tripName + ".");
     }
@@ -96,4 +100,5 @@ public class Ui {
     public void printWriteSave() {
         System.out.println("\tNow saving all your trips.");
     }
+
 }

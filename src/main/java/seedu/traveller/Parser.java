@@ -83,6 +83,9 @@ public class Parser {
         case "delete-item":
             command = parseDeleteItemCommand(userInput[1]);
             break;
+        case "edit":
+            command = parseEditItemCommand(userInput[1]);
+            break;
         case "exit":
             command = parseExitCommand();
             break;
