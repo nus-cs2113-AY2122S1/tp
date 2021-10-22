@@ -1,4 +1,4 @@
-# Duke
+![Traveller](./documentationPics/logo.png)
 
 Traveller is a command line interface (CLI) application that is designed to help holiday-makers plan 
 their overseas holiday trips with ease. 
