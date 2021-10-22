@@ -43,12 +43,12 @@ public class EditExerciseCommand extends Command {
      * @param newReps        is the new reps that the user wants to update with
      * @param newSets        is the new sets that the user wants to update with
      */
-    public EditExerciseCommand(int workoutIndex, int exerciseIndex, String newDescription, int newReps, int newSets) {
-        this.workoutIndex = workoutIndex;
+    public EditExerciseCommand(int exerciseIndex, int workoutIndex, String newDescription, int newSets, int newReps) {
         this.exerciseIndex = exerciseIndex;
+        this.workoutIndex = workoutIndex;
         this.newDescription = newDescription;
-        this.newReps = newReps;
         this.newSets = newSets;
+        this.newReps = newReps;
 
         assert workoutIndex >= 0;
         assert exerciseIndex >= 0;

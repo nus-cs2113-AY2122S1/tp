@@ -38,7 +38,7 @@ public class EditExerciseParser extends Parser {
             int newSets = parseArgsAsIndex(exerciseArgs[1]);
             int newReps = parseArgsAsIndex(exerciseArgs[2]);
 
-            return new EditExerciseCommand(workoutIndex, exerciseIndex, newDescription, newSets, newReps);
+            return new EditExerciseCommand(exerciseIndex, workoutIndex, newDescription, newSets, newReps);
         } catch (GetJackDException e) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + EditExerciseCommand.MESSAGE_USAGE);
         }
