@@ -39,6 +39,10 @@ public class Ui {
         System.out.println("Current budget left for this trip: " + stringMoney(t.getBudgetLeft()));
     }
 
+    public static void printFilteredExpenses(Expense e, int index) {
+        System.out.println((index + 1) + ". " + e.toString());
+    }
+
     public static void printExpenseAddedSuccess() {
         System.out.println("Your expense has been added successfully");
     }
@@ -68,6 +72,12 @@ public class Ui {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
                 + "expense [amount] [category] [people] /[description].");
+    }
+
+    public static void printFilterFormatError() {
+        System.out.println("Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "view filter [expense-attribute] [attribute-information]");
     }
 
     public static void printBudgetFormatError() {
@@ -214,5 +224,9 @@ public class Ui {
         System.out.println("Type [open] to open your trip");
         System.out.println("While a trip is open, type [expense] to create an expense for that trip");
         System.out.println();
+    }
+
+    public static void printInvalidFilterError() {
+
     }
 }

@@ -79,7 +79,12 @@ public class Parser {
             break;
 
         case "view":
-            executeView();
+            try {
+                executeView(inputParams);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                Ui.printFilterFormatError();
+            }
+
             break;
 
         case "delete":
@@ -148,8 +153,24 @@ public class Parser {
         Ui.printExpensesSummary(Storage.getOpenTrip());
     }
 
-    private static void executeView() {
-        Storage.getOpenTrip().viewAllExpenses();
+    private static void executeView(String inputParams) {
+        Trip currentTrip = Storage.getOpenTrip();
+        if (inputParams == null) {
+            Storage.getOpenTrip().viewAllExpenses();
+        } else {
+            String[] paramString = inputParams.split(" ", 3);
+            String secondCommand = paramString[0];
+            String expenseCategory = paramString[1];
+            String expenseAttribute = paramString[2];
+            if (secondCommand.equals("filter")) {
+                try {
+                    Trip.getFilteredExpenses(expenseCategory, expenseAttribute);
+                } catch (IndexOutOfBoundsException e) {
+                    Ui.printNoExpensesError();
+                }
+
+            }
+        }
     }
 
     private static void executeDelete(String inputParams) {

@@ -1,9 +1,31 @@
 create America 02-02-2021 1.08 1000 yikai,yuzhao,qian,josh,xiyuan
 open 1
+view filter category breakfast
+view filter description d a c
 list
 edit 1 budget 2000
-expense 8.00 food yikai,yuzhao /this is what i want to type
+expense 8.00 breakfast yikai,yuzhao,qian /c a b
 19-10-2021
+yikai
+5.00
+1.00
+2.00
+expense 1.00 lunch yikai,josh,xiyuan /d a c
+19-10-2021
+yikai
+0.33
+0.33
+0.34
+expense 2.00 breakfast yikai,josh /d a c
+19-10-2021
+josh
+1.00
+1.00
+view filter category breakfast
+view filter category lunch
+view filter description d a c
+view filter description c a b
+view filter payer josh
 yikai
 equal
 list
