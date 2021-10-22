@@ -59,4 +59,6 @@ public class Ui {
         printGlobe();
         printLogo();
     }
+
+    public static void printLineSeparator() {out.println(Constants.LINE_SEPARATOR);}
 }
