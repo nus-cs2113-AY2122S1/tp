@@ -11,8 +11,6 @@ import java.util.HashMap;
  * Represents students.
  */
 public class Student implements ClassChecker {
-    private static final double[] MARKS_RANGE = {0, 100};
-
     private String id;
     private String name;
     private final AttendanceList attendanceList;
@@ -23,25 +21,6 @@ public class Student implements ClassChecker {
         this.name = name;
         this.attendanceList = new AttendanceList();
         this.results = new HashMap<>();
-    }
-
-    /**
-     * Checks if the marks are valid.
-     *
-     * @param marks The marks to check.
-     * @return true if valid, else false.
-     */
-    public static boolean isMarksWithinRange(double marks) {
-        return (marks >= MARKS_RANGE[0] && marks <= MARKS_RANGE[1]);
-    }
-
-    /**
-     * Gets the marks range.
-     *
-     * @return A double array of size 2: [0] - Min marks, [1] - Max marks.
-     */
-    public static double[] getMarksRange() {
-        return MARKS_RANGE;
     }
 
     /**
@@ -156,12 +135,13 @@ public class Student implements ClassChecker {
         if (id.isEmpty() || name.isEmpty()) {
             return false;
         }
-        //do this in module instead
+
+        /*//do this in module instead
         for (String assessmentName : results.keySet()) {
             if (!isMarksWithinRange(results.get(assessmentName))) {
                 return false;
             }
-        }
+        }*/
 
         return true;
     }
