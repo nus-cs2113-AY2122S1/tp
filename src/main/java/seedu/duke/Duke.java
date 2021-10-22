@@ -1,6 +1,7 @@
 package seedu.duke;
 
 import seedu.duke.command.Command;
+import seedu.duke.command.CommandEnum;
 import seedu.duke.command.CommandResult;
 import seedu.duke.parser.CommandParser;
 import seedu.duke.task.TaskManager;
@@ -22,6 +23,9 @@ public class Duke {
     }
 
     public String readInput() {
+        if (!in.hasNextLine()) {
+            return CommandEnum.BYE.name();
+        }
         ui.printCursor();
         String input = in.nextLine();
         return input;
