@@ -14,6 +14,19 @@ import static seedu.duke.logger.LoggerUtil.setupLogger;
 public class Exercise {
     private static final Logger LOGGER = Logger.getLogger(Exercise.class.getName());
     protected String description;
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setSets(int sets) {
+        this.sets = sets;
+    }
+
+    public void setReps(int reps) {
+        this.reps = reps;
+    }
+
     protected int sets;
     protected int reps;
 

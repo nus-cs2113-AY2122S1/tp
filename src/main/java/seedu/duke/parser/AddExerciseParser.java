@@ -14,48 +14,9 @@ public class AddExerciseParser extends Parser {
         this.userInputString = userInputString;
     }
 
-    /**
-     * Gets arguments required for an exercise, such as workoutIndex, exerciseName, sets and reps.
-     * commandArgs passed in as [exercise description], [sets and reps], [workout index or name]
-     *
-     * @param commandArgs user input without the command word.
-     * @return string array containing workoutIndex, exerciseName, sets and reps.
-     * @throws GetJackDException if any of the above-mentioned arguments are empty.
-     */
-    static String[] getExerciseArgs(String commandArgs) throws GetJackDException {
-        if (!commandArgs.contains(PARAMETER_SEPARATOR)) {
-            throw new GetJackDException("Invalid format for add exercise.");
-        }
-
-        String[] arguments = commandArgs.split(PARAMETER_SEPARATOR);
-        if ((arguments.length < 3 && Command.workoutMode == 0) || arguments.length < 2) {
-            LOGGER.info("Missing exercise arguments");
-            throw new GetJackDException("Error. Missing exercise parameters");
-        }
-
-        try {
-            String exerciseDescription = arguments[0];
-            String[] setsAndReps = arguments[1].split(" ");
-            String sets = setsAndReps[0];
-            String reps = setsAndReps[1];
-            String workoutIdentifier = (Command.workoutMode == 0) ? arguments[2] : null;
-
-            String[] exerciseArgs = new String[]{exerciseDescription, sets, reps, workoutIdentifier};
-            for (String s : exerciseArgs) {
-                assert (!s.contains(PARAMETER_SEPARATOR));
-            }
-
-            return exerciseArgs;
-            
-        } catch (ArrayIndexOutOfBoundsException e) {
-            LOGGER.info("Missing exercise arguments");
-            throw new GetJackDException("Error. Missing sets or reps parameters");
-        }
-    }
-
     private Command prepareAddExercise(String commandArgs) {
         try {
-            String[] exerciseArgs = getExerciseArgs(commandArgs);
+            String[] exerciseArgs = getExerciseArgs(commandArgs, false);
             String exerciseName = exerciseArgs[0].trim();
             int sets = parseArgsAsIndex(exerciseArgs[1]);
             int reps = parseArgsAsIndex(exerciseArgs[2]);

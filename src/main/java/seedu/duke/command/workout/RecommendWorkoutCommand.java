@@ -48,6 +48,7 @@ public class RecommendWorkoutCommand extends Command {
      *
      * @param workouts is the list of Workouts
      * @param storage  is a storage object
+     * @return CommandResult
      */
     @Override
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) {

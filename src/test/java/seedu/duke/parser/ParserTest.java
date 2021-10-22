@@ -31,21 +31,21 @@ class ParserTest {
     void getExerciseArgs_emptyString_throwsException() {
         String[] emptyString = {" ", "\n", "\t", " "};
         for (String s : emptyString) {
-            assertThrows(GetJackDException.class, () -> getExerciseArgs(s));
+            assertThrows(GetJackDException.class, () -> getExerciseArgs(s,false));
         }
     }
 
     @Test
     void getExerciseArgs_nonEmptyStringWorkoutIndex_throwsException() {
         String input = "Test input, 5 20";
-        assertThrows(GetJackDException.class, () -> getExerciseArgs(input));
+        assertThrows(GetJackDException.class, () -> getExerciseArgs(input,false));
     }
 
     @Test
     void getExerciseArgs_validInput_returnsStringWithExerciseArgs() {
         String input = "exercise, 5 20, 1";
         try {
-            assertArrayEquals(new String[]{"exercise", "5", "20", "1"}, getExerciseArgs(input));
+            assertArrayEquals(new String[]{"exercise", "5", "20", "1"}, getExerciseArgs(input,false));
         } catch (GetJackDException e) {
             e.printStackTrace();
         }
