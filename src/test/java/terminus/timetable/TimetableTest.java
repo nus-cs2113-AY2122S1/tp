@@ -88,4 +88,14 @@ class TimetableTest {
         addLinkCommand2.execute(ui, moduleManager);
         assertNotNull(timetable.getWeeklySchedule());
     }
+
+    @Test
+    void execute_checkEmptySchedule_success() {
+        String schedule = null;
+        String day1 = "Friday";
+        String day2 = null;
+        Timetable timetable = new Timetable(moduleManager);
+        assertNotNull(timetable.checkEmptySchedule(schedule, day1));
+        assertNotNull(timetable.checkEmptySchedule(schedule, day2));
+    }
 }

@@ -65,7 +65,11 @@ public class LinkCommandParserTest {
         assertThrows(InvalidArgumentException.class,
             () -> linkCommandParser.parseCommand("add \"test desc\" \"monday\" \"x:30\" \"3\" \"https://zoom.us/test\""));
         assertThrows(InvalidArgumentException.class,
-            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"10:00\" \"1\" \"zoom.test\""));
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"10:00\" \"1\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"Monday\" \"10:00\" \"1\" \"empty\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"10:00\" \"1\" \"zoom\""));
         assertThrows(InvalidArgumentException.class,
             () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"10:00\" \"-1\" \"zoom.test\""));
         assertThrows(InvalidArgumentException.class,
