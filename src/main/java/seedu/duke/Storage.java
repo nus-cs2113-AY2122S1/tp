@@ -4,7 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.*;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,7 +18,7 @@ import java.util.logging.Logger;
 
 public class Storage {
 
-    private static String FILE_PATH = "trips.json";
+    private static final String FILE_PATH = "trips.json";
 
     public static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static Trip openTrip = null;

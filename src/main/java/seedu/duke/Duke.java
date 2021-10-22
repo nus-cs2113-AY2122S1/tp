@@ -28,7 +28,7 @@ public class Duke {
 
         Scanner in = new Scanner(System.in);
         Storage.setScanner(in);
-//        Storage.readFromFile();
+        //Storage.readFromFile();
 
         Logger logger = Logger.getLogger("ProgramLogger");
         Storage.setLogger(logger);
