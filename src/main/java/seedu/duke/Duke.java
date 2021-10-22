@@ -35,7 +35,7 @@ public class Duke {
             do {
                 try {
                     Ui.printLineSeparator();
-                    System.out.println("Enter a command");
+                    Ui.promptInput();
                     String userInput = in.nextLine();
                     cmd = mainParser.parseCommand(userInput);
 
