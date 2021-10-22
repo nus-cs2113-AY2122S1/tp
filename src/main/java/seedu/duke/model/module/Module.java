@@ -16,12 +16,22 @@ public class Module {
     private String prerequisite;
     private String corequisite;
     // todo add additional information
+    private Grade grade = Grade.NONE;
+    private Grade targetGrade = Grade.NONE; //not in use
 
     public Module(String moduleCode, String title, String moduleCredit) {
         // subject to change
         this.moduleCode = moduleCode;
         this.title = title;
         this.moduleCredit = moduleCredit;
+    }
+
+    public Module(String moduleCode, String title, String moduleCredit, String grade) {
+        // subject to change
+        this.moduleCode = moduleCode;
+        this.title = title;
+        this.moduleCredit = moduleCredit;
+        this.grade = Grade.deserializeGrade(grade);
     }
 
     public String getModuleCode() {
@@ -62,7 +72,7 @@ public class Module {
 
     public String serialize() {
         // subject to change
-        return moduleCode + " | " + title + " | " + moduleCredit;
+        return moduleCode + " | " + title + " | " + moduleCredit + " | " + grade;
     }
 
     public static Module deserialize(Ui ui, String line) {
@@ -72,8 +82,9 @@ public class Module {
             String moduleCode = params[0];
             String title = params[1];
             String moduleCredit = params[2];
+            String grade = params[3];
 
-            return new Module(moduleCode, title, moduleCredit);
+            return new Module(moduleCode, title, moduleCredit, grade);
         } catch (ArrayIndexOutOfBoundsException e) {
             // Ignoring the particular line
             ui.printMessage(Messages.ERROR_DESERIALIZING_TASK);
