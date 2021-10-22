@@ -112,6 +112,14 @@ public class Ui {
         }
     }
 
+    public void showAddTour(Tour tour) {
+        show(ADD_MESSAGE + "\n" + tour);
+    }
+
+    public void showAddClientPackage(ClientPackage clientPackage) {
+        show(ADD_MESSAGE + "\n" + clientPackage);
+    }
+
     /**
      * Prints an exit message to the text Ui to acknowledge exiting the application.
      */

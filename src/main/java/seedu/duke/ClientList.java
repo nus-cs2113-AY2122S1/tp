@@ -23,10 +23,9 @@ public class ClientList {
      * @param client the client to-be-added
      * @param ui     user interface of TourPlanner
      */
-    public void add(Client client, Ui ui) {
+    public void add(Client client) {
         clients.add(client);
         ui.showAddClient(client);
-        clientCount++;
     }
 
     /**
