@@ -26,8 +26,7 @@ public class RecommendWorkoutCommand extends Command {
             + "Example: " + COMMAND_WORD + " beginner";
     private static final Logger LOGGER = Logger.getLogger(RecommendWorkoutCommand.class.getName());
     private final String workoutLevel;
-    private Exercise toAdd;
-
+    
     /**
      * Instantiates object and sets parameters for recommending workouts based on workout difficulty.
      *

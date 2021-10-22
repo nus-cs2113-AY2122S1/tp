@@ -13,10 +13,15 @@ public class RecommendWorkoutParser extends Parser {
         this.userInputString = userInputString;
     }
 
+    private boolean isIncorrectParam(String workoutLevel) {
+        return !workoutLevel.contains("beginner") | !workoutLevel.contains("intermediate") |
+                !workoutLevel.contains("pro");
+    }
+
     private Command prepareRecommendWorkout(String commandArgs) {
         String workoutLevel = commandArgs.trim();
 
-        if (workoutLevel.length() == 0) {
+        if (workoutLevel.length() == 0 | isIncorrectParam(workoutLevel)) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + RecommendWorkoutCommand.MESSAGE_USAGE);
         }
 
