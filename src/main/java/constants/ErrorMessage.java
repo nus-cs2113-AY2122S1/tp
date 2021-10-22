@@ -22,7 +22,8 @@ public final class ErrorMessage {
     // budget error messages
     public static final String addBudgetErrorMsg = "Error with adding budget. Ensure you keyed "
             + "the budget value and try again!";
-
-    public static final String deleteBudgetErrorMsg = "Error with deleting budget.";
-
+    public static final String deleteBudgetErrorMsg = "Error with deleting budget. Currently you have no "
+            + "budget stored in the system!";
+    public static final String updateBudgetErrorMsg = "Error with updating budget. Ensure you keyed "
+            + "the budget value and try again!";
 }
