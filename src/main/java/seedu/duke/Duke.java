@@ -34,9 +34,11 @@ public class Duke {
 
             do {
                 try {
+                    Ui.printLineSeparator();
                     System.out.println("Enter a command");
                     String userInput = in.nextLine();
                     cmd = mainParser.parseCommand(userInput);
+
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
                 }

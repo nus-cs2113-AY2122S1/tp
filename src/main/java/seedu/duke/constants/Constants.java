@@ -6,6 +6,7 @@ public class Constants {
     public static final String INDEX_WRAP_BACK = "]";
     public static final String MODULE_MAPPING_SEPARATOR = " - ";
     public static final String MODULE_NAME_SEPARATOR = " : ";
+    public static final String LINE_SEPARATOR = "===============================================";
 
     // Commands
     public static final String COMMAND_REMOVE = "remove";
