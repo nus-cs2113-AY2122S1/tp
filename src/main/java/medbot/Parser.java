@@ -3,8 +3,10 @@ package medbot;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+
+import medbot.command.HelpInfoCommand;
+import medbot.command.HelpSchedulerCommand;
 import medbot.command.appointmentcommand.AddAppointmentCommand;
-import medbot.command.HelpCommand;
 import medbot.command.SwitchCommand;
 import medbot.command.Command;
 import medbot.command.ExitCommand;
@@ -145,9 +147,7 @@ public class Parser {
         if (userInput.equals(COMMAND_EXIT)) {
             return new ExitCommand();
         }
-        if (userInput.startsWith(COMMAND_HELP)) {
-            return parseHelpCommand(userInput);
-        }
+
         //commands valid in only some viewTypes
         switch (viewType) {
         case PATIENT_INFO:
@@ -189,6 +189,9 @@ public class Parser {
         if (userInput.startsWith(COMMAND_FIND)) {
             return parseFindPatientCommand(userInput);
         }
+        if (userInput.startsWith(COMMAND_HELP)) {
+            return parseHelpCommand(userInput);
+        }
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
@@ -218,6 +221,9 @@ public class Parser {
         if (userInput.startsWith(COMMAND_FIND)) {
             return parseFindStaffCommand(userInput);
         }
+        if (userInput.startsWith(COMMAND_HELP)) {
+            return parseHelpCommand(userInput);
+        }
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
@@ -244,6 +250,9 @@ public class Parser {
         if (userInput.startsWith(COMMAND_VIEW)) {
             return parseViewAppointmentCommand(userInput);
         }
+        if (userInput.startsWith(COMMAND_HELP)) {
+            return parseHelpCommand(userInput);
+        }
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
@@ -256,40 +265,70 @@ public class Parser {
      * @return HelpCommand object.
      * @throws MedBotParserException if parameters.length < 1 && > 2
      */
-    private static HelpCommand parseHelpCommand(String userInput) throws MedBotParserException {
+    private static Command parseHelpCommand(String userInput) throws MedBotParserException {
         String commandTypeString = EMPTY_STRING;
         try {
             commandTypeString = userInput.substring(4).strip();
         } catch (IndexOutOfBoundsException ie) {
-            return new HelpCommand();
+            return new HelpInfoCommand();
         }
         if (commandTypeString.equals(EMPTY_STRING)) {
-            return new HelpCommand();
+            return new HelpInfoCommand();
         }
-        CommandType commandType = parseHelpCommandType(commandTypeString);
-        return new HelpCommand(commandType);
+
+        if (viewType == ViewType.PATIENT_INFO || viewType == ViewType.MEDICAL_STAFF_INFO) {
+            CommandType commandType = parseHelpInfoViewCommandType(commandTypeString);
+            return new HelpInfoCommand(commandType);
+        } else {
+            CommandType commandType = parseHelpSchedulerViewCommandType(commandTypeString);
+            return new HelpSchedulerCommand(commandType);
+        }
+
     }
 
-    private static CommandType parseHelpCommandType(String commandTypeString) throws MedBotParserException {
+    private static CommandType parseHelpInfoViewCommandType(String commandTypeString) throws MedBotParserException {
         switch (commandTypeString) {
         case COMMAND_ADD:
-            return CommandType.ADD_PATIENT;
+            return CommandType.ADD_PERSON;
         case COMMAND_DELETE:
-            return CommandType.DELETE_PATIENT;
+            return CommandType.DELETE_PERSON;
         case COMMAND_EDIT:
-            return CommandType.EDIT_PATIENT;
+            return CommandType.EDIT_PERSON;
         case COMMAND_EXIT:
             return CommandType.EXIT;
         case COMMAND_HELP:
             return CommandType.HELP;
         case COMMAND_LIST:
-            return CommandType.LIST_PATIENT;
+            return CommandType.LIST_PERSON;
         case COMMAND_SWITCH:
             return CommandType.SWITCH;
         case COMMAND_VIEW:
-            return CommandType.VIEW_PATIENT;
+            return CommandType.VIEW_PERSON;
         case COMMAND_FIND:
-            return CommandType.FIND_PATIENT;
+            return CommandType.FIND_PERSON;
+        default:
+            throw new MedBotParserException(ERROR_WRONG_COMMAND);
+        }
+    }
+
+    private static CommandType parseHelpSchedulerViewCommandType(String commandTypeString) throws MedBotParserException {
+        switch (commandTypeString) {
+        case COMMAND_ADD:
+            return CommandType.ADD_APPOINTMENT;
+        case COMMAND_DELETE:
+            return CommandType.DELETE_APPOINTMENT;
+        case COMMAND_EDIT:
+            return CommandType.EDIT_APPOINTMENT;
+        case COMMAND_EXIT:
+            return CommandType.EXIT;
+        case COMMAND_HELP:
+            return CommandType.HELP;
+        case COMMAND_LIST:
+            return CommandType.LIST_APPOINTMENT;
+        case COMMAND_SWITCH:
+            return CommandType.SWITCH;
+        case COMMAND_VIEW:
+            return CommandType.VIEW_APPOINTMENT;
         default:
             throw new MedBotParserException(ERROR_WRONG_COMMAND);
         }
