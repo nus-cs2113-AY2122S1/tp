@@ -69,12 +69,13 @@ public class Ui {
         System.out.println("\tYou have just deleted item " + itemIndex + " of " + tripName + " day " + dayIndex);
     }
 
-    public void printSearchItem(String tripName, String item) {
-        System.out.println("\tYou have just search item keyword " + item + " in trip called " + tripName);
+    public void printSearchItem(String tripName, String itemName) {
+        System.out.println("\tYou have just search item keyword " + itemName + " in trip called " + tripName);
     }
 
-    public void printEditItem(String tripName, int itemIndex) {
-        System.out.println("\tYou have just edited item " + itemIndex + " of " + tripName);
+    public void printEditItem(String tripName, int itemIndex, String itemName, String itemTime) {
+        System.out.println("\tYou have just edited item " + itemIndex + " of "
+                + tripName + " to " + itemName + " and " + itemTime);
     }
 
     public void printEdit(String tripName) {

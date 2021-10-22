@@ -14,21 +14,33 @@ import java.util.logging.Logger;
 public class EditItemCommand extends Command {
     private static final Logger logger = Logger.getLogger(DeleteDayCommand.class.getName());
     private final String tripName;
-    private final Item item;
     private final int itemIndex;
+    private final String itemName;
+    private final String itemTime;
 
-    public EditItemCommand(String tripName, int itemIndex, Item item) {
+    public EditItemCommand(String tripName, int itemIndex, String itemTime, String itemName) {
         logger.setLevel(Level.INFO);
         this.tripName = tripName;
-        this.item = item;
+        this.itemTime = itemTime;
+        this.itemName = itemName;
         this.itemIndex = itemIndex;
         logger.log(Level.INFO, "Created an edit-item command: \n" + this);
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public String getItemTime() {
+        return itemTime;
     }
 
     @Override
     public String toString() {
         return "Edit-item command:"
-                + "\n\titem: " + item;
+                + "\n\titemname: " + itemIndex
+                + "\n\titemTime: " + getItemTime()
+                + "\n\titemName: " + getItemName();
     }
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
@@ -38,7 +50,7 @@ public class EditItemCommand extends Command {
             throw new TripNotFoundException();
         }
 
-        ui.printEditItem(tripName, itemIndex);
+        ui.printEditItem(tripName, itemIndex, itemName, itemTime);
     }
 }
 

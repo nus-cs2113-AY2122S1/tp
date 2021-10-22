@@ -9,6 +9,7 @@ import seedu.traveller.commands.DeleteDayCommand;
 import seedu.traveller.commands.DeleteItemCommand;
 import seedu.traveller.commands.ViewCommand;
 import seedu.traveller.commands.SearchItemCommand;
+import seedu.traveller.commands.EditItemCommand;
 import seedu.traveller.commands.ShortestCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
@@ -68,7 +69,7 @@ public class Parser {
         case "shortest":
             command = parseShortestCommand(userInput[1]);
             break;
-        case "search":
+        case "search-item":
             command = parseSearchItemCommand(userInput[1]);
             break;
         case "add-day":
@@ -83,7 +84,7 @@ public class Parser {
         case "delete-item":
             command = parseDeleteItemCommand(userInput[1]);
             break;
-        case "edit":
+        case "edit-item":
             command = parseEditItemCommand(userInput[1]);
             break;
         case "exit":
@@ -232,11 +233,53 @@ public class Parser {
         return command;
     }
 
-    private static Command parseSearchItemCommand(String userInput) {
-        Command command;
+    private static Command parseSearchItemCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
+
         String[] input = userInput.split(" ");
-        command = new SearchItemCommand(input[0],input[1]);
+
+        String tripName;
+        String itemName;
+
+        tripName = input[1];
+        String nameSeparator = " /name ";
+        int nameIdx = userInput.indexOf(nameSeparator);
+        itemName = userInput.substring(nameIdx + NAME_LENGTH);
+
+        Command command;
+        command = new SearchItemCommand(tripName, itemName);
+
+        return command;
+    }
+
+    private static Command parseEditItemCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Edit-item command input");
+        Command command;
+        String[] input = userInput.split(" ");
+
+        String tripName;
+        String itemName;
+        String itemTime;
+        int itemIndex;
+
+        try {
+            tripName = input[1];
+            itemIndex = Integer.valueOf(input[0]);
+
+            String nameSeparator = " /name ";
+            int nameIdx = userInput.indexOf(nameSeparator);
+            itemName = userInput.substring(nameIdx + NAME_LENGTH);
+
+            String timeSeparator = " /time ";
+            int timeIdx = userInput.indexOf(timeSeparator);
+            itemTime = userInput.substring(timeIdx + TIME_LENGTH, nameIdx);
+
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidAddItemFormatException();
+        }
+
+        command = new EditItemCommand(tripName, itemIndex, itemTime, itemName);
+
         return command;
     }
 
