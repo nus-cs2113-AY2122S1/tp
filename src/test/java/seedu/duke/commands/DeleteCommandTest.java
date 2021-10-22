@@ -2,7 +2,7 @@ package seedu.duke.commands;
 
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Parser;
+import seedu.duke.parser.Parser;
 import seedu.duke.items.Event;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

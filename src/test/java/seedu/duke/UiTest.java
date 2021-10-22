@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import seedu.duke.items.Event;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
+import seedu.duke.parser.Parser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
-import seedu.duke.Parser;
+import seedu.duke.parser.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
