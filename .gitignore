@@ -20,3 +20,4 @@ text-ui-test/ACTUAL.TXT
 data/taa_data.json
 text-ui-test/data/taa_data.json
 taa.log*
+src/main/java/META-INF/MANIFEST.MF
