@@ -1,7 +1,6 @@
 package seedu.command;
 
 import seedu.exception.InvalidFlagException;
-import seedu.exception.MissingDetailException;
 import seedu.ui.ExceptionTextUi;
 
 public class SearchContactCommand extends Command {

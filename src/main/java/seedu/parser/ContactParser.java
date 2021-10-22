@@ -1,6 +1,5 @@
 package seedu.parser;
 
-import seedu.contact.DetailType;
 import seedu.exception.ForbiddenDetailException;
 import seedu.exception.InvalidEmailException;
 import seedu.exception.InvalidFlagException;
@@ -12,7 +11,6 @@ import seedu.exception.InvalidTwitterUsernameException;
 import seedu.exception.MissingArgException;
 import seedu.exception.MissingDetailException;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class ContactParser extends RegexParser implements ContactDetails {
@@ -20,7 +18,6 @@ public abstract class ContactParser extends RegexParser implements ContactDetail
     public static final int NUMBER_OF_DETAILS = 2;
     public static final int NUMBER_OF_ADD_ARGS = 2;
     public static final int NUMBER_OF_EDIT_ARGS = 3;
-    public static final int NUMBER_OF_SEARCH_ARGS = 3;
     public static final int NUMBER_OF_FIELDS = 6;
 
     public static final String DETAIL_SEPARATOR = " -";

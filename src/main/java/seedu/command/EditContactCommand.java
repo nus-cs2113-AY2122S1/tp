@@ -1,7 +1,6 @@
 package seedu.command;
 
 import seedu.contact.Contact;
-import seedu.contact.ContactComparator;
 import seedu.contact.ContactList;
 import seedu.exception.InvalidFlagException;
 import seedu.ui.TextUi;

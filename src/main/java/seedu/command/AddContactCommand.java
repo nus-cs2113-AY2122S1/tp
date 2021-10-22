@@ -1,7 +1,6 @@
 package seedu.command;
 
 import seedu.contact.Contact;
-import seedu.contact.ContactComparator;
 import seedu.contact.ContactList;
 import seedu.contact.DetailType;
 import seedu.exception.InvalidFlagException;
@@ -10,7 +9,6 @@ import seedu.ui.TextUi;
 import seedu.ui.UserInputTextUi;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AddContactCommand extends Command {
     private final String name;
