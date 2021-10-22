@@ -1,8 +1,9 @@
 package terminus.ui;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
-import terminus.module.NusModule;
+import terminus.module.ModuleManager;
 import terminus.parser.CommandParser;
 
 public class Ui {
@@ -12,16 +13,20 @@ public class Ui {
     private final Scanner scanner;
 
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        this(System.in);
+    }
+    
+    public Ui(InputStream in) {
+        this.scanner = new Scanner(in);
     }
 
     /**
      * Prints the banner for a workspace, which includes all the commands in the parser.
      */
-    public void printParserBanner(CommandParser parser, NusModule nusModule) {
+    public void printParserBanner(CommandParser parser, ModuleManager moduleManager) {
         printSection(
             "",
-            parser.getWorkspaceBanner(nusModule), 
+            parser.getWorkspaceBanner(moduleManager),
             parser.getCommandList()
                 .stream()
                 .reduce("\nType any of the following to get started:\n",
@@ -40,8 +45,7 @@ public class Ui {
         if (validatedWorkspaceName == null) {
             validatedWorkspaceName = "";
         }
-        System.out.printf(PROMPT, validatedWorkspaceName);
-        return scanner.nextLine();
+        return getUserInput(String.format(PROMPT, validatedWorkspaceName));
     }
 
     /**
@@ -58,5 +62,15 @@ public class Ui {
      */
     public void printExitMessage() {
         System.out.println("Goodbye!");
+    }
+
+    /**
+     * Get the input of the user through the Scanner.
+     * 
+     * @return The user input from the Scanner.
+     */
+    public String getUserInput(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine();
     }
 }

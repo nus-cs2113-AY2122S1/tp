@@ -7,28 +7,26 @@ public class CommandResult {
     protected CommandParser additionalData;
     protected boolean isOk;
     protected boolean isExit;
-    protected String errorMessage;
-    
+
     public CommandResult(boolean isOk) {
         this(isOk, false);
     }
-    
+
     public CommandResult(boolean isOk, boolean isExit) {
-        this(isOk, isExit, null, null);
+        this(isOk, isExit, null);
     }
 
     public CommandResult(boolean isOk, CommandParser additionalData) {
-        this(isOk, false, additionalData, null);
+        this(isOk, false, additionalData);
     }
 
     public CommandResult(boolean isOk, String errorMessage) {
-        this(isOk, false, null, errorMessage);
+        this(isOk, false, null);
     }
 
-    public CommandResult(boolean isOk, boolean isExit, CommandParser additionalData, String errorMessage) {
+    public CommandResult(boolean isOk, boolean isExit, CommandParser additionalData) {
         this.additionalData = additionalData;
         this.isOk = isOk;
-        this.errorMessage = errorMessage;
         this.isExit = isExit;
     }
 
@@ -60,12 +58,4 @@ public class CommandResult {
         return isExit;
     }
 
-    /**
-     * Returns the error message as a String.
-     *
-     * @return The String object containing the error.
-     */
-    public String getErrorMessage() {
-        return errorMessage;
-    }
 }

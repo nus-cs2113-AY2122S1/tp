@@ -6,27 +6,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.command.DeleteCommand;
 import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
-import terminus.command.ViewCommand;
-import terminus.command.note.AddNoteCommand;
+import terminus.command.content.DeleteCommand;
+import terminus.command.content.ViewCommand;
+import terminus.command.content.note.AddNoteCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
-import terminus.ui.Ui;
 
 public class NoteCommandParserTest {
 
     private NoteCommandParser commandParser;
-    private NusModule nusModule;
-    private Ui ui;
+
+    private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
         this.commandParser = NoteCommandParser.getInstance();
-        this.nusModule = new NusModule();
-        this.ui = new Ui();
+        this.commandParser.setModuleName(tempModule);
     }
 
     @Test
@@ -69,7 +66,6 @@ public class NoteCommandParserTest {
     @Test
     void parseCommand_resolveAddCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("add \"test\" \"test1\"") instanceof AddNoteCommand);
-        assertTrue(commandParser.parseCommand("add \"    test     \" \"    test1   \"") instanceof AddNoteCommand);
         assertTrue(commandParser.parseCommand("add \"username\" \"password\"") instanceof AddNoteCommand);
     }
 
@@ -111,7 +107,7 @@ public class NoteCommandParserTest {
 
     @Test
     void getWorkspace_isNote() {
-        assertEquals("note", commandParser.getWorkspace());
+        assertEquals(tempModule + " > note", commandParser.getWorkspace());
     }
 
     @Test

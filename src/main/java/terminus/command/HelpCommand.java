@@ -4,7 +4,7 @@ import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
+import terminus.module.ModuleManager;
 import terminus.parser.CommandParser;
 import terminus.ui.Ui;
 
@@ -28,7 +28,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, NusModule module) throws InvalidCommandException {
+    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidCommandException {
         TerminusLogger.info("Executing Help Command");
         ui.printSection(HELP_MENU_MESSAGE);
         ui.printSection(commandMap.getHelpMenu());

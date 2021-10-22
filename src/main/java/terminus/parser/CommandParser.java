@@ -9,7 +9,7 @@ import terminus.command.HelpCommand;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
-import terminus.module.NusModule;
+import terminus.module.ModuleManager;
 
 public abstract class CommandParser {
 
@@ -18,8 +18,7 @@ public abstract class CommandParser {
     protected final HashMap<String, Command> commandMap;
 
     /**
-     * Initializes the commandMap.
-     * Adds some default commands to it.
+     * Initializes the commandMap. Adds some default commands to it.
      *
      * @param workspace The name of the workspace.
      */
@@ -36,7 +35,7 @@ public abstract class CommandParser {
      *
      * @param command The user input command.
      * @return The Command object to be executed.
-     * @throws InvalidCommandException when there is no command or empty command.
+     * @throws InvalidCommandException  when there is no command or empty command.
      * @throws InvalidArgumentException when arguments could not be parsed.
      */
 
@@ -64,7 +63,7 @@ public abstract class CommandParser {
         return commandMap.keySet();
     }
 
-    public abstract String getWorkspaceBanner(NusModule module);
+    public abstract String getWorkspaceBanner(ModuleManager moduleManager);
 
     /**
      * Returns the list of items in the help menu.
@@ -98,5 +97,14 @@ public abstract class CommandParser {
      */
     public String getWorkspace() {
         return workspace;
+    }
+
+    /**
+     * Sets the existing workspace for the module.
+     *
+     * @param workspace The name of the workspace
+     */
+    public void setWorkspace(String workspace) {
+        this.workspace = workspace;
     }
 }

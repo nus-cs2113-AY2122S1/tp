@@ -1,6 +1,9 @@
 package terminus.common;
 
 import java.net.URL;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -112,5 +115,60 @@ public class CommonUtils {
             }
         }
         return false;
+    }
+
+    public static boolean isStringNullOrEmpty(String string) {
+        return string == null || string.isBlank();
+    }
+
+    /**
+     * <<<<<<< HEAD
+     * Checks if the given name is a valid file name.
+     *
+     * @param name The string to be checked.
+     * @return True if name is a valid file name, false otherwise.
+     */
+    public static boolean isValidFileName(String name) {
+
+        if (name == null || name.isBlank() || name.length() > CommonFormat.MAX_FILENAME_LENGTH) {
+            return false;
+        }
+        boolean isOnlyAscii = name.chars()
+                .allMatch(c -> CommonFormat.STARTING_ASCII <= c && c <= CommonFormat.ENDING_ASCII);
+        boolean hasIllegalChar = name.chars().anyMatch(x -> CommonFormat.ILLEGAL_CHARACTERS.contains((char) x));
+        if (!isOnlyAscii || hasIllegalChar) {
+            return false;
+        }
+        try {
+            Paths.get(name);
+            return true;
+        } catch (InvalidPathException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the filename without its file extension of a given full filename.
+     *
+     * @param filename The filename string to be extracted.
+     * @return A string of the file name without its file extension.
+     */
+    public static String getFileNameOnly(String filename) {
+        assert filename != null;
+        String[] string = filename.split("\\.");
+        if (string != null && string.length == 2) {
+            return string[0];
+        }
+        return null;
+    }
+
+    /**
+     * Function to get today's day of the week.
+     *
+     * @return A string indicating today's day
+     */
+    public static String getCurrentDay() {
+        String currentDay = LocalDate.now().getDayOfWeek().toString();
+        return currentDay;
     }
 }
