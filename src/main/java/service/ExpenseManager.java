@@ -28,7 +28,7 @@ public class ExpenseManager {
 
     public static void listExpenses() {
         Ui ui = Ui.getUi();
-        String expenseListHeader = "Id.\t| Name\t\t\t\t| Value\t| Date";
+        String expenseListHeader = String.format("%s | %-25s | %-10s | %s", "Id.", "Name", "Value", "Date");
 
         ui.printMessage(expenseListHeader);
         ArrayList<Expense> expenses = ExpenseList.getExpenses();

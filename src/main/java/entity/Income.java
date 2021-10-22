@@ -1,11 +1,11 @@
 package entity;
 
-public class Expense {
+public class Income {
     private String description;
     private double value;
     private String date;
 
-    public Expense(String description, double value, String date) {
+    public Income(String description, double value, String date) {
         this.description = description;
         this.value = value;
         this.date = date;
@@ -25,6 +25,6 @@ public class Expense {
 
     @Override
     public String toString() {
-        return String.format("%-25s | %-10.2f | %s", description, value, date);
+        return String.format("%-16s | %-6.2f | %s", description, value, date);
     }
 }
