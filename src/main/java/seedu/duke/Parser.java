@@ -1,6 +1,10 @@
 package seedu.duke;
 
-import java.util;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.TreeMap;
+import java.util.Map;
 
 /**
  * Sense-makes the inputs given and distributes the information to other parts of the program.
@@ -38,11 +42,7 @@ public class Parser {
             }
             return new ByeCommand();
         case "add":
-//            try {
-                return parseAdd(params);
-//            } catch (NullPointerException | NumberFormatException e) {
-//                throw new TourPlannerException(ERROR_INVALID_CLIENT_INDEX);
-//            }
+            return parseAdd(params);
         case "list":
             return parseList(params);
         case "clear":
@@ -83,6 +83,7 @@ public class Parser {
      */
     private static TreeMap<Integer, String> extractPrefixIndexes(String argString, String identifier)
             throws TourPlannerException {
+
 
         List<String> prefixes = null;
         int repeatPrefixChecker = 0;
@@ -135,7 +136,7 @@ public class Parser {
      * @return the array containing client's information in a sorted fashion
      * @throws TourPlannerException if there are duplicate prefixes found
      */
-    private static ArrayList<String> extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes, 
+    private static ArrayList<String> extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes,
                                                             String argString, String identifier)
             throws TourPlannerException {
         ArrayList<String> extractedValues = new ArrayList<>();
@@ -185,14 +186,10 @@ public class Parser {
             throws TourPlannerException {
         String unformattedSubstring = argString.substring(startIndex, endIndex).trim();
         String value = unformattedSubstring.replaceFirst(prefix, "").trim();
-//        if (value.contains(CONTACT_NUMBER_PREFIX) || value.contains(FLIGHT_PREFIX)
-//                || value.contains(ACCOMMS_PREFIX) || value.contains(TOUR_PREFIX)) {
-//            throw new TourPlannerException(ERROR_DUPLICATE_PREFIXES);
-//        }
         return value;
     }
 
-     /**
+    /**
      * Obtains array index that corresponds to the prefix given.
      *
      * @param prefix prefix of value extracted
@@ -200,7 +197,7 @@ public class Parser {
      */
 
     private static int obtainArrayIndex(String prefix, String identifier) {
-        int index = 0;
+        int index;
         switch (identifier) {
         case "-c":
             index = obtainClientArrayIndex(prefix);
@@ -211,12 +208,34 @@ public class Parser {
         case "-f":
             index = obtainFlightArrayIndex(prefix);
             break;
+        case "-p":
+            index = obtainPackageArrayIndex(prefix);
+            break;
+        default:
+            index = 0;
+            break;
+        }
+        return index;
+    }
+
+    private static int obtainPackageArrayIndex(String prefix) {
+        int index;
+        switch (prefix) {
+        case "/t":
+            index = 1;
+            break;
+        case "/f":
+            index = 2;
+            break;
+        default:
+            index = 0;
+            break;
         }
         return index;
     }
 
     private static int obtainFlightArrayIndex(String prefix) {
-        int index = 0;
+        int index;
 
         switch (prefix) {
         case "/t":
@@ -231,12 +250,15 @@ public class Parser {
         case "/df":
             index = 4;
             break;
+        default:
+            index = 0;
+            break;
         }
         return index;
     }
 
     private static int obtainTourArrayIndex(String prefix) {
-        int index = 0;
+        int index;
 
         switch (prefix) {
         case "/n":
@@ -245,12 +267,15 @@ public class Parser {
         case "/p":
             index = 2;
             break;
+        default:
+            index = 0;
+            break;
         }
         return index;
     }
 
     private static int obtainClientArrayIndex(String prefix) {
-        int index = 0;
+        int index;
 
         switch (prefix) {
         case "/cn":
@@ -258,6 +283,9 @@ public class Parser {
             break;
         case "/m":
             index = 2;
+            break;
+        default:
+            index = 0;
             break;
         }
         return index;
@@ -333,7 +361,6 @@ public class Parser {
         case "-f":
             Flight flight = new Flight(values);
             return new AddFlightCommand(flight);
-
         case "-t":
             Tour tour = new Tour(values);
             return new AddTourCommand(tour);

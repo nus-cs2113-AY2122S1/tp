@@ -15,7 +15,8 @@ public abstract class Command {
      */
     public abstract void execute();
 
-    public void setData(ClientList clients, FlightList flights, TourList tours, ClientPackageList clientPackages, Ui ui) {
+    public void setData(ClientList clients, FlightList flights, TourList tours,
+                        ClientPackageList clientPackages, Ui ui) {
         this.clients = clients;
         this.flights = flights;
         this.tours = tours;

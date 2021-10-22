@@ -108,16 +108,12 @@ public class Ui {
         System.out.println(LIST_MESSAGE + "clients:");
         for (int i = 1; i <= count; i++) {
             Client currClient = clients.getClient(i - 1);
-            System.out.println(i + ". " + "\n" + currClient);
+            System.out.println(i + ". " + currClient + "\n");
         }
     }
 
-    public void showAddTour(Tour tour) {
-        show(ADD_MESSAGE + "\n" + tour);
-    }
-
     public void showAddClientPackage(ClientPackage clientPackage) {
-        show(ADD_MESSAGE + "\n" + clientPackage);
+        show("Client Package" + ADD_MESSAGE + "\n" + clientPackage);
     }
 
     /**
@@ -138,7 +134,7 @@ public class Ui {
         System.out.println(LIST_MESSAGE + "tours:");
         for (int i = 1; i <= count; i++) {
             Tour currTour = tours.getTourByIndex(i - 1);
-            System.out.println(i + ". " + "\n" + currTour);
+            System.out.println(i + ". " + currTour + "\n");
         }
     }
 
@@ -147,8 +143,7 @@ public class Ui {
         if (foundTour != null) {
             System.out.println(FIND_TOUR_MESSAGE + "\n" + foundTour + "\n");
             // List clients that are going for this tour, based on PackageList
-        }
-        else {
+        } else {
             System.out.println(FIND_NO_TOURS_MESSAGE + code);
         }
     }
@@ -159,7 +154,7 @@ public class Ui {
         for (int i = 1; i <= count; i++) {
             String currCode = sortedCodes[i - 1];
             Tour currTour = tours.getTourByCode(currCode);
-            System.out.println(i + ". " + "\n" + currTour);
+            System.out.println(i + ". " + currTour + "\n");
         }
     }
 
@@ -171,7 +166,7 @@ public class Ui {
             for (int j = 1; j <= count; j++) {
                 Tour currTour = tours.getTourByIndex(i - 1);
                 if (currTour.getPrice() == currPrice) {
-                    System.out.println(i + ". " + "\n" + currTour);
+                    System.out.println(i + ". " + currTour + "\n");
                     break;
                 }
             }
@@ -180,7 +175,7 @@ public class Ui {
 
     //Flight Functions
     public void showAddFlight(Flight flight) {
-        show("Flight " + ADD_MESSAGE + "\n" + flight);
+        show("Flight" + ADD_MESSAGE + "\n" + flight);
     }
 
     public void showListFlight(FlightList flights) {
@@ -192,7 +187,7 @@ public class Ui {
         System.out.println(LIST_MESSAGE + "flights:");
         for (int i = 1; i <= count; i++) {
             Flight currFlight = flights.getFlight(i - 1);
-            System.out.println(i + ". " + "\n" + currFlight);
+            System.out.println(i + ". " + currFlight + "\n");
         }
     }
 
