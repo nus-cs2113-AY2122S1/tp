@@ -48,7 +48,8 @@ class AddRecipeCommandTest {
         RecipeList recipes = new RecipeList();
         Command command = new AddRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME,
                 TestUtil.generateIngredientNamesForRecipe(), TestUtil.generateQuantitiesForRecipe());
-        String successMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ADDED, TestUtil.generateChickenRecipe(), 1);
+        String successMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ADDED,
+                TestUtil.generateChickenRecipe(), 1);
         assertEquals(command.execute(ingredientRepository, recipes), successMessage);
     }
 

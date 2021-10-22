@@ -17,7 +17,7 @@ public class DeleteExpiredIngredientCommandTest {
         Command command = new DeleteExpiredIngredientCommand();
 
         assertEquals(command.execute(ingredientRepository, null),
-                DeleteExpiredIngredientCommand.MESSAGE_DELETED_ALL_EXPIRED );
+                DeleteExpiredIngredientCommand.MESSAGE_DELETED_ALL_EXPIRED);
     }
 
     @Test
@@ -29,7 +29,7 @@ public class DeleteExpiredIngredientCommandTest {
         Command command = new DeleteExpiredIngredientCommand();
 
         assertEquals(command.execute(ingredientRepository, null),
-                DeleteExpiredIngredientCommand.MESSAGE_NO_EXPIRED_INGREDIENTS );
+                DeleteExpiredIngredientCommand.MESSAGE_NO_EXPIRED_INGREDIENTS);
     }
 
 }
