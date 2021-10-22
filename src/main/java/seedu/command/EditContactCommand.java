@@ -81,11 +81,11 @@ public class EditContactCommand extends Command {
                 }
                 if ((postEditContactDetails[j] != null && currentContactDetails[j] != null)
                         && hasDuplicateField(postEditContactDetails[j], currentContactDetails[j])) {
-                        duplicatedIndex.add(i);
-                        break;
-                    }
+                    duplicatedIndex.add(i);
+                    break;
                 }
             }
+        }
         if (!duplicatedIndex.isEmpty()) {
             TextUi.confirmDuplicateMessage(duplicatedIndex, contactList, EDIT_TYPE);
             String userEditConfirmation = UserInputTextUi.getUserConfirmation();
