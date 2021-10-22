@@ -40,9 +40,11 @@ public class StockValidator extends MedicineValidator {
             case CommandParameters.PRICE:
                 isValid = isValidPrice(ui, parameterValue);
                 break;
+            case CommandParameters.LOW:
             case CommandParameters.QUANTITY:
                 isValid = isValidQuantity(ui, parameterValue);
                 break;
+            case CommandParameters.EXPIRING:
             case CommandParameters.EXPIRY_DATE:
                 isValid = isValidExpiry(ui, parameterValue);
                 break;
