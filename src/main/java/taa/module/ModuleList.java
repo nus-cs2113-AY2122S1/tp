@@ -73,6 +73,18 @@ public class ModuleList implements ClassChecker {
         return null;
     }
 
+    /**
+     * Deletes a particular module from the list.
+     *
+     * @param module The module object to delete.
+     * @return true if successfully removed, else false.
+     */
+    public boolean deleteModule(Module module) {
+        assert module != null;
+
+        return modules.remove(module);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
