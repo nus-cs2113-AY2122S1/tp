@@ -42,6 +42,7 @@ public class AverageMarksCommand extends Command {
         }
 
         if (!checkArguments()) {
+        if (!hasAllArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 

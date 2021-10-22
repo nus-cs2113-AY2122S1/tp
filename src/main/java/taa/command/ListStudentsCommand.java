@@ -35,6 +35,7 @@ public class ListStudentsCommand extends Command {
         }
 
         if (!checkArguments()) {
+        if (!hasAllArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 

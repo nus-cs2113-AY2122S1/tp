@@ -39,6 +39,7 @@ public class FindStudentCommand extends Command {
         }
 
         if (!checkArguments()) {
+        if (!hasAllArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 

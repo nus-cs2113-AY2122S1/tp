@@ -17,6 +17,8 @@ public abstract class Command {
     public static final String COMMAND_LIST_MARKS = "list_marks";
     public static final String COMMAND_AVERAGE_MARKS = "average_marks";
     public static final String COMMAND_ADD_MODULE = "add_module";
+    public static final String COMMAND_EDIT_MODULE = "edit_module";
+    public static final String COMMAND_DELETE_MODULE = "delete_module";
     public static final String COMMAND_FIND_STUDENT = "find_student";
     public static final String COMMAND_ADD_STUDENT = "add_student";
     public static final String COMMAND_EDIT_STUDENT = "edit_student";
@@ -87,7 +89,7 @@ public abstract class Command {
      *
      * @return true if there no missing arguments, else false.
      */
-    protected boolean checkArguments() {
+    protected boolean hasAllArguments() {
         for (String key : argumentKeys) {
             if (!argumentMap.containsKey(key)) {
                 return false;

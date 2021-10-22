@@ -35,6 +35,7 @@ public class ListAssessmentsCommand extends Command {
         }
 
         if (!checkArguments()) {
+        if (!hasAllArguments()) {
             throw new TaaException(getMissingArgumentMessage());
         }
 
