@@ -1,8 +1,13 @@
 package taa.module;
 
 import taa.ClassChecker;
+import taa.assessment.Assessment;
 import taa.assessment.AssessmentList;
+import taa.student.Student;
 import taa.student.StudentList;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Module implements ClassChecker {
     private String code;
@@ -23,6 +28,14 @@ public class Module implements ClassChecker {
 
     public String getName() {
         return name;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -49,7 +62,7 @@ public class Module implements ClassChecker {
             return code;
         }
 
-        return String.format("%s (%s)", code, name);
+        return String.format("%s - %s", code, name);
     }
 
     /**
@@ -59,7 +72,7 @@ public class Module implements ClassChecker {
      */
     @Override
     public boolean verify() {
-        if (code.isEmpty() || name.isEmpty()) {
+        if (code.isEmpty()) {
             return false;
         }
 
@@ -69,6 +82,32 @@ public class Module implements ClassChecker {
 
         if (!assessmentList.verify()) {
             return false;
+        }
+
+        HashMap<String, Assessment> assessmentMap = new HashMap<>();
+        for (Assessment assessment : assessmentList.getAssessments()) {
+            assessmentMap.put(assessment.getName(), assessment);
+        }
+
+        for (Student student : studentList.getStudents()) {
+            ArrayList<String> invalidMarks = new ArrayList<>();
+            HashMap<String, Double> results = student.getResults();
+            for (String assessmentName : results.keySet()) {
+                if (!assessmentMap.containsKey(assessmentName)) {
+                    invalidMarks.add(assessmentName);
+                    continue;
+                }
+
+                Assessment assessment = assessmentMap.get(assessmentName);
+                double marks = results.get(assessmentName);
+                if (!assessment.isMarksValid(marks)) {
+                    invalidMarks.add(assessmentName);
+                }
+            }
+
+            for (String assessmentName : invalidMarks) {
+                student.deleteMark(assessmentName);
+            }
         }
 
         return true;
