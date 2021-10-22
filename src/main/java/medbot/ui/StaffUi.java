@@ -8,29 +8,58 @@ public class StaffUi {
             + "----------------------------------------------------- " + END_LINE;
 
     public static String getAddStaffHelpMessage() {
-        return " " + END_LINE;
+        return "Add a staff to the staff’s list." + END_LINE
+                + "Format:" + END_LINE
+                + "add i/STAFF_IC [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + END_LINE
+                + "Expected output:" + END_LINE
+                + "Added staff with staff ID: STAFF_ID" + END_LINE;
     }
 
     public static String getEditStaffHelpMessage() {
-        return " " + END_LINE;
+        return "Edit the personal information of a staff in the list." + END_LINE
+                + "Format:" + END_LINE
+                + "edit STAFF ID [i/STAFF_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + END_LINE
+                + "Expected output: " + END_LINE
+                + "The information of staff with ID STAFF_ID has been edited to:" + END_LINE
+                + "Staff ID: [STAFF_ID] IC: [STAFF_IC] Name: [NAME] H/P: [PHONE_NUMBER] "
+                + "Email: [EMAIL] Address: [ADDRESS] " + END_LINE;
     }
 
     public static String getFindStaffHelpMessage() {
-        return " " + END_LINE;
+        return "Find staffs from the list based on given attributes." + END_LINE
+                + "Format:" + END_LINE
+                + "find [i/STAFF_IC] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]" + END_LINE
+                + "    * The attributes do not have to be in full." + END_LINE
+                + "    * At least one attribute must be present." + END_LINE
+                + "Expected Output:" + END_LINE
+                + "Staff ID: STAFF_ID IC: STAFF_IC Name: NAME "
+                + "H/P: PHONE_NUMBER Email: EMAIL Address: ADDRESS" + END_LINE;
     }
 
     public static String getViewStaffHelpMessage() {
-        return " " + END_LINE;
+        return "View a staff’s personal information." + END_LINE
+                + "Format: view STAFF_ID" + END_LINE
+                + "Expected Output:" + END_LINE
+                + "id: STAFF_ID " + "name: NAME " + "phone number: PHONE_NUMBER "
+                + "email: EMAIL " + "address: ADDRESS" + END_LINE;
     }
 
     public static String getListStaffHelpMessage() {
-        return " " + END_LINE;
+        return "View information of all current staffs." + END_LINE
+                + "Format: list" + END_LINE
+                + "Expected Output for 2 staffs: " + END_LINE
+                + "Staff ID: [STAFF_ID_1] IC: [STAFF_IC]"
+                + "Name: [STAFF_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]" + END_LINE
+                + "Staff ID: [STAFF_ID_2] IC: [STAFF_IC]"
+                + "Name: [STAFF_NAME] H/P: [PHONE NUMBER] Email: [EMAIL]  Address: [ADDRESS]" + END_LINE;
     }
 
     public static String getDeleteStaffHelpMessage() {
-        return " " + END_LINE;
-    }
-
+        return "Delete a staff from the list." + END_LINE
+                + "Format:" + END_LINE
+                + "delete STAFF_ID" + END_LINE
+                + "Expected Output:" + END_LINE
+                + "Staff with id STAFF_ID deleted from system." + END_LINE;    }
 
     /**
      * Prints a message when viewing the profile of a staff.
