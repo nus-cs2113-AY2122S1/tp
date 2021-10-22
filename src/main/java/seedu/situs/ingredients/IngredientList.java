@@ -1,6 +1,6 @@
 package seedu.situs.ingredients;
 
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.storage.Storage;
 
 import java.io.IOException;
@@ -25,13 +25,13 @@ public class IngredientList {
     private static IngredientList instance = null;
     private static Storage storage;
 
-    public IngredientList() throws DukeException {
+    public IngredientList() throws SitusException {
         try {
             storage = new Storage();
             ingredientList = storage.loadIngredientsFromMemory();
         } catch (IOException e) {
             ingredientList = new ArrayList<>();
-            throw new DukeException("Cannot open the memory file!");
+            throw new SitusException("Cannot open the memory file!");
         }
     }
 
@@ -40,7 +40,7 @@ public class IngredientList {
      *
      * @return ingredient list
      */
-    public static IngredientList getInstance() throws DukeException {
+    public static IngredientList getInstance() throws SitusException {
         if (instance == null) {
             instance = new IngredientList();
         }
@@ -124,13 +124,13 @@ public class IngredientList {
      *
      * @param ingredientNumber ingredient number
      * @return ingredient group
-     * @throws DukeException index out of bounds, cannot access
+     * @throws SitusException index out of bounds, cannot access
      */
-    public IngredientGroup getIngredientGroup(int ingredientNumber) throws DukeException {
+    public IngredientGroup getIngredientGroup(int ingredientNumber) throws SitusException {
         try {
             return ingredientList.get(ingredientNumber - 1);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(INVALID_NUMBER);
+            throw new SitusException(INVALID_NUMBER);
         }
     }
 }

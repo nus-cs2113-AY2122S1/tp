@@ -1,7 +1,6 @@
 package seedu.situs.command;
 
-import seedu.situs.exceptions.DukeException;
-import seedu.situs.ingredients.Ingredient;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.IngredientGroup;
 import seedu.situs.ingredients.IngredientList;
 
@@ -18,7 +17,7 @@ public class ExpireCommand extends Command {
     }
 
     @Override
-    public String run() throws DukeException {
+    public String run() throws SitusException {
         int expiringCount = 0;
         String resultMsg = "";
         ArrayList<IngredientGroup> ingredientList = IngredientList.getInstance().getIngredientList();

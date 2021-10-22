@@ -1,10 +1,6 @@
 package seedu.situs.command;
 
-import seedu.situs.exceptions.DukeException;
-import seedu.situs.ingredients.Ingredient;
-import seedu.situs.ingredients.IngredientList;
-
-import java.io.IOException;
+import seedu.situs.exceptions.SitusException;
 
 public class DeleteCommand extends Command {
 
@@ -23,7 +19,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String run() throws DukeException {
+    public String run() throws SitusException {
         /*try {
             Ingredient removedIngredient = IngredientList.getInstance().remove(this.ingredientNumber);
             String resultMsg = DELETE_MESSAGE + removedIngredient.toString();

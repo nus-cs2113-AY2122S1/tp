@@ -1,6 +1,6 @@
 package seedu.situs.ingredients;
 
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.storage.Storage;
 
 import java.io.IOException;
@@ -66,13 +66,13 @@ public class IngredientGroup {
      *
      * @param ingredientNumber ingredient number to get information
      * @return String representation of the ingredient
-     * @throws DukeException if the ingredient number have not existed
+     * @throws SitusException if the ingredient number have not existed
      */
-    public String getIngredientInfo(int ingredientNumber) throws DukeException {
+    public String getIngredientInfo(int ingredientNumber) throws SitusException {
         try {
             return ingredientGroup.get(ingredientNumber - 1).toString();
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(INVALID_NUMBER);
+            throw new SitusException(INVALID_NUMBER);
         }
     }
 
@@ -109,7 +109,7 @@ public class IngredientGroup {
                 if (i < getIngredientGroupSize()) {
                     printedGroup += '\n';
                 }
-            } catch (DukeException e) {
+            } catch (SitusException e) {
                 e.printStackTrace();
             }
         }
@@ -138,14 +138,14 @@ public class IngredientGroup {
      *
      * @param ingredientNumber ingredient number to remove
      * @return The removed ingredient
-     * @throws DukeException if the ingredient number has not existed
+     * @throws SitusException if the ingredient number has not existed
      */
-    public Ingredient remove(int ingredientNumber) throws DukeException {
+    public Ingredient remove(int ingredientNumber) throws SitusException {
         try {
             Ingredient removedIngredient = ingredientGroup.remove(ingredientNumber - 1);
             return removedIngredient;
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(INVALID_NUMBER);
+            throw new SitusException(INVALID_NUMBER);
         }
     }
 
@@ -165,7 +165,7 @@ public class IngredientGroup {
      *
      * @param ingredientNumber The index of the ingredient to be located
      * @return The indexed ingredient object
-     * @throws DukeException The ingredient is out of bounds
+     * @throws SitusException The ingredient is out of bounds
      */
     public Ingredient get(int ingredientNumber) throws IndexOutOfBoundsException {
         return ingredientGroup.get(ingredientNumber - 1);

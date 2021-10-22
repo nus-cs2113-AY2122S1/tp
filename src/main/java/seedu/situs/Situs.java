@@ -1,7 +1,7 @@
 package seedu.situs;
 
 import seedu.situs.command.AlertCommand;
-import seedu.situs.exceptions.DukeException;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.localtime.CurrentDate;
 import seedu.situs.parser.Parser;
 import seedu.situs.ui.UI;
@@ -26,7 +26,7 @@ public class Situs {
 
         try {
             ui.printCommandOutput(new AlertCommand().run());
-        } catch (DukeException e) {
+        } catch (SitusException e) {
             ui.printCommandOutput(e.getMessage());
         }
 
@@ -61,7 +61,7 @@ public class Situs {
         try {
             msg = Parser.parse(command);
             return msg;
-        } catch (DukeException e) {
+        } catch (SitusException e) {
             LOGGER.log(Level.WARNING, "Error in parsing user command");
             return e.getMessage();
         }

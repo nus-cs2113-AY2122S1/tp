@@ -1,7 +1,6 @@
 package seedu.situs.command;
 
-import seedu.situs.exceptions.DukeException;
-import seedu.situs.ingredients.Ingredient;
+import seedu.situs.exceptions.SitusException;
 import seedu.situs.ingredients.IngredientGroup;
 import seedu.situs.ingredients.IngredientList;
 
@@ -25,7 +24,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String run() throws DukeException {
+    public String run() throws SitusException {
         String resultMsg = "";
         List<IngredientGroup> searchResults = IngredientList.getIngredientList().stream()
                 .filter(result -> result.getIngredientGroupName().toLowerCase().contains(keyword))
