@@ -17,6 +17,7 @@ import seedu.duke.task.type.Deadline;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//@@author SeanRobertDH
 class DeadlineFactoryTest {
 
     private static final String DESCRIPTION = "buy vegetables";

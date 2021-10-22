@@ -15,6 +15,7 @@ import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.type.Event;
 
+//@@author SeanRobertDH
 public class EventFactory {
     private static final TypeEnum taskType = TypeEnum.EVENT;
 

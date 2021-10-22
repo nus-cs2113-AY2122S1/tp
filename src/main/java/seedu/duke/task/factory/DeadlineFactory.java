@@ -14,6 +14,7 @@ import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.type.Deadline;
 
+//@@author SeanRobertDH
 public class DeadlineFactory {
     private static final TypeEnum taskType = TypeEnum.DEADLINE;
 

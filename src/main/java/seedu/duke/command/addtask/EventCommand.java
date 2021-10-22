@@ -6,6 +6,7 @@ import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.task.Task;
 import seedu.duke.task.factory.EventFactory;
 
+//@@author SeanRobertDH
 public class EventCommand extends TaskCommand {
     private static final CommandEnum COMMAND = CommandEnum.EVENT;
 

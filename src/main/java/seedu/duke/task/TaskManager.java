@@ -3,7 +3,6 @@ package seedu.duke.task;
 import seedu.duke.command.Command;
 import seedu.duke.command.flags.ListFlag;
 import seedu.duke.command.flags.SortFlag;
-import seedu.duke.command.flags.TaskFlag;
 import seedu.duke.exception.EmptySortCriteriaException;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.InvalidTaskIndexException;
@@ -240,13 +239,6 @@ public class TaskManager {
             tasks += i + 1 + ". " + filteredTasks.get(i).getTaskEntryDescription() + "\n";
         }
         System.out.println(tasks);
-    }
-
-    public static String getOptionalTaskArguments(String argumentFormat, String argumentSplit) {
-        String optionalTaskArguments = String.format(argumentFormat,
-            TaskFlag.PRIORITY + " " + PriorityEnum.getPrioritiesListString(argumentSplit)) + " ";
-        return optionalTaskArguments + String.format(argumentFormat,
-            TaskFlag.RECURRENCE + " " + RecurrenceEnum.getRecurrencesListString(argumentSplit));
     }
 
 }

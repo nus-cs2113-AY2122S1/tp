@@ -16,6 +16,7 @@ import seedu.duke.task.type.Event;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//@@author SeanRobertDH
 class EventFactoryTest {
     private static final String DESCRIPTION = "buy vegetables";
     private static final String VALID_DATE1 = "14-02-1998 02:00:00";
