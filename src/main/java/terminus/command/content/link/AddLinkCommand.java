@@ -16,8 +16,9 @@ import terminus.module.NusModule;
 import terminus.timetable.ConflictManager;
 import terminus.ui.Ui;
 
-import static terminus.common.CommonUtils.*;
-
+import static terminus.common.CommonUtils.isValidDuration;
+import static terminus.common.CommonUtils.isValidDay;
+import static terminus.common.CommonUtils.isValidUrl;
 
 /**
  * AddLinkCommand class which will manage the adding of new Links from user command.
@@ -73,9 +74,8 @@ public class AddLinkCommand extends Command {
             throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DAY, this.day));
         }
         if (!isValidUrl(this.link)) {
-        TerminusLogger.warning(String.format("Invalid Link: %s", this.link));
-        throw new InvalidArgumentException(
-                String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
+            TerminusLogger.warning(String.format("Invalid Link: %s", this.link));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
         }
         isValidDuration(startTime, duration);
         TerminusLogger.info(String.format("Parsed arguments (description = %s, day = %s, startTime = %s, link = %s)"
