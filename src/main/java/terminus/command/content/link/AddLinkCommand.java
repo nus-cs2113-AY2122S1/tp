@@ -13,6 +13,7 @@ import terminus.content.Link;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
+import terminus.timetable.ConflictManager;
 import terminus.ui.Ui;
 
 import static terminus.common.CommonUtils.*;
@@ -96,8 +97,17 @@ public class AddLinkCommand extends Command {
         ContentManager contentManager = module.getContentManager(Link.class);
         assert contentManager != null;
 
-        contentManager.add(new Link(description, day, startTime, duration, link));
+        Link newLink = new Link(description, day, startTime, duration, link);
+        ConflictManager scheduleConflict = new ConflictManager(moduleManager, newLink);
+
+        if (scheduleConflict.getConflictingSchedule() != null) {
+            String conflicts = scheduleConflict.getConflictingSchedule();
+            ui.printSection(Messages.MESSAGE_CONFLICTING_SCHEDULE);
+            ui.printSection(conflicts);
+        }
+        contentManager.add(newLink);
         ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
+
         return new CommandResult(true, false);
     }
 

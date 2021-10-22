@@ -56,6 +56,11 @@ public class Link extends Content {
         this.link = link;
     }
 
+    public LocalTime getEndTime() {
+        LocalTime endTime = startTime.plusHours(duration);
+        return endTime;
+    }
+
     /**
      * Returns all the attributes of the Link object.
      *
@@ -63,8 +68,7 @@ public class Link extends Content {
      */
     @Override
     public String getDisplayInfo() {
-        LocalTime endTime = startTime.plusHours(duration);
-        return String.format(DISPLAY_LINK_MESSAGE, this.name, day, startTime, endTime, link);
+        return String.format(DISPLAY_LINK_MESSAGE, this.name, day, startTime, getEndTime(), link);
     }
 
     /**

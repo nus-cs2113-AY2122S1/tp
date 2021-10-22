@@ -27,7 +27,7 @@ public class Messages {
     public static final String ERROR_MESSAGE_INVALID_LINK = ERROR_MESSAGE_TAG + "Invalid link %s.";
     public static final String ERROR_MESSAGE_INVALID_DAY = ERROR_MESSAGE_TAG + "Invalid day %s.";
     public static final String ERROR_MESSAGE_INVALID_DURATION = ERROR_MESSAGE_TAG + "Invalid duration %d.";
-    public static final String ERROR_MESSAGE_SCHEDULE_OVERFLOW = ERROR_MESSAGE_TAG + "Please set schedule on a separate day.";
+    public static final String ERROR_MESSAGE_SCHEDULE_OVERFLOW = ERROR_MESSAGE_TAG + "Please set schedules on separate days.";
     public static final String ERROR_MESSAGE_DUPLICATE_NAME = ERROR_MESSAGE_TAG + "Duplicate name found.";
 
     public static final String ERROR_FILE_TOO_LARGE = "Unable to read large files.";
@@ -67,4 +67,5 @@ public class Messages {
         "How did you find the question? (Compare against past attempts if any)",
         "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
     public static final String MESSAGE_EMPTY_DAILY_SCHEDULE = "You have no schedule for today.";
+    public static final String MESSAGE_CONFLICTING_SCHEDULE = "Your new schedule has conflicts with:";
 }
