@@ -58,7 +58,7 @@ public class EditContactCommand extends Command {
 
     private void updateContact(Contact postEditContact)
             throws IndexOutOfBoundsException {
-        contactList.editContact(contactDetails,contactIndex);
+        contactList.editContactAtIndex(contactDetails,contactIndex);
         //sort the contact list based on name after a contact has been edited
         contactList.sortContacts();
         TextUi.editContactMessage(postEditContact);

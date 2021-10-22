@@ -21,7 +21,7 @@ public class ContactList {
         contacts.remove(deletedIndex);
     }
 
-    public void editContact(String[] contactDetails, int editIndex) {
+    public void editContactAtIndex(String[] contactDetails, int editIndex) {
         Contact contactToEdit = getContactAtIndex(editIndex);
         contactToEdit.editContact(contactDetails);
     }
