@@ -84,6 +84,23 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    /**
+     * Displays a list of possible input commands and link to user guide.
+     */
+    public void printHelpMessage() {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Here is a list of possible commands:");
+        System.out.println(PADDING + "add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION}");
+        System.out.println(PADDING + "list [task/lesson/module]");
+        System.out.println(PADDING + "done [INDEX]");
+        System.out.println(PADDING + "delete [task/lesson/module] [INDEX]");
+        System.out.println(PADDING + "find [task/lesson] [KEYWORD]");
+        System.out.println(PADDING + "moduleinfo [MODULE_CODE]");
+        System.out.println(PADDING + "exit");
+        System.out.println(PADDING + "More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html");
+        System.out.print(LINE);
+    }
+
     // Task-related methods
 
     /**

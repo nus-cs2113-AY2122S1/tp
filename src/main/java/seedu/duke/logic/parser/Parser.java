@@ -33,6 +33,8 @@ public class Parser {
         case MODULEINFO:
             simplifiedUserResponse = removeFirstParam(userResponse, "moduleinfo");
             return ModuleInfoCommandParser.parse(simplifiedUserResponse);
+        case HELP:
+            return HelpCommandParser.parse();
         case EXIT:
             return ExitCommandParser.parse();
         case INVALID:
