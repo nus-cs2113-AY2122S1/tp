@@ -16,4 +16,12 @@ public class FlightList {
         flightCount++;
     }
 
+    public int getFlightCount() {
+        return flightCount;
+    }
+
+    public Flight getFlight(int index) {
+        return flights.get(index);
+    }
+
 }

@@ -39,10 +39,7 @@ public class Parser {
         case "add":
             return parseAdd(params);
         case "list":
-            if (!params.equals("")) {
-                throw new TourPlannerException(ERROR_EXTRA_INPUT);
-            }
-            return new ListCommand();
+            return parseList(params);
         case "clear":
             if (!params.equals("")) {
                 throw new TourPlannerException(ERROR_EXTRA_INPUT);
@@ -287,8 +284,21 @@ public class Parser {
 
         case "-t":
             Tour tour = new Tour(values);
-            //return new AddTourCommand(tour);
-            break;
+            return new AddTourCommand(tour);
+        }
+        return null;
+    }
+
+    private static Command parseList(String params) throws TourPlannerException {
+        switch (params) {
+        case "-c":
+            return new ListClientCommand();
+        case "-t":
+            return new ListTourCommand();
+        case "-f":
+            return new ListFlightCommand();
+        case "-p":
+            return new ListPackageCommand();
         }
         return null;
     }

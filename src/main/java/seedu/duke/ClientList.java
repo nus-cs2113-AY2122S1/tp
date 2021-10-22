@@ -25,7 +25,7 @@ public class ClientList {
      */
     public void add(Client client, Ui ui) {
         clients.add(client);
-        ui.showAdd(client);
+        ui.showAddClient(client);
         clientCount++;
     }
 

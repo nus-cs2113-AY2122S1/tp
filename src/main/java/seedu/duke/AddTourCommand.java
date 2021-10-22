@@ -1,9 +1,9 @@
 package seedu.duke;
 
 
-public class AddTourCommand extends TourCommand {
+//public class AddTourCommand extends TourCommand {
 
-//public class AddTourCommand extends Command {
+public class AddTourCommand extends Command {
 
     private final Tour tour;
 
@@ -12,7 +12,7 @@ public class AddTourCommand extends TourCommand {
     }
 
     @Override
-    public void execute(TourList tours, Ui ui) {
+    public void execute() {
         int newTourCount = tours.getTourCount() + 1;
         tours.add(tour, ui);
         assert newTourCount == tours.getTourCount();

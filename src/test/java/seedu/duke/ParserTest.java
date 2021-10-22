@@ -1,3 +1,4 @@
+/*
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
@@ -5,11 +6,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+*/
 /**
  * Junit testing of the Parser class.
- */
-public class ParserTest {
+ *//*
 
+public class ParserTest {
     private static final String WRONG_ADD_DUPLICATE_PREFIX
             = "add botuan /cn 9487 /f SQ123 /cn 5678 /a hotel-one /t aus-a";
     public static final String WRONG_ADD_MISSING_NAME = "add /cn 1234 /f SQ123 /a intercontinental /t jpn-a";
@@ -26,11 +28,13 @@ public class ParserTest {
     public static final String WRONG_BYE = "bye blah blah";
 
 
-    /**
+    */
+/**
      * Asserts that add command is correctly parsed and returns an AddCommand object.
      *
      * @throws TourPlannerException if there are general exceptions to user's input
-     */
+     *//*
+
     @Test
     void parse_addCommand_correctCommandCreated() throws TourPlannerException {
         parseAndAssertCommandType(CORRECT_ADD_ONE, AddCommand.class);
@@ -39,59 +43,71 @@ public class ParserTest {
         parseAndAssertCommandType(CORRECT_ADD_TWO, AddCommand.class);
     }
 
-    /**
+    */
+/**
      * Asserts that clear command is correctly parsed and returns a ClearCommand object.
      *
      * @throws TourPlannerException if there are general exceptions to user's input
-     */
+     *//*
+
     @Test
     void parse_clearCommand_correctCommandCreated() throws TourPlannerException {
         parseAndAssertCommandType(CORRECT_CLEAR, ClearCommand.class);
     }
 
-    /**
+    */
+/**
      * Asserts that list command is correctly parsed and returns a ListCommand object.
      *
      * @throws TourPlannerException if there are general exceptions to user's input
-     */
+     *//*
+
     @Test
     void parse_listCommand_correctCommandCreated() throws TourPlannerException {
         parseAndAssertCommandType(CORRECT_LIST, ListCommand.class);
     }
 
-    /**
+    */
+/**
      * Asserts that cut command is correctly parsed and returns a CutCommand object.
      *
      * @throws TourPlannerException if there are general exceptions to user's input
-     */
+     *//*
+
     @Test
     void parse_cutCommand_correctCommandCreated() throws TourPlannerException {
         parseAndAssertCommandType(CORRECT_CUT, CutCommand.class);
 
     }
 
-    /**
+    */
+/**
      * Asserts that bye command is correctly parsed and returns a ByeCommand object.
      *
      * @throws TourPlannerException if there are general exceptions to user's input
-     */
+     *//*
+
     @Test
     void parse_byeCommand_correctCommandCreated() throws TourPlannerException {
         parseAndAssertCommandType(CORRECT_BYE, ByeCommand.class);
 
     }
 
-    /**
+    */
+/**
      * Asserts that parsing duplicates in params during execution of add command will cause an exception to be thrown.
-     */
+     *//*
+
     @Test
     void parse_duplicatePrefixes_failure() {
         assertParseFailure(WRONG_ADD_DUPLICATE_PREFIX, Parser.ERROR_DUPLICATE_PREFIXES);
     }
 
-    /**
+    */
+/**
      * Asserts that missing prefixes in params during execution of add will cause an exception to be thrown.
-     */
+     *//*
+
     @Test
     void parse_missingPrefixes_failure() {
         //missing "/a"
@@ -101,17 +117,21 @@ public class ParserTest {
         assertParseFailure(WRONG_ADD_MISSING_PREFIX_ONE, Parser.ERROR_MISSING_PREFIXES);
     }
 
-    /**
+    */
+/**
      * Asserts that missing name in params string during execution of add will cause an exception to be thrown.
-     */
+     *//*
+
     @Test
     void parse_missingName_failure() {
         assertParseFailure(WRONG_ADD_MISSING_NAME, Parser.ERROR_MISSING_NAME);
     }
 
-    /**
+    */
+/**
      * Asserts that superfluous inputs other than the command itself for list, clear, bye will throw an exception.
-     */
+     *//*
+
     @Test
     void parse_superfluousInput_failure() {
         assertParseFailure(WRONG_LIST, Parser.ERROR_EXTRA_INPUT);
@@ -137,3 +157,5 @@ public class ParserTest {
     }
 
 }
+*/
+
