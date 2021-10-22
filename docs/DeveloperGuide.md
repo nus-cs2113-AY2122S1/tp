@@ -79,10 +79,17 @@ extractValue(/n Hokkaido-A) --> Hokkaido-A
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
+Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+
+|Priority| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|`* * *`|new user|see usage instructions|refer to them when I forget how to use the application|
+|`* * *`|user|add a new client| |
+|`* * *`|user|delete a new client|remove clients that cancelled their travel plans|
+|`* * *`|user|add a new tour package|update the tour package database|
+|`* * *`|user|delete a tour package|update the tour package database|
+|`* * *`|user|add flight timings|keep track of flights|
+
 
 ## Non-Functional Requirements
 
@@ -146,6 +153,26 @@ The following activity diagram summarizes the following steps.
 
 ### <u>Design Considerations</u>
 
-*  Alternative: only iterate through the ```Package``` List.
+* Alternative: only iterate through the ```Package``` List.
    * Pros: fast querying time.
    * Cons: If the client has not subscribed to a package, none of their information can be accessed, including their contact number.
+
+### <u>Listing clients, tours and flights</u>
+
+It implements these following types of list commands:
+* `list -c`: Lists all existing clients and their contact numbers
+* `list -t`: Lists all existing tours
+* `list -p`: Lists all clients and their corresponding tours and flights
+
+Given below is an example usage of command `list -c`:
+
+**Step 1**: After adding a few clients to the database, user inputs `list -c`. This command is passed to `parse()` method in the `Parser` class.
+
+**Step 2**: `parse()` identifies the command type `ListCCommand` based on the user input and returns it.
+
+**Step 3**: Then, `execute()` method in `ListCCommand` is called, where it loops through the current `clientList` and prints out all client names and their details.
+
+Depending on the type of list command being called, these command types will be returned:
+* `list -c`: `ListCCommand`
+* `list -t`: `ListTCommand`
+* `list -p`: `ListPCommand`

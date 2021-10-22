@@ -27,12 +27,16 @@ public class TourPlanner {
         ui.showWelcome();
         boolean isExit = false;
         String command;
-        ClientList clientList = new ClientList();
+        ClientList clients = new ClientList();
+        FlightList flights = new FlightList();
+        TourList tours = new TourList();
+        ClientPackageList packages = new ClientPackageList();
         while (!isExit) {
             command = ui.readCommand();
             try {
                 Command specificCommand = Parser.parse(command);
-                specificCommand.execute(clientList, ui);
+                specificCommand.setData(clients, flights, tours, packages, ui);
+                specificCommand.execute();
                 isExit = specificCommand.isExit();
             } catch (NullPointerException | NumberFormatException e) {
                 System.out.println();

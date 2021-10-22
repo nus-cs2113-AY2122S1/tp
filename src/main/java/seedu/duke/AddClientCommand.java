@@ -3,15 +3,16 @@ package seedu.duke;
 /**
  * Adds a client into the database.
  */
-public class AddCommand extends Command {
+public class AddClientCommand extends Command {
     private final Client client;
+
 
     /**
      * Class constructor for AddCommand.
      *
      * @param client client to be added
      */
-    public AddCommand(Client client) {
+    public AddClientCommand(Client client) {
         this.client = client;
     }
 
@@ -26,14 +27,9 @@ public class AddCommand extends Command {
 
     /**
      * Executes the addition of client to client list.
-     *
-     * @param clients existing list of clients
-     * @param ui      user interface of TourPlanner
      */
     @Override
-    public void execute(ClientList clients, Ui ui) {
-        int newClientCount = clients.getClientCount() + 1;
+    public void execute() {
         clients.add(client, ui);
-        assert newClientCount == clients.getClientCount();
     }
 }

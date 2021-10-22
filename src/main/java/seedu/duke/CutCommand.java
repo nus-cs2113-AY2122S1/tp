@@ -17,12 +17,9 @@ public class CutCommand extends Command {
 
     /**
      * Executes the deletion of a specific client from client list, corresponding to his/her index in the list.
-     *
-     * @param clients existing list of clients
-     * @param ui      user interface of TourPlanner
      */
     @Override
-    public void execute(ClientList clients, Ui ui) {
+    public void execute() {
         try {
             int newClientCount = clients.getClientCount() - 1;
             clients.cut(clientIndex, ui);

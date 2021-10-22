@@ -1,6 +1,10 @@
 package seedu.duke;
 
+
 public class AddTourCommand extends TourCommand {
+
+//public class AddTourCommand extends Command {
+
     private final Tour tour;
 
     public AddTourCommand(Tour tour) {
@@ -13,5 +17,4 @@ public class AddTourCommand extends TourCommand {
         tours.add(tour, ui);
         assert newTourCount == tours.getTourCount();
     }
-
 }

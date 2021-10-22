@@ -5,14 +5,9 @@ package seedu.duke;
  */
 public class ByeCommand extends Command {
 
-    /**
-     * Executes the exit of the loop and returns a goodbye message for acknowledgement.
-     *
-     * @param clientList existing list of clients
-     * @param ui         user interface of TourPlanner
-     */
+
     @Override
-    public void execute(ClientList clientList, Ui ui) {
+    public void execute() {
         ui.showBye();
     }
 
