@@ -325,9 +325,21 @@ public class Ui {
                     + "                                            ");
             break;
         case MEDICAL_STAFF_INFO:
+            System.out.println("  ___ _____ _   ___ ___  \n"
+                    + " / __|_   _/_\\ | __| __| \n"
+                    + " \\__ \\ | |/ _ \\| _|| _|  \n"
+                    + " |___/_|_/_/_\\_\\_| |_|   \n"
+                    + " |_ _| \\| | __/ _ \\      \n"
+                    + "  | || .` | _| (_) |     \n"
+                    + " |___|_|\\_|_|_\\___/    __\n"
+                    + " \\ \\ / /_ _| __\\ \\    / /\n"
+                    + "  \\ V / | || _| \\ \\/\\/ / \n"
+                    + "   \\_/ |___|___| \\_/\\_/  \n"
+                    + "                         ");
             break;
         default:
             break;
+
         }
 
         System.out.println("View has been switched to " + viewType);
