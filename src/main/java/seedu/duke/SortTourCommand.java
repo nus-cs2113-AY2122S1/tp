@@ -3,7 +3,7 @@ package seedu.duke;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class SortTourCommand extends TourCommand{
+public class SortTourCommand extends Command {
     private final String filter;
 
     public SortTourCommand(String filter) {
@@ -11,8 +11,8 @@ public class SortTourCommand extends TourCommand{
     }
 
     @Override
-    public void execute(TourList tours, Ui ui) {
-        switch (filter){
+    public void execute() {
+        switch (filter) {
         case "/a":
             String[] sortedCodes = new String[tours.getTourCount()];
             for (int i = 0; i < tours.getTourCount(); i++) {
