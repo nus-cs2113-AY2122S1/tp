@@ -31,7 +31,8 @@ The _Architecture Diagram_ shown above explains the high-level design of the App
   * Defines how a command is to be executed.
 * `Model`
   * Represents a collection of classes that holds the data of the application in-memory.
-  * Includes: `ModuleList`, `Modules`, `StudentList` , `Student`, `AssessmentList` , `Assessment`, `AttendanceList` , `Attendance`
+  * Includes: `ModuleList`, `Modules`, `StudentList` , `Student`, `AssessmentList` , `Assessment`, `AttendanceList`
+, `Attendance`
 * `Storage`
   * Handles data storage operations (e.g. Reading from and writing to data file).
 * `Commons`
@@ -62,20 +63,48 @@ module internally as an ArrayList `modules`.<br>
 * `ModuleList#getModule(code:String)` - Returns a module with a particular code.
 * `ModuleList#isValidIndex(index:int)` - Checks if an index is valid w.r.t the `modules` ArrayList.
 * `ModuleList#addModule(module:Module)` - Adds a module to the `modules` ArrayList.
-* `ModuleList#getModuleAt(index:int)` - Returns a `Module` object at the specified `index` within the `modules` ArrayList.
+* `ModuleList#getModuleAt(index:int)` - Returns a `Module` object at the specified `index` within the `modules` 
+ArrayList.
 
 Below is an example scenario of how the add module feature behaves at each step:<br>
-* Step 1 - The user executes `add_module c/CS2113T n/Software Engineering` to add a module. The `add_module` command calls
-the `AddModuleCommand#execute` method. Within `AddModuleCommand#execute`, `ModuleList#getModule("CS2113T")` is called to
-ensure that there is no existing module with code `CS2113T`.
+* Step 1 - The user executes `add_module c/CS2113T n/Software Engineering` to add a module. The `add_module` command 
+calls the `AddModuleCommand#execute` method. Within `AddModuleCommand#execute`, `ModuleList#getModule("CS2113T")` is 
+called to ensure that there is no existing module with code `CS2113T`.
 * Step 2 - If no existing module with code `CS2113T` is found, a new `Module` object with code and name set to `CS2113T`
-and `Software Engineering` set as its code and name respectively. Then, `ModuleList#addModule` is called to add the newly
-created `Module` object into the `modules` ArrayList within `ModuleList`.
+and `Software Engineering` respectively. Then, `ModuleList#addModule` is called to add the newly created `Module` 
+object into the `modules` ArrayList within `ModuleList`.
+
+### Add student
+The add student mechanism is facilitated by `AddStudentCommand`. It extends `Command` and uses `StudentList` which
+stores student internally as an ArrayList `students`.
+<br>  
+
+`AddStudentCommand` implements the following methods:
+* `AddStudentCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Performs operations for the command.
+
+`StudentList` implements the following methods:
+* `StudentList#getSize()` - Returns the no. of students currently in the list.
+* `StudentList#getStudents()` - Returns an ArrayList containing all the students.
+* `StudentList#getStudentAt(index:int)` - Returns a student with the particular index.
+* `StudentList#isValidIndex(index:int)` - Checks if an index is valid w.r.t the `students` ArrayList.
+* `StudentList#addStudent(student:Student)` - Adds a student to the `students` ArrayList.
+* `StudentList#deleteStudent(index:int)` - Deletes the `student` object at the specified `index` within the `students` 
+ArrayList.
+* `StudentList#findStudent(keyword:String)` - Returns an ArrayList of students containing the keyword
+
+Below is an example scenario of how the add student feature behaves at each step:<br>
+* Step 1 - The user executes `add_student c/CS2113T i/a0217978j n/jonny` to add a module. The `add_student` command 
+calls the `AddStudentCommand#execute` method. Within `AddStudentCommand#execute`, `ModuleList#getModule("CS2113T")` is 
+called to ensure that there is an existing module with code `CS2113T`.
+* Step 2 - If an existing module with code `CS2113T` is found, a new `Student` object with id and name set to 
+`a0217978j` and `jonny` respectively. Then, `StudentList#addModule` is called to add the newly created `Student` 
+object into the `students` ArrayList within `StudentList`.
 
 ### Set attendance
 The set attendance mechanism is facilitated by SetAttendanceCommand. It extends `Command` and
 uses  `AttendanceList` which stores a student's lessons attendance as an
-ArrayList `attendances`. <br>
+ArrayList `attendances`.
+<br>
 
 `SetAttendanceCommand` implements the following methods:
 * `SetAttendanceCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Performs operations for the command.
@@ -86,16 +115,20 @@ ArrayList `attendances`. <br>
 * `AttendanceList#getAttendance(lessonNumber:String)` - Returns an attendance with a particular lesson number.
 * `AttendanceList#isValidIndex(index:int)` - Checks if an index is valid w.r.t the `attendances` ArrayList.
 * `AttendanceList#addAttendance(attendance:Attendance)` - Adds an attendance to the `attendances` ArrayList.
-* `AttendnaceList#getAttendnaceIndex(lessonNumInput:String)` - Returns the attendance index in the `attendances` ArrayList.
+* `AttendnaceList#getAttendnaceIndex(lessonNumInput:String)` - Returns the attendance index in the `attendances` 
+ArrayList.
 * `AttendanceList#deleteAttendance(lessonNumInput:String)` - Deletes an attendance with a particular lesson number.
-* `AttendanceList#sortAttendances` - Sorts the attendance in the `attendances` ArrayList in ascending order based on lesson number.
+* `AttendanceList#sortAttendances` - Sorts the attendance in the `attendances` ArrayList in ascending order based on 
+lesson number.
 
 Below is an example scenario of how the set attendance feature behaves at each step:
 * Step 1 - The user executes `set_attendance c/CS2113T s/1 l/1 p/1` to set an attendance to `Present` for student at 
-index `1`, lesson number `1` to set a student's attendance for a lesson. The `set_attendance` command calls the `SetAttendanceCommand#execute` method. Within 
-`SetAttendanceCommand#execute`, `AttendanceList#getAttendance("1")` is called to ensure that there is no existing attendance with the
+index `1`, lesson number `1` to set a student's attendance for a lesson. The `set_attendance` command calls the 
+`SetAttendanceCommand#execute` method. Within `SetAttendanceCommand#execute`, `AttendanceList#getAttendance("1")` is 
+called to ensure that there is no existing attendance with the
 lesson number `1`for student at index `1`.
-* Step 2 - If no existing attendance object with lesson number `1` for student at index `1` is found, a new `Attendance` object
+* Step 2 - If no existing attendance object with lesson number `1` for student at index `1` is found, a new 
+`Attendance` object
 with lesson number `1` and attendance record `Present` is set as its lesson number and attendance record respectively.
 Then, `AttendanceList#addAttendance` is called to add the newly created `Attendance` object into the `attendances` 
 ArrayList within `AttendanceList`.
@@ -103,7 +136,7 @@ ArrayList within `AttendanceList`.
 
 
 ### Set marks
-he set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command`.<br>
+The set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command`.<br>
 
 ## Product scope
 ### Target user profile
