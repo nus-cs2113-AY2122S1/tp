@@ -22,6 +22,7 @@ public class TaskManager {
     private static final int STARTING_SIZE = 128;
 
     private static ArrayList<Task> taskList = new ArrayList<>(128);
+    private static ArrayList<Task> latestPrintedList = new ArrayList<>(128);
 
     private static final String LIST_HEADER = "-------------\n"
             + " MY TASKLIST\n"
@@ -31,15 +32,12 @@ public class TaskManager {
     public static String listTasklist(HashMap<String, String> filter) throws EmptyTasklistException,
             ListFormatException, MissingFilterArgumentException {
         assert taskList.size() >= 0 : "Tasklist cannot be negative";
-
         if (taskList.size() == 0) {
             Log.warning("tasklist is empty, throwing EmptyTasklistException");
             throw new EmptyTasklistException();
         }
-
         String taskEntries = "";
         ArrayList<Task> filteredTasks = (ArrayList<Task>) taskList.clone();
-
         for (HashMap.Entry<String, String> entry : filter.entrySet()) {
             String flag = entry.getKey();
             String argument = entry.getValue();
@@ -60,7 +58,8 @@ public class TaskManager {
                 throw new ListFormatException();
             }
         }
-
+        latestPrintedList.clear();
+        latestPrintedList = filteredTasks;
         for (int i = 0; i < filteredTasks.size(); i++) {
             taskEntries += i + 1 + ". " + filteredTasks.get(i).getTaskEntryDescription() + "\n";
         }
