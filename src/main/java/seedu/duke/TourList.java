@@ -17,9 +17,10 @@ public class TourList {
         tourCount++;
     }
 
-    public ArrayList<Tour> getTours(){
+    public ArrayList<Tour> getTours() {
         return tours;
     }
+
     public int getTourCount() {
         return tourCount;
     }

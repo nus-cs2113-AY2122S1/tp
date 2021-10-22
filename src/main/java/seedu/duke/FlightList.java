@@ -30,6 +30,7 @@ public class FlightList {
                 return flights.get(i);
             }
         }
+        return null;
     }
 
 }
