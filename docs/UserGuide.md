@@ -110,7 +110,7 @@ Examples:
 
 <br>
 
-### Find students in a module given a keyword: `find_student`
+### Finding students in a module given a keyword: `find_student`
 Displays all students in the module matching the keyword along with their index.
 
 Format: `find_student c/<MODULE_CODE> k/<KEYWORD>`
@@ -123,7 +123,7 @@ Examples:
 
 <br>
 
-### Set attendance for a particular lesson for a student: `set_attendance`
+### Setting attendance for a particular lesson for a student: `set_attendance`
 Sets a student's attendance for a lesson
 
 Format: `set_attendance c/<MODULE_CODE s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
@@ -133,7 +133,7 @@ Format: `set_attendance c/<MODULE_CODE s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PR
 * `PRESENT` refers to the whether a student is present. (1 for present, 0 for not present)
 
 ### Setting marks for a student's assessment: `set_marks`
-Add a student's marks for an assessment.
+Adds a student's marks for an assessment.
 
 Format: `set_marks c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
@@ -202,7 +202,7 @@ Examples:
 
 <br>
 
-### Exit the program: `exit`
+### Exiting the program: `exit`
 Exits the program
 
 Format: `exit`
