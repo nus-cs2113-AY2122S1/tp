@@ -1,6 +1,7 @@
 package seedu.situs.command;
 
 import seedu.situs.exceptions.SitusException;
+import seedu.situs.ingredients.Ingredient;
 import seedu.situs.ingredients.IngredientGroup;
 import seedu.situs.ingredients.IngredientList;
 
@@ -34,11 +35,12 @@ public class ExpireCommand extends Command {
         }
 
         if (expiringCount == 0) {
-            resultMsg = "No ingredients expiring by " + expireBeforeDate;
+            resultMsg = "No ingredients expiring by " + Ingredient.dateToString(expireBeforeDate);
             return resultMsg;
         }
 
         return "There are " + expiringCount
-                + " ingredients expiring by: " + expireBeforeDate + LIST_NEWLINE_INDENT + resultMsg;
+                + " ingredients expiring by: " + Ingredient.dateToString(expireBeforeDate)
+                + LIST_NEWLINE_INDENT + resultMsg;
     }
 }
