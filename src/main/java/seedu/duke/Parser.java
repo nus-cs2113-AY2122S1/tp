@@ -106,9 +106,9 @@ public class Parser {
             break;
         }
 
-//        if (!containAllPrefixes(argString, identifier)) {
-//            throw new TourPlannerException(ERROR_MISSING_PREFIXES);
-//        }
+        if (!containAllPrefixes(argString, prefixes)) {
+            throw new TourPlannerException(ERROR_MISSING_PREFIXES);
+        }
 
         TreeMap<Integer, String> prefixIndexes = new TreeMap<>();
         prefixIndexes.put(0, "");
@@ -136,6 +136,7 @@ public class Parser {
     private static ArrayList<String> extractValuesIntoArray(TreeMap<Integer, String> prefixIndexes, String argString, String identifier)
             throws TourPlannerException {
         ArrayList<String> extractedValues = new ArrayList<>();
+        initialiseArrayList(extractedValues);
         ArrayList<Integer> indexes = new ArrayList<>();
         ArrayList<String> prefixes = new ArrayList<>();
         for (Map.Entry<Integer, String> prefixIndex : prefixIndexes.entrySet()) {
@@ -148,18 +149,23 @@ public class Parser {
             int nextIndex = indexes.get(i + 1);
             String prefix = prefixes.get(i);
             String value = extractValue(argString, prefix, previousIndex, nextIndex);
-//            int inputIndex = obtainArrayIndex(prefix);
-//            extractedValues[inputIndex] = value;
-            extractedValues.add(value);
+            int inputIndex = obtainArrayIndex(prefix, identifier);
+            extractedValues.set(inputIndex, value);
         }
 
         String finalPrefix = prefixes.get(indexes.size() - 1);
         int finalIndex = indexes.get(indexes.size() - 1);
 
-//        int inputIndex = obtainArrayIndex(finalPrefix);
+        int inputIndex = obtainArrayIndex(finalPrefix, identifier);
         String value = extractValue(argString, finalPrefix, finalIndex, argString.length());
-        extractedValues.add(value);
+        extractedValues.set(inputIndex, value);
         return extractedValues;
+    }
+
+    private static void initialiseArrayList(ArrayList<String> extractedValues) {
+        for (int i = 0; i < 5; i++) {
+            extractedValues.add("");
+        }
     }
 
     /**
@@ -189,22 +195,65 @@ public class Parser {
      * @param prefix prefix of value extracted
      * @return array index of values according to prefix
      */
-    private static int obtainArrayIndex(String prefix) {
+    private static int obtainArrayIndex(String prefix, String identifier) {
         int index = 0;
+        switch (identifier) {
+        case "-c":
+            index = obtainClientArrayIndex(prefix);
+            break;
+        case "-t":
+            index = obtainTourArrayIndex(prefix);
+            break;
+        case "-f":
+            index = obtainFlightArrayIndex(prefix);
+            break;
+        }
+        return index;
+    }
+
+    private static int obtainFlightArrayIndex(String prefix) {
+        int index = 0;
+
         switch (prefix) {
-        case CONTACT_NUMBER_PREFIX:
+        case "/t":
             index = 1;
             break;
-        case FLIGHT_PREFIX:
+        case "/f":
             index = 2;
             break;
-        case ACCOMMS_PREFIX:
+        case "/dt":
             index = 3;
             break;
-        case TOUR_PREFIX:
+        case "/df":
             index = 4;
             break;
-        default:
+        }
+        return index;
+    }
+
+    private static int obtainTourArrayIndex(String prefix) {
+        int index = 0;
+
+        switch (prefix) {
+        case "/n":
+            index = 1;
+            break;
+        case "/p":
+            index = 2;
+            break;
+        }
+        return index;
+    }
+
+    private static int obtainClientArrayIndex(String prefix) {
+        int index = 0;
+
+        switch (prefix) {
+        case "/cn":
+            index = 1;
+            break;
+        case "/m":
+            index = 2;
             break;
         }
         return index;
@@ -216,28 +265,24 @@ public class Parser {
      * @param argString full user's argument string
      * @return true if all prefixes are present in add command's argument string
      */
-//    private static boolean containAllPrefixes(String argString, String... prefixes) {
-//        String[] splitBySpaces = argString.trim().split("\\s+");
-//        for (String substring : splitBySpaces) {
-//            switch (substring) {
-//            case "/cn":
-//                containsContact = true;
-//                break;
-//            case "/n":
-//                containsAccomms = true;
-//                break;
-//            case "/t":
-//                containsTour = true;
-//                break;
-//            case "/f":
-//                containsFlight = true;
-//                break;
-//            default:
-//                break;
-//            }
-//        }
-//        return containsContact && containsFlight && containsAccomms && containsTour;
-//    }
+    private static boolean containAllPrefixes(String argString, List<String> prefixList) {
+
+        String[] splitBySpaces = argString.trim().split("\\s+");
+        String[] prefixes = prefixList.toArray(new String[prefixList.size()]);
+        for (String prefix : prefixes) {
+            boolean containPrefix = false;
+            for (String substring : splitBySpaces) {
+                if (prefix.equals(substring)) {
+                    containPrefix = true;
+                    break;
+                }
+            }
+            if (!containPrefix) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
     /**
