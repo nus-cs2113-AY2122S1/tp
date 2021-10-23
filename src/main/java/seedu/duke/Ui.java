@@ -120,7 +120,7 @@ public class Ui {
     }
 
     public static void printDeleteExpenseSuccessful(Double expenseAmount) {
-        System.out.println("Your expense of " + expenseAmount + " has been successfully removed");
+        System.out.println("Your expense of " + stringMoney(expenseAmount) + " has been successfully removed");
     }
 
     public static void printNoExpensesError() {
@@ -175,8 +175,9 @@ public class Ui {
         System.out.print("Who paid for the expense?: ");
     }
 
-    public static void printHowMuchDidPersonSpend(String name) {
-        System.out.print("How much did " + name + " spend?: ");
+    public static void printHowMuchDidPersonSpend(String name, double amountRemaining) {
+        System.out.print("There is $" + stringMoney(amountRemaining) + " left to be assigned."
+                + " How much did " + name + " spend?: ");
     }
 
     public static void printPersonNotInExpense() {
