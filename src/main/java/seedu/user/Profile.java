@@ -9,7 +9,7 @@ public class Profile {
     private final String year;
     private final Timetable timetable;
     private final ModuleRecord record = new ModuleRecord();
-    private final double cap;
+    private double cap;
 
 
     public Profile(String username, String major, String year) {
@@ -17,11 +17,16 @@ public class Profile {
         this.major = major;
         this.year = year;
         this.timetable = null;
-        this.cap = record.getCap();
+        this.cap = record.calculateCap();
     }
 
     public String getYear() {
         return year;
+    }
+
+    public double getCap() {
+        cap = record.calculateCap();
+        return cap;
     }
 
     public String getMajor() {

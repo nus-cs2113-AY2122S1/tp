@@ -2,7 +2,9 @@ package seedu.module;
 
 import com.google.gson.annotations.JsonAdapter;
 import seedu.command.flags.SearchFlags;
+import seedu.exceptions.UniModsException;
 import seedu.online.PrerequisiteTreeAdapterFactory;
+import seedu.ui.TextUi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,10 @@ public class Module extends BaseModule {
     private String acadYear;
     private Attributes attributes;
     private ArrayList<Semester> semesterData;
+    private final static String GRADES[] = {
+            "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U"};
+    private final static String SU_GRADES[] = {"S", "U", "CS", "CU"};
+
 
     @JsonAdapter(PrerequisiteTreeAdapterFactory.class)
     private PrerequisiteTree prereqTree;
@@ -31,8 +37,12 @@ public class Module extends BaseModule {
         super(moduleCode);
     }
 
-    public GradedModule toGradedModule(char grade) {
+    public GradedModule toGradedModule(String grade) {
         return new GradedModule(this, grade);
+    }
+
+    public UngradedModule toUngradedModule(String grade) {
+        return new UngradedModule(this, grade);
     }
 
     public Lesson getLesson(int sem, int idx) {
@@ -72,7 +82,7 @@ public class Module extends BaseModule {
             isSUable = attributes.isSUable();
         }
         String fullInfo = "Title: " + title + "\n"
-                + "MCs: " + (int)moduleCredit + "\n"
+                + "MCs: " + (int) moduleCredit + "\n"
                 + "Department: " + department + "\n"
                 + wrap(description, 70) + "\n"
                 + "Prerequisites: " + prerequisite + "\n"
@@ -160,4 +170,28 @@ public class Module extends BaseModule {
         return false;
     }
 
+    /**
+     * Checks for the type and validity of the grade.
+     *
+     * @param gradeToCheck GradeToCheck stores the grade that is to be checked
+     * @return gradeType which is the type of the grade
+     * @throws UniModsException If grade is invalid
+     */
+    public static String checkGradeType(String gradeToCheck) throws UniModsException {
+        String gradeType = "";
+        for (int i = 0; i < GRADES.length; i++) {
+            if (gradeToCheck.equals(GRADES[i])) {
+                gradeType = TextUi.GRADED;
+                return gradeType;
+            }
+        }
+        for (int i = 0; i < SU_GRADES.length; i++) {
+            if (gradeToCheck.equals(SU_GRADES[i])) {
+                gradeType = TextUi.UNGRADED;
+                return gradeType;
+            }
+        }
+        throw new UniModsException(TextUi.ERROR_INVALID_GRADE);
+
+    }
 }
