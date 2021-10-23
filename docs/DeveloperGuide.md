@@ -196,8 +196,16 @@ Fetches the json from all mods in the NUSMods database. Utilizes `getOnlineModLi
 ### Maintaining Timetable
 
 #### Initialization
+![](uml-diagrams/TimetableLoad.png)
+
+Fetches locally stored timetable json, utilizing Gson to convert it to a `TimetableDto` object. `toTimetable()` function is then called to convert `TimetableDto` to a `Timetable` object, where schedule info is merged to easier access.
+
+In the event that the json save file is empty or does not exist, a new empty `Timetable` object is created
 
 #### Save
+![](uml-diagrams/TimetableSave.png)
+
+`Timetable` is converted to a `TimetableDto` object in order to separate different `TimetableItem` types. The `TimetableDto` object is then saved to a local json file via Gson.
 
 #### Add
 Utilizes `getLessonDetails` for each LessonType found in the Semester of the module. 
