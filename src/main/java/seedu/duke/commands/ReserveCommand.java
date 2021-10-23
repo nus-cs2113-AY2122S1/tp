@@ -46,7 +46,6 @@ public class ReserveCommand extends Command {
             throw new LibmgrException(RESERVE_INVALID_FORMAT);
         }
 
-        ui.print(id + "-" + username);
         // Get item to be updated
         Item toBeReserved = catalogue.getItem(id);
         // Perform operations
