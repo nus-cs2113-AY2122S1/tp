@@ -13,11 +13,11 @@ public class University {
     protected String name;
     public ArrayList<ModuleMapping> list;
 
-//    public University(String name, UniversityList universityMasterList) {
-//        index = getMasterListIndex(universityMasterList);
-//        this.name = name;
-//        this.list = new ArrayList<>();
-//    }
+    //    public University(String name, UniversityList universityMasterList) {
+    //        index = getMasterListIndex(universityMasterList);
+    //        this.name = name;
+    //        this.list = new ArrayList<>();
+    //    }
 
     public University(String name, ArrayList<ModuleMapping> list, UniversityList universityMasterList) {
         this.name = name;
@@ -25,11 +25,11 @@ public class University {
         index = getMasterListIndex(universityMasterList);
     }
 
-//    public University(String name, int index) {
-//        this.index = index;
-//        this.name = name;
-//        this.list = new ArrayList<>();
-//    }
+    //    public University(String name, int index) {
+    //        this.index = index;
+    //        this.name = name;
+    //        this.list = new ArrayList<>();
+    //    }
 
     public University(String name, ArrayList<ModuleMapping> list, int index) {
         this.index = index;
@@ -91,7 +91,7 @@ public class University {
         return selectedMapping;
     }
 
-    public int getMappingListSize(){
+    public int getMappingListSize() {
         return list.size();
     }
 
