@@ -24,7 +24,7 @@ public class ModuleRecord {
     }
 
     /**
-     * Adds a graded Module to the Transcript
+     * Adds a graded Module to the Transcript.
      *
      * @param module Module contains the graded module to be stored in the Transcript
      */
@@ -36,7 +36,7 @@ public class ModuleRecord {
     }
 
     /**
-     * Adds an ungraded Module to the Transcript
+     * Adds an ungraded Module to the Transcript.
      *
      * @param module Module contains the ungraded module to be stored in the Transcript
      */
@@ -48,7 +48,7 @@ public class ModuleRecord {
 
 
     /**
-     * Checks if the grade is valid and then calls the function to store module and grade in the transcript
+     * Checks if the grade is valid and then calls the function to store module and grade in the transcript.
      *
      * @param module Module stores the Module to be stored in the Transcript
      * @param grade  Grade stores the grade scored in the module which is to be stored in the Transcript
@@ -68,6 +68,8 @@ public class ModuleRecord {
     }
 
     /**
+     * Removes the module from the Transcript records.
+     *
      * @param moduleCode ModuleCode is the module code which is to be removed from the Transcript.
      * @throws UniModsException IF the module is not found in the transcript records.
      */
@@ -110,7 +112,6 @@ public class ModuleRecord {
             cap = numerator / denominator;
             return cap;
         }
-        TextUi.printEmptyRecord();
         return 0.0;
     }
 

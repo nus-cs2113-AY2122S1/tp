@@ -17,9 +17,7 @@ public class GradedModule extends BaseModule {
         return grade;
     }
 
-    /**
-     * Returns the grade point corresponding to the grade passed in the arguments
-     */
+    /* Returns the grade point corresponding to the grade passed in the arguments */
     public double getEquivalentCap(String grade) {
         switch (grade) {
         case "A+":

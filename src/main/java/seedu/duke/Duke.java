@@ -31,7 +31,6 @@ public class Duke {
         TextUi.printWelcomeMessage();
         profiles.add(new Profile("test user", "CEG", "2"));
         profileInUse = profiles.get(0);
-//        profileInUse.getRecord().addModuleToRecord(new Module("CS1010"), "A");
         run();
     }
 

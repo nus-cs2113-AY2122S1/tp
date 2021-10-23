@@ -22,9 +22,8 @@ public class Module extends BaseModule {
     private String acadYear;
     private Attributes attributes;
     private ArrayList<Semester> semesterData;
-    private final static String GRADES[] = {
-            "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U"};
-    private final static String SU_GRADES[] = {"S", "U", "CS", "CU"};
+    private static final String[] GRADES = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "D+", "D", "F", "S", "U"};
+    private static final String[] SU_GRADES = {"S", "U", "CS", "CU"};
 
 
     @JsonAdapter(PrerequisiteTreeAdapterFactory.class)
