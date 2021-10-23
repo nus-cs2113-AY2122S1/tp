@@ -1,17 +1,22 @@
 package seedu.traveller;
 
-import seedu.traveller.commands.AddDayCommand;
-import seedu.traveller.commands.AddItemCommand;
-import seedu.traveller.commands.DeleteCommand;
-import seedu.traveller.commands.EditCommand;
-import seedu.traveller.commands.ExitCommand;
-import seedu.traveller.commands.NewCommand;
-import seedu.traveller.commands.SearchCommand;
-import seedu.traveller.commands.ViewAllCommand;
-import seedu.traveller.commands.DeleteItemCommand;
-import seedu.traveller.commands.DeleteDayCommand;
 import seedu.traveller.commands.Command;
+import seedu.traveller.commands.NewCommand;
+import seedu.traveller.commands.AddItemCommand;
+import seedu.traveller.commands.EditCommand;
+import seedu.traveller.commands.DeleteCommand;
+import seedu.traveller.commands.DeleteDayCommand;
+import seedu.traveller.commands.DeleteItemCommand;
+import seedu.traveller.commands.ViewCommand;
+import seedu.traveller.commands.SearchItemCommand;
+import seedu.traveller.commands.EditItemCommand;
+import seedu.traveller.commands.ShortestCommand;
+import seedu.traveller.commands.AddDayCommand;
+import seedu.traveller.commands.ExitCommand;
+import seedu.traveller.commands.HelpCommand;
+
 import seedu.traveller.exceptions.CommandNotFoundException;
+import seedu.traveller.exceptions.IllegalTripNameException;
 import seedu.traveller.exceptions.InvalidAddItemFormatException;
 import seedu.traveller.exceptions.InvalidEditFormatException;
 import seedu.traveller.exceptions.InvalidNewFormatException;
@@ -58,11 +63,14 @@ public class Parser {
         case "delete":
             command = parseDeleteCommand(userInput[1]);
             break;
-        case "viewall":
-            command = parseViewallCommand();
+        case "view":
+            command = parseViewCommand(userInput[1]);
             break;
-        case "search":
-            command = parseSearchCommand(userInput[1]);
+        case "shortest":
+            command = parseShortestCommand(userInput[1]);
+            break;
+        case "search-item":
+            command = parseSearchItemCommand(userInput[1]);
             break;
         case "add-day":
             command = parseAddDayCommand(userInput[1]);
@@ -76,8 +84,15 @@ public class Parser {
         case "delete-item":
             command = parseDeleteItemCommand(userInput[1]);
             break;
+        case "edit-item":
+            command = parseEditItemCommand(userInput[1]);
+            break;
         case "exit":
             command = parseExitCommand();
+            break;
+
+        case "help":
+            command = parseHelpCommand();
             break;
         default:
             logger.log(Level.WARNING, "Invalid command input!");
@@ -139,6 +154,9 @@ public class Parser {
             int fromIdx = userInput.indexOf(fromSeparator);
             int toIdx = userInput.indexOf(toSeparator);
             String tripName = userInput.substring(0, fromIdx);
+            if (tripName.equals("all")) {
+                throw new IllegalTripNameException(tripName);
+            }
             String startCountryCode = userInput.substring(fromIdx + FROM_LENGTH, toIdx).toUpperCase();
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
@@ -215,22 +233,74 @@ public class Parser {
         return command;
     }
 
-    /**
-     * Parses user input to give a <code>ViewallCommand</code>.
-     * @return Command A <code>ViewallCommand</code> object.
-     */
-    private static Command parseViewallCommand() {
-        logger.log(Level.INFO, "Viewall command input");
-        return new ViewAllCommand();
+    private static Command parseSearchItemCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Search command input");
+
+        String[] input = userInput.split(" ");
+
+        String tripName;
+        String itemName;
+
+        tripName = input[1];
+        String nameSeparator = " /name ";
+        int nameIdx = userInput.indexOf(nameSeparator);
+        itemName = userInput.substring(nameIdx + NAME_LENGTH);
+
+        Command command;
+        command = new SearchItemCommand(tripName, itemName);
+
+        return command;
+    }
+
+    private static Command parseEditItemCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Edit-item command input");
+        Command command;
+        String[] input = userInput.split(" ");
+
+        String tripName;
+        String itemName;
+        String itemTime;
+        int itemIndex;
+
+        try {
+            tripName = input[1];
+            itemIndex = Integer.valueOf(input[0]);
+
+            String nameSeparator = " /name ";
+            int nameIdx = userInput.indexOf(nameSeparator);
+            itemName = userInput.substring(nameIdx + NAME_LENGTH);
+
+            String timeSeparator = " /time ";
+            int timeIdx = userInput.indexOf(timeSeparator);
+            itemTime = userInput.substring(timeIdx + TIME_LENGTH, nameIdx);
+
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidAddItemFormatException();
+        }
+
+        command = new EditItemCommand(tripName, itemIndex, itemTime, itemName);
+
+        return command;
     }
 
     /**
-     * Parses user input to give a <code>SearchCommand</code>.
+     * Parses user input to give a <code>ViewCommand</code>.
+     * @return Command A <code>ViewCommand</code> object.
+     */
+    private static Command parseViewCommand(String userInput) {
+        Command command;
+        logger.log(Level.INFO, "View command input");
+        command = new ViewCommand(userInput);
+        return command;
+    }
+
+    /**
+     * Parses user input to give a <code>ShortestCommand</code>.
      * @param userInput Raw user input, with the first command option (search) removed.
-     * @return Command A <code>SearchCommand</code> object.
+     * @return Command A <code>ShortestCommand</code> object.
      * @throws TravellerException Will be thrown if the user input cannot be understood.
      */
-    private static Command parseSearchCommand(String userInput) throws TravellerException {
+    private static Command parseShortestCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
         Command command;
         try {
@@ -240,7 +310,7 @@ public class Parser {
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
-            command = new SearchCommand(startCountryCode, endCountryCode);
+            command = new ShortestCommand(startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidSearchFormatException();
         }
@@ -267,4 +337,14 @@ public class Parser {
         logger.log(Level.INFO, "Exit command input");
         return new ExitCommand();
     }
+
+    /**
+     * Launches help menu.
+     * @return Command An <code>ExitCommand</code> object.
+     */
+    private static Command parseHelpCommand() {
+        logger.log(Level.INFO, "Help command input");
+        return new HelpCommand();
+    }
 }
+

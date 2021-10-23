@@ -28,7 +28,7 @@ public class Item {
     }
 
     /**
-     * Used to pretty print when the <code>ViewAllCommand</code> is called.
+     * Used to pretty print when the <code>ViewCommand</code> is called.
      * @return <code>String</code> of the contents of the <code>Item</code> object.
      */
     @Override

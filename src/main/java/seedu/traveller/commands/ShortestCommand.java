@@ -10,12 +10,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class SearchCommand extends Command {
-    private static final Logger logger = Logger.getLogger(SearchCommand.class.getName());
+public class ShortestCommand extends Command {
+    private static final Logger logger = Logger.getLogger(ShortestCommand.class.getName());
     private final String startCountry;
     private final String endCountry;
 
-    public SearchCommand(String startCountry, String endCountry) {
+    public ShortestCommand(String startCountry, String endCountry) {
         logger.setLevel(Level.INFO);
         this.startCountry = startCountry;
         this.endCountry = endCountry;
@@ -32,7 +32,7 @@ public class SearchCommand extends Command {
 
     @Override
     public String toString() {
-        return "Search command: "
+        return "Shortest command: "
                 + "\n\tstartCountry: " + startCountry
                 + "\n\tendCountry: " + endCountry;
     }
@@ -45,6 +45,6 @@ public class SearchCommand extends Command {
             sum += d;
         }
         assert sum >= 0 : "The distance should be more than or equal to 0.";
-        ui.printSearch(this.startCountry, this.endCountry, sum);
+        ui.printShortest(this.startCountry, this.endCountry, sum);
     }
 }

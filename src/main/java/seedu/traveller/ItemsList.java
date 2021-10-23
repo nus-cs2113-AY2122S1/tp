@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Represents a list of items that will be done in a particular day of a trip.
+ * Each <code>Day</code> will have 1 <code>ItemsList</code>.
+ */
 public class ItemsList {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final ArrayList<Item> items;
@@ -20,22 +24,22 @@ public class ItemsList {
         items.add(item);
     }
 
-    public void editItem(int i, Item item) {
+    public void editItem(int index, Item item) {
         logger.log(Level.INFO, "Editing an item to itemsList");
         items.add(item);
-        Collections.swap(items, i, getSize() - 1);
+        Collections.swap(items, index, getSize() - 1);
         items.remove(getSize() - 1);
     }
 
-    public ArrayList<Item> searchItem(String s) {
-        ArrayList<Item> ans = new ArrayList<>();
+    public ArrayList<Item> searchItem(String keyword) {
+        ArrayList<Item> keywordString = new ArrayList<>();
         logger.log(Level.INFO, "Searching for keyword in itemsList");
         for (Item i: items) {
-            if (i.getItemName().contains(s) || i.getItemTime().contains(s)) {
-                ans.add(i);
+            if (i.getItemName().contains(keyword) || i.getItemTime().contains(keyword)) {
+                keywordString.add(i);
             }
         }
-        return ans;
+        return keywordString;
     }
 
     public Item getItem(int i) {
