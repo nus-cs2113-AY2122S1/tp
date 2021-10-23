@@ -1,8 +1,9 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
-import seedu.duke.Parser;
+import seedu.duke.parser.Parser;
 import seedu.duke.exceptions.DukeException;
+import seedu.duke.items.mainlists.EventCatalog;
 import seedu.duke.items.Item;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class DoneUndoCommand extends Command {
                 }
                 indexes = command[2].split(",");
                 sortedList = new ArrayList<>(Duke.taskList);
-                Parser.bubbleSortItems(sortedList);
+                EventCatalog.bubbleSortItems(sortedList);
             } else if (command[1].equalsIgnoreCase(EVENT_FLAG)) {
                 if (command.length == 2) {
                     throw new DukeException("Please specify the indexes of the events you want to "
@@ -45,11 +46,11 @@ public class DoneUndoCommand extends Command {
                 }
                 indexes = command[2].split(",");
                 sortedList = new ArrayList<>(Duke.eventCatalog);
-                Parser.bubbleSortItems(sortedList);
+                EventCatalog.bubbleSortItems(sortedList);
             } else {
                 indexes = command[1].split(",");
                 sortedList = Parser.makeMainList();
-                Parser.bubbleSortItems(sortedList);
+                EventCatalog.bubbleSortItems(sortedList);
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());

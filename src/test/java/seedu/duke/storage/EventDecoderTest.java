@@ -1,12 +1,7 @@
 package seedu.duke.storage;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.Parser;
 import seedu.duke.items.Event;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

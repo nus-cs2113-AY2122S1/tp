@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.Duke;
-import seedu.duke.Parser;
+import seedu.duke.parser.Parser;
 import seedu.duke.Ui;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
@@ -34,6 +34,7 @@ public class AddCommand extends Command {
     public AddCommand(String[] command, String response) {
 
         isCorrectFormat = true;
+        assert command[0].equals("add") : "Command must be 'add'";
 
         try {
             if (command.length == 1) {
@@ -78,19 +79,31 @@ public class AddCommand extends Command {
     private double retrieveEventBudget(String response) {
         int startOfEventBudget = response.indexOf(BUDGET_FLAG) + 2;
         int endOfEventBudget = response.indexOf("/", startOfEventBudget) - 2;
+        double budget;
         try {
             if (endOfEventBudget < 0) {
-                return Double.parseDouble(response.trim().substring(startOfEventBudget));
+                budget = Double.parseDouble(response.trim().substring(startOfEventBudget));
+            } else {
+                budget = Double.parseDouble(response.trim().substring(startOfEventBudget, endOfEventBudget));
             }
-            return Double.parseDouble(response.trim().substring(startOfEventBudget, endOfEventBudget));
+            if (budget < 0) {
+                System.out.print("Event budget needs to be a positive number. ");
+                // Returns -1 to signify that the budget entered was not a positive number
+                return -1;
+            }
+            return budget;
         } catch (NumberFormatException e) {
             System.out.print("Event budget needs to be a number. ");
-            // Returns -1 to signify that the budget entered was not a valid integer
+            // Returns -1 to signify that the budget entered was not a valid number
             return -1;
         }
     }
 
     private void prepareTask(String response) throws DukeException {
+        if (Duke.eventCatalog.isEmpty()) {
+            throw new DukeException("There is no event to assign this task to! Please add "
+                    + "an event using the flag '-e'. ");
+        }
         if (!response.contains(TITLE_FLAG)) {
             throw new DukeException("Please add a title for your task using 'n/<title>'. ");
         }
@@ -143,21 +156,28 @@ public class AddCommand extends Command {
         }
 
         eventBudget = retrieveEventBudget(response);
+        if (eventBudget == -1) {
+            throw new DukeException("Please re-enter your event. ");
+        }
+        assert eventBudget >= 0 : "Event budget cannot be a negative number";
         if (BigDecimal.valueOf(eventBudget).scale() > 2) {
             throw new DukeException("Event budget cannot have more than 2 decimal places. Please re-enter "
                     + "your event. ");
         }
-        if (eventBudget == -1) {
-            throw new DukeException("Please re-enter your event. ");
-        }
     }
 
-    private static void addToTaskList(Task task) {
-        Duke.taskList.add(task);
-    }
-
-    private static void addToEventList(Event event) {
+    private static void addToEventCatalog(Event event) {
         Duke.eventCatalog.add(event);
+        Duke.eventCatalog.sortCatalog();
+    }
+
+    private void addTaskToEvent(int eventIndex, Task task) throws DukeException {
+        try {
+            Duke.eventCatalog.get(eventIndex - 1).addToTaskList(task);
+            Duke.eventCatalog.sortCatalog();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("No such event. Please enter a valid event for your task. ");
+        }
     }
 
     public CommandResult execute() {
@@ -166,13 +186,32 @@ public class AddCommand extends Command {
             itemDescription = Ui.readInput();
             Ui.printLineBreak();
             if (itemType.equalsIgnoreCase(TASK_FLAG)) {
-                Task task = new Task(itemTitle, itemDescription, itemDateTime);
-                addToTaskList(task);
-                return new CommandResult(Ui.getTaskAddedMessage(task));
+                Ui.promptForEventIndex();
+                boolean isCorrectEvent = false;
+                while (!isCorrectEvent) {
+                    try {
+                        assert !Duke.eventCatalog.isEmpty() : "The event catalog should not be empty";
+                        Ui.printEventCatalog();
+                        Ui.printLineBreak();
+                        int eventIndex = Integer.parseInt(Ui.readInput());
+                        Task task = new Task(itemTitle, itemDescription, itemDateTime);
+                        addTaskToEvent(eventIndex, task);
+                        isCorrectEvent = true;
+                        return new CommandResult(Ui.getTaskAddedMessage(eventIndex, task));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Please enter the number corresponding to the event "
+                                + "you want to add to. ");
+                        Ui.printLineBreak();
+                    } catch (DukeException e) {
+                        System.out.println(e.getMessage());
+                        Ui.printLineBreak();
+                    }
+                }
+
             }
             if (itemType.equalsIgnoreCase(EVENT_FLAG)) {
                 Event event = new Event(itemTitle, itemDescription, itemDateTime, eventVenue, eventBudget);
-                addToEventList(event);
+                addToEventCatalog(event);
                 return new CommandResult(Ui.getEventAddedMessage(event));
             }
         }
