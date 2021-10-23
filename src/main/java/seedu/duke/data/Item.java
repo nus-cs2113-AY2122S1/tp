@@ -9,6 +9,7 @@ public class Item {
     private String title;
     private String id;
     private Status status;
+    private String loanee;
 
     protected String separator = " | ";
 
@@ -22,6 +23,7 @@ public class Item {
         this.title = title;
         this.id = id;
         this.status = status;
+        this.loanee = null;
     }
 
     /**
@@ -70,6 +72,22 @@ public class Item {
      */
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    /**
+     * Getter method that returns the loanee attribute
+     * @return loanee Username of a person
+     */
+    public String getLoanee() {
+        return loanee;
+    }
+
+    /**
+     * Setter method that sets the loanee attribute
+     * @param loanee Username of a person
+     */
+    public void setLoanee(String loanee) {
+        this.loanee = loanee;
     }
 
     /**
