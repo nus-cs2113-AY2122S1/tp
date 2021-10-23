@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class MemberRoster extends ArrayList<Member> {
 
-    private static ArrayList<Event> memberRoster;
+    private static ArrayList<Member> memberRoster;
     private static MemberRoster theOne = null;
 
     private MemberRoster() {
