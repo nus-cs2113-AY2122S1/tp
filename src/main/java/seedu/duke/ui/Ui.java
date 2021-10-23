@@ -16,8 +16,8 @@ public class Ui {
         out.println(" " + mod.getModuleCode() + Constants.MODULE_NAME_SEPARATOR + mod.getModuleName());
     }
 
-    public static void printUniversity(University uni, UniversityList universityMasterList) {
-        printIndex(uni.getMasterListIndex(universityMasterList), false);
+    public static void printUniversity(University uni) {
+        printIndex(uni.getIndex(), false);
         out.println(Constants.MODULE_MAPPING_SEPARATOR + uni.getName());
     }
 

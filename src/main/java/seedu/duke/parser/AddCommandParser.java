@@ -12,6 +12,7 @@ import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -131,14 +132,14 @@ public class AddCommandParser {
         if (textMatches) {
             uniName = arguments;
         } else {
-            uniIndex = Integer.parseInt(arguments) - 1;
-            uniName = universityMasterList.get(uniIndex).getName();
+            uniIndex = Integer.parseInt(arguments);
+            uniName = universityMasterList.get(uniIndex - 1).getName();
         }
 
         if (!isUniversityExist(uniName, universityMasterList)) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
         }
-        university = new University(uniName);
+        university = new University(uniName, new ArrayList<>(), uniIndex);
     }
 
     private void handleModFlagArgs(String arguments, ModuleList moduleMasterList) throws ParseException {

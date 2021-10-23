@@ -3,6 +3,7 @@ package seedu.duke.storage;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.universities.University;
+import seedu.duke.universities.UniversityList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,12 +31,13 @@ public class UniversityStorage {
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line = br.readLine();
         String curr = " ";
+        int index = 0;
         while (line != null) {
             String[] attributes = extractAttributes(line);
             if (curr.equals(" ")) {
                 curr = attributes[0];
             } else if (!curr.equals(attributes[0])) {
-                universityList.add(new University(curr, moduleMappingList));
+                universityList.add(new University(curr, moduleMappingList, ++index));
                 curr = attributes[0];
                 moduleMappingList = new ArrayList<>();
             }
@@ -49,7 +51,7 @@ public class UniversityStorage {
             line = br.readLine();
         }
         if (!curr.equals(" ")) {
-            universityList.add(new University(curr, moduleMappingList));
+            universityList.add(new University(curr, moduleMappingList, ++index));
         }
         logger.log(Level.INFO, "Completed loading of universities");
         return universityList;
