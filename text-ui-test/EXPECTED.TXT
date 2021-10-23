@@ -14,13 +14,13 @@ Enter your command: There are no expenses in your trip, please add an expense us
 Enter your command: There are no expenses in your trip, please add an expense using the keyword 'expense'.
 Enter your command: Enter your command: Enter date of expense:
 	Press enter to use today's date
-Who paid for the expense?: How much did yikai spend?: How much did yuzhao spend?: How much did qian spend?: Your expense has been added successfully
+Who paid for the expense?: There is $8.00 left to be assigned. How much did yikai spend?: There is $3.00 left to be assigned. How much did yuzhao spend?: There is $2.00 left to be assigned. How much did qian spend?: Your expense has been added successfully
 Enter your command: Enter date of expense:
 	Press enter to use today's date
-Who paid for the expense?: How much did yikai spend?: How much did josh spend?: How much did xiyuan spend?: Your expense has been added successfully
+Who paid for the expense?: There is $1.00 left to be assigned. How much did yikai spend?: There is $0.67 left to be assigned. How much did josh spend?: There is $0.34 left to be assigned. How much did xiyuan spend?: Your expense has been added successfully
 Enter your command: Enter date of expense:
 	Press enter to use today's date
-Who paid for the expense?: How much did yikai spend?: How much did josh spend?: Your expense has been added successfully
+Who paid for the expense?: There is $2.00 left to be assigned. How much did yikai spend?: There is $1.00 left to be assigned. How much did josh spend?: Your expense has been added successfully
 Enter your command: 1. c a b
 date: 2021-10-19
 Amount Spent: 8.00
@@ -79,9 +79,9 @@ Amount Spent: 2.00
 People involved: [yikai, josh]
 Category: breakfast
 
-Enter your command: Your expense of 1.0 has been successfully removed
-Enter your command: Your expense of 8.0 has been successfully removed
-Enter your command: Your expense of 2.0 has been successfully removed
+Enter your command: Your expense of 1.00 has been successfully removed
+Enter your command: Your expense of 8.00 has been successfully removed
+Enter your command: Your expense of 2.00 has been successfully removed
 Enter your command: This is the summary for your America trip 02 Feb 2021
 Total budget for this trip: 2000.00
 Total expenditure so far: 0.00
