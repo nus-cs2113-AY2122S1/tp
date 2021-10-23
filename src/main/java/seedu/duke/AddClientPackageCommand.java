@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.util.Arrays;
-
 public class AddClientPackageCommand extends Command {
     private ClientPackage clientPackage;
     private String[] rawClientPackage;
@@ -13,8 +11,6 @@ public class AddClientPackageCommand extends Command {
     @Override
     public void execute() {
         createClientPackage();
-        clientPackages.add(clientPackage);
-        ui.showAddClientPackage(clientPackage);
     }
 
     private void createClientPackage() {
@@ -24,7 +20,14 @@ public class AddClientPackageCommand extends Command {
         Client client = extractClient(clientIndex);
         Tour tour = extractTour(tourCode);
         Flight flight = extractFlight(flightId);
-        clientPackage = new ClientPackage(client, tour, flight);
+        clientPackage = new ClientPackage(client, tour, flight, clientPackages);
+        if (clientPackages.getPackageCount() > 0) {
+            System.out.println(clientPackages.get(0));
+        }
+        if (clientPackages.getPackageCount() > 1) {
+            System.out.println(clientPackages.get(1));
+        }
+        clientPackages.add(clientPackage);
     }
 
     private Client extractClient(int clientIndex) {
