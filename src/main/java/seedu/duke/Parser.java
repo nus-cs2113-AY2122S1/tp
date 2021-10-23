@@ -126,7 +126,7 @@ public class Parser {
     }
 
     private static void executeCreate(String indexAsString) {
-        String[] newTripInfo = indexAsString.split(" ", 5);
+        String[] newTripInfo = indexAsString.split(" ", 4);
         Trip newTrip = new Trip(newTripInfo);
         Storage.listOfTrips.add(newTrip);
         System.out.println("Your trip to " + newTrip.getLocation() + " on "
@@ -250,7 +250,7 @@ public class Parser {
         String[] expenseInfo = inputDescription.split(" ", 3);
         Double expenseAmount = Double.parseDouble(expenseInfo[0]);
         String expenseCategory = expenseInfo[1].toLowerCase();
-        ArrayList<Person> listOfPersonsIncluded = checkValidPersons(Storage.getOpenTrip(), expenseInfo[2]);
+        ArrayList<Person> listOfPersonsIncluded = checkValidPersons(currTrip, expenseInfo[2]);
         String expenseDescription = getDescription(expenseInfo[2]);
         Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
         newExpense.setDate(newExpense.prompDate());

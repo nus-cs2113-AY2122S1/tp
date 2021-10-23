@@ -27,7 +27,7 @@ public class Trip {
      * @param newTripInfo array containing one attribute in each element
      */
     public Trip(String[] newTripInfo) {
-        assert newTripInfo.length == 5;
+        assert newTripInfo.length == 4;
         this.location = newTripInfo[0];
         setDateOfTrip(newTripInfo[1]);
         setExchangeRate(newTripInfo[2]);
@@ -38,7 +38,7 @@ public class Trip {
     public static void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
         Trip currentTrip = Storage.getOpenTrip();
         ArrayList<Expense> listOfCurrentExpenses = currentTrip.getListOfExpenses();
-        if (listOfCurrentExpenses.size() == 0) {
+        if (listOfCurrentExpenses.isEmpty()) {
             Ui.printNoExpensesError();
             return;
         }
@@ -103,7 +103,7 @@ public class Trip {
 
     public String getDateOfTripString() {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        return dateOfTrip.format(pattern);
+        return getDateOfTrip().format(pattern);
     }
 
     /**
@@ -124,9 +124,9 @@ public class Trip {
 
     /*public double getBudget() {
         return this.budget;
-    }*/
+    }
 
-    /*public void setBudget(String budget) {
+    public void setBudget(String budget) {
         try {
             this.budget = Double.parseDouble(budget);
         } catch (NumberFormatException e) {

@@ -227,7 +227,8 @@ public class Ui {
     }
 
     public static void printInvalidFilterError() {
-
+        System.out.println("Please filter using the following valid filter attributes: \n"
+                + "[category], [description], [payer]");
     }
 
     public static void printFileNotFoundError() {
