@@ -55,30 +55,62 @@ public class IngredientList {
     }
 
     public static void delete(String ingredientName) {
+        Scanner input = new Scanner(System.in);
+
+
         int listSize = ingredientList.size(); //listSize = N
         int ingredientIndex = IngredientList.find(ingredientName);
         if (ingredientIndex == -1) {
             ui.printIngrNotExistMsg();
             assert ingredientList.size() == listSize : "ingredientList should be of size N";
         } else {
-            //Get all dishes
-            for (Dish dish : DishList.dishList) {
-                //Find if they contain ingr in constituents
-                ArrayList<Ingredient> constituents = dish.getConstituents();
-                for (int i = 0; i < constituents.size(); i++) {
-                    if (constituents.get(i).getIngredientName().equals(ingredientName)) {
-                        constituents.remove(i);
+            ui.printConfirmDelIngr();
+            String confirmDel = input.nextLine().toLowerCase();
+            while (!(confirmDel.equals("y") | confirmDel.equals("n"))) {
+                ui.clearTerminalAndPrintNewPage();
+                ui.printInvalidConfirmation();
+                confirmDel = input.nextLine().toLowerCase();
+            }
+            ui.clearTerminalAndPrintNewPage();
+            if (confirmDel.equals("y")) {
+                //Get all dishes
+                for (Dish dish : DishList.dishList) {
+                    //Find if they contain ingr in constituents
+                    ArrayList<Ingredient> constituents = dish.getConstituents();
+                    for (int i = 0; i < constituents.size(); i++) {
+                        if (constituents.get(i).getIngredientName().equals(ingredientName)) {
+                            constituents.remove(i);
+                        }
                     }
                 }
+                ingredientList.remove(ingredientIndex);
+                ui.printIngrNameRemoved(ingredientName);
+                assert ingredientList.size() == (listSize - 1) : "ingredientList should be of size N-1";
+            } else {
+                ui.printDisregardMsg();
             }
-            ingredientList.remove(ingredientIndex);
-            ui.printIngrNameRemoved(ingredientName);
-            assert ingredientList.size() == (listSize - 1) : "ingredientList should be of size N-1";
+
+
         }
     }
 
     public static void clearList() {
-        ingredientList.clear();
-        assert ingredientList.size() == 0 : "ingredientList should be of size 0";
+        Scanner input = new Scanner(System.in);
+        ui.printConfirmClearIngr();
+        String confirmClear = input.nextLine().toLowerCase();
+
+        while (!(confirmClear.equals("y") | confirmClear.equals("n"))) {
+            ui.clearTerminalAndPrintNewPage();
+            ui.printInvalidConfirmation();
+            confirmClear = input.nextLine().toLowerCase();
+        }
+        ui.clearTerminalAndPrintNewPage();
+        if (confirmClear.equals("y")) {
+            ingredientList.clear();
+            assert ingredientList.size() == 0 : "ingredientList should be of size 0";
+            ui.printIngrListCleared();
+        } else {
+            ui.printDisregardMsg();
+        }
     }
 }
