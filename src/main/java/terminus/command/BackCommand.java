@@ -33,11 +33,11 @@ public class BackCommand extends Command {
         if (isModuleNameNullOrEmpty()) {
             MainCommandParser mainParser = MainCommandParser.getInstance();
             TerminusLogger.info("Changing Workspace to:" + mainParser.getWorkspace());
-            return new CommandResult(true, mainParser);
+            return new CommandResult(mainParser);
         } else {
             ModuleWorkspaceCommandParser moduleParser = ModuleWorkspaceCommandParser.getInstance();
             moduleParser.setWorkspace(getModuleName());
-            return new CommandResult(true, moduleParser);
+            return new CommandResult(moduleParser);
         }
     }
 
