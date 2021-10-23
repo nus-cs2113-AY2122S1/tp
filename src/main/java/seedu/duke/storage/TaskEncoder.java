@@ -1,6 +1,6 @@
 package seedu.duke.storage;
 
-import seedu.duke.Parser;
+import seedu.duke.parser.Parser;
 import seedu.duke.items.Task;
 
 import java.util.ArrayList;
