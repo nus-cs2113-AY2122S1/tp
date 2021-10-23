@@ -62,6 +62,10 @@ public class AllRecordList {
         }
     }
 
+    public void editBudget(int month, double amount) {
+        allRecordList.get(month).getBudget().setAmount(amount);
+    }
+
     public void clearAll() {
         allRecordList.clear();
         for (int i = 1; i <= 12; i++) {
@@ -119,5 +123,6 @@ public class AllRecordList {
     public int getMonthListSize(int month) {
         return allRecordList.get(month).getSize();
     }
+
 
 }
