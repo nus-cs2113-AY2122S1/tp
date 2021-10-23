@@ -80,7 +80,7 @@ public class AddLinkCommand extends Command {
         }
         if (!isValidDuration(this.duration)) {
             TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
-            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION, this.link));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION, this.duration));
         }
         if (hasDurationOverflow(startTime, this.duration)) {
             TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));

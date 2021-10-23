@@ -194,9 +194,9 @@ public class CommonUtilsTest {
     }
 
     @Test
-    void isValidUrl_invalidInput_exceptionThrown() {
-        assertThrows(InvalidArgumentException.class, () -> CommonUtils.isValidUrl(""));
-        assertThrows(InvalidArgumentException.class, () -> CommonUtils.isValidUrl(".."));
+    void isValidUrl_invalidInput_exceptionThrown() throws InvalidArgumentException {
+        assertFalse(CommonUtils.isValidUrl(""));
+        assertFalse(CommonUtils.isValidUrl(".."));
     }
 
     @Test

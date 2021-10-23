@@ -98,8 +98,7 @@ public class CommonUtils {
             new URL(url).toURI();
             return true;
         } catch (Exception e) {
-            throw new InvalidArgumentException(
-                    String.format(Messages.ERROR_MESSAGE_INVALID_LINK, url));
+            return false;
         }
     }
 
