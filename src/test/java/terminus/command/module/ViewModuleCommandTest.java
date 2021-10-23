@@ -2,6 +2,7 @@ package terminus.command.module;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,11 +16,10 @@ import terminus.ui.Ui;
 
 public class ViewModuleCommandTest {
 
+    private static final String tempModule = "test";
     private ModuleCommandParser commandParser;
     private ModuleManager moduleManager;
     private Ui ui;
-
-    private static final String tempModule = "test";
 
     @BeforeEach
     void setUp() {
@@ -30,7 +30,8 @@ public class ViewModuleCommandTest {
     }
 
     @Test
-    void execute_viewModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_viewModule_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
         Command cmd = commandParser.parseCommand("view");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());

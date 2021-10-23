@@ -3,6 +3,7 @@ package terminus.command.content.question;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,19 +13,16 @@ import terminus.content.Question;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
-import terminus.parser.NoteCommandParser;
 import terminus.parser.QuestionCommandParser;
 import terminus.ui.Ui;
 
 public class AddQuestionCommandTest {
 
+    private final String tempModule = "test";
+    Class<Question> type = Question.class;
     private QuestionCommandParser commandParser;
     private ModuleManager moduleManager;
     private Ui ui;
-
-    private final String tempModule = "test";
-
-    Class<Question> type = Question.class;
 
     @BeforeEach
     void setUp() {
@@ -36,7 +34,7 @@ public class AddQuestionCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test1\"");
         CommandResult addResult = addCommand.execute(ui, moduleManager);
         assertTrue(addResult.isOk());

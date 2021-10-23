@@ -13,7 +13,7 @@ public class DifficultyModifierTest {
         assertEquals(0.2, DifficultyModifier.tweakEasyQuestionDifficulty(0));
         assertEquals(0.2, DifficultyModifier.tweakEasyQuestionDifficulty(Double.MIN_VALUE));
     }
-    
+
     @Test
     void tweakHardQuestionDifficulty_higherThanMaxValue_returnMaxValue() {
         assertEquals(0.9, DifficultyModifier.tweakHardQuestionDifficulty(1));
@@ -21,6 +21,6 @@ public class DifficultyModifierTest {
         assertEquals(0.9, DifficultyModifier.tweakHardQuestionDifficulty(100000));
         assertEquals(0.9, DifficultyModifier.tweakHardQuestionDifficulty(Double.MAX_VALUE));
     }
-    
-    
+
+
 }

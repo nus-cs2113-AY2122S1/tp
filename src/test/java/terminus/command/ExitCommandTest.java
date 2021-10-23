@@ -2,6 +2,7 @@ package terminus.command;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,7 @@ public class ExitCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_success() throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
         Command exitCommand = commandParser.parseCommand(CommonFormat.COMMAND_EXIT);
         CommandResult mainResult = exitCommand.execute(ui, moduleManager);
         assertTrue(mainResult.isOk() && mainResult.isExit());
@@ -40,7 +41,8 @@ public class ExitCommandTest {
         assertTrue(noteResult.isOk() && noteResult.isExit());
 
         Command scheduleExitCommand = commandParser
-            .parseCommand("go " + tempModule + " " + CommonFormat.COMMAND_SCHEDULE + " " + CommonFormat.COMMAND_EXIT);
+                .parseCommand(
+                        "go " + tempModule + " " + CommonFormat.COMMAND_SCHEDULE + " " + CommonFormat.COMMAND_EXIT);
         CommandResult scheduleExitResult = scheduleExitCommand.execute(ui, moduleManager);
         assertTrue(scheduleExitResult.isOk() && scheduleExitResult.isExit());
 

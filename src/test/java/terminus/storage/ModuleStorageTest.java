@@ -17,7 +17,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.TestFilePath;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Note;
@@ -34,6 +33,22 @@ public class ModuleStorageTest {
 
     private String tempModule = "test";
 
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
+
+    /**
+     * Asserts whether the text in the two given files are the same. Ignores any differences in line endings. Taken
+     * from: https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/util/TestUtil.java#L128
+     */
+    public static void assertTextFilesEqual(Path path1, Path path2) throws IOException {
+        List<String> list1 = Files.readAllLines(path1);
+        List<String> list2 = Files.readAllLines(path2);
+        assertEquals(String.join("\n", list1), String.join("\n", list2));
+    }
+
     @BeforeEach
     void setUp() throws IOException {
         this.moduleStorage = ModuleStorage.getInstance();
@@ -49,12 +64,6 @@ public class ModuleStorageTest {
     @AfterEach
     void reset_filepath() {
         this.moduleStorage.init(SAVE_FILE);
-    }
-
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
     }
 
     @Test
@@ -168,17 +177,5 @@ public class ModuleStorageTest {
         this.moduleManager = this.moduleStorage.loadFile();
         assertEquals(4,
                 this.moduleManager.getModule(tempModule).getContentManager(Note.class).getTotalContents());
-    }
-
-
-    /**
-     * Asserts whether the text in the two given files are the same.
-     * Ignores any differences in line endings.
-     * Taken from: https://github.com/se-edu/addressbook-level2/blob/master/test/java/seedu/addressbook/util/TestUtil.java#L128
-     */
-    public static void assertTextFilesEqual(Path path1, Path path2) throws IOException {
-        List<String> list1 = Files.readAllLines(path1);
-        List<String> list2 = Files.readAllLines(path2);
-        assertEquals(String.join("\n", list1), String.join("\n", list2));
     }
 }

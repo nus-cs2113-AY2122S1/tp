@@ -29,7 +29,6 @@ import terminus.module.ModuleManager;
  */
 public class ModuleStorage {
 
-    public static final String PDF_FORMAT = ".pdf";
     private Path filePath;
     private final Gson gson;
 
@@ -299,24 +298,24 @@ public class ModuleStorage {
     }
 
     /**
-     * Exports all notes of a module to a PDF file
+     * Exports all notes of a module to a PDF file.
      *
      * @param module The Name of the module to export
      * @param notes  The list of notes to export
      * @throws IOException       When the file is inaccessible (e.g. file is locked by OS).
      * @throws DocumentException When unable to write to a pdf file
      */
-    public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException, DocumentException {
+    public boolean exportModuleNotes(String module, ArrayList<Note> notes) throws IOException, DocumentException {
         Document tempDocument = new Document();
-        Path modDirPath = Paths.get(filePath.getParent().toString(), module + PDF_FORMAT);
+        Path modDirPath = Paths.get(filePath.getParent().toString(), module + CommonFormat.PDF_FORMAT);
         if (Files.notExists(modDirPath.getParent())) {
             TerminusLogger.info("Directory does not exists: " + modDirPath.getParent());
-            return;
+            return false;
         }
         PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
+        Font header = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
+        Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, BaseColor.BLACK);
 
-        Font header = FontFactory.getFont(FontFactory.COURIER_BOLD, 24, BaseColor.BLACK);
-        Font text = FontFactory.getFont(FontFactory.COURIER, 11, BaseColor.BLACK);
         tempDocument.open();
         notes.forEach(note -> {
             Paragraph title = new Paragraph(note.getName(), header);
@@ -329,7 +328,7 @@ public class ModuleStorage {
             }
         });
         tempDocument.close();
-        ;
+        return true;
     }
 
     /**

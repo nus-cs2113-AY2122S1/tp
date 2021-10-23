@@ -3,6 +3,7 @@ package terminus.command.content.link;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,13 +20,11 @@ import terminus.ui.Ui;
 
 public class AddLinkCommandTest {
 
+    Class<Link> type = Link.class;
     private LinkCommandParser linkCommandParser;
     private ModuleManager moduleManager;
     private Ui ui;
-
     private String tempModule = "test";
-
-    Class<Link> type = Link.class;
 
     @BeforeEach
     void setUp() {
@@ -47,15 +46,18 @@ public class AddLinkCommandTest {
     }
 
     @Test
-    void execute_addLinkCommand_success() throws InvalidCommandException, InvalidArgumentException, IOException {
-        Command addLinkCommand = linkCommandParser.parseCommand("add \"test\" \"Monday\" \"00:00\" \"https://zoom.us/test\"");
+    void execute_addLinkCommand_success()
+            throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
+        Command addLinkCommand = linkCommandParser.parseCommand(
+                "add \"test\" \"Monday\" \"00:00\" \"https://zoom.us/test\"");
         CommandResult addResult = addLinkCommand.execute(ui, moduleManager);
         assertTrue(addResult.isOk());
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
         assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("test"));
         assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("Monday"));
         assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("00:00"));
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("https://zoom.us/test"));
+        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1)
+                .contains("https://zoom.us/test"));
 
         for (int i = 0; i < 5; i++) {
             addLinkCommand = linkCommandParser.parseCommand(

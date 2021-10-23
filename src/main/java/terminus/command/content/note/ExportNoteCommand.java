@@ -7,6 +7,7 @@ import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
+import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
@@ -50,12 +51,19 @@ public class ExportNoteCommand extends Command {
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
-        ContentManager<Note> noteManager = moduleManager.getModule(getModuleName()).getContentManager(Note.class);
+        TerminusLogger.info("Executing Export Note Command");
         assert getModuleName() != null;
+        ContentManager<Note> noteManager = moduleManager.getModule(getModuleName()).getContentManager(Note.class);
+
         ArrayList<Note> notes = noteManager.getContents();
         ModuleStorage storage = ModuleStorage.getInstance();
-        storage.exportModuleNotes(getModuleName(), notes);
-        ui.printSection("Exported notes! Check the data folder");
+        if (storage.exportModuleNotes(getModuleName(), notes)) {
+            TerminusLogger.info("Exported Notes Successfully");
+            ui.printSection(Messages.SUCCESSFUL_EXPORT);
+        } else {
+            TerminusLogger.warning("Failed to export notes");
+            throw new DocumentException(Messages.FAIL_TO_EXPORT);
+        }
         return new CommandResult(true);
     }
 }

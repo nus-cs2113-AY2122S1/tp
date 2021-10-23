@@ -53,4 +53,8 @@ public class CommonFormat {
 
 
     public static final String COMMAND_EXPORT = "export";
+    public static final String PDF_FORMAT = ".pdf";
+    public static final String FONT_NAME = "Arial";
+    public static final int FONT_HEADER_SIZE = 14;
+    public static final int FONT_SIZE = 11;
 }

@@ -2,6 +2,7 @@ package terminus.command.content.link;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class BackLinkCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
         Command backCommand = linkCommandParser.parseCommand("back");
         CommandResult backResult = backCommand.execute(ui, moduleManager);
         assertTrue(backResult.isOk());

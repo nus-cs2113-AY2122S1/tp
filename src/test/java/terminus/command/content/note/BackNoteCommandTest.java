@@ -2,6 +2,7 @@ package terminus.command.content.note;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ public class BackNoteCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
         Command backCommand = commandParser.parseCommand("back");
         CommandResult backResult = backCommand.execute(ui, moduleManager);
         assertTrue(backResult.isOk());
