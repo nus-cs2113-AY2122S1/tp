@@ -100,7 +100,7 @@ public class AddLinkCommand extends Command {
         Link newLink = new Link(description, day, startTime, duration, link);
         ConflictManager scheduleConflict = new ConflictManager(moduleManager, newLink);
 
-        if (scheduleConflict.getConflictingSchedule() != null) {
+        if (!CommonUtils.isStringNullOrEmpty(scheduleConflict.getConflictingSchedule())) {
             String conflicts = scheduleConflict.getConflictingSchedule();
             ui.printSection(Messages.MESSAGE_CONFLICTING_SCHEDULE);
             ui.printSection(conflicts);
