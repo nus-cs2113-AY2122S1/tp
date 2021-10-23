@@ -3,15 +3,12 @@ package medbot;
 import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
-import medbot.list.PersonalAppointmentList;
 import medbot.list.SchedulerAppointmentList;
 
 public class Scheduler {
     private static final String ERROR_ADD_INCOMPLETE_APPOINTMENT = "Incomplete appointment.";
     private static final String ERROR_PATIENT_APPOINTMENT_CLASH = "Patient unavailable, appointment %d at that time.";
     private static final String ERROR_STAFF_APPOINTMENT_CLASH = "Staff unavailable, appointment %d at that time.";
-
-    private static final String ERROR_APPOINTMENT_NOT_FOUND = "Appointment with id %d not found";
 
     private static final String ERROR_ADD_APPOINTMENT_ERROR = "Add appointment error.";
     private static final String ERROR_EDIT_APPOINTMENT_ERROR = "Edit appointment error.";
@@ -53,7 +50,7 @@ public class Scheduler {
     }
 
     public void deleteAppointment(int appointmentId) throws MedBotException {
-        Appointment deletedAppointment = schedulerAppointmentList.deleteAppointmentById(appointmentId);
+        Appointment deletedAppointment = schedulerAppointmentList.deleteAppointment(appointmentId);
         int patientId = deletedAppointment.getPatientId();
         int medicalStaffId = deletedAppointment.getMedicalStaffId();
         int dateTimeCode = deletedAppointment.getDateTimeCode();
@@ -66,13 +63,11 @@ public class Scheduler {
     }
 
     public Appointment editAppointment(int appointmentId, Appointment newAppointment) throws MedBotException {
-        if (!schedulerAppointmentList.doesAppointmentExistById(appointmentId)) {
-            throw new MedBotException(String.format(ERROR_APPOINTMENT_NOT_FOUND, appointmentId));
-        }
         Appointment oldAppointment = schedulerAppointmentList.getAppointment(appointmentId);
 
         newAppointment = Appointment.mergeAppointmentData(oldAppointment, newAppointment);
         newAppointment.setAppointmentId(appointmentId);
+
         int newPatientId = newAppointment.getPatientId();
         int newStaffId = newAppointment.getMedicalStaffId();
         int newDateTimeCode = newAppointment.getDateTimeCode();
