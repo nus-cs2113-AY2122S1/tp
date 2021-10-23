@@ -70,7 +70,7 @@ public class Trip {
         return this.distances;
     }
 
-    public void setDistances (List<Double> distances) {
+    public void setDistances(List<Double> distances) {
         this.distances = distances;
     }
 
