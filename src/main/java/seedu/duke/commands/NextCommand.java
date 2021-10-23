@@ -3,7 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.parser.Parser;
 import seedu.duke.Ui;
 import seedu.duke.items.Event;
-import seedu.duke.items.EventCatalog;
+import seedu.duke.items.mainlists.EventCatalog;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
 
