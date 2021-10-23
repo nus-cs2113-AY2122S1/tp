@@ -8,15 +8,30 @@ import seedu.duke.ui.Ui;
 import java.util.ArrayList;
 
 public class University {
+    protected int index;
     protected String name;
     public ArrayList<ModuleMapping> list;
 
-    public University(String name) {
+//    public University(String name, UniversityList universityMasterList) {
+//        index = getMasterListIndex(universityMasterList);
+//        this.name = name;
+//        this.list = new ArrayList<>();
+//    }
+
+    public University(String name, ArrayList<ModuleMapping> list, UniversityList universityMasterList) {
         this.name = name;
-        this.list = new ArrayList<>();
+        this.list = list;
+        index = getMasterListIndex(universityMasterList);
     }
 
-    public University(String name, ArrayList<ModuleMapping> list) {
+//    public University(String name, int index) {
+//        this.index = index;
+//        this.name = name;
+//        this.list = new ArrayList<>();
+//    }
+
+    public University(String name, ArrayList<ModuleMapping> list, int index) {
+        this.index = index;
         this.name = name;
         this.list = list;
     }
@@ -79,6 +94,10 @@ public class University {
 
     public String getName() {
         return name;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public int getMasterListIndex(UniversityList universityMasterList) {

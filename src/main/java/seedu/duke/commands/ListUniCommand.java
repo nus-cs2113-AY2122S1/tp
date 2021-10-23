@@ -29,7 +29,7 @@ public class ListUniCommand extends Command {
         System.out.println("Here are the universities and module mappings in the list:");
         for (int i = 0; i < universityList.getSize(); i++) {
             assert universityList.get(i).getName() != null;
-            Ui.printUniversity(universityList.get(i), universityList);
+            Ui.printUniversity(universityList.get(i));
             universityList.get(i).listAllMappings();
         }
     }
@@ -38,7 +38,7 @@ public class ListUniCommand extends Command {
         System.out.println("Here are the universities and module mappings in the list:");
         for (int i = 0; i < universityList.getSize(); i++) {
             assert universityList.get(i).getName() != null;
-            Ui.printUniversity(universityList.get(i), universityList);
+            Ui.printUniversity(universityList.get(i));
         }
     }
 }
