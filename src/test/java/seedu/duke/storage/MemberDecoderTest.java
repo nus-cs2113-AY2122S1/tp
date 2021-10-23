@@ -3,7 +3,7 @@ package seedu.duke.storage;
 import org.junit.jupiter.api.Test;
 import seedu.duke.items.characteristics.Member;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MemberDecoderTest {
 

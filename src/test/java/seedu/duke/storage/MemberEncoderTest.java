@@ -6,7 +6,7 @@ import seedu.duke.items.mainlists.MemberRoster;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MemberEncoderTest {
 
