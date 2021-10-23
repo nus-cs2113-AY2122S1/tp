@@ -212,7 +212,7 @@ Deletes an existing item from a trip.
 #### Usage Example:
 ```
 ____________________________________________________________
-$ delete-day myTrip /day 0 /item 0
+$ delete-item myTrip /day 0 /item 0
 ____________________________________________________________
 	You have just deleted item 0 of myTrip day 0.
 ____________________________________________________________
@@ -232,16 +232,49 @@ Edits an existing trip from the trip list.
 <br/>
 
 ### 2.10. Edit an item: `edit-item`
+Edits and updates existing item from a trip and updates it to a new corresponding item.
+
+#### Format: `edit-item ITEM_INDEX TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME`
+
+#### Usage Example:
+```
+____________________________________________________________
+$ edit-item 1 trip1 /day 1 /time 7am /name wake up from bed
+____________________________________________________________
+	You have just edited item 1 of trip1 to wake up from bed at 7am
+____________________________________________________________
+```
 
 <br/>
 
 ### 2.11. Searching for an item: `search-item`
+Searches for an item keyword from a trip and returns the resulting matching items.
 
-<br/>
+#### Format: `search-item TRIP_NAME /name ITEM_NAME`
+
+#### Usage Example:
+```
+____________________________________________________________
+$ search-item trip1 /name sleep at home
+____________________________________________________________
+	You have just search item keyword sleep at home in trip called trip1
+____________________________________________________________
+```
 
 ### 2.12. Shortest: `shortest`
+Returns the shortest distance from thr source to destination country.
 
-<br/>
+#### Format: `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
+
+#### Usage Example:
+```
+____________________________________________________________
+$ shortest /from SKR /to JPN
+____________________________________________________________
+	The distance from SKR to JPN is 10.0.
+____________________________________________________________
+```
+
 
 ### 2.13 Saving your trips
 Existing trips are saved automatically whenever you exit the program.
