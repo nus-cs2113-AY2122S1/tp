@@ -11,6 +11,7 @@ If you can type fast, TAA can help keep track of your modules and students faste
   * [Deleting student information: `delete_student`](#deleting-student-information-delete_student)
   * [Listing all students in a module: `list_students`](#listing-all-students-in-a-module-list_students)
   * [Finding students in a module given a keyword: `find_student`](#finding-students-in-a-module-given-a-keyword-find_student)
+  * [Setting attendance for a particular lesson for a student: `set_attendance`](#setting-attendance-for-a-particular-lesson-for-a-student-set_attendance)
   * [Listing all assessments in a module: `list_assessments`](#listing-all-assessments-in-a-module-list_assessments)
   * [Adding an assessment to a module: `add_assessment`](#adding-an-assessment-to-a-module-add_assessment)
   * [Editing an assessment in a module: `edit_assessment`](#editing-an-assessment-in-a-module-edit_assessment)
@@ -272,7 +273,7 @@ Format: `exit`
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: {your answer here}
+**A**: Simply transfer the `data` folder to your new computer and ensure that it is in the same folder as the jar file.
 
 ## Command Summary
 
