@@ -14,11 +14,16 @@ public class DeleteExpiredIngredientCommand extends Command {
             COMMAND_WORD + ": Deletes all expired ingredient from the ingredient repository.\n"
                     + "Example: " + COMMAND_WORD;
 
-    private static final String MESSAGE_DELETED_ALL_EXPIRED = "All expired ingredients have been deleted!";
+    public static final String MESSAGE_DELETED_ALL_EXPIRED = "All expired ingredients have been deleted!";
+    public static final String MESSAGE_NO_EXPIRED_INGREDIENTS = "You do not have expired ingredients!";
 
     @Override
     public String execute(IngredientRepository ingredients, RecipeList recipes) {
-        ingredients.deleteExpiredIngredients();
-        return MESSAGE_DELETED_ALL_EXPIRED;
+        Boolean haveExpired = ingredients.deleteExpiredIngredients();
+        if (haveExpired) {
+            return MESSAGE_DELETED_ALL_EXPIRED;
+        } else {
+            return MESSAGE_NO_EXPIRED_INGREDIENTS;
+        }
     }
 }

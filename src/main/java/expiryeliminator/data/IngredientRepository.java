@@ -206,8 +206,10 @@ public class IngredientRepository {
     /**
      * Deletes all ingredients that have expired.
      *
+     * @return a boolean that represents if there are expired ingredients within the repository
      */
-    public void deleteExpiredIngredients() {
+    public Boolean deleteExpiredIngredients() {
+        boolean haveExpired = false;
         LocalDate currentDate = LocalDate.now();
 
         for (IngredientStorage ingredientStorage : ingredients.values()) {
@@ -215,12 +217,14 @@ public class IngredientRepository {
             for (LocalDate expiryDate : ingredientStorage.getIngredientBatches().keySet()) {
                 if (expiryDate.isBefore(currentDate)) {
                     expiryDatesToRemove.add(expiryDate);
+                    haveExpired = true;
                 }
             }
             for (LocalDate expiryDate : expiryDatesToRemove) {
                 ingredientStorage.remove(expiryDate);
             }
         }
+        return haveExpired;
     }
 
     /**
