@@ -43,7 +43,7 @@ public class Ui {
 
         System.out.println(DIVIDER);
     }
-
+  
     public static String getHelpMessage() {
 
         return "Here's a list of commands and what they do.\n"
