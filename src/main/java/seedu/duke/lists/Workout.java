@@ -25,7 +25,7 @@ public class Workout {
     /**
      * Default Constructor.
      *
-     * @param workoutName is the name that the user gives to the workout routine
+     * @param workoutName  is the name that the user gives to the workout routine
      * @param deadlineDate Workout deadline in the form of yyyy-mm-dd
      */
     public Workout(String workoutName, LocalDate deadlineDate) {
@@ -35,6 +35,16 @@ public class Workout {
         this.workoutName = workoutName;
         this.deadlineDate = deadlineDate;
         deadline = deadlineDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+    }
+
+    //TODO add javadoc
+    public Workout(String workoutName, ArrayList<Exercise> exercises) {
+        assert !workoutName.isEmpty();
+        assert !exercises.isEmpty();
+        this.workoutName = workoutName;
+        this.exercises = exercises;
+        this.deadlineDate = LocalDate.now();
+        this.deadline = deadlineDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     /**

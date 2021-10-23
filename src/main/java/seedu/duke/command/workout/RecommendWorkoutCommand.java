@@ -4,6 +4,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.exercises.Exercise;
+import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 
@@ -51,8 +52,17 @@ public class RecommendWorkoutCommand extends Command {
      * @return all the information to be displayed to the user
      */
     @Override
-    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         LOGGER.info("Showing the recommended " + workoutLevel + " Workouts");
+        Map<String, ArrayList<?>> recommendedWorkouts = getRecommendedWorkouts(workoutLevel);
+        for (Map.Entry<String, ArrayList<?>> m : recommendedWorkouts.entrySet()) {
+            assert !m.getValue().isEmpty();
+            assert m.getValue().get(0) instanceof Exercise;
+            Workout recommendedWorkout = new Workout(m.getKey(), (ArrayList<Exercise>) m.getValue());
+            workouts.addWorkout(recommendedWorkout);
+            String jsonString = storage.convertToJson(workouts);
+            storage.saveData(jsonString);
+        }
         return new CommandResult(getRecommendedWorkouts(workoutLevel), true);
     }
 
