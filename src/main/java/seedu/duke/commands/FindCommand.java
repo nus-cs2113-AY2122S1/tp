@@ -1,7 +1,6 @@
 package seedu.duke.commands;
 
 import seedu.duke.search.FindBudget;
-import seedu.duke.ui.TextUi;
 
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
