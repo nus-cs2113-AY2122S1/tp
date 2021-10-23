@@ -1,6 +1,25 @@
 package seedu.duke.parser;
 
 import seedu.duke.commands.*;
+import seedu.duke.commands.AddBudgetCommand;
+import seedu.duke.commands.AddCommand;
+import seedu.duke.commands.AddExpenditureCommand;
+import seedu.duke.commands.AddLoanCommand;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.DeleteAllExpenditureCommand;
+import seedu.duke.commands.DeleteBudgetCommand;
+import seedu.duke.commands.DeleteCommand;
+import seedu.duke.commands.DeleteMultipleExpenditureCommand;
+import seedu.duke.commands.DeleteSingleExpenditureCommand;
+import seedu.duke.commands.ExitCommand;
+import seedu.duke.commands.HelpCommand;
+import seedu.duke.commands.InvalidCommand;
+import seedu.duke.commands.ListRecordsCommand;
+import seedu.duke.commands.YearCommand;
+import seedu.duke.commands.FindCommand;
+import seedu.duke.commands.EditCommand;
+import seedu.duke.commands.EditExpenditureCommand;
+import seedu.duke.commands.EditBudgetCommand;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -13,7 +32,7 @@ import static seedu.duke.common.Messages.MESSAGE_INVALID_DELETE_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH_OF_BUDGET;
-import static seedu.duke.common.Messages.MESSAGE_INVALID_EDIT_COMMAND;;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_EDIT_COMMAND;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
