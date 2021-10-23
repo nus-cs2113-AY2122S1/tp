@@ -23,6 +23,7 @@ import expiryeliminator.commands.ListRecipeCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ViewRecipeCommand;
 import expiryeliminator.commands.ShoppingListCommand;
+import expiryeliminator.commands.UpdateUnitsCommand;
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
 import expiryeliminator.parser.argparser.QuantityParser;
@@ -111,6 +112,8 @@ public class Parser {
                 return prepareViewRecipe(args);
             case ShoppingListCommand.COMMAND_WORD:
                 return prepareShoppingList(args);
+            case UpdateUnitsCommand.COMMAND_WORD:
+                return prepareUpdateUnits(args);
             case ByeCommand.COMMAND_WORD:
                 return new ByeCommand();
             case HelpCommand.COMMAND_WORD:
@@ -276,4 +279,22 @@ public class Parser {
         final ArrayList<String> recipe = new RecipeParser().parse(argParser.getArgList(PREFIX_MULTIPLE_RECIPE));
         return new ShoppingListCommand(recipe);
     }
+
+    private static Command prepareUpdateUnits(String args) throws InvalidArgFormatException {
+        final ArgParser argParser = new ArgParser(PREFIX_INGREDIENT, PREFIX_OPTIONAL_UNIT);
+
+        try {
+            argParser.parse(args);
+        } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIngredientCommand.MESSAGE_USAGE));
+        }
+        final String unitString = argParser.getSingleArg(PREFIX_OPTIONAL_UNIT);
+        final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
+
+        return new UpdateUnitsCommand(ingredient, unitString);
+
+    }
+
+
 }

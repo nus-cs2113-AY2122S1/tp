@@ -13,7 +13,12 @@ import expiryeliminator.data.exception.NotFoundException;
  * Represents the ingredient repository and contains methods to add and remove ingredients.
  */
 public class IngredientRepository {
+
     private final TreeMap<String, IngredientStorage> ingredients = new TreeMap<>();
+
+    public TreeMap<String, IngredientStorage> getIngredients() {
+        return ingredients;
+    }
 
     /**
      * Adds an ingredient to the repository without any associated unit or quantity.

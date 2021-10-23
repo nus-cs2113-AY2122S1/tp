@@ -6,11 +6,10 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-import expiryeliminator.data.IngredientRepository;
-import expiryeliminator.data.Recipe;
-import expiryeliminator.data.RecipeList;
+import expiryeliminator.data.*;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
+import expiryeliminator.data.exception.NotFoundException;
 
 public class TestUtil {
 
@@ -148,5 +147,27 @@ public class TestUtil {
 
     public static IngredientRepository generateEmptyIngredientRepository() {
         return new IngredientRepository();
+    }
+
+    public static String getUpdatedUnitsForIngredientRepo(IngredientRepository ingredientRepository) {
+        try {
+            IngredientStorage ingredientStorage = ingredientRepository.find("Salt");
+            return ingredientStorage.getIngredient().getUnit();
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getUpdatedUnitsForRecipeList(RecipeList recipes) {
+        try {
+            Recipe chickenSoupRecipe = recipes.findRecipe("Chicken Soup");
+            IngredientQuantity ingredientAndQuantity = chickenSoupRecipe.getIngredientQuantities().get("Salt");
+            String newUnit = ingredientAndQuantity.getIngredient().getUnit();
+            return newUnit;
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
