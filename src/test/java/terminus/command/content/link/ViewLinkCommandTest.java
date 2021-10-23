@@ -41,7 +41,7 @@ public class ViewLinkCommandTest {
             throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Saturday\" \"00:00\" \"1\" \"https://zoom.us/test\"");
             CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
@@ -57,7 +57,7 @@ public class ViewLinkCommandTest {
             DocumentException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Saturday\" \"00:00\" \"3\" \"https://zoom.us/test\"");
             CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
@@ -77,7 +77,7 @@ public class ViewLinkCommandTest {
             DocumentException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Saturday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
             CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }

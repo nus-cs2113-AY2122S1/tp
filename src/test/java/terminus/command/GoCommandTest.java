@@ -85,7 +85,7 @@ public class GoCommandTest {
         assertTrue(cmdResult.isOk());
         assertTrue(cmdResult.getAdditionalData() instanceof LinkCommandParser);
         cmd = commandParser.parseCommand("go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" "
-                + "\"https://zoom.us\"");
+                + "\"2\" \"https://zoom.us\"");
         cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(Link.class).getTotalContents());

@@ -7,7 +7,7 @@ CommandResult ..> "0..1" CommandParser: contains >
 CommandParser -> "2..*" Command: has >
 
 !startsub COMMAND
-abstract class Command {
+abstract class "{abstract}\nCommand" as Command {
   # arguments: String
   - moduleName: String
   + {abstract} getFormat(): String
