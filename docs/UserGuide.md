@@ -10,7 +10,11 @@ If you can type fast, TAA can help keep track of your modules and students faste
   * [Editing student information: `edit_student`](#editing-student-information-edit_student)
   * [Deleting student information: `delete_student`](#deleting-student-information-delete_student)
   * [Listing all students in a module: `list_students`](#listing-all-students-in-a-module-list_students)
-  * [Find students in a module given a keyword: `find_student`](#find-students-in-a-module-given-a-keyword-find_student)
+  * [Finding students in a module given a keyword: `find_student`](#finding-students-in-a-module-given-a-keyword-find_student)
+  * [Listing all assessments in a module: `list_assessments`](#listing-all-assessments-in-a-module-list_assessments)
+  * [Adding an assessment to a module: `add_assessment`](#adding-an-assessment-to-a-module-add_assessment)
+  * [Editing an assessment in a module: `edit_assessment`](#editing-an-assessment-in-a-module-edit_assessment)
+  * [Deleting an assessment from a module: `delete_assessment`](#deleting-an-assessment-from-a-module-delete_assessment)
   * [Listing marks for an assessment: `list_marks`](#listing-marks-for-an-assessment-list_marks)
   * [Setting marks for a student's assessment: `set_marks`](#setting-marks-for-a-students-assessment-set_marks) 
   * [Editing marks for a student's assessment: `edit_mark`](#editing-marks-for-a-students-assessment-edit_mark)
@@ -95,6 +99,61 @@ Format: `delete_student c/<MODULE_CODE> s/<STUDENT_INDEX>`
 
 Examples:
 * `delete_student c/cs2113t s/1`
+
+<br>
+
+### Listing all assessments in a module: `list_assessments`
+List all assessments in a module.
+
+Format: `list_assessments c/<MODULE_CODE>`
+* MODULE_CODE refers to the code of the module (e.g. CS2113T).
+
+Examples:
+* `list_assessments c/CS2113T`
+* `list_assessments c/CS2101`
+
+### Adding an assessment to a module: `add_assessment`
+Adds an assessment to a module.
+
+Format: `add_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> m/<MAXIMUM_MARKS> w/<WEIGHTAGE>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
+* `MAXIMUM_MARKS` refers to the maximum marks of the assessment (e.g. 100).
+* `WEIGHTAGE` refers to the weightage of the assessment (e.g. 10%).
+
+Examples:
+* `add_assessment c/CS2101 n/OP1 m/20 w/10`
+* `add_assessment c/CS2101 n/OP2 m/25 w/15`
+
+<br>
+
+### Editing an assessment in a module: `edit_assessment`
+Edits an assessment of a module.
+
+Format: `add_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
+* At least one of the optional fields must be provided.
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
+* `NEW_ASSESSMENT_NAME` refers to the new name of the assessment (e.g. Finals, Assignment 2, etc.).
+* `NEW_MAXIMUM_MARKS` refers to the new maximum marks of the assessment (e.g. 50).
+* `NEW_WEIGHTAGE` refers to the new weightage of the assessment (e.g. 20%).
+
+Examples:
+* `edit_assessment c/CS2101 n/OP1 m/20 w/10`
+* `edit_assessment c/CS2101 n/OP2 nn/UGDG`
+
+<br>
+
+### Deleting an assessment from a module: `delete_assessment`
+Deletes an assessment of a module.
+
+Format: `delete_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
+
+Examples:
+* `delete_assessment c/CS2101 n/OP1`
+* `delete_assessment c/CS2101 n/OP2`
 
 <br>
 
@@ -229,6 +288,7 @@ delete_assessment | `delete_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME>` <br 
 delete_mark | `delete_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>` <br /> e.g. `delete_mark c/CS2113T s/1 a/Midterms`
 edit_mark | `edit_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>` <br /> e.g. `edit_mark c/CS2113T s/1 a/Midterms m/80.6`
 edit_student | `edit_student c/<MODULE_CODE> s/<STUDENT_INDEX> i/<NEW_ID> n/<NEW_NAME>` <br /> e.g. `edit_student c/CS2113T s/1 i/12345 n/jon geh`
+edit_assessment | `add_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]` <br /> e.g. `edit_assessment c/CS2101 n/OP1 m/20 w/10`
 list_modules | `list_modules`
 list_students | `list_students c/<MODULE_CODE>` <br /> e.g. `list_students c/CS2113T`
 list_attendance | `list_attendance c/<MODULE_CODE> s/<STUDENT_INDEX>` <br /> e.g. `list_attendance c/CS2113T s/1`
