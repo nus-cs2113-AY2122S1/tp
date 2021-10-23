@@ -33,6 +33,7 @@ such as its employees, dishes and ingredients in storage via a **Command Line In
     * [Showing total account of finance records: `show-finance`](#showing-total-account-of-finance-records-show-finance)
     * [Listing all finance records: `list-finance`](#listing-all-finance-records-list-finance)
   * [Exiting the program: `bye`](#exiting-the-program-bye)
+* [FAQ](#faq)
 * [Command Summary](#command-summary)
 
 ## Quick start
