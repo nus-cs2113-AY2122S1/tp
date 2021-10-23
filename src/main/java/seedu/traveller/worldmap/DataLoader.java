@@ -39,7 +39,7 @@ public class DataLoader {
             double distance;
             try {
                 distance = Double.parseDouble(rawDistances[k]);
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 throw new IllegalFlightFileException();
             }
             if (distance < 0) {
@@ -54,7 +54,7 @@ public class DataLoader {
         }
     }
 
-    public GraphList readData() throws WorldMapException{
+    public GraphList readData() throws WorldMapException {
         logger.setLevel(Level.INFO);
         logger.log(Level.INFO, "Reading data from " + filePath);
         File data = new File(filePath);

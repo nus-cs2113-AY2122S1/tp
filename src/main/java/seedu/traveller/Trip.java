@@ -82,7 +82,8 @@ public class Trip {
         String saveDataForDays = "";
         if (getDaySize() > 0) {
             saveDataForDays = "add-day " + getTripName() + " " + getDaySize() + "\n";
-        } return saveDataForDays;
+        }
+        return saveDataForDays;
     }
 
     public String getSaveItem() {
@@ -90,8 +91,9 @@ public class Trip {
         for (int i = 0; i < getDaySize(); i++) {
             Day current = daysList.getDay(i);
             if (current.getItemsListSize() > 0) {
-                for (int j = 0; j < current.getItemsListSize() ; j++)
-                saveDataForItems += "add-item " + getTripName() + " /day " + i + current.itemsList.getItemInfo(j);
+                for (int j = 0; j < current.getItemsListSize(); j++) {
+                    saveDataForItems += "add-item " + getTripName() + " /day " + i + current.itemsList.getItemInfo(j);
+                }
             }
         }
         return saveDataForItems;
