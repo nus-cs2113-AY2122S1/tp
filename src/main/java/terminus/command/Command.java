@@ -49,7 +49,7 @@ public abstract class Command {
      * @throws DocumentException        when unable to write to a pdf file
      */
     public abstract CommandResult execute(Ui ui, ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException;
+            throws InvalidCommandException, InvalidArgumentException, IOException;
 
     /**
      * Returns the module name.

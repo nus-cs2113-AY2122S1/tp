@@ -34,7 +34,7 @@ public class ScheduleCommandTest {
 
     @Test
     void execute_linkAdvance_success()
-            throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command mainCommand = commandParser.parseCommand("go " + tempModule + " schedule");
         CommandResult changeResult = mainCommand.execute(ui, moduleManager);
         assertTrue(changeResult.isOk());

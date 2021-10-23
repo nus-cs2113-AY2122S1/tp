@@ -47,7 +47,7 @@ public class AddLinkCommandTest {
 
     @Test
     void execute_addLinkCommand_success()
-            throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         Command addLinkCommand = linkCommandParser.parseCommand(
                 "add \"test\" \"Monday\" \"00:00\" \"https://zoom.us/test\"");
         CommandResult addResult = addLinkCommand.execute(ui, moduleManager);

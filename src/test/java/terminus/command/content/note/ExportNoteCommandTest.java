@@ -1,17 +1,18 @@
 package terminus.command.content.note;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.itextpdf.text.DocumentException;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.TestFilePath;
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.common.CommonFormat;
 import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
@@ -20,7 +21,7 @@ import terminus.parser.NoteCommandParser;
 import terminus.storage.ModuleStorage;
 import terminus.ui.Ui;
 
-public class DeleteNoteCommandTest {
+public class ExportNoteCommandTest {
 
     Class<Note> type = Note.class;
     private NoteCommandParser commandParser;
@@ -57,21 +58,11 @@ public class DeleteNoteCommandTest {
 
         assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
 
-        Command deleteCommand = commandParser.parseCommand("delete 1");
-        CommandResult deleteResult = deleteCommand.execute(ui, moduleManager);
-        assertTrue(deleteResult.isOk());
-        assertEquals(4, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
-        for (int i = 2; i < 4; i++) {
-            deleteCommand = commandParser.parseCommand("delete " + i);
-            deleteResult = deleteCommand.execute(ui, moduleManager);
-            assertTrue(deleteResult.isOk());
-        }
-        assertEquals(2, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
-    }
-
-    @Test
-    void execute_throwsException() throws InvalidCommandException, InvalidArgumentException {
-        Command deleteCommand = commandParser.parseCommand("delete 100");
-        assertThrows(InvalidArgumentException.class, () -> deleteCommand.execute(ui, moduleManager));
+        Command exportCommand = commandParser.parseCommand("export");
+        CommandResult exportResult = exportCommand.execute(ui, moduleManager);
+        assertTrue(exportResult.isOk());
+        File pdf = new File(Paths.get(TestFilePath.RESOURCE_FOLDER.toString(), tempModule + CommonFormat.PDF_FORMAT)
+                .toString());
+        assertTrue(pdf.exists());
     }
 }

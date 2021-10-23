@@ -50,7 +50,7 @@ public class ExportNoteCommand extends Command {
      */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         TerminusLogger.info("Executing Export Note Command");
         assert getModuleName() != null;
         ContentManager<Note> noteManager = moduleManager.getModule(getModuleName()).getContentManager(Note.class);
@@ -62,7 +62,7 @@ public class ExportNoteCommand extends Command {
             ui.printSection(Messages.SUCCESSFUL_EXPORT);
         } else {
             TerminusLogger.warning("Failed to export notes");
-            throw new DocumentException(Messages.FAIL_TO_EXPORT);
+            throw new IOException(Messages.FAIL_TO_EXPORT);
         }
         return new CommandResult(true);
     }

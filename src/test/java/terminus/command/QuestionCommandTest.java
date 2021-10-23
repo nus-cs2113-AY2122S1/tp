@@ -34,7 +34,7 @@ public class QuestionCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
+    void execute_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command mainCommand = commandParser.parseCommand("go " + tempModule + " question");
         CommandResult changeResult = mainCommand.execute(ui, moduleManager);
         assertTrue(changeResult.isOk());

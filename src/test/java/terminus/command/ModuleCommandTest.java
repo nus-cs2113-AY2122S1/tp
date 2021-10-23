@@ -44,7 +44,7 @@ public class ModuleCommandTest {
 
     @Test
     void execute_module_success()
-            throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("module");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());

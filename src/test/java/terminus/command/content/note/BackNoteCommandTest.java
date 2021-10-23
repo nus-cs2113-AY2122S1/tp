@@ -33,7 +33,7 @@ public class BackNoteCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command backCommand = commandParser.parseCommand("back");
         CommandResult backResult = backCommand.execute(ui, moduleManager);
         assertTrue(backResult.isOk());

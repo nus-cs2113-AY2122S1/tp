@@ -123,9 +123,6 @@ public class Terminus {
             } catch (IOException e) {
                 TerminusLogger.warning("File saving has failed.");
                 handleIoException(e);
-            } catch (DocumentException e) {
-                TerminusLogger.warning("Failed to export file to PDF.");
-                ui.printSection(e.getMessage());
             }
         }
     }

@@ -43,7 +43,7 @@ public class AddModuleCommandTest {
 
     @Test
     void execute_addModule_success()
-            throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("add \"test\"");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());

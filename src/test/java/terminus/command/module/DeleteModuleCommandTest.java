@@ -46,7 +46,7 @@ public class DeleteModuleCommandTest {
 
     @Test
     void execute_deleteModule_success()
-            throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("delete 1");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());

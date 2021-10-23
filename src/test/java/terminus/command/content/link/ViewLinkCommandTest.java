@@ -38,7 +38,7 @@ public class ViewLinkCommandTest {
 
     @Test
     void execute_viewAll_success()
-            throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");

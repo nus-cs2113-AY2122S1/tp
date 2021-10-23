@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.gson.JsonSyntaxException;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import terminus.common.CommonFormat;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Note;
@@ -63,6 +66,9 @@ public class ModuleStorageTest {
 
     @AfterEach
     void reset_filepath() {
+        File pdf = new File(Paths.get(RESOURCE_FOLDER.toString(), tempModule + CommonFormat.PDF_FORMAT)
+                .toString());
+        pdf.delete();
         this.moduleStorage.init(SAVE_FILE);
     }
 
@@ -178,4 +184,35 @@ public class ModuleStorageTest {
         assertEquals(4,
                 this.moduleManager.getModule(tempModule).getContentManager(Note.class).getTotalContents());
     }
+
+    @Test
+    void exportModuleNotes_success() throws IOException {
+        ContentManager<Note> noteManager = this.moduleManager.getModule(tempModule).getContentManager(Note.class);
+        Note note1 = new Note("a", "test");
+        Note note2 = new Note("b", "test");
+        Note note3 = new Note("c", "test");
+        noteManager.add(note1);
+        noteManager.add(note2);
+        noteManager.add(note3);
+        this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents());
+        File pdf = new File(Paths.get(RESOURCE_FOLDER.toString(), tempModule + CommonFormat.PDF_FORMAT)
+                .toString());
+        assertTrue(pdf.exists());
+        StringBuilder content = new StringBuilder();
+        try {
+            PdfReader pdfReader = new PdfReader(pdf.getAbsolutePath());
+            int pages = pdfReader.getNumberOfPages();
+            for (int i = 1; i <= pages; i++) {
+                content.append(PdfTextExtractor.getTextFromPage(pdfReader, i));
+            }
+            assertTrue(content.toString().contains("a"));
+            assertTrue(content.toString().contains("b"));
+            assertTrue(content.toString().contains("c"));
+            assertTrue(content.toString().contains("test"));
+            pdfReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

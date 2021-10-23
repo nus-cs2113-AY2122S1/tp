@@ -34,7 +34,7 @@ public class BackLinkCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command backCommand = linkCommandParser.parseCommand("back");
         CommandResult backResult = backCommand.execute(ui, moduleManager);
         assertTrue(backResult.isOk());

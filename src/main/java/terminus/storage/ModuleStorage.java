@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
+import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
@@ -305,26 +306,30 @@ public class ModuleStorage {
      * @throws IOException       When the file is inaccessible (e.g. file is locked by OS).
      * @throws DocumentException When unable to write to a pdf file
      */
-    public boolean exportModuleNotes(String module, ArrayList<Note> notes) throws IOException, DocumentException {
+    public boolean exportModuleNotes(String module, ArrayList<Note> notes) throws IOException {
         Document tempDocument = new Document();
         Path modDirPath = Paths.get(filePath.getParent().toString(), module + CommonFormat.PDF_FORMAT);
         if (Files.notExists(modDirPath.getParent())) {
             TerminusLogger.info("Directory does not exists: " + modDirPath.getParent());
             return false;
         }
-        PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
-        Font header = FontFactory
-                .getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
-        Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, BaseColor.BLACK);
+        try {
+            PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
+            Font header = FontFactory
+                    .getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
+            Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, BaseColor.BLACK);
 
-        tempDocument.open();
-        for (Note note : notes) {
-            Paragraph title = new Paragraph(note.getName(), header);
-            Paragraph content = new Paragraph(note.getData(), text);
-            tempDocument.add(title);
-            tempDocument.add(content);
+            tempDocument.open();
+            for (Note note : notes) {
+                Paragraph title = new Paragraph(note.getName(), header);
+                Paragraph content = new Paragraph(note.getData(), text);
+                tempDocument.add(title);
+                tempDocument.add(content);
+            }
+            tempDocument.close();
+        } catch (DocumentException e) {
+            throw new IOException(Messages.FAIL_TO_EXPORT);
         }
-        tempDocument.close();
         return true;
     }
 

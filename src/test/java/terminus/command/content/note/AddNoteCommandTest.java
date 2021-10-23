@@ -49,7 +49,7 @@ public class AddNoteCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test1\"");
         CommandResult addResult = addCommand.execute(ui, moduleManager);
         assertTrue(addResult.isOk());
@@ -71,7 +71,7 @@ public class AddNoteCommandTest {
 
     @Test
     void execute_duplicateNoteName_exceptionThrown() throws InvalidArgumentException, InvalidCommandException,
-            IOException, DocumentException {
+            IOException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test\"");
         CommandResult addResult = addCommand.execute(ui, moduleManager);
         for (int i = 1; i < 5; i++) {

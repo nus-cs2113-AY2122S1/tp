@@ -34,7 +34,7 @@ public class AddQuestionCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
+    void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test1\"");
         CommandResult addResult = addCommand.execute(ui, moduleManager);
         assertTrue(addResult.isOk());

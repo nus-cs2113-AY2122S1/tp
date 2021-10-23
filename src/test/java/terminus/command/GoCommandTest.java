@@ -49,7 +49,7 @@ public class GoCommandTest {
     }
 
     @Test
-    void execute_go_success() throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
+    void execute_go_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("go " + tempModule);
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());
@@ -64,7 +64,7 @@ public class GoCommandTest {
 
     @Test
     void execute_goAdvance_success()
-            throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("go " + tempModule + " note");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());

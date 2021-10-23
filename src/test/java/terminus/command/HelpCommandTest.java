@@ -41,7 +41,7 @@ public class HelpCommandTest {
 
     @Test
     void execute_helpCommand_success()
-            throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         CommandResult result = mainCommandParser.parseCommand("help").execute(ui, moduleManager);
         assertTrue(result.isOk());
         result = noteCommandParser.parseCommand("help").execute(ui, moduleManager);

@@ -31,7 +31,7 @@ public abstract class WorkspaceCommand extends Command {
      */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException, DocumentException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         assert commandMap != null;
         TerminusLogger.info("Executing Workspace Command");
         if (isNotNullOrBlank()) {

@@ -30,7 +30,7 @@ public class ExitCommandTest {
     }
 
     @Test
-    void execute_success() throws InvalidArgumentException, InvalidCommandException, IOException, DocumentException {
+    void execute_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command exitCommand = commandParser.parseCommand(CommonFormat.COMMAND_EXIT);
         CommandResult mainResult = exitCommand.execute(ui, moduleManager);
         assertTrue(mainResult.isOk() && mainResult.isExit());
