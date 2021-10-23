@@ -3,6 +3,7 @@ package seedu.duke;
 import seedu.duke.items.Event;
 import seedu.duke.items.Item;
 import seedu.duke.items.Task;
+import seedu.duke.parser.Parser;
 
 import java.util.ArrayList;
 import java.util.Scanner;

@@ -1,6 +1,6 @@
 package seedu.duke.storage;
 
-import seedu.duke.Parser;
+import seedu.duke.parser.Parser;
 import seedu.duke.items.Event;
 
 import java.time.LocalDateTime;

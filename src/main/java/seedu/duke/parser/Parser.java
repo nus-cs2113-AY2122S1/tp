@@ -1,6 +1,7 @@
-package seedu.duke;
+package seedu.duke.parser;
 
 
+import seedu.duke.Duke;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.ByeCommand;
 
