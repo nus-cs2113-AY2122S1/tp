@@ -20,6 +20,15 @@ public class Ui {
         out.println(" " + codeString + Constants.MODULE_NAME_SEPARATOR + mod.getModuleName());
     }
 
+    public static void printMappingForList(ModuleMapping mm, int index) {
+        out.print(index + " |");
+        String mappingDetails
+                = " " + mm.localModule.getModuleCode()
+                + Constants.MODULE_MAPPING_SEPARATOR + mm.mappedModule.getModuleCode()
+                + Constants.MODULE_NAME_SEPARATOR + mm.mappedModule.getModuleName();
+        System.out.println(mappingDetails);
+    }
+
     public static void printUniversity(University uni) {
         printIndex(uni.getIndex(), false);
         out.println(Constants.MODULE_MAPPING_SEPARATOR + uni.getName());

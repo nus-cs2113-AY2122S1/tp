@@ -58,7 +58,7 @@ public class University {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
             System.out.print(Constants.INDENTATION);
-            Ui.printModuleMapping(currentMapping, i + 1);
+            Ui.printMappingForList(currentMapping, i+1);
         }
     }
 
