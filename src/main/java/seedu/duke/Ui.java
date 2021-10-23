@@ -260,7 +260,8 @@ public class Ui {
             + LINE_DIVIDER;
 
     public static final String CONFIRM_CLEAR_ALL = LINE_DIVIDER + System.lineSeparator()
-            + "Are you sure you want to remove all Dishes and Ingredients? Type y to confirm or n to disregard" + System.lineSeparator()
+            + "Are you sure you want to remove all Dishes and Ingredients? "
+            + "Type y to confirm or n to disregard" + System.lineSeparator()
             + LINE_DIVIDER;
 
     public static final String CONFIRM_DEL_INGR = LINE_DIVIDER + System.lineSeparator()

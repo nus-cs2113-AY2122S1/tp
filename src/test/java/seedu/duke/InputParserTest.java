@@ -39,7 +39,7 @@ class InputParserTest {
         String input1 = "add ingr chicken";
         //2 param command input
         //Split by slash
-        String input2 = "add constituent chicken rice / rice";
+        String input2 = "link chicken rice / rice";
         //Split by space
         String input3 = "find dish chicken rice";
         ArrayList<String> inputs = new ArrayList<>();
@@ -75,7 +75,7 @@ class InputParserTest {
             assertEquals(outputs.get(i), parameters);
         }
 
-        DishList.clearList();
-        IngredientList.clearList();
+        DishList.dishList.clear();
+        IngredientList.ingredientList.clear();
     }
 }
