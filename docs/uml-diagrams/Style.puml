@@ -1,0 +1,7 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+!define LOGIC_COLOR #F8CECC
+
+
+@enduml

@@ -1,6 +1,7 @@
 # Developer Guide
 
 ## UNIMods
+![Unimods](./resources/UnimodsLogo.png)
 
 **UNIMods** is a light-weight Command Line Interface (CLI) Application that provides a means for students to plan for
 their academic journey in NUS. This guide details the implementation design and architecture that Unimods was built
@@ -59,16 +60,58 @@ upon.
 
 ### Architecture
 
-The Architecture Diagram given above explains the high-level design of the App. Given below is a quick overview of main
-components and how they interact with each other.
+The Architecture Diagram given below explains the high-level design of the App. 
+Given below is a quick overview of main components and how they interact with each other.
+![Unimods](./resources/architecture.png)
+
+#### Main components of the architecture
+**Unimods**
+
+>  **Unimods** one class called `Duke`. It is responsible for
+>  - At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+
+<br>
+
+**Commons**
+> **Commons** represents a collection of classes used by multiple other components.
+The rest of the App consists of five components:
+> - **UI**: The UI of the App.
+> - **Logic**: The command executor.
+> - **Timetable**: Holds the timetable data in memory
+> - **Storage**: Reads data from, and writes data to, the hard disk.
+> - **Online**: Fetches data from the NUSMods API online for up to date information
+
+<br>
 
 ### UI component
 
+<br>
+
 ### Logic component
+The **Logic** component consists of the `CommandParser` , as well as all the valid commands : 
+`AddCommand`,  `ClearCommand`, `DeleteCommand`, `ExitCommand`, `HelpCommand`, `SearchCommand`, 
+`ShowCommand`, `TimetableCommand` and the `UpdateCommand` classes.
+
+![LogicComponent](./uml-diagrams/LogicComponent.png)
+
+The **Logic** component. </br>
+Consists of the `CommandParser` and `FlagParser` classes.
+> Converts user input into a `Command` object using the `CommandParser` component.
+>
+> If the user inputs a search command with **flags**, convert **flags** into a `SearchFlags` object using the `FlagParser` component.
+>
+>Instantiates `Commands` through `CommandParser` which each have unique `execute()` methods that execute their function.
+
+
+<br>
 
 ### Online component
 
+<br>
+
 ### Timetable component
+
+<br>
 
 ### Storage component
 
