@@ -13,6 +13,7 @@ public class AddPackageCommand extends Command {
     @Override
     public void execute() {
         createClientPackage();
+        System.out.println(clientPackage.getClient());
         clientPackages.add(clientPackage);
         ui.showAddClientPackage(clientPackage);
     }
