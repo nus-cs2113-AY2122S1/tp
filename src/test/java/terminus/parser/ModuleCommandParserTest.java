@@ -106,6 +106,7 @@ public class ModuleCommandParserTest {
             +
             "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
             + "1111111111111 \"test\""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("update"));
     }
 
     @Test

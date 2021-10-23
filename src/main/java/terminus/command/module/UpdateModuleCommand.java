@@ -48,10 +48,6 @@ public class UpdateModuleCommand extends Command {
             TerminusLogger.warning(String.format("Failed to parse index : %s", arguments));
             throw new InvalidArgumentException(this.getFormat(), Messages.ERROR_MESSAGE_INVALID_NUMBER);
         }
-        if (index <= 0) {
-            TerminusLogger.warning(String.format("Invalid index : %d", index));
-            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_INVALID_NUMBER);
-        }
 
         newName = m.group(REGEX_GROUP_NEWNAME);
         if (!newName.matches(CommonFormat.SPACE_NEGATED_DELIMITER)) {
