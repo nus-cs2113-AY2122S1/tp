@@ -1,6 +1,5 @@
 package terminus.command;
 
-import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
@@ -46,7 +45,6 @@ public abstract class Command {
      * @throws InvalidCommandException  when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
      * @throws IOException              when the file to be saved is inaccessible (e.g. file is locked by OS).
-     * @throws DocumentException        when unable to write to a pdf file
      */
     public abstract CommandResult execute(Ui ui, ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException;

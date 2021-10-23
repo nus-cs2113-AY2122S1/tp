@@ -1,6 +1,5 @@
 package terminus.command;
 
-import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
@@ -27,7 +26,6 @@ public abstract class WorkspaceCommand extends Command {
      * @return The CommandResult containing success or failure of command and CommandParser Object.
      * @throws InvalidCommandException when the command could not be found.
      * @throws IOException             when the file to be saved is inaccessible (e.g. file is locked by OS).
-     * @throws DocumentException       When unable to write to a pdf file
      */
     @Override
     public CommandResult execute(Ui ui, ModuleManager moduleManager)

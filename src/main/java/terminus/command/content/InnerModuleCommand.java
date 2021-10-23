@@ -1,6 +1,5 @@
 package terminus.command.content;
 
-import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import terminus.command.CommandResult;
 import terminus.command.WorkspaceCommand;

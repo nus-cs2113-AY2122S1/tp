@@ -304,7 +304,7 @@ public class ModuleStorage {
      * @param module The Name of the module to export
      * @param notes  The list of notes to export
      * @throws IOException       When the file is inaccessible (e.g. file is locked by OS).
-     * @throws DocumentException When unable to write to a pdf file
+     * @return false if the parent does not exist else it will be true
      */
     public boolean exportModuleNotes(String module, ArrayList<Note> notes) throws IOException {
         Document tempDocument = new Document();

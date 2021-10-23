@@ -1,6 +1,5 @@
 package terminus.command.content.note;
 
-import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import java.util.ArrayList;
 import terminus.command.Command;
