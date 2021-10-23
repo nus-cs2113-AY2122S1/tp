@@ -17,7 +17,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.TestFilePath;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Note;
@@ -129,7 +128,7 @@ public class ModuleStorageTest {
 
     @Test
     void saveAllNotes_success() throws IOException {
-        ContentManager noteManager = this.moduleManager.getModule(tempModule).getContentManager(Note.class);
+        ContentManager<Note> noteManager = this.moduleManager.getModule(tempModule).getContentManager(Note.class);
         Note note1 = new Note("a", "test");
         Note note2 = new Note("b", "test");
         Note note3 = new Note("c", "test");

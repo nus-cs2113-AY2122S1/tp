@@ -11,13 +11,11 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.ModuleCommandParser;
-import terminus.ui.Ui;
 
 public class ViewModuleCommandTest {
 
     private ModuleCommandParser commandParser;
     private ModuleManager moduleManager;
-    private Ui ui;
 
     private static final String tempModule = "test";
 
@@ -26,13 +24,12 @@ public class ViewModuleCommandTest {
         this.moduleManager = new ModuleManager();
         this.commandParser = ModuleCommandParser.getInstance();
         moduleManager.setModule(tempModule);
-        this.ui = new Ui();
     }
 
     @Test
     void execute_viewModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("view");
-        CommandResult cmdResult = cmd.execute(ui, moduleManager);
+        CommandResult cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());
     }
 }

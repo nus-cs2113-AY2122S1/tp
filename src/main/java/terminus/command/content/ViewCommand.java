@@ -11,7 +11,6 @@ import terminus.content.ContentManager;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.ui.Ui;
 
 /**
  * ViewModuleCommand generic class which will manage the viewing of Content information specified by user command.
@@ -80,13 +79,12 @@ public class ViewCommand<T extends Content> extends Command {
     /**
      * Executes the view command. Prints the relevant response to the Ui.
      *
-     * @param ui            The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException {
+    public CommandResult execute(ModuleManager moduleManager) throws InvalidArgumentException {
         StringBuilder result = new StringBuilder();
         assert getModuleName() != null;
         NusModule module = moduleManager.getModule(getModuleName());
@@ -104,7 +102,6 @@ public class ViewCommand<T extends Content> extends Command {
         } else {
             result.append(contentManager.getContentData(itemNumber));
         }
-        ui.printSection(result.toString());
-        return new CommandResult(true, false);
+        return new CommandResult(result.toString());
     }
 }

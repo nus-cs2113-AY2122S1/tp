@@ -12,13 +12,11 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.ModuleWorkspaceCommandParser;
 import terminus.parser.NoteCommandParser;
-import terminus.ui.Ui;
 
 public class BackNoteCommandTest {
 
     private NoteCommandParser commandParser;
     private ModuleManager moduleManager;
-    private Ui ui;
 
     private String tempModule = "test";
 
@@ -28,13 +26,12 @@ public class BackNoteCommandTest {
         this.commandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
         moduleManager.setModule(tempModule);
-        this.ui = new Ui();
     }
 
     @Test
     void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command backCommand = commandParser.parseCommand("back");
-        CommandResult backResult = backCommand.execute(ui, moduleManager);
+        CommandResult backResult = backCommand.execute(moduleManager);
         assertTrue(backResult.isOk());
         assertTrue(backResult.getAdditionalData() instanceof ModuleWorkspaceCommandParser);
     }

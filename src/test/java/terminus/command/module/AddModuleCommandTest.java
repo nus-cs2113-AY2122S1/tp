@@ -16,13 +16,11 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.ModuleCommandParser;
 import terminus.storage.ModuleStorage;
-import terminus.ui.Ui;
 
 public class AddModuleCommandTest {
 
     private ModuleCommandParser commandParser;
     private ModuleManager moduleManager;
-    private Ui ui;
     private ModuleStorage moduleStorage;
 
     @BeforeEach
@@ -31,7 +29,6 @@ public class AddModuleCommandTest {
         this.moduleStorage.init(TestFilePath.SAVE_FILE);
         this.moduleManager = new ModuleManager();
         this.commandParser = ModuleCommandParser.getInstance();
-        this.ui = new Ui();
     }
 
     @AfterAll
@@ -43,19 +40,16 @@ public class AddModuleCommandTest {
     @Test
     void execute_addModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("add \"test\"");
-        CommandResult cmdResult = cmd.execute(ui, moduleManager);
+        CommandResult cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());
         assertNotNull(moduleManager.getModule("test"));
     }
 
     @Test
-    void execute_addModule_throwsException() throws InvalidArgumentException, InvalidCommandException {
-
+    void execute_addModule_throwsException() {
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"test\" \"test2\"").execute(ui,
-                    moduleManager));
+            () -> commandParser.parseCommand("add \"test\" \"test2\"").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add   ").execute(ui,
-                    moduleManager));
+            () -> commandParser.parseCommand("add   ").execute(moduleManager));
     }
 }

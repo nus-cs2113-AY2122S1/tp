@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
-import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;

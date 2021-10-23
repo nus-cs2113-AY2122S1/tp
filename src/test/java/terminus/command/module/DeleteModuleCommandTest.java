@@ -16,13 +16,11 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.ModuleCommandParser;
 import terminus.storage.ModuleStorage;
-import terminus.ui.Ui;
 
 public class DeleteModuleCommandTest {
 
     private ModuleCommandParser commandParser;
     private ModuleManager moduleManager;
-    private Ui ui;
     private ModuleStorage moduleStorage;
 
     private static final String tempModule = "test";
@@ -35,7 +33,6 @@ public class DeleteModuleCommandTest {
         this.moduleManager = new ModuleManager();
         this.commandParser = ModuleCommandParser.getInstance();
         moduleManager.setModule(tempModule);
-        this.ui = new Ui();
     }
 
     @AfterAll
@@ -47,22 +44,18 @@ public class DeleteModuleCommandTest {
     @Test
     void execute_deleteModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("delete 1");
-        CommandResult cmdResult = cmd.execute(ui, moduleManager);
+        CommandResult cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());
         assertNull(moduleManager.getModule(tempModule));
     }
 
     @Test
-    void execute_deleteModule_throwsException() throws InvalidArgumentException, InvalidCommandException {
-
+    void execute_deleteModule_throwsException() {
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("delete -1").execute(ui,
-                    moduleManager));
+            () -> commandParser.parseCommand("delete -1").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("delete").execute(ui,
-                    moduleManager));
+            () -> commandParser.parseCommand("delete").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("delete 100").execute(ui,
-                    moduleManager));
+            () -> commandParser.parseCommand("delete 100").execute(moduleManager));
     }
 }

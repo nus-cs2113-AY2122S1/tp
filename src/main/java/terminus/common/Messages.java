@@ -65,4 +65,5 @@ public class Messages {
         "How did you find the question? (Compare against past attempts if any)",
         "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
     public static final String MESSAGE_EMPTY_DAILY_SCHEDULE = "You have no schedule for today.";
+    public static final String HELP_MENU_MESSAGE = "\nHelp Menu\n---------\n";
 }

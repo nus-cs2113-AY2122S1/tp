@@ -8,7 +8,6 @@ import terminus.common.Messages;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
-import terminus.ui.Ui;
 
 public class ViewModuleCommand extends Command {
 
@@ -35,24 +34,23 @@ public class ViewModuleCommand extends Command {
     /**
      * Executes the command. Prints the required result to the Ui.
      *
-     * @param ui            The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException  when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager)
+    public CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException {
         String[] modules = moduleManager.getAllModules();
         String[] listOfModules = IntStream.range(0, modules.length)
                 .mapToObj(i -> String.format(Messages.MESSAGE_RESPONSE_MODULE_FORMAT, i + 1, modules[i]))
                 .toArray(String[]::new);
+        
         if (listOfModules.length == 0) {
-            ui.printSection(Messages.MESSAGE_RESPONSE_NO_MODULES);
+            return new CommandResult(Messages.MESSAGE_RESPONSE_NO_MODULES);
         } else {
-            ui.printSection(listOfModules);
+            return new CommandResult(listOfModules);
         }
-        return new CommandResult(true);
     }
 }

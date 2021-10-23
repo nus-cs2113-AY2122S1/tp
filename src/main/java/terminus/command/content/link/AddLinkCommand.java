@@ -16,7 +16,6 @@ import terminus.content.Link;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.ui.Ui;
 
 
 /**
@@ -83,20 +82,19 @@ public class AddLinkCommand extends Command {
      * Executes the add link command.
      * Prints the relevant response to the Ui.
      *
-     * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the list of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+    public CommandResult execute(ModuleManager moduleManager) {
         assert getModuleName() != null;
         NusModule module = moduleManager.getModule(getModuleName());
-        ContentManager contentManager = module.getContentManager(Link.class);
+        ContentManager<Link> contentManager = module.getContentManager(Link.class);
         assert contentManager != null;
 
         contentManager.add(new Link(description, day, startTime, link));
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
-        return new CommandResult(true, false);
+        return new 
+            CommandResult(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
     }
 
     /**

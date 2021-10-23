@@ -33,7 +33,6 @@ public class AddLinkCommandTest {
         moduleManager.setModule(tempModule);
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
-        this.ui = new Ui();
     }
 
     @Test
@@ -48,19 +47,22 @@ public class AddLinkCommandTest {
 
     @Test
     void execute_addLinkCommand_success() throws InvalidCommandException, InvalidArgumentException, IOException {
-        Command addLinkCommand = linkCommandParser.parseCommand("add \"test\" \"Monday\" \"00:00\" \"https://zoom.us/test\"");
-        CommandResult addResult = addLinkCommand.execute(ui, moduleManager);
+        Command addLinkCommand = linkCommandParser.parseCommand(
+            "add \"test\" \"Monday\" \"00:00\" \"https://zoom.us/test\""
+        );
+        CommandResult addResult = addLinkCommand.execute(moduleManager);
         assertTrue(addResult.isOk());
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("test"));
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("Monday"));
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("00:00"));
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("https://zoom.us/test"));
+        String link = moduleManager.getModule(tempModule).getContentManager(type).getContentData(1);
+        assertTrue(link.contains("test"));
+        assertTrue(link.contains("Monday"));
+        assertTrue(link.contains("00:00"));
+        assertTrue(link.contains("https://zoom.us/test"));
 
         for (int i = 0; i < 5; i++) {
             addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
-            addResult = addLinkCommand.execute(ui, moduleManager);
+            addResult = addLinkCommand.execute(moduleManager);
             assertTrue(addResult.isOk());
         }
         assertEquals(6, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());

@@ -7,7 +7,6 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.MainCommandParser;
 import terminus.parser.ModuleWorkspaceCommandParser;
-import terminus.ui.Ui;
 
 public class BackCommand extends Command {
 
@@ -24,13 +23,12 @@ public class BackCommand extends Command {
     /**
      * Returns a command result containing the CommandParser object.
      *
-     * @param ui            The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult contains a CommandParser
      * @throws InvalidCommandException Throws if the command is invalid
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidCommandException {
+    public CommandResult execute(ModuleManager moduleManager) throws InvalidCommandException {
         TerminusLogger.info("Executing Back Command");
         if (isModuleNameNullOrEmpty()) {
             MainCommandParser mainParser = MainCommandParser.getInstance();

@@ -9,7 +9,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.InnerModuleCommandParser;
-import terminus.ui.Ui;
 
 public abstract class InnerModuleCommand extends WorkspaceCommand {
 
@@ -21,11 +20,11 @@ public abstract class InnerModuleCommand extends WorkspaceCommand {
     }
 
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager)
+    public CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException {
         commandMap.setModuleName(getModuleName());
         try {
-            return super.execute(ui, moduleManager);
+            return super.execute(moduleManager);
         } catch (InvalidArgumentException e) {
             if (e.getFormat() == null) {
                 throw e;
@@ -33,9 +32,9 @@ public abstract class InnerModuleCommand extends WorkspaceCommand {
             TerminusLogger.warning("Failed to parse command.");
             TerminusLogger.warning(commandMap.getWorkspace() + " : " + e.getFormat());
             throw new InvalidArgumentException(
-                    String.format(Messages.INVALID_ARGUMENT_FORMAT_MESSAGE_EXCEPTION, commandMap.getWorkspace(true),
-                            e.getFormat()),
-                    e.getMessage()
+                    String.format(Messages.INVALID_ARGUMENT_FORMAT_MESSAGE_EXCEPTION, 
+                        commandMap.getWorkspace(true), e.getFormat()),
+                e.getMessage()
             );
         }
 
