@@ -25,6 +25,13 @@ class WorkoutListTest {
     }
 
     @Test
+    public void addDeadlineWorkout_newDeadlineWorkout_expectWorkoutNameWithDeadline() throws GetJackDException {
+        testWorkouts.addWorkout(new DeadlineWorkout("Test 1", LocalDate.parse("2021-12-25")));
+        assertEquals("Test 1 finish by: 25 Dec 2021", testWorkouts.getWorkout(1).toString());
+        testWorkouts.getAllWorkouts().clear();
+    }
+
+    @Test
     public void removeWorkout_indexOfWorkouts_expectSizeDecreasesByOne() throws GetJackDException {
         testWorkouts.addWorkout(new Workout("Test 1"));
         testWorkouts.addWorkout(new Workout("Test 2"));
