@@ -1,6 +1,5 @@
 package seedu.duke.logic.commands.module;
 
-import seedu.duke.Duke;
 import seedu.duke.DukeException;
 import seedu.duke.logic.commands.Command;
 import seedu.duke.model.lesson.LessonList;
@@ -12,19 +11,19 @@ import seedu.duke.ui.Ui;
 
 import java.io.IOException;
 
-public class AddModuleCommand extends Command {
-    private final String moduleCode;
+public class DeleteModuleCommand extends Command {
+    private final int moduleIndex;
 
-    public AddModuleCommand(String moduleCode) {
-        this.moduleCode = moduleCode;
+    public DeleteModuleCommand(int moduleIndex) {
+        this.moduleIndex = moduleIndex;
     }
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
             throws DukeException, IOException {
-        Module newModule = Duke.fullModuleList.findModule(moduleCode);
-        moduleList.addModule(newModule);
+        Module deletedModule = moduleList.getModule(moduleIndex);
+        moduleList.deleteModule(moduleIndex);
         storage.saveData(moduleList);
-        ui.printModuleAdded(newModule, moduleList.getSize());
+        ui.printModuleDeleted(deletedModule, moduleList.getSize());
     }
 }

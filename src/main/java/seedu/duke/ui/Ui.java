@@ -6,8 +6,10 @@ import seedu.duke.Duke;
 import seedu.duke.DukeException;
 import seedu.duke.model.lesson.Lesson;
 import seedu.duke.model.lesson.LessonList;
+import seedu.duke.model.module.FullModuleList;
 import seedu.duke.model.module.Module;
 import seedu.duke.model.module.ModuleList;
+import seedu.duke.model.module.exceptions.ModuleNotFoundException;
 import seedu.duke.model.task.Task;
 import seedu.duke.model.task.TaskList;
 
@@ -80,6 +82,25 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + message);
         System.out.println(LINE);
+    }
+
+    /**
+     * Displays a list of possible input commands and link to user guide.
+     */
+    public void printHelpMessage() {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Here is a list of possible commands:");
+        System.out.println(PADDING + "add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION}");
+        System.out.println(PADDING + "add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {LINK}");
+        System.out.println(PADDING + "add module [MODULE_CODE]");
+        System.out.println(PADDING + "list [task/lesson/module]");
+        System.out.println(PADDING + "done [INDEX]");
+        System.out.println(PADDING + "delete [task/lesson/module] [INDEX]");
+        System.out.println(PADDING + "find [task/lesson] [KEYWORD]");
+        System.out.println(PADDING + "moduleinfo [MODULE_CODE]");
+        System.out.println(PADDING + "exit");
+        System.out.println(PADDING + "More details: https://ay2122s1-cs2113t-w11-3.github.io/tp/UserGuide.html");
+        System.out.print(LINE);
     }
 
     // Task-related methods
@@ -295,6 +316,21 @@ public class Ui {
     }
 
     /**
+     * Displays a message to inform user that the specified module
+     * has been successfully deleted.
+     *
+     * @param module the Module type object that has been deleted
+     * @param size the number of remaining modules in the list
+     */
+    public void printModuleDeleted(Module module, int size) {
+        System.out.print(LINE);
+        System.out.println(PADDING + "Ok. The following module has been deleted:");
+        System.out.println(PADDING + "  " + module);
+        System.out.println(PADDING + "Now you have " + size + " module(s) in the list.");
+        System.out.println(LINE);
+    }
+
+    /**
      * Displays the list of modules with only the basic module information.
      *
      * @param moduleList the list of modules
@@ -317,6 +353,17 @@ public class Ui {
         System.out.println(PADDING + "Here are the detailed information of your modules:");
         System.out.print(Duke.fullModuleList.getModulesFull(moduleList));
         System.out.print(LINE);
+    }
+
+    /**
+     * Displays the full module information of the specified module code.
+     *
+     * @param moduleCode the module code
+     * @throws ModuleNotFoundException when there is no module in FullModuleList with a matching module code
+     */
+    public void printModuleInfo(String moduleCode) throws ModuleNotFoundException {
+        Module module = Duke.fullModuleList.findModule(moduleCode);
+        System.out.print(module.getFullInfo());
     }
 
     // All-related methods

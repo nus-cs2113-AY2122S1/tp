@@ -11,7 +11,9 @@ public enum CommandType {
     LESSON,
     LIST,
     MODULE,
-    TASK;
+    TASK,
+    MODULEINFO,
+    HELP;
 
     /**
      * Determines the correct command type from the input parameter.
