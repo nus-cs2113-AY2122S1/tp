@@ -2,6 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.DishList;
 import seedu.duke.Ui;
+import seedu.duke.exceptions.FoodoramaException;
 import seedu.duke.logger.LoggerManager;
 
 import java.util.ArrayList;
@@ -16,14 +17,12 @@ public class ClearDishCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<String> parameters) {
+    public void execute(ArrayList<String> parameters) throws FoodoramaException {
         logger.log(Level.INFO, "Start of process");
-        Ui ui = new Ui();
 
         DishList.clearList();
         logger.log(Level.INFO, "Successfully cleared dishList");
 
-        ui.printDishListCleared();
         logger.log(Level.INFO, "End of process");
     }
 }

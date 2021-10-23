@@ -37,7 +37,7 @@ class ClearIngrCommandTest {
         clearIngrCommand.execute(inputParams);
 
         assertEquals(0, IngredientList.ingredientList.size());
-        DishList.clearList();
-        IngredientList.clearList();
+        DishList.dishList.clear();
+        IngredientList.ingredientList.clear();
     }
 }
