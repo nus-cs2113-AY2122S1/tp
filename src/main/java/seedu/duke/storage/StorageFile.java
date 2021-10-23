@@ -1,7 +1,9 @@
 package seedu.duke.storage;
 
 import seedu.duke.items.Event;
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.items.mainlists.EventCatalog;
+import seedu.duke.items.mainlists.MemberRoster;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,13 +20,14 @@ public class StorageFile {
     private static final String DEFAULT_FILE_PATH = "data/slamData.txt";
     private static final String DEFAULT_DIRECTORY = "data";
 
-    public void save(ArrayList<Event> eventsList) {
+    public void save(MemberRoster memberRoster, EventCatalog eventCatalog) {
 
         File saveFile = new File(DEFAULT_FILE_PATH);
         checkFileIsValid(saveFile);
-        List<String> encodedEventsList = EventEncoder.encodeEventsList(eventsList);
+        List<String> encodedMembersList = MemberEncoder.encodeMembersList(memberRoster);
+        List<String> encodedEventsList = EventEncoder.encodeEventsList(eventCatalog);
         try {
-            writeToFile(saveFile, encodedEventsList);
+            writeToFile(saveFile, encodedMembersList, encodedEventsList);
         } catch (IOException e) {
             System.out.println("Error writing to file at path: " + DEFAULT_FILE_PATH);
         }
@@ -42,10 +45,15 @@ public class StorageFile {
         }
     }
 
-    private void writeToFile(File saveFile, List<String> encodedEventsList)
+    private void writeToFile(File saveFile, List<String> encodedMembersList, List<String> encodedEventsList)
             throws IOException {
+        FileWriter membersWriter = new FileWriter(saveFile);
+        for (String member : encodedMembersList) {
+            membersWriter.write(member + "\n");
+        }
+        membersWriter.close();
 
-        FileWriter eventsWriter = new FileWriter(saveFile);
+        FileWriter eventsWriter = new FileWriter(saveFile, true);
         for (String item : encodedEventsList) {
             eventsWriter.write(item + "\n");
         }
