@@ -32,11 +32,9 @@ public class Messages {
     public static final String RETURN_SUCCESS = "  (+) Item has been returned:";
     public static final String WRONG_ITEM_MESSAGE = "  (!) Item is not on loan!";
     // Remove
-
     public static final String RM_SUCCESS = "  (+) Removed the following item:";
     // Add
     public static final String ADD_MESSAGE = "  (+) Added new item to catalogue:";
-
     public static final String INVALID_TITLE = "  (!) Please enter a valid title";
     public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate!";
     // Invalid Formats
@@ -46,6 +44,8 @@ public class Messages {
             + "  (!) Format: rm ID";
     public static final String RESERVE_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: reserve i/ID u/USER";
+    public static final String LOAN_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: loan i/ID u/USER d/DUEDATE";
     // Generic Errors
     public static final String INVALID_ID = "  (!) Invalid Item ID!";
 }

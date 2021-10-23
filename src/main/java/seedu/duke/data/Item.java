@@ -1,6 +1,9 @@
 package seedu.duke.data;
 
 import seedu.duke.Status;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * The Item class is a class representing a item in the library.
@@ -10,8 +13,19 @@ public class Item {
     private String id;
     private Status status;
     private String loanee;
+    private LocalDate dueDate;
 
+    // Date functions
+    public static final String dateFormat = "dd/MM/yyyy";
+    protected DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern(dateFormat);
+
+    // Literals
     protected String separator = " | ";
+    public static final String ARG_TITLE = "t/";
+    public static final String ARG_ID = "i/";
+    public static final String ARG_STATUS = "s/";
+    public static final String ARG_LOANEE = "u/";
+    public static final String ARG_DUEDATE = "d/";
 
     /**
      * Constructor for class item.
@@ -24,6 +38,7 @@ public class Item {
         this.id = id;
         this.status = status;
         this.loanee = null;
+        this.dueDate = null;
     }
 
     /**
@@ -75,19 +90,51 @@ public class Item {
     }
 
     /**
-     * Getter method that returns the loanee attribute
-     * @return loanee Username of a person
+     * Getter method that returns the loanee attribute.
+     * @return loanee Username of a person.
      */
     public String getLoanee() {
         return loanee;
     }
 
     /**
-     * Setter method that sets the loanee attribute
-     * @param loanee Username of a person
+     * Setter method that sets the loanee attribute.
+     * @param loanee Username of a person.
      */
     public void setLoanee(String loanee) {
         this.loanee = loanee;
+    }
+
+    /**
+     * Getter method that returns dueDate attribute.
+     * @return LocalDate date object representing due date.
+     */
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    /**
+     * Getter method that returns dueDate attribute as a string.
+     * @return String date representing due date.
+     */
+    public String getDueDateString() {
+        return dueDate.format(dtFormatter);
+    }
+
+    /**
+     * Setter method that sets the dueDate attribute.
+     * @param dueDate LocalDate object representing when item should be returned.
+     */
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    /**
+     * Setter method that sets the dueDate attribute.
+     * @param dueDate String representing when item should be returned.
+     */
+    public void setDueDate(String dueDate) throws DateTimeParseException {
+        this.dueDate = LocalDate.parse(dueDate, dtFormatter);
     }
 
     /**

@@ -36,6 +36,9 @@ public class LoanCommand extends Command {
      * @throws LibmgrException when user input is invalid
      */
     public void handleLoanCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
+        // Check validity of arguments
+        if (!args.contains("u/") | !args.contains("i/") )
+
         if (!args.contains(" ")) {
             throw new LibmgrException(INVALID_ID);
         }
