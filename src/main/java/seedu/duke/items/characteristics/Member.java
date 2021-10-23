@@ -9,6 +9,8 @@ public class Member {
 
     private String name;
     private ArrayList<Task> assignedTasks;
+    public static final String MEMBER_DATA_ARGS_DELIMITER = "\\s*\\|\\s*";
+
 
     public Member(String name) {
         this.name = name;
