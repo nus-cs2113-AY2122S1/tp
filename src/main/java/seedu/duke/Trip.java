@@ -65,16 +65,22 @@ public class Trip {
     }
 
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
+        int numberOfMatchingExpenses = 0;
         for (Expense e : listOfCurrentExpenses) {
             if (e.getPayer().getName().equals(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
+                numberOfMatchingExpenses++;
             }
+        }
+        if (numberOfMatchingExpenses == 0) {
+            Ui.printNoMatchingExpenseError();
         }
     }
 
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
+        int numberOfMatchingExpenses = 0;
         String descriptionToLowerCase;
         String attributeToLowerCase = expenseAttribute.toLowerCase();
         for (Expense e : listOfCurrentExpenses) {
@@ -82,19 +88,27 @@ public class Trip {
             if (descriptionToLowerCase.contains(attributeToLowerCase)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
+                numberOfMatchingExpenses++;
             }
+        }
+        if (numberOfMatchingExpenses == 0) {
+            Ui.printNoMatchingExpenseError();
         }
     }
 
     private static void findMatchingCategoryExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                      String expenseAttribute) {
+        int numberOfMatchingExpenses = 0;
         for (Expense e : listOfCurrentExpenses) {
             if (e.getCategory().equals(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
+                numberOfMatchingExpenses++;
             }
         }
-
+        if (numberOfMatchingExpenses == 0) {
+            Ui.printNoMatchingExpenseError();
+        }
     }
 
     public LocalDate getDateOfTrip() {

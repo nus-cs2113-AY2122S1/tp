@@ -127,6 +127,10 @@ public class Ui {
         System.out.println("There are no expenses in your trip, please add an expense using the keyword 'expense'.");
     }
 
+    public static void printNoMatchingExpenseError() {
+        System.out.println("No matching expenses found.");
+    }
+
     public static void printNoOpenTripError() {
         System.out.println("You have not opened any trip yet. Please open a trip to edit expenses within the trip.");
         printAllTrips();

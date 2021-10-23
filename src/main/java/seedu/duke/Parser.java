@@ -154,9 +154,8 @@ public class Parser {
     }
 
     private static void executeView(String inputParams) {
-        Trip currentTrip = Storage.getOpenTrip();
         if (inputParams == null) {
-            currentTrip.viewAllExpenses();
+            Storage.getOpenTrip().viewAllExpenses();
 
         } else {
             String[] paramString = inputParams.split(" ", 3);
