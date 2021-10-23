@@ -40,6 +40,11 @@ public class University {
         list.add(new ModuleMapping(localModule, mappedModule));
     }
 
+    public void addMapping(ModuleMapping moduleMapping) {
+        list.add(moduleMapping);
+    }
+
+
     public void removeMapping(Module localModule, Module mappedModule) {
         list.remove(new ModuleMapping(localModule, mappedModule));
     }
