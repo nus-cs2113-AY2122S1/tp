@@ -36,7 +36,7 @@ public class DeleteStockCommand extends Command {
         ArrayList<Medicine> medicines = Medicine.getInstance();
 
         String[] requiredParameters = {};
-        String[] optionalParameters = {CommandParameters.ID, CommandParameters.EXPIRY_DATE};
+        String[] optionalParameters = {CommandParameters.ID, CommandParameters.EXPIRING};
 
         StockValidator stockValidator = new StockValidator();
         boolean isInvalidParameter = stockValidator.containsInvalidParameters(ui, parameters, requiredParameters,
@@ -55,7 +55,7 @@ public class DeleteStockCommand extends Command {
         }
 
         boolean hasStockId = parameters.containsKey(CommandParameters.ID);
-        boolean hasExpiryDate = parameters.containsKey(CommandParameters.EXPIRY_DATE);
+        boolean hasExpiryDate = parameters.containsKey(CommandParameters.EXPIRING);
 
         // Both fields should not be provided for deletion of stock.
         if (hasStockId && hasExpiryDate) {
@@ -121,7 +121,7 @@ public class DeleteStockCommand extends Command {
      */
     private static void deleteStockByExpiry(Ui ui, LinkedHashMap<String, String> parameters,
                                             ArrayList<Medicine> medicines) {
-        String dateString = parameters.get(CommandParameters.EXPIRY_DATE);
+        String dateString = parameters.get(CommandParameters.EXPIRING);
         Date date = null;
         try {
             date = DateParser.stringToDate(dateString);
