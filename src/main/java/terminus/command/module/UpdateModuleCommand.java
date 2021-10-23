@@ -34,6 +34,9 @@ public class UpdateModuleCommand extends Command {
 
     @Override
     public void parseArguments(String arguments) throws InvalidArgumentException {
+        if (CommonUtils.isStringNullOrEmpty(arguments)) {
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MISSING_ARGUMENTS);
+        }
         Pattern p = Pattern.compile(CommonFormat.UPDATE_MODULE_REGEX_FORMAT);
         Matcher m = p.matcher(arguments);
         if (!m.matches()) {
@@ -63,12 +66,13 @@ public class UpdateModuleCommand extends Command {
         if (!CommonUtils.isValidIndex(index, listOfModule)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
         }
-        assert index > 0;
-        NusModule current = moduleManager.getModule(listOfModule[index - 1]);
-        moduleManager.removeModule(listOfModule[index - 1]);
         if (moduleManager.getModule(newName) != null) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_EXIST);
         }
+        assert index > 0;
+        NusModule current = moduleManager.getModule(listOfModule[index - 1]);
+        moduleManager.removeModule(listOfModule[index - 1]);
+
         moduleManager.setModule(newName, current);
         ui.printSection(String.format("Updated %s to %s successfully", listOfModule[index - 1], newName));
         return new CommandResult(true);

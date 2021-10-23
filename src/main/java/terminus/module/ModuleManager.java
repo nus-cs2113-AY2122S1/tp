@@ -30,9 +30,10 @@ public class ModuleManager {
     }
 
     /**
-     * Adds a new module to the moduleMap.
+     * Adds a module and also set the specific NusModule.
      *
      * @param moduleName The module name of the new module
+     * @param module The NusModule object to set
      */
     public void setModule(String moduleName, NusModule module) {
         moduleMap.put(moduleName, module);
