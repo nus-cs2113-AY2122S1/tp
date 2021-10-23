@@ -22,7 +22,7 @@ class AddDishCommandTest {
         testAddDishCommand.execute(inputParams);
 
         assertEquals("chicken rice", DishList.dishList.get(0).getDishName());
-        DishList.clearList();
-        IngredientList.clearList();
+        DishList.dishList.clear();
+        IngredientList.ingredientList.clear();
     }
 }

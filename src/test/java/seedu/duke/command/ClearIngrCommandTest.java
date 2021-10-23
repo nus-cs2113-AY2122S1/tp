@@ -33,8 +33,12 @@ class ClearIngrCommandTest {
 
         assertEquals(2, IngredientList.ingredientList.size());
 
+        InputStream originalInput = System.in;
+        InputStream fakeInput  = new ByteArrayInputStream("y".getBytes());
+        System.setIn(fakeInput);
         ClearIngrCommand clearIngrCommand = new ClearIngrCommand();
         clearIngrCommand.execute(inputParams);
+        System.setIn(originalInput);
 
         assertEquals(0, IngredientList.ingredientList.size());
         DishList.dishList.clear();

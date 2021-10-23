@@ -25,8 +25,8 @@ class InputParserTest {
             assertEquals(ui.getInvalidCommandMsg(), e.getMessage());
         }
 
-        DishList.clearList();
-        IngredientList.clearList();
+        DishList.dishList.clear();
+        IngredientList.ingredientList.clear();
     }
 
     @Test

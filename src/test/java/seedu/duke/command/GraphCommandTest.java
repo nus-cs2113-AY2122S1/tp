@@ -57,7 +57,7 @@ class GraphCommandTest {
             commandToTest.execute(inputs);
             assertTrue(newOutputStream.toString().trim().contains(dishToAdd.toGraph(max)));
             assertTrue(newOutputStream.toString().trim().contains(dishToAdd2.toGraph(max)));
-            DishList.clearList();
+            DishList.dishList.clear();
             commandToTest.execute(inputs);
         } catch (FoodoramaException e) {
             assertEquals("List is empty, nothing to show", e.getMessage());
@@ -80,7 +80,7 @@ class GraphCommandTest {
             commandToTest.execute(inputs);
             assertTrue(newOutputStream.toString().trim().contains(ingredientToAdd.toGraph(max)));
             assertTrue(newOutputStream.toString().trim().contains(ingredientToAdd2.toGraph(max)));
-            IngredientList.clearList();
+            IngredientList.ingredientList.clear();
             commandToTest.execute(inputs);
         } catch (FoodoramaException e) {
             assertEquals("List is empty, nothing to show", e.getMessage());

@@ -33,8 +33,8 @@ class AddDishWasteCommandTest {
             System.setIn(backupInputStream);
             assertEquals(2.33,DishList.dishList.get(0).getWastage());
             //Clear lists
-            DishList.clearList();
-            IngredientList.clearList();
+            DishList.dishList.clear();
+            IngredientList.ingredientList.clear();
             //Test case if dish not present
             commandToTest.execute(inputs);
         } catch (FoodoramaException e) {

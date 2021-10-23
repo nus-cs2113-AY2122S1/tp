@@ -27,8 +27,8 @@ class AddDishIngrCommandTest {
             commandToTest.execute(inputs);
             assertEquals(1,DishList.dishList.get(0).getParts().size());
             //Clear lists
-            DishList.clearList();
-            IngredientList.clearList();
+            DishList.dishList.clear();
+            IngredientList.ingredientList.clear();
             //Test case if dish not present
             commandToTest.execute(inputs);
         } catch (FoodoramaException e) {
