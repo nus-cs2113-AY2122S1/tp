@@ -125,16 +125,18 @@ public class Ui {
     }
 
     public static void printTask(Task task) {
-        System.out.println(task.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
-                + task.getDescription());
+        System.out.println("Title: " + task.getTitle() + System.lineSeparator()
+                + "Deadline: " + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
+                + "Description: " + task.getDescription());
     }
 
     public static void printEvent(Event event) {
-        System.out.println(event.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
-                + event.getDescription() + System.lineSeparator()
-                + event.getVenue() + System.lineSeparator()
-                + event.getBudget());
+        System.out.println("Title: " + event.getTitle() + System.lineSeparator()
+                + "Date: " + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
+                + "Description: " + event.getDescription() + System.lineSeparator()
+                + "Venue: " + event.getVenue() + System.lineSeparator()
+                + "Budget: $" + event.getBudget() + System.lineSeparator()
+                + "Tasks: ");
+        printList(event.getTaskList());
     }
 }

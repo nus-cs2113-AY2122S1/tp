@@ -1,9 +1,9 @@
 package seedu.duke.commands;
 
-import seedu.duke.parser.Parser;
+import seedu.duke.items.Event;
+import seedu.duke.items.Task;
 import seedu.duke.Duke;
 import seedu.duke.Ui;
-import seedu.duke.items.mainlists.EventCatalog;
 import seedu.duke.items.Item;
 
 import java.util.ArrayList;
@@ -12,16 +12,17 @@ public class ListCommand extends Command {
     public static ArrayList<Item> sortedList = new ArrayList<>();
 
     protected String listType;
-
+    protected String[] userCommand;
     public ListCommand(String[] command) {
-
+        this.userCommand = command;
         if (command.length == 1) {
             this.listType = "list";
-        } else if (command[1].equalsIgnoreCase("-e")) {
-            this.listType = "event";
-        } else if (command[1].equalsIgnoreCase("-t")) {
+        } else if (command[2].equalsIgnoreCase("-t")) {
             this.listType = "task";
-        } else {
+        }
+        else if (command[2].contains("t/")) {
+            this.listType = "member";
+        }else {
             this.listType = "others";
         }
     }
@@ -32,26 +33,22 @@ public class ListCommand extends Command {
 
         switch (listType) {
         case "list":
-            sortedList = Parser.makeMainList();
-            EventCatalog.bubbleSortItems(sortedList);
-            System.out.println("Here is your overall schedule:");
-            Ui.printList(sortedList);
-            break;
-        case "event":
-            sortedList = new ArrayList<>(Duke.eventCatalog);
-            EventCatalog.bubbleSortItems(sortedList);
-            System.out.println("Here are all the events in your list:");
-            Ui.printList(sortedList);
+            Ui.printEventCatalog();
             break;
         case "task":
-            sortedList = new ArrayList<>(Duke.taskList);
-            EventCatalog.bubbleSortItems(sortedList);
-            System.out.println("Here are all the tasks in your list:");
-            Ui.printList(sortedList);
+            Event event1 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
+            Ui.printList(event1.getTaskList());
+            break;
+        case "member":
+            Event event2 = Duke.eventCatalog.get(Integer.parseInt(userCommand[1]) - 1);
+            String[] taskCommand = userCommand[2].split("/", 1);
+            Integer taskNum = Integer.parseInt(taskCommand[2]);
+            Task task = event2.getFromTaskList(taskNum);
+            Ui.printList(event2.getTaskList());
             break;
         default:
             return new CommandResult("please specify type for list "
-                    + "[list, list -e, list -t ]");
+                    + "[list, list -t [EVENT_NUM]]");
         }
 
         return new CommandResult("--------END OF LIST-----------");
