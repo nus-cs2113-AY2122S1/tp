@@ -6,10 +6,16 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
+=======
+>>>>>>> b117e364596b11cbe2bea7c1b98cc0de70459ebf
 import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientQuantity;
+import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
@@ -268,5 +274,27 @@ public class TestUtil {
 
     public static IngredientRepository generateEmptyIngredientRepository() {
         return new IngredientRepository();
+    }
+
+    public static String getUpdatedUnitsForIngredientRepo(IngredientRepository ingredientRepository) {
+        try {
+            IngredientStorage ingredientStorage = ingredientRepository.find("Salt");
+            return ingredientStorage.getIngredient().getUnit();
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static String getUpdatedUnitsForRecipeList(RecipeList recipes) {
+        try {
+            Recipe chickenSoupRecipe = recipes.findRecipe("Chicken Soup");
+            IngredientQuantity ingredientAndQuantity = chickenSoupRecipe.getIngredientQuantities().get("Salt");
+            String newUnit = ingredientAndQuantity.getIngredient().getUnit();
+            return newUnit;
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -116,6 +116,16 @@ public class IngredientStorage {
         this.quantity -= quantity;
     }
 
+    /**
+     * Updates units if ingredient in storage.
+     *
+     * @param newUnit The new unit to change to.
+     */
+    public void updateUnits(String newUnit) {
+        ingredient.setUnit(newUnit);
+    }
+
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
