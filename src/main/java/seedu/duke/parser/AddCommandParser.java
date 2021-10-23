@@ -110,11 +110,21 @@ public class AddCommandParser {
                                    ModuleList moduleSelectedList) throws ParseException {
         // Separate arguments
         String[] argumentSubstrings = arguments.trim().split(" ", 2);
+        boolean validUni = false;
         if (argumentSubstrings.length < 2) {
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
         uniIndex = Integer.parseInt(argumentSubstrings[0].trim());
         mapIndex = Integer.parseInt(argumentSubstrings[1].trim());
+        for (University uni : universitySelectedList.getList()) {
+            if (uni.getIndex() == uniIndex) {
+                validUni = true;
+                break;
+            }
+        }
+        if (!validUni) {
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INVALIDUNI, 1);
+        }
     }
 
     private boolean isTextMatches(String arguments) {
