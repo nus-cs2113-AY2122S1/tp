@@ -8,15 +8,16 @@
   3. [Deleting a workout: `delete`](#3-deleting-a-workout-delete)
   4. [Adding an exercise to a workout: `add`](#4-adding-an-exercise-to-a-workout-add)
   5. [Mark an exercise done: `done`](#5-mark-an-exercise-done-done)
-  6. [Show all exercises from a workout: `display`](#6-show-all-exercises-from-a-workout-display)
-  7. [Removing an exercise from a workout: `remove`](#7-removing-an-exercise-from-a-workout-remove)
-  8. [Searching for workouts and exercises: `search`](#8-searching-for-workouts-and-exercises-search)
-  9. [Entering into a Workout: `enter`](#9-entering-into-a-workout-enter)
-  10. [Exiting from a workout: `back`](#10-exiting-from-a-workout-back)
-  11. [Recommend a workout: `recommend`](#11-recommend-a-workout-recommend)
-  12. [Exiting the application: `bye`](#12-exiting-the-application-bye)
-  13. [Saving data](#13-saving-data)
-  14. [Editable data file](#14-editable-data-file)
+  6. [Editing an exercise in a workout: `edit`](#6-editing-an-exercise-in-a-workout-edit)
+  7. [Show all exercises from a workout: `display`](#7-show-all-exercises-from-a-workout-display)
+  8. [Removing an exercise from a workout: `remove`](#8-removing-an-exercise-from-a-workout-remove)
+  9. [Searching for workouts and exercises: `search`](#9-searching-for-workouts-and-exercises-search)
+  10. [Entering into a Workout: `enter`](#10-entering-into-a-workout-enter)
+  11. [Exiting from a workout: `back`](#11-exiting-from-a-workout-back)
+  12. [Recommend a workout: `recommend`](#12-recommend-a-workout-recommend)
+  13. [Exiting the application: `bye`](#13-exiting-the-application-bye)
+  14. [Saving data](#14-saving-data)
+  15. [Editable data file](#15-editable-data-file)
 - [FAQ](#faq)
 - [Command Summary](#command-summary)
 
@@ -126,7 +127,7 @@ Usage examples:
 
 `add squats, 5 10, 1`  = squats, 5 sets of 10 reps, add to workout 1
 
-`add lunges, 4 8, 2` = lunges, 4 sets of 8 reps, add to workout 1
+`add lunges, 4 8, 1` = lunges, 4 sets of 8 reps, add to workout 1
 
 Expected outcome:
 
@@ -155,7 +156,25 @@ Completed: [X] lunges | 4 sets of 8 reps
 ________________________________________________________
 ```
 
-### 6. Show all exercises from a workout: `display`
+### 6. Editing an exercise in a workout: `edit`
+Edits an exercise in a specified workout
+
+Format: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]`
+
+Examples of usage:
+
+`edit 2, 1, kickbacks, 4 12 ` = edit exercise 2 from workout 1 to new exercise description of "kickbacks", new
+sets of "4" and new reps of "12"
+
+Expected outcome:
+```
+edit 2, 1, kickbacks, 4 12
+________________________________________________________
+The edited exercise: [X] kickbacks | 4 sets of 12 reps
+________________________________________________________
+```
+
+### 7. Show all exercises from a workout: `display`
 Shows you all the exercises in a specified workout
 
 Format: `display [WORKOUT_INDEX]`
@@ -171,44 +190,47 @@ display 1
 ________________________________________________________
 Exercises in leg day
 1. [ ] squats | 5 sets of 10 reps
-2. [X] lunges | 4 sets of 8 reps
+2. [X] kickbacks | 4 sets of 12 reps
 ________________________________________________________
 ```
 
-### 7. Removing an exercise from a workout: `remove`
+
+
+### 8. Removing an exercise from a workout: `remove`
 Removes an exercise from a specified workout
 
 Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]`
 
 Examples of usage:
 
-`remove 1, 2` = remove exercise 1 from workout 2
+`remove 1, 1` = remove exercise 1 from workout 1
 
 Expected outcome:
 
 ```
-remove 2, 1
+remove 1, 1
 ________________________________________________________
-Removed exercise: [X] lunges | 4 sets of 8 reps
+Removed exercise: [ ] squats | 5 sets of 10 reps
 ________________________________________________________
 ```
-### 8. Searching for workouts and exercises: `search`
+
+### 9. Searching for workouts and exercises: `search`
 Displays workouts or exercises that contain the specified keyword with the workout or exercise index the keyword.\n"
 
 Format: `search [KEYWORD]`
 
 Example of usage: 
 
-`search squats` = search for workout names and exercise names that contain "squats"
+`search kickbacks` = search for workout names and exercise names that contain "kickbacks"
 `search leg day` = search for workout names and exercise names that contain "leg day"
 
 Expected outcome:
 
 ```
-search squats
+search kickbacks
 ________________________________________________________
-Matching exercises in 1. leg day
-1. [ ] squats | 5 sets of 10 reps
+Matching exercises in 1) leg day
+1. [X] kickbacks | 4 sets of 12 reps
 ________________________________________________________
 search leg day
 ________________________________________________________
@@ -217,7 +239,7 @@ Matching workouts:
 ________________________________________________________
 ```
 
-### 9. Entering into a Workout: `enter`
+### 10. Entering into a Workout: `enter`
 Allows you to enter into a workout so that you can `add` ,`remove` , mark as `done` and `display` exercises
 in the context of the workout routine you have entered, saving you the trouble of entering the workout index everytime.
 
@@ -227,7 +249,7 @@ Example of usage:
 * `enter 1` = enter into the workout with index 1
 * `enter 2` = enter into the workout with index 2
 
-### 10. Exiting from a workout: `back`
+### 11. Exiting from a workout: `back`
 Allows you to exit back into the main view once you have entered into a workout.
 
 Format `back`
@@ -276,7 +298,7 @@ ________________________________________________________
 			
 ```
 
-### 11. Recommend a workout: `recommend`
+### 12. Recommend a workout: `recommend`
 
 Provides a given set of workouts with exercises.
 
@@ -305,7 +327,7 @@ __________________________________
 ________________________________________________________
 ```
 
-### 12. Exiting the application: `bye`
+### 13. Exiting the application: `bye`
 
 Allows you to exit from the application.
 
@@ -319,13 +341,13 @@ Bye. Hope you get your desired body soon, have a great day!
 ________________________________________________________
 ```
 
-### 13. Saving data
+### 14. Saving data
 
 GetJackd's workout list data is saved in the hard disk automatically after any command that changes the data (Adding 
 or editing workouts and exercises). There is no need to
 save manually.
 
-### 14. Editable data file
+### 15. Editable data file
 
 GetJackd's data is saved as a json file `[JAR file location]/data/workouts.json`. Advanced users are welcome to update data
 directly by editing that data file.
