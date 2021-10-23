@@ -5,21 +5,30 @@ Restaurant Buddy is a desktop application for restaurant managers to help **keep
 such as its employees, dishes and ingredients in storage via a **Command Line Interface (CLI)**.
 
 ## Contents
-* Quick start
-* Features
-  * Adding an employee: `add-employee`
-  * Removing an employee: `remove-employee`
-  * Listing all employees: `list-employee`
-  * Adding a dish: `add-dish`
-  * Removing a dish: `remove-dish`
-  * Editing a dish's price: `edit-dish`
-  * Adding a discount to a dish: `discount-dish`
-  * Listing all dishes: `list-menu`
-  * Adding an ingredient: `add-ingredient`
-  * Removing an ingredient: `remove-ingredient`
-  * Listing all ingredients: `list-ingredient`
-  * Exiting the program: `bye`
-* Command Summary
+* [Quick start](#quick-start)
+* [Features](#features)
+  * Employee
+    * [Adding an employee: `add-employee`](#adding-an-employee-add-employee)
+    * [Removing an employee: `remove-employee`](#removing-an-employee-remove-employee)
+    * [Listing all employees: `list-employee`](#listing-all-employees-list-employee)
+  * Dish
+    * [Adding a dish: `add-dish`](#adding-a-dish-add-dish)
+    * [Removing a dish: `remove-dish`](#removing-a-dish-remove-dish)
+    * [Editing a dish's price: `edit-dish`](#changing-a-dishs-price-edit-dish)
+    * [Adding a discount to a dish: `discount-dish`](#adding-a-discount-to-a-dish-discount-dish)
+    * [Listing all dishes: `list-menu`](#listing-all-dishes-list-menu)
+  * Ingredient
+    * [Adding an ingredient: `add-ingredient`](#adding-an-ingredient-add-ingredient)
+    * [Removing an ingredient: `remove-ingredient`](#removing-an-ingredient-remove-ingredient)
+    * [Listing all ingredients: `list-ingredient`](#listing-all-ingredients-list-ingredient)
+  * Finance
+    * [Adding a finance record: `add-finance`](#adding-a-finance-record-add-finance)
+    * [Removing a finance record: `remove-finance`](#removing-a-finance-record-remove-finance)
+    * [Editing a finance record: `edit-finance`](#editing-a-finance-record-edit-finance)
+    * [Showing total account of finance records: `show-finance`](#showing-total-account-of-finance-records-show-finance)
+    * [Listing all finance records: `list-finance`](#listing-all-finance-records-list-finance)
+  * [Exiting the program: `bye`](#exiting-the-program-bye)
+* [Command Summary](#command-summary)
 
 ## Quick start
 1. Ensure you have **Java 11** or above installed on your computer.
@@ -44,7 +53,7 @@ Adds an employee to the employee list.
 Format: `add-employee/EMPLOYEE_NAME/PHONE_NUMBER`
 
 Example:
-`add-employee/John/81145812` Adds the employee named John with 81145812 as his phone number to the employee list.
+`add-employee/John/81145812` Adds the employee named `John` with `81145812` as his phone number to the employee list.
 ```
 ---------------------------------------------
 I have added: 
@@ -75,7 +84,7 @@ Lists all employees in the employee list.
 Format: `list-employee`
 
 Example:
-`list-employee` Lists all employees in the employee list.
+`list-employee`
 ```
 ---------------------------------------------
 Here are the employees in your list:
@@ -90,7 +99,7 @@ Adds a dish to the menu.
 Format: `add-dish/DISH_NAME/PRICE`
 
 Example:
-`add-dish/Pizza/5.80` Adds Pizza which costs $5.80 to the menu.
+`add-dish/Pizza/5.80` Adds `Pizza` which costs `$5.80` to the menu.
 ```
 ---------------------------------------------
  I have added the following dish to the menu:
@@ -120,7 +129,7 @@ Edits the price of a dish in the menu.
 Format: `edit-dish/DISH_INDEX/NEW_PRICE`
 
 Example:
-`edit-dish/1/10` Increases the price of the first dish in the menu to $10.
+`edit-dish/1/10` Increases the price of the first dish in the menu to `$10`.
 ```
 ---------------------------------------------
  Got it! The updated price of the dish is as follows:
@@ -135,7 +144,7 @@ Adds a discount to a dish in the menu.
 Format: `discount-dish/DISH_INDEX/DISCOUNT(%)`
 
 Example:
-`discount-dish/1/30` Adds a 30% discount to the first dish in the menu.
+`discount-dish/1/30` Adds a `30%` discount to the first dish in the menu.
 ```
 ---------------------------------------------
  Got it! I have added the discount to the dish!
@@ -151,7 +160,7 @@ Lists all dishes in the menu.
 Format: `list-menu`
 
 Example:
-`list-menu` Lists all dishes in the menu.
+`list-menu`
 ```
 ---------------------------------------------
  Here are the dishes in your menu:
@@ -166,7 +175,7 @@ Adds an ingredient to the ingredient list.
 Format: `add-ingredient/INGREDIENT_NAME/QUANTITY`
 
 Example:
-`add-ingredient/Carrot/50` Adds 50 carrots to the ingredient list.
+`add-ingredient/Carrot/50` Adds `50` `carrots` to the ingredient list.
 ```
 ---------------------------------------------
 Got it. This ingredient was added:
@@ -197,13 +206,90 @@ Lists all ingredients in the ingredient list.
 Format: `list-ingredient`
 
 Example:
-`list-ingredient` Lists all ingredients in the ingredient list.
+`list-ingredient`
 ```
 ---------------------------------------------
 Here are the ingredients in your list:
 1. Carrot [50]
 ---------------------------------------------
 ```
+
+### Adding a finance record: `add-finance`
+
+Adds a finance record to the finance list.
+
+Format: `add-finance/DATE/ACCOUNT`
+
+Example:
+`add-finance/23 Oct 2021/5000` Adds a finance account of `$5000` on `23 October 2021`.
+```
+---------------------------------------------
+Got it. This account is added:
+Finance Date: 23 Oct 2021
+Account: 5000
+---------------------------------------------
+```
+
+### Removing a finance record: `remove-finance`
+
+Removes a finance record from the finance list.
+
+Format: `remove-finance/FINANCE_INDEX`
+
+Example:
+`remove_finance/1` Removes the first finance record in the finance list.
+```
+---------------------------------------------
+Got it. This account was deleted:
+23 Oct 2021  $5000
+---------------------------------------------
+```
+
+### Editing a finance record: `edit-finance`
+
+Edits a finance record in the finance list.
+
+Format: `edit-finance/FINANCE_INDEX/NEW_ACCOUNT`
+
+Example:
+`edit-finance/1/9000` Increases the account of the first finance record in the finance list to `$9000`.
+```
+---------------------------------------------
+Got it. This account is edited:
+Finance Date: 23 Oct 2021
+Account: 9000
+---------------------------------------------
+```
+
+### Showing total account of finance records: `show-finance`
+
+Shows the total account of all finance records in the finance list.
+
+Format: `show-finance`
+
+Example:
+`show-finance`
+```
+---------------------------------------------
+Here is the total account you have: $9000
+---------------------------------------------
+```
+
+### Listing all finance records: `list-finance`
+
+Lists all finance records in the finance list.
+
+Format: `list-finance`
+
+Example:
+`list-finance`
+```
+---------------------------------------------
+Here are the accounts in your list:
+1. 23 Oct 2021 9000
+---------------------------------------------
+```
+
 
 ### Exiting the program: `bye`
 
@@ -244,4 +330,9 @@ Example:
 | add-ingredient | `add-ingredient/INGREDIENT_NAME/QUANTITY` |
 | remove-ingredient | `remove-ingredient/INGREDIENT_INDEX` |
 | list-ingredient | `list-ingredient` |
+| add-finance | `add-finance/DATE/ACCOUNT` |
+| remove-finance | `remove-finance/FINANCE_INDEX` |
+| edit-finance | `edit-finance/FINANCE_INDEX/NEW_ACCOUNT` |
+| show-finance | `show-finance` |
+| list-finance | `list-finacne` |
 | bye | `bye` |

@@ -19,8 +19,6 @@ help **keep track of restaurant data** such as its employees, dishes and ingredi
   * Glossary
   * Instructions for Manual Testing
 
-
-
 ##Architecture
 The Main component has 2 classes, MainParser and MainUI. It is responsible for parsing user commands and 
 displaying messages to interact with the user.
