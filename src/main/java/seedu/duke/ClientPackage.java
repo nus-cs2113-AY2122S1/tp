@@ -1,9 +1,9 @@
 package seedu.duke;
 
 public class ClientPackage {
-    private Client client;
-    private Tour tour;
-    private Flight flight;
+    private final Client client;
+    private final Tour tour;
+    private final Flight flight;
 
     public ClientPackage(Client client, Tour tour, Flight flight, ClientPackageList clientPackages) {
 //        if (clientPackages.getPackageCount() > 0) {
@@ -36,6 +36,6 @@ public class ClientPackage {
                 + "Tour: " + "\n"
                 + tour + "\n\n"
                 + "Flight: " + "\n"
-                + flight + "\n";
+                + flight;
     }
 }

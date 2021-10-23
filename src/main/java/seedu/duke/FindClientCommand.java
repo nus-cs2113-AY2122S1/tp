@@ -1,13 +1,13 @@
 package seedu.duke;
 
 public class FindClientCommand extends Command {
-    private final int index;
+    private final String name;
 
-    public FindClientCommand(int index) {
-        this.index = index;
+    public FindClientCommand(String name) {
+        this.name = name;
     }
 
     public void execute() {
-        ui.showFindClient(clients, clientPackages, index);
+        ui.showFindClient(clients, name);
     }
 }
