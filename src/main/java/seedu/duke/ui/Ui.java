@@ -5,7 +5,6 @@ import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.universities.University;
 import seedu.duke.constants.Constants;
-import seedu.duke.universities.UniversityList;
 
 import static java.lang.System.out;
 
@@ -13,7 +12,12 @@ public class Ui {
 
     public static void printModule(Module mod, int index) {
         printIndex(index, false);
-        out.println(" " + mod.getModuleCode() + Constants.MODULE_NAME_SEPARATOR + mod.getModuleName());
+        StringBuilder codeString = new StringBuilder(mod.getModuleCode());
+        int padding = Constants.MODULE_CODE_LENGTH - mod.getModuleCode().length();
+        for (int i = 0; i < padding; i++) {
+            codeString.append(" ");
+        }
+        out.println(" " + codeString + Constants.MODULE_NAME_SEPARATOR + mod.getModuleName());
     }
 
     public static void printUniversity(University uni) {
