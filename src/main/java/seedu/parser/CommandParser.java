@@ -88,8 +88,7 @@ public class CommandParser {
      * Parses user input into a StoreResultsCommand.
      *
      * @param text User input.
-     * @return StoreResultsCommand with grade, moduleCode, gradeType and error check variable
-     * to store the grades in the Transcript
+     * @return StoreResultsCommand with necessary arguments to store the grades in the Transcript
      */
     public Command parseStoreResultsCommand(String text) {
         text = text.substring(STORE_LENGTH).trim();
