@@ -31,7 +31,7 @@ public class ModuleManagerTest {
     @Test
     void getAllModules_success() {
         IntStream.range(0, 5).forEach(i -> moduleManager.setModule(TEMP_MODULE + i));
-        String [] listOfModules = moduleManager.getAllModules();
+        String[] listOfModules = moduleManager.getAllModules();
         assertEquals(5, listOfModules.length);
         assertTrue(Arrays.asList(listOfModules).contains(TEMP_MODULE + 3));
     }

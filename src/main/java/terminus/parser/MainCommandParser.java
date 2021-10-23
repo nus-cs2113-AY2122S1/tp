@@ -1,5 +1,7 @@
 package terminus.parser;
 
+import static terminus.common.CommonUtils.getCurrentDay;
+
 import terminus.command.GoCommand;
 import terminus.command.TimetableCommand;
 import terminus.command.module.ModuleCommand;
@@ -7,8 +9,6 @@ import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.module.ModuleManager;
 import terminus.timetable.Timetable;
-
-import static terminus.common.CommonUtils.getCurrentDay;
 
 public class MainCommandParser extends CommandParser {
 

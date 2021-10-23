@@ -10,7 +10,6 @@ import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
 import terminus.command.content.DeleteCommand;
 import terminus.command.content.ViewCommand;
-import terminus.command.content.note.AddNoteCommand;
 import terminus.command.content.question.AddQuestionCommand;
 import terminus.command.content.question.TestCommand;
 import terminus.exception.InvalidArgumentException;
@@ -18,9 +17,8 @@ import terminus.exception.InvalidCommandException;
 
 public class QuestionCommandParserTest {
 
-    private QuestionCommandParser commandParser;
-
     private final String tempModule = "test";
+    private QuestionCommandParser commandParser;
 
     @BeforeEach
     void setUp() {
