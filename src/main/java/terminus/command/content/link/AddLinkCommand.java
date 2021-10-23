@@ -102,8 +102,7 @@ public class AddLinkCommand extends Command {
         
         if (scheduleConflict.getConflictingSchedule() != null) {
             String conflicts = scheduleConflict.getConflictingSchedule();
-            stringBuilder.append(Messages.MESSAGE_CONFLICTING_SCHEDULE);
-            stringBuilder.append(conflicts);
+            stringBuilder.append(Messages.MESSAGE_CONFLICTING_SCHEDULE + "\n").append(conflicts).append("\n");
         }
         contentManager.add(newLink);
         stringBuilder.append(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
