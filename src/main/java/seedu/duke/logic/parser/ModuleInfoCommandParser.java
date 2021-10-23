@@ -5,6 +5,6 @@ import seedu.duke.logic.commands.module.ModuleInfoCommand;
 
 public class ModuleInfoCommandParser {
     public static Command parse(String userResponse) {
-        return new ModuleInfoCommand(userResponse);
+        return new ModuleInfoCommand(userResponse.toUpperCase());
     }
 }

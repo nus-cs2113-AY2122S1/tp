@@ -91,6 +91,8 @@ public class Ui {
         System.out.print(LINE);
         System.out.println(PADDING + "Here is a list of possible commands:");
         System.out.println(PADDING + "add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION}");
+        System.out.println(PADDING + "add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {LINK}");
+        System.out.println(PADDING + "add module [MODULE_CODE]");
         System.out.println(PADDING + "list [task/lesson/module]");
         System.out.println(PADDING + "done [INDEX]");
         System.out.println(PADDING + "delete [task/lesson/module] [INDEX]");
@@ -360,7 +362,7 @@ public class Ui {
      * @throws ModuleNotFoundException when there is no module in FullModuleList with a matching module code
      */
     public void printModuleInfo(String moduleCode) throws ModuleNotFoundException {
-        Module module = Duke.fullModuleList.findModule(moduleCode.toUpperCase());
+        Module module = Duke.fullModuleList.findModule(moduleCode);
         System.out.print(module.getFullInfo());
     }
 
