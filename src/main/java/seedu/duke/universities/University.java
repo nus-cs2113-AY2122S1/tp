@@ -58,14 +58,14 @@ public class University {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
             System.out.print(Constants.INDENTATION);
-            Ui.printModuleMapping(currentMapping, i + 1);
+            Ui.printMappingForList(currentMapping, i + 1);
         }
     }
 
     public void listSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = getSelectedMappings(selectedModuleList);
         for (int i = 0; i < selectedMappings.size(); i++) {
-            Ui.printModuleMapping(selectedMappings.get(i), i + 1);
+            Ui.printMappingForList(selectedMappings.get(i), i + 1);
         }
     }
 

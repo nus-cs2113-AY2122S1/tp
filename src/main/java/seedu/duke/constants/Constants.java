@@ -9,6 +9,8 @@ public class Constants {
     public static final String LINE_SEPARATOR = "============================="
             + "====================================================";
     public static final String INDENTATION = "    ";
+    public static final int MODULE_CODE_LENGTH = 8;
+
 
     // Commands
     public static final String COMMAND_REMOVE = "remove";

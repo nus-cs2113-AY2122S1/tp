@@ -26,7 +26,7 @@ public class ListUniCommand extends Command {
     }
 
     private void printSelectedList(UniversityList universityList) {
-        System.out.println("Here are the universities and module mappings in the list:");
+        System.out.println("Here are the universities and module mappings in your list:");
         for (int i = 0; i < universityList.getSize(); i++) {
             assert universityList.get(i).getName() != null;
             Ui.printUniversity(universityList.get(i));
@@ -35,7 +35,7 @@ public class ListUniCommand extends Command {
     }
 
     private void printMasterList(UniversityList universityList) {
-        System.out.println("Here are the universities and module mappings in the list:");
+        System.out.println("Here are the universities for exchange:");
         for (int i = 0; i < universityList.getSize(); i++) {
             assert universityList.get(i).getName() != null;
             Ui.printUniversity(universityList.get(i));
