@@ -45,6 +45,9 @@ public class Parser {
     /** Offset required to convert between 1-indexing and 0-indexing.  */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
+    /** Offset after reading type identifier tag. */
+    public static final int TYPE_IDENTIFIER_END_INDEX = 2;
+
     private static String[] splitCommandWordAndArgs(String userInput) {
         final String[] split = userInput.trim().split(" ", 2);
         if (split.length == 2) {
@@ -102,13 +105,12 @@ public class Parser {
     }
 
     private Command prepareEditCommand(String commandParams) {
-        String editOption = commandParams.substring(0,2);
-        String paramsToEdit = commandParams.substring(3);
-
+        String editOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+        String paramsToEdit = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
         switch (editOption) {
-        case ("b/"):
+        case ("-b"):
             return prepareEditBudgetCommand(paramsToEdit);
-        case ("e/"):
+        case ("-e"):
             return prepareEditExpenditureCommand(paramsToEdit);
         default:
             return new InvalidCommand(MESSAGE_INVALID_EDIT_COMMAND);
@@ -120,7 +122,7 @@ public class Parser {
         assert split[0].equals("");
 
         int month = Integer.parseInt(split[1].trim());
-        double amount = Double.parseDouble(split[2].trim());
+        double amount = Double.parseDouble(split[TYPE_IDENTIFIER_END_INDEX].trim());
 
         return new EditBudgetCommand(month, amount);
     }
@@ -130,7 +132,7 @@ public class Parser {
         assert split[0].equals("");
 
         int month = Integer.parseInt(split[1].trim());
-        int index = Integer.parseInt(split[2].trim());
+        int index = Integer.parseInt(split[TYPE_IDENTIFIER_END_INDEX].trim());
         double amount = Double.parseDouble(split[3].trim());
         LocalDate date;
         if (split[4].equals("")) {
@@ -166,14 +168,15 @@ public class Parser {
      */
     private Command prepareAddCommand(String commandParams) {
         try {
-            String addType = commandParams.substring(0, 2);
+            String addType = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+            String addParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
             switch (addType) {
-            case ("b/"):
-                return prepareAddBudgetCommand(commandParams);
-            case ("e/"):
-                return prepareAddExpenditureCommand(commandParams);
-            case ("l/"):
-                return prepareAddLoanCommand(commandParams);
+            case ("-b"):
+                return prepareAddBudgetCommand(addParams);
+            case ("-e"):
+                return prepareAddExpenditureCommand(addParams);
+            case ("-l"):
+                return prepareAddLoanCommand(addParams);
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
             }
@@ -183,9 +186,10 @@ public class Parser {
 
     }
 
-    private Command prepareAddLoanCommand(String commandParams) {
+
+    private Command prepareAddLoanCommand(String addParams) {
         try {
-            String[] split = commandParams.trim().split("l/|a/|d/", 4);
+            String[] split = addParams.trim().split("n/|a/|d/", 4);
             assert split[0].equals("");
             String name = split[1].trim();
             double amount = Double.parseDouble(split[2].trim());
@@ -206,28 +210,32 @@ public class Parser {
     /**
      * Splits the commandParams into amount and date.
      *
-     * @param commandParams String with raw input
+     * @param addParams String without type identifier
      * @return an AddBudgetCommand with proper parameters
      * @throws ArrayIndexOutOfBoundsException if amount input does not exist.
      */
-    private Command prepareAddBudgetCommand(String commandParams) throws ArrayIndexOutOfBoundsException {
-        String[] split = commandParams.substring(2).trim().split("a/|m/", 3);
-        assert split[0].equals("");
-        double amount = Double.parseDouble(split[1].trim());
-        int month = Integer.parseInt(split[2].trim());
+    private Command prepareAddBudgetCommand(String addParams) throws ArrayIndexOutOfBoundsException {
+        try {
+            String[] split = addParams.trim().split("a/|m/", 3);
+            assert split[0].equals("");
+            double amount = Double.parseDouble(split[1].trim());
+            int month = Integer.parseInt(split[2].trim());
 
-        return new AddBudgetCommand(amount, month);
+            return new AddBudgetCommand(amount, month);
+        } catch (NumberFormatException nfe) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_MONTH_OF_BUDGET, AddBudgetCommand.MESSAGE_USAGE));
+        }
     }
 
     /**
      * Splits the commandParams into description, amount, date.
      *
-     * @param commandParams raw String input
+     * @param addParams raw String input
      * @return an AddExpenditureCommand with proper parameters
      */
-    private Command prepareAddExpenditureCommand(String commandParams) {
+    private Command prepareAddExpenditureCommand(String addParams) {
         try {
-            String[] split = commandParams.trim().split("e/|a/|d/", 4);
+            String[] split = addParams.trim().split("c/|a/|d/", 4);
             assert split[0].equals("");
             String description = split[1].trim();
             double amount = Double.parseDouble(split[2].trim());
@@ -250,7 +258,7 @@ public class Parser {
         try {
             return new FindCommand(commandParams);
         } catch (StringIndexOutOfBoundsException e) {
-            return new InvalidCommand(String.format("Add message later pleasee", AddCommand.MESSAGE_USAGE));
+            return new InvalidCommand(String.format("Add message later please", AddCommand.MESSAGE_USAGE));
         }
     }
 
@@ -264,21 +272,22 @@ public class Parser {
     }
 
     /**
-     * Splits params into the different add commands.
+     * Splits params into the different delete commands.
      *
      * @param commandParams raw String commandParams
      * @return AddBudgetCommand or AddExpenditureCommand depending on the addType
      */
     private Command prepareDeleteCommand(String commandParams) {
         try {
-            String deleteType = commandParams.substring(0, 2);
+            String deleteType = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+            String deleteParams = commandParams.substring(TYPE_IDENTIFIER_END_INDEX);
             switch (deleteType) {
-            case ("b/"):
-                return prepareDeleteBudgetCommand(commandParams);
-            case ("e/"):
-                return prepareDeleteExpenditureCommand(commandParams);
-            case ("l/"):
-                return prepareDeleteLoanCommand(commandParams);
+            case ("-b"):
+                return prepareDeleteBudgetCommand(deleteParams);
+            case ("-e"):
+                return prepareDeleteExpenditureCommand(deleteParams);
+            case ("-l"):
+                return prepareDeleteLoanCommand(deleteParams);
             default:
                 return new InvalidCommand(MESSAGE_INVALID_COMMAND);
             }
@@ -291,14 +300,13 @@ public class Parser {
      * Splits the commandParams to get which month of budget to be deleted.
      *
      * @param commandParams raw String input
-     * @return an DeleteBudgetCommand with proper parameters
+     * @return a DeleteBudgetCommand with proper parameters
      */
     private Command prepareDeleteBudgetCommand(String commandParams) {
         try {
-            String[] split = commandParams.trim().split("b/|m/", 3);
+            String[] split = commandParams.trim().split("m/", 2);
             assert split[0].equals("");
-            assert split[1].equals("");
-            String indexOfMonthString = split[2].trim();
+            String indexOfMonthString = split[1].trim();
             int month = Integer.parseInt(indexOfMonthString);
             return new DeleteBudgetCommand(month);
         } catch (NumberFormatException nfe) {
@@ -312,15 +320,15 @@ public class Parser {
      * Splits the commandParams to get index/s of expenditure to be deleted.
      *
      * @param commandParams raw String input
-     * @return an DeleteExpenditureCommand with proper parameters
+     * @return a DeleteExpenditureCommand with proper parameters
      */
     private Command prepareDeleteExpenditureCommand(String commandParams) {
         try {
-            String[] split = commandParams.trim().split("e/|m/", 3);
+            String[] split = commandParams.trim().split("m/|i/", 3);
             assert split[0].equals("");
-            String indexOfMonthString = split[2].trim();
+            String indexOfMonthString = split[1].trim();
             int month = Integer.parseInt(indexOfMonthString);
-            String indexOfExpenditureToBeDeleted = split[1].trim();
+            String indexOfExpenditureToBeDeleted = split[2].trim();
             if (indexOfExpenditureToBeDeleted.length() == 1) {
                 int index;
                 index = Integer.parseInt(indexOfExpenditureToBeDeleted);
@@ -328,7 +336,7 @@ public class Parser {
             } else if (indexOfExpenditureToBeDeleted.length() > 1) {
                 int startIndex;
                 int endIndex;
-                String[] indexSplit = indexOfExpenditureToBeDeleted.trim().split("-|",2);
+                String[] indexSplit = indexOfExpenditureToBeDeleted.trim().split("-|", 2);
                 String index1 = indexSplit[0].trim();
                 String index2 = indexSplit[1].trim();
                 startIndex = Integer.parseInt(index1);
@@ -349,15 +357,15 @@ public class Parser {
      * Splits the commandParams to get index/s of loan to be deleted.
      *
      * @param commandParams raw String input
-     * @return an DeleteExpenditureCommand with proper parameters
+     * @return a DeleteExpenditureCommand with proper parameters
      */
     private Command prepareDeleteLoanCommand(String commandParams) {
         try {
-            String[] split = commandParams.trim().split("l/|m/", 3);
+            String[] split = commandParams.trim().split("m/|i/", 3);
             assert split[0].equals("");
-            String indexOfMonthString = split[2].trim();
+            String indexOfMonthString = split[1].trim();
             int month = Integer.parseInt(indexOfMonthString);
-            String indexOfLoanToBeDeleted = split[1].trim();
+            String indexOfLoanToBeDeleted = split[2].trim();
             if (indexOfLoanToBeDeleted.length() == 1) {
                 int index;
                 index = Integer.parseInt(indexOfLoanToBeDeleted);
@@ -365,7 +373,7 @@ public class Parser {
             } else if (indexOfLoanToBeDeleted.length() > 1) {
                 int startIndex;
                 int endIndex;
-                String[] indexSplit = indexOfLoanToBeDeleted.trim().split("-|",2);
+                String[] indexSplit = indexOfLoanToBeDeleted.trim().split("-|", 2);
                 String index1 = indexSplit[0].trim();
                 String index2 = indexSplit[1].trim();
                 startIndex = Integer.parseInt(index1);

@@ -41,9 +41,10 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 ## Features
 
 ### Notes about the command format:
-Words in UPPER_CASE are the parameters to be supplied by the user. <br />
+* Words in UPPER_CASE are the parameters to be supplied by the user. <br />
 e.g. in `add b/ a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add b/ a/500 m/12`
 
+* Words encased in `<>` are optional parameters.
 <br />
 
 ## Commands
@@ -51,20 +52,20 @@ e.g. in `add b/ a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can
 ## `add`
 
 The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
-The type of record is determined by the first prefix after the `add` command word.
+The type of record is determined by the identifier tag after the `add` command word.
 
-### `b/` - Add a Budget
+### `-b` - Add a Budget
 
 Adds a new budget to a specific month.
 
-Format: `add b/ a/AMOUNT m/MONTH`
+Format: `add -b a/AMOUNT m/MONTH`
 
 * The `AMOUNT` can be entered with 2 decimal places or without decimal places and cannot be empty.
 * The `MONTH` must strictly be within the range of 1 to 12 and cannot be empty.
 
 Example of usage:
 
-`add b/ a/500 m/12`
+`add -b a/500 m/12`
 
 Expected outcome: Budget of $500.00 is added to the december of that particular year.
 
@@ -74,21 +75,21 @@ Your budget of 500.0 for this month is successfully added!
 ========================================================
 ```
 
-### `e/` - Add an expenditure
+### `-e` - Add an expenditure
 
 Adds a new expenditure to a month.
 
-Format: `add e/DESCRIPTION a/AMOUNT d/<date>`
+Format: `add -e c/<DESCRIPTION> a/AMOUNT d/<DATE_OF_EXPENDITURE>`
 
 * The `DESCRIPTION` can be in a natural language format. It can be left empty if the user does not wish
-* to add specific information about the expenditure.
+to add specific information about the expenditure.
 * The `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
-* The `<date>` must strictly be in the form of YYYY-MM-DD. If left empty, the current date according to the
-* system will be entered by default.
+* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of YYYY-MM-DD. If left empty, the current date according to the
+system will be entered by default.
 
 Example of usage:
 
-`add e/CS2113T Textbooks a/60 d/2021-08-20`
+`add -e c/CS2113T Textbooks a/60 d/2021-08-20`
 
 Expected outcome: Expenditure of $60.00 2021-08-20 on has been successfully added.
 
@@ -257,11 +258,11 @@ Expected outcome: Listing the budget and all expenditures for that particular mo
 ========================================================
 1. add
 Adds an expenditure record.
-Parameters: e/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE]
+Parameters: -e c/DESCRIPTION a/COST d/<DATE_OF_EXPENDITURE>
 Note: If DATE_OF_EXPENDITURE is not specified, the current system date will be the default value.
 
 Adds a budget record.
-Parameters: b/ a/AMOUNT m/MONTH [y/YEAR]
+Parameters: -b a/AMOUNT m/MONTH [y/YEAR]
 
 Adds a loan record.
 Parameters: l/DEBTOR_NAME a/AMOUNT [d/DATE_OF_LOAN]
@@ -321,8 +322,8 @@ Bye, see you again soon!
 ## Command Summary
 | `no.` | `Command` | `Description` |
 | --- | --- | --- |
-| `1` | `add b/ a/AMOUNT m/MONTH` | `add budget of AMOUNT to MONTH` |
-| `2` | `add e/DESCRIPTION a/AMOUNT d/DATE` | `add <description> expenditure of <amount> at <date>` |
+| `1` | `add -b a/AMOUNT m/MONTH` | `add budget of AMOUNT to MONTH` |
+| `2` | `add -e c/DESCRIPTION a/AMOUNT d/<DATE_OF_EXPENDITURE>` | `add expenditure <description> of <amount> on <date>` |
 | `3` | `` | `` |
 | `4` | `` | `` |
 | `5` | `` | `` |

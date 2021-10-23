@@ -173,7 +173,7 @@ public class TextUi {
         boolean printInfo = true;
 
         if (currentMonthBudget == 0) {
-            budget = " Budget have not been allocated!";
+            budget = " Budget has not been allocated!";
             printInfo = false;
         } else {
             budget = records.getBudget(i).toString();
@@ -183,15 +183,18 @@ public class TextUi {
             System.out.println("You are spending too much for " + monthString + "!");
             double percentage = (totalSpending / currentMonthBudget) * 100;
             System.out.printf("%.2f", percentage);
-            System.out.println("% is spent");
+            System.out.println("% of your overall budget has been spent");
         } else if (printInfo) {
             System.out.println("You did not overspend for " + monthString + ", Good JOB!");
             double percentage = (totalSpending / currentMonthBudget) * 100;
-            System.out.println(percentage + "% is spent");
+            System.out.println(percentage + "% of your overall budget has been spent");
         }
         getMonthListView(records, i, monthString, budget);
     }
 
+    /**
+     * Possible error: Names/Descriptions longer than 20characters get truncated.
+     */
     private static void getMonthListView(AllRecordList list, int month, String monthString, String budget) {
         System.out.println("Your budget for " + monthString + ":" + budget + LS
                 + "Your expenditures:");
@@ -203,10 +206,10 @@ public class TextUi {
         }
         System.out.println("Your loans: ");
         if (list.getLoanListSize(month) > 0) {
-            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Debtorname", "   | Amount", "   | Date ");
+            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Debtor name", "   | Amount", "   | Date ");
             printEnumeratedLoanList(list.getLoanRecords(month));
         } else {
-            System.out.println("No Loan records.");
+            System.out.println("No Loan records yet.");
         }
         System.out.println(DIVIDER);
     }
