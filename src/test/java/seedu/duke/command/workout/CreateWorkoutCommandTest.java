@@ -41,14 +41,14 @@ class CreateWorkoutCommandTest {
     @Test
     void createWorkoutCommand_InvalidWorkoutDeadline_expectDateTimeParseExceptionThrown() {
         assertThrows(DateTimeParseException.class,
-                () -> new CreateWorkoutCommand("Test", LocalDate.parse("abc"))
+            () -> new CreateWorkoutCommand("Test", LocalDate.parse("abc"))
         );
     }
 
     @Test
     void createWorkoutCommand_InvalidWorkoutName_expectAssertionError() {
         assertThrows(AssertionError.class,
-                () -> new CreateWorkoutCommand("")
+            () -> new CreateWorkoutCommand("")
         );
     }
 }
