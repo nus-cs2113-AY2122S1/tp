@@ -26,8 +26,8 @@ public class DataManager {
     private static final String ENTRIES_FILE_NAME = "./StonksXD_Entries.csv";
     private static final String ENTRIES_CSV_HEADER = "entry_type,entry_description,amount,category,date";
     private static final String BUDGET_FILE_NAME = "./StonksXD_Budget.csv";
-    private static final String BUDGET_CSV_HEADER = "overallBudget,foodBudget,transportBudget,medicalBudget," +
-            "billsBudget,entertainmentBudget,miscBudget";
+    private static final String BUDGET_CSV_HEADER = "overallBudget,foodBudget,transportBudget,medicalBudget," 
+            + "billsBudget,entertainmentBudget,miscBudget";
     private final Parser parser;
     private final FinancialTracker financialTracker;
     private final Ui ui;
@@ -168,8 +168,8 @@ public class DataManager {
             // To be updated
         }
 
-        if (hasCorruptedLines) {
-            ui.printError(Messages.HAS_CORRUPTED_BUDGET_SETTINGS);
-        }
+//        if (hasCorruptedLines) {
+//            ui.printError(Messages.HAS_CORRUPTED_BUDGET_SETTINGS);
+//        }
     }
 }
