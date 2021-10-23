@@ -25,7 +25,7 @@ public class ViewModuleCommandTest {
     void setUp() {
         this.moduleManager = new ModuleManager();
         this.commandParser = ModuleCommandParser.getInstance();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.ui = new Ui();
     }
 

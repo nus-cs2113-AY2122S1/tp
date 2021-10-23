@@ -34,7 +34,7 @@ public class AddLinkCommandTest {
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
         this.ui = new Ui();

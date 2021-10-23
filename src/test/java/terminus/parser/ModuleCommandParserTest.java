@@ -10,6 +10,7 @@ import terminus.command.ExitCommand;
 import terminus.command.HelpCommand;
 import terminus.command.module.AddModuleCommand;
 import terminus.command.module.DeleteModuleCommand;
+import terminus.command.module.UpdateModuleCommand;
 import terminus.command.module.ViewModuleCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
@@ -35,7 +36,7 @@ public class ModuleCommandParserTest {
 
     @Test
     void parseCommand_resolveExitCommand_success()
-            throws InvalidCommandException, InvalidArgumentException {
+        throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("exit") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("EXIT") instanceof ExitCommand);
         assertTrue(commandParser.parseCommand("   exit   ") instanceof ExitCommand);
@@ -44,7 +45,7 @@ public class ModuleCommandParserTest {
 
     @Test
     void parseCommand_resolveHelpCommand_success()
-            throws InvalidCommandException, InvalidArgumentException {
+        throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("help") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("HELP") instanceof HelpCommand);
         assertTrue(commandParser.parseCommand("   help   ") instanceof HelpCommand);
@@ -53,7 +54,7 @@ public class ModuleCommandParserTest {
 
     @Test
     void parseCommand_resolveAddCommand_exceptionThrown()
-            throws InvalidCommandException, InvalidArgumentException {
+        throws InvalidCommandException, InvalidArgumentException {
         assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("add"));
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("add \"test\" \"test1\" "));
@@ -76,7 +77,7 @@ public class ModuleCommandParserTest {
 
     @Test
     void parseCommand_resolveDeleteCommand_success()
-            throws InvalidCommandException, InvalidArgumentException {
+        throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("delete 1") instanceof DeleteModuleCommand);
         assertTrue(commandParser.parseCommand("delete 2") instanceof DeleteModuleCommand);
     }
@@ -87,6 +88,28 @@ public class ModuleCommandParserTest {
     }
 
     @Test
+    void parseCommand_resolveUpdateCommand_success() throws InvalidCommandException, InvalidArgumentException {
+        assertTrue(commandParser.parseCommand("update 1 \"test\"") instanceof UpdateModuleCommand);
+        assertTrue(commandParser.parseCommand("update 99 \"CS2106\"") instanceof UpdateModuleCommand);
+    }
+
+    @Test
+    void parseCommand_resolveUpdateCommand_thrownException() throws InvalidCommandException, InvalidArgumentException {
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("update abcd \"test\""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("update -1 \"test\""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("update 1 \"    test    \""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("update 1 \"\""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("update -1 \"     \""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("update -1 "));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("update \"test\""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("update "
+            +
+            "1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111"
+            + "1111111111111 \"test\""));
+        assertThrows(InvalidArgumentException.class, () -> commandParser.parseCommand("update"));
+    }
+
+    @Test
     void getCommandList_containsBasicCommands() {
         assertTrue(commandParser.getCommandList().contains("exit"));
         assertTrue(commandParser.getCommandList().contains("add"));
@@ -94,6 +117,8 @@ public class ModuleCommandParserTest {
         assertTrue(commandParser.getCommandList().contains("delete"));
         assertTrue(commandParser.getCommandList().contains("view"));
         assertTrue(commandParser.getCommandList().contains("help"));
+        assertTrue(commandParser.getCommandList().contains("update"));
+
     }
 
     @Test
