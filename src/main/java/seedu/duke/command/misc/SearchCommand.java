@@ -2,7 +2,6 @@ package seedu.duke.command.misc;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
-import seedu.duke.exception.GetJackDException;
 import seedu.duke.exercises.Exercise;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
@@ -37,8 +36,15 @@ public class SearchCommand extends Command {
         this.filterString = filterString;
     }
 
+    /**
+     * Executes search command to display all the exercises and workouts with the matching keyword provided by the user.
+     *
+     * @param workouts is the list of Workouts
+     * @param storage  is a storage object
+     * @return all the information to be displayed to the user
+     */
     @Override
-    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
+    public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) {
         Map<String, ArrayList<?>> map = new HashMap<>();
         ArrayList<Workout> workoutList = workouts.getAllWorkouts();
 
