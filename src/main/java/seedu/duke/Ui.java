@@ -30,51 +30,51 @@ public class Ui {
 
     private static final String EXIT_LOGO =
             "#######################################"
-            + "####################################" + System.lineSeparator()
-            + "#           _____                ____"
-            + "_                    _____           #" + System.lineSeparator()
-            + "#          /\\    \\              |\\"
-            + "    \\                  /\\    \\          #" + System.lineSeparator()
-            + "#         /::\\    \\             |:\\"
-            + "____\\                /::\\    \\         #" + System.lineSeparator()
-            + "#        /::::\\    \\            |::"
-            + "|   |               /::::\\    \\        #" + System.lineSeparator()
-            + "#       /::::::\\    \\           |::"
-            + "|   |              /::::::\\    \\       #" + System.lineSeparator()
-            + "#      /:::/\\:::\\    \\          |::"
-            + "|   |             /:::/\\:::\\    \\      #" + System.lineSeparator()
-            + "#     /:::/__\\:::\\    \\         |::"
-            + "|   |            /:::/__\\:::\\    \\     #" + System.lineSeparator()
-            + "#    /::::\\   \\:::\\    \\        |:"
-            + ":|   |           /::::\\   \\:::\\    \\    #" + System.lineSeparator()
-            + "#   /::::::\\   \\:::\\    \\       |:"
-            + ":|___|______    /::::::\\   \\:::\\    \\   #" + System.lineSeparator()
-            + "#  /:::/\\:::\\   \\:::\\ ___\\      /"
-            + "::::::::\\    \\  /:::/\\:::\\   \\:::\\    \\  #" + System.lineSeparator()
-            + "# /:::/__\\:::\\   \\:::|    |    /:::"
-            + ":::::::\\____\\/:::/__\\:::\\   \\:::\\____\\ #" + System.lineSeparator()
-            + "# \\:::\\   \\:::\\  /:::|____|   /:::"
-            + "/~~~~/~~      \\:::\\   \\:::\\   \\::/    / #" + System.lineSeparator()
-            + "#  \\:::\\   \\:::\\/:::/    /   /:::/"
-            + "    /          \\:::\\   \\:::\\   \\/____/  #" + System.lineSeparator()
-            + "#   \\:::\\   \\::::::/    /   /:::/  "
-            + "  /            \\:::\\   \\:::\\    \\      #" + System.lineSeparator()
-            + "#    \\:::\\   \\::::/    /   /:::/  "
-            + "  /              \\:::\\   \\:::\\____\\     #" + System.lineSeparator()
-            + "#     \\:::\\  /:::/    /    \\::/   "
-            + " /                \\:::\\   \\::/    /     #" + System.lineSeparator()
-            + "#      \\:::\\/:::/    /      \\/____"
-            + "/                  \\:::\\   \\/____/      #" + System.lineSeparator()
-            + "#       \\::::::/    /              "
-            + "                   \\:::\\    \\          #" + System.lineSeparator()
-            + "#        \\::::/    /              "
-            + "                     \\:::\\____\\         #" + System.lineSeparator()
-            + "#         \\::/____/                "
-            + "                     \\::/    /         #" + System.lineSeparator()
-            + "#          ~~                       "
-            + "                     \\/____/          #" + System.lineSeparator()
-            + "####################################"
-            + "#######################################";
+                    + "####################################" + System.lineSeparator()
+                    + "#           _____                ____"
+                    + "_                    _____           #" + System.lineSeparator()
+                    + "#          /\\    \\              |\\"
+                    + "    \\                  /\\    \\          #" + System.lineSeparator()
+                    + "#         /::\\    \\             |:\\"
+                    + "____\\                /::\\    \\         #" + System.lineSeparator()
+                    + "#        /::::\\    \\            |::"
+                    + "|   |               /::::\\    \\        #" + System.lineSeparator()
+                    + "#       /::::::\\    \\           |::"
+                    + "|   |              /::::::\\    \\       #" + System.lineSeparator()
+                    + "#      /:::/\\:::\\    \\          |::"
+                    + "|   |             /:::/\\:::\\    \\      #" + System.lineSeparator()
+                    + "#     /:::/__\\:::\\    \\         |::"
+                    + "|   |            /:::/__\\:::\\    \\     #" + System.lineSeparator()
+                    + "#    /::::\\   \\:::\\    \\        |:"
+                    + ":|   |           /::::\\   \\:::\\    \\    #" + System.lineSeparator()
+                    + "#   /::::::\\   \\:::\\    \\       |:"
+                    + ":|___|______    /::::::\\   \\:::\\    \\   #" + System.lineSeparator()
+                    + "#  /:::/\\:::\\   \\:::\\ ___\\      /"
+                    + "::::::::\\    \\  /:::/\\:::\\   \\:::\\    \\  #" + System.lineSeparator()
+                    + "# /:::/__\\:::\\   \\:::|    |    /:::"
+                    + ":::::::\\____\\/:::/__\\:::\\   \\:::\\____\\ #" + System.lineSeparator()
+                    + "# \\:::\\   \\:::\\  /:::|____|   /:::"
+                    + "/~~~~/~~      \\:::\\   \\:::\\   \\::/    / #" + System.lineSeparator()
+                    + "#  \\:::\\   \\:::\\/:::/    /   /:::/"
+                    + "    /          \\:::\\   \\:::\\   \\/____/  #" + System.lineSeparator()
+                    + "#   \\:::\\   \\::::::/    /   /:::/  "
+                    + "  /            \\:::\\   \\:::\\    \\      #" + System.lineSeparator()
+                    + "#    \\:::\\   \\::::/    /   /:::/  "
+                    + "  /              \\:::\\   \\:::\\____\\     #" + System.lineSeparator()
+                    + "#     \\:::\\  /:::/    /    \\::/   "
+                    + " /                \\:::\\   \\::/    /     #" + System.lineSeparator()
+                    + "#      \\:::\\/:::/    /      \\/____"
+                    + "/                  \\:::\\   \\/____/      #" + System.lineSeparator()
+                    + "#       \\::::::/    /              "
+                    + "                   \\:::\\    \\          #" + System.lineSeparator()
+                    + "#        \\::::/    /              "
+                    + "                     \\:::\\____\\         #" + System.lineSeparator()
+                    + "#         \\::/____/                "
+                    + "                     \\::/    /         #" + System.lineSeparator()
+                    + "#          ~~                       "
+                    + "                     \\/____/          #" + System.lineSeparator()
+                    + "####################################"
+                    + "#######################################";
 
     private static final String WELCOME_MESSSAGE = START_LOGO + System.lineSeparator()
             + "#             Hello, welcome to FOOD-O-RAMA! "
@@ -101,7 +101,7 @@ public class Ui {
             + "            #" + System.lineSeparator()
             + "# 6. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]'          "
             + "            #" + System.lineSeparator()
-            + "# 7. Linking an Ingredient to a Dish : 'add constituent [dishName] / [ingrName]'                   "
+            + "# 7. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'                   "
             + "            #" + System.lineSeparator()
             + "# 8. Deleting an Ingredient : 'del ingr [ingrName]'                                                "
             + "            #" + System.lineSeparator()
@@ -149,8 +149,8 @@ public class Ui {
             + "11. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr waste chicken' ; '0.7'" + System.lineSeparator()
-            + "12. Linking an Ingredient to a Dish : 'add constituent [dishName] / [ingrName]'" + System.lineSeparator()
-            + "    Example: 'add constituent chicken rice / chicken'" + System.lineSeparator()
+            + "12. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'" + System.lineSeparator()
+            + "    Example: 'link chicken rice / chicken'" + System.lineSeparator()
             + "13. Finding an Ingredient : 'find ingr [keyword]'" + System.lineSeparator()
             + "    Example: 'find ingr chicken'" + System.lineSeparator()
             + "14. Deleting an Ingredient : 'del [ingrName]'" + System.lineSeparator()
@@ -201,8 +201,7 @@ public class Ui {
             + LINE_DIVIDER;
 
     private static final String DISH_SORT = LINE_DIVIDER + System.lineSeparator()
-            + "List of Dishes has been sorted." + System.lineSeparator()
-            + LINE_DIVIDER;
+            + "List of Dishes has been sorted." + System.lineSeparator();
 
     private static final String DISH_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()
             + "Dish list has been cleared." + System.lineSeparator()
@@ -221,8 +220,7 @@ public class Ui {
             + LINE_DIVIDER;
 
     private static final String INGR_SORT = LINE_DIVIDER + System.lineSeparator()
-            + "List of Ingredients has been sorted." + System.lineSeparator()
-            + LINE_DIVIDER;
+            + "List of Ingredients has been sorted." + System.lineSeparator();
 
     private static final String INGR_LIST_CLEARED = LINE_DIVIDER + System.lineSeparator()
             + "Ingredient list has been cleared." + System.lineSeparator()
@@ -505,7 +503,7 @@ public class Ui {
         System.out.println(LINE_DIVIDER);
     }
 
-    public void printAddedConstituentOf(String ingredientName, String dishName) {
+    public void printAddedPartOf(String ingredientName, String dishName) {
         assert ingredientName != null : "ingredientName cannot be null";
         assert dishName != null : "dishName cannot be null";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
