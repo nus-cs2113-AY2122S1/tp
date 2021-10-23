@@ -33,10 +33,10 @@ public class MediVault {
     public MediVault() {
         // For testing, uncomment generateData() && comment the 3 lines
         // For storage, comment generateData() && uncomment the 3 lines
-        generateData();
-        //ArrayList<Medicine> medicines = Medicine.getInstance();
-        //Storage storage = Storage.getInstance();
-        //medicines.addAll(storage.loadData());
+        //generateData();
+        ArrayList<Medicine> medicines = Medicine.getInstance();
+        Storage storage = Storage.getInstance();
+        medicines.addAll(storage.loadData());
         logger.log(Level.INFO, "All variables are initialised.");
     }
 
