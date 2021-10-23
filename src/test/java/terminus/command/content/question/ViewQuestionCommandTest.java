@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,13 +19,11 @@ import terminus.ui.Ui;
 
 public class ViewQuestionCommandTest {
 
+    Class<Question> type = Question.class;
     private QuestionCommandParser commandParser;
     private ModuleManager moduleManager;
     private Ui ui;
-
     private String tempModule = "test";
-
-    Class<Question> type = Question.class;
 
     @BeforeEach
     void setUp() {
@@ -37,7 +36,7 @@ public class ViewQuestionCommandTest {
 
     @Test
     void execute_viewAll_success()
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(ui, moduleManager);
@@ -52,7 +51,7 @@ public class ViewQuestionCommandTest {
 
     @Test
     void execute_viewOne_success()
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(ui, moduleManager);
@@ -67,7 +66,7 @@ public class ViewQuestionCommandTest {
 
     @Test
     void execute_viewOne_exceptionThrown()
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(ui, moduleManager);

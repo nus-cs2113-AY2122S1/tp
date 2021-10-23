@@ -3,6 +3,7 @@ package terminus.command.content.question;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,10 +19,10 @@ import terminus.ui.Ui;
 
 public class TestCommandTest {
 
+    private final String tempModule = "test";
     private QuestionCommandParser commandParser;
     private ModuleManager moduleManager;
     private Ui ui;
-    private final String tempModule = "test";
 
     @BeforeEach
     void setUp() {

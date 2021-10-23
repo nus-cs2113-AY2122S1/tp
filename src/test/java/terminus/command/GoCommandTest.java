@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,6 +31,12 @@ public class GoCommandTest {
 
     private String tempModule = "test";
 
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
+
     @BeforeEach
     void setUp() throws IOException {
         this.moduleStorage = ModuleStorage.getInstance();
@@ -39,12 +46,6 @@ public class GoCommandTest {
         this.moduleManager = new ModuleManager();
         moduleManager.addModule(tempModule);
         this.ui = new Ui();
-    }
-
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
     }
 
     @Test
@@ -62,7 +63,8 @@ public class GoCommandTest {
     }
 
     @Test
-    void execute_goAdvance_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_goAdvance_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("go " + tempModule + " note");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());

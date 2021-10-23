@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,12 +21,17 @@ import terminus.ui.Ui;
 
 public class DeleteModuleCommandTest {
 
+    private static final String tempModule = "test";
     private ModuleCommandParser commandParser;
     private ModuleManager moduleManager;
     private Ui ui;
     private ModuleStorage moduleStorage;
 
-    private static final String tempModule = "test";
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
 
     @BeforeEach
     void setUp() throws IOException {
@@ -38,14 +44,9 @@ public class DeleteModuleCommandTest {
         this.ui = new Ui();
     }
 
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
-    }
-
     @Test
-    void execute_deleteModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_deleteModule_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("delete 1");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());

@@ -2,6 +2,7 @@ package terminus.command;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,8 @@ public class HelpCommandTest {
     }
 
     @Test
-    void execute_helpCommand_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_helpCommand_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         CommandResult result = mainCommandParser.parseCommand("help").execute(ui, moduleManager);
         assertTrue(result.isOk());
         result = noteCommandParser.parseCommand("help").execute(ui, moduleManager);
