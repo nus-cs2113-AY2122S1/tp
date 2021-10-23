@@ -1,7 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.items.Event;
-import seedu.duke.items.EventCatalog;
+import seedu.duke.items.mainlists.EventCatalog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
