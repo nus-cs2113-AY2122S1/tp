@@ -30,14 +30,14 @@ public class ContentManagerTest {
 
     @Test
     void addContent_link_success() throws InvalidArgumentException {
-        Link link = new Link("test", "monday", LocalTime.now(), "test.com");
+        Link link = new Link("test", "monday", LocalTime.now(), 1, "test.com");
         linkContentManager.add(link);
         assertEquals(link.getDisplayInfo(), linkContentManager.getContentData(1));
     }
 
     @Test
     void deleteContent_link_success() throws InvalidArgumentException {
-        Link link = new Link("test", "monday", LocalTime.now(), "test.com");
+        Link link = new Link("test", "monday", LocalTime.now(), 1, "test.com");
         linkContentManager.add(link);
         assertEquals(1, linkContentManager.getTotalContents());
         assertSame(link.getName(), linkContentManager.deleteContent(1));
@@ -55,7 +55,7 @@ public class ContentManagerTest {
 
     @Test
     void deleteContent_exceptionThrown() throws InvalidArgumentException {
-        Link link = new Link("test", "monday", LocalTime.now(), "test.com");
+        Link link = new Link("test", "monday", LocalTime.now(), 2, "test.com");
         linkContentManager.add(link);
         assertThrows(InvalidArgumentException.class, () -> linkContentManager.deleteContent(-1));
         assertThrows(InvalidArgumentException.class, () -> linkContentManager.deleteContent(0));
@@ -71,7 +71,7 @@ public class ContentManagerTest {
 
     @Test
     void getContent_link_success() throws InvalidArgumentException {
-        Link link = new Link("test", "monday", LocalTime.now(), "test.com");
+        Link link = new Link("test", "monday", LocalTime.now(), 1,"test.com");
         linkContentManager.add(link);
         assertEquals(link.getDisplayInfo(), linkContentManager.getContentData(1));
     }
@@ -114,9 +114,9 @@ public class ContentManagerTest {
 
     @Test
     void listContent_link_success() {
-        Link link1 = new Link("test1", "monday", LocalTime.now(), "test.com");
-        Link link2 = new Link("test2", "monday", LocalTime.now(), "test.com");
-        Link link3 = new Link("test3", "monday", LocalTime.now(), "test.com");
+        Link link1 = new Link("test1", "monday", LocalTime.now(), 1, "test.com");
+        Link link2 = new Link("test2", "monday", LocalTime.now(), 2, "test.com");
+        Link link3 = new Link("test3", "monday", LocalTime.now(), 3, "test.com");
         linkContentManager.add(link1);
         linkContentManager.add(link2);
         linkContentManager.add(link3);

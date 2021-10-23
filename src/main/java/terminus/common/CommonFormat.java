@@ -28,7 +28,7 @@ public class CommonFormat {
     public static final String COMMAND_DELETE_FORMAT = COMMAND_DELETE + " <item number>";
     public static final String COMMAND_VIEW_FORMAT = COMMAND_VIEW + " {item number}";
     public static final String COMMAND_ADD_SCHEDULE_FORMAT = COMMAND_ADD + " \"<link description>\" "
-            + "\"<day>\" \"<start_time " + LOCAL_TIME_FORMAT + ">\" \"<zoom_link>\"";
+            + "\"<day>\" \"<start_time " + LOCAL_TIME_FORMAT + ">\" \"<duration>\" \"<zoom_link>\"";
     public static final String COMMAND_ADD_NOTE_FORMAT = COMMAND_ADD + " \"<note name>\" \"<note content>\"";
     public static final String COMMAND_ADD_QUESTION_FORMAT = COMMAND_ADD + " \"<question>\" \"<answer>\"";
     public static final String COMMAND_TEST_QUESTION_FORMAT = COMMAND_TEST + " {question count}";

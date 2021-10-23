@@ -38,7 +38,7 @@ public class ScheduleCommandTest {
         assertTrue(changeResult.isOk());
         assertTrue(changeResult.getAdditionalData() instanceof LinkCommandParser);
         mainCommand = commandParser.parseCommand("go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" "
-                + "\"https://zoom.us\"");
+                + "\"3\" \"https://zoom.us\"");
         changeResult = mainCommand.execute(ui, moduleManager);
         assertTrue(changeResult.isOk());
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(Link.class).getTotalContents());
@@ -53,7 +53,7 @@ public class ScheduleCommandTest {
             () -> commandParser.parseCommand("go " + tempModule + " schedule -1").execute(ui, moduleManager));
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand(
-                            "go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" \"test.com\"")
+                            "go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" \"2\" \"test.com\"")
                     .execute(ui, moduleManager));
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("go " + tempModule + " schedule delete -1")
