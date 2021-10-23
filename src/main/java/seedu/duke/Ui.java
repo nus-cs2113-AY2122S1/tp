@@ -116,9 +116,9 @@ public class Ui {
     }
 
     public void showFindClient(ClientList clients, ClientPackageList packages, int index) {
-        if (index >= clients.getClientCount()){
-           System.out.println(FIND_NO_CLIENTS_MESSAGE);
-           return;
+        if (index >= clients.getClientCount()) {
+            System.out.println(FIND_NO_CLIENTS_MESSAGE);
+            return;
         }
         Client foundClient = clients.getClient(index - 1);
         System.out.println(FIND_CLIENT_MESSAGE + "\n" + foundClient);
@@ -132,7 +132,7 @@ public class Ui {
                 packageCount++;
             }
         }
-        System.out.println("Total Packages Subscribed by " + foundClient.getName()+ ": " + packageCount);
+        System.out.println("Total Packages Subscribed by " + foundClient.getName() + ": " + packageCount);
     }
 
 
