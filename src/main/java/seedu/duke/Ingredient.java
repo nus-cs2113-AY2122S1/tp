@@ -68,7 +68,7 @@ public class Ingredient implements  Comparable<Ingredient> {
     @Override
     public String toString() {
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
-        //Todo add constituents
+        //Todo add parts
         return ingredientName + '\n'
                 + "   Storage: " + ingredientWeight + " kg" +  System.lineSeparator()
                 + "   Wastage: " + totalWaste + " kg";

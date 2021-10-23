@@ -26,7 +26,7 @@ public class AddDishIngrCommand extends Command {
             logger.log(Level.INFO, "Dish does not exist", dishIndex);
             throw new FoodoramaException(ui.getDishNotExistMsg(parameters.get(0)));
         } else {
-            DishList.dishList.get(dishIndex).addConstituent(parameters.get(1));
+            DishList.dishList.get(dishIndex).addPart(parameters.get(1));
             logger.log(Level.INFO, "Successfully added dish ingredient");
         }
         logger.log(Level.INFO, "End of process");
