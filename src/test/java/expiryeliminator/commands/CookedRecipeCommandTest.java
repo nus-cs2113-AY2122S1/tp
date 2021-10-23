@@ -37,7 +37,7 @@ class CookedRecipeCommandTest {
         try {
             assertEquals(1, ingredients.find("Chicken").getQuantity());
             assertEquals(20, ingredients.find("Salt").getQuantity());
-        } catch (NotFoundException e ) {
+        } catch (NotFoundException e) {
             fail("Ingredients should be in repository by definition");
         }
     }
