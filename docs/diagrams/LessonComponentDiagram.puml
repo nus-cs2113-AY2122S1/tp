@@ -2,31 +2,12 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-class Lesson {
-    title : String
-    dayOfTheWeek : String
-    startTime : String
-    endTime : String
-    meetingUrl : String
-
-    serialize() : String
-    {static} deserialize() : String
-}
-
-class LessonList {
-    getSize() : int
-    getLesson(lessonIndex: int) : Lesson
-    isEmpty() : boolean
-    addLesson(newLesson: Lesson)
-    deleteLesson(lessonIndex: int)
-    deleteAllLessons()
-    filterLessonsByKeyword(keyword: String): LessonList
-    filterLessonsByPeriod(period: String): LessonList
-    serialize()
-    {static} deserialize(ui: Ui, data: List<String>)
-}
+class Lesson
+class LessonList
 
 LessonList -> "*" Lesson : lessonList
+
+hide members
 
 class AddLessonCommand
 class DeleteLessonCommand
