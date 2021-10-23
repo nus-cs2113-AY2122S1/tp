@@ -24,21 +24,27 @@
 
 ![img.png](umldg/BasicArchitecture.png)
 
-__Note:__
-* `GetJackd` : Main of whole application.
+__Note:__ Lines in this diagram denote that the component has references to most classes inside the component the arrow
+is pointing towards, whereas dotted lines denote dependencies.
 * `Ui` : In charge of reading user input and printing the results on the terminal.
-* `WorkoutList` : Contains list of all workouts the user has added.
-* `Storage` : In charge of storing and loading user data.
-* `CommandManager` : Parses user input and returns Command object.
+* `Main` : Main of whole application.
+* `Storage` : In charge of storing and loading user data from the json file.
+* `Data` : Contains data of all workouts the user has added.
+* `Parser` : Parses user input and returns Command object.
 * `Command` : Holds all information related to a type of command and can be executed.
-* `LoggerUtil` : Contains method to set up the logger for each class.
+* `Logger` : Contains method to set up the logger for each class.
+* `Exceptions` : Contains all specialized exceptions created for this application.
+
+The `Main` component is run by`GetJackd.java` while the rest of the components are run by the respective classes
+inside their packages.
 
 Basic sequence of events:
-1. User inputs data which is read by `Ui` inside `GetJackd`
-2. `GetJackd` makes a new `CommandManager` Object
-3. The user input is passed into `CommandManager` which parses it to return a `Command`
-4. The `Command` object is executed.
-5. `Ui` acknowledges the command and shows the result of the Command if any.
+1. User inputs data which is read by `Ui` inside `Main`
+2. `Main` passes the input to  `Parser` which returns a `Command`
+3. The `Command` is executed.
+   * If the command edits the `Data` component (e.g. create a Workout) then `Storage` reflects the changes
+     in the json file.
+4. `Ui` acknowledges the command and shows the result of the Command if any.
 
 ### Data Component
 
