@@ -156,7 +156,8 @@ public class Parser {
     private static void executeView(String inputParams) {
         Trip currentTrip = Storage.getOpenTrip();
         if (inputParams == null) {
-            Storage.getOpenTrip().viewAllExpenses();
+            currentTrip.viewAllExpenses();
+
         } else {
             String[] paramString = inputParams.split(" ", 3);
             String secondCommand = paramString[0];
@@ -228,7 +229,6 @@ public class Parser {
     private static void executeList() {
         int index = 1;
         if (!Storage.checkOpenTrip()) {
-            Storage.getLogger().log(Level.INFO, "trying to list - no trip currently open");
             for (Trip trip : Storage.listOfTrips) {
                 Ui.printTripsInList(trip, index);
                 index++;
@@ -397,9 +397,9 @@ public class Parser {
             String[] splitCommandAndData = attributeToEdit.split(" ");
             String data = splitCommandAndData[1];
             switch (splitCommandAndData[0]) {
-            case "budget":
+            /*case "budget":
                 tripToEdit.setBudget(data);
-                break;
+                break;*/
             case "location":
                 tripToEdit.setLocation(data);
                 break;

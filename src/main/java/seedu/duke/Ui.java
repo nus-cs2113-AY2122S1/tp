@@ -34,9 +34,9 @@ public class Ui {
 
     public static void printExpensesSummary(Trip t) {
         System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
-        System.out.println("Total budget for this trip: " + stringMoney(t.getBudget()));
+        /*System.out.println("Total budget for this trip: " + stringMoney(t.getBudget()));
         System.out.println("Total expenditure so far: " + stringMoney(t.getTotalExpenses()));
-        System.out.println("Current budget left for this trip: " + stringMoney(t.getBudgetLeft()));
+        System.out.println("Current budget left for this trip: " + stringMoney(t.getBudgetLeft()));*/
     }
 
     public static void printFilteredExpenses(Expense e, int index) {
@@ -65,7 +65,7 @@ public class Ui {
     public static void printCreateFormatError() {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
-                + "create [place] [date] [exchange rate] [budget] [people].");
+                + "create [place] [date] [exchange rate] [people].");
     }
 
     public static void printExpenseFormatError() {
@@ -80,9 +80,9 @@ public class Ui {
                 + "view filter [expense-attribute] [attribute-information]");
     }
 
-    public static void printBudgetFormatError() {
+    /*public static void printBudgetFormatError() {
         System.out.print("Please re-enter your budget as a decimal number (e.g. 2000.00): ");
-    }
+    }*/
 
     public static void printExchangeRateFormatError() {
         System.out.print("Please re-enter your exchange rate as a decimal number (e.g. 1.32): ");
@@ -219,9 +219,9 @@ public class Ui {
 
     public static void displayHelp() {
         System.out.println("Create a trip to get started!");
-        System.out.println("create [place] [date] [exchange rate] [budget] [people]");
+        System.out.println("create [place] [date] [exchange rate] [people]");
         System.out.println();
-        System.out.println("Type [open] to open your trip");
+        System.out.println("Type open [trip number] to open your trip");
         System.out.println("While a trip is open, type [expense] to create an expense for that trip");
         System.out.println();
     }
@@ -229,4 +229,15 @@ public class Ui {
     public static void printInvalidFilterError() {
 
     }
+
+    public static void printFileNotFoundError() {
+        System.out.println("No preloaded data found! We have created a file for you.");
+    }
+
+    public static void printJsonParseError() {
+        //todo not sure what this should be
+        System.out.println("An unexpected error has occurred! Aborting...");
+
+    }
+
 }

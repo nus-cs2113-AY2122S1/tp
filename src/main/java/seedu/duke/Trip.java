@@ -11,7 +11,7 @@ public class Trip {
     private LocalDate dateOfTrip;
     private ArrayList<Expense> listOfExpenses = new ArrayList<>();
     private ArrayList<Person> listOfPersons = new ArrayList<>();
-    private double budget;
+    //private double budget; //may not be needed anymore
     private double exchangeRate;
     private String foreignCurrency;
     private String repaymentCurrency;
@@ -31,8 +31,8 @@ public class Trip {
         this.location = newTripInfo[0];
         setDateOfTrip(newTripInfo[1]);
         setExchangeRate(newTripInfo[2]);
-        setBudget(newTripInfo[3]);
-        this.listOfPersons = splitPeople(newTripInfo[4]);
+        //setBudget(newTripInfo[3]);
+        this.listOfPersons = splitPeople(newTripInfo[3]);
     }
 
     public static void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
@@ -122,11 +122,11 @@ public class Trip {
         }
     }
 
-    public double getBudget() {
+    /*public double getBudget() {
         return this.budget;
-    }
+    }*/
 
-    public void setBudget(String budget) {
+    /*public void setBudget(String budget) {
         try {
             this.budget = Double.parseDouble(budget);
         } catch (NumberFormatException e) {
@@ -134,7 +134,7 @@ public class Trip {
             Scanner scanner = Storage.getScanner();
             setBudget(scanner.nextLine().strip());
         }
-    }
+    }*/
 
     public double getExchangeRate() {
         return exchangeRate;
@@ -164,9 +164,9 @@ public class Trip {
         return totalExpense;
     }
 
-    public double getBudgetLeft() {
+    /*public double getBudgetLeft() {
         return getBudget() - getTotalExpenses();
-    }
+    }*/
 
 
     public String getForeignCurrency() {
@@ -215,9 +215,13 @@ public class Trip {
     }
 
     public void viewAllExpenses() {
-        for (Expense expense : listOfExpenses) {
-            Ui.printExpenseDetails(expense);
-            System.out.println();
+        if (listOfExpenses.isEmpty()) {
+            Ui.printNoExpensesError();
+        } else {
+            for (Expense expense : listOfExpenses) {
+                Ui.printExpenseDetails(expense);
+                System.out.println();
+            }
         }
     }
 
