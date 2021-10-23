@@ -31,9 +31,19 @@ public class ModuleManagerTest {
     @Test
     void getAllModules_success() {
         IntStream.range(0, 5).forEach(i -> moduleManager.addModule(TEMP_MODULE + i));
-        String [] listOfModules = moduleManager.getAllModules();
+        String[] listOfModules = moduleManager.getAllModules();
         assertEquals(5, listOfModules.length);
         assertTrue(Arrays.asList(listOfModules).contains(TEMP_MODULE + 3));
     }
 
+    @Test
+    void updateModule_success() {
+        moduleManager.addModule(TEMP_MODULE);
+        NusModule tempMod = moduleManager.getModule(TEMP_MODULE);
+        moduleManager.removeModule(TEMP_MODULE);
+        moduleManager.setModule("newName", tempMod);
+        assertNotNull(moduleManager.getModule("newName"));
+        moduleManager.removeModule("newName");
+        assertNull(moduleManager.getModule("newName"));
+    }
 }
