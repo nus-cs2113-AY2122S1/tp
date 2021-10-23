@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.TestFilePath;
@@ -23,15 +23,18 @@ import terminus.ui.Ui;
 
 public class AddNoteCommandTest {
 
+    Class<Note> type = Note.class;
     private NoteCommandParser commandParser;
     private ModuleManager moduleManager;
     private Ui ui;
     private ModuleStorage moduleStorage;
-
-
     private String tempModule = "test";
 
-    Class<Note> type = Note.class;
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
 
     @BeforeEach
     void setUp() throws IOException {
@@ -39,16 +42,10 @@ public class AddNoteCommandTest {
         this.moduleStorage.init(TestFilePath.SAVE_FILE);
         this.moduleStorage.createModuleDirectory(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.commandParser = NoteCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
         this.ui = new Ui();
-    }
-
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
     }
 
     @Test
@@ -62,7 +59,8 @@ public class AddNoteCommandTest {
     }
 
     @Test
-    void execute_success_multipleNotes() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_success_multipleNotes() throws InvalidArgumentException, InvalidCommandException, IOException,
+            DocumentException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test" + i + "\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(ui, moduleManager);

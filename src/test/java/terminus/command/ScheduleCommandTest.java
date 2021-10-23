@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,18 +28,19 @@ public class ScheduleCommandTest {
     void setUp() {
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         ui = new Ui();
     }
 
     @Test
-    void execute_linkAdvance_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_linkAdvance_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command mainCommand = commandParser.parseCommand("go " + tempModule + " schedule");
         CommandResult changeResult = mainCommand.execute(ui, moduleManager);
         assertTrue(changeResult.isOk());
         assertTrue(changeResult.getAdditionalData() instanceof LinkCommandParser);
         mainCommand = commandParser.parseCommand("go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" "
-                + "\"https://zoom.us\"");
+                + "\"3\" \"https://zoom.us\"");
         changeResult = mainCommand.execute(ui, moduleManager);
         assertTrue(changeResult.isOk());
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(Link.class).getTotalContents());
@@ -53,7 +55,7 @@ public class ScheduleCommandTest {
             () -> commandParser.parseCommand("go " + tempModule + " schedule -1").execute(ui, moduleManager));
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand(
-                            "go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" \"test.com\"")
+                            "go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" \"2\" \"test.com\"")
                     .execute(ui, moduleManager));
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("go " + tempModule + " schedule delete -1")

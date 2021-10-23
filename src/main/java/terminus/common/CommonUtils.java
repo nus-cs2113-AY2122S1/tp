@@ -117,12 +117,21 @@ public class CommonUtils {
         return false;
     }
 
+    public static boolean isValidDuration(LocalTime startTime, int duration) throws InvalidArgumentException {
+        LocalTime endTime = startTime.plusHours(duration);
+        if (duration < 0) {
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION, duration));
+        } else if (startTime.getHour() > endTime.getHour()) {
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_SCHEDULE_OVERFLOW);
+        }
+        return true;
+    }
+
     public static boolean isStringNullOrEmpty(String string) {
         return string == null || string.isBlank();
     }
 
     /**
-     * <<<<<<< HEAD
      * Checks if the given name is a valid file name.
      *
      * @param name The string to be checked.
@@ -170,5 +179,16 @@ public class CommonUtils {
     public static String getCurrentDay() {
         String currentDay = LocalDate.now().getDayOfWeek().toString();
         return currentDay;
+    }
+
+    /**
+     * Returns a boolean if the index give is valid.
+     *
+     * @param index The index to check
+     * @param listOfModule The full list of modules
+     * @return True if the index is valid or else it is false
+     */
+    public static boolean isValidIndex(int index, String[] listOfModule) {
+        return listOfModule.length >= index && index > 0;
     }
 }

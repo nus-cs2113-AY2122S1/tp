@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,14 +22,18 @@ import terminus.ui.Ui;
 
 public class DeleteNoteCommandTest {
 
+    Class<Note> type = Note.class;
     private NoteCommandParser commandParser;
     private ModuleManager moduleManager;
     private Ui ui;
     private ModuleStorage moduleStorage;
-
     private String tempModule = "test";
 
-    Class<Note> type = Note.class;
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
 
     @BeforeEach
     void setUp() throws IOException {
@@ -36,16 +41,10 @@ public class DeleteNoteCommandTest {
         this.moduleStorage.init(TestFilePath.SAVE_FILE);
         this.moduleStorage.createModuleDirectory(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.commandParser = NoteCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
         this.ui = new Ui();
-    }
-
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
     }
 
     @Test

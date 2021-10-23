@@ -1,5 +1,9 @@
 package terminus.command;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,9 +13,6 @@ import terminus.module.ModuleManager;
 import terminus.parser.LinkCommandParser;
 import terminus.parser.MainCommandParser;
 import terminus.ui.Ui;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TimetableCommandTest {
 
@@ -28,15 +29,16 @@ public class TimetableCommandTest {
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule1);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule1);
+        moduleManager.addModule(tempModule1);
         this.ui = new Ui();
     }
 
     @Test
-    void execute_viewWeekly_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_viewWeekly_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Saturday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
             CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
@@ -47,7 +49,7 @@ public class TimetableCommandTest {
 
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Friday\" \"00:00\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Friday\" \"00:00\" \"3\" \"https://zoom.us/test\"");
             CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
@@ -58,7 +60,7 @@ public class TimetableCommandTest {
 
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Sunday\" \"00:00\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Sunday\" \"00:00\" \"5\" \"https://zoom.us/test\"");
             CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
@@ -69,24 +71,25 @@ public class TimetableCommandTest {
     }
 
     @Test
-    void execute_viewDaily_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_viewDaily_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Tuesday\" \"00:00\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Tuesday\" \"00:00\" \"4\" \"https://zoom.us/test\"");
             CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
 
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Wednesday\" \"00:00\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Wednesday\" \"00:00\" \"3\" \"https://zoom.us/test\"");
             CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
 
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Thursday\" \"00:00\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Thursday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
             CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
@@ -109,10 +112,11 @@ public class TimetableCommandTest {
     }
 
     @Test
-    void execute_viewDaily_exceptionThrown() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_viewDaily_exceptionThrown()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                    "add \"test\" \"Saturday\" \"00:00\" \"https://zoom.us/test\"");
+                    "add \"test\" \"Saturday\" \"00:00\" \"4\" \"https://zoom.us/test\"");
             CommandResult addLinkResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addLinkResult.isOk());
         }
