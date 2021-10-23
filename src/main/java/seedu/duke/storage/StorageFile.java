@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import seedu.duke.items.Event;
+import seedu.duke.items.EventCatalog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,18 +52,18 @@ public class StorageFile {
         eventsWriter.close();
     }
 
-    public void load(ArrayList<Event> eventsList) {
+    public void load(EventCatalog eventCatalog) {
         File saveFile = new File(DEFAULT_FILE_PATH);
         try {
             List<String> encodedItems = getStringsFromFile(saveFile);
             assert encodedItems.get(0).startsWith("e") : "First String in list should be an Event";
             for (String item : encodedItems) {
                 if (item.startsWith("e")) {
-                    eventsList.add(EventDecoder.decodeEventFromString(item));
+                    eventCatalog.add(EventDecoder.decodeEventFromString(item));
                 }
                 if (item.startsWith("t")) {
-                    eventsList.get(eventsList.size() - 1)
-                            .taskList.add(TaskDecoder.decodeTaskFromString(item));
+                    eventCatalog.get(eventCatalog.size() - 1)
+                            .addToTaskList(TaskDecoder.decodeTaskFromString(item));
                 }
             }
         } catch (FileNotFoundException e) {
