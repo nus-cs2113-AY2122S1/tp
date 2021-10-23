@@ -13,8 +13,6 @@ import seedu.ui.TimetableUI.LineType;
  */
 public class TimetableLesson extends TimetableItem {
     private final int semester;
-    private final String type;
-    private final String venue;
     private final String classNo;
 
     /**
