@@ -82,7 +82,7 @@ public class AddDispenseCommand extends Command {
 
         for (Stock stock : filteredStocks) {
             int existingQuantity = stock.getQuantity();
-            int existingId = stock.getStockID();
+            int existingId = stock.getStockId();
             Date existingExpiry = stock.getExpiry();
 
             int setStockValue = 0;

@@ -89,7 +89,7 @@ public class ListStockCommand extends Command {
             switch (parameter) {
             case CommandParameters.ID:
                 filteredStocks = (ArrayList<Stock>) filteredStocks.stream().filter((m) ->
-                        m.getStockID() == Integer.parseInt(parameterValue)).collect(Collectors.toList());
+                        m.getStockId() == Integer.parseInt(parameterValue)).collect(Collectors.toList());
                 break;
             case CommandParameters.NAME:
                 filteredStocks = (ArrayList<Stock>) filteredStocks.stream().filter((m) ->

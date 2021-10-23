@@ -30,7 +30,7 @@ public class Stock extends Medicine {
     public static final String[] COLUMNS = {ID, NAME, PRICE, QUANTITY, EXPIRY_DATE, DESCRIPTION, MAX_QUANTITY};
 
     private static int stockCount = 0;
-    protected int stockID;
+    protected int stockId;
     protected double price;
     protected Date expiry;
     protected String description;
@@ -40,7 +40,7 @@ public class Stock extends Medicine {
     public Stock(String name, double price, int quantity, Date expiry, String description, int maxQuantity) {
         super(name, quantity);
         stockCount++;
-        this.stockID = stockCount;
+        this.stockId = stockCount;
         this.price = price;
         this.expiry = expiry;
         this.description = description;
@@ -55,12 +55,12 @@ public class Stock extends Medicine {
         Stock.stockCount = stockCount;
     }
 
-    public int getStockID() {
-        return stockID;
+    public int getStockId() {
+        return stockId;
     }
 
-    public void setStockID(int stockID) {
-        this.stockID = stockID;
+    public void setStockId(int stockId) {
+        this.stockId = stockId;
     }
 
     public double getPrice() {
@@ -104,7 +104,7 @@ public class Stock extends Medicine {
     }
 
     public String toFileFormat() {
-        String fileFormat = getStockID() + "|" + getMedicineName() + "|" + getPrice() + "|" + getQuantity() + "|"
+        String fileFormat = getStockId() + "|" + getMedicineName() + "|" + getPrice() + "|" + getQuantity() + "|"
                 + DateParser.dateToString(getExpiry()) + "|" + getDescription() + "|" + getMaxQuantity() + "|"
                 + isDeleted();
         return fileFormat;

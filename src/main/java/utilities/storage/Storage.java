@@ -8,7 +8,6 @@ import utilities.parser.FileParser;
 import inventory.Stock;
 import utilities.ui.Ui;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -37,6 +36,10 @@ public class Storage {
     private static File orderArchiveFile;
     private static File dispenseArchiveFile;
     private static Storage storage = null;
+    int highestStockId = 0;
+    int highestOrderId = 0;
+    int highestDispenseId = 0;
+
 
     /**
      * Helps to create the Storage instance or returns the Storage instance if it exists.
@@ -238,7 +241,7 @@ public class Storage {
             throw new InvalidDataException("[ROW: " + stockRow + "] INVALID NUMBER OF DELIMITER OR FIELDS"
                     + " [data/stock.txt]");
         }
-        int stockID = FileParser.parseStockID(splitStockDetails, stockRow);
+        int stockId = FileParser.parseStockId(splitStockDetails, stockRow);
         String stockName = FileParser.parseStockName(splitStockDetails, stockRow);
         double stockPrice = FileParser.parseStockPrice(splitStockDetails, stockRow);
         int stockQuantity = FileParser.parseStockQuantity(splitStockDetails, stockRow);
@@ -248,8 +251,14 @@ public class Storage {
         boolean stockIsDeleted = FileParser.parseStockIsDeleted(splitStockDetails, stockRow);
 
         Stock stock = new Stock(stockName, stockPrice, stockQuantity, stockExpiry, stockDescription, stockMaxQuantity);
-        stock.setStockID(stockID);
-        stock.setStockCount(stockID);
+        if (stockId > highestStockId) {
+            stock.setStockId(stockId);
+            stock.setStockCount(stockId);
+            highestStockId = stockId;
+        } else {
+            stock.setStockId(stockId);
+            stock.setStockCount(highestStockId);
+        }
         stock.setDeleted(stockIsDeleted);
         return stock;
     }
@@ -276,8 +285,14 @@ public class Storage {
         if (orderStatus) {
             order.setDelivered();
         }
-        order.setOrderId(orderId);
-        order.setOrderCount(orderId);
+        if (orderId > highestOrderId) {
+            order.setOrderId(orderId);
+            order.setOrderCount(orderId);
+            highestOrderId = orderId;
+        } else {
+            order.setOrderId(orderId);
+            order.setOrderCount(highestOrderId);
+        }
         return order;
     }
 
@@ -303,8 +318,14 @@ public class Storage {
 
         Dispense dispense = new Dispense(dispenseName, dispenseQuantity, dispenseCustomerId, dispenseDate,
                 dispenseStaff, dispenseStockId);
-        dispense.setDispenseId(dispenseId);
-        dispense.setDispenseCount(dispenseId);
+        if (dispenseId > highestDispenseId) {
+            dispense.setDispenseId(dispenseId);
+            dispense.setDispenseCount(dispenseId);
+            highestDispenseId = dispenseId;
+        } else {
+            dispense.setDispenseId(dispenseId);
+            dispense.setDispenseCount(highestDispenseId);
+        }
         return dispense;
     }
 }

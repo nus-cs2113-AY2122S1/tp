@@ -102,7 +102,7 @@ public class DeleteStockCommand extends Command {
                 continue;
             }
             Stock stock = (Stock) medicine;
-            if (stock.getStockID() == stockId) {
+            if (stock.getStockId() == stockId) {
                 stock.setQuantity(0);
                 stock.setDeleted(true);
                 logger.log(Level.INFO, "Stock id found and deleted");

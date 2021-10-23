@@ -69,7 +69,7 @@ public class StockManager {
         int stockId = Integer.parseInt(parameters.get(CommandParameters.ID));
         Stock stock = null;
         for (Medicine medicine : medicines) {
-            if (medicine instanceof Stock && stockId == ((Stock) medicine).getStockID()) {
+            if (medicine instanceof Stock && stockId == ((Stock) medicine).getStockId()) {
                 stock = (Stock) medicine;
             }
         }
@@ -93,7 +93,7 @@ public class StockManager {
             }
             Stock stock = (Stock) medicine;
             boolean isSameName = name.equalsIgnoreCase(stock.getMedicineName());
-            boolean isSameId = stockId == stock.getStockID();
+            boolean isSameId = stockId == stock.getStockId();
             if (isSameName && isSameId) {
                 return stock;
             }

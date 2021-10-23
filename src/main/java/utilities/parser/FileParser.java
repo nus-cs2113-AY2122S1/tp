@@ -4,11 +4,15 @@ import errors.InvalidDataException;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashSet;
 
 /**
  * FileParser class handles all validation of input from data/stock.txt, data/order.txt, data/dispense.txt
  */
 public class FileParser {
+    public static HashSet<Integer> stockIds = new HashSet<>();
+    public static HashSet<Integer> orderIds = new HashSet<>();
+    public static HashSet<Integer> dispenseIds = new HashSet<>();
 
     /**
      * Perform validation of Stock Id during parsing from file.
@@ -18,12 +22,16 @@ public class FileParser {
      * @return Stock Id of integer data type for creation of Stock object.
      * @throws InvalidDataException Invalid data will trigger exception.
      */
-    public static int parseStockID(String[] splitStockDetails, int stockRow) throws InvalidDataException {
+    public static int parseStockId(String[] splitStockDetails, int stockRow) throws InvalidDataException {
         try {
             int stockId = Integer.parseInt(splitStockDetails[0]);
             if (stockId <= 0) {
                 throw new InvalidDataException("[ROW: " + stockRow + "] INVALID STOCK ID [data/stock.txt]");
             }
+            if (stockIds.contains(stockId)) {
+                throw new InvalidDataException("[ROW: " + stockRow + "] INVALID STOCK ID [data/stock.txt]");
+            }
+            stockIds.add(stockId);
             return stockId;
         } catch (NumberFormatException e) {
             throw new InvalidDataException("[ROW: " + stockRow + "] INVALID STOCK ID [data/stock.txt]");
@@ -172,6 +180,10 @@ public class FileParser {
             if (orderId <= 0) {
                 throw new InvalidDataException("[ROW: " + orderRow + "] INVALID ORDER ID [data/order.txt]");
             }
+            if (orderIds.contains(orderId)) {
+                throw new InvalidDataException("[ROW: " + orderRow + "] INVALID ORDER ID [data/order.txt]");
+            }
+            orderIds.add(orderId);
             return orderId;
         } catch (NumberFormatException e) {
             throw new InvalidDataException("[ROW: " + orderRow + "] INVALID ORDER ID [data/order.txt]");
@@ -268,6 +280,10 @@ public class FileParser {
             if (dispenseId <= 0) {
                 throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE ID [data/dispense.txt]");
             }
+            if (dispenseIds.contains(dispenseId)) {
+                throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE ID [data/dispense.txt]");
+            }
+            dispenseIds.add(dispenseId);
             return dispenseId;
         } catch (NumberFormatException e) {
             throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID DISPENSE ID [data/dispense.txt]");

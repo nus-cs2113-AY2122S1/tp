@@ -92,12 +92,12 @@ public class UpdateStockCommand extends Command {
             rowsAffected = filteredStocks.size();
         }
 
-        setUpdatesByStockID(parameters, filteredStocks, stock);
+        setUpdatesByStockId(parameters, filteredStocks, stock);
         ui.print("Updated! Number of rows affected: " + rowsAffected);
         if (parameters.containsKey(CommandParameters.NAME)) {
             ui.print("Stock Id changed from:");
             for (int i = 0; i < filteredStocks.size(); i++) {
-                ui.print(oldFilteredStocks.get(i).getStockID() + " -> " + filteredStocks.get(i).getStockID());
+                ui.print(oldFilteredStocks.get(i).getStockId() + " -> " + filteredStocks.get(i).getStockId());
             }
         }
 
@@ -126,7 +126,7 @@ public class UpdateStockCommand extends Command {
             boolean isSameName = medicine.getMedicineName().equalsIgnoreCase(stock.getMedicineName());
             boolean isSameExpDate = ((Stock) medicine).getExpiry().equals(stock.getExpiry());
             if (isSameName && isSameExpDate) {
-                String newStockId = String.valueOf(((Stock) medicine).getStockID());
+                String newStockId = String.valueOf(((Stock) medicine).getStockId());
                 parameters.put(CommandParameters.ID, newStockId);
                 newStock = (Stock) medicine;
                 break;
@@ -160,8 +160,8 @@ public class UpdateStockCommand extends Command {
                 if (!(medicine instanceof Stock)) {
                     continue;
                 }
-                int stockId = ((Stock) medicine).getStockID();
-                if (stockId == stock.getStockID()) {
+                int stockId = ((Stock) medicine).getStockId();
+                if (stockId == stock.getStockId()) {
                     ((Stock) medicine).setDeleted(true);
                     medicine.setQuantity(0);
                 }
@@ -255,7 +255,7 @@ public class UpdateStockCommand extends Command {
      * @param filteredStocks Arraylist of filtered medicine stocks.
      * @param stock          Stock object of the given stock id.
      */
-    private void setUpdatesByStockID(LinkedHashMap<String, String> parameters, ArrayList<Stock> filteredStocks,
+    private void setUpdatesByStockId(LinkedHashMap<String, String> parameters, ArrayList<Stock> filteredStocks,
                                      Stock stock) {
         logger.log(Level.INFO, "Attempt to update stock information.");
         for (String parameter : parameters.keySet()) {
