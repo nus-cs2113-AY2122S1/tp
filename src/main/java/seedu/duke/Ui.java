@@ -259,6 +259,10 @@ public class Ui {
             + "Are you sure you want to remove all Dishes? Type y to confirm or n to disregard" + System.lineSeparator()
             + LINE_DIVIDER;
 
+    public static final String CONFIRM_CLEAR_ALL = LINE_DIVIDER + System.lineSeparator()
+            + "Are you sure you want to remove all Dishes and Ingredients? Type y to confirm or n to disregard" + System.lineSeparator()
+            + LINE_DIVIDER;
+
     public static final String CONFIRM_DEL_INGR = LINE_DIVIDER + System.lineSeparator()
             + "Are you sure you want to remove this Ingredient? Type y to confirm or n to disregard"
             + System.lineSeparator()
@@ -433,6 +437,10 @@ public class Ui {
 
     public void printConfirmClearIngr() {
         System.out.println(CONFIRM_CLEAR_INGR);
+    }
+
+    public void printConfirmClearAll() {
+        System.out.println(CONFIRM_CLEAR_ALL);
     }
 
     public void printDisregardMsg() {
