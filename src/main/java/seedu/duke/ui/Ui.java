@@ -44,24 +44,6 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
-    public static String getHelpMessage() {
-
-        return "Here's a list of commands and what they do.\n"
-                + "To find out more information about the command, such as input format and parameters, "
-                + "enter \"help COMMAND\" where COMMAND is the command you want to know more about\n"
-                + "\"add\" : Adds an exercise to a workout\n"
-                + "\"done\" : Marks an exercise as done\n"
-                + "\"remove\" : Removes an exercise from a workout\n"
-                + "\"create\" : Creates a new workout\n"
-                + "\"delete\" : Deletes a workout\n"
-                + "\"list\" : Lists all your workouts\n"
-                + "\"recommend\" : Recommends workouts of a given difficulty\n"
-                + "\"display\" : Shows all the exercises in a specified workout\n"
-                + "\"edit\" : Edits a specific exercise in a specified workout\n"
-                + "\"search\" : Displays workouts or exercises that contain the specified keyword\n"
-                + "\"bye\" : Ends the program";
-    }
-
     private void printText(String message) {
         System.out.println(prefix + message.replace("\n", newLine));
     }

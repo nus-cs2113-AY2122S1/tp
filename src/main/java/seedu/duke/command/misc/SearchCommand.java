@@ -48,8 +48,8 @@ public class SearchCommand extends Command {
         Map<String, ArrayList<?>> map = new HashMap<>();
         ArrayList<Workout> workoutList = workouts.getAllWorkouts();
 
-        boolean matchingWorkoutsFound = getMatchingWorkouts(map, workoutList);
-        boolean matchingExercisesFound = getMatchingExercises(map, workoutList);
+        boolean matchingWorkoutsFound = addMatchingWorkouts(map, workoutList);
+        boolean matchingExercisesFound = addMatchingExercises(map, workoutList);
 
         if (!matchingExercisesFound && !matchingWorkoutsFound) {
             return new CommandResult(MESSAGE_NO_MATCHES_FOUND);
@@ -58,7 +58,7 @@ public class SearchCommand extends Command {
         return new CommandResult(map, false);
     }
 
-    private boolean getMatchingWorkouts(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
+    private boolean addMatchingWorkouts(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
         boolean matchesFound = false;
         ArrayList<Workout> filteredWorkouts = getFilteredWorkoutsWithWorkoutIndex(workoutList);
         if (!filteredWorkouts.isEmpty()) {
@@ -68,8 +68,8 @@ public class SearchCommand extends Command {
         return matchesFound;
     }
 
-    private boolean getMatchingExercises(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
-        boolean matchingWorkouts = false;
+    private boolean addMatchingExercises(Map<String, ArrayList<?>> map, ArrayList<Workout> workoutList) {
+        boolean matchesFound = false;
 
         for (int i = 0; i < workoutList.size(); i++) {
             int displayIndex = i + 1;
@@ -77,13 +77,13 @@ public class SearchCommand extends Command {
             ArrayList<Exercise> exercises = w.getAllExercises();
             ArrayList<Exercise> filteredExercises = getFilteredExercisesWithExerciseIndex(exercises);
             if (!filteredExercises.isEmpty()) {
-                matchingWorkouts = true;
+                matchesFound = true;
                 String matchingExerciseMessage = String.format(MESSAGE_MATCHING_EXERCISES_IN_WORKOUT,
                         displayIndex, w.getWorkoutName());
                 map.put(matchingExerciseMessage, filteredExercises);
             }
         }
-        return matchingWorkouts;
+        return matchesFound;
     }
 
     private ArrayList<Workout> getFilteredWorkoutsWithWorkoutIndex(ArrayList<Workout> workoutList) {
