@@ -10,10 +10,6 @@ import java.util.Map;
  * Sense-makes the inputs given and distributes the information to other parts of the program.
  */
 public class Parser {
-    private static final String CONTACT_NUMBER_PREFIX = "/cn";
-    private static final String FLIGHT_PREFIX = "/f";
-    private static final String ACCOMMS_PREFIX = "/a";
-    private static final String TOUR_PREFIX = "/t";
     public static final String ERROR_INVALID_INPUT = "Invalid input! Please enter a valid command.";
     public static final String ERROR_EXTRA_INPUT = "Extra input! Refrain from doing so.";
     public static final String ERROR_INVALID_CUT_INDEX = "Invalid cut index!";
@@ -21,7 +17,7 @@ public class Parser {
     public static final String ERROR_DUPLICATE_PREFIXES = "Duplicate prefixes! Please try again.";
     public static final String ERROR_MISSING_PREFIXES
             = "Missing prefixes! Did you miss out some fields? Please try again.";
-    public static final String ERROR_MISSING_NAME = "Missing client name! Please try again.";
+    public static final String ERROR_MISSING_NAME = "Missing name/id! Please try again.";
 
     /**
      * Parses user's input into command to execute.
