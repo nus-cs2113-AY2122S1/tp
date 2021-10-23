@@ -69,4 +69,33 @@ public class Trip {
     public void deleteDay(int i) {
         daysList.deleteDay(i);
     }
+
+    public String getSaveTrip() {
+        return "new " + getTripName() + " /from " + getStartCountryCode() + " /to " + getEndCountryCode() + "\n";
+    }
+
+    public int getDaySize() {
+        return daysList.getSize();
+    }
+
+    public String getSaveDay() {
+        String saveDataForDays = "";
+        if (getDaySize() > 0) {
+            saveDataForDays = "add-day " + getTripName() + " " + getDaySize() + "\n";
+        }
+        return saveDataForDays;
+    }
+
+    public String getSaveItem() {
+        String saveDataForItems = "";
+        for (int i = 0; i < getDaySize(); i++) {
+            Day current = daysList.getDay(i);
+            if (current.getItemsListSize() > 0) {
+                for (int j = 0; j < current.getItemsListSize(); j++) {
+                    saveDataForItems += "add-item " + getTripName() + " /day " + i + current.itemsList.getItemInfo(j);
+                }
+            }
+        }
+        return saveDataForItems;
+    }
 }

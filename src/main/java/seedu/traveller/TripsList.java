@@ -1,5 +1,7 @@
 package seedu.traveller;
 
+import seedu.traveller.exceptions.TripNotFoundException;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,16 +21,19 @@ public class TripsList {
         this.trips.add(trip);
     }
 
-    public Trip getTrip(int i) {
+    public Trip getTrip(int i) throws TripNotFoundException {
+        if (i < 0) {
+            throw new TripNotFoundException();
+        }
         return this.trips.get(i);
     }
 
-    public Trip getTrip(String tripName) {
+    public Trip getTrip(String tripName) throws TripNotFoundException {
         int tripIndex = getTripIndex(tripName);
         return getTrip(tripIndex);
     }
 
-    public int getTripIndex(String tripName) {
+    public int getTripIndex(String tripName) throws TripNotFoundException {
         int tripIndex = -1;
         for (int i = 0; i < this.getSize(); i++) {
             Trip trip = this.getTrip(i);

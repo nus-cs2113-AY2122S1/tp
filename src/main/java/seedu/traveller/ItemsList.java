@@ -68,4 +68,9 @@ public class ItemsList {
         }
         return itemsListString.toString();
     }
+
+    public String getItemInfo(int itemIndex) {
+        Item current = getItem(itemIndex);
+        return " /time " + current.getItemTime() + " /name " + current.getItemName() + "\n";
+    }
 }

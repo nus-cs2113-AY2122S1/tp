@@ -1,5 +1,7 @@
 package seedu.traveller;
 
+import seedu.traveller.exceptions.TripNotFoundException;
+
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,7 +43,7 @@ public class Ui {
         System.out.println(trip);
     }
 
-    public void printAllTrips(TripsList tripsList) {
+    public void printAllTrips(TripsList tripsList) throws TripNotFoundException {
         assert tripsList.getSize() > 0 : "There are no trips in the tripsList.";
         System.out.println("\tHere are all your trips: ");
         for (int i = 0; i < tripsList.getSize(); i++) {
@@ -86,8 +88,8 @@ public class Ui {
         System.out.println("\tThe distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
     }
 
-    public void printAddDayToTrip(String tripName) {
-        System.out.println("\tAdded a new day to trip " + tripName + ".");
+    public void printAddDayToTrip(String tripName, int daysNumber) {
+        System.out.println("\tAdded " + daysNumber + " days to trip " + tripName + ".");
     }
 
     public void printAddItemToDay(String tripName, int dayIndex, String itemName) {
