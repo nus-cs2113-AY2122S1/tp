@@ -8,7 +8,6 @@ import seedu.utility.DataManager;
 import seedu.utility.FinancialTracker;
 
 import seedu.utility.Parser;
-import seedu.utility.StonksGraph;
 import seedu.utility.Ui;
 
 
@@ -23,12 +22,12 @@ public class StonksXD {
         this.ui = new Ui();
         this.finances = new FinancialTracker();
         this.parser = new Parser();
-        this.dataManager = new DataManager();
         this.budgetManager = new BudgetManager();
+        this.dataManager = new DataManager(this.parser, this.finances, this.ui, this.budgetManager);
     }
 
     public void run() {
-        dataManager.load(parser, finances, ui);
+        dataManager.loadAll();
         ui.printWelcome();
         boolean exitFlag = true;
         while (exitFlag) {
@@ -39,7 +38,7 @@ public class StonksXD {
                 assert command.getClass() == ExitCommand.class;
                 exitFlag = false;
             }
-            dataManager.save(parser, finances, ui);
+            dataManager.saveAll();
         }
         ui.printBye();
     }
