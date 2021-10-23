@@ -8,10 +8,12 @@ alt Able to connect
     activate NusMods
     NusMods -> NusMods : getOnlineModList()
     activate NusMods
+    NusMods --> NusMods
     deactivate NusMods
     loop for each mod
         NusMods -> NusMods : getOnlineModInfo()
         activate NusMods
+        NusMods --> NusMods
         deactivate NusMods
         NusMods -> ModStorage : saveModInfo()
         activate ModStorage
