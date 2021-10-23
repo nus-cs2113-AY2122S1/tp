@@ -53,7 +53,9 @@ public class RecipeList {
      *
      * @return The list of recipes.
      */
-    public TreeMap<String,Recipe> getRecipes() {return recipes;}
+    public TreeMap<String,Recipe> getRecipes() {
+        return recipes;
+    }
 
     /**
      * Returns the number of recipes in the list.

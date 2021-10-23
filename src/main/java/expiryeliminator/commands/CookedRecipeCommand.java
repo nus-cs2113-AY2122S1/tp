@@ -13,14 +13,14 @@ import java.util.TreeMap;
 /**
  * Updates the ingredient amounts in the repository based on the recipe that is cooked.
  */
-public class CookedRecipeCommand extends Command{
+public class CookedRecipeCommand extends Command {
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "cooked";
 
     public static final String MESSAGE_RECIPE_COOKED = "Now you have these quantities left for your ingredients:\n"
             + "\n%1$s\n";
-    public static final String MESSAGE_INSUFFICIENT_QUANTITY = "You don't have enough ingredients! " +
-            "Generate a shopping list to see what ingredients you're missing.";
+    public static final String MESSAGE_INSUFFICIENT_QUANTITY = "You don't have enough ingredients! "
+            + "Generate a shopping list to see what ingredients you're missing.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes the ingredients' quantities based on"
             + "the recipe cooked.\n"
             + "Parameters: r/RECIPE NAME\n"
