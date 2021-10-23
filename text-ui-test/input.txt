@@ -26,4 +26,10 @@ delete
 help delete
 delete 1
 list
+recommend beginner
+list
+enter 1
+display
+delete 1
+back
 bye
