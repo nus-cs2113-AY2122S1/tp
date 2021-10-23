@@ -7,6 +7,7 @@ import seedu.duke.exceptions.FoodoramaException;
 import seedu.duke.logger.LoggerManager;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,12 +22,23 @@ public class ClearAllCommand extends Command {
     @Override
     public void execute(ArrayList<String> parameters) throws FoodoramaException {
         logger.log(Level.INFO, "Start of process");
-
-        DishList.clearList();
-        IngredientList.clearList();
-        logger.log(Level.INFO, "Successfully cleared both lists");
-
-        ui.printAllCleared();
+        Scanner input = new Scanner(System.in);
+        ui.printConfirmClearAll();
+        String confirmClear = input.nextLine().toLowerCase();
+        while (!(confirmClear.equals("y") | confirmClear.equals("n"))) {
+            ui.clearTerminalAndPrintNewPage();
+            ui.printInvalidConfirmation();
+            confirmClear = input.nextLine().toLowerCase();
+        }
+        ui.clearTerminalAndPrintNewPage();
+        if (confirmClear.equals("y")) {
+            DishList.dishList.clear();
+            IngredientList.ingredientList.clear();
+            ui.printAllCleared();
+            logger.log(Level.INFO, "Successfully cleared both lists");
+        } else {
+            ui.printDisregardMsg();
+        }
         logger.log(Level.INFO, "End of process");
     }
 }
