@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 import expiryeliminator.commands.AddIngredientCommand;
 import expiryeliminator.commands.AddRecipeCommand;
 import expiryeliminator.commands.ByeCommand;
@@ -23,6 +24,8 @@ import expiryeliminator.commands.ListRecipeCommand;
 import expiryeliminator.commands.ViewIngredientCommand;
 import expiryeliminator.commands.ViewRecipeCommand;
 import expiryeliminator.commands.ShoppingListCommand;
+import expiryeliminator.commands.CookedRecipeCommand;
+
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
 import expiryeliminator.parser.argparser.QuantityParser;
@@ -111,6 +114,8 @@ public class Parser {
                 return prepareViewRecipe(args);
             case ShoppingListCommand.COMMAND_WORD:
                 return prepareShoppingList(args);
+            case CookedRecipeCommand.COMMAND_WORD:
+                return prepareCookedRecipe(args);
             case ByeCommand.COMMAND_WORD:
                 return new ByeCommand();
             case HelpCommand.COMMAND_WORD:
@@ -251,6 +256,19 @@ public class Parser {
 
         final String ingredient = new IngredientParser().parse(argParser.getSingleArg(PREFIX_INGREDIENT));
         return new ViewIngredientCommand(ingredient);
+    }
+
+    private static Command prepareCookedRecipe(String args) throws InvalidArgFormatException {
+        final ArgParser argParser = new ArgParser(PREFIX_RECIPE);
+        try {
+            argParser.parse(args);
+        } catch (InvalidPrefixException | MissingPrefixException | MultipleArgsException e) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewIngredientCommand.MESSAGE_USAGE));
+        }
+
+        final String recipe = new RecipeParser().parse(argParser.getSingleArg(PREFIX_RECIPE));
+        return new CookedRecipeCommand(recipe);
     }
 
     private static Command prepareViewRecipe(String args) throws InvalidArgFormatException {
