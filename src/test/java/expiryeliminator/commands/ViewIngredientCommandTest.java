@@ -14,7 +14,7 @@ public class ViewIngredientCommandTest {
 
     @Test
     public void viewIngredientCommand_sampleIngredientRepository_expectRedAppleString() {
-        IngredientRepository ingredientRepository = TestUtil.generateIngredientRepository();
+        IngredientRepository ingredientRepository = TestUtil.generateIngredientRepositoryWithSomeExpiredIngredients();
         assert ingredientRepository != null;
         Command command = new ViewIngredientCommand("Red Apple");
 
