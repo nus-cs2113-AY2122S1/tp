@@ -6,9 +6,9 @@ import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.NotFoundException;
 
 /**
- * Updates the units of ingredients both in the ingredient repository and in recipes
+ * Updates the units of ingredients both in the ingredient repository and in recipes.
  */
-public class UpdateUnitsCommand extends Command{
+public class UpdateUnitsCommand extends Command {
 
     /** Unique word associated with the command. */
     public static final String COMMAND_WORD = "update units";
@@ -18,8 +18,8 @@ public class UpdateUnitsCommand extends Command{
                     + "Example: " + COMMAND_WORD + " i/Chicken u/kilograms";
 
     private static final String MESSAGE_INGREDIENT_NOT_FOUND = "Sorry. No matching ingredients found!";
-    private static final String MESSAGE_INGREDIENT_UNIT_UPDATED = "The units for this " +
-            "ingredient has been updated to %1$s.\n";
+    private static final String MESSAGE_INGREDIENT_UNIT_UPDATED = "The units for this "
+            + "ingredient has been updated to %1$s.\n";
 
     private final String ingredientName;
     private final String newUnit;
