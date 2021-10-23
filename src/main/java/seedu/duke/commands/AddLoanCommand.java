@@ -11,7 +11,7 @@ public class AddLoanCommand extends AddCommand {
     LocalDate date;
 
     public static final String MESSAGE_USAGE = "Adds a loan record.\n"
-            + "Parameters: l/DEBTOR_NAME a/AMOUNT d/[DATE_OF_LOAN]\n"
+            + "Parameters: -l n/DEBTOR_NAME a/AMOUNT d/[DATE_OF_LOAN]\n"
             + "Note: If DATE_OF_LOAN is not specified, the current system date will be the "
             + "default value.";
 

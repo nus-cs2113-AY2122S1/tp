@@ -15,7 +15,7 @@ public class AddExpenditureCommand extends AddCommand {
     LocalDate date;
 
     public static final String MESSAGE_USAGE = "Adds an expenditure record.\n"
-            + "Parameters: e/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE]\n"
+            + "Parameters: -e c/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE]\n"
             + "Note: If DATE_OF_EXPENDITURE is not specified, the current system date will be the "
             + "default value.";
 

@@ -45,7 +45,7 @@ public class Parser {
     /** Offset required to convert between 1-indexing and 0-indexing.  */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
-    /** Offset after reading type identifier tag */
+    /** Offset after reading type identifier tag. */
     public static final int TYPE_IDENTIFIER_END_INDEX = 2;
 
     private static String[] splitCommandWordAndArgs(String userInput) {
