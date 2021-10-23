@@ -7,10 +7,8 @@ import seedu.duke.modules.ModuleList;
 import seedu.duke.universities.UniversityList;
 import seedu.duke.commands.ListModCommand;
 import seedu.duke.commands.ListUniCommand;
-
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -25,6 +23,7 @@ public class ListCommandParser {
         logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
 
         if (arguments.trim().length() == 0) {
+            logger.log(Level.WARNING, Constants.LOGMSG_PARSEFAILED);
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
         }
         switch (arguments.trim()) {
