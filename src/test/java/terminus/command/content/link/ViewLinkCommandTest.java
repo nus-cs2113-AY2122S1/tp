@@ -52,9 +52,9 @@ public class ViewLinkCommandTest {
         }
         assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
 
-        String stringBuilder = Messages.CONTENT_MESSAGE_HEADER +
-            moduleManager.getModule(tempModule).getContentManager(type).listAllContents() +
-            Messages.CONTENT_MESSAGE_FOOTER;
+        String stringBuilder = Messages.CONTENT_MESSAGE_HEADER
+            + moduleManager.getModule(tempModule).getContentManager(type).listAllContents()
+            + Messages.CONTENT_MESSAGE_FOOTER;
         Command viewCommand = linkCommandParser.parseCommand("view");
         CommandResult viewResult = viewCommand.execute(moduleManager);
         assertEquals(stringBuilder, TestUtils.generateCommandOutputString(viewResult.getMessage()));
