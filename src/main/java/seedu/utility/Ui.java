@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 
 public class Ui {
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private Scanner in;
     private final String newLine = System.lineSeparator();
 
@@ -225,29 +226,29 @@ public class Ui {
     }
 
     private void printExpenseBetweenMessage(double totalExpense, LocalDate start, LocalDate end) {
-        String startString = start.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
-        String endString = end.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         System.out.printf("Your total expense between %s and %s is $%.2f", startString, endString, totalExpense);
         System.out.print(newLine);
     }
 
     private void printNoExpenseBetweenMessage(LocalDate start, LocalDate end) {
-        String startString = start.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
-        String endString = end.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         System.out.printf("You do not have any expense between %s and %s", startString, endString);
         System.out.print(newLine);
     }
 
     private void printIncomeBetweenMessage(double totalExpense, LocalDate start, LocalDate end) {
-        String startString = start.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
-        String endString = end.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         System.out.printf("Your total income between %s and %s is $%.2f", startString, endString, totalExpense);
         System.out.print(newLine);
     }
 
     private void printNoIncomeBetweenMessage(LocalDate start, LocalDate end) {
-        String startString = start.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
-        String endString = end.format(DateTimeFormatter.ofPattern("dd MMM yyy"));
+        String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
         System.out.printf("You do not have any income between %s and %s", startString, endString);
         System.out.print(newLine);
 

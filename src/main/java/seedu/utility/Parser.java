@@ -117,15 +117,16 @@ public class Parser {
     private static final String CHECK_BUDGET_KEYWORD = "check_budget";
     private static final String SET_THRESHOLD_KEYWORD = "set_threshold";
     
-    private static final String DATA_SEPARATOR = ", ";
+    private static final String DATA_SEPARATOR = ",";
 
     private static final Pattern EXPENSE_DATA_FORMAT
-            = Pattern.compile("E" + DATA_SEPARATOR + "(?<description>[^/]+)" + DATA_SEPARATOR
-            + "(?<amount>[^/]+)" + DATA_SEPARATOR + "(?<category>[^/]+)" + DATA_SEPARATOR + "(?<date>[^/]+)");
+            = Pattern.compile("E" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
+            + "(?<amount>.+)" + DATA_SEPARATOR + "(?<category>.+)" + DATA_SEPARATOR + "(?<date>.+)");
     private static final Pattern INCOME_DATA_FORMAT
-            = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>[^/]+)" + DATA_SEPARATOR
-            + "(?<amount>[^/]+)" + DATA_SEPARATOR + "(?<category>[^/]+)" + DATA_SEPARATOR + "(?<date>[^/]+)");
-    public static final String SHOW_GRAPH_KEYWORD = "show_graph";
+            = Pattern.compile("I" + DATA_SEPARATOR + "(?<description>.+)" + DATA_SEPARATOR
+            + "(?<amount>.+)" + DATA_SEPARATOR + "(?<category>.+)" + DATA_SEPARATOR + "(?<date>.+)");
+    private static final String SHOW_GRAPH_KEYWORD = "show_graph";
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
 
 
     /**
@@ -196,9 +197,9 @@ public class Parser {
         }
         try {
             String start = matcher.group("start").trim();
-            LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
             String end = matcher.group("end").trim();
-            LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
             return new TotalIncomeBetweenCommand(startDate,endDate);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
@@ -212,9 +213,9 @@ public class Parser {
         }
         try {
             String start = matcher.group("start").trim();
-            LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate startDate = LocalDate.parse(start, DateTimeFormatter.ofPattern(DATE_FORMAT));
             String end = matcher.group("end").trim();
-            LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate endDate = LocalDate.parse(end, DateTimeFormatter.ofPattern(DATE_FORMAT));
             return new TotalExpenseBetweenCommand(startDate,endDate);
         } catch (DateTimeParseException e) {
             return new InvalidCommand(Messages.DATE_FORMAT_MESSAGE);
@@ -492,12 +493,14 @@ public class Parser {
 
     public String convertExpenseToData(Expense expense) {
         return "E" + DATA_SEPARATOR + expense.getDescription() + DATA_SEPARATOR + expense.getValue() + DATA_SEPARATOR 
-                + expense.getCategory() + DATA_SEPARATOR + expense.getDate();
+                + expense.getCategory() + DATA_SEPARATOR 
+                + expense.getDate().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 
     public String convertIncomeToData(Income income) {
         return "I" + DATA_SEPARATOR + income.getDescription() + DATA_SEPARATOR + income.getValue() + DATA_SEPARATOR 
-                + income.getCategory() + DATA_SEPARATOR + income.getDate();
+                + income.getCategory() + DATA_SEPARATOR 
+                + income.getDate().format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
     
     public Expense convertDataToExpense(String data) throws InvalidExpenseAmountException,
@@ -513,12 +516,12 @@ public class Parser {
         }
         String dataAmount = matcher.group("amount").trim();
         double expenseAmount = parseExpenseAmount(dataAmount);
-        String expenseCategory = matcher.group("category").trim();
+        String expenseCategory = matcher.group("category").trim().toUpperCase();
         if (expenseCategory.isBlank()) {
             throw new InvalidExpenseDataFormatException();
         }
         String date = matcher.group("date").trim();
-        LocalDate expenseDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate expenseDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
         Expense expense;
         switch (expenseCategory) {
         case "FOOD":
@@ -565,8 +568,8 @@ public class Parser {
         if (incomeCategory.isBlank()) {
             throw new InvalidIncomeDataFormatException();
         }
-        String date = matcher.group("date").trim();
-        LocalDate incomeDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String date = matcher.group("date").trim().toUpperCase();
+        LocalDate incomeDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
         Income income;
         switch (incomeCategory) {
         case "ALLOWANCE":
