@@ -13,7 +13,7 @@ import expiryeliminator.util.TestUtil;
 public class RecipeListTest {
     @Test
     public void add_correctRecipeInput_correctRecipe() {
-        Recipe recipe = TestUtil.generateRecipe();
+        Recipe recipe = TestUtil.generateChickenRecipe();
         RecipeList recipes = new RecipeList();
         try {
             recipes.add(recipe);
@@ -25,11 +25,11 @@ public class RecipeListTest {
 
     @Test
     public void add_duplicateRecipeName_ExceptionThrown() {
-        Recipe recipe = TestUtil.generateRecipe();
+        Recipe recipe = TestUtil.generateChickenRecipe();
         RecipeList recipes = new RecipeList();
         try {
             recipes.add(recipe);
-            Recipe duplicateRecipe = TestUtil.generateRecipe();
+            Recipe duplicateRecipe = TestUtil.generateChickenRecipe();
             assertThrows(DuplicateDataException.class, () -> {
                 recipes.add(duplicateRecipe);
             });
@@ -40,7 +40,7 @@ public class RecipeListTest {
 
     @Test
     public void remove_recipeNameNotInList_ExceptionThrown() {
-        Recipe recipe = TestUtil.generateRecipe();
+        Recipe recipe = TestUtil.generateChickenRecipe();
         RecipeList recipes = new RecipeList();
         try {
             recipes.add(recipe);
@@ -54,7 +54,7 @@ public class RecipeListTest {
 
     @Test
     public void remove_recipeNameInList_recipeRemoved() {
-        Recipe recipe = TestUtil.generateRecipe();
+        Recipe recipe = TestUtil.generateChickenRecipe();
         RecipeList recipes = new RecipeList();
         try {
             recipes.add(recipe);

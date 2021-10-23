@@ -11,7 +11,7 @@ public class ListIngredientsExpiringCommandTest {
 
     @Test
     public void listIngredientsExpiringCommand_sampleIngredientRepository_expectExpiringIngredientString() {
-        IngredientRepository ingredientRepository = TestUtil.generateIngredientRepository();
+        IngredientRepository ingredientRepository = TestUtil.generateIngredientRepositoryWithSomeExpiredIngredients();
         assert ingredientRepository != null;
         Command command = new ListIngredientExpiringCommand();
         String message = String.format(ListIngredientExpiringCommand.MESSAGE_SHOW_WHOLE_LIST,
