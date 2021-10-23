@@ -53,8 +53,10 @@ public class DeleteCommand extends Command {
             System.out.println(e.getMessage());
             isCorrectFormat = false;
         } catch (NumberFormatException e) {
-            System.out.println("PLease enter a number for the item index!");
+            System.out.println("Please enter a number for the item index!");
             isCorrectFormat = false;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("No such item index exists!");
         }
     }
 
@@ -90,10 +92,6 @@ public class DeleteCommand extends Command {
             indexToDelete = getIndex(command[2]);
         } else {
             throw new DukeException("Invalid item index!");
-        }
-
-        if (!isValidIndex(indexToDelete)) {
-            throw new DukeException("No such item index exists!");
         }
     }
 
