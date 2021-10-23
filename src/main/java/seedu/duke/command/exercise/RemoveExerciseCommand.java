@@ -47,6 +47,7 @@ public class RemoveExerciseCommand extends Command {
      *
      * @param workouts is the list of Workouts
      * @param storage  is a storage object
+     * @return all the information to be displayed to the user
      * @throws GetJackDException if there is an invalid index used or an error occurs within the storage
      */
     @Override
@@ -59,7 +60,7 @@ public class RemoveExerciseCommand extends Command {
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove));
         } catch (IndexOutOfBoundsException e) {
-            LOGGER.info("remove exercise failed - exercise not found");
+            LOGGER.info("Remove exercise failed - exercise not found");
             throw new GetJackDException(ERROR_MESSAGE_EXERCISE_NOT_FOUND);
         }
     }

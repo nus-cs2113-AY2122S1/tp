@@ -2,6 +2,7 @@ package seedu.duke.parser;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.ExitCommand;
+import seedu.duke.command.exercise.EditExerciseCommand;
 import seedu.duke.command.misc.HelpCommand;
 import seedu.duke.command.workout.RecommendWorkoutCommand;
 import seedu.duke.command.exercise.AddExerciseCommand;
@@ -40,6 +41,8 @@ public class HelpParser extends Parser {
             return new HelpCommand(MarkExerciseAsDoneCommand.MESSAGE_USAGE);
         case RemoveExerciseCommand.COMMAND_WORD:
             return new HelpCommand(RemoveExerciseCommand.MESSAGE_USAGE);
+        case EditExerciseCommand.COMMAND_WORD:
+            return new HelpCommand(EditExerciseCommand.MESSAGE_USAGE);
         case ExitCommand.COMMAND_WORD:
             return new HelpCommand(ExitCommand.MESSAGE_USAGE);
         default:

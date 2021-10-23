@@ -25,7 +25,7 @@ class CreateWorkoutCommandTest {
     }
 
     @Test
-    void executeUserCommand_validDataAddToEmptyWorkoutList_exerciseAdded() throws GetJackDException {
+    void executeUserCommand_validDataAddToEmptyWorkoutList_exerciseAdded() {
         try {
             int initialSize = workoutList.getAllWorkouts().size();
             CreateWorkoutCommand c = new CreateWorkoutCommand("workout", LocalDate.parse("2021-12-12"));

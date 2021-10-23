@@ -1,7 +1,9 @@
-package seedu.duke.command;
+package seedu.duke.command.workout;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.duke.command.Command;
 import seedu.duke.command.workout.EnterWorkoutCommand;
 import seedu.duke.command.workout.ExitWorkoutCommand;
 import seedu.duke.exception.GetJackDException;
@@ -33,7 +35,7 @@ class ExitWorkoutCommandTest {
     void executeUserCommand_enterThenExitWorkoutOne_workoutModeChanged() throws GetJackDException {
         EnterWorkoutCommand c = new EnterWorkoutCommand(1);
         c.executeUserCommand(workoutList, storage);
-        assertEquals(1, Command.workoutMode);
+        Assertions.assertEquals(1, Command.workoutMode);
         ExitWorkoutCommand c2 = new ExitWorkoutCommand();
         c2.executeUserCommand(workoutList, storage);
         assertEquals(0, Command.workoutMode);

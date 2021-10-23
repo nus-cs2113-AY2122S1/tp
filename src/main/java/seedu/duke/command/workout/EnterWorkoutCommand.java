@@ -44,6 +44,7 @@ public class EnterWorkoutCommand extends Command {
      *
      * @param workouts is the list of Workouts
      * @param storage  is a storage object
+     * @return all the information to be displayed to the user
      * @throws GetJackDException if there is an invalid index used
      */
     @Override
