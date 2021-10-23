@@ -36,6 +36,13 @@ public class EditCommand extends Command {
                 + "\n\tendCountry: " + endCountry;
     }
 
+    public void editTripInfo(Trip current, List<Country> path, List<Double> distances) {
+        current.setStartCountryCode(this.startCountry);
+        current.setEndCountryCode(this.endCountry);
+        current.setPath(path);
+        current.setDistances(distances);
+    }
+
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
         int tripIndex = tripsList.getTripIndex(this.tripName);
         if (tripIndex == -1) {
@@ -43,12 +50,11 @@ public class EditCommand extends Command {
         }
         assert tripIndex < tripsList.getSize() && tripIndex > -1 : "The trip index is out of bound.";
 
-        tripsList.deleteTrip(tripIndex);
         MinCalcResult result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
         List<Country> path = result.getPath();
         List<Double> distances = result.getDistances();
-        Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry, path, distances);
-        tripsList.addTrip(trip);
+        Trip current = tripsList.getTrip(tripIndex);
+        editTripInfo(current, path, distances);
         ui.printEdit(tripName);
     }
 }

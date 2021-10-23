@@ -10,10 +10,10 @@ import java.util.logging.Logger;
 public class Trip {
     private static final Logger logger = Logger.getLogger(TripsList.class.getName());
     private final String tripName;
-    private final String startCountryCode;
-    private final String endCountryCode;
-    private final List<Country> path;
-    private final List<Double> distances;
+    private String startCountryCode;
+    private String endCountryCode;
+    private List<Country> path;
+    private List<Double> distances;
     private final DaysList daysList;
 
     public Trip(String tripName, String startCountryCode, String endCountryCode,
@@ -46,16 +46,32 @@ public class Trip {
         return this.startCountryCode;
     }
 
+    public void setStartCountryCode(String startCountryCode) {
+        this.startCountryCode = startCountryCode;
+    }
+
     public String getEndCountryCode() {
         return this.endCountryCode;
+    }
+
+    public void setEndCountryCode(String endCountryCode) {
+        this.endCountryCode = endCountryCode;
     }
 
     public List<Country> getPath() {
         return this.path;
     }
 
+    public void setPath(List<Country> path) {
+        this.path = path;
+    }
+
     public List<Double> getDistances() {
         return this.distances;
+    }
+
+    public void setDistances (List<Double> distances) {
+        this.distances = distances;
     }
 
     public Day getDay(int i) {
