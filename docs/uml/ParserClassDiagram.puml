@@ -4,7 +4,7 @@ CommandParser --> "2..*" Command: has >
 Terminus -> "0..1" CommandParser: commandParser
 
 !startsub COMMANDPARSER
-abstract class CommandParser {
+abstract class "{abstract}\nCommandParser" as CommandParser {
  - workplace: String
  + CommandParser(workspace: String)
  + {abstract} parseCommand(command: String): Command
