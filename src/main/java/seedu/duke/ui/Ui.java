@@ -34,7 +34,7 @@ public class Ui {
         out.println(Constants.MODULE_MAPPING_SEPARATOR + uni.getName());
     }
 
-    public static void printModuleMapping(ModuleMapping mm, int index) {
+    public static void printMapping(ModuleMapping mm, int index) {
         printIndex(index, false);
         String mappingDetails
                 = " " + mm.localModule.getModuleCode()
