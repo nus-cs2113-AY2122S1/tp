@@ -244,12 +244,26 @@ public class Ui {
 
     public static void printJsonParseError() {
         //todo not sure what this should be
-        System.out.println("An unexpected error has occurred! Aborting...");
+        System.out.println("We couldn't read your save file. It may be corrupted, "
+                + "or may have been wrongly modified outside the program.");
+        System.out.println("If you would like to overwrite your current save file and"
+                + "start with a new save file, please enter 'y'. "
+                + "Otherwise, please enter 'n' to exit the program.");
+        System.out.println("IMPORTANT: if you choose to start with a new save file, your previous save file"
+                + "will no longer be recoverable. This operation is irreversible.");
+    }
+
+    public static void printJsonParseUserInputPrompt() {
+        System.out.print("Would you like to overwrite your save file? (y/n): ");
     }
 
     public static void printNoLastTripError() {
         System.out.println("You may have deleted the most recently modified trip. "
                 + "Please try again with the trip number of the trip you wish to edit.");
+    }
+
+    public static void printCreateFileFailure() {
+        System.out.println("The save file could not be created. Exiting the program now...");
     }
 
 }

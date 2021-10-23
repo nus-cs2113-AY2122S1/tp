@@ -51,15 +51,30 @@ public class Storage {
             listOfTrips = new Gson().fromJson(jsonString, tripType);
         } catch (JsonParseException e) {
             Ui.printJsonParseError();
-            Scanner scanner = Storage.getScanner();
-            if (scanner.nextLine().strip().contains("n")) {
-                Storage.getLogger().log(Level.WARNING, "JSON Parse failed, user requests program end");
-                System.exit(1);
-            } else {
-                //TODO: clear the current file and start with a new file
-            }
+            askOverwriteOrClose();
         } catch (FileNotFoundException e) {
             Ui.printFileNotFoundError();
+        }
+    }
+
+    private static void askOverwriteOrClose() {
+        while (true) {
+            Ui.printJsonParseUserInputPrompt();
+            String input = scanner.nextLine().strip();
+            if (input.contains("n")) {
+                Storage.getLogger().log(Level.WARNING, "JSON Parse failed, user requests program end");
+                System.exit(1);
+                return;
+            } else if (input.contains("y")) {
+                try {
+                    FileWriter fileWriter = new FileWriter(FILE_PATH);
+                    fileWriter.close();
+                } catch (IOException e) {
+                    Ui.printCreateFileFailure();
+                    System.exit(1);
+                }
+                return;
+            }
         }
     }
 
