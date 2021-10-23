@@ -139,11 +139,12 @@ public class Ui {
 
     public static void printAllTrips() {
         System.out.println("List of Trips: ");
-        for (int i = 0; i < Storage.listOfTrips.size(); i++) {
+        ArrayList<Trip> listOfTrips = Storage.getListOfTrips();
+        for (int i = 0; i < listOfTrips.size(); i++) {
             System.out.print("\t");
             System.out.println(i + 1 + ". "
-                    + Storage.listOfTrips.get(i).getLocation() + " "
-                    + Storage.listOfTrips.get(i).getDateOfTripString());
+                    + listOfTrips.get(i).getLocation() + " "
+                    + listOfTrips.get(i).getDateOfTripString());
 
         }
     }

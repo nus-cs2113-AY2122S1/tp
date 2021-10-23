@@ -21,9 +21,10 @@ import java.util.logging.Logger;
 public class Storage {
 
     private static final String FILE_PATH = "trips.json";
-
-    public static ArrayList<Trip> listOfTrips = new ArrayList<>();
+    private static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static Trip openTrip = null;
+    private static Trip lastTrip = null;
+    private static Expense lastExpense = null;
 
     private static Scanner scanner;
     private static Logger logger;
@@ -85,6 +86,10 @@ public class Storage {
         }
     }
 
+    public static void setOpenTripAsLastTrip() {
+        lastTrip = openTrip;
+    }
+
     /**
      * Checks if there is an open trip or not.
      *
@@ -108,6 +113,26 @@ public class Storage {
 
     public static void setLogger(Logger logger) {
         Storage.logger = logger;
+    }
+
+    public static ArrayList<Trip> getListOfTrips() {
+        return listOfTrips;
+    }
+
+    public static Trip getLastTrip() {
+        return lastTrip;
+    }
+
+    public static void setLastTrip(Trip lastTrip) {
+        Storage.lastTrip = lastTrip;
+    }
+
+    public static Expense getLastExpense() {
+        return lastExpense;
+    }
+
+    public static void setLastExpense(Expense lastExpense) {
+        Storage.lastExpense = lastExpense;
     }
 
 

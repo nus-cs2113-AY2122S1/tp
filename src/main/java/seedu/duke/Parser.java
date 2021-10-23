@@ -25,16 +25,16 @@ public class Parser {
         if (inputCommand.equals("quit")) {
             Ui.goodBye();
             return false;
-        } else if (Storage.listOfTrips.isEmpty() && !inputCommand.equals("create")) {
+        } else if (!checkValidCommand(inputCommand)) {
+            Storage.getLogger().log(Level.WARNING, "invalid user input");
+            Ui.printUnknownCommandError();
+            return true;
+        } else if (Storage.getListOfTrips().isEmpty() && !inputCommand.equals("create")) {
             Storage.getLogger().log(Level.WARNING, "No trip created yet");
             Ui.printNoTripError();
             return true;
         } else if (inputCommand.equals("close")) {
             Storage.closeTrip();
-            return true;
-        } else if (!checkValidCommand(inputCommand)) {
-            Storage.getLogger().log(Level.WARNING, "invalid user input");
-            Ui.printUnknownCommandError();
             return true;
         }
 
@@ -128,35 +128,44 @@ public class Parser {
     private static void executeCreate(String indexAsString) {
         String[] newTripInfo = indexAsString.split(" ", 4);
         Trip newTrip = new Trip(newTripInfo);
-        Storage.listOfTrips.add(newTrip);
+        Storage.getListOfTrips().add(newTrip);
         System.out.println("Your trip to " + newTrip.getLocation() + " on "
                 + newTrip.getDateOfTripString() + " has been successfully added!");
+        Storage.setLastTrip(newTrip);
     }
 
     private static void executeEdit(String inputDescription) {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
-        int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
         assert tripToEditInfo[1] != null;
         String attributesToEdit = tripToEditInfo[1];
-        Trip tripToEdit = Storage.listOfTrips.get(indexToEdit);
+        Trip tripToEdit;
+        if (tripToEditInfo[0].equals("last")) {
+            tripToEdit = Storage.getLastTrip();
+        } else {
+            int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
+            tripToEdit = Storage.getListOfTrips().get(indexToEdit);
+            Storage.setLastTrip(tripToEdit);
+        }
         editTripPerAttribute(tripToEdit, attributesToEdit);
     }
 
     //assumes that listOfTrips have at least 1 trip
     private static void executeOpen(String indexAsString) {
         int indexToGet = Integer.parseInt(indexAsString) - 1;
-        Storage.setOpenTrip(Storage.listOfTrips.get(indexToGet));
-        Ui.printOpenTripMessage(Storage.listOfTrips.get(indexToGet));
+        Storage.setOpenTrip(Storage.getListOfTrips().get(indexToGet));
+        Ui.printOpenTripMessage(Storage.getOpenTrip());
+        Storage.setOpenTripAsLastTrip();
     }
 
     private static void executeSummary() {
         Ui.printExpensesSummary(Storage.getOpenTrip());
+        Storage.setOpenTripAsLastTrip();
     }
 
     private static void executeView(String inputParams) {
+        Trip openTrip = Storage.getOpenTrip();
         if (inputParams == null) {
-            Storage.getOpenTrip().viewAllExpenses();
-
+            openTrip.viewAllExpenses();
         } else {
             String[] paramString = inputParams.split(" ", 3);
             String secondCommand = paramString[0];
@@ -164,13 +173,14 @@ public class Parser {
             String expenseAttribute = paramString[2];
             if (secondCommand.equals("filter")) {
                 try {
-                    Trip.getFilteredExpenses(expenseCategory, expenseAttribute);
+                    openTrip.getFilteredExpenses(expenseCategory, expenseAttribute);
                 } catch (IndexOutOfBoundsException e) {
                     Ui.printNoExpensesError();
                 }
 
             }
         }
+
     }
 
     private static void executeDelete(String inputParams) {
@@ -215,9 +225,9 @@ public class Parser {
 
     private static void executeDeleteTrip(int tripIndex) {
         try {
-            String tripLocation = Storage.listOfTrips.get(tripIndex).getLocation();
-            String tripDate = Storage.listOfTrips.get(tripIndex).getDateOfTripString();
-            Storage.listOfTrips.remove(tripIndex);
+            String tripLocation = Storage.getListOfTrips().get(tripIndex).getLocation();
+            String tripDate = Storage.getListOfTrips().get(tripIndex).getDateOfTripString();
+            Storage.getListOfTrips().remove(tripIndex);
             Ui.printDeleteTripSuccessful(tripLocation, tripDate);
         } catch (IndexOutOfBoundsException e) {
             Ui.printUnknownTripIndexError();
@@ -228,7 +238,7 @@ public class Parser {
     private static void executeList() {
         int index = 1;
         if (!Storage.checkOpenTrip()) {
-            for (Trip trip : Storage.listOfTrips) {
+            for (Trip trip : Storage.getListOfTrips()) {
                 Ui.printTripsInList(trip, index);
                 index++;
             }
