@@ -18,11 +18,12 @@ public class CreateWorkoutParser extends Parser {
     }
 
     /**
-     * Gets arguments required for a workout, such as workoutIndex, exerciseName, sets and reps.
-     * commandArgs passed in as [workoutName], [deadline]
-     * @param commandArgs user input without the command word.
+     * Gets arguments required for a workout, such as workoutIndex, exerciseName, sets and reps
+     * commandArgs passed in as [workoutName], [deadline].
+     *
+     * @param commandArgs user input without the command word
      * @return string array containing workoutName and deadline
-     * @throws GetJackDException thrown if any of the above-mentioned arguments are empty.
+     * @throws GetJackDException thrown if any of the above-mentioned arguments are empty
      */
     static String[] getWorkoutArgs(String commandArgs) throws GetJackDException {
         if (!commandArgs.contains(PARAMETER_SEPARATOR)) {

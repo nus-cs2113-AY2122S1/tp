@@ -33,6 +33,7 @@ public class ExitCommand extends Command {
      *
      * @param workouts is the list of Workouts
      * @param storage  is a storage object
+     * @return all the information to be displayed to the user
      */
     @Override
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) {

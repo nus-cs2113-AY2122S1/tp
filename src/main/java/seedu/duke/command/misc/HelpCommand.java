@@ -34,6 +34,7 @@ public class HelpCommand extends Command {
      *
      * @param workouts List of Workouts
      * @param storage  Storage object
+     * @return all the information to be displayed to the user
      */
     @Override
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) {

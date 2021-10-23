@@ -8,6 +8,9 @@ import seedu.duke.exception.GetJackDException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Parses and processes input for the edit command.
+ */
 public class EditExerciseParser extends Parser {
     private static int workoutIndex;
 

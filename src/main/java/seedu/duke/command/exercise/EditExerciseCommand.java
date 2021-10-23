@@ -24,7 +24,8 @@ public class EditExerciseCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1, 2, Lunges, 5 10 - edit exercise 1 to Lunges of 5 sets and 10 reps "
             + "from workout 2";
     public static final String MESSAGE_SUCCESS = "The edited exercise: %1$s";
-    private static final Logger LOGGER = Logger.getLogger(RemoveExerciseCommand.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(EditExerciseCommand.class.getName());
 
     private final String newDescription;
 
@@ -62,6 +63,7 @@ public class EditExerciseCommand extends Command {
      *
      * @param workouts is the list of Workouts
      * @param storage  is a storage object
+     * @return all the information to be displayed to the user
      * @throws GetJackDException if there is an invalid index used or an error occurs within the storage
      */
     @Override

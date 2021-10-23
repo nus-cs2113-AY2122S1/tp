@@ -50,6 +50,7 @@ public class AddExerciseCommand extends Command {
      *
      * @param workouts is the list of Workouts
      * @param storage  is a storage object
+     * @return all the information to be displayed to the user
      * @throws GetJackDException if sets or reps are less than or equal to 0 or an error occurs within the storage
      */
     @Override
