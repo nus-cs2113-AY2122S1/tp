@@ -39,7 +39,7 @@ public abstract class ParserUtils {
     private static final String ERROR_EMAIL_ADDRESS_WRONG_FORMAT = "Incorrect email address format." + END_LINE;
     private static final String ERROR_ADDRESS_NOT_SPECIFIED = "Address not specified." + END_LINE;
     private static final String REGEX_VERTICAL_LINE = "\\|";
-    private static final String REGEX_INPUT_PARAMETER = " [a-zA-Z]{1,2}/";
+    private static final String REGEX_INPUT_PARAMETER = "[a-zA-Z]/";
     private static final String REGEX_EMAIL = "(([a-zA-Z0-9][\\w-.]*[a-zA-Z0-9])|[a-zA-Z0-9])@([\\w]+\\.)+[\\w]+";
     private static final String REGEX_IC = "[STFGM][0-9]{7}[A-Z]";
     private static final String REGEX_PHONE_NUMBER = "[\\d]{8}";
@@ -169,7 +169,10 @@ public abstract class ParserUtils {
         if (attributeString.startsWith(PARAMETER_ADDRESS)) {
             String address = parseResidentialAddress(attributeString.substring(PARAMETER_BUFFER));
             person.setResidentialAddress(address);
+            return;
         }
+        throw new MedBotParserException("\"" + attributeString.substring(0, 2)
+                + "\" is not a valid attribute specifier");
     }
 
     /**
@@ -360,8 +363,7 @@ public abstract class ParserUtils {
      */
     private static String preprocessMultiAttributeInput(String input) {
         //replacement function to add a "|" character before an attribute specifier
-        Function<MatchResult, String> replacementFunction = x ->
-                SEPARATOR_SPACE + VERTICAL_LINE + x.group().substring(1);
+        Function<MatchResult, String> replacementFunction = x -> VERTICAL_LINE + x.group();
         Pattern pattern = Pattern.compile(REGEX_INPUT_PARAMETER);
         Matcher matcher = pattern.matcher(input);
         return matcher.replaceAll(replacementFunction);
