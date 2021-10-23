@@ -50,7 +50,7 @@ The _Architecture Diagram_ shown above explains the high-level design of the App
 _Figure 2. An example of interactions between components for `add_module c/CS2113T n/Software Engineering`._
 
 ## Implementation
-### Add module
+### Add Module
 The add module mechanism is facilitated by `AddModuleCommand`. It extends `Command` and uses `ModuleList` which stores
 module internally as an ArrayList `modules`.<br>
 
@@ -74,7 +74,7 @@ called to ensure that there is no existing module with code `CS2113T`.
 and `Software Engineering` respectively. Then, `ModuleList#addModule` is called to add the newly created `Module` 
 object into the `modules` ArrayList within `ModuleList`.
 
-### Add student
+### Add Student
 The add student mechanism is facilitated by `AddStudentCommand`. It extends `Command` and uses `StudentList` which
 stores student internally as an ArrayList `students`.
 <br>  
@@ -100,7 +100,9 @@ called to ensure that there is an existing module with code `CS2113T`.
 `a0217978j` and `jonny` respectively. Then, `StudentList#addModule` is called to add the newly created `Student` 
 object into the `students` ArrayList within `StudentList`.
 
-### Set attendance
+
+
+### Set Attendance
 The set attendance mechanism is facilitated by SetAttendanceCommand. It extends `Command` and
 uses  `AttendanceList` which stores a student's lessons attendance as an
 ArrayList `attendances`.
@@ -133,9 +135,10 @@ with lesson number `1` and attendance record `Present` is set as its lesson numb
 Then, `AttendanceList#addAttendance` is called to add the newly created `Attendance` object into the `attendances` 
 ArrayList within `AttendanceList`.
 
+### Add Assessment
+HI
 
-
-### Set marks
+### Set Marks
 The set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command` and uses a `results` HashMap to store 
 `assessmentName` and the `marks` for it as a key-value pair.<br>  
 
@@ -162,7 +165,6 @@ turn calls the `Student#setMarks` command to put the key-value pair into the `re
 `1`.
 
 
-
 ## Product scope
 ### Target user profile
 
@@ -184,9 +186,16 @@ turn calls the `Student#setMarks` command to put the key-value pair into the `re
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
 ## Non-Functional Requirements
-
-{Give non-functional requirements}
+1. Should work on any mainstream OS as long as it has Java 11 or above installed.
+2. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should 
+be able to accomplish most of the tasks faster using commands than using the mouse.
 
 ## Glossary
+* Mainstream OS: Windows, Linux, Unix, OS-X
 
-* *glossary item* - Definition
+
+## Method Summary
+
+Method | Description |
+  ------ | --------------- |
+add_module | adds a module lol
