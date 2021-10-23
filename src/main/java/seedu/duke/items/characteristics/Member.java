@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Member {
 
     private String name;
-    private ArrayList<Task> assignedTasks;
+    private ArrayList<Task> assignedTasks = new ArrayList<>();
     public static final String MEMBER_DATA_ARGS_DELIMITER = "\\s*\\|\\s*";
 
 
