@@ -26,7 +26,7 @@ public class DataManager {
     private static final String ENTRIES_FILE_NAME = "./StonksXD_Entries.csv";
     private static final String ENTRIES_CSV_HEADER = "entry_type,entry_description,amount,category,date";
     private static final String BUDGET_FILE_NAME = "./StonksXD_Budget.csv";
-    private static final String BUDGET_CSV_HEADER = "overallBudget,foodBudget,transportBudget,medicalBudget," 
+    private static final String BUDGET_CSV_HEADER = "overallBudget,foodBudget,transportBudget,medicalBudget,"
             + "billsBudget,entertainmentBudget,miscBudget";
     private final Parser parser;
     private final FinancialTracker financialTracker;
@@ -57,7 +57,7 @@ public class DataManager {
         loadEntries();
         //loadBudgetSettings();
     }
-    
+
     /**
      * Saves all entries StonksXD is currently tracking into a csv file StonksXD_Data.csv.
      * This allows users to not lose all their entries when program closes.
@@ -120,10 +120,10 @@ public class DataManager {
                 }
             }
         }
-        
+
         if (hasCorruptedLines) {
             ui.printError(Messages.HAS_CORRUPTED_DATA_ENTRIES);
-        } 
+        }
     }
 
     /**
@@ -168,8 +168,8 @@ public class DataManager {
             // To be updated
         }
 
-//      if (hasCorruptedLines) {
-//          ui.printError(Messages.HAS_CORRUPTED_BUDGET_SETTINGS);
-//      }
+        //if (hasCorruptedLines) {
+        //   ui.printError(Messages.HAS_CORRUPTED_BUDGET_SETTINGS);
+        //}
     }
 }
