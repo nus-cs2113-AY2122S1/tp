@@ -1,5 +1,8 @@
 package terminus.command.content.link;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -22,17 +25,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class AddLinkCommandTest {
 
+    Class<Link> type = Link.class;
     private LinkCommandParser linkCommandParser;
     private ModuleManager moduleManager;
     private Ui ui;
-
     private String tempModule = "test";
-    Class<Link> type = Link.class;
 
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
         this.ui = new Ui();

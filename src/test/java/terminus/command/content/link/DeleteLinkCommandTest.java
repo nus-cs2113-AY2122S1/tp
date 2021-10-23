@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,27 +19,28 @@ import terminus.ui.Ui;
 
 public class DeleteLinkCommandTest {
 
+    Class<Link> type = Link.class;
     private LinkCommandParser linkCommandParser;
     private ModuleManager moduleManager;
     private Ui ui;
-
     private String tempModule = "test";
-
-    Class<Link> type = Link.class;
 
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
         this.ui = new Ui();
     }
 
     @Test
-    void execute_deleteLink_success() throws InvalidCommandException, InvalidArgumentException, IOException {
+    void execute_deleteLink_success()
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 3; i++) {
-            Command addLinkCommand = linkCommandParser.parseCommand("add \"test_desc\" \"Monday\" \"12:00\" \"1\" \"https://zoom.us/test\"");
+            Command addLinkCommand = linkCommandParser.parseCommand(
+                "add \"test_desc\" \"Monday\" \"12:00\" \"1\" \"https://zoom.us/test\""
+            );
             CommandResult addResult = addLinkCommand.execute(ui, moduleManager);
             assertTrue(addResult.isOk());
         }
@@ -59,7 +61,8 @@ public class DeleteLinkCommandTest {
     }
 
     @Test
-    void execute_deleteLink_throwsException() throws InvalidCommandException, InvalidArgumentException {
+    void execute_deleteLink_throwsException()
+            throws InvalidCommandException, InvalidArgumentException {
         Command deleteLinkCommand = linkCommandParser.parseCommand("delete 20");
         assertThrows(InvalidArgumentException.class, () -> deleteLinkCommand.execute(ui, moduleManager));
     }

@@ -208,4 +208,15 @@ public class CommonUtils {
         String currentDay = LocalDate.now().getDayOfWeek().toString();
         return currentDay;
     }
+
+    /**
+     * Returns a boolean if the index give is valid.
+     *
+     * @param index The index to check
+     * @param listOfModule The full list of modules
+     * @return True if the index is valid or else it is false
+     */
+    public static boolean isValidIndex(int index, String[] listOfModule) {
+        return listOfModule.length >= index && index > 0;
+    }
 }

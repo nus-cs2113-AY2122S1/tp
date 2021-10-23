@@ -2,13 +2,12 @@ package terminus.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.content.Link;
@@ -260,6 +259,17 @@ public class CommonUtilsTest {
         assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(23,59), 0));
         assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(00,00), 0));
         assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(23,00), 0));
+    }
+
+    @Test
+    void isValidIndex() {
+        String[] list = new String[50];
+        assertTrue(CommonUtils.isValidIndex(5, list));
+        assertTrue(CommonUtils.isValidIndex(50, list));
+        assertTrue(CommonUtils.isValidIndex(1, list));
+        assertFalse(CommonUtils.isValidIndex(0, list));
+        assertFalse(CommonUtils.isValidIndex(51, list));
+        assertFalse(CommonUtils.isValidIndex(100, list));
     }
 
     @Test

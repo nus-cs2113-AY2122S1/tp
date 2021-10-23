@@ -70,4 +70,8 @@ public class Messages {
         "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
     public static final String MESSAGE_EMPTY_DAILY_SCHEDULE = "You have no schedule for today.";
     public static final String MESSAGE_CONFLICTING_SCHEDULE = "Your new schedule has conflicts with:";
+    public static final String UPDATE_COMMAND_MESSAGE = "Updates the module name";
+    public static final String MESSAGE_COMMAND_EXPORT = "Export all existing notes into a pdf file.";
+    public static final String SUCCESSFUL_EXPORT = "Exported notes! Check the data folder.";
+    public static final String FAIL_TO_EXPORT = "Unable to export file to pdf.";
 }

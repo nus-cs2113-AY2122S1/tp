@@ -346,3 +346,113 @@ Once the adjustment of weights of the question is done, the process is repeated 
 questions left inside `QuestionGenerator`. Otherwise, the Active Recall session will be terminated, 
 and the input will be passed back to the `CommandParser`.
 
+### 4.3 Workspace Implementation
+
+This workspace feature aims to provide users with a better experience in navigating the different
+features TermiNUS has to offer, and caters for both users which enjoy using a particular feature or
+prefer typing commands in a single step.
+
+#### 4.3.1 Current Implementation
+The workspace feature was implemented with the idea of a single command input as well as a multiple 
+step input. For example, running 3 separate commands `go Module` -> `note` -> 
+`add "Content Name" "Content"` would perform the same functionality as a single command 
+`go Module note add "Content Name" "Content"`. This workspace feature implemented in the Command and 
+CommandParser component.
+
+
+![](attachments/CommandDetailedClassDiagram.png)
+
+The `Command` class in fact has an abstract child `WorkspaceCommand` and grandchild 
+`InnerModuleCommand` that inherit from it. In general, aside from the `Command` classes in the 
+diagram, all other `XYZCommand` children simply inherit from `Command` itself. Each `Command` child 
+
+The `WorkspaceCommand` class which inherits from `Command` and requires a `CommandParser` in its 
+constructor as this command helps with the workspace implementation. When the command is executed,
+it will check if there are any arguments to the command. If there are arguments, it will pass the 
+remaining arguments the initialised `commandMap` and attempt to parse and execute the command. 
+In the case of error, an exception will be thrown and caught in the `Terminus` class. 
+In the case where there is no arguments, the program will store the `commandMap` in the 
+`CommandResult` `additionalData` attribute and returns that `CommandResult` to the `Terminus` class.
+The `Terminus` class checks if the `CommandResult` contains a `additionData` and replaces its own 
+`CommandParser` with the `CommandParser` stored in `additionalData`. This command helps `Terminus` 
+to change and beware of workspace changes
+
+The `InnerModuleCommand` class inherits from the `WorkspaceCommand`. 
+It functions identical the `WorkspaceCommand` but has some subtle differences such as requiring a 
+`InnerModuleCommandParser` which inherits from a `CommandParser` but can store another 
+attribute called `moduleName`. The `InnerModuleCommand` `execute` function will set the initialized 
+`InnerModuleCommandParser`'s`moduleName` attribute using its own stored `moduleName` attribute.
+This `InnerModuleCommand` purpose to enable any `InnerModuleCommandParser` to be aware of which 
+module and pass this module to any of the subsequent commands it may parse.
+
+The `GoCommand` in particular is a special `WorkspaceCommand` which has a unique feature that sets 
+the `ModuleWorkspaceCommandParser` class `workspace` attribute to a specific module name and after
+validating that the module exists. This command starts the storing of the module name that the 
+subsequent commands may use identify the module data to retrieve.
+
+![](attachments/ParserDetailedClassDiagram.png)
+
+The `CommandParser` class has an abstract child `InnerModuleCommandParser` class that inherit from 
+it. Other than the `CommandParser` classes mentioned in the diagram above, all other 
+`XYZCommandParser` inherit from the `CommandParser` class directly. Each `CommandParser` class 
+contains a `HashMap<String, Command>` which helps in parsing and return the specific `Command` 
+object back.
+
+The `InnerModuleCommandParser` functions similar to a regular `CommandParser` but stores and 
+extra attribute called `moduleName`. This attribute will be set in all `Commands` that are parsed 
+with the `parseCommand` function. The `moduleName` allows all it's `Commands` to be aware of which 
+module they need to retrieve the stored data.
+
+The `ModuleWorkspaceCommandParser` is a special `CommandParser` that sets the `moduleName` 
+attribute for all the subsequent commands, so that they become aware of what module they are 
+modifying.
+
+To explain the concept, more clearly we will be explaining how the  input from the user
+`go Module note add "Content Name" "Content"` will be executed.
+
+![](attachments/CommandExecution.png)
+
+**Step 1:** After receiving the user input in `Terminus`, `MainCommandParser` is called to parse the input 
+with the `parseCommand` function which return the specific `Command` class. In this case `GoCommand` 
+is returned. It will then call the `GoCommand`'s `execute` function to run the command. 
+Note the remaining arguments is `Module note add "Content Name" "Content"`
+
+**Step 2:** The `GoCommand` validates the Module name stored as the `arguments` attribute of 
+the `GoCommand` and sets the workspace of the stored `commandMap` with the value of the module name.
+This is done so via the `setWorkspace` function, and for this scenario the workspace for
+`ModuleWorkspaceCommandParser` is set. 
+Note the remaining arguments is `note add "Content Name" "Content"` and the module name is `Module`
+
+**Step 3:** Similar to step 1 but with a different `CommandParser`, the 
+`ModuleWorkspaceCommandParser` parses the remaining arguments from `GoCommand` as a command 
+and sets the `NoteCommand`'s `moduleName` attribute to the value of the module name stored in its 
+workspace. It then executes the `NoteCommand` `execute` function. 
+Note the remaining arguments is `add "Content Name" "Content"` and the module name is `Module`
+> 📝 **Note:** If the remaining arguments is empty, `ModuleWorkspaceCommandParser` will be stored 
+> inside of `CommandResult` and returned to `Terminus`. `Terminus` will then replace its 
+> `commandParser` with `ModuleWorkspaceCommandParser`, changing the workspace.
+
+**Step 4:** Similar to step 1, the `NoteCommand` `setsModule` for the `NoteCommandParser` that is 
+stored in the `commandMap` attribute and parses the remaining arguments 
+`add "Content Name" "Content"` which results in a `AddNoteCommand`. The `execute` function of 
+`AddNoteCommand` performs the needed modification to the `NusModule` for the module with the name 
+`Module`. The `execute` function then returns a `CommandResult` that is propagated to `Terminus`.
+> 📝 **Note:** If the remaining arguments is empty, `NoteCommandParser` will be stored
+> inside of `CommandResult` and returned to `Terminus`. `Terminus` will then replace its
+> `commandParser` with `NoteCommandParser`, changing the workspace.
+
+#### 4.3.2 Design considerations
+This section shows the design considerations that were taken into account when implementing 
+the command parsing.  
+Aspect: **Usability for other fellow developers**
+Since a `Command` class is required for almost all functionalities in TermiNUS ensuring that the 
+Custom commands and Command Parsers should be easy for others to implement.  
+
+| Approach | Pros | Cons|
+| ---  |---|---|
+| Single Command Parser with all Commands inherit from a single `Command` Class, a large switch statement to separate commands.| Easy to implement and `execute` function for each class has higher flexibility as they can have different arguments| When extending to multilevel workspace can be tedious to implement.|
+| Multiple Command Parsers each with its own set of commands, require separate managing. | Easy to create new workspace and add command specific the to workspace.| Implementation can be tedious and difficult to upgrade and manage.
+Eventually the team decide to go with the second implementation, as we require multi-level 
+workspaces and would like to create our own workspace for each feature. Aside from that the 
+`Command` provide common functionality that many commands need hence reducing repetition of code.
+

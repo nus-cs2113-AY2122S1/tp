@@ -1,5 +1,11 @@
 package terminus.timetable;
 
+import static terminus.common.CommonUtils.isStringNullOrEmpty;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.Comparator;
 import terminus.common.DaysOfWeekEnum;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
@@ -7,13 +13,6 @@ import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.stream.Stream;
-
-import static terminus.common.CommonUtils.isStringNullOrEmpty;
 
 public class Timetable {
 

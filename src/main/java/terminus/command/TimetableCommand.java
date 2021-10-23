@@ -1,5 +1,8 @@
 package terminus.command;
 
+import static terminus.common.CommonUtils.isStringNullOrEmpty;
+import static terminus.common.CommonUtils.isValidDay;
+
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
@@ -7,9 +10,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.timetable.Timetable;
 import terminus.ui.Ui;
-
-import static terminus.common.CommonUtils.isStringNullOrEmpty;
-import static terminus.common.CommonUtils.isValidDay;
 
 public class TimetableCommand extends Command {
 
