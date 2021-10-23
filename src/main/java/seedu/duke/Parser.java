@@ -295,8 +295,6 @@ public class Parser {
         int phoneNumber = 0;
 
         String trainingName = "";
-        String venue = "";
-        String time = "";
         String presentOrAbsent = "";
 
         int wordIndex = 1;
@@ -316,9 +314,7 @@ public class Parser {
             }
             wordIndex++;
         }
-        Member member = new Member(memberName, studentNumber, gender, phoneNumber, presentOrAbsent);
-        TrainingSchedule training = new TrainingSchedule(trainingName, venue, time);
-        return new Attendance(member, training);
+        return new Attendance(memberName, trainingName,presentOrAbsent);
     }
 
     /**
@@ -388,12 +384,15 @@ public class Parser {
     /**
      * Creates an Attendance Entry to put into AttendanceList.
      *
-     * @param attendanceList AttendanceList containing all Attendance entries
+     * @param attendanceList AttendanceList containing all Attendance lists
      * @param query          User input command to parse
      */
     public static void makeAttendanceEntry(AttendanceList attendanceList, String query) {
         Attendance attendance = getAttendanceDetails(query);
         assert attendance != null : "attendance should not be empty";
+
+        String trainingName = attendance.getTrainingName();
+
         attendanceList.addAttendance(attendance);
         Ui.printAddedAttendanceMessage(attendance);
     }
@@ -600,7 +599,5 @@ public class Parser {
             flag = 1;
         }
     }
-
-
 }
 

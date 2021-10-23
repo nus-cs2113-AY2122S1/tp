@@ -12,7 +12,7 @@ public class Member {
     protected boolean isActive;
 
     /* 1 if present, 0 if absent */
-    String presentOrAbsent;
+    //String presentOrAbsent;
 
     protected int phoneNumber;
 
@@ -30,7 +30,7 @@ public class Member {
         setAsActiveMember();
         setGender(gender);
         setPhoneNumber(phoneNumber);
-        setPresentOrAbsent(presentOrAbsent);
+       // setPresentOrAbsent(presentOrAbsent);
     }
 
     public Member() {
@@ -42,7 +42,7 @@ public class Member {
         setAsActiveMember();
         setGender(gender);
         setPhoneNumber(phoneNumber);
-        setPresentOrAbsent(presentOrAbsent);
+       // setPresentOrAbsent(presentOrAbsent);
 
     }
 
@@ -52,14 +52,14 @@ public class Member {
         setAsActiveMember();
         setGender(gender);
         setPhoneNumber(phoneNumber);
-        setPresentOrAbsent(presentOrAbsent);
+        //setPresentOrAbsent(presentOrAbsent);
     }
 
     public Member(String name, String studentNumber) {
         setName(name);
         setStudentNumber(studentNumber);
         setAsActiveMember();
-        setPresentOrAbsent(presentOrAbsent);
+        //setPresentOrAbsent(presentOrAbsent);
     }
 
 
@@ -69,7 +69,7 @@ public class Member {
         setAsActiveMember();
         setGender(member.gender);
         setPhoneNumber(member.phoneNumber);
-        setPresentOrAbsent(presentOrAbsent);
+        //setPresentOrAbsent(presentOrAbsent);
     }
 
     public void setName(String name) {
@@ -108,10 +108,10 @@ public class Member {
         this.phoneNumber = Integer.parseInt(phoneNumber);
     }
 
-    public void setPresentOrAbsent(String presentOrAbsent) {
+   /* public void setPresentOrAbsent(String presentOrAbsent) {
         this.presentOrAbsent = presentOrAbsent;
     }
-
+*/
     public String getName() {
         return name;
     }
@@ -119,11 +119,11 @@ public class Member {
     public String getStudentNumber() {
         return studentNumber;
     }
-
+/*
     public String getAttendance() {
         return presentOrAbsent;
     }
-
+*/
     /**
      * Formats description of member to be displayed to user.
      *
