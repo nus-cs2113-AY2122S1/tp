@@ -12,12 +12,14 @@ public class Task {
     private final String dayOfTheWeek;
     private final String information;
     private boolean isDone;
+    private String priority;
 
-    public Task(String title, String dayOfTheWeek, String information) {
+    public Task(String title, String dayOfTheWeek, String information, String priority) {
         this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;
         this.information = information;
         this.isDone = false;
+        this.priority = priority;
     }
 
     public String getTitle() {
@@ -73,7 +75,7 @@ public class Task {
 
             String information = params[3];
 
-            Task task = new Task(title, dayOfTheWeek, information);
+            Task task = new Task(title, dayOfTheWeek, information, "");
 
             boolean isTaskDone = params[0].equals("1");
             if (isTaskDone) {

@@ -14,18 +14,20 @@ public class AddTaskCommand extends Command {
     private final String title;
     private final String dayOfTheWeek;
     private final String information;
+    private final String priority;
 
-    public AddTaskCommand(String title, String dayOfTheWeek, String information) {
+    public AddTaskCommand(String title, String dayOfTheWeek, String information, String priority) {
         assert information != null : Ui.PADDING + "Information should not be null.";
         this.title = title;
         this.dayOfTheWeek = dayOfTheWeek;
         this.information = information;
+        this.priority = priority;
     }
 
     @Override
     public void execute(Ui ui, Storage storage, TaskList taskList, LessonList lessonList, ModuleList moduleList)
             throws IOException {
-        Task newTask = new Task(title, dayOfTheWeek, information);
+        Task newTask = new Task(title, dayOfTheWeek, information, priority);
         taskList.addTask(newTask);
         storage.saveData(taskList);
         ui.printTaskAdded(newTask, taskList.getSize());
