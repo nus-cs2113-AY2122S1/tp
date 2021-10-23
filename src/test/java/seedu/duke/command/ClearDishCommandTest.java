@@ -27,7 +27,7 @@ class ClearDishCommandTest {
         Command testClearDishCommand = new ClearDishCommand();
         testClearDishCommand.execute(inputParams);
         assertEquals(0, DishList.dishList.size());
-        DishList.dishList.clear();
-        IngredientList.ingredientList.clear();
+        DishList.clearList();
+        IngredientList.clearList();
     }
 }

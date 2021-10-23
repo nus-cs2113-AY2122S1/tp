@@ -25,7 +25,7 @@ class DeleteDishCommandTest {
         Command testDeleteDishCommand = new DeleteDishCommand();
         testDeleteDishCommand.execute(inputParams);
         assertEquals(0, DishList.dishList.size());
-        DishList.dishList.clear();
-        IngredientList.ingredientList.clear();
+        DishList.clearList();
+        IngredientList.clearList();
     }
 }

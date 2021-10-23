@@ -1,7 +1,6 @@
 package seedu.duke.command;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.DishList;
 import seedu.duke.Ingredient;
 import seedu.duke.IngredientList;
 import seedu.duke.exceptions.FoodoramaException;
@@ -52,7 +51,6 @@ class SortIngrCommandTest {
         assertEquals("egg", IngredientList.ingredientList.get(2).getIngredientName());
 
         //clearing IngredientList
-        DishList.dishList.clear();
-        IngredientList.ingredientList.clear();
+        IngredientList.clearList();
     }
 }

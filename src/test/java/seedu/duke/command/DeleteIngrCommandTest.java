@@ -29,7 +29,7 @@ class DeleteIngrCommandTest {
         deleteIngrCommand.execute(inputParams);
 
         assertEquals(0, IngredientList.ingredientList.size());
-        DishList.dishList.clear();
-        IngredientList.ingredientList.clear();
+        DishList.clearList();
+        IngredientList.clearList();
     }
 }

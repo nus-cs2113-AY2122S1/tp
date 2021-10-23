@@ -98,8 +98,8 @@ class GraphCommandTest {
 
     @AfterEach
     void reset() {
-        DishList.dishList.clear();
-        IngredientList.ingredientList.clear();
+        DishList.clearList();
+        IngredientList.clearList();
         System.setOut(originalOutputStream);
         System.setIn(backupInputStream);
     }

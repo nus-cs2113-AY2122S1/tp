@@ -77,14 +77,14 @@ class ListCommandTest {
         } catch (FoodoramaException e) {
             assertEquals(ui.getListMissingParamMsg(), e.getMessage());
         }
-        DishList.dishList.clear();
-        IngredientList.ingredientList.clear();
+        DishList.clearList();
+        IngredientList.clearList();
     }
 
     @AfterEach
     void reset() {
-        DishList.dishList.clear();
-        IngredientList.ingredientList.clear();
+        DishList.clearList();
+        IngredientList.clearList();
         System.setOut(originalOutputStream);
     }
 }

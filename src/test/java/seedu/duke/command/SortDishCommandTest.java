@@ -3,7 +3,6 @@ package seedu.duke.command;
 import org.junit.jupiter.api.Test;
 import seedu.duke.Dish;
 import seedu.duke.DishList;
-import seedu.duke.IngredientList;
 import seedu.duke.exceptions.FoodoramaException;
 
 import java.io.ByteArrayInputStream;
@@ -52,8 +51,7 @@ class SortDishCommandTest {
         assertEquals("hamburger", DishList.dishList.get(2).getDishName());
 
         //clearing dishList
-        DishList.dishList.clear();
-        IngredientList.ingredientList.clear();
+        DishList.clearList();
 
     }
 }

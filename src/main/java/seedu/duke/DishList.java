@@ -1,9 +1,6 @@
 package seedu.duke;
 
-import seedu.duke.exceptions.FoodoramaException;
-
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DishList {
     public static ArrayList<Dish> dishList = new ArrayList<>();
@@ -52,51 +49,21 @@ public class DishList {
     }
 
     public static void delete(String dishName) {
-        Scanner input = new Scanner(System.in);
-
         int listSize = dishList.size(); //listSize = N
         int dishIndex = DishList.find(dishName);
         if (dishIndex == -1) {
             ui.printDishNotExistMsg();
             assert dishList.size() == listSize : "dishList should be of size N";
         } else {
-            ui.printConfirmDelDish();
-            String confirmDel = input.nextLine().toLowerCase();
-            while (!(confirmDel.equals("y") | confirmDel.equals("n"))) {
-                ui.clearTerminalAndPrintNewPage();
-                ui.printInvalidConfirmation();
-                confirmDel = input.nextLine().toLowerCase();
-            }
-            ui.clearTerminalAndPrintNewPage();
-            if (confirmDel.equals("y")) {
-                dishList.remove(dishIndex);
-                ui.printDishNameRemoved(dishName);
-                assert dishList.size() == (listSize - 1) : "dishList should be of size N-1";
-            } else {
-                ui.printDisregardMsg();
-            }
+            dishList.remove(dishIndex);
+            ui.printDishNameRemoved(dishName);
+            assert dishList.size() == (listSize - 1) : "dishList should be of size N-1";
         }
     }
 
 
-
     public static void clearList() {
-        Scanner input = new Scanner(System.in);
-        ui.printConfirmClearDish();
-        String confirmClear = input.nextLine().toLowerCase();
-
-        while (!(confirmClear.equals("y") | confirmClear.equals("n"))) {
-            ui.clearTerminalAndPrintNewPage();
-            ui.printInvalidConfirmation();
-            confirmClear = input.nextLine().toLowerCase();
-        }
-        ui.clearTerminalAndPrintNewPage();
-        if (confirmClear.equals("y")) {
-            dishList.clear();
-            assert dishList.size() == 0 : "dishList should be of size 0";
-            ui.printDishListCleared();
-        } else {
-            ui.printDisregardMsg();
-        }
+        dishList.clear();
+        assert dishList.size() == 0 : "dishList should be of size 0";
     }
 }
