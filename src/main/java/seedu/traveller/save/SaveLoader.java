@@ -18,7 +18,6 @@ public class SaveLoader {
     //private static final Logger logger = Logger.getLogger(DataLoader.class.getName());
     private final String filePath = "./save/save.txt";
     private final String separator = " ";
-    private final String newCommand = "new";
     private final Ui ui;
     private final TripsList tripsList;
 
@@ -88,12 +87,11 @@ public class SaveLoader {
         logger.log(Level.INFO, "Writing data to " + FILE_PATH);*/
         FileWriter fw = new FileWriter(filePath);
         ui.printWriteSave();
-        ui.printLine();
         for (int i = 0; i < tripsList.getSize(); i++) {
             Trip current = tripsList.getTrip(i);
-            fw.write(newCommand + separator
-                    + current.getTripName() + separator
-                    + current.getStartCountryCode() + separator
+            fw.write("new" + separator
+                    + current.getTripName() + separator + "/from" + separator
+                    + current.getStartCountryCode() + separator + "/to" + separator
                     + current.getEndCountryCode() + "\n");
         }
         fw.close();

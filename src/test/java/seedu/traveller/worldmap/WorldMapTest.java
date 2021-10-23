@@ -76,7 +76,6 @@ public class WorldMapTest {
 
         MinCalcResult minCalcResult = new MinCalcResult(countryJpn, countrySin, path, distances);
 
-        assertEquals(1, 1);
         assertEquals(minCalcResult.toString(),
                 WorldMap.calcMinDistance("JPN", "SIN").toString());
 

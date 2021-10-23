@@ -40,6 +40,10 @@ public class NewCommand extends Command {
         return this.endCountry;
     }
 
+    /**
+     * Used to pretty print to the logger.
+     * @return <code>String</code> of the <code>NewCommand</code>'s contents.
+     */
     @Override
     public String toString() {
         return "New command:"
@@ -48,6 +52,12 @@ public class NewCommand extends Command {
                 + "\n\tendCountry: " + endCountry;
     }
 
+    /**
+     * Performs the action of creating a new trip for the <code>TripsList</code>.
+     * @param tripsList The <code>TripsList</code> that the command will be executed on.
+     * @param ui The <code>Ui</code> that will be used to print out the outcome of the execution.
+     * @throws TravellerException To be thrown if there exists another trip with the specified <code>tripName</code>.
+     */
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
         for (int i = 0; i < tripsList.getSize(); i++) {
             if (tripsList.getTrip(i).getTripName().equals(tripName)) {

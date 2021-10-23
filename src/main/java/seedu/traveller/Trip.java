@@ -14,6 +14,7 @@ public class Trip {
     private final String endCountryCode;
     private final List<Country> path;
     private final List<Double> distances;
+    private final DaysList daysList;
 
     public Trip(String tripName, String startCountryCode, String endCountryCode,
                 List<Country> path, List<Double> distances) {
@@ -23,6 +24,7 @@ public class Trip {
         this.endCountryCode = endCountryCode;
         this.path = path;
         this.distances = distances;
+        this.daysList = new DaysList();
         logger.log(Level.INFO, "Trip created with details: \n" + this);
     }
 
@@ -32,7 +34,8 @@ public class Trip {
                 + "\n\t\t\t Origin: " + getStartCountryCode()
                 + "\n\t\t\t Destination: " + getEndCountryCode()
                 + "\n\t\t\t Path: " + getPath()
-                + "\n\t\t\t Distances: " + getDistances();
+                + "\n\t\t\t Distances: " + getDistances()
+                + "\n\t\t\t Days: " + daysList;
     }
 
     public String getTripName() {
@@ -55,4 +58,15 @@ public class Trip {
         return this.distances;
     }
 
+    public Day getDay(int i) {
+        return daysList.getDay(i);
+    }
+
+    public void addDay() {
+        daysList.addDay();
+    }
+
+    public void deleteDay(int i) {
+        daysList.deleteDay(i);
+    }
 }

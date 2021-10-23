@@ -23,6 +23,11 @@ public class TripsList {
         return this.trips.get(i);
     }
 
+    public Trip getTrip(String tripName) {
+        int tripIndex = getTripIndex(tripName);
+        return getTrip(tripIndex);
+    }
+
     public int getTripIndex(String tripName) {
         int tripIndex = -1;
         for (int i = 0; i < this.getSize(); i++) {
