@@ -254,7 +254,7 @@ public class Parser {
         Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
         newExpense.setDate(newExpense.prompDate());
         currTrip.addExpense(newExpense);
-        if (listOfPersonsIncluded.size() == 1){
+        if (listOfPersonsIncluded.size() == 1) {
             updateOnePersonSpending(newExpense, listOfPersonsIncluded.get(0));
         } else {
             updateIndividualSpending(newExpense);
@@ -262,7 +262,7 @@ public class Parser {
         Ui.printExpenseAddedSuccess();
     }
 
-    private static void updateOnePersonSpending(Expense expense, Person person){
+    private static void updateOnePersonSpending(Expense expense, Person person) {
         person.setMoneyOwed(person, expense.getAmountSpent());
     }
 
