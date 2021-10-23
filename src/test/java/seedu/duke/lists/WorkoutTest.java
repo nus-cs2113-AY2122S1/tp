@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class WorkoutTest {
 
-    private Workout testExercises = new Workout("Legs", LocalDate.parse("2021-10-10"));
+    private Workout testExercises = new Workout("Legs");
     private WorkoutListModel workoutListModel = new WorkoutListModel();
 
     @Test

@@ -18,37 +18,45 @@ public class CreateWorkoutParser extends Parser {
     }
 
     /**
-     * Gets arguments required for a workout, such as workoutIndex, exerciseName, sets and reps
-     * commandArgs passed in as [workoutName], [deadline].
+     * Gets arguments required for a workout, such as workoutName and Deadline (if user chose to set it).
+     * commandArgs passed in as "[workoutName]" or "[workoutName], [deadline]".
      *
      * @param commandArgs user input without the command word
-     * @return string array containing workoutName and deadline
-     * @throws GetJackDException thrown if any of the above-mentioned arguments are empty
+     * @return string array containing workoutName and deadline (if user chose to set it)
+     * @throws GetJackDException thrown if workoutName is empty
      */
     static String[] getWorkoutArgs(String commandArgs) throws GetJackDException {
+        String[] workoutArgs = null;
         if (!commandArgs.contains(PARAMETER_SEPARATOR)) {
-            throw new GetJackDException("Invalid format for create workout. No deadline provided!");
+            String workoutName = commandArgs.trim();
+            if (workoutName.length() == 0) {
+                throw new GetJackDException(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
+            }
+            workoutArgs = new String[]{workoutName};
+        } else {
+            String[] arguments = commandArgs.split(PARAMETER_SEPARATOR);
+            String workoutName = arguments[0];
+            String deadline = arguments[1];
+
+            workoutArgs = new String[]{workoutName, deadline};
+            for (String s : workoutArgs) {
+                assert (!s.contains(PARAMETER_SEPARATOR));
+            }
         }
-
-        String[] arguments = commandArgs.split(PARAMETER_SEPARATOR);
-        String workoutName = arguments[0];
-        String deadline = arguments[1];
-
-        String[] workoutArgs = new String[]{workoutName, deadline};
-        for (String s : workoutArgs) {
-            assert (!s.contains(PARAMETER_SEPARATOR));
-        }
-
         return workoutArgs;
     }
 
     private Command prepareCreateWorkout(String commandArgs) {
         try {
             String[] workoutArgs = getWorkoutArgs(commandArgs);
-            String workoutName = workoutArgs[0].trim();
-            String deadline = workoutArgs[1];
-            LocalDate deadlineDate = LocalDate.parse(deadline);
-            return new CreateWorkoutCommand(workoutName, deadlineDate);
+            if (workoutArgs.length == 1) {
+                return new CreateWorkoutCommand(workoutArgs[0].trim());
+            } else {
+                String workoutName = workoutArgs[0].trim();
+                String deadline = workoutArgs[1];
+                LocalDate deadlineDate = LocalDate.parse(deadline);
+                return new CreateWorkoutCommand(workoutName, deadlineDate);
+            }
         } catch (GetJackDException | DateTimeParseException e) {
             return new IncorrectCommand(MESSAGE_INVALID_COMMAND + CreateWorkoutCommand.MESSAGE_USAGE);
         }

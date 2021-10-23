@@ -26,7 +26,7 @@ class ExitWorkoutCommandTest {
     }
 
     private void createOneWorkout() {
-        Workout workout = new Workout("workout", LocalDate.parse("2021-10-10"));
+        Workout workout = new Workout("workout");
         workoutList = new WorkoutList();
         workoutList.addWorkout(workout);
     }

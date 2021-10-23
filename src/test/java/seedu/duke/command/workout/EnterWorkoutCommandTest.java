@@ -26,7 +26,7 @@ class EnterWorkoutCommandTest {
     }
 
     private void createOneWorkout() {
-        Workout workout = new Workout("workout", LocalDate.parse("2021-12-25"));
+        Workout workout = new Workout("workout");
         workoutList = new WorkoutList();
         workoutList.addWorkout(workout);
     }

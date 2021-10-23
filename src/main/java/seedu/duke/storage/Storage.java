@@ -3,6 +3,7 @@ package seedu.duke.storage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import seedu.duke.exception.GetJackDException;
+import seedu.duke.lists.DeadlineWorkout;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.models.ExerciseModel;
@@ -64,21 +65,46 @@ public class Storage {
             ArrayList<WorkoutModel> workoutsStorageForm = convertFromJson(jsonString);
 
             for (WorkoutModel workoutModel : workoutsStorageForm) {
-                Workout workout = new Workout(
-                        workoutModel.getWorkoutName(),
-                        LocalDate.parse(workoutModel.getDeadline())
-                );
-                for (ExerciseModel exerciseModel : workoutModel.getExercises()) {
-                    Exercise exercise = readExercise(exerciseModel);
-                    workout.addExercise(exercise);
+                if (workoutModel.getDeadline().equals("")) {
+                    Workout workout = new Workout(workoutModel.getWorkoutName());
+                    addWorkout(workoutList, workoutModel, workout);
+                } else {
+                    DeadlineWorkout deadlineWorkout = new DeadlineWorkout(
+                            workoutModel.getWorkoutName(),
+                            LocalDate.parse(workoutModel.getDeadline())
+                    );
+                    addDeadlineWorkout(workoutList, workoutModel, deadlineWorkout);
                 }
-                workoutList.addWorkout(workout);
             }
 
             LOGGER.info("Successfully loaded data from JSON file.");
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, "Data file can't be loaded. Exception: ", e);
             throw new GetJackDException("☹ OOPS!!! Can't load data");
+        }
+    }
+
+    private void addWorkout(WorkoutList workoutList, WorkoutModel workoutModel, Workout workout) {
+        assert workout != null;
+        populateExercises(workoutModel, workout);
+        workoutList.addWorkout(workout);
+    }
+
+    private void addDeadlineWorkout(
+            WorkoutList workoutList,
+            WorkoutModel workoutModel,
+            DeadlineWorkout deadlineWorkout
+    ) {
+        assert deadlineWorkout != null;
+        populateExercises(workoutModel, deadlineWorkout);
+        workoutList.addWorkout(deadlineWorkout);
+    }
+
+
+    private void populateExercises(WorkoutModel workoutModel, Workout workout) {
+        for (ExerciseModel exerciseModel : workoutModel.getExercises()) {
+            Exercise exercise = readExercise(exerciseModel);
+            workout.addExercise(exercise);
         }
     }
 

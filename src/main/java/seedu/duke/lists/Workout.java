@@ -5,8 +5,6 @@ import seedu.duke.exercises.Exercise;
 import seedu.duke.storage.models.WorkoutListModel;
 import seedu.duke.storage.models.WorkoutModel;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static seedu.duke.lists.WorkoutList.LOGGER;
@@ -17,24 +15,19 @@ import static seedu.duke.lists.WorkoutList.LOGGER;
  * Adding, deleting and other operations related to all exercises in the workout will be executed from here.
  */
 public class Workout {
-    private final String workoutName;
-    private final ArrayList<Exercise> exercises;
-    private final String deadline;
-    private final LocalDate deadlineDate;
+    protected final String workoutName;
+    protected final ArrayList<Exercise> exercises;
+
 
     /**
      * Default Constructor.
      *
      * @param workoutName is the name that the user gives to the workout routine
-     * @param deadlineDate Workout deadline in the form of yyyy-mm-dd
      */
-    public Workout(String workoutName, LocalDate deadlineDate) {
+    public Workout(String workoutName) {
         assert !workoutName.isEmpty();
-        assert deadlineDate != null;
         exercises = new ArrayList<>();
         this.workoutName = workoutName;
-        this.deadlineDate = deadlineDate;
-        deadline = deadlineDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
     /**
@@ -44,8 +37,7 @@ public class Workout {
      */
     @Override
     public String toString() {
-        assert !deadline.isEmpty();
-        return getWorkoutName() + " finish by: " + deadline;
+        return getWorkoutName();
     }
 
     /**
@@ -116,7 +108,7 @@ public class Workout {
      */
     public void convertToWorkoutStorageModel() {
         LOGGER.info("Generating WorkoutModel");
-        WorkoutModel workoutModel = new WorkoutModel(workoutName, deadlineDate.toString());
+        WorkoutModel workoutModel = new WorkoutModel(workoutName, "");
 
         for (Exercise exercise : exercises) {
             exercise.convertToExerciseStorageModel(workoutModel);
