@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Trip {
@@ -14,7 +15,11 @@ public class Trip {
     //private double budget; //may not be needed anymore
     private double exchangeRate;
     private String foreignCurrency;
-    private String repaymentCurrency;
+    private String foreignCurrencyFormat;
+    private String foreignCurrencySymbol;
+    private String repaymentCurrency = "SGD";
+    private String repaymentCurrencyFormat = "%.02f";
+    private String repaymentCurrencySymbol = "$";
     private String location;
 
     public Trip() {
@@ -27,12 +32,13 @@ public class Trip {
      * @param newTripInfo array containing one attribute in each element
      */
     public Trip(String[] newTripInfo) {
-        assert newTripInfo.length == 4;
+        assert newTripInfo.length == 5;
         this.location = newTripInfo[0];
         setDateOfTrip(newTripInfo[1]);
-        setExchangeRate(newTripInfo[2]);
+        setForeignCurrency(newTripInfo[2].toUpperCase());
+        setExchangeRate(newTripInfo[3]);
         //setBudget(newTripInfo[3]);
-        this.listOfPersons = splitPeople(newTripInfo[3]);
+        this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
     public void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
@@ -63,22 +69,22 @@ public class Trip {
     }
 
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
-        int numberOfMatchingExpenses = 0;
+        boolean isThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
             if (e.getPayer().getName().equals(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
-                numberOfMatchingExpenses++;
+                isThereExpenses = true;
             }
         }
-        if (numberOfMatchingExpenses == 0) {
+        if (isThereExpenses) {
             Ui.printNoMatchingExpenseError();
         }
     }
 
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
-        int numberOfMatchingExpenses = 0;
+        boolean isThereExpenses = false;
         String descriptionToLowerCase;
         String attributeToLowerCase = expenseAttribute.toLowerCase();
         for (Expense e : listOfCurrentExpenses) {
@@ -86,25 +92,25 @@ public class Trip {
             if (descriptionToLowerCase.contains(attributeToLowerCase)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
-                numberOfMatchingExpenses++;
+                isThereExpenses = true;
             }
         }
-        if (numberOfMatchingExpenses == 0) {
+        if (isThereExpenses) {
             Ui.printNoMatchingExpenseError();
         }
     }
 
     private static void findMatchingCategoryExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                      String expenseAttribute) {
-        int numberOfMatchingExpenses = 0;
+        boolean isThereExpenses = false;
         for (Expense e : listOfCurrentExpenses) {
             if (e.getCategory().equals(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
-                numberOfMatchingExpenses++;
+                isThereExpenses = true;
             }
         }
-        if (numberOfMatchingExpenses == 0) {
+        if (isThereExpenses) {
             Ui.printNoMatchingExpenseError();
         }
     }
@@ -187,6 +193,32 @@ public class Trip {
 
     public void setForeignCurrency(String foreignCurrency) {
         this.foreignCurrency = foreignCurrency;
+        setForeignCurrencyFormat(this.foreignCurrency);
+        setForeignCurrencySymbol(this.foreignCurrency);
+    }
+
+    private void setForeignCurrencyFormat(String input) {
+        if (Storage.getAvailableCurrency().containsKey(input)) {
+            this.foreignCurrencyFormat = Storage.getAvailableCurrency().get(input)[1];
+        } else {
+            this.foreignCurrencyFormat = "%.02f";
+        }
+    }
+
+    private void setForeignCurrencySymbol(String input) {
+        if (Storage.getAvailableCurrency().containsKey(input)) {
+            this.foreignCurrencySymbol = Storage.getAvailableCurrency().get(input)[0];
+        } else {
+            this.foreignCurrencySymbol = "";
+        }
+    }
+
+    public String getForeignCurrencyFormat() {
+        return foreignCurrencyFormat;
+    }
+
+    public String getForeignCurrencySymbol() {
+        return foreignCurrencySymbol;
     }
 
     public String getRepaymentCurrency() {
@@ -194,7 +226,34 @@ public class Trip {
     }
 
     public void setRepaymentCurrency(String repaymentCurrency) {
-        this.repaymentCurrency = repaymentCurrency;
+        this.repaymentCurrency = repaymentCurrency.toUpperCase();
+        setRepaymentCurrencyFormat(this.repaymentCurrency);
+        setForeignCurrencySymbol(this.repaymentCurrency);
+
+    }
+
+    private void setRepaymentCurrencyFormat(String input) {
+        if (Storage.getAvailableCurrency().containsKey(input)) {
+            this.repaymentCurrencyFormat = Storage.getAvailableCurrency().get(input)[1];
+        } else {
+            this.repaymentCurrencyFormat = "%.02f";
+        }
+    }
+
+    public String getRepaymentCurrencyFormat() {
+        return repaymentCurrencyFormat;
+    }
+
+    public String getRepaymentCurrencySymbol() {
+        return repaymentCurrencySymbol;
+    }
+
+    private void setRepaymentCurrencySymbol(String input) {
+        if (Storage.getAvailableCurrency().containsKey(input)) {
+            this.repaymentCurrencySymbol = Storage.getAvailableCurrency().get(input)[0];
+        } else {
+            this.repaymentCurrencySymbol = "";
+        }
     }
 
     public String getLocation() {
