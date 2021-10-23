@@ -234,6 +234,9 @@ This feature would ease users in accessing a compilation of all their schedule, 
 
 
 #### 4.1.1 Current Implementation
+The following sequence diagram shows how the timetable feature works:
+![](attachments/Timetable.png)
+
 The timetable feature is one of TermiNUS' features which can be accessed from the main workspace.
 
 The `timetable` feature has 2 variations:
@@ -267,8 +270,7 @@ For each `Link`, the application will invoke `Link#getDay()` to allow the filter
 Otherwise, for a Weekly Timetable Instruction, the process in Step 5 will be repeated for each day in the `DaysOfWeekEnum`.
 Once all the relevant `Link` objects have been collected, the application will sort all the user `Link` according to its `startTime` to allow a more convenient viewing.
 
-The following sequence diagram shows how the timetable operation works:
-![](attachments/Timetable.png)
+
 
 
 ### 4.2 Active Recall Implementation
