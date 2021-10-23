@@ -25,14 +25,13 @@ public class BackQuestionCommandTest {
         this.commandParser = QuestionCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @Test
     void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command backCommand = commandParser.parseCommand("back");
         CommandResult backResult = backCommand.execute(moduleManager);
-        assertTrue(backResult.isOk());
-        assertTrue(backResult.getAdditionalData() instanceof ModuleWorkspaceCommandParser);
+        assertTrue(backResult.getNewCommandParser() instanceof ModuleWorkspaceCommandParser);
     }
 }

@@ -66,4 +66,5 @@ public class Messages {
         "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
     public static final String MESSAGE_EMPTY_DAILY_SCHEDULE = "You have no schedule for today.";
     public static final String HELP_MENU_MESSAGE = "\nHelp Menu\n---------\n";
+    public static final String CONTENT_MESSAGE_FOOTER = "\nRerun the same command with an index behind to view the content.";
 }

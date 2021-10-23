@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.common.Messages;
+import terminus.common.TestUtils;
 import terminus.content.Link;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
@@ -29,9 +31,17 @@ public class ViewLinkCommandTest {
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
+    @Test
+    void execute_viewNone_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+        Command viewCommand = linkCommandParser.parseCommand("view");
+        CommandResult viewResult = viewCommand.execute(moduleManager);
+        assertEquals(TestUtils.generateCommandOutputString(viewResult.getMessage()),
+            Messages.EMPTY_CONTENT_LIST_MESSAGE.trim());
+    }
+    
     @Test
     void execute_viewAll_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
@@ -42,9 +52,12 @@ public class ViewLinkCommandTest {
         }
         assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
 
-        Command viewLinkCommand = linkCommandParser.parseCommand("view");
-        CommandResult viewLinkResult = viewLinkCommand.execute(moduleManager);
-        assertTrue(viewLinkResult.isOk());
+        String stringBuilder = Messages.CONTENT_MESSAGE_HEADER +
+            moduleManager.getModule(tempModule).getContentManager(type).listAllContents() +
+            Messages.CONTENT_MESSAGE_FOOTER;
+        Command viewCommand = linkCommandParser.parseCommand("view");
+        CommandResult viewResult = viewCommand.execute(moduleManager);
+        assertEquals(stringBuilder, TestUtils.generateCommandOutputString(viewResult.getMessage()));
     }
 
     @Test

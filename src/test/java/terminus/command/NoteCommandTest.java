@@ -32,7 +32,7 @@ public class NoteCommandTest {
         this.moduleStorage.createModuleDirectory(tempModule);
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @AfterAll
@@ -46,7 +46,7 @@ public class NoteCommandTest {
         Command mainCommand = commandParser.parseCommand("go " + tempModule + " note");
         CommandResult changeResult = mainCommand.execute(moduleManager);
         assertTrue(changeResult.isOk());
-        assertTrue(changeResult.getAdditionalData() instanceof NoteCommandParser);
+        assertTrue(changeResult.getNewCommandParser() instanceof NoteCommandParser);
         mainCommand = commandParser.parseCommand("go " + tempModule + " note add \"username\" \"password\"");
         changeResult = mainCommand.execute(moduleManager);
         assertTrue(changeResult.isOk());

@@ -4,7 +4,7 @@ import terminus.parser.CommandParser;
 
 public class CommandResult {
 
-    protected CommandParser additionalData;
+    protected CommandParser newCommandParser;
     protected String[] message;
     protected boolean isExit;
     
@@ -20,9 +20,9 @@ public class CommandResult {
         this(isExit, null);
     }
 
-    public CommandResult(boolean isExit, CommandParser additionalData, String... message) {
+    public CommandResult(boolean isExit, CommandParser newCommandParser, String... message) {
         this.message = message;
-        this.additionalData = additionalData;
+        this.newCommandParser = newCommandParser;
         this.isExit = isExit;
     }
 
@@ -32,8 +32,8 @@ public class CommandResult {
      *
      * @return The CommandParser object for the workspace or else null.
      */
-    public CommandParser getAdditionalData() {
-        return additionalData;
+    public CommandParser getNewCommandParser() {
+        return newCommandParser;
     }
 
     /**

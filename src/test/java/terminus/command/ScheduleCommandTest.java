@@ -25,7 +25,7 @@ public class ScheduleCommandTest {
     void setUp() {
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class ScheduleCommandTest {
         Command mainCommand = commandParser.parseCommand("go " + tempModule + " schedule");
         CommandResult changeResult = mainCommand.execute(moduleManager);
         assertTrue(changeResult.isOk());
-        assertTrue(changeResult.getAdditionalData() instanceof LinkCommandParser);
+        assertTrue(changeResult.getNewCommandParser() instanceof LinkCommandParser);
         mainCommand = commandParser.parseCommand("go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" "
                 + "\"https://zoom.us\"");
         changeResult = mainCommand.execute(moduleManager);

@@ -97,7 +97,7 @@ public class ViewCommand<T extends Content> extends Command {
             } else {
                 result.append(Messages.CONTENT_MESSAGE_HEADER);
                 result.append(contentManager.listAllContents());
-                result.append("\nRerun the same command with an index behind to view the content.");
+                result.append(Messages.CONTENT_MESSAGE_FOOTER);
             }
         } else {
             result.append(contentManager.getContentData(itemNumber));

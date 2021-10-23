@@ -35,7 +35,7 @@ public class GoCommandTest {
         this.moduleStorage.createModuleDirectory(tempModule);
         this.commandParser = MainCommandParser.getInstance();
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @AfterAll
@@ -49,7 +49,7 @@ public class GoCommandTest {
         Command cmd = commandParser.parseCommand("go " + tempModule);
         CommandResult cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());
-        assertTrue(cmdResult.getAdditionalData() instanceof ModuleWorkspaceCommandParser);
+        assertTrue(cmdResult.getNewCommandParser() instanceof ModuleWorkspaceCommandParser);
     }
 
     @Test
@@ -63,7 +63,7 @@ public class GoCommandTest {
         Command cmd = commandParser.parseCommand("go " + tempModule + " note");
         CommandResult cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());
-        assertTrue(cmdResult.getAdditionalData() instanceof NoteCommandParser);
+        assertTrue(cmdResult.getNewCommandParser() instanceof NoteCommandParser);
         cmd = commandParser.parseCommand("go " + tempModule + " note add \"test\" \"test1\"");
         cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());
@@ -78,7 +78,7 @@ public class GoCommandTest {
         cmd = commandParser.parseCommand("go " + tempModule + " schedule");
         cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());
-        assertTrue(cmdResult.getAdditionalData() instanceof LinkCommandParser);
+        assertTrue(cmdResult.getNewCommandParser() instanceof LinkCommandParser);
         cmd = commandParser.parseCommand("go " + tempModule + " schedule add \"test\" \"Thursday\" \"00:00\" "
                 + "\"https://zoom.us\"");
         cmdResult = cmd.execute(moduleManager);

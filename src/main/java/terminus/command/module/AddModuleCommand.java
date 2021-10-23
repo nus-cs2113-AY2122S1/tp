@@ -74,7 +74,7 @@ public class AddModuleCommand extends Command {
         // Create its directory
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
         if (moduleStorage.createModuleDirectory(moduleName)) {
-            moduleManager.setModule(moduleName);
+            moduleManager.addModule(moduleName);
         }
         
         String message = String.format(Messages.MESSAGE_RESPONSE_MODULE_ADD, moduleName);

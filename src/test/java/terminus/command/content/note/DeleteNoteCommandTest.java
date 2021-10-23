@@ -34,7 +34,7 @@ public class DeleteNoteCommandTest {
         this.moduleStorage.init(TestFilePath.SAVE_FILE);
         this.moduleStorage.createModuleDirectory(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.commandParser = NoteCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
     }

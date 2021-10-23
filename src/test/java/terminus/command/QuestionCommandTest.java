@@ -26,7 +26,7 @@ public class QuestionCommandTest {
     void setUp() {
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class QuestionCommandTest {
         Command mainCommand = commandParser.parseCommand("go " + tempModule + " question");
         CommandResult changeResult = mainCommand.execute(moduleManager);
         assertTrue(changeResult.isOk());
-        assertTrue(changeResult.getAdditionalData() instanceof QuestionCommandParser);
+        assertTrue(changeResult.getNewCommandParser() instanceof QuestionCommandParser);
         mainCommand = commandParser.parseCommand("go " + tempModule + " question add \"username\" \"password\"");
         changeResult = mainCommand.execute(moduleManager);
         assertTrue(changeResult.isOk());

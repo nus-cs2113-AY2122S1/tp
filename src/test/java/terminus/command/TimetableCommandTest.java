@@ -28,7 +28,7 @@ public class TimetableCommandTest {
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule1);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule1);
+        moduleManager.addModule(tempModule1);
     }
 
     @Test

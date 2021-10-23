@@ -33,7 +33,6 @@ public class HelpCommand extends Command {
         String helpMessage = Arrays.stream(commandMap.getHelpMenu())
             .reduce((x, y) -> x + "\n" + y)
             .orElse("There are no commands in this workspace.");
-        stringBuilder.append(Messages.HELP_MENU_MESSAGE);
         stringBuilder.append(helpMessage);
         return new CommandResult(stringBuilder.toString());
     }

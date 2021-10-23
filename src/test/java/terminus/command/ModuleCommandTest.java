@@ -43,7 +43,7 @@ public class ModuleCommandTest {
         Command cmd = commandParser.parseCommand("module");
         CommandResult cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());
-        assertTrue(cmdResult.getAdditionalData() instanceof ModuleCommandParser);
+        assertTrue(cmdResult.getNewCommandParser() instanceof ModuleCommandParser);
         cmd = commandParser.parseCommand("module add \"test\"");
         cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());

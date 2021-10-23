@@ -34,7 +34,7 @@ public class TestCommandTest {
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.commandParser = QuestionCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
     }
@@ -54,7 +54,8 @@ public class TestCommandTest {
         }
         Command command = commandParser.parseCommand("test");
         try {
-            assertTrue(command.execute(moduleManager).isOk());
+            CommandResult commandResult = command.execute(moduleManager);
+            assertTrue(commandResult.isOk());
         } catch (NoSuchElementException exception) {
             assertTrue(true);
         }

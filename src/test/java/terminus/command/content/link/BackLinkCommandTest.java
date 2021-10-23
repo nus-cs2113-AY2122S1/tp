@@ -26,7 +26,7 @@ public class BackLinkCommandTest {
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class BackLinkCommandTest {
         Command backCommand = linkCommandParser.parseCommand("back");
         CommandResult backResult = backCommand.execute(moduleManager);
         assertTrue(backResult.isOk());
-        assertTrue(backResult.getAdditionalData() instanceof ModuleWorkspaceCommandParser);
+        assertTrue(backResult.getNewCommandParser() instanceof ModuleWorkspaceCommandParser);
     }
 
 }

@@ -93,11 +93,11 @@ public class Terminus {
                 CommandResult result = currentCommand.execute(moduleManager);
 
                 boolean isExitCommand = result.isExit();
-                boolean isWorkspaceCommand = result.getAdditionalData() != null;
+                boolean isWorkspaceCommand = result.getNewCommandParser() != null;
                 if (isExitCommand) {
                     break;
                 } else if (isWorkspaceCommand) {
-                    parser = result.getAdditionalData();
+                    parser = result.getNewCommandParser();
                     assert parser != null : "commandParser is not null";
                     workspace = parser.getWorkspace();
                     ui.printParserBanner(parser, moduleManager);

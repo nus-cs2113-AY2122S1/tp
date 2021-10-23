@@ -1,6 +1,7 @@
 package terminus.command.content.question;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -9,6 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
 import terminus.command.CommandResult;
+import terminus.common.Messages;
+import terminus.common.TestUtils;
 import terminus.content.Question;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
@@ -27,9 +30,17 @@ public class ViewQuestionCommandTest {
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.commandParser = QuestionCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
+    }
+
+    @Test
+    void execute_viewNone_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+        Command viewCommand = commandParser.parseCommand("view");
+        CommandResult viewResult = viewCommand.execute(moduleManager);
+        assertEquals(TestUtils.generateCommandOutputString(viewResult.getMessage()),
+            Messages.EMPTY_CONTENT_LIST_MESSAGE.trim());
     }
 
     @Test
@@ -41,10 +52,12 @@ public class ViewQuestionCommandTest {
             assertTrue(addResult.isOk());
         }
         assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
-
+        String stringBuilder = Messages.CONTENT_MESSAGE_HEADER + 
+            moduleManager.getModule(tempModule).getContentManager(type).listAllContents() +
+            Messages.CONTENT_MESSAGE_FOOTER;
         Command viewCommand = commandParser.parseCommand("view");
         CommandResult viewResult = viewCommand.execute(moduleManager);
-        assertTrue(viewResult.isOk());
+        assertEquals(stringBuilder, TestUtils.generateCommandOutputString(viewResult.getMessage()));
     }
 
     @Test
@@ -56,10 +69,13 @@ public class ViewQuestionCommandTest {
             assertTrue(addResult.isOk());
         }
         assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
-
-        Command viewCommand = commandParser.parseCommand("view 1");
+        
+        int testId = 1;
+        
+        Command viewCommand = commandParser.parseCommand("view " + testId);
         CommandResult viewResult = viewCommand.execute(moduleManager);
-        assertTrue(viewResult.isOk());
+        assertEquals(moduleManager.getModule(tempModule).getContentManager(type).getContentData(testId).trim(),
+            TestUtils.generateCommandOutputString(viewResult.getMessage()));
     }
 
     @Test
