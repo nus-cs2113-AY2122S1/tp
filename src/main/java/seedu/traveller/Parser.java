@@ -253,17 +253,21 @@ public class Parser {
     private static Command parseSearchItemCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
 
+        Command command;
         String[] input = userInput.split(" ");
 
         String tripName;
         String itemName;
 
-        tripName = input[1];
-        String nameSeparator = " /name ";
-        int nameIdx = userInput.indexOf(nameSeparator);
-        itemName = userInput.substring(nameIdx + NAME_LENGTH);
+        try {
+            tripName = input[0];
+            String nameSeparator = " /name ";
+            int nameIdx = userInput.indexOf(nameSeparator);
+            itemName = userInput.substring(nameIdx + NAME_LENGTH);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidAddItemFormatException();
+        }
 
-        Command command;
         command = new SearchItemCommand(tripName, itemName);
 
         return command;

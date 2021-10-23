@@ -77,7 +77,7 @@ public class Ui {
 
     public void printEditItem(String tripName, int itemIndex, String itemName, String itemTime) {
         System.out.println("\tYou have just edited item " + itemIndex + " of "
-                + tripName + " to " + itemName + " and " + itemTime);
+                + tripName + " to " + itemName + " at " + itemTime);
     }
 
     public void printEdit(String tripName) {
