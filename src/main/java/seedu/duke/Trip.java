@@ -199,27 +199,27 @@ public class Trip {
         setForeignCurrencySymbol(this.foreignCurrency);
     }
 
-    private void setForeignCurrencyFormat(String input){
-        if (Storage.getAvailableCurrency().containsKey(input)){
+    private void setForeignCurrencyFormat(String input) {
+        if (Storage.getAvailableCurrency().containsKey(input)) {
             this.foreignCurrencyFormat = Storage.getAvailableCurrency().get(input)[1];
         } else {
             this.foreignCurrencyFormat = "%.02f";
         }
     }
 
-    private void setForeignCurrencySymbol(String input){
-        if (Storage.getAvailableCurrency().containsKey(input)){
+    private void setForeignCurrencySymbol(String input) {
+        if (Storage.getAvailableCurrency().containsKey(input)) {
             this.foreignCurrencySymbol = Storage.getAvailableCurrency().get(input)[0];
         } else {
             this.foreignCurrencySymbol = "";
         }
     }
 
-    public String getForeignCurrencyFormat(){
+    public String getForeignCurrencyFormat() {
         return foreignCurrencyFormat;
     }
 
-    public String getForeignCurrencySymbol(){
+    public String getForeignCurrencySymbol() {
         return foreignCurrencySymbol;
     }
 
@@ -234,15 +234,15 @@ public class Trip {
 
     }
 
-    private void setRepaymentCurrencyFormat(String input){
-        if (Storage.getAvailableCurrency().containsKey(input)){
+    private void setRepaymentCurrencyFormat(String input) {
+        if (Storage.getAvailableCurrency().containsKey(input)) {
             this.repaymentCurrencyFormat = Storage.getAvailableCurrency().get(input)[1];
         } else {
             this.repaymentCurrencyFormat = "%.02f";
         }
     }
 
-    public String getRepaymentCurrencyFormat(){
+    public String getRepaymentCurrencyFormat() {
         return repaymentCurrencyFormat;
     }
 
@@ -250,8 +250,8 @@ public class Trip {
         return repaymentCurrencySymbol;
     }
 
-    private void setRepaymentCurrencySymbol(String input){
-        if (Storage.getAvailableCurrency().containsKey(input)){
+    private void setRepaymentCurrencySymbol(String input) {
+        if (Storage.getAvailableCurrency().containsKey(input)) {
             this.repaymentCurrencySymbol = Storage.getAvailableCurrency().get(input)[0];
         } else {
             this.repaymentCurrencySymbol = "";
