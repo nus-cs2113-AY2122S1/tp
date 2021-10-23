@@ -9,10 +9,10 @@ public class Flight {
 
     public Flight(String[] values) {
         id = values[0];
-        fromDestination = values[1];
-        toDestination = values[2];
-        fromDate = values[3];
-        toDate = values[4];
+        toDestination = values[1];
+        fromDestination = values[2];
+        toDate = values[3];
+        fromDate = values[4];
     }
 
     public String getId() {

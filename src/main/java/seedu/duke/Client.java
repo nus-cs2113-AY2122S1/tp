@@ -38,6 +38,10 @@ public class Client {
         return contactNum;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     /**
      * Formats client's information as a string that is viewable as an indexed list item.
      *
