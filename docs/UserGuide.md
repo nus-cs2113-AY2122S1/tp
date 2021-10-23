@@ -287,6 +287,78 @@ Total MCs taken this semester: 4.0
 
 <br>
 
+## Store grades secured in various modules: `store <GRADE> > <MODULE_CODE>`
+
+You can store the grades you have secured for various modules by using this command.These will be stored in the list of
+completed modules and will be used for CAP calculation.
+
+For Example : Let's store `A+` grade for `CS2113T` module in the records.
+
+You can type `store A+ > CS2113T` to store A+ grade for the module CS2113T in the records.
+
+```shell
+~$ store A+ > CS2113T
+CS2113T with grade A+ has been added to the list of modules completed.
+__________________________________________________________________________
+
+```
+
+You can also store modules with CS/CU grades for record purposes.These modules will not be considered for CAP
+calculation.
+
+For Example : Let's store `CS` grade for `CFG1002` module in the records.
+
+```shell
+~$ store CS > CFG1002
+CFG1002 with grade CS has been added to the list of modules completed.
+__________________________________________________________________________
+
+```
+
+You can choose to store modules for which you have exercised the S/U option. These modules will not be considered for
+CAP calculation. For Example : Let's store `S` grade for `CS1231` module in the records.
+
+```shell
+~$ store S > CS1231
+CS1231 with grade S has been added to the list of modules completed.
+__________________________________________________________________________
+
+```
+
+<br>
+
+## Remove modules from the list of completed modules: `remove <module_code>`
+
+You can remove any module that you added to your list of completed modules using this command.
+
+For example: If you have CS2113T already to your list of completed modules. You can type
+`remove CS2113T` to remove this module and its corresponding grade from the list of modules completed.
+
+```shell
+~$ remove CS2113T
+CS2113T is successfully removed from your Transcript.
+__________________________________________________________________________
+```
+
+<br>
+
+## Calculate CAP : `calculate cap`
+
+You can calculate your **CAP** based on the list of modules you have completed and the corresponding grades scored in
+them.
+
+You can type `calculate cap` to view your Cumulative Average Point.
+
+For Example:
+
+```shell
+~$ calculate cap
+Cumulative Average Point : 3.0
+__________________________________________________________________________
+
+```
+
+<br>
 ## Exit: `exit`
 
 You can end the application anytime by typing `exit` into the terminal
