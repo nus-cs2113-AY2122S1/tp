@@ -1,9 +1,9 @@
 package seedu.duke;
 
 public class ClientPackage {
-    private static Client client;
-    private static Tour tour;
-    private static Flight flight;
+    private final Client client;
+    private final Tour tour;
+    private final Flight flight;
 
     public ClientPackage(Client client, Tour tour, Flight flight) {
         this.client = client;
@@ -30,6 +30,6 @@ public class ClientPackage {
                 + "Tour: " + "\n"
                 + tour + "\n\n"
                 + "Flight: " + "\n"
-                + flight + "\n";
+                + flight;
     }
 }

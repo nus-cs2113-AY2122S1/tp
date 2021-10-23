@@ -386,15 +386,15 @@ public class Parser {
     }
 
     private static Command parseFind(String params) throws TourPlannerException {
-        String prefix = params.substring(0, 2);
-        String suffix = params.substring(3);
+        String prefix = params.split(" ")[0];
+        String suffix = params.split(" ")[1];
         switch (prefix) {
         case "-c":
-            System.out.println("reached");
-            System.out.println(suffix);
-            return new FindClientCommand(stringToInt(suffix));
+            return new FindClientCommand(suffix);
         case "-t":
             return new FindTourCommand(suffix);
+        case "-f":
+            return new FindFlightCommand(suffix);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
