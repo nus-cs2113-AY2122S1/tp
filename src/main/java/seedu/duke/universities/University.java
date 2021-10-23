@@ -4,6 +4,7 @@ import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.ui.Ui;
+import seedu.duke.constants.Constants;
 
 import java.util.ArrayList;
 
@@ -49,9 +50,14 @@ public class University {
         list.remove(new ModuleMapping(localModule, mappedModule));
     }
 
+    public void clearMappings() {
+        list = new ArrayList<>();
+    }
+
     public void listAllMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
+            System.out.print(Constants.INDENTATION);
             Ui.printModuleMapping(currentMapping, i + 1);
         }
     }
@@ -83,6 +89,10 @@ public class University {
             }
         }
         return selectedMapping;
+    }
+
+    public int getMappingListSize(){
+        return list.size();
     }
 
     public Module getMappedModule(Module selectedLocalModule, ModuleList selectedModuleList) {

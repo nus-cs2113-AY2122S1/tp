@@ -15,21 +15,15 @@ public class AddMapCommand extends Command {
     public AddMapCommand(int universityIndexToMap, int selectedMappingIndex, UniversityList universityMasterList,
                          ModuleList moduleMasterList, UniversityList universitySelectedList,
                          ModuleList moduleSelectedList) throws IOException {
-        University universityToMap = universityMasterList.get(universityIndexToMap - 1);
-        ArrayList<ModuleMapping> selectedMappings = universityToMap.getSelectedMappings(moduleSelectedList);
-//        Module moduleToMap = moduleMasterList.get(moduleIndexToMap - 1);
-//        Module mappedModule = universityToMap.getMappedModule(moduleToMap, moduleSelectedList);
-//        ModuleMapping selectedMapping = universityToMap.getMapping(moduleToMap, moduleSelectedList);
-//        universityToMap.addMapping(moduleToMap, mappedModule);
+        // selectedUniversity is the uni object from the master list
+        University selectedUniversity = universityMasterList.get(universityIndexToMap - 1);
+        // universityToMap is the uni object from the selected list
+        University universityToMap = universitySelectedList.getUniversity(selectedUniversity.getName());
+        ArrayList<ModuleMapping> selectedMappings = selectedUniversity.getSelectedMappings(moduleSelectedList);
         System.out.println("New module mapping added: ");
-        ModuleMapping selectedMapping = selectedMappings.get(selectedMappingIndex);
+        ModuleMapping selectedMapping = selectedMappings.get(selectedMappingIndex - 1);
         universityToMap.addMapping(selectedMapping);
-        Ui.printModuleMapping(selectedMapping, );
-//        for (ModuleMapping selectedMapping : selectedMappings) {
-//            Ui.printModuleMapping(selectedMapping, moduleIndexToMap);
-//            universityToMap.addMapping(selectedMapping);
-//        }
-
+        Ui.printModuleMapping(selectedMapping, universityToMap.getMappingListSize());
         SelectedUniversityStorage.write(universitySelectedList);
     }
 }
