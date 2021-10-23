@@ -1,3 +1,4 @@
+
 # Traveller User Guide
 
 ## Introduction
@@ -87,6 +88,10 @@ For a quick summary of all commands, please click [here](#4-command-summary) ins
 <br/>
 
 ### 2.1. Getting help: `help`
+The help command would return the basic commands that are able to be input into CLI.
+The purpose of the help command is to ensure that even if there is no internet connection, the user is able to utilise the CLI without having to refer to the user guide
+
+#### Format: `help`
 
 <br/>
 
@@ -330,7 +335,7 @@ Action | Format
 **delete-item** | `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
 **edit** | `edit TRIP_NAME /from START /to END`
 **edit-item** | `{to be added}`
-**search-item** | '{to be added}`
-**shortest** | '{to be added}`
+**search-item** |  `{to be added}`
+**shortest** | `{to be added}`
 **exit** | `exit`
 
