@@ -32,7 +32,7 @@ public class ViewLinkCommandTest {
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.ui = new Ui();
     }
 
