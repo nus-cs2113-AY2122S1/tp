@@ -13,7 +13,7 @@ class AddRecipeCommandTest {
     @Test
     public void addRecipeCommand_duplicateRecipeName_recipeAlreadyExistsError() {
         final IngredientRepository ingredientRepository = TestUtil.generateIngredientRepositoryForRecipe();
-        RecipeList recipes = TestUtil.generateRecipeList();
+        RecipeList recipes = TestUtil.generateRecipeListWithSingleRecipe();
         Command command = new AddRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME,
                 TestUtil.generateIngredientNamesForRecipe(), TestUtil.generateQuantitiesForRecipe());
         String errorMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ALREADY_EXISTS,
@@ -48,7 +48,8 @@ class AddRecipeCommandTest {
         RecipeList recipes = new RecipeList();
         Command command = new AddRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME,
                 TestUtil.generateIngredientNamesForRecipe(), TestUtil.generateQuantitiesForRecipe());
-        String successMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ADDED, TestUtil.generateRecipe(), 1);
+        String successMessage = String.format(AddRecipeCommand.MESSAGE_RECIPE_ADDED,
+                TestUtil.generateChickenRecipe(), 1);
         assertEquals(command.execute(ingredientRepository, recipes), successMessage);
     }
 
