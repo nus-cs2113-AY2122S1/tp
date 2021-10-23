@@ -38,7 +38,7 @@ class AddRecipeCommandTest {
         RecipeList recipes = new RecipeList();
         Command command = new AddRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME,
                 TestUtil.generateIngredientNamesForRecipe(), TestUtil.generateZeroQuantityForRecipe());
-        String errorMessage = String.format(AddRecipeCommand.MESSAGE_ILLEGAL_VALUE_ERROR);
+        String errorMessage = AddRecipeCommand.MESSAGE_ILLEGAL_VALUE_ERROR;
         assertEquals(command.execute(ingredientRepository, recipes), errorMessage);
     }
 
