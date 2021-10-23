@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public class FindClientCommand extends Command{
+public class FindClientCommand extends Command {
     private final int index;
 
     public FindClientCommand(int index) {
