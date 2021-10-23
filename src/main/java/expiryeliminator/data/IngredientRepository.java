@@ -233,6 +233,24 @@ public class IngredientRepository {
         return haveExpired;
     }
 
+
+    public void updateShoppingListItemQuantity(String ingredientName, Recipe recipe, TreeMap<String,
+            IngredientQuantity> totalIngredients) throws IllegalValueException {
+        int quantity = recipe.getIngredientQuantities().get(ingredientName).getQuantity();
+        if (totalIngredients.containsKey(ingredientName)) {
+            try {
+                int previousQuantity = totalIngredients.get(ingredientName).getQuantity();
+                totalIngredients.get(ingredientName).setQuantity(quantity + previousQuantity);
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Ingredient ingredientItem = new Ingredient(ingredientName);
+            IngredientQuantity ingredientAndQuantityItem = new IngredientQuantity(ingredientItem, quantity);
+            totalIngredients.put(ingredientName, ingredientAndQuantityItem);
+        }
+    }
+
     /**
      * Generates a list of ingredients and quantity to buy depending on what recipe/recipes the user wants to make.
      *
@@ -248,19 +266,7 @@ public class IngredientRepository {
         //tally total types and quantities of ingredients needed to cook the recipes
         for (Recipe recipe : recipes) {
             for (String ingredientName : recipe.getIngredientQuantities().keySet()) {
-                int quantity = recipe.getIngredientQuantities().get(ingredientName).getQuantity();
-                if (totalIngredients.containsKey(ingredientName)) {
-                    try {
-                        int previousQuantity = totalIngredients.get(ingredientName).getQuantity();
-                        totalIngredients.get(ingredientName).setQuantity(quantity + previousQuantity);
-                    } catch (IllegalValueException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    Ingredient ingredientItem = new Ingredient(ingredientName);
-                    IngredientQuantity ingredientAndQuantityItem = new IngredientQuantity(ingredientItem, quantity);
-                    totalIngredients.put(ingredientName, ingredientAndQuantityItem);
-                }
+                updateShoppingListItemQuantity(ingredientName, recipe, totalIngredients);
             }
         }
 
