@@ -3,11 +3,13 @@ package seedu.ui;
 import seedu.module.Module;
 import seedu.timetable.TimetableItem;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 public class TimetableUI {
 
     public enum LineType {
-        CODE, LESSONTYPE, VENUE,
+        TITLE, TYPE, VENUE,
     }
 
     private static final int TIME_MULTIPLIER = 100;
@@ -68,44 +70,74 @@ public class TimetableUI {
             System.out.print(DIVIDER);
         }
         System.out.println();
-        printLine(day, schedule, start, end, LineType.CODE);
-        printLine(day, schedule, start, end, LineType.LESSONTYPE);
+        printLine(day, schedule, start, end, LineType.TITLE);
+        printLine(day, schedule, start, end, LineType.TYPE);
         printLine(day, schedule, start, end, LineType.VENUE);
 
     }
 
     private static void printLine(String day, TimetableItem[] schedule, int start, int end, LineType type) {
         String infoLine = addHeader(day, type);
-        TimetableItem prevItem = null;
-        TimetableItem curItem;
-        int i = start;
-        while (i < end) {
-            curItem = schedule[i];
-            if (curItem != null) {
-                infoLine = infoLine.concat(String.format(FIXED_LENGTH_FORMAT, curItem.printTypeInfo(type)));
-                i += curItem.duration();
-                for (int j = 0; j < curItem.duration() - 1; j++) {
-                    infoLine = infoLine.concat(String.format(FIXED_LENGTH_FORMAT, ""));
-                }
-            } else {
-                if (prevItem != null) {
-                    infoLine = infoLine.concat(String.format(FIXED_LENGTH_FORMAT, "|   "));
-                } else {
-                    infoLine = infoLine.concat(String.format(FIXED_LENGTH_FORMAT, ""));
-                }
-                i++;
-            }
-            prevItem = curItem;
+        TimetableItem prevTimetableItem = null;
+        for (int i = start; i <= end; i++) {
+            TimetableItem timetableItem = schedule[i];
+            infoLine += addInfoToString(timetableItem,prevTimetableItem, type);
+            prevTimetableItem = timetableItem;
         }
-        System.out.println(infoLine);
     }
 
     private static String addHeader(String day, LineType type) {
-        if (type.equals(LineType.LESSONTYPE)) {
+        if (type.equals(LineType.TYPE)) {
             return "\t\t" + day + "\t\t";
         } else {
             return "\t\t\t\t";
         }
+    }
+
+    private static String addInfoToString(TimetableItem timetableItem,
+            TimetableItem prevItem, LineType type) {
+        String str = "";
+        if (!Objects.equals(timetableItem, prevItem)) {
+            str = "|   ";
+            switch (type) {
+            case TITLE:
+                str += addTitle(timetableItem);
+                break;
+            case TYPE:
+                str += addItemType(timetableItem);
+                break;
+            case VENUE:
+                str += addVenue(timetableItem);
+                break;
+            default:
+                str += "";
+            }
+        }
+        return String.format(FIXED_LENGTH_FORMAT,str);
+    }
+
+    private static String addTitle(TimetableItem timetableItem) {
+        String str = "";
+        if (timetableItem != null) {
+            str = timetableItem.getTitle();
+        }
+        return str;
+    }
+
+    private static String addItemType(TimetableItem timetableItem) {
+        String str = "";
+        if (timetableItem != null) {
+            str += timetableItem.getType();
+        }
+        return str;
+    }
+
+    private static String addVenue(TimetableItem timetableItem) {
+        String str = "";
+        if (timetableItem != null) {
+            str = timetableItem.getVenue();
+        }
+        return str;
     }
 
     /*------------- Timetable Storage ----------- */
