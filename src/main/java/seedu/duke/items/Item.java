@@ -2,7 +2,7 @@ package seedu.duke.items;
 
 import java.time.LocalDateTime;
 
-import seedu.duke.Parser;
+import seedu.duke.parser.Parser;
 
 public abstract class Item {
 
