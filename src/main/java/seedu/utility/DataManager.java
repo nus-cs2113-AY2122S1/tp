@@ -23,7 +23,7 @@ import java.util.Scanner;
 public class DataManager {
 
     private static final String NEWLINE = System.lineSeparator();
-    private static final String ENTRIES_FILE_NAME = "./StonksXD_Data.csv";
+    private static final String ENTRIES_FILE_NAME = "./StonksXD_Entries.csv";
     private static final String ENTRIES_CSV_HEADER = "entry_type,entry_description,amount,category,date";
     private static final String BUDGET_FILE_NAME = "./StonksXD_Budget.csv";
     private static final String BUDGET_CSV_HEADER = "overallBudget,foodBudget,transportBudget,medicalBudget," +

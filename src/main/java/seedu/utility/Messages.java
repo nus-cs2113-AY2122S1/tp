@@ -13,11 +13,11 @@ public class Messages {
     public static final String BLANK_AMOUNT_MESSAGE = "No amount inputted!";
     public static final String UNABLE_TO_DELETE_MESSAGE = "Entry not deleted because entry not found!";
     public static final String BLANK_DESCRIPTION_MESSAGE = "Your description is empty!";
-    public static final String HAS_CORRUPTED_DATA_ENTRIES = "StonksXD_Data.csv has corrupted entries, " 
+    public static final String HAS_CORRUPTED_DATA_ENTRIES = "StonksXD_Entries.csv has corrupted entries, " 
             + "some or all data maybe lost.";
     public static final String HAS_CORRUPTED_BUDGET_SETTINGS = "StonksXD_Budget.csv has corrupted settings, "
             + "some or all settings maybe lost.";
-    public static final String UNABLE_TO_FIND_DATA_FILE = "Unable to find StonksXD_Data.csv, a new one has been made.";
+    public static final String UNABLE_TO_FIND_DATA_FILE = "Unable to find StonksXD_Entries.csv, a new one has been made.";
     public static final String UNABLE_TO_FIND_BUDGET_FILE = "Unable to find StonksXD_Budget.csv, a new one " +
             "has been made.";
     public static final String ERROR_SAVING_ENTRIES = "Unable to save entries into StonksXD_Data.csv, " 
