@@ -75,12 +75,7 @@ public class Parser {
             break;
 
         case "expense":
-            try {
-                assert inputParams != null;
-                executeExpense(inputParams);
-            } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
-                Ui.printExpenseFormatError();
-            }
+            handleExpense(inputParams);
             break;
 
         case "amount":
@@ -96,20 +91,20 @@ public class Parser {
         }
     }
 
+    private static void handleExpense(String inputParams) {
+        try {
+            assert inputParams != null;
+            executeExpense(inputParams);
+        } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
+            Ui.printExpenseFormatError();
+        }
+    }
+
     private static void handleViewTrip(String inputParams) {
         try {
             executeView(inputParams);
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printFilterFormatError();
-        }
-    }
-
-    private static void handleExpense(String inputParams) {
-        try {
-            assert inputParams != null;
-            executeExpense(inputParams);
-        } catch (NullPointerException | IndexOutOfBoundsException e) {
-            Ui.printExpenseFormatError();
         }
     }
 
