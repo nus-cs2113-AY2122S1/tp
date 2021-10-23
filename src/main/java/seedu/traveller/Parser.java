@@ -214,14 +214,14 @@ public class Parser {
      * @return Command A <code>DeleteDayCommand</code> object.
      */
     private static Command parseDeleteDayCommand(String userInput) {
+        logger.log(Level.INFO, "Delete-day command input");
         Command command;
-        logger.log(Level.INFO, "Delete command input");
         String tripName;
         String day;
         String daySeparator = " /day ";
         int dayIdx = userInput.indexOf(daySeparator);
         tripName = userInput.substring(0, dayIdx);
-        day = userInput.substring(userInput.length()-1, userInput.length());
+        day = userInput.substring(userInput.length() - 1, userInput.length());
         command = new DeleteDayCommand(tripName,Integer.valueOf(day));
         return command;
     }
@@ -232,8 +232,7 @@ public class Parser {
      * @return A <code>DeleteItemCommand</code> object.
      */
     private static Command parseDeleteItemCommand(String userInput) {
-        Command command;
-        logger.log(Level.INFO, "Delete command input");
+        logger.log(Level.INFO, "Delete-item command input");
         String tripName;
         String day;
         String item;
@@ -243,8 +242,8 @@ public class Parser {
         int itemIdx = userInput.indexOf(itemSeparator);
         tripName = userInput.substring(0, dayIdx);
         day = userInput.substring(dayIdx + DAY_LENGTH, itemIdx);
-        item = userInput.substring(userInput.length()-1, userInput.length());
-        command = new DeleteItemCommand(tripName,Integer.valueOf(day),Integer.valueOf(item));
+        item = userInput.substring(userInput.length() - 1, userInput.length());
+        Command command = new DeleteItemCommand(tripName,Integer.valueOf(day),Integer.valueOf(item));
         return command;
     }
 
