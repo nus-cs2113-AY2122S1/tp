@@ -48,19 +48,21 @@ ________________________________________________________
 Invalid command format
 
 create: Creates a new workout.
-Format: create [workout description]
+Format: create [workout description] or Format: create [workout description], [deadline]
 Parameters:
 	Workout description - description or name of workout
-	Workout deadline - deadline of workout
-Example: create abs, 2021-12-25
+	Workout deadline - deadline of workout (optional)
+Example: create abs (if no deadline set)
+Example: create abs, 2021-12-25 (if you want to set a deadline)
 ________________________________________________________
 ________________________________________________________
 create: Creates a new workout.
-Format: create [workout description]
+Format: create [workout description] or Format: create [workout description], [deadline]
 Parameters:
 	Workout description - description or name of workout
-	Workout deadline - deadline of workout
-Example: create abs, 2021-12-25
+	Workout deadline - deadline of workout (optional)
+Example: create abs (if no deadline set)
+Example: create abs, 2021-12-25 (if you want to set a deadline)
 ________________________________________________________
 ________________________________________________________
 New workout created: Legs finish by: 25 Dec 2021
