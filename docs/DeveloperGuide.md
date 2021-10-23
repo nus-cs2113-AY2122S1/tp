@@ -136,7 +136,32 @@ ArrayList within `AttendanceList`.
 
 
 ### Set marks
-The set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command`.<br>
+The set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command` and uses a `results` HashMap to store 
+`assessmentName` and the `marks` for it as a key-value pair.<br>  
+
+`SetMarksCommand` implements the following methods:
+* `SetMarksCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Checks input for errors before calling the 
+`setMarks` command and saving the data.
+* `SetMarksCommand#setMarks(ui:Ui, student:Student, assessmentName:String, marks:double)` - Puts a key-value pair with
+`assessmentName` as key and `marks` as the value into the `results` HashMap of `student`.
+
+Below is an example scenario of how the set marks mechanism behaves at each step:
+* Precursor Step - The user must have executed the commands to create `module`, `assessment`, and `student` entities.
+For purpose of this example, the user will have created `CS2113T` as the `module`, `Midterms` as the `assessment` with
+a maximum mark of `100`, and `Jim Ho` as the `student`.
+* Step 1 - The user executes the `set_marks c/CS2113T s/1 a/Midterms m/50` command to set marks for student at index `1`
+for the `Midterms` assessment under the `CS2113T` module. The `set_marks` command calls the  `SetMarksCommand#execute` 
+method. Within  `SetMarksCommand#execute`, `StudentList#getStudentAt("1")` is called to ensure that the student to be 
+marked (in this case student at index `1`) exists.
+* Step 2 - `AssessmentList#getAssessment(Midterms)` is then called to ensure that the `Midterms` assessment exists and
+that the student has yet to be marked for it.
+* Step 3 - `Assessment#getMaximumMarks();` is then called to ensure that the marks to be given for the `Midterms` 
+assessment do not exceed the maximum marks attributed to it.
+* Step 4 - If the above steps do not output an error, the `SetMarksCommand#setMarks` command is then called, which in 
+turn calls the `Student#setMarks` command to put the key-value pair into the `results` HashMap of the student at index 
+`1`.
+
+
 
 ## Product scope
 ### Target user profile
