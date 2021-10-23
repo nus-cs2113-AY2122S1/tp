@@ -313,20 +313,17 @@ public class ModuleStorage {
             return false;
         }
         PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
-        Font header = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
+        Font header = FontFactory
+                .getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
         Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, BaseColor.BLACK);
 
         tempDocument.open();
-        notes.forEach(note -> {
+        for (Note note : notes) {
             Paragraph title = new Paragraph(note.getName(), header);
             Paragraph content = new Paragraph(note.getData(), text);
-            try {
-                tempDocument.add(title);
-                tempDocument.add(content);
-            } catch (DocumentException e) {
-                e.printStackTrace();
-            }
-        });
+            tempDocument.add(title);
+            tempDocument.add(content);
+        }
         tempDocument.close();
         return true;
     }
