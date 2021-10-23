@@ -7,6 +7,7 @@ import seedu.traveller.Ui;
 import seedu.traveller.commands.Command;
 import seedu.traveller.exceptions.SaveDataNotFoundException;
 import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.exceptions.TripNotFoundException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,7 +43,7 @@ public class SaveLoader {
         try {
             createSave();
             writeToSave();
-        } catch (IOException e) {
+        } catch (IOException | TripNotFoundException e) {
             ui.printError(e.getMessage());
         }
         ui.printLine();
@@ -82,17 +83,16 @@ public class SaveLoader {
         save.delete();
     }
 
-    private void writeToSave() throws IOException {
+    private void writeToSave() throws IOException, TripNotFoundException {
         /*logger.setLevel(Level.INFO);
         logger.log(Level.INFO, "Writing data to " + FILE_PATH);*/
         FileWriter fw = new FileWriter(filePath);
         ui.printWriteSave();
         for (int i = 0; i < tripsList.getSize(); i++) {
             Trip current = tripsList.getTrip(i);
-            fw.write("new" + separator
-                    + current.getTripName() + separator + "/from" + separator
-                    + current.getStartCountryCode() + separator + "/to" + separator
-                    + current.getEndCountryCode() + "\n");
+            fw.write(current.getSaveTrip());
+            fw.write(current.getSaveDay());
+            fw.write(current.getSaveItem());
         }
         fw.close();
     }

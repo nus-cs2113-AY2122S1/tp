@@ -319,10 +319,18 @@ public class Parser {
      * @param userInput Raw user input, with the first command option (add-day) removed.
      * @return Command An <code>AddDayCommand</code> object.
      */
-    private static Command parseAddDayCommand(String userInput) {
+    private static Command parseAddDayCommand(String userInput) throws TravellerException {
+        String[] rawInputs = userInput.split(" ", 2);
+        String tripName = rawInputs[0];
+        int daysNumber;
+        try {
+            daysNumber = Integer.parseInt(rawInputs[1]);
+        } catch (NumberFormatException e) {
+            throw new InvalidAddDayFormatException();
+        }
         Command command;
         logger.log(Level.INFO, "Add-day command input");
-        command = new AddDayCommand(userInput);
+        command = new AddDayCommand(tripName, daysNumber);
         return command;
     }
 

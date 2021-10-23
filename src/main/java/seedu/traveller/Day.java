@@ -20,6 +20,10 @@ public class Day {
         itemsList.deleteItem(i);
     }
 
+    public int getItemsListSize() {
+        return itemsList.getSize();
+    }
+
     @Override
     public String toString() {
         return itemsList.toString();
