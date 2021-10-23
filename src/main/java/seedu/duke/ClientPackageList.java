@@ -3,21 +3,22 @@ package seedu.duke;
 import java.util.ArrayList;
 
 public class ClientPackageList {
-    private static ArrayList<ClientPackage> packages;
+    private static ArrayList<ClientPackage> clientPackages;
     private static int packageCount = 0;
 
     public ClientPackageList() {
-        packages = new ArrayList<>();
+        clientPackages = new ArrayList<>();
         packageCount = 0;
     }
 
     public void add(ClientPackage pack) {
         packageCount++;
-        packages.add(pack);
+        clientPackages.add(pack);
+        System.out.println(clientPackages.get(0));
     }
 
     public ClientPackage get(int index) {
-        return packages.get(index);
+        return clientPackages.get(index);
     }
 
     public int getPackageCount() {

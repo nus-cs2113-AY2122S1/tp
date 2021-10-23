@@ -1,11 +1,17 @@
 package seedu.duke;
 
 public class ClientPackage {
-    private static Client client;
-    private static Tour tour;
-    private static Flight flight;
+    private Client client;
+    private Tour tour;
+    private Flight flight;
 
-    public ClientPackage(Client client, Tour tour, Flight flight) {
+    public ClientPackage(Client client, Tour tour, Flight flight, ClientPackageList clientPackages) {
+//        if (clientPackages.getPackageCount() > 0) {
+//            System.out.println(clientPackages.get(0));
+//        }
+//        if (clientPackages.getPackageCount() > 1) {
+//            System.out.println(clientPackages.get(1));
+//        }
         this.client = client;
         this.tour = tour;
         this.flight = flight;
