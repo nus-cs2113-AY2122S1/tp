@@ -26,7 +26,7 @@ public class QuestionCommandTest {
     void setUp() {
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
     }
 
     @Test

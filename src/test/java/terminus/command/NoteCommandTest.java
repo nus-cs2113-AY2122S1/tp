@@ -32,7 +32,7 @@ public class NoteCommandTest {
         this.moduleStorage.createModuleDirectory(tempModule);
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
     }
 
     @AfterAll

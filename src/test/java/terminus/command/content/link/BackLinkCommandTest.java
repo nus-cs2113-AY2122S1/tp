@@ -26,7 +26,7 @@ public class BackLinkCommandTest {
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
     }
 
     @Test

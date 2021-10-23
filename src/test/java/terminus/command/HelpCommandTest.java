@@ -32,7 +32,7 @@ public class HelpCommandTest {
         linkCommandParser.setModuleName(tempModule);
         moduleCommandParser = ModuleCommandParser.getInstance();
         moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
     }
 
     @Test

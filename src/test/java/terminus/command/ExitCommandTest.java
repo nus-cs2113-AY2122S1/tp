@@ -22,7 +22,7 @@ public class ExitCommandTest {
     void setUp() {
         this.commandParser = MainCommandParser.getInstance();
         this.moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
     }
 
     @Test

@@ -32,7 +32,7 @@ public class DeleteModuleCommandTest {
         this.moduleStorage.createModuleDirectory(tempModule);
         this.moduleManager = new ModuleManager();
         this.commandParser = ModuleCommandParser.getInstance();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
     }
 
     @AfterAll

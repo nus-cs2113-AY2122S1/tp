@@ -38,7 +38,7 @@ public class ViewModuleCommandTest {
 
     @Test
     void execute_viewModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
         Command cmd = commandParser.parseCommand("view");
         CommandResult cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());

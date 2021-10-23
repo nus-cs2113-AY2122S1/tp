@@ -23,7 +23,7 @@ public class MainCommandParserTest {
     void setUp() {
         this.commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
 
     }
 

@@ -26,6 +26,9 @@ public class Messages {
     public static final String ERROR_MESSAGE_INVALID_TIME_FORMAT = ERROR_MESSAGE_TAG + "Invalid time format %s.";
     public static final String ERROR_MESSAGE_INVALID_LINK = ERROR_MESSAGE_TAG + "Invalid link %s.";
     public static final String ERROR_MESSAGE_INVALID_DAY = ERROR_MESSAGE_TAG + "Invalid day %s.";
+    public static final String ERROR_MESSAGE_INVALID_DURATION = ERROR_MESSAGE_TAG + "Invalid duration %d.";
+    public static final String ERROR_MESSAGE_SCHEDULE_OVERFLOW = ERROR_MESSAGE_TAG
+            + "Please set schedules on separate days.";
     public static final String ERROR_MESSAGE_DUPLICATE_NAME = ERROR_MESSAGE_TAG + "Duplicate name found.";
 
     public static final String ERROR_FILE_TOO_LARGE = "Unable to read large files.";
@@ -36,7 +39,8 @@ public class Messages {
     public static final String EMPTY_CONTENT_LIST_MESSAGE = "You do not have any content in this workspace.\n";
     public static final String CONTENT_MESSAGE_HEADER = "List of Content\n---------------\n";
 
-    public static final String EMPTY_SCHEDULE_FOR_THE_DAY = "You have no schedule for %s\n";
+    public static final String EMPTY_SCHEDULE_FOR_THE_DAY = "You have no schedule for %s.\n";
+    public static final String EMPTY_SCHEDULE_FOR_THE_WEEK = "You have no schedule for the week.\n";
     
     public static final String MAIN_BANNER = "Welcome to TermiNUS!\n";
     public static final String MAIN_REMINDER = "This is your schedule today:\n";
@@ -68,4 +72,5 @@ public class Messages {
     public static final String HELP_MENU_MESSAGE = "\nHelp Menu\n---------\n";
     public static final String CONTENT_MESSAGE_FOOTER = 
         "\nRerun the same command with an index behind to view the content.";
+    public static final String MESSAGE_CONFLICTING_SCHEDULE = "Your new schedule has conflicts with:";
 }

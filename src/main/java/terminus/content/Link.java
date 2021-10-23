@@ -9,15 +9,17 @@ public class Link extends Content {
 
     private String day;
     private LocalTime startTime;
+    private int duration;
     private String link;
     public static final String TYPE = "Z";
 
-    private static final String DISPLAY_LINK_MESSAGE = "%s (%s, %s): %s";
+    private static final String DISPLAY_LINK_MESSAGE = "%s (%s, %s - %s): %s";
 
-    public Link(String name, String day, LocalTime startTime, String link) {
+    public Link(String name, String day, LocalTime startTime, int duration, String link) {
         super(name);
         this.day = day;
         this.startTime = startTime;
+        this.duration = duration;
         this.link = link;
     }
 
@@ -38,12 +40,25 @@ public class Link extends Content {
         this.startTime = startTime;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     public String getLink() {
         return link;
     }
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public LocalTime getEndTime() {
+        LocalTime endTime = startTime.plusHours(duration);
+        return endTime;
     }
 
     /**
@@ -53,7 +68,7 @@ public class Link extends Content {
      */
     @Override
     public String getDisplayInfo() {
-        return String.format(DISPLAY_LINK_MESSAGE, this.name, day, startTime, link);
+        return String.format(DISPLAY_LINK_MESSAGE, this.name, day, startTime, getEndTime(), link);
     }
 
     /**

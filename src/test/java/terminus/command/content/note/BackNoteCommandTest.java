@@ -25,7 +25,7 @@ public class BackNoteCommandTest {
         this.commandParser = NoteCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
     }
 
     @Test

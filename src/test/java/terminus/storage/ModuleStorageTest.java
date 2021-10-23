@@ -38,11 +38,11 @@ public class ModuleStorageTest {
         this.moduleStorage = ModuleStorage.getInstance();
         this.moduleStorage.init(SAVE_FILE);
         moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
         moduleManager.getModule(tempModule).getContentManager(Note.class).add(new Note("test", "test"));
         moduleStorage.saveNotesFromModule(moduleManager, tempModule, true);
         moduleManager.getModule(tempModule).getContentManager(Link.class).add(new Link("test", "tuesday",
-                LocalTime.of(11, 11), "https://zoom.us/"));
+                LocalTime.of(11, 11), 2, "https://zoom.us/"));
     }
 
     @AfterEach

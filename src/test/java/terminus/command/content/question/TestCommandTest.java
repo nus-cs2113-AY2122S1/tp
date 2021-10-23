@@ -34,7 +34,7 @@ public class TestCommandTest {
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
         this.commandParser = QuestionCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
     }

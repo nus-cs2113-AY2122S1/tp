@@ -25,7 +25,7 @@ public class BackQuestionCommandTest {
         this.commandParser = QuestionCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
     }
 
     @Test

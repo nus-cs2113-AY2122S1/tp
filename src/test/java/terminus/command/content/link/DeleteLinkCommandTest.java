@@ -27,7 +27,7 @@ public class DeleteLinkCommandTest {
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.addModule(tempModule);
+        moduleManager.setModule(tempModule);
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
     }
@@ -36,7 +36,7 @@ public class DeleteLinkCommandTest {
     void execute_deleteLink_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 3; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
-                "add \"test_desc\" \"Monday\" \"12:00\" \"https://zoom.us/test\""
+                "add \"test_desc\" \"Monday\" \"12:00\" \"1\" \"https://zoom.us/test\""
             );
             CommandResult addResult = addLinkCommand.execute(moduleManager);
             assertTrue(addResult.isOk());

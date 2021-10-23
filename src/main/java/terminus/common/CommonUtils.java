@@ -117,6 +117,16 @@ public class CommonUtils {
         return false;
     }
 
+    public static boolean isValidDuration(LocalTime startTime, int duration) throws InvalidArgumentException {
+        LocalTime endTime = startTime.plusHours(duration);
+        if (duration < 0) {
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION, duration));
+        } else if (startTime.getHour() > endTime.getHour()) {
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_SCHEDULE_OVERFLOW);
+        }
+        return true;
+    }
+
     public static boolean isStringNullOrEmpty(String string) {
         return string == null || string.isBlank();
     }
