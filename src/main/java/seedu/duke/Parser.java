@@ -154,7 +154,6 @@ public class Parser {
     }
 
     private static void executeView(String inputParams) {
-        Trip currentTrip = Storage.getOpenTrip();
         if (inputParams == null) {
             Storage.getOpenTrip().viewAllExpenses();
         } else {
@@ -255,8 +254,16 @@ public class Parser {
         Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
         newExpense.setDate(newExpense.prompDate());
         currTrip.addExpense(newExpense);
-        updateIndividualSpending(newExpense);
+        if (listOfPersonsIncluded.size() == 1){
+            updateOnePersonSpending(newExpense, listOfPersonsIncluded.get(0));
+        } else {
+            updateIndividualSpending(newExpense);
+        }
         Ui.printExpenseAddedSuccess();
+    }
+
+    private static void updateOnePersonSpending(Expense expense, Person person){
+        person.setMoneyOwed(person, expense.getAmountSpent());
     }
 
     private static void updateIndividualSpending(Expense expense) {
@@ -268,7 +275,8 @@ public class Parser {
             HashMap<Person, Double> amountBeingPaid = new HashMap<>();
             double total = 0.0;
             for (Person person : expense.getPersonsList()) {
-                Ui.printHowMuchDidPersonSpend(person.getName());
+                double amountRemaining = expense.getAmountSpent() - total;
+                Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
                 String amountString = Storage.getScanner().nextLine().strip();
                 if (amountString.equalsIgnoreCase("equal") && amountBeingPaid.isEmpty()) {
                     assignEqualAmounts(payer, expense, amountBeingPaid);
