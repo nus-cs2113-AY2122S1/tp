@@ -74,6 +74,17 @@ public class TextUi {
         return input;
     }
 
+    public static String printAskConfirmation(Lesson lesson) {
+        String output = "Are you sure you want to add " + lesson.lessonDetails()
+                + " as it conflicts with your current timetable (y/n)";
+        System.out.print(output);
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
+        }
+        return input;
+    }
+
     public static void printExitMessage() {
         System.out.print(LINE + "> Bye friend!\n> See you again! :)\n" + LINE);
     }

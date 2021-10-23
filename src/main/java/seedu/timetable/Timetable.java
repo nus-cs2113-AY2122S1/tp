@@ -22,12 +22,12 @@ public class Timetable implements Comparable<Timetable> {
     private static final int DEFAULT_START = 9;
     private static final int DEFAULT_END = 16;
 
-    private int semester;
+    private final int semester;
     private int earliestHour;
     private int latestHour;
 
-    private ArrayList<Module> modules;
-    private TimetableLogger logger = new TimetableLogger();
+    private final ArrayList<Module> modules;
+    private final TimetableLogger logger = new TimetableLogger();
 
     private TimetableItem[] monday = new TimetableItem[24];
     private TimetableItem[] tuesday = new TimetableItem[24];
@@ -63,13 +63,6 @@ public class Timetable implements Comparable<Timetable> {
         this.friday = fri;
         this.saturday = sat;
         this.sunday = sun;
-
-        addItemToSchedule(new TimetableUserItem(
-                "Test Item",
-                "Monday",
-                "1400",
-                "1700",
-                "Test description"), monday);
     }
 
     /**
@@ -378,10 +371,10 @@ public class Timetable implements Comparable<Timetable> {
         ArrayList<Integer> duration = lesson.getStartToEndTime();
         for (Integer time : duration) {
             if (isLessonExist(lesson, time)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public boolean isLessonExist(Lesson lesson, Integer time) {
