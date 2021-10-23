@@ -29,7 +29,19 @@ import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 
 import seedu.entry.IncomeCategory;
-import seedu.exceptions.*;
+import seedu.exceptions.BlankExpenseCategoryException;
+import seedu.exceptions.BlankIncomeCategoryException;
+import seedu.exceptions.InputException;
+import seedu.exceptions.InvalidExpenseAmountException;
+import seedu.exceptions.InvalidExpenseCategoryException;
+import seedu.exceptions.InvalidExpenseDataFormatException;
+import seedu.exceptions.InvalidExpenseDescriptionException;
+import seedu.exceptions.InvalidExpenseIndexException;
+import seedu.exceptions.InvalidIncomeAmountException;
+import seedu.exceptions.InvalidIncomeCategoryException;
+import seedu.exceptions.InvalidIncomeDataFormatException;
+import seedu.exceptions.InvalidIncomeDescriptionException;
+import seedu.exceptions.InvalidIncomeIndexException;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -262,7 +274,8 @@ public class Parser {
         return matcher.matches();
     }
 
-    private ExpenseCategory extractExpenseCategory(Matcher matcher, String groupName) throws BlankExpenseCategoryException, InvalidExpenseCategoryException {
+    private ExpenseCategory extractExpenseCategory(Matcher matcher, String groupName) throws 
+            BlankExpenseCategoryException, InvalidExpenseCategoryException {
         String expenseCategory = matcher.group(groupName).trim();
         if (expenseCategory.isBlank()) {
             throw new BlankExpenseCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
@@ -285,7 +298,8 @@ public class Parser {
         }
     }
     
-    private String extractExpenseDescription(Matcher matcher, String groupName) throws InvalidExpenseDescriptionException {
+    private String extractExpenseDescription(Matcher matcher, String groupName) throws 
+            InvalidExpenseDescriptionException {
         String expenseDescription = matcher.group(groupName).trim();
         if (expenseDescription.isBlank()) {
             throw new InvalidExpenseDescriptionException(Messages.BLANK_DESCRIPTION_MESSAGE);
@@ -314,7 +328,8 @@ public class Parser {
         return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
-    private IncomeCategory extractIncomeCategory(Matcher matcher, String groupName) throws BlankIncomeCategoryException, InvalidIncomeCategoryException {
+    private IncomeCategory extractIncomeCategory(Matcher matcher, String groupName) throws 
+            BlankIncomeCategoryException, InvalidIncomeCategoryException {
         String incomeCategory = matcher.group(groupName).trim();
         if (incomeCategory.isBlank()) {
             throw new BlankIncomeCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
@@ -333,7 +348,8 @@ public class Parser {
         }
     }
 
-    private String extractIncomeDescription(Matcher matcher, String groupName) throws InvalidIncomeDescriptionException {
+    private String extractIncomeDescription(Matcher matcher, String groupName) throws 
+            InvalidIncomeDescriptionException {
         String incomeDescription = matcher.group(groupName).trim();
         if (incomeDescription.isBlank()) {
             throw new InvalidIncomeDescriptionException(Messages.BLANK_DESCRIPTION_MESSAGE);
