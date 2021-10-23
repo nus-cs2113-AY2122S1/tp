@@ -46,6 +46,13 @@ Basic sequence of events:
      in the json file.
 4. `Ui` acknowledges the command and shows the result of the Command if any.
 
+Below is a high-level sequence diagram showing the `create` Command
+
+![img.png](umldg/BasicArchitectureSequenceDiagram.png)
+
+**`showResultToUser(CommandResult)`
+
+
 ### Data Component
 
 Location : `seedu.duke.data`
@@ -67,6 +74,21 @@ exercises (in the form of an `Exercise` object). Lastly, `Exercise` stores the e
 
 __Storage.models__: `addToWorkoutListModel(WorkoutModel workout)` and `addToWorkoutModel(ExerciseModel exercise)` from the `storage.models` component
 are called in the methods of `Workout` and `Exercise` respectively. This causes the dependency on `WorkoutModel` and `WorkoutListModel` as seen in the UML Diagram.
+These methods are required to convert the current `WorkoutList` into a `WorkoutListModel` which can then be easily converted
+into a json String with the help of a `ObjectMapper` from the [Jackson](https://github.com/FasterXML/jackson) Library.
+Below is a sequence diagram showing how this all happens:
+
+![img.png](umldg/DataSequenceDiagram.png)
+
+1. First `convertAllWorkoutsToStorageModel()` is called when the whole `WorkoutList` is to be converted into its model counterpart.
+   1. For each `Workout` in the `WorkoutList`, its `convertToWorkoutStorageModel()` method is called.
+   2. In this method a new `WorkoutModel` is created which acts as the model counterpart for this `Workout` object.
+      1. For each `Exercise` in this `Workout` object, its `convertToExerciseStorageModel(WorkoutModel)` is called.
+      2. In this method a new `ExerciseModel` is created which acts as the model counterpart for this `Exercise` object.
+      3. Each `ExerciseModel` created this way is added to the `WorkoutModel`.
+   3. Each `WorkoutModel` created this way is added to the `WorkoutListModel`.
+2. Once all `Workout` objects are converted to `WorkoutModel` objects, the `WorkoutListModel` has all the data which was in 
+   the `WorkoutList` and now can be converted into a json String to be stored in the json File.
 
 ### Storage Component
 
