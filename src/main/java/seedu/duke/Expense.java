@@ -101,6 +101,8 @@ public class Expense {
                 + System.lineSeparator()
                 + "People involved: " + this.getPersonsList().toString()
                 + System.lineSeparator()
+                + "Payer: " + this.getPayer()
+                + System.lineSeparator()
                 + "Category: " + this.category);
     }
 
