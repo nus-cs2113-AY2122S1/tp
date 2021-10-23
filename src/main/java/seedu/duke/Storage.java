@@ -1,7 +1,9 @@
 package seedu.duke;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
 
@@ -60,10 +62,10 @@ public class Storage {
             String jsonString = scanner.nextLine();
             Type tripType = new TypeToken<ArrayList<Trip>>(){}.getType();
             listOfTrips = new Gson().fromJson(jsonString, tripType);
-        } catch (FileNotFoundException e) {
-            //TODO: print output to start new file for user
         } catch (JsonParseException e) {
-            //TODO: ask user whether to overwrite file
+            Ui.printJsonParseError();
+        } catch (FileNotFoundException e) {
+            Ui.printFileNotFoundError();
         }
     }
 

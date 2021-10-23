@@ -11,7 +11,7 @@ public class Trip {
     private LocalDate dateOfTrip;
     private ArrayList<Expense> listOfExpenses = new ArrayList<>();
     private ArrayList<Person> listOfPersons = new ArrayList<>();
-    private double budget;
+    //private double budget; //may not be needed anymore
     private double exchangeRate;
     private String foreignCurrency;
     private String repaymentCurrency;
@@ -27,18 +27,18 @@ public class Trip {
      * @param newTripInfo array containing one attribute in each element
      */
     public Trip(String[] newTripInfo) {
-        assert newTripInfo.length == 5;
+        assert newTripInfo.length == 4;
         this.location = newTripInfo[0];
         setDateOfTrip(newTripInfo[1]);
         setExchangeRate(newTripInfo[2]);
-        setBudget(newTripInfo[3]);
-        this.listOfPersons = splitPeople(newTripInfo[4]);
+        //setBudget(newTripInfo[3]);
+        this.listOfPersons = splitPeople(newTripInfo[3]);
     }
 
     public static void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
         Trip currentTrip = Storage.getOpenTrip();
         ArrayList<Expense> listOfCurrentExpenses = currentTrip.getListOfExpenses();
-        if (listOfCurrentExpenses.size() == 0) {
+        if (listOfCurrentExpenses.isEmpty()) {
             Ui.printNoExpensesError();
             return;
         }
@@ -65,16 +65,22 @@ public class Trip {
     }
 
     private static void findMatchingPayerExpenses(ArrayList<Expense> listOfCurrentExpenses, String expenseAttribute) {
+        int numberOfMatchingExpenses = 0;
         for (Expense e : listOfCurrentExpenses) {
             if (e.getPayer().getName().equals(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
+                numberOfMatchingExpenses++;
             }
+        }
+        if (numberOfMatchingExpenses == 0) {
+            Ui.printNoMatchingExpenseError();
         }
     }
 
     private static void findMatchingDescriptionExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                         String expenseAttribute) {
+        int numberOfMatchingExpenses = 0;
         String descriptionToLowerCase;
         String attributeToLowerCase = expenseAttribute.toLowerCase();
         for (Expense e : listOfCurrentExpenses) {
@@ -82,19 +88,27 @@ public class Trip {
             if (descriptionToLowerCase.contains(attributeToLowerCase)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
+                numberOfMatchingExpenses++;
             }
+        }
+        if (numberOfMatchingExpenses == 0) {
+            Ui.printNoMatchingExpenseError();
         }
     }
 
     private static void findMatchingCategoryExpenses(ArrayList<Expense> listOfCurrentExpenses,
                                                      String expenseAttribute) {
+        int numberOfMatchingExpenses = 0;
         for (Expense e : listOfCurrentExpenses) {
             if (e.getCategory().equals(expenseAttribute)) {
                 int index = listOfCurrentExpenses.indexOf(e);
                 Ui.printFilteredExpenses(e, index);
+                numberOfMatchingExpenses++;
             }
         }
-
+        if (numberOfMatchingExpenses == 0) {
+            Ui.printNoMatchingExpenseError();
+        }
     }
 
     public LocalDate getDateOfTrip() {
@@ -103,7 +117,7 @@ public class Trip {
 
     public String getDateOfTripString() {
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd MMM yyyy");
-        return dateOfTrip.format(pattern);
+        return getDateOfTrip().format(pattern);
     }
 
     /**
@@ -122,7 +136,7 @@ public class Trip {
         }
     }
 
-    public double getBudget() {
+    /*public double getBudget() {
         return this.budget;
     }
 
@@ -134,7 +148,7 @@ public class Trip {
             Scanner scanner = Storage.getScanner();
             setBudget(scanner.nextLine().strip());
         }
-    }
+    }*/
 
     public double getExchangeRate() {
         return exchangeRate;
@@ -164,9 +178,9 @@ public class Trip {
         return totalExpense;
     }
 
-    public double getBudgetLeft() {
+    /*public double getBudgetLeft() {
         return getBudget() - getTotalExpenses();
-    }
+    }*/
 
 
     public String getForeignCurrency() {
@@ -215,9 +229,13 @@ public class Trip {
     }
 
     public void viewAllExpenses() {
-        for (Expense expense : listOfExpenses) {
-            Ui.printExpenseDetails(expense);
-            System.out.println();
+        if (listOfExpenses.isEmpty()) {
+            Ui.printNoExpensesError();
+        } else {
+            for (Expense expense : listOfExpenses) {
+                Ui.printExpenseDetails(expense);
+                System.out.println();
+            }
         }
     }
 
