@@ -25,7 +25,7 @@ public class Ui {
 
 
     public static String stringMoney(double val) {
-        return String.format("%.02f", val);
+        return String.format(Storage.getAvailableCurrency().get("USD")[1], val);
     }
 
     public static void printExpenseDetails(Expense e) {
