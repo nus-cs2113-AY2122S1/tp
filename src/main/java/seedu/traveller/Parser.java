@@ -14,8 +14,14 @@ import seedu.traveller.commands.ShortestCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.HelpCommand;
-
-import seedu.traveller.exceptions.*;
+import seedu.traveller.exceptions.CommandNotFoundException;
+import seedu.traveller.exceptions.IllegalTripNameException;
+import seedu.traveller.exceptions.InvalidAddItemFormatException;
+import seedu.traveller.exceptions.InvalidEditFormatException;
+import seedu.traveller.exceptions.InvalidNewFormatException;
+import seedu.traveller.exceptions.InvalidSearchFormatException;
+import seedu.traveller.exceptions.TravellerException;
+import seedu.traveller.exceptions.InvalidDeleteDayFormatException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -210,10 +216,15 @@ public class Parser {
      * @return Command A <code>DeleteDayCommand</code> object.
      */
     private static Command parseDeleteDayCommand(String userInput) {
+        logger.log(Level.INFO, "Delete-day command input");
         Command command;
-        logger.log(Level.INFO, "Delete command input");
-        String[] input = userInput.split(" ");
-        command = new DeleteDayCommand(input[0],Integer.valueOf(input[1]));
+        String tripName;
+        String day;
+        String daySeparator = " /day ";
+        int dayIdx = userInput.indexOf(daySeparator);
+        tripName = userInput.substring(0, dayIdx);
+        day = userInput.substring(userInput.length() - 1, userInput.length());
+        command = new DeleteDayCommand(tripName,Integer.valueOf(day));
         return command;
     }
 
@@ -223,10 +234,18 @@ public class Parser {
      * @return A <code>DeleteItemCommand</code> object.
      */
     private static Command parseDeleteItemCommand(String userInput) {
-        Command command;
-        logger.log(Level.INFO, "Delete command input");
-        String[] input = userInput.split(" ");
-        command = new DeleteItemCommand(input[0],Integer.valueOf(input[1]),Integer.valueOf(input[2]));
+        logger.log(Level.INFO, "Delete-item command input");
+        String tripName;
+        String day;
+        String item;
+        String daySeparator = " /day ";
+        String itemSeparator = " /item ";
+        int dayIdx = userInput.indexOf(daySeparator);
+        int itemIdx = userInput.indexOf(itemSeparator);
+        tripName = userInput.substring(0, dayIdx);
+        day = userInput.substring(dayIdx + DAY_LENGTH, itemIdx);
+        item = userInput.substring(userInput.length() - 1, userInput.length());
+        Command command = new DeleteItemCommand(tripName,Integer.valueOf(day),Integer.valueOf(item));
         return command;
     }
 
