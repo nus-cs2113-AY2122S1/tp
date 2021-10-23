@@ -27,7 +27,7 @@ public class Messages {
     public static final String EMPTY_EXPENSE_MESSAGE = "You have not spent anything!";
     public static final String FOUND_LIST_MESSAGE = "Below is a list of all your findings!";
     public static final String BLANK_CATEGORY_MESSAGE = "Your category is empty!";
-    public static final String DATE_FORMAT_MESSAGE = "Your start and end dates must be in a YYYY-MM-DD format!";
+    public static final String DATE_FORMAT_MESSAGE = "Your start and end dates must be in a DD/MM/YYYY format!";
     public static final String ALL_DATA_CLEARED = "All your entries have been cleared!";
     public static final String INVALID_EXPENSE_CATEGORY_MESSAGE = "Input only 1 of these 5 categories: Food, " 
             + "Transport, Bills, Medical or Entertainment.";
@@ -52,7 +52,5 @@ public class Messages {
             + "███████    ██    ██    ██ ██ ██  ██ █████   ███████       ███   ██   ██ \n"
             + "     ██    ██    ██    ██ ██  ██ ██ ██  ██       ██      ██ ██  ██   ██ \n"
             + "███████    ██     ██████  ██   ████ ██   ██ ███████     ██   ██ ██████  ";
-
-
-
+    
 }

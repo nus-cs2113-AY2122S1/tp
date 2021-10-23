@@ -42,7 +42,7 @@ public class UiTest {
     private static final String SEPARATOR_LINE = "-------------------------------------------------------------------"
             + "----------------------------------";
     private static final String currentDate =
-            "(" + LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMM yyy")) + ")";
+            "(" + LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")";
 
     
     private final Ui testUI = new Ui();
@@ -220,7 +220,7 @@ public class UiTest {
     @Test
     public void printTotalExpenseBetween_noExpenseBetween_printNoExpenseBetweenMessage() {
         String expectedOutput = SEPARATOR_LINE + newLine
-                + "You do not have any expense between 30 Aug 2090 and 30 Aug 2092" + newLine
+                + "You do not have any expense between 30/08/2090 and 30/08/2092" + newLine
                 + SEPARATOR_LINE;
         LocalDate testDate1 = LocalDate.of(2090,8,30);
         LocalDate testDate2 = LocalDate.of(2092,8,30);
@@ -233,7 +233,7 @@ public class UiTest {
     @Test
     public void printTotalExpenseBetween_gotExpenseBetween_printTotalExpenseBetweenMessage() {
         String expectedOutput = SEPARATOR_LINE + newLine
-                + "Your total expense between 30 Aug 2090 and 30 Aug 2092 is $7512.00" + newLine
+                + "Your total expense between 30/08/2090 and 30/08/2092 is $7512.00" + newLine
                 + SEPARATOR_LINE;
         LocalDate testDate1 = LocalDate.of(2090,8,30);
         LocalDate testDate2 = LocalDate.of(2092,8,30);
@@ -246,7 +246,7 @@ public class UiTest {
     @Test
     public void printTotalIncomeBetween_noIncomeBetween_printNoIncomeBetweenMessage() {
         String expectedOutput = SEPARATOR_LINE + newLine
-                + "You do not have any income between 30 Aug 2090 and 30 Aug 2092" + newLine
+                + "You do not have any income between 30/08/2090 and 30/08/2092" + newLine
                 + SEPARATOR_LINE;
         LocalDate testDate1 = LocalDate.of(2090,8,30);
         LocalDate testDate2 = LocalDate.of(2092,8,30);
@@ -259,7 +259,7 @@ public class UiTest {
     @Test
     public void printTotalIncomeBetween_gotIncomeBetween_printTotalIncomeBetweenMessage() {
         String expectedOutput = SEPARATOR_LINE + newLine
-                + "Your total income between 30 Aug 2090 and 30 Aug 2092 is $988.10" + newLine
+                + "Your total income between 30/08/2090 and 30/08/2092 is $988.10" + newLine
                 + SEPARATOR_LINE;
         LocalDate testDate1 = LocalDate.of(2090,8,30);
         LocalDate testDate2 = LocalDate.of(2092,8,30);

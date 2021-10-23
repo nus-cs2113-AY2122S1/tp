@@ -17,6 +17,7 @@ import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
+import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeAmountException;
@@ -28,6 +29,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class ParserTest {
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final String DATA_SEPARATOR = ",";
+    
     @Test
     public void parseCommand_validHelpCommand_returnHelpCommand() {
         Parser testParser = new Parser();
@@ -162,34 +166,36 @@ public class ParserTest {
     @Test
     public void convertExpenseToData_validExpense_correctDataOutput() {
         Parser testParser = new Parser();
-        LocalDate date = LocalDate.parse("2121-11-11", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         Expense testExpense = new Expense("buy book", 12.33, ExpenseCategory.FOOD, date);
         String testData = testParser.convertExpenseToData(testExpense);
-        assertEquals("E, buy book, 12.33, FOOD, 2121-11-11", testData);
+        assertEquals("E" + DATA_SEPARATOR + "buy book" + DATA_SEPARATOR + 12.33 + DATA_SEPARATOR + "FOOD" 
+                + DATA_SEPARATOR + "11/11/2121", testData);
     }
 
     @Test
     public void convertIncomeToData_validIncome_correctDataOutput() {
         Parser testParser = new Parser();
-        LocalDate date = LocalDate.parse("2121-11-11", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate date = LocalDate.parse("11/11/2121", DateTimeFormatter.ofPattern(DATE_FORMAT));
         Income testIncome = new Income("job", 1233.0, IncomeCategory.ADHOC, date);
         String testData = testParser.convertIncomeToData(testIncome);
-        assertEquals("I, job, 1233.0, ADHOC, 2121-11-11", testData);
+        assertEquals("I" + DATA_SEPARATOR + "job" + DATA_SEPARATOR + 1233.0 + DATA_SEPARATOR + "ADHOC" 
+                + DATA_SEPARATOR + "11/11/2121", testData);
     }
 
     @Test
-    public void convertDataToExpense_validExpenseData_outputExpense() throws InvalidExpenseAmountException,
+    public void convertDataToExpense_validExpenseData_outputExpense() throws InputException,
             InvalidExpenseDataFormatException {
         Parser testParser = new Parser();
-        Expense testExpense = testParser.convertDataToExpense("E, sfa, 12, q, 2121-11-11");
-        assertEquals("FAIL EXPENSE", testExpense.getDescription());
-        assertEquals(9999999.0, testExpense.getValue());
+        Expense testExpense = testParser.convertDataToExpense("E,sfa,12,food,11/11/2121");
+        assertEquals("sfa", testExpense.getDescription());
+        assertEquals(12, testExpense.getValue());
     }
 
     @Test
     public void convertDataToExpense_invalidExpenseDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
-        assertThrows(InvalidExpenseDataFormatException.class, () -> testParser.convertDataToExpense("E, , 12"));
+        assertThrows(InvalidExpenseDataFormatException.class, () -> testParser.convertDataToExpense("E, ,"));
     }
 
     @Test
@@ -200,18 +206,19 @@ public class ParserTest {
     }
 
     @Test
-    public void convertDataToIncome_validIncomeData_outputIncome() throws InvalidIncomeAmountException,
+    public void convertDataToIncome_validIncomeData_outputIncome() throws InputException, 
             InvalidIncomeDataFormatException, DateTimeException {
         Parser testParser = new Parser();
-        Income testIncome = testParser.convertDataToIncome("I, sfa, 12, qwe, 2121-11-11");
-        assertEquals("FAIL INCOME", testIncome.getDescription());
-        assertEquals(999999.0, testIncome.getValue());
+        Income testIncome = testParser.convertDataToIncome("I" + DATA_SEPARATOR + "pay" + DATA_SEPARATOR 
+                + 1000 + DATA_SEPARATOR + "SALARY" + DATA_SEPARATOR + "11/11/2121");
+        assertEquals("pay", testIncome.getDescription());
+        assertEquals(1000.0, testIncome.getValue());
     }
 
     @Test
     public void convertDataToIncome_invalidIncomeDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
-        assertThrows(InvalidIncomeDataFormatException.class, 
+        assertThrows(InputException.class, 
             () -> testParser.convertDataToIncome("I, , 12, q, 2121-11-11"));
     }
 
@@ -233,6 +240,7 @@ public class ParserTest {
     public void convertDataToIncome_invalidIncomeDataWithInvalidSeparator_throwsException() {
         Parser testParser = new Parser();
         assertThrows(InvalidIncomeDataFormatException.class, 
-            () -> testParser.convertDataToIncome("I,asd, 12, q, 2121-11-11"));
+            () -> testParser.convertDataToIncome("I" + DATA_SEPARATOR + "pay" + DATA_SEPARATOR + 1000 + DATA_SEPARATOR 
+                    + "SALARY" + "|" + "11/11/2121"));
     }
 }
