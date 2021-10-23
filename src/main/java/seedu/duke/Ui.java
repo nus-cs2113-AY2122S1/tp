@@ -245,6 +245,32 @@ public class Ui {
             + "[TYPE]: dish to list dishes, ingr to list ingredients." + System.lineSeparator()
             + LINE_DIVIDER;
 
+    public static final String INVALID_CONFIRMATION = LINE_DIVIDER + System.lineSeparator()
+            + "Sorry, that is an invalid command. Please type y to confirm or n to disregard" + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    public static final String DISREGARD_MSG = LINE_DIVIDER + System.lineSeparator()
+            + "Your previous command is disregarded." + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    public static final String CONFIRM_DEL_DISH = LINE_DIVIDER + System.lineSeparator()
+            + "Are you sure you want to remove this Dish? Type y to confirm or n to disregard" + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    public static final String CONFIRM_CLEAR_DISH = LINE_DIVIDER + System.lineSeparator()
+            + "Are you sure you want to remove all Dishes? Type y to confirm or n to disregard" + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    public static final String CONFIRM_DEL_INGR = LINE_DIVIDER + System.lineSeparator()
+            + "Are you sure you want to remove this Ingredient? Type y to confirm or n to disregard"
+            + System.lineSeparator()
+            + LINE_DIVIDER;
+
+    public static final String CONFIRM_CLEAR_INGR = LINE_DIVIDER + System.lineSeparator()
+            + "Are you sure you want to remove all Ingredients? Type y to confirm or n to disregard"
+            + System.lineSeparator()
+            + LINE_DIVIDER;
+
     public void printLogo() {
         System.out.println(START_LOGO);
     }
@@ -393,6 +419,30 @@ public class Ui {
 
     public void printSortDishMsg() {
         System.out.println(DISH_SORT);
+    }
+
+    public void printConfirmDelDish() {
+        System.out.println(CONFIRM_DEL_DISH);
+    }
+
+    public void printConfirmClearDish() {
+        System.out.println(CONFIRM_CLEAR_DISH);
+    }
+
+    public void printConfirmDelIngr() {
+        System.out.println(CONFIRM_DEL_INGR);
+    }
+
+    public void printConfirmClearIngr() {
+        System.out.println(CONFIRM_CLEAR_INGR);
+    }
+
+    public void printDisregardMsg() {
+        System.out.println(DISREGARD_MSG);
+    }
+
+    public void printInvalidConfirmation() {
+        System.out.println(INVALID_CONFIRMATION);
     }
 
     public void printDishListGraph(ArrayList<Dish> dishList) {
