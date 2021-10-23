@@ -6,11 +6,11 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
-import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientQuantity;
-import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
@@ -210,6 +210,59 @@ public class TestUtil {
             return ingredientRepository;
         } catch (DuplicateDataException e) {
             fail("Ingredient repository should be valid by definition");
+            return null;
+        }
+    }
+
+    public static IngredientRepository generateIngredientRepositoryForCookedRecipeCommand() {
+        final LocalDate currentDate = LocalDate.now();
+        final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
+        final LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);
+
+        final IngredientRepository ingredientRepository = new IngredientRepository();
+
+        try {
+            //expiring
+            ingredientRepository.add("Chicken", null, 2, currentDatePlusThreeDays);
+            //fresh
+            ingredientRepository.add("Salt", null, 40, currentDatePlusThreeWeeks);
+            return ingredientRepository;
+        } catch (DuplicateDataException e) {
+            fail("Ingredient repository should be valid by definition");
+            return null;
+        }
+    }
+
+    public static IngredientStorage generateFirstIngredient() {
+        final LocalDate currentDate = LocalDate.now();
+        final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
+
+        try {
+            final IngredientRepository ingredients = new IngredientRepository();
+            ingredients.add("Chicken",null, 1, currentDatePlusThreeDays);
+            return ingredients.find("Chicken");
+        } catch (DuplicateDataException e) {
+            fail("Ingredient repository should be valid by definition");
+            return null;
+        } catch (NotFoundException e) {
+            fail("Ingredient should be in the repository by definition");
+            return null;
+        }
+    }
+
+    public static IngredientStorage generateSecondIngredient() {
+        final LocalDate currentDate = LocalDate.now();
+        final LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);
+
+        try {
+            final IngredientRepository ingredients = new IngredientRepository();
+            ingredients.add("Salt",null, 20, currentDatePlusThreeWeeks);
+            return ingredients.find("Salt");
+        } catch (DuplicateDataException e) {
+            fail("Ingredient repository should be valid by definition");
+            return null;
+        } catch (NotFoundException e) {
+            fail("Ingredient should be in the repository by definition");
             return null;
         }
     }
