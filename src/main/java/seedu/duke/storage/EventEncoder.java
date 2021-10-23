@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EventEncoder {
 
-    public static List<String> encodeEventsList(ArrayList<Event> eventsToSave) {
+    protected static List<String> encodeEventsList(ArrayList<Event> eventsToSave) {
         List<String> encodedEvents = new ArrayList<>();
         eventsToSave.forEach(event -> encodedEvents.addAll(encodeEventToString(event)));
         return encodedEvents;

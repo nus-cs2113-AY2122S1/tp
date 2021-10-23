@@ -15,7 +15,7 @@ public class EventDecoder {
     private static final int INDEX_OF_VENUE = 5;
     private static final int INDEX_OF_BUDGET = 6;
 
-    public static Event decodeEventFromString(String encodedEvent) {
+    protected static Event decodeEventFromString(String encodedEvent) {
         String[] eventDetails = encodedEvent.trim().split(Event.EVENT_DATA_ARGS_DELIMITER);
         String eventTitle = eventDetails[INDEX_OF_TITLE];
         String eventStatus = eventDetails[INDEX_OF_STATUS];
