@@ -2,18 +2,17 @@ package seedu.duke;
 
 import java.util.Arrays;
 
-public class AddPackageCommand extends Command {
+public class AddClientPackageCommand extends Command {
     private ClientPackage clientPackage;
     private String[] rawClientPackage;
 
-    public AddPackageCommand(String [] rawClientPackage) {
+    public AddClientPackageCommand(String [] rawClientPackage) {
         this.rawClientPackage = rawClientPackage;
     }
 
     @Override
     public void execute() {
         createClientPackage();
-        System.out.println(clientPackage.getClient());
         clientPackages.add(clientPackage);
         ui.showAddClientPackage(clientPackage);
     }

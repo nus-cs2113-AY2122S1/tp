@@ -12,8 +12,16 @@ public class ClientPackageList {
     }
 
     public void add(ClientPackage pack) {
-        packages.add(pack);
         packageCount++;
+        packages.add(pack);
+    }
+
+    public ClientPackage get(int index) {
+        return packages.get(index);
+    }
+
+    public int getPackageCount() {
+        return packageCount;
     }
 
 }

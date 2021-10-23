@@ -1,7 +1,7 @@
 package seedu.duke;
 
-public class ListPackageCommand extends Command {
+public class ListClientPackageCommand extends Command {
     public void execute() {
-
+        ui.showListClientPackage(clientPackages);
     }
 }

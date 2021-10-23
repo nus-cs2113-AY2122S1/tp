@@ -1,6 +1,6 @@
 package seedu.duke;
 
-public abstract class FindTourCommand extends Command {
+public class FindTourCommand extends Command {
     private final String code;
 
     public FindTourCommand(String code) {
@@ -8,6 +8,6 @@ public abstract class FindTourCommand extends Command {
     }
 
     public void execute() {
-        ui.showFindTour(tours, code);
+        ui.showFindTour(tours, clientPackages, code);
     }
 }
