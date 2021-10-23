@@ -19,8 +19,8 @@ import seedu.duke.commands.FindCommand;
 import seedu.duke.commands.EditCommand;
 import seedu.duke.commands.EditExpenditureCommand;
 import seedu.duke.commands.EditBudgetCommand;
-import seedu.duke.commands.DeleteMultipleExpenditureCommand;
-import seedu.duke.commands.DeleteSingleExpenditureCommand;
+import seedu.duke.commands.DeleteMultipleLoanCommand;
+import seedu.duke.commands.DeleteAllLoanCommand;
 import seedu.duke.commands.DeleteAllExpenditureCommand;
 import seedu.duke.commands.DeleteSingleLoanCommand;
 
