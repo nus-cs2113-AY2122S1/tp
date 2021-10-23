@@ -7,7 +7,7 @@ public abstract class Entry {
     protected String description;
     protected double value;
     protected LocalDate date;
-    protected String category;
+    protected static final String DATE_FORMAT = "dd/MM/yyyy";
 
     public String getDescription() {
         return this.description;
@@ -21,9 +21,7 @@ public abstract class Entry {
         return this.date;
     }
     
-    public String getCategory() {
-        return this.category;
-    }
+    public abstract Enum getCategory();
 
     public abstract String toString();
 }

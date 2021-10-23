@@ -1,8 +1,8 @@
 package seedu.utility;
 
-import seedu.duke.Parser;
 import seedu.entry.Expense;
 import seedu.entry.Income;
+import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeAmountException;
@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,7 +25,7 @@ import java.util.Scanner;
  */
 public class DataManager {
 
-    private static final String NEWLINE = "\n";
+    private static final String NEWLINE = System.lineSeparator();
     private static final String FILE_NAME = "./StonksXD_Data.csv";
     private static final String CSV_HEADER = "entry_type, entry_description, amount, category, date";
 
@@ -89,11 +90,11 @@ public class DataManager {
             try {
                 Expense expense = parser.convertDataToExpense(data);
                 financialTracker.addExpense(expense);
-            } catch (InvalidExpenseAmountException | InvalidExpenseDataFormatException | DateTimeException ee) {
+            } catch (InputException | InvalidExpenseDataFormatException | DateTimeParseException e) {
                 try {
                     Income income = parser.convertDataToIncome(data);
                     financialTracker.addIncome(income);
-                } catch (InvalidIncomeAmountException | InvalidIncomeDataFormatException | DateTimeException ie) {
+                } catch (InputException | InvalidIncomeDataFormatException | DateTimeParseException ie) {
                     hasCorruptedLines = true;
                 }
             }

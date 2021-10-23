@@ -1,8 +1,8 @@
-package seedu.duke;
+package seedu.utility;
 
 
-import seedu.utility.FinancialTracker;
-
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 
 public class StonksGraph {
@@ -13,6 +13,7 @@ public class StonksGraph {
     private static final int BAR_VALUE = 200;
     private final char[][] grid = new char [ROWS][COLS];
     private static final char BORDER_CHAR = 'x';
+    private static final char NON_BORDER_CHAR = ' ';
 
     /**
      * It will call all the differnet methods here like balance, date(which mth), a bar in the middle(How many% full).
@@ -20,36 +21,40 @@ public class StonksGraph {
      *
      */
     public StonksGraph(FinancialTracker finances) {
-        setBorder(BORDER_CHAR);
+        setBorder();
         setBalance(finances.getBalance());
         setBar(finances);
     }
     
-    private void setBorder(char symbol) {
+    private void setBorder() {
         for (int x = 0; x < ROWS; x++) {
             for (int y = 0; y < COLS; y++) {
-                if (x == 0 || y == 0 || x == ROWS_OFFSET || y == COLS_OFFSET) {
-                    grid[x][y] = symbol;
+                if (isBorder(x, y)) {
+                    grid[x][y] = BORDER_CHAR;
                 } else {
-                    grid[x][y] = ' ';
+                    grid[x][y] = NON_BORDER_CHAR;
                 }
             }
         }
     }
-    
+
+    private boolean isBorder(int x, int y) {
+        return x == 0 || y == 0 || x == ROWS_OFFSET || y == COLS_OFFSET;
+    }
+
     private void setBalance(double amount) {
         String stringAmount = Double.toString(amount);
         
-        writeToGraph(2,4,"TOTAL AMOUNT: ");
-        writeToGraph(2,19, stringAmount);
+        writeToGraph(2,4,"Account Balance: $");
+        writeToGraph(2,22, stringAmount);
     }
 
 
-    private void writeToGraph(int rowCounnt,int colCount, String toAdd) {
+    private void writeToGraph(int rowCount, int colCount, String toAdd) {
         int stringLength = toAdd.length();
         int i = 0;
         while (i < stringLength) {
-            grid[rowCounnt][colCount] = toAdd.charAt(i);
+            grid[rowCount][colCount] = toAdd.charAt(i);
             colCount++;
             i++;
         }
@@ -57,14 +62,14 @@ public class StonksGraph {
     
     
     public String convertGridToString() {
-        String convertedString = "";
+        StringBuilder convertedString = new StringBuilder();
         for (int x = 0; x < ROWS; x++) {
             for (int y = 0; y < COLS; y++) {
-                convertedString += (String.format("%c", grid[x][y]));
+                convertedString.append(grid[x][y]);
             }
-            convertedString += (System.lineSeparator());
+            convertedString.append(System.lineSeparator());
         }
-        return convertedString;
+        return convertedString.toString();
     }
     
     
@@ -74,9 +79,9 @@ public class StonksGraph {
     }
 
     /**
-     * Returns month as a int base on which columm it is at.
+     * Returns month as an int base on which columm it is at.
      *
-     * @param colCount the y - coordinate of the grid
+     * @param colCount the columns of the grid
      * @return Returns an integer that represents the month
      */
     private int getMonth(int colCount) {
@@ -109,25 +114,22 @@ public class StonksGraph {
 
 
     private void setBar(FinancialTracker finances) {
-        writeToGraph(4,4, "Your Yearly Report");
+        writeToGraph(5,4, "Your Yearly Report");
         drawSeparator();
         drawLegend();
         drawXAxisLabels();
         drawXAxis();
         ArrayList<Double> monthlyIncomeBreakdowns = finances.getMonthlyIncomeBreakdown(2021);
         ArrayList<Double> monthlyExpenseBreakdowns = finances.getMonthlyExpenseBreakdown(2021);
+        drawCurrentMonth(monthlyIncomeBreakdowns, monthlyExpenseBreakdowns);
 
-        System.out.println("October total expense: " + monthlyExpenseBreakdowns.get(9));
-        System.out.println("October total income: " + monthlyIncomeBreakdowns.get(9));
         for (int x = 0; x < ROWS; x++) {
             for (int y = 0; y < COLS; y++) {
-
                 int monthIndex = getMonth(y) - 1;
-                //Example totalincome 800/200 = 4 units of bar
                 int incomeBar = (int)(monthlyIncomeBreakdowns.get(monthIndex) / BAR_VALUE);
                 int expenseBar = (int)(monthlyExpenseBreakdowns.get(monthIndex) / BAR_VALUE);
 
-                if (x >= 7 && x < 17) {
+                if (isWithinRowsConsistingOfBarGraph(x)) {
                     if (isExpenseBar(y)) {
                         setExpenseBar(x, y, expenseBar);
                     }
@@ -139,10 +141,27 @@ public class StonksGraph {
         }
     }
 
+    private void drawCurrentMonth(ArrayList<Double> monthIncomeBreakdowns, ArrayList<Double> monthExpenseBreakdowns) {
+        Month currentMonth = currentMonth();
+        int currentMonthInIndex = currentMonthInIndex();
+        double currentMonthExpense = monthExpenseBreakdowns.get(currentMonthInIndex);
+        double currentMonthIncome = monthIncomeBreakdowns.get(currentMonthInIndex);
+        String currentMonthExpenseAsString =
+                String.format("Current month (" + currentMonth + ") total expense: " + "$%.2f", currentMonthExpense);
+        String currentMonthIncomeAsString =
+                String.format("Current month (" + currentMonth + ") total income: " + "$%.2f", currentMonthIncome);
+        writeToGraph(3,4, currentMonthExpenseAsString);
+        writeToGraph(4,4, currentMonthIncomeAsString);
+    }
+
+    private boolean isWithinRowsConsistingOfBarGraph(int x) {
+        return x >= 7 && x < 17;
+    }
+
     private void drawLegend() {
         writeToGraph(2, 75, "Legend:");
         writeToGraph(3, 80, " # is Expense");
-        writeToGraph(4, 80, " o is Expense");
+        writeToGraph(4, 80, " o is Income ");
     }
 
     private boolean isExpenseBar(int y) {
@@ -178,7 +197,7 @@ public class StonksGraph {
 
     private void drawSeparator() {
         for (int i = 2;i < 98; i++) {
-            grid[5][i] = '-';
+            grid[6][i] = '-';
         }
     }
 
@@ -193,5 +212,14 @@ public class StonksGraph {
             grid[x][y] = '#';
         }
     }
-
+    
+    private int currentMonthInIndex() {
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getMonthValue() - 1;
+    }
+    
+    private Month currentMonth() {
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getMonth();
+    }
 }

@@ -2,52 +2,19 @@ package seedu.utility;
 
 import seedu.entry.Entry;
 import seedu.entry.Expense;
+import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 
 public class Ui {
+    private static final String DATE_FORMAT = "dd/MM/yyyy";
     private Scanner in;
-
-    private static final String PRODUCT_LOGO = "███████ ████████  ██████  ███    ██ ██   ██ ███████"
-            + "     ██   ██ ██████  \n██         ██    ██    ██ ████   ██ ██  ██  ██           ██ ██  ██   ██ \n"
-            + "███████    ██    ██    ██ ██ ██  ██ █████   ███████       ███   ██   ██ \n"
-            + "     ██    ██    ██    ██ ██  ██ ██ ██  ██       ██      ██ ██  ██   ██ \n"
-            + "███████    ██     ██████  ██   ████ ██   ██ ███████     ██   ██ ██████  ";
-
-    public static final String SEPARATOR_LINE = "-------------------------------------------------------------------"
-            + "----------------------------------";
     private final String newLine = System.lineSeparator();
-
-
-    private static final String HELP_FORMAT = "List Out All Commands: help";
-    private static final String ADD_EXPENSE_FORMAT = "Adding Expense: add_ex d/DESCRIPTION a/AMOUNT";
-    private static final String DEL_EXPENSE_FORMAT = "Deleting Expense: del_ex i/INDEX";
-    private static final String LIST_EXPENSE_FORMAT = "Listing Expense: list_ex";
-    private static final String TOTAL_EXPENSE_FORMAT = "Show Total Expense: total_ex";
-    private static final String ADD_INCOME_FORMAT = "Adding Income: add_in d/DESCRIPTION a/AMOUNT";
-    private static final String DEL_INCOME_FORMAT = "Deleting Income: del_in i/INDEX";
-    private static final String LIST_INCOME_FORMAT = "Listing Income: list_in";
-    private static final String TOTAL_INCOME_FORMAT = "Show Total Income: total_in";
-    private static final String EXPENSE_BETWEEN_FORMAT = "Show Total Expense between 2 dates" 
-            + ": btw_ex s/START_DATE e/END_DATE";
-    private static final String INCOME_BETWEEN_FORMAT = "Show Total Income between 2 dates"
-            + ": btw_in s/START_DATE e/END_DATE";
-    private static final String END_FORMAT = "To Terminate The Program: end";
-    private static final String FIND_FORMAT = "To Find Using Date: find YYYY-MM-DD\n"
-            + "To Find Based On Keyword: find KEYWORD";
-    private static final String BALANCE_FORMAT = "To Display Total Balance: balance";
-
-    private static final List<String> commands = Arrays.asList(HELP_FORMAT, ADD_EXPENSE_FORMAT, DEL_EXPENSE_FORMAT,
-            LIST_EXPENSE_FORMAT, TOTAL_EXPENSE_FORMAT, EXPENSE_BETWEEN_FORMAT, ADD_INCOME_FORMAT, DEL_INCOME_FORMAT, 
-            LIST_INCOME_FORMAT, TOTAL_INCOME_FORMAT, FIND_FORMAT, BALANCE_FORMAT, INCOME_BETWEEN_FORMAT, END_FORMAT);
-
 
 
     /**
@@ -69,13 +36,13 @@ public class Ui {
      */
     public void printWelcome() {
         printLine();
-        System.out.println(PRODUCT_LOGO);
+        System.out.println(Messages.LOGO_MESSAGE);
         printLine();
         System.out.println(Messages.TYPE_SOMETHING_MESSAGE);
     }
 
     private void printLine() {
-        System.out.println(SEPARATOR_LINE);
+        System.out.println(Messages.SEPARATOR_MESSAGE);
     }
 
     /**
@@ -92,7 +59,6 @@ public class Ui {
         }
         printLine();
     }
-
 
     /**
      * Prints the filtered list of incomes in the financial tracker to the standard output.
@@ -134,8 +100,7 @@ public class Ui {
 
         int i = 1;
         for (Entry entry : filteredEntries) {
-            System.out.print(i + ": ");
-            System.out.println(entry);
+            System.out.print(i + ": " + entry + newLine);
             i++;
         }
     }
@@ -147,8 +112,7 @@ public class Ui {
 
         int i = 1;
         for (Income income : incomes) {
-            System.out.print(i + ": ");
-            System.out.println(income);
+            System.out.print(i + ": " + income + newLine);
             i++;
         }
     }
@@ -160,8 +124,7 @@ public class Ui {
 
         int i = 1;
         for (Expense expense : expenses) {
-            System.out.print(i + ": ");
-            System.out.println(expense);
+            System.out.print(i + ": " + expense + newLine);
             i++;
         }
     }
@@ -175,34 +138,6 @@ public class Ui {
         assert totalExpense >= 0;
         printLine();
         System.out.printf("Your total expense is: $%.2f" + newLine, totalExpense);
-        printLine();
-    }
-
-    public void printTotalExpenseBetween(double totalExpense, LocalDate start, LocalDate end) {
-        printLine();
-        if (totalExpense == 0) {
-            System.out.printf("You do not have any expense between " 
-                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + newLine);
-        } else {
-            System.out.printf("Your total expense between " 
-                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f" + newLine, totalExpense);
-        }
-        printLine();
-    }
-
-    public void printTotalIncomeBetween(double totalExpense, LocalDate start, LocalDate end) {
-        printLine();
-        if (totalExpense == 0) {
-            System.out.printf("You do not have any income between " 
-                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + newLine);
-        } else {
-            System.out.printf("Your total income between " 
-                    + start.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " and " 
-                    + end.format(DateTimeFormatter.ofPattern("dd MMM yyy")) + " is : $%.2f" + newLine, totalExpense);
-        }
         printLine();
     }
 
@@ -224,8 +159,6 @@ public class Ui {
         printLine();
     }
     
-    
-    
     /**
      * Prints the feedback message for adding an expense to the financial tracker.
      *
@@ -233,8 +166,7 @@ public class Ui {
      */
     public void printExpenseAdded(Expense expense) {
         printLine();
-        System.out.println("Your most recent spending: ");
-        System.out.println(expense);
+        System.out.println("Your most recent spending: " + newLine + expense);
         printLine();
     }
 
@@ -245,8 +177,7 @@ public class Ui {
      */
     public void printExpenseDeleted(Expense expense) {
         printLine();
-        System.out.println("You removed this: ");
-        System.out.println(expense);
+        System.out.println("You removed this: " + newLine + expense);
         printLine();
     }
 
@@ -257,8 +188,7 @@ public class Ui {
      */
     public void printIncomeAdded(Income income) {
         printLine();
-        System.out.println("Your most recent earning: ");
-        System.out.println(income);
+        System.out.println("Your most recent earning: " + newLine + income);
         printLine();
     }
 
@@ -269,9 +199,59 @@ public class Ui {
      */
     public void printIncomeDeleted(Income income) {
         printLine();
-        System.out.println("You removed this: ");
-        System.out.println(income);
+        System.out.println("You removed this: " + newLine + income);
         printLine();
+    }
+
+
+    public void printTotalExpenseBetween(double totalExpense, LocalDate start, LocalDate end) {
+        printLine();
+        if (totalExpense == 0) {
+            printNoExpenseBetweenMessage(start, end);
+        } else {
+            printExpenseBetweenMessage(totalExpense, start, end);
+        }
+        printLine();
+    }
+
+
+    public void printTotalIncomeBetween(double totalExpense, LocalDate start, LocalDate end) {
+        printLine();
+        if (totalExpense == 0) {
+            printNoIncomeBetweenMessage(start, end);
+        } else {
+            printIncomeBetweenMessage(totalExpense, start, end);
+        }
+        printLine();
+    }
+
+    private void printExpenseBetweenMessage(double totalExpense, LocalDate start, LocalDate end) {
+        String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        System.out.printf("Your total expense between %s and %s is $%.2f", startString, endString, totalExpense);
+        System.out.print(newLine);
+    }
+
+    private void printNoExpenseBetweenMessage(LocalDate start, LocalDate end) {
+        String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        System.out.printf("You do not have any expense between %s and %s", startString, endString);
+        System.out.print(newLine);
+    }
+
+    private void printIncomeBetweenMessage(double totalExpense, LocalDate start, LocalDate end) {
+        String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        System.out.printf("Your total income between %s and %s is $%.2f", startString, endString, totalExpense);
+        System.out.print(newLine);
+    }
+
+    private void printNoIncomeBetweenMessage(LocalDate start, LocalDate end) {
+        String startString = start.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        String endString = end.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
+        System.out.printf("You do not have any income between %s and %s", startString, endString);
+        System.out.print(newLine);
+
     }
 
     /**
@@ -281,7 +261,7 @@ public class Ui {
         printLine();
         System.out.println(Messages.HELP_COMMAND_MESSAGE);
         printLine();
-        for (String command:commands) {
+        for (String command:CommandFormat.commands) {
             System.out.println(command);
         }
         printLine();
@@ -313,6 +293,51 @@ public class Ui {
     public void printAllEntriesCleared() {
         printLine();
         System.out.println(Messages.ALL_DATA_CLEARED);
+        printLine();
+    }
+
+
+    public void printGraph(StonksGraph stonksGraph) {
+        printLine();
+        System.out.print(stonksGraph);
+        printLine();
+    }
+
+
+    public void printBudgetWarning(String month, String budgetName, double currAmount, double limit) {
+        printLine();
+        System.out.printf("You are almost reaching the %s %s budget: $%.2f/$%.2f",
+                month, budgetName, currAmount, limit);
+        System.out.print(newLine);
+        System.out.println("Would you like to readjust your " + month + " " + budgetName + " budget?");
+        printLine();
+    }
+
+    public void printBudgetExceeded(String month, String budgetName, double currAmount, double limit) {
+        printLine();
+        System.out.printf("You have exceeded the %s %s budget: $%.2f/$%.2f", month, budgetName, currAmount, limit);
+        System.out.print(newLine);
+        System.out.println("Would you like to readjust your " + month + " " + budgetName + " budget?");
+        printLine();
+    }
+
+    public void printBudgetSetConfirmation(double amount, ExpenseCategory category) {
+        printLine();
+        System.out.printf("%s budget has been set to $%.2f", category.toString(), amount);
+        System.out.print(newLine);
+        printLine();
+    }
+
+    public void printBudget(ExpenseCategory category, double budgetLimit) {
+        printLine();
+        System.out.printf("Current %s limit is $%.2f", category.toString(), budgetLimit);
+        System.out.print(newLine);
+        printLine();
+    }
+
+    public void printThresholdConfirmation(double threshold) {
+        printLine();
+        System.out.println("Threshold for budget reminders set to " + threshold);
         printLine();
     }
 }
