@@ -241,6 +241,7 @@ public class IngredientRepository {
         StringBuilder shoppingList = new StringBuilder();
         TreeMap<String, IngredientQuantity> totalIngredients = new TreeMap<>();
 
+        //tally total types and quantities of ingredients needed to cook the recipes
         for (Recipe recipe : recipes) {
             for (String ingredientName : recipe.getIngredientQuantities().keySet()) {
                 int quantity = recipe.getIngredientQuantities().get(ingredientName).getQuantity();
@@ -259,6 +260,7 @@ public class IngredientRepository {
             }
         }
 
+        //determine what and how much of an ingredient is needed to be bought
         for (String ingredientName : totalIngredients.keySet()) {
             IngredientQuantity ingredientAndQuantityItem = totalIngredients.get(ingredientName);
             int quantityRequired = ingredientAndQuantityItem.getQuantity();
@@ -268,9 +270,9 @@ public class IngredientRepository {
                 IngredientStorage ingredientStorage = ingredients.get(ingredientName);
                 int quantityAvailable = ingredientStorage.getQuantity();
                 if (quantityAvailable < quantityRequired) {
+                    int quantityRequiredToBuy = quantityRequired - quantityAvailable;
                     try {
-                        IngredientQuantity shoppingItem = new IngredientQuantity(ingredient,
-                                quantityRequired - quantityAvailable);
+                        IngredientQuantity shoppingItem = new IngredientQuantity(ingredient, quantityRequiredToBuy);
                         shoppingList.append("\n").append(shoppingItem);
                     } catch (IllegalValueException e) {
                         e.printStackTrace();
