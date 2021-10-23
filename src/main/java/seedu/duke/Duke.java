@@ -36,9 +36,9 @@ public class Duke {
         while (isProgramRunning) {
             isProgramRunning = Parser.parseUserInput(readUserInput(in));
             //try {
-                //Storage.writeToFile();
+            //    Storage.writeToFile();
             //} catch (IOException e) {
-                //e.printStackTrace();
+            //    e.printStackTrace();
             //}
         }
 
