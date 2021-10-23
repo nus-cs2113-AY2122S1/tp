@@ -19,7 +19,7 @@ public class CommandSyntax {
     public static final String ADD_ORDER_COMMAND = "addorder n/NAME q/QUANTITY {d/DATE}";
     public static final String ARCHIVE_DISPENSE_COMMAND = "archivedispense d/DATE";
     public static final String ARCHIVE_ORDER_COMMAND = "archiveorder d/DATE";
-    public static final String DELETE_STOCK_COMMAND = "deletestock [i/ID e/EXPIRY_DATE]";
+    public static final String DELETE_STOCK_COMMAND = "deletestock [i/ID expiring/EXPIRY_DATE]";
     public static final String DELETE_ORDER_COMMAND = "deleteorder i/ID";
     public static final String DELETE_DISPENSE_COMMAND = "deletedispense i/ID";
     public static final String EXIT_COMMAND = "exit";
