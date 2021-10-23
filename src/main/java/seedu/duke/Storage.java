@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Storage {
@@ -50,6 +51,13 @@ public class Storage {
             listOfTrips = new Gson().fromJson(jsonString, tripType);
         } catch (JsonParseException e) {
             Ui.printJsonParseError();
+            Scanner scanner = Storage.getScanner();
+            if (scanner.nextLine().strip().contains("n")) {
+                Storage.getLogger().log(Level.WARNING, "JSON Parse failed, user requests program end");
+                System.exit(1);
+            } else {
+                //TODO: clear the current file and start with a new file
+            }
         } catch (FileNotFoundException e) {
             Ui.printFileNotFoundError();
         }

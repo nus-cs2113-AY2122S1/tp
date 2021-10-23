@@ -233,7 +233,8 @@ public class Ui {
     }
 
     public static void printInvalidFilterError() {
-        System.out.println("Please filter using the following valid filter attributes: \n"
+        System.out.println("Please filter using the following valid filter attributes: "
+                + System.lineSeparator()
                 + "[category], [description], [payer]");
     }
 
@@ -244,7 +245,11 @@ public class Ui {
     public static void printJsonParseError() {
         //todo not sure what this should be
         System.out.println("An unexpected error has occurred! Aborting...");
+    }
 
+    public static void printNoLastTripError() {
+        System.out.println("You may have deleted the most recently modified trip. "
+                + "Please try again with the trip number of the trip you wish to edit.");
     }
 
 }

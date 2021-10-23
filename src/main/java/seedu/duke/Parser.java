@@ -40,64 +40,34 @@ public class Parser {
             return true;
         }
 
+        handleValidCommands(inputCommand, inputParams);
+        return true;
+    }
+
+    private static void handleValidCommands(String inputCommand, String inputParams) {
         switch (inputCommand) {
         case "create":
-            try {
-                assert inputParams != null;
-                executeCreate(inputParams);
-            } catch (IndexOutOfBoundsException | NullPointerException e) {
-                Ui.printCreateFormatError();
-            }
+            handleCreateTrip(inputParams);
             break;
 
         case "edit":
-            try {
-                assert inputParams != null;
-                executeEdit(inputParams);
-            } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
-                Ui.printUnknownTripIndexError();
-            }
+            handleEditTrip(inputParams);
             break;
 
         case "open":
-            try {
-                assert inputParams != null;
-                executeOpen(inputParams);
-            } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                Ui.printSingleUnknownTripIndexError();
-                System.out.println();
-            } catch (NullPointerException e) {
-                Ui.emptyArgForOpenCommand();
-            }
+            handleOpenTrip(inputParams);
             break;
 
         case "summary":
-            try {
-                assert inputParams != null;
-                executeSummary();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.printUnknownTripIndexError();
-            }
+            handleTripSummary(inputParams);
             break;
 
         case "view":
-            try {
-                executeView(inputParams);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.printFilterFormatError();
-            }
-
+            handleViewTrip(inputParams);
             break;
 
         case "delete":
-            try {
-                assert inputParams != null;
-                executeDelete(inputParams);
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                Ui.printUnknownTripIndexError();
-            } catch (NullPointerException e) {
-                Ui.emptyArgForDeleteCommand();
-            }
+            handleDeleteTrip(inputParams);
             break;
 
         case "list":
@@ -105,12 +75,7 @@ public class Parser {
             break;
 
         case "expense":
-            try {
-                assert inputParams != null;
-                executeExpense(inputParams);
-            } catch (NullPointerException | IndexOutOfBoundsException e) {
-                Ui.printExpenseFormatError();
-            }
+            handleExpense(inputParams);
             break;
 
         case "amount":
@@ -124,7 +89,73 @@ public class Parser {
         default:
             Ui.printUnknownCommandError();
         }
-        return true;
+    }
+
+    private static void handleViewTrip(String inputParams) {
+        try {
+            executeView(inputParams);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Ui.printFilterFormatError();
+        }
+    }
+
+    private static void handleExpense(String inputParams) {
+        try {
+            assert inputParams != null;
+            executeExpense(inputParams);
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            Ui.printExpenseFormatError();
+        }
+    }
+
+    private static void handleDeleteTrip(String inputParams) {
+        try {
+            assert inputParams != null;
+            executeDelete(inputParams);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            Ui.printUnknownTripIndexError();
+        } catch (NullPointerException e) {
+            Ui.emptyArgForDeleteCommand();
+        }
+    }
+
+    private static void handleTripSummary(String inputParams) {
+        try {
+            assert inputParams != null;
+            executeSummary();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Ui.printUnknownTripIndexError();
+        }
+    }
+
+    private static void handleOpenTrip(String inputParams) {
+        try {
+            assert inputParams != null;
+            executeOpen(inputParams);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            Ui.printSingleUnknownTripIndexError();
+            System.out.println();
+        } catch (NullPointerException e) {
+            Ui.emptyArgForOpenCommand();
+        }
+    }
+
+    private static void handleEditTrip(String inputParams) {
+        try {
+            assert inputParams != null;
+            executeEdit(inputParams);
+        } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
+            Ui.printUnknownTripIndexError();
+        }
+    }
+
+    private static void handleCreateTrip(String inputParams) {
+        try {
+            assert inputParams != null;
+            executeCreate(inputParams);
+        } catch (IndexOutOfBoundsException | NullPointerException e) {
+            Ui.printCreateFormatError();
+        }
     }
 
     private static void executeCreate(String indexAsString) {
@@ -143,6 +174,10 @@ public class Parser {
         Trip tripToEdit;
         if (tripToEditInfo[0].equals("last")) {
             tripToEdit = Storage.getLastTrip();
+            if (tripToEdit == null) {
+                Ui.printNoLastTripError();
+                return;
+            }
         } else {
             int indexToEdit = Integer.parseInt(tripToEditInfo[0]) - 1;
             tripToEdit = Storage.getListOfTrips().get(indexToEdit);
