@@ -1,5 +1,6 @@
 package seedu.duke.storage;
 
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
 import seedu.duke.items.Task;
 
@@ -22,6 +23,15 @@ public class TaskEncoder {
                 + " | "
                 + task.getDescription()
                 + " | "
-                + Parser.convertDateTimeForSaving(task.getDateTime());
+                + Parser.convertDateTimeForSaving(task.getDateTime())
+                + " |"
+                + encodeMemberListToString(task);
+    }
+
+    private static String encodeMemberListToString(Task task) {
+        StringBuilder encodedMemberList = new StringBuilder();
+        task.memberList.forEach(member -> encodedMemberList.append(" ")
+                .append(MemberEncoder.encodeMemberNameToString(member)));
+        return encodedMemberList.toString();
     }
 }

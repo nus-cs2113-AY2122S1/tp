@@ -21,7 +21,7 @@ public class MemberEncoder {
         return "m | " + encodeMemberNameToString(member);
     }
 
-    private static String encodeMemberNameToString(Member member) {
+    protected static String encodeMemberNameToString(Member member) {
         String name = member.getName();
         name = name.replaceAll(INTER_MEMBER_DELIMITER, NAME_SPACER);
         return name;
