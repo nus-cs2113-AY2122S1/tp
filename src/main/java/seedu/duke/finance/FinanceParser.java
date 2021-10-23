@@ -48,7 +48,7 @@ public class FinanceParser {
             IngredientUI.printEmptyListMessage();
             return;
         }
-        assert finances.financeList.size() > 0 : "Ingredient list should not be empty";
+        assert finances.financeList.size() > 0 : "Finance list should not be empty";
 
         FinanceUI.printFinanceListMessage(finances);
     }

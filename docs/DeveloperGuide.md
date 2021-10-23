@@ -10,7 +10,6 @@ help **keep track of restaurant data** such as its employees, dishes and ingredi
   * Ingredient Component
   * Dish Component
   * Storage Component
-
 * Design and Implementation
 * Appendix
   * Product Scope
@@ -23,7 +22,7 @@ help **keep track of restaurant data** such as its employees, dishes and ingredi
 The Main component has 2 classes, MainParser and MainUI. It is responsible for parsing user commands and 
 displaying messages to interact with the user.
 
-The rest of the app consists of 4 components:  
+The rest of the app consists of 4 components:
 
 1. Employee: Modify data related to employee classes  
 

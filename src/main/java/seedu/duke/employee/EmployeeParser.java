@@ -27,9 +27,9 @@ public class EmployeeParser {
         masterList.totalEmployee += 1;
 
         MainUI.printSingleLine();
-        System.out.println("I have added: ");
-        System.out.println(masterList.employeeList.get(masterList.totalEmployee - 1));
-        System.out.println("You now have " + masterList.totalEmployee + " employees.");
+        System.out.println(" I have added: ");
+        System.out.println("   " + masterList.employeeList.get(masterList.totalEmployee - 1));
+        System.out.println(" You now have " + masterList.totalEmployee + " employees.");
         MainUI.printSingleLine();
         logger.log(Level.FINE, "end of adding employee");
         assert masterList.totalEmployee >= 0 : "total employee should be equals to or greater than zero";
@@ -60,15 +60,15 @@ public class EmployeeParser {
         }
         if (employeeIndex < 0 || employeeIndex >= masterList.totalEmployee) {
             MainUI.printSingleLine();
-            System.out.println("Invalid input detected.");
-            System.out.println("Please include employee index found in \"list-employee\".");
+            System.out.println(" Invalid input detected.");
+            System.out.println(" Please include employee index found in \"list-employee\".");
             MainUI.printSingleLine();
             logger.log(Level.FINE, "index from user input for removing employee is out of range");
             return;
         }
         MainUI.printSingleLine();
-        System.out.println("I have deleted: ");
-        System.out.println(masterList.employeeList.get(employeeIndex));
+        System.out.println(" I have deleted: ");
+        System.out.println("   " + masterList.employeeList.get(employeeIndex));
         MainUI.printSingleLine();
 
         masterList.employeeList.remove(employeeIndex);
@@ -85,9 +85,9 @@ public class EmployeeParser {
             return;
         }
         MainUI.printSingleLine();
-        System.out.println("Here are the employees in your list:");
+        System.out.println(" Here are the employees in your list:");
         for (int i = 1; i <= masterList.totalEmployee; i += 1) {
-            System.out.println(i + ". " + masterList.employeeList.get(i - 1).getName()
+            System.out.println("   " + i + ". " + masterList.employeeList.get(i - 1).getName()
                     + " - " + masterList.employeeList.get(i - 1).getPhoneNum());
         }
         MainUI.printSingleLine();
