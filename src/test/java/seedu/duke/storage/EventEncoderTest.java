@@ -1,6 +1,7 @@
 package seedu.duke.storage;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.items.characteristics.Member;
 import seedu.duke.parser.Parser;
 import seedu.duke.items.Event;
 import seedu.duke.items.Task;
@@ -26,9 +27,9 @@ class EventEncoderTest {
         String expectedEvent1 = "e | Peppa Pig's Concert | X | Asia world tour "
                 + "| 19-02-2022 2000 | Indoor Stadium | 1000.9";
         assertEquals(expectedEvent1, encodedEventsList.get(0));
-        String expectedSubTask1 = "t | Hype myself up | X | Drink lots of sugar | 19-02-2022 1950";
+        String expectedSubTask1 = "t | Hype myself up | X | Drink lots of sugar | 19-02-2022 1950 | Biggest_Fan";
         assertEquals(expectedSubTask1, encodedEventsList.get(1));
-        String expectedSubTask2 = "t | Enter venue |   |  | 19-02-2022 1955";
+        String expectedSubTask2 = "t | Enter venue |   |  | 19-02-2022 1955 | Biggest_Fan";
         assertEquals(expectedSubTask2, encodedEventsList.get(2));
         String expectedEvent2 = "e | Funfair |   | For charity | 20-02-2022 2030 | Parade square | 2000.1";
         assertEquals(expectedEvent2, encodedEventsList.get(3));
@@ -49,12 +50,16 @@ class EventEncoderTest {
                 "Indoor Stadium", 1000.90);
 
         LocalDateTime task1DateTime = Parser.convertDateTime("19-02-2022 1950");
-        event1.addToTaskList(new Task("Hype myself up", "Drink lots of sugar", task1DateTime));
+        Task task1 = new Task("Hype myself up", "Drink lots of sugar", task1DateTime);
+        task1.memberList.add(new Member("Biggest Fan"));
+        task1.markAsDone();
+        event1.addToTaskList(task1);
         event1.getFromTaskList(0).markAsDone();
 
         LocalDateTime task2DateTime = Parser.convertDateTime("19-02-2022 1955");
-        event1.addToTaskList(new Task("Enter venue", "", task2DateTime));
-
+        Task task2 = new Task("Enter venue", "", task2DateTime);
+        task2.memberList.add(new Member("Biggest Fan"));
+        event1.addToTaskList(task2);
         event1.markAsDone();
 
         LocalDateTime event2DateTime = Parser.convertDateTime("20-02-2022 2030");
