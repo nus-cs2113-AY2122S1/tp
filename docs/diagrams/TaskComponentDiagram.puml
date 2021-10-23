@@ -2,32 +2,12 @@
 hide circle
 skinparam classAttributeIconSize 0
 
-class Task {
-    title: String
-    dayOfTheWeek: String
-    information: String
-    isDone: boolean
-
-    serialize()
-    {static} deserialize()
-}
-
-class TaskList {
-    getSize(): int
-    getTask(taskIndex: int): Task
-    getNumberOfPendingTasks(): int
-    isEmpty(): boolean
-    addTask(newTask: Task)
-    deleteTask(taskIndex: int)
-    deleteAllTasks()
-    markTaskAsDone(taskIndex: int)
-    filterTasksByKeyword(keyword: String): TaskList
-    filterTasksByPeriod(period: String): TaskList
-    serialize()
-    {static} deserialize(ui: Ui, data: List<String>)
-}
+class Task
+class TaskList
 
 TaskList -> "*" Task : taskList
+
+hide members
 
 class AddTaskCommand
 class DeleteTaskCommand
