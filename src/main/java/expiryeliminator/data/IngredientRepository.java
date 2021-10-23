@@ -147,7 +147,6 @@ public class IngredientRepository {
      *
      * @param ingredientName Name of ingredient.
      * @return Ingredient storage object corresponding to the given ingredient name.
-     * @throws NotFoundException If ingredient does not exist in the repository.
      */
     public IngredientStorage findWithNullReturn(String ingredientName) {
         return ingredients.get(ingredientName);

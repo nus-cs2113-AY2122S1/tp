@@ -4,7 +4,6 @@ import java.util.TreeMap;
 
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
-import expiryeliminator.data.exception.NotFoundException;
 
 /**
  * Represents a recipe.
