@@ -17,7 +17,8 @@ public class UpdateUnitsCommandTest {
         IngredientRepository ingredientRepository = TestUtil.generateIngredientRepositoryForRecipe();
         assert ingredientRepository != null;
         //generate recipe list
-        RecipeList recipes = TestUtil.generateRecipeList();
+
+        RecipeList recipes = TestUtil.generateRecipeListWithSingleRecipe();
         //update units
         Command command = new UpdateUnitsCommand("Salt","kilograms");
         String output = command.execute(ingredientRepository, recipes);
@@ -33,7 +34,7 @@ public class UpdateUnitsCommandTest {
         IngredientRepository ingredientRepository = TestUtil.generateIngredientRepositoryForRecipe();
         assert ingredientRepository != null;
         //generate recipe list
-        RecipeList recipes = TestUtil.generateRecipeList();
+        RecipeList recipes = TestUtil.generateRecipeListWithSingleRecipe();
         //update units
         Command command = new UpdateUnitsCommand("Salt","kilograms");
         String output = command.execute(ingredientRepository, recipes);
