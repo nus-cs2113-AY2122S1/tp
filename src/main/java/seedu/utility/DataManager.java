@@ -28,10 +28,10 @@ public class DataManager {
     private static final String BUDGET_FILE_NAME = "./StonksXD_Budget.csv";
     private static final String BUDGET_CSV_HEADER = "overallBudget,foodBudget,transportBudget,medicalBudget," +
             "billsBudget,entertainmentBudget,miscBudget";
-    private Parser parser;
-    private FinancialTracker financialTracker;
-    private Ui ui;
-    private BudgetManager budgetManager;
+    private final Parser parser;
+    private final FinancialTracker financialTracker;
+    private final Ui ui;
+    private final BudgetManager budgetManager;
 
     public DataManager(Parser parser, FinancialTracker financialTracker, Ui ui, BudgetManager budgetManager) {
         this.parser = parser;
@@ -165,7 +165,7 @@ public class DataManager {
         sc.nextLine();
 
         while (sc.hasNextLine()) {
-            
+            // To be updated
         }
 
         if (hasCorruptedLines) {
