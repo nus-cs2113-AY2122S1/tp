@@ -11,6 +11,7 @@ import terminus.command.HelpCommand;
 import terminus.command.content.DeleteCommand;
 import terminus.command.content.ViewCommand;
 import terminus.command.content.note.AddNoteCommand;
+import terminus.command.content.note.ExportNoteCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 
@@ -93,6 +94,12 @@ public class NoteCommandParserTest {
     void parseCommand_resolveViewCommand_success() throws InvalidCommandException, InvalidArgumentException {
         assertTrue(commandParser.parseCommand("view") instanceof ViewCommand);
         assertTrue(commandParser.parseCommand("view 1") instanceof ViewCommand);
+    }
+
+    @Test
+    void parseCommand_resolveExportCommand_success()
+            throws InvalidCommandException, InvalidArgumentException {
+        assertTrue(commandParser.parseCommand("export") instanceof ExportNoteCommand);
     }
 
     @Test

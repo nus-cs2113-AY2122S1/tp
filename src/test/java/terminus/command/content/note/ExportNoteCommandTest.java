@@ -28,12 +28,12 @@ public class ExportNoteCommandTest {
     private ModuleManager moduleManager;
     private Ui ui;
     private ModuleStorage moduleStorage;
-    private String tempModule = "test";
+    private String tempModule = "test1";
 
     @AfterAll
     static void reset() throws IOException {
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
+        moduleStorage.cleanAfterDeleteModule("test1");
     }
 
     @BeforeEach
