@@ -18,7 +18,7 @@ import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
  */
 public class LoanCommand extends Command {
     public static final String COMMAND_WORD = "loan";
-    protected String args; // Format: loan [ID]
+    protected String args; // Format: loan i/ID u/USERNAME d/DUEDATE
     protected String id;
 
     /**

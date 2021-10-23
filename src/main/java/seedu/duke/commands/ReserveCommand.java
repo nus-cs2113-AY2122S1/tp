@@ -7,23 +7,23 @@ import seedu.duke.ui.TextUI;
 
 import static seedu.duke.Status.AVAILABLE;
 import static seedu.duke.Status.RESERVED;
-import static seedu.duke.common.Messages.RESERVE_SUCCESS;
-import static seedu.duke.common.Messages.INVALID_ID;
-import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
+import static seedu.duke.common.Messages.*;
 
 /**
  * Class encapsulating command to update the status of the item to be loaned out.
  */
 public class ReserveCommand extends Command {
+    // Format: reserve i/ID u/USERNAME
     public static final String COMMAND_WORD = "reserve";
-    protected String args; // Format: loan [ID]
+    protected String args;
     protected String id;
+    protected String username;
 
     /**
      * Class Constructor.
      * @param args Arguments supplied by user in the loan command
      */
-    public ReserveCommand(String args) {
+    public ReserveCommand(String args){
         this.args = args;
     }
 
@@ -34,14 +34,25 @@ public class ReserveCommand extends Command {
      * @throws LibmgrException when user input is invalid
      */
     public void handleLoanCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
-        if (!args.contains(" ")) {
-            throw new LibmgrException(INVALID_ID);
+        // Check validity of arguments
+        if (!args.contains("u/") | !args.contains("i/")) {
+            throw new LibmgrException(RESERVE_INVALID_FORMAT);
         }
-        id = args.split(" ")[1];
-        Item toBeReserved = catalogue.getItem(id);
+        // Process arguments
+        try {
+            id = args.substring(args.indexOf("i/") + 2, args.indexOf("u/")).strip();
+            username = args.substring(args.indexOf("u/") + 2).strip();
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new LibmgrException(RESERVE_INVALID_FORMAT);
+        }
 
+        ui.print(id + "-" + username);
+        // Get item to be updated
+        Item toBeReserved = catalogue.getItem(id);
+        // Perform operations
         if (toBeReserved.getStatus().equals(AVAILABLE)) {
             toBeReserved.setStatus(RESERVED);
+            toBeReserved.setLoanee(username);
             ui.print(RESERVE_SUCCESS, toBeReserved);
         } else {
             ui.print(UNAVAILABLE_ITEM_MESSAGE);
