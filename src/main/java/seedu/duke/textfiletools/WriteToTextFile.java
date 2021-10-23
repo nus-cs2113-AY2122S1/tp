@@ -50,7 +50,7 @@ public class WriteToTextFile {
 
             for (int i = 1; i <= 12; i++) {
                 RecordList currentMonthRecordList = monthlyRecordList.get(i);
-                fileWrite.println("add b/ a/" + currentMonthRecordList.getBudget().getRawValue() + " m/" + i);
+                fileWrite.println("add -b a/" + currentMonthRecordList.getBudget().getRawValue() + " m/" + i);
                 fileWrite.flush();
                 for (int j = 0; j < currentMonthRecordList.getExpenditureListSize(); j++) {
                     ArrayList<Expenditure> expenditureRecords = currentMonthRecordList.getExpenditureRecords();
@@ -58,7 +58,7 @@ public class WriteToTextFile {
                     String description = currentExpenditure.getDescription();
                     double amount = currentExpenditure.getAmount();
                     String date = currentExpenditure.getDate();
-                    fileWrite.println("add e/" + description + " a/" + amount + " d/" + date);
+                    fileWrite.println("add -e c/" + description + " a/" + amount + " d/" + date);
                     fileWrite.flush();
                 }
             }

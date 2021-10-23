@@ -37,6 +37,9 @@ public class Storage {
             assert i == commandStorage.size();
         } catch (IOException i) {
             System.out.println("Error");
+        } catch (ClassCastException cce) {
+            System.out.println("Data File is corrupted");
+            System.exit(0);
         }
 
         return recordListDirectory;
@@ -68,14 +71,14 @@ public class Storage {
 
     //--------------------------------------------------------------------------------------
     public void saveNewlyAddedExpenditure(String description, double spending, LocalDate date) {
-        String expenditureToAdd = "add e/";
-        expenditureToAdd += (description + " a/" + spending + " d/" + date);
+        String expenditureToAdd = "add -e";
+        expenditureToAdd += (" c/" + description + " a/" + spending + " d/" + date);
         assert expenditureToAdd.length() >= description.length();
         WriteToTextFile.writeToStorage(expenditureToAdd, "./data/BudgetList1.txt");
     }
 
     public void saveNewlyAddedBudget(double budgetLimit, int month) {
-        String expenditureToAdd = "add b/";
+        String expenditureToAdd = "add -b";
         expenditureToAdd += (" a/" + budgetLimit + " m/" + month);
         WriteToTextFile.writeToStorage(expenditureToAdd, "./data/BudgetList1.txt");
     }
