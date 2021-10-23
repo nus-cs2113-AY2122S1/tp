@@ -13,7 +13,7 @@ public class ListCommandTest {
 
     @Test
     public void listCommand_sampleIngredientRepository_expectListString() {
-        IngredientRepository ingredientRepository = TestUtil.generateIngredientRepository();
+        IngredientRepository ingredientRepository = TestUtil.generateIngredientRepositoryWithSomeExpiredIngredients();
         assert ingredientRepository != null;
         Command command = new ListCommand();
         String message = String.format(ListCommand.MESSAGE_SHOW_WHOLE_LIST, ingredientRepository.printWholeList(), 3);

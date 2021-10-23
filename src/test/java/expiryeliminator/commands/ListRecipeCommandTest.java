@@ -10,7 +10,7 @@ class ListRecipeCommandTest {
 
     @Test
     public void listRecipeCommand_sampleRecipeList_expectLIstString() {
-        RecipeList recipeList = TestUtil.generateRecipeList();
+        RecipeList recipeList = TestUtil.generateRecipeListWithSingleRecipe();
         assert recipeList != null;
         Command command = new ListRecipeCommand();
         String message = String.format(ListRecipeCommand.MESSAGE_RECIPE_LIST, recipeList.getWholeRecipeList(), 1);
