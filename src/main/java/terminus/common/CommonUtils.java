@@ -132,7 +132,6 @@ public class CommonUtils {
     }
 
     /**
-     * <<<<<<< HEAD
      * Checks if the given name is a valid file name.
      *
      * @param name The string to be checked.

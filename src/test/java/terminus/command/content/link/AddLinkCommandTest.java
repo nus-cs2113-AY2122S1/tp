@@ -30,7 +30,6 @@ public class AddLinkCommandTest {
     private ModuleManager moduleManager;
     private Ui ui;
     private String tempModule = "test";
-    Class<Link> type = Link.class;
 
     @BeforeEach
     void setUp() {
