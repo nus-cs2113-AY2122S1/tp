@@ -8,16 +8,16 @@ hide circle
 ' hide the icons for access modifiers
 skinparam classAttributeIconSize 0
 ' to join all the arrows
-skinparam groupInheritance 3
+'skinparam groupInheritance 3
 skinparam classBackgroundColor COLOR_COMMAND_BOX
-skinparam arrowColor #000000
 
 package "Command Component" <<Rectangle>> {
     class "{abstract}\nCommand" as Command
     class AddDispenseCommand
     class AddStockCommand
     class AddOrderCommand
-    class Archive
+    class ArchiveDispenseCommand
+    class ArchiveOrderCommand
     class DeleteDispenseCommand
     class DeleteStockCommand
     class DeleteOrderCommand
@@ -34,49 +34,61 @@ package "Command Component" <<Rectangle>> {
 
 }
 
+package MediVault <<Rectangle>> COLOR_MEDIVAULT_BOX {
+}
+
+package Inventory <<Rectangle>> COLOR_INVENTORY_BOX {
+}
+
 class Command {
     #parameters: LinkedHashMap<String, String>
     +execute(): void{abstract}
 }
 
 class AddDispenseCommand {
-    +AddDispenseCommand(parameters: LinkedHashMap<String, String>)
+    +AddDispenseCommand()
     +execute(): void
-    -dispense(medicationName: String, customerId: String, staffName: String, quantityToDispense: int, dispenseDate: Date, stock: Stock, existingId: int, existingExpiry: Date, setStockValue: int): void
+    -dispense(): void
 }
 
 class AddStockCommand {
-    +AddStockCommand(parameters: LinkedHashMap<String, String>)
+    +AddStockCommand()
     +execute(): void
-    -checkDateAndQuantity(nameToAdd: String, formatExpiry: Date, quantity: int, existingMaxQuantity: int, totalStock: int): boolean
-    -addMedicine(name: String, description: String, price: double, quantity: int, expiryDate: Date, maxQuantity: int): void
+    -checkDateAndQuantity(): boolean
+    -addMedicine(): void
 }
 
 class AddOrderCommand {
-    +AddOrderCommand(parameters: LinkedHashMap<String, String>)
+    +AddOrderCommand()
     +execute(): void
-    -addOrder(name: String, quantity: int, date: Date): void
+    -addOrder(): void
 }
 
-class Archive {
-    'to fill up
+class ArchiveDispenseCommand {
+    +ArchiveDispenseCommand()
+    +execute(): void
+}
+
+class ArchiveOrderCommand {
+    +ArchiveOrderCommand()
+    +execute(): void
 }
 
 class DeleteDispenseCommand {
-    +DeleteDispenseCommand(parameters: LinkedHashMap<String, String>)
+    +DeleteDispenseCommand()
     +execute(): void
-    -setStockQuantity(stockIdToDispense: int, dispenseQuantity: int): boolean
+    -setStockQuantity(): boolean
 }
 
 class DeleteStockCommand {
-    +DeleteStockCommand(parameters: LinkedHashMap<String, String>)
+    +DeleteStockCommand()
     +execute(): void
     -deleteStockById(): void
     -deleteStockByExpiry(): void
 }
 
 class DeleteOrderCommand {
-    +DeleteOrderCommand(parameters: LinkedHashMap<String, String>)
+    +DeleteOrderCommand()
     +execute(): void
 }
 
@@ -89,65 +101,77 @@ class HelpCommand {
 }
 
 class ListDispenseCommand {
-    +ListDispenseCommand(parameters: LinkedHashMap<String, String>)
+    +ListDispenseCommand()
     +execute(): void
-    -filterDispenses(filteredDispenses: ArrayList<Dispense>): ArrayList<Dispense>
+    -filterDispenses(): ArrayList<Dispense>
 }
 
 class ListStockCommand {
-    +ListStockCommand(parameters: LinkedHashMap<String, String>)
+    +ListStockCommand()
     +execute(): void
 }
 
 class ListOrderCommand {
-    +ListOrderCommand(parameters: LinkedHashMap<String, String>)
+    +ListOrderCommand()
     +execute(): void
-    -filterOrders(filteredOrders: ArrayList<Order>): ArrayList<Order>
+    -filterOrders(): ArrayList<Order>
 }
 
 class PurgeCommand {
     +execute(): void
 }
 
-class UpdateDispenseCommand {
-    +UpdateDispenseCommand(parameters: LinkedHashMap<String, String>)
+class ReceiveOrderCommand {
+    +ReceiveOrderCommand()
     +execute(): void
-    -processGivenNameAndQuantity(dispense: Dispense, customerId: String, date: Date, staffName: String): boolean
-    -processGivenName(dispense: Dispense, customerId: String, date: Date, staffName: String): boolean
-    -processGivenQuantity(dispense: Dispense, customerId: String, date: Date, staffName: String): boolean
-    -processOtherFields(dispense: Dispense, customerId: String, date: Date, staffName: String): boolean
+}
+
+class UpdateDispenseCommand {
+    +UpdateDispenseCommand()
+    +execute(): void
+    -processGivenNameAndQuantity(): boolean
+    -processGivenName(): boolean
+    -processGivenQuantity(): boolean
+    -processOtherFields(): boolean
 }
 
 class UpdateOrderCommand {
-    +UpdateOrderCommand(parameters: LinkedHashMap<String, String>)
+    +UpdateOrderCommand()
     +execute(): void
-    -setUpdatesByOrderId(filteredOrders: ArrayList<Order>, order: Order): void
+    -setUpdatesByOrderId(): void
 }
 
 class UpdateStockCommand {
-    +UpdateStockCommand(parameters: LinkedHashMap<String, String>)
+    +UpdateStockCommand()
     +execute(): void
-    -getNewStock(stock: Stock): Stock
-    -addNewRowForUpdates(filteredStocks: ArrayList<Stock>): void
-    -processDateInput(stock: Stock): boolean
-    -processQuantityValues(stock: Stock): boolean
-    -setUpdatesByStockId(filteredStocks: ArrayList<Stock>, stock: Stock): void
+    -getNewStock(): Stock
+    -addNewRowForUpdates(): void
+    -processDateInput(): boolean
+    -processQuantityValues(): boolean
+    -setUpdatesByStockId(): void
 }
 
-AddDispenseCommand ---|> Command
-AddStockCommand ---|> Command
-AddOrderCommand ---|> Command
-DeleteDispenseCommand --|> Command
-DeleteStockCommand --|> Command
-DeleteOrderCommand --|> Command
+AddDispenseCommand ----|> Command
+AddStockCommand ----|> Command
+AddOrderCommand ----|> Command
+DeleteDispenseCommand ---|> Command
+DeleteStockCommand ---|> Command
+DeleteOrderCommand ---|> Command
 ExitCommand --|> Command
 HelpCommand --|> Command
+PurgeCommand --|> Command
 ListDispenseCommand --up|> Command
 ListStockCommand --up|> Command
 ListOrderCommand --up|> Command
-PurgeCommand --|> Command
-UpdateOrderCommand ---up|> Command
-UpdateDispenseCommand ---up|> Command
-UpdateStockCommand ---up|> Command
+ReceiveOrderCommand ---up|> Command
+ArchiveDispenseCommand ---up|> Command
+ArchiveOrderCommand ---up|> Command
+UpdateOrderCommand ----up|> Command
+UpdateDispenseCommand ----up|> Command
+UpdateStockCommand ----up|> Command
+
+MediVault ---.right|> Command: executes >
+Command ---.right|> Inventory: affects >
+
 
 @enduml

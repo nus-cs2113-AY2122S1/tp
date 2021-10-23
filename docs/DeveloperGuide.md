@@ -276,7 +276,7 @@ MediVault initialises an UpdateDispenseCommand class when CommandParser identifi
 
 The sequence diagram for UpdateDispenseCommand is shown below.
 
-![UpdateDispenseSequenceDiagram](diagrams/diagram_images/UpdateDispenseSequenceDiagram.png)
+![UpdateDispenseSequenceDiagram](diagrams/diagram_images/UpdatePrescriptionSequenceDiagram.png)
 
 MediVault adds a new _dispense_ record when a user updates contains either the `n/NAME`, `q/QUANTITY`
 parameter or both. The old _dispense_ record is permanently removed from MediVault. This approach solves the issue when
