@@ -58,7 +58,8 @@ public class RecommendWorkoutCommand extends Command {
         for (Map.Entry<String, ArrayList<?>> m : recommendedWorkouts.entrySet()) {
             assert !m.getValue().isEmpty();
             assert m.getValue().get(0) instanceof Exercise;
-            Workout recommendedWorkout = new Workout(m.getKey(), (ArrayList<Exercise>) m.getValue());
+            Workout recommendedWorkout = new Workout(workoutLevel + " " + m.getKey(),
+                    (ArrayList<Exercise>) m.getValue());
             workouts.addWorkout(recommendedWorkout);
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
