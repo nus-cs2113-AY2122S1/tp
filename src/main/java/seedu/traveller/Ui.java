@@ -83,19 +83,19 @@ public class Ui {
     }
 
     public void printShortest(String startCountry, String endCountry, double distance) {
-        System.out.println("The distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
+        System.out.println("\tThe distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
     }
 
     public void printAddDayToTrip(String tripName) {
-        System.out.println("Added a new day to trip " + tripName + ".");
+        System.out.println("\tAdded a new day to trip " + tripName + ".");
     }
 
     public void printAddItemToDay(String tripName, int dayIndex, String itemName) {
-        System.out.println("Added a new item to day " + dayIndex + " of trip " + tripName + ".");
+        System.out.println("\tAdded a new item to day " + dayIndex + " of trip " + tripName + ".");
     }
 
     public void printReadSave() {
-        System.out.println("Now reading save data.");
+        System.out.println("\tNow reading save data.");
     }
 
     public void printWriteSave() {

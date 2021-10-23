@@ -3,14 +3,26 @@
 ## Introduction
 ![Traveller](./documentationPics/logo.png)
 
-Traveller is a travel planner app that is designed to help holidaymakers like you optimise your trips!
+Thank you for choosing to use Traveller!
+
+Traveller is a travel planner app that is designed to help holidaymakers like you plan your overseas trips with ease.
 It is created for individuals who prefer to use a Command Line Interface (CLI) over a Graphical User Interface (GUI), 
 while still retaining the ease of use of a GUI.
 Use Traveller so that you can plan your trips with ease and focus on what matters most: Fun!
 
 ### What is a Command Line Interface (CLI)?
 A CLI is a way of interacting with applications via lines of text, instead of the usual way of clicking on the application.
-Each computer will have their own CLI, such as the window's Powershell and the MacOS's Terminal.
+Each computer will have their own CLI, such as the Windows' Powershell and the MacOS's Terminal.
+
+### What is this guide for?
+This guide's purpose is to help users like you understand how to use the Traveller application to its fullest potential.
+
+For users who can't wait to start using Traveller, see [here](#1-quick-start) for a quick guide on how to set it up.
+The [command summary](#4-command-summary) provides you with a summary of the various functionalities currently 
+supported by Traveller too.
+
+For users who are seeking to understand the full functionality of Traveller, details, along with tips and tricks, of 
+each functionality are explained in the [features](#2-features) section.
 
 ### Legend
 
@@ -24,44 +36,59 @@ Each computer will have their own CLI, such as the window's Powershell and the M
 
 ## Contents Table
 
-**[1. Quick Start](#1-quick-start)**
+* [1. Quick Start](#1-quick-start)
+* [2. Features](#2-features)
+  * [2.1. help](#21-getting-help-help)
+  * [2.2. new](#22-creating-a-trip-new)
+  * [2.3. add-day](#23-adding-a-day-to-trip-add-day)
+  * [2.4. add-item](#24-adding-an-item-to-a-day-add-item)
+  * [2.5. view](#25-viewing-trips-view)
+  * [2.6. delete](#26-delete-a-trip-delete)
+  * [2.7. delete-day](#27-deleting-a-day-from-a-trip-delete-day)
+  * [2.8. delete-item](#28-deleting-an-item-from-a-day-delete-item)
+  * [2.9. edit](#29-edit-a-trip-edit)
+  * [2.10. edit-item](#210-edit-an-item-edit-item)
+  * [2.11. search-item](#211-searching-for-an-item-search-item)
+  * [2.12. shortest](#212-shortest-shortest)
+  * [2.13. save](#213-saving-your-trips)
+  * [2.14. exit](#214-exiting-the-program-exit)
+* [3. FAQ](#3-faq)
+* [4. Command Summary](#4-command-summary)
 
-**[2. Features](#2-features)**
-  * [2.1 new](#21-creating-a-trip-new)
-  * [2.2 view](#22-viewing-trips-view)
-  * [2.3 delete](#23-delete-a-trip-delete)
-  * [2.4 edit](#24-edit-a-trip-edit)
-  * [2.5 exit](#25-exiting-the-program-exit)
-  * [2.6 save](#26-saving-your-trips)
-
-**[3. FAQ](#3-faq)**
-
-**[4. Command Summary](#4-command-summary)**
-
+<br/>
 
 ## 1. Quick Start
-This sections provides a guide on how to get Traveller up and running on your computer.
+This section provides a guide on how to get Traveller up and running on your computer.
 
 1. Ensure that you have Java 11 or above installed.
-2. Down the latest version of `Traveller.zip` from [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
-3. Unzip the downloaded folder.
+2. Download the latest version of `Traveller.zip` from [here](https://github.com/AY2122S1-CS2113T-W13-1/tp/releases).
+3. Unzip the downloaded folder in an empty directory of your choice.
 4. Navigate to the directory containing `Traveller.jar` in your command prompt and run `java -jar Traveller.jar`.
    You should see Traveller's welcome message as shown below.
 
 ![Welcome](./documentationPics/welcome.png)
 
-5. Enter a command to execute it.
+5. Enter a command.
+
    Some of our basic commands are:
    * `new FamilyTrip2021 /from SIN /to MLY` : Creates a new trip called `FamilyTrip2021` from Singapore (`SIN`) to Malaysia (`MLY`).
    * `view FamilyTrip2021` : Shows your existing trips and their details.
    * `delete FamilyTrip2021` : Deletes the trip called `FamilyTrip2021`.
    * `exit` : Exits the program.
 
+<br/>
+
 ## 2. Features
 This section provides details for all commands that Traveller supports.
-For a quick summary of all commands, please click [here](#4.-command-summary) instead.
+For a quick summary of all commands, please click [here](#4-command-summary) instead.
 
-### 2.1. Creating a trip: `new`
+<br/>
+
+### 2.1. Getting help: `help`
+
+<br/>
+
+### 2.2. Creating a trip: `new`
 Creates a new trip. 
 The CLI then returns the shortest path from one point to another.
 
@@ -74,18 +101,61 @@ The CLI then returns the shortest path from one point to another.
    * `new FamilyTrip2021 /from SIN /to MLY` creates a new trip called `FamilyTrip2021` from Singapore (`SIN`) to Malaysia (`MLY`).
    * `new Vacation /from SKR /to JPN` creates a new trip called `Vacation` from South Korea (`SKR`) to Japan (`JPN`).
 
+<br/>
 
-### 2.2. Viewing trips: `view`
+### 2.3. Adding a day to Trip: `add-day`
+Your overseas trip may span multiple days.
+
+This command allows you to create a day in your trip.
+
+#### Format: `add-day TRIP_NAME`
+
+#### Usage Example:
+
+```
+____________________________________________________________
+$ add-day myTrip
+____________________________________________________________
+	Added a new day to trip trip1.
+____________________________________________________________
+```
+
+<br/>
+
+### 2.4. Adding an item to a Day: `add-item`
+In each day of your trip, you will want to have multiple items planned out, such as visiting a museum or going to the
+beach.
+
+Use this command to add an item to a day of your trip.
+
+#### Format: `add-item TRIP_NAME /day DAY_NUMBER /time ITEM_TIME /name ITEM_NAME`
+
+#### Usage Example:
+
+```
+____________________________________________________________
+$ add-item trip1 /day 0 /time 7pm /name Check-in to HolidayInn
+____________________________________________________________
+	Added a new item to day 0 of trip trip1.
+____________________________________________________________
+```
+
+> ![](documentationPics/info.png) Days are 0-indexed based. That is, the first day of your trip is day 0.
+> ![](documentationPics/tip.png) If your item spans the whole day, just type in `All day` for the time field!
+
+<br/>
+
+### 2.5. Viewing trips: `view`
 Shows you details of your existing trips.
 
 #### Format: `view TRIP_NAME`
 
 #### Usage Example:
 
-Input > `view myTrip`
-
-Expected Output >
 ```
+____________________________________________________________
+$ view myTrip
+____________________________________________________________
 	Here are all your trips: 
 		TripName: myTrip
 			 Origin: SIN
@@ -93,12 +163,16 @@ Expected Output >
 			 Path: [SIN, MLY]
 			 Distances: [1.0]
 			 Days: 
+				Day 0: 
+					0:	7pm		Check-in at HolidayInn
+____________________________________________________________
 ```
 
-![](documentationPics/tip.png)Tip:
-* To view all trips, simply enter `view all`.
+> ![](documentationPics/tip.png) To view all trips, simply enter `view all`.
 
-### 2.3. Delete a trip: `delete`
+<br/>
+
+### 2.6. Delete a trip: `delete`
 Deletes an existing trip from the trip list.
 
 #### Format: `delete TRIP_NAME`
@@ -106,7 +180,17 @@ Deletes an existing trip from the trip list.
 #### Usage Example:
    * `delete FamilyTrip2021` deletes an existing trip called `FamilyTrip2021`.
 
-### 2.4 Edit a trip: `edit`
+<br/>
+
+### 2.7. Deleting a day from a trip: `delete-day`
+
+<br/>
+
+### 2.8. Deleting an item from a day: `delete-item`
+
+<br/>
+
+### 2.9 Edit a trip: `edit`
 Edits an existing trip from the trip list.
 
 #### Format: `edit TRIP_NAME /from START /to END`
@@ -115,27 +199,46 @@ Edits an existing trip from the trip list.
 #### Usage Example:
    * `edit FamilyTrip2021 /from SKR /to JPN` edits an existing trip called `FamilyTrip2021` to have new `START` and `END` destinations.
 
-### 2.5 Exiting the program: `exit`
+<br/>
+
+### 2.10. Edit an item: `edit-item`
+
+<br/>
+
+### 2.11. Searching for an item: `search-item`
+
+<br/>
+
+### 2.12. Shortest: `shortest`
+
+<br/>
+
+### 2.13 Saving your trips
+Existing trips are saved automatically whenever you exit the program.
+
+<br/>
+
+### 2.14 Exiting the program: `exit`
 Exits the program.
 
 #### Format: `exit`
 
-### 2.6 Saving your trips
-Existing trips are saved automatically whenever you exit the program.
+<br/>
 
 ## 3. FAQ
 
 **Q**: How do I transfer my data to another computer? 
 
-**A**: Transfer the entire folder to the other computer. 
-       The folder should contain 3 items:
-       * Traveller.jar
-       * flightData folder with flights.txt inside
-       * save folder with save.txt inside
+**A**: Transfer the entire folder containing the items listed below to the other computer. 
+   * Traveller.jar
+   * flightData folder with flights.txt inside
+   * save folder with save.txt inside
 
 **Q**: Why does it keep saying "Either of these nodes doesn't exist!"?
 
 **A**: Traveller can only read specific words as destinations. Please check in `flightData/flights.txt` for all supported destinations and their specific wordings.
+
+<br/>
 
 ## 4. Command Summary
 
