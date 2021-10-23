@@ -20,7 +20,8 @@ public class AddUI {
     private static final int BALANCE_ARRAY = 1;
     private static final int SERIAL_STARTING = 1;
     private static final int ZERO = 0;
-    private static final int ONE = 1;
+    private static final String RUN = "Run";
+    private static final String EXIT = "Exit";
     private static final String LINE = "_________________________________________________   |   ";
     private static final String NO_LESSON_FOUND = "No Lesson Time Slots Found";
     private static final String NO_LECTURE_FOUND = "            *Module has no Lectures*";
@@ -60,12 +61,13 @@ public class AddUI {
         } catch (IntegerException e) {
             e.printMessage();
         }
+        TextUi.printLessonAdded();
     }
 
     /**
-     * Function add the details of each lesson by calling the printLessonInfo, lessons
-     * of different class number will be divided and if a particular lesson type
-     * does not exist, a corresponding string will be used to highlight that
+     * Function add the details of each lesson by calling the printLessonInfo
+     * Lessons of different class number will be divided and if a particular lesson type
+     * does not exist, a corresponding string will be used to highlight that.
      * @param lessons the list of lessons
      * @param length the maximum index of a lesson type used to ensure that the UI is neatly displayed
      * @param lessonType the lesson type of the list of lessons
@@ -89,7 +91,7 @@ public class AddUI {
             }
         }
         if (!isExist(completeList, ZERO)) {
-            switch(lessonType) {
+            switch (lessonType) {
             case LECTURE:
                 detail = String.format(FIXED_LENGTH_FORMAT, NO_LECTURE_FOUND);
                 break;
@@ -109,7 +111,7 @@ public class AddUI {
     }
 
     /**
-     * Functions prints out the lesson detail for all lessons
+     * Functions prints out the lesson detail for all lessons.
      * @param lec the list of Strings representing the lesson detail
      * @param tt the list of Strings representing the tutorial details
      * @param lab the list of Strings representing the lab details
@@ -137,7 +139,7 @@ public class AddUI {
     }
 
     /**
-     * Function attempts to get user command of their preferred lesson
+     * Function attempts to get user command of their preferred lesson.
      * @param lessons the list of lessons
      * @param lessonType the type of lesson
      * @param timetable the timetable that the lesson will be added to
@@ -149,10 +151,10 @@ public class AddUI {
 
         String classNumber = "";
         if (isArrayExist(lessons, ZERO)) {
-            int flag;
+            String flag;
             try {
-                flag = ONE;
-                while (flag == ONE) {
+                flag = RUN;
+                while (flag.equals(RUN)) {
                     String select = TextUi.getLessonCommand(lessonType);
                     int indexOfLesson = Integer.parseInt(select) - BALANCE_ARRAY;
                     Lesson selectedLesson = lessons.get(indexOfLesson);
@@ -160,14 +162,14 @@ public class AddUI {
                     if (timetable.isConflict(selectedLesson)) {
                         String choice = TextUi.printAskConfirmation(selectedLesson);
                         if (choice.equals("y") || choice.equals("yes")) {
-                            flag = ZERO;
-                        } else if (choice.equals("n") || choice.equals("no")){
+                            flag = EXIT;
+                        } else if (choice.equals("n") || choice.equals("no")) {
                             System.out.println("Alright bitch do it properly this time");
                         } else {
                             System.out.println("Invalid Command, Try Again Dumb Ass");
                         }
                     } else {
-                        flag = ZERO;
+                        flag = EXIT;
                     }
                 }
             } catch (NumberFormatException e) {
@@ -177,17 +179,12 @@ public class AddUI {
             }
 
             addLessonToTimetable(lessons, timetable, module, classNumber);
-
-            if (lessonType.equals(LAB)) {
-                TextUi.printLessonAdded();
-            }
         }
     }
 
     /**
      * Add lesson(s) from the list of lessons with the same class number selected
-     * into the timetable
-     *
+     * into the timetable.
      * @param lessons the list of lessons
      * @param timetable the timetable where the lesson is to be added
      * @param module the module of the lesson
@@ -215,7 +212,7 @@ public class AddUI {
 
     /**
      * Function checks whether the current lesson in the list of lessons has the
-     * same class number as the next lesson in the index
+     * same class number as the next lesson in the index.
      * @param lessonList the list of lesson
      * @param lesson the specified lesson
      * @return true if the next lesson in the index has the same class number, false otherwise
@@ -234,8 +231,7 @@ public class AddUI {
 
     /**
      * Function checks whether the array of lesson details
-     * exist and a String in the index specified contains a lesson
-     *
+     * exist and a String in the index specified contains a lesson.
      * @param lesson the list of Strings that contain lesson details
      * @param index the index specified
      * @return return true if the array and the lesson detail exist, otherwise false
@@ -246,8 +242,7 @@ public class AddUI {
 
     /**
      * Function checks whether the array exist and a lesson in
-     * the index specified contains a lesson
-     *
+     * the index specified contains a lesson.
      * @param lesson the list of lessons
      * @param index the index specified
      * @return return true if the array and the lesson exist, otherwise false
@@ -258,8 +253,7 @@ public class AddUI {
 
     /**
      * Function prints out the header to label each corresponding lesson
-     * type in the module lessons
-     *
+     * type in the module lessons.
      * @param lt The list of lessons that are lectures
      * @param tt The list of lessons that are tutorials
      * @param lb The list of lessons that are laboratory

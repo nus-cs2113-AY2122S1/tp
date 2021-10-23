@@ -94,7 +94,7 @@ public class Lesson {
         ArrayList<Integer> time = new ArrayList<>();
         int startTime = Integer.parseInt(getStartTime()) / DIVISOR;
         time.add(startTime);
-        for (int i = 0; length > i; i++) {
+        for (int i = 1; length > i; i++) {
             startTime += ONE;
             time.add(startTime);
         }
