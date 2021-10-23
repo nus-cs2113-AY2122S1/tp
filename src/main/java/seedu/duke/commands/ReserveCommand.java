@@ -11,6 +11,8 @@ import static seedu.duke.common.Messages.RESERVE_INVALID_FORMAT;
 import static seedu.duke.common.Messages.RESERVE_SUCCESS;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
 import static seedu.duke.common.Messages.INVALID_ID;
+import static seedu.duke.data.Item.ARG_ID;
+import static seedu.duke.data.Item.ARG_LOANEE;
 
 /**
  * Class encapsulating command to update the status of the item to be loaned out.
@@ -38,13 +40,13 @@ public class ReserveCommand extends Command {
      */
     public void handleLoanCommand(TextUI ui, Catalogue catalogue) throws LibmgrException {
         // Check validity of arguments
-        if (!args.contains(Item.ARG_ID) | !args.contains(Item.ARG_LOANEE)) {
+        if (!args.contains(ARG_ID) | !args.contains(ARG_LOANEE)) {
             throw new LibmgrException(RESERVE_INVALID_FORMAT);
         }
         // Process arguments
         try {
-            id = args.substring(args.indexOf(Item.ARG_ID) + 2, args.indexOf(Item.ARG_LOANEE)).strip();
-            username = args.substring(args.indexOf(Item.ARG_LOANEE) + 2).strip();
+            id = args.substring(args.indexOf(ARG_ID) + ARG_ID.length(), args.indexOf(ARG_LOANEE)).strip();
+            username = args.substring(args.indexOf(ARG_LOANEE) + ARG_LOANEE.length()).strip();
         } catch (StringIndexOutOfBoundsException e) {
             throw new LibmgrException(RESERVE_INVALID_FORMAT);
         }
@@ -55,6 +57,7 @@ public class ReserveCommand extends Command {
         if (toBeReserved.getStatus().equals(AVAILABLE)) {
             toBeReserved.setStatus(RESERVED);
             toBeReserved.setLoanee(username);
+            assert toBeReserved.getStatus() == RESERVED : "Status not set as reserved";
             assert toBeReserved.getLoanee() != null : "Loanee still null";
             ui.print(RESERVE_SUCCESS, toBeReserved);
         } else {

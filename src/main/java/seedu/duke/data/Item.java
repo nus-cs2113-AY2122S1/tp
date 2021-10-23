@@ -16,7 +16,7 @@ public class Item {
     private LocalDate dueDate;
 
     // Date functions
-    public static final String dateFormat = "dd/MM/yyyy";
+    public static final String dateFormat = "dd-MM-yyyy";
     protected DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern(dateFormat);
 
     // Literals
@@ -25,7 +25,7 @@ public class Item {
     public static final String ARG_ID = "i/";
     public static final String ARG_STATUS = "s/";
     public static final String ARG_LOANEE = "u/";
-    public static final String ARG_DUEDATE = "d/";
+    public static final String ARG_DUE = "d/";
 
     /**
      * Constructor for class item.
@@ -135,6 +135,13 @@ public class Item {
      */
     public void setDueDate(String dueDate) throws DateTimeParseException {
         this.dueDate = LocalDate.parse(dueDate, dtFormatter);
+    }
+
+    /**
+     * Setter method that resets the dueDate attribute.
+     */
+    public void setDueDate() {
+        this.dueDate = null;
     }
 
     /**

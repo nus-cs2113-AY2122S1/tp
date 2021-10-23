@@ -31,6 +31,7 @@ public class Messages {
     public static final String UNAVAILABLE_ITEM_MESSAGE = "  (!) Sorry, the item is unavailable.";
     public static final String RETURN_SUCCESS = "  (+) Item has been returned:";
     public static final String WRONG_ITEM_MESSAGE = "  (!) Item is not on loan!";
+    public static final String ALREADY_RESERVED_MESSAGE = "  (!) Sorry, the item has already been reserved for someone";
     // Remove
     public static final String RM_SUCCESS = "  (+) Removed the following item:";
     // Add
@@ -45,7 +46,7 @@ public class Messages {
     public static final String RESERVE_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
             + "  (!) Format: reserve i/ID u/USER";
     public static final String LOAN_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
-            + "  (!) Format: loan i/ID u/USER d/DUEDATE";
+            + "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)";
     // Generic Errors
     public static final String INVALID_ID = "  (!) Invalid Item ID!";
 }
