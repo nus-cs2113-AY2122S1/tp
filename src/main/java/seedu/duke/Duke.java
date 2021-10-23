@@ -35,11 +35,11 @@ public class Duke {
 
         while (isProgramRunning) {
             isProgramRunning = Parser.parseUserInput(readUserInput(in));
-            try {
-                Storage.writeToFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            //try {
+            //    Storage.writeToFile();
+            //} catch (IOException e) {
+            //    e.printStackTrace();
+            //}
         }
 
     }

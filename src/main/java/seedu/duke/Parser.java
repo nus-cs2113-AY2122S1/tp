@@ -79,7 +79,12 @@ public class Parser {
             break;
 
         case "view":
-            executeView();
+            try {
+                executeView(inputParams);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                Ui.printFilterFormatError();
+            }
+
             break;
 
         case "delete":
@@ -121,7 +126,7 @@ public class Parser {
     }
 
     private static void executeCreate(String indexAsString) {
-        String[] newTripInfo = indexAsString.split(" ", 5);
+        String[] newTripInfo = indexAsString.split(" ", 4);
         Trip newTrip = new Trip(newTripInfo);
         Storage.listOfTrips.add(newTrip);
         System.out.println("Your trip to " + newTrip.getLocation() + " on "
@@ -148,8 +153,24 @@ public class Parser {
         Ui.printExpensesSummary(Storage.getOpenTrip());
     }
 
-    private static void executeView() {
-        Storage.getOpenTrip().viewAllExpenses();
+    private static void executeView(String inputParams) {
+        if (inputParams == null) {
+            Storage.getOpenTrip().viewAllExpenses();
+
+        } else {
+            String[] paramString = inputParams.split(" ", 3);
+            String secondCommand = paramString[0];
+            String expenseCategory = paramString[1];
+            String expenseAttribute = paramString[2];
+            if (secondCommand.equals("filter")) {
+                try {
+                    Trip.getFilteredExpenses(expenseCategory, expenseAttribute);
+                } catch (IndexOutOfBoundsException e) {
+                    Ui.printNoExpensesError();
+                }
+
+            }
+        }
     }
 
     private static void executeDelete(String inputParams) {
@@ -207,7 +228,6 @@ public class Parser {
     private static void executeList() {
         int index = 1;
         if (!Storage.checkOpenTrip()) {
-            Storage.getLogger().log(Level.INFO, "trying to list - no trip currently open");
             for (Trip trip : Storage.listOfTrips) {
                 Ui.printTripsInList(trip, index);
                 index++;
@@ -229,13 +249,21 @@ public class Parser {
         String[] expenseInfo = inputDescription.split(" ", 3);
         Double expenseAmount = Double.parseDouble(expenseInfo[0]);
         String expenseCategory = expenseInfo[1].toLowerCase();
-        ArrayList<Person> listOfPersonsIncluded = checkValidPersons(Storage.getOpenTrip(), expenseInfo[2]);
+        ArrayList<Person> listOfPersonsIncluded = checkValidPersons(currTrip, expenseInfo[2]);
         String expenseDescription = getDescription(expenseInfo[2]);
         Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
         newExpense.setDate(newExpense.prompDate());
         currTrip.addExpense(newExpense);
-        updateIndividualSpending(newExpense);
+        if (listOfPersonsIncluded.size() == 1) {
+            updateOnePersonSpending(newExpense, listOfPersonsIncluded.get(0));
+        } else {
+            updateIndividualSpending(newExpense);
+        }
         Ui.printExpenseAddedSuccess();
+    }
+
+    private static void updateOnePersonSpending(Expense expense, Person person) {
+        person.setMoneyOwed(person, expense.getAmountSpent());
     }
 
     private static void updateIndividualSpending(Expense expense) {
@@ -247,7 +275,8 @@ public class Parser {
             HashMap<Person, Double> amountBeingPaid = new HashMap<>();
             double total = 0.0;
             for (Person person : expense.getPersonsList()) {
-                Ui.printHowMuchDidPersonSpend(person.getName());
+                double amountRemaining = expense.getAmountSpent() - total;
+                Ui.printHowMuchDidPersonSpend(person.getName(), amountRemaining);
                 String amountString = Storage.getScanner().nextLine().strip();
                 if (amountString.equalsIgnoreCase("equal") && amountBeingPaid.isEmpty()) {
                     assignEqualAmounts(payer, expense, amountBeingPaid);
@@ -376,9 +405,9 @@ public class Parser {
             String[] splitCommandAndData = attributeToEdit.split(" ");
             String data = splitCommandAndData[1];
             switch (splitCommandAndData[0]) {
-            case "budget":
+            /*case "budget":
                 tripToEdit.setBudget(data);
-                break;
+                break;*/
             case "location":
                 tripToEdit.setLocation(data);
                 break;
