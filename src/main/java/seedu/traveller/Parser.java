@@ -8,7 +8,9 @@ import seedu.traveller.commands.DeleteCommand;
 import seedu.traveller.commands.DeleteDayCommand;
 import seedu.traveller.commands.DeleteItemCommand;
 import seedu.traveller.commands.ViewCommand;
-import seedu.traveller.commands.SearchCommand;
+import seedu.traveller.commands.SearchItemCommand;
+import seedu.traveller.commands.EditItemCommand;
+import seedu.traveller.commands.ShortestCommand;
 import seedu.traveller.commands.AddDayCommand;
 import seedu.traveller.commands.ExitCommand;
 import seedu.traveller.commands.HelpCommand;
@@ -64,8 +66,11 @@ public class Parser {
         case "view":
             command = parseViewCommand(userInput[1]);
             break;
-        case "search":
-            command = parseSearchCommand(userInput[1]);
+        case "shortest":
+            command = parseShortestCommand(userInput[1]);
+            break;
+        case "search-item":
+            command = parseSearchItemCommand(userInput[1]);
             break;
         case "add-day":
             command = parseAddDayCommand(userInput[1]);
@@ -78,6 +83,9 @@ public class Parser {
             break;
         case "delete-item":
             command = parseDeleteItemCommand(userInput[1]);
+            break;
+        case "edit-item":
+            command = parseEditItemCommand(userInput[1]);
             break;
         case "exit":
             command = parseExitCommand();
@@ -225,6 +233,56 @@ public class Parser {
         return command;
     }
 
+    private static Command parseSearchItemCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Search command input");
+
+        String[] input = userInput.split(" ");
+
+        String tripName;
+        String itemName;
+
+        tripName = input[1];
+        String nameSeparator = " /name ";
+        int nameIdx = userInput.indexOf(nameSeparator);
+        itemName = userInput.substring(nameIdx + NAME_LENGTH);
+
+        Command command;
+        command = new SearchItemCommand(tripName, itemName);
+
+        return command;
+    }
+
+    private static Command parseEditItemCommand(String userInput) throws TravellerException {
+        logger.log(Level.INFO, "Edit-item command input");
+        Command command;
+        String[] input = userInput.split(" ");
+
+        String tripName;
+        String itemName;
+        String itemTime;
+        int itemIndex;
+
+        try {
+            tripName = input[1];
+            itemIndex = Integer.valueOf(input[0]);
+
+            String nameSeparator = " /name ";
+            int nameIdx = userInput.indexOf(nameSeparator);
+            itemName = userInput.substring(nameIdx + NAME_LENGTH);
+
+            String timeSeparator = " /time ";
+            int timeIdx = userInput.indexOf(timeSeparator);
+            itemTime = userInput.substring(timeIdx + TIME_LENGTH, nameIdx);
+
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidAddItemFormatException();
+        }
+
+        command = new EditItemCommand(tripName, itemIndex, itemTime, itemName);
+
+        return command;
+    }
+
     /**
      * Parses user input to give a <code>ViewCommand</code>.
      * @return Command A <code>ViewCommand</code> object.
@@ -237,12 +295,12 @@ public class Parser {
     }
 
     /**
-     * Parses user input to give a <code>SearchCommand</code>.
+     * Parses user input to give a <code>ShortestCommand</code>.
      * @param userInput Raw user input, with the first command option (search) removed.
-     * @return Command A <code>SearchCommand</code> object.
+     * @return Command A <code>ShortestCommand</code> object.
      * @throws TravellerException Will be thrown if the user input cannot be understood.
      */
-    private static Command parseSearchCommand(String userInput) throws TravellerException {
+    private static Command parseShortestCommand(String userInput) throws TravellerException {
         logger.log(Level.INFO, "Search command input");
         Command command;
         try {
@@ -252,7 +310,7 @@ public class Parser {
             String endCountryCode = userInput.substring(toIdx + TO_LENGTH).toUpperCase();
             assert !startCountryCode.contains(" ") : "startCountryCode should not contain whitespaces.";
             assert !endCountryCode.contains(" ") : "endCountryCode should not contain whitespaces.";
-            command = new SearchCommand(startCountryCode, endCountryCode);
+            command = new ShortestCommand(startCountryCode, endCountryCode);
         } catch (StringIndexOutOfBoundsException e) {
             throw new InvalidSearchFormatException();
         }

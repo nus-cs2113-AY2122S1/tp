@@ -69,11 +69,20 @@ public class Ui {
         System.out.println("\tYou have just deleted item " + itemIndex + " of " + tripName + " day " + dayIndex);
     }
 
+    public void printSearchItem(String tripName, String itemName) {
+        System.out.println("\tYou have just search item keyword " + itemName + " in trip called " + tripName);
+    }
+
+    public void printEditItem(String tripName, int itemIndex, String itemName, String itemTime) {
+        System.out.println("\tYou have just edited item " + itemIndex + " of "
+                + tripName + " to " + itemName + " and " + itemTime);
+    }
+
     public void printEdit(String tripName) {
         System.out.println("\tYou have just edited a trip called " + tripName + ".");
     }
 
-    public void printSearch(String startCountry, String endCountry, double distance) {
+    public void printShortest(String startCountry, String endCountry, double distance) {
         System.out.println("The distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
     }
 
@@ -92,4 +101,5 @@ public class Ui {
     public void printWriteSave() {
         System.out.println("\tNow saving all your trips.");
     }
+
 }
