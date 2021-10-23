@@ -83,4 +83,27 @@ public class RecipeList {
         }
         return recipe;
     }
+
+    /**
+     * Updates units of specified ingredient in all recipes.
+     *
+     * @param ingredientName The name of the ingredient.
+     * @param newUnits The new units to change to.
+     */
+    public void updateUnits(String ingredientName, String newUnits) {
+        //iterate through all recipes
+        for (Recipe recipe : recipes.values()) {
+            //iterate through all the ingredients in the recipe
+            for (String ingredientInRecipeName : recipe.getIngredientQuantities().keySet()) {
+                if (ingredientInRecipeName.equals(ingredientName)) {
+                    recipe.getIngredientQuantities().get(ingredientInRecipeName).getIngredient().setUnit(newUnits);
+                }
+            }
+        }
+    }
+
+
+
+
+
 }

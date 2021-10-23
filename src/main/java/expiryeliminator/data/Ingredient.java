@@ -3,7 +3,7 @@ package expiryeliminator.data;
 /**
  * Represents an ingredient.
  */
-class Ingredient {
+public class Ingredient {
     private final String name;
     private String unit;
 
@@ -42,7 +42,7 @@ class Ingredient {
      *
      * @return The unit for the ingredient.
      */
-    String getUnit() {
+    public String getUnit() {
         return unit;
     }
 

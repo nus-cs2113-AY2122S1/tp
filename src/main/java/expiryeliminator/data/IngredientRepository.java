@@ -13,7 +13,12 @@ import expiryeliminator.data.exception.NotFoundException;
  * Represents the ingredient repository and contains methods to add and remove ingredients.
  */
 public class IngredientRepository {
+
     private final TreeMap<String, IngredientStorage> ingredients = new TreeMap<>();
+
+    public TreeMap<String, IngredientStorage> getIngredients() {
+        return ingredients;
+    }
 
     /**
      * Adds an ingredient to the repository without any associated unit or quantity.
@@ -228,6 +233,24 @@ public class IngredientRepository {
         return haveExpired;
     }
 
+
+    public void updateShoppingListItemQuantity(String ingredientName, Recipe recipe, TreeMap<String,
+            IngredientQuantity> totalIngredients) throws IllegalValueException {
+        int quantity = recipe.getIngredientQuantities().get(ingredientName).getQuantity();
+        if (totalIngredients.containsKey(ingredientName)) {
+            try {
+                int previousQuantity = totalIngredients.get(ingredientName).getQuantity();
+                totalIngredients.get(ingredientName).setQuantity(quantity + previousQuantity);
+            } catch (IllegalValueException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Ingredient ingredientItem = new Ingredient(ingredientName);
+            IngredientQuantity ingredientAndQuantityItem = new IngredientQuantity(ingredientItem, quantity);
+            totalIngredients.put(ingredientName, ingredientAndQuantityItem);
+        }
+    }
+
     /**
      * Generates a list of ingredients and quantity to buy depending on what recipe/recipes the user wants to make.
      *
@@ -240,24 +263,14 @@ public class IngredientRepository {
         StringBuilder shoppingList = new StringBuilder();
         TreeMap<String, IngredientQuantity> totalIngredients = new TreeMap<>();
 
+        //tally total types and quantities of ingredients needed to cook the recipes
         for (Recipe recipe : recipes) {
             for (String ingredientName : recipe.getIngredientQuantities().keySet()) {
-                int quantity = recipe.getIngredientQuantities().get(ingredientName).getQuantity();
-                if (totalIngredients.containsKey(ingredientName)) {
-                    try {
-                        int previousQuantity = totalIngredients.get(ingredientName).getQuantity();
-                        totalIngredients.get(ingredientName).setQuantity(quantity + previousQuantity);
-                    } catch (IllegalValueException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    Ingredient ingredientItem = new Ingredient(ingredientName);
-                    IngredientQuantity ingredientAndQuantityItem = new IngredientQuantity(ingredientItem, quantity);
-                    totalIngredients.put(ingredientName, ingredientAndQuantityItem);
-                }
+                updateShoppingListItemQuantity(ingredientName, recipe, totalIngredients);
             }
         }
 
+        //determine what and how much of an ingredient is needed to be bought
         for (String ingredientName : totalIngredients.keySet()) {
             IngredientQuantity ingredientAndQuantityItem = totalIngredients.get(ingredientName);
             int quantityRequired = ingredientAndQuantityItem.getQuantity();
@@ -267,9 +280,9 @@ public class IngredientRepository {
                 IngredientStorage ingredientStorage = ingredients.get(ingredientName);
                 int quantityAvailable = ingredientStorage.getQuantity();
                 if (quantityAvailable < quantityRequired) {
+                    int quantityRequiredToBuy = quantityRequired - quantityAvailable;
                     try {
-                        IngredientQuantity shoppingItem = new IngredientQuantity(ingredient,
-                                quantityRequired - quantityAvailable);
+                        IngredientQuantity shoppingItem = new IngredientQuantity(ingredient, quantityRequiredToBuy);
                         shoppingList.append("\n").append(shoppingItem);
                     } catch (IllegalValueException e) {
                         e.printStackTrace();
