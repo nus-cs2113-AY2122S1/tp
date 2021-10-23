@@ -11,7 +11,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
+//@@author gavienwz
 public class DataLoader {
     private static final Logger logger = Logger.getLogger(DataLoader.class.getName());
     private final int numberOfCountries = 5;
