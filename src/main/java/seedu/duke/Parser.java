@@ -106,7 +106,7 @@ public class Parser {
             try {
                 assert inputParams != null;
                 executeExpense(inputParams);
-            } catch (NullPointerException | IndexOutOfBoundsException e) {
+            } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
                 Ui.printExpenseFormatError();
             }
             break;
@@ -126,7 +126,7 @@ public class Parser {
     }
 
     private static void executeCreate(String indexAsString) {
-        String[] newTripInfo = indexAsString.split(" ", 4);
+        String[] newTripInfo = indexAsString.split(" ", 5);
         Trip newTrip = new Trip(newTripInfo);
         Storage.listOfTrips.add(newTrip);
         System.out.println("Your trip to " + newTrip.getLocation() + " on "
@@ -323,7 +323,7 @@ public class Parser {
 
     private static void assignEqualAmounts(Person payer, Expense expense, HashMap<Person, Double> amountBeingPaid) {
         double total = 0.0;
-        double amount = Double.parseDouble(String.format("%.02f",
+        double amount = Double.parseDouble(String.format(Storage.getOpenTrip().getForeignCurrencyFormat(),
                 (expense.getAmountSpent() / expense.getPersonsList().size())));
         for (Person people : expense.getPersonsList()) {
             amountBeingPaid.put(people, amount);
@@ -429,7 +429,7 @@ public class Parser {
                 //TODO: add edit persons branch
                 break;
             default:
-                System.out.println(splitCommandAndData[0] + "was not recognised. "
+                System.out.println(splitCommandAndData[0] + " was not recognised. "
                         + "Please try again after this process is complete");
             }
         }

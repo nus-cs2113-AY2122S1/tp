@@ -13,9 +13,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class Storage {
@@ -24,7 +24,6 @@ public class Storage {
 
     public static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static Trip openTrip = null;
-
     private static Scanner scanner;
     private static Logger logger;
 
@@ -32,6 +31,26 @@ public class Storage {
             Arrays.asList("create", "edit", "view", "open", "list", "summary",
                     "delete", "expense", "quit", "help", "amount"));
 
+    private static final HashMap<String, String[]> availableCurrency = new HashMap<>() {{
+            put("USD", new String[] {"$", "%.02f"});
+            put("SGD", new String[] {"$", "%.02f"});
+            put("AUD", new String[] {"$", "%.02f"});
+            put("CAD", new String[] {"$", "%.02f"});
+            put("EUR", new String[] {"€", "%.02f"});
+            put("GBP", new String[] {"£", "%.02f"});
+            put("MYR", new String[] {"RM", "%.02f"});
+            put("HKD", new String[] {"$", "%.02f"});
+            put("THB", new String[] {"฿", "%.02f"});
+            put("CNY", new String[] {"¥", "%.0f"});
+            put("JPY", new String[] {"¥", "%.0f"});
+            put("KRW", new String[] {"₩", "%.0f"});
+            put("IDR", new String[] {"Rp", "%.0f"});
+            put("INR", new String[] {"Rs", "%.0f"});
+        }};
+
+    public static HashMap<String, String[]> getAvailableCurrency() {
+        return availableCurrency;
+    }
 
     protected static void writeToFile() throws IOException {
         String jsonString = new Gson().toJson(listOfTrips);
