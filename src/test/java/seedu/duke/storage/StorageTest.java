@@ -24,8 +24,8 @@ class StorageTest {
     @Test
     void load() {
         write();
-        DishList.clearList();
-        IngredientList.clearList();
+        DishList.dishList.clear();
+        IngredientList.ingredientList.clear();
         assertEquals(0, DishList.dishList.size());
         assertEquals(0, IngredientList.ingredientList.size());
         Storage.load();
@@ -37,8 +37,8 @@ class StorageTest {
 
     @AfterEach
     void resetLists() {
-        DishList.clearList();
-        IngredientList.clearList();
+        DishList.dishList.clear();
+        IngredientList.ingredientList.clear();
         Storage.write("ingredient");
         Storage.write("dish");
     }

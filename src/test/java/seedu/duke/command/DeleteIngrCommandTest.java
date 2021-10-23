@@ -25,8 +25,12 @@ class DeleteIngrCommandTest {
         System.setIn(backupInputStream);
         assertEquals(1, IngredientList.ingredientList.size());
 
+        InputStream originalInput = System.in;
+        InputStream fakeConfirmation  = new ByteArrayInputStream("y".getBytes());
+        System.setIn(fakeConfirmation);
         DeleteIngrCommand deleteIngrCommand = new DeleteIngrCommand();
         deleteIngrCommand.execute(inputParams);
+        System.setIn(originalInput);
 
         assertEquals(0, IngredientList.ingredientList.size());
         DishList.dishList.clear();

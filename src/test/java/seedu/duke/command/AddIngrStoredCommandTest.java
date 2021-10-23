@@ -32,8 +32,8 @@ class AddIngrStoredCommandTest {
             System.setIn(backupInputStream);
             assertEquals(4.34,IngredientList.ingredientList.get(0).getIngredientWeight());
             //Clear lists
-            DishList.clearList();
-            IngredientList.clearList();
+            DishList.dishList.clear();
+            IngredientList.ingredientList.clear();
             //Test case if dish not present
             commandToTest.execute(inputs);
         } catch (FoodoramaException e) {

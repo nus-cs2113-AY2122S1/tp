@@ -42,12 +42,16 @@ class ClearAllCommandTest {
 
         assertEquals(2, IngredientList.ingredientList.size());
 
+        InputStream originalInput = System.in;
+        InputStream fakeInput  = new ByteArrayInputStream("y".getBytes());
+        System.setIn(fakeInput);
         ClearAllCommand clearAllCommand = new ClearAllCommand();
         clearAllCommand.execute(inputParamsDish);
+        System.setIn(originalInput);
 
         assertEquals(0, DishList.dishList.size());
         assertEquals(0, IngredientList.ingredientList.size());
-        DishList.clearList();
-        IngredientList.clearList();
+        DishList.dishList.clear();
+        IngredientList.ingredientList.clear();
     }
 }

@@ -49,7 +49,7 @@ class ListCommandTest {
             list.execute(inputArrayList);
             assertTrue(newOutputStream.toString().trim().contains(dishToAdd.toString()));
             assertTrue(newOutputStream.toString().trim().contains(dishToAdd2.toString()));
-            DishList.clearList();
+            DishList.dishList.clear();
             list.execute(inputArrayList);
         } catch (FoodoramaException e) {
             assertEquals("List is empty, nothing to show", e.getMessage());
@@ -65,7 +65,7 @@ class ListCommandTest {
             list.execute(inputArrayList);
             assertTrue(newOutputStream.toString().trim().contains(ingredientToAdd.toString()));
             assertTrue(newOutputStream.toString().trim().contains(ingredientToAdd2.toString()));
-            IngredientList.clearList();
+            IngredientList.ingredientList.clear();
             list.execute(inputArrayList);
         } catch (FoodoramaException e) {
             assertEquals("List is empty, nothing to show", e.getMessage());
