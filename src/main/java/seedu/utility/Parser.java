@@ -29,12 +29,7 @@ import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 
 import seedu.entry.IncomeCategory;
-import seedu.exceptions.InvalidExpenseAmountException;
-import seedu.exceptions.InvalidExpenseDataFormatException;
-import seedu.exceptions.InvalidExpenseIndexException;
-import seedu.exceptions.InvalidIncomeAmountException;
-import seedu.exceptions.InvalidIncomeDataFormatException;
-import seedu.exceptions.InvalidIncomeIndexException;
+import seedu.exceptions.*;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -249,100 +244,106 @@ public class Parser {
      */
     private Command prepareAddExpense(String arguments) {
         final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments);
-        if (!matcher.matches()) {
-            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+        if (isMatch(matcher)) {
+            try {
+                double expenseAmount = extractExpenseAmount(matcher, "amount");
+                String expenseDescription = extractExpenseDescription(matcher, "description");
+                ExpenseCategory expenseCategory = extractExpenseCategory(matcher, "category");
+                Expense expense = new Expense(expenseDescription, expenseAmount, expenseCategory);
+                return new AddExpenseCommand(expense);
+            } catch (InputException e) {
+                return new InvalidCommand(e.getMessage());
+            }
         }
-
-        String userGivenAmount = matcher.group("amount").trim();
-        double expenseAmount;
-        try {
-            expenseAmount = parseExpenseAmount(userGivenAmount);
-        } catch (InvalidExpenseAmountException e) {
-            return new InvalidCommand(e.getMessage());
-        }
-        assert expenseAmount > 0;
-
-        String expenseDescription = matcher.group("description").trim();
-        if (expenseDescription.isBlank()) {
-            return new InvalidCommand(Messages.BLANK_DESCRIPTION_MESSAGE);
-        }
-        
-        String expenseCategory = matcher.group("category").trim().toUpperCase();
-        if (expenseCategory.isBlank()) {
-            return new InvalidCommand(Messages.BLANK_CATEGORY_MESSAGE);
-        }
-        Expense expense;
-        switch (expenseCategory) {
-        case "FOOD":
-            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.FOOD);
-            break;
-        case "TRANSPORT":
-            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.TRANSPORT);
-            break;
-        case "MEDICAL":
-            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.MEDICAL);
-            break;
-        case "BILLS":
-            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.BILLS);
-            break;
-        case "ENTERTAINMENT":
-            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.ENTERTAINMENT);
-            break;
-        case "MISC":
-            expense = new Expense(expenseDescription, expenseAmount, ExpenseCategory.MISC);
-            break;
-        default:
-            return new InvalidCommand(Messages.INVALID_EXPENSE_CATEGORY_MESSAGE);
-        }
-        return new AddExpenseCommand(expense);
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
     }
 
-    /**
-     * This was adapted from addressbook-level2 source code here:
-     * https://github.com/se-edu/addressbook-level2/blob/master/src/seedu/addressbook/parser/Parser.java
-     */
-    private Command prepareAddIncome(String arguments) {
-        final Matcher matcher = ADD_INCOME_ARGUMENT_FORMAT.matcher(arguments);
-        if (!matcher.matches()) {
-            return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
-        }
+    private boolean isMatch(Matcher matcher) {
+        return matcher.matches();
+    }
 
-        String userGivenAmount = matcher.group("amount").trim();
-        double incomeAmount;
-        try {
-            incomeAmount = parseIncomeAmount(userGivenAmount);
-        } catch (InvalidIncomeAmountException e) {
-            return new InvalidCommand(e.getMessage());
+    private ExpenseCategory extractExpenseCategory(Matcher matcher, String groupName) throws BlankExpenseCategoryException, InvalidExpenseCategoryException {
+        String expenseCategory = matcher.group(groupName).trim();
+        if (expenseCategory.isBlank()) {
+            throw new BlankExpenseCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
         }
-        assert incomeAmount > 0;
-
-        String incomeDescription = matcher.group("description").trim();
-        if (incomeDescription.isBlank()) {
-            return new InvalidCommand(Messages.BLANK_DESCRIPTION_MESSAGE);
-        }
-
-        String incomeCategory = matcher.group("category").trim().toUpperCase();
-        if (incomeCategory.isBlank()) {
-            return new InvalidCommand(Messages.BLANK_CATEGORY_MESSAGE);
-        }
-        Income income;
-        switch (incomeCategory) {
-        case "ALLOWANCE":
-            income = new Income(incomeDescription, incomeAmount, IncomeCategory.ALLOWANCE);
-            break;
-        case "SALARY":
-            income = new Income(incomeDescription, incomeAmount, IncomeCategory.SALARY);
-            break;
-        case "ADHOC":
-            income = new Income(incomeDescription, incomeAmount, IncomeCategory.ADHOC);
-            break;
-        case "OTHERS":
-            income = new Income(incomeDescription, incomeAmount, IncomeCategory.OTHERS);
-            break;
+        switch (expenseCategory.toUpperCase()) {
+        case "FOOD":
+            return ExpenseCategory.FOOD;
+        case "TRANSPORT":
+            return ExpenseCategory.TRANSPORT;
+        case "MEDICAL":
+            return ExpenseCategory.MEDICAL;
+        case "BILLS":
+            return ExpenseCategory.BILLS;
+        case "ENTERTAINMENT":
+            return ExpenseCategory.ENTERTAINMENT;
+        case "MISC":
+            return ExpenseCategory.MISC;
         default:
-            return new InvalidCommand(Messages.INVALID_INCOME_CATEGORY_MESSAGE);
+            throw new InvalidExpenseCategoryException(Messages.INVALID_EXPENSE_CATEGORY_MESSAGE);
         }
-        return new AddIncomeCommand(income);
+    }
+    
+    private String extractExpenseDescription(Matcher matcher, String groupName) throws InvalidExpenseDescriptionException {
+        String expenseDescription = matcher.group(groupName).trim();
+        if (expenseDescription.isBlank()) {
+            throw new InvalidExpenseDescriptionException(Messages.BLANK_DESCRIPTION_MESSAGE);
+        }
+        return expenseDescription;
+    }
+    
+    private double extractExpenseAmount(Matcher matcher, String groupName) throws InvalidExpenseAmountException {
+        String userGivenAmount = matcher.group(groupName).trim();
+        return parseExpenseAmount(userGivenAmount);
+    }
+
+    private Command prepareAddIncome(String arguments) {
+        final Matcher matcher = ADD_EXPENSE_ARGUMENT_FORMAT.matcher(arguments);
+        if (isMatch(matcher)) {
+            try {
+                double incomeAmount = extractIncomeAmount(matcher, "amount");
+                String incomeDescription = extractIncomeDescription(matcher, "description");
+                IncomeCategory incomeCategory = extractIncomeCategory(matcher, "category");
+                Income income = new Income(incomeDescription, incomeAmount, incomeCategory);
+                return new AddIncomeCommand(income);
+            } catch (InputException e) {
+                return new InvalidCommand(e.getMessage());
+            }
+        }
+        return new InvalidCommand(Messages.INVALID_COMMAND_MESSAGE);
+    }
+
+    private IncomeCategory extractIncomeCategory(Matcher matcher, String groupName) throws BlankIncomeCategoryException, InvalidIncomeCategoryException {
+        String incomeCategory = matcher.group(groupName).trim();
+        if (incomeCategory.isBlank()) {
+            throw new BlankIncomeCategoryException(Messages.BLANK_CATEGORY_MESSAGE);
+        }
+        switch (incomeCategory.toUpperCase()) {
+        case "ALLOWANCE":
+            return IncomeCategory.ALLOWANCE;
+        case "SALARY":
+            return IncomeCategory.SALARY;
+        case "ADHOC":
+            return IncomeCategory.ADHOC;
+        case "OTHERS":
+            return IncomeCategory.OTHERS;
+        default:
+            throw new InvalidIncomeCategoryException(Messages.INVALID_INCOME_CATEGORY_MESSAGE);
+        }
+    }
+
+    private String extractIncomeDescription(Matcher matcher, String groupName) throws InvalidIncomeDescriptionException {
+        String incomeDescription = matcher.group(groupName).trim();
+        if (incomeDescription.isBlank()) {
+            throw new InvalidIncomeDescriptionException(Messages.BLANK_DESCRIPTION_MESSAGE);
+        }
+        return incomeDescription;
+    }
+
+    private double extractIncomeAmount(Matcher matcher, String groupName) throws InvalidIncomeAmountException {
+        String userGivenAmount = matcher.group(groupName).trim();
+        return parseIncomeAmount(userGivenAmount);
     }
 
     /**
