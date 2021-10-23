@@ -13,25 +13,28 @@ import seedu.duke.constants.Constants;
 
 public class FindCommandParser {
 
+    private String flag;
+
     public Command parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList)
             throws ParseException {
-
-        String[] argumentsSubstrings = arguments.trim().split(" ", 2);
-        if (argumentsSubstrings.length < 2) {
-            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
-        }
-
-        String flag = argumentsSubstrings[0];
-        String input = argumentsSubstrings[1];
+        String searchString = identifyFlagAndSplitArgs(arguments);
 
         switch (flag) {
         case Constants.FLAG_UNIVERSITY:
-            return new FindUniCommand(input, universityMasterList);
+            return new FindUniCommand(searchString, universityMasterList);
         case Constants.FLAG_MODULE:
-            return new FindModCommand(input, moduleMasterList);
+            return new FindModCommand(searchString, moduleMasterList);
         default:
             throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_INCORRECTFLAGS, 1);
         }
     }
 
+    private String identifyFlagAndSplitArgs(String arguments) throws ParseException {
+        String[] argumentsSubstrings = arguments.trim().split(" ", 2);
+        if (argumentsSubstrings.length < 2) {
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MISSINGARGUMENTS, 1);
+        }
+        flag = argumentsSubstrings[0];
+        return argumentsSubstrings[1];
+    }
 }

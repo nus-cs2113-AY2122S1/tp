@@ -61,7 +61,7 @@ public class University {
     public ArrayList<ModuleMapping> getSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = new ArrayList<>();
         for (ModuleMapping currentMapping : list) {
-            if (selectedModuleList.searchModule(currentMapping.localModule.getModuleCode())) {
+            if (selectedModuleList.isModuleExist(currentMapping.localModule.getModuleCode())) {
                 selectedMappings.add(currentMapping);
             }
         }
