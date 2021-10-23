@@ -56,13 +56,9 @@ public class ExportNoteCommand extends Command {
 
         ArrayList<Note> notes = noteManager.getContents();
         ModuleStorage storage = ModuleStorage.getInstance();
-        if (storage.exportModuleNotes(getModuleName(), notes)) {
-            TerminusLogger.info("Exported Notes Successfully");
-            ui.printSection(Messages.SUCCESSFUL_EXPORT);
-        } else {
-            TerminusLogger.warning("Failed to export notes");
-            throw new IOException(Messages.FAIL_TO_EXPORT);
-        }
+        storage.exportModuleNotes(getModuleName(), notes);
+        TerminusLogger.info("Exported Notes Successfully");
+        ui.printSection(Messages.SUCCESSFUL_EXPORT);
         return new CommandResult(true);
     }
 }

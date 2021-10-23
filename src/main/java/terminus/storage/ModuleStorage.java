@@ -303,15 +303,14 @@ public class ModuleStorage {
      *
      * @param module The Name of the module to export
      * @param notes  The list of notes to export
-     * @return false if the parent does not exist else it will be true
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
-    public boolean exportModuleNotes(String module, ArrayList<Note> notes) throws IOException {
+    public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException {
         Document tempDocument = new Document();
         Path modDirPath = Paths.get(filePath.getParent().toString(), module + CommonFormat.PDF_FORMAT);
         if (Files.notExists(modDirPath.getParent())) {
             TerminusLogger.info("Directory does not exists: " + modDirPath.getParent());
-            return false;
+            throw new IOException("Parent directory does not exist");
         }
         try {
             PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
@@ -330,7 +329,6 @@ public class ModuleStorage {
         } catch (DocumentException e) {
             throw new IOException(Messages.FAIL_TO_EXPORT);
         }
-        return true;
     }
 
     /**

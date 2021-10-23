@@ -215,4 +215,12 @@ public class ModuleStorageTest {
         }
     }
 
+    @Test
+    void exportModuleNotes_throwException() throws IOException {
+        ContentManager<Note> noteManager = this.moduleManager.getModule(tempModule).getContentManager(Note.class);
+        this.moduleStorage.init(Paths.get(RESOURCE_FOLDER.toString(),"doesNotExist","didNotExist"));
+        assertThrows(IOException.class,
+            () -> this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents()));
+
+    }
 }
