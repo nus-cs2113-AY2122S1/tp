@@ -6,6 +6,7 @@ import seedu.duke.command.misc.IncorrectCommand;
 import seedu.duke.exception.GetJackDException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EditExerciseParser extends Parser {
     private static int workoutIndex;
@@ -26,10 +27,7 @@ public class EditExerciseParser extends Parser {
 
             // String excluding the exerciseIndex and workoutIndex
             String[] params = commandArgs.split(PARAMETER_SEPARATOR);
-            ArrayList<String> paramsWithoutIndices = new ArrayList<>();
-            for (int i = 2; i < params.length; i++) {
-                paramsWithoutIndices.add(params[i]);
-            }
+            ArrayList<String> paramsWithoutIndices = new ArrayList<>(Arrays.asList(params).subList(2, params.length));
 
             String newArgs = String.join(PARAMETER_SEPARATOR, paramsWithoutIndices);
             String[] exerciseArgs = getExerciseArgs(newArgs, true);

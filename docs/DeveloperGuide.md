@@ -97,7 +97,8 @@ Exercise commands
 * `AddExerciseCommand` : To add a new exercise to a workout.
 * `DisplayExerciseCommand` : To display all the exercises in a workout.
 * `MarkExerciseAsDoneCommand` : To mark an exercise of a user given index as completed in a workout. 
-* `RemoveExerciseCommand` : To remove an exercise of a user given index from the workout.
+* `RemoveExerciseCommand` : To remove an exercise from the workout based on user given indices.
+* `EditExerciseCommand` : To edit an exercise in a workout based on user given indices.
 
 Workout commands
 * `CreateWorkoutCommand` : To create a new workout.
@@ -180,7 +181,8 @@ Manage fitness routines quickly
 |v1.0|over-ambitious user|delete my workouts|remove really hard workouts that I thought I could do but realised I couldn't|
 |v2.0|busy user|enter into workouts|add exercises without the workout index parameter and save time|
 |v2.0|unfit user|be suggested workouts|so that I can follow them to achieve basic fitness|
-|v2.0|forgetful user| be constantly reminded of the syntax for commands|so that I can easily correct any incorrect input while using the app|
+|v2.0|forgetful user| be constantly reminded of the syntax for commands|easily correct any incorrect input while using the app|
+|v2.0|user|modify an existing exercise in a workout|constantly update my routine|
 
 ## Non-Functional Requirements
 
