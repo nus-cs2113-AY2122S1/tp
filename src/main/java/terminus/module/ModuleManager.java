@@ -25,8 +25,17 @@ public class ModuleManager {
      *
      * @param moduleName The module name of the new module
      */
-    public void setModule(String moduleName) {
+    public void addModule(String moduleName) {
         moduleMap.put(moduleName, new NusModule());
+    }
+
+    /**
+     * Adds a new module to the moduleMap.
+     *
+     * @param moduleName The module name of the new module
+     */
+    public void setModule(String moduleName, NusModule module) {
+        moduleMap.put(moduleName, module);
     }
 
     /**

@@ -69,9 +69,10 @@ public class DeleteModuleCommand extends Command {
     public CommandResult execute(Ui ui, ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException {
         String[] listOfModule = moduleManager.getAllModules();
-        if (!isValidIndex(itemNumber, listOfModule)) {
+        if (!CommonUtils.isValidIndex(itemNumber, listOfModule)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
         }
+        assert itemNumber > 0;
         moduleManager.removeModule(listOfModule[itemNumber - 1]);
 
         // Delete all files and then its folder
@@ -82,14 +83,4 @@ public class DeleteModuleCommand extends Command {
         return new CommandResult(true);
     }
 
-    /**
-     * Returns a boolean if the index give is valid.
-     *
-     * @param index The index to check
-     * @param listOfModule The full list of modules
-     * @return True if the index is valid or else it is false
-     */
-    private boolean isValidIndex(int index, String[] listOfModule) {
-        return listOfModule.length >= index && index > 0;
-    }
 }

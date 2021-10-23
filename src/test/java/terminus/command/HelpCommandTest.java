@@ -35,7 +35,7 @@ public class HelpCommandTest {
         moduleCommandParser = ModuleCommandParser.getInstance();
         ui = new Ui();
         moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @Test

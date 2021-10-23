@@ -17,7 +17,6 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import terminus.TestFilePath;
 import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.content.Note;
@@ -39,7 +38,7 @@ public class ModuleStorageTest {
         this.moduleStorage = ModuleStorage.getInstance();
         this.moduleStorage.init(SAVE_FILE);
         moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         moduleManager.getModule(tempModule).getContentManager(Note.class).add(new Note("test", "test"));
         moduleStorage.saveNotesFromModule(moduleManager, tempModule, true);
         moduleManager.getModule(tempModule).getContentManager(Link.class).add(new Link("test", "tuesday",

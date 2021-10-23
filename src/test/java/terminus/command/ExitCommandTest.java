@@ -24,7 +24,7 @@ public class ExitCommandTest {
     void setUp() {
         this.commandParser = MainCommandParser.getInstance();
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.ui = new Ui();
     }
 

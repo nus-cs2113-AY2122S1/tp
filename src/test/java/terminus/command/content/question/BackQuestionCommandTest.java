@@ -11,7 +11,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.ModuleWorkspaceCommandParser;
-import terminus.parser.NoteCommandParser;
 import terminus.parser.QuestionCommandParser;
 import terminus.ui.Ui;
 
@@ -28,7 +27,7 @@ public class BackQuestionCommandTest {
         this.commandParser = QuestionCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.ui = new Ui();
     }
 

@@ -37,7 +37,7 @@ public class GoCommandTest {
         this.moduleStorage.createModuleDirectory(tempModule);
         this.commandParser = MainCommandParser.getInstance();
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.ui = new Ui();
     }
 
