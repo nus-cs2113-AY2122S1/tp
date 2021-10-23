@@ -35,7 +35,7 @@ public class ParserTest {
         deleteCommand = new DeleteCommand("trip2");
         viewCommand = new ViewCommand("all");
         shortestCommand = new ShortestCommand("SKR", "JPN");
-        addDayCommand = new AddDayCommand("trip3");
+        addDayCommand = new AddDayCommand("trip3", 1);
 
         addItemCommand = new AddItemCommand("trip4", 0, "1-2am", "sleep at home");
         searchItemCommand = new SearchItemCommand("trip4", "sleep at home");
