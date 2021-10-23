@@ -7,8 +7,10 @@
 Thank you for choosing to use Traveller!
 
 Traveller is a travel planner app that is designed to help holidaymakers like you plan your overseas trips with ease.
+
 It is created for individuals who prefer to use a Command Line Interface (CLI) over a Graphical User Interface (GUI), 
 while still retaining the ease of use of a GUI.
+
 Use Traveller so that you can plan your trips with ease and focus on what matters most: Fun!
 
 ### What is a Command Line Interface (CLI)?
@@ -51,7 +53,7 @@ each functionality are explained in the [features](#2-features) section.
   * [2.10. edit-item](#210-edit-an-item-edit-item)
   * [2.11. search-item](#211-searching-for-an-item-search-item)
   * [2.12. shortest](#212-shortest-shortest)
-  * [2.13. exit](#214-exiting-the-program-exit)
+  * [2.13. exit](#213-exiting-the-program-exit)
 * [3. FAQ](#3-faq)
 * [4. Command Summary](#4-command-summary)
 
@@ -80,6 +82,7 @@ This section provides a guide on how to get Traveller up and running on your com
 
 ## 2. Features
 This section provides details for all commands that Traveller supports.
+
 For a quick summary of all commands, please click [here](#4-command-summary) instead.
 
 > ![](documentationPics/info.png) As Traveller is a CLI based app, what and how you type your commands is *very important*.
@@ -281,7 +284,7 @@ ____________________________________________________________
 ```
 
 ### 2.12. Shortest: `shortest`
-Returns the shortest distance from thr source to destination country.
+Returns the shortest distance from the source to destination country.
 
 #### Format: `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 
@@ -300,7 +303,8 @@ Exits the program.
 
 #### Format: `exit`
 
-> ![](documentationPics/warning.png) Properly exiting Traveller with the `exit` command is **CRUCIAL** in ensuring that your trips are saved
+> ![](documentationPics/warning.png) Properly exiting Traveller with the `exit` command is **CRUCIAL** in 
+> ensuring that your trips are saved.
 
 <br/>
 
@@ -315,7 +319,8 @@ Exits the program.
 
 **Q**: Why does it keep saying "Either of these nodes doesn't exist!"?
 
-**A**: Traveller can only read specific words as destinations. Please check in `flightData/flights.txt` for all supported destinations and their specific wordings.
+**A**: Traveller can only read specific words as destinations. 
+Please check in `flightData/flights.txt` for all supported destinations and their specific wordings.
 
 <br/>
 
@@ -334,8 +339,8 @@ Action | Format
 **delete-day** | `delete-day TRIP_NAME /day DAY_INDEX`
 **delete-item** | `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
 **edit** | `edit TRIP_NAME /from START /to END`
-**edit-item** | `{to be added}`
-**search-item** |  `{to be added}`
-**shortest** | `{to be added}`
+**edit-item** | `edit-item ITEM_INDEX TRIP_NAME /day DAY_NUMBER /time NEW_ITEM_TIME /name NEW_ITEM_NAME`
+**search-item** |  `search-item TRIP_NAME /name ITEM_NAME`
+**shortest** | `shortest /from SOURCE_COUNTRY /to DESTINATION_COUNTRY`
 **exit** | `exit`
 
