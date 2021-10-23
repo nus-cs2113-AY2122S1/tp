@@ -162,7 +162,7 @@ public class AddUI {
                         String choice = TextUi.printAskConfirmation(selectedLesson);
                         if (choice.equals("y") || choice.equals("yes")) {
                             flag = ZERO;
-                        } else if (choice.equals("n") || choice.equals("no")){
+                        } else if (choice.equals("n") || choice.equals("no")) {
                             System.out.println("Alright bitch do it properly this time");
                         } else {
                             System.out.println("Invalid Command, Try Again Dumb Ass");
