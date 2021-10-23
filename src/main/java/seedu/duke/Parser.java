@@ -34,6 +34,8 @@ public class Parser {
             Ui.printNoTripError();
             return true;
         } else if (inputCommand.equals("close")) {
+            Storage.setOpenTripAsLastTrip();
+            Storage.setLastExpense(null);
             Storage.closeTrip();
             return true;
         }
@@ -164,6 +166,7 @@ public class Parser {
 
     private static void executeView(String inputParams) {
         Trip openTrip = Storage.getOpenTrip();
+        Storage.setOpenTripAsLastTrip();
         if (inputParams == null) {
             openTrip.viewAllExpenses();
         } else {
@@ -208,6 +211,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             Ui.printUnknownExpenseIndexError();
         }
+        Storage.setLastExpense(null);
     }
 
     private static void correctBalances(Expense expense) {
@@ -232,6 +236,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             Ui.printUnknownTripIndexError();
         }
+        Storage.setLastTrip(null);
 
     }
 
@@ -269,6 +274,7 @@ public class Parser {
         } else {
             updateIndividualSpending(newExpense);
         }
+        Storage.setLastExpense(newExpense);
         Ui.printExpenseAddedSuccess();
     }
 
