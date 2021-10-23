@@ -112,6 +112,8 @@ Examples:
 * `list_assessments c/CS2113T`
 * `list_assessments c/CS2101`
 
+<br>
+
 ### Adding an assessment to a module: `add_assessment`
 Adds an assessment to a module.
 
@@ -130,7 +132,7 @@ Examples:
 ### Editing an assessment in a module: `edit_assessment`
 Edits an assessment of a module.
 
-Format: `add_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
+Format: `edit_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]`
 * At least one of the optional fields must be provided.
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
 * `ASSESSMENT_NAME` refers to the name of the assessment (e.g. Midterm, Assignment 1, etc.).
@@ -288,7 +290,7 @@ delete_assessment | `delete_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME>` <br 
 delete_mark | `delete_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>` <br /> e.g. `delete_mark c/CS2113T s/1 a/Midterms`
 edit_mark | `edit_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>` <br /> e.g. `edit_mark c/CS2113T s/1 a/Midterms m/80.6`
 edit_student | `edit_student c/<MODULE_CODE> s/<STUDENT_INDEX> i/<NEW_ID> n/<NEW_NAME>` <br /> e.g. `edit_student c/CS2113T s/1 i/12345 n/jon geh`
-edit_assessment | `add_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]` <br /> e.g. `edit_assessment c/CS2101 n/OP1 m/20 w/10`
+edit_assessment | `edit_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME> [nn/<NEW_ASSESSMENT_NAME>] [m/<NEW_MAXIMUM_MARKS>]` <br /> e.g. `edit_assessment c/CS2101 n/OP1 m/20 w/10`
 list_modules | `list_modules`
 list_students | `list_students c/<MODULE_CODE>` <br /> e.g. `list_students c/CS2113T`
 list_attendance | `list_attendance c/<MODULE_CODE> s/<STUDENT_INDEX>` <br /> e.g. `list_attendance c/CS2113T s/1`
