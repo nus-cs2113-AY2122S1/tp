@@ -178,15 +178,45 @@ Deletes an existing trip from the trip list.
 #### Format: `delete TRIP_NAME`
 
 #### Usage Example:
-   * `delete FamilyTrip2021` deletes an existing trip called `FamilyTrip2021`.
+```
+____________________________________________________________
+$ delete myTrip
+____________________________________________________________
+	You have just deleted a trip called myTrip.
+____________________________________________________________
+```
 
 <br/>
 
 ### 2.7. Deleting a day from a trip: `delete-day`
+Deletes an existing day from a trip.
+
+#### Format: `delete-day TRIP_NAME /day DAY_INDEX`
+
+#### Usage Example:
+```
+____________________________________________________________
+$ delete-day myTrip /day 0
+____________________________________________________________
+	You have just deleted day 0 of myTrip.
+____________________________________________________________
+```
 
 <br/>
 
 ### 2.8. Deleting an item from a day: `delete-item`
+Deletes an existing item from a trip.
+
+#### Format: `delete-day TRIP_NAME /day DAT_INDEX /item ITEM_INDEX`
+
+#### Usage Example:
+```
+____________________________________________________________
+$ delete-day myTrip /day 0 /item 0
+____________________________________________________________
+	You have just deleted item 0 of myTrip day 0.
+____________________________________________________________
+```
 
 <br/>
 
