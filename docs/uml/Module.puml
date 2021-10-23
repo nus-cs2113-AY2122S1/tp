@@ -15,51 +15,25 @@
 'AbstractCollection <|- AbstractList
 'AbstractList <|-- ArrayList
 
-Content <|-- Note
-Content <|-- Link
-ContentManager  --> "0..*" Content
-ContentManager ..>  Note
-ContentManager ..>  Link
 
-NusModule -> ContentManager: noteManager
-NusModule -> ContentManager: linkManager
+NusModule -> "1" ContentManager: noteManager
+NusModule -> "1" ContentManager: linkManager
+NusModule -> "1" ContentManager: questionManager
 
 ModuleManager  --> "0..*" NusModule :  has >
-
-
+!startsub MODULEMANAGER
 class ModuleManager {
   + getAllModules(): String []
   + getModule(moduleName: String): NusModule
   + removeModule(moduleName: String): void
   + setModule(moduleName: String): void
 }
+!endsub
 
 class NusModule {
   + getContentManager (type: Class<T>): ContentManager<T>
 }
 
-class ContentManager <T extends Content> {
-  + add(content: T): void
-  + deleteContent(contentNumber: int): String
-  + getContentData(contentNumber: int): String
-  + getContents(contents: ArrayList<T> ): String
-  + getTotalContents() : int
-  + listAllContents(): String
-  + setContent(contents: ArrayList<T> ): void
-}
-
-abstract class Content {
-  # name: String
-  # data: String
-}
-
-class Link {
-  - day: String
-  - startTime: LocalTime
-  - link: String
-}
-
-class Note {
-}
+ !includesub Content.puml!CONTENTMANAGER
 
 @enduml

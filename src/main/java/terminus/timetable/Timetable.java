@@ -7,7 +7,6 @@ import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.ui.Ui;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
