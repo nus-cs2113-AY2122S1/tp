@@ -329,8 +329,6 @@ and the input will be passed back to the `CommandParser`.
 This workspace feature aims to provide users with a better experience in navigating the different
 features TermiNUS has to offer, and caters for both users which enjoy using a particular feature or
 prefer typing commands in a single step.
-- [ ] Alternative implementation, interface which allows command and command parser inherit from
-- [ ] Alternative implementation, create a individual class for each command no common parent
 
 #### 4.3.1 Current Implementation
 The workspace feature was implemented with the idea of a single command input as well as a multiple 
