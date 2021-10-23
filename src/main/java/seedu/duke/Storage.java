@@ -46,7 +46,7 @@ public class Storage {
             put("KRW", new String[] {"₩", "%.0f"});
             put("IDR", new String[] {"Rp", "%.0f"});
             put("INR", new String[] {"Rs", "%.0f"});
-    }};
+        }};
 
     public static HashMap<String, String[]> getAvailableCurrency() {
         return availableCurrency;
