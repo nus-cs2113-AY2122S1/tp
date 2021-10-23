@@ -1,14 +1,10 @@
 package seedu.duke.ui;
 
 import seedu.duke.data.AllRecordList;
-import seedu.duke.data.RecordList;
-import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
-import seedu.duke.data.records.Record;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Scanner;
 
 public class TextUi {
@@ -51,13 +47,38 @@ public class TextUi {
                 + DIVIDER);
     }
 
-    public static void showExpenditureAddedMessage(Expenditure addedExpenditure, boolean isLoadingStorage) {
+    public static void showExpenditureAddedMessage(Expenditure addedExpenditure, boolean isLoadingStorage,
+                                                   AllRecordList recordList) {
         if (!isLoadingStorage) {
             System.out.println("Expenditure successfully added!"
                     + LS
                     + "Description: " + addedExpenditure.getDescription()
                     + "\nAmount: $" + addedExpenditure.getAmount()
                     + "\nDate: " + addedExpenditure.getDate());
+
+            int month = addedExpenditure.getMonth();
+            double amount = recordList.getBudget(month).getAmount();
+            double totalSpending = 0.0;
+
+            for (int i = 0; i < recordList.getExpenditureListSize(month); i += 1) {
+                totalSpending += recordList.getExpenditure(i, month).getAmount();
+            }
+
+            System.out.println("Total Spent: $" + totalSpending);
+
+            double amountLeft =  amount - totalSpending;
+
+            double percentageLeft;
+            if (amountLeft > 0) {
+                percentageLeft = (amountLeft / amount) * 100;
+                System.out.print("Percentage of Budget Left: ");
+            } else {
+                percentageLeft = (totalSpending / amount) * 100;
+                System.out.print("You overspend your Budget by: ");
+            }
+
+            System.out.printf("%.2f", percentageLeft);
+            System.out.println("%");
             System.out.println(DIVIDER);
         }
     }
@@ -137,7 +158,6 @@ public class TextUi {
         } else {
             printRecordList(records, month);
         }
-
     }
 
     private static void printRecordList(AllRecordList records, int i) {

@@ -20,6 +20,10 @@ public class Expenditure extends Record {
         return date.toString();
     }
 
+    public int getMonth() {
+        return date.getMonthValue();
+    }
+
     public String toString() {
         return String.format("%-20.20s  %-20.20s %-20.20s",
                 this.description, " | $" + this.amount, " | " + this.date.toString());

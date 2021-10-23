@@ -1,6 +1,5 @@
 package seedu.duke.data;
 
-
 import seedu.duke.data.records.Budget;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
