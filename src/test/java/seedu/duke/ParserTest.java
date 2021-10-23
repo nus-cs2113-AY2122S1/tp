@@ -17,6 +17,7 @@ import seedu.entry.Expense;
 import seedu.entry.ExpenseCategory;
 import seedu.entry.Income;
 import seedu.entry.IncomeCategory;
+import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeAmountException;
@@ -183,7 +184,7 @@ public class ParserTest {
     }
 
     @Test
-    public void convertDataToExpense_validExpenseData_outputExpense() throws InvalidExpenseAmountException,
+    public void convertDataToExpense_validExpenseData_outputExpense() throws InputException,
             InvalidExpenseDataFormatException {
         Parser testParser = new Parser();
         Expense testExpense = testParser.convertDataToExpense("E,sfa,12,food,11/11/2121");
@@ -194,7 +195,7 @@ public class ParserTest {
     @Test
     public void convertDataToExpense_invalidExpenseDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
-        assertThrows(InvalidExpenseDataFormatException.class, () -> testParser.convertDataToExpense("E, ,));
+        assertThrows(InvalidExpenseDataFormatException.class, () -> testParser.convertDataToExpense("E, ,"));
     }
 
     @Test
@@ -205,7 +206,7 @@ public class ParserTest {
     }
 
     @Test
-    public void convertDataToIncome_validIncomeData_outputIncome() throws InvalidIncomeAmountException,
+    public void convertDataToIncome_validIncomeData_outputIncome() throws InputException, 
             InvalidIncomeDataFormatException, DateTimeException {
         Parser testParser = new Parser();
         Income testIncome = testParser.convertDataToIncome("I" + DATA_SEPARATOR + "pay" + DATA_SEPARATOR 
@@ -217,7 +218,7 @@ public class ParserTest {
     @Test
     public void convertDataToIncome_invalidIncomeDataWithBlankDescription_throwsException() {
         Parser testParser = new Parser();
-        assertThrows(InvalidIncomeDataFormatException.class, 
+        assertThrows(InputException.class, 
             () -> testParser.convertDataToIncome("I, , 12, q, 2121-11-11"));
     }
 

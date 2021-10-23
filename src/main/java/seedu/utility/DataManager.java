@@ -2,6 +2,7 @@ package seedu.utility;
 
 import seedu.entry.Expense;
 import seedu.entry.Income;
+import seedu.exceptions.InputException;
 import seedu.exceptions.InvalidExpenseAmountException;
 import seedu.exceptions.InvalidExpenseDataFormatException;
 import seedu.exceptions.InvalidIncomeAmountException;
@@ -13,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -88,11 +90,11 @@ public class DataManager {
             try {
                 Expense expense = parser.convertDataToExpense(data);
                 financialTracker.addExpense(expense);
-            } catch (InvalidExpenseAmountException | InvalidExpenseDataFormatException | DateTimeException ee) {
+            } catch (InputException | InvalidExpenseDataFormatException | DateTimeParseException e) {
                 try {
                     Income income = parser.convertDataToIncome(data);
                     financialTracker.addIncome(income);
-                } catch (InvalidIncomeAmountException | InvalidIncomeDataFormatException | DateTimeException ie) {
+                } catch (InputException | InvalidIncomeDataFormatException | DateTimeParseException ie) {
                     hasCorruptedLines = true;
                 }
             }
