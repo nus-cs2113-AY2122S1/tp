@@ -15,15 +15,18 @@ import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.logging.Level;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class Storage {
 
     private static final String FILE_PATH = "trips.json";
-
-    public static ArrayList<Trip> listOfTrips = new ArrayList<>();
+    private static ArrayList<Trip> listOfTrips = new ArrayList<>();
     private static Trip openTrip = null;
+    private static Trip lastTrip = null;
+    private static Expense lastExpense = null;
+
     private static Scanner scanner;
     private static Logger logger;
 
@@ -68,8 +71,30 @@ public class Storage {
             listOfTrips = new Gson().fromJson(jsonString, tripType);
         } catch (JsonParseException e) {
             Ui.printJsonParseError();
+            askOverwriteOrClose();
         } catch (FileNotFoundException e) {
             Ui.printFileNotFoundError();
+        }
+    }
+
+    private static void askOverwriteOrClose() {
+        while (true) {
+            Ui.printJsonParseUserInputPrompt();
+            String input = scanner.nextLine().strip();
+            if (input.contains("n")) {
+                Storage.getLogger().log(Level.WARNING, "JSON Parse failed, user requests program end");
+                System.exit(1);
+                return;
+            } else if (input.contains("y")) {
+                try {
+                    FileWriter fileWriter = new FileWriter(FILE_PATH);
+                    fileWriter.close();
+                } catch (IOException e) {
+                    Ui.printCreateFileFailure();
+                    System.exit(1);
+                }
+                return;
+            }
         }
     }
 
@@ -104,6 +129,10 @@ public class Storage {
         }
     }
 
+    public static void setOpenTripAsLastTrip() {
+        lastTrip = openTrip;
+    }
+
     /**
      * Checks if there is an open trip or not.
      *
@@ -127,6 +156,26 @@ public class Storage {
 
     public static void setLogger(Logger logger) {
         Storage.logger = logger;
+    }
+
+    public static ArrayList<Trip> getListOfTrips() {
+        return listOfTrips;
+    }
+
+    public static Trip getLastTrip() {
+        return lastTrip;
+    }
+
+    public static void setLastTrip(Trip lastTrip) {
+        Storage.lastTrip = lastTrip;
+    }
+
+    public static Expense getLastExpense() {
+        return lastExpense;
+    }
+
+    public static void setLastExpense(Expense lastExpense) {
+        Storage.lastExpense = lastExpense;
     }
 
 

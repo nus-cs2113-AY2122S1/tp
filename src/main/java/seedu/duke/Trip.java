@@ -41,23 +41,21 @@ public class Trip {
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
-    public static void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
-        Trip currentTrip = Storage.getOpenTrip();
-        ArrayList<Expense> listOfCurrentExpenses = currentTrip.getListOfExpenses();
-        if (listOfCurrentExpenses.isEmpty()) {
+    public void getFilteredExpenses(String expenseCategory, String expenseAttribute) {
+        if (listOfExpenses.isEmpty()) {
             Ui.printNoExpensesError();
             return;
         }
         try {
             switch (expenseCategory) {
             case "category":
-                findMatchingCategoryExpenses(listOfCurrentExpenses, expenseAttribute);
+                findMatchingCategoryExpenses(listOfExpenses, expenseAttribute);
                 break;
             case "description":
-                findMatchingDescriptionExpenses(listOfCurrentExpenses, expenseAttribute);
+                findMatchingDescriptionExpenses(listOfExpenses, expenseAttribute);
                 break;
             case "payer":
-                findMatchingPayerExpenses(listOfCurrentExpenses, expenseAttribute);
+                findMatchingPayerExpenses(listOfExpenses, expenseAttribute);
                 break;
             default:
                 Ui.printInvalidFilterError();
