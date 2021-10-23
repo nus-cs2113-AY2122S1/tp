@@ -1,10 +1,12 @@
 package medbot;
 
+import medbot.exceptions.MedBotException;
+import medbot.list.PatientList;
 import medbot.person.Patient;
 import medbot.utilities.Pair;
 
-import static medbot.Parser.updatePersonalInformation;
-import static medbot.Ui.VERTICAL_LINE_SPACED_ESCAPED;
+import static medbot.parser.ParserUtils.updatePersonalInformation;
+import static medbot.ui.Ui.VERTICAL_LINE_SPACED_ESCAPED;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -73,8 +75,8 @@ public class Storage {
                 String storageLine = s.nextLine();
                 Pair<Integer, ArrayList<String>> patientDetails = parseStorageLine(storageLine);
                 patient = createPatient(patientDetails);
-                patientList.addPatientFromStorage(patient);
-                lastId = patient.getPatientId();
+                patientList.addPersonFromStorage(patient);
+                lastId = patient.getPersonId();
 
             } catch (Exception e) {
                 loadStorageErrorMessage += loadStorageLineErrorMessage(lineNumber);
@@ -139,7 +141,7 @@ public class Storage {
         int patientId = patientDetails.first;
         ArrayList<String> prefixPlusPersonParameters = patientDetails.second;
 
-        patient.setPatientId(patientId);
+        patient.setPersonId(patientId);
 
         for (String prefixPlusPersonParameter : prefixPlusPersonParameters) {
             //updatePersonalInformation does error-checking of patient details

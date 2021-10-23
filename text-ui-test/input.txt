@@ -1,10 +1,1 @@
-list
-help
-help add
-add n/John Doe p/8123 4321 a/123 Dover Road
-delete 2
-edit 1 n/Jane Smith e/jane@gmail.com
-view 1
-delete 1
-list
 exit

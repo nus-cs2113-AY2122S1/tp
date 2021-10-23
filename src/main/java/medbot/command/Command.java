@@ -1,8 +1,8 @@
 package medbot.command;
 
-import medbot.MedBotException;
-import medbot.PatientList;
-import medbot.Ui;
+import medbot.Scheduler;
+import medbot.exceptions.MedBotException;
+import medbot.ui.Ui;
 
 public abstract class Command {
     /**
@@ -17,7 +17,7 @@ public abstract class Command {
     /**
      * Abstract method that executes the command.
      *
-     * @param patientList the patientList that will be modified
+     * @param scheduler the scheduler that will be read or modified
      */
-    public abstract void execute(PatientList patientList, Ui ui) throws MedBotException;
+    public abstract void execute(Scheduler scheduler, Ui ui) throws MedBotException;
 }

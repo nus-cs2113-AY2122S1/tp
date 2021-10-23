@@ -1,7 +1,9 @@
 package medbot;
 
-import static medbot.Parser.updatePersonalInformation;
+import static medbot.parser.ParserUtils.updatePersonalInformation;
 
+import medbot.exceptions.MedBotException;
+import medbot.list.PatientList;
 import medbot.person.Patient;
 
 import java.io.File;
@@ -118,8 +120,8 @@ class StorageTest {
         Patient[] patients = {patient1, patient2, patient3, patient4, patient5, patient6, patient7};
 
         for (Patient p : patients) {
-            testPatientList.setLastId(p.getPatientId());
-            testPatientList.addPatient(p);
+            testPatientList.setLastId(p.getPersonId());
+            testPatientList.addPerson(p);
         }
 
         return testPatientList;
@@ -143,7 +145,7 @@ class StorageTest {
             throws MedBotException {
 
         Patient patient = new Patient();
-        patient.setPatientId(id);
+        patient.setPersonId(id);
         String[] parameterPrefixes = {"i/", "n/", "p/", "e/", "a/"};
         String[] parameters = {icNumber, name, phoneNumber, emailAddress, residentialAddress};
         ArrayList<String> prefixPlusPersonParameters = new ArrayList<>();
