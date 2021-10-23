@@ -6,16 +6,11 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientStorage;
-=======
->>>>>>> b117e364596b11cbe2bea7c1b98cc0de70459ebf
 import expiryeliminator.data.Recipe;
 import expiryeliminator.data.RecipeList;
-import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.IngredientQuantity;
-import expiryeliminator.data.IngredientStorage;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
 import expiryeliminator.data.exception.NotFoundException;
