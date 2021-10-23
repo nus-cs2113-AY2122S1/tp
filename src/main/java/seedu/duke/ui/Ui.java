@@ -13,12 +13,14 @@ public class Ui {
     private static final String INDENT = "\t\t\t";
     private static final String DIVIDER = "________________________________________________________";
 
-    private final boolean withIndent;
     private final String prefix;
     private final String newLine;
 
+    /**
+     * Constructor that is used to update the formatting of the result shown to the user depending on the workout mode.
+     */
     public Ui() {
-        withIndent = Command.workoutMode != 0;
+        boolean withIndent = Command.workoutMode != 0;
         if (withIndent) {
             prefix = INDENT;
             newLine = System.lineSeparator() + INDENT;
@@ -44,10 +46,17 @@ public class Ui {
         System.out.println(DIVIDER);
     }
 
+    /**
+     * Prints a message with the required indent.
+     * @param message String to be printed to the user.
+     */
     private void printText(String message) {
         System.out.println(prefix + message.replace("\n", newLine));
     }
 
+    /**
+     * Prints a horizontal line with the required indent.
+     */
     private void printLineSeparator() {
         printText(DIVIDER);
     }
@@ -65,11 +74,12 @@ public class Ui {
         printText(errorMessage);
         printLineSeparator();
 
-        if (withIndent) {
-            System.out.print(INDENT);
-        }
     }
 
+    /**
+     * Prints an indexed list with the required indent.
+     * @param itemList list to be printed.
+     */
     private void printList(ArrayList<?> itemList) {
         for (int i = 0; i < itemList.size(); i++) {
             if (itemList.get(i) != null) {
@@ -78,6 +88,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Prints a map as multiple indexed lists with their accompanying message for each list.
+     * @param map map containing multiple list, each with its own message.
+     */
     private void printMap(Map<String, ArrayList<?>> map) {
         for (Map.Entry<String, ArrayList<?>> m : map.entrySet()) {
             printText(m.getKey());
@@ -85,14 +99,19 @@ public class Ui {
         }
     }
 
-    public AsciiTable getExerciseTable(Map.Entry<String, ArrayList<?>> m) {
+    /**
+     * Gets the exercise table.
+     * @param map contains multiple exercise lists.
+     * @return exercise table.
+     */
+    public AsciiTable getExerciseTable(Map.Entry<String, ArrayList<?>> map) {
         AsciiTable at = new AsciiTable();
         at.addRule();
         String[] columnNames = {"Index", "Exercise name", "Sets", "Reps"};
         at.addRow((Object[]) columnNames);
         at.addRule();
 
-        ArrayList<?> list = m.getValue();
+        ArrayList<?> list = map.getValue();
         for (int i = 0; i < list.size(); i++) {
             Object e = list.get(i);
             if (e instanceof Exercise) {
@@ -107,6 +126,10 @@ public class Ui {
         return at;
     }
 
+    /**
+     * Prints the exercise table.
+     * @param map contains multiple exercise lists.
+     */
     public void printExerciseTable(Map<String, ArrayList<?>> map) {
         assert map != null;
         assert !map.isEmpty();
@@ -119,6 +142,10 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows result to user.
+     * @param result result to be shown to user.
+     */
     public void showResultToUser(CommandResult result) {
         printLineSeparator();
 
