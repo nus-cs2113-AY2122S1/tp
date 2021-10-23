@@ -49,10 +49,7 @@ public class Storage {
     }
 
     private boolean hasEmptyExistingPersonalContactFile() {
-        if (personalContactFile.exists() && personalContactFile.length() == 0) {
-            return true;
-        }
-        return false;
+        return personalContactFile.exists() && personalContactFile.length() == 0;
     }
 
     private boolean hasExistingContactFile() throws FileErrorException {

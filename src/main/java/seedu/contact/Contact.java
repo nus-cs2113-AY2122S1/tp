@@ -1,7 +1,5 @@
 package seedu.contact;
 
-import seedu.exception.InvalidFlagException;
-
 public class Contact {
     public static final int NAME_INDEX = 0;
     public static final int GITHUB_INDEX = 1;
@@ -55,7 +53,6 @@ public class Contact {
             }
         }
     }
-
 
     public String getName() {
         return name;

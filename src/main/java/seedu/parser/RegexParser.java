@@ -58,7 +58,7 @@ public abstract class RegexParser {
         //allow lowercase email ids
         String emailRegex = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$";
         if (!detailToParse.matches(emailRegex)) {
-            LOGGER.log(Level.INFO, "Regex check for Email id failed");
+            //LOGGER.log(Level.INFO, "Regex check for Email id failed");
             throw new InvalidEmailException();
         }
     }
@@ -67,7 +67,7 @@ public abstract class RegexParser {
         //allows lowercase, numbers, underscore and hyphen. Length must be 3-100 characters
         String linkedinRegex = "^[a-z0-9-_]{3,100}$";
         if (!detailToParse.matches(linkedinRegex)) {
-            LOGGER.log(Level.INFO, "Regex check for Linkedin failed");
+            LOGGER.log(Level.FINE, "Regex check for Linkedin failed");
             throw new InvalidLinkedinUsernameException();
         }
     }
@@ -76,7 +76,7 @@ public abstract class RegexParser {
         //allows lowercase, numbers and underscore. Length must be max 15 characters
         String twitterRegex = "^[a-z0-9_]{1,15}$";
         if (!detailToParse.matches(twitterRegex)) {
-            LOGGER.log(Level.INFO, "Regex check for Name failed");
+            LOGGER.log(Level.FINE, "Regex check for Name failed");
             throw new InvalidTwitterUsernameException();
         }
     }
@@ -85,7 +85,7 @@ public abstract class RegexParser {
         //allows uppercase, lowercase, numbers and underscore. Length must be atleast 5 characters
         String telegramRegex = "^[a-zA-Z0-9_]{5,}$";
         if (!detailToParse.matches(telegramRegex)) {
-            LOGGER.log(Level.INFO, "Regex check for Telegram username failed");
+            LOGGER.log(Level.FINE, "Regex check for Telegram username failed");
             throw new InvalidTelegramUsernameException();
         }
     }
@@ -97,7 +97,7 @@ public abstract class RegexParser {
         //Maximum is 39 characters.
         String githubUsernameRegex = "^[a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,39}$";
         if (!detailToParse.matches(githubUsernameRegex)) {
-            LOGGER.log(Level.INFO, "Regex check for Github username failed");
+            LOGGER.log(Level.FINE, "Regex check for Github username failed");
             throw new InvalidGithubUsernameException();
         }
     }
@@ -106,7 +106,7 @@ public abstract class RegexParser {
         //only letters and spaces allowed
         String nameRegex = "^[ A-Za-z]+$";
         if (!detailToParse.matches(nameRegex)) {
-            LOGGER.log(Level.INFO, "Regex check for name failed");
+            LOGGER.log(Level.FINE, "Regex check for name failed");
             throw new InvalidNameException();
         }
     }

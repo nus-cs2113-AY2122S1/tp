@@ -31,7 +31,7 @@ public class EditContactParser extends ContactParser {
         String[] destructuredInputs = (BUFFER + inputDetails[USER_INFO_INDEX]).split(DETAIL_SEPARATOR);
         //handles illegal input "edit 0 -" and "edit 0 [invalid string]"
         //valid input will take the form of [, -flag input] so min length should be 2
-        if (destructuredInputs.length < 2) {
+        if (destructuredInputs.length < NUMBER_OF_EDIT_ARGS - 1) {
             throw new MissingArgException();
         }
 

@@ -197,8 +197,10 @@ public class MainParser {
     //@@author ng-andre
     private Command parseSearchCommand(String userInput) {
         try {
-            String query = searchContactParser.parseSearchQuery(userInput);
-            int detailFlag = searchContactParser.getDetailFlag(userInput);
+            //string contains at least "search"
+            String searchInput = searchContactParser.getSearchInput(userInput);
+            int detailFlag = searchContactParser.getDetailFlag(searchInput);
+            String query = searchContactParser.parseSearchQuery(searchInput);
             return new SearchContactCommand(query, detailFlag);
         } catch (MissingArgException e) {
             return new FailedCommand(FailedCommandType.MISSING_ARG);
