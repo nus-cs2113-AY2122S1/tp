@@ -19,6 +19,7 @@ import terminus.ui.Ui;
 import static terminus.common.CommonUtils.isValidDuration;
 import static terminus.common.CommonUtils.isValidDay;
 import static terminus.common.CommonUtils.isValidUrl;
+import static terminus.common.CommonUtils.hasDurationOverflow;
 
 /**
  * AddLinkCommand class which will manage the adding of new Links from user command.
@@ -77,7 +78,14 @@ public class AddLinkCommand extends Command {
             TerminusLogger.warning(String.format("Invalid Link: %s", this.link));
             throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
         }
-        isValidDuration(startTime, duration);
+        if (!isValidDuration(this.duration)) {
+            TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_DURATION, this.link));
+        }
+        if (hasDurationOverflow(startTime, this.duration)) {
+            TerminusLogger.warning(String.format("Invalid Duration: %d", this.duration));
+            throw new InvalidArgumentException(Messages.ERROR_MESSAGE_SCHEDULE_OVERFLOW);
+        }
         TerminusLogger.info(String.format("Parsed arguments (description = %s, day = %s, startTime = %s, link = %s)"
                 + " to Add Link Command", description, day, startTime, link));
     }

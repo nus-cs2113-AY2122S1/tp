@@ -107,7 +107,7 @@ The below table represents what each means.
 |`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
 |`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hournotation**. For example, `14:20` is valid which represents `2:20 pm`.|
 |`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
-|`duration`|The `duration` must be a **positive** number and upon addition with `start_time`, its hour value must not exceed 24. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
+|`duration`|The `duration` must be a **positive** number and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
 
 Terminologies used throughout this guide:
 
