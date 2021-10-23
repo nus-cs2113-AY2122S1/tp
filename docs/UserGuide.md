@@ -7,8 +7,8 @@
 It’s August 5th, and the Academic Year is right around the corner!
 ModReg is about to start, and you have no idea what modules to take and what your timetable might even look like.
 
-Introducing **UNI Mods**, an easy to use application that provides information on all available NUS modules and lets you
-pick and choose the modules and classes you want to take for that semester!
+Introducing **UNI Mods**, an easy to use application for NUS students that provides information on all available NUS 
+modules and lets you pick and choose the modules and classes you want to take for that semester!
 Depending on the classes you decide to take, a timetable will be generated to keep track of your daily schedule and your
 total workload:
 
@@ -22,17 +22,15 @@ total workload:
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-    * [Viewing help](#viewing-help--help)
-    * [Listing tasks](#listing-tasks-list)
-    * [Querying tasks](#querying-tasks-find-regex-type-tasktype-limit-querylimit)
-    * [Adding a Todo](#adding-a-todo-todo-description)
-    * [Adding a Deadline](#adding-a-deadline-deadline-description-by-datetime)
-    * [Adding an Event](#adding-an-event-event-description-at-datetime)
-    * [List valid DateTime Formats](#list-valid-datetime-formats-dates)
-    * [Removing a task](#removing-a-task-delete-idx)
-    * [Marking a task as done](#marking-a-task-as-done-done-idx)
-    * [Exit](#exit-the-application--bye)
-    * [Local Save](#local-save)
+    * [Viewing help](#viewing-help-help)
+    * [Show Module Info](#display-module-info-show-module_code)
+    * [Search Module](#search-module-search-keyword--l)
+    * [Update Local Database](#update-local-database-update)
+    * [Add to Timetable](#add-to-timetable-add-module_code)
+    * [Delete from Timetable](#delete-from-timetable-delete-module_code)
+    * [Clear Timetable](#clear-timetable-clear)
+    * [View Timetable](#view-timetable-timetable)
+    * [Exit](#exit-exit)
 - [FAQ](#faq)
 - [Command Summary]()
 
@@ -43,7 +41,9 @@ total workload:
 # Quick Start
 
 1. Ensure you have **Java 11** or above installed in your Computer.
-2. Download the latest **unimods.jar** from here.
+2. Download the latest **unimods.jar** from here. If it does not work, open your CLI of choice and run 
+`java -jar unimods.jar`.
+
 3. Copy the file to the folder you want to use as the home folder for your Unimods.
 4. Double-click the file to start the app.
 5. Type the command in the command box and press Enter to execute it.
@@ -72,9 +72,6 @@ total workload:
 > - Items in square brackets are optional <br />
     > e.g. find `search <KEYWORD> [-l]`
     > can be called as `search GEH` OR `search GEH -l`.
-    <br /><br />
-> - Parameters can be in any order for optional flags <br />
-    > e.g. `search <KEYWORD> [-l]` is equivalent to `search [-l] <KEYWORD> `
     <br /><br />
 > - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `bye`) will be ignored.<br />
     > e.g. `help abc` will be interpreted as  `help`
@@ -124,6 +121,8 @@ If you want to find out more about a module, type `show <module_code>` to displa
 
 For example, try typing `show CS2113T` and see the magic happen!
 
+:information_source: Both command and module code is case-insensitive.
+
 ```shell
 ~$ show CS2113T
 Title: Software Engineering & Object-Oriented Programming
@@ -169,7 +168,37 @@ GEH1011 Film and History 4MC
 
 You can also apply the following flags to refine the search:
 
-- -l (small L) : performs a local search using locally saved module data which might not be the most updated version
+- **-l (small L) :** search for mods matching the level specified e.g `-l 3000`
+- **-mc :** search for mods matching the number of MCs specified e.g `-mc 4`
+- **-s :** search for mods offered in the semester e.g. `-s 2`
+(:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.)
+- **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`
+- **-f :** search for mods from a faculty e.g `-f Computing`
+- **-d :** search for mods from a department `-d Computer Science`
+- **-q :** performs a local search using locally saved module data which might not be the most updated version, 
+but is very quick e.g. `-q`
+
+:information_source: Command, search term and flag regex are case insensitive.
+
+:warning: Flags are not case insensitive. Inputting an invalid flag will cause the invalid flag and its regex to be ignored.
+
+:warning: Broad queries may take up to ten minutes to execute, as UNI Mods will have to fetch information for every 
+single mod from NUSMods. You may wish to avoid broad queries, and if absolutely required, it is recommended to perform 
+them with the -q flag, which will execute in a matter of seconds.
+
+<br>
+
+## Update local database: `update`
+
+Maybe you are going to be doing some work at the University Sports Center tomorrow. You forsee that you will lack a 
+good WiFi connection there, and want to access the latest information offline. Run update, and grab a cup of coffee 
+while waiting!
+
+:information_source: Command is case insensitive.
+
+:information_source:  You should rarely need to execute this command since every time UNI Mods retrieves data from 
+NUSMods, it will update that mod in the local database. You should only realistically only need to do this before 
+the start of a new semester, when mods are being updated for the coming semester.
 
 <br>
 
