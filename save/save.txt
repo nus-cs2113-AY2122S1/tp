@@ -1,1 +1,5 @@
 new trip1 /from SIN /to MLY
+add-day trip1 2
+add-item trip1 /day 0 /time 0900 /name bob
+add-item trip1 /day 0 /time 1000 /name tom
+add-item trip1 /day 1 /time 2131 /name bob
