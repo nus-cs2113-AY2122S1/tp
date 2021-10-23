@@ -36,7 +36,7 @@ public class AddExpenditureCommand extends AddCommand {
     public void execute() {
         Expenditure newExpenditure = new Expenditure(description, spending, date);
         recordList.addExpenditure(description, spending, date, false);
-        TextUi.showExpenditureAddedMessage(newExpenditure, false);
+        TextUi.showExpenditureAddedMessage(newExpenditure, false, recordList);
     }
 
 
@@ -50,6 +50,6 @@ public class AddExpenditureCommand extends AddCommand {
     public void execute(boolean isLoadingStorage) {
         Expenditure newExpenditure = new Expenditure(description, spending, date);
         recordList.addExpenditure(description, spending, date, isLoadingStorage);
-        TextUi.showExpenditureAddedMessage(newExpenditure, isLoadingStorage);
+        TextUi.showExpenditureAddedMessage(newExpenditure, isLoadingStorage, recordList);
     }
 }

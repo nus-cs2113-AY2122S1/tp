@@ -125,7 +125,6 @@ public class Parser {
         return new EditBudgetCommand(month, amount);
     }
 
-    // edit m/5 i/4 a/$5.50 d/2030-05-22
     private Command prepareEditExpenditureCommand(String commandParams) {
         String[] split = commandParams.trim().split("m/|i/|a/|d/", 5);
         assert split[0].equals("");
