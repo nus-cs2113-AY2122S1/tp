@@ -50,8 +50,7 @@ each functionality are explained in the [features](#2-features) section.
   * [2.10. edit-item](#210-edit-an-item-edit-item)
   * [2.11. search-item](#211-searching-for-an-item-search-item)
   * [2.12. shortest](#212-shortest-shortest)
-  * [2.13. save](#213-saving-your-trips)
-  * [2.14. exit](#214-exiting-the-program-exit)
+  * [2.13. exit](#214-exiting-the-program-exit)
 * [3. FAQ](#3-faq)
 * [4. Command Summary](#4-command-summary)
 
@@ -82,6 +81,9 @@ This section provides a guide on how to get Traveller up and running on your com
 This section provides details for all commands that Traveller supports.
 For a quick summary of all commands, please click [here](#4-command-summary) instead.
 
+> ![](documentationPics/info.png) As Traveller is a CLI based app, what and how you type your commands is *very important*.
+> Each command has its specific format so that Traveller can understand what you want to do!
+
 <br/>
 
 ### 2.1. Getting help: `help`
@@ -97,26 +99,35 @@ The CLI then returns the shortest path from one point to another.
    * Keywords `/from` and `/to` must be included before the START and END destinations respectively.
    * `START` and `END` destinations must be countries included in `flightData/flights.txt`.
 
-#### Usage Example: 
-   * `new FamilyTrip2021 /from SIN /to MLY` creates a new trip called `FamilyTrip2021` from Singapore (`SIN`) to Malaysia (`MLY`).
-   * `new Vacation /from SKR /to JPN` creates a new trip called `Vacation` from South Korea (`SKR`) to Japan (`JPN`).
+#### Usage Example:
+
+```
+____________________________________________________________
+$ new FamilyTrip2021 /from SIN /to MLY
+____________________________________________________________
+	You have just created a new trip called FamilyTrip2021.
+____________________________________________________________
+```
+
+> ![](documentationPics/warning.png) If you encounter an issue where either your Start or End destinations are not recognised by Traveller.
+> Take a look in `flightData/flights.txt` to see how Traveller recognises them!
 
 <br/>
 
 ### 2.3. Adding a day to Trip: `add-day`
 Your overseas trip may span multiple days.
 
-This command allows you to create a day in your trip.
+This command allows you to create any number of days in your trip.
 
-#### Format: `add-day TRIP_NAME`
+#### Format: `add-day TRIP_NAME NUMBER_OF_DAYS`
 
 #### Usage Example:
 
 ```
 ____________________________________________________________
-$ add-day myTrip
+$ add-day myTrip 3
 ____________________________________________________________
-	Added a new day to trip trip1.
+	Added 3 days to trip trip1.
 ____________________________________________________________
 ```
 
@@ -128,7 +139,7 @@ beach.
 
 Use this command to add an item to a day of your trip.
 
-#### Format: `add-item TRIP_NAME /day DAY_NUMBER /time ITEM_TIME /name ITEM_NAME`
+#### Format: `add-item TRIP_NAME /day DAY_INDEX /time ITEM_TIME /name ITEM_NAME`
 
 #### Usage Example:
 
@@ -207,7 +218,7 @@ ____________________________________________________________
 ### 2.8. Deleting an item from a day: `delete-item`
 Deletes an existing item from a trip.
 
-#### Format: `delete-day TRIP_NAME /day DAT_INDEX /item ITEM_INDEX`
+#### Format: `delete-day TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
 
 #### Usage Example:
 ```
@@ -228,6 +239,9 @@ Edits an existing trip from the trip list.
 
 #### Usage Example:
    * `edit FamilyTrip2021 /from SKR /to JPN` edits an existing trip called `FamilyTrip2021` to have new `START` and `END` destinations.
+
+> ![](documentationPics/tip.png) Edit only allows you to change your Start and End destinations! 
+> To change your trip itinerary use [edit-item](#210-edit-an-item-edit-item) instead!
 
 <br/>
 
@@ -276,15 +290,12 @@ ____________________________________________________________
 ```
 
 
-### 2.13 Saving your trips
-Existing trips are saved automatically whenever you exit the program.
-
-<br/>
-
-### 2.14 Exiting the program: `exit`
+### 2.13 Exiting the program: `exit`
 Exits the program.
 
 #### Format: `exit`
+
+> ![](documentationPics/warning.png) Properly exiting Traveller with the `exit` command is **CRUCIAL** in ensuring that your trips are saved
 
 <br/>
 
@@ -293,9 +304,9 @@ Exits the program.
 **Q**: How do I transfer my data to another computer? 
 
 **A**: Transfer the entire folder containing the items listed below to the other computer. 
-   * Traveller.jar
-   * flightData folder with flights.txt inside
-   * save folder with save.txt inside
+   * *Traveller.jar*
+   * *flightData* folder with *flights.txt* inside
+   * *save* folder with *save.txt* inside
 
 **Q**: Why does it keep saying "Either of these nodes doesn't exist!"?
 
@@ -305,13 +316,21 @@ Exits the program.
 
 ## 4. Command Summary
 
-A summary of all commands available in Traveller is detailed here.
+A summary of all commands available in Traveller, and how you can use them, is detailed here.
 
 Action | Format
 --- | ---
+**help**| `help`
 **new** | `new TRIP_NAME /from START /to END`
+**add-day**| `add-day TRIP_NAME NUMBER_OF_DAYS`
+**add-item**|`add-item TRIP_NAME /day DAY_INDEX /time ITEM_TIME /name ITEM_NAME`
 **view** | `view TRIP_NAME`
 **delete** | `delete TRIP_NAME`
+**delete-day** | `delete-day TRIP_NAME /day DAY_INDEX`
+**delete-item** | `delete-item TRIP_NAME /day DAY_INDEX /item ITEM_INDEX`
 **edit** | `edit TRIP_NAME /from START /to END`
+**edit-item** | `{to be added}`
+**search-item** | '{to be added}`
+**shortest** | '{to be added}`
 **exit** | `exit`
 
