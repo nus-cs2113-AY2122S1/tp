@@ -26,10 +26,9 @@ delete
 help delete
 delete 1
 list
-recommend beginner
-list
+create abs, 2021-12-25
 enter 1
 display
-delete 1
+add pushups, 5 20
 back
 bye
