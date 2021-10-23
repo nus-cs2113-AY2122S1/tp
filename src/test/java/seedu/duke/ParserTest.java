@@ -73,7 +73,7 @@ public class ParserTest {
     }
 
     @Test
-    void parse_missingIDOrName_failure() {
+    void parse_missingIdOrName_failure() {
         assertParseFailure(WRONG_ADDCLIENT_MISSING_NAME, Parser.ERROR_MISSING_NAME);
         assertParseFailure(WRONG_ADDFLIGHT_MISSING_NAME, Parser.ERROR_MISSING_NAME);
         assertParseFailure(WRONG_ADDTOUR_MISSING_NAME, Parser.ERROR_MISSING_NAME);
