@@ -1,0 +1,40 @@
+@startuml
+
+[-> TimetableStorage : save()
+activate TimetableStorage
+TimetableStorage -> FileWriter**
+activate FileWriter
+FileWriter --> TimetableStorage
+deactivate FileWriter
+TimetableStorage -> Gson**
+activate Gson
+Gson --> TimetableStorage
+deactivate Gson
+TimetableStorage -> TimetableDto**
+activate TimetableDto
+TimetableDto --> TimetableStorage
+deactivate TimetableDto
+
+TimetableStorage -> Gson : toJson(timetableDto, fileWriter)
+activate Gson
+Gson --> TimetableStorage
+deactivate Gson
+destroy Gson
+destroy TimetableDto
+
+TimetableStorage -> FileWriter : flush()
+activate FileWriter
+FileWriter --> TimetableStorage
+deactivate FileWriter
+
+TimetableStorage -> FileWriter : close()
+activate FileWriter
+FileWriter --> TimetableStorage
+deactivate FileWriter
+
+destroy FileWriter
+
+<-- TimetableStorage
+deactivate TimetableStorage
+
+@enduml

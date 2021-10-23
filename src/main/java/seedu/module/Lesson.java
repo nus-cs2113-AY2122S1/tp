@@ -1,7 +1,6 @@
 package seedu.module;
 
 import com.google.gson.annotations.JsonAdapter;
-import seedu.timetable.TimetableItem;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 public class Lesson {
     private static final String GAP = ", ";
     private static final int DIVISOR = 100;
+    private static final int ONE = 1;
     private final String classNo;
     private final String startTime;
     private final String endTime;
@@ -29,12 +29,7 @@ public class Lesson {
         this.venue = venue;
         this.lessonType = lessonType;
         this.day = day;
-        this.size = initialiseSize(startTime, endTime);
-    }
-
-    public int initialiseSize(String startTime, String endTime) {
-        int result = Integer.parseInt(endTime) - Integer.parseInt(startTime);
-        return result / DIVISOR;
+        this.size = 0;
     }
 
     public String getStartTime() {
@@ -95,11 +90,12 @@ public class Lesson {
     }
 
     public ArrayList<Integer> getStartToEndTime() {
+        int length = ((Integer.parseInt(getEndTime())) - Integer.parseInt(getStartTime())) / DIVISOR;
         ArrayList<Integer> time = new ArrayList<>();
-        int startTime = Integer.parseInt(getStartTime());
+        int startTime = Integer.parseInt(getStartTime()) / DIVISOR;
         time.add(startTime);
-        for (int i = 0; getSize() > i; i++) {
-            startTime += DIVISOR;
+        for (int i = 1; length > i; i++) {
+            startTime += ONE;
             time.add(startTime);
         }
         return time;
