@@ -1,22 +1,39 @@
 @startuml
+!include <office/Concepts/documents>
+!include <office/Users/user>
+
 skinparam classAttributeIconSize 0
+skinparam shadowing false
 hide circle
 hide empty members
 
-class GetJackd #LightGrey ##Black
-class WorkoutList #Pink
-class Storage #LightGreen ##Green
-class Ui #White ##Black
-class LoggerUtil #LightBlue ##Blue
-class CommandManager #Yellow ##edba02
-class Command #Orange
+class "<$user>" as User #Red;text:White
+class "<$documents>" as File #Green;text:White##Green
 
-GetJackd --> "workouts 1" WorkoutList 
-GetJackd --> "1  " Storage
-GetJackd .right.> Command 
-GetJackd .right.> CommandManager
-GetJackd .down.> LoggerUtil
-GetJackd -right-> "1" Ui
-WorkoutList ..> LoggerUtil
-Storage ..> LoggerUtil
+package "" <<Rectangle>>{
+class Main #LightGrey ##Black
+class Storage #LightGreen ##Green
+class " Ui  " as Ui #White ##Black
+class Logger #LightBlue ##Blue
+class Data #Pink
+class Parser #Yellow ##edba02
+class Command #Orange ##DarkOrange
+class Exceptions #DarkBlue;text:White##White
+}
+
+
+Parser .[#edba02]down.> Logger
+Command .[#DarkOrange]down.> Logger
+Main .[#Black]down.> Command 
+Data .down.> Logger
+Storage .[#Green]down.> Logger
+User .down.> Ui
+Main -[#Black]down-> Data
+Main .down[#Black].> Parser
+Main .right[#Black].> Logger
+Storage .right[#Green].> File
+Main -right[#Black]->  Storage
+Main -up[#Black]->  Ui
+Parser .right[#edba02].> Command
+
 @enduml
