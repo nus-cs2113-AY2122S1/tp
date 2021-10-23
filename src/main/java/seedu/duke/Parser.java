@@ -52,6 +52,8 @@ public class Parser {
             } catch (NullPointerException | NumberFormatException e) {
                 throw new TourPlannerException(ERROR_INVALID_CUT_INDEX);
             }
+        case "find":
+            return parseFind(params);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
@@ -331,8 +333,8 @@ public class Parser {
      * @return the client index from argument string
      */
     private static int stringToInt(String params) {
-        int clientIndex = Integer.parseInt(params);
-        return clientIndex;
+        int index = Integer.parseInt(params);
+        return index;
     }
 
     /**
@@ -361,7 +363,7 @@ public class Parser {
             Tour tour = new Tour(values);
             return new AddTourCommand(tour);
         case "-p":
-            return new AddPackageCommand(values);
+            return new AddClientPackageCommand(values);
         default:
             break;
         }
@@ -377,12 +379,27 @@ public class Parser {
         case "-f":
             return new ListFlightCommand();
         case "-p":
-            return new ListPackageCommand();
+            return new ListClientPackageCommand();
         default:
-            break;
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
-        return null;
     }
+
+    private static Command parseFind(String params) throws TourPlannerException {
+        String prefix = params.substring(0, 2);
+        String suffix = params.substring(3);
+        switch (prefix) {
+        case "-c":
+            System.out.println("reached");
+            System.out.println(suffix);
+            return new FindClientCommand(stringToInt(suffix));
+        case "-t":
+            return new FindTourCommand(suffix);
+        default:
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
+        }
+    }
+
 }
 
    

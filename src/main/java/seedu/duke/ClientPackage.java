@@ -11,6 +11,18 @@ public class ClientPackage {
         this.flight = flight;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public Tour getTour() {
+        return tour;
+    }
+
+    public Flight getFlight() {
+        return flight;
+    }
+
     @Override
     public String toString() {
         return "Client: " + "\n"

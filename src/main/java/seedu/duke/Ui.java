@@ -14,6 +14,8 @@ public class Ui {
     private static final String BYE_MESSAGE = "Thanks for using TourPlanner. Goodbye!";
     private static final String CLEAR_MESSAGE = "All clients have been deleted";
     private static final String CUT_MESSAGE = "Client has been deleted:";
+    private static final String FIND_NO_CLIENTS_MESSAGE = "I'm sorry, there seems no client that matches your search:";
+    private static final String FIND_CLIENT_MESSAGE = "This is the client that matches your search:";
 
     private static final String FIND_NO_TOURS_MESSAGE = "I'm sorry, there seems no tour that has the code ";
     private static final String FIND_TOUR_MESSAGE = "This is the tour that matches your search";
@@ -110,15 +112,29 @@ public class Ui {
             Client currClient = clients.getClient(i - 1);
             System.out.println(i + ". " + currClient + "\n");
         }
+        System.out.println("Total Clients:" + count);
     }
 
-    public void showAddClientPackage(ClientPackage clientPackage) {
-        show("Client Package" + ADD_MESSAGE + "\n" + clientPackage);
+    public void showFindClient(ClientList clients, ClientPackageList packages, int index) {
+        if (index >= clients.getClientCount()) {
+            System.out.println(FIND_NO_CLIENTS_MESSAGE);
+            return;
+        }
+        Client foundClient = clients.getClient(index - 1);
+        System.out.println(FIND_CLIENT_MESSAGE + "\n" + foundClient);
+        System.out.println("Here are the client's packages: ");
+        int count = packages.getPackageCount();
+        int packageCount = 0;
+        for (int i = 0; i < count; i++) {
+            ClientPackage currPackage = packages.get(i);
+            if (currPackage.getClient().equals(foundClient)) {
+                System.out.println((packageCount + 1) + ". " + currPackage + "\n");
+                packageCount++;
+            }
+        }
+        System.out.println("Total Packages Subscribed by " + foundClient.getName() + ": " + packageCount);
     }
 
-    /**
-     * Prints an exit message to the text Ui to acknowledge exiting the application.
-     */
 
     //Tour Functions
     public void showAddTour(Tour tour) {
@@ -138,11 +154,22 @@ public class Ui {
         }
     }
 
-    public void showFindTour(TourList tours, String code) {
+    public void showFindTour(TourList tours, ClientPackageList packages, String code) {
         Tour foundTour = tours.getTourByCode(code);
         if (foundTour != null) {
-            System.out.println(FIND_TOUR_MESSAGE + "\n" + foundTour + "\n");
-            // List clients that are going for this tour, based on PackageList
+            System.out.println(FIND_TOUR_MESSAGE + "\n" + foundTour + "\n" + "\n");
+            int subbedClients = 0;
+            int count = packages.getPackageCount();
+            System.out.println("Subscribed Clients:" + "\n");
+            for (int i = 0; i < count; i++) {
+                Tour currTour = packages.get(i).getTour();
+                if (currTour.equals(foundTour)) {
+                    String currClientName = packages.get(i).getClient().getName();
+                    System.out.println((i + 1) + ". " + currClientName + "\n");
+                    subbedClients++;
+                }
+            }
+            System.out.println("Total Subscribed Clients:" + subbedClients);
         } else {
             System.out.println(FIND_NO_TOURS_MESSAGE + code);
         }
@@ -190,6 +217,28 @@ public class Ui {
             System.out.println(i + ". " + currFlight + "\n");
         }
     }
+
+    //ClientPackage Functions
+    public void showAddClientPackage(ClientPackage clientPackage) {
+        show("Client Package" + ADD_MESSAGE + "\n" + clientPackage);
+    }
+
+    public void showListClientPackage(ClientPackageList clientPackageList) {
+        int count = clientPackageList.getPackageCount();
+        if (count == 0) {
+            System.out.println(LIST_NO_MESSAGE + "packages");
+            return;
+        }
+        System.out.println(LIST_MESSAGE + "packages:");
+        for (int i = 0; i < count; i++) {
+            ClientPackage currPackage = clientPackageList.get(i);
+            System.out.println((i + 1) + ". " + currPackage + "\n");
+        }
+        System.out.println("Total Packages:" + count);
+    }
+    /**
+     * Prints an exit message to the text Ui to acknowledge exiting the application.
+     */
 
     public void showBye() {
         show(BYE_MESSAGE);
