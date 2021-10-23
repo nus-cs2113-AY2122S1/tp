@@ -45,9 +45,7 @@ public class SelectedUniversityStorage {
             if (curr.equals(" ")) {
                 curr = line;
             } else if (!line.contains("#")) {
-                System.out.println("Test");
                 universities.add(new University(curr, moduleMappings, universityMasterList));
-                System.out.println("Test");
                 curr = line;
                 moduleMappings = new ArrayList<>();
             } else {

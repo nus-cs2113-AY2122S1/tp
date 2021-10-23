@@ -38,6 +38,7 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMOD = "This module has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEUNI = "This university has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP = "This mapping has already been added.";
+    public static final String ERRORMSG_PARSEEXCEPTION_INVALIDUNI = "This university is not in your selected list.";
 
     // Logging messages
     public static final String LOGMSG_PARSESUCCESS = "Parse completed successfully";
