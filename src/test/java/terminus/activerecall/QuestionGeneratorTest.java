@@ -46,7 +46,7 @@ public class QuestionGeneratorTest {
             questions.remove(question);
         }
         assertTrue(questions.isEmpty());
-        
+
         for (int i = 0; i < 10; i++) {
             questions.add(new Question("test " + i, "answer " + i));
         }
@@ -56,7 +56,6 @@ public class QuestionGeneratorTest {
         }
         assertTrue(questions.isEmpty());
         assertFalse(questionGenerator.hasNext());
-
 
         for (int i = 0; i < 10; i++) {
             questions.add(new Question("test " + i, "answer " + i));

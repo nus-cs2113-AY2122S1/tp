@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,6 +26,12 @@ public class AddModuleCommandTest {
     private Ui ui;
     private ModuleStorage moduleStorage;
 
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
+
     @BeforeEach
     void setUp() {
         this.moduleStorage = ModuleStorage.getInstance();
@@ -34,14 +41,9 @@ public class AddModuleCommandTest {
         this.ui = new Ui();
     }
 
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
-    }
-
     @Test
-    void execute_addModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_addModule_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("add \"test\"");
         CommandResult cmdResult = cmd.execute(ui, moduleManager);
         assertTrue(cmdResult.isOk());
