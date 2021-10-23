@@ -78,8 +78,8 @@ public class SearchCommand extends Command {
     /**
      * Adds matching exercises to the map and returns true if matching exercises are found.
      *
-     * @param map         Map whose key is the workout name and value is the list of exercises that contain the particular
-     *                    keyword in that specific workout.
+     * @param map         Map whose key is the workout name and value is the list of exercises that contain the
+     *                    particular keyword in that specific workout.
      * @param workoutList list of all workouts that we want to filter through.
      * @return true if matching exercises were found and added to the map, false otherwise.
      */
