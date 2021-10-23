@@ -194,8 +194,6 @@ Exercises in leg day
 ________________________________________________________
 ```
 
-
-
 ### 8. Removing an exercise from a workout: `remove`
 Removes an exercise from a specified workout
 
@@ -373,7 +371,8 @@ saved file format (json), GetJack'd will not run.
 | Recommend workout                                | Format: `recommend [beginner/ intermediate/ pro]` <br />Example: `recommend beginner`                      |
 | Add exercise                                     | Format: `add [EXERCISE_DESCRIPTION], [SETS] [REPS], [WORKOUT_INDEX]` <br /> Example: `add Push-ups, 5 10, 1` |
 | Mark exercise as done                            | Format: `done [EXERCISE_INDEX], [WORKOUT_INDEX]` <br />Example: `done 5, 1`                                |
-| Remove exercise                                  | Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]` <br />Example: `remove 5, 1`                            |
+| Remove exercise                                  | Format: `remove [EXERCISE_INDEX], [WORKOUT_INDEX]` <br />Example: `remove 5, 1`  
+| Edit exercise                                    | Format: `edit [EXERCISE_INDEX], [WORKOUT_INDEX], [NEW_DESCRIPTION], [SETS] [REPS]` <br />Example: `edit 1, 1, Flutter, 4 10` |
 | Enter workout                                    | Format: `enter [WORKOUT_INDEX]` <br />Example: `enter 1`                                                   |
 | Exit workout                                     | Example: `back`                                                                                          |
 | Help                                             | Format: `help [COMMAND_WORD]` <br />Example: `help add`                                                    |
