@@ -93,14 +93,12 @@ ArrayList.
 * `StudentList#findStudent(keyword:String)` - Returns an ArrayList of students containing the keyword
 
 Below is an example scenario of how the add student feature behaves at each step:<br>
-* Step 1 - The user executes `add_student c/CS2113T i/a0217978j n/jonny` to add a module. The `add_student` command 
+* Step 1 - The user executes `add_student c/CS2113T i/a0217978j n/jonny` to add a student. The `add_student` command 
 calls the `AddStudentCommand#execute` method. Within `AddStudentCommand#execute`, `ModuleList#getModule("CS2113T")` is 
 called to ensure that there is an existing module with code `CS2113T`.
 * Step 2 - If an existing module with code `CS2113T` is found, a new `Student` object with id and name set to 
 `a0217978j` and `jonny` respectively. Then, `StudentList#addModule` is called to add the newly created `Student` 
 object into the `students` ArrayList within `StudentList`.
-
-
 
 ### Set Attendance
 The set attendance mechanism is facilitated by SetAttendanceCommand. It extends `Command` and
@@ -136,7 +134,37 @@ Then, `AttendanceList#addAttendance` is called to add the newly created `Attenda
 ArrayList within `AttendanceList`.
 
 ### Add Assessment
-HI
+The add assessment mechanism is facilitated by `AddAssessmentCommand`. It extends `Command` and uses `AssessmentList`
+which stores assessment internally as an ArrayList `assessments`.<br>
+
+`AddAssessmentCommand` implements the following methods:
+* `AddAssessmentCommand#execute(moduleList:ModuleList, ui:Ui, storage:Storage)` - Performs operations for the command.
+
+`AssessmentList` implements the following methods:
+* `AssessmentList#getSize()` - Returns the no. of assessments currently in the list.
+* `AssessmentList#getAssessments()` - Returns an ArrayList containing all the assessments.
+* `AssessmentList#getAssessment(assessmentName:String)` - Returns an assessment with a particular name specified by the 
+  user.
+* `AssessmentList#addAssessment(assessment:Assessment)` - Adds an assessment to the `assessments` ArrayList.
+* `AssessmentList#deleteAssessment(assessmentName:String)` - Deletes an assessment with the name specified by the user 
+  from the `assessments` ArrayList.
+
+Below is an example scenario of how the add assessment feature behaves at each step:
+* Step 1 - The user executes `add_assessment c/cs2113t n/midterms m/20 w/10` to add an assessment. The `add_assessment`
+  command calls the `AddAssessmentCommand#execute` method. Within `AddAssessmentCommand#execute`,
+  `ModuleList#getModuleWithCode("cs2113t")` is called to ensure that there is an existing module with code `cs2113t`.
+* Step 2 - If an existing module with code `cs2113t` is found, the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are checked
+  to ensure that they are valid.
+* Step 3 - If the `MAXIMUM_MARKS` and `WEIGHTAGE` arguments are valid, a new `Assessment` object with name, 
+  maximum marks and weightage set to `midterms`, `20` and `10` respectively is created under the existing `Module` with
+  code `cs2113t`. Then, `AssessmentList#addAssessment` is called to add the newly created `Assessment` object into the
+  `assessments` ArrayList within `AssessmentList`.
+* Step 4 - Within `AssessmentList#addAssessment`, the name of the newly created `Assessment` object is checked to ensure
+  there is no existing assessment with name `midterms`. At the same time, the weightage of the newly created
+  `Assessment` object is also checked to ensure that the total weightage of the assessments in the `cs2113t` module 
+  will not exceed 100 with the addition of the weightage of the newly created `Assessment` object.
+* Step 5 - If the name and weightage of the newly created `Assessment` object are valid, the newly created `Assessment` 
+  object is added into the `assessments` ArrayList within `AssessmentList`.
 
 ### Set Marks
 The set marks mechanism is facilitated by `SetMarksCommand`. It extends `Command` and uses a `results` HashMap to store 
