@@ -7,6 +7,6 @@ public class ListItem {
         return 0;
     }
 
-    public void setId(int Id) {
+    public void setId(int id) {
     }
 }

@@ -1,8 +1,7 @@
 package medbot;
 
-import medbot.Storage.PatientStorage;
-import medbot.Storage.StaffStorage;
-import medbot.Storage.Storage;
+import medbot.storage.PatientStorage;
+import medbot.storage.StaffStorage;
 import medbot.command.Command;
 import medbot.exceptions.MedBotException;
 import medbot.list.ListItemType;
