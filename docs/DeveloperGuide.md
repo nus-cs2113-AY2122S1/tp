@@ -31,6 +31,7 @@ realise the target user profile that motivated us to build this application.
 
 * [AddressBook Level-3](https://se-education.org/addressbook-level3/) for User Guide and Developer Guide reference
 * [PlantUML](https://plantuml.com/) for creation of UML diagrams
+* [Java-Clear-Console](https://www.delftstack.com/howto/java/java-clear-console/) for reference on clearing terminal
 
 ## ⭐ Setting Up & Getting Started
 1. Fork *Food-O-Rama*'s repository from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp).
