@@ -40,7 +40,8 @@ public class UpdateCommand extends Command {
                 + System.lineSeparator() + "venue/[NEW VENUE]"
                 + System.lineSeparator() + "budget/[NEW BUDGET]"
                 + System.lineSeparator() + "task/[TASK NUM YOU WANT TO UPDATE]"
-                + System.lineSeparator() + "You may type more then one update at a given time but separate them with a [>]"
+                + System.lineSeparator()
+                + "You may type more then one update at a given time but separate them with a [>]"
                 + System.lineSeparator() + Ui.getLineBreak());
     }
 
@@ -56,7 +57,9 @@ public class UpdateCommand extends Command {
             String[] userUpdates = userInput.trim().split(">");
             try {
                 CommandResult x = implementUpdates(userUpdates);
-                if (x != null) return x;
+                if (x != null) {
+                    return x;
+                }
                 postUpdateMessage();
                 String exitInput = Ui.readInput();
                 Ui.printLineBreak();
@@ -110,10 +113,10 @@ public class UpdateCommand extends Command {
             } else if (update.contains(DEADLINE_FLAG)) {
                 updateDeadline(attribute[1], taskToBeUpdated);
             } else if (update.contains(DESCRIPTION_FLAG)) {
-               taskToBeUpdated.setDescription(attribute[1]);
+                taskToBeUpdated.setDescription(attribute[1]);
             } else if (update.contains(MEMBER_FLAG)) {
                 updateMember(attribute[1], taskToBeUpdated);
-            }else {
+            } else {
                 System.out.println("invalid Command!");
             }
         }
@@ -129,12 +132,13 @@ public class UpdateCommand extends Command {
     private void updateTaskIntroMessage() {
         Ui.printLineBreak();
         System.out.println("Please type the item for task you would like to update in the following manner "
-                + System.lineSeparator() + "-----------------------------------------------------------------------   "
+                + System.lineSeparator() + "-----------------------------------------------------------------------"
                 + System.lineSeparator() + "title/[NEW NAME]   "
                 + System.lineSeparator() + "deadline/[NEW DATE[d/dd-MM-yyyy HHmm]]"
                 + System.lineSeparator() + "description/[NEW DESCRIPTION]"
                 + System.lineSeparator() + "member/[MEMBER INDEX]"
-                + System.lineSeparator() + "You may type more then one update at a given time but separate them with a [>]"
+                + System.lineSeparator()
+                + "You may type more then one update at a given time but separate them with a [>]"
                 + System.lineSeparator() + Ui.getLineBreak());
     }
 

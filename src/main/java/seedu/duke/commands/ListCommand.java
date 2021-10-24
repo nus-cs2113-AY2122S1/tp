@@ -65,7 +65,7 @@ public class ListCommand extends Command {
         System.out.println(System.lineSeparator() + "FURTHER COMMANDS"
                 + System.lineSeparator() + "-----------------------"
                 + System.lineSeparator() + "To list Task: list [Event Index] -t"
-                + System.lineSeparator() + "To list Members of a Task: " +
-                "list [Event Index] t/[Task Index]");
+                + System.lineSeparator() + "To list Members of a Task: "
+                + "list [Event Index] t/[Task Index]");
     }
 }
