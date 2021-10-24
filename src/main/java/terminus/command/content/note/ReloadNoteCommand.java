@@ -1,20 +1,16 @@
 package terminus.command.content.note;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import terminus.command.Command;
 import terminus.command.CommandResult;
 import terminus.common.CommonFormat;
 import terminus.common.Messages;
-import terminus.common.TerminusLogger;
-import terminus.content.ContentManager;
-import terminus.content.Note;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.storage.ModuleStorage;
 
-public class ExportNoteCommand extends Command {
+public class ReloadNoteCommand extends Command {
 
     /**
      * Returns the format for the command.
@@ -23,7 +19,7 @@ public class ExportNoteCommand extends Command {
      */
     @Override
     public String getFormat() {
-        return CommonFormat.COMMAND_EXPORT;
+        return CommonFormat.COMMAND_RELOAD;
     }
 
     /**
@@ -33,29 +29,26 @@ public class ExportNoteCommand extends Command {
      */
     @Override
     public String getHelpMessage() {
-        return Messages.MESSAGE_COMMAND_EXPORT;
+        return Messages.MESSAGE_COMMAND_RELOAD;
     }
 
     /**
-     * Executes the command. Prints the required result to the Ui.
+     * Executes Reload Note command.
+     * Replace existing note data in the specified module with the ones in the file directory.
      *
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
-     * @return The CommandResult object indicating the success of failure including additional options.
+     * @return The CommandResult object indicating the success including additional options.
      * @throws InvalidCommandException when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
-     * @throws IOException when the file to be saved is inaccessible (e.g. file is locked by OS).
+     * @throws IOException when the file to be read is null.
      */
     @Override
     public CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException {
-        TerminusLogger.info("Executing Export Note Command");
-        assert getModuleName() != null;
-        ContentManager<Note> noteManager = moduleManager.getModule(getModuleName()).getContentManager(Note.class);
-
-        ArrayList<Note> notes = noteManager.getContents();
-        ModuleStorage storage = ModuleStorage.getInstance();
-        storage.exportModuleNotes(getModuleName(), notes);
-        TerminusLogger.info("Exported Notes Successfully");
-        return new CommandResult(Messages.SUCCESSFUL_EXPORT);
+        StringBuilder result = new StringBuilder();
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.loadNotesFromModule(moduleManager, getModuleName());
+        result.append(String.format(Messages.MESSAGE_RESPONSE_RELOAD_NOTE, getModuleName()));
+        return new CommandResult(result.toString());
     }
 }
