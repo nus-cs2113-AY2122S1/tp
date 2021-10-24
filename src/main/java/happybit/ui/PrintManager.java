@@ -55,7 +55,7 @@ public class PrintManager {
         for (Goal goal : goals) {
             System.out.print(index + ". ");
             System.out.println(goal.getDescription());
-            index ++;
+            index++;
         }
         printDashes();
     }
@@ -77,7 +77,7 @@ public class PrintManager {
             }
             System.out.println(prefix + " " + habit.getHabitName() + " " + intervalPrint);
             System.out.println("Last: " + lastHabitDatePrint + ", " + "Next: " + nextHabitDatePrint);
-            index ++;
+            index++;
         }
         printDashes();
     }

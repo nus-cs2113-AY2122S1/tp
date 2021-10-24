@@ -63,7 +63,7 @@ public class Storage {
     }
 
     /**
-     * To export goal list to storage file
+     * To export goal list to storage file.
      *
      * @param goalList an array list of goals
      * @throws HaBitStorageException IOException
@@ -73,7 +73,7 @@ public class Storage {
     }
 
     /**
-     * To export a goal to storage file
+     * To export a goal to storage file.
      *
      * @param goal a goal object
      * @param index the index of goal in goal list
