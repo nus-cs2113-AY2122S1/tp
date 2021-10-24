@@ -30,11 +30,8 @@ yikai
 equal
 list
 view
-delete expense 2
-delete expense 1
-delete expense 1
-summary
-delete trip 2
-delete trip 1
+delete 2
+delete 1
+delete 1
 summary
 quit

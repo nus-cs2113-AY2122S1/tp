@@ -135,8 +135,8 @@ public class Trip {
             }
         }
         System.out.println(person + " has spent "
-                //+ money sign
-                + totalAmountSpent
+                + Ui.stringForeignMoney(totalAmountSpent)
+                + " (" + Ui.stringRepaymentMoney(totalAmountSpent) + ")"
                 + " on "
                 + expensesInvolved
                 + " expenses in the following split: ");

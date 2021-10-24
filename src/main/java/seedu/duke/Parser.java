@@ -274,24 +274,18 @@ public class Parser {
                 } catch (IndexOutOfBoundsException e) {
                     Ui.printNoExpensesError();
                 }
-
             }
         }
 
     }
 
     private static void executeDelete(String inputParams) {
-        String[] splitInputParams = inputParams.split(" ", 2);
-        String type = splitInputParams[0];
-        int index = Integer.parseInt(splitInputParams[1]) - 1;
-        if (type.equals("trip")) {
+        int index = Integer.parseInt(inputParams) - 1;
+        if (!Storage.checkOpenTrip()) {
             executeDeleteTrip(index);
-        } else if (type.equals("expense")) {
-            executeDeleteExpense(index);
         } else {
-            Ui.printInvalidDeleteFormatError();
+            executeDeleteExpense(index);
         }
-
     }
 
     private static void executeDeleteExpense(int expenseIndex) {

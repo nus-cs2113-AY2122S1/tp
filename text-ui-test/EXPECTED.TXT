@@ -98,17 +98,14 @@ Category: breakfast
 Enter your command: Your expense of USD $1.00 has been successfully removed
 Enter your command: Your expense of USD $8.00 has been successfully removed
 Enter your command: Your expense of USD $2.00 has been successfully removed
-Enter your command: yikai has spent 0.0 on 0 expenses in the following split: 
+Enter your command: yikai has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-yuzhao has spent 0.0 on 0 expenses in the following split: 
+yuzhao has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-qian has spent 0.0 on 0 expenses in the following split: 
+qian has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-josh has spent 0.0 on 0 expenses in the following split: 
+josh has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-xiyuan has spent 0.0 on 0 expenses in the following split: 
+xiyuan has spent USD $0.00 (SGD $0.00) on 0 expenses in the following split: 
 
-Enter your command: Sorry, no such trip number exists. Please check your trip number and try again.
-Enter your command: Your trip to America on 02 Feb 2021 has been successfully removed
-Enter your command: You have not created a trip yet. Please create a trip using the keyword 'create'.
 Enter your command: Goodbye!
