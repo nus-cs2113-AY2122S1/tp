@@ -9,7 +9,6 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.parser.ModuleWorkspaceCommandParser;
-import terminus.ui.Ui;
 
 public class GoCommand extends WorkspaceCommand {
 
@@ -54,13 +53,13 @@ public class GoCommand extends WorkspaceCommand {
     }
 
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager)
+    public CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException {
         NusModule module = moduleManager.getModule(moduleName);
         if (module == null) {
             throw new InvalidArgumentException("Module not found! Type 'module view' for the list of modules.");
         }
         commandMap.setWorkspace(moduleName);
-        return super.execute(ui, moduleManager);
+        return super.execute(moduleManager);
     }
 }

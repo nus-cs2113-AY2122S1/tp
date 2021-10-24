@@ -2,7 +2,6 @@ package terminus.command;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,6 @@ import terminus.parser.LinkCommandParser;
 import terminus.parser.MainCommandParser;
 import terminus.parser.ModuleCommandParser;
 import terminus.parser.NoteCommandParser;
-import terminus.ui.Ui;
 
 public class HelpCommandTest {
 
@@ -21,7 +19,6 @@ public class HelpCommandTest {
     private NoteCommandParser noteCommandParser;
     private LinkCommandParser linkCommandParser;
     private ModuleCommandParser moduleCommandParser;
-    private Ui ui;
     private ModuleManager moduleManager;
 
     private String tempModule = "test";
@@ -34,21 +31,19 @@ public class HelpCommandTest {
         linkCommandParser = LinkCommandParser.getInstance();
         linkCommandParser.setModuleName(tempModule);
         moduleCommandParser = ModuleCommandParser.getInstance();
-        ui = new Ui();
         moduleManager = new ModuleManager();
         moduleManager.addModule(tempModule);
     }
 
     @Test
-    void execute_helpCommand_success()
-            throws InvalidArgumentException, InvalidCommandException, IOException {
-        CommandResult result = mainCommandParser.parseCommand("help").execute(ui, moduleManager);
+    void execute_helpCommand_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+        CommandResult result = mainCommandParser.parseCommand("help").execute(moduleManager);
         assertTrue(result.isOk());
-        result = noteCommandParser.parseCommand("help").execute(ui, moduleManager);
+        result = noteCommandParser.parseCommand("help").execute(moduleManager);
         assertTrue(result.isOk());
-        result = linkCommandParser.parseCommand("help").execute(ui, moduleManager);
+        result = linkCommandParser.parseCommand("help").execute(moduleManager);
         assertTrue(result.isOk());
-        result = moduleCommandParser.parseCommand("help").execute(ui, moduleManager);
+        result = moduleCommandParser.parseCommand("help").execute(moduleManager);
         assertTrue(result.isOk());
     }
 }

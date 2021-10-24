@@ -12,7 +12,6 @@ import terminus.content.Question;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.ui.Ui;
 
 public class AddQuestionCommand extends Command {
     
@@ -60,11 +59,10 @@ public class AddQuestionCommand extends Command {
      * Executes the add Question command.
      * Prints the relevant response to the Ui and a new Note will be added into the arraylist of Notes.
      *
-     * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      */
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+    public CommandResult execute(ModuleManager moduleManager) {
         assert getModuleName() != null;
         TerminusLogger.info("Executing Add Question Command");
         NusModule module = moduleManager.getModule(getModuleName());
@@ -73,8 +71,8 @@ public class AddQuestionCommand extends Command {
 
         contentManager.add(new Question(question, answer));
         TerminusLogger.info(String.format("Question (\"%s\",\"%s\") has been added", question, answer));
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_QUESTION, question));
-        return new CommandResult(true, false);
+        String message = String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_QUESTION, question);
+        return new CommandResult(message);
     }
 
     /**

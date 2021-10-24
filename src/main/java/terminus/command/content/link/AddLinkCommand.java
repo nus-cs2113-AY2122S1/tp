@@ -1,5 +1,9 @@
 package terminus.command.content.link;
 
+import static terminus.common.CommonUtils.isValidDay;
+import static terminus.common.CommonUtils.isValidDuration;
+import static terminus.common.CommonUtils.isValidUrl;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import terminus.command.Command;
@@ -14,12 +18,9 @@ import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.timetable.ConflictManager;
-import terminus.ui.Ui;
 
-import static terminus.common.CommonUtils.isValidDuration;
-import static terminus.common.CommonUtils.isValidDay;
-import static terminus.common.CommonUtils.isValidUrl;
 import static terminus.common.CommonUtils.hasDurationOverflow;
+
 
 /**
  * AddLinkCommand class which will manage the adding of new Links from user command.
@@ -94,29 +95,29 @@ public class AddLinkCommand extends Command {
      * Executes the add link command.
      * Prints the relevant response to the Ui.
      *
-     * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the list of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+    public CommandResult execute(ModuleManager moduleManager) {
         assert getModuleName() != null;
         NusModule module = moduleManager.getModule(getModuleName());
-        ContentManager contentManager = module.getContentManager(Link.class);
+        ContentManager<Link> contentManager = module.getContentManager(Link.class);
         assert contentManager != null;
 
         Link newLink = new Link(description, day, startTime, duration, link);
         ConflictManager scheduleConflict = new ConflictManager(moduleManager, newLink);
 
+        StringBuilder stringBuilder = new StringBuilder();
+
         if (!CommonUtils.isStringNullOrEmpty(scheduleConflict.getConflictingSchedule())) {
             String conflicts = scheduleConflict.getConflictingSchedule();
-            ui.printSection(Messages.MESSAGE_CONFLICTING_SCHEDULE);
-            ui.printSection(conflicts);
+            stringBuilder.append(Messages.MESSAGE_CONFLICTING_SCHEDULE + "\n").append(conflicts).append("\n");
         }
         contentManager.add(newLink);
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
+        stringBuilder.append(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
 
-        return new CommandResult(true, false);
+        return new CommandResult(stringBuilder.toString());
     }
 
     /**

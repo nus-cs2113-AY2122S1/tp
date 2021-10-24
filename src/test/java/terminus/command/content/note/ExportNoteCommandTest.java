@@ -45,21 +45,20 @@ public class ExportNoteCommandTest {
         moduleManager.addModule(tempModule);
         this.commandParser = NoteCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
-        this.ui = new Ui();
     }
 
     @Test
     void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test" + i + "\" \"test" + i + "\"");
-            CommandResult addResult = addCommand.execute(ui, moduleManager);
+            CommandResult addResult = addCommand.execute(moduleManager);
             assertTrue(addResult.isOk());
         }
 
         assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
 
         Command exportCommand = commandParser.parseCommand("export");
-        CommandResult exportResult = exportCommand.execute(ui, moduleManager);
+        CommandResult exportResult = exportCommand.execute(moduleManager);
         assertTrue(exportResult.isOk());
         File pdf = new File(Paths.get(TestFilePath.RESOURCE_FOLDER.toString(), tempModule + CommonFormat.PDF_FORMAT)
                 .toString());

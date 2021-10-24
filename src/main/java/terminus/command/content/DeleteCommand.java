@@ -12,7 +12,6 @@ import terminus.content.ContentManager;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.ui.Ui;
 
 /**
  * DeleteCommand generic class which will manage the deletion of Content specified by user command.
@@ -74,26 +73,27 @@ public class DeleteCommand<T extends Content> extends Command {
      * Executes the delete command. Prints the relevant response to the Ui and the specified Content object will be
      * removed from the arraylist.
      *
-     * @param ui            The Ui object to send messages to the users.
      * @param moduleManager The ModuleManager that contains the NusModules.
      * @return CommandResult to indicate the success and additional information about the execution.
      * @throws InvalidArgumentException when argument provided is index out of bounds of the ArrayList.
      * @throws IOException when file is inaccessible.
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) throws InvalidArgumentException, IOException {
+    public CommandResult execute(ModuleManager moduleManager) throws InvalidArgumentException, IOException {
         assert getModuleName() != null;
         NusModule module = moduleManager.getModule(getModuleName());
         ContentManager<T> contentManager = module.getContentManager(type);
         assert contentManager != null;
+        
         TerminusLogger.info("Executing Delete Command");
         this.deletedContentName = contentManager.deleteContent(itemNumber);
         assert deletedContentName != null && !deletedContentName.isBlank();
         TerminusLogger.info(
                 String.format("%s(%s) has been deleted", CommonUtils.getClassName(type), deletedContentName));
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_DELETE,
+        
+        String message = (String.format(Messages.MESSAGE_RESPONSE_DELETE,
                 CommonUtils.getClassName(type).toLowerCase(), deletedContentName));
-        return new CommandResult(true);
+        return new CommandResult(message);
     }
 }
 

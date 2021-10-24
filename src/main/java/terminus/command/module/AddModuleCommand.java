@@ -12,7 +12,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.storage.ModuleStorage;
-import terminus.ui.Ui;
 
 public class AddModuleCommand extends Command {
 
@@ -59,7 +58,6 @@ public class AddModuleCommand extends Command {
     /**
      * Executes the command. Prints the required result to the Ui.
      *
-     * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException when the command could not be found.
@@ -67,7 +65,7 @@ public class AddModuleCommand extends Command {
      * @throws IOException when the module directory is not empty.
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager)
+    public CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException {
         if (moduleManager.getModule(moduleName) != null) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_EXIST);
@@ -78,8 +76,9 @@ public class AddModuleCommand extends Command {
         if (moduleStorage.createModuleDirectory(moduleName)) {
             moduleManager.addModule(moduleName);
         }
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_MODULE_ADD, moduleName));
-        return new CommandResult(true);
+        
+        String message = String.format(Messages.MESSAGE_RESPONSE_MODULE_ADD, moduleName);
+        return new CommandResult(message);
     }
 
     private boolean isValidModuleArguments(ArrayList<String> argArray) {

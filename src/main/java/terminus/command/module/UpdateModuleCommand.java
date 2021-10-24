@@ -13,7 +13,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.ui.Ui;
 
 public class UpdateModuleCommand extends Command {
 
@@ -24,12 +23,12 @@ public class UpdateModuleCommand extends Command {
 
     @Override
     public String getFormat() {
-        return CommonFormat.UPDATE_COMMAND_FORMAT;
+        return CommonFormat.COMMAND_UPDATE_MODULE_FORMAT;
     }
 
     @Override
     public String getHelpMessage() {
-        return Messages.UPDATE_COMMAND_MESSAGE;
+        return Messages.MESSAGE_COMMAND_UPDATE_MODULE;
     }
 
     @Override
@@ -56,7 +55,7 @@ public class UpdateModuleCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager)
+    public CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException {
         String[] listOfModule = moduleManager.getAllModules();
         if (!CommonUtils.isValidIndex(index, listOfModule)) {
@@ -70,7 +69,6 @@ public class UpdateModuleCommand extends Command {
         moduleManager.removeModule(listOfModule[index - 1]);
 
         moduleManager.setModule(newName, current);
-        ui.printSection(String.format("Updated %s to %s successfully", listOfModule[index - 1], newName));
-        return new CommandResult(true);
+        return new CommandResult(String.format("Updated %s to %s successfully", listOfModule[index - 1], newName));
     }
 }
