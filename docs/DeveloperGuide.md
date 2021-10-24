@@ -10,7 +10,7 @@ realise the target user profile that motivated us to build this application.
 ## 🧾 Table of Contents
 
 * [Acknowledgements](#-acknowledgements)
-* [Setting Up & Getting Started](#star-setting-up--getting-started)
+* [Setting Up & Getting Started](#-setting-up--getting-started)
 * [Design & Implementations](#-design--implementation)
   * [General Flow](#general-flow)
   * [Input Parsing](#input-parsing)
@@ -31,7 +31,7 @@ realise the target user profile that motivated us to build this application.
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## :star: Setting Up & Getting Started
+##⭐ Setting Up & Getting Started
 1. Fork *Food-O-Rama*'s repository from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp).
 2. Clone the repository into your computer.
 3. Import the project into your IDE.
