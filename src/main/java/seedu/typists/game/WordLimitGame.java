@@ -9,7 +9,6 @@ import java.util.Scanner;
 import static seedu.typists.parser.StringParser.splitString;
 
 public class WordLimitGame extends Game {
-    private final TextUi ui;
 
     private ArrayList<String> eachWord;
     protected int wordLimit;
@@ -18,11 +17,11 @@ public class WordLimitGame extends Game {
     private final String content1;
 
 
-    public WordLimitGame(String targetWordSet) {
+    public WordLimitGame(String targetWordSet, int wordsPerLine) {
+        super();
         this.eachWord = new ArrayList<>(100);
         this.gameIndex = 0;
-        this.numberOfWordsDisplayed = 5;
-        this.ui = new TextUi();
+        this.numberOfWordsDisplayed = wordsPerLine;
         this.content1 = targetWordSet;
         this.wordLimit = getWordLimit();
     }
@@ -48,7 +47,7 @@ public class WordLimitGame extends Game {
         eachWord = new ArrayList<String>(eachWord.subList(0, wordLimit));
     }
 
-    public void beginNewGame() throws InvalidStringInputException {
+    public void runGame() throws InvalidStringInputException {
         trimContent(wordLimit);
         boolean isExit = false;
         int totalError = 0;

@@ -40,22 +40,8 @@ public class Main {
 
     public void startWordLimitGame() throws InvalidStringInputException {
         uiBot.printKeyboard();
-        this.wordLimitGame = new WordLimitGame(content.getContent());
+        this.wordLimitGame = new WordLimitGame(content.getContent(), 5);
         wordLimitGame.beginNewGame();
-    }
-
-    public void startTimeLimitGame() {
-        uiBot.printClock();
-        TimeModeGame g = new TimeModeGame(content.getContent(), LINE_LENGTH);
-        DataProcessor p = new DataProcessor(g);
-        uiBot.showSummary(
-                p.getErrorWordCount(),
-                p.getErrorPercentage(),
-                p.getErrorWords(),
-                p.getWordPerMinute(),
-                p.getTotalWordTyped(),
-                p.totalTime
-        );
     }
 
     public void startErrorGame() {
@@ -95,6 +81,7 @@ public class Main {
                 uiBot.showText("OOPS!!! The description after this command word cannot be empty.");
             } catch (IndexOutOfBoundsException e) {
                 uiBot.showText("OOPS!!! It's out of range.");
+                e.printStackTrace();
             } catch (NumberFormatException e) {
                 uiBot.showText("OOPS!!! Number not found. ");
             } catch (NoSuchElementException | InvalidStringInputException e) {

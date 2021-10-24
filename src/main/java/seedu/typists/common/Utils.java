@@ -14,7 +14,7 @@ public class Utils {
     }
 
     /** group the word list into groups of x, where x is the number of words per line. */
-    public static ArrayList<String[]> getWordLine(String text, int lineLength) {
+    public static ArrayList<String[]> getWordLines(String text, int lineLength) {
         ArrayList<String> wordList = splitStringIntoWordList(text);
         ArrayList<String[]> wordLines = new ArrayList<>();
         int j = 0;
