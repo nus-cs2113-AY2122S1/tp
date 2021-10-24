@@ -1,7 +1,5 @@
 # Developer Guide for SITUS
 
-
-
 ## Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
@@ -16,15 +14,21 @@
 [2. First-time setup](#2-first-time-setup) <br>
 &nbsp;&nbsp;[2.1. Prerequisites](#21-prerequisites) <br>
 &nbsp;&nbsp;[2.2. Setting up the project on the computer](#22-setting-up-the-project-on-the-computer) <br>
+&nbsp;&nbsp;[2.3. Running the program for the first time](#23-running-the-program-for-the-first-time) <br>
 [3. Design](#3-design) <br>
-&nbsp;&nbsp;[3.1. Architecture](#31-architecture) <br>
+&nbsp;&nbsp;[3.1. System architecture](#31-system-architecture) <br>
+&nbsp;&nbsp;[3.2. UI component](#32-ui-component) <br>
+&nbsp;&nbsp;[3.3. Parser component](#33-parser-component) <br>
+&nbsp;&nbsp;[3.4. Command component](#34-command-component) <br>
+&nbsp;&nbsp;[3.5. IngredientList component](#35-ingredientlist-component) <br>
+&nbsp;&nbsp;[3.6. Storage component](#36-storage-component) <br>
 [4. Implementation](#4-implementation) <br>
 &nbsp;&nbsp;[4.1. Alerts](#41-alerts) <br>
 
 ## 1. Introduction
 
 ### 1.1. Purpose
-This document specified the architectural and software design decisions in the implementation of the Smart Inventory
+This document specifies the architectural and software design decisions in the implementation of the Smart Inventory
 Tracking and Updating System (SITUS).
 
 ### 1.2. Audience
@@ -88,11 +92,27 @@ The **UI** component can be found in the `UI` package. The UI reads commands fro
 
 ### 3.3 Parser component
 
-The **Parser** component can be found in the `parser` package
+The **Parser** component can be found in the `parser` package. 
 
-<<description here>>
+The package consists of the `Parser` class, which parses the command input by the user and executes the required `XYZCommand` class (`XYZ` is henceforth used as a placeholder for the specific command name, e.g. `AddCommand`).
 
-### 3.4 IngredientList component
+### 3.4 Command component
+
+The **Command** component can be found in the `command` package
+
+The package consists of an abstract class `Command` and classes named `XYZCommand`. `Command` has only one abstract method, `run()`. All `XYZCommand` classes inherit from `Command` and implement `run()` to execute the corresponding commands. 
+
+The class diagram below shows the relationships between `Parser`, `Command` and `XYZCommand`.
+
+![image](images/ParserDiagram.png)
+
+A quick overview of how a command is parsed and executed is as such:
+* The command entered by the user is passed to `Parser`.
+* `Parser` calls its `parseXYZCommand()` method with the command entered by the user as its parameter.
+* `parseXYZCommand()` creates an instance of the corresponding `XYZCommand` class and calls its `run()` method.
+* Thus, the command entered by the user is executed.
+
+### 3.5 IngredientList component
 
 The **IngredientList** component can be found in the `ingredients` package
 
@@ -107,7 +127,7 @@ The `IngredientList` class
 
 Each of the `Ingredient` objects contains information about an ingredient, namely its `name`, `amount` in stock and the `expiry` date.
 
-### 3.5 Storage component
+### 3.6 Storage component
 
 The **Storage** component can be found in the `Storage` package
 
@@ -123,13 +143,6 @@ The `Storage` class
 The two public methods mentioned above are the most essential for the storage capablility of the program.
 `IngredientList` object will only use `loadIngredientsFromMemory()` and `writeIngredientsToMemory()` methods
 of the storage class only when there is a change in the ingredient list of the program.
-
-### 3.6 Command component
-
-The **Command** component can be found in the `command` package
-
-The package consists of an abstract class `command` and `classes` corresponding to each functionality.
-
 
 ## 4. Implementation
 
@@ -178,15 +191,14 @@ For `AlertLowStockCommand`, it is less complicated, and the sequence diagram sho
 The `totalAmount` for each `IngredientGroup` in the `IngredientList` is obtained and compared to the threshold amount. The 
 information of the `IngredientGroup` is taken note of to be printed when the function is returned.
 
-
 ## Product scope
-### Target user profile
 
-{Describe the target user profile}
+**Target user profile**:
+* manages food stock and needs to track a significant number of ingredients/ food items (e.g. a restaurant inventory manager)
+* is proficient at typing
+* is comfortable with CLI apps
 
-### Value proposition
-
-{Describe the value proposition: what problem does it solve?}
+**Value proposition**: track large amounts of ingredients simply through typing commands faster than a GUI driven application
 
 ## User Stories
 
@@ -204,13 +216,32 @@ information of the `IngredientGroup` is taken note of to be printed when the fun
 
 ## Non-Functional Requirements
 
-1. Should work on any *mainstream OS* with Java `11` or above installed.
+1. Should work on any *mainstream OS* (Windows, Linus, macOS or Unix) with Java `11` or above installed.
 2. Users proficient at typing should be able to complete tasks faster using commands than using a mouse with a GUI.
-
-## Glossary
-
-* **Mainstream OS** - Windows, Linux, Unix, macOS
 
 ## Instructions for manual testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+### Setting up 
+Refer to the [first time setup section](#2-first-time-setup) and follow the steps to run SITUS on your device. For the following sections, refer to the [user guide](UserGuide.md) for information on how to use the different commands.
+
+### Testing features
+
+#### Adding ingredients
+1. Add ingredients using the `add` command with the correct format.
+2. Use `list` to ensure ingredients you added are shown.
+3. Test case: `add n/NAME a/AMOUNT` <br>
+Expected: No ingredient is added and an error message is shown.
+4. Try other incorrect add commands with different parameters missing <br>
+Expected: Similar to previous.
+
+#### Deleting ingredients
+1. Use the same list from the previous section. 
+2. Test case: `delete 0` <br>
+Expected: No ingredient is deleted and an error message is shown.
+3. Test case: `delete 1` <br>
+Expected: The first ingredient is deleted.
+
+#### Updating ingredients
+1. Similar to adding ingredients, first use `update` correctly for an existing ingredient.
+2. Next, test `update` with missing parameters <br>
+Expected: No ingredient is updated and an error message is shown.

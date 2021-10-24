@@ -27,16 +27,16 @@ public class IngredientGroup {
 
     private Storage storage;
 
-    /*public IngredientGroup() throws DukeException {
-        try {
-            storage = new Storage();
-            ingredientList = storage.loadIngredientsFromMemory();
-        } catch (IOException e) {
-            //failsafe
-            ingredientList = new ArrayList<>();
-            throw new DukeException("Cannot read ingredients from memory!");
-        }
-    }*/
+//    public IngredientGroup() throws DukeException {
+//        try {
+//            storage = new Storage();
+//            ingredientList = storage.loadIngredientsFromMemory();
+//        } catch (IOException e) {
+//            //failsafe
+//            ingredientList = new ArrayList<>();
+//            throw new DukeException("Cannot read ingredients from memory!");
+//        }
+//    }
 
     public IngredientGroup() {
         ingredientGroup = new ArrayList<>();
