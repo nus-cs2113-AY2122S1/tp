@@ -89,7 +89,7 @@ public class StockValidator extends MedicineValidator {
                     continue;
                 }
                 Stock stock = (Stock) medicine;
-                if (stock.getStockID() == stockId && !stock.isDeleted()) {
+                if (stock.getStockId() == stockId && !stock.isDeleted()) {
                     stockExist = true;
                     break;
                 }

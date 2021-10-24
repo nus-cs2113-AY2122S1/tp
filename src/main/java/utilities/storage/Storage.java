@@ -6,7 +6,7 @@ import inventory.Medicine;
 import inventory.Order;
 import utilities.parser.FileParser;
 import inventory.Stock;
-
+import utilities.ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -36,6 +36,10 @@ public class Storage {
     private static File orderArchiveFile;
     private static File dispenseArchiveFile;
     private static Storage storage = null;
+    int highestStockId = 0;
+    int highestOrderId = 0;
+    int highestDispenseId = 0;
+
 
     /**
      * Helps to create the Storage instance or returns the Storage instance if it exists.
@@ -190,27 +194,36 @@ public class Storage {
     private ArrayList<Medicine> readFromFile(String fileType, File file) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         ArrayList<Medicine> medicines = new ArrayList<>();
+        int stockRow = 1;
+        int orderRow = 1;
+        int dispenseRow = 1;
         while (sc.hasNextLine()) {
-            String stockDetails = sc.nextLine();
+            String medicineDetails = sc.nextLine();
             try {
                 switch (fileType) {
                 case "STOCK":
-                    Medicine parsedStock = parseStockData(stockDetails);
+                    Medicine parsedStock = parseStockData(medicineDetails, stockRow);
                     medicines.add(parsedStock);
+                    stockRow++;
                     break;
                 case "ORDER":
-                    Medicine parsedOrder = parseOrderData(stockDetails);
+                    Medicine parsedOrder = parseOrderData(medicineDetails, orderRow);
                     medicines.add(parsedOrder);
+                    orderRow++;
                     break;
                 case "DISPENSE":
-                    Medicine parsedDispense = parseDispenseData(stockDetails);
+                    Medicine parsedDispense = parseDispenseData(medicineDetails, dispenseRow);
                     medicines.add(parsedDispense);
+                    dispenseRow++;
                     break;
                 default:
                     break;
                 }
             } catch (InvalidDataException e) {
-                System.out.println("Corrupted data detected in file"); // Maybe just log it instead of displaying?
+                Ui ui = Ui.getInstance();
+                ui.print(e.getMessage());
+                ui.print("Corrupted data detected in file. Please fix error in file. Quitting MediVault now.");
+                System.exit(0);
             }
         }
         return medicines;
@@ -222,23 +235,30 @@ public class Storage {
      * @param stockDetails String of data of specific stock from file data/stock.txt.
      * @return Stock object for adding into medicines.
      */
-    private Medicine parseStockData(String stockDetails) throws InvalidDataException {
+    private Medicine parseStockData(String stockDetails, int stockRow) throws InvalidDataException {
         String[] splitStockDetails = stockDetails.split("\\|");
         if (splitStockDetails.length != NUMBER_OF_STOCK_DATA_FIELDS) { // If not all fields present.
-            throw new InvalidDataException();
+            throw new InvalidDataException("[ROW: " + stockRow + "] INVALID NUMBER OF DELIMITER OR FIELDS"
+                    + " [data/stock.txt]");
         }
-        int stockID = FileParser.parseStockID(splitStockDetails);
-        String stockName = FileParser.parseStockName(splitStockDetails);
-        double stockPrice = FileParser.parseStockPrice(splitStockDetails);
-        int stockQuantity = FileParser.parseStockQuantity(splitStockDetails);
-        Date stockExpiry = FileParser.parseStockExpiry(splitStockDetails);
-        String stockDescription = FileParser.parseStockDescription(splitStockDetails);
-        int stockMaxQuantity = FileParser.parseStockMaxQuantity(splitStockDetails);
-        boolean stockIsDeleted = FileParser.parseStockIsDeleted(splitStockDetails);
+        int stockId = FileParser.parseStockId(splitStockDetails, stockRow);
+        String stockName = FileParser.parseStockName(splitStockDetails, stockRow);
+        double stockPrice = FileParser.parseStockPrice(splitStockDetails, stockRow);
+        int stockQuantity = FileParser.parseStockQuantity(splitStockDetails, stockRow);
+        Date stockExpiry = FileParser.parseStockExpiry(splitStockDetails, stockRow);
+        String stockDescription = FileParser.parseStockDescription(splitStockDetails, stockRow);
+        int stockMaxQuantity = FileParser.parseStockMaxQuantity(splitStockDetails, stockRow);
+        boolean stockIsDeleted = FileParser.parseStockIsDeleted(splitStockDetails, stockRow);
 
         Stock stock = new Stock(stockName, stockPrice, stockQuantity, stockExpiry, stockDescription, stockMaxQuantity);
-        stock.setStockID(stockID);
-        stock.setStockCount(stockID);
+        if (stockId > highestStockId) {
+            stock.setStockId(stockId);
+            stock.setStockCount(stockId);
+            highestStockId = stockId;
+        } else {
+            stock.setStockId(stockId);
+            stock.setStockCount(highestStockId);
+        }
         stock.setDeleted(stockIsDeleted);
         return stock;
     }
@@ -249,23 +269,30 @@ public class Storage {
      * @param orderDetails String of data of specific order from file data/order.txt.
      * @return Order object for adding into medicines.
      */
-    private Medicine parseOrderData(String orderDetails) throws InvalidDataException {
+    private Medicine parseOrderData(String orderDetails, int orderRow) throws InvalidDataException {
         String[] orderStockDetails = orderDetails.split("\\|"); //what if call split when no delimiter
         if (orderStockDetails.length != NUMBER_OF_ORDER_DATA_FIELDS) { // If not all fields present.
-            throw new InvalidDataException();
+            throw new InvalidDataException("[ROW: " + orderRow + "] INVALID NUMBER OF DELIMITER OR FIELDS"
+                    + " [data/order.txt]");
         }
-        int orderId = FileParser.parseOrderId(orderStockDetails);
-        String orderName = FileParser.parseOrderName(orderStockDetails);
-        int orderQuantity = FileParser.parseOrderQuantity(orderStockDetails);
-        Date orderDate = FileParser.parseOrderDate(orderStockDetails);
-        boolean orderStatus = FileParser.parseOrderStatus(orderStockDetails);
+        int orderId = FileParser.parseOrderId(orderStockDetails, orderRow);
+        String orderName = FileParser.parseOrderName(orderStockDetails, orderRow);
+        int orderQuantity = FileParser.parseOrderQuantity(orderStockDetails, orderRow);
+        Date orderDate = FileParser.parseOrderDate(orderStockDetails, orderRow);
+        boolean orderStatus = FileParser.parseOrderStatus(orderStockDetails, orderRow);
 
         Order order = new Order(orderName, orderQuantity, orderDate);
         if (orderStatus) {
             order.setDelivered();
         }
-        order.setOrderId(orderId);
-        order.setOrderCount(orderId);
+        if (orderId > highestOrderId) {
+            order.setOrderId(orderId);
+            order.setOrderCount(orderId);
+            highestOrderId = orderId;
+        } else {
+            order.setOrderId(orderId);
+            order.setOrderCount(highestOrderId);
+        }
         return order;
     }
 
@@ -275,23 +302,30 @@ public class Storage {
      * @param dispenseDetails String of data of specific stock from file data/dispense.txt.
      * @return Dispense object for adding into medicines.
      */
-    private Medicine parseDispenseData(String dispenseDetails) throws InvalidDataException {
+    private Medicine parseDispenseData(String dispenseDetails, int dispenseRow) throws InvalidDataException {
         String[] splitDispenseDetails = dispenseDetails.split("\\|");
         if (splitDispenseDetails.length != NUMBER_OF_DISPENSE_DATA_FIELDS) { // If not all fields present.
-            throw new InvalidDataException();
+            throw new InvalidDataException("[ROW: " + dispenseRow + "] INVALID NUMBER OF DELIMITER OR FIELDS"
+                    + " [data/dispense.txt]");
         }
-        int dispenseId = FileParser.parseDispenseId(splitDispenseDetails);
-        String dispenseName = FileParser.parseDispenseName(splitDispenseDetails);
-        int dispenseQuantity = FileParser.parseDispenseQuantity(splitDispenseDetails);
-        String dispenseCustomerId = FileParser.parseDispenseCustomerId(splitDispenseDetails);
-        Date dispenseDate = FileParser.parseDispenseDate(splitDispenseDetails);
-        String dispenseStaff = FileParser.parseDispenseStaff(splitDispenseDetails);
-        int dispenseStockId = FileParser.parseDispenseStockId(splitDispenseDetails);
+        int dispenseId = FileParser.parseDispenseId(splitDispenseDetails, dispenseRow);
+        String dispenseName = FileParser.parseDispenseName(splitDispenseDetails, dispenseRow);
+        int dispenseQuantity = FileParser.parseDispenseQuantity(splitDispenseDetails, dispenseRow);
+        String dispenseCustomerId = FileParser.parseDispenseCustomerId(splitDispenseDetails, dispenseRow);
+        Date dispenseDate = FileParser.parseDispenseDate(splitDispenseDetails, dispenseRow);
+        String dispenseStaff = FileParser.parseDispenseStaff(splitDispenseDetails, dispenseRow);
+        int dispenseStockId = FileParser.parseDispenseStockId(splitDispenseDetails, dispenseRow);
 
         Dispense dispense = new Dispense(dispenseName, dispenseQuantity, dispenseCustomerId, dispenseDate,
                 dispenseStaff, dispenseStockId);
-        dispense.setDispenseId(dispenseId);
-        dispense.setDispenseCount(dispenseId);
+        if (dispenseId > highestDispenseId) {
+            dispense.setDispenseId(dispenseId);
+            dispense.setDispenseCount(dispenseId);
+            highestDispenseId = dispenseId;
+        } else {
+            dispense.setDispenseId(dispenseId);
+            dispense.setDispenseCount(highestDispenseId);
+        }
         return dispense;
     }
 }

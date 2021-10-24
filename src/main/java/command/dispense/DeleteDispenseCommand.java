@@ -99,7 +99,7 @@ public class DeleteDispenseCommand extends Command {
             if (stock.isDeleted()) {
                 stock.setDeleted(false);
             }
-            if (stock.getStockID() == stockIdToDispense) {
+            if (stock.getStockId() == stockIdToDispense) {
                 int quantityToRestore = stock.getQuantity() + dispenseQuantity;
                 if (quantityToRestore > stock.getMaxQuantity()) {
                     ui.print("Unable to delete dispense. Quantity added will exceed maximum quantity.");

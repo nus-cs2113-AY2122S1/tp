@@ -142,7 +142,7 @@ public class Ui {
 
         // Find the longest width of each column
         for (Stock stock : stocks) {
-            idWidth = Math.max(String.valueOf(stock.getStockID()).length(), idWidth);
+            idWidth = Math.max(String.valueOf(stock.getStockId()).length(), idWidth);
             nameWidth = Math.max(stock.getMedicineName().length(), nameWidth);
             priceWidth = Math.max(String.format("$%.2f", stock.getPrice()).length(), priceWidth);
             quantityWidth = Math.max(String.valueOf(stock.getQuantity()).length(), quantityWidth);
@@ -185,7 +185,7 @@ public class Ui {
             int orderQuantity = OrderManager.getTotalOrderQuantity(medicines, stock.getMedicineName());
             int descriptionIndex = truncatedDescription.length();
 
-            String row = String.format(idFormat, centerString(idWidth, String.valueOf(stock.getStockID())))
+            String row = String.format(idFormat, centerString(idWidth, String.valueOf(stock.getStockId())))
                     + String.format(nameFormat, centerString(nameWidth, stock.getMedicineName()))
                     + String.format(priceFormat, centerString(priceWidth, String.format("$%.2f", stock.getPrice())))
                     + String.format(quantityFormat, centerString(quantityWidth, String.valueOf(stock.getQuantity())))

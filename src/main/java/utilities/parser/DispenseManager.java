@@ -67,14 +67,14 @@ public class DispenseManager {
                 Dispense dispense;
                 if (stock.getQuantity() <= dispenseQuantity) {
                     dispense = new Dispense(stock.getMedicineName(), stock.getQuantity(), customerId, date, staffName,
-                            stock.getStockID());
+                            stock.getStockId());
                     newDispenses.add(dispense);
                     dispenseQuantity -= stock.getQuantity();
                     stock.setQuantity(0);
                 } else {
                     int remainingStocks = stock.getQuantity() - dispenseQuantity;
                     dispense = new Dispense(stock.getMedicineName(), dispenseQuantity, customerId, date, staffName,
-                            stock.getStockID());
+                            stock.getStockId());
                     newDispenses.add(dispense);
                     stock.setQuantity(remainingStocks);
                     dispenseQuantity = 0;
@@ -90,7 +90,7 @@ public class DispenseManager {
                     continue;
                 }
                 Stock stock = (Stock) medicine;
-                boolean isSameStockId = stock.getStockID() == targetStock.getStockID();
+                boolean isSameStockId = stock.getStockId() == targetStock.getStockId();
                 boolean isDeleted = stock.isDeleted();
                 if (isSameStockId && !isDeleted) {
                     medicine.setQuantity(targetStock.getQuantity());
