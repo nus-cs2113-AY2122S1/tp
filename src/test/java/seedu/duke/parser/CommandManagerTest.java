@@ -45,13 +45,6 @@ class CommandManagerTest {
     }
 
     @Test
-    void generateCommand_addExerciseCorrect_returnsAddExerciseCommand() {
-        String input = "add Exercise, 10 100, 1";
-        Command result = generator.generateCommand(input);
-        assertTrue(result instanceof AddExerciseCommand);
-    }
-
-    @Test
     void generateCommand_markExerciseAsDoneCorrect_returnsMarkExerciseAsDoneCommand() {
         String input = "done 3, 1";
         Command result = generator.generateCommand(input);
