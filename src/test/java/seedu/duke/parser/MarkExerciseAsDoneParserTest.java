@@ -1,5 +1,6 @@
 package seedu.duke.parser;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.Command;
 import seedu.duke.command.exercise.MarkExerciseAsDoneCommand;
@@ -14,6 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class MarkExerciseAsDoneParserTest {
     private MarkExerciseAsDoneParser parser;
     private Command result;
+
+    @BeforeEach
+    void setUp() {
+        Command.workoutMode = 0;
+    }
 
     @Test
     void parseInput_validInput_returnsMarkExerciseAsDoneCommand() {

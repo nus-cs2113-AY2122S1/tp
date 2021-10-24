@@ -1,5 +1,7 @@
 package seedu.duke.parser;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.Command;
 import seedu.duke.command.exercise.AddExerciseCommand;
@@ -11,6 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class AddExerciseParserTest {
     private AddExerciseParser parser;
     private Command result;
+
+    @BeforeEach
+    void setUp() {
+        Command.workoutMode = 0;
+    }
 
     @Test
     void parseInput_validInputs_returnsAddExerciseCommand() {
