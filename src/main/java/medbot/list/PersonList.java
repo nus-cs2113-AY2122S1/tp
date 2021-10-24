@@ -154,6 +154,16 @@ public abstract class PersonList {
         persons.get(personId).archive();
     }
 
+    public void unarchivePerson(int personId) throws MedBotException {
+        if (!persons.containsKey(personId)) {
+            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
+        }
+        if (!persons.get(personId).isArchived()) {
+            throw new MedBotException(getAlreadyUnarchivedErrorMessage(personId));
+        }
+        persons.get(personId).unarchive();
+    }
+
     /**
      * For the person with the specified personId, returns the appointmentId of the appointment at the specified
      * time code, or -1 if there is none.
@@ -223,7 +233,26 @@ public abstract class PersonList {
      */
     protected abstract String getPersonNotFoundErrorMessage(int personId);
 
+    /**
+     * Generates the exception message for MedBotExceptions when the person is already archived.
+     *
+     * <p>Is overrode by subclasses
+     *
+     * @param personId id of the person who is already archived
+     * @return exception message when the person is already archived
+     */
     protected abstract String getAlreadyArchivedErrorMessage(int personId);
+
+    /**
+     * Generates the exception message for MedBotExceptions when the person is already unarchived.
+     *
+     * <p>Is overrode by subclasses
+     *
+     * @param personId id of the person who is already unarchived
+     * @return exception message when the person is already unarchived
+     */
+    protected abstract String getAlreadyUnarchivedErrorMessage(int personId);
+
 
     /**
      * Get storageString for all persons.

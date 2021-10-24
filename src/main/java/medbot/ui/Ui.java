@@ -181,6 +181,30 @@ public class Ui {
     }
 
     /**
+     * Returns the successful message of un-archiving a person.
+     *
+     * @param personId  the ID of the person to be un-archived.
+     * @param viewType the viewType context of the command.
+     * @return The successful message of un-archiving the person
+     */
+    public static String getUnarchivePersonMessage(int personId, ViewType viewType) throws MedBotException {
+        String output;
+        switch (viewType) {
+        case PATIENT_INFO:
+            output = "The patient with ID: " + personId + " is unarchived successfully.";
+            break;
+        case MEDICAL_STAFF_INFO:
+            output = "The staff with ID: " + personId + " is unarchived successfully.";
+            break;
+        default:
+            assert false;
+            throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
+        }
+
+        return output;
+    }
+
+    /**
      * Prints an exit message when MedBot is exiting.
      *
      * @return the exit Message
@@ -198,7 +222,8 @@ public class Ui {
     public static String getCommandList() {
         return "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
-                + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + END_LINE
+                + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + "archive" + END_LINE + "unarchive"
+                + END_LINE + END_LINE
                 + "To obtain more information on each command and their respective required inputs, type:" + END_LINE
                 + "help [COMMAND]" + END_LINE + END_LINE
                 + "*Note that all commands will remove any '|' inputs for format parsing purposes" + END_LINE;
@@ -348,6 +373,23 @@ public class Ui {
             return PatientUi.getArchivePatientHelpMessage();
         case MEDICAL_STAFF_INFO:
             return StaffUi.getArchiveStaffHelpMessage();
+        default:
+            assert false;
+            throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
+        }
+    }
+
+    /**
+     * Prints information about archive command.
+     *
+     * @return the information on archive command.
+     */
+    public String getUnarchiveHelpMessage(ViewType viewType) throws MedBotException {
+        switch (viewType) {
+        case PATIENT_INFO:
+            return PatientUi.getUnarchivePatientHelpMessage();
+        case MEDICAL_STAFF_INFO:
+            return StaffUi.getUnarchiveStaffHelpMessage();
         default:
             assert false;
             throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);

@@ -14,4 +14,9 @@ public class PatientList extends PersonList {
         return "The patient with ID " + patientId + " is already archived." + END_LINE;
     }
 
+    @Override
+    protected String getAlreadyUnarchivedErrorMessage(int patientId) {
+        return "The patient with ID " + patientId + " is already unarchived." + END_LINE;
+    }
+
 }

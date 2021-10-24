@@ -68,6 +68,14 @@ public class StaffUi {
                 + "Staff with id STAFF_ID is successfully archived." + END_LINE;
     }
 
+    public static String getUnarchiveStaffHelpMessage() {
+        return "Unarchive a staff from the list." + END_LINE
+                + "Format:" + END_LINE
+                + "unarchive STAFF_ID" + END_LINE
+                + "Expected Output:" + END_LINE
+                + "Staff with id STAFF_ID is successfully unarchived." + END_LINE;
+    }
+
     /**
      * Prints a message when viewing the profile of a staff.
      *

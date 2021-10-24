@@ -13,4 +13,9 @@ public class MedicalStaffList extends PersonList {
     protected String getAlreadyArchivedErrorMessage(int staffId) {
         return "The staff with ID " + staffId + " is already archived." + END_LINE;
     }
+
+    @Override
+    protected String getAlreadyUnarchivedErrorMessage(int staffId) {
+        return "The staff with ID " + staffId + " is already unarchived." + END_LINE;
+    }
 }

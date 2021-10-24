@@ -69,6 +69,14 @@ public class PatientUi {
                 + "Patient with id PATIENT_ID is successfully archived." + END_LINE;
     }
 
+    public static String getUnarchivePatientHelpMessage() {
+        return "Unarchive a patient from the list." + END_LINE
+                + "Format:" + END_LINE
+                + "unarchive PATIENT_ID" + END_LINE
+                + "Expected Output:" + END_LINE
+                + "Patient with id PATIENT_ID is successfully unarchived." + END_LINE;
+    }
+
 
     /**
      * Prints a message when viewing the profile of a patient.

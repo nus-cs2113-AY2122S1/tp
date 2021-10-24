@@ -164,9 +164,9 @@ public class Scheduler {
     }
 
     /**
-     * Removes the patient with the specified id.
+     * Archives the patient with the specified id.
      *
-     * @param patientId the id of the patient to remove.
+     * @param patientId the id of the patient to archive.
      * @throws MedBotException if there is no patient with that id
      */
     public void archivePatient(int patientId) throws MedBotException {
@@ -181,6 +181,26 @@ public class Scheduler {
      */
     public void archiveStaff(int staffId) throws MedBotException {
         medicalStaffList.archivePerson(staffId);
+    }
+
+    /**
+     * Unarchives the patient with the specified id.
+     *
+     * @param patientId the id of the patient to unarchive.
+     * @throws MedBotException if there is no patient with that id
+     */
+    public void unarchivePatient(int patientId) throws MedBotException {
+        patientList.unarchivePerson(patientId);
+    }
+
+    /**
+     * Unarchives the staff with the specified id.
+     *
+     * @param staffId the id of the staff to unarchive.
+     * @throws MedBotException if there is no staff with that id
+     */
+    public void unarchiveStaff(int staffId) throws MedBotException {
+        medicalStaffList.unarchivePerson(staffId);
     }
 
     /**
