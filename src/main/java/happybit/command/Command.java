@@ -10,9 +10,9 @@ public abstract class Command {
     /**
      * Abstract method that runs user input commands.
      *
-     * @param goalList List that stores all the tasks.
-     * @param printManager       User interface of duke.
-     * @param storage  Reference to the file where data is stored.
+     * @param goalList     List that stores all the goals.
+     * @param printManager Prints messages to the console.
+     * @param storage      Reference to the file where data is stored.
      * @throws HaBitCommandException If exception is thrown by Command subclasses.
      */
     public abstract void runCommand(GoalList goalList, PrintManager printManager, Storage storage)

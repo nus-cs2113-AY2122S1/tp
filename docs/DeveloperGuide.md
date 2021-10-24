@@ -1,7 +1,7 @@
 # Developer Guide
 
 This developer guide documents the design and implementation of the application,
-Ha(ppy)Bit. It will provide an insight into the design considerations, and implementation
+_Ha(ppy)Bit_. It will provide an insight into the design considerations, and implementation
 of features.
 
 * [Acknowledgements](#acknowledgements)
@@ -20,6 +20,7 @@ of features.
 * [Appendix D: Glossary](#appendix-d-glossary)
 * [Appendix E: Instructions for Manual Testing](#appendix-e-instructions-for-manual-testing)
 
+---------------------------------------------------------------------------------------------------------
 
 ## Acknowledgements
 
@@ -38,6 +39,7 @@ This application adapted the Developer Guide and User Guide from:
 * Link to Developer Guide: <https://se-education.org/addressbook-level3/DeveloperGuide.html>
 * Link to User Guide: <https://se-education.org/addressbook-level3/UserGuide.html#quick-start>
 
+---------------------------------------------------------------------------------------------------------
 
 ## Design and Implementation
 
@@ -51,7 +53,7 @@ In the sections below, we will be explaining in detail how each compomponent wor
 
 ### UI component
 
-**API** : `Ui.java`
+**API:** `Ui.java`
 
 How the `Ui` component works:
 1. The `Ui` is called in 2 main classes - `GoalList` and `UiOverall`
@@ -91,6 +93,7 @@ which obtains a `Command` object after parsing the input using the `Parser` comp
 `Command` objects available are:
 * `AddGoalCommand` - Adds a new Goal to the GoalList.
 * `AddHabitCommand` - Adds a new Habit object to a specified Goal set by the user.
+* `UpdateGoalNameCommand` - Updates the name of a Goal specified by the user.
 * `DeleteGoalCommand` - Deletes a Goal from the GoalList
 * `DeleteHabitCommand` - Deletes a Habit object from a specified Goal set by the user.
 * `DoneHabitCommand` - Marks a Habit object under a Goal as done.
@@ -104,34 +107,46 @@ In the sections below we will be providing implementation details for each of th
 #### `AddGoalCommand`
 
 When the `runCommand` function is executed for the `AddGoalCommand` object, the following steps as indicated by the
-sequence diagram below is carried out.
+sequence diagram below is carried out:
 
 ![](https://www.planttext.com/api/plantuml/img/ZLB1QiCm3BtxAqGltI1fxcQCZWvwwM2mwouY5fuXbZDRsVVFIGepn2sxoUz9xptBFYR1A9CVrFvBP4owwyO1UKOEVV1Tek-9kAVMEBGHlMgVOQVXnPXpmE4Kl4Ss6OWJNmyFDXCNbqJ3-LeryCbZT2nlo6WfQdWlJWqa2J5N6ZxMub5XB-u7XIfUIcqnc5DjVNCZherBg9Leu7QKqhWYbwqhw69-MtC7UdNCcUalpC6Il5Bgenl51PxldfjicU2EPZt8KzlUdpBqF_NQYXVnsb9AqHg_36wViHpRiaTYa__WBm00)
 
 #### `AddHabitCommand`
 
+#### `UpdateGoalNameCommand`
+
 #### `DeleteGoalCommand`
 
+When the `runCommand` function is executed for the `DeleteGoalCommand` object, the following steps as indicated by the
+sequence diagram below is carried out:
+
+![](Diagram Images/DeleteGoalCommandSequenceDiagram.png)
+
 #### `DeleteHabitCommand`
+
+When the `runCommand` function is executed for the `DeleteHabitCommand` object, the following steps as indicated by the
+sequence diagram below is carried out:
+
+![](Diagram Images/DeleteHabitCommandSequenceDiagram.png)
 
 #### `DoneHabitCommand`
 
 When the `runCommand` function is executed for the `DoneHabitCommand` object, the following steps as indicated by the 
-sequence diagram below is carried out.
+sequence diagram below is carried out:
 
 ![](Diagram Images/DoneCommandSequenceDiagram.png)
 
 #### `ListGoalCommand`
 
 When the `runCommand` function is executed for the `ListGoalsCommand` object, the following steps as indicated by the
-sequence diagram below is carried out.
+sequence diagram below is carried out:
 
 ![](Diagram Images/ListGoalsCommandSequenceDiagram.png)
 
 #### `ListHabitCommand`
 
 When the `runCommand` function is executed for the `ListHabitsCommand` object, the following steps as indicated by the
-sequence diagram below is carried out.
+sequence diagram below is carried out:
 
 ![](Diagram Images/ListHabitsCommandSequenceDiagram.png)
 
@@ -165,14 +180,22 @@ the user's data.
 
 ### Storage component
 
-**API:** `Storage.java`
+The `Storage` class allows data to be read from and saved to a storage file.
+The class diagram shows the interactions between the different classes.
 
 ![Storage Class Diagram](Diagram%20Images/StorageClassDiagram.png)
 
-The Storage Class allows data to be read from and saved to a storage file. When a user exits the program, the 
-information entered by the user during the program will be exported and saved into a `HappyBit.txt` file. The next time
-the program is run by the user, this data will be imported back into the program to allow the user to pick up and 
-continue from where they left off.
+The program uses `Storage` class to import data from the storage file.
+* `Storage` interacts with `Import` to access the data stored in storage file.
+* `Import` will depend on `ImportParser` to decipher the data stored, and return 
+a `Goal` or `Habit` object back to `Import` correspondingly.
+* `Import` will then populate `GoalList` with `Goal` and `Habit` objects accordingly
+before returning `GoalList` back to `Storage` and back to user.
+
+`Storage` class can also export data to storage file with `Export` class.
+
+
+---------------------------------------------------------------------------------------------------------
 
 ## Appendix A: Product Scope
 
@@ -209,14 +232,20 @@ workload or commitments.
 
 ## Appendix C: Non-Functional Requirements
 
-{Give non-functional requirements}
-
+|Non-Functional Requirements | Requirement Type |
+| :---------- | :---: |
+|App should be operable on Windows, macOS, and Ubuntu running Java `11` or above.|Technical|
+|App can be learned anyone who is familiar with computer within minutes of use.|Quality|
+|App should be a helpful, encouraging, and a joy to use.|Quality|
+| |Performance|
 
 ## Appendix D: Glossary
 
-* *glossary item* - Definition
+* **Goal**: A long term achievement you wish to accomplish
+* **Habit**: Checkpoints; actionable tasks to be done to achieve goal
 
 
 ## Appendix E: Instructions for Manual Testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+{Someone shall give instructions on how to do a manual product testing 
+e.g., how to load sample data to be used for testing}

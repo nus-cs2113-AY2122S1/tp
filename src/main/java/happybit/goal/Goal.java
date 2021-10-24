@@ -50,7 +50,7 @@ public class Goal {
     }
 
     /**
-     * Gets the description of the goal.
+     * Getter for description of the goal.
      *
      * @return String containing goal name and type.
      */
@@ -59,7 +59,27 @@ public class Goal {
     }
 
     /**
-     * Gets the habitList.
+     * Getter for startDate of the goal in string format.
+     *
+     * @return Start date formatted as a string.
+     */
+    public String getStartDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        return dateFormat.format(this.startDate);
+    }
+
+    /**
+     * Getter for endDate of the goal in string format.
+     *
+     * @return End date formatted as a string.
+     */
+    public String getEndDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        return dateFormat.format(this.endDate);
+    }
+
+    /**
+     * Getter for habitList.
      *
      * @return ArrayList of habits.
      */
@@ -100,20 +120,8 @@ public class Goal {
      *
      * @return Integer number of habits associated with the goal.
      */
-    public int numberOfHabits() {
+    public int getListLength() {
         return habitList.size();
-    }
-
-    public String getStartDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-
-        return dateFormat.format(this.startDate);
-    }
-
-    public String getEndDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-
-        return dateFormat.format(this.endDate);
     }
 
     /*
