@@ -7,7 +7,7 @@ import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.RecurrenceWithoutDateException;
 import seedu.duke.exception.RequiredArgmentNotProvidedException;
-import seedu.duke.parser.UtilityParser;
+import seedu.duke.parser.DateParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.TypeEnum;
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class TodoFactoryTest {
 
     private static final String DESCRIPTION = "buy vegetables";
-    private static final String VALID_DATE1 = "14-02-1998 02:00:00";
+    private static final String VALID_DATE1 = "14-02-1998 02:00";
 
     @Test
     void getTask_validTodoInputs_expectTodo() throws GetTaskFailedException {
@@ -33,7 +33,7 @@ class TodoFactoryTest {
         Todo todo = TodoFactory.getTodo(arguments);
 
         assertEquals(todo.getDescription(), DESCRIPTION);
-        assertEquals(UtilityParser.getDateAsString(todo.getDoOnDate()), VALID_DATE1);
+        assertEquals(DateParser.dateToString(todo.getDoOnDate()), VALID_DATE1);
         assertEquals(todo.getPriority(), PriorityEnum.HIGH);
         assertEquals(todo.getRecurrence(), RecurrenceEnum.NONE);
     }

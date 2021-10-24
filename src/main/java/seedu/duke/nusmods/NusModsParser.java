@@ -4,6 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.time.ZoneId;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Lesson;
 
@@ -63,8 +64,10 @@ public class NusModsParser {
                         .map(l -> {
                             try {
                                 return new Event(lesson.getTaskEntryDescription(),
-                                        formatter.parse(l.get("startTime").getAsString()),
-                                        formatter.parse(l.get("endTime").getAsString()));
+                                        formatter.parse(l.get("startTime").getAsString())
+                                            .toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),
+                                        formatter.parse(l.get("endTime").getAsString())
+                                            .toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
                             } catch (ParseException ex) {
                                 return new Todo(lesson.getTaskEntryDescription());
                             }

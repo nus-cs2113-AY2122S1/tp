@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 //@@author SeanRobertDH
 class DeleteCommandTest {
 
-    private static final String VALID_DATE1 = "14-02-1998 02:00:00";
-    private static final String VALID_DATE2 = "14-02-1998 04:40:00";
+    private static final String VALID_DATE1 = "14-02-1998 02:00";
+    private static final String VALID_DATE2 = "14-02-1998 04:40";
 
     private static final String TO_DELETE = "TO DELETE";
 

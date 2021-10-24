@@ -7,7 +7,7 @@ import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.RequiredArgmentNotProvidedException;
 import seedu.duke.exception.StartDateAfterEndDateException;
-import seedu.duke.parser.UtilityParser;
+import seedu.duke.parser.DateParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.TypeEnum;
@@ -19,8 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 //@@author SeanRobertDH
 class EventFactoryTest {
     private static final String DESCRIPTION = "buy vegetables";
-    private static final String VALID_DATE1 = "14-02-1998 02:00:00";
-    private static final String VALID_DATE2 = "14-02-1998 03:30:00";
+    private static final String VALID_DATE1 = "14-02-1998 02:00";
+    private static final String VALID_DATE2 = "14-02-1998 03:30";
 
     @Test
     void getEvent_validEventInputs_expectEvent() throws GetTaskFailedException {
@@ -35,8 +35,8 @@ class EventFactoryTest {
         Event event = EventFactory.getEvent(arguments);
 
         assertEquals(event.getDescription(), DESCRIPTION);
-        assertEquals(UtilityParser.getDateAsString(event.getStartDate()), VALID_DATE1);
-        assertEquals(UtilityParser.getDateAsString(event.getEndDate()), VALID_DATE2);
+        assertEquals(DateParser.dateToString(event.getStartDate()), VALID_DATE1);
+        assertEquals(DateParser.dateToString(event.getEndDate()), VALID_DATE2);
         assertEquals(event.getPriority(), PriorityEnum.LOW);
         assertEquals(event.getRecurrence(), RecurrenceEnum.YEARLY);
     }
@@ -52,8 +52,8 @@ class EventFactoryTest {
         Event event = EventFactory.getEvent(arguments);
 
         assertEquals(event.getDescription(), DESCRIPTION);
-        assertEquals(UtilityParser.getDateAsString(event.getStartDate()), VALID_DATE1);
-        assertEquals(UtilityParser.getDateAsString(event.getEndDate()), VALID_DATE2);
+        assertEquals(DateParser.dateToString(event.getStartDate()), VALID_DATE1);
+        assertEquals(DateParser.dateToString(event.getEndDate()), VALID_DATE2);
         assertEquals(event.getPriority(), PriorityEnum.MEDIUM);
         assertEquals(event.getRecurrence(), RecurrenceEnum.NONE);
     }
