@@ -88,7 +88,7 @@ Icons used throughout this guide:
 
 > ❗ Important things you should take note of before using the command.
 
-Lastly, text that is blue like this example, are clickable [links]() that will bring you to the 
+Lastly, text that is blue like this example, are clickable [links](#test) that will bring you to the 
 relevant part of this user guide.
 
 ---
