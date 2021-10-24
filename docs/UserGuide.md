@@ -126,6 +126,9 @@ Habit | Checkpoints; actionable tasks to be done to achieve goal. | `Run 5km`
 Below are the commands that the app supports.
 Each section describes the function of the command and the command format.
 
+**NOTE**: For all commands and features, apart from the positioning of the command word, all other flags and parameters 
+can be placed in any order as long as their respective tags are present e.g. `n/, s/, e/` etc.
+
 ### Ask for Help: `help`
 Displays a list of all possible commands. 
 If a user types in an invalid command, it will invoke this method by default.
@@ -138,6 +141,7 @@ ________________________________________________________________________________
 Hello! These are all the possible commands for this habit tracker :) (flags within {} brackets are optional)
 - set a goal: set n/<goal name> { t/<goal type> s/<start date> } e/<end date>
    -> Goal types include: default[df], sleep[sl], food[fd], exercise[ex] and study[sd]
+- update a goal: update g/<goal index> n/<new goal name>
 - remove a goal: remove g/<goal index>
 - list all goals for that habit: list
 - add a habit to a goal: add g/<goal index> n/<habit name> i/<interval>
@@ -151,60 +155,73 @@ Press enter to return to command mode...
 ```
 
 ### Set a Goal: `set`
-Sets a new goal for long term achievement you wish to accomplish. Goals must have an end date while goal type and
+Sets a new goal for a long term achievement you wish to accomplish. Goals must have an end date while the goal type and
 start dates are optional.
 
-Format: `set <GOAL_NAME> {-<GOAL_TYPE> /<START_DATE>} /<END_DATE>` 
+Format: `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>` 
 
 Note:
 1. Dates must be in `DDMMYYYY` format. For example, 01 January 2021 must be written as `01012020`.
-2. If the optional `/<START_DATE>` argument is not provided, `/<END_DATE>` will be used instead. 
-3. The optional `-<GOAL_TYPE>` argument can take one of the following flags:
+2. The two flags contained within the `{}` brackets indicate the optional inputs of `t/<GOAL_TYPE>` and `s/<START_DATE>`.
+3. The optional `<GOAL_TYPE>` argument can take one of the following flags:
    1. `sl` &#8594; Sleep
    2. `fd` &#8594; Food
    3. `ex` &#8594; Exercise
    4. `sd` &#8594; Study
-4. Otherwise, it will be default goal type `DF`.
+4. Otherwise, it will be of default goal type `df`.
 
 Example:
 ```
-set Reduce spending /01012022 /31122022
+Command: set n/Reduce Spending e/31122021
 ```
 
 Output:
 ```
-Your goal: [DF] Reduce spending has been added.
+________________________________________________________________________________________________________________________
+Your goal: [DF] Reduce Spending has been added.
+________________________________________________________________________________________________________________________
+
+Press enter to return to command mode...
+
 ```
 ### Update a Goal: `Update`
 Updates the name of a goal specified by its index.
 
-Format: `update <GOAL_INDEX> <NEW_GOAL_NAME>`
+Format: `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>`
 
 Note: As of now, only goal name may be updated. To update other goal features you just have to wait :p 
 
 Example:
 
 ```
-update 3 Reach for the Stars
+Command: update g/1 n/Decrease Spending
 ```
 Output:
 ```
-Your goal "Reach for the Moon" has been changed to "Reach for the Stars".
+________________________________________________________________________________________________________________________
+Your goal "Reduce Spending" has been changed to "Decrease Spending".
+________________________________________________________________________________________________________________________
+
+Press enter to return to command mode...
 ```
 
 ### Remove a Goal: `remove`
 Removes a goal specified by its index.
 
-Format: `remove <GOAL_INDEX>`
+Format: `remove g/<GOAL_INDEX>`
 
 Example:
 ```
-remove 1
+Command: remove 1
 ```
 
 Output:
 ```
-Your goal: [DF] Exercise More has been removed.
+________________________________________________________________________________________________________________________
+Your goal: [DF] Decrease Spending has been removed.
+________________________________________________________________________________________________________________________
+
+Press enter to return to command mode...
 ```
 
 ### List all Goals: `list`
@@ -323,10 +340,11 @@ are **automatically** saved in a text file at the relative storage path, `data/h
 
 Action | Command Format | Example
 ------------ | ------------ | ------------
-Set goal | `set <GOAL_NAME> {-<GOAL_TYPE> /<START_DATE>} /<END_DATE>` | `set Reduce spending /01012022 /31122022`
-Remove goal | `remove <GOAL_INDEX>` | `remove 1`
+Set goal | `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>` | `set Reduce spending /01012022 /31122022`
+Update goal | `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>` | `update g/1 n/Decrease Spending`
+Remove goal | `remove g/<GOAL_INDEX>` | `remove 1`
 List goals | `list` | `list`
-Add habit | `add <GOAL_INDEX> <HABIT_NAME>` | `add 1 Run 4km`
+Add habit | `add n/<HABIT_NAME g/<GOAL_INDEX> i/<INTERVAL>` | `add 1 Run 4km`
 Done habit | `done <GOAL_INDEX> <HABIT_INDEX>` | `done 1 2`
 Delete habit  | `delete <GOAL_INDEX> <HABIT_INDEX>` | `delete 2 1`
 View habits | `view <GOAL_INDEX>` | `view 1`
