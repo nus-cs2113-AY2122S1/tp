@@ -18,8 +18,11 @@ SchedUrMods can help you manage your daily tasks faster than traditional GUI app
 - [4. Command Summary](#4-command-summary)
 
 ## 1. Quick Start
-1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `SchedUrMods.jar` from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases)
+1. Ensure you have Java **11** or above installed in your Computer, 
+and that `java` is in your `PATH` environment variable.
+2. Download the latest `SchedUrMods.jar` from [here](https://github.com/AY2122S1-CS2113T-W13-3/tp/releases/latest).
+
+   > **⚠️Note:** Do *not* decompress the jar file even if it shows as an archive on your file manager.
 3. Copy the file to the folder you want to use as the _home folder_ for Duke.
 4. Open a terminal window in the _home folder_.
 5. Type `java -jar SchedUrMods.jar` into the terminal to start Duke.
@@ -219,6 +222,10 @@ Sorts the tasklist by a given criteria.
 Deletes tasks specified in comma-seperated argument.
 
 **Format:** `delete <indexes of tasks to delete>`
+
+Index should be specified in either,
+- Single index, such as `3`
+- A range of two indexes, such as `1-3`. This is a shorthand for `1,2,3`.
 - task indexes should be comma seperated.
   - `delete 1,3,5` would delete tasks with indexes 1, 3 and 5.
   - `delete 1-3` would delete tasks with indexes 1, 2 and 3.
@@ -272,6 +279,8 @@ Deletes tasks specified in comma-seperated argument.
 
 ### 2.6 Exiting the program: `bye`
 Displays goodbye message and exits the program.
+
+An end-of-file condition in the input, such as <kbd>Ctrl-D</kbd> on Bash, has the same effect as this command.
 
 **Format:** `bye`
 
