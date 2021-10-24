@@ -2,6 +2,7 @@ package seedu.duke.task;
 
 import seedu.duke.exception.InvalidRecurrenceException;
 
+//@@author SeanRobertDH
 public enum RecurrenceEnum {
     NONE, DAILY, WEEKLY, MONTHLY, YEARLY;
 
@@ -22,17 +23,5 @@ public enum RecurrenceEnum {
             }
         }
         throw new InvalidRecurrenceException(recurrence);
-    }
-
-    public static String getRecurrencesListString(String argumentSplit) {
-        String listString = "%s";
-        for (RecurrenceEnum recurrence : RecurrenceEnum.values()) {
-            if (recurrence == NONE) {
-                continue;
-            }
-            listString = String.format(listString, recurrence.toString() + argumentSplit + "%s");
-        }
-        listString = listString.replaceAll("%s", "");
-        return listString.substring(0, listString.length() - 1);
     }
 }

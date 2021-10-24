@@ -1,6 +1,6 @@
 package seedu.duke.task.factory;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +17,7 @@ import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.TypeEnum;
 import seedu.duke.task.type.Todo;
 
+//@@author SeanRobertDH
 public class TodoFactory {
     private static final TypeEnum taskType = TypeEnum.TODO;
 
@@ -30,7 +31,7 @@ public class TodoFactory {
             String recurrence = flags.get(TodoFlag.RECURRENCE);
 
             PriorityEnum priorityEnum = TaskParser.getPriorityEnum(priority);
-            Date doOnDate = TaskParser.getDate(doOn);
+            LocalDateTime doOnDate = TaskParser.getDate(doOn);
             RecurrenceEnum recurrenceEnum = TaskParser.getRecurrenceEnum(recurrence);
 
             boolean hasRecurrence = recurrenceEnum != null && recurrenceEnum != RecurrenceEnum.NONE;
@@ -64,7 +65,7 @@ public class TodoFactory {
     }
 
     private static Todo getConstructor(String description,
-            PriorityEnum priority, Date doOn, RecurrenceEnum recurrence) {
+            PriorityEnum priority, LocalDateTime doOn, RecurrenceEnum recurrence) {
         if (priority == null) {
             return getTodoWithDefaultPriority(description, doOn, recurrence);
         } else {
@@ -72,7 +73,7 @@ public class TodoFactory {
         }
     }
 
-    private static Todo getTodoWithDefaultPriority(String description, Date doOn, RecurrenceEnum recurrence) {
+    private static Todo getTodoWithDefaultPriority(String description, LocalDateTime doOn, RecurrenceEnum recurrence) {
         if (doOn == null) {
             return new Todo(description);
         } else {
@@ -85,7 +86,7 @@ public class TodoFactory {
     }
 
     private static Todo getTodoWithPriority(String description,
-            PriorityEnum priority, Date doOn, RecurrenceEnum recurrence) {
+            PriorityEnum priority, LocalDateTime doOn, RecurrenceEnum recurrence) {
         if (doOn == null) {
             return new Todo(description, priority);
         } else {

@@ -10,7 +10,6 @@ import seedu.duke.exception.InvalidRecurrenceException;
 import seedu.duke.exception.ParseDateFailedException;
 import seedu.duke.exception.RequiredArgmentNotProvidedException;
 import seedu.duke.parser.DateParser;
-import seedu.duke.parser.UtilityParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.TypeEnum;
@@ -19,10 +18,11 @@ import seedu.duke.task.type.Deadline;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+//@@author SeanRobertDH
 class DeadlineFactoryTest {
 
     private static final String DESCRIPTION = "buy vegetables";
-    private static final String VALID_DATE1 = "14-02-1998 02:00:00";
+    private static final String VALID_DATE1 = "14-02-1998 02:00";
 
     @Test
     void getDeadline_validTodoInputs_expectDeadline() throws GetTaskFailedException {
@@ -37,7 +37,7 @@ class DeadlineFactoryTest {
         Deadline deadline = DeadlineFactory.getDeadline(arguments);
 
         assertEquals(deadline.getDescription(), DESCRIPTION);
-        assertEquals(UtilityParser.getDateAsString(deadline.getDueDate()), VALID_DATE1);
+        assertEquals(DateParser.dateToString(deadline.getDueDate()), VALID_DATE1);
         assertEquals(deadline.getPriority(), PriorityEnum.HIGH);
         assertEquals(deadline.getRecurrence(), RecurrenceEnum.MONTHLY);
     }
@@ -52,7 +52,7 @@ class DeadlineFactoryTest {
         Deadline deadline = DeadlineFactory.getDeadline(arguments);
 
         assertEquals(deadline.getDescription(), DESCRIPTION);
-        assertEquals(UtilityParser.getDateAsString(deadline.getDueDate()), VALID_DATE1);
+        assertEquals(DateParser.dateToString(deadline.getDueDate()), VALID_DATE1);
         assertEquals(deadline.getPriority(), PriorityEnum.MEDIUM);
         assertEquals(deadline.getRecurrence(), RecurrenceEnum.NONE);
     }

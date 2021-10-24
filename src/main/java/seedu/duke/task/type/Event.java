@@ -1,8 +1,7 @@
 package seedu.duke.task.type;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import seedu.duke.parser.UtilityParser;
+import seedu.duke.parser.DateParser;
 import seedu.duke.task.PriorityEnum;
 import seedu.duke.task.RecurrenceEnum;
 import seedu.duke.task.Task;
@@ -20,26 +19,26 @@ public class Event extends Task {
     private static final String START_DATE_BEFORE_END_DATE_ASSERTION = "Start date must be before end date!";
 
     private Reminder reminder;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
 
-    public Event(String description, Date startDate, Date endDate) {
+    public Event(String description, LocalDateTime startDate, LocalDateTime endDate) {
         super(description);
         setStartDate(startDate);
         setEndDate(endDate);
     }
 
-    public Event(String description, Date startDate, Date endDate, PriorityEnum priority) {
+    public Event(String description, LocalDateTime startDate, LocalDateTime endDate, PriorityEnum priority) {
         this(description, startDate, endDate);
         setPriority(priority);
     }
 
-    public Event(String description, Date startDate, Date endDate, RecurrenceEnum recurrence) {
+    public Event(String description, LocalDateTime startDate, LocalDateTime endDate, RecurrenceEnum recurrence) {
         this(description, startDate, endDate);
         setRecurrence(recurrence);
     }
 
-    public Event(String description, Date startDate, Date endDate, PriorityEnum priority, RecurrenceEnum recurrence) {
+    public Event(String description, LocalDateTime startDate, LocalDateTime endDate, PriorityEnum priority, RecurrenceEnum recurrence) {
         this(description, startDate, endDate);
         setPriority(priority);
         setRecurrence(recurrence);
@@ -49,27 +48,27 @@ public class Event extends Task {
         return this.TASK_TYPE;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         assert startDate != null : START_DATE_NOT_NULL_ASSERTION;
         if (endDate != null) {
-            assert startDate.before(endDate) : START_DATE_BEFORE_END_DATE_ASSERTION;
+            assert startDate.isBefore(endDate) : START_DATE_BEFORE_END_DATE_ASSERTION;
         }
         this.startDate = startDate;
         reminder = new Reminder(startDate);
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         assert endDate != null : END_DATE_NOT_NULL_ASSERTION;
         if (startDate != null) {
-            assert startDate.before(endDate) : START_DATE_BEFORE_END_DATE_ASSERTION;
+            assert startDate.isBefore(endDate) : START_DATE_BEFORE_END_DATE_ASSERTION;
         }
         this.endDate = endDate;
     }
@@ -83,7 +82,7 @@ public class Event extends Task {
     public String getTaskEntryDescription() {
         return super.getTaskEntryDescription()
             + String.format(DEADLINE_DATE_DESCRIPTION_REGEX,
-            UtilityParser.getDateAsString(getStartDate()), UtilityParser.getDateAsString(getEndDate()));
+            DateParser.dateToString(getStartDate()), DateParser.dateToString(getEndDate()));
     }
 
     public String getReminder(LocalDateTime now) {

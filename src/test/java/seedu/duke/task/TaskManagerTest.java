@@ -3,31 +3,32 @@ package seedu.duke.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDateTime;
 import org.junit.jupiter.api.Test;
 import seedu.duke.exception.EmptyTasklistException;
 import seedu.duke.exception.ListFormatException;
 import seedu.duke.exception.MissingFilterArgumentException;
 import seedu.duke.exception.ParseDateFailedException;
-import seedu.duke.parser.UtilityParser;
+import seedu.duke.parser.DateParser;
 import seedu.duke.task.type.Deadline;
 import seedu.duke.task.type.Event;
 import seedu.duke.task.type.Todo;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+//@@author SeanRobertDH
 class TaskManagerTest {
 
     Task newToDo;
     Task newDeadline;
     Task newEvent;
-    private static final String VALID_DATE1 = "22-10-2021 02:00:00";
-    private static final String VALID_DATE2 = "22-10-2021 05:00:00";
+    private static final String VALID_DATE1 = "22-10-2021 02:00";
+    private static final String VALID_DATE2 = "22-10-2021 05:00";
 
     private TaskManagerTest() throws ParseDateFailedException {
-        Date startDate = UtilityParser.getStringAsDate(VALID_DATE1);
-        Date endDate = UtilityParser.getStringAsDate(VALID_DATE2);
+        LocalDateTime startDate = DateParser.stringToDate(VALID_DATE1);
+        LocalDateTime endDate = DateParser.stringToDate(VALID_DATE2);
         newToDo = new Todo("read book", PriorityEnum.LOW, startDate, RecurrenceEnum.DAILY);
         newDeadline = new Deadline("return book", startDate, PriorityEnum.MEDIUM, RecurrenceEnum.WEEKLY);
         newEvent = new Event("project meeting", startDate, endDate, PriorityEnum.HIGH, RecurrenceEnum.MONTHLY);
