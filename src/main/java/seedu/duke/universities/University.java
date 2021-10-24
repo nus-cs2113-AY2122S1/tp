@@ -25,7 +25,7 @@ public class University implements Comparator<University> {
     public University(String name, ArrayList<ModuleMapping> list, UniversityList universityMasterList) {
         this.name = name;
         this.list = list;
-        index = getMasterListIndex(universityMasterList);
+        this.index = getMasterListIndex(universityMasterList);
     }
 
     //    public University(String name, int index) {

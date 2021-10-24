@@ -23,6 +23,6 @@ public class AddMapCommand extends Command {
         ModuleMapping selectedMapping = selectedMappings.get(selectedMappingIndex - 1);
         universityToMap.addMapping(selectedMapping);
         Ui.printMapping(selectedMapping, universityToMap.getMappingListSize());
-        SelectedUniversityStorage.write(universitySelectedList);
+        storage.updateSelectedUniversityList(universitySelectedList);
     }
 }

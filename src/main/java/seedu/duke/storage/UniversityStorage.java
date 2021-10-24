@@ -18,14 +18,7 @@ import static java.lang.Double.parseDouble;
 public class UniversityStorage {
     private static final Logger logger = Logger.getLogger("UniversityStorageLog");
 
-    public static ArrayList<University> load() throws IOException {
-        logger.log(Level.INFO, "Start loading university data");
-        InputStream inputStream = UniversityStorage.class.getResourceAsStream(
-                "/University.csv");
-        return readUniversities(inputStream);
-    }
-
-    public static ArrayList<University> readUniversities(InputStream inputStream) throws IOException {
+    public ArrayList<University> readUniversityList(InputStream inputStream) throws IOException {
         ArrayList<University> universityList = new ArrayList<>();
         ArrayList<ModuleMapping> moduleMappingList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
@@ -57,7 +50,7 @@ public class UniversityStorage {
         return universityList;
     }
 
-    public static String[] extractAttributes(String line) {
+    private String[] extractAttributes(String line) {
         String[] attributes = line.split(",");
         if (attributes.length == 7) {
             return attributes;

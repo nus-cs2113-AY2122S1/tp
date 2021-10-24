@@ -1,9 +1,6 @@
 package seedu.duke.universities;
 
-import seedu.duke.modules.Module;
-
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class UniversityList {
 
