@@ -29,9 +29,10 @@ realise the target user profile that motivated us to build this application.
 
 ## 👍 Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [AddressBook Level-3](https://se-education.org/addressbook-level3/) for User Guide and Developer Guide reference
+* [PlantUML](https://plantuml.com/) for creation of UML diagrams
 
-##⭐ Setting Up & Getting Started
+## ⭐ Setting Up & Getting Started
 1. Fork *Food-O-Rama*'s repository from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp).
 2. Clone the repository into your computer.
 3. Import the project into your IDE.
@@ -194,4 +195,10 @@ without crashing
 
 ## 🧪 Instructions for Manual Testing
 
-{Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
+* For Manual Testing, you can write sample data into data text files (dishes.txt & ingredients.txt)
+* Write data in appropriate format
+  * Dishes: [dishName] | [dishWaste (kg)] | [dishWaste divided by number of constituents] | [ingredient 1|ingredient 2|etc]
+    * Example: chicken rice|2.0|1.0|chicken|rice
+  * Ingredients: [ingrName]|[ingrStored(kg)]|[ingrWasted(kg)]
+    * Example:chicken|2.33|1.0
+
