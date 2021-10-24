@@ -114,6 +114,7 @@ class UiTest {
 
     @Test
     public void testGetCommandListMessage() {
+
         String expectedOutput = "Here are the list of commands:" + END_LINE + END_LINE
                 + "help" + END_LINE + "add" + END_LINE + "list" + END_LINE + "view" + END_LINE + "edit" + END_LINE
                 + "find" + END_LINE + "delete" + END_LINE + "exit" + END_LINE + END_LINE

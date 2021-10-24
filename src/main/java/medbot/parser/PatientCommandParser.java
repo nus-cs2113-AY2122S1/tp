@@ -10,6 +10,7 @@ import medbot.command.personcommand.patientcommand.ViewPatientCommand;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Patient;
 
+
 public abstract class PatientCommandParser {
     private static final String END_LINE = System.lineSeparator();
 
@@ -19,8 +20,13 @@ public abstract class PatientCommandParser {
     private static final String COMMAND_VIEW = "view";
     private static final String COMMAND_LIST = "list";
     private static final String COMMAND_FIND = "find";
+    private static final String COMMAND_HELP = "help";
+    private static final String COMMAND_EXIT = "exit";
+    private static final String COMMAND_SWITCH = "switch";
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
+    private static final String EMPTY_STRING = "";
+
 
     /**
      * Parses the user input and returns the corresponding command when the view type is PATIENT_INFO.
@@ -48,6 +54,7 @@ public abstract class PatientCommandParser {
         if (userInput.startsWith(COMMAND_FIND)) {
             return parseFindPatientCommand(userInput);
         }
+
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
@@ -110,4 +117,5 @@ public abstract class PatientCommandParser {
         String[] parameters = ParserUtils.getParameters(userInput);
         return new FindPatientCommand(parameters);
     }
+
 }
