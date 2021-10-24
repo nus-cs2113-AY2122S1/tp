@@ -69,6 +69,6 @@ public class UpdateModuleCommand extends Command {
         moduleManager.removeModule(listOfModule[index - 1]);
 
         moduleManager.setModule(newName, current);
-        return new CommandResult(String.format("Updated %s to %s successfully", listOfModule[index - 1], newName));
+        return new CommandResult(String.format(Messages.UPDATE_MODULE_RESPONSE_MESSAGE, listOfModule[index - 1], newName));
     }
 }

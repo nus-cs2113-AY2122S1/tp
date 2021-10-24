@@ -10,6 +10,7 @@
     * [Accessing the module management workspace : `module`](#accessing-the-module-management-workspace)
     * [Adding a new module : `add "<module_code>"`](#adding-a-new-module)
     * [Deleting a module : `delete <index>`](#deleting-a-module)
+    * [Updating a module information :`update <index> "<new_module_code>"`](#updating-a-module)
     * [Viewing module information `view`](#viewing-module-information)
 - [Section: Module](#section--module)
     * [Accessing module workspace : `go <module_code>`](#accessing-module-workspace)
@@ -18,6 +19,7 @@
     * [Adding a Note : `add "<name>" "<content>"`](#adding-a-note)
     * [Deleting a Note : `delete <index>`](#deleting-a-note)
     * [Viewing note information : `view {index}`](#viewing-note-information)
+    * [Exporting all notes: `export`](#exporting-all-notes)
 - [Section: Schedule](#section--schedule)
     * [Accessing schedule workspace : `schedule`](#accessing-schedule-workspace)
     * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<zoom_link>"`](#adding-a-schedule)
@@ -105,7 +107,7 @@ The below table represents what each means.
 | `{value}` |  The value is optional, and including it may provide different results.|
 | `<value>` | The value is required for the command to work properly.|
 |`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
-|`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hournotation**. For example, `14:20` is valid which represents `2:20 pm`.|
+|`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.|
 |`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
 
 Terminologies used throughout this guide:
@@ -144,6 +146,7 @@ Type any of the following to get started:
 > help
 > view
 > back
+> update
 > delete
 
 [module] >>> 
@@ -155,6 +158,7 @@ List of Module Management workspace commands:
 | ----------- | ----------- |
 |add|add a module in TermiNUS|
 |delete|delete a module in TermiNUS|
+|update|update a module name currently in TermiNUS|
 |view|view modules information currently in TermiNUS|
 |help|view all commands and their usage within the module management workspace|
 |back|escape and return to the default workspace|
@@ -197,6 +201,22 @@ Expected Output:
 ```
 [module] >>> delete 1
 Deleted module CS2113T.
+[module] >>> 
+```
+
+### Updating a module
+
+**Format:** `update <index> "<new_module_code>"`
+
+Updates a module name in the module management workspace.
+> ⚠️The `<new_module_code>` will have the same restrictions as the [add command](#adding-a-new-module)
+Example: `update 1 "CS2113"`
+
+Expected Output:
+
+```
+[module] >>> update 1 "CS2113"
+Updated CS2113T to CS2113 successfully.
 [module] >>> 
 ```
 
@@ -292,6 +312,7 @@ Type any of the following to get started:
 > view
 > back
 > delete
+> export
 
 [CS2113T > note] >>> 
 ```
@@ -303,6 +324,7 @@ List of Note workspace commands:
 |add|add a note for the module|
 |delete|delete a note from the module|
 |view|view notes information from the module|
+|export|export all current notes for the module as a pdf|
 |help|view all commands and their usage in the note workspace|
 |back|escape and return to the module workspace|
 |exit|exit and closes TermiNUS|
@@ -379,6 +401,26 @@ Name: coding style
 Content:
 switch case identation should be aligned.
 
+[CS2113T > note] >>> 
+```
+
+### Exporting all notes 
+
+**Format:** `export`
+
+Exports all notes within the note workspace as a PDF file.
+> ⚠️ To export a file, there must be at least 1 note contain within the note workspace.
+
+> ⚠️ The export process can take a while.   
+> A very large text can cause the program to take a long time to export.
+
+Example: `export`
+
+Expected Output:
+
+```
+[CS2113T > note] >>> export
+Exported notes! Check the data folder.
 [CS2113T > note] >>> 
 ```
 
@@ -809,6 +851,11 @@ Your question on 'What is Java?' has been added!
 ___  
 
 ## FAQ
+**Q:** Can I edit the information in the`data` directory?
+**A:** Yes! **TermiNUS** saves and loads your information form the `data` directory, editing the files
+in the `data` folder works. We recommend that you update the **contents** of any notes `.txt` in the 
+`data/module_name` directory. However, we do not recommend modifying any configuration file 
+or renaming any file/folders. You should use **TermiNUS** instead to edit any information.
 
 ___  
 
@@ -825,11 +872,15 @@ ___
 ___  
 
 ## Command Summary
+> ⚠️ To understand which command applies to which workspace mentioned below, 
+> please refer to [Workspace Command Summary](#workspace-command-summary)
 
 | Workspace   | Action | Format| Examples |
 | ----------- | ----------- | ----------- |----------- |
 |module management|add module|`add "<module_code>"`|`add "CS2113T"`|
+|module management|update module |`update <index> "<new_module_code>"`|`update 1 "CS2113"`|
 |note|add note|`add "<name>" "<content>"`|`add "Note1" "Hello world."`|
+|note|export note|`export`|`export`|
 |schedule|add schedule|`add "<description>" "<day>" "<start_time>" "<zoom_link>"`|`add "CS2113T Tutorial 1" "Thursday" "10:00" "https://zoom.us/test"`|
 |question|add question|`add "<question>" "<answer>"`|`add "What is 1+1?" "2"`|
 |question|active learning|`test {count}`|`test`, `test 3`|
