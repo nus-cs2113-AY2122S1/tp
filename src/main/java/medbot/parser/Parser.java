@@ -65,7 +65,7 @@ public abstract class Parser {
         if (userInput.equals(COMMAND_EXIT)) {
             return new ExitCommand();
         }
-        if (userInput.equals(COMMAND_HELP)) {
+        if (userInput.startsWith(COMMAND_HELP)) {
             return parseHelpCommand(userInput);
         }
 
