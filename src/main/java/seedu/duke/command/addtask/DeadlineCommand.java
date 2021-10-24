@@ -1,6 +1,5 @@
 package seedu.duke.command.addtask;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import seedu.duke.command.CommandEnum;
