@@ -409,7 +409,7 @@ switch case identation should be aligned.
 **Format:** `export`
 
 Exports all notes within the note workspace as a PDF file.
-> ⚠️ To export a file, there must be at least 1 note contain within the note workspace.
+> ⚠️ To export a file, there must be at least 1 note contained within the note workspace.
 
 > ⚠️ The export process can take a while.   
 > A very large text can cause the program to take a long time to export.
