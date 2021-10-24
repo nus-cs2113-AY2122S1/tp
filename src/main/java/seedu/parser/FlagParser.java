@@ -3,7 +3,6 @@ package seedu.parser;
 import seedu.command.flags.SearchFlags;
 import seedu.ui.TextUi;
 
-
 public class FlagParser {
 
     private static final String QUICK_FLAG = "q";
