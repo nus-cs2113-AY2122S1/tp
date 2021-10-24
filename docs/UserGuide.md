@@ -14,8 +14,6 @@ wastage, and even **link** your ingredients to your dishes for advanced manageme
 This user guide serves to help you manoeuvre around *Food-O-Rama*, and includes a List of Commands for your quick
 reference. We hope you enjoy using *Food-O-Rama*! 💕
 
----
-
 ## 🧾 Table of Contents
 
 * [Quick Start](#-quick-start)
@@ -50,8 +48,6 @@ reference. We hope you enjoy using *Food-O-Rama*! 💕
     * `bye`: [Exit Food-O-Rama](#exit-food-o-rama-bye)
     * [Saving the data](#saving-the-data)
 
----
-
 ## 📖 Quick Start
 
 1. Ensure that you have Java 11 or above installed.
@@ -83,8 +79,6 @@ java -jar Food-O-Rama.jar
 ################################################################################################################
 ```
 
----
-
 ## 💽 List of Commands
 
 | 🏁 Function | ✔ Command | 
@@ -110,8 +104,6 @@ java -jar Food-O-Rama.jar
 | Sort the *dishes* by *amount of wastage* | `sort dish` |
 | Sort the *ingredients* by *amount of wastage* | `sort ingr` |
 | Exit *Food-O-Rama* | `bye` |
-
----
 
 ## 👍 Features
 
@@ -898,7 +890,6 @@ Expected Outcome:
 Food-O-Rama data (*dish and ingredients list*) are saved automatically after any command that changes the data.
 There is no need to save manually.
 
----
 
 ## 😯 FAQ
 
@@ -906,7 +897,7 @@ There is no need to save manually.
 
 **A**: Copy the data folder and its contents over to the new computer. 
 
----
+## 👋 Final Notes
 
 You have come to the end of the **Food-O-Rama User Guide**. 
 
