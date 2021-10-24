@@ -228,7 +228,8 @@ public class Parser {
         } else {
             //list only 1 person, if exists
             try {
-                Person personToView = getValidPersonInTripFromString(inputParams, currentTrip); //returns null if no such person
+                //returns null if no such person
+                Person personToView = getValidPersonInTripFromString(inputParams, currentTrip);
                 if (personToView != null) {
                     currentTrip.getIndividualExpenseSummary(personToView);
                 } else {
