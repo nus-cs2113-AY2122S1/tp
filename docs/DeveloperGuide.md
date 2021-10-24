@@ -1,20 +1,17 @@
-
 # Food-O-Rama Developer Guide ✍
 
-## Introduction
+## 🌑 Introduction
 *Food-O-Rama* is a Java based Command-Line-Interface (CLI) application.
 
 This Developer Guide serves to inform developers on the design and implementation of
 *Food-O-Rama* to assist them in the development process of APIs. It also helps them 
 realise the target user profile that motivated us to build this application.
 
----
+## 🧾 Table of Contents
 
-## Table of Contents
-
-* [Acknowledgements](#acknowledgements)
-* [Setting Up & Getting Started](#setting-up--getting-started)
-* [Design & Implementations](#design--implementation)
+* [Acknowledgements](#-acknowledgements)
+* [Setting Up & Getting Started](#star-setting-up--getting-started)
+* [Design & Implementations](#-design--implementation)
   * [General Flow](#general-flow)
   * [Input Parsing](#input-parsing)
   * [Storage](#storage)
@@ -22,29 +19,27 @@ realise the target user profile that motivated us to build this application.
   * [User-Interface Component](#user-interface-component)
   * [Exceptions](#exceptions)
   * [Command Abstraction](#command-abstraction)
-* [Product Scope](#product-scope)
+* [Product Scope](#-product-scope)
   * [Target User Profile](#target-user-profile)
   * [Value Proposition](#value-proposition)
-*[User Stories](#user-stories)
-*[Non-Functional Requirements](#non-functional-requirements)
-*[Glossary](#glossary)
-*[Instructions for Manual Testing](#instructions-for-manual-testing)
-
----
+* [User Stories](#-user-stories)
+* [Non-Functional Requirements](#-non-functional-requirements)
+* [Glossary](#-glossary)
+* [Instructions for Manual Testing](#-instructions-for-manual-testing)
 
 ## 👍 Acknowledgements
 
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
-## Setting Up & Getting Started
-1. Fork *Food-O-Rama*'s repository from [here] (https://github.com/AY2122S1-CS2113T-W11-4/tp)
-2. Clone the repository into your computer
-3. Import the project into your IDE
-4. For optimal results it is recommended to use JDK 11
+## :star: Setting Up & Getting Started
+1. Fork *Food-O-Rama*'s repository from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp).
+2. Clone the repository into your computer.
+3. Import the project into your IDE.
+4. For optimal results, it is recommended to use JDK 11.
 
 ## 📔 Design & Implementation
 
-This section brings developers through the general flow of the programme, the various components involved and the overall design of their 
+This section brings developers through the general flow of the programme, the various components involved, and the overall design of their
 implementation.
 
 ### General Flow
@@ -57,7 +52,6 @@ Describes the step-by-step sequence from User Input to the Output.
 * User begins typing inputs
 * Inputs get parsed by InputParser returning the appropriate Command
 * Command gets executed and respective output gets displayed
-
 * Once user is done using the application, he can send an exit message prompting a goodbye message
 * Application exits
 
@@ -92,8 +86,8 @@ wasted as well as the weight of Ingredient wasted from Dish wastage
 * The `IngredientList` class comprises an array of `Ingredient` along with Sort and Graph functions.
   * The Sort function arranges Dishes / Ingredients in descending order of their wastage
   * The Graph function visualises the wastage of Dishes / Ingredients for easier analysis 
-### User-Interface Component
 
+### User-Interface Component
 
 ![](images/UiClass.png)
 
@@ -108,6 +102,7 @@ The command it sends to the terminal is as follows:
 * `clear` for Linux/MacOS Terminals
 
 `ClearConsole()` Code Snippet:
+
 ```
  public static void clearConsole() {
         try {
@@ -130,11 +125,12 @@ The command it sends to the terminal is as follows:
         }
     }
 ```
+
 ### Exceptions
+
 The `FoodoramaException` class is responsible for handling errors such as unrecognised user commands and 
 improper parameters. It does so by calling the `Ui` class to print error messages that prompt the User to 
 type in correct Commands/Parameters
-
 
 ### Command Abstraction
 
@@ -142,7 +138,6 @@ type in correct Commands/Parameters
 
 * Different Command Classes that perform different tasks by calling various functions of the Object Classes  
 * All inherit from an abstract `Command` class with one execute method that takes an Arraylist<String> as input
-
 
 ## 📂 Product Scope
 
@@ -167,20 +162,20 @@ global food wastage.
 
 Brings developers through the requirements of Users the *Food-O-Rama* team considered when building this programme.
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|Restaurant owner|Delete an entry for a particular dish|Change the tracking to adapt to a change in my menu|
-|v1.0|Restaurant owner| Use a help function|Get familiar with the application|
-|v1.0|Restaurant owner|Add a ingredient to be tracked|Keep track of the ingredient storage|
-|v1.0|Restaurant owner|Add a dish to be tracked|Track its wastage and its ingredients’ wastage|
-|v1.0|Restaurant owner|Add the weight of wastage of a dish|Know how much of a certain dish is being wasted|
-|v1.0|Restaurant owner|Calculate the Ingredients and Dishes wasted|Plan for future meal services to reduce food wastage|
-|v2.0|Restaurant owner|Find a particular Ingredient/Dish|Do not have to look through a long list of ingredients/dishes|
-|v2.0|Restaurant owner|Sort the Ingredients in descending order of Wastage|Determine which ingredients are wasted the most|
-|v2.0|Restaurant owner|Sort the Dishes in descending order of Wastage|Determine which dishes are wasted the most|
-|v2.0|Restaurant owner|Clear all the Dishes and/or Ingredients present in my data|Restart my data collection|
-|v2.0|Restaurant owner|View a graph of wastage for my Dishes and Ingredients|Understand the wastage trends of Dishes and Ingredients at a glance|
-|v2.0|Restaurant owner|Refresh my Command Line Interface after every User Command|Not have a cluttered terminal and instead focus on my tasks|
+| Version | As a ... | I want to ... | So that I can ... |
+| -------- | ---------- | --------------- | ------------------ |
+| v1.0 | Restaurant owner | Delete an entry for a particular dish | Change the tracking to adapt to a change in my menu |
+| v1.0 | Restaurant owner | Use a help function | Get familiar with the application |
+| v1.0 | Restaurant owner | Add an ingredient to be tracked | Keep track of the ingredient storage |
+| v1.0 | Restaurant owner | Add a dish to be tracked | Track its wastage and its ingredients’ wastage |
+| v1.0 | Restaurant owner | Add the weight of wastage of a dish | Know how much of a certain dish is being wasted |
+| v1.0 | Restaurant owner | Calculate the Ingredients and Dishes wasted | Plan for future meal services to reduce food wastage |
+| v2.0 | Restaurant owner | Find a particular Ingredient/Dish | Do not have to look through a long list of ingredients/dishes |
+| v2.0 | Restaurant owner | Sort the Ingredients in descending order of Wastage | Determine which ingredients are wasted the most |
+| v2.0 | Restaurant owner | Sort the Dishes in descending order of Wastage | Determine which dishes are wasted the most |
+| v2.0 | Restaurant owner | Clear all the Dishes and/or Ingredients present in my data | Restart my data collection |
+| v2.0 | Restaurant owner | View a graph of wastage for my Dishes and Ingredients | Understand the wastage trends of Dishes and Ingredients at a glance |
+| v2.0 | Restaurant owner | Refresh my Command Line Interface after every User Command | Not have a cluttered terminal and instead focus on my tasks |
 
 ## 🚦 Non-Functional Requirements
 
@@ -189,8 +184,6 @@ Brings developers through the requirements of Users the *Food-O-Rama* team consi
 * *Exceptions handling:* *Food-O-Rama* should be able to handle exceptions caused by User keying in erroneous inputs 
 without crashing
 * *Accessibility:* Users with the .jar file should be able to use *Food-O-Rama* 
-
-
 
 ## 📒 Glossary
 
