@@ -1,7 +1,7 @@
 package seedu.duke.commands;
 
 public class StatYearCommand extends StatCommand {
-    private int type = 0;
+    private int type = 1;
 
     public StatYearCommand(int type) {
         this.type = type;
