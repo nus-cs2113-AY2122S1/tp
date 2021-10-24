@@ -14,7 +14,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.ui.Ui;
 
 public class TestCommand extends Command {
 
@@ -50,7 +49,7 @@ public class TestCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager)
+    public CommandResult execute(ModuleManager moduleManager)
         throws InvalidArgumentException, InvalidCommandException {
         assert getModuleName() != null;
         assert questionCount > 0;
@@ -58,12 +57,12 @@ public class TestCommand extends Command {
         ContentManager<Question> contentManager = module.getContentManager(Question.class);
         ArrayList<Question> questions = contentManager.getContents();
         if (questions.isEmpty()) {
-            throw new InvalidCommandException(Messages.NO_QUESTIONS_ERROR_MESSAGE);
+            throw new InvalidCommandException(Messages.ERROR_MESSAGE_NO_QUESTIONS);
         }
 
-        GameEnvironment.createNewEnvironment(ui, questions, questionCount).run(); 
+        GameEnvironment.createNewEnvironment(questions, questionCount).run(); 
         
-        return new CommandResult(true);
+        return new CommandResult();
     }
     
 }

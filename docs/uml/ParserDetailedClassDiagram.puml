@@ -1,0 +1,29 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+hide circle
+
+!includesub ParserClassDiagram.puml!COMMANDPARSER
+
+abstract class "{abstract}\nInnerModuleCommandParser" as InnerModuleCommandParser extends CommandParser {
+-moduleName: String
++parseCommand(command: String): Command
+ }
+
+class QuestionCommandParser extends InnerModuleCommandParser {
+- {static} parser: QuestionCommandParser
++{static}getInstance(): QuestionCommandParser
+}
+class LinkCommandParser extends InnerModuleCommandParser {
+- {static} parser: LinkCommandParser
++{static}getInstance(): LinkCommandParser
+}
+class NoteCommandParser extends InnerModuleCommandParser {
+- {static} parser: NoteCommandParser
++{static}getInstance(): NoteCommandParser
+}
+class XYZCommandParser extends CommandParser {
+- {static} parser: XYZCommandParser
++{static}getInstance(): XYZCommandParser
+}
+@enduml

@@ -1,7 +1,6 @@
 package terminus.activerecall;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -15,9 +14,9 @@ import terminus.ui.Ui;
 
 public class GameEnvironmentTest {
 
-    private Random random;
     private static final String LS = System.lineSeparator();
-    
+    private Random random;
+
     @BeforeEach
     void setUp() {
         random = new Random();
@@ -40,7 +39,7 @@ public class GameEnvironmentTest {
             assertEquals(0.5, questions.get(i).getWeight());
         }
     }
-    
+
     @Test
     void run_ignoreGarbageInput_success() {
         String input = String.format("%s%sasdf%s2%s%s%sasdf%se%s", LS, LS, LS, LS, LS, LS, LS, LS);
@@ -62,7 +61,7 @@ public class GameEnvironmentTest {
     @Test
     void run_reweigh_success() {
         String input = String.format("%s%s3%s%s%s2%s%s%s1%s%s%s2%s%s%s2%s", LS, LS, LS, LS, LS, LS, LS, LS, LS, LS,
-            LS, LS, LS, LS, LS);
+                LS, LS, LS, LS, LS);
         InputStream in = new ByteArrayInputStream(input.getBytes());
         Ui ui = new Ui(in);
         List<Question> questions = new ArrayList<>();
@@ -74,7 +73,7 @@ public class GameEnvironmentTest {
         gameEnvironment.run();
         double highNewWeight = DifficultyModifier.tweakHardQuestionDifficulty(0.5);
         double lowNewWeight = DifficultyModifier.tweakEasyQuestionDifficulty(0.5);
-        int high = 0; 
+        int high = 0;
         int same = 0;
         int low = 0;
         for (int i = 0; i < 5; i++) {

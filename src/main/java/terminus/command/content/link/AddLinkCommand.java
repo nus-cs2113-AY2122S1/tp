@@ -1,6 +1,7 @@
 package terminus.command.content.link;
 
 import static terminus.common.CommonUtils.isValidDay;
+import static terminus.common.CommonUtils.isValidDuration;
 import static terminus.common.CommonUtils.isValidUrl;
 
 import java.time.LocalTime;
@@ -16,8 +17,7 @@ import terminus.content.Link;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.ui.Ui;
-
+import terminus.timetable.ConflictManager;
 
 /**
  * AddLinkCommand class which will manage the adding of new Links from user command.
@@ -27,9 +27,10 @@ public class AddLinkCommand extends Command {
     private String description;
     private String day;
     private LocalTime startTime;
+    private int duration;
     private String link;
 
-    private static final int ADD_SCHEDULE_ARGUMENTS = 4;
+    private static final int ADD_SCHEDULE_ARGUMENTS = 5;
 
     @Override
     public String getFormat() {
@@ -64,7 +65,8 @@ public class AddLinkCommand extends Command {
         this.description = argArray.get(0);
         this.day = argArray.get(1);
         this.startTime = CommonUtils.convertToLocalTime(userStartTime);
-        this.link = argArray.get(3);
+        this.duration = Integer.parseInt(argArray.get(3));
+        this.link = argArray.get(4);
 
         if (!isValidDay(this.day)) {
             TerminusLogger.warning(String.format("Invalid Day: %s", this.day));
@@ -72,9 +74,9 @@ public class AddLinkCommand extends Command {
         }
         if (!isValidUrl(this.link)) {
             TerminusLogger.warning(String.format("Invalid Link: %s", this.link));
-            throw new InvalidArgumentException(
-                    String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
+            throw new InvalidArgumentException(String.format(Messages.ERROR_MESSAGE_INVALID_LINK, this.link));
         }
+        isValidDuration(startTime, duration);
         TerminusLogger.info(String.format("Parsed arguments (description = %s, day = %s, startTime = %s, link = %s)"
                 + " to Add Link Command", description, day, startTime, link));
     }
@@ -83,20 +85,29 @@ public class AddLinkCommand extends Command {
      * Executes the add link command.
      * Prints the relevant response to the Ui.
      *
-     * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the list of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+    public CommandResult execute(ModuleManager moduleManager) {
         assert getModuleName() != null;
         NusModule module = moduleManager.getModule(getModuleName());
-        ContentManager contentManager = module.getContentManager(Link.class);
+        ContentManager<Link> contentManager = module.getContentManager(Link.class);
         assert contentManager != null;
 
-        contentManager.add(new Link(description, day, startTime, link));
-        ui.printSection(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
-        return new CommandResult(true, false);
+        Link newLink = new Link(description, day, startTime, duration, link);
+        ConflictManager scheduleConflict = new ConflictManager(moduleManager, newLink);
+
+        StringBuilder stringBuilder = new StringBuilder();
+        
+        if (scheduleConflict.getConflictingSchedule() != null) {
+            String conflicts = scheduleConflict.getConflictingSchedule();
+            stringBuilder.append(Messages.MESSAGE_CONFLICTING_SCHEDULE + "\n").append(conflicts).append("\n");
+        }
+        contentManager.add(newLink);
+        stringBuilder.append(String.format(Messages.MESSAGE_RESPONSE_ADD, CommonFormat.COMMAND_SCHEDULE, description));
+
+        return new CommandResult(stringBuilder.toString());
     }
 
     /**

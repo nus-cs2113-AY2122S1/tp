@@ -25,7 +25,7 @@ public class NusModuleTest {
         ContentManager<Note> noteContentManager = module.getContentManager(Note.class);
         ContentManager<Link> linkContentManager = module.getContentManager(Link.class);
         Note note = new Note("test1", "test1");
-        Link link = new Link("test1", "test1", LocalTime.now(), "test1");
+        Link link = new Link("test1", "test1", LocalTime.now(), 2, "test1");
         noteContentManager.add(note);
         linkContentManager.add(link);
         assertEquals(note.getDisplayInfo(), noteContentManager.getContentData(1));
