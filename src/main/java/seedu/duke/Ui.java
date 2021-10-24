@@ -116,12 +116,16 @@ public class Ui {
     public static String getTask(Task task) {
         return task.getTitle() + System.lineSeparator()
                 + Parser.convertDateTime(task.getDateTime()) + System.lineSeparator()
-                + task.getDescription();
+                + task.getDescription() + System.lineSeparator() + task.getMemberList()
+                + task.getEvent();
     }
 
     public static String getEvent(Event event) {
         return event.getTitle() + System.lineSeparator()
-                + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator();
+                + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
+                + event.getDescription() + System.lineSeparator()
+                + event.getVenue() + System.lineSeparator()
+                + event.getBudget() + event.getTaskList();
     }
 
     public static void printTask(Task task) {
@@ -136,5 +140,6 @@ public class Ui {
                 + event.getDescription() + System.lineSeparator()
                 + event.getVenue() + System.lineSeparator()
                 + event.getBudget());
+        System.out.println(event.getTaskList());
     }
 }
