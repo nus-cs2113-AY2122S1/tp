@@ -194,9 +194,9 @@ public class CommonUtilsTest {
     }
 
     @Test
-    void isValidUrl_invalidInput_exceptionThrown() {
-        assertThrows(InvalidArgumentException.class, () -> CommonUtils.isValidUrl(""));
-        assertThrows(InvalidArgumentException.class, () -> CommonUtils.isValidUrl(".."));
+    void isValidUrl_invalidInput_exceptionThrown() throws InvalidArgumentException {
+        assertFalse(CommonUtils.isValidUrl(""));
+        assertFalse(CommonUtils.isValidUrl(".."));
     }
 
     @Test
@@ -238,23 +238,27 @@ public class CommonUtilsTest {
     }
 
     @Test
-    void isValidDuration_success() throws InvalidArgumentException {
-        /*assertTrue(CommonUtils.isValidDuration(LocalTime.now(), 1));
-        assertTrue(CommonUtils.isValidDuration(LocalTime.now(), 2));
-        assertTrue(CommonUtils.isValidDuration(LocalTime.now(), 3));
-        assertTrue(CommonUtils.isValidDuration(LocalTime.now(), 4));*/
+    void isValidDuration_success() {
+        assertTrue(CommonUtils.isValidDuration(0));
+        assertTrue(CommonUtils.isValidDuration(1));
+        assertTrue(CommonUtils.isValidDuration(2));
+        assertFalse(CommonUtils.isValidDuration(-3));
+        assertFalse(CommonUtils.isValidDuration(34));
+        assertFalse(CommonUtils.isValidDuration(-1));
+        assertFalse(CommonUtils.isValidDuration(25));
     }
 
     @Test
-    void isValidDuration_exceptionThrown() {
-        /*assertThrows(InvalidArgumentException.class,
-            () -> CommonUtils.isValidDuration(LocalTime.now(), -1));
-        assertThrows(InvalidArgumentException.class,
-            () -> CommonUtils.isValidDuration(LocalTime.now(), -3));
-        assertThrows(InvalidArgumentException.class,
-            () -> CommonUtils.isValidDuration(LocalTime.of(11, 00), -5));
-        assertThrows(InvalidArgumentException.class,
-            () -> CommonUtils.isValidDuration(LocalTime.of(23, 00), 12));*/
+    void hasDurationOverflow_success() {
+        assertTrue(CommonUtils.hasDurationOverflow(LocalTime.of(22,22), 2));
+        assertTrue(CommonUtils.hasDurationOverflow(LocalTime.of(22,00), 3));
+        assertTrue(CommonUtils.hasDurationOverflow(LocalTime.of(23,00), 2));
+        assertTrue(CommonUtils.hasDurationOverflow(LocalTime.of(00,22), 24));
+        assertTrue(CommonUtils.hasDurationOverflow(LocalTime.of(02,22), 23));
+        assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(22,22), 1));
+        assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(23,59), 0));
+        assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(00,00), 0));
+        assertFalse(CommonUtils.hasDurationOverflow(LocalTime.of(23,00), 0));
     }
 
     @Test
