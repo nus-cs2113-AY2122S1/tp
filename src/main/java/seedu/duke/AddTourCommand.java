@@ -14,7 +14,8 @@ public class AddTourCommand extends Command {
     @Override
     public void execute() {
         int newTourCount = tours.getTourCount() + 1;
-        tours.add(tour, ui);
+        tours.add(tour);
+        ui.showAddTour(tour);
         assert newTourCount == tours.getTourCount();
     }
 }

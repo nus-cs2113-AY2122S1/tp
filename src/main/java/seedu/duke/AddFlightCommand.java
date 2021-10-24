@@ -29,7 +29,7 @@ public class AddFlightCommand extends Command {
      */
     @Override
     public void execute() {
-        flights.add(flight, ui);
+        flights.add(flight);
         ui.showAddFlight(flight);
     }
 }
