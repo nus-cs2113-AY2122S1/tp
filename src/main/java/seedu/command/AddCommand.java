@@ -2,7 +2,6 @@ package seedu.command;
 
 import seedu.comparator.ClassNumComparator;
 import seedu.exceptions.FetchException;
-import seedu.exceptions.IntegerException;
 import seedu.module.Lesson;
 import seedu.module.Module;
 import seedu.module.Semester;
@@ -29,14 +28,10 @@ public class AddCommand extends Command {
         this.timetable = timetable;
     }
 
-    public void execute() throws FetchException, ModuleExistException, IntegerException {
+    public void execute() throws FetchException, ModuleExistException {
         Module module;
-        try {
-            module = NusMods.fetchModOnline(moduleCode);
-            checkModuleExist(module);
-        } catch (FetchException | ModuleExistException e) {
-            throw e;
-        }
+        module = NusMods.fetchModOnline(moduleCode);
+        checkModuleExist(module);
         TextUi.printAddMessage(moduleCode);
 
         Semester semesterData = module.getSemester(semester);
@@ -70,6 +65,5 @@ public class AddCommand extends Command {
                 throw new ModuleExistException("Module currently already exist in your timetable");
             }
         }
-
     }
 }
