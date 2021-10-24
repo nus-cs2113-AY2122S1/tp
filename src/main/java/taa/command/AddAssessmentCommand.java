@@ -36,6 +36,51 @@ public class AddAssessmentCommand extends Command {
         super(argument, ADD_ASSESSMENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+        if (argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
+
+        if (!hasAllArguments()) {
+            throw new TaaException(getMissingArgumentMessage());
+        }
+
+        String maximumMarksString = argumentMap.get(KEY_MAXIMUM_MARKS);
+        if (!Util.isStringInteger(maximumMarksString)) {
+            throw new TaaException(String.format(
+                MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
+                Assessment.MINIMUM_MARKS)
+            );
+        }
+
+        int maximumMarks = Integer.parseInt(maximumMarksString);
+        if (maximumMarks < Assessment.MINIMUM_MARKS) {
+            throw new TaaException(String.format(
+                MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
+                Assessment.MINIMUM_MARKS)
+            );
+        }
+
+        String weightageString = argumentMap.get(KEY_WEIGHTAGE);
+        if (!Util.isStringDouble(weightageString)) {
+            throw new TaaException(String.format(
+                MESSAGE_FORMAT_INVALID_WEIGHTAGE,
+                Assessment.WEIGHTAGE_RANGE[0],
+                Assessment.WEIGHTAGE_RANGE[1])
+            );
+        }
+
+        double weightage = Double.parseDouble(weightageString);
+        if (!Assessment.isWeightageWithinRange(weightage)) {
+            throw new TaaException(String.format(
+                MESSAGE_FORMAT_INVALID_WEIGHTAGE,
+                Assessment.WEIGHTAGE_RANGE[0],
+                Assessment.WEIGHTAGE_RANGE[1])
+            );
+        }
+    }
+
     /**
      * Executes the add_assessment command and adds an assessment to a particular module.
      *
@@ -46,13 +91,7 @@ public class AddAssessmentCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
-
-        if (!hasAllArguments()) {
-            throw new TaaException(getMissingArgumentMessage());
-        }
+        checkArgument();
 
         String moduleCode = argumentMap.get(KEY_MODULE_CODE);
         Module module = moduleList.getModuleWithCode(moduleCode);
@@ -61,38 +100,14 @@ public class AddAssessmentCommand extends Command {
         }
 
         String maximumMarksString = argumentMap.get(KEY_MAXIMUM_MARKS);
-        if (!Util.isStringInteger(maximumMarksString)) {
-            throw new TaaException(String.format(
-                    MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
-                    Assessment.MINIMUM_MARKS)
-            );
-        }
-
+        assert Util.isStringInteger(maximumMarksString);
         int maximumMarks = Integer.parseInt(maximumMarksString);
-        if (maximumMarks < Assessment.MINIMUM_MARKS) {
-            throw new TaaException(String.format(
-                    MESSAGE_FORMAT_INVALID_MAXIMUM_MARKS,
-                    Assessment.MINIMUM_MARKS)
-            );
-        }
+        assert maximumMarks >= Assessment.MINIMUM_MARKS;
 
         String weightageString = argumentMap.get(KEY_WEIGHTAGE);
-        if (!Util.isStringDouble(weightageString)) {
-            throw new TaaException(String.format(
-                    MESSAGE_FORMAT_INVALID_WEIGHTAGE,
-                    Assessment.WEIGHTAGE_RANGE[0],
-                    Assessment.WEIGHTAGE_RANGE[1])
-            );
-        }
-
+        assert Util.isStringDouble(weightageString);
         double weightage = Double.parseDouble(weightageString);
-        if (!Assessment.isWeightageWithinRange(weightage)) {
-            throw new TaaException(String.format(
-                    MESSAGE_FORMAT_INVALID_WEIGHTAGE,
-                    Assessment.WEIGHTAGE_RANGE[0],
-                    Assessment.WEIGHTAGE_RANGE[1])
-            );
-        }
+        assert Assessment.isWeightageWithinRange(weightage);
 
         String name = argumentMap.get(KEY_ASSESSMENT_NAME);
         Assessment assessment = new Assessment(name, maximumMarks, weightage);
