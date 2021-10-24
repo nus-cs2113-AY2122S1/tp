@@ -310,7 +310,7 @@ public class Parser {
         }
 
         assert (details.length == 3);
-        
+
         try {
             switch (details[1].trim()) {
             case "expiry":
