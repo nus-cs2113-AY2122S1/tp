@@ -4,9 +4,9 @@
 
 - [Introduction](#introduction)
 - [Purpose](#purpose)
-- [Getting Started](#getting-started)
 - [Using this Guide](#using-this-guide)
-- [Quick guide to use Terminus](#quick-guide-to-use-terminus)
+- [Getting Started](#getting-started)
+- [Quick guide to using TermiNUS](#quick-guide-to-using-terminus)
 - [Section: Module Management](#section-module-management)
     * [Accessing the module management workspace : `module`](#accessing-the-module-management-workspace)
     * [Adding a module : `add "<module_code>"`](#adding-a-module)
@@ -55,6 +55,33 @@ guide on all existing commands as well as aiding you in installing `TerminNUS`.
 
 ---
 
+## Using this Guide
+
+Along the way, you might encounter commands with specific brackets around some values such as `{}`
+and `<>`.
+
+The below table represents what each means.
+
+| Command options | Description |
+| ----------- | ----------- |
+| `{value}` |  The value is optional, and including it may provide different results.|
+| `<value>` | The value is required for the command to work properly.|
+|`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
+|`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.|
+|`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
+|`duration`|The `duration` must be a **positive** number and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
+
+Terminologies used throughout this guide:
+
+| Terminology | Description |
+| ----------- | ----------- |
+| workspace |  A workspace is the environment in which you are currently assessing. For example, when you want to access some files inside a folder, you will need to enter the folder first. As such the folder is a **workspace**.|
+|workspace indicator|A workspace indicator shows the current workspace you are currently in when using `TermiNUS`. For example, in the expected output for commands, you will be able to see `[] >>>` which means you are in the **default workspace**, `[module] >>>` which means you are in the **module management workspace**. etc.|
+|default workspace|The very first workspace when executing the `TermiNUS` program. For example, `[] >>>` indicates you are currently in the **default workspace**.|
+|module|A module refers to a NUS module. For example, `CS2113T` is a module.|
+
+---
+
 ## Getting Started
 
 1. Ensure that you
@@ -62,8 +89,8 @@ guide on all existing commands as well as aiding you in installing `TerminNUS`.
    above installed.
 2. Download the latest version of `TermiNUS.jar`
    from [here](https://github.com/AY2122S1-CS2113T-T10-2/tp/releases/).
-3. Copy the file to the folder you want to use for `Terminus`.
-    1. This is because `Terminus` will store all its saved data in the folder it is currently in.
+3. Copy the file to the folder you want to use for `TermiNUS`.
+    1. This is because `TermiNUS` will store all its saved data in the folder it is currently in.
 4. Open your command prompt and go into the folder containing the `TermiNUS.jar` file.
     1. You can do so by `win + R` and run `cmd`.
     2. Next, a console will appear, type in the following `cd C:/folder` where `folder` is the
@@ -96,43 +123,16 @@ guide on all existing commands as well as aiding you in installing `TerminNUS`.
 
 ___
 
-## Using this Guide
-
-Along the way, you might encounter commands with specific brackets around some values such as `{}`
-and `<>`.
-
-The below table represents what each means.
-
-| Command options | Description |
-| ----------- | ----------- |
-| `{value}` |  The value is optional, and including it may provide different results.|
-| `<value>` | The value is required for the command to work properly.|
-|`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
-|`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.|
-|`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
-|`duration`|The `duration` must be a **positive** number and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
-
-Terminologies used throughout this guide:
-
-| Terminology | Description |
-| ----------- | ----------- |
-| workspace |  A workspace is the environment in which you are currently assessing. For example, when you want to access some files inside a folder, you will need to enter the folder first. As such the folder is a **workspace**.|
-|workspace indicator|A workspace indicator shows the current workspace you are currently in when using `TermiNUS`. For example, in the expected output for commands, you will be able to see `[] >>>` which means you are in the **default workspace**, `[module] >>>` which means you are in the **module management workspace**. etc.|
-|default workspace|The very first workspace when executing the `TermiNUS` program. For example, `[] >>>` indicates you are currently in the **default workspace**.|
-|module|A module refers to a NUS module. For example, `CS2113T` is a module.|
-
----
-
-## Quick guide to use Terminus
+## Quick guide to using TermiNUS
 
 1. Before adding any **note**, **schedule** and **question**, we will need to have a **module** first in which these items belong to.
 2. You can do so by adding a module within the **module management workspace**. Please refer to: [Section: Module Management](#section-module-management).
 3. After adding a module, you can proceed to add items such as **note**, **schedule** and **question** into it.
 4. But firstly you will need to enter the **module workspace** in which you have just created. Please refer to: [Section: Module](#section-module).
 5. Once entering the **module workspace**, you can add the items related to the module here.
-   1. Please refer to [Section: Note](#section-note) for any related **Note** item.
-   2. Please refer to [Section: Schedule](#section-schedule) for any related **Schedule** item.
-   3. Please refer to [Section: Question](#section-question) for any related **Question** item.
+    1. Please refer to [Section: Note](#section-note) for any related **Note** item.
+    2. Please refer to [Section: Schedule](#section-schedule) for any related **Schedule** item.
+    3. Please refer to [Section: Question](#section-question) for any related **Question** item.
 6. Once you are done, you can exit **TermiNUS** using the `exit` command.
 
 Hope you enjoy your experience with TermiNUS!
