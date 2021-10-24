@@ -113,7 +113,8 @@ Terminologies used throughout this guide:
 | Terminology | Description |
 | ----------- | ----------- |
 | workspace |  A workspace is the environment in which you are currently assessing. For example, when you want to access some files inside a folder, you will need to enter the folder first. As such the folder is a **workspace**.|
-|default workspace|The very first workspace when executing the TermiNUS program.|
+|workspace indicator|A workspace indicator shows the current workspace you are currently in when using `TermiNUS`. For example, in the expected output for commands, you will be able to see `[] >>>` which means you are in the **default workspace**, `[module] >>>` which means you are in the **module management workspace**. etc.|
+|default workspace|The very first workspace when executing the `TermiNUS` program. For example, `[] >>>` indicates you are currently in the **default workspace**.|
 |module|A module refers to a NUS module. For example, `CS2113T` is a module.|
 
 ---
