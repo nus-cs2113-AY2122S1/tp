@@ -1,5 +1,9 @@
 package terminus.timetable;
 
+import static terminus.common.CommonUtils.isStringNullOrEmpty;
+
+import java.util.Arrays;
+import java.util.stream.Stream;
 import terminus.common.DaysOfWeekEnum;
 import terminus.common.Messages;
 import terminus.common.TerminusLogger;
@@ -7,12 +11,6 @@ import terminus.content.ContentManager;
 import terminus.content.Link;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
-import terminus.ui.Ui;
-
-import java.util.Arrays;
-import java.util.stream.Stream;
-
-import static terminus.common.CommonUtils.isStringNullOrEmpty;
 
 public class Timetable {
 
@@ -90,6 +88,10 @@ public class Timetable {
             }
             index = 0;
         }
+
+        if (isStringNullOrEmpty(dailyResult.toString())) {
+            return null;
+        }
         return dailyResult.toString();
     }
 
@@ -100,9 +102,12 @@ public class Timetable {
      * @param day      The day corresponding to the retrieved schedule
      */
     public String checkEmptySchedule(String schedule, String day) {
-        if (schedule == null) {
+        if (schedule == null && day != null) {
             TerminusLogger.info("There is no schedule in the user's timetable");
             schedule = String.format(Messages.EMPTY_SCHEDULE_FOR_THE_DAY, day);
+        } else if (schedule == null && day == null) {
+            TerminusLogger.info("There is no schedule in the user's timetable");
+            schedule = Messages.EMPTY_SCHEDULE_FOR_THE_WEEK;
         }
         return schedule;
     }

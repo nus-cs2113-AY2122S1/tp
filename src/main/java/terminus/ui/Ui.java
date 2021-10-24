@@ -1,5 +1,6 @@
 package terminus.ui;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Scanner;
 import terminus.module.ModuleManager;
@@ -8,11 +9,16 @@ import terminus.parser.CommandParser;
 public class Ui {
 
     private static final String PROMPT = "[%s] >>> ";
+    private static final Ui UI = new Ui();
 
     private final Scanner scanner;
 
-    public Ui() {
-        this.scanner = new Scanner(System.in);
+    private Ui() {
+        this(System.in);
+    }
+    
+    public Ui(InputStream in) {
+        this.scanner = new Scanner(in);
     }
 
     /**
@@ -40,8 +46,7 @@ public class Ui {
         if (validatedWorkspaceName == null) {
             validatedWorkspaceName = "";
         }
-        System.out.printf(PROMPT, validatedWorkspaceName);
-        return scanner.nextLine();
+        return getUserInput(String.format(PROMPT, validatedWorkspaceName));
     }
 
     /**
@@ -58,5 +63,19 @@ public class Ui {
      */
     public void printExitMessage() {
         System.out.println("Goodbye!");
+    }
+
+    /**
+     * Get the input of the user through the Scanner.
+     * 
+     * @return The user input from the Scanner.
+     */
+    public String getUserInput(String prompt) {
+        System.out.print(prompt);
+        return scanner.nextLine();
+    }
+    
+    public static Ui getInstance() {
+        return UI;
     }
 }

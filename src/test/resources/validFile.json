@@ -11,10 +11,14 @@
               "second": 0,
               "nano": 0
             },
+            "duration": 2,
             "link": "https://zoom.us/",
             "name": "test"
           }
         ]
+      },
+      "questionManager": {
+        "contents": []
       }
     }
   }

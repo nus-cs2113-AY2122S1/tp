@@ -54,12 +54,11 @@ public class Terminus {
         try {
             TerminusLogger.initializeLogger();
             TerminusLogger.info("Starting Terminus...");
-            this.ui = new Ui();
+            this.ui = Ui.getInstance();
             this.parser = MainCommandParser.getInstance();
             this.workspace = "";
             this.moduleStorage = ModuleStorage.getInstance();
             this.moduleStorage.init(DATA_DIRECTORY.resolve(MAIN_JSON));
-            this.moduleManager = new ModuleManager();
             TerminusLogger.info("Loading file...");
             this.moduleManager = moduleStorage.loadFile();
         } catch (IOException e) {
@@ -91,18 +90,21 @@ public class Terminus {
             Command currentCommand;
             try {
                 currentCommand = parser.parseCommand(input);
-                CommandResult result = currentCommand.execute(ui, moduleManager);
+                CommandResult result = currentCommand.execute(moduleManager);
 
-                boolean isExitCommand = result.isOk() && result.isExit();
-                boolean isWorkspaceCommand = result.isOk() && result.getAdditionalData() != null;
+                boolean isExitCommand = result.isExit();
+                boolean isWorkspaceCommand = result.getNewCommandParser() != null;
                 if (isExitCommand) {
                     break;
                 } else if (isWorkspaceCommand) {
-                    parser = result.getAdditionalData();
+                    parser = result.getNewCommandParser();
                     assert parser != null : "commandParser is not null";
                     workspace = parser.getWorkspace();
                     ui.printParserBanner(parser, moduleManager);
+                } else {
+                    ui.printSection(result.getMessage());
                 }
+                
                 TerminusLogger.info("Saving data into file...");
                 this.moduleStorage.saveFile(moduleManager);
                 TerminusLogger.info("Save completed.");

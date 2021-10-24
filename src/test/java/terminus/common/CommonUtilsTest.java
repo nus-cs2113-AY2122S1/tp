@@ -2,6 +2,7 @@ package terminus.common;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -236,4 +237,39 @@ public class CommonUtilsTest {
         assertThrows(AssertionError.class, () -> CommonUtils.getFileNameOnly(null));
     }
 
+    @Test
+    void isValidDuration_success() throws InvalidArgumentException {
+        assertTrue(CommonUtils.isValidDuration(LocalTime.now(), 1));
+        assertTrue(CommonUtils.isValidDuration(LocalTime.now(), 2));
+        assertTrue(CommonUtils.isValidDuration(LocalTime.now(), 3));
+        assertTrue(CommonUtils.isValidDuration(LocalTime.now(), 4));
+    }
+
+    @Test
+    void isValidDuration_exceptionThrown() {
+        assertThrows(InvalidArgumentException.class,
+            () -> CommonUtils.isValidDuration(LocalTime.now(), -1));
+        assertThrows(InvalidArgumentException.class,
+            () -> CommonUtils.isValidDuration(LocalTime.now(), -3));
+        assertThrows(InvalidArgumentException.class,
+            () -> CommonUtils.isValidDuration(LocalTime.of(11, 00), -5));
+        assertThrows(InvalidArgumentException.class,
+            () -> CommonUtils.isValidDuration(LocalTime.of(23, 00), 12));
+    }
+
+    @Test
+    void isValidIndex() {
+        String[] list = new String[50];
+        assertTrue(CommonUtils.isValidIndex(5, list));
+        assertTrue(CommonUtils.isValidIndex(50, list));
+        assertTrue(CommonUtils.isValidIndex(1, list));
+        assertFalse(CommonUtils.isValidIndex(0, list));
+        assertFalse(CommonUtils.isValidIndex(51, list));
+        assertFalse(CommonUtils.isValidIndex(100, list));
+    }
+
+    @Test
+    void getCurrentDay_success() {
+        assertNotNull(CommonUtils.getCurrentDay());
+    }
 }
