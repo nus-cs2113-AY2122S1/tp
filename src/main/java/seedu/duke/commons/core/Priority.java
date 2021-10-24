@@ -19,7 +19,7 @@ public enum Priority {
     }
 
     /**
-     * Returns a properly capitalised priority type
+     * Returns a properly capitalised priority type.
      *
      * @param param the priority with any capitalisation
      * @return either "Low", "Medium", "High" or "None"
