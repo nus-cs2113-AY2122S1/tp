@@ -26,15 +26,16 @@ public class Expense {
     private double exchangeRate;
 
     /**
-     * Legacy Constructor for {@link Expense} - does not include parsing
+     * Legacy Constructor for {@link Expense} - does not include parsing.
      *
-     * @param amountSpent
-     * @param category
-     * @param listOfPersons
-     * @param description
-     * @param exchangeRate
+     * @param amountSpent (placeholder)
+     * @param category (placeholder)
+     * @param listOfPersons (placeholder)
+     * @param description (placeholder)
+     * @param exchangeRate (placeholder)
      */
-    public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons, String description, double exchangeRate) {
+    public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons,
+                   String description, double exchangeRate) {
         this.amountSpent = amountSpent;
         this.description = description;
         this.category = category;
@@ -43,7 +44,7 @@ public class Expense {
     }
 
     /**
-     * Constructor for {@link Expense} class - contains parsing, date prompting and amount assignment
+     * Constructor for {@link Expense} class - contains parsing, date prompting and amount assignment.
      *
      * @param inputDescription String of user input to be parsed and assigned to expense attributes
      */
@@ -52,7 +53,7 @@ public class Expense {
         this.amountSpent = Double.parseDouble(expenseInfo[0]);
         this.description = expenseInfo[1].toLowerCase();
         this.personsList = checkValidPersons(expenseInfo[2]);
-        this.category = getDescription(expenseInfo[2]);
+        this.category = getDescriptionParse(expenseInfo[2]);
         this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
         this.date = prompDate();
         if (personsList.size() == 1) {
@@ -62,7 +63,7 @@ public class Expense {
         }
     }
 
-    private static String getDescription(String userInput) {
+    private static String getDescriptionParse(String userInput) {
         return userInput.split("/")[1].trim();
     }
 
