@@ -1,7 +1,8 @@
 package seedu.duke.task.factory;
 
 import java.util.Date;
-import java.util.HashMap;
+import java.util.Map;
+
 import seedu.duke.exception.GetTaskFailedException;
 import seedu.duke.exception.InvalidPriorityException;
 import seedu.duke.exception.InvalidRecurrenceException;
@@ -17,7 +18,7 @@ import seedu.duke.task.type.Deadline;
 public class DeadlineFactory {
     private static final TypeEnum taskType = TypeEnum.DEADLINE;
 
-    public static Deadline getDeadline(HashMap<String, String> flags) throws GetTaskFailedException {
+    public static Deadline getDeadline(Map<String, String> flags) throws GetTaskFailedException {
         try {
             checkForRequiredArguments(flags);
 
@@ -43,7 +44,7 @@ public class DeadlineFactory {
         }
     }
 
-    private static void checkForRequiredArguments(HashMap<String, String> flags)
+    private static void checkForRequiredArguments(Map<String, String> flags)
             throws RequiredArgmentNotProvidedException {
         for (String requiredArgument : DeadlineFlag.REQUIRED_FLAGS) {
             String flag = flags.get(requiredArgument);

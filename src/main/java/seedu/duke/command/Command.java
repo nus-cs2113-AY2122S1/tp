@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents a command.
@@ -11,14 +12,14 @@ public abstract class Command {
     private static final String USAGE_REGEX = "Usage: %s";
 
     private final CommandEnum command;
-    protected final HashMap<String, String> commandArguments;
+    protected final Map<String, String> commandArguments;
 
     public Command(CommandEnum command) {
         this.command = command;
         commandArguments = null;
     }
 
-    public Command(CommandEnum command, HashMap<String, String> commandArguments) {
+    public Command(CommandEnum command, Map<String, String> commandArguments) {
         this.command = command;
         this.commandArguments = commandArguments;
     }

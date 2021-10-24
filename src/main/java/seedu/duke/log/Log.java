@@ -3,6 +3,7 @@ package seedu.duke.log;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -20,7 +21,7 @@ public class Log {
 
     private static final int METHOD_STACKTRACE_POSITION = 3;
 
-    private static HashMap<String, Logger> loggers = new HashMap<>();
+    private static Map<String, Logger> loggers = new HashMap<>();
 
     public static FileHandler getFileHandler() throws IOException {
         FileHandler fileHandler = new FileHandler(LOG_FILE_NAME, true);

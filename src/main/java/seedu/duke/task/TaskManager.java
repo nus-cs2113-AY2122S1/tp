@@ -12,24 +12,26 @@ import seedu.duke.exception.MissingFilterArgumentException;
 import seedu.duke.exception.SortFormatException;
 import seedu.duke.log.Log;
 
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 
 public class TaskManager {
 
     private static final int STARTING_SIZE = 128;
 
-    private static ArrayList<Task> taskList = new ArrayList<>(128);
-    private static ArrayList<Task> latestPrintedList = new ArrayList<>(128);
+    private static List<Task> taskList = new ArrayList<>(128);
+    private static List<Task> latestPrintedList = new ArrayList<>(128);
 
     private static final String LIST_HEADER = "-------------\n"
             + " MY TASKLIST\n"
             + "-------------\n";
 
     //@@author APZH
-    public static String listTasklist(HashMap<String, String> filter) throws EmptyTasklistException,
+    public static String listTasklist(Map<String, String> filter) throws EmptyTasklistException,
             ListFormatException, MissingFilterArgumentException {
         assert taskList.size() >= 0 : "Tasklist cannot be negative";
         if (taskList.size() == 0) {
@@ -37,7 +39,7 @@ public class TaskManager {
             throw new EmptyTasklistException();
         }
         String taskEntries = "";
-        ArrayList<Task> filteredTasks = (ArrayList<Task>) taskList.clone();
+        List<Task> filteredTasks = new ArrayList<>(taskList);
         for (HashMap.Entry<String, String> entry : filter.entrySet()) {
             String flag = entry.getKey();
             String argument = entry.getValue();
@@ -66,12 +68,12 @@ public class TaskManager {
         return LIST_HEADER + taskEntries;
     }
 
-    public static ArrayList<Task> filterListByTaskType(ArrayList<Task> taskList, String taskTypeFilter)
+    public static List<Task> filterListByTaskType(List<Task> taskList, String taskTypeFilter)
             throws MissingFilterArgumentException {
         if (taskTypeFilter.isEmpty()) {
             throw new MissingFilterArgumentException();
         }
-        ArrayList<Task> filteredTasks = new ArrayList<>();
+        List<Task> filteredTasks = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             String currentTaskType = taskList.get(i).getTaskType().name();
             if (currentTaskType.equalsIgnoreCase(taskTypeFilter)) {
@@ -81,12 +83,12 @@ public class TaskManager {
         return filteredTasks;
     }
 
-    public static ArrayList<Task> filterListByPriority(ArrayList<Task> taskList, String priorityFilter)
+    public static List<Task> filterListByPriority(List<Task> taskList, String priorityFilter)
             throws MissingFilterArgumentException {
         if (priorityFilter.isEmpty()) {
             throw new MissingFilterArgumentException();
         }
-        ArrayList<Task> filteredTasks = new ArrayList<>();
+        List<Task> filteredTasks = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             String currentPriority = taskList.get(i).getPriority().name();
             if (currentPriority.equalsIgnoreCase(priorityFilter)) {
@@ -96,12 +98,12 @@ public class TaskManager {
         return filteredTasks;
     }
 
-    public static ArrayList<Task> filterListByRecurrence(ArrayList<Task> taskList, String recurrenceFilter)
+    public static List<Task> filterListByRecurrence(List<Task> taskList, String recurrenceFilter)
             throws MissingFilterArgumentException {
         if (recurrenceFilter.isEmpty()) {
             throw new MissingFilterArgumentException();
         }
-        ArrayList<Task> filteredTasks = new ArrayList<>();
+        List<Task> filteredTasks = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
             String currentRecurrence = taskList.get(i).getRecurrence().name();
             if (currentRecurrence.equalsIgnoreCase(recurrenceFilter)) {
@@ -112,7 +114,7 @@ public class TaskManager {
     }
 
     //@@author APZH
-    public static String sortTasklist(HashMap<String, String> criteria) throws EmptyTasklistException,
+    public static String sortTasklist(Map<String, String> criteria) throws EmptyTasklistException,
             SortFormatException, EmptySortCriteriaException {
         Log.info("sortTasklist method called");
         String sortCriteria = "";
@@ -197,7 +199,7 @@ public class TaskManager {
         }
     }
 
-    public static ArrayList<Task> getTaskList() {
+    public static List<Task> getTaskList() {
         return taskList;
     }
 
@@ -233,7 +235,7 @@ public class TaskManager {
         taskList.clear();
     }
 
-    private static void printArrayList(ArrayList<Task> filteredTasks) {
+    private static void printList(List<Task> filteredTasks) {
         String tasks = "";
         System.out.println("Printing filtered list...");
         for (int i = 0; i < filteredTasks.size(); i++) {

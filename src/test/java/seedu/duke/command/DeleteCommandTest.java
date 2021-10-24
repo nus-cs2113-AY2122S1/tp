@@ -1,6 +1,8 @@
 package seedu.duke.command;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.flags.DeadlineFlag;
@@ -29,7 +31,7 @@ class DeleteCommandTest {
 
     @Test
     void executeCommand_validSingleInput_expectTaskDeleted() throws Exception {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, "1");
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
@@ -50,12 +52,12 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "   __3__, , _");
         new DeleteCommand(arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist(new HashMap<String, String>()).contains(TO_DELETE));
+        assertFalse(TaskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
     void executeCommand_validListInput_expectTasksDeleted() throws Exception {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, "1");
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
@@ -76,12 +78,12 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "  _3-5      ");
         new DeleteCommand(arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist(new HashMap<String, String>()).contains(TO_DELETE));
+        assertFalse(TaskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
     void executeCommand_validSingleInputAndListInput_expectTasksDeleted() throws Exception {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
@@ -102,12 +104,12 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "  _3-5,   1   ");
         new DeleteCommand(arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist(new HashMap<String, String>()).contains(TO_DELETE));
+        assertFalse(TaskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
     void executeCommand_validMultiSingleInput_expectTasksDeleted() throws Exception {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
@@ -128,12 +130,12 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "1, _ _ 3    _,_   5");
         new DeleteCommand(arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist(new HashMap<String, String>()).contains(TO_DELETE));
+        assertFalse(TaskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
     void executeCommand_validMultiInput_expectTasksDeleted() throws Exception {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, TO_DELETE);
         arguments.put(EventFlag.START_DATE, VALID_DATE1);
@@ -154,12 +156,12 @@ class DeleteCommandTest {
         arguments.put(Command.MAIN_ARGUMENT, "1-2, _ _ 4    _,_   5");
         new DeleteCommand(arguments).executeCommand();
 
-        assertFalse(TaskManager.listTasklist(new HashMap<String, String>()).contains(TO_DELETE));
+        assertFalse(TaskManager.listTasklist(new HashMap<>()).contains(TO_DELETE));
     }
 
     @Test
     void executeCommand_noMainArgument_expectUsage() throws Exception {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         Command delete = new DeleteCommand(arguments);
         String result = delete.executeCommand().getMessage();
@@ -169,7 +171,7 @@ class DeleteCommandTest {
 
     @Test
     void executeCommand_emptyTaskList_expectEmptyTaskListExceptionMessage() throws Exception {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
         arguments.put(Command.MAIN_ARGUMENT, "1");
 
         Command delete = new DeleteCommand(arguments);
@@ -183,7 +185,7 @@ class DeleteCommandTest {
      */
     @Test
     void executeCommand_invalidInteger_expectDeleteClassNumberFormatExceptionMessage() throws Exception {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, "3");
         TaskManager.addTask(TodoFactory.getTodo(arguments));
@@ -198,7 +200,7 @@ class DeleteCommandTest {
 
     @Test
     void executeCommand_invalidTaskIndex_expectInvalidTaskIndexExceptionMessage() throws Exception {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(EventFlag.DESCRIPTION, "3");
         TaskManager.addTask(TodoFactory.getTodo(arguments));

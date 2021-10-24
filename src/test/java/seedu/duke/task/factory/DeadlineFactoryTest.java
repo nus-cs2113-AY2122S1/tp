@@ -1,6 +1,8 @@
 package seedu.duke.task.factory;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.flags.DeadlineFlag;
 import seedu.duke.exception.GetTaskFailedException;
@@ -25,7 +27,7 @@ class DeadlineFactoryTest {
     @Test
     void getDeadline_validTodoInputs_expectDeadline() throws GetTaskFailedException {
 
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(DeadlineFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(DeadlineFlag.DUE_DATE, VALID_DATE1);
@@ -42,7 +44,7 @@ class DeadlineFactoryTest {
 
     @Test
     void getDeadline_minimumDeadlineInputs_expectDeadline() throws GetTaskFailedException {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(DeadlineFlag.DESCRIPTION, DESCRIPTION);
         arguments.put(DeadlineFlag.DUE_DATE, VALID_DATE1);
@@ -57,7 +59,7 @@ class DeadlineFactoryTest {
 
     @Test
     void getDeadline_deadlineWithNoDueDate_expectGetTaskFailedException() {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
 
         arguments.put(DeadlineFlag.DESCRIPTION, DESCRIPTION);
 
@@ -73,7 +75,7 @@ class DeadlineFactoryTest {
 
     @Test
     void getDeadline_deadlineWithInvalidRecurrence_expectGetTaskFailedException() {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
         String invalidRecurrence = "wibble";
 
         arguments.put(DeadlineFlag.DESCRIPTION, DESCRIPTION);
@@ -91,7 +93,7 @@ class DeadlineFactoryTest {
 
     @Test
     void getDeadline_deadlineWithInvalidDate_expectGetTaskFailedException() {
-        HashMap<String, String> arguments = new HashMap<>();
+        Map<String, String> arguments = new HashMap<>();
         String invalidDate = "blarg";
 
         arguments.put(DeadlineFlag.DESCRIPTION, DESCRIPTION);
