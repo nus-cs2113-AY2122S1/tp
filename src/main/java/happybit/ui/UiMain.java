@@ -103,19 +103,7 @@ public class UiMain extends UiManager {
                 resetDisplay();
             }
         }
-        exportData();
         return isReturn;
-    }
-
-    /**
-     * Exports data to an external storage.
-     */
-    private void exportData() {
-        try {
-            storage.export(goalList.getGoalList());
-        } catch (HaBitStorageException e) {
-            printManager.showError(e.getMessage());
-        }
     }
 
     /**
