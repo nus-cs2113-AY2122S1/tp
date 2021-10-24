@@ -6,8 +6,8 @@ import expiryeliminator.data.exception.IllegalValueException;
  * Represents an ingredient and it's associated quantity.
  */
 public class IngredientQuantity {
-    public final Ingredient ingredient;
-    public int quantity;
+    private final Ingredient ingredient;
+    private int quantity;
 
     /**
      * Initialises ingredient and quantity.

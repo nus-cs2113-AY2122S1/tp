@@ -69,7 +69,7 @@ public class LoadLists {
         }
         Ingredient ingredient = new Ingredient(ingredientName, unit);
         IngredientQuantity ingredientQuantity = new IngredientQuantity(ingredient, quantity);
-        currentRecipe.ingredientQuantities.put(ingredientName, ingredientQuantity);
+        currentRecipe.setIngredientQuantities(ingredientName, ingredientQuantity);
     }
 
     /*public static void loadIngredientRepo(IngredientRepository ingredients) {
