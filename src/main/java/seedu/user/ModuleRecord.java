@@ -1,43 +1,122 @@
 package seedu.user;
 
+import seedu.exceptions.UniModsException;
 import seedu.module.GradedModule;
 import seedu.module.Module;
 import seedu.module.PrerequisiteTree;
+import seedu.module.UngradedModule;
+import seedu.ui.TextUi;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 
 public class ModuleRecord {
-
-    private final ArrayList<GradedModule> modules = new ArrayList<>();
+    private final ArrayList<GradedModule> gradedModules = new ArrayList<>();
+    private final ArrayList<UngradedModule> ungradedModules = new ArrayList<>();
     private final SortedSet<String> moduleCodes = new TreeSet<>();
     private double cap;
+
 
     public ModuleRecord() {
         cap = 0;
     }
 
+    /**
+     * Adds a graded Module to the Transcript.
+     *
+     * @param module Module contains the graded module to be stored in the Transcript
+     */
     public void addModuleToRecord(GradedModule module) {
-        modules.add(module);
+        gradedModules.add(module);
         moduleCodes.add(module.getModuleCode());
         cap = calculateCapFromList();
+        TextUi.printAddedGrade(module.getModuleCode(), module.getGrade());
     }
 
-    public void addModuleToRecord(Module module, char grade) {
-        this.addModuleToRecord(module.toGradedModule(grade));
+    /**
+     * Adds an ungraded Module to the Transcript.
+     *
+     * @param module Module contains the ungraded module to be stored in the Transcript
+     */
+    public void addModuleToRecord(UngradedModule module) {
+        ungradedModules.add(module);
+        moduleCodes.add(module.getModuleCode());
+        TextUi.printAddedGrade(module.getModuleCode(), module.getGrade());
     }
 
 
-    public double getCap() {
-        return cap;
+    /**
+     * Checks if the grade is valid and then calls the function to store module and grade in the transcript.
+     *
+     * @param module Module stores the Module to be stored in the Transcript
+     * @param grade  Grade stores the grade scored in the module which is to be stored in the Transcript
+     */
+    public void addModuleToRecord(Module module, String grade) {
+        String gradeType = "";
+        try {
+            gradeType = Module.checkGradeType(grade);
+        } catch (UniModsException e) {
+            System.out.println(e.getMessage());
+        }
+        if (gradeType.equals(TextUi.GRADED)) {
+            this.addModuleToRecord(module.toGradedModule(grade));
+        } else {
+            this.addModuleToRecord(module.toUngradedModule(grade));
+        }
     }
 
+    /**
+     * Removes the module from the Transcript records.
+     *
+     * @param moduleCode ModuleCode is the module code which is to be removed from the Transcript.
+     * @throws UniModsException IF the module is not found in the transcript records.
+     */
+    public void removeModuleFromTranscript(String moduleCode) throws UniModsException {
+        for (int i = 0; i < gradedModules.size(); i++) {
+            if (gradedModules.get(i).getModuleCode().equals(moduleCode)) {
+                gradedModules.remove(gradedModules.get(i));
+                TextUi.printModuleRemoved(moduleCode);
+                return;
+            }
+        }
+        for (int i = 0; i < ungradedModules.size(); i++) {
+            if (ungradedModules.get(i).getModuleCode().equals(moduleCode)) {
+                ungradedModules.remove(ungradedModules.get(i));
+                TextUi.printModuleRemoved(moduleCode);
+                return;
+            }
+        }
+        throw new UniModsException(TextUi.ERROR_MODULE_NOT_IN_TRANSCRIPT);
+    }
+
+
+    /**
+     * Calculates and returns the CAP of the user.
+     *
+     * @return cap CAP according to the user's grades in the transcript's records.
+     */
     private double calculateCapFromList() {
-        //TODO calculate CAP from the module arraylist
-        return 0;
+        double numerator = 0;
+        double denominator = 0;
+        double moduleCredits;
+        double moduleGradePoint;
+        for (int i = 0; i < gradedModules.size(); i++) {
+            moduleCredits = (gradedModules.get(i)).getModuleCredit();
+            moduleGradePoint = gradedModules.get(i).getEquivalentCap(gradedModules.get(i).getGrade());
+            numerator = (moduleCredits * moduleGradePoint) + numerator;
+            denominator = denominator + moduleCredits;
+        }
+        if (denominator != 0) {
+            cap = numerator / denominator;
+            return cap;
+        }
+        return 0.0;
+    }
+
+    public double calculateCap() {
+        return calculateCapFromList();
     }
 
     /**
@@ -136,5 +215,6 @@ public class ModuleRecord {
     private boolean isModuleInRecord(String moduleCode) {
         return moduleCodes.contains(moduleCode);
     }
+
 
 }

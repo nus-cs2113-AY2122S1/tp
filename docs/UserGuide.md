@@ -7,8 +7,8 @@
 It’s August 5th, and the Academic Year is right around the corner!
 ModReg is about to start, and you have no idea what modules to take and what your timetable might even look like.
 
-Introducing **UNI Mods**, an easy to use application that provides information on all available NUS modules and lets you
-pick and choose the modules and classes you want to take for that semester!
+Introducing **UNI Mods**, an easy to use application for NUS students that provides information on all available NUS 
+modules and lets you pick and choose the modules and classes you want to take for that semester!
 Depending on the classes you decide to take, a timetable will be generated to keep track of your daily schedule and your
 total workload:
 
@@ -22,17 +22,15 @@ total workload:
 
 - [Quick Start](#quick-start)
 - [Features](#features)
-    * [Viewing help](#viewing-help--help)
-    * [Listing tasks](#listing-tasks-list)
-    * [Querying tasks](#querying-tasks-find-regex-type-tasktype-limit-querylimit)
-    * [Adding a Todo](#adding-a-todo-todo-description)
-    * [Adding a Deadline](#adding-a-deadline-deadline-description-by-datetime)
-    * [Adding an Event](#adding-an-event-event-description-at-datetime)
-    * [List valid DateTime Formats](#list-valid-datetime-formats-dates)
-    * [Removing a task](#removing-a-task-delete-idx)
-    * [Marking a task as done](#marking-a-task-as-done-done-idx)
-    * [Exit](#exit-the-application--bye)
-    * [Local Save](#local-save)
+    * [Viewing help](#viewing-help-help)
+    * [Show Module Info](#display-module-info-show-module_code)
+    * [Search Module](#search-module-search-keyword--l)
+    * [Update Local Database](#update-local-database-update)
+    * [Add to Timetable](#add-to-timetable-add-module_code)
+    * [Delete from Timetable](#delete-from-timetable-delete-module_code)
+    * [Clear Timetable](#clear-timetable-clear)
+    * [View Timetable](#view-timetable-timetable)
+    * [Exit](#exit-exit)
 - [FAQ](#faq)
 - [Command Summary]()
 
@@ -43,7 +41,9 @@ total workload:
 # Quick Start
 
 1. Ensure you have **Java 11** or above installed in your Computer.
-2. Download the latest **unimods.jar** from here.
+2. Download the latest **unimods.jar** from here. If it does not work, open your CLI of choice and run 
+`java -jar unimods.jar`.
+
 3. Copy the file to the folder you want to use as the home folder for your Unimods.
 4. Double-click the file to start the app.
 5. Type the command in the command box and press Enter to execute it.
@@ -73,9 +73,6 @@ total workload:
     > e.g. find `search <KEYWORD> [-l]`
     > can be called as `search GEH` OR `search GEH -l`.
     <br /><br />
-> - Parameters can be in any order for optional flags <br />
-    > e.g. `search <KEYWORD> [-l]` is equivalent to `search [-l] <KEYWORD> `
-    <br /><br />
 > - Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `bye`) will be ignored.<br />
     > e.g. `help abc` will be interpreted as  `help`
 
@@ -90,19 +87,23 @@ Output:
 
 ```shell
 ~$ help
-____________________________________________________________________________
+__________________________________________________________________________
 	UNIMods accepts the following commands:-
-		| No.| Command Syntax          |            Command Action                      |
-		| 1. | search <module_code>    | Search module based on the given partial regex |
-		| 2. | show <module_code>      | Display module information                     |
-		| 3. | add <module_code>       | Add module to the Timetable                    |
-		| 4. | delete <module_code>    | Remove module from the Timetable               |
-		| 5. | clear                   | Remove all modules from the Timetable          |
-		| 6. | timetable               | Display the Timetable                          |
-		| 7. | exit                    | Exit From Program                              |
+		| No.| Command Syntax                |            Command Action                      |
+		| 1. | search <module_code>          | Search module based on the given partial regex |
+		| 2. | show <module_code>            | Display module information                     |
+		| 3. | add <module_code>             | Add module to the Timetable                    |
+		| 4. | delete <module_code>          | Deletes module from the Timetable              |
+		| 5. | clear                         | Deletes all modules from the Timetable         |
+		| 6. | timetable                     | Display the Timetable                          |
+		| 7. | store <grade> > <module_code> | Stores the grades scored in the Transcript     |
+		| 8. | remove <module_code>          | Remove the module from the Transcript          |
+		| 9. | calculate cap                 | Displays the Cumulative Average Point          |
+		| 10.| exit                          | Exit From Program                              |
 	 ** Note: For details, refer to the User Guide of NUSModsLite at: 
 		https://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html
-____________________________________________________________________________
+__________________________________________________________________________
+
 
 ```
 
@@ -123,6 +124,8 @@ If you want to find out more about a module, type `show <module_code>` to displa
 * Semester Availability
 
 For example, try typing `show CS2113T` and see the magic happen!
+
+:information_source: Both command and module code is case-insensitive.
 
 ```shell
 ~$ show CS2113T
@@ -169,13 +172,43 @@ GEH1011 Film and History 4MC
 
 You can also apply the following flags to refine the search:
 
-- -l (small L) : performs a local search using locally saved module data which might not be the most updated version
+- **-l (small L) :** search for mods matching the level specified e.g `-l 3000`
+- **-mc :** search for mods matching the number of MCs specified e.g `-mc 4`
+- **-s :** search for mods offered in the semester e.g. `-s 2`
+(:information_source: 3 & 4 refer to Special Terms 1 and 2 respectively.)
+- **-e :** search for mods that have/do not have exams. Specify with true/false e.g `-e false`
+- **-f :** search for mods from a faculty e.g `-f Computing`
+- **-d :** search for mods from a department `-d Computer Science`
+- **-q :** performs a local search using locally saved module data which might not be the most updated version, 
+but is very quick e.g. `-q`
+
+:information_source: Command, search term and flag regex are case insensitive.
+
+:warning: Flags are not case insensitive. Inputting an invalid flag will cause the invalid flag and its regex to be ignored.
+
+:warning: Broad queries may take up to ten minutes to execute, as UNI Mods will have to fetch information for every 
+single mod from NUSMods. You may wish to avoid broad queries, and if absolutely required, it is recommended to perform 
+them with the -q flag, which will execute in a matter of seconds.
+
+<br>
+
+## Update local database: `update`
+
+Maybe you are going to be doing some work at the University Sports Center tomorrow. You forsee that you will lack a 
+good WiFi connection there, and want to access the latest information offline. Run update, and grab a cup of coffee 
+while waiting!
+
+:information_source: Command is case insensitive.
+
+:information_source:  You should rarely need to execute this command since every time UNI Mods retrieves data from 
+NUSMods, it will update that mod in the local database. You should only realistically only need to do this before 
+the start of a new semester, when mods are being updated for the coming semester.
 
 <br>
 
 ## Add to timetable: `add <MODULE_CODE>`
 
-You have finally decided on the modules you want to take. Try adding your first module to your timetable! 
+You have finally decided on the modules you want to take. Try adding your first module to your timetable!
 
 Let's add for example, `CG2271` to the timetable
 
@@ -198,7 +231,6 @@ If lessons are found, a prompt to indicate a choice for each lesson type will be
 ```shell
 Which Lecture would you like to choose? 
 ```
-
 
 <br>
 
@@ -284,6 +316,78 @@ Total MCs taken this semester: 4.0
 
 <br>
 
+## Store grades secured in various modules: `store <GRADE> > <MODULE_CODE>`
+
+You can store the grades you have secured for various modules by using this command.These will be stored in the list of
+completed modules and will be used for CAP calculation.
+
+For Example : Let's store `A+` grade for `CS2113T` module in the records.
+
+You can type `store A+ > CS2113T` to store A+ grade for the module CS2113T in the records.
+
+```shell
+~$ store A+ > CS2113T
+CS2113T with grade A+ has been added to the list of modules completed.
+__________________________________________________________________________
+
+```
+
+You can also store modules with CS/CU grades for record purposes.These modules will not be considered for CAP
+calculation.
+
+For Example : Let's store `CS` grade for `CFG1002` module in the records.
+
+```shell
+~$ store CS > CFG1002
+CFG1002 with grade CS has been added to the list of modules completed.
+__________________________________________________________________________
+
+```
+
+You can choose to store modules for which you have exercised the S/U option. These modules will not be considered for
+CAP calculation. For Example : Let's store `S` grade for `CS1231` module in the records.
+
+```shell
+~$ store S > CS1231
+CS1231 with grade S has been added to the list of modules completed.
+__________________________________________________________________________
+
+```
+
+<br>
+
+## Remove modules from the list of completed modules: `remove <module_code>`
+
+You can remove any module that you added to your list of completed modules using this command.
+
+For example: If you have CS2113T already to your list of completed modules. You can type
+`remove CS2113T` to remove this module and its corresponding grade from the list of modules completed.
+
+```shell
+~$ remove CS2113T
+CS2113T is successfully removed from your Transcript.
+__________________________________________________________________________
+```
+
+<br>
+
+## Calculate CAP : `calculate cap`
+
+You can calculate your **CAP** based on the list of modules you have completed and the corresponding grades scored in
+them.
+
+You can type `calculate cap` to view your Cumulative Average Point.
+
+For Example:
+
+```shell
+~$ calculate cap
+Cumulative Average Point : 3.0
+__________________________________________________________________________
+
+```
+
+<br>
 ## Exit: `exit`
 
 You can end the application anytime by typing `exit` into the terminal

@@ -8,12 +8,12 @@ import seedu.ui.TimetableUI.LineType;
 
 public abstract class TimetableItem {
 
-    private final String title;
-    private final DayOfWeek dayOfWeek;
-    private final String startTime;
-    private final String endTime;
-
-    public abstract String printTypeInfo(LineType type);
+    protected final String title;
+    protected final DayOfWeek dayOfWeek;
+    protected final String startTime;
+    protected final String endTime;
+    protected String type;
+    protected String venue;
 
     public TimetableItem(String title, String day, String startTime, String endTime) {
         this.title = title;
@@ -57,6 +57,22 @@ public abstract class TimetableItem {
      */
     public String getTitle() {
         return title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getVenue() {
+        return venue;
+    }
+
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
     /**

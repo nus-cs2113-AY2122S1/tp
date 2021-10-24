@@ -1,13 +1,10 @@
 package seedu.ui;
 
 
-import seedu.comparator.ClassNumComparator;
 import seedu.module.Lesson;
 import seedu.module.Module;
-import seedu.module.Semester;
-import seedu.timetable.Timetable;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class TextUi {
@@ -33,23 +30,36 @@ public class TextUi {
     private static final String PREREQ_FAIL = "Oops, you have not met the module's prerequisite: ";
     private static final String HELP_MESSAGE = LINE
             + "\tUNIMods accepts the following commands:-\n"
-            + "\t\t| No.| Command Syntax          |            Command Action                      |\n"
-            + "\t\t| 1. | search <module_code>    | Search module based on the given partial regex |\n"
-            + "\t\t| 2. | show <module_code>      | Display module information                     |\n"
-            + "\t\t| 3. | add <module_code>       | Add module to the Timetable                    |\n"
-            + "\t\t| 4. | delete <module_code>    | Remove module from the Timetable               |\n"
-            + "\t\t| 5. | clear                   | Remove all modules from the Timetable          |\n"
-            + "\t\t| 6. | timetable               | Display the Timetable                          |\n"
-            + "\t\t| 7. | exit                    | Exit From Program                              |\n"
+            + "\t\t| No.| Command Syntax                |            Command Action                      |\n"
+            + "\t\t| 1. | search <module_code>          | Search module based on the given partial regex |\n"
+            + "\t\t| 2. | show <module_code>            | Display module information                     |\n"
+            + "\t\t| 3. | add <module_code>             | Add module to the Timetable                    |\n"
+            + "\t\t| 4. | delete <module_code>          | Deletes module from the Timetable              |\n"
+            + "\t\t| 5. | clear                         | Deletes all modules from the Timetable         |\n"
+            + "\t\t| 6. | timetable                     | Display the Timetable                          |\n"
+            + "\t\t| 7. | store <grade> > <module_code> | Stores the grades scored in the Transcript     |\n"
+            + "\t\t| 8. | remove <module_code>          | Remove the module from the Transcript          |\n"
+            + "\t\t| 9. | calculate cap                 | Displays the Cumulative Average Point          |\n"
+            + "\t\t| 10.| exit                          | Exit From Program                              |\n"
             + "\t ** Note: For details, refer to the User Guide of NUSModsLite at: "
             + "\n\t\thttps://ay2122s1-cs2113t-w12-2.github.io/tp/UserGuide.html\n" + LINE;
 
     public static final String ERROR_MODULE_NOT_FOUND = "OOPS, this module does not exist in your timetable!";
+    public static final String ERROR_MODULE_NOT_IN_TRANSCRIPT = "OOPS, this module does not exist in your Transcript";
     public static final String ERROR_INVALID_MODULE_CODE =
             "OOPS, it looks like the module code you entered doesn't exist, Please re-check!";
     public static final String ERROR_EMPTY_TIMETABLE = "OOPS, it seems that your timetable is already empty.";
+    public static final String ERROR_INVALID_GRADE = "OOPS, it seems that the grade you entered is invalid.";
+    public static final String ERROR_INVALID_RESULT_COMMAND = "OOPS, it seems that your command is in wrong format"
+            + "The correct command format is =>"
+            + " \n \"store\" <grade> \">\" <module_code> ";
 
-
+    public static final String GRADED = "GRADED";
+    public static final String UNGRADED = "UNGRADED";
+    public static final String ERROR_EMPTY_RECORD = "OOPS, it seems that you have not added any modules "
+            + "and grades to your transcript"
+            + "\nType the command below to store the grades in our records =>"
+            + "\n \"store\" <grade> \">\" <module_code> ";
 
     /*------------- PUBLIC COMMANDS ----------- */
     public static String getCommand() {
@@ -66,6 +76,17 @@ public class TextUi {
 
     public static String getLessonCommand(String lessonType) {
         String output = "Which " + lessonType + " would you like to choose? ";
+        System.out.print(output);
+        String input = in.nextLine();
+        while (input.isEmpty()) {
+            input = in.next();
+        }
+        return input;
+    }
+
+    public static String printAskConfirmation(Lesson lesson) {
+        String output = "Are you sure you want to add " + lesson.lessonDetails()
+                + " as it conflicts with your current timetable (y/n)";
         System.out.print(output);
         String input = in.nextLine();
         while (input.isEmpty()) {
@@ -223,5 +244,21 @@ public class TextUi {
             System.out.println(PREREQ_FAIL);
             System.out.println(module.getPrerequisite());
         }
+    }
+
+    public static void printAddedGrade(String moduleCode, String grade) {
+        System.out.println(moduleCode + " with grade " + grade + " has been added to the list of modules completed.");
+    }
+
+    public static void printCap(double cap) {
+        System.out.println("Cumulative Average Point : " + cap);
+    }
+
+    public static void printEmptyRecord() {
+        System.out.println(ERROR_EMPTY_RECORD);
+    }
+
+    public static void printModuleRemoved(String moduleCode) {
+        System.out.println(moduleCode + " is successfully removed from your Transcript.");
     }
 }

@@ -12,11 +12,8 @@ import seedu.ui.TimetableUI.LineType;
  * lesson.
  */
 public class TimetableLesson extends TimetableItem {
-
-    private int semester;
-    private String type;
-    private String venue;
-    private String classNo;
+    private final int semester;
+    private final String classNo;
 
     /**
      * Creates a Timetable Lesson based off a valid Lesson in a Module.
@@ -70,6 +67,11 @@ public class TimetableLesson extends TimetableItem {
         return parseLessonType(this.type);
     }
 
+    @Override
+    public String getType() {
+        return getLessonType().toString() + "[" + getClassNo() + "]";
+    }
+
     /**
      * Getter for the Venue that Lesson is held at.
      * 
@@ -91,21 +93,4 @@ public class TimetableLesson extends TimetableItem {
                 && this.getLessonType().equals(lesson.getLessonType());
     }
 
-    public String printTypeInfo(LineType type) {
-        String str = "|   ";
-        switch (type) {
-        case CODE:
-            str += getTitle();
-            break;
-        case LESSONTYPE:
-            str += String.format("%s[%s]", getLessonType().toString(), getClassNo());
-            break;
-        case VENUE:
-            str += getVenue();
-            break;
-        default:
-            str += "";
-        }
-        return str;
-    }
 }
