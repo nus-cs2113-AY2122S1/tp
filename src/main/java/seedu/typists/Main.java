@@ -19,8 +19,6 @@ public class Main {
     public static final int LINE_LENGTH = 10;
     public static Content content;
     public static TextUi uiBot;
-    //Parser parseBot;
-    WordLimitGame wordLimitGame;
     StorageFile storage;
 
 
