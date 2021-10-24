@@ -543,14 +543,16 @@ public class Ui {
         assert name != null : "name cannot be null";
         assert wastage != -1 : "wastage cannot be negative";
         System.out.println(LINE_DIVIDER + System.lineSeparator()
-                + name + " is now " + wastage + " kg" + System.lineSeparator()
+                + "Wastage of " + name + " is now " + wastage + " kg" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
     public void printStorage(String name, double storage) {
         assert name != null : "name cannot be null";
         assert storage != -1 : "storage cannot be negative";
-        System.out.println("Storage of " + name + " is now " + storage + " kg");
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Storage of " + name + " is now " + storage + " kg" + System.lineSeparator()
+                + LINE_DIVIDER);
     }
 
     public void clearTerminalAndPrintNewPage() {
