@@ -10,10 +10,10 @@ import seedu.duke.training.TrainingSchedule;
 
 public class AttendanceListTest {
 
-    private Member teckHwee;
-    private Member ianWang;
-    private Member glen;
-    private Member izdiyad;
+    private String teckHwee;
+    private String ianWang;
+    private String glen;
+    private String izdiyad;
 
     private AttendanceList attendanceList;
 

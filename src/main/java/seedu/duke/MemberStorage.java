@@ -32,11 +32,11 @@ public class MemberStorage {
             }
         } else {
             try {
-                System.out.println("file loaded");
+                System.out.println("file loaded" + dukeMemberFile.getCanonicalPath());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            loadDukeAttendanceFile(dukeMemberFile, members);
+            loadDukeMemberFile(dukeMemberFile, members);
         }
     }
 
@@ -46,7 +46,7 @@ public class MemberStorage {
      * @param dukeMemberFile CSV file to read data from.
      * @param memberList MemberList to write to.
      */
-    public static void loadDukeAttendanceFile(File dukeMemberFile, MemberList memberList) {
+    public static void loadDukeMemberFile(File dukeMemberFile, MemberList memberList) {
         String name;
         String studentNumber;
         String gender;
@@ -73,9 +73,9 @@ public class MemberStorage {
     }
 
     /**
-     * This method initializes the headers of duke attendance file.
+     * This method initializes the headers of duke member file.
      *
-     * @param dukeMemberFile the attendance file
+     * @param dukeMemberFile the member file
      */
     public static void initializeMemberFile(File dukeMemberFile) {
         try (PrintWriter dukeMemberWriter = new PrintWriter(dukeMemberFile)) {
@@ -93,10 +93,10 @@ public class MemberStorage {
     }
 
     /**
-     * This method rewrites the entire duke attendance file.
+     * This method rewrites the entire duke member file.
      *
      * @param dukeMemberFile  the member file
-     * @param memberList     the current attendance list
+     * @param memberList     the current member list
      */
     public static void writeMemberFile(File dukeMemberFile, MemberList memberList) {
         int memberListSize = memberList.getMemberListSize();
