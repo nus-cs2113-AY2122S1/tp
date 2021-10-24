@@ -1,0 +1,57 @@
+@startuml
+Activate AddLinkCommand #FFBBBB
+create ConflictManager
+AddLinkCommand -> ConflictManager: ConflictManager()
+Activate ConflictManager #FFBBBB
+
+ConflictManager -> ConflictManager: getConflictingSchedule()
+Activate ConflictManager #DarkSalmon
+
+ConflictManager -> ConflictManager: getAllLinks()
+Activate ConflictManager
+
+create ArrayList
+ConflictManager -> ArrayList: ArrayList()
+Activate ArrayList #FFBBBB
+ArrayList --> ConflictManager: currentLinks
+
+ConflictManager -> ModuleManager: getAllModules()
+Activate ModuleManager #FFBBBB
+NusModule --> ModuleManager: modules
+Activate NusModule #FFBBBB
+
+loop For each NusModule in modules
+    ModuleManager -> NusModule: getModule(NusModule)
+    Deactivate ModuleManager
+    NusModule -> ContentManager : getContentManager()
+    Activate ContentManager #FFBBBB
+    Deactivate NusModule
+    ContentManager -> ContentManager: getContents()
+    Activate ContentManager
+    ContentManager --> ContentManager: contents
+    Deactivate ContentManager
+    ContentManager -> ArrayList: addAll(contents)
+    Deactivate ContentManager
+    ArrayList --> ConflictManager
+    Deactivate ArrayList
+    ConflictManager --> ConflictManager: AllLinks
+    Deactivate ConflictManager
+
+    create StringBuilder
+    ConflictManager -> StringBuilder: StringBuilder()
+    Activate StringBuilder #FFBBBB
+
+    loop For each Link in AllLinks
+        alt same day && overlapping start-time or end-time
+        ConflictManager -> StringBuilder: append(LinkDescription)
+        StringBuilder --> ConflictManager: conflictingSchedule
+        Deactivate StringBuilder
+    end
+end
+
+ConflictManager --> ConflictManager: conflictingSchedule
+Deactivate ConflictManager
+end
+
+ConflictManager --> AddLinkCommand: conflictingSchedule
+@enduml
