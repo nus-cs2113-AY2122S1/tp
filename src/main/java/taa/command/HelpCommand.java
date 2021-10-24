@@ -29,6 +29,7 @@ public class HelpCommand extends Command {
         new AverageMarksCommand(""),
         new ListAttendanceCommand(""),
         new SetAttendanceCommand(""),
+        new DeleteAttendanceCommand(""),
         new ExitCommand(""),
         new HelpCommand("")
     };
