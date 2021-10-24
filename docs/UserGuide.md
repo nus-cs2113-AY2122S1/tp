@@ -2,57 +2,60 @@
 
 ## Introduction
 
-*Food-O-Rama* is a food wastage tracking application for restaurant owners to 
-**keep track of their food resources**. It provides the user with **insight on the amount of ingredients 
-in their storage** and **how track much food is wasted**. This allows the user to better plan their 
-purchase of raw ingredients and enables more efficient allocation to the cooking of dishes which ultimately saves cost.
+*Food-O-Rama* is a food wastage tracking application for restaurant owners like you to
+**keep track of their food resources**. It provides you with **insight on the amount of ingredients in their storage**
+and **how track much food is wasted**. This allows you to better plan your purchase of raw ingredients and enables more
+efficient allocation to the cooking of dishes which ultimately saves cost.
 
 *Food-O-Rama* provides a variety of features that allow for food resource tracking. You can **add**, **delete**,
-**list** and **find** different dishes and ingredients. What's more, you can also show **graphs** for your statistical wastage,
-and even **link** your ingredients to your dishes for advanced management!
+**list** and **find** different dishes and ingredients. What's more, you can also show **graphs** for your statistical
+wastage, and even **link** your ingredients to your dishes for advanced management!
 
-This user guide serves to help you manoeuvre around *Food-O-Rama*, and includes a List of Commands for your quick reference.
-We hope you enjoy using *Food-O-Rama*! 💕
+This user guide serves to help you manoeuvre around *Food-O-Rama*, and includes a List of Commands for your quick
+reference. We hope you enjoy using *Food-O-Rama*! 💕
 
 ## 🧾 Table of Contents
-* [Quick Start](#quick-start)
-* [List of Commands](#list-of-commands)
-* [Features](#features)
-  * `help`: [List all commands](#get-some-help-help)
-  * [Dish Commands](#add-new-dish-add-dish)
-    * `add dish`: [Add new dish](#add-new-dish-add-dish)
-    * `add dish waste`: [Add dish wastage](#add-dish-wastage-add-dish-waste)
-    * `del dish`: [Delete existing dish](#delete-existing-dish-del-dish)
-    * `list dish`: [View existing dishes](#view-existing-dishes-list-dish)
-  * [Ingredient Commands](#add-new-ingredient-add-ingr)  
-    * `add ingr`: [Add new ingredient](#add-new-ingredient-add-ingr)
-    * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient-add-ingr-stored)
-    * `add ingr waste`: [Add ingredient wastage](#add-ingredient-wastage-add-ingr-waste)
-    * `add constituent`: [Link ingredient to dish](#link-ingredient-to-dish-add-constituent)
-    * `del ingr`: [Delete existing ingredient](#delete-existing-ingredient-del-ingr)
-    * `list ingr`: [View exising ingredients](#view-all-exising-ingredients-list-ingr)
-  * [Graph Commands](#graphical-representatioon-of-dishes-wasteage-graph-dish)
-    * `graph dish`: [Graphical representation of dish wastage](#graphical-representatioon-of-dishes-wasteage-graph-dish)
-    * `graph ingr`: [Graphical representation of ingredient wastage](#graphical-representatioon-of-ingredients-wasteage-graph-ingr)
-  * [Find Commands](find-dishes-with-matching-keyword-find-dish)
-    * `find dish`: [Find dishes with matching keyword](#find-dishes-with-matching-keyword-find-dish)
-    * `find ingr`: [Find ingredients with matching keyword](#find-ingredients-with-matching-keyword-find-ingr)
-  * [Clear Commands](#clears-all-dish-entries-in-the-list-of-dishes-clear-dish)
-    * `clear dish`: [Clears all dish entries in the list of dishes](#clears-all-dish-entries-in-the-list-of-dishes-clear-dish)   
-    * `clear ingr`: [Clears all ingredient entries in the list of ingredients](#clears-all-ingredient-entries-in-the-list-of-ingredients-clear-ingr)
-    * `clear all`: [Clears all ingredient & dish entries in both lists](#clears-all-ingredient--dish-entries-in-the-list-of-dishes-clear-all)
-  * [Sort Commands](#sort-the-dishes-by-amount-of-wastage-sort-dish)
-    * `sort dish`: [Sort dishes by amount of wastage](#sort-the-dishes-by-amount-of-wastage-sort-dish)
-    * `sort ingr`: [Sort ingredients by amount of wastage](#sort-the-dishes-by-amount-of-wastage-sort-ingr)
-  * `find dish`: [Exit Food-O-Rama](#exit-food-o-rama-bye)
+
+* [Quick Start](#-quick-start)
+* [List of Commands](#-list-of-commands)
+* [Features](#-features)
+    * `help`: [List all commands](#list-all-commands-help)
+    * [Dish Commands](#add-new-dish-add-dish)
+        * `add dish`: [Add new dish](#add-new-dish-add-dish)
+        * `add dish waste`: [Add dish wastage](#add-dish-wastage-add-dish-waste)
+        * `del dish`: [Delete existing dish](#delete-existing-dish-del-dish)
+        * `list dish`: [View existing dishes](#view-existing-dishes-list-dish)
+    * [Ingredient Commands](#add-new-ingredient-add-ingr)
+        * `add ingr`: [Add new ingredient](#add-new-ingredient-add-ingr)
+        * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient-add-ingr-stored)
+        * `add ingr waste`: [Add ingredient wastage](#add-ingredient-wastage-add-ingr-waste)
+        * `add constituent`: [Link ingredient to dish](#link-ingredient-to-dish-add-constituent)
+        * `del ingr`: [Delete existing ingredient](#delete-existing-ingredient-del-ingr)
+        * `list ingr`: [View exising ingredients](#view-all-exising-ingredients-list-ingr)
+    * [Graph Commands](#graphical-representation-of-dishes-wastage-graph-dish)
+        * `graph dish`: [Graphical representation of dish wastage](#graphical-representation-of-dishes-wastage-graph-dish)
+        * `graph ingr`: [Graphical representation of ingredient wastage](#graphical-representation-of-ingredients-wastage-graph-ingr)
+    * [Find Commands](#find-dishes-with-matching-keyword-find-dish)
+        * `find dish`: [Find dishes with matching keyword](#find-dishes-with-matching-keyword-find-dish)
+        * `find ingr`: [Find ingredients with matching keyword](#find-ingredients-with-matching-keyword-find-ingr)
+    * [Clear Commands](#clears-dish-entries-in-the-list-of-dishes-totally-clear-dish)
+        * `clear dish`: [Clears all dish entries in the list of dishes](#clears-dish-entries-in-the-list-of-dishes-totally-clear-dish)
+        * `clear ingr`: [Clears all ingredient entries in the list of ingredients](#clears-ingredient-entries-in-the-list-of-ingredients-totally-clear-ingr)
+        * `clear all`: [Clears all ingredient & dish entries in both lists](#clears-ingredient--dish-entries-in-the-list-of-dishes-totally-clear-all)
+    * [Sort Commands](#sort-the-dishes-by-amount-of-wastage-sort-dish)
+        * `sort dish`: [Sort dishes by amount of wastage](#sort-the-dishes-by-amount-of-wastage-sort-dish)
+        * `sort ingr`: [Sort ingredients by amount of wastage](#sort-the-ingredients-by-amount-of-wastage-sort-ingr)
+    * `bye`: [Exit Food-O-Rama](#exit-food-o-rama-bye)
 
 ## 📖 Quick Start
+
 1. Ensure that you have Java 11 or above installed.
-2. Download the latest version of `Food-O-Rama` from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp/releases/tag/Release_v1.0).
+2. Download the latest version of `Food-O-Rama`
+   from [here](https://github.com/AY2122S1-CS2113T-W11-4/tp/releases/tag/Release_v1.0).
 3. Copy 'Food-O-Rama.jar' into an empty folder.
 4. Open command promppt, nagivate to where 'Food-O-Rama.jar' is located. e.g. cd [file path]
 5. Launch 'Food-O-Rama' using 'java -jar Food-O-Rama.jar'.
-6. Enter commands to use Food-O-Rama
+6. Enter commands to use Food-O-Rama.
 
 Demo:
 
@@ -79,31 +82,32 @@ java -jar Food-O-Rama.jar
 
 | Function | Command  |
 |---|---|
-|View the list of commands| help|
-|Add a new Dish   | add dish [dishName]|
-|Add the Dish Wastage | add dish waste [dishName] followed by [weight in KG]|
-|Delete a Dish| del [dishName] |
-|View all Dishes|list dish|
-|Add a new Ingredient| add ingr [ingrName]  followed by [weight in KG] |
-|Add storage to an existing Ingredient| add ingr stored [ingrName] followed by [weight in KG] |
-|Add Ingredient Wastage| add ingr waste [ingrName] followed by [weight in KG]|
-|Link a Dish to a Ingredient| add constituent [dishName] / [ingrName]|
-|Delete an Ingredient | del [ingrName]|
-|View all Ingredients| list ingr|
-|Display a graph for Dishes wastage| graph dish|
-|Display a graph for Ingredients wastage| graph ingr|
-|Find a Dish| find dish|
-|Find an Ingredient| find ingr|
-|Remove all Dishes| clear dish|
-|Remove all Ingredients| clear ingr|
-|Remove all Ingredients & Dishes| clear all|
-|Sort the Dishes by amount of wastage| sort dish|
-|Sort the Ingredients by amount of wastage| sort ingr|
-|Exit Food-O-Rama| bye|
+| View the list of commands | help |
+| Add a new Dish | add dish [dishName] |
+| Add the Dish Wastage | add dish waste [dishName] followed by [weight in KG] |
+| Delete a Dish | del [dishName] |
+| View all Dishes | list dish|
+| Add a new Ingredient | add ingr [ingrName]  followed by [weight in KG] |
+| Add storage to an existing Ingredient | add ingr stored [ingrName] followed by [weight in KG] |
+| Add Ingredient Wastage | add ingr waste [ingrName] followed by [weight in KG] |
+| Link a Dish to a Ingredient | add constituent [dishName] / [ingrName] |
+| Delete an Ingredient | del [ingrName] |
+| View all Ingredients | list ingr |
+| Display a graph for Dishes wastage | graph dish |
+| Display a graph for Ingredients wastage | graph ingr |
+| Find a Dish | find dish |
+| Find an Ingredient | find ingr | 
+| Remove all Dishes | clear dish |
+| Remove all Ingredients | clear ingr |
+| Remove all Ingredients & Dishes | clear all |
+| Sort the Dishes by amount of wastage | sort dish |
+| Sort the Ingredients by amount of wastage | sort ingr |
+| Exit Food-O-Rama | bye |
 
-## 👍 Features 
+## 👍 Features
 
 ### List all commands: `help`
+
 Display the list of commands that Food-O-Rama utilises
 
 Format: `help`
@@ -148,13 +152,14 @@ Here are the commands you can use:
 17. Viewing Graph of Ingredient Wastage : 'graph ingr'
 18. Clearing all Ingredients : 'clear ingr'
 19. Clearing both Dishes and Ingredients : 'clear all'
-20. Viewing this list of commands: help
-21. Exiting the program: bye
+20. Viewing this list of commands: `help`
+21. Exiting the program: `bye`
 ____________________________________________________________
 
 ```
 
 ### Add New Dish: `add dish`
+
 Add a new Dish to your Dish list
 
 Format: `add dish dishName`
@@ -174,6 +179,7 @@ ____________________________________________________________
 ```
 
 ### Add Dish Wastage: `add dish waste`
+
 Incur wastage on an existing Dish
 
 Format: `add dish waste ingrName`
@@ -191,6 +197,7 @@ Expected Outcome:
 ____________________________________________________________
 Enter the wastage of chicken rice in KG:
 ```
+
 Example of usage:
 
 `2.5`
@@ -203,6 +210,7 @@ ____________________________________________________________
 ```
 
 ### Delete Existing Dish: `del dish`
+
 Delete an existing Ingredient from your Ingredient list
 
 Format: `del dish dishName`
@@ -222,6 +230,7 @@ ____________________________________________________________
 ```
 
 ### View Existing dishes: `list dish`
+
 View all exisitng Dishes in the Dish list
 
 Format: `list dish`
@@ -245,14 +254,15 @@ ____________________________________________________________
 ```
 
 ### Add New Ingredient: `add ingr`
+
 Add a new Ingredient to your Ingredient list
 
 Format: `add ingr ingrName`
 
-* The `ingrName` can be in a natural language format. 
+* The `ingrName` can be in a natural language format.
 * You will be prompted to enter the weight of `ingrName` in the next step.
 
-Example of usage: 
+Example of usage:
 
 `add ingr chicken`
 
@@ -278,6 +288,7 @@ ____________________________________________________________
 ```
 
 ### Add Storage to Existing Ingredient: `add ingr stored`
+
 Add more storage in KG to an Ingredient that exists in the Ingredient list.
 
 Format: `add ingr stored ingrName`
@@ -295,6 +306,7 @@ Expected Outcome:
 ____________________________________________________________
 Enter the weight of chicken in KG:
 ```
+
 Example of usage:
 
 `5`
@@ -307,6 +319,7 @@ ____________________________________________________________
 ```
 
 ### Add Ingredient Wastage: `add ingr waste`
+
 Incur wastage on an existing Ingredient
 
 Format: `add ingr waste ingrName`
@@ -324,6 +337,7 @@ Expected Outcome:
 ____________________________________________________________
 Enter the wastage of chicken in KG:
 ```
+
 Example of usage:
 
 `1.5`
@@ -336,6 +350,7 @@ ____________________________________________________________
 ```
 
 ### Link Ingredient to Dish: `add constituent`
+
 Link an existing Ingredient to an existing Dish
 
 Format: `add constituent dishName / ingrName`
@@ -355,6 +370,7 @@ ____________________________________________________________
 ```
 
 ### Delete Existing Ingredient: `del ingr`
+
 Delete an existing Ingredient from your Ingredient list
 
 Format: `del ingr ingrName`
@@ -374,6 +390,7 @@ ____________________________________________________________
 ```
 
 ### View all exising Ingredients: `list ingr`
+
 View all exisitng Ingredients in the Ingredient list
 
 Format: `list ingr`
@@ -397,11 +414,12 @@ ____________________________________________________________
 ```
 
 ### Graphical representation of Dishes wastage: `graph dish`
-Displays a graph to show Dish wastage.
+
+Display a graph to show Dish wastage.
 
 Format: `graph dish`
 
-* `graph dish` does not require additional parameters
+* `graph dish` does not require additional parameters.
 
 Example of usage:
 
@@ -422,11 +440,12 @@ ____________________________________________________________
 ```
 
 ### Graphical representation of Ingredients wastage: `graph ingr`
+
 Displays a graph to show Ingredient wastage.
 
 Format: `graph ingr`
 
-* `graph ingr` does not require additional parameters
+* `graph ingr` does not require additional parameters.
 
 Example of usage:
 
@@ -446,6 +465,7 @@ ____________________________________________________________
 ```
 
 ### Find Dishes with matching keyword: `find dish`
+
 Retrieves a list of Dishes inclusive of the matching keyword.
 
 Format: `find dish keyword`
@@ -473,6 +493,7 @@ ____________________________________________________________
 ```
 
 ### Find Ingredients with matching keyword: `find ingr`
+
 Retrieves a list of Ingredients inclusive of the matching keyword.
 
 Format: `find ingr keyword`
@@ -500,6 +521,7 @@ ____________________________________________________________
 ```
 
 ### Clears Dish entries in the list of Dishes totally: `clear dish`
+
 Removes all existing Dishes from the list of ingredients.
 
 Format: `clear dish`
@@ -519,6 +541,7 @@ ____________________________________________________________
 ```
 
 ### Clears Ingredient entries in the list of Ingredients totally: `clear ingr`
+
 Removes all existing Ingredients from the list of ingredients.
 
 Format: `clear ingr`
@@ -539,6 +562,7 @@ ____________________________________________________________
 ```
 
 ### Clears Ingredient & Dish entries in the list of Dishes totally: `clear all`
+
 Removes all existing Ingredients & Dishes from the list of ingredients & list of Dishes.
 
 Format: `clear all`
@@ -558,6 +582,7 @@ ____________________________________________________________
 ```
 
 ### Sort the Dishes by amount of wastage: `sort dish`
+
 Sorts all Dishes in descending order of wastage.
 
 Format: `sort dish`
@@ -590,6 +615,7 @@ ____________________________________________________________
 ```
 
 ### Sort the Ingredients by amount of wastage: `sort ingr`
+
 Sorts all Ingredients in descending order of wastage.
 
 Format: `sort ingr`
@@ -625,6 +651,7 @@ ____________________________________________________________
 ```
 
 ### Exit Food-O-Rama: `bye`
+
 Exit Food-O-Rama and save all data entries.
 
 Format: `bye`
@@ -667,9 +694,10 @@ Expected Outcome:
 #                   Love, the Food-O-Rama Team <3                         #
 ###########################################################################
 ```
+
 ## FAQ
 
-**Q**: How do I transfer my data to another computer? 
+**Q**: How do I transfer my data to another computer?
 
 **A**: Copy the text files in the data folder over to the new computer. 
 
