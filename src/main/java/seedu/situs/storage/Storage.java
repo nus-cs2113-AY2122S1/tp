@@ -69,6 +69,10 @@ public class Storage {
             String ingredientGroupName = ingredientDetails[0].trim();
             ingredientGroup.setIngredientGroupName(ingredientGroupName);
 
+            if (ingredientDetails.length <= 1) {
+                throw new SitusException("Invalid ingredient format!");
+            }
+
             for (int i = 1; i < ingredientDetails.length; i++) {
                 String[] amountAndExpiry = ingredientDetails[i].split("%");
                 double ingredientAmount = Double.parseDouble(amountAndExpiry[0]);

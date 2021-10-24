@@ -4,6 +4,7 @@ import seedu.situs.exceptions.SitusException;
 import seedu.situs.storage.Storage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /*
@@ -71,7 +72,7 @@ public class IngredientList {
      * @param ingredientName ingredient to be searched
      * @return true if ingredient already exists, false if otherwise
      */
-    public boolean searchIngredientInList(String ingredientName) {
+    public boolean isIngredientInList(String ingredientName) {
         for (int i = 0; i < getSize(); i++) {
             if (ingredientList.get(i).getIngredientGroupName().equals(ingredientName)) {
                 return true;
@@ -104,9 +105,9 @@ public class IngredientList {
      */
     public void add(Ingredient ingredient) throws IOException, IndexOutOfBoundsException {
         String ingredientName = ingredient.getName();
-        boolean repeatedName = searchIngredientInList(ingredientName);
+        boolean isRepeatedName = isIngredientInList(ingredientName);
 
-        if (repeatedName) { //ingredient already exists, add to current ingredient group
+        if (isRepeatedName) { //ingredient already exists, add to current ingredient group
             int ingredientIndex = findIngredientIndexInList(ingredientName);
             ingredientList.get(ingredientIndex).add(ingredient);
 
@@ -117,6 +118,43 @@ public class IngredientList {
             newGroup.add(ingredient);
         }
         storage.writeIngredientsToMemory(ingredientList);
+    }
+
+    /**
+     * Removes an ingredient from ingredient group.
+     *
+     * @param ingredientName the ingredient name to remove
+     * @param expiryDate the expiration date of the removed ingredient
+     * @return an ingredient object of the removed ingredient
+     * @throws SitusException if the ingredient and/or expiry date are not matched
+     * @throws IOException if the removed ingredient cannot be removed from memory
+     */
+    public Ingredient removeIngredientFromGroup(String ingredientName, LocalDate expiryDate)
+            throws SitusException, IOException {
+        Ingredient removedIngredient;
+        int groupIndexToRemove = findIngredientIndexInList(ingredientName);
+
+        if (groupIndexToRemove < 0) {
+            throw new SitusException("Ingredient not found!");
+        }
+
+        int ingredientIndexToRemove = getIngredientGroup(groupIndexToRemove + 1)
+                .findIngredientIndexByExpiry(expiryDate);
+
+        if (ingredientIndexToRemove < 0) {
+            throw new SitusException("No matching ingredient and expiry date found");
+        }
+
+        removedIngredient = getIngredientGroup(groupIndexToRemove + 1)
+                .remove(ingredientIndexToRemove + 1);
+
+        if (getIngredientGroup(groupIndexToRemove + 1).getIngredientGroupSize() <= 0) {
+            ingredientList.remove(groupIndexToRemove);
+        }
+
+        storage.writeIngredientsToMemory(ingredientList);
+
+        return removedIngredient;
     }
 
     /**

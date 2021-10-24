@@ -25,18 +25,6 @@ public class IngredientGroup {
     private String groupName; //name of ingredient
     private Double totalAmount;
 
-    private Storage storage;
-
-    /*public IngredientGroup() throws DukeException {
-        try {
-            storage = new Storage();
-            ingredientList = storage.loadIngredientsFromMemory();
-        } catch (IOException e) {
-            //failsafe
-            ingredientList = new ArrayList<>();
-            throw new DukeException("Cannot read ingredients from memory!");
-        }
-    }*/
 
     public IngredientGroup() {
         ingredientGroup = new ArrayList<>();
@@ -143,6 +131,7 @@ public class IngredientGroup {
     public Ingredient remove(int ingredientNumber) throws SitusException {
         try {
             Ingredient removedIngredient = ingredientGroup.remove(ingredientNumber - 1);
+            this.totalAmount -= removedIngredient.getAmount();
             return removedIngredient;
         } catch (IndexOutOfBoundsException e) {
             throw new SitusException(INVALID_NUMBER);
@@ -169,5 +158,20 @@ public class IngredientGroup {
      */
     public Ingredient get(int ingredientNumber) throws IndexOutOfBoundsException {
         return ingredientGroup.get(ingredientNumber - 1);
+    }
+
+    /**
+     * Finds the ingredient index in the group by expiry date.
+     *
+     * @param expiryDate the expiration date of the ingredient
+     * @return the ingredient index by expiration date, -1 if not found
+     */
+    public int findIngredientIndexByExpiry(LocalDate expiryDate) {
+        for (int i = 0; i < ingredientGroup.size(); i++) {
+            if (ingredientGroup.get(i).getExpiry().compareTo(expiryDate) == 0) {
+                return i;
+            }
+        }
+        return -1;
     }
 }
