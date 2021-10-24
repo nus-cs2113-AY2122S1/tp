@@ -10,10 +10,23 @@ public class DeleteGoalCommand extends DeleteCommand {
 
     protected int goalIndex;
 
+    /**
+     * Constructor of DeleteGoalCommand.
+     *
+     * @param goalIndex Index of goal in goalList to be deleted.
+     */
     public DeleteGoalCommand(int goalIndex) {
         this.goalIndex = goalIndex;
     }
 
+    /**
+     * Executes delete goal command and removes goal from goalList.
+     *
+     * @param goalList     List that stores all the goals.
+     * @param printManager Prints messages to the console.
+     * @param storage      Reference to the file where data is stored.
+     * @throws HaBitCommandException If the goalIndex provided is invalid.
+     */
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
         goalList.deleteGoal(goalIndex, printManager);
