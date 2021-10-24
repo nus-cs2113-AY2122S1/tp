@@ -12,6 +12,7 @@ import terminus.command.content.DeleteCommand;
 import terminus.command.content.ViewCommand;
 import terminus.command.content.note.AddNoteCommand;
 import terminus.command.content.note.ExportNoteCommand;
+import terminus.command.content.note.ReloadNoteCommand;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 
@@ -103,6 +104,12 @@ public class NoteCommandParserTest {
     }
 
     @Test
+    void parseCommand_resolveReloadCommand_success()
+            throws InvalidCommandException, InvalidArgumentException {
+        assertTrue(commandParser.parseCommand("reload") instanceof ReloadNoteCommand);
+    }
+
+    @Test
     void getCommandList_containsBasicCommands() {
         assertTrue(commandParser.getCommandList().contains("exit"));
         assertTrue(commandParser.getCommandList().contains("add"));
@@ -110,6 +117,8 @@ public class NoteCommandParserTest {
         assertTrue(commandParser.getCommandList().contains("delete"));
         assertTrue(commandParser.getCommandList().contains("view"));
         assertTrue(commandParser.getCommandList().contains("help"));
+        assertTrue(commandParser.getCommandList().contains("export"));
+        assertTrue(commandParser.getCommandList().contains("reload"));
     }
 
     @Test
