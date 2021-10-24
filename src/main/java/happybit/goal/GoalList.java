@@ -232,8 +232,8 @@ public class GoalList {
      * @param printManager Prints messages to the console.
      * @param newHabitName New name user wants to change the habit to.
      * @throws HaBitCommandException If the goalIndex and/or habitIndex is not within its respective list range.
-    public void updateHabitNameFromGoal(int goalIndex, int habitIndex, String newHabitName, PrintManager printManager)
      */
+    public void updateHabitNameFromGoal(int goalIndex, int habitIndex, String newHabitName, PrintManager printManager)
         throws HaBitCommandException {
         // To be implemented
     }
