@@ -131,7 +131,7 @@ Goal  | A long term achievement you wish to accomplish.           |`Lose 5kg by 
 Habit | Checkpoints; actionable tasks to be done to achieve goal. | `Run 5km`         
 
 **Notes about command format:**
-* words enclosed in angle brackets, `<>` are the parameters which the input the
+* words enclosed in angle brackets, `<>` are the parameters which is the input the
 user is supposed to provide.
   * e.g `view g/<goal index>` can be `view g/1`.
 * The parameters enclosed in curly brackets, `{}`, are optional.
@@ -283,9 +283,9 @@ Your habit:  Run 4km has been added to your goal: [DF] Exercise More
 ### Complete a Habit: `done`
 Marks a habit under a goal as done.
 
-Format: `done g/<goal index> h/<habit index>`
+Format: `done g/<GOAL_INDEX> h/<HABIT_INDEX>`
 
-* `<goal index>` and `<habit index>` are integers.
+* `<GOAL_INDEX>` and `<HABIT_INDEX>` are integers.
 
 Example: 
 ```
@@ -316,9 +316,9 @@ Your habit of " Run 6km" under the goal "[DF] Exercise More" has been deleted.
 ### View all Habits: `view`
 Lists all habits under a specific goal.
 
-Format: `view g/<goal index>`
+Format: `view g/<GOAL_INDEX>`
 
-* `<goal index>` is an integer.
+* `<GOAL_INDEX>` is an integer.
 
 Example:
 ```
@@ -383,9 +383,9 @@ Set goal | `set <GOAL_NAME> {-<GOAL_TYPE> /<START_DATE>} /<END_DATE>` | `set Red
 Remove goal | `remove <GOAL_INDEX>` | `remove 1`
 List goals | `list` | `list`
 Add habit | `add <GOAL_INDEX> <HABIT_NAME>` | `add 1 Run 4km`
-Done habit | `done g/<goal index> h/<habit index>` | `done g/1 h/2`
+Done habit | `done g/<GOAL_INDEX> h/<HABIT_INDEX>` | `done g/1 h/2`
 Delete habit  | `delete <GOAL_INDEX> <HABIT_INDEX>` | `delete 2 1`
-View habits | `view g/<goal index>` | `view g/1`
+View habits | `view g/<GOAL_INDEX>` | `view g/1`
 Exit Program | `bye` | `bye`
 
 ## Useful Links
