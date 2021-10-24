@@ -1,11 +1,12 @@
 package medbot.list;
 
-import medbot.exceptions.MedBotException;
-import medbot.person.Staff;
+
+import static medbot.ui.Ui.END_LINE;
 
 public class MedicalStaffList extends PersonList {
 
-    private String getNoStaffIdErrorMessage(int patientId) {
-        return "No Staff with ID " + super.getNoPersonIdErrorMessage(patientId);
+    @Override
+    protected String getPersonNotFoundErrorMessage(int patientId) {
+        return "No Staff with ID " + patientId + " found." + END_LINE;
     }
 }
