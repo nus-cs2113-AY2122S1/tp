@@ -44,7 +44,7 @@ public class Export {
             ArrayList<Habit> habits = goal.getHabitList();
             String goalToWrite = index + DELIMITER
                     + GOAL_TYPE + DELIMITER
-                    + goal.getGoalTypeCharacter() + DELIMITER
+                    + goal.getGoalType() + DELIMITER
                     + goal.getGoalName() + DELIMITER
                     + goal.getStartDate() + DELIMITER
                     + goal.getEndDate() + NEWLINE;
@@ -72,7 +72,7 @@ public class Export {
 
             String goalToWrite = index + DELIMITER
                     + GOAL_TYPE + DELIMITER
-                    + goal.getGoalTypeCharacter() + DELIMITER
+                    + goal.getGoalType() + DELIMITER
                     + goal.getGoalName() + DELIMITER
                     + goal.getStartDate() + DELIMITER
                     + goal.getEndDate() + NEWLINE;

@@ -55,11 +55,11 @@ public class Goal {
      * @return String containing goal name and type.
      */
     public String getDescription() {
-        return getGoalTypeCharacter() + " " + goalName;
+        return getGoalType() + " " + goalName;
     }
 
     /**
-     * Getter for startDate of the goal in string format.
+     * Getter for startDate of the goal in string format. (For storage)
      *
      * @return Start date formatted as a string.
      */
@@ -69,12 +69,32 @@ public class Goal {
     }
 
     /**
-     * Getter for endDate of the goal in string format.
+     * Getter for startDate of the goal in string format. (For printing)
+     *
+     * @return Start date formatted as a string.
+     */
+    public String getPrintableStartDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        return dateFormat.format(this.startDate);
+    }
+
+    /**
+     * Getter for endDate of the goal in string format. (For storage)
      *
      * @return End date formatted as a string.
      */
     public String getEndDate() {
         SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        return dateFormat.format(this.endDate);
+    }
+
+    /**
+     * Getter for endDate of the goal in string format. (For printing)
+     *
+     * @return End date formatted as a string.
+     */
+    public String getPrintableEndDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
         return dateFormat.format(this.endDate);
     }
 
@@ -85,6 +105,15 @@ public class Goal {
      */
     public ArrayList<Habit> getHabitList() {
         return habitList;
+    }
+
+    /**
+     * Returns the size of the habitList.
+     *
+     * @return Size of habitList.
+     */
+    public int getHabitListSize() {
+        return habitList.size();
     }
 
     /**
@@ -130,18 +159,18 @@ public class Goal {
      *
      * @return String of the goalType 2-character code.
      */
-    public String getGoalTypeCharacter() {
+    public String getGoalType() {
         switch (this.goalType) {
         case SLEEP:
-            return "[SL]";
+            return "Sleep";
         case FOOD:
-            return "[FD]";
+            return "Food";
         case EXERCISE:
-            return "[EX]";
+            return "Exercise";
         case STUDY:
-            return "[SD]";
+            return "Study";
         default:
-            return "[DF]";
+            return "Default";
         }
     }
 
