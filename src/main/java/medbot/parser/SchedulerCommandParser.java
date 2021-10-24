@@ -16,8 +16,12 @@ public abstract class SchedulerCommandParser {
     private static final String COMMAND_EDIT = "edit";
     private static final String COMMAND_VIEW = "view";
     private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_HELP = "help";
+    private static final String COMMAND_EXIT = "exit";
+    private static final String COMMAND_SWITCH = "switch";
 
     private static final String ERROR_WRONG_COMMAND = "Unable to parse command." + END_LINE;
+    private static final String EMPTY_STRING = "";
 
     /**
      * Parses the user input and returns the corresponding command when the view type is SCHEDULER.
@@ -39,6 +43,7 @@ public abstract class SchedulerCommandParser {
         if (userInput.equals(COMMAND_LIST)) {
             return new ListAppointmentCommand();
         }
+
         throw new MedBotParserException(ERROR_WRONG_COMMAND);
     }
 
@@ -86,4 +91,5 @@ public abstract class SchedulerCommandParser {
         ParserUtils.updateMultipleAppointmentInformation(appointment, attributeStrings);
         return new EditAppointmentCommand(appointmentId, appointment);
     }
+
 }

@@ -65,9 +65,10 @@ public abstract class Parser {
         if (userInput.equals(COMMAND_EXIT)) {
             return new ExitCommand();
         }
-        if (userInput.startsWith(COMMAND_HELP)) {
+        if (userInput.equals(COMMAND_HELP)) {
             return parseHelpCommand(userInput);
         }
+
         //commands valid in only some viewTypes
         switch (viewType) {
         case PATIENT_INFO:
@@ -129,6 +130,7 @@ public abstract class Parser {
     }
 
     /**
+>>>>>>> 08146902260bb36f8caf3b266aa18d64025862a8
      * Processes user input and returns a SwitchCommand.
      *
      * <p>If view type is specified, returns a switch command with that new view type. If not, returns

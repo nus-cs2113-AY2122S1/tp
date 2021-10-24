@@ -5,6 +5,7 @@ import medbot.ui.Ui;
 import medbot.exceptions.MedBotException;
 import medbot.utilities.ViewType;
 
+
 public class HelpCommand extends Command {
 
     private CommandType commandType = null;
@@ -12,7 +13,6 @@ public class HelpCommand extends Command {
 
     public HelpCommand(ViewType viewType) {
         this.viewType = viewType;
-
     }
 
     public HelpCommand(CommandType commandType, ViewType viewType) {
