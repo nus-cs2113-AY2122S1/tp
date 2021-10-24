@@ -134,7 +134,7 @@ public class AddCommandParser {
     }
 
     private static String checkPriority(String param) throws ParseException {
-        if (!Priority.is(param)) {
+        if (!Priority.is(param) | param.equals("None")) {
             throw new ParseException(param + ": " + Messages.ERROR_INVALID_PRIORITY);
         }
         return Priority.toProper(param);
