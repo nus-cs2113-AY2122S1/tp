@@ -17,7 +17,7 @@ public class PrintManager {
     private static final String GOAL_TYPE_INFO =
             "   -> Goal types include: default[df], sleep[sl], food[fd], exercise[ex] and study[sd]";
     private static final String UPDATE_GOAL_COMMAND =
-            "- update a goal: update <goal index> <new goal name>";
+            "- update a goal: update g/<goal index> n/<new goal name>";
     private static final String REMOVE_GOAL_COMMAND =
             "- remove a goal: remove g/<goal index>";
     private static final String LIST_GOAL_COMMAND =

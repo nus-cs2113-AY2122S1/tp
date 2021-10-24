@@ -37,19 +37,80 @@ download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-
 5. Run the file using `java -jar tp.jar`.
 6. Upon loading the app you should see the following screen which would indicate that you have successfully run the app
    ```
-   insert load screen
+   ==============================================================================
+     _  _   __   ____  ____  _  _  ____  __  ____
+    / )( \ / _\ (  _ \(  _ \( \/ )(  _ \(  )(_  _)
+    ) __ (/    \ ) __/ ) __/ )  /  ) _ ( )(   )(
+    \_)(_/\_/\_/(__)  (__)  (__/  (____/(__) (__)     tracking habits made fun...
+    ==============================================================================
+
+    Howdy! Welcome to Ha(ppy)Bit!
+    Select from one of the following menu items:
+    [1] About HappyBit
+    [2] User Guide
+    [3] Developer Guide
+    [4] Demo Video
+    [5] Start Application
+    
+    Option:
    ```
 
 ## Navigation
 In the current loading screen, users will be able to execute the following actions based on the number they input
 1. About Ha(ppy)Bit - Shows brief description of the program and a short meet the team section
     ```
+   Option: 1
+
+    Ha(ppy)Bit is a desktop app aimed to improve both the physical and mental lifestyle of students,
+    through the setting and tracking of goals to cultivate good habits. The app operates on a Command
+    Line Interface (CLI) while still comprising features typically found in a Graphical User Interface
+    (GUI). Students who type fast will find that Ha(ppy)Bit performs habit tracking more efficiently
+    than your conventional GUI apps.
+    
+    Meet The Team
+    =================================================================
+    ||  Tan Kah Heng       ||  Creative Director, Visionary        ||
+    ||  Swaminathan Varun  ||  Business Manager, Technical Advisor ||
+    ||  Tan Jun Heng Daren ||  Frontend Developer                  ||
+    ||  Tan Hui En         ||  Backend Developer                   ||
+    ||  Swann Tet Aung     ||  Backend Developer                   ||
+    =================================================================
+    
+    Current Version: v2.0 (updated 28-Oct-2021)
+    
+    
+    Press enter to return to main menu...
     ```
 2. User Guide - Opens up User Guide github page in user's web browser.
+    ```
+    Option: 2
+
+    Opening in a web browser...
+    
+    Press enter to return to main menu...
+    ```
 3. Developer Guide - Opens up Developer Guide github page in user's web browser
-4. Demo Video
+    ```
+    Option: 3
+
+    Opening in a web browser...
+    
+    Press enter to return to main menu...
+    ```
+4. Demo Video - Links to Demo Video (Not done yet)
 5. Start Application - Brings user to the application. User can start using the app or continue where they left off.
     ```
+    Starting application...
+    Type 'return' to return to main menu
+   
+    ==============================================================================
+     _  _   __   ____  ____  _  _  ____  __  ____
+    / )( \ / _\ (  _ \(  _ \( \/ )(  _ \(  )(_  _)
+    ) __ (/    \ ) __/ ) __/ )  /  ) _ ( )(   )(
+    \_)(_/\_/\_/(__)  (__)  (__/  (____/(__) (__)     tracking habits made fun...
+    ==============================================================================
+    
+    Command:
     ```
 
 
@@ -73,17 +134,20 @@ Format: `help`
 
 Output:
 ```
-Hello! These are all the possible commands for this habit tracker :) 
-(flags within {} brackets are optional)
-1. set a goal: set <goal name> {-<goal type> /<start date>} /<end date>
-   -> Goal types include: default, sleep, food, exercise and study
-2. remove a goal: remove <goal index>
-3. list all goals for that habit: list
-4. add a habit to a goal: add <goal index> <habit name> #<interval>
-5. delete a habit from a goal: delete <goal index> <habit index>
-6. indicate a habit as done: done <goal index> <habit index>
-7. view all the habits user has under a goal: view <goal index>
-8. Exit habit tracker program: bye
+________________________________________________________________________________________________________________________
+Hello! These are all the possible commands for this habit tracker :) (flags within {} brackets are optional)
+- set a goal: set n/<goal name> { t/<goal type> s/<start date> } e/<end date>
+   -> Goal types include: default[df], sleep[sl], food[fd], exercise[ex] and study[sd]
+- remove a goal: remove g/<goal index>
+- list all goals for that habit: list
+- add a habit to a goal: add g/<goal index> n/<habit name> i/<interval>
+- delete a habit from a goal: delete g/<goal index> h/<habit index>
+- indicate a habit as done: done g/<goal index> h/<habit index>
+- View all the habits user has under a goal: view g/<goal index>
+- Exit habit tracker program: bye
+________________________________________________________________________________________________________________________
+
+Press enter to return to command mode...
 ```
 
 ### Set a Goal: `set`
