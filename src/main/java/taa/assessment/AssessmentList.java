@@ -25,16 +25,6 @@ public class AssessmentList implements ClassChecker {
     }
 
     /**
-     * Checks if an index is valid with respect to the assessments ArrayList.
-     *
-     * @param index The index to check.
-     * @return true if valid, else false.
-     */
-    public boolean isValidIndex(int index) {
-        return (index >= 0 && index < assessments.size());
-    }
-
-    /**
      * Adds an assessment to the list of assessments in a particular module.
      * Does not add if assessment name already exists
      * or total weightage exceed the maximum weightage after adding.
@@ -76,20 +66,6 @@ public class AssessmentList implements ClassChecker {
                 return assessments.remove(indexOfAssessmentToRemove);
             }
             indexOfAssessmentToRemove += 1;
-        }
-
-        return null;
-    }
-
-    /**
-     * Gets an Assessment object at the index from the assessment ArrayList.
-     *
-     * @param index The index of the object.
-     * @return An Assessment object if the index is valid, else null.
-     */
-    private Assessment getAssessmentAt(int index) {
-        if (isValidIndex(index)) {
-            return assessments.get(index);
         }
 
         return null;
