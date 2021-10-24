@@ -30,7 +30,7 @@ public class AddFlightCommandTest {
         addFlight.setData(dummyClientList, testFlightList, dummyTourList, dummyPackageList, testUi);
         addFlight.execute();
 
-        Flight retrieveFlight = testFlightList.getFlight(0);
+        Flight retrieveFlight = testFlightList.getFlightById(0);
         assertEquals("SQ-JPN1", retrieveFlight.getId());
         assertEquals("JPN", retrieveFlight.getToDestination());
         assertEquals("SG", retrieveFlight.getFromDestination());

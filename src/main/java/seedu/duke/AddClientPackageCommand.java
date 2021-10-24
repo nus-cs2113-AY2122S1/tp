@@ -17,13 +17,14 @@ public class AddClientPackageCommand extends Command {
 
     private void createClientPackage() {
         try {
-            String clientId = rawClientPackage[0];
-            String tourCode = rawClientPackage[1];
-            String flightId = rawClientPackage[2];
+            String clientPackageId = rawClientPackage[0];
+            String clientId = rawClientPackage[1];
+            String tourCode = rawClientPackage[2];
+            String flightId = rawClientPackage[3];
             Client client = extractClient(clientId);
             Tour tour = extractTour(tourCode);
             Flight flight = extractFlight(flightId);
-            clientPackage = new ClientPackage(client, tour, flight);
+            clientPackage = new ClientPackage(clientPackageId, client, tour, flight);
         } catch (TourPlannerException e) {
             System.out.println(e.getMessage());
         }
@@ -33,12 +34,12 @@ public class AddClientPackageCommand extends Command {
         return clients.getClientById(clientId);
     }
 
-    private Tour extractTour(String tourCode) {
+    private Tour extractTour(String tourCode) throws TourPlannerException {
         return tours.getTourByCode(tourCode);
     }
 
-    private Flight extractFlight(String flightId) {
-        return flights.getFlight(flightId);
+    private Flight extractFlight(String flightId) throws TourPlannerException {
+        return flights.getFlightById(flightId);
     }
 
     private static int stringToInt(String params) {

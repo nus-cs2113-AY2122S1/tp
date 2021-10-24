@@ -47,11 +47,7 @@ public class Parser {
             }
             return new ClearCommand();
         case "cut":
-            try {
                 return parseCut(params);
-            } catch (NullPointerException | NumberFormatException e) {
-                throw new TourPlannerException(ERROR_INVALID_CUT_INDEX);
-            }
         case "find":
             return parseFind(params);
         default:
@@ -100,8 +96,8 @@ public class Parser {
             repeatPrefixChecker = 5;
             break;
         case "-p":
-            prefixes = Arrays.asList("/t", "/f");
-            repeatPrefixChecker = 3;
+            prefixes = Arrays.asList("/c", "/t", "/f");
+            repeatPrefixChecker = 4;
             break;
         default:
             break;
@@ -219,11 +215,14 @@ public class Parser {
     private static int obtainPackageArrayIndex(String prefix) {
         int index;
         switch (prefix) {
-        case "/t":
+        case "/c":
             index = 1;
             break;
-        case "/f":
+        case "/t":
             index = 2;
+            break;
+        case "/f":
+            index = 3;
             break;
         default:
             index = 0;
@@ -391,7 +390,13 @@ public class Parser {
 
         switch (identifier) {
         case "-c":
-            return new CutClientCommand(args);
+            return new CutFlightCommand(args);
+        case "-t":
+            return new CutTourCommand(args);
+        case "-f":
+            return new CutFlightCommand(args);
+        case "-p":
+            return new CutClientPackageCommand(args);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }

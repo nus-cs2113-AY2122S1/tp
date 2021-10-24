@@ -8,6 +8,10 @@ public class FindTourCommand extends Command {
     }
 
     public void execute() {
-        ui.showFindTour(tours, clientPackages, code);
+        try {
+            ui.showFindTour(tours, clientPackages, code);
+        } catch (TourPlannerException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

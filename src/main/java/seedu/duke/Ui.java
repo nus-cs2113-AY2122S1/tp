@@ -82,10 +82,10 @@ public class Ui {
     /**
      * Ui response to cut client command.
      *
-     * @param client the client object that was cut
+     * @param object the object that was cut
      */
-    public void showCut(Client client) {
-        show(CUT_MESSAGE + "\n" + client);
+    public void showCut(Object object) {
+        show(CUT_MESSAGE + "\n" + object);
     }
 
     /**
@@ -151,18 +151,18 @@ public class Ui {
         show("Total Tours: " + count);
     }
 
-    public void showFindTour(TourList tours, ClientPackageList packages, String code) {
+    public void showFindTour(TourList tours, ClientPackageList clientPackages, String code) throws TourPlannerException {
         Tour foundTour = tours.getTourByCode(code);
         if (foundTour != null) {
             show(FIND_SUCCESS_MESSAGE_LEFT + "tours " + FIND_MESSAGE_RIGHT);
             show(foundTour + "\n" + "\n");
             int subbedClients = 0;
-            int count = packages.getPackageCount();
+            int count = clientPackages.getClientPackageCount();
             show("Subscribed Clients:");
             for (int i = 0; i < count; i++) {
-                Tour currTour = packages.get(i).getTour();
+                Tour currTour = clientPackages.get(i).getTour();
                 if (currTour.equals(foundTour)) {
-                    String currClientName = packages.get(i).getClient().getName();
+                    String currClientName = clientPackages.get(i).getClient().getName();
                     show((i + 1) + ". " + currClientName + "\n");
                     subbedClients++;
                 }
@@ -173,7 +173,7 @@ public class Ui {
         }
     }
 
-    public void showSortedTour(TourList tours, String[] sortedCodes) {
+    public void showSortedTour(TourList tours, String[] sortedCodes) throws TourPlannerException {
         int count = tours.getTourCount();
         show(SORT_TOUR_ALPHA_MESSAGE);
         for (int i = 1; i <= count; i++) {
@@ -211,24 +211,24 @@ public class Ui {
         }
         show(LIST_MESSAGE + "flights:");
         for (int i = 1; i <= count; i++) {
-            Flight currFlight = flights.getFlight(i - 1);
+            Flight currFlight = flights.getFlightById(i - 1);
             show(i + ". " + currFlight + "\n");
         }
         show("Total Flights: " + count);
     }
 
-    public void showFindFlight(FlightList flights, ClientPackageList packages, String code) {
-        Flight foundFlight = flights.getFlight(code);
+    public void showFindFlight(FlightList flights, ClientPackageList clientPackages, String code) throws TourPlannerException {
+        Flight foundFlight = flights.getFlightById(code);
         if (foundFlight != null) {
             show(FIND_SUCCESS_MESSAGE_LEFT + "flights " + FIND_MESSAGE_RIGHT);
             show(foundFlight + "\n" + "\n");
             int passengers = 0;
-            int count = packages.getPackageCount();
+            int count = clientPackages.getClientPackageCount();
             show("Passengers:");
             for (int i = 0; i < count; i++) {
-                Flight currFlight = packages.get(i).getFlight();
+                Flight currFlight = clientPackages.get(i).getFlight();
                 if (currFlight.equals(foundFlight)) {
-                    String currClientName = packages.get(i).getClient().getName();
+                    String currClientName = clientPackages.get(i).getClient().getName();
                     show((i + 1) + ". " + currClientName + "\n");
                     passengers++;
                 }
@@ -244,15 +244,15 @@ public class Ui {
         show("Client Package" + ADD_MESSAGE + "\n" + clientPackage);
     }
 
-    public void showListClientPackage(ClientPackageList clientPackageList) {
-        int count = clientPackageList.getPackageCount();
+    public void showListClientPackage(ClientPackageList clientPackages) {
+        int count = clientPackages.getClientPackageCount();
         if (count == 0) {
             show(LIST_NO_MESSAGE + "packages");
             return;
         }
         show(LIST_MESSAGE + "packages:");
         for (int i = 0; i < count; i++) {
-            ClientPackage currPackage = clientPackageList.get(i);
+            ClientPackage currPackage = clientPackages.get(i);
             show((i + 1) + ". " + currPackage + "\n" + "\n");
         }
         show("Total Packages:" + count);

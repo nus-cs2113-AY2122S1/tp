@@ -12,27 +12,31 @@ public class SortTourCommand extends Command {
 
     @Override
     public void execute() {
-        switch (filter) {
-        case "/a":
-            String[] sortedCodes = new String[tours.getTourCount()];
-            for (int i = 0; i < tours.getTourCount(); i++) {
-                Tour currTour = tours.getTourByIndex(i);
-                sortedCodes[i] = currTour.getCode();
+        try {
+            switch (filter) {
+            case "/a":
+                String[] sortedCodes = new String[tours.getTourCount()];
+                for (int i = 0; i < tours.getTourCount(); i++) {
+                    Tour currTour = tours.getTourByIndex(i);
+                    sortedCodes[i] = currTour.getCode();
+                }
+                Arrays.sort(sortedCodes);
+                ui.showSortedTour(tours, sortedCodes);
+                break;
+            case "/p":
+                Float[] sortedPrices = new Float[tours.getTourCount()];
+                for (int i = 0; i < tours.getTourCount(); i++) {
+                    Tour currTour = tours.getTourByIndex(i);
+                    sortedPrices[i] = currTour.getPrice();
+                }
+                Arrays.sort(sortedPrices);
+                ui.showSortedTour(tours, sortedPrices);
+                break;
+            default:
+                break;
             }
-            Arrays.sort(sortedCodes);
-            ui.showSortedTour(tours, sortedCodes);
-            break;
-        case "/p":
-            Float[] sortedPrices = new Float[tours.getTourCount()];
-            for (int i = 0; i < tours.getTourCount(); i++) {
-                Tour currTour = tours.getTourByIndex(i);
-                sortedPrices[i] = currTour.getPrice();
-            }
-            Arrays.sort(sortedPrices);
-            ui.showSortedTour(tours, sortedPrices);
-            break;
-        default:
-            break;
+        } catch (TourPlannerException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
