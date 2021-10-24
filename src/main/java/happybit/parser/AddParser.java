@@ -267,8 +267,9 @@ public class AddParser extends ParserUtils {
             return GoalType.STUDY;
         case DEFAULT_LABEL:
             return GoalType.DEFAULT;
+        default:
+            throw new HaBitParserException(ERROR_GOAL_TYPE_LABEL);
         }
-        throw new HaBitParserException(ERROR_GOAL_TYPE_LABEL);
     }
 
     /**
