@@ -550,8 +550,8 @@ public class Ui {
     public void printStorage(String name, double storage) {
         assert name != null : "name cannot be null";
         assert storage != -1 : "storage cannot be negative";
-        System.out.println(LINE_DIVIDER + System.lineSeparator() +
-                "Storage of " + name + " is now " + storage + " kg" + System.lineSeparator()
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Storage of " + name + " is now " + storage + " kg" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 
