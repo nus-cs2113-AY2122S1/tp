@@ -2,11 +2,10 @@ package seedu.duke.command.exercise;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.duke.exception.GetJackDException;
 import seedu.duke.data.Workout;
 import seedu.duke.data.WorkoutList;
+import seedu.duke.exception.GetJackDException;
 import seedu.duke.storage.Storage;
-import seedu.duke.ui.Ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -14,13 +13,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class AddExerciseCommandTest {
     private WorkoutList workoutList;
     private Storage storage;
-    private Ui ui;
 
     @BeforeEach
     public void setUp() throws GetJackDException {
         createEmptyWorkout();
         storage = new Storage();
-        ui = new Ui();
     }
 
     private void createEmptyWorkout() {
