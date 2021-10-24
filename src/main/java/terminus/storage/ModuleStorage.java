@@ -381,7 +381,9 @@ public class ModuleStorage {
             TerminusLogger.info("Renaming directory: " + modDirPath);
             File oldFile = new File(modDirPath.toString());
             File newFile = new File(newModDirPath.toString());
-            oldFile.renameTo(newFile);
+            if (!oldFile.renameTo(newFile)) {
+                throw new IOException(Messages.ERROR_CHANGE_FILE_NAME);
+            }
         } else {
             TerminusLogger.info("Directory: " + newModDirPath + " already exists.");
         }
@@ -395,11 +397,18 @@ public class ModuleStorage {
             isValid = false;
         } else if (!isValidFileSize(file)) {
             isValid = false;
-        } else if (!Files.probeContentType(Paths.get(file.getAbsolutePath()))
-                .equals(CommonFormat.CONTENT_TYPE_TEXT_FILE)) {
+        } else if (!isTextFile(file)) {
             isValid = false;
         }
         return isValid;
+    }
+
+    private boolean isTextFile(File file) throws IOException {
+        String contentType = Files.probeContentType(Paths.get(file.getAbsolutePath()));
+        if (contentType == null) {
+            return false;
+        }
+        return contentType.equals(CommonFormat.CONTENT_TYPE_TEXT_FILE);
     }
 
     private boolean isValidFileSize(File file) throws IOException {

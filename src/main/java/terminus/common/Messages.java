@@ -65,6 +65,7 @@ public class Messages {
     public static final String ERROR_MESSAGE_MODULE_WHITESPACE = "Module name cannot contain any whitespaces!";
     public static final String ERROR_MESSAGE_MODULE_EXIST = "Module already exist!";
     public static final String ERROR_INVALID_FILE_NAME = "Name provided is invalid.";
+    public static final String ERROR_CHANGE_FILE_NAME = "Unable to change file name";
 
     /*
      * Banners

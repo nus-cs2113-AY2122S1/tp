@@ -70,8 +70,8 @@ public class UpdateModuleCommand extends Command {
         assert index > 0;
         String oldName = listOfModule[index - 1];
         NusModule current = moduleManager.getModule(listOfModule[index - 1]);
-        moduleManager.removeModule(listOfModule[index - 1]);
         ModuleStorage.getInstance().updateModuleDirectory(oldName, newName);
+        moduleManager.removeModule(listOfModule[index - 1]);
         moduleManager.setModule(newName, current);
         return new CommandResult(String.format("Updated %s to %s successfully", listOfModule[index - 1], newName));
     }
