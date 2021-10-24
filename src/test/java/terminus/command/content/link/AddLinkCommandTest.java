@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -19,6 +20,8 @@ import terminus.module.ModuleManager;
 import terminus.parser.LinkCommandParser;
 import terminus.timetable.ConflictManager;
 import terminus.ui.Ui;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddLinkCommandTest {
 
@@ -63,6 +66,7 @@ public class AddLinkCommandTest {
         Link newLink = new Link("test conflict", "Saturday", LocalTime.of(9, 00), 3, "https://zoom.us/test");
         ConflictManager conflictManager = new ConflictManager(moduleManager, newLink);
 
+
         for (int i = 0; i < 5; i++) {
             addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"10:00\" \"2\" \"https://zoom.us/test\"");
@@ -71,5 +75,15 @@ public class AddLinkCommandTest {
             assertNotNull(conflictManager.getConflictingSchedule());
         }
         assertEquals(6, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
+    }
+
+    @Test
+    void execute_addLinkCommand_fail() {
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"23:00\" \"12\" \"https://zoom.us/test\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"23:00\" \"12\" \"zoom.test\""));
+        assertThrows(InvalidArgumentException.class,
+            () -> linkCommandParser.parseCommand("add \"test desc\" \"friday\" \"00:00\" \"25\" \"https://zoom.us/test\""));
     }
 }
