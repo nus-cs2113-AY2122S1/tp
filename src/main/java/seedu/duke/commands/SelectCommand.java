@@ -121,6 +121,6 @@ public class SelectCommand extends Command {
     }
 
     private Task getTaskFromEventIndex(int eventIndex, int taskIndex) {
-        return Duke.eventCatalog.get(eventIndex).getTaskList().get(taskIndex);
+        return Duke.eventCatalog.get(eventIndex).getFromTaskList(taskIndex);
     }
 }
