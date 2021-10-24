@@ -84,35 +84,34 @@ Add an ingredient to the ingredient list.
 
 Command:
 \
-`add n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]`
+`add n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]`
 
 The parameters used in the command are:
 * `INGREDIENT_NAME`: name of the ingredient.
-* `AMOUNT`: amount of the ingredient.
-* `UNITS`: units specified to associate with `AMOUNT`.
+* `AMOUNT`: amount of the ingredient, in kilograms.
 * `EXPIRY`: expiration date of ingredient, in format of `dd/mm/yyyy`.
 
 > Note: Ensure *ALL* parameters are specified when entering the command.
 
 Examples:
-* `add n/carrot a/200 u/sticks e/01/03/2022`
-* `add n/potato a/500 u/g e/25/12/2021`
+* `add n/carrot a/20 e/01/03/2022`
+* `add n/potato a/5 e/25/12/2021`
 
 Output:
 ```
-add n/carrot a/200 u/sticks e/01/03/2022
+add n/carrot a/20 e/01/03/2022
 ____________________________________________________
 Got it. This ingredient has been added to the inventory:
-	Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
+	Carrot | Amount Left: 20.0 kg | Expiry Date: 01/03/2022
 Current inventory has 1 items.
 This ingredient will expire in 131 days.
 ____________________________________________________
 ```
 ```
-add n/potato a/500 u/g e/25/12/2021
+add n/potato a/5 e/25/12/2021
 ____________________________________________________
 Got it. This ingredient has been added to the inventory:
-	Potato | Amount Left: 500.0 g | Expiry Date: 25/12/2021
+	Potato | Amount Left: 5.0 kg | Expiry Date: 25/12/2021
 Current inventory has 2 items.
 This ingredient will expire in 65 days.
 ____________________________________________________
@@ -127,8 +126,11 @@ Command: `list`
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
-	2. Potato | Amount Left: 500.0 g | Expiry Date: 25/12/2021
+	1. Carrot | Total Amount: 20.0 kg
+	    Amount Left: 20.0 kg | Expiry Date: 01/03/2022
+	    
+	2. Potato | Total Amount: 5.0 kg
+	    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
 ____________________________________________________
 ```
 
@@ -168,20 +170,21 @@ ____________________________________________________
 
 ### 2.5. Delete Ingredients
 
-Delete an ingredient from the ingredient list based on its number in the list.
+Delete an ingredient from the ingredient list based on its name and expiry date in the list.
 > Note: Users are recommended to use the `list` command *prior* to deleting to confirm the ingredient number of the ingredient  they intend to remove.
 
-Command: `delete [INGREDIENT_NUMBER]`
+Command: `delete n/[INGREDIENT_NUMBER] e/[EXPIRY_DATE]`
 
-The parameter used in the command is:
-* `INGREDIENT_NUMBER`: the ingredient number to remove
+The parameter used in the command are:
+* `INGREDIENT_NAME`: the ingredient name to remove
+* `EXPIRY_DATE`: the expiry date of the ingredient to remove, in format of `dd/mm/yyyy`
 
-Example: `delete 1`
+Example: `delete n/ carrot e/ 01/03/2022`
 ```
-delete 1
+delete n/ carrot e/ 01/03/2022
 ____________________________________________________
 Got it. This ingredient has been removed:
-	Carrot | Amount Left: 100.0 sticks | Expiry Date: 05/04/2022
+	Carrot | Amount Left: 20.0 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 
@@ -307,7 +310,7 @@ ____________________________________________________
 View or set the system's current date. 
 
 Command: `date [NEW_DATE]`
-* `NEW_DATE`: The date in the format of yyyy/mm/dd. 
+* `NEW_DATE`: The date in the format of `dd/mm/yyyy`. 
   * To view current date: Leave field empty
   * To set a new current date: Key in the new date
   
@@ -318,9 +321,9 @@ Current session date is: 21/10/2021
 ____________________________________________________
 ```
 ```
-date 2022-01-01
+date 01/01/2022
 ____________________________________________________
-The current session date has been changed to 01 01 2022
+The current session date has been changed to 01/01/2022
 ____________________________________________________
 ```
 
