@@ -132,7 +132,6 @@ public class CommonUtils {
     }
 
     /**
-     * <<<<<<< HEAD
      * Checks if the given name is a valid file name.
      *
      * @param name The string to be checked.
@@ -180,5 +179,16 @@ public class CommonUtils {
     public static String getCurrentDay() {
         String currentDay = LocalDate.now().getDayOfWeek().toString();
         return currentDay;
+    }
+
+    /**
+     * Returns a boolean if the index give is valid.
+     *
+     * @param index The index to check
+     * @param listOfModule The full list of modules
+     * @return True if the index is valid or else it is false
+     */
+    public static boolean isValidIndex(int index, String[] listOfModule) {
+        return listOfModule.length >= index && index > 0;
     }
 }

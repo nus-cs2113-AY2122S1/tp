@@ -17,23 +17,22 @@ import terminus.parser.LinkCommandParser;
 
 public class DeleteLinkCommandTest {
 
+    Class<Link> type = Link.class;
     private LinkCommandParser linkCommandParser;
     private ModuleManager moduleManager;
-
     private String tempModule = "test";
-
-    Class<Link> type = Link.class;
 
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
     }
 
     @Test
-    void execute_deleteLink_success() throws InvalidCommandException, InvalidArgumentException, IOException {
+    void execute_deleteLink_success()
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 3; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                 "add \"test_desc\" \"Monday\" \"12:00\" \"1\" \"https://zoom.us/test\""
@@ -58,7 +57,8 @@ public class DeleteLinkCommandTest {
     }
 
     @Test
-    void execute_deleteLink_throwsException() throws InvalidCommandException, InvalidArgumentException {
+    void execute_deleteLink_throwsException()
+            throws InvalidCommandException, InvalidArgumentException {
         Command deleteLinkCommand = linkCommandParser.parseCommand("delete 20");
         assertThrows(InvalidArgumentException.class, () -> deleteLinkCommand.execute(moduleManager));
     }

@@ -25,6 +25,12 @@ public class NoteCommandTest {
 
     private String tempModule = "test";
 
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
+
     @BeforeEach
     void setUp() throws IOException {
         this.moduleStorage = ModuleStorage.getInstance();
@@ -32,17 +38,12 @@ public class NoteCommandTest {
         this.moduleStorage.createModuleDirectory(tempModule);
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
-    }
-
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
+        moduleManager.addModule(tempModule);
     }
 
     @Test
-    void execute_noteAdvance_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_noteAdvance_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command mainCommand = commandParser.parseCommand("go " + tempModule + " note");
         CommandResult changeResult = mainCommand.execute(moduleManager);
         assertTrue(changeResult.isOk());

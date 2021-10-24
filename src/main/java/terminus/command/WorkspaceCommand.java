@@ -23,7 +23,7 @@ public abstract class WorkspaceCommand extends Command {
      * @param moduleManager The NusModule contain the list of all notes and schedules.
      * @return The CommandResult containing success or failure of command and CommandParser Object.
      * @throws InvalidCommandException when the command could not be found.
-     * @throws IOException when the file to be saved is inaccessible (e.g. file is locked by OS).
+     * @throws IOException             when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
     @Override
     public CommandResult execute(ModuleManager moduleManager)

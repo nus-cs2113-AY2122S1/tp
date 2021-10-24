@@ -1,5 +1,9 @@
 package terminus.command.content.link;
 
+import static terminus.common.CommonUtils.isValidDay;
+import static terminus.common.CommonUtils.isValidDuration;
+import static terminus.common.CommonUtils.isValidUrl;
+
 import java.time.LocalTime;
 import java.util.ArrayList;
 import terminus.command.Command;
@@ -14,10 +18,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
 import terminus.timetable.ConflictManager;
-
-import static terminus.common.CommonUtils.isValidDuration;
-import static terminus.common.CommonUtils.isValidDay;
-import static terminus.common.CommonUtils.isValidUrl;
 
 /**
  * AddLinkCommand class which will manage the adding of new Links from user command.

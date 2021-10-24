@@ -28,11 +28,12 @@ public class TimetableCommandTest {
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule1);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule1);
+        moduleManager.addModule(tempModule1);
     }
 
     @Test
-    void execute_viewWeekly_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_viewWeekly_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
@@ -68,7 +69,8 @@ public class TimetableCommandTest {
     }
 
     @Test
-    void execute_viewDaily_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_viewDaily_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Tuesday\" \"00:00\" \"4\" \"https://zoom.us/test\"");
@@ -108,7 +110,8 @@ public class TimetableCommandTest {
     }
 
     @Test
-    void execute_viewDaily_exceptionThrown() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_viewDaily_exceptionThrown()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"4\" \"https://zoom.us/test\"");

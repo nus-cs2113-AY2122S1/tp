@@ -24,6 +24,12 @@ public class ModuleCommandTest {
 
     private String tempModule = "test";
 
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
+
     @BeforeEach
     void setUp() {
         this.moduleStorage = ModuleStorage.getInstance();
@@ -32,14 +38,9 @@ public class ModuleCommandTest {
         moduleManager = new ModuleManager();
     }
 
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
-    }
-
     @Test
-    void execute_module_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_module_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("module");
         CommandResult cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());

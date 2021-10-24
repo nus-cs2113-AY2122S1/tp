@@ -25,11 +25,12 @@ public class ScheduleCommandTest {
     void setUp() {
         commandParser = MainCommandParser.getInstance();
         moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @Test
-    void execute_linkAdvance_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_linkAdvance_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command mainCommand = commandParser.parseCommand("go " + tempModule + " schedule");
         CommandResult changeResult = mainCommand.execute(moduleManager);
         assertTrue(changeResult.isOk());

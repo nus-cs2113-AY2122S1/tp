@@ -2,7 +2,15 @@ package terminus.storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import terminus.common.CommonFormat;
 import terminus.common.CommonUtils;
+import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
@@ -147,7 +156,7 @@ public class ModuleStorage {
      * Loads all notes data from a specified module if any.
      *
      * @param moduleManager The ModuleManager containing existing modules.
-     * @param mod A module name in the moduleManager.
+     * @param mod           A module name in the moduleManager.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void loadNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
@@ -184,8 +193,8 @@ public class ModuleStorage {
      * Saves all notes from a specified module into multiple text files inside the directory of its module name.
      *
      * @param moduleManager The ModuleManager containing all data from each module.
-     * @param mod A module name in the moduleManager.
-     * @param toDeleteAll True if files in directory should be removed first, otherwise false.
+     * @param mod           A module name in the moduleManager.
+     * @param toDeleteAll   True if files in directory should be removed first, otherwise false.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void saveNotesFromModule(ModuleManager moduleManager, String mod, Boolean toDeleteAll) throws IOException {
@@ -218,7 +227,7 @@ public class ModuleStorage {
      * Removes deleted note file from module folder.
      *
      * @param moduleName The module name related to the new note.
-     * @param noteName The note removed from moduleManager.
+     * @param noteName   The note removed from moduleManager.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void removeNoteFromModule(String moduleName, String noteName) throws IOException {
@@ -239,7 +248,7 @@ public class ModuleStorage {
      * Add new notes file into module folder.
      *
      * @param moduleName The module name related to the new note.
-     * @param newNote The new note added to moduleManager.
+     * @param newNote    The new note added to moduleManager.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void addNoteFromModule(String moduleName, Note newNote) throws IOException {
@@ -286,6 +295,39 @@ public class ModuleStorage {
         cleanAllFilesInclusive(folder);
         if (folder.exists()) {
             throw new IOException(folder.getAbsolutePath());
+        }
+    }
+
+    /**
+     * Exports all notes of a module to a PDF file.
+     *
+     * @param module The Name of the module to export
+     * @param notes  The list of notes to export
+     * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
+     */
+    public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException {
+        Document tempDocument = new Document();
+        Path modDirPath = Paths.get(filePath.getParent().toString(), module + CommonFormat.PDF_FORMAT);
+        if (Files.notExists(modDirPath.getParent())) {
+            TerminusLogger.info("Directory does not exists: " + modDirPath.getParent());
+            throw new IOException("Parent directory does not exist");
+        }
+        try {
+            PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
+            Font header = FontFactory
+                    .getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
+            Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, BaseColor.BLACK);
+
+            tempDocument.open();
+            for (Note note : notes) {
+                Paragraph title = new Paragraph(note.getName(), header);
+                Paragraph content = new Paragraph(note.getData(), text);
+                tempDocument.add(title);
+                tempDocument.add(content);
+            }
+            tempDocument.close();
+        } catch (DocumentException e) {
+            throw new IOException(Messages.FAIL_TO_EXPORT);
         }
     }
 

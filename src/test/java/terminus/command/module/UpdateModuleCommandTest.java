@@ -1,11 +1,10 @@
 package terminus.command.module;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.TestFilePath;
@@ -17,17 +16,12 @@ import terminus.module.ModuleManager;
 import terminus.parser.ModuleCommandParser;
 import terminus.storage.ModuleStorage;
 
-public class AddModuleCommandTest {
+public class UpdateModuleCommandTest {
 
     private ModuleCommandParser commandParser;
     private ModuleManager moduleManager;
     private ModuleStorage moduleStorage;
-
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
-    }
+    private String tempModule = "test";
 
     @BeforeEach
     void setUp() {
@@ -35,22 +29,27 @@ public class AddModuleCommandTest {
         this.moduleStorage.init(TestFilePath.SAVE_FILE);
         this.moduleManager = new ModuleManager();
         this.commandParser = ModuleCommandParser.getInstance();
+        moduleManager.addModule(tempModule);
     }
 
     @Test
-    void execute_addModule_success()
-            throws InvalidArgumentException, InvalidCommandException, IOException {
-        Command cmd = commandParser.parseCommand("add \"test\"");
+    void execute_updateModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+        Command cmd = commandParser.parseCommand("update 1 \"test2\"");
         CommandResult cmdResult = cmd.execute(moduleManager);
-        assertTrue(cmdResult.isOk());
-        assertNotNull(moduleManager.getModule("test"));
+        assertNull(moduleManager.getModule(tempModule));
+        assertNotNull(moduleManager.getModule("test2"));
+        Command cmd2 = commandParser.parseCommand("update 1 \"CS2106\"");
+        CommandResult cmdResult2 = cmd.execute(moduleManager);
+        assertNull(moduleManager.getModule("test2"));
+        assertNotNull(moduleManager.getModule("CS2106"));
     }
 
     @Test
-    void execute_addModule_throwsException() {
+    void execute_updateModule_throwException() throws InvalidArgumentException, InvalidCommandException, IOException {
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"test\" \"test2\"").execute(moduleManager));
+            () -> commandParser.parseCommand("update 100 \"asdasd\"").execute(moduleManager));
+        moduleManager.addModule("test2");
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add   ").execute(moduleManager));
+            () -> commandParser.parseCommand("update 1 \"test2\"").execute(moduleManager));
     }
 }

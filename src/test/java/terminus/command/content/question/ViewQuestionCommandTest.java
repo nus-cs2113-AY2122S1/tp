@@ -1,7 +1,6 @@
 package terminus.command.content.question;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,17 +19,15 @@ import terminus.parser.QuestionCommandParser;
 
 public class ViewQuestionCommandTest {
 
+    Class<Question> type = Question.class;
     private QuestionCommandParser commandParser;
     private ModuleManager moduleManager;
-
     private String tempModule = "test";
-
-    Class<Question> type = Question.class;
 
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.commandParser = QuestionCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
     }
@@ -45,7 +42,7 @@ public class ViewQuestionCommandTest {
 
     @Test
     void execute_viewAll_success()
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(moduleManager);
@@ -62,7 +59,7 @@ public class ViewQuestionCommandTest {
 
     @Test
     void execute_viewOne_success()
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(moduleManager);
@@ -80,7 +77,7 @@ public class ViewQuestionCommandTest {
 
     @Test
     void execute_viewOne_exceptionThrown()
-        throws InvalidCommandException, InvalidArgumentException, IOException {
+            throws InvalidCommandException, InvalidArgumentException, IOException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test\" \"test" + i + "\"");
             CommandResult addResult = addCommand.execute(moduleManager);

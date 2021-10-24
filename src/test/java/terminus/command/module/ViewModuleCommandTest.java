@@ -17,10 +17,9 @@ import terminus.parser.ModuleCommandParser;
 
 public class ViewModuleCommandTest {
 
+    private static final String tempModule = "test";
     private ModuleCommandParser commandParser;
     private ModuleManager moduleManager;
-
-    private static final String tempModule = "test";
 
     @BeforeEach
     void setUp() {
@@ -38,7 +37,7 @@ public class ViewModuleCommandTest {
 
     @Test
     void execute_viewModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         Command cmd = commandParser.parseCommand("view");
         CommandResult cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());

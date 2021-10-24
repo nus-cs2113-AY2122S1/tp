@@ -19,11 +19,16 @@ import terminus.storage.ModuleStorage;
 
 public class DeleteModuleCommandTest {
 
+    private static final String tempModule = "test";
     private ModuleCommandParser commandParser;
     private ModuleManager moduleManager;
     private ModuleStorage moduleStorage;
 
-    private static final String tempModule = "test";
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
 
     @BeforeEach
     void setUp() throws IOException {
@@ -32,17 +37,12 @@ public class DeleteModuleCommandTest {
         this.moduleStorage.createModuleDirectory(tempModule);
         this.moduleManager = new ModuleManager();
         this.commandParser = ModuleCommandParser.getInstance();
-        moduleManager.setModule(tempModule);
-    }
-
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
+        moduleManager.addModule(tempModule);
     }
 
     @Test
-    void execute_deleteModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
+    void execute_deleteModule_success()
+            throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("delete 1");
         CommandResult cmdResult = cmd.execute(moduleManager);
         assertTrue(cmdResult.isOk());

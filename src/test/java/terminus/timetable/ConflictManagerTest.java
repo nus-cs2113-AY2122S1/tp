@@ -1,14 +1,13 @@
 package terminus.timetable;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.time.LocalTime;
+import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.content.Link;
 import terminus.module.ModuleManager;
-
-import java.time.LocalTime;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ConflictManagerTest {
 

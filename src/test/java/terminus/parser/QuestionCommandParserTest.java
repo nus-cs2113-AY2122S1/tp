@@ -17,9 +17,8 @@ import terminus.exception.InvalidCommandException;
 
 public class QuestionCommandParserTest {
 
-    private QuestionCommandParser commandParser;
-
     private final String tempModule = "test";
+    private QuestionCommandParser commandParser;
 
     @BeforeEach
     void setUp() {

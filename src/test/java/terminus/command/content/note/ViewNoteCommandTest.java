@@ -22,13 +22,17 @@ import terminus.storage.ModuleStorage;
 
 public class ViewNoteCommandTest {
 
+    Class<Note> type = Note.class;
     private NoteCommandParser commandParser;
     private ModuleManager moduleManager;
     private ModuleStorage moduleStorage;
-
     private String tempModule = "test";
 
-    Class<Note> type = Note.class;
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
 
     @BeforeEach
     void setUp() throws IOException {
@@ -36,15 +40,9 @@ public class ViewNoteCommandTest {
         this.moduleStorage.init(TestFilePath.SAVE_FILE);
         this.moduleStorage.createModuleDirectory(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.commandParser = NoteCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
-    }
-
-    @AfterAll
-    static void reset() throws IOException {
-        ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        moduleStorage.cleanAfterDeleteModule("test");
     }
 
     @Test

@@ -1,5 +1,9 @@
 package terminus.timetable;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -8,11 +12,6 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.LinkCommandParser;
 import terminus.ui.Ui;
-
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 class TimetableTest {
     private ModuleManager moduleManager;
@@ -23,7 +22,7 @@ class TimetableTest {
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @Test

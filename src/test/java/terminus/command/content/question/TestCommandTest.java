@@ -19,9 +19,9 @@ import terminus.parser.QuestionCommandParser;
 
 public class TestCommandTest {
 
+    private final String tempModule = "test";
     private QuestionCommandParser commandParser;
     private ModuleManager moduleManager;
-    private final String tempModule = "test";
 
     @BeforeAll
     static void beforeAll() {
@@ -34,7 +34,7 @@ public class TestCommandTest {
     @BeforeEach
     void setUp() {
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
         this.commandParser = QuestionCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
     }

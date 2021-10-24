@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.itextpdf.text.DocumentException;
 import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +32,7 @@ public class ViewLinkCommandTest {
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @Test
@@ -61,7 +62,8 @@ public class ViewLinkCommandTest {
     }
 
     @Test
-    void execute_viewLink_success() throws InvalidCommandException, InvalidArgumentException, IOException {
+    void execute_viewLink_success() throws InvalidCommandException, InvalidArgumentException, IOException,
+            DocumentException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"3\" \"https://zoom.us/test\"");
@@ -80,7 +82,8 @@ public class ViewLinkCommandTest {
     }
 
     @Test
-    void execute_viewLink_exceptionThrown() throws InvalidCommandException, InvalidArgumentException, IOException {
+    void execute_viewLink_exceptionThrown() throws InvalidCommandException, InvalidArgumentException, IOException,
+            DocumentException {
         for (int i = 0; i < 5; i++) {
             Command addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"00:00\" \"2\" \"https://zoom.us/test\"");

@@ -22,7 +22,7 @@ public class ExitCommandTest {
     void setUp() {
         this.commandParser = MainCommandParser.getInstance();
         this.moduleManager = new ModuleManager();
-        moduleManager.setModule(tempModule);
+        moduleManager.addModule(tempModule);
     }
 
     @Test
@@ -37,7 +37,8 @@ public class ExitCommandTest {
         assertTrue(noteResult.isOk() && noteResult.isExit());
 
         Command scheduleExitCommand = commandParser
-            .parseCommand("go " + tempModule + " " + CommonFormat.COMMAND_SCHEDULE + " " + CommonFormat.COMMAND_EXIT);
+                .parseCommand(
+                        "go " + tempModule + " " + CommonFormat.COMMAND_SCHEDULE + " " + CommonFormat.COMMAND_EXIT);
         CommandResult scheduleExitResult = scheduleExitCommand.execute(moduleManager);
         assertTrue(scheduleExitResult.isOk() && scheduleExitResult.isExit());
 
