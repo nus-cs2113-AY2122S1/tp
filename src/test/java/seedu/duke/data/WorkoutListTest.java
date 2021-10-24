@@ -70,6 +70,17 @@ class WorkoutListTest {
     }
 
     @Test
+    public void sortWorkout_void_expectSortedWorkoutList() throws GetJackDException {
+        testWorkouts.addWorkout(new Workout("Test 1"));
+        testWorkouts.addWorkout(new DeadlineWorkout("xmas abs", LocalDate.parse("2021-12-25")));
+        testWorkouts.addWorkout(new DeadlineWorkout("hello halloween", LocalDate.parse("2021-10-31")));
+        testWorkouts.sortWorkouts();
+        assertEquals("hello halloween finish by: 31 Oct 2021", testWorkouts.getWorkout(1).toString());
+        assertEquals("xmas abs finish by: 25 Dec 2021", testWorkouts.getWorkout(2).toString());
+        assertEquals("Test 1", testWorkouts.getWorkout(3).toString());
+    }
+
+    @Test
     public void convertAllWorkoutsToStorageModel_void_expectWorkoutsConvertedToStorageModel() {
         testWorkouts.addWorkout(new Workout("Test 1"));
         WorkoutListModel.clearWorkoutListModel();

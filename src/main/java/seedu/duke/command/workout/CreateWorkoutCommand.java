@@ -66,6 +66,7 @@ public class CreateWorkoutCommand extends Command {
             workouts.addWorkout(toCreateWithDeadline);
             commandResult = new CommandResult(String.format(MESSAGE_SUCCESS, toCreateWithDeadline));
         }
+        workouts.sortWorkouts();
 
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);

@@ -27,6 +27,10 @@ public class DeadlineWorkout extends Workout {
         deadline = deadlineDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
     }
 
+    public LocalDate getDeadlineDate() {
+        return deadlineDate;
+    }
+
     /**
      * Converts the object to a String.
      * @return name of workout routine
