@@ -2,6 +2,7 @@ package medbot;
 
 import static medbot.parser.ParserUtils.updatePersonalInformation;
 
+import medbot.Storage.Storage;
 import medbot.exceptions.MedBotException;
 import medbot.list.PatientList;
 import medbot.person.Patient;

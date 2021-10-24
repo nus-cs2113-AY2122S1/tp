@@ -9,8 +9,8 @@ import java.util.List;
 
 import static medbot.ui.Ui.END_LINE;
 
-public class PersonList {
-    private HashMap<Integer, Person> persons = new HashMap<>();
+public class PersonList extends MedBotList {
+    private final HashMap<Integer, Person> persons = new HashMap<>();
     private int lastId = 1;
 
     public int size() {
@@ -137,6 +137,7 @@ public class PersonList {
      *
      * @return storageString of all persons
      */
+    @Override
     public String getStorageString() {
         String output = "";
         for (int key : persons.keySet()) {
@@ -147,21 +148,20 @@ public class PersonList {
         return output;
     }
 
-    /**
-     * Adds a person to persons hashmap.
-     *
-     * @param person an instance of Person
-     */
-    public void addPersonFromStorage(Person person) {
-        int personId = person.getPersonId();
+    @Override
+    public void addListItemFromStorage(ListItem personItem) {
+        Person person = (Person) personItem;
+        int personId = person.getId();
         persons.put(personId, person);
     }
+
 
     /**
      * Set lastId to a new number.
      *
      * @param newLastId lastId to be set to this
      */
+    @Override
     public void setLastId(int newLastId) {
         lastId = newLastId;
     }

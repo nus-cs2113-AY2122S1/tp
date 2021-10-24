@@ -4,10 +4,11 @@ package medbot.person;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 import static medbot.ui.Ui.END_LINE;
 
+import medbot.list.ListItem;
 import medbot.list.PersonalAppointmentList;
 
 
-public abstract class Person {
+public abstract class Person extends ListItem {
     private static final String PARAMETER_NAME = "n/";
     private static final String PARAMETER_PHONE = "p/";
     private static final String PARAMETER_EMAIL = "e/";
@@ -212,5 +213,17 @@ public abstract class Person {
 
     private String getFormattedAddress() {
         return formattedAttribute(residentialAddress, LENGTH_ADDRESS_COLUMN);
+    }
+
+
+    //TODO: Change these to the native methods
+    @Override
+    public int getId() {
+        return getPersonId();
+    }
+
+    @Override
+    public void setId(int personId) {
+        setPersonId(personId);
     }
 }
