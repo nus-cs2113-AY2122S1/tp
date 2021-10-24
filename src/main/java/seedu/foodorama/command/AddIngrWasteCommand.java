@@ -1,0 +1,44 @@
+package seedu.foodorama.command;
+
+import seedu.foodorama.Ingredient;
+import seedu.foodorama.IngredientList;
+import seedu.foodorama.Ui;
+import seedu.foodorama.exceptions.FoodoramaException;
+import seedu.foodorama.logger.LoggerManager;
+
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class AddIngrWasteCommand extends Command {
+    private static Logger logger = Logger.getLogger("AddIngrWasteCommand.execute()");
+
+    AddIngrWasteCommand() {
+        LoggerManager.setupLogger(logger);
+    }
+
+    @Override
+    public void execute(ArrayList<String> parameters) throws FoodoramaException {
+        Ui ui = new Ui();
+        logger.log(Level.INFO, "Start of process");
+        String ingredient = String.join(" ", parameters);
+        int ingredientIndex = IngredientList.find(ingredient);
+        if (ingredientIndex == -1) {
+            logger.log(Level.INFO, "Ingredient does not exist", ingredientIndex);
+            throw new FoodoramaException(ui.getIngrNotExistMsg());
+        } else {
+            try {
+                Ingredient currentIngredient = IngredientList.ingredientList.get(ingredientIndex);
+                currentIngredient.addWaste();
+                logger.log(Level.INFO, "Successfully recorded Ingredient waste "
+                        + ingredient
+                        + " "
+                        + currentIngredient.getWastage());
+            } catch (FoodoramaException e) {
+                throw new FoodoramaException(e.getMessage());
+            }
+        }
+        logger.log(Level.INFO, "End of process");
+    }
+
+}
