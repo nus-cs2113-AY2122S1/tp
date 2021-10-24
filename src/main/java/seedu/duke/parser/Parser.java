@@ -1,28 +1,6 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.AddBudgetCommand;
-import seedu.duke.commands.AddCommand;
-import seedu.duke.commands.AddExpenditureCommand;
-import seedu.duke.commands.AddLoanCommand;
-import seedu.duke.commands.Command;
-import seedu.duke.commands.DeleteAllExpenditureCommand;
-import seedu.duke.commands.DeleteBudgetCommand;
-import seedu.duke.commands.DeleteCommand;
-import seedu.duke.commands.DeleteMultipleExpenditureCommand;
-import seedu.duke.commands.DeleteSingleExpenditureCommand;
-import seedu.duke.commands.ExitCommand;
-import seedu.duke.commands.HelpCommand;
-import seedu.duke.commands.InvalidCommand;
-import seedu.duke.commands.ListRecordsCommand;
-import seedu.duke.commands.YearCommand;
-import seedu.duke.commands.FindCommand;
-import seedu.duke.commands.EditCommand;
-import seedu.duke.commands.EditExpenditureCommand;
-import seedu.duke.commands.EditBudgetCommand;
-import seedu.duke.commands.DeleteMultipleLoanCommand;
-import seedu.duke.commands.DeleteAllLoanCommand;
-import seedu.duke.commands.StatCommand;
-import seedu.duke.commands.DeleteSingleLoanCommand;
+import seedu.duke.commands.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -36,6 +14,7 @@ import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH_OF_BUDGET;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_EDIT_COMMAND;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
@@ -108,16 +87,25 @@ public class Parser {
     }
 
     private Command prepareStatCommand(String commandParams) {
+        String statOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+
         switch (statOption) {
         case ("-b"):
-            return;
-        case ("-e"):
-            return;
+            return prepareStatBudgetCommand(commandParams);
         case ("-l"):
-            return;
+            return new StatYearCommand();
         default:
             return new InvalidCommand(MESSAGE_INVALID_STAT_COMMAND);
         }
+    }
+
+    private Command prepareStatBudgetCommand(String commandParams) {
+        String[] split = commandParams.trim().split("m/", 2);
+        assert split[0].equals("");
+
+        int month = Integer.parseInt(split[1].trim());
+
+        return new StatBudgetCommand(month);
     }
 
     private Command prepareEditCommand(String commandParams) {
