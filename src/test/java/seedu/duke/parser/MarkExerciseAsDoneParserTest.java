@@ -7,6 +7,10 @@ import seedu.duke.command.misc.IncorrectCommand;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * JUnit tests for MarkExerciseAsDoneParser class.
+ * Tests also apply to the RemoveExerciseParser class as the same logic applies to both classes
+ */
 class MarkExerciseAsDoneParserTest {
     private MarkExerciseAsDoneParser parser;
     private Command result;
