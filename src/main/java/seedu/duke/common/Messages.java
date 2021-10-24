@@ -24,6 +24,12 @@ public class Messages {
     public static final String LIST_ALL_MESSAGE = "  (+) Listing out all items in library";
     public static final String LIST_AVAILABLE_MESSAGE = "  (+) Listing out available items in library";
     public static final String LIST_LOANED_MESSAGE = "  (+) Listing out loaned items in library";
+    public static final String LIST_FORMAT_INCORRECT = " (!) Invalid listing command" + System.lineSeparator()
+            + " (!) Format: 'list all' OR 'list available' OR 'list loaned'";
+    // Search
+    public static final String SEARCH_MESSAGE = "  (+) Here are the searching results in library";
+    public static final String SEARCH_FORMAT_INCORRECT = " (!) Invalid searching format!" + System.lineSeparator()
+            + " (!) Format: 'search i/ID' OR 'search t/TITLE' OR 'search s/STATUS'";
     // Loan and Return
     public static final String LOAN_SUCCESS = "  (+) Item has been loaned out:";
     public static final String LOAN_SUCCESS_RESERVED = "  (+) The reserved item has been loaned out:";
