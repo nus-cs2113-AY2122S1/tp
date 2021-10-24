@@ -1,4 +1,14 @@
-Chicken Rice
+test
+Difficulty: 
+Hard
+Calories (kcal): 
+123
+Preparation time: 
+69 minute(s)
+Cooking time: 
+420 minute(s)
+Total price of ingredients: 
+$5.99
 Ingredients needed: 
 1. Chicken
 Method: 

@@ -1,6 +1,6 @@
 # Duke
 
-{Give product intro here}
+Gordon is a CLI recipe manager.
 
 Useful links:
 * [User Guide](UserGuide.md)
