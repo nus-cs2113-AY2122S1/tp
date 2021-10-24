@@ -11,8 +11,8 @@ public class AddModCommand extends Command {
     private final Module moduleToAdd;
     private final int moduleIndexToAdd;
 
-    public AddModCommand(int moduleIndexToAdd, ModuleList moduleMasterList, ModuleList moduleSelectedList)
-            throws IOException {
+    public AddModCommand(int moduleIndexToAdd, ModuleList moduleMasterList,
+                         ModuleList moduleSelectedList) throws IOException {
         this.moduleIndexToAdd = moduleIndexToAdd;
         this.moduleToAdd = moduleMasterList.get(moduleIndexToAdd - 1);
         assert moduleToAdd.getModuleCode() != null;

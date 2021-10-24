@@ -1,5 +1,7 @@
 package seedu.duke.modules;
 
+import seedu.duke.universities.University;
+
 import java.util.ArrayList;
 
 public class ModuleList {
@@ -56,5 +58,14 @@ public class ModuleList {
 
     public ArrayList<Module> getList() {
         return list;
+    }
+
+    public void listModules() {
+        assert list.size() != 0;
+        for (int i = 0; i < list.size(); i++) {
+            Module curr = list.get(i);
+            String output = (i + 1) + ". " + curr.moduleName;
+            System.out.println(output);
+        }
     }
 }

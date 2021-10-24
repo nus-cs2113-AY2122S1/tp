@@ -30,7 +30,7 @@ class RemoveCommandParserTest {
             assertEquals(RemoveUniCommand.class, rcp.parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList));
         } catch (Exception e) {
-            assertEquals("For input string: \"someUniversityName\"", e.getMessage());
+            assertEquals("University not found.", e.getMessage());
         }
     }
 
@@ -41,7 +41,7 @@ class RemoveCommandParserTest {
             assertEquals(RemoveModCommand.class, rcp.parse(arguments, universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList));
         } catch (Exception e) {
-            assertEquals("For input string: \"someModule\"", e.getMessage());
+            assertEquals("Module not found.", e.getMessage());
         }
     }
 

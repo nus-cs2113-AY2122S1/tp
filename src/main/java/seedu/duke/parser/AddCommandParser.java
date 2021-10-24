@@ -24,9 +24,9 @@ public class AddCommandParser {
     private University university;
     private Module module;
 
-    public Command parse(String arguments, UniversityList universityMasterList, ModuleList moduleMasterList,
-                         UniversityList universitySelectedList, ModuleList moduleSelectedList)
-            throws ParseException, IOException {
+    public Command parse(String arguments, UniversityList universityMasterList,
+                         ModuleList moduleMasterList, UniversityList universitySelectedList,
+                         ModuleList moduleSelectedList) throws ParseException, IOException {
 
         String flagArguments = identifyFlagAndSplitArgs(arguments);
 
@@ -132,5 +132,13 @@ public class AddCommandParser {
         Pattern pattern = Pattern.compile(regex);  // compiles the regex
         Matcher matcherText = pattern.matcher(arguments);
         return matcherText.matches();
+    }
+
+    public boolean isUniversityExist(String uniName, UniversityList universityMasterList) {
+        return universityMasterList.searchUniversity(uniName);
+    }
+
+    public Module searchForModule(String moduleCode, ModuleList moduleMasterList) {
+        return moduleMasterList.getModule(moduleCode);
     }
 }
