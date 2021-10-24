@@ -235,7 +235,79 @@ Your expenditures:
 
 ## `delete`
 
-### Delete: `delete`
+Deletes an entry / entries (maybe user wants to cut off the expenses) from the budget tracker data set.
+
+### `b/` - Delete a budget 
+
+Deletes the budget of a specific month
+
+Format: `delete b/ m/MONTH`
+
+* The `MONTH` represents the month of the budget will be deleted and cannot be empty.
+
+Example of usage:
+
+`delete b/ m/10`
+
+Expected outcome:
+```
+========================================================
+Successfully deleted Budget for this month!
+Now the budget amount is 0.00!      
+========================================================
+```
+
+### `e/` - Delete (an) expenditure(s)
+
+Deletes (an) expenditure(s) of a specific month
+
+Format:`delete e/ m/MONTH` 
+<br/> `delete e/INDEX m/MONTH`
+<br/> `delete e/INDEX_FROM-INDEX_TO m/MONTH`
+
+* The `MONTH` represents the month of the expenditure(s) will be deleted and cannot be empty.
+* The `INDEX` refers to the index number or a range of index number shown in the displayed entry list.
+* The `INDEX` must be within the range of the list.
+* If the `INDEX` is empty, then all the expenditures of this month will be deleted.
+
+Examples of usage:
+
+ `delete e/3-5 m/MONTH`
+
+Expected outcome:
+```
+========================================================
+Successfully deleted Expenditure 3.chicken rice3          | $5.0               | 2021-10-21       
+Successfully deleted Expenditure 4.chicken rice4          | $5.0               | 2021-10-21       
+Successfully deleted Expenditure 5.chicken rice5          | $5.0               | 2021-10-21     
+========================================================
+```
+
+### `l/` - Delete (a) loan record(s)
+
+Deletes (a) loan record(s) of a specific month
+
+Format:`delete l/ m/MONTH` 
+<br/> `delete l/INDEX m/MONTH`
+<br/> `delete l/INDEX_FROM-INDEX_TO m/MONTH`
+
+* The `MONTH` represents the month of the loan record(s) will be deleted and cannot be empty.
+* The `INDEX` refers to the index number or a range of index number shown in the displayed entry list.
+* The `INDEX` must be within the range of the list.
+* If the `INDEX` is empty, then all the loan records of this month will be deleted.
+
+Examples of usage:
+
+ `delete l/3-5 m/MONTH`
+
+Expected outcome:
+```
+========================================================
+Successfully deleted Loan 3.Wei Xuan               | $1000.0            | 2021-10-24       
+Successfully deleted Loan 4.Luoyuang               | $1000.0            | 2021-10-24       
+Successfully deleted Loan 5.Yixuan                 | $1000.0            | 2021-10-24      
+========================================================
+```
 
 ## `help`
  
