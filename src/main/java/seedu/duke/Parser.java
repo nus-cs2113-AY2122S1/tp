@@ -44,6 +44,15 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Handles commands entered by the user that are confirmed as valid, and redirects to the appropriate method
+     * for further updates.
+     *
+     *
+     * @param inputCommand Valid command executed by the user
+     * @param inputParams Additional information appended to the command by the user
+     *                    (inputParams are not checked and may not be valid)
+     */
     private static void handleValidCommands(String inputCommand, String inputParams) {
         switch (inputCommand) {
         case "create":
@@ -75,7 +84,11 @@ public class Parser {
             break;
 
         case "expense":
-            handleExpense(inputParams);
+            handleCreateExpense(inputParams);
+            break;
+
+        case "edit-exp":
+            handleEditExpense(inputParams);
             break;
 
         case "amount":
@@ -91,10 +104,19 @@ public class Parser {
         }
     }
 
-    private static void handleExpense(String inputParams) {
+    private static void handleCreateExpense(String inputParams) {
         try {
             assert inputParams != null;
-            executeExpense(inputParams);
+            executeCreateExpense(inputParams);
+        } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
+            Ui.printExpenseFormatError();
+        }
+    }
+
+    private static void handleEditExpense(String inputParams) {
+        try {
+            assert inputParams != null;
+            executeEditExpense(inputParams);
         } catch (NullPointerException | IndexOutOfBoundsException | NumberFormatException e) {
             Ui.printExpenseFormatError();
         }
@@ -143,7 +165,7 @@ public class Parser {
     private static void handleEditTrip(String inputParams) {
         try {
             assert inputParams != null;
-            executeEdit(inputParams);
+            executeEditTrip(inputParams);
         } catch (NumberFormatException | IndexOutOfBoundsException | NullPointerException e) {
             Ui.printUnknownTripIndexError();
         }
@@ -167,7 +189,7 @@ public class Parser {
         Storage.setLastTrip(newTrip);
     }
 
-    private static void executeEdit(String inputDescription) {
+    private static void executeEditTrip(String inputDescription) {
         String[] tripToEditInfo = inputDescription.split(" ", 2);
         assert tripToEditInfo[1] != null;
         String attributesToEdit = tripToEditInfo[1];
@@ -294,31 +316,27 @@ public class Parser {
         }
     }
 
-    private static void executeExpense(String inputDescription) {
+    private static void executeCreateExpense(String inputDescription) {
         Trip currTrip = Storage.getOpenTrip();
         assert Storage.checkOpenTrip();
-        String[] expenseInfo = inputDescription.split(" ", 3);
-        Double expenseAmount = Double.parseDouble(expenseInfo[0]);
-        String expenseCategory = expenseInfo[1].toLowerCase();
-        ArrayList<Person> listOfPersonsIncluded = checkValidPersons(currTrip, expenseInfo[2]);
-        String expenseDescription = getDescription(expenseInfo[2]);
-        Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded, expenseDescription);
-        newExpense.setDate(newExpense.prompDate());
+        Expense newExpense = new Expense(inputDescription);
+        //Expense newExpense = new Expense(expenseAmount, expenseCategory, listOfPersonsIncluded,
+        //        expenseDescription, currTrip.getExchangeRate());
+        //newExpense.setDate(newExpense.prompDate());
         currTrip.addExpense(newExpense);
-        if (listOfPersonsIncluded.size() == 1) {
-            updateOnePersonSpending(newExpense, listOfPersonsIncluded.get(0));
-        } else {
-            updateIndividualSpending(newExpense);
-        }
         Storage.setLastExpense(newExpense);
         Ui.printExpenseAddedSuccess();
     }
 
-    private static void updateOnePersonSpending(Expense expense, Person person) {
+    private static void executeEditExpense(String inputDescription) {
+        //TODO: add edit expense code (for override of exchange rate using manual local currency)
+    }
+
+    protected static void updateOnePersonSpending(Expense expense, Person person) {
         person.setMoneyOwed(person, expense.getAmountSpent());
     }
 
-    private static void updateIndividualSpending(Expense expense) {
+    protected static void updateIndividualSpending(Expense expense) {
         Ui.printGetPersonPaid();
         String input = Storage.getScanner().nextLine().strip();
         Person payer = checkValidPersonInExpense(input, expense);
@@ -426,30 +444,7 @@ public class Parser {
         return Storage.getValidCommands().contains(inputCommand);
     }
 
-    /**
-     * Obtains a list of Person objects from array of names of people.
-     *
-     * @param userInput the input of the user
-     * @return listOfPersons ArrayList containing Person objects included in the expense
-     */
-    private static ArrayList<Person> checkValidPersons(Trip currentTrip, String userInput) {
-        String[] listOfPeople = userInput.split("/")[0].split(",");
-        ArrayList<Person> validListOfPeople = new ArrayList<>();
-        Storage.getLogger().log(Level.INFO, "Checking if names are valid");
-        for (String name : listOfPeople) {
-            for (Person person : currentTrip.getListOfPersons()) {
-                if (name.trim().equalsIgnoreCase(person.getName())) {
-                    validListOfPeople.add(person);
-                    break;
-                }
-            }
-        }
-        return validListOfPeople;
-    }
 
-    private static String getDescription(String userInput) {
-        return userInput.split("/")[1].trim();
-    }
 
     private static void editTripPerAttribute(Trip tripToEdit, String attributesToEdit) {
         String[] attributesToEditSplit = attributesToEdit.split("-");

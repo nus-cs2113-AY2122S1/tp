@@ -23,12 +23,69 @@ public class Expense {
     private Person payer;
     private HashMap<Person, Double> amountSplit = new HashMap<>();
     private static final DateTimeFormatter pattern = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private double exchangeRate;
 
-    public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons, String description) {
+    /**
+     * Legacy Constructor for {@link Expense} - does not include parsing.
+     *
+     * @param amountSpent (placeholder)
+     * @param category (placeholder)
+     * @param listOfPersons (placeholder)
+     * @param description (placeholder)
+     * @param exchangeRate (placeholder)
+     */
+    public Expense(Double amountSpent, String category, ArrayList<Person> listOfPersons,
+                   String description, double exchangeRate) {
         this.amountSpent = amountSpent;
         this.description = description;
         this.category = category;
         this.personsList = listOfPersons;
+        this.exchangeRate = exchangeRate;
+    }
+
+    /**
+     * Constructor for {@link Expense} class - contains parsing, date prompting and amount assignment.
+     *
+     * @param inputDescription String of user input to be parsed and assigned to expense attributes
+     */
+    public Expense(String inputDescription) {
+        String[] expenseInfo = inputDescription.split(" ", 3);
+        this.amountSpent = Double.parseDouble(expenseInfo[0]);
+        this.category = expenseInfo[1].toLowerCase();
+        this.personsList = checkValidPersons(expenseInfo[2]);
+        this.description = getDescriptionParse(expenseInfo[2]);
+        this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
+        this.date = prompDate();
+        if (personsList.size() == 1) {
+            Parser.updateOnePersonSpending(this, personsList.get(0));
+        } else {
+            Parser.updateIndividualSpending(this);
+        }
+    }
+
+    private static String getDescriptionParse(String userInput) {
+        return userInput.split("/")[1].trim();
+    }
+
+    /**
+     * Obtains a list of Person objects from array of names of people.
+     *
+     * @param userInput the input of the user
+     * @return listOfPersons ArrayList containing Person objects included in the expense
+     */
+    private static ArrayList<Person> checkValidPersons(String userInput) {
+        String[] listOfPeople = userInput.split("/")[0].split(",");
+        ArrayList<Person> validListOfPeople = new ArrayList<>();
+        Storage.getLogger().log(Level.INFO, "Checking if names are valid");
+        for (String name : listOfPeople) {
+            for (Person person : Storage.getOpenTrip().getListOfPersons()) {
+                if (name.trim().equalsIgnoreCase(person.getName())) {
+                    validListOfPeople.add(person);
+                    break;
+                }
+            }
+        }
+        return validListOfPeople;
     }
 
     public void setPayer(Person person) {
@@ -139,4 +196,13 @@ public class Expense {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
+    public double getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public void setExchangeRate(double exchangeRate) {
+        this.exchangeRate = exchangeRate;
+    }
+
 }
