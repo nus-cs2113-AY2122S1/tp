@@ -228,7 +228,8 @@ Deleted module CS2113T.
 **Format:** `update <index> "<new_module_code>"`
 
 Updates a module name in the module management workspace.
-> ⚠️The `<new_module_code>` will have the same restrictions as the [add command](#adding-a-new-module)
+> ⚠️The `<new_module_code>` will have the same restrictions as the [add command](#adding-a-new-module).  
+
 Example: `update 1 "CS2113"`
 
 Expected Output:
@@ -872,7 +873,7 @@ Your question on 'What is Java?' has been added!
 ___  
 
 ## FAQ
-**Q:** Can I edit the information in the`data` directory?
+**Q:** Can I edit the information in the`data` directory?  
 **A:** Yes! **TermiNUS** saves and loads your information form the `data` directory, editing the files
 in the `data` folder works. We recommend that you update the **contents** of any notes `.txt` in the 
 `data/module_name` directory. However, we do not recommend modifying any configuration file 
