@@ -2,8 +2,6 @@ package medbot.ui;
 
 import medbot.list.PersonList;
 
-import java.util.List;
-
 public class PatientUi {
     private static final String END_LINE = System.lineSeparator();
     private static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"

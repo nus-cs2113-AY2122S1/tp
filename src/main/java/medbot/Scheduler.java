@@ -30,6 +30,26 @@ public class Scheduler {
         return schedulerAppointmentList;
     }
 
+    /**
+     * Returns a copy of the appointment at the specified id.
+     *
+     * @param appointmentId the id of the Appointment to be returned
+     * @return a copy of the appointment at the specified id
+     * @throws MedBotException if there is no appointment with that id
+     */
+    public Appointment getAppointment(int appointmentId) throws MedBotException {
+        return schedulerAppointmentList.getAppointment(appointmentId);
+    }
+
+    /**
+     * Adds the specified appointment to the scheduler if it does not clash with existing appointments.
+     *
+     * <p>If the appointment does not have an appointmentId, it will be assigned one.
+     *
+     * @param appointment Appointment to be added to the scheduler
+     * @return the appointmentId of the appointment after it was added to the scheduler
+     * @throws MedBotException if the appointment is missing information or clashes with another appointment
+     */
     public int addAppointment(Appointment appointment) throws MedBotException {
         if (!appointment.isComplete()) {
             throw new MedBotException(ERROR_ADD_INCOMPLETE_APPOINTMENT);
@@ -38,6 +58,12 @@ public class Scheduler {
         return insertAppointment(appointment);
     }
 
+    /**
+     * Removes the appointment with the specified appointmentId.
+     *
+     * @param appointmentId the appointmentId of the appointment to be removed
+     * @throws MedBotException if there is no appointment with that appointmentId
+     */
     public void deleteAppointment(int appointmentId) throws MedBotException {
         Appointment deletedAppointment = schedulerAppointmentList.deleteAppointment(appointmentId);
         int patientId = deletedAppointment.getPatientId();
@@ -51,9 +77,15 @@ public class Scheduler {
         }
     }
 
-    public Appointment editAppointment(int appointmentId, Appointment newAppointment) throws MedBotException {
+    /**
+     * Edits the appointment at the specified appointmentId to have the parameters of newAppointment.
+     *
+     * @param appointmentId  the id of the appointment to be modified
+     * @param newAppointment Appointment containing the new parameter values
+     * @throws MedBotException if there is no appointment with the specified id or the changes will lead to a clash
+     */
+    public void editAppointment(int appointmentId, Appointment newAppointment) throws MedBotException {
         Appointment oldAppointment = schedulerAppointmentList.getAppointment(appointmentId);
-
         newAppointment = Appointment.mergeAppointmentData(oldAppointment, newAppointment);
         newAppointment.setAppointmentId(appointmentId);
         assert newAppointment.isComplete();
@@ -61,7 +93,6 @@ public class Scheduler {
         checkAvailability(newAppointment);
         deleteAppointment(appointmentId);
         insertAppointment(newAppointment);
-        return newAppointment;
     }
 
     private int insertAppointment(Appointment appointment) throws MedBotException {
@@ -81,8 +112,8 @@ public class Scheduler {
         int staffId = appointment.getMedicalStaffId();
         int dateTimeCode = appointment.getDateTimeCode();
         int appointmentId = appointment.getAppointmentId();
-        checkPatientAvailability(patientId,dateTimeCode,appointmentId);
-        checkMedicalStaffAvailability(staffId,dateTimeCode,appointmentId);
+        checkPatientAvailability(patientId, dateTimeCode, appointmentId);
+        checkMedicalStaffAvailability(staffId, dateTimeCode, appointmentId);
     }
 
     private void checkPatientAvailability(int patientId, int dateTimeCode, int appointmentId) throws MedBotException {

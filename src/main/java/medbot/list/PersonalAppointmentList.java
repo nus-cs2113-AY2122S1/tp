@@ -26,6 +26,12 @@ public class PersonalAppointmentList {
 
     }
 
+    /**
+     * Adds the given appointment to the appointment list.
+     *
+     * @param appointment Appointment to be added to the appointment list
+     * @throws MedBotException if there is another appointment at that time
+     */
     public void addAppointment(Appointment appointment) throws MedBotException {
         int appointmentId = appointment.getAppointmentId();
         if (appointmentId == 0) {
@@ -38,6 +44,12 @@ public class PersonalAppointmentList {
 
     }
 
+    /**
+     * Returns the appointmentId of the appointment at the specified time code, or -1 if there is none.
+     *
+     * @param dateTimeCode the dateTimeCode to search for
+     * @return the appointmentId of the appointment with that dateTimeCode
+     */
     public int getAppointmentId(int dateTimeCode) {
         for (Appointment appointment : appointments) {
             if (appointment != null && appointment.getDateTimeCode() == dateTimeCode) {
@@ -47,6 +59,12 @@ public class PersonalAppointmentList {
         return -1;
     }
 
+    /**
+     * Removes the appointment with the specified dateTimeCode.
+     *
+     * @param dateTimeCode the dateTimeCode of the appointment to be deleted
+     * @throws MedBotException if there is no appointment with that dateTimeCode.
+     */
     public void deleteAppointment(int dateTimeCode) throws MedBotException {
         Iterator<Appointment> it = appointments.iterator();
         while (it.hasNext()) {
