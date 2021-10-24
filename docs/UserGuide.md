@@ -31,7 +31,7 @@ You can find out more about _Ha(ppy)Bit_ at our [Main Page](README.md).
 
 ## Quick Start
 
-1. Ensure you have Java 11 installed in your computer. If you do not have it installed, 
+1. Ensure you have Java `11` installed in your computer. If you do not have it installed, 
 download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
 2. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0). 
 3. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
@@ -103,6 +103,9 @@ In the current loading screen, users will be able to execute the following actio
     Press enter to return to main menu...
     ```
 4. Demo Video - Links to Demo Video (Not done yet)
+    ```
+   video not available.
+    ```
 5. Start Application - Brings user to the application. User can start using the app or continue where they left off.
 
     ```
@@ -150,6 +153,7 @@ ________________________________________________________________________________
 Hello! These are all the possible commands for this habit tracker :) (flags within {} brackets are optional)
 - set a goal: set n/<goal name> { t/<goal type> s/<start date> } e/<end date>
    -> Goal types include: default[df], sleep[sl], food[fd], exercise[ex] and study[sd]
+- update a goal: update g/<goal index> n/<new goal name>
 - remove a goal: remove g/<goal index>
 - list all goals for that habit: list
 - add a habit to a goal: add g/<goal index> n/<habit name> i/<interval>
@@ -188,11 +192,10 @@ Output:
 Your goal: [DF] Reduce spending has been added.
 ```
 ### Update a Goal: `Update`
-Updates the name of a goal specified by its index.
+Updates an attribute of a goal specified by its index.
 
-Format: `update <GOAL_INDEX> <NEW_GOAL_NAME>`
-
-Note: As of now, only goal name may be updated. To update other goal features you just have to wait :p 
+#### Updating Name
+Format: `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>`
 
 Example:
 
@@ -202,6 +205,36 @@ update 3 Reach for the Stars
 Output:
 ```
 Your goal "Reach for the Moon" has been changed to "Reach for the Stars".
+```
+
+> :exclamation: ❗  The update features below are still underway. 
+
+#### Updating Start/End Date
+Format: `update g/<GOAL_INDEX> s/<NEW_START_DATE>` <br>
+_or_ <br>
+Format: `update g/<GOAL_INDEX> e/<NEW_END_DATE>`
+
+Example:
+
+```
+
+```
+Output:
+```
+
+```
+
+#### Updating Goal Type
+Format: `update g/<GOAL_INDEX> t/<NEW_GOAL_TYPE>`
+
+Example:
+
+```
+
+```
+Output:
+```
+
 ```
 
 ### Remove a Goal: `remove`
@@ -336,11 +369,14 @@ are **automatically** saved in a text file at the relative storage path, `data/h
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
-
+<br>
 **A**: {your answer here}
 
-## Command Summary
+**Q**: Are there any books you recommend?
+<br>
+**A**: 
 
+## Command Summary
 Action | Command Format | Example
 ------------ | ------------ | ------------
 Set goal | `set <GOAL_NAME> {-<GOAL_TYPE> /<START_DATE>} /<END_DATE>` | `set Reduce spending /01012022 /31122022`
