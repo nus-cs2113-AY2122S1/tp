@@ -115,7 +115,6 @@ public class LoadData {
         String ingredientName = null;
         String expiryDateString;
         int quantityWithBatch = 0;
-        int quantity = 0;
         while (sc.hasNext()) {
             String line = sc.nextLine();
             if (!line.isBlank()) {
