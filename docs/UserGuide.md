@@ -3,8 +3,9 @@
 _Ha(ppy)Bit_ is a desktop app aimed to **empower students** to improve their **well-being**,
 amidst the hectic and stressful **university life**. 
 The app enables students to cultivate **good habits**, through the setting and tracking of **goals**.
-The app operates on a Command Line Interface (CLI) while still 
-comprising features typically found in a Graphical User Interface (GUI). 
+The app operates on a [Command Line Interface (CLI)](https://en.wikipedia.org/wiki/Command-line_interface) 
+while still comprising features typically found in a
+[Graphical User Interface (GUI)](https://en.wikipedia.org/wiki/Graphical_user_interface). 
 Students who type fast will find that _Ha(ppy)Bit_ performs habit tracking more efficiently than your 
 conventional GUI apps.
 
@@ -33,11 +34,12 @@ You can find out more about _Ha(ppy)Bit_ at our [Main Page](README.md).
 
 1. Ensure you have Java `11` installed in your computer. If you do not have it installed, 
 download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
-2. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0). 
+2. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0).
 3. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
 4. Open your terminal of choice inside the folder containing `tp.jar` file.
-5. Run the file using `java -jar tp.jar`.
+5. Run the file by typing the command `java -jar tp.jar`.
 6. Upon loading the app you should see the following screen which would indicate that you have successfully run the app.
+
    ```
    ==============================================================================
      _  _   __   ____  ____  _  _  ____  __  ____
@@ -200,14 +202,14 @@ Format: `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>`
 Example:
 
 ```
-update 3 Reach for the Stars
+update g/3 n/Reach for the Stars
 ```
 Output:
 ```
 Your goal "Reach for the Moon" has been changed to "Reach for the Stars".
 ```
 
-> :exclamation: ❗  The update features below are still underway. 
+> :exclamation: Note: The update features below are still underway. 
 
 #### Updating Start/End Date
 Format: `update g/<GOAL_INDEX> s/<NEW_START_DATE>` <br>
@@ -240,11 +242,11 @@ Output:
 ### Remove a Goal: `remove`
 Removes a goal specified by its index.
 
-Format: `remove <GOAL_INDEX>`
+Format: `remove g/<GOAL_INDEX>`
 
 Example:
 ```
-remove 1
+remove g/1
 ```
 
 Output:
@@ -301,11 +303,11 @@ Your habit of " Run 6km" under the goal "[DF] Exercise More" has been set as don
 ### Delete a Habit: `delete`
 Deletes a habit under a goal.
 
-Format: `delete <GOAL_INDEX> <HABIT_INDEX>`
+Format: `delete g/<GOAL_INDEX> h/<HABIT_INDEX>`
 
 Example:
 ```
-delete 1 2
+delete g/1 h/2
 ```
 
 Output:
@@ -335,7 +337,7 @@ Here are your 2 habit(s) under the goal "[EX] Exercise More".
 ### Exit the Program: `bye`
 Exits the program.
 
-**Make sure to use this command before exiting the program
+> :warning: **Warning: Make sure to use this command before exiting the program
 to ensure that your data are saved properly.**
 
 Format: `bye`
@@ -372,6 +374,9 @@ are **automatically** saved in a text file at the relative storage path, `data/h
 <br>
 **A**: {your answer here}
 
+> :bulb: Pro Tip! Have your home folder reside in a cloud storage service (OneDrive, iCloud, etc.) to sync your data 
+> between devices. 
+
 **Q**: Are there any books you recommend?
 <br>
 **A**: 
@@ -391,3 +396,5 @@ Exit Program | `bye` | `bye`
 ## Useful Links
 
 Visit our [Main Page](README.md) to find more useful links.
+
+Watch our wacky [Demo Video v0](https://www.youtube.com/watch?v=dQw4w9WgXcQ)!
