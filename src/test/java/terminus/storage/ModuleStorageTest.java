@@ -42,8 +42,8 @@ public class ModuleStorageTest {
     @AfterAll
     static void reset() throws IOException {
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
-        /*moduleStorage.cleanAfterDeleteModule("test");
-        moduleStorage.cleanAfterDeleteModule("test1");*/
+        moduleStorage.cleanAfterDeleteModule("test");
+        moduleStorage.cleanAfterDeleteModule("test1");
     }
 
     /**
@@ -69,11 +69,13 @@ public class ModuleStorageTest {
     }
 
     @AfterEach
-    void reset_filepath() {
+    void reset_filepath() throws IOException {
         File pdf = new File(Paths.get(RESOURCE_FOLDER.toString(), tempModule + CommonFormat.PDF_FORMAT)
                 .toString());
         pdf.delete();
         this.moduleStorage.init(SAVE_FILE);
+        this.moduleStorage.cleanAfterDeleteModule("test");
+        this.moduleStorage.cleanAfterDeleteModule("test1");
     }
 
     @Test
@@ -238,7 +240,6 @@ public class ModuleStorageTest {
         this.moduleStorage.updateModuleDirectory(tempModule, "test1");
         assertTrue(Files.exists(newPath));
         assertFalse(Files.exists(oldPath));
-        this.moduleStorage.cleanAfterDeleteModule("test1");
     }
 
     @Test
@@ -251,7 +252,6 @@ public class ModuleStorageTest {
         this.moduleStorage.updateModuleDirectory(tempModule, "test1");
         assertTrue(Files.exists(newPath));
         assertTrue(Files.exists(oldPath));
-        this.moduleStorage.cleanAfterDeleteModule("test1");
     }
 
     @Test
@@ -275,9 +275,10 @@ public class ModuleStorageTest {
         Path filePath = Paths.get(oldPath.toString(), "test.txt");
         FileChannel channel = FileChannel.open(filePath, StandardOpenOption.APPEND);
         assertThrows(IOException.class, () -> this.moduleStorage.updateModuleDirectory(tempModule, "test1"));
+        channel.close();
         assertFalse(Files.exists(newPath));
         assertTrue(Files.exists(oldPath));
-        channel.close();
+
     }
 
     @Test
