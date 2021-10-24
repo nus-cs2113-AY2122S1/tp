@@ -1,6 +1,10 @@
 package seedu.duke;
 
 import org.junit.jupiter.api.Test;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.flights.AddFlightCommand;
+import seedu.duke.data.*;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

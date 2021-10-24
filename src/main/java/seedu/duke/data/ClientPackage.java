@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.data;
 
 public class ClientPackage {
     private final Client client;

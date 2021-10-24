@@ -1,10 +1,13 @@
 package seedu.duke;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.TreeMap;
-import java.util.Map;
+import seedu.duke.commands.*;
+import seedu.duke.commands.clients.*;
+import seedu.duke.commands.tours.*;
+import seedu.duke.commands.flights.*;
+import seedu.duke.commands.clientpackages.*;
+import seedu.duke.data.*;
+
+import java.util.*;
 
 /**
  * Sense-makes the inputs given and distributes the information to other parts of the program.
@@ -88,8 +91,8 @@ public class Parser {
 
         switch (identifier) {
         case "-c":
-            prefixes = Arrays.asList("/n", "/cn", "/m");
-            repeatPrefixChecker = 4;
+            prefixes = Arrays.asList("/cn", "/m");
+            repeatPrefixChecker = 3;
             break;
         case "-t":
             prefixes = Arrays.asList("/n", "/p");
@@ -276,14 +279,11 @@ public class Parser {
         int index;
 
         switch (prefix) {
-        case "/n":
+        case "/cn":
             index = 1;
             break;
-        case "/cn":
-            index = 2;
-            break;
         case "/m":
-            index = 3;
+            index = 2;
             break;
         default:
             index = 0;
@@ -316,14 +316,6 @@ public class Parser {
         }
         return true;
     }
-
-
-    /**
-     * Parses arguments with respect to the cut client command.
-     *
-     * @param params full user's argument/params string after splitting
-     * @return the prepared command
-     */
 
     /**
      * Parses string containing an integer value to int.
@@ -366,7 +358,7 @@ public class Parser {
         default:
             break;
         }
-        throw new TourPlannerException(ERROR_INVALID_INPUT);
+        return null;
     }
 
     private static Command parseList(String params) throws TourPlannerException {
@@ -384,19 +376,6 @@ public class Parser {
         }
     }
 
-    private static Command parseCut(String params) throws TourPlannerException {
-        String[] identifierAndArgs = splitCommandString(params, " ");
-        String identifier = identifierAndArgs[0];
-        String args = identifierAndArgs[1];
-
-        switch (identifier) {
-        case "-c":
-            return new CutClientCommand(args);
-        default:
-            throw new TourPlannerException(ERROR_INVALID_INPUT);
-        }
-    }
-
     private static Command parseFind(String params) throws TourPlannerException {
         String prefix = params.split(" ")[0];
         String suffix = params.split(" ")[1];
@@ -407,6 +386,19 @@ public class Parser {
             return new FindTourCommand(suffix);
         case "-f":
             return new FindFlightCommand(suffix);
+        default:
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
+        }
+    }
+    
+     private static Command parseCut(String params) throws TourPlannerException {
+        String[] identifierAndArgs = splitCommandString(params, " ");
+        String identifier = identifierAndArgs[0];
+        String args = identifierAndArgs[1];
+
+        switch (identifier) {
+        case "-c":
+            return new CutClientCommand(args);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }

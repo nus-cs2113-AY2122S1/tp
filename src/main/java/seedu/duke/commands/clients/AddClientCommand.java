@@ -1,4 +1,7 @@
-package seedu.duke;
+package seedu.duke.commands.clients;
+
+import seedu.duke.data.Client;
+import seedu.duke.commands.Command;
 
 /**
  * Adds a client into the database.

@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.commands.clients;
+
+import seedu.duke.commands.Command;
 
 public class FindClientCommand extends Command {
     private final String name;

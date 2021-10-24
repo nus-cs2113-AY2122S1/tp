@@ -1,5 +1,7 @@
-package seedu.duke;
+package seedu.duke.commands.tours;
 
+
+import seedu.duke.commands.Command;
 
 public class ListTourCommand extends Command {
 
