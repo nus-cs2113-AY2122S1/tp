@@ -1,6 +1,11 @@
 package expiryeliminator.storage;
 
-import expiryeliminator.data.*;
+import expiryeliminator.data.Ingredient;
+import expiryeliminator.data.IngredientQuantity;
+import expiryeliminator.data.IngredientRepository;
+import expiryeliminator.data.IngredientStorage;
+import expiryeliminator.data.Recipe;
+import expiryeliminator.data.RecipeList;
 import expiryeliminator.data.exception.DuplicateDataException;
 import expiryeliminator.data.exception.IllegalValueException;
 
@@ -20,12 +25,10 @@ public class LoadLists {
             Scanner sc = new Scanner(file);
             Recipe currentRecipe = new Recipe(null);
             storeCurrentRecipe(recipes, sc, currentRecipe);
-        } catch (DuplicateDataException e) {
+        } catch (DuplicateDataException | IllegalValueException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
             SaveLists.createFileOrFolder(pathName, fileName);
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
         }
     }
 
@@ -42,7 +45,7 @@ public class LoadLists {
                     }
                 }
             } else {
-                if(currentRecipe.getName()!=null) {
+                if (currentRecipe.getName() != null) {
                     recipes.add(currentRecipe);
                     currentRecipe = new Recipe(null);
                 }
@@ -53,14 +56,14 @@ public class LoadLists {
     private static void storeCurrentIngredient(Recipe currentRecipe, String line) throws IllegalValueException {
         int ingredientNameSeparator = line.indexOf("(") - 1;
         String ingredientName = line.substring(2, ingredientNameSeparator);
-        String theDigits= line.replaceAll("[^0-9]", "");
+        String theDigits = line.replaceAll("[^0-9]", "");
         int lengthOfQuantity = theDigits.length();
         int quantityStartIndex = line.indexOf(theDigits);
         int unitStartIndex = quantityStartIndex + lengthOfQuantity;
         int unitEndIndex = line.indexOf(")");
         int quantity = Integer.parseInt(theDigits);
         String unit = line.substring(unitStartIndex, unitEndIndex);
-        if(unit.isBlank()) {
+        if (unit.isBlank()) {
             unit = null;
         }
         Ingredient ingredient = new Ingredient(ingredientName, unit);
