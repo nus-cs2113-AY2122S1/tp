@@ -1,6 +1,7 @@
 package seedu.commands;
 
 import seedu.entry.Income;
+import seedu.utility.BudgetManager;
 import seedu.utility.FinancialTracker;
 import seedu.utility.Ui;
 
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 public class ListIncomeCommand extends Command {
     @Override
-    public void execute(FinancialTracker finances, Ui ui) {
+    public void execute(FinancialTracker finances, Ui ui, BudgetManager budgetManager) {
         ArrayList<Income> incomes = finances.getIncomes(); 
         ui.listIncome(incomes);
     }
