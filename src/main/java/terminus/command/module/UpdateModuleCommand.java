@@ -23,12 +23,12 @@ public class UpdateModuleCommand extends Command {
 
     @Override
     public String getFormat() {
-        return CommonFormat.UPDATE_COMMAND_FORMAT;
+        return CommonFormat.COMMAND_UPDATE_MODULE_FORMAT;
     }
 
     @Override
     public String getHelpMessage() {
-        return Messages.UPDATE_COMMAND_MESSAGE;
+        return Messages.MESSAGE_COMMAND_UPDATE_MODULE;
     }
 
     @Override

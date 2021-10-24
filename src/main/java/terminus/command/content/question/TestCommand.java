@@ -57,7 +57,7 @@ public class TestCommand extends Command {
         ContentManager<Question> contentManager = module.getContentManager(Question.class);
         ArrayList<Question> questions = contentManager.getContents();
         if (questions.isEmpty()) {
-            throw new InvalidCommandException(Messages.NO_QUESTIONS_ERROR_MESSAGE);
+            throw new InvalidCommandException(Messages.ERROR_MESSAGE_NO_QUESTIONS);
         }
 
         GameEnvironment.createNewEnvironment(questions, questionCount).run(); 
