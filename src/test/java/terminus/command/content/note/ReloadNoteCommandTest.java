@@ -1,6 +1,8 @@
 package terminus.command.content.note;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import org.junit.jupiter.api.AfterAll;
@@ -56,10 +58,18 @@ public class ReloadNoteCommandTest {
         Note note2 = new Note("test2", "test2");
         assertEquals(note2.getDisplayInfo(), noteContentManager.getContentData(2));
         moduleStorage.removeNoteFromModule(tempModule, "test2");
-        note2 = new Note("test100", "test100");
+        note2 = new Note("test2", "test100");
         moduleStorage.addNoteFromModule(tempModule, note2);
         Command reloadCommand = commandParser.parseCommand("reload");
         reloadCommand.execute(moduleManager);
         assertEquals(note2.getDisplayInfo(), noteContentManager.getContentData(2));
+        moduleStorage.removeNoteFromModule(tempModule, "test2");
+        assertFalse(noteContentManager.isDuplicateName("test100"));
+        note2 = new Note("test100", "test100");
+        moduleStorage.addNoteFromModule(tempModule, note2);
+        reloadCommand.execute(moduleManager);
+        assertTrue(noteContentManager.isDuplicateName("test100"));
     }
+
+
 }
