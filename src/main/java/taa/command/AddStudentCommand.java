@@ -22,6 +22,11 @@ public class AddStudentCommand extends Command {
         super(argument, ADD_STUDENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the add_student command and adds a student to a particular module.
      *

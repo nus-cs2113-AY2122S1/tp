@@ -24,6 +24,11 @@ public class FindStudentCommand extends Command {
         super(argument, FIND_STUDENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the find_student command and finds students in the module based on a keyword.
      *

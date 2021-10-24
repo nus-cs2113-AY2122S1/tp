@@ -29,6 +29,11 @@ public class EditStudentCommand extends Command {
         super(argument, EDIT_STUDENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the edit_student command and edits the particulars of a student.
      *

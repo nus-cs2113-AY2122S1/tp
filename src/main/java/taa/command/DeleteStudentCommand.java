@@ -21,6 +21,11 @@ public class DeleteStudentCommand extends Command {
         super(argument, DELETE_STUDENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the delete_student command and deletes a student from the module.
      *

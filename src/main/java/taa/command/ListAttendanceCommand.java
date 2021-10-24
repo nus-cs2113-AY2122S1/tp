@@ -23,6 +23,11 @@ public class ListAttendanceCommand extends Command {
         super(argument, LIST_ATTENDANCE_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the list_attendance command and list all the attendance record of a student.
      *

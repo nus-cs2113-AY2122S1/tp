@@ -36,6 +36,11 @@ public class SetMarksCommand extends Command {
         super(argument, SET_MARKS_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the set_marks command and sets the marks of a student's assessment.
      *

@@ -20,6 +20,11 @@ public class ListStudentsCommand extends Command {
         super(argument, LIST_STUDENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the list_student command and lists the students of a particular module.
      *

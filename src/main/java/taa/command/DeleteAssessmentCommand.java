@@ -20,6 +20,11 @@ public class DeleteAssessmentCommand extends Command {
         super(argument, DELETE_ASSESSMENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the delete_assessment command and deletes an assessment with the specified assessment name.
      *

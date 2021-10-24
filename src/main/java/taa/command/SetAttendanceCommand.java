@@ -39,6 +39,11 @@ public class SetAttendanceCommand extends Command {
         super(argument, SET_ATTENDANCE_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the set_attendance command and sets the attendance of a student.
      *

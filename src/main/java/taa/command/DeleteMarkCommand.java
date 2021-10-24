@@ -30,6 +30,11 @@ public class DeleteMarkCommand extends Command {
     }
 
     @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
+    @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
         if (argument.isEmpty()) {
             throw new TaaException(getUsageMessage());

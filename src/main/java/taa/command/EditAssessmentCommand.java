@@ -34,6 +34,11 @@ public class EditAssessmentCommand extends Command {
         super(argument, EDIT_ASSESSMENT_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the edit_assessment command and edits an assessment a particular module.
      * The name, maximum marks and weightage of the assessment can be changed.

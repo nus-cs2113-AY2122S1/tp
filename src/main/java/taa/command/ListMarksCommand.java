@@ -27,6 +27,11 @@ public class ListMarksCommand extends Command {
         super(argument, LIST_MARKS_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the list_marks command and list marks of students for an assessment.
      *

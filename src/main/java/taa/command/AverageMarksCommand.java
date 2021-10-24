@@ -27,6 +27,11 @@ public class AverageMarksCommand extends Command {
         super(argument, AVERAGE_MARKS_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the average_marks command and displays the average mark of an assessment to the user.
      *

@@ -20,6 +20,11 @@ public class ListAssessmentsCommand extends Command {
         super(argument, LIST_ASSESSMENTS_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the list_assessment command and list all the assessments of a particular module.
      *

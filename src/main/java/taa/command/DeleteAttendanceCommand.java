@@ -29,6 +29,11 @@ public class DeleteAttendanceCommand extends Command {
         super(argument, DELETE_ATTENDANCE_ARGUMENT_KEYS);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+
+    }
+
     /**
      * Executes the delete_attendance command and deletes a student's attendance from the attendanceList.
      *
