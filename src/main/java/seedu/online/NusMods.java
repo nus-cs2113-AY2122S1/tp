@@ -60,6 +60,7 @@ public class NusMods {
         while (searchThread.isAlive()) {
             //locks code here while thread is running
         }
+        interruptThread.interrupt();
     }
 
     /**
@@ -179,6 +180,7 @@ public class NusMods {
         while (updateThread.isAlive()) {
             //locks code here while thread is running
         }
+        interruptThread.interrupt();
     }
 
     /**
@@ -217,11 +219,18 @@ public class NusMods {
         }
 
         public void run() {
-            while (thread.isAlive()) {
-                Scanner s = new Scanner(System.in);
-                s.nextLine();
-                thread.interrupt();
+            try {
+                while (System.in.available() == 0) {
+                    try {
+                        sleep(10);
+                    } catch (InterruptedException e) {
+                        return;
+                    }
+                }
+            } catch (IOException e) {
+                TextUi.printErrorMessage();
             }
+            thread.interrupt();
         }
     }
 

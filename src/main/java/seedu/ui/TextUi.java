@@ -120,7 +120,7 @@ public class TextUi {
 
     public static void printUpdateStartMessage() {
         System.out.println("Updating, standby...");
-        System.out.println("Press any key to cancel the update.");
+        System.out.println("Press ENTER to cancel the update.");
     }
 
     public static void printUpdateInterruptMessage() {
