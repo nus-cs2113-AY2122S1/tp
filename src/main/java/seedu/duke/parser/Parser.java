@@ -1,5 +1,4 @@
 package seedu.duke.parser;
-
 import seedu.duke.commands.AddBudgetCommand;
 import seedu.duke.commands.AddCommand;
 import seedu.duke.commands.AddExpenditureCommand;
@@ -21,7 +20,9 @@ import seedu.duke.commands.EditExpenditureCommand;
 import seedu.duke.commands.EditBudgetCommand;
 import seedu.duke.commands.DeleteMultipleLoanCommand;
 import seedu.duke.commands.DeleteAllLoanCommand;
-import seedu.duke.commands.DeleteAllExpenditureCommand;
+import seedu.duke.commands.StatCommand;
+import seedu.duke.commands.StatYearCommand;
+import seedu.duke.commands.StatBudgetCommand;
 import seedu.duke.commands.DeleteSingleLoanCommand;
 import seedu.duke.data.records.Category;
 
@@ -38,6 +39,7 @@ import static seedu.duke.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH_OF_BUDGET;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_EDIT_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_CATEGORY;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_STAT_COMMAND;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
@@ -99,11 +101,36 @@ public class Parser {
         case EditCommand.COMMAND_WORD:
             command = prepareEditCommand(commandParams);
             break;
+        case StatCommand.COMMAND_WORD:
+            command = prepareStatCommand(commandParams);
+            break;
         default:
             command = new InvalidCommand("Sorry. I don't understand your command!");
             break;
         }
         return command;
+    }
+
+    private Command prepareStatCommand(String commandParams) {
+        String statOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
+
+        switch (statOption) {
+        case ("-b"):
+            return prepareStatBudgetCommand(commandParams);
+        case ("-l"):
+            return new StatYearCommand();
+        default:
+            return new InvalidCommand(MESSAGE_INVALID_STAT_COMMAND);
+        }
+    }
+
+    private Command prepareStatBudgetCommand(String commandParams) {
+        String[] split = commandParams.trim().split("m/", 2);
+        assert split[0].equals("");
+
+        int month = Integer.parseInt(split[1].trim());
+
+        return new StatBudgetCommand(month);
     }
 
     private Command prepareEditCommand(String commandParams) {
