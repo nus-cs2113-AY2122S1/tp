@@ -27,6 +27,7 @@ public class CommonFormat {
     public static final String COMMAND_GO = "go";
     public static final String COMMAND_EXPORT = "export";
     public static final String COMMAND_UPDATE = "update";
+    public static final String COMMAND_RELOAD = "reload";
 
     public static final String LOCAL_TIME_FORMAT = "HH:mm";
 

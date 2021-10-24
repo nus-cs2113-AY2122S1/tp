@@ -23,6 +23,7 @@ public class Messages {
     public static final String MESSAGE_COMMAND_MODULE_VIEW = "View all modules available";
     public static final String MESSAGE_COMMAND_EXPORT = "Export all existing notes into a pdf file.";
     public static final String MESSAGE_COMMAND_UPDATE_MODULE = "Updates the module name";
+    public static final String MESSAGE_COMMAND_RELOAD = "Reload the contents of notes for this module.";
 
     public static final String CONTENT_MESSAGE_HEADER = "List of Content\n---------------\n";
     public static final String CONTENT_MESSAGE_FOOTER =
@@ -33,6 +34,7 @@ public class Messages {
     public static final String MESSAGE_RESPONSE_MODULE_FORMAT = "%d. %s";
     public static final String MESSAGE_RESPONSE_NO_MODULES = "You do not have any modules.";
     public static final String MESSAGE_RESPONSE_MODULE_DELETE = "Deleted module %s.";
+    public static final String MESSAGE_RESPONSE_RELOAD_NOTE = "Your Notes for %s has been reloaded.";
     
     /*
      * Error Messages 

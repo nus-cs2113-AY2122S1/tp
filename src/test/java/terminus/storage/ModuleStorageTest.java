@@ -213,7 +213,6 @@ public class ModuleStorageTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        pdf.delete();
 
     }
 
