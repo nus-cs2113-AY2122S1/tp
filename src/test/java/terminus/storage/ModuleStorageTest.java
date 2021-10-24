@@ -9,8 +9,10 @@ import com.google.gson.JsonSyntaxException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -42,6 +44,7 @@ public class ModuleStorageTest {
     static void reset() throws IOException {
         ModuleStorage moduleStorage = ModuleStorage.getInstance();
         moduleStorage.cleanAfterDeleteModule("test");
+        moduleStorage.cleanAfterDeleteModule("test1");
     }
 
     /**
@@ -67,11 +70,13 @@ public class ModuleStorageTest {
     }
 
     @AfterEach
-    void reset_filepath() {
+    void reset_filepath() throws IOException {
         File pdf = new File(Paths.get(RESOURCE_FOLDER.toString(), tempModule + CommonFormat.PDF_FORMAT)
                 .toString());
         pdf.delete();
         this.moduleStorage.init(SAVE_FILE);
+        this.moduleStorage.cleanAfterDeleteModule("test");
+        this.moduleStorage.cleanAfterDeleteModule("test1");
     }
 
     @Test
@@ -228,5 +233,55 @@ public class ModuleStorageTest {
         assertThrows(IOException.class,
             () -> this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents()));
 
+    }
+
+    @Test
+    void updateModuleDirectory_success() throws IOException {
+        Path oldPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
+        Path newPath = Paths.get(RESOURCE_FOLDER.toString(), "test1");
+        assertTrue(Files.exists(oldPath));
+        assertFalse(Files.exists(newPath));
+        this.moduleStorage.updateModuleDirectory(tempModule, "test1");
+        assertTrue(Files.exists(newPath));
+        assertFalse(Files.exists(oldPath));
+    }
+
+    @Test
+    void updateModuleDirectory_newDirectoryExists() throws IOException {
+        Path oldPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
+        Path newPath = Paths.get(RESOURCE_FOLDER.toString(), "test1");
+        Files.createDirectories(newPath);
+        assertTrue(Files.exists(oldPath));
+        assertTrue(Files.exists(newPath));
+        this.moduleStorage.updateModuleDirectory(tempModule, "test1");
+        assertTrue(Files.exists(newPath));
+        assertTrue(Files.exists(oldPath));
+    }
+
+    @Test
+    void updateModuleDirectory_noDirectoryExists() throws IOException {
+        Path oldPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
+        Path newPath = Paths.get(RESOURCE_FOLDER.toString(), "test1");
+        this.moduleStorage.cleanAfterDeleteModule(tempModule);
+        assertFalse(Files.exists(oldPath));
+        assertFalse(Files.exists(newPath));
+        this.moduleStorage.updateModuleDirectory(tempModule, "test1");
+        assertTrue(Files.exists(newPath));
+        assertFalse(Files.exists(oldPath));
+    }
+
+    @Test
+    void loadNotesFromModule_success() throws IOException {
+        moduleStorage.loadNotesFromModule(moduleManager, tempModule);
+        assertEquals(1, moduleManager.getModule(tempModule).getContentManager(Note.class).getTotalContents());
+        Path nonTextFilePath = Paths.get(RESOURCE_FOLDER.toString(), tempModule, "test1.ser");
+        File nonTextFile = new File(nonTextFilePath.toString());
+        FileOutputStream output = new FileOutputStream(nonTextFile);
+        ObjectOutputStream objectOutput = new ObjectOutputStream(output);
+        objectOutput.writeObject("save");
+        objectOutput.flush();
+        objectOutput.close();
+        moduleStorage.loadNotesFromModule(moduleManager, tempModule);
+        assertEquals(1, moduleManager.getModule(tempModule).getContentManager(Note.class).getTotalContents());
     }
 }

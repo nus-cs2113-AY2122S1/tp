@@ -27,6 +27,7 @@ public class CommonFormat {
     public static final String COMMAND_GO = "go";
     public static final String COMMAND_EXPORT = "export";
     public static final String COMMAND_UPDATE = "update";
+    public static final String COMMAND_RELOAD = "reload";
 
     public static final String LOCAL_TIME_FORMAT = "HH:mm";
 
@@ -53,6 +54,7 @@ public class CommonFormat {
      * Notes storage setting 
      */
     public static final String EXTENSION_TEXT_FILE = ".txt";
+    public static final String CONTENT_TYPE_TEXT_FILE = "text/plain";
 
     public static final ArrayList<Character> ILLEGAL_CHARACTERS = new ArrayList<>(
             Arrays.asList('/', '\n', '\r', '\t', '\0', '\f', '`', '?', '*', '\\', '<', '>', '|', '\"', ':', '.'));
