@@ -15,14 +15,7 @@ import static java.lang.Double.parseDouble;
 public class ModuleStorage {
     private static Logger logger = Logger.getLogger("ModuleStorageLog");
 
-    public static ArrayList<Module> load() throws IOException {
-        logger.log(Level.INFO, "Start loading module data");
-        InputStream inputStream = ModuleStorage.class.getResourceAsStream(
-                "/modules.csv");
-        return readModules(inputStream);
-    }
-
-    private static ArrayList<Module> readModules(InputStream inputStream) throws IOException {
+    public ArrayList<Module> readModuleList(InputStream inputStream) throws IOException {
         ArrayList<Module> moduleList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String line = br.readLine();
@@ -36,7 +29,7 @@ public class ModuleStorage {
         return moduleList;
     }
 
-    public static String[] extractAttributes(String line) {
+    private String[] extractAttributes(String line) {
         String[] attributes = line.split(",");
         if (attributes.length == 3) {
             return attributes;

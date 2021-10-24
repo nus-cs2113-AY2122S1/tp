@@ -23,7 +23,7 @@ public class RemoveUniCommand extends Command {
             assert universitySelectedList.getSize() != 0;
             universitySelectedList.removeUniversity(universityToRemove.getName());
             assert !universitySelectedList.searchUniversity(universityToRemove.getName());
-            SelectedUniversityStorage.write(universitySelectedList);
+            storage.updateSelectedUniversityList(universitySelectedList);
             System.out.println("This university is removed: ");
             Ui.printUniversity(universityToRemove);
         }
@@ -41,7 +41,7 @@ public class RemoveUniCommand extends Command {
             assert universitySelectedList.getSize() != 0;
             universitySelectedList.removeUniversity(universityToRemove.getName());
             assert !universitySelectedList.searchUniversity(universityToRemove.getName());
-            SelectedUniversityStorage.write(universitySelectedList);
+            storage.updateSelectedUniversityList(universitySelectedList);
             System.out.println("This university is removed: ");
             Ui.printUniversity(universityToRemove);
         }

@@ -4,10 +4,7 @@ import seedu.duke.commands.Command;
 import seedu.duke.commands.ExitCommand;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.parser.Parser;
-import seedu.duke.storage.ModuleStorage;
-import seedu.duke.storage.SelectedModuleStorage;
-import seedu.duke.storage.SelectedUniversityStorage;
-import seedu.duke.storage.UniversityStorage;
+import seedu.duke.storage.Storage;
 import seedu.duke.ui.Ui;
 import seedu.duke.universities.UniversityList;
 
@@ -19,19 +16,18 @@ public class Duke {
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-
+        Storage storage = new Storage();
         try {
-            UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
-            ModuleList moduleMasterList = new ModuleList(ModuleStorage.load());
+            Ui.welcome();
+            UniversityList universityMasterList = new UniversityList(storage.readUniversityList());
+            ModuleList moduleMasterList = new ModuleList(storage.readModuleList());
             UniversityList universitySelectedList = new UniversityList(
-                    SelectedUniversityStorage.load());
+                    storage.readSelectedUniversityList(universityMasterList));
             ModuleList moduleSelectedList = new ModuleList(
-                    SelectedModuleStorage.load());
+                    storage.readSelectedModuleList());
             Parser mainParser = new Parser(universityMasterList, moduleMasterList,
                     universitySelectedList, moduleSelectedList);
             Command cmd = null;
-            Ui.welcome();
-
             do {
                 try {
                     Ui.printLineSeparator();

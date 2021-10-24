@@ -23,7 +23,7 @@ public class AddModCommand extends Command {
                 .getModuleName().equals(moduleToAdd.getModuleName());
         assert moduleSelectedList.get(moduleSelectedList.getSize() - 1)
                 .getModuleCode().equals(moduleToAdd.getModuleCode());
-        SelectedModuleStorage.write(moduleSelectedList);
+        storage.updateSelectedModuleList(moduleSelectedList);
         System.out.println("New module added: ");
         Ui.printModule(moduleToAdd, moduleIndexToAdd);
     }
@@ -41,7 +41,7 @@ public class AddModCommand extends Command {
                 .getModuleName().equals(moduleToAdd.getModuleName());
         assert moduleSelectedList.get(moduleSelectedList.getSize() - 1)
                 .getModuleCode().equals(moduleToAdd.getModuleCode());
-        SelectedModuleStorage.write(moduleSelectedList);
+        storage.updateSelectedModuleList(moduleSelectedList);
         System.out.println("New module added: ");
         Ui.printModule(moduleToAdd, moduleIndexToAdd);
     }
