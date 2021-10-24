@@ -3,6 +3,7 @@ package happybit.ui;
 import happybit.command.Command;
 import happybit.exception.HaBitCommandException;
 import happybit.exception.HaBitParserException;
+import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.goal.GoalType;
 import happybit.parser.Parser;
@@ -46,6 +47,7 @@ public class UiMain extends UiManager {
         this.goalList = goalList;
         this.printManager = printManager;
         this.storage = storage;
+        loadData();
     }
 
     /**
@@ -65,6 +67,17 @@ public class UiMain extends UiManager {
      * visualise the actual methods that can be called from outside this class.
      * =========================================================================
      */
+
+    /**
+     * Loads in data from an external storage.
+     */
+    private void loadData() {
+        try {
+            this.goalList = this.storage.load();
+        } catch (HaBitStorageException e) {
+            printManager.showError(e.getMessage());
+        }
+    }
 
     /**
      * Reads in user input and performs the corresponding command.
@@ -90,7 +103,19 @@ public class UiMain extends UiManager {
                 resetDisplay();
             }
         }
+        exportData();
         return isReturn;
+    }
+
+    /**
+     * Exports data to an external storage.
+     */
+    private void exportData() {
+        try {
+            storage.export(goalList.getGoalList());
+        } catch (HaBitStorageException e) {
+            printManager.showError(e.getMessage());
+        }
     }
 
     /**
