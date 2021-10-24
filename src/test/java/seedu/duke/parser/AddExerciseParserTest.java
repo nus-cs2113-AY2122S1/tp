@@ -5,6 +5,7 @@ import seedu.duke.command.Command;
 import seedu.duke.command.exercise.AddExerciseCommand;
 import seedu.duke.command.misc.IncorrectCommand;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AddExerciseParserTest {
@@ -15,7 +16,8 @@ class AddExerciseParserTest {
     void parseInput_validInputs_returnsAddExerciseCommand() {
         parser = new AddExerciseParser("add testExercise, 5 20, 1");
         result = parser.parseInput();
-        assertTrue(result instanceof AddExerciseCommand);
+        //assertTrue(result instanceof AddExerciseCommand);
+        assertEquals(result.getClass(), AddExerciseCommand.class);
     }
 
     @Test
@@ -60,6 +62,4 @@ class AddExerciseParserTest {
         result = parser.parseInput();
         assertTrue(result instanceof IncorrectCommand);
     }
-
-
 }
