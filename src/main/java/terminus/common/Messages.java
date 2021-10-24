@@ -96,4 +96,5 @@ public class Messages {
      */
     public static final String SUCCESSFUL_EXPORT = "Exported notes! Check the data folder.";
     public static final String FAIL_TO_EXPORT = "Unable to export file to pdf.";
+    public static final String UPDATE_MODULE_RESPONSE_MESSAGE = "Updated %s to %s successfully.";
 }

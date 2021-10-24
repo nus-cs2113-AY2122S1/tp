@@ -6,10 +6,12 @@
 - [Purpose](#purpose)
 - [Getting Started](#getting-started)
 - [Using this Guide](#using-this-guide)
+- [Quick guide to use Terminus](#quick-guide-to-use-terminus)
 - [Section: Module Management](#section-module-management)
     * [Accessing the module management workspace : `module`](#accessing-the-module-management-workspace)
-    * [Adding a new module : `add "<module_code>"`](#adding-a-new-module)
+    * [Adding a module : `add "<module_code>"`](#adding-a-module)
     * [Deleting a module : `delete <index>`](#deleting-a-module)
+    * [Updating a module information :`update <index> "<new_module_code>"`](#updating-a-module)
     * [Viewing module information `view`](#viewing-module-information)
 - [Section: Module](#section-module)
     * [Accessing module workspace : `go <module_code>`](#accessing-module-workspace)
@@ -18,6 +20,7 @@
     * [Adding a Note : `add "<name>" "<content>"`](#adding-a-note)
     * [Deleting a Note : `delete <index>`](#deleting-a-note)
     * [Viewing note information : `view {index}`](#viewing-note-information)
+    * [Exporting all notes: `export`](#exporting-all-notes)
 - [Section: Schedule](#section-schedule)
     * [Accessing schedule workspace : `schedule`](#accessing-schedule-workspace)
     * [Adding a Schedule : `add "<description>" "<day>" "<start_time>" "<duration>" "<zoom_link>"`](#adding-a-schedule)
@@ -89,7 +92,7 @@ guide on all existing commands as well as aiding you in installing `TerminNUS`.
     - timetable
     - help
     - exit
-8. For more information of each command, please refer to the [Features](#Section:-Note) below.
+8. For more information of each command, please refer to the [Features](#section-note) below.
 
 ___
 
@@ -105,7 +108,7 @@ The below table represents what each means.
 | `{value}` |  The value is optional, and including it may provide different results.|
 | `<value>` | The value is required for the command to work properly.|
 |`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
-|`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hournotation**. For example, `14:20` is valid which represents `2:20 pm`.|
+|`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.|
 |`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
 |`duration`|The `duration` must be a **positive** number and upon addition with `start_time`, it must not exceed the 24-hour limit of the day. For example, if `start_time` is `21:00`, `2` is a valid `duration` but `-1` and `4` are not.|
 
@@ -114,8 +117,25 @@ Terminologies used throughout this guide:
 | Terminology | Description |
 | ----------- | ----------- |
 | workspace |  A workspace is the environment in which you are currently assessing. For example, when you want to access some files inside a folder, you will need to enter the folder first. As such the folder is a **workspace**.|
-|default workspace|The very first workspace when executing the TermiNUS program.|
+|workspace indicator|A workspace indicator shows the current workspace you are currently in when using `TermiNUS`. For example, in the expected output for commands, you will be able to see `[] >>>` which means you are in the **default workspace**, `[module] >>>` which means you are in the **module management workspace**. etc.|
+|default workspace|The very first workspace when executing the `TermiNUS` program. For example, `[] >>>` indicates you are currently in the **default workspace**.|
 |module|A module refers to a NUS module. For example, `CS2113T` is a module.|
+
+---
+
+## Quick guide to use Terminus
+
+1. Before adding any **note**, **schedule** and **question**, we will need to have a **module** first in which these items belong to.
+2. You can do so by adding a module within the **module management workspace**. Please refer to: [Section: Module Management](#section-module-management).
+3. After adding a module, you can proceed to add items such as **note**, **schedule** and **question** into it.
+4. But firstly you will need to enter the **module workspace** in which you have just created. Please refer to: [Section: Module](#section-module).
+5. Once entering the **module workspace**, you can add the items related to the module here.
+   1. Please refer to [Section: Note](#section-note) for any related **Note** item.
+   2. Please refer to [Section: Schedule](#section-schedule) for any related **Schedule** item.
+   3. Please refer to [Section: Question](#section-question) for any related **Question** item.
+6. Once you are done, you can exit **TermiNUS** using the `exit` command.
+
+Hope you enjoy your experience with TermiNUS!
 
 ---
 
@@ -145,6 +165,7 @@ Type any of the following to get started:
 > help
 > view
 > back
+> update
 > delete
 
 [module] >>> 
@@ -156,12 +177,13 @@ List of Module Management workspace commands:
 | ----------- | ----------- |
 |add|add a module in TermiNUS|
 |delete|delete a module in TermiNUS|
+|update|update a module name currently in TermiNUS|
 |view|view modules information currently in TermiNUS|
 |help|view all commands and their usage within the module management workspace|
 |back|escape and return to the default workspace|
 |exit|exit and closes TermiNUS|
 
-### Adding a new module
+### Adding a module
 
 **Format:** `add "<module_code>"`
 
@@ -198,6 +220,22 @@ Expected Output:
 ```
 [module] >>> delete 1
 Deleted module CS2113T.
+[module] >>> 
+```
+
+### Updating a module
+
+**Format:** `update <index> "<new_module_code>"`
+
+Updates a module name in the module management workspace.
+> ⚠️The `<new_module_code>` will have the same restrictions as the [add command](#adding-a-new-module)
+Example: `update 1 "CS2113"`
+
+Expected Output:
+
+```
+[module] >>> update 1 "CS2113"
+Updated CS2113T to CS2113 successfully.
 [module] >>> 
 ```
 
@@ -293,6 +331,7 @@ Type any of the following to get started:
 > view
 > back
 > delete
+> export
 
 [CS2113T > note] >>> 
 ```
@@ -304,6 +343,7 @@ List of Note workspace commands:
 |add|add a note for the module|
 |delete|delete a note from the module|
 |view|view notes information from the module|
+|export|export all current notes for the module as a pdf|
 |help|view all commands and their usage in the note workspace|
 |back|escape and return to the module workspace|
 |exit|exit and closes TermiNUS|
@@ -380,6 +420,26 @@ Name: coding style
 Content:
 switch case identation should be aligned.
 
+[CS2113T > note] >>> 
+```
+
+### Exporting all notes 
+
+**Format:** `export`
+
+Exports all notes within the note workspace as a PDF file.
+> ⚠️ To export a file, there must be at least 1 note contained within the note workspace.
+
+> ⚠️ The export process can take a while.   
+> A very large text can cause the program to take a long time to export.
+
+Example: `export`
+
+Expected Output:
+
+```
+[CS2113T > note] >>> export
+Exported notes! Check the data folder.
 [CS2113T > note] >>> 
 ```
 
@@ -812,6 +872,11 @@ Your question on 'What is Java?' has been added!
 ___  
 
 ## FAQ
+**Q:** Can I edit the information in the`data` directory?
+**A:** Yes! **TermiNUS** saves and loads your information form the `data` directory, editing the files
+in the `data` folder works. We recommend that you update the **contents** of any notes `.txt` in the 
+`data/module_name` directory. However, we do not recommend modifying any configuration file 
+or renaming any file/folders. You should use **TermiNUS** instead to edit any information.
 
 ___  
 
@@ -828,11 +893,15 @@ ___
 ___  
 
 ## Command Summary
+> ⚠️ To understand which command applies to which workspace mentioned below, 
+> please refer to [Workspace Command Summary](#workspace-command-summary)
 
 | Workspace   | Action | Format| Examples |
 | ----------- | ----------- | ----------- |----------- |
 |module management|add module|`add "<module_code>"`|`add "CS2113T"`|
+|module management|update module |`update <index> "<new_module_code>"`|`update 1 "CS2113"`|
 |note|add note|`add "<name>" "<content>"`|`add "Note1" "Hello world."`|
+|note|export note|`export`|`export`|
 |schedule|add schedule|`add "<description>" "<day>" "<start_time>" "<duration>" <zoom_link>"`|`add "CS2113T Tutorial 1" "Thursday" "10:00" "1" "https://zoom.us/test"`|
 |question|add question|`add "<question>" "<answer>"`|`add "What is 1+1?" "2"`|
 |question|active learning|`test {count}`|`test`, `test 3`|
