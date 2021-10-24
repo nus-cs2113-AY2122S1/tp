@@ -162,7 +162,7 @@ global food wastage.
 
 Brings developers through the requirements of Users the *Food-O-Rama* team considered when building this programme.
 
-| Version | As a ... | I want to ... | So that I can ...|
+| Version | As a ... | I want to ... | So that I can ... |
 | -------- | ---------- | --------------- | ------------------ |
 | v1.0 | Restaurant owner | Delete an entry for a particular dish | Change the tracking to adapt to a change in my menu |
 | v1.0 | Restaurant owner | Use a help function | Get familiar with the application |
