@@ -1,5 +1,7 @@
 package seedu.duke.commands;
 
+import java.util.List;
+
 import static seedu.duke.commands.RemoveCommand.COMMAND_REMOVE;
 
 /**
@@ -26,6 +28,8 @@ public class Parser {
             return new RemoveCommand(input);
         } else if (input.startsWith(ListCommand.COMMAND_WORD)) {
             return new ListCommand(input);
+        } else if (input.startsWith(SearchCommand.COMMAND_WORD)) {
+            return new SearchCommand(input);
         } else if (input.startsWith(AddCommand.COMMAND_WORD)) {
             return new AddCommand(input);
         } else if (input.startsWith(LoanCommand.COMMAND_WORD)) {
