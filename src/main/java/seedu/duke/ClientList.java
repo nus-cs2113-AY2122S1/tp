@@ -6,6 +6,8 @@ import java.util.ArrayList;
  * List of clients.
  */
 public class ClientList {
+    private static final String CLIENT_NOT_FOUND_MESSAGE = "Client cannot be found. Please try another client ID";
+
     private static ArrayList<Client> clients;
     private static int clientCount = 0;
 
@@ -46,6 +48,15 @@ public class ClientList {
         return clients.get(index);
     }
 
+    public Client getClientById(String clientId) throws TourPlannerException {
+        for (int i = 0; i < clientCount; i++) {
+            if (clients.get(i).getId().equals(clientId)) {
+                return clients.get(i);
+            }
+        }
+        throw new TourPlannerException(CLIENT_NOT_FOUND_MESSAGE);
+    }
+
     /**
      * Main method for clearing the client list.
      */
@@ -60,14 +71,9 @@ public class ClientList {
 
     /**
      * Main method for deleting a client.
-     *
-     * @param clientIndex the index of the specific client to be deleted from the list.
-     * @param ui          user interface of TourPlanner
      */
-    public void cut(int clientIndex, Ui ui) {
-        Client client = clients.get(clientIndex);
-        ui.showCut(client);
-        clients.remove(clientIndex);
+    public void cut(Client client) {
+        clients.remove(client);
         clientCount--;
     }
 }

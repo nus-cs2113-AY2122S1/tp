@@ -5,7 +5,7 @@ public class ClientPackage {
     private final Tour tour;
     private final Flight flight;
 
-    public ClientPackage(Client client, Tour tour, Flight flight, ClientPackageList clientPackages) {
+    public ClientPackage(Client client, Tour tour, Flight flight) {
         this.client = client;
         this.tour = tour;
         this.flight = flight;

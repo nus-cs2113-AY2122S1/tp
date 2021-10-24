@@ -88,8 +88,8 @@ public class Parser {
 
         switch (identifier) {
         case "-c":
-            prefixes = Arrays.asList("/cn", "/m");
-            repeatPrefixChecker = 3;
+            prefixes = Arrays.asList("/n", "/cn", "/m");
+            repeatPrefixChecker = 4;
             break;
         case "-t":
             prefixes = Arrays.asList("/n", "/p");
@@ -276,11 +276,14 @@ public class Parser {
         int index;
 
         switch (prefix) {
-        case "/cn":
+        case "/n":
             index = 1;
             break;
-        case "/m":
+        case "/cn":
             index = 2;
+            break;
+        case "/m":
+            index = 3;
             break;
         default:
             index = 0;
@@ -321,10 +324,6 @@ public class Parser {
      * @param params full user's argument/params string after splitting
      * @return the prepared command
      */
-    private static Command parseCut(String params) {
-        int clientIndex = stringToInt(params) - 1;
-        return new CutCommand(clientIndex);
-    }
 
     /**
      * Parses string containing an integer value to int.
@@ -367,7 +366,7 @@ public class Parser {
         default:
             break;
         }
-        return null;
+        throw new TourPlannerException(ERROR_INVALID_INPUT);
     }
 
     private static Command parseList(String params) throws TourPlannerException {
@@ -380,6 +379,19 @@ public class Parser {
             return new ListFlightCommand();
         case "-p":
             return new ListClientPackageCommand();
+        default:
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
+        }
+    }
+
+    private static Command parseCut(String params) throws TourPlannerException {
+        String[] identifierAndArgs = splitCommandString(params, " ");
+        String identifier = identifierAndArgs[0];
+        String args = identifierAndArgs[1];
+
+        switch (identifier) {
+        case "-c":
+            return new CutClientCommand(args);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
