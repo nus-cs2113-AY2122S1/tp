@@ -527,6 +527,13 @@ public class Ui {
                 + LINE_DIVIDER);
     }
 
+    public void printEnterLimitFor(String name) {
+        assert name != null : "name cannot be null";
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Enter the limit for " + name + " in kg:" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
     public String getFindMissingParamMsg() {
         return FIND_MISSING_PARAM;
     }
@@ -556,5 +563,17 @@ public class Ui {
     public void clearTerminalAndPrintNewPage() {
         ClearScreen.clearConsole();
         System.out.println(NEWPAGE_MESSSAGE);
+    }
+
+    public void printLimitExceeded(String input) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Wastage of " + input + " has exceeded the limit" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printLimitSet(String name, double limit) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "The limit of " + name + " is now " + limit + " kg" + System.lineSeparator()
+                + LINE_DIVIDER);
     }
 }

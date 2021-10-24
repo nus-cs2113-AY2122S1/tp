@@ -24,6 +24,7 @@ public class Dish implements Comparable<Dish> {
         this.dishName = dishName;
         this.wastage = 0.0;
         this.ingredientContribution = 0.0;
+        this.limit = -1;
     }
 
     public Dish(String dishName, double wastage, double ingredientContribution) {
@@ -32,6 +33,7 @@ public class Dish implements Comparable<Dish> {
         this.dishName = dishName;
         this.wastage = wastage;
         this.ingredientContribution = ingredientContribution;
+        this.limit = -1;
     }
 
     public String getDishName() {
@@ -47,7 +49,7 @@ public class Dish implements Comparable<Dish> {
     }
 
     public void setLimitValue() throws FoodoramaException {
-        ui.printEnterWeightOf(dishName);
+        ui.printEnterLimitFor(dishName);
         Scanner in = new Scanner(System.in);
         String inputLimit = in.nextLine();
         double userLimit;
@@ -57,6 +59,7 @@ public class Dish implements Comparable<Dish> {
             throw new FoodoramaException(ui.getInvalidNumberMsg());
         }
         limit = userLimit;
+        ui.printLimitSet(dishName, limit);
     }
 
     public double getIngredientContribution() {
@@ -103,6 +106,9 @@ public class Dish implements Comparable<Dish> {
         assert inputWastage > 0 : "Adding negative waste is impossible";
         wastage += inputWastage;
         ui.printWastage(dishName, wastage);
+        if(wastage >= limit && limit != -1) {
+            ui.printLimitExceeded(dishName);
+        }
         if (!parts.isEmpty()) {
             //Todo proportion stuff and prevent feedback loop
             ingredientContribution = wastage / parts.size();
@@ -116,7 +122,15 @@ public class Dish implements Comparable<Dish> {
 
     @Override
     public String toString() {
-        String limitString = (this.limit == 0) ? "No limit has been set" : String.valueOf(limit) ;
+        String limitString;
+        if(limit == -1) {
+            limitString = "No limit has been set";
+        } else {
+            limitString = String.valueOf(limit);
+            if(limit < wastage) {
+                limitString  = limitString + " (exceeded)";
+            }
+        }
         String partList = "";
         if (!parts.isEmpty()) {
             for (Ingredient ingredient : parts) {

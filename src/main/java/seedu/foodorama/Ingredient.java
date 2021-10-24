@@ -17,12 +17,14 @@ public class Ingredient implements  Comparable<Ingredient> {
         this.ingredientName = ingredientName;
         this.ingredientWeight = ingredientWeight;
         this.ingredientWasteIngr = 0;
+        this.limit = -1;
     }
 
     public Ingredient(String ingredientName, double ingredientWeight, double ingredientWaste) {
         this.ingredientName = ingredientName;
         this.ingredientWeight = ingredientWeight;
         this.ingredientWasteIngr = ingredientWaste;
+        this.limit = -1;
     }
 
     public String getIngredientName() {
@@ -52,7 +54,7 @@ public class Ingredient implements  Comparable<Ingredient> {
     }
 
     public void setLimitValue() throws FoodoramaException {
-        ui.printEnterWeightOf(ingredientName);
+        ui.printEnterLimitFor(ingredientName);
         Scanner in = new Scanner(System.in);
         String inputLimit = in.nextLine();
         double userLimit;
@@ -62,6 +64,7 @@ public class Ingredient implements  Comparable<Ingredient> {
             throw new FoodoramaException(ui.getInvalidNumberMsg());
         }
         limit = userLimit;
+        ui.printLimitSet(ingredientName, limit);
     }
 
     public void addWaste() throws FoodoramaException {
@@ -77,6 +80,9 @@ public class Ingredient implements  Comparable<Ingredient> {
         ingredientWasteIngr += ingredientWeightValue;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
         ui.printWastage(ingredientName, totalWaste);
+        if(totalWaste >= limit && limit != -1) {
+            ui.printLimitExceeded(ingredientName);
+        }
     }
 
     public double getWastage() {
@@ -85,8 +91,16 @@ public class Ingredient implements  Comparable<Ingredient> {
 
     @Override
     public String toString() {
-        String limitString = (this.limit == 0) ? "No limit has been set" : String.valueOf(limit) ;
         double totalWaste = ingredientWasteIngr + ingredientWasteDish;
+        String limitString;
+        if(limit == -1) {
+            limitString = "No limit has been set";
+        } else {
+            limitString = String.valueOf(limit);
+            if(limit < totalWaste) {
+                limitString  = limitString + " (exceeded)";
+            }
+        }
         //Todo add parts
         return ingredientName + '\n'
                 + "   Storage: " + ingredientWeight + " kg" +  System.lineSeparator()
