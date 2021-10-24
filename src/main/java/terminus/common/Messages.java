@@ -35,9 +35,9 @@ public class Messages {
     public static final String MESSAGE_RESPONSE_NO_MODULES = "You do not have any modules.";
     public static final String MESSAGE_RESPONSE_MODULE_DELETE = "Deleted module %s.";
     public static final String MESSAGE_RESPONSE_RELOAD_NOTE = "Your Notes for %s has been reloaded.";
-    
+
     /*
-     * Error Messages 
+     * Error Messages
      */
     public static final String ERROR_MESSAGE_TAG = "Error: ";
     public static final String INVALID_ARGUMENT_FORMAT_MESSAGE_EXCEPTION = "%s %s";
@@ -64,6 +64,7 @@ public class Messages {
     public static final String EMPTY_CONTENT_LIST_MESSAGE = "You do not have any content in this workspace.\n";
     public static final String ERROR_MESSAGE_MODULE_WHITESPACE = "Module name cannot contain any whitespaces!";
     public static final String ERROR_MESSAGE_MODULE_EXIST = "Module already exist!";
+    public static final String ERROR_INVALID_FILE_NAME = "Name provided is invalid.";
 
     /*
      * Banners
@@ -83,7 +84,7 @@ public class Messages {
     public static final String EMPTY_SCHEDULE_FOR_THE_WEEK = "You have no schedule for the week.\n";
 
     /*
-     * Active Recall 
+     * Active Recall
      */
     public static final String ACTIVE_RECALL_ENTER_TO_CONTINUE_MESSAGE =
         "When you are ready, press [Enter] to continue.";
@@ -94,7 +95,7 @@ public class Messages {
         "[1] Easy; [2] Normal / Same; [3] Hard; [E] Exit"};
 
     /*
-     * Notes Export 
+     * Notes Export
      */
     public static final String SUCCESSFUL_EXPORT = "Exported notes! Check the data folder.";
     public static final String FAIL_TO_EXPORT = "Unable to export file to pdf.";

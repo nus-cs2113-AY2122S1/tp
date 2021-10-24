@@ -224,4 +224,42 @@ public class ModuleStorageTest {
             () -> this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents()));
 
     }
+
+    @Test
+    void updateModuleDirectory_success() throws IOException {
+        Path oldPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
+        Path newPath = Paths.get(RESOURCE_FOLDER.toString(), "test1");
+        assertTrue(Files.exists(oldPath));
+        assertFalse(Files.exists(newPath));
+        this.moduleStorage.updateModuleDirectory(tempModule, "test1");
+        assertTrue(Files.exists(newPath));
+        assertFalse(Files.exists(oldPath));
+        this.moduleStorage.cleanAfterDeleteModule("test1");
+    }
+
+    @Test
+    void updateModuleDirectory_newDirectoryExists() throws IOException {
+        Path oldPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
+        Path newPath = Paths.get(RESOURCE_FOLDER.toString(), "test1");
+        Files.createDirectories(newPath);
+        assertTrue(Files.exists(oldPath));
+        assertTrue(Files.exists(newPath));
+        this.moduleStorage.updateModuleDirectory(tempModule, "test1");
+        assertTrue(Files.exists(newPath));
+        assertTrue(Files.exists(oldPath));
+        this.moduleStorage.cleanAfterDeleteModule("test1");
+    }
+
+    @Test
+    void updateModuleDirectory_noDirectoryExists() throws IOException {
+        Path oldPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
+        Path newPath = Paths.get(RESOURCE_FOLDER.toString(), "test1");
+        this.moduleStorage.cleanAfterDeleteModule(tempModule);
+        assertFalse(Files.exists(oldPath));
+        assertFalse(Files.exists(newPath));
+        this.moduleStorage.updateModuleDirectory(tempModule, "test1");
+        assertTrue(Files.exists(newPath));
+        assertFalse(Files.exists(oldPath));
+        this.moduleStorage.cleanAfterDeleteModule("test1");
+    }
 }
