@@ -16,7 +16,7 @@ public class ErrorGame extends Game {
         ui = new TextUi();
         inputLines = new ArrayList<>();
         wordLines = getWordLines(targetWordSet, wordsPerLine);
-        startGame();
+        runGame();
     }
 
     public boolean readyToStartGame() {

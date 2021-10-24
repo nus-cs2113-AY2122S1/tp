@@ -47,8 +47,13 @@ public class WordLimitGame extends Game {
         eachWord = new ArrayList<String>(eachWord.subList(0, wordLimit));
     }
 
-    public void runGame() throws InvalidStringInputException {
-        trimContent(wordLimit);
+    public void runGame() {
+        try {
+            trimContent(wordLimit);
+        } catch (InvalidStringInputException e) {
+            e.printStackTrace();
+            //do something
+        }
         boolean isExit = false;
         int totalError = 0;
         while (!isExit) {
@@ -71,7 +76,12 @@ public class WordLimitGame extends Game {
                 break;
             }
             WordLimitDataProcessor recordError =  new WordLimitDataProcessor(fullCommand, temp);
-            totalError += recordError.getError();
+            try {
+                totalError += recordError.getError();
+            } catch (InvalidStringInputException e) {
+                e.printStackTrace();
+                //do something
+            }
             //isExit = recordError.getIsExit();
             ui.printGameMode1Progress(gameIndex,getTotalSentence());
             if (gameIndex >= getTotalSentence()) {

@@ -17,5 +17,5 @@ public abstract class Game {
         return (double) (endTime - startTime) / 1000;
     }
 
-    abstract void runGame();
+    public abstract void runGame();
 }

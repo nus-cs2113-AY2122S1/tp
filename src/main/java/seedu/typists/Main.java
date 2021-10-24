@@ -1,95 +1,54 @@
 package seedu.typists;
 
 import seedu.typists.content.Content;
-import seedu.typists.game.ErrorGame;
-import seedu.typists.game.DataProcessor;
-import seedu.typists.game.TimeModeGame;
-import seedu.typists.parser.Parser;
+import seedu.typists.parser.Command;
+import seedu.typists.parser.CommandFactory;
 import seedu.typists.ui.TextUi;
 
 import seedu.typists.game.WordLimitGame;
-import seedu.typists.exception.FaultyInputException;
-import seedu.typists.exception.InvalidStringInputException;
 import seedu.typists.storage.StorageFile;
 
-import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 
-//solution below adapted from https://github.com/se-edu/addressbook-level2/
 public class Main {
     /**
      * Version info of the program.
      */
     public static final String VERSION = "Typist - Version 1.0";
     public static final int LINE_LENGTH = 10;
-    TextUi uiBot;
+    public static Content content;
+    public static TextUi uiBot;
     //Parser parseBot;
     WordLimitGame wordLimitGame;
     StorageFile storage;
-    Content content;
+
 
     public Main() {
-        this.uiBot = new TextUi();
+        uiBot = new TextUi();
         this.storage = new StorageFile();
-        this.content = new Content();
+        content = new Content();
     }
 
     public void start() {
         uiBot.showWelcomeMessage(VERSION);
     }
 
-    public void startWordLimitGame() throws InvalidStringInputException {
-        uiBot.printKeyboard();
-        this.wordLimitGame = new WordLimitGame(content.getContent(), 5);
-        wordLimitGame.beginNewGame();
-    }
-
-    public void startErrorGame() {
-        ErrorGame a = new ErrorGame(content.getContent(), LINE_LENGTH);
-    }
-
-    public void executeCommand(Parser c, StorageFile storage) throws InvalidStringInputException {
-        switch (c.getCommand()) {
-        case "content":
-            content.setContent();
-            break;
-        case "new":
-            startWordLimitGame();
-            break;
-        case "time":
-            startTimeLimitGame();
-            break;
-        case "error":
-            startErrorGame();
-            break;
-        default:
-            break;
-        }
-        //storage.writeToFile(tasks);
+    public String read() {
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
     }
 
     public void runCommandLoopUntilExitCommand() {
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = uiBot.readCommand();
-                Parser c = new Parser(fullCommand);
-                c.parse();
-                executeCommand(c, storage);
-                isExit = c.getIsExit();
-            } catch (StringIndexOutOfBoundsException e) {
-                uiBot.showText("OOPS!!! The description after this command word cannot be empty.");
-            } catch (IndexOutOfBoundsException e) {
-                uiBot.showText("OOPS!!! It's out of range.");
-                e.printStackTrace();
-            } catch (NumberFormatException e) {
-                uiBot.showText("OOPS!!! Number not found. ");
-            } catch (NoSuchElementException | InvalidStringInputException e) {
-                e.printStackTrace();
-            } finally {
-                uiBot.showLine();
-            }
-        }
+        CommandFactory cmdFactory = new CommandFactory();
+        String command;
+        do {
+            String[] input = read().split(" ");
+            command = input[0];
+            Command c = cmdFactory.getCommand(input[0]);
+            c.run();
+        } while (!command.equals("bye"));
+
     }
 
     public void exit() {

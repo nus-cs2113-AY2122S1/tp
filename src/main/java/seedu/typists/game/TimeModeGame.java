@@ -1,12 +1,12 @@
 package seedu.typists.game;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
-import seedu.typists.ui.TextUi;
+
+import static seedu.typists.common.Utils.getWordLineFromStringArray;
 import static seedu.typists.common.Utils.getWordLines;
 
 public class TimeModeGame extends Game {
@@ -49,6 +49,7 @@ public class TimeModeGame extends Game {
 
     public void runGame() {
         Scanner in = new Scanner(System.in);
+        List<String> inputs = new ArrayList<>();
 
         if (readyToStartTimer()) {
             int i = 0;
@@ -62,22 +63,17 @@ public class TimeModeGame extends Game {
                     realGameTime = (double) currTime / 1000;
                 } else {
                     ui.printLine(wordLines.get(i));
-                    userLines.add(getWordLine(in));
+                    inputs.add(in.nextLine());
                     i++;
                 }
             }
+            updateUserLines(inputs);
             System.out.println("Game Finished.");
         }
     }
 
-    public String[] getWordLine(Scanner in) {
-        int j = 0;
-        List<String> words = new ArrayList<>();
-        words.add(in.next());
-        j++;
-
-        Object[] objArr = words.toArray();
-        return Arrays.copyOf(objArr, objArr.length, String[].class);
+    public void updateUserLines(List<String> stringArray) {
+        userLines = getWordLineFromStringArray(stringArray);
     }
 }
 

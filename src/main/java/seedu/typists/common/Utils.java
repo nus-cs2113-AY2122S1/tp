@@ -2,6 +2,7 @@ package seedu.typists.common;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Utility methods.
@@ -33,7 +34,7 @@ public class Utils {
     }
 
     /** same function as getWordLines, but the param is ArrayList not string. */
-    public static ArrayList<String[]> getWordLineFromStringArray(ArrayList<String> stringList) {
+    public static ArrayList<String[]> getWordLineFromStringArray(List<String> stringList) {
         ArrayList<String[]> wordLines = new ArrayList<>();
         for (String s : stringList) {
             String[] wordLine = s.split(" ");

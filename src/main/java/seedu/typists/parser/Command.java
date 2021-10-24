@@ -1,5 +1,5 @@
 package seedu.typists.parser;
 
-public abstract class Command {
-    public abstract void runCommand();
+public interface Command {
+    void run();
 }
