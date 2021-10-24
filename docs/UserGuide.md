@@ -29,7 +29,7 @@ reference. We hope you enjoy using *Food-O-Rama*! 💕
         * `add ingr`: [Add new ingredient](#add-new-ingredient-add-ingr)
         * `add ingr stored`: [Add storage to existing ingredient](#add-storage-to-existing-ingredient-add-ingr-stored)
         * `add ingr waste`: [Add ingredient wastage](#add-ingredient-wastage-add-ingr-waste)
-        * `add constituent`: [Link ingredient to dish](#link-ingredient-to-dish-add-constituent)
+        * `link`: [Link ingredient to dish](#link-ingredient-to-dish-link)
         * `del ingr`: [Delete existing ingredient](#delete-existing-ingredient-del-ingr)
         * `list ingr`: [View exising ingredients](#view-all-exising-ingredients-list-ingr)
     * [Graph Commands](#graphical-representation-of-dishes-wastage-graph-dish)
@@ -90,7 +90,7 @@ java -jar Food-O-Rama.jar
 | Add a new Ingredient | add ingr [ingrName]  followed by [weight in KG] |
 | Add storage to an existing Ingredient | add ingr stored [ingrName] followed by [weight in KG] |
 | Add Ingredient Wastage | add ingr waste [ingrName] followed by [weight in KG] |
-| Link a Dish to a Ingredient | add constituent [dishName] / [ingrName] |
+| Link a Dish to a Ingredient | link [dishName] / [ingrName] |
 | Delete an Ingredient | del [ingrName] |
 | View all Ingredients | list ingr |
 | Display a graph for Dishes wastage | graph dish |
@@ -141,8 +141,8 @@ Here are the commands you can use:
     Example: 'add ingr stored chicken' ; '1.5'
 11. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]'
     Example: 'add ingr waste chicken' ; '0.7'
-12. Linking an Ingredient to a Dish : 'add constituent [dishName] / [ingrName]'
-    Example: 'add constituent chicken rice / chicken'
+12. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'
+    Example: 'link chicken rice / chicken'
 13. Finding an Ingredient : 'find ingr [keyword]'
     Example: 'find ingr chicken'
 14. Deleting an Ingredient : 'del [ingrName]'
@@ -349,17 +349,17 @@ Wastage of chicken is now 1.5 kg
 ____________________________________________________________
 ```
 
-### Link Ingredient to Dish: `add constituent`
+### Link Ingredient to Dish: `link`
 
 Link an existing Ingredient to an existing Dish
 
-Format: `add constituent dishName / ingrName`
+Format: `link dishName / ingrName`
 
 *`dishName` space `/` space `ingrName`.
 
 Example of usage:
 
-`add constituent chicken rice / chicken`
+`link chicken rice / chicken`
 
 Expected Outcome:
 
@@ -598,7 +598,7 @@ Expected Outcome:
 ```
 ____________________________________________________________
 List of Dishes has been sorted.
-____________________________________________________________
+
 ____________________________________________________________
 Here are the dishes you have:
 1. krabby patty
@@ -631,7 +631,7 @@ Expected Outcome:
 ```
 ____________________________________________________________
 List of Ingredients has been sorted.
-____________________________________________________________
+
 ____________________________________________________________
 Here are the ingredients you have: 
 1. chicken
