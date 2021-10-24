@@ -9,6 +9,7 @@ Students who type fast will find that _Ha(ppy)Bit_ performs habit tracking more 
 conventional GUI apps.
 
 * [Quick Start](#quick-start)
+* [Navigation](#navigation)
 * [Terminology](#terminology)
 * [Features](#features)
     * [Ask for Help: `help`](#ask-for-help-help)
@@ -34,6 +35,23 @@ download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-
 3. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
 4. Open your terminal of choice inside the folder containing `tp.jar` file.
 5. Run the file using `java -jar tp.jar`.
+6. Upon loading the app you should see the following screen which would indicate that you have successfully run the app
+   ```
+   insert load screen
+   ```
+
+## Navigation
+In the current loading screen, users will be able to execute the following actions based on the number they input
+1. About Ha(ppy)Bit - Shows brief description of the program and a short meet the team section
+    ```
+    ```
+2. User Guide - Opens up User Guide github page in user's web browser.
+3. Developer Guide - Opens up Developer Guide github page in user's web browser
+4. Demo Video
+5. Start Application - Brings user to the application. User can start using the app or continue where they left off.
+    ```
+    ```
+
 
 ## Terminology
 
@@ -61,10 +79,10 @@ Hello! These are all the possible commands for this habit tracker :)
    -> Goal types include: default, sleep, food, exercise and study
 2. remove a goal: remove <goal index>
 3. list all goals for that habit: list
-4. add a habit to a goal: add <goal index> <habit name>
+4. add a habit to a goal: add <goal index> <habit name> #<interval>
 5. delete a habit from a goal: delete <goal index> <habit index>
 6. indicate a habit as done: done <goal index> <habit index>
-7. View all the habits user has under a goal: view <goal index>
+7. view all the habits user has under a goal: view <goal index>
 8. Exit habit tracker program: bye
 ```
 

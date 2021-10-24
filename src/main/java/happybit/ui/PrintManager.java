@@ -10,21 +10,25 @@ public class PrintManager {
             "Hello! These are all the possible commands for this habit tracker :)"
                     + " (flags within {} brackets are optional)";
     private static final String SET_GOAL_COMMAND =
-            "1. set a goal: set <goal name> {-<goal type> /<start date>} /<end date>";
+            "- set a goal: set <goal name> {-<goal type> /<start date>} /<end date>";
     private static final String GOAL_TYPE_INFO =
             "   -> Goal types include: default, sleep, food, exercise and study";
+    private static final String UPDATE_GOAL_COMMAND =
+            "- update a goal: update <goal index> <new goal name>";
     private static final String REMOVE_GOAL_COMMAND =
-            "2. remove a goal: remove <goal index>";
+            "- remove a goal: remove <goal index>";
     private static final String LIST_GOAL_COMMAND =
-            "3. list all goals for that habit: list";
+            "- list all goals for that habit: list";
     private static final String ADD_HABIT_COMMAND =
-            "4. add a habit to a goal: add <goal index> <habit name>";
+            "- add a habit to a goal: add <goal index> <habit name>";
     private static final String DELETE_HABIT_COMMAND =
-            "5. delete a habit from a goal: delete <goal index> <habit index>";
+            "- delete a habit from a goal: delete <goal index> <habit index>";
     private static final String DONE_HABIT_COMMAND =
-            "6. indicate a habit as done: done <goal index> <habit index>";
+            "- indicate a habit as done: done <goal index> <habit index>";
     private static final String LIST_HABIT_COMMAND =
-            "7. View all the habits user has under a goal: view <goal index>";
+            "- View all the habits user has under a goal: view <goal index>";
+    private static final String RETURN_COMMAND =
+            "- Return to loading screen of program: return";
     private static final String BYE_COMMAND = "8. Exit habit tracker program: bye";
 
     private static final String NEWLINE = System.lineSeparator();
@@ -36,12 +40,14 @@ public class PrintManager {
         System.out.print(COMMAND_LIST_GREETING + NEWLINE
                 + SET_GOAL_COMMAND + NEWLINE
                 + GOAL_TYPE_INFO + NEWLINE
+                + UPDATE_GOAL_COMMAND + NEWLINE
                 + REMOVE_GOAL_COMMAND + NEWLINE
                 + LIST_GOAL_COMMAND + NEWLINE
                 + ADD_HABIT_COMMAND + NEWLINE
                 + DELETE_HABIT_COMMAND + NEWLINE
                 + DONE_HABIT_COMMAND + NEWLINE
                 + LIST_HABIT_COMMAND + NEWLINE
+                + RETURN_COMMAND + NEWLINE
                 + BYE_COMMAND + NEWLINE
         );
         printDashes();
