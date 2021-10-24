@@ -713,4 +713,12 @@ public class Parser {
 
         return new SetThresholdCommand(thresholdValue);
     }
+    
+    public String convertBudgetSettingsToString(BudgetManager budgetManager) {
+        return budgetManager.overallBudget.getLimit() + DATA_SEPARATOR + budgetManager.foodBudget.getLimit() 
+                + DATA_SEPARATOR + budgetManager.transportBudget.getLimit() + DATA_SEPARATOR 
+                + budgetManager.medicalBudget.getLimit() + DATA_SEPARATOR + budgetManager.billsBudget.getLimit() 
+                + DATA_SEPARATOR + budgetManager.entertainmentBudget.getLimit() + DATA_SEPARATOR 
+                + budgetManager.miscBudget.getLimit();
+    }
 }
