@@ -200,15 +200,33 @@ The following sequence diagrams show how task data is [saved](#saving-data) and 
 
 ![StorageSaveSequence](images/SaveDataSequenceDiagram.png)
 
+1. The path is determined based on the class type of the list given when calling the function.
+2. A FileWriter is created and subsequently used to create a BufferedWriter that points to the path.
+3. A taskList is called to return the serialized data of the list.
+4. BufferedWriter is used to write the serialized data into the location of the path.
+5. BufferedWriter is closed and the function subsequently returns.
+
 ### Loading data
 
 ![StorageLoadSequence](images/LoadDataSequenceDiagram.png)
+
+1. A FileReader and created and subsequently used to create a BufferedReader that points to the given path.
+2. An ArrayList of Strings is created.
+3. BufferedReader is used to read each line of data from the path and stored into the ArrayList. (with each item in the array representing 1 line in the file)
+4. BufferedReader is closed and the function returns the ArrayList containing the read data.
 
 ## Appendix: Requirements
 
 ### Product scope
 
-{Describe the product scope}
+**Target Users:** 
+
+NUS undergraduate students who prefer typing over using a mouse and proficient with using CLI.
+
+**Needs of users:**
+
+* Quickly manage and record tasks and lessons
+* Manage modules for the semester and get module information quickly
 
 ### User stories
 
