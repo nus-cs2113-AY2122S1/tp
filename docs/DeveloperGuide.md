@@ -173,8 +173,24 @@ The following sequence diagrams below show how task data is [saved](#saving-data
 
 |Version| As a ... | I want to ... | So that I can ...|
 |--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|v1.0|user|add a task|keep track of my tasks|
+|v1.0|student|add a lesson|keep track of my lessons|
+|v1.0|user|list out tasks and lessons|see all my tasks and lessons|
+|v1.0|user|mark a task a done|keep track of completed tasks|
+|v1.0|user|delete tasks/lessons|keep my agenda clean|
+|v1.0|user|delete all tasks/lessons|quickly clear my agenda|
+|v1.0|user|store tasks/lessons in file(s)|retain data beyond the current instance|
+|v1.0|user|find tasks/lessons by keyword|quickly locate relevant information about tasks or lessons|
+|v2.0|user|attach priority to my tasks|see which tasks are of greater importance|
+|v2.0|NUS student|add/delete modules|keep track of my semester|
+|v2.0|NUS student|list out all the modules that I have with only the basic information|see all my modules with key information at a glance|
+|v2.0|NUS student|list out all the modules that I have with detailed information|see all my modules in detail|
+|v2.0|NUS student|search and browse for modules|look up for detailed information regarding a known module quickly|
+|v2.0|student|save to zoom link for my lessons|quickly access my zoom lessons|
+|v2.0|student|see all my tasks/lessons for today or tomorrow|quickly see work that are upcoming soon|
+|v2.0|user|see all the commands the app offers|not have to constantly refer to the user guide|
+|v2.0|user|sort my task in order of importance|see the important ones first|
+|v2.0|NUS student|be able to keep track of my CAP score|gauge my current undergraduate performance|
 
 ### Use cases
 

@@ -90,7 +90,7 @@ public class Ui {
     public void printHelpMessage() {
         System.out.print(LINE);
         System.out.println(PADDING + "Here is a list of possible commands:");
-        System.out.println(PADDING + "add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION}");
+        System.out.println(PADDING + "add task [TITLE] -d [DAY_OF_THE_WEEK] -i {INFORMATION} -p {PRIORITY}");
         System.out.println(PADDING + "add lesson [TITLE] -d [DAY_OF] -s [START_TIME] -e [END_TIME] -l {LINK}");
         System.out.println(PADDING + "add module [MODULE_CODE]");
         System.out.println(PADDING + "list [task/lesson/module]");
