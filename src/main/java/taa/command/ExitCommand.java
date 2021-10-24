@@ -12,6 +12,13 @@ public class ExitCommand extends Command {
         super(argument);
     }
 
+    @Override
+    protected void checkArgument() throws TaaException {
+        if (!argument.isEmpty()) {
+            throw new TaaException(getUsageMessage());
+        }
+    }
+
     /**
      * Executes the exit command and exits the program.
      *
@@ -22,9 +29,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
-        if (!argument.isEmpty()) {
-            throw new TaaException(getUsageMessage());
-        }
+        checkArgument();
 
         ui.printExitMessage();
         this.isExit = true;

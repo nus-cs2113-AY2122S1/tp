@@ -38,10 +38,15 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+    protected void checkArgument() throws TaaException {
         if (!argument.isEmpty()) {
             throw new TaaException(getUsageMessage());
         }
+    }
+
+    @Override
+    public void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException {
+        checkArgument();
 
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < commands.length; i += 1) {
