@@ -188,7 +188,7 @@ Format: `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>`
 Example:
 
 ```
-update 3 Reach for the Stars
+update g/3 n/Reach for the Stars
 ```
 Output:
 ```
@@ -228,11 +228,11 @@ Output:
 ### Remove a Goal: `remove`
 Removes a goal specified by its index.
 
-Format: `remove <GOAL_INDEX>`
+Format: `remove g/<GOAL_INDEX>`
 
 Example:
 ```
-remove 1
+remove g/1
 ```
 
 Output:
@@ -287,11 +287,11 @@ Your habit of " Run 6km" under the goal "[DF] Exercise More" has been set as don
 ### Delete a Habit: `delete`
 Deletes a habit under a goal.
 
-Format: `delete <GOAL_INDEX> <HABIT_INDEX>`
+Format: `delete g/<GOAL_INDEX> h/<HABIT_INDEX>`
 
 Example:
 ```
-delete 1 2
+delete g/1 h/2
 ```
 
 Output:
