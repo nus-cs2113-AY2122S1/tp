@@ -30,9 +30,9 @@ public class Habit {
      * Constructor for Habit class when importing from storage.
      * Date to keep track of last date
      *
-     * @param habitName
-     * @param interval
-     * @param lastHabitDate
+     * @param habitName String parameter of habit name
+     * @param interval integer storing interval for habit
+     * @param lastHabitDate Date parameter storing last date for Habit
      */
     public Habit(String habitName,  Date lastHabitDate, int interval) {
         this.habitName = habitName;
@@ -77,7 +77,7 @@ public class Habit {
     }
 
     /**
-     * Update the habit as uncompleted for next interval
+     * Update the habit as uncompleted for next interval.
      */
     public void setUncompleted() {
         isDone = false;
@@ -102,7 +102,7 @@ public class Habit {
     }
 
     /**
-     * Next Date in printable format
+     * Next Date in printable format.
      *
      * @return String formatted next date milestone
      */
