@@ -49,10 +49,7 @@ public class AddCommandParser {
         String title = params[0].strip();
 
         String dayOfTheWeek = params[1].strip();
-        if (!DayOfTheWeek.is(dayOfTheWeek)) {
-            throw new ParseException(dayOfTheWeek + Messages.ERROR_INVALID_DAY);
-        }
-        dayOfTheWeek = DayOfTheWeek.toProper(dayOfTheWeek);
+        dayOfTheWeek = checkDayOfTheWeek(dayOfTheWeek);
 
         String startTime;
         String endTime;
@@ -89,10 +86,7 @@ public class AddCommandParser {
         String title = params[0].strip();
 
         String dayOfTheWeek = params[1].strip();
-        if (!DayOfTheWeek.is(dayOfTheWeek)) {
-            throw new ParseException(dayOfTheWeek + Messages.ERROR_INVALID_DAY);
-        }
-        dayOfTheWeek = DayOfTheWeek.toProper(dayOfTheWeek);
+        dayOfTheWeek = checkDayOfTheWeek(dayOfTheWeek);
 
         switch (params.length) {
         case 2:
@@ -109,24 +103,18 @@ public class AddCommandParser {
                     throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
                 }
                 String priority = params[2].strip();
-                if (!Priority.is(priority)) {
-                    throw new ParseException(priority + Messages.ERROR_INVALID_PRIORITY);
-                }
-                priority = Priority.toProper(priority);
+                priority = checkPriority(priority);
                 return new AddTaskCommand(title, dayOfTheWeek, "-", priority);
             } else {
                 throw new ParseException(Messages.ERROR_INVALID_COMMAND);
             }
         case 4:
-            if (!hasCorrectFlagSequence("-d", "-i", "-p")) {
+            if (!hasCorrectFlagSequence(userResponse, "-d", "-i", "-p")) {
                 throw new ParseException(Messages.ERROR_INVALID_FLAG_SEQUENCE);
             }
             String information = params[2].strip();
-            String priority = params[2].strip();
-            if (!Priority.is(priority)) {
-                throw new ParseException(priority + Messages.ERROR_INVALID_PRIORITY);
-            }
-            priority = Priority.toProper(priority);
+            String priority = params[3].strip();
+            priority = checkPriority(priority);
             return new AddTaskCommand(title, dayOfTheWeek, information, priority);
         default:
             throw new ParseException(Messages.ERROR_INVALID_COMMAND);
@@ -136,5 +124,19 @@ public class AddCommandParser {
     public static Command parseAddModuleCommand(String userResponse) {
         String moduleCode = userResponse.strip().toUpperCase();
         return new AddModuleCommand(moduleCode);
+    }
+
+    private static String checkDayOfTheWeek(String param) throws ParseException {
+        if (!DayOfTheWeek.is(param)) {
+            throw new ParseException(param + Messages.ERROR_INVALID_DAY);
+        }
+        return DayOfTheWeek.toProper(param);
+    }
+
+    private static String checkPriority(String param) throws ParseException {
+        if (!Priority.is(param)) {
+            throw new ParseException(param + Messages.ERROR_INVALID_PRIORITY);
+        }
+        return Priority.toProper(param);
     }
 }
