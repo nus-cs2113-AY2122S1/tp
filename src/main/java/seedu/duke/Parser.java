@@ -54,10 +54,13 @@ public class Parser {
             }
         case "find":
             return parseFind(params);
+        case "sort":
+            return parseSort(params);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
     }
+
 
     /**
      * Separates command word and arguments.
@@ -412,6 +415,19 @@ public class Parser {
         }
     }
 
+    private static Command parseSort(String params) {
+        String[] identifierAndFilter = splitCommandString(params, " ");
+        String identifier = identifierAndFilter[0];
+        String filter = identifierAndFilter[1];
+        switch (identifier) {
+        case "-t":
+            return new SortTourCommand(filter);
+        case "-c":
+            return new SortClientCommand(filter);
+        default:
+            return null;
+        }
+    }
 }
 
    

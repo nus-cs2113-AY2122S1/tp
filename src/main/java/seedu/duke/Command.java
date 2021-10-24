@@ -13,7 +13,7 @@ public abstract class Command {
     /**
      * Executes the specific command depending on the command constructed.
      */
-    public abstract void execute();
+    public abstract void execute() throws TourPlannerException;
 
     public void setData(ClientList clients, FlightList flights, TourList tours,
                         ClientPackageList clientPackages, Ui ui) {
