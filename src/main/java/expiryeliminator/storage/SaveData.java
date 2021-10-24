@@ -41,7 +41,7 @@ public class SaveData {
         File file = new File(pathName + fileName);
         try {
             FileWriter fw = new FileWriter(file);
-            fw.write("");
+            fw.flush();
         } catch (IOException e) {
             System.out.println("An flush IO error has occurred: " + e.getMessage());
         }
@@ -52,7 +52,6 @@ public class SaveData {
             Path path = Paths.get(pathName);
             Files.createDirectory(path);
         } catch (FileAlreadyExistsException ignored) {
-            System.out.println("");
         } catch (IOException e) {
             System.out.println("An createFile IO error has occurred: " + e.getMessage());
         }
@@ -61,7 +60,6 @@ public class SaveData {
             Path file = Paths.get(pathName + fileName);
             Files.createFile(file);
         } catch (FileAlreadyExistsException ignored) {
-            System.out.println("");
         } catch (IOException e) {
             System.out.println("An createFile IO error has occurred: " + e.getMessage());
         }
