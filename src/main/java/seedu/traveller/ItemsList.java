@@ -42,13 +42,13 @@ public class ItemsList {
         return keywordString;
     }
 
-    public Item getItem(int i) {
-        return items.get(i);
+    public Item getItem(int itemNumber) {
+        return items.get(itemNumber);
     }
 
-    public void deleteItem(int i) {
-        logger.log(Level.INFO, "Deleted an item of index " + i + " from itemsList");
-        items.remove(i);
+    public void deleteItem(int itemNumber) {
+        logger.log(Level.INFO, "Deleted an item of index " + itemNumber + " from itemsList");
+        items.remove(itemNumber);
     }
 
     public int getSize() {

@@ -1,5 +1,6 @@
 package seedu.traveller;
 
+import seedu.traveller.exceptions.TravellerException;
 import seedu.traveller.exceptions.TripNotFoundException;
 
 import java.util.ArrayList;
@@ -21,19 +22,21 @@ public class TripsList {
         this.trips.add(trip);
     }
 
-    public Trip getTrip(int i) throws TripNotFoundException {
-        if (i < 0) {
+    public Trip getTrip(int tripNumber) throws TravellerException {
+        if (tripNumber < 0) {
             throw new TripNotFoundException();
         }
-        return this.trips.get(i);
+        return this.trips.get(tripNumber);
     }
 
-    public Trip getTrip(String tripName) throws TripNotFoundException {
+    public Trip getTrip(String tripName) throws TravellerException {
+        assert !tripName.equals("all") : "'all' is an invalid tripName.";
+        assert !tripName.equals("") : "'' is an invalid tripName.";
         int tripIndex = getTripIndex(tripName);
         return getTrip(tripIndex);
     }
 
-    public int getTripIndex(String tripName) throws TripNotFoundException {
+    public int getTripIndex(String tripName) throws TravellerException {
         int tripIndex = -1;
         for (int i = 0; i < this.getSize(); i++) {
             Trip trip = this.getTrip(i);
@@ -45,11 +48,11 @@ public class TripsList {
         return tripIndex;
     }
 
-    public void deleteTrip(int i) {
-        this.trips.remove(i);
+    public void deleteTrip(int tripNumber) {
+        trips.remove(tripNumber);
     }
 
     public int getSize() {
-        return this.trips.size();
+        return trips.size();
     }
 }

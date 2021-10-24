@@ -65,6 +65,9 @@ public class NewCommand extends Command {
             }
         }
         MinCalcResult result = WorldMap.calcMinDistance(this.startCountry, this.endCountry);
+        if (result.getError() == 1) {
+            return;
+        }
         List<Country> path = result.getPath();
         List<Double> distances = result.getDistances();
         Trip trip = new Trip(this.tripName, this.startCountry, this.endCountry, path, distances);

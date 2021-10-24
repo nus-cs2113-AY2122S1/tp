@@ -43,7 +43,7 @@ public class SaveLoader {
         try {
             createSave();
             writeToSave();
-        } catch (IOException | TripNotFoundException e) {
+        } catch (IOException | TravellerException e) {
             ui.printError(e.getMessage());
         }
         ui.printLine();
@@ -83,7 +83,7 @@ public class SaveLoader {
         save.delete();
     }
 
-    private void writeToSave() throws IOException, TripNotFoundException {
+    private void writeToSave() throws IOException, TravellerException {
         /*logger.setLevel(Level.INFO);
         logger.log(Level.INFO, "Writing data to " + FILE_PATH);*/
         FileWriter fw = new FileWriter(filePath);
