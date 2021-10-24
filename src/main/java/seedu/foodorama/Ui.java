@@ -91,33 +91,37 @@ public class Ui {
             + "            #" + System.lineSeparator()
             + "# 2. Adding Dish Wastage : 'add dish waste [dishName]' followed by '[weight in KG]'                "
             + "            #" + System.lineSeparator()
-            + "# 3. Deleting a Dish : 'del dish [dishName]                                                        "
+            + "# 3. Adding Dish Limit : 'add dish limit [dishName]' followed by '[weight in KG]'                  "
             + "            #" + System.lineSeparator()
-            + "# 4. Adding a new Ingredient : 'add ingr [ingrName]' followed by '[weight in KG]'                  "
+            + "# 4. Deleting a Dish : 'del dish [dishName]                                                        "
             + "            #" + System.lineSeparator()
-            + "# 5. Adding storage to an already existing Ingredient : 'add ingr stored [ingrName]'               "
+            + "# 5. Adding a new Ingredient : 'add ingr [ingrName]' followed by '[weight in KG]'                  "
+            + "            #" + System.lineSeparator()
+            + "# 6. Adding storage to an already existing Ingredient : 'add ingr stored [ingrName]'               "
             + "            #" + System.lineSeparator()
             + "#    followed by '[weight in KG]'                                                                  "
             + "            #" + System.lineSeparator()
-            + "# 6. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]'          "
+            + "# 7. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]'          "
             + "            #" + System.lineSeparator()
-            + "# 7. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'                   "
+            + "# 8. Adding Ingredient Limit : 'add ingr limit [ingrName]' followed by '[weight in KG]'            "
             + "            #" + System.lineSeparator()
-            + "# 8. Deleting an Ingredient : 'del ingr [ingrName]'                                                "
+            + "# 9. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'                              "
             + "            #" + System.lineSeparator()
-            + "# 9. Find a Dish/Ingredient : 'find dish [KEYWORD] | find ingr [KEYWORD]'                          "
+            + "# 10. Deleting an Ingredient : 'del ingr [ingrName]'                                               "
             + "            #" + System.lineSeparator()
-            + "# 10. Viewing all Dishes/Ingredients : 'list dish | list ingr'                                     "
+            + "# 11. Find a Dish/Ingredient : 'find dish [KEYWORD] | find ingr [KEYWORD]'                         "
             + "            #" + System.lineSeparator()
-            + "# 11. View graph of all Dishes/Ingredients : 'graph dish | graph ingr'                             "
+            + "# 12. Viewing all Dishes/Ingredients : 'list dish | list ingr'                                     "
             + "            #" + System.lineSeparator()
-            + "# 11. Sort list of Dishes/Ingredients : 'sort dish | sort ingr'                                    "
+            + "# 13. View graph of all Dishes/Ingredients : 'graph dish | graph ingr'                             "
             + "            #" + System.lineSeparator()
-            + "# 12. Clearing saved lists: 'clear dish' | 'clear ingr' | 'clear all'                              "
+            + "# 14. Sort list of Dishes/Ingredients : 'sort dish | sort ingr'                                    "
             + "            #" + System.lineSeparator()
-            + "# 13. View full list of commands and examples: 'help'                                              "
+            + "# 15. Clearing saved lists: 'clear dish' | 'clear ingr' | 'clear all'                              "
             + "            #" + System.lineSeparator()
-            + "# 14. Exiting the program: 'bye'                                                                   "
+            + "# 14. View full list of commands and examples: 'help'                                              "
+            + "            #" + System.lineSeparator()
+            + "# 15. Exiting the program: 'bye'                                                                   "
             + "            #" + System.lineSeparator()
             + "###################################################################################################"
             + "#############" + System.lineSeparator()
@@ -133,35 +137,41 @@ public class Ui {
             + "2. Adding Dish Wastage : 'add dish waste [dishName]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add dish waste chicken rice' ; '0.8'" + System.lineSeparator()
-            + "3. Finding a Dish : 'find dish [keyword]'" + System.lineSeparator()
+            + "3. Adding Dish Limit : 'add dish limit [dishName]' followed by "
+            + "'[weight in KG]'" + System.lineSeparator()
+            + "    Example: 'add dish limit chicken rice' ; '16.9'" + System.lineSeparator()
+            + "4. Finding a Dish : 'find dish [keyword]'" + System.lineSeparator()
             + "    Example: 'find dish chicken rice'" + System.lineSeparator()
-            + "4. Deleting a Dish : 'del [dishName]" + System.lineSeparator()
+            + "5. Deleting a Dish : 'del [dishName]" + System.lineSeparator()
             + "    Example: 'del dish chicken rice'" + System.lineSeparator()
-            + "5. Viewing all Dishes : 'list dish'" + System.lineSeparator()
-            + "6. Sorting Dishes according to Dish Wastage : 'sort dish'" + System.lineSeparator()
-            + "7. Viewing Graph of Dish Wastage : 'graph dish'" + System.lineSeparator()
-            + "8. Clearing all Dishes : 'clear dish'" + System.lineSeparator()
-            + "9. Adding a new Ingredient : 'add ingr [ingrName]' followed by '[weight in KG]'" + System.lineSeparator()
+            + "6. Viewing all Dishes : 'list dish'" + System.lineSeparator()
+            + "7. Sorting Dishes according to Dish Wastage : 'sort dish'" + System.lineSeparator()
+            + "8. Viewing Graph of Dish Wastage : 'graph dish'" + System.lineSeparator()
+            + "9. Clearing all Dishes : 'clear dish'" + System.lineSeparator()
+            + "10. Adding a new Ingredient : 'add ingr [ingrName]' followed by '[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr chicken' ; '2'" + System.lineSeparator()
-            + "10. Adding storage to an already existing Ingredient : 'add ingr stored [ingrName]'"
+            + "11. Adding storage to an already existing Ingredient : 'add ingr stored [ingrName]'"
             + " followed by '[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr stored chicken' ; '1.5'" + System.lineSeparator()
-            + "11. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by "
+            + "12. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by "
             + "'[weight in KG]'" + System.lineSeparator()
             + "    Example: 'add ingr waste chicken' ; '0.7'" + System.lineSeparator()
-            + "12. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'" + System.lineSeparator()
+            + "13. Adding Ingredient Limit : 'add ingr limit [ingrName]' followed by "
+            + "'[weight in KG]'" + System.lineSeparator()
+            + "    Example: 'add ingr limit chicken' ; '42.7'" + System.lineSeparator()
+            + "14. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'" + System.lineSeparator()
             + "    Example: 'link chicken rice / chicken'" + System.lineSeparator()
-            + "13. Finding an Ingredient : 'find ingr [keyword]'" + System.lineSeparator()
+            + "15. Finding an Ingredient : 'find ingr [keyword]'" + System.lineSeparator()
             + "    Example: 'find ingr chicken'" + System.lineSeparator()
-            + "14. Deleting an Ingredient : 'del [ingrName]'" + System.lineSeparator()
+            + "16. Deleting an Ingredient : 'del [ingrName]'" + System.lineSeparator()
             + "    Example: 'del ingr chicken'" + System.lineSeparator()
-            + "15. Viewing all Ingredients : 'list ingr'" + System.lineSeparator()
-            + "16. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'" + System.lineSeparator()
-            + "17. Viewing Graph of Ingredient Wastage : 'graph ingr'" + System.lineSeparator()
-            + "18. Clearing all Ingredients : 'clear ingr'" + System.lineSeparator()
-            + "19. Clearing both Dishes and Ingredients : 'clear all'" + System.lineSeparator()
-            + "20. Viewing this list of commands: help" + System.lineSeparator()
-            + "21. Exiting the program: bye" + System.lineSeparator()
+            + "17. Viewing all Ingredients : 'list ingr'" + System.lineSeparator()
+            + "18. Sorting Ingredients according to Ingredient Wastage : 'sort ingr'" + System.lineSeparator()
+            + "19. Viewing Graph of Ingredient Wastage : 'graph ingr'" + System.lineSeparator()
+            + "20. Clearing all Ingredients : 'clear ingr'" + System.lineSeparator()
+            + "21. Clearing both Dishes and Ingredients : 'clear all'" + System.lineSeparator()
+            + "22. Viewing this list of commands: help" + System.lineSeparator()
+            + "23. Exiting the program: bye" + System.lineSeparator()
             + LINE_DIVIDER;
 
     private static final String EXIT_MESSAGE = EXIT_LOGO + System.lineSeparator()
@@ -574,6 +584,12 @@ public class Ui {
     public void printLimitSet(String name, double limit) {
         System.out.println(LINE_DIVIDER + System.lineSeparator()
                 + "The limit of " + name + " is now " + limit + " kg" + System.lineSeparator()
+                + LINE_DIVIDER);
+    }
+
+    public void printExcessParamMsg(String name) {
+        System.out.println(LINE_DIVIDER + System.lineSeparator()
+                + "Warning: The command " + name + " does not need any excess parameters" + System.lineSeparator()
                 + LINE_DIVIDER);
     }
 }

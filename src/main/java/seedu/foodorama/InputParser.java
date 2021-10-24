@@ -33,7 +33,7 @@ public class InputParser {
         case SORT_INGR:
         case HELP:
             if (!parameterString.isBlank()) {
-                ui.printInvalidParamMsg();
+                ui.printExcessParamMsg(inputCommand.getName());
             }
             break;
 
