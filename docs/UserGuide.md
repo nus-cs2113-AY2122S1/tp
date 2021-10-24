@@ -6,13 +6,13 @@
 * [Features](#features)
 * [Commands](#commands)
   * [Add](#add) 
-    * [Budget: `b/`](#add-budget)
-    * [Expenditure: `e/`](#add-expenditure)
-    * [Loan: `l/`](#add-loan)
+    * [Budget: `-b`](#add-budget)
+    * [Expenditure: `-e`](#add-expenditure)
+    * [Loan: `-l`](#add-loan)
   * [Edit](#edit)
-    * [Budget: `b/`](#edit-budget)
-    * [Expenditure: `e/`](#edit-expenditure)
-    * [Loan: `l/`](#edit-loan)
+    * [Budget: `-b`](#edit-budget)
+    * [Expenditure: `-e`](#edit-expenditure)
+    * [Loan: `-l`](#edit-loan)
   * [Database Selector](#dbselect)
 	* [year](#year)
   * [Find & Filter](#find&filter)
@@ -42,9 +42,9 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 ### Notes about the command format:
 * Words in UPPER_CASE are the parameters to be supplied by the user. <br />
-e.g. in `add b/ a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add b/ a/500 m/12`
-
+e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`
 * Words encased in `<>` are optional parameters.
+
 <br />
 
 ## Commands
@@ -54,7 +54,7 @@ e.g. in `add b/ a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can
 The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
 The type of record is determined by the identifier tag after the `add` command word.
 
-### `-b` - Add a Budget
+### `-b` : Add a Budget
 
 Adds a new budget to a specific month.
 
@@ -75,21 +75,24 @@ Your budget of 500.0 for this month is successfully added!
 ========================================================
 ```
 
-### `-e` - Add an expenditure
+### `-e` : Add an expenditure
 
 Adds a new expenditure to a month.
 
-Format: `add -e c/<DESCRIPTION> a/AMOUNT d/<DATE_OF_EXPENDITURE>`
+Format: `add -e n/<DESCRIPTION> a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
 
 * The `DESCRIPTION` can be in a natural language format. It can be left empty if the user does not wish
 to add specific information about the expenditure.
 * The `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
-* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of YYYY-MM-DD. If left empty, the current date according to the
+* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. If left empty, the current date according to the
 system will be entered by default.
+* The `<CATEGORY>` must be one of the following values:
+  * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH_
+  * If left empty, the default value will be _GENERAL_
 
 Example of usage:
 
-`add -e c/CS2113T Textbooks a/60 d/2021-08-20`
+`add -e n/CS2113T Textbooks a/60 d/2021-08-20 c/GENERAL`
 
 Expected outcome: Expenditure of $60.00 2021-08-20 on has been successfully added.
 
