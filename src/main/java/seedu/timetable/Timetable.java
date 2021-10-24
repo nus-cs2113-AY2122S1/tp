@@ -129,6 +129,36 @@ public class Timetable implements Comparable<Timetable> {
         assert earliestHour < latestHour : "Earliest hour of the day is should be earlier than latest hour of the day";
     }
 
+    public void addEvent(DayOfWeek date, TimetableUserItem timetableUserItem) {
+        switch (date) {
+        case MONDAY:
+            addItemToSchedule(timetableUserItem, monday);
+            break;
+        case TUESDAY:
+            addItemToSchedule(timetableUserItem, tuesday);
+            break;
+        case WEDNESDAY:
+            addItemToSchedule(timetableUserItem, wednesday);
+            break;
+        case THURSDAY:
+            addItemToSchedule(timetableUserItem, thursday);
+            break;
+        case FRIDAY:
+            addItemToSchedule(timetableUserItem, friday);
+            break;
+        case SATURDAY:
+            addItemToSchedule(timetableUserItem, saturday);
+            break;
+        case SUNDAY:
+            addItemToSchedule(timetableUserItem, sunday);
+            break;
+        default:
+            break;
+        }
+
+        logger.log(Level.INFO, String.format("%s added to timetable", timetableUserItem.getTitle()));
+    }
+
     /**
      * Adds a timetable item to a specific day schedule E.g.
      * addLessonToSchedule(lesson, monday) will add the lesson to the monday

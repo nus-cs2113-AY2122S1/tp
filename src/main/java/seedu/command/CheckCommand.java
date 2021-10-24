@@ -23,6 +23,5 @@ public class CheckCommand extends Command {
         if (module != null) {
             TextUi.printPrereqMet(profile.getRecord().isModulePrereqMet(module),module);
         }
-
     }
 }

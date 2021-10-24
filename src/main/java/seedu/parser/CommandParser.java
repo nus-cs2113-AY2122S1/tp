@@ -1,5 +1,7 @@
 package seedu.parser;
 
+import seedu.command.EventCommand;
+import seedu.exceptions.EventException;
 import seedu.command.AddCommand;
 import seedu.command.CalculateCapCommand;
 import seedu.command.CheckCommand;
@@ -20,6 +22,7 @@ import seedu.duke.Duke;
 import seedu.exceptions.UniModsException;
 import seedu.module.Module;
 import seedu.timetable.Timetable;
+import seedu.timetable.TimetableUserItem;
 import seedu.ui.TextUi;
 
 public class CommandParser {
@@ -55,6 +58,8 @@ public class CommandParser {
             command = new TimetableCommand(Duke.timetable);
         } else if (lowerCaseText.startsWith("add")) {
             command = parseAddCommand(text, timetable);
+        } else if (lowerCaseText.startsWith("event")) {
+            command = parseEventCommand(text, timetable);
         } else if (lowerCaseText.startsWith("help")) {
             command = new HelpCommand();
         } else if (lowerCaseText.startsWith("delete")) {
@@ -75,6 +80,66 @@ public class CommandParser {
         return command;
     }
 
+    //Format event Read Micah /at Monday 1600-1800
+    private Command parseEventCommand(String text, Timetable timetable) {
+        Command event = null;
+        try {
+            event = checkEventCommand(text, timetable);
+        } catch (EventException e) {
+            e.printMessage();
+        }
+        return event;
+    }
+
+    private Command checkEventCommand(String text, Timetable timetable) throws EventException {
+        int textLength = text.length();
+        if (textLength <= 14) {
+            throw new EventException("Don't be a joker and type a valid event Command");
+        }
+
+        if (!text.contains("/at")) {
+            throw new EventException("Event Request Does not Contain /at");
+        }
+        int dividerPosition = text.indexOf("/at");
+
+        String description = text.substring(6, dividerPosition).trim();
+        int descriptionLength = description.length();
+        if (descriptionLength == 0) {
+            throw new EventException("Event Request Does Not Contain A Description");
+        }
+
+        String date;
+        if (text.contains("Monday")) {
+            date = "Monday";
+        } else if (text.contains("Tuesday")) {
+            date = "Tuesday";
+        } else if (text.contains("Wednesday")) {
+            date = "Wednesday";
+        } else if (text.contains("Thursday")) {
+            date = "Thursday";
+        } else if (text.contains("Friday")) {
+            date = "Friday";
+        } else if (text.contains("Saturday")) {
+            date = "Saturday";
+        } else if (text.contains("Sunday")) {
+            date = "Sunday";
+        } else {
+            throw new EventException("Invalid Date Format");
+        }
+
+        String startTime = text.substring(textLength - 9, textLength - 5);
+        if (Integer.parseInt(startTime) < 0) {
+            throw new EventException("Invalid start time you idiot");
+        }
+
+        String endTime = text.substring(textLength - 4, textLength);
+        if (Integer.parseInt(endTime) < 0) {
+            throw new EventException("Maybe if you could just follow simple instructions, she wouldn't have left you");
+        }
+
+        TimetableUserItem event = new TimetableUserItem(description, date, startTime, endTime, description);
+        return new EventCommand(event, timetable);
+    }
 
     /**
      * Parses user input into a RemoveCommand.
@@ -124,8 +189,6 @@ public class CommandParser {
         if (split.length < 2 || split[0].equals("") || split[1].equals("")) {
             isErrorThrown = true;
             throw new UniModsException(TextUi.ERROR_INVALID_RESULT_COMMAND);
-        } else {
-            return;
         }
     }
 
@@ -133,7 +196,8 @@ public class CommandParser {
      * Parses user input into a DeleteCommand.
      *
      * @param text User input.
-     * @return DeleteeCommand with module code that is to be deleted from the timetable.
+     * @param timetable User's current timetable schedule.
+     * @return DeleteCommand with module code that is to be deleted from the timetable.
      */
     public Command parseDeleteCommand(String text, Timetable timetable) {
         String moduleToBeDeleted = (text.substring(DELETE_LENGTH).trim()).toUpperCase();
@@ -186,9 +250,16 @@ public class CommandParser {
         return new ShowCommand(str);
     }
 
-    private Command parseAddCommand(String input, Timetable timetable) {
-        input = input.substring(ADD_LENGTH).trim();
-        String moduleCode = input.toUpperCase();
+    /**
+     * Parses user input into an AddCommand.
+     *
+     * @param text User input.
+     * @param timetable User's current timetable schedule.
+     * @return AddCommand with the moduleCode that is to be added
+     */
+    private Command parseAddCommand(String text, Timetable timetable) {
+        text = text.substring(ADD_LENGTH).trim();
+        String moduleCode = text.toUpperCase();
         return new AddCommand(moduleCode, timetable);
     }
 
