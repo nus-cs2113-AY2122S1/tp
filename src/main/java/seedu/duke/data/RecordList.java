@@ -1,6 +1,7 @@
 package seedu.duke.data;
 
 import seedu.duke.data.records.Budget;
+import seedu.duke.data.records.Category;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
 import seedu.duke.data.records.Record;
@@ -49,8 +50,9 @@ public class RecordList {
      * @param date date on which the expenditure took place
      * @param isLoadingStorage indicate if this command is called during loading or runtime
      */
-    public void addExpenditure(String description, double amount, LocalDate date, boolean isLoadingStorage) {
-        expenditureRecords.add(new Expenditure(description, amount, date));
+    public void addExpenditure(String description, double amount, LocalDate date, Category category,
+                               boolean isLoadingStorage) {
+        expenditureRecords.add(new Expenditure(description, amount, date, category));
         numberOfRecords += 1;
         /*
         if (!isLoadingStorage) {
@@ -129,20 +131,11 @@ public class RecordList {
             totalSpending += record.getAmount();
         }
 
-        if (totalSpending > budget.getAmount() && budget.getAmount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return (totalSpending > budget.getAmount() && budget.getAmount() > 0);
     }
 
     public int getSize() {
         return expenditureRecords.size();
     }
 
-    public void printRecord(int i) {
-    }
-
-    public void addBudgetList(String description, double spendingLimit, int month) {
-    }
 }
