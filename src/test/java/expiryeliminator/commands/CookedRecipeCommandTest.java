@@ -29,7 +29,7 @@ class CookedRecipeCommandTest {
     @Test
     public void cookedRecipeCommand_correctInputAndSufficientIngredientQuantity_ingredientRepositoryUpdated() {
         final RecipeList recipes = TestUtil.generateRecipeListWithSingleRecipe();
-        final IngredientRepository ingredients = TestUtil.generateIngredientRepositoryForCookedRecipeCommand();
+        final IngredientRepository ingredients = TestUtil.generateIngredientRepositoryForExampleRecipe(2,40);
         Command command = new CookedRecipeCommand(TestUtil.EXAMPLE_RECIPE_NAME);
         String successMessage = String.format(CookedRecipeCommand.MESSAGE_RECIPE_COOKED,
                 TestUtil.generateFirstIngredient() + "\n" + TestUtil.generateSecondIngredient() + "\n");

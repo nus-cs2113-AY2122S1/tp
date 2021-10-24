@@ -214,7 +214,7 @@ public class TestUtil {
         }
     }
 
-    public static IngredientRepository generateIngredientRepositoryForCookedRecipeCommand() {
+    public static IngredientRepository generateIngredientRepositoryForExampleRecipe(int quantity1, int quantity2) {
         final LocalDate currentDate = LocalDate.now();
         final LocalDate currentDatePlusThreeDays = currentDate.plus(3, ChronoUnit.DAYS);
         final LocalDate currentDatePlusThreeWeeks = currentDate.plus(3, ChronoUnit.WEEKS);
@@ -223,9 +223,9 @@ public class TestUtil {
 
         try {
             //expiring
-            ingredientRepository.add("Chicken", null, 2, currentDatePlusThreeDays);
+            ingredientRepository.add("Chicken", null, quantity1, currentDatePlusThreeDays);
             //fresh
-            ingredientRepository.add("Salt", null, 40, currentDatePlusThreeWeeks);
+            ingredientRepository.add("Salt", null, quantity2, currentDatePlusThreeWeeks);
             return ingredientRepository;
         } catch (DuplicateDataException e) {
             fail("Ingredient repository should be valid by definition");
