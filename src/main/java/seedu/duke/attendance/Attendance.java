@@ -25,6 +25,14 @@ public class Attendance {
         return trainingName;
     }
 
+    public String getMemberName(){
+        return memberName;
+    }
+
+    public String getAttended(){
+        return attended;
+    }
+
     /**
      * Formats description of attendance to be displayed to user.
      *

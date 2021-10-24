@@ -32,7 +32,7 @@ public class MemberStorage {
             }
         } else {
             try {
-                System.out.println("file loaded");
+                System.out.println("file loaded" + dukeMemberFile.getCanonicalPath());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -93,7 +93,7 @@ public class MemberStorage {
     }
 
     /**
-     * This method rewrites the entire duke attendance file.
+     * This method rewrites the entire duke member file.
      *
      * @param dukeMemberFile  the member file
      * @param memberList     the current member list

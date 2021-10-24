@@ -391,9 +391,9 @@ public class Parser {
         Attendance attendance = getAttendanceDetails(query);
         assert attendance != null : "attendance should not be empty";
 
-        String trainingName = attendance.getTrainingName();
-
         attendanceList.addAttendance(attendance);
+        AttendanceStorage.writeToAttendance(attendanceList,attendance);
+
         Ui.printAddedAttendanceMessage(attendance);
     }
 

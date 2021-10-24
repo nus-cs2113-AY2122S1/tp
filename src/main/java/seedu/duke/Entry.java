@@ -24,6 +24,7 @@ public class Entry {
 
         if (flag == 0) {
             MemberStorage.setupMemberFile(members);
+            AttendanceStorage.setUpAttendanceStorage(attendanceList);
         }
 
         switch (keyword) {
