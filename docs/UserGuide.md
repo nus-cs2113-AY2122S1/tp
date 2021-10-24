@@ -11,7 +11,7 @@
     * [Accessing the module management workspace : `module`](#accessing-the-module-management-workspace)
     * [Adding a module : `add "<module_code>"`](#adding-a-module)
     * [Deleting a module : `delete <index>`](#deleting-a-module)
-    * [Updating a module information :`update <index> "<new_module_code>"`](#updating-a-module)
+    * [Updating a module :`update <index> "<new_module_code>"`](#updating-a-module)
     * [Viewing module information `view`](#viewing-module-information)
 - [Section: Module](#section-module)
     * [Accessing module workspace : `go <module_code>`](#accessing-module-workspace)
@@ -79,6 +79,17 @@ Terminologies used throughout this guide:
 |workspace indicator|A workspace indicator shows the current workspace you are currently in when using `TermiNUS`. For example, in the expected output for commands, you will be able to see `[] >>>` which means you are in the **default workspace**, `[module] >>>` which means you are in the **module management workspace**. etc.|
 |default workspace|The very first workspace when executing the `TermiNUS` program. For example, `[] >>>` indicates you are currently in the **default workspace**.|
 |module|A module refers to a NUS module. For example, `CS2113T` is a module.|
+
+Icons used throughout this guide:
+
+> ⚠️A caution that you have to keep in mind when using the command.
+
+> 💡 Take note when you see this icon, as it might tell you something important.
+
+> ❗ Important things you should take note of before using the command.
+
+Lastly, text that is blue like this example, are clickable [links]() that will bring you to the 
+relevant part of this user guide.
 
 ---
 
@@ -228,7 +239,7 @@ Deleted module CS2113T.
 **Format:** `update <index> "<new_module_code>"`
 
 Updates a module name in the module management workspace.
-> ⚠️The `<new_module_code>` will have the same restrictions as the [add command](#adding-a-new-module).  
+> ⚠️The `<new_module_code>` will have the same restrictions as the [add command](#adding-a-module).  
 
 Example: `update 1 "CS2113"`
 
