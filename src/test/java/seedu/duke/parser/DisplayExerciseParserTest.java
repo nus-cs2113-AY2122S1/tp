@@ -1,5 +1,6 @@
 package seedu.duke.parser;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.Command;
 import seedu.duke.command.exercise.DisplayExercisesCommand;
@@ -16,6 +17,11 @@ class DisplayExerciseParserTest {
     private DisplayExerciseParser parser;
     private Command result;
 
+    @BeforeEach
+    void setUp() {
+        Command.workoutMode = 0;
+    }
+
     @Test
     void parseInput_validInput_returnsDisplayExerciseCommand() {
         parser = new DisplayExerciseParser("display 2");
@@ -28,7 +34,7 @@ class DisplayExerciseParserTest {
         parser = new DisplayExerciseParser("display    ");
         result = parser.parseInput();
         //assertTrue(result instanceof IncorrectCommand);
-        assertEquals(result.getClass(), IncorrectCommand.class);
+        assertEquals(IncorrectCommand.class, result.getClass());
         parser = new DisplayExerciseParser("display");
         result = parser.parseInput();
         //assertTrue(result instanceof IncorrectCommand);
