@@ -886,10 +886,10 @@ ___
 
 ## FAQ
 **Q:** Can I edit the information in the`data` directory?  
-**A:** Yes! **TermiNUS** saves and loads your information form the `data` directory, editing the files
-in the `data` folder works. We recommend that you update the **contents** of any notes `.txt` in the 
-`data/module_name` directory. However, we do not recommend modifying any configuration file 
-or renaming any file/folders. You should use **TermiNUS** instead to edit any information.
+**A:** Yes! **TermiNUS** saves and loads your information from the `data` folder. You are able to edit the files
+in the `data` folder. We recommend you to update the **contents** of any notes which should be a `.txt` file in the 
+`data/module_name` directory. However, we **do not** recommend modifying any configuration file such as `.json` file 
+or renaming any folders in the `data` folder including the `data` folder itself. For these, you should use **TermiNUS** instead to edit.
 
 ___  
 
