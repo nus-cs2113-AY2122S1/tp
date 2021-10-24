@@ -43,11 +43,4 @@ class CommandManagerTest {
         DeleteWorkoutCommand result = (DeleteWorkoutCommand) generator.generateCommand(input);
         assertEquals(result.getWorkoutIndex(), testIndex);
     }
-
-    @Test
-    void generateCommand_markExerciseAsDoneCorrect_returnsMarkExerciseAsDoneCommand() {
-        String input = "done 3, 1";
-        Command result = generator.generateCommand(input);
-        assertTrue(result instanceof MarkExerciseAsDoneCommand);
-    }
 }
