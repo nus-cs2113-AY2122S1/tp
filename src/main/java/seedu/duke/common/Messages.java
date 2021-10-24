@@ -37,16 +37,22 @@ public class Messages {
     public static final String UNAVAILABLE_ITEM_MESSAGE = "  (!) Sorry, the item is unavailable.";
     public static final String RETURN_SUCCESS = "  (+) Item has been returned:";
     public static final String WRONG_ITEM_MESSAGE = "  (!) Item is not on loan!";
+    public static final String ALREADY_RESERVED_MESSAGE = "  (!) Sorry, the item has already been reserved for someone";
     // Remove
-    public static final String RM_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
-            + "  (!) Format: rm <id>";
     public static final String RM_SUCCESS = "  (+) Removed the following item:";
     // Add
     public static final String ADD_MESSAGE = "  (+) Added new item to catalogue:";
-    public static final String FORMAT_INCORRECT = "  (!) Invalid/missing values!" + System.lineSeparator()
-            + "  (!) Format: add t/TITLE i/ID";
     public static final String INVALID_TITLE = "  (!) Please enter a valid title";
     public static final String ADD_DUPLICATE_ID = "  (!) ID cannot be a duplicate!";
+    // Invalid Formats
+    public static final String ADD_INVALID_FORMAT = "  (!) Invalid/missing values!" + System.lineSeparator()
+            + "  (!) Format: add t/TITLE i/ID";
+    public static final String RM_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: rm ID";
+    public static final String RESERVE_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: reserve i/ID u/USER";
+    public static final String LOAN_INVALID_FORMAT = "  (!) Invalid/missing values" + System.lineSeparator()
+            + "  (!) Format: loan i/ID u/USER d/DUE_DATE(dd-mm-yyyy)";
     // Generic Errors
     public static final String INVALID_ID = "  (!) Invalid Item ID!";
 }
