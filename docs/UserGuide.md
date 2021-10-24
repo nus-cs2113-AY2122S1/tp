@@ -446,6 +446,7 @@ your data will be there!
 **A**: Data Structures and Algorithms in Java -> [here](https://www.amazon.com/Data-Structures-Algorithms-Java-2nd/dp/0672324539)
 
 ## Command Summary
+
 Action | Command Format | Example
 ------------ | ------------ | ------------
 Set goal | `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>` | `set n/Reduce spending e/31122022`
