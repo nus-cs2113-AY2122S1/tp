@@ -11,9 +11,7 @@ import java.util.List;
 import static medbot.ui.Ui.END_LINE;
 
 
-public class PersonList extends MedBotList {
-
-public abstract class PersonList {
+public abstract class PersonList extends MedBotList {
 
     private final HashMap<Integer, Person> persons = new HashMap<>();
     private int lastId = 1;
