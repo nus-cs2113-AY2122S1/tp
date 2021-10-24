@@ -21,6 +21,7 @@ public class University implements Comparator<University> {
     //    }
     public University() {
     }
+
     public University(String name, ArrayList<ModuleMapping> list, UniversityList universityMasterList) {
         this.name = name;
         this.list = list;
