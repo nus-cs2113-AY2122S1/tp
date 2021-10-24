@@ -1,4 +1,7 @@
-package seedu.duke.items;
+package seedu.duke.items.mainlists;
+
+import seedu.duke.items.Event;
+import seedu.duke.items.Item;
 
 import java.util.ArrayList;
 
