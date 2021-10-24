@@ -66,6 +66,7 @@ The below table represents what each means.
 | ----------- | ----------- |
 | `{value}` |  The value is optional, and including it may provide different results.|
 | `<value>` | The value is required for the command to work properly.|
+|`"<value>"`| Some command have `""` quotes in it, this is required for the command to work properly. For example, `add "<value>"` would need to be `add "something"`.|
 |`index`|A number identifying an item in TermiNUS. This index can only be viewed using the `view` command.|
 |`start_time`|The `start time` must be in a **HH:mm** format which follows the **24-hour notation**. For example, `14:20` is valid which represents `2:20 pm`.|
 |`day`|The `day` must be a day spelled out fully. For example, `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` and `Sunday` are the only **7** valid days.|
