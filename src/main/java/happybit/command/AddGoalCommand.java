@@ -1,5 +1,7 @@
 package happybit.command;
 
+import happybit.exception.HaBitCommandException;
+import happybit.exception.HaBitStorageException;
 import happybit.goal.Goal;
 import happybit.goal.GoalList;
 import happybit.storage.Storage;
@@ -26,8 +28,15 @@ public class AddGoalCommand extends AddCommand {
      * @param storage      Reference to the file where data is stored.
      */
     @Override
-    public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) {
-        goalList.addGoal(goal, printManager);
+    public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
+        goalList.addGoal(this.goal, printManager);
+
+        try {
+            int index = goalList.getListLength() - 1;
+            storage.export(this.goal, index);
+        } catch (HaBitStorageException e) {
+            printManager.showError(e.getMessage());
+        }
     }
 
 }

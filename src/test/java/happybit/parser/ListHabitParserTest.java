@@ -1,3 +1,4 @@
+/*
 package happybit.parser;
 
 import happybit.command.ListHabitsCommand;
@@ -72,3 +73,4 @@ class ListHabitParserTest {
                 ((ListHabitsCommand) ListHabitParser.parseListHabitCommand("1")).getGoalIndex());
     }
 }
+*/

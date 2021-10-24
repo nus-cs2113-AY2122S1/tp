@@ -1,6 +1,7 @@
 package happybit.command;
 
 import happybit.exception.HaBitCommandException;
+import happybit.exception.HaBitStorageException;
 import happybit.goal.GoalList;
 import happybit.habit.Habit;
 import happybit.storage.Storage;
@@ -32,7 +33,13 @@ public class AddHabitCommand extends AddCommand {
      */
     @Override
     public void runCommand(GoalList goalList, PrintManager printManager, Storage storage) throws HaBitCommandException {
-        goalList.addHabitToGoal(habit, goalIndex, printManager);
+        goalList.addHabitToGoal(this.habit, goalIndex, printManager);
+
+        try {
+            storage.export(this.habit, goalIndex);
+        } catch (HaBitStorageException e) {
+            printManager.showError(e.getMessage());
+        }
     }
 
 }

@@ -49,7 +49,7 @@ The diagram below shows the higher-level implementation of the interactions of a
 
 ![Ui Diagram](Diagram Images/SystemArchitecture.png)
 
-In the sections below, we will be explaining in detail how each compomponent works.
+In the sections below, we will be explaining in detail how each component works.
 
 ### UI component
 
