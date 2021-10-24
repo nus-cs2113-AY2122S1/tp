@@ -51,9 +51,9 @@ public class Expense {
     public Expense(String inputDescription) {
         String[] expenseInfo = inputDescription.split(" ", 3);
         this.amountSpent = Double.parseDouble(expenseInfo[0]);
-        this.description = expenseInfo[1].toLowerCase();
+        this.category = expenseInfo[1].toLowerCase();
         this.personsList = checkValidPersons(expenseInfo[2]);
-        this.category = getDescriptionParse(expenseInfo[2]);
+        this.description = getDescriptionParse(expenseInfo[2]);
         this.exchangeRate = Storage.getOpenTrip().getExchangeRate();
         this.date = prompDate();
         if (personsList.size() == 1) {
