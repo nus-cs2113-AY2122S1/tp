@@ -41,12 +41,12 @@ public class Ui {
         System.out.println(e);
     }
 
-    public static void printExpensesSummary(Trip t) {
+    /*public static void printExpensesSummary(Trip t) {
         System.out.println("This is the summary for your " + t.getLocation() + " trip " + t.getDateOfTripString());
-        /*System.out.println("Total budget for this trip: " + stringMoney(t.getBudget()));
+        *//*System.out.println("Total budget for this trip: " + stringMoney(t.getBudget()));
         System.out.println("Total expenditure so far: " + stringMoney(t.getTotalExpenses()));
-        System.out.println("Current budget left for this trip: " + stringMoney(t.getBudgetLeft()));*/
-    }
+        System.out.println("Current budget left for this trip: " + stringMoney(t.getBudgetLeft()));*//*
+    }*/
 
     public static void printFilteredExpenses(Expense e, int index) {
         System.out.println((index + 1) + ". " + e.toString());
@@ -89,9 +89,6 @@ public class Ui {
                 + "view filter [expense-attribute] [attribute-information]");
     }
 
-    /*public static void printBudgetFormatError() {
-        System.out.print("Please re-enter your budget as a decimal number (e.g. 2000.00): ");
-    }*/
 
     public static void printExchangeRateFormatError() {
         System.out.print("Please re-enter your exchange rate as a decimal number (e.g. 1.32): ");
@@ -134,6 +131,16 @@ public class Ui {
 
     public static void printNoExpensesError() {
         System.out.println("There are no expenses in your trip, please add an expense using the keyword 'expense'.");
+    }
+
+    public static void printNoPersonFound(String string) {
+        System.out.println("There are no persons with the name of [" + string + "] in this trip.");
+    }
+
+    public static void printSummaryFormatError() {
+        System.out.println("Please format your inputs as follows: "
+                + System.lineSeparator()
+                + "\"summary\" or \"summary [person name]\".");
     }
 
     public static void printNoMatchingExpenseError() {
