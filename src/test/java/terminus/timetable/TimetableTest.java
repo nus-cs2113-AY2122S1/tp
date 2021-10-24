@@ -1,5 +1,9 @@
 package terminus.timetable;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.command.Command;
@@ -8,11 +12,6 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.LinkCommandParser;
 import terminus.ui.Ui;
-
-import java.io.IOException;
-
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 class TimetableTest {
     private ModuleManager moduleManager;
@@ -24,7 +23,6 @@ class TimetableTest {
     void setUp() {
         this.moduleManager = new ModuleManager();
         moduleManager.addModule(tempModule);
-        this.ui = new Ui();
     }
 
     @Test
@@ -35,15 +33,15 @@ class TimetableTest {
         linkCommandParser.setModuleName(tempModule);
 
         Command addLinkCommand = linkCommandParser.parseCommand("add \"test\" \"Monday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
-        addLinkCommand.execute(ui, moduleManager);
+        addLinkCommand.execute(moduleManager);
         assertNotNull(timetable.getDailySchedule("Monday"));
 
         Command addLinkCommand1 = linkCommandParser.parseCommand("add \"test\" \"Thursday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
-        addLinkCommand1.execute(ui, moduleManager);
+        addLinkCommand1.execute(moduleManager);
         assertNotNull(timetable.getDailySchedule("Thursday"));
 
         Command addLinkCommand2 = linkCommandParser.parseCommand("add \"test\" \"Friday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
-        addLinkCommand2.execute(ui, moduleManager);
+        addLinkCommand2.execute(moduleManager);
         assertNotNull(timetable.getDailySchedule("Friday"));
     }
 
@@ -53,13 +51,13 @@ class TimetableTest {
         linkCommandParser.setModuleName(tempModule);
 
         Command addLinkCommand = linkCommandParser.parseCommand("add \"test\" \"Monday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
-        addLinkCommand.execute(ui, moduleManager);
+        addLinkCommand.execute(moduleManager);
 
         Command addLinkCommand1 = linkCommandParser.parseCommand("add \"test\" \"Thursday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
-        addLinkCommand1.execute(ui, moduleManager);
+        addLinkCommand1.execute(moduleManager);
 
         Command addLinkCommand2 = linkCommandParser.parseCommand("add \"test\" \"Friday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
-        addLinkCommand2.execute(ui, moduleManager);
+        addLinkCommand2.execute(moduleManager);
 
         Timetable timetable = new Timetable(moduleManager);
         assertNull(timetable.getDailySchedule("Tuesday"));
@@ -77,15 +75,15 @@ class TimetableTest {
         assertNull(timetable.getWeeklySchedule());
 
         Command addLinkCommand = linkCommandParser.parseCommand("add \"test\" \"Monday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
-        addLinkCommand.execute(ui, moduleManager);
+        addLinkCommand.execute(moduleManager);
         assertNotNull(timetable.getWeeklySchedule());
 
         Command addLinkCommand1 = linkCommandParser.parseCommand("add \"test\" \"Thursday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
-        addLinkCommand1.execute(ui, moduleManager);
+        addLinkCommand1.execute(moduleManager);
         assertNotNull(timetable.getWeeklySchedule());
 
         Command addLinkCommand2 = linkCommandParser.parseCommand("add \"test\" \"Friday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
-        addLinkCommand2.execute(ui, moduleManager);
+        addLinkCommand2.execute(moduleManager);
         assertNotNull(timetable.getWeeklySchedule());
     }
 

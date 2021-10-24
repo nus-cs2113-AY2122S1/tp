@@ -9,7 +9,6 @@ import terminus.common.TerminusLogger;
 import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 import terminus.timetable.Timetable;
-import terminus.ui.Ui;
 
 public class TimetableCommand extends Command {
 
@@ -54,12 +53,11 @@ public class TimetableCommand extends Command {
     /**
      * Executes the timetable command. Prints the relevant response to the Ui.
      *
-     * @param ui The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return CommandResult to indicate the success and additional information about the execution.
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager) {
+    public CommandResult execute(ModuleManager moduleManager) {
         StringBuilder result = new StringBuilder();
         Timetable timetable = new Timetable(moduleManager);
         String schedule;
@@ -71,7 +69,6 @@ public class TimetableCommand extends Command {
             schedule = timetable.getDailySchedule(day);
         }
         result.append(timetable.checkEmptySchedule(schedule, day));
-        ui.printSection(result.toString());
-        return new CommandResult(true, false);
+        return new CommandResult(result.toString());
     }
 }
