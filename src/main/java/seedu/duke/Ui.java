@@ -151,7 +151,8 @@ public class Ui {
         show("Total Tours: " + count);
     }
 
-    public void showFindTour(TourList tours, ClientPackageList clientPackages, String code) throws TourPlannerException {
+    public void showFindTour(TourList tours, ClientPackageList clientPackages, String code)
+            throws TourPlannerException {
         Tour foundTour = tours.getTourByCode(code);
         if (foundTour != null) {
             show(FIND_SUCCESS_MESSAGE_LEFT + "tours " + FIND_MESSAGE_RIGHT);
@@ -217,7 +218,8 @@ public class Ui {
         show("Total Flights: " + count);
     }
 
-    public void showFindFlight(FlightList flights, ClientPackageList clientPackages, String code) throws TourPlannerException {
+    public void showFindFlight(FlightList flights, ClientPackageList clientPackages, String code)
+            throws TourPlannerException {
         Flight foundFlight = flights.getFlightById(code);
         if (foundFlight != null) {
             show(FIND_SUCCESS_MESSAGE_LEFT + "flights " + FIND_MESSAGE_RIGHT);

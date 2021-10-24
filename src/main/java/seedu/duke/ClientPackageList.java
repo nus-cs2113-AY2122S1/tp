@@ -3,7 +3,8 @@ package seedu.duke;
 import java.util.ArrayList;
 
 public class ClientPackageList {
-    private static final String CLIENTPACKAGE_NOT_FOUND_MESSAGE = "Client Package ID cannot be found. Please try another Client Package ID";
+    private static final String CLIENTPACKAGE_NOT_FOUND_MESSAGE
+            = "Client Package ID cannot be found. Please try another Client Package ID";
 
     private static ArrayList<ClientPackage> clientPackages;
     private static int clientPackageCount = 0;
@@ -69,8 +70,8 @@ public class ClientPackageList {
     }
 
     public void cut(ClientPackage clientPackage) {
-            clientPackages.remove(clientPackage);
-            clientPackageCount--;
+        clientPackages.remove(clientPackage);
+        clientPackageCount--;
     }
 
 }

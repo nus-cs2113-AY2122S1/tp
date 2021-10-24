@@ -47,7 +47,7 @@ public class Parser {
             }
             return new ClearCommand();
         case "cut":
-                return parseCut(params);
+            return parseCut(params);
         case "find":
             return parseFind(params);
         default:
