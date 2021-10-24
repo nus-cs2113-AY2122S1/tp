@@ -84,4 +84,22 @@ public class Export {
         }
     }
 
+    protected void exportHabit(Habit habit, int index) throws HaBitStorageException {
+        try {
+            FileWriter fileWriter = new FileWriter(this.filePath, true);
+
+            int doneValue = habit.getDone() ? 1 : 0;
+            String habitToWrite = index + DELIMITER
+                    + HABIT_TYPE + DELIMITER
+                    + doneValue + DELIMITER
+                    + habit.getHabitName() + DELIMITER
+                    + habit.getHabitDateString() + DELIMITER
+                    + habit.getInterval() + NEWLINE;
+
+            fileWriter.write(habitToWrite);
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new HaBitStorageException(e.getMessage());
+        }
+    }
 }

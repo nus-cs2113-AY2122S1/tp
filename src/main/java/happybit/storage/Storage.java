@@ -3,6 +3,7 @@ package happybit.storage;
 import happybit.exception.HaBitStorageException;
 import happybit.goal.Goal;
 import happybit.goal.GoalList;
+import happybit.habit.Habit;
 
 import java.io.File;
 import java.io.IOException;
@@ -81,5 +82,8 @@ public class Storage {
     public void export(Goal goal, int index) throws HaBitStorageException {
         export.exportGoal(goal, index);
     }
+
+    public void export(Habit habit, int index) throws HaBitStorageException {
+        export.exportHabit(habit, index);
     }
 }
