@@ -28,6 +28,7 @@ public class RemoveUniCommand extends Command {
             Ui.printUniversity(universityToRemove);
         }
     }
+    
     public RemoveUniCommand(University universityToRemove, UniversityList universityMasterList,
                             UniversityList universitySelectedList) throws IOException {
         this.universityToRemove = universityToRemove;

@@ -1,6 +1,9 @@
 package seedu.duke.parser;
 
-import seedu.duke.commands.*;
+import seedu.duke.commands.Command;
+import seedu.duke.commands.RemoveMapCommand;
+import seedu.duke.commands.RemoveModCommand;
+import seedu.duke.commands.RemoveUniCommand;
 import seedu.duke.constants.Constants;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
@@ -83,11 +86,11 @@ public class RemoveCommandParser {
             uniName = universityMasterList.get(uniIndex - 1).getName();
             university = new University(uniName, new ArrayList<>(), uniIndex);
         }
-            // Check if university has been added already
-            if (!universitySelectedList.searchUniversity(uniName)) {
-                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
-            }
+        // Check if university has been added already
+        if (!universitySelectedList.searchUniversity(uniName)) {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
+        }
     }
 
     private void handleModFlagArgs(String arguments, ModuleList moduleMasterList,
