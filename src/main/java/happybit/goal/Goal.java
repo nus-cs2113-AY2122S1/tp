@@ -124,17 +124,6 @@ public class Goal {
         return habitList.size();
     }
 
-    public String getStartDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-
-        return dateFormat.format(this.startDate);
-    }
-
-    public String getEndDate() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-
-        return dateFormat.format(this.endDate);
-    }
 
     /**
      * Gets the corresponding 2-character code for the goalType.
