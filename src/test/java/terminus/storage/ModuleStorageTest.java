@@ -9,7 +9,9 @@ import com.google.gson.JsonSyntaxException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -267,9 +269,13 @@ public class ModuleStorageTest {
     void loadNotesFromModule_success() throws IOException {
         moduleStorage.loadNotesFromModule(moduleManager, tempModule);
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(Note.class).getTotalContents());
-        Path nonTextFilePath = Paths.get(RESOURCE_FOLDER.toString(), tempModule, "test1.py");
+        Path nonTextFilePath = Paths.get(RESOURCE_FOLDER.toString(), tempModule, "test1.ser");
         File nonTextFile = new File(nonTextFilePath.toString());
-        nonTextFile.createNewFile();
+        FileOutputStream output = new FileOutputStream(nonTextFile);
+        ObjectOutputStream objectOutput = new ObjectOutputStream(output);
+        objectOutput.writeObject("save");
+        objectOutput.flush();
+        objectOutput.close();
         moduleStorage.loadNotesFromModule(moduleManager, tempModule);
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(Note.class).getTotalContents());
     }
