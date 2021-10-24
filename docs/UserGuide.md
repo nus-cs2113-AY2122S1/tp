@@ -44,7 +44,20 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 ## Features
 
-### Notes about the command format:
+1. Storage
+	Allows saving and loading of budget and loan data.
+	
+2. Statistics
+
+3. Loan Tracker
+
+4. Loan Reminder
+
+5. Budget Tracker
+
+6. Expenditure Categories
+
+## Notes about the command format:
 * Words in UPPER_CASE are the parameters to be supplied by the user. <br />
 e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`
 * Words encased in `<>` are optional parameters.
