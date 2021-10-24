@@ -8,6 +8,8 @@ comprising features typically found in a Graphical User Interface (GUI).
 Students who type fast will find that _Ha(ppy)Bit_ performs habit tracking more efficiently than your 
 conventional GUI apps.
 
+You can find out more about _Ha(ppy)Bit_ at our [Main Page](README.md).
+
 * [Quick Start](#quick-start)
 * [Navigation](#navigation)
 * [Terminology](#terminology)
@@ -35,7 +37,7 @@ download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-
 3. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
 4. Open your terminal of choice inside the folder containing `tp.jar` file.
 5. Run the file using `java -jar tp.jar`.
-6. Upon loading the app you should see the following screen which would indicate that you have successfully run the app
+6. Upon loading the app you should see the following screen which would indicate that you have successfully run the app.
    ```
    ==============================================================================
      _  _   __   ____  ____  _  _  ____  __  ____
@@ -56,8 +58,9 @@ download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-
    ```
 
 ## Navigation
-In the current loading screen, users will be able to execute the following actions based on the number they input
+In the current loading screen, users will be able to execute the following actions based on the number they input.
 1. About Ha(ppy)Bit - Shows brief description of the program and a short meet the team section
+
     ```
    Option: 1
 
@@ -82,14 +85,16 @@ In the current loading screen, users will be able to execute the following actio
     Press enter to return to main menu...
     ```
 2. User Guide - Opens up User Guide github page in user's web browser.
-    ```
+    
+   ```
     Option: 2
 
     Opening in a web browser...
     
     Press enter to return to main menu...
     ```
-3. Developer Guide - Opens up Developer Guide github page in user's web browser
+3. Developer Guide - Opens up Developer Guide github page in user's web browser.
+
     ```
     Option: 3
 
@@ -99,6 +104,7 @@ In the current loading screen, users will be able to execute the following actio
     ```
 4. Demo Video - Links to Demo Video (Not done yet)
 5. Start Application - Brings user to the application. User can start using the app or continue where they left off.
+
     ```
     Starting application...
     Type 'return' to return to main menu
@@ -120,6 +126,12 @@ Name  | Description | Example
 ----- | --------------------------------------------------------- | -------------------
 Goal  | A long term achievement you wish to accomplish.           |`Lose 5kg by Dec`
 Habit | Checkpoints; actionable tasks to be done to achieve goal. | `Run 5km`         
+
+**Notes about command format:**
+* words enclosed in angle brackets, `<>` are the parameters which the input the
+user is supposed to provide.
+  * e.g `view g/<goal index>` can be `view g/1`.
+* The parameters enclosed in curly brackets, `{}`, are optional.
 
 ## Features 
 
@@ -238,11 +250,13 @@ Your habit:  Run 4km has been added to your goal: [DF] Exercise More
 ### Complete a Habit: `done`
 Marks a habit under a goal as done.
 
-Format: `done <GOAL_INDEX> <HABIT_INDEX>`
+Format: `done g/<goal index> h/<habit index>`
+
+* `<goal index>` and `<habit index>` are integers.
 
 Example: 
 ```
-done 1 2
+done g/1 h/2
 ```
 
 Output: 
@@ -269,18 +283,20 @@ Your habit of " Run 6km" under the goal "[DF] Exercise More" has been deleted.
 ### View all Habits: `view`
 Lists all habits under a specific goal.
 
-Format: `view <GOAL_INDEX>` 
+Format: `view g/<goal index>`
+
+* `<goal index>` is an integer.
 
 Example:
 ```
-view 1
+view g/1
 ```
 
 Output
 ```
 Here are your 2 habit(s) under the goal "[EX] Exercise More".
-[ ]  Run 4km
-[X]  Run 6km
+1. [ ]  Run 4km
+2. [X]  Run 6km
 ```
 
 ### Exit the Program: `bye`
@@ -310,7 +326,11 @@ one for you at the relative storage path, `data/habits.txt`.
 
 **Saving data:** 
 
-Before you exit the program, the goals you set and the habits you tracked
+* Everytime you make changes to any of your goals and habits, the changes
+are **immediately** reflected in the storage file. This is to ensure that in the
+event you closed the program without using the command `bye`, we can ensure that
+**most of your data are saved**.
+* Before you exit the program, the goals you set and the habits you have added
 are **automatically** saved in a text file at the relative storage path, `data/habits.txt`.
 
 ## FAQ
@@ -327,9 +347,9 @@ Set goal | `set <GOAL_NAME> {-<GOAL_TYPE> /<START_DATE>} /<END_DATE>` | `set Red
 Remove goal | `remove <GOAL_INDEX>` | `remove 1`
 List goals | `list` | `list`
 Add habit | `add <GOAL_INDEX> <HABIT_NAME>` | `add 1 Run 4km`
-Done habit | `done <GOAL_INDEX> <HABIT_INDEX>` | `done 1 2`
+Done habit | `done g/<goal index> h/<habit index>` | `done g/1 h/2`
 Delete habit  | `delete <GOAL_INDEX> <HABIT_INDEX>` | `delete 2 1`
-View habits | `view <GOAL_INDEX>` | `view 1`
+View habits | `view g/<goal index>` | `view g/1`
 Exit Program | `bye` | `bye`
 
 ## Useful Links
