@@ -9,4 +9,9 @@ public class PatientList extends PersonList {
         return "No Patient with ID " + patientId + " found." + END_LINE;
     }
 
+    @Override
+    protected String getAlreadyArchivedErrorMessage(int patientId) {
+        return "The patient with ID " + patientId + " is already archived." + END_LINE;
+    }
+
 }

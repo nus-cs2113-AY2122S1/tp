@@ -1,7 +1,5 @@
 package medbot.ui;
 
-import medbot.list.PersonList;
-
 public class StaffUi {
     public static final String END_LINE = System.lineSeparator();
     public static final String TABLE_ROW_SEPARATOR = " ------------------------------------------------"
@@ -60,6 +58,14 @@ public class StaffUi {
                 + "delete STAFF_ID" + END_LINE
                 + "Expected Output:" + END_LINE
                 + "Staff with id STAFF_ID deleted from system." + END_LINE;
+    }
+
+    public static String getArchiveStaffHelpMessage() {
+        return "Archive a staff from the list." + END_LINE
+                + "Format:" + END_LINE
+                + "archive STAFF_ID" + END_LINE
+                + "Expected Output:" + END_LINE
+                + "Staff with id STAFF_ID is successfully archived." + END_LINE;
     }
 
     /**

@@ -157,6 +157,30 @@ public class Ui {
     }
 
     /**
+     * Returns the successful message of archiving a person.
+     *
+     * @param personId  the ID of the person to be archived.
+     * @param viewType the viewType context of the command.
+     * @return The successful message of archiving the person
+     */
+    public static String getArchivePersonMessage(int personId, ViewType viewType) throws MedBotException {
+        String output;
+        switch (viewType) {
+        case PATIENT_INFO:
+            output = "The patient with ID: " + personId + " is archived successfully.";
+            break;
+        case MEDICAL_STAFF_INFO:
+            output = "The staff with ID: " + personId + " is archived successfully.";
+            break;
+        default:
+            assert false;
+            throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
+        }
+
+        return output;
+    }
+
+    /**
      * Prints an exit message when MedBot is exiting.
      *
      * @return the exit Message
@@ -311,6 +335,23 @@ public class Ui {
      */
     public String getSwitchHelpMessage() {
         return " " + END_LINE;
+    }
+
+    /**
+     * Prints information about archive command.
+     *
+     * @return the information on archive command.
+     */
+    public String getArchiveHelpMessage(ViewType viewType) throws MedBotException {
+        switch (viewType) {
+        case PATIENT_INFO:
+            return PatientUi.getArchivePatientHelpMessage();
+        case MEDICAL_STAFF_INFO:
+            return StaffUi.getArchiveStaffHelpMessage();
+        default:
+            assert false;
+            throw new MedBotException(ERROR_VIEW_CONTEXT_NOT_FOUND);
+        }
     }
 
 

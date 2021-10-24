@@ -144,6 +144,16 @@ public abstract class PersonList {
         return output;
     }
 
+    public void archivePerson(int personId) throws MedBotException {
+        if (!persons.containsKey(personId)) {
+            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
+        }
+        if (persons.get(personId).isArchived()) {
+            throw new MedBotException(getAlreadyArchivedErrorMessage(personId));
+        }
+        persons.get(personId).archive();
+    }
+
     /**
      * For the person with the specified personId, returns the appointmentId of the appointment at the specified
      * time code, or -1 if there is none.
@@ -212,6 +222,8 @@ public abstract class PersonList {
      * @return exception message when no person with the specified id is found
      */
     protected abstract String getPersonNotFoundErrorMessage(int personId);
+
+    protected abstract String getAlreadyArchivedErrorMessage(int personId);
 
     /**
      * Get storageString for all persons.

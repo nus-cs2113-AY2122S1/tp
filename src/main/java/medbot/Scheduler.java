@@ -1,13 +1,12 @@
 package medbot;
 
-import java.util.List;
 import medbot.exceptions.MedBotException;
 import medbot.list.MedicalStaffList;
 import medbot.list.PatientList;
 import medbot.list.SchedulerAppointmentList;
-import medbot.person.Patient;
 import medbot.person.Person;
-import medbot.person.Staff;
+
+import java.util.List;
 
 public class Scheduler {
     private static final String ERROR_ADD_INCOMPLETE_APPOINTMENT = "Incomplete appointment.";
@@ -162,6 +161,26 @@ public class Scheduler {
      */
     public String listStaff() {
         return medicalStaffList.listPersons();
+    }
+
+    /**
+     * Removes the patient with the specified id.
+     *
+     * @param patientId the id of the patient to remove.
+     * @throws MedBotException if there is no patient with that id
+     */
+    public void archivePatient(int patientId) throws MedBotException {
+        patientList.archivePerson(patientId);
+    }
+
+    /**
+     * Archives the staff with the specified id.
+     *
+     * @param staffId the id of the staff to archive.
+     * @throws MedBotException if there is no staff with that id
+     */
+    public void archiveStaff(int staffId) throws MedBotException {
+        medicalStaffList.archivePerson(staffId);
     }
 
     /**
