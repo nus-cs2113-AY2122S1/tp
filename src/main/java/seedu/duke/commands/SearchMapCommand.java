@@ -1,6 +1,7 @@
 package seedu.duke.commands;
 
 import seedu.duke.modules.ModuleList;
+import seedu.duke.ui.Ui;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
@@ -16,7 +17,11 @@ public class SearchMapCommand extends Command {
         if (selectedUniversity.getSelectedMappings(moduleSelectedList).isEmpty()) {
             System.out.println("There is no potential mappings for " + selectedUniversity.getName());
         } else {
-            System.out.println("Potential mappings for " + selectedUniversity.getName() + ": ");
+            System.out.print("Potential mappings for ");
+
+            System.out.print(selectedUniversity.getName() + " ");
+            Ui.printIndex(selectedUniversity.getIndex(), false);
+            System.out.println(":");
             selectedUniversity.listSelectedMappings(moduleSelectedList);
         }
     }

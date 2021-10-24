@@ -38,12 +38,14 @@ public class SelectedUniversityStorage {
         ArrayList<University> universities = new ArrayList<>();
         ArrayList<ModuleMapping> moduleMappings = new ArrayList<>();
         String curr = " ";
+        UniversityList universityMasterList = new UniversityList(UniversityStorage.load());
+        int index = 0;
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
             if (curr.equals(" ")) {
                 curr = line;
             } else if (!line.contains("#")) {
-                universities.add(new University(curr, moduleMappings));
+                universities.add(new University(curr, moduleMappings, universityMasterList));
                 curr = line;
                 moduleMappings = new ArrayList<>();
             } else {

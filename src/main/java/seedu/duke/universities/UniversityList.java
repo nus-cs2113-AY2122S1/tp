@@ -3,6 +3,7 @@ package seedu.duke.universities;
 import seedu.duke.modules.Module;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class UniversityList {
 
@@ -19,6 +20,7 @@ public class UniversityList {
     public void addUniversity(University addedUniversity) {
         assert addedUniversity != null;
         list.add(addedUniversity);
+        list.sort(new University());
         assert !list.isEmpty();
     }
 
@@ -68,9 +70,9 @@ public class UniversityList {
     }
 
     public University getUniversity(String universityName) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).name.equals(universityName)) {
-                return list.get(i);
+        for (University university : list) {
+            if (university.name.equals(universityName)) {
+                return university;
             }
         }
         return null;

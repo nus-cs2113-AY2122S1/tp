@@ -6,6 +6,11 @@ public class Constants {
     public static final String INDEX_WRAP_BACK = "]";
     public static final String MODULE_MAPPING_SEPARATOR = " - ";
     public static final String MODULE_NAME_SEPARATOR = " : ";
+    public static final String LINE_SEPARATOR = "============================="
+            + "====================================================";
+    public static final String INDENTATION = "    ";
+    public static final int MODULE_CODE_LENGTH = 8;
+
 
     // Commands
     public static final String COMMAND_REMOVE = "remove";
@@ -35,6 +40,7 @@ public class Constants {
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMOD = "This module has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEUNI = "This university has already been added.";
     public static final String ERRORMSG_PARSEEXCEPTION_DUPLICATEMAP = "This mapping has already been added.";
+    public static final String ERRORMSG_PARSEEXCEPTION_INVALIDUNI = "This university is not in your selected list.";
 
     // Logging messages
     public static final String LOGMSG_PARSESUCCESS = "Parse completed successfully";

@@ -28,7 +28,7 @@ public class AddUniCommand extends Command {
                 .getName().equals(universityToAdd.getName());
         SelectedUniversityStorage.write(universitySelectedList);
         System.out.println("New university added: ");
-        Ui.printUniversity(universityToAdd, universityMasterList);
+        Ui.printUniversity(universityToAdd);
     }
 
     public AddUniCommand(University universityToAdd, UniversityList universityMasterList,
@@ -36,6 +36,7 @@ public class AddUniCommand extends Command {
         this.universityToAdd = universityToAdd;
         assert universityToAdd.getName() != null;
         assert universityToAdd.getClass() != null;
+        // universityToAdd.clearMappings();
         universitySelectedList.addUniversity(universityToAdd);
         this.universityIndexToAdd = universityToAdd.getMasterListIndex(universityMasterList);
         assert universitySelectedList.getSize() != 0;
@@ -44,6 +45,6 @@ public class AddUniCommand extends Command {
                 .getName().equals(universityToAdd.getName());
         SelectedUniversityStorage.write(universitySelectedList);
         System.out.println("New university added: ");
-        Ui.printUniversity(universityToAdd, universitySelectedList);
+        Ui.printUniversity(universityToAdd);
     }
 }

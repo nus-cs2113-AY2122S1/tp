@@ -21,30 +21,24 @@ public class ListUniCommand extends Command {
                 printMasterList(universityList);
             } else if (type == ListType.SELECTED) {
                 printSelectedList(universityList);
-//=======
-//            System.out.println("Here are the universities and module mappings in the list:");
-//            for (int i = 0; i < universityList.getSize(); i++) {
-//                assert universityList.get(i).getName() != null;
-//                Ui.printUniversity(universityList.get(i), universityMasterList);
-//>>>>>>> f44e071ae00d3485101b601e76650ef74929d9bb
             }
         }
     }
 
     private void printSelectedList(UniversityList universityList) {
-        System.out.println("Here are the universities and module mappings in the list:");
+        System.out.println("Here are the universities and module mappings in your list:");
         for (int i = 0; i < universityList.getSize(); i++) {
             assert universityList.get(i).getName() != null;
-            Ui.printUniversity(universityList.get(i), universityList);
+            Ui.printUniversity(universityList.get(i));
             universityList.get(i).listAllMappings();
         }
     }
 
     private void printMasterList(UniversityList universityList) {
-        System.out.println("Here are the universities and module mappings in the list:");
+        System.out.println("Here are the universities for exchange:");
         for (int i = 0; i < universityList.getSize(); i++) {
             assert universityList.get(i).getName() != null;
-            Ui.printUniversity(universityList.get(i), universityList);
+            Ui.printUniversity(universityList.get(i));
         }
     }
 }

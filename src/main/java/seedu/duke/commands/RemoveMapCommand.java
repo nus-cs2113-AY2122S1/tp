@@ -20,7 +20,7 @@ public class RemoveMapCommand extends Command {
         ModuleMapping selectedMapping = universityToMap.getMapping(moduleToMap, moduleSelectedList);
         universityToMap.addMapping(moduleToMap, mappedModule);
         System.out.println("This module mapping is removed: ");
-        Ui.printModuleMapping(selectedMapping, moduleIndexToMap);
+        Ui.printMapping(selectedMapping, moduleIndexToMap);
         SelectedUniversityStorage.write(universitySelectedList);
     }
 }

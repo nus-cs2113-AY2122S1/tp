@@ -5,7 +5,6 @@ import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.universities.University;
 import seedu.duke.constants.Constants;
-import seedu.duke.universities.UniversityList;
 
 import static java.lang.System.out;
 
@@ -13,15 +12,29 @@ public class Ui {
 
     public static void printModule(Module mod, int index) {
         printIndex(index, false);
-        out.println(" " + mod.getModuleCode() + Constants.MODULE_NAME_SEPARATOR + mod.getModuleName());
+        StringBuilder codeString = new StringBuilder(mod.getModuleCode());
+        int padding = Constants.MODULE_CODE_LENGTH - mod.getModuleCode().length();
+        for (int i = 0; i < padding; i++) {
+            codeString.append(" ");
+        }
+        out.println(" " + codeString + Constants.MODULE_NAME_SEPARATOR + mod.getModuleName());
     }
 
-    public static void printUniversity(University uni, UniversityList universityMasterList) {
-        printIndex(uni.getMasterListIndex(universityMasterList), false);
+    public static void printMappingForList(ModuleMapping mm, int index) {
+        out.print(index + " |");
+        String mappingDetails
+                = " " + mm.localModule.getModuleCode()
+                + Constants.MODULE_MAPPING_SEPARATOR + mm.mappedModule.getModuleCode()
+                + Constants.MODULE_NAME_SEPARATOR + mm.mappedModule.getModuleName();
+        System.out.println(mappingDetails);
+    }
+
+    public static void printUniversity(University uni) {
+        printIndex(uni.getIndex(), false);
         out.println(Constants.MODULE_MAPPING_SEPARATOR + uni.getName());
     }
 
-    public static void printModuleMapping(ModuleMapping mm, int index) {
+    public static void printMapping(ModuleMapping mm, int index) {
         printIndex(index, false);
         String mappingDetails
                 = " " + mm.localModule.getModuleCode()
@@ -58,5 +71,13 @@ public class Ui {
     public static void welcome() {
         printGlobe();
         printLogo();
+    }
+
+    public static void promptInput() {
+        out.print("Enter a command: ");
+    }
+
+    public static void printLineSeparator() {
+        out.println(Constants.LINE_SEPARATOR);
     }
 }

@@ -4,19 +4,38 @@ import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.modules.ModuleMapping;
 import seedu.duke.ui.Ui;
+import seedu.duke.constants.Constants;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class University {
+public class University implements Comparator<University> {
+    protected int index;
     protected String name;
     public ArrayList<ModuleMapping> list;
 
-    public University(String name) {
-        this.name = name;
-        this.list = new ArrayList<>();
+    //    public University(String name, UniversityList universityMasterList) {
+    //        index = getMasterListIndex(universityMasterList);
+    //        this.name = name;
+    //        this.list = new ArrayList<>();
+    //    }
+    public University() {
     }
 
-    public University(String name, ArrayList<ModuleMapping> list) {
+    public University(String name, ArrayList<ModuleMapping> list, UniversityList universityMasterList) {
+        this.name = name;
+        this.list = list;
+        index = getMasterListIndex(universityMasterList);
+    }
+
+    //    public University(String name, int index) {
+    //        this.index = index;
+    //        this.name = name;
+    //        this.list = new ArrayList<>();
+    //    }
+
+    public University(String name, ArrayList<ModuleMapping> list, int index) {
+        this.index = index;
         this.name = name;
         this.list = list;
     }
@@ -25,28 +44,38 @@ public class University {
         list.add(new ModuleMapping(localModule, mappedModule));
     }
 
+    public void addMapping(ModuleMapping moduleMapping) {
+        list.add(moduleMapping);
+    }
+
+
     public void removeMapping(Module localModule, Module mappedModule) {
         list.remove(new ModuleMapping(localModule, mappedModule));
+    }
+
+    public void clearMappings() {
+        list = new ArrayList<>();
     }
 
     public void listAllMappings() {
         for (int i = 0; i < list.size(); i++) {
             ModuleMapping currentMapping = list.get(i);
-            Ui.printModuleMapping(currentMapping, i + 1);
+            System.out.print(Constants.INDENTATION);
+            Ui.printMappingForList(currentMapping, i + 1);
         }
     }
 
     public void listSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = getSelectedMappings(selectedModuleList);
         for (int i = 0; i < selectedMappings.size(); i++) {
-            Ui.printModuleMapping(selectedMappings.get(i), i + 1);
+            Ui.printMappingForList(selectedMappings.get(i), i + 1);
         }
     }
 
     public ArrayList<ModuleMapping> getSelectedMappings(ModuleList selectedModuleList) {
         ArrayList<ModuleMapping> selectedMappings = new ArrayList<>();
         for (ModuleMapping currentMapping : list) {
-            if (selectedModuleList.searchModule(currentMapping.localModule.getModuleCode())) {
+            if (selectedModuleList.isModuleExist(currentMapping.localModule.getModuleCode())) {
                 selectedMappings.add(currentMapping);
             }
         }
@@ -65,6 +94,10 @@ public class University {
         return selectedMapping;
     }
 
+    public int getMappingListSize() {
+        return list.size();
+    }
+
     public Module getMappedModule(Module selectedLocalModule, ModuleList selectedModuleList) {
         String mappedModuleCode = "";
         for (int i = 0; i < list.size(); i++) {
@@ -79,6 +112,10 @@ public class University {
 
     public String getName() {
         return name;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public int getMasterListIndex(UniversityList universityMasterList) {
@@ -101,6 +138,11 @@ public class University {
                     + System.lineSeparator());
         }
         return result;
+    }
+
+    @Override
+    public int compare(University u, University u1) {
+        return u.index - u1.index;
     }
 
 }

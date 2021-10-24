@@ -3,10 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
 import seedu.duke.storage.SelectedModuleStorage;
-import seedu.duke.storage.SelectedUniversityStorage;
 import seedu.duke.ui.Ui;
-import seedu.duke.universities.University;
-import seedu.duke.universities.UniversityList;
 
 import java.io.IOException;
 
@@ -21,7 +18,7 @@ public class RemoveModCommand extends Command {
             assert moduleToRemove.getModuleName() != null;
             assert moduleSelectedList.getSize() != 0;
             moduleSelectedList.removeModule(moduleToRemove.getModuleCode());
-            assert !moduleSelectedList.searchModule(moduleToRemove.getModuleCode());
+            assert !moduleSelectedList.isModuleExist(moduleToRemove.getModuleCode());
             SelectedModuleStorage.write(moduleSelectedList);
             System.out.println("This module is removed: ");
             Ui.printModule(moduleToRemove, moduleIndexToRemove);
