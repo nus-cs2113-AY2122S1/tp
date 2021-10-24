@@ -130,7 +130,6 @@ public abstract class Parser {
     }
 
     /**
->>>>>>> 08146902260bb36f8caf3b266aa18d64025862a8
      * Processes user input and returns a SwitchCommand.
      *
      * <p>If view type is specified, returns a switch command with that new view type. If not, returns
@@ -163,6 +162,4 @@ public abstract class Parser {
             throw new MedBotParserException(ERROR_INVALID_VIEW_TYPE);
         }
     }
-
-
 }

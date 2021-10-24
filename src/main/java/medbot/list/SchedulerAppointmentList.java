@@ -50,11 +50,11 @@ public class SchedulerAppointmentList {
         return appointmentId;
     }
 
-    public boolean doesAppointmentExistById(int appointmentId) {
+    public boolean doesAppointmentExist(int appointmentId) {
         return appointments.containsKey(appointmentId);
     }
 
-    public Appointment deleteAppointmentById(int appointmentId) throws MedBotException {
+    public Appointment deleteAppointment(int appointmentId) throws MedBotException {
         if (!appointments.containsKey(appointmentId)) {
             throw new MedBotException(getAppointmentNotFoundErrorMessage(appointmentId));
         }

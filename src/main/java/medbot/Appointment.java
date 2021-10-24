@@ -50,28 +50,44 @@ public class Appointment {
         return localDateTime.format(dateTimeFormatter);
     }
 
+    /**
+     * Returns whether appointment is complete. I.e., contains a positive patientId, medicalStaffId and dateTimeCode.
+     *
+     * @return whether appointment is complete
+     */
     public boolean isComplete() {
-        if (patientId > 0 && medicalStaffId > 0 && dateTimeCode > 0) {
-            return true;
-        }
-        return false;
+        return patientId > 0 && medicalStaffId > 0 && dateTimeCode > 0;
     }
 
+    /**
+     * Updates parameters (patientId, medicalStaffId and dateTimeCode) with non-zero parameters of newAppointment.
+     *
+     * <p>Does not update appointmentId.
+     *
+     * @param newAppointment Appointment object that contains the parameters to be updated
+     */
     public void mergeAppointmentData(Appointment newAppointment) {
-        if (newAppointment.getDateTimeCode() != 0) {
-            assert newAppointment.getDateTimeCode() > 0;
+        if (newAppointment.getDateTimeCode() > 0) {
             setDateTimeCode(newAppointment.getDateTimeCode());
         }
-        if (newAppointment.getPatientId() != 0) {
-            assert newAppointment.getPatientId() > 0;
+        if (newAppointment.getPatientId() > 0) {
             setPatientId(newAppointment.getPatientId());
         }
-        if (newAppointment.getMedicalStaffId() != 0) {
-            assert newAppointment.getMedicalStaffId() > 0;
+        if (newAppointment.getMedicalStaffId() > 0) {
             setMedicalStaffId(newAppointment.getMedicalStaffId());
         }
     }
 
+    /**
+     * Updates parameters (patientId, medicalStaffId and dateTimeCode) of a copy of oldAppointment
+     * with non-zero parameters of newAppointment.
+     *
+     * <p>Does not update appointmentId.
+     *
+     * @param oldAppointment Appointment to be updated.
+     * @param newAppointment Appointment that contains the parameters to be updated
+     * @return a copy of oldAppointment updated with the attributes in newAppointment
+     */
     public static Appointment mergeAppointmentData(Appointment oldAppointment, Appointment newAppointment) {
         Appointment tempAppointment = new Appointment();
         tempAppointment.mergeAppointmentData(oldAppointment);
