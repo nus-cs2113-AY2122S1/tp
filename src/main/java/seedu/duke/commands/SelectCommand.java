@@ -15,7 +15,6 @@ public class SelectCommand extends Command {
     private String itemFlag;
     private int eventIndexToSelect;
     private int taskIndexToSelect;
-    private boolean hasSelectedEvent;
 
     public SelectCommand(String[] command) {
         try {
@@ -42,13 +41,10 @@ public class SelectCommand extends Command {
         Item selectedItem;
         if (isEventFlag(itemFlag)) {
             selectedItem = getEventFromIndex(eventIndexToSelect);
-            return new CommandResult("These are the details of the event:\n" + Ui.getEvent((Event) selectedItem));
-        }
-        if (isTaskFlag(itemFlag) && hasSelectedEvent) {
+            return new CommandResult(Ui.getSelectedEventMessage((Event) selectedItem));
+        } else if (isTaskFlag(itemFlag)) {
             selectedItem = getTaskFromEventIndex(taskIndexToSelect);
-            return new CommandResult("These are the details of the task:\n" + Ui.getTask((Task) selectedItem));
-        } else if (isTaskFlag(itemFlag) && !hasSelectedEvent) {
-            return new CommandResult("Please select an event first!");
+            return new CommandResult(Ui.getSelectedTaskMessage((Task) selectedItem));
         }
         return new CommandResult("Insert something here.");
     }
@@ -60,10 +56,8 @@ public class SelectCommand extends Command {
         if (isValidFlag(itemFlag)) {
             int index = getIndexFromCommand(command[2]);
             if (isEventFlag(itemFlag)) {
-                hasSelectedEvent = true;
                 eventIndexToSelect = index;
             } else {
-                hasSelectedEvent = false;
                 taskIndexToSelect = index;
             }
         } else {
