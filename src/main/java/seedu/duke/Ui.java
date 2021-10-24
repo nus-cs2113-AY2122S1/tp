@@ -34,8 +34,8 @@ public class Ui {
     /**
      * Prints a divider to the text Ui.
      */
-    public static void showLine() {
-        System.out.println("____________________________________________________________");
+    public void showLine() {
+        show("____________________________________________________________");
     }
 
     /**
@@ -104,15 +104,15 @@ public class Ui {
     public void showListClient(ClientList clients) {
         int count = clients.getClientCount();
         if (count == 0) {
-            System.out.println(LIST_NO_MESSAGE + "clients");
+            show(LIST_NO_MESSAGE + "clients");
             return;
         }
-        System.out.println(LIST_MESSAGE + "clients:");
+        show(LIST_MESSAGE + "clients:");
         for (int i = 1; i <= count; i++) {
             Client currClient = clients.getClient(i - 1);
-            System.out.println(i + ". " + currClient + "\n");
+            show(i + ". " + currClient + "\n");
         }
-        System.out.println("Total Clients: " + count);
+        show("Total Clients: " + count);
     }
 
     public void showFindClient(ClientList clients, String name) {
@@ -122,14 +122,14 @@ public class Ui {
             Client currClient = clients.getClient(i);
             if (currClient.getName().equals(name)) {
                 if (foundClients == 0) {
-                    System.out.println(FIND_SUCCESS_MESSAGE_LEFT + "client(s) " + FIND_MESSAGE_RIGHT);
+                    show(FIND_SUCCESS_MESSAGE_LEFT + "client(s) " + FIND_MESSAGE_RIGHT);
                 }
-                System.out.println((foundClients + 1) + ". " + currClient + "\n");
+                show((foundClients + 1) + ". " + currClient + "\n");
                 foundClients++;
             }
         }
         if (foundClients == 0) {
-            System.out.println(FIND_FAIL_MESSAGE_LEFT + "client(s) " + FIND_MESSAGE_RIGHT);
+            show(FIND_FAIL_MESSAGE_LEFT + "client(s) " + FIND_MESSAGE_RIGHT);
         }
     }
 
@@ -142,58 +142,58 @@ public class Ui {
     public void showListTour(TourList tours) {
         int count = tours.getTourCount();
         if (count == 0) {
-            System.out.println(LIST_NO_MESSAGE + "tours");
+            show(LIST_NO_MESSAGE + "tours");
             return;
         }
-        System.out.println(LIST_MESSAGE + "tours:");
+        show(LIST_MESSAGE + "tours:");
         for (int i = 1; i <= count; i++) {
             Tour currTour = tours.getTourByIndex(i - 1);
-            System.out.println(i + ". " + currTour + "\n");
+            show(i + ". " + currTour + "\n");
         }
-        System.out.println("Total Tours: " + count);
+        show("Total Tours: " + count);
     }
 
     public void showFindTour(TourList tours, ClientPackageList packages, String code) {
         Tour foundTour = tours.getTourByCode(code);
         if (foundTour != null) {
-            System.out.println(FIND_SUCCESS_MESSAGE_LEFT + "tours " + FIND_MESSAGE_RIGHT);
-            System.out.println(foundTour + "\n" + "\n");
+            show(FIND_SUCCESS_MESSAGE_LEFT + "tours " + FIND_MESSAGE_RIGHT);
+            show(foundTour + "\n" + "\n");
             int subbedClients = 0;
             int count = packages.getPackageCount();
-            System.out.println("Subscribed Clients:");
+            show("Subscribed Clients:");
             for (int i = 0; i < count; i++) {
                 Tour currTour = packages.get(i).getTour();
                 if (currTour.equals(foundTour)) {
                     String currClientName = packages.get(i).getClient().getName();
-                    System.out.println((i + 1) + ". " + currClientName + "\n");
+                    show((i + 1) + ". " + currClientName + "\n");
                     subbedClients++;
                 }
             }
-            System.out.println("Total Subscribed Clients: " + subbedClients);
+            show("Total Subscribed Clients: " + subbedClients);
         } else {
-            System.out.println(FIND_FAIL_MESSAGE_LEFT + "tours " + FIND_MESSAGE_RIGHT);
+            show(FIND_FAIL_MESSAGE_LEFT + "tours " + FIND_MESSAGE_RIGHT);
         }
     }
 
     public void showSortedTour(TourList tours, String[] sortedCodes) {
         int count = tours.getTourCount();
-        System.out.println(SORT_TOUR_ALPHA_MESSAGE);
+        show(SORT_TOUR_ALPHA_MESSAGE);
         for (int i = 1; i <= count; i++) {
             String currCode = sortedCodes[i - 1];
             Tour currTour = tours.getTourByCode(currCode);
-            System.out.println(i + ". " + currTour + "\n");
+            show(i + ". " + currTour + "\n");
         }
     }
 
     public void showSortedTour(TourList tours, Float[] sortedPrices) {
         int count = tours.getTourCount();
-        System.out.println(SORT_TOUR_PRICE_MESSAGE);
+        show(SORT_TOUR_PRICE_MESSAGE);
         for (int i = 1; i <= count; i++) {
             float currPrice = sortedPrices[i - 1];
             for (int j = 1; j <= count; j++) {
                 Tour currTour = tours.getTourByIndex(i - 1);
                 if (currTour.getPrice() == currPrice) {
-                    System.out.println(i + ". " + currTour + "\n");
+                    show(i + ". " + currTour + "\n");
                     break;
                 }
             }
@@ -208,36 +208,36 @@ public class Ui {
     public void showListFlight(FlightList flights) {
         int count = flights.getFlightCount();
         if (count == 0) {
-            System.out.println(LIST_NO_MESSAGE + "flights");
+            show(LIST_NO_MESSAGE + "flights");
             return;
         }
-        System.out.println(LIST_MESSAGE + "flights:");
+        show(LIST_MESSAGE + "flights:");
         for (int i = 1; i <= count; i++) {
             Flight currFlight = flights.getFlight(i - 1);
-            System.out.println(i + ". " + currFlight + "\n");
+            show(i + ". " + currFlight + "\n");
         }
-        System.out.println("Total Flights: " + count);
+        show("Total Flights: " + count);
     }
 
     public void showFindFlight(FlightList flights, ClientPackageList packages, String code) {
         Flight foundFlight = flights.getFlight(code);
         if (foundFlight != null) {
-            System.out.println(FIND_SUCCESS_MESSAGE_LEFT + "flights " + FIND_MESSAGE_RIGHT);
-            System.out.println(foundFlight + "\n" + "\n");
+            show(FIND_SUCCESS_MESSAGE_LEFT + "flights " + FIND_MESSAGE_RIGHT);
+            show(foundFlight + "\n" + "\n");
             int passengers = 0;
             int count = packages.getPackageCount();
-            System.out.println("Passengers:");
+            show("Passengers:");
             for (int i = 0; i < count; i++) {
                 Flight currFlight = packages.get(i).getFlight();
                 if (currFlight.equals(foundFlight)) {
                     String currClientName = packages.get(i).getClient().getName();
-                    System.out.println((i + 1) + ". " + currClientName + "\n");
+                    show((i + 1) + ". " + currClientName + "\n");
                     passengers++;
                 }
             }
-            System.out.println("Total Passengers: " + passengers);
+            show("Total Passengers: " + passengers);
         } else {
-            System.out.println(FIND_FAIL_MESSAGE_LEFT + "flights " + FIND_MESSAGE_RIGHT);
+            show(FIND_FAIL_MESSAGE_LEFT + "flights " + FIND_MESSAGE_RIGHT);
         }
     }
 
@@ -249,24 +249,24 @@ public class Ui {
     public void showListClientPackage(ClientPackageList clientPackageList) {
         int count = clientPackageList.getPackageCount();
         if (count == 0) {
-            System.out.println(LIST_NO_MESSAGE + "packages");
+            show(LIST_NO_MESSAGE + "packages");
             return;
         }
-        System.out.println(LIST_MESSAGE + "packages:");
+        show(LIST_MESSAGE + "packages:");
         for (int i = 0; i < count; i++) {
             ClientPackage currPackage = clientPackageList.get(i);
-            System.out.println((i + 1) + ". " + currPackage + "\n" + "\n");
+            show((i + 1) + ". " + currPackage + "\n" + "\n");
         }
-        System.out.println("Total Packages:" + count);
+        show("Total Packages:" + count);
     }
 
     public void showFindClientPackage(ClientPackageList packages, int index) {
         ClientPackage foundPackage = packages.get(index - 1);
         if (foundPackage != null) {
-            System.out.println(FIND_SUCCESS_MESSAGE_LEFT + "packages " + FIND_MESSAGE_RIGHT);
-            System.out.println(foundPackage + "\n" + "\n");
+            show(FIND_SUCCESS_MESSAGE_LEFT + "packages " + FIND_MESSAGE_RIGHT);
+            show(foundPackage + "\n" + "\n");
         } else {
-            System.out.println(FIND_FAIL_MESSAGE_LEFT + "packages " + FIND_MESSAGE_RIGHT);
+            show(FIND_FAIL_MESSAGE_LEFT + "packages " + FIND_MESSAGE_RIGHT);
         }
     }
 

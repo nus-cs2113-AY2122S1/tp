@@ -16,7 +16,6 @@ public class ClientPackageList {
     public void add(ClientPackage pack) {
         packageCount++;
         clientPackages.add(pack);
-        System.out.println(clientPackages.get(0));
     }
 
     public ClientPackage get(int index) {

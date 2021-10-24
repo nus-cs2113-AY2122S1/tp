@@ -14,7 +14,7 @@ public class FlightList {
         flightCount = 0;
     }
 
-    public void add(Flight flight, Ui ui) {
+    public void add(Flight flight) {
         flights.add(flight);
         flightCount++;
     }

@@ -14,9 +14,8 @@ public class TourList {
         tourCount = 0;
     }
 
-    public void add(Tour tour, Ui ui) {
+    public void add(Tour tour) {
         tours.add(tour);
-        ui.showAddTour(tour);
         tourCount++;
     }
 

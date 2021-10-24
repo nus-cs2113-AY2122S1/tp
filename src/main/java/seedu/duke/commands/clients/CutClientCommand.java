@@ -1,20 +1,16 @@
-package seedu.duke.commands.clients;
+package seedu.duke;
 
-import seedu.duke.commands.Command;
-
-/**
- * Deletes a client from the client list.
- */
 public class CutClientCommand extends Command {
-    private final int clientIndex;
+    private final String clientId;
+    private Client client;
 
     /**
      * Class constructor for CutCommand.
      *
-     * @param clientIndex index of to-be-deleted client in the client list
+     * @param clientId ID of to-be-deleted client in the client list
      */
-    public CutClientCommand(int clientIndex) {
-        this.clientIndex = clientIndex;
+    public CutClientCommand(String clientId) {
+        this.clientId = clientId;
     }
 
     /**
@@ -23,13 +19,16 @@ public class CutClientCommand extends Command {
     @Override
     public void execute() {
         try {
+            this.client = clients.getClientById(clientId);
             int newClientCount = clients.getClientCount() - 1;
-            clients.cut(clientIndex, ui);
+            ui.showCut(client);
+            clients.cut(client);
             assert newClientCount == clients.getClientCount();
             assert newClientCount >= 0;
-        } catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e1) {
             System.out.println("INVALID: Index out of bounds");
+        } catch (TourPlannerException e2) {
+            System.out.println(e2.getMessage());
         }
     }
 }
-
