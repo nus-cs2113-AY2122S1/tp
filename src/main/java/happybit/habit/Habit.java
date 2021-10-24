@@ -9,8 +9,11 @@ public class Habit {
 
     protected String habitName;
     protected boolean isDone;
-    protected Date lastHabitDate;
+    protected Date lastHabitDate; // change to nextHabitDate
     protected int interval;
+    // Map <Date, isDone> for Progress
+
+    // one time habit => user inputs 0 or nothing
 
     /**
      * Constructor for Habit class.

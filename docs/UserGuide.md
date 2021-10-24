@@ -3,10 +3,13 @@
 _Ha(ppy)Bit_ is a desktop app aimed to **empower students** to improve their **well-being**,
 amidst the hectic and stressful **university life**. 
 The app enables students to cultivate **good habits**, through the setting and tracking of **goals**.
-The app operates on a Command Line Interface (CLI) while still 
-comprising features typically found in a Graphical User Interface (GUI). 
+The app operates on a [Command Line Interface (CLI)](https://en.wikipedia.org/wiki/Command-line_interface) 
+while still comprising features typically found in a
+[Graphical User Interface (GUI)](https://en.wikipedia.org/wiki/Graphical_user_interface). 
 Students who type fast will find that _Ha(ppy)Bit_ performs habit tracking more efficiently than your 
 conventional GUI apps.
+
+You can find out more about _Ha(ppy)Bit_ at our [Main Page](README.md).
 
 * [Quick Start](#quick-start)
 * [Navigation](#navigation)
@@ -29,13 +32,14 @@ conventional GUI apps.
 
 ## Quick Start
 
-1. Ensure you have Java 11 installed in your computer. If you do not have it installed, 
+1. Ensure you have Java `11` installed in your computer. If you do not have it installed, 
 download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html).
-2. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0). 
+2. Download the latest `tp.jar` [here](https://github.com/AY2122S1-CS2113T-F14-1/tp/releases/tag/v1.0).
 3. Copy the file to the folder you want to use as the **home folder** for your _Ha(ppy)Bit_.
 4. Open your terminal of choice inside the folder containing `tp.jar` file.
-5. Run the file using `java -jar tp.jar`.
-6. Upon loading the app you should see the following screen which would indicate that you have successfully run the app
+5. Run the file by typing the command `java -jar tp.jar`.
+6. Upon loading the app you should see the following screen which would indicate that you have successfully run the app.
+
    ```
    ==============================================================================
      _  _   __   ____  ____  _  _  ____  __  ____
@@ -56,8 +60,9 @@ download it from [here](https://docs.aws.amazon.com/corretto/latest/corretto-11-
    ```
 
 ## Navigation
-In the current loading screen, users will be able to execute the following actions based on the number they input
+In the current loading screen, users will be able to execute the following actions based on the number they input.
 1. About Ha(ppy)Bit - Shows brief description of the program and a short meet the team section
+
     ```
    Option: 1
 
@@ -82,14 +87,16 @@ In the current loading screen, users will be able to execute the following actio
     Press enter to return to main menu...
     ```
 2. User Guide - Opens up User Guide github page in user's web browser.
-    ```
+    
+   ```
     Option: 2
 
     Opening in a web browser...
     
     Press enter to return to main menu...
     ```
-3. Developer Guide - Opens up Developer Guide github page in user's web browser
+3. Developer Guide - Opens up Developer Guide github page in user's web browser.
+
     ```
     Option: 3
 
@@ -98,7 +105,11 @@ In the current loading screen, users will be able to execute the following actio
     Press enter to return to main menu...
     ```
 4. Demo Video - Links to Demo Video (Not done yet)
+    ```
+   video not available.
+    ```
 5. Start Application - Brings user to the application. User can start using the app or continue where they left off.
+
     ```
     Starting application...
     Type 'return' to return to main menu
@@ -120,6 +131,12 @@ Name  | Description | Example
 ----- | --------------------------------------------------------- | -------------------
 Goal  | A long term achievement you wish to accomplish.           |`Lose 5kg by Dec`
 Habit | Checkpoints; actionable tasks to be done to achieve goal. | `Run 5km`         
+
+**Notes about command format:**
+* words enclosed in angle brackets, `<>` are the parameters which is the input the
+user is supposed to provide.
+  * e.g `view g/<goal index>` can be `view g/1`.
+* The parameters enclosed in curly brackets, `{}`, are optional.
 
 ## Features 
 
@@ -160,15 +177,15 @@ start dates are optional.
 
 Format: `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>` 
 
-Note:
-1. Dates must be in `DDMMYYYY` format. For example, 01 January 2021 must be written as `01012020`.
-2. The two flags contained within the `{}` brackets indicate the optional inputs of `t/<GOAL_TYPE>` and `s/<START_DATE>`.
-3. The optional `<GOAL_TYPE>` argument can take one of the following flags:
-   1. `sl` &#8594; Sleep
-   2. `fd` &#8594; Food
-   3. `ex` &#8594; Exercise
-   4. `sd` &#8594; Study
-4. Otherwise, it will be of default goal type `df`.
+> :exclamation: Note:
+> 1. Dates must be in `DDMMYYYY` format. For example, 01 January 2021 must be written as `01012020`.
+> 2. The two flags contained within the `{}` brackets indicate the optional inputs of `t/<GOAL_TYPE>` and `s/<START_DATE>`.
+> 3. The optional `<GOAL_TYPE>` argument can take one of the following flags:
+>   1. `sl` &#8594; Sleep
+>   2. `fd` &#8594; Food
+>   3. `ex` &#8594; Exercise
+>   4. `sd` &#8594; Study
+>4. Otherwise, it will be of default goal type `df`.
 
 Example:
 ```
@@ -185,24 +202,65 @@ Press enter to return to command mode...
 
 ```
 ### Update a Goal: `Update`
-Updates the name of a goal specified by its index.
+Updates an attribute of a goal specified by its index.
+
+Note: As of now, only goal name may be updated. To update other goal features you just have to wait :p 
+
+#### Updating Name
 
 Format: `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>`
 
-Note: As of now, only goal name may be updated. To update other goal features you just have to wait :p 
+> :exclamation: Note:
+> 1. `<GOAL_INDEX>` is an integer.
 
 Example:
 
 ```
-Command: update g/1 n/Decrease Spending
+Command: update g/3 n/Reach for the Stars
 ```
 Output:
 ```
 ________________________________________________________________________________________________________________________
-Your goal "Reduce Spending" has been changed to "Decrease Spending".
+Your goal "Reach for the Moon" has been changed to "Reach for the Stars".
 ________________________________________________________________________________________________________________________
 
 Press enter to return to command mode...
+```
+
+> :exclamation: Note: The update features below are still underway. 
+
+#### Updating Start/End Date
+Format: `update g/<GOAL_INDEX> s/<NEW_START_DATE>` <br>
+_or_ <br>
+Format: `update g/<GOAL_INDEX> e/<NEW_END_DATE>`
+
+> :exclamation: Note:
+> 1. `<GOAL_INDEX>` is an integer.
+
+Example:
+
+```
+
+```
+Output:
+```
+
+```
+
+#### Updating Goal Type
+Format: `update g/<GOAL_INDEX> t/<NEW_GOAL_TYPE>`
+
+> :exclamation: Note:
+> 1. `<GOAL_INDEX>` is an integer.
+
+Example:
+
+```
+
+```
+Output:
+```
+
 ```
 
 ### Remove a Goal: `remove`
@@ -210,9 +268,12 @@ Removes a goal specified by its index.
 
 Format: `remove g/<GOAL_INDEX>`
 
+> :exclamation: Note:
+> 1. `<GOAL_INDEX>` is an integer.
+
 Example:
 ```
-Command: remove 1
+Command: remove g/1
 ```
 
 Output:
@@ -231,79 +292,115 @@ Format: `list`
 
 Output:
 ```
-There are 2 goal(s) in your list:
-[EX] Exercise More
-[DF] Become Gudetama
+There are 3 goals currently being tracked:
+-----------------------------------------------------------------------------
+|Index|Name      |Type      |Start Date     |End Date       |Habit Count    |
+-----------------------------------------------------------------------------
+|1    |example   |Default   |24-Oct-2021    |01-Jan-2022    |0              |
+-----------------------------------------------------------------------------
+|2    |test 1    |Default   |24-Oct-2021    |30-Oct-2021    |0              |
+-----------------------------------------------------------------------------
+|3    |test 2    |Default   |24-Oct-2021    |27-Oct-2021    |0              |
+-----------------------------------------------------------------------------
 ```
 
 ### Add a Habit: `add`
 Adds a habit that is linked to a goal.
 
-Format: `add <GOAL_INDEX> <HABIT_NAME>`
+Format: `add  n/<HABIT_NAME> g/<GOAL_INDEX> i/<INTERVALS>`
+
+> :exclamation: Note:
+> 1. `<GOAL_INDEX>` is an integer.
+> 2. `<INTERVALS>` is an integer indicating the number of days between each recurring instance of a habit.
 
 Example:
 ```
-add 1 Run 4km
+Command: add n/Don't drink BBT g/1 i/3 
 ```
 
 Output:
 ```
-Your habit:  Run 4km has been added to your goal: [DF] Exercise More
+________________________________________________________________________________________________________________________
+Your habit: Don't drink BBT has been added to your goal: [DF] Reduce Spending
+________________________________________________________________________________________________________________________
+
+Press enter to return to command mode...
 ```
 
 
 ### Complete a Habit: `done`
 Marks a habit under a goal as done.
 
-Format: `done <GOAL_INDEX> <HABIT_INDEX>`
+Format: `done g/<GOAL_INDEX> h/<HABIT_INDEX>`
+
+> :exclamation: Note:
+> 1. `<GOAL_INDEX>` is an integer.
+> 2. `<HABIT_INDEX>` is an integer.
 
 Example: 
 ```
-done 1 2
+done g/1 h/1
 ```
 
 Output: 
 ```
-Your habit of " Run 6km" under the goal "[DF] Exercise More" has been set as done.
+________________________________________________________________________________________________________________________
+Your habit of "Don't drink BBT" under the goal "[DF] Reduce Spending" has been set as done.
+________________________________________________________________________________________________________________________
+
+Press enter to return to command mode...
 ```
 
 
 ### Delete a Habit: `delete`
 Deletes a habit under a goal.
 
-Format: `delete <GOAL_INDEX> <HABIT_INDEX>`
+Format: `delete g/<GOAL_INDEX> h/<HABIT_INDEX>`
+
+> :exclamation: Note:
+> 1. `<GOAL_INDEX>` is an integer.
+> 2. `<HABIT_INDEX>` is an integer.
 
 Example:
 ```
-delete 1 2
+delete g/1 h/1
 ```
 
 Output:
 ```
-Your habit of " Run 6km" under the goal "[DF] Exercise More" has been deleted.
+________________________________________________________________________________________________________________________
+Your habit of "Don't drink BBT" under the goal "[DF] Reduce Spending" has been deleted.
+________________________________________________________________________________________________________________________
+
+Press enter to return to command mode...
 ```
 
 ### View all Habits: `view`
 Lists all habits under a specific goal.
 
-Format: `view <GOAL_INDEX>` 
+Format: `view g/<GOAL_INDEX>`
+
+> :exclamation: Note:
+> 1. `<GOAL_INDEX>` is an integer.
 
 Example:
 ```
-view 1
+view g/1
 ```
 
 Output
 ```
-Here are your 2 habit(s) under the goal "[EX] Exercise More".
-[ ]  Run 4km
-[X]  Run 6km
+________________________________________________________________________________________________________________________
+Here are your 1 habit(s) under the goal "[DF] Reduce Spending".
+1. [ ] Don't drink BBT (every 3 days)
+Last: 25/10/2021, Next: 28/10/2021
+________________________________________________________________________________________________________________________
 ```
 
 ### Exit the Program: `bye`
 Exits the program.
 
-**Make sure to use this command before exiting the program
+> :warning: **Warning: Make sure to use this command before exiting the program
 to ensure that your data are saved properly.**
 
 Format: `bye`
@@ -327,29 +424,42 @@ one for you at the relative storage path, `data/habits.txt`.
 
 **Saving data:** 
 
-Before you exit the program, the goals you set and the habits you tracked
+* Everytime you make changes to any of your goals and habits, the changes
+are **immediately** reflected in the storage file. This is to ensure that in the
+event you closed the program without using the command `bye`, we can ensure that
+**most of your data are saved**.
+* Before you exit the program, the goals you set and the habits you have added
 are **automatically** saved in a text file at the relative storage path, `data/habits.txt`.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer? 
+<br>
+**A**: You can just copy-paste the habits.txt in the path `data/habits.txt` file from one computer to another and all 
+your data will be there!
 
-**A**: {your answer here}
+> :bulb: Pro Tip! Have your home folder reside in a cloud storage service (OneDrive, iCloud, etc.) to sync your data 
+> between devices. 
+
+**Q**: Are there any books you recommend?
+<br>
+**A**: Data Structures and Algorithms in Java -> [here](https://www.amazon.com/Data-Structures-Algorithms-Java-2nd/dp/0672324539)
 
 ## Command Summary
-
 Action | Command Format | Example
 ------------ | ------------ | ------------
-Set goal | `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>` | `set Reduce spending /01012022 /31122022`
+Set goal | `set n/<GOAL_NAME> { t/<GOAL_TYPE> s/<START_DATE> } e/<END_DATE>` | `set n/Reduce spending e/31122022`
 Update goal | `update g/<GOAL_INDEX> n/<NEW_GOAL_NAME>` | `update g/1 n/Decrease Spending`
-Remove goal | `remove g/<GOAL_INDEX>` | `remove 1`
+Remove goal | `remove g/<GOAL_INDEX>` | `remove g/1`
 List goals | `list` | `list`
-Add habit | `add n/<HABIT_NAME g/<GOAL_INDEX> i/<INTERVAL>` | `add 1 Run 4km`
-Done habit | `done <GOAL_INDEX> <HABIT_INDEX>` | `done 1 2`
-Delete habit  | `delete <GOAL_INDEX> <HABIT_INDEX>` | `delete 2 1`
-View habits | `view <GOAL_INDEX>` | `view 1`
+Add habit | `add n/<HABIT_NAME> g/<GOAL_INDEX> i/<INTERVAL>` | `add n/Don't drink BBT g/1 i/3`
+Done habit | `done g/<GOAL_INDEX> h/<HABIT_INDEX>` | `done g/1 h/1`
+Delete habit  | `delete <GOAL_INDEX> <HABIT_INDEX>` | `delete g/1 g/1`
+View habits | `view g/<GOAL_INDEX>` | `view g/1`
 Exit Program | `bye` | `bye`
 
 ## Useful Links
 
 Visit our [Main Page](README.md) to find more useful links.
+
+Watch our wacky [Demo Video v0](https://www.youtube.com/watch?v=dQw4w9WgXcQ)!
