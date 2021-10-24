@@ -317,18 +317,6 @@ public class Parser {
         return true;
     }
 
-
-    /**
-     * Parses arguments with respect to the cut client command.
-     *
-     * @param params full user's argument/params string after splitting
-     * @return the prepared command
-     */
-    private static Command parseCut(String params) {
-        int clientIndex = stringToInt(params) - 1;
-        return new CutClientCommand(clientIndex);
-    }
-
     /**
      * Parses string containing an integer value to int.
      *
@@ -398,6 +386,19 @@ public class Parser {
             return new FindTourCommand(suffix);
         case "-f":
             return new FindFlightCommand(suffix);
+        default:
+            throw new TourPlannerException(ERROR_INVALID_INPUT);
+        }
+    }
+    
+     private static Command parseCut(String params) throws TourPlannerException {
+        String[] identifierAndArgs = splitCommandString(params, " ");
+        String identifier = identifierAndArgs[0];
+        String args = identifierAndArgs[1];
+
+        switch (identifier) {
+        case "-c":
+            return new CutClientCommand(args);
         default:
             throw new TourPlannerException(ERROR_INVALID_INPUT);
         }
