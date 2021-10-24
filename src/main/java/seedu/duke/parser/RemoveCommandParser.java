@@ -7,6 +7,7 @@ import seedu.duke.commands.RemoveUniCommand;
 import seedu.duke.constants.Constants;
 import seedu.duke.modules.Module;
 import seedu.duke.modules.ModuleList;
+import seedu.duke.ui.Ui;
 import seedu.duke.universities.University;
 import seedu.duke.universities.UniversityList;
 
@@ -23,14 +24,13 @@ public class RemoveCommandParser {
     private final Logger logger = Logger.getLogger("RemoveCommandParserLog");
     private String flag;
     private int uniIndex;
-    private int modIndex;
     private int mapIndex;
     private University university;
     private Module module;
 
-    public Command parse(String arguments, UniversityList universitySelectedList,
-                         ModuleList moduleSelectedList, UniversityList universityMasterList,
-                         ModuleList moduleMasterList) throws ParseException, IOException {
+    public Command parse(String arguments, UniversityList universityMasterList,
+                         ModuleList moduleMasterList, UniversityList universitySelectedList,
+                         ModuleList moduleSelectedList) throws ParseException, IOException {
 
         logger.log(Level.INFO, Constants.LOGMSG_PARSESTARTED);
         String flagArguments = identifyFlagAndSplitArgs(arguments);
@@ -38,11 +38,11 @@ public class RemoveCommandParser {
         case Constants.FLAG_UNIVERSITY:
             handleUniFlagArgs(flagArguments, universityMasterList, universitySelectedList);
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
-            return new RemoveUniCommand(uniIndex, universityMasterList, universitySelectedList);
+            return new RemoveUniCommand(university, universityMasterList, universitySelectedList);
         case Constants.FLAG_MODULE:
             handleModFlagArgs(flagArguments, moduleMasterList, moduleSelectedList);
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
-            return new RemoveModCommand(modIndex, moduleMasterList, moduleSelectedList);
+            return new RemoveModCommand(module, moduleMasterList, moduleSelectedList);
         case Constants.FLAG_MAP:
             handleMapFlagArgs(flagArguments, universitySelectedList, moduleSelectedList);
             logger.log(Level.INFO, Constants.LOGMSG_PARSESUCCESS);
@@ -84,12 +84,12 @@ public class RemoveCommandParser {
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
             }
             uniName = universityMasterList.get(uniIndex - 1).getName();
-            // Check if university has been added already
-            if (!universitySelectedList.searchUniversity(uniName)) {
-                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
-            }
             university = new University(uniName, new ArrayList<>(), uniIndex);
+        }
+        // Check if university has been added already
+        if (!universitySelectedList.searchUniversity(uniName)) {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_UNINOTFOUND, 1);
         }
     }
 
@@ -110,12 +110,12 @@ public class RemoveCommandParser {
                 logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
                 throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
             }
-            module = moduleMasterList.get(modIndex);
-            // Check if module has been added already
-            if (!moduleSelectedList.isModuleExist(module.getModuleCode())) {
-                logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
-                throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
-            }
+            module = moduleMasterList.get(modIndex - 1);
+        }
+        // Check if module has been added already
+        if (!moduleSelectedList.isModuleExist(module.getModuleCode())) {
+            logger.log(Level.INFO, Constants.LOGMSG_PARSEFAILED);
+            throw new ParseException(Constants.ERRORMSG_PARSEEXCEPTION_MODNOTFOUND, 1);
         }
     }
 
