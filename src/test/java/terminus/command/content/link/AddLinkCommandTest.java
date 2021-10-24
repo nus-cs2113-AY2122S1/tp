@@ -1,6 +1,7 @@
 package terminus.command.content.link;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
@@ -19,10 +20,6 @@ import terminus.parser.LinkCommandParser;
 import terminus.timetable.ConflictManager;
 import terminus.ui.Ui;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 public class AddLinkCommandTest {
 
     Class<Link> type = Link.class;
@@ -37,7 +34,6 @@ public class AddLinkCommandTest {
         moduleManager.addModule(tempModule);
         this.linkCommandParser = LinkCommandParser.getInstance();
         this.linkCommandParser.setModuleName(tempModule);
-        this.ui = new Ui();
     }
 
     @Test
@@ -54,14 +50,15 @@ public class AddLinkCommandTest {
     @Test
     void execute_addLinkCommand_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command addLinkCommand = linkCommandParser.parseCommand("add \"test\" \"Monday\" \"00:00\" \"2\" \"https://zoom.us/test\"");
-        CommandResult addResult = addLinkCommand.execute(ui, moduleManager);
+        CommandResult addResult = addLinkCommand.execute(moduleManager);
         assertTrue(addResult.isOk());
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("test"));
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("Monday"));
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("00:00"));
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("2"));
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("https://zoom.us/test"));
+        String link = moduleManager.getModule(tempModule).getContentManager(type).getContentData(1);
+        assertTrue(link.contains("test"));
+        assertTrue(link.contains("Monday"));
+        assertTrue(link.contains("00:00"));
+        assertTrue(link.contains("2"));
+        assertTrue(link.contains("https://zoom.us/test"));
 
         Link newLink = new Link("test conflict", "Saturday", LocalTime.of(9, 00), 3, "https://zoom.us/test");
         ConflictManager conflictManager = new ConflictManager(moduleManager, newLink);
@@ -69,7 +66,7 @@ public class AddLinkCommandTest {
         for (int i = 0; i < 5; i++) {
             addLinkCommand = linkCommandParser.parseCommand(
                     "add \"test\" \"Saturday\" \"10:00\" \"2\" \"https://zoom.us/test\"");
-            addResult = addLinkCommand.execute(ui, moduleManager);
+            addResult = addLinkCommand.execute(moduleManager);
             assertTrue(addResult.isOk());
             assertNotNull(conflictManager.getConflictingSchedule());
         }

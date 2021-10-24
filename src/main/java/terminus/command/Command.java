@@ -4,7 +4,6 @@ import java.io.IOException;
 import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
-import terminus.ui.Ui;
 
 public abstract class Command {
 
@@ -37,16 +36,15 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command. Prints the required result to the Ui.
+     * Executes the command.
      *
-     * @param ui            The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException  when the command could not be found.
      * @throws InvalidArgumentException when arguments parsing fails.
      * @throws IOException              when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
-    public abstract CommandResult execute(Ui ui, ModuleManager moduleManager)
+    public abstract CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException;
 
     /**

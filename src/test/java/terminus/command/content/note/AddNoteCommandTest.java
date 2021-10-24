@@ -19,14 +19,12 @@ import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.parser.NoteCommandParser;
 import terminus.storage.ModuleStorage;
-import terminus.ui.Ui;
 
 public class AddNoteCommandTest {
 
     Class<Note> type = Note.class;
     private NoteCommandParser commandParser;
     private ModuleManager moduleManager;
-    private Ui ui;
     private ModuleStorage moduleStorage;
     private String tempModule = "test";
 
@@ -45,17 +43,18 @@ public class AddNoteCommandTest {
         moduleManager.addModule(tempModule);
         this.commandParser = NoteCommandParser.getInstance();
         this.commandParser.setModuleName(tempModule);
-        this.ui = new Ui();
     }
 
     @Test
     void execute_success() throws InvalidCommandException, InvalidArgumentException, IOException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test1\"");
-        CommandResult addResult = addCommand.execute(ui, moduleManager);
+        CommandResult addResult = addCommand.execute(moduleManager);
         assertTrue(addResult.isOk());
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("test"));
-        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1).contains("test1"));
+        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1)
+            .contains("test"));
+        assertTrue(moduleManager.getModule(tempModule).getContentManager(type).getContentData(1)
+            .contains("test1"));
     }
 
     @Test
@@ -63,7 +62,7 @@ public class AddNoteCommandTest {
             DocumentException {
         for (int i = 0; i < 5; i++) {
             Command addCommand = commandParser.parseCommand("add \"test" + i + "\" \"test" + i + "\"");
-            CommandResult addResult = addCommand.execute(ui, moduleManager);
+            CommandResult addResult = addCommand.execute(moduleManager);
             assertTrue(addResult.isOk());
         }
         assertEquals(5, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
@@ -73,10 +72,10 @@ public class AddNoteCommandTest {
     void execute_duplicateNoteName_exceptionThrown() throws InvalidArgumentException, InvalidCommandException,
             IOException {
         Command addCommand = commandParser.parseCommand("add \"test\" \"test\"");
-        CommandResult addResult = addCommand.execute(ui, moduleManager);
+        CommandResult addResult = addCommand.execute(moduleManager);
         for (int i = 1; i < 5; i++) {
             assertThrows(InvalidArgumentException.class,
-                () -> commandParser.parseCommand("add \"test\" \"test\"").execute(ui, moduleManager));
+                () -> commandParser.parseCommand("add \"test\" \"test\"").execute(moduleManager));
         }
         assertEquals(1, moduleManager.getModule(tempModule).getContentManager(type).getTotalContents());
     }
@@ -84,26 +83,26 @@ public class AddNoteCommandTest {
     @Test
     void execute_illegalNoteName_exceptionThrown() {
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"\\uD83D\\uDC76 \" \"test\"").execute(ui, moduleManager));
+            () -> commandParser.parseCommand("add \"\\uD83D\\uDC76 \" \"test\"").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \".......\" \"test\"").execute(ui, moduleManager));
+            () -> commandParser.parseCommand("add \".......\" \"test\"").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"\" \"test\"").execute(ui, moduleManager));
+            () -> commandParser.parseCommand("add \"\" \"test\"").execute(moduleManager));
         String s = "a".repeat(31);
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"" + s + "\" \"test\"").execute(ui, moduleManager));
+            () -> commandParser.parseCommand("add \"" + s + "\" \"test\"").execute(moduleManager));
     }
 
     @Test
     void execute_invalidArguments_exceptionThrown() {
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \" \"test\"").execute(ui, moduleManager));
+            () -> commandParser.parseCommand("add \" \"test\"").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"t\" \"\"").execute(ui, moduleManager));
+            () -> commandParser.parseCommand("add \"t\" \"\"").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"\" \"test\"").execute(ui, moduleManager));
+            () -> commandParser.parseCommand("add \"\" \"test\"").execute(moduleManager));
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"test\" \"test\"\"\"").execute(ui, moduleManager));
+            () -> commandParser.parseCommand("add \"test\" \"test\"\"\"").execute(moduleManager));
     }
 
     @Test
@@ -111,6 +110,6 @@ public class AddNoteCommandTest {
         TerminusLogger.initializeLoggerWarnings();
         String s = "a".repeat(1000001);
         assertThrows(InvalidArgumentException.class,
-            () -> commandParser.parseCommand("add \"test\" \"" + s + "\"").execute(ui, moduleManager));
+            () -> commandParser.parseCommand("add \"test\" \"" + s + "\"").execute(moduleManager));
     }
 }

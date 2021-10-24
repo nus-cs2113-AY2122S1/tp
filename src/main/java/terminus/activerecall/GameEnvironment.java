@@ -113,15 +113,14 @@ public class GameEnvironment {
     }
 
     /**
-     * Create a new GameEnvironment instance.
+     * Create a new GameEnvironment instance using the singleton instance of Ui.
      * 
-     * @param ui The UI to handle all input and output.
      * @param questions The list of questions to ask from.
      * @param questionCount The maximum number of questions.
      * @return The new GameEnvironment to start the Active Recall.
      */
-    public static GameEnvironment createNewEnvironment(Ui ui, List<Question> questions, int questionCount) {
-        return new GameEnvironment(ui, new QuestionGenerator(questions, questionCount));
+    public static GameEnvironment createNewEnvironment(List<Question> questions, int questionCount) {
+        return new GameEnvironment(Ui.getInstance(), new QuestionGenerator(questions, questionCount));
     }
 
 }

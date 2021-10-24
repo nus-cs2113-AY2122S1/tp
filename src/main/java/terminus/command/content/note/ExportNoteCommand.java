@@ -13,7 +13,6 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.storage.ModuleStorage;
-import terminus.ui.Ui;
 
 public class ExportNoteCommand extends Command {
 
@@ -40,7 +39,6 @@ public class ExportNoteCommand extends Command {
     /**
      * Executes the command. Prints the required result to the Ui.
      *
-     * @param ui            The Ui object to send messages to the users.
      * @param moduleManager The NusModule contain the ContentManager of all notes and schedules.
      * @return The CommandResult object indicating the success of failure including additional options.
      * @throws InvalidCommandException  when the command could not be found.
@@ -48,7 +46,7 @@ public class ExportNoteCommand extends Command {
      * @throws IOException              when the file to be saved is inaccessible (e.g. file is locked by OS).
      */
     @Override
-    public CommandResult execute(Ui ui, ModuleManager moduleManager)
+    public CommandResult execute(ModuleManager moduleManager)
             throws InvalidCommandException, InvalidArgumentException, IOException {
         TerminusLogger.info("Executing Export Note Command");
         assert getModuleName() != null;
@@ -58,7 +56,6 @@ public class ExportNoteCommand extends Command {
         ModuleStorage storage = ModuleStorage.getInstance();
         storage.exportModuleNotes(getModuleName(), notes);
         TerminusLogger.info("Exported Notes Successfully");
-        ui.printSection(Messages.SUCCESSFUL_EXPORT);
-        return new CommandResult(true);
+        return new CommandResult(Messages.SUCCESSFUL_EXPORT);
     }
 }
