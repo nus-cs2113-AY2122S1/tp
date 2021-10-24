@@ -23,27 +23,23 @@ public class AddPersonalContactParser extends RegexParser {
         TextUi.welcomeMessage();
         parsePersonalName(true);
         TextUi.greetingMessage(personalContact);
-        String userConfirmation = UserInputTextUi.getUserConfirmation();
-        if (userConfirmation.isBlank()) {
-            parsePersonalGithubUsername();
-            parsePersonalTelegramUsername();
-            parsePersonalTwitterUsername();
-            parsePersonalEmailAddress();
-            parsePersonalLinkedinUsername();
-            TextUi.finishSetUpMessage();
-        }
+        UserInputTextUi.getUserConfirmation();
+        parsePersonalGithubUsername();
+        parsePersonalTelegramUsername();
+        parsePersonalTwitterUsername();
+        parsePersonalEmailAddress();
+        parsePersonalLinkedinUsername();
+        TextUi.finishSetUpMessage();
     }
 
     public void recallPersonalDetails() {
         String userConfirmation = UserInputTextUi.getUserConfirmation();
-        if (userConfirmation.isBlank()) {
-            parsePersonalName(false);
-            parsePersonalGithubUsername();
-            parsePersonalTelegramUsername();
-            parsePersonalTwitterUsername();
-            parsePersonalEmailAddress();
-            parsePersonalLinkedinUsername();
-        }
+        parsePersonalName(false);
+        parsePersonalGithubUsername();
+        parsePersonalTelegramUsername();
+        parsePersonalTwitterUsername();
+        parsePersonalEmailAddress();
+        parsePersonalLinkedinUsername();
     }
 
     private void parsePersonalName(boolean isFirstTime) {
