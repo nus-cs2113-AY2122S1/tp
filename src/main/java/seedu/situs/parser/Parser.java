@@ -308,7 +308,9 @@ public class Parser {
         if (details.length < 3) {
             throw new SitusException(INCORRECT_PARAMETERS_MESSAGE);
         }
-        assert(details.length == 3);
+
+        assert (details.length == 3);
+        
         try {
             switch (details[1].trim()) {
             case "expiry":
