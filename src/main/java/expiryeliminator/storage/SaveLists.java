@@ -1,6 +1,5 @@
 package expiryeliminator.storage;
 
-import expiryeliminator.data.Ingredient;
 import expiryeliminator.data.IngredientRepository;
 import expiryeliminator.data.RecipeList;
 
@@ -11,7 +10,6 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.TreeMap;
 
 public class SaveLists {
 
@@ -29,7 +27,7 @@ public class SaveLists {
 
     public static void saveIngredientRepoToFile(IngredientRepository ingredients) {
         String pathName = "./data/";
-        String fileName = "ingredientList.txt";
+        String fileName = "ingredientRepo.txt";
         flushFile(pathName, fileName);
         try {
             String textToAppend = ingredients.printWholeList();
@@ -53,6 +51,13 @@ public class SaveLists {
         try {
             Path path = Paths.get(pathName);
             Files.createDirectory(path);
+        } catch (FileAlreadyExistsException ignored) {
+            System.out.println("");
+        } catch (IOException e) {
+            System.out.println("An createFile IO error has occurred: " + e.getMessage());
+        }
+
+        try {
             Path file = Paths.get(pathName + fileName);
             Files.createFile(file);
         } catch (FileAlreadyExistsException ignored) {

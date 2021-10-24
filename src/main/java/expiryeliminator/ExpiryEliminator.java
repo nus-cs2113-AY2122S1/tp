@@ -40,7 +40,7 @@ public class ExpiryEliminator {
     public void run() {
         ui.showGreeting();
         LoadLists.loadRecipeList(recipes);
-        //LoadLists.loadIngredientRepo(ingredients);
+        LoadLists.loadIngredientRepo(ingredients);
         boolean isExit = false;
         while (!isExit) {
             final String userInput = ui.getUserInput();
