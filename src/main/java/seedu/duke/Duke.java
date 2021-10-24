@@ -24,7 +24,6 @@ public class Duke {
     private static Profile profileInUse;
 
     public static void main(String[] args) {
-        // assert false : "dummy";
         new Duke().setup();
     }
 
