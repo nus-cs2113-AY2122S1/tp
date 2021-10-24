@@ -1,5 +1,6 @@
 package seedu.duke.commands;
 
+import seedu.duke.data.records.Category;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.ui.TextUi;
 
@@ -10,12 +11,15 @@ import java.time.LocalDate;
  */
 public class AddExpenditureCommand extends AddCommand {
 
-    public String description;
-    public double spending;
-    LocalDate date;
+    private final String description;
+    private final double spending;
+    private final LocalDate date;
+    private final Category category;
+
+
 
     public static final String MESSAGE_USAGE = "Adds an expenditure record.\n"
-            + "Parameters: -e c/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE]\n"
+            + "Parameters: -e n/EXPENDITURE_NAME a/COST d/[DATE_OF_EXPENDITURE] c/[CATEGORY]\n"
             + "Note: If DATE_OF_EXPENDITURE is not specified, the current system date will be the "
             + "default value.";
 
@@ -27,15 +31,16 @@ public class AddExpenditureCommand extends AddCommand {
      * @param amount amount spent for expenditure
      * @param date date on which expenditure was made
      */
-    public AddExpenditureCommand(String description, double amount, LocalDate date) {
+    public AddExpenditureCommand(String description, double amount, LocalDate date, Category category) {
         this.description = description;
         this.spending = amount;
         this.date = date;
+        this.category = category;
     }
 
     public void execute() {
-        Expenditure newExpenditure = new Expenditure(description, spending, date);
-        recordList.addExpenditure(description, spending, date, false);
+        Expenditure newExpenditure = new Expenditure(description, spending, date, category);
+        recordList.addExpenditure(description, spending, date, category, false);
         TextUi.showExpenditureAddedMessage(newExpenditure, false, recordList);
     }
 
@@ -48,8 +53,8 @@ public class AddExpenditureCommand extends AddCommand {
      */
     @Override
     public void execute(boolean isLoadingStorage) {
-        Expenditure newExpenditure = new Expenditure(description, spending, date);
-        recordList.addExpenditure(description, spending, date, isLoadingStorage);
+        Expenditure newExpenditure = new Expenditure(description, spending, date, category);
+        recordList.addExpenditure(description, spending, date, category, isLoadingStorage);
         TextUi.showExpenditureAddedMessage(newExpenditure, isLoadingStorage, recordList);
     }
 }

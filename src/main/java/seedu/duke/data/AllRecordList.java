@@ -1,6 +1,7 @@
 package seedu.duke.data;
 
 import seedu.duke.data.records.Budget;
+import seedu.duke.data.records.Category;
 import seedu.duke.data.records.Expenditure;
 import seedu.duke.data.records.Loan;
 import seedu.duke.textfiletools.WriteToTextFile;
@@ -46,9 +47,10 @@ public class AllRecordList {
      * @param amount           amount spent
      * @param isLoadingStorage indicate if this command is called during loading or runtime
      */
-    public void addExpenditure(String description, double amount, LocalDate date, boolean isLoadingStorage) {
+    public void addExpenditure(String description, double amount, LocalDate date, Category category,
+                               boolean isLoadingStorage) {
         int month = date.getMonthValue();
-        allRecordList.get(month).addExpenditure(description, amount, date, isLoadingStorage);
+        allRecordList.get(month).addExpenditure(description, amount, date, category, isLoadingStorage);
         if (!isLoadingStorage) {
             saveToStorage(storageDirectory);
         }

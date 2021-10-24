@@ -5,11 +5,13 @@ import java.time.LocalDate;
 public class Expenditure extends Record {
     protected String description;
     protected LocalDate date;
+    protected Category category;
 
-    public Expenditure(String description, double amount, LocalDate date) {
+    public Expenditure(String description, double amount, LocalDate date, Category category) {
         super(amount, date.getMonthValue());
         this.date = date;
         this.description = description;
+        this.category = category;
     }
 
     public String getDescription() {
@@ -24,8 +26,12 @@ public class Expenditure extends Record {
         return date.getMonthValue();
     }
 
+    public String getCategory() {
+        return category.toString();
+    }
+
     public String toString() {
-        return String.format("%-20.20s  %-20.20s %-20.20s",
-                this.description, " | $" + this.amount, " | " + this.date.toString());
+        return String.format("%-20.20s  %-20.20s %-20.20s %-20.20s",
+                this.description, " | $" + this.amount, " | " + this.date.toString(), " | " + this.category.toString());
     }
 }

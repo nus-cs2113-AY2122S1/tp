@@ -58,7 +58,8 @@ public class WriteToTextFile {
                     String description = currentExpenditure.getDescription();
                     double amount = currentExpenditure.getAmount();
                     String date = currentExpenditure.getDate();
-                    fileWrite.println("add -e c/" + description + " a/" + amount + " d/" + date);
+                    String category = currentExpenditure.getCategory();
+                    fileWrite.println("add -e c/" + description + " a/" + amount + " d/" + date + " c/" + category);
                     fileWrite.flush();
                 }
             }

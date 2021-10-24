@@ -7,6 +7,8 @@ import seedu.duke.data.records.Loan;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static seedu.duke.common.Messages.MESSAGE_EXIT;
+
 public class TextUi {
 
     /**
@@ -23,8 +25,6 @@ public class TextUi {
             + " |____/ \\__,_|\\__,_|\\__, |\\___|\\__||_|_|  \\__,_|\\___|_|\\_\\___|_|\n"
             + "                     __/ |\n"
             + "                    |___/";
-
-    private static final String MESSAGE_EXIT = "Bye, see you again soon!";
 
     private final Scanner in;
 
@@ -54,7 +54,8 @@ public class TextUi {
                     + LS
                     + "Description: " + addedExpenditure.getDescription()
                     + "\nAmount: $" + addedExpenditure.getAmount()
-                    + "\nDate: " + addedExpenditure.getDate());
+                    + "\nDate: " + addedExpenditure.getDate()
+                    + "\nCategory: " + addedExpenditure.getCategory());
 
             int month = addedExpenditure.getMonth();
             double amount = recordList.getBudget(month).getAmount();
@@ -66,7 +67,7 @@ public class TextUi {
 
             System.out.println("Total Spent: $" + totalSpending);
 
-            double amountLeft =  amount - totalSpending;
+            double amountLeft = amount - totalSpending;
 
             double percentageLeft;
             if (amountLeft > 0) {
@@ -199,7 +200,8 @@ public class TextUi {
         System.out.println("Your budget for " + monthString + ":" + budget + LS
                 + "Your expenditures:");
         if (list.getMonthListSize(month) > 0) {
-            System.out.printf("%-20.20s  %-20.20s %-20.20s%n", "  Description", "   | Amount", "   | Date ");
+            System.out.printf("%-20.20s  %-20.20s %-20.20s %-20.20s%n", "  Information", "   | Amount",
+                    "   | Date ", "   | Category");
             printEnumeratedExpenditureList(list.getExpenditureRecords(month));
         } else {
             System.out.println("No Expenditure records yet.");

@@ -23,6 +23,7 @@ import seedu.duke.commands.DeleteMultipleLoanCommand;
 import seedu.duke.commands.DeleteAllLoanCommand;
 import seedu.duke.commands.DeleteAllExpenditureCommand;
 import seedu.duke.commands.DeleteSingleLoanCommand;
+import seedu.duke.data.records.Category;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -36,6 +37,7 @@ import static seedu.duke.common.Messages.MESSAGE_INVALID_INDEX_OF_EXPENDITURE;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_LIST_COMMAND;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_MONTH_OF_BUDGET;
 import static seedu.duke.common.Messages.MESSAGE_INVALID_EDIT_COMMAND;
+import static seedu.duke.common.Messages.MESSAGE_INVALID_CATEGORY;
 
 //import java.time.LocalDate;
 //import java.util.Locale;
@@ -230,26 +232,34 @@ public class Parser {
     /**
      * Splits the commandParams into description, amount, date.
      *
-     * @param addParams raw String input
+     * @param addParams String without type identifier
      * @return an AddExpenditureCommand with proper parameters
      */
     private Command prepareAddExpenditureCommand(String addParams) {
         try {
-            String[] split = addParams.trim().split("c/|a/|d/", 4);
+            String[] split = addParams.trim().split("n/|a/|d/|c/", 5);
             assert split[0].equals("");
             String description = split[1].trim();
             double amount = Double.parseDouble(split[2].trim());
             LocalDate date;
-            if (split[3].equals("")) {
+            if (split[3].trim().equals("")) {
                 date = LocalDate.now();
             } else {
                 date = LocalDate.parse(split[3].trim());
             }
-            return new AddExpenditureCommand(description, amount, date);
+            Category category;
+            if (split[4].equals("")) {
+                category = Category.GENERAL;
+            } else {
+                category = Category.valueOf(split[4]);
+            }
+            return new AddExpenditureCommand(description, amount, date, category);
         } catch (NumberFormatException nfe) {
             return new InvalidCommand(String.format(MESSAGE_INVALID_AMOUNT, AddExpenditureCommand.MESSAGE_USAGE));
         } catch (DateTimeParseException dtpe) {
             return new InvalidCommand(String.format(MESSAGE_INVALID_DATE, AddExpenditureCommand.MESSAGE_USAGE));
+        } catch (IllegalArgumentException iae) {
+            return new InvalidCommand(String.format(MESSAGE_INVALID_CATEGORY, AddExpenditureCommand.MESSAGE_USAGE));
         }
 
     }
