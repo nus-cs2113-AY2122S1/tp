@@ -14,7 +14,7 @@ public class DeletePatientCommand extends DeletePersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
-        scheduler.getPatientList().deletePerson(personId);
+        scheduler.deletePatient(personId);
         String deletePatientMessage = Ui.getDeleteMessage(personId, ViewType.PATIENT_INFO);
         ui.printOutput(deletePatientMessage);
     }

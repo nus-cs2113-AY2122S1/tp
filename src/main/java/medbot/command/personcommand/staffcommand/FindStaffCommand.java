@@ -15,8 +15,8 @@ public class FindStaffCommand extends FindPersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
-        List<String> staffs = scheduler.getMedicalStaffList().findPersons(parameters);
-        String findStaffMessage = ui.getFindPersonsMessage(staffs, ViewType.MEDICAL_STAFF_INFO);
+        List<String> staffs = scheduler.findStaff(parameters);
+        String findStaffMessage = Ui.getFindPersonsMessage(staffs, ViewType.MEDICAL_STAFF_INFO);
         ui.printOutput(findStaffMessage);
     }
 }

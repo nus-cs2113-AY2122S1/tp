@@ -14,7 +14,7 @@ public class ViewPatientCommand extends ViewPersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) throws MedBotException {
-        String patientInfo = scheduler.getPatientList().getPersonInfo(personId);
+        String patientInfo = scheduler.getPatientInfo(personId);
         String viewPatientMessage = PatientUi.getPatientInfo(patientInfo);
         ui.printOutput(viewPatientMessage);
     }

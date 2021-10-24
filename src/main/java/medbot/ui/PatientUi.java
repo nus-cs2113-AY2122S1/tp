@@ -78,12 +78,12 @@ public class PatientUi {
     /**
      * Prints all patients in a list.
      *
-     * @param patientList the list containing patients to be printed.
+     * @param patientListString String containing information of all patients.
      * @return all Patients' information.
      */
-    public static String getAllPatientsString(PersonList patientList) {
+    public static String getAllPatientsString(String patientListString) {
         String output = getPatientTableHeader();
-        output += patientList.listPersons();
+        output += patientListString;
         output += TABLE_ROW_SEPARATOR;
         return output;
     }

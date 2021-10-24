@@ -10,7 +10,7 @@ public class ListPatientCommand extends ListPersonCommand {
 
     @Override
     public void execute(Scheduler scheduler, Ui ui) {
-        String allPatientsString = PatientUi.getAllPatientsString(scheduler.getPatientList());
+        String allPatientsString = PatientUi.getAllPatientsString(scheduler.listPatients());
         ui.printOutput(allPatientsString);
     }
 }

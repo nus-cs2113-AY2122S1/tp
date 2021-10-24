@@ -11,7 +11,7 @@ import java.util.List;
 import static medbot.ui.Ui.END_LINE;
 
 public abstract class PersonList {
-    private HashMap<Integer, Person> persons = new HashMap<>();
+    private final HashMap<Integer, Person> persons = new HashMap<>();
     private int lastId = 1;
 
     public int size() {
@@ -33,6 +33,18 @@ public abstract class PersonList {
     }
 
     /**
+     * Generates a non-random but unique id to be allocated to a person.
+     *
+     * @return a unique id to be allocated to a person
+     */
+    private int generatePersonId() {
+        while (persons.containsKey(lastId)) {
+            lastId++;
+        }
+        return lastId;
+    }
+
+    /**
      * Returns a String containing the information of the person with the specified personId.
      *
      * @param personId the id of the person to search for
@@ -47,15 +59,18 @@ public abstract class PersonList {
     }
 
     /**
-     * Generates a non-random but unique id to be allocated to a person.
+     * Edits the specified fields on Person information with new values from the user.
      *
-     * @return a unique id to be allocated to a person
+     * @param personId      The Person with information to change
+     * @param newPersonData the new Person data to change to (except the null fields)
+     * @throws MedBotException when the Person ID cannot be found
      */
-    private int generatePersonId() {
-        while (persons.containsKey(lastId)) {
-            lastId++;
+    public void editPerson(int personId, Person newPersonData) throws MedBotException {
+        if (!persons.containsKey(personId)) {
+            throw new MedBotException(getPersonNotFoundErrorMessage(personId));
         }
-        return lastId;
+        assert (personId > 0);
+        mergeEditPersonData(persons.get(personId), newPersonData);
     }
 
     /**
@@ -80,18 +95,6 @@ public abstract class PersonList {
         if (newPersonData.getResidentialAddress() != null) {
             oldPersonData.setResidentialAddress(newPersonData.getResidentialAddress());
         }
-    }
-
-    /**
-     * Edits the specified fields on Person information with new values from the user.
-     *
-     * @param personId      The Person with information to change
-     * @param newPersonData the new Person data to change to (except the null fields)
-     * @throws MedBotException when the Person ID cannot be found
-     */
-    public void editPerson(int personId, Person newPersonData) throws MedBotException {
-        assert (personId > 0);
-        mergeEditPersonData(persons.get(personId), newPersonData);
     }
 
     /**
@@ -127,9 +130,9 @@ public abstract class PersonList {
     }
 
     /**
-     * Lists all current persons.
+     * Returns a String that contains information of all persons.
      *
-     * @return String displays the list of all current persons
+     * @return String that contains information of all persons
      */
     public String listPersons() {
         String output = "";
