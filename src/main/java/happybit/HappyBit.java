@@ -24,6 +24,7 @@ public class HappyBit {
         goalList = new GoalList();
         state = new State(goalList, printManager, storage);
         loadData();
+        goalList.setRecurringTasks();
     }
 
     /**

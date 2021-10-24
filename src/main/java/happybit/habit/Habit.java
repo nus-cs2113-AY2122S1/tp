@@ -9,19 +9,35 @@ public class Habit {
 
     protected String habitName;
     protected boolean isDone;
-    protected Date setDate;
+    protected Date lastHabitDate;
     protected int interval;
 
     /**
      * Constructor for Habit class.
      *
      * @param habitName Name of habit linked to a goal.
+     * @param interval Integer of interval set by user
      */
     public Habit(String habitName, int interval) {
         this.habitName = habitName;
         this.isDone = false;
         // date habit is set; current date
-        this.setDate = new Date();
+        this.lastHabitDate = new Date();
+        this.interval = interval;
+    }
+
+    /**
+     * Constructor for Habit class when importing from storage.
+     * Date to keep track of last date
+     *
+     * @param habitName
+     * @param interval
+     * @param lastHabitDate
+     */
+    public Habit(String habitName,  Date lastHabitDate, int interval) {
+        this.habitName = habitName;
+        this.isDone = false;
+        this.lastHabitDate = lastHabitDate;
         this.interval = interval;
     }
 
@@ -61,18 +77,52 @@ public class Habit {
     }
 
     /**
+     * Update the habit as uncompleted for next interval
+     */
+    public void setUncompleted() {
+        isDone = false;
+    }
+
+    /**
      * Next Date depending on interval user set.
      *
-     * @return String formatted next date milestone for user
+     * @return next Date milestone for user
      */
-    public String getNextDate() {
-        LocalDate currSetDate = setDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate nextDate = currSetDate.plusDays(interval);
+    public Date getNextDate() {
+        // convert habitDate to LocalDate format to add by number of days specified in interval
+        LocalDate currHabitDate = lastHabitDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate nextDate = currHabitDate.plusDays(interval);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        // convert nextDate to Date format
         Date nextDateInDateFormat = java.util.Date.from(
                 nextDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        return dateFormat.format(nextDateInDateFormat);
+
+        return nextDateInDateFormat;
+
+    }
+
+    /**
+     * Next Date in printable format
+     *
+     * @return String formatted next date milestone
+     */
+    public String getNextDateString() {
+        Date nextDate = getNextDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        return dateFormat.format(nextDate);
+    }
+
+    public Date getHabitDate() {
+        return lastHabitDate;
+    }
+
+    public String getHabitDateString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        return dateFormat.format(lastHabitDate);
+    }
+
+    public void setHabitDate(Date date) {
+        this.lastHabitDate = date;
     }
 
     /**
@@ -83,5 +133,13 @@ public class Habit {
     public int getInterval() {
         return this.interval;
     }
+
+    /*
+     * NOTE : ==================================================================
+     * The following are private methods that are used to implement SLAP for the
+     * above public methods. These methods are positioned at the bottom to better
+     * visualise the actual methods that can be called from outside this class.
+     * =========================================================================
+     */
 
 }

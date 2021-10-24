@@ -65,10 +65,14 @@ public class PrintManager {
         String prefix = "[ ]";
         for (Habit habit : habits) {
             String intervalPrint = "(every " + habit.getInterval() + " days)";
+            String lastHabitDatePrint = habit.getHabitDateString();
+            String nextHabitDatePrint = habit.getNextDateString();
             if (habit.getDone()) {
                 prefix = "[X]";
             }
             System.out.println(prefix + " " + habit.getHabitName() + " " + intervalPrint);
+            System.out.println("Last: " + lastHabitDatePrint + ", " + "Next: " + nextHabitDatePrint);
+
         }
         printDashes();
     }

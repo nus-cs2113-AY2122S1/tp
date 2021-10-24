@@ -116,14 +116,6 @@ public class Goal {
         return dateFormat.format(this.endDate);
     }
 
-    /*
-     * NOTE : ==================================================================
-     * The following are private methods that are used to implement SLAP for the
-     * above public methods. These methods are positioned at the bottom to better
-     * visualise the actual methods that can be called from outside this class.
-     * =========================================================================
-     */
-
     /**
      * Gets the corresponding 2-character code for the goalType.
      *
@@ -143,4 +135,15 @@ public class Goal {
             return "[DF]";
         }
     }
+
+
+
+    /*
+     * NOTE : ==================================================================
+     * The following are private methods that are used to implement SLAP for the
+     * above public methods. These methods are positioned at the bottom to better
+     * visualise the actual methods that can be called from outside this class.
+     * =========================================================================
+     */
+
 }

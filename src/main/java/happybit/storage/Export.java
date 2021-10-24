@@ -51,6 +51,7 @@ public class Export {
                         + HABIT_TYPE + DELIMITER
                         + doneValue + DELIMITER
                         + habit.getHabitName() + DELIMITER
+                        + habit.getHabitDateString() + DELIMITER
                         + habit.getInterval() + NEWLINE;
 
                 fileWriter.write(habitToWrite);
