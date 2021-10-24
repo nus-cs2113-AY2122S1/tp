@@ -11,27 +11,26 @@ public class AddClientPackageCommand extends Command {
     @Override
     public void execute() {
         createClientPackage();
+        clientPackages.add(clientPackage);
+        ui.showAddClientPackage(clientPackage);
     }
 
     private void createClientPackage() {
-        int clientIndex = stringToInt(rawClientPackage[0]) - 1;
-        String tourCode = rawClientPackage[1];
-        String flightId = rawClientPackage[2];
-        Client client = extractClient(clientIndex);
-        Tour tour = extractTour(tourCode);
-        Flight flight = extractFlight(flightId);
-        clientPackage = new ClientPackage(client, tour, flight, clientPackages);
-        if (clientPackages.getPackageCount() > 0) {
-            System.out.println(clientPackages.get(0));
+        try {
+            String clientId = rawClientPackage[0];
+            String tourCode = rawClientPackage[1];
+            String flightId = rawClientPackage[2];
+            Client client = extractClient(clientId);
+            Tour tour = extractTour(tourCode);
+            Flight flight = extractFlight(flightId);
+            clientPackage = new ClientPackage(client, tour, flight);
+        } catch (TourPlannerException e){
+            System.out.println(e.getMessage());
         }
-        if (clientPackages.getPackageCount() > 1) {
-            System.out.println(clientPackages.get(1));
-        }
-        clientPackages.add(clientPackage);
     }
 
-    private Client extractClient(int clientIndex) {
-        return clients.getClient(clientIndex);
+    private Client extractClient(String clientId) throws TourPlannerException {
+        return clients.getClientById(clientId);
     }
 
     private Tour extractTour(String tourCode) {

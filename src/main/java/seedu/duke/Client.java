@@ -4,6 +4,7 @@ package seedu.duke;
  * Represents a client under the Tour agency.
  */
 public class Client {
+    private final String id;
     private final String name;
     private final String contactNum;
     private final String email;
@@ -15,9 +16,14 @@ public class Client {
      *               name, contact number, flight, accommodation, tour
      */
     public Client(String[] values) {
-        name = values[0];
-        contactNum = values[1];
-        email = values[2];
+        id = values[0];
+        name = values[1];
+        contactNum = values[2];
+        email = values[3];
+    }
+
+    public String getId() {
+        return id;
     }
 
     /**
@@ -50,7 +56,8 @@ public class Client {
     @Override
     public String toString() {
 
-        return "Name: " + name + System.lineSeparator()
+        return "Client ID: " + id + System.lineSeparator()
+                + "Name: " + name + System.lineSeparator()
                 + "Contact Number: " + contactNum + System.lineSeparator()
                 + "Email: " + email;
     }
