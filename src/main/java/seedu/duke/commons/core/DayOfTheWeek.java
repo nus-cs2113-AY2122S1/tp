@@ -10,6 +10,9 @@ public enum DayOfTheWeek {
      * @return true if the input is valid, false otherwise
      */
     public static boolean is(String param) {
+        if (param.length() < 3) {
+            return false;
+        }
         for (DayOfTheWeek day : DayOfTheWeek.values()) {
             if (param.substring(0, 3).equalsIgnoreCase(day.toString())) {
                 return true;
