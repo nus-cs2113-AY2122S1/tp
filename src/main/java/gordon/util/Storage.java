@@ -32,7 +32,7 @@ public class Storage {
                 buffer = loadPrice(r, buffer, loadScanner);
                 buffer = loadIngredients(r, buffer, loadScanner);
                 buffer = loadSteps(r, buffer, loadScanner);
-                loadTags(r, loadScanner, cookbook);
+                loadTags(r, buffer, loadScanner, cookbook);
                 cookbook.addRecipe(r);
             }
 
@@ -148,24 +148,28 @@ public class Storage {
         }
     }
 
-    public void loadTags(Recipe r, Scanner loadScanner, Cookbook cookbook) {
-        while (loadScanner.hasNext()) {
-            String line = loadScanner.nextLine().trim();
-            int dotIndex = line.indexOf('.');
+    public void loadTags(Recipe r, String buffer, Scanner loadScanner, Cookbook cookbook) {
+        String line = buffer;
 
-            if (dotIndex < 0) {
-                break;
+        if (line.trim().equals("Tags:")) {
+            while (loadScanner.hasNext()) {
+                line = loadScanner.nextLine().trim();
+                int dotIndex = line.indexOf('.');
+
+                if (dotIndex < 0) {
+                    break;
+                }
+
+                String parsedStep = line.substring(dotIndex + 2);
+                Tag createdTag = new Tag(parsedStep, r.getName());
+
+                if (!cookbook.doesCookbookTagExists(parsedStep)) {
+                    cookbook.addCookbookTag(createdTag);
+                } else {
+                    cookbook.appendRecipeToCookbookTag(createdTag.getTagName(), r.getName());
+                }
+                r.addTagToRecipe(createdTag, r.getName());
             }
-
-            String parsedStep = line.substring(dotIndex + 2);
-            Tag createdTag = new Tag(parsedStep, r.getName());
-
-            if (!cookbook.doesCookbookTagExists(parsedStep)) {
-                cookbook.addCookbookTag(createdTag);
-            } else {
-                cookbook.appendRecipeToCookbookTag(createdTag.getTagName(), r.getName());
-            }
-            r.addTagToRecipe(createdTag, r.getName());
         }
     }
 

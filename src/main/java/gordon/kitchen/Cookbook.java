@@ -189,6 +189,18 @@ public class Cookbook {
         }
     }
 
+    public void untagTagFromRecipe(Tag tag, String recipeName) {
+        for (Recipe recipe : recipes) {
+            // ensure that we fetch the correct Recipe
+            // ensure that Tag corresponds to correct recipe
+            if (recipe.getName().equalsIgnoreCase(recipeName) && tag.containsAssociatedRecipeNames(recipe.getName())) {
+                recipe.deleteTagFromRecipe(tag);
+                tag.removeAssociatedRecipeName(recipe.getName());
+                return;
+            }
+        }
+    }
+
     public void deleteTagFromRecipes(Tag tag) {
         for (Recipe recipe : recipes) {
             // ensure that Tag corresponds to correct recipe
