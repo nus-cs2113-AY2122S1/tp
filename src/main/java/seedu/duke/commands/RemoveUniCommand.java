@@ -11,6 +11,7 @@ import java.io.IOException;
 public class RemoveUniCommand extends Command {
     public RemoveUniCommand(int universityIndexToRemove, UniversityList universityMasterList,
                             UniversityList universitySelectedList) throws IOException {
+        universityIndexToRemove--;
         if (universitySelectedList.getSize() == 0) {
             assert universitySelectedList.getSize() == 0;
             System.out.println("The university list is empty!");

@@ -7,8 +7,9 @@ import seedu.duke.ui.Ui;
 import seedu.duke.constants.Constants;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
-public class University {
+public class University implements Comparator<University> {
     protected int index;
     protected String name;
     public ArrayList<ModuleMapping> list;
@@ -18,7 +19,8 @@ public class University {
     //        this.name = name;
     //        this.list = new ArrayList<>();
     //    }
-
+    public University() {
+    }
     public University(String name, ArrayList<ModuleMapping> list, UniversityList universityMasterList) {
         this.name = name;
         this.list = list;
@@ -135,6 +137,11 @@ public class University {
                     + System.lineSeparator());
         }
         return result;
+    }
+
+    @Override
+    public int compare(University u, University u1) {
+        return u.index - u1.index;
     }
 
 }
