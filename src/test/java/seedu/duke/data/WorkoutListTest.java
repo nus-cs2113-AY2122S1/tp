@@ -1,9 +1,6 @@
-package seedu.duke.lists;
+package seedu.duke.data;
 
 import org.junit.jupiter.api.Test;
-import seedu.duke.data.DeadlineWorkout;
-import seedu.duke.data.Workout;
-import seedu.duke.data.WorkoutList;
 import seedu.duke.exception.GetJackDException;
 import seedu.duke.storage.models.WorkoutListModel;
 
