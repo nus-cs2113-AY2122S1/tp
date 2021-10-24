@@ -140,9 +140,6 @@ public abstract class Parser {
                 workoutIdentifier = String.valueOf(EditExerciseParser.getWorkoutIndex());
             }
             String[] exerciseArgs = new String[]{exerciseDescription, sets, reps, workoutIdentifier};
-            for (String s : exerciseArgs) {
-                assert (!s.contains(PARAMETER_SEPARATOR));
-            }
 
             return exerciseArgs;
 
