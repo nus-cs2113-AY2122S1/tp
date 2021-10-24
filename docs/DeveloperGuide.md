@@ -29,6 +29,47 @@
 
 ## Setting up, getting started
 
+Prerequisites: JDK 11 (use the exact version), update Intellij to the most recent version.
+
+1. **Ensure Intellij JDK 11 is defined as an SDK**, as described [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk) -- this step is not needed if you have used JDK 11 in a previous Intellij project.
+  * In the same dialog, you _may_ have to set the Project language level field to the SDK default option.
+
+2. **Import the project _as a Gradle project_**, as described [here](https://se-education.org/guides/tutorials/intellijImportGradleProject.html).
+
+
+3. **Verify the set up**: After the importing is complete, locate the `src/main/java/seedu/duke/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
+```
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+
+> Task :Duke.main()
+    _______________________________________________________________________________
+     I can't retrieve the saved task data. Creating new file..
+    _______________________________________________________________________________
+
+    _______________________________________________________________________________
+     I can't retrieve the saved lesson data. Creating new file..
+    _______________________________________________________________________________
+
+    _______________________________________________________________________________
+     I can't retrieve the saved module data. Creating new file..
+    _______________________________________________________________________________
+
+    _______________________________________________________________________________
+       _   _       _   _   ____           ____     _   _   ____     ____   __   __ 
+      | \ |"|   U |"|u| | / __"| u     U | __")uU |"|u| | |  _"\   |  _"\  \ \ / / 
+     <|  \| |>   \| |\| |<\___ \/       \|  _ \/ \| |\| |/| | | | /| | | |  \ V /  
+     U| |\  |u    | |_| | u___) |        | |_) |  | |_| |U| |_| |\U| |_| |\U_|"|_u 
+      |_| \_|    <<\___/  |____/>>       |____/  <<\___/  |____/ u |____/ u  |_|   
+      ||   \\,-.(__) )(    )(  (__)     _|| \\_ (__) )(    |||_     |||_ .-,//|(_  
+      (_")  (_/     (__)  (__)         (__) (__)    (__)  (__)_)   (__)_) \_) (__) 
+    _______________________________________________________________________________
+
+```
+
+4. Follow [this guide](https://se-education.org/guides/tutorials/intellijCodeStyle.html) to set up Intellij IDEA to the coding style that matches ours.
+
 ## Design
 
 ### Architecture
@@ -147,7 +188,7 @@ The `Storage` component has methods that:
 * load data from the file in the given path into an array of strings representing each line of data.
 * save data of a given list by overwriting the respective file in the `data` folder with serialized data.
 
-The following sequence diagrams below show how task data is [saved](#saving-data) and [loaded](#loading-data) using the Storage class.
+The following sequence diagrams show how task data is [saved](#saving-data) and [loaded](#loading-data) using the Storage class.
 
 ### Common classes
 
