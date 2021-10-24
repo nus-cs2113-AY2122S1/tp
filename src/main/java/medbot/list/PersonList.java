@@ -1,5 +1,6 @@
 package medbot.list;
 
+import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 import medbot.person.Person;
 
@@ -121,11 +122,32 @@ public class PersonList {
         return output;
     }
 
-    public PersonalAppointmentList getPersonalAppointmentList(int personId) throws MedBotException {
+    public int getAppointmentId(int personId, int dateTimeCode) throws MedBotException {
         if (!persons.containsKey(personId)) {
             throw new MedBotException(getNoPersonIdErrorMessage(personId));
         }
-        return persons.get(personId).getPersonalAppointmentList();
+        return persons.get(personId).getAppointmentId(dateTimeCode);
+    }
+
+    public void addAppointment(int personId, Appointment appointment) throws MedBotException {
+        if (!persons.containsKey(personId)) {
+            throw new MedBotException(getNoPersonIdErrorMessage(personId));
+        }
+        persons.get(personId).addAppointment(appointment);
+    }
+
+    public void deleteAppointment(int personId, int dateTimeCode) throws MedBotException {
+        if (!persons.containsKey(personId)) {
+            throw new MedBotException(getNoPersonIdErrorMessage(personId));
+        }
+        persons.get(personId).deleteAppointment(dateTimeCode);
+    }
+
+    public String listAppointments(int personId) throws MedBotException {
+        if (!persons.containsKey(personId)) {
+            throw new MedBotException(getNoPersonIdErrorMessage(personId));
+        }
+        return persons.get(personId).listAppointments();
     }
 
     public String getNoPersonIdErrorMessage(int personId) {

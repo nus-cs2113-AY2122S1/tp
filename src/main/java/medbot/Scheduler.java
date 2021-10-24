@@ -26,8 +26,8 @@ public class Scheduler {
         return medicalStaffList;
     }
 
-    public SchedulerAppointmentList getSchedulerAppointmentList() {
-        return schedulerAppointmentList;
+    public String listAllAppointments() {
+        return schedulerAppointmentList.listAppointments();
     }
 
     /**
@@ -70,9 +70,11 @@ public class Scheduler {
         int medicalStaffId = deletedAppointment.getMedicalStaffId();
         int dateTimeCode = deletedAppointment.getDateTimeCode();
         try {
-            patientList.getPersonalAppointmentList(patientId).deleteAppointment(dateTimeCode);
-            medicalStaffList.getPersonalAppointmentList(medicalStaffId).deleteAppointment(dateTimeCode);
+            patientList.deleteAppointment(patientId, dateTimeCode);
+            medicalStaffList.deleteAppointment(medicalStaffId, dateTimeCode);
         } catch (MedBotException me) {
+            //No exception should be thrown
+            assert false;
             throw new MedBotException(ERROR_DELETE_APPOINTMENT_ERROR);
         }
     }
@@ -98,10 +100,11 @@ public class Scheduler {
     private int insertAppointment(Appointment appointment) throws MedBotException {
         try {
             int appointmentId = schedulerAppointmentList.addAppointment(appointment);
-            patientList.getPersonalAppointmentList(appointment.getPatientId()).addAppointment(appointment);
-            medicalStaffList.getPersonalAppointmentList(appointment.getMedicalStaffId()).addAppointment(appointment);
+            patientList.addAppointment(appointment.getPatientId(), appointment);
+            medicalStaffList.addAppointment(appointment.getMedicalStaffId(), appointment);
             return appointmentId;
         } catch (MedBotException me) {
+            //No exception should be thrown
             assert false;
             throw new MedBotException(ERROR_ADD_APPOINTMENT_ERROR);
         }
@@ -117,7 +120,7 @@ public class Scheduler {
     }
 
     private void checkPatientAvailability(int patientId, int dateTimeCode, int appointmentId) throws MedBotException {
-        int clashAppointmentId = patientList.getPersonalAppointmentList(patientId).getAppointmentId(dateTimeCode);
+        int clashAppointmentId = patientList.getAppointmentId(patientId, dateTimeCode);
         if (clashAppointmentId != -1 && clashAppointmentId != appointmentId) {
             throw new MedBotException(String.format(ERROR_PATIENT_APPOINTMENT_CLASH, clashAppointmentId));
         }
@@ -125,7 +128,7 @@ public class Scheduler {
 
     private void checkMedicalStaffAvailability(int staffId, int dateTimeCode, int appointmentId)
             throws MedBotException {
-        int clashAppointmentId = medicalStaffList.getPersonalAppointmentList(staffId).getAppointmentId(dateTimeCode);
+        int clashAppointmentId = medicalStaffList.getAppointmentId(staffId, dateTimeCode);
         if (clashAppointmentId != -1 && clashAppointmentId != appointmentId) {
             throw new MedBotException(String.format(ERROR_STAFF_APPOINTMENT_CLASH, clashAppointmentId));
         }
