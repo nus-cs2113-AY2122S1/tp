@@ -21,7 +21,7 @@ import seedu.duke.commands.EditExpenditureCommand;
 import seedu.duke.commands.EditBudgetCommand;
 import seedu.duke.commands.DeleteMultipleLoanCommand;
 import seedu.duke.commands.DeleteAllLoanCommand;
-import seedu.duke.commands.DeleteAllExpenditureCommand;
+import seedu.duke.commands.StatCommand;
 import seedu.duke.commands.DeleteSingleLoanCommand;
 
 import java.time.LocalDate;
@@ -97,11 +97,27 @@ public class Parser {
         case EditCommand.COMMAND_WORD:
             command = prepareEditCommand(commandParams);
             break;
+        case StatCommand.COMMAND_WORD:
+            command = prepareStatCommand(commandParams);
+            break;
         default:
             command = new InvalidCommand("Sorry. I don't understand your command!");
             break;
         }
         return command;
+    }
+
+    private Command prepareStatCommand(String commandParams) {
+        switch (statOption) {
+        case ("-b"):
+            return;
+        case ("-e"):
+            return;
+        case ("-l"):
+            return;
+        default:
+            return new InvalidCommand(MESSAGE_INVALID_STAT_COMMAND);
+        }
     }
 
     private Command prepareEditCommand(String commandParams) {
