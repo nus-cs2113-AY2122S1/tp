@@ -63,5 +63,6 @@ public class ExportNoteCommandTest {
         File pdf = new File(Paths.get(TestFilePath.RESOURCE_FOLDER.toString(), tempModule + CommonFormat.PDF_FORMAT)
                 .toString());
         assertTrue(pdf.exists());
+        pdf.delete();
     }
 }
