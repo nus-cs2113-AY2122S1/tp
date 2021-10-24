@@ -1,4 +1,11 @@
-package seedu.duke;
+package seedu.duke.commands.clientpackages;
+
+import seedu.duke.TourPlannerException;
+import seedu.duke.commands.Command;
+import seedu.duke.data.Client;
+import seedu.duke.data.ClientPackage;
+import seedu.duke.data.Flight;
+import seedu.duke.data.Tour;
 
 public class AddClientPackageCommand extends Command {
     private ClientPackage clientPackage;

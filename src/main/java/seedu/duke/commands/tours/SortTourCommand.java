@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.commands.tours;
+
+import seedu.duke.commands.Command;
 
 import java.util.ArrayList;
 

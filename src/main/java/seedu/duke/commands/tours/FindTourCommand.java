@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.commands.tours;
+
+import seedu.duke.commands.Command;
 
 public class FindTourCommand extends Command {
     private final String code;

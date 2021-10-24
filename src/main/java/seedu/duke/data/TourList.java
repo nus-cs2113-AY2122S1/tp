@@ -1,4 +1,7 @@
-package seedu.duke;
+package seedu.duke.data;
+
+import seedu.duke.Ui;
+import seedu.duke.data.Tour;
 
 import java.util.ArrayList;
 import java.util.Collections;

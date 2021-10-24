@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.data;
 
 public class Flight {
     private final String id;

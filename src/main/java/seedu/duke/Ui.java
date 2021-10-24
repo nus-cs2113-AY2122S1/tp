@@ -1,5 +1,15 @@
 package seedu.duke;
 
+import seedu.duke.data.Client;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.Tour;
+import seedu.duke.data.TourList;
+import seedu.duke.data.Flight;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.ClientPackage;
+import seedu.duke.data.ClientPackageList;
+
+
 import java.util.ArrayList;
 import java.util.Scanner;
 

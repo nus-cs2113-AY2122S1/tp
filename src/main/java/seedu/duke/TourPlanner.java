@@ -1,5 +1,11 @@
 package seedu.duke;
 
+import seedu.duke.commands.Command;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.ClientPackageList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.TourList;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

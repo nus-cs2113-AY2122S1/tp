@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.data;
 
 /**
  * Represents a client under the Tour agency.

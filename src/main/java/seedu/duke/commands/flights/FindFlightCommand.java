@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.commands.flights;
+
+import seedu.duke.commands.Command;
 
 public class FindFlightCommand extends Command {
     private final String code;

@@ -1,4 +1,6 @@
-package seedu.duke;
+package seedu.duke.commands;
+
+import seedu.duke.TourPlannerException;
 
 /**
  * Clears the entire client list.
