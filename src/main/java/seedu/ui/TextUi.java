@@ -94,18 +94,6 @@ public class TextUi {
         return input;
     }
 
-    public static boolean interruptCommand() {
-        if (in.hasNext()) {
-            printInterruptMessage();
-            return true;
-        }
-        return false;
-    }
-
-    public static void printInterruptMessage() {
-        System.out.println(LINE + "UPDATE CANCELLED.\n" + LINE);
-    }
-
     public static void printExitMessage() {
         System.out.print(LINE + "> Bye friend!\n> See you again! :)\n" + LINE);
     }
@@ -132,6 +120,11 @@ public class TextUi {
 
     public static void printUpdateStartMessage() {
         System.out.println("Updating, standby...");
+        System.out.println("Press any key to cancel the update.");
+    }
+
+    public static void printUpdateInterruptMessage() {
+        System.out.println(LINE + "UPDATE CANCELLED.\n" + LINE);
     }
 
     public static void printUpdateSuccessMessage() {

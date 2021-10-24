@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -117,20 +118,50 @@ public class NusMods {
         return con.getInputStream();
     }
 
+//    /**
+//     * Fetches all mods from NUSMods and saves all of them into the local storage.
+//     *
+//     * @throws IOException if there is no connection.
+//     */
+//    public static void update() throws IOException, ModStorage.FileErrorException {
+//        TextUi.printUpdateStartMessage();
+//        InputStream inputStream = getOnlineModList();
+//        JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+//        int count = 0;
+//        reader.beginArray();
+//        while (reader.hasNext()) {
+//            if (TextUi.interruptCommand()) {
+//                return;
+//            }
+//            Module module = new Gson().fromJson(reader, Module.class);
+//            String moduleCode = module.getModuleCode();
+//            try {
+//                InputStream modStream = getOnlineModInfo(moduleCode);
+//                ModStorage.saveModInfo(moduleCode, modStream);
+//                count++;
+//                System.out.println(count);
+//            } catch (Exception e) {
+//                logger.log(Level.WARNING, "Failed to save mod" + moduleCode);
+//                TextUi.printErrorMessage();
+//            }
+//        }
+//        reader.endArray();
+//        TextUi.printUpdateSuccessMessage();
+//    }
+
     /**
-     * Fetches a mod from NUSMods and prints its full information.
+     * Fetches all mods from NUSMods and saves all of them into the local storage.
      *
-     * @param moduleCode mod to fetch.
      * @throws IOException if there is no connection.
      */
-    public static void showModOnline(String moduleCode) throws IOException {
-        Module module;
-        try {
-            module = fetchModOnline(moduleCode);
-        } catch (FetchException e) {
-            throw new IOException();
+    public static void updateSequence() throws IOException {
+        UpdateThread updateThread = new UpdateThread();
+        updateThread.start();
+        InterruptThread interruptThread = new InterruptThread(updateThread);
+        interruptThread.start();
+        while (updateThread.isAlive()) {
+            //locks code here while thread is running
         }
-        TextUi.printModFullDescription(module);
     }
 
     /**
@@ -138,28 +169,8 @@ public class NusMods {
      *
      * @throws IOException if there is no connection.
      */
-    public static void update() throws IOException, ModStorage.FileErrorException {
-        TextUi.printUpdateStartMessage();
-        InputStream inputStream = getOnlineModList();
-        JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
-        int count = 0;
-        reader.beginArray();
-        while (reader.hasNext()) {
-            Module module = new Gson().fromJson(reader, Module.class);
-            String moduleCode = module.getModuleCode();
-            try {
-                InputStream modStream = getOnlineModInfo(moduleCode);
-                ModStorage.saveModInfo(moduleCode, modStream);
-                count++;
-                System.out.println(count);
-            } catch (Exception e) {
-                logger.log(Level.WARNING, "Failed to save mod" + moduleCode);
-                TextUi.printErrorMessage();
-            }
-        }
-        reader.endArray();
-        TextUi.printUpdateSuccessMessage();
-    }
+
+
 
     /**
      * Attempts to first fetch module info from online API.
@@ -186,5 +197,66 @@ public class NusMods {
             }
         }
         return module;
+    }
+
+    public static class InterruptThread extends Thread {
+
+        private final Thread thread;
+
+        public InterruptThread(Thread thread) {
+            this.thread = thread;
+        }
+
+        public void run() {
+            while (thread.isAlive()) {
+                Scanner s = new Scanner(System.in);
+                s.nextLine();
+                thread.interrupt();
+            }
+        }
+    }
+
+    public static class SearchThread extends Thread {
+    }
+
+    public static class UpdateThread extends Thread {
+
+        public void run() {
+            try {
+                update();
+            } catch (IOException e) {
+                TextUi.printNoConnectionMessage();
+            } catch (InterruptedException e) {
+                TextUi.printErrorMessage();
+            }
+        }
+
+        public static void update() throws IOException, InterruptedException {
+            TextUi.printUpdateStartMessage();
+            sleep(1000);
+            InputStream inputStream = getOnlineModList();
+            JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+            int count = 0;
+            reader.beginArray();
+            while (reader.hasNext()) {
+                if (currentThread().isInterrupted()) {
+                    TextUi.printUpdateInterruptMessage();
+                    return;
+                }
+                Module module = new Gson().fromJson(reader, Module.class);
+                String moduleCode = module.getModuleCode();
+                try {
+                    InputStream modStream = getOnlineModInfo(moduleCode);
+                    ModStorage.saveModInfo(moduleCode, modStream);
+                    count++;
+                    System.out.println(count);
+                } catch (Exception e) {
+                    logger.log(Level.WARNING, "Failed to save mod" + moduleCode);
+                    TextUi.printErrorMessage();
+                }
+            }
+            reader.endArray();
+            TextUi.printUpdateSuccessMessage();
+        }
     }
 }
