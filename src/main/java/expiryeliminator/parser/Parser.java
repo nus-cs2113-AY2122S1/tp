@@ -6,10 +6,33 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import expiryeliminator.commands.ListRecipesUserCanCookCommand;
+import expiryeliminator.commands.AddRecipeCommand;
+import expiryeliminator.commands.DeleteRecipeCommand;
+import expiryeliminator.commands.CookedRecipeCommand;
+import expiryeliminator.commands.ViewRecipeCommand;
+import expiryeliminator.commands.ByeCommand;
 
-import expiryeliminator.commands.*;
+
+import expiryeliminator.commands.AddIngredientCommand;
+import expiryeliminator.commands.Command;
+import expiryeliminator.commands.DecrementCommand;
+import expiryeliminator.commands.DeleteIngredientCommand;
+import expiryeliminator.commands.HelpCommand;
+import expiryeliminator.commands.IncorrectCommand;
+import expiryeliminator.commands.IncrementCommand;
+import expiryeliminator.commands.ListCommand;
+import expiryeliminator.commands.ListIngredientExpiringCommand;
+import expiryeliminator.commands.ListIngredientsExpiredCommand;
+import expiryeliminator.commands.DeleteExpiredIngredientCommand;
+import expiryeliminator.commands.ListRecipeCommand;
+import expiryeliminator.commands.ViewIngredientCommand;
+import expiryeliminator.commands.ShoppingListCommand;
+import expiryeliminator.commands.UpdateUnitsCommand;
+import expiryeliminator.commands.UpdateRecipeCommand;
 
 import expiryeliminator.data.IngredientQuantity;
+
 import expiryeliminator.parser.argparser.ExpiryDateParser;
 import expiryeliminator.parser.argparser.IngredientParser;
 import expiryeliminator.parser.argparser.QuantityParser;
@@ -95,6 +118,8 @@ public class Parser {
                 return prepareDeleteRecipe(args);
             case ListRecipeCommand.COMMAND_WORD:
                 return new ListRecipeCommand();
+            case ListRecipesUserCanCookCommand.COMMAND_WORD:
+                return new ListRecipesUserCanCookCommand();
             case ViewRecipeCommand.COMMAND_WORD:
                 return prepareViewRecipe(args);
             case UpdateRecipeCommand.COMMAND_WORD:
