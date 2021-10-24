@@ -72,12 +72,8 @@ Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<duratio
 Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<duration>" "<zoom_link>"
 [test] >>> Error: Missing arguments.
 Format: schedule add "<link description>" "<day>" "<start_time HH:mm>" "<duration>" "<zoom_link>"
-[test] >>> Your new schedule has conflicts with:
-
-Your schedule on 'CS2113T Tutorial' has been added!
-[test] >>> Your new schedule has conflicts with:
-
-Your schedule on 'CS2113T Lecture' has been added!
+[test] >>> Your schedule on 'CS2113T Tutorial' has been added!
+[test] >>> Your schedule on 'CS2113T Lecture' has been added!
 [test] >>> Command not found! Type 'help' for a list of commands.
 [test] >>> List of Content
 ---------------
