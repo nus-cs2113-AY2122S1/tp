@@ -11,6 +11,7 @@ ingredient inventory.**
 * Words/phrases within square brackets `[square bracket]` are user's inputs. <br>
   For example in `delete [INGREDIENT_NUMBER]`, `INGREDIENT_NUMBER` is the user's input,
   such as `delete 1`.
+* All information about ingredients expiring in **x** days is calculated based on the current date of the system.
 
 ## Contents
 
@@ -56,7 +57,7 @@ ____________________________________________________
 
 This section covers the commands SITUS can execute - how to use them and the expected output. 
 
-### 2.1. Viewing Help
+### 2.1. Viewing Help [to update]
 
 Shows a list of available commands and their syntax.
 
@@ -76,14 +77,10 @@ These are the commands I can currently carry out:
 ____________________________________________________
 ```
 
-
-
 ### 2.2. Add Ingredients
 
 Add an ingredient to the ingredient list.
 
-Command:
-\
 `add n/[INGREDIENT_NAME] a/[AMOUNT] e/[EXPIRY]`
 
 The parameters used in the command are:
@@ -131,27 +128,25 @@ Here is the list of the ingredients currently in inventory:
 	    
     2. Potato | Total Amount: 5.0 kg
         Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+
 ____________________________________________________
 ```
 
+### 2.4. Update Ingredients [to be updated]
 
-### 2.4. Update Ingredients
+Update the amount, unit and expiry of an ingredient in the ingredient list.
 
-Update the amount, unit and expiry of an ingredient in the ingredient list
-
-Command: 
-\
+Command:
 `update n/[INGREDIENT_NAME] a/[AMOUNT] u/[UNITS] e/[EXPIRY]`
 
 The parameters used in the command are:
-* `INGREDIENT_NAME`: name of the ingredient
-* `AMOUNT`: updated amount of the ingredient
-* `UNITS`: updated unit of the ingredient
-* `EXPIRY`: updated expiration date of the ingredient, in format of `dd/mm/yyyy`
+* `INGREDIENT_NAME`: name of the ingredient.
+* `AMOUNT`: updated amount of the ingredient, in kilograms.
+* `EXPIRY`: updated expiration date of the ingredient, in format of `dd/mm/yyyy`.
 
 Examples:
-* `update n/carrot a/100 u/sticks e/05/04/2022`
-* `update n/potato a/0.6 u/kg e/30/12/2021`
+* `update n/carrot a/100 e/05/04/2022`
+* `update n/potato a/0.6 e/30/12/2021`
 
 ```
 update n/carrot a/100 u/sticks e/05/04/2022
@@ -168,7 +163,7 @@ Got it. This ingredient has been updated:
 ____________________________________________________
 ```
 
-### 2.5. Delete Ingredients
+### 2.5. Delete Ingredients [to be updated]
 
 Delete an ingredient from the ingredient list based on its name and expiry date in the list.
 > Note: Users are recommended to use the `list` command *prior* to deleting to confirm the ingredient number of the ingredient  they intend to remove.
@@ -197,7 +192,7 @@ Command: `expire [DATE]`
 The parameter used in the command is:
 * `DATE`: the date of interest, in the format of `dd/mm/yyyy`.
 
-Example: `expire 30/01/2022`
+Example: `expire 26/12/2022`
 
 Full ingredient List: 
 ```
@@ -245,7 +240,7 @@ ____________________________________________________
 ```
 alerts expiry
 ____________________________________________________
-No ingredients expiring by 2021-11-20
+No ingredients expiring by 27/10/2021
 ____________________________________________________
 alerts stock
 ____________________________________________________
@@ -268,13 +263,13 @@ The parameters used in the command are:
 ```
 set expiry 30
 ____________________________________________________
-Successfully set expiry threshold to 30days
+Successfully set expiry threshold to 30 days
 ____________________________________________________
 ```
 ```
-set stock 5
+set stock 4.0
 ____________________________________________________
-Successfully set low stock threshold to 5kg
+Successfully set low stock threshold to 4.0 kg
 ____________________________________________________
 ```
 
@@ -289,7 +284,7 @@ Command: `find [INGREDIENT_NAMES]`
 Examples: `find radish`, `find potato tomato`
 
 ```
-find radish
+find carrot
 ____________________________________________________
 I found these ingredients for "radish":
     3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
@@ -310,7 +305,7 @@ ____________________________________________________
 View or set the system's current date. 
 
 Command: `date [NEW_DATE]`
-* `NEW_DATE`: The date in the format of `dd/mm/yyyy`. 
+  * `NEW_DATE`: The date in the format of `dd/mm/yyyy`. 
   * To view current date: Leave field empty
   * To set a new current date: Key in the new date
   

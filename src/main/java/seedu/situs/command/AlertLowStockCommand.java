@@ -34,7 +34,8 @@ public class AlertLowStockCommand extends Command {
         }
 
         return "There are " + lowStockCount
-                + " ingredients with stock less than " + lowStockThreshold + " kg" + LIST_NEWLINE_INDENT + resultMsg;
+                + " ingredients with stock less than " + lowStockThreshold + " kg"
+                + LIST_NEWLINE_INDENT + resultMsg.trim();
     }
 }
 
