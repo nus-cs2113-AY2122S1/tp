@@ -263,10 +263,11 @@ public class Parser {
     }
 
     private static void executeDeleteTrip(int tripIndex) {
+        ArrayList<Trip> listOfTrips = Storage.getListOfTrips();
         try {
-            String tripLocation = Storage.getListOfTrips().get(tripIndex).getLocation();
-            String tripDate = Storage.getListOfTrips().get(tripIndex).getDateOfTripString();
-            Storage.getListOfTrips().remove(tripIndex);
+            String tripLocation = listOfTrips.get(tripIndex).getLocation();
+            String tripDate = listOfTrips.get(tripIndex).getDateOfTripString();
+            listOfTrips.remove(tripIndex);
             Ui.printDeleteTripSuccessful(tripLocation, tripDate);
         } catch (IndexOutOfBoundsException e) {
             Ui.printUnknownTripIndexError();
