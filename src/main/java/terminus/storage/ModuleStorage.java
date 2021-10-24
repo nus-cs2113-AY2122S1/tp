@@ -371,6 +371,22 @@ public class ModuleStorage {
         return true;
     }
 
+    public void updateModuleDirectory(String oldName, String newName) throws IOException {
+        Path modDirPath = Paths.get(filePath.getParent().toString(), oldName);
+        Path newModDirPath = Paths.get(filePath.getParent().toString(), newName);
+        if (Files.notExists(newModDirPath) && Files.notExists(modDirPath)) {
+            TerminusLogger.info("Creating directory: " + newModDirPath);
+            Files.createDirectories(newModDirPath);
+        } else if (Files.exists(modDirPath) && Files.notExists(newModDirPath)) {
+            TerminusLogger.info("Renaming directory: " + modDirPath);
+            File oldFile = new File(modDirPath.toString());
+            File newFile = new File(newModDirPath.toString());
+            oldFile.renameTo(newFile);
+        } else {
+            TerminusLogger.info("Directory: " + newModDirPath + " already exists.");
+        }
+    }
+
     private boolean isValidFile(File file) throws IOException {
         boolean isValid = true;
         if (!Files.isReadable(Paths.get(file.getAbsolutePath()))) {

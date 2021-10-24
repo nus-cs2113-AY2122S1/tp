@@ -213,12 +213,14 @@ public class ModuleStorageTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        pdf.delete();
+
     }
 
     @Test
     void exportModuleNotes_throwException() throws IOException {
         ContentManager<Note> noteManager = this.moduleManager.getModule(tempModule).getContentManager(Note.class);
-        this.moduleStorage.init(Paths.get(RESOURCE_FOLDER.toString(),"doesNotExist","didNotExist"));
+        this.moduleStorage.init(Paths.get(RESOURCE_FOLDER.toString(), "doesNotExist", "didNotExist"));
         assertThrows(IOException.class,
             () -> this.moduleStorage.exportModuleNotes(tempModule, noteManager.getContents()));
 

@@ -13,6 +13,7 @@ import terminus.exception.InvalidArgumentException;
 import terminus.exception.InvalidCommandException;
 import terminus.module.ModuleManager;
 import terminus.module.NusModule;
+import terminus.storage.ModuleStorage;
 
 public class UpdateModuleCommand extends Command {
 
@@ -65,9 +66,10 @@ public class UpdateModuleCommand extends Command {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_MODULE_EXIST);
         }
         assert index > 0;
+        String oldName = listOfModule[index - 1];
         NusModule current = moduleManager.getModule(listOfModule[index - 1]);
         moduleManager.removeModule(listOfModule[index - 1]);
-
+        ModuleStorage.getInstance().updateModuleDirectory(oldName, newName);
         moduleManager.setModule(newName, current);
         return new CommandResult(String.format("Updated %s to %s successfully", listOfModule[index - 1], newName));
     }
