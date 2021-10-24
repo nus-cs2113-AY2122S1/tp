@@ -189,7 +189,7 @@ List of Module Management workspace commands:
 | ----------- | ----------- |
 |add|add a module in TermiNUS|
 |delete|delete a module in TermiNUS|
-|update|update a module name currently in TermiNUS|
+|update|update a module code currently in TermiNUS|
 |view|view modules information currently in TermiNUS|
 |help|view all commands and their usage within the module management workspace|
 |back|escape and return to the default workspace|
@@ -239,7 +239,7 @@ Deleted module CS2113T.
 
 **Format:** `update <index> "<new_module_code>"`
 
-Updates a module name in the module management workspace.
+Updates a module code in the module management workspace.
 > ⚠️The `<new_module_code>` will have the same restrictions as the [add command](#adding-a-module).  
 
 Example: `update 1 "CS2113"`
@@ -886,10 +886,10 @@ ___
 
 ## FAQ
 **Q:** Can I edit the information in the`data` directory?  
-**A:** Yes! **TermiNUS** saves and loads your information form the `data` directory, editing the files
-in the `data` folder works. We recommend that you update the **contents** of any notes `.txt` in the 
-`data/module_name` directory. However, we do not recommend modifying any configuration file 
-or renaming any file/folders. You should use **TermiNUS** instead to edit any information.
+**A:** Yes! **TermiNUS** saves and loads your information from the `data` folder. You are able to edit the files
+in the `data` folder. We recommend you to update the **contents** of any notes which should be a `.txt` file in the 
+`data/module_code` directory. However, we **do not** recommend modifying any configuration file such as `.json` file 
+or renaming any folders in the `data` folder including the `data` folder itself. For these, you should use **TermiNUS** instead to edit.
 
 ___  
 
