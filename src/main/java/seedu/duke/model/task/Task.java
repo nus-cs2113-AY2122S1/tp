@@ -11,7 +11,7 @@ public class Task {
     private final String dayOfTheWeek;
     private final String information;
     private boolean isDone;
-    private String priority;
+    private final String priority;
 
     public Task(String title, String dayOfTheWeek, String information, String priority) {
         this.title = title;
