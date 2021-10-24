@@ -20,6 +20,8 @@ public class HelpCommand extends Command {
                 + "\n\n" + DecrementCommand.MESSAGE_USAGE
                 + "\n\n" + IncrementCommand.MESSAGE_USAGE
                 + "\n\n" + ListRecipeCommand.MESSAGE_USAGE
+                + "\n\n" + ListRecipesUserCanCookCommand.MESSAGE_USAGE
+                + "\n\n" + CookedRecipeCommand.MESSAGE_USAGE
                 + "\n\n" + ViewRecipeCommand.MESSAGE_USAGE
                 + "\n\n" + ListCommand.MESSAGE_USAGE
                 + "\n\n" + ViewIngredientCommand.MESSAGE_USAGE
