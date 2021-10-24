@@ -113,15 +113,23 @@ public class Parser {
 
     private Command prepareStatCommand(String commandParams) {
         String statOption = commandParams.substring(0, TYPE_IDENTIFIER_END_INDEX);
-
         switch (statOption) {
         case ("-b"):
             return prepareStatBudgetCommand(commandParams);
         case ("-l"):
-            return new StatYearCommand();
+            return prepareStatYearCommand(commandParams);
         default:
             return new InvalidCommand(MESSAGE_INVALID_STAT_COMMAND);
         }
+    }
+
+    private Command prepareStatYearCommand(String commandParams) {
+        String[] split = commandParams.trim().split("t/", 2);
+        assert split[0].equals("");
+
+        int type = Integer.parseInt(split[1].trim());
+
+        return new StatYearCommand(type);
     }
 
     private Command prepareStatBudgetCommand(String commandParams) {

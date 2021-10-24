@@ -9,6 +9,6 @@ public class StatBudgetCommand extends StatCommand {
 
     @Override
     public void execute(boolean isLoadingStorage) {
-
+        System.out.println(this.month);
     }
 }

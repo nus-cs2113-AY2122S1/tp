@@ -1,21 +1,30 @@
 package seedu.duke.commands;
 
 public class StatYearCommand extends StatCommand {
-    public void drawVerticalPercentatge(double[] barPercentage) {
-        System.out.println("- - - - - - - - - - - -");
+    private int type = 0;
 
-        for (int i = 0; i < 100; i++) {
+    public StatYearCommand(int type) {
+        this.type = type;
+    }
+
+    public void drawVerticalPercentatge(double[] barPercentage) {
+        System.out.println("Percentage of Money Spent");
+        System.out.println("     JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC ");
+        for (int i = 10; i > 0; i--) {
+            if (i == 10) {
+                System.out.print("100% ");
+            } else {
+                System.out.print((i * 10) + "%  ");
+            }
             for (int j = 0; j < 12; j++ ) {
-                if (i < barPercentage[j]) {
-                    System.out.print("#");
+                if ((i * 10) < barPercentage[j]) {
+                    System.out.print(" #  ");
                 } else {
-                    System.out.print(" ");
+                    System.out.print("    ");
                 }
             }
             System.out.println();
         }
-
-        System.out.println("- - - - - - - - - - - -");
     }
 
     @Override
@@ -31,7 +40,13 @@ public class StatYearCommand extends StatCommand {
                 totalSpending += recordList.getExpenditure(j, i).getAmount();
             }
             amount = recordList.getBudget(i).getAmount();
-            barPercentage[i] = (totalSpending / amount) * 100;
+
+            if (amount != 0) {
+                barPercentage[i - 1] = (totalSpending / amount) * 100;
+            } else {
+                barPercentage[i - 1] = 0;
+            }
+
         }
 
         drawVerticalPercentatge(barPercentage);
