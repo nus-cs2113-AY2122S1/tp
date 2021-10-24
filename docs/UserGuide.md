@@ -6,13 +6,13 @@
 * [Features](#features)
 * [Commands](#commands)
   * [Add](#add) 
-    * [Budget: `b/`](#add-budget)
-    * [Expenditure: `e/`](#add-expenditure)
-    * [Loan: `l/`](#add-loan)
+    * [Budget: `-b`](#add-budget)
+    * [Expenditure: `-e`](#add-expenditure)
+    * [Loan: `-l`](#add-loan)
   * [Edit](#edit)
-    * [Budget: `b/`](#edit-budget)
-    * [Expenditure: `e/`](#edit-expenditure)
-    * [Loan: `l/`](#edit-loan)
+    * [Budget: `-b`](#edit-budget)
+    * [Expenditure: `-e`](#edit-expenditure)
+    * [Loan: `-l`](#edit-loan)
   * [Database Selector](#dbselect)
 	* [year](#year)
   * [Find & Filter](#find&filter)
@@ -42,9 +42,9 @@ Command Line Interface (CLI) for tech-savvy students who have trouble keeping tr
 
 ### Notes about the command format:
 * Words in UPPER_CASE are the parameters to be supplied by the user. <br />
-e.g. in `add b/ a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add b/ a/500 m/12`
-
+e.g. in `add -b a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can be used as `add -b a/500 m/12`
 * Words encased in `<>` are optional parameters.
+
 <br />
 
 ## Commands
@@ -54,7 +54,7 @@ e.g. in `add b/ a/AMOUNT m/MONTH`, `AMOUNT` and `MONTH` are parameters which can
 The command word `add` adds a record of either Budget, Expenditure, or Loan to the record list. 
 The type of record is determined by the identifier tag after the `add` command word.
 
-### `-b` - Add a Budget
+### `-b` : Add a Budget
 
 Adds a new budget to a specific month.
 
@@ -75,21 +75,24 @@ Your budget of 500.0 for this month is successfully added!
 ========================================================
 ```
 
-### `-e` - Add an expenditure
+### `-e` : Add an expenditure
 
 Adds a new expenditure to a month.
 
-Format: `add -e c/<DESCRIPTION> a/AMOUNT d/<DATE_OF_EXPENDITURE>`
+Format: `add -e n/<DESCRIPTION> a/AMOUNT d/<DATE_OF_EXPENDITURE> c/<CATEGORY>`
 
 * The `DESCRIPTION` can be in a natural language format. It can be left empty if the user does not wish
 to add specific information about the expenditure.
 * The `AMOUNT` entered can be up to 2 decimal places and cannot be empty.
-* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of YYYY-MM-DD. If left empty, the current date according to the
+* The `<DATE_OF_EXPENDITURE>` must strictly be in the form of _YYYY-MM-DD_. If left empty, the current date according to the
 system will be entered by default.
+* The `<CATEGORY>` must be one of the following values:
+  * _GENERAL, CLOTHES, FOOD, ENTERTAINMENT, GIFTS, HEALTH_
+  * If left empty, the default value will be _GENERAL_
 
 Example of usage:
 
-`add -e c/CS2113T Textbooks a/60 d/2021-08-20`
+`add -e n/CS2113T Textbooks a/60 d/2021-08-20 c/GENERAL`
 
 Expected outcome: Expenditure of $60.00 2021-08-20 on has been successfully added.
 
@@ -236,7 +239,79 @@ Your expenditures:
 
 ## `delete`
 
-### Delete: `delete`
+Deletes an entry / entries (maybe user wants to cut off the expenses) from the budget tracker data set.
+
+### `b/` - Delete a budget 
+
+Deletes the budget of a specific month
+
+Format: `delete b/ m/MONTH`
+
+* The `MONTH` represents the month of the budget will be deleted and cannot be empty.
+
+Example of usage:
+
+`delete b/ m/10`
+
+Expected outcome:
+```
+========================================================
+Successfully deleted Budget for this month!
+Now the budget amount is 0.00!      
+========================================================
+```
+
+### `e/` - Delete (an) expenditure(s)
+
+Deletes (an) expenditure(s) of a specific month
+
+Format:`delete e/ m/MONTH` 
+<br/> `delete e/INDEX m/MONTH`
+<br/> `delete e/INDEX_FROM-INDEX_TO m/MONTH`
+
+* The `MONTH` represents the month of the expenditure(s) will be deleted and cannot be empty.
+* The `INDEX` refers to the index number or a range of index number shown in the displayed entry list.
+* The `INDEX` must be within the range of the list.
+* If the `INDEX` is empty, then all the expenditures of this month will be deleted.
+
+Examples of usage:
+
+ `delete e/3-5 m/MONTH`
+
+Expected outcome:
+```
+========================================================
+Successfully deleted Expenditure 3.chicken rice3          | $5.0               | 2021-10-21       
+Successfully deleted Expenditure 4.chicken rice4          | $5.0               | 2021-10-21       
+Successfully deleted Expenditure 5.chicken rice5          | $5.0               | 2021-10-21     
+========================================================
+```
+
+### `l/` - Delete (a) loan record(s)
+
+Deletes (a) loan record(s) of a specific month
+
+Format:`delete l/ m/MONTH` 
+<br/> `delete l/INDEX m/MONTH`
+<br/> `delete l/INDEX_FROM-INDEX_TO m/MONTH`
+
+* The `MONTH` represents the month of the loan record(s) will be deleted and cannot be empty.
+* The `INDEX` refers to the index number or a range of index number shown in the displayed entry list.
+* The `INDEX` must be within the range of the list.
+* If the `INDEX` is empty, then all the loan records of this month will be deleted.
+
+Examples of usage:
+
+ `delete l/3-5 m/MONTH`
+
+Expected outcome:
+```
+========================================================
+Successfully deleted Loan 3.Wei Xuan               | $1000.0            | 2021-10-24       
+Successfully deleted Loan 4.Luoyuang               | $1000.0            | 2021-10-24       
+Successfully deleted Loan 5.Yixuan                 | $1000.0            | 2021-10-24      
+========================================================
+```
 
 ## `help`
  
