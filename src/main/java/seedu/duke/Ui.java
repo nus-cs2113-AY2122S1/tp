@@ -125,7 +125,7 @@ public class Ui {
                 + Parser.convertDateTime(event.getDateTime()) + System.lineSeparator()
                 + event.getDescription() + System.lineSeparator()
                 + event.getVenue() + System.lineSeparator()
-                + event.getBudget() + event.getTaskList();
+                + event.getBudget() + System.lineSeparator() + event.getTaskList();
     }
 
     public static void printTask(Task task) {

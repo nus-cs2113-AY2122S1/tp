@@ -119,10 +119,6 @@ public class DeleteCommand extends Command {
         return flag.trim().equalsIgnoreCase(EVENT_FLAG);
     }
 
-    private static boolean isValidIndex(int index) {
-        return index > 0 && index < eventCatalog.size();
-    }
-
     private static boolean isTaskFlag(String flag) {
         return flag.trim().equalsIgnoreCase(TASK_FLAG);
     }
