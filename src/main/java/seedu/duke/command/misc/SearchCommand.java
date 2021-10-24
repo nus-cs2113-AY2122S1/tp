@@ -2,13 +2,14 @@ package seedu.duke.command.misc;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
-import seedu.duke.exercises.Exercise;
-import seedu.duke.lists.Workout;
-import seedu.duke.lists.WorkoutList;
+import seedu.duke.data.Exercise;
+import seedu.duke.data.Workout;
+import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -33,7 +34,7 @@ public class SearchCommand extends Command {
      * @param filterString the substring that the user wants to find within the task description.
      */
     public SearchCommand(String filterString) {
-        this.filterString = filterString;
+        this.filterString = filterString.toLowerCase(Locale.ROOT);
     }
 
     /**
@@ -156,7 +157,7 @@ public class SearchCommand extends Command {
     private static ArrayList<Exercise> filterExercisesByString(ArrayList<Exercise> workout, String filterString) {
         ArrayList<Exercise> filteredList = new ArrayList<>();
         for (Exercise e : workout) {
-            if (e.getDescription().contains(filterString)) {
+            if (e.getDescription().toLowerCase(Locale.ROOT).contains(filterString)) {
                 filteredList.add(e);
             } else {
                 filteredList.add(null);
@@ -166,7 +167,7 @@ public class SearchCommand extends Command {
     }
 
     /**
-     * Filters through a workout list to find workouts that contain a keyword in the workout name.
+     * Filters through a workout list to find workouts that contain a keyword in the workout name or date.
      * Index of workouts are preserved in the list.
      *
      * @param workoutList list of workouts that we want to filter through.
@@ -175,7 +176,7 @@ public class SearchCommand extends Command {
     private static ArrayList<Workout> filterWorkoutsByString(ArrayList<Workout> workoutList, String filterString) {
         ArrayList<Workout> filteredList = new ArrayList<>();
         for (Workout w : workoutList) {
-            if (w.getWorkoutName().contains(filterString)) {
+            if (w.toString().toLowerCase(Locale.ROOT).contains(filterString)) {
                 filteredList.add(w);
             } else {
                 filteredList.add(null);

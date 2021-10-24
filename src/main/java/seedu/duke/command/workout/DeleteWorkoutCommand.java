@@ -3,8 +3,8 @@ package seedu.duke.command.workout;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.lists.Workout;
-import seedu.duke.lists.WorkoutList;
+import seedu.duke.data.Workout;
+import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.Storage;
 
 import java.util.logging.Logger;
@@ -54,6 +54,7 @@ public class DeleteWorkoutCommand extends Command {
     @Override
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         Workout toDelete = workouts.removeWorkout(workoutIndex);
+        workouts.sortWorkouts();
 
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);

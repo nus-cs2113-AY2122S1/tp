@@ -207,10 +207,13 @@ Manage fitness routines quickly
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v1.0|fit user|create my own workouts|follow the workouts that I created|
 |v1.0|over-ambitious user|delete my workouts|remove really hard workouts that I thought I could do but realised I couldn't|
+|v1.0|user|store all workout routines I created|jump straight into my previous workouts when I open the app
 |v2.0|busy user|enter into workouts|add exercises without the workout index parameter and save time|
 |v2.0|unfit user|be suggested workouts|so that I can follow them to achieve basic fitness|
 |v2.0|forgetful user| be constantly reminded of the syntax for commands|easily correct any incorrect input while using the app|
 |v2.0|user|modify an existing exercise in a workout|constantly update my routine|
+|v2.0|user who finds it hard to find motivation to complete workouts|be able to set deadlines for my workouts|set a goal for myself|
+|v2.0|user|have my workouts sorted according to deadline|complete my workouts on time and meet my fitness goals|
 
 ## Non-Functional Requirements
 

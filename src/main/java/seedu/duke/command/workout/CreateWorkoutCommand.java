@@ -3,9 +3,9 @@ package seedu.duke.command.workout;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.lists.DeadlineWorkout;
-import seedu.duke.lists.Workout;
-import seedu.duke.lists.WorkoutList;
+import seedu.duke.data.DeadlineWorkout;
+import seedu.duke.data.Workout;
+import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.Storage;
 
 import java.time.LocalDate;
@@ -66,10 +66,10 @@ public class CreateWorkoutCommand extends Command {
             workouts.addWorkout(toCreateWithDeadline);
             commandResult = new CommandResult(String.format(MESSAGE_SUCCESS, toCreateWithDeadline));
         }
+        workouts.sortWorkouts();
 
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);
-        assert commandResult != null;
         return commandResult;
     }
 }

@@ -3,9 +3,9 @@ package seedu.duke.command.workout;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.exercises.Exercise;
-import seedu.duke.lists.Workout;
-import seedu.duke.lists.WorkoutList;
+import seedu.duke.data.Exercise;
+import seedu.duke.data.Workout;
+import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.Storage;
 
 import java.util.ArrayList;
@@ -55,14 +55,21 @@ public class RecommendWorkoutCommand extends Command {
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
         LOGGER.info("Showing the recommended " + workoutLevel + " Workouts");
         Map<String, ArrayList<?>> recommendedWorkouts = getRecommendedWorkouts(workoutLevel);
+
         for (Map.Entry<String, ArrayList<?>> m : recommendedWorkouts.entrySet()) {
-            assert !m.getValue().isEmpty();
-            assert m.getValue().get(0) instanceof Exercise;
-            Workout recommendedWorkout = new Workout(workoutLevel + " " + m.getKey(),
-                    (ArrayList<Exercise>) m.getValue());
+            ArrayList<?> list = m.getValue();
+            ArrayList<Exercise> exerciseList = new ArrayList<>();
+            assert !list.isEmpty();
+            for (Object o : list) {
+                assert o instanceof Exercise;
+                exerciseList.add((Exercise)o);
+            }
+            String recommendedWorkoutName = workoutLevel + " " + m.getKey();
+            Workout recommendedWorkout = new Workout(recommendedWorkoutName, exerciseList);
             workouts.addWorkout(recommendedWorkout);
             String jsonString = storage.convertToJson(workouts);
             storage.saveData(jsonString);
+
         }
         return new CommandResult(getRecommendedWorkouts(workoutLevel), true);
     }

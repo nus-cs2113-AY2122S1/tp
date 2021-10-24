@@ -4,10 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.duke.command.workout.EnterWorkoutCommand;
 import seedu.duke.command.misc.IncorrectCommand;
-import seedu.duke.lists.Workout;
-import seedu.duke.lists.WorkoutList;
-
-import java.time.LocalDate;
+import seedu.duke.data.Workout;
+import seedu.duke.data.WorkoutList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

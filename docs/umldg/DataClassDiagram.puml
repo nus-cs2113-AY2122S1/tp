@@ -16,14 +16,20 @@ class WorkoutList {
 class Workout {
 -workoutName:String
 +Workout(String)
-+convertToWorkoutStorageModel()
++convertToWorkoutStorageModel():void
+}
+class DeadlineWorkout {
+-deadline:String
+-deadlineDate:LocalDate
++DeadlineWorkout(String, LocalDate)
++convertToWorkoutStorageModel():void
 }
 class Exercise {
 -LOGGER:Logger {static}
 #description:String
 #sets:Integer
 #reps:Integer
-+convertToExerciseStorageModel(WorkoutModel)
++convertToExerciseStorageModel(WorkoutModel):void
 }
 }
 }
@@ -45,6 +51,7 @@ WorkoutList *-- "*" Workout
 WorkoutList .right.> LoggerUtil
 WorkoutList .right. N1
 N1 .. LoggerUtil
+Workout <|-- DeadlineWorkout
 Workout ..> WorkoutListModel
 Exercise ..> WorkoutModel
 Workout *-- "*" Exercise

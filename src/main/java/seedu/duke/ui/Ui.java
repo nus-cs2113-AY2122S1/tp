@@ -4,7 +4,7 @@ import de.vandermeer.asciitable.AsciiTable;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.exercises.Exercise;
+import seedu.duke.data.Exercise;
 
 import java.util.ArrayList;
 import java.util.Map;

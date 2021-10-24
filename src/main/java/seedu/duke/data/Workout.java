@@ -1,13 +1,12 @@
-package seedu.duke.lists;
+package seedu.duke.data;
 
 import seedu.duke.exception.GetJackDException;
-import seedu.duke.exercises.Exercise;
 import seedu.duke.storage.models.WorkoutListModel;
 import seedu.duke.storage.models.WorkoutModel;
 
 import java.util.ArrayList;
 
-import static seedu.duke.lists.WorkoutList.LOGGER;
+import static seedu.duke.data.WorkoutList.LOGGER;
 
 /**
  * A workout contains a list of exercises in the form of ArrayList of Exercise objects.

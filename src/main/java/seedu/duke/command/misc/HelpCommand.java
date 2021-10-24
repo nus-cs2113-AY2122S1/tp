@@ -2,7 +2,7 @@ package seedu.duke.command.misc;
 
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
-import seedu.duke.lists.WorkoutList;
+import seedu.duke.data.WorkoutList;
 import seedu.duke.storage.Storage;
 
 /**
