@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import terminus.TestFilePath;
@@ -32,6 +33,12 @@ public class UpdateModuleCommandTest {
         moduleManager.addModule(tempModule);
     }
 
+    @AfterAll
+    static void reset() throws IOException {
+        ModuleStorage moduleStorage = ModuleStorage.getInstance();
+        moduleStorage.cleanAfterDeleteModule("test");
+    }
+
     @Test
     void execute_updateModule_success() throws InvalidArgumentException, InvalidCommandException, IOException {
         Command cmd = commandParser.parseCommand("update 1 \"test2\"");
@@ -39,9 +46,10 @@ public class UpdateModuleCommandTest {
         assertNull(moduleManager.getModule(tempModule));
         assertNotNull(moduleManager.getModule("test2"));
         Command cmd2 = commandParser.parseCommand("update 1 \"CS2106\"");
-        CommandResult cmdResult2 = cmd.execute(moduleManager);
+        CommandResult cmdResult2 = cmd2.execute(moduleManager);
         assertNull(moduleManager.getModule("test2"));
         assertNotNull(moduleManager.getModule("CS2106"));
+        moduleStorage.cleanAfterDeleteModule("CS2106");
     }
 
     @Test
