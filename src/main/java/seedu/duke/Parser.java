@@ -47,11 +47,11 @@ public class Parser {
             }
             return new ClearCommand();
         case "cut":
-//            try {
+            try {
                 return parseCut(params);
-//            } catch (NullPointerException | NumberFormatException e) {
-//                throw new TourPlannerException(ERROR_INVALID_CUT_INDEX);
-//            }
+            } catch (NullPointerException | NumberFormatException e) {
+                throw new TourPlannerException(ERROR_INVALID_CUT_INDEX);
+            }
         case "find":
             return parseFind(params);
         default:
@@ -324,10 +324,6 @@ public class Parser {
      * @param params full user's argument/params string after splitting
      * @return the prepared command
      */
-//    private static Command parseCut(String params) {
-//        int clientIndex = stringToInt(params) - 1;
-//        return new CutCommand(clientIndex);
-//    }
 
     /**
      * Parses string containing an integer value to int.

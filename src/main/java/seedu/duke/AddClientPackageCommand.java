@@ -4,7 +4,7 @@ public class AddClientPackageCommand extends Command {
     private ClientPackage clientPackage;
     private String[] rawClientPackage;
 
-    public AddClientPackageCommand(String [] rawClientPackage) {
+    public AddClientPackageCommand(String[] rawClientPackage) {
         this.rawClientPackage = rawClientPackage;
     }
 
@@ -24,7 +24,7 @@ public class AddClientPackageCommand extends Command {
             Tour tour = extractTour(tourCode);
             Flight flight = extractFlight(flightId);
             clientPackage = new ClientPackage(client, tour, flight);
-        } catch (TourPlannerException e){
+        } catch (TourPlannerException e) {
             System.out.println(e.getMessage());
         }
     }
