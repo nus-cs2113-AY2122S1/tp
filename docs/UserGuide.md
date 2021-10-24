@@ -111,7 +111,7 @@ ____________________________________________________
 add n/potato a/5 e/25/12/2021
 ____________________________________________________
 Got it. This ingredient has been added to the inventory:
-	Potato | Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+    Potato | Amount Left: 5.0 kg | Expiry Date: 25/12/2021
 Current inventory has 2 items.
 This ingredient will expire in 65 days.
 ____________________________________________________
@@ -126,11 +126,11 @@ Command: `list`
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Carrot | Total Amount: 20.0 kg
-	    Amount Left: 20.0 kg | Expiry Date: 01/03/2022
+    1. Carrot | Total Amount: 20.0 kg
+        Amount Left: 20.0 kg | Expiry Date: 01/03/2022
 	    
-	2. Potato | Total Amount: 5.0 kg
-	    Amount Left: 5.0 kg | Expiry Date: 25/12/2021
+    2. Potato | Total Amount: 5.0 kg
+        Amount Left: 5.0 kg | Expiry Date: 25/12/2021
 ____________________________________________________
 ```
 
@@ -157,14 +157,14 @@ Examples:
 update n/carrot a/100 u/sticks e/05/04/2022
 ____________________________________________________
 Got it. This ingredient has been updated:
-	Carrot | Amount Left: 100.0 sticks | Expiry Date: 05/04/2022
+    Carrot | Amount Left: 100.0 sticks | Expiry Date: 05/04/2022
 ____________________________________________________
 ```
 ```
 update n/potato a/0.6 u/kg e/30/12/2021
 ____________________________________________________
 Got it. This ingredient has been updated:
-	Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+    Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
 ____________________________________________________
 ```
 
@@ -184,7 +184,7 @@ Example: `delete n/ carrot e/ 01/03/2022`
 delete n/ carrot e/ 01/03/2022
 ____________________________________________________
 Got it. This ingredient has been removed:
-	Carrot | Amount Left: 20.0 kg | Expiry Date: 01/03/2022
+    Carrot | Amount Left: 20.0 kg | Expiry Date: 01/03/2022
 ____________________________________________________
 ```
 
@@ -204,19 +204,19 @@ Full ingredient List:
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
-	2. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
-	3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
-	4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+    1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+    2. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
+    3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+    4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
 ```
 expire 30/01/2022
 ____________________________________________________
 There are 3 ingredients expiring by: 2022-01-30
-	Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
-	Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
-	Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021	
+    Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+    Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+    Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021	
 ____________________________________________________
 ```
 
@@ -236,10 +236,10 @@ Full Ingredient List:
 list
 ____________________________________________________
 Here is the list of the ingredients currently in inventory:
-	1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
-	2. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
-	3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
-	4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+    1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+    2. Carrot | Amount Left: 200.0 sticks | Expiry Date: 01/03/2022
+    3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+    4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
 ```
@@ -250,7 +250,7 @@ ____________________________________________________
 alerts stock
 ____________________________________________________
 There are 1 ingredients with stock less than 5.0 kg
-	Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+    Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
 ____________________________________________________
 ```
 
@@ -292,16 +292,16 @@ Examples: `find radish`, `find potato tomato`
 find radish
 ____________________________________________________
 I found these ingredients for "radish":
-	3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
+    3. Radish | Amount Left: 43.8 kg | Expiry Date: 19/01/2022
 ____________________________________________________
 ```
 ```
 find potato tomato
 ____________________________________________________
 I found these ingredients for "potato":
-	1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
+    1. Potato | Amount Left: 0.6 kg | Expiry Date: 30/12/2021
 I found these ingredients for "tomato":
-	4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
+    4. Tomato | Amount Left: 23.7 kg | Expiry Date: 21/11/2021
 ____________________________________________________
 ```
 
