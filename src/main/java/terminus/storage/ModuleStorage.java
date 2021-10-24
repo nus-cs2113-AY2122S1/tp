@@ -156,7 +156,7 @@ public class ModuleStorage {
      * Loads all notes data from a specified module if any.
      *
      * @param moduleManager The ModuleManager containing existing modules.
-     * @param mod           A module name in the moduleManager.
+     * @param mod A module name in the moduleManager.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void loadNotesFromModule(ModuleManager moduleManager, String mod) throws IOException {
@@ -168,9 +168,14 @@ public class ModuleStorage {
         contentManager.purgeData();
         for (File file : listOfFiles) {
             if (isValidFile(file)) {
-                TerminusLogger.info(String.format("Loading note file %s.", file.getAbsolutePath()));
-                contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
-                        Files.readString(Paths.get(file.getAbsolutePath()))));
+                try {
+                    TerminusLogger.info(String.format("Loading note file %s.", file.getAbsolutePath()));
+                    contentManager.add(new Note(CommonUtils.getFileNameOnly(file.getName()),
+                            Files.readString(Paths.get(file.getAbsolutePath()))));
+                } catch (IOException e) {
+                    // Read String error
+                    TerminusLogger.severe(String.format("Loading note file %s failed.", file.getAbsolutePath()));
+                }
             } else {
                 TerminusLogger.info(String.format("File %s is not a valid note file.", file.getAbsolutePath()));
             }
@@ -193,8 +198,8 @@ public class ModuleStorage {
      * Saves all notes from a specified module into multiple text files inside the directory of its module name.
      *
      * @param moduleManager The ModuleManager containing all data from each module.
-     * @param mod           A module name in the moduleManager.
-     * @param toDeleteAll   True if files in directory should be removed first, otherwise false.
+     * @param mod A module name in the moduleManager.
+     * @param toDeleteAll True if files in directory should be removed first, otherwise false.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void saveNotesFromModule(ModuleManager moduleManager, String mod, Boolean toDeleteAll) throws IOException {
@@ -227,7 +232,7 @@ public class ModuleStorage {
      * Removes deleted note file from module folder.
      *
      * @param moduleName The module name related to the new note.
-     * @param noteName   The note removed from moduleManager.
+     * @param noteName The note removed from moduleManager.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void removeNoteFromModule(String moduleName, String noteName) throws IOException {
@@ -248,7 +253,7 @@ public class ModuleStorage {
      * Add new notes file into module folder.
      *
      * @param moduleName The module name related to the new note.
-     * @param newNote    The new note added to moduleManager.
+     * @param newNote The new note added to moduleManager.
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void addNoteFromModule(String moduleName, Note newNote) throws IOException {
@@ -302,7 +307,7 @@ public class ModuleStorage {
      * Exports all notes of a module to a PDF file.
      *
      * @param module The Name of the module to export
-     * @param notes  The list of notes to export
+     * @param notes The list of notes to export
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
     public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException {
@@ -373,6 +378,9 @@ public class ModuleStorage {
         } else if (!CommonUtils.isValidFileName(CommonUtils.getFileNameOnly(file.getName()))) {
             isValid = false;
         } else if (!isValidFileSize(file)) {
+            isValid = false;
+        } else if (!Files.probeContentType(Paths.get(file.getAbsolutePath()))
+                .equals(CommonFormat.CONTENT_TYPE_TEXT_FILE)) {
             isValid = false;
         }
         return isValid;
