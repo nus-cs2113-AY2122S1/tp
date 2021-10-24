@@ -32,7 +32,8 @@ public class LoadLists {
         }
     }
 
-    private static void storeCurrentRecipe(RecipeList recipes, Scanner sc, Recipe currentRecipe) throws IllegalValueException, DuplicateDataException {
+    private static void storeCurrentRecipe(RecipeList recipes, Scanner sc, Recipe currentRecipe)
+            throws IllegalValueException, DuplicateDataException {
         while (sc.hasNext()) {
             String line = sc.nextLine();
             if (!line.isBlank()) {
