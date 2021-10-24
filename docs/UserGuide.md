@@ -15,6 +15,8 @@ If you can type fast, TAA can help keep track of your modules and students faste
   * [Listing all students in a module: `list_students`](#listing-all-students-in-a-module-list_students)
   * [Finding students in a module given a keyword: `find_student`](#finding-students-in-a-module-given-a-keyword-find_student)
   * [Setting attendance for a particular lesson for a student: `set_attendance`](#setting-attendance-for-a-particular-lesson-for-a-student-set_attendance)
+  * [Deleting attendance for a particular lesson for a student: `delete_attendance`](#deleting-attendance-for-a-particular-lesson-for-a-student-delete_attendance)
+  * [Listing attendance for a particular student: `list_attendance`](#listing-attendance-for-a-particular-student-list_attendance)
   * [Listing all assessments in a module: `list_assessments`](#listing-all-assessments-in-a-module-list_assessments)
   * [Adding an assessment to a module: `add_assessment`](#adding-an-assessment-to-a-module-add_assessment)
   * [Editing an assessment in a module: `edit_assessment`](#editing-an-assessment-in-a-module-edit_assessment)
@@ -217,13 +219,34 @@ Examples:
 <br>
 
 ### Setting attendance for a particular lesson for a student: `set_attendance`
-Sets a student's attendance for a lesson
+Sets a student's attendance for a lesson.
 
-Format: `set_attendance c/<MODULE_CODE s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
+Format: `set_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUMBER> p/<PRESENT>`
 * `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
 * `STUDENT_INDEX` refers to the index of the student in the student list of the module.
-* `LESSON_NUMBER` refers to the lesson number
+* `LESSON_NUMBER` refers to the lesson number.
 * `PRESENT` refers to the whether a student is present. (1 for present, 0 for not present)
+
+<br>
+
+### Deleting attendance for a particular lesson for a student: `delete_attendance`
+Deletes a student's attendance for a lesson.
+
+Format: `delete_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUMBER>`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the module.
+* `LESSON_NUMBER` refers to the lesson number.
+
+<br>
+
+### Listing attendance for a particular student: `list_attendance`
+Lists a student's attendance.
+
+Format: `list_attendance c/<MODULE_CODE> s/<STUDENT_INDEX`
+* `MODULE_CODE` refers to the code of the module (e.g. CS2113T).
+* `STUDENT_INDEX` refers to the index of the student in the student list of the module.
+
+<br>
 
 ### Setting marks for a student's assessment: `set_marks`
 Adds a student's marks for an assessment.
@@ -319,6 +342,7 @@ set_attendance | `set_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUM
 set_marks | `set_marks c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<MARKS>` <br /> e.g. `set_marks c/CS2113T s/1 a/Midterms m/70.6`
 delete_student | `delete_student c/<MODULE_CODE> s/<STUDENT_INDEX>` <br /> e.g. `delete_student c/cs2113t s/1`
 delete_assessment | `delete_assessment c/<MODULE_CODE> n/<ASSESSMENT_NAME>` <br /> e.g. `delete_assessment c/CS2113T n/finals`
+delete_attendance | `delete_attendance c/<MODULE_CODE> s/<STUDENT_INDEX> l/<LESSON_NUMBER>` <br /> e.g. `delete_attendance c/CS2113T s/1 l/1`
 delete_mark | `delete_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME>` <br /> e.g. `delete_mark c/CS2113T s/1 a/Midterms`
 edit_mark | `edit_mark c/<MODULE_CODE> s/<STUDENT_INDEX> a/<ASSESSMENT_NAME> m/<NEW_MARKS>` <br /> e.g. `edit_mark c/CS2113T s/1 a/Midterms m/80.6`
 edit_student | `edit_student c/<MODULE_CODE> s/<STUDENT_INDEX> i/<NEW_ID> n/<NEW_NAME>` <br /> e.g. `edit_student c/CS2113T s/1 i/12345 n/jon geh`
