@@ -77,12 +77,22 @@ public class Expense {
         String[] listOfPeople = userInput.split("/")[0].split(",");
         ArrayList<Person> validListOfPeople = new ArrayList<>();
         Storage.getLogger().log(Level.INFO, "Checking if names are valid");
+        if (listOfPeople.length == 1 && listOfPeople[0].trim().equalsIgnoreCase("-all")) {
+            return Storage.getOpenTrip().getListOfPersons();
+        }
         for (String name : listOfPeople) {
+            boolean isValidPerson = false;
             for (Person person : Storage.getOpenTrip().getListOfPersons()) {
                 if (name.trim().equalsIgnoreCase(person.getName())) {
                     validListOfPeople.add(person);
+                    isValidPerson = true;
                     break;
                 }
+            }
+            if (!isValidPerson) {
+                Ui.printInvalidPerson(name);
+                Scanner newUserInput = Storage.getScanner();
+                return checkValidPersons(newUserInput.nextLine());
             }
         }
         return validListOfPeople;

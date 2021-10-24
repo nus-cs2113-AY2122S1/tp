@@ -86,7 +86,7 @@ public class Ui {
     public static void printFilterFormatError() {
         System.out.println("Please format your inputs as follows: "
                 + System.lineSeparator()
-                + "view filter [expense-attribute] [attribute-information]");
+                + "view filter [category, payer, description] [search keyword]");
     }
 
     /*public static void printBudgetFormatError() {
@@ -277,6 +277,15 @@ public class Ui {
 
     public static void printCreateFileFailure() {
         System.out.println("The save file could not be created. Exiting the program now...");
+    }
+
+    public static void printInvalidPerson(String name){
+        System.out.println(name + " is not part of the trip. "
+                + "Please enter the names of the people who are involved in this expense again, separated by a comma.");
+        System.out.println("These are the names of the people who are part of the trip:");
+        for (Person person : Storage.getOpenTrip().getListOfPersons()){
+            System.out.println(person.getName());
+        }
     }
 
 }
