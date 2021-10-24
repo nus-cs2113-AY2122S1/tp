@@ -36,6 +36,8 @@ public class Parser {
             return new LoanCommand(input);
         } else if (input.startsWith(ReturnCommand.COMMAND_WORD)) {
             return new ReturnCommand(input);
+        } else if (input.startsWith(ReserveCommand.COMMAND_WORD)) {
+            return new ReserveCommand(input);
         } else {
             return new UnknownCommand();
         }

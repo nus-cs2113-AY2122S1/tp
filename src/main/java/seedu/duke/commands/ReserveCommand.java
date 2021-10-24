@@ -6,18 +6,16 @@ import seedu.duke.data.Item;
 import seedu.duke.ui.TextUI;
 
 import static seedu.duke.Status.AVAILABLE;
-import static seedu.duke.Status.LOANED;
 import static seedu.duke.Status.RESERVED;
+import static seedu.duke.common.Messages.RESERVE_SUCCESS;
 import static seedu.duke.common.Messages.INVALID_ID;
-import static seedu.duke.common.Messages.LOAN_SUCCESS;
-import static seedu.duke.common.Messages.LOAN_SUCCESS_RESERVED;
 import static seedu.duke.common.Messages.UNAVAILABLE_ITEM_MESSAGE;
 
 /**
  * Class encapsulating command to update the status of the item to be loaned out.
  */
-public class LoanCommand extends Command {
-    public static final String COMMAND_WORD = "loan";
+public class ReserveCommand extends Command {
+    public static final String COMMAND_WORD = "reserve";
     protected String args; // Format: loan [ID]
     protected String id;
 
@@ -25,7 +23,7 @@ public class LoanCommand extends Command {
      * Class Constructor.
      * @param args Arguments supplied by user in the loan command
      */
-    public LoanCommand(String args) {
+    public ReserveCommand(String args) {
         this.args = args;
     }
 
@@ -40,14 +38,11 @@ public class LoanCommand extends Command {
             throw new LibmgrException(INVALID_ID);
         }
         id = args.split(" ")[1];
-        Item toBeLoaned = catalogue.getItem(id);
+        Item toBeReserved = catalogue.getItem(id);
 
-        if (toBeLoaned.getStatus().equals(AVAILABLE)) {
-            toBeLoaned.setStatus(LOANED);
-            ui.print(LOAN_SUCCESS, toBeLoaned);
-        } else if (toBeLoaned.getStatus().equals(RESERVED)) {
-            toBeLoaned.setStatus(LOANED);
-            ui.print(LOAN_SUCCESS_RESERVED, toBeLoaned);
+        if (toBeReserved.getStatus().equals(AVAILABLE)) {
+            toBeReserved.setStatus(RESERVED);
+            ui.print(RESERVE_SUCCESS, toBeReserved);
         } else {
             ui.print(UNAVAILABLE_ITEM_MESSAGE);
         }
