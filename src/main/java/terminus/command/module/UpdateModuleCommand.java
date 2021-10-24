@@ -56,7 +56,7 @@ public class UpdateModuleCommand extends Command {
 
     @Override
     public CommandResult execute(ModuleManager moduleManager)
-            throws InvalidCommandException, InvalidArgumentException, IOException {
+        throws InvalidCommandException, InvalidArgumentException, IOException {
         String[] listOfModule = moduleManager.getAllModules();
         if (!CommonUtils.isValidIndex(index, listOfModule)) {
             throw new InvalidArgumentException(Messages.ERROR_MESSAGE_EMPTY_CONTENTS);
@@ -69,6 +69,7 @@ public class UpdateModuleCommand extends Command {
         moduleManager.removeModule(listOfModule[index - 1]);
 
         moduleManager.setModule(newName, current);
-        return new CommandResult(String.format("Updated %s to %s successfully", listOfModule[index - 1], newName));
+        return new CommandResult(
+            String.format(Messages.UPDATE_MODULE_RESPONSE_MESSAGE, listOfModule[index - 1], newName));
     }
 }

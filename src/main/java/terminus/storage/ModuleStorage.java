@@ -23,6 +23,7 @@ import terminus.common.Messages;
 import terminus.common.TerminusLogger;
 import terminus.content.ContentManager;
 import terminus.content.Note;
+import terminus.exception.InvalidArgumentException;
 import terminus.module.ModuleManager;
 
 /**
@@ -305,15 +306,19 @@ public class ModuleStorage {
      * @param notes  The list of notes to export
      * @throws IOException When the file is inaccessible (e.g. file is locked by OS).
      */
-    public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException {
+    public void exportModuleNotes(String module, ArrayList<Note> notes) throws IOException,InvalidArgumentException {
         Document tempDocument = new Document();
         Path modDirPath = Paths.get(filePath.getParent().toString(), module + CommonFormat.PDF_FORMAT);
         if (Files.notExists(modDirPath.getParent())) {
             TerminusLogger.info("Directory does not exists: " + modDirPath.getParent());
-            throw new IOException("Parent directory does not exist");
+            throw new IOException("Parent directory does not exist.");
+        }
+        if (notes.isEmpty()) {
+            TerminusLogger.info("Directory does not exists: " + modDirPath.getParent());
+            throw new InvalidArgumentException("There are no notes to export.");
         }
         try {
-            PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
+            final PdfWriter writer = PdfWriter.getInstance(tempDocument, new FileOutputStream(modDirPath.toString()));
             Font header = FontFactory
                     .getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_HEADER_SIZE, Font.BOLD, BaseColor.BLACK);
             Font text = FontFactory.getFont(CommonFormat.FONT_NAME, CommonFormat.FONT_SIZE, BaseColor.BLACK);
@@ -326,6 +331,7 @@ public class ModuleStorage {
                 tempDocument.add(content);
             }
             tempDocument.close();
+            writer.close();
         } catch (DocumentException e) {
             throw new IOException(Messages.FAIL_TO_EXPORT);
         }
