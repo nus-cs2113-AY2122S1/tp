@@ -1,10 +1,14 @@
 package seedu.traveller;
 
+import seedu.traveller.exceptions.DayNotFoundException;
+import seedu.traveller.exceptions.TravellerException;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//@@author Uxinnn
 /**
  * Represents a list of days in a trip.
  * Each <code>Trip</code> will have 1 <code>DaysList</code>.
@@ -25,13 +29,23 @@ public class DaysList {
         days.add(newDay);
     }
 
-    public Day getDay(int i) {
-        return days.get(i);
+    public Day getDay(int dayNumber) throws TravellerException {
+        Day day;
+        try {
+            day = days.get(dayNumber);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DayNotFoundException(dayNumber);
+        }
+        return day;
     }
 
-    public void deleteDay(int i) {
-        logger.log(Level.INFO, "Deleted a day of index " + i + " from daysList");
-        days.remove(i);
+    public void deleteDay(int dayNumber) throws TravellerException {
+        logger.log(Level.INFO, "Deleted a day of index " + dayNumber + " from daysList");
+        try {
+            days.remove(dayNumber);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DayNotFoundException(dayNumber);
+        }
     }
 
     public int getSize() {
@@ -45,10 +59,10 @@ public class DaysList {
     @Override
     public String toString() {
         StringBuilder daysListString = new StringBuilder();
-        for (int i = 0; i < getSize(); i++) {
-            String dayHeader = "\n\t\t\t\tDay " + i + ": ";
+        for (int dayNumber = 0; dayNumber < getSize(); dayNumber++) {
+            String dayHeader = "\n\t\t\t\tDay " + dayNumber + ": ";
             daysListString.append(dayHeader);
-            daysListString.append(getDay(i).toString());
+            daysListString.append(days.get(dayNumber).toString());
         }
         return daysListString.toString();
     }

@@ -1,6 +1,7 @@
 package seedu.traveller;
 
 
+//@@author Uxinnn
 public class Day {
     protected ItemsList itemsList;
 
@@ -12,12 +13,12 @@ public class Day {
         itemsList.addItem(item);
     }
 
-    public Item getItem(int i) {
-        return itemsList.getItem(i);
+    public Item getItem(int itemNumber) {
+        return itemsList.getItem(itemNumber);
     }
 
-    public void deleteItem(int i) {
-        itemsList.deleteItem(i);
+    public void deleteItem(int itemNumber) {
+        itemsList.deleteItem(itemNumber);
     }
 
     public int getItemsListSize() {

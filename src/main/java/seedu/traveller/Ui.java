@@ -1,6 +1,6 @@
 package seedu.traveller;
 
-import seedu.traveller.exceptions.TripNotFoundException;
+import seedu.traveller.exceptions.TravellerException;
 
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -39,11 +39,12 @@ public class Ui {
     }
 
     public void printTrip(Trip trip) {
-        assert !trip.getTripName().equals("all") : "`all` is an invalid tripName.";
+        assert !trip.getTripName().equals("all") : "'all' is an invalid tripName.";
+        assert !trip.getTripName().equals("") : "'' is an invalid tripName.";
         System.out.println(trip);
     }
 
-    public void printAllTrips(TripsList tripsList) throws TripNotFoundException {
+    public void printAllTrips(TripsList tripsList) throws TravellerException {
         assert tripsList.getSize() > 0 : "There are no trips in the tripsList.";
         System.out.println("\tHere are all your trips: ");
         for (int i = 0; i < tripsList.getSize(); i++) {
@@ -56,6 +57,8 @@ public class Ui {
     }
 
     public void printNewTripCreated(String tripName) {
+        assert !tripName.equals("all") : "'all' is an invalid tripName.";
+        assert !tripName.equals("") : "'' is an invalid tripName.";
         System.out.println("\tYou have just created a new trip called " + tripName + ".");
     }
 
@@ -88,11 +91,17 @@ public class Ui {
         System.out.println("\tThe distance from " + startCountry + " to " + endCountry + " is " + distance + ".");
     }
 
-    public void printAddDayToTrip(String tripName, int daysNumber) {
-        System.out.println("\tAdded " + daysNumber + " days to trip " + tripName + ".");
+    public void printAddDayToTrip(String tripName, int numberOfDays) {
+        assert numberOfDays >= 0 : "Number of days is negative.";
+        assert !tripName.equals("all") : "'all' is an invalid tripName.";
+        assert !tripName.equals("") : "'' is an invalid tripName.";
+        System.out.println("\tAdded " + numberOfDays + " days to trip " + tripName + ".");
     }
 
-    public void printAddItemToDay(String tripName, int dayIndex, String itemName) {
+    public void printAddItemToDay(String tripName, int dayIndex) {
+        assert dayIndex >= 0 : "Number of days is negative.";
+        assert !tripName.equals("all") : "'all' is an invalid tripName.";
+        assert !tripName.equals("") : "'' is an invalid tripName.";
         System.out.println("\tAdded a new item to day " + dayIndex + " of trip " + tripName + ".");
     }
 

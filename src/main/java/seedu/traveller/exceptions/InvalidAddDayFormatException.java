@@ -1,8 +1,10 @@
 package seedu.traveller.exceptions;
 
+
+//@@author Uxinnn
 public class InvalidAddDayFormatException extends TravellerException {
     @Override
     public String getMessage() {
-        return "\tWrong format for Add-day! \n\t Correct format: add-day TRIP_NAME NUMBER_OF_DAYS";
+        return "\tWrong format for add-day! \n\tCorrect format: add-day TRIP_NAME /day NUMBER_OF_DAYS";
     }
 }

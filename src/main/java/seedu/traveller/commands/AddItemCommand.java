@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//@@author Uxinnn
 public class AddItemCommand extends Command {
     private static final Logger logger = Logger.getLogger(NewCommand.class.getName());
     private final String tripName;
@@ -21,7 +22,10 @@ public class AddItemCommand extends Command {
 
     public AddItemCommand(String tripName, int dayIndex, String itemTime, String itemName) {
         logger.setLevel(Level.INFO);
+        assert !tripName.equals("all") : "'all' is an invalid tripName.";
+        assert !tripName.equals("") : "'' is an invalid tripName.";
         this.tripName = tripName;
+        assert dayIndex >= 0 : "Day index is negative.";
         this.dayIndex = dayIndex;
         this.itemTime = itemTime;
         this.itemName = itemName;
@@ -74,6 +78,6 @@ public class AddItemCommand extends Command {
         assert Objects.equals(newItem.getItemName(), getItemName()) :
                 "Item name in created item and command do not match.";
         day.addItem(newItem);
-        ui.printAddItemToDay(getTripName(), getDayIndex(), getItemName());
+        ui.printAddItemToDay(getTripName(), getDayIndex());
     }
 }

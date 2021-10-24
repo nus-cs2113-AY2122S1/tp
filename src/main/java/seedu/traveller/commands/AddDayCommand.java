@@ -9,33 +9,44 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+//@@author Uxinnn
 public class AddDayCommand extends Command {
     private static final Logger logger = Logger.getLogger(NewCommand.class.getName());
     private final String tripName;
-    private final int daysNumber;
+    private final int numberOfDays;
 
-    public AddDayCommand(String tripName, int daysNumber) {
+    public AddDayCommand(String tripName, int numberOfDays) {
         logger.setLevel(Level.INFO);
+        assert !tripName.equals("all") : "'all' is an invalid tripName.";
+        assert !tripName.equals("") : "'' is an invalid tripName.";
         this.tripName = tripName;
-        this.daysNumber = daysNumber;
-        logger.log(Level.INFO, "Created an addTripDay command: \n" + this);
+        assert numberOfDays >= 0 : "Number of days is negative.";
+        this.numberOfDays = numberOfDays;
+        logger.log(Level.INFO, "Created an addDay command: \n" + this);
     }
 
     public String getTripName() {
-        return this.tripName;
+        return tripName;
+    }
+
+    public int getNumberOfDays() {
+        return numberOfDays;
     }
 
     @Override
     public String toString() {
         return "AddTripDay command:"
-                + "\n\ttripName: " + tripName;
+                + "\n\ttripName: " + getTripName();
     }
 
     public void execute(TripsList tripsList, Ui ui) throws TravellerException {
-        Trip trip = tripsList.getTrip(tripName);
-        for (int i = 0; i < daysNumber; i++) {
+        Trip trip = tripsList.getTrip(getTripName());
+        int originalNumberOfDays = trip.getDaySize();
+        for (int i = 0; i < getNumberOfDays(); i++) {
             trip.addDay();
         }
-        ui.printAddDayToTrip(tripName, daysNumber);
+        int finalNumberOfDays = trip.getDaySize();
+        assert originalNumberOfDays + getNumberOfDays() == finalNumberOfDays : "Days are added incorrectly.";
+        ui.printAddDayToTrip(getTripName(), getNumberOfDays());
     }
 }

@@ -41,6 +41,11 @@ public class WorldMap {
     public static MinCalcResult calcMinDistance(String sourceCountryName, String targetCountryName) {
         Country sourceCountry = getCountry(sourceCountryName);
         Country targetCountry = getCountry(targetCountryName);
+        if (sourceCountry.getKey() == -1 || targetCountry.getKey() == -1) {
+            MinCalcResult result = new MinCalcResult(sourceCountry, targetCountry, null, null);
+            result.setError();
+            return result;
+        }
         logic.computeSource(sourceCountry, graphList);
         return logic.getToGoal(sourceCountry,targetCountry);
     }

@@ -8,12 +8,18 @@ public class MinCalcResult {
     Country endCountry;
     List<Country> path;
     List<Double> distances;
+    int error;
 
     public MinCalcResult(Country startCountry, Country endCountry, List<Country> path, List<Double> distances) {
         this.startCountry = startCountry;
         this.endCountry = endCountry;
         this.path = path;
         this.distances = distances;
+        this.error = 0;
+    }
+
+    public void setError() {
+        error = 1;
     }
 
     public Country getStartCountry() {
@@ -30,6 +36,10 @@ public class MinCalcResult {
 
     public List<Double> getDistances() {
         return distances;
+    }
+
+    public int getError() {
+        return error;
     }
 
     @Override
