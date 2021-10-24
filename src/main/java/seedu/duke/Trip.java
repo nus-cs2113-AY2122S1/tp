@@ -1,18 +1,16 @@
 package seedu.duke;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Trip {
 
     private LocalDate dateOfTrip;
     private ArrayList<Expense> listOfExpenses = new ArrayList<>();
     private ArrayList<Person> listOfPersons = new ArrayList<>();
-    //private double budget; //may not be needed anymore
     private double exchangeRate;
     private String foreignCurrency;
     private String foreignCurrencyFormat;
@@ -37,7 +35,6 @@ public class Trip {
         setDateOfTrip(newTripInfo[1]);
         setForeignCurrency(newTripInfo[2].toUpperCase());
         setExchangeRate(newTripInfo[3]);
-        //setBudget(newTripInfo[3]);
         this.listOfPersons = splitPeople(newTripInfo[4]);
     }
 
@@ -115,6 +112,38 @@ public class Trip {
         }
     }
 
+    public void getIndividualExpenseSummary(Person person) {
+        double currentAmount = 0; //amount paid for current expense
+        double totalAmountSpent = 0;
+        int expensesInvolved = 0; //num of expenses involved
+        HashMap<String, Double> categoriesSplit = new HashMap<>(); //contains the amount spent in each category
+        for (Expense e : listOfExpenses) {
+            if (e.getPersonsList().contains(person)) {
+                currentAmount = e.getAmountSplit().get(person); //why is this null?
+                String currentCategory = e.getCategory();
+                totalAmountSpent += currentAmount;
+                expensesInvolved++;
+                //the following if else is to update the category/amtSpent hashmap
+                if (!categoriesSplit.containsKey(currentCategory)) {
+                    categoriesSplit.put(currentCategory, currentAmount);
+                } else {
+                    double updatedValue = categoriesSplit.get(currentCategory) + currentAmount;
+                    categoriesSplit.put(currentCategory, updatedValue);
+                }
+            }
+        }
+        System.out.println(person + " has spent "
+                //+ money sign
+                + totalAmountSpent
+                + " on "
+                + expensesInvolved
+                + " expenses in the following split: ");
+        for (Map.Entry<String, Double> set : categoriesSplit.entrySet()) {
+            System.out.println(set.getKey() + ": " + set.getValue());
+        }
+    }
+
+
     public LocalDate getDateOfTrip() {
         return dateOfTrip;
     }
@@ -140,19 +169,6 @@ public class Trip {
         }
     }
 
-    /*public double getBudget() {
-        return this.budget;
-    }
-
-    public void setBudget(String budget) {
-        try {
-            this.budget = Double.parseDouble(budget);
-        } catch (NumberFormatException e) {
-            Ui.printBudgetFormatError();
-            Scanner scanner = Storage.getScanner();
-            setBudget(scanner.nextLine().strip());
-        }
-    }*/
 
     public double getExchangeRate() {
         return exchangeRate;
@@ -182,9 +198,6 @@ public class Trip {
         return totalExpense;
     }
 
-    /*public double getBudgetLeft() {
-        return getBudget() - getTotalExpenses();
-    }*/
 
 
     public String getForeignCurrency() {
