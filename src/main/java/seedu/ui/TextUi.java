@@ -131,6 +131,10 @@ public class TextUi {
         System.out.println("Local data updated successfully.");
     }
 
+    public static void printSearchInterruptMessage() {
+        System.out.println(LINE + "SEARCH CANCELLED.\n" + LINE);
+    }
+
     public static void printWelcomeMessage() {
         System.out.println(STARTUP);
     }

@@ -30,19 +30,36 @@ public class NusMods {
      * @param searchFlags secondary variables that will be checked to narrow the search.
      * @throws IOException if there is no connection.
      */
+//    public static void searchModsOnline(String searchTerm, SearchFlags searchFlags) throws IOException {
+//        InputStream inputStream = getOnlineModList();
+//        JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+//        int count = 0;
+//        reader.beginArray();
+//        while (reader.hasNext()) {
+//            Module module = new Gson().fromJson(reader, Module.class);
+//            if (isMatch(module, searchTerm, searchFlags)) {
+//                count++;
+//            }
+//        }
+//        reader.endArray();
+//        TextUi.printModsFound(count);
+//    }
+
+    /**
+     * Retrieves mod list from NUSMods API then iterates through it and prints all matching mods.
+     *
+     * @param searchTerm  searchTerm that has to be contained in the moduleCode.
+     * @param searchFlags secondary variables that will be checked to narrow the search.
+     * @throws IOException if there is no connection.
+     */
     public static void searchModsOnline(String searchTerm, SearchFlags searchFlags) throws IOException {
-        InputStream inputStream = getOnlineModList();
-        JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
-        int count = 0;
-        reader.beginArray();
-        while (reader.hasNext()) {
-            Module module = new Gson().fromJson(reader, Module.class);
-            if (isMatch(module, searchTerm, searchFlags)) {
-                count++;
-            }
+        SearchThread searchThread = new SearchThread(searchTerm, searchFlags);
+        searchThread.start();
+        InterruptThread interruptThread = new InterruptThread(searchThread);
+        interruptThread.start();
+        while (searchThread.isAlive()) {
+            //locks code here while thread is running
         }
-        reader.endArray();
-        TextUi.printModsFound(count);
     }
 
     /**
@@ -165,14 +182,6 @@ public class NusMods {
     }
 
     /**
-     * Fetches all mods from NUSMods and saves all of them into the local storage.
-     *
-     * @throws IOException if there is no connection.
-     */
-
-
-
-    /**
      * Attempts to first fetch module info from online API.
      * If fails, fetches module information from local save.
      *
@@ -217,6 +226,41 @@ public class NusMods {
     }
 
     public static class SearchThread extends Thread {
+
+        private final String searchTerm;
+        private final SearchFlags searchFlags;
+
+        public SearchThread(String searchTerm, SearchFlags searchFlags) {
+            this.searchTerm = searchTerm;
+            this.searchFlags = searchFlags;
+        }
+
+        public void run() {
+            try {
+                search(searchTerm, searchFlags);
+            } catch (IOException e) {
+                TextUi.printNoConnectionMessage();
+            }
+        }
+
+        private static void search(String searchTerm, SearchFlags searchFlags) throws IOException {
+            InputStream inputStream = getOnlineModList();
+            JsonReader reader = new JsonReader(new InputStreamReader(inputStream));
+            int count = 0;
+            reader.beginArray();
+            while (reader.hasNext()) {
+                if (currentThread().isInterrupted()) {
+                    TextUi.printSearchInterruptMessage();
+                    return;
+                }
+                Module module = new Gson().fromJson(reader, Module.class);
+                if (isMatch(module, searchTerm, searchFlags)) {
+                    count++;
+                }
+            }
+            reader.endArray();
+            TextUi.printModsFound(count);
+        }
     }
 
     public static class UpdateThread extends Thread {
@@ -231,7 +275,7 @@ public class NusMods {
             }
         }
 
-        public static void update() throws IOException, InterruptedException {
+        private static void update() throws IOException, InterruptedException {
             TextUi.printUpdateStartMessage();
             sleep(1000);
             InputStream inputStream = getOnlineModList();
