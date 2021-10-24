@@ -1,7 +1,14 @@
 package medbot.parser;
 
 import medbot.command.Command;
-import medbot.command.personcommand.patientcommand.*;
+import medbot.command.personcommand.patientcommand.AddPatientCommand;
+import medbot.command.personcommand.patientcommand.ArchivePatientCommand;
+import medbot.command.personcommand.patientcommand.DeletePatientCommand;
+import medbot.command.personcommand.patientcommand.EditPatientCommand;
+import medbot.command.personcommand.patientcommand.FindPatientCommand;
+import medbot.command.personcommand.patientcommand.ListPatientCommand;
+import medbot.command.personcommand.patientcommand.UnarchivePatientCommand;
+import medbot.command.personcommand.patientcommand.ViewPatientCommand;
 import medbot.exceptions.MedBotParserException;
 import medbot.person.Patient;
 

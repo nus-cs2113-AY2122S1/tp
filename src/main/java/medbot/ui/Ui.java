@@ -359,7 +359,14 @@ public class Ui {
      * @return the information on switch command.
      */
     public String getSwitchHelpMessage() {
-        return " " + END_LINE;
+        return "Switches between the different views of MedBot." + END_LINE
+                + "Format: switch [VIEW_TYPE]" + END_LINE
+                + "If the switch command is called without any parameters," + END_LINE
+                + "the view that is switched to will depend on the current view." + END_LINE
+                + "(PATIENT_INFO --> MEDICAL_STAFF_INFO --> SCHEDULER --> PATIENT_INFO)" + END_LINE
+                + "Expected Output:" + END_LINE
+                + "[VIEW_TYPE_ASCI_TEXT_BANNER]" + END_LINE + END_LINE
+                + "View has been switched to [VIEW_TYPE]" + END_LINE;
     }
 
     /**
