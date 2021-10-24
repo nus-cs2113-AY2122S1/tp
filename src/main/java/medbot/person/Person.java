@@ -4,6 +4,8 @@ package medbot.person;
 import static medbot.ui.Ui.VERTICAL_LINE_SPACED;
 import static medbot.ui.Ui.END_LINE;
 
+import medbot.Appointment;
+import medbot.exceptions.MedBotException;
 import medbot.list.PersonalAppointmentList;
 
 
@@ -109,8 +111,20 @@ public abstract class Person {
         residentialAddress = null;
     }
 
-    public PersonalAppointmentList getPersonalAppointmentList() {
-        return personalAppointmentList;
+    public int getAppointmentId(int dateTimeCode) throws MedBotException {
+        return personalAppointmentList.getAppointmentId(dateTimeCode);
+    }
+
+    public void addAppointment(Appointment appointment) throws MedBotException {
+        personalAppointmentList.addAppointment(appointment);
+    }
+
+    public void deleteAppointment(int dateTimeCode) throws MedBotException {
+        personalAppointmentList.deleteAppointment(dateTimeCode);
+    }
+
+    public String listAppointments() {
+        return personalAppointmentList.listAppointments();
     }
 
     /**
