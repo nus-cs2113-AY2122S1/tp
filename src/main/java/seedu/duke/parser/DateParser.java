@@ -1,22 +1,37 @@
 package seedu.duke.parser;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import seedu.duke.exception.ParseDateFailedException;
+import seedu.duke.log.Log;
 
+//@@author SeanRobertDH
 public class DateParser {
-    private static final String DEFAULT_DATE_FORMAT = "dd-MM-yyyy hh:mm";
+    private static final String DEFAULT_DATE_FORMAT = "dd-MM-yyyy HH:mm";
 
-    private static String STARTS_WITH_REGEX = "^";
-    private static String ENDS_WITH_REGEX = "$";
-    private static String WHITESPACE_REGEX = "\\s+";
+    private static final String[] ACCEPTED_DATE_FORMATS
+        = {"d-M-[yyyy][yy]_H-m", "d-M-[yyyy][yy]_H", "d-M_H-m", "d-M_H", "d_H-m", "d_H", "H-m", "H"};
+    private static final String YEAR_CHAR_REPRESENTATION = "y";
+
+    private static final String STARTS_WITH_REGEX = "^";
+    private static final String ENDS_WITH_REGEX = "$";
+    private static final String WHITESPACE_REGEX = "\\s+";
+
+    private static final String DEFAULT_SEPARATOR = "-";
+
+    private static final String DEFAULT_SPACE = "_";
+
+    private static int HALF_HOUR = 30;
+    private static int HOUR = 60;
+
+    private static final String LOG_FORMATTED_DATE_MESSAGE = "Formatted date String is: ";
 
 
-    private static final String[] ACCEPTED_SEPERATORS
-        = {":", "_", "~", ".", "-", "/", "|", "\\", WHITESPACE_REGEX};
+    private static final String[] ACCEPTED_SEPARATORS
+        = {":", "~", "\\.", "\\/", "\\|", "\\\\"};
 
     private enum Day {
         YESTERDAY(-1),
@@ -30,12 +45,13 @@ public class DateParser {
         }
 
         private String getRegex() {
-            return STARTS_WITH_REGEX + super.toString().toLowerCase() + WHITESPACE_REGEX + ENDS_WITH_REGEX;
+            return STARTS_WITH_REGEX + super.toString().toLowerCase() + ENDS_WITH_REGEX;
         }
 
         private static boolean isDay(String input) {
+            input = input.toLowerCase().replace(WHITESPACE_REGEX, "");
             for (Day day : Day.values()) {
-                if (day.getRegex().matches(input.toLowerCase())) {
+                if (input.matches(day.getRegex())) {
                     return true;
                 }
             }
@@ -43,120 +59,74 @@ public class DateParser {
         }
 
         private static LocalDateTime getDate(String input) {
+            input = input.toLowerCase().replace(WHITESPACE_REGEX, "");
             for (Day day : Day.values()) {
-                if (day.getRegex().matches(input.toLowerCase())) {
-                    return LocalDateTime.now().plusDays(day.daysToAdd);
+                if (input.matches(day.getRegex())) {
+                    LocalDateTime dateTime = LocalDateTime.now().plusDays(day.daysToAdd);
+                    return roundToClosestHour(dateTime);
                 }
             }
             return null;
         }
-
     }
 
-    private enum Prefix {
-        LAST(-1),
-        THIS(0),
-        NEXT(1);
-
-        private final int toAdd;
-
-        Prefix(int toAdd) {
-            this.toAdd = toAdd;
+    public static LocalDateTime roundToClosestHour(LocalDateTime dateTime) {
+        int minutes = dateTime.getMinute();
+        if (minutes >= HALF_HOUR) {
+            return dateTime.plusMinutes(HOUR - minutes);
         }
-
-        private String getRegex() {
-            return STARTS_WITH_REGEX + super.toString().toLowerCase() + WHITESPACE_REGEX;
-        }
-
-        private static boolean hasPrefix(String input) {
-            for (Prefix prefix : Prefix.values()) {
-                if (prefix.getRegex().matches(input.toLowerCase())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private static Prefix getPrefix(String input) {
-            for (Prefix prefix : Prefix.values()) {
-                if (prefix.getRegex().matches(input.toLowerCase())) {
-                    return prefix;
-                }
-            }
-            return null;
-        }
-
-        private String removePrefixFromString(String input) {
-            return input.replaceAll(getRegex(), "");
-        }
+        System.out.printf(Integer.toString(minutes));
+        return dateTime.minusMinutes(minutes);
     }
 
-    private enum Prefix {
-        LAST(-1),
-        THIS(0),
-        NEXT(1);
-
-        private final int toAdd;
-
-        Prefix(int toAdd) {
-            this.toAdd = toAdd;
-        }
-
-        private String getRegex() {
-            return STARTS_WITH_REGEX + super.toString().toLowerCase() + WHITESPACE_REGEX;
-        }
-
-        private static boolean hasPrefix(String input) {
-            for (Prefix prefix : Prefix.values()) {
-                if (prefix.getRegex().matches(input.toLowerCase())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private static Prefix getPrefix(String input) {
-            for (Prefix prefix : Prefix.values()) {
-                if (prefix.getRegex().matches(input.toLowerCase())) {
-                    return prefix;
-                }
-            }
-            return null;
-        }
-
-        private String removePrefixFromString(String input) {
-            return input.replaceAll(getRegex(), "");
-        }
+    public static String dateToString(LocalDateTime dateTime) {
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
+        return dateFormat.format(dateTime);
     }
 
-    private static final String WEEK = "week";
-    private static final String MONTH = "month";
-    private static final String YEAR = "year";
-
-    private static String[] PERIOD = {WEEK, MONTH, YEAR};
-
-    public static String getDateAsString(LocalDateTime date) {
-        DateFormat dateFormat = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
-        String strDate = dateFormat.format(date);
-        return strDate;
-    }
-
-    public static LocalDateTime getStringAsDate(String date) throws ParseDateFailedException {
-        LocalDateTime dateTime = Day.getDate(date);
-        if (Day.isDay(date)) {
-            return Day.getDate(date);
-        } else if (Prefix.hasPrefix(date)) {
-            Prefix prefix = Prefix.getPrefix(date);
-            date = prefix.removePrefixFromString(date);
-
+    public static LocalDateTime stringToDate(String dateTime) throws ParseDateFailedException {
+        if (Day.isDay(dateTime)) {
+            return Day.getDate(dateTime);
         } else {
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT);
-                return LocalDateTime.parse(date, formatter);
-            } catch (DateTimeParseException dtpe) {
-                throw new ParseDateFailedException(getDefaultDateFormat());
+            String formattedDate = formatDateString(dateTime);
+            Log.info(LOG_FORMATTED_DATE_MESSAGE + formattedDate);
+            for (String dateFormatString : ACCEPTED_DATE_FORMATS) {
+                try {
+                    DateTimeFormatter dateFormat = getDateTimeFormatter(dateFormatString);
+                    return LocalDateTime.parse(formattedDate, dateFormat);
+                } catch (DateTimeParseException dtpe) {
+                    continue;
+                }
             }
+            throw new ParseDateFailedException(getDefaultDateFormat());
         }
+    }
+
+    private static String formatDateString(String dateTime) {
+        for (String separator : ACCEPTED_SEPARATORS) {
+            dateTime = dateTime.replaceAll(separator, DEFAULT_SEPARATOR);
+        }
+        if (hasDateAndTime(dateTime)) {
+            dateTime = dateTime.replaceFirst(WHITESPACE_REGEX, DEFAULT_SPACE);
+        }
+        dateTime = dateTime.replaceAll(WHITESPACE_REGEX, "");
+        return dateTime;
+    }
+
+    private static boolean hasDateAndTime(String date) {
+        return date.split(WHITESPACE_REGEX).length >= 2;
+    }
+
+    private static DateTimeFormatter getDateTimeFormatter(String dateFormatString) {
+        DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder()
+            .appendPattern(dateFormatString);
+        if (!dateFormatString.contains(YEAR_CHAR_REPRESENTATION)) {
+            builder = builder.parseDefaulting(ChronoField.YEAR, LocalDateTime.now().getYear());
+        }
+        return builder
+            .parseDefaulting(ChronoField.MONTH_OF_YEAR, LocalDateTime.now().getMonthValue())
+            .parseDefaulting(ChronoField.DAY_OF_MONTH, LocalDateTime.now().getDayOfMonth())
+            .toFormatter();
     }
 
     public static String getDefaultDateFormat() {
