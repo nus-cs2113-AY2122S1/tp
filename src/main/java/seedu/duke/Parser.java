@@ -143,7 +143,8 @@ public class Parser {
 
     private static void handleTripSummary(String inputParams) {
         try {
-            executeSummary();
+            assert inputParams != null;
+            executeSummary(inputParams);
         } catch (ArrayIndexOutOfBoundsException e) {
             Ui.printUnknownTripIndexError();
         }
@@ -215,9 +216,46 @@ public class Parser {
         Storage.setOpenTripAsLastTrip();
     }
 
-    private static void executeSummary() {
-        Ui.printExpensesSummary(Storage.getOpenTrip());
+    private static void executeSummary(String inputParams) {
+        Trip currentTrip = Storage.getOpenTrip();
         Storage.setOpenTripAsLastTrip();
+        if (inputParams == null) {
+            //list everybody's expense summary
+            for (Person p : currentTrip.getListOfPersons()) {
+                currentTrip.getIndividualExpenseSummary(p);
+                System.out.println();
+            }
+        } else {
+            //list only 1 person, if exists
+            try {
+                Person personToView = stringToPerson(currentTrip, inputParams); //returns null if no such person
+                if (personToView != null) {
+                    currentTrip.getIndividualExpenseSummary(personToView);
+                } else {
+                    Ui.printNoPersonFound(inputParams);
+                    Ui.printSummaryFormatError();
+                }
+
+            } catch (IndexOutOfBoundsException e) {
+                Ui.printNoExpensesError();
+            }
+        }
+
+    }
+
+    /**
+     * Parses string to person, if it exists .
+     * @param trip trip to find person
+     * @param string supposed name of person
+     * @return the person corresponding to the input string
+     */
+    public static Person stringToPerson(Trip trip, String string) {
+        for (Person p : trip.getListOfPersons()) {
+            if (p.getName().equals(string)) {
+                return p;
+            }
+        }
+        return null;
     }
 
     private static void executeView(String inputParams) {
@@ -327,6 +365,8 @@ public class Parser {
 
     protected static void updateOnePersonSpending(Expense expense, Person person) {
         person.setMoneyOwed(person, expense.getAmountSpent());
+        expense.setPayer(person);
+        expense.setAmountSplit(person, expense.getAmountSpent());
     }
 
     protected static void updateIndividualSpending(Expense expense) {
