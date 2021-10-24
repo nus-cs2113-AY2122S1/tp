@@ -58,17 +58,14 @@ public class ReloadNoteCommandTest {
         Note note2 = new Note("test2", "test2");
         assertEquals(note2.getDisplayInfo(), noteContentManager.getContentData(2));
         moduleStorage.removeNoteFromModule(tempModule, "test2");
-        note2 = new Note("test2", "test100");
-        moduleStorage.addNoteFromModule(tempModule, note2);
-        Command reloadCommand = commandParser.parseCommand("reload");
-        reloadCommand.execute(moduleManager);
-        assertEquals(note2.getDisplayInfo(), noteContentManager.getContentData(2));
-        moduleStorage.removeNoteFromModule(tempModule, "test2");
+        assertTrue(noteContentManager.isDuplicateName("test2"));
         assertFalse(noteContentManager.isDuplicateName("test100"));
         note2 = new Note("test100", "test100");
         moduleStorage.addNoteFromModule(tempModule, note2);
+        Command reloadCommand = commandParser.parseCommand("reload");
         reloadCommand.execute(moduleManager);
         assertTrue(noteContentManager.isDuplicateName("test100"));
+        assertFalse(noteContentManager.isDuplicateName("test2"));
     }
 
 
