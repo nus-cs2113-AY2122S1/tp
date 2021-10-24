@@ -128,14 +128,14 @@ public class AddCommandParser {
 
     private static String checkDayOfTheWeek(String param) throws ParseException {
         if (!DayOfTheWeek.is(param)) {
-            throw new ParseException(param + Messages.ERROR_INVALID_DAY);
+            throw new ParseException(param + ": " + Messages.ERROR_INVALID_DAY);
         }
         return DayOfTheWeek.toProper(param);
     }
 
     private static String checkPriority(String param) throws ParseException {
         if (!Priority.is(param)) {
-            throw new ParseException(param + Messages.ERROR_INVALID_PRIORITY);
+            throw new ParseException(param + ": " + Messages.ERROR_INVALID_PRIORITY);
         }
         return Priority.toProper(param);
     }
