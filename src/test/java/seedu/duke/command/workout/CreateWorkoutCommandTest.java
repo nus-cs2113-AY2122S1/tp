@@ -7,8 +7,10 @@ import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class CreateWorkoutCommandTest {
     private WorkoutList workoutList;
@@ -34,5 +36,19 @@ class CreateWorkoutCommandTest {
         } catch (GetJackDException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    void createWorkoutCommand_InvalidWorkoutDeadline_expectDateTimeParseExceptionThrown() {
+        assertThrows(DateTimeParseException.class,
+            () -> new CreateWorkoutCommand("Test", LocalDate.parse("abc"))
+        );
+    }
+
+    @Test
+    void createWorkoutCommand_InvalidWorkoutName_expectAssertionError() {
+        assertThrows(AssertionError.class,
+            () -> new CreateWorkoutCommand("")
+        );
     }
 }

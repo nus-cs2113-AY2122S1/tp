@@ -24,7 +24,7 @@ class EditExerciseCommandTest {
     }
 
     private void createEmptyWorkout() {
-        Workout workout = new Workout("blah", LocalDate.parse("2021-10-18"));
+        Workout workout = new Workout("blah");
         Exercise exercise = new Exercise("blah", 10, 30);
         Exercise exerciseTwo = new Exercise("blahTwo", 5, 15);
         workout.addExercise(exercise);

@@ -3,6 +3,7 @@ package seedu.duke.command.workout;
 import seedu.duke.command.Command;
 import seedu.duke.command.CommandResult;
 import seedu.duke.exception.GetJackDException;
+import seedu.duke.lists.DeadlineWorkout;
 import seedu.duke.lists.Workout;
 import seedu.duke.lists.WorkoutList;
 import seedu.duke.storage.Storage;
@@ -17,22 +18,34 @@ import static seedu.duke.parser.Parser.PARAMETER_SEPARATOR;
 public class CreateWorkoutCommand extends Command {
     public static final String COMMAND_WORD = "create";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new workout.\n"
-            + "Format: create [workout description]\n"
+            + "Format: create [workout description] or Format: create [workout description], [deadline]\n"
             + "Parameters:\n"
             + "\tWorkout description - description or name of workout\n"
-            + "\tWorkout deadline - deadline of workout\n"
-            + "Example: " + COMMAND_WORD + " abs" + PARAMETER_SEPARATOR + "2021-12-25";
+            + "\tWorkout deadline - deadline of workout (optional)\n"
+            + "Example: " + COMMAND_WORD + " abs (if no deadline set)\n"
+            + "Example: " + COMMAND_WORD + " abs" + PARAMETER_SEPARATOR + "2021-12-25 (if you want to set a deadline)";
     public static final String MESSAGE_SUCCESS = "New workout created: %s";
 
-    private final Workout toCreate;
+    private Workout toCreate;
+    private DeadlineWorkout toCreateWithDeadline;
 
     /**
      * Instantiates object and creates a new workout.
      *
      * @param description description of new workout.
      */
+    public CreateWorkoutCommand(String description) {
+        this.toCreate = new Workout(description);
+    }
+
+    /**
+     * Instantiates object and creates a new workout with deadline.
+     *
+     * @param description description of new workout.
+     * @param deadline deadline of new workout.
+     */
     public CreateWorkoutCommand(String description, LocalDate deadline) {
-        this.toCreate = new Workout(description, deadline);
+        this.toCreateWithDeadline = new DeadlineWorkout(description, deadline);
     }
 
     /**
@@ -45,10 +58,18 @@ public class CreateWorkoutCommand extends Command {
      */
     @Override
     public CommandResult executeUserCommand(WorkoutList workouts, Storage storage) throws GetJackDException {
-        workouts.addWorkout(toCreate);
+        CommandResult commandResult;
+        if (toCreate != null) {
+            workouts.addWorkout(toCreate);
+            commandResult = new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
+        } else {
+            workouts.addWorkout(toCreateWithDeadline);
+            commandResult = new CommandResult(String.format(MESSAGE_SUCCESS, toCreateWithDeadline));
+        }
 
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
+        assert commandResult != null;
+        return commandResult;
     }
 }

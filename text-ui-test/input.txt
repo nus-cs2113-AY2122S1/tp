@@ -26,7 +26,7 @@ delete
 help delete
 delete 1
 list
-create abs, 2021-12-25
+create abs
 enter 1
 display
 add pushups, 5 20

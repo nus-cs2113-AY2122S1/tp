@@ -25,7 +25,7 @@ class DeleteWorkoutCommandTest {
 
     private void createOneWorkoutWithOneExercise() {
         Exercise exercise = new Exercise("blah", 10, 30);
-        Workout workout = new Workout("workout", LocalDate.parse("2021-10-12"));
+        Workout workout = new Workout("workout");
         workout.addExercise(exercise);
         workoutList = new WorkoutList();
         workoutList.addWorkout(workout);
