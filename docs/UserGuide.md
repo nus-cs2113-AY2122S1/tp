@@ -57,24 +57,35 @@ ________________________________________________________
 ## Features
 
 ### 1. Creating a new workout: `create`
-Adds a new workout to the list of workouts
+Adds a new workout to the list of workouts. You are free to add a deadline to your workouts too.
 
-Format: `create [WORKOUT_DESCRIPTION], [DEADLINE]`
+Format (without deadline): `create [WORKOUT_DESCRIPTION]`
+
+Format (with deadline): `create [WORKOUT_DESCRIPTION], [DEADLINE]`
 
 ⚠️  `DEADLINE` needs to be in format `yyyy-MM-dd`.
 
 Usage examples: 
 
-`create abs, 2021-12-25`
+`create abs`
 
 `create leg day, 2021-10-21`
 
-Expected outcome:
+Expected outcome (**no deadline specified**):
 
 ```
-create abs, 2021-12-25
+create abs
 ________________________________________________________
-New workout created: abs finish by: 25 Dec 2021
+New workout created: abs
+________________________________________________________
+```
+
+Expected outcome (**deadline specified**):
+
+```
+create leg day, 2021-10-21
+________________________________________________________
+New workout created: leg day finish by: 21 Oct 2021
 ________________________________________________________
 ```
 
@@ -365,7 +376,8 @@ saved file format (json), GetJack'd will not run.
 | Action                                           | Format, Examples                                                                                       |
 |--------------------------------------------------|--------------------------------------------------------------------------------------------------------|
 | List all workouts                                | Example: `list`                                                                                        |
-| Create workout                                   | Format: `create [WORKOUT_DESCRIPTION], [DEADLINE]` <br />Example: `create abs workout, 2021-12-25`                                         |
+| Create workout (**without deadline**)                                  | Format: `create [WORKOUT_DESCRIPTION]` <br />Example: `create leg day`
+| Create workout (**with deadline**)                                  | Format: `create [WORKOUT_DESCRIPTION], [DEADLINE]` <br />Example: `create abs workout, 2021-12-25`                                         |
 | Delete workout                                   | Format: `delete [WORKOUT_INDEX]` <br />Example: `delete 1`                                                 |
 | Display exercises in <br /> a particular workout | Format: `display [WORKOUT_INDEX]` <br />Example: `display 1`                                               |
 | Recommend workout                                | Format: `recommend [beginner/ intermediate/ pro]` <br />Example: `recommend beginner`                      |
