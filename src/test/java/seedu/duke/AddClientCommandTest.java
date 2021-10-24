@@ -3,8 +3,11 @@ package seedu.duke;
 import org.junit.jupiter.api.Test;
 import seedu.duke.commands.Command;
 import seedu.duke.commands.clients.AddClientCommand;
-import seedu.duke.data.*;
-
+import seedu.duke.data.Client;
+import seedu.duke.data.ClientList;
+import seedu.duke.data.TourList;
+import seedu.duke.data.FlightList;
+import seedu.duke.data.ClientPackageList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,7 +24,7 @@ class AddClientCommandTest {
     }
 
     @Test
-    void addClientCommand_emptyClientList_populatedClientList() {
+    void addClientCommand_emptyClientList_populatedClientList() throws TourPlannerException {
         ClientList testClientList = new ClientList();
         FlightList dummyFlightList = new FlightList();
         TourList dummyTourList = new TourList();
