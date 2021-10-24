@@ -3,14 +3,16 @@ package seedu.duke.commands;
 import seedu.duke.Duke;
 import seedu.duke.exceptions.DukeException;
 import seedu.duke.items.Event;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class FindCommand extends Command {
 
+    private final static int MAX_SIZE = Duke.eventCatalog.size();
+
     private static String keyword;
-    private static final ArrayList<Event> filteredList = new ArrayList<>();
+    private static Event[] filteredList = new Event[MAX_SIZE];
+    //private static ArrayList<Event> filteredList = new ArrayList<>();
     private static int numberOfEvents;
 
     public FindCommand(String[] command) {
@@ -30,7 +32,7 @@ public class FindCommand extends Command {
         filterEventsByString(keyword);
         System.out.println("Here are the events you wished to find:");
         printFilteredEvents();
-        if (filteredList.isEmpty()) {
+        if (numberOfEvents == 0) {
             return new CommandResult("No matching events were found.");
         }
         return new CommandResult(numberOfEvents + " events found.");
@@ -42,25 +44,26 @@ public class FindCommand extends Command {
 
     private static String getKeywordFromCommand(String[] command) {
         String commandAsString = convertArrayToString(command);
+        int endIndex = commandAsString.length();
         int startOfKeyword = commandAsString.trim().indexOf(" ") + 1;
-        return commandAsString.substring(startOfKeyword).trim();
+        return commandAsString.substring(startOfKeyword, endIndex - 1).trim();
     }
 
     private static void filterEventsByString(String keyword) {
         for (int i = 0; i < Duke.eventCatalog.size(); i++) {
             Event event = Duke.eventCatalog.get(i);
             if (event.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
-                filteredList.add(i, event);
+                filteredList[i] = event;
             }
         }
     }
 
     private static void printFilteredEvents() {
-        for (int i = 0; i < filteredList.size(); i++) {
-            if (filteredList.get(i) == null) {
+        for (int i = 0; i < filteredList.length; i++) {
+            if (filteredList[i] == null) {
                 continue;
             }
-            System.out.println((i + 1) + filteredList.get(i).getTitle());
+            System.out.println((i + 1) + ". " + filteredList[i].getTitle());
             numberOfEvents++;
         }
     }
