@@ -11,7 +11,7 @@ import seedu.duke.ui.Ui;
 import java.io.IOException;
 
 public class ListModuleCommand extends Command {
-    public final String argument;
+    private final String argument;
 
     public ListModuleCommand(String argument) {
         this.argument = argument;
