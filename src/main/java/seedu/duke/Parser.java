@@ -329,7 +329,7 @@ public class Parser {
     }
 
     private static void executeEditExpense(String inputDescription) {
-
+        //TODO: add edit expense code (for override of exchange rate using manual local currency)
     }
 
     protected static void updateOnePersonSpending(Expense expense, Person person) {
