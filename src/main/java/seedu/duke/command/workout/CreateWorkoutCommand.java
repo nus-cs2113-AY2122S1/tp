@@ -70,7 +70,6 @@ public class CreateWorkoutCommand extends Command {
 
         String jsonString = storage.convertToJson(workouts);
         storage.saveData(jsonString);
-        assert commandResult != null;
         return commandResult;
     }
 }
