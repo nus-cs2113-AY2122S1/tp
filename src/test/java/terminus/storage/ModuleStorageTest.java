@@ -9,6 +9,7 @@ import com.google.gson.JsonSyntaxException;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.parser.PdfTextExtractor;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -261,5 +262,32 @@ public class ModuleStorageTest {
         assertTrue(Files.exists(newPath));
         assertFalse(Files.exists(oldPath));
         this.moduleStorage.cleanAfterDeleteModule("test1");
+    }
+
+    @Test
+    void updateModuleDirectory_directoryRenameFailed_exceptionThrown() throws IOException {
+        Path oldPath = Paths.get(RESOURCE_FOLDER.toString(), tempModule);
+        Path newPath = Paths.get(RESOURCE_FOLDER.toString(), "test1");
+        assertTrue(Files.exists(oldPath));
+        assertFalse(Files.exists(newPath));
+        File file = new File(Paths.get(oldPath.toString(), "a.txt").toString());
+        FileWriter writer = new FileWriter(file);
+        writer.write("This\n is\n an\n example\n");
+        assertThrows(IOException.class, () -> this.moduleStorage.updateModuleDirectory(tempModule, "test1"));
+        assertFalse(Files.exists(newPath));
+        assertTrue(Files.exists(oldPath));
+        writer.close();
+        this.moduleStorage.cleanAfterDeleteModule("test");
+    }
+
+    @Test
+    void loadNotesFromModule_success() throws IOException {
+        moduleStorage.loadNotesFromModule(moduleManager, tempModule);
+        assertEquals(1, moduleManager.getModule(tempModule).getContentManager(Note.class).getTotalContents());
+        Path nonTextFilePath = Paths.get(RESOURCE_FOLDER.toString(), tempModule, "test1.py");
+        File nonTextFile = new File(nonTextFilePath.toString());
+        nonTextFile.createNewFile();
+        moduleStorage.loadNotesFromModule(moduleManager, tempModule);
+        assertEquals(1, moduleManager.getModule(tempModule).getContentManager(Note.class).getTotalContents());
     }
 }

@@ -59,5 +59,7 @@ public class UpdateModuleCommandTest {
         moduleManager.addModule("test2");
         assertThrows(InvalidArgumentException.class,
             () -> commandParser.parseCommand("update 1 \"test2\"").execute(moduleManager));
+        assertThrows(InvalidArgumentException.class,
+            () -> commandParser.parseCommand("update 1 \"???\"").execute(moduleManager));
     }
 }
