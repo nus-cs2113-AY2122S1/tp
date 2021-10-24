@@ -16,7 +16,7 @@ public class StatYearCommand extends StatCommand {
             } else {
                 System.out.print((i * 10) + "%  ");
             }
-            for (int j = 0; j < 12; j++ ) {
+            for (int j = 0; j < 12; j++) {
                 if ((i * 10) < barPercentage[j]) {
                     System.out.print(" #  ");
                 } else {
@@ -32,7 +32,7 @@ public class StatYearCommand extends StatCommand {
         double totalSpending = 0.0;
         double amount = 0.0;
 
-        double barPercentage[];
+        double[] barPercentage;
         barPercentage = new double[12];
 
         for (int i = 1; i <= 12; i++) {
