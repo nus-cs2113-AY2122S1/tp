@@ -5,6 +5,8 @@ import medbot.Appointment;
 import medbot.exceptions.MedBotException;
 
 public class SchedulerAppointmentList {
+    private static final String END_LINE = System.lineSeparator();
+
     protected HashMap<Integer, Appointment> appointments = new HashMap<>();
     private int lastId = 1;
 
@@ -62,13 +64,13 @@ public class SchedulerAppointmentList {
     }
 
     private String getAppointmentNotFoundErrorMessage(int appointmentId) {
-        return "No appointment with ID: " + appointmentId + "found.";
+        return "No appointment with ID " + appointmentId + " found.";
     }
 
     public String listAppointments() {
         String output = "";
         for (int appointmentId : appointments.keySet()) {
-            output += appointments.get(appointmentId);
+            output += appointments.get(appointmentId) + END_LINE;
         }
         return output;
     }

@@ -47,7 +47,7 @@ public class PersonalAppointmentList {
         return -1;
     }
 
-    public void deleteAppointmentByTime(int dateTimeCode) throws MedBotException {
+    public void deleteAppointment(int dateTimeCode) throws MedBotException {
         Iterator<Appointment> it = appointments.iterator();
         while (it.hasNext()) {
             Appointment appointment = it.next();

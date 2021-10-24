@@ -30,23 +30,12 @@ public class Scheduler {
         return schedulerAppointmentList;
     }
 
-    public void addAppointment(Appointment appointment) throws MedBotException {
+    public int addAppointment(Appointment appointment) throws MedBotException {
         if (!appointment.isComplete()) {
             throw new MedBotException(ERROR_ADD_INCOMPLETE_APPOINTMENT);
         }
-        int patientId = appointment.getPatientId();
-        int medicalStaffId = appointment.getMedicalStaffId();
-        int dateTimeCode = appointment.getDateTimeCode();
-        checkPatientAvailability(patientId, dateTimeCode);
-        checkMedicalStaffAvailability(medicalStaffId, dateTimeCode);
-        try {
-            int appointmentId = schedulerAppointmentList.addAppointment(appointment);
-            appointment.setAppointmentId(appointmentId);
-            patientList.getPersonalAppointmentList(patientId).addAppointment(appointment);
-            medicalStaffList.getPersonalAppointmentList(medicalStaffId).addAppointment(appointment);
-        } catch (MedBotException me) {
-            throw new MedBotException(ERROR_ADD_APPOINTMENT_ERROR);
-        }
+        checkAvailability(appointment);
+        return insertAppointment(appointment);
     }
 
     public void deleteAppointment(int appointmentId) throws MedBotException {
@@ -55,8 +44,8 @@ public class Scheduler {
         int medicalStaffId = deletedAppointment.getMedicalStaffId();
         int dateTimeCode = deletedAppointment.getDateTimeCode();
         try {
-            patientList.getPersonalAppointmentList(patientId).deleteAppointmentByTime(dateTimeCode);
-            medicalStaffList.getPersonalAppointmentList(medicalStaffId).deleteAppointmentByTime(dateTimeCode);
+            patientList.getPersonalAppointmentList(patientId).deleteAppointment(dateTimeCode);
+            medicalStaffList.getPersonalAppointmentList(medicalStaffId).deleteAppointment(dateTimeCode);
         } catch (MedBotException me) {
             throw new MedBotException(ERROR_DELETE_APPOINTMENT_ERROR);
         }
@@ -67,39 +56,47 @@ public class Scheduler {
 
         newAppointment = Appointment.mergeAppointmentData(oldAppointment, newAppointment);
         newAppointment.setAppointmentId(appointmentId);
+        assert newAppointment.isComplete();
 
-        int newPatientId = newAppointment.getPatientId();
-        int newStaffId = newAppointment.getMedicalStaffId();
-        int newDateTimeCode = newAppointment.getDateTimeCode();
-        int patientAvail = patientList.getPersonalAppointmentList(newPatientId).getAppointmentId(newDateTimeCode);
-        if (patientAvail != -1 && patientAvail != appointmentId) {
-            throw new MedBotException(String.format(ERROR_PATIENT_APPOINTMENT_CLASH, patientAvail));
-        }
-        int staffAvail = medicalStaffList.getPersonalAppointmentList(newStaffId).getAppointmentId(newDateTimeCode);
-        if (staffAvail != -1 && staffAvail != appointmentId) {
-            throw new MedBotException(String.format(ERROR_STAFF_APPOINTMENT_CLASH, staffAvail));
-        }
+        checkAvailability(newAppointment);
         deleteAppointment(appointmentId);
-        schedulerAppointmentList.addAppointment(newAppointment);
-        patientList.getPersonalAppointmentList(newPatientId).addAppointment(newAppointment);
-        medicalStaffList.getPersonalAppointmentList(newStaffId).addAppointment(newAppointment);
+        insertAppointment(newAppointment);
         return newAppointment;
     }
 
+    private int insertAppointment(Appointment appointment) throws MedBotException {
+        try {
+            int appointmentId = schedulerAppointmentList.addAppointment(appointment);
+            patientList.getPersonalAppointmentList(appointment.getPatientId()).addAppointment(appointment);
+            medicalStaffList.getPersonalAppointmentList(appointment.getMedicalStaffId()).addAppointment(appointment);
+            return appointmentId;
+        } catch (MedBotException me) {
+            assert false;
+            throw new MedBotException(ERROR_ADD_APPOINTMENT_ERROR);
+        }
+    }
 
-    private void checkPatientAvailability(int patientId, int dateTimeCode) throws MedBotException {
+    private void checkAvailability(Appointment appointment) throws MedBotException {
+        int patientId = appointment.getPatientId();
+        int staffId = appointment.getMedicalStaffId();
+        int dateTimeCode = appointment.getDateTimeCode();
+        int appointmentId = appointment.getAppointmentId();
+        checkPatientAvailability(patientId,dateTimeCode,appointmentId);
+        checkMedicalStaffAvailability(staffId,dateTimeCode,appointmentId);
+    }
+
+    private void checkPatientAvailability(int patientId, int dateTimeCode, int appointmentId) throws MedBotException {
         int clashAppointmentId = patientList.getPersonalAppointmentList(patientId).getAppointmentId(dateTimeCode);
-        if (clashAppointmentId != -1) {
+        if (clashAppointmentId != -1 && clashAppointmentId != appointmentId) {
             throw new MedBotException(String.format(ERROR_PATIENT_APPOINTMENT_CLASH, clashAppointmentId));
         }
     }
 
-    private void checkMedicalStaffAvailability(int patientId, int dateTimeCode) throws MedBotException {
-        int clashAppointmentId = medicalStaffList.getPersonalAppointmentList(patientId).getAppointmentId(dateTimeCode);
-        if (clashAppointmentId != -1) {
+    private void checkMedicalStaffAvailability(int staffId, int dateTimeCode, int appointmentId)
+            throws MedBotException {
+        int clashAppointmentId = medicalStaffList.getPersonalAppointmentList(staffId).getAppointmentId(dateTimeCode);
+        if (clashAppointmentId != -1 && clashAppointmentId != appointmentId) {
             throw new MedBotException(String.format(ERROR_STAFF_APPOINTMENT_CLASH, clashAppointmentId));
         }
     }
-
-
 }
