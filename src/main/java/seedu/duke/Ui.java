@@ -101,7 +101,7 @@ public class Ui {
             + "            #" + System.lineSeparator()
             + "# 6. Adding Ingredient Wastage : 'add ingr waste [ingrName]' followed by '[weight in KG]'          "
             + "            #" + System.lineSeparator()
-            + "# 7. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'                   "
+            + "# 7. Linking an Ingredient to a Dish : 'link [dishName] / [ingrName]'                              "
             + "            #" + System.lineSeparator()
             + "# 8. Deleting an Ingredient : 'del ingr [ingrName]'                                                "
             + "            #" + System.lineSeparator()
@@ -111,13 +111,13 @@ public class Ui {
             + "            #" + System.lineSeparator()
             + "# 11. View graph of all Dishes/Ingredients : 'graph dish | graph ingr'                             "
             + "            #" + System.lineSeparator()
-            + "# 11. Sort list of Dishes/Ingredients : 'sort dish | sort ingr'                                    "
+            + "# 12. Sort list of Dishes/Ingredients : 'sort dish | sort ingr'                                    "
             + "            #" + System.lineSeparator()
-            + "# 12. Clearing saved lists: 'clear dish' | 'clear ingr' | 'clear all'                              "
+            + "# 13. Clearing saved lists: 'clear dish' | 'clear ingr' | 'clear all'                              "
             + "            #" + System.lineSeparator()
-            + "# 13. View full list of commands and examples: 'help'                                              "
+            + "# 14. View full list of commands and examples: 'help'                                              "
             + "            #" + System.lineSeparator()
-            + "# 14. Exiting the program: 'bye'                                                                   "
+            + "# 15. Exiting the program: 'bye'                                                                   "
             + "            #" + System.lineSeparator()
             + "###################################################################################################"
             + "#############" + System.lineSeparator()
