@@ -64,17 +64,19 @@ public abstract class Command {
         this.argumentMap = Parser.getArgumentsFromString(argument, argumentKeys);
     }
 
+    protected abstract String getUsage();
+
+    protected abstract void checkArgument() throws TaaException;
+
+    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException;
+
     public boolean isExit() {
         return isExit;
     }
 
-    protected abstract String getUsage();
-
     protected String getUsageMessage() {
         return String.format(MESSAGE_FORMAT_USAGE_MESSAGE, getUsage());
     }
-
-    public abstract void execute(ModuleList moduleList, Ui ui, Storage storage) throws TaaException;
 
     protected String getMissingArgumentMessage() {
         String usageMessage = getUsageMessage();
