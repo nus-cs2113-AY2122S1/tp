@@ -21,6 +21,7 @@ import seedu.command.flags.SearchFlags;
 import seedu.duke.Duke;
 import seedu.exceptions.UniModsException;
 import seedu.module.Module;
+import seedu.timetable.TaskType;
 import seedu.timetable.Timetable;
 import seedu.timetable.TimetableUserItem;
 import seedu.ui.TextUi;
@@ -171,7 +172,8 @@ public class CommandParser {
             throw new EventException("Maybe if you could just follow simple instructions, she wouldn't have left you");
         }
 
-        TimetableUserItem event = new TimetableUserItem(description, date, startTime, endTime, description);
+        TimetableUserItem event = new TimetableUserItem(description, date, startTime, endTime,
+                description, TaskType.EVENT);
         return new EventCommand(event, timetable);
     }
 

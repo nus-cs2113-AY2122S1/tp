@@ -3,6 +3,7 @@ package seedu.timetable;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import seedu.ui.TimetableUI.LineType;
 
@@ -118,5 +119,9 @@ public abstract class TimetableItem {
 
     public int duration() {
         return getEndHour() - getStartHour();
+    }
+
+    public boolean equals(TimetableItem item) {
+        return Objects.equals(this,item);
     }
 }

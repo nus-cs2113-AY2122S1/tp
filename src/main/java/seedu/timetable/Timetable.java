@@ -249,15 +249,16 @@ public class Timetable implements Comparable<Timetable> {
      * Removes all modules from the list of modules taken by the user. Calls the
      * clearTimetableFromLessons() function to delete all the scheduled lessons.
      */
-    public void clearTimetable() throws UniModsException {
-        if (modules.size() > 0) {
-            modules.clear();
-            clearTimetableFromLessons();
-            TextUi.printTimetableCleared();
-            logger.log(Level.INFO, "All modules removed from timetable");
-        } else {
-            throw new UniModsException(TextUi.ERROR_EMPTY_TIMETABLE);
-        }
+    public void clearTimetable() {
+        //Commented out if check for now because userItems dont show up in modules
+        //if (modules.size() > 0) {
+        modules.clear();
+        clearTimetableFromLessons();
+        TextUi.printTimetableCleared();
+        logger.log(Level.INFO, "All modules removed from timetable");
+        //} else {
+        //throw new UniModsException(TextUi.ERROR_EMPTY_TIMETABLE);
+        //}
     }
 
     /**
