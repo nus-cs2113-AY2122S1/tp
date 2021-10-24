@@ -63,7 +63,8 @@ public class DeadlineFactory {
         }
     }
 
-    private static Deadline getDeadlineWithDefaultPriority(String description, LocalDateTime due, RecurrenceEnum recurrence) {
+    private static Deadline getDeadlineWithDefaultPriority(String description,
+            LocalDateTime due, RecurrenceEnum recurrence) {
         if (recurrence == null) {
             return new Deadline(description, due);
         } else {

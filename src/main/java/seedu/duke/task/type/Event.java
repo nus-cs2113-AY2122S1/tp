@@ -38,7 +38,8 @@ public class Event extends Task {
         setRecurrence(recurrence);
     }
 
-    public Event(String description, LocalDateTime startDate, LocalDateTime endDate, PriorityEnum priority, RecurrenceEnum recurrence) {
+    public Event(String description, LocalDateTime startDate,
+            LocalDateTime endDate, PriorityEnum priority, RecurrenceEnum recurrence) {
         this(description, startDate, endDate);
         setPriority(priority);
         setRecurrence(recurrence);
