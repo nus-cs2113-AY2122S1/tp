@@ -1,6 +1,7 @@
 package seedu.parser;
 
 import seedu.command.AddCommand;
+import seedu.command.ChangeSemesterCommand;
 import seedu.command.CheckCommand;
 import seedu.command.ClearCommand;
 import seedu.command.Command;
@@ -50,6 +51,8 @@ public class CommandParser {
             command = parseCheckCommand(text);
         } else if (lowerCaseText.startsWith("clear")) {
             command = parseClearCommand(timetable);
+        } else if (lowerCaseText.startsWith("semester")) {
+            command = new ChangeSemesterCommand(timetable);
         } else {
             command = new InvalidCommand();
         }
